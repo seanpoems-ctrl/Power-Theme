@@ -217,14 +217,16 @@ def fetch_stock_detail(ticker: str) -> dict | None:
                 company = tag.get_text(strip=True)
                 break
 
-        try:
-            h52 = float((snap.get("52W High") or "0").replace(",", "").strip())
-        except ValueError:
-            h52 = 0.0
-        try:
-            l52 = float((snap.get("52W Low") or "0").replace(",", "").strip())
-        except ValueError:
-            l52 = 0.0
+        import re as _re
+        def _parse_52w(s):
+            # Finviz format: "71.54-1.12%" or "31.03127.97%" — extract leading number only
+            m = _re.match(r"^([\d,]+\.\d{2})", (s or "").strip())
+            try:
+                return float(m.group(1).replace(",", "")) if m else 0.0
+            except ValueError:
+                return 0.0
+        h52 = _parse_52w(snap.get("52W High"))
+        l52 = _parse_52w(snap.get("52W Low"))
         avg_vol = parse_vol(snap.get("Avg Volume") or "0")
         dist_52w_high = round((price / h52 - 1) * 100, 2) if h52 > 0 else None
         rvol = round(volume / avg_vol, 2) if avg_vol > 0 else None
@@ -255,24 +257,43 @@ def fetch_stock_detail(ticker: str) -> dict | None:
 
 
 def fetch_sparkline(ticker: str) -> list[float]:
-    sym = f"{ticker.lower()}.us"
     try:
-        resp = requests.get(f"https://stooq.com/q/d/l/?s={sym}&i=d", headers=HEADERS, timeout=12)
-        resp.raise_for_status()
-        lines = [ln.strip() for ln in resp.text.splitlines() if ln.strip()]
-        if len(lines) < 2:
+        import yfinance as yf
+        hist = yf.Ticker(ticker).history(period="14d", interval="1d")
+        if hist.empty:
             return []
-        out: list[float] = []
-        for ln in lines[1:]:
-            parts = ln.split(",")
-            if len(parts) >= 5:
-                try:
-                    out.append(round(float(parts[4]), 2))
-                except ValueError:
-                    continue
+        out = [round(c, 2) for c in hist["Close"].tolist()]
         return out[-10:] if len(out) >= 2 else []
     except Exception:
         return []
+
+
+# ──────────────────────────────────────────────────────────────
+# RS Universe (S&P 500)
+# ──────────────────────────────────────────────────────────────
+
+def _build_sp500_rs_universe() -> dict[str, float]:
+    """Download S&P 500 6-month performance to use as RS benchmark."""
+    try:
+        import pandas as pd
+        import yfinance as yf
+        from io import StringIO
+        resp = requests.get(
+            "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",
+            headers=HEADERS, timeout=15
+        )
+        resp.raise_for_status()
+        tables = pd.read_html(StringIO(resp.text))
+        tickers = tables[0]["Symbol"].str.replace(".", "-", regex=False).tolist()
+        logger.info(f"  Downloading {len(tickers)} S&P 500 stocks...")
+        data = yf.download(tickers, period="6mo", interval="1d", auto_adjust=True, progress=False)
+        closes = data["Close"]
+        valid = closes.dropna(thresh=int(len(closes) * 0.5), axis=1)
+        perf = ((valid.iloc[-1] - valid.iloc[0]) / valid.iloc[0] * 100).dropna()
+        return perf.to_dict()
+    except Exception as e:
+        logger.warning(f"  S&P 500 RS universe failed: {e}")
+        return {}
 
 
 # ──────────────────────────────────────────────────────────────
@@ -425,13 +446,36 @@ def build_data() -> dict:
         if theme_subthemes:
             output_themes.append({"name": theme_label, "subthemes": theme_subthemes})
 
-    # ── Step 4: Compute RS across ALL stocks ──
+    # ── Step 4: Mark pure_play (appears in only one subtheme across all themes) ──
+    ticker_count: dict[str, int] = {}
+    for th in output_themes:
+        for sub in th.get("subthemes", []):
+            for stock in sub["stocks"]:
+                ticker_count[stock["ticker"]] = ticker_count.get(stock["ticker"], 0) + 1
+    for th in output_themes:
+        for sub in th.get("subthemes", []):
+            for stock in sub["stocks"]:
+                stock["pure_play"] = ticker_count.get(stock["ticker"], 1) == 1
+
+    # ── Step 5: Compute RS vs S&P 500 universe ──
+    logger.info("\nStep 5: Building RS universe from S&P 500...")
+    rs_universe = _build_sp500_rs_universe()
+    logger.info(f"  RS universe: {len(rs_universe)} stocks")
+
     all_stocks_flat = []
     for th in output_themes:
         for sub in th.get("subthemes", []):
             all_stocks_flat.extend(sub["stocks"])
 
-    if all_stocks_flat:
+    if rs_universe and all_stocks_flat:
+        sorted_perfs = sorted(rs_universe.values())
+        n = len(sorted_perfs)
+        for stock in all_stocks_flat:
+            perf = stock.get("perf_6m") or stock.get("perf_3m") or 0
+            rank = sum(1 for v in sorted_perfs if v <= perf)
+            stock["rs_52w"] = max(1, min(99, int((rank / max(n, 1)) * 98) + 1))
+    elif all_stocks_flat:
+        # Fallback: internal ranking if S&P 500 fetch failed
         perfs = [(i, s.get("perf_6m") or s.get("perf_3m") or 0) for i, s in enumerate(all_stocks_flat)]
         perfs.sort(key=lambda x: x[1])
         n = len(perfs)

@@ -308,7 +308,7 @@ export default function App() {
       }).filter(sub => sub.stocks.length > 0);
       return { ...norm, subthemes: filteredSubs };
     }).filter(t => t.subthemes.length > 0);
-  }, [data, search, filtersOn, filterDolVol, filterADR, filterRS]);
+  }, [data, search, filtersOn, filterDolVol, filterADR, filterRS, filterDist52w]);
 
   const unique = [...new Set(filtered.flatMap(t => t.subthemes.flatMap(s => s.stocks.map(st => st.ticker))))];
   const totalSubs = filtered.reduce((n, t) => n + t.subthemes.length, 0);

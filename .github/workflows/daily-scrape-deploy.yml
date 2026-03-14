@@ -27,7 +27,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install Python deps
-        run: pip install requests beautifulsoup4 exchange-calendars
+        run: pip install requests beautifulsoup4 exchange-calendars yfinance
 
       # Finviz 偶爾限流／擋 IP：失敗則等幾分鐘再掃，最多 4 次
       - name: Run scraper (retry on failure)
