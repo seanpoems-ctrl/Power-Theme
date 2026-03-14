@@ -29,7 +29,7 @@ HEADERS = {
 
 CI = os.environ.get("CI") == "true"
 
-TOP_THEMES = 10
+TOP_THEMES = 5
 TOP_SUBTHEMES_PER_THEME = 5
 TOP_STOCKS_PER_SUBTHEME = 10
 
@@ -234,7 +234,9 @@ def fetch_stock_detail(ticker: str) -> dict | None:
         result = {
             "ticker": ticker, "company": company, "price": round(price, 2),
             "change_pct": parse_pct(snap.get("Change", "0%")) or 0,
-            "volume": volume, "dollar_volume": round(price * volume), "adr_pct": adr_pct,
+            "volume": volume, "dollar_volume": round(price * volume),
+            "avg_dollar_volume": round(price * avg_vol) if avg_vol > 0 else 0,
+            "adr_pct": adr_pct,
             "52w_high": round(h52, 2) if h52 > 0 else None,
             "52w_low": round(l52, 2) if l52 > 0 else None,
             "avg_volume": avg_vol,
@@ -243,6 +245,8 @@ def fetch_stock_detail(ticker: str) -> dict | None:
         }
         for fk, jk in PERF_MAP.items():
             result[jk] = parse_pct(snap.get(fk, ""))
+        for fk, jk in [("SMA20", "sma20_pct"), ("SMA50", "sma50_pct"), ("SMA200", "sma200_pct")]:
+            result[jk] = parse_pct(snap.get(fk, "") or "")
 
         original_change = result["change_pct"]
         if result.get("perf_1d") is not None:
@@ -486,8 +490,20 @@ def build_data() -> dict:
         for sub in th.get("subthemes", []):
             sub["stocks"].sort(key=lambda s: s.get("rs_52w", 0), reverse=True)
 
+    # ── Step 6: Fetch SPY benchmark ──
+    logger.info("\nStep 6: Fetching SPY benchmark...")
+    _sleep()
+    spy_detail = fetch_stock_detail("SPY")
+    spy_benchmarks = {}
+    if spy_detail:
+        for k in ["perf_1w", "perf_1m", "perf_3m"]:
+            spy_benchmarks[k] = spy_detail.get(k)
+        logger.info(f"  SPY: {spy_benchmarks}")
+    else:
+        logger.warning("  SPY fetch failed")
+
     updated = date.today() if is_trading_day() else last_trading_date()
-    return {"last_updated": updated.isoformat(), "themes": output_themes}
+    return {"last_updated": updated.isoformat(), "themes": output_themes, "spy_benchmarks": spy_benchmarks}
 
 
 def _fetch_details(picks: list[dict], cache: dict) -> list[dict]:
