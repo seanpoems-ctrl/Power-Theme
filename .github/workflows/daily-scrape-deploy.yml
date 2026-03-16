@@ -29,8 +29,27 @@ jobs:
       - name: Install Python deps
         run: pip install requests beautifulsoup4 exchange-calendars yfinance
 
+      - name: Check NYSE trading day
+        id: trading_day
+        run: |
+          python - <<'EOF'
+          import exchange_calendars as xcals
+          from datetime import date
+          nyse = xcals.get_calendar("XNYS")
+          today = date.today().isoformat()
+          if nyse.is_session(today):
+              print("is_trading_day=true")
+              with open("$GITHUB_OUTPUT", "a") as f:
+                  f.write("is_trading_day=true\n")
+          else:
+              print(f"Skipping — {today} is not a NYSE trading day")
+              with open("$GITHUB_OUTPUT", "a") as f:
+                  f.write("is_trading_day=false\n")
+          EOF
+
       # Finviz 偶爾限流／擋 IP：失敗則等幾分鐘再掃，最多 4 次
       - name: Run scraper (retry on failure)
+        if: steps.trading_day.outputs.is_trading_day == 'true'
         env:
           CI: true
         run: |
@@ -49,21 +68,27 @@ jobs:
           exit 1
 
       - uses: actions/setup-node@v4
+        if: steps.trading_day.outputs.is_trading_day == 'true'
         with:
           node-version: 18
 
       - run: npm install
+        if: steps.trading_day.outputs.is_trading_day == 'true'
 
       - name: Build React app
+        if: steps.trading_day.outputs.is_trading_day == 'true'
         run: npm run build
         env:
           CI: false
 
       - uses: actions/configure-pages@v4
+        if: steps.trading_day.outputs.is_trading_day == 'true'
 
       - uses: actions/upload-pages-artifact@v3
+        if: steps.trading_day.outputs.is_trading_day == 'true'
         with:
           path: ./build
 
       - id: deployment
+        if: steps.trading_day.outputs.is_trading_day == 'true'
         uses: actions/deploy-pages@v4

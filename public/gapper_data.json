@@ -1,0 +1,75 @@
+{
+  "scan_time": "2026-03-15 15:43 ET",
+  "gappers": [
+    {
+      "ticker": "KLAR",
+      "price": 15.91,
+      "gap_pct": 8.34,
+      "pm_volume": 280265,
+      "avg_vol_30d": 7927540,
+      "mkt_cap": 6006150696,
+      "rvol": 1.4,
+      "category": "Institutional Buying",
+      "reasoning": "Multiple headlines specifically report major institutional funds like Coatue Management, Azora Capital, and Centiva Capital acquiring new or increased stakes in Klarna Group plc.",
+      "hypothesis": "Medium Conviction (RS Hold) — Large fund accumulation; watch for continuation.",
+      "conviction": 58,
+      "headlines": [
+        "Coatue Management LLC Purchases Shares of 330,000 Klarna Group plc $KLAR - MarketBeat",
+        "Klarna Insider Buying And New Partnerships Test Market View On Valuation - simplywall.st",
+        "Azora Capital LP Buys New Stake in Klarna Group plc $KLAR - MarketBeat"
+      ]
+    },
+    {
+      "ticker": "SSL",
+      "price": 11.31,
+      "gap_pct": 6.6,
+      "pm_volume": 216726,
+      "avg_vol_30d": 2884122,
+      "mkt_cap": 7245708415,
+      "rvol": 1.62,
+      "category": "Upgrade",
+      "reasoning": "The headlines explicitly state that Sasol (SSL) climbed 26% and hit a new high 'on 122% Analyst Upgrade,' directly attributing the move to an analyst raising their rating or price target.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 33,
+      "headlines": [
+        "Sasol (SSL) Climbs 26%, Hits New High on 122% Analyst Upgrade - Yahoo! Finance Canada",
+        "Sasol (SSL) Climbs 26%, Hits New High on 122% Analyst Upgrade - Insider Monkey",
+        "5 Stocks Making Huge Moves this Week - Insider Monkey"
+      ]
+    },
+    {
+      "ticker": "BMNR",
+      "price": 20.54,
+      "gap_pct": 5.79,
+      "pm_volume": 1387552,
+      "avg_vol_30d": 45119185,
+      "mkt_cap": 9342874662,
+      "rvol": 2.1,
+      "category": "Institutional Buying",
+      "reasoning": "ARP Global Capital Ltd, an institutional entity, disclosed a multi-million dollar position in BMNR, directly fitting the definition of institutional buying. The ETH sale to BMNR is an asset acquisition, not fitting the provided primary catalyst categories as directly.",
+      "hypothesis": "Medium Conviction (RS Hold) — Large fund accumulation; watch for continuation.",
+      "conviction": 60,
+      "headlines": [
+        "ARP Global Capital Ltd Takes $3.43 Million Position in BitMine Immersion Technologies, Inc. $BMNR - MarketBeat",
+        "Ethereum Foundation Completes $10.2M ETH Sale to BitMine (BMNR) - CoinCentral"
+      ]
+    },
+    {
+      "ticker": "COIN",
+      "price": 195.53,
+      "gap_pct": 5.51,
+      "pm_volume": 365012,
+      "avg_vol_30d": 14703228,
+      "mkt_cap": 51634563437,
+      "rvol": 0.95,
+      "category": "New Contract/Partnership",
+      "reasoning": "Speculation about a potential deal with Bybit is cited as the reason for the stock jump, indicating the market is reacting to the prospect of a new partnership or major agreement for Coinbase.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "headlines": [
+        "Coinbase (COIN) Stock Jumps as Bybit Deal Speculation Heats Up - MEXC",
+        "Banco Bilbao Vizcaya Argentaria S.A. Has $92.72 Million Stock Holdings in Coinbase Global, Inc. $COIN - MarketBeat"
+      ]
+    }
+  ]
+}

@@ -260,24 +260,147 @@ def fetch_stock_detail(ticker: str) -> dict | None:
         return None
 
 
-def fetch_sparkline(ticker: str) -> list[float]:
+def fetch_sparkline(ticker: str) -> dict:
     try:
         import yfinance as yf
-        hist = yf.Ticker(ticker).history(period="14d", interval="1d")
-        if hist.empty:
-            return []
-        out = [round(c, 2) for c in hist["Close"].tolist()]
-        return out[-10:] if len(out) >= 2 else []
+        hist = yf.Ticker(ticker).history(period="6mo", interval="1d")
+        if hist.empty or len(hist) < 2:
+            return {"sparkline": [], "bars_30d": []}
+        closes = [round(float(c), 2) for c in hist["Close"].tolist()]
+        bars_30d = [
+            {"h": round(float(r["High"]), 2), "l": round(float(r["Low"]), 2),
+             "c": round(float(r["Close"]), 2), "v": int(r["Volume"])}
+            for _, r in hist.tail(30).iterrows()
+        ]
+        return {"sparkline": closes, "bars_30d": bars_30d}
     except Exception:
-        return []
+        return {"sparkline": [], "bars_30d": []}
+
+
+# ──────────────────────────────────────────────────────────────
+# Market Condition (SPY + QQQ indicators)
+# ──────────────────────────────────────────────────────────────
+
+def _ema(closes: list, period: int):
+    if len(closes) < period:
+        return None
+    k = 2.0 / (period + 1)
+    val = sum(closes[:period]) / period
+    for p in closes[period:]:
+        val = p * k + val * (1 - k)
+    return val
+
+
+def _rsi(closes: list, period: int = 14) -> float | None:
+    if len(closes) < period + 1:
+        return None
+    deltas = [closes[i] - closes[i - 1] for i in range(1, len(closes))]
+    gains  = [d if d > 0 else 0.0 for d in deltas[-period:]]
+    losses = [-d if d < 0 else 0.0 for d in deltas[-period:]]
+    avg_gain = sum(gains) / period
+    avg_loss = sum(losses) / period
+    if avg_loss == 0:
+        return 100.0
+    return round(100 - 100 / (1 + avg_gain / avg_loss), 2)
+
+
+def _elite_status(price, sma10, sma20, sma50, sma200, rsi, breadth) -> str:
+    """Classify index into Strong / Mediocre / Lagging / Weak per Elite Rubric."""
+    # Strong: price > SMA10 > SMA20 > SMA50, breadth > 70%, RSI 60–80
+    strong_smas = sma10 and sma20 and sma50 and price > sma10 > sma20 > sma50
+    if strong_smas and (breadth is None or breadth > 70) and (rsi is None or 60 <= rsi <= 80):
+        return "Strong"
+
+    # Weak: price below SMA10, SMA20, SMA50 AND SMA200
+    if (sma10 and price < sma10) and (sma20 and price < sma20) and \
+       (sma50 and price < sma50) and (sma200 and price < sma200):
+        return "Weak"
+
+    # Lagging: price below SMA10, SMA20, SMA50 but still above SMA200, breadth < 40%
+    if (sma10 and price < sma10) and (sma20 and price < sma20) and \
+       (sma50 and price < sma50) and (sma200 and price > sma200) and \
+       (breadth is None or breadth < 40):
+        return "Lagging"
+
+    # Mediocre: SMA10 has crossed below SMA20, but price still above SMA50 and SMA200
+    if sma10 and sma20 and sma50 and sma200 and \
+       sma10 < sma20 and price > sma50 and price > sma200:
+        return "Mediocre"
+
+    return "Neutral"
+
+
+def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
+    """Return price action metrics + Elite Regime status for an index ETF."""
+    try:
+        import yfinance as yf
+        hist = yf.Ticker(ticker).history(period="1y", interval="1d")
+        if hist.empty or len(hist) < 50:
+            return {}
+        closes = [float(c) for c in hist["Close"].tolist()]
+        price = closes[-1]
+        sma10  = sum(closes[-10:]) / 10  if len(closes) >= 10  else None
+        sma20  = sum(closes[-20:]) / 20  if len(closes) >= 20  else None
+        sma50  = sum(closes[-50:]) / 50  if len(closes) >= 50  else None
+        sma200 = sum(closes[-200:]) / 200 if len(closes) >= 200 else None
+        # 200SMA slope: compare current vs 20 trading days ago
+        sma200_20d = sum(closes[-220:-20]) / 200 if len(closes) >= 220 else None
+        ema10      = _ema(closes, 10)
+        ema20      = _ema(closes, 20)
+        ema10_prev = _ema(closes[:-1], 10)
+        ema20_prev = _ema(closes[:-1], 20)
+        rsi14      = _rsi(closes, 14)
+        change_pct = round((closes[-1] / closes[-2] - 1) * 100, 2) if len(closes) >= 2 else None
+        sma50_pct  = round((price / sma50  - 1) * 100, 2) if sma50  else None
+        sma200_pct = round((price / sma200 - 1) * 100, 2) if sma200 else None
+        slope_up   = bool(sma200 > sma200_20d) if sma200 and sma200_20d else None
+
+        index_status = _elite_status(price, sma10, sma20, sma50, sma200, rsi14, breadth)
+
+        return {
+            "price":             round(price, 2),
+            "change_pct":        change_pct,
+            "index_status":      index_status,
+            "breadth":           breadth,
+            "rsi14":             rsi14,
+            "sma50_pct":         sma50_pct,
+            "sma200_pct":        sma200_pct,
+            "sma200_slope_up":   slope_up,
+            "ema10_above_ema20": bool(ema10 > ema20) if ema10 and ema20 else None,
+            "ema10_ema20_both_down": bool(ema10 < ema10_prev and ema20 < ema20_prev)
+                                     if all([ema10, ema10_prev, ema20, ema20_prev]) else None,
+        }
+    except Exception as e:
+        logger.warning(f"  Market indicators for {ticker} failed: {e}")
+        return {}
+
+
+def _market_signal(spy: dict, qqq: dict) -> str:
+    def is_red(d):
+        broke_200 = (d.get("sma200_pct") or 0) < 0
+        ema_cross_down = (d.get("ema10_above_ema20") is False
+                          and d.get("ema10_ema20_both_down") is True)
+        return broke_200 or ema_cross_down
+
+    if is_red(spy) or is_red(qqq):
+        return "red"
+
+    spy_above_50 = (spy.get("sma50_pct") or 0) > 0
+    qqq_above_50 = (qqq.get("sma50_pct") or 0) > 0
+    spy_200_up   = spy.get("sma200_slope_up") is not False
+    qqq_200_up   = qqq.get("sma200_slope_up") is not False
+
+    if spy_above_50 and qqq_above_50 and spy_200_up and qqq_200_up:
+        return "green"
+    return "yellow"
 
 
 # ──────────────────────────────────────────────────────────────
 # RS Universe (S&P 500)
 # ──────────────────────────────────────────────────────────────
 
-def _build_sp500_rs_universe() -> dict[str, float]:
-    """Download S&P 500 6-month performance to use as RS benchmark."""
+def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None]:
+    """Download S&P 500 6-month data. Returns (rs_dict, breadth_pct)."""
     try:
         import pandas as pd
         import yfinance as yf
@@ -294,10 +417,67 @@ def _build_sp500_rs_universe() -> dict[str, float]:
         closes = data["Close"]
         valid = closes.dropna(thresh=int(len(closes) * 0.5), axis=1)
         perf = ((valid.iloc[-1] - valid.iloc[0]) / valid.iloc[0] * 100).dropna()
-        return perf.to_dict()
+
+        # Compute breadth: % of S&P 500 stocks above their 50-day SMA
+        above_50 = 0
+        total = 0
+        for col in valid.columns:
+            col_data = valid[col].dropna()
+            if len(col_data) >= 50:
+                total += 1
+                if float(col_data.iloc[-1]) > float(col_data.iloc[-50:].mean()):
+                    above_50 += 1
+        breadth = round(above_50 / total * 100, 1) if total > 0 else None
+        logger.info(f"  S&P 500 breadth (% above SMA50): {breadth}%")
+        return perf.to_dict(), breadth
     except Exception as e:
         logger.warning(f"  S&P 500 RS universe failed: {e}")
-        return {}
+        return {}, None
+
+
+def _fetch_nasdaq100_breadth() -> float | None:
+    """Compute % of Nasdaq 100 stocks above their 50-day SMA."""
+    try:
+        import pandas as pd
+        import yfinance as yf
+        from io import StringIO
+        resp = requests.get(
+            "https://en.wikipedia.org/wiki/Nasdaq-100",
+            headers=HEADERS, timeout=15
+        )
+        resp.raise_for_status()
+        tables = pd.read_html(StringIO(resp.text))
+        # Find the table with a 'Ticker' or 'Symbol' column
+        tickers = None
+        for t in tables:
+            cols = [str(c).lower() for c in t.columns]
+            if "ticker" in cols:
+                tickers = t[t.columns[[i for i, c in enumerate(cols) if c == "ticker"][0]]].tolist()
+                break
+            if "symbol" in cols:
+                tickers = t[t.columns[[i for i, c in enumerate(cols) if c == "symbol"][0]]].tolist()
+                break
+        if not tickers:
+            return None
+        tickers = [str(t).replace(".", "-") for t in tickers if str(t) not in ("nan", "")]
+        logger.info(f"  Downloading {len(tickers)} Nasdaq-100 stocks for breadth...")
+        data = yf.download(tickers, period="3mo", interval="1d", auto_adjust=True, progress=False)
+        closes = data["Close"]
+        valid = closes.dropna(thresh=int(len(closes) * 0.5), axis=1)
+        above_50 = 0
+        total = 0
+        for col in valid.columns:
+            col_data = valid[col].dropna()
+            if len(col_data) >= 50:
+                total += 1
+                if float(col_data.iloc[-1]) > float(col_data.iloc[-50:].mean()):
+                    above_50 += 1
+        breadth = round(above_50 / total * 100, 1) if total > 0 else None
+        logger.info(f"  Nasdaq-100 breadth (% above SMA50): {breadth}%")
+        return breadth
+    except Exception as e:
+        logger.warning(f"  Nasdaq-100 breadth failed: {e}")
+        return None
 
 
 # ──────────────────────────────────────────────────────────────
@@ -461,10 +641,10 @@ def build_data() -> dict:
             for stock in sub["stocks"]:
                 stock["pure_play"] = ticker_count.get(stock["ticker"], 1) == 1
 
-    # ── Step 5: Compute RS vs S&P 500 universe ──
+    # ── Step 5: Compute RS vs S&P 500 universe + breadth ──
     logger.info("\nStep 5: Building RS universe from S&P 500...")
-    rs_universe = _build_sp500_rs_universe()
-    logger.info(f"  RS universe: {len(rs_universe)} stocks")
+    rs_universe, sp500_breadth = _build_sp500_rs_universe()
+    logger.info(f"  RS universe: {len(rs_universe)} stocks | S&P 500 breadth: {sp500_breadth}%")
 
     all_stocks_flat = []
     for th in output_themes:
@@ -490,20 +670,67 @@ def build_data() -> dict:
         for sub in th.get("subthemes", []):
             sub["stocks"].sort(key=lambda s: s.get("rs_52w", 0), reverse=True)
 
-    # ── Step 6: Fetch SPY benchmark ──
-    logger.info("\nStep 6: Fetching SPY benchmark...")
+    # ── Step 6: Fetch SPY benchmark + market condition ──
+    logger.info("\nStep 6: Fetching SPY & QQQ market condition...")
     _sleep()
     spy_detail = fetch_stock_detail("SPY")
     spy_benchmarks = {}
     if spy_detail:
-        for k in ["perf_1w", "perf_1m", "perf_3m"]:
+        for k in ["perf_1w", "perf_1m", "perf_3m", "perf_6m"]:
             spy_benchmarks[k] = spy_detail.get(k)
-        logger.info(f"  SPY: {spy_benchmarks}")
-    else:
-        logger.warning("  SPY fetch failed")
+
+    # Fetch Nasdaq-100 breadth for QQQ (S&P 500 reused as proxy for SPY and IWM)
+    qqq_breadth = _fetch_nasdaq100_breadth()
+    _sleep()
+
+    spy_ind = fetch_market_indicators("SPY", breadth=sp500_breadth)
+    _sleep()
+    qqq_ind = fetch_market_indicators("QQQ", breadth=qqq_breadth)
+    _sleep()
+    iwm_ind = fetch_market_indicators("IWM", breadth=sp500_breadth)  # S&P 500 as proxy
+    signal = _market_signal(spy_ind, qqq_ind) if spy_ind and qqq_ind else "yellow"
+    market_condition = {"signal": signal, "spy": spy_ind, "qqq": qqq_ind, "iwm": iwm_ind}
+    logger.info(
+        f"  Market signal: {signal} | "
+        f"SPY sma50={spy_ind.get('sma50_pct')} status={spy_ind.get('index_status')} breadth={sp500_breadth}% | "
+        f"QQQ sma50={qqq_ind.get('sma50_pct')} status={qqq_ind.get('index_status')} breadth={qqq_breadth}%"
+    )
 
     updated = date.today() if is_trading_day() else last_trading_date()
-    return {"last_updated": updated.isoformat(), "themes": output_themes, "spy_benchmarks": spy_benchmarks}
+    return {
+        "last_updated": updated.isoformat(),
+        "themes": output_themes,
+        "spy_benchmarks": spy_benchmarks,
+        "market_condition": market_condition,
+    }
+
+
+def fetch_earnings_yf(ticker: str) -> str | None:
+    """Return next earnings date as 'MMM DD' string using yfinance, or None."""
+    try:
+        import yfinance as yf
+        from datetime import date as _date
+        cal = yf.Ticker(ticker).calendar
+        if not cal:
+            return None
+        dates = cal.get("Earnings Date")
+        if not dates:
+            return None
+        # calendar returns a list of timestamps
+        if not isinstance(dates, list):
+            dates = [dates]
+        today = _date.today()
+        upcoming = []
+        for d in dates:
+            # yfinance returns datetime.date or Timestamp
+            d_date = d.date() if hasattr(d, "date") and callable(d.date) else d
+            if d_date >= today:
+                upcoming.append(d_date)
+        if not upcoming:
+            return None
+        return upcoming[0].strftime("%b %-d")
+    except Exception:
+        return None
 
 
 def _fetch_details(picks: list[dict], cache: dict) -> list[dict]:
@@ -514,7 +741,10 @@ def _fetch_details(picks: list[dict], cache: dict) -> list[dict]:
             logger.info(f"      {t}...")
             detail = fetch_stock_detail(t)
             if detail:
-                detail["sparkline"] = fetch_sparkline(t)
+                price_data = fetch_sparkline(t)
+                detail["sparkline"] = price_data.get("sparkline", [])
+                detail["bars_30d"] = price_data.get("bars_30d", [])
+                detail["earnings"] = fetch_earnings_yf(t)
             cache[t] = detail
             _sleep()
         d = cache.get(t)
