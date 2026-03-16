@@ -493,6 +493,7 @@ const StockTable = ({ stocks, sortKey, sortDir, spyPerf, rsSPYKey, isTopTheme, t
   }, [stocks, sortKey, sortDir]);
 
   return (
+    <>
     <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
       <table className="w-full text-sm min-w-[900px]">
         <thead>
@@ -558,6 +559,7 @@ const StockTable = ({ stocks, sortKey, sortDir, spyPerf, rsSPYKey, isTopTheme, t
       </table>
     </div>
     {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
+    </>
   );
 };
 
