@@ -685,7 +685,7 @@ const GapperScanner = () => {
   );
 
   return (
-    <div className="max-w-[1400px] mx-auto px-4 py-4">
+    <div className="max-w-[1600px] mx-auto px-4 py-4">
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="text-sm font-bold text-zinc-100 tracking-wide uppercase">Institutional Gappers</h2>
@@ -856,7 +856,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
       <div className="border-b border-zinc-800/60 bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-20">
-        <div className="max-w-[1400px] mx-auto px-4 py-3">
+        <div className="max-w-[1600px] mx-auto px-4 py-3">
           <div className="flex items-center justify-between mb-2.5">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center"><Activity size={16} className="text-white"/></div>
@@ -950,7 +950,7 @@ export default function App() {
       </div>
 
       {tab === "gapper" ? <GapperScanner/> : (
-        <div className="max-w-[1400px] mx-auto px-4 py-4">
+        <div className="max-w-[1600px] mx-auto px-4 py-4">
           {data && <MarketCondition mc={data.market_condition}/>}
           {data && <Leaderboard themes={data.themes} perfKey={lbPerfKey} onPerfKeyChange={setLbPerfKey}/>}
           {data && <CorrelationGuard themes={data.themes}/>}
