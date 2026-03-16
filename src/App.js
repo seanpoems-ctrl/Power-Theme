@@ -798,7 +798,7 @@ const VixGauge = ({ initialVix }) => {
       </div>
 
       {/* Semicircle SVG */}
-      <svg viewBox="0 0 400 215" className="w-full h-auto" style={{ overflow: 'visible' }}>
+      <svg viewBox="0 0 400 215" className="w-full h-auto mx-auto block" style={{ overflow: 'visible', maxWidth: '340px' }}>
         <defs>
           <filter id="vg-needle-shadow" x="-50%" y="-20%" width="200%" height="140%">
             <feGaussianBlur stdDeviation="2" result="b"/>
@@ -1288,7 +1288,7 @@ export default function App() {
 
       {tab === "gapper" ? <GapperScanner/> : (
         <div className="max-w-[1400px] mx-auto px-4 py-4">
-          <VixGauge initialVix={data?.vix}/>
+          <div className="w-72"><VixGauge initialVix={data?.vix}/></div>
           {data && <Leaderboard themes={data.themes} perfKey={lbPerfKey} onPerfKeyChange={setLbPerfKey}/>}
           {data && <CorrelationGuard themes={data.themes}/>}
           {data && <CounterTrendWarning themes={data.themes}/>}
