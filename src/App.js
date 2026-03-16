@@ -839,6 +839,7 @@ const GapperScanner = () => {
                 </td>
                 {/* Premkt % */}
                 <td className="py-2 px-1.5 text-right">
+                  <div className="text-[11px] font-mono text-zinc-300">${g.price.toFixed(2)}</div>
                   <span className="text-xs font-bold font-mono text-emerald-400">+{g.gap_pct.toFixed(1)}%</span>
                 </td>
                 {/* Premkt Vol */}
