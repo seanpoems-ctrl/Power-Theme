@@ -427,9 +427,11 @@ const Leaderboard = ({ themes, perfKey, onPerfKeyChange }) => {
       .slice(0, 5);
   }, [themes, perfKey]);
 
+  const maxAvg = Math.max(...ranked.map(t => Math.abs(t.avg)), 0.1);
+
   return (
-    <div className="mb-5 p-4 bg-zinc-900/60 rounded-xl border border-zinc-800/60">
-      <div className="flex items-center justify-between mb-3">
+    <div className="h-full p-4 bg-zinc-900/60 rounded-xl border border-zinc-800/60 flex flex-col">
+      <div className="flex items-center justify-between mb-3 flex-shrink-0">
         <div className="flex items-center gap-2">
           <BarChart3 size={13} className="text-blue-400"/>
           <span className="text-xs font-semibold text-zinc-300">Theme Leaderboard</span>
@@ -444,17 +446,21 @@ const Leaderboard = ({ themes, perfKey, onPerfKeyChange }) => {
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-5 gap-2">
+      <div className="flex flex-col gap-2 flex-1 justify-between">
         {ranked.map((t, i) => (
-          <div key={t.name} className={`p-3 rounded-lg border ${i === 0 ? 'bg-blue-500/10 border-blue-500/30' : 'bg-zinc-800/40 border-zinc-700/30'}`}>
-            <div className="flex items-center gap-1.5 mb-1">
-              <span className={`text-[10px] font-bold font-mono ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>#{i+1}</span>
-              <span className="text-[10px] font-semibold text-zinc-200 leading-tight line-clamp-2">{t.name}</span>
+          <div key={t.name} className={`flex items-center gap-3 px-3 py-2.5 rounded-lg border flex-1 ${i === 0 ? 'bg-blue-500/10 border-blue-500/30' : 'bg-zinc-800/40 border-zinc-700/30'}`}>
+            <span className={`text-xs font-bold font-mono w-6 flex-shrink-0 ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>#{i+1}</span>
+            <span className="text-[11px] font-semibold text-zinc-200 flex-1 leading-snug">{t.name}</span>
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <div className="w-24 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                <div className="h-full rounded-full transition-all duration-500"
+                  style={{ width: `${Math.abs(t.avg) / maxAvg * 100}%`, background: t.avg >= 0 ? '#34d399' : '#f87171' }}/>
+              </div>
+              <span className={`text-sm font-bold font-mono w-16 text-right ${t.avg >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                {t.avg >= 0 ? '+' : ''}{t.avg.toFixed(1)}%
+              </span>
+              <span className="text-[10px] text-zinc-600 w-20 text-right">{t.subs} sub · {t.stocks}s</span>
             </div>
-            <div className={`text-sm font-bold font-mono ${t.avg >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-              {t.avg >= 0 ? '+' : ''}{t.avg.toFixed(1)}%
-            </div>
-            <div className="text-[10px] text-zinc-600 mt-1">{t.subs} sub · {t.stocks} stocks</div>
           </div>
         ))}
       </div>
@@ -1288,7 +1294,7 @@ export default function App() {
 
       {tab === "gapper" ? <GapperScanner/> : (
         <div className="max-w-[1400px] mx-auto px-4 py-4">
-          <div className="flex gap-4 items-start mb-4">
+          <div className="flex gap-4 items-stretch mb-4">
             <div className="w-72 flex-shrink-0"><VixGauge initialVix={data?.vix}/></div>
             <div className="flex-1 min-w-0">
               {data && <Leaderboard themes={data.themes} perfKey={lbPerfKey} onPerfKeyChange={setLbPerfKey}/>}
