@@ -682,10 +682,24 @@ const ConvictionBar = ({ value }) => {
   );
 };
 
+const gradeStyle = (g) => {
+  if (g === "A+") return "text-emerald-300 border-emerald-500/40 bg-emerald-500/10";
+  if (g === "A")  return "text-blue-300 border-blue-500/40 bg-blue-500/10";
+  if (g === "B")  return "text-zinc-400 border-zinc-600/40 bg-zinc-700/20";
+  return "text-red-400 border-red-500/40 bg-red-500/10";
+};
+
+const DailyChg = ({ val }) => {
+  if (val == null) return <span className="text-zinc-600 text-xs">—</span>;
+  const pos = val >= 0;
+  return <span className={`text-xs font-mono font-bold ${pos ? "text-emerald-400" : "text-red-400"}`}>{pos ? "+" : ""}{val.toFixed(2)}%</span>;
+};
+
 const GapperScanner = () => {
   const [gapperData, setGapperData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState(null);
+  const [expandedTicker, setExpandedTicker] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -710,66 +724,134 @@ const GapperScanner = () => {
 
   return (
     <>
-    <div className="max-w-[1400px] mx-auto px-4 py-4">
+    <div className="max-w-[1600px] mx-auto px-4 py-4">
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="text-sm font-bold text-zinc-100 tracking-wide uppercase">Institutional Gappers</h2>
-          <p className="text-[11px] text-zinc-600 mt-0.5">Scanned: {gapperData.scan_time}</p>
+          <p className="text-[11px] text-zinc-600 mt-0.5">Scanned: {gapperData.scan_time} · Click a row to expand analysis</p>
         </div>
         <span className="text-[10px] text-zinc-600 bg-zinc-800/60 border border-zinc-700/40 px-2 py-1 rounded">{gapperData.gappers.length} gappers found</span>
       </div>
 
       <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
-        <table className="w-full text-sm min-w-[1000px]">
+        <table className="w-full text-sm min-w-[1500px]">
           <thead>
             <tr className="text-[11px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80">
               <th className="text-left py-2 px-4 font-medium">Ticker</th>
-              <th className="text-right py-2 px-2 font-medium">Price / Gap</th>
-              <th className="text-right py-2 px-2 font-medium">PM Vol</th>
+              <th className="text-right py-2 px-2 font-medium">PreMkt Price / Gap</th>
+              <th className="text-right py-2 px-2 font-medium">PreMkt Vol</th>
               <th className="text-right py-2 px-2 font-medium">RVOL</th>
+              <th className="text-right py-2 px-2 font-medium">Daily %</th>
+              <th className="text-right py-2 px-2 font-medium">Float</th>
+              <th className="text-right py-2 px-2 font-medium">Short Int %</th>
               <th className="text-right py-2 px-2 font-medium">Mkt Cap</th>
+              <th className="text-left py-2 px-2 font-medium">Industry</th>
+              <th className="text-center py-2 px-2 font-medium">Grade</th>
               <th className="text-center py-2 px-2 font-medium">Category</th>
-              <th className="text-left py-2 px-4 font-medium">Gemini Reasoning</th>
-              <th className="text-left py-2 px-4 font-medium">Trade Hypothesis</th>
               <th className="text-center py-2 px-2 font-medium">Conviction</th>
             </tr>
           </thead>
           <tbody>
-            {gapperData.gappers.map((g, i) => (
-              <tr key={g.ticker + i} className="border-t border-zinc-800/50 hover:bg-zinc-800/30 transition-colors">
-                <td className="py-2.5 px-4">
-                  <span
-                    className="flex items-center gap-1.5 font-bold text-zinc-100 text-xs cursor-default hover:text-blue-400 transition-colors"
-                    onMouseEnter={e => setHovered({ ticker: g.ticker, rect: e.currentTarget.getBoundingClientRect() })}
-                    onMouseLeave={() => setHovered(null)}
-                  >
-                    {g.ticker}
-                    <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}>
-                      <ExternalLink size={9} className="text-zinc-600 hover:text-blue-400"/>
-                    </a>
-                  </span>
-                </td>
-                <td className="text-right py-2.5 px-2">
-                  <div className="text-xs font-mono text-zinc-200">${g.price.toFixed(2)}</div>
-                  <div className="text-[10px] font-bold text-emerald-400">+{g.gap_pct.toFixed(1)}%</div>
-                </td>
-                <td className="text-right py-2.5 px-2 text-xs font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
-                <td className="text-right py-2.5 px-2">
-                  <span className={`text-xs font-bold font-mono ${g.rvol >= 5 ? 'text-emerald-300' : g.rvol >= 3 ? 'text-emerald-400' : g.rvol >= 2 ? 'text-amber-400' : 'text-zinc-500'}`}>
-                    {g.rvol.toFixed(1)}x
-                  </span>
-                </td>
-                <td className="text-right py-2.5 px-2 text-xs font-mono text-zinc-400">{fmtCap(g.mkt_cap)}</td>
-                <td className="text-center py-2.5 px-2">
-                  <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border ${CATEGORY_STYLE[g.category] || CATEGORY_STYLE["Others"]}`}>
-                    {g.category}
-                  </span>
-                </td>
-                <td className="py-2.5 px-4 text-[11px] text-zinc-400 max-w-[200px]">{g.reasoning}</td>
-                <td className="py-2.5 px-4 text-[11px] text-zinc-300 max-w-[180px]">{g.hypothesis}</td>
-                <td className="text-center py-2.5 px-2"><ConvictionBar value={g.conviction}/></td>
-              </tr>
-            ))}
+            {gapperData.gappers.map((g, i) => {
+              const isExpanded = expandedTicker === g.ticker + i;
+              return (
+                <>
+                <tr
+                  key={g.ticker + i}
+                  className={`border-t border-zinc-800/50 cursor-pointer transition-colors ${isExpanded ? "bg-zinc-800/50" : "hover:bg-zinc-800/30"}`}
+                  onClick={() => setExpandedTicker(isExpanded ? null : g.ticker + i)}
+                >
+                  <td className="py-2.5 px-4">
+                    <div className="flex items-center gap-1.5">
+                      {isExpanded ? <ChevronDown size={11} className="text-zinc-500"/> : <ChevronRight size={11} className="text-zinc-500"/>}
+                      <span
+                        className="font-bold text-zinc-100 text-xs cursor-default hover:text-blue-400 transition-colors"
+                        onMouseEnter={e => { e.stopPropagation(); setHovered({ ticker: g.ticker, rect: e.currentTarget.getBoundingClientRect() }); }}
+                        onMouseLeave={() => setHovered(null)}
+                      >
+                        {g.ticker}
+                      </span>
+                      <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}>
+                        <ExternalLink size={9} className="text-zinc-600 hover:text-blue-400"/>
+                      </a>
+                    </div>
+                  </td>
+                  <td className="text-right py-2.5 px-2">
+                    <div className="text-xs font-mono text-zinc-200">${g.price.toFixed(2)}</div>
+                    <div className="text-[10px] font-bold text-emerald-400">+{g.gap_pct.toFixed(1)}%</div>
+                  </td>
+                  <td className="text-right py-2.5 px-2 text-xs font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
+                  <td className="text-right py-2.5 px-2">
+                    <span className={`text-xs font-bold font-mono ${g.rvol >= 5 ? "text-emerald-300" : g.rvol >= 3 ? "text-emerald-400" : g.rvol >= 2 ? "text-amber-400" : "text-zinc-500"}`}>
+                      {g.rvol.toFixed(1)}x
+                    </span>
+                  </td>
+                  <td className="text-right py-2.5 px-2"><DailyChg val={g.daily_pct}/></td>
+                  <td className="text-right py-2.5 px-2 text-xs font-mono text-zinc-400">{g.float_shares || "—"}</td>
+                  <td className="text-right py-2.5 px-2 text-xs font-mono text-zinc-400">{g.short_float || "—"}</td>
+                  <td className="text-right py-2.5 px-2 text-xs font-mono text-zinc-400">{fmtCap(g.mkt_cap)}</td>
+                  <td className="py-2.5 px-2 text-[10px] text-zinc-500 max-w-[120px] truncate">{g.industry || "—"}</td>
+                  <td className="text-center py-2.5 px-2">
+                    {g.grade ? (
+                      <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span>
+                    ) : <span className="text-zinc-600">—</span>}
+                  </td>
+                  <td className="text-center py-2.5 px-2">
+                    <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border ${CATEGORY_STYLE[g.category] || CATEGORY_STYLE["Others"]}`}>
+                      {g.category}
+                    </span>
+                  </td>
+                  <td className="text-center py-2.5 px-2"><ConvictionBar value={g.conviction}/></td>
+                </tr>
+                {isExpanded && (
+                  <tr key={g.ticker + i + "-detail"} className="bg-zinc-900/60 border-t border-zinc-700/30">
+                    <td colSpan={12} className="px-6 py-4">
+                      <div className="grid grid-cols-2 gap-5">
+                        {/* Analysis Details */}
+                        <div>
+                          <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-semibold mb-2.5 flex items-center gap-1.5">
+                            <Activity size={10}/> Analysis Details
+                          </div>
+                          <div className="text-[11px] text-zinc-300 whitespace-pre-line leading-relaxed bg-zinc-800/40 rounded-lg p-3 border border-zinc-700/30">
+                            {g.analysis_details || g.reasoning || "No analysis available."}
+                          </div>
+                        </div>
+                        {/* Trade Hypothesis + Headlines */}
+                        <div className="space-y-3">
+                          <div>
+                            <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-semibold mb-2 flex items-center gap-1.5">
+                              <TrendingUp size={10}/> Trade Hypothesis
+                            </div>
+                            <div className="text-[11px] text-zinc-300 bg-zinc-800/40 rounded-lg p-3 border border-zinc-700/30">
+                              {g.hypothesis}
+                            </div>
+                          </div>
+                          <div>
+                            <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-semibold mb-2 flex items-center gap-1.5">
+                              <Search size={10}/> Reasoning
+                            </div>
+                            <div className="text-[11px] text-zinc-400 bg-zinc-800/40 rounded-lg p-3 border border-zinc-700/30">
+                              {g.reasoning}
+                            </div>
+                          </div>
+                          {g.headlines && g.headlines.length > 0 && (
+                            <div>
+                              <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-semibold mb-2">News</div>
+                              <div className="space-y-1">
+                                {g.headlines.map((h, hi) => (
+                                  <div key={hi} className="text-[10px] text-zinc-500 flex gap-1.5"><span className="text-zinc-600">•</span>{h}</div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                )}
+                </>
+              );
+            })}
           </tbody>
         </table>
       </div>

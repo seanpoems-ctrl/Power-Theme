@@ -42,7 +42,7 @@ jobs:
 
       - name: Install Python deps
         if: steps.trading_day.outputs.is_trading_day == 'true'
-        run: pip install requests tradingview-screener google-genai exchange-calendars python-dotenv
+        run: pip install requests beautifulsoup4 tradingview-screener google-genai exchange-calendars python-dotenv
 
       - name: Run gapper scanner
         if: steps.trading_day.outputs.is_trading_day == 'true'
