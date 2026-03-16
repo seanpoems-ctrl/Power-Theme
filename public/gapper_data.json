@@ -1,5 +1,5 @@
 {
-  "scan_time": "2026-03-15 15:43 ET",
+  "scan_time": "2026-03-16 04:00 ET",
   "gappers": [
     {
       "ticker": "KLAR",
@@ -10,14 +10,21 @@
       "mkt_cap": 6006150696,
       "rvol": 1.4,
       "category": "Institutional Buying",
-      "reasoning": "Multiple headlines specifically report major institutional funds like Coatue Management, Azora Capital, and Centiva Capital acquiring new or increased stakes in Klarna Group plc.",
+      "reasoning": "Multiple institutional funds, including Coatue Management LLC, Azora Capital LP, and Centiva Capital LP, have disclosed new or increased positions in Klarna Group plc.",
       "hypothesis": "Medium Conviction (RS Hold) — Large fund accumulation; watch for continuation.",
       "conviction": 58,
+      "grade": "A",
+      "finviz_theme": "Fintech - Payments",
+      "analysis_details": "🏛️ WHO BOUGHT\nCoatue Management LLC, Azora Capital LP, Centiva Capital LP\n\n💰 POSITION SIZE\nCoatue Management LLC purchased 330,000 shares. Azora Capital LP and Centiva Capital LP made new investments/stakes (specific share counts or dollar values not fully disclosed in headlines).\n\n📊 CONVICTION SIGNAL\nCoatue's purchase of 330,000 shares represents a significant investment by a prominent fund. The establishment of 'new stakes' or 'new investments' by Azora Capital LP and Centiva Capital LP indicates fresh conviction from multiple institutional players, suggesting a belief in Klarna's future prospects and/or an attractive valuation.\n\n⚡ INTERPRETATION\nThe concurrent buying activity by several institutional investors points to a collective positive sentiment shift towards Klarna. Such moves by sophisticated investors often signal that they perceive an undervaluation or anticipate improved business fundamentals, potentially leading to upward price momentum as other investors take notice.",
       "headlines": [
         "Coatue Management LLC Purchases Shares of 330,000 Klarna Group plc $KLAR - MarketBeat",
-        "Klarna Insider Buying And New Partnerships Test Market View On Valuation - simplywall.st",
-        "Azora Capital LP Buys New Stake in Klarna Group plc $KLAR - MarketBeat"
-      ]
+        "Azora Capital LP Buys New Stake in Klarna Group plc $KLAR - MarketBeat",
+        "Centiva Capital LP Makes New Investment in Klarna Group plc $KLAR - MarketBeat"
+      ],
+      "float_shares": "143.95M",
+      "short_float": "18.60%",
+      "daily_pct": 8.82,
+      "industry": "Fintech - Payments"
     },
     {
       "ticker": "SSL",
@@ -25,17 +32,23 @@
       "gap_pct": 6.6,
       "pm_volume": 216726,
       "avg_vol_30d": 2884122,
-      "mkt_cap": 7245708415,
+      "mkt_cap": 7160177287,
       "rvol": 1.62,
       "category": "Upgrade",
-      "reasoning": "The headlines explicitly state that Sasol (SSL) climbed 26% and hit a new high 'on 122% Analyst Upgrade,' directly attributing the move to an analyst raising their rating or price target.",
+      "reasoning": "Sasol's stock surge is primarily driven by a substantial analyst upgrade that featured a reported 122% increase in the price target, indicating a strong positive re-evaluation.",
       "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
       "conviction": 33,
+      "grade": "A+",
+      "finviz_theme": "Energy - Oil & Gas",
+      "analysis_details": "🏦 THE FIRM\nUnnamed Analyst Firm\n\n📊 RATING CHANGE\nNot explicitly stated in the headlines, but the significant price target revision strongly implies a positive shift in the analyst's rating (e.g., from Hold to Buy, or Buy to Strong Buy).\n\n🎯 PRICE TARGET\nOld PT: Not stated → New PT: Not stated (122% increase from prior target)\n\n💡 KEY THESIS\nSpecific reasons for the analyst's upgrade are not detailed in the headlines. However, a 122% increase in a price target is exceptionally bullish and suggests a fundamental re-rating of the company. This could be based on a significantly improved outlook for commodity prices (e.g., oil, gas, chemicals), strong operational performance, successful execution of strategic initiatives, or a re-evaluation of its asset base and future cash flow potential. It indicates a belief that the stock was substantially undervalued prior to the upgrade.",
       "headlines": [
-        "Sasol (SSL) Climbs 26%, Hits New High on 122% Analyst Upgrade - Yahoo! Finance Canada",
         "Sasol (SSL) Climbs 26%, Hits New High on 122% Analyst Upgrade - Insider Monkey",
         "5 Stocks Making Huge Moves this Week - Insider Monkey"
-      ]
+      ],
+      "float_shares": "634.13M",
+      "short_float": "0.61%",
+      "daily_pct": 6.7,
+      "industry": "Energy - Oil & Gas"
     },
     {
       "ticker": "BMNR",
@@ -46,13 +59,21 @@
       "mkt_cap": 9342874662,
       "rvol": 2.1,
       "category": "Institutional Buying",
-      "reasoning": "ARP Global Capital Ltd, an institutional entity, disclosed a multi-million dollar position in BMNR, directly fitting the definition of institutional buying. The ETH sale to BMNR is an asset acquisition, not fitting the provided primary catalyst categories as directly.",
+      "reasoning": "The headline directly reports a significant $3.43 million position taken by ARP Global Capital Ltd, indicating a clear vote of confidence from a sophisticated investor.",
       "hypothesis": "Medium Conviction (RS Hold) — Large fund accumulation; watch for continuation.",
       "conviction": 60,
+      "grade": "A",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "analysis_details": "🏛️ WHO BOUGHT\nARP Global Capital Ltd\n\n💰 POSITION SIZE\n$3.43 Million position\n\n📊 CONVICTION SIGNAL\nThis represents a new or significantly increased position from an institutional fund, signaling strong conviction in BitMine Immersion Technologies, Inc. A $3.43M position can be a notable allocation, especially for a company in the crypto mining sector.\n\n⚡ INTERPRETATION\nThis institutional buying suggests that ARP Global Capital Ltd sees value in BMNR, potentially validating the company's operational strategy, its positioning as a proxy for Ethereum (as suggested by other headlines), or its overall valuation. It could lead to increased investor interest and potentially attract further institutional inflows.",
       "headlines": [
-        "ARP Global Capital Ltd Takes $3.43 Million Position in BitMine Immersion Technologies, Inc. $BMNR - MarketBeat",
-        "Ethereum Foundation Completes $10.2M ETH Sale to BitMine (BMNR) - CoinCentral"
-      ]
+        "BitMine Stock Tracks Ethereum’s Price to a T as it Proves to Be the Ultimate Proxy for ETH Investors - TipRanks",
+        "3 Trending Crypto Stocks to Watch: BMNR, CRCL and MSTR, What to Expect This Week - CoinGape",
+        "ARP Global Capital Ltd Takes $3.43 Million Position in BitMine Immersion Technologies, Inc. $BMNR - MarketBeat"
+      ],
+      "float_shares": "432.95M",
+      "short_float": "5.11%",
+      "daily_pct": -0.05,
+      "industry": "Fintech - Blockchain/Crypto"
     },
     {
       "ticker": "COIN",
@@ -62,14 +83,22 @@
       "avg_vol_30d": 14703228,
       "mkt_cap": 51634563437,
       "rvol": 0.95,
-      "category": "New Contract/Partnership",
-      "reasoning": "Speculation about a potential deal with Bybit is cited as the reason for the stock jump, indicating the market is reacting to the prospect of a new partnership or major agreement for Coinbase.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
+      "category": "Others",
+      "reasoning": "Coinbase stock is jumping due to unconfirmed speculation about a potential deal with crypto exchange Bybit, alongside positive broader crypto market sentiment.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "B",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "analysis_details": "📰 WHAT HAPPENED\nNews reports indicate that Coinbase's stock is experiencing a jump due to increasing speculation surrounding a potential deal with Bybit, another major cryptocurrency exchange. The exact nature of the speculated deal (e.g., partnership, acquisition) remains unspecified and unconfirmed by either company.\n\n📊 WHY THE GAP\nThe market is interpreting the speculation about a Bybit deal as a significant potential positive catalyst for Coinbase. A potential collaboration or acquisition could lead to increased market share, expanded user base, diversified product offerings, or access to new geographical markets, thereby enhancing COIN's long-term growth prospects and competitive position. This speculation is amplified by a strong Bitcoin performance (best week since 2025) and news of significant institutional holdings, creating a confluence of positive sentiment.\n\n⚡ KEY CONSIDERATION\nThe primary factor for consideration is the *unconfirmed* and *speculative* nature of the deal. The current stock movement is driven purely by market rumors. If the deal does not materialize, or if its terms are less favorable than currently anticipated by the market, there could be a sharp reversal in COIN's stock price. Investors should await official announcements from Coinbase or Bybit and exercise caution regarding positions based solely on speculation. The positive crypto market backdrop provides underlying support, but the deal speculation is the direct driver of the 'jump'.",
       "headlines": [
-        "Coinbase (COIN) Stock Jumps as Bybit Deal Speculation Heats Up - MEXC",
+        "BTC price analysis: Bitcoin set for best week since September 2025 as correlation with tech stocks weakens - CoinDesk",
+        "Coinbase (COIN) Stock Jumps as Bybit Deal Speculation Heats Up - CoinCentral",
         "Banco Bilbao Vizcaya Argentaria S.A. Has $92.72 Million Stock Holdings in Coinbase Global, Inc. $COIN - MarketBeat"
-      ]
+      ],
+      "float_shares": "215.26M",
+      "short_float": "10.97%",
+      "daily_pct": 1.19,
+      "industry": "Fintech - Blockchain/Crypto"
     }
   ]
 }

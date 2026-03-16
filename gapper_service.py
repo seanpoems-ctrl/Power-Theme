@@ -249,7 +249,8 @@ def analyze_with_gemini(ticker: str, headlines: list[str], rvol: float) -> dict:
         return {
             "category": "Others", "reasoning": "No news found.",
             "hypothesis": "Monitor price action at open.", "conviction": 30,
-            "grade": "C", "analysis_details": "No news catalyst identified.\n\n⚡ KEY CONSIDERATION\nMonitor price action at open for directional bias.",
+            "grade": "C", "finviz_theme": "—",
+            "analysis_details": "No news catalyst identified.\n\n⚡ KEY CONSIDERATION\nMonitor price action at open for directional bias.",
         }
     try:
         from google import genai
@@ -281,8 +282,24 @@ GRADE RUBRIC (based on catalyst quality, clarity, and fundamental backing):
 
 {ANALYSIS_FORMAT_INSTRUCTIONS}
 
+FINVIZ HEATMAP THEME — classify {ticker} into one of these Finviz themes heatmap categories based on the company's business and the news. Use the most specific match:
+AI Compute | AI Cloud | AI Models | AI Data & Analytics | AI Enterprise Software | AI Networking | AI Security | AI Edge & IoT | AI Robotics | AI Applications | AI Ads & Search | AI Energy | AI AGI |
+Semiconductors - Compute | Semiconductors - Memory | Semiconductors - Analog | Semiconductors - Wireless | Semiconductors - Foundries | Semiconductors - Design Tools | Semiconductors - Lithography | Semiconductors - Packaging |
+Cloud Hyperscalers | Cloud Data Centers | Cloud Databases | Cloud DevOps | Cloud Security | Cloud Hybrid | Cloud Multi-cloud | Cloud SaaS |
+Cybersecurity - Zero Trust | Cybersecurity - Endpoint | Cybersecurity - Network | Cybersecurity - Cloud | Cybersecurity - Identity/IAM | Cybersecurity - Threat Ops |
+Fintech - Payments | Fintech - Neobanks | Fintech - Lending | Fintech - Trading | Fintech - Blockchain/Crypto |
+Clean Energy - Solar | Clean Energy - Wind | Clean Energy - Grid | Clean Energy - Nuclear | Clean Energy - Hydrogen |
+Electric Vehicles | EV Batteries | EV Charging |
+Biotech - Oncology | Biotech - Rare Disease | Biotech - Gene Therapy | Biotech - Immunology |
+Pharma - Large Cap | Medical Devices | Digital Health |
+Defense & Aerospace | Space | Drones |
+Consumer - E-Commerce | Consumer - Streaming | Consumer - Social Media | Consumer - Gaming |
+Energy - Oil & Gas | Energy - LNG | Materials - Metals & Mining |
+Real Estate | REITs | Infrastructure |
+Others
+
 Respond in this exact JSON format only, no extra text:
-{{"category": "<category>", "reasoning": "<1-2 sentence quick summary>", "grade": "<A+|A|B|C>", "analysis_details": "<detailed structured analysis>"}}"""
+{{"category": "<category>", "reasoning": "<1-2 sentence quick summary>", "grade": "<A+|A|B|C>", "finviz_theme": "<most specific matching theme from the list above>", "analysis_details": "<detailed structured analysis>"}}"""
 
         response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
         text = response.text.strip()
@@ -299,6 +316,7 @@ Respond in this exact JSON format only, no extra text:
         grade = result.get("grade", "B")
         if grade not in ("A+", "A", "B", "C"):
             grade = "B"
+        finviz_theme = result.get("finviz_theme", "—")
         analysis_details = result.get("analysis_details", reasoning)
 
         hypothesis_label, strategy = HYPOTHESIS_RULES.get(category, HYPOTHESIS_RULES["Others"])
@@ -312,6 +330,7 @@ Respond in this exact JSON format only, no extra text:
             "hypothesis":      f"{hypothesis_label} — {strategy}",
             "conviction":      conviction,
             "grade":           grade,
+            "finviz_theme":    finviz_theme,
             "analysis_details": analysis_details,
         }
     except Exception as e:
@@ -341,6 +360,7 @@ def _fallback_analysis(ticker: str, headlines: list[str], rvol: float) -> dict:
         "hypothesis":      f"{label} — {strategy}",
         "conviction":      50,
         "grade":           "B",
+        "finviz_theme":    "—",
         "analysis_details": headlines[0] if headlines else "No catalyst identified.",
     }
 
@@ -357,9 +377,6 @@ def main():
     gappers = fetch_gappers()
     logger.info(f"  Found {len(gappers)} gappers")
 
-    logger.info("Building Finviz theme map...")
-    theme_map = fetch_finviz_theme_map()
-
     output = []
     for stock in gappers:
         ticker = stock["ticker"]
@@ -371,11 +388,8 @@ def main():
         # News headlines
         headlines = fetch_news_headlines(ticker)
 
-        # AI analysis
+        # AI analysis (includes finviz_theme classification)
         analysis = analyze_with_gemini(ticker, headlines, stock["rvol"])
-
-        # Theme from heatmap
-        industry = theme_map.get(ticker, "—")
 
         time.sleep(1)  # rate limit
         output.append({
@@ -385,7 +399,7 @@ def main():
             "float_shares": fv.get("float_shares"),
             "short_float":  fv.get("short_float"),
             "daily_pct":    fv.get("daily_pct"),
-            "industry":     industry,
+            "industry":     analysis.get("finviz_theme", "—"),
         })
 
     result = {
