@@ -145,10 +145,19 @@ const RVolCell = ({ value }) => {
 };
 
 /* Instant tooltip — no browser delay */
-const Tip = ({ text, children }) => (
+const TIP_COLORS = {
+  amber:   'border-amber-500/60 text-amber-200',
+  blue:    'border-blue-500/60 text-blue-200',
+  emerald: 'border-emerald-500/60 text-emerald-200',
+  violet:  'border-violet-500/60 text-violet-200',
+  fuchsia: 'border-fuchsia-500/60 text-fuchsia-200',
+  slate:   'border-slate-500/60 text-slate-200',
+  zinc:    'border-zinc-700 text-zinc-200',
+};
+const Tip = ({ text, color = 'zinc', children }) => (
   <span className="group relative inline-flex">
     {children}
-    <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 px-2 py-1 text-[10px] leading-snug text-zinc-200 bg-zinc-900 border border-zinc-700 rounded-md whitespace-nowrap z-[9999] shadow-lg opacity-0 group-hover:opacity-100 transition-none">
+    <span className={`pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 px-2 py-1 text-[10px] leading-snug bg-zinc-900 border rounded-md whitespace-nowrap z-[9999] shadow-lg opacity-0 group-hover:opacity-100 transition-none ${TIP_COLORS[color] ?? TIP_COLORS.zinc}`}>
       {text}
     </span>
   </span>
@@ -156,16 +165,16 @@ const Tip = ({ text, children }) => (
 
 // ── Elite Badge System ──
 const BADGE_CONFIG = {
-  triple_crown:     { Icon: Trophy,   color: "text-amber-400",   bg: "bg-amber-500/10 border-amber-500/25",   tip: "Triple Crown: #1 Theme + ADR >5% + Pure Play" },
-  volatility_king:  { Icon: Zap,      color: "text-blue-400",    bg: "bg-blue-500/10 border-blue-500/25",     tip: "Volatility King: ADR in top 10% of dataset" },
-  liquidity_monster:{ Icon: Landmark, color: "text-emerald-400", bg: "bg-emerald-500/10 border-emerald-500/25", tip: "Liquidity Monster: Daily Dollar Vol >$500M" },
-  vcp_tightening:   { Icon: Minimize2,color: "text-violet-400",  bg: "bg-violet-500/10 border-violet-500/25", tip: "VCP Tightening: <2% range last 3 days + Volume dry-up" },
+  triple_crown:     { Icon: Trophy,   color: "text-amber-400",   bg: "bg-amber-500/10 border-amber-500/25",   tip: "Triple Crown: #1 Theme + ADR >5% + Pure Play",          tipColor: "amber"   },
+  volatility_king:  { Icon: Zap,      color: "text-blue-400",    bg: "bg-blue-500/10 border-blue-500/25",     tip: "Volatility King: ADR in top 10% of dataset",            tipColor: "blue"    },
+  liquidity_monster:{ Icon: Landmark, color: "text-emerald-400", bg: "bg-emerald-500/10 border-emerald-500/25", tip: "Liquidity Monster: Daily Dollar Vol >$500M",          tipColor: "emerald" },
+  vcp_tightening:   { Icon: Minimize2,color: "text-violet-400",  bg: "bg-violet-500/10 border-violet-500/25", tip: "VCP Tightening: <2% range last 3 days + Volume dry-up", tipColor: "violet"  },
 };
 
 const EliteBadge = ({ type }) => {
-  const { Icon, color, bg, tip } = BADGE_CONFIG[type];
+  const { Icon, color, bg, tip, tipColor } = BADGE_CONFIG[type];
   return (
-    <Tip text={tip}>
+    <Tip text={tip} color={tipColor}>
       <span className={`inline-flex items-center justify-center w-4 h-4 rounded border backdrop-blur-sm cursor-help ${bg}`}>
         <Icon size={9} className={color}/>
       </span>
@@ -184,9 +193,10 @@ const GRADE_TIP = {
   "A":  "A  — Above SMA50 & SMA200 + RS ≥ 80",
   "B":  "B  — Above SMA200",
 };
+const GRADE_TIP_COLOR = { "A+": "emerald", "A": "blue", "B": "zinc" };
 const GradeBadge = ({ grade }) => {
   if (!grade) return null;
-  return <Tip text={GRADE_TIP[grade]}><span className={`inline-flex items-center px-1 py-0.5 text-[10px] font-bold rounded border backdrop-blur-sm cursor-help ${GRADE_STYLE[grade]}`}>{grade}</span></Tip>;
+  return <Tip text={GRADE_TIP[grade]} color={GRADE_TIP_COLOR[grade]}><span className={`inline-flex items-center px-1 py-0.5 text-[10px] font-bold rounded border backdrop-blur-sm cursor-help ${GRADE_STYLE[grade]}`}>{grade}</span></Tip>;
 };
 
 function isVDU(s) {
@@ -535,8 +545,8 @@ const StockTable = ({ stocks, sortKey, sortDir, spyPerf, rsSPYKey, isTopTheme, t
               <td className="py-2 px-4">
                 <div className="flex items-center gap-2">
                   {s.pure_play
-                    ? <Tip text="Pure Play — appears in only one sub-theme"><Star size={11} className="text-amber-400 fill-amber-400 flex-shrink-0 cursor-help"/></Tip>
-                    : <Tip text="Legacy Leader — appears across multiple sub-themes"><TrendingUp size={11} className="text-zinc-600 flex-shrink-0 cursor-help"/></Tip>}
+                    ? <Tip text="Pure Play — appears in only one sub-theme" color="amber"><Star size={11} className="text-amber-400 fill-amber-400 flex-shrink-0 cursor-help"/></Tip>
+                    : <Tip text="Legacy Leader — appears across multiple sub-themes" color="zinc"><TrendingUp size={11} className="text-zinc-600 flex-shrink-0 cursor-help"/></Tip>}
                   <div>
                     <div className="flex items-center gap-1.5 flex-wrap">
                       <span
@@ -545,10 +555,10 @@ const StockTable = ({ stocks, sortKey, sortDir, spyPerf, rsSPYKey, isTopTheme, t
                         onMouseLeave={() => setHovered(null)}
                       >{s.ticker}</span>
                       <GradeBadge grade={getEliteGrade(s)}/>
-                      {isVCPStage1(s) && <Tip text="Narrowing consolidation + VDU + near 52W high"><span className="text-[9px] font-bold text-violet-400 bg-violet-500/15 border border-violet-500/30 px-1 py-0.5 rounded cursor-help">🎯 VCP S1</span></Tip>}
-                      {!isVCPStage1(s) && isVDU(s) && <Tip text="Volume below 50% of 10-day avg — selling pressure exhausted"><span className="text-[9px] font-bold text-blue-400 bg-blue-500/15 border border-blue-500/30 px-1 py-0.5 rounded cursor-help">VDU</span></Tip>}
-                      {isTight(s) && <Tip text="Last 3 days range < 1.5% — extremely tight"><span className="text-[9px] font-bold text-fuchsia-400 bg-fuchsia-500/15 border border-fuchsia-500/30 px-1 py-0.5 rounded cursor-help">Tight</span></Tip>}
-                      {isInsideDay(s) && <Tip text="Today's range inside yesterday's range"><span className="text-[9px] font-bold text-slate-400 bg-slate-500/15 border border-slate-500/30 px-1 py-0.5 rounded cursor-help">ID</span></Tip>}
+                      {isVCPStage1(s) && <Tip text="Narrowing consolidation + VDU + near 52W high" color="violet"><span className="text-[9px] font-bold text-violet-400 bg-violet-500/15 border border-violet-500/30 px-1 py-0.5 rounded cursor-help">🎯 VCP S1</span></Tip>}
+                      {!isVCPStage1(s) && isVDU(s) && <Tip text="Volume below 50% of 10-day avg — selling pressure exhausted" color="blue"><span className="text-[9px] font-bold text-blue-400 bg-blue-500/15 border border-blue-500/30 px-1 py-0.5 rounded cursor-help">VDU</span></Tip>}
+                      {isTight(s) && <Tip text="Last 3 days range < 1.5% — extremely tight" color="fuchsia"><span className="text-[9px] font-bold text-fuchsia-400 bg-fuchsia-500/15 border border-fuchsia-500/30 px-1 py-0.5 rounded cursor-help">Tight</span></Tip>}
+                      {isInsideDay(s) && <Tip text="Today's range inside yesterday's range" color="slate"><span className="text-[9px] font-bold text-slate-400 bg-slate-500/15 border border-slate-500/30 px-1 py-0.5 rounded cursor-help">ID</span></Tip>}
                       <span className="hidden sm:flex items-center gap-0.5">
                         {getEliteBadges(s, { isTopTheme, isTopADR: topADRTickers?.has(s.ticker) }).map(b => <EliteBadge key={b} type={b}/>)}
                       </span>
