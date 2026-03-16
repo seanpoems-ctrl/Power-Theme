@@ -873,6 +873,29 @@ const VixGauge = ({ initialVix }) => {
           {/* Hub inner dot */}
           <circle cx={CX} cy={CY} r="5" fill="#555"/>
 
+          {/* Daily VIX marker — fixed pin at initialVix position */}
+          {initialVix != null && (() => {
+            const dailyAngle = v2a(initialVix);
+            const dailyZone  = zoneOf(initialVix);
+            const [mx, my]   = pt(RO + 8, dailyAngle);
+            const [lx, ly]   = pt(RO + 22, dailyAngle);
+            return (
+              <g style={{ pointerEvents: 'none' }}>
+                {/* Tick line on outer edge */}
+                <line
+                  x1={f(pt(RO - 2, dailyAngle)[0])} y1={f(pt(RO - 2, dailyAngle)[1])}
+                  x2={f(mx)} y2={f(my)}
+                  stroke={dailyZone.color} strokeWidth="2.5" strokeLinecap="round"
+                />
+                {/* Label */}
+                <text x={f(lx)} y={f(ly)} textAnchor="middle" dominantBaseline="middle"
+                  fill={dailyZone.color} fontSize="8.5" fontWeight="700" fontFamily="monospace">
+                  {initialVix.toFixed(1)}
+                </text>
+              </g>
+            );
+          })()}
+
           {/* Centre VIX number */}
           <text x={CX} y={CY + 38} textAnchor="middle" fontSize="40" fontWeight="800"
             fill={active.color} fontFamily="system-ui, -apple-system, sans-serif"
@@ -891,6 +914,13 @@ const VixGauge = ({ initialVix }) => {
             className="flex-1 accent-zinc-400 h-1"/>
           <span className="text-[9px] text-zinc-700">45</span>
         </div>
+        {/* Reset to today's value */}
+        {initialVix != null && vix !== initialVix && (
+          <button onClick={() => setVix(initialVix)}
+            className="mt-1 w-full text-[9px] text-zinc-600 hover:text-zinc-400 transition-colors text-center">
+            ↩ Reset to today ({initialVix})
+          </button>
+        )}
       </div>
 
       {/* Info panel */}
