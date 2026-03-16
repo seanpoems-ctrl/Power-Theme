@@ -709,6 +709,7 @@ const GapperScanner = () => {
   );
 
   return (
+    <>
     <div className="max-w-[1400px] mx-auto px-4 py-4">
       <div className="flex items-center justify-between mb-4">
         <div>
@@ -774,6 +775,7 @@ const GapperScanner = () => {
       </div>
     </div>
     {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
+    </>
   );
 };
 
