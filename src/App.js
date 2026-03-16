@@ -749,92 +749,91 @@ const VixGauge = ({ initialVix }) => {
   useEffect(() => { if (initialVix != null) setVix(initialVix); }, [initialVix]);
   const [hov, setHov] = useState(null);
 
-  const CX = 200, CY = 192, RO = 158, RI = 96, GAP = 3, VMAX = 40;
+  // ── Layout ──────────────────────────────────────────────────────────────
+  const CX = 200, CY = 188;
+  const R  = 132;   // arc centre radius
+  const SW = 28;    // stroke width (arc thickness)
+  const VMAX = 40, GAP = 4;
 
   const toRad = d => d * Math.PI / 180;
   const pt    = (r, d) => [CX + r * Math.cos(toRad(d)), CY - r * Math.sin(toRad(d))];
   const f     = n => +n.toFixed(2);
   const v2a   = v => 180 - Math.min(Math.max(v, 0), VMAX) / VMAX * 180;
   const zoneOf = v => VIX_ZONES.find(z => v >= z.vMin && v < z.vMax) ?? VIX_ZONES[VIX_ZONES.length - 1];
-  const activeIdx = VIX_ZONES.findIndex(z => vix >= z.vMin && vix < z.vMax);
+  const activeIdx = (() => { const i = VIX_ZONES.findIndex(z => vix >= z.vMin && vix < z.vMax); return i === -1 ? VIX_ZONES.length - 1 : i; })();
   const dispIdx = hov !== null ? hov : activeIdx;
   const active = VIX_ZONES[dispIdx];
 
-  function arcD(aS, aE, r1, r2, g = 0) {
+  // Stroke-only arc path (rounded ends via strokeLinecap)
+  function arcS(aS, aE, g = 0) {
     const s = aS - g, e = aE + g, large = (s - e) > 180 ? 1 : 0;
-    const [ox1,oy1] = pt(r2,s), [ox2,oy2] = pt(r2,e);
-    const [ix1,iy1] = pt(r1,s), [ix2,iy2] = pt(r1,e);
-    return `M${f(ox1)} ${f(oy1)} A${r2} ${r2} 0 ${large} 0 ${f(ox2)} ${f(oy2)} L${f(ix2)} ${f(iy2)} A${r1} ${r1} 0 ${large} 1 ${f(ix1)} ${f(iy1)}Z`;
+    const [x1,y1] = pt(R,s), [x2,y2] = pt(R,e);
+    return `M${f(x1)} ${f(y1)} A${R} ${R} 0 ${large} 0 ${f(x2)} ${f(y2)}`;
   }
 
-  // Elegant clock-hand needle: tapered tip, short counterweight tail
+  // Tapered needle: tip → left base → tail → right base
   function needleD(v) {
     const a = v2a(v);
-    const [tx, ty]   = pt(RO - 6,  a);       // tip
-    const [b1x, b1y] = pt(5,  a + 90);       // left pivot
-    const [b2x, b2y] = pt(5,  a - 90);       // right pivot
-    const [tlx, tly] = pt(22, a + 180);      // tail end
-    const [t1x, t1y] = pt(3,  a + 90 + 180); // tail left
-    const [t2x, t2y] = pt(3,  a - 90 + 180); // tail right
+    const [tx,ty]   = pt(R + SW/2 - 5, a);
+    const [b1x,b1y] = pt(6,  a + 90);
+    const [b2x,b2y] = pt(6,  a - 90);
+    const [tlx,tly] = pt(18, a + 180);
     return `M${f(tx)} ${f(ty)} L${f(b1x)} ${f(b1y)} L${f(tlx)} ${f(tly)} L${f(b2x)} ${f(b2y)}Z`;
   }
 
-  // Dot tick marks between zones (at boundary VIX values)
-  const dotTicks = [0, 12, 20, 30, 40];
-  // Subtle mid-zone dots
-  const midDots = [6, 16, 25, 35];
-
   return (
     <div className="mb-4 p-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex flex-col sm:flex-row gap-4">
-      {/* Gauge SVG */}
       <div className="flex-shrink-0 w-full sm:w-72">
         <div className="flex items-center justify-between mb-1">
           <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest">VIX Fear Gauge</span>
           <span className="text-[9px] text-zinc-700 border border-zinc-800 rounded px-1.5 py-0.5">CBOE · QQQ</span>
         </div>
-        <svg viewBox="0 0 400 252" className="w-full h-auto overflow-visible" xmlns="http://www.w3.org/2000/svg">
 
-          {/* Zone arcs */}
+        <svg viewBox="0 0 400 248" className="w-full h-auto overflow-visible" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="vg-glow" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="vg-needle" x="-80%" y="-80%" width="260%" height="260%">
+              <feGaussianBlur stdDeviation="2.5" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          {/* Background track */}
+          <path d={arcS(180, 0, -1)} fill="none" stroke="#1c1c1c" strokeWidth={SW + 10} strokeLinecap="round"/>
+
+          {/* Zone arcs — stroke-based with rounded caps */}
           {VIX_ZONES.map((z, i) => {
             const isActive = i === activeIdx;
-            const isHov   = hov === i;
+            const isHov    = hov === i;
             const mid = (z.aStart + z.aEnd) / 2;
-            const lr  = (RI + RO) / 2;
-            const [lx, ly] = pt(lr, mid);
+            const [lx, ly] = pt(R + SW/2 + 20, mid);
             const rot = -(90 - mid);
-
-            // Active zone: full color; hovered-inactive: slightly lighter grey; else: dark grey
-            const fill    = isActive ? z.color : isHov ? '#383838' : '#242424';
-            const lblFill = isActive ? '#0a0a0a' : '#505050';
-            const lblSize = isActive ? '9.5' : '8.5';
-            const glow    = isActive ? `drop-shadow(0 0 12px ${z.color}66)` : 'none';
-
             return (
               <g key={i} style={{ cursor: 'pointer' }}
-                onMouseEnter={() => setHov(i)}
-                onMouseLeave={() => setHov(null)}>
+                onMouseEnter={() => setHov(i)} onMouseLeave={() => setHov(null)}>
                 <path
-                  d={arcD(z.aStart, z.aEnd, RI, RO, GAP)}
-                  fill={fill}
-                  style={{ filter: glow, transition: 'fill 0.25s, filter 0.25s' }}
+                  d={arcS(z.aStart, z.aEnd, GAP/2)}
+                  fill="none"
+                  stroke={isActive ? z.color : isHov ? '#383838' : '#262626'}
+                  strokeWidth={isActive ? SW + 5 : SW}
+                  strokeLinecap="round"
+                  style={{
+                    filter: isActive ? 'url(#vg-glow)' : 'none',
+                    transition: 'stroke 0.25s, stroke-width 0.25s'
+                  }}
                 />
-                {/* Active zone: colored border on outer arc */}
-                {isActive && (
-                  <path
-                    d={arcD(z.aStart, z.aEnd, RO - 3, RO + 2, GAP)}
-                    fill={z.color}
-                    opacity="0.5"
-                    style={{ pointerEvents: 'none' }}
-                  />
-                )}
-                {/* Zone label, tangent-rotated */}
+                {/* Zone labels — outside the arc, tangent-rotated */}
                 <g transform={`rotate(${f(rot)} ${f(lx)} ${f(ly)})`} style={{ pointerEvents: 'none' }}>
                   {z.label.map((line, li) => (
-                    <text key={li} x={f(lx)} y={f(ly + (li === 0 ? -5.5 : 6))}
+                    <text key={li} x={f(lx)} y={f(ly + (li === 0 ? -5.5 : 5.5))}
                       textAnchor="middle" dominantBaseline="middle"
-                      fill={lblFill} fontSize={lblSize} fontWeight="800"
-                      letterSpacing="0.06em" fontFamily="system-ui, -apple-system, sans-serif"
-                      style={{ transition: 'fill 0.25s, font-size 0.25s' }}>
+                      fill={isActive ? z.color : isHov ? '#555' : '#333'}
+                      fontSize={isActive ? '9.5' : '8'} fontWeight="700"
+                      letterSpacing="0.07em" fontFamily="system-ui, -apple-system, sans-serif"
+                      style={{ transition: 'fill 0.25s' }}>
                       {line}
                     </text>
                   ))}
@@ -843,78 +842,73 @@ const VixGauge = ({ initialVix }) => {
             );
           })}
 
-          {/* Boundary dot ticks + scale labels */}
-          {dotTicks.map(v => {
+          {/* Boundary ticks + scale numbers — inner side */}
+          {[0, 12, 20, 30, 40].map(v => {
             const a = v2a(v);
-            const [dx, dy] = pt(RI - 10, a);
-            const [lx, ly] = pt(RI - 24, a);
+            const [dx,dy] = pt(R - SW/2 - 7, a);
+            const [lx,ly] = pt(R - SW/2 - 19, a);
             return (
               <g key={v}>
-                <circle cx={f(dx)} cy={f(dy)} r="2.5" fill="#404040"/>
+                <circle cx={f(dx)} cy={f(dy)} r="2" fill="#383838"/>
                 <text x={f(lx)} y={f(ly)} textAnchor="middle" dominantBaseline="middle"
-                  fill="#383838" fontSize="9" fontFamily="monospace">{v}</text>
+                  fill="#2e2e2e" fontSize="8.5" fontFamily="monospace">{v}</text>
               </g>
             );
           })}
 
-          {/* Subtle mid-zone dots */}
-          {midDots.map(v => {
-            const a = v2a(v);
-            const [dx, dy] = pt(RI - 10, a);
-            return <circle key={v} cx={f(dx)} cy={f(dy)} r="1.5" fill="#2e2e2e"/>;
+          {/* Mid-zone subtle dots */}
+          {[6, 16, 25, 35].map(v => {
+            const [dx,dy] = pt(R - SW/2 - 7, v2a(v));
+            return <circle key={v} cx={f(dx)} cy={f(dy)} r="1.3" fill="#272727"/>;
           })}
 
-          {/* Needle shadow */}
-          <path d={needleD(vix)} fill="rgba(0,0,0,0.4)" transform="translate(2,3)" style={{ pointerEvents: 'none' }}/>
-          {/* Needle */}
-          <path d={needleD(vix)} fill="#d4d4d4" style={{ pointerEvents: 'none' }}/>
-          {/* Hub outer ring */}
-          <circle cx={CX} cy={CY} r="11" fill="#1a1a1a" stroke="#383838" strokeWidth="2"/>
-          {/* Hub inner dot */}
-          <circle cx={CX} cy={CY} r="5" fill="#555"/>
-
-          {/* Daily VIX marker — fixed pin at initialVix position */}
+          {/* Daily VIX marker pin */}
           {initialVix != null && (() => {
-            const dailyAngle = v2a(initialVix);
-            const dailyZone  = zoneOf(initialVix);
-            const [mx, my]   = pt(RO + 8, dailyAngle);
-            const [lx, ly]   = pt(RO + 22, dailyAngle);
+            const a = v2a(initialVix);
+            const dz = zoneOf(initialVix);
+            const [ox,oy] = pt(R + SW/2 + 2, a);
+            const [lx,ly] = pt(R + SW/2 + 15, a);
             return (
               <g style={{ pointerEvents: 'none' }}>
-                {/* Tick line on outer edge */}
-                <line
-                  x1={f(pt(RO - 2, dailyAngle)[0])} y1={f(pt(RO - 2, dailyAngle)[1])}
-                  x2={f(mx)} y2={f(my)}
-                  stroke={dailyZone.color} strokeWidth="2.5" strokeLinecap="round"
-                />
-                {/* Label */}
+                <line x1={f(pt(R - SW/2 + 2, a)[0])} y1={f(pt(R - SW/2 + 2, a)[1])}
+                  x2={f(ox)} y2={f(oy)}
+                  stroke={dz.color} strokeWidth="2" strokeLinecap="round" opacity="0.8"/>
                 <text x={f(lx)} y={f(ly)} textAnchor="middle" dominantBaseline="middle"
-                  fill={dailyZone.color} fontSize="8.5" fontWeight="700" fontFamily="monospace">
+                  fill={dz.color} fontSize="8" fontWeight="700" fontFamily="monospace" opacity="0.9">
                   {initialVix.toFixed(1)}
                 </text>
               </g>
             );
           })()}
 
-          {/* Centre VIX number */}
-          <text x={CX} y={CY + 38} textAnchor="middle" fontSize="40" fontWeight="800"
+          {/* Needle shadow + needle */}
+          <path d={needleD(vix)} fill="rgba(0,0,0,0.35)" transform="translate(2,3)" style={{ pointerEvents: 'none' }}/>
+          <path d={needleD(vix)} fill="#c8c8c8" filter="url(#vg-needle)" style={{ pointerEvents: 'none' }}/>
+
+          {/* Hub */}
+          <circle cx={CX} cy={CY} r="10" fill="#171717" stroke="#333" strokeWidth="1.5"/>
+          <circle cx={CX} cy={CY} r="4"  fill="#484848"/>
+
+          {/* Centre readout */}
+          <text x={CX} y={CY + 35} textAnchor="middle" fontSize="40" fontWeight="800"
             fill={active.color} fontFamily="system-ui, -apple-system, sans-serif"
             style={{ transition: 'fill 0.3s' }}>
             {vix.toFixed(1)}
           </text>
-          <text x={CX} y={CY + 58} textAnchor="middle" fill="#303030" fontSize="9"
-            letterSpacing="0.25em" fontFamily="system-ui, sans-serif">VIX</text>
+          <text x={CX} y={CY + 55} textAnchor="middle" fill="#2a2a2a" fontSize="8.5"
+            letterSpacing="0.24em" fontFamily="system-ui, sans-serif">VIX</text>
         </svg>
 
         {/* Slider */}
-        <div className="flex items-center gap-2 px-1">
+        <div className="flex items-center gap-2 px-1 -mt-1">
           <span className="text-[9px] text-zinc-700">0</span>
           <input type="range" min="0" max="45" step="0.5" value={vix}
             onChange={e => setVix(parseFloat(e.target.value))}
-            className="flex-1 accent-zinc-400 h-1"/>
+            className="flex-1 accent-zinc-500 h-1 cursor-pointer"/>
           <span className="text-[9px] text-zinc-700">45</span>
         </div>
-        {/* Reset to today's value */}
+
+        {/* Reset button */}
         {initialVix != null && vix !== initialVix && (
           <button onClick={() => setVix(initialVix)}
             className="mt-2 w-full flex items-center justify-center gap-1.5 px-3 py-1.5 text-[10px] font-medium rounded-md border border-zinc-700/60 bg-zinc-800/60 text-zinc-400 hover:text-zinc-200 hover:border-zinc-600 transition-colors">
