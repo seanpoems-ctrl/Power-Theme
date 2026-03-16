@@ -213,31 +213,25 @@ HYPOTHESIS_RULES = {
 }
 
 ANALYSIS_FORMAT_INSTRUCTIONS = """
-For analysis_details, use this exact format based on category:
+Return analysis_details as 2-3 structured sections using EXACTLY this format:
 
-Earnings:
-"📊 THE BEAT\\nEPS: [actual vs estimate + surprise %]\\nRevenue: [actual vs estimate + surprise %]\\n\\n📈 THE GROWTH\\nYoY EPS Growth: [%]\\nYoY Revenue Growth: [%]\\n\\n🎯 GUIDANCE\\n[Raised/Cut/Maintained — new outlook vs prior]\\n\\n⚡ SURPRISE FACTOR\\n[Assessment of beat magnitude and management tone]"
+• **[Section Title]**
+[Body: 2-4 sentences. Bold important numbers and outcome words using **word** — e.g. **beat** EPS by **22%**, guidance **raised** to **$7.2B**, stock **declined** below support.]
 
-Upgrade:
-"🏦 THE FIRM\\n[Analyst firm name]\\n\\n📊 RATING CHANGE\\n[From → To]\\n\\n🎯 PRICE TARGET\\nOld PT: $[X] → New PT: $[Y] ([+Z% implied upside])\\n\\n💡 KEY THESIS\\n[Why analyst upgraded — 2-3 key reasons]"
+• **[Section Title 2]**
+[Body text...]
 
-FDA:
-"💊 THE DRUG\\n[Drug/device name — indication/disease area]\\n\\n🔬 TRIAL PHASE\\n[Phase X — approval/rejection/data readout type]\\n\\n📊 MARKET SIZE\\n[Patient population, addressable market estimate]\\n\\n⚡ RISK PROFILE\\n[Approval context, historical base rate for this type, typical stock behavior]"
+Section titles to use by category:
+- Earnings: "The 'Beats' (Surprise Factor)" | "The Growth (Momentum)" | "The Guide"
+- Upgrade: "The Firm & Rating" | "The Thesis"
+- FDA: "The Drug" | "The Significance" | "Risk Profile"
+- Thematic Narratives: "The Narrative" | "Explosiveness"
+- Government Policy: "The Policy" | "Direct Impact"
+- New Contract/Partnership: "Impact" | "Strategic Value"
+- Institutional Buying / Insider Buying: "The Buyer" | "Conviction Signal"
+- Others: "What Happened" | "Key Consideration"
 
-Thematic Narratives:
-"🌊 THE NARRATIVE\\n[Specific theme/trend driving the move]\\n\\n🎯 WHY THIS STOCK\\n[Why this company is a primary beneficiary]\\n\\n📈 TAILWIND DURATION\\n[Short-term catalyst vs structural multi-year trend]\\n\\n⚡ KEY RISK\\n[What could invalidate or fade the thesis]"
-
-Government Policy:
-"📋 THE POLICY\\n[Specific regulation/contract/policy change]\\n\\n🎯 DIRECT IMPACT\\n[Quantifiable benefit or headwind for this company]\\n\\n🏛️ DURATION\\n[One-time event vs ongoing structural benefit]\\n\\n⚡ POLITICAL RISK\\n[Implementation risk or reversal probability]"
-
-New Contract/Partnership:
-"🤝 THE DEAL\\n[Counterparty name — deal type]\\n\\n💰 DEAL VALUE\\n[Size disclosed or strategic significance]\\n\\n📈 REVENUE IMPACT\\n[Estimated % impact on annual revenue, expected timeline]\\n\\n⚡ COMPETITIVE ANGLE\\n[How this shifts the competitive landscape]"
-
-Institutional Buying / Insider Buying:
-"🏛️ WHO BOUGHT\\n[Fund name or insider name + title]\\n\\n💰 POSITION SIZE\\n[Shares/dollar value, % of float if disclosed]\\n\\n📊 CONVICTION SIGNAL\\n[Context: new position vs add, size vs normal activity]\\n\\n⚡ INTERPRETATION\\n[What this buying signals about the stock's near-term outlook]"
-
-Others:
-"📰 WHAT HAPPENED\\n[Clear factual summary of the news]\\n\\n📊 WHY THE GAP\\n[Market's likely interpretation]\\n\\n⚡ KEY CONSIDERATION\\n[Most important factor for trading this gap — technicals, short interest, catalyst durability]"
+Rules: No emojis. No markdown headers. Start every section with • **Title** on its own line then the body on the next line. Separate sections with a blank line.
 """
 
 

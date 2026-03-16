@@ -658,6 +658,54 @@ const ThemeSection = ({ theme, sortKey, sortDir, lbPerfKey, spyPerf, rsSPYKey, i
 // ── Gapper Scanner UI ──
 const fmtCap = n => n >= 1e12 ? `$${(n/1e12).toFixed(1)}T` : n >= 1e9 ? `$${(n/1e9).toFixed(1)}B` : `$${(n/1e6).toFixed(0)}M`;
 
+const POS_WORDS = new Set(["beat","beats","beating","surpassed","exceeded","surpassing","exceeding","raised","raise","above","approved","approval","strong","won","outperformed","record"]);
+const NEG_WORDS = new Set(["miss","missed","missing","below","decline","declined","declining","cut","weak","rejected","rejection","loss","fell","failed","disappointing","missed"]);
+
+const renderStyledText = (text) => {
+  if (!text) return null;
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      const inner = part.slice(2, -2);
+      const lower = inner.toLowerCase().trim();
+      const isPos = POS_WORDS.has(lower) || [...POS_WORDS].some(w => lower.includes(w));
+      const isNeg = NEG_WORDS.has(lower) || [...NEG_WORDS].some(w => lower.includes(w));
+      const cls = isPos ? "text-emerald-400 font-semibold" : isNeg ? "text-red-400 font-semibold" : "text-zinc-200 font-semibold";
+      return <strong key={i} className={cls}>{inner}</strong>;
+    }
+    return <span key={i}>{part}</span>;
+  });
+};
+
+const AnalysisCell = ({ text }) => {
+  const [expanded, setExpanded] = useState(false);
+  if (!text) return <span className="text-zinc-600 text-[11px]">—</span>;
+  const sections = text.split(/\n\n(?=•)/).map(s => s.trim()).filter(Boolean);
+  const visible = expanded ? sections : sections.slice(0, 1);
+  return (
+    <div className="text-[11px] leading-relaxed min-w-[320px] max-w-[420px]">
+      {visible.map((sec, i) => {
+        const nl = sec.indexOf("\n");
+        const header = nl > -1 ? sec.slice(0, nl) : sec;
+        const body   = nl > -1 ? sec.slice(nl + 1) : "";
+        return (
+          <div key={i} className={i > 0 ? "mt-2 pt-2 border-t border-zinc-800/60" : ""}>
+            <div className="text-zinc-200 font-medium mb-0.5">{renderStyledText(header)}</div>
+            {body && <div className="text-zinc-400">{renderStyledText(body)}</div>}
+          </div>
+        );
+      })}
+      {sections.length > 1 && (
+        <button
+          onClick={e => { e.stopPropagation(); setExpanded(x => !x); }}
+          className="mt-2 flex items-center justify-center w-5 h-5 rounded-full border border-zinc-600/60 text-zinc-500 hover:border-zinc-400 hover:text-zinc-300 transition-colors text-[10px] font-bold"
+        >
+          {expanded ? "−" : "+"}
+        </button>
+      )}
+    </div>
+  );
+};
+
 const CATEGORY_STYLE = {
   "Earnings":                 "bg-emerald-500/15 text-emerald-400 border-emerald-500/25",
   "New Contract/Partnership": "bg-blue-500/15 text-blue-400 border-blue-500/25",
@@ -699,7 +747,6 @@ const GapperScanner = () => {
   const [gapperData, setGapperData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState(null);
-  const [expandedTicker, setExpandedTicker] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -724,134 +771,80 @@ const GapperScanner = () => {
 
   return (
     <>
-    <div className="max-w-[1600px] mx-auto px-4 py-4">
+    <div className="max-w-[1800px] mx-auto px-4 py-4">
       <div className="flex items-center justify-between mb-4">
         <div>
           <h2 className="text-sm font-bold text-zinc-100 tracking-wide uppercase">Institutional Gappers</h2>
-          <p className="text-[11px] text-zinc-600 mt-0.5">Scanned: {gapperData.scan_time} · Click a row to expand analysis</p>
+          <p className="text-[11px] text-zinc-600 mt-0.5">Scanned: {gapperData.scan_time}</p>
         </div>
         <span className="text-[10px] text-zinc-600 bg-zinc-800/60 border border-zinc-700/40 px-2 py-1 rounded">{gapperData.gappers.length} gappers found</span>
       </div>
 
       <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
-        <table className="w-full text-sm min-w-[1500px]">
+        <table className="w-full text-sm min-w-[1900px]">
           <thead>
             <tr className="text-[11px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80">
               <th className="text-left py-2 px-4 font-medium">Ticker</th>
-              <th className="text-right py-2 px-2 font-medium">PreMkt Price / Gap</th>
+              <th className="text-right py-2 px-2 font-medium">PreMkt %</th>
               <th className="text-right py-2 px-2 font-medium">PreMkt Vol</th>
               <th className="text-right py-2 px-2 font-medium">RVOL</th>
               <th className="text-right py-2 px-2 font-medium">Daily %</th>
+              <th className="text-right py-2 px-2 font-medium">Short Interest</th>
               <th className="text-right py-2 px-2 font-medium">Float</th>
-              <th className="text-right py-2 px-2 font-medium">Short Int %</th>
               <th className="text-right py-2 px-2 font-medium">Mkt Cap</th>
               <th className="text-left py-2 px-2 font-medium">Industry</th>
-              <th className="text-center py-2 px-2 font-medium">Grade</th>
               <th className="text-center py-2 px-2 font-medium">Category</th>
-              <th className="text-center py-2 px-2 font-medium">Conviction</th>
+              <th className="text-center py-2 px-2 font-medium">Grade</th>
+              <th className="text-left py-2 px-3 font-medium">Reasoning</th>
+              <th className="text-left py-2 px-3 font-medium">Analysis Details</th>
             </tr>
           </thead>
           <tbody>
-            {gapperData.gappers.map((g, i) => {
-              const isExpanded = expandedTicker === g.ticker + i;
-              return (
-                <>
-                <tr
-                  key={g.ticker + i}
-                  className={`border-t border-zinc-800/50 cursor-pointer transition-colors ${isExpanded ? "bg-zinc-800/50" : "hover:bg-zinc-800/30"}`}
-                  onClick={() => setExpandedTicker(isExpanded ? null : g.ticker + i)}
-                >
-                  <td className="py-2.5 px-4">
-                    <div className="flex items-center gap-1.5">
-                      {isExpanded ? <ChevronDown size={11} className="text-zinc-500"/> : <ChevronRight size={11} className="text-zinc-500"/>}
-                      <span
-                        className="font-bold text-zinc-100 text-xs cursor-default hover:text-blue-400 transition-colors"
-                        onMouseEnter={e => { e.stopPropagation(); setHovered({ ticker: g.ticker, rect: e.currentTarget.getBoundingClientRect() }); }}
-                        onMouseLeave={() => setHovered(null)}
-                      >
-                        {g.ticker}
-                      </span>
-                      <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}>
-                        <ExternalLink size={9} className="text-zinc-600 hover:text-blue-400"/>
-                      </a>
-                    </div>
-                  </td>
-                  <td className="text-right py-2.5 px-2">
-                    <div className="text-xs font-mono text-zinc-200">${g.price.toFixed(2)}</div>
-                    <div className="text-[10px] font-bold text-emerald-400">+{g.gap_pct.toFixed(1)}%</div>
-                  </td>
-                  <td className="text-right py-2.5 px-2 text-xs font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
-                  <td className="text-right py-2.5 px-2">
-                    <span className={`text-xs font-bold font-mono ${g.rvol >= 5 ? "text-emerald-300" : g.rvol >= 3 ? "text-emerald-400" : g.rvol >= 2 ? "text-amber-400" : "text-zinc-500"}`}>
-                      {g.rvol.toFixed(1)}x
+            {gapperData.gappers.map((g, i) => (
+              <tr key={g.ticker + i} className="border-t border-zinc-800/50 hover:bg-zinc-800/20 transition-colors align-top">
+                <td className="py-3 px-4">
+                  <div className="flex items-center gap-1.5">
+                    <span
+                      className="font-bold text-zinc-100 text-xs hover:text-blue-400 transition-colors cursor-default"
+                      onMouseEnter={e => setHovered({ ticker: g.ticker, rect: e.currentTarget.getBoundingClientRect() })}
+                      onMouseLeave={() => setHovered(null)}
+                    >
+                      {g.ticker}
                     </span>
-                  </td>
-                  <td className="text-right py-2.5 px-2"><DailyChg val={g.daily_pct}/></td>
-                  <td className="text-right py-2.5 px-2 text-xs font-mono text-zinc-400">{g.float_shares || "—"}</td>
-                  <td className="text-right py-2.5 px-2 text-xs font-mono text-zinc-400">{g.short_float || "—"}</td>
-                  <td className="text-right py-2.5 px-2 text-xs font-mono text-zinc-400">{fmtCap(g.mkt_cap)}</td>
-                  <td className="py-2.5 px-2 text-[10px] text-zinc-500 max-w-[120px] truncate">{g.industry || "—"}</td>
-                  <td className="text-center py-2.5 px-2">
-                    {g.grade ? (
-                      <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span>
-                    ) : <span className="text-zinc-600">—</span>}
-                  </td>
-                  <td className="text-center py-2.5 px-2">
-                    <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border ${CATEGORY_STYLE[g.category] || CATEGORY_STYLE["Others"]}`}>
-                      {g.category}
-                    </span>
-                  </td>
-                  <td className="text-center py-2.5 px-2"><ConvictionBar value={g.conviction}/></td>
-                </tr>
-                {isExpanded && (
-                  <tr key={g.ticker + i + "-detail"} className="bg-zinc-900/60 border-t border-zinc-700/30">
-                    <td colSpan={12} className="px-6 py-4">
-                      <div className="grid grid-cols-2 gap-5">
-                        {/* Analysis Details */}
-                        <div>
-                          <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-semibold mb-2.5 flex items-center gap-1.5">
-                            <Activity size={10}/> Analysis Details
-                          </div>
-                          <div className="text-[11px] text-zinc-300 whitespace-pre-line leading-relaxed bg-zinc-800/40 rounded-lg p-3 border border-zinc-700/30">
-                            {g.analysis_details || g.reasoning || "No analysis available."}
-                          </div>
-                        </div>
-                        {/* Trade Hypothesis + Headlines */}
-                        <div className="space-y-3">
-                          <div>
-                            <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-semibold mb-2 flex items-center gap-1.5">
-                              <TrendingUp size={10}/> Trade Hypothesis
-                            </div>
-                            <div className="text-[11px] text-zinc-300 bg-zinc-800/40 rounded-lg p-3 border border-zinc-700/30">
-                              {g.hypothesis}
-                            </div>
-                          </div>
-                          <div>
-                            <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-semibold mb-2 flex items-center gap-1.5">
-                              <Search size={10}/> Reasoning
-                            </div>
-                            <div className="text-[11px] text-zinc-400 bg-zinc-800/40 rounded-lg p-3 border border-zinc-700/30">
-                              {g.reasoning}
-                            </div>
-                          </div>
-                          {g.headlines && g.headlines.length > 0 && (
-                            <div>
-                              <div className="text-[10px] text-zinc-500 uppercase tracking-widest font-semibold mb-2">News</div>
-                              <div className="space-y-1">
-                                {g.headlines.map((h, hi) => (
-                                  <div key={hi} className="text-[10px] text-zinc-500 flex gap-1.5"><span className="text-zinc-600">•</span>{h}</div>
-                                ))}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                )}
-                </>
-              );
-            })}
+                    <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer">
+                      <ExternalLink size={9} className="text-zinc-600 hover:text-blue-400"/>
+                    </a>
+                  </div>
+                  <div className="text-[10px] font-mono text-zinc-500 mt-0.5">${g.price.toFixed(2)}</div>
+                </td>
+                <td className="text-right py-3 px-2">
+                  <span className="text-xs font-bold font-mono text-emerald-400">+{g.gap_pct.toFixed(1)}%</span>
+                </td>
+                <td className="text-right py-3 px-2 text-xs font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
+                <td className="text-right py-3 px-2">
+                  <span className={`text-xs font-bold font-mono ${g.rvol >= 5 ? "text-emerald-300" : g.rvol >= 3 ? "text-emerald-400" : g.rvol >= 2 ? "text-amber-400" : "text-zinc-500"}`}>
+                    {g.rvol.toFixed(1)}x
+                  </span>
+                </td>
+                <td className="text-right py-3 px-2"><DailyChg val={g.daily_pct}/></td>
+                <td className="text-right py-3 px-2 text-xs font-mono text-zinc-400">{g.short_float || "—"}</td>
+                <td className="text-right py-3 px-2 text-xs font-mono text-zinc-400">{g.float_shares || "—"}</td>
+                <td className="text-right py-3 px-2 text-xs font-mono text-zinc-400">{fmtCap(g.mkt_cap)}</td>
+                <td className="py-3 px-2 text-[10px] text-zinc-400 max-w-[110px]">{g.industry || "—"}</td>
+                <td className="text-center py-3 px-2">
+                  <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border ${CATEGORY_STYLE[g.category] || CATEGORY_STYLE["Others"]}`}>
+                    {g.category}
+                  </span>
+                </td>
+                <td className="text-center py-3 px-2">
+                  {g.grade
+                    ? <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span>
+                    : <span className="text-zinc-600">—</span>}
+                </td>
+                <td className="py-3 px-3 text-[11px] text-zinc-400 max-w-[200px] align-top">{g.reasoning}</td>
+                <td className="py-3 px-3 align-top"><AnalysisCell text={g.analysis_details}/></td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
