@@ -705,7 +705,7 @@ const GapperScanner = () => {
     (async () => {
       setLoading(true);
       try {
-        const r = await fetch(process.env.PUBLIC_URL + "/gapper_data.json");
+        const r = await fetch(process.env.PUBLIC_URL + "/gapper_data.json?v=" + Date.now());
         if (r.ok) setGapperData(await r.json());
       } catch {}
       setLoading(false);
@@ -916,7 +916,7 @@ export default function App() {
     (async () => {
       setLoading(true);
       try {
-        const r = await fetch(process.env.PUBLIC_URL + "/thematic_data.json");
+        const r = await fetch(process.env.PUBLIC_URL + "/thematic_data.json?v=" + Date.now());
         if (r.ok) setData(await r.json());
       } catch {}
       setLoading(false);
