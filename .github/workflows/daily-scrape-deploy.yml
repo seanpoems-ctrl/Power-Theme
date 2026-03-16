@@ -33,17 +33,17 @@ jobs:
         id: trading_day
         run: |
           python - <<'EOF'
-          import exchange_calendars as xcals
+          import exchange_calendars as xcals, os
           from datetime import date
           nyse = xcals.get_calendar("XNYS")
           today = date.today().isoformat()
           if nyse.is_session(today):
               print("is_trading_day=true")
-              with open("$GITHUB_OUTPUT", "a") as f:
+              with open(os.environ["GITHUB_OUTPUT"], "a") as f:
                   f.write("is_trading_day=true\n")
           else:
               print(f"Skipping — {today} is not a NYSE trading day")
-              with open("$GITHUB_OUTPUT", "a") as f:
+              with open(os.environ["GITHUB_OUTPUT"], "a") as f:
                   f.write("is_trading_day=false\n")
           EOF
 

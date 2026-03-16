@@ -25,13 +25,13 @@ jobs:
         run: |
           pip install exchange-calendars -q
           python - <<'EOF'
-          import exchange_calendars as xcals
+          import exchange_calendars as xcals, os
           from datetime import date
           nyse = xcals.get_calendar("XNYS")
           today = date.today().isoformat()
           is_session = nyse.is_session(today)
           print(f"is_trading_day={'true' if is_session else 'false'}")
-          with open("$GITHUB_OUTPUT", "a") as f:
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write(f"is_trading_day={'true' if is_session else 'false'}\n")
           EOF
 
