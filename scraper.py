@@ -696,16 +696,22 @@ def build_data() -> dict:
         f"QQQ sma50={qqq_ind.get('sma50_pct')} status={qqq_ind.get('index_status')} breadth={qqq_breadth}%"
     )
 
-    # Fetch VIX closing value
+    # Fetch VIX from TradingView scanner API
     vix_value = None
     try:
-        import yfinance as yf
-        vix_hist = yf.Ticker("^VIX").history(period="5d", interval="1d")
-        if not vix_hist.empty:
-            vix_value = round(float(vix_hist["Close"].iloc[-1]), 2)
-            logger.info(f"  VIX: {vix_value}")
+        vix_resp = requests.post(
+            "https://scanner.tradingview.com/global/scan",
+            json={"symbols": {"tickers": ["CBOE:VIX"]}, "columns": ["close"]},
+            headers={"Content-Type": "application/json"},
+            timeout=10,
+        )
+        vix_resp.raise_for_status()
+        rows = vix_resp.json().get("data", [])
+        if rows and rows[0].get("d"):
+            vix_value = round(float(rows[0]["d"][0]), 2)
+            logger.info(f"  VIX (TradingView): {vix_value}")
     except Exception as e:
-        logger.warning(f"  VIX fetch failed: {e}")
+        logger.warning(f"  VIX TradingView fetch failed: {e}")
 
     updated = date.today() if is_trading_day() else last_trading_date()
     return {
