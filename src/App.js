@@ -780,95 +780,99 @@ const GapperScanner = () => {
         <span className="text-[10px] text-zinc-600 bg-zinc-800/60 border border-zinc-700/40 px-2 py-1 rounded">{gapperData.gappers.length} gappers found</span>
       </div>
 
-      <div className="rounded-lg border border-zinc-700/40 overflow-hidden">
-        <table className="w-full table-fixed">
+      <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
+        <table className="w-full table-fixed min-w-[1200px]">
           <colgroup>
-            <col style={{width:"11%"}}/>
-            <col style={{width:"10%"}}/>
-            <col style={{width:"12%"}}/>
-            <col style={{width:"10%"}}/>
-            <col style={{width:"13%"}}/>
-            <col style={{width:"18%"}}/>
-            <col style={{width:"26%"}}/>
+            <col style={{width:"2%"}}/>
+            <col style={{width:"5%"}}/>
+            <col style={{width:"4.5%"}}/>
+            <col style={{width:"5%"}}/>
+            <col style={{width:"4%"}}/>
+            <col style={{width:"4%"}}/>
+            <col style={{width:"5%"}}/>
+            <col style={{width:"5.5%"}}/>
+            <col style={{width:"8%"}}/>
+            <col style={{width:"9%"}}/>
+            <col style={{width:"3%"}}/>
+            <col style={{width:"14%"}}/>
+            <col style={{width:"31%"}}/>
           </colgroup>
           <thead>
-            <tr className="text-[11px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80">
-              <th className="text-left py-2 px-3 font-medium">Ticker</th>
-              <th className="text-right py-2 px-2 font-medium">PreMkt / Vol</th>
-              <th className="text-right py-2 px-2 font-medium">Float / SI / Daily</th>
-              <th className="text-right py-2 px-2 font-medium">Mkt Cap</th>
-              <th className="text-left py-2 px-2 font-medium">Industry · Cat · Grade</th>
-              <th className="text-left py-2 px-2 font-medium">Reasoning</th>
-              <th className="text-left py-2 px-3 font-medium">Analysis Details</th>
+            <tr className="text-[10px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40">
+              <th className="py-2 px-1"/>
+              <th className="text-left py-2 px-1.5 font-medium">Ticker</th>
+              <th className="text-right py-2 px-1.5 font-medium">Premkt %</th>
+              <th className="text-right py-2 px-1.5 font-medium">Premkt Vol</th>
+              <th className="text-right py-2 px-1.5 font-medium">RVol</th>
+              <th className="text-right py-2 px-1.5 font-medium">Daily %</th>
+              <th className="text-right py-2 px-1.5 font-medium">Short Int</th>
+              <th className="text-right py-2 px-1.5 font-medium">Float</th>
+              <th className="text-left py-2 px-1.5 font-medium">Industry</th>
+              <th className="text-left py-2 px-1.5 font-medium">Category</th>
+              <th className="text-center py-2 px-1 font-medium">Grade</th>
+              <th className="text-left py-2 px-1.5 font-medium">Reasoning</th>
+              <th className="text-left py-2 px-2 font-medium flex items-center gap-1">
+                Analysis Details
+              </th>
             </tr>
           </thead>
           <tbody>
             {gapperData.gappers.map((g, i) => (
-              <tr key={g.ticker + i} className="border-t border-zinc-800/50 hover:bg-zinc-800/20 transition-colors align-top">
-
+              <tr key={g.ticker + i} className="border-t border-zinc-800/40 hover:bg-zinc-800/20 transition-colors align-top">
+                {/* + button */}
+                <td className="py-2 px-1 text-center">
+                  <span className="inline-flex items-center justify-center w-4 h-4 rounded bg-zinc-700/50 text-zinc-500 text-[10px] font-bold leading-none">+</span>
+                </td>
                 {/* Ticker */}
-                <td className="py-3 px-3">
-                  <div className="flex items-center gap-1.5">
-                    <span
-                      className="font-bold text-zinc-100 text-sm hover:text-blue-400 transition-colors cursor-default"
-                      onMouseEnter={e => setHovered({ ticker: g.ticker, rect: e.currentTarget.getBoundingClientRect() })}
-                      onMouseLeave={() => setHovered(null)}
-                    >
-                      {g.ticker}
-                    </span>
-                    <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer">
-                      <ExternalLink size={9} className="text-zinc-600 hover:text-blue-400"/>
-                    </a>
-                  </div>
-                  <div className="text-[11px] font-mono text-zinc-500 mt-0.5">${g.price.toFixed(2)}</div>
+                <td className="py-2 px-1.5">
+                  <span
+                    className="font-bold text-zinc-100 text-xs hover:text-blue-400 transition-colors cursor-default"
+                    onMouseEnter={e => setHovered({ ticker: g.ticker, rect: e.currentTarget.getBoundingClientRect() })}
+                    onMouseLeave={() => setHovered(null)}
+                  >
+                    {g.ticker}
+                  </span>
+                  <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer" className="ml-1">
+                    <ExternalLink size={8} className="inline text-zinc-600 hover:text-blue-400"/>
+                  </a>
+                  <div className="text-[10px] font-mono text-zinc-500">${g.price.toFixed(2)}</div>
                 </td>
-
-                {/* PreMkt % + Vol + RVOL */}
-                <td className="py-3 px-2 text-right">
-                  <div className="text-sm font-bold font-mono text-emerald-400">+{g.gap_pct.toFixed(1)}%</div>
-                  <div className="text-[11px] font-mono text-zinc-400 mt-0.5">{fmtNum(g.pm_volume)}</div>
-                  <div className={`text-[11px] font-bold font-mono mt-0.5 ${g.rvol >= 5 ? "text-emerald-300" : g.rvol >= 3 ? "text-emerald-400" : g.rvol >= 2 ? "text-amber-400" : "text-zinc-500"}`}>
-                    {g.rvol.toFixed(1)}x
-                  </div>
+                {/* Premkt % */}
+                <td className="py-2 px-1.5 text-right">
+                  <span className="text-xs font-bold font-mono text-emerald-400">+{g.gap_pct.toFixed(1)}%</span>
                 </td>
-
-                {/* Float / Short Int / Daily % */}
-                <td className="py-3 px-2 text-right">
-                  <div className="flex justify-end items-center gap-1 text-[11px]">
-                    <span className="text-zinc-600">Float</span>
-                    <span className="font-mono text-zinc-300">{g.float_shares || "—"}</span>
-                  </div>
-                  <div className="flex justify-end items-center gap-1 text-[11px] mt-0.5">
-                    <span className="text-zinc-600">SI</span>
-                    <span className="font-mono text-zinc-300">{g.short_float || "—"}</span>
-                  </div>
-                  <div className="flex justify-end items-center gap-1 text-[11px] mt-0.5">
-                    <span className="text-zinc-600">Day</span>
-                    <DailyChg val={g.daily_pct}/>
-                  </div>
+                {/* Premkt Vol */}
+                <td className="py-2 px-1.5 text-right text-[11px] font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
+                {/* RVol */}
+                <td className="py-2 px-1.5 text-right">
+                  <span className={`text-[11px] font-bold font-mono ${g.rvol >= 5 ? "text-emerald-300" : g.rvol >= 3 ? "text-emerald-400" : g.rvol >= 2 ? "text-amber-400" : "text-zinc-500"}`}>
+                    {g.rvol.toFixed(2)}x
+                  </span>
                 </td>
-
-                {/* Mkt Cap */}
-                <td className="py-3 px-2 text-right text-[11px] font-mono text-zinc-400">{fmtCap(g.mkt_cap)}</td>
-
-                {/* Industry · Category · Grade */}
-                <td className="py-3 px-2">
-                  <div className="text-[10px] text-zinc-400 mb-1.5 leading-snug">{g.industry || "—"}</div>
-                  <div className="flex flex-wrap gap-1 items-center">
-                    <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border ${CATEGORY_STYLE[g.category] || CATEGORY_STYLE["Others"]}`}>
-                      {g.category}
-                    </span>
-                    {g.grade && (
-                      <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span>
-                    )}
-                  </div>
+                {/* Daily % */}
+                <td className="py-2 px-1.5 text-right"><DailyChg val={g.daily_pct}/></td>
+                {/* Short Int */}
+                <td className="py-2 px-1.5 text-right text-[11px] font-mono text-zinc-400">{g.short_float || "—"}</td>
+                {/* Float */}
+                <td className="py-2 px-1.5 text-right text-[11px] font-mono text-zinc-400">{g.float_shares || "—"}</td>
+                {/* Industry */}
+                <td className="py-2 px-1.5 text-[10px] text-zinc-400 leading-snug">{g.industry || "—"}</td>
+                {/* Category */}
+                <td className="py-2 px-1.5">
+                  <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full border ${CATEGORY_STYLE[g.category] || CATEGORY_STYLE["Others"]}`}>
+                    {g.category}
+                  </span>
                 </td>
-
+                {/* Grade */}
+                <td className="py-2 px-1 text-center">
+                  {g.grade
+                    ? <span className={`text-[10px] font-bold px-1 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span>
+                    : <span className="text-zinc-600">—</span>}
+                </td>
                 {/* Reasoning */}
-                <td className="py-3 px-2 text-[11px] text-zinc-400 align-top">{g.reasoning}</td>
-
+                <td className="py-2 px-1.5 text-[11px] text-zinc-400 leading-relaxed align-top">{g.reasoning}</td>
                 {/* Analysis Details */}
-                <td className="py-3 px-3 align-top"><AnalysisCell text={g.analysis_details}/></td>
+                <td className="py-2 px-2 align-top"><AnalysisCell text={g.analysis_details}/></td>
               </tr>
             ))}
           </tbody>
