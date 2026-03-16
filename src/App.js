@@ -746,15 +746,18 @@ const VIX_ZONES = [
 
 const VixGauge = () => {
   const [vix, setVix] = useState(18);
-  const [hov, setHov] = useState(null); // hovered zone index
+  const [hov, setHov] = useState(null);
 
-  const CX = 200, CY = 185, RO = 142, RI = 88, GAP = 1.2, VMAX = 40;
+  const CX = 200, CY = 192, RO = 158, RI = 96, GAP = 3, VMAX = 40;
 
   const toRad = d => d * Math.PI / 180;
   const pt    = (r, d) => [CX + r * Math.cos(toRad(d)), CY - r * Math.sin(toRad(d))];
   const f     = n => +n.toFixed(2);
   const v2a   = v => 180 - Math.min(Math.max(v, 0), VMAX) / VMAX * 180;
   const zoneOf = v => VIX_ZONES.find(z => v >= z.vMin && v < z.vMax) ?? VIX_ZONES[VIX_ZONES.length - 1];
+  const activeIdx = VIX_ZONES.findIndex(z => vix >= z.vMin && vix < z.vMax);
+  const dispIdx = hov !== null ? hov : activeIdx;
+  const active = VIX_ZONES[dispIdx];
 
   function arcD(aS, aE, r1, r2, g = 0) {
     const s = aS - g, e = aE + g, large = (s - e) > 180 ? 1 : 0;
@@ -763,50 +766,74 @@ const VixGauge = () => {
     return `M${f(ox1)} ${f(oy1)} A${r2} ${r2} 0 ${large} 0 ${f(ox2)} ${f(oy2)} L${f(ix2)} ${f(iy2)} A${r1} ${r1} 0 ${large} 1 ${f(ix1)} ${f(iy1)}Z`;
   }
 
+  // Elegant clock-hand needle: tapered tip, short counterweight tail
   function needleD(v) {
     const a = v2a(v);
-    const [tx,ty]   = pt(RO - 10, a);
-    const [b1x,b1y] = pt(10, a + 90);
-    const [b2x,b2y] = pt(10, a - 90);
-    return `M${f(tx)} ${f(ty)} L${f(b1x)} ${f(b1y)} L${f(b2x)} ${f(b2y)}Z`;
+    const [tx, ty]   = pt(RO - 6,  a);       // tip
+    const [b1x, b1y] = pt(5,  a + 90);       // left pivot
+    const [b2x, b2y] = pt(5,  a - 90);       // right pivot
+    const [tlx, tly] = pt(22, a + 180);      // tail end
+    const [t1x, t1y] = pt(3,  a + 90 + 180); // tail left
+    const [t2x, t2y] = pt(3,  a - 90 + 180); // tail right
+    return `M${f(tx)} ${f(ty)} L${f(b1x)} ${f(b1y)} L${f(tlx)} ${f(tly)} L${f(b2x)} ${f(b2y)}Z`;
   }
 
-  const active = hov !== null ? VIX_ZONES[hov] : zoneOf(vix);
+  // Dot tick marks between zones (at boundary VIX values)
+  const dotTicks = [0, 12, 20, 30, 40];
+  // Subtle mid-zone dots
+  const midDots = [6, 16, 25, 35];
 
   return (
     <div className="mb-4 p-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex flex-col sm:flex-row gap-4">
       {/* Gauge SVG */}
-      <div className="flex-shrink-0 w-full sm:w-64">
-        <div className="flex items-center justify-between mb-1.5">
+      <div className="flex-shrink-0 w-full sm:w-72">
+        <div className="flex items-center justify-between mb-1">
           <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest">VIX Fear Gauge</span>
           <span className="text-[9px] text-zinc-700 border border-zinc-800 rounded px-1.5 py-0.5">CBOE · QQQ</span>
         </div>
-        <svg viewBox="0 0 400 245" className="w-full h-auto overflow-visible" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 400 252" className="w-full h-auto overflow-visible" xmlns="http://www.w3.org/2000/svg">
+
           {/* Zone arcs */}
           {VIX_ZONES.map((z, i) => {
+            const isActive = i === activeIdx;
+            const isHov   = hov === i;
             const mid = (z.aStart + z.aEnd) / 2;
             const lr  = (RI + RO) / 2;
-            const [lx,ly] = pt(lr, mid);
+            const [lx, ly] = pt(lr, mid);
             const rot = -(90 - mid);
-            const opacity = hov === null ? 0.78 : hov === i ? 1 : 0.16;
-            const glow = hov === i ? `drop-shadow(0 0 10px ${z.color}55)` : "none";
+
+            // Active zone: full color; hovered-inactive: slightly lighter grey; else: dark grey
+            const fill    = isActive ? z.color : isHov ? '#383838' : '#242424';
+            const lblFill = isActive ? '#0a0a0a' : '#505050';
+            const lblSize = isActive ? '9.5' : '8.5';
+            const glow    = isActive ? `drop-shadow(0 0 12px ${z.color}66)` : 'none';
+
             return (
-              <g key={i}>
+              <g key={i} style={{ cursor: 'pointer' }}
+                onMouseEnter={() => setHov(i)}
+                onMouseLeave={() => setHov(null)}>
                 <path
                   d={arcD(z.aStart, z.aEnd, RI, RO, GAP)}
-                  fill={z.color}
-                  opacity={opacity}
-                  style={{ cursor: "pointer", filter: glow, transition: "opacity 0.2s, filter 0.2s" }}
-                  onMouseEnter={() => setHov(i)}
-                  onMouseLeave={() => setHov(null)}
+                  fill={fill}
+                  style={{ filter: glow, transition: 'fill 0.25s, filter 0.25s' }}
                 />
-                {/* Zone label */}
-                <g transform={`rotate(${f(rot)} ${f(lx)} ${f(ly)})`} style={{ pointerEvents: "none" }}>
+                {/* Active zone: colored border on outer arc */}
+                {isActive && (
+                  <path
+                    d={arcD(z.aStart, z.aEnd, RO - 3, RO + 2, GAP)}
+                    fill={z.color}
+                    opacity="0.5"
+                    style={{ pointerEvents: 'none' }}
+                  />
+                )}
+                {/* Zone label, tangent-rotated */}
+                <g transform={`rotate(${f(rot)} ${f(lx)} ${f(ly)})`} style={{ pointerEvents: 'none' }}>
                   {z.label.map((line, li) => (
-                    <text key={li} x={f(lx)} y={f(ly + (li === 0 ? -5 : 5.5))}
+                    <text key={li} x={f(lx)} y={f(ly + (li === 0 ? -5.5 : 6))}
                       textAnchor="middle" dominantBaseline="middle"
-                      fill="#0d0d0d" fontSize="7.5" fontWeight="900"
-                      letterSpacing="0.05em" fontFamily="system-ui, sans-serif">
+                      fill={lblFill} fontSize={lblSize} fontWeight="800"
+                      letterSpacing="0.06em" fontFamily="system-ui, -apple-system, sans-serif"
+                      style={{ transition: 'fill 0.25s, font-size 0.25s' }}>
                       {line}
                     </text>
                   ))}
@@ -815,47 +842,58 @@ const VixGauge = () => {
             );
           })}
 
-          {/* Tick marks + labels */}
-          {[0, 12, 20, 30, 40].map(v => {
+          {/* Boundary dot ticks + scale labels */}
+          {dotTicks.map(v => {
             const a = v2a(v);
-            const [x1,y1] = pt(RO + 4, a), [x2,y2] = pt(RO + 13, a), [lx,ly] = pt(RO + 24, a);
+            const [dx, dy] = pt(RI - 10, a);
+            const [lx, ly] = pt(RI - 24, a);
             return (
               <g key={v}>
-                <line x1={f(x1)} y1={f(y1)} x2={f(x2)} y2={f(y2)} stroke="#303030" strokeWidth="1.5"/>
+                <circle cx={f(dx)} cy={f(dy)} r="2.5" fill="#404040"/>
                 <text x={f(lx)} y={f(ly)} textAnchor="middle" dominantBaseline="middle"
-                  fill="#303030" fontSize="9" fontFamily="monospace">{v}</text>
+                  fill="#383838" fontSize="9" fontFamily="monospace">{v}</text>
               </g>
             );
           })}
 
-          {/* Needle shadow */}
-          <path d={needleD(vix)} fill="rgba(0,0,0,0.3)" transform="translate(1.5,2)" style={{ pointerEvents: "none" }}/>
-          {/* Needle */}
-          <path d={needleD(vix)} fill="#e0e0e0" opacity="0.95" style={{ pointerEvents: "none" }}/>
-          {/* Hub */}
-          <circle cx={CX} cy={CY} r="8" fill="#242424" stroke="#3c3c3c" strokeWidth="1.5"/>
+          {/* Subtle mid-zone dots */}
+          {midDots.map(v => {
+            const a = v2a(v);
+            const [dx, dy] = pt(RI - 10, a);
+            return <circle key={v} cx={f(dx)} cy={f(dy)} r="1.5" fill="#2e2e2e"/>;
+          })}
 
-          {/* Centre readout */}
-          <text x={CX} y={CY + 34} textAnchor="middle" fontSize="36" fontWeight="700"
-            fill={active.color} fontFamily="system-ui, -apple-system, sans-serif">
+          {/* Needle shadow */}
+          <path d={needleD(vix)} fill="rgba(0,0,0,0.4)" transform="translate(2,3)" style={{ pointerEvents: 'none' }}/>
+          {/* Needle */}
+          <path d={needleD(vix)} fill="#d4d4d4" style={{ pointerEvents: 'none' }}/>
+          {/* Hub outer ring */}
+          <circle cx={CX} cy={CY} r="11" fill="#1a1a1a" stroke="#383838" strokeWidth="2"/>
+          {/* Hub inner dot */}
+          <circle cx={CX} cy={CY} r="5" fill="#555"/>
+
+          {/* Centre VIX number */}
+          <text x={CX} y={CY + 38} textAnchor="middle" fontSize="40" fontWeight="800"
+            fill={active.color} fontFamily="system-ui, -apple-system, sans-serif"
+            style={{ transition: 'fill 0.3s' }}>
             {vix.toFixed(1)}
           </text>
-          <text x={CX} y={CY + 54} textAnchor="middle" fill="#2a2a2a" fontSize="8.5"
-            letterSpacing="0.22em" fontFamily="system-ui, sans-serif">VIX</text>
+          <text x={CX} y={CY + 58} textAnchor="middle" fill="#303030" fontSize="9"
+            letterSpacing="0.25em" fontFamily="system-ui, sans-serif">VIX</text>
         </svg>
 
         {/* Slider */}
-        <div className="flex items-center gap-2 mt-1 px-1">
-          <span className="text-[9px] text-zinc-700 uppercase tracking-widest">0</span>
+        <div className="flex items-center gap-2 px-1">
+          <span className="text-[9px] text-zinc-700">0</span>
           <input type="range" min="0" max="45" step="0.5" value={vix}
             onChange={e => setVix(parseFloat(e.target.value))}
             className="flex-1 accent-zinc-400 h-1"/>
-          <span className="text-[9px] text-zinc-700 uppercase tracking-widest">45</span>
+          <span className="text-[9px] text-zinc-700">45</span>
         </div>
       </div>
 
       {/* Info panel */}
-      <div className="flex flex-col justify-center gap-2 min-w-0">
+      <div className="flex flex-col justify-center gap-2.5 min-w-0">
         <div>
           <div className="text-[10px] uppercase tracking-widest text-zinc-600 mb-1">Zone</div>
           <div className="text-sm font-bold" style={{ color: active.color }}>{active.name}</div>
@@ -866,10 +904,8 @@ const VixGauge = () => {
           <div className="text-[10px] uppercase tracking-widest text-zinc-600 mb-1.5">QQQ Impact</div>
           <p className="text-xs text-zinc-400 leading-relaxed">{active.impact}</p>
         </div>
-        <div className="mt-auto pt-1">
-          <div className="text-[10px] text-zinc-700 leading-relaxed">
-            Hover a zone for details · Drag slider to set VIX
-          </div>
+        <div className="mt-auto">
+          <div className="text-[10px] text-zinc-700">Hover a zone · Drag slider to set VIX</div>
         </div>
       </div>
     </div>
