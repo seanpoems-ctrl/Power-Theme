@@ -781,7 +781,7 @@ const VixGauge = () => {
   const active = hov !== null ? VIX_ZONES[hov] : zoneOf(vix);
 
   return (
-    <div className="mb-4 p-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex flex-col sm:flex-row gap-4">
+    <div className="p-4 bg-zinc-900 border border-zinc-700/60 rounded-xl shadow-2xl flex flex-col sm:flex-row gap-4">
       {/* Gauge SVG */}
       <div className="flex-shrink-0 w-full sm:w-64">
         <div className="flex items-center justify-between mb-1.5">
@@ -1073,6 +1073,7 @@ export default function App() {
   const [sortKey, setSortKey] = useState("rs_52w");
   const [sortDir, setSortDir] = useState("desc");
   const [showFP, setShowFP] = useState(false);
+  const [showVix, setShowVix] = useState(false);
   const [lbPerfKey, setLbPerfKey] = useState("perf_1m");
   const [rsSPYKey, setRsSPYKey] = useState("perf_1m");
 
@@ -1153,6 +1154,20 @@ export default function App() {
                 </button>
               </div>
               <span className="text-[11px] text-zinc-600">Updated {data?.last_updated}</span>
+              {/* VIX Gauge trigger */}
+              <div className="relative">
+                <button
+                  onClick={() => setShowVix(v => !v)}
+                  className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-md border transition-colors ${showVix ? "bg-amber-500/15 border-amber-500/30 text-amber-400" : "bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-200"}`}
+                >
+                  <span className="font-semibold tracking-wide">VIX</span>
+                </button>
+                {showVix && (
+                  <div className="absolute right-0 top-full mt-2 z-50 w-[480px]">
+                    <VixGauge/>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
           <div className="flex flex-wrap items-center gap-3">
@@ -1230,7 +1245,6 @@ export default function App() {
       {tab === "gapper" ? <GapperScanner/> : (
         <div className="max-w-[1400px] mx-auto px-4 py-4">
           {data && <MarketCondition mc={data.market_condition}/>}
-          <VixGauge/>
           {data && <Leaderboard themes={data.themes} perfKey={lbPerfKey} onPerfKeyChange={setLbPerfKey}/>}
           {data && <CorrelationGuard themes={data.themes}/>}
           {data && <CounterTrendWarning themes={data.themes}/>}
