@@ -744,8 +744,9 @@ const VIX_ZONES = [
   { name: "Extreme Panic",       range: "VIX 30+",   color: "#ff1744", vMin: 30, vMax: 40, aStart: 45,  aEnd: 0,   label: ["EXTREME","PANIC"],         impact: "Maximum fear. While painful initially, extreme VIX spikes are historically the best entry points for massive QQQ rallies." },
 ];
 
-const VixGauge = () => {
-  const [vix, setVix] = useState(18);
+const VixGauge = ({ initialVix }) => {
+  const [vix, setVix] = useState(initialVix ?? 18);
+  useEffect(() => { if (initialVix != null) setVix(initialVix); }, [initialVix]);
   const [hov, setHov] = useState(null);
 
   const CX = 200, CY = 192, RO = 158, RI = 96, GAP = 3, VMAX = 40;
@@ -1283,7 +1284,7 @@ export default function App() {
 
       {tab === "gapper" ? <GapperScanner/> : (
         <div className="max-w-[1400px] mx-auto px-4 py-4">
-          <VixGauge/>
+          <VixGauge initialVix={data?.vix}/>
           {data && <Leaderboard themes={data.themes} perfKey={lbPerfKey} onPerfKeyChange={setLbPerfKey}/>}
           {data && <CorrelationGuard themes={data.themes}/>}
           {data && <CounterTrendWarning themes={data.themes}/>}

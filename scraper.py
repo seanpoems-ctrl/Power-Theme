@@ -696,12 +696,24 @@ def build_data() -> dict:
         f"QQQ sma50={qqq_ind.get('sma50_pct')} status={qqq_ind.get('index_status')} breadth={qqq_breadth}%"
     )
 
+    # Fetch VIX closing value
+    vix_value = None
+    try:
+        import yfinance as yf
+        vix_hist = yf.Ticker("^VIX").history(period="5d", interval="1d")
+        if not vix_hist.empty:
+            vix_value = round(float(vix_hist["Close"].iloc[-1]), 2)
+            logger.info(f"  VIX: {vix_value}")
+    except Exception as e:
+        logger.warning(f"  VIX fetch failed: {e}")
+
     updated = date.today() if is_trading_day() else last_trading_date()
     return {
         "last_updated": updated.isoformat(),
         "themes": output_themes,
         "spy_benchmarks": spy_benchmarks,
         "market_condition": market_condition,
+        "vix": vix_value,
     }
 
 
