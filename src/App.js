@@ -157,7 +157,7 @@ const TIP_COLORS = {
 const Tip = ({ text, color = 'zinc', children }) => (
   <span className="group relative inline-flex">
     {children}
-    <span className={`pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1.5 px-2 py-1 text-[10px] leading-snug bg-zinc-900 border rounded-md whitespace-nowrap z-[9999] shadow-lg opacity-0 group-hover:opacity-100 transition-none ${TIP_COLORS[color] ?? TIP_COLORS.zinc}`}>
+    <span className={`pointer-events-none absolute bottom-full left-0 mb-1.5 px-2 py-1 text-[10px] leading-snug bg-zinc-900 border rounded-md whitespace-nowrap z-[9999] shadow-lg opacity-0 group-hover:opacity-100 transition-none ${TIP_COLORS[color] ?? TIP_COLORS.zinc}`}>
       {text}
     </span>
   </span>
