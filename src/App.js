@@ -318,13 +318,6 @@ const MarketCondition = ({ mc }) => {
       <span className={`w-2 h-2 rounded-full flex-shrink-0 ${cfg.dot}`}/>
       <span className="text-xs font-semibold text-zinc-200">{cfg.label}</span>
       <span className="text-[11px] text-zinc-500 hidden sm:block">{cfg.sub}</span>
-      <span className="ml-auto flex items-center gap-3 text-[10px] font-mono whitespace-nowrap">
-        <IndexTag label="QQQ" d={qqq} />
-        <span className="text-zinc-600">·</span>
-        <IndexTag label="SPY" d={spy} />
-        <span className="text-zinc-600">·</span>
-        <IndexTag label="IWM" d={iwm} />
-      </span>
     </div>
   );
 };
@@ -1143,6 +1136,31 @@ export default function App() {
                 <h1 className="text-base font-bold tracking-tight">Thematic Scanner</h1>
                 <p className="text-[11px] text-zinc-500">美股強勢主題篩選器</p>
               </div>
+              {/* Index tickers — left side of header */}
+              {data?.market_condition && (() => {
+                const { spy, qqq, iwm } = data.market_condition;
+                const fmtChg = v => v == null ? null : v > 0
+                  ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
+                  : <span className="text-red-400">{v.toFixed(2)}%</span>;
+                const statusColor = st => st === "Strong" ? "text-emerald-400" : st === "Weak" || st === "Lagging" ? "text-red-400" : st === "Mediocre" ? "text-yellow-400" : "text-zinc-500";
+                const Tag = ({ label, d }) => d ? (
+                  <span className="flex items-center gap-1 text-[11px] font-mono">
+                    <span className="text-zinc-500">{label}</span>
+                    {d.price != null && <span className="text-zinc-300">${d.price.toFixed(2)}</span>}
+                    {fmtChg(d.change_pct)}
+                    {d.index_status && <span className={statusColor(d.index_status)}>{d.index_status}</span>}
+                  </span>
+                ) : null;
+                return (
+                  <div className="hidden lg:flex items-center gap-3 ml-4 pl-4 border-l border-zinc-700/50">
+                    <Tag label="QQQ" d={qqq}/>
+                    <span className="text-zinc-700">·</span>
+                    <Tag label="SPY" d={spy}/>
+                    <span className="text-zinc-700">·</span>
+                    <Tag label="IWM" d={iwm}/>
+                  </div>
+                );
+              })()}
             </div>
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1 bg-zinc-800/60 border border-zinc-700/50 rounded-lg p-1">
