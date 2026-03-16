@@ -469,7 +469,23 @@ const Leaderboard = ({ themes, perfKey, onPerfKeyChange }) => {
   );
 };
 
+const TVPopup = ({ ticker, anchorRect }) => {
+  if (!ticker || !anchorRect) return null;
+  const W = 380, H = 270;
+  let left = anchorRect.right + 12;
+  if (left + W > window.innerWidth - 8) left = anchorRect.left - W - 12;
+  let top = anchorRect.top + anchorRect.height / 2 - H / 2;
+  top = Math.max(8, Math.min(top, window.innerHeight - H - 8));
+  const src = `https://s.tradingview.com/widgetembed/?symbol=${encodeURIComponent(ticker)}&interval=D&hidesidetoolbar=1&hidetoptoolbar=0&theme=dark&style=1&locale=en&enable_publishing=false&save_image=false&allow_symbol_change=false`;
+  return (
+    <div style={{ position:"fixed", left, top, width:W, height:H, zIndex:9999, borderRadius:8, overflow:"hidden", border:"1px solid #27272a", boxShadow:"0 24px 64px rgba(0,0,0,0.85)", pointerEvents:"none" }}>
+      <iframe src={src} width="100%" height="100%" frameBorder="0" title={ticker} scrolling="no"/>
+    </div>
+  );
+};
+
 const StockTable = ({ stocks, sortKey, sortDir, spyPerf, rsSPYKey, isTopTheme, topADRTickers }) => {
+  const [hovered, setHovered] = useState(null);
   const sorted = useMemo(() => {
     const a = [...stocks];
     a.sort((x, y) => sortDir === "asc" ? ((x[sortKey]||0) > (y[sortKey]||0) ? 1 : -1) : ((x[sortKey]||0) < (y[sortKey]||0) ? 1 : -1));
@@ -506,7 +522,11 @@ const StockTable = ({ stocks, sortKey, sortDir, spyPerf, rsSPYKey, isTopTheme, t
                     : <TrendingUp size={11} className="text-zinc-600 flex-shrink-0"/>}
                   <div>
                     <div className="flex items-center gap-1.5 flex-wrap">
-                      <span className="font-semibold text-zinc-100 text-xs">{s.ticker}</span>
+                      <span
+                        className="font-semibold text-zinc-100 text-xs cursor-default hover:text-blue-400 transition-colors"
+                        onMouseEnter={e => setHovered({ ticker: s.ticker, rect: e.currentTarget.getBoundingClientRect() })}
+                        onMouseLeave={() => setHovered(null)}
+                      >{s.ticker}</span>
                       <GradeBadge grade={getEliteGrade(s)}/>
                       {isVCPStage1(s) && <span title="Narrowing consolidation + VDU + near 52W high" className="text-[9px] font-bold text-violet-400 bg-violet-500/15 border border-violet-500/30 px-1 py-0.5 rounded">🎯 VCP S1</span>}
                       {!isVCPStage1(s) && isVDU(s) && <span title="Volume below 50% of 10-day avg — selling pressure exhausted" className="text-[9px] font-bold text-blue-400 bg-blue-500/15 border border-blue-500/30 px-1 py-0.5 rounded">VDU</span>}
@@ -537,6 +557,7 @@ const StockTable = ({ stocks, sortKey, sortDir, spyPerf, rsSPYKey, isTopTheme, t
         </tbody>
       </table>
     </div>
+    {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
   );
 };
 
