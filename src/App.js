@@ -743,6 +743,146 @@ const DailyChg = ({ val }) => {
   return <span className={`text-xs font-mono font-bold ${pos ? "text-emerald-400" : "text-red-400"}`}>{pos ? "+" : ""}{val.toFixed(2)}%</span>;
 };
 
+/* ─────────────────────────────────────────────────────────── VIX GAUGE ── */
+const VIX_ZONES = [
+  { name: "Extreme Complacency", range: "VIX < 12",  color: "#00e676", vMin: 0,  vMax: 12, aStart: 180, aEnd: 126, label: ["EXTREME","COMPLACENCY"], impact: 'Markets are dangerously calm. High performance and steady grind higher — watch for sharp "rug pull" corrections as complacency peaks.' },
+  { name: "Healthy / Normal",    range: "VIX 12–20", color: "#ffee58", vMin: 12, vMax: 20, aStart: 126, aEnd: 90,  label: ["HEALTHY","NORMAL"],       impact: "Tech stocks thrive in stable macro environments. QQQ sees consistent, sustainable growth with minimal headline risk." },
+  { name: "Elevated Concern",    range: "VIX 20–30", color: "#ff9100", vMin: 20, vMax: 30, aStart: 90,  aEnd: 45,  label: ["ELEVATED","CONCERN"],      impact: "Choppy, headline-driven trading. QQQ often struggles to hold gains. Reduce position size and tighten stops." },
+  { name: "Extreme Panic",       range: "VIX 30+",   color: "#ff1744", vMin: 30, vMax: 40, aStart: 45,  aEnd: 0,   label: ["EXTREME","PANIC"],         impact: "Maximum fear. While painful initially, extreme VIX spikes are historically the best entry points for massive QQQ rallies." },
+];
+
+const VixGauge = () => {
+  const [vix, setVix] = useState(18);
+  const [hov, setHov] = useState(null); // hovered zone index
+
+  const CX = 200, CY = 185, RO = 142, RI = 88, GAP = 1.2, VMAX = 40;
+
+  const toRad = d => d * Math.PI / 180;
+  const pt    = (r, d) => [CX + r * Math.cos(toRad(d)), CY - r * Math.sin(toRad(d))];
+  const f     = n => +n.toFixed(2);
+  const v2a   = v => 180 - Math.min(Math.max(v, 0), VMAX) / VMAX * 180;
+  const zoneOf = v => VIX_ZONES.find(z => v >= z.vMin && v < z.vMax) ?? VIX_ZONES[VIX_ZONES.length - 1];
+
+  function arcD(aS, aE, r1, r2, g = 0) {
+    const s = aS - g, e = aE + g, large = (s - e) > 180 ? 1 : 0;
+    const [ox1,oy1] = pt(r2,s), [ox2,oy2] = pt(r2,e);
+    const [ix1,iy1] = pt(r1,s), [ix2,iy2] = pt(r1,e);
+    return `M${f(ox1)} ${f(oy1)} A${r2} ${r2} 0 ${large} 0 ${f(ox2)} ${f(oy2)} L${f(ix2)} ${f(iy2)} A${r1} ${r1} 0 ${large} 1 ${f(ix1)} ${f(iy1)}Z`;
+  }
+
+  function needleD(v) {
+    const a = v2a(v);
+    const [tx,ty]   = pt(RO - 10, a);
+    const [b1x,b1y] = pt(10, a + 90);
+    const [b2x,b2y] = pt(10, a - 90);
+    return `M${f(tx)} ${f(ty)} L${f(b1x)} ${f(b1y)} L${f(b2x)} ${f(b2y)}Z`;
+  }
+
+  const active = hov !== null ? VIX_ZONES[hov] : zoneOf(vix);
+
+  return (
+    <div className="mb-4 p-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex flex-col sm:flex-row gap-4">
+      {/* Gauge SVG */}
+      <div className="flex-shrink-0 w-full sm:w-64">
+        <div className="flex items-center justify-between mb-1.5">
+          <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest">VIX Fear Gauge</span>
+          <span className="text-[9px] text-zinc-700 border border-zinc-800 rounded px-1.5 py-0.5">CBOE · QQQ</span>
+        </div>
+        <svg viewBox="0 0 400 245" className="w-full h-auto overflow-visible" xmlns="http://www.w3.org/2000/svg">
+          {/* Zone arcs */}
+          {VIX_ZONES.map((z, i) => {
+            const mid = (z.aStart + z.aEnd) / 2;
+            const lr  = (RI + RO) / 2;
+            const [lx,ly] = pt(lr, mid);
+            const rot = -(90 - mid);
+            const opacity = hov === null ? 0.78 : hov === i ? 1 : 0.16;
+            const glow = hov === i ? `drop-shadow(0 0 10px ${z.color}55)` : "none";
+            return (
+              <g key={i}>
+                <path
+                  d={arcD(z.aStart, z.aEnd, RI, RO, GAP)}
+                  fill={z.color}
+                  opacity={opacity}
+                  style={{ cursor: "pointer", filter: glow, transition: "opacity 0.2s, filter 0.2s" }}
+                  onMouseEnter={() => setHov(i)}
+                  onMouseLeave={() => setHov(null)}
+                />
+                {/* Zone label */}
+                <g transform={`rotate(${f(rot)} ${f(lx)} ${f(ly)})`} style={{ pointerEvents: "none" }}>
+                  {z.label.map((line, li) => (
+                    <text key={li} x={f(lx)} y={f(ly + (li === 0 ? -5 : 5.5))}
+                      textAnchor="middle" dominantBaseline="middle"
+                      fill="#0d0d0d" fontSize="7.5" fontWeight="900"
+                      letterSpacing="0.05em" fontFamily="system-ui, sans-serif">
+                      {line}
+                    </text>
+                  ))}
+                </g>
+              </g>
+            );
+          })}
+
+          {/* Tick marks + labels */}
+          {[0, 12, 20, 30, 40].map(v => {
+            const a = v2a(v);
+            const [x1,y1] = pt(RO + 4, a), [x2,y2] = pt(RO + 13, a), [lx,ly] = pt(RO + 24, a);
+            return (
+              <g key={v}>
+                <line x1={f(x1)} y1={f(y1)} x2={f(x2)} y2={f(y2)} stroke="#303030" strokeWidth="1.5"/>
+                <text x={f(lx)} y={f(ly)} textAnchor="middle" dominantBaseline="middle"
+                  fill="#303030" fontSize="9" fontFamily="monospace">{v}</text>
+              </g>
+            );
+          })}
+
+          {/* Needle shadow */}
+          <path d={needleD(vix)} fill="rgba(0,0,0,0.3)" transform="translate(1.5,2)" style={{ pointerEvents: "none" }}/>
+          {/* Needle */}
+          <path d={needleD(vix)} fill="#e0e0e0" opacity="0.95" style={{ pointerEvents: "none" }}/>
+          {/* Hub */}
+          <circle cx={CX} cy={CY} r="8" fill="#242424" stroke="#3c3c3c" strokeWidth="1.5"/>
+
+          {/* Centre readout */}
+          <text x={CX} y={CY + 34} textAnchor="middle" fontSize="36" fontWeight="700"
+            fill={active.color} fontFamily="system-ui, -apple-system, sans-serif">
+            {vix.toFixed(1)}
+          </text>
+          <text x={CX} y={CY + 54} textAnchor="middle" fill="#2a2a2a" fontSize="8.5"
+            letterSpacing="0.22em" fontFamily="system-ui, sans-serif">VIX</text>
+        </svg>
+
+        {/* Slider */}
+        <div className="flex items-center gap-2 mt-1 px-1">
+          <span className="text-[9px] text-zinc-700 uppercase tracking-widest">0</span>
+          <input type="range" min="0" max="45" step="0.5" value={vix}
+            onChange={e => setVix(parseFloat(e.target.value))}
+            className="flex-1 accent-zinc-400 h-1"/>
+          <span className="text-[9px] text-zinc-700 uppercase tracking-widest">45</span>
+        </div>
+      </div>
+
+      {/* Info panel */}
+      <div className="flex flex-col justify-center gap-2 min-w-0">
+        <div>
+          <div className="text-[10px] uppercase tracking-widest text-zinc-600 mb-1">Zone</div>
+          <div className="text-sm font-bold" style={{ color: active.color }}>{active.name}</div>
+          <div className="text-[10px] font-mono text-zinc-600 mt-0.5">{active.range}</div>
+        </div>
+        <div className="h-px bg-zinc-800/60"/>
+        <div>
+          <div className="text-[10px] uppercase tracking-widest text-zinc-600 mb-1.5">QQQ Impact</div>
+          <p className="text-xs text-zinc-400 leading-relaxed">{active.impact}</p>
+        </div>
+        <div className="mt-auto pt-1">
+          <div className="text-[10px] text-zinc-700 leading-relaxed">
+            Hover a zone for details · Drag slider to set VIX
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const GapperScanner = () => {
   const [gapperData, setGapperData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -1090,6 +1230,7 @@ export default function App() {
       {tab === "gapper" ? <GapperScanner/> : (
         <div className="max-w-[1400px] mx-auto px-4 py-4">
           {data && <MarketCondition mc={data.market_condition}/>}
+          <VixGauge/>
           {data && <Leaderboard themes={data.themes} perfKey={lbPerfKey} onPerfKeyChange={setLbPerfKey}/>}
           {data && <CorrelationGuard themes={data.themes}/>}
           {data && <CounterTrendWarning themes={data.themes}/>}
