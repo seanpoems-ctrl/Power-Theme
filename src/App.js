@@ -685,6 +685,7 @@ const ConvictionBar = ({ value }) => {
 const GapperScanner = () => {
   const [gapperData, setGapperData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [hovered, setHovered] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -736,11 +737,16 @@ const GapperScanner = () => {
             {gapperData.gappers.map((g, i) => (
               <tr key={g.ticker + i} className="border-t border-zinc-800/50 hover:bg-zinc-800/30 transition-colors">
                 <td className="py-2.5 px-4">
-                  <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer"
-                    className="flex items-center gap-1.5 font-bold text-zinc-100 text-xs hover:text-blue-400 transition-colors">
+                  <span
+                    className="flex items-center gap-1.5 font-bold text-zinc-100 text-xs cursor-default hover:text-blue-400 transition-colors"
+                    onMouseEnter={e => setHovered({ ticker: g.ticker, rect: e.currentTarget.getBoundingClientRect() })}
+                    onMouseLeave={() => setHovered(null)}
+                  >
                     {g.ticker}
-                    <ExternalLink size={9} className="text-zinc-600"/>
-                  </a>
+                    <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}>
+                      <ExternalLink size={9} className="text-zinc-600 hover:text-blue-400"/>
+                    </a>
+                  </span>
                 </td>
                 <td className="text-right py-2.5 px-2">
                   <div className="text-xs font-mono text-zinc-200">${g.price.toFixed(2)}</div>
@@ -767,6 +773,7 @@ const GapperScanner = () => {
         </table>
       </div>
     </div>
+    {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
   );
 };
 
