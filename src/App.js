@@ -167,9 +167,14 @@ const GRADE_STYLE = {
   "B":  "bg-zinc-700/40 text-zinc-400 border-zinc-600/30",
 };
 
+const GRADE_TIP = {
+  "A+": "A+ — Above all SMAs (20/50/200) + RS ≥ 90",
+  "A":  "A  — Above SMA50 & SMA200 + RS ≥ 80",
+  "B":  "B  — Above SMA200",
+};
 const GradeBadge = ({ grade }) => {
   if (!grade) return null;
-  return <span className={`inline-flex items-center px-1 py-0.5 text-[10px] font-bold rounded border backdrop-blur-sm ${GRADE_STYLE[grade]}`}>{grade}</span>;
+  return <span title={GRADE_TIP[grade]} className={`inline-flex items-center px-1 py-0.5 text-[10px] font-bold rounded border backdrop-blur-sm cursor-help ${GRADE_STYLE[grade]}`}>{grade}</span>;
 };
 
 function isVDU(s) {
@@ -518,8 +523,8 @@ const StockTable = ({ stocks, sortKey, sortDir, spyPerf, rsSPYKey, isTopTheme, t
               <td className="py-2 px-4">
                 <div className="flex items-center gap-2">
                   {s.pure_play
-                    ? <Star size={11} className="text-amber-400 fill-amber-400 flex-shrink-0"/>
-                    : <TrendingUp size={11} className="text-zinc-600 flex-shrink-0"/>}
+                    ? <Star size={11} title="Pure Play — appears in only one sub-theme" className="text-amber-400 fill-amber-400 flex-shrink-0 cursor-help"/>
+                    : <TrendingUp size={11} title="Legacy Leader — appears across multiple sub-themes" className="text-zinc-600 flex-shrink-0 cursor-help"/>}
                   <div>
                     <div className="flex items-center gap-1.5 flex-wrap">
                       <span
@@ -1065,40 +1070,6 @@ const GapperScanner = () => {
   );
 };
 
-const Legend = () => {
-  const [open, setOpen] = useState(false);
-  return (
-    <div className="mb-3">
-      <button onClick={() => setOpen(o => !o)} className="px-2.5 py-1 text-[11px] text-zinc-500 bg-zinc-800/60 border border-zinc-700/50 rounded-md hover:text-zinc-300 hover:border-zinc-600 transition-colors">
-        Symbol Legend
-      </button>
-      {open && (
-        <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[10px] text-zinc-600 px-1">
-          <span className="flex items-center gap-1"><Star size={9} className="text-amber-400 fill-amber-400"/> Pure Play</span>
-          <span className="flex items-center gap-1"><TrendingUp size={9} className="text-zinc-600"/> Legacy Leader</span>
-          <span className="flex items-center gap-1"><Zap size={9} className="text-yellow-400 fill-yellow-400"/> Sub-theme outperforming parent &gt;3%</span>
-          <span className="flex items-center gap-1"><Layers size={9} className="text-blue-400"/> Theme → Sub-theme hierarchy</span>
-          <span className="text-zinc-700">|</span>
-          <span className="flex items-center gap-1"><Trophy size={9} className="text-amber-400"/> Triple Crown: #1主題 + ADR&gt;5% + Pure Play</span>
-          <span className="flex items-center gap-1"><Zap size={9} className="text-blue-400"/> Volatility King: ADR 前10%</span>
-          <span className="flex items-center gap-1"><Landmark size={9} className="text-emerald-400"/> Liquidity Monster: 日均成交額 &gt;$500M</span>
-          <span className="flex items-center gap-1"><Minimize2 size={9} className="text-violet-400"/> VCP Tightening: 近3日波動&lt;2% + 量縮</span>
-          <span className="text-zinc-700">|</span>
-          <span className="flex items-center gap-1"><span className="text-emerald-300 font-bold">A+</span> 站上全部均線 + RS≥90</span>
-          <span className="flex items-center gap-1"><span className="text-blue-300 font-bold">A</span> 站上50/200MA + RS≥80</span>
-          <span className="flex items-center gap-1"><span className="text-zinc-400 font-bold">B</span> 站上200MA</span>
-          <span className="text-zinc-700">|</span>
-          <span className="flex items-center gap-1"><span className="text-violet-400 font-bold">🎯 VCP S1</span> 靠近52W高 + 波動收窄 + 量縮</span>
-          <span className="flex items-center gap-1"><span className="text-blue-400 font-bold">VDU</span> 今日成交量 &lt; 10日均量50%</span>
-          <span className="flex items-center gap-1"><span className="text-fuchsia-400 font-bold">Tight</span> 近3日波動 &lt; 1.5%</span>
-          <span className="flex items-center gap-1"><span className="text-slate-400 font-bold">ID</span> Inside Day — 今日高低在昨日範圍內</span>
-          <span className="text-zinc-700">|</span>
-          <span className="flex items-center gap-1"><AlertTriangle size={9} className="text-rose-400"/> Counter-Trend: 今日1D第一但6M跌超-15%，可能是死貓反彈</span>
-        </div>
-      )}
-    </div>
-  );
-};
 
 export default function App() {
   const [tab, setTab] = useState("scanner");
@@ -1302,7 +1273,6 @@ export default function App() {
               {data && <CounterTrendWarning themes={data.themes}/>}
             </div>
           </div>
-          <Legend/>
           {filtered.length === 0 ? (
             <div className="text-center py-16 text-zinc-500">
               <BarChart3 size={28} className="mx-auto mb-3 opacity-40"/>
