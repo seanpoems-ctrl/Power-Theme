@@ -1288,10 +1288,14 @@ export default function App() {
 
       {tab === "gapper" ? <GapperScanner/> : (
         <div className="max-w-[1400px] mx-auto px-4 py-4">
-          <div className="w-72"><VixGauge initialVix={data?.vix}/></div>
-          {data && <Leaderboard themes={data.themes} perfKey={lbPerfKey} onPerfKeyChange={setLbPerfKey}/>}
-          {data && <CorrelationGuard themes={data.themes}/>}
-          {data && <CounterTrendWarning themes={data.themes}/>}
+          <div className="flex gap-4 items-start mb-4">
+            <div className="w-72 flex-shrink-0"><VixGauge initialVix={data?.vix}/></div>
+            <div className="flex-1 min-w-0">
+              {data && <Leaderboard themes={data.themes} perfKey={lbPerfKey} onPerfKeyChange={setLbPerfKey}/>}
+              {data && <CorrelationGuard themes={data.themes}/>}
+              {data && <CounterTrendWarning themes={data.themes}/>}
+            </div>
+          </div>
           <Legend/>
           {filtered.length === 0 ? (
             <div className="text-center py-16 text-zinc-500">
