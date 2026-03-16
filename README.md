@@ -68,3 +68,13 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+---
+
+## 每日自動更新（GitHub Actions）
+
+- Workflow：**`.github/workflows/daily-scrape-deploy.yml`**
+- **週一～五 21:30 UTC** 執行（約美東收盤後 30 分～1.5 小時，視夏令時）：`python scraper.py` → `npm run build` → 部署 **GitHub Pages**（與 `deploy.yml` 相同環境）。
+- 可在 repo **Actions → Daily scrape & deploy → Run workflow** 手動跑一次測試。
+- 美國假日若無交易，爬蟲仍會跑，資料邏輯與本機相同（非交易日 1D 等仍會處理）。
+- 若 Finviz 限流：**同一個 workflow 會自動重試掃描最多 4 次**（每次失敗間隔約 3 分鐘）。仍失敗可到 Actions 手動 **Re-run jobs**。或本機 `python3 scraper.py` 後 push 觸發 `deploy.yml`。
