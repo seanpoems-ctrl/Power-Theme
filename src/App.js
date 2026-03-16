@@ -917,8 +917,8 @@ const VixGauge = ({ initialVix }) => {
         {/* Reset to today's value */}
         {initialVix != null && vix !== initialVix && (
           <button onClick={() => setVix(initialVix)}
-            className="mt-1 w-full text-[9px] text-zinc-600 hover:text-zinc-400 transition-colors text-center">
-            ↩ Reset to today ({initialVix})
+            className="mt-2 w-full flex items-center justify-center gap-1.5 px-3 py-1.5 text-[10px] font-medium rounded-md border border-zinc-700/60 bg-zinc-800/60 text-zinc-400 hover:text-zinc-200 hover:border-zinc-600 transition-colors">
+            ↩ Reset to today's VIX ({initialVix})
           </button>
         )}
       </div>
