@@ -27,7 +27,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install Python deps
-        run: pip install requests beautifulsoup4 exchange-calendars yfinance
+        run: pip install requests beautifulsoup4 exchange-calendars yfinance lxml
 
       - name: Check NYSE trading day
         id: trading_day
