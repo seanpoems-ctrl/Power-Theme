@@ -1,10 +1,11 @@
-# 平日關盤後 1 小時：跑爬蟲 → build → 部署 GitHub Pages
-# 美東 17:00 = 21:00 UTC 夏令；冬令同 UTC 對應 16:00 ET，仍已關盤
+# 平日關盤後 1.5 小時：跑爬蟲 → build → 部署 GitHub Pages
+# 美東 17:30 = 21:30 UTC 夏令；冬令 17:30 EST = 22:30 UTC
 name: Daily scrape & deploy
 
 on:
   schedule:
-    - cron: "0 21 * * 1-5"   # 夏令 17:00 ET；冬令 16:00 ET（均已關盤）
+    - cron: "30 21 * * 1-5"  # 夏令 17:30 ET（關盤後 1.5h）
+    - cron: "30 22 * * 1-5"  # 冬令 17:30 ET 備援
   workflow_dispatch: {}
 
 jobs:
