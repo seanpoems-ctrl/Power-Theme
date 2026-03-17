@@ -1,12 +1,11 @@
-# 平日美股收盤（美東 16:00）後約 30 分鐘：跑爬蟲 → build → 部署 GitHub Pages
-# Cron 為 UTC。美東 16:30 = 21:30 UTC（冬令）；夏令時同一 UTC 對應美東 17:30，仍已關盤。
+# 平日關盤後 1 小時：跑爬蟲 → build → 部署 GitHub Pages
+# 美東 17:00 = 21:00 UTC 夏令；冬令同 UTC 對應 16:00 ET，仍已關盤
 name: Daily scrape & deploy
 
 on:
   schedule:
-    # 週一～五 21:30 UTC（約美東收盤後 30 分～1.5 小時，依夏令與否）
-    - cron: "30 21 * * 1-5"
-  workflow_dispatch: {} # 可手動在 Actions 裡點 Run workflow 測試
+    - cron: "0 21 * * 1-5"   # 夏令 17:00 ET；冬令 16:00 ET（均已關盤）
+  workflow_dispatch: {}
 
 jobs:
   scrape-build-deploy:
@@ -16,6 +15,7 @@ jobs:
       contents: read
       pages: write
       id-token: write
+      issues: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -92,3 +92,13 @@ jobs:
       - id: deployment
         if: steps.trading_day.outputs.is_trading_day == 'true'
         uses: actions/deploy-pages@v4
+
+      - name: Notify on failure
+        if: failure()
+        run: |
+          gh issue create \
+            --title "⚠️ 盤後 Thematic Scanner 失敗 $(date -u +%Y-%m-%d)" \
+            --body "盤後爬蟲或部署失敗，網頁未更新。請查看：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --label "bug"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
