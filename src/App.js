@@ -961,6 +961,7 @@ const GapperScanner = () => {
   const [fMinPrice,  setFMinPrice]  = useState(5);
   const [fMinAvgVol, setFMinAvgVol] = useState(500000);
   const [fMinMktCap, setFMinMktCap] = useState(2000000000);
+  const [fMinDolVol, setFMinDolVol] = useState(50000000);
 
   useEffect(() => {
     (async () => {
@@ -984,47 +985,53 @@ const GapperScanner = () => {
   );
 
   const filtered = gapperData.gappers.filter(g =>
-    g.gap_pct    >= fMinGap &&
-    g.pm_volume  >= fMinPMVol &&
-    g.price      >= fMinPrice &&
-    (g.avg_vol_30d || 0) >= fMinAvgVol &&
-    (g.mkt_cap   || 0) >= fMinMktCap
+    g.gap_pct   >= fMinGap &&
+    g.pm_volume >= fMinPMVol &&
+    g.price     >= fMinPrice &&
+    (g.avg_vol_10d || 0)     >= fMinAvgVol &&
+    (g.mkt_cap   || 0)       >= fMinMktCap &&
+    (g.avg_dollar_vol || g.price * (g.avg_vol_10d || 0)) >= fMinDolVol
   );
 
-  const NumInput = ({ label, value, onChange, fmt }) => (
-    <div className="flex flex-col gap-1">
-      <label className="text-[10px] text-zinc-500">{label}</label>
+  const FInput = ({ label, value, onChange, hint }) => (
+    <div className="flex flex-col gap-1 min-w-0">
+      <label className="text-[10px] text-zinc-500 whitespace-nowrap">{label}</label>
       <input
         type="number"
         value={value}
         onChange={e => onChange(Number(e.target.value))}
-        className="w-28 px-2 py-1 text-xs font-mono bg-zinc-900 border border-zinc-700/60 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50"
+        className="w-full px-2 py-1.5 text-xs font-mono bg-zinc-900 border border-zinc-700/60 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50"
       />
-      {fmt && <span className="text-[10px] text-zinc-600">{fmt(value)}</span>}
+      <span className="text-[10px] text-zinc-600 h-3">{hint || ""}</span>
     </div>
   );
+
+  const resetFilters = () => {
+    setFMinGap(5); setFMinPMVol(200000); setFMinPrice(5);
+    setFMinAvgVol(500000); setFMinMktCap(2000000000); setFMinDolVol(50000000);
+  };
 
   return (
     <>
     <div className="max-w-[1800px] mx-auto px-4 py-4">
       {/* Filter Bar */}
       <div className="mb-4 p-3 bg-zinc-800/40 border border-zinc-700/40 rounded-lg">
-        <div className="flex flex-wrap items-end gap-4">
-          <NumInput label="Min Gap %" value={fMinGap} onChange={setFMinGap}/>
-          <NumInput label="Min PM Volume" value={fMinPMVol} onChange={setFMinPMVol} fmt={n => fmtNum(n)}/>
-          <NumInput label="Min Price ($)" value={fMinPrice} onChange={setFMinPrice}/>
-          <NumInput label="Min Avg Vol (30d)" value={fMinAvgVol} onChange={setFMinAvgVol} fmt={n => fmtNum(n)}/>
-          <NumInput label="Min Mkt Cap" value={fMinMktCap} onChange={setFMinMktCap} fmt={n => fmtCap(n)}/>
-          <button
-            onClick={() => { setFMinGap(5); setFMinPMVol(200000); setFMinPrice(5); setFMinAvgVol(500000); setFMinMktCap(2000000000); }}
-            className="self-end px-3 py-1 text-xs bg-zinc-700/50 border border-zinc-600/40 rounded text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition-colors"
-          >
+        <div className="grid grid-cols-6 gap-3 mb-2">
+          <FInput label="Min Gap (%)"         value={fMinGap}    onChange={setFMinGap}/>
+          <FInput label="Min PM Volume"        value={fMinPMVol}  onChange={setFMinPMVol}  hint={fmtNum(fMinPMVol)}/>
+          <FInput label="Min Price ($)"        value={fMinPrice}  onChange={setFMinPrice}/>
+          <FInput label="Min Avg Vol (10d)"    value={fMinAvgVol} onChange={setFMinAvgVol} hint={fmtNum(fMinAvgVol)}/>
+          <FInput label="Min Mkt Cap ($)"      value={fMinMktCap} onChange={setFMinMktCap} hint={fmtCap(fMinMktCap)}/>
+          <FInput label="Min Avg $ Vol"        value={fMinDolVol} onChange={setFMinDolVol} hint={fmtVol(fMinDolVol)}/>
+        </div>
+        <div className="flex items-center justify-between pt-1 border-t border-zinc-700/30">
+          <button onClick={resetFilters} className="text-[11px] px-2.5 py-1 bg-zinc-700/50 border border-zinc-600/40 rounded text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition-colors">
             Reset
           </button>
-          <div className="self-end ml-auto text-[11px] text-zinc-500">
+          <span className="text-[11px] text-zinc-500">
             Scanned: <span className="text-zinc-400">{gapperData.scan_time}</span>
             <span className="ml-3 text-zinc-600">{filtered.length} / {gapperData.gappers.length} shown</span>
-          </div>
+          </span>
         </div>
       </div>
 

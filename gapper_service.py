@@ -38,33 +38,39 @@ def fetch_gappers() -> list[dict]:
             Query()
             .select(
                 "name", "close", "premarket_change", "premarket_volume",
-                "market_cap_basic", "average_volume_30d_calc", "relative_volume_intraday|5"
+                "market_cap_basic", "average_volume_10d_calc", "relative_volume_intraday|5"
             )
             .where(
                 col("premarket_change") >= 5,
                 col("premarket_volume") >= 200000,
                 col("market_cap_basic") >= 2e9,
-                col("average_volume_30d_calc") >= 500000,
+                col("average_volume_10d_calc") >= 500000,
                 col("close") >= 5,
-                col("close") <= 200,
             )
             .order_by("premarket_change", ascending=False)
-            .limit(20)
+            .limit(40)
             .get_scanner_data()
         )
         if df is None or df.empty:
             return []
         results = []
         for _, row in df.iterrows():
-            rvol = float(row.get("relative_volume_intraday|5") or 0)
+            rvol     = float(row.get("relative_volume_intraday|5") or 0)
+            price    = round(float(row.get("close") or 0), 2)
+            avg_vol  = int(row.get("average_volume_10d_calc") or 0)
+            avg_dvol = round(price * avg_vol)
+            # Avg $ Vol ≥ $50M filter
+            if avg_dvol < 50_000_000:
+                continue
             results.append({
-                "ticker":      str(row.get("name", "")),
-                "price":       round(float(row.get("close") or 0), 2),
-                "gap_pct":     round(float(row.get("premarket_change") or 0), 2),
-                "pm_volume":   int(row.get("premarket_volume") or 0),
-                "avg_vol_30d": int(row.get("average_volume_30d_calc") or 0),
-                "mkt_cap":     int(row.get("market_cap_basic") or 0),
-                "rvol":        round(rvol, 2),
+                "ticker":       str(row.get("name", "")),
+                "price":        price,
+                "gap_pct":      round(float(row.get("premarket_change") or 0), 2),
+                "pm_volume":    int(row.get("premarket_volume") or 0),
+                "avg_vol_10d":  avg_vol,
+                "avg_dollar_vol": avg_dvol,
+                "mkt_cap":      int(row.get("market_cap_basic") or 0),
+                "rvol":         round(rvol, 2),
             })
         return results
     except Exception as e:
