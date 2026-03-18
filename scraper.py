@@ -198,6 +198,16 @@ def fetch_stock_detail(ticker: str) -> dict | None:
         for i in range(0, len(cells) - 1, 2):
             snap[cells[i].get_text(strip=True)] = cells[i + 1].get_text(strip=True)
 
+    # Sector and Industry are in tab-link anchors with hrefs like f=sec_* and f=ind_*
+    sector = ""
+    industry = ""
+    for a in soup.find_all("a", class_="tab-link"):
+        href = a.get("href", "")
+        if "f=sec_" in href:
+            sector = a.get_text(strip=True)
+        elif "f=ind_" in href:
+            industry = a.get_text(strip=True)
+
     try:
         price = float(snap.get("Price", "0").replace(",", ""))
         if price <= 0:
@@ -242,6 +252,8 @@ def fetch_stock_detail(ticker: str) -> dict | None:
             "avg_volume": avg_vol,
             "dist_52w_high": dist_52w_high,
             "rvol": rvol,
+            "sector": sector,
+            "industry": industry,
         }
         for fk, jk in PERF_MAP.items():
             result[jk] = parse_pct(snap.get(fk, ""))

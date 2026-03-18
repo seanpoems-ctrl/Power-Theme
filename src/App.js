@@ -1092,6 +1092,92 @@ const GapperScanner = () => {
   );
 };
 
+// ── Ticker Lookup ──
+const TickerLookup = ({ data }) => {
+  const [query, setQuery] = useState("");
+  const [open, setOpen] = useState(false);
+
+  const index = useMemo(() => {
+    if (!data) return {};
+    const map = {};
+    data.themes.forEach(t => {
+      const norm = normalizeTheme(t);
+      norm.subthemes.forEach(sub => {
+        sub.stocks.forEach(s => {
+          if (!map[s.ticker]) {
+            map[s.ticker] = { ticker: s.ticker, company: s.company, sector: s.sector || "", industry: s.industry || "", appearances: [] };
+          }
+          map[s.ticker].appearances.push({ theme: norm.name, subtheme: sub.name });
+        });
+      });
+    });
+    return map;
+  }, [data]);
+
+  const upper = query.trim().toUpperCase();
+  const result = upper.length >= 1 ? (index[upper] || null) : null;
+  const noMatch = upper.length >= 1 && !result;
+
+  return (
+    <div className="relative">
+      <div className="relative">
+        <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-500"/>
+        <input
+          type="text"
+          value={query}
+          onChange={e => { setQuery(e.target.value); setOpen(true); }}
+          onFocus={() => setOpen(true)}
+          onBlur={() => setTimeout(() => setOpen(false), 150)}
+          placeholder="Ticker lookup…"
+          className="w-36 pl-7 pr-3 py-1.5 text-xs bg-zinc-800/60 border border-zinc-700/50 rounded-md text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-blue-500/50 uppercase"
+        />
+        {query && <button onMouseDown={e => { e.preventDefault(); setQuery(""); setOpen(false); }} className="absolute right-2 top-1/2 -translate-y-1/2"><X size={11} className="text-zinc-500"/></button>}
+      </div>
+      {open && upper.length >= 1 && (
+        <div className="absolute top-full right-0 mt-1.5 w-72 bg-zinc-900 border border-zinc-700/60 rounded-lg shadow-2xl z-50 p-3">
+          {result ? (
+            <div className="space-y-2">
+              <div className="flex items-baseline gap-2">
+                <span className="text-sm font-bold text-zinc-100">{result.ticker}</span>
+                {result.company && <span className="text-[11px] text-zinc-500 truncate">{result.company}</span>}
+              </div>
+              <div className="space-y-1.5">
+                {[
+                  { label: "Sector",   value: result.sector,   color: "text-zinc-200" },
+                  { label: "Industry", value: result.industry, color: "text-zinc-200" },
+                ].map(({ label, value, color }) => value ? (
+                  <div key={label} className="flex gap-2 text-xs">
+                    <span className="text-zinc-500 w-16 flex-shrink-0">{label}</span>
+                    <span className={color}>{value}</span>
+                  </div>
+                ) : null)}
+                {result.appearances.length > 0 && (
+                  <div className="mt-2 pt-2 border-t border-zinc-800 space-y-2">
+                    {result.appearances.map((a, i) => (
+                      <div key={i} className="space-y-1">
+                        <div className="flex gap-2 text-xs">
+                          <span className="text-zinc-500 w-16 flex-shrink-0">Theme</span>
+                          <span className="text-blue-300 font-medium">{a.theme}</span>
+                        </div>
+                        <div className="flex gap-2 text-xs">
+                          <span className="text-zinc-500 w-16 flex-shrink-0">Sub-Theme</span>
+                          <span className="text-violet-300">{a.subtheme}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : noMatch ? (
+            <p className="text-xs text-zinc-500">"{upper}" not found in current dataset</p>
+          ) : null}
+        </div>
+      )}
+    </div>
+  );
+};
+
 
 export default function App() {
   const [tab, setTab] = useState("scanner");
@@ -1222,6 +1308,7 @@ export default function App() {
               <span className="text-zinc-500">{unique.length} tickers</span>
             </div>
             <div className="flex-1"/>
+            {data && <TickerLookup data={data}/>}
             <div className="relative">
               <Search size={13} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-500"/>
               <input type="text" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search..." className="w-40 pl-7 pr-3 py-1.5 text-xs bg-zinc-800/60 border border-zinc-700/50 rounded-md text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-zinc-600"/>
