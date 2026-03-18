@@ -166,11 +166,34 @@ def fetch_finviz_data(ticker: str) -> dict:
 
 
 # ──────────────────────────────────────────────────────────────
+# Last Earnings Date (yfinance)
+# ──────────────────────────────────────────────────────────────
+
+def fetch_last_earnings_date(ticker: str) -> str | None:
+    """Return the most recent past earnings date as YYYY-MM-DD, or None if unavailable."""
+    try:
+        import yfinance as yf
+        from datetime import date as _date
+        t = yf.Ticker(ticker)
+        ed = t.earnings_dates
+        if ed is None or ed.empty:
+            return None
+        today = _date.today()
+        past = ed[ed.index.date < today]
+        if past.empty:
+            return None
+        return past.index[0].strftime("%Y-%m-%d")
+    except Exception:
+        return None
+
+
+# ──────────────────────────────────────────────────────────────
 # Google News RSS
 # ──────────────────────────────────────────────────────────────
 
-def fetch_news_headlines(ticker: str) -> list[str]:
-    """Fetch news headlines from the last 24 hours for a ticker via Google News RSS."""
+def fetch_news_headlines(ticker: str) -> list[dict]:
+    """Fetch news headlines from the last 24 hours for a ticker via Google News RSS.
+    Returns list of {title, date} dicts so Gemini knows when each article was published."""
     try:
         from xml.etree import ElementTree as ET_xml
         from email.utils import parsedate_to_datetime
@@ -189,9 +212,10 @@ def fetch_news_headlines(ticker: str) -> list[str]:
                 pub_dt = parsedate_to_datetime(pub_date_str)
                 if pub_dt < cutoff:
                     continue
+                date_label = pub_dt.strftime("%Y-%m-%d %H:%M UTC")
             except Exception:
                 continue  # Skip articles with unparseable dates to avoid stale news
-            headlines.append(title)
+            headlines.append({"title": title, "date": date_label})
             if len(headlines) >= 5:
                 break
         return headlines
@@ -241,7 +265,7 @@ Rules: No emojis. No markdown headers. Start every section with • **Title** on
 """
 
 
-def analyze_with_gemini(ticker: str, headlines: list[str], rvol: float) -> dict:
+def analyze_with_gemini(ticker: str, headlines: list[str], rvol: float, last_earnings_date: str | None = None) -> dict:
     """Use Gemini 2.5 Flash to categorize catalyst, assign grade, and generate detailed analysis."""
     if not GEMINI_API_KEY:
         return _fallback_analysis(ticker, headlines, rvol)
@@ -257,15 +281,25 @@ def analyze_with_gemini(ticker: str, headlines: list[str], rvol: float) -> dict:
         client = genai.Client(api_key=GEMINI_API_KEY)
 
         today_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        headlines_text = "\n".join(f"- {h}" for h in headlines)
-        prompt = f"""You are an institutional trading analyst. Today's date is {today_str}. Analyze these news headlines for {ticker} that were published in the last 24 hours:
+        headlines_text = "\n".join(f"- [{h['date']}] {h['title']}" if isinstance(h, dict) else f"- {h}" for h in headlines)
+        earnings_note = ""
+        if last_earnings_date:
+            from datetime import date as _date, timedelta as _td
+            last_dt = _date.fromisoformat(last_earnings_date)
+            days_ago = (_date.today() - last_dt).days
+            if days_ago > 5:
+                earnings_note = f"\nIMPORTANT: {ticker}'s last earnings report was on {last_earnings_date} ({days_ago} days ago). Do NOT classify as Earnings — that is too old to be today's catalyst."
+            else:
+                earnings_note = f"\nNote: {ticker}'s last earnings report was on {last_earnings_date} ({days_ago} days ago) — recent enough to be a valid Earnings catalyst."
+        prompt = f"""You are an institutional trading analyst. Today's date is {today_str}.{earnings_note}
+Analyze these news headlines for {ticker} that were published in the last 24 hours (publication date shown in brackets):
 
 {headlines_text}
 
 Classify the PRIMARY catalyst and provide a detailed, structured analysis.
 
 CATEGORIES (choose exactly one):
-- Earnings: Company reported quarterly/annual results WITHIN THE LAST 3 DAYS. If the earnings date is more than 3 days ago, do NOT classify as Earnings — use Thematic Narratives or Others instead.
+- Earnings: Company reported quarterly/annual results within the last 5 days. Check the IMPORTANT note above about the actual earnings date before choosing this category.
 - Upgrade: Analyst raised rating or price target
 - FDA: FDA approval, rejection, clinical trial result, or drug news
 - Thematic Narratives: Sector rotation, macro theme, industry trend
@@ -339,9 +373,10 @@ Respond in this exact JSON format only, no extra text:
         return _fallback_analysis(ticker, headlines, rvol)
 
 
-def _fallback_analysis(ticker: str, headlines: list[str], rvol: float) -> dict:
+def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
     """Rule-based fallback if Gemini unavailable."""
-    text = " ".join(headlines).lower()
+    titles = [h["title"] if isinstance(h, dict) else h for h in headlines]
+    text = " ".join(titles).lower()
     if any(w in text for w in ["earnings", "beat", "revenue", "eps"]):
         cat = "Earnings"
     elif any(w in text for w in ["fda", "clinical", "trial", "drug", "approval"]):
@@ -357,12 +392,12 @@ def _fallback_analysis(ticker: str, headlines: list[str], rvol: float) -> dict:
     label, strategy = HYPOTHESIS_RULES.get(cat, HYPOTHESIS_RULES["Others"])
     return {
         "category":        cat,
-        "reasoning":       headlines[0] if headlines else "No catalyst identified.",
+        "reasoning":       titles[0] if titles else "No catalyst identified.",
         "hypothesis":      f"{label} — {strategy}",
         "conviction":      50,
         "grade":           "B",
         "finviz_theme":    "—",
-        "analysis_details": headlines[0] if headlines else "No catalyst identified.",
+        "analysis_details": titles[0] if titles else "No catalyst identified.",
     }
 
 
@@ -389,14 +424,17 @@ def main():
         # News headlines
         headlines = fetch_news_headlines(ticker)
 
+        # Last earnings date (to prevent misclassification of old earnings news)
+        last_earnings_date = fetch_last_earnings_date(ticker)
+
         # AI analysis (includes finviz_theme classification)
-        analysis = analyze_with_gemini(ticker, headlines, stock["rvol"])
+        analysis = analyze_with_gemini(ticker, headlines, stock["rvol"], last_earnings_date)
 
         time.sleep(1)  # rate limit
         output.append({
             **stock,
             **analysis,
-            "headlines":    headlines[:3],
+            "headlines":    [h["title"] if isinstance(h, dict) else h for h in headlines[:3]],
             "float_shares": fv.get("float_shares"),
             "short_float":  fv.get("short_float"),
             "daily_pct":    fv.get("daily_pct"),
