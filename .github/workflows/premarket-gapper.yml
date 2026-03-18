@@ -1,10 +1,9 @@
-# 盤前掃描：開盤前 30 分鐘（09:00 AM ET = 13:00 UTC 夏令 / 14:00 UTC 冬令）
+# 盤前掃描：13:05 UTC = 9:05 AM EDT (夏令) / 8:05 AM EST (冬令)，兩季都在盤前
 name: Pre-Market Gapper Scan
 
 on:
   schedule:
-    - cron: "0 13 * * 1-5"   # 夏令 09:00 ET；冬令 08:00 ET（仍在盤前）
-    - cron: "0 14 * * 1-5"   # 冬令 09:00 ET 備援
+    - cron: "5 13 * * 1-5"   # 9:05 AM EDT / 8:05 AM EST，盤前都適用
   workflow_dispatch: {}
 
 jobs:
@@ -14,7 +13,7 @@ jobs:
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     permissions:
-      contents: read
+      contents: write
       pages: write
       id-token: write
       issues: write
@@ -53,6 +52,16 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python gapper_service.py
+
+      # 把最新的 gapper_data.json 存回 repo，讓 daily scrape build 也能用到新資料
+      - name: Commit gapper data to repo
+        if: steps.trading_day.outputs.is_trading_day == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/gapper_data.json
+          git diff --staged --quiet || git commit -m "data: gapper_data $(date -u +%Y-%m-%d) [skip ci]"
+          git push
 
       - uses: actions/setup-node@v4
         if: steps.trading_day.outputs.is_trading_day == 'true'

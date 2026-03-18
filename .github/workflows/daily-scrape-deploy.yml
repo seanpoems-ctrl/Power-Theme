@@ -1,11 +1,10 @@
-# 平日關盤後 1.5 小時：跑爬蟲 → build → 部署 GitHub Pages
-# 美東 17:30 = 21:30 UTC 夏令；冬令 17:30 EST = 22:30 UTC
+# 平日關盤後 1.5 小時：跑爬蟲 → commit JSON → build → 部署 GitHub Pages
+# 21:30 UTC = 17:30 EDT (夏令) / 16:30 EST (冬令)，兩個季節都在盤後
 name: Daily scrape & deploy
 
 on:
   schedule:
-    - cron: "30 21 * * 1-5"  # 夏令 17:30 ET（關盤後 1.5h）
-    - cron: "30 22 * * 1-5"  # 冬令 17:30 ET 備援
+    - cron: "30 21 * * 1-5"  # 17:30 EDT / 16:30 EST，盤後都適用
   workflow_dispatch: {}
 
 jobs:
@@ -15,7 +14,7 @@ jobs:
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     permissions:
-      contents: read
+      contents: write
       pages: write
       id-token: write
       issues: write
@@ -69,6 +68,16 @@ jobs:
           done
           echo "Scraper failed after 4 attempts"
           exit 1
+
+      # 把最新的 thematic_data.json 存回 repo，讓 gapper build 也能用到新資料
+      - name: Commit thematic data to repo
+        if: steps.trading_day.outputs.is_trading_day == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/thematic_data.json
+          git diff --staged --quiet || git commit -m "data: thematic_data $(date -u +%Y-%m-%d) [skip ci]"
+          git push
 
       - uses: actions/setup-node@v4
         if: steps.trading_day.outputs.is_trading_day == 'true'
