@@ -955,6 +955,13 @@ const GapperScanner = () => {
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState(null);
 
+  // Filter state (mirrors the default screener params)
+  const [fMinGap,    setFMinGap]    = useState(5);
+  const [fMinPMVol,  setFMinPMVol]  = useState(200000);
+  const [fMinPrice,  setFMinPrice]  = useState(5);
+  const [fMinAvgVol, setFMinAvgVol] = useState(500000);
+  const [fMinMktCap, setFMinMktCap] = useState(2000000000);
+
   useEffect(() => {
     (async () => {
       setLoading(true);
@@ -976,15 +983,56 @@ const GapperScanner = () => {
     </div>
   );
 
+  const filtered = gapperData.gappers.filter(g =>
+    g.gap_pct    >= fMinGap &&
+    g.pm_volume  >= fMinPMVol &&
+    g.price      >= fMinPrice &&
+    (g.avg_vol_30d || 0) >= fMinAvgVol &&
+    (g.mkt_cap   || 0) >= fMinMktCap
+  );
+
+  const NumInput = ({ label, value, onChange, fmt }) => (
+    <div className="flex flex-col gap-1">
+      <label className="text-[10px] text-zinc-500">{label}</label>
+      <input
+        type="number"
+        value={value}
+        onChange={e => onChange(Number(e.target.value))}
+        className="w-28 px-2 py-1 text-xs font-mono bg-zinc-900 border border-zinc-700/60 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50"
+      />
+      {fmt && <span className="text-[10px] text-zinc-600">{fmt(value)}</span>}
+    </div>
+  );
+
   return (
     <>
     <div className="max-w-[1800px] mx-auto px-4 py-4">
-      <div className="flex items-center justify-between mb-4">
-        <div>
-          <h2 className="text-sm font-bold text-zinc-100 tracking-wide uppercase">Institutional Gappers</h2>
-          <p className="text-[11px] text-zinc-600 mt-0.5">Scanned: {gapperData.scan_time}</p>
+      {/* Filter Bar */}
+      <div className="mb-4 p-3 bg-zinc-800/40 border border-zinc-700/40 rounded-lg">
+        <div className="flex flex-wrap items-end gap-4">
+          <NumInput label="Min Gap %" value={fMinGap} onChange={setFMinGap}/>
+          <NumInput label="Min PM Volume" value={fMinPMVol} onChange={setFMinPMVol} fmt={n => fmtNum(n)}/>
+          <NumInput label="Min Price ($)" value={fMinPrice} onChange={setFMinPrice}/>
+          <NumInput label="Min Avg Vol (30d)" value={fMinAvgVol} onChange={setFMinAvgVol} fmt={n => fmtNum(n)}/>
+          <NumInput label="Min Mkt Cap" value={fMinMktCap} onChange={setFMinMktCap} fmt={n => fmtCap(n)}/>
+          <button
+            onClick={() => { setFMinGap(5); setFMinPMVol(200000); setFMinPrice(5); setFMinAvgVol(500000); setFMinMktCap(2000000000); }}
+            className="self-end px-3 py-1 text-xs bg-zinc-700/50 border border-zinc-600/40 rounded text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition-colors"
+          >
+            Reset
+          </button>
+          <div className="self-end ml-auto text-[11px] text-zinc-500">
+            Scanned: <span className="text-zinc-400">{gapperData.scan_time}</span>
+            <span className="ml-3 text-zinc-600">{filtered.length} / {gapperData.gappers.length} shown</span>
+          </div>
         </div>
-        <span className="text-[10px] text-zinc-600 bg-zinc-800/60 border border-zinc-700/40 px-2 py-1 rounded">{gapperData.gappers.length} gappers found</span>
+      </div>
+
+      <div className="flex items-center justify-between mb-3">
+        <h2 className="text-sm font-bold text-zinc-100 tracking-wide uppercase">Institutional Gappers</h2>
+        {filtered.length === 0 && (
+          <p className="text-xs text-zinc-500">No gappers match current filters — try loosening the criteria</p>
+        )}
       </div>
 
       <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
@@ -1024,7 +1072,7 @@ const GapperScanner = () => {
             </tr>
           </thead>
           <tbody>
-            {gapperData.gappers.map((g, i) => (
+            {filtered.map((g, i) => (
               <tr key={g.ticker + i} className="border-t border-zinc-800/40 hover:bg-zinc-800/20 transition-colors align-top">
                 {/* + button */}
                 <td className="py-2 px-1 text-center">
