@@ -190,7 +190,7 @@ def fetch_news_headlines(ticker: str) -> list[str]:
                 if pub_dt < cutoff:
                     continue
             except Exception:
-                pass  # If date can't be parsed, include it anyway
+                continue  # Skip articles with unparseable dates to avoid stale news
             headlines.append(title)
             if len(headlines) >= 5:
                 break
@@ -256,15 +256,16 @@ def analyze_with_gemini(ticker: str, headlines: list[str], rvol: float) -> dict:
         from google import genai
         client = genai.Client(api_key=GEMINI_API_KEY)
 
+        today_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
         headlines_text = "\n".join(f"- {h}" for h in headlines)
-        prompt = f"""You are an institutional trading analyst. Analyze these news headlines for {ticker}:
+        prompt = f"""You are an institutional trading analyst. Today's date is {today_str}. Analyze these news headlines for {ticker} that were published in the last 24 hours:
 
 {headlines_text}
 
 Classify the PRIMARY catalyst and provide a detailed, structured analysis.
 
 CATEGORIES (choose exactly one):
-- Earnings: Company reported quarterly/annual results (EPS/revenue beat or miss)
+- Earnings: Company reported quarterly/annual results WITHIN THE LAST 3 DAYS. If the earnings date is more than 3 days ago, do NOT classify as Earnings — use Thematic Narratives or Others instead.
 - Upgrade: Analyst raised rating or price target
 - FDA: FDA approval, rejection, clinical trial result, or drug news
 - Thematic Narratives: Sector rotation, macro theme, industry trend
