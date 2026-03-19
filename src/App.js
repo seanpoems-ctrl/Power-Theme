@@ -1357,70 +1357,74 @@ export default function App() {
               <span className="text-[11px] text-zinc-600">Updated {data?.last_updated}</span>
             </div>
           </div>
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="flex items-center gap-3 text-[11px]">
-              <span className="text-zinc-500">{filtered.length} themes</span>
-              <span className="text-zinc-600">·</span>
-              <span className="text-zinc-500">{totalSubs} sub-themes</span>
-              <span className="text-zinc-600">·</span>
-              <span className="text-zinc-500">{unique.length} tickers</span>
-            </div>
-            <div className="flex-1"/>
-            <SearchBar data={data} search={search} setSearch={setSearch}/>
-            <button onClick={()=>setShowFP(!showFP)} className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-md border transition-colors ${filtersOn?'bg-blue-500/15 border-blue-500/30 text-blue-400':'bg-zinc-800/60 border-zinc-700/50 text-zinc-400'}`}>
-              <SlidersHorizontal size={12}/> Filters
-            </button>
-            <div className="flex items-center gap-1 border border-zinc-700/50 rounded-md overflow-hidden">
-              <span className="px-2 text-[10px] text-zinc-600 bg-zinc-800/60">vs SPY</span>
-              {RS_SPY_KEYS.map(k => (
-                <button key={k.key} onClick={() => setRsSPYKey(k.key)} className={`px-2 py-1.5 text-[11px] transition-colors ${rsSPYKey === k.key ? 'bg-blue-500/25 text-blue-300' : 'bg-zinc-800/60 text-zinc-500 hover:text-zinc-300'}`}>{k.label}</button>
-              ))}
-            </div>
-            <div className="flex items-center gap-1.5">
-              <select value={sortKey} onChange={e=>setSortKey(e.target.value)} className="text-[11px] bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1.5 text-zinc-300 focus:outline-none">
-                <option value="rs_52w">Sort: RS</option>
-                <option value="perf_1d">Sort: 1D</option>
-                <option value="perf_1w">Sort: 1W</option>
-                <option value="perf_1m">Sort: 1M</option>
-                <option value="perf_3m">Sort: 3M</option>
-                <option value="perf_6m">Sort: 6M</option>
-                <option value="dollar_volume">Sort: $ Vol</option>
-                <option value="adr_pct">Sort: ADR</option>
-              </select>
-              <button onClick={()=>setSortDir(d=>d==="desc"?"asc":"desc")} className="text-[11px] px-2 py-1.5 bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-400 hover:text-zinc-200">{sortDir==="desc"?"↓":"↑"}</button>
-            </div>
-          </div>
-          {showFP && (
-            <div className="mt-2.5 p-3 bg-zinc-800/40 rounded-lg border border-zinc-700/40 flex flex-wrap items-end gap-4">
-              <label className="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" checked={filtersOn} onChange={()=>setFiltersOn(!filtersOn)} className="rounded"/>
-                <span className="text-xs text-zinc-300">Enable</span>
-              </label>
-              <div>
-                <label className="text-[10px] text-zinc-500 block mb-1">Min $ Vol</label>
-                <select value={filterDolVol} onChange={e=>setFilterDolVol(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
-                  {[50,100,250,500].map(v=><option key={v} value={v}>${v}M</option>)}
-                </select>
+          {tab === "scanner" && (
+            <>
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="flex items-center gap-3 text-[11px]">
+                <span className="text-zinc-500">{filtered.length} themes</span>
+                <span className="text-zinc-600">·</span>
+                <span className="text-zinc-500">{totalSubs} sub-themes</span>
+                <span className="text-zinc-600">·</span>
+                <span className="text-zinc-500">{unique.length} tickers</span>
               </div>
-              <div>
-                <label className="text-[10px] text-zinc-500 block mb-1">Min ADR%</label>
-                <select value={filterADR} onChange={e=>setFilterADR(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
-                  {[2,3,4,5,7].map(v=><option key={v} value={v}>{v}%</option>)}
-                </select>
+              <div className="flex-1"/>
+              <SearchBar data={data} search={search} setSearch={setSearch}/>
+              <button onClick={()=>setShowFP(!showFP)} className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-md border transition-colors ${filtersOn?'bg-blue-500/15 border-blue-500/30 text-blue-400':'bg-zinc-800/60 border-zinc-700/50 text-zinc-400'}`}>
+                <SlidersHorizontal size={12}/> Filters
+              </button>
+              <div className="flex items-center gap-1 border border-zinc-700/50 rounded-md overflow-hidden">
+                <span className="px-2 text-[10px] text-zinc-600 bg-zinc-800/60">vs SPY</span>
+                {RS_SPY_KEYS.map(k => (
+                  <button key={k.key} onClick={() => setRsSPYKey(k.key)} className={`px-2 py-1.5 text-[11px] transition-colors ${rsSPYKey === k.key ? 'bg-blue-500/25 text-blue-300' : 'bg-zinc-800/60 text-zinc-500 hover:text-zinc-300'}`}>{k.label}</button>
+                ))}
               </div>
-              <div>
-                <label className="text-[10px] text-zinc-500 block mb-1">Min RS</label>
-                <select value={filterRS} onChange={e=>setFilterRS(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
-                  {[30,50,70,80,90].map(v=><option key={v} value={v}>{v}+</option>)}
+              <div className="flex items-center gap-1.5">
+                <select value={sortKey} onChange={e=>setSortKey(e.target.value)} className="text-[11px] bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1.5 text-zinc-300 focus:outline-none">
+                  <option value="rs_52w">Sort: RS</option>
+                  <option value="perf_1d">Sort: 1D</option>
+                  <option value="perf_1w">Sort: 1W</option>
+                  <option value="perf_1m">Sort: 1M</option>
+                  <option value="perf_3m">Sort: 3M</option>
+                  <option value="perf_6m">Sort: 6M</option>
+                  <option value="dollar_volume">Sort: $ Vol</option>
+                  <option value="adr_pct">Sort: ADR</option>
                 </select>
-              </div>
-              <div>
-                <label className="text-[10px] text-zinc-500 block mb-1">Max Dist 52W Hi</label>
-                <select value={filterDist52w} onChange={e=>setFilterDist52w(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
-                  {[5,10,15,20,30].map(v=><option key={v} value={v}>within {v}%</option>)}
-                </select>
+                <button onClick={()=>setSortDir(d=>d==="desc"?"asc":"desc")} className="text-[11px] px-2 py-1.5 bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-400 hover:text-zinc-200">{sortDir==="desc"?"↓":"↑"}</button>
               </div>
             </div>
+            {showFP && (
+              <div className="mt-2.5 p-3 bg-zinc-800/40 rounded-lg border border-zinc-700/40 flex flex-wrap items-end gap-4">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" checked={filtersOn} onChange={()=>setFiltersOn(!filtersOn)} className="rounded"/>
+                  <span className="text-xs text-zinc-300">Enable</span>
+                </label>
+                <div>
+                  <label className="text-[10px] text-zinc-500 block mb-1">Min $ Vol</label>
+                  <select value={filterDolVol} onChange={e=>setFilterDolVol(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
+                    {[50,100,250,500].map(v=><option key={v} value={v}>${v}M</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="text-[10px] text-zinc-500 block mb-1">Min ADR%</label>
+                  <select value={filterADR} onChange={e=>setFilterADR(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
+                    {[2,3,4,5,7].map(v=><option key={v} value={v}>{v}%</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="text-[10px] text-zinc-500 block mb-1">Min RS</label>
+                  <select value={filterRS} onChange={e=>setFilterRS(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
+                    {[30,50,70,80,90].map(v=><option key={v} value={v}>{v}+</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="text-[10px] text-zinc-500 block mb-1">Max Dist 52W Hi</label>
+                  <select value={filterDist52w} onChange={e=>setFilterDist52w(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
+                    {[5,10,15,20,30].map(v=><option key={v} value={v}>within {v}%</option>)}
+                  </select>
+                </div>
+              </div>
+            )}
+            </>
           )}
         </div>
       </div>
