@@ -48,11 +48,11 @@ const PERF_KEYS = [
 ];
 
 const LB_KEYS = [
-  { key: "perf_1d", label: "1D", hint: "Flash" },
-  { key: "perf_1w", label: "1W", hint: "" },
-  { key: "perf_1m", label: "1M", hint: "" },
-  { key: "perf_3m", label: "3M", hint: "" },
-  { key: "perf_6m", label: "6M", hint: "Structural" },
+  { key: "perf_1d", label: "1D" },
+  { key: "perf_1w", label: "1W" },
+  { key: "perf_1m", label: "1M" },
+  { key: "perf_3m", label: "3M" },
+  { key: "perf_6m", label: "6M" },
 ];
 
 function sparklineSeries(s) {
@@ -440,64 +440,114 @@ function normalizeThemeRaw(t) {
   return { ...t, subthemes: [{ name: t.name, stocks: t.stocks || [] }] };
 }
 
-const Leaderboard = ({ themes, themeRankings, perfKey, onPerfKeyChange }) => {
-  const ranked = useMemo(() => {
-    // Use theme_rankings (all themes) if available, otherwise fall back to detailed themes
-    if (themeRankings && themeRankings.length > 0) {
-      return [...themeRankings]
-        .map(t => ({ name: t.name, avg: t[perfKey] || 0, subs: null, stocks: t.n }))
-        .sort((a, b) => b.avg - a.avg)
-        .slice(0, 5);
-    }
-    return [...themes]
-      .map(t => {
-        const norm = normalizeThemeRaw(t);
-        const allStocks = norm.subthemes.flatMap(s => s.stocks);
-        const vals = allStocks.map(s => s[perfKey]).filter(v => v != null);
-        const avg = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
-        return { name: norm.name, avg, subs: norm.subthemes.length, stocks: allStocks.length };
-      })
-      .sort((a, b) => b.avg - a.avg)
-      .slice(0, 5);
-  }, [themes, themeRankings, perfKey]);
+const PerfCellLB = ({ val }) => {
+  if (val == null) return <td className="px-2 py-1.5 text-center text-[10px] text-zinc-600">—</td>;
+  const color = val > 0 ? 'text-emerald-400' : val < 0 ? 'text-red-400' : 'text-zinc-400';
+  const bg = val > 5 ? 'bg-emerald-500/10' : val < -5 ? 'bg-red-500/10' : '';
+  return <td className={`px-2 py-1.5 text-right text-[11px] font-mono font-medium ${color} ${bg}`}>{val > 0 ? '+' : ''}{val.toFixed(1)}%</td>;
+};
 
-  const maxAvg = Math.max(...ranked.map(t => Math.abs(t.avg)), 0.1);
+const Leaderboard = ({ themeRankings, industryRankings }) => {
+  const [sortKey, setSortKey] = useState("rs_score");
+  const [expanded, setExpanded] = useState(null);
+  const [showAll, setShowAll] = useState(false);
+
+  const ranked = useMemo(() => {
+    if (!themeRankings || !themeRankings.length) return [];
+    return [...themeRankings].sort((a, b) => (b[sortKey] || 0) - (a[sortKey] || 0));
+  }, [themeRankings, sortKey]);
+
+  const visible = showAll ? ranked : ranked.slice(0, 10);
+
+  const industryMap = useMemo(() => {
+    if (!industryRankings) return {};
+    const m = {};
+    for (const ind of industryRankings) {
+      const p = ind.parent_theme;
+      if (!m[p]) m[p] = [];
+      m[p].push(ind);
+    }
+    // Sort each group by composite
+    for (const k of Object.keys(m)) {
+      m[k].sort((a, b) => {
+        const sa = (a.perf_1w||0)*0.2 + (a.perf_1m||0)*0.3 + (a.perf_3m||0)*0.3 + (a.perf_6m||0)*0.2;
+        const sb = (b.perf_1w||0)*0.2 + (b.perf_1m||0)*0.3 + (b.perf_3m||0)*0.3 + (b.perf_6m||0)*0.2;
+        return sb - sa;
+      });
+    }
+    return m;
+  }, [industryRankings]);
+
+  const SortHeader = ({ k, label, w }) => (
+    <th onClick={() => setSortKey(k)}
+      className={`px-2 py-2 text-right cursor-pointer select-none ${w || 'w-14'} ${sortKey === k ? 'text-blue-400' : 'text-zinc-500 hover:text-zinc-300'}`}>
+      <span className="text-[10px] font-semibold uppercase tracking-wider">{label}</span>
+      {sortKey === k && <span className="ml-0.5 text-[8px]">▼</span>}
+    </th>
+  );
 
   return (
-    <div className="h-full p-4 bg-zinc-900/60 rounded-xl border border-zinc-800/60 flex flex-col">
-      <div className="flex items-center justify-between mb-3 flex-shrink-0">
+    <div className="p-4 bg-zinc-900/60 rounded-xl border border-zinc-800/60">
+      <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <BarChart3 size={13} className="text-blue-400"/>
-          <span className="text-xs font-semibold text-zinc-300">Theme Leaderboard</span>
-          <span className="text-[10px] text-zinc-600">Top 5</span>
-        </div>
-        <div className="flex items-center gap-1">
-          {LB_KEYS.map(k => (
-            <button key={k.key} onClick={() => onPerfKeyChange(k.key)}
-              className={`px-2.5 py-1 text-[11px] font-medium rounded transition-colors ${perfKey === k.key ? 'bg-blue-500/25 text-blue-300 border border-blue-500/40' : 'bg-zinc-800/60 text-zinc-500 border border-zinc-700/30 hover:text-zinc-300'}`}>
-              {k.label}{k.hint ? <span className="ml-1 text-[9px] opacity-60">{k.hint}</span> : null}
-            </button>
-          ))}
+          <span className="text-xs font-semibold text-zinc-300">Industry Leaderboard</span>
+          <span className="text-[10px] text-zinc-600">{ranked.length} themes</span>
         </div>
       </div>
-      <div className="flex flex-col gap-2 flex-1 justify-between">
-        {ranked.map((t, i) => (
-          <div key={t.name} className={`flex items-center gap-3 px-3 py-2.5 rounded-lg border flex-1 ${i === 0 ? 'bg-blue-500/10 border-blue-500/30' : 'bg-zinc-800/40 border-zinc-700/30'}`}>
-            <span className={`text-xs font-bold font-mono w-6 flex-shrink-0 ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>#{i+1}</span>
-            <span className="text-[11px] font-semibold text-zinc-200 flex-1 leading-snug">{t.name}</span>
-            <div className="flex items-center gap-3 flex-shrink-0">
-              <div className="w-24 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
-                <div className="h-full rounded-full transition-all duration-500"
-                  style={{ width: `${Math.abs(t.avg) / maxAvg * 100}%`, background: t.avg >= 0 ? '#34d399' : '#f87171' }}/>
-              </div>
-              <span className={`text-sm font-bold font-mono w-16 text-right ${t.avg >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                {t.avg >= 0 ? '+' : ''}{t.avg.toFixed(1)}%
-              </span>
-              <span className="text-[10px] text-zinc-600 w-20 text-right">{t.subs != null ? `${t.subs} sub · ` : ''}{t.stocks}s</span>
-            </div>
-          </div>
-        ))}
+      <div className="overflow-x-auto">
+        <table className="w-full text-left">
+          <thead>
+            <tr className="border-b border-zinc-800/60">
+              <th className="px-2 py-2 w-6 text-[10px] text-zinc-600">#</th>
+              <th className="px-2 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Theme</th>
+              {LB_KEYS.map(k => <SortHeader key={k.key} k={k.key} label={k.label} />)}
+              <SortHeader k="rs_score" label="RS" w="w-16" />
+            </tr>
+          </thead>
+          <tbody>
+            {visible.map((t, i) => {
+              const isExpanded = expanded === t.name;
+              const industries = industryMap[t.name] || [];
+              return (<>
+                <tr key={t.name}
+                  onClick={() => setExpanded(isExpanded ? null : t.name)}
+                  className={`border-b border-zinc-800/30 cursor-pointer transition-colors ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
+                  <td className={`px-2 py-2 text-[11px] font-bold font-mono ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i+1}</td>
+                  <td className="px-2 py-2">
+                    <div className="flex items-center gap-1.5">
+                      {isExpanded ? <ChevronDown size={11} className="text-zinc-500 flex-shrink-0"/> : <ChevronRight size={11} className="text-zinc-600 flex-shrink-0"/>}
+                      <span className="text-[11px] font-semibold text-zinc-200">{t.name}</span>
+                      {t.stage2_momentum && <span className="px-1.5 py-0.5 text-[8px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full leading-none">STAGE 2</span>}
+                      <span className="text-[9px] text-zinc-600">{t.n_industries} ind</span>
+                    </div>
+                  </td>
+                  {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
+                  <td className={`px-2 py-1.5 text-right text-[11px] font-mono font-bold ${t.rs_score > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                    {t.rs_score > 0 ? '+' : ''}{t.rs_score.toFixed(1)}
+                  </td>
+                </tr>
+                {isExpanded && industries.map(ind => (
+                  <tr key={ind.name} className="bg-zinc-800/20 border-b border-zinc-800/20">
+                    <td className="px-2 py-1.5"></td>
+                    <td className="px-2 py-1.5 pl-8">
+                      <span className="text-[10px] text-zinc-400">{ind.name}</span>
+                    </td>
+                    {LB_KEYS.map(k => <PerfCellLB key={k.key} val={ind[k.key]}/>)}
+                    <td className="px-2 py-1.5"></td>
+                  </tr>
+                ))}
+              </>);
+            })}
+          </tbody>
+        </table>
       </div>
+      {ranked.length > 10 && (
+        <button onClick={() => setShowAll(!showAll)}
+          className="mt-2 w-full py-1.5 text-[10px] text-zinc-500 hover:text-zinc-300 bg-zinc-800/30 rounded transition-colors">
+          {showAll ? 'Show top 10' : `Show all ${ranked.length} themes`}
+        </button>
+      )}
     </div>
   );
 };
@@ -1441,7 +1491,7 @@ export default function App() {
           <div className="flex gap-4 items-stretch mb-4">
             <div className="w-72 flex-shrink-0"><VixGauge initialVix={data?.vix}/></div>
             <div className="flex-1 min-w-0">
-              {data && <Leaderboard themes={data.themes} themeRankings={data.theme_rankings} perfKey={lbPerfKey} onPerfKeyChange={setLbPerfKey}/>}
+              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings}/>}
               {data && <CorrelationGuard themes={data.themes}/>}
               {data && <CounterTrendWarning themes={data.themes}/>}
             </div>

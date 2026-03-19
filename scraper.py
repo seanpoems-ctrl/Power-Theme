@@ -87,34 +87,289 @@ def _sleep():
 
 
 # ──────────────────────────────────────────────────────────────
-# Discover Themes & Sub-themes
+# Industry → Parent Theme Mapping  (144 Finviz industries → ~20 themes)
 # ──────────────────────────────────────────────────────────────
 
-def discover_themes() -> tuple[list[tuple[str, str]], list[tuple[str, str, str]]]:
-    url = "https://finviz.com/screener.ashx?v=141"
+INDUSTRY_TO_THEME = {
+    # ── AI & Semiconductors ──
+    "Semiconductors": "AI & Semiconductors",
+    "Semiconductor Equipment & Materials": "AI & Semiconductors",
+    "Electronic Components": "AI & Semiconductors",
+    "Scientific & Technical Instruments": "AI & Semiconductors",
+    "Computer Hardware": "AI & Semiconductors",
+    "Consumer Electronics": "AI & Semiconductors",
+    "Communication Equipment": "AI & Semiconductors",
+    "Electronics & Computer Distribution": "AI & Semiconductors",
+
+    # ── Software & Cloud ──
+    "Software - Application": "Software & Cloud",
+    "Software - Infrastructure": "Software & Cloud",
+    "Information Technology Services": "Software & Cloud",
+    "Internet Content & Information": "Software & Cloud",
+
+    # ── Internet & E-Commerce ──
+    "Internet Retail": "Internet & E-Commerce",
+    "Electronic Gaming & Multimedia": "Internet & E-Commerce",
+
+    # ── Financials ──
+    "Banks - Diversified": "Financials",
+    "Banks - Regional": "Financials",
+    "Capital Markets": "Financials",
+    "Financial Data & Stock Exchanges": "Financials",
+    "Asset Management": "Financials",
+    "Insurance - Life": "Financials",
+    "Insurance - Property & Casualty": "Financials",
+    "Insurance - Diversified": "Financials",
+    "Insurance - Reinsurance": "Financials",
+    "Insurance - Specialty": "Financials",
+    "Insurance Brokers": "Financials",
+    "Credit Services": "Financials",
+    "Financial Conglomerates": "Financials",
+    "Mortgage Finance": "Financials",
+
+    # ── Healthcare & Biotech ──
+    "Biotechnology": "Healthcare & Biotech",
+    "Drug Manufacturers - General": "Healthcare & Biotech",
+    "Drug Manufacturers - Specialty & Generic": "Healthcare & Biotech",
+    "Medical Devices": "Healthcare & Biotech",
+    "Medical Instruments & Supplies": "Healthcare & Biotech",
+    "Health Information Services": "Healthcare & Biotech",
+    "Healthcare Plans": "Healthcare & Biotech",
+    "Diagnostics & Research": "Healthcare & Biotech",
+    "Pharmaceutical Retailers": "Healthcare & Biotech",
+    "Medical Care Facilities": "Healthcare & Biotech",
+    "Medical Distribution": "Healthcare & Biotech",
+
+    # ── Defense & Aerospace ──
+    "Aerospace & Defense": "Defense & Aerospace",
+
+    # ── Energy - Oil & Gas ──
+    "Oil & Gas E&P": "Energy - Oil & Gas",
+    "Oil & Gas Integrated": "Energy - Oil & Gas",
+    "Oil & Gas Midstream": "Energy - Oil & Gas",
+    "Oil & Gas Refining & Marketing": "Energy - Oil & Gas",
+    "Oil & Gas Equipment & Services": "Energy - Oil & Gas",
+    "Oil & Gas Drilling": "Energy - Oil & Gas",
+
+    # ── Clean Energy & Utilities ──
+    "Solar": "Clean Energy & Utilities",
+    "Uranium": "Clean Energy & Utilities",
+    "Utilities - Renewable": "Clean Energy & Utilities",
+    "Utilities - Regulated Electric": "Clean Energy & Utilities",
+    "Utilities - Regulated Gas": "Clean Energy & Utilities",
+    "Utilities - Regulated Water": "Clean Energy & Utilities",
+    "Utilities - Diversified": "Clean Energy & Utilities",
+    "Utilities - Independent Power Producers": "Clean Energy & Utilities",
+
+    # ── Consumer Discretionary ──
+    "Specialty Retail": "Consumer Discretionary",
+    "Apparel Retail": "Consumer Discretionary",
+    "Home Improvement Retail": "Consumer Discretionary",
+    "Auto Manufacturers": "Consumer Discretionary",
+    "Auto Parts": "Consumer Discretionary",
+    "Auto & Truck Dealerships": "Consumer Discretionary",
+    "Restaurants": "Consumer Discretionary",
+    "Leisure": "Consumer Discretionary",
+    "Gambling": "Consumer Discretionary",
+    "Resorts & Casinos": "Consumer Discretionary",
+    "Travel Services": "Consumer Discretionary",
+    "Lodging": "Consumer Discretionary",
+    "Luxury Goods": "Consumer Discretionary",
+    "Apparel Manufacturing": "Consumer Discretionary",
+    "Footwear & Accessories": "Consumer Discretionary",
+    "Residential Construction": "Consumer Discretionary",
+    "Department Stores": "Consumer Discretionary",
+    "Recreational Vehicles": "Consumer Discretionary",
+    "Furnishings, Fixtures & Appliances": "Consumer Discretionary",
+    "Personal Services": "Consumer Discretionary",
+    "Textile Manufacturing": "Consumer Discretionary",
+
+    # ── Consumer Staples ──
+    "Household & Personal Products": "Consumer Staples",
+    "Packaged Foods": "Consumer Staples",
+    "Beverages - Non-Alcoholic": "Consumer Staples",
+    "Beverages - Brewers": "Consumer Staples",
+    "Beverages - Wineries & Distilleries": "Consumer Staples",
+    "Grocery Stores": "Consumer Staples",
+    "Discount Stores": "Consumer Staples",
+    "Tobacco": "Consumer Staples",
+    "Farm Products": "Consumer Staples",
+    "Confectioners": "Consumer Staples",
+    "Food Distribution": "Consumer Staples",
+    "Education & Training Services": "Consumer Staples",
+
+    # ── Industrials ──
+    "Railroads": "Industrials",
+    "Trucking": "Industrials",
+    "Airlines": "Industrials",
+    "Airports & Air Services": "Industrials",
+    "Marine Shipping": "Industrials",
+    "Industrial Distribution": "Industrials",
+    "Specialty Industrial Machinery": "Industrials",
+    "Farm & Heavy Construction Machinery": "Industrials",
+    "Metal Fabrication": "Industrials",
+    "Building Products & Equipment": "Industrials",
+    "Engineering & Construction": "Industrials",
+    "Conglomerates": "Industrials",
+    "Rental & Leasing Services": "Industrials",
+    "Waste Management": "Industrials",
+    "Pollution & Treatment Controls": "Industrials",
+    "Electrical Equipment & Parts": "Industrials",
+    "Consulting Services": "Industrials",
+    "Staffing & Employment Services": "Industrials",
+    "Security & Protection Services": "Industrials",
+    "Tools & Accessories": "Industrials",
+    "Integrated Freight & Logistics": "Industrials",
+    "Business Equipment & Supplies": "Industrials",
+    "Specialty Business Services": "Industrials",
+
+    # ── Real Estate ──
+    "REIT - Diversified": "Real Estate",
+    "REIT - Industrial": "Real Estate",
+    "REIT - Office": "Real Estate",
+    "REIT - Residential": "Real Estate",
+    "REIT - Retail": "Real Estate",
+    "REIT - Healthcare Facilities": "Real Estate",
+    "REIT - Hotel & Motel": "Real Estate",
+    "REIT - Mortgage": "Real Estate",
+    "REIT - Specialty": "Real Estate",
+    "Real Estate Services": "Real Estate",
+    "Real Estate - Development": "Real Estate",
+    "Real Estate - Diversified": "Real Estate",
+
+    # ── Materials & Mining ──
+    "Gold": "Materials & Mining",
+    "Silver": "Materials & Mining",
+    "Copper": "Materials & Mining",
+    "Steel": "Materials & Mining",
+    "Aluminum": "Materials & Mining",
+    "Other Industrial Metals & Mining": "Materials & Mining",
+    "Specialty Chemicals": "Materials & Mining",
+    "Chemicals": "Materials & Mining",
+    "Agricultural Inputs": "Materials & Mining",
+    "Building Materials": "Materials & Mining",
+    "Lumber & Wood Production": "Materials & Mining",
+    "Paper & Paper Products": "Materials & Mining",
+    "Coking Coal": "Materials & Mining",
+    "Thermal Coal": "Materials & Mining",
+    "Other Precious Metals & Mining": "Materials & Mining",
+    "Packaging & Containers": "Materials & Mining",
+
+    # ── Media & Entertainment ──
+    "Entertainment": "Media & Entertainment",
+    "Publishing": "Media & Entertainment",
+    "Broadcasting": "Media & Entertainment",
+    "Advertising Agencies": "Media & Entertainment",
+
+    # ── Telecom ──
+    "Telecom Services": "Telecom",
+
+    # ── Shell ──
+    "Shell Companies": "Other",
+}
+
+
+# ──────────────────────────────────────────────────────────────
+# Fetch Industry Performance + Industry Codes
+# ──────────────────────────────────────────────────────────────
+
+def fetch_industry_performance() -> list[dict]:
+    """Fetch performance data for all ~144 Finviz industries (single HTTP request)."""
+    url = "https://finviz.com/groups.ashx?g=industry&v=140"
     r = requests.get(url, headers=HEADERS, timeout=15)
     r.raise_for_status()
     soup = BeautifulSoup(r.text, "html.parser")
 
-    themes = []
-    sel = soup.find("select", {"data-filter": "theme"})
+    for t in soup.find_all("table"):
+        rows = t.find_all("tr")
+        if len(rows) < 5:
+            continue
+        header = [td.get_text(strip=True) for td in rows[0].find_all(["td", "th"])]
+        if "Name" not in header:
+            continue
+        # v=140 columns: No, Name, PerfW, PerfM, PerfQ, PerfHY, PerfY, PerfYTD, AvgVol, RelVol, Change, Volume
+        industries = []
+        for row in rows[1:]:
+            cells = [td.get_text(strip=True) for td in row.find_all("td")]
+            if len(cells) < 12:
+                continue
+            name = cells[1]
+            parent = INDUSTRY_TO_THEME.get(name)
+            if parent is None:
+                logger.warning(f"  Unmapped industry: {name}")
+                parent = "Other"
+            industries.append({
+                "name": name,
+                "parent_theme": parent,
+                "perf_1w": parse_pct(cells[2]),
+                "perf_1m": parse_pct(cells[3]),
+                "perf_3m": parse_pct(cells[4]),
+                "perf_6m": parse_pct(cells[5]),
+                "perf_1y": parse_pct(cells[6]),
+                "perf_ytd": parse_pct(cells[7]),
+                "perf_1d": parse_pct(cells[10]),  # "Change" column = today's %
+            })
+        logger.info(f"  Fetched {len(industries)} industries from Finviz groups")
+        return industries
+    return []
+
+
+def discover_industry_codes() -> dict[str, str]:
+    """Return {display_name: filter_code} for all Finviz industries from screener dropdown."""
+    url = "https://finviz.com/screener.ashx?v=141"
+    r = requests.get(url, headers=HEADERS, timeout=15)
+    r.raise_for_status()
+    soup = BeautifulSoup(r.text, "html.parser")
+    sel = soup.find("select", {"data-filter": "ind"})
+    codes = {}
     if sel:
         for opt in sel.find_all("option"):
             v = opt.get("value", "")
             if v:
-                themes.append((v, opt.get_text(strip=True)))
+                codes[opt.get_text(strip=True)] = v
+    logger.info(f"  Discovered {len(codes)} industry filter codes")
+    return codes
 
-    subthemes = []
-    sel2 = soup.find("select", {"data-filter": "subtheme"})
-    if sel2:
-        for opt in sel2.find_all("option"):
-            v = opt.get("value", "")
-            label = opt.get_text(strip=True)
-            if v and " - " in label:
-                parent = label.split(" - ", 1)[0].strip()
-                subthemes.append((v, label, parent))
 
-    return themes, subthemes
+def aggregate_theme_performance(industries: list[dict]) -> list[dict]:
+    """Group industries by parent theme, compute avg performance + RS score."""
+    from collections import defaultdict
+    theme_groups = defaultdict(list)
+    for ind in industries:
+        theme_groups[ind["parent_theme"]].append(ind)
+
+    perf_keys = ["perf_1d", "perf_1w", "perf_1m", "perf_3m", "perf_6m"]
+    results = []
+    for theme_name, inds in theme_groups.items():
+        if theme_name == "Other":
+            continue
+        avg_perfs = {}
+        for k in perf_keys:
+            vals = [i[k] for i in inds if i.get(k) is not None]
+            avg_perfs[k] = round(sum(vals) / len(vals), 2) if vals else 0
+
+        # Weighted RS Score: 5% 1D + 15% 1W + 25% 1M + 30% 3M + 25% 6M
+        rs_score = round(
+            avg_perfs.get("perf_1d", 0) * 0.05 +
+            avg_perfs.get("perf_1w", 0) * 0.15 +
+            avg_perfs.get("perf_1m", 0) * 0.25 +
+            avg_perfs.get("perf_3m", 0) * 0.30 +
+            avg_perfs.get("perf_6m", 0) * 0.25, 2)
+
+        # Stage 2 Momentum: positive across ALL 5 timeframes
+        stage2 = all(avg_perfs.get(k, 0) > 0 for k in perf_keys)
+
+        results.append({
+            "name": theme_name,
+            "industries": [i["name"] for i in inds],
+            "n_industries": len(inds),
+            "rs_score": rs_score,
+            "stage2_momentum": stage2,
+            **avg_perfs,
+        })
+
+    results.sort(key=lambda t: t["rs_score"], reverse=True)
+    return results
 
 
 # ──────────────────────────────────────────────────────────────
@@ -146,7 +401,7 @@ def _parse_screener_table(soup) -> list[dict]:
                 "perf_6m": parse_pct(cells[5]),
                 "perf_ytd": parse_pct(cells[6]),
                 "avg_volume": parse_vol(cells[13]),
-                "price": float(cells[15].replace(",", "") or "0"),
+                "price": float(cells[15].replace(",", "").replace("-", "0") or "0"),
                 "change_pct": parse_pct(cells[16]) or 0,
                 "volume": parse_vol(cells[17]),
             })
@@ -514,144 +769,79 @@ def _stock_score(s):
     return v
 
 
+def _composite_ind(ind: dict) -> float:
+    """Composite score for a single industry dict (from groups page)."""
+    return ((ind.get("perf_1w") or 0) * 0.20 + (ind.get("perf_1m") or 0) * 0.30
+            + (ind.get("perf_3m") or 0) * 0.30 + (ind.get("perf_6m") or 0) * 0.20)
+
+
 # ──────────────────────────────────────────────────────────────
 # Build pipeline
 # ──────────────────────────────────────────────────────────────
 
-_SUB_PARENT_TO_THEME = {
-    "AI": "Artificial Intelligence",
-    "Agriculture": "Agriculture & FoodTech",
-    "Automation": "Industrial Automation",
-    "Autonomous": "Autonomous Systems",
-    "Blockchain": "Crypto & Blockchain",
-    "Cloud": "Cloud Computing",
-    "Comm Agri": "Commodities - Agriculture",
-    "Comm Energy": "Commodities - Energy",
-    "Comm Metals": "Commodities - Metals",
-    "Consumer": "Consumer Goods",
-    "Defense": "Defense & Aerospace",
-    "EVs": "Electric Vehicles",
-    "Education": "Education Technology",
-    "Energy Base": "Energy - Traditional",
-    "Energy Clean": "Energy - Renewable",
-    "Entertainment": "Digital Entertainment",
-    "Environmental": "Environmental Sustainability",
-    "Healthcare": "Healthcare & Biotech",
-    "IoT": "Internet of Things",
-    "Longevity": "Aging Population & Longevity",
-    "NanoTech": "Nanotechnology",
-    "Nutrition": "Healthy Food & Nutrition",
-    "Quantum": "Quantum Computing",
-    "Real Estate": "Real Estate & REITs",
-    "Semis": "Semiconductors",
-    "Social": "Social Media",
-    "Space": "Space Tech",
-    "Telecom": "Telecommunications",
-    "Transportation": "Transportation & Logistics",
-    "V/A Reality": "Virtual & Augmented Reality",
-}
-
-
-def _sub_parent_to_theme_label(parent: str) -> str:
-    return _SUB_PARENT_TO_THEME.get(parent.strip(), parent.strip())
-
-
 def build_data() -> dict:
     logger.info("=" * 60)
-    logger.info("Thematic Scanner v4 — Theme → Sub-theme → Stocks")
+    logger.info("Thematic Scanner v5 — Industry → Parent Theme → Stocks")
     if not is_trading_day():
         logger.info(f"⚠ Non-trading day — using last session ({last_trading_date().isoformat()})")
     logger.info("=" * 60)
 
-    # ── Step 1: Discover ──
-    logger.info("Step 1: Discovering themes & sub-themes...")
-    themes_list, subthemes_list = discover_themes()
-    logger.info(f"  {len(themes_list)} themes, {len(subthemes_list)} sub-themes")
+    # ── Step 1: Fetch all industry performance (single request) ──
+    logger.info("Step 1: Fetching industry performance from Finviz groups...")
+    industries = fetch_industry_performance()
+    if not industries:
+        logger.error("  Failed to fetch industry performance!")
+        industries = []
     _sleep()
 
-    # ── Step 2: Score all themes ──
-    logger.info("Step 2: Scoring all themes...")
-    theme_scores: dict[str, dict] = {}
-    all_theme_perfs: list[dict] = []  # avg perf per timeframe for ALL themes (for leaderboard)
-    for i, (code, label) in enumerate(themes_list, 1):
-        logger.info(f"  [{i}/{len(themes_list)}] {label}...")
-        stocks = fetch_screener_stocks("theme", code)
-        if stocks:
-            score = _composite(stocks)
-            theme_scores[label] = {"code": code, "label": label, "score": score, "n": len(stocks)}
-            logger.info(f"    → {len(stocks)} stocks, score={score:+.2f}")
-            # Save avg perf per timeframe for leaderboard ranking
-            all_theme_perfs.append({
-                "name": label,
-                "n": len(stocks),
-                "perf_1d": _avg(stocks, "change_pct"),
-                "perf_1w": _avg(stocks, "perf_1w"),
-                "perf_1m": _avg(stocks, "perf_1m"),
-                "perf_3m": _avg(stocks, "perf_3m"),
-                "perf_6m": _avg(stocks, "perf_6m"),
-            })
-        _sleep()
+    # ── Step 1b: Discover industry filter codes for stock fetching ──
+    logger.info("Step 1b: Discovering industry filter codes...")
+    ind_codes = discover_industry_codes()
+    _sleep()
 
-    ranked_themes = sorted(theme_scores.values(), key=lambda t: t["score"], reverse=True)
-    top_themes = ranked_themes[:TOP_THEMES]
-    logger.info(f"\nTop {len(top_themes)} themes:")
-    for t in top_themes:
-        logger.info(f"  {t['label']:35} score={t['score']:+.2f}")
+    # ── Step 2: Aggregate into parent themes ──
+    logger.info("Step 2: Aggregating into parent themes...")
+    theme_rankings = aggregate_theme_performance(industries)
+    for t in theme_rankings:
+        badge = " ★ Stage2" if t["stage2_momentum"] else ""
+        logger.info(f"  {t['name']:30} RS={t['rs_score']:+7.2f}  1D={t['perf_1d']:+.1f}%  1W={t['perf_1w']:+.1f}%  1M={t['perf_1m']:+.1f}%  3M={t['perf_3m']:+.1f}%  6M={t['perf_6m']:+.1f}%{badge}")
 
-    # ── Step 3: For each top theme, find & score its sub-themes ──
-    logger.info(f"\nStep 3: Scanning sub-themes for top themes...")
+    # ── Step 3: For top themes, drill into industries → stocks ──
+    top_themes = theme_rankings[:TOP_THEMES]
+    logger.info(f"\nStep 3: Drilling into top {len(top_themes)} themes for stock details...")
     all_detail_cache: dict[str, dict | None] = {}
     output_themes = []
 
-    for theme_info in top_themes:
-        theme_label = theme_info["label"]
+    for theme in top_themes:
+        theme_name = theme["name"]
         logger.info(f"\n{'─'*50}")
-        logger.info(f"Theme: {theme_label}")
+        logger.info(f"Theme: {theme_name} ({theme['n_industries']} industries)")
 
-        matching_subs = [
-            (code, label) for code, label, parent in subthemes_list
-            if _sub_parent_to_theme_label(parent) == theme_label
-        ]
+        # Sort industries within this theme by their composite perf
+        theme_industries = [i for i in industries if i["parent_theme"] == theme_name]
+        theme_industries.sort(key=lambda i: _composite_ind(i), reverse=True)
+        top_industries = theme_industries[:TOP_SUBTHEMES_PER_THEME]
 
-        if not matching_subs:
-            logger.info(f"  No sub-themes found, using theme-level stocks")
-            stocks = fetch_screener_stocks("theme", theme_info["code"])
+        theme_subthemes = []
+        for ind in top_industries:
+            ind_name = ind["name"]
+            ind_code = ind_codes.get(ind_name)
+            if not ind_code:
+                logger.warning(f"  No filter code for industry: {ind_name}")
+                continue
+
+            logger.info(f"  Industry: {ind_name} (code={ind_code})")
+            stocks = fetch_screener_stocks("ind", ind_code)
             if not stocks:
                 continue
             stocks.sort(key=_stock_score, reverse=True)
             picks = stocks[:TOP_STOCKS_PER_SUBTHEME]
             sub_stocks = _fetch_details(picks, all_detail_cache)
             if sub_stocks:
-                output_themes.append({
-                    "name": theme_label,
-                    "subthemes": [{"name": theme_label, "stocks": sub_stocks}]
-                })
-            continue
-
-        logger.info(f"  {len(matching_subs)} sub-themes found, scoring...")
-        sub_scored = []
-        for sub_code, sub_label in matching_subs:
-            stocks = fetch_screener_stocks("subtheme", sub_code)
-            if stocks:
-                score = _composite(stocks)
-                sub_scored.append({"code": sub_code, "label": sub_label, "stocks": stocks, "score": score})
-                logger.info(f"    {sub_label:50} {len(stocks):>3} stocks  score={score:+.2f}")
-            _sleep()
-
-        sub_scored.sort(key=lambda x: x["score"], reverse=True)
-        top_subs = sub_scored[:TOP_SUBTHEMES_PER_THEME]
-
-        theme_subthemes = []
-        for sub in top_subs:
-            sub["stocks"].sort(key=_stock_score, reverse=True)
-            picks = sub["stocks"][:TOP_STOCKS_PER_SUBTHEME]
-            sub_stocks = _fetch_details(picks, all_detail_cache)
-            if sub_stocks:
-                short_name = sub["label"].split(" - ", 1)[1] if " - " in sub["label"] else sub["label"]
-                theme_subthemes.append({"name": short_name, "stocks": sub_stocks})
+                theme_subthemes.append({"name": ind_name, "stocks": sub_stocks})
 
         if theme_subthemes:
-            output_themes.append({"name": theme_label, "subthemes": theme_subthemes})
+            output_themes.append({"name": theme_name, "subthemes": theme_subthemes})
 
     # ── Step 4: Mark pure_play (appears in only one subtheme across all themes) ──
     ticker_count: dict[str, int] = {}
@@ -737,10 +927,19 @@ def build_data() -> dict:
         logger.warning(f"  VIX TradingView fetch failed: {e}")
 
     updated = date.today() if is_trading_day() else last_trading_date()
+
+    # Build industry_rankings (raw per-industry data with parent_theme tag)
+    industry_rankings = [
+        {k: v for k, v in ind.items() if k != "perf_1y"}
+        for ind in industries
+        if ind.get("parent_theme") != "Other"
+    ]
+
     return {
         "last_updated": updated.isoformat(),
         "themes": output_themes,
-        "theme_rankings": all_theme_perfs,
+        "theme_rankings": theme_rankings,
+        "industry_rankings": industry_rankings,
         "spy_benchmarks": spy_benchmarks,
         "market_condition": market_condition,
         "vix": vix_value,
