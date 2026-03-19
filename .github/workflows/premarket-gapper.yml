@@ -1,9 +1,21 @@
-# 盤前掃描：13:05 UTC = 9:05 AM EDT (夏令) / 8:05 AM EST (冬令)，兩季都在盤前
+# 盤前掃描：每 15 分鐘觸發，workflow 內部檢查是否在 8:00–9:29 AM ET 窗口內
+# 12:00–13:30 UTC 涵蓋 8:00–9:30 AM EDT (夏令) 和 7:00–8:30 AM EST (冬令)
+# 13:00–14:30 UTC 涵蓋 9:00–10:30 AM EDT (夏令) 和 8:00–9:30 AM EST (冬令)
+# ET 時間判斷確保只在 8:00–9:29 AM ET 執行
 name: Pre-Market Gapper Scan
 
 on:
   schedule:
-    - cron: "5 13 * * 1-5"   # 9:05 AM EDT / 8:05 AM EST，盤前都適用
+    - cron: "0 12 * * 1-5"    # 12:00 UTC = 8:00 AM EDT / 7:00 AM EST
+    - cron: "15 12 * * 1-5"   # 12:15 UTC = 8:15 AM EDT / 7:15 AM EST
+    - cron: "30 12 * * 1-5"   # 12:30 UTC = 8:30 AM EDT / 7:30 AM EST
+    - cron: "45 12 * * 1-5"   # 12:45 UTC = 8:45 AM EDT / 7:45 AM EST
+    - cron: "0 13 * * 1-5"    # 13:00 UTC = 9:00 AM EDT / 8:00 AM EST
+    - cron: "15 13 * * 1-5"   # 13:15 UTC = 9:15 AM EDT / 8:15 AM EST
+    - cron: "25 13 * * 1-5"   # 13:25 UTC = 9:25 AM EDT / 8:25 AM EST
+    - cron: "0 14 * * 1-5"    # 14:00 UTC = 10:00 AM EDT / 9:00 AM EST
+    - cron: "15 14 * * 1-5"   # 14:15 UTC = 10:15 AM EDT / 9:15 AM EST
+    - cron: "25 14 * * 1-5"   # 14:25 UTC = 10:25 AM EDT / 9:25 AM EST
   workflow_dispatch: {}
 
 jobs:
@@ -23,19 +35,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check NYSE trading day
+      - name: Check NYSE trading day + ET window (8:00–9:29 AM)
         id: trading_day
         run: |
           pip install exchange-calendars -q
           python - <<'EOF'
           import exchange_calendars as xcals, os
-          from datetime import date
+          from datetime import date, datetime
+          from zoneinfo import ZoneInfo
+
           nyse = xcals.get_calendar("XNYS")
           today = date.today().isoformat()
           is_session = nyse.is_session(today)
-          print(f"is_trading_day={'true' if is_session else 'false'}")
+
+          # Check ET window: 8:00 AM – 9:29 AM
+          et_now = datetime.now(ZoneInfo("America/New_York"))
+          et_minutes = et_now.hour * 60 + et_now.minute
+          in_window = 480 <= et_minutes <= 569  # 8:00–9:29 AM
+
+          should_run = is_session and in_window
+          print(f"NYSE session: {is_session} | ET time: {et_now.strftime('%H:%M')} | in window: {in_window} | will run: {should_run}")
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-              f.write(f"is_trading_day={'true' if is_session else 'false'}\n")
+              f.write(f"is_trading_day={'true' if should_run else 'false'}\n")
           EOF
 
       - uses: actions/setup-python@v5
@@ -45,7 +66,7 @@ jobs:
 
       - name: Install Python deps
         if: steps.trading_day.outputs.is_trading_day == 'true'
-        run: pip install requests beautifulsoup4 tradingview-screener google-genai exchange-calendars python-dotenv
+        run: pip install requests beautifulsoup4 tradingview-screener google-genai exchange-calendars python-dotenv yfinance
 
       - name: Run gapper scanner
         if: steps.trading_day.outputs.is_trading_day == 'true'
@@ -60,7 +81,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/gapper_data.json
-          git diff --staged --quiet || git commit -m "data: gapper_data $(date -u +%Y-%m-%d) [skip ci]"
+          git diff --staged --quiet || git commit -m "data: gapper_data $(date -u +%Y-%m-%dT%H:%M) [skip ci]"
           git pull --rebase && git push
 
       - uses: actions/setup-node@v4
