@@ -260,13 +260,9 @@ def fetch_stock_detail(ticker: str) -> dict | None:
         for fk, jk in [("SMA20", "sma20_pct"), ("SMA50", "sma50_pct"), ("SMA200", "sma200_pct")]:
             result[jk] = parse_pct(snap.get(fk, "") or "")
 
-        original_change = result["change_pct"]
-        if result.get("perf_1d") is not None:
-            result["change_pct"] = result["perf_1d"]
-        if not is_trading_day():
-            if result.get("perf_1d") is None or result["perf_1d"] == 0:
-                result["perf_1d"] = original_change
-                result["change_pct"] = original_change
+        # Finviz snapshot-table2 has no "Perf Day" field; always fall back to Change%
+        if result.get("perf_1d") is None:
+            result["perf_1d"] = result["change_pct"]
         return result
     except (ValueError, TypeError):
         return None
