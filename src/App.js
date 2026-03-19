@@ -682,18 +682,27 @@ const ThemeSection = ({ theme, sortKey, sortDir, lbPerfKey, spyPerf, rsSPYKey, i
 };
 
 // ── Gapper Filter Input ──
-const FInput = ({ label, value, onChange, hint }) => (
-  <div className="flex flex-col gap-1 min-w-0">
-    <label className="text-[10px] text-zinc-500 whitespace-nowrap">{label}</label>
-    <input
-      type="number"
-      value={value}
-      onChange={e => onChange(Number(e.target.value))}
-      className="w-full px-2 py-1.5 text-xs font-mono bg-zinc-900 border border-zinc-700/60 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50"
-    />
-    <span className="text-[10px] text-zinc-600 h-3">{hint || ""}</span>
-  </div>
-);
+const FInput = ({ label, value, onChange, hint }) => {
+  const [local, setLocal] = useState(String(value));
+  // Sync when parent resets (e.g. Reset button)
+  useEffect(() => { setLocal(String(value)); }, [value]);
+  return (
+    <div className="flex flex-col gap-1 min-w-0">
+      <label className="text-[10px] text-zinc-500 whitespace-nowrap">{label}</label>
+      <input
+        type="number"
+        value={local}
+        onChange={e => {
+          setLocal(e.target.value);
+          const n = parseFloat(e.target.value);
+          if (!isNaN(n)) onChange(n);
+        }}
+        className="w-full px-2 py-1.5 text-xs font-mono bg-zinc-900 border border-zinc-700/60 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50"
+      />
+      <span className="text-[10px] text-zinc-600 h-3">{hint || ""}</span>
+    </div>
+  );
+};
 
 // ── Gapper Scanner UI ──
 const fmtCap = n => n >= 1e12 ? `$${(n/1e12).toFixed(1)}T` : n >= 1e9 ? `$${(n/1e9).toFixed(1)}B` : `$${(n/1e6).toFixed(0)}M`;
