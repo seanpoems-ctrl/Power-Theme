@@ -41,11 +41,11 @@ def fetch_gappers() -> list[dict]:
                 "market_cap_basic", "average_volume_10d_calc", "relative_volume_intraday|5"
             )
             .where(
-                col("premarket_change") >= 5,
-                col("premarket_volume") >= 200000,
-                col("market_cap_basic") >= 2e9,
-                col("average_volume_10d_calc") >= 500000,
-                col("close") >= 5,
+                col("premarket_change") >= 3,
+                col("premarket_volume") >= 50000,
+                col("market_cap_basic") >= 5e8,
+                col("average_volume_10d_calc") >= 100000,
+                col("close") >= 2,
             )
             .order_by("premarket_change", ascending=False)
             .limit(100)
@@ -59,8 +59,8 @@ def fetch_gappers() -> list[dict]:
             price    = round(float(row.get("close") or 0), 2)
             avg_vol  = int(row.get("average_volume_10d_calc") or 0)
             avg_dvol = round(price * avg_vol)
-            # Avg $ Vol ≥ $50M filter
-            if avg_dvol < 50_000_000:
+            # Minimum avg $ vol: $5M (UI filter handles stricter thresholds)
+            if avg_dvol < 5_000_000:
                 continue
             results.append({
                 "ticker":       str(row.get("name", "")),

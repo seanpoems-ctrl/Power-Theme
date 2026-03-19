@@ -1276,7 +1276,11 @@ export default function App() {
     return data.themes.map(t => {
       const norm = normalizeTheme(t);
       const filteredSubs = norm.subthemes.map(sub => {
-        let st = sub.stocks;
+        // Normalise stocks: fill perf_1d from change_pct when scraper left it null
+        let st = sub.stocks.map(s => ({
+          ...s,
+          perf_1d: s.perf_1d != null ? s.perf_1d : (s.change_pct ?? null),
+        }));
         if (search) {
           const q = search.toLowerCase();
           st = st.filter(s => s.ticker.toLowerCase().includes(q) || (s.company || "").toLowerCase().includes(q));
