@@ -1,16 +1,22 @@
-# 平日關盤後 1.5 小時：跑爬蟲 → commit JSON → build → 部署 GitHub Pages
-# 21:30 UTC = 17:30 EDT (夏令) / 16:30 EST (冬令)，兩個季節都在盤後
+# 全交易日每 30 分鐘更新：8:00 AM – 5:30 PM ET
+# 2 條 cron 涵蓋 12:00–22:30 UTC（含夏令/冬令兩季）
+# ET 時間判斷確保只在 8:00 AM – 5:30 PM ET 視窗內執行
 name: Daily scrape & deploy
 
 on:
   schedule:
-    - cron: "30 21 * * 1-5"  # 17:30 EDT / 16:30 EST，盤後都適用
+    - cron: "0 12-22 * * 1-5"   # 每小時整點，12:00–22:00 UTC
+    - cron: "30 12-22 * * 1-5"  # 每小時半點，12:30–22:30 UTC
   workflow_dispatch: {}
+
+concurrency:
+  group: thematic-scrape
+  cancel-in-progress: true   # 新一輪開始時取消舊的，確保資料最新
 
 jobs:
   scrape-build-deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 30
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     permissions:
@@ -31,52 +37,54 @@ jobs:
       - name: Install Python deps
         run: pip install requests beautifulsoup4 exchange-calendars yfinance lxml
 
-      - name: Check NYSE trading day
+      - name: Check NYSE trading day + ET window (8:00 AM – 5:30 PM)
         id: trading_day
         run: |
           python - <<'EOF'
           import exchange_calendars as xcals, os
-          from datetime import date
+          from datetime import date, datetime
+          from zoneinfo import ZoneInfo
+
           nyse = xcals.get_calendar("XNYS")
           today = date.today().isoformat()
-          if nyse.is_session(today):
-              print("is_trading_day=true")
-              with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-                  f.write("is_trading_day=true\n")
-          else:
-              print(f"Skipping — {today} is not a NYSE trading day")
-              with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-                  f.write("is_trading_day=false\n")
+          is_session = nyse.is_session(today)
+
+          et_now = datetime.now(ZoneInfo("America/New_York"))
+          et_minutes = et_now.hour * 60 + et_now.minute
+          in_window = 480 <= et_minutes <= 1050  # 8:00 AM – 5:30 PM ET
+
+          should_run = is_session and in_window
+          print(f"NYSE session: {is_session} | ET: {et_now.strftime('%H:%M')} | in window: {in_window} | will run: {should_run}")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"is_trading_day={'true' if should_run else 'false'}\n")
           EOF
 
-      # Finviz 偶爾限流／擋 IP：失敗則等幾分鐘再掃，最多 4 次
       - name: Run scraper (retry on failure)
         if: steps.trading_day.outputs.is_trading_day == 'true'
         env:
           CI: true
         run: |
-          for attempt in 1 2 3 4; do
-            echo "=== Scraper attempt $attempt / 4 ==="
+          for attempt in 1 2 3; do
+            echo "=== Scraper attempt $attempt / 3 ==="
             if python scraper.py; then
               echo "Scraper OK"
               exit 0
             fi
-            if [ "$attempt" -lt 4 ]; then
-              echo "Failed — waiting 3 minutes before retry..."
-              sleep 180
+            if [ "$attempt" -lt 3 ]; then
+              echo "Failed — waiting 2 minutes before retry..."
+              sleep 120
             fi
           done
-          echo "Scraper failed after 4 attempts"
+          echo "Scraper failed after 3 attempts"
           exit 1
 
-      # 把最新的 thematic_data.json 存回 repo，讓 gapper build 也能用到新資料
       - name: Commit thematic data to repo
         if: steps.trading_day.outputs.is_trading_day == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/thematic_data.json
-          git diff --staged --quiet || git commit -m "data: thematic_data $(date -u +%Y-%m-%d) [skip ci]"
+          git diff --staged --quiet || git commit -m "data: thematic_data $(date -u +%Y-%m-%dT%H:%M) [skip ci]"
           git pull --rebase && git push
 
       - uses: actions/setup-node@v4
@@ -109,8 +117,8 @@ jobs:
         if: failure()
         run: |
           gh issue create \
-            --title "⚠️ 盤後 Thematic Scanner 失敗 $(date -u +%Y-%m-%d)" \
-            --body "盤後爬蟲或部署失敗，網頁未更新。請查看：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+            --title "⚠️ Thematic Scanner 失敗 $(date -u +%Y-%m-%dT%H:%M)" \
+            --body "爬蟲或部署失敗，網頁未更新。請查看：${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
             --label "bug"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
