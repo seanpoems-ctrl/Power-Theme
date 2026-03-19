@@ -969,13 +969,13 @@ const GapperScanner = () => {
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState(null);
 
-  // Filter state (mirrors the default screener params)
+  // Filter state — human-friendly units: PMVol/AvgVol in K, MktCap in $B, DolVol in $M
   const [fMinGap,    setFMinGap]    = useState(5);
-  const [fMinPMVol,  setFMinPMVol]  = useState(200000);
+  const [fMinPMVol,  setFMinPMVol]  = useState(200);    // K
   const [fMinPrice,  setFMinPrice]  = useState(5);
-  const [fMinAvgVol, setFMinAvgVol] = useState(500000);
-  const [fMinMktCap, setFMinMktCap] = useState(2000000000);
-  const [fMinDolVol, setFMinDolVol] = useState(50000000);
+  const [fMinAvgVol, setFMinAvgVol] = useState(500);    // K
+  const [fMinMktCap, setFMinMktCap] = useState(2);      // $B
+  const [fMinDolVol, setFMinDolVol] = useState(50);     // $M
 
   useEffect(() => {
     (async () => {
@@ -1000,16 +1000,16 @@ const GapperScanner = () => {
 
   const filtered = gapperData.gappers.filter(g =>
     g.gap_pct   >= fMinGap &&
-    g.pm_volume >= fMinPMVol &&
+    g.pm_volume >= fMinPMVol * 1000 &&
     g.price     >= fMinPrice &&
-    (g.avg_vol_10d || 0)     >= fMinAvgVol &&
-    (g.mkt_cap   || 0)       >= fMinMktCap &&
-    (g.avg_dollar_vol || g.price * (g.avg_vol_10d || 0)) >= fMinDolVol
+    (g.avg_vol_10d || 0)     >= fMinAvgVol * 1000 &&
+    (g.mkt_cap   || 0)       >= fMinMktCap * 1e9 &&
+    (g.avg_dollar_vol || g.price * (g.avg_vol_10d || 0)) >= fMinDolVol * 1e6
   );
 
   const resetFilters = () => {
-    setFMinGap(5); setFMinPMVol(200000); setFMinPrice(5);
-    setFMinAvgVol(500000); setFMinMktCap(2000000000); setFMinDolVol(50000000);
+    setFMinGap(5); setFMinPMVol(200); setFMinPrice(5);
+    setFMinAvgVol(500); setFMinMktCap(2); setFMinDolVol(50);
   };
 
   return (
@@ -1018,12 +1018,12 @@ const GapperScanner = () => {
       {/* Filter Bar */}
       <div className="mb-4 p-3 bg-zinc-800/40 border border-zinc-700/40 rounded-lg">
         <div className="grid grid-cols-6 gap-3 mb-2">
-          <FInput label="Min Gap (%)"         value={fMinGap}    onChange={setFMinGap}/>
-          <FInput label="Min PM Volume"        value={fMinPMVol}  onChange={setFMinPMVol}  hint={fmtNum(fMinPMVol)}/>
+          <FInput label="Min Gap (%)"          value={fMinGap}    onChange={setFMinGap}    hint="e.g. 5 = 5%"/>
+          <FInput label="Min PM Vol (K)"       value={fMinPMVol}  onChange={setFMinPMVol}  hint={`= ${fmtNum(fMinPMVol * 1000)}`}/>
           <FInput label="Min Price ($)"        value={fMinPrice}  onChange={setFMinPrice}/>
-          <FInput label="Min Avg Vol (10d)"    value={fMinAvgVol} onChange={setFMinAvgVol} hint={fmtNum(fMinAvgVol)}/>
-          <FInput label="Min Mkt Cap ($)"      value={fMinMktCap} onChange={setFMinMktCap} hint={fmtCap(fMinMktCap)}/>
-          <FInput label="Min Avg $ Vol"        value={fMinDolVol} onChange={setFMinDolVol} hint={fmtVol(fMinDolVol)}/>
+          <FInput label="Min Avg Vol 10d (K)"  value={fMinAvgVol} onChange={setFMinAvgVol} hint={`= ${fmtNum(fMinAvgVol * 1000)}`}/>
+          <FInput label="Min Mkt Cap ($B)"     value={fMinMktCap} onChange={setFMinMktCap} hint={`= ${fmtCap(fMinMktCap * 1e9)}`}/>
+          <FInput label="Min Avg $ Vol ($M)"   value={fMinDolVol} onChange={setFMinDolVol} hint={`= ${fmtVol(fMinDolVol * 1e6)}`}/>
         </div>
         <div className="flex items-center justify-between pt-1 border-t border-zinc-700/30">
           <button onClick={resetFilters} className="text-[11px] px-2.5 py-1 bg-zinc-700/50 border border-zinc-600/40 rounded text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition-colors">
