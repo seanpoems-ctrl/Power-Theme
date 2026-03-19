@@ -1,21 +1,10 @@
-# 盤前掃描：每 15 分鐘觸發，workflow 內部檢查是否在 8:00–9:29 AM ET 窗口內
-# 12:00–13:30 UTC 涵蓋 8:00–9:30 AM EDT (夏令) 和 7:00–8:30 AM EST (冬令)
-# 13:00–14:30 UTC 涵蓋 9:00–10:30 AM EDT (夏令) 和 8:00–9:30 AM EST (冬令)
-# ET 時間判斷確保只在 8:00–9:29 AM ET 執行
+# 盤前掃描：每 5 分鐘觸發，workflow 內部檢查是否在 8:00–9:29 AM ET 窗口內
+# 12:00–14:55 UTC 涵蓋兩季時間，ET 時間判斷確保只在 8:00–9:29 AM ET 執行
 name: Pre-Market Gapper Scan
 
 on:
   schedule:
-    - cron: "0 12 * * 1-5"    # 12:00 UTC = 8:00 AM EDT / 7:00 AM EST
-    - cron: "15 12 * * 1-5"   # 12:15 UTC = 8:15 AM EDT / 7:15 AM EST
-    - cron: "30 12 * * 1-5"   # 12:30 UTC = 8:30 AM EDT / 7:30 AM EST
-    - cron: "45 12 * * 1-5"   # 12:45 UTC = 8:45 AM EDT / 7:45 AM EST
-    - cron: "0 13 * * 1-5"    # 13:00 UTC = 9:00 AM EDT / 8:00 AM EST
-    - cron: "15 13 * * 1-5"   # 13:15 UTC = 9:15 AM EDT / 8:15 AM EST
-    - cron: "25 13 * * 1-5"   # 13:25 UTC = 9:25 AM EDT / 8:25 AM EST
-    - cron: "0 14 * * 1-5"    # 14:00 UTC = 10:00 AM EDT / 9:00 AM EST
-    - cron: "15 14 * * 1-5"   # 14:15 UTC = 10:15 AM EDT / 9:15 AM EST
-    - cron: "25 14 * * 1-5"   # 14:25 UTC = 10:25 AM EDT / 9:25 AM EST
+    - cron: "*/5 12-14 * * 1-5"  # Every 5 min, 12:00–14:55 UTC (covers 8:00–9:29 AM ET both seasons)
   workflow_dispatch: {}
 
 jobs:
