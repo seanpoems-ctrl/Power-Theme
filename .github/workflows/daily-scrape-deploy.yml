@@ -1,22 +1,20 @@
-# 全交易日每 30 分鐘更新：8:00 AM – 5:30 PM ET
-# 2 條 cron 涵蓋 12:00–22:30 UTC（含夏令/冬令兩季）
-# ET 時間判斷確保只在 8:00 AM – 5:30 PM ET 視窗內執行
+# Thematic Scanner — every 5 min trigger, 9:00 AM – 4:30 PM ET
+# Scraper takes ~8-10 min, so concurrency queues (not cancels) → effective ~10 min updates
 name: Daily scrape & deploy
 
 on:
   schedule:
-    - cron: "0 12-22 * * 1-5"   # 每小時整點，12:00–22:00 UTC
-    - cron: "30 12-22 * * 1-5"  # 每小時半點，12:30–22:30 UTC
+    - cron: "*/5 12-20 * * 1-5"  # Every 5 min, 12:00–20:55 UTC (covers 9AM-4:30PM ET both seasons)
   workflow_dispatch: {}
 
 concurrency:
   group: thematic-scrape
-  cancel-in-progress: true   # 新一輪開始時取消舊的，確保資料最新
+  cancel-in-progress: false  # Queue — scraper takes ~10 min, cancelling would prevent completion
 
 jobs:
   scrape-build-deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 25
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
     permissions:
@@ -37,7 +35,7 @@ jobs:
       - name: Install Python deps
         run: pip install requests beautifulsoup4 exchange-calendars yfinance lxml
 
-      - name: Check NYSE trading day + ET window (8:00 AM – 5:30 PM)
+      - name: Check NYSE trading day + ET window (9:00 AM – 4:30 PM)
         id: trading_day
         run: |
           python - <<'EOF'
@@ -51,7 +49,7 @@ jobs:
 
           et_now = datetime.now(ZoneInfo("America/New_York"))
           et_minutes = et_now.hour * 60 + et_now.minute
-          in_window = 480 <= et_minutes <= 1050  # 8:00 AM – 5:30 PM ET
+          in_window = 540 <= et_minutes <= 990  # 9:00 AM – 4:30 PM ET
 
           should_run = is_session and in_window
           print(f"NYSE session: {is_session} | ET: {et_now.strftime('%H:%M')} | in window: {in_window} | will run: {should_run}")

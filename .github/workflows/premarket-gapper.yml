@@ -1,11 +1,16 @@
-# 盤前掃描：每 5 分鐘觸發，workflow 內部檢查是否在 8:00–9:29 AM ET 窗口內
-# 12:00–14:55 UTC 涵蓋兩季時間，ET 時間判斷確保只在 8:00–9:29 AM ET 執行
+# 盤前掃描：每 5 分鐘觸發，workflow 內部檢查是否在 8:00 AM–12:00 PM ET 窗口內
+# GitHub Actions cron 延遲可達 1-3 小時，所以放寬 UTC 範圍 + ET 窗口
+# 一天只掃一次：成功掃過後後續 run 會跳過
 name: Pre-Market Gapper Scan
 
 on:
   schedule:
-    - cron: "*/5 12-14 * * 1-5"  # Every 5 min, 12:00–14:55 UTC (covers 8:00–9:29 AM ET both seasons)
+    - cron: "*/5 11-17 * * 1-5"  # Every 5 min, 11:00–17:55 UTC (wide buffer for GHA delays)
   workflow_dispatch: {}
+
+concurrency:
+  group: gapper-scan
+  cancel-in-progress: false
 
 jobs:
   gapper-scan:
@@ -24,12 +29,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check NYSE trading day + ET window (8:00–9:29 AM)
+      - name: Check NYSE trading day + ET window (8:00 AM–12:00 PM) + already scanned today
         id: trading_day
         run: |
           pip install exchange-calendars -q
           python - <<'EOF'
-          import exchange_calendars as xcals, os
+          import exchange_calendars as xcals, os, json
           from datetime import date, datetime
           from zoneinfo import ZoneInfo
 
@@ -37,13 +42,26 @@ jobs:
           today = date.today().isoformat()
           is_session = nyse.is_session(today)
 
-          # Check ET window: 8:00 AM – 9:29 AM
+          # Check ET window: 8:00 AM – 12:00 PM (wide to absorb GHA cron delays)
           et_now = datetime.now(ZoneInfo("America/New_York"))
           et_minutes = et_now.hour * 60 + et_now.minute
-          in_window = 480 <= et_minutes <= 569  # 8:00–9:29 AM
+          in_window = 480 <= et_minutes <= 720  # 8:00 AM–12:00 PM
 
-          should_run = is_session and in_window
-          print(f"NYSE session: {is_session} | ET time: {et_now.strftime('%H:%M')} | in window: {in_window} | will run: {should_run}")
+          # Check if already scanned today (avoid duplicate runs)
+          already_scanned = False
+          try:
+              with open("public/gapper_data.json") as f:
+                  data = json.load(f)
+              scan_date = data.get("scan_time", "")[:10]  # "YYYY-MM-DD ..."
+              et_today = et_now.strftime("%Y-%m-%d")
+              if scan_date == et_today:
+                  already_scanned = True
+                  print(f"Already scanned today ({scan_date}), skipping")
+          except Exception:
+              pass
+
+          should_run = is_session and in_window and not already_scanned
+          print(f"NYSE session: {is_session} | ET time: {et_now.strftime('%H:%M')} | in window: {in_window} | already scanned: {already_scanned} | will run: {should_run}")
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write(f"is_trading_day={'true' if should_run else 'false'}\n")
           EOF
