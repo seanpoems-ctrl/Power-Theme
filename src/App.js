@@ -440,8 +440,15 @@ function normalizeThemeRaw(t) {
   return { ...t, subthemes: [{ name: t.name, stocks: t.stocks || [] }] };
 }
 
-const Leaderboard = ({ themes, perfKey, onPerfKeyChange }) => {
+const Leaderboard = ({ themes, themeRankings, perfKey, onPerfKeyChange }) => {
   const ranked = useMemo(() => {
+    // Use theme_rankings (all themes) if available, otherwise fall back to detailed themes
+    if (themeRankings && themeRankings.length > 0) {
+      return [...themeRankings]
+        .map(t => ({ name: t.name, avg: t[perfKey] || 0, subs: null, stocks: t.n }))
+        .sort((a, b) => b.avg - a.avg)
+        .slice(0, 5);
+    }
     return [...themes]
       .map(t => {
         const norm = normalizeThemeRaw(t);
@@ -452,7 +459,7 @@ const Leaderboard = ({ themes, perfKey, onPerfKeyChange }) => {
       })
       .sort((a, b) => b.avg - a.avg)
       .slice(0, 5);
-  }, [themes, perfKey]);
+  }, [themes, themeRankings, perfKey]);
 
   const maxAvg = Math.max(...ranked.map(t => Math.abs(t.avg)), 0.1);
 
@@ -486,7 +493,7 @@ const Leaderboard = ({ themes, perfKey, onPerfKeyChange }) => {
               <span className={`text-sm font-bold font-mono w-16 text-right ${t.avg >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                 {t.avg >= 0 ? '+' : ''}{t.avg.toFixed(1)}%
               </span>
-              <span className="text-[10px] text-zinc-600 w-20 text-right">{t.subs} sub · {t.stocks}s</span>
+              <span className="text-[10px] text-zinc-600 w-20 text-right">{t.subs != null ? `${t.subs} sub · ` : ''}{t.stocks}s</span>
             </div>
           </div>
         ))}
@@ -1434,7 +1441,7 @@ export default function App() {
           <div className="flex gap-4 items-stretch mb-4">
             <div className="w-72 flex-shrink-0"><VixGauge initialVix={data?.vix}/></div>
             <div className="flex-1 min-w-0">
-              {data && <Leaderboard themes={data.themes} perfKey={lbPerfKey} onPerfKeyChange={setLbPerfKey}/>}
+              {data && <Leaderboard themes={data.themes} themeRankings={data.theme_rankings} perfKey={lbPerfKey} onPerfKeyChange={setLbPerfKey}/>}
               {data && <CorrelationGuard themes={data.themes}/>}
               {data && <CounterTrendWarning themes={data.themes}/>}
             </div>

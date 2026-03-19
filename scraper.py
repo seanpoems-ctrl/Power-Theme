@@ -132,8 +132,12 @@ def _parse_screener_table(soup) -> list[dict]:
         stocks = []
         for row in rows[1:]:
             cells = [td.get_text(strip=True) for td in row.find_all("td")]
-            if len(cells) < 17:
+            if len(cells) < 18:
                 continue
+            # Finviz v=141 columns (18 total):
+            # 0:No 1:Ticker 2:PerfW 3:PerfM 4:PerfQ 5:PerfHY 6:PerfYTD
+            # 7:PerfY 8:Perf3Y 9:Perf5Y 10:Perf10Y 11:VolW 12:VolM
+            # 13:AvgVol 14:RelVol 15:Price 16:Change 17:Volume
             stocks.append({
                 "ticker": cells[1],
                 "perf_1w": parse_pct(cells[2]),
@@ -141,10 +145,10 @@ def _parse_screener_table(soup) -> list[dict]:
                 "perf_3m": parse_pct(cells[4]),
                 "perf_6m": parse_pct(cells[5]),
                 "perf_ytd": parse_pct(cells[6]),
-                "avg_volume": parse_vol(cells[12]),
-                "price": float(cells[14].replace(",", "") or "0"),
-                "change_pct": parse_pct(cells[15]) or 0,
-                "volume": parse_vol(cells[16]),
+                "avg_volume": parse_vol(cells[13]),
+                "price": float(cells[15].replace(",", "") or "0"),
+                "change_pct": parse_pct(cells[16]) or 0,
+                "volume": parse_vol(cells[17]),
             })
         return stocks
     return []
@@ -568,6 +572,7 @@ def build_data() -> dict:
     # ── Step 2: Score all themes ──
     logger.info("Step 2: Scoring all themes...")
     theme_scores: dict[str, dict] = {}
+    all_theme_perfs: list[dict] = []  # avg perf per timeframe for ALL themes (for leaderboard)
     for i, (code, label) in enumerate(themes_list, 1):
         logger.info(f"  [{i}/{len(themes_list)}] {label}...")
         stocks = fetch_screener_stocks("theme", code)
@@ -575,6 +580,16 @@ def build_data() -> dict:
             score = _composite(stocks)
             theme_scores[label] = {"code": code, "label": label, "score": score, "n": len(stocks)}
             logger.info(f"    → {len(stocks)} stocks, score={score:+.2f}")
+            # Save avg perf per timeframe for leaderboard ranking
+            all_theme_perfs.append({
+                "name": label,
+                "n": len(stocks),
+                "perf_1d": _avg(stocks, "change_pct"),
+                "perf_1w": _avg(stocks, "perf_1w"),
+                "perf_1m": _avg(stocks, "perf_1m"),
+                "perf_3m": _avg(stocks, "perf_3m"),
+                "perf_6m": _avg(stocks, "perf_6m"),
+            })
         _sleep()
 
     ranked_themes = sorted(theme_scores.values(), key=lambda t: t["score"], reverse=True)
@@ -725,6 +740,7 @@ def build_data() -> dict:
     return {
         "last_updated": updated.isoformat(),
         "themes": output_themes,
+        "theme_rankings": all_theme_perfs,
         "spy_benchmarks": spy_benchmarks,
         "market_condition": market_condition,
         "vix": vix_value,
