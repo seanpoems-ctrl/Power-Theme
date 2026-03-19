@@ -48,7 +48,7 @@ def fetch_gappers() -> list[dict]:
                 col("close") >= 5,
             )
             .order_by("premarket_change", ascending=False)
-            .limit(40)
+            .limit(100)
             .get_scanner_data()
         )
         if df is None or df.empty:
