@@ -1265,7 +1265,15 @@ export default function App() {
       setLoading(true);
       try {
         const r = await fetch(process.env.PUBLIC_URL + "/thematic_data.json?v=" + Date.now());
-        if (r.ok) setData(await r.json());
+        if (r.ok) {
+          const json = await r.json();
+          // Normalize: fill perf_1d from change_pct when scraper left it null
+          for (const theme of (json.themes || []))
+            for (const sub of (theme.subthemes || []))
+              for (const stock of (sub.stocks || []))
+                if (stock.perf_1d == null) stock.perf_1d = stock.change_pct ?? null;
+          setData(json);
+        }
       } catch {}
       setLoading(false);
     })();
@@ -1276,11 +1284,7 @@ export default function App() {
     return data.themes.map(t => {
       const norm = normalizeTheme(t);
       const filteredSubs = norm.subthemes.map(sub => {
-        // Normalise stocks: fill perf_1d from change_pct when scraper left it null
-        let st = sub.stocks.map(s => ({
-          ...s,
-          perf_1d: s.perf_1d != null ? s.perf_1d : (s.change_pct ?? null),
-        }));
+        let st = sub.stocks;
         if (search) {
           const q = search.toLowerCase();
           st = st.filter(s => s.ticker.toLowerCase().includes(q) || (s.company || "").toLowerCase().includes(q));
