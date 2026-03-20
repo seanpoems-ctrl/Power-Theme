@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { ChevronDown, ChevronRight, Star, Activity, BarChart3, RefreshCw, Search, SlidersHorizontal, X, Layers, Zap, TrendingUp, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink } from "lucide-react";
 
+// eslint-disable-next-line no-unused-vars
 const MOCK_DATA = {
   last_updated: "2026-03-13",
   spy_benchmarks: { perf_1w: 1.2, perf_1m: 3.5, perf_3m: 8.2 },
   themes: [
     {
       name: "Semiconductors",
-      subthemes: [
+      subthemes: 
         {
           name: "AI Chips & Accelerators",
           stocks: [
@@ -312,9 +313,10 @@ const RSvsSPYBadge = ({ stockPerf, spyPerf }) => {
 };
 
 // ── Market Condition ──
+// eslint-disable-next-line no-unused-vars
 const MarketCondition = ({ mc }) => {
   if (!mc) return null;
-  const { signal, spy, qqq, iwm } = mc;
+  const { signal } = mc;
   const cfg = {
     green:  { dot: "bg-emerald-400", ring: "border-emerald-500/40 bg-emerald-500/8",  label: "🟢 Market Uptrend",    sub: "SPY & QQQ 站上 SMA50 & SMA200，200SMA 向上，正常執行突破單" },
     yellow: { dot: "bg-amber-400",   ring: "border-amber-500/40 bg-amber-500/8",   label: "🟡 Market Correction", sub: "SPY 或 QQQ 跌破 SMA50，暫停常規突破，只做 RS 最強的少數股票" },
@@ -332,6 +334,7 @@ const MarketCondition = ({ mc }) => {
     : st === "Lagging"  ? "text-red-400"
     : st === "Mediocre" ? "text-yellow-400"
     : "text-zinc-400";
+  // eslint-disable-next-line no-unused-vars
   const IndexTag = ({ label, d }) => (
     <span className="flex items-center gap-1">
       <span className="text-zinc-400">{label}</span>
@@ -858,6 +861,7 @@ const CATEGORY_STYLE = {
   "Others":                   "bg-zinc-700/40 text-zinc-500 border-zinc-600/30",
 };
 
+// eslint-disable-next-line no-unused-vars
 const ConvictionBar = ({ value }) => {
   const color = value >= 70 ? "bg-emerald-500" : value >= 50 ? "bg-amber-500" : "bg-rose-500";
   return (
@@ -1325,6 +1329,7 @@ export default function App() {
   const [filterRS, setFilterRS] = useState(50);
   const [filterDist52w, setFilterDist52w] = useState(20);
   const [showFP, setShowFP] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [lbPerfKey, setLbPerfKey] = useState("perf_1m");
   const [rsSPYKey, setRsSPYKey] = useState("perf_1m");
 
