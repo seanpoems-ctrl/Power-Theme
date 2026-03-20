@@ -520,7 +520,10 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings }) =
         <table className="w-full text-left">
           <thead>
             <tr className="border-b border-zinc-800/60">
-              <th className="px-2 py-2 w-6 text-[10px] text-zinc-600">#</th>
+              <th onClick={() => setSortDir(d => d === "desc" ? "asc" : "desc")}
+                className="px-2 py-2 w-6 text-[10px] text-zinc-500 cursor-pointer hover:text-zinc-300 select-none">
+                {sortDir === "desc" ? "▼" : "▲"}
+              </th>
               <th className="px-2 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Theme</th>
               {LB_KEYS.map(k => <SortHeader key={k.key} k={k.key} label={k.label} />)}
               <SortHeader k="rs_score" label="RS" w="w-16" />
