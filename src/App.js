@@ -449,16 +449,24 @@ const PerfCellLB = ({ val }) => {
 
 const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings }) => {
   const [sortKey, setSortKey] = useState("rs_score");
+  const [sortDir, setSortDir] = useState("desc");
   const [expanded, setExpanded] = useState(null);
   const [showAll, setShowAll] = useState(false);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
 
   const activeData = view === "themes" ? finvizThemeRankings : themeRankings;
 
+  const handleLBSort = (k) => {
+    if (sortKey === k) setSortDir(d => d === "desc" ? "asc" : "desc");
+    else { setSortKey(k); setSortDir("desc"); }
+  };
+
   const ranked = useMemo(() => {
     if (!activeData || !activeData.length) return [];
-    return [...activeData].sort((a, b) => (b[sortKey] || 0) - (a[sortKey] || 0));
-  }, [activeData, sortKey]);
+    return [...activeData].sort((a, b) =>
+      sortDir === "desc" ? (b[sortKey] || 0) - (a[sortKey] || 0) : (a[sortKey] || 0) - (b[sortKey] || 0)
+    );
+  }, [activeData, sortKey, sortDir]);
 
   const visible = showAll ? ranked : ranked.slice(0, 10);
 
@@ -481,10 +489,10 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings }) =
   }, [industryRankings]);
 
   const SortHeader = ({ k, label, w }) => (
-    <th onClick={() => setSortKey(k)}
+    <th onClick={() => handleLBSort(k)}
       className={`px-2 py-2 text-right cursor-pointer select-none ${w || 'w-14'} ${sortKey === k ? 'text-blue-400' : 'text-zinc-500 hover:text-zinc-300'}`}>
       <span className="text-[10px] font-semibold uppercase tracking-wider">{label}</span>
-      {sortKey === k && <span className="ml-0.5 text-[8px]">▼</span>}
+      {sortKey === k && <span className="ml-0.5 text-[8px]">{sortDir === "desc" ? "▼" : "▲"}</span>}
     </th>
   );
 
