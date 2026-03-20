@@ -1335,6 +1335,23 @@ export default function App() {
   // eslint-disable-next-line no-unused-vars
   const [lbPerfKey, setLbPerfKey] = useState("perf_1m");
   const [rsSPYKey, setRsSPYKey] = useState("perf_1m");
+  const [fetchedAt, setFetchedAt] = useState(null);
+  const [countdown, setCountdown] = useState(null);
+
+  const REFRESH_SEC = 5 * 60; // scraper runs every 5 min
+
+  // Countdown ticker
+  useEffect(() => {
+    if (!fetchedAt) return;
+    const tick = () => {
+      const elapsed = Math.floor((Date.now() - fetchedAt) / 1000);
+      const remaining = REFRESH_SEC - (elapsed % REFRESH_SEC);
+      setCountdown(remaining);
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [fetchedAt]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     (async () => {
@@ -1343,6 +1360,7 @@ export default function App() {
         const r = await fetch(process.env.PUBLIC_URL + "/thematic_data.json?v=" + Date.now());
         if (r.ok) {
           const json = await r.json();
+          setFetchedAt(Date.now());
           // Normalize: fill perf_1d from change_pct when scraper left it null
           for (const theme of (json.themes || []))
             for (const sub of (theme.subthemes || []))
@@ -1445,7 +1463,18 @@ export default function App() {
                   Pre-Market Gappers
                 </button>
               </div>
-              <span className="text-[11px] text-zinc-600">Updated {data?.last_updated}</span>
+              {data && fetchedAt && (
+                <div className="text-right leading-tight">
+                  <div className="text-[11px] font-medium text-emerald-400">
+                    Updated {new Date(fetchedAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
+                  </div>
+                  {countdown != null && (
+                    <div className="text-[10px] text-zinc-500">
+                      Next refresh in <span className="text-zinc-400 font-mono">{countdown >= 60 ? `${Math.floor(countdown/60)}m ${countdown%60}s` : `${countdown}s`}</span>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
           {tab === "scanner" && (
