@@ -1123,7 +1123,6 @@ const GapperScanner = () => {
       <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
         <table className="w-full table-fixed min-w-[1200px]">
           <colgroup>
-            <col style={{width:"2%"}}/>
             <col style={{width:"5%"}}/>
             <col style={{width:"4.5%"}}/>
             <col style={{width:"5%"}}/>
@@ -1139,7 +1138,6 @@ const GapperScanner = () => {
           </colgroup>
           <thead>
             <tr className="text-[10px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40">
-              <th className="py-2 px-1"/>
               <th className="text-left py-2 px-1.5 font-medium">Ticker</th>
               <th className="text-right py-2 px-1.5 font-medium">Premkt %</th>
               <th className="text-right py-2 px-1.5 font-medium">Premkt Vol</th>
@@ -1159,10 +1157,6 @@ const GapperScanner = () => {
           <tbody>
             {filtered.map((g, i) => (
               <tr key={g.ticker + i} className="border-t border-zinc-800/40 hover:bg-zinc-800/20 transition-colors align-top">
-                {/* + button */}
-                <td className="py-2 px-1 text-center">
-                  <span className="inline-flex items-center justify-center w-4 h-4 rounded bg-zinc-700/50 text-zinc-500 text-[10px] font-bold leading-none">+</span>
-                </td>
                 {/* Ticker */}
                 <td className="py-2 px-1.5">
                   <span
