@@ -8,7 +8,7 @@ const MOCK_DATA = {
   themes: [
     {
       name: "Semiconductors",
-      subthemes: 
+      subthemes: [
         {
           name: "AI Chips & Accelerators",
           stocks: [
