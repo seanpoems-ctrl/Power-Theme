@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { ChevronDown, ChevronRight, Star, Activity, BarChart3, RefreshCw, Search, SlidersHorizontal, X, Layers, Zap, TrendingUp, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink } from "lucide-react";
 
 const MOCK_DATA = {
@@ -447,15 +447,18 @@ const PerfCellLB = ({ val }) => {
   return <td className={`px-2 py-1.5 text-right text-[11px] font-mono font-medium ${color} ${bg}`}>{val > 0 ? '+' : ''}{val.toFixed(1)}%</td>;
 };
 
-const Leaderboard = ({ themeRankings, industryRankings }) => {
+const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings }) => {
   const [sortKey, setSortKey] = useState("rs_score");
   const [expanded, setExpanded] = useState(null);
   const [showAll, setShowAll] = useState(false);
+  const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
+
+  const activeData = view === "themes" ? finvizThemeRankings : themeRankings;
 
   const ranked = useMemo(() => {
-    if (!themeRankings || !themeRankings.length) return [];
-    return [...themeRankings].sort((a, b) => (b[sortKey] || 0) - (a[sortKey] || 0));
-  }, [themeRankings, sortKey]);
+    if (!activeData || !activeData.length) return [];
+    return [...activeData].sort((a, b) => (b[sortKey] || 0) - (a[sortKey] || 0));
+  }, [activeData, sortKey]);
 
   const visible = showAll ? ranked : ranked.slice(0, 10);
 
@@ -467,7 +470,6 @@ const Leaderboard = ({ themeRankings, industryRankings }) => {
       if (!m[p]) m[p] = [];
       m[p].push(ind);
     }
-    // Sort each group by composite
     for (const k of Object.keys(m)) {
       m[k].sort((a, b) => {
         const sa = (a.perf_1w||0)*0.2 + (a.perf_1m||0)*0.3 + (a.perf_3m||0)*0.3 + (a.perf_6m||0)*0.2;
@@ -491,8 +493,16 @@ const Leaderboard = ({ themeRankings, industryRankings }) => {
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
           <BarChart3 size={13} className="text-blue-400"/>
-          <span className="text-xs font-semibold text-zinc-300">Industry Leaderboard</span>
+          <span className="text-xs font-semibold text-zinc-300">Theme Leaderboard</span>
           <span className="text-[10px] text-zinc-600">{ranked.length} themes</span>
+        </div>
+        <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+          {[{k:"themes",l:"Themes Map"},{k:"industry",l:"Industry"}].map(v => (
+            <button key={v.k} onClick={() => { setView(v.k); setExpanded(null); setShowAll(false); }}
+              className={`px-2.5 py-1 text-[10px] font-medium rounded-md transition-all ${view === v.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
+              {v.l}
+            </button>
+          ))}
         </div>
       </div>
       <div className="overflow-x-auto">
@@ -507,19 +517,20 @@ const Leaderboard = ({ themeRankings, industryRankings }) => {
           </thead>
           <tbody>
             {visible.map((t, i) => {
-              const isExpanded = expanded === t.name;
-              const industries = industryMap[t.name] || [];
-              return (<>
-                <tr key={t.name}
-                  onClick={() => setExpanded(isExpanded ? null : t.name)}
-                  className={`border-b border-zinc-800/30 cursor-pointer transition-colors ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
+              const isIndustryView = view === "industry";
+              const isExpanded = isIndustryView && expanded === t.name;
+              const industries = isIndustryView ? (industryMap[t.name] || []) : [];
+              return (<React.Fragment key={`lb-${t.name}`}>
+                <tr
+                  onClick={() => isIndustryView && setExpanded(isExpanded ? null : t.name)}
+                  className={`border-b border-zinc-800/30 transition-colors ${isIndustryView ? 'cursor-pointer' : ''} ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
                   <td className={`px-2 py-2 text-[11px] font-bold font-mono ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i+1}</td>
                   <td className="px-2 py-2">
                     <div className="flex items-center gap-1.5">
-                      {isExpanded ? <ChevronDown size={11} className="text-zinc-500 flex-shrink-0"/> : <ChevronRight size={11} className="text-zinc-600 flex-shrink-0"/>}
+                      {isIndustryView && (isExpanded ? <ChevronDown size={11} className="text-zinc-500 flex-shrink-0"/> : <ChevronRight size={11} className="text-zinc-600 flex-shrink-0"/>)}
                       <span className="text-[11px] font-semibold text-zinc-200">{t.name}</span>
                       {t.stage2_momentum && <span className="px-1.5 py-0.5 text-[8px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full leading-none">STAGE 2</span>}
-                      <span className="text-[9px] text-zinc-600">{t.n_industries} ind</span>
+                      {isIndustryView && t.n_industries && <span className="text-[9px] text-zinc-600">{t.n_industries} ind</span>}
                     </div>
                   </td>
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
@@ -537,7 +548,7 @@ const Leaderboard = ({ themeRankings, industryRankings }) => {
                     <td className="px-2 py-1.5"></td>
                   </tr>
                 ))}
-              </>);
+              </React.Fragment>);
             })}
           </tbody>
         </table>
@@ -1491,7 +1502,7 @@ export default function App() {
           <div className="flex gap-4 items-stretch mb-4">
             <div className="w-72 flex-shrink-0"><VixGauge initialVix={data?.vix}/></div>
             <div className="flex-1 min-w-0">
-              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings}/>}
+              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings}/>}
               {data && <CorrelationGuard themes={data.themes}/>}
               {data && <CounterTrendWarning themes={data.themes}/>}
             </div>

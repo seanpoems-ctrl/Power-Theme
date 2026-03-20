@@ -270,6 +270,137 @@ INDUSTRY_TO_THEME = {
 
 
 # ──────────────────────────────────────────────────────────────
+# Finviz Themes Map — 40 parent themes from map.ashx?t=themes
+# ──────────────────────────────────────────────────────────────
+
+# Node ID prefix → parent theme name (from Finviz themes map JS bundle)
+_THEME_MAP_PREFIXES = {
+    "energyclean": "Energy Renewable",
+    "energybase": "Energy Traditional",
+    "commenergy": "Commodities Energy",
+    "commmetals": "Commodities Metals",
+    "commagri": "Commodities Agriculture",
+    "cybersecurity": "Cybersecurity",
+    "entertainment": "Digital Entertainment",
+    "environmental": "Environmental Sustainability",
+    "transportation": "Transportation & Logistics",
+    "agriculture": "Agriculture & FoodTech",
+    "realestate": "Real Estate & REITs",
+    "blockchain": "Crypto & Blockchain",
+    "automation": "Industrial Automation",
+    "autonomous": "Autonomous Systems",
+    "healthcare": "Healthcare & Biotech",
+    "longevity": "Aging Population & Longevity",
+    "nutrition": "Healthy Food & Nutrition",
+    "biometrics": "Biometrics",
+    "smarthome": "Smart Home",
+    "wearables": "Wearables",
+    "education": "Education Technology",
+    "ecommerce": "E-commerce",
+    "hardware": "Hardware",
+    "software": "Software",
+    "consumer": "Consumer Goods",
+    "robotics": "Robotics",
+    "nanotech": "Nanotechnology",
+    "quantum": "Quantum Computing",
+    "vareality": "Virtual & Augmented Reality",
+    "bigdata": "Big Data",
+    "defense": "Defense & Aerospace",
+    "fintech": "FinTech",
+    "telecom": "Telecommunications",
+    "social": "Social Media",
+    "cloud": "Cloud Computing",
+    "space": "Space Tech",
+    "semis": "Semiconductors",
+    "evs": "Electric Vehicles",
+    "iot": "Internet of Things",
+    "ai": "Artificial Intelligence",
+}
+
+# URL param for each timeframe on Finviz themes map
+_THEME_MAP_TIMEFRAMES = {
+    "perf_1d": "",            # default (no param) = 1-day
+    "perf_1w": "&st=w1",
+    "perf_1m": "&st=w4",
+    "perf_3m": "&st=w13",
+    "perf_6m": "&st=w26",
+}
+
+
+def fetch_themes_map_performance() -> list[dict]:
+    """Fetch all ~40 Finviz parent themes with 1D/1W/1M/3M/6M performance.
+
+    Scrapes finviz.com/map.ashx?t=themes for each timeframe (5 HTTP requests).
+    Returns list of dicts with name, perf_1d..perf_6m, rs_score, stage2_momentum.
+    """
+    import re
+
+    base_url = "https://finviz.com/map.ashx?t=themes"
+    # {theme_name: {perf_1d: float, ...}}
+    theme_data: dict[str, dict[str, float]] = {}
+
+    for perf_key, url_param in _THEME_MAP_TIMEFRAMES.items():
+        url = base_url + url_param
+        try:
+            r = requests.get(url, headers=HEADERS, timeout=15)
+            r.raise_for_status()
+            # Extract nodes JSON from FinvizInitCanvas({..., initialPerf: {"nodes": {...}, ...}})
+            m = re.search(r'"nodes":(\{[^}]+\})', r.text)
+            if not m:
+                logger.warning(f"  Themes map: no nodes found for {perf_key}")
+                continue
+            nodes = json.loads(m.group(1))
+
+            # Aggregate sub-theme nodes into parent themes
+            parent_sums: dict[str, list[float]] = {}
+            for node_id, perf_val in nodes.items():
+                parent_name = None
+                # Match longest prefix first (sorted by length desc)
+                for prefix, name in sorted(_THEME_MAP_PREFIXES.items(), key=lambda x: -len(x[0])):
+                    if node_id.startswith(prefix):
+                        parent_name = name
+                        break
+                if parent_name is None:
+                    continue
+                if parent_name not in parent_sums:
+                    parent_sums[parent_name] = []
+                parent_sums[parent_name].append(perf_val)
+
+            for name, vals in parent_sums.items():
+                if name not in theme_data:
+                    theme_data[name] = {}
+                theme_data[name][perf_key] = round(sum(vals) / len(vals), 3)
+
+            logger.info(f"  Themes map {perf_key}: {len(parent_sums)} themes from {len(nodes)} nodes")
+        except Exception as e:
+            logger.warning(f"  Themes map fetch failed for {perf_key}: {e}")
+        _sleep()
+
+    # Build results with RS score + Stage 2 badge
+    perf_keys = ["perf_1d", "perf_1w", "perf_1m", "perf_3m", "perf_6m"]
+    results = []
+    for name, perfs in theme_data.items():
+        # RS Score: 5% 1D + 15% 1W + 25% 1M + 30% 3M + 25% 6M
+        rs_score = round(
+            perfs.get("perf_1d", 0) * 0.05 +
+            perfs.get("perf_1w", 0) * 0.15 +
+            perfs.get("perf_1m", 0) * 0.25 +
+            perfs.get("perf_3m", 0) * 0.30 +
+            perfs.get("perf_6m", 0) * 0.25, 2)
+        stage2 = all(perfs.get(k, 0) > 0 for k in perf_keys)
+        results.append({
+            "name": name,
+            "rs_score": rs_score,
+            "stage2_momentum": stage2,
+            **{k: perfs.get(k, 0) for k in perf_keys},
+        })
+
+    results.sort(key=lambda t: t["rs_score"], reverse=True)
+    logger.info(f"  Themes map: {len(results)} parent themes with performance data")
+    return results
+
+
+# ──────────────────────────────────────────────────────────────
 # Fetch Industry Performance + Industry Codes
 # ──────────────────────────────────────────────────────────────
 
@@ -786,6 +917,13 @@ def build_data() -> dict:
         logger.info(f"⚠ Non-trading day — using last session ({last_trading_date().isoformat()})")
     logger.info("=" * 60)
 
+    # ── Step 0: Fetch Finviz themes map (40 parent themes, 5 timeframes) ──
+    logger.info("Step 0: Fetching Finviz themes map performance...")
+    finviz_theme_rankings = fetch_themes_map_performance()
+    for t in finviz_theme_rankings[:10]:
+        badge = " ★ Stage2" if t["stage2_momentum"] else ""
+        logger.info(f"  {t['name']:35} RS={t['rs_score']:+7.2f}  1D={t['perf_1d']:+.2f}%  1W={t['perf_1w']:+.2f}%  1M={t['perf_1m']:+.2f}%  3M={t['perf_3m']:+.2f}%  6M={t['perf_6m']:+.2f}%{badge}")
+
     # ── Step 1: Fetch all industry performance (single request) ──
     logger.info("Step 1: Fetching industry performance from Finviz groups...")
     industries = fetch_industry_performance()
@@ -940,6 +1078,7 @@ def build_data() -> dict:
         "themes": output_themes,
         "theme_rankings": theme_rankings,
         "industry_rankings": industry_rankings,
+        "finviz_theme_rankings": finviz_theme_rankings,
         "spy_benchmarks": spy_benchmarks,
         "market_condition": market_condition,
         "vix": vix_value,
