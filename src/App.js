@@ -578,33 +578,48 @@ const TVPopup = ({ ticker, anchorRect }) => {
   );
 };
 
-const StockTable = ({ stocks, sortKey, sortDir, spyPerf, rsSPYKey, isTopTheme, topADRTickers }) => {
+const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers }) => {
   const [hovered, setHovered] = useState(null);
+  const [sortKey, setSortKey] = useState("rs_52w");
+  const [sortDir, setSortDir] = useState("desc");
+
+  const handleSort = (key) => {
+    if (sortKey === key) setSortDir(d => d === "desc" ? "asc" : "desc");
+    else { setSortKey(key); setSortDir("desc"); }
+  };
+
   const sorted = useMemo(() => {
     const a = [...stocks];
     a.sort((x, y) => sortDir === "asc" ? ((x[sortKey]||0) > (y[sortKey]||0) ? 1 : -1) : ((x[sortKey]||0) < (y[sortKey]||0) ? 1 : -1));
     return a;
   }, [stocks, sortKey, sortDir]);
 
+  const SH = ({ k, label, align = "right" }) => (
+    <th onClick={() => handleSort(k)}
+      className={`py-2 px-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors text-${align} ${sortKey === k ? 'text-blue-400' : 'text-zinc-500'}`}>
+      {label}{sortKey === k ? (sortDir === "desc" ? " ▼" : " ▲") : ""}
+    </th>
+  );
+
   return (
     <>
     <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
       <table className="w-full text-sm min-w-[900px]">
         <thead>
-          <tr className="text-[11px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80">
-            <th className="text-left py-2 px-4 font-medium w-40">Ticker</th>
-            <th className="text-right py-2 px-2 font-medium">Price</th>
-            <th className="text-right py-2 px-2 font-medium">52W Hi</th>
-            <th className="text-right py-2 px-2 font-medium">Dist</th>
-            <th className="text-right py-2 px-2 font-medium">Vol</th>
-            <th className="text-right py-2 px-2 font-medium">RVol</th>
-            <th className="text-right py-2 px-2 font-medium">Avg $V</th>
-            <th className="text-right py-2 px-2 font-medium">ADR</th>
-            <th className="text-center py-2 px-2 font-medium">RS</th>
-            <th className="text-center py-2 px-2 font-medium">vs SPY</th>
-            {PERF_KEYS.map(p => <th key={p.key} className="text-right py-2 px-2 font-medium">{p.label}</th>)}
-            <th className="text-right py-2 px-2 font-medium">Earnings</th>
-            <th className="text-center py-2 px-2 font-medium">6M</th>
+          <tr className="text-[11px] uppercase tracking-wider bg-zinc-900/80">
+            <th className="text-left py-2 px-4 font-medium w-40 text-zinc-500">Ticker</th>
+            <SH k="price" label="Price"/>
+            <SH k="52w_high" label="52W Hi"/>
+            <SH k="dist_52w_high" label="Dist"/>
+            <SH k="volume" label="Vol"/>
+            <SH k="rvol" label="RVol"/>
+            <SH k="avg_dollar_volume" label="Avg $V"/>
+            <SH k="adr_pct" label="ADR"/>
+            <SH k="rs_52w" label="RS" align="center"/>
+            <th className="text-center py-2 px-2 font-medium text-zinc-500">vs SPY</th>
+            {PERF_KEYS.map(p => <SH key={p.key} k={p.key} label={p.label}/>)}
+            <th className="text-right py-2 px-2 font-medium text-zinc-500">Earnings</th>
+            <th className="text-center py-2 px-2 font-medium text-zinc-500">6M</th>
           </tr>
         </thead>
         <tbody>
@@ -662,7 +677,7 @@ function normalizeTheme(t) {
   return { ...t, subthemes: [{ name: t.name, stocks: t.stocks || [] }] };
 }
 
-const SubThemeSection = ({ subtheme, sortKey, sortDir, parentAvg, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers }) => {
+const SubThemeSection = ({ subtheme, parentAvg, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers }) => {
   const [open, setOpen] = useState(true);
   const avg = (k) => subtheme.stocks.length
     ? subtheme.stocks.reduce((s, x) => s + (x[k] || 0), 0) / subtheme.stocks.length
@@ -697,14 +712,14 @@ const SubThemeSection = ({ subtheme, sortKey, sortDir, parentAvg, lbPerfKey, spy
       </button>
       {open && (
         <div className="mt-1">
-          <StockTable stocks={subtheme.stocks} sortKey={sortKey} sortDir={sortDir} spyPerf={spyPerf} rsSPYKey={rsSPYKey} isTopTheme={isTopTheme} topADRTickers={topADRTickers}/>
+          <StockTable stocks={subtheme.stocks} spyPerf={spyPerf} rsSPYKey={rsSPYKey} isTopTheme={isTopTheme} topADRTickers={topADRTickers}/>
         </div>
       )}
     </div>
   );
 };
 
-const ThemeSection = ({ theme, sortKey, sortDir, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers }) => {
+const ThemeSection = ({ theme, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers }) => {
   const [open, setOpen] = useState(true);
   const norm = normalizeTheme(theme);
   const allStocks = norm.subthemes.flatMap(s => s.stocks);
@@ -741,7 +756,7 @@ const ThemeSection = ({ theme, sortKey, sortDir, lbPerfKey, spyPerf, rsSPYKey, i
       {open && (
         <div className="mt-1.5 space-y-1.5">
           {norm.subthemes.map((sub, i) => (
-            <SubThemeSection key={sub.name + i} subtheme={sub} sortKey={sortKey} sortDir={sortDir} parentAvg={parentAvg} lbPerfKey={lbPerfKey} spyPerf={spyPerf} rsSPYKey={rsSPYKey} isTopTheme={isTopTheme} topADRTickers={topADRTickers}/>
+            <SubThemeSection key={sub.name + i} subtheme={sub} parentAvg={parentAvg} lbPerfKey={lbPerfKey} spyPerf={spyPerf} rsSPYKey={rsSPYKey} isTopTheme={isTopTheme} topADRTickers={topADRTickers}/>
           ))}
         </div>
       )}
@@ -1301,8 +1316,6 @@ export default function App() {
   const [filterADR, setFilterADR] = useState(4);
   const [filterRS, setFilterRS] = useState(50);
   const [filterDist52w, setFilterDist52w] = useState(20);
-  const [sortKey, setSortKey] = useState("rs_52w");
-  const [sortDir, setSortDir] = useState("desc");
   const [showFP, setShowFP] = useState(false);
   const [lbPerfKey, setLbPerfKey] = useState("perf_1m");
   const [rsSPYKey, setRsSPYKey] = useState("perf_1m");
@@ -1440,19 +1453,6 @@ export default function App() {
                   <button key={k.key} onClick={() => setRsSPYKey(k.key)} className={`px-2 py-1.5 text-[11px] transition-colors ${rsSPYKey === k.key ? 'bg-blue-500/25 text-blue-300' : 'bg-zinc-800/60 text-zinc-500 hover:text-zinc-300'}`}>{k.label}</button>
                 ))}
               </div>
-              <div className="flex items-center gap-1.5">
-                <select value={sortKey} onChange={e=>setSortKey(e.target.value)} className="text-[11px] bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1.5 text-zinc-300 focus:outline-none">
-                  <option value="rs_52w">Sort: RS</option>
-                  <option value="perf_1d">Sort: 1D</option>
-                  <option value="perf_1w">Sort: 1W</option>
-                  <option value="perf_1m">Sort: 1M</option>
-                  <option value="perf_3m">Sort: 3M</option>
-                  <option value="perf_6m">Sort: 6M</option>
-                  <option value="dollar_volume">Sort: $ Vol</option>
-                  <option value="adr_pct">Sort: ADR</option>
-                </select>
-                <button onClick={()=>setSortDir(d=>d==="desc"?"asc":"desc")} className="text-[11px] px-2 py-1.5 bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-400 hover:text-zinc-200">{sortDir==="desc"?"↓":"↑"}</button>
-              </div>
             </div>
             {showFP && (
               <div className="mt-2.5 p-3 bg-zinc-800/40 rounded-lg border border-zinc-700/40 flex flex-wrap items-end gap-4">
@@ -1507,7 +1507,7 @@ export default function App() {
               <p className="text-sm">No results</p>
               <button onClick={()=>{setFiltersOn(false);setSearch("");}} className="mt-2 text-xs text-blue-400 hover:underline">Reset</button>
             </div>
-          ) : filtered.map((t,i) => <ThemeSection key={t.name+i} theme={t} sortKey={sortKey} sortDir={sortDir} lbPerfKey={lbPerfKey} spyPerf={data?.spy_benchmarks?.[rsSPYKey]} rsSPYKey={rsSPYKey} isTopTheme={i===0} topADRTickers={topADRTickers}/>)}
+          ) : filtered.map((t,i) => <ThemeSection key={t.name+i} theme={t} lbPerfKey={lbPerfKey} spyPerf={data?.spy_benchmarks?.[rsSPYKey]} rsSPYKey={rsSPYKey} isTopTheme={i===0} topADRTickers={topADRTickers}/>)}
         </div>
       )}
     </div>
