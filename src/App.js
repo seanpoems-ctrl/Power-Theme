@@ -83,21 +83,14 @@ const PerfCell = ({ value }) => {
   if (value == null) return <td className="text-right py-2 px-2 text-xs text-zinc-600">—</td>;
   const v = parseFloat(value);
   let bg, txt;
-  if      (v >= 30)  { bg = "bg-emerald-500/40"; txt = "text-emerald-200 font-bold"; }
-  else if (v >= 20)  { bg = "bg-emerald-500/28"; txt = "text-emerald-300"; }
-  else if (v >= 15)  { bg = "bg-emerald-500/20"; txt = "text-emerald-300"; }
-  else if (v >= 10)  { bg = "bg-emerald-500/15"; txt = "text-emerald-400"; }
-  else if (v >= 7)   { bg = "bg-emerald-500/10"; txt = "text-emerald-400"; }
-  else if (v >= 5)   { bg = "bg-emerald-500/8";  txt = "text-emerald-400"; }
-  else if (v >= 2)   { bg = "bg-emerald-500/5";  txt = "text-emerald-400/80"; }
-  else if (v >= 0)   { bg = "";                  txt = "text-emerald-400/50"; }
-  else if (v >= -2)  { bg = "";                  txt = "text-red-400/50"; }
-  else if (v >= -5)  { bg = "bg-red-500/5";      txt = "text-red-400/80"; }
-  else if (v >= -7)  { bg = "bg-red-500/8";      txt = "text-red-400"; }
-  else if (v >= -10) { bg = "bg-red-500/12";     txt = "text-red-400"; }
-  else if (v >= -15) { bg = "bg-red-500/20";     txt = "text-red-400"; }
-  else if (v >= -20) { bg = "bg-red-500/28";     txt = "text-red-400"; }
-  else               { bg = "bg-red-500/40";     txt = "text-red-300 font-bold"; }
+  if (v >= 20) { bg = "bg-emerald-500/30"; txt = "text-emerald-300"; }
+  else if (v >= 10) { bg = "bg-emerald-500/20"; txt = "text-emerald-400"; }
+  else if (v >= 5) { bg = "bg-emerald-500/10"; txt = "text-emerald-400"; }
+  else if (v >= 0) { bg = "bg-emerald-500/5"; txt = "text-emerald-400/80"; }
+  else if (v >= -5) { bg = "bg-red-500/5"; txt = "text-red-400/80"; }
+  else if (v >= -10) { bg = "bg-red-500/10"; txt = "text-red-400"; }
+  else if (v >= -20) { bg = "bg-red-500/20"; txt = "text-red-400"; }
+  else { bg = "bg-red-500/30"; txt = "text-red-300"; }
   return (
     <td className={`text-right py-2 px-2 text-xs font-mono font-medium ${txt} ${bg}`}>
       {v >= 0 ? "+" : ""}{v.toFixed(1)}%
@@ -703,9 +696,8 @@ function normalizeTheme(t) {
   return { ...t, subthemes: [{ name: t.name, stocks: t.stocks || [] }] };
 }
 
-const SubThemeSection = ({ subtheme, parentAvg, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers, defaultOpen = true }) => {
-  const [open, setOpen] = useState(defaultOpen);
-  useEffect(() => { setOpen(defaultOpen); }, [defaultOpen]);
+const SubThemeSection = ({ subtheme, parentAvg, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers }) => {
+  const [open, setOpen] = useState(true);
   const avg = (k) => subtheme.stocks.length
     ? subtheme.stocks.reduce((s, x) => s + (x[k] || 0), 0) / subtheme.stocks.length
     : 0;
@@ -746,9 +738,8 @@ const SubThemeSection = ({ subtheme, parentAvg, lbPerfKey, spyPerf, rsSPYKey, is
   );
 };
 
-const ThemeSection = ({ theme, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers, defaultOpen = true, rankNum }) => {
-  const [open, setOpen] = useState(defaultOpen);
-  useEffect(() => { setOpen(defaultOpen); }, [defaultOpen]);
+const ThemeSection = ({ theme, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers }) => {
+  const [open, setOpen] = useState(true);
   const norm = normalizeTheme(theme);
   const allStocks = norm.subthemes.flatMap(s => s.stocks);
 
@@ -762,7 +753,6 @@ const ThemeSection = ({ theme, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRT
       <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-4 py-2.5 bg-zinc-800/60 hover:bg-zinc-800/80 rounded-lg border border-zinc-700/50 transition-colors">
         <div className="flex items-center gap-3">
           {open ? <ChevronDown size={14} className="text-zinc-400"/> : <ChevronRight size={14} className="text-zinc-400"/>}
-          {rankNum != null && <span className="w-5 h-5 flex items-center justify-center text-[10px] font-bold font-mono text-zinc-500 bg-zinc-800 border border-zinc-700/50 rounded flex-shrink-0">#{rankNum}</span>}
           <Layers size={13} className="text-blue-400"/>
           <span className="font-semibold text-sm text-zinc-100">{norm.name}</span>
           <span className="text-[11px] text-zinc-500 bg-zinc-700/40 px-1.5 py-0.5 rounded">
@@ -785,7 +775,7 @@ const ThemeSection = ({ theme, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRT
       {open && (
         <div className="mt-1.5 space-y-1.5">
           {norm.subthemes.map((sub, i) => (
-            <SubThemeSection key={sub.name + i} subtheme={sub} parentAvg={parentAvg} lbPerfKey={lbPerfKey} spyPerf={spyPerf} rsSPYKey={rsSPYKey} isTopTheme={isTopTheme} topADRTickers={topADRTickers} defaultOpen={defaultOpen}/>
+            <SubThemeSection key={sub.name + i} subtheme={sub} parentAvg={parentAvg} lbPerfKey={lbPerfKey} spyPerf={spyPerf} rsSPYKey={rsSPYKey} isTopTheme={isTopTheme} topADRTickers={topADRTickers}/>
           ))}
         </div>
       )}
@@ -1346,7 +1336,7 @@ export default function App() {
   const [filterADR, setFilterADR] = useState(4);
   const [filterRS, setFilterRS] = useState(50);
   const [filterDist52w, setFilterDist52w] = useState(20);
-  const [allOpen, setAllOpen] = useState(true);
+  const [showFP, setShowFP] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [lbPerfKey, setLbPerfKey] = useState("perf_1m");
   const [rsSPYKey, setRsSPYKey] = useState("perf_1m");
@@ -1517,15 +1507,11 @@ export default function App() {
                 <span className="text-zinc-600">·</span>
                 <span className="text-zinc-500">{unique.length} tickers</span>
               </div>
-              <button
-                onClick={() => setAllOpen(v => !v)}
-                className="flex items-center gap-1 px-2 py-1 text-[10px] text-zinc-500 hover:text-zinc-300 bg-zinc-800/40 border border-zinc-700/40 rounded transition-colors"
-              >
-                {allOpen ? <ChevronDown size={10}/> : <ChevronRight size={10}/>}
-                {allOpen ? "Collapse All" : "Expand All"}
-              </button>
               <div className="flex-1"/>
               <SearchBar data={data} search={search} setSearch={setSearch}/>
+              <button onClick={()=>setShowFP(!showFP)} className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-md border transition-colors ${filtersOn?'bg-blue-500/15 border-blue-500/30 text-blue-400':'bg-zinc-800/60 border-zinc-700/50 text-zinc-400'}`}>
+                <SlidersHorizontal size={12}/> Filters
+              </button>
               <div className="flex items-center gap-1 border border-zinc-700/50 rounded-md overflow-hidden">
                 <span className="px-2 text-[10px] text-zinc-600 bg-zinc-800/60">vs SPY</span>
                 {RS_SPY_KEYS.map(k => (
@@ -1533,52 +1519,38 @@ export default function App() {
                 ))}
               </div>
             </div>
-            {/* Always-visible chip filter bar */}
-            <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2 pt-2 border-t border-zinc-800/60">
-              <button
-                onClick={() => setFiltersOn(v => !v)}
-                className={`flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-semibold rounded border transition-colors flex-shrink-0 ${filtersOn ? 'bg-blue-500/15 border-blue-500/30 text-blue-400' : 'bg-zinc-800/40 border-zinc-700/40 text-zinc-500'}`}
-              >
-                <SlidersHorizontal size={9}/>
-                {filtersOn ? "Filters ON" : "Filters OFF"}
-              </button>
-              <div className={`flex items-center gap-1 transition-opacity ${filtersOn ? '' : 'opacity-30 pointer-events-none'}`}>
-                <span className="text-[10px] text-zinc-600 mr-0.5">$Vol</span>
-                {[50,100,250,500].map(v => (
-                  <button key={v} onClick={() => setFilterDolVol(v)}
-                    className={`px-2 py-0.5 text-[10px] font-mono rounded border transition-colors ${filterDolVol === v ? 'bg-blue-500/20 border-blue-500/40 text-blue-300' : 'border-zinc-700/40 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600'}`}>
-                    ${v}M
-                  </button>
-                ))}
+            {showFP && (
+              <div className="mt-2.5 p-3 bg-zinc-800/40 rounded-lg border border-zinc-700/40 flex flex-wrap items-end gap-4">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" checked={filtersOn} onChange={()=>setFiltersOn(!filtersOn)} className="rounded"/>
+                  <span className="text-xs text-zinc-300">Enable</span>
+                </label>
+                <div>
+                  <label className="text-[10px] text-zinc-500 block mb-1">Min $ Vol</label>
+                  <select value={filterDolVol} onChange={e=>setFilterDolVol(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
+                    {[50,100,250,500].map(v=><option key={v} value={v}>${v}M</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="text-[10px] text-zinc-500 block mb-1">Min ADR%</label>
+                  <select value={filterADR} onChange={e=>setFilterADR(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
+                    {[2,3,4,5,7].map(v=><option key={v} value={v}>{v}%</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="text-[10px] text-zinc-500 block mb-1">Min RS</label>
+                  <select value={filterRS} onChange={e=>setFilterRS(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
+                    {[30,50,70,80,90].map(v=><option key={v} value={v}>{v}+</option>)}
+                  </select>
+                </div>
+                <div>
+                  <label className="text-[10px] text-zinc-500 block mb-1">Max Dist 52W Hi</label>
+                  <select value={filterDist52w} onChange={e=>setFilterDist52w(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
+                    {[5,10,15,20,30].map(v=><option key={v} value={v}>within {v}%</option>)}
+                  </select>
+                </div>
               </div>
-              <div className={`flex items-center gap-1 transition-opacity ${filtersOn ? '' : 'opacity-30 pointer-events-none'}`}>
-                <span className="text-[10px] text-zinc-600 mr-0.5">ADR</span>
-                {[2,3,4,5,7].map(v => (
-                  <button key={v} onClick={() => setFilterADR(v)}
-                    className={`px-2 py-0.5 text-[10px] font-mono rounded border transition-colors ${filterADR === v ? 'bg-blue-500/20 border-blue-500/40 text-blue-300' : 'border-zinc-700/40 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600'}`}>
-                    {v}%
-                  </button>
-                ))}
-              </div>
-              <div className={`flex items-center gap-1 transition-opacity ${filtersOn ? '' : 'opacity-30 pointer-events-none'}`}>
-                <span className="text-[10px] text-zinc-600 mr-0.5">RS</span>
-                {[30,50,70,80,90].map(v => (
-                  <button key={v} onClick={() => setFilterRS(v)}
-                    className={`px-2 py-0.5 text-[10px] font-mono rounded border transition-colors ${filterRS === v ? 'bg-blue-500/20 border-blue-500/40 text-blue-300' : 'border-zinc-700/40 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600'}`}>
-                    {v}+
-                  </button>
-                ))}
-              </div>
-              <div className={`flex items-center gap-1 transition-opacity ${filtersOn ? '' : 'opacity-30 pointer-events-none'}`}>
-                <span className="text-[10px] text-zinc-600 mr-0.5">Dist</span>
-                {[5,10,15,20,30].map(v => (
-                  <button key={v} onClick={() => setFilterDist52w(v)}
-                    className={`px-2 py-0.5 text-[10px] font-mono rounded border transition-colors ${filterDist52w === v ? 'bg-blue-500/20 border-blue-500/40 text-blue-300' : 'border-zinc-700/40 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600'}`}>
-                    {v}%
-                  </button>
-                ))}
-              </div>
-            </div>
+            )}
             </>
           )}
         </div>
@@ -1589,7 +1561,7 @@ export default function App() {
           <div className="flex gap-4 items-stretch mb-4">
             <div className="w-72 flex-shrink-0"><VixGauge initialVix={data?.vix}/></div>
             <div className="flex-1 min-w-0">
-              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings}/>}
+              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} themeSparklines={themeSparklineMap}/>}
               {data && <CorrelationGuard themes={data.themes}/>}
               {data && <CounterTrendWarning themes={data.themes}/>}
             </div>
