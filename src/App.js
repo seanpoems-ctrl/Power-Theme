@@ -83,14 +83,21 @@ const PerfCell = ({ value }) => {
   if (value == null) return <td className="text-right py-2 px-2 text-xs text-zinc-600">—</td>;
   const v = parseFloat(value);
   let bg, txt;
-  if (v >= 20) { bg = "bg-emerald-500/30"; txt = "text-emerald-300"; }
-  else if (v >= 10) { bg = "bg-emerald-500/20"; txt = "text-emerald-400"; }
-  else if (v >= 5) { bg = "bg-emerald-500/10"; txt = "text-emerald-400"; }
-  else if (v >= 0) { bg = "bg-emerald-500/5"; txt = "text-emerald-400/80"; }
-  else if (v >= -5) { bg = "bg-red-500/5"; txt = "text-red-400/80"; }
-  else if (v >= -10) { bg = "bg-red-500/10"; txt = "text-red-400"; }
-  else if (v >= -20) { bg = "bg-red-500/20"; txt = "text-red-400"; }
-  else { bg = "bg-red-500/30"; txt = "text-red-300"; }
+  if      (v >= 30)  { bg = "bg-emerald-500/40"; txt = "text-emerald-200 font-bold"; }
+  else if (v >= 20)  { bg = "bg-emerald-500/28"; txt = "text-emerald-300"; }
+  else if (v >= 15)  { bg = "bg-emerald-500/20"; txt = "text-emerald-300"; }
+  else if (v >= 10)  { bg = "bg-emerald-500/15"; txt = "text-emerald-400"; }
+  else if (v >= 7)   { bg = "bg-emerald-500/10"; txt = "text-emerald-400"; }
+  else if (v >= 5)   { bg = "bg-emerald-500/8";  txt = "text-emerald-400"; }
+  else if (v >= 2)   { bg = "bg-emerald-500/5";  txt = "text-emerald-400/80"; }
+  else if (v >= 0)   { bg = "";                  txt = "text-emerald-400/50"; }
+  else if (v >= -2)  { bg = "";                  txt = "text-red-400/50"; }
+  else if (v >= -5)  { bg = "bg-red-500/5";      txt = "text-red-400/80"; }
+  else if (v >= -7)  { bg = "bg-red-500/8";      txt = "text-red-400"; }
+  else if (v >= -10) { bg = "bg-red-500/12";     txt = "text-red-400"; }
+  else if (v >= -15) { bg = "bg-red-500/20";     txt = "text-red-400"; }
+  else if (v >= -20) { bg = "bg-red-500/28";     txt = "text-red-400"; }
+  else               { bg = "bg-red-500/40";     txt = "text-red-300 font-bold"; }
   return (
     <td className={`text-right py-2 px-2 text-xs font-mono font-medium ${txt} ${bg}`}>
       {v >= 0 ? "+" : ""}{v.toFixed(1)}%
@@ -691,8 +698,9 @@ function normalizeTheme(t) {
   return { ...t, subthemes: [{ name: t.name, stocks: t.stocks || [] }] };
 }
 
-const SubThemeSection = ({ subtheme, parentAvg, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers }) => {
-  const [open, setOpen] = useState(true);
+const SubThemeSection = ({ subtheme, parentAvg, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers, defaultOpen = true }) => {
+  const [open, setOpen] = useState(defaultOpen);
+  useEffect(() => { setOpen(defaultOpen); }, [defaultOpen]);
   const avg = (k) => subtheme.stocks.length
     ? subtheme.stocks.reduce((s, x) => s + (x[k] || 0), 0) / subtheme.stocks.length
     : 0;
@@ -733,8 +741,9 @@ const SubThemeSection = ({ subtheme, parentAvg, lbPerfKey, spyPerf, rsSPYKey, is
   );
 };
 
-const ThemeSection = ({ theme, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers }) => {
-  const [open, setOpen] = useState(true);
+const ThemeSection = ({ theme, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers, defaultOpen = true, rankNum }) => {
+  const [open, setOpen] = useState(defaultOpen);
+  useEffect(() => { setOpen(defaultOpen); }, [defaultOpen]);
   const norm = normalizeTheme(theme);
   const allStocks = norm.subthemes.flatMap(s => s.stocks);
 
@@ -748,6 +757,7 @@ const ThemeSection = ({ theme, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRT
       <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-4 py-2.5 bg-zinc-800/60 hover:bg-zinc-800/80 rounded-lg border border-zinc-700/50 transition-colors">
         <div className="flex items-center gap-3">
           {open ? <ChevronDown size={14} className="text-zinc-400"/> : <ChevronRight size={14} className="text-zinc-400"/>}
+          {rankNum != null && <span className="w-5 h-5 flex items-center justify-center text-[10px] font-bold font-mono text-zinc-500 bg-zinc-800 border border-zinc-700/50 rounded flex-shrink-0">#{rankNum}</span>}
           <Layers size={13} className="text-blue-400"/>
           <span className="font-semibold text-sm text-zinc-100">{norm.name}</span>
           <span className="text-[11px] text-zinc-500 bg-zinc-700/40 px-1.5 py-0.5 rounded">
@@ -770,7 +780,7 @@ const ThemeSection = ({ theme, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRT
       {open && (
         <div className="mt-1.5 space-y-1.5">
           {norm.subthemes.map((sub, i) => (
-            <SubThemeSection key={sub.name + i} subtheme={sub} parentAvg={parentAvg} lbPerfKey={lbPerfKey} spyPerf={spyPerf} rsSPYKey={rsSPYKey} isTopTheme={isTopTheme} topADRTickers={topADRTickers}/>
+            <SubThemeSection key={sub.name + i} subtheme={sub} parentAvg={parentAvg} lbPerfKey={lbPerfKey} spyPerf={spyPerf} rsSPYKey={rsSPYKey} isTopTheme={isTopTheme} topADRTickers={topADRTickers} defaultOpen={defaultOpen}/>
           ))}
         </div>
       )}
@@ -1331,7 +1341,7 @@ export default function App() {
   const [filterADR, setFilterADR] = useState(4);
   const [filterRS, setFilterRS] = useState(50);
   const [filterDist52w, setFilterDist52w] = useState(20);
-  const [showFP, setShowFP] = useState(false);
+  const [allOpen, setAllOpen] = useState(true);
   // eslint-disable-next-line no-unused-vars
   const [lbPerfKey, setLbPerfKey] = useState("perf_1m");
   const [rsSPYKey, setRsSPYKey] = useState("perf_1m");
@@ -1340,18 +1350,17 @@ export default function App() {
 
   const REFRESH_SEC = 5 * 60; // scraper runs every 5 min
 
-  // Countdown ticker
+  // Countdown ticker — aligned to clock's 5-min boundaries (:00, :05, :10, ...)
   useEffect(() => {
-    if (!fetchedAt) return;
     const tick = () => {
-      const elapsed = Math.floor((Date.now() - fetchedAt) / 1000);
-      const remaining = REFRESH_SEC - (elapsed % REFRESH_SEC);
+      const msIntoInterval = Date.now() % (REFRESH_SEC * 1000);
+      const remaining = Math.ceil((REFRESH_SEC * 1000 - msIntoInterval) / 1000) || REFRESH_SEC;
       setCountdown(remaining);
     };
     tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, [fetchedAt]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     (async () => {
