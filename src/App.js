@@ -457,7 +457,7 @@ const PerfCellLB = ({ val }) => {
   return <td className={`px-2 py-1.5 text-right text-[11px] font-mono font-medium ${color} ${bg}`}>{val > 0 ? '+' : ''}{val.toFixed(1)}%</td>;
 };
 
-const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings }) => {
+const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themeSparklines = {} }) => {
   const [sortKey, setSortKey] = useState("rs_score");
   const [sortDir, setSortDir] = useState("desc");
   const [expanded, setExpanded] = useState(null);
@@ -534,6 +534,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings }) =
               <th className="px-2 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Theme</th>
               {LB_KEYS.map(k => <SortHeader key={k.key} k={k.key} label={k.label} />)}
               <SortHeader k="rs_score" label="RS" w="w-16" />
+              <th className="px-2 py-2 w-14 text-center text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">6M</th>
             </tr>
           </thead>
           <tbody>
@@ -558,6 +559,9 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings }) =
                   <td className={`px-2 py-1.5 text-right text-[11px] font-mono font-bold ${t.rs_score > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {t.rs_score > 0 ? '+' : ''}{t.rs_score.toFixed(1)}
                   </td>
+                  <td className="px-2 py-1.5 text-center">
+                    <div className="flex justify-center"><Sparkline data={themeSparklines[t.name] || []} width={48} height={16}/></div>
+                  </td>
                 </tr>
                 {isExpanded && industries.map(ind => (
                   <tr key={ind.name} className="bg-zinc-800/20 border-b border-zinc-800/20">
@@ -566,6 +570,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings }) =
                       <span className="text-[10px] text-zinc-400">{ind.name}</span>
                     </td>
                     {LB_KEYS.map(k => <PerfCellLB key={k.key} val={ind[k.key]}/>)}
+                    <td className="px-2 py-1.5"></td>
                     <td className="px-2 py-1.5"></td>
                   </tr>
                 ))}
@@ -1424,6 +1429,22 @@ export default function App() {
     return new Set(sorted.slice(0, Math.ceil(sorted.length * 0.1)).map(s => s.ticker));
   }, [data]);
 
+  // Compute aggregated sparklines per theme for Leaderboard
+  const themeSparklineMap = useMemo(() => {
+    if (!data) return {};
+    const map = {};
+    for (const theme of data.themes) {
+      const norm = normalizeTheme(theme);
+      const sparklines = norm.subthemes.flatMap(s => s.stocks).map(s => s.sparkline).filter(sp => sp && sp.length >= 5);
+      if (!sparklines.length) continue;
+      const len = Math.min(...sparklines.map(sp => sp.length));
+      // Normalize each to start at 1.0, then average
+      const norm2 = sparklines.map(sp => { const base = sp[sp.length - len]; return sp.slice(-len).map(v => base > 0 ? v / base : 1); });
+      map[norm.name] = Array.from({ length: len }, (_, i) => norm2.reduce((s, sp) => s + sp[i], 0) / norm2.length);
+    }
+    return map;
+  }, [data]);
+
   if (loading) return <div className="min-h-screen bg-zinc-950 flex items-center justify-center"><RefreshCw size={24} className="text-zinc-500 animate-spin"/></div>;
 
   return (
@@ -1496,11 +1517,15 @@ export default function App() {
                 <span className="text-zinc-600">·</span>
                 <span className="text-zinc-500">{unique.length} tickers</span>
               </div>
+              <button
+                onClick={() => setAllOpen(v => !v)}
+                className="flex items-center gap-1 px-2 py-1 text-[10px] text-zinc-500 hover:text-zinc-300 bg-zinc-800/40 border border-zinc-700/40 rounded transition-colors"
+              >
+                {allOpen ? <ChevronDown size={10}/> : <ChevronRight size={10}/>}
+                {allOpen ? "Collapse All" : "Expand All"}
+              </button>
               <div className="flex-1"/>
               <SearchBar data={data} search={search} setSearch={setSearch}/>
-              <button onClick={()=>setShowFP(!showFP)} className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-md border transition-colors ${filtersOn?'bg-blue-500/15 border-blue-500/30 text-blue-400':'bg-zinc-800/60 border-zinc-700/50 text-zinc-400'}`}>
-                <SlidersHorizontal size={12}/> Filters
-              </button>
               <div className="flex items-center gap-1 border border-zinc-700/50 rounded-md overflow-hidden">
                 <span className="px-2 text-[10px] text-zinc-600 bg-zinc-800/60">vs SPY</span>
                 {RS_SPY_KEYS.map(k => (
@@ -1508,38 +1533,52 @@ export default function App() {
                 ))}
               </div>
             </div>
-            {showFP && (
-              <div className="mt-2.5 p-3 bg-zinc-800/40 rounded-lg border border-zinc-700/40 flex flex-wrap items-end gap-4">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" checked={filtersOn} onChange={()=>setFiltersOn(!filtersOn)} className="rounded"/>
-                  <span className="text-xs text-zinc-300">Enable</span>
-                </label>
-                <div>
-                  <label className="text-[10px] text-zinc-500 block mb-1">Min $ Vol</label>
-                  <select value={filterDolVol} onChange={e=>setFilterDolVol(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
-                    {[50,100,250,500].map(v=><option key={v} value={v}>${v}M</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label className="text-[10px] text-zinc-500 block mb-1">Min ADR%</label>
-                  <select value={filterADR} onChange={e=>setFilterADR(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
-                    {[2,3,4,5,7].map(v=><option key={v} value={v}>{v}%</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label className="text-[10px] text-zinc-500 block mb-1">Min RS</label>
-                  <select value={filterRS} onChange={e=>setFilterRS(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
-                    {[30,50,70,80,90].map(v=><option key={v} value={v}>{v}+</option>)}
-                  </select>
-                </div>
-                <div>
-                  <label className="text-[10px] text-zinc-500 block mb-1">Max Dist 52W Hi</label>
-                  <select value={filterDist52w} onChange={e=>setFilterDist52w(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
-                    {[5,10,15,20,30].map(v=><option key={v} value={v}>within {v}%</option>)}
-                  </select>
-                </div>
+            {/* Always-visible chip filter bar */}
+            <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2 pt-2 border-t border-zinc-800/60">
+              <button
+                onClick={() => setFiltersOn(v => !v)}
+                className={`flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-semibold rounded border transition-colors flex-shrink-0 ${filtersOn ? 'bg-blue-500/15 border-blue-500/30 text-blue-400' : 'bg-zinc-800/40 border-zinc-700/40 text-zinc-500'}`}
+              >
+                <SlidersHorizontal size={9}/>
+                {filtersOn ? "Filters ON" : "Filters OFF"}
+              </button>
+              <div className={`flex items-center gap-1 transition-opacity ${filtersOn ? '' : 'opacity-30 pointer-events-none'}`}>
+                <span className="text-[10px] text-zinc-600 mr-0.5">$Vol</span>
+                {[50,100,250,500].map(v => (
+                  <button key={v} onClick={() => setFilterDolVol(v)}
+                    className={`px-2 py-0.5 text-[10px] font-mono rounded border transition-colors ${filterDolVol === v ? 'bg-blue-500/20 border-blue-500/40 text-blue-300' : 'border-zinc-700/40 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600'}`}>
+                    ${v}M
+                  </button>
+                ))}
               </div>
-            )}
+              <div className={`flex items-center gap-1 transition-opacity ${filtersOn ? '' : 'opacity-30 pointer-events-none'}`}>
+                <span className="text-[10px] text-zinc-600 mr-0.5">ADR</span>
+                {[2,3,4,5,7].map(v => (
+                  <button key={v} onClick={() => setFilterADR(v)}
+                    className={`px-2 py-0.5 text-[10px] font-mono rounded border transition-colors ${filterADR === v ? 'bg-blue-500/20 border-blue-500/40 text-blue-300' : 'border-zinc-700/40 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600'}`}>
+                    {v}%
+                  </button>
+                ))}
+              </div>
+              <div className={`flex items-center gap-1 transition-opacity ${filtersOn ? '' : 'opacity-30 pointer-events-none'}`}>
+                <span className="text-[10px] text-zinc-600 mr-0.5">RS</span>
+                {[30,50,70,80,90].map(v => (
+                  <button key={v} onClick={() => setFilterRS(v)}
+                    className={`px-2 py-0.5 text-[10px] font-mono rounded border transition-colors ${filterRS === v ? 'bg-blue-500/20 border-blue-500/40 text-blue-300' : 'border-zinc-700/40 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600'}`}>
+                    {v}+
+                  </button>
+                ))}
+              </div>
+              <div className={`flex items-center gap-1 transition-opacity ${filtersOn ? '' : 'opacity-30 pointer-events-none'}`}>
+                <span className="text-[10px] text-zinc-600 mr-0.5">Dist</span>
+                {[5,10,15,20,30].map(v => (
+                  <button key={v} onClick={() => setFilterDist52w(v)}
+                    className={`px-2 py-0.5 text-[10px] font-mono rounded border transition-colors ${filterDist52w === v ? 'bg-blue-500/20 border-blue-500/40 text-blue-300' : 'border-zinc-700/40 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600'}`}>
+                    {v}%
+                  </button>
+                ))}
+              </div>
+            </div>
             </>
           )}
         </div>
