@@ -736,7 +736,7 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
   const primaryKey = sortPriority[0]?.key;
   const secondaryKey = sortPriority[1]?.key;
 
-  const SH = ({ k, label, align = "right" }) => {
+  const SH = ({ k, label, align = "right", w }) => {
     const priIdx = sortPriority.findIndex(p => p.key === k);
     const isActive = priIdx >= 0;
     const dir = isActive ? sortPriority[priIdx].direction : null;
@@ -745,7 +745,7 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
     const isBlocked = SORT_PERF_COLS.has(k) && SORT_PERF_COLS.has(primaryKey) && !isPrimary;
     return (
       <th onClick={e => handleSort(k, e.shiftKey)}
-        className={`py-2 px-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors text-${align} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500'}`}>
+        className={`py-2 px-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors text-${align} ${w || ''} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500'}`}>
         <span className="inline-flex items-center gap-0.5">
           {label}
           {isPrimary && <span className="text-[8px] text-blue-400/70 ml-0.5">①{dir === 'desc' ? '▼' : '▲'}</span>}
@@ -767,22 +767,22 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
       </div>
     )}
     <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
-      <table className="w-full text-sm min-w-[900px]">
+      <table className="w-full text-sm table-fixed min-w-[1280px]">
         <thead>
           <tr className="text-[11px] uppercase tracking-wider bg-zinc-900/80">
-            <th className="text-left py-2 px-4 font-medium w-40 text-zinc-500">Ticker</th>
-            <SH k="price" label="Price"/>
-            {PERF_KEYS.map(p => <SH key={p.key} k={p.key} label={p.label}/>)}
-            <th className="text-right py-2 px-2 font-medium text-zinc-500">Earnings</th>
-            <th className="text-center py-2 px-2 font-medium text-zinc-500">6M</th>
-            <SH k="52w_high" label="52W Hi"/>
-            <SH k="dist_52w_high" label="Dist"/>
-            <SH k="volume" label="Vol"/>
-            <SH k="rvol" label="RVol"/>
-            <SH k="avg_dollar_volume" label="Avg $V"/>
-            <SH k="adr_pct" label="ADR"/>
-            <SH k="rs_52w" label="RS" align="center"/>
-            <th className="text-center py-2 px-2 font-medium text-zinc-500">vs SPY</th>
+            <th className="text-left py-2 px-4 font-medium w-[160px] text-zinc-500">Ticker</th>
+            <SH k="price" label="Price" w="w-[80px]"/>
+            {PERF_KEYS.map(p => <SH key={p.key} k={p.key} label={p.label} w="w-[64px]"/>)}
+            <th className="text-right py-2 px-2 font-medium w-[84px] text-zinc-500">Earnings</th>
+            <th className="text-center py-2 px-2 font-medium w-[84px] text-zinc-500">6M</th>
+            <SH k="52w_high" label="52W Hi" w="w-[80px]"/>
+            <SH k="dist_52w_high" label="Dist" w="w-[64px]"/>
+            <SH k="volume" label="Vol" w="w-[68px]"/>
+            <SH k="rvol" label="RVol" w="w-[64px]"/>
+            <SH k="avg_dollar_volume" label="Avg $V" w="w-[72px]"/>
+            <SH k="adr_pct" label="ADR" w="w-[56px]"/>
+            <SH k="rs_52w" label="RS" align="center" w="w-[60px]"/>
+            <th className="text-center py-2 px-2 font-medium w-[84px] text-zinc-500">vs SPY</th>
           </tr>
         </thead>
         <tbody>
