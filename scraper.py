@@ -16,6 +16,12 @@ import requests
 from bs4 import BeautifulSoup
 import exchange_calendars as xcals
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
@@ -91,41 +97,45 @@ def _sleep():
 # ──────────────────────────────────────────────────────────────
 
 INDUSTRY_TO_THEME = {
-    # ── AI & Semiconductors ──
-    "Semiconductors": "AI & Semiconductors",
-    "Semiconductor Equipment & Materials": "AI & Semiconductors",
-    "Electronic Components": "AI & Semiconductors",
-    "Scientific & Technical Instruments": "AI & Semiconductors",
-    "Computer Hardware": "AI & Semiconductors",
-    "Consumer Electronics": "AI & Semiconductors",
-    "Communication Equipment": "AI & Semiconductors",
-    "Electronics & Computer Distribution": "AI & Semiconductors",
+    # ── Artificial Intelligence ──
+    "Internet Content & Information": "Artificial Intelligence",
+    "Advertising Agencies": "Artificial Intelligence",
 
-    # ── Software & Cloud ──
-    "Software - Application": "Software & Cloud",
-    "Software - Infrastructure": "Software & Cloud",
-    "Information Technology Services": "Software & Cloud",
-    "Internet Content & Information": "Software & Cloud",
+    # ── Cloud Computing ──
+    "Software - Infrastructure": "Cloud Computing",
+    "Information Technology Services": "Cloud Computing",
 
-    # ── Internet & E-Commerce ──
-    "Internet Retail": "Internet & E-Commerce",
-    "Electronic Gaming & Multimedia": "Internet & E-Commerce",
+    # ── Software ──
+    "Software - Application": "Software",
+    "Electronic Gaming & Multimedia": "Software",
 
-    # ── Financials ──
-    "Banks - Diversified": "Financials",
-    "Banks - Regional": "Financials",
-    "Capital Markets": "Financials",
-    "Financial Data & Stock Exchanges": "Financials",
-    "Asset Management": "Financials",
-    "Insurance - Life": "Financials",
-    "Insurance - Property & Casualty": "Financials",
-    "Insurance - Diversified": "Financials",
-    "Insurance - Reinsurance": "Financials",
-    "Insurance - Specialty": "Financials",
-    "Insurance Brokers": "Financials",
-    "Credit Services": "Financials",
-    "Financial Conglomerates": "Financials",
-    "Mortgage Finance": "Financials",
+    # ── Semiconductors ──
+    "Semiconductors": "Semiconductors",
+    "Semiconductor Equipment & Materials": "Semiconductors",
+    "Electronic Components": "Semiconductors",
+    "Scientific & Technical Instruments": "Semiconductors",
+    "Electronics & Computer Distribution": "Semiconductors",
+    "Electrical Equipment & Parts": "Semiconductors",
+
+    # ── Hardware ──
+    "Computer Hardware": "Hardware",
+    "Consumer Electronics": "Hardware",
+
+    # ── Cybersecurity ──
+    "Security & Protection Services": "Cybersecurity",
+
+    # ── Communication Equipment / Telecom ──
+    "Communication Equipment": "Telecommunications",
+    "Telecom Services": "Telecommunications",
+
+    # ── Electric Vehicles ──
+    "Auto Manufacturers": "Electric Vehicles",
+    "Auto Parts": "Electric Vehicles",
+    "Auto & Truck Dealerships": "Electric Vehicles",
+    "Recreational Vehicles": "Electric Vehicles",
+
+    # ── Defense & Aerospace ──
+    "Aerospace & Defense": "Defense & Aerospace",
 
     # ── Healthcare & Biotech ──
     "Biotechnology": "Healthcare & Biotech",
@@ -140,134 +150,495 @@ INDUSTRY_TO_THEME = {
     "Medical Care Facilities": "Healthcare & Biotech",
     "Medical Distribution": "Healthcare & Biotech",
 
-    # ── Defense & Aerospace ──
-    "Aerospace & Defense": "Defense & Aerospace",
+    # ── Fintech ──
+    "Banks - Diversified": "Fintech",
+    "Banks - Regional": "Fintech",
+    "Capital Markets": "Fintech",
+    "Financial Data & Stock Exchanges": "Fintech",
+    "Asset Management": "Fintech",
+    "Insurance - Life": "Fintech",
+    "Insurance - Property & Casualty": "Fintech",
+    "Insurance - Diversified": "Fintech",
+    "Insurance - Reinsurance": "Fintech",
+    "Insurance - Specialty": "Fintech",
+    "Insurance Brokers": "Fintech",
+    "Credit Services": "Fintech",
+    "Financial Conglomerates": "Fintech",
+    "Mortgage Finance": "Fintech",
 
-    # ── Energy - Oil & Gas ──
-    "Oil & Gas E&P": "Energy - Oil & Gas",
-    "Oil & Gas Integrated": "Energy - Oil & Gas",
-    "Oil & Gas Midstream": "Energy - Oil & Gas",
-    "Oil & Gas Refining & Marketing": "Energy - Oil & Gas",
-    "Oil & Gas Equipment & Services": "Energy - Oil & Gas",
-    "Oil & Gas Drilling": "Energy - Oil & Gas",
+    # ── Energy Traditional ──
+    "Oil & Gas E&P": "Energy Traditional",
+    "Oil & Gas Integrated": "Energy Traditional",
+    "Oil & Gas Midstream": "Energy Traditional",
+    "Oil & Gas Refining & Marketing": "Energy Traditional",
+    "Oil & Gas Equipment & Services": "Energy Traditional",
+    "Oil & Gas Drilling": "Energy Traditional",
+    "Uranium": "Energy Traditional",
+    "Thermal Coal": "Energy Traditional",
+    "Coking Coal": "Energy Traditional",
+    "Utilities - Regulated Electric": "Energy Traditional",
+    "Utilities - Regulated Gas": "Energy Traditional",
+    "Utilities - Diversified": "Energy Traditional",
+    "Utilities - Independent Power Producers": "Energy Traditional",
 
-    # ── Clean Energy & Utilities ──
-    "Solar": "Clean Energy & Utilities",
-    "Uranium": "Clean Energy & Utilities",
-    "Utilities - Renewable": "Clean Energy & Utilities",
-    "Utilities - Regulated Electric": "Clean Energy & Utilities",
-    "Utilities - Regulated Gas": "Clean Energy & Utilities",
-    "Utilities - Regulated Water": "Clean Energy & Utilities",
-    "Utilities - Diversified": "Clean Energy & Utilities",
-    "Utilities - Independent Power Producers": "Clean Energy & Utilities",
+    # ── Energy Renewable ──
+    "Solar": "Energy Renewable",
+    "Utilities - Renewable": "Energy Renewable",
 
-    # ── Consumer Discretionary ──
-    "Specialty Retail": "Consumer Discretionary",
-    "Apparel Retail": "Consumer Discretionary",
-    "Home Improvement Retail": "Consumer Discretionary",
-    "Auto Manufacturers": "Consumer Discretionary",
-    "Auto Parts": "Consumer Discretionary",
-    "Auto & Truck Dealerships": "Consumer Discretionary",
-    "Restaurants": "Consumer Discretionary",
-    "Leisure": "Consumer Discretionary",
-    "Gambling": "Consumer Discretionary",
-    "Resorts & Casinos": "Consumer Discretionary",
-    "Travel Services": "Consumer Discretionary",
-    "Lodging": "Consumer Discretionary",
-    "Luxury Goods": "Consumer Discretionary",
-    "Apparel Manufacturing": "Consumer Discretionary",
-    "Footwear & Accessories": "Consumer Discretionary",
-    "Residential Construction": "Consumer Discretionary",
-    "Department Stores": "Consumer Discretionary",
-    "Recreational Vehicles": "Consumer Discretionary",
-    "Furnishings, Fixtures & Appliances": "Consumer Discretionary",
-    "Personal Services": "Consumer Discretionary",
-    "Textile Manufacturing": "Consumer Discretionary",
+    # ── Commodities Metals ──
+    "Gold": "Commodities Metals",
+    "Silver": "Commodities Metals",
+    "Copper": "Commodities Metals",
+    "Steel": "Commodities Metals",
+    "Aluminum": "Commodities Metals",
+    "Other Industrial Metals & Mining": "Commodities Metals",
+    "Other Precious Metals & Mining": "Commodities Metals",
 
-    # ── Consumer Staples ──
-    "Household & Personal Products": "Consumer Staples",
-    "Packaged Foods": "Consumer Staples",
-    "Beverages - Non-Alcoholic": "Consumer Staples",
-    "Beverages - Brewers": "Consumer Staples",
-    "Beverages - Wineries & Distilleries": "Consumer Staples",
-    "Grocery Stores": "Consumer Staples",
-    "Discount Stores": "Consumer Staples",
-    "Tobacco": "Consumer Staples",
-    "Farm Products": "Consumer Staples",
-    "Confectioners": "Consumer Staples",
-    "Food Distribution": "Consumer Staples",
-    "Education & Training Services": "Consumer Staples",
+    # ── Materials & Mining ──
+    "Specialty Chemicals": "Materials & Mining",
+    "Chemicals": "Materials & Mining",
+    "Building Materials": "Materials & Mining",
+    "Lumber & Wood Production": "Materials & Mining",
+    "Paper & Paper Products": "Materials & Mining",
+    "Packaging & Containers": "Materials & Mining",
+    "Metal Fabrication": "Materials & Mining",
+
+    # ── Agriculture & Food ──
+    "Farm Products": "Agriculture & Food",
+    "Agricultural Inputs": "Agriculture & Food",
+    "Packaged Foods": "Agriculture & Food",
+    "Confectioners": "Agriculture & Food",
+    "Food Distribution": "Agriculture & Food",
+    "Grocery Stores": "Agriculture & Food",
+
+    # ── Consumer Goods ──
+    "Specialty Retail": "Consumer Goods",
+    "Apparel Retail": "Consumer Goods",
+    "Home Improvement Retail": "Consumer Goods",
+    "Luxury Goods": "Consumer Goods",
+    "Apparel Manufacturing": "Consumer Goods",
+    "Footwear & Accessories": "Consumer Goods",
+    "Department Stores": "Consumer Goods",
+    "Furnishings, Fixtures & Appliances": "Consumer Goods",
+    "Personal Services": "Consumer Goods",
+    "Textile Manufacturing": "Consumer Goods",
+    "Household & Personal Products": "Consumer Goods",
+    "Beverages - Non-Alcoholic": "Consumer Goods",
+    "Beverages - Brewers": "Consumer Goods",
+    "Beverages - Wineries & Distilleries": "Consumer Goods",
+    "Discount Stores": "Consumer Goods",
+    "Tobacco": "Consumer Goods",
+
+    # ── Digital Entertainment ──
+    "Entertainment": "Digital Entertainment",
+    "Gambling": "Digital Entertainment",
+    "Resorts & Casinos": "Digital Entertainment",
+    "Publishing": "Digital Entertainment",
+    "Broadcasting": "Digital Entertainment",
+
+    # ── Transportation & Logistics ──
+    "Railroads": "Transportation & Logistics",
+    "Trucking": "Transportation & Logistics",
+    "Airlines": "Transportation & Logistics",
+    "Airports & Air Services": "Transportation & Logistics",
+    "Marine Shipping": "Transportation & Logistics",
+    "Integrated Freight & Logistics": "Transportation & Logistics",
+    "Travel Services": "Transportation & Logistics",
+    "Lodging": "Transportation & Logistics",
+    "Restaurants": "Transportation & Logistics",
+
+    # ── Industrial Automation ──
+    "Specialty Industrial Machinery": "Industrial Automation",
+    "Farm & Heavy Construction Machinery": "Industrial Automation",
 
     # ── Industrials ──
-    "Railroads": "Industrials",
-    "Trucking": "Industrials",
-    "Airlines": "Industrials",
-    "Airports & Air Services": "Industrials",
-    "Marine Shipping": "Industrials",
     "Industrial Distribution": "Industrials",
-    "Specialty Industrial Machinery": "Industrials",
-    "Farm & Heavy Construction Machinery": "Industrials",
-    "Metal Fabrication": "Industrials",
     "Building Products & Equipment": "Industrials",
     "Engineering & Construction": "Industrials",
     "Conglomerates": "Industrials",
     "Rental & Leasing Services": "Industrials",
-    "Waste Management": "Industrials",
-    "Pollution & Treatment Controls": "Industrials",
-    "Electrical Equipment & Parts": "Industrials",
     "Consulting Services": "Industrials",
     "Staffing & Employment Services": "Industrials",
-    "Security & Protection Services": "Industrials",
     "Tools & Accessories": "Industrials",
-    "Integrated Freight & Logistics": "Industrials",
     "Business Equipment & Supplies": "Industrials",
     "Specialty Business Services": "Industrials",
+    "Education & Training Services": "Industrials",
 
-    # ── Real Estate ──
-    "REIT - Diversified": "Real Estate",
-    "REIT - Industrial": "Real Estate",
-    "REIT - Office": "Real Estate",
-    "REIT - Residential": "Real Estate",
-    "REIT - Retail": "Real Estate",
-    "REIT - Healthcare Facilities": "Real Estate",
-    "REIT - Hotel & Motel": "Real Estate",
-    "REIT - Mortgage": "Real Estate",
-    "REIT - Specialty": "Real Estate",
-    "Real Estate Services": "Real Estate",
-    "Real Estate - Development": "Real Estate",
-    "Real Estate - Diversified": "Real Estate",
+    # ── Environmental Sustainability ──
+    "Waste Management": "Environmental Sustainability",
+    "Pollution & Treatment Controls": "Environmental Sustainability",
+    "Utilities - Regulated Water": "Environmental Sustainability",
 
-    # ── Materials & Mining ──
-    "Gold": "Materials & Mining",
-    "Silver": "Materials & Mining",
-    "Copper": "Materials & Mining",
-    "Steel": "Materials & Mining",
-    "Aluminum": "Materials & Mining",
-    "Other Industrial Metals & Mining": "Materials & Mining",
-    "Specialty Chemicals": "Materials & Mining",
-    "Chemicals": "Materials & Mining",
-    "Agricultural Inputs": "Materials & Mining",
-    "Building Materials": "Materials & Mining",
-    "Lumber & Wood Production": "Materials & Mining",
-    "Paper & Paper Products": "Materials & Mining",
-    "Coking Coal": "Materials & Mining",
-    "Thermal Coal": "Materials & Mining",
-    "Other Precious Metals & Mining": "Materials & Mining",
-    "Packaging & Containers": "Materials & Mining",
+    # ── Real Estate & REITs ──
+    "REIT - Diversified": "Real Estate & REITs",
+    "REIT - Industrial": "Real Estate & REITs",
+    "REIT - Office": "Real Estate & REITs",
+    "REIT - Residential": "Real Estate & REITs",
+    "REIT - Retail": "Real Estate & REITs",
+    "REIT - Healthcare Facilities": "Real Estate & REITs",
+    "REIT - Hotel & Motel": "Real Estate & REITs",
+    "REIT - Mortgage": "Real Estate & REITs",
+    "REIT - Specialty": "Real Estate & REITs",
+    "Real Estate Services": "Real Estate & REITs",
+    "Real Estate - Development": "Real Estate & REITs",
+    "Real Estate - Diversified": "Real Estate & REITs",
+    "Residential Construction": "Real Estate & REITs",
 
-    # ── Media & Entertainment ──
-    "Entertainment": "Media & Entertainment",
-    "Publishing": "Media & Entertainment",
-    "Broadcasting": "Media & Entertainment",
-    "Advertising Agencies": "Media & Entertainment",
-
-    # ── Telecom ──
-    "Telecom Services": "Telecom",
+    # ── Media & Entertainment (legacy) ──
+    "Internet Retail": "E-Commerce",
+    "Leisure": "Consumer Goods",
 
     # ── Shell ──
     "Shell Companies": "Other",
 }
 
+INDUSTRY_TO_SUBTHEME = {
+    # Artificial Intelligence
+    "Internet Content & Information": "Cloud",
+    "Advertising Agencies": "Ads & Search",
+
+    # Cloud Computing
+    "Software - Infrastructure": "Infrastructure",
+    "Information Technology Services": "Data Centers",
+
+    # Software
+    "Software - Application": "Enterprise",
+    "Electronic Gaming & Multimedia": "Gaming",
+
+    # Semiconductors
+    "Semiconductors": "Compute",
+    "Semiconductor Equipment & Materials": "Foundries",
+    "Electronic Components": "Electronic Components",
+    "Scientific & Technical Instruments": "Design Tools",
+    "Electronics & Computer Distribution": "Distribution",
+    "Electrical Equipment & Parts": "Electronic Components",
+
+    # Hardware
+    "Computer Hardware": "Computing",
+    "Consumer Electronics": "Consumer",
+
+    # Cybersecurity
+    "Security & Protection Services": "Physical Security",
+
+    # Telecom
+    "Communication Equipment": "Wireless",
+    "Telecom Services": "Wireless",
+
+    # Electric Vehicles
+    "Auto Manufacturers": "Manufacturers",
+    "Auto Parts": "Suppliers",
+    "Auto & Truck Dealerships": "Fleets",
+    "Recreational Vehicles": "Fleets",
+
+    # Defense & Aerospace
+    "Aerospace & Defense": "Aviation",
+
+    # Healthcare & Biotech
+    "Biotechnology": "Genomics",
+    "Drug Manufacturers - General": "Therapeutics",
+    "Drug Manufacturers - Specialty & Generic": "Therapeutics",
+    "Medical Devices": "Devices",
+    "Medical Instruments & Supplies": "Devices",
+    "Health Information Services": "Diagnostics",
+    "Healthcare Plans": "Healthcare Plans",
+    "Diagnostics & Research": "Diagnostics",
+    "Pharmaceutical Retailers": "Therapeutics",
+    "Medical Care Facilities": "Oncology",
+    "Medical Distribution": "Diagnostics",
+
+    # Fintech
+    "Banks - Diversified": "Neobanks",
+    "Banks - Regional": "Neobanks",
+    "Capital Markets": "Trading",
+    "Financial Data & Stock Exchanges": "Exchanges",
+    "Asset Management": "Trading",
+    "Insurance - Life": "Insurance",
+    "Insurance - Property & Casualty": "Insurance",
+    "Insurance - Diversified": "Insurance",
+    "Insurance - Reinsurance": "Insurance",
+    "Insurance - Specialty": "Insurance",
+    "Insurance Brokers": "Insurance",
+    "Credit Services": "Payments",
+    "Financial Conglomerates": "IT & Data",
+    "Mortgage Finance": "Lending",
+
+    # Energy Traditional
+    "Oil & Gas E&P": "Oil Production",
+    "Oil & Gas Integrated": "Majors",
+    "Oil & Gas Midstream": "Gas & LNG",
+    "Oil & Gas Refining & Marketing": "Oil Refining",
+    "Oil & Gas Equipment & Services": "Oil Services",
+    "Oil & Gas Drilling": "Oil Production",
+    "Uranium": "Nuclear",
+    "Thermal Coal": "Thermal",
+    "Coking Coal": "Thermal",
+    "Utilities - Regulated Electric": "Utilities",
+    "Utilities - Regulated Gas": "Utilities",
+    "Utilities - Diversified": "Utilities",
+    "Utilities - Independent Power Producers": "Utilities",
+
+    # Energy Renewable
+    "Solar": "Solar",
+    "Utilities - Renewable": "Utilities",
+
+    # Commodities Metals
+    "Gold": "Gold",
+    "Silver": "Silver",
+    "Copper": "Industrial",
+    "Steel": "Industrial",
+    "Aluminum": "Industrial",
+    "Other Industrial Metals & Mining": "Industrial",
+    "Other Precious Metals & Mining": "Precious",
+
+    # Materials & Mining
+    "Specialty Chemicals": "Chemicals",
+    "Chemicals": "Chemicals",
+    "Building Materials": "Materials",
+    "Lumber & Wood Production": "Materials",
+    "Paper & Paper Products": "Materials",
+    "Packaging & Containers": "Packaging",
+    "Metal Fabrication": "Metals",
+
+    # Agriculture & Food
+    "Farm Products": "Farming",
+    "Agricultural Inputs": "Crop Inputs",
+    "Packaged Foods": "Food",
+    "Confectioners": "Food",
+    "Food Distribution": "Food",
+    "Grocery Stores": "Grocery",
+
+    # Consumer Goods
+    "Specialty Retail": "Retail",
+    "Apparel Retail": "Apparel",
+    "Home Improvement Retail": "Household",
+    "Luxury Goods": "Luxury",
+    "Apparel Manufacturing": "Apparel",
+    "Footwear & Accessories": "Apparel",
+    "Department Stores": "Retail",
+    "Furnishings, Fixtures & Appliances": "Household",
+    "Personal Services": "Services",
+    "Textile Manufacturing": "Apparel",
+    "Household & Personal Products": "Household",
+    "Beverages - Non-Alcoholic": "Food",
+    "Beverages - Brewers": "Food",
+    "Beverages - Wineries & Distilleries": "Food",
+    "Discount Stores": "Retail",
+    "Tobacco": "Consumer",
+    "Leisure": "Leisure",
+    "Internet Retail": "E-Commerce",
+
+    # Digital Entertainment
+    "Entertainment": "Video",
+    "Gambling": "Gambling",
+    "Resorts & Casinos": "Gambling",
+    "Publishing": "Media",
+    "Broadcasting": "Media",
+
+    # Transportation & Logistics
+    "Railroads": "Rail",
+    "Trucking": "Trucking",
+    "Airlines": "Air Travel",
+    "Airports & Air Services": "Air Travel",
+    "Marine Shipping": "Maritime",
+    "Integrated Freight & Logistics": "Logistics",
+    "Travel Services": "Air Travel",
+    "Lodging": "Lodging",
+    "Restaurants": "Food",
+
+    # Industrial Automation
+    "Specialty Industrial Machinery": "Robotics",
+    "Farm & Heavy Construction Machinery": "Robotics",
+
+    # Industrials
+    "Industrial Distribution": "Distribution",
+    "Building Products & Equipment": "Construction",
+    "Engineering & Construction": "Construction",
+    "Conglomerates": "Conglomerates",
+    "Rental & Leasing Services": "Services",
+    "Consulting Services": "Services",
+    "Staffing & Employment Services": "Services",
+    "Tools & Accessories": "Tools",
+    "Business Equipment & Supplies": "Office",
+    "Specialty Business Services": "Services",
+    "Education & Training Services": "EdTech",
+
+    # Environmental Sustainability
+    "Waste Management": "Waste",
+    "Pollution & Treatment Controls": "Air Quality",
+    "Utilities - Regulated Water": "Water",
+
+    # Real Estate & REITs
+    "REIT - Diversified": "Diversified",
+    "REIT - Industrial": "Industrial",
+    "REIT - Office": "Office",
+    "REIT - Residential": "Residential",
+    "REIT - Retail": "Retail",
+    "REIT - Healthcare Facilities": "Healthcare",
+    "REIT - Hotel & Motel": "Hotel",
+    "REIT - Mortgage": "Mortgage",
+    "REIT - Specialty": "Specialty",
+    "Real Estate Services": "Services",
+    "Real Estate - Development": "Development",
+    "Real Estate - Diversified": "Diversified",
+    "Residential Construction": "Residential",
+}
+
+
+# ──────────────────────────────────────────────────────────────
+# Ticker-level overrides — stocks that Finviz themes map places
+# in a different theme/subtheme than their industry would suggest
+# ──────────────────────────────────────────────────────────────
+TICKER_THEME_OVERRIDE = {
+    # Electric Vehicles — Self-Driving
+    "AUR":   ("Electric Vehicles", "Self-Driving"),
+    "MBLY":  ("Electric Vehicles", "Self-Driving"),
+    "INVZ":  ("Electric Vehicles", "Self-Driving"),
+    "APTV":  ("Electric Vehicles", "Self-Driving"),
+    "HSAI":  ("Electric Vehicles", "Self-Driving"),
+    "LYFT":  ("Electric Vehicles", "Self-Driving"),
+    "UBER":  ("Electric Vehicles", "Self-Driving"),
+    "TSLA":  ("Electric Vehicles", "Self-Driving"),
+    # EV — Chips
+    "NVDA":  ("Semiconductors", "Compute"),       # primary; also EV/Chips
+    "QCOM":  ("Semiconductors", "Wireless"),      # primary; also EV/Self-Driving
+    # EV — Batteries
+    "QS":    ("Electric Vehicles", "Batteries"),
+    "FREYR": ("Electric Vehicles", "Batteries"),
+    "ENVX":  ("Electric Vehicles", "Batteries"),
+    "CBAT":  ("Electric Vehicles", "Batteries"),
+    # EV — Charging
+    "CHPT":  ("Electric Vehicles", "Charging"),
+    "BLNK":  ("Electric Vehicles", "Charging"),
+    "EVGO":  ("Electric Vehicles", "Charging"),
+    # EV — Manufacturers
+    "RIVN":  ("Electric Vehicles", "Manufacturers"),
+    "LCID":  ("Electric Vehicles", "Manufacturers"),
+    "NIO":   ("Electric Vehicles", "Manufacturers"),
+    "XPEV":  ("Electric Vehicles", "Manufacturers"),
+    "LI":    ("Electric Vehicles", "Manufacturers"),
+    "NKLA":  ("Electric Vehicles", "Manufacturers"),
+    "HYZN":  ("Electric Vehicles", "Manufacturers"),
+    "ARVL":  ("Electric Vehicles", "Manufacturers"),
+    "WKHS":  ("Electric Vehicles", "Manufacturers"),  # electric delivery vehicles
+    "ZAPP":  ("Electric Vehicles", "Manufacturers"),  # electric motorcycles
+    # AI — specific overrides
+    "GOOGL": ("Artificial Intelligence", "Ads & Search"),
+    "GOOG":  ("Artificial Intelligence", "Ads & Search"),
+    "META":  ("Artificial Intelligence", "Ads & Search"),
+    "MSFT":  ("Artificial Intelligence", "Enterprise"),
+    "AMZN":  ("Cloud Computing", "Hyperscalers"),
+    "ORCL":  ("Cloud Computing", "Databases"),
+    "CRM":   ("Software", "CRM"),
+    "NOW":   ("Software", "Enterprise"),
+    "SNOW":  ("Cloud Computing", "Databases"),
+    "MDB":   ("Cloud Computing", "Databases"),
+    "PLTR":  ("Artificial Intelligence", "Data"),
+    "AI":    ("Artificial Intelligence", "Enterprise"),
+    "BBAI":  ("Artificial Intelligence", "Enterprise"),
+    "SOUN":  ("Artificial Intelligence", "Models"),
+    "CEVA":  ("Artificial Intelligence", "Compute"),
+    # Cybersecurity — overrides from Software/IT industry
+    "CRWD":  ("Cybersecurity", "Endpoint"),
+    "PANW":  ("Cybersecurity", "Network"),
+    "S":     ("Cybersecurity", "Endpoint"),
+    "OKTA":  ("Cybersecurity", "Identity IAM"),
+    "ZS":    ("Cybersecurity", "Cloud"),
+    "QLYS":  ("Cybersecurity", "Cloud"),
+    "TENB":  ("Cybersecurity", "Cloud"),
+    "VRNS":  ("Cybersecurity", "ZeroTrust"),
+    "SAIL":  ("Cybersecurity", "Identity IAM"),
+    "CYBR":  ("Cybersecurity", "Identity IAM"),
+    "FTNT":  ("Cybersecurity", "Network"),
+    "CHKP":  ("Cybersecurity", "Network"),
+    "RPD":   ("Cybersecurity", "Endpoint"),
+    # Space Tech
+    "RKLB":  ("Space Tech", "Launch"),
+    "ASTS":  ("Space Tech", "Satellites"),
+    "SPCE":  ("Space Tech", "Launch"),
+    "LMT":   ("Defense & Aerospace", "Aviation"),
+    "BA":    ("Defense & Aerospace", "Aviation"),
+    "NOC":   ("Defense & Aerospace", "Weapons"),
+    "RTX":   ("Defense & Aerospace", "Aviation"),
+    "GD":    ("Defense & Aerospace", "Aviation"),
+    "HII":   ("Defense & Aerospace", "Weapons"),
+    "AXON":  ("Defense & Aerospace", "Drones"),
+    "KTOS":  ("Defense & Aerospace", "Drones"),
+    "AVAV":  ("Defense & Aerospace", "Drones"),
+    # Quantum Computing
+    "IONQ":  ("Quantum Computing", "Hardware"),
+    "RGTI":  ("Quantum Computing", "Hardware"),
+    "QUBT":  ("Quantum Computing", "Hardware"),
+    "QBTS":  ("Quantum Computing", "Hardware"),
+    "IBM":   ("Quantum Computing", "Hardware"),
+    # Robotics
+    "IRBT":  ("Robotics", "Consumer"),
+    "ISRG":  ("Robotics", "Medical"),
+    "AGCO":  ("Robotics", "Automation"),
+    # Fintech — overrides from financial industry
+    "COIN":  ("Fintech", "Blockchain"),
+    "HOOD":  ("Fintech", "Trading"),
+    "SOFI":  ("Fintech", "Neobanks"),
+    "AFRM":  ("Fintech", "Lending"),
+    "UPST":  ("Fintech", "Lending"),
+    "PAYC":  ("Software", "Enterprise"),   # Paycom = HR/payroll software, not payments
+    "PYPL":  ("Fintech", "Payments"),
+    "SQ":    ("Fintech", "Payments"),
+    "V":     ("Fintech", "Payments"),
+    "MA":    ("Fintech", "Payments"),
+    "ADYEY": ("Fintech", "Payments"),
+    # Power semiconductors — EV charging / solar (not compute)
+    "NVTS":  ("Electric Vehicles", "Charging"),   # GaN/SiC power ICs for EV charging & solar
+    # Energy storage / renewables — misclassified as EV batteries
+    "STEM":  ("Energy Renewable", "Storage"),     # AI-driven battery storage optimization, not EV
+}
+
+# ──────────────────────────────────────────────────────────────
+# Ticker extra sub-themes — companies that belong to multiple
+# (theme, subtheme) pairs beyond their primary classification.
+# Format: ticker → list of (theme, subtheme) tuples.
+# These supplement (not replace) the primary TICKER_THEME_OVERRIDE.
+# ──────────────────────────────────────────────────────────────
+TICKER_EXTRA_SUBTHEMES: dict[str, list[tuple[str, str]]] = {
+    # Semiconductors that are core EV chip suppliers
+    "NVDA":  [("Electric Vehicles", "Chips"), ("Artificial Intelligence", "Compute")],
+    "QCOM":  [("Electric Vehicles", "Self-Driving"), ("Artificial Intelligence", "Edge")],
+    "INTC":  [("Electric Vehicles", "Self-Driving")],
+    "ON":    [("Electric Vehicles", "Chips")],       # ON Semiconductor — EV power mgmt
+    "STM":   [("Electric Vehicles", "Chips")],       # STMicroelectronics — EV/industrial
+    "TXN":   [("Electric Vehicles", "Chips")],       # Texas Instruments — EV power/BMS
+    "MCHP":  [("Electric Vehicles", "Chips")],       # Microchip Technology — EV MCUs
+    "WOLF":  [("Electric Vehicles", "Chips")],       # Wolfspeed — SiC for EV
+    "SWKS":  [("Electric Vehicles", "Chips")],       # Skyworks — RF + EV connectivity
+    # AI-adjacent hyperscalers / platform companies
+    "GOOGL": [("Cloud Computing", "Hyperscalers"), ("Electric Vehicles", "Self-Driving")],
+    "GOOG":  [("Cloud Computing", "Hyperscalers"), ("Electric Vehicles", "Self-Driving")],
+    "MSFT":  [("Cloud Computing", "Hyperscalers"), ("Artificial Intelligence", "Enterprise")],
+    "AMZN":  [("Artificial Intelligence", "Cloud"), ("E-commerce", "Platforms")],
+    "AAPL":  [("Semiconductors", "Chips"), ("Hardware", "Consumer")],
+    "META":  [("Artificial Intelligence", "Ads & Search"), ("Virtual & Augmented Reality", "AR/VR")],
+    # Tesla — spans EV manufacturing + self-driving + energy
+    "TSLA":  [("Electric Vehicles", "Manufacturers"), ("Artificial Intelligence", "Edge")],
+    # EV adjacent — battery + charging crossover
+    "ALB":   [("Electric Vehicles", "Batteries")],   # Albemarle — lithium for EV batteries
+    "LTHM":  [("Electric Vehicles", "Batteries")],   # Livent — lithium
+    "LAC":   [("Electric Vehicles", "Batteries")],   # Lithium Americas
+    "SQM":   [("Electric Vehicles", "Batteries")],   # Sociedad Quimica — lithium
+    # Defense companies with drone/autonomy angle
+    "LMT":   [("Defense & Aerospace", "Drones")],
+    "NOC":   [("Defense & Aerospace", "Drones")],
+    "RTX":   [("Defense & Aerospace", "Drones")],
+    # Robotics + industrial automation crossover
+    "ABB":   [("Industrial Automation", "Robotics")],
+    "ROK":   [("Industrial Automation", "Robotics")],
+    "EMR":   [("Industrial Automation", "Robotics")],
+    # Biotech with diagnostics angle
+    "ILMN":  [("Healthcare & Biotech", "Diagnostics")],
+    "TMO":   [("Healthcare & Biotech", "Diagnostics")],
+    "DHR":   [("Healthcare & Biotech", "Diagnostics")],
+    # Space + defense crossover
+    "RKLB":  [("Defense & Aerospace", "Aviation")],  # Rocket Lab — launch + defense payloads
+    "ASTS":  [("Telecommunications", "Wireless")],   # AST SpaceMobile — satellite broadband
+}
 
 # ──────────────────────────────────────────────────────────────
 # Finviz Themes Map — 40 parent themes from map.ashx?t=themes
@@ -1073,6 +1444,15 @@ def build_data() -> dict:
         if ind.get("parent_theme") != "Other"
     ]
 
+    logger.info("Fetching macro news...")
+    macro_news = fetch_macro_news()
+
+    # Convert TICKER_EXTRA_SUBTHEMES tuples to JSON-serialisable dicts
+    ticker_extra_subthemes = {
+        t: [{"theme": th, "subtheme": sub} for th, sub in pairs]
+        for t, pairs in TICKER_EXTRA_SUBTHEMES.items()
+    }
+
     return {
         "last_updated": updated.isoformat(),
         "themes": output_themes,
@@ -1082,6 +1462,8 @@ def build_data() -> dict:
         "spy_benchmarks": spy_benchmarks,
         "market_condition": market_condition,
         "vix": vix_value,
+        "macro_news": macro_news,
+        "ticker_extra_subthemes": ticker_extra_subthemes,
     }
 
 
@@ -1137,11 +1519,169 @@ def _fetch_details(picks: list[dict], cache: dict) -> list[dict]:
     return result
 
 
+MACRO_QUERIES = [
+    "Federal Reserve interest rate",
+    "FOMC Fed rate decision",
+    "US jobs report nonfarm payroll",
+    "US unemployment CPI inflation",
+    "US GDP recession",
+    "US China trade war tariff",
+    "war conflict geopolitical",
+    "US debt ceiling Treasury",
+    "oil price OPEC",
+]
+
+MACRO_KEYWORDS = [
+    "fed", "federal reserve", "fomc", "rate hike", "rate cut", "interest rate",
+    "nonfarm", "payroll", "unemployment", "jobs report", "cpi", "ppi", "inflation",
+    "gdp", "recession", "tariff", "trade war", "sanction",
+    "war", "conflict", "invasion", "military", "nato",
+    "debt ceiling", "shutdown", "opec", "oil price",
+]
+
+def fetch_macro_news() -> list[dict]:
+    """Fetch high-impact macro news via Alpaca (if key available) or Google News RSS."""
+    alpaca_key    = os.environ.get("ALPACA_API_KEY", "")
+    alpaca_secret = os.environ.get("ALPACA_SECRET_KEY", "")
+
+    if alpaca_key and alpaca_secret:
+        return _fetch_alpaca_macro_news(alpaca_key, alpaca_secret)
+    return _fetch_rss_macro_news()
+
+
+def _fetch_alpaca_macro_news(api_key: str, secret: str) -> list[dict]:
+    """Fetch macro news from Alpaca News API, filtered to high-impact stories."""
+    from datetime import datetime, timezone, timedelta
+    try:
+        cutoff = datetime.now(timezone.utc) - timedelta(hours=24)
+        url = "https://data.alpaca.markets/v1beta1/news"
+        params = {
+            "symbols": "SPY,QQQ,GLD,USO,TLT",
+            "limit": 50,
+            "start": cutoff.strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "sort": "desc",
+        }
+        resp = requests.get(url, params=params,
+                            headers={"APCA-API-KEY-ID": api_key, "APCA-API-SECRET-KEY": secret},
+                            timeout=15)
+        resp.raise_for_status()
+        articles = resp.json().get("news", [])
+        results = []
+        seen = set()
+        for a in articles:
+            title = a.get("headline", "")
+            summary = a.get("summary", "")
+            text = (title + " " + summary).lower()
+            if not any(kw in text for kw in MACRO_KEYWORDS):
+                continue
+            url_link = a.get("url", "")
+            key = title[:60].lower()
+            if key in seen:
+                continue
+            seen.add(key)
+            results.append({
+                "title": title,
+                "summary": summary[:180] if summary else "",
+                "url": url_link,
+                "date": a.get("created_at", "")[:16].replace("T", " "),
+                "source": a.get("source", ""),
+            })
+            if len(results) >= 15:
+                break
+        logger.info(f"  Alpaca macro news: {len(results)} articles")
+        return results
+    except Exception as e:
+        logger.warning(f"  Alpaca news failed: {e}")
+        return _fetch_rss_macro_news()
+
+
+def _fetch_rss_macro_news() -> list[dict]:
+    """Fetch macro news from Google News RSS using macro keyword queries."""
+    from xml.etree import ElementTree as ET
+    from email.utils import parsedate_to_datetime
+    from datetime import datetime, timezone, timedelta
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=24)
+    seen = set()
+    results = []
+    for query in MACRO_QUERIES[:5]:
+        try:
+            q = query.replace(" ", "+")
+            url = f"https://news.google.com/rss/search?q={q}&hl=en-US&gl=US&ceid=US:en"
+            resp = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+            resp.raise_for_status()
+            root = ET.fromstring(resp.content)
+            for item in root.findall(".//item"):
+                title = item.findtext("title", "")
+                link  = item.findtext("link", "")
+                desc  = item.findtext("description", "")
+                pub   = item.findtext("pubDate", "")
+                if not title:
+                    continue
+                text = (title + " " + desc).lower()
+                if not any(kw in text for kw in MACRO_KEYWORDS):
+                    continue
+                try:
+                    pub_dt = parsedate_to_datetime(pub)
+                    if pub_dt < cutoff:
+                        continue
+                    date_label = pub_dt.strftime("%Y-%m-%d %H:%M")
+                except Exception:
+                    continue
+                key = title[:60].lower()
+                if key in seen:
+                    continue
+                seen.add(key)
+                # Strip HTML from description
+                import re
+                summary = re.sub(r"<[^>]+>", "", desc).strip()[:180]
+                results.append({
+                    "title": title,
+                    "summary": summary,
+                    "url": link,
+                    "date": date_label,
+                    "source": "Google News",
+                })
+                if len(results) >= 15:
+                    break
+        except Exception as e:
+            logger.warning(f"  RSS macro news failed for query '{query}': {e}")
+        if len(results) >= 15:
+            break
+    results.sort(key=lambda x: x["date"], reverse=True)
+    logger.info(f"  RSS macro news: {len(results)} articles")
+    return results
+
+
+def fetch_all_tickers() -> list[dict]:
+    """Fetch complete US stock ticker list from SEC EDGAR (free, no API key)."""
+    try:
+        url = "https://www.sec.gov/files/company_tickers.json"
+        resp = requests.get(url, timeout=15, headers={"User-Agent": "thematic-scanner research@example.com"})
+        resp.raise_for_status()
+        data = resp.json()
+        tickers = [
+            {"ticker": v["ticker"].upper(), "company": v["title"]}
+            for v in data.values()
+            if v.get("ticker") and v.get("title")
+        ]
+        logger.info(f"  SEC ticker list: {len(tickers)} tickers")
+        return tickers
+    except Exception as e:
+        logger.warning(f"  SEC ticker fetch failed: {e}")
+        return []
+
+
 def main():
     output = build_data()
     out_path = Path("public/thematic_data.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(output, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    logger.info("Fetching SEC ticker list...")
+    all_tickers = fetch_all_tickers()
+    ticker_path = Path("public/all_tickers.json")
+    ticker_path.write_text(json.dumps(all_tickers, ensure_ascii=False), encoding="utf-8")
+    logger.info(f"Output → {ticker_path}")
 
     total = sum(len(sub["stocks"]) for th in output["themes"] for sub in th.get("subthemes", []))
     subs = sum(len(th.get("subthemes", [])) for th in output["themes"])

@@ -188,12 +188,11 @@ def fetch_last_earnings_date(ticker: str) -> str | None:
 
 
 # ──────────────────────────────────────────────────────────────
-# Google News RSS
+# Google News RSS + Finviz News
 # ──────────────────────────────────────────────────────────────
 
-def fetch_news_headlines(ticker: str) -> list[dict]:
-    """Fetch news headlines from the last 24 hours for a ticker via Google News RSS.
-    Returns list of {title, date} dicts so Gemini knows when each article was published."""
+def _fetch_google_news(ticker: str, cutoff, limit: int = 5) -> list[dict]:
+    """Fetch up to `limit` headlines from Google News RSS within the last 24h."""
     try:
         from xml.etree import ElementTree as ET_xml
         from email.utils import parsedate_to_datetime
@@ -201,8 +200,7 @@ def fetch_news_headlines(ticker: str) -> list[dict]:
         resp = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
         resp.raise_for_status()
         root = ET_xml.fromstring(resp.content)
-        cutoff = datetime.now(timezone.utc) - __import__("datetime").timedelta(hours=24)
-        headlines = []
+        results = []
         for item in root.findall(".//item"):
             title = item.findtext("title", "")
             pub_date_str = item.findtext("pubDate", "")
@@ -214,14 +212,86 @@ def fetch_news_headlines(ticker: str) -> list[dict]:
                     continue
                 date_label = pub_dt.strftime("%Y-%m-%d %H:%M UTC")
             except Exception:
-                continue  # Skip articles with unparseable dates to avoid stale news
-            headlines.append({"title": title, "date": date_label})
-            if len(headlines) >= 5:
+                continue
+            results.append({"title": title, "date": date_label, "source": "Google News"})
+            if len(results) >= limit:
                 break
-        return headlines
+        return results
     except Exception as e:
-        logger.warning(f"  News fetch failed for {ticker}: {e}")
+        logger.warning(f"  Google News fetch failed for {ticker}: {e}")
         return []
+
+
+def _fetch_finviz_news(ticker: str, cutoff, limit: int = 5) -> list[dict]:
+    """Fetch up to `limit` headlines from Finviz quote page news table within the last 24h."""
+    try:
+        from bs4 import BeautifulSoup
+        url = f"https://finviz.com/quote.ashx?t={ticker}&p=d"
+        resp = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
+        resp.raise_for_status()
+        soup = BeautifulSoup(resp.text, "html.parser")
+        table = soup.find("table", id="news-table")
+        if not table:
+            return []
+        results = []
+        last_date = None
+        today = datetime.now(timezone.utc).date()
+        for row in table.find_all("tr"):
+            cells = row.find_all("td")
+            if len(cells) < 2:
+                continue
+            date_str = cells[0].get_text(strip=True)
+            title_tag = cells[1].find("a")
+            if not title_tag:
+                continue
+            title = title_tag.get_text(strip=True)
+            # Finviz date cell: either "Mar-20-26 07:30AM" or just "07:30AM" (same day)
+            if len(date_str) > 8:
+                last_date = date_str
+            full_date_str = last_date or date_str
+            try:
+                from datetime import timedelta
+                import re
+                # Parse "Mar-20-26 07:30AM" or "Mar-20-2026 07:30AM"
+                match = re.match(r"(\w{3}-\d{2}-\d{2,4})\s+(\d{1,2}:\d{2}(?:AM|PM))", full_date_str)
+                if not match:
+                    continue
+                date_part, time_part = match.group(1), match.group(2)
+                year_part = date_part.split("-")[2]
+                if len(year_part) == 2:
+                    date_part = date_part[:-2] + "20" + year_part
+                pub_dt = datetime.strptime(f"{date_part} {time_part}", "%b-%d-%Y %I:%M%p")
+                pub_dt = pub_dt.replace(tzinfo=timezone.utc)
+                if pub_dt < cutoff:
+                    continue
+                date_label = pub_dt.strftime("%Y-%m-%d %H:%M UTC")
+            except Exception:
+                continue
+            results.append({"title": title, "date": date_label, "source": "Finviz"})
+            if len(results) >= limit:
+                break
+        return results
+    except Exception as e:
+        logger.warning(f"  Finviz news fetch failed for {ticker}: {e}")
+        return []
+
+
+def fetch_news_headlines(ticker: str) -> list[dict]:
+    """Fetch news headlines from the last 24h via Google News RSS + Finviz, deduped and sorted."""
+    import datetime as dt
+    cutoff = datetime.now(timezone.utc) - dt.timedelta(hours=24)
+    google = _fetch_google_news(ticker, cutoff, limit=5)
+    finviz = _fetch_finviz_news(ticker, cutoff, limit=5)
+    # Merge, deduplicate by title similarity, sort newest first
+    seen = set()
+    merged = []
+    for item in google + finviz:
+        key = item["title"][:60].lower()
+        if key not in seen:
+            seen.add(key)
+            merged.append(item)
+    merged.sort(key=lambda x: x["date"], reverse=True)
+    return merged[:8]
 
 
 # ──────────────────────────────────────────────────────────────
