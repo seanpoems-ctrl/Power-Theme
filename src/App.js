@@ -666,17 +666,28 @@ const TVPopup = ({ ticker, anchorRect }) => {
 const SORT_PERF_COLS = new Set(['perf_1d','perf_1w','perf_1m','perf_3m','perf_6m']);
 const SORT_TECH_COLS = new Set(['rs_52w','rvol','avg_dollar_volume','adr_pct','dist_52w_high','volume','price','52w_high','ticker']);
 
-function getAlphaGrade(s) {
+function getAlphaGrade(s, spyPerf1d = 0) {
   const rs = s.rs_52w || 0;
   if (rs > 97 && (s.perf_1m||0) > 0 && (s.perf_1d||0) > 0) return 'A+';
   if (rs > 95 && (s.perf_1m||0) > 0) return 'A';
-  if (rs > 90) return 'B';
+  if (rs > 90 || (s.perf_1d||0) > spyPerf1d) return 'B';
   return null;
 }
 
-const AlphaLeaderBadge = ({ stock }) => {
-  const grade = getAlphaGrade(stock);
-  if (!grade || grade === 'B' || (stock.perf_1d||0) <= 0) return null;
+// Returns true if stock "fits" a given sort key (used for dynamic badge)
+function fitsSortKey(stock, key) {
+  if (SORT_PERF_COLS.has(key)) return (stock[key] || 0) > 0;
+  if (key === 'rs_52w') return (stock.rs_52w || 0) > 95;
+  return true;
+}
+
+const AlphaLeaderBadge = ({ stock, sortPriority = [], spyPerf1d = 0 }) => {
+  const grade = getAlphaGrade(stock, spyPerf1d);
+  if (!grade || grade === 'B') return null;
+  if ((stock.perf_1d||0) <= 0) return null;
+  // Dynamic: must fit the current top-2 sort priorities
+  const fits = sortPriority.slice(0, 2).every(p => fitsSortKey(stock, p.key));
+  if (!fits) return null;
   const style = grade === 'A+'
     ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
     : 'bg-blue-500/20 text-blue-300 border-blue-500/40';
@@ -804,7 +815,7 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
                         onMouseLeave={() => setHovered(null)}
                       >{s.ticker}</span>
                       <GradeBadge grade={getEliteGrade(s)}/>
-                      <AlphaLeaderBadge stock={s}/>
+                      <AlphaLeaderBadge stock={s} sortPriority={sortPriority} spyPerf1d={spyPerf || 0}/>
                       {isVCPStage1(s) && <Tip text="Narrowing consolidation + VDU + near 52W high" color="violet"><span className="text-[9px] font-bold text-violet-400 bg-violet-500/15 border border-violet-500/30 px-1 py-0.5 rounded cursor-help">🎯 VCP S1</span></Tip>}
                       {!isVCPStage1(s) && isVDU(s) && <Tip text="Volume below 50% of 10-day avg — selling pressure exhausted" color="blue"><span className="text-[9px] font-bold text-blue-400 bg-blue-500/15 border border-blue-500/30 px-1 py-0.5 rounded cursor-help">VDU</span></Tip>}
                       {isTight(s) && <Tip text="Last 3 days range < 1.5% — extremely tight" color="fuchsia"><span className="text-[9px] font-bold text-fuchsia-400 bg-fuchsia-500/15 border border-fuchsia-500/30 px-1 py-0.5 rounded cursor-help">Tight</span></Tip>}
