@@ -560,6 +560,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
             ✕ Reset
           </button>
         )}
+        <div className="flex-1"></div>
         <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 flex-shrink-0">
           {[{k:"themes",l:"Themes Map"},{k:"industry",l:"Industry"}].map(v => (
             <button key={v.k} onClick={() => { setView(v.k); setExpanded(null); }}
