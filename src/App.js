@@ -574,7 +574,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
           <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
             <tr className="border-b border-zinc-800/60">
               <th className="px-2 py-2 w-6 text-[10px] text-zinc-600 select-none">#</th>
-              <th className="px-2 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Theme</th>
+              <th className="pl-10 pr-2 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Theme</th>
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
               <LBSortHeader k="rs_score" label="RS" w="w-16" />
             </tr>
@@ -589,7 +589,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                   onClick={() => isIndustryView && setExpanded(isExpanded ? null : t.name)}
                   className={`border-b border-zinc-800/30 transition-colors ${isIndustryView ? 'cursor-pointer' : ''} ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
                   <td className={`px-2 py-2 text-[11px] font-bold font-mono ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
-                  <td className="px-2 py-2">
+                  <td className="pl-10 pr-2 py-2">
                     <div className="flex items-center gap-1.5">
                       {isIndustryView && (isExpanded ? <ChevronDown size={11} className="text-zinc-500 flex-shrink-0"/> : <ChevronRight size={11} className="text-zinc-600 flex-shrink-0"/>)}
                       <span
