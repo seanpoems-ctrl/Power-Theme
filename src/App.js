@@ -94,7 +94,7 @@ const PerfCell = ({ value }) => {
   else { bg = "bg-red-500/30"; txt = "text-red-300"; }
   return (
     <td className="text-center py-3 px-1">
-      <span className={`inline-block rounded-md px-2 py-0.5 text-xs font-mono font-medium ${txt} ${bg}`}>
+      <span className={`inline-block rounded-md px-2 py-1.5 text-xs font-mono font-medium ${txt} ${bg}`}>
         {v >= 0 ? "+" : ""}{v.toFixed(1)}%
       </span>
     </td>
