@@ -1308,19 +1308,18 @@ const GapperScanner = () => {
         <table className="w-full table-fixed min-w-[1300px]">
           <colgroup>
             <col style={{width:"5%"}}/>
-            <col style={{width:"4.5%"}}/>
+            <col style={{width:"5%"}}/>
             <col style={{width:"5%"}}/>
             <col style={{width:"4%"}}/>
             <col style={{width:"4%"}}/>
-            <col style={{width:"5%"}}/>
-            <col style={{width:"5.5%"}}/>
+            <col style={{width:"4%"}}/>
             <col style={{width:"5%"}}/>
             <col style={{width:"6%"}}/>
             <col style={{width:"8%"}}/>
             <col style={{width:"8%"}}/>
-            <col style={{width:"3%"}}/>
-            <col style={{width:"12%"}}/>
-            <col style={{width:"25%"}}/>
+            <col style={{width:"4%"}}/>
+            <col style={{width:"18%"}}/>
+            <col style={{width:"24%"}}/>
           </colgroup>
           <thead>
             <tr className="text-[10px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40 align-middle">
@@ -1400,7 +1399,7 @@ const GapperScanner = () => {
                     : <span className="text-zinc-600">—</span>}
                 </td>
                 {/* Reasoning */}
-                <td className="py-2 px-1.5 text-[11px] text-zinc-400 leading-relaxed align-middle">{g.reasoning}</td>
+                <td className="py-2 px-1.5 text-[11px] text-zinc-400 leading-relaxed align-middle whitespace-normal break-words">{g.reasoning}</td>
                 {/* Analysis Details */}
                 <td className="py-2 px-2 align-middle"><AnalysisCell text={g.analysis_details}/></td>
               </tr>
