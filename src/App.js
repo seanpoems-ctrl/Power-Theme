@@ -451,26 +451,66 @@ const PerfCellLB = ({ val }) => {
   return <td className={`px-2 py-1.5 text-right text-[11px] font-mono font-medium ${color} ${bg}`}>{val > 0 ? '+' : ''}{val.toFixed(1)}%</td>;
 };
 
+const LB_PERF_COLS = new Set(['perf_1d','perf_1w','perf_1m','perf_3m','perf_6m']);
+
 const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themeSparklines = {} }) => {
-  const [sortKey, setSortKey] = useState("rs_score");
-  const [sortDir, setSortDir] = useState("desc");
+  const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
+  const [shiftHeld, setShiftHeld] = useState(false);
   const [expanded, setExpanded] = useState(null);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
   const [themeHover, setThemeHover] = useState(null); // { ticker, rect }
 
   const activeData = view === "themes" ? finvizThemeRankings : themeRankings;
 
-  const handleLBSort = (k) => {
-    if (sortKey === k) setSortDir(d => d === "desc" ? "asc" : "desc");
-    else { setSortKey(k); setSortDir("desc"); }
+  useEffect(() => {
+    const down = e => { if (e.key === 'Shift') setShiftHeld(true); };
+    const up   = e => { if (e.key === 'Shift') setShiftHeld(false); };
+    window.addEventListener('keydown', down);
+    window.addEventListener('keyup', up);
+    return () => { window.removeEventListener('keydown', down); window.removeEventListener('keyup', up); };
+  }, []);
+
+  const handleLBSort = (key) => {
+    if (shiftHeld) {
+      const primary = sortPriority[0];
+      // Mutual exclusion: block perf→perf secondary
+      if (primary && LB_PERF_COLS.has(primary.key) && LB_PERF_COLS.has(key)) return;
+      setSortPriority(prev => {
+        const existing = prev.findIndex((p, i) => i > 0 && p.key === key);
+        if (existing > 0) return prev.map((p, i) => i === existing ? { ...p, direction: p.direction === 'desc' ? 'asc' : 'desc' } : p);
+        return [prev[0], { key, direction: 'desc' }];
+      });
+    } else {
+      setSortPriority(prev => {
+        const cur = prev.find(p => p.key === key);
+        if (cur && prev[0].key === key) return [{ key, direction: cur.direction === 'desc' ? 'asc' : 'desc' }, ...prev.slice(1)];
+        return [{ key, direction: 'desc' }];
+      });
+    }
   };
+
+  const primaryKey = sortPriority[0]?.key;
+  const secondaryKey = sortPriority[1]?.key;
 
   const ranked = useMemo(() => {
     if (!activeData || !activeData.length) return [];
-    return [...activeData].sort((a, b) =>
-      sortDir === "desc" ? (b[sortKey] || 0) - (a[sortKey] || 0) : (a[sortKey] || 0) - (b[sortKey] || 0)
-    );
-  }, [activeData, sortKey, sortDir]);
+    return [...activeData].sort((a, b) => {
+      for (let i = 0; i < sortPriority.length; i++) {
+        const { key, direction } = sortPriority[i];
+        let va = a[key] ?? 0;
+        let vb = b[key] ?? 0;
+        // Bucketing: round to 1 decimal for perf cols when primary sort
+        if (i === 0 && LB_PERF_COLS.has(key)) {
+          va = Math.round(va * 10) / 10;
+          vb = Math.round(vb * 10) / 10;
+        }
+        if (va === vb) continue;
+        const cmp = va > vb ? 1 : -1;
+        return direction === 'desc' ? -cmp : cmp;
+      }
+      return 0;
+    });
+  }, [activeData, sortPriority]);
 
 
   const industryMap = useMemo(() => {
@@ -491,13 +531,24 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     return m;
   }, [industryRankings]);
 
-  const SortHeader = ({ k, label, w }) => (
-    <th onClick={() => handleLBSort(k)}
-      className={`px-2 py-2 text-right cursor-pointer select-none ${w || 'w-14'} ${sortKey === k ? 'text-blue-400' : 'text-zinc-500 hover:text-zinc-300'}`}>
-      <span className="text-[10px] font-semibold uppercase tracking-wider">{label}</span>
-      {sortKey === k && <span className="ml-0.5 text-[8px]">{sortDir === "desc" ? "▼" : "▲"}</span>}
-    </th>
-  );
+  const LBSortHeader = ({ k, label, w }) => {
+    const priIdx = sortPriority.findIndex(p => p.key === k);
+    const isActive = priIdx >= 0;
+    const dir = isActive ? sortPriority[priIdx].direction : null;
+    const isPrimary = priIdx === 0;
+    const isSecondary = priIdx === 1;
+    const isBlocked = shiftHeld && LB_PERF_COLS.has(k) && LB_PERF_COLS.has(primaryKey) && !isPrimary;
+    return (
+      <th onClick={() => handleLBSort(k)}
+        className={`px-2 py-2 text-right cursor-pointer select-none ${w || 'w-14'} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500 hover:text-zinc-300'}`}>
+        <span className="inline-flex items-center justify-end gap-0.5 text-[10px] font-semibold uppercase tracking-wider">
+          {label}
+          {isPrimary   && <span className="text-[8px] text-blue-400/70">①{dir === 'desc' ? '▼' : '▲'}</span>}
+          {isSecondary && <span className="text-[8px] text-violet-400/70">②{dir === 'desc' ? '▼' : '▲'}</span>}
+        </span>
+      </th>
+    );
+  };
 
   return (
     <><div className="p-4 bg-zinc-900/60 rounded-xl border border-zinc-800/60">
@@ -506,6 +557,12 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
           <BarChart3 size={13} className="text-blue-400"/>
           <span className="text-xs font-semibold text-zinc-300">Theme Leaderboard</span>
           <span className="text-[10px] text-zinc-600">{ranked.length} themes</span>
+          {secondaryKey && (
+            <button onClick={() => setSortPriority([{ key: 'rs_score', direction: 'desc' }])}
+              className="text-[9px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">
+              ✕ Reset
+            </button>
+          )}
         </div>
         <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
           {[{k:"themes",l:"Themes Map"},{k:"industry",l:"Industry"}].map(v => (
@@ -520,13 +577,10 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         <table className="w-full text-left">
           <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
             <tr className="border-b border-zinc-800/60">
-              <th onClick={() => setSortDir(d => d === "desc" ? "asc" : "desc")}
-                className="px-2 py-2 w-6 text-[10px] text-zinc-500 cursor-pointer hover:text-zinc-300 select-none">
-                {sortDir === "desc" ? "▼" : "▲"}
-              </th>
+              <th className="px-2 py-2 w-6 text-[10px] text-zinc-600 select-none">#</th>
               <th className="px-2 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Theme</th>
-              {LB_KEYS.map(k => <SortHeader key={k.key} k={k.key} label={k.label} />)}
-              <SortHeader k="rs_score" label="RS" w="w-16" />
+              {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
+              <LBSortHeader k="rs_score" label="RS" w="w-16" />
             </tr>
           </thead>
           <tbody>
@@ -538,7 +592,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                 <tr
                   onClick={() => isIndustryView && setExpanded(isExpanded ? null : t.name)}
                   className={`border-b border-zinc-800/30 transition-colors ${isIndustryView ? 'cursor-pointer' : ''} ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
-                  <td className={`px-2 py-2 text-[11px] font-bold font-mono ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{sortDir === "desc" ? i + 1 : ranked.length - i}</td>
+                  <td className={`px-2 py-2 text-[11px] font-bold font-mono ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
                   <td className="px-2 py-2">
                     <div className="flex items-center gap-1.5">
                       {isIndustryView && (isExpanded ? <ChevronDown size={11} className="text-zinc-500 flex-shrink-0"/> : <ChevronRight size={11} className="text-zinc-600 flex-shrink-0"/>)}
