@@ -93,10 +93,10 @@ const PerfCell = ({ value }) => {
   else if (v >= -20) { bg = "bg-red-500/20"; txt = "text-red-400"; }
   else { bg = "bg-red-500/30"; txt = "text-red-300"; }
   return (
-    <td className="text-center py-3 px-1">
-      <span className={`inline-block rounded-md px-2 py-1.5 text-xs font-mono font-medium ${txt} ${bg}`}>
+    <td className="p-0">
+      <div className={`mx-0.5 my-1 rounded-md flex items-center justify-center py-3 text-xs font-mono font-medium ${txt} ${bg}`}>
         {v >= 0 ? "+" : ""}{v.toFixed(1)}%
-      </span>
+      </div>
     </td>
   );
 };
