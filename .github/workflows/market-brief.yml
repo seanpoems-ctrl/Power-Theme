@@ -1,0 +1,65 @@
+name: Market Brief (AM + PM)
+
+on:
+  schedule:
+    - cron: "0 13 * * 1-5"   # 8:00 AM ET (UTC-5) / 9:00 AM ET (UTC-4, DST)
+    - cron: "0 21 * * 1-5"   # 4:00 PM ET → covers both EST and EDT
+  workflow_dispatch: {}
+
+jobs:
+  market-brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install requests yfinance google-genai exchange-calendars
+
+      - name: Check trading day
+        id: trading_day
+        run: |
+          python - <<'EOF'
+          import exchange_calendars as xcals, os
+          from datetime import date
+          nyse = xcals.get_calendar("XNYS")
+          is_session = nyse.is_session(date.today().isoformat())
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"is_trading_day={'true' if is_session else 'false'}\n")
+          EOF
+
+      - name: Run Market Brief
+        if: steps.trading_day.outputs.is_trading_day == 'true'
+        run: python market_brief.py
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+
+      - name: Build React app
+        if: steps.trading_day.outputs.is_trading_day == 'true'
+        run: npm run build
+        env:
+          CI: false
+
+      - uses: actions/configure-pages@v4
+        if: steps.trading_day.outputs.is_trading_day == 'true'
+
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.trading_day.outputs.is_trading_day == 'true'
+        with:
+          path: ./build
+
+      - id: deployment
+        if: steps.trading_day.outputs.is_trading_day == 'true'
+        uses: actions/deploy-pages@v4

@@ -2089,9 +2089,142 @@ const MomentumCockpit = () => {
   );
 };
 
+// ── Market Brief Panel ──────────────────────────────────────────────────────
+const MarketBriefPanel = ({ data }) => {
+  if (!data) {
+    return (
+      <div className="max-w-[1400px] mx-auto px-4 py-16 text-center">
+        <Landmark size={28} className="mx-auto mb-3 text-zinc-600"/>
+        <p className="text-sm text-zinc-500">Brief not yet generated</p>
+        <p className="text-xs text-zinc-600 mt-1">Runs at 8:00 AM and 4:00 PM ET on trading days</p>
+      </div>
+    );
+  }
+
+  const { generated_at, session, market_data: md, brief, article_count } = data;
+  const b = brief || {};
+
+  const renderBold = (text) => {
+    if (!text) return null;
+    const parts = text.split(/\*\*(.+?)\*\*/g);
+    return parts.map((part, i) =>
+      i % 2 === 1 ? <strong key={i} className="text-white font-semibold">{part}</strong> : part
+    );
+  };
+
+  const sentimentColor = b.sentiment === "Bullish"
+    ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
+    : b.sentiment === "Bearish"
+    ? "bg-red-500/20 text-red-300 border-red-500/30"
+    : "bg-zinc-700/40 text-zinc-300 border-zinc-600/40";
+
+  const sentimentDot = b.sentiment === "Bullish" ? "bg-emerald-400"
+    : b.sentiment === "Bearish" ? "bg-red-400" : "bg-zinc-400";
+
+  const vixColor = md?.vix > 20 ? "text-red-400" : "text-emerald-400";
+  const chgColor = v => v == null ? "text-zinc-500" : v >= 0 ? "text-emerald-400" : "text-red-400";
+  const fmtChg = v => v == null ? "—" : `${v >= 0 ? "+" : ""}${v.toFixed(2)}%`;
+
+  return (
+    <div className="max-w-[1400px] mx-auto px-4 py-6">
+      {/* Header */}
+      <div className="flex flex-wrap items-center gap-3 mb-5">
+        <h2 className="text-base font-bold text-zinc-100">
+          {session === "Pre-Market" ? "Pre-Market Brief" : "Post-Market Brief"}
+        </h2>
+        {b.sentiment && (
+          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-full border ${sentimentColor}`}>
+            <span className={`w-1.5 h-1.5 rounded-full ${sentimentDot}`}/>
+            {b.sentiment}
+          </span>
+        )}
+        {b.sentiment_reason && <span className="text-xs text-zinc-400 flex-1">{b.sentiment_reason}</span>}
+        <span className="text-[11px] text-zinc-500 ml-auto">{generated_at} · {article_count} articles</span>
+      </div>
+
+      {/* Market data cards */}
+      {md && (
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
+          <div className="bg-zinc-900 border border-zinc-800/60 rounded-lg px-4 py-3">
+            <div className="text-[10px] text-zinc-500 mb-1">VIX</div>
+            <div className={`text-lg font-bold font-mono ${vixColor}`}>{md.vix?.toFixed(2)}</div>
+            <div className="text-[10px] text-zinc-500 mt-0.5">{md.vix > 20 ? "Elevated fear" : "Low fear"}</div>
+          </div>
+          <div className="bg-zinc-900 border border-zinc-800/60 rounded-lg px-4 py-3">
+            <div className="text-[10px] text-zinc-500 mb-1">SPY</div>
+            <div className="text-lg font-bold font-mono text-zinc-100">${md.spy?.toFixed(2)}</div>
+            <div className={`text-[11px] font-mono mt-0.5 ${chgColor(md.spy_chg)}`}>{fmtChg(md.spy_chg)}</div>
+          </div>
+          <div className="bg-zinc-900 border border-zinc-800/60 rounded-lg px-4 py-3">
+            <div className="text-[10px] text-zinc-500 mb-1">QQQ</div>
+            <div className="text-lg font-bold font-mono text-zinc-100">${md.qqq?.toFixed(2)}</div>
+            <div className={`text-[11px] font-mono mt-0.5 ${chgColor(md.qqq_chg)}`}>{fmtChg(md.qqq_chg)}</div>
+          </div>
+          <div className="bg-zinc-900 border border-zinc-800/60 rounded-lg px-4 py-3">
+            <div className="text-[10px] text-zinc-500 mb-1">10Y Yield</div>
+            <div className="text-lg font-bold font-mono text-amber-400">{md.yield_10y?.toFixed(2)}%</div>
+            <div className="text-[10px] text-zinc-500 mt-0.5">US Treasury</div>
+          </div>
+        </div>
+      )}
+
+      {/* Macro News */}
+      {b.macro_news?.length > 0 && (
+        <div className="mb-5">
+          <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">Macro News</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {b.macro_news.map((item, i) => (
+              <div key={i} className="bg-zinc-900 border border-zinc-800/60 rounded-lg p-4">
+                <div className="text-xs font-semibold text-amber-400 mb-2">{item.title}</div>
+                <p className="text-xs text-zinc-300 leading-relaxed">{renderBold(item.summary)}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Sector Focus */}
+      {b.sector_themes?.length > 0 && (
+        <div className="mb-5">
+          <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">Sector Focus</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {b.sector_themes.map((s, i) => (
+              <div key={i} className="bg-zinc-900 border border-zinc-800/60 rounded-lg p-4">
+                <div className="text-sm font-bold text-zinc-100 mb-1">{s.theme}</div>
+                <p className="text-xs text-zinc-400 leading-relaxed">{s.reason}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Key Levels */}
+      {b.key_levels && (
+        <div className="bg-zinc-900 border border-zinc-800/60 rounded-lg p-4 flex flex-wrap gap-6">
+          <div>
+            <div className="text-[10px] text-zinc-500 mb-1">SPY Support Level</div>
+            <div className="text-sm font-bold font-mono text-zinc-100">${b.key_levels.spy_support}</div>
+          </div>
+          <div className="flex-1">
+            <div className="text-[10px] text-zinc-500 mb-1">Today's Catalyst</div>
+            <div className="text-sm text-zinc-200">{b.key_levels.catalyst_today}</div>
+          </div>
+        </div>
+      )}
+
+      {b.error && (
+        <div className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg p-4 mt-3">
+          Analysis error: {b.error}
+        </div>
+      )}
+    </div>
+  );
+};
+
 export default function App() {
   const [tab, setTab] = useState("scanner");
   const [data, setData] = useState(null);
+  const [briefData, setBriefData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filtersOn, setFiltersOn] = useState(false);
@@ -2138,6 +2271,13 @@ export default function App() {
       } catch {}
       setLoading(false);
     })();
+  }, []);
+
+  useEffect(() => {
+    fetch(process.env.PUBLIC_URL + "/market_brief.json?v=" + Date.now())
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d) setBriefData(d); })
+      .catch(() => {});
   }, []);
 
 const filtered = useMemo(() => {
@@ -2239,6 +2379,9 @@ const filtered = useMemo(() => {
                 <button onClick={() => setTab("analyst")} className={`px-3 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1 ${tab === "analyst" ? "bg-violet-500/25 text-violet-300 border border-violet-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
                   <FlaskConical size={11}/> Analyst Cockpit
                 </button>
+                <button onClick={() => setTab("brief")} className={`px-3 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1 ${tab === "brief" ? "bg-amber-500/25 text-amber-300 border border-amber-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
+                  <Landmark size={11}/> Market Brief
+                </button>
               </div>
               {data && fetchedAt && (
                 <div className="text-right leading-tight">
@@ -2313,7 +2456,7 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "analyst" ? <MomentumCockpit/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
+      {tab === "analyst" ? <MomentumCockpit/> : tab === "brief" ? <MarketBriefPanel data={briefData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
         <div className="max-w-[1400px] mx-auto px-4 py-4">
           <div className="flex gap-4 items-stretch mb-2">
             <div className="w-[520px] flex-shrink-0 flex flex-col">
