@@ -93,8 +93,10 @@ const PerfCell = ({ value }) => {
   else if (v >= -20) { bg = "bg-red-500/20"; txt = "text-red-400"; }
   else { bg = "bg-red-500/30"; txt = "text-red-300"; }
   return (
-    <td className={`text-center py-2 px-2 text-xs font-mono font-medium ${txt} ${bg}`}>
-      {v >= 0 ? "+" : ""}{v.toFixed(1)}%
+    <td className="text-center py-2 px-1">
+      <span className={`inline-block rounded-md px-2 py-0.5 text-xs font-mono font-medium ${txt} ${bg}`}>
+        {v >= 0 ? "+" : ""}{v.toFixed(1)}%
+      </span>
     </td>
   );
 };
@@ -448,7 +450,11 @@ const PerfCellLB = ({ val }) => {
   if (val == null) return <td className="px-2 py-1.5 text-center text-[10px] text-zinc-600">—</td>;
   const color = val > 0 ? 'text-emerald-400' : val < 0 ? 'text-red-400' : 'text-zinc-400';
   const bg = val > 5 ? 'bg-emerald-500/10' : val < -5 ? 'bg-red-500/10' : '';
-  return <td className={`px-2 py-1.5 text-right text-[11px] font-mono font-medium ${color} ${bg}`}>{val > 0 ? '+' : ''}{val.toFixed(1)}%</td>;
+  return (
+    <td className="px-2 py-1.5 text-center">
+      <span className={`inline-block rounded-md px-1.5 py-0.5 text-[11px] font-mono font-medium ${color} ${bg}`}>{val > 0 ? '+' : ''}{val.toFixed(1)}%</span>
+    </td>
+  );
 };
 
 const LB_PERF_COLS = new Set(['perf_1d','perf_1w','perf_1m','perf_3m','perf_6m']);
