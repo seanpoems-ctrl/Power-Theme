@@ -81,7 +81,7 @@ const Sparkline = ({ data, width = 72, height = 26 }) => {
 };
 
 const PerfCell = ({ value }) => {
-  if (value == null) return <td className="text-center py-2 px-2 text-xs text-zinc-600">—</td>;
+  if (value == null) return <td className="text-center py-3 px-2 text-xs text-zinc-600">—</td>;
   const v = parseFloat(value);
   let bg, txt;
   if (v >= 20) { bg = "bg-emerald-500/30"; txt = "text-emerald-300"; }
@@ -93,7 +93,7 @@ const PerfCell = ({ value }) => {
   else if (v >= -20) { bg = "bg-red-500/20"; txt = "text-red-400"; }
   else { bg = "bg-red-500/30"; txt = "text-red-300"; }
   return (
-    <td className="text-center py-2 px-1">
+    <td className="text-center py-3 px-1">
       <span className={`inline-block rounded-md px-2 py-0.5 text-xs font-mono font-medium ${txt} ${bg}`}>
         {v >= 0 ? "+" : ""}{v.toFixed(1)}%
       </span>
@@ -127,25 +127,25 @@ const fmtVol = n => n >= 1e9 ? `$${(n/1e9).toFixed(1)}B` : n >= 1e6 ? `$${(n/1e6
 const fmtNum = n => n >= 1e6 ? `${(n/1e6).toFixed(1)}M` : n >= 1e3 ? `${(n/1e3).toFixed(0)}K` : `${n}`;
 
 const Dist52wCell = ({ value }) => {
-  if (value == null) return <td className="text-center py-2 px-2 text-xs text-zinc-600">—</td>;
+  if (value == null) return <td className="text-center py-3 px-2 text-xs text-zinc-600">—</td>;
   const v = parseFloat(value);
   let txt;
   if (v >= -3) txt = "text-emerald-300 font-semibold";
   else if (v >= -8) txt = "text-emerald-400";
   else if (v >= -15) txt = "text-amber-400";
   else txt = "text-zinc-500";
-  return <td className={`text-center py-2 px-2 text-xs font-mono ${txt}`}>{v.toFixed(1)}%</td>;
+  return <td className={`text-center py-3 px-2 text-xs font-mono ${txt}`}>{v.toFixed(1)}%</td>;
 };
 
 const RVolCell = ({ value }) => {
-  if (value == null) return <td className="text-center py-2 px-2 text-xs text-zinc-600">—</td>;
+  if (value == null) return <td className="text-center py-3 px-2 text-xs text-zinc-600">—</td>;
   const v = parseFloat(value);
   let txt;
   if (v >= 2) txt = "text-emerald-300 font-semibold";
   else if (v >= 1.5) txt = "text-emerald-400";
   else if (v >= 1) txt = "text-zinc-300";
   else txt = "text-zinc-500";
-  return <td className={`text-center py-2 px-2 text-xs font-mono ${txt}`}>{v.toFixed(2)}x</td>;
+  return <td className={`text-center py-3 px-2 text-xs font-mono ${txt}`}>{v.toFixed(2)}x</td>;
 };
 
 /* Instant tooltip — no browser delay */
@@ -371,12 +371,12 @@ function earningsDaysAway(s) {
 const EarningsCell = ({ value }) => {
   const days = earningsDaysAway(value);
   const label = value ? value.replace(/\s+(AMC|BMO|--)/i, "") : null;
-  if (!label || days == null) return <td className="text-center py-2 px-2 text-xs text-zinc-700">—</td>;
+  if (!label || days == null) return <td className="text-center py-3 px-2 text-xs text-zinc-700">—</td>;
   if (days <= 7)
-    return <td className="text-center py-2 px-2"><span className="text-[10px] font-bold text-red-400 bg-red-500/15 border border-red-500/30 px-1 py-0.5 rounded">⚠ {label}</span></td>;
+    return <td className="text-center py-3 px-2"><span className="text-[10px] font-bold text-red-400 bg-red-500/15 border border-red-500/30 px-1 py-0.5 rounded">⚠ {label}</span></td>;
   if (days <= 14)
-    return <td className="text-center py-2 px-2"><span className="text-[10px] font-medium text-amber-400">{label}</span></td>;
-  return <td className="text-center py-2 px-2 text-[10px] text-zinc-600 font-mono">{label}</td>;
+    return <td className="text-center py-3 px-2"><span className="text-[10px] font-medium text-amber-400">{label}</span></td>;
+  return <td className="text-center py-3 px-2 text-[10px] text-zinc-600 font-mono">{label}</td>;
 };
 
 // ── Counter-Trend Warning ──
@@ -751,7 +751,7 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
     const isBlocked = SORT_PERF_COLS.has(k) && SORT_PERF_COLS.has(primaryKey) && !isPrimary;
     return (
       <th onClick={e => handleSort(k, e.shiftKey)}
-        className={`py-2 px-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors text-${align} ${w || ''} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500'}`}>
+        className={`py-3 px-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors text-${align} ${w || ''} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500'}`}>
         <span className="inline-flex items-center gap-0.5">
           {label}
           {isPrimary && <span className="text-[8px] text-blue-400/70 ml-0.5">①{dir === 'desc' ? '▼' : '▲'}</span>}
@@ -776,11 +776,11 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
       <table className="w-full text-sm table-fixed min-w-[1280px]">
         <thead>
           <tr className="text-[11px] uppercase tracking-wider bg-zinc-900/80">
-            <th className="text-left py-2 px-4 font-medium w-[160px] text-zinc-500">Ticker</th>
+            <th className="text-left py-3 px-4 font-medium w-[160px] text-zinc-500">Ticker</th>
             <SH k="price" label="Price" w="w-[80px]"/>
             {PERF_KEYS.map(p => <SH key={p.key} k={p.key} label={p.label} w="w-[64px]"/>)}
-            <th className="text-center py-2 px-2 font-medium w-[84px] text-zinc-500">Earnings</th>
-            <th className="text-center py-2 px-2 font-medium w-[84px] text-zinc-500">6M</th>
+            <th className="text-center py-3 px-2 font-medium w-[84px] text-zinc-500">Earnings</th>
+            <th className="text-center py-3 px-2 font-medium w-[84px] text-zinc-500">6M</th>
             <SH k="52w_high" label="52W Hi" w="w-[80px]"/>
             <SH k="dist_52w_high" label="Dist" w="w-[64px]"/>
             <SH k="volume" label="Vol" w="w-[68px]"/>
@@ -788,13 +788,13 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
             <SH k="avg_dollar_volume" label="Avg $V" w="w-[72px]"/>
             <SH k="adr_pct" label="ADR" w="w-[56px]"/>
             <SH k="rs_52w" label="RS" align="center" w="w-[60px]"/>
-            <th className="text-center py-2 px-2 font-medium w-[84px] text-zinc-500">vs SPY</th>
+            <th className="text-center py-3 px-2 font-medium w-[84px] text-zinc-500">vs SPY</th>
           </tr>
         </thead>
         <tbody>
           {sorted.map((s, i) => (
             <tr key={s.ticker+i} className="border-t border-zinc-800/50 hover:bg-zinc-800/30 transition-colors">
-              <td className="py-2 px-4">
+              <td className="py-3 px-4">
                 <div className="flex items-center gap-2">
                   {s.pure_play
                     ? <Tip text="Pure Play — appears in only one sub-theme" color="amber"><Star size={11} className="text-amber-400 fill-amber-400 flex-shrink-0 cursor-help"/></Tip>
@@ -820,18 +820,18 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
                   </div>
                 </div>
               </td>
-              <td className="text-center py-2 px-2 font-mono text-zinc-200 text-xs">${s.price.toFixed(2)}</td>
+              <td className="text-center py-3 px-2 font-mono text-zinc-200 text-xs">${s.price.toFixed(2)}</td>
               {PERF_KEYS.map(p => <PerfCell key={p.key} value={s[p.key]}/>)}
               <EarningsCell value={s.earnings}/>
-              <td className="text-center py-2 px-2"><div className="flex justify-center"><Sparkline data={sparklineSeries(s)}/></div></td>
-              <td className="text-center py-2 px-2 font-mono text-zinc-400 text-xs">{s["52w_high"] ? `$${s["52w_high"].toFixed(2)}` : "—"}</td>
+              <td className="text-center py-3 px-2"><div className="flex justify-center"><Sparkline data={sparklineSeries(s)}/></div></td>
+              <td className="text-center py-3 px-2 font-mono text-zinc-400 text-xs">{s["52w_high"] ? `$${s["52w_high"].toFixed(2)}` : "—"}</td>
               <Dist52wCell value={s.dist_52w_high}/>
-              <td className="text-center py-2 px-2 text-zinc-500 text-xs font-mono">{fmtNum(s.volume)}</td>
+              <td className="text-center py-3 px-2 text-zinc-500 text-xs font-mono">{fmtNum(s.volume)}</td>
               <RVolCell value={s.rvol}/>
-              <td className="text-center py-2 px-2 text-zinc-500 text-xs font-mono">{fmtVol(s.avg_dollar_volume || s.dollar_volume)}</td>
-              <td className="text-center py-2 px-2 text-zinc-400 text-xs font-mono">{s.adr_pct.toFixed(1)}%</td>
-              <td className="text-center py-2 px-2"><RSBadge value={s.rs_52w} trend={getRSTrend(s)}/></td>
-              <td className="text-center py-2 px-2"><RSvsSPYBadge stockPerf={s[rsSPYKey]} spyPerf={spyPerf}/></td>
+              <td className="text-center py-3 px-2 text-zinc-500 text-xs font-mono">{fmtVol(s.avg_dollar_volume || s.dollar_volume)}</td>
+              <td className="text-center py-3 px-2 text-zinc-400 text-xs font-mono">{s.adr_pct.toFixed(1)}%</td>
+              <td className="text-center py-3 px-2"><RSBadge value={s.rs_52w} trend={getRSTrend(s)}/></td>
+              <td className="text-center py-3 px-2"><RSvsSPYBadge stockPerf={s[rsSPYKey]} spyPerf={spyPerf}/></td>
             </tr>
           ))}
         </tbody>
