@@ -455,25 +455,16 @@ const LB_PERF_COLS = new Set(['perf_1d','perf_1w','perf_1m','perf_3m','perf_6m']
 
 const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themeSparklines = {} }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
-  const [shiftHeld, setShiftHeld] = useState(false);
+  const [multiMode, setMultiMode] = useState(false);
   const [expanded, setExpanded] = useState(null);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
   const [themeHover, setThemeHover] = useState(null); // { ticker, rect }
 
   const activeData = view === "themes" ? finvizThemeRankings : themeRankings;
 
-  useEffect(() => {
-    const down = e => { if (e.key === 'Shift') setShiftHeld(true); };
-    const up   = e => { if (e.key === 'Shift') setShiftHeld(false); };
-    window.addEventListener('keydown', down);
-    window.addEventListener('keyup', up);
-    return () => { window.removeEventListener('keydown', down); window.removeEventListener('keyup', up); };
-  }, []);
-
-  const handleLBSort = (key, isShift) => {
-    if (isShift) {
+  const handleLBSort = (key) => {
+    if (multiMode) {
       const primary = sortPriority[0];
-      // Mutual exclusion: block perf→perf secondary
       if (primary && LB_PERF_COLS.has(primary.key) && LB_PERF_COLS.has(key)) return;
       setSortPriority(prev => {
         const existing = prev.findIndex((p, i) => i > 0 && p.key === key);
@@ -537,9 +528,9 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     const dir = isActive ? sortPriority[priIdx].direction : null;
     const isPrimary = priIdx === 0;
     const isSecondary = priIdx === 1;
-    const isBlocked = shiftHeld && LB_PERF_COLS.has(k) && LB_PERF_COLS.has(primaryKey) && !isPrimary;
+    const isBlocked = multiMode && LB_PERF_COLS.has(k) && LB_PERF_COLS.has(primaryKey) && !isPrimary;
     return (
-      <th onClick={e => handleLBSort(k, e.shiftKey)}
+      <th onClick={() => handleLBSort(k)}
         className={`px-2 py-2 text-right cursor-pointer select-none ${w || 'w-14'} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500 hover:text-zinc-300'}`}>
         <span className="inline-flex items-center justify-end gap-0.5 text-[10px] font-semibold uppercase tracking-wider">
           {label}
@@ -557,8 +548,13 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
           <BarChart3 size={13} className="text-blue-400"/>
           <span className="text-xs font-semibold text-zinc-300">Theme Leaderboard</span>
           <span className="text-[10px] text-zinc-600">{ranked.length} themes</span>
+          <button
+            onClick={() => setMultiMode(m => !m)}
+            className={`text-[9px] px-2 py-0.5 rounded border transition-colors ${multiMode ? 'bg-violet-500/20 text-violet-300 border-violet-500/40' : 'text-zinc-500 border-zinc-700/50 hover:text-zinc-300'}`}>
+            {multiMode ? '② 次排序模式' : '+ 次排序'}
+          </button>
           {secondaryKey && (
-            <button onClick={() => setSortPriority([{ key: 'rs_score', direction: 'desc' }])}
+            <button onClick={() => { setSortPriority([{ key: 'rs_score', direction: 'desc' }]); setMultiMode(false); }}
               className="text-[9px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">
               ✕ Reset
             </button>
@@ -690,21 +686,12 @@ const AlphaLeaderBadge = ({ stock }) => {
 const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, themeName, subthemeName }) => {
   const [hovered, setHovered] = useState(null);
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_52w', direction: 'desc' }]);
-  const [shiftHeld, setShiftHeld] = useState(false);
+  const [multiMode, setMultiMode] = useState(false);
 
-  useEffect(() => {
-    const down = e => { if (e.key === 'Shift') setShiftHeld(true); };
-    const up   = e => { if (e.key === 'Shift') setShiftHeld(false); };
-    window.addEventListener('keydown', down);
-    window.addEventListener('keyup', up);
-    return () => { window.removeEventListener('keydown', down); window.removeEventListener('keyup', up); };
-  }, []);
-
-  const handleSort = (key, isShift) => {
-    if (isShift) {
-      // Secondary sort — enforce mutual exclusion
+  const handleSort = (key) => {
+    if (multiMode) {
       const primary = sortPriority[0];
-      if (primary && SORT_PERF_COLS.has(primary.key) && SORT_PERF_COLS.has(key)) return; // blocked
+      if (primary && SORT_PERF_COLS.has(primary.key) && SORT_PERF_COLS.has(key)) return;
       setSortPriority(prev => {
         const existing = prev.findIndex((p, i) => i > 0 && p.key === key);
         if (existing > 0) {
@@ -713,7 +700,6 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
         return [prev[0], { key, direction: 'desc' }];
       });
     } else {
-      // Primary sort
       setSortPriority(prev => {
         const cur = prev.find(p => p.key === key);
         if (cur && prev[0].key === key) {
@@ -752,10 +738,9 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
     const dir = isActive ? sortPriority[priIdx].direction : null;
     const isPrimary = priIdx === 0;
     const isSecondary = priIdx === 1;
-    // Dim if shift held and this perf col would be blocked
-    const isBlocked = shiftHeld && SORT_PERF_COLS.has(k) && SORT_PERF_COLS.has(primaryKey) && !isPrimary;
+    const isBlocked = multiMode && SORT_PERF_COLS.has(k) && SORT_PERF_COLS.has(primaryKey) && !isPrimary;
     return (
-      <th onClick={e => handleSort(k, e.shiftKey)}
+      <th onClick={() => handleSort(k)}
         className={`py-2 px-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors text-${align} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500'}`}>
         <span className="inline-flex items-center gap-0.5">
           {label}
@@ -768,15 +753,22 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
 
   return (
     <>
-    {secondaryKey && (
-      <div className="flex items-center gap-2 mb-1">
-        <span className="text-[10px] text-zinc-500">
-          Sort: <span className="text-blue-400">①{primaryKey}</span>
-          {' → '}<span className="text-violet-400">②{secondaryKey}</span>
-        </span>
-        <button onClick={() => setSortPriority([{ key: 'rs_52w', direction: 'desc' }])} className="text-[9px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">✕ Reset</button>
-      </div>
-    )}
+    <div className="flex items-center gap-2 mb-1">
+      <button
+        onClick={() => setMultiMode(m => !m)}
+        className={`text-[9px] px-2 py-0.5 rounded border transition-colors ${multiMode ? 'bg-violet-500/20 text-violet-300 border-violet-500/40' : 'text-zinc-500 border-zinc-700/50 hover:text-zinc-300'}`}>
+        {multiMode ? '② 次排序模式' : '+ 次排序'}
+      </button>
+      {secondaryKey && (
+        <>
+          <span className="text-[10px] text-zinc-500">
+            <span className="text-blue-400">①{primaryKey}</span>
+            {' → '}<span className="text-violet-400">②{secondaryKey}</span>
+          </span>
+          <button onClick={() => { setSortPriority([{ key: 'rs_52w', direction: 'desc' }]); setMultiMode(false); }} className="text-[9px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">✕ Reset</button>
+        </>
+      )}
+    </div>
     <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
       <table className="w-full text-sm min-w-[900px]">
         <thead>
