@@ -592,7 +592,6 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                   <td className={`px-2 py-2 text-[11px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
                   <td className="px-2 py-2 whitespace-nowrap">
                     <div className="flex items-center gap-1.5">
-                      {isExpanded ? <ChevronDown size={11} className="text-zinc-500 flex-shrink-0"/> : <ChevronRight size={11} className="text-zinc-600 flex-shrink-0"/>}
                       <span
                         className="text-[11px] font-semibold text-zinc-200 cursor-default"
                         onMouseEnter={e => { const etf = THEME_ETF_MAP[t.name]; if (etf) setThemeHover({ ticker: etf, rect: e.currentTarget.getBoundingClientRect() }); }}
