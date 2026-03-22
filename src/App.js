@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { ChevronDown, ChevronRight, Star, Activity, BarChart3, RefreshCw, Search, SlidersHorizontal, X, Layers, Zap, TrendingUp, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink, FlaskConical } from "lucide-react";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
 
@@ -1212,35 +1212,11 @@ const MacroNews = ({ news = [] }) => {
 };
 
 
-const GapperScanner = ({ finvizThemeRankings = [], themeRankings = [] }) => {
+const GapperScanner = () => {
   const [gapperData, setGapperData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState(null);
-  const [subthemeChart, setSubthemeChart] = useState(null); // { ticker, left, top, W, H }
   const [tickerDb, setTickerDb] = useState({});
-  const [subthemeHover, setSubthemeHover] = useState(null); // { subtheme, stocks, rect }
-  const subthemeListRef = useRef(null); // ref to sub-theme list container for accurate left position
-
-  // Build rank map: theme name (lowercase) → rank number (1 = best)
-  const themeRankMap = useMemo(() => {
-    const rankings = finvizThemeRankings.length ? finvizThemeRankings : themeRankings;
-    const map = {};
-    rankings.forEach((r, i) => { if (r.name) map[r.name.toLowerCase()] = i + 1; });
-    return map;
-  }, [finvizThemeRankings, themeRankings]);
-
-  // Build subtheme → [{ticker, company}] map from tickerDb
-  const subthemeMap = useMemo(() => {
-    const map = {};
-    Object.values(tickerDb).forEach(t => {
-      if (!t.subtheme) return;
-      if (!map[t.subtheme]) map[t.subtheme] = [];
-      map[t.subtheme].push({ ticker: t.ticker, company: t.company || "" });
-    });
-    // Sort each list alphabetically
-    Object.values(map).forEach(arr => arr.sort((a, b) => a.ticker.localeCompare(b.ticker)));
-    return map;
-  }, [tickerDb]);
 
   // Filter state — human-friendly units: PMVol/AvgVol in K, MktCap in $B, DolVol in $M
   const [fMinGap,    setFMinGap]    = useState(0);
@@ -1357,7 +1333,6 @@ const GapperScanner = ({ finvizThemeRankings = [], themeRankings = [] }) => {
               <th className="text-center py-2 px-1.5 font-medium align-middle">Float</th>
               <th className="text-center py-2 px-1.5 font-medium align-middle">Sector</th>
               <th className="text-center py-2 px-1.5 font-medium align-middle">Industry</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">Theme /<br/>Sub-Theme</th>
               <th className="text-center py-2 px-1.5 font-medium align-middle">Category</th>
               <th className="text-center py-2 px-1 font-medium align-middle">Grade</th>
               <th className="text-center py-2 px-1.5 font-medium align-middle">Reasoning</th>
@@ -1400,67 +1375,15 @@ const GapperScanner = ({ finvizThemeRankings = [], themeRankings = [] }) => {
                 <td className="py-2 px-1.5 text-center text-[11px] font-mono text-zinc-400">{g.short_float || "—"}</td>
                 {/* Float */}
                 <td className="py-2 px-1.5 text-center text-[11px] font-mono text-zinc-400">{g.float_shares || "—"}</td>
-                {/* Sector / Industry / Theme+SubTheme — separate columns */}
+                {/* Sector / Industry */}
                 {(() => {
                   const db = tickerDb[g.ticker] || {};
                   const sector = db.sector || "";
                   const industry = db.industry || g.industry || "";
-                  const theme = db.theme || g.finviz_theme || "";
-                  const subtheme = db.subtheme || "";
-                  const rank = theme ? themeRankMap[theme.toLowerCase()] : null;
-                  const isOpen = subthemeHover?.subtheme === subtheme && subthemeHover?.rowTicker === g.ticker;
-                  const stocks = subthemeMap[subtheme] || [];
                   return (
                     <>
                       <td className="py-2 px-1.5 text-center text-[10px] text-zinc-200 align-middle">{sector || <span className="text-zinc-600">—</span>}</td>
                       <td className="py-2 px-1.5 text-center text-[10px] text-zinc-200 align-middle">{industry || <span className="text-zinc-600">—</span>}</td>
-                      <td className="py-2 px-1.5 align-middle">
-                        <div className="space-y-0.5 text-center">
-                          {theme ? (
-                            <div className="flex items-center justify-center gap-1 text-[10px]">
-                              <span className="text-blue-300 font-medium">{theme}</span>
-                              {rank && <span className="text-[9px] font-mono text-blue-400/60">#{rank}</span>}
-                            </div>
-                          ) : <span className="text-zinc-600 text-[10px]">—</span>}
-                          {subtheme && (
-                            <>
-                              <div className="flex items-center justify-center text-[10px]">
-                                <span
-                                  className="text-violet-300 font-medium cursor-pointer hover:text-violet-200 flex items-center gap-0.5"
-                                  onClick={() => setSubthemeHover(isOpen ? null : { subtheme, rowTicker: g.ticker, stocks })}
-                                >
-                                  {subtheme} <span className="text-zinc-500 text-[8px]">{isOpen ? '▲' : '▼'}</span>
-                                </span>
-                              </div>
-                              {isOpen && (
-                                <div ref={subthemeListRef} className="mt-1 border border-zinc-700/50 rounded overflow-hidden" style={{ maxHeight: 200, overflowY: 'auto', width: 'fit-content', minWidth: 180 }}>
-                                  {stocks.map(s => (
-                                    <div key={s.ticker}
-                                      className="flex items-center gap-2 px-2 py-1 border-b border-zinc-800/60 last:border-0 hover:bg-zinc-800/40 cursor-default"
-                                      onMouseEnter={e => {
-                                        const rowRect = e.currentTarget.getBoundingClientRect();
-                                        const listLeft = subthemeListRef.current
-                                          ? subthemeListRef.current.getBoundingClientRect().left
-                                          : rowRect.left;
-                                        const maxRight = listLeft - 102;
-                                        const W = Math.min(600, Math.max(220, maxRight - 8));
-                                        const H = Math.round(W * 200 / 600);
-                                        const left = maxRight - W;
-                                        const top = Math.max(60, Math.min(rowRect.top - 132, window.innerHeight - H - 130));
-                                        setSubthemeChart({ ticker: s.ticker, left, top, W, H });
-                                      }}
-                                      onMouseLeave={() => setSubthemeChart(null)}
-                                    >
-                                      <span className="text-[11px] font-bold text-zinc-200 w-10 flex-shrink-0">{s.ticker}</span>
-                                      <span className="text-[10px] text-zinc-500 truncate">{s.company}</span>
-                                    </div>
-                                  ))}
-                                </div>
-                              )}
-                            </>
-                          )}
-                        </div>
-                      </td>
                     </>
                   );
                 })()}
@@ -1487,11 +1410,6 @@ const GapperScanner = ({ finvizThemeRankings = [], themeRankings = [] }) => {
       </div>
     </div>
     {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
-    {subthemeChart && (
-      <div style={{ position:'fixed', left:subthemeChart.left, top:subthemeChart.top, width:subthemeChart.W, height:subthemeChart.H, zIndex:9999, borderRadius:8, overflow:'hidden', border:'1px solid #27272a', boxShadow:'0 24px 64px rgba(0,0,0,0.85)', pointerEvents:'none', background:'#fff' }}>
-        <img src={`https://finviz.com/chart.ashx?t=${encodeURIComponent(subthemeChart.ticker)}&ty=c&ta=1&p=d&s=l`} alt={subthemeChart.ticker} style={{ width:'100%', height:'100%', objectFit:'fill', display:'block' }}/>
-      </div>
-    )}
     </>
   );
 };
