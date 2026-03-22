@@ -543,24 +543,23 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
 
   return (
     <><div className="p-4 bg-zinc-900/60 rounded-xl border border-zinc-800/60">
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <BarChart3 size={13} className="text-blue-400"/>
-          <span className="text-xs font-semibold text-zinc-300">Theme Leaderboard</span>
-          <span className="text-[10px] text-zinc-600">{ranked.length} themes</span>
-          <button
-            onClick={() => setMultiMode(m => !m)}
-            className={`text-[9px] px-2 py-0.5 rounded border transition-colors ${multiMode ? 'bg-violet-500/20 text-violet-300 border-violet-500/40' : 'text-zinc-500 border-zinc-700/50 hover:text-zinc-300'}`}>
-            {multiMode ? '② 次排序模式' : '+ 次排序'}
+      <div className="flex items-center mb-3 gap-2">
+        <div className="flex-1"></div>
+        <BarChart3 size={13} className="text-blue-400 flex-shrink-0"/>
+        <span className="text-xs font-semibold text-zinc-300 whitespace-nowrap">Theme Leaderboard</span>
+        <span className="text-[10px] text-zinc-600">{ranked.length} themes</span>
+        <button
+          onClick={() => setMultiMode(m => !m)}
+          className={`text-[9px] px-2 py-0.5 rounded border transition-colors whitespace-nowrap ${multiMode ? 'bg-violet-500/20 text-violet-300 border-violet-500/40' : 'text-zinc-500 border-zinc-700/50 hover:text-zinc-300'}`}>
+          {multiMode ? '② 次排序模式' : '+ 次排序'}
+        </button>
+        {secondaryKey && (
+          <button onClick={() => { setSortPriority([{ key: 'rs_score', direction: 'desc' }]); setMultiMode(false); }}
+            className="text-[9px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">
+            ✕ Reset
           </button>
-          {secondaryKey && (
-            <button onClick={() => { setSortPriority([{ key: 'rs_score', direction: 'desc' }]); setMultiMode(false); }}
-              className="text-[9px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">
-              ✕ Reset
-            </button>
-          )}
-        </div>
-        <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+        )}
+        <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 flex-shrink-0">
           {[{k:"themes",l:"Themes Map"},{k:"industry",l:"Industry"}].map(v => (
             <button key={v.k} onClick={() => { setView(v.k); setExpanded(null); }}
               className={`px-2.5 py-1 text-[10px] font-medium rounded-md transition-all ${view === v.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
@@ -573,6 +572,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         <table className="w-full text-left">
           <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
             <tr className="border-b border-zinc-800/60">
+              <th className="w-full"></th>
               <th className="px-2 py-2 w-6 text-[10px] text-zinc-600 select-none whitespace-nowrap">#</th>
               <th className="px-2 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Theme</th>
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
@@ -588,6 +588,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                 <tr
                   onClick={() => isIndustryView && setExpanded(isExpanded ? null : t.name)}
                   className={`border-b border-zinc-800/30 transition-colors ${isIndustryView ? 'cursor-pointer' : ''} ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
+                  <td className="w-full"></td>
                   <td className={`px-2 py-2 text-[11px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
                   <td className="px-2 py-2 whitespace-nowrap">
                     <div className="flex items-center gap-1.5">
@@ -608,6 +609,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                 </tr>
                 {isExpanded && industries.map(ind => (
                   <tr key={ind.name} className="bg-zinc-800/20 border-b border-zinc-800/20">
+                    <td className="w-full"></td>
                     <td className="px-2 py-1.5"></td>
                     <td className="px-2 py-1.5 pl-4 whitespace-nowrap">
                       <span className="text-[10px] text-zinc-400">{ind.name}</span>
