@@ -691,10 +691,9 @@ const AlphaLeaderBadge = ({ stock, sortPriority = [], spyPerf1d = 0 }) => {
 const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, themeName, subthemeName }) => {
   const [hovered, setHovered] = useState(null);
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_52w', direction: 'desc' }]);
-  const [multiMode, setMultiMode] = useState(false);
 
-  const handleSort = (key) => {
-    if (multiMode) {
+  const handleSort = (key, isShift) => {
+    if (isShift) {
       const primary = sortPriority[0];
       if (primary && SORT_PERF_COLS.has(primary.key) && SORT_PERF_COLS.has(key)) return;
       setSortPriority(prev => {
@@ -743,9 +742,9 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
     const dir = isActive ? sortPriority[priIdx].direction : null;
     const isPrimary = priIdx === 0;
     const isSecondary = priIdx === 1;
-    const isBlocked = multiMode && SORT_PERF_COLS.has(k) && SORT_PERF_COLS.has(primaryKey) && !isPrimary;
+    const isBlocked = SORT_PERF_COLS.has(k) && SORT_PERF_COLS.has(primaryKey) && !isPrimary;
     return (
-      <th onClick={() => handleSort(k)}
+      <th onClick={e => handleSort(k, e.shiftKey)}
         className={`py-2 px-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors text-${align} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500'}`}>
         <span className="inline-flex items-center gap-0.5">
           {label}
@@ -758,22 +757,15 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
 
   return (
     <>
-    <div className="flex items-center gap-2 mb-1">
-      <button
-        onClick={() => setMultiMode(m => !m)}
-        className={`text-[9px] px-2 py-0.5 rounded border transition-colors ${multiMode ? 'bg-violet-500/20 text-violet-300 border-violet-500/40' : 'text-zinc-500 border-zinc-700/50 hover:text-zinc-300'}`}>
-        {multiMode ? '② 次排序模式' : '+ 次排序'}
-      </button>
-      {secondaryKey && (
-        <>
-          <span className="text-[10px] text-zinc-500">
-            <span className="text-blue-400">①{primaryKey}</span>
-            {' → '}<span className="text-violet-400">②{secondaryKey}</span>
-          </span>
-          <button onClick={() => { setSortPriority([{ key: 'rs_52w', direction: 'desc' }]); setMultiMode(false); }} className="text-[9px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">✕ Reset</button>
-        </>
-      )}
-    </div>
+    {secondaryKey && (
+      <div className="flex items-center gap-2 mb-1">
+        <span className="text-[10px] text-zinc-500">
+          <span className="text-blue-400">①{primaryKey}</span>
+          {' → '}<span className="text-violet-400">②{secondaryKey}</span>
+        </span>
+        <button onClick={() => setSortPriority([{ key: 'rs_52w', direction: 'desc' }])} className="text-[9px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">✕ Reset</button>
+      </div>
+    )}
     <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
       <table className="w-full text-sm min-w-[900px]">
         <thead>
