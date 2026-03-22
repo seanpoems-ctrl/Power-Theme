@@ -546,6 +546,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     <div className="flex-1"></div>
     <div className="p-4 bg-zinc-900/60 rounded-xl border border-zinc-800/60 min-w-0">
       <div className="flex items-center mb-3 gap-2">
+        <div className="flex-1"></div>
         <BarChart3 size={13} className="text-blue-400 flex-shrink-0"/>
         <span className="text-xs font-semibold text-zinc-300 whitespace-nowrap">Theme Leaderboard</span>
         <span className="text-[10px] text-zinc-600">{ranked.length} themes</span>
