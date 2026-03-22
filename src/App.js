@@ -470,8 +470,8 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     return () => { window.removeEventListener('keydown', down); window.removeEventListener('keyup', up); };
   }, []);
 
-  const handleLBSort = (key) => {
-    if (shiftHeld) {
+  const handleLBSort = (key, isShift) => {
+    if (isShift) {
       const primary = sortPriority[0];
       // Mutual exclusion: block perf→perf secondary
       if (primary && LB_PERF_COLS.has(primary.key) && LB_PERF_COLS.has(key)) return;
@@ -539,7 +539,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     const isSecondary = priIdx === 1;
     const isBlocked = shiftHeld && LB_PERF_COLS.has(k) && LB_PERF_COLS.has(primaryKey) && !isPrimary;
     return (
-      <th onClick={() => handleLBSort(k)}
+      <th onClick={e => handleLBSort(k, e.shiftKey)}
         className={`px-2 py-2 text-right cursor-pointer select-none ${w || 'w-14'} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500 hover:text-zinc-300'}`}>
         <span className="inline-flex items-center justify-end gap-0.5 text-[10px] font-semibold uppercase tracking-wider">
           {label}
@@ -700,18 +700,16 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
     return () => { window.removeEventListener('keydown', down); window.removeEventListener('keyup', up); };
   }, []);
 
-  const handleSort = (key) => {
-    if (shiftHeld) {
+  const handleSort = (key, isShift) => {
+    if (isShift) {
       // Secondary sort — enforce mutual exclusion
       const primary = sortPriority[0];
       if (primary && SORT_PERF_COLS.has(primary.key) && SORT_PERF_COLS.has(key)) return; // blocked
       setSortPriority(prev => {
         const existing = prev.findIndex((p, i) => i > 0 && p.key === key);
         if (existing > 0) {
-          // toggle direction
           return prev.map((p, i) => i === existing ? { ...p, direction: p.direction === 'desc' ? 'asc' : 'desc' } : p);
         }
-        // replace secondary slot
         return [prev[0], { key, direction: 'desc' }];
       });
     } else {
@@ -719,7 +717,6 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
       setSortPriority(prev => {
         const cur = prev.find(p => p.key === key);
         if (cur && prev[0].key === key) {
-          // toggle direction of primary
           return [{ key, direction: cur.direction === 'desc' ? 'asc' : 'desc' }, ...prev.slice(1)];
         }
         return [{ key, direction: 'desc' }];
@@ -758,7 +755,7 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
     // Dim if shift held and this perf col would be blocked
     const isBlocked = shiftHeld && SORT_PERF_COLS.has(k) && SORT_PERF_COLS.has(primaryKey) && !isPrimary;
     return (
-      <th onClick={() => handleSort(k)}
+      <th onClick={e => handleSort(k, e.shiftKey)}
         className={`py-2 px-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors text-${align} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500'}`}>
         <span className="inline-flex items-center gap-0.5">
           {label}
