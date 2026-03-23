@@ -646,7 +646,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
   );
 };
 
-const TVPopup = ({ ticker, anchorRect }) => {
+const TVPopup = ({ ticker, anchorRect, chartUrl }) => {
   if (!ticker || !anchorRect) return null;
   const MAX_W = 600, MAX_H = 200;
   const vw = window.innerWidth;
@@ -675,7 +675,7 @@ const TVPopup = ({ ticker, anchorRect }) => {
   }
   let top = anchorRect.top;
   top = Math.max(edgeTop, Math.min(top, vh - H - edgeBot));
-  const src = `https://finviz.com/chart.ashx?t=${encodeURIComponent(ticker)}&ty=c&ta=1&p=d&s=l`;
+  const src = chartUrl || `https://finviz.com/chart.ashx?t=${encodeURIComponent(ticker)}&ty=c&ta=1&p=d&s=l`;
   return (
     <div style={{ position:"fixed", left, top, width:W, height:H, zIndex:9999, borderRadius:8, overflow:"hidden", border:"1px solid #27272a", boxShadow:"0 24px 64px rgba(0,0,0,0.85)", pointerEvents:"none", background:"#fff" }}>
       <img src={src} alt={ticker} style={{ width:"100%", height:"100%", objectFit:"fill", display:"block" }}/>
@@ -3261,7 +3261,8 @@ const filtered = useMemo(() => {
             const hasAny = btc || gld || oil || credit_spread != null || breadth_50d != null;
             if (!hasAny) return null;
             const CHART = { btc: 'BTCUSD', gld: 'GLD', oil: 'USO', credit_spread: 'HYG', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R' };
-            const mkHover = (key, e) => setMacroHover({ ticker: CHART[key], rect: e.currentTarget.getBoundingClientRect() });
+            const CHART_URL = { btc: 'https://finviz.com/crypto_charts.ashx?t=BTCUSD&c=USD' };
+            const mkHover = (key, e) => setMacroHover({ ticker: CHART[key], chartUrl: CHART_URL[key] || null, rect: e.currentTarget.getBoundingClientRect() });
             const fmtChg = v => v == null ? null : v > 0
               ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
               : <span className="text-red-400">{v.toFixed(2)}%</span>;
@@ -3410,7 +3411,7 @@ const filtered = useMemo(() => {
           ) : filtered.map((t,i) => <ThemeSection key={t.name+i} theme={t} lbPerfKey={lbPerfKey} spyPerf={data?.spy_benchmarks?.[rsSPYKey]} rsSPYKey={rsSPYKey} isTopTheme={i===0} topADRTickers={topADRTickers} themeRankings={data?.theme_rankings} finvizThemeRankings={data?.finviz_theme_rankings}/>)}
         </div>
       )}
-      {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect}/>}
+      {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect} chartUrl={macroHover.chartUrl}/>}
     </div>
   );
 }
