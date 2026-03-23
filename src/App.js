@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { ChevronDown, ChevronRight, Star, Activity, BarChart3, RefreshCw, Search, SlidersHorizontal, X, Layers, Zap, TrendingUp, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink, FlaskConical } from "lucide-react";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
 
@@ -1053,7 +1053,8 @@ const gradeStyle = (g) => {
 };
 
 const VerificationBadge = ({ verification, headlines }) => {
-  const [show, setShow] = useState(false);
+  const [tooltipPos, setTooltipPos] = useState(null);
+  const btnRef = useRef(null);
   if (!verification) return null;
   const { status, confidence_score, primary_claim, discrepancy_note } = verification;
 
@@ -1063,17 +1064,37 @@ const VerificationBadge = ({ verification, headlines }) => {
     Unconfirmed: { icon: "✕", color: "text-red-400",     bg: "bg-red-500/15 border-red-500/30",       label: "Unconfirmed" },
   }[status] || { icon: "?", color: "text-zinc-500", bg: "bg-zinc-700/20 border-zinc-600/30", label: status };
 
+  const handleEnter = () => {
+    if (!btnRef.current) return;
+    const r = btnRef.current.getBoundingClientRect();
+    const TOOLTIP_H = 220; // approx tooltip height
+    const above = r.top > TOOLTIP_H + 8;
+    setTooltipPos({ x: r.left + r.width / 2, y: above ? r.top - 8 : r.bottom + 8, above });
+  };
+
   return (
     <div className="relative inline-block">
       <button
-        onMouseEnter={() => setShow(true)}
-        onMouseLeave={() => setShow(false)}
+        ref={btnRef}
+        onMouseEnter={handleEnter}
+        onMouseLeave={() => setTooltipPos(null)}
         className={`inline-flex items-center gap-0.5 px-1 py-0.5 rounded border text-[10px] font-bold ${cfg.color} ${cfg.bg}`}
       >
         {cfg.icon}
       </button>
-      {show && (
-        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 bg-zinc-900 border border-zinc-700 rounded-lg shadow-2xl p-3 z-50 text-left">
+      {tooltipPos && (
+        <div
+          className="w-72 bg-zinc-900 border border-zinc-700 rounded-lg shadow-2xl p-3 text-left pointer-events-none"
+          style={{
+            position: "fixed",
+            zIndex: 9999,
+            left: tooltipPos.x,
+            ...(tooltipPos.above
+              ? { bottom: window.innerHeight - tooltipPos.y }
+              : { top: tooltipPos.y }),
+            transform: "translateX(-50%)",
+          }}
+        >
           <div className={`text-[10px] font-bold mb-1 ${cfg.color}`}>{cfg.icon} {cfg.label} · {confidence_score}% confidence</div>
           {primary_claim && <div className="text-[10px] text-zinc-300 mb-1.5 leading-snug">"{primary_claim}"</div>}
           {discrepancy_note && <div className="text-[10px] text-amber-300 mb-1.5 leading-snug">⚠ {discrepancy_note}</div>}
