@@ -1318,7 +1318,7 @@ const BreakingNewsAlert = ({ newsData }) => {
           aria-label="Dismiss"
         >×</button>
 
-        <div className="flex items-center gap-3 mb-2">
+        <div className="flex items-center gap-3 mb-3">
           <h1 className="text-red-600 font-black text-4xl tracking-tighter italic leading-none">
             BREAKING NEWS:
           </h1>
@@ -1334,18 +1334,27 @@ const BreakingNewsAlert = ({ newsData }) => {
           {top.headline}
         </div>
 
-        <div className="space-y-4">
-          <h3 className="text-white font-bold text-sm uppercase tracking-widest opacity-80">
-            Quick Analysis &amp; Impact
-          </h3>
-          <ul className="text-white space-y-3">
-            {(top.analysis || []).map((item, i) => (
-              <li key={i} className="flex gap-3 text-base font-medium">
-                <span className="text-red-600 font-black flex-shrink-0">▶</span>
-                {item}
-              </li>
-            ))}
-          </ul>
+        <div className="space-y-5">
+          {top.analysis && (
+            <div>
+              <h3 className="text-white font-bold text-sm uppercase tracking-widest mb-2">
+                Analysis
+              </h3>
+              <p className="text-white text-base font-medium leading-relaxed">
+                {top.analysis}
+              </p>
+            </div>
+          )}
+          {top.impact && (
+            <div>
+              <h3 className="text-white font-bold text-sm uppercase tracking-widest mb-2">
+                Impact
+              </h3>
+              <p className="text-white text-base font-medium leading-relaxed">
+                {top.impact}
+              </p>
+            </div>
+          )}
         </div>
       </div>
 
@@ -1353,21 +1362,34 @@ const BreakingNewsAlert = ({ newsData }) => {
       {rest.map(alert => (
         <div
           key={alert.headline}
-          className="relative bg-zinc-950 border-2 border-red-800/60 px-4 py-3 rounded flex items-start gap-3"
+          className="relative bg-black border-2 border-red-800/60 px-5 py-4"
         >
-          <span className="text-red-600 font-black text-lg flex-shrink-0 mt-0.5">▶</span>
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-0.5">
-              <span className="text-red-700 text-[10px] font-bold border border-red-800 px-1">{alert.grade}/10</span>
-              <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{alert.source}</span>
-            </div>
-            <p className="text-red-500 font-bold text-sm uppercase leading-snug">{alert.headline}</p>
-          </div>
           <button
             onClick={() => dismiss(alert.headline)}
-            className="text-zinc-700 hover:text-zinc-400 text-lg font-bold leading-none flex-shrink-0"
+            className="absolute top-3 right-4 text-red-800 hover:text-red-500 text-lg font-black leading-none"
             aria-label="Dismiss"
           >×</button>
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-red-700 text-[10px] font-bold border border-red-800 px-1">{alert.grade}/10</span>
+            <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{alert.source}</span>
+          </div>
+          <p className="text-red-600 font-extrabold text-lg uppercase leading-snug mb-3 border-b border-red-900 pb-3">
+            {alert.headline}
+          </p>
+          <div className="space-y-3">
+            {alert.analysis && (
+              <div>
+                <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">Analysis</h4>
+                <p className="text-white text-sm font-medium leading-relaxed">{alert.analysis}</p>
+              </div>
+            )}
+            {alert.impact && (
+              <div>
+                <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">Impact</h4>
+                <p className="text-white text-sm font-medium leading-relaxed">{alert.impact}</p>
+              </div>
+            )}
+          </div>
         </div>
       ))}
 

@@ -122,11 +122,8 @@ For each qualifying headline:
   "headline": "exact headline text",
   "source": "source name",
   "grade": 9,
-  "analysis": [
-    "Market/macro impact in 1 sentence",
-    "Sector or stock impact in 1 sentence",
-    "Specific trading implication in 1 sentence"
-  ]
+  "analysis": "2-3 sentences on market and macro context — what this means for the broader market",
+  "impact": "2-3 sentences on direct trading implications — which sectors, stocks, or asset classes are affected and how to position"
 }}
 
 If NO headlines score 8+, return: []
@@ -198,7 +195,8 @@ def send_telegram(alert: dict) -> bool:
     grade    = alert.get("grade", 0)
     headline = alert.get("headline", "")
     source   = alert.get("source", "")
-    analysis = alert.get("analysis", [])
+    analysis = alert.get("analysis", "")
+    impact   = alert.get("impact", "")
 
     lines = [
         "🚨 *BREAKING NEWS ALERT* 🚨",
@@ -207,10 +205,11 @@ def send_telegram(alert: dict) -> bool:
         f"*{_esc(headline.upper())}*",
         f"_{_esc(source)}_",
         "",
-        "*Quick Analysis & Impact:*",
     ]
-    for item in analysis:
-        lines.append(f"▶ {_esc(str(item))}")
+    if analysis:
+        lines += ["*Analysis*", _esc(str(analysis)), ""]
+    if impact:
+        lines += ["*Impact*", _esc(str(impact))]
 
     text = "\n".join(lines)[:4090]
     try:
