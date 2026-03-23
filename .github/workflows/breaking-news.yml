@@ -34,8 +34,12 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
       - name: Build React app
-        run: npm ci && npm run build
+        run: npm install --legacy-peer-deps && npm run build
         env:
           CI: false
 

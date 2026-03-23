@@ -50,9 +50,14 @@ jobs:
           TELEGRAM_BOT_TOKEN:  ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:    ${{ secrets.TELEGRAM_CHAT_ID }}
 
+      - uses: actions/setup-node@v4
+        if: steps.trading_day.outputs.is_trading_day == 'true'
+        with:
+          node-version: 18
+
       - name: Build React app
         if: steps.trading_day.outputs.is_trading_day == 'true'
-        run: npm ci && npm run build
+        run: npm install --legacy-peer-deps && npm run build
         env:
           CI: false
 
