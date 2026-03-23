@@ -4,7 +4,7 @@ from __future__ import annotations
 Emergency News Monitor — High-Impact Breaking News Alerts
 
 Runs every 30 min on weekdays via GitHub Actions.
-Sources: CNBC, Yahoo Finance, MarketWatch RSS feeds
+Sources: CNBC, Yahoo Finance, MarketWatch RSS + Trump X/TruthSocial posts
 
 Logic:
   1. Fetch headlines from the last 2 hours
@@ -44,6 +44,27 @@ RSS_FEEDS = [
     ("CNBC Markets","https://www.cnbc.com/id/10000664/device/rss/rss.html"),
     ("Yahoo Finance","https://finance.yahoo.com/news/rssindex"),
     ("MarketWatch", "https://feeds.content.dowjones.io/public/rss/mw_marketpulse"),
+]
+
+# Nitter instances to try for Trump's X feed (tried in order, first success wins)
+NITTER_INSTANCES = [
+    "https://nitter.privacydev.net",
+    "https://nitter.poast.org",
+    "https://nitter.1d4.us",
+    "https://nitter.kavin.rocks",
+    "https://nitter.cz",
+    "https://nitter.net",
+    "https://nitter.it",
+]
+
+# Google News RSS queries targeting Trump market-moving statements
+TRUMP_GNEWS_QUERIES = [
+    "Trump tariff",
+    "Trump military strike",
+    "Trump sanctions",
+    "Trump federal reserve",
+    "Trump announces",
+    "Trump threatens",
 ]
 
 
@@ -95,6 +116,126 @@ def fetch_headlines() -> list[dict]:
     return unique
 
 
+# ── Trump / X Posts ─────────────────────────────────────────────────────────
+
+def fetch_trump_posts() -> list[dict]:
+    """Fetch Trump's X posts via Nitter RSS, falling back to Truth Social RSS."""
+    from email.utils import parsedate_to_datetime
+    now_utc = datetime.now(timezone.utc)
+    posts   = []
+
+    def _parse_feed(content: bytes, source_label: str) -> list[dict]:
+        found = []
+        try:
+            root = ET.fromstring(content)
+        except ET.ParseError:
+            return found
+        for item in root.findall(".//item")[:15]:
+            title_el   = item.find("title")
+            pubdate_el = item.find("pubDate")
+            if title_el is None:
+                continue
+            text = (title_el.text or "").strip()
+            if not text or text.lower().startswith("rt by"):
+                continue  # skip retweets
+            # Strip "R to @handle: " reply prefix from nitter titles
+            text = re.sub(r"^R to @\w+:\s*", "", text).strip()
+            if not text:
+                continue
+            # Recency filter
+            if pubdate_el is not None and pubdate_el.text:
+                try:
+                    pub_dt = parsedate_to_datetime(pubdate_el.text)
+                    age_h  = (now_utc - pub_dt.astimezone(timezone.utc)).total_seconds() / 3600
+                    if age_h > HOURS_LOOKBACK:
+                        continue
+                except Exception:
+                    pass
+            found.append({"title": text, "source": source_label})
+        return found
+
+    # 1. Try nitter instances
+    for base in NITTER_INSTANCES:
+        url = f"{base}/realDonaldTrump/rss"
+        try:
+            r = requests.get(url, timeout=8, headers={"User-Agent": "Mozilla/5.0"})
+            if r.status_code == 200:
+                posts = _parse_feed(r.content, "Trump/X")
+                if posts:
+                    print(f"  Trump/X: {len(posts)} recent posts via {base}")
+                    return posts
+        except Exception:
+            continue
+
+    # 2. Fallback: Truth Social RSS
+    try:
+        r = requests.get(
+            "https://truthsocial.com/@realDonaldTrump.rss",
+            timeout=10, headers={"User-Agent": "Mozilla/5.0"},
+        )
+        if r.status_code == 200:
+            posts = _parse_feed(r.content, "Trump/TruthSocial")
+            if posts:
+                print(f"  Trump/TruthSocial: {len(posts)} recent posts")
+    except Exception as e:
+        print(f"  Trump/TruthSocial: {e}")
+
+    # 3. Fallback: Google News RSS search for Trump statements
+    if not posts:
+        posts = _fetch_trump_gnews()
+
+    if not posts:
+        print("  Trump: no posts retrieved (all sources failed or nothing recent)")
+    return posts
+
+
+def _fetch_trump_gnews() -> list[dict]:
+    """Google News RSS search for Trump market-moving statements."""
+    from email.utils import parsedate_to_datetime
+    now_utc = datetime.now(timezone.utc)
+    found   = []
+    seen    = set()
+
+    for query in TRUMP_GNEWS_QUERIES:
+        url = (
+            "https://news.google.com/rss/search"
+            f"?q={requests.utils.quote(query)}&hl=en-US&gl=US&ceid=US:en"
+        )
+        try:
+            r = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0"})
+            if r.status_code != 200:
+                continue
+            root = ET.fromstring(r.content)
+            for item in root.findall(".//item")[:8]:
+                title_el   = item.find("title")
+                pubdate_el = item.find("pubDate")
+                if title_el is None:
+                    continue
+                title = (title_el.text or "").strip()
+                if not title:
+                    continue
+                key = title[:60].lower()
+                if key in seen:
+                    continue
+                seen.add(key)
+                # Recency filter
+                if pubdate_el is not None and pubdate_el.text:
+                    try:
+                        pub_dt = parsedate_to_datetime(pubdate_el.text)
+                        age_h  = (now_utc - pub_dt.astimezone(timezone.utc)).total_seconds() / 3600
+                        if age_h > HOURS_LOOKBACK:
+                            continue
+                    except Exception:
+                        pass
+                found.append({"title": title, "source": "Trump/GoogleNews"})
+        except Exception as e:
+            print(f"  Trump GNews [{query}]: {e}")
+
+    if found:
+        print(f"  Trump/GoogleNews: {len(found)} recent articles")
+    return found
+
+
 # ── Gemini Grading ──────────────────────────────────────────────────────────
 
 def grade_with_gemini(headlines: list[dict]) -> list[dict]:
@@ -108,10 +249,15 @@ def grade_with_gemini(headlines: list[dict]) -> list[dict]:
 
     prompt = f"""You are a financial news analyst for a professional trading desk.
 
-Review these recent financial headlines. Grade each 1-10 for IMMEDIATE MARKET IMPACT:
-- 9-10: Market-moving event (Fed emergency action, geopolitical crisis, circuit breakers, major bankruptcy)
-- 8:    High-impact (significant policy shift, major earnings shock, sector-wide catalyst)
-- 7 and below: Routine news — OMIT from output
+Review these recent financial headlines and social media posts. Grade each 1-10 for IMMEDIATE MARKET IMPACT:
+- 9-10: Market-moving event — Fed emergency action, geopolitical crisis, circuit breakers, major bankruptcy,
+        Trump announcing NEW tariffs / military strikes / sanctions / Fed firing threats
+- 8:    High-impact — significant policy shift, major earnings shock, sector-wide catalyst,
+        Trump threatening tariffs / commenting on war / market or trade statements
+- 7 and below: Routine news, old tariff rehash, general commentary — OMIT from output
+
+IMPORTANT: Posts from Trump/X or Trump/TruthSocial about war, tariffs, sanctions, or the Federal Reserve
+are almost always grade 8-10 due to direct presidential market impact. Grade them aggressively.
 
 Headlines:
 {headlines_text}
@@ -235,12 +381,16 @@ def main():
 
     existing = load_existing()
 
-    print("  [1/2] Fetching RSS headlines…")
+    print("  [1/3] Fetching RSS headlines…")
     headlines = fetch_headlines()
+
+    print("  [2/3] Fetching Trump/X posts…")
+    trump_posts = fetch_trump_posts()
+    headlines = trump_posts + headlines  # Trump posts first (higher priority)
 
     new_alerts: list[dict] = []
     if headlines:
-        print("  [2/2] Grading with Gemini…")
+        print(f"  [3/3] Grading {len(headlines)} items with Gemini…")
         candidates = grade_with_gemini(headlines)
         new_alerts = [
             a for a in candidates
