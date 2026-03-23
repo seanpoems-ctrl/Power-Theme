@@ -3308,7 +3308,7 @@ const filtered = useMemo(() => {
               <VixGauge initialVix={data?.vix}/>
               <ScannerBriefFeed briefData={briefData}/>
             </div>
-            <div className="w-[700px] flex-shrink-0 translate-x-[76px]">
+            <div className="w-[700px] flex-shrink-0 translate-x-[133px]">
               {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
             </div>
           </div>
