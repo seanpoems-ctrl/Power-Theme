@@ -3070,8 +3070,9 @@ export default function App() {
   const [fetchedAt, setFetchedAt] = useState(null);
   const [countdown, setCountdown] = useState(null);
   const nextFetchAt = useRef(null);
+  const lastGeneratedAt = useRef(null);
 
-  // Countdown ticker — counts down to actual next fetch time
+  // Countdown ticker — counts down to next actual data update
   useEffect(() => {
     const tick = () => {
       if (nextFetchAt.current == null) return;
@@ -3090,8 +3091,12 @@ export default function App() {
         const r = await fetch(process.env.PUBLIC_URL + "/thematic_data.json?v=" + Date.now());
         if (r.ok) {
           const json = await r.json();
-          setFetchedAt(Date.now());
-          nextFetchAt.current = Date.now() + INTERVAL;
+          // Only reset countdown when data actually changed
+          if (json.generated_at !== lastGeneratedAt.current) {
+            lastGeneratedAt.current = json.generated_at;
+            setFetchedAt(Date.now());
+            nextFetchAt.current = Date.now() + INTERVAL;
+          }
           for (const theme of (json.themes || []))
             for (const sub of (theme.subthemes || []))
               for (const stock of (sub.stocks || []))
