@@ -164,7 +164,7 @@ const Tip = ({ text, color = 'zinc', width = "w-56", children }) => {
     const r = e.currentTarget.getBoundingClientRect();
     const tipW = 224; // w-56 = 14rem = 224px
     const left = r.right + 6 + tipW > window.innerWidth ? r.left - tipW - 6 : r.right + 6;
-    setPos({ left, top: r.top });
+    setPos({ left: left - 113, top: r.top - 76 });
   };
   return (
     <span onMouseEnter={handleEnter} onMouseLeave={() => setPos(null)} className="cursor-pointer inline-flex">
@@ -1081,7 +1081,7 @@ const VerificationBadge = ({ verification, headlines }) => {
     const r = e.currentTarget.getBoundingClientRect();
     const tipW = 288; // w-72
     const left = r.right + 6 + tipW > window.innerWidth ? r.left - tipW - 6 : r.right + 6;
-    setTooltipPos({ left, top: r.top });
+    setTooltipPos({ left: left - 113, top: r.top - 76 });
   };
 
   return (
