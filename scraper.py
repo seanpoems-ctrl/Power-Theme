@@ -9,7 +9,8 @@ import os
 import time
 import random
 import logging
-from datetime import date, timedelta
+from datetime import date, datetime, timedelta
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 import requests
@@ -1560,8 +1561,11 @@ def build_data() -> dict:
         for t, pairs in TICKER_EXTRA_SUBTHEMES.items()
     }
 
+    generated_at = datetime.now(ZoneInfo("America/New_York")).strftime("%Y-%m-%d %H:%M ET")
+
     return {
         "last_updated": updated.isoformat(),
+        "generated_at": generated_at,
         "themes": output_themes,
         "theme_rankings": theme_rankings,
         "industry_rankings": industry_rankings,
