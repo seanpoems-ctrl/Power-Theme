@@ -1289,6 +1289,98 @@ const VixGauge = ({ initialVix }) => {
   );
 };
 
+/** Breaking News Alert — shown globally above tab content when grade >= 8 news detected */
+const BreakingNewsAlert = ({ newsData }) => {
+  const [dismissed, setDismissed] = useState([]);
+
+  if (!newsData || !newsData.has_alert) return null;
+
+  const visible = (newsData.alerts || []).filter(
+    a => !dismissed.includes(a.headline)
+  );
+  if (!visible.length) return null;
+
+  // Show only the top-graded alert prominently; others as secondary
+  const [top, ...rest] = visible.sort((a, b) => (b.grade || 0) - (a.grade || 0));
+
+  const dismiss = headline => setDismissed(prev => [...prev, headline]);
+
+  return (
+    <div className="mb-6 space-y-3">
+      {/* Primary alert */}
+      <div
+        className="relative bg-black border-4 border-red-600 p-6 rounded-none shadow-[0_0_40px_rgba(220,38,38,0.3)] animate-pulse"
+        style={{ animationDuration: "2s" }}
+      >
+        <button
+          onClick={() => dismiss(top.headline)}
+          className="absolute top-3 right-4 text-red-600 hover:text-red-400 text-xl font-black leading-none"
+          aria-label="Dismiss"
+        >×</button>
+
+        <div className="flex items-center gap-3 mb-2">
+          <h1 className="text-red-600 font-black text-4xl tracking-tighter italic leading-none">
+            BREAKING NEWS:
+          </h1>
+          <span className="text-red-700 font-black text-lg border border-red-700 px-2 py-0.5">
+            {top.grade}/10
+          </span>
+          <span className="text-red-800 text-xs font-semibold uppercase tracking-widest">
+            {top.source}
+          </span>
+        </div>
+
+        <div className="text-red-600 font-extrabold text-2xl uppercase leading-tight mb-6 border-b border-red-900 pb-4">
+          {top.headline}
+        </div>
+
+        <div className="space-y-4">
+          <h3 className="text-white font-bold text-sm uppercase tracking-widest opacity-80">
+            Quick Analysis &amp; Impact
+          </h3>
+          <ul className="text-white space-y-3">
+            {(top.analysis || []).map((item, i) => (
+              <li key={i} className="flex gap-3 text-base font-medium">
+                <span className="text-red-600 font-black flex-shrink-0">▶</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* Secondary alerts (compact) */}
+      {rest.map(alert => (
+        <div
+          key={alert.headline}
+          className="relative bg-zinc-950 border-2 border-red-800/60 px-4 py-3 rounded flex items-start gap-3"
+        >
+          <span className="text-red-600 font-black text-lg flex-shrink-0 mt-0.5">▶</span>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className="text-red-700 text-[10px] font-bold border border-red-800 px-1">{alert.grade}/10</span>
+              <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{alert.source}</span>
+            </div>
+            <p className="text-red-500 font-bold text-sm uppercase leading-snug">{alert.headline}</p>
+          </div>
+          <button
+            onClick={() => dismiss(alert.headline)}
+            className="text-zinc-700 hover:text-zinc-400 text-lg font-bold leading-none flex-shrink-0"
+            aria-label="Dismiss"
+          >×</button>
+        </div>
+      ))}
+
+      {/* Last-checked */}
+      {newsData.last_checked && (
+        <p className="text-[10px] text-zinc-700 text-right">
+          Last checked: {newsData.last_checked}
+        </p>
+      )}
+    </div>
+  );
+};
+
 /** Thematic Scanner 側欄：以 Market Brief（market_brief.json）取代原 macro_news 列表 */
 const ScannerBriefFeed = ({ briefData }) => {
   if (!briefData) return (
@@ -2787,6 +2879,7 @@ export default function App() {
   const [tab, setTab] = useState("scanner");
   const [data, setData] = useState(null);
   const [briefData, setBriefData] = useState(null);
+  const [newsData, setNewsData]   = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filtersOn, setFiltersOn] = useState(false);
@@ -2841,6 +2934,19 @@ export default function App() {
       .then(d => { if (d) setBriefData(d); })
       .catch(() => {});
   }, []);
+
+  // Breaking news — poll every 5 min
+  useEffect(() => {
+    const fetchNews = () => {
+      fetch(process.env.PUBLIC_URL + "/breaking_news.json?v=" + Date.now())
+        .then(r => r.ok ? r.json() : null)
+        .then(d => { if (d) setNewsData(d); })
+        .catch(() => {});
+    };
+    fetchNews();
+    const id = setInterval(fetchNews, 5 * 60 * 1000);
+    return () => clearInterval(id);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 const filtered = useMemo(() => {
     if (!data) return [];
@@ -2959,6 +3065,10 @@ const filtered = useMemo(() => {
               )}
             </div>
           </div>
+
+          {/* Breaking News Alert — shown above all tabs when active */}
+          <BreakingNewsAlert newsData={newsData}/>
+
           {tab === "scanner" && (
             <>
             <div className="flex flex-wrap items-center gap-3">

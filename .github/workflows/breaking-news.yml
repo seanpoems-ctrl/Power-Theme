@@ -1,0 +1,49 @@
+name: Emergency News Monitor
+
+on:
+  schedule:
+    - cron: "*/30 * * * 1-5"   # Every 30 min, Mon–Fri
+  workflow_dispatch: {}
+
+jobs:
+  breaking-news:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install requests python-dotenv google-genai
+
+      - name: Run Emergency News Monitor
+        run: python breaking_news.py
+        env:
+          GEMINI_API_KEY:     ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
+
+      - name: Build React app
+        run: npm ci && npm run build
+        env:
+          CI: false
+
+      - uses: actions/configure-pages@v4
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./build
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
