@@ -3200,67 +3200,28 @@ const filtered = useMemo(() => {
                 <h1 className="text-base font-bold tracking-tight">Thematic Scanner</h1>
                 <p className="text-[11px] text-zinc-500">美股強勢主題篩選器</p>
               </div>
-              {/* Index tickers + macro — left side of header */}
+              {/* Index tickers — inline with logo */}
               {data?.market_condition && (() => {
-                const mc = data.market_condition;
-                const { spy, qqq, iwm, btc, gld, oil, credit_spread, breadth_50d, breadth_200d } = mc;
+                const { spy, qqq, iwm } = data.market_condition;
                 const fmtChg = v => v == null ? null : v > 0
                   ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
                   : <span className="text-red-400">{v.toFixed(2)}%</span>;
                 const statusColor = st => st === "Strong" ? "text-emerald-400" : st === "Weak" || st === "Lagging" ? "text-red-400" : st === "Mediocre" ? "text-yellow-400" : "text-zinc-500";
-                const Tag = ({ label, d, noStatus }) => d ? (
+                const Tag = ({ label, d }) => d ? (
                   <span className="flex items-center gap-1 text-[11px] font-mono">
                     <span className="text-zinc-500">{label}</span>
-                    {d.price != null && <span className="text-zinc-300">${d.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>}
+                    {d.price != null && <span className="text-zinc-300">${d.price.toFixed(2)}</span>}
                     {fmtChg(d.change_pct)}
-                    {!noStatus && d.index_status && <span className={statusColor(d.index_status)}>{d.index_status}</span>}
+                    {d.index_status && <span className={statusColor(d.index_status)}>{d.index_status}</span>}
                   </span>
                 ) : null;
-                const Dot = () => <span className="text-zinc-700">·</span>;
-                const breadthColor = v => v >= 60 ? "text-emerald-400" : v >= 40 ? "text-yellow-400" : "text-red-400";
                 return (
-                  <div className="hidden lg:flex flex-col gap-0.5 ml-4 pl-4 border-l border-zinc-700/50">
-                    {/* Row 1: Major indices + BTC */}
-                    <div className="flex items-center gap-2">
-                      <Tag label="QQQ" d={qqq}/><Dot/>
-                      <Tag label="SPY" d={spy}/><Dot/>
-                      <Tag label="IWM" d={iwm}/>
-                      {btc && <><Dot/><Tag label="BTC" d={btc} noStatus/></>}
-                    </div>
-                    {/* Row 2: Macro assets + Credit Spreads */}
-                    <div className="flex items-center gap-2">
-                      {gld && <Tag label="GLD" d={gld} noStatus/>}
-                      {gld && oil && <Dot/>}
-                      {oil && <Tag label="OIL" d={oil} noStatus/>}
-                      {credit_spread != null && (
-                        <><Dot/>
-                        <span className="flex items-center gap-1 text-[11px] font-mono">
-                          <span className="text-zinc-500">BAMLH0A0HYM2</span>
-                          <span className="text-zinc-600 text-[10px]">(HY Spreads)</span>
-                          <span className="text-zinc-300">{credit_spread.value.toFixed(2)}%</span>
-                          {credit_spread.change !== 0 && (
-                            <span className={credit_spread.change > 0 ? "text-red-400" : "text-emerald-400"}>
-                              {credit_spread.change > 0 ? "+" : ""}{credit_spread.change.toFixed(3)}
-                            </span>
-                          )}
-                        </span></>
-                      )}
-                    </div>
-                    {/* Row 3: Market Breadth */}
-                    {(breadth_50d != null || breadth_200d != null) && (
-                      <div className="flex items-center gap-2 text-[11px] font-mono">
-                        <span className="text-zinc-600 text-[10px] uppercase tracking-wide">Market Breadth</span>
-                        {breadth_50d != null && (
-                          <><span className="text-zinc-500">S5FI (50D)</span>
-                          <span className={breadthColor(breadth_50d)}>{breadth_50d.toFixed(1)}%</span></>
-                        )}
-                        {breadth_200d != null && (
-                          <><Dot/>
-                          <span className="text-zinc-500">VITH (200D)</span>
-                          <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span></>
-                        )}
-                      </div>
-                    )}
+                  <div className="hidden lg:flex items-center gap-3 ml-4 pl-4 border-l border-zinc-700/50">
+                    <Tag label="QQQ" d={qqq}/>
+                    <span className="text-zinc-700">·</span>
+                    <Tag label="SPY" d={spy}/>
+                    <span className="text-zinc-700">·</span>
+                    <Tag label="IWM" d={iwm}/>
                   </div>
                 );
               })()}
@@ -3288,6 +3249,59 @@ const filtered = useMemo(() => {
               )}
             </div>
           </div>
+
+          {/* Macro ticker bar */}
+          {data?.market_condition && (() => {
+            const { btc, gld, oil, credit_spread, breadth_50d, breadth_200d } = data.market_condition;
+            const hasAny = btc || gld || oil || credit_spread != null || breadth_50d != null;
+            if (!hasAny) return null;
+            const fmtChg = v => v == null ? null : v > 0
+              ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
+              : <span className="text-red-400">{v.toFixed(2)}%</span>;
+            const Tag = ({ label, d }) => d ? (
+              <span className="flex items-center gap-1">
+                <span className="text-zinc-600">{label}</span>
+                {d.price != null && <span className="text-zinc-300">${d.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>}
+                {fmtChg(d.change_pct)}
+              </span>
+            ) : null;
+            const Sep = () => <span className="text-zinc-800">|</span>;
+            const Dot = () => <span className="text-zinc-700 mx-0.5">·</span>;
+            const breadthColor = v => v >= 60 ? "text-emerald-400" : v >= 40 ? "text-yellow-400" : "text-red-400";
+            return (
+              <div className="hidden lg:flex items-center gap-2 text-[11px] font-mono py-1 mt-1 border-t border-zinc-800/50 flex-wrap">
+                {btc && <><Tag label="BTC" d={btc}/></>}
+                {gld && <><Dot/><Tag label="GLD" d={gld}/></>}
+                {oil && <><Dot/><Tag label="OIL" d={oil}/></>}
+                {credit_spread != null && (
+                  <><Sep/>
+                  <span className="flex items-center gap-1">
+                    <span className="text-zinc-600">HY Spread</span>
+                    <span className="text-zinc-400 text-[10px]">(BAMLH0A0HYM2)</span>
+                    <span className="text-zinc-300">{credit_spread.value.toFixed(2)}%</span>
+                    {credit_spread.change !== 0 && (
+                      <span className={credit_spread.change > 0 ? "text-red-400" : "text-emerald-400"}>
+                        {credit_spread.change > 0 ? "+" : ""}{credit_spread.change.toFixed(3)}
+                      </span>
+                    )}
+                  </span></>
+                )}
+                {(breadth_50d != null || breadth_200d != null) && (
+                  <><Sep/>
+                  <span className="text-zinc-600">Market Breadth</span>
+                  {breadth_50d != null && (
+                    <><span className="text-zinc-500">S5FI 50D</span>
+                    <span className={breadthColor(breadth_50d)}>{breadth_50d.toFixed(1)}%</span></>
+                  )}
+                  {breadth_200d != null && (
+                    <><Dot/>
+                    <span className="text-zinc-500">VITH 200D</span>
+                    <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span></>
+                  )}</>
+                )}
+              </div>
+            );
+          })()}
 
           {/* Breaking News Alert — shown above all tabs when active */}
           <BreakingNewsAlert newsData={newsData}/>
