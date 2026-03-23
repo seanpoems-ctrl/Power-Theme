@@ -1626,16 +1626,19 @@ const GapperScanner = () => {
       .catch(() => {});
   }, []);
 
+  // Gapper data — poll every 5 min
   useEffect(() => {
-    (async () => {
+    const load = () => {
       setLoading(true);
-      try {
-        const r = await fetch(process.env.PUBLIC_URL + "/gapper_data.json?v=" + Date.now());
-        if (r.ok) setGapperData(await r.json());
-      } catch {}
-      setLoading(false);
-    })();
-  }, []);
+      fetch(process.env.PUBLIC_URL + "/gapper_data.json?v=" + Date.now())
+        .then(r => r.ok ? r.json() : null)
+        .then(d => { if (d) setGapperData(d); setLoading(false); })
+        .catch(() => setLoading(false));
+    };
+    load();
+    const id = setInterval(load, 5 * 60 * 1000);
+    return () => clearInterval(id);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) return <div className="flex items-center justify-center py-20"><RefreshCw size={20} className="text-zinc-500 animate-spin"/></div>;
 
