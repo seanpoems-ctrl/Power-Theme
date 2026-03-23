@@ -1544,7 +1544,7 @@ const ScannerBriefFeed = ({ briefData }) => {
         </div>
       </div>
 
-      <div className="overflow-y-auto flex-1 space-y-3" style={{ maxHeight: "218px" }}>
+      <div className="overflow-y-auto flex-1 space-y-3" style={{ maxHeight: "237px" }}>
 
         {error && (
           <div className="text-[10px] text-red-400 bg-red-500/10 rounded p-2">{String(error)}</div>
