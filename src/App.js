@@ -168,7 +168,7 @@ const Tip = ({ text, color = 'zinc', width = "w-56", children }) => {
     setPos({ x: r.left + r.width / 2, showBelow, top: r.bottom + 6, bottom: window.innerHeight - r.top + 6 });
   };
   return (
-    <span ref={ref} onMouseEnter={handleEnter} onMouseLeave={() => setPos(null)} className="cursor-help inline-flex">
+    <span ref={ref} onMouseEnter={handleEnter} onMouseLeave={() => setPos(null)} className="cursor-pointer inline-flex">
       {children}
       {pos && (
         <span
@@ -194,7 +194,7 @@ const EliteBadge = ({ type }) => {
   const { Icon, color, bg, tip, tipColor } = BADGE_CONFIG[type];
   return (
     <Tip text={tip} color={tipColor}>
-      <span className={`inline-flex items-center justify-center w-4 h-4 rounded border backdrop-blur-sm cursor-help ${bg}`}>
+      <span className={`inline-flex items-center justify-center w-4 h-4 rounded border backdrop-blur-sm cursor-pointer ${bg}`}>
         <Icon size={9} className={color}/>
       </span>
     </Tip>
@@ -215,7 +215,7 @@ const GRADE_TIP = {
 const GRADE_TIP_COLOR = { "A+": "emerald", "A": "blue", "B": "zinc" };
 const GradeBadge = ({ grade }) => {
   if (!grade) return null;
-  return <Tip text={GRADE_TIP[grade]} color={GRADE_TIP_COLOR[grade]}><span className={`inline-flex items-center px-1 py-0.5 text-[10px] font-bold rounded border backdrop-blur-sm cursor-help ${GRADE_STYLE[grade]}`}>{grade}</span></Tip>;
+  return <Tip text={GRADE_TIP[grade]} color={GRADE_TIP_COLOR[grade]}><span className={`inline-flex items-center px-1 py-0.5 text-[10px] font-bold rounded border backdrop-blur-sm cursor-pointer ${GRADE_STYLE[grade]}`}>{grade}</span></Tip>;
 };
 
 function isVDU(s) {
@@ -813,8 +813,8 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
               <td className="py-3 px-4">
                 <div className="flex items-center gap-2">
                   {s.pure_play
-                    ? <Tip text="Pure Play — appears in only one sub-theme" color="amber"><Star size={11} className="text-amber-400 fill-amber-400 flex-shrink-0 cursor-help"/></Tip>
-                    : <Tip text="Legacy Leader — appears across multiple sub-themes" color="zinc"><TrendingUp size={11} className="text-zinc-600 flex-shrink-0 cursor-help"/></Tip>}
+                    ? <Tip text="Pure Play — appears in only one sub-theme" color="amber"><Star size={11} className="text-amber-400 fill-amber-400 flex-shrink-0 cursor-pointer"/></Tip>
+                    : <Tip text="Legacy Leader — appears across multiple sub-themes" color="zinc"><TrendingUp size={11} className="text-zinc-600 flex-shrink-0 cursor-pointer"/></Tip>}
                   <div>
                     <div className="flex items-center gap-1.5 flex-wrap">
                       <span
@@ -824,10 +824,10 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
                       >{s.ticker}</span>
                       <GradeBadge grade={getEliteGrade(s)}/>
                       <AlphaLeaderBadge stock={s} sortPriority={sortPriority} spyPerf1d={spyPerf || 0}/>
-                      {isVCPStage1(s) && <Tip text="Narrowing consolidation + VDU + near 52W high" color="violet"><span className="text-[9px] font-bold text-violet-400 bg-violet-500/15 border border-violet-500/30 px-1 py-0.5 rounded cursor-help">🎯 VCP S1</span></Tip>}
-                      {!isVCPStage1(s) && isVDU(s) && <Tip text="Volume below 50% of 10-day avg — selling pressure exhausted" color="blue"><span className="text-[9px] font-bold text-blue-400 bg-blue-500/15 border border-blue-500/30 px-1 py-0.5 rounded cursor-help">VDU</span></Tip>}
-                      {isTight(s) && <Tip text="Last 3 days range < 1.5% — extremely tight" color="fuchsia"><span className="text-[9px] font-bold text-fuchsia-400 bg-fuchsia-500/15 border border-fuchsia-500/30 px-1 py-0.5 rounded cursor-help">Tight</span></Tip>}
-                      {isInsideDay(s) && <Tip text="Today's range inside yesterday's range" color="slate"><span className="text-[9px] font-bold text-slate-400 bg-slate-500/15 border border-slate-500/30 px-1 py-0.5 rounded cursor-help">ID</span></Tip>}
+                      {isVCPStage1(s) && <Tip text="Narrowing consolidation + VDU + near 52W high" color="violet"><span className="text-[9px] font-bold text-violet-400 bg-violet-500/15 border border-violet-500/30 px-1 py-0.5 rounded cursor-pointer">🎯 VCP S1</span></Tip>}
+                      {!isVCPStage1(s) && isVDU(s) && <Tip text="Volume below 50% of 10-day avg — selling pressure exhausted" color="blue"><span className="text-[9px] font-bold text-blue-400 bg-blue-500/15 border border-blue-500/30 px-1 py-0.5 rounded cursor-pointer">VDU</span></Tip>}
+                      {isTight(s) && <Tip text="Last 3 days range < 1.5% — extremely tight" color="fuchsia"><span className="text-[9px] font-bold text-fuchsia-400 bg-fuchsia-500/15 border border-fuchsia-500/30 px-1 py-0.5 rounded cursor-pointer">Tight</span></Tip>}
+                      {isInsideDay(s) && <Tip text="Today's range inside yesterday's range" color="slate"><span className="text-[9px] font-bold text-slate-400 bg-slate-500/15 border border-slate-500/30 px-1 py-0.5 rounded cursor-pointer">ID</span></Tip>}
                       <span className="hidden sm:flex items-center gap-0.5">
                         {getEliteBadges(s, { isTopTheme, isTopADR: topADRTickers?.has(s.ticker) }).map(b => <EliteBadge key={b} type={b}/>)}
                       </span>
