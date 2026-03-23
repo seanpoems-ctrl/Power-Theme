@@ -1727,8 +1727,16 @@ const GapperScanner = () => {
             </tr>
           </thead>
           <tbody>
-            {filtered.map((g, i) => (
-              <tr key={g.ticker + i} className="border-t border-zinc-800/40 hover:bg-zinc-800/20 transition-colors align-middle">
+            {filtered.map((g, i) => {
+              const techFail   = (g.technical_status || "").startsWith("Fail");
+              const flowTheme  = (g.theme || g.category || "") === "Technical / Flow";
+              const rowCls     = [
+                "border-t align-middle transition-colors",
+                techFail  ? "opacity-40 grayscale border-zinc-800/30" : "border-zinc-800/40 hover:bg-zinc-800/20",
+                flowTheme ? "border-dashed border-amber-800/40" : "",
+              ].join(" ");
+              return (
+              <tr key={g.ticker + i} className={rowCls}>
                 {/* Ticker */}
                 <td className="py-2 px-1.5 text-center">
                   <span
@@ -1780,21 +1788,50 @@ const GapperScanner = () => {
                     {g.category}
                   </span>
                 </td>
-                {/* Grade + Verification */}
+                {/* Grade + Technical Status + Verification */}
                 <td className="py-2 px-1 text-center">
-                  <div className="flex items-center justify-center gap-1">
-                    {g.grade
-                      ? <span className={`text-[10px] font-bold px-1 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span>
-                      : <span className="text-zinc-600">—</span>}
-                    <VerificationBadge verification={g.verification} headlines={g.headlines}/>
+                  <div className="flex flex-col items-center gap-0.5">
+                    <div className="flex items-center gap-1">
+                      {g.grade
+                        ? <span className={`text-[10px] font-bold px-1 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span>
+                        : <span className="text-zinc-600">—</span>}
+                      <VerificationBadge verification={g.verification} headlines={g.headlines}/>
+                    </div>
+                    {g.technical_status && (
+                      <span className={`text-[8px] font-semibold px-1 py-0.5 rounded leading-none ${
+                        (g.technical_status || "").startsWith("Fail")
+                          ? "text-red-400 bg-red-500/10 border border-red-500/20"
+                          : "text-emerald-400 bg-emerald-500/10 border border-emerald-500/20"
+                      }`}>
+                        {(g.technical_status || "").startsWith("Fail") ? "✗ Fail" : "✓ Pass"}
+                      </span>
+                    )}
+                    {(g.theme || g.category) === "Technical / Flow" && (
+                      <span className="text-[8px] text-amber-500 font-semibold">🔍 Flow</span>
+                    )}
                   </div>
                 </td>
-                {/* Reasoning */}
-                <td className="py-2 px-1.5 text-[11px] text-zinc-400 leading-relaxed align-middle whitespace-normal break-words">{g.reasoning}</td>
+                {/* Reasoning — shows analysis_detail with bold Catalyst/Impact */}
+                <td className="py-2 px-1.5 text-[11px] text-zinc-400 leading-relaxed align-middle whitespace-normal break-words">
+                  {g.analysis_detail ? (() => {
+                    const parts = g.analysis_detail.split(" | Impact: ");
+                    if (parts.length === 2) {
+                      const catalystText = parts[0].replace(/^Catalyst:\s*/i, "");
+                      return (
+                        <div className="space-y-1">
+                          <p><span className="font-bold text-zinc-300">Catalyst:</span> {catalystText}</p>
+                          <p><span className="font-bold text-zinc-300">Impact:</span> {parts[1]}</p>
+                        </div>
+                      );
+                    }
+                    return g.analysis_detail;
+                  })() : g.reasoning}
+                </td>
                 {/* Analysis Details */}
                 <td className="py-2 px-2 align-middle"><AnalysisCell text={g.analysis_details}/></td>
               </tr>
-            ))}
+              );
+            })}
           </tbody>
         </table>
       </div>

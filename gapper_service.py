@@ -166,25 +166,59 @@ def fetch_finviz_data(ticker: str) -> dict:
 
 
 # ──────────────────────────────────────────────────────────────
-# Last Earnings Date (yfinance)
+# Ticker Fundamentals: ADR% + Last Earnings Date (yfinance)
 # ──────────────────────────────────────────────────────────────
 
-def fetch_last_earnings_date(ticker: str) -> str | None:
-    """Return the most recent past earnings date as YYYY-MM-DD, or None if unavailable."""
+def fetch_ticker_fundamentals(ticker: str) -> dict:
+    """Fetch ADR%(20d) and last earnings date in one yfinance call."""
+    result = {"adr_pct": None, "last_earnings_date": None}
     try:
         import yfinance as yf
         from datetime import date as _date
         t = yf.Ticker(ticker)
-        ed = t.earnings_dates
-        if ed is None or ed.empty:
-            return None
-        today = _date.today()
-        past = ed[ed.index.date < today]
-        if past.empty:
-            return None
-        return past.index[0].strftime("%Y-%m-%d")
-    except Exception:
-        return None
+
+        # ADR% — avg of (High-Low)/Close over last 20 sessions
+        hist = t.history(period="25d", interval="1d", auto_adjust=True)
+        if len(hist) >= 10:
+            adr = ((hist["High"] - hist["Low"]) / hist["Close"] * 100).tail(20).mean()
+            result["adr_pct"] = round(float(adr), 2)
+
+        # Last earnings date
+        try:
+            ed = t.earnings_dates
+            if ed is not None and not ed.empty:
+                today = _date.today()
+                past  = ed[ed.index.date < today]
+                if not past.empty:
+                    result["last_earnings_date"] = past.index[0].strftime("%Y-%m-%d")
+        except Exception:
+            pass
+    except Exception as e:
+        logger.warning(f"  yfinance fundamentals failed for {ticker}: {e}")
+    return result
+
+
+def _apply_technical_floor(analysis: dict, avg_dollar_vol: float, adr_pct: float | None) -> tuple[dict, str]:
+    """Enforce the Hard Technical Floor on grade and return (updated_analysis, technical_status)."""
+    dvol_m  = (avg_dollar_vol or 0) / 1_000_000
+    adr     = adr_pct or 0.0
+    grade   = analysis.get("grade", "C")
+
+    failures = []
+    if dvol_m < 100:
+        failures.append(f"Avg $Vol ${dvol_m:.0f}M < $100M")
+    if adr < 4:
+        failures.append(f"ADR {adr:.1f}% < 4%")
+
+    technical_status = "Pass" if not failures else "Fail (" + ", ".join(failures) + ")"
+
+    # Hard grade cap
+    if dvol_m < 100 or adr < 2:
+        analysis["grade"] = "C"
+    elif adr < 4 and grade in ("A+", "A"):
+        analysis["grade"] = "B"
+
+    return analysis, technical_status
 
 
 # ──────────────────────────────────────────────────────────────
@@ -403,16 +437,32 @@ Rules: No emojis. No markdown headers. Start every section with • **Title** on
 """
 
 
-def analyze_with_gemini(ticker: str, headlines: list[str], rvol: float, last_earnings_date: str | None = None) -> dict:
-    """Use Gemini 2.5 Flash to categorize catalyst, assign grade, and generate detailed analysis."""
+def analyze_with_gemini(
+    ticker: str,
+    headlines: list[str],
+    rvol: float,
+    last_earnings_date: str | None = None,
+    avg_dollar_vol: float = 0,
+    adr_pct: float | None = None,
+) -> dict:
+    """Use Gemini 2.5 Flash — Momentum Catalyst Intelligence with Hard Technical Floor."""
     if not GEMINI_API_KEY:
         return _fallback_analysis(ticker, headlines, rvol)
+
+    dvol_m = (avg_dollar_vol or 0) / 1_000_000
+    adr    = adr_pct or 0.0
+
     if not headlines:
         return {
-            "category": "Others", "reasoning": "No news found.",
-            "hypothesis": "Monitor price action at open.", "conviction": 30,
-            "grade": "C", "finviz_theme": "—",
-            "analysis_details": "No news catalyst identified.\n\n⚡ KEY CONSIDERATION\nMonitor price action at open for directional bias.",
+            "category":        "Others",
+            "theme":           "Technical / Flow",
+            "reasoning":       "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+            "hypothesis":      "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+            "conviction":      25,
+            "grade":           "C",
+            "finviz_theme":    "—",
+            "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+            "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
         }
     try:
         from google import genai
@@ -429,33 +479,46 @@ def analyze_with_gemini(ticker: str, headlines: list[str], rvol: float, last_ear
                 earnings_note = f"\nIMPORTANT: {ticker}'s last earnings report was on {last_earnings_date} ({days_ago} days ago). Do NOT classify as Earnings — that is too old to be today's catalyst."
             else:
                 earnings_note = f"\nNote: {ticker}'s last earnings report was on {last_earnings_date} ({days_ago} days ago) — recent enough to be a valid Earnings catalyst."
-        prompt = f"""You are an institutional trading analyst. Today's date is {today_str}.{earnings_note}
-Analyze these news headlines for {ticker} that were published in the last 24 hours (publication date shown in brackets):
+        prompt = f"""You are a Senior Momentum Equity Analyst. Today is {today_str}.{earnings_note}
 
+Technical context for {ticker}:
+  Avg $ Vol (20d): ${dvol_m:.0f}M  |  ADR% (20d): {adr:.1f}%  |  RVOL: {rvol:.1f}x
+
+News headlines (last 24h):
 {headlines_text}
 
-Classify the PRIMARY catalyst and provide a detailed, structured analysis.
+═══ STEP 1: CATALYST VERIFICATION ═══
+Before grading, verify a specific catalyst occurred in the last 24h.
 
-CATEGORIES (choose exactly one):
-- Earnings: Company reported quarterly/annual results within the last 5 days. Check the IMPORTANT note above about the actual earnings date before choosing this category.
-- Upgrade: Analyst raised rating or price target
-- FDA: FDA approval, rejection, clinical trial result, or drug news
-- Thematic Narratives: Sector rotation, macro theme, industry trend
-- Government Policy: Regulation, tariff, government contract, policy change
-- New Contract/Partnership: New deal, partnership, or major customer win
-- Institutional Buying: Hedge funds/mutual funds disclosed new or increased positions
-- Insider Buying: Company executives/directors purchased shares
-- Others: Technical breakout, short squeeze, or anything not fitting above
+UNKNOWN CATALYST RULE — If no specific fundamental news found:
+  category: "Others"  |  theme: "Technical / Flow"  |  grade: "C"
+  reasoning: "No immediate fundamental catalyst found; likely technical breakout or institutional flow."
+  analysis_detail: "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
 
-GRADE RUBRIC (based on catalyst quality, clarity, and fundamental backing):
-- A+: Crystal-clear high-quality catalyst with strong fundamentals (massive earnings beat + guidance raise, or landmark FDA approval)
-- A: Clear catalyst with good fundamental support (solid earnings beat, major contract win, significant policy tailwind)
-- B: Moderate catalyst or mixed signals (small beat, minor upgrade, unclear policy impact)
-- C: Weak or unclear catalyst (small analyst upgrade, speculative theme, no confirmed news)
+SYMPATHY MOVE RULE — If ticker moves because a sector leader (e.g. NVDA) reported news:
+  theme: "Sector Sympathy"  |  grade: "B" or "C"
+  reasoning: "Moving in sympathy with [Leader] following [Event]."
+  analysis_detail: "Catalyst: Sector Tailwinds | Impact: Secondary. No company-specific news; move correlated to broader [Industry] trend."
 
+DO NOT invent a story. DO NOT use "Market Volatility" as reasoning.
+
+═══ STEP 2: CATEGORY ═══
+Choose exactly one:
+- Earnings | Upgrade | FDA | Thematic Narratives | Government Policy | New Contract/Partnership | Institutional Buying | Insider Buying | Others
+{earnings_note}
+
+═══ STEP 3: GRADE RUBRIC — STRICT HIERARCHY ═══
+Apply BOTH technical and news quality. The Hard Technical Floor is informational here — Python will enforce caps.
+
+- A+ (Institutional Apex): News = structural change ($1B+ contract, Tier-1 partnership like NVDA/Meta, FDA Approval for $5B+ TAM, massive Beat+Raise)
+- A  (High Conviction):    News = Earnings Beat+Raise, significant product launch, major analyst re-rating
+- B  (Exploitable):        News is incremental (Price Target hike, minor contract, unclear policy impact)
+- C  (Avoid / Noise):      Sympathy move, vague rumor, low-impact headline, Technical/Flow, unknown catalyst
+
+═══ STEP 4: OUTPUT FORMAT ═══
 {ANALYSIS_FORMAT_INSTRUCTIONS}
 
-FINVIZ HEATMAP THEME — classify {ticker} into one of these Finviz themes heatmap categories based on the company's business and the news. Use the most specific match:
+FINVIZ INDUSTRY THEME (use most specific):
 AI Compute | AI Cloud | AI Models | AI Data & Analytics | AI Enterprise Software | AI Networking | AI Security | AI Edge & IoT | AI Robotics | AI Applications | AI Ads & Search | AI Energy | AI AGI |
 Semiconductors - Compute | Semiconductors - Memory | Semiconductors - Analog | Semiconductors - Wireless | Semiconductors - Foundries | Semiconductors - Design Tools | Semiconductors - Lithography | Semiconductors - Packaging |
 Cloud Hyperscalers | Cloud Data Centers | Cloud Databases | Cloud DevOps | Cloud Security | Cloud Hybrid | Cloud Multi-cloud | Cloud SaaS |
@@ -468,11 +531,10 @@ Pharma - Large Cap | Medical Devices | Digital Health |
 Defense & Aerospace | Space | Drones |
 Consumer - E-Commerce | Consumer - Streaming | Consumer - Social Media | Consumer - Gaming |
 Energy - Oil & Gas | Energy - LNG | Materials - Metals & Mining |
-Real Estate | REITs | Infrastructure |
-Others
+Real Estate | REITs | Infrastructure | Others
 
-Respond in this exact JSON format only, no extra text:
-{{"category": "<category>", "reasoning": "<1-2 sentence quick summary>", "grade": "<A+|A|B|C>", "finviz_theme": "<most specific matching theme from the list above>", "analysis_details": "<detailed structured analysis>"}}"""
+Respond in this exact JSON format only (no extra text):
+{{"category": "<category>", "theme": "<specific catalyst name, e.g. 'Beat & Raise', 'New Contracts', 'Sector Sympathy', 'Technical / Flow'>", "reasoning": "<1 sentence mechanical trigger>", "grade": "<A+|A|B|C>", "finviz_theme": "<industry>", "analysis_detail": "Catalyst: [news facts 2-3 sentences] | Impact: [quantify shift, e.g. adds X% to revenue, de-risks pipeline]", "analysis_details": "<detailed multi-section analysis>"}}"""
 
         response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
         text = response.text.strip()
@@ -485,11 +547,13 @@ Respond in this exact JSON format only, no extra text:
         category = result.get("category", "Others")
         if category not in CATEGORIES:
             category = "Others"
-        reasoning = result.get("reasoning", "")
-        grade = result.get("grade", "B")
+        theme            = result.get("theme", category)
+        reasoning        = result.get("reasoning", "")
+        grade            = result.get("grade", "B")
         if grade not in ("A+", "A", "B", "C"):
             grade = "B"
-        finviz_theme = result.get("finviz_theme", "—")
+        finviz_theme     = result.get("finviz_theme", "—")
+        analysis_detail  = result.get("analysis_detail", f"Catalyst: {reasoning} | Impact: See analysis.")
         analysis_details = result.get("analysis_details", reasoning)
 
         hypothesis_label, strategy = HYPOTHESIS_RULES.get(category, HYPOTHESIS_RULES["Others"])
@@ -499,11 +563,13 @@ Respond in this exact JSON format only, no extra text:
 
         return {
             "category":        category,
+            "theme":           theme,
             "reasoning":       reasoning,
             "hypothesis":      f"{hypothesis_label} — {strategy}",
             "conviction":      conviction,
             "grade":           grade,
             "finviz_theme":    finviz_theme,
+            "analysis_detail": analysis_detail,
             "analysis_details": analysis_details,
         }
     except Exception as e:
@@ -528,14 +594,17 @@ def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
     else:
         cat = "Others"
     label, strategy = HYPOTHESIS_RULES.get(cat, HYPOTHESIS_RULES["Others"])
+    rsn = titles[0] if titles else "No catalyst identified."
     return {
         "category":        cat,
-        "reasoning":       titles[0] if titles else "No catalyst identified.",
+        "theme":           cat,
+        "reasoning":       rsn,
         "hypothesis":      f"{label} — {strategy}",
         "conviction":      50,
         "grade":           "B",
         "finviz_theme":    "—",
-        "analysis_details": titles[0] if titles else "No catalyst identified.",
+        "analysis_detail": f"Catalyst: {rsn} | Impact: See analysis.",
+        "analysis_details": rsn,
     }
 
 
@@ -574,11 +643,23 @@ def main():
         headlines.sort(key=lambda x: x["date"], reverse=True)
         headlines = headlines[:8]
 
-        # Last earnings date (to prevent misclassification of old earnings news)
-        last_earnings_date = fetch_last_earnings_date(ticker)
+        # ADR% + last earnings date (single yfinance call)
+        fundamentals       = fetch_ticker_fundamentals(ticker)
+        last_earnings_date = fundamentals["last_earnings_date"]
+        adr_pct            = fundamentals["adr_pct"]
+        stock["adr_pct"]   = adr_pct
 
-        # AI analysis (includes finviz_theme classification)
-        analysis = analyze_with_gemini(ticker, headlines, stock["rvol"], last_earnings_date)
+        # AI analysis — Momentum Catalyst Intelligence
+        analysis = analyze_with_gemini(
+            ticker, headlines, stock["rvol"], last_earnings_date,
+            avg_dollar_vol=stock.get("avg_dollar_vol", 0),
+            adr_pct=adr_pct,
+        )
+
+        # Hard Technical Floor — enforce grade cap + compute technical_status
+        analysis, technical_status = _apply_technical_floor(
+            analysis, stock.get("avg_dollar_vol", 0), adr_pct
+        )
 
         # Fact-check verification (Skeptical Auditor — second Gemini call)
         logger.info(f"  Verifying catalyst for {ticker}...")
@@ -594,12 +675,13 @@ def main():
         output.append({
             **stock,
             **analysis,
-            "headlines":    [{"title": h["title"], "source": h.get("source",""), "url": h.get("url","")} for h in headlines[:5]],
-            "float_shares": fv.get("float_shares"),
-            "short_float":  fv.get("short_float"),
-            "daily_pct":    fv.get("daily_pct"),
-            "industry":     analysis.get("finviz_theme", "—"),
-            "verification": verification,
+            "headlines":        [{"title": h["title"], "source": h.get("source",""), "url": h.get("url","")} for h in headlines[:5]],
+            "float_shares":     fv.get("float_shares"),
+            "short_float":      fv.get("short_float"),
+            "daily_pct":        fv.get("daily_pct"),
+            "industry":         analysis.get("finviz_theme", "—"),
+            "technical_status": technical_status,
+            "verification":     verification,
         })
 
     result = {
