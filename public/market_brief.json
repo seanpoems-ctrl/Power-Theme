@@ -1,46 +1,89 @@
 {
-  "generated_at": "2026-03-22 17:16 ET",
-  "session": "Post-Market",
-  "market_data": {
-    "vix": 26.78,
-    "spy": 648.57,
-    "spy_chg": -1.43,
-    "qqq": 582.06,
-    "qqq_chg": -1.85,
-    "yield_10y": 4.39
-  },
-  "brief": {
-    "session": "Post-Market",
-    "sentiment": "Bearish",
-    "sentiment_reason": "Market indices saw significant declines today, driven by elevated volatility and persistent geopolitical concerns that overshadowed positive catalysts.",
-    "macro_news": [
-      {
-        "title": "VIX & Volatility",
-        "summary": "The VIX, a key fear gauge, surged to **26.78**, signaling heightened market anxiety among investors. This elevated level, well above the **20** threshold, reflects increased uncertainty and could translate to wider price swings for swing traders in the coming sessions."
-      },
-      {
-        "title": "Geopolitical Tensions & Energy Markets",
-        "summary": "Concerns over potential conflict in the Strait of Hormuz and the broader 'Iran war' narrative are escalating, threatening global oil and gas supplies. News of a 'gas supply cliff edge' and dealmaking paralysis in US oil and gas underscore the acute sensitivity of energy markets to current geopolitical developments."
-      },
-      {
-        "title": "Interest Rates & Stagflation Concerns",
-        "summary": "The 10-Year Treasury Yield remained elevated at **4.39%**, continuing to put pressure on equity valuations. Concurrently, headlines suggest investors are increasingly 'betting on stagflation,' implying a challenging economic environment of high inflation combined with slow growth."
-      }
-    ],
-    "sector_themes": [
-      {
-        "theme": "Technology & AI",
-        "reason": "AI continues to be a central theme for innovation and investment, but concerns about Wall Street spending and geopolitical risks impacting the 'AI boom' highlight potential headwinds for the sector despite ongoing developments."
-      },
-      {
-        "theme": "Energy",
-        "reason": "Geopolitical tensions, particularly regarding the Strait of Hormuz and potential conflict in Iran, are directly impacting energy supply stability and creating significant uncertainty for oil and gas markets globally."
-      }
-    ],
-    "key_levels": {
-      "spy_support": "$645.00",
-      "catalyst_today": "Geopolitical tensions surrounding the Strait of Hormuz and potential Iran conflict"
+  "generated_at": "March 23, 2026 (03:15 EST)",
+  "session": "Pre-Market",
+  "global_snapshot": [
+    {
+      "label": "S&P 500",
+      "price": 6506.48,
+      "change": -100.01,
+      "change_pct": -1.51
+    },
+    {
+      "label": "Nasdaq 100",
+      "price": 23898.15,
+      "change": -457.12,
+      "change_pct": -1.88
+    },
+    {
+      "label": "VIX",
+      "price": 26.78,
+      "change": 2.72,
+      "change_pct": null,
+      "zone_label": "Anxiety Zone"
+    },
+    {
+      "label": "10Y Yield",
+      "price": 4.39,
+      "change": 0.11,
+      "change_pct": null,
+      "trend_label": "Rising"
+    }
+  ],
+  "global_indices": {
+    "nikkei": {
+      "label": "Nikkei 225",
+      "price": 51515.49,
+      "change_pct": -3.48
+    },
+    "dax": {
+      "label": "DAX",
+      "price": 22380.19,
+      "change_pct": -2.01
+    },
+    "ftse": {
+      "label": "FTSE 100",
+      "price": 9918.33,
+      "change_pct": -1.44
     }
   },
-  "article_count": 15
+  "macro_breadth": {
+    "credit_spread": null,
+    "credit_date": null,
+    "credit_regime": null,
+    "s5fi": 24.2,
+    "mmth": 50.5,
+    "breadth_flush": false,
+    "generational": false,
+    "breadth_status": "FLUSH WATCH"
+  },
+  "reversal_signals": {
+    "signal_detected": false,
+    "description": ""
+  },
+  "mood": "Global Contagion, Deep Selling",
+  "analysis": {
+    "analysis_para1": "The global market tape signals deep distress this morning, with the Nikkei 225 plunging -3.48%, DAX down -2.01%, and FTSE 100 losing -1.44%, indicating a synchronized risk-off move across continents. This global contagion is mirrored in the US by a rising 10-year yield at 4.39% and VIX pushing into the Anxiety Zone at 26.78. Market breadth metrics are deteriorating sharply, with only 24.2% of S&P 500 stocks above their 50-day moving average (S5FI), underscoring widespread selling pressure and a severe lack of conviction outside a few names.",
+    "analysis_para2": "The immediate mechanical plan involves closely monitoring key support levels for the S&P 500 around the 6500 psychological mark, with the next critical zone around 6450. For the Nasdaq 100, watching for defense at 23800, then 23500 is crucial. A sustained break below these levels, especially on high volume, would confirm further downside potential and deepen the correction. Conversely, a sharp rejection from these supports, combined with VIX stabilizing or pulling back from 26.78, could signal an oversold bounce, though current market conditions favor selling into strength. Traders should prioritize capital preservation and remain highly defensive, awaiting clear signs of stabilization.",
+    "technical_signal": "No reversal pattern confirmed yet. Widespread selling across global markets and deteriorating breadth suggest ongoing downside pressure.",
+    "ticker_intel": [
+      {
+        "ticker": "JNJ",
+        "company": "Johnson & Johnson",
+        "grade": "A+",
+        "reason": "Johnson & Johnson offers defensive stability and reliable dividends, making it an attractive safe-haven asset amidst current market turmoil."
+      },
+      {
+        "ticker": "MSFT",
+        "company": "Microsoft Corp.",
+        "grade": "A",
+        "reason": "Microsoft's robust cloud computing growth and strong balance sheet provide resilience, positioning it favorably for recovery once market sentiment improves."
+      },
+      {
+        "ticker": "TSLA",
+        "company": "Tesla Inc.",
+        "grade": "C",
+        "reason": "Tesla faces significant downside risk due to its high beta, intense competition, and potential demand weakness in a deteriorating economic climate."
+      }
+    ]
+  }
 }

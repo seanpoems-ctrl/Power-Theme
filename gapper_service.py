@@ -203,6 +203,7 @@ def _fetch_google_news(ticker: str, cutoff, limit: int = 5) -> list[dict]:
         results = []
         for item in root.findall(".//item"):
             title = item.findtext("title", "")
+            link  = item.findtext("link", "")
             pub_date_str = item.findtext("pubDate", "")
             if not title:
                 continue
@@ -213,7 +214,7 @@ def _fetch_google_news(ticker: str, cutoff, limit: int = 5) -> list[dict]:
                 date_label = pub_dt.strftime("%Y-%m-%d %H:%M UTC")
             except Exception:
                 continue
-            results.append({"title": title, "date": date_label, "source": "Google News"})
+            results.append({"title": title, "date": date_label, "source": "Google News", "url": link})
             if len(results) >= limit:
                 break
         return results
@@ -267,13 +268,80 @@ def _fetch_finviz_news(ticker: str, cutoff, limit: int = 5) -> list[dict]:
                 date_label = pub_dt.strftime("%Y-%m-%d %H:%M UTC")
             except Exception:
                 continue
-            results.append({"title": title, "date": date_label, "source": "Finviz"})
+            link = title_tag.get("href", "") if title_tag else ""
+            results.append({"title": title, "date": date_label, "source": "Finviz", "url": link})
             if len(results) >= limit:
                 break
         return results
     except Exception as e:
         logger.warning(f"  Finviz news fetch failed for {ticker}: {e}")
         return []
+
+
+def verify_catalyst_accuracy(
+    ticker: str,
+    category: str,
+    reasoning: str,
+    google_headlines: list[dict],
+    finviz_headlines: list[dict],
+) -> dict:
+    """Second Gemini call: Skeptical Auditor cross-checks facts across two independent sources."""
+    fallback = {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": ["Finviz", "Google News"],
+        "primary_claim": reasoning,
+        "discrepancy_note": "",
+    }
+    if not GEMINI_API_KEY:
+        return fallback
+
+    def fmt(items):
+        return "\n".join(f"  [{i+1}] ({h['source']}) {h['title']}" for i, h in enumerate(items)) or "  (none)"
+
+    prompt = f"""You are a Skeptical Auditor fact-checking pre-market news for {ticker}.
+
+PRIMARY CATALYST CLAIM (from initial analysis):
+Category: {category}
+Summary: {reasoning}
+
+SOURCE A — Finviz News:
+{fmt(finviz_headlines)}
+
+SOURCE B — Google News:
+{fmt(google_headlines)}
+
+Your job:
+1. Identify the single most specific factual claim (a dollar amount, percentage, date, approval decision, etc.) in the catalyst summary.
+2. Check whether BOTH sources confirm this claim with matching specifics. Exact number agreement is required for "Verified".
+3. If the news mentions a specific number (e.g. "$1.6T deal" or "beat by 22%"), look carefully — is it consistent across sources, or could it be an old headline, typo, or exaggeration?
+4. If only ONE source mentions the claim or sources give conflicting numbers, mark as Discrepancy.
+5. If neither source contains enough detail to confirm the claim, mark as Unconfirmed.
+
+Respond ONLY with this JSON (no extra text):
+{{"status": "Verified|Discrepancy|Unconfirmed", "confidence_score": <0-100>, "sources_consulted": ["Finviz", "Google News"], "primary_claim": "<the specific claim being verified>", "discrepancy_note": "<only populated when status=Discrepancy, e.g. Source A says $200M, Source B says $20M>"}}"""
+
+    try:
+        from google import genai
+        client = genai.Client(api_key=GEMINI_API_KEY)
+        response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+        text = response.text.strip()
+        if text.startswith("```"):
+            text = re.sub(r"^```(?:json)?", "", text).rstrip("`").strip()
+        result = json.loads(text)
+        status = result.get("status", "Unconfirmed")
+        if status not in ("Verified", "Discrepancy", "Unconfirmed"):
+            status = "Unconfirmed"
+        return {
+            "status": status,
+            "confidence_score": max(0, min(100, int(result.get("confidence_score", 50)))),
+            "sources_consulted": result.get("sources_consulted", ["Finviz", "Google News"]),
+            "primary_claim": result.get("primary_claim", reasoning),
+            "discrepancy_note": result.get("discrepancy_note", ""),
+        }
+    except Exception as e:
+        logger.warning(f"  Verification failed for {ticker}: {e}")
+        return fallback
 
 
 def fetch_news_headlines(ticker: str) -> list[dict]:
@@ -484,6 +552,7 @@ def main():
     logger.info(f"  Found {len(gappers)} gappers")
 
     output = []
+    import datetime as dt
     for stock in gappers:
         ticker = stock["ticker"]
         logger.info(f"  Analyzing {ticker} (gap={stock['gap_pct']}% rvol={stock['rvol']}x)...")
@@ -491,8 +560,19 @@ def main():
         # Finviz fundamentals (float, short interest, daily %)
         fv = fetch_finviz_data(ticker)
 
-        # News headlines
-        headlines = fetch_news_headlines(ticker)
+        # News headlines — keep sources separate for verification
+        cutoff = datetime.now(timezone.utc) - dt.timedelta(hours=24)
+        google_headlines = _fetch_google_news(ticker, cutoff, limit=5)
+        finviz_headlines = _fetch_finviz_news(ticker, cutoff, limit=5)
+        seen = set()
+        headlines = []
+        for h in google_headlines + finviz_headlines:
+            key = h["title"][:60].lower()
+            if key not in seen:
+                seen.add(key)
+                headlines.append(h)
+        headlines.sort(key=lambda x: x["date"], reverse=True)
+        headlines = headlines[:8]
 
         # Last earnings date (to prevent misclassification of old earnings news)
         last_earnings_date = fetch_last_earnings_date(ticker)
@@ -500,15 +580,26 @@ def main():
         # AI analysis (includes finviz_theme classification)
         analysis = analyze_with_gemini(ticker, headlines, stock["rvol"], last_earnings_date)
 
+        # Fact-check verification (Skeptical Auditor — second Gemini call)
+        logger.info(f"  Verifying catalyst for {ticker}...")
+        verification = verify_catalyst_accuracy(
+            ticker,
+            analysis.get("category", "Others"),
+            analysis.get("reasoning", ""),
+            google_headlines,
+            finviz_headlines,
+        )
+
         time.sleep(1)  # rate limit
         output.append({
             **stock,
             **analysis,
-            "headlines":    [h["title"] if isinstance(h, dict) else h for h in headlines[:3]],
+            "headlines":    [{"title": h["title"], "source": h.get("source",""), "url": h.get("url","")} for h in headlines[:5]],
             "float_shares": fv.get("float_shares"),
             "short_float":  fv.get("short_float"),
             "daily_pct":    fv.get("daily_pct"),
             "industry":     analysis.get("finviz_theme", "—"),
+            "verification": verification,
         })
 
     result = {

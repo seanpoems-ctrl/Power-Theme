@@ -547,9 +547,8 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
   };
 
   return (
-    <><div className="flex">
-    <div className="flex-1"></div>
-    <div className="p-4 bg-zinc-900/60 rounded-xl border border-zinc-800/60">
+    <>
+    <div className="p-4 bg-zinc-900/60 rounded-xl border border-zinc-800/60 w-full min-w-0">
       <div className="flex items-center mb-3 gap-2">
         <BarChart3 size={13} className="text-blue-400 flex-shrink-0"/>
         <span className="text-xs font-semibold text-zinc-300 whitespace-nowrap">Theme Leaderboard</span>
@@ -570,7 +569,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
           ))}
         </div>
       </div>
-      <div className="overflow-y-auto overflow-x-auto" style={{ maxHeight: '420px' }}>
+      <div className="overflow-y-auto overflow-x-auto" style={{ maxHeight: '440px' }}>
         <table className="w-full text-left">
           <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
             <tr className="border-b border-zinc-800/60">
@@ -621,7 +620,9 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
           </tbody>
         </table>
       </div>
-    </div></div>{themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect}/>}</>
+    </div>
+    {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect}/>}
+    </>
   );
 };
 
@@ -1051,6 +1052,50 @@ const gradeStyle = (g) => {
   return "text-red-400 border-red-500/40 bg-red-500/10";
 };
 
+const VerificationBadge = ({ verification, headlines }) => {
+  const [show, setShow] = useState(false);
+  if (!verification) return null;
+  const { status, confidence_score, primary_claim, discrepancy_note } = verification;
+
+  const cfg = {
+    Verified:    { icon: "✓", color: "text-emerald-400", bg: "bg-emerald-500/15 border-emerald-500/30", label: "Verified" },
+    Discrepancy: { icon: "⚠", color: "text-amber-400",   bg: "bg-amber-500/15 border-amber-500/30",   label: "Discrepancy" },
+    Unconfirmed: { icon: "✕", color: "text-red-400",     bg: "bg-red-500/15 border-red-500/30",       label: "Unconfirmed" },
+  }[status] || { icon: "?", color: "text-zinc-500", bg: "bg-zinc-700/20 border-zinc-600/30", label: status };
+
+  return (
+    <div className="relative inline-block">
+      <button
+        onMouseEnter={() => setShow(true)}
+        onMouseLeave={() => setShow(false)}
+        className={`inline-flex items-center gap-0.5 px-1 py-0.5 rounded border text-[10px] font-bold ${cfg.color} ${cfg.bg}`}
+      >
+        {cfg.icon}
+      </button>
+      {show && (
+        <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-72 bg-zinc-900 border border-zinc-700 rounded-lg shadow-2xl p-3 z-50 text-left">
+          <div className={`text-[10px] font-bold mb-1 ${cfg.color}`}>{cfg.icon} {cfg.label} · {confidence_score}% confidence</div>
+          {primary_claim && <div className="text-[10px] text-zinc-300 mb-1.5 leading-snug">"{primary_claim}"</div>}
+          {discrepancy_note && <div className="text-[10px] text-amber-300 mb-1.5 leading-snug">⚠ {discrepancy_note}</div>}
+          {headlines?.length > 0 && (
+            <div className="border-t border-zinc-800 pt-1.5 space-y-1">
+              <div className="text-[9px] text-zinc-600 uppercase tracking-widest mb-1">Sources</div>
+              {headlines.map((h, i) => (
+                <div key={i} className="text-[10px] text-zinc-400 leading-snug">
+                  <span className="text-zinc-600">[{h.source}]</span>{" "}
+                  {h.url
+                    ? <a href={h.url} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">{h.title}</a>
+                    : h.title}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const DailyChg = ({ val }) => {
   if (val == null) return <span className="text-zinc-600 text-xs">—</span>;
   const pos = val >= 0;
@@ -1099,8 +1144,11 @@ const VixGauge = ({ initialVix }) => {
   const needlePath = `M${f(ntx)} ${f(nty)} L${f(nb1x)} ${f(nb1y)} L${f(nb2x)} ${f(nb2y)}Z`;
   const da = initialVix != null ? v2a(initialVix) : null;
 
+  const gaugeColW = 210;
+  const expectedMovePct = vix / 16;
+
   return (
-    <div className="mb-4 px-4 pt-3 pb-3 bg-zinc-900/60 border border-zinc-800/50 rounded-xl">
+    <div className="px-5 pt-4 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl">
 
       {/* Header */}
       <div className="flex items-center justify-between mb-1">
@@ -1110,9 +1158,10 @@ const VixGauge = ({ initialVix }) => {
         </div>
       </div>
 
-      {/* Gauge SVG + Zone info side by side */}
+      {/* Left: gauge + slider under dial (matches reference); right: zone info */}
       <div className="flex items-start gap-3">
-        <svg viewBox="0 0 400 215" className="flex-shrink-0 h-auto block" style={{ overflow: 'visible', width: '210px' }}>
+        <div className="flex flex-col flex-shrink-0" style={{ width: gaugeColW }}>
+        <svg viewBox="0 0 400 215" className="h-auto block w-full" style={{ overflow: 'visible' }}>
           <defs>
             <filter id="vg-needle-shadow" x="-50%" y="-20%" width="200%" height="140%">
               <feGaussianBlur stdDeviation="2" result="b"/>
@@ -1198,60 +1247,239 @@ const VixGauge = ({ initialVix }) => {
             fontFamily="system-ui,sans-serif">VIX</text>
         </svg>
 
-        {/* Zone info */}
-        <div className="flex-1 mt-4 px-3 py-2.5 rounded-lg border transition-colors duration-300"
-          style={{ background: '#1a1a1a', borderColor: active.color + '28' }}>
-          <div className="flex items-baseline gap-2 mb-0.5">
-            <span className="text-[11px] font-bold uppercase tracking-wider transition-colors duration-300"
-              style={{ color: active.color }}>{active.name}</span>
-            <span className="text-[9px] font-mono" style={{ color: '#363636' }}>{active.range}</span>
+        <div className="flex items-center gap-2 mt-2 w-full min-w-0">
+          <span className="text-[9px] text-zinc-700 font-mono shrink-0">0</span>
+          <input type="range" min="0" max="45" step="0.5" value={vix}
+            onChange={e => setVix(parseFloat(e.target.value))}
+            className="flex-1 min-w-0 accent-zinc-400 h-1 cursor-pointer"/>
+          <span className="text-[9px] text-zinc-700 font-mono shrink-0">45</span>
+        </div>
+        {initialVix != null && vix !== initialVix && (
+          <button onClick={() => setVix(initialVix)}
+            className="mt-1.5 w-full text-center py-0.5 text-[9px] font-medium rounded border border-zinc-700/60 bg-zinc-800/60 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600 transition-colors">
+            Restore {initialVix.toFixed(1)}
+          </button>
+        )}
+        </div>
+
+        {/* Zone info — 整卡一併上移（mt），勿對下半用負 margin 才不會疊字 */}
+        <div className="flex-1 min-w-0 mt-0 px-3 py-2 rounded-lg border transition-colors duration-300"
+          style={{ background: '#1a1a1a', borderColor: active.color + '55', marginTop: '-18px' }}>
+          <div className="border-b border-zinc-800/70 pb-2">
+            <div className="text-[9px] font-semibold text-zinc-500 uppercase tracking-widest mb-1.5">Expected Move</div>
+            <div className="flex flex-nowrap items-baseline gap-x-2 min-w-0">
+              <span className="text-[10px] text-zinc-500 font-mono shrink-0">$SPX</span>
+              <span className="text-sm font-bold font-mono text-zinc-100 tabular-nums leading-none">
+                ±{expectedMovePct.toFixed(2)}%
+              </span>
+            </div>
           </div>
-          <div className="text-[11px] text-zinc-500 leading-relaxed">{active.impact}</div>
+          <div className="pt-1.5 space-y-1">
+            <div className="flex flex-col gap-0.5">
+              <span className="text-[11px] font-bold uppercase tracking-wider leading-tight transition-colors duration-300"
+                style={{ color: active.color }}>{active.name}</span>
+              <span className="text-[9px] font-mono uppercase leading-tight" style={{ color: active.color, opacity: 0.85 }}>{active.range}</span>
+            </div>
+            <div className="text-[11px] text-zinc-500 leading-relaxed">{active.impact}</div>
+          </div>
         </div>
       </div>
-
-      {/* Slider */}
-      <div className="flex items-center gap-2 mt-2 w-[210px]">
-        <span className="text-[9px] text-zinc-700 font-mono">0</span>
-        <input type="range" min="0" max="45" step="0.5" value={vix}
-          onChange={e => setVix(parseFloat(e.target.value))}
-          className="flex-1 accent-zinc-500 h-1 cursor-pointer"/>
-        <span className="text-[9px] text-zinc-700 font-mono">45</span>
-      </div>
-      {initialVix != null && vix !== initialVix && (
-        <button onClick={() => setVix(initialVix)}
-          className="mt-1.5 w-[210px] text-center py-0.5 text-[9px] font-medium rounded border border-zinc-700/60 bg-zinc-800/60 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600 transition-colors">
-          Restore {initialVix.toFixed(1)}
-        </button>
-      )}
 
     </div>
   );
 };
 
-const MacroNews = ({ news = [] }) => {
-  if (!news.length) return null;
+/** Thematic Scanner 側欄：以 Market Brief（market_brief.json）取代原 macro_news 列表 */
+const ScannerBriefFeed = ({ briefData }) => {
+  if (!briefData) return (
+    <div className="px-5 pt-4 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex items-center justify-center" style={{ minHeight: 200 }}>
+      <span className="text-[10px] text-zinc-600">載入簡報中…</span>
+    </div>
+  );
+
+  const {
+    session, generated_at,
+    global_snapshot = [], global_indices = {},
+    macro_breadth = {}, reversal_signals = {},
+    mood = "", analysis = {}, error,
+  } = briefData;
+
+  const sessionEmoji = { "Pre-Market": "🌅", "Market Hours": "☀️", "Post-Market": "🌙" }[session] || "📊";
+  const priceLabel   = session === "Pre-Market" ? "Futures" : "Close";
+
+  const regimeCls = r => ({
+    Complacent:    "text-emerald-400",
+    "Yellow Flag": "text-amber-400",
+    Stress:        "text-red-400",
+  }[r] || "text-zinc-400");
+
+  const gradeCls = g => (g || "").startsWith("A")
+    ? "text-emerald-400 border-emerald-500/40 bg-emerald-500/10"
+    : (g || "").startsWith("B")
+    ? "text-amber-400 border-amber-500/40 bg-amber-500/10"
+    : "text-red-400 border-red-500/40 bg-red-500/10";
+
   return (
-    <div className="mt-3 px-4 pt-3 pb-3 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex flex-col flex-1 min-h-0">
-      <div className="flex items-center gap-2 mb-2">
-        <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest">Market-Moving News</span>
-        <span className="text-[9px] text-zinc-700">last 24h</span>
+    <div className="px-4 pt-4 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex flex-col flex-1 min-h-0">
+
+      {/* Header */}
+      <div className="flex items-center gap-1.5 mb-3 pb-2 border-b border-zinc-800/60">
+        <span className="text-sm">{sessionEmoji}</span>
+        <span className="text-[10px] font-bold text-zinc-300 uppercase tracking-wide">{session} Brief</span>
+        <span className="text-[9px] text-zinc-600 ml-auto">{generated_at}</span>
       </div>
-      <div className="overflow-y-auto space-y-2" style={{ maxHeight: '200px' }}>
-        {news.map((n, i) => (
-          <a key={i} href={n.url} target="_blank" rel="noopener noreferrer"
-            className="block group">
-            <div className="text-[11px] font-semibold text-zinc-300 group-hover:text-blue-400 leading-snug transition-colors line-clamp-1">
-              {n.title}
+
+      <div className="overflow-y-auto flex-1 space-y-3" style={{ maxHeight: "445px" }}>
+
+        {error && (
+          <div className="text-[10px] text-red-400 bg-red-500/10 rounded p-2">{String(error)}</div>
+        )}
+
+        {/* Mood */}
+        {mood && (
+          <div className="text-[10px] text-zinc-400 italic">Mood: <span className="text-zinc-300 not-italic font-medium">{mood}</span></div>
+        )}
+
+        {/* Reversal Banner */}
+        {reversal_signals.signal_detected && (
+          <div className="flex items-start gap-1.5 bg-amber-500/15 border border-amber-500/30 rounded p-2">
+            <span className="text-sm flex-shrink-0">🔥</span>
+            <div>
+              <div className="text-[10px] font-bold text-amber-400">[REVERSAL SIGNAL DETECTED]</div>
+              <div className="text-[9px] text-amber-300/70 mt-0.5">{reversal_signals.description}</div>
             </div>
-            {n.summary && (
-              <div className="text-[10px] text-zinc-600 mt-0.5 leading-snug line-clamp-1">
-                {n.summary}
+          </div>
+        )}
+
+        {/* 1. Global Snapshot */}
+        {global_snapshot.length > 0 && (
+          <div>
+            <div className="text-[9px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">1. Global Snapshot</div>
+            <table className="w-full text-[9px]">
+              <thead>
+                <tr className="text-zinc-600 border-b border-zinc-800/60">
+                  <th className="text-left py-0.5 font-medium">Asset</th>
+                  <th className="text-right py-0.5 font-medium">{priceLabel}</th>
+                  <th className="text-right py-0.5 font-medium">Chg</th>
+                  <th className="text-right py-0.5 font-medium">%</th>
+                </tr>
+              </thead>
+              <tbody>
+                {global_snapshot.map((row, i) => {
+                  const chg = row.change ?? 0;
+                  const isYield = row.label === "10Y Yield";
+                  const isVix   = row.label === "VIX";
+                  const pctDisp = row.zone_label || row.trend_label
+                    || (row.change_pct != null ? `${row.change_pct >= 0 ? "+" : ""}${row.change_pct.toFixed(2)}%` : "—");
+                  return (
+                    <tr key={i} className="border-b border-zinc-800/30 last:border-0">
+                      <td className="py-0.5 text-zinc-300 font-medium">{row.label}</td>
+                      <td className="py-0.5 text-right font-mono text-zinc-200">
+                        {row.price != null
+                          ? isYield ? `${row.price.toFixed(2)}%` : row.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                          : "—"}
+                      </td>
+                      <td className={`py-0.5 text-right font-mono ${chg >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                        {row.change != null ? `${chg >= 0 ? "+" : ""}${chg.toFixed(2)}` : "—"}
+                      </td>
+                      <td className={`py-0.5 text-right font-mono ${
+                        (row.zone_label || row.trend_label)
+                          ? (isVix && (row.zone_label || "").includes("Fear") ? "text-red-400" : isVix ? "text-amber-400" : chg >= 0 ? "text-amber-400" : "text-emerald-400")
+                          : (row.change_pct ?? 0) >= 0 ? "text-emerald-400" : "text-red-400"
+                      }`}>
+                        {pctDisp}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            {/* Global indices row */}
+            {Object.values(global_indices).some(g => g?.change_pct != null) && (
+              <div className="flex gap-2 mt-1.5 flex-wrap">
+                {Object.entries(global_indices).map(([k, g]) => g?.change_pct != null && (
+                  <span key={k} className="text-[9px]">
+                    <span className="text-zinc-600">{g.label?.split(" ")[0]}</span>
+                    <span className={`ml-0.5 font-mono ${g.change_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                      {g.change_pct >= 0 ? "+" : ""}{g.change_pct.toFixed(2)}%
+                    </span>
+                  </span>
+                ))}
               </div>
             )}
-            <div className="text-[9px] text-zinc-700 mt-0.5 font-mono">{n.date} · {n.source}</div>
-          </a>
-        ))}
+          </div>
+        )}
+
+        {/* 2. Macro Risk & Breadth */}
+        {(macro_breadth.credit_spread != null || macro_breadth.s5fi != null) && (
+          <div>
+            <div className="text-[9px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">2. Macro Risk &amp; Breadth</div>
+            <div className="space-y-1">
+              {macro_breadth.credit_spread != null && (
+                <div className="text-[10px] text-zinc-400">
+                  <span className="text-zinc-500">• Credit Spread (HY Master II): </span>
+                  <span className="text-zinc-200 font-mono">{macro_breadth.credit_spread.toFixed(2)}%</span>
+                  {macro_breadth.credit_regime && (
+                    <> <span className="text-zinc-600">|</span> <span className={`font-semibold ${regimeCls(macro_breadth.credit_regime)}`}>Regime: {macro_breadth.credit_regime}</span></>
+                  )}
+                </div>
+              )}
+              {macro_breadth.s5fi != null && (
+                <div className="text-[10px] text-zinc-400">
+                  <span className="text-zinc-500">• Market Breadth: </span>
+                  <span className="font-mono text-zinc-200">S5FI {macro_breadth.s5fi.toFixed(1)}%</span>
+                  {macro_breadth.mmth != null && (
+                    <> <span className="text-zinc-600">·</span> <span className="font-mono text-zinc-200">MMTH {macro_breadth.mmth.toFixed(1)}%</span></>
+                  )}
+                </div>
+              )}
+              {macro_breadth.breadth_status && (
+                <div className={`text-[10px] font-bold mt-0.5 ${
+                  macro_breadth.generational ? "text-orange-400" : macro_breadth.breadth_flush ? "text-red-400" : "text-amber-400"
+                }`}>
+                  • Status: [{macro_breadth.breadth_status}]
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* 3. Analysis & Lessons */}
+        {(analysis.analysis_para1 || analysis.analysis_para2) && (
+          <div>
+            <div className="text-[9px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">3. Analysis &amp; Lessons</div>
+            <div className="space-y-2">
+              {analysis.analysis_para1 && (
+                <p className="text-[10px] text-zinc-300 leading-relaxed">{analysis.analysis_para1}</p>
+              )}
+              {analysis.analysis_para2 && (
+                <p className="text-[10px] text-zinc-400 leading-relaxed">{analysis.analysis_para2}</p>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* 4. Ticker Intelligence */}
+        {analysis.ticker_intel?.length > 0 && (
+          <div>
+            <div className="text-[9px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">4. Ticker Intel</div>
+            <div className="space-y-1.5">
+              {analysis.ticker_intel.map((t, i) => (
+                <div key={i} className="flex gap-1.5 items-start">
+                  <span className={`text-[9px] font-bold px-1 py-0.5 rounded border flex-shrink-0 mt-0.5 ${gradeCls(t.grade)}`}>
+                    {t.grade}
+                  </span>
+                  <div>
+                    <span className="text-[10px] font-bold text-zinc-200 font-mono">${t.ticker}</span>
+                    {t.company && <span className="text-[9px] text-zinc-500 ml-1">({t.company})</span>}
+                    {t.reason && <p className="text-[9px] text-zinc-400 leading-snug mt-0.5">{t.reason}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
       </div>
     </div>
   );
@@ -1438,11 +1666,14 @@ const GapperScanner = () => {
                     {g.category}
                   </span>
                 </td>
-                {/* Grade */}
+                {/* Grade + Verification */}
                 <td className="py-2 px-1 text-center">
-                  {g.grade
-                    ? <span className={`text-[10px] font-bold px-1 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span>
-                    : <span className="text-zinc-600">—</span>}
+                  <div className="flex items-center justify-center gap-1">
+                    {g.grade
+                      ? <span className={`text-[10px] font-bold px-1 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span>
+                      : <span className="text-zinc-600">—</span>}
+                    <VerificationBadge verification={g.verification} headlines={g.headlines}/>
+                  </div>
                 </td>
                 {/* Reasoning */}
                 <td className="py-2 px-1.5 text-[11px] text-zinc-400 leading-relaxed align-middle whitespace-normal break-words">{g.reasoning}</td>
@@ -1533,9 +1764,27 @@ const SearchBar = ({ data, search, setSearch }) => {
   const [open, setOpen] = useState(false);
   const [allTickers, setAllTickers] = useState([]);
   const [livePrice, setLivePrice] = useState(null); // { price, change_pct } for non-scanner stocks
+  const [livePriceLoading, setLivePriceLoading] = useState(false);
+  const [priceCache, setPriceCache] = useState({});
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/prices.json`)
+      .then(r => r.json())
+      .then(setPriceCache)
+      .catch(() => {});
+  }, []);
   const [tickerHover, setTickerHover] = useState(null); // { ticker, rect } for TVPopup
   const [selectedTheme, setSelectedTheme] = useState(null); // theme name to expand stock list
   const [selectedSubTheme, setSelectedSubTheme] = useState(null); // subtheme name to expand stock list
+  const [searchHistory, setSearchHistory] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('searchHistory') || '[]'); } catch { return []; }
+  });
+
+  const saveToHistory = (term) => {
+    if (!term.trim()) return;
+    const next = [term, ...searchHistory.filter(h => h !== term)].slice(0, 8);
+    setSearchHistory(next);
+    localStorage.setItem('searchHistory', JSON.stringify(next));
+  };
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/stock_db.json`)
@@ -1640,20 +1889,53 @@ const SearchBar = ({ data, search, setSearch }) => {
     return { ...base, appearances: merged };
   })();
 
-  // Fetch live price from local price_api.py for any exact match
+  // Fetch live price: try local API first, fallback to Yahoo Finance
   useEffect(() => {
     setLivePrice(null);
     if (!fullResult) return;
     const ticker = fullResult.ticker;
+    let cancelled = false;
+    const fetchYahoo = () => {
+      setLivePriceLoading(true);
+      fetch(`https://query2.finance.yahoo.com/v7/finance/quote?symbols=${ticker}&fields=regularMarketPrice,regularMarketChangePercent`)
+        .then(r => r.json())
+        .then(d => {
+          if (cancelled) return;
+          const q = d?.quoteResponse?.result?.[0];
+          if (q?.regularMarketPrice != null) {
+            setLivePrice({ price: q.regularMarketPrice, change_pct: q.regularMarketChangePercent ?? null });
+          }
+        })
+        .catch(() => {
+          // fallback: v8 chart
+          fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=1d`)
+            .then(r => r.json())
+            .then(d => {
+              if (cancelled) return;
+              const meta = d?.chart?.result?.[0]?.meta;
+              if (meta?.regularMarketPrice != null) {
+                const price = meta.regularMarketPrice;
+                const prev = meta.chartPreviousClose || meta.previousClose;
+                setLivePrice({ price, change_pct: prev ? ((price - prev) / prev) * 100 : null });
+              }
+            })
+            .catch(() => {});
+        })
+        .finally(() => { if (!cancelled) setLivePriceLoading(false); });
+    };
     fetch(`http://localhost:5001/price/${ticker}`)
       .then(r => r.json())
       .then(d => {
-        if (d.price != null) setLivePrice({ price: d.price, change_pct: d.change_pct });
+        if (cancelled) return;
+        if (d.price != null) { setLivePrice({ price: d.price, change_pct: d.change_pct }); setLivePriceLoading(false); }
+        else fetchYahoo();
       })
-      .catch(() => {});
+      .catch(() => fetchYahoo());
+    return () => { cancelled = true; };
   }, [fullResult?.ticker]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const displayPrice = livePrice;
+  const cachedPrice = fullResult ? priceCache[fullResult.ticker] : null;
+  const displayPrice = livePrice || (fullResult?.price != null ? { price: fullResult.price, change_pct: fullResult.change_pct } : null) || cachedPrice;
 
   const showSuggestions = open && q.length >= 1 && !fullResult && suggestions.length > 0;
   const noMatch = open && q.length >= 2 && !fullResult && suggestions.length === 0;
@@ -1666,17 +1948,35 @@ const SearchBar = ({ data, search, setSearch }) => {
         value={search}
         onChange={e => { setSearch(e.target.value); setOpen(true); }}
         onFocus={() => setOpen(true)}
-        onBlur={() => setTimeout(() => { setOpen(false); setSelectedTheme(null); setSelectedSubTheme(null); }, 150)}
+        onKeyDown={e => { if (e.key === 'Enter' && search.trim()) saveToHistory(search.trim()); }}
+        onBlur={() => { if (search.trim()) saveToHistory(search.trim()); setTimeout(() => { setOpen(false); setSelectedTheme(null); setSelectedSubTheme(null); setTickerHover(null); }, 150); }}
         placeholder="Search ticker or company…"
         className="w-52 pl-7 pr-7 py-1.5 text-xs bg-zinc-800/60 border border-zinc-700/50 rounded-md text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-blue-500/50"
       />
       {search && <button onMouseDown={e => { e.preventDefault(); setSearch(""); setOpen(false); }} className="absolute right-2 top-1/2 -translate-y-1/2"><X size={11} className="text-zinc-500"/></button>}
 
+      {/* Search history dropdown */}
+      {open && q.length === 0 && searchHistory.length > 0 && (
+        <div className="absolute top-full right-0 mt-1.5 w-72 bg-zinc-900 border border-zinc-700/60 rounded-lg shadow-2xl z-50 py-1">
+          <div className="px-3 py-1 flex items-center justify-between">
+            <span className="text-[9px] text-zinc-600 uppercase tracking-widest">最近搜尋</span>
+            <button onMouseDown={e => { e.preventDefault(); setSearchHistory([]); localStorage.removeItem('searchHistory'); }} className="text-[9px] text-zinc-600 hover:text-zinc-400">清除</button>
+          </div>
+          {searchHistory.map(h => (
+            <button key={h} onMouseDown={e => { e.preventDefault(); setSearch(h); setOpen(true); }}
+              className="w-full flex items-center gap-2 px-3 py-1.5 hover:bg-zinc-800 text-left">
+              <Clock size={10} className="text-zinc-600 flex-shrink-0"/>
+              <span className="text-xs text-zinc-300">{h}</span>
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* Suggestions dropdown */}
       {showSuggestions && (
         <div className="absolute top-full right-0 mt-1.5 w-72 bg-zinc-900 border border-zinc-700/60 rounded-lg shadow-2xl z-50 py-1">
           {suggestions.map(s => (
-            <button key={s.ticker} onMouseDown={e => { e.preventDefault(); setSearch(s.ticker); setOpen(true); }}
+            <button key={s.ticker} onMouseDown={e => { e.preventDefault(); saveToHistory(s.ticker); setSearch(s.ticker); setOpen(true); }}
               className="w-full flex items-center gap-2 px-3 py-1.5 hover:bg-zinc-800 text-left">
               <span className="text-xs font-bold text-zinc-200 w-14 flex-shrink-0">{s.ticker}</span>
               <span className="text-[11px] text-zinc-500 truncate flex-1">{s.company}</span>
@@ -1689,26 +1989,28 @@ const SearchBar = ({ data, search, setSearch }) => {
       {/* Detail panel for exact match */}
       {open && fullResult && (
         <div id="search-result-panel" className="absolute top-full right-0 mt-1.5 w-72 bg-zinc-900 border border-zinc-700/60 rounded-lg shadow-2xl z-50 p-3 space-y-2">
-          <div className="flex items-baseline gap-2">
+          <div className="flex items-baseline gap-2 flex-wrap">
             <span
               className="text-sm font-bold text-zinc-100 cursor-default hover:text-blue-400 transition-colors"
               onMouseEnter={e => { const panel = e.currentTarget.closest('[class*="shadow-2xl"]') || e.currentTarget; setTickerHover({ ticker: fullResult.ticker, rect: panel.getBoundingClientRect() }); }}
               onMouseLeave={() => setTickerHover(null)}
             >{fullResult.ticker}</span>
-            {fullResult.company && <span className="text-[11px] text-zinc-500 truncate">{fullResult.company}</span>}
-          </div>
-          <div className="space-y-1.5">
+            {livePriceLoading && !displayPrice && (
+              <span className="text-xs text-zinc-600 animate-pulse">載入中…</span>
+            )}
             {displayPrice?.price != null && (
-              <div className="flex gap-2 text-xs">
-                <span className="text-zinc-500 w-16 flex-shrink-0">Price</span>
-                <span className="text-zinc-200">${displayPrice.price.toFixed(2)}</span>
+              <span className="flex items-baseline gap-1.5">
+                <span className="text-sm font-semibold text-zinc-200">${displayPrice.price.toFixed(2)}</span>
                 {displayPrice.change_pct != null && (
-                  <span className={`font-medium ${displayPrice.change_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                  <span className={`text-xs font-medium ${displayPrice.change_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {displayPrice.change_pct >= 0 ? '+' : ''}{displayPrice.change_pct.toFixed(2)}%
                   </span>
                 )}
-              </div>
+              </span>
             )}
+            {fullResult.company && <span className="text-[11px] text-zinc-500 truncate w-full">{fullResult.company}</span>}
+          </div>
+          <div className="space-y-1.5">
             {[{ label: "Sector", value: fullResult.sector }, { label: "Industry", value: fullResult.industry }].map(({ label, value }) => value ? (
               <div key={label} className="flex gap-2 text-xs">
                 <span className="text-zinc-500 w-16 flex-shrink-0">{label}</span>
@@ -1798,6 +2100,265 @@ const SearchBar = ({ data, search, setSearch }) => {
         </div>
       )}
       {tickerHover && <TVPopup ticker={tickerHover.ticker} anchorRect={tickerHover.rect}/>}
+    </div>
+  );
+};
+
+
+// ── Macro Risk Card (Market Intelligence) ─────────────────────────────────────
+
+const MacroRiskCard = () => {
+  const [intel, setIntel] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/market_intelligence.json?v=${Date.now()}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { setIntel(d); setLoading(false); })
+      .catch(() => setLoading(false));
+  }, []);
+
+  if (loading) return (
+    <div className="flex items-center justify-center py-20 text-zinc-500">
+      <RefreshCw size={16} className="animate-spin mr-2"/> Loading Market Intelligence…
+    </div>
+  );
+  if (!intel) return (
+    <div className="text-center py-20 text-zinc-600 text-sm">
+      No data — run <code className="text-zinc-400">python market_intelligence.py</code> first
+    </div>
+  );
+
+  const { indices = {}, credit = {}, breadth = {}, global: gl = {},
+          reversal_signals: rev = {}, analysis: ana = {}, session, generated_at } = intel;
+  const spy = indices.spy || {};
+  const qqq = indices.qqq || {};
+  const vix = indices.vix || {};
+  const hasReversal   = rev.signal_detected;
+  const isGenerational = breadth.generational_buy_zone;
+
+  const PctChange = ({ v }) => v == null ? <span className="text-zinc-600">—</span> : (
+    <span className={v >= 0 ? "text-emerald-400" : "text-red-400"}>{v >= 0 ? "+" : ""}{v.toFixed(2)}%</span>
+  );
+
+  const regimeCls = r => ({
+    Complacent:    "text-emerald-400 border-emerald-500/30 bg-emerald-500/10",
+    "Yellow Flag": "text-amber-400  border-amber-500/30  bg-amber-500/10",
+    Stress:        "text-red-400    border-red-500/30    bg-red-500/10",
+  }[r] || "text-zinc-400 border-zinc-700/40 bg-zinc-800/40");
+
+  return (
+    <div className="max-w-[1400px] mx-auto px-4 py-4 space-y-4">
+
+      {/* Header */}
+      <div className="flex items-center gap-3">
+        <Activity size={14} className="text-orange-400"/>
+        <span className="text-sm font-semibold text-zinc-200">Market Intelligence</span>
+        {session && (
+          <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium
+            ${session === "Pre-Market"
+              ? "bg-blue-500/15 border-blue-500/30 text-blue-400"
+              : session === "Post-Market"
+              ? "bg-violet-500/15 border-violet-500/30 text-violet-400"
+              : "bg-emerald-500/15 border-emerald-500/30 text-emerald-400"}`}>
+            {session}
+          </span>
+        )}
+        {generated_at && <span className="text-[10px] text-zinc-600 ml-auto">{generated_at}</span>}
+      </div>
+
+      {/* Reversal / Generational Buy Banner */}
+      {hasReversal && (
+        <div className={`flex items-center gap-3 rounded-lg border p-3
+          ${isGenerational
+            ? "bg-orange-500/20 border-orange-500/40"
+            : "bg-amber-500/15 border-amber-500/35"}`}>
+          <span className="text-2xl flex-shrink-0">{isGenerational ? "🔥" : "🕯"}</span>
+          <div>
+            <div className={`font-bold text-sm ${isGenerational ? "text-orange-400" : "text-amber-400"}`}>
+              {isGenerational ? "GENERATIONAL BUY ZONE DETECTED" : "[🔥 REVERSAL SIGNAL DETECTED]"}
+            </div>
+            {rev.signal_description && (
+              <div className="text-[11px] text-amber-300/70 mt-0.5">{rev.signal_description}</div>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* Index Cards */}
+      <div className="grid grid-cols-3 gap-3">
+        {[
+          { label: "SPY", d: spy },
+          { label: "QQQ", d: qqq },
+          { label: "VIX", d: vix, isVix: true },
+        ].map(({ label, d, isVix }) => !d.price ? null : (
+          <div key={label} className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg p-3">
+            <div className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider mb-1">{label}</div>
+            <div className="font-mono text-xl font-bold text-zinc-100">
+              {isVix ? d.price.toFixed(2) : `$${d.price.toFixed(2)}`}
+            </div>
+            <PctChange v={d.change_pct}/>
+            {!isVix && d.open != null && (
+              <div className="text-[9px] text-zinc-700 mt-1 font-mono">
+                O:{d.open.toFixed(2)} H:{d.high?.toFixed(2)} L:{d.low?.toFixed(2)}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Credit + Breadth + Global Row */}
+      <div className="grid grid-cols-3 gap-3">
+
+        {/* Credit Regime */}
+        <div className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg p-3">
+          <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">
+            Credit Risk · BAML HY
+          </div>
+          {credit.baml_hy != null ? (
+            <>
+              <div className="font-mono text-2xl font-bold text-zinc-100">{credit.baml_hy.toFixed(2)}%</div>
+              <span className={`text-[10px] font-bold px-2 py-0.5 rounded border mt-1 inline-block ${regimeCls(credit.regime)}`}>
+                {credit.regime}
+              </span>
+              {credit.date && <div className="text-[9px] text-zinc-700 mt-1.5">FRED · {credit.date}</div>}
+            </>
+          ) : <div className="text-zinc-600 text-xs">No data</div>}
+        </div>
+
+        {/* Breadth */}
+        <div className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg p-3">
+          <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">
+            Market Breadth
+          </div>
+          {breadth.s5fi != null ? (
+            <div className="space-y-2.5">
+              {[
+                { label: "S5FI  >50DMA",  val: breadth.s5fi },
+                { label: "MMTH >200DMA",  val: breadth.mmth },
+              ].map(({ label, val }) => val != null && (
+                <div key={label}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[10px] text-zinc-400 font-mono">{label}</span>
+                    <span className={`font-mono text-sm font-bold
+                      ${val < 10 ? "text-orange-400" : val < 20 ? "text-amber-400" : val < 40 ? "text-yellow-400" : "text-emerald-400"}`}>
+                      {val.toFixed(1)}%
+                    </span>
+                  </div>
+                  <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                    <div className={`h-full rounded-full transition-all
+                      ${val < 20 ? "bg-amber-500" : "bg-emerald-500"}`}
+                      style={{ width: `${val}%` }}/>
+                  </div>
+                </div>
+              ))}
+              {breadth.breadth_flush && (
+                <div className="text-[10px] text-amber-400 font-semibold mt-1">⚠ Breadth Flush Active</div>
+              )}
+            </div>
+          ) : <div className="text-zinc-600 text-xs">No data</div>}
+        </div>
+
+        {/* Global Indices */}
+        <div className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg p-3">
+          <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">Global</div>
+          <div className="space-y-2">
+            {[
+              { label: "Nikkei 225", key: "nikkei" },
+              { label: "DAX",        key: "dax" },
+              { label: "FTSE 100",   key: "ftse" },
+            ].map(({ label, key }) => {
+              const g = gl[key];
+              return (
+                <div key={key} className="flex items-center justify-between">
+                  <span className="text-[10px] text-zinc-400">{label}</span>
+                  {g?.change_pct != null
+                    ? <span className={`font-mono text-xs font-medium ${g.change_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                        {g.change_pct >= 0 ? "+" : ""}{g.change_pct.toFixed(2)}%
+                      </span>
+                    : <span className="text-zinc-600 text-xs">—</span>
+                  }
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Gemini Analysis */}
+      {ana && !ana.error && (
+        <div className="bg-zinc-900/40 border border-zinc-800/50 rounded-lg divide-y divide-zinc-800/60">
+
+          {ana.macro_section && (
+            <div className="p-4">
+              <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1.5 font-semibold">Macro Overview</div>
+              <p className="text-xs text-zinc-300 leading-relaxed">{ana.macro_section}</p>
+            </div>
+          )}
+
+          {(ana.analysis_para1 || ana.analysis_para2) && (
+            <div className="p-4">
+              <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">
+                Analysis &amp; Lessons
+              </div>
+              <div className="space-y-3">
+                {ana.analysis_para1 && (
+                  <p className="text-xs text-zinc-300 leading-relaxed">{ana.analysis_para1}</p>
+                )}
+                {ana.analysis_para2 && (
+                  <div>
+                    <div className="text-[9px] text-zinc-600 uppercase tracking-wide mb-1">Mechanical Catalyst</div>
+                    <p className="text-xs text-zinc-300 leading-relaxed">{ana.analysis_para2}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {ana.technical_signal && (
+            <div className={`p-4 ${hasReversal ? "bg-amber-500/5" : ""}`}>
+              <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1.5 font-semibold">
+                Technical Signal
+              </div>
+              <p className={`text-xs leading-relaxed ${hasReversal ? "text-amber-300" : "text-zinc-400"}`}>
+                {ana.technical_signal}
+              </p>
+            </div>
+          )}
+
+          {ana.ticker_intel && (
+            <div className="p-4">
+              <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">
+                Ticker Intel
+              </div>
+              <div className="grid grid-cols-2 gap-2">
+                {(ana.ticker_intel.a_grade || []).map((t, i) => (
+                  <div key={i} className="bg-emerald-500/10 border border-emerald-500/20 rounded p-2 flex gap-2 items-start">
+                    <span className="text-[9px] font-bold text-emerald-500 border border-emerald-500/40 rounded px-1 mt-0.5 flex-shrink-0">A</span>
+                    <div>
+                      <div className="font-mono text-xs font-bold text-zinc-200">{t.ticker}</div>
+                      <div className="text-[10px] text-zinc-400 leading-tight mt-0.5">{t.reason}</div>
+                    </div>
+                  </div>
+                ))}
+                {(ana.ticker_intel.c_grade || []).map((t, i) => (
+                  <div key={i} className="bg-red-500/10 border border-red-500/20 rounded p-2 flex gap-2 items-start">
+                    <span className="text-[9px] font-bold text-red-400 border border-red-500/40 rounded px-1 mt-0.5 flex-shrink-0">C</span>
+                    <div>
+                      <div className="font-mono text-xs font-bold text-zinc-200">{t.ticker}</div>
+                      <div className="text-[10px] text-zinc-400 leading-tight mt-0.5">{t.reason}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+        </div>
+      )}
+      {ana?.error && (
+        <div className="text-red-400 text-xs bg-red-500/10 border border-red-500/20 rounded p-3">{ana.error}</div>
+      )}
     </div>
   );
 };
@@ -2089,7 +2650,7 @@ const MomentumCockpit = () => {
   );
 };
 
-// ── Market Brief Panel ──────────────────────────────────────────────────────
+// ── Market Brief Panel (RSS 全文 + Gemini：可信度、交叉驗證、突破單建議) ──
 const MarketBriefPanel = ({ data }) => {
   if (!data) {
     return (
@@ -2101,7 +2662,7 @@ const MarketBriefPanel = ({ data }) => {
     );
   }
 
-  const { generated_at, session, market_data: md, brief, article_count } = data;
+  const { generated_at, session, brief, article_count, fulltext_articles, fulltext_success_count } = data;
   const b = brief || {};
 
   const renderBold = (text) => {
@@ -2112,66 +2673,102 @@ const MarketBriefPanel = ({ data }) => {
     );
   };
 
-  const sentimentColor = b.sentiment === "Bullish"
-    ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
-    : b.sentiment === "Bearish"
-    ? "bg-red-500/20 text-red-300 border-red-500/30"
-    : "bg-zinc-700/40 text-zinc-300 border-zinc-600/40";
+  const credStyle = (c) => {
+    const x = (c || "").toLowerCase();
+    if (x === "high") return "bg-emerald-500/15 text-emerald-300 border-emerald-500/35";
+    if (x === "low") return "bg-red-500/15 text-red-300 border-red-500/35";
+    return "bg-amber-500/15 text-amber-200 border-amber-500/35";
+  };
 
-  const sentimentDot = b.sentiment === "Bullish" ? "bg-emerald-400"
-    : b.sentiment === "Bearish" ? "bg-red-400" : "bg-zinc-400";
-
-  const vixColor = md?.vix > 20 ? "text-red-400" : "text-emerald-400";
-  const chgColor = v => v == null ? "text-zinc-500" : v >= 0 ? "text-emerald-400" : "text-red-400";
-  const fmtChg = v => v == null ? "—" : `${v >= 0 ? "+" : ""}${v.toFixed(2)}%`;
+  const isPendingSetup = b.pending_setup === true;
+  const isLegacyBrief = !b.error && !isPendingSetup && !b.top_market_views && (b.macro_news?.length > 0 || b.sentiment);
 
   return (
     <div className="max-w-[1400px] mx-auto px-4 py-6">
-      {/* Header */}
       <div className="flex flex-wrap items-center gap-3 mb-5">
-        <h2 className="text-base font-bold text-zinc-100">
-          {session === "Pre-Market" ? "Pre-Market Brief" : "Post-Market Brief"}
-        </h2>
-        {b.sentiment && (
-          <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-full border ${sentimentColor}`}>
-            <span className={`w-1.5 h-1.5 rounded-full ${sentimentDot}`}/>
-            {b.sentiment}
-          </span>
-        )}
-        {b.sentiment_reason && <span className="text-xs text-zinc-400 flex-1">{b.sentiment_reason}</span>}
-        <span className="text-[11px] text-zinc-500 ml-auto">{generated_at} · {article_count} articles</span>
+        <span className="text-[11px] text-zinc-500">
+          {generated_at}
+          {article_count != null && ` · RSS ${article_count} 則`}
+          {fulltext_articles != null && fulltext_success_count != null
+            && ` · 全文 ${fulltext_success_count}/${fulltext_articles} 篇`}
+        </span>
       </div>
 
-      {/* Market data cards */}
-      {md && (
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-5">
-          <div className="bg-zinc-900 border border-zinc-800/60 rounded-lg px-4 py-3">
-            <div className="text-[10px] text-zinc-500 mb-1">VIX</div>
-            <div className={`text-lg font-bold font-mono ${vixColor}`}>{md.vix?.toFixed(2)}</div>
-            <div className="text-[10px] text-zinc-500 mt-0.5">{md.vix > 20 ? "Elevated fear" : "Low fear"}</div>
-          </div>
-          <div className="bg-zinc-900 border border-zinc-800/60 rounded-lg px-4 py-3">
-            <div className="text-[10px] text-zinc-500 mb-1">SPY</div>
-            <div className="text-lg font-bold font-mono text-zinc-100">${md.spy?.toFixed(2)}</div>
-            <div className={`text-[11px] font-mono mt-0.5 ${chgColor(md.spy_chg)}`}>{fmtChg(md.spy_chg)}</div>
-          </div>
-          <div className="bg-zinc-900 border border-zinc-800/60 rounded-lg px-4 py-3">
-            <div className="text-[10px] text-zinc-500 mb-1">QQQ</div>
-            <div className="text-lg font-bold font-mono text-zinc-100">${md.qqq?.toFixed(2)}</div>
-            <div className={`text-[11px] font-mono mt-0.5 ${chgColor(md.qqq_chg)}`}>{fmtChg(md.qqq_chg)}</div>
-          </div>
-          <div className="bg-zinc-900 border border-zinc-800/60 rounded-lg px-4 py-3">
-            <div className="text-[10px] text-zinc-500 mb-1">10Y Yield</div>
-            <div className="text-lg font-bold font-mono text-amber-400">{md.yield_10y?.toFixed(2)}%</div>
-            <div className="text-[10px] text-zinc-500 mt-0.5">US Treasury</div>
+      {isPendingSetup && (
+        <div className="text-sm text-zinc-300 bg-zinc-800/50 border border-zinc-600/50 rounded-lg p-4 mb-5 leading-relaxed">
+          {b.pending_message || "尚未產生簡報。請設定 GEMINI_API_KEY 並執行 python market_brief.py。"}
+        </div>
+      )}
+      {b.error && !isPendingSetup && (
+        <div className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-5">
+          分析錯誤：{b.error}
+        </div>
+      )}
+
+      {isLegacyBrief && (
+        <p className="text-xs text-amber-400/90 bg-amber-500/10 border border-amber-500/25 rounded-lg px-3 py-2 mb-5">
+          此檔為舊版格式。請重新執行 <code className="text-amber-200">python market_brief.py</code> 以產生新聞全文分析與突破單建議。
+        </p>
+      )}
+
+      {/* 交叉驗證 */}
+      {b.cross_check_note && (
+        <div className="mb-5 bg-zinc-900/80 border border-zinc-700/50 rounded-xl p-4">
+          <h3 className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">交叉驗證</h3>
+          <p className="text-sm text-zinc-300 leading-relaxed">{b.cross_check_note}</p>
+        </div>
+      )}
+
+      {/* 三大市場觀點 */}
+      {b.top_market_views?.length > 0 && (
+        <div className="mb-5">
+          <h3 className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-3">波動主因（精簡）</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            {b.top_market_views.map((line, i) => (
+              <div key={i} className="bg-zinc-900 border border-zinc-800/60 rounded-lg p-4">
+                <div className="text-[10px] font-mono text-zinc-600 mb-1">#{i + 1}</div>
+                <p className="text-sm text-zinc-200 leading-snug">{line}</p>
+              </div>
+            ))}
           </div>
         </div>
       )}
 
-      {/* Macro News */}
-      {b.macro_news?.length > 0 && (
+      {/* 突破單建議 */}
+      {b.breakout_trading_advice && (
+        <div className="mb-5 rounded-xl border border-amber-500/30 bg-amber-500/5 p-4">
+          <h3 className="text-[10px] font-semibold text-amber-400/90 uppercase tracking-wider mb-2">突破單建議</h3>
+          <p className="text-sm text-zinc-200 leading-relaxed whitespace-pre-wrap">{renderBold(b.breakout_trading_advice)}</p>
+        </div>
+      )}
+
+      {/* 各則可信度 */}
+      {b.articles_reviewed?.length > 0 && (
         <div className="mb-5">
-          <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">Macro News</h3>
+          <h3 className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-3">新聞可信度（逐則）</h3>
+          <div className="space-y-2">
+            {b.articles_reviewed.map((row, i) => (
+              <div key={i} className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg px-3 py-2.5 flex flex-wrap gap-2 items-start">
+                <span className={`text-[9px] font-bold uppercase px-2 py-0.5 rounded border shrink-0 ${credStyle(row.credibility)}`}>
+                  {row.credibility || "—"}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="text-[10px] text-zinc-500 mb-0.5">{row.source}</div>
+                  <div className="text-xs font-medium text-zinc-200 leading-snug">{row.title}</div>
+                  {row.credibility_note && (
+                    <p className="text-[11px] text-zinc-500 mt-1 leading-relaxed">{row.credibility_note}</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* 舊版 fallback 顯示 */}
+      {isLegacyBrief && b.macro_news?.length > 0 && (
+        <div className="mb-5">
+          <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">Macro（舊版）</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {b.macro_news.map((item, i) => (
               <div key={i} className="bg-zinc-900 border border-zinc-800/60 rounded-lg p-4">
@@ -2180,41 +2777,6 @@ const MarketBriefPanel = ({ data }) => {
               </div>
             ))}
           </div>
-        </div>
-      )}
-
-      {/* Sector Focus */}
-      {b.sector_themes?.length > 0 && (
-        <div className="mb-5">
-          <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">Sector Focus</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {b.sector_themes.map((s, i) => (
-              <div key={i} className="bg-zinc-900 border border-zinc-800/60 rounded-lg p-4">
-                <div className="text-sm font-bold text-zinc-100 mb-1">{s.theme}</div>
-                <p className="text-xs text-zinc-400 leading-relaxed">{s.reason}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Key Levels */}
-      {b.key_levels && (
-        <div className="bg-zinc-900 border border-zinc-800/60 rounded-lg p-4 flex flex-wrap gap-6">
-          <div>
-            <div className="text-[10px] text-zinc-500 mb-1">SPY Support Level</div>
-            <div className="text-sm font-bold font-mono text-zinc-100">${b.key_levels.spy_support}</div>
-          </div>
-          <div className="flex-1">
-            <div className="text-[10px] text-zinc-500 mb-1">Today's Catalyst</div>
-            <div className="text-sm text-zinc-200">{b.key_levels.catalyst_today}</div>
-          </div>
-        </div>
-      )}
-
-      {b.error && (
-        <div className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg p-4 mt-3">
-          Analysis error: {b.error}
         </div>
       )}
     </div>
@@ -2379,8 +2941,8 @@ const filtered = useMemo(() => {
                 <button onClick={() => setTab("analyst")} className={`px-3 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1 ${tab === "analyst" ? "bg-violet-500/25 text-violet-300 border border-violet-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
                   <FlaskConical size={11}/> Analyst Cockpit
                 </button>
-                <button onClick={() => setTab("brief")} className={`px-3 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1 ${tab === "brief" ? "bg-amber-500/25 text-amber-300 border border-amber-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
-                  <Landmark size={11}/> Market Brief
+                <button onClick={() => setTab("intel")} className={`px-3 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1 ${tab === "intel" ? "bg-orange-500/25 text-orange-300 border border-orange-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
+                  <Activity size={11}/> Market Intel
                 </button>
               </div>
               {data && fetchedAt && (
@@ -2456,12 +3018,14 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "analyst" ? <MomentumCockpit/> : tab === "brief" ? <MarketBriefPanel data={briefData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
+      {tab === "intel" ? <MacroRiskCard/> : tab === "analyst" ? <MomentumCockpit/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
         <div className="max-w-[1400px] mx-auto px-4 py-4">
-          <div className="flex gap-4 items-stretch mb-2">
-            <div className="w-[520px] flex-shrink-0 flex flex-col">
+          <div className="flex gap-4 items-start mb-2">
+            <div className="w-[420px] flex-shrink-0">
               <VixGauge initialVix={data?.vix}/>
-              <MacroNews news={data?.macro_news || []}/>
+            </div>
+            <div className="w-[280px] flex-shrink-0 self-stretch">
+              <ScannerBriefFeed briefData={briefData}/>
             </div>
             <div className="flex-1 min-w-0">
               {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}

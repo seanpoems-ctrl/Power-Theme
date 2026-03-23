@@ -1,4 +1,4 @@
-name: Market Brief (AM + PM)
+name: Market Intelligence Engine
 
 on:
   schedule:
@@ -7,9 +7,9 @@ on:
   workflow_dispatch: {}
 
 jobs:
-  market-brief:
+  market-intel:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     permissions:
       contents: write
       pages: write
@@ -28,7 +28,7 @@ jobs:
       - name: Install deps
         run: |
           pip install requests yfinance pandas python-dotenv google-genai \
-                      tradingview-screener exchange-calendars
+                      tradingview-screener exchange-calendars beautifulsoup4
 
       - name: Check trading day
         id: trading_day
@@ -42,17 +42,17 @@ jobs:
               f.write(f"is_trading_day={'true' if is_session else 'false'}\n")
           EOF
 
-      - name: Run Market Brief
+      - name: Run Market Intelligence Engine
         if: steps.trading_day.outputs.is_trading_day == 'true'
-        run: python market_brief.py
+        run: python market_intelligence.py
         env:
-          GEMINI_API_KEY:     ${{ secrets.GEMINI_API_KEY }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
+          GEMINI_API_KEY:      ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN:  ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:    ${{ secrets.TELEGRAM_CHAT_ID }}
 
       - name: Build React app
         if: steps.trading_day.outputs.is_trading_day == 'true'
-        run: npm run build
+        run: npm ci && npm run build
         env:
           CI: false
 

@@ -1099,49 +1099,136 @@ def _elite_status(price, sma10, sma20, sma50, sma200, rsi, breadth) -> str:
     return "Neutral"
 
 
-def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
-    """Return price action metrics + Elite Regime status for an index ETF."""
+# SPY / QQQ / IWM 指數條用 TradingView Scanner（與 VIX 同源）；失敗時回退 yfinance
+_TV_INDEX_SYMBOL = {"SPY": "AMEX:SPY", "QQQ": "NASDAQ:QQQ", "IWM": "AMEX:IWM"}
+_TV_SCAN_URL = "https://scanner.tradingview.com/america/scan"
+
+
+def _fetch_tradingview_index_snapshot(tv_symbol: str) -> dict[str, float] | None:
+    """Single-row snapshot: close, change%, RSI, SMAs, EMAs from TradingView."""
+    try:
+        resp = requests.post(
+            _TV_SCAN_URL,
+            json={
+                "symbols": {"tickers": [tv_symbol]},
+                "columns": [
+                    "close",
+                    "change",
+                    "RSI",
+                    "SMA10",
+                    "SMA20",
+                    "SMA50",
+                    "SMA200",
+                    "EMA10",
+                    "EMA20",
+                ],
+            },
+            headers={"Content-Type": "application/json"},
+            timeout=12,
+        )
+        resp.raise_for_status()
+        rows = resp.json().get("data") or []
+        if not rows or not rows[0].get("d"):
+            return None
+        d = rows[0]["d"]
+        if len(d) < 9:
+            return None
+        keys = (
+            "price",
+            "change_pct",
+            "rsi14",
+            "sma10",
+            "sma20",
+            "sma50",
+            "sma200",
+            "ema10",
+            "ema20",
+        )
+        out: dict[str, float] = {}
+        for k, v in zip(keys, d):
+            if v is None:
+                return None
+            out[k] = float(v)
+        return out
+    except Exception as e:
+        logger.warning(f"  TradingView index scan failed [{tv_symbol}]: {e}")
+        return None
+
+
+def _fetch_market_indicators_yfinance(ticker: str, breadth: float | None = None) -> dict:
+    """Legacy path: 1y daily history from yfinance (SMA200 slope + EMA cross persistence)."""
     try:
         import yfinance as yf
+
         hist = yf.Ticker(ticker).history(period="1y", interval="1d")
         if hist.empty or len(hist) < 50:
             return {}
         closes = [float(c) for c in hist["Close"].tolist()]
         price = closes[-1]
-        sma10  = sum(closes[-10:]) / 10  if len(closes) >= 10  else None
-        sma20  = sum(closes[-20:]) / 20  if len(closes) >= 20  else None
-        sma50  = sum(closes[-50:]) / 50  if len(closes) >= 50  else None
+        sma10 = sum(closes[-10:]) / 10 if len(closes) >= 10 else None
+        sma20 = sum(closes[-20:]) / 20 if len(closes) >= 20 else None
+        sma50 = sum(closes[-50:]) / 50 if len(closes) >= 50 else None
         sma200 = sum(closes[-200:]) / 200 if len(closes) >= 200 else None
-        # 200SMA slope: compare current vs 20 trading days ago
         sma200_20d = sum(closes[-220:-20]) / 200 if len(closes) >= 220 else None
-        ema10      = _ema(closes, 10)
-        ema20      = _ema(closes, 20)
+        ema10 = _ema(closes, 10)
+        ema20 = _ema(closes, 20)
         ema10_prev = _ema(closes[:-1], 10)
         ema20_prev = _ema(closes[:-1], 20)
-        rsi14      = _rsi(closes, 14)
+        rsi14 = _rsi(closes, 14)
         change_pct = round((closes[-1] / closes[-2] - 1) * 100, 2) if len(closes) >= 2 else None
-        sma50_pct  = round((price / sma50  - 1) * 100, 2) if sma50  else None
+        sma50_pct = round((price / sma50 - 1) * 100, 2) if sma50 else None
         sma200_pct = round((price / sma200 - 1) * 100, 2) if sma200 else None
-        slope_up   = bool(sma200 > sma200_20d) if sma200 and sma200_20d else None
+        slope_up = bool(sma200 > sma200_20d) if sma200 and sma200_20d else None
 
         index_status = _elite_status(price, sma10, sma20, sma50, sma200, rsi14, breadth)
 
         return {
-            "price":             round(price, 2),
-            "change_pct":        change_pct,
-            "index_status":      index_status,
-            "breadth":           breadth,
-            "rsi14":             rsi14,
-            "sma50_pct":         sma50_pct,
-            "sma200_pct":        sma200_pct,
-            "sma200_slope_up":   slope_up,
+            "price": round(price, 2),
+            "change_pct": change_pct,
+            "index_status": index_status,
+            "breadth": breadth,
+            "rsi14": rsi14,
+            "sma50_pct": sma50_pct,
+            "sma200_pct": sma200_pct,
+            "sma200_slope_up": slope_up,
             "ema10_above_ema20": bool(ema10 > ema20) if ema10 and ema20 else None,
             "ema10_ema20_both_down": bool(ema10 < ema10_prev and ema20 < ema20_prev)
-                                     if all([ema10, ema10_prev, ema20, ema20_prev]) else None,
+            if all([ema10, ema10_prev, ema20, ema20_prev])
+            else None,
         }
     except Exception as e:
-        logger.warning(f"  Market indicators for {ticker} failed: {e}")
+        logger.warning(f"  Market indicators (yfinance) for {ticker} failed: {e}")
         return {}
+
+
+def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
+    """Index ETF metrics + Elite Regime. Primary: TradingView scanner; fallback: yfinance."""
+    sym = (ticker or "").upper()
+    tv_sym = _TV_INDEX_SYMBOL.get(sym)
+    if tv_sym:
+        raw = _fetch_tradingview_index_snapshot(tv_sym)
+        if raw:
+            price = raw["price"]
+            sma10, sma20, sma50, sma200 = raw["sma10"], raw["sma20"], raw["sma50"], raw["sma200"]
+            rsi14 = raw["rsi14"]
+            ema10, ema20 = raw["ema10"], raw["ema20"]
+            sma50_pct = round((price / sma50 - 1) * 100, 2) if sma50 else None
+            sma200_pct = round((price / sma200 - 1) * 100, 2) if sma200 else None
+            index_status = _elite_status(price, sma10, sma20, sma50, sma200, rsi14, breadth)
+            logger.info(f"  {sym} market indicators (TradingView): price={price} chg={raw['change_pct']:.2f}%")
+            return {
+                "price": round(price, 2),
+                "change_pct": round(raw["change_pct"], 2),
+                "index_status": index_status,
+                "breadth": breadth,
+                "rsi14": round(rsi14, 2),
+                "sma50_pct": sma50_pct,
+                "sma200_pct": sma200_pct,
+                "sma200_slope_up": None,
+                "ema10_above_ema20": bool(ema10 > ema20) if ema10 and ema20 else None,
+                "ema10_ema20_both_down": None,
+            }
+    return _fetch_market_indicators_yfinance(ticker, breadth)
 
 
 def _market_signal(spy: dict, qqq: dict) -> str:
@@ -1174,13 +1261,22 @@ def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None]:
         import pandas as pd
         import yfinance as yf
         from io import StringIO
-        resp = requests.get(
-            "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",
-            headers=HEADERS, timeout=15
-        )
-        resp.raise_for_status()
-        tables = pd.read_html(StringIO(resp.text))
-        tickers = tables[0]["Symbol"].str.replace(".", "-", regex=False).tolist()
+        try:
+            resp = requests.get(
+                "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",
+                headers=HEADERS, timeout=15
+            )
+            resp.raise_for_status()
+            tables = pd.read_html(StringIO(resp.text))
+            tickers = tables[0]["Symbol"].str.replace(".", "-", regex=False).tolist()
+        except Exception:
+            # Fallback: use GitHub-hosted CSV
+            csv_resp = requests.get(
+                "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv",
+                timeout=15
+            )
+            lines = csv_resp.text.strip().split("\n")[1:]
+            tickers = [line.split(",")[0].strip().replace(".", "-") for line in lines if line]
         logger.info(f"  Downloading {len(tickers)} S&P 500 stocks...")
         data = yf.download(tickers, period="6mo", interval="1d", auto_adjust=True, progress=False)
         closes = data["Close"]
@@ -1198,10 +1294,21 @@ def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None]:
                     above_50 += 1
         breadth = round(above_50 / total * 100, 1) if total > 0 else None
         logger.info(f"  S&P 500 breadth (% above SMA50): {breadth}%")
-        return perf.to_dict(), breadth
+        # Also extract latest price + 1D change for prices.json
+        price_data = {}
+        for col in valid.columns:
+            col_data = valid[col].dropna()
+            if len(col_data) >= 2:
+                price = float(col_data.iloc[-1])
+                prev  = float(col_data.iloc[-2])
+                price_data[str(col)] = {
+                    "price": round(price, 2),
+                    "change_pct": round((price - prev) / prev * 100, 2) if prev else None,
+                }
+        return perf.to_dict(), breadth, price_data
     except Exception as e:
         logger.warning(f"  S&P 500 RS universe failed: {e}")
-        return {}, None
+        return {}, None, {}
 
 
 def _fetch_nasdaq100_breadth() -> float | None:
@@ -1365,7 +1472,7 @@ def build_data() -> dict:
 
     # ── Step 5: Compute RS vs S&P 500 universe + breadth ──
     logger.info("\nStep 5: Building RS universe from S&P 500...")
-    rs_universe, sp500_breadth = _build_sp500_rs_universe()
+    rs_universe, sp500_breadth, sp500_prices = _build_sp500_rs_universe()
     logger.info(f"  RS universe: {len(rs_universe)} stocks | S&P 500 breadth: {sp500_breadth}%")
 
     all_stocks_flat = []
@@ -1464,6 +1571,7 @@ def build_data() -> dict:
         "vix": vix_value,
         "macro_news": macro_news,
         "ticker_extra_subthemes": ticker_extra_subthemes,
+        "_sp500_prices": sp500_prices,
     }
 
 
@@ -1652,6 +1760,71 @@ def _fetch_rss_macro_news() -> list[dict]:
     return results
 
 
+def _build_price_cache(scanner_prices: dict) -> dict:
+    """Build prices.json: S&P 500 + Russell 2000 closing prices + today's scanner stocks."""
+    import yfinance as yf
+    import pandas as pd
+
+    prices = dict(scanner_prices)  # start with today's scanner stocks
+
+    def _fetch_tickers_prices(tickers: list[str]) -> dict:
+        if not tickers:
+            return {}
+        try:
+            data = yf.download(tickers, period="5d", interval="1d", auto_adjust=True, progress=False)
+            closes = data["Close"].dropna(thresh=2, axis=1)
+            result = {}
+            for col in closes.columns:
+                col_data = closes[col].dropna()
+                if len(col_data) >= 2:
+                    price = float(col_data.iloc[-1])
+                    prev  = float(col_data.iloc[-2])
+                    result[str(col)] = {
+                        "price": round(price, 2),
+                        "change_pct": round((price - prev) / prev * 100, 2) if prev else None,
+                    }
+            return result
+        except Exception as e:
+            logger.warning(f"  Price batch failed: {e}")
+            return {}
+
+    # S&P 500
+    try:
+        r = requests.get(
+            "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv",
+            timeout=15
+        )
+        sp500 = [line.split(",")[0].strip().replace(".", "-") for line in r.text.strip().split("\n")[1:] if line]
+        logger.info(f"  Fetching prices for {len(sp500)} S&P 500 tickers...")
+        prices.update(_fetch_tickers_prices(sp500))
+        logger.info(f"  prices.json now: {len(prices)} tickers")
+    except Exception as e:
+        logger.warning(f"  S&P 500 price fetch failed: {e}")
+
+    # Russell 2000 (IWM holdings from iShares)
+    try:
+        r = requests.get(
+            "https://www.ishares.com/us/products/239714/IWM/1467271812596.ajax?fileType=csv&fileName=IWM_holdings&dataType=fund",
+            headers={"User-Agent": "Mozilla/5.0"}, timeout=20
+        )
+        r2k = []
+        for line in r.text.strip().split("\n"):
+            parts = line.split(",")
+            if len(parts) >= 2:
+                t = parts[0].strip().strip('"')
+                # Valid US stock ticker: 1-5 alpha chars, no $ or special prefix
+                if 1 <= len(t) <= 5 and t.replace("-", "").isalpha() and t[0].isalpha():
+                    r2k.append(t.replace(".", "-"))
+        new_tickers = [t for t in r2k if t not in prices]
+        logger.info(f"  Fetching prices for {len(new_tickers)} Russell 2000 tickers...")
+        prices.update(_fetch_tickers_prices(new_tickers))
+        logger.info(f"  prices.json now: {len(prices)} tickers")
+    except Exception as e:
+        logger.warning(f"  Russell 2000 price fetch failed: {e}")
+
+    return prices
+
+
 def fetch_all_tickers() -> list[dict]:
     """Fetch complete US stock ticker list from SEC EDGAR (free, no API key)."""
     try:
@@ -1673,6 +1846,7 @@ def fetch_all_tickers() -> list[dict]:
 
 def main():
     output = build_data()
+    sp500_prices = output.pop("_sp500_prices", {})
     out_path = Path("public/thematic_data.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(output, indent=2, ensure_ascii=False), encoding="utf-8")
@@ -1682,6 +1856,22 @@ def main():
     ticker_path = Path("public/all_tickers.json")
     ticker_path.write_text(json.dumps(all_tickers, ensure_ascii=False), encoding="utf-8")
     logger.info(f"Output → {ticker_path}")
+
+    # Build prices.json — scanner stocks + S&P 500 + Russell 2000
+    scanner_prices = {}
+    for th in output["themes"]:
+        for sub in th.get("subthemes", []):
+            for s in sub.get("stocks", []):
+                if s.get("ticker") and s.get("price") is not None:
+                    scanner_prices[s["ticker"]] = {
+                        "price": s["price"],
+                        "change_pct": s.get("change_pct") if s.get("change_pct") is not None else s.get("perf_1d"),
+                    }
+    logger.info(f"Building price cache (S&P 500 + Russell 2000 + scanner)...")
+    prices = _build_price_cache(scanner_prices)
+    prices_path = Path("public/prices.json")
+    prices_path.write_text(json.dumps(prices, ensure_ascii=False), encoding="utf-8")
+    logger.info(f"Prices → {prices_path} ({len(prices)} tickers)")
 
     total = sum(len(sub["stocks"]) for th in output["themes"] for sub in th.get("subthemes", []))
     subs = sum(len(th.get("subthemes", [])) for th in output["themes"])
