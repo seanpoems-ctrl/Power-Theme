@@ -1116,6 +1116,31 @@ const VerificationBadge = ({ verification, headlines }) => {
   );
 };
 
+/** Generic hover tooltip — wraps any element */
+const Tip = ({ text, children, width = "w-56" }) => {
+  const [pos, setPos] = useState(null);
+  const ref = useRef(null);
+  const handleEnter = () => {
+    if (!ref.current) return;
+    const r = ref.current.getBoundingClientRect();
+    const showBelow = (window.innerHeight - r.bottom) >= r.top;
+    setPos({ x: r.left + r.width / 2, showBelow, top: r.bottom + 6, bottom: window.innerHeight - r.top + 6 });
+  };
+  return (
+    <span ref={ref} onMouseEnter={handleEnter} onMouseLeave={() => setPos(null)} className="cursor-help">
+      {children}
+      {pos && (
+        <div
+          className={`${width} bg-zinc-900 border border-zinc-700 rounded-lg shadow-2xl p-2.5 text-left pointer-events-none text-[10px] text-zinc-300 leading-snug`}
+          style={{ position: "fixed", zIndex: 9999, left: pos.x, ...(pos.showBelow ? { top: pos.top } : { bottom: pos.bottom }), transform: "translateX(-50%)" }}
+        >
+          {text}
+        </div>
+      )}
+    </span>
+  );
+};
+
 const DailyChg = ({ val }) => {
   if (val == null) return <span className="text-zinc-600 text-xs">—</span>;
   const pos = val >= 0;
@@ -1791,14 +1816,14 @@ const GapperScanner = () => {
               <th className="text-center py-2 px-1.5 font-medium align-middle">Ticker</th>
               <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">Premkt<br/>Price<br/>Chg %</th>
               <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">Premkt<br/>Vol</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle">RVol</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle">Daily %</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">Short<br/>Int</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle">Float</th>
+              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip text="Relative Volume：今日成交量 ÷ 過去10天平均量。🟢 ≥5x 極強  🟡 ≥3x 強  ⚪ ≥2x 中等  灰色 &lt;2x 弱">RVol</Tip></th>
+              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip text="Daily %：昨日收盤漲跌幅（非盤前）">Daily %</Tip></th>
+              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight"><Tip text="Short Interest：放空股數佔流通股比例。>20% 有軋空 (Short Squeeze) 潛力，但也代表市場看空">Short<br/>Int</Tip></th>
+              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip text="Float：市場上可自由買賣的流通股數。Float 越小，股價越容易被大幅推動">Float</Tip></th>
               <th className="text-center py-2 px-1.5 font-medium align-middle">Sector</th>
               <th className="text-center py-2 px-1.5 font-medium align-middle">Industry</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle">Category</th>
-              <th className="text-center py-2 px-1 font-medium align-middle">Grade</th>
+              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip width="w-72" text="催化劑分類：Earnings 財報｜Upgrade 分析師升評｜FDA 藥品審批｜Government Policy 政策｜Contract/Partnership 合約｜Institutional/Insider Buying 機構/內部人買入｜Thematic Narratives 主題敘事｜Technical/Flow 無明確催化劑">Category</Tip></th>
+              <th className="text-center py-2 px-1 font-medium align-middle"><Tip width="w-64" text="Gemini 信心評分：A+ 極高 (90+)｜A 高 (75-89)｜B 中 (50-74)｜C 低 (&lt;50)。Pass/Fail = 技術門檻 ($Vol >$100M 且 ADR >4%)">Grade</Tip></th>
               <th className="text-center py-2 px-1.5 font-medium align-middle">Reasoning</th>
               <th className="text-center py-2 px-2 font-medium align-middle">Analysis Details</th>
             </tr>
@@ -1870,21 +1895,27 @@ const GapperScanner = () => {
                   <div className="flex flex-col items-center gap-0.5">
                     <div className="flex items-center gap-1">
                       {g.grade
-                        ? <span className={`text-[10px] font-bold px-1 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span>
+                        ? <Tip text={{ "A+": "極高信心 (90+)：催化劑強、成交量爆發、技術全達標。Gap & Go 策略首選", A: "高信心 (75-89)：催化劑明確，技術面佳，可積極參與", B: "中等信心 (50-74)：催化劑存在但強度不足，或技術面稍弱，謹慎操作", C: "低信心 (<50)：催化劑不明確或技術不達標，建議觀望" }[g.grade] || `信心評分：${g.grade}`}><span className={`text-[10px] font-bold px-1 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span></Tip>
                         : <span className="text-zinc-600">—</span>}
                       <VerificationBadge verification={g.verification} headlines={g.headlines}/>
                     </div>
                     {g.technical_status && (
-                      <span className={`text-[8px] font-semibold px-1 py-0.5 rounded leading-none ${
-                        (g.technical_status || "").startsWith("Fail")
-                          ? "text-red-400 bg-red-500/10 border border-red-500/20"
-                          : "text-emerald-400 bg-emerald-500/10 border border-emerald-500/20"
-                      }`}>
-                        {(g.technical_status || "").startsWith("Fail") ? "✗ Fail" : "✓ Pass"}
-                      </span>
+                      <Tip text={(g.technical_status || "").startsWith("Fail")
+                        ? `✗ 未通過技術門檻：${g.technical_status.replace("Fail — ", "")}。整排灰色 = 不建議交易`
+                        : "✓ 通過技術門檻：平均日成交金額 >$100M 且 ADR >4%，具備足夠流動性與波動性"}>
+                        <span className={`text-[8px] font-semibold px-1 py-0.5 rounded leading-none ${
+                          (g.technical_status || "").startsWith("Fail")
+                            ? "text-red-400 bg-red-500/10 border border-red-500/20"
+                            : "text-emerald-400 bg-emerald-500/10 border border-emerald-500/20"
+                        }`}>
+                          {(g.technical_status || "").startsWith("Fail") ? "✗ Fail" : "✓ Pass"}
+                        </span>
+                      </Tip>
                     )}
                     {(g.theme || g.category) === "Technical / Flow" && (
-                      <span className="text-[8px] text-amber-500 font-semibold">🔍 Flow</span>
+                      <Tip text="找不到明確催化劑（無財報、合約、政策等新聞）。歸類為資金流向/技術突破。自動降為 C 級，風險較高，謹慎操作">
+                        <span className="text-[8px] text-amber-500 font-semibold">🔍 Flow</span>
+                      </Tip>
                     )}
                   </div>
                 </td>
