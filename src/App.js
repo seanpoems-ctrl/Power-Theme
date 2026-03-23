@@ -3209,7 +3209,11 @@ const filtered = useMemo(() => {
                   : <span className="text-red-400">{v.toFixed(2)}%</span>;
                 const statusColor = st => st === "Strong" ? "text-emerald-400" : st === "Weak" || st === "Lagging" ? "text-red-400" : st === "Mediocre" ? "text-yellow-400" : "text-zinc-500";
                 const Tag = ({ label, d }) => d ? (
-                  <span className="flex items-center gap-1 text-[11px] font-mono">
+                  <span
+                    className="flex items-center gap-1 text-[11px] font-mono cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
+                    onMouseEnter={e => setMacroHover({ ticker: label, rect: e.currentTarget.getBoundingClientRect() })}
+                    onMouseLeave={() => setMacroHover(null)}
+                  >
                     <span className="text-zinc-500">{label}</span>
                     {d.price != null && <span className="text-zinc-300">${d.price.toFixed(2)}</span>}
                     {fmtChg(d.change_pct)}
@@ -3326,8 +3330,6 @@ const filtered = useMemo(() => {
             );
           })()}
 
-          {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect}/>}
-
           {/* Breaking News Alert — shown above all tabs when active */}
           <BreakingNewsAlert newsData={newsData}/>
 
@@ -3408,6 +3410,7 @@ const filtered = useMemo(() => {
           ) : filtered.map((t,i) => <ThemeSection key={t.name+i} theme={t} lbPerfKey={lbPerfKey} spyPerf={data?.spy_benchmarks?.[rsSPYKey]} rsSPYKey={rsSPYKey} isTopTheme={i===0} topADRTickers={topADRTickers} themeRankings={data?.theme_rankings} finvizThemeRankings={data?.finviz_theme_rankings}/>)}
         </div>
       )}
+      {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect}/>}
     </div>
   );
 }
