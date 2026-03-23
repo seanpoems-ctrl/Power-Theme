@@ -3,7 +3,7 @@ from __future__ import annotations
 """
 Emergency News Monitor — High-Impact Breaking News Alerts
 
-Runs every 30 min on weekdays via GitHub Actions.
+Runs every 5 min on weekdays via GitHub Actions.
 Sources: CNBC, Yahoo Finance, MarketWatch RSS + Trump X/TruthSocial posts
 
 Logic:
@@ -300,12 +300,40 @@ def load_existing() -> dict:
             return json.loads(path.read_text(encoding="utf-8"))
         except Exception:
             pass
-    return {"alerts": []}
+    return {"alerts": [], "seen_keys": []}
 
 
-def is_duplicate(headline: str, existing: dict) -> bool:
-    known = {a.get("headline", "")[:60].lower() for a in existing.get("alerts", [])}
-    return headline[:60].lower() in known
+def _headline_key(text: str) -> str:
+    """Normalize a headline to a dedup key (strip punctuation, lowercase, first 100 chars)."""
+    import string
+    t = text.lower()[:100]
+    t = "".join(c for c in t if c not in string.punctuation)
+    return " ".join(t.split())
+
+
+def is_seen(headline: str, existing: dict) -> bool:
+    """True if this headline was already processed in a recent run."""
+    known = {s["k"] for s in existing.get("seen_keys", [])}
+    return _headline_key(headline) in known
+
+
+def is_duplicate_alert(headline: str, existing: dict) -> bool:
+    """True if this headline already exists as an active alert."""
+    known = {_headline_key(a.get("headline", "")) for a in existing.get("alerts", [])}
+    return _headline_key(headline) in known
+
+
+def expire_seen_keys(seen: list[dict]) -> list[dict]:
+    """Expire seen keys older than 6 hours."""
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=6)
+    result = []
+    for s in seen:
+        try:
+            if datetime.fromisoformat(s["ts"]).astimezone(timezone.utc) >= cutoff:
+                result.append(s)
+        except Exception:
+            result.append(s)
+    return result
 
 
 def expire_old_alerts(alerts: list[dict]) -> list[dict]:
@@ -388,16 +416,28 @@ def main():
     trump_posts = fetch_trump_posts()
     headlines = trump_posts + headlines  # Trump posts first (higher priority)
 
+    # ── Dedup: skip anything already processed in last 6 hours ──────────────
+    ts_now = datetime.now(timezone.utc).isoformat()
+    fresh_headlines = [h for h in headlines if not is_seen(h["title"], existing)]
+    skipped = len(headlines) - len(fresh_headlines)
+    if skipped:
+        print(f"  Dedup: skipped {skipped} already-seen headline(s)")
+
+    # Mark all fetched headlines as seen (regardless of grade)
+    new_seen = [{"k": _headline_key(h["title"]), "ts": ts_now} for h in fresh_headlines]
+    all_seen = expire_seen_keys(existing.get("seen_keys", []) + new_seen)
+
     new_alerts: list[dict] = []
-    if headlines:
-        print(f"  [3/3] Grading {len(headlines)} items with Gemini…")
-        candidates = grade_with_gemini(headlines)
+    if fresh_headlines:
+        print(f"  [3/3] Grading {len(fresh_headlines)} new headline(s) with Gemini…")
+        candidates = grade_with_gemini(fresh_headlines)
+        # Also skip if already an active alert
         new_alerts = [
             a for a in candidates
-            if not is_duplicate(a.get("headline", ""), existing)
+            if not is_duplicate_alert(a.get("headline", ""), existing)
         ]
     else:
-        print("  [2/2] No recent headlines — skipping Gemini")
+        print("  [3/3] All headlines already seen — skipping Gemini")
 
     # Timestamp and send Telegram for each new alert
     ts = now_et.isoformat()
@@ -413,6 +453,7 @@ def main():
         "last_checked": now_et.strftime("%B %d, %Y (%H:%M EST)"),
         "has_alert":    len(merged) > 0,
         "alerts":       merged,
+        "seen_keys":    all_seen,   # persisted for cross-run dedup
     }
 
     out = Path("public/breaking_news.json")
