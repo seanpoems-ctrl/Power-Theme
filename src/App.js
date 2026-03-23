@@ -160,20 +160,18 @@ const TIP_COLORS = {
 };
 const Tip = ({ text, color = 'zinc', width = "w-56", children }) => {
   const [pos, setPos] = React.useState(null);
-  const ref = React.useRef(null);
-  const handleEnter = () => {
-    if (!ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    const showBelow = (window.innerHeight - r.bottom) >= r.top;
-    setPos({ x: r.left + r.width / 2, showBelow, top: r.bottom + 6, bottom: window.innerHeight - r.top + 6 });
+  const handleMove = (e) => {
+    const x = e.clientX + 14;
+    const y = e.clientY + 14;
+    setPos({ x, y });
   };
   return (
-    <span ref={ref} onMouseEnter={handleEnter} onMouseLeave={() => setPos(null)} className="cursor-pointer inline-flex">
+    <span onMouseMove={handleMove} onMouseLeave={() => setPos(null)} className="cursor-pointer inline-flex">
       {children}
       {pos && (
         <span
           className={`${width} bg-zinc-900 border rounded-lg shadow-2xl px-2 py-1.5 text-[10px] leading-snug pointer-events-none ${TIP_COLORS[color] ?? TIP_COLORS.zinc}`}
-          style={{ position: "fixed", zIndex: 9999, left: pos.x, ...(pos.showBelow ? { top: pos.top } : { bottom: pos.bottom }), transform: "translateX(-50%)" }}
+          style={{ position: "fixed", zIndex: 9999, left: pos.x, top: pos.y }}
         >
           {text}
         </span>
@@ -1069,7 +1067,6 @@ const gradeStyle = (g) => {
 
 const VerificationBadge = ({ verification, headlines }) => {
   const [tooltipPos, setTooltipPos] = useState(null);
-  const btnRef = useRef(null);
   if (!verification) return null;
   const { status, confidence_score, primary_claim, discrepancy_note } = verification;
 
@@ -1079,20 +1076,14 @@ const VerificationBadge = ({ verification, headlines }) => {
     Unconfirmed: { icon: "✕", color: "text-red-400",     bg: "bg-red-500/15 border-red-500/30",       label: "Unconfirmed" },
   }[status] || { icon: "?", color: "text-zinc-500", bg: "bg-zinc-700/20 border-zinc-600/30", label: status };
 
-  const handleEnter = () => {
-    if (!btnRef.current) return;
-    const r = btnRef.current.getBoundingClientRect();
-    const showBelow = (window.innerHeight - r.bottom) >= r.top;
-    setTooltipPos({ x: r.left + r.width / 2, showBelow, top: r.bottom + 8, bottom: window.innerHeight - r.top + 8 });
-  };
+  const handleMove = (e) => setTooltipPos({ x: e.clientX + 14, y: e.clientY + 14 });
 
   return (
     <div className="relative inline-block">
       <button
-        ref={btnRef}
-        onMouseEnter={handleEnter}
+        onMouseMove={handleMove}
         onMouseLeave={() => setTooltipPos(null)}
-        className={`inline-flex items-center gap-0.5 px-1 py-0.5 rounded border text-[10px] font-bold ${cfg.color} ${cfg.bg}`}
+        className={`inline-flex items-center gap-0.5 px-1 py-0.5 rounded border text-[10px] font-bold cursor-pointer ${cfg.color} ${cfg.bg}`}
       >
         {cfg.icon}
       </button>
@@ -1103,8 +1094,7 @@ const VerificationBadge = ({ verification, headlines }) => {
             position: "fixed",
             zIndex: 9999,
             left: tooltipPos.x,
-            ...(tooltipPos.showBelow ? { top: tooltipPos.top } : { bottom: tooltipPos.bottom }),
-            transform: "translateX(-50%)",
+            top: tooltipPos.y,
             maxHeight: "80vh",
             overflowY: "auto",
           }}
