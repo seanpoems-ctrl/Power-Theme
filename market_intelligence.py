@@ -479,8 +479,8 @@ def main() -> None:
     print("  [3/5] Fetching market breadth (TradingView Screener)…")
     breadth = fetch_breadth()
     s5fi = breadth.get("s5fi")
-    breadth["breadth_flush"]         = s5fi is not None and s5fi < 15
-    breadth["generational_buy_zone"] = s5fi is not None and s5fi < 10
+    breadth["breadth_flush"]         = bool(s5fi is not None and s5fi < 15)
+    breadth["generational_buy_zone"] = bool(s5fi is not None and s5fi < 10)
 
     print("  [4/5] Fetching global indices (Nikkei / DAX / FTSE)…")
     global_idx = fetch_global_indices()
