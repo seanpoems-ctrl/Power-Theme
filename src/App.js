@@ -3302,16 +3302,17 @@ const filtered = useMemo(() => {
       </div>
 
       {tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
-        <div className="max-w-[1400px] mx-auto px-4 py-4">
-          <div className="flex justify-between items-start mb-2">
+        <>
+          <div className="flex justify-between items-start px-4 pt-4 pb-2">
             <div className="w-[420px] flex-shrink-0 flex flex-col gap-4">
               <VixGauge initialVix={data?.vix}/>
               <ScannerBriefFeed briefData={briefData}/>
             </div>
-            <div className="w-[700px] flex-shrink-0">
+            <div className="w-[700px] flex-shrink-0 mr-4">
               {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
             </div>
           </div>
+        <div className="max-w-[1400px] mx-auto px-4 pb-4">
           <div className="mb-4">
             {data && <CorrelationGuard themes={data.themes}/>}
             {data && <CounterTrendWarning themes={data.themes}/>}
@@ -3324,6 +3325,7 @@ const filtered = useMemo(() => {
             </div>
           ) : filtered.map((t,i) => <ThemeSection key={t.name+i} theme={t} lbPerfKey={lbPerfKey} spyPerf={data?.spy_benchmarks?.[rsSPYKey]} rsSPYKey={rsSPYKey} isTopTheme={i===0} topADRTickers={topADRTickers} themeRankings={data?.theme_rankings} finvizThemeRankings={data?.finviz_theme_rankings}/>)}
         </div>
+        </>
       )}
     </div>
   );
