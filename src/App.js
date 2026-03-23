@@ -875,7 +875,7 @@ function normalizeTheme(t) {
 }
 
 const SubThemeSection = ({ subtheme, parentAvg, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers, themeName }) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const avg = (k) => subtheme.stocks.length
     ? subtheme.stocks.reduce((s, x) => s + (x[k] || 0), 0) / subtheme.stocks.length
     : 0;
@@ -917,7 +917,7 @@ const SubThemeSection = ({ subtheme, parentAvg, lbPerfKey, spyPerf, rsSPYKey, is
 };
 
 const ThemeSection = ({ theme, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers, themeRankings, finvizThemeRankings }) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   const norm = normalizeTheme(theme);
   const allStocks = norm.subthemes.flatMap(s => s.stocks);
 
