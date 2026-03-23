@@ -1544,7 +1544,7 @@ const ScannerBriefFeed = ({ briefData }) => {
         </div>
       </div>
 
-      <div className="overflow-y-auto flex-1 space-y-3" style={{ maxHeight: "369px" }}>
+      <div className="overflow-y-auto flex-1 space-y-3" style={{ maxHeight: "256px" }}>
 
         {error && (
           <div className="text-[10px] text-red-400 bg-red-500/10 rounded p-2">{String(error)}</div>
@@ -3303,12 +3303,12 @@ const filtered = useMemo(() => {
 
       {tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
         <div className="max-w-[1400px] mx-auto px-4 py-4">
-          <div className="flex gap-4 items-start mb-2">
+          <div className="flex justify-between items-start mb-2">
             <div className="w-[420px] flex-shrink-0 flex flex-col gap-4">
               <VixGauge initialVix={data?.vix}/>
               <ScannerBriefFeed briefData={briefData}/>
             </div>
-            <div className="flex-1 min-w-0">
+            <div className="w-[700px] flex-shrink-0">
               {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
             </div>
           </div>
