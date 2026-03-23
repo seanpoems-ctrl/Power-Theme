@@ -569,7 +569,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
   return (
     <>
     <div className="p-4 bg-zinc-900/60 rounded-xl border border-zinc-800/60 w-full min-w-0">
-      <div className="flex items-center mb-3 gap-2" style={{ paddingLeft: '76px' }}>
+      <div className="flex items-center mb-3 gap-2">
         <BarChart3 size={13} className="text-blue-400 flex-shrink-0"/>
         <span className="text-xs font-semibold text-zinc-300 whitespace-nowrap">Theme Leaderboard</span>
         <span className="text-[10px] text-zinc-600">{ranked.length} themes</span>
@@ -589,7 +589,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
           ))}
         </div>
       </div>
-      <div className="overflow-y-auto overflow-x-auto" style={{ maxHeight: '478px', marginLeft: '76px' }}>
+      <div className="overflow-y-auto overflow-x-auto" style={{ maxHeight: '478px' }}>
         <table className="w-full text-left">
           <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
             <tr className="border-b border-zinc-800/60">
@@ -3308,7 +3308,7 @@ const filtered = useMemo(() => {
               <VixGauge initialVix={data?.vix}/>
               <ScannerBriefFeed briefData={briefData}/>
             </div>
-            <div className="w-[700px] flex-shrink-0">
+            <div className="w-[624px] flex-shrink-0">
               {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
             </div>
           </div>
