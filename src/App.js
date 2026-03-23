@@ -3208,10 +3208,11 @@ const filtered = useMemo(() => {
                   ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
                   : <span className="text-red-400">{v.toFixed(2)}%</span>;
                 const statusColor = st => st === "Strong" ? "text-emerald-400" : st === "Weak" || st === "Lagging" ? "text-red-400" : st === "Mediocre" ? "text-yellow-400" : "text-zinc-500";
+                const chartUrl1Y = t => `https://finviz.com/chart.ashx?t=${encodeURIComponent(t)}&ty=c&ta=1&p=w&s=l`;
                 const Tag = ({ label, d }) => d ? (
                   <span
                     className="flex items-center gap-1 text-[12px] font-mono cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
-                    onMouseEnter={e => setMacroHover({ ticker: label, rect: e.currentTarget.getBoundingClientRect() })}
+                    onMouseEnter={e => setMacroHover({ ticker: label, chartUrl: chartUrl1Y(label), rect: e.currentTarget.getBoundingClientRect() })}
                     onMouseLeave={() => setMacroHover(null)}
                   >
                     <span className="text-zinc-500">{label}</span>
@@ -3410,7 +3411,7 @@ const filtered = useMemo(() => {
           ) : filtered.map((t,i) => <ThemeSection key={t.name+i} theme={t} lbPerfKey={lbPerfKey} spyPerf={data?.spy_benchmarks?.[rsSPYKey]} rsSPYKey={rsSPYKey} isTopTheme={i===0} topADRTickers={topADRTickers} themeRankings={data?.theme_rankings} finvizThemeRankings={data?.finviz_theme_rankings}/>)}
         </div>
       )}
-      {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect}/>}
+      {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect} chartUrl={macroHover.chartUrl}/>}
     </div>
   );
 }
