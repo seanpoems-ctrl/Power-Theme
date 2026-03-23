@@ -478,7 +478,16 @@ const PerfCellLB = ({ val }) => {
 
 const LB_PERF_COLS = new Set(['perf_1d','perf_1w','perf_1m','perf_3m','perf_6m']);
 
-const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themeSparklines = {} }) => {
+const VS_SPY_KEYS = [
+  { key: 'vs_spy_1d', label: '1D', spyKey: 'perf_1d', themeKey: 'perf_1d' },
+  { key: 'vs_spy_1w', label: '1W', spyKey: 'perf_1w', themeKey: 'perf_1w' },
+  { key: 'vs_spy_1m', label: '1M', spyKey: 'perf_1m', themeKey: 'perf_1m' },
+  { key: 'vs_spy_3m', label: '3M', spyKey: 'perf_3m', themeKey: 'perf_3m' },
+  { key: 'vs_spy_6m', label: '6M', spyKey: 'perf_6m', themeKey: 'perf_6m' },
+];
+const LB_VS_SPY_COLS = new Set(VS_SPY_KEYS.map(k => k.key));
+
+const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themeSparklines = {}, spyBenchmarks }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
   const [expanded, setExpanded] = useState(null);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
@@ -490,6 +499,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     if (isShift) {
       const primary = sortPriority[0];
       if (primary && LB_PERF_COLS.has(primary.key) && LB_PERF_COLS.has(key)) return;
+      if (primary && LB_VS_SPY_COLS.has(primary.key) && LB_VS_SPY_COLS.has(key)) return;
       setSortPriority(prev => {
         const existing = prev.findIndex((p, i) => i > 0 && p.key === key);
         if (existing > 0) return prev.map((p, i) => i === existing ? { ...p, direction: p.direction === 'desc' ? 'asc' : 'desc' } : p);
@@ -509,13 +519,21 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
 
   const ranked = useMemo(() => {
     if (!activeData || !activeData.length) return [];
-    return [...activeData].sort((a, b) => {
+    // Enrich with vs SPY values
+    const enriched = activeData.map(t => {
+      const extra = {};
+      VS_SPY_KEYS.forEach(({ key, spyKey, themeKey }) => {
+        const spy = spyBenchmarks?.[spyKey];
+        extra[key] = spy != null ? (t[themeKey] ?? 0) - spy : null;
+      });
+      return { ...t, ...extra };
+    });
+    return [...enriched].sort((a, b) => {
       for (let i = 0; i < sortPriority.length; i++) {
         const { key, direction } = sortPriority[i];
         let va = a[key] ?? 0;
         let vb = b[key] ?? 0;
-        // Bucketing: round to 1 decimal for perf cols when primary sort
-        if (i === 0 && LB_PERF_COLS.has(key)) {
+        if (i === 0 && (LB_PERF_COLS.has(key) || LB_VS_SPY_COLS.has(key))) {
           va = Math.round(va * 10) / 10;
           vb = Math.round(vb * 10) / 10;
         }
@@ -525,7 +543,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
       }
       return 0;
     });
-  }, [activeData, sortPriority]);
+  }, [activeData, sortPriority, spyBenchmarks]);
 
 
   const industryMap = useMemo(() => {
@@ -596,6 +614,8 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
               <th className="px-2 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Theme</th>
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
               <LBSortHeader k="rs_score" label="RS" w="w-16" />
+              <th className="px-2 py-2 text-[10px] text-zinc-600 whitespace-nowrap text-right border-l border-zinc-700/40" colSpan={1}>vs SPY ↓</th>
+              {VS_SPY_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
             </tr>
           </thead>
           <tbody>
@@ -623,6 +643,8 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                   <td className={`px-2 py-1.5 text-right text-[11px] font-mono font-bold ${t.rs_score > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {t.rs_score > 0 ? '+' : ''}{t.rs_score.toFixed(1)}
                   </td>
+                  <td className="border-l border-zinc-700/40"></td>
+                  {VS_SPY_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
                 </tr>
                 {isExpanded && industries.map(ind => (
                   <tr key={ind.name} className="bg-zinc-800/20 border-b border-zinc-800/20">
@@ -632,6 +654,8 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                     </td>
                     {LB_KEYS.map(k => <PerfCellLB key={k.key} val={ind[k.key]}/>)}
                     <td className="px-2 py-1.5"></td>
+                    <td className="border-l border-zinc-700/40"></td>
+                    {VS_SPY_KEYS.map(k => <PerfCellLB key={k.key} val={null}/>)}
                   </tr>
                 ))}
               </React.Fragment>);
@@ -802,6 +826,7 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
             <th className="text-center py-3 px-2 font-medium w-[84px] text-zinc-500">Earnings</th>
             <th className="text-center py-3 px-2 font-medium w-[84px] text-zinc-500">6M</th>
             <SH k="52w_high" label="52W Hi" w="w-[80px]"/>
+            <SH k="52w_low" label="52W Lo" w="w-[80px]"/>
             <SH k="dist_52w_high" label="Dist" w="w-[64px]"/>
             <SH k="volume" label="Vol" w="w-[68px]"/>
             <SH k="rvol" label="RVol" w="w-[64px]"/>
@@ -845,6 +870,7 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
               <EarningsCell value={s.earnings}/>
               <td className="text-center py-3 px-2"><div className="flex justify-center"><Sparkline data={sparklineSeries(s)}/></div></td>
               <td className="text-center py-3 px-2 font-mono text-zinc-400 text-xs">{s["52w_high"] ? `$${s["52w_high"].toFixed(2)}` : "—"}</td>
+              <td className="text-center py-3 px-2 font-mono text-zinc-500 text-xs">{s["52w_low"] ? `$${s["52w_low"].toFixed(2)}` : "—"}</td>
               <Dist52wCell value={s.dist_52w_high}/>
               <td className="text-center py-3 px-2 text-zinc-500 text-xs font-mono">{fmtNum(s.volume)}</td>
               <RVolCell value={s.rvol}/>
@@ -3256,12 +3282,6 @@ const filtered = useMemo(() => {
               <button onClick={()=>setShowFP(!showFP)} className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-md border transition-colors ${filtersOn?'bg-blue-500/15 border-blue-500/30 text-blue-400':'bg-zinc-800/60 border-zinc-700/50 text-zinc-400'}`}>
                 <SlidersHorizontal size={12}/> Filters
               </button>
-              <div className="flex items-center gap-1 border border-zinc-700/50 rounded-md overflow-hidden">
-                <span className="px-2 text-[10px] text-zinc-600 bg-zinc-800/60">vs SPY</span>
-                {RS_SPY_KEYS.map(k => (
-                  <button key={k.key} onClick={() => setRsSPYKey(k.key)} className={`px-2 py-1.5 text-[11px] transition-colors ${rsSPYKey === k.key ? 'bg-blue-500/25 text-blue-300' : 'bg-zinc-800/60 text-zinc-500 hover:text-zinc-300'}`}>{k.label}</button>
-                ))}
-              </div>
             </div>
             {showFP && (
               <div className="mt-2.5 p-3 bg-zinc-800/40 rounded-lg border border-zinc-700/40 flex flex-wrap items-end gap-4">
@@ -3303,14 +3323,12 @@ const filtered = useMemo(() => {
       {tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
         <div className="max-w-[1400px] mx-auto px-4 py-4">
           <div className="flex gap-4 items-start mb-2">
-            <div className="w-[420px] flex-shrink-0">
+            <div className="w-[420px] flex-shrink-0 flex flex-col gap-4">
               <VixGauge initialVix={data?.vix}/>
-            </div>
-            <div className="w-[280px] flex-shrink-0 self-stretch">
               <ScannerBriefFeed briefData={briefData}/>
             </div>
             <div className="flex-1 min-w-0">
-              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
+              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} spyBenchmarks={data?.spy_benchmarks} />}
             </div>
           </div>
           <div className="mb-4">
