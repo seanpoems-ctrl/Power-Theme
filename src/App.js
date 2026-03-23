@@ -478,16 +478,8 @@ const PerfCellLB = ({ val }) => {
 
 const LB_PERF_COLS = new Set(['perf_1d','perf_1w','perf_1m','perf_3m','perf_6m']);
 
-const VS_SPY_KEYS = [
-  { key: 'vs_spy_1d', label: '1D', spyKey: 'perf_1d', themeKey: 'perf_1d' },
-  { key: 'vs_spy_1w', label: '1W', spyKey: 'perf_1w', themeKey: 'perf_1w' },
-  { key: 'vs_spy_1m', label: '1M', spyKey: 'perf_1m', themeKey: 'perf_1m' },
-  { key: 'vs_spy_3m', label: '3M', spyKey: 'perf_3m', themeKey: 'perf_3m' },
-  { key: 'vs_spy_6m', label: '6M', spyKey: 'perf_6m', themeKey: 'perf_6m' },
-];
-const LB_VS_SPY_COLS = new Set(VS_SPY_KEYS.map(k => k.key));
 
-const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themeSparklines = {}, spyBenchmarks }) => {
+const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themeSparklines = {} }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
   const [expanded, setExpanded] = useState(null);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
@@ -499,7 +491,6 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     if (isShift) {
       const primary = sortPriority[0];
       if (primary && LB_PERF_COLS.has(primary.key) && LB_PERF_COLS.has(key)) return;
-      if (primary && LB_VS_SPY_COLS.has(primary.key) && LB_VS_SPY_COLS.has(key)) return;
       setSortPriority(prev => {
         const existing = prev.findIndex((p, i) => i > 0 && p.key === key);
         if (existing > 0) return prev.map((p, i) => i === existing ? { ...p, direction: p.direction === 'desc' ? 'asc' : 'desc' } : p);
@@ -519,21 +510,13 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
 
   const ranked = useMemo(() => {
     if (!activeData || !activeData.length) return [];
-    // Enrich with vs SPY values
-    const enriched = activeData.map(t => {
-      const extra = {};
-      VS_SPY_KEYS.forEach(({ key, spyKey, themeKey }) => {
-        const spy = spyBenchmarks?.[spyKey];
-        extra[key] = spy != null ? (t[themeKey] ?? 0) - spy : null;
-      });
-      return { ...t, ...extra };
-    });
+    const enriched = activeData;
     return [...enriched].sort((a, b) => {
       for (let i = 0; i < sortPriority.length; i++) {
         const { key, direction } = sortPriority[i];
         let va = a[key] ?? 0;
         let vb = b[key] ?? 0;
-        if (i === 0 && (LB_PERF_COLS.has(key) || LB_VS_SPY_COLS.has(key))) {
+        if (i === 0 && LB_PERF_COLS.has(key)) {
           va = Math.round(va * 10) / 10;
           vb = Math.round(vb * 10) / 10;
         }
@@ -543,7 +526,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
       }
       return 0;
     });
-  }, [activeData, sortPriority, spyBenchmarks]);
+  }, [activeData, sortPriority]);
 
 
   const industryMap = useMemo(() => {
@@ -606,7 +589,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
           ))}
         </div>
       </div>
-      <div className="overflow-y-auto overflow-x-auto" style={{ maxHeight: '440px' }}>
+      <div className="overflow-y-auto overflow-x-auto" style={{ maxHeight: '478px' }}>
         <table className="w-full text-left">
           <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
             <tr className="border-b border-zinc-800/60">
@@ -614,8 +597,6 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
               <th className="px-2 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Theme</th>
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
               <LBSortHeader k="rs_score" label="RS" w="w-16" />
-              <th className="px-2 py-2 text-[10px] text-zinc-600 whitespace-nowrap text-right border-l border-zinc-700/40" colSpan={1}>vs SPY ↓</th>
-              {VS_SPY_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
             </tr>
           </thead>
           <tbody>
@@ -643,8 +624,6 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                   <td className={`px-2 py-1.5 text-right text-[11px] font-mono font-bold ${t.rs_score > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {t.rs_score > 0 ? '+' : ''}{t.rs_score.toFixed(1)}
                   </td>
-                  <td className="border-l border-zinc-700/40"></td>
-                  {VS_SPY_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
                 </tr>
                 {isExpanded && industries.map(ind => (
                   <tr key={ind.name} className="bg-zinc-800/20 border-b border-zinc-800/20">
@@ -654,8 +633,6 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                     </td>
                     {LB_KEYS.map(k => <PerfCellLB key={k.key} val={ind[k.key]}/>)}
                     <td className="px-2 py-1.5"></td>
-                    <td className="border-l border-zinc-700/40"></td>
-                    {VS_SPY_KEYS.map(k => <PerfCellLB key={k.key} val={null}/>)}
                   </tr>
                 ))}
               </React.Fragment>);
@@ -765,7 +742,11 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
   };
 
   const sorted = useMemo(() => {
-    return [...stocks].sort((a, b) => {
+    const withVsSpy = stocks.map(s => ({
+      ...s,
+      vs_spy: spyPerf != null ? (s[rsSPYKey] ?? 0) - spyPerf : null,
+    }));
+    return [...withVsSpy].sort((a, b) => {
       for (let i = 0; i < sortPriority.length; i++) {
         const { key, direction } = sortPriority[i];
         let va = key === 'ticker' ? (a.ticker||'') : (a[key]||0);
@@ -833,7 +814,7 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
             <SH k="avg_dollar_volume" label="Avg $V" w="w-[72px]"/>
             <SH k="adr_pct" label="ADR" w="w-[56px]"/>
             <SH k="rs_52w" label="RS" align="center" w="w-[60px]"/>
-            <th className="text-center py-3 px-2 font-medium w-[84px] text-zinc-500">vs SPY</th>
+            <SH k="vs_spy" label="vs SPY" w="w-[84px]"/>
           </tr>
         </thead>
         <tbody>
@@ -1563,7 +1544,7 @@ const ScannerBriefFeed = ({ briefData }) => {
         </div>
       </div>
 
-      <div className="overflow-y-auto flex-1 space-y-3" style={{ maxHeight: "445px" }}>
+      <div className="overflow-y-auto flex-1 space-y-3" style={{ maxHeight: "369px" }}>
 
         {error && (
           <div className="text-[10px] text-red-400 bg-red-500/10 rounded p-2">{String(error)}</div>
@@ -3328,7 +3309,7 @@ const filtered = useMemo(() => {
               <ScannerBriefFeed briefData={briefData}/>
             </div>
             <div className="flex-1 min-w-0">
-              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} spyBenchmarks={data?.spy_benchmarks} />}
+              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
             </div>
           </div>
           <div className="mb-4">
