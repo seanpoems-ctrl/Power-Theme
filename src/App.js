@@ -164,10 +164,11 @@ const Tip = ({ text, color = 'zinc', width = "w-56", children }) => {
     const r = e.currentTarget.getBoundingClientRect();
     const tipW = 224; // w-56
     const rawLeft = (r.right + 6 + tipW > window.innerWidth ? r.left - tipW - 6 : r.right + 6) - 113;
-    const rawTop  = r.top - 76;
+    const top = Math.max(8, r.top - 76);
     setPos({
-      left: Math.max(8, Math.min(rawLeft, window.innerWidth  - tipW - 8)),
-      top:  Math.max(8, Math.min(rawTop,  window.innerHeight - 160)),
+      left:      Math.max(8, Math.min(rawLeft, window.innerWidth - tipW - 8)),
+      top,
+      maxHeight: window.innerHeight - top - 8,
     });
   };
   return (
@@ -176,7 +177,7 @@ const Tip = ({ text, color = 'zinc', width = "w-56", children }) => {
       {pos && (
         <span
           className={`${width} bg-zinc-900 border rounded-lg shadow-2xl px-2 py-1.5 text-[10px] leading-snug pointer-events-none ${TIP_COLORS[color] ?? TIP_COLORS.zinc}`}
-          style={{ position: "fixed", zIndex: 9999, left: pos.left, top: pos.top }}
+          style={{ position: "fixed", zIndex: 9999, left: pos.left, top: pos.top, maxHeight: pos.maxHeight, overflowY: "auto" }}
         >
           {text}
         </span>
@@ -1085,10 +1086,11 @@ const VerificationBadge = ({ verification, headlines }) => {
     const r = e.currentTarget.getBoundingClientRect();
     const tipW = 288; // w-72
     const rawLeft = (r.right + 6 + tipW > window.innerWidth ? r.left - tipW - 6 : r.right + 6) - 113;
-    const rawTop  = r.top - 76;
+    const top = Math.max(8, r.top - 76);
     setTooltipPos({
-      left: Math.max(8, Math.min(rawLeft, window.innerWidth  - tipW - 8)),
-      top:  Math.max(8, Math.min(rawTop,  window.innerHeight - 320)),
+      left:      Math.max(8, Math.min(rawLeft, window.innerWidth - tipW - 8)),
+      top,
+      maxHeight: window.innerHeight - top - 8,
     });
   };
 
@@ -1109,7 +1111,7 @@ const VerificationBadge = ({ verification, headlines }) => {
             zIndex: 9999,
             left: tooltipPos.left,
             top: tooltipPos.top,
-            maxHeight: "80vh",
+            maxHeight: tooltipPos.maxHeight,
             overflowY: "auto",
           }}
         >
