@@ -3235,6 +3235,11 @@ const filtered = useMemo(() => {
                   <div className="text-[11px] font-medium text-emerald-400">
                     Updated {data.generated_at || data.last_updated}
                   </div>
+                  {countdown != null && (
+                    <div className="text-[10px] text-zinc-500">
+                      Next refresh in <span className="text-zinc-400 font-mono">{countdown >= 60 ? `${Math.floor(countdown/60)}m ${countdown%60}s` : `${countdown}s`}</span>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
