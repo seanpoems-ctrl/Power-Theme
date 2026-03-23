@@ -3260,9 +3260,8 @@ const filtered = useMemo(() => {
             const { btc, gld, oil, credit_spread, breadth_50d, breadth_200d } = data.market_condition;
             const hasAny = btc || gld || oil || credit_spread != null || breadth_50d != null;
             if (!hasAny) return null;
-            const CHART = { btc: 'BTCUSD', gld: 'GLD', oil: 'USO', credit_spread: 'HYG', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R' };
-            const CHART_URL = { btc: 'https://finviz.com/crypto_charts.ashx?t=BTCUSD&c=USD' };
-            const mkHover = (key, e) => setMacroHover({ ticker: CHART[key], chartUrl: CHART_URL[key] || null, rect: e.currentTarget.getBoundingClientRect() });
+            const CHART = { btc: 'IBIT', gld: 'GLD', oil: 'USO', credit_spread: 'HYG', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R' };
+            const mkHover = (key, e) => setMacroHover({ ticker: CHART[key], rect: e.currentTarget.getBoundingClientRect() });
             const fmtChg = v => v == null ? null : v > 0
               ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
               : <span className="text-red-400">{v.toFixed(2)}%</span>;
@@ -3411,7 +3410,7 @@ const filtered = useMemo(() => {
           ) : filtered.map((t,i) => <ThemeSection key={t.name+i} theme={t} lbPerfKey={lbPerfKey} spyPerf={data?.spy_benchmarks?.[rsSPYKey]} rsSPYKey={rsSPYKey} isTopTheme={i===0} topADRTickers={topADRTickers} themeRankings={data?.theme_rankings} finvizThemeRankings={data?.finviz_theme_rankings}/>)}
         </div>
       )}
-      {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect} chartUrl={macroHover.chartUrl}/>}
+      {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect}/>}
     </div>
   );
 }
