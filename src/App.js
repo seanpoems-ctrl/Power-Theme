@@ -3044,12 +3044,6 @@ const filtered = useMemo(() => {
                 <button onClick={() => setTab("gapper")} className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${tab === "gapper" ? "bg-emerald-500/25 text-emerald-300 border border-emerald-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
                   Pre-Market Gappers
                 </button>
-                <button onClick={() => setTab("analyst")} className={`px-3 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1 ${tab === "analyst" ? "bg-violet-500/25 text-violet-300 border border-violet-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
-                  <FlaskConical size={11}/> Analyst Cockpit
-                </button>
-                <button onClick={() => setTab("intel")} className={`px-3 py-1 text-xs font-medium rounded-md transition-colors flex items-center gap-1 ${tab === "intel" ? "bg-orange-500/25 text-orange-300 border border-orange-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
-                  <Activity size={11}/> Market Intel
-                </button>
               </div>
               {data && fetchedAt && (
                 <div className="text-right leading-tight">
@@ -3128,7 +3122,7 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "intel" ? <MacroRiskCard/> : tab === "analyst" ? <MomentumCockpit/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
+      {tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
         <div className="max-w-[1400px] mx-auto px-4 py-4">
           <div className="flex gap-4 items-start mb-2">
             <div className="w-[420px] flex-shrink-0">
