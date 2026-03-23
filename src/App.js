@@ -162,9 +162,13 @@ const Tip = ({ text, color = 'zinc', width = "w-56", children }) => {
   const [pos, setPos] = React.useState(null);
   const handleEnter = (e) => {
     const r = e.currentTarget.getBoundingClientRect();
-    const tipW = 224; // w-56 = 14rem = 224px
-    const left = r.right + 6 + tipW > window.innerWidth ? r.left - tipW - 6 : r.right + 6;
-    setPos({ left: left - 113, top: r.top - 76 });
+    const tipW = 224; // w-56
+    const rawLeft = (r.right + 6 + tipW > window.innerWidth ? r.left - tipW - 6 : r.right + 6) - 113;
+    const rawTop  = r.top - 76;
+    setPos({
+      left: Math.max(8, Math.min(rawLeft, window.innerWidth  - tipW - 8)),
+      top:  Math.max(8, Math.min(rawTop,  window.innerHeight - 160)),
+    });
   };
   return (
     <span onMouseEnter={handleEnter} onMouseLeave={() => setPos(null)} className="cursor-pointer inline-flex">
@@ -1080,8 +1084,12 @@ const VerificationBadge = ({ verification, headlines }) => {
   const handleEnter = (e) => {
     const r = e.currentTarget.getBoundingClientRect();
     const tipW = 288; // w-72
-    const left = r.right + 6 + tipW > window.innerWidth ? r.left - tipW - 6 : r.right + 6;
-    setTooltipPos({ left: left - 113, top: r.top - 76 });
+    const rawLeft = (r.right + 6 + tipW > window.innerWidth ? r.left - tipW - 6 : r.right + 6) - 113;
+    const rawTop  = r.top - 76;
+    setTooltipPos({
+      left: Math.max(8, Math.min(rawLeft, window.innerWidth  - tipW - 8)),
+      top:  Math.max(8, Math.min(rawTop,  window.innerHeight - 320)),
+    });
   };
 
   return (
