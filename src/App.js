@@ -160,18 +160,19 @@ const TIP_COLORS = {
 };
 const Tip = ({ text, color = 'zinc', width = "w-56", children }) => {
   const [pos, setPos] = React.useState(null);
-  const handleMove = (e) => {
-    const x = e.clientX + 14;
-    const y = e.clientY + 14;
-    setPos({ x, y });
+  const handleEnter = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const tipW = 224; // w-56 = 14rem = 224px
+    const left = r.right + 6 + tipW > window.innerWidth ? r.left - tipW - 6 : r.right + 6;
+    setPos({ left, top: r.top });
   };
   return (
-    <span onMouseMove={handleMove} onMouseLeave={() => setPos(null)} className="cursor-pointer inline-flex">
+    <span onMouseEnter={handleEnter} onMouseLeave={() => setPos(null)} className="cursor-pointer inline-flex">
       {children}
       {pos && (
         <span
           className={`${width} bg-zinc-900 border rounded-lg shadow-2xl px-2 py-1.5 text-[10px] leading-snug pointer-events-none ${TIP_COLORS[color] ?? TIP_COLORS.zinc}`}
-          style={{ position: "fixed", zIndex: 9999, left: pos.x, top: pos.y }}
+          style={{ position: "fixed", zIndex: 9999, left: pos.left, top: pos.top }}
         >
           {text}
         </span>
@@ -1076,12 +1077,17 @@ const VerificationBadge = ({ verification, headlines }) => {
     Unconfirmed: { icon: "✕", color: "text-red-400",     bg: "bg-red-500/15 border-red-500/30",       label: "Unconfirmed" },
   }[status] || { icon: "?", color: "text-zinc-500", bg: "bg-zinc-700/20 border-zinc-600/30", label: status };
 
-  const handleMove = (e) => setTooltipPos({ x: e.clientX + 14, y: e.clientY + 14 });
+  const handleEnter = (e) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    const tipW = 288; // w-72
+    const left = r.right + 6 + tipW > window.innerWidth ? r.left - tipW - 6 : r.right + 6;
+    setTooltipPos({ left, top: r.top });
+  };
 
   return (
     <div className="relative inline-block">
       <button
-        onMouseMove={handleMove}
+        onMouseEnter={handleEnter}
         onMouseLeave={() => setTooltipPos(null)}
         className={`inline-flex items-center gap-0.5 px-1 py-0.5 rounded border text-[10px] font-bold cursor-pointer ${cfg.color} ${cfg.bg}`}
       >
@@ -1093,8 +1099,8 @@ const VerificationBadge = ({ verification, headlines }) => {
           style={{
             position: "fixed",
             zIndex: 9999,
-            left: tooltipPos.x,
-            top: tooltipPos.y,
+            left: tooltipPos.left,
+            top: tooltipPos.top,
             maxHeight: "80vh",
             overflowY: "auto",
           }}
