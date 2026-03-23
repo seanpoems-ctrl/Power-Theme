@@ -593,7 +593,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         <table className="w-full text-left">
           <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
             <tr className="border-b border-zinc-800/60">
-              <th className="px-2 py-2 w-6 text-[10px] text-zinc-600 select-none whitespace-nowrap">#</th>
+              <th className="pl-[57px] pr-2 py-2 w-6 text-[10px] text-zinc-600 select-none whitespace-nowrap">#</th>
               <th className="px-2 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Theme</th>
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
               <LBSortHeader k="rs_score" label="RS" w="w-16" />
@@ -608,7 +608,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                 <tr
                   onClick={() => isIndustryView && setExpanded(isExpanded ? null : t.name)}
                   className={`border-b border-zinc-800/30 transition-colors cursor-pointer ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
-                  <td className={`px-2 py-2 text-[11px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
+                  <td className={`pl-[57px] pr-2 py-2 text-[11px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
                   <td className="px-2 py-2 whitespace-nowrap">
                     <div className="flex items-center gap-1.5">
                       <span
@@ -3308,7 +3308,7 @@ const filtered = useMemo(() => {
               <VixGauge initialVix={data?.vix}/>
               <ScannerBriefFeed briefData={briefData}/>
             </div>
-            <div className="w-[700px] flex-shrink-0 translate-x-[133px]">
+            <div className="w-[700px] flex-shrink-0 translate-x-[76px]">
               {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
             </div>
           </div>
