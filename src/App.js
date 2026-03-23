@@ -556,8 +556,8 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     const isBlocked = LB_PERF_COLS.has(k) && LB_PERF_COLS.has(primaryKey) && !isPrimary;
     return (
       <th onClick={e => handleLBSort(k, e.shiftKey)}
-        className={`px-2 py-2 text-right cursor-pointer select-none ${w || 'w-14'} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500 hover:text-zinc-300'}`}>
-        <span className="inline-flex items-center justify-end gap-0.5 text-[10px] font-semibold uppercase tracking-wider">
+        className={`px-2 py-2 text-center cursor-pointer select-none ${w || 'w-14'} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500 hover:text-zinc-300'}`}>
+        <span className="inline-flex items-center justify-center gap-0.5 text-[10px] font-semibold uppercase tracking-wider">
           {label}
           {isPrimary   && <span className="text-[8px] text-blue-400/70">①{dir === 'desc' ? '▼' : '▲'}</span>}
           {isSecondary && <span className="text-[8px] text-violet-400/70">②{dir === 'desc' ? '▼' : '▲'}</span>}
@@ -621,7 +621,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                     </div>
                   </td>
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
-                  <td className={`px-2 py-1.5 text-right text-[11px] font-mono font-bold ${t.rs_score > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                  <td className={`px-2 py-1.5 text-center text-[11px] font-mono font-bold ${t.rs_score > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {t.rs_score > 0 ? '+' : ''}{t.rs_score.toFixed(1)}
                   </td>
                 </tr>
