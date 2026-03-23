@@ -158,14 +158,29 @@ const TIP_COLORS = {
   slate:   'border-slate-500/60 text-slate-200',
   zinc:    'border-zinc-700 text-zinc-200',
 };
-const Tip = ({ text, color = 'zinc', children }) => (
-  <span className="group relative inline-flex">
-    {children}
-    <span className={`pointer-events-none absolute bottom-full left-0 mb-1.5 px-2 py-1 text-[10px] leading-snug bg-zinc-900 border rounded-md whitespace-nowrap z-[9999] shadow-lg opacity-0 group-hover:opacity-100 transition-none ${TIP_COLORS[color] ?? TIP_COLORS.zinc}`}>
-      {text}
+const Tip = ({ text, color = 'zinc', width = "w-56", children }) => {
+  const [pos, setPos] = React.useState(null);
+  const ref = React.useRef(null);
+  const handleEnter = () => {
+    if (!ref.current) return;
+    const r = ref.current.getBoundingClientRect();
+    const showBelow = (window.innerHeight - r.bottom) >= r.top;
+    setPos({ x: r.left + r.width / 2, showBelow, top: r.bottom + 6, bottom: window.innerHeight - r.top + 6 });
+  };
+  return (
+    <span ref={ref} onMouseEnter={handleEnter} onMouseLeave={() => setPos(null)} className="cursor-help inline-flex">
+      {children}
+      {pos && (
+        <span
+          className={`${width} bg-zinc-900 border rounded-lg shadow-2xl px-2 py-1.5 text-[10px] leading-snug pointer-events-none ${TIP_COLORS[color] ?? TIP_COLORS.zinc}`}
+          style={{ position: "fixed", zIndex: 9999, left: pos.x, ...(pos.showBelow ? { top: pos.top } : { bottom: pos.bottom }), transform: "translateX(-50%)" }}
+        >
+          {text}
+        </span>
+      )}
     </span>
-  </span>
-);
+  );
+};
 
 // ── Elite Badge System ──
 const BADGE_CONFIG = {
@@ -1113,31 +1128,6 @@ const VerificationBadge = ({ verification, headlines }) => {
         </div>
       )}
     </div>
-  );
-};
-
-/** Generic hover tooltip — wraps any element */
-const Tip = ({ text, children, width = "w-56" }) => {
-  const [pos, setPos] = useState(null);
-  const ref = useRef(null);
-  const handleEnter = () => {
-    if (!ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    const showBelow = (window.innerHeight - r.bottom) >= r.top;
-    setPos({ x: r.left + r.width / 2, showBelow, top: r.bottom + 6, bottom: window.innerHeight - r.top + 6 });
-  };
-  return (
-    <span ref={ref} onMouseEnter={handleEnter} onMouseLeave={() => setPos(null)} className="cursor-help">
-      {children}
-      {pos && (
-        <div
-          className={`${width} bg-zinc-900 border border-zinc-700 rounded-lg shadow-2xl p-2.5 text-left pointer-events-none text-[10px] text-zinc-300 leading-snug`}
-          style={{ position: "fixed", zIndex: 9999, left: pos.x, ...(pos.showBelow ? { top: pos.top } : { bottom: pos.bottom }), transform: "translateX(-50%)" }}
-        >
-          {text}
-        </div>
-      )}
-    </span>
   );
 };
 
