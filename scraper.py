@@ -1232,6 +1232,52 @@ def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
     return _fetch_market_indicators_yfinance(ticker, breadth)
 
 
+def fetch_macro_assets() -> dict:
+    """Fetch BTC, GLD, Oil (CL=F) prices via yfinance + Credit Spreads from FRED."""
+    import yfinance as yf
+
+    result: dict = {}
+    for key, sym in [("btc", "BTC-USD"), ("gld", "GLD"), ("oil", "CL=F")]:
+        try:
+            hist = yf.Ticker(sym).history(period="5d", interval="1d")
+            hist = hist.dropna(subset=["Close"])
+            if len(hist) >= 2:
+                price = float(hist["Close"].iloc[-1])
+                prev = float(hist["Close"].iloc[-2])
+                result[key] = {
+                    "price": round(price, 2),
+                    "change_pct": round((price - prev) / prev * 100, 2),
+                }
+                logger.info(f"  {key.upper()} ({sym}): {price:.2f} {result[key]['change_pct']:+.2f}%")
+        except Exception as e:
+            logger.warning(f"  Macro asset {sym} failed: {e}")
+
+    # Credit Spreads: ICE BofA HY Index OAS from FRED (BAMLH0A0HYM2)
+    try:
+        resp = requests.get(
+            "https://fred.stlouisfed.org/graph/fredgraph.csv?id=BAMLH0A0HYM2",
+            timeout=15,
+        )
+        resp.raise_for_status()
+        lines = [
+            l.strip() for l in resp.text.strip().split("\n")
+            if l.strip() and not l.startswith("DATE")
+        ]
+        valid_lines = [l for l in lines if "." in l.split(",")[-1]]
+        if len(valid_lines) >= 2:
+            latest_val = float(valid_lines[-1].split(",")[1])
+            prev_val = float(valid_lines[-2].split(",")[1])
+            result["credit_spread"] = {
+                "value": round(latest_val, 2),
+                "change": round(latest_val - prev_val, 3),
+            }
+            logger.info(f"  Credit Spread (BAMLH0A0HYM2): {latest_val}% ({result['credit_spread']['change']:+.3f})")
+    except Exception as e:
+        logger.warning(f"  Credit spreads (FRED) failed: {e}")
+
+    return result
+
+
 def _market_signal(spy: dict, qqq: dict) -> str:
     def is_red(d):
         broke_200 = (d.get("sma200_pct") or 0) < 0
@@ -1256,8 +1302,8 @@ def _market_signal(spy: dict, qqq: dict) -> str:
 # RS Universe (S&P 500)
 # ──────────────────────────────────────────────────────────────
 
-def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None]:
-    """Download S&P 500 6-month data. Returns (rs_dict, breadth_pct)."""
+def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None, float | None, dict]:
+    """Download S&P 500 1-year data. Returns (rs_dict, breadth_50d_pct, breadth_200d_pct, price_data)."""
     try:
         import pandas as pd
         import yfinance as yf
@@ -1278,23 +1324,35 @@ def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None]:
             )
             lines = csv_resp.text.strip().split("\n")[1:]
             tickers = [line.split(",")[0].strip().replace(".", "-") for line in lines if line]
-        logger.info(f"  Downloading {len(tickers)} S&P 500 stocks...")
-        data = yf.download(tickers, period="6mo", interval="1d", auto_adjust=True, progress=False)
+        logger.info(f"  Downloading {len(tickers)} S&P 500 stocks (1Y for 200D breadth)...")
+        data = yf.download(tickers, period="1y", interval="1d", auto_adjust=True, progress=False)
         closes = data["Close"]
         valid = closes.dropna(thresh=int(len(closes) * 0.5), axis=1)
-        perf = ((valid.iloc[-1] - valid.iloc[0]) / valid.iloc[0] * 100).dropna()
 
-        # Compute breadth: % of S&P 500 stocks above their 50-day SMA
-        above_50 = 0
-        total = 0
+        # 6M RS performance: use last ~126 trading days to preserve RS calculation
+        six_months_ago = pd.Timestamp.now(tz="UTC") - pd.DateOffset(months=6)
+        six_m = valid[valid.index >= six_months_ago]
+        if len(six_m) >= 2:
+            perf = ((six_m.iloc[-1] - six_m.iloc[0]) / six_m.iloc[0] * 100).dropna()
+        else:
+            perf = ((valid.iloc[-1] - valid.iloc[0]) / valid.iloc[0] * 100).dropna()
+
+        # Compute breadth: % of S&P 500 stocks above their 50-day and 200-day SMA
+        above_50 = above_200 = total_50 = total_200 = 0
         for col in valid.columns:
             col_data = valid[col].dropna()
+            last = float(col_data.iloc[-1])
             if len(col_data) >= 50:
-                total += 1
-                if float(col_data.iloc[-1]) > float(col_data.iloc[-50:].mean()):
+                total_50 += 1
+                if last > float(col_data.iloc[-50:].mean()):
                     above_50 += 1
-        breadth = round(above_50 / total * 100, 1) if total > 0 else None
-        logger.info(f"  S&P 500 breadth (% above SMA50): {breadth}%")
+            if len(col_data) >= 200:
+                total_200 += 1
+                if last > float(col_data.iloc[-200:].mean()):
+                    above_200 += 1
+        breadth_50 = round(above_50 / total_50 * 100, 1) if total_50 > 0 else None
+        breadth_200 = round(above_200 / total_200 * 100, 1) if total_200 > 0 else None
+        logger.info(f"  S&P 500 breadth: {breadth_50}% above SMA50, {breadth_200}% above SMA200")
         # Also extract latest price + 1D change for prices.json
         price_data = {}
         for col in valid.columns:
@@ -1306,10 +1364,10 @@ def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None]:
                     "price": round(price, 2),
                     "change_pct": round((price - prev) / prev * 100, 2) if prev else None,
                 }
-        return perf.to_dict(), breadth, price_data
+        return perf.to_dict(), breadth_50, breadth_200, price_data
     except Exception as e:
         logger.warning(f"  S&P 500 RS universe failed: {e}")
-        return {}, None, {}
+        return {}, None, None, {}
 
 
 def _fetch_nasdaq100_breadth() -> float | None:
@@ -1473,8 +1531,8 @@ def build_data() -> dict:
 
     # ── Step 5: Compute RS vs S&P 500 universe + breadth ──
     logger.info("\nStep 5: Building RS universe from S&P 500...")
-    rs_universe, sp500_breadth, sp500_prices = _build_sp500_rs_universe()
-    logger.info(f"  RS universe: {len(rs_universe)} stocks | S&P 500 breadth: {sp500_breadth}%")
+    rs_universe, sp500_breadth, sp500_breadth_200, sp500_prices = _build_sp500_rs_universe()
+    logger.info(f"  RS universe: {len(rs_universe)} stocks | S&P 500 breadth 50D: {sp500_breadth}% | 200D: {sp500_breadth_200}%")
 
     all_stocks_flat = []
     for th in output_themes:
@@ -1518,8 +1576,18 @@ def build_data() -> dict:
     qqq_ind = fetch_market_indicators("QQQ", breadth=qqq_breadth)
     _sleep()
     iwm_ind = fetch_market_indicators("IWM", breadth=sp500_breadth)  # S&P 500 as proxy
+    _sleep()
+    macro_assets = fetch_macro_assets()
     signal = _market_signal(spy_ind, qqq_ind) if spy_ind and qqq_ind else "yellow"
-    market_condition = {"signal": signal, "spy": spy_ind, "qqq": qqq_ind, "iwm": iwm_ind}
+    market_condition = {
+        "signal": signal,
+        "spy": spy_ind,
+        "qqq": qqq_ind,
+        "iwm": iwm_ind,
+        "breadth_50d": sp500_breadth,
+        "breadth_200d": sp500_breadth_200,
+        **macro_assets,
+    }
     logger.info(
         f"  Market signal: {signal} | "
         f"SPY sma50={spy_ind.get('sma50_pct')} status={spy_ind.get('index_status')} breadth={sp500_breadth}% | "
