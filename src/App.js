@@ -2465,12 +2465,18 @@ const MomentumCockpit = () => {
   const [analysis, setAnalysis] = useState(null);
   const [analyzing, setAnalyzing] = useState(false);
 
+  // Gapper data — poll every 5 min (matches scanner schedule)
   useEffect(() => {
-    fetch(process.env.PUBLIC_URL + "/gapper_data.json?v=" + Date.now())
-      .then(r => r.ok ? r.json() : null)
-      .then(d => { setGapperData(d); setLoading(false); })
-      .catch(() => setLoading(false));
-  }, []);
+    const fetchGapper = () => {
+      fetch(process.env.PUBLIC_URL + "/gapper_data.json?v=" + Date.now())
+        .then(r => r.ok ? r.json() : null)
+        .then(d => { setGapperData(d); setLoading(false); })
+        .catch(() => setLoading(false));
+    };
+    fetchGapper();
+    const id = setInterval(fetchGapper, 5 * 60 * 1000);
+    return () => clearInterval(id);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchAnalysis = useCallback(async (ticker, row) => {
     setSelectedTicker(ticker);
@@ -2908,15 +2914,14 @@ export default function App() {
     return () => clearInterval(id);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Thematic data — poll every 5 min (matches scraper schedule)
   useEffect(() => {
-    (async () => {
-      setLoading(true);
+    const fetchThematic = async () => {
       try {
         const r = await fetch(process.env.PUBLIC_URL + "/thematic_data.json?v=" + Date.now());
         if (r.ok) {
           const json = await r.json();
           setFetchedAt(Date.now());
-          // Normalize: fill perf_1d from change_pct when scraper left it null
           for (const theme of (json.themes || []))
             for (const sub of (theme.subthemes || []))
               for (const stock of (sub.stocks || []))
@@ -2925,15 +2930,25 @@ export default function App() {
         }
       } catch {}
       setLoading(false);
-    })();
-  }, []);
+    };
+    setLoading(true);
+    fetchThematic();
+    const id = setInterval(fetchThematic, 5 * 60 * 1000);
+    return () => clearInterval(id);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Market brief — poll every 5 min
   useEffect(() => {
-    fetch(process.env.PUBLIC_URL + "/market_brief.json?v=" + Date.now())
-      .then(r => r.ok ? r.json() : null)
-      .then(d => { if (d) setBriefData(d); })
-      .catch(() => {});
-  }, []);
+    const fetchBrief = () => {
+      fetch(process.env.PUBLIC_URL + "/market_brief.json?v=" + Date.now())
+        .then(r => r.ok ? r.json() : null)
+        .then(d => { if (d) setBriefData(d); })
+        .catch(() => {});
+    };
+    fetchBrief();
+    const id = setInterval(fetchBrief, 5 * 60 * 1000);
+    return () => clearInterval(id);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Breaking news — poll every 5 min
   useEffect(() => {
