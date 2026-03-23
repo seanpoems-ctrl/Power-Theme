@@ -1067,9 +1067,8 @@ const VerificationBadge = ({ verification, headlines }) => {
   const handleEnter = () => {
     if (!btnRef.current) return;
     const r = btnRef.current.getBoundingClientRect();
-    const TOOLTIP_H = 220; // approx tooltip height
-    const above = r.top > TOOLTIP_H + 8;
-    setTooltipPos({ x: r.left + r.width / 2, y: above ? r.top - 8 : r.bottom + 8, above });
+    const showBelow = (window.innerHeight - r.bottom) >= r.top;
+    setTooltipPos({ x: r.left + r.width / 2, showBelow, top: r.bottom + 8, bottom: window.innerHeight - r.top + 8 });
   };
 
   return (
@@ -1089,10 +1088,10 @@ const VerificationBadge = ({ verification, headlines }) => {
             position: "fixed",
             zIndex: 9999,
             left: tooltipPos.x,
-            ...(tooltipPos.above
-              ? { bottom: window.innerHeight - tooltipPos.y }
-              : { top: tooltipPos.y }),
+            ...(tooltipPos.showBelow ? { top: tooltipPos.top } : { bottom: tooltipPos.bottom }),
             transform: "translateX(-50%)",
+            maxHeight: "80vh",
+            overflowY: "auto",
           }}
         >
           <div className={`text-[10px] font-bold mb-1 ${cfg.color}`}>{cfg.icon} {cfg.label} · {confidence_score}% confidence</div>
