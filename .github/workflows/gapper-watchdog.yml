@@ -1,0 +1,57 @@
+name: Gapper Watchdog
+
+# Safety net: if the gapper cron missed today, force-trigger it at 10:30 AM ET
+on:
+  schedule:
+    - cron: "30 14 * * 1-5"   # 10:30 AM ET (UTC-4 summer) Mon–Fri
+  workflow_dispatch: {}
+
+jobs:
+  watchdog:
+    runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+    permissions:
+      contents: read
+      actions: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check if gapper ran today
+        id: check
+        run: |
+          python - <<'EOF'
+          import json, os
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+
+          ET = ZoneInfo("America/New_York")
+          today = datetime.now(ET).strftime("%Y-%m-%d")
+
+          already_ran = False
+          last_scan = "none"
+          try:
+              with open("public/gapper_data.json") as f:
+                  data = json.load(f)
+              last_scan = data.get("scan_time", "")[:10]
+              already_ran = last_scan == today
+          except Exception as e:
+              print(f"  Could not read gapper_data.json: {e}")
+
+          print(f"  Today (ET): {today} | Last scan: {last_scan} | Already ran: {already_ran}")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"already_ran={'true' if already_ran else 'false'}\n")
+          EOF
+
+      - name: Trigger gapper (missed today)
+        if: steps.check.outputs.already_ran == 'false'
+        run: |
+          echo "⚠️  Gapper missed today — triggering via workflow_dispatch"
+          gh workflow run "Pre-Market Gapper Scan" --repo ${{ github.repository }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Already ran — nothing to do
+        if: steps.check.outputs.already_ran == 'true'
+        run: echo "✅ Gapper already ran today — no action needed"
