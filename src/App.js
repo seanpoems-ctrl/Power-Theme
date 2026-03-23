@@ -81,7 +81,7 @@ const Sparkline = ({ data, width = 72, height = 26 }) => {
 };
 
 const PerfCell = ({ value }) => {
-  if (value == null) return <td className="text-center py-3 px-2 text-xs text-zinc-600">—</td>;
+  if (value == null) return <td className="text-center py-3 px-2 text-[13px] text-zinc-600">—</td>;
   const v = parseFloat(value);
   let bg, txt;
   if (v >= 20) { bg = "bg-emerald-500/30"; txt = "text-emerald-300"; }
@@ -94,7 +94,7 @@ const PerfCell = ({ value }) => {
   else { bg = "bg-red-500/30"; txt = "text-red-300"; }
   return (
     <td className="text-center py-3 px-1">
-      <span className={`inline-block rounded-md px-2 py-1.5 text-xs font-mono font-medium ${txt} ${bg}`}>
+      <span className={`inline-block rounded-md px-2 py-1.5 text-[13px] font-mono font-medium ${txt} ${bg}`}>
         {v >= 0 ? "+" : ""}{v.toFixed(1)}%
       </span>
     </td>
@@ -116,9 +116,9 @@ const RSBadge = ({ value, trend }) => {
   else cl = "bg-red-500/15 text-red-400 border-red-500/20";
   return (
     <span className="inline-flex items-center gap-0.5">
-      <span className={`inline-flex items-center px-1.5 py-0.5 text-[11px] font-semibold rounded border ${cl}`}>{value}</span>
-      {trend === "up"   && <span className="text-[10px] font-bold text-cyan-400" title="RS Improving">▲</span>}
-      {trend === "down" && <span className="text-[10px] font-bold text-rose-400" title="RS Declining">▼</span>}
+      <span className={`inline-flex items-center px-1.5 py-0.5 text-[12px] font-semibold rounded border ${cl}`}>{value}</span>
+      {trend === "up"   && <span className="text-[11px] font-bold text-cyan-400" title="RS Improving">▲</span>}
+      {trend === "down" && <span className="text-[11px] font-bold text-rose-400" title="RS Declining">▼</span>}
     </span>
   );
 };
@@ -127,25 +127,25 @@ const fmtVol = n => n >= 1e9 ? `$${(n/1e9).toFixed(1)}B` : n >= 1e6 ? `$${(n/1e6
 const fmtNum = n => n >= 1e6 ? `${(n/1e6).toFixed(1)}M` : n >= 1e3 ? `${(n/1e3).toFixed(0)}K` : `${n}`;
 
 const Dist52wCell = ({ value }) => {
-  if (value == null) return <td className="text-center py-3 px-2 text-xs text-zinc-600">—</td>;
+  if (value == null) return <td className="text-center py-3 px-2 text-[13px] text-zinc-600">—</td>;
   const v = parseFloat(value);
   let txt;
   if (v >= -3) txt = "text-emerald-300 font-semibold";
   else if (v >= -8) txt = "text-emerald-400";
   else if (v >= -15) txt = "text-amber-400";
   else txt = "text-zinc-500";
-  return <td className={`text-center py-3 px-2 text-xs font-mono ${txt}`}>{v.toFixed(1)}%</td>;
+  return <td className={`text-center py-3 px-2 text-[13px] font-mono ${txt}`}>{v.toFixed(1)}%</td>;
 };
 
 const RVolCell = ({ value }) => {
-  if (value == null) return <td className="text-center py-3 px-2 text-xs text-zinc-600">—</td>;
+  if (value == null) return <td className="text-center py-3 px-2 text-[13px] text-zinc-600">—</td>;
   const v = parseFloat(value);
   let txt;
   if (v >= 2) txt = "text-emerald-300 font-semibold";
   else if (v >= 1.5) txt = "text-emerald-400";
   else if (v >= 1) txt = "text-zinc-300";
   else txt = "text-zinc-500";
-  return <td className={`text-center py-3 px-2 text-xs font-mono ${txt}`}>{v.toFixed(2)}x</td>;
+  return <td className={`text-center py-3 px-2 text-[13px] font-mono ${txt}`}>{v.toFixed(2)}x</td>;
 };
 
 /* Instant tooltip — no browser delay */
@@ -176,7 +176,7 @@ const Tip = ({ text, color = 'zinc', width = "w-56", children }) => {
       {children}
       {pos && (
         <span
-          className={`${width} bg-zinc-900 border rounded-lg shadow-2xl px-2 py-1.5 text-[10px] leading-snug pointer-events-none ${TIP_COLORS[color] ?? TIP_COLORS.zinc}`}
+          className={`${width} bg-zinc-900 border rounded-lg shadow-2xl px-2 py-1.5 text-[11px] leading-snug pointer-events-none ${TIP_COLORS[color] ?? TIP_COLORS.zinc}`}
           style={{ position: "fixed", zIndex: 9999, left: pos.left, top: pos.top, maxHeight: pos.maxHeight, overflowY: "auto" }}
         >
           {text}
@@ -219,7 +219,7 @@ const GRADE_TIP = {
 const GRADE_TIP_COLOR = { "A+": "emerald", "A": "blue", "B": "zinc" };
 const GradeBadge = ({ grade }) => {
   if (!grade) return null;
-  return <Tip text={GRADE_TIP[grade]} color={GRADE_TIP_COLOR[grade]}><span className={`inline-flex items-center px-1 py-0.5 text-[10px] font-bold rounded border backdrop-blur-sm cursor-pointer ${GRADE_STYLE[grade]}`}>{grade}</span></Tip>;
+  return <Tip text={GRADE_TIP[grade]} color={GRADE_TIP_COLOR[grade]}><span className={`inline-flex items-center px-1 py-0.5 text-[11px] font-bold rounded border backdrop-blur-sm cursor-pointer ${GRADE_STYLE[grade]}`}>{grade}</span></Tip>;
 };
 
 function isVDU(s) {
@@ -327,11 +327,11 @@ const RS_SPY_KEYS = [
 
 const RSvsSPYBadge = ({ stockPerf, spyPerf }) => {
   if (stockPerf == null || spyPerf == null)
-    return <span className="text-[10px] text-zinc-700">—</span>;
+    return <span className="text-[11px] text-zinc-700">—</span>;
   const diff = stockPerf - spyPerf;
-  if (diff > 5) return <span className="px-1 py-0.5 text-[9px] font-bold rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">Leader</span>;
-  if (diff < -5) return <span className="px-1 py-0.5 text-[9px] font-bold rounded bg-orange-500/15 text-orange-400 border border-orange-500/20">Lagging</span>;
-  return <span className="px-1 py-0.5 text-[9px] font-bold rounded bg-zinc-700/40 text-zinc-500 border border-zinc-600/30">In-Line</span>;
+  if (diff > 5) return <span className="px-1 py-0.5 text-[10px] font-bold rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">Leader</span>;
+  if (diff < -5) return <span className="px-1 py-0.5 text-[10px] font-bold rounded bg-orange-500/15 text-orange-400 border border-orange-500/20">Lagging</span>;
+  return <span className="px-1 py-0.5 text-[10px] font-bold rounded bg-zinc-700/40 text-zinc-500 border border-zinc-600/30">In-Line</span>;
 };
 
 // ── Market Condition ──
@@ -368,8 +368,8 @@ const MarketCondition = ({ mc }) => {
   return (
     <div className={`mb-4 px-4 py-2.5 rounded-lg border flex flex-wrap items-center gap-3 ${cfg.ring}`}>
       <span className={`w-2 h-2 rounded-full flex-shrink-0 ${cfg.dot}`}/>
-      <span className="text-xs font-semibold text-zinc-200">{cfg.label}</span>
-      <span className="text-[11px] text-zinc-500 hidden sm:block">{cfg.sub}</span>
+      <span className="text-[13px] font-semibold text-zinc-200">{cfg.label}</span>
+      <span className="text-[12px] text-zinc-500 hidden sm:block">{cfg.sub}</span>
     </div>
   );
 };
@@ -390,12 +390,12 @@ function earningsDaysAway(s) {
 const EarningsCell = ({ value }) => {
   const days = earningsDaysAway(value);
   const label = value ? value.replace(/\s+(AMC|BMO|--)/i, "") : null;
-  if (!label || days == null) return <td className="text-center py-3 px-2 text-xs text-zinc-700">—</td>;
+  if (!label || days == null) return <td className="text-center py-3 px-2 text-[13px] text-zinc-700">—</td>;
   if (days <= 7)
-    return <td className="text-center py-3 px-2"><span className="text-[10px] font-bold text-red-400 bg-red-500/15 border border-red-500/30 px-1 py-0.5 rounded">⚠ {label}</span></td>;
+    return <td className="text-center py-3 px-2"><span className="text-[11px] font-bold text-red-400 bg-red-500/15 border border-red-500/30 px-1 py-0.5 rounded">⚠ {label}</span></td>;
   if (days <= 14)
-    return <td className="text-center py-3 px-2"><span className="text-[10px] font-medium text-amber-400">{label}</span></td>;
-  return <td className="text-center py-3 px-2 text-[10px] text-zinc-600 font-mono">{label}</td>;
+    return <td className="text-center py-3 px-2"><span className="text-[11px] font-medium text-amber-400">{label}</span></td>;
+  return <td className="text-center py-3 px-2 text-[11px] text-zinc-600 font-mono">{label}</td>;
 };
 
 // ── Counter-Trend Warning ──
@@ -418,9 +418,9 @@ const CounterTrendWarning = ({ themes }) => {
     <div className="mb-4 px-4 py-3 bg-rose-500/10 border border-rose-500/30 rounded-lg flex items-start gap-2">
       <AlertTriangle size={13} className="text-rose-400 flex-shrink-0 mt-0.5"/>
       <div>
-        <span className="text-xs font-semibold text-rose-400">⚠ Counter-Trend Alert</span>
+        <span className="text-[13px] font-semibold text-rose-400">⚠ Counter-Trend Alert</span>
         {warnings.map(t => (
-          <p key={t.name} className="text-[11px] text-rose-400/70 mt-0.5">
+          <p key={t.name} className="text-[12px] text-rose-400/70 mt-0.5">
             <span className="font-medium text-rose-400">{t.name}</span> is{" "}
             <span className="font-medium">#1 Flash Momentum today (+{t.avg1d?.toFixed(1)}%)</span> but in a{" "}
             <span className="font-medium">Structural Downtrend ({t.avg6m?.toFixed(1)}% over 6M)</span> — likely a dead-cat bounce, not a real breakout.
@@ -453,8 +453,8 @@ const CorrelationGuard = ({ themes }) => {
     <div className="mb-4 px-4 py-3 bg-orange-500/10 border border-orange-500/30 rounded-lg flex items-start gap-2">
       <AlertTriangle size={13} className="text-orange-400 flex-shrink-0 mt-0.5"/>
       <div>
-        <span className="text-xs font-semibold text-orange-400">Concentration Warning</span>
-        <p className="text-[11px] text-orange-400/70 mt-0.5">High correlation detected. Risk concentrated in: <span className="font-medium text-orange-400">{warning.join(', ')}</span></p>
+        <span className="text-[13px] font-semibold text-orange-400">Concentration Warning</span>
+        <p className="text-[12px] text-orange-400/70 mt-0.5">High correlation detected. Risk concentrated in: <span className="font-medium text-orange-400">{warning.join(', ')}</span></p>
       </div>
     </div>
   );
@@ -466,12 +466,12 @@ function normalizeThemeRaw(t) {
 }
 
 const PerfCellLB = ({ val }) => {
-  if (val == null) return <td className="px-2 py-1.5 text-center text-[10px] text-zinc-600">—</td>;
+  if (val == null) return <td className="px-2 py-1.5 text-center text-[11px] text-zinc-600">—</td>;
   const color = val > 0 ? 'text-emerald-400' : val < 0 ? 'text-red-400' : 'text-zinc-400';
   const bg = val > 5 ? 'bg-emerald-500/10' : val < -5 ? 'bg-red-500/10' : '';
   return (
     <td className="px-2 py-1.5 text-center">
-      <span className={`inline-block rounded-md px-1.5 py-0.5 text-[11px] font-mono font-medium ${color} ${bg}`}>{val > 0 ? '+' : ''}{val.toFixed(1)}%</span>
+      <span className={`inline-block rounded-md px-1.5 py-0.5 text-[12px] font-mono font-medium ${color} ${bg}`}>{val > 0 ? '+' : ''}{val.toFixed(1)}%</span>
     </td>
   );
 };
@@ -557,10 +557,10 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     return (
       <th onClick={e => handleLBSort(k, e.shiftKey)}
         className={`px-2 py-2 text-center cursor-pointer select-none ${w || 'w-14'} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500 hover:text-zinc-300'}`}>
-        <span className="inline-flex items-center justify-center gap-0.5 text-[10px] font-semibold uppercase tracking-wider">
+        <span className="inline-flex items-center justify-center gap-0.5 text-[11px] font-semibold uppercase tracking-wider">
           {label}
-          {isPrimary   && <span className="text-[8px] text-blue-400/70">①{dir === 'desc' ? '▼' : '▲'}</span>}
-          {isSecondary && <span className="text-[8px] text-violet-400/70">②{dir === 'desc' ? '▼' : '▲'}</span>}
+          {isPrimary   && <span className="text-[9px] text-blue-400/70">①{dir === 'desc' ? '▼' : '▲'}</span>}
+          {isSecondary && <span className="text-[9px] text-violet-400/70">②{dir === 'desc' ? '▼' : '▲'}</span>}
         </span>
       </th>
     );
@@ -571,11 +571,11 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     <div className="p-4 bg-zinc-900/60 rounded-xl border border-zinc-800/60 w-full min-w-0">
       <div className="flex items-center mb-3 gap-2">
         <BarChart3 size={13} className="text-blue-400 flex-shrink-0"/>
-        <span className="text-xs font-semibold text-zinc-300 whitespace-nowrap">Theme Leaderboard</span>
-        <span className="text-[10px] text-zinc-600">{ranked.length} themes</span>
+        <span className="text-[13px] font-semibold text-zinc-300 whitespace-nowrap">Theme Leaderboard</span>
+        <span className="text-[11px] text-zinc-600">{ranked.length} themes</span>
         {secondaryKey && (
           <button onClick={() => setSortPriority([{ key: 'rs_score', direction: 'desc' }])}
-            className="text-[9px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">
+            className="text-[10px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">
             ✕ Reset
           </button>
         )}
@@ -583,7 +583,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 flex-shrink-0">
           {[{k:"themes",l:"Themes Map"},{k:"industry",l:"Industry"}].map(v => (
             <button key={v.k} onClick={() => { setView(v.k); setExpanded(null); }}
-              className={`px-2.5 py-1 text-[10px] font-medium rounded-md transition-all ${view === v.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
+              className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all ${view === v.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
               {v.l}
             </button>
           ))}
@@ -593,8 +593,8 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         <table className="w-full text-left">
           <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
             <tr className="border-b border-zinc-800/60">
-              <th className="px-2 py-2 w-6 text-[10px] text-zinc-600 select-none whitespace-nowrap">#</th>
-              <th className="px-2 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Theme</th>
+              <th className="px-2 py-2 w-6 text-[11px] text-zinc-600 select-none whitespace-nowrap">#</th>
+              <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Theme</th>
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
               <LBSortHeader k="rs_score" label="RS" w="w-16" />
             </tr>
@@ -608,20 +608,20 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                 <tr
                   onClick={() => isIndustryView && setExpanded(isExpanded ? null : t.name)}
                   className={`border-b border-zinc-800/30 transition-colors cursor-pointer ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
-                  <td className={`px-2 py-2 text-[11px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
+                  <td className={`px-2 py-2 text-[12px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
                   <td className="px-2 py-2 whitespace-nowrap">
                     <div className="flex items-center gap-1.5">
                       <span
-                        className="text-[11px] font-semibold text-zinc-200 cursor-default"
+                        className="text-[12px] font-semibold text-zinc-200 cursor-default"
                         onMouseEnter={e => { const etf = THEME_ETF_MAP[t.name]; if (etf) setThemeHover({ ticker: etf, rect: e.currentTarget.getBoundingClientRect() }); }}
                         onMouseLeave={() => setThemeHover(null)}
                       >{t.name}</span>
-                      {t.stage2_momentum && <span className="px-1.5 py-0.5 text-[8px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full leading-none">STAGE 2</span>}
-                      {t.n_industries && <span className="text-[9px] text-zinc-600">{t.n_industries} ind</span>}
+                      {t.stage2_momentum && <span className="px-1.5 py-0.5 text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full leading-none">STAGE 2</span>}
+                      {t.n_industries && <span className="text-[10px] text-zinc-600">{t.n_industries} ind</span>}
                     </div>
                   </td>
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
-                  <td className={`px-2 py-1.5 text-center text-[11px] font-mono font-bold ${t.rs_score > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                  <td className={`px-2 py-1.5 text-center text-[12px] font-mono font-bold ${t.rs_score > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {t.rs_score > 0 ? '+' : ''}{t.rs_score.toFixed(1)}
                   </td>
                 </tr>
@@ -629,7 +629,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                   <tr key={ind.name} className="bg-zinc-800/20 border-b border-zinc-800/20">
                     <td className="px-2 py-1.5"></td>
                     <td className="px-2 py-1.5 pl-4 whitespace-nowrap">
-                      <span className="text-[10px] text-zinc-400">{ind.name}</span>
+                      <span className="text-[11px] text-zinc-400">{ind.name}</span>
                     </td>
                     {LB_KEYS.map(k => <PerfCellLB key={k.key} val={ind[k.key]}/>)}
                     <td className="px-2 py-1.5"></td>
@@ -712,7 +712,7 @@ const AlphaLeaderBadge = ({ stock, sortPriority = [], spyPerf1d = 0 }) => {
   const style = grade === 'A+'
     ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
     : 'bg-blue-500/20 text-blue-300 border-blue-500/40';
-  return <span className={`inline-flex items-center gap-0.5 px-1 py-0.5 text-[9px] font-bold rounded border ${style}`}>🔥 {grade}</span>;
+  return <span className={`inline-flex items-center gap-0.5 px-1 py-0.5 text-[10px] font-bold rounded border ${style}`}>🔥 {grade}</span>;
 };
 
 const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, themeName, subthemeName }) => {
@@ -779,8 +779,8 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
         className={`py-3 px-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors text-${align} ${w || ''} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500'}`}>
         <span className="inline-flex items-center gap-0.5">
           {label}
-          {isPrimary && <span className="text-[8px] text-blue-400/70 ml-0.5">①{dir === 'desc' ? '▼' : '▲'}</span>}
-          {isSecondary && <span className="text-[8px] text-violet-400/70 ml-0.5">②{dir === 'desc' ? '▼' : '▲'}</span>}
+          {isPrimary && <span className="text-[9px] text-blue-400/70 ml-0.5">①{dir === 'desc' ? '▼' : '▲'}</span>}
+          {isSecondary && <span className="text-[9px] text-violet-400/70 ml-0.5">②{dir === 'desc' ? '▼' : '▲'}</span>}
         </span>
       </th>
     );
@@ -790,17 +790,17 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
     <>
     {secondaryKey && (
       <div className="flex items-center gap-2 mb-1">
-        <span className="text-[10px] text-zinc-500">
+        <span className="text-[11px] text-zinc-500">
           <span className="text-blue-400">①{primaryKey}</span>
           {' → '}<span className="text-violet-400">②{secondaryKey}</span>
         </span>
-        <button onClick={() => setSortPriority([{ key: 'rs_52w', direction: 'desc' }])} className="text-[9px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">✕ Reset</button>
+        <button onClick={() => setSortPriority([{ key: 'rs_52w', direction: 'desc' }])} className="text-[10px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">✕ Reset</button>
       </div>
     )}
     <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
       <table className="w-full text-sm table-fixed min-w-[1280px]">
         <thead>
-          <tr className="text-[11px] uppercase tracking-wider bg-zinc-900/80">
+          <tr className="text-[12px] uppercase tracking-wider bg-zinc-900/80">
             <th className="text-left py-3 px-4 font-medium w-[160px] text-zinc-500">Ticker</th>
             <SH k="price" label="Price" w="w-[80px]"/>
             {PERF_KEYS.map(p => <SH key={p.key} k={p.key} label={p.label} w="w-[64px]"/>)}
@@ -828,35 +828,35 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
                   <div>
                     <div className="flex items-center gap-1.5 flex-wrap">
                       <span
-                        className="font-semibold text-zinc-100 text-xs cursor-default hover:text-blue-400 transition-colors"
+                        className="font-semibold text-zinc-100 text-[13px] cursor-default hover:text-blue-400 transition-colors"
                         onMouseEnter={e => setHovered({ ticker: s.ticker, rect: e.currentTarget.getBoundingClientRect() })}
                         onMouseLeave={() => setHovered(null)}
                       >{s.ticker}</span>
                       <GradeBadge grade={getEliteGrade(s)}/>
                       <AlphaLeaderBadge stock={s} sortPriority={sortPriority} spyPerf1d={spyPerf || 0}/>
-                      {isVCPStage1(s) && <Tip text="Narrowing consolidation + VDU + near 52W high" color="violet"><span className="text-[9px] font-bold text-violet-400 bg-violet-500/15 border border-violet-500/30 px-1 py-0.5 rounded cursor-pointer">🎯 VCP S1</span></Tip>}
-                      {!isVCPStage1(s) && isVDU(s) && <Tip text="Volume below 50% of 10-day avg — selling pressure exhausted" color="blue"><span className="text-[9px] font-bold text-blue-400 bg-blue-500/15 border border-blue-500/30 px-1 py-0.5 rounded cursor-pointer">VDU</span></Tip>}
-                      {isTight(s) && <Tip text="Last 3 days range < 1.5% — extremely tight" color="fuchsia"><span className="text-[9px] font-bold text-fuchsia-400 bg-fuchsia-500/15 border border-fuchsia-500/30 px-1 py-0.5 rounded cursor-pointer">Tight</span></Tip>}
-                      {isInsideDay(s) && <Tip text="Today's range inside yesterday's range" color="slate"><span className="text-[9px] font-bold text-slate-400 bg-slate-500/15 border border-slate-500/30 px-1 py-0.5 rounded cursor-pointer">ID</span></Tip>}
+                      {isVCPStage1(s) && <Tip text="Narrowing consolidation + VDU + near 52W high" color="violet"><span className="text-[10px] font-bold text-violet-400 bg-violet-500/15 border border-violet-500/30 px-1 py-0.5 rounded cursor-pointer">🎯 VCP S1</span></Tip>}
+                      {!isVCPStage1(s) && isVDU(s) && <Tip text="Volume below 50% of 10-day avg — selling pressure exhausted" color="blue"><span className="text-[10px] font-bold text-blue-400 bg-blue-500/15 border border-blue-500/30 px-1 py-0.5 rounded cursor-pointer">VDU</span></Tip>}
+                      {isTight(s) && <Tip text="Last 3 days range < 1.5% — extremely tight" color="fuchsia"><span className="text-[10px] font-bold text-fuchsia-400 bg-fuchsia-500/15 border border-fuchsia-500/30 px-1 py-0.5 rounded cursor-pointer">Tight</span></Tip>}
+                      {isInsideDay(s) && <Tip text="Today's range inside yesterday's range" color="slate"><span className="text-[10px] font-bold text-slate-400 bg-slate-500/15 border border-slate-500/30 px-1 py-0.5 rounded cursor-pointer">ID</span></Tip>}
                       <span className="hidden sm:flex items-center gap-0.5">
                         {getEliteBadges(s, { isTopTheme, isTopADR: topADRTickers?.has(s.ticker) }).map(b => <EliteBadge key={b} type={b}/>)}
                       </span>
                     </div>
-                    <p className="text-[10px] text-zinc-500 leading-tight truncate max-w-[160px]">{s.company}</p>
+                    <p className="text-[11px] text-zinc-500 leading-tight truncate max-w-[160px]">{s.company}</p>
                   </div>
                 </div>
               </td>
-              <td className="text-center py-3 px-2 font-mono text-zinc-200 text-xs">${s.price.toFixed(2)}</td>
+              <td className="text-center py-3 px-2 font-mono text-zinc-200 text-[13px]">${s.price.toFixed(2)}</td>
               {PERF_KEYS.map(p => <PerfCell key={p.key} value={s[p.key]}/>)}
               <EarningsCell value={s.earnings}/>
               <td className="text-center py-3 px-2"><div className="flex justify-center"><Sparkline data={sparklineSeries(s)}/></div></td>
-              <td className="text-center py-3 px-2 font-mono text-zinc-400 text-xs">{s["52w_high"] ? `$${s["52w_high"].toFixed(2)}` : "—"}</td>
-              <td className="text-center py-3 px-2 font-mono text-zinc-500 text-xs">{s["52w_low"] ? `$${s["52w_low"].toFixed(2)}` : "—"}</td>
+              <td className="text-center py-3 px-2 font-mono text-zinc-400 text-[13px]">{s["52w_high"] ? `$${s["52w_high"].toFixed(2)}` : "—"}</td>
+              <td className="text-center py-3 px-2 font-mono text-zinc-500 text-[13px]">{s["52w_low"] ? `$${s["52w_low"].toFixed(2)}` : "—"}</td>
               <Dist52wCell value={s.dist_52w_high}/>
-              <td className="text-center py-3 px-2 text-zinc-500 text-xs font-mono">{fmtNum(s.volume)}</td>
+              <td className="text-center py-3 px-2 text-zinc-500 text-[13px] font-mono">{fmtNum(s.volume)}</td>
               <RVolCell value={s.rvol}/>
-              <td className="text-center py-3 px-2 text-zinc-500 text-xs font-mono">{fmtVol(s.avg_dollar_volume || s.dollar_volume)}</td>
-              <td className="text-center py-3 px-2 text-zinc-400 text-xs font-mono">{s.adr_pct.toFixed(1)}%</td>
+              <td className="text-center py-3 px-2 text-zinc-500 text-[13px] font-mono">{fmtVol(s.avg_dollar_volume || s.dollar_volume)}</td>
+              <td className="text-center py-3 px-2 text-zinc-400 text-[13px] font-mono">{s.adr_pct.toFixed(1)}%</td>
               <td className="text-center py-3 px-2"><RSBadge value={s.rs_52w} trend={getRSTrend(s)}/></td>
               <td className="text-center py-3 px-2"><RSvsSPYBadge stockPerf={s[rsSPYKey]} spyPerf={spyPerf}/></td>
             </tr>
@@ -887,15 +887,15 @@ const SubThemeSection = ({ subtheme, parentAvg, lbPerfKey, spyPerf, rsSPYKey, is
       <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-3 py-2 bg-zinc-800/40 hover:bg-zinc-800/60 rounded-md border border-zinc-700/30 transition-colors">
         <div className="flex items-center gap-2">
           {open ? <ChevronDown size={12} className="text-zinc-500"/> : <ChevronRight size={12} className="text-zinc-500"/>}
-          <span className="text-xs font-medium text-zinc-300">{subtheme.name}</span>
-          <span className="text-[10px] text-zinc-600 bg-zinc-700/30 px-1.5 py-0.5 rounded">{subtheme.stocks.length}</span>
+          <span className="text-[13px] font-medium text-zinc-300">{subtheme.name}</span>
+          <span className="text-[11px] text-zinc-600 bg-zinc-700/30 px-1.5 py-0.5 rounded">{subtheme.stocks.length}</span>
           {hasDivergence && (
-            <span className="flex items-center gap-0.5 px-1.5 py-0.5 bg-yellow-500/15 border border-yellow-500/30 rounded text-[10px] text-yellow-400 font-medium">
+            <span className="flex items-center gap-0.5 px-1.5 py-0.5 bg-yellow-500/15 border border-yellow-500/30 rounded text-[11px] text-yellow-400 font-medium">
               <Zap size={9} className="fill-yellow-400"/> +{(subAvg - parentAvg).toFixed(1)}%
             </span>
           )}
         </div>
-        <div className="flex items-center gap-2.5 text-[10px]">
+        <div className="flex items-center gap-2.5 text-[11px]">
           {PERF_KEYS.map(p => {
             const v = avg(p.key);
             return (
@@ -943,11 +943,11 @@ const ThemeSection = ({ theme, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRT
           {open ? <ChevronDown size={14} className="text-zinc-400"/> : <ChevronRight size={14} className="text-zinc-400"/>}
           <Layers size={13} className="text-blue-400"/>
           <span className="font-semibold text-sm text-zinc-100">{norm.name}</span>
-          <span className="text-[11px] text-zinc-500 bg-zinc-700/40 px-1.5 py-0.5 rounded">
+          <span className="text-[12px] text-zinc-500 bg-zinc-700/40 px-1.5 py-0.5 rounded">
             {norm.subthemes.length} sub · {allStocks.length} stocks
           </span>
         </div>
-        <div className="flex items-center gap-3 text-[11px]">
+        <div className="flex items-center gap-3 text-[12px]">
           {PERF_KEYS.map(p => {
             const v = perfVal(p.key);
             if (v == null) return null;
@@ -979,7 +979,7 @@ const FInput = ({ label, value, onChange, hint }) => {
   useEffect(() => { setLocal(String(value)); }, [value]);
   return (
     <div className="flex flex-col gap-1 min-w-0">
-      <label className="text-[10px] text-zinc-500 whitespace-nowrap">{label}</label>
+      <label className="text-[11px] text-zinc-500 whitespace-nowrap">{label}</label>
       <input
         type="number"
         value={local}
@@ -988,9 +988,9 @@ const FInput = ({ label, value, onChange, hint }) => {
           const n = parseFloat(e.target.value);
           if (!isNaN(n)) onChange(n);
         }}
-        className="w-full px-2 py-1.5 text-xs font-mono bg-zinc-900 border border-zinc-700/60 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50"
+        className="w-full px-2 py-1.5 text-[13px] font-mono bg-zinc-900 border border-zinc-700/60 rounded text-zinc-200 focus:outline-none focus:border-blue-500/50"
       />
-      <span className="text-[10px] text-zinc-600 h-3">{hint || ""}</span>
+      <span className="text-[11px] text-zinc-600 h-3">{hint || ""}</span>
     </div>
   );
 };
@@ -1018,11 +1018,11 @@ const renderStyledText = (text) => {
 
 const AnalysisCell = ({ text }) => {
   const [expanded, setExpanded] = useState(false);
-  if (!text) return <span className="text-zinc-600 text-[11px]">—</span>;
+  if (!text) return <span className="text-zinc-600 text-[12px]">—</span>;
   const sections = text.split(/\n\n(?=•)/).map(s => s.trim()).filter(Boolean);
   const visible = expanded ? sections : sections.slice(0, 1);
   return (
-    <div className="text-[11px] leading-relaxed min-w-[320px] max-w-[420px]">
+    <div className="text-[12px] leading-relaxed min-w-[320px] max-w-[420px]">
       {visible.map((sec, i) => {
         const nl = sec.indexOf("\n");
         const header = nl > -1 ? sec.slice(0, nl) : sec;
@@ -1037,7 +1037,7 @@ const AnalysisCell = ({ text }) => {
       {sections.length > 1 && (
         <button
           onClick={e => { e.stopPropagation(); setExpanded(x => !x); }}
-          className="mt-2 flex items-center justify-center w-5 h-5 rounded-full border border-zinc-600/60 text-zinc-500 hover:border-zinc-400 hover:text-zinc-300 transition-colors text-[10px] font-bold"
+          className="mt-2 flex items-center justify-center w-5 h-5 rounded-full border border-zinc-600/60 text-zinc-500 hover:border-zinc-400 hover:text-zinc-300 transition-colors text-[11px] font-bold"
         >
           {expanded ? "−" : "+"}
         </button>
@@ -1066,7 +1066,7 @@ const ConvictionBar = ({ value }) => {
       <div className="w-16 h-1.5 bg-zinc-800 rounded-full overflow-hidden">
         <div className={`h-full rounded-full ${color}`} style={{ width: `${value}%` }}/>
       </div>
-      <span className="text-[10px] font-mono text-zinc-400">{value}%</span>
+      <span className="text-[11px] font-mono text-zinc-400">{value}%</span>
     </div>
   );
 };
@@ -1106,7 +1106,7 @@ const VerificationBadge = ({ verification, headlines }) => {
       <button
         onMouseEnter={handleEnter}
         onMouseLeave={() => setTooltipPos(null)}
-        className={`inline-flex items-center gap-0.5 px-1 py-0.5 rounded border text-[10px] font-bold cursor-pointer ${cfg.color} ${cfg.bg}`}
+        className={`inline-flex items-center gap-0.5 px-1 py-0.5 rounded border text-[11px] font-bold cursor-pointer ${cfg.color} ${cfg.bg}`}
       >
         {cfg.icon}
       </button>
@@ -1122,14 +1122,14 @@ const VerificationBadge = ({ verification, headlines }) => {
             overflowY: "auto",
           }}
         >
-          <div className={`text-[10px] font-bold mb-1 ${cfg.color}`}>{cfg.icon} {cfg.label} · {confidence_score}% confidence</div>
-          {primary_claim && <div className="text-[10px] text-zinc-300 mb-1.5 leading-snug">"{primary_claim}"</div>}
-          {discrepancy_note && <div className="text-[10px] text-amber-300 mb-1.5 leading-snug">⚠ {discrepancy_note}</div>}
+          <div className={`text-[11px] font-bold mb-1 ${cfg.color}`}>{cfg.icon} {cfg.label} · {confidence_score}% confidence</div>
+          {primary_claim && <div className="text-[11px] text-zinc-300 mb-1.5 leading-snug">"{primary_claim}"</div>}
+          {discrepancy_note && <div className="text-[11px] text-amber-300 mb-1.5 leading-snug">⚠ {discrepancy_note}</div>}
           {headlines?.length > 0 && (
             <div className="border-t border-zinc-800 pt-1.5 space-y-1">
-              <div className="text-[9px] text-zinc-600 uppercase tracking-widest mb-1">Sources</div>
+              <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1">Sources</div>
               {headlines.map((h, i) => (
-                <div key={i} className="text-[10px] text-zinc-400 leading-snug">
+                <div key={i} className="text-[11px] text-zinc-400 leading-snug">
                   <span className="text-zinc-600">[{h.source}]</span>{" "}
                   {h.url
                     ? <a href={h.url} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">{h.title}</a>
@@ -1145,9 +1145,9 @@ const VerificationBadge = ({ verification, headlines }) => {
 };
 
 const DailyChg = ({ val }) => {
-  if (val == null) return <span className="text-zinc-600 text-xs">—</span>;
+  if (val == null) return <span className="text-zinc-600 text-[13px]">—</span>;
   const pos = val >= 0;
-  return <span className={`text-xs font-mono font-bold ${pos ? "text-emerald-400" : "text-red-400"}`}>{pos ? "+" : ""}{val.toFixed(2)}%</span>;
+  return <span className={`text-[13px] font-mono font-bold ${pos ? "text-emerald-400" : "text-red-400"}`}>{pos ? "+" : ""}{val.toFixed(2)}%</span>;
 };
 
 /* ─────────────────────────────────────────────────────────── VIX GAUGE ── */
@@ -1201,8 +1201,8 @@ const VixGauge = ({ initialVix }) => {
       {/* Header */}
       <div className="flex items-center justify-between mb-1">
         <div className="flex items-center gap-2">
-          <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest">VIX Fear Gauge</span>
-          <span className="text-[9px] text-zinc-700 border border-zinc-800 rounded px-1.5 py-0.5">CBOE · SPX</span>
+          <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-widest">VIX Fear Gauge</span>
+          <span className="text-[10px] text-zinc-700 border border-zinc-800 rounded px-1.5 py-0.5">CBOE · SPX</span>
         </div>
       </div>
 
@@ -1296,15 +1296,15 @@ const VixGauge = ({ initialVix }) => {
         </svg>
 
         <div className="flex items-center gap-2 mt-2 w-full min-w-0">
-          <span className="text-[9px] text-zinc-700 font-mono shrink-0">0</span>
+          <span className="text-[10px] text-zinc-700 font-mono shrink-0">0</span>
           <input type="range" min="0" max="45" step="0.5" value={vix}
             onChange={e => setVix(parseFloat(e.target.value))}
             className="flex-1 min-w-0 accent-zinc-400 h-1 cursor-pointer"/>
-          <span className="text-[9px] text-zinc-700 font-mono shrink-0">45</span>
+          <span className="text-[10px] text-zinc-700 font-mono shrink-0">45</span>
         </div>
         {initialVix != null && vix !== initialVix && (
           <button onClick={() => setVix(initialVix)}
-            className="mt-1.5 w-full text-center py-0.5 text-[9px] font-medium rounded border border-zinc-700/60 bg-zinc-800/60 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600 transition-colors">
+            className="mt-1.5 w-full text-center py-0.5 text-[10px] font-medium rounded border border-zinc-700/60 bg-zinc-800/60 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600 transition-colors">
             Restore {initialVix.toFixed(1)}
           </button>
         )}
@@ -1314,9 +1314,9 @@ const VixGauge = ({ initialVix }) => {
         <div className="flex-1 min-w-0 mt-0 px-3 py-2 rounded-lg border transition-colors duration-300"
           style={{ background: '#1a1a1a', borderColor: active.color + '55', marginTop: '-18px' }}>
           <div className="border-b border-zinc-800/70 pb-2">
-            <div className="text-[9px] font-semibold text-zinc-500 uppercase tracking-widest mb-1.5">Expected Move</div>
+            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest mb-1.5">Expected Move</div>
             <div className="flex flex-nowrap items-baseline gap-x-2 min-w-0">
-              <span className="text-[10px] text-zinc-500 font-mono shrink-0">$SPX</span>
+              <span className="text-[11px] text-zinc-500 font-mono shrink-0">$SPX</span>
               <span className="text-sm font-bold font-mono text-zinc-100 tabular-nums leading-none">
                 ±{expectedMovePct.toFixed(2)}%
               </span>
@@ -1324,11 +1324,11 @@ const VixGauge = ({ initialVix }) => {
           </div>
           <div className="pt-1.5 space-y-1">
             <div className="flex flex-col gap-0.5">
-              <span className="text-[11px] font-bold uppercase tracking-wider leading-tight transition-colors duration-300"
+              <span className="text-[12px] font-bold uppercase tracking-wider leading-tight transition-colors duration-300"
                 style={{ color: active.color }}>{active.name}</span>
-              <span className="text-[9px] font-mono uppercase leading-tight" style={{ color: active.color, opacity: 0.85 }}>{active.range}</span>
+              <span className="text-[10px] font-mono uppercase leading-tight" style={{ color: active.color, opacity: 0.85 }}>{active.range}</span>
             </div>
-            <div className="text-[11px] text-zinc-500 leading-relaxed">{active.impact}</div>
+            <div className="text-[12px] text-zinc-500 leading-relaxed">{active.impact}</div>
           </div>
         </div>
       </div>
@@ -1373,7 +1373,7 @@ const BreakingNewsAlert = ({ newsData }) => {
           <span className="text-red-700 font-black text-lg border border-red-700 px-2 py-0.5">
             {top.grade}/10
           </span>
-          <span className="text-red-800 text-xs font-semibold uppercase tracking-widest">
+          <span className="text-red-800 text-[13px] font-semibold uppercase tracking-widest">
             {top.source}
           </span>
         </div>
@@ -1418,8 +1418,8 @@ const BreakingNewsAlert = ({ newsData }) => {
             aria-label="Dismiss"
           >×</button>
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-red-700 text-[10px] font-bold border border-red-800 px-1">{alert.grade}/10</span>
-            <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{alert.source}</span>
+            <span className="text-red-700 text-[11px] font-bold border border-red-800 px-1">{alert.grade}/10</span>
+            <span className="text-red-900 text-[11px] font-semibold uppercase tracking-widest">{alert.source}</span>
           </div>
           <p className="text-red-600 font-extrabold text-lg uppercase leading-snug mb-3 border-b border-red-900 pb-3">
             {alert.headline}
@@ -1427,13 +1427,13 @@ const BreakingNewsAlert = ({ newsData }) => {
           <div className="space-y-3">
             {alert.analysis && (
               <div>
-                <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">Analysis</h4>
+                <h4 className="text-white font-bold text-[13px] uppercase tracking-widest mb-1">Analysis</h4>
                 <p className="text-white text-sm font-medium leading-relaxed">{alert.analysis}</p>
               </div>
             )}
             {alert.impact && (
               <div>
-                <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-1">Impact</h4>
+                <h4 className="text-white font-bold text-[13px] uppercase tracking-widest mb-1">Impact</h4>
                 <p className="text-white text-sm font-medium leading-relaxed">{alert.impact}</p>
               </div>
             )}
@@ -1443,7 +1443,7 @@ const BreakingNewsAlert = ({ newsData }) => {
 
       {/* Last-checked */}
       {newsData.last_checked && (
-        <p className="text-[10px] text-zinc-700 text-right">
+        <p className="text-[11px] text-zinc-700 text-right">
           Last checked: {newsData.last_checked}
         </p>
       )}
@@ -1505,7 +1505,7 @@ function getNextBriefTime() {
 const ScannerBriefFeed = ({ briefData }) => {
   if (!briefData) return (
     <div className="px-5 pt-4 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex items-center justify-center" style={{ minHeight: 200 }}>
-      <span className="text-[10px] text-zinc-600">載入簡報中…</span>
+      <span className="text-[11px] text-zinc-600">載入簡報中…</span>
     </div>
   );
 
@@ -1537,22 +1537,22 @@ const ScannerBriefFeed = ({ briefData }) => {
       {/* Header */}
       <div className="flex items-center gap-1.5 mb-3 pb-2 border-b border-zinc-800/60">
         <span className="text-sm">{sessionEmoji}</span>
-        <span className="text-[10px] font-bold text-zinc-300 uppercase tracking-wide">{session} Brief</span>
+        <span className="text-[11px] font-bold text-zinc-300 uppercase tracking-wide">{session} Brief</span>
         <div className="ml-auto text-right">
-          <div className="text-[9px] text-zinc-600">{generated_at}</div>
-          <div className="text-[9px] text-zinc-500">Next: {getNextBriefTime()}</div>
+          <div className="text-[10px] text-zinc-600">{generated_at}</div>
+          <div className="text-[10px] text-zinc-500">Next: {getNextBriefTime()}</div>
         </div>
       </div>
 
       <div className="overflow-y-auto flex-1 space-y-3" style={{ maxHeight: "237px" }}>
 
         {error && (
-          <div className="text-[10px] text-red-400 bg-red-500/10 rounded p-2">{String(error)}</div>
+          <div className="text-[11px] text-red-400 bg-red-500/10 rounded p-2">{String(error)}</div>
         )}
 
         {/* Mood */}
         {mood && (
-          <div className="text-[10px] text-zinc-400 italic">Mood: <span className="text-zinc-300 not-italic font-medium">{mood}</span></div>
+          <div className="text-[11px] text-zinc-400 italic">Mood: <span className="text-zinc-300 not-italic font-medium">{mood}</span></div>
         )}
 
         {/* Reversal Banner */}
@@ -1560,8 +1560,8 @@ const ScannerBriefFeed = ({ briefData }) => {
           <div className="flex items-start gap-1.5 bg-amber-500/15 border border-amber-500/30 rounded p-2">
             <span className="text-sm flex-shrink-0">🔥</span>
             <div>
-              <div className="text-[10px] font-bold text-amber-400">[REVERSAL SIGNAL DETECTED]</div>
-              <div className="text-[9px] text-amber-300/70 mt-0.5">{reversal_signals.description}</div>
+              <div className="text-[11px] font-bold text-amber-400">[REVERSAL SIGNAL DETECTED]</div>
+              <div className="text-[10px] text-amber-300/70 mt-0.5">{reversal_signals.description}</div>
             </div>
           </div>
         )}
@@ -1569,8 +1569,8 @@ const ScannerBriefFeed = ({ briefData }) => {
         {/* 1. Global Snapshot */}
         {global_snapshot.length > 0 && (
           <div>
-            <div className="text-[9px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">1. Global Snapshot</div>
-            <table className="w-full text-[9px]">
+            <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">1. Global Snapshot</div>
+            <table className="w-full text-[10px]">
               <thead>
                 <tr className="text-zinc-600 border-b border-zinc-800/60">
                   <th className="text-left py-0.5 font-medium">Asset</th>
@@ -1613,7 +1613,7 @@ const ScannerBriefFeed = ({ briefData }) => {
             {Object.values(global_indices).some(g => g?.change_pct != null) && (
               <div className="flex gap-2 mt-1.5 flex-wrap">
                 {Object.entries(global_indices).map(([k, g]) => g?.change_pct != null && (
-                  <span key={k} className="text-[9px]">
+                  <span key={k} className="text-[10px]">
                     <span className="text-zinc-600">{g.label?.split(" ")[0]}</span>
                     <span className={`ml-0.5 font-mono ${g.change_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
                       {g.change_pct >= 0 ? "+" : ""}{g.change_pct.toFixed(2)}%
@@ -1628,10 +1628,10 @@ const ScannerBriefFeed = ({ briefData }) => {
         {/* 2. Macro Risk & Breadth */}
         {(macro_breadth.credit_spread != null || macro_breadth.s5fi != null) && (
           <div>
-            <div className="text-[9px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">2. Macro Risk &amp; Breadth</div>
+            <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">2. Macro Risk &amp; Breadth</div>
             <div className="space-y-1">
               {macro_breadth.credit_spread != null && (
-                <div className="text-[10px] text-zinc-400">
+                <div className="text-[11px] text-zinc-400">
                   <span className="text-zinc-500">• Credit Spread (HY Master II): </span>
                   <span className="text-zinc-200 font-mono">{macro_breadth.credit_spread.toFixed(2)}%</span>
                   {macro_breadth.credit_regime && (
@@ -1640,7 +1640,7 @@ const ScannerBriefFeed = ({ briefData }) => {
                 </div>
               )}
               {macro_breadth.s5fi != null && (
-                <div className="text-[10px] text-zinc-400">
+                <div className="text-[11px] text-zinc-400">
                   <span className="text-zinc-500">• Market Breadth: </span>
                   <span className="font-mono text-zinc-200">S5FI {macro_breadth.s5fi.toFixed(1)}%</span>
                   {macro_breadth.mmth != null && (
@@ -1649,7 +1649,7 @@ const ScannerBriefFeed = ({ briefData }) => {
                 </div>
               )}
               {macro_breadth.breadth_status && (
-                <div className={`text-[10px] font-bold mt-0.5 ${
+                <div className={`text-[11px] font-bold mt-0.5 ${
                   macro_breadth.generational ? "text-orange-400" : macro_breadth.breadth_flush ? "text-red-400" : "text-amber-400"
                 }`}>
                   • Status: [{macro_breadth.breadth_status}]
@@ -1662,13 +1662,13 @@ const ScannerBriefFeed = ({ briefData }) => {
         {/* 3. Analysis & Lessons */}
         {(analysis.analysis_para1 || analysis.analysis_para2) && (
           <div>
-            <div className="text-[9px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">3. Analysis &amp; Lessons</div>
+            <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">3. Analysis &amp; Lessons</div>
             <div className="space-y-2">
               {analysis.analysis_para1 && (
-                <p className="text-[10px] text-zinc-300 leading-relaxed">{analysis.analysis_para1}</p>
+                <p className="text-[11px] text-zinc-300 leading-relaxed">{analysis.analysis_para1}</p>
               )}
               {analysis.analysis_para2 && (
-                <p className="text-[10px] text-zinc-400 leading-relaxed">{analysis.analysis_para2}</p>
+                <p className="text-[11px] text-zinc-400 leading-relaxed">{analysis.analysis_para2}</p>
               )}
             </div>
           </div>
@@ -1677,17 +1677,17 @@ const ScannerBriefFeed = ({ briefData }) => {
         {/* 4. Ticker Intelligence */}
         {analysis.ticker_intel?.length > 0 && (
           <div>
-            <div className="text-[9px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">4. Ticker Intel</div>
+            <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">4. Ticker Intel</div>
             <div className="space-y-1.5">
               {analysis.ticker_intel.map((t, i) => (
                 <div key={i} className="flex gap-1.5 items-start">
-                  <span className={`text-[9px] font-bold px-1 py-0.5 rounded border flex-shrink-0 mt-0.5 ${gradeCls(t.grade)}`}>
+                  <span className={`text-[10px] font-bold px-1 py-0.5 rounded border flex-shrink-0 mt-0.5 ${gradeCls(t.grade)}`}>
                     {t.grade}
                   </span>
                   <div>
-                    <span className="text-[10px] font-bold text-zinc-200 font-mono">${t.ticker}</span>
-                    {t.company && <span className="text-[9px] text-zinc-500 ml-1">({t.company})</span>}
-                    {t.reason && <p className="text-[9px] text-zinc-400 leading-snug mt-0.5">{t.reason}</p>}
+                    <span className="text-[11px] font-bold text-zinc-200 font-mono">${t.ticker}</span>
+                    {t.company && <span className="text-[10px] text-zinc-500 ml-1">({t.company})</span>}
+                    {t.reason && <p className="text-[10px] text-zinc-400 leading-snug mt-0.5">{t.reason}</p>}
                   </div>
                 </div>
               ))}
@@ -1747,7 +1747,7 @@ const GapperScanner = () => {
     <div className="text-center py-20 text-zinc-500">
       <Clock size={28} className="mx-auto mb-3 opacity-40"/>
       <p className="text-sm font-medium">No pre-market data available</p>
-      <p className="text-xs mt-1 text-zinc-600">Scanner runs weekdays 08:05 AM ET</p>
+      <p className="text-[13px] mt-1 text-zinc-600">Scanner runs weekdays 08:05 AM ET</p>
     </div>
   );
 
@@ -1779,10 +1779,10 @@ const GapperScanner = () => {
           <FInput label="Min Avg $ Vol ($M)"   value={fMinDolVol} onChange={setFMinDolVol} hint={`= ${fmtVol(fMinDolVol * 1e6)}`}/>
         </div>
         <div className="flex items-center justify-between pt-1 border-t border-zinc-700/30">
-          <button onClick={resetFilters} className="text-[11px] px-2.5 py-1 bg-zinc-700/50 border border-zinc-600/40 rounded text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition-colors">
+          <button onClick={resetFilters} className="text-[12px] px-2.5 py-1 bg-zinc-700/50 border border-zinc-600/40 rounded text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition-colors">
             Reset
           </button>
-          <span className="text-[11px] text-zinc-500">
+          <span className="text-[12px] text-zinc-500">
             Scanned: <span className="text-zinc-400">{gapperData.scan_time}</span>
             <span className="ml-3 text-zinc-600">{filtered.length} / {gapperData.gappers.length} shown</span>
             <span className="ml-3 text-zinc-600">· Next: <span className="text-zinc-500">{getNextGapperScanTime(gapperData.scan_time)}</span></span>
@@ -1793,7 +1793,7 @@ const GapperScanner = () => {
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-sm font-bold text-zinc-100 tracking-wide uppercase">Institutional Gappers</h2>
         {filtered.length === 0 && (
-          <p className="text-xs text-zinc-500">No gappers match current filters — try loosening the criteria</p>
+          <p className="text-[13px] text-zinc-500">No gappers match current filters — try loosening the criteria</p>
         )}
       </div>
 
@@ -1815,7 +1815,7 @@ const GapperScanner = () => {
             <col style={{width:"24%"}}/>
           </colgroup>
           <thead>
-            <tr className="text-[10px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40 align-middle">
+            <tr className="text-[11px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40 align-middle">
               <th className="text-center py-2 px-1.5 font-medium align-middle">Ticker</th>
               <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">Premkt<br/>Price<br/>Chg %</th>
               <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">Premkt<br/>Vol</th>
@@ -1845,7 +1845,7 @@ const GapperScanner = () => {
                 {/* Ticker */}
                 <td className="py-2 px-1.5 text-center">
                   <span
-                    className="font-bold text-zinc-100 text-xs hover:text-blue-400 transition-colors cursor-default"
+                    className="font-bold text-zinc-100 text-[13px] hover:text-blue-400 transition-colors cursor-default"
                     onMouseEnter={e => setHovered({ ticker: g.ticker, rect: e.currentTarget.getBoundingClientRect() })}
                     onMouseLeave={() => setHovered(null)}
                   >
@@ -1854,27 +1854,27 @@ const GapperScanner = () => {
                   <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer" className="ml-1">
                     <ExternalLink size={8} className="inline text-zinc-600 hover:text-blue-400"/>
                   </a>
-                  <div className="text-[10px] font-mono text-zinc-500">${g.price.toFixed(2)}</div>
+                  <div className="text-[11px] font-mono text-zinc-500">${g.price.toFixed(2)}</div>
                 </td>
                 {/* Premkt % */}
                 <td className="py-2 px-1.5 text-center">
-                  <div className="text-[11px] font-mono text-zinc-300">${g.price.toFixed(2)}</div>
-                  <span className="text-xs font-bold font-mono text-emerald-400">+{g.gap_pct.toFixed(1)}%</span>
+                  <div className="text-[12px] font-mono text-zinc-300">${g.price.toFixed(2)}</div>
+                  <span className="text-[13px] font-bold font-mono text-emerald-400">+{g.gap_pct.toFixed(1)}%</span>
                 </td>
                 {/* Premkt Vol */}
-                <td className="py-2 px-1.5 text-center text-[11px] font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
+                <td className="py-2 px-1.5 text-center text-[12px] font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
                 {/* RVol */}
                 <td className="py-2 px-1.5 text-center">
-                  <span className={`text-[11px] font-bold font-mono ${g.rvol >= 5 ? "text-emerald-300" : g.rvol >= 3 ? "text-emerald-400" : g.rvol >= 2 ? "text-amber-400" : "text-zinc-500"}`}>
+                  <span className={`text-[12px] font-bold font-mono ${g.rvol >= 5 ? "text-emerald-300" : g.rvol >= 3 ? "text-emerald-400" : g.rvol >= 2 ? "text-amber-400" : "text-zinc-500"}`}>
                     {g.rvol.toFixed(2)}x
                   </span>
                 </td>
                 {/* Daily % */}
                 <td className="py-2 px-1.5 text-center"><DailyChg val={g.daily_pct}/></td>
                 {/* Short Int */}
-                <td className="py-2 px-1.5 text-center text-[11px] font-mono text-zinc-400">{g.short_float || "—"}</td>
+                <td className="py-2 px-1.5 text-center text-[12px] font-mono text-zinc-400">{g.short_float || "—"}</td>
                 {/* Float */}
-                <td className="py-2 px-1.5 text-center text-[11px] font-mono text-zinc-400">{g.float_shares || "—"}</td>
+                <td className="py-2 px-1.5 text-center text-[12px] font-mono text-zinc-400">{g.float_shares || "—"}</td>
                 {/* Sector / Industry */}
                 {(() => {
                   const db = tickerDb[g.ticker] || {};
@@ -1882,14 +1882,14 @@ const GapperScanner = () => {
                   const industry = db.industry || g.industry || "";
                   return (
                     <>
-                      <td className="py-2 px-1.5 text-center text-[10px] text-zinc-200 align-middle">{sector || <span className="text-zinc-600">—</span>}</td>
-                      <td className="py-2 px-1.5 text-center text-[10px] text-zinc-200 align-middle">{industry || <span className="text-zinc-600">—</span>}</td>
+                      <td className="py-2 px-1.5 text-center text-[11px] text-zinc-200 align-middle">{sector || <span className="text-zinc-600">—</span>}</td>
+                      <td className="py-2 px-1.5 text-center text-[11px] text-zinc-200 align-middle">{industry || <span className="text-zinc-600">—</span>}</td>
                     </>
                   );
                 })()}
                 {/* Category */}
                 <td className="py-2 px-1.5 text-center">
-                  <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded-full border ${CATEGORY_STYLE[g.category] || CATEGORY_STYLE["Others"]}`}>
+                  <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full border ${CATEGORY_STYLE[g.category] || CATEGORY_STYLE["Others"]}`}>
                     {g.category}
                   </span>
                 </td>
@@ -1898,7 +1898,7 @@ const GapperScanner = () => {
                   <div className="flex flex-col items-center gap-0.5">
                     <div className="flex items-center gap-1">
                       {g.grade
-                        ? <Tip text={{ "A+": "極高信心 (90+)：催化劑強、成交量爆發、技術全達標。Gap & Go 策略首選", A: "高信心 (75-89)：催化劑明確，技術面佳，可積極參與", B: "中等信心 (50-74)：催化劑存在但強度不足，或技術面稍弱，謹慎操作", C: "低信心 (<50)：催化劑不明確或技術不達標，建議觀望" }[g.grade] || `信心評分：${g.grade}`}><span className={`text-[10px] font-bold px-1 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span></Tip>
+                        ? <Tip text={{ "A+": "極高信心 (90+)：催化劑強、成交量爆發、技術全達標。Gap & Go 策略首選", A: "高信心 (75-89)：催化劑明確，技術面佳，可積極參與", B: "中等信心 (50-74)：催化劑存在但強度不足，或技術面稍弱，謹慎操作", C: "低信心 (<50)：催化劑不明確或技術不達標，建議觀望" }[g.grade] || `信心評分：${g.grade}`}><span className={`text-[11px] font-bold px-1 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span></Tip>
                         : <span className="text-zinc-600">—</span>}
                       <VerificationBadge verification={g.verification} headlines={g.headlines}/>
                     </div>
@@ -1906,7 +1906,7 @@ const GapperScanner = () => {
                       <Tip text={(g.technical_status || "").startsWith("Fail")
                         ? `✗ 未通過技術門檻：${g.technical_status.replace("Fail — ", "")}。整排灰色 = 不建議交易`
                         : "✓ 通過技術門檻：平均日成交金額 >$100M 且 ADR >4%，具備足夠流動性與波動性"}>
-                        <span className={`text-[8px] font-semibold px-1 py-0.5 rounded leading-none ${
+                        <span className={`text-[9px] font-semibold px-1 py-0.5 rounded leading-none ${
                           (g.technical_status || "").startsWith("Fail")
                             ? "text-red-400 bg-red-500/10 border border-red-500/20"
                             : "text-emerald-400 bg-emerald-500/10 border border-emerald-500/20"
@@ -1917,13 +1917,13 @@ const GapperScanner = () => {
                     )}
                     {(g.theme || g.category) === "Technical / Flow" && (
                       <Tip text="找不到明確催化劑（無財報、合約、政策等新聞）。歸類為資金流向/技術突破。自動降為 C 級，風險較高，謹慎操作">
-                        <span className="text-[8px] text-amber-500 font-semibold">🔍 Flow</span>
+                        <span className="text-[9px] text-amber-500 font-semibold">🔍 Flow</span>
                       </Tip>
                     )}
                   </div>
                 </td>
                 {/* Reasoning — shows analysis_detail with bold Catalyst/Impact */}
-                <td className="py-2 px-1.5 text-[11px] text-zinc-400 leading-relaxed align-middle whitespace-normal break-words">
+                <td className="py-2 px-1.5 text-[12px] text-zinc-400 leading-relaxed align-middle whitespace-normal break-words">
                   {g.analysis_detail ? (() => {
                     const parts = g.analysis_detail.split(" | Impact: ");
                     if (parts.length === 2) {
@@ -2213,7 +2213,7 @@ const SearchBar = ({ data, search, setSearch }) => {
         onKeyDown={e => { if (e.key === 'Enter' && search.trim()) saveToHistory(search.trim()); }}
         onBlur={() => { if (search.trim()) saveToHistory(search.trim()); setTimeout(() => { setOpen(false); setSelectedTheme(null); setSelectedSubTheme(null); setTickerHover(null); }, 150); }}
         placeholder="Search ticker or company…"
-        className="w-52 pl-7 pr-7 py-1.5 text-xs bg-zinc-800/60 border border-zinc-700/50 rounded-md text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-blue-500/50"
+        className="w-52 pl-7 pr-7 py-1.5 text-[13px] bg-zinc-800/60 border border-zinc-700/50 rounded-md text-zinc-200 placeholder-zinc-600 focus:outline-none focus:border-blue-500/50"
       />
       {search && <button onMouseDown={e => { e.preventDefault(); setSearch(""); setOpen(false); }} className="absolute right-2 top-1/2 -translate-y-1/2"><X size={11} className="text-zinc-500"/></button>}
 
@@ -2221,14 +2221,14 @@ const SearchBar = ({ data, search, setSearch }) => {
       {open && q.length === 0 && searchHistory.length > 0 && (
         <div className="absolute top-full right-0 mt-1.5 w-72 bg-zinc-900 border border-zinc-700/60 rounded-lg shadow-2xl z-50 py-1">
           <div className="px-3 py-1 flex items-center justify-between">
-            <span className="text-[9px] text-zinc-600 uppercase tracking-widest">最近搜尋</span>
-            <button onMouseDown={e => { e.preventDefault(); setSearchHistory([]); localStorage.removeItem('searchHistory'); }} className="text-[9px] text-zinc-600 hover:text-zinc-400">清除</button>
+            <span className="text-[10px] text-zinc-600 uppercase tracking-widest">最近搜尋</span>
+            <button onMouseDown={e => { e.preventDefault(); setSearchHistory([]); localStorage.removeItem('searchHistory'); }} className="text-[10px] text-zinc-600 hover:text-zinc-400">清除</button>
           </div>
           {searchHistory.map(h => (
             <button key={h} onMouseDown={e => { e.preventDefault(); setSearch(h); setOpen(true); }}
               className="w-full flex items-center gap-2 px-3 py-1.5 hover:bg-zinc-800 text-left">
               <Clock size={10} className="text-zinc-600 flex-shrink-0"/>
-              <span className="text-xs text-zinc-300">{h}</span>
+              <span className="text-[13px] text-zinc-300">{h}</span>
             </button>
           ))}
         </div>
@@ -2240,9 +2240,9 @@ const SearchBar = ({ data, search, setSearch }) => {
           {suggestions.map(s => (
             <button key={s.ticker} onMouseDown={e => { e.preventDefault(); saveToHistory(s.ticker); setSearch(s.ticker); setOpen(true); }}
               className="w-full flex items-center gap-2 px-3 py-1.5 hover:bg-zinc-800 text-left">
-              <span className="text-xs font-bold text-zinc-200 w-14 flex-shrink-0">{s.ticker}</span>
-              <span className="text-[11px] text-zinc-500 truncate flex-1">{s.company}</span>
-              {s.inScanner && <span className="text-[9px] text-blue-400 flex-shrink-0">in scanner</span>}
+              <span className="text-[13px] font-bold text-zinc-200 w-14 flex-shrink-0">{s.ticker}</span>
+              <span className="text-[12px] text-zinc-500 truncate flex-1">{s.company}</span>
+              {s.inScanner && <span className="text-[10px] text-blue-400 flex-shrink-0">in scanner</span>}
             </button>
           ))}
         </div>
@@ -2258,23 +2258,23 @@ const SearchBar = ({ data, search, setSearch }) => {
               onMouseLeave={() => setTickerHover(null)}
             >{fullResult.ticker}</span>
             {livePriceLoading && !displayPrice && (
-              <span className="text-xs text-zinc-600 animate-pulse">載入中…</span>
+              <span className="text-[13px] text-zinc-600 animate-pulse">載入中…</span>
             )}
             {displayPrice?.price != null && (
               <span className="flex items-baseline gap-1.5">
                 <span className="text-sm font-semibold text-zinc-200">${displayPrice.price.toFixed(2)}</span>
                 {displayPrice.change_pct != null && (
-                  <span className={`text-xs font-medium ${displayPrice.change_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                  <span className={`text-[13px] font-medium ${displayPrice.change_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {displayPrice.change_pct >= 0 ? '+' : ''}{displayPrice.change_pct.toFixed(2)}%
                   </span>
                 )}
               </span>
             )}
-            {fullResult.company && <span className="text-[11px] text-zinc-500 truncate w-full">{fullResult.company}</span>}
+            {fullResult.company && <span className="text-[12px] text-zinc-500 truncate w-full">{fullResult.company}</span>}
           </div>
           <div className="space-y-1.5">
             {[{ label: "Sector", value: fullResult.sector }, { label: "Industry", value: fullResult.industry }].map(({ label, value }) => value ? (
-              <div key={label} className="flex gap-2 text-xs">
+              <div key={label} className="flex gap-2 text-[13px]">
                 <span className="text-zinc-500 w-16 flex-shrink-0">{label}</span>
                 <span className="text-zinc-200">{value}</span>
               </div>
@@ -2282,7 +2282,7 @@ const SearchBar = ({ data, search, setSearch }) => {
             {fullResult.appearances.length > 0 && (
               <div className="mt-2 pt-2 border-t border-zinc-800 space-y-1.5">
                 {/* Single "Theme" row — display only, not expandable */}
-                <div className="flex gap-2 text-xs items-start">
+                <div className="flex gap-2 text-[13px] items-start">
                   <span className="text-zinc-500 w-16 flex-shrink-0">Theme</span>
                   <div className="flex flex-wrap gap-x-2 gap-y-1">
                     {fullResult.appearances.map((a, i) => (
@@ -2292,7 +2292,7 @@ const SearchBar = ({ data, search, setSearch }) => {
                 </div>
                 {/* Sub-theme for scanner stocks */}
                 {fullResult.appearances.some(a => a.subtheme) && (
-                  <div className="flex gap-2 text-xs items-start">
+                  <div className="flex gap-2 text-[13px] items-start">
                     <span className="text-zinc-500 w-16 flex-shrink-0">Sub-Theme</span>
                     <div className="flex flex-wrap gap-x-2 gap-y-1">
                       {fullResult.appearances.filter(a => a.subtheme).map((a, i) => {
@@ -2304,7 +2304,7 @@ const SearchBar = ({ data, search, setSearch }) => {
                             onClick={() => setSelectedSubTheme(isOpen ? null : a.subtheme)}
                           >
                             {a.subtheme}
-                            <span className="text-zinc-500 text-[9px] ml-0.5">{isOpen ? '▲' : '▼'}</span>
+                            <span className="text-zinc-500 text-[10px] ml-0.5">{isOpen ? '▲' : '▼'}</span>
                           </button>
                         );
                       })}
@@ -2334,13 +2334,13 @@ const SearchBar = ({ data, search, setSearch }) => {
                             onMouseDown={e => { e.preventDefault(); setSearch(s.ticker); setSelectedSubTheme(null); }}
                           >
                             <span
-                              className="text-[11px] font-bold text-zinc-200 w-12 flex-shrink-0 hover:text-blue-400 cursor-default"
+                              className="text-[12px] font-bold text-zinc-200 w-12 flex-shrink-0 hover:text-blue-400 cursor-default"
                               onMouseEnter={e => { e.stopPropagation(); const panelEl = document.getElementById('search-result-panel'); const panelLeft = panelEl ? panelEl.getBoundingClientRect().left : null; const sr = e.currentTarget.getBoundingClientRect(); setTickerHover({ ticker: s.ticker, rect: { ...sr, panelLeft } }); }}
                               onMouseLeave={() => setTickerHover(null)}
                             >{s.ticker}</span>
-                            <span className="text-[10px] text-zinc-500 truncate flex-1">{s.company}</span>
+                            <span className="text-[11px] text-zinc-500 truncate flex-1">{s.company}</span>
                             {s.change_pct != null && (
-                              <span className={`text-[10px] font-medium flex-shrink-0 ${s.change_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                              <span className={`text-[11px] font-medium flex-shrink-0 ${s.change_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                                 {s.change_pct >= 0 ? '+' : ''}{s.change_pct.toFixed(1)}%
                               </span>
                             )}
@@ -2358,7 +2358,7 @@ const SearchBar = ({ data, search, setSearch }) => {
 
       {open && noMatch && (
         <div className="absolute top-full right-0 mt-1.5 w-72 bg-zinc-900 border border-zinc-700/60 rounded-lg shadow-2xl z-50 p-3">
-          <p className="text-xs text-zinc-500">"{q}" not found in scanner data</p>
+          <p className="text-[13px] text-zinc-500">"{q}" not found in scanner data</p>
         </div>
       )}
       {tickerHover && <TVPopup ticker={tickerHover.ticker} anchorRect={tickerHover.rect}/>}
@@ -2417,7 +2417,7 @@ const MacroRiskCard = () => {
         <Activity size={14} className="text-orange-400"/>
         <span className="text-sm font-semibold text-zinc-200">Market Intelligence</span>
         {session && (
-          <span className={`text-[10px] px-2 py-0.5 rounded-full border font-medium
+          <span className={`text-[11px] px-2 py-0.5 rounded-full border font-medium
             ${session === "Pre-Market"
               ? "bg-blue-500/15 border-blue-500/30 text-blue-400"
               : session === "Post-Market"
@@ -2426,7 +2426,7 @@ const MacroRiskCard = () => {
             {session}
           </span>
         )}
-        {generated_at && <span className="text-[10px] text-zinc-600 ml-auto">{generated_at}</span>}
+        {generated_at && <span className="text-[11px] text-zinc-600 ml-auto">{generated_at}</span>}
       </div>
 
       {/* Reversal / Generational Buy Banner */}
@@ -2441,7 +2441,7 @@ const MacroRiskCard = () => {
               {isGenerational ? "GENERATIONAL BUY ZONE DETECTED" : "[🔥 REVERSAL SIGNAL DETECTED]"}
             </div>
             {rev.signal_description && (
-              <div className="text-[11px] text-amber-300/70 mt-0.5">{rev.signal_description}</div>
+              <div className="text-[12px] text-amber-300/70 mt-0.5">{rev.signal_description}</div>
             )}
           </div>
         </div>
@@ -2455,13 +2455,13 @@ const MacroRiskCard = () => {
           { label: "VIX", d: vix, isVix: true },
         ].map(({ label, d, isVix }) => !d.price ? null : (
           <div key={label} className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg p-3">
-            <div className="text-[10px] text-zinc-500 font-semibold uppercase tracking-wider mb-1">{label}</div>
+            <div className="text-[11px] text-zinc-500 font-semibold uppercase tracking-wider mb-1">{label}</div>
             <div className="font-mono text-xl font-bold text-zinc-100">
               {isVix ? d.price.toFixed(2) : `$${d.price.toFixed(2)}`}
             </div>
             <PctChange v={d.change_pct}/>
             {!isVix && d.open != null && (
-              <div className="text-[9px] text-zinc-700 mt-1 font-mono">
+              <div className="text-[10px] text-zinc-700 mt-1 font-mono">
                 O:{d.open.toFixed(2)} H:{d.high?.toFixed(2)} L:{d.low?.toFixed(2)}
               </div>
             )}
@@ -2474,23 +2474,23 @@ const MacroRiskCard = () => {
 
         {/* Credit Regime */}
         <div className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg p-3">
-          <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">
+          <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">
             Credit Risk · BAML HY
           </div>
           {credit.baml_hy != null ? (
             <>
               <div className="font-mono text-2xl font-bold text-zinc-100">{credit.baml_hy.toFixed(2)}%</div>
-              <span className={`text-[10px] font-bold px-2 py-0.5 rounded border mt-1 inline-block ${regimeCls(credit.regime)}`}>
+              <span className={`text-[11px] font-bold px-2 py-0.5 rounded border mt-1 inline-block ${regimeCls(credit.regime)}`}>
                 {credit.regime}
               </span>
-              {credit.date && <div className="text-[9px] text-zinc-700 mt-1.5">FRED · {credit.date}</div>}
+              {credit.date && <div className="text-[10px] text-zinc-700 mt-1.5">FRED · {credit.date}</div>}
             </>
-          ) : <div className="text-zinc-600 text-xs">No data</div>}
+          ) : <div className="text-zinc-600 text-[13px]">No data</div>}
         </div>
 
         {/* Breadth */}
         <div className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg p-3">
-          <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">
+          <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">
             Market Breadth
           </div>
           {breadth.s5fi != null ? (
@@ -2501,7 +2501,7 @@ const MacroRiskCard = () => {
               ].map(({ label, val }) => val != null && (
                 <div key={label}>
                   <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] text-zinc-400 font-mono">{label}</span>
+                    <span className="text-[11px] text-zinc-400 font-mono">{label}</span>
                     <span className={`font-mono text-sm font-bold
                       ${val < 10 ? "text-orange-400" : val < 20 ? "text-amber-400" : val < 40 ? "text-yellow-400" : "text-emerald-400"}`}>
                       {val.toFixed(1)}%
@@ -2515,15 +2515,15 @@ const MacroRiskCard = () => {
                 </div>
               ))}
               {breadth.breadth_flush && (
-                <div className="text-[10px] text-amber-400 font-semibold mt-1">⚠ Breadth Flush Active</div>
+                <div className="text-[11px] text-amber-400 font-semibold mt-1">⚠ Breadth Flush Active</div>
               )}
             </div>
-          ) : <div className="text-zinc-600 text-xs">No data</div>}
+          ) : <div className="text-zinc-600 text-[13px]">No data</div>}
         </div>
 
         {/* Global Indices */}
         <div className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg p-3">
-          <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">Global</div>
+          <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">Global</div>
           <div className="space-y-2">
             {[
               { label: "Nikkei 225", key: "nikkei" },
@@ -2533,12 +2533,12 @@ const MacroRiskCard = () => {
               const g = gl[key];
               return (
                 <div key={key} className="flex items-center justify-between">
-                  <span className="text-[10px] text-zinc-400">{label}</span>
+                  <span className="text-[11px] text-zinc-400">{label}</span>
                   {g?.change_pct != null
-                    ? <span className={`font-mono text-xs font-medium ${g.change_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                    ? <span className={`font-mono text-[13px] font-medium ${g.change_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
                         {g.change_pct >= 0 ? "+" : ""}{g.change_pct.toFixed(2)}%
                       </span>
-                    : <span className="text-zinc-600 text-xs">—</span>
+                    : <span className="text-zinc-600 text-[13px]">—</span>
                   }
                 </div>
               );
@@ -2553,24 +2553,24 @@ const MacroRiskCard = () => {
 
           {ana.macro_section && (
             <div className="p-4">
-              <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1.5 font-semibold">Macro Overview</div>
-              <p className="text-xs text-zinc-300 leading-relaxed">{ana.macro_section}</p>
+              <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-1.5 font-semibold">Macro Overview</div>
+              <p className="text-[13px] text-zinc-300 leading-relaxed">{ana.macro_section}</p>
             </div>
           )}
 
           {(ana.analysis_para1 || ana.analysis_para2) && (
             <div className="p-4">
-              <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">
+              <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">
                 Analysis &amp; Lessons
               </div>
               <div className="space-y-3">
                 {ana.analysis_para1 && (
-                  <p className="text-xs text-zinc-300 leading-relaxed">{ana.analysis_para1}</p>
+                  <p className="text-[13px] text-zinc-300 leading-relaxed">{ana.analysis_para1}</p>
                 )}
                 {ana.analysis_para2 && (
                   <div>
-                    <div className="text-[9px] text-zinc-600 uppercase tracking-wide mb-1">Mechanical Catalyst</div>
-                    <p className="text-xs text-zinc-300 leading-relaxed">{ana.analysis_para2}</p>
+                    <div className="text-[10px] text-zinc-600 uppercase tracking-wide mb-1">Mechanical Catalyst</div>
+                    <p className="text-[13px] text-zinc-300 leading-relaxed">{ana.analysis_para2}</p>
                   </div>
                 )}
               </div>
@@ -2579,10 +2579,10 @@ const MacroRiskCard = () => {
 
           {ana.technical_signal && (
             <div className={`p-4 ${hasReversal ? "bg-amber-500/5" : ""}`}>
-              <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1.5 font-semibold">
+              <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-1.5 font-semibold">
                 Technical Signal
               </div>
-              <p className={`text-xs leading-relaxed ${hasReversal ? "text-amber-300" : "text-zinc-400"}`}>
+              <p className={`text-[13px] leading-relaxed ${hasReversal ? "text-amber-300" : "text-zinc-400"}`}>
                 {ana.technical_signal}
               </p>
             </div>
@@ -2590,25 +2590,25 @@ const MacroRiskCard = () => {
 
           {ana.ticker_intel && (
             <div className="p-4">
-              <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">
+              <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-2 font-semibold">
                 Ticker Intel
               </div>
               <div className="grid grid-cols-2 gap-2">
                 {(ana.ticker_intel.a_grade || []).map((t, i) => (
                   <div key={i} className="bg-emerald-500/10 border border-emerald-500/20 rounded p-2 flex gap-2 items-start">
-                    <span className="text-[9px] font-bold text-emerald-500 border border-emerald-500/40 rounded px-1 mt-0.5 flex-shrink-0">A</span>
+                    <span className="text-[10px] font-bold text-emerald-500 border border-emerald-500/40 rounded px-1 mt-0.5 flex-shrink-0">A</span>
                     <div>
-                      <div className="font-mono text-xs font-bold text-zinc-200">{t.ticker}</div>
-                      <div className="text-[10px] text-zinc-400 leading-tight mt-0.5">{t.reason}</div>
+                      <div className="font-mono text-[13px] font-bold text-zinc-200">{t.ticker}</div>
+                      <div className="text-[11px] text-zinc-400 leading-tight mt-0.5">{t.reason}</div>
                     </div>
                   </div>
                 ))}
                 {(ana.ticker_intel.c_grade || []).map((t, i) => (
                   <div key={i} className="bg-red-500/10 border border-red-500/20 rounded p-2 flex gap-2 items-start">
-                    <span className="text-[9px] font-bold text-red-400 border border-red-500/40 rounded px-1 mt-0.5 flex-shrink-0">C</span>
+                    <span className="text-[10px] font-bold text-red-400 border border-red-500/40 rounded px-1 mt-0.5 flex-shrink-0">C</span>
                     <div>
-                      <div className="font-mono text-xs font-bold text-zinc-200">{t.ticker}</div>
-                      <div className="text-[10px] text-zinc-400 leading-tight mt-0.5">{t.reason}</div>
+                      <div className="font-mono text-[13px] font-bold text-zinc-200">{t.ticker}</div>
+                      <div className="text-[11px] text-zinc-400 leading-tight mt-0.5">{t.reason}</div>
                     </div>
                   </div>
                 ))}
@@ -2619,7 +2619,7 @@ const MacroRiskCard = () => {
         </div>
       )}
       {ana?.error && (
-        <div className="text-red-400 text-xs bg-red-500/10 border border-red-500/20 rounded p-3">{ana.error}</div>
+        <div className="text-red-400 text-[13px] bg-red-500/10 border border-red-500/20 rounded p-3">{ana.error}</div>
       )}
     </div>
   );
@@ -2673,8 +2673,8 @@ const MomentumCockpit = () => {
         const g = row.original;
         return (
           <div>
-            <div className="font-bold font-mono text-xs text-zinc-100 hover:text-blue-400 cursor-pointer" onClick={() => fetchAnalysis(g.ticker, g)}>{g.ticker}</div>
-            <div className="text-[9px] text-zinc-500 truncate max-w-[90px]">{g.company || ""}</div>
+            <div className="font-bold font-mono text-[13px] text-zinc-100 hover:text-blue-400 cursor-pointer" onClick={() => fetchAnalysis(g.ticker, g)}>{g.ticker}</div>
+            <div className="text-[10px] text-zinc-500 truncate max-w-[90px]">{g.company || ""}</div>
           </div>
         );
       }
@@ -2685,8 +2685,8 @@ const MomentumCockpit = () => {
         const g = row.original;
         return (
           <div className="text-right">
-            <div className="font-mono text-xs text-zinc-200">{g.price != null ? `$${g.price.toFixed(2)}` : "—"}</div>
-            <div className={`text-[10px] font-mono ${(g.daily_pct || 0) >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+            <div className="font-mono text-[13px] text-zinc-200">{g.price != null ? `$${g.price.toFixed(2)}` : "—"}</div>
+            <div className={`text-[11px] font-mono ${(g.daily_pct || 0) >= 0 ? "text-emerald-400" : "text-red-400"}`}>
               {g.daily_pct != null ? `${g.daily_pct >= 0 ? "+" : ""}${g.daily_pct.toFixed(2)}%` : "—"}
             </div>
           </div>
@@ -2695,48 +2695,48 @@ const MomentumCockpit = () => {
     },
     {
       id: "gap", header: "Gap %",
-      cell: ({ row }) => <span className="font-mono text-xs text-emerald-400">+{(row.original.gap_pct || 0).toFixed(1)}%</span>
+      cell: ({ row }) => <span className="font-mono text-[13px] text-emerald-400">+{(row.original.gap_pct || 0).toFixed(1)}%</span>
     },
     {
       id: "adr", header: "ADR", accessorKey: "adr_pct",
       cell: ({ getValue }) => {
         const v = getValue();
-        return <span className={`font-mono text-xs ${v >= 5 ? "text-emerald-400" : v >= 4 ? "text-amber-400" : "text-zinc-500"}`}>{v != null ? `${v.toFixed(1)}%` : "—"}</span>;
+        return <span className={`font-mono text-[13px] ${v >= 5 ? "text-emerald-400" : v >= 4 ? "text-amber-400" : "text-zinc-500"}`}>{v != null ? `${v.toFixed(1)}%` : "—"}</span>;
       }
     },
     {
       id: "rvol", header: "RVOL", accessorKey: "rvol",
       cell: ({ getValue }) => {
         const v = getValue();
-        return <span className={`font-mono text-xs font-bold ${v >= 5 ? "text-emerald-300" : v >= 3 ? "text-emerald-400" : v >= 2 ? "text-amber-400" : "text-zinc-500"}`}>{v != null ? `${v.toFixed(2)}x` : "—"}</span>;
+        return <span className={`font-mono text-[13px] font-bold ${v >= 5 ? "text-emerald-300" : v >= 3 ? "text-emerald-400" : v >= 2 ? "text-amber-400" : "text-zinc-500"}`}>{v != null ? `${v.toFixed(2)}x` : "—"}</span>;
       }
     },
     {
       id: "industry", header: "Industry",
-      cell: ({ row }) => <span className="text-[10px] text-zinc-300">{row.original.industry || "—"}</span>
+      cell: ({ row }) => <span className="text-[11px] text-zinc-300">{row.original.industry || "—"}</span>
     },
     {
       id: "theme", header: "Theme",
-      cell: ({ row }) => <span className="text-[10px] text-blue-300">{row.original.finviz_theme || row.original.theme || "—"}</span>
+      cell: ({ row }) => <span className="text-[11px] text-blue-300">{row.original.finviz_theme || row.original.theme || "—"}</span>
     },
     {
       id: "grade", header: "Grade", accessorKey: "grade",
       cell: ({ getValue }) => {
         const g = getValue();
-        return g ? <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${gradeStyle(g)}`}>{g}</span> : <span className="text-zinc-600">—</span>;
+        return g ? <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded border ${gradeStyle(g)}`}>{g}</span> : <span className="text-zinc-600">—</span>;
       }
     },
     {
       id: "reasoning", header: "Reasoning", accessorKey: "reasoning",
-      cell: ({ getValue }) => <span className="text-[10px] text-zinc-400 leading-tight line-clamp-2">{getValue() || "—"}</span>
+      cell: ({ getValue }) => <span className="text-[11px] text-zinc-400 leading-tight line-clamp-2">{getValue() || "—"}</span>
     },
     {
       id: "analysis", header: "Analysis Detail",
       cell: ({ row }) => {
         const d = row.original.analysis_detail;
-        if (!d) return <span className="text-zinc-600 text-[10px]">—</span>;
+        if (!d) return <span className="text-zinc-600 text-[11px]">—</span>;
         return (
-          <div className="text-[10px] leading-snug space-y-1">
+          <div className="text-[11px] leading-snug space-y-1">
             {d.catalyst && <div className="text-zinc-300 line-clamp-2">{d.catalyst}</div>}
             {d.impact && <div className="text-zinc-500 italic line-clamp-1">{d.impact}</div>}
           </div>
@@ -2759,15 +2759,15 @@ const MomentumCockpit = () => {
       {/* Main Table */}
       <div className={`flex-1 overflow-x-auto transition-all duration-300 ${selectedTicker ? "mr-[440px]" : ""}`}>
         <div className="flex items-center justify-between px-4 py-2 border-b border-zinc-800/60">
-          <span className="text-xs text-zinc-500">
+          <span className="text-[13px] text-zinc-500">
             {gapperData.gappers.length} gappers · {gapperData.scan_time ? `Scanned ${gapperData.scan_time}` : ""}
           </span>
-          <span className="text-[10px] text-zinc-600">Click any row to fetch live Gemini analysis →</span>
+          <span className="text-[11px] text-zinc-600">Click any row to fetch live Gemini analysis →</span>
         </div>
         <table className="w-full min-w-[1100px] text-left border-collapse">
           <thead>
             {table.getHeaderGroups().map(hg => (
-              <tr key={hg.id} className="text-[9px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40">
+              <tr key={hg.id} className="text-[10px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40">
                 {hg.headers.map(h => (
                   <th key={h.id} className="py-2 px-2 font-medium whitespace-nowrap">
                     {flexRender(h.column.columnDef.header, h.getContext())}
@@ -2806,9 +2806,9 @@ const MomentumCockpit = () => {
         <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 flex-shrink-0">
           <div className="flex items-center gap-2">
             <span className="font-bold font-mono text-zinc-100">{selectedTicker}</span>
-            {analysis?.grade && <span className={`text-xs font-bold px-1.5 py-0.5 rounded border ${gradeStyle(analysis.grade)}`}>{analysis.grade}</span>}
+            {analysis?.grade && <span className={`text-[13px] font-bold px-1.5 py-0.5 rounded border ${gradeStyle(analysis.grade)}`}>{analysis.grade}</span>}
             {analysis?.technical_status && (
-              <span className={`text-[9px] px-1.5 py-0.5 rounded ${analysis.technical_status === "Pass" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" : "bg-red-500/20 text-red-400 border border-red-500/30"}`}>
+              <span className={`text-[10px] px-1.5 py-0.5 rounded ${analysis.technical_status === "Pass" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" : "bg-red-500/20 text-red-400 border border-red-500/30"}`}>
                 {analysis.technical_status}
               </span>
             )}
@@ -2839,8 +2839,8 @@ const MomentumCockpit = () => {
                   { label: "Avg Vol",  value: analysis.avg_vol_10d != null ? `${(analysis.avg_vol_10d/1000).toFixed(0)}K` : "—" },
                 ].map(({ label, value }) => (
                   <div key={label} className="bg-zinc-900 rounded p-2">
-                    <div className="text-[9px] text-zinc-500 uppercase tracking-wide">{label}</div>
-                    <div className="font-mono text-xs text-zinc-200 mt-0.5">{value}</div>
+                    <div className="text-[10px] text-zinc-500 uppercase tracking-wide">{label}</div>
+                    <div className="font-mono text-[13px] text-zinc-200 mt-0.5">{value}</div>
                   </div>
                 ))}
               </div>
@@ -2848,11 +2848,11 @@ const MomentumCockpit = () => {
               {/* Category + Conviction */}
               <div className="flex gap-2">
                 <div className="flex-1 bg-zinc-900 rounded p-2">
-                  <div className="text-[9px] text-zinc-500 uppercase mb-0.5">Category</div>
-                  <div className="text-xs text-zinc-200">{analysis.category || "—"}</div>
+                  <div className="text-[10px] text-zinc-500 uppercase mb-0.5">Category</div>
+                  <div className="text-[13px] text-zinc-200">{analysis.category || "—"}</div>
                 </div>
                 <div className="bg-zinc-900 rounded p-2 text-center w-20">
-                  <div className="text-[9px] text-zinc-500 uppercase mb-0.5">Conviction</div>
+                  <div className="text-[10px] text-zinc-500 uppercase mb-0.5">Conviction</div>
                   <div className={`text-base font-bold ${analysis.conviction >= 70 ? "text-emerald-400" : analysis.conviction >= 50 ? "text-amber-400" : "text-zinc-500"}`}>{analysis.conviction ?? "—"}</div>
                 </div>
               </div>
@@ -2860,22 +2860,22 @@ const MomentumCockpit = () => {
               {/* Reasoning */}
               {analysis.reasoning && (
                 <div>
-                  <div className="text-[9px] text-zinc-500 uppercase tracking-wide mb-1">Mechanical Trigger</div>
-                  <div className="text-xs text-zinc-300 bg-zinc-900 rounded p-2.5 leading-relaxed">{analysis.reasoning}</div>
+                  <div className="text-[10px] text-zinc-500 uppercase tracking-wide mb-1">Mechanical Trigger</div>
+                  <div className="text-[13px] text-zinc-300 bg-zinc-900 rounded p-2.5 leading-relaxed">{analysis.reasoning}</div>
                 </div>
               )}
 
               {/* Catalyst + Impact */}
               {analysis.analysis_detail && (
                 <div>
-                  <div className="text-[9px] text-zinc-500 uppercase tracking-wide mb-1">Catalyst Breakdown</div>
+                  <div className="text-[10px] text-zinc-500 uppercase tracking-wide mb-1">Catalyst Breakdown</div>
                   <div className="bg-zinc-900 rounded p-3 space-y-2">
                     {analysis.analysis_detail.catalyst && (
-                      <div className="text-[11px] text-zinc-300 leading-relaxed"
+                      <div className="text-[12px] text-zinc-300 leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: analysis.analysis_detail.catalyst.replace(/\*\*(.*?)\*\*/g, '<strong class="text-zinc-100">$1</strong>') }}/>
                     )}
                     {analysis.analysis_detail.impact && (
-                      <div className="text-[11px] text-zinc-500 italic border-t border-zinc-800 pt-2 leading-relaxed">{analysis.analysis_detail.impact}</div>
+                      <div className="text-[12px] text-zinc-500 italic border-t border-zinc-800 pt-2 leading-relaxed">{analysis.analysis_detail.impact}</div>
                     )}
                   </div>
                 </div>
@@ -2884,8 +2884,8 @@ const MomentumCockpit = () => {
               {/* Full Analysis markdown */}
               {analysis.analysis_details && (
                 <div>
-                  <div className="text-[9px] text-zinc-500 uppercase tracking-wide mb-1">Full Analysis</div>
-                  <div className="text-[11px] text-zinc-400 bg-zinc-900 rounded p-3 leading-relaxed whitespace-pre-line"
+                  <div className="text-[10px] text-zinc-500 uppercase tracking-wide mb-1">Full Analysis</div>
+                  <div className="text-[12px] text-zinc-400 bg-zinc-900 rounded p-3 leading-relaxed whitespace-pre-line"
                     dangerouslySetInnerHTML={{ __html: analysis.analysis_details
                       .replace(/\*\*(.*?)\*\*/g, '<strong class="text-zinc-200">$1</strong>') }}/>
                 </div>
@@ -2894,18 +2894,18 @@ const MomentumCockpit = () => {
               {/* Trade Hypothesis */}
               {analysis.hypothesis && (
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
-                  <div className="text-[9px] text-blue-400 uppercase tracking-wide mb-1">Trade Hypothesis</div>
-                  <div className="text-[11px] text-blue-300 leading-relaxed">{analysis.hypothesis}</div>
+                  <div className="text-[10px] text-blue-400 uppercase tracking-wide mb-1">Trade Hypothesis</div>
+                  <div className="text-[12px] text-blue-300 leading-relaxed">{analysis.hypothesis}</div>
                 </div>
               )}
 
               {/* Headlines */}
               {analysis.headlines?.length > 0 && (
                 <div>
-                  <div className="text-[9px] text-zinc-500 uppercase tracking-wide mb-1">Recent Headlines</div>
+                  <div className="text-[10px] text-zinc-500 uppercase tracking-wide mb-1">Recent Headlines</div>
                   <div className="space-y-1">
                     {analysis.headlines.map((h, i) => (
-                      <div key={i} className="text-[10px] text-zinc-400 bg-zinc-900/60 rounded px-2 py-1.5 leading-snug">· {h}</div>
+                      <div key={i} className="text-[11px] text-zinc-400 bg-zinc-900/60 rounded px-2 py-1.5 leading-snug">· {h}</div>
                     ))}
                   </div>
                 </div>
@@ -2925,7 +2925,7 @@ const MarketBriefPanel = ({ data }) => {
       <div className="max-w-[1400px] mx-auto px-4 py-16 text-center">
         <Landmark size={28} className="mx-auto mb-3 text-zinc-600"/>
         <p className="text-sm text-zinc-500">Brief not yet generated</p>
-        <p className="text-xs text-zinc-600 mt-1">Runs at 8:00 AM and 4:00 PM ET on trading days</p>
+        <p className="text-[13px] text-zinc-600 mt-1">Runs at 8:00 AM and 4:00 PM ET on trading days</p>
       </div>
     );
   }
@@ -2954,7 +2954,7 @@ const MarketBriefPanel = ({ data }) => {
   return (
     <div className="max-w-[1400px] mx-auto px-4 py-6">
       <div className="flex flex-wrap items-center gap-3 mb-5">
-        <span className="text-[11px] text-zinc-500">
+        <span className="text-[12px] text-zinc-500">
           {generated_at}
           {article_count != null && ` · RSS ${article_count} 則`}
           {fulltext_articles != null && fulltext_success_count != null
@@ -2974,7 +2974,7 @@ const MarketBriefPanel = ({ data }) => {
       )}
 
       {isLegacyBrief && (
-        <p className="text-xs text-amber-400/90 bg-amber-500/10 border border-amber-500/25 rounded-lg px-3 py-2 mb-5">
+        <p className="text-[13px] text-amber-400/90 bg-amber-500/10 border border-amber-500/25 rounded-lg px-3 py-2 mb-5">
           此檔為舊版格式。請重新執行 <code className="text-amber-200">python market_brief.py</code> 以產生新聞全文分析與突破單建議。
         </p>
       )}
@@ -2982,7 +2982,7 @@ const MarketBriefPanel = ({ data }) => {
       {/* 交叉驗證 */}
       {b.cross_check_note && (
         <div className="mb-5 bg-zinc-900/80 border border-zinc-700/50 rounded-xl p-4">
-          <h3 className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">交叉驗證</h3>
+          <h3 className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">交叉驗證</h3>
           <p className="text-sm text-zinc-300 leading-relaxed">{b.cross_check_note}</p>
         </div>
       )}
@@ -2990,11 +2990,11 @@ const MarketBriefPanel = ({ data }) => {
       {/* 三大市場觀點 */}
       {b.top_market_views?.length > 0 && (
         <div className="mb-5">
-          <h3 className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-3">波動主因（精簡）</h3>
+          <h3 className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-3">波動主因（精簡）</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {b.top_market_views.map((line, i) => (
               <div key={i} className="bg-zinc-900 border border-zinc-800/60 rounded-lg p-4">
-                <div className="text-[10px] font-mono text-zinc-600 mb-1">#{i + 1}</div>
+                <div className="text-[11px] font-mono text-zinc-600 mb-1">#{i + 1}</div>
                 <p className="text-sm text-zinc-200 leading-snug">{line}</p>
               </div>
             ))}
@@ -3005,7 +3005,7 @@ const MarketBriefPanel = ({ data }) => {
       {/* 突破單建議 */}
       {b.breakout_trading_advice && (
         <div className="mb-5 rounded-xl border border-amber-500/30 bg-amber-500/5 p-4">
-          <h3 className="text-[10px] font-semibold text-amber-400/90 uppercase tracking-wider mb-2">突破單建議</h3>
+          <h3 className="text-[11px] font-semibold text-amber-400/90 uppercase tracking-wider mb-2">突破單建議</h3>
           <p className="text-sm text-zinc-200 leading-relaxed whitespace-pre-wrap">{renderBold(b.breakout_trading_advice)}</p>
         </div>
       )}
@@ -3013,18 +3013,18 @@ const MarketBriefPanel = ({ data }) => {
       {/* 各則可信度 */}
       {b.articles_reviewed?.length > 0 && (
         <div className="mb-5">
-          <h3 className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-3">新聞可信度（逐則）</h3>
+          <h3 className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-3">新聞可信度（逐則）</h3>
           <div className="space-y-2">
             {b.articles_reviewed.map((row, i) => (
               <div key={i} className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg px-3 py-2.5 flex flex-wrap gap-2 items-start">
-                <span className={`text-[9px] font-bold uppercase px-2 py-0.5 rounded border shrink-0 ${credStyle(row.credibility)}`}>
+                <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded border shrink-0 ${credStyle(row.credibility)}`}>
                   {row.credibility || "—"}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <div className="text-[10px] text-zinc-500 mb-0.5">{row.source}</div>
-                  <div className="text-xs font-medium text-zinc-200 leading-snug">{row.title}</div>
+                  <div className="text-[11px] text-zinc-500 mb-0.5">{row.source}</div>
+                  <div className="text-[13px] font-medium text-zinc-200 leading-snug">{row.title}</div>
                   {row.credibility_note && (
-                    <p className="text-[11px] text-zinc-500 mt-1 leading-relaxed">{row.credibility_note}</p>
+                    <p className="text-[12px] text-zinc-500 mt-1 leading-relaxed">{row.credibility_note}</p>
                   )}
                 </div>
               </div>
@@ -3036,12 +3036,12 @@ const MarketBriefPanel = ({ data }) => {
       {/* 舊版 fallback 顯示 */}
       {isLegacyBrief && b.macro_news?.length > 0 && (
         <div className="mb-5">
-          <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">Macro（舊版）</h3>
+          <h3 className="text-[13px] font-semibold text-zinc-500 uppercase tracking-wider mb-3">Macro（舊版）</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {b.macro_news.map((item, i) => (
               <div key={i} className="bg-zinc-900 border border-zinc-800/60 rounded-lg p-4">
-                <div className="text-xs font-semibold text-amber-400 mb-2">{item.title}</div>
-                <p className="text-xs text-zinc-300 leading-relaxed">{renderBold(item.summary)}</p>
+                <div className="text-[13px] font-semibold text-amber-400 mb-2">{item.title}</div>
+                <p className="text-[13px] text-zinc-300 leading-relaxed">{renderBold(item.summary)}</p>
               </div>
             ))}
           </div>
@@ -3199,7 +3199,7 @@ const filtered = useMemo(() => {
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center"><Activity size={16} className="text-white"/></div>
               <div>
                 <h1 className="text-base font-bold tracking-tight">Thematic Scanner</h1>
-                <p className="text-[11px] text-zinc-500">美股強勢主題篩選器</p>
+                <p className="text-[12px] text-zinc-500">美股強勢主題篩選器</p>
               </div>
               {/* Index tickers — inline with logo */}
               {data?.market_condition && (() => {
@@ -3210,7 +3210,7 @@ const filtered = useMemo(() => {
                 const statusColor = st => st === "Strong" ? "text-emerald-400" : st === "Weak" || st === "Lagging" ? "text-red-400" : st === "Mediocre" ? "text-yellow-400" : "text-zinc-500";
                 const Tag = ({ label, d }) => d ? (
                   <span
-                    className="flex items-center gap-1 text-[11px] font-mono cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
+                    className="flex items-center gap-1 text-[12px] font-mono cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
                     onMouseEnter={e => setMacroHover({ ticker: label, rect: e.currentTarget.getBoundingClientRect() })}
                     onMouseLeave={() => setMacroHover(null)}
                   >
@@ -3233,20 +3233,20 @@ const filtered = useMemo(() => {
             </div>
             <div className="flex items-center gap-2">
               <div className="flex items-center gap-1 bg-zinc-800/60 border border-zinc-700/50 rounded-lg p-1">
-                <button onClick={() => setTab("scanner")} className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${tab === "scanner" ? "bg-blue-500/25 text-blue-300 border border-blue-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
+                <button onClick={() => setTab("scanner")} className={`px-3 py-1 text-[13px] font-medium rounded-md transition-colors ${tab === "scanner" ? "bg-blue-500/25 text-blue-300 border border-blue-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
                   Thematic Scanner
                 </button>
-                <button onClick={() => setTab("gapper")} className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${tab === "gapper" ? "bg-emerald-500/25 text-emerald-300 border border-emerald-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
+                <button onClick={() => setTab("gapper")} className={`px-3 py-1 text-[13px] font-medium rounded-md transition-colors ${tab === "gapper" ? "bg-emerald-500/25 text-emerald-300 border border-emerald-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
                   Pre-Market Gappers
                 </button>
               </div>
               {data && (
                 <div className="text-right leading-tight">
-                  <div className="text-[11px] font-medium text-emerald-400">
+                  <div className="text-[12px] font-medium text-emerald-400">
                     Updated {data.generated_at || data.last_updated}
                   </div>
                   {countdown != null && (
-                    <div className="text-[10px] text-zinc-500">
+                    <div className="text-[11px] text-zinc-500">
                       Next refresh in <span className="text-zinc-400 font-mono">{countdown >= 60 ? `${Math.floor(countdown/60)}m ${countdown%60}s` : `${countdown}s`}</span>
                     </div>
                   )}
@@ -3280,7 +3280,7 @@ const filtered = useMemo(() => {
             const Dot = () => <span className="text-zinc-700 mx-0.5">·</span>;
             const breadthColor = v => v >= 60 ? "text-emerald-400" : v >= 40 ? "text-yellow-400" : "text-red-400";
             return (
-              <div className="hidden lg:flex items-center gap-2 text-[11px] font-mono py-1 mt-1 border-t border-zinc-800/50 flex-wrap">
+              <div className="hidden lg:flex items-center gap-2 text-[12px] font-mono py-1 mt-1 border-t border-zinc-800/50 flex-wrap">
                 {btc && <Tag label="BTC" d={btc} chartKey="btc"/>}
                 {gld && <><Dot/><Tag label="GLD" d={gld} chartKey="gld"/></>}
                 {oil && <><Dot/><Tag label="OIL" d={oil} chartKey="oil"/></>}
@@ -3292,7 +3292,7 @@ const filtered = useMemo(() => {
                     onMouseLeave={() => setMacroHover(null)}
                   >
                     <span className="text-zinc-600">HY Spread</span>
-                    <span className="text-zinc-400 text-[10px]">(BAMLH0A0HYM2)</span>
+                    <span className="text-zinc-400 text-[11px]">(BAMLH0A0HYM2)</span>
                     <span className="text-zinc-300">{credit_spread.value.toFixed(2)}%</span>
                     {credit_spread.change !== 0 && (
                       <span className={credit_spread.change > 0 ? "text-red-400" : "text-emerald-400"}>
@@ -3336,7 +3336,7 @@ const filtered = useMemo(() => {
           {tab === "scanner" && (
             <>
             <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-3 text-[11px]">
+              <div className="flex items-center gap-3 text-[12px]">
                 <span className="text-zinc-500">{filtered.length} themes</span>
                 <span className="text-zinc-600">·</span>
                 <span className="text-zinc-500">{totalSubs} sub-themes</span>
@@ -3345,7 +3345,7 @@ const filtered = useMemo(() => {
               </div>
               <div className="flex-1"/>
               <SearchBar data={data} search={search} setSearch={setSearch}/>
-              <button onClick={()=>setShowFP(!showFP)} className={`flex items-center gap-1.5 px-2.5 py-1.5 text-xs rounded-md border transition-colors ${filtersOn?'bg-blue-500/15 border-blue-500/30 text-blue-400':'bg-zinc-800/60 border-zinc-700/50 text-zinc-400'}`}>
+              <button onClick={()=>setShowFP(!showFP)} className={`flex items-center gap-1.5 px-2.5 py-1.5 text-[13px] rounded-md border transition-colors ${filtersOn?'bg-blue-500/15 border-blue-500/30 text-blue-400':'bg-zinc-800/60 border-zinc-700/50 text-zinc-400'}`}>
                 <SlidersHorizontal size={12}/> Filters
               </button>
             </div>
@@ -3353,29 +3353,29 @@ const filtered = useMemo(() => {
               <div className="mt-2.5 p-3 bg-zinc-800/40 rounded-lg border border-zinc-700/40 flex flex-wrap items-end gap-4">
                 <label className="flex items-center gap-2 cursor-pointer">
                   <input type="checkbox" checked={filtersOn} onChange={()=>setFiltersOn(!filtersOn)} className="rounded"/>
-                  <span className="text-xs text-zinc-300">Enable</span>
+                  <span className="text-[13px] text-zinc-300">Enable</span>
                 </label>
                 <div>
-                  <label className="text-[10px] text-zinc-500 block mb-1">Min $ Vol</label>
-                  <select value={filterDolVol} onChange={e=>setFilterDolVol(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
+                  <label className="text-[11px] text-zinc-500 block mb-1">Min $ Vol</label>
+                  <select value={filterDolVol} onChange={e=>setFilterDolVol(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
                     {[50,100,250,500].map(v=><option key={v} value={v}>${v}M</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="text-[10px] text-zinc-500 block mb-1">Min ADR%</label>
-                  <select value={filterADR} onChange={e=>setFilterADR(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
+                  <label className="text-[11px] text-zinc-500 block mb-1">Min ADR%</label>
+                  <select value={filterADR} onChange={e=>setFilterADR(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
                     {[2,3,4,5,7].map(v=><option key={v} value={v}>{v}%</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="text-[10px] text-zinc-500 block mb-1">Min RS</label>
-                  <select value={filterRS} onChange={e=>setFilterRS(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
+                  <label className="text-[11px] text-zinc-500 block mb-1">Min RS</label>
+                  <select value={filterRS} onChange={e=>setFilterRS(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
                     {[30,50,70,80,90].map(v=><option key={v} value={v}>{v}+</option>)}
                   </select>
                 </div>
                 <div>
-                  <label className="text-[10px] text-zinc-500 block mb-1">Max Dist 52W Hi</label>
-                  <select value={filterDist52w} onChange={e=>setFilterDist52w(Number(e.target.value))} className="text-xs bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
+                  <label className="text-[11px] text-zinc-500 block mb-1">Max Dist 52W Hi</label>
+                  <select value={filterDist52w} onChange={e=>setFilterDist52w(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
                     {[5,10,15,20,30].map(v=><option key={v} value={v}>within {v}%</option>)}
                   </select>
                 </div>
@@ -3405,7 +3405,7 @@ const filtered = useMemo(() => {
             <div className="text-center py-16 text-zinc-500">
               <BarChart3 size={28} className="mx-auto mb-3 opacity-40"/>
               <p className="text-sm">No results</p>
-              <button onClick={()=>{setFiltersOn(false);setSearch("");}} className="mt-2 text-xs text-blue-400 hover:underline">Reset</button>
+              <button onClick={()=>{setFiltersOn(false);setSearch("");}} className="mt-2 text-[13px] text-blue-400 hover:underline">Reset</button>
             </div>
           ) : filtered.map((t,i) => <ThemeSection key={t.name+i} theme={t} lbPerfKey={lbPerfKey} spyPerf={data?.spy_benchmarks?.[rsSPYKey]} rsSPYKey={rsSPYKey} isTopTheme={i===0} topADRTickers={topADRTickers} themeRankings={data?.theme_rankings} finvizThemeRankings={data?.finviz_theme_rankings}/>)}
         </div>
