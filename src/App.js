@@ -1544,7 +1544,7 @@ const ScannerBriefFeed = ({ briefData }) => {
         </div>
       </div>
 
-      <div className="overflow-y-auto flex-1 space-y-3" style={{ maxHeight: "256px" }}>
+      <div className="overflow-y-auto flex-1 space-y-3" style={{ maxHeight: "218px" }}>
 
         {error && (
           <div className="text-[10px] text-red-400 bg-red-500/10 rounded p-2">{String(error)}</div>
@@ -3308,7 +3308,7 @@ const filtered = useMemo(() => {
               <VixGauge initialVix={data?.vix}/>
               <ScannerBriefFeed briefData={briefData}/>
             </div>
-            <div className="w-[700px] flex-shrink-0">
+            <div className="w-[700px] flex-shrink-0 translate-x-[76px]">
               {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
             </div>
           </div>
