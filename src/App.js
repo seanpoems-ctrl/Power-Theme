@@ -3071,6 +3071,7 @@ export default function App() {
   const [countdown, setCountdown] = useState(null);
   const nextFetchAt = useRef(null);
   const lastGeneratedAt = useRef(null);
+  const [macroHover, setMacroHover] = useState(null);
 
   // Countdown ticker — counts down to next actual data update
   useEffect(() => {
@@ -3255,11 +3256,17 @@ const filtered = useMemo(() => {
             const { btc, gld, oil, credit_spread, breadth_50d, breadth_200d } = data.market_condition;
             const hasAny = btc || gld || oil || credit_spread != null || breadth_50d != null;
             if (!hasAny) return null;
+            const CHART = { btc: 'BTCUSD', gld: 'GLD', oil: 'USO', credit_spread: 'HYG', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R' };
+            const mkHover = (key, e) => setMacroHover({ ticker: CHART[key], rect: e.currentTarget.getBoundingClientRect() });
             const fmtChg = v => v == null ? null : v > 0
               ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
               : <span className="text-red-400">{v.toFixed(2)}%</span>;
-            const Tag = ({ label, d }) => d ? (
-              <span className="flex items-center gap-1">
+            const Tag = ({ label, d, chartKey }) => d ? (
+              <span
+                className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
+                onMouseEnter={e => mkHover(chartKey, e)}
+                onMouseLeave={() => setMacroHover(null)}
+              >
                 <span className="text-zinc-600">{label}</span>
                 {d.price != null && <span className="text-zinc-300">${d.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>}
                 {fmtChg(d.change_pct)}
@@ -3270,12 +3277,16 @@ const filtered = useMemo(() => {
             const breadthColor = v => v >= 60 ? "text-emerald-400" : v >= 40 ? "text-yellow-400" : "text-red-400";
             return (
               <div className="hidden lg:flex items-center gap-2 text-[11px] font-mono py-1 mt-1 border-t border-zinc-800/50 flex-wrap">
-                {btc && <><Tag label="BTC" d={btc}/></>}
-                {gld && <><Dot/><Tag label="GLD" d={gld}/></>}
-                {oil && <><Dot/><Tag label="OIL" d={oil}/></>}
+                {btc && <Tag label="BTC" d={btc} chartKey="btc"/>}
+                {gld && <><Dot/><Tag label="GLD" d={gld} chartKey="gld"/></>}
+                {oil && <><Dot/><Tag label="OIL" d={oil} chartKey="oil"/></>}
                 {credit_spread != null && (
                   <><Sep/>
-                  <span className="flex items-center gap-1">
+                  <span
+                    className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
+                    onMouseEnter={e => mkHover('credit_spread', e)}
+                    onMouseLeave={() => setMacroHover(null)}
+                  >
                     <span className="text-zinc-600">HY Spread</span>
                     <span className="text-zinc-400 text-[10px]">(BAMLH0A0HYM2)</span>
                     <span className="text-zinc-300">{credit_spread.value.toFixed(2)}%</span>
@@ -3290,18 +3301,32 @@ const filtered = useMemo(() => {
                   <><Sep/>
                   <span className="text-zinc-600">Market Breadth</span>
                   {breadth_50d != null && (
-                    <><span className="text-zinc-500">S5FI 50D</span>
-                    <span className={breadthColor(breadth_50d)}>{breadth_50d.toFixed(1)}%</span></>
+                    <span
+                      className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
+                      onMouseEnter={e => mkHover('breadth_50d', e)}
+                      onMouseLeave={() => setMacroHover(null)}
+                    >
+                      <span className="text-zinc-500">S5FI 50D</span>
+                      <span className={breadthColor(breadth_50d)}>{breadth_50d.toFixed(1)}%</span>
+                    </span>
                   )}
                   {breadth_200d != null && (
                     <><Dot/>
-                    <span className="text-zinc-500">VITH 200D</span>
-                    <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span></>
+                    <span
+                      className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
+                      onMouseEnter={e => mkHover('breadth_200d', e)}
+                      onMouseLeave={() => setMacroHover(null)}
+                    >
+                      <span className="text-zinc-500">VITH 200D</span>
+                      <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span>
+                    </span></>
                   )}</>
                 )}
               </div>
             );
           })()}
+
+          {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect}/>}
 
           {/* Breaking News Alert — shown above all tabs when active */}
           <BreakingNewsAlert newsData={newsData}/>
