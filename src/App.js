@@ -3069,29 +3069,29 @@ export default function App() {
   const [rsSPYKey, setRsSPYKey] = useState("perf_1m");
   const [fetchedAt, setFetchedAt] = useState(null);
   const [countdown, setCountdown] = useState(null);
+  const nextFetchAt = useRef(null);
 
-  const REFRESH_SEC = 5 * 60; // scraper runs every 5 min
-
-  // Countdown ticker — aligned to clock's 5-min boundaries (:00, :05, :10, ...)
+  // Countdown ticker — counts down to actual next fetch time
   useEffect(() => {
     const tick = () => {
-      const msIntoInterval = Date.now() % (REFRESH_SEC * 1000);
-      const remaining = Math.ceil((REFRESH_SEC * 1000 - msIntoInterval) / 1000) || REFRESH_SEC;
+      if (nextFetchAt.current == null) return;
+      const remaining = Math.max(0, Math.ceil((nextFetchAt.current - Date.now()) / 1000));
       setCountdown(remaining);
     };
-    tick();
     const id = setInterval(tick, 1000);
     return () => clearInterval(id);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   // Thematic data — poll every 5 min (matches scraper schedule)
   useEffect(() => {
+    const INTERVAL = 5 * 60 * 1000;
     const fetchThematic = async () => {
       try {
         const r = await fetch(process.env.PUBLIC_URL + "/thematic_data.json?v=" + Date.now());
         if (r.ok) {
           const json = await r.json();
           setFetchedAt(Date.now());
+          nextFetchAt.current = Date.now() + INTERVAL;
           for (const theme of (json.themes || []))
             for (const sub of (theme.subthemes || []))
               for (const stock of (sub.stocks || []))
@@ -3103,7 +3103,7 @@ export default function App() {
     };
     setLoading(true);
     fetchThematic();
-    const id = setInterval(fetchThematic, 5 * 60 * 1000);
+    const id = setInterval(fetchThematic, INTERVAL);
     return () => clearInterval(id);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
