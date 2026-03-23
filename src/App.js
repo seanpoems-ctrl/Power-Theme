@@ -1403,6 +1403,34 @@ const BreakingNewsAlert = ({ newsData }) => {
   );
 };
 
+/** Returns the next Market Brief update time as a display string (ET). */
+function getNextBriefTime() {
+  const now = new Date();
+  const todayUTC = new Date(now);
+  todayUTC.setUTCHours(0, 0, 0, 0);
+  // Brief runs at 12:30 UTC and 21:30 UTC, Mon–Fri
+  const am = new Date(todayUTC.getTime() + (12 * 60 + 30) * 60000);
+  const pm = new Date(todayUTC.getTime() + (21 * 60 + 30) * 60000);
+  const nextBusinessDay = (base) => {
+    const d = new Date(base);
+    do { d.setUTCDate(d.getUTCDate() + 1); } while (d.getUTCDay() === 0 || d.getUTCDay() === 6);
+    return d;
+  };
+  const isWeekend = now.getUTCDay() === 0 || now.getUTCDay() === 6;
+  let next;
+  if (!isWeekend && now < am) {
+    next = am;
+  } else if (!isWeekend && now < pm) {
+    next = pm;
+  } else {
+    const nextDay = nextBusinessDay(todayUTC);
+    next = new Date(nextDay.getTime() + (12 * 60 + 30) * 60000);
+  }
+  const etTime = next.toLocaleTimeString("en-US", { timeZone: "America/New_York", hour: "numeric", minute: "2-digit", hour12: true });
+  const sameDay = next.toDateString() === now.toDateString();
+  return `${etTime} ET${sameDay ? "" : " (tomorrow)"}`;
+}
+
 /** Thematic Scanner 側欄：以 Market Brief（market_brief.json）取代原 macro_news 列表 */
 const ScannerBriefFeed = ({ briefData }) => {
   if (!briefData) return (
@@ -1440,7 +1468,10 @@ const ScannerBriefFeed = ({ briefData }) => {
       <div className="flex items-center gap-1.5 mb-3 pb-2 border-b border-zinc-800/60">
         <span className="text-sm">{sessionEmoji}</span>
         <span className="text-[10px] font-bold text-zinc-300 uppercase tracking-wide">{session} Brief</span>
-        <span className="text-[9px] text-zinc-600 ml-auto">{generated_at}</span>
+        <div className="ml-auto text-right">
+          <div className="text-[9px] text-zinc-600">{generated_at}</div>
+          <div className="text-[9px] text-zinc-500">Next: {getNextBriefTime()}</div>
+        </div>
       </div>
 
       <div className="overflow-y-auto flex-1 space-y-3" style={{ maxHeight: "445px" }}>
