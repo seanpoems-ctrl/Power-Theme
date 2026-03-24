@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { ChevronDown, ChevronRight, Star, Activity, BarChart3, RefreshCw, Search, SlidersHorizontal, X, Layers, Zap, TrendingUp, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink, FlaskConical } from "lucide-react";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
+import useMarketStore from "./useMarketStore";
+import GlobalAlertBanner from "./GlobalAlertBanner";
 
 // eslint-disable-next-line no-unused-vars
 const MOCK_DATA = {
@@ -1747,6 +1749,7 @@ const ScannerBriefFeed = ({ briefData }) => {
 
 
 const GapperScanner = () => {
+  const creditRegime = useMarketStore((s) => s.creditRegime);
   const [gapperData, setGapperData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState(null);
@@ -1802,7 +1805,9 @@ const GapperScanner = () => {
     g.price     >= fMinPrice &&
     (g.avg_vol_10d || 0)     >= fMinAvgVol * 1000 &&
     (g.mkt_cap   || 0)       >= fMinMktCap * 1e9 &&
-    (g.avg_dollar_vol || g.price * (g.avg_vol_10d || 0)) >= fMinDolVol * 1e6
+    (g.avg_dollar_vol || g.price * (g.avg_vol_10d || 0)) >= fMinDolVol * 1e6 &&
+    // In Stress regime: hide C-grade gappers to reduce noise
+    (creditRegime !== "Stress" || (g.grade && g.grade !== "C"))
   );
 
   const resetFilters = () => {
@@ -3165,6 +3170,53 @@ export default function App() {
   const lastGeneratedAt = useRef(null);
   const [macroHover, setMacroHover] = useState(null);
 
+  // ── Market store (global macro alerts + reversal) ─────────────────────────
+  const { updateFromIntel, creditRegime } = useMarketStore((s) => ({
+    updateFromIntel: s.updateFromIntel,
+    creditRegime:    s.creditRegime,
+  }));
+  const prevReversal = useRef(false);
+
+  // Poll market_intelligence.json every 60 seconds to keep the store fresh.
+  // On reversal flip (false → true), trigger a browser notification.
+  useEffect(() => {
+    const INTERVAL = 60 * 1000;
+    const poll = async () => {
+      try {
+        const r = await fetch(
+          `${process.env.PUBLIC_URL}/market_intelligence.json?v=${Date.now()}`
+        );
+        if (!r.ok) return;
+        const data = await r.json();
+        updateFromIntel(data);
+
+        // Reversal flip notification
+        const isNowReversal =
+          data.regime?.reversal?.signal_detected ||
+          data.reversal_signals?.signal_detected ||
+          false;
+        if (!prevReversal.current && isNowReversal) {
+          const desc =
+            data.regime?.reversal?.signal_description ||
+            data.reversal_signals?.signal_description ||
+            "Reversal pattern detected";
+          if ("Notification" in window && Notification.permission === "granted") {
+            new Notification("🚨 Reversal Signal Detected", { body: desc, icon: "/favicon.ico" });
+          } else if ("Notification" in window && Notification.permission !== "denied") {
+            Notification.requestPermission().then((p) => {
+              if (p === "granted")
+                new Notification("🚨 Reversal Signal Detected", { body: desc, icon: "/favicon.ico" });
+            });
+          }
+        }
+        prevReversal.current = isNowReversal;
+      } catch {}
+    };
+    poll();
+    const id = setInterval(poll, INTERVAL);
+    return () => clearInterval(id);
+  }, [updateFromIntel]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // Countdown ticker — counts down to next actual data update
   useEffect(() => {
     const tick = () => {
@@ -3249,6 +3301,13 @@ const filtered = useMemo(() => {
             (s.dist_52w_high == null || s.dist_52w_high >= -filterDist52w)
           );
         }
+        // In Stress regime: only show A/A+ grade stocks to reduce noise
+        if (creditRegime === "Stress") {
+          st = st.filter(s => {
+            const g = getEliteGrade(s);
+            return g === "A+" || g === "A";
+          });
+        }
         return { ...sub, stocks: st };
       }).filter(sub => sub.stocks.length > 0);
       return { ...norm, subthemes: filteredSubs };
@@ -3266,7 +3325,7 @@ const filtered = useMemo(() => {
       };
       return getRankingRS(b) - getRankingRS(a);
     });
-  }, [data, search, filtersOn, filterDolVol, filterADR, filterRS, filterDist52w]);
+  }, [data, search, filtersOn, filterDolVol, filterADR, filterRS, filterDist52w, creditRegime]);
 
   const unique = [...new Set(filtered.flatMap(t => t.subthemes.flatMap(s => s.stocks.map(st => st.ticker))))];
   const totalSubs = filtered.reduce((n, t) => n + t.subthemes.length, 0);
@@ -3284,6 +3343,7 @@ const filtered = useMemo(() => {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
+      <GlobalAlertBanner />
       <div id="app-navbar" className="border-b border-zinc-800/60 bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-20">
         <div className="max-w-[1400px] mx-auto px-4 py-3">
           <div className="flex items-center justify-between mb-2.5">
