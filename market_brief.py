@@ -269,7 +269,7 @@ def analyze_with_gemini(context: dict, session: str, now_et: datetime) -> dict:
             return "N/A"
         return f"{g['change_pct']:+.2f}%"
 
-    prompt = f"""You are writing the {session} Market Intelligence Brief for {now_et.strftime('%B %d, %Y (%H:%M EST)')}.
+    prompt = f"""You are writing the {session} Market Intelligence Brief for {now_et.strftime('%B %d, %Y (%H:%M %Z)')}.
 
 Market data:
   S&P 500:     {_p(sp)} ({sp.get('change_pct', 0):+.2f}% today)
@@ -506,7 +506,7 @@ def main():
     analysis = analyze_with_gemini(context, session, now_et)
 
     result = {
-        "generated_at":    now_et.strftime("%B %d, %Y (%H:%M EST)"),
+        "generated_at":    now_et.strftime("%B %d, %Y (%H:%M %Z)"),
         "session":         session,
         "global_snapshot": global_snapshot,
         "global_indices":  global_data,
