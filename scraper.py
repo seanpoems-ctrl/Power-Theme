@@ -1331,7 +1331,8 @@ def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None, float | 
 
         # 6M RS performance: use last ~126 trading days to preserve RS calculation
         six_months_ago = pd.Timestamp.now(tz="UTC") - pd.DateOffset(months=6)
-        six_m = valid[valid.index >= six_months_ago]
+        idx = valid.index.tz_localize("UTC") if valid.index.tz is None else valid.index
+        six_m = valid[idx >= six_months_ago]
         if len(six_m) >= 2:
             perf = ((six_m.iloc[-1] - six_m.iloc[0]) / six_m.iloc[0] * 100).dropna()
         else:
