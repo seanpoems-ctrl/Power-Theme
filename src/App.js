@@ -3327,7 +3327,7 @@ const filtered = useMemo(() => {
                       onMouseEnter={e => mkHover('breadth_200d', e)}
                       onMouseLeave={() => setMacroHover(null)}
                     >
-                      <span className="text-zinc-500">VITH 200D</span>
+                      <span className="text-zinc-500">MMTH 200D</span>
                       <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span>
                     </span></>
                   )}</>
