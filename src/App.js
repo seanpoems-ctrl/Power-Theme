@@ -1343,6 +1343,7 @@ const BreakingNewsAlert = ({ newsData }) => {
   const [expanded, setExpanded] = useState(false);
   const [pos, setPos] = useState(null); // null = default CSS position
   const drag = useRef({ active: false, ox: 0, oy: 0, sx: 0, sy: 0, moved: false });
+  const containerRef = useRef(null);
 
   // Document-level mouse listeners so drag works even if cursor leaves the element
   useEffect(() => {
@@ -1376,16 +1377,16 @@ const BreakingNewsAlert = ({ newsData }) => {
 
   const onDragDown = (e) => {
     if (e.button !== 0) return;
-    const w = expanded ? 420 : 170;
-    const ox = pos?.x ?? window.innerWidth - w - 16;
-    const oy = pos?.y ?? 108;
+    const rect = containerRef.current?.getBoundingClientRect();
+    const ox = rect ? rect.left : 0;
+    const oy = rect ? rect.top  : 0;
     drag.current = { active: true, ox, oy, sx: e.clientX, sy: e.clientY, moved: false };
   };
 
   const posStyle = pos ? { left: pos.x, top: pos.y, right: 'auto' } : {};
 
   return (
-    <div className="fixed top-[108px] right-4 z-50" style={{ width: expanded ? 420 : 'auto', ...posStyle }}>
+    <div ref={containerRef} className="fixed top-[108px] right-4 z-50" style={{ width: expanded ? 420 : 'auto', ...posStyle }}>
       {/* Collapsed pill */}
       {!expanded && (
         <button
