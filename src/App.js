@@ -1349,6 +1349,7 @@ const BreakingNewsAlert = ({ newsData }) => {
   useEffect(() => {
     const onMove = (e) => {
       if (!drag.current.active) return;
+      e.preventDefault();                  // prevent text selection while dragging
       const dx = e.clientX - drag.current.sx;
       const dy = e.clientY - drag.current.sy;
       if (!drag.current.moved && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) drag.current.moved = true;
@@ -1377,6 +1378,7 @@ const BreakingNewsAlert = ({ newsData }) => {
 
   const onDragDown = (e) => {
     if (e.button !== 0) return;
+    e.preventDefault();                    // prevent native drag / text selection
     const rect = containerRef.current?.getBoundingClientRect();
     const ox = rect ? rect.left : 0;
     const oy = rect ? rect.top  : 0;
