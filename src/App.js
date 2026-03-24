@@ -466,12 +466,12 @@ function normalizeThemeRaw(t) {
 }
 
 const PerfCellLB = ({ val }) => {
-  if (val == null) return <td className="px-2 py-1.5 text-center text-[11px] text-zinc-600">—</td>;
+  if (val == null) return <td className="px-1 py-1.5 text-center text-[11px] text-zinc-600">—</td>;
   const color = val > 0 ? 'text-emerald-400' : val < 0 ? 'text-red-400' : 'text-zinc-400';
   const bg = val > 5 ? 'bg-emerald-500/10' : val < -5 ? 'bg-red-500/10' : '';
   return (
-    <td className="px-2 py-1.5 text-center">
-      <span className={`inline-block rounded-md px-1.5 py-0.5 text-[12px] font-mono font-medium ${color} ${bg}`}>{val > 0 ? '+' : ''}{val.toFixed(1)}%</span>
+    <td className="px-1 py-1.5 text-center">
+      <span className={`inline-block rounded-md px-1 py-0.5 text-[11px] font-mono font-medium ${color} ${bg}`}>{val > 0 ? '+' : ''}{val.toFixed(1)}%</span>
     </td>
   );
 };
@@ -556,7 +556,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     const isBlocked = LB_PERF_COLS.has(k) && LB_PERF_COLS.has(primaryKey) && !isPrimary;
     return (
       <th onClick={e => handleLBSort(k, e.shiftKey)}
-        className={`px-2 py-2 text-center cursor-pointer select-none ${w || 'w-14'} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500 hover:text-zinc-300'}`}>
+        className={`px-1 py-2 text-center cursor-pointer select-none ${w || 'w-12'} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500 hover:text-zinc-300'}`}>
         <span className="inline-flex items-center justify-center gap-0.5 text-[11px] font-semibold uppercase tracking-wider">
           {label}
           {isPrimary   && <span className="text-[9px] text-blue-400/70">①{dir === 'desc' ? '▼' : '▲'}</span>}
@@ -596,7 +596,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
               <th className="px-2 py-2 w-6 text-[11px] text-zinc-600 select-none whitespace-nowrap">#</th>
               <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Theme</th>
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
-              <LBSortHeader k="rs_score" label="RS" w="w-16" />
+              <LBSortHeader k="rs_score" label="RS" w="w-14" />
             </tr>
           </thead>
           <tbody>
@@ -608,8 +608,8 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                 <tr
                   onClick={() => isIndustryView && setExpanded(isExpanded ? null : t.name)}
                   className={`border-b border-zinc-800/30 transition-colors cursor-pointer ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
-                  <td className={`px-2 py-2 text-[12px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
-                  <td className="px-2 py-2 whitespace-nowrap">
+                  <td className={`px-1 py-2 text-[12px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
+                  <td className="px-2 py-2">
                     <div className="flex items-center gap-1.5">
                       <span
                         className="text-[12px] font-semibold text-zinc-200 cursor-default"
@@ -621,7 +621,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                     </div>
                   </td>
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
-                  <td className={`px-2 py-1.5 text-center text-[12px] font-mono font-bold ${t.rs_score > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                  <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${t.rs_score > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {t.rs_score > 0 ? '+' : ''}{t.rs_score.toFixed(1)}
                   </td>
                 </tr>
