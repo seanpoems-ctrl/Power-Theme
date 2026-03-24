@@ -11,12 +11,9 @@ import useMarketStore from "./useMarketStore";
  * Reversal takes priority over Stress if both are true.
  */
 export default function GlobalAlertBanner() {
-  const { isReversalDetected, reversalType, creditRegime } =
-    useMarketStore((s) => ({
-      isReversalDetected: s.isReversalDetected,
-      reversalType:       s.reversalType,
-      creditRegime:       s.creditRegime,
-    }));
+  const isReversalDetected = useMarketStore((s) => s.isReversalDetected);
+  const reversalType       = useMarketStore((s) => s.reversalType);
+  const creditRegime       = useMarketStore((s) => s.creditRegime);
 
   const showReversal = isReversalDetected;
   const showStress   = !showReversal && creditRegime === "Stress";

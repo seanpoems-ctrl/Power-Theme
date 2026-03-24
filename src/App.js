@@ -3171,10 +3171,9 @@ export default function App() {
   const [macroHover, setMacroHover] = useState(null);
 
   // ── Market store (global macro alerts + reversal) ─────────────────────────
-  const { updateFromIntel, creditRegime } = useMarketStore((s) => ({
-    updateFromIntel: s.updateFromIntel,
-    creditRegime:    s.creditRegime,
-  }));
+  // Use separate selectors — object selectors create new refs every render → infinite loop
+  const updateFromIntel = useMarketStore((s) => s.updateFromIntel);
+  const creditRegime    = useMarketStore((s) => s.creditRegime);
   const prevReversal = useRef(false);
 
   // Poll market_intelligence.json every 60 seconds to keep the store fresh.
