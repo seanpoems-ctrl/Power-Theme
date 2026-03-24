@@ -1582,7 +1582,7 @@ const ScannerBriefFeed = ({ briefData }) => {
                   <th className="text-left py-0.5 font-medium">Asset</th>
                   <th className="text-right py-0.5 font-medium">{priceLabel}</th>
                   <th className="text-right py-0.5 font-medium">Chg</th>
-                  <th className="text-right py-0.5 font-medium">%</th>
+                  <th className="text-right py-0.5 pl-3 font-medium w-[90px]">%</th>
                 </tr>
               </thead>
               <tbody>
@@ -1603,7 +1603,7 @@ const ScannerBriefFeed = ({ briefData }) => {
                       <td className={`py-0.5 text-right font-mono ${chg >= 0 ? "text-emerald-400" : "text-red-400"}`}>
                         {row.change != null ? `${chg >= 0 ? "+" : ""}${chg.toFixed(2)}` : "—"}
                       </td>
-                      <td className={`py-0.5 text-right font-mono ${
+                      <td className={`py-0.5 text-right pl-3 font-mono ${
                         (row.zone_label || row.trend_label)
                           ? (isVix && (row.zone_label || "").includes("Fear") ? "text-red-400" : isVix ? "text-amber-400" : chg >= 0 ? "text-amber-400" : "text-emerald-400")
                           : (row.change_pct ?? 0) >= 0 ? "text-emerald-400" : "text-red-400"
