@@ -1354,7 +1354,7 @@ const BreakingNewsAlert = ({ newsData }) => {
   const dismiss = headline => setDismissed(prev => [...prev, headline]);
 
   return (
-    <div className="fixed bottom-4 right-4 z-50" style={{ width: expanded ? 420 : "auto" }}>
+    <div className="fixed top-[108px] right-4 z-50" style={{ width: expanded ? 420 : "auto" }}>
       {/* Collapsed pill */}
       {!expanded && (
         <button
@@ -1371,7 +1371,7 @@ const BreakingNewsAlert = ({ newsData }) => {
 
       {/* Expanded panel */}
       {expanded && (
-        <div className="bg-black border-2 border-red-600 shadow-[0_0_40px_rgba(220,38,38,0.3)] flex flex-col" style={{ maxHeight: "75vh" }}>
+        <div className="bg-black border-2 border-red-600 shadow-[0_0_40px_rgba(220,38,38,0.3)] flex flex-col" style={{ maxHeight: "calc(100vh - 124px)" }}>
           {/* Panel header */}
           <div className="flex items-center justify-between px-4 py-2 border-b border-red-900 flex-shrink-0">
             <div className="flex items-center gap-2">
