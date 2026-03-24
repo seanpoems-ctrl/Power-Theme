@@ -1,0 +1,101 @@
+{
+  "generated_at": "2026-03-23 20:30 ET",
+  "session": "Post-Market",
+  "indices": {
+    "spy": {
+      "price": 655.38,
+      "open": 658.07,
+      "high": 662.61,
+      "low": 653.94,
+      "close": 655.38,
+      "prev_open": 656.51,
+      "prev_close": 648.57,
+      "change_pct": 1.05
+    },
+    "qqq": {
+      "price": 588.0,
+      "open": 590.47,
+      "high": 595.08,
+      "low": 585.96,
+      "close": 588.0,
+      "prev_open": 591.06,
+      "prev_close": 582.06,
+      "change_pct": 1.02
+    },
+    "vix": {
+      "price": 26.15,
+      "open": 30.04,
+      "high": 31.04,
+      "low": 20.28,
+      "close": 26.15,
+      "prev_open": 24.46,
+      "prev_close": 26.78,
+      "change_pct": -2.35
+    }
+  },
+  "credit": {
+    "baml_hy": null,
+    "date": null,
+    "regime": "Unknown",
+    "color": "gray"
+  },
+  "breadth": {
+    "s5fi": 29.5,
+    "mmth": 52.5,
+    "breadth_flush": false,
+    "generational_buy_zone": false
+  },
+  "global": {
+    "nikkei": {
+      "price": 52491.66,
+      "change_pct": -1.65
+    },
+    "dax": {
+      "price": 22653.86,
+      "change_pct": 1.22
+    },
+    "ftse": {
+      "price": 9894.15,
+      "change_pct": -0.24
+    }
+  },
+  "reversal_signals": {
+    "spy": {
+      "hammer": false,
+      "bullish_engulfing": false,
+      "undercut_reclaim": false
+    },
+    "qqq": {
+      "hammer": false,
+      "bullish_engulfing": false,
+      "undercut_reclaim": false
+    },
+    "signal_detected": false,
+    "signal_description": ""
+  },
+  "analysis": {
+    "snapshot_md": "| Index              | Price      | Change    |\n|--------------------|------------|-----------|\n| SPY                | $655.38    | +1.05%    |\n| QQQ                | $588.00    | +1.02%    |\n| VIX                | $26.15     | -2.35%    |\n| BAML HY Spread     | N/A        | N/A       |\n| S5FI               | 29.5%      |           |\n| MMTH               | 52.5%      |           |\n| Nikkei 225         |            | -1.65%    |\n| DAX                |            | +1.22%    |\n| FTSE 100           |            | -0.24%    |",
+    "macro_section": "The BAML High Yield Spread (BAMLH0A0HYM2) showing N/A indicates an unknown or unquantifiable credit regime, leaving a critical piece of the risk appetite puzzle missing. This absence of a clear credit signal typically fosters a cautious undertone, as investors lack a definitive read on corporate credit health and broader systemic risk perception, potentially limiting conviction in sustained market moves.",
+    "analysis_para1": "Today's global tape presents a fragmented picture with Nikkei 225 down -1.65%, the DAX up +1.22%, and FTSE 100 slightly lower at -0.24%. This mixed international performance, devoid of a clear directional consensus, contrasts with the positive US equity session. Critically, the N/A status of the BAML High Yield Spread means we lack an immediate read on US credit stress, preventing a direct correlation to these divergent global equity movements; instead, its absence signals a data void that adds an layer of uncertainty rather than offering a clear interpretive lens for risk appetite.",
+    "analysis_para2": "The most potent mechanical catalyst for today's session was the coordinated downward movement in the VIX alongside strong gains in both SPY and QQQ. This synchronized action, where volatility fear subsides as major indices advance by over 1%, strongly suggests systematic buying or a significant unwinding of short positions and hedges. Such a broad-based, low-volatility rally often triggers algorithm-driven follow-through, mechanically reinforcing upward momentum as risk managers become comfortable with reducing downside protection.",
+    "technical_signal": "No reversal pattern detected. While the headline indices rallied strongly, underlying market breadth remains concerning, with only 29.5% of stocks above their 50-day moving average (S5FI). The slightly positive MMTH at 52.5% suggests a fragile long-term picture, implying that today's gains may be concentrated in a narrower set of larger cap names, rather than a broad-based market improvement, leaving the overall technical structure vulnerable.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "reason": "Strong demand in AI infrastructure and data center spending continues to drive robust earnings and future growth projections."
+        },
+        {
+          "ticker": "MSFT",
+          "reason": "Consistent cloud growth through Azure, combined with broad AI integration across its product suite, provides a durable competitive advantage."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "reason": "Increasing competition in the EV market, ongoing price pressures, and potential saturation in key segments pose significant margin and growth challenges."
+        }
+      ]
+    }
+  }
+}
