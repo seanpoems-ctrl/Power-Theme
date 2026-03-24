@@ -86,20 +86,52 @@ def _flatten_df(df: pd.DataFrame) -> pd.DataFrame:
 
 
 async def _fetch_fred_series(client: httpx.AsyncClient, series_id: str) -> float | None:
-    """Fetch the latest non-null value from a FRED series via free CSV endpoint."""
+    """
+    Fetch the latest non-null value from a FRED series.
+    Tries the free CSV endpoint; on failure retries once after 3 seconds.
+    """
     url = f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={series_id}"
+    for attempt in range(2):
+        try:
+            r = await client.get(url, timeout=20, headers={"User-Agent": "Mozilla/5.0"})
+            r.raise_for_status()
+            for line in reversed(r.text.strip().split("\n")[1:]):
+                parts = line.strip().split(",")
+                if len(parts) == 2 and parts[1] not in (".", ""):
+                    try:
+                        return float(parts[1])
+                    except ValueError:
+                        continue
+            # CSV parsed but all recent values were "." — data not yet published today
+            return None
+        except Exception as e:
+            log.warning(f"FRED {series_id} attempt {attempt + 1}: {e}")
+            if attempt == 0:
+                await asyncio.sleep(3)
+    return None
+
+
+def _load_cached_hy_oas() -> float | None:
+    """
+    Load the last known BAML HY OAS from the previously committed
+    public/market_intelligence.json.  Handles both the new engine schema
+    (fred.hy_oas) and the old market_intelligence.py schema (credit.baml_hy).
+    """
     try:
-        r = await client.get(url, timeout=15, headers={"User-Agent": "Mozilla/5.0"})
-        r.raise_for_status()
-        for line in reversed(r.text.strip().split("\n")[1:]):
-            parts = line.strip().split(",")
-            if len(parts) == 2 and parts[1] not in (".", ""):
-                try:
-                    return float(parts[1])
-                except ValueError:
-                    continue
-    except Exception as e:
-        log.warning(f"FRED {series_id}: {e}")
+        p = Path("public/market_intelligence.json")
+        if not p.exists():
+            return None
+        data = json.loads(p.read_text(encoding="utf-8"))
+        # New schema: market_briefing_engine.py
+        v = (data.get("fred") or {}).get("hy_oas")
+        if v is not None:
+            return float(v)
+        # Old schema: market_intelligence.py
+        v = (data.get("credit") or {}).get("baml_hy")
+        if v is not None:
+            return float(v)
+    except Exception:
+        pass
     return None
 
 
@@ -107,14 +139,30 @@ async def _fetch_fred_data() -> dict:
     """
     Fetch BAMLH0A0HYM2 (ICE BofA HY OAS) and T10Y2Y (10Y-2Y Yield Curve) concurrently.
     No API key required — uses FRED's free CSV endpoint.
+
+    Fallback chain for BAMLH0A0HYM2 if live fetch fails:
+      1. Retry once after 3 seconds (transient network issue)
+      2. Load last known value from public/market_intelligence.json (previous run)
+    hy_oas_stale=True when the cached value is used — Gemini will note this.
     """
     async with httpx.AsyncClient() as client:
         hy_oas, yield_curve = await asyncio.gather(
             _fetch_fred_series(client, "BAMLH0A0HYM2"),
             _fetch_fred_series(client, "T10Y2Y"),
         )
-    log.info(f"FRED: HY OAS={hy_oas}%  T10Y2Y={yield_curve}")
-    return {"hy_oas": hy_oas, "yield_curve": yield_curve}
+
+    hy_oas_stale = False
+    if hy_oas is None:
+        cached = _load_cached_hy_oas()
+        if cached is not None:
+            hy_oas      = cached
+            hy_oas_stale = True
+            log.info(f"FRED BAMLH0A0HYM2: live fetch failed — using cached value {hy_oas:.2f}%")
+        else:
+            log.warning("FRED BAMLH0A0HYM2: live fetch failed and no cached value available")
+
+    log.info(f"FRED: HY OAS={hy_oas}{'(cached)' if hy_oas_stale else ''}  T10Y2Y={yield_curve}")
+    return {"hy_oas": hy_oas, "yield_curve": yield_curve, "hy_oas_stale": hy_oas_stale}
 
 
 def _fetch_prices_sync() -> dict:
@@ -472,7 +520,7 @@ def _generate_brief_sync(
 {snapshot_table}
 
 FRED Macro Data:
-  BAMLH0A0HYM2 (HY Credit Spread): {f"{hy_oas:.2f}%" if hy_oas is not None else "N/A"} → {regime["credit_status"]}
+  BAMLH0A0HYM2 (HY Credit Spread): {f"{hy_oas:.2f}%{'  ⚠ CACHED — live FRED fetch failed, value is from previous run' if fred.get('hy_oas_stale') else ''}" if hy_oas is not None else "N/A — live FRED fetch failed and no cache available"} → {regime["credit_status"]}
   T10Y2Y (10Y-2Y Yield Curve):      {f"{yield_curve:+.3f}" if yield_curve is not None else "N/A"} → {regime["yc_status"]}
   S5FI  (% stocks > 50DMA):         {f"{s5fi:.1f}%" if s5fi is not None else "N/A"}
   MMTH  (% stocks > 200DMA):        {f"{mmth:.1f}%" if mmth is not None else "N/A"}

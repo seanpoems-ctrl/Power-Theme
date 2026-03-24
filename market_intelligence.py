@@ -97,21 +97,40 @@ def fetch_spy_ma200() -> float | None:
 
 
 def fetch_credit_spread() -> dict | None:
-    """BAMLH0A0HYM2 from FRED — free CSV, no API key required."""
+    """
+    BAMLH0A0HYM2 from FRED — free CSV, no API key required.
+    Retries once on failure; falls back to last cached value from
+    public/market_intelligence.json when live fetch fails.
+    """
     url = "https://fred.stlouisfed.org/graph/fredgraph.csv?id=BAMLH0A0HYM2"
+    for attempt in range(2):
+        try:
+            r = requests.get(url, timeout=20, headers={"User-Agent": "Mozilla/5.0"})
+            r.raise_for_status()
+            for line in reversed(r.text.strip().split("\n")[1:]):
+                parts = line.strip().split(",")
+                if len(parts) == 2 and parts[1] not in (".", ""):
+                    try:
+                        return {"date": parts[0], "value": float(parts[1]), "stale": False}
+                    except ValueError:
+                        continue
+        except Exception as e:
+            print(f"  fetch_credit_spread attempt {attempt + 1}: {e}")
+            if attempt == 0:
+                time.sleep(3)
+
+    # Fallback: load last known value from previously committed market_intelligence.json
     try:
-        r = requests.get(url, timeout=15,
-                         headers={"User-Agent": "Mozilla/5.0"})
-        r.raise_for_status()
-        for line in reversed(r.text.strip().split("\n")[1:]):
-            parts = line.strip().split(",")
-            if len(parts) == 2 and parts[1] not in (".", ""):
-                try:
-                    return {"date": parts[0], "value": float(parts[1])}
-                except ValueError:
-                    continue
+        p = Path("public/market_intelligence.json")
+        if p.exists():
+            prev = json.loads(p.read_text(encoding="utf-8"))
+            v = (prev.get("credit") or {}).get("baml_hy") or \
+                (prev.get("fred")   or {}).get("hy_oas")
+            if v is not None:
+                print(f"  fetch_credit_spread: using cached value {v:.2f}%")
+                return {"date": "cached", "value": float(v), "stale": True}
     except Exception as e:
-        print(f"  fetch_credit_spread: {e}")
+        print(f"  fetch_credit_spread cache fallback: {e}")
     return None
 
 
