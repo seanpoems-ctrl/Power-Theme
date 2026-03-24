@@ -50,6 +50,15 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
 
+      - name: Commit market brief data to repo
+        if: steps.trading_day.outputs.is_trading_day == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/market_brief.json
+          git diff --staged --quiet || git commit -m "data: market_brief $(date -u +%Y-%m-%dT%H:%M) [skip ci]"
+          git pull --rebase --autostash && git push
+
       - uses: actions/setup-node@v4
         if: steps.trading_day.outputs.is_trading_day == 'true'
         with:
