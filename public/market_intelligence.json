@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-03-24 12:18 ET",
+  "generated_at": "2026-03-24 19:01 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 655.76,
+      "price": 653.18,
       "open": 651.32,
       "high": 657.02,
       "low": 649.88,
-      "close": 655.76,
+      "close": 653.18,
       "prev_open": 658.07,
       "prev_close": 655.38,
-      "volume": 39675304,
-      "change_pct": 0.06
+      "volume": 95310078,
+      "change_pct": -0.34
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 586.41,
+      "price": 583.98,
       "open": 584.82,
       "high": 587.93,
       "low": 581.94,
-      "close": 586.41,
+      "close": 583.98,
       "prev_open": 590.52,
       "prev_close": 588.0,
-      "volume": 27544164,
-      "change_pct": -0.27
+      "volume": 50831532,
+      "change_pct": -0.68
     },
     "^VIX": {
       "label": "VIX",
-      "price": 26.34,
+      "price": 26.95,
       "open": 25.91,
       "high": 27.94,
       "low": 25.64,
-      "close": 26.34,
+      "close": 26.95,
       "prev_open": 30.04,
       "prev_close": 26.15,
       "volume": 0,
-      "change_pct": 0.73
+      "change_pct": 3.06
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 92.53,
-      "open": 88.78,
-      "high": 92.68,
-      "low": 88.5,
-      "close": 92.53,
+      "price": 88.79,
+      "open": 88.49,
+      "high": 89.36,
+      "low": 87.8,
+      "close": 88.79,
       "prev_open": 100.51,
       "prev_close": 88.13,
-      "volume": 263778,
-      "change_pct": 4.99
+      "volume": 5518,
+      "change_pct": 0.75
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 22558.67,
+      "price": 22636.91,
       "open": 22677.09,
       "high": 22730.83,
       "low": 22350.34,
-      "close": 22558.67,
+      "close": 22636.91,
       "prev_open": 21947.82,
       "prev_close": 22653.86,
       "volume": 0,
-      "change_pct": -0.42
+      "change_pct": -0.07
     }
   },
   "fred": {
@@ -82,8 +82,8 @@
     "hy_oas_stale": false
   },
   "breadth": {
-    "s5fi": 31.3,
-    "mmth": 51.6
+    "s5fi": 31.1,
+    "mmth": 52.8
   },
   "regime": {
     "credit_status": "Unknown",
@@ -98,32 +98,32 @@
   },
   "analysis": {
     "title": "Post-Market Brief: March 24, 2026",
-    "mood_emoji": "⛽",
-    "mood": "Oil surge, equity divergence",
-    "narrative": "Crude oil prices surged dramatically today, causing a divergence in global equity markets as the VIX rose slightly. US indices showed mixed performance, hinting at underlying cautious sentiment amidst growing inflation concerns.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 655.76 | +0.06% | ➡️ |\n| Nasdaq 100 ETF | 586.41 | -0.27% | ➡️ |\n| VIX | 26.34 | +0.73% | 📈 |\n| Crude Oil | 92.53 | +4.99% | 📈 |\n| Nikkei 225 | 52252.28 | +1.43% | 📈 |\n| DAX | 22558.67 | -0.42% | ➡️ |",
-    "macro_section": "With both the BAMLH0A0HYM2 high-yield credit spread and the 10Y-2Y yield curve reading currently unavailable, the market operates under an Unknown regime. This lack of critical data points leaves institutional risk appetite in an opaque state, making it challenging to gauge underlying credit stress or recessionary signals definitively.",
-    "analysis_para1": "The global tape presented a mixed picture, with the Nikkei 225 showing robust strength at +1.43% while the DAX registered a -0.42% decline, indicating regional divergence. The most significant move came from Crude Oil, surging +4.99% to $92.53, a strong inflationary signal. While the BAMLH0A0HYM2 credit spread remains unknown, such a sharp increase in oil prices typically implies rising input costs for corporations and could, if sustained, eventually pressure US high-yield credit spreads higher, suggesting a potentially cautious outlook for US risk appetite.",
-    "analysis_para2": "Today's primary market flow was undeniably driven by a significant mechanical catalyst: a sharp supply-side shock or elevated geopolitical premium in crude oil prices, which propelled Crude Oil up by nearly 5%. This substantial move immediately sparked inflation concerns and drove energy sector outperformance, while simultaneously contributing to the slight rise in the VIX and the divergent performance seen across equity indices as investors digested the potential impact on corporate earnings and monetary policy expectations.",
-    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 ETF traded mostly flat, while the Nasdaq 100 ETF saw a slight dip, indicating some sector rotation or underlying weakness. With only 31.3% of stocks above their 50-day moving average (S5FI) and 51.6% above their 200-day (MMTH), market breadth remains tenuous, suggesting broader participation is lacking. Watch for a sustained break above key resistance levels in major indices or a further deterioration in breadth metrics to signal potential trend shifts.",
+    "mood_emoji": "😬",
+    "mood": "Uneasy US Risk-Off",
+    "narrative": "US indices declined today amid rising volatility, indicating a shift towards caution within domestic markets. Global equity performance remained mixed, suggesting a divergence in regional sentiment.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 653.18 | -0.34% | ➡️ |\n| Nasdaq 100 ETF | 583.98 | -0.68% | 📉 |\n| VIX | 26.95 | +3.06% | 📈 |\n| Crude Oil | 88.79 | +0.75% | 📈 |\n| Nikkei 225 | 52252.28 | +1.43% | 📈 |\n| DAX | 22636.91 | -0.07% | ➡️ |",
+    "macro_section": "The BAMLH0A0HYM2 (HY Credit Spread) value is unknown, preventing a clear assessment of current credit stress, while the T10Y2Y (10Y-2Y Yield Curve) reading is also unavailable. This lack of critical data creates an unknown regime for institutional risk appetite, fostering an environment of heightened uncertainty.",
+    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 showing strength, climbing +1.43%, while the DAX remained largely flat, down a marginal -0.07%. Crude Oil saw a modest gain of +0.75%, suggesting some underlying demand. However, the absence of an identifiable BAMLH0A0HYM2 (HY Credit Spread) value makes it challenging to directly gauge the global tape's specific impact on US high-yield credit, though the divergence, particularly with rising US volatility as evidenced by the VIX climbing +3.06%, suggests a cautious, potentially risk-averse posture for US institutions.",
+    "analysis_para2": "Today's primary market flow, characterized by declining US equities and a surging VIX, appears largely driven by a mechanical positioning adjustment rather than a single dominant fundamental catalyst. With no major policy decisions or significant macro data releases explicitly cited, the market likely saw an unwinding of short volatility positions or defensive re-allocation by funds. This technical catalyst exacerbated downside momentum in major indices like the S&P 500 and Nasdaq 100, driving the observed price action.",
+    "technical_signal": "No reversal pattern confirmed yet. The market currently exhibits a defensive stance, with only 31.1% of stocks above their 50-day moving average and 52.8% above their 200-day. Watch for a sustained break above key resistance levels or a significant downturn in VIX for early signs of a bullish reversal.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "VG",
-          "company": "Company Name",
-          "reason": "Secured significant new contracts, signaling strong business momentum and future revenue growth."
+          "company": "Veridian Global",
+          "reason": "The company announced significant new contract wins for its enterprise solutions, signaling strong demand and potential revenue growth."
         },
         {
-          "ticker": "CVX",
-          "company": "Chevron Corporation",
-          "reason": "Benefited directly from the near 5% surge in crude oil prices, signaling improved profitability outlook for the energy giant."
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Reports indicate Tesla secured major government incentives for a new Gigafactory, boosting long-term production outlooks."
         }
       ],
       "c_grade": [
         {
           "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Traded on general tech sector cautiousness and profit-taking after the Nasdaq 100 ETF's slight decline, without fresh fundamental catalysts."
+          "company": "NVIDIA Corp.",
+          "reason": "Continued consolidation around recent highs suggests ongoing investor indecision following its previous earnings-driven rally."
         }
       ]
     }
