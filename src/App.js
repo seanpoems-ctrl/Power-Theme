@@ -1340,6 +1340,7 @@ const VixGauge = ({ initialVix }) => {
 /** Breaking News Alert — shown globally above tab content when grade >= 8 news detected */
 const BreakingNewsAlert = ({ newsData }) => {
   const [dismissed, setDismissed] = useState([]);
+  const [expanded, setExpanded] = useState(false);
 
   if (!newsData || !newsData.has_alert) return null;
 
@@ -1348,104 +1349,109 @@ const BreakingNewsAlert = ({ newsData }) => {
   );
   if (!visible.length) return null;
 
-  // Show only the top-graded alert prominently; others as secondary
-  const [top, ...rest] = visible.sort((a, b) => (b.grade || 0) - (a.grade || 0));
-
+  const sorted = visible.sort((a, b) => (b.grade || 0) - (a.grade || 0));
+  const [top, ...rest] = sorted;
   const dismiss = headline => setDismissed(prev => [...prev, headline]);
 
   return (
-    <div className="mb-6 space-y-3">
-      {/* Primary alert */}
-      <div
-        className="relative bg-black border-4 border-red-600 p-6 rounded-none shadow-[0_0_40px_rgba(220,38,38,0.3)] animate-pulse"
-        style={{ animationDuration: "2s" }}
-      >
+    <div className="fixed bottom-4 right-4 z-50" style={{ width: expanded ? 420 : "auto" }}>
+      {/* Collapsed pill */}
+      {!expanded && (
         <button
-          onClick={() => dismiss(top.headline)}
-          className="absolute top-3 right-4 text-red-600 hover:text-red-400 text-xl font-black leading-none"
-          aria-label="Dismiss"
-        >×</button>
-
-        <div className="flex items-center gap-3 mb-3">
-          <h1 className="text-red-600 font-black text-4xl tracking-tighter italic leading-none">
-            BREAKING NEWS:
-          </h1>
-          <span className="text-red-700 font-black text-lg border border-red-700 px-2 py-0.5">
-            {top.grade}/10
-          </span>
-          <span className="text-red-800 text-[13px] font-semibold uppercase tracking-widest">
-            {top.source}
-          </span>
-        </div>
-
-        <div className="text-red-600 font-extrabold text-2xl uppercase leading-tight mb-6 border-b border-red-900 pb-4">
-          {top.headline}
-        </div>
-
-        <div className="space-y-5">
-          {top.analysis && (
-            <div>
-              <h3 className="text-white font-bold text-sm uppercase tracking-widest mb-2">
-                Analysis
-              </h3>
-              <p className="text-white text-base font-medium leading-relaxed">
-                {top.analysis}
-              </p>
-            </div>
-          )}
-          {top.impact && (
-            <div>
-              <h3 className="text-white font-bold text-sm uppercase tracking-widest mb-2">
-                Impact
-              </h3>
-              <p className="text-white text-base font-medium leading-relaxed">
-                {top.impact}
-              </p>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* Secondary alerts (compact) */}
-      {rest.map(alert => (
-        <div
-          key={alert.headline}
-          className="relative bg-black border-2 border-red-800/60 px-5 py-4"
+          onClick={() => setExpanded(true)}
+          className="flex items-center gap-2 bg-black border-2 border-red-600 px-3 py-2 shadow-[0_0_20px_rgba(220,38,38,0.4)] animate-pulse hover:border-red-400 transition-colors"
+          style={{ animationDuration: "2s" }}
         >
-          <button
-            onClick={() => dismiss(alert.headline)}
-            className="absolute top-3 right-4 text-red-800 hover:text-red-500 text-lg font-black leading-none"
-            aria-label="Dismiss"
-          >×</button>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-red-700 text-[11px] font-bold border border-red-800 px-1">{alert.grade}/10</span>
-            <span className="text-red-900 text-[11px] font-semibold uppercase tracking-widest">{alert.source}</span>
+          <span className="text-red-600 font-black text-xs tracking-widest italic">⚡ BREAKING NEWS</span>
+          <span className="bg-red-600 text-white text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center">
+            {visible.length}
+          </span>
+        </button>
+      )}
+
+      {/* Expanded panel */}
+      {expanded && (
+        <div className="bg-black border-2 border-red-600 shadow-[0_0_40px_rgba(220,38,38,0.3)] flex flex-col" style={{ maxHeight: "75vh" }}>
+          {/* Panel header */}
+          <div className="flex items-center justify-between px-4 py-2 border-b border-red-900 flex-shrink-0">
+            <div className="flex items-center gap-2">
+              <span className="text-red-600 font-black text-sm tracking-widest italic animate-pulse" style={{ animationDuration: "2s" }}>
+                ⚡ BREAKING NEWS
+              </span>
+              <span className="text-red-800 text-[10px] font-bold border border-red-900 px-1">{visible.length}</span>
+            </div>
+            <button
+              onClick={() => setExpanded(false)}
+              className="text-zinc-500 hover:text-zinc-300 text-lg leading-none ml-3"
+              aria-label="Minimize"
+            >−</button>
           </div>
-          <p className="text-red-600 font-extrabold text-lg uppercase leading-snug mb-3 border-b border-red-900 pb-3">
-            {alert.headline}
-          </p>
-          <div className="space-y-3">
-            {alert.analysis && (
-              <div>
-                <h4 className="text-white font-bold text-[13px] uppercase tracking-widest mb-1">Analysis</h4>
-                <p className="text-white text-sm font-medium leading-relaxed">{alert.analysis}</p>
+
+          {/* Scrollable alerts */}
+          <div className="overflow-y-auto">
+            {/* Primary alert */}
+            <div className="relative px-4 pt-4 pb-3 border-b border-red-900/40">
+              <button
+                onClick={() => dismiss(top.headline)}
+                className="absolute top-3 right-3 text-red-700 hover:text-red-400 text-base font-black leading-none"
+                aria-label="Dismiss"
+              >×</button>
+              <div className="flex items-center gap-2 mb-2 pr-5">
+                <span className="text-red-700 font-black text-[11px] border border-red-700 px-1">{top.grade}/10</span>
+                <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{top.source}</span>
               </div>
-            )}
-            {alert.impact && (
-              <div>
-                <h4 className="text-white font-bold text-[13px] uppercase tracking-widest mb-1">Impact</h4>
-                <p className="text-white text-sm font-medium leading-relaxed">{alert.impact}</p>
+              <p className="text-red-500 font-extrabold text-sm uppercase leading-snug mb-3">
+                {top.headline}
+              </p>
+              {top.analysis && (
+                <div className="mb-2">
+                  <h4 className="text-zinc-400 font-bold text-[10px] uppercase tracking-widest mb-1">Analysis</h4>
+                  <p className="text-zinc-300 text-xs leading-relaxed">{top.analysis}</p>
+                </div>
+              )}
+              {top.impact && (
+                <div>
+                  <h4 className="text-zinc-400 font-bold text-[10px] uppercase tracking-widest mb-1">Impact</h4>
+                  <p className="text-zinc-300 text-xs leading-relaxed">{top.impact}</p>
+                </div>
+              )}
+            </div>
+
+            {/* Secondary alerts */}
+            {rest.map(alert => (
+              <div key={alert.headline} className="relative px-4 pt-3 pb-3 border-b border-red-900/20">
+                <button
+                  onClick={() => dismiss(alert.headline)}
+                  className="absolute top-3 right-3 text-red-900 hover:text-red-500 text-base font-black leading-none"
+                  aria-label="Dismiss"
+                >×</button>
+                <div className="flex items-center gap-2 mb-1 pr-5">
+                  <span className="text-red-800 text-[10px] font-bold border border-red-900 px-1">{alert.grade}/10</span>
+                  <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{alert.source}</span>
+                </div>
+                <p className="text-red-700 font-bold text-xs uppercase leading-snug mb-2">{alert.headline}</p>
+                {alert.analysis && (
+                  <div className="mb-1">
+                    <h4 className="text-zinc-500 font-bold text-[9px] uppercase tracking-widest mb-0.5">Analysis</h4>
+                    <p className="text-zinc-400 text-[11px] leading-relaxed">{alert.analysis}</p>
+                  </div>
+                )}
+                {alert.impact && (
+                  <div>
+                    <h4 className="text-zinc-500 font-bold text-[9px] uppercase tracking-widest mb-0.5">Impact</h4>
+                    <p className="text-zinc-400 text-[11px] leading-relaxed">{alert.impact}</p>
+                  </div>
+                )}
               </div>
+            ))}
+
+            {newsData.last_checked && (
+              <p className="text-[10px] text-zinc-700 text-right px-3 py-2">
+                Last checked: {newsData.last_checked}
+              </p>
             )}
           </div>
         </div>
-      ))}
-
-      {/* Last-checked */}
-      {newsData.last_checked && (
-        <p className="text-[11px] text-zinc-700 text-right">
-          Last checked: {newsData.last_checked}
-        </p>
       )}
     </div>
   );
