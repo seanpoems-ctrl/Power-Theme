@@ -2410,6 +2410,46 @@ const SearchBar = ({ data, search, setSearch }) => {
 };
 
 
+// ── Snapshot Markdown Table ────────────────────────────────────────────────────
+
+const SnapshotMdTable = ({ md }) => {
+  if (!md) return null;
+  const lines = md.split('\n').map(l => l.trim()).filter(Boolean);
+  const tableLines = lines.filter(l => l.startsWith('|'));
+  // separator rows contain only pipes, dashes, colons, spaces
+  const isSep = l => /^\|[\s\|\-\:]+\|$/.test(l);
+  const dataLines = tableLines.filter(l => !isSep(l));
+  if (dataLines.length < 2) return null;
+  const parseRow = l => l.split('|').slice(1, -1).map(c => c.trim());
+  const [headerRow, ...bodyRows] = dataLines;
+  const headers = parseRow(headerRow);
+  return (
+    <div className="overflow-x-auto">
+      <table className="w-full text-[11px] border-collapse">
+        <thead>
+          <tr>
+            {headers.map((h, i) => (
+              <th key={i} className="text-left py-1 px-2 text-zinc-500 font-semibold border-b border-zinc-700/50 uppercase tracking-wide whitespace-nowrap">
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {bodyRows.map((row, ri) => (
+            <tr key={ri} className="border-b border-zinc-800/30 hover:bg-zinc-800/20">
+              {parseRow(row).map((cell, ci) => (
+                <td key={ci} className="py-0.5 px-2 font-mono text-zinc-300 whitespace-nowrap">{cell}</td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+
 // ── Macro Risk Card (Market Intelligence) ─────────────────────────────────────
 
 const MacroRiskCard = () => {
@@ -2593,6 +2633,13 @@ const MacroRiskCard = () => {
       {/* Gemini Analysis */}
       {ana && !ana.error && (
         <div className="bg-zinc-900/40 border border-zinc-800/50 rounded-lg divide-y divide-zinc-800/60">
+
+          {ana.snapshot_md && (
+            <div className="p-4">
+              <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-1.5 font-semibold">Snapshot</div>
+              <SnapshotMdTable md={ana.snapshot_md}/>
+            </div>
+          )}
 
           {ana.macro_section && (
             <div className="p-4">

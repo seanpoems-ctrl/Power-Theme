@@ -456,6 +456,48 @@ def send_telegram(text: str) -> bool:
         return False
 
 
+# ── Briefs DB ──────────────────────────────────────────────────────────────────
+
+def _append_briefs_db(result: dict) -> None:
+    """Append a compact summary to public/market_briefs.json (newest-first, max 30)."""
+    path = Path("public/market_briefs.json")
+    try:
+        entries: list = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+        if not isinstance(entries, list):
+            entries = []
+    except Exception:
+        entries = []
+
+    idx     = result.get("indices", {})
+    spy     = idx.get("spy") or {}
+    vix     = idx.get("vix") or {}
+    credit  = result.get("credit", {})
+    breadth = result.get("breadth", {})
+    rev     = result.get("reversal_signals", {})
+    ana     = result.get("analysis") or {}
+
+    compact = {
+        "generated_at":          result.get("generated_at", ""),
+        "session":               result.get("session", ""),
+        "spy_price":             spy.get("price"),
+        "spy_change_pct":        spy.get("change_pct"),
+        "vix":                   vix.get("price"),
+        "baml_hy":               credit.get("baml_hy"),
+        "credit_regime":         credit.get("regime"),
+        "s5fi":                  breadth.get("s5fi"),
+        "mmth":                  breadth.get("mmth"),
+        "generational_buy_zone": breadth.get("generational_buy_zone", False),
+        "reversal":              rev.get("signal_detected", False),
+        "reversal_description":  rev.get("signal_description", ""),
+    }
+
+    entries.insert(0, compact)
+    path.write_text(
+        json.dumps(entries[:30], indent=2, ensure_ascii=False), encoding="utf-8"
+    )
+    print(f"  Saved → {path} ({min(len(entries), 30)} entries)")
+
+
 # ── Main ───────────────────────────────────────────────────────────────────────
 
 def main() -> None:
@@ -516,6 +558,8 @@ def main() -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"  Saved → {out}")
+
+    _append_briefs_db(result)
 
     tg_msg = build_telegram_message(result)
     send_telegram(tg_msg)
