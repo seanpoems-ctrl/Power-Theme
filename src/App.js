@@ -1192,7 +1192,7 @@ const VixGauge = ({ initialVix }) => {
   const needlePath = `M${f(ntx)} ${f(nty)} L${f(nb1x)} ${f(nb1y)} L${f(nb2x)} ${f(nb2y)}Z`;
   const da = initialVix != null ? v2a(initialVix) : null;
 
-  const gaugeColW = 210;
+  const gaugeColW = 240;
   const expectedMovePct = vix / 16;
 
   return (
@@ -1207,7 +1207,7 @@ const VixGauge = ({ initialVix }) => {
       </div>
 
       {/* Left: gauge + slider under dial (matches reference); right: zone info */}
-      <div className="flex items-start gap-3">
+      <div className="flex items-stretch gap-3">
         <div className="flex flex-col flex-shrink-0" style={{ width: gaugeColW }}>
         <svg viewBox="0 0 400 215" className="h-auto block w-full" style={{ overflow: 'visible' }}>
           <defs>
@@ -1311,9 +1311,9 @@ const VixGauge = ({ initialVix }) => {
         </div>
 
         {/* Zone info — 整卡一併上移（mt），勿對下半用負 margin 才不會疊字 */}
-        <div className="flex-1 min-w-0 mt-0 px-3 py-2 rounded-lg border transition-colors duration-300"
+        <div className="flex-1 min-w-0 flex flex-col px-3 py-2 rounded-lg border transition-colors duration-300"
           style={{ background: '#1a1a1a', borderColor: active.color + '55', marginTop: '-18px' }}>
-          <div className="border-b border-zinc-800/70 pb-2">
+          <div className="border-b border-zinc-800/70 pb-2 flex-shrink-0">
             <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest mb-1.5">Expected Move</div>
             <div className="flex flex-nowrap items-baseline gap-x-2 min-w-0">
               <span className="text-[11px] text-zinc-500 font-mono shrink-0">$SPX</span>
@@ -1322,13 +1322,13 @@ const VixGauge = ({ initialVix }) => {
               </span>
             </div>
           </div>
-          <div className="pt-1.5 space-y-1">
-            <div className="flex flex-col gap-0.5">
+          <div className="pt-1.5 flex flex-col flex-1 gap-1">
+            <div className="flex flex-col gap-0.5 flex-shrink-0">
               <span className="text-[12px] font-bold uppercase tracking-wider leading-tight transition-colors duration-300"
                 style={{ color: active.color }}>{active.name}</span>
               <span className="text-[10px] font-mono uppercase leading-tight" style={{ color: active.color, opacity: 0.85 }}>{active.range}</span>
             </div>
-            <div className="text-[12px] text-zinc-500 leading-relaxed">{active.impact}</div>
+            <div className="text-[12px] text-zinc-500 leading-relaxed flex-1">{active.impact}</div>
           </div>
         </div>
       </div>
