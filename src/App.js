@@ -2456,8 +2456,8 @@ const MacroRiskCard = () => {
       {/* Index Cards */}
       <div className="grid grid-cols-3 gap-3">
         {[
-          { label: "SPY", d: spy },
-          { label: "QQQ", d: qqq },
+          { label: "ES1!", d: spy },
+          { label: "NQ1!", d: qqq },
           { label: "VIX", d: vix, isVix: true },
         ].map(({ label, d, isVix }) => !d.price ? null : (
           <div key={label} className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg p-3">
@@ -3229,9 +3229,9 @@ const filtered = useMemo(() => {
                 ) : null;
                 return (
                   <div className="hidden lg:flex items-center gap-3 ml-4 pl-4 border-l border-zinc-700/50">
-                    <Tag label="QQQ" d={qqq}/>
+                    <Tag label="NQ1!" d={qqq}/>
                     <span className="text-zinc-700">·</span>
-                    <Tag label="SPY" d={spy}/>
+                    <Tag label="ES1!" d={spy}/>
                     <span className="text-zinc-700">·</span>
                     <Tag label="IWM" d={iwm}/>
                   </div>
@@ -3288,9 +3288,9 @@ const filtered = useMemo(() => {
             const breadthColor = v => v >= 60 ? "text-emerald-400" : v >= 40 ? "text-yellow-400" : "text-red-400";
             return (
               <div className="hidden lg:flex items-center gap-2 text-[12px] font-mono py-1 mt-1 border-t border-zinc-800/50 flex-wrap">
-                {btc && <Tag label="BTC" d={btc} chartKey="btc"/>}
-                {gld && <><Dot/><Tag label="GLD" d={gld} chartKey="gld"/></>}
-                {oil && <><Dot/><Tag label="OIL" d={oil} chartKey="oil"/></>}
+                {btc && <Tag label="BTC CME" d={btc} chartKey="btc"/>}
+                {gld && <><Dot/><Tag label="GC1! COMEX" d={gld} chartKey="gld"/></>}
+                {oil && <><Dot/><Tag label="CL1! NYMEX" d={oil} chartKey="oil"/></>}
                 {credit_spread != null && (
                   <><Sep/>
                   <span

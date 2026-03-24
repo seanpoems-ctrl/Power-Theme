@@ -1100,16 +1100,27 @@ def _elite_status(price, sma10, sma20, sma50, sma200, rsi, breadth) -> str:
     return "Neutral"
 
 
-# SPY / QQQ / IWM 指數條用 TradingView Scanner（與 VIX 同源）；失敗時回退 yfinance
-_TV_INDEX_SYMBOL = {"SPY": "AMEX:SPY", "QQQ": "NASDAQ:QQQ", "IWM": "AMEX:IWM"}
-_TV_SCAN_URL = "https://scanner.tradingview.com/america/scan"
+# Index / futures symbols → (TV symbol, scanner endpoint)
+_TV_SCAN_URL         = "https://scanner.tradingview.com/america/scan"
+_TV_FUTURES_SCAN_URL = "https://scanner.tradingview.com/futures/scan"
+_TV_INDEX_SYMBOL = {
+    "SPY": ("CME_MINI:ES1!",  _TV_FUTURES_SCAN_URL),
+    "QQQ": ("CME_MINI:NQ1!",  _TV_FUTURES_SCAN_URL),
+    "IWM": ("AMEX:IWM",       _TV_SCAN_URL),
+}
+# Macro futures symbols for BTC / Gold / Oil via TradingView
+_TV_MACRO_SYMBOL = {
+    "btc": ("CME:BTC1!",   _TV_FUTURES_SCAN_URL),
+    "gld": ("COMEX:GC1!",  _TV_FUTURES_SCAN_URL),
+    "oil": ("NYMEX:CL1!",  _TV_FUTURES_SCAN_URL),
+}
 
 
-def _fetch_tradingview_index_snapshot(tv_symbol: str) -> dict[str, float] | None:
+def _fetch_tradingview_index_snapshot(tv_symbol: str, scan_url: str = _TV_SCAN_URL) -> dict[str, float] | None:
     """Single-row snapshot: close, change%, RSI, SMAs, EMAs from TradingView."""
     try:
         resp = requests.post(
-            _TV_SCAN_URL,
+            scan_url,
             json={
                 "symbols": {"tickers": [tv_symbol]},
                 "columns": [
@@ -1205,9 +1216,10 @@ def _fetch_market_indicators_yfinance(ticker: str, breadth: float | None = None)
 def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
     """Index ETF metrics + Elite Regime. Primary: TradingView scanner; fallback: yfinance."""
     sym = (ticker or "").upper()
-    tv_sym = _TV_INDEX_SYMBOL.get(sym)
-    if tv_sym:
-        raw = _fetch_tradingview_index_snapshot(tv_sym)
+    tv_entry = _TV_INDEX_SYMBOL.get(sym)
+    if tv_entry:
+        tv_sym, scan_url = tv_entry
+        raw = _fetch_tradingview_index_snapshot(tv_sym, scan_url)
         if raw:
             price = raw["price"]
             sma10, sma20, sma50, sma200 = raw["sma10"], raw["sma20"], raw["sma50"], raw["sma200"]
@@ -1233,24 +1245,21 @@ def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
 
 
 def fetch_macro_assets() -> dict:
-    """Fetch BTC, GLD, Oil (CL=F) prices via yfinance + Credit Spreads from FRED."""
-    import yfinance as yf
-
+    """Fetch BTC / Gold / Oil futures via TradingView + Credit Spreads from FRED."""
     result: dict = {}
-    for key, sym in [("btc", "BTC-USD"), ("gld", "GLD"), ("oil", "CL=F")]:
+    for key, (tv_sym, scan_url) in _TV_MACRO_SYMBOL.items():
         try:
-            hist = yf.Ticker(sym).history(period="5d", interval="1d")
-            hist = hist.dropna(subset=["Close"])
-            if len(hist) >= 2:
-                price = float(hist["Close"].iloc[-1])
-                prev = float(hist["Close"].iloc[-2])
+            raw = _fetch_tradingview_index_snapshot(tv_sym, scan_url)
+            if raw:
                 result[key] = {
-                    "price": round(price, 2),
-                    "change_pct": round((price - prev) / prev * 100, 2),
+                    "price": round(raw["price"], 2),
+                    "change_pct": round(raw["change_pct"], 2),
                 }
-                logger.info(f"  {key.upper()} ({sym}): {price:.2f} {result[key]['change_pct']:+.2f}%")
+                logger.info(f"  {key.upper()} ({tv_sym}): {raw['price']:.2f} {raw['change_pct']:+.2f}%")
+            else:
+                logger.warning(f"  Macro asset {tv_sym}: no data from TradingView")
         except Exception as e:
-            logger.warning(f"  Macro asset {sym} failed: {e}")
+            logger.warning(f"  Macro asset {tv_sym} failed: {e}")
 
     # Credit Spreads: ICE BofA HY Index OAS from FRED (BAMLH0A0HYM2)
     try:
