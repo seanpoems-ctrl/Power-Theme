@@ -1388,7 +1388,7 @@ const BreakingNewsAlert = ({ newsData }) => {
           </div>
 
           {/* Scrollable alerts */}
-          <div className="overflow-y-auto">
+          <div className="overflow-y-auto flex-1 min-h-0">
             {/* Primary alert */}
             <div className="relative px-4 pt-4 pb-3 border-b border-red-900/40">
               <button
