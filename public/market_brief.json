@@ -1,30 +1,30 @@
 {
-  "generated_at": "March 24, 2026 (11:48 EDT)",
-  "session": "Market Hours",
+  "generated_at": "March 24, 2026 (18:05 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6591.19,
-      "change": 10.19,
-      "change_pct": 0.15
+      "price": 6556.37,
+      "change": -24.63,
+      "change_pct": -0.37
     },
     {
       "label": "Nasdaq 100",
-      "price": 24134.39,
-      "change": -54.2,
-      "change_pct": -0.22
+      "price": 24002.45,
+      "change": -186.14,
+      "change_pct": -0.77
     },
     {
       "label": "VIX",
-      "price": 26.02,
-      "change": -0.13,
+      "price": 26.95,
+      "change": 0.8,
       "change_pct": null,
       "zone_label": "Anxiety Zone"
     },
     {
       "label": "10Y Yield",
-      "price": 4.37,
-      "change": 0.04,
+      "price": 4.39,
+      "change": 0.06,
       "change_pct": null,
       "trend_label": "Rising"
     }
@@ -37,21 +37,21 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 22602.64,
-      "change_pct": -0.23
+      "price": 22636.91,
+      "change_pct": -0.07
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 9948.71,
-      "change_pct": 0.55
+      "price": 9965.16,
+      "change_pct": 0.72
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 32.0,
-    "mmth": 53.0,
+    "s5fi": 31.0,
+    "mmth": 52.7,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "High VIX, Mixed Signals, Cautious",
+  "mood": "Anxious Distribution / Risk Aversion",
   "analysis": {
-    "analysis_para1": "Global markets displayed a divergence this morning, with the Nikkei 225 surging by +1.43% and the FTSE 100 gaining +0.55%, while the DAX struggled, closing down -0.23%. Domestically, the 10-year yield continues its ascent to 4.37%, contributing to a tightening credit environment. This backdrop is reflected in US equity breadth, where only 32.0% of S&P 500 stocks are above their 50-day moving average, signaling a lack of widespread participation. The MMTH also sits at a moderate 53.0%, suggesting underlying fragility despite mixed headline index moves.",
-    "analysis_para2": "The immediate mechanical plan involves closely monitoring key index levels amidst this divergence. For the S&P 500, a sustained hold above 6600 could signal resilience, but a break below 6550 would indicate increased downside risk. The Nasdaq 100 needs to defend the 24000 level to avoid further weakness, with 24200 acting as near-term resistance. Given the VIX in the \"Anxiety Zone\" at 26.02, traders should prioritize capital preservation and consider reducing exposure on any breach of support. A decisive move by the VIX below 25 or above 28 will dictate market momentum, signaling either waning fear or accelerating selling pressure.",
-    "technical_signal": "No reversal pattern confirmed yet. The market continues to display high anxiety, with mixed index performance and weak breadth preventing a clear directional shift.",
+    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 gaining 1.43% and FTSE 100 up 0.72%, while the DAX remained flat. However, this global resilience did not translate to US markets, which saw the S&P 500 decline by 0.37% to 6556.37 and the Nasdaq 100 by 0.77% to 24002.45. The VIX remains elevated at 26.95, signaling significant anxiety, compounded by rising 10-year yields at 4.39%. US market breadth shows clear internal weakness with only 31.0% of stocks above their 50-day moving average (S5FI), despite 52.7% remaining above their 200-day (MMTH). The BAML HY Spread's unknown regime adds to the uncertainty, preventing a clear credit-risk assessment.",
+    "analysis_para2": "Given the current anxious distribution, the mechanical plan calls for extreme caution as long as the VIX remains in the Anxiety Zone above 25. Key support levels for the S&P 500 are near 6500, with a break below potentially signaling further downside towards the 6400 area. For the Nasdaq 100, watch 23800 as crucial support; a sustained breach could lead to accelerated selling. The divergence in breadth, with S5FI at 31.0%, demands that any rallies be treated as suspect unless accompanied by a significant breadth improvement and a decline in the 10-year yield.",
+    "technical_signal": "No reversal pattern confirmed yet. US indices closed lower on high anxiety (VIX 26.95), suggesting continued pressure rather than a capitulation bounce.",
     "ticker_intel": [
       {
-        "ticker": "JPM",
-        "company": "JPMorgan Chase & Co.",
+        "ticker": "NVDA",
+        "company": "NVIDIA Corporation",
         "grade": "A+",
-        "reason": "Strong balance sheet and diversified revenue streams position it well to capitalize on rising interest rates and navigate market volatility."
+        "reason": "Continues to demonstrate leadership in AI compute, with strong demand underpinning future revenue growth irrespective of short-term market wobbles."
       },
       {
-        "ticker": "PG",
-        "company": "Procter & Gamble Co.",
+        "ticker": "MSFT",
+        "company": "Microsoft Corporation",
         "grade": "A",
-        "reason": "Consistent dividend growth and essential product portfolio offer defensive stability amidst market anxiety and economic uncertainty."
+        "reason": "Its robust cloud services and strategic AI integration across its product suite provide defensive growth and stable cash flows in an uncertain environment."
       },
       {
-        "ticker": "TSLA",
-        "company": "Tesla Inc.",
+        "ticker": "BA",
+        "company": "The Boeing Company",
         "grade": "C",
-        "reason": "Heightened market volatility and a rising rate environment pose significant headwinds for high-growth, high-valuation stocks."
+        "reason": "Persistent operational challenges, regulatory oversight, and quality control issues continue to weigh on production schedules and investor confidence."
       }
     ]
   }
