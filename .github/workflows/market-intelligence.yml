@@ -27,7 +27,7 @@ jobs:
 
       - name: Install deps
         run: |
-          pip install requests yfinance pandas python-dotenv google-genai \
+          pip install requests httpx yfinance pandas python-dotenv google-genai \
                       tradingview-screener exchange-calendars beautifulsoup4
 
       - name: Check trading day
@@ -42,9 +42,9 @@ jobs:
               f.write(f"is_trading_day={'true' if is_session else 'false'}\n")
           EOF
 
-      - name: Run Market Intelligence Engine
+      - name: Run Market Briefing Engine
         if: steps.trading_day.outputs.is_trading_day == 'true'
-        run: python market_intelligence.py
+        run: python market_briefing_engine.py auto
         env:
           GEMINI_API_KEY:      ${{ secrets.GEMINI_API_KEY }}
           TELEGRAM_BOT_TOKEN:  ${{ secrets.TELEGRAM_BOT_TOKEN }}
