@@ -1344,6 +1344,25 @@ const BreakingNewsAlert = ({ newsData }) => {
   const [pos, setPos] = useState(null); // null = default CSS position
   const drag = useRef({ active: false, ox: 0, oy: 0, sx: 0, sy: 0, moved: false });
 
+  // Document-level mouse listeners so drag works even if cursor leaves the element
+  useEffect(() => {
+    const onMove = (e) => {
+      if (!drag.current.active) return;
+      const dx = e.clientX - drag.current.sx;
+      const dy = e.clientY - drag.current.sy;
+      if (!drag.current.moved && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) drag.current.moved = true;
+      if (!drag.current.moved) return;
+      setPos({ x: Math.max(0, drag.current.ox + dx), y: Math.max(0, drag.current.oy + dy) });
+    };
+    const onUp = () => { drag.current.active = false; };
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
+    return () => {
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   if (!newsData || !newsData.has_alert) return null;
 
   const visible = (newsData.alerts || []).filter(
@@ -1356,27 +1375,12 @@ const BreakingNewsAlert = ({ newsData }) => {
   const dismiss = headline => setDismissed(prev => [...prev, headline]);
 
   const onDragDown = (e) => {
-    e.preventDefault();
+    if (e.button !== 0) return;
     const w = expanded ? 420 : 170;
     const ox = pos?.x ?? window.innerWidth - w - 16;
     const oy = pos?.y ?? 108;
     drag.current = { active: true, ox, oy, sx: e.clientX, sy: e.clientY, moved: false };
-    e.currentTarget.setPointerCapture(e.pointerId);
   };
-  const onDragMove = (e) => {
-    if (!drag.current.active) return;
-    const dx = e.clientX - drag.current.sx;
-    const dy = e.clientY - drag.current.sy;
-    if (!drag.current.moved && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) drag.current.moved = true;
-    if (!drag.current.moved) return;
-    setPos({ x: Math.max(0, drag.current.ox + dx), y: Math.max(0, drag.current.oy + dy) });
-  };
-  const onPillUp = () => {
-    if (!drag.current.active) return;
-    drag.current.active = false;
-    if (!drag.current.moved) setExpanded(true);
-  };
-  const onDragUp = () => { drag.current.active = false; };
 
   const posStyle = pos ? { left: pos.x, top: pos.y, right: 'auto' } : {};
 
@@ -1385,11 +1389,10 @@ const BreakingNewsAlert = ({ newsData }) => {
       {/* Collapsed pill */}
       {!expanded && (
         <button
-          onPointerDown={onDragDown}
-          onPointerMove={onDragMove}
-          onPointerUp={onPillUp}
+          onClick={() => { if (!drag.current.moved) setExpanded(true); }}
+          onMouseDown={onDragDown}
           className="flex items-center gap-2 bg-black border-2 border-red-600 px-3 py-2 shadow-[0_0_20px_rgba(220,38,38,0.4)] animate-pulse hover:border-red-400 transition-colors cursor-grab active:cursor-grabbing"
-          style={{ animationDuration: "2s", touchAction: 'none' }}
+          style={{ animationDuration: "2s" }}
         >
           <span className="text-red-600 font-black text-xs tracking-widest italic">⚡ BREAKING NEWS</span>
           <span className="bg-red-600 text-white text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center">
@@ -1403,11 +1406,8 @@ const BreakingNewsAlert = ({ newsData }) => {
         <div className="bg-black border-2 border-red-600 shadow-[0_0_40px_rgba(220,38,38,0.3)] flex flex-col" style={{ maxHeight: "calc(100vh - 124px)" }}>
           {/* Panel header — drag handle */}
           <div
-            onPointerDown={onDragDown}
-            onPointerMove={onDragMove}
-            onPointerUp={onDragUp}
+            onMouseDown={onDragDown}
             className="flex items-center justify-between px-4 py-2 border-b border-red-900 flex-shrink-0 cursor-grab active:cursor-grabbing select-none"
-            style={{ touchAction: 'none' }}
           >
             <div className="flex items-center gap-2">
               <span className="text-red-600 font-black text-sm tracking-widest italic animate-pulse" style={{ animationDuration: "2s" }}>
@@ -1417,7 +1417,7 @@ const BreakingNewsAlert = ({ newsData }) => {
             </div>
             <button
               onClick={() => setExpanded(false)}
-              onPointerDown={e => e.stopPropagation()}
+              onMouseDown={e => e.stopPropagation()}
               className="text-zinc-500 hover:text-zinc-300 text-lg leading-none ml-3"
               aria-label="Minimize"
             >−</button>
