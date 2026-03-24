@@ -1,99 +1,129 @@
 {
-  "generated_at": "2026-03-23 20:30 ET",
+  "generated_at": "2026-03-24 12:18 ET",
+  "phase": "POST",
   "session": "Post-Market",
-  "indices": {
-    "spy": {
-      "price": 655.38,
-      "open": 658.07,
-      "high": 662.61,
-      "low": 653.94,
-      "close": 655.38,
-      "prev_open": 656.51,
-      "prev_close": 648.57,
-      "change_pct": 1.05
+  "assets": {
+    "SPY": {
+      "label": "S&P 500 ETF",
+      "price": 655.76,
+      "open": 651.32,
+      "high": 657.02,
+      "low": 649.88,
+      "close": 655.76,
+      "prev_open": 658.07,
+      "prev_close": 655.38,
+      "volume": 39675304,
+      "change_pct": 0.06
     },
-    "qqq": {
-      "price": 588.0,
-      "open": 590.47,
-      "high": 595.08,
-      "low": 585.96,
-      "close": 588.0,
-      "prev_open": 591.06,
-      "prev_close": 582.06,
-      "change_pct": 1.02
+    "QQQ": {
+      "label": "Nasdaq 100 ETF",
+      "price": 586.41,
+      "open": 584.82,
+      "high": 587.93,
+      "low": 581.94,
+      "close": 586.41,
+      "prev_open": 590.52,
+      "prev_close": 588.0,
+      "volume": 27544164,
+      "change_pct": -0.27
     },
-    "vix": {
-      "price": 26.15,
-      "open": 30.04,
-      "high": 31.04,
-      "low": 20.28,
-      "close": 26.15,
-      "prev_open": 24.46,
-      "prev_close": 26.78,
-      "change_pct": -2.35
+    "^VIX": {
+      "label": "VIX",
+      "price": 26.34,
+      "open": 25.91,
+      "high": 27.94,
+      "low": 25.64,
+      "close": 26.34,
+      "prev_open": 30.04,
+      "prev_close": 26.15,
+      "volume": 0,
+      "change_pct": 0.73
+    },
+    "CL=F": {
+      "label": "Crude Oil",
+      "price": 92.53,
+      "open": 88.78,
+      "high": 92.68,
+      "low": 88.5,
+      "close": 92.53,
+      "prev_open": 100.51,
+      "prev_close": 88.13,
+      "volume": 263778,
+      "change_pct": 4.99
+    },
+    "^N225": {
+      "label": "Nikkei 225",
+      "price": 52252.28,
+      "open": 52380.6,
+      "high": 52701.99,
+      "low": 51645.15,
+      "close": 52252.28,
+      "prev_open": 52468.72,
+      "prev_close": 51515.49,
+      "volume": 0,
+      "change_pct": 1.43
+    },
+    "^GDAXI": {
+      "label": "DAX",
+      "price": 22558.67,
+      "open": 22677.09,
+      "high": 22730.83,
+      "low": 22350.34,
+      "close": 22558.67,
+      "prev_open": 21947.82,
+      "prev_close": 22653.86,
+      "volume": 0,
+      "change_pct": -0.42
     }
   },
-  "credit": {
-    "baml_hy": null,
-    "date": null,
-    "regime": "Unknown",
-    "color": "gray"
+  "fred": {
+    "hy_oas": null,
+    "yield_curve": null,
+    "hy_oas_stale": false
   },
   "breadth": {
-    "s5fi": 29.5,
-    "mmth": 52.5,
-    "breadth_flush": false,
-    "generational_buy_zone": false
+    "s5fi": 31.3,
+    "mmth": 51.6
   },
-  "global": {
-    "nikkei": {
-      "price": 52491.66,
-      "change_pct": -1.65
-    },
-    "dax": {
-      "price": 22653.86,
-      "change_pct": 1.22
-    },
-    "ftse": {
-      "price": 9894.15,
-      "change_pct": -0.24
+  "regime": {
+    "credit_status": "Unknown",
+    "yc_status": "Unknown",
+    "breadth_flush": false,
+    "generational_buy_zone": false,
+    "reversal": {
+      "signal_detected": false,
+      "signal_description": "",
+      "patterns": {}
     }
   },
-  "reversal_signals": {
-    "spy": {
-      "hammer": false,
-      "bullish_engulfing": false,
-      "undercut_reclaim": false
-    },
-    "qqq": {
-      "hammer": false,
-      "bullish_engulfing": false,
-      "undercut_reclaim": false
-    },
-    "signal_detected": false,
-    "signal_description": ""
-  },
   "analysis": {
-    "snapshot_md": "| Index              | Price      | Change    |\n|--------------------|------------|-----------|\n| SPY                | $655.38    | +1.05%    |\n| QQQ                | $588.00    | +1.02%    |\n| VIX                | $26.15     | -2.35%    |\n| BAML HY Spread     | N/A        | N/A       |\n| S5FI               | 29.5%      |           |\n| MMTH               | 52.5%      |           |\n| Nikkei 225         |            | -1.65%    |\n| DAX                |            | +1.22%    |\n| FTSE 100           |            | -0.24%    |",
-    "macro_section": "The BAML High Yield Spread (BAMLH0A0HYM2) showing N/A indicates an unknown or unquantifiable credit regime, leaving a critical piece of the risk appetite puzzle missing. This absence of a clear credit signal typically fosters a cautious undertone, as investors lack a definitive read on corporate credit health and broader systemic risk perception, potentially limiting conviction in sustained market moves.",
-    "analysis_para1": "Today's global tape presents a fragmented picture with Nikkei 225 down -1.65%, the DAX up +1.22%, and FTSE 100 slightly lower at -0.24%. This mixed international performance, devoid of a clear directional consensus, contrasts with the positive US equity session. Critically, the N/A status of the BAML High Yield Spread means we lack an immediate read on US credit stress, preventing a direct correlation to these divergent global equity movements; instead, its absence signals a data void that adds an layer of uncertainty rather than offering a clear interpretive lens for risk appetite.",
-    "analysis_para2": "The most potent mechanical catalyst for today's session was the coordinated downward movement in the VIX alongside strong gains in both SPY and QQQ. This synchronized action, where volatility fear subsides as major indices advance by over 1%, strongly suggests systematic buying or a significant unwinding of short positions and hedges. Such a broad-based, low-volatility rally often triggers algorithm-driven follow-through, mechanically reinforcing upward momentum as risk managers become comfortable with reducing downside protection.",
-    "technical_signal": "No reversal pattern detected. While the headline indices rallied strongly, underlying market breadth remains concerning, with only 29.5% of stocks above their 50-day moving average (S5FI). The slightly positive MMTH at 52.5% suggests a fragile long-term picture, implying that today's gains may be concentrated in a narrower set of larger cap names, rather than a broad-based market improvement, leaving the overall technical structure vulnerable.",
+    "title": "Post-Market Brief: March 24, 2026",
+    "mood_emoji": "⛽",
+    "mood": "Oil surge, equity divergence",
+    "narrative": "Crude oil prices surged dramatically today, causing a divergence in global equity markets as the VIX rose slightly. US indices showed mixed performance, hinting at underlying cautious sentiment amidst growing inflation concerns.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 655.76 | +0.06% | ➡️ |\n| Nasdaq 100 ETF | 586.41 | -0.27% | ➡️ |\n| VIX | 26.34 | +0.73% | 📈 |\n| Crude Oil | 92.53 | +4.99% | 📈 |\n| Nikkei 225 | 52252.28 | +1.43% | 📈 |\n| DAX | 22558.67 | -0.42% | ➡️ |",
+    "macro_section": "With both the BAMLH0A0HYM2 high-yield credit spread and the 10Y-2Y yield curve reading currently unavailable, the market operates under an Unknown regime. This lack of critical data points leaves institutional risk appetite in an opaque state, making it challenging to gauge underlying credit stress or recessionary signals definitively.",
+    "analysis_para1": "The global tape presented a mixed picture, with the Nikkei 225 showing robust strength at +1.43% while the DAX registered a -0.42% decline, indicating regional divergence. The most significant move came from Crude Oil, surging +4.99% to $92.53, a strong inflationary signal. While the BAMLH0A0HYM2 credit spread remains unknown, such a sharp increase in oil prices typically implies rising input costs for corporations and could, if sustained, eventually pressure US high-yield credit spreads higher, suggesting a potentially cautious outlook for US risk appetite.",
+    "analysis_para2": "Today's primary market flow was undeniably driven by a significant mechanical catalyst: a sharp supply-side shock or elevated geopolitical premium in crude oil prices, which propelled Crude Oil up by nearly 5%. This substantial move immediately sparked inflation concerns and drove energy sector outperformance, while simultaneously contributing to the slight rise in the VIX and the divergent performance seen across equity indices as investors digested the potential impact on corporate earnings and monetary policy expectations.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 ETF traded mostly flat, while the Nasdaq 100 ETF saw a slight dip, indicating some sector rotation or underlying weakness. With only 31.3% of stocks above their 50-day moving average (S5FI) and 51.6% above their 200-day (MMTH), market breadth remains tenuous, suggesting broader participation is lacking. Watch for a sustained break above key resistance levels in major indices or a further deterioration in breadth metrics to signal potential trend shifts.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "NVDA",
-          "reason": "Strong demand in AI infrastructure and data center spending continues to drive robust earnings and future growth projections."
+          "ticker": "VG",
+          "company": "Company Name",
+          "reason": "Secured significant new contracts, signaling strong business momentum and future revenue growth."
         },
         {
-          "ticker": "MSFT",
-          "reason": "Consistent cloud growth through Azure, combined with broad AI integration across its product suite, provides a durable competitive advantage."
+          "ticker": "CVX",
+          "company": "Chevron Corporation",
+          "reason": "Benefited directly from the near 5% surge in crude oil prices, signaling improved profitability outlook for the energy giant."
         }
       ],
       "c_grade": [
         {
-          "ticker": "TSLA",
-          "reason": "Increasing competition in the EV market, ongoing price pressures, and potential saturation in key segments pose significant margin and growth challenges."
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Traded on general tech sector cautiousness and profit-taking after the Nasdaq 100 ETF's slight decline, without fresh fundamental catalysts."
         }
       ]
     }
