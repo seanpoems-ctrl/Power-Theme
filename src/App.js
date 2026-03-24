@@ -3299,7 +3299,6 @@ const filtered = useMemo(() => {
                     onMouseLeave={() => setMacroHover(null)}
                   >
                     <span className="text-zinc-600">HY Spread</span>
-                    <span className="text-zinc-400 text-[11px]">(BAMLH0A0HYM2)</span>
                     <span className="text-zinc-300">{credit_spread.value.toFixed(2)}%</span>
                     {credit_spread.change !== 0 && (
                       <span className={credit_spread.change > 0 ? "text-red-400" : "text-emerald-400"}>
