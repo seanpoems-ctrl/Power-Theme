@@ -156,9 +156,15 @@ def fetch_finviz_headlines() -> list[dict]:
 
 # ── Gemini Grading ──────────────────────────────────────────────────────────
 
+ALLOWED_SOURCES = {"CNBC", "CNBC Markets", "Yahoo Finance", "Finviz"}
+
+
 def grade_with_gemini(headlines: list[dict]) -> list[dict]:
     if not GEMINI_API_KEY or not headlines:
         return []
+
+    # Map normalized headline → original feed source so we can restore it after Gemini
+    source_map = {h["title"]: h["source"] for h in headlines}
 
     headlines_text = "\n".join(
         f"{i+1}. [{h['source']}] {h['title']}"
@@ -178,10 +184,10 @@ Headlines:
 {headlines_text}
 
 Return ONLY a valid JSON array. Include ONLY headlines graded 8+.
-For each qualifying headline:
+For each qualifying headline use EXACTLY the source label shown in brackets — do NOT derive the source from the headline text:
 {{
   "headline": "exact headline text",
-  "source": "source name",
+  "source": "source label from brackets",
   "grade": 9,
   "analysis": "2-3 sentences on market and macro context — what this means for the broader market",
   "impact": "2-3 sentences on direct trading implications — which sectors, stocks, or asset classes are affected and how to position"
@@ -200,7 +206,20 @@ Output ONLY the JSON array. No markdown, no explanation."""
         alerts = json.loads(raw)
         if not isinstance(alerts, list):
             return []
-        return [a for a in alerts if isinstance(a, dict) and a.get("grade", 0) >= ALERT_THRESHOLD]
+
+        result = []
+        for a in alerts:
+            if not isinstance(a, dict) or a.get("grade", 0) < ALERT_THRESHOLD:
+                continue
+            # Restore original feed source (overrides anything Gemini may have derived)
+            original_source = source_map.get(a.get("headline", ""), a.get("source", ""))
+            a["source"] = original_source
+            # Drop alerts whose feed source is not in our approved list
+            if a["source"] not in ALLOWED_SOURCES:
+                print(f"  Filtered non-approved source: {a['source']}")
+                continue
+            result.append(a)
+        return result
     except Exception as e:
         print(f"  Gemini grading failed: {e}")
         return []
