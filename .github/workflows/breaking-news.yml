@@ -25,7 +25,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install deps
-        run: pip install requests python-dotenv google-genai
+        run: pip install requests python-dotenv google-genai beautifulsoup4
 
       - name: Run Emergency News Monitor
         run: python breaking_news.py

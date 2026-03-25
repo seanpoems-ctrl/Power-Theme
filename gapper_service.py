@@ -617,7 +617,7 @@ def main():
     logger.info(f"Pre-Market Gapper Scanner — {now_et.strftime('%Y-%m-%d %H:%M ET')}")
 
     logger.info("Fetching gappers from TradingView...")
-    gappers = fetch_gappers()
+    gappers = fetch_gappers()[:25]
     logger.info(f"  Found {len(gappers)} gappers")
 
     output = []
