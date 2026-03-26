@@ -82,11 +82,25 @@ jobs:
         if: steps.trading_day.outputs.is_trading_day == 'true'
         run: pip install requests beautifulsoup4 tradingview-screener google-genai exchange-calendars python-dotenv yfinance
 
-      - name: Run gapper scanner
+      - name: Run gapper scanner (retry on failure)
         if: steps.trading_day.outputs.is_trading_day == 'true'
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python gapper_service.py
+          CI: true
+        run: |
+          for attempt in 1 2 3; do
+            echo "=== Gapper attempt $attempt / 3 ==="
+            if python gapper_service.py; then
+              echo "Gapper OK"
+              exit 0
+            fi
+            if [ "$attempt" -lt 3 ]; then
+              echo "Failed — waiting 60s before retry..."
+              sleep 60
+            fi
+          done
+          echo "Gapper failed after 3 attempts"
+          exit 1
 
       # 把最新的 gapper_data.json 存回 repo，讓 daily scrape build 也能用到新資料
       - name: Commit gapper data to repo

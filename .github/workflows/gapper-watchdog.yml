@@ -1,9 +1,11 @@
 name: Gapper Watchdog
 
-# Safety net: if the gapper cron missed today, force-trigger it at 10:30 AM ET
+# Safety net: if the gapper cron missed today, force-trigger it
+# Two triggers: 10:30 AM ET (first check) + 12:30 PM ET (final check after timeout failures)
 on:
   schedule:
     - cron: "30 14 * * 1-5"   # 10:30 AM ET (UTC-4 summer) Mon–Fri
+    - cron: "30 16 * * 1-5"   # 12:30 PM ET — late safety net (catches timeout failures)
   workflow_dispatch: {}
 
 jobs:

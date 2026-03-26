@@ -1,10 +1,11 @@
-# Thematic Scanner — every 5 min trigger, 9:00 AM – 4:30 PM ET
+# Thematic Scanner — every 5 min trigger, 9:00 AM – 5:00 PM ET
 # Scraper takes ~8-10 min, so concurrency queues (not cancels) → effective ~10 min updates
+# Post-close window extended to 5:00 PM ET to capture final closing data
 name: Daily scrape & deploy
 
 on:
   schedule:
-    - cron: "*/5 12-20 * * 1-5"  # Every 5 min, 12:00–20:55 UTC (covers 9AM-4:30PM ET both seasons)
+    - cron: "*/5 12-22 * * 1-5"  # Every 5 min, 12:00–22:55 UTC (covers 9AM-5PM ET both EDT and EST)
   workflow_dispatch: {}
 
 concurrency:
@@ -35,7 +36,7 @@ jobs:
       - name: Install Python deps
         run: pip install requests beautifulsoup4 exchange-calendars yfinance lxml
 
-      - name: Check NYSE trading day + ET window (9:00 AM – 4:30 PM)
+      - name: Check NYSE trading day + ET window (9:00 AM – 5:00 PM)
         id: trading_day
         run: |
           python - <<'EOF'
@@ -52,7 +53,7 @@ jobs:
 
           et_now = datetime.now(ZoneInfo("America/New_York"))
           et_minutes = et_now.hour * 60 + et_now.minute
-          in_window = 540 <= et_minutes <= 990  # 9:00 AM – 4:30 PM ET
+          in_window = 540 <= et_minutes <= 1020  # 9:00 AM – 5:00 PM ET (post-close data capture)
 
           if is_manual:
               should_run = True
