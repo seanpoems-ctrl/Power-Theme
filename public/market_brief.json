@@ -1,30 +1,30 @@
 {
-  "generated_at": "March 26, 2026 (12:21 EDT)",
-  "session": "Market Hours",
+  "generated_at": "March 26, 2026 (17:56 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6530.91,
-      "change": -60.99,
-      "change_pct": -0.93
+      "price": 6477.16,
+      "change": -114.74,
+      "change_pct": -1.74
     },
     {
       "label": "Nasdaq 100",
-      "price": 23848.52,
-      "change": -314.46,
-      "change_pct": -1.3
+      "price": 23586.99,
+      "change": -575.99,
+      "change_pct": -2.38
     },
     {
       "label": "VIX",
-      "price": 26.92,
-      "change": 1.59,
+      "price": 27.44,
+      "change": 2.11,
       "change_pct": null,
       "zone_label": "Anxiety Zone"
     },
     {
       "label": "10Y Yield",
-      "price": 4.39,
-      "change": 0.06,
+      "price": 4.42,
+      "change": 0.09,
       "change_pct": null,
       "trend_label": "Rising"
     }
@@ -37,21 +37,21 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 22671.53,
-      "change_pct": -1.24
+      "price": 22612.97,
+      "change_pct": -1.5
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 9979.76,
-      "change_pct": -1.26
+      "price": 9972.17,
+      "change_pct": -1.33
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 32.3,
-    "mmth": 53.1,
+    "s5fi": 28.9,
+    "mmth": 51.9,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Heightened Anxiety / Broad Sell-off",
+  "mood": "Risk-Off / Global Weakness",
   "analysis": {
-    "analysis_para1": "Global markets initiated a clear risk-off tone with the DAX and FTSE 100 both dropping sharply by -1.24% and -1.26% respectively, while the Nikkei 225 also edged down -0.27%. This weakness has permeated the U.S. session, driving the S&P 500 down -0.93% and the Nasdaq 100 -1.30%. The rising 10Y Yield to 4.39% reflects tightening financial conditions, further pressuring equities, especially growth names. Market breadth indicators remain concerning, with only 32.3% of stocks above their 50-day moving average (S5FI) and 53.1% above their 200-day moving average (MMTH), indicating narrowing leadership and underlying fragility.",
-    "analysis_para2": "With the VIX elevated in the 'Anxiety Zone' at 26.92, current action demands defensive positioning. Key support for the S&P 500 sits around the 6500 level; a decisive break below this would signal further downside toward 6450, warranting a reduction in risk exposure. Conversely, any bounce from 6500 would need to clear immediate resistance at 6550 to suggest a temporary reprieve. Traders should monitor volume on any potential bounces for conviction and consider trimming high-beta positions until VIX shows signs of normalizing below 25.",
-    "technical_signal": "No reversal pattern confirmed yet. Today's session is characterized by continued selling pressure across major indices and increasing volatility, indicating a lack of buying conviction.",
+    "analysis_para1": "Global markets experienced broad declines today, with the Nikkei 225 down -0.27%, DAX -1.50%, and FTSE 100 -1.33%, setting a negative tone for US trading. This global apprehension was amplified by a rising 10Y Yield at 4.42%, signaling tighter financial conditions, though the BAML HY Spread's regime remains unknown. US market breadth deteriorated significantly, with only 28.9% of S&P 500 stocks above their 50-day moving average (S5FI), indicating widespread short-term weakness. While 51.9% of stocks remain above their 200-day moving average (MMTH), this longer-term strength is now under pressure, suggesting distribution across the market.",
+    "analysis_para2": "The mechanical plan for navigating this environment involves monitoring key S&P 500 (SPX) support levels, with the immediate focus on reclaiming the 6500 psychological mark. A sustained break below today's close of 6477.16 could signal further downside towards 6400, while a bounce above 6500 would suggest a potential relief rally. On the Nasdaq 100 (NDX), defending the 23500 level is critical; a failure here could open the door to 23000. Traders should watch the VIX closely, as its current \"Anxiety Zone\" reading of 27.44 suggests high fear, but a move above 30 could signal capitulation, potentially preceding a short-term bottom. Until these levels are either decisively held or broken, discretion and reduced exposure are advised.",
+    "technical_signal": "No reversal pattern confirmed yet. Today's steep declines across indices, coupled with an elevated VIX in the \"Anxiety Zone,\" indicate continued selling pressure without any discernible signs of a bullish turnaround.",
     "ticker_intel": [
       {
-        "ticker": "MSFT",
-        "company": "Microsoft Corp",
+        "ticker": "AAPL",
+        "company": "Apple Inc.",
         "grade": "A+",
-        "reason": "Strong cloud demand (Azure) and leading AI investments provide a defensible moat against broader market volatility and rising rates."
+        "reason": "Its strong balance sheet, resilient ecosystem, and consistent share repurchase programs provide a defensive quality amid broader market declines."
       },
       {
-        "ticker": "JNJ",
-        "company": "Johnson & Johnson",
+        "ticker": "LLY",
+        "company": "Eli Lilly and Company",
         "grade": "A",
-        "reason": "Defensive healthcare sector exposure with consistent cash flows and dividend history makes it resilient in an anxious, risk-off market."
+        "reason": "A robust drug pipeline, defensive healthcare sector positioning, and consistent demand for its innovative treatments offer stability and growth potential irrespective of market cycles."
       },
       {
-        "ticker": "TSLA",
-        "company": "Tesla Inc",
+        "ticker": "CCL",
+        "company": "Carnival Corporation",
         "grade": "C",
-        "reason": "High-beta growth stock facing increasing competition and potential valuation headwinds in a rising rate and risk-off environment."
+        "reason": "Highly cyclical nature, sensitivity to consumer discretionary spending, and macroeconomic headwinds expose it to significant downside risk during periods of market stress."
       }
     ]
   }
