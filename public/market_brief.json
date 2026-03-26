@@ -1,57 +1,57 @@
 {
-  "generated_at": "March 25, 2026 (18:59 EDT)",
-  "session": "Post-Market",
+  "generated_at": "March 26, 2026 (12:21 EDT)",
+  "session": "Market Hours",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6591.9,
-      "change": 35.53,
-      "change_pct": 0.54
+      "price": 6530.91,
+      "change": -60.99,
+      "change_pct": -0.93
     },
     {
       "label": "Nasdaq 100",
-      "price": 24162.98,
-      "change": 160.53,
-      "change_pct": 0.67
+      "price": 23848.52,
+      "change": -314.46,
+      "change_pct": -1.3
     },
     {
       "label": "VIX",
-      "price": 25.33,
-      "change": -1.62,
+      "price": 26.92,
+      "change": 1.59,
       "change_pct": null,
       "zone_label": "Anxiety Zone"
     },
     {
       "label": "10Y Yield",
-      "price": 4.33,
-      "change": -0.06,
+      "price": 4.39,
+      "change": 0.06,
       "change_pct": null,
-      "trend_label": "Falling"
+      "trend_label": "Rising"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 53749.62,
-      "change_pct": 2.87
+      "price": 53603.65,
+      "change_pct": -0.27
     },
     "dax": {
       "label": "DAX",
-      "price": 22957.08,
-      "change_pct": 1.41
+      "price": 22671.53,
+      "change_pct": -1.24
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10106.84,
-      "change_pct": 1.42
+      "price": 9979.76,
+      "change_pct": -1.26
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 34.8,
-    "mmth": 52.9,
+    "s5fi": 32.3,
+    "mmth": 53.1,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Anxious Gains, Breadth Lags",
+  "mood": "Heightened Anxiety / Broad Sell-off",
   "analysis": {
-    "analysis_para1": "Global markets surged today, with the Nikkei 225 leading the charge at +2.87%, complemented by robust gains in the DAX (+1.41%) and FTSE 100 (+1.42%). Despite this strong international tape boosting US indices, domestic conditions remain complex. The VIX lingering in the \"Anxiety Zone\" at 25.33, coupled with a falling 10Y yield of 4.33%, suggests underlying caution. Furthermore, US market breadth remains tepid, with only 34.8% of S&P 500 stocks above their 50-day moving average (S5FI) and 52.9% above their 200-day (MMTH), indicating concentrated gains rather than broad participation.",
-    "analysis_para2": "Given the divergent signals, the mechanical plan involves close monitoring of breadth and volatility. A decisive move above S&P 500's 6600 level, accompanied by an expansion in S5FI above 50%, would signal broadening strength. Conversely, a failure to hold the 6550 support on the S&P 500, especially if combined with a VIX surge above 28, would confirm increasing risk-off sentiment. Traders should prioritize names demonstrating sustained relative strength within key growth sectors, while sustained VIX contraction below 20 remains a crucial signal for a more confident bullish stance.",
-    "technical_signal": "No reversal pattern confirmed yet. While global markets show strong upward momentum, the persistent \"Anxiety Zone\" VIX and subdued US breadth indicate a lack of conviction for a clear directional shift.",
+    "analysis_para1": "Global markets initiated a clear risk-off tone with the DAX and FTSE 100 both dropping sharply by -1.24% and -1.26% respectively, while the Nikkei 225 also edged down -0.27%. This weakness has permeated the U.S. session, driving the S&P 500 down -0.93% and the Nasdaq 100 -1.30%. The rising 10Y Yield to 4.39% reflects tightening financial conditions, further pressuring equities, especially growth names. Market breadth indicators remain concerning, with only 32.3% of stocks above their 50-day moving average (S5FI) and 53.1% above their 200-day moving average (MMTH), indicating narrowing leadership and underlying fragility.",
+    "analysis_para2": "With the VIX elevated in the 'Anxiety Zone' at 26.92, current action demands defensive positioning. Key support for the S&P 500 sits around the 6500 level; a decisive break below this would signal further downside toward 6450, warranting a reduction in risk exposure. Conversely, any bounce from 6500 would need to clear immediate resistance at 6550 to suggest a temporary reprieve. Traders should monitor volume on any potential bounces for conviction and consider trimming high-beta positions until VIX shows signs of normalizing below 25.",
+    "technical_signal": "No reversal pattern confirmed yet. Today's session is characterized by continued selling pressure across major indices and increasing volatility, indicating a lack of buying conviction.",
     "ticker_intel": [
       {
-        "ticker": "AAPL",
-        "company": "Apple Inc.",
-        "grade": "A+",
-        "reason": "Continues to demonstrate robust ecosystem growth and capital returns, sustaining premium valuation even amidst broader market anxiety."
-      },
-      {
         "ticker": "MSFT",
-        "company": "Microsoft Corp.",
-        "grade": "A",
-        "reason": "Azure cloud momentum and strategic AI integration continue to drive strong enterprise demand and consistent revenue growth."
+        "company": "Microsoft Corp",
+        "grade": "A+",
+        "reason": "Strong cloud demand (Azure) and leading AI investments provide a defensible moat against broader market volatility and rising rates."
       },
       {
-        "ticker": "GM",
-        "company": "General Motors Co.",
+        "ticker": "JNJ",
+        "company": "Johnson & Johnson",
+        "grade": "A",
+        "reason": "Defensive healthcare sector exposure with consistent cash flows and dividend history makes it resilient in an anxious, risk-off market."
+      },
+      {
+        "ticker": "TSLA",
+        "company": "Tesla Inc",
         "grade": "C",
-        "reason": "Significant capital expenditures for EV transition and competitive pressures are weighing on near-term profitability and market share, increasing cyclical vulnerability."
+        "reason": "High-beta growth stock facing increasing competition and potential valuation headwinds in a rising rate and risk-off environment."
       }
     ]
   }
