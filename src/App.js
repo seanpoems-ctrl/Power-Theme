@@ -1196,11 +1196,11 @@ const VixGauge = ({ initialVix }) => {
   const needlePath = `M${f(ntx)} ${f(nty)} L${f(nb1x)} ${f(nb1y)} L${f(nb2x)} ${f(nb2y)}Z`;
   const da = initialVix != null ? v2a(initialVix) : null;
 
-  const gaugeColW = 175;
+  const gaugeColW = 205;
   const expectedMovePct = vix / 16;
 
   return (
-    <div className="px-5 pt-1 pb-2 bg-zinc-900/60 border border-zinc-800/50 rounded-xl">
+    <div className="px-5 pt-2 pb-2 bg-zinc-900/60 border border-zinc-800/50 rounded-xl">
 
       {/* Header */}
       <div className="flex items-center justify-between mb-1">
