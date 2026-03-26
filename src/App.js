@@ -1200,7 +1200,7 @@ const VixGauge = ({ initialVix }) => {
   const expectedMovePct = vix / 16;
 
   return (
-    <div className="px-5 pt-2 pb-2 bg-zinc-900/60 border border-zinc-800/50 rounded-xl">
+    <div className="px-5 pt-2 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl">
 
       {/* Header */}
       <div className="flex items-center justify-between mb-1">
@@ -1332,7 +1332,7 @@ const VixGauge = ({ initialVix }) => {
                 style={{ color: active.color }}>{active.name}</span>
               <span className="text-[10px] font-mono uppercase leading-tight" style={{ color: active.color, opacity: 0.85 }}>{active.range}</span>
             </div>
-            <div className="text-[12px] text-zinc-500 leading-normal flex-1">{active.impact}</div>
+            <div className="text-[12px] text-zinc-500 leading-relaxed flex-1">{active.impact}</div>
           </div>
         </div>
       </div>
