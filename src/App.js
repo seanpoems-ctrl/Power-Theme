@@ -1501,23 +1501,25 @@ const BreakingNewsAlert = ({ newsData }) => {
 /** Returns the next Gapper scan time as a display string. */
 function getNextGapperScanTime(scanTime) {
   const now = new Date();
-  // Gapper triggers at 13:05 UTC Mon–Fri
+  // Gapper window: 8:00 AM – 12:00 PM ET, triggers every 5 min via cron
   const utcDay = now.getUTCDay();
   const isWeekday = utcDay >= 1 && utcDay <= 5;
-  const beforeTrigger = now.getUTCHours() < 13 || (now.getUTCHours() === 13 && now.getUTCMinutes() < 5);
+  // Check ET time: before 8:00 AM ET means scan hasn't started yet
+  const etHour = parseInt(now.toLocaleString("en-US", { timeZone: "America/New_York", hour: "numeric", hour12: false }));
+  const beforeWindow = etHour < 8;
   // Check if already scanned today (scan_time format: "2026-03-20 10:33 ET")
   const etTodayParts = now.toLocaleDateString("en-US", { timeZone: "America/New_York" }).split("/");
   const etTodayISO = `${etTodayParts[2]}-${etTodayParts[0].padStart(2,"0")}-${etTodayParts[1].padStart(2,"0")}`;
   const alreadyScannedToday = scanTime && scanTime.slice(0, 10) === etTodayISO;
-  if (isWeekday && beforeTrigger && !alreadyScannedToday) return "Today ~9:05 AM ET";
+  if (isWeekday && beforeWindow && !alreadyScannedToday) return "Today ~8:00 AM ET";
   const next = new Date(now);
   for (let i = 1; i <= 7; i++) {
     next.setUTCDate(next.getUTCDate() + 1);
     if (next.getUTCDay() >= 1 && next.getUTCDay() <= 5) {
-      return next.toLocaleDateString("en-US", { timeZone: "America/New_York", weekday: "short", month: "short", day: "numeric" }) + " ~9:05 AM ET";
+      return next.toLocaleDateString("en-US", { timeZone: "America/New_York", weekday: "short", month: "short", day: "numeric" }) + " ~8:00 AM ET";
     }
   }
-  return "Next weekday ~9:05 AM ET";
+  return "Next weekday ~8:00 AM ET";
 }
 
 /** Returns the next Market Brief update time as a display string (ET). */
