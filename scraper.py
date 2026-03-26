@@ -1036,11 +1036,13 @@ def fetch_sparkline(ticker: str) -> dict:
         hist = yf.Ticker(ticker).history(period="6mo", interval="1d")
         if hist.empty or len(hist) < 2:
             return {"sparkline": [], "bars_30d": []}
-        closes = [round(float(c), 2) for c in hist["Close"].tolist()]
+        import math
+        closes = [round(float(c), 2) for c in hist["Close"].tolist() if not math.isnan(c)]
         bars_30d = [
             {"h": round(float(r["High"]), 2), "l": round(float(r["Low"]), 2),
              "c": round(float(r["Close"]), 2), "v": int(r["Volume"])}
             for _, r in hist.tail(30).iterrows()
+            if not (math.isnan(r["High"]) or math.isnan(r["Low"]) or math.isnan(r["Close"]))
         ]
         return {"sparkline": closes, "bars_30d": bars_30d}
     except Exception:
@@ -1931,7 +1933,7 @@ def main():
     sp500_prices = output.pop("_sp500_prices", {})
     out_path = Path("public/thematic_data.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(json.dumps(output, indent=2, ensure_ascii=False), encoding="utf-8")
+    out_path.write_text(json.dumps(output, indent=2, ensure_ascii=False, allow_nan=False), encoding="utf-8")
 
     logger.info("Fetching SEC ticker list...")
     all_tickers = fetch_all_tickers()
