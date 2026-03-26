@@ -1200,7 +1200,7 @@ const VixGauge = ({ initialVix }) => {
   const expectedMovePct = vix / 16;
 
   return (
-    <div className="px-5 pt-4 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl">
+    <div className="px-5 pt-2 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl">
 
       {/* Header */}
       <div className="flex items-center justify-between mb-1">
@@ -3545,7 +3545,7 @@ const filtered = useMemo(() => {
       </div>
 
       {tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
-        <div className="max-w-[1400px] mx-auto px-4 py-4">
+        <div className="max-w-[1400px] mx-auto px-4 pt-2 pb-4">
           <div className="flex justify-between items-start mb-2">
             <div className="w-[420px] flex-shrink-0 flex flex-col gap-4">
               <VixGauge initialVix={data?.vix}/>
