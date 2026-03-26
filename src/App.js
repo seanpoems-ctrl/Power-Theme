@@ -3249,7 +3249,7 @@ export default function App() {
                 if (stock.perf_1d == null) stock.perf_1d = stock.change_pct ?? null;
           setData(json);
         }
-      } catch {}
+      } catch (err) { console.error("[ThematicScanner] fetch failed:", err); }
       setLoading(false);
     };
     setLoading(true);
