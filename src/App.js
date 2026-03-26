@@ -615,7 +615,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                   <td className="px-2 py-2">
                     <div className="flex items-center gap-1.5">
                       <span
-                        className="text-[12px] font-semibold text-zinc-200 cursor-default"
+                        className="text-[12px] font-semibold text-zinc-200 cursor-default hover:text-blue-400 transition-colors"
                         onMouseEnter={e => { const etf = THEME_ETF_MAP[t.name]; if (!etf) return; clearTimeout(themeHoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); themeHoverTimer.current = setTimeout(() => setThemeHover({ ticker: etf, rect }), 500); }}
                         onMouseLeave={() => { clearTimeout(themeHoverTimer.current); setThemeHover(null); }}
                       >{t.name}</span>
