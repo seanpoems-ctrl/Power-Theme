@@ -1196,11 +1196,11 @@ const VixGauge = ({ initialVix }) => {
   const needlePath = `M${f(ntx)} ${f(nty)} L${f(nb1x)} ${f(nb1y)} L${f(nb2x)} ${f(nb2y)}Z`;
   const da = initialVix != null ? v2a(initialVix) : null;
 
-  const gaugeColW = 240;
+  const gaugeColW = 175;
   const expectedMovePct = vix / 16;
 
   return (
-    <div className="px-5 pt-2 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl">
+    <div className="px-5 pt-1 pb-2 bg-zinc-900/60 border border-zinc-800/50 rounded-xl">
 
       {/* Header */}
       <div className="flex items-center justify-between mb-1">
@@ -1213,7 +1213,7 @@ const VixGauge = ({ initialVix }) => {
       {/* Left: gauge + slider under dial (matches reference); right: zone info */}
       <div className="flex items-stretch gap-3">
         <div className="flex flex-col flex-shrink-0" style={{ width: gaugeColW }}>
-        <svg viewBox="0 0 400 215" className="h-auto block w-full" style={{ overflow: 'visible' }}>
+        <svg viewBox="0 20 400 200" className="h-auto block w-full" style={{ overflow: 'visible' }}>
           <defs>
             <filter id="vg-needle-shadow" x="-50%" y="-20%" width="200%" height="140%">
               <feGaussianBlur stdDeviation="2" result="b"/>
@@ -1294,12 +1294,12 @@ const VixGauge = ({ initialVix }) => {
             fill={active.color} style={{ transition: 'fill 0.3s' }}>
             {vix.toFixed(1)}
           </text>
-          <text x={CX} y={CY + 54} textAnchor="middle"
+          <text x={CX} y={CY + 42} textAnchor="middle"
             fill="#272727" fontSize="8.5" letterSpacing="0.25em"
             fontFamily="system-ui,sans-serif">VIX</text>
         </svg>
 
-        <div className="flex items-center gap-2 mt-2 w-full min-w-0">
+        <div className="flex items-center gap-2 mt-1 w-full min-w-0">
           <span className="text-[10px] text-zinc-700 font-mono shrink-0">0</span>
           <input type="range" min="0" max="45" step="0.5" value={vix}
             onChange={e => setVix(parseFloat(e.target.value))}
@@ -1315,10 +1315,10 @@ const VixGauge = ({ initialVix }) => {
         </div>
 
         {/* Zone info — 整卡一併上移（mt），勿對下半用負 margin 才不會疊字 */}
-        <div className="flex-1 min-w-0 flex flex-col px-3 py-2 rounded-lg border transition-colors duration-300"
+        <div className="flex-1 min-w-0 flex flex-col px-3 py-1 rounded-lg border transition-colors duration-300"
           style={{ background: '#1a1a1a', borderColor: active.color + '55', marginTop: '-18px' }}>
-          <div className="border-b border-zinc-800/70 pb-2 flex-shrink-0">
-            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest mb-1.5">Expected Move</div>
+          <div className="border-b border-zinc-800/70 pb-1.5 flex-shrink-0">
+            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest mb-1">Expected Move</div>
             <div className="flex flex-nowrap items-baseline gap-x-2 min-w-0">
               <span className="text-[11px] text-zinc-500 font-mono shrink-0">$SPX</span>
               <span className="text-sm font-bold font-mono text-zinc-100 tabular-nums leading-none">
@@ -1326,13 +1326,13 @@ const VixGauge = ({ initialVix }) => {
               </span>
             </div>
           </div>
-          <div className="pt-1.5 flex flex-col flex-1 gap-1">
+          <div className="pt-1 flex flex-col flex-1 gap-0.5">
             <div className="flex flex-col gap-0.5 flex-shrink-0">
               <span className="text-[12px] font-bold uppercase tracking-wider leading-tight transition-colors duration-300"
                 style={{ color: active.color }}>{active.name}</span>
               <span className="text-[10px] font-mono uppercase leading-tight" style={{ color: active.color, opacity: 0.85 }}>{active.range}</span>
             </div>
-            <div className="text-[12px] text-zinc-500 leading-relaxed flex-1">{active.impact}</div>
+            <div className="text-[12px] text-zinc-500 leading-normal flex-1">{active.impact}</div>
           </div>
         </div>
       </div>
