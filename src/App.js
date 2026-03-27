@@ -1748,10 +1748,18 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
       {/* Card */}
       <div className="px-4 pt-4 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex flex-col flex-1 min-h-0">
         {/* Header */}
-        <div className="flex items-center gap-1.5 mb-3 pb-2 border-b border-zinc-800/60 flex-wrap gap-y-1.5">
-          <span className="text-sm">{sessionEmoji}</span>
-          <span className="text-[11px] font-bold text-zinc-300 uppercase tracking-wide">{session ? `${session} Brief` : "Market Brief"}</span>
-          <div className="ml-auto flex items-center gap-1.5">
+        <div className="mb-3 pb-2 border-b border-zinc-800/60">
+          <div className="flex items-center justify-between gap-2 mb-1.5">
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm">{sessionEmoji}</span>
+              <span className="text-[11px] font-bold text-zinc-300 uppercase tracking-wide">{session ? `${session} Brief` : "Market Brief"}</span>
+            </div>
+            <div className="text-right flex-shrink-0">
+              {generated_at && <div className="text-[10px] text-zinc-600">{generated_at}</div>}
+              <div className="text-[10px] text-zinc-500">Next: {getNextBriefTime()}</div>
+            </div>
+          </div>
+          <div className="flex items-center gap-1.5">
             {/* Full brief expand button */}
             <button
               onClick={() => setShowFullBrief(true)}
@@ -1775,10 +1783,6 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
                 </span>
               </button>
             )}
-            <div className="text-right">
-              {generated_at && <div className="text-[10px] text-zinc-600">{generated_at}</div>}
-              <div className="text-[10px] text-zinc-500">Next: {getNextBriefTime()}</div>
-            </div>
           </div>
         </div>
 
