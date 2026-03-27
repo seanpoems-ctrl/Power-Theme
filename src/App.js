@@ -1346,6 +1346,42 @@ const VixGauge = ({ initialVix }) => {
   );
 };
 
+// Keywords to highlight in breaking news headlines
+const NEWS_KEYWORDS = [
+  "tariff", "tariffs", "sanction", "sanctions", "war", "military",
+  "fed", "federal reserve", "rate cut", "rate hike", "fomc", "powell",
+  "bankruptcy", "default", "merger", "acquisition", "fda",
+  "circuit breaker", "emergency", "recession", "inflation",
+  "layoff", "layoffs", "shutdown", "invasion", "strike", "iran", "china",
+  "ukraine", "russia", "north korea", "taiwan",
+];
+const _kwRe = new RegExp(
+  `(${NEWS_KEYWORDS.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`,
+  "gi"
+);
+const _kwTest = new RegExp(`^(${NEWS_KEYWORDS.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})$`, "i");
+
+function highlightHeadline(text) {
+  if (!text) return text;
+  return text.split(_kwRe).map((part, i) =>
+    _kwTest.test(part) ? <span key={i} className="text-amber-400">{part}</span> : part
+  );
+}
+
+function formatAlertTime(ts) {
+  if (!ts) return null;
+  try {
+    const d = new Date(ts);
+    const time = d.toLocaleTimeString("en-US", {
+      timeZone: "America/New_York", hour: "numeric", minute: "2-digit", hour12: true,
+    });
+    const date = d.toLocaleDateString("en-US", {
+      timeZone: "America/New_York", month: "short", day: "numeric",
+    });
+    return `${date} ${time} ET`;
+  } catch { return null; }
+}
+
 /** Breaking News Alert — shown globally above tab content when grade >= 8 news detected */
 const BreakingNewsAlert = ({ newsData }) => {
   const [dismissed, setDismissed] = useState([]);
@@ -1447,9 +1483,12 @@ const BreakingNewsAlert = ({ newsData }) => {
               <div className="flex items-center gap-2 mb-2 pr-5">
                 <span className="text-red-700 font-black text-[11px] border border-red-700 px-1">{top.grade}/10</span>
                 <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{top.source}</span>
+                {formatAlertTime(top.timestamp) && (
+                  <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(top.timestamp)}</span>
+                )}
               </div>
               <p className="text-red-500 font-extrabold text-sm uppercase leading-snug mb-3">
-                {top.headline}
+                {highlightHeadline(top.headline)}
               </p>
               {top.analysis && (
                 <div className="mb-2">
@@ -1476,8 +1515,11 @@ const BreakingNewsAlert = ({ newsData }) => {
                 <div className="flex items-center gap-2 mb-1 pr-5">
                   <span className="text-red-800 text-[10px] font-bold border border-red-900 px-1">{alert.grade}/10</span>
                   <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{alert.source}</span>
+                  {formatAlertTime(alert.timestamp) && (
+                    <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(alert.timestamp)}</span>
+                  )}
                 </div>
-                <p className="text-red-700 font-bold text-xs uppercase leading-snug mb-2">{alert.headline}</p>
+                <p className="text-red-700 font-bold text-xs uppercase leading-snug mb-2">{highlightHeadline(alert.headline)}</p>
                 {alert.analysis && (
                   <div className="mb-1">
                     <h4 className="text-zinc-500 font-bold text-[9px] uppercase tracking-widest mb-0.5">Analysis</h4>
@@ -1800,11 +1842,14 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
                   onClick={() => setDismissedNews(prev => [...prev, alert.headline])}
                   className="absolute top-2 right-2 text-red-900 hover:text-red-500 text-sm font-black leading-none"
                 >×</button>
-                <div className="flex items-center gap-1.5 mb-0.5 pr-4">
+                <div className="flex items-center gap-1.5 mb-0.5 pr-4 flex-wrap">
                   {alert.grade != null && <span className="text-red-700 font-black text-[9px] border border-red-800 px-1">{alert.grade}/10</span>}
                   {alert.source && <span className="text-red-900 text-[9px] font-semibold uppercase tracking-widest truncate max-w-[130px]">{alert.source}</span>}
+                  {formatAlertTime(alert.timestamp) && (
+                    <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(alert.timestamp)}</span>
+                  )}
                 </div>
-                <p className={`font-extrabold text-[10px] uppercase leading-snug ${i === 0 ? "text-red-500" : "text-red-700"}`}>{alert.headline}</p>
+                <p className={`font-extrabold text-[10px] uppercase leading-snug ${i === 0 ? "text-red-500" : "text-red-700"}`}>{highlightHeadline(alert.headline)}</p>
                 {i === 0 && alert.analysis && <p className="text-zinc-400 text-[10px] leading-relaxed mt-1">{alert.analysis}</p>}
               </div>
             ))}
