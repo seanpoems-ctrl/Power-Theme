@@ -1336,7 +1336,7 @@ const VixGauge = ({ initialVix }) => {
                   style={{ color: active.color }}>{active.name}</span>
                 <span className="text-[10px] font-mono uppercase leading-tight" style={{ color: active.color, opacity: 0.85 }}>{active.range}</span>
               </div>
-              <div className="text-[12px] text-zinc-500 leading-relaxed overflow-hidden">{active.impact}</div>
+              <div className="text-[12px] text-zinc-500 leading-relaxed overflow-y-auto">{active.impact}</div>
             </div>
           </div>
         </div>
