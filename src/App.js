@@ -1306,33 +1306,38 @@ const VixGauge = ({ initialVix }) => {
             className="flex-1 min-w-0 accent-zinc-400 h-1 cursor-pointer"/>
           <span className="text-[10px] text-zinc-700 font-mono shrink-0">45</span>
         </div>
-        {initialVix != null && vix !== initialVix && (
+        {/* Always reserve button space so left-col height never changes */}
+        {initialVix != null && (
           <button onClick={() => setVix(initialVix)}
+            style={{ visibility: vix !== initialVix ? 'visible' : 'hidden' }}
             className="mt-1.5 w-full text-center py-0.5 text-[10px] font-medium rounded border border-zinc-700/60 bg-zinc-800/60 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600 transition-colors">
             Restore {initialVix.toFixed(1)}
           </button>
         )}
         </div>
 
-        {/* Zone info — 整卡一併上移（mt），勿對下半用負 margin 才不會疊字 */}
-        <div className="flex-1 min-w-0 flex flex-col px-3 py-1 rounded-lg border transition-colors duration-300"
+        {/* Zone info — position:relative so content is absolute and has zero intrinsic height,
+            preventing long text from expanding the flex row (and the card) */}
+        <div className="flex-1 min-w-0 relative rounded-lg border transition-colors duration-300 overflow-hidden"
           style={{ background: '#1a1a1a', borderColor: active.color + '55', marginTop: '-18px' }}>
-          <div className="border-b border-zinc-800/70 pb-1.5 flex-shrink-0">
-            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest mb-1">Expected Move</div>
-            <div className="flex flex-nowrap items-baseline gap-x-2 min-w-0">
-              <span className="text-[11px] text-zinc-500 font-mono shrink-0">$SPX</span>
-              <span className="text-sm font-bold font-mono text-zinc-100 tabular-nums leading-none">
-                ±{expectedMovePct.toFixed(2)}%
-              </span>
+          <div className="absolute inset-0 flex flex-col px-3 py-1 min-h-0">
+            <div className="border-b border-zinc-800/70 pb-1.5 flex-shrink-0">
+              <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest mb-1">Expected Move</div>
+              <div className="flex flex-nowrap items-baseline gap-x-2 min-w-0">
+                <span className="text-[11px] text-zinc-500 font-mono shrink-0">$SPX</span>
+                <span className="text-sm font-bold font-mono text-zinc-100 tabular-nums leading-none">
+                  ±{expectedMovePct.toFixed(2)}%
+                </span>
+              </div>
             </div>
-          </div>
-          <div className="pt-1 flex flex-col flex-1 gap-0.5">
-            <div className="flex flex-col gap-0.5 flex-shrink-0">
-              <span className="text-[12px] font-bold uppercase tracking-wider leading-tight transition-colors duration-300"
-                style={{ color: active.color }}>{active.name}</span>
-              <span className="text-[10px] font-mono uppercase leading-tight" style={{ color: active.color, opacity: 0.85 }}>{active.range}</span>
+            <div className="pt-1 flex flex-col flex-1 gap-0.5 min-h-0 overflow-hidden">
+              <div className="flex flex-col gap-0.5 flex-shrink-0">
+                <span className="text-[12px] font-bold uppercase tracking-wider leading-tight transition-colors duration-300"
+                  style={{ color: active.color }}>{active.name}</span>
+                <span className="text-[10px] font-mono uppercase leading-tight" style={{ color: active.color, opacity: 0.85 }}>{active.range}</span>
+              </div>
+              <div className="text-[12px] text-zinc-500 leading-relaxed overflow-hidden">{active.impact}</div>
             </div>
-            <div className="text-[12px] text-zinc-500 leading-relaxed flex-1">{active.impact}</div>
           </div>
         </div>
       </div>
@@ -3576,7 +3581,7 @@ const filtered = useMemo(() => {
                   <span className="text-[13px] text-zinc-300">Enable</span>
                 </label>
                 <div>
-                  <label className="text-[11px] text-zinc-500 block mb-1">Min $ Vol</label>
+                  <label className="text-[11px] text-zinc-500 block mb-1">Min Avg $ Vol (30D)</label>
                   <select value={filterDolVol} onChange={e=>setFilterDolVol(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
                     {[50,100,250,500].map(v=><option key={v} value={v}>${v}M</option>)}
                   </select>
