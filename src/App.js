@@ -1346,26 +1346,70 @@ const VixGauge = ({ initialVix }) => {
   );
 };
 
-// Keywords to highlight in breaking news headlines
-const NEWS_KEYWORDS = [
-  "tariff", "tariffs", "sanction", "sanctions", "war", "military",
-  "fed", "federal reserve", "rate cut", "rate hike", "fomc", "powell",
-  "bankruptcy", "default", "merger", "acquisition", "fda",
-  "circuit breaker", "emergency", "recession", "inflation",
-  "layoff", "layoffs", "shutdown", "invasion", "strike", "iran", "china",
-  "ukraine", "russia", "north korea", "taiwan",
+// Color-coded keyword categories for breaking news highlighting
+const _KW_CATEGORIES = [
+  // Geopolitical / conflict — orange
+  { cls: "text-orange-400", words: [
+    "war", "wars", "invasion", "invade", "military", "airstrike", "missile", "nuclear",
+    "troops", "bomb", "conflict", "coup", "assassination", "hostage", "ceasefire",
+    "sanctions", "sanction", "iran", "russia", "ukraine", "north korea",
+    "israel", "hamas", "hezbollah", "taiwan", "china", "venezuela", "nato",
+  ]},
+  // Trade / tariff / policy — amber
+  { cls: "text-amber-400", words: [
+    "tariff", "tariffs", "trade war", "trade deal", "import duty", "export ban",
+    "ban", "embargo", "executive order", "veto", "legislation", "bill", "stimulus",
+    "subsidy", "subsides", "restriction", "restrictions", "retaliatory", "retaliation",
+  ]},
+  // Fed / monetary policy — sky blue
+  { cls: "text-sky-400", words: [
+    "fed", "federal reserve", "fomc", "powell", "rate cut", "rate hike",
+    "interest rate", "basis points", "quantitative easing", "quantitative tightening",
+    "taper", "tapering", "yield curve", "cpi", "ppi", "inflation", "deflation",
+    "monetary policy", "balance sheet",
+  ]},
+  // Market risk / crisis — rose
+  { cls: "text-rose-400", words: [
+    "crash", "collapse", "circuit breaker", "trading halt", "halt", "emergency",
+    "recession", "depression", "bear market", "selloff", "sell-off", "plunge",
+    "panic", "contagion", "systemic risk", "liquidity crisis", "margin call",
+    "downgrade", "credit watch", "default", "bankruptcy", "bankrupt", "chapter 11",
+    "insolvency", "shutdown", "debt ceiling",
+  ]},
+  // Corporate / earnings events — yellow
+  { cls: "text-yellow-300", words: [
+    "merger", "acquisition", "acquire", "takeover", "buyout", "spinoff", "spin-off",
+    "ipo", "earnings", "beat", "miss", "guidance", "outlook", "forecast",
+    "layoff", "layoffs", "restructuring", "job cuts", "headcount",
+    "record", "all-time high",
+  ]},
+  // Positive / approval — emerald
+  { cls: "text-emerald-400", words: [
+    "approval", "approved", "fda approval", "fda", "breakthrough",
+    "upgrade", "deal signed", "partnership", "contract", "ceasefire deal",
+    "peace deal", "rate cut", "stimulus package",
+  ]},
 ];
+
+// Build a single map: lowercase word → css class (longer phrases first to match greedily)
+const _kwMap = new Map();
+_KW_CATEGORIES.forEach(({ cls, words }) => {
+  words.slice().sort((a, b) => b.length - a.length).forEach(w => {
+    if (!_kwMap.has(w.toLowerCase())) _kwMap.set(w.toLowerCase(), cls);
+  });
+});
+const _sortedKws = [..._kwMap.keys()].sort((a, b) => b.length - a.length);
 const _kwRe = new RegExp(
-  `(${NEWS_KEYWORDS.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`,
+  `(${_sortedKws.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`,
   "gi"
 );
-const _kwTest = new RegExp(`^(${NEWS_KEYWORDS.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})$`, "i");
 
-function highlightHeadline(text) {
+function highlightText(text) {
   if (!text) return text;
-  return text.split(_kwRe).map((part, i) =>
-    _kwTest.test(part) ? <span key={i} className="text-amber-400">{part}</span> : part
-  );
+  return text.split(_kwRe).map((part, i) => {
+    const cls = _kwMap.get(part.toLowerCase());
+    return cls ? <span key={i} className={cls}>{part}</span> : part;
+  });
 }
 
 function formatAlertTime(ts) {
@@ -1488,18 +1532,18 @@ const BreakingNewsAlert = ({ newsData }) => {
                 )}
               </div>
               <p className="text-red-500 font-extrabold text-sm uppercase leading-snug mb-3">
-                {highlightHeadline(top.headline)}
+                {highlightText(top.headline)}
               </p>
               {top.analysis && (
                 <div className="mb-2">
                   <h4 className="text-zinc-400 font-bold text-[10px] uppercase tracking-widest mb-1">Analysis</h4>
-                  <p className="text-zinc-300 text-xs leading-relaxed">{top.analysis}</p>
+                  <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(top.analysis)}</p>
                 </div>
               )}
               {top.impact && (
                 <div>
                   <h4 className="text-zinc-400 font-bold text-[10px] uppercase tracking-widest mb-1">Impact</h4>
-                  <p className="text-zinc-300 text-xs leading-relaxed">{top.impact}</p>
+                  <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(top.impact)}</p>
                 </div>
               )}
             </div>
@@ -1519,17 +1563,17 @@ const BreakingNewsAlert = ({ newsData }) => {
                     <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(alert.pub_time || alert.timestamp)}</span>
                   )}
                 </div>
-                <p className="text-red-700 font-bold text-xs uppercase leading-snug mb-2">{highlightHeadline(alert.headline)}</p>
+                <p className="text-red-700 font-bold text-xs uppercase leading-snug mb-2">{highlightText(alert.headline)}</p>
                 {alert.analysis && (
                   <div className="mb-1">
                     <h4 className="text-zinc-500 font-bold text-[9px] uppercase tracking-widest mb-0.5">Analysis</h4>
-                    <p className="text-zinc-400 text-[11px] leading-relaxed">{alert.analysis}</p>
+                    <p className="text-zinc-400 text-[11px] leading-relaxed">{highlightText(alert.analysis)}</p>
                   </div>
                 )}
                 {alert.impact && (
                   <div>
                     <h4 className="text-zinc-500 font-bold text-[9px] uppercase tracking-widest mb-0.5">Impact</h4>
-                    <p className="text-zinc-400 text-[11px] leading-relaxed">{alert.impact}</p>
+                    <p className="text-zinc-400 text-[11px] leading-relaxed">{highlightText(alert.impact)}</p>
                   </div>
                 )}
               </div>
@@ -1812,18 +1856,18 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
                     {formatAlertTime(alert.pub_time || alert.timestamp) && <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(alert.pub_time || alert.timestamp)}</span>}
                   </div>
                   <p className={`font-extrabold text-sm uppercase leading-snug mb-3 ${i === 0 ? "text-red-500" : "text-red-700"}`}>
-                    {highlightHeadline(alert.headline)}
+                    {highlightText(alert.headline)}
                   </p>
                   {alert.analysis && (
                     <div className="mb-2">
                       <h4 className="text-zinc-400 font-bold text-[10px] uppercase tracking-widest mb-1">Analysis</h4>
-                      <p className="text-zinc-300 text-xs leading-relaxed">{alert.analysis}</p>
+                      <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(alert.analysis)}</p>
                     </div>
                   )}
                   {alert.impact && (
                     <div>
                       <h4 className="text-zinc-400 font-bold text-[10px] uppercase tracking-widest mb-1">Impact</h4>
-                      <p className="text-zinc-300 text-xs leading-relaxed">{alert.impact}</p>
+                      <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(alert.impact)}</p>
                     </div>
                   )}
                 </div>
