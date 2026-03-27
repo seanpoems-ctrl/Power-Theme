@@ -592,7 +592,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
           ))}
         </div>
       </div>
-      <div className="overflow-y-auto overflow-x-auto" style={{ maxHeight: '516px' }}>
+      <div className="overflow-y-auto overflow-x-auto" style={{ maxHeight: '497px' }}>
         <table className="w-full text-left">
           <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
             <tr className="border-b border-zinc-800/60">
