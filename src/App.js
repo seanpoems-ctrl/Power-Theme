@@ -1793,7 +1793,7 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
 
         {/* Inline Breaking News */}
         {showBreakingNews && visibleAlerts.length > 0 && (
-          <div className="mb-3 border border-red-900/40 bg-red-950/10 rounded overflow-hidden">
+          <div className="mb-3 border border-red-900/40 bg-red-950/10 rounded overflow-x-hidden overflow-y-auto max-h-48">
             {visibleAlerts.map((alert, i) => (
               <div key={alert.headline} className={`px-3 py-2 relative ${i > 0 ? "border-t border-red-900/20" : ""}`}>
                 <button
