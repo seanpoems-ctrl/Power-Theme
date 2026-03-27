@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-03-26 18:01 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-03-27 11:14 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 645.09,
-      "open": 652.06,
-      "high": 654.85,
-      "low": 644.83,
-      "close": 645.09,
-      "prev_open": 658.67,
-      "prev_close": 656.82,
-      "volume": 92903674,
-      "change_pct": -1.79
+      "price": 640.18,
+      "open": 642.5,
+      "high": 642.66,
+      "low": 638.34,
+      "close": 640.18,
+      "prev_open": 652.06,
+      "prev_close": 645.09,
+      "volume": 26675496,
+      "change_pct": -0.76
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 573.79,
-      "open": 582.6,
-      "high": 584.61,
-      "low": 573.43,
-      "close": 573.79,
-      "prev_open": 589.14,
-      "prev_close": 587.82,
-      "volume": 80431893,
-      "change_pct": -2.39
+      "price": 567.52,
+      "open": 570.81,
+      "high": 571.02,
+      "low": 565.66,
+      "close": 567.52,
+      "prev_open": 582.6,
+      "prev_close": 573.79,
+      "volume": 28229382,
+      "change_pct": -1.09
     },
     "^VIX": {
       "label": "VIX",
-      "price": 27.44,
-      "open": 26.49,
-      "high": 28.49,
-      "low": 26.12,
-      "close": 27.44,
-      "prev_open": 25.79,
-      "prev_close": 25.33,
+      "price": 29.4,
+      "open": 27.54,
+      "high": 30.33,
+      "low": 27.54,
+      "close": 29.4,
+      "prev_open": 26.49,
+      "prev_close": 27.44,
       "volume": 0,
-      "change_pct": 8.33
+      "change_pct": 7.14
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 93.79,
-      "open": 91.38,
-      "high": 95.44,
-      "low": 89.51,
-      "close": 93.79,
-      "prev_open": 88.49,
-      "prev_close": 90.32,
-      "volume": 330086,
-      "change_pct": 3.84
+      "price": 98.05,
+      "open": 93.31,
+      "high": 98.35,
+      "low": 92.08,
+      "close": 98.05,
+      "prev_open": 91.38,
+      "prev_close": 94.48,
+      "volume": 171619,
+      "change_pct": 3.78
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -60,20 +60,20 @@
       "close": 53603.65,
       "prev_open": 53015.8,
       "prev_close": 53749.62,
-      "volume": 0,
+      "volume": 124500000,
       "change_pct": -0.27
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 22612.97,
-      "open": 22740.71,
-      "high": 22813.41,
-      "low": 22557.1,
-      "close": 22612.97,
-      "prev_open": 22961.89,
-      "prev_close": 22957.08,
+      "price": 22291.0,
+      "open": 22612.93,
+      "high": 22631.76,
+      "low": 22215.86,
+      "close": 22291.0,
+      "prev_open": 22740.71,
+      "prev_close": 22612.97,
       "volume": 0,
-      "change_pct": -1.5
+      "change_pct": -1.42
     }
   },
   "fred": {
@@ -82,8 +82,8 @@
     "hy_oas_stale": false
   },
   "breadth": {
-    "s5fi": 28.9,
-    "mmth": 51.9
+    "s5fi": 26.0,
+    "mmth": 48.9
   },
   "regime": {
     "credit_status": "Unknown",
@@ -97,33 +97,33 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: March 26, 2026",
-    "mood_emoji": "⛈️",
-    "mood": "Broad Risk Aversion / Volatility Spike",
-    "narrative": "Global equities faced widespread selling pressure today, led by significant declines in US tech indices. A surge in the VIX underscored a rapid shift towards broad risk aversion as investors de-grossed across asset classes.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 645.09 | -1.79% | 📉 |\n| Nasdaq 100 ETF | 573.79 | -2.39% | 📉 |\n| VIX | 27.44 | +8.33% | 📈 |\n| Crude Oil | 93.79 | +3.84% | 📈 |\n| Nikkei 225 | 53603.65 | -0.27% | ➡️ |\n| DAX | 22612.97 | -1.50% | 📉 |",
-    "macro_section": "The BAMLH0A0HYM2 high-yield credit spread reading is currently Unknown, as is the 10Y-2Y yield curve (T10Y2Y). This lack of real-time data on key credit and recession indicators means institutional risk appetite is navigating an informational vacuum, potentially exacerbating uncertainty and contributing to today's broad de-risking.",
-    "analysis_para1": "Despite a relatively muted -0.27% dip in the Nikkei 225, European markets, specifically the DAX, saw a notable decline of -1.50%, aligning with the significant -1.79% fall in the S&P 500. Crude Oil, however, surged +3.84%, potentially signaling inflationary pressures or supply concerns rather than a robust global demand surge, which typically weighs on credit. In the absence of definitive high-yield credit spread data, the global tape, marked by a broad sell-off in developed markets and a spike in volatility, implies a pronounced contraction in US risk appetite, with investors likely retreating from riskier assets.",
-    "analysis_para2": "Today's primary market flow was overwhelmingly driven by a mechanical de-grossing catalyst across institutional portfolios. Amid a lack of specific positive macro news and underlying geopolitical uncertainties, a broad-based shift towards risk aversion triggered a rapid unwinding of long positions, particularly in growth-oriented assets. This systematic deleveraging and a flight to safety manifested as a sharp spike in the VIX and widespread equity declines, amplifying downside momentum regardless of individual company fundamentals.",
-    "technical_signal": "No reversal pattern confirmed yet. With only 28.9% of stocks above their 50-day moving average (S5FI) and 51.9% above their 200-day moving average (MMTH), short-term breadth remains weak, while longer-term support is fragile. Traders should watch for sustained improvements in market breadth and a significant decline in volatility as potential signals for a bottoming process.",
+    "title": "Pre-Market Brief: March 27, 2026",
+    "mood_emoji": "😬",
+    "mood": "Risk-Off / Credit Stress",
+    "narrative": "Equity markets are signaling broad risk aversion globally, with major indices declining and volatility spiking. Investors are bracing for potential credit stress amid an unknown macro environment.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 640.18 | -0.76% | 📉 |\n| Nasdaq 100 ETF | 567.52 | -1.09% | 📉 |\n| VIX | 29.40 | +7.14% | 📈 |\n| Crude Oil | 98.05 | +3.78% | 📈 |\n| Nikkei 225 | 53603.65 | -0.27% | ➡️ |\n| DAX | 22291.00 | -1.42% | 📉 |",
+    "macro_section": "With BAMLH0A0HYM2 (HY Credit Spread) data unavailable and the 10Y-2Y yield curve reading also unknown, institutional risk appetite remains in a state of uncertainty. This lack of critical credit and rates data leaves investors without key indicators to assess underlying financial stress, contributing to the cautious sentiment.",
+    "analysis_para1": "The global tape implies increasing risk aversion, with the DAX’s significant -1.42% decline contrasting with the more muted -0.27% dip in the Nikkei 225, suggesting a regional divergence in risk appetite. The substantial +3.78% surge in Crude Oil prices to $98.05, often a proxy for geopolitical tension or inflation expectations, further complicates the outlook. Combined with the unknown status of US HY credit spreads (BAMLH0A0HYM2), this global performance signals a cautious environment where investors may be demanding higher compensation for risk, potentially foreshadowing tightening credit conditions in the US.",
+    "analysis_para2": "The VIX surge of +7.14% to 29.40, coupled with simultaneous declines in both the S&P 500 ETF (-0.76%) and Nasdaq 100 ETF (-1.09%), points to a positioning squeeze and broad de-risking as the primary mechanical catalyst. This indicates that investors are aggressively reducing exposure, possibly unwinding leveraged positions or hedging against further downside, which exacerbates downward pressure on equities while bidding up volatility. This defensive posture suggests a widespread shift in sentiment rather than a single event, driving the observed price action.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 ETF and Nasdaq 100 ETF both closed significantly below their previous day's levels, while the VIX remains elevated above 29, indicating persistent fear. Traders should watch for a sustained break above recent resistance levels in the major indices or a notable retreat in the VIX as potential signs of capitulation or a temporary bottom.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "CHWY",
-          "company": "Chewy Inc.",
-          "reason": "Strong Q4 earnings beat and raised full-year guidance demonstrate robust pet care demand and effective strategic execution."
+          "ticker": "U",
+          "company": "Unity Software Inc.",
+          "reason": "Fresh Q4 earnings beat and raised full-year guidance suggests strong demand for its real-time 3D development platform."
         },
         {
-          "ticker": "ARM",
-          "company": "Arm Holdings plc",
-          "reason": "Strategic pivot towards AI chip sales, including new design wins and expanded partnerships, positions the company as a pivotal player in the evolving AI hardware ecosystem."
+          "ticker": "AAOI",
+          "company": "Applied Optoelectronics, Inc.",
+          "reason": "Announcement of significant new contracts for its data center optics portfolio indicates robust growth in a key market segment."
         }
       ],
       "c_grade": [
         {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continued sector-wide momentum and institutional accumulation, driven by ongoing AI narrative dominance, are sustaining price action despite broader market weakness."
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Continues to see institutional flow based on its long-term AI narrative, though no fresh catalysts today beyond general market sentiment."
         }
       ]
     }
