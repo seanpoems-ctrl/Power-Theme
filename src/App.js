@@ -1792,6 +1792,50 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
         </div>
       )}
 
+      {/* Breaking News Modal */}
+      {showBreakingNews && visibleAlerts.length > 0 && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={() => setShowBreakingNews(false)}>
+          <div className="bg-zinc-950 border border-red-900/60 rounded-xl shadow-2xl w-full max-w-xl max-h-[88vh] overflow-y-auto mx-4" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between px-5 py-3 border-b border-red-900/40 sticky top-0 bg-zinc-950 z-10">
+              <div className="flex items-center gap-2">
+                <span className="text-red-600 font-black text-sm tracking-widest italic animate-pulse" style={{ animationDuration: "2s" }}>⚡ BREAKING NEWS</span>
+                <span className="bg-red-600 text-white text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center">{visibleAlerts.length}</span>
+              </div>
+              <button onClick={() => setShowBreakingNews(false)} className="text-zinc-500 hover:text-zinc-300 text-xl leading-none ml-4">×</button>
+            </div>
+            <div className="px-5 py-4 space-y-4">
+              {visibleAlerts.map((alert, i) => (
+                <div key={alert.headline} className={i > 0 ? "pt-4 border-t border-red-900/20" : ""}>
+                  <div className="flex items-center gap-2 mb-2 flex-wrap">
+                    {alert.grade != null && <span className="text-red-700 font-black text-[11px] border border-red-700 px-1">{alert.grade}/10</span>}
+                    {alert.source && <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{alert.source}</span>}
+                    {formatAlertTime(alert.timestamp) && <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(alert.timestamp)}</span>}
+                  </div>
+                  <p className={`font-extrabold text-sm uppercase leading-snug mb-3 ${i === 0 ? "text-red-500" : "text-red-700"}`}>
+                    {highlightHeadline(alert.headline)}
+                  </p>
+                  {alert.analysis && (
+                    <div className="mb-2">
+                      <h4 className="text-zinc-400 font-bold text-[10px] uppercase tracking-widest mb-1">Analysis</h4>
+                      <p className="text-zinc-300 text-xs leading-relaxed">{alert.analysis}</p>
+                    </div>
+                  )}
+                  {alert.impact && (
+                    <div>
+                      <h4 className="text-zinc-400 font-bold text-[10px] uppercase tracking-widest mb-1">Impact</h4>
+                      <p className="text-zinc-300 text-xs leading-relaxed">{alert.impact}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+              {newsData?.last_checked && (
+                <p className="text-[10px] text-zinc-700 text-right pt-2 border-t border-zinc-800/60">Last checked: {newsData.last_checked}</p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Card */}
       <div className="px-4 pt-4 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex flex-col flex-1 min-h-0">
         {/* Header */}
@@ -1817,12 +1861,8 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
             {/* Breaking News button */}
             {visibleAlerts.length > 0 && (
               <button
-                onClick={() => setShowBreakingNews(v => !v)}
-                className={`flex items-center gap-1 border px-2 py-0.5 text-[10px] font-black italic tracking-wider transition-colors ${
-                  showBreakingNews
-                    ? "bg-red-950/30 border-red-600 text-red-500"
-                    : "bg-black border-red-800 text-red-700 hover:border-red-600 hover:text-red-600"
-                }`}
+                onClick={() => setShowBreakingNews(true)}
+                className="flex items-center gap-1 bg-black border border-red-800 px-2 py-0.5 text-[10px] font-black italic tracking-wider text-red-700 hover:border-red-600 hover:text-red-600 transition-colors"
               >
                 ⚡ NEWS
                 <span className="bg-red-600 text-white text-[9px] font-black rounded-full w-3.5 h-3.5 flex items-center justify-center">
@@ -1832,32 +1872,6 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
             )}
           </div>
         </div>
-
-        {/* Inline Breaking News */}
-        {showBreakingNews && visibleAlerts.length > 0 && (
-          <div className="mb-3 border border-red-900/40 bg-red-950/10 rounded overflow-x-hidden overflow-y-auto max-h-48">
-            {visibleAlerts.map((alert, i) => (
-              <div key={alert.headline} className={`px-3 py-2 relative ${i > 0 ? "border-t border-red-900/20" : ""}`}>
-                <button
-                  onClick={() => setDismissedNews(prev => [...prev, alert.headline])}
-                  className="absolute top-2 right-2 text-red-900 hover:text-red-500 text-sm font-black leading-none"
-                >×</button>
-                <div className="flex items-center gap-1.5 mb-0.5 pr-4 flex-wrap">
-                  {alert.grade != null && <span className="text-red-700 font-black text-[9px] border border-red-800 px-1">{alert.grade}/10</span>}
-                  {alert.source && <span className="text-red-900 text-[9px] font-semibold uppercase tracking-widest truncate max-w-[130px]">{alert.source}</span>}
-                  {formatAlertTime(alert.timestamp) && (
-                    <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(alert.timestamp)}</span>
-                  )}
-                </div>
-                <p className={`font-extrabold text-[10px] uppercase leading-snug ${i === 0 ? "text-red-500" : "text-red-700"}`}>{highlightHeadline(alert.headline)}</p>
-                {i === 0 && alert.analysis && <p className="text-zinc-400 text-[10px] leading-relaxed mt-1">{alert.analysis}</p>}
-              </div>
-            ))}
-            {newsData?.last_checked && (
-              <p className="text-[9px] text-zinc-700 text-right px-3 py-1 border-t border-red-900/20">Last checked: {newsData.last_checked}</p>
-            )}
-          </div>
-        )}
 
         {briefContent("237px")}
       </div>
