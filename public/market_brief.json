@@ -1,30 +1,30 @@
 {
-  "generated_at": "March 27, 2026 (11:12 EDT)",
-  "session": "Market Hours",
+  "generated_at": "March 27, 2026 (18:00 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6421.63,
-      "change": -55.53,
-      "change_pct": -0.86
+      "price": 6368.85,
+      "change": -108.31,
+      "change_pct": -1.67
     },
     {
       "label": "Nasdaq 100",
-      "price": 23317.12,
-      "change": -269.88,
-      "change_pct": -1.14
+      "price": 23132.77,
+      "change": -454.22,
+      "change_pct": -1.93
     },
     {
       "label": "VIX",
-      "price": 29.44,
-      "change": 2.0,
+      "price": 31.05,
+      "change": 3.61,
       "change_pct": null,
-      "zone_label": "Anxiety Zone"
+      "zone_label": "Fear"
     },
     {
       "label": "10Y Yield",
-      "price": 4.43,
-      "change": 0.01,
+      "price": 4.44,
+      "change": 0.02,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -37,52 +37,52 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 22286.75,
-      "change_pct": -1.44
+      "price": 22300.75,
+      "change_pct": -1.38
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 9956.39,
-      "change_pct": -0.16
+      "price": 9967.35,
+      "change_pct": -0.05
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 26.1,
-    "mmth": 48.9,
+    "s5fi": 24.2,
+    "mmth": 47.0,
     "breadth_flush": false,
     "generational": false,
-    "breadth_status": ""
+    "breadth_status": "FLUSH WATCH"
   },
   "reversal_signals": {
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Risk-Off / Broad Weakness Persists",
+  "mood": "Fearful Selling / Broad Market Weakness",
   "analysis": {
-    "analysis_para1": "European markets are leading the global weakness today, with the DAX down significantly by 1.44%; the Nikkei and FTSE are also in negative territory. This bearish sentiment is clearly mirrored in US breadth metrics, where only 26.1% of stocks are above their 50-day moving average and less than half (48.9%) are above their 200-day. The VIX holding firmly in the 'Anxiety Zone' at 29.44 underscores a widespread defensive posture. While the BAML HY Spread data is an 'Unknown regime,' the deteriorating breadth and global cues signal underlying fragility across asset classes.",
-    "analysis_para2": "Given the pervasive weakness and elevated VIX, the mechanical plan remains strictly defensive. Watch for the S&P 500 to hold above 6400; a sustained break below this level would suggest a deeper downside test towards 6350. The Nasdaq 100, already down 1.14%, needs to find support around 23200 to avoid accelerating losses. The VIX staying elevated near 30.00 confirms this anxiety; only a sustained move below 25.00 would signal a potential abatement of fear. Until then, prioritize capital preservation, reduce exposure to speculative names, and consider defensive allocations.",
-    "technical_signal": "No reversal pattern confirmed yet. The market continues to show broad distribution and elevated fear, with no signs of capitulation or a definitive bottom forming.",
+    "analysis_para1": "Global markets showed a mixed picture today, with the DAX notably weaker by -1.38% echoing US sentiment, while the Nikkei saw mild losses of -0.27% and the FTSE remained largely flat at -0.05%. Domestically, the elevated VIX at 31.05 signals heightened fear, suggesting a risk-off tone permeating credit markets despite an unknown BAML HY Spread. This fear translated into significant internal weakness, as evidenced by only 24.2% of S&P 500 stocks above their 50-day moving average (S5FI) and merely 47.0% above their 200-day (MMTH), indicating broad distribution and deteriorating market health.",
+    "analysis_para2": "The immediate mechanical plan centers on identifying signs of capitulation or stabilization after today's sharp sell-off. For the S&P 500, a critical support level to watch is the 6300 psychological barrier, with a breach potentially signaling further declines towards the next major fibonacci extension. On the Nasdaq 100, the 23,000 level is paramount; a firm hold here on increased buying volume would be the first hint of a bounce. Without significant breadth improvement, indicated by S5FI rising above 30%, and a VIX retracement below 25, defensive positioning remains prudent.",
+    "technical_signal": "No reversal pattern confirmed yet. Today's broad market weakness, high VIX, and deteriorating breadth indicate continued downside momentum without any immediate signs of buying exhaustion or a bullish engulfing candle.",
     "ticker_intel": [
+      {
+        "ticker": "PG",
+        "company": "Procter & Gamble Co.",
+        "grade": "A+",
+        "reason": "PG offers robust defensive characteristics with consistent demand for essential goods, making it a safe haven in a risk-off environment."
+      },
       {
         "ticker": "JPM",
         "company": "JPMorgan Chase & Co.",
-        "grade": "A+",
-        "reason": "Its strong balance sheet, diversified revenue streams, and attractive dividend offer relative stability amidst market volatility and stable 10Y yields."
-      },
-      {
-        "ticker": "MSFT",
-        "company": "Microsoft Corporation",
         "grade": "A",
-        "reason": "Its dominant position in cloud computing and enterprise software provides resilient cash flows and a durable competitive advantage, making it a quality long-term hold."
+        "reason": "Strong balance sheet and stable 10Y yields support JPM's net interest income outlook, positioning it defensively amidst market volatility."
       },
       {
         "ticker": "TSLA",
         "company": "Tesla, Inc.",
         "grade": "C",
-        "reason": "High valuation combined with increasing global competition and a slowing EV demand narrative makes it particularly vulnerable in a risk-off environment."
+        "reason": "As a high-beta growth stock, TSLA remains vulnerable to further downside in a fear-driven, risk-off market due to its speculative nature and valuation."
       }
     ]
   }
