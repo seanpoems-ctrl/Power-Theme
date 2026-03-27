@@ -1,32 +1,32 @@
 {
-  "generated_at": "March 26, 2026 (17:56 EDT)",
-  "session": "Post-Market",
+  "generated_at": "March 27, 2026 (11:12 EDT)",
+  "session": "Market Hours",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6477.16,
-      "change": -114.74,
-      "change_pct": -1.74
+      "price": 6421.63,
+      "change": -55.53,
+      "change_pct": -0.86
     },
     {
       "label": "Nasdaq 100",
-      "price": 23586.99,
-      "change": -575.99,
-      "change_pct": -2.38
+      "price": 23317.12,
+      "change": -269.88,
+      "change_pct": -1.14
     },
     {
       "label": "VIX",
-      "price": 27.44,
-      "change": 2.11,
+      "price": 29.44,
+      "change": 2.0,
       "change_pct": null,
       "zone_label": "Anxiety Zone"
     },
     {
       "label": "10Y Yield",
-      "price": 4.42,
-      "change": 0.09,
+      "price": 4.43,
+      "change": 0.01,
       "change_pct": null,
-      "trend_label": "Rising"
+      "trend_label": "Stable"
     }
   ],
   "global_indices": {
@@ -37,21 +37,21 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 22612.97,
-      "change_pct": -1.5
+      "price": 22286.75,
+      "change_pct": -1.44
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 9972.17,
-      "change_pct": -1.33
+      "price": 9956.39,
+      "change_pct": -0.16
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 28.9,
-    "mmth": 51.9,
+    "s5fi": 26.1,
+    "mmth": 48.9,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Risk-Off / Global Weakness",
+  "mood": "Risk-Off / Broad Weakness Persists",
   "analysis": {
-    "analysis_para1": "Global markets experienced broad declines today, with the Nikkei 225 down -0.27%, DAX -1.50%, and FTSE 100 -1.33%, setting a negative tone for US trading. This global apprehension was amplified by a rising 10Y Yield at 4.42%, signaling tighter financial conditions, though the BAML HY Spread's regime remains unknown. US market breadth deteriorated significantly, with only 28.9% of S&P 500 stocks above their 50-day moving average (S5FI), indicating widespread short-term weakness. While 51.9% of stocks remain above their 200-day moving average (MMTH), this longer-term strength is now under pressure, suggesting distribution across the market.",
-    "analysis_para2": "The mechanical plan for navigating this environment involves monitoring key S&P 500 (SPX) support levels, with the immediate focus on reclaiming the 6500 psychological mark. A sustained break below today's close of 6477.16 could signal further downside towards 6400, while a bounce above 6500 would suggest a potential relief rally. On the Nasdaq 100 (NDX), defending the 23500 level is critical; a failure here could open the door to 23000. Traders should watch the VIX closely, as its current \"Anxiety Zone\" reading of 27.44 suggests high fear, but a move above 30 could signal capitulation, potentially preceding a short-term bottom. Until these levels are either decisively held or broken, discretion and reduced exposure are advised.",
-    "technical_signal": "No reversal pattern confirmed yet. Today's steep declines across indices, coupled with an elevated VIX in the \"Anxiety Zone,\" indicate continued selling pressure without any discernible signs of a bullish turnaround.",
+    "analysis_para1": "European markets are leading the global weakness today, with the DAX down significantly by 1.44%; the Nikkei and FTSE are also in negative territory. This bearish sentiment is clearly mirrored in US breadth metrics, where only 26.1% of stocks are above their 50-day moving average and less than half (48.9%) are above their 200-day. The VIX holding firmly in the 'Anxiety Zone' at 29.44 underscores a widespread defensive posture. While the BAML HY Spread data is an 'Unknown regime,' the deteriorating breadth and global cues signal underlying fragility across asset classes.",
+    "analysis_para2": "Given the pervasive weakness and elevated VIX, the mechanical plan remains strictly defensive. Watch for the S&P 500 to hold above 6400; a sustained break below this level would suggest a deeper downside test towards 6350. The Nasdaq 100, already down 1.14%, needs to find support around 23200 to avoid accelerating losses. The VIX staying elevated near 30.00 confirms this anxiety; only a sustained move below 25.00 would signal a potential abatement of fear. Until then, prioritize capital preservation, reduce exposure to speculative names, and consider defensive allocations.",
+    "technical_signal": "No reversal pattern confirmed yet. The market continues to show broad distribution and elevated fear, with no signs of capitulation or a definitive bottom forming.",
     "ticker_intel": [
       {
-        "ticker": "AAPL",
-        "company": "Apple Inc.",
+        "ticker": "JPM",
+        "company": "JPMorgan Chase & Co.",
         "grade": "A+",
-        "reason": "Its strong balance sheet, resilient ecosystem, and consistent share repurchase programs provide a defensive quality amid broader market declines."
+        "reason": "Its strong balance sheet, diversified revenue streams, and attractive dividend offer relative stability amidst market volatility and stable 10Y yields."
       },
       {
-        "ticker": "LLY",
-        "company": "Eli Lilly and Company",
+        "ticker": "MSFT",
+        "company": "Microsoft Corporation",
         "grade": "A",
-        "reason": "A robust drug pipeline, defensive healthcare sector positioning, and consistent demand for its innovative treatments offer stability and growth potential irrespective of market cycles."
+        "reason": "Its dominant position in cloud computing and enterprise software provides resilient cash flows and a durable competitive advantage, making it a quality long-term hold."
       },
       {
-        "ticker": "CCL",
-        "company": "Carnival Corporation",
+        "ticker": "TSLA",
+        "company": "Tesla, Inc.",
         "grade": "C",
-        "reason": "Highly cyclical nature, sensitivity to consumer discretionary spending, and macroeconomic headwinds expose it to significant downside risk during periods of market stress."
+        "reason": "High valuation combined with increasing global competition and a slowing EV demand narrative makes it particularly vulnerable in a risk-off environment."
       }
     ]
   }
