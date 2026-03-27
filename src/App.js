@@ -3582,27 +3582,28 @@ const filtered = useMemo(() => {
                 </label>
                 <div>
                   <label className="text-[11px] text-zinc-500 block mb-1">Min Avg $ Vol (30D)</label>
-                  <select value={filterDolVol} onChange={e=>setFilterDolVol(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
-                    {[50,100,250,500].map(v=><option key={v} value={v}>${v}M</option>)}
-                  </select>
+                  <div className="flex items-center gap-1">
+                    <input type="number" min="0" value={filterDolVol} onChange={e=>setFilterDolVol(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300 w-20"/>
+                    <span className="text-[12px] text-zinc-500">M</span>
+                  </div>
                 </div>
                 <div>
                   <label className="text-[11px] text-zinc-500 block mb-1">Min ADR%</label>
-                  <select value={filterADR} onChange={e=>setFilterADR(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
-                    {[2,3,4,5,7].map(v=><option key={v} value={v}>{v}%</option>)}
-                  </select>
+                  <div className="flex items-center gap-1">
+                    <input type="number" min="0" step="0.5" value={filterADR} onChange={e=>setFilterADR(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300 w-16"/>
+                    <span className="text-[12px] text-zinc-500">%</span>
+                  </div>
                 </div>
                 <div>
                   <label className="text-[11px] text-zinc-500 block mb-1">Min RS</label>
-                  <select value={filterRS} onChange={e=>setFilterRS(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
-                    {[30,50,70,80,90].map(v=><option key={v} value={v}>{v}+</option>)}
-                  </select>
+                  <input type="number" min="0" max="99" value={filterRS} onChange={e=>setFilterRS(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300 w-16"/>
                 </div>
                 <div>
                   <label className="text-[11px] text-zinc-500 block mb-1">Max Dist 52W Hi</label>
-                  <select value={filterDist52w} onChange={e=>setFilterDist52w(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300">
-                    {[5,10,15,20,30].map(v=><option key={v} value={v}>within {v}%</option>)}
-                  </select>
+                  <div className="flex items-center gap-1">
+                    <input type="number" min="0" value={filterDist52w} onChange={e=>setFilterDist52w(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300 w-16"/>
+                    <span className="text-[12px] text-zinc-500">%</span>
+                  </div>
                 </div>
               </div>
             )}
