@@ -1,13 +1,13 @@
-# Thematic Scanner — every 5 min trigger, 9:00 AM – 5:00 PM ET + dedicated 8:10 PM ET post-market snapshot
+# Thematic Scanner — every 5 min trigger, 9:00 AM – 5:00 PM ET + dedicated 4:35 PM ET end-of-day snapshot
 # Scraper takes ~8-10 min, so concurrency queues (not cancels) → effective ~10 min updates
-# Post-market close (8 PM ET): Finviz snapshot-table2 auto-updates to after-hours price
+# Finviz finalizes closing data at 4:30 PM ET — 4:35 PM cron captures clean EOD prices
 name: Daily scrape & deploy
 
 on:
   schedule:
     - cron: "*/5 12-22 * * 1-5"  # Every 5 min, 12:00–22:55 UTC (covers 9AM-5PM ET both EDT and EST)
-    - cron: "10 0 * * 2-6"       # 8:10 PM EDT (Mon-Fri ET = Tue-Sat 00:10 UTC) — post-market close snapshot
-    - cron: "10 1 * * 2-6"       # 8:10 PM EST (Mon-Fri ET = Tue-Sat 01:10 UTC) — post-market close snapshot
+    - cron: "35 20 * * 1-5"      # 4:35 PM EDT — Finviz finalizes closing data at 4:30 PM ET
+    - cron: "35 21 * * 1-5"      # 4:35 PM EST — same, winter offset
   workflow_dispatch: {}
 
 concurrency:
@@ -55,7 +55,7 @@ jobs:
 
           et_now = datetime.now(ZoneInfo("America/New_York"))
           et_minutes = et_now.hour * 60 + et_now.minute
-          in_window = 540 <= et_minutes <= 1260  # 9:00 AM – 9:00 PM ET (includes post-market close at 8PM)
+          in_window = 540 <= et_minutes <= 1020  # 9:00 AM – 5:00 PM ET (Finviz finalizes at 4:30 PM ET)
 
           if is_manual:
               should_run = True
