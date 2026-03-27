@@ -69,16 +69,18 @@ def fetch_headlines() -> list[dict]:
                     continue
 
                 # Recency filter
+                pub_time = None
                 if pubdate_el is not None and pubdate_el.text:
                     try:
                         pub_dt = parsedate_to_datetime(pubdate_el.text)
                         age_h  = (now_utc - pub_dt.astimezone(timezone.utc)).total_seconds() / 3600
                         if age_h > HOURS_LOOKBACK:
                             continue
+                        pub_time = pub_dt.astimezone(ET_TZ).isoformat()
                     except Exception:
                         pass
 
-                headlines.append({"title": title, "source": source})
+                headlines.append({"title": title, "source": source, "pub_time": pub_time})
         except Exception as e:
             print(f"  RSS [{source}]: {e}")
 
@@ -130,13 +132,15 @@ def fetch_finviz_headlines() -> list[dict]:
                 time_part    = time_text
 
             # Recency filter
+            pub_time = None
             if current_date and time_part:
                 try:
                     pub_dt = datetime.strptime(
                         f"{current_date} {time_part}", "%b-%d-%y %I:%M%p"
-                    ).replace(tzinfo=ET_TZ).astimezone(timezone.utc)
-                    if (now_utc - pub_dt).total_seconds() / 3600 > HOURS_LOOKBACK:
+                    ).replace(tzinfo=ET_TZ)
+                    if (now_utc - pub_dt.astimezone(timezone.utc)).total_seconds() / 3600 > HOURS_LOOKBACK:
                         continue
+                    pub_time = pub_dt.isoformat()
                 except Exception:
                     pass
 
@@ -145,7 +149,7 @@ def fetch_finviz_headlines() -> list[dict]:
                 continue
             title = a_tag.get_text(strip=True)
             if title:
-                headlines.append({"title": title, "source": "Finviz"})
+                headlines.append({"title": title, "source": "Finviz", "pub_time": pub_time})
 
     except Exception as e:
         print(f"  Finviz: {e}")
@@ -386,8 +390,10 @@ def main():
 
     # Timestamp and send Telegram for each new alert
     ts = now_et.isoformat()
+    pub_time_map = {h["title"]: h.get("pub_time") for h in deduped}
     for a in new_alerts:
         a["timestamp"] = ts
+        a["pub_time"] = pub_time_map.get(a.get("headline", ""))
         send_telegram(a)
 
     # Merge, expire old, cap

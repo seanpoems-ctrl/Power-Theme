@@ -1483,8 +1483,8 @@ const BreakingNewsAlert = ({ newsData }) => {
               <div className="flex items-center gap-2 mb-2 pr-5">
                 <span className="text-red-700 font-black text-[11px] border border-red-700 px-1">{top.grade}/10</span>
                 <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{top.source}</span>
-                {formatAlertTime(top.timestamp) && (
-                  <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(top.timestamp)}</span>
+                {formatAlertTime(top.pub_time || top.timestamp) && (
+                  <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(top.pub_time || top.timestamp)}</span>
                 )}
               </div>
               <p className="text-red-500 font-extrabold text-sm uppercase leading-snug mb-3">
@@ -1515,8 +1515,8 @@ const BreakingNewsAlert = ({ newsData }) => {
                 <div className="flex items-center gap-2 mb-1 pr-5">
                   <span className="text-red-800 text-[10px] font-bold border border-red-900 px-1">{alert.grade}/10</span>
                   <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{alert.source}</span>
-                  {formatAlertTime(alert.timestamp) && (
-                    <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(alert.timestamp)}</span>
+                  {formatAlertTime(alert.pub_time || alert.timestamp) && (
+                    <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(alert.pub_time || alert.timestamp)}</span>
                   )}
                 </div>
                 <p className="text-red-700 font-bold text-xs uppercase leading-snug mb-2">{highlightHeadline(alert.headline)}</p>
@@ -1809,7 +1809,7 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
                   <div className="flex items-center gap-2 mb-2 flex-wrap">
                     {alert.grade != null && <span className="text-red-700 font-black text-[11px] border border-red-700 px-1">{alert.grade}/10</span>}
                     {alert.source && <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{alert.source}</span>}
-                    {formatAlertTime(alert.timestamp) && <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(alert.timestamp)}</span>}
+                    {formatAlertTime(alert.pub_time || alert.timestamp) && <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(alert.pub_time || alert.timestamp)}</span>}
                   </div>
                   <p className={`font-extrabold text-sm uppercase leading-snug mb-3 ${i === 0 ? "text-red-500" : "text-red-700"}`}>
                     {highlightHeadline(alert.headline)}
