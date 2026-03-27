@@ -1553,201 +1553,261 @@ function getNextBriefTime() {
 }
 
 /** Thematic Scanner 側欄：以 Market Brief（market_brief.json）取代原 macro_news 列表 */
-const ScannerBriefFeed = ({ briefData }) => {
-  if (!briefData) return (
-    <div className="px-5 pt-4 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex items-center justify-center" style={{ minHeight: 200 }}>
-      <span className="text-[11px] text-zinc-600">載入簡報中…</span>
-    </div>
-  );
+const ScannerBriefFeed = ({ briefData, newsData }) => {
+  const [showFullBrief, setShowFullBrief] = useState(false);
+  const [showBreakingNews, setShowBreakingNews] = useState(false);
+  const [dismissedNews, setDismissedNews] = useState([]);
 
-  const {
-    session, generated_at,
-    global_snapshot = [], global_indices = {},
-    macro_breadth = {}, reversal_signals = {},
-    mood = "", analysis = {}, error,
-  } = briefData;
+  const session       = briefData?.session || "";
+  const generated_at  = briefData?.generated_at;
+  const global_snapshot  = briefData?.global_snapshot  || [];
+  const global_indices   = briefData?.global_indices   || {};
+  const macro_breadth    = briefData?.macro_breadth    || {};
+  const reversal_signals = briefData?.reversal_signals || {};
+  const mood    = briefData?.mood    || "";
+  const analysis = briefData?.analysis || {};
+  const error   = briefData?.error;
 
   const sessionEmoji = { "Pre-Market": "🌅", "Market Hours": "☀️", "Post-Market": "🌙" }[session] || "📊";
-  const priceLabel   = session === "Pre-Market" ? "Futures" : "Close";
+  const sessionLabel = session === "Pre-Market" ? "Pre-Market Brief"
+    : session === "Post-Market" ? "Post-Market Brief"
+    : "Market Brief";
+  const priceLabel = session === "Pre-Market" ? "Futures" : "Close";
 
-  const regimeCls = r => ({
-    Complacent:    "text-emerald-400",
-    "Yellow Flag": "text-amber-400",
-    Stress:        "text-red-400",
-  }[r] || "text-zinc-400");
-
+  const regimeCls = r => ({ Complacent: "text-emerald-400", "Yellow Flag": "text-amber-400", Stress: "text-red-400" }[r] || "text-zinc-400");
   const gradeCls = g => (g || "").startsWith("A")
     ? "text-emerald-400 border-emerald-500/40 bg-emerald-500/10"
     : (g || "").startsWith("B")
     ? "text-amber-400 border-amber-500/40 bg-amber-500/10"
     : "text-red-400 border-red-500/40 bg-red-500/10";
 
-  return (
-    <div className="px-4 pt-4 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex flex-col flex-1 min-h-0">
+  const visibleAlerts = (newsData?.has_alert ? (newsData.alerts || []) : [])
+    .filter(a => !dismissedNews.includes(a.headline))
+    .sort((a, b) => (b.grade || 0) - (a.grade || 0));
 
-      {/* Header */}
-      <div className="flex items-center gap-1.5 mb-3 pb-2 border-b border-zinc-800/60">
-        <span className="text-sm">{sessionEmoji}</span>
-        <span className="text-[11px] font-bold text-zinc-300 uppercase tracking-wide">{session} Brief</span>
-        <div className="ml-auto text-right">
-          <div className="text-[10px] text-zinc-600">{generated_at}</div>
-          <div className="text-[10px] text-zinc-500">Next: {getNextBriefTime()}</div>
+  // Shared content renderer (used in both the card and the full-brief modal)
+  const briefContent = (maxH) => !briefData ? (
+    <div className="flex-1 flex items-center justify-center" style={{ minHeight: 120 }}>
+      <span className="text-[11px] text-zinc-600">載入簡報中…</span>
+    </div>
+  ) : (
+    <div className="overflow-y-auto flex-1 space-y-3" style={maxH ? { maxHeight: maxH } : {}}>
+      {error && <div className="text-[11px] text-red-400 bg-red-500/10 rounded p-2">{String(error)}</div>}
+      {mood && <div className="text-[11px] text-zinc-400 italic">Mood: <span className="text-zinc-300 not-italic font-medium">{mood}</span></div>}
+      {reversal_signals.signal_detected && (
+        <div className="flex items-start gap-1.5 bg-amber-500/15 border border-amber-500/30 rounded p-2">
+          <span className="text-sm flex-shrink-0">🔥</span>
+          <div>
+            <div className="text-[11px] font-bold text-amber-400">[REVERSAL SIGNAL DETECTED]</div>
+            <div className="text-[10px] text-amber-300/70 mt-0.5">{reversal_signals.description}</div>
+          </div>
         </div>
-      </div>
+      )}
+      {/* 1. Global Snapshot */}
+      {global_snapshot.length > 0 && (
+        <div>
+          <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">1. Global Snapshot</div>
+          <table className="w-full text-[10px]">
+            <thead>
+              <tr className="text-zinc-600 border-b border-zinc-800/60">
+                <th className="text-left py-0.5 font-medium">Asset</th>
+                <th className="text-right py-0.5 font-medium">{priceLabel}</th>
+                <th className="text-right py-0.5 font-medium">Chg</th>
+                <th className="text-right py-0.5 pl-3 font-medium w-[90px]">%</th>
+              </tr>
+            </thead>
+            <tbody>
+              {global_snapshot.map((row, i) => {
+                const chg = row.change ?? 0;
+                const isYield = row.label === "10Y Yield";
+                const isVix   = row.label === "VIX";
+                const pctDisp = row.zone_label || row.trend_label
+                  || (row.change_pct != null ? `${row.change_pct >= 0 ? "+" : ""}${row.change_pct.toFixed(2)}%` : "—");
+                return (
+                  <tr key={i} className="border-b border-zinc-800/30 last:border-0">
+                    <td className="py-0.5 text-zinc-300 font-medium">{row.label}</td>
+                    <td className="py-0.5 text-right font-mono text-zinc-200">
+                      {row.price != null
+                        ? isYield ? `${row.price.toFixed(2)}%` : row.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+                        : "—"}
+                    </td>
+                    <td className={`py-0.5 text-right font-mono ${chg >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                      {row.change != null ? `${chg >= 0 ? "+" : ""}${chg.toFixed(2)}` : "—"}
+                    </td>
+                    <td className={`py-0.5 text-right pl-3 font-mono ${
+                      (row.zone_label || row.trend_label)
+                        ? (isVix && (row.zone_label || "").includes("Fear") ? "text-red-400" : isVix ? "text-amber-400" : chg >= 0 ? "text-amber-400" : "text-emerald-400")
+                        : (row.change_pct ?? 0) >= 0 ? "text-emerald-400" : "text-red-400"
+                    }`}>
+                      {pctDisp}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          {Object.values(global_indices).some(g => g?.change_pct != null) && (
+            <div className="flex gap-2 mt-1.5 flex-wrap">
+              {Object.entries(global_indices).map(([k, g]) => g?.change_pct != null && (
+                <span key={k} className="text-[10px]">
+                  <span className="text-zinc-600">{g.label?.split(" ")[0]}</span>
+                  <span className={`ml-0.5 font-mono ${g.change_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                    {g.change_pct >= 0 ? "+" : ""}{g.change_pct.toFixed(2)}%
+                  </span>
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+      {/* 2. Macro Risk & Breadth */}
+      {(macro_breadth.credit_spread != null || macro_breadth.s5fi != null) && (
+        <div>
+          <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">2. Macro Risk &amp; Breadth</div>
+          <div className="space-y-1">
+            {macro_breadth.credit_spread != null && (
+              <div className="text-[11px] text-zinc-400">
+                <span className="text-zinc-500">• Credit Spread (HY Master II): </span>
+                <span className="text-zinc-200 font-mono">{macro_breadth.credit_spread.toFixed(2)}%</span>
+                {macro_breadth.credit_regime && (
+                  <> <span className="text-zinc-600">|</span> <span className={`font-semibold ${regimeCls(macro_breadth.credit_regime)}`}>Regime: {macro_breadth.credit_regime}</span></>
+                )}
+              </div>
+            )}
+            {macro_breadth.s5fi != null && (
+              <div className="text-[11px] text-zinc-400">
+                <span className="text-zinc-500">• Market Breadth: </span>
+                <span className="font-mono text-zinc-200">S5FI {macro_breadth.s5fi.toFixed(1)}%</span>
+                {macro_breadth.mmth != null && (
+                  <> <span className="text-zinc-600">·</span> <span className="font-mono text-zinc-200">MMTH {macro_breadth.mmth.toFixed(1)}%</span></>
+                )}
+              </div>
+            )}
+            {macro_breadth.breadth_status && (
+              <div className={`text-[11px] font-bold mt-0.5 ${
+                macro_breadth.generational ? "text-orange-400" : macro_breadth.breadth_flush ? "text-red-400" : "text-amber-400"
+              }`}>
+                • Status: [{macro_breadth.breadth_status}]
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+      {/* 3. Analysis & Lessons */}
+      {(analysis.analysis_para1 || analysis.analysis_para2) && (
+        <div>
+          <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">3. Analysis &amp; Lessons</div>
+          <div className="space-y-2">
+            {analysis.analysis_para1 && <p className="text-[11px] text-zinc-300 leading-relaxed">{analysis.analysis_para1}</p>}
+            {analysis.analysis_para2 && <p className="text-[11px] text-zinc-400 leading-relaxed">{analysis.analysis_para2}</p>}
+          </div>
+        </div>
+      )}
+      {/* 4. Ticker Intelligence */}
+      {analysis.ticker_intel?.length > 0 && (
+        <div>
+          <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">4. Ticker Intel</div>
+          <div className="space-y-1.5">
+            {analysis.ticker_intel.map((t, i) => (
+              <div key={i} className="flex gap-1.5 items-start">
+                <span className={`text-[10px] font-bold px-1 py-0.5 rounded border flex-shrink-0 mt-0.5 ${gradeCls(t.grade)}`}>{t.grade}</span>
+                <div>
+                  <span className="text-[11px] font-bold text-zinc-200 font-mono">${t.ticker}</span>
+                  {t.company && <span className="text-[10px] text-zinc-500 ml-1">({t.company})</span>}
+                  {t.reason && <p className="text-[10px] text-zinc-400 leading-snug mt-0.5">{t.reason}</p>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 
-      <div className="overflow-y-auto flex-1 space-y-3" style={{ maxHeight: "237px" }}>
-
-        {error && (
-          <div className="text-[11px] text-red-400 bg-red-500/10 rounded p-2">{String(error)}</div>
-        )}
-
-        {/* Mood */}
-        {mood && (
-          <div className="text-[11px] text-zinc-400 italic">Mood: <span className="text-zinc-300 not-italic font-medium">{mood}</span></div>
-        )}
-
-        {/* Reversal Banner */}
-        {reversal_signals.signal_detected && (
-          <div className="flex items-start gap-1.5 bg-amber-500/15 border border-amber-500/30 rounded p-2">
-            <span className="text-sm flex-shrink-0">🔥</span>
-            <div>
-              <div className="text-[11px] font-bold text-amber-400">[REVERSAL SIGNAL DETECTED]</div>
-              <div className="text-[10px] text-amber-300/70 mt-0.5">{reversal_signals.description}</div>
+  return (
+    <>
+      {/* Full Brief Modal */}
+      {showFullBrief && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm" onClick={() => setShowFullBrief(false)}>
+          <div className="bg-zinc-950 border border-zinc-700/60 rounded-xl shadow-2xl w-full max-w-xl max-h-[88vh] overflow-y-auto mx-4" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-800 sticky top-0 bg-zinc-950 z-10">
+              <div className="flex items-center gap-2">
+                <span className="text-base">{sessionEmoji}</span>
+                <span className="text-sm font-bold text-zinc-200 uppercase tracking-wide">{sessionLabel}</span>
+                {generated_at && <span className="text-[10px] text-zinc-500 ml-1">{generated_at}</span>}
+              </div>
+              <button onClick={() => setShowFullBrief(false)} className="text-zinc-500 hover:text-zinc-300 text-xl leading-none ml-4">×</button>
+            </div>
+            <div className="px-5 py-4">
+              {briefContent(null)}
             </div>
           </div>
-        )}
+        </div>
+      )}
 
-        {/* 1. Global Snapshot */}
-        {global_snapshot.length > 0 && (
-          <div>
-            <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">1. Global Snapshot</div>
-            <table className="w-full text-[10px]">
-              <thead>
-                <tr className="text-zinc-600 border-b border-zinc-800/60">
-                  <th className="text-left py-0.5 font-medium">Asset</th>
-                  <th className="text-right py-0.5 font-medium">{priceLabel}</th>
-                  <th className="text-right py-0.5 font-medium">Chg</th>
-                  <th className="text-right py-0.5 pl-3 font-medium w-[90px]">%</th>
-                </tr>
-              </thead>
-              <tbody>
-                {global_snapshot.map((row, i) => {
-                  const chg = row.change ?? 0;
-                  const isYield = row.label === "10Y Yield";
-                  const isVix   = row.label === "VIX";
-                  const pctDisp = row.zone_label || row.trend_label
-                    || (row.change_pct != null ? `${row.change_pct >= 0 ? "+" : ""}${row.change_pct.toFixed(2)}%` : "—");
-                  return (
-                    <tr key={i} className="border-b border-zinc-800/30 last:border-0">
-                      <td className="py-0.5 text-zinc-300 font-medium">{row.label}</td>
-                      <td className="py-0.5 text-right font-mono text-zinc-200">
-                        {row.price != null
-                          ? isYield ? `${row.price.toFixed(2)}%` : row.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-                          : "—"}
-                      </td>
-                      <td className={`py-0.5 text-right font-mono ${chg >= 0 ? "text-emerald-400" : "text-red-400"}`}>
-                        {row.change != null ? `${chg >= 0 ? "+" : ""}${chg.toFixed(2)}` : "—"}
-                      </td>
-                      <td className={`py-0.5 text-right pl-3 font-mono ${
-                        (row.zone_label || row.trend_label)
-                          ? (isVix && (row.zone_label || "").includes("Fear") ? "text-red-400" : isVix ? "text-amber-400" : chg >= 0 ? "text-amber-400" : "text-emerald-400")
-                          : (row.change_pct ?? 0) >= 0 ? "text-emerald-400" : "text-red-400"
-                      }`}>
-                        {pctDisp}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-            {/* Global indices row */}
-            {Object.values(global_indices).some(g => g?.change_pct != null) && (
-              <div className="flex gap-2 mt-1.5 flex-wrap">
-                {Object.entries(global_indices).map(([k, g]) => g?.change_pct != null && (
-                  <span key={k} className="text-[10px]">
-                    <span className="text-zinc-600">{g.label?.split(" ")[0]}</span>
-                    <span className={`ml-0.5 font-mono ${g.change_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
-                      {g.change_pct >= 0 ? "+" : ""}{g.change_pct.toFixed(2)}%
-                    </span>
-                  </span>
-                ))}
+      {/* Card */}
+      <div className="px-4 pt-4 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex flex-col flex-1 min-h-0">
+        {/* Header */}
+        <div className="flex items-center gap-1.5 mb-3 pb-2 border-b border-zinc-800/60 flex-wrap gap-y-1.5">
+          <span className="text-sm">{sessionEmoji}</span>
+          <span className="text-[11px] font-bold text-zinc-300 uppercase tracking-wide">{session ? `${session} Brief` : "Market Brief"}</span>
+          <div className="ml-auto flex items-center gap-1.5">
+            {/* Breaking News button */}
+            {visibleAlerts.length > 0 && (
+              <button
+                onClick={() => setShowBreakingNews(v => !v)}
+                className={`flex items-center gap-1 border px-2 py-0.5 text-[10px] font-black italic tracking-wider transition-colors ${
+                  showBreakingNews
+                    ? "bg-red-950/30 border-red-600 text-red-500"
+                    : "bg-black border-red-800 text-red-700 hover:border-red-600 hover:text-red-600"
+                }`}
+              >
+                ⚡ NEWS
+                <span className="bg-red-600 text-white text-[9px] font-black rounded-full w-3.5 h-3.5 flex items-center justify-center">
+                  {visibleAlerts.length}
+                </span>
+              </button>
+            )}
+            {/* Full brief expand button */}
+            <button
+              onClick={() => setShowFullBrief(true)}
+              className="text-[10px] text-zinc-500 hover:text-zinc-300 border border-zinc-700/50 rounded px-1.5 py-0.5 transition-colors flex items-center gap-1"
+            >
+              {sessionLabel} <ExternalLink size={9}/>
+            </button>
+            <div className="text-right">
+              {generated_at && <div className="text-[10px] text-zinc-600">{generated_at}</div>}
+              <div className="text-[10px] text-zinc-500">Next: {getNextBriefTime()}</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Inline Breaking News */}
+        {showBreakingNews && visibleAlerts.length > 0 && (
+          <div className="mb-3 border border-red-900/40 bg-red-950/10 rounded overflow-hidden">
+            {visibleAlerts.map((alert, i) => (
+              <div key={alert.headline} className={`px-3 py-2 relative ${i > 0 ? "border-t border-red-900/20" : ""}`}>
+                <button
+                  onClick={() => setDismissedNews(prev => [...prev, alert.headline])}
+                  className="absolute top-2 right-2 text-red-900 hover:text-red-500 text-sm font-black leading-none"
+                >×</button>
+                <div className="flex items-center gap-1.5 mb-0.5 pr-4">
+                  {alert.grade != null && <span className="text-red-700 font-black text-[9px] border border-red-800 px-1">{alert.grade}/10</span>}
+                  {alert.source && <span className="text-red-900 text-[9px] font-semibold uppercase tracking-widest truncate max-w-[130px]">{alert.source}</span>}
+                </div>
+                <p className={`font-extrabold text-[10px] uppercase leading-snug ${i === 0 ? "text-red-500" : "text-red-700"}`}>{alert.headline}</p>
+                {i === 0 && alert.analysis && <p className="text-zinc-400 text-[10px] leading-relaxed mt-1">{alert.analysis}</p>}
               </div>
+            ))}
+            {newsData?.last_checked && (
+              <p className="text-[9px] text-zinc-700 text-right px-3 py-1 border-t border-red-900/20">Last checked: {newsData.last_checked}</p>
             )}
           </div>
         )}
 
-        {/* 2. Macro Risk & Breadth */}
-        {(macro_breadth.credit_spread != null || macro_breadth.s5fi != null) && (
-          <div>
-            <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">2. Macro Risk &amp; Breadth</div>
-            <div className="space-y-1">
-              {macro_breadth.credit_spread != null && (
-                <div className="text-[11px] text-zinc-400">
-                  <span className="text-zinc-500">• Credit Spread (HY Master II): </span>
-                  <span className="text-zinc-200 font-mono">{macro_breadth.credit_spread.toFixed(2)}%</span>
-                  {macro_breadth.credit_regime && (
-                    <> <span className="text-zinc-600">|</span> <span className={`font-semibold ${regimeCls(macro_breadth.credit_regime)}`}>Regime: {macro_breadth.credit_regime}</span></>
-                  )}
-                </div>
-              )}
-              {macro_breadth.s5fi != null && (
-                <div className="text-[11px] text-zinc-400">
-                  <span className="text-zinc-500">• Market Breadth: </span>
-                  <span className="font-mono text-zinc-200">S5FI {macro_breadth.s5fi.toFixed(1)}%</span>
-                  {macro_breadth.mmth != null && (
-                    <> <span className="text-zinc-600">·</span> <span className="font-mono text-zinc-200">MMTH {macro_breadth.mmth.toFixed(1)}%</span></>
-                  )}
-                </div>
-              )}
-              {macro_breadth.breadth_status && (
-                <div className={`text-[11px] font-bold mt-0.5 ${
-                  macro_breadth.generational ? "text-orange-400" : macro_breadth.breadth_flush ? "text-red-400" : "text-amber-400"
-                }`}>
-                  • Status: [{macro_breadth.breadth_status}]
-                </div>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* 3. Analysis & Lessons */}
-        {(analysis.analysis_para1 || analysis.analysis_para2) && (
-          <div>
-            <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">3. Analysis &amp; Lessons</div>
-            <div className="space-y-2">
-              {analysis.analysis_para1 && (
-                <p className="text-[11px] text-zinc-300 leading-relaxed">{analysis.analysis_para1}</p>
-              )}
-              {analysis.analysis_para2 && (
-                <p className="text-[11px] text-zinc-400 leading-relaxed">{analysis.analysis_para2}</p>
-              )}
-            </div>
-          </div>
-        )}
-
-        {/* 4. Ticker Intelligence */}
-        {analysis.ticker_intel?.length > 0 && (
-          <div>
-            <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">4. Ticker Intel</div>
-            <div className="space-y-1.5">
-              {analysis.ticker_intel.map((t, i) => (
-                <div key={i} className="flex gap-1.5 items-start">
-                  <span className={`text-[10px] font-bold px-1 py-0.5 rounded border flex-shrink-0 mt-0.5 ${gradeCls(t.grade)}`}>
-                    {t.grade}
-                  </span>
-                  <div>
-                    <span className="text-[11px] font-bold text-zinc-200 font-mono">${t.ticker}</span>
-                    {t.company && <span className="text-[10px] text-zinc-500 ml-1">({t.company})</span>}
-                    {t.reason && <p className="text-[10px] text-zinc-400 leading-snug mt-0.5">{t.reason}</p>}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
+        {briefContent("237px")}
       </div>
-    </div>
+    </>
   );
 };
 
@@ -3488,8 +3548,6 @@ const filtered = useMemo(() => {
             );
           })()}
 
-          {/* Breaking News Alert — shown above all tabs when active */}
-          <BreakingNewsAlert newsData={newsData}/>
 
           {tab === "scanner" && (
             <>
@@ -3549,7 +3607,7 @@ const filtered = useMemo(() => {
           <div className="flex justify-between items-start mb-2">
             <div className="w-[420px] flex-shrink-0 flex flex-col gap-4">
               <VixGauge initialVix={data?.vix}/>
-              <ScannerBriefFeed briefData={briefData}/>
+              <ScannerBriefFeed briefData={briefData} newsData={newsData}/>
             </div>
             <div className="w-[624px] flex-shrink-0">
               {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
