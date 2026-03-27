@@ -2379,49 +2379,53 @@ const SearchBar = ({ data, search, setSearch }) => {
     return { ...base, appearances: merged };
   })();
 
-  // Fetch live price: try local API first, fallback to Yahoo Finance
+  // Fetch live price: try local API first, fallback to Yahoo Finance. Polls every 30s.
   useEffect(() => {
     setLivePrice(null);
     if (!fullResult) return;
     const ticker = fullResult.ticker;
     let cancelled = false;
-    const fetchYahoo = () => {
-      setLivePriceLoading(true);
-      fetch(`https://query2.finance.yahoo.com/v7/finance/quote?symbols=${ticker}&fields=regularMarketPrice,regularMarketChangePercent`)
+    const doFetch = () => {
+      const fetchYahoo = () => {
+        setLivePriceLoading(true);
+        fetch(`https://query2.finance.yahoo.com/v7/finance/quote?symbols=${ticker}&fields=regularMarketPrice,regularMarketChangePercent`)
+          .then(r => r.json())
+          .then(d => {
+            if (cancelled) return;
+            const q = d?.quoteResponse?.result?.[0];
+            if (q?.regularMarketPrice != null) {
+              setLivePrice({ price: q.regularMarketPrice, change_pct: q.regularMarketChangePercent ?? null });
+            }
+          })
+          .catch(() => {
+            // fallback: v8 chart
+            fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=1d`)
+              .then(r => r.json())
+              .then(d => {
+                if (cancelled) return;
+                const meta = d?.chart?.result?.[0]?.meta;
+                if (meta?.regularMarketPrice != null) {
+                  const price = meta.regularMarketPrice;
+                  const prev = meta.chartPreviousClose || meta.previousClose;
+                  setLivePrice({ price, change_pct: prev ? ((price - prev) / prev) * 100 : null });
+                }
+              })
+              .catch(() => {});
+          })
+          .finally(() => { if (!cancelled) setLivePriceLoading(false); });
+      };
+      fetch(`http://localhost:5001/price/${ticker}`)
         .then(r => r.json())
         .then(d => {
           if (cancelled) return;
-          const q = d?.quoteResponse?.result?.[0];
-          if (q?.regularMarketPrice != null) {
-            setLivePrice({ price: q.regularMarketPrice, change_pct: q.regularMarketChangePercent ?? null });
-          }
+          if (d.price != null) { setLivePrice({ price: d.price, change_pct: d.change_pct }); setLivePriceLoading(false); }
+          else fetchYahoo();
         })
-        .catch(() => {
-          // fallback: v8 chart
-          fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=1d`)
-            .then(r => r.json())
-            .then(d => {
-              if (cancelled) return;
-              const meta = d?.chart?.result?.[0]?.meta;
-              if (meta?.regularMarketPrice != null) {
-                const price = meta.regularMarketPrice;
-                const prev = meta.chartPreviousClose || meta.previousClose;
-                setLivePrice({ price, change_pct: prev ? ((price - prev) / prev) * 100 : null });
-              }
-            })
-            .catch(() => {});
-        })
-        .finally(() => { if (!cancelled) setLivePriceLoading(false); });
+        .catch(() => fetchYahoo());
     };
-    fetch(`http://localhost:5001/price/${ticker}`)
-      .then(r => r.json())
-      .then(d => {
-        if (cancelled) return;
-        if (d.price != null) { setLivePrice({ price: d.price, change_pct: d.change_pct }); setLivePriceLoading(false); }
-        else fetchYahoo();
-      })
-      .catch(() => fetchYahoo());
-    return () => { cancelled = true; };
+    doFetch();
+    const interval = setInterval(doFetch, 30000); // refresh every 30s
+    return () => { cancelled = true; clearInterval(interval); };
   }, [fullResult?.ticker]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const cachedPrice = fullResult ? priceCache[fullResult.ticker] : null;
