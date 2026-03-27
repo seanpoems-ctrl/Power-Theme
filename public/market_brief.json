@@ -1,5 +1,5 @@
 {
-  "generated_at": "March 27, 2026 (18:00 EDT)",
+  "generated_at": "March 27, 2026 (18:35 EDT)",
   "session": "Post-Market",
   "global_snapshot": [
     {
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Fearful Selling / Broad Market Weakness",
+  "mood": "Distribution / Broad Weakness",
   "analysis": {
-    "analysis_para1": "Global markets showed a mixed picture today, with the DAX notably weaker by -1.38% echoing US sentiment, while the Nikkei saw mild losses of -0.27% and the FTSE remained largely flat at -0.05%. Domestically, the elevated VIX at 31.05 signals heightened fear, suggesting a risk-off tone permeating credit markets despite an unknown BAML HY Spread. This fear translated into significant internal weakness, as evidenced by only 24.2% of S&P 500 stocks above their 50-day moving average (S5FI) and merely 47.0% above their 200-day (MMTH), indicating broad distribution and deteriorating market health.",
-    "analysis_para2": "The immediate mechanical plan centers on identifying signs of capitulation or stabilization after today's sharp sell-off. For the S&P 500, a critical support level to watch is the 6300 psychological barrier, with a breach potentially signaling further declines towards the next major fibonacci extension. On the Nasdaq 100, the 23,000 level is paramount; a firm hold here on increased buying volume would be the first hint of a bounce. Without significant breadth improvement, indicated by S5FI rising above 30%, and a VIX retracement below 25, defensive positioning remains prudent.",
-    "technical_signal": "No reversal pattern confirmed yet. Today's broad market weakness, high VIX, and deteriorating breadth indicate continued downside momentum without any immediate signs of buying exhaustion or a bullish engulfing candle.",
+    "analysis_para1": "Global markets displayed a mixed but largely negative tone today, with the DAX leading European declines at -1.38% while the Nikkei saw a modest -0.27% dip. This international caution dovetailed into significant domestic selling, as evidenced by the S&P 500's -1.67% drop and the Nasdaq 100's deeper -1.93% decline. Market breadth remains alarmingly weak, with only 24.2% of S&P 500 stocks above their 50-day moving average (S5FI) and less than half, 47.0%, above their 200-day moving average (MMTH), indicating broad underlying distribution. The BAML HY Spread remains in an unknown regime, but the stable 10-year yield at 4.44% offers little comfort against the rapidly rising VIX at 31.05.",
+    "analysis_para2": "The immediate mechanical plan involves monitoring for a decisive shift in market character and controlling risk. For the S&P 500, a key support level to watch is the 6300 mark; a breach could accelerate downside momentum significantly. Conversely, a sustained close above 6450, accompanied by a significant drop in the VIX below 28, would be a preliminary signal of exhaustion in selling pressure. We must also observe breadth indicators for any meaningful improvement, particularly S5FI rising above 30%, before considering tactical long positions. Until then, protecting capital and focusing on defensive or high-quality names remains paramount.",
+    "technical_signal": "No reversal pattern confirmed yet. Today's steep declines in major indices and elevated VIX indicate ongoing bearish momentum.",
     "ticker_intel": [
       {
-        "ticker": "PG",
-        "company": "Procter & Gamble Co.",
+        "ticker": "JNJ",
+        "company": "Johnson & Johnson",
         "grade": "A+",
-        "reason": "PG offers robust defensive characteristics with consistent demand for essential goods, making it a safe haven in a risk-off environment."
+        "reason": "Its defensive healthcare portfolio and consistent dividend make it attractive during periods of market uncertainty and high volatility."
       },
       {
-        "ticker": "JPM",
-        "company": "JPMorgan Chase & Co.",
+        "ticker": "MSFT",
+        "company": "Microsoft Corporation",
         "grade": "A",
-        "reason": "Strong balance sheet and stable 10Y yields support JPM's net interest income outlook, positioning it defensively amidst market volatility."
+        "reason": "Its dominant cloud services and robust enterprise software suite provide resilient growth and strong free cash flow even amidst broader market weakness."
       },
       {
-        "ticker": "TSLA",
-        "company": "Tesla, Inc.",
+        "ticker": "NVDA",
+        "company": "NVIDIA Corporation",
         "grade": "C",
-        "reason": "As a high-beta growth stock, TSLA remains vulnerable to further downside in a fear-driven, risk-off market due to its speculative nature and valuation."
+        "reason": "As a high-beta semiconductor play, NVIDIA faces significant downside risk during broad market de-risking and potential demand slowdowns."
       }
     ]
   }
