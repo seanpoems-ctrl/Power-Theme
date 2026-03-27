@@ -12,11 +12,8 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: write
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      is_trading_day: ${{ steps.trading_day.outputs.is_trading_day }}
 
     steps:
       - uses: actions/checkout@v4
@@ -46,9 +43,9 @@ jobs:
         if: steps.trading_day.outputs.is_trading_day == 'true'
         run: python market_brief.py
         env:
-          GEMINI_API_KEY:      ${{ secrets.GEMINI_API_KEY }}
-          TELEGRAM_BOT_TOKEN:  ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID:    ${{ secrets.TELEGRAM_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
       - name: Commit market brief data to repo
         if: steps.trading_day.outputs.is_trading_day == 'true'
@@ -59,25 +56,36 @@ jobs:
           git diff --staged --quiet || git commit -m "data: market_brief $(date -u +%Y-%m-%dT%H:%M) [skip ci]"
           for i in 1 2 3; do git pull --rebase --autostash && git push && break || sleep 5; done
 
+  deploy:
+    needs: market-brief
+    if: needs.market-brief.outputs.is_trading_day == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
-        if: steps.trading_day.outputs.is_trading_day == 'true'
         with:
           node-version: 18
 
       - name: Build React app
-        if: steps.trading_day.outputs.is_trading_day == 'true'
         run: npm install --legacy-peer-deps && npm run build
         env:
           CI: false
 
       - uses: actions/configure-pages@v4
-        if: steps.trading_day.outputs.is_trading_day == 'true'
 
       - uses: actions/upload-pages-artifact@v3
-        if: steps.trading_day.outputs.is_trading_day == 'true'
         with:
           path: ./build
 
       - id: deployment
-        if: steps.trading_day.outputs.is_trading_day == 'true'
         uses: actions/deploy-pages@v4
