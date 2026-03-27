@@ -1752,6 +1752,13 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
           <span className="text-sm">{sessionEmoji}</span>
           <span className="text-[11px] font-bold text-zinc-300 uppercase tracking-wide">{session ? `${session} Brief` : "Market Brief"}</span>
           <div className="ml-auto flex items-center gap-1.5">
+            {/* Full brief expand button */}
+            <button
+              onClick={() => setShowFullBrief(true)}
+              className="text-[10px] text-zinc-500 hover:text-zinc-300 border border-zinc-700/50 rounded px-1.5 py-0.5 transition-colors flex items-center gap-1"
+            >
+              {sessionLabel} <ExternalLink size={9}/>
+            </button>
             {/* Breaking News button */}
             {visibleAlerts.length > 0 && (
               <button
@@ -1768,13 +1775,6 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
                 </span>
               </button>
             )}
-            {/* Full brief expand button */}
-            <button
-              onClick={() => setShowFullBrief(true)}
-              className="text-[10px] text-zinc-500 hover:text-zinc-300 border border-zinc-700/50 rounded px-1.5 py-0.5 transition-colors flex items-center gap-1"
-            >
-              {sessionLabel} <ExternalLink size={9}/>
-            </button>
             <div className="text-right">
               {generated_at && <div className="text-[10px] text-zinc-600">{generated_at}</div>}
               <div className="text-[10px] text-zinc-500">Next: {getNextBriefTime()}</div>
