@@ -271,16 +271,21 @@ def expire_seen_keys(seen: list[dict]) -> list[dict]:
 
 
 def expire_old_alerts(alerts: list[dict]) -> list[dict]:
-    cutoff = datetime.now(timezone.utc) - timedelta(hours=ALERT_TTL_HOURS)
-    fresh  = []
+    now_utc   = datetime.now(timezone.utc)
+    cutoff    = now_utc - timedelta(hours=ALERT_TTL_HOURS)
+    today_et  = datetime.now(ET_TZ).date()
+    fresh     = []
     for a in alerts:
         ts = a.get("timestamp")
         if not ts:
             fresh.append(a)
             continue
         try:
-            dt = datetime.fromisoformat(ts)
-            if dt.astimezone(timezone.utc) >= cutoff:
+            dt     = datetime.fromisoformat(ts)
+            dt_utc = dt.astimezone(timezone.utc)
+            dt_et  = dt.astimezone(ET_TZ)
+            # Expire if older than TTL OR from a previous ET calendar day
+            if dt_utc >= cutoff and dt_et.date() == today_et:
                 fresh.append(a)
         except Exception:
             fresh.append(a)
