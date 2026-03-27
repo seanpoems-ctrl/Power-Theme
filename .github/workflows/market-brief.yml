@@ -46,9 +46,9 @@ jobs:
         if: steps.trading_day.outputs.is_trading_day == 'true'
         run: python market_brief.py
         env:
-          GEMINI_API_KEY:     ${{ secrets.GEMINI_API_KEY }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
+          GEMINI_API_KEY:      ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN:  ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:    ${{ secrets.TELEGRAM_CHAT_ID }}
 
       - name: Commit market brief data to repo
         if: steps.trading_day.outputs.is_trading_day == 'true'
