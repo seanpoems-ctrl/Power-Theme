@@ -1935,10 +1935,10 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
             {visibleAlerts.length > 0 && (
               <button
                 onClick={() => setShowBreakingNews(true)}
-                className="flex items-center gap-1 bg-black border border-red-800 px-2 py-0.5 text-[10px] font-black italic tracking-wider text-red-700 hover:border-red-600 hover:text-red-600 transition-colors"
+                className="flex items-center gap-1 bg-black border border-red-700/60 px-2 py-0.5 text-[10px] font-semibold italic tracking-wider text-red-500 hover:border-red-500 hover:text-red-400 transition-colors"
               >
                 ⚡ NEWS
-                <span className="bg-red-600 text-white text-[9px] font-black rounded-full w-3.5 h-3.5 flex items-center justify-center">
+                <span className="bg-red-500/80 text-white text-[9px] font-semibold rounded-full w-3.5 h-3.5 flex items-center justify-center">
                   {visibleAlerts.length}
                 </span>
               </button>
