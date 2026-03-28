@@ -3750,93 +3750,18 @@ const filtered = useMemo(() => {
 
       {tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
         <div className="max-w-[1400px] mx-auto px-4 pt-2 pb-4">
-          <div className="flex gap-4 items-start mb-2">
+          <div className="flex justify-between items-start mb-2">
             <div className="w-[420px] flex-shrink-0 flex flex-col gap-4">
               <VixGauge initialVix={data?.vix}/>
               <ScannerBriefFeed briefData={briefData} newsData={newsData}/>
             </div>
-            {/* ── Middle: Market Condition ── */}
-            <div className="flex-1 min-w-0 flex flex-col gap-3">
-              {data?.market_condition && (() => {
-                const mc = data.market_condition;
-                const { signal, spy, qqq, breadth_50d, breadth_200d } = mc;
-                const sigCfg = {
-                  green:  { dot: "bg-emerald-400", border: "border-emerald-500/30", bg: "bg-emerald-500/8",  label: "Market Uptrend",    guide: "正常執行突破單，SPY & QQQ 站上所有均線" },
-                  yellow: { dot: "bg-amber-400",   border: "border-amber-500/30",  bg: "bg-amber-500/8",   label: "Market Correction", guide: "暫停常規突破，只做 RS 最強的少數股票" },
-                  red:    { dot: "bg-red-400",     border: "border-red-500/30",    bg: "bg-red-500/8",     label: "Market Downtrend",  guide: "停止所有新倉突破單，現金為王" },
-                }[signal] || { dot: "bg-zinc-500", border: "border-zinc-700/30", bg: "bg-zinc-800/20", label: "Unknown", guide: "" };
-
-                const statusCls = st =>
-                  st === "Strong"   ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/30"
-                  : st === "Mediocre" ? "text-amber-400 bg-amber-500/10 border-amber-500/30"
-                  : st === "Lagging"  ? "text-orange-400 bg-orange-500/10 border-orange-500/30"
-                  : st === "Weak"     ? "text-red-400 bg-red-500/10 border-red-500/30"
-                  : "text-zinc-400 bg-zinc-800/40 border-zinc-700/30";
-
-                const pct = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(2)}%`;
-                const pctCls = v => v == null ? "text-zinc-600" : v > 0 ? "text-emerald-400 font-mono" : "text-red-400 font-mono";
-                const chgCls = v => v == null ? "text-zinc-600" : v > 0 ? "text-emerald-400" : "text-red-400";
-
-                const IndexRow = ({ label, d }) => !d ? null : (
-                  <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-mono text-zinc-500 w-8 flex-shrink-0">{label}</span>
-                    <span className="text-[13px] font-mono text-zinc-200">${d.price?.toFixed(2) ?? "—"}</span>
-                    <span className={`text-[12px] ${chgCls(d.change_pct)}`}>{d.change_pct != null ? `${d.change_pct > 0 ? "+" : ""}${d.change_pct.toFixed(2)}%` : "—"}</span>
-                    {d.index_status && (
-                      <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border ${statusCls(d.index_status)}`}>{d.index_status}</span>
-                    )}
-                    <div className="ml-auto flex items-center gap-2 text-[11px]">
-                      <span className="text-zinc-600">50MA</span>
-                      <span className={pctCls(d.sma50_pct)}>{pct(d.sma50_pct)}</span>
-                      <span className="text-zinc-700">·</span>
-                      <span className="text-zinc-600">200MA</span>
-                      <span className={pctCls(d.sma200_pct)}>{pct(d.sma200_pct)}</span>
-                    </div>
-                  </div>
-                );
-
-                return (
-                  <div className={`p-3 rounded-xl border ${sigCfg.border} ${sigCfg.bg} flex flex-col gap-3`}>
-                    {/* Signal header */}
-                    <div className="flex items-center gap-2">
-                      <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${sigCfg.dot} shadow-sm`} style={{ boxShadow: `0 0 6px 1px ${signal === 'green' ? '#34d399' : signal === 'red' ? '#f87171' : '#fbbf24'}40` }}/>
-                      <span className="text-[13px] font-semibold text-zinc-200">{sigCfg.label}</span>
-                    </div>
-                    {/* Index rows */}
-                    <div className="flex flex-col gap-2">
-                      <IndexRow label="SPY" d={spy}/>
-                      <IndexRow label="QQQ" d={qqq}/>
-                    </div>
-                    {/* Breadth */}
-                    {(breadth_50d != null || breadth_200d != null) && (
-                      <div className="flex items-center gap-3 pt-1 border-t border-zinc-800/60">
-                        <span className="text-[11px] text-zinc-500">Market Breadth</span>
-                        {breadth_50d != null && (
-                          <span className="text-[11px]">
-                            <span className="text-zinc-600">S5FI 50D </span>
-                            <span className={breadth_50d >= 60 ? "text-emerald-400 font-mono" : breadth_50d >= 40 ? "text-amber-400 font-mono" : "text-red-400 font-mono"}>{breadth_50d.toFixed(1)}%</span>
-                          </span>
-                        )}
-                        {breadth_200d != null && (
-                          <span className="text-[11px]">
-                            <span className="text-zinc-600">MMTH 200D </span>
-                            <span className={breadth_200d >= 60 ? "text-emerald-400 font-mono" : breadth_200d >= 40 ? "text-amber-400 font-mono" : "text-red-400 font-mono"}>{breadth_200d.toFixed(1)}%</span>
-                          </span>
-                        )}
-                      </div>
-                    )}
-                    {/* Guidance */}
-                    <p className="text-[11px] text-zinc-500 leading-relaxed">{sigCfg.guide}</p>
-                  </div>
-                );
-              })()}
-              {/* CorrelationGuard + CounterTrendWarning in middle column */}
-              {data && <CorrelationGuard themes={data.themes}/>}
-              {data && <CounterTrendWarning themes={data.themes}/>}
-            </div>
             <div className="w-[624px] flex-shrink-0">
               {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
             </div>
+          </div>
+          <div className="mb-4">
+            {data && <CorrelationGuard themes={data.themes}/>}
+            {data && <CounterTrendWarning themes={data.themes}/>}
           </div>
           {filtered.length === 0 ? (
             <div className="text-center py-16 text-zinc-500">
