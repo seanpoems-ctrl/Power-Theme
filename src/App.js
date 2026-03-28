@@ -1400,7 +1400,7 @@ _KW_CATEGORIES.forEach(({ cls, words }) => {
 });
 const _sortedKws = [..._kwMap.keys()].sort((a, b) => b.length - a.length);
 const _kwRe = new RegExp(
-  `(${_sortedKws.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`,
+  `\\b(${_sortedKws.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})\\b`,
   "gi"
 );
 
