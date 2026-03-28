@@ -1354,12 +1354,18 @@ const _KW_CATEGORIES = [
     "troops", "bomb", "conflict", "coup", "assassination", "hostage", "ceasefire",
     "sanctions", "sanction", "iran", "russia", "ukraine", "north korea",
     "israel", "hamas", "hezbollah", "taiwan", "china", "venezuela", "nato",
+    "strike", "strikes", "attack", "attacked", "invades", "invaded", "troops deployed",
+    "military operation", "escalation", "escalate", "retaliation", "retaliates",
+    "bombing", "blockade", "occupied", "occupation", "proxy war", "regime change",
   ]},
   // Trade / tariff / policy — amber
   { cls: "text-amber-400", words: [
     "tariff", "tariffs", "trade war", "trade deal", "import duty", "export ban",
     "ban", "embargo", "executive order", "veto", "legislation", "bill", "stimulus",
     "subsidy", "subsides", "restriction", "restrictions", "retaliatory", "retaliation",
+    "trump", "biden", "white house", "congress", "senate", "executive", "decree",
+    "25%", "50%", "100%", "tariff rate", "import tax", "trade bloc", "wto",
+    "decouple", "decoupling", "supply chain",
   ]},
   // Fed / monetary policy — sky blue
   { cls: "text-sky-400", words: [
@@ -1367,6 +1373,10 @@ const _KW_CATEGORIES = [
     "interest rate", "basis points", "quantitative easing", "quantitative tightening",
     "taper", "tapering", "yield curve", "cpi", "ppi", "inflation", "deflation",
     "monetary policy", "balance sheet",
+    "rate decision", "basis point", "bps", "dot plot", "pivot", "hold", "pause",
+    "emergency cut", "emergency hike", "jerome powell", "chair powell",
+    "ecb", "boj", "pboc", "bank of japan", "european central bank",
+    "treasury yield", "10-year", "2-year", "inverted", "inversion", "spread",
   ]},
   // Market risk / crisis — rose
   { cls: "text-rose-400", words: [
@@ -1375,6 +1385,9 @@ const _KW_CATEGORIES = [
     "panic", "contagion", "systemic risk", "liquidity crisis", "margin call",
     "downgrade", "credit watch", "default", "bankruptcy", "bankrupt", "chapter 11",
     "insolvency", "shutdown", "debt ceiling",
+    "halted", "suspended trading", "black swan", "flash crash",
+    "mass layoffs", "bank run", "bank failure", "fdic", "seized", "nationalized",
+    "sovereign default", "imf bailout", "credit downgrade", "junk", "speculative grade",
   ]},
   // Corporate / earnings events — yellow
   { cls: "text-yellow-300", words: [
@@ -1382,12 +1395,16 @@ const _KW_CATEGORIES = [
     "ipo", "earnings", "beat", "miss", "guidance", "outlook", "forecast",
     "layoff", "layoffs", "restructuring", "job cuts", "headcount",
     "record", "all-time high",
+    "surprise", "shock", "miss by", "beat by", "raised guidance", "cut guidance",
+    "profit warning", "revenue warning", "Chapter 7", "Chapter 11", "delisted",
   ]},
   // Positive / approval — emerald
   { cls: "text-emerald-400", words: [
     "approval", "approved", "fda approval", "fda", "breakthrough",
     "upgrade", "deal signed", "partnership", "contract", "ceasefire deal",
     "peace deal", "rate cut", "stimulus package",
+    "ceasefire", "peace", "de-escalation", "rate cut announced", "stimulus approved",
+    "trade deal signed", "sanctions lifted", "recovery", "rebound", "relief rally",
   ]},
 ];
 
@@ -1428,7 +1445,11 @@ function formatAlertTime(ts) {
 
 /** Breaking News Alert — shown globally above tab content when grade >= 8 news detected */
 const BreakingNewsAlert = ({ newsData }) => {
-  const [dismissed, setDismissed] = useState([]);
+  const [dismissed, setDismissed] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("bn_dismissed") || "[]");
+    } catch { return []; }
+  });
   const [expanded, setExpanded] = useState(false);
   const [pos, setPos] = useState(null); // null = default CSS position
   const drag = useRef({ active: false, ox: 0, oy: 0, sx: 0, sy: 0, moved: false });
@@ -1463,7 +1484,11 @@ const BreakingNewsAlert = ({ newsData }) => {
 
   const sorted = visible.sort((a, b) => (b.grade || 0) - (a.grade || 0));
   const [top, ...rest] = sorted;
-  const dismiss = headline => setDismissed(prev => [...prev, headline]);
+  const dismiss = headline => setDismissed(prev => {
+    const next = [...prev, headline];
+    try { localStorage.setItem("bn_dismissed", JSON.stringify(next.slice(-50))); } catch {}
+    return next;
+  });
 
   const onDragDown = (e) => {
     if (e.button !== 0) return;
@@ -1536,13 +1561,13 @@ const BreakingNewsAlert = ({ newsData }) => {
               </p>
               {top.analysis && (
                 <div className="mb-2">
-                  <h4 className="text-zinc-400 font-bold text-[10px] uppercase tracking-widest mb-1">Analysis</h4>
+                  <h4 className="text-sky-400 font-bold text-[10px] uppercase tracking-widest mb-1">Analysis</h4>
                   <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(top.analysis)}</p>
                 </div>
               )}
               {top.impact && (
                 <div>
-                  <h4 className="text-zinc-400 font-bold text-[10px] uppercase tracking-widest mb-1">Impact</h4>
+                  <h4 className="text-amber-400 font-bold text-[10px] uppercase tracking-widest mb-1">Impact</h4>
                   <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(top.impact)}</p>
                 </div>
               )}
@@ -1566,13 +1591,13 @@ const BreakingNewsAlert = ({ newsData }) => {
                 <p className="text-red-700 font-bold text-xs uppercase leading-snug mb-2">{highlightText(alert.headline)}</p>
                 {alert.analysis && (
                   <div className="mb-1">
-                    <h4 className="text-zinc-500 font-bold text-[9px] uppercase tracking-widest mb-0.5">Analysis</h4>
+                    <h4 className="text-sky-400 font-bold text-[9px] uppercase tracking-widest mb-0.5">Analysis</h4>
                     <p className="text-zinc-400 text-[11px] leading-relaxed">{highlightText(alert.analysis)}</p>
                   </div>
                 )}
                 {alert.impact && (
                   <div>
-                    <h4 className="text-zinc-500 font-bold text-[9px] uppercase tracking-widest mb-0.5">Impact</h4>
+                    <h4 className="text-amber-400 font-bold text-[9px] uppercase tracking-widest mb-0.5">Impact</h4>
                     <p className="text-zinc-400 text-[11px] leading-relaxed">{highlightText(alert.impact)}</p>
                   </div>
                 )}
@@ -1647,7 +1672,11 @@ function getNextBriefTime() {
 const ScannerBriefFeed = ({ briefData, newsData }) => {
   const [showFullBrief, setShowFullBrief] = useState(false);
   const [showBreakingNews, setShowBreakingNews] = useState(false);
-  const [dismissedNews, setDismissedNews] = useState([]);
+  const [dismissedNews, setDismissedNews] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("bn_dismissed") || "[]");
+    } catch { return []; }
+  });
 
   const session       = briefData?.session || "";
   const generated_at  = briefData?.generated_at;
@@ -1860,13 +1889,13 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
                   </p>
                   {alert.analysis && (
                     <div className="mb-2">
-                      <h4 className="text-zinc-400 font-bold text-[10px] uppercase tracking-widest mb-1">Analysis</h4>
+                      <h4 className="text-sky-400 font-bold text-[10px] uppercase tracking-widest mb-1">Analysis</h4>
                       <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(alert.analysis)}</p>
                     </div>
                   )}
                   {alert.impact && (
                     <div>
-                      <h4 className="text-zinc-400 font-bold text-[10px] uppercase tracking-widest mb-1">Impact</h4>
+                      <h4 className="text-amber-400 font-bold text-[10px] uppercase tracking-widest mb-1">Impact</h4>
                       <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(alert.impact)}</p>
                     </div>
                   )}

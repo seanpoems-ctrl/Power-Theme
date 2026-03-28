@@ -34,7 +34,7 @@ GEMINI_API_KEY  = os.getenv("GEMINI_API_KEY", "")
 TELEGRAM_TOKEN  = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT   = os.getenv("TELEGRAM_CHAT_ID", "")
 
-ALERT_THRESHOLD = 8    # Gemini grade >= 8 triggers alert
+ALERT_THRESHOLD = 9    # Gemini grade >= 9 triggers alert
 HOURS_LOOKBACK  = 2    # Only consider headlines from last N hours
 MAX_ALERTS      = 6    # Keep at most N alerts in rolling store
 ALERT_TTL_HOURS = 12   # Expire alerts older than N hours
@@ -175,26 +175,46 @@ def grade_with_gemini(headlines: list[dict]) -> list[dict]:
         for i, h in enumerate(headlines[:30])
     )
 
-    prompt = f"""You are a financial news analyst for a professional trading desk.
+    prompt = f"""You are a senior macro trader. Your job is to flag only the most extreme, \
+market-moving headlines. Be brutally strict.
 
-Review these recent financial headlines. Grade each 1-10 for IMMEDIATE MARKET IMPACT:
-- 9-10: Market-moving event — Fed emergency action, geopolitical crisis, circuit breakers, major bankruptcy,
-        surprise tariff announcements, military strikes, sanctions
-- 8:    High-impact — significant policy shift, major earnings shock, sector-wide catalyst,
-        central bank surprises, large-cap guidance cuts
-- 7 and below: Routine news, analyst price targets, general commentary — OMIT from output
+Grade each headline 1–10 for IMMEDIATE broad market impact:
+
+GRADE 9–10 (alert-worthy — include these):
+  - Fed emergency action / surprise rate hike or cut outside scheduled FOMC
+  - Declared war, military strikes between major nations (US, China, Russia, Iran, Israel, NATO)
+  - Nuclear threat escalation (confirmed, not speculative)
+  - President / head of state announces attack, invasion, or military operation
+  - Major country sovereign default or IMF bailout (G20 level)
+  - Surprise tariff announcement affecting entire sectors (e.g. 25% on all semiconductors)
+  - Stock market circuit breaker triggered
+  - Major central bank emergency meeting / policy reversal
+  - Catastrophic natural disaster disrupting global supply chain
+
+GRADE 8 (include only if truly sector-wide, not company-specific):
+  - FOMC decision that surprises consensus by ≥25bps
+  - G7/G20 coordinated sanctions on a major economy
+  - Confirmed ceasefire collapse in an active war zone
+  - Major country election result that reverses geopolitical alignment
+
+AUTOMATICALLY GRADE 7 OR BELOW — DO NOT INCLUDE:
+  - Any individual company earnings, upgrades, downgrades, or price targets
+  - "Concerns about", "fears of", "expected to", speculative/opinion headlines
+  - Oil price moves unless caused by a declared supply disruption
+  - Economic data releases (CPI, PPI, jobs) unless they cause an emergency Fed response
+  - Any headline about a single stock, ETF, or sector fund
 
 Headlines:
 {headlines_text}
 
 Return ONLY a valid JSON array. Include ONLY headlines graded 8+.
-For each qualifying headline use EXACTLY the source label shown in brackets — do NOT derive the source from the headline text:
+For each use EXACTLY the source label shown in brackets:
 {{
   "headline": "exact headline text",
   "source": "source label from brackets",
   "grade": 9,
-  "analysis": "2-3 sentences on market and macro context — what this means for the broader market",
-  "impact": "2-3 sentences on direct trading implications — which sectors, stocks, or asset classes are affected and how to position"
+  "analysis": "2–3 sentences: macro context and why this matters globally",
+  "impact": "2–3 sentences: which asset classes, sectors move and in which direction"
 }}
 
 If NO headlines score 8+, return: []
@@ -262,8 +282,8 @@ def is_duplicate_alert(headline: str, existing: dict) -> bool:
 
 
 def expire_seen_keys(seen: list[dict]) -> list[dict]:
-    """Expire seen keys older than 6 hours."""
-    cutoff = datetime.now(timezone.utc) - timedelta(hours=6)
+    """Expire seen keys older than 48 hours."""
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=48)
     result = []
     for s in seen:
         try:
