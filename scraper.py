@@ -113,10 +113,6 @@ INDUSTRY_TO_THEME = {
     # ── Semiconductors ──
     "Semiconductors": "Semiconductors",
     "Semiconductor Equipment & Materials": "Semiconductors",
-    "Electronic Components": "Semiconductors",
-    "Scientific & Technical Instruments": "Semiconductors",
-    "Electronics & Computer Distribution": "Semiconductors",
-    "Electrical Equipment & Parts": "Semiconductors",
 
     # ── Hardware ──
     "Computer Hardware": "Hardware",
@@ -132,8 +128,6 @@ INDUSTRY_TO_THEME = {
     # ── Electric Vehicles ──
     "Auto Manufacturers": "Electric Vehicles",
     "Auto Parts": "Electric Vehicles",
-    "Auto & Truck Dealerships": "Electric Vehicles",
-    "Recreational Vehicles": "Electric Vehicles",
 
     # ── Defense & Aerospace ──
     "Aerospace & Defense": "Defense & Aerospace",
@@ -145,11 +139,13 @@ INDUSTRY_TO_THEME = {
     "Medical Devices": "Healthcare & Biotech",
     "Medical Instruments & Supplies": "Healthcare & Biotech",
     "Health Information Services": "Healthcare & Biotech",
-    "Healthcare Plans": "Healthcare & Biotech",
     "Diagnostics & Research": "Healthcare & Biotech",
-    "Pharmaceutical Retailers": "Healthcare & Biotech",
-    "Medical Care Facilities": "Healthcare & Biotech",
-    "Medical Distribution": "Healthcare & Biotech",
+
+    # ── Healthcare Services ──
+    "Healthcare Plans": "Healthcare Services",
+    "Pharmaceutical Retailers": "Healthcare Services",
+    "Medical Care Facilities": "Healthcare Services",
+    "Medical Distribution": "Healthcare Services",
 
     # ── Fintech ──
     "Banks - Diversified": "Fintech",
@@ -157,15 +153,17 @@ INDUSTRY_TO_THEME = {
     "Capital Markets": "Fintech",
     "Financial Data & Stock Exchanges": "Fintech",
     "Asset Management": "Fintech",
-    "Insurance - Life": "Fintech",
-    "Insurance - Property & Casualty": "Fintech",
-    "Insurance - Diversified": "Fintech",
-    "Insurance - Reinsurance": "Fintech",
-    "Insurance - Specialty": "Fintech",
-    "Insurance Brokers": "Fintech",
     "Credit Services": "Fintech",
     "Financial Conglomerates": "Fintech",
     "Mortgage Finance": "Fintech",
+
+    # ── Insurance ──
+    "Insurance - Life": "Insurance",
+    "Insurance - Property & Casualty": "Insurance",
+    "Insurance - Diversified": "Insurance",
+    "Insurance - Reinsurance": "Insurance",
+    "Insurance - Specialty": "Insurance",
+    "Insurance Brokers": "Insurance",
 
     # ── Energy Traditional ──
     "Oil & Gas E&P": "Energy Traditional",
@@ -174,13 +172,17 @@ INDUSTRY_TO_THEME = {
     "Oil & Gas Refining & Marketing": "Energy Traditional",
     "Oil & Gas Equipment & Services": "Energy Traditional",
     "Oil & Gas Drilling": "Energy Traditional",
-    "Uranium": "Energy Traditional",
-    "Thermal Coal": "Energy Traditional",
-    "Coking Coal": "Energy Traditional",
-    "Utilities - Regulated Electric": "Energy Traditional",
-    "Utilities - Regulated Gas": "Energy Traditional",
-    "Utilities - Diversified": "Energy Traditional",
-    "Utilities - Independent Power Producers": "Energy Traditional",
+
+    # ── Nuclear & Coal ──
+    "Uranium": "Nuclear & Coal",
+    "Thermal Coal": "Nuclear & Coal",
+    "Coking Coal": "Nuclear & Coal",
+
+    # ── Utilities ──
+    "Utilities - Regulated Electric": "Utilities",
+    "Utilities - Regulated Gas": "Utilities",
+    "Utilities - Diversified": "Utilities",
+    "Utilities - Independent Power Producers": "Utilities",
 
     # ── Energy Renewable ──
     "Solar": "Energy Renewable",
@@ -244,9 +246,6 @@ INDUSTRY_TO_THEME = {
     "Airports & Air Services": "Transportation & Logistics",
     "Marine Shipping": "Transportation & Logistics",
     "Integrated Freight & Logistics": "Transportation & Logistics",
-    "Travel Services": "Transportation & Logistics",
-    "Lodging": "Transportation & Logistics",
-    "Restaurants": "Transportation & Logistics",
 
     # ── Industrial Automation ──
     "Specialty Industrial Machinery": "Industrial Automation",
@@ -254,6 +253,11 @@ INDUSTRY_TO_THEME = {
 
     # ── Industrials ──
     "Industrial Distribution": "Industrials",
+    # moved from Semiconductors (electronic components/distribution ≠ chip design)
+    "Electronic Components": "Industrials",
+    "Scientific & Technical Instruments": "Industrials",
+    "Electronics & Computer Distribution": "Industrials",
+    "Electrical Equipment & Parts": "Industrials",
     "Building Products & Equipment": "Industrials",
     "Engineering & Construction": "Industrials",
     "Conglomerates": "Industrials",
@@ -289,6 +293,15 @@ INDUSTRY_TO_THEME = {
     "Internet Retail": "E-Commerce",
     "Leisure": "Consumer Goods",
 
+    # moved from Electric Vehicles (dealerships/RVs ≠ EV pure-play)
+    "Auto & Truck Dealerships": "Consumer Goods",
+    "Recreational Vehicles": "Consumer Goods",
+
+    # moved from Transportation & Logistics (hospitality ≠ freight)
+    "Travel Services": "Consumer Goods",
+    "Lodging": "Consumer Goods",
+    "Restaurants": "Consumer Goods",
+
     # ── Shell ──
     "Shell Companies": "Other",
 }
@@ -309,8 +322,9 @@ INDUSTRY_TO_SUBTHEME = {
     # Semiconductors
     "Semiconductors": "Compute",
     "Semiconductor Equipment & Materials": "Foundries",
+    # moved to Industrials
     "Electronic Components": "Electronic Components",
-    "Scientific & Technical Instruments": "Design Tools",
+    "Scientific & Technical Instruments": "Instruments",
     "Electronics & Computer Distribution": "Distribution",
     "Electrical Equipment & Parts": "Electronic Components",
 
@@ -328,8 +342,9 @@ INDUSTRY_TO_SUBTHEME = {
     # Electric Vehicles
     "Auto Manufacturers": "Manufacturers",
     "Auto Parts": "Suppliers",
-    "Auto & Truck Dealerships": "Fleets",
-    "Recreational Vehicles": "Fleets",
+    # moved to Consumer Goods
+    "Auto & Truck Dealerships": "Auto Retail",
+    "Recreational Vehicles": "Leisure",
 
     # Defense & Aerospace
     "Aerospace & Defense": "Aviation",
@@ -442,7 +457,8 @@ INDUSTRY_TO_SUBTHEME = {
     "Airports & Air Services": "Air Travel",
     "Marine Shipping": "Maritime",
     "Integrated Freight & Logistics": "Logistics",
-    "Travel Services": "Air Travel",
+    # moved to Consumer Goods
+    "Travel Services": "Travel",
     "Lodging": "Lodging",
     "Restaurants": "Food",
 
