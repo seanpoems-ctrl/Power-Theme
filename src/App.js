@@ -467,6 +467,12 @@ function normalizeThemeRaw(t) {
   return { ...t, subthemes: [{ name: t.name, stocks: t.stocks || [] }] };
 }
 
+function formatSubthemeName(name) {
+  const idx = name.indexOf(' - ');
+  if (idx === -1) return name;
+  return '- ' + name.slice(idx + 3);
+}
+
 const PerfCellLB = ({ val }) => {
   if (val == null) return <td className="px-1 py-1.5 text-center text-[11px] text-zinc-600">—</td>;
   const color = val > 0 ? 'text-emerald-400' : val < 0 ? 'text-red-400' : 'text-zinc-400';
@@ -891,7 +897,7 @@ const SubThemeSection = ({ subtheme, parentAvg, lbPerfKey, spyPerf, rsSPYKey, is
       <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-3 py-2 bg-zinc-800/40 hover:bg-zinc-800/60 rounded-md border border-zinc-700/30 transition-colors">
         <div className="flex items-center gap-2">
           {open ? <ChevronDown size={12} className="text-zinc-500"/> : <ChevronRight size={12} className="text-zinc-500"/>}
-          <span className="text-[13px] font-medium text-zinc-300">{subtheme.name}</span>
+          <span className="text-[13px] font-medium text-zinc-300">{formatSubthemeName(subtheme.name)}</span>
           <span className="text-[11px] text-zinc-600 bg-zinc-700/30 px-1.5 py-0.5 rounded">{subtheme.stocks.length}</span>
           {hasDivergence && (
             <span className="flex items-center gap-0.5 px-1.5 py-0.5 bg-yellow-500/15 border border-yellow-500/30 rounded text-[11px] text-yellow-400 font-medium">
