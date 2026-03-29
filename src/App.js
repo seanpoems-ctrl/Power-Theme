@@ -3750,12 +3750,12 @@ const filtered = useMemo(() => {
 
       {tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
         <div className="max-w-[1400px] mx-auto px-4 pt-2 pb-4">
-          <div className="flex justify-between items-start mb-2">
+          <div className="flex items-start gap-6 mb-2">
             <div className="w-[420px] flex-shrink-0 flex flex-col gap-4">
               <VixGauge initialVix={data?.vix}/>
               <ScannerBriefFeed briefData={briefData} newsData={newsData}/>
             </div>
-            <div className="w-[624px] flex-shrink-0">
+            <div className="flex-1 min-w-0">
               {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
             </div>
           </div>
