@@ -3750,74 +3750,10 @@ const filtered = useMemo(() => {
 
       {tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
         <div className="max-w-[1400px] mx-auto px-4 pt-2 pb-4">
-          <div className="flex gap-4 items-start mb-2">
+          <div className="flex justify-between items-start mb-2">
             <div className="w-[420px] flex-shrink-0 flex flex-col gap-4">
               <VixGauge initialVix={data?.vix}/>
               <ScannerBriefFeed briefData={briefData} newsData={newsData}/>
-            </div>
-            {/* ── Middle: Market Condition ── */}
-            <div className="flex-1 min-w-0">
-              {data?.market_condition && (() => {
-                const { signal, spy, qqq, breadth_50d, breadth_200d } = data.market_condition;
-                const sigCfg = signal === "green"
-                  ? { dot: "bg-emerald-400", glow: "#34d39980", border: "border-emerald-500/30", bg: "bg-emerald-500/[0.06]", label: "Market Uptrend",    guide: "正常執行突破單 — SPY & QQQ 站上所有均線" }
-                  : signal === "yellow"
-                  ? { dot: "bg-amber-400",   glow: "#fbbf2480", border: "border-amber-500/30",  bg: "bg-amber-500/[0.06]",  label: "Market Correction", guide: "暫停常規突破，只做 RS 最強的少數股票" }
-                  : { dot: "bg-red-400",     glow: "#f8717180", border: "border-red-500/30",    bg: "bg-red-500/[0.06]",    label: "Market Downtrend",  guide: "停止所有新倉突破單，現金為王" };
-
-                const statusCls = st =>
-                  st === "Strong"   ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/30"
-                  : st === "Mediocre" ? "text-amber-400   bg-amber-500/10  border-amber-500/30"
-                  : st === "Lagging"  ? "text-orange-400  bg-orange-500/10 border-orange-500/30"
-                  : st === "Weak"     ? "text-red-400     bg-red-500/10    border-red-500/30"
-                  : "text-zinc-400 bg-zinc-800/40 border-zinc-700/30";
-
-                const pctCls = v => v == null ? "text-zinc-600" : v > 0 ? "text-emerald-400" : "text-red-400";
-                const fmt    = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(2)}%`;
-
-                const IndexRow = ({ label, d }) => !d ? null : (
-                  <div className="py-2.5 border-b border-zinc-800/50 last:border-0">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <span className="text-[11px] font-mono font-semibold text-zinc-400 w-7">{label}</span>
-                      <span className="text-[14px] font-mono text-zinc-200">${d.price?.toFixed(2) ?? "—"}</span>
-                      <span className={`text-[12px] font-mono ${pctCls(d.change_pct)}`}>{fmt(d.change_pct)}</span>
-                      {d.index_status && (
-                        <span className={`ml-auto text-[10px] font-semibold px-1.5 py-0.5 rounded border ${statusCls(d.index_status)}`}>{d.index_status}</span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-3 pl-9 text-[11px]">
-                      <span className="text-zinc-600">vs 50MA</span>
-                      <span className={`font-mono ${pctCls(d.sma50_pct)}`}>{fmt(d.sma50_pct)}</span>
-                      <span className="text-zinc-700">·</span>
-                      <span className="text-zinc-600">vs 200MA</span>
-                      <span className={`font-mono ${pctCls(d.sma200_pct)}`}>{fmt(d.sma200_pct)}</span>
-                    </div>
-                  </div>
-                );
-
-                return (
-                  <div className={`rounded-xl border ${sigCfg.border} ${sigCfg.bg} p-3 flex flex-col gap-0`}>
-                    {/* Signal header */}
-                    <div className="flex items-center gap-2 pb-2.5 border-b border-zinc-800/50">
-                      <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${sigCfg.dot}`} style={{ boxShadow: `0 0 7px 2px ${sigCfg.glow}` }}/>
-                      <span className="text-[13px] font-semibold text-zinc-200">{sigCfg.label}</span>
-                    </div>
-                    {/* SPY / QQQ rows */}
-                    <IndexRow label="SPY" d={spy}/>
-                    <IndexRow label="QQQ" d={qqq}/>
-                    {/* Breadth */}
-                    {(breadth_50d != null || breadth_200d != null) && (
-                      <div className="flex items-center gap-3 pt-2.5 border-t border-zinc-800/50 text-[11px]">
-                        <span className="text-zinc-500">Breadth</span>
-                        {breadth_50d  != null && <><span className="text-zinc-600">S5FI 50D</span><span className={`font-mono ${breadth_50d  >= 60 ? "text-emerald-400" : breadth_50d  >= 40 ? "text-amber-400" : "text-red-400"}`}>{breadth_50d.toFixed(1)}%</span></>}
-                        {breadth_200d != null && <><span className="text-zinc-700">·</span><span className="text-zinc-600">MMTH 200D</span><span className={`font-mono ${breadth_200d >= 60 ? "text-emerald-400" : breadth_200d >= 40 ? "text-amber-400" : "text-red-400"}`}>{breadth_200d.toFixed(1)}%</span></>}
-                      </div>
-                    )}
-                    {/* Guidance */}
-                    <p className="text-[11px] text-zinc-500 pt-2.5 border-t border-zinc-800/50 mt-0.5">{sigCfg.guide}</p>
-                  </div>
-                );
-              })()}
             </div>
             <div className="w-[624px] flex-shrink-0">
               {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
