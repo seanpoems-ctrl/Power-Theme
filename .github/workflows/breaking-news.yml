@@ -5,6 +5,10 @@ on:
     - cron: "*/5 * * * *"      # Every 5 min, every day including weekends/holidays
   workflow_dispatch: {}
 
+concurrency:
+  group: breaking-news
+  cancel-in-progress: true  # Cancel queued run — seen_keys are committed after each run
+
 jobs:
   breaking-news:
     runs-on: ubuntu-latest
