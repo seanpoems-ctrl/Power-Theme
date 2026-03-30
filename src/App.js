@@ -1729,7 +1729,7 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
       {global_snapshot.length > 0 && (
         <div>
           <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">1. Global Snapshot</div>
-          <table className="w-full text-[10px]">
+          <table className="w-auto text-[10px]">
             <thead>
               <tr className="text-zinc-600 border-b border-zinc-800/60">
                 <th className="text-left py-0.5 font-medium">Asset</th>
