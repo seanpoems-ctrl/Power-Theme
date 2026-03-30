@@ -1165,16 +1165,15 @@ const VIX_ZONES = [
 ];
 
 const VixGauge = ({ initialVix }) => {
-  const [vix, setVix] = useState(initialVix ?? 18);
-  useEffect(() => { if (initialVix != null) setVix(initialVix); }, [initialVix]);
+  const vix = initialVix ?? 18;
 
   const VMAX = 40;
   const zoneOf = v => VIX_ZONES.find(z => v >= z.vMin && v < z.vMax) ?? VIX_ZONES[VIX_ZONES.length - 1];
   const active = zoneOf(vix);
   const expectedMovePct = vix / 16;
 
-  /* Marker position: clamp vix to [0, VMAX], map to 0–100% */
-  const markerPct = Math.min(Math.max(vix, 0), VMAX) / VMAX * 100;
+  /* Arrow position: clamp vix to [0, VMAX], map to 0–100% */
+  const arrowPct = Math.min(Math.max(vix, 0), VMAX) / VMAX * 100;
 
   return (
     <div className="px-5 pt-2 pb-3 bg-zinc-900/60 border border-zinc-800/50 rounded-xl h-[240px] flex flex-col">
@@ -1192,40 +1191,32 @@ const VixGauge = ({ initialVix }) => {
         <span className="text-[11px] font-bold uppercase tracking-widest" style={{ color: active.color, opacity: 0.75 }}>{active.name}</span>
       </div>
 
-      {/* Gradient bar */}
-      <div className="relative mb-1">
-        {/* Bar */}
-        <div className="h-4 rounded-full overflow-visible relative"
-          style={{ background: 'linear-gradient(to right, #00e676 0%, #00e676 30%, #ffee58 30%, #ffee58 50%, #ff9100 50%, #ff9100 75%, #ff1744 75%, #ff1744 100%)' }}>
-          {/* Marker */}
-          <div className="absolute top-1/2 -translate-y-1/2 w-3.5 h-5 rounded-sm border-2 border-zinc-900 shadow-lg transition-all duration-300"
-            style={{ left: `calc(${markerPct}% - 7px)`, background: active.color }} />
+      {/* Gradient bar + arrow */}
+      <div className="relative mb-3">
+        {/* Arrow above bar */}
+        <div className="relative h-4 mb-0.5">
+          <div className="absolute transition-all duration-300"
+            style={{ left: `calc(${arrowPct}% - 5px)` }}>
+            {/* Down-pointing triangle */}
+            <svg width="10" height="8" viewBox="0 0 10 8">
+              <polygon points="5,8 0,0 10,0" fill={active.color} />
+            </svg>
+          </div>
         </div>
-        {/* Zone labels */}
-        <div className="flex justify-between mt-1 px-0">
+        {/* Bar */}
+        <div className="h-3.5 rounded-full"
+          style={{ background: 'linear-gradient(to right, #00e676 0%, #00e676 30%, #ffee58 30%, #ffee58 50%, #ff9100 50%, #ff9100 75%, #ff1744 75%, #ff1744 100%)' }} />
+        {/* Tick labels */}
+        <div className="flex mt-1">
           {VIX_ZONES.map((z, i) => (
-            <span key={i} className="text-[9px] font-mono text-zinc-600"
-              style={{ width: `${(z.vMax - z.vMin) / VMAX * 100}%`, textAlign: i === 0 ? 'left' : i === VIX_ZONES.length - 1 ? 'right' : 'center' }}>
+            <div key={i} className="text-[9px] font-mono text-zinc-600 flex-shrink-0"
+              style={{ width: `${(z.vMax - z.vMin) / VMAX * 100}%` }}>
               {z.vMin}
-            </span>
+            </div>
           ))}
           <span className="text-[9px] font-mono text-zinc-600">40</span>
         </div>
       </div>
-
-      {/* Slider */}
-      <div className="flex items-center gap-2 mb-2">
-        <input type="range" min="0" max="45" step="0.5" value={vix}
-          onChange={e => setVix(parseFloat(e.target.value))}
-          className="flex-1 min-w-0 accent-zinc-400 h-1 cursor-pointer"/>
-      </div>
-      {initialVix != null && (
-        <button onClick={() => setVix(initialVix)}
-          style={{ visibility: vix !== initialVix ? 'visible' : 'hidden' }}
-          className="w-full text-center py-0.5 text-[10px] font-medium rounded border border-zinc-700/60 bg-zinc-800/60 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600 transition-colors mb-2">
-          Restore {initialVix.toFixed(1)}
-        </button>
-      )}
 
       {/* Zone info */}
       <div className="flex-1 min-h-0 overflow-hidden">
