@@ -1733,9 +1733,9 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
             <thead>
               <tr className="text-zinc-600 border-b border-zinc-800/60">
                 <th className="text-left py-0.5 font-medium">Asset</th>
-                <th className="text-right py-0.5 font-medium">{priceLabel}</th>
-                <th className="text-right py-0.5 font-medium">Chg</th>
-                <th className="text-right py-0.5 pl-3 font-medium w-[90px]">%</th>
+                <th className="text-left py-0.5 font-medium pl-2">{priceLabel}</th>
+                <th className="text-left py-0.5 font-medium pl-2">Chg</th>
+                <th className="text-left py-0.5 font-medium pl-2">%</th>
               </tr>
             </thead>
             <tbody>
@@ -1748,15 +1748,15 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
                 return (
                   <tr key={i} className="border-b border-zinc-800/30 last:border-0">
                     <td className="py-0.5 text-zinc-300 font-medium">{row.label}</td>
-                    <td className="py-0.5 text-right font-mono text-zinc-200">
+                    <td className="py-0.5 pl-2 font-mono text-zinc-200">
                       {row.price != null
                         ? isYield ? `${row.price.toFixed(2)}%` : row.price.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
                         : "—"}
                     </td>
-                    <td className={`py-0.5 text-right font-mono ${chg >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                    <td className={`py-0.5 pl-2 font-mono ${chg >= 0 ? "text-emerald-400" : "text-red-400"}`}>
                       {row.change != null ? `${chg >= 0 ? "+" : ""}${chg.toFixed(2)}` : "—"}
                     </td>
-                    <td className={`py-0.5 text-right pl-3 font-mono ${
+                    <td className={`py-0.5 pl-2 font-mono ${
                       (row.zone_label || row.trend_label)
                         ? (isVix && (row.zone_label || "").includes("Fear") ? "text-red-400" : isVix ? "text-amber-400" : chg >= 0 ? "text-amber-400" : "text-emerald-400")
                         : (row.change_pct ?? 0) >= 0 ? "text-emerald-400" : "text-red-400"
@@ -1912,15 +1912,15 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
       )}
 
       {/* Card */}
-      <div className="px-4 pt-4 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex flex-col flex-1 min-h-0">
+      <div className="px-3 pt-3 pb-3 bg-zinc-900/60 border border-zinc-800/50 rounded-xl flex flex-col flex-1 min-h-0">
         {/* Header */}
         <div className="mb-3 pb-2 border-b border-zinc-800/60">
-          <div className="flex items-center justify-between gap-2 mb-1.5">
+          <div className="flex items-start gap-2 mb-1.5">
             <div className="flex items-center gap-1.5">
               <span className="text-sm">{sessionEmoji}</span>
               <span className="text-[11px] font-bold text-zinc-300 uppercase tracking-wide">{session ? `${session} Brief` : "Market Brief"}</span>
             </div>
-            <div className="text-right flex-shrink-0">
+            <div className="flex-shrink-0 ml-2">
               {generated_at && <div className="text-[10px] text-zinc-600">{generated_at}</div>}
               <div className="text-[10px] text-zinc-500">Next: {getNextBriefTime()}</div>
             </div>
