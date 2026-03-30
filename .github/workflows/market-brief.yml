@@ -2,8 +2,8 @@ name: Market Brief (AM + PM)
 
 on:
   schedule:
-    - cron: "15 12 * * 1-5"   # 08:15 ET (EDT/UTC-4) | 07:15 ET (EST/UTC-5)
-    - cron: "0 21 * * 1-5"    # 17:00 ET (EDT/UTC-4) | 16:00 ET (EST/UTC-5)
+    - cron: "17 12 * * 1-5"   # 08:17 ET (EDT/UTC-4) | 07:17 ET (EST/UTC-5)
+    - cron: "3 21 * * 1-5"    # 17:03 ET (EDT/UTC-4) | 16:03 ET (EST/UTC-5)
   workflow_dispatch: {}
 
 jobs:

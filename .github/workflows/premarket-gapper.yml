@@ -5,7 +5,7 @@ name: Pre-Market Gapper Scan
 
 on:
   schedule:
-    - cron: "*/5 11-17 * * 1-5"  # Every 5 min, 11:00–17:55 UTC (wide buffer for GHA delays)
+    - cron: "33 12 * * 1-5"  # 08:33 ET (EDT/UTC-4) | 07:33 ET (EST/UTC-5)
   workflow_dispatch: {}
 
 concurrency:
