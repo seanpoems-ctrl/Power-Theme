@@ -687,7 +687,7 @@ const TVPopup = ({ ticker, anchorRect, chartUrl }) => {
   const src = chartUrl || `https://finviz.com/chart.ashx?t=${encodeURIComponent(ticker)}&ty=c&ta=1&p=d&s=l`;
   return (
     <div style={{ position:"fixed", left, top, width:W, height:H, zIndex:9999, borderRadius:8, overflow:"hidden", border:"1px solid #27272a", boxShadow:"0 24px 64px rgba(0,0,0,0.85)", pointerEvents:"none", background:"#fff" }}>
-      <img src={src} alt={ticker} style={{ width:"100%", height:"100%", objectFit:"fill", display:"block" }}/>
+      <img src={src} alt={ticker} referrerPolicy="no-referrer" style={{ width:"100%", height:"100%", objectFit:"fill", display:"block" }}/>
     </div>
   );
 };
