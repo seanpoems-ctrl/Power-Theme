@@ -1202,7 +1202,7 @@ const VixGauge = ({ initialVix }) => {
   const expectedMovePct = vix / 16;
 
   return (
-    <div className="px-5 pt-2 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl h-[300px]">
+    <div className="px-5 pt-2 pb-3 bg-zinc-900/60 border border-zinc-800/50 rounded-xl h-[240px]">
 
       {/* Header */}
       <div className="flex items-center justify-between mb-1">
@@ -1215,7 +1215,7 @@ const VixGauge = ({ initialVix }) => {
       {/* Left: gauge + slider under dial (matches reference); right: zone info */}
       <div className="flex items-stretch gap-3">
         <div className="flex flex-col flex-shrink-0" style={{ width: gaugeColW }}>
-        <svg viewBox="0 20 400 240" className="h-auto block w-full" style={{ overflow: 'visible' }}>
+        <svg viewBox="0 20 400 210" className="h-auto block w-full" style={{ overflow: 'visible' }}>
           <defs>
             <filter id="vg-needle-shadow" x="-50%" y="-20%" width="200%" height="140%">
               <feGaussianBlur stdDeviation="2" result="b"/>
