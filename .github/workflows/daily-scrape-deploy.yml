@@ -5,9 +5,9 @@ name: Daily scrape & deploy
 
 on:
   schedule:
-    - cron: "*/5 12-22 * * 1-5"  # Every 5 min, 12:00–22:55 UTC (covers 9AM-5PM ET both EDT and EST)
-    - cron: "35 20 * * 1-5"      # 4:35 PM EDT — Finviz finalizes closing data at 4:30 PM ET
-    - cron: "35 21 * * 1-5"      # 4:35 PM EST — same, winter offset
+    - cron: "*/5 12-22 * * *"    # Every 5 min, 12:00–22:55 UTC (covers 9AM-5PM ET both EDT and EST) — runs 7 days
+    - cron: "35 20 * * *"        # 4:35 PM EDT — Finviz finalizes closing data at 4:30 PM ET
+    - cron: "35 21 * * *"        # 4:35 PM EST — same, winter offset
   workflow_dispatch: {}
 
 concurrency:
@@ -36,33 +36,29 @@ jobs:
           python-version: "3.12"
 
       - name: Install Python deps
-        run: pip install requests beautifulsoup4 exchange-calendars yfinance lxml
+        run: pip install requests beautifulsoup4 yfinance lxml
 
-      - name: Check NYSE trading day + ET window (9:00 AM – 5:00 PM)
+      - name: Check ET window (9:00 AM – 5:00 PM) — runs every day including weekends/holidays
         id: trading_day
         run: |
           python - <<'EOF'
-          import exchange_calendars as xcals, os
-          from datetime import date, datetime
+          import os
+          from datetime import datetime
           from zoneinfo import ZoneInfo
 
           # workflow_dispatch (manual trigger) bypasses window check
           is_manual = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
 
-          nyse = xcals.get_calendar("XNYS")
-          today = date.today().isoformat()
-          is_session = nyse.is_session(today)
-
           et_now = datetime.now(ZoneInfo("America/New_York"))
           et_minutes = et_now.hour * 60 + et_now.minute
-          in_window = 540 <= et_minutes <= 1020  # 9:00 AM – 5:00 PM ET (Finviz finalizes at 4:30 PM ET)
+          in_window = 540 <= et_minutes <= 1020  # 9:00 AM – 5:00 PM ET
 
           if is_manual:
               should_run = True
-              print(f"Manual trigger — forcing run (session: {is_session}, ET: {et_now.strftime('%H:%M')})")
+              print(f"Manual trigger — forcing run (ET: {et_now.strftime('%H:%M')})")
           else:
-              should_run = is_session and in_window
-              print(f"NYSE session: {is_session} | ET: {et_now.strftime('%H:%M')} | in window: {in_window} | will run: {should_run}")
+              should_run = in_window
+              print(f"ET: {et_now.strftime('%H:%M')} | in window: {in_window} | will run: {should_run}")
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write(f"is_trading_day={'true' if should_run else 'false'}\n")
           EOF

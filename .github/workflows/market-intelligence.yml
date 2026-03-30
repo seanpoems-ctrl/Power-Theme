@@ -2,8 +2,8 @@ name: Market Intelligence Engine
 
 on:
   schedule:
-    - cron: "30 12 * * 1-5"   # 07:30 ET (UTC-5 / EST)
-    - cron: "30 21 * * 1-5"   # 16:30 ET (UTC-5 / EST)
+    - cron: "30 12 * * *"     # 07:30 ET (UTC-5 / EST) — runs every day including weekends/holidays
+    - cron: "30 21 * * *"     # 16:30 ET (UTC-5 / EST) — runs every day including weekends/holidays
   workflow_dispatch: {}
 
 jobs:
@@ -25,18 +25,15 @@ jobs:
       - name: Install deps
         run: |
           pip install requests httpx yfinance pandas python-dotenv google-genai \
-                      tradingview-screener exchange-calendars beautifulsoup4
+                      tradingview-screener beautifulsoup4
 
-      - name: Check trading day
+      - name: Always run — no trading day restriction
         id: trading_day
         run: |
           python - <<'EOF'
-          import exchange_calendars as xcals, os
-          from datetime import date
-          nyse = xcals.get_calendar("XNYS")
-          is_session = nyse.is_session(date.today().isoformat())
+          import os
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
-              f.write(f"is_trading_day={'true' if is_session else 'false'}\n")
+              f.write("is_trading_day=true\n")
           EOF
 
       - name: Run Market Briefing Engine

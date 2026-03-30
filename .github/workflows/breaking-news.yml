@@ -2,7 +2,7 @@ name: Emergency News Monitor
 
 on:
   schedule:
-    - cron: "*/5 * * * 1-5"    # Every 5 min, Mon–Fri
+    - cron: "*/5 * * * *"      # Every 5 min, every day including weekends/holidays
   workflow_dispatch: {}
 
 jobs:
