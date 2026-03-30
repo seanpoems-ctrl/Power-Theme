@@ -1171,63 +1171,106 @@ const VixGauge = ({ initialVix }) => {
   const zoneOf = v => VIX_ZONES.find(z => v >= z.vMin && v < z.vMax) ?? VIX_ZONES[VIX_ZONES.length - 1];
   const active = zoneOf(vix);
   const expectedMovePct = vix / 16;
-
-  /* Arrow position: clamp vix to [0, VMAX], map to 0–100% */
   const arrowPct = Math.min(Math.max(vix, 0), VMAX) / VMAX * 100;
 
+  /* Glow color for ambient effect */
+  const glowRgb = active.color === '#00e676' ? '0,230,118'
+    : active.color === '#ffee58' ? '255,238,88'
+    : active.color === '#ff9100' ? '255,145,0'
+    : '255,23,68';
+
   return (
-    <div className="px-5 pt-2 pb-3 bg-zinc-900/60 border border-zinc-800/50 rounded-xl h-[240px] flex flex-col">
+    <div className="px-5 pt-3 pb-4 rounded-2xl h-[240px] flex flex-col relative overflow-hidden"
+      style={{
+        background: 'linear-gradient(145deg, #141414 0%, #0f0f0f 100%)',
+        border: `1px solid rgba(${glowRgb},0.18)`,
+        boxShadow: `0 0 32px rgba(${glowRgb},0.07), inset 0 1px 0 rgba(255,255,255,0.04)`,
+      }}>
+
+      {/* Ambient glow blob */}
+      <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full pointer-events-none"
+        style={{ background: `radial-gradient(circle, rgba(${glowRgb},0.12) 0%, transparent 70%)` }} />
 
       {/* Header */}
-      <div className="flex items-center gap-2 mb-3">
-        <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-widest">VIX Fear Gauge</span>
-        <span className="text-[10px] text-zinc-700 border border-zinc-800 rounded px-1.5 py-0.5">CBOE · SPX</span>
+      <div className="flex items-center justify-between mb-2 relative z-10">
+        <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.18em]">VIX Fear Gauge</span>
+        <span className="text-[9px] text-zinc-700 border border-zinc-800/80 rounded-md px-1.5 py-0.5 font-mono tracking-wider">CBOE · SPX</span>
       </div>
 
-      {/* VIX number */}
-      <div className="flex items-baseline gap-2 mb-3">
-        <span className="text-4xl font-extrabold font-mono tabular-nums leading-none transition-colors duration-300"
-          style={{ color: active.color }}>{vix.toFixed(1)}</span>
-        <span className="text-[11px] font-bold uppercase tracking-widest" style={{ color: active.color, opacity: 0.75 }}>{active.name}</span>
+      {/* VIX number + badge */}
+      <div className="flex items-end gap-3 mb-auto relative z-10">
+        <div>
+          <span className="text-[46px] font-black font-mono tabular-nums leading-none"
+            style={{
+              color: active.color,
+              textShadow: `0 0 24px rgba(${glowRgb},0.55), 0 0 8px rgba(${glowRgb},0.3)`,
+              letterSpacing: '-0.02em',
+            }}>
+            {vix.toFixed(1)}
+          </span>
+        </div>
+        <div className="mb-1.5 flex flex-col gap-0.5">
+          <span className="text-[9px] font-bold uppercase tracking-[0.15em] leading-none"
+            style={{ color: active.color, opacity: 0.6 }}>VIX Index</span>
+          <span className="text-[11px] font-extrabold uppercase tracking-wider leading-tight"
+            style={{ color: active.color }}>{active.name}</span>
+        </div>
       </div>
 
-      {/* Gradient bar + arrow */}
-      <div className="relative mb-3">
-        {/* Arrow above bar */}
-        <div className="relative h-4 mb-0.5">
-          <div className="absolute transition-all duration-300"
-            style={{ left: `calc(${arrowPct}% - 5px)` }}>
-            {/* Down-pointing triangle */}
-            <svg width="10" height="8" viewBox="0 0 10 8">
-              <polygon points="5,8 0,0 10,0" fill={active.color} />
+      {/* Gradient bar section */}
+      <div className="relative mt-3 mb-1 z-10">
+        {/* Arrow marker */}
+        <div className="relative h-3 mb-1">
+          <div className="absolute transition-all duration-500" style={{ left: `calc(${arrowPct}% - 6px)` }}>
+            <svg width="12" height="9" viewBox="0 0 12 9">
+              <defs>
+                <filter id="arrow-glow">
+                  <feGaussianBlur stdDeviation="1.5" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <polygon points="6,9 0,0 12,0" fill={active.color} filter="url(#arrow-glow)" />
             </svg>
           </div>
         </div>
-        {/* Bar */}
-        <div className="h-3.5 rounded-full"
-          style={{ background: 'linear-gradient(to right, #00e676 0%, #00e676 30%, #ffee58 30%, #ffee58 50%, #ff9100 50%, #ff9100 75%, #ff1744 75%, #ff1744 100%)' }} />
+
+        {/* Bar with inner shadow and segment dividers */}
+        <div className="relative h-2.5 rounded-full overflow-hidden"
+          style={{
+            background: 'linear-gradient(to right, #00e676 0%, #39e07a 30%, #ffee58 30%, #ffd600 50%, #ff9100 50%, #ff6d00 75%, #ff1744 75%, #d50000 100%)',
+            boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.5), inset 0 -1px 0 rgba(255,255,255,0.06)',
+          }}>
+          {/* Segment dividers */}
+          {[30, 50, 75].map(p => (
+            <div key={p} className="absolute top-0 bottom-0 w-px"
+              style={{ left: `${p}%`, background: 'rgba(0,0,0,0.4)' }} />
+          ))}
+          {/* Gloss overlay */}
+          <div className="absolute inset-0 rounded-full"
+            style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.12) 0%, transparent 60%)' }} />
+        </div>
+
         {/* Tick labels */}
         <div className="flex mt-1">
           {VIX_ZONES.map((z, i) => (
-            <div key={i} className="text-[9px] font-mono text-zinc-600 flex-shrink-0"
+            <div key={i} className="flex-shrink-0 text-[9px] font-mono text-zinc-700"
               style={{ width: `${(z.vMax - z.vMin) / VMAX * 100}%` }}>
               {z.vMin}
             </div>
           ))}
-          <span className="text-[9px] font-mono text-zinc-600">40</span>
+          <span className="text-[9px] font-mono text-zinc-700">40</span>
         </div>
       </div>
 
-      {/* Zone info */}
-      <div className="flex-1 min-h-0 overflow-hidden">
-        <div className="flex flex-col gap-0.5 h-full">
-          <div className="flex items-baseline gap-3 flex-shrink-0">
-            <span className="text-[10px] text-zinc-500 font-semibold uppercase tracking-widest">Expected Move</span>
-            <span className="text-[11px] text-zinc-500 font-mono shrink-0">$SPX</span>
-            <span className="text-sm font-bold font-mono text-zinc-100 tabular-nums leading-none">±{expectedMovePct.toFixed(2)}%</span>
-          </div>
-          <div className="text-[11px] text-zinc-500 leading-relaxed overflow-y-auto mt-0.5">{active.impact}</div>
+      {/* Expected move + description */}
+      <div className="mt-2 pt-2 border-t z-10 relative" style={{ borderColor: `rgba(${glowRgb},0.12)` }}>
+        <div className="flex items-center gap-2 mb-0.5">
+          <span className="text-[9px] font-bold text-zinc-600 uppercase tracking-[0.14em]">Expected Move</span>
+          <span className="text-[9px] text-zinc-700 font-mono">$SPX</span>
+          <span className="text-[13px] font-extrabold font-mono tabular-nums ml-auto"
+            style={{ color: active.color }}>±{expectedMovePct.toFixed(2)}%</span>
         </div>
+        <p className="text-[10px] leading-relaxed text-zinc-600 line-clamp-2">{active.impact}</p>
       </div>
 
     </div>
