@@ -1,88 +1,88 @@
 {
-  "generated_at": "March 27, 2026 (18:35 EDT)",
-  "session": "Post-Market",
+  "generated_at": "March 30, 2026 (12:11 EDT)",
+  "session": "Market Hours",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6368.85,
-      "change": -108.31,
-      "change_pct": -1.67
+      "price": 6390.46,
+      "change": 21.61,
+      "change_pct": 0.34
     },
     {
       "label": "Nasdaq 100",
-      "price": 23132.77,
-      "change": -454.22,
-      "change_pct": -1.93
+      "price": 23150.03,
+      "change": 17.26,
+      "change_pct": 0.07
     },
     {
       "label": "VIX",
-      "price": 31.05,
-      "change": 3.61,
+      "price": 29.79,
+      "change": -1.26,
       "change_pct": null,
-      "zone_label": "Fear"
+      "zone_label": "Anxiety Zone"
     },
     {
       "label": "10Y Yield",
-      "price": 4.44,
-      "change": 0.02,
+      "price": 4.34,
+      "change": -0.1,
       "change_pct": null,
-      "trend_label": "Stable"
+      "trend_label": "Falling"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 53603.65,
-      "change_pct": -0.27
+      "price": 53373.07,
+      "change_pct": -0.43
     },
     "dax": {
       "label": "DAX",
-      "price": 22300.75,
-      "change_pct": -1.38
+      "price": 22562.88,
+      "change_pct": 1.18
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 9967.35,
-      "change_pct": -0.05
+      "price": 10127.96,
+      "change_pct": 1.61
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 24.2,
-    "mmth": 47.0,
+    "s5fi": 26.4,
+    "mmth": 47.7,
     "breadth_flush": false,
     "generational": false,
-    "breadth_status": "FLUSH WATCH"
+    "breadth_status": ""
   },
   "reversal_signals": {
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Distribution / Broad Weakness",
+  "mood": "Fragile Recovery, High Volatility",
   "analysis": {
-    "analysis_para1": "Global markets displayed a mixed but largely negative tone today, with the DAX leading European declines at -1.38% while the Nikkei saw a modest -0.27% dip. This international caution dovetailed into significant domestic selling, as evidenced by the S&P 500's -1.67% drop and the Nasdaq 100's deeper -1.93% decline. Market breadth remains alarmingly weak, with only 24.2% of S&P 500 stocks above their 50-day moving average (S5FI) and less than half, 47.0%, above their 200-day moving average (MMTH), indicating broad underlying distribution. The BAML HY Spread remains in an unknown regime, but the stable 10-year yield at 4.44% offers little comfort against the rapidly rising VIX at 31.05.",
-    "analysis_para2": "The immediate mechanical plan involves monitoring for a decisive shift in market character and controlling risk. For the S&P 500, a key support level to watch is the 6300 mark; a breach could accelerate downside momentum significantly. Conversely, a sustained close above 6450, accompanied by a significant drop in the VIX below 28, would be a preliminary signal of exhaustion in selling pressure. We must also observe breadth indicators for any meaningful improvement, particularly S5FI rising above 30%, before considering tactical long positions. Until then, protecting capital and focusing on defensive or high-quality names remains paramount.",
-    "technical_signal": "No reversal pattern confirmed yet. Today's steep declines in major indices and elevated VIX indicate ongoing bearish momentum.",
+    "analysis_para1": "European markets rallied strongly today with DAX up +1.18% and FTSE 100 gaining +1.61%, contrasting with the Nikkei's -0.43% dip. Despite the S&P 500's modest +0.34% advance, US market breadth remains concerning, with only 26.4% of stocks above their 50-day moving average (S5FI) and 47.7% above their 200-day (MMTH). This narrow participation, combined with the 10-year yield falling to 4.34% and the VIX remaining elevated at 29.79, suggests underlying caution despite headline index gains. The unknown BAML HY Spread regime prevents a clear read on corporate credit, but the falling yield hints at potential defensive positioning.",
+    "analysis_para2": "The current minor rally (S&P +0.34%, Nasdaq +0.07%) needs confirmation in this anxious market. Watch for sustained breaks above immediate overhead resistance, perhaps around the 6400 level on the S&P 500, to validate this morning's bounce. A failure to hold above 6350 would be a key bearish signal, indicating the ongoing anxiety (VIX 29.79) is translating into selling pressure. The low breadth metrics (S5FI 26.4%) suggest any rally is narrow, so broad market participation, indicated by an improving S5FI, would be a necessary signal for a durable uptrend. Conversely, a further decline in breadth on any future rally attempts will highlight underlying weakness and potential for distribution.",
+    "technical_signal": "No reversal pattern confirmed yet. The market is contending with high volatility (VIX 29.79) and extremely narrow breadth, indicating a lack of conviction rather than a definitive shift.",
     "ticker_intel": [
-      {
-        "ticker": "JNJ",
-        "company": "Johnson & Johnson",
-        "grade": "A+",
-        "reason": "Its defensive healthcare portfolio and consistent dividend make it attractive during periods of market uncertainty and high volatility."
-      },
-      {
-        "ticker": "MSFT",
-        "company": "Microsoft Corporation",
-        "grade": "A",
-        "reason": "Its dominant cloud services and robust enterprise software suite provide resilient growth and strong free cash flow even amidst broader market weakness."
-      },
       {
         "ticker": "NVDA",
         "company": "NVIDIA Corporation",
+        "grade": "A+",
+        "reason": "Continued dominance in AI hardware and software positions it for sustained growth in an expanding market."
+      },
+      {
+        "ticker": "COST",
+        "company": "Costco Wholesale Corporation",
+        "grade": "A",
+        "reason": "Its resilient membership model and strong value proposition offer defensive stability amidst economic uncertainty."
+      },
+      {
+        "ticker": "BA",
+        "company": "The Boeing Company",
         "grade": "C",
-        "reason": "As a high-beta semiconductor play, NVIDIA faces significant downside risk during broad market de-risking and potential demand slowdowns."
+        "reason": "Ongoing operational challenges, safety concerns, and intense regulatory scrutiny continue to cloud its near-term outlook."
       }
     ]
   }
