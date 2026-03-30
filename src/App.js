@@ -3741,13 +3741,13 @@ const filtered = useMemo(() => {
 
       {tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
         <div className="max-w-[1400px] mx-auto px-4 pt-2 pb-4">
-          <div className="flex items-start gap-6 mb-2">
+          <div className="flex items-stretch gap-6 mb-2">
             <div className="w-[300px] flex-shrink-0 flex flex-col gap-4">
               <VixGauge initialVix={data?.vix}/>
               <ScannerBriefFeed briefData={briefData} newsData={newsData}/>
             </div>
             {/* Middle: Market Condition */}
-            <div className="w-[280px] flex-shrink-0">
+            <div className="w-[260px] flex-shrink-0 flex flex-col">
               {data?.market_condition && (() => {
                 const { signal, spy, qqq, breadth_50d, breadth_200d } = data.market_condition;
                 const sigCfg = signal === "green"
@@ -3764,48 +3764,48 @@ const filtered = useMemo(() => {
                 const pctCls = v => v == null ? "text-zinc-600" : v > 0 ? "text-emerald-400" : "text-red-400";
                 const fmt    = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(2)}%`;
                 const IndexRow = ({ label, d }) => !d ? null : (
-                  <div className="py-2 border-b border-zinc-800/50 last:border-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[11px] font-mono font-bold text-zinc-400 w-7">{label}</span>
-                      <span className="text-[14px] font-mono font-semibold text-zinc-100">${d.price?.toFixed(2) ?? "—"}</span>
-                      <span className={`text-[12px] font-mono ${pctCls(d.change_pct)}`}>{fmt(d.change_pct)}</span>
+                  <div className="flex-1 flex flex-col justify-center py-3 border-b border-zinc-800/50 last:border-0">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-[11px] font-mono font-bold text-zinc-500 w-7">{label}</span>
+                      <span className="text-[15px] font-mono font-semibold text-zinc-100">${d.price?.toFixed(2) ?? "—"}</span>
+                      <span className={`text-[13px] font-mono font-semibold ${pctCls(d.change_pct)}`}>{fmt(d.change_pct)}</span>
                       {d.index_status && (
                         <span className={`ml-auto text-[10px] font-semibold px-1.5 py-0.5 rounded border ${statusCls(d.index_status)}`}>{d.index_status}</span>
                       )}
                     </div>
-                    <div className="grid grid-cols-2 pl-9 text-[11px] gap-y-0">
+                    <div className="grid grid-cols-2 pl-9 gap-x-2 text-[11px]">
                       <div className="flex items-center gap-1.5">
                         <span className="text-zinc-600">50MA</span>
-                        <span className={`font-mono ${pctCls(d.sma50_pct)}`}>{fmt(d.sma50_pct)}</span>
+                        <span className={`font-mono font-semibold ${pctCls(d.sma50_pct)}`}>{fmt(d.sma50_pct)}</span>
                       </div>
                       <div className="flex items-center gap-1.5">
                         <span className="text-zinc-600">200MA</span>
-                        <span className={`font-mono ${pctCls(d.sma200_pct)}`}>{fmt(d.sma200_pct)}</span>
+                        <span className={`font-mono font-semibold ${pctCls(d.sma200_pct)}`}>{fmt(d.sma200_pct)}</span>
                       </div>
                     </div>
                   </div>
                 );
                 return (
-                  <div className={`rounded-xl border ${sigCfg.border} ${sigCfg.bg} p-3 flex flex-col gap-0`}>
-                    <div className="flex items-center gap-2 pb-2 border-b border-zinc-800/50">
-                      <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${sigCfg.dot}`} style={{ boxShadow: `0 0 7px 2px ${sigCfg.glow}` }}/>
+                  <div className={`flex-1 rounded-xl border ${sigCfg.border} ${sigCfg.bg} p-3 flex flex-col`}>
+                    <div className="flex items-center gap-2 pb-2.5 border-b border-zinc-800/50 mb-0.5">
+                      <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${sigCfg.dot}`} style={{ boxShadow: `0 0 8px 3px ${sigCfg.glow}` }}/>
                       <span className="text-[13px] font-semibold text-zinc-100">{sigCfg.label}</span>
                     </div>
                     <IndexRow label="SPY" d={spy}/>
                     <IndexRow label="QQQ" d={qqq}/>
                     {(breadth_50d != null || breadth_200d != null) && (
-                      <div className="grid grid-cols-2 pt-2 border-t border-zinc-800/50 text-[11px]">
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-zinc-500">S5FI 50D</span>
-                          {breadth_50d != null && <span className={`font-mono font-semibold ${breadth_50d >= 60 ? "text-emerald-400" : breadth_50d >= 40 ? "text-amber-400" : "text-red-400"}`}>{breadth_50d.toFixed(1)}%</span>}
+                      <div className="grid grid-cols-2 py-3 border-b border-zinc-800/50 text-[11px] gap-y-1">
+                        <div className="flex flex-col gap-0.5">
+                          <span className="text-zinc-600 text-[10px] uppercase tracking-wide">S5FI 50D</span>
+                          {breadth_50d != null && <span className={`font-mono font-bold text-[14px] ${breadth_50d >= 60 ? "text-emerald-400" : breadth_50d >= 40 ? "text-amber-400" : "text-red-400"}`}>{breadth_50d.toFixed(1)}%</span>}
                         </div>
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-zinc-500">MMTH 200D</span>
-                          {breadth_200d != null && <span className={`font-mono font-semibold ${breadth_200d >= 60 ? "text-emerald-400" : breadth_200d >= 40 ? "text-amber-400" : "text-red-400"}`}>{breadth_200d.toFixed(1)}%</span>}
+                        <div className="flex flex-col gap-0.5">
+                          <span className="text-zinc-600 text-[10px] uppercase tracking-wide">MMTH 200D</span>
+                          {breadth_200d != null && <span className={`font-mono font-bold text-[14px] ${breadth_200d >= 60 ? "text-emerald-400" : breadth_200d >= 40 ? "text-amber-400" : "text-red-400"}`}>{breadth_200d.toFixed(1)}%</span>}
                         </div>
                       </div>
                     )}
-                    <p className="text-[11px] text-zinc-500 pt-2 border-t border-zinc-800/50 mt-1 leading-relaxed">{sigCfg.guide}</p>
+                    <p className="text-[11px] text-zinc-500 pt-2.5 leading-relaxed mt-auto">{sigCfg.guide}</p>
                   </div>
                 );
               })()}
