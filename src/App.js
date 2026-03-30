@@ -3803,7 +3803,7 @@ const filtered = useMemo(() => {
               })()}
             </div>
             {/* Right: Leaderboard */}
-            <div className="flex-1 min-w-0 ml-8">
+            <div className="flex-1 min-w-0 ml-20">
               {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
             </div>
           </div>
