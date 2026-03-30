@@ -1167,180 +1167,75 @@ const VIX_ZONES = [
 const VixGauge = ({ initialVix }) => {
   const [vix, setVix] = useState(initialVix ?? 18);
   useEffect(() => { if (initialVix != null) setVix(initialVix); }, [initialVix]);
-  const [hov, setHov] = useState(null);
 
-  /* Layout */
-  const CX = 200, CY = 178, RO = 145, RI = 60, GAP = 1.8, VMAX = 40;
-  const f      = n => +n.toFixed(2);
-  const toRad  = d => d * Math.PI / 180;
-  const pt     = (r, deg) => [CX + r * Math.cos(toRad(deg)), CY - r * Math.sin(toRad(deg))];
-  const v2a    = v => 180 - Math.min(Math.max(v, 0), VMAX) / VMAX * 180;
+  const VMAX = 40;
   const zoneOf = v => VIX_ZONES.find(z => v >= z.vMin && v < z.vMax) ?? VIX_ZONES[VIX_ZONES.length - 1];
-  const activeIdx = (() => { const i = VIX_ZONES.findIndex(z => vix >= z.vMin && vix < z.vMax); return i === -1 ? VIX_ZONES.length - 1 : i; })();
-  const dispIdx = hov !== null ? hov : activeIdx;
-  const active  = VIX_ZONES[dispIdx];
-  const dz      = initialVix != null ? zoneOf(initialVix) : null;
-
-  function arcPath(aS, aE, r1, r2, g = 0) {
-    const s = aS - g, e = aE + g;
-    const large = (s - e) > 180 ? 1 : 0;
-    const [ox1, oy1] = pt(r2, s), [ox2, oy2] = pt(r2, e);
-    const [ix1, iy1] = pt(r1, s), [ix2, iy2] = pt(r1, e);
-    return `M${f(ox1)} ${f(oy1)} A${r2} ${r2} 0 ${large} 0 ${f(ox2)} ${f(oy2)}`
-         + ` L${f(ix2)} ${f(iy2)} A${r1} ${r1} 0 ${large} 1 ${f(ix1)} ${f(iy1)}Z`;
-  }
-
-  /* Needle */
-  const na = v2a(vix);
-  const [ntx, nty] = pt(RI + 8, na);
-  const [nb1x, nb1y] = pt(4, na + 90);
-  const [nb2x, nb2y] = pt(4, na - 90);
-  const needlePath = `M${f(ntx)} ${f(nty)} L${f(nb1x)} ${f(nb1y)} L${f(nb2x)} ${f(nb2y)}Z`;
-  const da = initialVix != null ? v2a(initialVix) : null;
-
-  const gaugeColW = 205;
+  const active = zoneOf(vix);
   const expectedMovePct = vix / 16;
 
+  /* Marker position: clamp vix to [0, VMAX], map to 0–100% */
+  const markerPct = Math.min(Math.max(vix, 0), VMAX) / VMAX * 100;
+
   return (
-    <div className="px-5 pt-2 pb-3 bg-zinc-900/60 border border-zinc-800/50 rounded-xl h-[240px]">
+    <div className="px-5 pt-2 pb-3 bg-zinc-900/60 border border-zinc-800/50 rounded-xl h-[240px] flex flex-col">
 
       {/* Header */}
-      <div className="flex items-center justify-between mb-1">
-        <div className="flex items-center gap-2">
-          <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-widest">VIX Fear Gauge</span>
-          <span className="text-[10px] text-zinc-700 border border-zinc-800 rounded px-1.5 py-0.5">CBOE · SPX</span>
+      <div className="flex items-center gap-2 mb-3">
+        <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-widest">VIX Fear Gauge</span>
+        <span className="text-[10px] text-zinc-700 border border-zinc-800 rounded px-1.5 py-0.5">CBOE · SPX</span>
+      </div>
+
+      {/* VIX number */}
+      <div className="flex items-baseline gap-2 mb-3">
+        <span className="text-4xl font-extrabold font-mono tabular-nums leading-none transition-colors duration-300"
+          style={{ color: active.color }}>{vix.toFixed(1)}</span>
+        <span className="text-[11px] font-bold uppercase tracking-widest" style={{ color: active.color, opacity: 0.75 }}>{active.name}</span>
+      </div>
+
+      {/* Gradient bar */}
+      <div className="relative mb-1">
+        {/* Bar */}
+        <div className="h-4 rounded-full overflow-visible relative"
+          style={{ background: 'linear-gradient(to right, #00e676 0%, #00e676 30%, #ffee58 30%, #ffee58 50%, #ff9100 50%, #ff9100 75%, #ff1744 75%, #ff1744 100%)' }}>
+          {/* Marker */}
+          <div className="absolute top-1/2 -translate-y-1/2 w-3.5 h-5 rounded-sm border-2 border-zinc-900 shadow-lg transition-all duration-300"
+            style={{ left: `calc(${markerPct}% - 7px)`, background: active.color }} />
+        </div>
+        {/* Zone labels */}
+        <div className="flex justify-between mt-1 px-0">
+          {VIX_ZONES.map((z, i) => (
+            <span key={i} className="text-[9px] font-mono text-zinc-600"
+              style={{ width: `${(z.vMax - z.vMin) / VMAX * 100}%`, textAlign: i === 0 ? 'left' : i === VIX_ZONES.length - 1 ? 'right' : 'center' }}>
+              {z.vMin}
+            </span>
+          ))}
+          <span className="text-[9px] font-mono text-zinc-600">40</span>
         </div>
       </div>
 
-      {/* Left: gauge + slider under dial (matches reference); right: zone info */}
-      <div className="flex items-stretch gap-3">
-        <div className="flex flex-col flex-shrink-0" style={{ width: gaugeColW }}>
-        <svg viewBox="0 20 400 210" className="h-auto block w-full" style={{ overflow: 'visible' }}>
-          <defs>
-            <filter id="vg-needle-shadow" x="-50%" y="-20%" width="200%" height="140%">
-              <feGaussianBlur stdDeviation="2" result="b"/>
-              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-            </filter>
-          </defs>
+      {/* Slider */}
+      <div className="flex items-center gap-2 mb-2">
+        <input type="range" min="0" max="45" step="0.5" value={vix}
+          onChange={e => setVix(parseFloat(e.target.value))}
+          className="flex-1 min-w-0 accent-zinc-400 h-1 cursor-pointer"/>
+      </div>
+      {initialVix != null && (
+        <button onClick={() => setVix(initialVix)}
+          style={{ visibility: vix !== initialVix ? 'visible' : 'hidden' }}
+          className="w-full text-center py-0.5 text-[10px] font-medium rounded border border-zinc-700/60 bg-zinc-800/60 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600 transition-colors mb-2">
+          Restore {initialVix.toFixed(1)}
+        </button>
+      )}
 
-          {/* Zone arcs */}
-          {VIX_ZONES.map((z, i) => {
-            const isActive = i === activeIdx;
-            const isHov    = hov === i;
-            const mid = (z.aStart + z.aEnd) / 2;
-            const lr  = (RI + RO) / 2 + 2;
-            const [lx, ly] = pt(lr, mid);
-            const rot = -(90 - mid);
-            return (
-              <g key={i} style={{ cursor: 'pointer' }}
-                onMouseEnter={() => setHov(i)} onMouseLeave={() => setHov(null)}>
-                <path d={arcPath(z.aStart, z.aEnd, RI, RO, GAP)}
-                  fill={isActive ? z.color : isHov ? '#2d2d2d' : '#1e1e1e'}
-                  style={{ transition: 'fill 0.25s' }}/>
-                <g transform={`rotate(${f(rot)} ${f(lx)} ${f(ly)})`} style={{ pointerEvents: 'none' }}>
-                  {z.label.map((line, li) => (
-                    <text key={li}
-                      x={f(lx)} y={f(ly + (z.label.length > 1 ? (li === 0 ? -6 : 6) : 0))}
-                      textAnchor="middle" dominantBaseline="middle"
-                      fill={isActive ? '#111111' : isHov ? '#4a4a4a' : '#383838'}
-                      fontSize="8.5" fontWeight="900" letterSpacing="0.08em"
-                      fontFamily="system-ui,-apple-system,sans-serif"
-                      style={{ transition: 'fill 0.25s' }}>
-                      {line}
-                    </text>
-                  ))}
-                </g>
-              </g>
-            );
-          })}
-
-          {/* Tick marks + numbers */}
-          {[0, 12, 20, 30, 40].map(v => {
-            const a  = v2a(v);
-            const [d1x, d1y] = pt(RI - 6, a);
-            const [lx,  ly]  = pt(RI - 20, a);
-            return (
-              <g key={v}>
-                <circle cx={f(d1x)} cy={f(d1y)} r="2.2" fill="#2e2e2e"/>
-                <text x={f(lx)} y={f(ly)} textAnchor="middle" dominantBaseline="middle"
-                  fill="#303030" fontSize="9.5" fontFamily="monospace">{v}</text>
-              </g>
-            );
-          })}
-
-          {/* Minor dots */}
-          {[5, 8, 15, 17, 25, 35].map(v => {
-            const a = v2a(v);
-            const [dx, dy] = pt(RI - 6, a);
-            return <circle key={v} cx={f(dx)} cy={f(dy)} r="1.3" fill="#252525"/>;
-          })}
-
-          {/* Daily marker */}
-          {da != null && (() => {
-            const [mx1, my1] = pt(RI, da);
-            const [mx2, my2] = pt(RO, da);
-            return <line x1={f(mx1)} y1={f(my1)} x2={f(mx2)} y2={f(my2)}
-              stroke={dz.color} strokeWidth="2" strokeDasharray="4,3"
-              strokeLinecap="round" opacity="0.6"/>;
-          })()}
-
-          {/* Needle */}
-          <path d={needlePath} fill="#d8d8d8"
-            filter="url(#vg-needle-shadow)" style={{ transition: 'all 0.3s' }}/>
-          <circle cx={CX} cy={CY} r="10" fill="#171717" stroke="#3a3a3a" strokeWidth="2"/>
-          <circle cx={CX} cy={CY} r="4"  fill="#404040"/>
-
-          {/* VIX number */}
-          <text x={CX} y={CY + 36} textAnchor="middle"
-            fontSize="36" fontWeight="800" fontFamily="system-ui,-apple-system,sans-serif"
-            fill={active.color} style={{ transition: 'fill 0.3s' }}>
-            {vix.toFixed(1)}
-          </text>
-          <text x={CX} y={CY + 42} textAnchor="middle"
-            fill="#272727" fontSize="8.5" letterSpacing="0.25em"
-            fontFamily="system-ui,sans-serif">VIX</text>
-        </svg>
-
-        <div className="flex items-center gap-2 mt-1 w-full min-w-0">
-          <span className="text-[10px] text-zinc-700 font-mono shrink-0">0</span>
-          <input type="range" min="0" max="45" step="0.5" value={vix}
-            onChange={e => setVix(parseFloat(e.target.value))}
-            className="flex-1 min-w-0 accent-zinc-400 h-1 cursor-pointer"/>
-          <span className="text-[10px] text-zinc-700 font-mono shrink-0">45</span>
-        </div>
-        {/* Always reserve button space so left-col height never changes */}
-        {initialVix != null && (
-          <button onClick={() => setVix(initialVix)}
-            style={{ visibility: vix !== initialVix ? 'visible' : 'hidden' }}
-            className="mt-1.5 w-full text-center py-0.5 text-[10px] font-medium rounded border border-zinc-700/60 bg-zinc-800/60 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600 transition-colors">
-            Restore {initialVix.toFixed(1)}
-          </button>
-        )}
-        </div>
-
-        {/* Zone info — position:relative so content is absolute and has zero intrinsic height,
-            preventing long text from expanding the flex row (and the card) */}
-        <div className="flex-1 min-w-0 relative rounded-lg border transition-colors duration-300 overflow-hidden"
-          style={{ background: '#1a1a1a', borderColor: active.color + '55', marginTop: '-18px' }}>
-          <div className="absolute inset-0 flex flex-col px-3 py-1 min-h-0">
-            <div className="border-b border-zinc-800/70 pb-1.5 flex-shrink-0">
-              <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest mb-1">Expected Move</div>
-              <div className="flex flex-nowrap items-baseline gap-x-2 min-w-0">
-                <span className="text-[11px] text-zinc-500 font-mono shrink-0">$SPX</span>
-                <span className="text-sm font-bold font-mono text-zinc-100 tabular-nums leading-none">
-                  ±{expectedMovePct.toFixed(2)}%
-                </span>
-              </div>
-            </div>
-            <div className="pt-1 flex flex-col flex-1 gap-0.5 min-h-0 overflow-hidden">
-              <div className="flex flex-col gap-0.5 flex-shrink-0">
-                <span className="text-[12px] font-bold uppercase tracking-wider leading-tight transition-colors duration-300"
-                  style={{ color: active.color }}>{active.name}</span>
-                <span className="text-[10px] font-mono uppercase leading-tight" style={{ color: active.color, opacity: 0.85 }}>{active.range}</span>
-              </div>
-              <div className="text-[12px] text-zinc-500 leading-relaxed overflow-y-auto">{active.impact}</div>
-            </div>
+      {/* Zone info */}
+      <div className="flex-1 min-h-0 overflow-hidden">
+        <div className="flex flex-col gap-0.5 h-full">
+          <div className="flex items-baseline gap-3 flex-shrink-0">
+            <span className="text-[10px] text-zinc-500 font-semibold uppercase tracking-widest">Expected Move</span>
+            <span className="text-[11px] text-zinc-500 font-mono shrink-0">$SPX</span>
+            <span className="text-sm font-bold font-mono text-zinc-100 tabular-nums leading-none">±{expectedMovePct.toFixed(2)}%</span>
           </div>
+          <div className="text-[11px] text-zinc-500 leading-relaxed overflow-y-auto mt-0.5">{active.impact}</div>
         </div>
       </div>
 
