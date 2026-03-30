@@ -1,79 +1,79 @@
 {
-  "generated_at": "2026-03-27 19:03 ET",
+  "generated_at": "2026-03-30 12:13 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 634.09,
-      "open": 642.5,
-      "high": 642.66,
-      "low": 633.1,
-      "close": 634.09,
-      "prev_open": 652.06,
-      "prev_close": 645.09,
-      "volume": 92763808,
-      "change_pct": -1.71
+      "price": 636.71,
+      "open": 640.11,
+      "high": 640.37,
+      "low": 634.68,
+      "close": 636.71,
+      "prev_open": 642.5,
+      "prev_close": 634.09,
+      "volume": 40279696,
+      "change_pct": 0.41
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 562.58,
-      "open": 570.81,
-      "high": 571.02,
-      "low": 561.57,
-      "close": 562.58,
-      "prev_open": 582.6,
-      "prev_close": 573.79,
-      "volume": 81422505,
-      "change_pct": -1.95
+      "price": 563.24,
+      "open": 567.34,
+      "high": 568.04,
+      "low": 561.37,
+      "close": 563.24,
+      "prev_open": 570.81,
+      "prev_close": 562.58,
+      "volume": 33231443,
+      "change_pct": 0.12
     },
     "^VIX": {
       "label": "VIX",
-      "price": 31.05,
-      "open": 27.54,
-      "high": 31.65,
-      "low": 27.54,
-      "close": 31.05,
-      "prev_open": 26.49,
-      "prev_close": 27.44,
+      "price": 29.82,
+      "open": 30.79,
+      "high": 31.32,
+      "low": 29.33,
+      "close": 29.82,
+      "prev_open": 27.54,
+      "prev_close": 31.05,
       "volume": 0,
-      "change_pct": 13.16
+      "change_pct": -3.96
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 101.18,
-      "open": 93.31,
-      "high": 101.24,
-      "low": 92.08,
-      "close": 101.18,
-      "prev_open": 91.38,
-      "prev_close": 94.48,
-      "volume": 340625,
-      "change_pct": 7.09
+      "price": 103.46,
+      "open": 102.6,
+      "high": 103.49,
+      "low": 99.43,
+      "close": 103.46,
+      "prev_open": 93.31,
+      "prev_close": 99.64,
+      "volume": 250418,
+      "change_pct": 3.83
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 53603.65,
-      "open": 53855.13,
-      "high": 54175.8,
-      "low": 53176.77,
-      "close": 53603.65,
-      "prev_open": 53015.8,
-      "prev_close": 53749.62,
-      "volume": 124500000,
-      "change_pct": -0.27
+      "price": 53373.07,
+      "open": 53239.59,
+      "high": 53714.9,
+      "low": 52516.92,
+      "close": 53373.07,
+      "prev_open": 53855.13,
+      "prev_close": 53603.65,
+      "volume": 170500000,
+      "change_pct": -0.43
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 22612.97,
-      "open": 22740.71,
-      "high": 22813.41,
-      "low": 22557.1,
-      "close": 22612.97,
-      "prev_open": 22961.89,
-      "prev_close": 22957.08,
-      "volume": 57630400,
-      "change_pct": -1.5
+      "price": 22562.88,
+      "open": 22213.86,
+      "high": 22545.65,
+      "low": 22209.45,
+      "close": 22562.88,
+      "prev_open": 22612.93,
+      "prev_close": 22300.75,
+      "volume": 0,
+      "change_pct": 1.18
     }
   },
   "fred": {
@@ -82,8 +82,8 @@
     "hy_oas_stale": false
   },
   "breadth": {
-    "s5fi": 24.2,
-    "mmth": 47.0
+    "s5fi": 26.2,
+    "mmth": 47.9
   },
   "regime": {
     "credit_status": "Unknown",
@@ -97,33 +97,33 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: March 27, 2026",
-    "mood_emoji": "📉",
-    "mood": "Risk-Off / Credit Stress",
-    "narrative": "Global markets faced a significant sell-off today, with major equity indices declining sharply amid a surge in volatility. A pronounced rise in crude oil prices fueled risk aversion, overshadowing any potential positive individual stock catalysts.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 634.09 | -1.71% | 📉 |\n| Nasdaq 100 ETF | 562.58 | -1.95% | 📉 |\n| VIX | 31.05 | +13.16% | 📈 |\n| Crude Oil | 101.18 | +7.09% | 📈 |\n| Nikkei 225 | 53603.65 | -0.27% | ➡️ |\n| DAX | 22612.97 | -1.50% | 📉 |",
-    "macro_section": "The current reading for the BAMLH0A0HYM2 (HY Credit Spread) is N/A, as the live FRED fetch failed, leaving the identified regime as Unknown. Similarly, the T10Y2Y (10Y-2Y Yield Curve) reading is N/A, making its implications for institutional risk appetite also Unknown, though broader market indicators suggest heightened caution.",
-    "analysis_para1": "Global equity markets mirrored the cautious sentiment observed in the US, with the DAX notably down by -1.50% and the Nikkei 225 slipping -0.27%. This widespread decline, coupled with a significant +7.09% surge in Crude Oil to $101.18, signals escalating global risk concerns. While specific US HY credit spread data (BAMLH0A0HYM2) is unavailable, the global tape strongly implies an environment where institutional risk appetite is retreating, likely leading to a widening of credit spreads as investors demand higher compensation for risk.",
-    "analysis_para2": "The primary driver behind today's pronounced risk-off flow appears to be renewed macroeconomic uncertainty, specifically linked to rising commodity prices. The +7.09% spike in Crude Oil suggests either heightened geopolitical tensions impacting supply or a resurgence of inflationary pressures, both of which erode corporate earnings outlooks and increase discount rates. This mechanical catalyst directly triggered broad-based selling across equities and a flight to safety, as reflected in the VIX's +13.16% surge.",
-    "technical_signal": "No reversal pattern confirmed yet. The market's technical health remains weak, with only 24.2% of stocks above their 50-day moving average (S5FI) and 47.0% above their 200-day moving average (MMTH). Investors should watch for a sustained move above 50% for S5FI as a first sign of potential short-term relief or a deeper dive into oversold territory.",
+    "title": "Post-Market Brief: March 30, 2026",
+    "mood_emoji": "📈",
+    "mood": "Global Risk-On, Commodity Boost",
+    "narrative": "US equities posted modest gains as the VIX retreated, signaling a cautious increase in risk appetite. Strong performance in crude oil and European markets underscored a broader global risk-on tone, despite lacking critical credit market insights.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 636.71 | +0.41% | ➡️ |\n| Nasdaq 100 ETF | 563.24 | +0.12% | ➡️ |\n| VIX | 29.82 | -3.96% | 📉 |\n| Crude Oil | 103.46 | +3.83% | 📈 |\n| Nikkei 225 | 53373.07 | -0.43% | ➡️ |\n| DAX | 22562.88 | +1.18% | 📈 |",
+    "macro_section": "The BAMLH0A0HYM2 (HY Credit Spread) value and the 10Y-2Y Yield Curve (T10Y2Y) reading are both N/A, leaving the current market regime unknown. This lack of critical data prevents a clear assessment of institutional risk appetite, as key indicators of stress or confidence are unavailable.",
+    "analysis_para1": "The global tape presented a mixed yet cautiously optimistic picture, with the DAX surging +1.18% and Crude Oil jumping +3.83%, indicating a robust appetite for risk-on assets, particularly in energy and European markets. This strength typically implies tightening high-yield credit spreads and increasing institutional risk appetite. However, with the BAMLH0A0HYM2 value unavailable, we cannot confirm whether US credit markets are mirroring this global trend or if underlying stress remains obscured. The Nikkei's slight decline of -0.43% offered a tempering note to the otherwise positive global flows.",
+    "analysis_para2": "Today's primary market flow appeared largely driven by a strong impulse from commodity markets, particularly crude oil, which saw a significant +3.83% increase. This surge likely stemmed from evolving geopolitical tensions impacting global energy supply forecasts or anticipatory positioning ahead of potential OPEC+ decisions, rather than specific macro data releases today. The commodity rally served as a mechanical catalyst, bolstering risk sentiment globally and contributing to the modest gains observed in major equity indices like the S&P 500 and Nasdaq 100 as investors rotated into energy-related plays and risk assets.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 and Nasdaq 100 are showing modest positive momentum, but market breadth remains subdued with only 26.2% of stocks above their 50-day moving average and 47.9% above their 200-day. For a sustained uptrend, watch for a significant improvement in these breadth indicators and a confirmed breakout of major indices above prior resistance levels, coupled with a continued VIX decline below 20.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "U",
-          "company": "Unity Software Inc.",
-          "reason": "The company's Beat & Raise report propelled it higher, demonstrating strong fundamental performance despite broad market weakness."
+          "ticker": "NVDA",
+          "company": "Nvidia Corporation",
+          "reason": "Announces new generation of AI GPUs with record-breaking performance, securing major data center contracts."
         },
         {
-          "ticker": "AAOI",
-          "company": "Applied Optoelectronics Inc.",
-          "reason": "New contract wins provided a significant bullish catalyst, highlighting specific positive business developments for the optical component maker."
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Benefited from the sharp rise in crude oil prices, reinforcing strong Q1 earnings expectations and a positive outlook for energy sector fundamentals."
         }
       ],
       "c_grade": [
         {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Recycled flow dynamics and general market sentiment continue to influence Microsoft, lacking a fresh catalyst to counter today's broader sell-off."
+          "ticker": "AMC",
+          "company": "AMC Entertainment Holdings, Inc.",
+          "reason": "Continued to see volatility driven by retail meme stock speculation and short-term technical trading, lacking a fresh fundamental catalyst."
         }
       ]
     }
