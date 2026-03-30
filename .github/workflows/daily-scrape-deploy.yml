@@ -36,7 +36,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install Python deps
-        run: pip install requests beautifulsoup4 yfinance lxml
+        run: pip install requests beautifulsoup4 yfinance lxml exchange_calendars pandas google-genai tradingview_screener python-dotenv
 
       - name: Check ET window (9:00 AM – 5:00 PM) — runs every day including weekends/holidays
         id: trading_day
