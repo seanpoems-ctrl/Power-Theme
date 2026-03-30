@@ -1028,7 +1028,7 @@ const AnalysisCell = ({ text }) => {
   const sections = text.split(/\n\n(?=•)/).map(s => s.trim()).filter(Boolean);
   const visible = expanded ? sections : sections.slice(0, 1);
   return (
-    <div className="text-[12px] leading-relaxed min-w-[320px] max-w-[420px]">
+    <div className="text-[12px] leading-relaxed min-w-0 max-w-full">
       {visible.map((sec, i) => {
         const nl = sec.indexOf("\n");
         const header = nl > -1 ? sec.slice(0, nl) : sec;
@@ -3742,7 +3742,7 @@ const filtered = useMemo(() => {
       {tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
         <div className="max-w-[1400px] mx-auto px-4 pt-2 pb-4">
           <div className="flex items-start gap-6 mb-2">
-            <div className="w-[380px] flex-shrink-0 flex flex-col gap-4">
+            <div className="w-[300px] flex-shrink-0 flex flex-col gap-4">
               <VixGauge initialVix={data?.vix}/>
               <ScannerBriefFeed briefData={briefData} newsData={newsData}/>
             </div>
