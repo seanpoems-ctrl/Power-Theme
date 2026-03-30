@@ -1202,7 +1202,7 @@ const VixGauge = ({ initialVix }) => {
   const expectedMovePct = vix / 16;
 
   return (
-    <div className="px-5 pt-2 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl">
+    <div className="px-5 pt-2 pb-4 bg-zinc-900/60 border border-zinc-800/50 rounded-xl h-[300px]">
 
       {/* Header */}
       <div className="flex items-center justify-between mb-1">
@@ -3747,7 +3747,7 @@ const filtered = useMemo(() => {
               <ScannerBriefFeed briefData={briefData} newsData={newsData}/>
             </div>
             {/* Middle: Market Condition */}
-            <div className="w-[260px] flex-shrink-0 flex flex-col">
+            <div className="w-[300px] flex-shrink-0 flex flex-col self-start">
               {data?.market_condition && (() => {
                 const { signal, spy, qqq, breadth_50d, breadth_200d } = data.market_condition;
                 const sigCfg = signal === "green"
@@ -3786,7 +3786,7 @@ const filtered = useMemo(() => {
                   </div>
                 );
                 return (
-                  <div className={`flex-1 rounded-xl border ${sigCfg.border} ${sigCfg.bg} p-3 flex flex-col`}>
+                  <div className={`rounded-xl border ${sigCfg.border} ${sigCfg.bg} p-3 flex flex-col h-[300px]`}>
                     <div className="flex items-center gap-2 pb-2.5 border-b border-zinc-800/50 mb-0.5">
                       <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${sigCfg.dot}`} style={{ boxShadow: `0 0 8px 3px ${sigCfg.glow}` }}/>
                       <span className="text-[13px] font-semibold text-zinc-100">{sigCfg.label}</span>
