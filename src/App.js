@@ -492,7 +492,6 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
   const [expanded, setExpanded] = useState(null);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
   const [themeHover, setThemeHover] = useState(null); // { ticker, rect }
-  const themeHoverTimer = useRef(null);
 
   const activeData = view === "themes" ? finvizThemeRankings : themeRankings;
 
@@ -621,9 +620,8 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                   <td className="px-2 py-2">
                     <div className="flex items-center gap-1.5">
                       <span
-                        className="text-[12px] font-semibold text-zinc-200 cursor-default hover:text-blue-400 transition-colors"
-                        onMouseEnter={e => { const etf = THEME_ETF_MAP[t.name]; if (!etf) return; clearTimeout(themeHoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); themeHoverTimer.current = setTimeout(() => setThemeHover({ ticker: etf, rect }), 500); }}
-                        onMouseLeave={() => { clearTimeout(themeHoverTimer.current); setThemeHover(null); }}
+                        className="text-[12px] font-semibold text-zinc-200 cursor-pointer hover:text-blue-400 transition-colors"
+                        onClick={e => { const etf = THEME_ETF_MAP[t.name]; if (!etf) return; const rect = e.currentTarget.getBoundingClientRect(); setThemeHover(prev => prev?.ticker === etf ? null : { ticker: etf, rect }); }}
                       >{t.name}</span>
                       {t.stage2_momentum && <span className="px-1.5 py-0.5 text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full leading-none">STAGE 2</span>}
                       {t.n_industries && <span className="text-[10px] text-zinc-600">{t.n_industries} ind</span>}
@@ -726,7 +724,6 @@ const AlphaLeaderBadge = ({ stock, sortPriority = [], spyPerf1d = 0 }) => {
 
 const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, themeName, subthemeName }) => {
   const [hovered, setHovered] = useState(null);
-  const hoverTimer = useRef(null);
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_52w', direction: 'desc' }]);
 
   const handleSort = (key, isShift) => {
@@ -838,9 +835,8 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
                   <div>
                     <div className="flex items-center gap-1.5 flex-wrap">
                       <span
-                        className="font-semibold text-zinc-100 text-[13px] cursor-default hover:text-blue-400 transition-colors"
-                        onMouseEnter={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); hoverTimer.current = setTimeout(() => setHovered({ ticker: s.ticker, rect }), 500); }}
-                        onMouseLeave={() => { clearTimeout(hoverTimer.current); setHovered(null); }}
+                        className="font-semibold text-zinc-100 text-[13px] cursor-pointer hover:text-blue-400 transition-colors"
+                        onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === s.ticker ? null : { ticker: s.ticker, rect }); }}
                       >{s.ticker}</span>
                       <GradeBadge grade={getEliteGrade(s)}/>
                       <AlphaLeaderBadge stock={s} sortPriority={sortPriority} spyPerf1d={spyPerf || 0}/>
@@ -1964,7 +1960,6 @@ const GapperScanner = () => {
   const [gapperData, setGapperData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState(null);
-  const hoverTimer = useRef(null);
   const [tickerDb, setTickerDb] = useState({});
 
   // Filter state — human-friendly units: PMVol/AvgVol in K, MktCap in $B, DolVol in $M
@@ -2107,9 +2102,8 @@ const GapperScanner = () => {
                 {/* Ticker */}
                 <td className="py-2 px-1.5 text-center">
                   <span
-                    className="font-bold text-zinc-100 text-[13px] hover:text-blue-400 transition-colors cursor-default"
-                    onMouseEnter={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); hoverTimer.current = setTimeout(() => setHovered({ ticker: g.ticker, rect }), 500); }}
-                    onMouseLeave={() => { clearTimeout(hoverTimer.current); setHovered(null); }}
+                    className="font-bold text-zinc-100 text-[13px] hover:text-blue-400 transition-colors cursor-pointer"
+                    onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === g.ticker ? null : { ticker: g.ticker, rect }); }}
                   >
                     {g.ticker}
                   </span>
@@ -2297,7 +2291,6 @@ const SearchBar = ({ data, search, setSearch }) => {
       .catch(() => {});
   }, []);
   const [tickerHover, setTickerHover] = useState(null); // { ticker, rect } for TVPopup
-  const tickerHoverTimer = useRef(null);
   const [selectedTheme, setSelectedTheme] = useState(null); // theme name to expand stock list
   const [selectedSubTheme, setSelectedSubTheme] = useState(null); // subtheme name to expand stock list
   const [searchHistory, setSearchHistory] = useState(() => {
@@ -2520,9 +2513,8 @@ const SearchBar = ({ data, search, setSearch }) => {
         <div id="search-result-panel" className="absolute top-full right-0 mt-1.5 w-72 bg-zinc-900 border border-zinc-700/60 rounded-lg shadow-2xl z-50 p-3 space-y-2">
           <div className="flex items-baseline gap-2 flex-wrap">
             <span
-              className="text-sm font-bold text-zinc-100 cursor-default hover:text-blue-400 transition-colors"
-              onMouseEnter={e => { clearTimeout(tickerHoverTimer.current); const panel = e.currentTarget.closest('[class*="shadow-2xl"]') || e.currentTarget; const rect = panel.getBoundingClientRect(); tickerHoverTimer.current = setTimeout(() => setTickerHover({ ticker: fullResult.ticker, rect }), 500); }}
-              onMouseLeave={() => { clearTimeout(tickerHoverTimer.current); setTickerHover(null); }}
+              className="text-sm font-bold text-zinc-100 cursor-pointer hover:text-blue-400 transition-colors"
+              onClick={e => { const panel = e.currentTarget.closest('[class*="shadow-2xl"]') || e.currentTarget; const rect = panel.getBoundingClientRect(); setTickerHover(prev => prev?.ticker === fullResult.ticker ? null : { ticker: fullResult.ticker, rect }); }}
             >{fullResult.ticker}</span>
             {livePriceLoading && !displayPrice && (
               <span className="text-[13px] text-zinc-600 animate-pulse">載入中…</span>
@@ -2601,9 +2593,8 @@ const SearchBar = ({ data, search, setSearch }) => {
                             onMouseDown={e => { e.preventDefault(); setSearch(s.ticker); setSelectedSubTheme(null); }}
                           >
                             <span
-                              className="text-[12px] font-bold text-zinc-200 w-12 flex-shrink-0 hover:text-blue-400 cursor-default"
-                              onMouseEnter={e => { e.stopPropagation(); clearTimeout(tickerHoverTimer.current); const panelEl = document.getElementById('search-result-panel'); const panelLeft = panelEl ? panelEl.getBoundingClientRect().left : null; const sr = e.currentTarget.getBoundingClientRect(); tickerHoverTimer.current = setTimeout(() => setTickerHover({ ticker: s.ticker, rect: { ...sr, panelLeft } }), 500); }}
-                              onMouseLeave={() => { clearTimeout(tickerHoverTimer.current); setTickerHover(null); }}
+                              className="text-[12px] font-bold text-zinc-200 w-12 flex-shrink-0 hover:text-blue-400 cursor-pointer"
+                              onClick={e => { e.stopPropagation(); const panelEl = document.getElementById('search-result-panel'); const panelLeft = panelEl ? panelEl.getBoundingClientRect().left : null; const sr = e.currentTarget.getBoundingClientRect(); setTickerHover(prev => prev?.ticker === s.ticker ? null : { ticker: s.ticker, rect: { ...sr, panelLeft } }); }}
                             >{s.ticker}</span>
                             <span className="text-[11px] text-zinc-500 truncate flex-1">{s.company}</span>
                             {s.change_pct != null && (
@@ -3386,7 +3377,6 @@ export default function App() {
   const nextFetchAt = useRef(null);
   const lastGeneratedAt = useRef(null);
   const [macroHover, setMacroHover] = useState(null);
-  const macroHoverTimer = useRef(null);
 
   // ── Market store (global macro alerts + reversal) ─────────────────────────
   // Use separate selectors — object selectors create new refs every render → infinite loop
@@ -3581,8 +3571,7 @@ const filtered = useMemo(() => {
                 const Tag = ({ label, d }) => d ? (
                   <span
                     className="flex items-center gap-1 text-[12px] font-mono cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
-                    onMouseEnter={e => { clearTimeout(macroHoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); macroHoverTimer.current = setTimeout(() => setMacroHover({ ticker: label, chartUrl: chartUrl1Y(label), rect }), 500); }}
-                    onMouseLeave={() => { clearTimeout(macroHoverTimer.current); setMacroHover(null); }}
+                    onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setMacroHover(prev => prev?.ticker === label ? null : { ticker: label, chartUrl: chartUrl1Y(label), rect }); }}
                   >
                     <span className="text-zinc-500">{label}</span>
                     {d.price != null && <span className="text-zinc-300">${d.price.toFixed(2)}</span>}
@@ -3631,15 +3620,14 @@ const filtered = useMemo(() => {
             const hasAny = btc || gld || oil || credit_spread != null || breadth_50d != null;
             if (!hasAny) return null;
             const CHART = { btc: 'IBIT', gld: 'GLD', oil: 'USO', credit_spread: 'HYG', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R' };
-            const mkHover = (key, e) => { clearTimeout(macroHoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); macroHoverTimer.current = setTimeout(() => setMacroHover({ ticker: CHART[key], rect }), 500); };
+            const mkClick = (key, e) => { const ticker = CHART[key]; const rect = e.currentTarget.getBoundingClientRect(); setMacroHover(prev => prev?.ticker === ticker ? null : { ticker, rect }); };
             const fmtChg = v => v == null ? null : v > 0
               ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
               : <span className="text-red-400">{v.toFixed(2)}%</span>;
             const Tag = ({ label, d, chartKey }) => d ? (
               <span
                 className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
-                onMouseEnter={e => mkHover(chartKey, e)}
-                onMouseLeave={() => { clearTimeout(macroHoverTimer.current); setMacroHover(null); }}
+                onClick={e => mkClick(chartKey, e)}
               >
                 <span className="text-zinc-600">{label}</span>
                 {d.price != null && <span className="text-zinc-300">${d.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>}
@@ -3658,8 +3646,7 @@ const filtered = useMemo(() => {
                   <><Sep/>
                   <span
                     className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
-                    onMouseEnter={e => mkHover('credit_spread', e)}
-                    onMouseLeave={() => { clearTimeout(macroHoverTimer.current); setMacroHover(null); }}
+                    onClick={e => mkClick('credit_spread', e)}
                   >
                     <span className="text-zinc-600">HY Spread</span>
                     <span className="text-zinc-300">{credit_spread.value.toFixed(2)}%</span>
@@ -3676,8 +3663,7 @@ const filtered = useMemo(() => {
                   {breadth_50d != null && (
                     <span
                       className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
-                      onMouseEnter={e => mkHover('breadth_50d', e)}
-                      onMouseLeave={() => { clearTimeout(macroHoverTimer.current); setMacroHover(null); }}
+                      onClick={e => mkClick('breadth_50d', e)}
                     >
                       <span className="text-zinc-500">S5FI 50D</span>
                       <span className={breadthColor(breadth_50d)}>{breadth_50d.toFixed(1)}%</span>
@@ -3687,8 +3673,7 @@ const filtered = useMemo(() => {
                     <><Dot/>
                     <span
                       className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
-                      onMouseEnter={e => mkHover('breadth_200d', e)}
-                      onMouseLeave={() => { clearTimeout(macroHoverTimer.current); setMacroHover(null); }}
+                      onClick={e => mkClick('breadth_200d', e)}
                     >
                       <span className="text-zinc-500">MMTH 200D</span>
                       <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span>
