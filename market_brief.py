@@ -408,19 +408,22 @@ def send_telegram(text: str) -> bool:
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT:
         print("  Telegram: not configured — skipping")
         return False
-    try:
-        r = requests.post(
-            f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-            json={"chat_id": TELEGRAM_CHAT, "text": text,
-                  "parse_mode": "MarkdownV2", "disable_web_page_preview": True},
-            timeout=15,
-        )
-        r.raise_for_status()
-        print("  Telegram: sent ✓")
-        return True
-    except Exception as e:
-        print(f"  Telegram send failed: {e}")
-        return False
+    chat_ids = [cid.strip() for cid in TELEGRAM_CHAT.split(",")]
+    ok = False
+    for chat_id in chat_ids:
+        try:
+            r = requests.post(
+                f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+                json={"chat_id": chat_id, "text": text,
+                      "parse_mode": "MarkdownV2", "disable_web_page_preview": True},
+                timeout=15,
+            )
+            r.raise_for_status()
+            print(f"  Telegram: sent to {chat_id} ✓")
+            ok = True
+        except Exception as e:
+            print(f"  Telegram failed for {chat_id}: {e}")
+    return ok
 
 
 # ── Main ───────────────────────────────────────────────────────────────────────

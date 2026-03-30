@@ -720,24 +720,27 @@ async def send_telegram(text: str) -> bool:
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT:
         log.info("Telegram: not configured (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID missing)")
         return False
-    try:
-        async with httpx.AsyncClient() as client:
-            r = await client.post(
-                f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-                json={
-                    "chat_id":                  TELEGRAM_CHAT,
-                    "text":                     text,
-                    "parse_mode":               "MarkdownV2",
-                    "disable_web_page_preview": True,
-                },
-                timeout=15,
-            )
-            r.raise_for_status()
-        log.info("Telegram: sent ✓")
-        return True
-    except Exception as e:
-        log.warning(f"Telegram: {e}")
-        return False
+    chat_ids = [cid.strip() for cid in TELEGRAM_CHAT.split(",")]
+    ok = False
+    async with httpx.AsyncClient() as client:
+        for chat_id in chat_ids:
+            try:
+                r = await client.post(
+                    f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+                    json={
+                        "chat_id":                  chat_id,
+                        "text":                     text,
+                        "parse_mode":               "MarkdownV2",
+                        "disable_web_page_preview": True,
+                    },
+                    timeout=15,
+                )
+                r.raise_for_status()
+                log.info(f"Telegram: sent to {chat_id} ✓")
+                ok = True
+            except Exception as e:
+                log.warning(f"Telegram failed for {chat_id}: {e}")
+    return ok
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
