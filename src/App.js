@@ -3786,7 +3786,7 @@ const filtered = useMemo(() => {
                   </div>
                 );
                 return (
-                  <div className={`rounded-xl border ${sigCfg.border} ${sigCfg.bg} p-3 flex flex-col h-[300px]`}>
+                  <div className={`rounded-xl border ${sigCfg.border} ${sigCfg.bg} p-3 flex flex-col h-[240px]`}>
                     <div className="flex items-center gap-2 pb-2.5 border-b border-zinc-800/50 mb-0.5">
                       <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${sigCfg.dot}`} style={{ boxShadow: `0 0 8px 3px ${sigCfg.glow}` }}/>
                       <span className="text-[13px] font-semibold text-zinc-100">{sigCfg.label}</span>
