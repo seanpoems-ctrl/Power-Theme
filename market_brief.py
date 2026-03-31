@@ -229,9 +229,45 @@ def detect_reversal(indices: dict, s5fi: float | None, spy_ma200: float | None) 
 
 # ── Gemini Analysis ────────────────────────────────────────────────────────────
 
+def fetch_top_stocks_from_scanner() -> list[dict]:
+    """讀取 thematic_data.json，篩選出最強的候選股票清單給 Gemini 參考"""
+    try:
+        p = Path("public/thematic_data.json")
+        if not p.exists():
+            return []
+        data = json.loads(p.read_text(encoding="utf-8"))
+        candidates = []
+        for theme in data.get("themes", []):
+            theme_name = theme.get("name", "")
+            for sub in theme.get("subthemes", []):
+                for stock in sub.get("stocks", []):
+                    rs = stock.get("rs_52w") or 0
+                    perf_1m = stock.get("perf_1m") or 0
+                    dollar_vol = stock.get("dollar_volume") or 0
+                    adr = stock.get("adr_pct") or 0
+                    if rs >= 80 and perf_1m >= 10 and dollar_vol >= 80_000_000 and adr >= 4:
+                        candidates.append({
+                            "ticker": stock.get("ticker"),
+                            "company": stock.get("company", ""),
+                            "theme": theme_name,
+                            "rs_52w": rs,
+                            "perf_1m": perf_1m,
+                            "perf_3m": stock.get("perf_3m") or 0,
+                            "adr_pct": adr,
+                        })
+        # 按 RS 排序，最多給 Gemini 15 個候選
+        candidates.sort(key=lambda x: x["rs_52w"], reverse=True)
+        return candidates[:15]
+    except Exception as e:
+        print(f"  fetch_top_stocks_from_scanner: {e}")
+        return []
+
+
 def analyze_with_gemini(context: dict, session: str, now_et: datetime) -> dict:
     if not GEMINI_API_KEY:
         return {"error": "GEMINI_API_KEY not set"}
+
+    candidates = fetch_top_stocks_from_scanner()
 
     idx     = context["indices"]
     credit  = context["credit"]
@@ -280,7 +316,19 @@ Market data:
   S5FI (% stocks > 50DMA):  {f"{s5fi:.1f}%" if s5fi is not None else "N/A"}
   MMTH (% stocks > 200DMA): {f"{mmth:.1f}%" if mmth is not None else "N/A"}
   Nikkei 225: {_gl_str("nikkei")} | DAX: {_gl_str("dax")} | FTSE 100: {_gl_str("ftse")}{rev_note}
+"""
 
+    if candidates:
+        cand_text = "\n".join(
+            f"  {c['ticker']} ({c['company']}) | Theme: {c['theme']} | "
+            f"RS={c['rs_52w']} | 1M={c['perf_1m']:+.1f}% | 3M={c['perf_3m']:+.1f}% | ADR={c['adr_pct']:.1f}%"
+            for c in candidates
+        )
+        prompt += f"""Stock candidates from Thematic Scanner (pre-filtered: RS≥80, 1M≥+10%, AvgDolVol≥$80M, ADR≥4%):
+{cand_text}
+"""
+
+    prompt += f"""
 Output ONLY valid JSON (no markdown wrapping):
 {{
   "mood": "2-6 word market mood — e.g. 'Risk-Off / Global Weakness' or 'Capitulation / Distribution'",
@@ -299,7 +347,10 @@ Rules:
   analysis_para1: 3-5 sentences, connect global → credit → US breadth, cite specific numbers
   analysis_para2: 3-5 sentences, the actionable mechanical plan with key price levels
   technical_signal: {tech_instruction}
-  ticker_intel: exactly 2 conviction (A+/A/A-) + 1 avoid (C/D/F); well-known S&P 500 names
+  ticker_intel: pick exactly 2 conviction longs (grade A+/A/A-) + 1 avoid (grade C/D/F)
+  FROM THE CANDIDATES LIST ABOVE ONLY. Do not invent tickers not on the list.
+  For the avoid: pick the weakest candidate or one showing distribution.
+  reason: 1 sentence citing specific RS, 1M return, and why it fits current market regime.
 """
 
     try:
