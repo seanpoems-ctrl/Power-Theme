@@ -2270,83 +2270,110 @@ const CATALYST_CATEGORIES = [
     key: "fda",
     label: "FDA",
     color: "text-violet-400 bg-violet-500/10 border-violet-500/30",
-    keywords: ["fda", "nda", "bla", "crl", "pdufa", "approval", "approved",
-               "clearance", "510(k)", "fast track", "breakthrough therapy",
-               "accelerated approval", "priority review"],
+    keywords: [
+      "fda approved", "fda approval", "fda rejected", "fda rejection",
+      "fda grants", "fda accepts", "fda refuses", "complete response letter",
+      "nda approved", "bla approved", "nda submitted", "bla submitted",
+      "pdufa date", "fast track designation", "breakthrough therapy designation",
+      "accelerated approval", "priority review granted",
+    ],
   },
   {
     key: "clinical",
     label: "Clinical Trial",
     color: "text-blue-400 bg-blue-500/10 border-blue-500/30",
-    keywords: ["phase 2", "phase 3", "phase ii", "phase iii", "clinical trial",
-               "readout", "interim analysis", "primary endpoint", "overall survival",
-               "progression-free", "efficacy data", "trial results"],
+    keywords: [
+      "phase 3 trial", "phase iii trial", "phase 2 trial", "phase ii trial",
+      "phase 3 results", "phase 3 data", "phase 2 results",
+      "met primary endpoint", "failed to meet", "missed primary endpoint",
+      "interim analysis", "overall survival benefit", "progression-free survival",
+      "trial discontinued", "trial halted",
+    ],
   },
   {
     key: "earnings",
     label: "Earnings",
     color: "text-yellow-400 bg-yellow-500/10 border-yellow-500/30",
-    keywords: ["earnings", "eps", "revenue", "quarterly results", "q1 ", "q2 ",
-               "q3 ", "q4 ", "beats estimates", "misses estimates", "guidance",
-               "profit warning", "revenue warning", "preliminary results",
-               "full-year outlook"],
+    keywords: [
+      "beats estimates", "misses estimates", "beat expectations",
+      "missed expectations", "profit warning", "revenue warning",
+      "cuts guidance", "raises guidance", "lowers outlook",
+      "raises outlook", "preliminary results", "restates earnings",
+      "earnings restatement",
+    ],
   },
   {
     key: "ma",
     label: "M&A",
     color: "text-orange-400 bg-orange-500/10 border-orange-500/30",
-    keywords: ["acquisition", "acquires", "acquired", "merger", "takeover",
-               "buyout", "to acquire", "agrees to buy", "deal valued",
-               "strategic transaction"],
+    keywords: [
+      "agrees to acquire", "to be acquired", "acquisition agreement",
+      "merger agreement", "definitive agreement to acquire",
+      "takeover bid", "buyout offer", "tender offer",
+      "strategic review", "exploring sale",
+    ],
   },
   {
     key: "partnership",
     label: "Partnership",
     color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30",
-    keywords: ["partnership", "licensing", "license agreement", "collaboration",
-               "milestone payment", "co-development", "joint venture",
-               "strategic alliance", "royalty"],
+    keywords: [
+      "license agreement", "licensing deal", "collaboration agreement",
+      "co-development agreement", "milestone payment", "royalty agreement",
+      "exclusive license", "joint development", "strategic collaboration",
+    ],
   },
   {
     key: "contract",
     label: "Contract",
     color: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30",
-    keywords: ["contract", "awarded", "government contract", "defense contract",
-               "multi-year agreement", "purchase order", "supply agreement",
-               "exclusive supplier"],
+    keywords: [
+      "awarded contract", "wins contract", "government contract awarded",
+      "defense contract", "multi-year contract", "exclusive supply agreement",
+      "selected as supplier", "awarded $", "contract worth $",
+    ],
   },
   {
     key: "index",
-    label: "Index",
+    label: "Index Change",
     color: "text-pink-400 bg-pink-500/10 border-pink-500/30",
-    keywords: ["s&p 500", "s&p500", "russell 2000", "russell 1000",
-               "index inclusion", "added to", "removed from index",
-               "index rebalance", "constituent"],
+    keywords: [
+      "added to s&p 500", "removed from s&p 500", "joins s&p 500",
+      "added to russell", "removed from russell", "index addition",
+      "index removal", "s&p 500 inclusion", "s&p 500 constituent",
+    ],
   },
   {
     key: "analyst",
     label: "Analyst",
     color: "text-amber-400 bg-amber-500/10 border-amber-500/30",
-    keywords: ["upgrade", "downgrade", "price target", "raises pt",
-               "lowers pt", "initiates coverage", "overweight", "underweight",
-               "outperform", "underperform", "buy rating", "sell rating",
-               "strong buy", "target price"],
+    keywords: [
+      "upgrades to buy", "upgrades to overweight", "upgrades to outperform",
+      "downgrades to sell", "downgrades to underweight", "downgrades to underperform",
+      "downgrades to neutral", "initiates with buy", "initiates with overweight",
+      "raises price target to", "lowers price target to",
+    ],
   },
   {
     key: "short",
     label: "Short Report",
     color: "text-red-400 bg-red-500/10 border-red-500/30",
-    keywords: ["short seller", "short report", "hindenburg", "citron",
-               "muddy waters", "gotham city", "grizzly research",
-               "fraud allegations", "accounting irregularities"],
+    keywords: [
+      "hindenburg research", "citron research", "muddy waters",
+      "gotham city research", "grizzly research", "short report",
+      "short seller report", "fraud allegations", "accounting fraud",
+      "accounting irregularities",
+    ],
   },
   {
     key: "buyback",
     label: "Buyback / Dividend",
     color: "text-teal-400 bg-teal-500/10 border-teal-500/30",
-    keywords: ["buyback", "share repurchase", "repurchase program",
-               "dividend increase", "special dividend", "dividend raised",
-               "capital return", "quarterly dividend"],
+    keywords: [
+      "share repurchase program", "buyback program", "stock repurchase",
+      "dividend increase", "raises dividend", "special dividend declared",
+      "initiates dividend", "accelerated share repurchase",
+    ],
   },
 ];
 
@@ -2565,20 +2592,44 @@ const SearchBar = ({ data, search, setSearch }) => {
       );
       if (!res.ok) throw new Error(res.status);
       const articles = await res.json();
-      // Filter to catalyst articles only, deduplicate by headline prefix
-      const seen = new Set();
-      const filtered = [];
+      // Filter to catalyst articles only, deduplicate by headline + significant words within 24h
+      const STOPWORDS = new Set([
+        "that","this","with","from","have","will","been","were","they",
+        "their","said","says","after","before","report","stock","shares",
+        "company","says","over","more","than","about","into","would",
+      ]);
+      const sigWords = (text) =>
+        (text || "").toLowerCase()
+          .replace(/[^a-z0-9 ]/g, " ")
+          .split(/\s+/)
+          .filter(w => w.length >= 4 && !STOPWORDS.has(w));
+
+      const dedupedGroups = []; // Each entry = { article, words, timestamp }
       for (const a of (Array.isArray(articles) ? articles : [])) {
         const cat = detectCatalyst(a.headline, a.summary);
         if (!cat) continue;
-        const key = (a.headline || "").slice(0, 60).toLowerCase();
-        if (seen.has(key)) continue;
-        seen.add(key);
-        filtered.push({ ...a, catalyst: cat });
+        const words = new Set(sigWords(a.headline));
+        if (words.size === 0) continue;
+
+        // Check if a similar article exists within 24 hours
+        const isDuplicate = dedupedGroups.some(({ article: existing, words: exWords }) => {
+          if (Math.abs(a.datetime - existing.datetime) > 86400) return false; // >24h apart = not dup
+          const overlap = [...words].filter(w => exWords.has(w)).length;
+          const similarity = overlap / Math.max(words.size, exWords.size);
+          return similarity >= 0.45; // 45% word overlap = duplicate
+        });
+
+        if (!isDuplicate) {
+          dedupedGroups.push({ article: { ...a, catalyst: cat }, words, timestamp: a.datetime });
+        }
       }
-      // Sort newest first, cap at 30
-      filtered.sort((a, b) => b.datetime - a.datetime);
-      setNews(filtered.slice(0, 30));
+
+      const filtered = dedupedGroups
+        .map(g => g.article)
+        .sort((a, b) => b.datetime - a.datetime)
+        .slice(0, 40); // keep up to 40 after dedup
+
+      setNews(filtered);
     } catch {
       setNewsError(true);
     } finally {
