@@ -3734,63 +3734,60 @@ const filtered = useMemo(() => {
             {/* Middle: Market Condition */}
             <div className="w-[300px] flex-shrink-0 flex flex-col self-start">
               {data?.market_condition && (() => {
-                const { signal, spy, qqq, breadth_50d, breadth_200d } = data.market_condition;
+                const { signal, adv_dec, new_hl, sma50_counts, sma200_counts } = data.market_condition;
                 const sigCfg = signal === "green"
                   ? { dot: "bg-emerald-400", glow: "#34d39980", border: "border-emerald-500/30", bg: "bg-emerald-500/[0.06]", label: "Market Uptrend",    guide: "正常執行突破單 — SPY & QQQ 站上所有均線" }
                   : signal === "yellow"
                   ? { dot: "bg-amber-400",   glow: "#fbbf2480", border: "border-amber-500/30",  bg: "bg-amber-500/[0.06]",  label: "Market Correction", guide: "暫停常規突破，只做 RS 最強的少數股票" }
                   : { dot: "bg-red-400",     glow: "#f8717180", border: "border-red-500/30",    bg: "bg-red-500/[0.06]",    label: "Market Downtrend",  guide: "停止所有新倉突破單，現金為王" };
-                const statusCls = st =>
-                  st === "Strong"   ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/30"
-                  : st === "Mediocre" ? "text-amber-400   bg-amber-500/10  border-amber-500/30"
-                  : st === "Lagging"  ? "text-orange-400  bg-orange-500/10 border-orange-500/30"
-                  : st === "Weak"     ? "text-red-400     bg-red-500/10    border-red-500/30"
-                  : "text-zinc-400 bg-zinc-800/40 border-zinc-700/30";
-                const pctCls = v => v == null ? "text-zinc-600" : v > 0 ? "text-emerald-400" : "text-red-400";
-                const fmt    = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(2)}%`;
-                const IndexRow = ({ label, d }) => !d ? null : (
-                  <div className="flex-1 flex flex-col justify-center py-1.5 border-b border-zinc-800/50 last:border-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[10px] font-mono font-bold text-zinc-500 w-7">{label}</span>
-                      <span className="text-[13px] font-mono font-semibold text-zinc-100">${d.price?.toFixed(2) ?? "—"}</span>
-                      <span className={`text-[12px] font-mono font-semibold ${pctCls(d.change_pct)}`}>{fmt(d.change_pct)}</span>
-                      {d.index_status && (
-                        <span className={`ml-auto text-[10px] font-semibold px-1.5 py-0.5 rounded border ${statusCls(d.index_status)}`}>{d.index_status}</span>
-                      )}
-                    </div>
-                    <div className="grid grid-cols-2 pl-9 gap-x-2 text-[10px]">
-                      <div className="flex items-center gap-1">
-                        <span className="text-zinc-600">50MA</span>
-                        <span className={`font-mono font-semibold ${pctCls(d.sma50_pct)}`}>{fmt(d.sma50_pct)}</span>
+                const BC = ({ leftLabel, leftVal, leftCount, rightLabel, rightVal, rightCount, centerLabel }) => {
+                  const lp = leftVal ?? 0;
+                  const rp = rightVal ?? 0;
+                  return (
+                    <div className="flex-1 min-w-[120px] bg-zinc-900/60 border border-zinc-700/40 rounded-lg px-3 py-2">
+                      <div className="flex justify-between items-baseline mb-1.5">
+                        <span className="text-[11px] font-semibold text-emerald-400">{leftLabel}</span>
+                        {centerLabel && <span className="text-[10px] text-zinc-500 font-medium">{centerLabel}</span>}
+                        <span className="text-[11px] font-semibold text-red-400">{rightLabel}</span>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <span className="text-zinc-600">200MA</span>
-                        <span className={`font-mono font-semibold ${pctCls(d.sma200_pct)}`}>{fmt(d.sma200_pct)}</span>
+                      <div className="flex justify-between items-baseline mb-1">
+                        <span className="text-[13px] font-bold text-emerald-300">{lp.toFixed(1)}%{leftCount != null ? ` (${leftCount})` : ""}</span>
+                        <span className="text-[13px] font-bold text-red-300">{rp.toFixed(1)}%{rightCount != null ? ` (${rightCount})` : ""}</span>
+                      </div>
+                      <div className="flex gap-0.5 h-1.5 rounded-full overflow-hidden">
+                        <div className="bg-emerald-500 rounded-l-full transition-all" style={{ width: `${lp}%` }}/>
+                        <div className="bg-red-500 rounded-r-full transition-all" style={{ width: `${rp}%` }}/>
                       </div>
                     </div>
-                  </div>
-                );
+                  );
+                };
                 return (
-                  <div className={`rounded-xl border ${sigCfg.border} ${sigCfg.bg} p-3 flex flex-col h-[240px]`}>
-                    <div className="flex items-center gap-2 pb-1.5 border-b border-zinc-800/50">
+                  <div className={`rounded-xl border ${sigCfg.border} ${sigCfg.bg} p-3 flex flex-col`}>
+                    <div className="flex items-center gap-2 pb-1.5 mb-2 border-b border-zinc-800/50">
                       <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${sigCfg.dot}`} style={{ boxShadow: `0 0 8px 3px ${sigCfg.glow}` }}/>
                       <span className="text-[13px] font-semibold text-zinc-100">{sigCfg.label}</span>
                     </div>
-                    <IndexRow label="SPY" d={spy}/>
-                    <IndexRow label="QQQ" d={qqq}/>
-                    {(breadth_50d != null || breadth_200d != null) && (
-                      <div className="grid grid-cols-2 py-1.5 border-b border-zinc-800/50 text-[10px]">
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-zinc-600">S5FI 50D</span>
-                          {breadth_50d != null && <span className={`font-mono font-bold text-[12px] ${breadth_50d >= 60 ? "text-emerald-400" : breadth_50d >= 40 ? "text-amber-400" : "text-red-400"}`}>{breadth_50d.toFixed(1)}%</span>}
-                        </div>
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-zinc-600">MMTH 200D</span>
-                          {breadth_200d != null && <span className={`font-mono font-bold text-[12px] ${breadth_200d >= 60 ? "text-emerald-400" : breadth_200d >= 40 ? "text-amber-400" : "text-red-400"}`}>{breadth_200d.toFixed(1)}%</span>}
-                        </div>
-                      </div>
-                    )}
-                    <p className="text-[10px] text-zinc-500 pt-1.5 leading-snug mt-auto">{sigCfg.guide}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {adv_dec && (
+                        <BC leftLabel="Advancing" leftVal={adv_dec.adv_pct} leftCount={adv_dec.advancing}
+                            rightLabel="Declining" rightVal={adv_dec.dec_pct} rightCount={adv_dec.declining} />
+                      )}
+                      {new_hl && (
+                        <BC leftLabel="New High" leftVal={new_hl.nh_pct} leftCount={new_hl.new_high}
+                            rightLabel="New Low" rightVal={new_hl.nl_pct} rightCount={new_hl.new_low} />
+                      )}
+                      {sma50_counts && (
+                        <BC leftLabel="Above" leftVal={sma50_counts.above_pct} leftCount={sma50_counts.above}
+                            rightLabel="Below" rightVal={sma50_counts.below_pct} rightCount={sma50_counts.below}
+                            centerLabel="SMA50" />
+                      )}
+                      {sma200_counts && (
+                        <BC leftLabel="Above" leftVal={sma200_counts.above_pct} leftCount={sma200_counts.above}
+                            rightLabel="Below" rightVal={sma200_counts.below_pct} rightCount={sma200_counts.below}
+                            centerLabel="SMA200" />
+                      )}
+                    </div>
+                    <p className="text-[10px] text-zinc-500 pt-2 leading-snug">{sigCfg.guide}</p>
                   </div>
                 );
               })()}
