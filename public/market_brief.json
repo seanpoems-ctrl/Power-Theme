@@ -1,57 +1,57 @@
 {
-  "generated_at": "March 30, 2026 (19:02 EDT)",
-  "session": "Post-Market",
+  "generated_at": "March 31, 2026 (12:13 EDT)",
+  "session": "Market Hours",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6343.72,
-      "change": -25.13,
-      "change_pct": -0.39
+      "price": 6434.6,
+      "change": 90.88,
+      "change_pct": 1.43
     },
     {
       "label": "Nasdaq 100",
-      "price": 22953.38,
-      "change": -179.39,
-      "change_pct": -0.78
+      "price": 23323.25,
+      "change": 369.87,
+      "change_pct": 1.61
     },
     {
       "label": "VIX",
-      "price": 30.61,
-      "change": -0.44,
+      "price": 27.78,
+      "change": -2.83,
       "change_pct": null,
-      "zone_label": "Fear"
+      "zone_label": "Anxiety Zone"
     },
     {
       "label": "10Y Yield",
-      "price": 4.34,
-      "change": -0.1,
+      "price": 4.33,
+      "change": -0.01,
       "change_pct": null,
-      "trend_label": "Falling"
+      "trend_label": "Stable"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 53373.07,
-      "change_pct": -0.43
+      "price": 51885.85,
+      "change_pct": -2.79
     },
     "dax": {
       "label": "DAX",
-      "price": 22300.75,
-      "change_pct": -1.38
+      "price": 22680.04,
+      "change_pct": 0.52
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 9967.4,
-      "change_pct": -0.05
+      "price": 10176.45,
+      "change_pct": 0.48
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 23.5,
-    "mmth": 45.9,
+    "s5fi": 24.9,
+    "mmth": 46.7,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": "FLUSH WATCH"
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Elevated Fear, Broad Weakness",
+  "mood": "Anxious Rally / Short Covering",
   "analysis": {
-    "analysis_para1": "Global markets, particularly the DAX (-1.38%), indicated a cautious tone leading into US trading. Domestically, the 10Y Yield falling to 4.34% alongside a VIX at 30.61 underscores a clear risk-off environment, even with BAML HY Spread data unavailable. Market breadth remains concerningly weak, with only 23.5% of S&P 500 stocks above their 50-day moving average and 45.9% above their 200-day. This internal weakness suggests broad distribution despite relatively modest headline index declines.",
-    "analysis_para2": "Traders should closely monitor key support levels for the S&P 500 around 6300 and the Nasdaq 100 at 22800, as a break could signal further downside acceleration. A sustained VIX above 30 confirms elevated volatility, making range-bound trading or quick reversals more likely, requiring tight stops. Look for any significant uptick in market breadth, specifically S5FI breaking above 30%, as an early sign of stabilization. Conversely, a failure to hold these supports would necessitate continued defensive positioning, with cash remaining king.",
-    "technical_signal": "No reversal pattern confirmed yet. The persistent global weakness and elevated VIX indicate a lack of buying conviction.",
+    "analysis_para1": "Global markets present a mixed picture today, with a notable -2.79% decline in the Nikkei 225 contrasting with modest gains in European indices (DAX +0.52%, FTSE 100 +0.48%). Despite the strong intra-day rally in US equities (S&P 500 +1.43%, Nasdaq 100 +1.61%), underlying market breadth remains concerning. Only 24.9% of S&P 500 stocks are above their 50-day moving average, and fewer than half (46.7%) are above their 200-day moving average. This weak breadth, coupled with a VIX reading of 27.78 ('Anxiety Zone'), suggests a rally within an anxiety-prone environment rather than broad-based conviction.",
+    "analysis_para2": "The mechanical plan for today centers on sustaining momentum above the intraday low and approaching key resistance levels. For the S&P 500, immediate support lies around 6400, with a break below potentially inviting a test of 6350. On the upside, 6450 presents a near-term resistance, with a push above potentially targeting the 6500 psychological level. Traders should watch for the VIX to retreat decisively below 25 for any signs of easing anxiety, while continued weak breadth indicators (S5FI < 30%) suggest caution on chasing this rally without further confirmation. The primary action remains defensive, managing risk until clear directional conviction or a VIX capitulation emerges.",
+    "technical_signal": "No reversal pattern confirmed yet. Today's strong bounce occurs within an elevated VIX environment and persistently weak internal market breadth, indicating underlying fragility.",
     "ticker_intel": [
       {
-        "ticker": "NVDA",
-        "company": "NVIDIA Corporation",
+        "ticker": "MSFT",
+        "company": "Microsoft Corporation",
         "grade": "A+",
-        "reason": "Continues to dominate AI infrastructure, exhibiting strong fundamental momentum despite broader market choppiness."
+        "reason": "Continued strong cloud growth and AI integration positions it for leadership in a volatile environment."
       },
       {
-        "ticker": "JPM",
-        "company": "JPMorgan Chase & Co.",
+        "ticker": "AAPL",
+        "company": "Apple Inc.",
         "grade": "A",
-        "reason": "Solid financial performance and robust capital returns position it favorably amidst broader market volatility."
+        "reason": "Robust ecosystem and consistent cash flow provide a defensive moat amidst broader market uncertainty."
       },
       {
-        "ticker": "FDX",
-        "company": "FedEx Corporation",
+        "ticker": "BA",
+        "company": "The Boeing Company",
         "grade": "C",
-        "reason": "Macroeconomic slowdown concerns and ongoing labor challenges present significant headwinds to its core shipping business."
+        "reason": "Persisting quality control issues and delivery delays continue to weigh on investor confidence and operational outlook."
       }
     ]
   }
