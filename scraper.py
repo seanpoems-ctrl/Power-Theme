@@ -1381,9 +1381,8 @@ def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None, float | 
         else:
             perf = ((valid.iloc[-1] - valid.iloc[0]) / valid.iloc[0] * 100).dropna()
 
-        # Compute S&P 500 breadth: % above SMA50/200, and NH/NL (52W high/low)
+        # Compute S&P 500 breadth: % above SMA50/200 (used for SPY/QQQ breadth indicators)
         above_50 = above_200 = total_50 = total_200 = 0
-        new_high = new_low = total_nh = 0
         for col in valid.columns:
             col_data = valid[col].dropna()
             last = float(col_data.iloc[-1])
@@ -1395,20 +1394,9 @@ def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None, float | 
                 total_200 += 1
                 if last > float(col_data.iloc[-200:].mean()):
                     above_200 += 1
-            if len(col_data) >= 252:
-                total_nh += 1
-                if last >= float(col_data.max()):
-                    new_high += 1
-                elif last <= float(col_data.min()):
-                    new_low += 1
         breadth_50 = round(above_50 / total_50 * 100, 1) if total_50 > 0 else None
         breadth_200 = round(above_200 / total_200 * 100, 1) if total_200 > 0 else None
-        new_hl = {
-            "new_high": new_high, "new_low": new_low, "total": total_nh,
-            "nh_pct": round(new_high / total_nh * 100, 1) if total_nh > 0 else None,
-            "nl_pct": round(new_low / total_nh * 100, 1) if total_nh > 0 else None,
-        } if total_nh > 0 else None
-        logger.info(f"  S&P 500 breadth: {breadth_50}% above SMA50, {breadth_200}% above SMA200 | NH/NL: {new_high}/{new_low}")
+        logger.info(f"  S&P 500 breadth: {breadth_50}% above SMA50, {breadth_200}% above SMA200")
         # Also extract latest price + 1D change for prices.json
         price_data = {}
         for col in valid.columns:
@@ -1420,17 +1408,17 @@ def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None, float | 
                     "price": round(price, 2),
                     "change_pct": round((price - prev) / prev * 100, 2) if prev else None,
                 }
-        return perf.to_dict(), breadth_50, breadth_200, price_data, new_hl
+        return perf.to_dict(), breadth_50, breadth_200, price_data
     except Exception as e:
         logger.warning(f"  S&P 500 RS universe failed: {e}")
-        return {}, None, None, {}, None
+        return {}, None, None, {}
 
 
-def _fetch_finviz_market_breadth() -> tuple[dict | None, dict | None, dict | None]:
-    """Fetch full-market Adv/Dec, SMA50, SMA200 counts from Finviz screener.
+def _fetch_finviz_market_breadth() -> tuple[dict | None, dict | None, dict | None, dict | None]:
+    """Fetch full-market Adv/Dec, NH/NL, SMA50, SMA200 counts from Finviz screener.
 
     Uses NYSE+NASD+AMEX universe (~11000 stocks) via Finviz filter codes.
-    Returns (adv_dec, sma50_counts, sma200_counts).
+    Returns (adv_dec, new_hl, sma50_counts, sma200_counts).
     """
     import re as _re
     import time as _time
@@ -1446,20 +1434,29 @@ def _fetch_finviz_market_breadth() -> tuple[dict | None, dict | None, dict | Non
             return None
 
     try:
-        total    = _get_count("") or 0;          _time.sleep(1.0)
-        adv      = _get_count("ta_change_u");     _time.sleep(1.0)
-        dec      = _get_count("ta_change_d");     _time.sleep(1.0)
-        above50  = _get_count("ta_sma50_pa");     _time.sleep(1.0)
+        total    = _get_count("") or 0;                  _time.sleep(1.0)
+        adv      = _get_count("ta_change_u");             _time.sleep(1.0)
+        dec      = _get_count("ta_change_d");             _time.sleep(1.0)
+        nh       = _get_count("ta_highlow52w_nh");        _time.sleep(1.0)
+        nl       = _get_count("ta_highlow52w_nl");        _time.sleep(1.0)
+        above50  = _get_count("ta_sma50_pa");             _time.sleep(1.0)
         above200 = _get_count("ta_sma200_pa")
 
         if not total:
-            return None, None, None
+            return None, None, None, None
 
         adv_dec = {
             "advancing": adv, "declining": dec, "total": total,
             "adv_pct": round(adv / total * 100, 1) if adv is not None else None,
             "dec_pct": round(dec / total * 100, 1) if dec is not None else None,
         } if adv is not None and dec is not None else None
+
+        nh_nl_total = (nh or 0) + (nl or 0)
+        new_hl = {
+            "new_high": nh, "new_low": nl, "total": nh_nl_total,
+            "nh_pct": round(nh / nh_nl_total * 100, 1) if nh_nl_total > 0 and nh is not None else None,
+            "nl_pct": round(nl / nh_nl_total * 100, 1) if nh_nl_total > 0 and nl is not None else None,
+        } if nh is not None and nl is not None else None
 
         sma50_counts = {
             "above": above50, "below": total - above50 if above50 is not None else None, "total": total,
@@ -1473,11 +1470,11 @@ def _fetch_finviz_market_breadth() -> tuple[dict | None, dict | None, dict | Non
             "below_pct": round((total - above200) / total * 100, 1) if above200 is not None else None,
         } if above200 is not None else None
 
-        logger.info(f"  Finviz market breadth: Adv/Dec={adv}/{dec} | SMA50 above={above50} | SMA200 above={above200} | total={total}")
-        return adv_dec, sma50_counts, sma200_counts
+        logger.info(f"  Finviz market breadth: Adv/Dec={adv}/{dec} | NH/NL={nh}/{nl} | SMA50 above={above50} | SMA200 above={above200} | total={total}")
+        return adv_dec, new_hl, sma50_counts, sma200_counts
     except Exception as e:
         logger.warning(f"  Finviz market breadth failed: {e}")
-        return None, None, None
+        return None, None, None, None
 
 
 def _fetch_nasdaq100_breadth() -> float | None:
@@ -1641,11 +1638,11 @@ def build_data() -> dict:
 
     # ── Step 5: Compute RS vs S&P 500 universe + breadth ──
     logger.info("\nStep 5: Building RS universe from S&P 500...")
-    rs_universe, sp500_breadth, sp500_breadth_200, sp500_prices, sp500_new_hl = _build_sp500_rs_universe()
+    rs_universe, sp500_breadth, sp500_breadth_200, sp500_prices = _build_sp500_rs_universe()
     logger.info(f"  RS universe: {len(rs_universe)} stocks | S&P 500 breadth 50D: {sp500_breadth}% | 200D: {sp500_breadth_200}%")
 
     logger.info("  Fetching full-market breadth from Finviz screener...")
-    finviz_adv_dec, finviz_sma50, finviz_sma200 = _fetch_finviz_market_breadth()
+    finviz_adv_dec, finviz_new_hl, finviz_sma50, finviz_sma200 = _fetch_finviz_market_breadth()
 
     all_stocks_flat = []
     for th in output_themes:
@@ -1700,7 +1697,7 @@ def build_data() -> dict:
         "breadth_50d": sp500_breadth,
         "breadth_200d": sp500_breadth_200,
         "adv_dec": finviz_adv_dec,
-        "new_hl": sp500_new_hl,
+        "new_hl": finviz_new_hl,
         "sma50_counts": finviz_sma50,
         "sma200_counts": finviz_sma200,
         **macro_assets,
