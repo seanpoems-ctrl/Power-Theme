@@ -1632,9 +1632,9 @@ function getNextBriefTime() {
   const now = new Date();
   const todayUTC = new Date(now);
   todayUTC.setUTCHours(0, 0, 0, 0);
-  // Brief runs at 12:30 UTC and 21:30 UTC, Mon–Fri
-  const am = new Date(todayUTC.getTime() + (12 * 60 + 30) * 60000);
-  const pm = new Date(todayUTC.getTime() + (21 * 60 + 30) * 60000);
+  // Brief runs at 12:17 UTC and 21:03 UTC, Mon–Fri
+  const am = new Date(todayUTC.getTime() + (12 * 60 + 17) * 60000);
+  const pm = new Date(todayUTC.getTime() + (21 * 60 + 3) * 60000);
   const nextBusinessDay = (base) => {
     const d = new Date(base);
     do { d.setUTCDate(d.getUTCDate() + 1); } while (d.getUTCDay() === 0 || d.getUTCDay() === 6);
