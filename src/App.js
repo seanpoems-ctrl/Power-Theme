@@ -3732,7 +3732,7 @@ const filtered = useMemo(() => {
               <ScannerBriefFeed briefData={briefData} newsData={newsData}/>
             </div>
             {/* Middle: Market Condition */}
-            <div className="w-[300px] flex-shrink-0 flex flex-col self-start">
+            <div className="w-[520px] flex-shrink-0 flex flex-col self-start">
               {data?.market_condition && (() => {
                 const { signal, adv_dec, new_hl, sma50_counts, sma200_counts } = data.market_condition;
                 const sigCfg = signal === "green"
