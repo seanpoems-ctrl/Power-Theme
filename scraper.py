@@ -1478,106 +1478,6 @@ def _fetch_nasdaq100_breadth() -> float | None:
         return None
 
 
-def _fetch_full_market_breadth() -> dict | None:
-    """Fetch NYSE+Nasdaq+AMEX full market breadth via TradingView screener.
-    Returns adv_dec, new_hl, sma50_counts, sma200_counts dicts."""
-    try:
-        import time as _time
-        columns = ["close", "change", "SMA50", "SMA200", "price_52_week_high", "price_52_week_low"]
-        filter_rule = [
-            {"left": "exchange", "operation": "in_range", "right": ["NYSE", "NASDAQ", "AMEX"]},
-            {"left": "type", "operation": "equal", "right": "stock"},
-        ]
-        # Get total count
-        r = requests.post(
-            "https://scanner.tradingview.com/america/scan",
-            json={"filter": filter_rule, "columns": columns, "range": [0, 1]},
-            headers={"Content-Type": "application/json"}, timeout=15
-        )
-        r.raise_for_status()
-        total_count = r.json().get("totalCount", 0)
-        if total_count == 0:
-            return None
-
-        all_rows = []
-        batch = 500
-        for offset in range(0, min(total_count + batch, 12000), batch):
-            resp = requests.post(
-                "https://scanner.tradingview.com/america/scan",
-                json={"filter": filter_rule, "columns": columns, "range": [offset, offset + batch]},
-                headers={"Content-Type": "application/json"}, timeout=15
-            )
-            resp.raise_for_status()
-            rows = resp.json().get("data", [])
-            if not rows:
-                break
-            all_rows.extend(rows)
-            _time.sleep(0.3)
-
-        advancing = declining = new_high = new_low = 0
-        above_50 = below_50 = above_200 = below_200 = 0
-        for row in all_rows:
-            d = row.get("d", [])
-            if len(d) < 6:
-                continue
-            close, change, sma50, sma200, wh52, wl52 = d[0], d[1], d[2], d[3], d[4], d[5]
-            if change is not None:
-                if change > 0:
-                    advancing += 1
-                elif change < 0:
-                    declining += 1
-            if close is not None and wh52 is not None and wl52 is not None:
-                if close >= wh52 * 0.995:
-                    new_high += 1
-                elif close <= wl52 * 1.005:
-                    new_low += 1
-            if close is not None and sma50 is not None:
-                if close > sma50:
-                    above_50 += 1
-                else:
-                    below_50 += 1
-            if close is not None and sma200 is not None:
-                if close > sma200:
-                    above_200 += 1
-                else:
-                    below_200 += 1
-
-        total_adv = advancing + declining
-        total_hl  = new_high + new_low
-        total_50  = above_50 + below_50
-        total_200 = above_200 + below_200
-        logger.info(
-            f"  Full market breadth ({len(all_rows)} stocks): "
-            f"Adv/Dec {advancing}/{declining} | NH/NL {new_high}/{new_low} | "
-            f">SMA50 {above_50}/{below_50} | >SMA200 {above_200}/{below_200}"
-        )
-        return {
-            "adv_dec": {
-                "advancing": advancing, "declining": declining, "total": total_adv,
-                "adv_pct": round(advancing / total_adv * 100, 1) if total_adv else None,
-                "dec_pct": round(declining / total_adv * 100, 1) if total_adv else None,
-            },
-            "new_hl": {
-                "new_high": new_high, "new_low": new_low, "total": total_hl,
-                "nh_pct": round(new_high / (total_hl or 1) * 100, 1),
-                "nl_pct": round(new_low  / (total_hl or 1) * 100, 1),
-            },
-            "sma50_counts": {
-                "above": above_50, "below": below_50, "total": total_50,
-                "above_pct": round(above_50 / total_50 * 100, 1) if total_50 else None,
-                "below_pct": round(below_50 / total_50 * 100, 1) if total_50 else None,
-            },
-            "sma200_counts": {
-                "above": above_200, "below": below_200, "total": total_200,
-                "above_pct": round(above_200 / total_200 * 100, 1) if total_200 else None,
-                "below_pct": round(below_200 / total_200 * 100, 1) if total_200 else None,
-            },
-        }
-    except Exception as e:
-        logger.warning(f"  Full market breadth failed: {e}")
-        return None
-
-
 # ──────────────────────────────────────────────────────────────
 # Scoring
 # ──────────────────────────────────────────────────────────────
@@ -1741,15 +1641,6 @@ def build_data() -> dict:
     iwm_ind = fetch_market_indicators("IWM", breadth=sp500_breadth)  # S&P 500 as proxy
     _sleep()
     macro_assets = fetch_macro_assets()
-
-    # Full market breadth (NYSE+Nasdaq+AMEX ~5500 stocks) via TradingView
-    # Falls back to S&P 500 computed values if TradingView fetch fails
-    full_breadth = _fetch_full_market_breadth()
-    adv_dec     = full_breadth["adv_dec"]      if full_breadth else sp500_adv_dec
-    new_hl      = full_breadth["new_hl"]       if full_breadth else sp500_new_hl
-    sma50_counts  = full_breadth["sma50_counts"]  if full_breadth else sp500_sma50
-    sma200_counts = full_breadth["sma200_counts"] if full_breadth else sp500_sma200
-
     signal = _market_signal(spy_ind, qqq_ind) if spy_ind and qqq_ind else "yellow"
     market_condition = {
         "signal": signal,
@@ -1758,10 +1649,10 @@ def build_data() -> dict:
         "iwm": iwm_ind,
         "breadth_50d": sp500_breadth,
         "breadth_200d": sp500_breadth_200,
-        "adv_dec": adv_dec,
-        "new_hl": new_hl,
-        "sma50_counts": sma50_counts,
-        "sma200_counts": sma200_counts,
+        "adv_dec": sp500_adv_dec,
+        "new_hl": sp500_new_hl,
+        "sma50_counts": sp500_sma50,
+        "sma200_counts": sp500_sma200,
         **macro_assets,
     }
     logger.info(
