@@ -1367,8 +1367,8 @@ def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None, float | 
             )
             lines = csv_resp.text.strip().split("\n")[1:]
             tickers = [line.split(",")[0].strip().replace(".", "-") for line in lines if line]
-        logger.info(f"  Downloading {len(tickers)} S&P 500 stocks (1Y for 200D breadth)...")
-        data = yf.download(tickers, period="1y", interval="1d", auto_adjust=True, progress=False)
+        logger.info(f"  Downloading {len(tickers)} S&P 500 stocks (15mo for 52W NH/NL + 200D breadth)...")
+        data = yf.download(tickers, period="15mo", interval="1d", auto_adjust=True, progress=False)
         closes = data["Close"]
         valid = closes.dropna(thresh=int(len(closes) * 0.5), axis=1)
 
