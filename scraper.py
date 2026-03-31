@@ -1126,6 +1126,11 @@ _TV_INDEX_SYMBOL = {
     "QQQ": ("CME_MINI:NQ1!",  _TV_FUTURES_SCAN_URL),
     "IWM": ("AMEX:IWM",       _TV_SCAN_URL),
 }
+# ETF symbols for display price/change (overrides futures price in output)
+_TV_ETF_SYMBOL = {
+    "SPY": "AMEX:SPY",
+    "QQQ": "NASDAQ:QQQ",
+}
 # Macro futures symbols for BTC / Gold / Oil via TradingView
 _TV_MACRO_SYMBOL = {
     "btc": ("CME:BTC1!",   _TV_FUTURES_SCAN_URL),
@@ -1246,10 +1251,21 @@ def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
             sma50_pct = round((price / sma50 - 1) * 100, 2) if sma50 else None
             sma200_pct = round((price / sma200 - 1) * 100, 2) if sma200 else None
             index_status = _elite_status(price, sma10, sma20, sma50, sma200, rsi14, breadth)
-            logger.info(f"  {sym} market indicators (TradingView): price={price} chg={raw['change_pct']:.2f}%")
+
+            # Override display price/change_pct with ETF spot price (not futures)
+            display_price = round(price, 2)
+            display_change = round(raw["change_pct"], 2)
+            etf_sym = _TV_ETF_SYMBOL.get(sym)
+            if etf_sym:
+                etf_raw = _fetch_tradingview_index_snapshot(etf_sym, _TV_SCAN_URL)
+                if etf_raw:
+                    display_price = round(etf_raw["price"], 2)
+                    display_change = round(etf_raw["change_pct"], 2)
+
+            logger.info(f"  {sym} market indicators (TradingView): price={display_price} chg={display_change:.2f}%")
             return {
-                "price": round(price, 2),
-                "change_pct": round(raw["change_pct"], 2),
+                "price": display_price,
+                "change_pct": display_change,
                 "index_status": index_status,
                 "breadth": breadth,
                 "rsi14": round(rsi14, 2),
