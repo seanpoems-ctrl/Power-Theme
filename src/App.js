@@ -367,11 +367,67 @@ const MarketCondition = ({ mc }) => {
       {d?.index_status && <span className={`${statusColor(d.index_status)}`}>{d.index_status}</span>}
     </span>
   );
+  const { adv_dec, new_hl, sma50_counts, sma200_counts } = mc;
+
+  const BreadthCard = ({ leftLabel, leftVal, leftCount, rightLabel, rightVal, rightCount, centerLabel }) => {
+    const leftPct = leftVal ?? 0;
+    const rightPct = rightVal ?? 0;
+    return (
+      <div className="flex-1 min-w-[160px] bg-zinc-900/60 border border-zinc-700/40 rounded-lg px-3 py-2">
+        <div className="flex justify-between items-baseline mb-1.5">
+          <span className="text-[11px] font-semibold text-emerald-400">{leftLabel}</span>
+          {centerLabel && <span className="text-[10px] text-zinc-500 font-medium">{centerLabel}</span>}
+          <span className="text-[11px] font-semibold text-red-400">{rightLabel}</span>
+        </div>
+        <div className="flex justify-between items-baseline mb-1">
+          <span className="text-[13px] font-bold text-emerald-300">{leftPct.toFixed(1)}%{leftCount != null ? ` (${leftCount})` : ""}</span>
+          <span className="text-[13px] font-bold text-red-300">{rightPct.toFixed(1)}%{rightCount != null ? ` (${rightCount})` : ""}</span>
+        </div>
+        <div className="flex gap-0.5 h-1.5 rounded-full overflow-hidden">
+          <div className="bg-emerald-500 rounded-l-full transition-all" style={{ width: `${leftPct}%` }}/>
+          <div className="bg-red-500 rounded-r-full transition-all" style={{ width: `${rightPct}%` }}/>
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <div className={`mb-4 px-4 py-2.5 rounded-lg border flex flex-wrap items-center gap-3 ${cfg.ring}`}>
-      <span className={`w-2 h-2 rounded-full flex-shrink-0 ${cfg.dot}`}/>
-      <span className="text-[13px] font-semibold text-zinc-200">{cfg.label}</span>
-      <span className="text-[12px] text-zinc-500 hidden sm:block">{cfg.sub}</span>
+    <div className={`mb-4 rounded-lg border ${cfg.ring}`}>
+      <div className="px-4 py-2 flex flex-wrap items-center gap-3 border-b border-zinc-700/30">
+        <span className={`w-2 h-2 rounded-full flex-shrink-0 ${cfg.dot}`}/>
+        <span className="text-[13px] font-semibold text-zinc-200">{cfg.label}</span>
+        <span className="text-[12px] text-zinc-500 hidden sm:block">{cfg.sub}</span>
+      </div>
+      {(adv_dec || new_hl || sma50_counts || sma200_counts) && (
+        <div className="px-3 py-2.5 flex flex-wrap gap-2">
+          {adv_dec && (
+            <BreadthCard
+              leftLabel="Advancing" leftVal={adv_dec.adv_pct} leftCount={adv_dec.advancing}
+              rightLabel="Declining" rightVal={adv_dec.dec_pct} rightCount={adv_dec.declining}
+            />
+          )}
+          {new_hl && (
+            <BreadthCard
+              leftLabel="New High" leftVal={new_hl.nh_pct} leftCount={new_hl.new_high}
+              rightLabel="New Low" rightVal={new_hl.nl_pct} rightCount={new_hl.new_low}
+            />
+          )}
+          {sma50_counts && (
+            <BreadthCard
+              leftLabel="Above" leftVal={sma50_counts.above_pct} leftCount={sma50_counts.above}
+              centerLabel="SMA50"
+              rightLabel="Below" rightVal={sma50_counts.below_pct} rightCount={sma50_counts.below}
+            />
+          )}
+          {sma200_counts && (
+            <BreadthCard
+              leftLabel="Above" leftVal={sma200_counts.above_pct} leftCount={sma200_counts.above}
+              centerLabel="SMA200"
+              rightLabel="Below" rightVal={sma200_counts.below_pct} rightCount={sma200_counts.below}
+            />
+          )}
+        </div>
+      )}
     </div>
   );
 };

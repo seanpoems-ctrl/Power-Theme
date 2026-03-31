@@ -1329,7 +1329,7 @@ def _market_signal(spy: dict, qqq: dict) -> str:
 # RS Universe (S&P 500)
 # ──────────────────────────────────────────────────────────────
 
-def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None, float | None, dict]:
+def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None, float | None, dict, dict | None, dict | None, dict | None, dict | None]:
     """Download S&P 500 1-year data. Returns (rs_dict, breadth_50d_pct, breadth_200d_pct, price_data)."""
     try:
         import pandas as pd
@@ -1366,7 +1366,9 @@ def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None, float | 
             perf = ((valid.iloc[-1] - valid.iloc[0]) / valid.iloc[0] * 100).dropna()
 
         # Compute breadth: % of S&P 500 stocks above their 50-day and 200-day SMA
+        # Also compute Advancing/Declining and New 52W High/Low counts
         above_50 = above_200 = total_50 = total_200 = 0
+        advancing = declining = new_high = new_low = total_adv = total_nh = 0
         for col in valid.columns:
             col_data = valid[col].dropna()
             last = float(col_data.iloc[-1])
@@ -1378,9 +1380,42 @@ def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None, float | 
                 total_200 += 1
                 if last > float(col_data.iloc[-200:].mean()):
                     above_200 += 1
+            if len(col_data) >= 2:
+                total_adv += 1
+                prev = float(col_data.iloc[-2])
+                if last > prev:
+                    advancing += 1
+                elif last < prev:
+                    declining += 1
+            if len(col_data) >= 252:
+                total_nh += 1
+                if last >= float(col_data.max()):
+                    new_high += 1
+                elif last <= float(col_data.min()):
+                    new_low += 1
         breadth_50 = round(above_50 / total_50 * 100, 1) if total_50 > 0 else None
         breadth_200 = round(above_200 / total_200 * 100, 1) if total_200 > 0 else None
-        logger.info(f"  S&P 500 breadth: {breadth_50}% above SMA50, {breadth_200}% above SMA200")
+        adv_dec = {
+            "advancing": advancing, "declining": declining, "total": total_adv,
+            "adv_pct": round(advancing / total_adv * 100, 1) if total_adv > 0 else None,
+            "dec_pct": round(declining / total_adv * 100, 1) if total_adv > 0 else None,
+        } if total_adv > 0 else None
+        new_hl = {
+            "new_high": new_high, "new_low": new_low, "total": total_nh,
+            "nh_pct": round(new_high / total_nh * 100, 1) if total_nh > 0 else None,
+            "nl_pct": round(new_low / total_nh * 100, 1) if total_nh > 0 else None,
+        } if total_nh > 0 else None
+        sma50_counts = {
+            "above": above_50, "below": total_50 - above_50, "total": total_50,
+            "above_pct": breadth_50,
+            "below_pct": round((total_50 - above_50) / total_50 * 100, 1) if total_50 > 0 else None,
+        } if total_50 > 0 else None
+        sma200_counts = {
+            "above": above_200, "below": total_200 - above_200, "total": total_200,
+            "above_pct": breadth_200,
+            "below_pct": round((total_200 - above_200) / total_200 * 100, 1) if total_200 > 0 else None,
+        } if total_200 > 0 else None
+        logger.info(f"  S&P 500 breadth: {breadth_50}% above SMA50, {breadth_200}% above SMA200 | Adv/Dec: {advancing}/{declining} | NH/NL: {new_high}/{new_low}")
         # Also extract latest price + 1D change for prices.json
         price_data = {}
         for col in valid.columns:
@@ -1392,10 +1427,10 @@ def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None, float | 
                     "price": round(price, 2),
                     "change_pct": round((price - prev) / prev * 100, 2) if prev else None,
                 }
-        return perf.to_dict(), breadth_50, breadth_200, price_data
+        return perf.to_dict(), breadth_50, breadth_200, price_data, adv_dec, new_hl, sma50_counts, sma200_counts
     except Exception as e:
         logger.warning(f"  S&P 500 RS universe failed: {e}")
-        return {}, None, None, {}
+        return {}, None, None, {}, None, None, None, None
 
 
 def _fetch_nasdaq100_breadth() -> float | None:
@@ -1559,7 +1594,7 @@ def build_data() -> dict:
 
     # ── Step 5: Compute RS vs S&P 500 universe + breadth ──
     logger.info("\nStep 5: Building RS universe from S&P 500...")
-    rs_universe, sp500_breadth, sp500_breadth_200, sp500_prices = _build_sp500_rs_universe()
+    rs_universe, sp500_breadth, sp500_breadth_200, sp500_prices, sp500_adv_dec, sp500_new_hl, sp500_sma50, sp500_sma200 = _build_sp500_rs_universe()
     logger.info(f"  RS universe: {len(rs_universe)} stocks | S&P 500 breadth 50D: {sp500_breadth}% | 200D: {sp500_breadth_200}%")
 
     all_stocks_flat = []
@@ -1614,6 +1649,10 @@ def build_data() -> dict:
         "iwm": iwm_ind,
         "breadth_50d": sp500_breadth,
         "breadth_200d": sp500_breadth_200,
+        "adv_dec": sp500_adv_dec,
+        "new_hl": sp500_new_hl,
+        "sma50_counts": sp500_sma50,
+        "sma200_counts": sp500_sma200,
         **macro_assets,
     }
     logger.info(
