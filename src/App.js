@@ -3726,74 +3726,72 @@ const filtered = useMemo(() => {
 
       {tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
         <div className="max-w-[1400px] mx-auto px-4 pt-2 pb-4">
+          {/* Market Condition — full-width row */}
+          {data?.market_condition && (() => {
+            const { signal, adv_dec, new_hl, sma50_counts, sma200_counts } = data.market_condition;
+            const sigCfg = signal === "green"
+              ? { dot: "bg-emerald-400", glow: "#34d39980", border: "border-emerald-500/30", bg: "bg-emerald-500/[0.06]", label: "Market Uptrend",    guide: "正常執行突破單 — SPY & QQQ 站上所有均線" }
+              : signal === "yellow"
+              ? { dot: "bg-amber-400",   glow: "#fbbf2480", border: "border-amber-500/30",  bg: "bg-amber-500/[0.06]",  label: "Market Correction", guide: "暫停常規突破，只做 RS 最強的少數股票" }
+              : { dot: "bg-red-400",     glow: "#f8717180", border: "border-red-500/30",    bg: "bg-red-500/[0.06]",    label: "Market Downtrend",  guide: "停止所有新倉突破單，現金為王" };
+            const BC = ({ leftLabel, leftVal, leftCount, rightLabel, rightVal, rightCount, centerLabel }) => {
+              const lp = leftVal ?? 0;
+              const rp = rightVal ?? 0;
+              return (
+                <div className="flex-1 min-w-[120px] bg-zinc-900/60 border border-zinc-700/40 rounded-lg px-3 py-2">
+                  <div className="flex justify-between items-baseline mb-1.5">
+                    <span className="text-[11px] font-semibold text-emerald-400">{leftLabel}</span>
+                    {centerLabel && <span className="text-[10px] text-zinc-500 font-medium">{centerLabel}</span>}
+                    <span className="text-[11px] font-semibold text-red-400">{rightLabel}</span>
+                  </div>
+                  <div className="flex justify-between items-baseline mb-1">
+                    <span className="text-[13px] font-bold text-emerald-300">{lp.toFixed(1)}%{leftCount != null ? ` (${leftCount})` : ""}</span>
+                    <span className="text-[13px] font-bold text-red-300">{rp.toFixed(1)}%{rightCount != null ? ` (${rightCount})` : ""}</span>
+                  </div>
+                  <div className="flex gap-0.5 h-1.5 rounded-full overflow-hidden">
+                    <div className="bg-emerald-500 rounded-l-full transition-all" style={{ width: `${lp}%` }}/>
+                    <div className="bg-red-500 rounded-r-full transition-all" style={{ width: `${rp}%` }}/>
+                  </div>
+                </div>
+              );
+            };
+            return (
+              <div className={`rounded-xl border ${sigCfg.border} ${sigCfg.bg} p-3 mb-2`}>
+                <div className="flex items-center gap-2 pb-1.5 mb-2 border-b border-zinc-800/50">
+                  <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${sigCfg.dot}`} style={{ boxShadow: `0 0 8px 3px ${sigCfg.glow}` }}/>
+                  <span className="text-[13px] font-semibold text-zinc-100">{sigCfg.label}</span>
+                  <span className="text-[10px] text-zinc-500 ml-auto">{sigCfg.guide}</span>
+                </div>
+                <div className="flex gap-2">
+                  {adv_dec && (
+                    <BC leftLabel="Advancing" leftVal={adv_dec.adv_pct} leftCount={adv_dec.advancing}
+                        rightLabel="Declining" rightVal={adv_dec.dec_pct} rightCount={adv_dec.declining} />
+                  )}
+                  {new_hl && (
+                    <BC leftLabel="New High" leftVal={new_hl.nh_pct} leftCount={new_hl.new_high}
+                        rightLabel="New Low" rightVal={new_hl.nl_pct} rightCount={new_hl.new_low} />
+                  )}
+                  {sma50_counts && (
+                    <BC leftLabel="Above" leftVal={sma50_counts.above_pct} leftCount={sma50_counts.above}
+                        rightLabel="Below" rightVal={sma50_counts.below_pct} rightCount={sma50_counts.below}
+                        centerLabel="SMA50" />
+                  )}
+                  {sma200_counts && (
+                    <BC leftLabel="Above" leftVal={sma200_counts.above_pct} leftCount={sma200_counts.above}
+                        rightLabel="Below" rightVal={sma200_counts.below_pct} rightCount={sma200_counts.below}
+                        centerLabel="SMA200" />
+                  )}
+                </div>
+              </div>
+            );
+          })()}
           <div className="flex items-stretch gap-6 mb-2">
             <div className="w-[300px] flex-shrink-0 flex flex-col gap-4">
               <VixGauge initialVix={data?.vix}/>
               <ScannerBriefFeed briefData={briefData} newsData={newsData}/>
             </div>
-            {/* Middle: Market Condition */}
-            <div className="w-[520px] flex-shrink-0 flex flex-col self-start">
-              {data?.market_condition && (() => {
-                const { signal, adv_dec, new_hl, sma50_counts, sma200_counts } = data.market_condition;
-                const sigCfg = signal === "green"
-                  ? { dot: "bg-emerald-400", glow: "#34d39980", border: "border-emerald-500/30", bg: "bg-emerald-500/[0.06]", label: "Market Uptrend",    guide: "正常執行突破單 — SPY & QQQ 站上所有均線" }
-                  : signal === "yellow"
-                  ? { dot: "bg-amber-400",   glow: "#fbbf2480", border: "border-amber-500/30",  bg: "bg-amber-500/[0.06]",  label: "Market Correction", guide: "暫停常規突破，只做 RS 最強的少數股票" }
-                  : { dot: "bg-red-400",     glow: "#f8717180", border: "border-red-500/30",    bg: "bg-red-500/[0.06]",    label: "Market Downtrend",  guide: "停止所有新倉突破單，現金為王" };
-                const BC = ({ leftLabel, leftVal, leftCount, rightLabel, rightVal, rightCount, centerLabel }) => {
-                  const lp = leftVal ?? 0;
-                  const rp = rightVal ?? 0;
-                  return (
-                    <div className="flex-1 min-w-[120px] bg-zinc-900/60 border border-zinc-700/40 rounded-lg px-3 py-2">
-                      <div className="flex justify-between items-baseline mb-1.5">
-                        <span className="text-[11px] font-semibold text-emerald-400">{leftLabel}</span>
-                        {centerLabel && <span className="text-[10px] text-zinc-500 font-medium">{centerLabel}</span>}
-                        <span className="text-[11px] font-semibold text-red-400">{rightLabel}</span>
-                      </div>
-                      <div className="flex justify-between items-baseline mb-1">
-                        <span className="text-[13px] font-bold text-emerald-300">{lp.toFixed(1)}%{leftCount != null ? ` (${leftCount})` : ""}</span>
-                        <span className="text-[13px] font-bold text-red-300">{rp.toFixed(1)}%{rightCount != null ? ` (${rightCount})` : ""}</span>
-                      </div>
-                      <div className="flex gap-0.5 h-1.5 rounded-full overflow-hidden">
-                        <div className="bg-emerald-500 rounded-l-full transition-all" style={{ width: `${lp}%` }}/>
-                        <div className="bg-red-500 rounded-r-full transition-all" style={{ width: `${rp}%` }}/>
-                      </div>
-                    </div>
-                  );
-                };
-                return (
-                  <div className={`rounded-xl border ${sigCfg.border} ${sigCfg.bg} p-3 flex flex-col`}>
-                    <div className="flex items-center gap-2 pb-1.5 mb-2 border-b border-zinc-800/50">
-                      <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${sigCfg.dot}`} style={{ boxShadow: `0 0 8px 3px ${sigCfg.glow}` }}/>
-                      <span className="text-[13px] font-semibold text-zinc-100">{sigCfg.label}</span>
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {adv_dec && (
-                        <BC leftLabel="Advancing" leftVal={adv_dec.adv_pct} leftCount={adv_dec.advancing}
-                            rightLabel="Declining" rightVal={adv_dec.dec_pct} rightCount={adv_dec.declining} />
-                      )}
-                      {new_hl && (
-                        <BC leftLabel="New High" leftVal={new_hl.nh_pct} leftCount={new_hl.new_high}
-                            rightLabel="New Low" rightVal={new_hl.nl_pct} rightCount={new_hl.new_low} />
-                      )}
-                      {sma50_counts && (
-                        <BC leftLabel="Above" leftVal={sma50_counts.above_pct} leftCount={sma50_counts.above}
-                            rightLabel="Below" rightVal={sma50_counts.below_pct} rightCount={sma50_counts.below}
-                            centerLabel="SMA50" />
-                      )}
-                      {sma200_counts && (
-                        <BC leftLabel="Above" leftVal={sma200_counts.above_pct} leftCount={sma200_counts.above}
-                            rightLabel="Below" rightVal={sma200_counts.below_pct} rightCount={sma200_counts.below}
-                            centerLabel="SMA200" />
-                      )}
-                    </div>
-                    <p className="text-[10px] text-zinc-500 pt-2 leading-snug">{sigCfg.guide}</p>
-                  </div>
-                );
-              })()}
-            </div>
             {/* Right: Leaderboard */}
-            <div className="flex-1 min-w-0 ml-20">
+            <div className="flex-1 min-w-0">
               {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
             </div>
           </div>
