@@ -1198,9 +1198,9 @@ const VixGauge = ({ initialVix }) => {
       </div>
 
       {/* VIX number + badge */}
-      <div className="flex items-end gap-3 mb-auto relative z-10">
+      <div className="flex items-end gap-3 mb-2 relative z-10">
         <div>
-          <span className="text-[46px] font-black font-mono tabular-nums leading-none"
+          <span className="text-[32px] font-black font-mono tabular-nums leading-none"
             style={{
               color: active.color,
               textShadow: `0 0 24px rgba(${glowRgb},0.55), 0 0 8px rgba(${glowRgb},0.3)`,
@@ -1270,7 +1270,7 @@ const VixGauge = ({ initialVix }) => {
           <span className="text-[13px] font-extrabold font-mono tabular-nums ml-auto"
             style={{ color: active.color }}>±{expectedMovePct.toFixed(2)}%</span>
         </div>
-        <p className="text-[10px] leading-relaxed text-zinc-600 line-clamp-2">{active.impact}</p>
+        <p className="text-[10px] leading-relaxed text-zinc-600">{active.impact}</p>
       </div>
 
     </div>
