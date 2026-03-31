@@ -80,6 +80,7 @@ jobs:
         run: npm install --legacy-peer-deps && npm run build
         env:
           CI: false
+          REACT_APP_FINNHUB_KEY: ${{ secrets.FINNHUB_API_KEY }}
 
       - uses: actions/configure-pages@v4
 

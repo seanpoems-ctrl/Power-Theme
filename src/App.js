@@ -2262,6 +2262,102 @@ const THEME_ETF_MAP = {
   "Fintech":                       "FINX",
 };
 
+// ── Finnhub Catalyst Feed ──
+const FINNHUB_KEY = process.env.REACT_APP_FINNHUB_KEY || "";
+
+const CATALYST_CATEGORIES = [
+  {
+    key: "fda",
+    label: "FDA",
+    color: "text-violet-400 bg-violet-500/10 border-violet-500/30",
+    keywords: ["fda", "nda", "bla", "crl", "pdufa", "approval", "approved",
+               "clearance", "510(k)", "fast track", "breakthrough therapy",
+               "accelerated approval", "priority review"],
+  },
+  {
+    key: "clinical",
+    label: "Clinical Trial",
+    color: "text-blue-400 bg-blue-500/10 border-blue-500/30",
+    keywords: ["phase 2", "phase 3", "phase ii", "phase iii", "clinical trial",
+               "readout", "interim analysis", "primary endpoint", "overall survival",
+               "progression-free", "efficacy data", "trial results"],
+  },
+  {
+    key: "earnings",
+    label: "Earnings",
+    color: "text-yellow-400 bg-yellow-500/10 border-yellow-500/30",
+    keywords: ["earnings", "eps", "revenue", "quarterly results", "q1 ", "q2 ",
+               "q3 ", "q4 ", "beats estimates", "misses estimates", "guidance",
+               "profit warning", "revenue warning", "preliminary results",
+               "full-year outlook"],
+  },
+  {
+    key: "ma",
+    label: "M&A",
+    color: "text-orange-400 bg-orange-500/10 border-orange-500/30",
+    keywords: ["acquisition", "acquires", "acquired", "merger", "takeover",
+               "buyout", "to acquire", "agrees to buy", "deal valued",
+               "strategic transaction"],
+  },
+  {
+    key: "partnership",
+    label: "Partnership",
+    color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30",
+    keywords: ["partnership", "licensing", "license agreement", "collaboration",
+               "milestone payment", "co-development", "joint venture",
+               "strategic alliance", "royalty"],
+  },
+  {
+    key: "contract",
+    label: "Contract",
+    color: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30",
+    keywords: ["contract", "awarded", "government contract", "defense contract",
+               "multi-year agreement", "purchase order", "supply agreement",
+               "exclusive supplier"],
+  },
+  {
+    key: "index",
+    label: "Index",
+    color: "text-pink-400 bg-pink-500/10 border-pink-500/30",
+    keywords: ["s&p 500", "s&p500", "russell 2000", "russell 1000",
+               "index inclusion", "added to", "removed from index",
+               "index rebalance", "constituent"],
+  },
+  {
+    key: "analyst",
+    label: "Analyst",
+    color: "text-amber-400 bg-amber-500/10 border-amber-500/30",
+    keywords: ["upgrade", "downgrade", "price target", "raises pt",
+               "lowers pt", "initiates coverage", "overweight", "underweight",
+               "outperform", "underperform", "buy rating", "sell rating",
+               "strong buy", "target price"],
+  },
+  {
+    key: "short",
+    label: "Short Report",
+    color: "text-red-400 bg-red-500/10 border-red-500/30",
+    keywords: ["short seller", "short report", "hindenburg", "citron",
+               "muddy waters", "gotham city", "grizzly research",
+               "fraud allegations", "accounting irregularities"],
+  },
+  {
+    key: "buyback",
+    label: "Buyback / Dividend",
+    color: "text-teal-400 bg-teal-500/10 border-teal-500/30",
+    keywords: ["buyback", "share repurchase", "repurchase program",
+               "dividend increase", "special dividend", "dividend raised",
+               "capital return", "quarterly dividend"],
+  },
+];
+
+function detectCatalyst(headline, summary) {
+  const text = ((headline || "") + " " + (summary || "")).toLowerCase();
+  for (const cat of CATALYST_CATEGORIES) {
+    if (cat.keywords.some(kw => text.includes(kw))) return cat;
+  }
+  return null;
+}
+
 // ── Merged Search + Ticker Lookup ──
 const SearchBar = ({ data, search, setSearch }) => {
   const [open, setOpen] = useState(false);
@@ -2277,6 +2373,10 @@ const SearchBar = ({ data, search, setSearch }) => {
   }, []);
   const [tickerHover, setTickerHover] = useState(null); // { ticker, rect } for TVPopup
   const [selectedTheme, setSelectedTheme] = useState(null); // theme name to expand stock list
+  const [activeTab, setActiveTab]     = useState("info");
+  const [news, setNews]               = useState([]);
+  const [newsLoading, setNewsLoading] = useState(false);
+  const [newsError, setNewsError]     = useState(false);
   const [selectedSubTheme, setSelectedSubTheme] = useState(null); // subtheme name to expand stock list
   const [searchHistory, setSearchHistory] = useState(() => {
     try { return JSON.parse(localStorage.getItem('searchHistory') || '[]'); } catch { return []; }
@@ -2444,6 +2544,48 @@ const SearchBar = ({ data, search, setSearch }) => {
   const cachedPrice = fullResult ? priceCache[fullResult.ticker] : null;
   const displayPrice = livePrice || (fullResult?.price != null ? { price: fullResult.price, change_pct: fullResult.change_pct } : null) || cachedPrice;
 
+  // Reset news state when ticker changes
+  useEffect(() => {
+    setActiveTab("info");
+    setNews([]);
+    setNewsError(false);
+  }, [fullResult?.ticker]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const fetchNews = async (ticker) => {
+    if (!FINNHUB_KEY) { setNewsError(true); return; }
+    setNewsLoading(true);
+    setNewsError(false);
+    try {
+      const to   = new Date();
+      const from = new Date(to.getTime() - 180 * 24 * 60 * 60 * 1000); // 6 months
+      const fmt  = d => d.toISOString().split("T")[0];
+      const res  = await fetch(
+        `https://finnhub.io/api/v1/company-news?symbol=${ticker}` +
+        `&from=${fmt(from)}&to=${fmt(to)}&token=${FINNHUB_KEY}`
+      );
+      if (!res.ok) throw new Error(res.status);
+      const articles = await res.json();
+      // Filter to catalyst articles only, deduplicate by headline prefix
+      const seen = new Set();
+      const filtered = [];
+      for (const a of (Array.isArray(articles) ? articles : [])) {
+        const cat = detectCatalyst(a.headline, a.summary);
+        if (!cat) continue;
+        const key = (a.headline || "").slice(0, 60).toLowerCase();
+        if (seen.has(key)) continue;
+        seen.add(key);
+        filtered.push({ ...a, catalyst: cat });
+      }
+      // Sort newest first, cap at 30
+      filtered.sort((a, b) => b.datetime - a.datetime);
+      setNews(filtered.slice(0, 30));
+    } catch {
+      setNewsError(true);
+    } finally {
+      setNewsLoading(false);
+    }
+  };
+
   const showSuggestions = open && q.length >= 1 && !fullResult && suggestions.length > 0;
   const noMatch = open && q.length >= 2 && !fullResult && suggestions.length === 0;
 
@@ -2516,86 +2658,162 @@ const SearchBar = ({ data, search, setSearch }) => {
             )}
             {fullResult.company && <span className="text-[12px] text-zinc-500 truncate w-full">{fullResult.company}</span>}
           </div>
-          <div className="space-y-1.5">
-            {[{ label: "Sector", value: fullResult.sector }, { label: "Industry", value: fullResult.industry }].map(({ label, value }) => value ? (
-              <div key={label} className="flex gap-2 text-[13px]">
-                <span className="text-zinc-500 w-16 flex-shrink-0">{label}</span>
-                <span className="text-zinc-200">{value}</span>
-              </div>
-            ) : null)}
-            {fullResult.appearances.length > 0 && (
-              <div className="mt-2 pt-2 border-t border-zinc-800 space-y-1.5">
-                {/* Single "Theme" row — display only, not expandable */}
-                <div className="flex gap-2 text-[13px] items-start">
-                  <span className="text-zinc-500 w-16 flex-shrink-0">Theme</span>
-                  <div className="flex flex-wrap gap-x-2 gap-y-1">
-                    {fullResult.appearances.map((a, i) => (
-                      <span key={i} className="text-blue-300 font-medium">{a.theme}</span>
-                    ))}
-                  </div>
+
+          {/* Tab bar */}
+          <div className="flex border-b border-zinc-800 -mx-3 px-3">
+            {[{ key: "info", label: "Info" }, { key: "news", label: "Catalysts" }].map(tab => (
+              <button
+                key={tab.key}
+                onMouseDown={e => e.preventDefault()}
+                onClick={() => {
+                  setActiveTab(tab.key);
+                  if (tab.key === "news" && news.length === 0 && !newsLoading) fetchNews(fullResult.ticker);
+                }}
+                className={`text-[12px] px-3 py-1.5 border-b-2 transition-colors ${activeTab === tab.key ? "border-blue-500 text-blue-400" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Info tab */}
+          {activeTab === "info" && (
+            <div className="space-y-1.5">
+              {[{ label: "Sector", value: fullResult.sector }, { label: "Industry", value: fullResult.industry }].map(({ label, value }) => value ? (
+                <div key={label} className="flex gap-2 text-[13px]">
+                  <span className="text-zinc-500 w-16 flex-shrink-0">{label}</span>
+                  <span className="text-zinc-200">{value}</span>
                 </div>
-                {/* Sub-theme for scanner stocks */}
-                {fullResult.appearances.some(a => a.subtheme) && (
+              ) : null)}
+              {fullResult.appearances.length > 0 && (
+                <div className="mt-2 pt-2 border-t border-zinc-800 space-y-1.5">
+                  {/* Single "Theme" row — display only, not expandable */}
                   <div className="flex gap-2 text-[13px] items-start">
-                    <span className="text-zinc-500 w-16 flex-shrink-0">Sub-Theme</span>
+                    <span className="text-zinc-500 w-16 flex-shrink-0">Theme</span>
                     <div className="flex flex-wrap gap-x-2 gap-y-1">
-                      {fullResult.appearances.filter(a => a.subtheme).map((a, i) => {
-                        const isOpen = selectedSubTheme === a.subtheme;
-                        return (
-                          <button key={i}
-                            className="text-violet-300 font-medium hover:text-violet-200 flex items-center gap-0.5 text-left"
-                            onMouseDown={e => e.preventDefault()}
-                            onClick={() => setSelectedSubTheme(isOpen ? null : a.subtheme)}
-                          >
-                            {a.subtheme}
-                            <span className="text-zinc-500 text-[10px] ml-0.5">{isOpen ? '▲' : '▼'}</span>
-                          </button>
-                        );
-                      })}
+                      {fullResult.appearances.map((a, i) => (
+                        <span key={i} className="text-blue-300 font-medium">{a.theme}</span>
+                      ))}
                     </div>
                   </div>
-                )}
-                {/* Expanded stock list for selected subtheme */}
-                {selectedSubTheme && (() => {
-                  const scannerStocks = subThemeStocksMap[selectedSubTheme] || [];
-                  // Also find tickers that have this subtheme as an extra (from ticker_extra_subthemes)
-                  const extraTickers = data?.ticker_extra_subthemes
-                    ? Object.entries(data.ticker_extra_subthemes)
-                        .filter(([, extras]) => extras.some(e => e.subtheme === selectedSubTheme))
-                        .map(([t]) => t)
-                    : [];
-                  const extraStocks = extraTickers.map(t => allTickers.find(s => s.ticker === t)).filter(Boolean);
-                  const primaryStocks = allTickers.filter(s => s.subtheme === selectedSubTheme);
-                  const combined = [...new Map([...primaryStocks, ...extraStocks].map(s => [s.ticker, s])).values()];
-                  const stocks = scannerStocks.length > 0 ? scannerStocks : combined.slice(0, 50);
-                  if (stocks.length === 0) return null;
-                  return (
-                    <div className="mt-1 border border-zinc-700/50 rounded-md overflow-hidden">
-                      <div className="overflow-y-auto" style={{ maxHeight: '200px' }}>
-                        {[...stocks].sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0) || a.ticker.localeCompare(b.ticker)).map(s => (
-                          <button key={s.ticker}
-                            className="w-full flex items-center gap-2 px-2 py-1 hover:bg-zinc-800 text-left border-b border-zinc-800 last:border-0"
-                            onMouseDown={e => { e.preventDefault(); setSearch(s.ticker); setSelectedSubTheme(null); }}
-                          >
-                            <span
-                              className="text-[12px] font-bold text-zinc-200 w-12 flex-shrink-0 hover:text-blue-400 cursor-pointer"
-                              onClick={e => { e.stopPropagation(); const panelEl = document.getElementById('search-result-panel'); const panelLeft = panelEl ? panelEl.getBoundingClientRect().left : null; const sr = e.currentTarget.getBoundingClientRect(); setTickerHover(prev => prev?.ticker === s.ticker ? null : { ticker: s.ticker, rect: { ...sr, panelLeft } }); }}
-                            >{s.ticker}</span>
-                            <span className="text-[11px] text-zinc-500 truncate flex-1">{s.company}</span>
-                            {s.change_pct != null && (
-                              <span className={`text-[11px] font-medium flex-shrink-0 ${s.change_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                                {s.change_pct >= 0 ? '+' : ''}{s.change_pct.toFixed(1)}%
-                              </span>
-                            )}
-                          </button>
-                        ))}
+                  {/* Sub-theme for scanner stocks */}
+                  {fullResult.appearances.some(a => a.subtheme) && (
+                    <div className="flex gap-2 text-[13px] items-start">
+                      <span className="text-zinc-500 w-16 flex-shrink-0">Sub-Theme</span>
+                      <div className="flex flex-wrap gap-x-2 gap-y-1">
+                        {fullResult.appearances.filter(a => a.subtheme).map((a, i) => {
+                          const isOpen = selectedSubTheme === a.subtheme;
+                          return (
+                            <button key={i}
+                              className="text-violet-300 font-medium hover:text-violet-200 flex items-center gap-0.5 text-left"
+                              onMouseDown={e => e.preventDefault()}
+                              onClick={() => setSelectedSubTheme(isOpen ? null : a.subtheme)}
+                            >
+                              {a.subtheme}
+                              <span className="text-zinc-500 text-[10px] ml-0.5">{isOpen ? '▲' : '▼'}</span>
+                            </button>
+                          );
+                        })}
                       </div>
                     </div>
+                  )}
+                  {/* Expanded stock list for selected subtheme */}
+                  {selectedSubTheme && (() => {
+                    const scannerStocks = subThemeStocksMap[selectedSubTheme] || [];
+                    // Also find tickers that have this subtheme as an extra (from ticker_extra_subthemes)
+                    const extraTickers = data?.ticker_extra_subthemes
+                      ? Object.entries(data.ticker_extra_subthemes)
+                          .filter(([, extras]) => extras.some(e => e.subtheme === selectedSubTheme))
+                          .map(([t]) => t)
+                      : [];
+                    const extraStocks = extraTickers.map(t => allTickers.find(s => s.ticker === t)).filter(Boolean);
+                    const primaryStocks = allTickers.filter(s => s.subtheme === selectedSubTheme);
+                    const combined = [...new Map([...primaryStocks, ...extraStocks].map(s => [s.ticker, s])).values()];
+                    const stocks = scannerStocks.length > 0 ? scannerStocks : combined.slice(0, 50);
+                    if (stocks.length === 0) return null;
+                    return (
+                      <div className="mt-1 border border-zinc-700/50 rounded-md overflow-hidden">
+                        <div className="overflow-y-auto" style={{ maxHeight: '200px' }}>
+                          {[...stocks].sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0) || a.ticker.localeCompare(b.ticker)).map(s => (
+                            <button key={s.ticker}
+                              className="w-full flex items-center gap-2 px-2 py-1 hover:bg-zinc-800 text-left border-b border-zinc-800 last:border-0"
+                              onMouseDown={e => { e.preventDefault(); setSearch(s.ticker); setSelectedSubTheme(null); }}
+                            >
+                              <span
+                                className="text-[12px] font-bold text-zinc-200 w-12 flex-shrink-0 hover:text-blue-400 cursor-pointer"
+                                onClick={e => { e.stopPropagation(); const panelEl = document.getElementById('search-result-panel'); const panelLeft = panelEl ? panelEl.getBoundingClientRect().left : null; const sr = e.currentTarget.getBoundingClientRect(); setTickerHover(prev => prev?.ticker === s.ticker ? null : { ticker: s.ticker, rect: { ...sr, panelLeft } }); }}
+                              >{s.ticker}</span>
+                              <span className="text-[11px] text-zinc-500 truncate flex-1">{s.company}</span>
+                              {s.change_pct != null && (
+                                <span className={`text-[11px] font-medium flex-shrink-0 ${s.change_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                                  {s.change_pct >= 0 ? '+' : ''}{s.change_pct.toFixed(1)}%
+                                </span>
+                              )}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })()}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* News / Catalysts tab */}
+          {activeTab === "news" && (
+            <div>
+              {newsLoading && (
+                <p className="text-[12px] text-zinc-600 animate-pulse py-3 text-center">
+                  Loading catalysts…
+                </p>
+              )}
+              {newsError && (
+                <p className="text-[12px] text-red-500/70 py-3 text-center">
+                  Failed to load — check API key
+                </p>
+              )}
+              {!newsLoading && !newsError && news.length === 0 && (
+                <p className="text-[12px] text-zinc-600 py-3 text-center">
+                  No catalyst news in the last 6 months.
+                </p>
+              )}
+              <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1">
+                {news.map((item, i) => {
+                  const date = item.datetime
+                    ? new Date(item.datetime * 1000).toLocaleDateString("en-US", {
+                        month: "short", day: "numeric", year: "numeric",
+                      })
+                    : null;
+                  return (
+                    <a
+                      key={i}
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block group"
+                      onMouseDown={e => e.preventDefault()}
+                    >
+                      <div className="flex items-center gap-1.5 mb-1">
+                        <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border ${item.catalyst.color}`}>
+                          {item.catalyst.label}
+                        </span>
+                        {date && (
+                          <span className="text-[10px] text-zinc-600">{date}</span>
+                        )}
+                      </div>
+                      <p className="text-[12px] text-zinc-300 group-hover:text-blue-400 leading-snug transition-colors">
+                        {item.headline}
+                      </p>
+                      {item.source && (
+                        <p className="text-[10px] text-zinc-700 mt-0.5">{item.source}</p>
+                      )}
+                    </a>
                   );
-                })()}
+                })}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       )}
 
