@@ -1,30 +1,30 @@
 {
-  "generated_at": "March 31, 2026 (12:13 EDT)",
-  "session": "Market Hours",
+  "generated_at": "March 31, 2026 (18:54 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6434.6,
-      "change": 90.88,
-      "change_pct": 1.43
+      "price": 6528.52,
+      "change": 184.8,
+      "change_pct": 2.91
     },
     {
       "label": "Nasdaq 100",
-      "price": 23323.25,
-      "change": 369.87,
-      "change_pct": 1.61
+      "price": 23740.19,
+      "change": 786.81,
+      "change_pct": 3.43
     },
     {
       "label": "VIX",
-      "price": 27.78,
-      "change": -2.83,
+      "price": 25.25,
+      "change": -5.36,
       "change_pct": null,
       "zone_label": "Anxiety Zone"
     },
     {
       "label": "10Y Yield",
-      "price": 4.33,
-      "change": -0.01,
+      "price": 4.31,
+      "change": -0.03,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -37,8 +37,8 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 22680.04,
-      "change_pct": 0.52
+      "price": 22562.88,
+      "change_pct": 1.18
     },
     "ftse": {
       "label": "FTSE 100",
@@ -50,39 +50,39 @@
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 24.9,
-    "mmth": 46.7,
+    "s5fi": 30.0,
+    "mmth": 50.8,
     "breadth_flush": false,
     "generational": false,
-    "breadth_status": "FLUSH WATCH"
+    "breadth_status": ""
   },
   "reversal_signals": {
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Anxious Rally / Short Covering",
+  "mood": "Strong US Rally / Global Divergence",
   "analysis": {
-    "analysis_para1": "Global markets present a mixed picture today, with a notable -2.79% decline in the Nikkei 225 contrasting with modest gains in European indices (DAX +0.52%, FTSE 100 +0.48%). Despite the strong intra-day rally in US equities (S&P 500 +1.43%, Nasdaq 100 +1.61%), underlying market breadth remains concerning. Only 24.9% of S&P 500 stocks are above their 50-day moving average, and fewer than half (46.7%) are above their 200-day moving average. This weak breadth, coupled with a VIX reading of 27.78 ('Anxiety Zone'), suggests a rally within an anxiety-prone environment rather than broad-based conviction.",
-    "analysis_para2": "The mechanical plan for today centers on sustaining momentum above the intraday low and approaching key resistance levels. For the S&P 500, immediate support lies around 6400, with a break below potentially inviting a test of 6350. On the upside, 6450 presents a near-term resistance, with a push above potentially targeting the 6500 psychological level. Traders should watch for the VIX to retreat decisively below 25 for any signs of easing anxiety, while continued weak breadth indicators (S5FI < 30%) suggest caution on chasing this rally without further confirmation. The primary action remains defensive, managing risk until clear directional conviction or a VIX capitulation emerges.",
-    "technical_signal": "No reversal pattern confirmed yet. Today's strong bounce occurs within an elevated VIX environment and persistently weak internal market breadth, indicating underlying fragility.",
+    "analysis_para1": "Today's market presented a highly divergent global picture, with the Nikkei 225 experiencing a significant -2.79% decline while European markets, the DAX (+1.18%) and FTSE 100 (+0.48%), posted modest gains. In stark contrast, US equities saw a robust rally, with the S&P 500 up +2.91% and the Nasdaq 100 surging +3.43%. Despite this strong performance, underlying market breadth remains tepid, with only 30.0% of stocks above their 50-day moving average (S5FI) and 50.8% above their 200-day moving average (MMTH), indicating that gains may not be broadly distributed. The unknown status of the BAML HY Spread further adds to the uncertainty regarding broader credit market health.",
+    "analysis_para2": "Given today's powerful US rally, the mechanical plan involves confirming follow-through above prior resistance levels for the S&P 500 at 6500 and the Nasdaq 100 at 23500, which now serve as critical support. A sustained retreat of the VIX from its 'Anxiety Zone' level of 25.25 below 20 would provide a clearer signal of diminishing systemic risk and increasing conviction in the market's upward momentum. Until then, maintain a selective approach, prioritizing names with superior relative strength and robust earnings prospects. Monitor US market breadth indicators closely for signs of broader participation that would confirm a healthier, more sustainable uptrend.",
+    "technical_signal": "No reversal pattern confirmed yet. While today's strong rally is positive, a single session does not definitively confirm a broader trend reversal.",
     "ticker_intel": [
       {
-        "ticker": "MSFT",
-        "company": "Microsoft Corporation",
+        "ticker": "AXTI",
+        "company": "AXT Inc",
         "grade": "A+",
-        "reason": "Continued strong cloud growth and AI integration positions it for leadership in a volatile environment."
+        "reason": "AXTI exhibits exceptional momentum with an RS=99 and a phenomenal 3-month return of +290.5%, making it a top conviction play within the resurgent Semiconductors theme."
       },
       {
-        "ticker": "AAPL",
-        "company": "Apple Inc.",
+        "ticker": "PARR",
+        "company": "Par Pacific Holdings Inc",
         "grade": "A",
-        "reason": "Robust ecosystem and consistent cash flow provide a defensive moat amidst broader market uncertainty."
+        "reason": "PARR demonstrates strong leadership in the Energy Traditional theme with RS=97 and an impressive 1-month gain of +35.9%, aligning well with current sector strength."
       },
       {
-        "ticker": "BA",
-        "company": "The Boeing Company",
+        "ticker": "CENX",
+        "company": "Century Aluminum Co",
         "grade": "C",
-        "reason": "Persisting quality control issues and delivery delays continue to weigh on investor confidence and operational outlook."
+        "reason": "Despite a high RS=97, CENX's 1-month return of +14.3% is relatively weaker than other top-tier candidates, suggesting it might lag during aggressive market rallies."
       }
     ]
   }
