@@ -1,9 +1,8 @@
 name: Emergency News Monitor
 
 on:
-  schedule:
-    - cron: "*/5 * * * *"      # Every 5 min, every day including weekends/holidays
   workflow_dispatch: {}
+  # Schedule removed — triggered externally via cron-job.org every 5 minutes
 
 concurrency:
   group: breaking-news
@@ -28,6 +27,13 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-breaking-news-v1
+          restore-keys: pip-breaking-news-
+
       - name: Install deps
         run: pip install requests python-dotenv google-genai beautifulsoup4
 
@@ -50,8 +56,15 @@ jobs:
         with:
           node-version: 18
 
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: npm-
+
       - name: Build React app
-        run: npm install --legacy-peer-deps && npm run build
+        run: npm ci --legacy-peer-deps && npm run build
         env:
           CI: false
 
