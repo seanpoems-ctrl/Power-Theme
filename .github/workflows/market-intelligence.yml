@@ -2,8 +2,8 @@ name: Market Intelligence Engine
 
 on:
   schedule:
-    - cron: "30 12 * * *"     # 07:30 ET (UTC-5 / EST) — runs every day including weekends/holidays
-    - cron: "30 21 * * *"     # 16:30 ET (UTC-5 / EST) — runs every day including weekends/holidays
+    - cron: "05 11 * * *"     # 07:05 ET (UTC-4 / EDT) — target delivery by 08:05 ET
+    - cron: "00 20 * * *"     # 16:00 ET (UTC-4 / EDT) — target delivery by 17:00 ET
   workflow_dispatch: {}
 
 jobs:

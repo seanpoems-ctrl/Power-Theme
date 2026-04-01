@@ -2,8 +2,7 @@ name: Market Brief (AM + PM)
 
 on:
   workflow_dispatch: {}
-  # Schedule removed — triggered externally via cron-job.org for precise timing
-  # AM: 12:03 UTC = 08:03 ET (EDT) | PM: 21:00 UTC = 17:00 ET (EDT)
+  # DISABLED — superseded by market-intelligence.yml (market_briefing_engine.py)
 
 jobs:
   market-brief:
