@@ -1,14 +1,11 @@
-# Thematic Scanner — every 5 min trigger, 9:00 AM – 5:00 PM ET + dedicated 4:35 PM ET end-of-day snapshot
-# Scraper takes ~8-10 min, so concurrency queues (not cancels) → effective ~10 min updates
-# Finviz finalizes closing data at 4:30 PM ET — 4:35 PM cron captures clean EOD prices
+# Thematic Scanner — triggered externally via cron-job.org at 4:35 PM ET (20:35 UTC) Mon–Fri
+# workflow_dispatch bypasses ET-window check (manual or external trigger)
 name: Daily scrape & deploy
 
 on:
-  schedule:
-    - cron: "*/5 12-22 * * *"    # Every 5 min, 12:00–22:55 UTC (covers 9AM-5PM ET both EDT and EST) — runs 7 days
-    - cron: "35 20 * * *"        # 4:35 PM EDT — Finviz finalizes closing data at 4:30 PM ET
-    - cron: "35 21 * * *"        # 4:35 PM EST — same, winter offset
   workflow_dispatch: {}
+  # Schedule removed — triggered externally via cron-job.org for reliable timing
+  # 20:35 UTC = 4:35 PM ET (EDT) — Finviz finalizes closing data at 4:30 PM ET
 
 concurrency:
   group: thematic-scrape
@@ -35,10 +32,17 @@ jobs:
         with:
           python-version: "3.12"
 
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-scraper-v1
+          restore-keys: pip-scraper-
+
       - name: Install Python deps
         run: pip install requests beautifulsoup4 yfinance lxml exchange_calendars pandas google-genai tradingview_screener python-dotenv
 
-      - name: Check ET window (9:00 AM – 5:00 PM) — runs every day including weekends/holidays
+      - name: Check ET window (9:00 AM – 5:00 PM) + trading day
         id: trading_day
         run: |
           python - <<'EOF'
@@ -96,12 +100,17 @@ jobs:
         with:
           node-version: 18
 
-      - run: npm install --legacy-peer-deps
+      - name: Cache npm
         if: steps.trading_day.outputs.is_trading_day == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: npm-
 
       - name: Build React app
         if: steps.trading_day.outputs.is_trading_day == 'true'
-        run: npm run build
+        run: npm ci --legacy-peer-deps && npm run build
         env:
           CI: false
           REACT_APP_FINNHUB_KEY: ${{ secrets.FINNHUB_API_KEY }}
