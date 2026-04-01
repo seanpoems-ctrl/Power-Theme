@@ -543,7 +543,7 @@ const PerfCellLB = ({ val }) => {
 const LB_PERF_COLS = new Set(['perf_1d','perf_1w','perf_1m','perf_3m','perf_6m']);
 
 
-const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themeSparklines = {} }) => {
+const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {} }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
   const [expanded, setExpanded] = useState(null);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
@@ -572,14 +572,25 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
   const primaryKey = sortPriority[0]?.key;
   const secondaryKey = sortPriority[1]?.key;
 
+  // Build theme name → avg rs_52w map from actual stock data
+  const themeAvgRS = useMemo(() => {
+    const map = {};
+    for (const theme of (themes || [])) {
+      const norm = normalizeTheme(theme);
+      const stocks = norm.subthemes.flatMap(s => s.stocks);
+      const vals = stocks.map(s => s.rs_52w).filter(v => v != null);
+      map[norm.name.toLowerCase()] = vals.length ? Math.round(vals.reduce((a, v) => a + v, 0) / vals.length) : null;
+    }
+    return map;
+  }, [themes]);
+
   const ranked = useMemo(() => {
     if (!activeData || !activeData.length) return [];
-    const enriched = activeData;
-    return [...enriched].sort((a, b) => {
+    return [...activeData].sort((a, b) => {
       for (let i = 0; i < sortPriority.length; i++) {
         const { key, direction } = sortPriority[i];
-        let va = a[key] ?? 0;
-        let vb = b[key] ?? 0;
+        let va = key === 'rs_score' ? (themeAvgRS[a.name?.toLowerCase()] ?? 0) : (a[key] ?? 0);
+        let vb = key === 'rs_score' ? (themeAvgRS[b.name?.toLowerCase()] ?? 0) : (b[key] ?? 0);
         if (i === 0 && LB_PERF_COLS.has(key)) {
           va = Math.round(va * 10) / 10;
           vb = Math.round(vb * 10) / 10;
@@ -590,7 +601,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
       }
       return 0;
     });
-  }, [activeData, sortPriority]);
+  }, [activeData, sortPriority, themeAvgRS]);
 
 
   const industryMap = useMemo(() => {
@@ -684,8 +695,8 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                     </div>
                   </td>
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
-                  <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${t.rs_score > 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                    {t.rs_score > 0 ? '+' : ''}{t.rs_score.toFixed(1)}
+                  <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${(themeAvgRS[t.name?.toLowerCase()] ?? 0) >= 50 ? 'text-emerald-400' : 'text-red-400'}`}>
+                    {themeAvgRS[t.name?.toLowerCase()] ?? '—'}
                   </td>
                 </tr>
                 {isExpanded && industries.map(ind => (
@@ -4062,7 +4073,7 @@ const filtered = useMemo(() => {
             </div>
             {/* Right: Leaderboard */}
             <div className="flex-1 min-w-0">
-              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
+              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} themes={data.themes} />}
             </div>
           </div>
           <div className="mb-4">
