@@ -3619,10 +3619,10 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filtersOn, setFiltersOn] = useState(false);
-  const [filterDolVol, setFilterDolVol] = useState(100);
-  const [filterADR, setFilterADR] = useState(4);
-  const [filterRS, setFilterRS] = useState(50);
-  const [filterDist52w, setFilterDist52w] = useState(20);
+  const [filterDolVol, setFilterDolVol] = useState("100");
+  const [filterADR, setFilterADR] = useState("4");
+  const [filterRS, setFilterRS] = useState("50");
+  const [filterDist52w, setFilterDist52w] = useState("20");
   const [showFP, setShowFP] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [lbPerfKey, setLbPerfKey] = useState("perf_1m");
@@ -3757,10 +3757,10 @@ const filtered = useMemo(() => {
         }
         if (filtersOn) {
           st = st.filter(s =>
-            s.dollar_volume >= filterDolVol * 1e6 &&
-            s.adr_pct >= filterADR &&
-            s.rs_52w >= filterRS &&
-            (s.dist_52w_high == null || s.dist_52w_high >= -filterDist52w)
+            s.dollar_volume >= (parseFloat(filterDolVol) || 0) * 1e6 &&
+            s.adr_pct >= (parseFloat(filterADR) || 0) &&
+            s.rs_52w >= (parseFloat(filterRS) || 0) &&
+            (s.dist_52w_high == null || s.dist_52w_high >= -(parseFloat(filterDist52w) || 0))
           );
         }
         // In Stress regime: only show A/A+ grade stocks to reduce noise
@@ -3965,25 +3965,25 @@ const filtered = useMemo(() => {
                 <div>
                   <label className="text-[11px] text-zinc-500 block mb-1">Min Avg $ Vol (30D)</label>
                   <div className="flex items-center gap-1">
-                    <input type="number" min="0" value={filterDolVol} onChange={e=>setFilterDolVol(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300 w-20"/>
+                    <input type="number" min="0" value={filterDolVol} onChange={e=>setFilterDolVol(e.target.value)} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300 w-20"/>
                     <span className="text-[12px] text-zinc-500">M</span>
                   </div>
                 </div>
                 <div>
                   <label className="text-[11px] text-zinc-500 block mb-1">Min ADR%</label>
                   <div className="flex items-center gap-1">
-                    <input type="number" min="0" step="0.5" value={filterADR} onChange={e=>setFilterADR(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300 w-16"/>
+                    <input type="number" min="0" step="0.5" value={filterADR} onChange={e=>setFilterADR(e.target.value)} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300 w-16"/>
                     <span className="text-[12px] text-zinc-500">%</span>
                   </div>
                 </div>
                 <div>
                   <label className="text-[11px] text-zinc-500 block mb-1">Min RS</label>
-                  <input type="number" min="0" max="99" value={filterRS} onChange={e=>setFilterRS(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300 w-16"/>
+                  <input type="number" min="0" max="99" value={filterRS} onChange={e=>setFilterRS(e.target.value)} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300 w-16"/>
                 </div>
                 <div>
                   <label className="text-[11px] text-zinc-500 block mb-1">Max Dist 52W Hi</label>
                   <div className="flex items-center gap-1">
-                    <input type="number" min="0" value={filterDist52w} onChange={e=>setFilterDist52w(Number(e.target.value))} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300 w-16"/>
+                    <input type="number" min="0" value={filterDist52w} onChange={e=>setFilterDist52w(e.target.value)} className="text-[13px] bg-zinc-900 border border-zinc-700/50 rounded px-2 py-1 text-zinc-300 w-16"/>
                     <span className="text-[12px] text-zinc-500">%</span>
                   </div>
                 </div>
