@@ -2344,17 +2344,6 @@ const CATALYST_CATEGORIES = [
     ],
   },
   {
-    key: "analyst",
-    label: "Analyst",
-    color: "text-amber-400 bg-amber-500/10 border-amber-500/30",
-    keywords: [
-      "upgrades to buy", "upgrades to overweight", "upgrades to outperform",
-      "downgrades to sell", "downgrades to underweight", "downgrades to underperform",
-      "downgrades to neutral", "initiates with buy", "initiates with overweight",
-      "raises price target to", "lowers price target to",
-    ],
-  },
-  {
     key: "short",
     label: "Short Report",
     color: "text-red-400 bg-red-500/10 border-red-500/30",
