@@ -1,10 +1,9 @@
 name: Market Brief (AM + PM)
 
 on:
-  schedule:
-    - cron: "17 12 * * 1-5"   # 08:17 ET (EDT/UTC-4) | 07:17 ET (EST/UTC-5)
-    - cron: "3 21 * * 1-5"    # 17:03 ET (EDT/UTC-4) | 16:03 ET (EST/UTC-5)
   workflow_dispatch: {}
+  # Schedule removed — triggered externally via cron-job.org for precise timing
+  # AM: 12:03 UTC = 08:03 ET (EDT) | PM: 21:00 UTC = 17:00 ET (EDT)
 
 jobs:
   market-brief:
@@ -21,6 +20,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-market-brief-v1
+          restore-keys: pip-market-brief-
 
       - name: Install deps
         run: |
@@ -76,8 +82,15 @@ jobs:
         with:
           node-version: 18
 
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: npm-
+
       - name: Build React app
-        run: npm install --legacy-peer-deps && npm run build
+        run: npm ci --legacy-peer-deps && npm run build
         env:
           CI: false
           REACT_APP_FINNHUB_KEY: ${{ secrets.FINNHUB_API_KEY }}
