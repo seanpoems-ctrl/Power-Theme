@@ -1124,12 +1124,7 @@ _TV_FUTURES_SCAN_URL = "https://scanner.tradingview.com/futures/scan"
 _TV_INDEX_SYMBOL = {
     "SPY": ("CME_MINI:ES1!",  _TV_FUTURES_SCAN_URL),
     "QQQ": ("CME_MINI:NQ1!",  _TV_FUTURES_SCAN_URL),
-    "IWM": ("AMEX:IWM",       _TV_SCAN_URL),
-}
-# ETF symbols for display price/change (overrides futures price in output)
-_TV_ETF_SYMBOL = {
-    "SPY": "AMEX:SPY",
-    "QQQ": "NASDAQ:QQQ",
+    "IWM": ("CME_MINI:RTY1!", _TV_FUTURES_SCAN_URL),
 }
 # Macro futures symbols for BTC / Gold / Oil via TradingView
 _TV_MACRO_SYMBOL = {
@@ -1252,16 +1247,8 @@ def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
             sma200_pct = round((price / sma200 - 1) * 100, 2) if sma200 else None
             index_status = _elite_status(price, sma10, sma20, sma50, sma200, rsi14, breadth)
 
-            # Override display price/change_pct with ETF spot price (not futures)
             display_price = round(price, 2)
             display_change = round(raw["change_pct"], 2)
-            etf_sym = _TV_ETF_SYMBOL.get(sym)
-            if etf_sym:
-                etf_raw = _fetch_tradingview_index_snapshot(etf_sym, _TV_SCAN_URL)
-                if etf_raw:
-                    display_price = round(etf_raw["price"], 2)
-                    display_change = round(etf_raw["change_pct"], 2)
-
             logger.info(f"  {sym} market indicators (TradingView): price={display_price} chg={display_change:.2f}%")
             return {
                 "price": display_price,

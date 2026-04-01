@@ -3840,7 +3840,7 @@ const filtered = useMemo(() => {
                     <span className="text-zinc-700">·</span>
                     <Tag label="ES1!" d={spy}/>
                     <span className="text-zinc-700">·</span>
-                    <Tag label="IWM" d={iwm}/>
+                    <Tag label="RTY1!" d={iwm}/>
                   </div>
                 );
               })()}
