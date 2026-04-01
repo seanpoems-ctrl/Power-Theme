@@ -995,7 +995,7 @@ const ThemeSection = ({ theme, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRT
   }, [norm.name, finvizThemeRankings, themeRankings]);
 
   const perfVal = (key) => rankingEntry ? (rankingEntry[key] ?? null) : avg(key);
-  const rsVal = rankingEntry ? (rankingEntry.rs_score ?? avg("rs_52w")) : avg("rs_52w");
+  const rsVal = avg("rs_52w");
   const parentAvg = rankingEntry ? (rankingEntry[lbPerfKey] ?? avg(lbPerfKey)) : avg(lbPerfKey);
 
   return (
