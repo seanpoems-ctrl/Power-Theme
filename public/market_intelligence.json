@@ -1,79 +1,79 @@
 {
-  "generated_at": "2026-03-31 19:02 ET",
+  "generated_at": "2026-04-01 12:13 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 650.34,
-      "open": 638.94,
-      "high": 651.53,
-      "low": 637.98,
-      "close": 650.34,
-      "prev_open": 640.11,
-      "prev_close": 631.97,
-      "volume": 151177326,
-      "change_pct": 2.91
+      "price": 657.71,
+      "open": 653.9,
+      "high": 658.09,
+      "low": 653.0,
+      "close": 657.71,
+      "prev_open": 638.94,
+      "prev_close": 650.34,
+      "volume": 42947712,
+      "change_pct": 1.13
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 577.18,
-      "open": 564.29,
-      "high": 578.64,
-      "low": 564.21,
-      "close": 577.18,
-      "prev_open": 567.38,
-      "prev_close": 558.28,
-      "volume": 93624299,
-      "change_pct": 3.39
+      "price": 586.76,
+      "open": 581.48,
+      "high": 587.2,
+      "low": 580.42,
+      "close": 586.76,
+      "prev_open": 564.29,
+      "prev_close": 577.18,
+      "volume": 35633788,
+      "change_pct": 1.66
     },
     "^VIX": {
       "label": "VIX",
-      "price": 25.25,
-      "open": 29.53,
-      "high": 29.64,
-      "low": 25.08,
-      "close": 25.25,
-      "prev_open": 30.79,
-      "prev_close": 30.61,
+      "price": 23.54,
+      "open": 24.3,
+      "high": 25.3,
+      "low": 23.54,
+      "close": 23.54,
+      "prev_open": 29.53,
+      "prev_close": 25.25,
       "volume": 0,
-      "change_pct": -17.51
+      "change_pct": -6.77
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 102.23,
+      "price": 99.79,
       "open": 101.72,
-      "high": 102.85,
-      "low": 101.52,
-      "close": 102.23,
-      "prev_open": 102.6,
-      "prev_close": 102.88,
-      "volume": 3949,
-      "change_pct": -0.63
+      "high": 103.31,
+      "low": 96.5,
+      "close": 99.79,
+      "prev_open": 105.07,
+      "prev_close": 101.38,
+      "volume": 280997,
+      "change_pct": -1.57
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 51885.85,
-      "open": 52054.68,
-      "high": 52054.68,
-      "low": 50566.99,
-      "close": 51885.85,
-      "prev_open": 53239.59,
-      "prev_close": 53373.07,
-      "volume": 183100000,
-      "change_pct": -2.79
+      "price": 51063.72,
+      "open": 51382.53,
+      "high": 52169.01,
+      "low": 50558.91,
+      "close": 51063.72,
+      "prev_open": 52054.68,
+      "prev_close": 51885.85,
+      "volume": 174500000,
+      "change_pct": -1.58
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 22562.88,
-      "open": 22213.86,
-      "high": 22562.88,
-      "low": 22209.45,
-      "close": 22562.88,
-      "prev_open": 22612.93,
-      "prev_close": 22300.75,
-      "volume": 56264500,
-      "change_pct": 1.18
+      "price": 23298.89,
+      "open": 23326.89,
+      "high": 23377.65,
+      "low": 23027.04,
+      "close": 23298.89,
+      "prev_open": 22578.84,
+      "prev_close": 22680.04,
+      "volume": 0,
+      "change_pct": 2.73
     }
   },
   "fred": {
@@ -82,8 +82,8 @@
     "hy_oas_stale": false
   },
   "breadth": {
-    "s5fi": 30.0,
-    "mmth": 50.8
+    "s5fi": 35.9,
+    "mmth": 53.3
   },
   "regime": {
     "credit_status": "Unknown",
@@ -97,33 +97,33 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: March 31, 2026",
+    "title": "Post-Market Brief: April 01, 2026",
     "mood_emoji": "🚀",
-    "mood": "Broad Risk Appetite Surge",
-    "narrative": "US equities soared today, with major indices posting significant gains as robust risk appetite drove market action. Volatility plummeted, signaling heightened investor confidence to close out the quarter.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 650.34 | +2.91% | 📈 |\n| Nasdaq 100 ETF | 577.18 | +3.39% | 📈 |\n| VIX | 25.25 | -17.51% | 📉 |\n| Crude Oil | 102.23 | -0.63% | 📉 |\n| Nikkei 225 | 51885.85 | -2.79% | 📉 |\n| DAX | 22562.88 | +1.18% | 📈 |",
-    "macro_section": "The values for the HY Credit Spread (BAMLH0A0HYM2) and the 10Y-2Y Yield Curve (T10Y2Y) were unavailable today, leaving the precise credit and recessionary regime as Unknown. Despite this data gap, the decisive risk-on action in US equities suggests institutions are actively embracing risk, likely undeterred by potential underlying credit concerns that remain unquantified.",
-    "analysis_para1": "The global tape presented a mixed but not universally bearish picture, with the Nikkei 225 dropping significantly by -2.79% and Crude Oil declining by -0.63%, potentially reflecting some localized concerns or profit-taking. However, the DAX posted a solid gain of +1.18%, indicating strength in European markets. Given the US HY credit spread (BAMLH0A0HYM2) is unknown, a direct correlation to US risk appetite is challenging; yet, the robust rally in US indices (S&P 500 +2.91%, Nasdaq 100 +3.39%) suggests that any global headwinds were insufficient to curb domestic investor enthusiasm, implying strong localized US risk appetite today.",
-    "analysis_para2": "The dominant 'Why' behind today's powerful market advance appears to be mechanical, driven primarily by strong institutional flows associated with quarter-end rebalancing. As March 31st marks the close of Q1, significant portfolio adjustments and target allocation buying likely fueled the broad-based rally in US equities. This systematic demand for risk assets, coupled with potential short covering in the face of strong upward momentum, was the primary force propelling major indices higher and crushing volatility.",
-    "technical_signal": "No reversal pattern confirmed yet. While today's rally was substantial, the percentage of stocks above their 50-day moving average (S5FI) remains relatively low at 30.0%, suggesting the rally might not yet be fully broad-based across all names, though over half of stocks (MMTH at 50.8%) are above their 200-day moving average. Traders should watch for a sustained increase in S5FI to confirm broader participation, or a sharp VIX reversal for signs of exhaustion.",
+    "mood": "Risk-On / Equities Surge",
+    "narrative": "US and European equities roared higher today, propelled by robust institutional inflows and a retreat in volatility. Despite some weakness in Asian markets and oil, the overall sentiment favored growth assets.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 657.71 | +1.13% | 📈 |\n| Nasdaq 100 ETF | 586.76 | +1.66% | 📈 |\n| VIX | 23.54 | -6.77% | 📉 |\n| Crude Oil | 99.79 | -1.57% | 📉 |\n| Nikkei 225 | 51063.72 | -1.58% | 📉 |\n| DAX | 23298.89 | +2.73% | 📈 |",
+    "macro_section": "Key macro indicators for institutional risk appetite remain opaque today, with the BAMLH0A0HYM2 (HY Credit Spread) value registering as Unknown due to a FRED data fetch failure. Similarly, the T10Y2Y (10Y-2Y Yield Curve) also returned an Unknown reading. This lack of clear guidance from critical credit and rates metrics implies institutions are navigating with reduced visibility into underlying financial stress or easing conditions.",
+    "analysis_para1": "The global tape presented a mixed picture, with the Nikkei 225 declining by -1.58% and Crude Oil falling by -1.57%, signaling potential pockets of caution or profit-taking in some markets. However, the DAX surged by +2.73%, suggesting strong European market conviction that largely overshadowed these declines. Without a current reading for BAMLH0A0HYM2 (US HY Credit Spreads), it's challenging to directly correlate this global divergence to US credit conditions, but the robust DAX performance alongside falling oil prices could imply a shift in global capital towards developed market equities, potentially putting upward pressure on US risk appetite despite mixed international signals.",
+    "analysis_para2": "Today's dominant 'Why' behind the broad equity surge appears to be strong start-of-quarter institutional inflows and rebalancing, following a period of cautious positioning. With the new quarter officially underway, large asset allocators likely deployed capital, particularly into growth-oriented US equities, driving the S&P 500 ETF up +1.13% and the Nasdaq 100 ETF up +1.66%. This mechanical flow-driven buying, coupled with the significant -6.77% drop in the VIX, indicates a broad-based conviction shift towards risk assets, rather than a specific macro data point or policy announcement.",
+    "technical_signal": "No reversal pattern confirmed yet. Equities continue to exhibit strong upside momentum, with the VIX retreating significantly. While % stocks above their 50DMA (S5FI) sits at a lukewarm 35.9% and 200DMA (MMTH) at 53.3%, indicating underlying mixed breadth, the headline indices are powering higher, suggesting continued positive sentiment; watch for any signs of exhaustion near prior resistance levels.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "MRVL",
-          "company": "Marvell Technology, Inc.",
-          "reason": "Shares surged following news of a strategic investment and partnership aimed at expanding its cloud and enterprise data center solutions."
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet surged today after unveiling a new AI-powered suite of enterprise tools aimed at significantly boosting productivity and capturing market share from competitors."
         },
         {
-          "ticker": "RKLB",
-          "company": "Rocket Lab USA, Inc.",
-          "reason": "Stock rocketed higher after announcing new contracts and a strategic acquisition, bolstering its position in the space launch and satellite services market."
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase saw strong buying interest following a major analyst upgrade citing robust Q1 loan growth and an improving outlook for net interest margins."
         }
       ],
       "c_grade": [
         {
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
-          "reason": "Moved on continued AI sector momentum and technical buying, without specific new fundamental catalysts beyond existing industry trends."
+          "reason": "NVIDIA traded higher on general enthusiasm for AI-related stocks, a continuation of the prevailing narrative without specific new company news today."
         }
       ]
     }
