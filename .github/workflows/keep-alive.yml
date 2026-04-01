@@ -3,9 +3,9 @@
 name: Keep Alive
 
 on:
-  schedule:
-    - cron: "0 10 * * 1-5"   # 週一～五 10:00 UTC（比 gapper 早 3 小時）
   workflow_dispatch: {}
+  # Schedule removed — triggered externally via cron-job.org
+  # 10:00 UTC = 6:00 AM ET (EDT) — before gapper at 8:05 AM ET
 
 jobs:
   ping:
