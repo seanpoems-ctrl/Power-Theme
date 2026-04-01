@@ -3621,7 +3621,7 @@ export default function App() {
   const [filtersOn, setFiltersOn] = useState(false);
   const [filterDolVol, setFilterDolVol] = useState("100");
   const [filterADR, setFilterADR] = useState("4");
-  const [filterRS, setFilterRS] = useState("50");
+  const [filterRS, setFilterRS] = useState("85");
   const [filterDist52w, setFilterDist52w] = useState("20");
   const [showFP, setShowFP] = useState(false);
   // eslint-disable-next-line no-unused-vars
