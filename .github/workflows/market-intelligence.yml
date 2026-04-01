@@ -1,10 +1,9 @@
 name: Market Intelligence Engine
 
 on:
-  schedule:
-    - cron: "05 11 * * *"     # 07:05 ET (UTC-4 / EDT) — target delivery by 08:05 ET
-    - cron: "00 20 * * *"     # 16:00 ET (UTC-4 / EDT) — target delivery by 17:00 ET
   workflow_dispatch: {}
+  # Schedule removed — triggered externally via cron-job.org
+  # 11:05 UTC = 07:05 ET (EDT) — AM brief | 20:00 UTC = 16:00 ET (EDT) — PM brief
 
 jobs:
   market-intel:
@@ -21,6 +20,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-market-intel-v1
+          restore-keys: pip-market-intel-
 
       - name: Install deps
         run: |
@@ -73,8 +79,15 @@ jobs:
         with:
           node-version: 18
 
+      - name: Cache npm
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: npm-
+
       - name: Build React app
-        run: npm install --legacy-peer-deps && npm run build
+        run: npm ci --legacy-peer-deps && npm run build
         env:
           CI: false
 
