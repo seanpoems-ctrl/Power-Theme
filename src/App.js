@@ -3822,11 +3822,11 @@ const filtered = useMemo(() => {
                   ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
                   : <span className="text-red-400">{v.toFixed(2)}%</span>;
                 const statusColor = st => st === "Strong" ? "text-emerald-400" : st === "Weak" || st === "Lagging" ? "text-red-400" : st === "Mediocre" ? "text-yellow-400" : "text-zinc-500";
-                const chartUrl1Y = t => `https://finviz.com/chart.ashx?t=${encodeURIComponent(t)}&ty=c&ta=1&p=w&s=l`;
+                const TV_SYMBOLS = { "NQ1!": "CME_MINI:NQ1!", "ES1!": "CME_MINI:ES1!", "RTY1!": "CME_MINI:RTY1!" };
                 const Tag = ({ label, d }) => d ? (
                   <span
                     className="flex items-center gap-1 text-[12px] font-mono cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
-                    onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setMacroHover(prev => prev?.ticker === label ? null : { ticker: label, chartUrl: chartUrl1Y(label), rect }); }}
+                    onClick={() => { const sym = TV_SYMBOLS[label]; if (sym) window.open(`https://www.tradingview.com/chart/?symbol=${encodeURIComponent(sym)}`, "_blank"); }}
                   >
                     <span className="text-zinc-500">{label}</span>
                     {d.price != null && <span className="text-zinc-300">${d.price.toFixed(2)}</span>}
