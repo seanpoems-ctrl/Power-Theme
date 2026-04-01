@@ -695,7 +695,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                     </div>
                   </td>
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
-                  <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${(themeAvgRS[t.name?.toLowerCase()] ?? 0) >= 50 ? 'text-emerald-400' : 'text-red-400'}`}>
+                  <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${(themeAvgRS[t.name?.toLowerCase()] ?? 0) >= 85 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {themeAvgRS[t.name?.toLowerCase()] ?? '—'}
                   </td>
                 </tr>
