@@ -1,12 +1,12 @@
-# 盤前掃描：每 5 分鐘觸發，workflow 內部檢查是否在 8:00 AM–12:00 PM ET 窗口內
-# GitHub Actions cron 延遲可達 1-3 小時，所以放寬 UTC 範圍 + ET 窗口
-# 一天只掃一次：成功掃過後後續 run 會跳過
+# Pre-market scan — triggered externally via cron-job.org at 8:05 AM ET (12:05 UTC)
+# workflow_dispatch bypasses ET-window + already-scanned checks (manual or external trigger)
+# One scan per day: subsequent runs are skipped if already scanned today
 name: Pre-Market Gapper Scan
 
 on:
-  schedule:
-    - cron: "33 12 * * 1-5"  # 08:33 ET (EDT/UTC-4) | 07:33 ET (EST/UTC-5)
   workflow_dispatch: {}
+  # Schedule removed — triggered externally via cron-job.org for precise timing
+  # 12:05 UTC = 08:05 ET (EDT)
 
 concurrency:
   group: gapper-scan
@@ -29,6 +29,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-gapper-v1
+          restore-keys: pip-gapper-
+
       - name: Check NYSE trading day + ET window (8:00 AM–12:00 PM) + already scanned today
         id: trading_day
         run: |
@@ -45,7 +52,7 @@ jobs:
           today = date.today().isoformat()
           is_session = nyse.is_session(today)
 
-          # Check ET window: 8:00 AM – 12:00 PM (wide to absorb GHA cron delays)
+          # Check ET window: 8:00 AM – 12:00 PM (wide to absorb any delays)
           et_now = datetime.now(ZoneInfo("America/New_York"))
           et_minutes = et_now.hour * 60 + et_now.minute
           in_window = 480 <= et_minutes <= 720  # 8:00 AM–12:00 PM
@@ -102,7 +109,6 @@ jobs:
           echo "Gapper failed after 3 attempts"
           exit 1
 
-      # 把最新的 gapper_data.json 存回 repo，讓 daily scrape build 也能用到新資料
       - name: Commit gapper data to repo
         if: steps.trading_day.outputs.is_trading_day == 'true'
         run: |
@@ -117,14 +123,20 @@ jobs:
         with:
           node-version: 18
 
-      - run: npm install --legacy-peer-deps
+      - name: Cache npm
         if: steps.trading_day.outputs.is_trading_day == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: npm-
 
       - name: Build React app
         if: steps.trading_day.outputs.is_trading_day == 'true'
-        run: npm run build
+        run: npm ci --legacy-peer-deps && npm run build
         env:
           CI: false
+          REACT_APP_FINNHUB_KEY: ${{ secrets.FINNHUB_API_KEY }}
 
       - uses: actions/configure-pages@v4
         if: steps.trading_day.outputs.is_trading_day == 'true'
