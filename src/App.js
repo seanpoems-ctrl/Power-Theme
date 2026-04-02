@@ -871,9 +871,9 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
         <button onClick={() => setSortPriority([{ key: 'rs_52w', direction: 'desc' }])} className="text-[10px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">✕ Reset</button>
       </div>
     )}
-    <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
+    <div className="overflow-x-auto overflow-y-auto rounded-lg border border-zinc-700/40" style={{maxHeight:'520px'}}>
       <table className="w-full text-sm table-fixed min-w-[1280px]">
-        <thead>
+        <thead className="sticky top-0 z-10">
           <tr className="text-[12px] uppercase tracking-wider bg-zinc-900/80">
             <th className="text-left py-3 px-4 font-medium w-[160px] text-zinc-500">Ticker</th>
             <SH k="price" label="Price" w="w-[80px]"/>
