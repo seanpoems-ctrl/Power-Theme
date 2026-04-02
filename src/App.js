@@ -715,12 +715,12 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         </table>
       </div>
     </div>
-    {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect}/>}
+    {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => setThemeHover(null)}/>}
     </>
   );
 };
 
-const TVPopup = ({ ticker, anchorRect, chartUrl }) => {
+const TVPopup = ({ ticker, anchorRect, chartUrl, onClose }) => {
   if (!ticker || !anchorRect) return null;
   const MAX_W = 600, MAX_H = 200;
   const vw = window.innerWidth;
@@ -751,9 +751,12 @@ const TVPopup = ({ ticker, anchorRect, chartUrl }) => {
   top = Math.max(edgeTop, Math.min(top, vh - H - edgeBot));
   const src = chartUrl || `https://finviz.com/chart.ashx?t=${encodeURIComponent(ticker)}&ty=c&ta=1&p=d&s=l`;
   return (
-    <div style={{ position:"fixed", left, top, width:W, height:H, zIndex:9999, borderRadius:8, overflow:"hidden", border:"1px solid #27272a", boxShadow:"0 24px 64px rgba(0,0,0,0.85)", pointerEvents:"none", background:"#fff" }}>
-      <img src={src} alt={ticker} referrerPolicy="no-referrer" style={{ width:"100%", height:"100%", objectFit:"fill", display:"block" }}/>
-    </div>
+    <>
+      {onClose && <div style={{ position:"fixed", inset:0, zIndex:9998 }} onClick={onClose}/>}
+      <div style={{ position:"fixed", left, top, width:W, height:H, zIndex:9999, borderRadius:8, overflow:"hidden", border:"1px solid #27272a", boxShadow:"0 24px 64px rgba(0,0,0,0.85)", pointerEvents:"none", background:"#fff" }}>
+        <img src={src} alt={ticker} referrerPolicy="no-referrer" style={{ width:"100%", height:"100%", objectFit:"fill", display:"block" }}/>
+      </div>
+    </>
   );
 };
 
@@ -937,7 +940,7 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
         </tbody>
       </table>
     </div>
-    {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
+    {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
     </>
   );
 };
@@ -2199,7 +2202,7 @@ const GapperScanner = () => {
         </table>
       </div>
     </div>
-    {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
+    {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
     </>
   );
 };
@@ -2885,7 +2888,7 @@ const SearchBar = ({ data, search, setSearch }) => {
           <p className="text-[13px] text-zinc-500">"{q}" not found in scanner data</p>
         </div>
       )}
-      {tickerHover && <TVPopup ticker={tickerHover.ticker} anchorRect={tickerHover.rect}/>}
+      {tickerHover && <TVPopup ticker={tickerHover.ticker} anchorRect={tickerHover.rect} onClose={() => setTickerHover(null)}/>}
     </div>
   );
 };
@@ -4097,7 +4100,7 @@ const filtered = useMemo(() => {
           ) : filtered.map((t,i) => <ThemeSection key={t.name+i} theme={t} lbPerfKey={lbPerfKey} spyPerf={data?.spy_benchmarks?.[rsSPYKey]} rsSPYKey={rsSPYKey} isTopTheme={i===0} topADRTickers={topADRTickers} themeRankings={data?.theme_rankings} finvizThemeRankings={data?.finviz_theme_rankings}/>)}
         </div>
       )}
-      {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect} chartUrl={macroHover.chartUrl}/>}
+      {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect} chartUrl={macroHover.chartUrl} onClose={() => setMacroHover(null)}/>}
     </div>
   );
 }
