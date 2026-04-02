@@ -584,6 +584,17 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     return map;
   }, [themes]);
 
+  // Build theme name → ticker list map for MultiChart button
+  const themeTickersMap = useMemo(() => {
+    const map = {};
+    for (const theme of (themes || [])) {
+      const norm = normalizeTheme(theme);
+      const tickers = norm.subthemes.flatMap(s => s.stocks).map(s => s.ticker).filter(Boolean);
+      if (tickers.length) map[norm.name.toLowerCase()] = [...new Set(tickers)];
+    }
+    return map;
+  }, [themes]);
+
   const ranked = useMemo(() => {
     if (!activeData || !activeData.length) return [];
     return [...activeData].sort((a, b) => {
@@ -692,6 +703,13 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                       >{t.name}</span>
                       {t.stage2_momentum && <span className="px-1.5 py-0.5 text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full leading-none">STAGE 2</span>}
                       {t.n_industries && <span className="text-[10px] text-zinc-600">{t.n_industries} ind</span>}
+                      {themeTickersMap[t.name?.toLowerCase()] && (
+                        <button
+                          title="Open MultiChart"
+                          onClick={e => { e.stopPropagation(); const tickers = themeTickersMap[t.name.toLowerCase()]; window.open(`https://finviz.com/screener.ashx?v=340&t=${tickers.join(',')}`, '_blank'); }}
+                          className="ml-1 px-1.5 py-0.5 text-[9px] font-semibold bg-zinc-700/50 text-zinc-400 hover:bg-blue-500/20 hover:text-blue-400 border border-zinc-600/30 hover:border-blue-500/30 rounded transition-all"
+                        >Charts</button>
+                      )}
                     </div>
                   </td>
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
