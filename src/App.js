@@ -3768,7 +3768,7 @@ const filtered = useMemo(() => {
         }
         if (filtersOn) {
           st = st.filter(s =>
-            s.dollar_volume >= (parseFloat(filterDolVol) || 0) * 1e6 &&
+            s.avg_dollar_volume >= (parseFloat(filterDolVol) || 0) * 1e6 &&
             s.adr_pct >= (parseFloat(filterADR) || 0) &&
             s.rs_52w >= (parseFloat(filterRS) || 0) &&
             (s.dist_52w_high == null || s.dist_52w_high >= -(parseFloat(filterDist52w) || 0))
