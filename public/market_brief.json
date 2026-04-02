@@ -1,30 +1,30 @@
 {
-  "generated_at": "April 01, 2026 (23:01 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 02, 2026 (11:31 EDT)",
+  "session": "Market Hours",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6575.32,
-      "change": 46.8,
-      "change_pct": 0.72
+      "price": 6572.65,
+      "change": -2.67,
+      "change_pct": -0.04
     },
     {
       "label": "Nasdaq 100",
-      "price": 24019.99,
-      "change": 279.8,
-      "change_pct": 1.18
+      "price": 23989.2,
+      "change": -30.79,
+      "change_pct": -0.13
     },
     {
       "label": "VIX",
-      "price": 24.54,
-      "change": -0.71,
+      "price": 25.13,
+      "change": 0.59,
       "change_pct": null,
-      "zone_label": "Elevated"
+      "zone_label": "Anxiety Zone"
     },
     {
       "label": "10Y Yield",
-      "price": 4.32,
-      "change": 0.01,
+      "price": 4.3,
+      "change": -0.02,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 52731.94,
-      "change_pct": -1.88
+      "price": 53739.68,
+      "change_pct": 5.24
     },
     "dax": {
       "label": "DAX",
-      "price": 23298.89,
-      "change_pct": 2.73
+      "price": 23146.34,
+      "change_pct": -0.65
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10364.8,
-      "change_pct": 1.85
+      "price": 10454.63,
+      "change_pct": 0.87
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 32.3,
-    "mmth": 51.3,
+    "s5fi": 34.9,
+    "mmth": 50.9,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Elevated VIX, US Resilience, Mixed Global",
+  "mood": "Anxious Consolidation / Sector Focus",
   "analysis": {
-    "analysis_para1": "Global markets presented a mixed picture today, with Asian weakness as the Nikkei 225 fell -1.88%, contrasting sharply with robust European performance led by the DAX's +2.73% surge and FTSE 100's +1.85%. Despite US indices posting gains, the VIX remains elevated at 24.54, signaling persistent underlying anxiety among investors. US market breadth remains concerning, with only 32.3% of S&P 500 stocks above their 50-day moving average (S5FI), suggesting narrow participation in today's rally.",
-    "analysis_para2": "Given the elevated VIX and narrow breadth, market participants should prioritize capital preservation and selective exposure. A confirmed break above the S&P 500's session high of 6575.32 on improving breadth (S5FI sustainably above 40%) would signal improving conditions for increased risk-taking. Conversely, a sustained breach below yesterday's low, coupled with VIX pushing towards 28, would indicate a shift to risk-off and necessitate further defensive positioning. Monitor for VIX to subside towards 20 and for leadership to broaden beyond current narrow themes before increasing aggressive exposure.",
-    "technical_signal": "No reversal pattern confirmed yet. The elevated VIX at 24.54, despite positive market closes, suggests underlying caution rather than a clear reversal setup.",
+    "analysis_para1": "Global markets present a mixed picture: Nikkei surged +5.24%, while the DAX dipped -0.65%, and the FTSE 100 gained +0.87%. Domestically, US indices are treading water, with the S&P 500 down a marginal -0.04% and the Nasdaq 100 slightly lower by -0.13%. The VIX at 25.13 signals an elevated 'Anxiety Zone', contradicting the relatively calm index moves and suggesting underlying investor unease. Market breadth remains concerning, with only 34.9% of stocks above their 50-day moving average (S5FI) and 50.9% above their 200-day (MMTH), indicating narrowing leadership and a consolidating tape; the BAML HY Spread is unavailable, leaving the credit regime status unknown.",
+    "analysis_para2": "The mechanical plan demands vigilance in this 'Anxiety Zone' environment. Watch for sustained breaks in either direction from current levels, particularly if the S&P 500 pushes below 6550 or the Nasdaq 100 dips under 23900, which could signal deeper weakness. Conversely, a decisive move above yesterday's close for both indices, coupled with a VIX retreat below 24, would suggest a potential easing of current anxieties. Given the mixed breadth, focus should remain on high Relative Strength (RS) leaders within strong thematic sectors like Semiconductors, Energy Traditional, and Commodities Metals, as these are showing the most resilience. Maintain tight stop-losses on all positions until a clearer directional trend is established and the VIX shows signs of normalizing.",
+    "technical_signal": "No reversal pattern confirmed yet. US indices are exhibiting flat to slightly negative price action amidst a high VIX and mixed global performance, indicating a lack of clear directional conviction.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "AXT Inc, with an exceptional RS of 99 and a powerful 3-month surge of +199.2%, demonstrates leadership within the strong Semiconductor theme amidst a selective market."
+        "reason": "AXTI exhibits exceptional relative strength (RS=99) and explosive 3-month growth (+198.3%) within the leading Semiconductors theme, making it a high-conviction momentum play."
       },
       {
         "ticker": "TSEM",
         "company": "Tower Semiconductor Ltd",
         "grade": "A",
-        "reason": "Tower Semiconductor Ltd exhibits robust strength with RS of 98 and a significant 1-month gain of +48.6%, making it a strong contender in the currently leading Semiconductor sector."
+        "reason": "TSEM displays robust relative strength (RS=98) and strong one-month acceleration (+49.0%) in the high-performing Semiconductors sector, indicating continued institutional interest."
       },
       {
         "ticker": "MRVL",
         "company": "Marvell Technology Inc",
         "grade": "C",
-        "reason": "Marvell Technology Inc, despite a strong 1-month gain of +37.0%, presents the lowest Relative Strength (RS=85) among highlighted peers, suggesting relative underperformance or potential for distribution in this narrow market."
+        "reason": "Despite a strong one-month return, MRVL's relatively lower RS (85) and more modest 3-month performance (+23.0%) compared to its sector peers suggest it may be prone to underperformance in a consolidating market."
       }
     ]
   }
