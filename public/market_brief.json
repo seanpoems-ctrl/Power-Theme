@@ -1,25 +1,25 @@
 {
-  "generated_at": "April 02, 2026 (13:03 EDT)",
-  "session": "Market Hours",
+  "generated_at": "April 02, 2026 (18:00 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6559.65,
-      "change": -15.67,
-      "change_pct": -0.24
+      "price": 6582.69,
+      "change": 7.37,
+      "change_pct": 0.11
     },
     {
       "label": "Nasdaq 100",
-      "price": 23941.55,
-      "change": -78.44,
-      "change_pct": -0.33
+      "price": 24045.53,
+      "change": 25.54,
+      "change_pct": 0.11
     },
     {
       "label": "VIX",
-      "price": 25.46,
-      "change": 0.92,
+      "price": 23.87,
+      "change": -0.67,
       "change_pct": null,
-      "zone_label": "Anxiety Zone"
+      "zone_label": "Elevated"
     },
     {
       "label": "10Y Yield",
@@ -37,8 +37,8 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 23168.08,
-      "change_pct": -0.56
+      "price": 23298.89,
+      "change_pct": 2.73
     },
     "ftse": {
       "label": "FTSE 100",
@@ -50,8 +50,8 @@
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 33.3,
-    "mmth": 50.7,
+    "s5fi": 33.8,
+    "mmth": 51.1,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Anxiety Prevails, US Weakness",
+  "mood": "Global Rally, Uneven US Gains",
   "analysis": {
-    "analysis_para1": "Global markets present a mixed picture today, with the Nikkei surging impressively by +5.24% while European indices like the DAX (-0.56%) and FTSE 100 (+0.69%) showed more muted, divergent moves. Domestically, US indices are trending lower, with the S&P 500 down 0.24% and the Nasdaq 100 down 0.33%, signaling persistent weakness. Breadth indicators confirm this softer trend, as only 33.3% of stocks are above their 50-day moving average (S5FI) and 50.7% are above their 200-day moving average (MMTH), suggesting declining participation. The VIX resting in the Anxiety Zone at 25.46 further underscores underlying market apprehension.",
-    "analysis_para2": "Given the current market tone, traders should watch for potential support around the 6550 level on the S&P 500, with resistance forming near 6600; a breach below 6550 could signal further downside, while a reclaim of 6600 might alleviate immediate pressure. The elevated VIX at 25.46 suggests volatility will remain a factor, favoring nimble trading and robust risk management. Focus should remain on identifying stocks exhibiting strong relative strength and volume within defensive or momentum-driven themes, especially as breadth indicators remain subdued. Maintain strict stops and be prepared to reduce exposure if key support levels fail to hold.",
-    "technical_signal": "No reversal pattern confirmed yet. US indices are showing weakness, and the VIX remains elevated, indicating ongoing market anxiety.",
+    "analysis_para1": "Global markets displayed significant strength today, with the Nikkei 225 surging +5.24%, the DAX up +2.73%, and the FTSE 100 gaining +0.69%. Despite this robust international performance, the US market saw a modest advance, with the S&P 500 and Nasdaq 100 both rising by only +0.11%. Credit conditions remain stable with the 10-year yield at 4.31%, though the BAML HY Spread's regime is undefined. However, underlying US market breadth remains concerning, indicated by only 33.8% of stocks above their 50-day moving average (S5FI) and 51.1% above their 200-day moving average (MMTH), pointing to a narrow participation in the minor market gains.",
+    "analysis_para2": "The immediate mechanical plan involves monitoring for sustained conviction given the flat US close amidst strong global cues. For the S&P 500, a decisive break above the 6600 level would signal renewed bullish momentum, while a failure to hold above 6550 could quickly neutralize today's marginal advance. The elevated VIX at 23.87 suggests ongoing market jitters, with a sustained move below 20 needed to confirm a reduction in risk aversion. Traders should continue to favor high relative strength themes like Semiconductors and Energy, but maintain vigilance for any further deterioration in breadth (e.g., S5FI dropping below 30%) as a warning of potential distribution. Tight stop-losses on long positions are prudent until market breadth improves and volatility subsides.",
+    "technical_signal": "No reversal pattern confirmed yet. The market saw a slight positive close amidst an elevated VIX and weak underlying breadth, suggesting an uncertain directional bias.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "AXT Inc (AXTI) earns an A+ for its exceptional RS=99 and remarkable 3-month return of +198.3%, positioning it as a top semiconductor play in a market craving selective strength."
+        "reason": "AXTI exhibits exceptional relative strength (RS=99) and robust long-term momentum with a +198.3% 3-month return, making it a leader within the strong Semiconductor theme."
       },
       {
         "ticker": "TSEM",
         "company": "Tower Semiconductor Ltd",
         "grade": "A",
-        "reason": "Tower Semiconductor Ltd (TSEM) receives an A grade due to its strong RS=98 and impressive 1-month gain of +49.0%, making it a high-momentum pick within the resilient semiconductor theme."
+        "reason": "TSEM demonstrates outstanding near-term momentum with a +49.0% 1-month return and high relative strength (RS=98), confirming its leadership in the thriving Semiconductor sector."
       },
       {
         "ticker": "MRVL",
         "company": "Marvell Technology Inc",
         "grade": "C",
-        "reason": "Marvell Technology Inc (MRVL) is graded C as an avoid; despite its +37.7% 1-month return, its relatively lower RS=85 and modest 3-month performance (+23.0%) make it a weaker conviction amidst current market anxiety."
+        "reason": "Despite a strong 1-month return, Marvell Technology's (MRVL) relatively lower RS (85) and comparatively weaker 3-month performance (+23.0%) suggest it may lag higher conviction Semiconductor plays in the current uncertain market."
       }
     ]
   }
