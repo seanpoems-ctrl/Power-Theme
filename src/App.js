@@ -3882,10 +3882,10 @@ const filtered = useMemo(() => {
 
           {/* Macro ticker bar */}
           {data?.market_condition && (() => {
-            const { btc, gld, oil, credit_spread, breadth_50d, breadth_200d } = data.market_condition;
-            const hasAny = btc || gld || oil || credit_spread != null || breadth_50d != null;
+            const { btc, gld, oil, dxy, credit_spread, breadth_50d, breadth_200d } = data.market_condition;
+            const hasAny = btc || gld || oil || dxy || credit_spread != null || breadth_50d != null;
             if (!hasAny) return null;
-            const CHART = { btc: 'IBIT', gld: 'GLD', oil: 'USO', credit_spread: 'HYG', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R' };
+            const CHART = { btc: 'IBIT', gld: 'GLD', oil: 'USO', dxy: 'UUP', credit_spread: 'HYG', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R' };
             const mkClick = (key, e) => { const ticker = CHART[key]; const rect = e.currentTarget.getBoundingClientRect(); setMacroHover(prev => prev?.ticker === ticker ? null : { ticker, rect }); };
             const fmtChg = v => v == null ? null : v > 0
               ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
@@ -3908,6 +3908,14 @@ const filtered = useMemo(() => {
                 {btc && <Tag label="BTC CME" d={btc} chartKey="btc"/>}
                 {gld && <><Dot/><Tag label="GC1! COMEX" d={gld} chartKey="gld"/></>}
                 {oil && <><Dot/><Tag label="CL1! NYMEX" d={oil} chartKey="oil"/></>}
+                {dxy && <><Sep/><span
+                  className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
+                  onClick={e => mkClick('dxy', e)}
+                >
+                  <span className="text-zinc-600">DXY</span>
+                  {dxy.price != null && <span className={dxy.change_pct > 0 ? "text-red-400" : dxy.change_pct < 0 ? "text-emerald-400" : "text-zinc-300"}>{dxy.price.toFixed(2)}</span>}
+                  {dxy.change_pct != null && <span className={dxy.change_pct > 0 ? "text-red-400" : dxy.change_pct < 0 ? "text-emerald-400" : "text-zinc-400"}>{dxy.change_pct > 0 ? "+" : ""}{dxy.change_pct.toFixed(2)}%</span>}
+                </span></>}
                 {credit_spread != null && (
                   <><Sep/>
                   <span

@@ -1131,6 +1131,7 @@ _TV_MACRO_SYMBOL = {
     "btc": ("CME:BTC1!",   _TV_FUTURES_SCAN_URL),
     "gld": ("COMEX:GC1!",  _TV_FUTURES_SCAN_URL),
     "oil": ("NYMEX:CL1!",  _TV_FUTURES_SCAN_URL),
+    "dxy": ("TVC:DXY",     _TV_SCAN_URL),
 }
 
 
