@@ -1,30 +1,30 @@
 {
-  "generated_at": "March 31, 2026 (18:54 EDT)",
+  "generated_at": "April 01, 2026 (23:01 EDT)",
   "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6528.52,
-      "change": 184.8,
-      "change_pct": 2.91
+      "price": 6575.32,
+      "change": 46.8,
+      "change_pct": 0.72
     },
     {
       "label": "Nasdaq 100",
-      "price": 23740.19,
-      "change": 786.81,
-      "change_pct": 3.43
+      "price": 24019.99,
+      "change": 279.8,
+      "change_pct": 1.18
     },
     {
       "label": "VIX",
-      "price": 25.25,
-      "change": -5.36,
+      "price": 24.54,
+      "change": -0.71,
       "change_pct": null,
-      "zone_label": "Anxiety Zone"
+      "zone_label": "Elevated"
     },
     {
       "label": "10Y Yield",
-      "price": 4.31,
-      "change": -0.03,
+      "price": 4.32,
+      "change": 0.01,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 51885.85,
-      "change_pct": -2.79
+      "price": 52731.94,
+      "change_pct": -1.88
     },
     "dax": {
       "label": "DAX",
-      "price": 22562.88,
-      "change_pct": 1.18
+      "price": 23298.89,
+      "change_pct": 2.73
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10176.45,
-      "change_pct": 0.48
+      "price": 10364.8,
+      "change_pct": 1.85
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 30.0,
-    "mmth": 50.8,
+    "s5fi": 32.3,
+    "mmth": 51.3,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Strong US Rally / Global Divergence",
+  "mood": "Elevated VIX, US Resilience, Mixed Global",
   "analysis": {
-    "analysis_para1": "Today's market presented a highly divergent global picture, with the Nikkei 225 experiencing a significant -2.79% decline while European markets, the DAX (+1.18%) and FTSE 100 (+0.48%), posted modest gains. In stark contrast, US equities saw a robust rally, with the S&P 500 up +2.91% and the Nasdaq 100 surging +3.43%. Despite this strong performance, underlying market breadth remains tepid, with only 30.0% of stocks above their 50-day moving average (S5FI) and 50.8% above their 200-day moving average (MMTH), indicating that gains may not be broadly distributed. The unknown status of the BAML HY Spread further adds to the uncertainty regarding broader credit market health.",
-    "analysis_para2": "Given today's powerful US rally, the mechanical plan involves confirming follow-through above prior resistance levels for the S&P 500 at 6500 and the Nasdaq 100 at 23500, which now serve as critical support. A sustained retreat of the VIX from its 'Anxiety Zone' level of 25.25 below 20 would provide a clearer signal of diminishing systemic risk and increasing conviction in the market's upward momentum. Until then, maintain a selective approach, prioritizing names with superior relative strength and robust earnings prospects. Monitor US market breadth indicators closely for signs of broader participation that would confirm a healthier, more sustainable uptrend.",
-    "technical_signal": "No reversal pattern confirmed yet. While today's strong rally is positive, a single session does not definitively confirm a broader trend reversal.",
+    "analysis_para1": "Global markets presented a mixed picture today, with Asian weakness as the Nikkei 225 fell -1.88%, contrasting sharply with robust European performance led by the DAX's +2.73% surge and FTSE 100's +1.85%. Despite US indices posting gains, the VIX remains elevated at 24.54, signaling persistent underlying anxiety among investors. US market breadth remains concerning, with only 32.3% of S&P 500 stocks above their 50-day moving average (S5FI), suggesting narrow participation in today's rally.",
+    "analysis_para2": "Given the elevated VIX and narrow breadth, market participants should prioritize capital preservation and selective exposure. A confirmed break above the S&P 500's session high of 6575.32 on improving breadth (S5FI sustainably above 40%) would signal improving conditions for increased risk-taking. Conversely, a sustained breach below yesterday's low, coupled with VIX pushing towards 28, would indicate a shift to risk-off and necessitate further defensive positioning. Monitor for VIX to subside towards 20 and for leadership to broaden beyond current narrow themes before increasing aggressive exposure.",
+    "technical_signal": "No reversal pattern confirmed yet. The elevated VIX at 24.54, despite positive market closes, suggests underlying caution rather than a clear reversal setup.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "AXTI exhibits exceptional momentum with an RS=99 and a phenomenal 3-month return of +290.5%, making it a top conviction play within the resurgent Semiconductors theme."
+        "reason": "AXT Inc, with an exceptional RS of 99 and a powerful 3-month surge of +199.2%, demonstrates leadership within the strong Semiconductor theme amidst a selective market."
       },
       {
-        "ticker": "PARR",
-        "company": "Par Pacific Holdings Inc",
+        "ticker": "TSEM",
+        "company": "Tower Semiconductor Ltd",
         "grade": "A",
-        "reason": "PARR demonstrates strong leadership in the Energy Traditional theme with RS=97 and an impressive 1-month gain of +35.9%, aligning well with current sector strength."
+        "reason": "Tower Semiconductor Ltd exhibits robust strength with RS of 98 and a significant 1-month gain of +48.6%, making it a strong contender in the currently leading Semiconductor sector."
       },
       {
-        "ticker": "CENX",
-        "company": "Century Aluminum Co",
+        "ticker": "MRVL",
+        "company": "Marvell Technology Inc",
         "grade": "C",
-        "reason": "Despite a high RS=97, CENX's 1-month return of +14.3% is relatively weaker than other top-tier candidates, suggesting it might lag during aggressive market rallies."
+        "reason": "Marvell Technology Inc, despite a strong 1-month gain of +37.0%, presents the lowest Relative Strength (RS=85) among highlighted peers, suggesting relative underperformance or potential for distribution in this narrow market."
       }
     ]
   }
