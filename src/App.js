@@ -874,7 +874,7 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
     <div className="overflow-x-auto overflow-y-auto rounded-lg border border-zinc-700/40" style={{maxHeight:'520px'}}>
       <table className="w-full text-sm table-fixed min-w-[1280px]">
         <thead className="sticky top-0 z-10">
-          <tr className="text-[12px] uppercase tracking-wider bg-zinc-900/80">
+          <tr className="text-[12px] uppercase tracking-wider bg-zinc-900">
             <th className="text-left py-3 px-4 font-medium w-[160px] text-zinc-500">Ticker</th>
             <SH k="price" label="Price" w="w-[80px]"/>
             {PERF_KEYS.map(p => <SH key={p.key} k={p.key} label={p.label} w="w-[64px]"/>)}
