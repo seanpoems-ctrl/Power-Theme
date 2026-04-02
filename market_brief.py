@@ -437,9 +437,9 @@ def build_telegram_message(result: dict) -> str:
     lines.append("")
 
     if ana.get("analysis_para1"):
-        lines += [f"*📊 Analysis:*", _esc(ana["analysis_para1"][:500]), ""]
+        lines += [f"*📊 Analysis:*", _esc(ana["analysis_para1"][:900]), ""]
     if ana.get("analysis_para2"):
-        lines += [f"*⚙️ Mechanical Plan:*", _esc(ana["analysis_para2"][:500]), ""]
+        lines += [f"*⚙️ Mechanical Plan:*", _esc(ana["analysis_para2"][:900]), ""]
 
     tickers = ana.get("ticker_intel", [])
     if tickers:
@@ -449,7 +449,7 @@ def build_telegram_message(result: dict) -> str:
             g_icon = "✅" if grade.startswith("A") else "⚠️" if grade.startswith("B") else "❌"
             lines.append(
                 f"  {g_icon} `{t.get('ticker','')}` *{_esc(t.get('company',''))}* "
-                f"Grade {_esc(grade)}: {_esc(str(t.get('reason',''))[:140])}"
+                f"Grade {_esc(grade)}: {_esc(str(t.get('reason',''))[:280])}"
             )
 
     return "\n".join(line for line in lines if line is not None)[:4090]
