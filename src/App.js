@@ -548,6 +548,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
   const [expanded, setExpanded] = useState(null);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
   const [themeHover, setThemeHover] = useState(null); // { ticker, rect }
+  const [themeStats, setThemeStats] = useState(null); // { themeName, anchorRect }
 
   const activeData = view === "themes" ? finvizThemeRankings : themeRankings;
 
@@ -681,14 +682,18 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
               const industries = isIndustryView ? (industryMap[t.name] || []) : [];
               return (<React.Fragment key={`lb-${t.name}`}>
                 <tr
-                  onClick={() => isIndustryView && setExpanded(isExpanded ? null : t.name)}
+                  onClick={e => {
+                    if (isIndustryView) { setExpanded(isExpanded ? null : t.name); return; }
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setThemeStats(prev => prev?.themeName === t.name ? null : { themeName: t.name, anchorRect: rect });
+                  }}
                   className={`border-b border-zinc-800/30 transition-colors cursor-pointer ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
                   <td className={`px-1 py-2 text-[12px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
                   <td className="px-2 py-2">
                     <div className="flex items-center gap-1.5">
                       <span
                         className="text-[12px] font-semibold text-zinc-200 cursor-pointer hover:text-blue-400 transition-colors"
-                        onClick={e => { const etf = THEME_ETF_MAP[t.name]; if (!etf) return; const rect = e.currentTarget.getBoundingClientRect(); setThemeHover(prev => prev?.ticker === etf ? null : { ticker: etf, rect }); }}
+                        onClick={e => { e.stopPropagation(); const etf = THEME_ETF_MAP[t.name]; if (!etf) return; const rect = e.currentTarget.getBoundingClientRect(); setThemeHover(prev => prev?.ticker === etf ? null : { ticker: etf, rect }); }}
                       >{t.name}</span>
                       {t.stage2_momentum && <span className="px-1.5 py-0.5 text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full leading-none">STAGE 2</span>}
                       {t.n_industries && <span className="text-[10px] text-zinc-600">{t.n_industries} ind</span>}
@@ -716,6 +721,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
       </div>
     </div>
     {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => setThemeHover(null)}/>}
+    {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} anchorRect={themeStats.anchorRect} onClose={() => setThemeStats(null)}/>}
     </>
   );
 };
@@ -755,6 +761,122 @@ const TVPopup = ({ ticker, anchorRect, chartUrl, onClose }) => {
       {onClose && <div style={{ position:"fixed", inset:0, zIndex:9998 }} onClick={onClose}/>}
       <div style={{ position:"fixed", left, top, width:W, height:H, zIndex:9999, borderRadius:8, overflow:"hidden", border:"1px solid #27272a", boxShadow:"0 24px 64px rgba(0,0,0,0.85)", pointerEvents:"none", background:"#fff" }}>
         <img src={src} alt={ticker} referrerPolicy="no-referrer" style={{ width:"100%", height:"100%", objectFit:"fill", display:"block" }}/>
+      </div>
+    </>
+  );
+};
+
+const ThemeStatsPopup = ({ themeName, themes, anchorRect, onClose }) => {
+  const stocks = useMemo(() => {
+    if (!themeName || !themes) return [];
+    const theme = themes.find(t => normalizeTheme(t).name.toLowerCase() === themeName.toLowerCase());
+    if (!theme) return [];
+    const norm = normalizeTheme(theme);
+    const all = norm.subthemes.flatMap(s => s.stocks);
+    const seen = new Set();
+    return all.filter(s => { if (seen.has(s.ticker)) return false; seen.add(s.ticker); return true; });
+  }, [themeName, themes]);
+
+  const mean = (arr) => arr.length ? arr.reduce((a, v) => a + v, 0) / arr.length : 0;
+  const avgPrice  = mean(stocks.map(s => s.price).filter(v => v != null));
+  const avg1m     = mean(stocks.map(s => s.perf_1m).filter(v => v != null));
+  const avgRS     = Math.round(mean(stocks.map(s => s.rs_52w).filter(v => v != null)));
+  const avg1d     = mean(stocks.map(s => s.perf_1d).filter(v => v != null));
+  const sorted    = [...stocks].sort((a, b) => (b.perf_1d ?? 0) - (a.perf_1d ?? 0));
+  const best      = sorted.filter(s => (s.perf_1d ?? 0) > 0).slice(0, 3);
+  const worst     = sorted.filter(s => (s.perf_1d ?? 0) < 0).slice(-3).reverse();
+
+  if (!anchorRect) return null;
+  const MAX_W = 420, EDGE = 12;
+  const vw = window.innerWidth, vh = window.innerHeight;
+  const spaceRight = vw - anchorRect.right - EDGE;
+  const spaceLeft  = anchorRect.left - EDGE;
+  let left;
+  if (spaceRight >= MAX_W) {
+    left = anchorRect.right + 8;
+  } else if (spaceLeft >= MAX_W) {
+    left = anchorRect.left - MAX_W - 8;
+  } else {
+    left = Math.max(EDGE, Math.min(anchorRect.left, vw - MAX_W - EDGE));
+  }
+  const navEl = document.getElementById("app-navbar");
+  const edgeTop = navEl ? navEl.getBoundingClientRect().bottom + 8 : 72;
+  const top = Math.max(edgeTop, Math.min(anchorRect.top, vh - EDGE - 300));
+
+  const rsColor = avgRS >= 70 ? 'text-emerald-400' : avgRS >= 50 ? 'text-yellow-400' : 'text-red-400';
+  const perfColor = (v) => v >= 0 ? 'text-emerald-400' : 'text-red-400';
+  const fmt = (v) => `${v >= 0 ? '+' : ''}${v.toFixed(1)}%`;
+
+  return (
+    <>
+      <div style={{ position:'fixed', inset:0, zIndex:9998 }} onClick={onClose}/>
+      <div style={{ position:'fixed', left, top, width:MAX_W, zIndex:9999, borderRadius:10, border:'1px solid rgba(63,63,70,0.7)', boxShadow:'0 24px 64px rgba(0,0,0,0.85)', background:'#18181b', overflow:'hidden' }}
+        onClick={e => e.stopPropagation()}>
+        {/* Header */}
+        <div style={{ background: avg1d >= 0 ? 'rgba(16,185,129,0.12)' : 'rgba(239,68,68,0.12)', borderBottom:'1px solid rgba(63,63,70,0.5)' }}
+          className="px-4 py-3 flex items-start justify-between gap-2">
+          <div>
+            <div className="text-[13px] font-bold text-zinc-100 leading-tight">{themeName}</div>
+            <div className={`text-[18px] font-bold font-mono mt-0.5 ${avg1d >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+              {avg1d >= 0 ? '▲' : '▼'} {fmt(avg1d)}
+            </div>
+          </div>
+          <div className="flex items-center gap-2 mt-0.5">
+            <span className="text-[11px] text-zinc-500 bg-zinc-800 px-2 py-0.5 rounded font-mono">{stocks.length} stocks</span>
+            <button onClick={onClose} className="text-zinc-500 hover:text-zinc-300 transition-colors"><X size={14}/></button>
+          </div>
+        </div>
+        {/* Stats row */}
+        <div className="grid grid-cols-3 divide-x divide-zinc-700/50 border-b border-zinc-700/50">
+          {[
+            { label:'AVG PRICE',   val:`$${avgPrice.toFixed(2)}`,          cls:'text-zinc-200' },
+            { label:'AVG 1-MONTH', val:fmt(avg1m),                         cls:perfColor(avg1m) },
+            { label:'AVG RS',      val:String(avgRS || '—'),                cls:rsColor },
+          ].map(({ label, val, cls }) => (
+            <div key={label} className="px-3 py-2.5 text-center">
+              <div className="text-[9px] font-semibold text-zinc-500 uppercase tracking-widest mb-1">{label}</div>
+              <div className={`text-[15px] font-bold font-mono ${cls}`}>{val}</div>
+            </div>
+          ))}
+        </div>
+        {/* Movers */}
+        <div className="px-4 py-3 border-b border-zinc-700/50">
+          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest mb-2">TODAY'S MOVERS</div>
+          <div className="flex flex-col gap-1.5">
+            <div className="flex items-center gap-2">
+              <TrendingUp size={11} className="text-emerald-400 flex-shrink-0"/>
+              <span className="text-[11px] text-zinc-500 w-9 flex-shrink-0">Best</span>
+              <div className="flex gap-1.5 flex-wrap">
+                {best.length ? best.map(s => (
+                  <span key={s.ticker} className="text-[11px] font-mono font-semibold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                    {s.ticker} {fmt(s.perf_1d)}
+                  </span>
+                )) : <span className="text-[11px] text-zinc-600">—</span>}
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <TrendingUp size={11} className="text-red-400 flex-shrink-0 rotate-180"/>
+              <span className="text-[11px] text-zinc-500 w-9 flex-shrink-0">Worst</span>
+              <div className="flex gap-1.5 flex-wrap">
+                {worst.length ? worst.map(s => (
+                  <span key={s.ticker} className="text-[11px] font-mono font-semibold text-red-400 bg-red-500/10 px-1.5 py-0.5 rounded">
+                    {s.ticker} {fmt(s.perf_1d)}
+                  </span>
+                )) : <span className="text-[11px] text-zinc-600">—</span>}
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Ticker pills */}
+        <div className="px-4 py-3">
+          <div className="flex flex-wrap gap-1.5">
+            {stocks.map(s => (
+              <span key={s.ticker} className="text-[11px] font-mono px-2 py-0.5 bg-zinc-700/60 text-zinc-300 rounded cursor-default hover:bg-zinc-600/60 transition-colors">
+                {s.ticker}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </>
   );
