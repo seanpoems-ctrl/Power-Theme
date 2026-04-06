@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 02, 2026 (18:00 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 06, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,10 +16,10 @@
     },
     {
       "label": "VIX",
-      "price": 23.87,
-      "change": -0.67,
+      "price": 25.09,
+      "change": 1.22,
       "change_pct": null,
-      "zone_label": "Elevated"
+      "zone_label": "Anxiety Zone"
     },
     {
       "label": "10Y Yield",
@@ -32,17 +32,17 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 53739.68,
-      "change_pct": 5.24
+      "price": 53413.68,
+      "change_pct": 0.55
     },
     "dax": {
       "label": "DAX",
-      "price": 23298.89,
-      "change_pct": 2.73
+      "price": 23168.08,
+      "change_pct": -0.56
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10436.29,
+      "price": 10436.3,
       "change_pct": 0.69
     }
   },
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Global Rally, Uneven US Gains",
+  "mood": "Sector Strength / Underlying Anxiety",
   "analysis": {
-    "analysis_para1": "Global markets displayed significant strength today, with the Nikkei 225 surging +5.24%, the DAX up +2.73%, and the FTSE 100 gaining +0.69%. Despite this robust international performance, the US market saw a modest advance, with the S&P 500 and Nasdaq 100 both rising by only +0.11%. Credit conditions remain stable with the 10-year yield at 4.31%, though the BAML HY Spread's regime is undefined. However, underlying US market breadth remains concerning, indicated by only 33.8% of stocks above their 50-day moving average (S5FI) and 51.1% above their 200-day moving average (MMTH), pointing to a narrow participation in the minor market gains.",
-    "analysis_para2": "The immediate mechanical plan involves monitoring for sustained conviction given the flat US close amidst strong global cues. For the S&P 500, a decisive break above the 6600 level would signal renewed bullish momentum, while a failure to hold above 6550 could quickly neutralize today's marginal advance. The elevated VIX at 23.87 suggests ongoing market jitters, with a sustained move below 20 needed to confirm a reduction in risk aversion. Traders should continue to favor high relative strength themes like Semiconductors and Energy, but maintain vigilance for any further deterioration in breadth (e.g., S5FI dropping below 30%) as a warning of potential distribution. Tight stop-losses on long positions are prudent until market breadth improves and volatility subsides.",
-    "technical_signal": "No reversal pattern confirmed yet. The market saw a slight positive close amidst an elevated VIX and weak underlying breadth, suggesting an uncertain directional bias.",
+    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 up 0.55% and FTSE 100 gaining 0.69%, contrasting with the DAX's 0.56% decline. Domestically, while the S&P 500 and Nasdaq 100 show minor pre-market gains of 0.11%, underlying sentiment remains cautious. The VIX at 25.09 indicates elevated anxiety among investors, further supported by weak internal breadth metrics. Only 33.8% of S&P 500 stocks are above their 50-day moving average (S5FI), and 51.1% are above their 200-day moving average (MMTH), signaling narrow participation despite a stable 10Y yield at 4.31%.",
+    "analysis_para2": "The mechanical plan for today demands vigilance given the conflicting signals. With the VIX entrenched in the Anxiety Zone at 25.09, traders should prioritize risk management and maintain smaller position sizes. The S&P 500's ability to hold above the immediate support zone around 6570 will be crucial to prevent further weakness. A break above 6600 would be a positive sign, indicating potential for continued upward momentum, yet without confirming broad market participation. Given the weak market breadth, as indicated by S5FI at 33.8% and MMTH at 51.1%, focus should remain on leading sectors and stocks exhibiting superior relative strength and momentum. A clear confirmation of broad market participation is needed to shift from a selective, tactical approach to a more aggressive long bias.",
+    "technical_signal": "No reversal pattern confirmed yet. The mixed global tape, high VIX, and weak breadth suggest ongoing choppiness rather than a clear directional shift for the broader market.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "AXTI exhibits exceptional relative strength (RS=99) and robust long-term momentum with a +198.3% 3-month return, making it a leader within the strong Semiconductor theme."
+        "reason": "With an RS of 99 and a stellar 1-month gain of +12.9%, AXTI is a standout semiconductor play, demonstrating leadership in a highly relevant growth sector amidst market uncertainty."
       },
       {
         "ticker": "TSEM",
         "company": "Tower Semiconductor Ltd",
         "grade": "A",
-        "reason": "TSEM demonstrates outstanding near-term momentum with a +49.0% 1-month return and high relative strength (RS=98), confirming its leadership in the thriving Semiconductor sector."
+        "reason": "TSEM boasts an RS of 98 and an impressive 1-month return of +49.0%, making it a high-momentum semiconductor stock well-suited for a selective market environment."
       },
       {
         "ticker": "MRVL",
         "company": "Marvell Technology Inc",
         "grade": "C",
-        "reason": "Despite a strong 1-month return, Marvell Technology's (MRVL) relatively lower RS (85) and comparatively weaker 3-month performance (+23.0%) suggest it may lag higher conviction Semiconductor plays in the current uncertain market."
+        "reason": "Despite a strong 1-month return of +37.7%, MRVL's RS of 85 places it at the lower end of the strong candidates, potentially indicating less consistent relative strength compared to top-tier semiconductor peers in this selective market."
       }
     ]
   }
