@@ -1,40 +1,35 @@
 {
-  "generated_at": "April 06, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "April 06, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6582.69,
-      "change": 7.37,
-      "change_pct": 0.11
+      "price": 6611.83,
+      "change": 29.14,
+      "change_pct": 0.44
     },
     {
       "label": "Nasdaq 100",
-      "price": 24045.53,
-      "change": 25.54,
-      "change_pct": 0.11
+      "price": 24192.17,
+      "change": 146.64,
+      "change_pct": 0.61
     },
     {
       "label": "VIX",
-      "price": 25.09,
-      "change": 1.22,
+      "price": 24.17,
+      "change": 0.3,
       "change_pct": null,
-      "zone_label": "Anxiety Zone"
+      "zone_label": "Elevated"
     },
     {
       "label": "10Y Yield",
-      "price": 4.31,
-      "change": -0.01,
-      "change_pct": null,
-      "trend_label": "Stable"
+      "price": null,
+      "change": null,
+      "change_pct": null
     }
   ],
   "global_indices": {
-    "nikkei": {
-      "label": "Nikkei 225",
-      "price": 53413.68,
-      "change_pct": 0.55
-    },
+    "nikkei": null,
     "dax": {
       "label": "DAX",
       "price": 23168.08,
@@ -50,8 +45,8 @@
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 33.8,
-    "mmth": 51.1,
+    "s5fi": 37.2,
+    "mmth": 51.5,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +55,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Sector Strength / Underlying Anxiety",
+  "mood": "Selective strength, elevated volatility",
   "analysis": {
-    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 up 0.55% and FTSE 100 gaining 0.69%, contrasting with the DAX's 0.56% decline. Domestically, while the S&P 500 and Nasdaq 100 show minor pre-market gains of 0.11%, underlying sentiment remains cautious. The VIX at 25.09 indicates elevated anxiety among investors, further supported by weak internal breadth metrics. Only 33.8% of S&P 500 stocks are above their 50-day moving average (S5FI), and 51.1% are above their 200-day moving average (MMTH), signaling narrow participation despite a stable 10Y yield at 4.31%.",
-    "analysis_para2": "The mechanical plan for today demands vigilance given the conflicting signals. With the VIX entrenched in the Anxiety Zone at 25.09, traders should prioritize risk management and maintain smaller position sizes. The S&P 500's ability to hold above the immediate support zone around 6570 will be crucial to prevent further weakness. A break above 6600 would be a positive sign, indicating potential for continued upward momentum, yet without confirming broad market participation. Given the weak market breadth, as indicated by S5FI at 33.8% and MMTH at 51.1%, focus should remain on leading sectors and stocks exhibiting superior relative strength and momentum. A clear confirmation of broad market participation is needed to shift from a selective, tactical approach to a more aggressive long bias.",
-    "technical_signal": "No reversal pattern confirmed yet. The mixed global tape, high VIX, and weak breadth suggest ongoing choppiness rather than a clear directional shift for the broader market.",
+    "analysis_para1": "Global markets presented a mixed picture, with the DAX down 0.56% while the FTSE 100 gained 0.69%. Despite this varied international performance, major US indices showed resilience, as the S&P 500 climbed 0.44% and the Nasdaq 100 advanced 0.61%. However, underlying market breadth remains tepid, with only 37.2% of S&P 500 stocks above their 50-day moving average (S5FI) and 51.5% above their 200-day moving average (MMTH), indicating concentrated gains. The VIX remains elevated at 24.17, suggesting persistent underlying uncertainty, while credit conditions remain an unknown as the BAML HY Spread regime is N/A.",
+    "analysis_para2": "The current market environment demands a focus on robust relative strength, particularly given the elevated VIX at 24.17 and moderate breadth. For the S&P 500 at 6611.83 and Nasdaq 100 at 24192.17, watch for sustained closes above recent swing highs to confirm bullish momentum, or conversely, breaks below intraday lows as a short-term risk signal. Traders should prioritize names exhibiting strong thematic tailwinds and high Relative Strength (RS), as seen in today's scanner. A potential signal of broader market health would be an improvement in the S5FI and MMTH percentages, indicating wider participation beyond a few dominant sectors.",
+    "technical_signal": "No reversal pattern confirmed yet. While US indices rose, the elevated VIX and tepid breadth suggest underlying caution.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "With an RS of 99 and a stellar 1-month gain of +12.9%, AXTI is a standout semiconductor play, demonstrating leadership in a highly relevant growth sector amidst market uncertainty."
+        "reason": "AXTI shows exceptional relative strength at 99 and phenomenal 3-month performance of +198.3%, making it a top play in the leading Semiconductors theme."
       },
       {
         "ticker": "TSEM",
         "company": "Tower Semiconductor Ltd",
         "grade": "A",
-        "reason": "TSEM boasts an RS of 98 and an impressive 1-month return of +49.0%, making it a high-momentum semiconductor stock well-suited for a selective market environment."
+        "reason": "TSEM exhibits strong relative strength at 98 with a robust 1-month gain of +49.0%, positioning it well within the currently dominant Semiconductors sector."
       },
       {
         "ticker": "MRVL",
         "company": "Marvell Technology Inc",
         "grade": "C",
-        "reason": "Despite a strong 1-month return of +37.7%, MRVL's RS of 85 places it at the lower end of the strong candidates, potentially indicating less consistent relative strength compared to top-tier semiconductor peers in this selective market."
+        "reason": "Despite strong recent gains, MRVL's relative strength of 85 is the lowest among this pre-filtered group, indicating it may lag peers in the semiconductor theme should momentum shift."
       }
     ]
   }
