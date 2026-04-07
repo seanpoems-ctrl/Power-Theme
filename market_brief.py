@@ -405,7 +405,7 @@ def build_telegram_message(result: dict) -> str:
         price_str = f"{price:.2f}" if price else "—"
         chg_str   = f"{chg:+.2f}" if chg is not None else ""
         pct_str   = f"{pct:+.2f}%" if pct is not None else lbl
-        lines.append(f"{arrow} *{_esc(label)}* `{price_str}` `{chg_str}` `{pct_str}`")
+        lines.append(f"{arrow} *{_esc(label)}:* `{price_str}` `{chg_str}` `{pct_str}`")
 
     lines.append("")
 
