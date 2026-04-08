@@ -1,57 +1,281 @@
 {
-  "scan_time": "2026-04-07 08:05 ET",
+  "scan_time": "2026-04-08 08:05 ET",
   "gappers": [
     {
-      "ticker": "CVS",
-      "price": 73.28,
-      "gap_pct": 6.41,
-      "pm_volume": 115754,
-      "avg_vol_10d": 6339111,
-      "avg_dollar_vol": 464530054,
-      "mkt_cap": 93227633837,
-      "rvol": 0.64,
-      "adr_pct": 2.45,
-      "category": "Government Policy",
-      "theme": "Medicare Advantage Rate Increase",
-      "reasoning": "CVS rallied alongside other health insurers following a positive adjustment to Medicare Advantage payment rates.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 55,
-      "grade": "B",
-      "finviz_theme": "Pharma - Large Cap",
-      "analysis_detail": "Catalyst: The Centers for Medicare & Medicaid Services (CMS) announced a **2.48% increase** in Medicare Advantage payment rates for 2027, exceeding previous expectations. | Impact: This policy change provides a direct **tailwind** for CVS's Aetna health insurance segment, potentially **boosting** revenue and profitability for its Medicare Advantage plans.",
-      "analysis_details": "• **The Policy**\nThe Centers for Medicare & Medicaid Services (CMS) officially announced a **2.48% increase** in the 2027 Medicare Advantage payment rates. This decision came as a positive surprise to the market, as initial expectations had pointed to a potentially lower or even flat rate adjustment. This policy directly impacts the reimbursement rates for private health insurance companies, including CVS Health's Aetna subsidiary, that offer Medicare Advantage plans.\n\n• **Direct Impact**\nThe increased payment rates are expected to provide a significant **tailwind** to the profitability of CVS's Medicare Advantage segment. This positive adjustment effectively **reduces pressure** on margins and offers more flexibility in plan design and benefits, potentially supporting member acquisition and retention. While the precise financial impact for CVS will need to be quantified, the general sentiment is that this policy change will lead to **higher revenue** and **improved earnings outlook** from this crucial government-sponsored program.",
+      "ticker": "GFI",
+      "price": 46.12,
+      "gap_pct": 13.62,
+      "pm_volume": 300470,
+      "avg_vol_10d": 3466827,
+      "avg_dollar_vol": 159890061,
+      "mkt_cap": 40799690695,
+      "rvol": 0.84,
+      "adr_pct": 4.44,
+      "category": "Upgrade",
+      "theme": "Price Target Adjustment",
+      "reasoning": "J.P. Morgan maintained its Buy rating but cut its price target for Gold Fields, indicating a reduction in perceived upside potential.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 31,
+      "grade": "C",
+      "finviz_theme": "Materials - Metals & Mining",
+      "analysis_detail": "Catalyst: J.P. Morgan maintained its 'Buy' rating but **cut** its price target for GFI to **$76**. | Impact: The price target **reduction** signals diminished upside potential from the analyst's perspective, potentially acting as a minor headwind for positive momentum.",
+      "analysis_details": "• **The Firm & Rating**\nJ.P. Morgan has **maintained** its \"Buy\" rating on Gold Fields (GFI.US). However, the firm has **reduced** its price target from an unspecified previous level to **$76**. This indicates a recalibration of the analyst's valuation without changing the fundamental investment recommendation.\n\n• **The Thesis**\nThe reduction in the price target suggests a revision of the underlying valuation model or a response to updated market conditions, potentially impacting future earnings expectations or discounted cash flows. While the Buy rating is upheld, the **lower price target** implies diminished upside potential, which could act as a minor headwind for positive momentum.",
       "headlines": [
         {
-          "title": "Daytona Street Capital LLC Invests $2.69 Million in CVS Health Corporation $CVS - MarketBeat",
+          "title": "J.P. Morgan Maintains Gold Fields(GFI.US) With Buy Rating, Cuts Target Price to $76 - 富途牛牛",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPNXY2UzhiMzFBOGlwcTV6dE1hdUFNQkN4VkdUYkZ6TkR4TFNoTG1XakZZRlBjMHJyQnFvbUF2ZnN3VXZjWWdSQ2g1c2N6eDB5QmJFYWdtT1BxZzhCb0RWaGo1YkxlR01VeGl0YndiclZTS2VXampRakRHSHl1UEpneU1IMGFzMks1SUlNYUZETGRKS2lhOHRMUkU2cU1WamFmdHMwTVVyLWY2cGhDcTVQZ1BkTHFJNDBfamY3TE8yYzAtNlNhOGNEWUY2ZlRpdTFUTHZj?oc=5"
-        },
-        {
-          "title": "Insurance stocks jump on Medicare Advantage rate boost: Humana, UnitedHealth, lead gains (UNH:NYSE) - Seeking Alpha",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPZzdnSkhBNER2aDF1Z3hYTFBweXpFVXRvam5hNWpaRFhURUU3ckhtZUZpdkx3aU1lNkRFWlVqZ0VTMDFjNHUtZDRhUXNTakFBaGhfM3FnTHRITVhxbFJaU1ZaQkt6ZXhRa1VETGdaU3ltMFlRRkNkNFJPQW1rVE43VV92RVJxT1poMDhDcF9MbUpydXU1dHpadXZXVXdDc2hMeUNIV1BpVVNvV2dvWGZRSXRpc3h6WHdUZ0VVWnZIYWk?oc=5"
-        },
-        {
-          "title": "HUM, UNH, CVS: Healthcare Stocks Soar on 2.48% Medicare Rate Increase - TipRanks",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOMVQ4bUwyckI3ZkVVckNURnlKSkxlT2VjTHQwRnBVeWwxOXpHVnZCX3c1YmNQZUNVd3p5VG1IMVVBUmR5aThjQU1ZSGZlMVVRbHhjY04tcFhGRFgxQVBfelA5ZE5mdl9tQktmUzVOLUV4T0hfZ1Y4YkxOSTZ4Y3o3Q1hhU25hNWZLWU9xd3I2SEotYmJObGYxcUYwZw?oc=5"
-        },
-        {
-          "title": "Humana shares surge 12% on 2027 Medicare rate boost; UNH, CVS rally - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOVnE4T1FwWEQxM0FZVlJkcmVMTWxnS3ppQWYxODgyNGQyV2xRWjRWaml5SG1taG9EdUM3OEhDeGduYnlRdUlIN052alpnM2VYQ3ZPTDY5UDRFN1hoZ2JQcnh2aW1MUHM2T0lJM05DX3M1VjhDUVZKRDBLTThXOG50SUJEd1BZSkg2VlNIbXh3TzVESWRvWG1KMkdMWHpKRkQ2OWUyeFNEV3dlSlZhMWpTbGlTR29YNUV3ajdja1ZB?oc=5"
-        },
-        {
-          "title": "CVS, UnitedHealth, Humana, Elevance Shares Surge: Here's Why - Benzinga",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNMkZ6bzltdEdpZXllSDBNZVFHSUliM2tGQmRreFdCZTVMMTg0VjdwODQzT2syNUpYY2ctZUt6MmVPX0JONzRoUmJzUUdFTnJPMVZMV0RhQkJJb0NFZmdzRkY3OUV5MG1jMlZSNjQwU0JidUktVlhEN1lnTThlX3ktemF1a04yUjhSNjdES0RaRVFqUnlpS21yT2w3cjF4TXk3LTFjRGgwS0R5MnpmWnJhNXFLNDJxLWM?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPc2lBanZWNGgyaUNtanByV3BxNUQ3aDlTd2lDcnNvN0N0ODVtWGE3WFlsSUlSMFFCLWtZeVl2d3g4UVBIbjZiTFdLNmhScjZOc0paVDJfUWN0VEVoTmRYS08zOWh4bkdObW9hYzlVWVJyN2pRNmZ5RFl3N0JDM2NiZnl2VGotbk0xcllCRHUyNlB6NGh5bTRLd3hlcGVnOWNk?oc=5"
         }
       ],
-      "float_shares": "1.27B",
-      "short_float": "1.40%",
-      "daily_pct": -0.29,
-      "industry": "Pharma - Large Cap",
-      "technical_status": "Fail (ADR 2.5% < 4%)",
+      "float_shares": "895.02M",
+      "short_float": "0.84%",
+      "daily_pct": -1.2,
+      "industry": "Materials - Metals & Mining",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 60,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "J.P. Morgan cut its price target for Gold Fields to $76.",
+        "discrepancy_note": "Source A (Finviz) has no information regarding the price target. Source B (Google News) states the new target price is $76."
+      }
+    },
+    {
+      "ticker": "AXTI",
+      "price": 45.46,
+      "gap_pct": 13.62,
+      "pm_volume": 494896,
+      "avg_vol_10d": 15003365,
+      "avg_dollar_vol": 682052973,
+      "mkt_cap": 2526375667,
+      "rvol": 0.94,
+      "adr_pct": 16.47,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Semiconductors - Analog",
+      "analysis_detail": "Catalyst: No specific fundamental news was released. The recent surge in AXTI appears driven by technical factors and anticipation of upcoming earnings. | Impact: Speculative. Without a concrete fundamental trigger, the sustainability of the current price action is questionable, suggesting high risk for momentum traders.",
+      "analysis_details": "• **What Happened**\nAXT Inc. (AXTI) experienced a significant **8.26%** surge today, as reported by Insider Monkey. This sharp upward movement occurred without any specific fundamental news, such as an earnings release, analyst upgrade, or new contract announcement. All recent headlines point to the **scheduling** of Q1 2026 earnings on April 30, 2026, or general market movements, rather than a specific trigger.\n\n• **Key Consideration**\nGiven the lack of a clear fundamental catalyst, the rally is likely driven by **technical factors**, potentially a short squeeze or anticipatory buying ahead of the scheduled earnings. With an Average Daily Volume (20d) of **$682M** and an ADR% of **16.5%**, the stock is accustomed to volatility. Momentum traders should be cautious, as a move without fundamental backing carries **high risk** of a reversal, especially if the upcoming earnings do not deliver positive surprises.",
+      "headlines": [
+        {
+          "title": "AXT Inc. (AXT) Surges 8.26% as Traders Gear Up for Earnings - Insider Monkey",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNWHkzRkdJbUczNFpRWnM5bk05MkhTYzFuN3d1Yk85SGFYWkVOZnpsMkxXWGNjWUJSWFBxUWpKZTdPaXB6Ymk0RUk0VG9kWHlsLXc0S3czbDdIdVJQQWJXdUtBeTgxQlpybW4wcUJnZG1YVVJjb2pPeEF6OVNfZm5jZ2d0bGpESFROZHV5YmlYeDVLd1h2Q1JzQzEtQ2I2NW9oQUNsbGVkRXHSAagBQVVfeXFMTVh5M0ZHSW1HMzRaUVpzOW5NOTJIU2Mxbjd3dWJPOUhhWFpFTmZ6bDJMV1hjY1lCUlhQcVFqSmU3T2lwemJpNEVJNFRvZFh5bC13NEt3M2w3SHVSUEFiV3VLQXk4MUJacm1uMHFCZ2RtWFVSY29qT3hBejlTX2ZuY2dndGxqREhUTmR1eWJpWHg1S3dYdkNSc0MxLUNiNjVvaEFDbGxlZEVx?oc=5"
+        },
+        {
+          "title": "AXT will post quarterly results April 30, then hold a call - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPTDQ2ZE5mZS05VkhQQXVIV2ZTTjBWVU5VVHR3emsxRlVpM2VhUENhRUlGVDZCMV9EY0hLQkRSLXcyVFZiVDNLM3ZJYlBuRFRzZlZTLXdMUDVyWjVvZTdzZ3JhaDY1Y0JUVlFXZlhBdFJiY0QySzJYa0pkNjRCaDcxZDZKSGZjM285Q3ZNekthaEItaU4tMU41a0VfMTI0TEx1WnlHMnBsMV9JTVczVUxTd2hLbE1JSGhhdlUzTW93?oc=5"
+        },
+        {
+          "title": "AXTI Stock Faces Wild Swings amid Market Movements - StocksToTrade",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibEFVX3lxTE1IbjdaZjJzcG1Ia1JWYTZ5dlpRcDNhc1RFM1BEX2RYMTB3aHVjMDNSdjJseW1KS0UzSkZUYThIOFg0SEhlZ3lrY1NNN3FCOXFrX1p3U1JIQU9XMGpXX0h2Y01HazJKU3V5b3MySw?oc=5"
+        },
+        {
+          "title": "Why AXT Stock Is Suddenly Surging Again - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQelhMQmZDSmdQNGhMazFXSG1FNzBYV0RNZXA2SVp0SXJWVklsbHI1bWlkZmh1XzAwYWZVZ2hMV0N1OXJZSHVOT3lzVlliUGRvRUs2OUFCUmhIeWVPUzQ1aktCeVRocDVPRkZwbTlRUFRmQTF6Q2l4ZERpVkppREF5Tm42NnY?oc=5"
+        },
+        {
+          "title": "AXT, Inc. Schedules First Quarter 2026 Earnings Release for April 30, 2026",
+          "source": "Finviz",
+          "url": "https://www.businesswire.com/news/home/20260407105866/en"
+        }
+      ],
+      "float_shares": "51.74M",
+      "short_float": "11.92%",
+      "daily_pct": 8.26,
+      "industry": "Semiconductors - Analog",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "The initial analysis claims 'No immediate fundamental catalyst found'. However, Source A [1] and Source B [1] both explicitly identify an immediate fundamental catalyst: the Q1 2026 earnings release scheduled for April 30, 2026. Source A specifies 'April 30, 2026' and Source B mentions 'April 30' for 'quarterly results', consistently indicating the same event and date."
+      }
+    },
+    {
+      "ticker": "UAL",
+      "price": 89.29,
+      "gap_pct": 13.34,
+      "pm_volume": 460677,
+      "avg_vol_10d": 7974140,
+      "avg_dollar_vol": 712010961,
+      "mkt_cap": 28879102491,
+      "rvol": 1.22,
+      "adr_pct": 4.51,
+      "category": "Government Policy",
+      "theme": "Geopolitical De-escalation",
+      "reasoning": "Airline stocks jumped following news of a 2-week ceasefire deal in the U.S.-Iran War, reducing geopolitical tensions for the sector.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "B",
+      "finviz_theme": "Others",
+      "analysis_detail": "Catalyst: A 2-week ceasefire deal between the U.S. and Iran was announced, leading to a sector-wide jump in airline stocks, including UAL. | Impact: This temporary de-escalation provides immediate positive sentiment, potentially mitigating recent negative pressures and offering a short-term boost to travel outlook and operational stability.",
+      "analysis_details": "• **The Policy**\nThe recent **2-week ceasefire deal** in the U.S.-Iran War has significantly eased geopolitical tensions. This development is perceived as a positive for the airline industry, including United Airlines, as it can temporarily **reduce operational uncertainties** and potentially **stabilize fuel prices** that might be impacted by regional conflict.\n\n• **Direct Impact**\nUAL shares, along with other major airlines, experienced a **jump** on the news. This temporary de-escalation offers a **reprieve** from recent negative pressures such as fare revamps, increased bag fees, and a turbulent earnings season outlook. While a **short-term relief**, the ceasefire provides a window for improved travel sentiment and potentially more stable operational conditions.",
+      "headlines": [
+        {
+          "title": "Assessing United Airlines (UAL) Valuation After Recent Share Price Weakness And Mixed Return Profile - Yahoo Finance Singapore",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPVjVyODNoRl82R0tPMDJpVEtiX05qX1M3X25OU0RYWTJ6MXhqTWRYaWxKZ1FocUoyWEpoclMxT1lwNlZ5V2swU3FUdkRtMk14QlN0ckVyRTRTSS1EWjdURWtERVhtMTJraTlrYmlTeHRMdllqMF9za191eGxJZ0ozOHRZbXVtc25oSGZES1NaOHBqQQ?oc=5"
+        },
+        {
+          "title": "AAL, DAL, UAL: Airline Stocks Jump on 2-Week Ceasefire Deal in U.S.-Iran War - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPOUVhbnBtWFNydFhFOWxnRE13MzhkUWgzajRWQnZiNmhyVWIxMEhNRkk4YnVNbS1CdHJmRmZJN2JJWFpHckdWNzdnZksxVWd3UGVpNGVFSjdYM3RHSlRnSmZxYXczQzJQcGZFaVJyYk41UEdkTHhieThiM0MwVUpvWlpOSFhaOWhwaHI0bmtBalR4SDRwejVUX25raw?oc=5"
+        },
+        {
+          "title": "Why United Airlines Stock Is Sinking After Fare Revamp - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNUXd4N3BVT1NUaTBnbWxKX0tOZmJiOUFLLUpUZmhKclNRNHVTWkUyeHFac29pUTBmbTYzRVBpOGZBSk1xWW9qdTZLS0xucUozb2YtV1BJRnpJa1Nra3VPb253WnVuZ0VVN2xvS19GYThqcFlZYTN3TjRCS0R3cC1QUUJwTzNUNTdhWFJqb2YxVzJXZ21OVVRIMg?oc=5"
+        },
+        {
+          "title": "United Airlines Holdings Inc (UAL) Shares Gap Down to $87.08 on Apr 7 - gurufocus.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPRGlJa0oyQXhZSVJFRUdRaVcyTHJ5bnQwd0FYV2t5ekUtYUVpNnVjZ3I2cl9tVDdLOGNPNy1jZWVRZWJSaVlTRzdFRDFHc29raUdKc1ZWMmlwc1BTREh6alNzbmhWMnJRYmh2ZVVlT1ZVei0zSzdTajU3d2dseUJYTEhSTlVRUlZ2OEQwYlFVaXVSMkItbzZPRXhmVVpKODZRU1ZEOE5uaU9aVEhiQ2paYi1ZTmhvbTA?oc=5"
+        },
+        {
+          "title": "UAL Stock Today: April 7 — TSA Delays Prompt Fee Waivers at Houston - Meyka",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPcTZoTm5zX3owaWlncGFSVW5VdHVBLVYtSUZIQ3hQenlMVU1STmZNREdKT0FzMzVDdmF1VlY4aTBXaUxSYXhmR2s2LTJjejRoRW1zZTNWYUU2R0VaRERYdF9zdGFIdHdQQjlLSXRQTVRhbnpNVkNHRDhldVNRQ0FXbERJYkdzT2VoNlJkSkp6RVRRd1dtbUk5Vw?oc=5"
+        }
+      ],
+      "float_shares": "321.42M",
+      "short_float": "4.02%",
+      "daily_pct": -1.85,
+      "industry": "Others",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "2-week ceasefire deal in the U.S.-Iran War",
+        "discrepancy_note": "Source B ([2] Google News) mentions '2-Week Ceasefire Deal in U.S.-Iran War', which directly confirms the claim. Source A (Finviz) does not contain any information about a U.S.-Iran War ceasefire deal; its articles focus on bag fees and earnings."
+      }
+    },
+    {
+      "ticker": "CRML",
+      "price": 7.78,
+      "gap_pct": 12.6,
+      "pm_volume": 274322,
+      "avg_vol_10d": 6887731,
+      "avg_dollar_vol": 53586547,
+      "mkt_cap": 949742018,
+      "rvol": 0.9,
+      "adr_pct": 8.53,
+      "category": "Others",
+      "theme": "Tanbreez Metallurgy Milestone",
+      "reasoning": "The stock is reacting to a highlighted metallurgy milestone for Critical Metals' Tanbreez project, suggesting operational progress.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Materials - Metals & Mining",
+      "analysis_detail": "Catalyst: Simply Wall St highlighted a metallurgy milestone for Critical Metals' (CRML) Tanbreez project. | Impact: This event likely **de-risks** the project's processing economics and **validates** the technical feasibility, potentially improving long-term project value.",
+      "analysis_details": "• **What Happened**\nThe Simply Wall St article references a recent **metallurgy milestone** concerning Critical Metals' (CRML) Tanbreez project. This indicates progress in the company's operational development, likely related to the processing and extraction efficiency of critical minerals from their deposits. Such milestones are crucial for resource companies, as they **de-risk** future production and can positively impact project valuation.\n\n• **Key Consideration**\nWhile a metallurgy milestone is a **positive development**, its precise impact on CRML's valuation and long-term prospects requires further investigation. The headline itself is from an analytical site *commenting* on the milestone rather than a direct company announcement, suggesting the news might already be somewhat absorbed. Investors will be looking for **quantifiable improvements** in recovery rates, cost efficiencies, or project timeline accelerations to justify significant momentum.",
+      "headlines": [
+        {
+          "title": "A Look At Critical Metals (CRML) Valuation After Tanbreez Metallurgy Milestone - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNc2t6emJHeVBkR0FldEZJRFJDMTdwOW92Q21IckNYZl92LTdrWTFiR2IyZ2pWUHZrbC13eGlJYjc3cnQ1U09SenpxQ3oyWk95a0g4a09rUFB2RUJUdXl2OEprZHVOVklSb3ZpR3BOZ2hMMk1RWEFfLXF2Y3VXdEk3U1Y5SHR6aGdEZXFyNEVSWkkzck5fR1E0TFBiWXEzTHhMckt1a2VPWWprd1c4ak5oZTk2cXFWTjlweGtYMlhpaUVsbW1UUWhpWGlmUGF3YTBW0gHWAUFVX3lxTFAya1hDbDFFUXBWdjdFRWZjQkNFTU1yNU5BalNPMXNscFk0ZXpoczVJWmctNERXMzdJRGpndFFsTGNOTmNLNnl5X2doUFVWUVp5aUlIOVVDRzNWeG50LUVkLUc1VG5RaWlvMmJtR3ZBYUhaMUNyM29QVnFmMGNnS0thZExtVHdsQ2JUT05wODFKTXJHcG5BQm9ibmt4RUx0Y1FoVDNTM05mUGVfVW9qbGdyYmVmWFE3RjZZRmZIVHhBdzZKeVdhc2ZtdFdKNkdNaGVIVlJWNlE?oc=5"
+        }
+      ],
+      "float_shares": "62.78M",
+      "short_float": "27.40%",
+      "daily_pct": -3.95,
+      "industry": "Materials - Metals & Mining",
+      "technical_status": "Fail (Avg $Vol $54M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "a metallurgy milestone for Critical Metals' Tanbreez project",
+        "discrepancy_note": "Source B mentions 'Tanbreez Metallurgy Milestone', confirming the claim. However, Source A provides no information to confirm or deny this, making it a discrepancy as only one source supports the claim."
+      }
+    },
+    {
+      "ticker": "MT",
+      "price": 53.8,
+      "gap_pct": 12.43,
+      "pm_volume": 102933,
+      "avg_vol_10d": 1673348,
+      "avg_dollar_vol": 90026122,
+      "mkt_cap": 39366667451,
+      "rvol": 1.0,
+      "adr_pct": 3.25,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "headlines": [],
+      "float_shares": "760.95M",
+      "short_float": "0.41%",
+      "daily_pct": 0.86,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $90M < $100M, ADR 3.2% < 4%)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": null
+      }
+    },
+    {
+      "ticker": "SBSW",
+      "price": 12.39,
+      "gap_pct": 12.43,
+      "pm_volume": 240149,
+      "avg_vol_10d": 5362770,
+      "avg_dollar_vol": 66444720,
+      "mkt_cap": 8555032423,
+      "rvol": 0.65,
+      "adr_pct": 4.71,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 55,
+      "grade": "C",
+      "finviz_theme": "Materials - Metals & Mining",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nThe headline from TipRanks on 2026-04-07 discusses why Sibanye Stillwater (SBSW) stock has been **sinking again**, indicating an ongoing negative trend. However, no **new fundamental catalyst** has been reported in the last 24 hours to explain any potential significant price action today. The article itself is a commentary, not an event trigger.\n\n• **Key Consideration**\nWithout specific fundamental news, any substantial move (up or down) would likely be **technically driven** or influenced by **institutional flow**. Investors should exercise caution as such moves are **speculative** and carry a high risk of being a **gap and trap** or a temporary short squeeze without underlying fundamental support.",
+      "headlines": [
+        {
+          "title": "Why Sibanye Stillwater Stock Is Sinking Again - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQS2dzWWRCYm1MV3JKdDUxLWlBUDBQMzhrSGtTcVBONkZLd3MzOHRwbnlSOE5XQVY5aEExWjBrMU8zV1pXTGMtcGs2ajlzbVBhM3huZzVfVExLLXFSRUNrNGxYUkxNLUR5WGVLT0NRR2ZSTEFOLUtTbU9pcGs1MDVDM2ZFZTduZEs2THQ3Yg?oc=5"
+        }
+      ],
+      "float_shares": "707.64M",
+      "short_float": "2.05%",
+      "daily_pct": -0.64,
+      "industry": "Materials - Metals & Mining",
+      "technical_status": "Fail (Avg $Vol $66M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 90,
@@ -59,61 +283,212 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Medicare Advantage payment rates adjusted by 2.48%",
-        "discrepancy_note": "Source B [2] explicitly states '2.48% Medicare Rate Increase'. Source A mentions 'Higher Medicare Advantage Payments' [1], 'New Medicare Payment Rate Released' [2], and '2027 Medicare rate boost' [3], but none of its articles provide the specific '2.48%' numerical value for the rate adjustment."
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "Finviz reports 'none' for news, supporting the claim. However, Google News provides a headline 'Why Sibanye Stillwater Stock Is Sinking Again,' which implies there *is* a fundamental reason or catalyst being discussed, thus contradicting the claim that 'no immediate fundamental catalyst' was found."
       }
     },
     {
-      "ticker": "UNH",
-      "price": 281.36,
-      "gap_pct": 6.06,
-      "pm_volume": 221912,
-      "avg_vol_10d": 7733391,
-      "avg_dollar_vol": 2175866892,
-      "mkt_cap": 255383661688,
-      "rvol": 0.66,
-      "adr_pct": 2.68,
-      "category": "Government Policy",
-      "theme": "Medicare Advantage Rate Hike",
-      "reasoning": "UnitedHealth Group (UNH) shares surged following the Centers for Medicare & Medicaid Services (CMS) announcement of a higher-than-expected Medicare Advantage payment rate boost.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 55,
+      "ticker": "DAL",
+      "price": 65.62,
+      "gap_pct": 12.4,
+      "pm_volume": 506086,
+      "avg_vol_10d": 13153385,
+      "avg_dollar_vol": 863125124,
+      "mkt_cap": 42858436770,
+      "rvol": 1.27,
+      "adr_pct": 3.34,
+      "category": "Earnings",
+      "theme": "Beat & Raise",
+      "reasoning": "Delta Air Lines reported stronger-than-expected Q1 2026 earnings and provided an optimistic outlook for Q2, leading to a significant stock price increase.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
       "grade": "B",
       "finviz_theme": "Others",
-      "analysis_detail": "Catalyst: CMS's **unexpected increase** in Medicare Advantage payment rates for **2027** reversed earlier fears of cuts, providing a **significant tailwind** for health insurers. | Impact: This policy shift directly improves revenue visibility and profitability projections for UNH's **substantial Medicare Advantage segment**, potentially adding **hundreds of millions** to future earnings and **de-risking** a key business line.",
-      "analysis_details": "• **The Policy**\nThe Centers for Medicare & Medicaid Services (CMS) announced its final payment rates for Medicare Advantage (MA) plans, revealing a **higher-than-anticipated increase** for 2027. This move **surprised** the market, as initial proposals had hinted at lower rates or more modest increases, leading to prior sector weakness. The new rates are generally seen as more favorable to health insurers.\n\n• **Direct Impact**\nUnitedHealth Group, a dominant player in the Medicare Advantage market, stands to **directly benefit** from these revised payment rates. The **positive adjustment** alleviates pressure on margins and revenue growth within its **Optum and UnitedHealthcare segments**, particularly its MA offerings. This reduces regulatory risk and provides a **clear path** for sustained profitability in a crucial, high-growth area of its business.",
+      "analysis_detail": "Catalyst: Delta **exceeded** Q1 CY2026 expectations, with its stock **jumping 11.8%** on the news. The airline also indicated a **$300M refinery benefit** would boost its Q2 profit. | Impact: This strong earnings report and positive forward guidance provide a significant boost to investor sentiment and suggests robust operational performance and profitability.",
+      "analysis_details": "• **The 'Beats' (Surprise Factor)**\nDelta Air Lines (DAL) **exceeded** Q1 CY2026 expectations, leading to its stock **jumping 11.8%** immediately following the announcement. This positive surprise signals stronger operational performance than anticipated by the market, overcoming previous concerns about rising jet fuel costs.\n\n• **The Growth (Momentum)**\nThe reported **11.8% stock jump** on **1.3x RVOL** confirms strong immediate momentum driven by the earnings beat. This price action, combined with a broader sector tailwind from the U.S.-Iran ceasefire easing oil fears, creates a powerful upward trend.\n\n• **The Guide**\nManagement specifically highlighted a **$300M refinery benefit** expected to boost its Q2 profit, providing a clear positive outlook for the near-term. This forward guidance suggests sustained profitability and reinforces DAL's operational efficiency advantages over peers, further fueling investor confidence.",
       "headlines": [
         {
-          "title": "Biggest stock movers Tuesday: HUM, UNH, and more (NYSE:ELV) - Seeking Alpha",
+          "title": "Delta (NYSE:DAL) Exceeds Q1 CY2026 Expectations, Stock Jumps 11.8% - StockStory",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxObi1DR0hpX0kxRGxRTlpYbnlmM0hMb2laSS1RYWpsVm4tT1laZ3lvT1hPc0VQQU12Tm9mNzRvMFZjNGJ6TnY5Y3hteEtCZXI0cU1ZeENySHpoYjNKYURLTE43NWtqM1cwTGtTWWxSVU1zcXJmZElSMnR6WVFzUW1YZDEtWFlULWMyWkVN?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOTUJTOFA2cVhpc2ZvWHBucEIybUVTbGlMaTkxOTdTZnFhZXRfNjI0cjJVMEw4WmFtNXdkaVRJQ0RsODdPcjNfTUcxUE5TVVZKblZXQU9kd2lWa1lFcUN2eUNPb2FTMzRWbTh0cGgxTzZKVElxWnZRZ2VPNVNPeDV5eW4zdGkya2kzdkF4ZlAxU3hlTWdoNVpxREc3MmNmRWEzSkoxT1NYbWtTMWFMc3pMUGlpVE1OZzJLaFdvTk1VVGE?oc=5"
         },
         {
-          "title": "Insurance stocks jump on Medicare Advantage rate boost: Humana, UnitedHealth, lead gains (UNH:NYSE) - Seeking Alpha",
+          "title": "DELTA AIR LINES ($DAL) Releases Q1 2026 Earnings - Quiver Quantitative",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPZzdnSkhBNER2aDF1Z3hYTFBweXpFVXRvam5hNWpaRFhURUU3ckhtZUZpdkx3aU1lNkRFWlVqZ0VTMDFjNHUtZDRhUXNTakFBaGhfM3FnTHRITVhxbFJaU1ZaQkt6ZXhRa1VETGdaU3ltMFlRRkNkNFJPQW1rVE43VV92RVJxT1poMDhDcF9MbUpydXU1dHpadXZXVXdDc2hMeUNIV1BpVVNvV2dvWGZRSXRpc3h6WHdUZ0VVWnZIYWk?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOSU9YeUtWUWdFdDZRdWlUN3lYc2d2cjRmLVdOWmtfS3VNMTZKMURoMXFJRWlQWHN3azJwMHkzczVLOFJpcllRLWZTNFJ4YllVN1F3cFNNWnpnZmw5UVNkYU5hT0FMM1pVM2xCZTZwRDk3czdYZEp2OHVnazR5RERBOWhjREc1cjJFc1kzd3hha1c?oc=5"
         },
         {
-          "title": "UnitedHealth (UNH) or Humana (HUM): Which Stock Is the Better Buy After CMS’ Surprise Rate Hike - TipRanks",
+          "title": "DAL Stock Soars On Delta’s Q1 Beat, Airline Sees $300M Refinery Benefit Boosting Its Q2 Profit - stocktwits.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQbE5Eb3JvNEFIX3JlWWZrYmlXWVJ5d2xBdFNaZ0plQWYtNFlQalJqVmZjSHp4T1k1c3JhYm40NUlLazdBUURuRTBVb25WYTY5M1FLeXlvdDN3amF0d3hVa2c2ZE5FZ293dWREdlhHcFpQTmdnZjlRZFRESUVmdDBTbmRPX0FHYkt4d3I1U2FScUJVX3UxTjdZY0x2S2lNUG5kbDBBMnItbWNUWjBWMUtWR2ZxTzZZMWY4RlpN?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPOTlCX3VlZDdLZ1R1SmZwX2gtTHZ4OVQtelF0ZlU5STF5OUlTMVJ3ZXpLMWR1QlNDekpxOXU4RzZVcms2d3I1elM0dXlsVngtdkhhUkEzdFVCNTJvc2U2RTluaXA4Q1QwZkVhLW52WnBVRjRYWlRWUmt1WXhYWVd4SzU2cTZham5COEFmZ0F4OFVEanpBa0tfaEE5Y1I2Skd2b05pZGw4UG5tUGZ3NTctSHpZdDM3V3pVZ28tRVBTYWs1UQ?oc=5"
         },
         {
-          "title": "Humana shares surge 12% on 2027 Medicare rate boost; UNH, CVS rally - Investing.com",
+          "title": "Airline stocks jump as U.S.-Iran ceasefire lifts oil fears (DAL:NYSE) - Seeking Alpha",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOVnE4T1FwWEQxM0FZVlJkcmVMTWxnS3ppQWYxODgyNGQyV2xRWjRWaml5SG1taG9EdUM3OEhDeGduYnlRdUlIN052alpnM2VYQ3ZPTDY5UDRFN1hoZ2JQcnh2aW1MUHM2T0lJM05DX3M1VjhDUVZKRDBLTThXOG50SUJEd1BZSkg2VlNIbXh3TzVESWRvWG1KMkdMWHpKRkQ2OWUyeFNEV3dlSlZhMWpTbGlTR29YNUV3ajdja1ZB?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNMVlBV3BqWVNVdlU1R2UwbFppUzQzemM0R1NiZWVCYmlXMVh6QkRuTDRFODdNNzVkdnpKbDNETnFNSzAyLXpWRWRralM0bGQtYURsLS01RXc0MjFxZC1DTzVEeE1HaXlqUTNZbk5WRVQxNGV0ZVdVbVZXQ3NKR0xqTUc0OE9TWWFyWXhpSGVIM3hDYVJ2dW1FNk5B?oc=5"
         },
         {
-          "title": "CVS, UnitedHealth, Humana, Elevance Shares Surge: Here's Why - Benzinga",
+          "title": "Delta Stock: Earnings Coming Up — It Has This Jet Fuel Advantage Over Peers. - Investor's Business Daily",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNMkZ6bzltdEdpZXllSDBNZVFHSUliM2tGQmRreFdCZTVMMTg0VjdwODQzT2syNUpYY2ctZUt6MmVPX0JONzRoUmJzUUdFTnJPMVZMV0RhQkJJb0NFZmdzRkY3OUV5MG1jMlZSNjQwU0JidUktVlhEN1lnTThlX3ktemF1a04yUjhSNjdES0RaRVFqUnlpS21yT2w3cjF4TXk3LTFjRGgwS0R5MnpmWnJhNXFLNDJxLWM?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNOUVyNVliSkgwdnZMU3FiWkZOU0lLSENNc0JpdVFYSTl4cDFKRV9mMVNsZ2pTd2hiU2tGdXlmMFA2My1DazE1Q08wTkE4WVpYVVEzRUk4MXhybExkVVdWLVM2Uk5oSDFYTjVGMXp2SW5uZDd4YTdEVDF4RWZPcjg2Nl9ZaG5yOFNrWnpCTmpSbDNWcHdXOTU2ME9MNmVqYjd3M1R3TEd3?oc=5"
         }
       ],
-      "float_shares": "905.79M",
-      "short_float": "1.97%",
-      "daily_pct": 1.48,
+      "float_shares": "649.40M",
+      "short_float": "2.54%",
+      "daily_pct": -1.74,
       "industry": "Others",
-      "technical_status": "Fail (ADR 2.7% < 4%)",
+      "technical_status": "Fail (ADR 3.3% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Delta Air Lines' stock increased by 11.8% following its stronger-than-expected Q1 2026 earnings report.",
+        "discrepancy_note": "Source A (Finviz) does not mention Q1 2026 earnings, an optimistic Q2 outlook, or any stock price movement related to earnings. Source B[2] explicitly states 'Delta (NYSE:DAL) Exceeds Q1 CY2026 Expectations, Stock Jumps 11.8%', confirming the earnings beat and specific stock increase percentage, and B[3] notes an optimistic Q2 outlook. However, for 'Verified' status, both sources must confirm the claim."
+      }
+    },
+    {
+      "ticker": "HMY",
+      "price": 15.84,
+      "gap_pct": 12.37,
+      "pm_volume": 225811,
+      "avg_vol_10d": 5107902,
+      "avg_dollar_vol": 80909168,
+      "mkt_cap": 9858177235,
+      "rvol": 0.96,
+      "adr_pct": 4.39,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Materials - Metals & Mining",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nThe provided headline from TipRanks on April 8, 2026, reports on Harmony Gold Mining shares **sinking**, but does not specify an underlying fundamental catalyst. This suggests the move is not directly attributable to new company-specific news, earnings, or strategic announcements. The market reaction appears to be driven by factors external to immediate company developments.\n\n• **Key Consideration**\nGiven the absence of a clear fundamental driver, the **decline** is likely attributed to technical factors such as stop-loss triggers, general market sentiment towards the **mining sector**, or institutional rebalancing. With an **average daily volume of $81M** and an **ADR% of 4.4%**, the stock is relatively active, making it susceptible to flow-driven movements. Investors should exercise caution as such moves without a tangible catalyst can reverse quickly.",
+      "headlines": [
+        {
+          "title": "Why Harmony Gold Mining Shares Are Sinking Now - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQNU5PMzVEaEZFRnlQbzJsVXZlazdWVEg5b2NtZkhzTmFZZHRwYzYwdlpZRldURFlXOE41ZEczTmZfYjZpX180Mjd1SEVZUW92TUxvVktPZmxQc2kzXzBQNlFrNTA1bUVBQXRCbWVXVDhvVW9wTU5mSjVnblliVjFJcFRRTXVBM0dsaWdvcmlB?oc=5"
+        }
+      ],
+      "float_shares": "624.74M",
+      "short_float": "0.81%",
+      "daily_pct": -0.56,
+      "industry": "Materials - Metals & Mining",
+      "technical_status": "Fail (Avg $Vol $81M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "Source A (Finviz) reports no news, which supports the claim of no immediate fundamental catalyst. However, Source B (Google News) has a headline 'Why Harmony Gold Mining Shares Are Sinking Now', which implies a fundamental reason or catalyst exists for the stock's movement, contradicting the claim that none was found."
+      }
+    },
+    {
+      "ticker": "AAL",
+      "price": 10.81,
+      "gap_pct": 12.12,
+      "pm_volume": 4127866,
+      "avg_vol_10d": 51413099,
+      "avg_dollar_vol": 555775600,
+      "mkt_cap": 7137892629,
+      "rvol": 1.03,
+      "adr_pct": 3.82,
+      "category": "Government Policy",
+      "theme": "Geopolitical De-escalation / Oil Price Relief",
+      "reasoning": "A 2-week ceasefire deal in the U.S.-Iran war eased oil shock fears, directly benefiting airline stocks like AAL by reducing fuel cost concerns.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "B",
+      "finviz_theme": "Others",
+      "analysis_detail": "Catalyst: A 2-week ceasefire deal between the U.S. and Iran was announced, leading to an immediate **easing** of oil shock fears. This geopolitical de-escalation is a **direct positive** for airline stocks like AAL, as fuel is a primary operating expense. | Impact: This development **reduces** the risk of escalating fuel costs, potentially **improving** profit margins and providing a more **stable** operational outlook for the near term.",
+      "analysis_details": "• **The Policy**\nA 2-week ceasefire deal was announced in the U.S.-Iran conflict, leading to an immediate **de-escalation** of geopolitical tensions. This diplomatic development directly impacts global commodity markets, particularly crude oil, by **reducing uncertainty** and the risk premium associated with supply disruptions. The news sparked a **rally** in airline stocks, including AAL, as investors anticipate a more favorable operating environment.\n\n• **Direct Impact**\nThe primary benefit for American Airlines stems from the **easing of oil shock fears**. Fuel costs represent a significant portion of an airline's operating expenses, and any reduction in oil price volatility or actual price declines can **materially improve** profitability. The ceasefire, while temporary, provides a **near-term tailwind** by potentially lowering fuel input costs and improving investor sentiment towards the sector, thereby **boosting** AAL's stock performance.",
+      "headlines": [
+        {
+          "title": "AAL, DAL, UAL: Airline Stocks Jump on 2-Week Ceasefire Deal in U.S.-Iran War - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPOUVhbnBtWFNydFhFOWxnRE13MzhkUWgzajRWQnZiNmhyVWIxMEhNRkk4YnVNbS1CdHJmRmZJN2JJWFpHckdWNzdnZksxVWd3UGVpNGVFSjdYM3RHSlRnSmZxYXczQzJQcGZFaVJyYk41UEdkTHhieThiM0MwVUpvWlpOSFhaOWhwaHI0bmtBalR4SDRwejVUX25raw?oc=5"
+        },
+        {
+          "title": "American Airlines Surges as Oil Shock Fears Ease - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNc2RmYVRTbXVacHpkbTljbXEwclE0NkRYQmI3T01uMzhyWFhVT1FXRllIU05CejZHMXhpaEVMOHJoZFBwb1FsM0xtd05ndGhza0tTUFlodlJ0SHZRUDBFMXNzaW9NcGJHTTczR09Ud2lXLUhnMUt5UTJRM25JX09NOFlqNmRNOC1BcV9PNG96d1U?oc=5"
+        },
+        {
+          "title": "Stocks expected to have increasing option volume: DAL UAL AAL LUV JBLU NCLH RCL CCL VIK LEVI - StreetInsider",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxNYThudmFWTFJuZzhzLWNFczJ3bTNCUk95R1JMWHBiWGE1dnk2X2UwUXBRbGJvaUdHUHcyNXpHVUU3MVhrWDZ4ZjBqR1ZScUFZSXRkZ0hoWDlWbnBiNmp1YnJOa3JRSEEydzY0OWxZMjM3ZTVvVTdUYmk2Um5YcF8yWFNmQ01HNXJYSEdBNzhSV2dwSWY1cTkzdkc5T29sdTdpUl94TWtMQTFRRmlIRDA4MHlxWWwyUEpobno0Y2pkYXpXa1FlN1dBaWtaRm16eV9ZZzA5LW5ZNTJqVkduLUNn?oc=5"
+        },
+        {
+          "title": "The Allstate Corporation (ALL) stock price, news, quote and history - Yahoo Finance UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE95OVYwdVdQUkJSY1dyVU56aUkwNl93OVVaVGFTMm1yUkdMbGQ2RS1GVVNXQVA0bUQ4Vk5Kb3c1VzlWNGhWUDRlQmt4Y1M4eURW?oc=5"
+        },
+        {
+          "title": "The Allstate Corporation (ALL) Stock Price, News, Quote & History - Yahoo! Finance Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5WR3JWakRVeTVXZTh4RkdpN2I1STdYYzVQRHctSlRoNWgzbmFjNm8wNXd3b0h1TkROQk5raHRMSXFpeDRpV0pHbXhjdDVRZUF3?oc=5"
+        }
+      ],
+      "float_shares": "648.50M",
+      "short_float": "8.70%",
+      "daily_pct": -0.83,
+      "industry": "Others",
+      "technical_status": "Fail (ADR 3.8% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "A 2-week ceasefire deal in the U.S.-Iran war",
+        "discrepancy_note": "Finviz News does not mention a '2-week ceasefire deal in the U.S.-Iran war'. Google News article [2] explicitly mentions '2-Week Ceasefire Deal in U.S.-Iran War', but this is only one of the two required sources."
+      }
+    },
+    {
+      "ticker": "AU",
+      "price": 101.08,
+      "gap_pct": 11.78,
+      "pm_volume": 98361,
+      "avg_vol_10d": 2918089,
+      "avg_dollar_vol": 294960436,
+      "mkt_cap": 51046156680,
+      "rvol": 0.6,
+      "adr_pct": 4.71,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 55,
+      "grade": "C",
+      "finviz_theme": "Materials - Metals & Mining",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nThe stock has experienced a significant move without any discernible company-specific fundamental news in the last 24 hours. The available headlines are either an analytical piece on past performance or a broad market commentary unrelated to AngloGold Ashanti's direct operations. This suggests the recent price action is likely driven by non-fundamental factors.\n\n• **Key Consideration**\nWith an Average Daily Volume of **$295M** and an ADR% of **4.7%**, AngloGold Ashanti typically has decent liquidity. However, a Relative Volume of **0.6x** indicates lower-than-average volume today, which can exacerbate price movements on lower conviction. The absence of a clear catalyst coupled with lower relative volume increases the risk of a technical **gap-and-trap** scenario or a short-lived move driven by order flow rather than value.",
+      "headlines": [
+        {
+          "title": "Why AngloGold Ashanti’s Rally May Not Last - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPUW84TVF5cFREaGRsaGNiWDZ0M0otOXNVUzVFS28zc25KWGwyV0pBaHFkQlRuZEVOUEFiV0UyN3Q0WXNXbkxRR0FJc1puZFRNWjRHd2dQOWJQSkdVZWZpYXJyWjE2R1daWlF5Y01RcnV3RkEzclBYLTY2RWZ1bnUzWDZPLTBFdTA?oc=5"
+        },
+        {
+          "title": "Australia’s biggest stock exchange needs tougher competition, or we all risk paying the price - The Conversation",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOQUJwYmtCRjVMR2xiYjZHeG51OGZfMXh2Ukhmbi1iQkNTcjEtWjRkbGhhdm9jQ0VWVDNMalBiWlBhWkpObnozMjIyYXdFeHBzUHhycEk2ZVl1azYwMzJkS2xqaXMwY28xSjQ1WUlHUldhaE8xRjhWVklEQlJPQ1RuVmVpSWVQZDdCalhITWswM0pZVklqRGkxY1NFN011X05QZUxQNEF0VGNCVWxGUWkzR1hrM0JEcjFpZi00MG9HV2tta2Y0?oc=5"
+        }
+      ],
+      "float_shares": "504.00M",
+      "short_float": "1.51%",
+      "daily_pct": -0.4,
+      "industry": "Materials - Metals & Mining",
+      "technical_status": "Pass",
       "verification": {
         "status": "Unconfirmed",
         "confidence_score": 90,
@@ -121,93 +496,118 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "The specific percentage of the higher-than-expected Medicare Advantage payment rate boost.",
-        "discrepancy_note": "Neither source provides a specific percentage or dollar amount for the Medicare Advantage payment rate boost itself. Both sources confirm that a boost or hike occurred and that it caused stock surges, but they do not quantify the magnitude of the rate change."
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": null
       }
     },
     {
-      "ticker": "SSL",
-      "price": 12.48,
-      "gap_pct": 5.29,
-      "pm_volume": 157190,
-      "avg_vol_10d": 2786743,
-      "avg_dollar_vol": 34778553,
-      "mkt_cap": 7815387901,
-      "rvol": 0.29,
-      "adr_pct": 3.92,
-      "category": "Others",
-      "theme": "Debt Management / Corporate Action",
-      "reasoning": "Sasol announced the successful tender offer to retire a portion of its 2028 debt, strengthening its balance sheet.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 54,
-      "grade": "C",
-      "finviz_theme": "Energy - Oil & Gas",
-      "analysis_detail": "Catalyst: Sasol successfully executed a tender offer to retire **$416.2M** of its **2028** notes. This proactive debt management move reduces future interest obligations and strengthens the company's financial flexibility. | Impact: Positive for balance sheet health and reduces financial risk, but market reaction appears muted given low trading volume and fading momentum.",
-      "analysis_details": "• **What Happened**\nSasol announced the successful tender offer for its 2028 notes, resulting in the retirement of **$416.2M** of debt. This corporate action aims to proactively manage the company's debt profile and reduce future interest expenses, which is a financially sound move for the company's long-term stability.\n\n• **Key Consideration**\nDespite the positive financial management news, technical indicators signal a distinct lack of buying momentum, with relative volume at a low **0.3x** of its average. This suggests the market is largely shrugging off the debt retirement, potentially due to broader negative sentiment highlighted by recent articles indicating a 'fading hot streak' or other company-specific headwinds.",
+      "ticker": "APLD",
+      "price": 25.18,
+      "gap_pct": 11.67,
+      "pm_volume": 689391,
+      "avg_vol_10d": 19822403,
+      "avg_dollar_vol": 499128108,
+      "mkt_cap": 7039970917,
+      "rvol": 1.01,
+      "adr_pct": 7.25,
+      "category": "Earnings",
+      "theme": "Earnings Hype",
+      "reasoning": "Stock popped after-hours on anticipation/initial reaction to earnings.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "B",
+      "finviz_theme": "AI Compute",
+      "analysis_detail": "Catalyst: APLD experienced an after-hours **pop** driven by **earnings hype** on April 8th, suggesting positive market sentiment regarding its upcoming or just-released financial performance. The move was also preceded by a Motley Fool article indicating April 8th as a \"Big Day\" where the stock \"could double.\" | Impact: This strong pre- or post-earnings market reaction signals significant **short-term momentum** and investor confidence in the company's growth trajectory, potentially overshadowing concerns about interest costs.",
+      "analysis_details": "• **The 'Beats' (Surprise Factor)**\nAPLD experienced an after-hours **pop** driven by **earnings hype**, indicating strong positive market sentiment. While specific numbers are not yet detailed, this reaction suggests investors are anticipating or have reacted positively to initial indications of financial performance, potentially signaling a **surprise** to the upside or at least better-than-expected outlook.\n\n• **The Growth (Momentum)**\nThe market's enthusiasm, despite questions surrounding **rising interest costs** and recent **institutional selling** by Tudor Investment Corp, highlights robust underlying momentum. The **after-hours rally** underscores investor belief in APLD's rapid expansion plans and its position within the high-growth **AI compute** and **digital infrastructure** sectors.\n\n• **The Guide**\nThe \"hype\" component suggests that either the **outlook** is strongly anticipated to be positive, or early indications point towards a **favorable guide**. This sets up expectations for future performance and will be critical in sustaining momentum post-official earnings release, especially given Wall Street commentary suggesting the stock \"could double.\"",
       "headlines": [
         {
-          "title": "Why Sasol’s Hot Streak In Shares Is Fading - TipRanks",
+          "title": "Can APLD Navigate Rising Interest Costs Amid Rapid Expansion Plans? - zacks.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPdDdEalI0MzhCcTVkZWVETmVvTzBock1wVkQxZjBTZ1ByVk5OSng1WWJxMGRnSFpFUEJZTWNnaGlHcEZia2NpTFJQNHdUekRPUWM0TW1lZHBMYkZsUVFMVXhhSFRFRHY0NVJqY3ZXN0pGV1BlQlpnbU1LUXJsclVpdW55a3lwOTQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQVkdNbng4V2JvZFZLSzZ3cEJSWENPa1RDOTlBaUF4MEVIS1BDdU9KazVlbWljY040RGxkdUxlek9jR21lVTRiRTRLYkNucmp5T1FSN2RaUEtBUG1Sd0hDa1M4cWk3S2tNSENkTV9vT010X0xQQi1fUFgxWVYtdmhSYjA4R1ctQXZkTE5LOEVJdHctcDV5b0hLemE3S0FTbUxOcGVfbjZ2NTA5UEk?oc=5"
         },
         {
-          "title": "[6-K] SASOL LTD Current Report (Foreign Issuer) | SSL SEC Filing - Form 6-K - Stock Titan",
+          "title": "Applied Digital Corporation $APLD Shares Sold by Tudor Investment Corp ET AL - MarketBeat",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPUTVOU0FraW5aemQwbHFHSGFHREpfWTJ0VXkzSVQ4WDFTUTNqdHJMdUNUYUxRX3VUWTZEbTBvWVlpZXZnMmVza24yQWFNSUF1Q0wwQXRKVm9jb2JyOXkyNWh6LTBkVUxIS2paZHNpanBGRmJWSTM0ekVrVHVZc05aam9UbmxGU19ZazBzR01FOERLN0R4czBYN3M5WE52QVB1cUY3eEtZcw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQZEpMSk1uMklxWnloLVJIQ1NYZnlMYWZQSEt6NXVRNzZ2RlR3T0k2M1pEQXczYzRvUEJHN2V0Z0YwUFdaYkJXaGRQa0dieDJETTNhSnJfRThyandXVHJuemRqRk5wUVhEbXBFeU5zNWRRU1RuUWNId21xYkVLWkpZLUJLdzZIb1VCT2lBR3NzblJNT0pPRDVaZDI5cWc5Ym9Xczg2UDhQbjE1azVwand2WEdzN2ZUTjVqOUw0NlBfdmxqMm5ucGRaWlZkck5uT1o1R3c?oc=5"
         },
         {
-          "title": "Sasol moves to retire 2028 debt after holders tender $416.2M - Stock Titan",
+          "title": "APLD stock pops after-hours on earnings hype, Iran ceasefire announcement - MSN",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOQjJWU3o4OWdaT21CcGk5N1hXTXN3Z3VUMldKaU9fMGJrLU93SU00eTBhSkJSYzFnemZqQlIyMDJja0dwbkFnc0tyY3BwRFN5QXQ4RENUMkMtb3FDX0pHVmgtc2ZrMXJJUV9UZUsxT0t6bW12SjJqTUpzS19IVXo4aFFMalFmd21JaFJFcmQ1cVMyUXZRX0prdi1UWnNRN2RTaThnaEdOT1NUdnMyZU5iYlBmcmI0eDVjSkxjTw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOaDlRd0Yxd1gxSWx0aFlpcmJZdUN3Z0YzTTUyeEVqM0hYWGRDLVZ6WW9yeFQzUUxkTXBpSXNOV09OSXdTTVhFb3I3Y3RmQnFwNGNweTZDdmNDTWpmSVROY0F2aVZoV0lHbk9ldi0wR0VUdGN2STVXaDlYbm9UWFVlTFdIUGhTcDRQRHVpdkVmcnZKbmc0SXNJRDFza3ZIaDE4ZUlfRTJUR0l6cUNCTVowYmRJOWJDQ00wOUVQejR5UTc4RzA1?oc=5"
+        },
+        {
+          "title": "April 8 Is a Big Day for Applied Digital. Wall Street Says the Stock Could Double. - The Motley Fool",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOR0I1bG1QVVBWSnJYWi11dnk5ZnR6SVhiMm9ycDlOM19IOVd4dDNCR011UTZQNXl6QW0zRDRYSm52YW41Q19tUjlVYnBibHp3UUNQLXEwVmVITHZza0xkZEU4T21BMUREN0JVOF8tM2ZkV1lJd1hibThLMW5ESDF2MFhreVZPSmJlUkdJbmRsUWJRNTdSYkl3aw?oc=5"
         }
       ],
-      "float_shares": "634.13M",
-      "short_float": "0.47%",
-      "daily_pct": 0.4,
-      "industry": "Energy - Oil & Gas",
-      "technical_status": "Fail (Avg $Vol $35M < $100M, ADR 3.9% < 4%)",
+      "float_shares": "253.81M",
+      "short_float": "31.03%",
+      "daily_pct": -0.04,
+      "industry": "AI Compute",
+      "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 95,
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Sasol received tenders for $416.2 million of its 2028 debt.",
-        "discrepancy_note": "Source B [1] reports that holders tendered $416.2M of 2028 debt. However, Source A (Finviz) has no mention of this specific dollar amount, and Source B [2] (the 6-K filing) does not explicitly state this amount in its provided title for direct numerical confirmation across sources."
+        "primary_claim": "APLD stock popped after-hours on anticipation/initial reaction to earnings.",
+        "discrepancy_note": "Source A (Finviz News) contains no information to confirm or deny the claim. Source B (Google News) articles [2] and [3] explicitly state 'APLD stock pops after-hours on earnings hype'."
       }
     },
     {
-      "ticker": "ANNA",
-      "price": 7.81,
-      "gap_pct": 3.31,
-      "pm_volume": 72275,
-      "avg_vol_10d": 11440359,
-      "avg_dollar_vol": 89349204,
-      "mkt_cap": 520569934,
-      "rvol": 0.07,
-      "adr_pct": 22.69,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; likely technical pressure or institutional flow contributing to the gap down.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 54,
-      "grade": "C",
+      "ticker": "LUV",
+      "price": 37.87,
+      "gap_pct": 11.49,
+      "pm_volume": 84532,
+      "avg_vol_10d": 7279162,
+      "avg_dollar_vol": 275661865,
+      "mkt_cap": 18606211876,
+      "rvol": 1.2,
+      "adr_pct": 4.15,
+      "category": "Thematic Narratives",
+      "theme": "New Customer Experience Initiative",
+      "reasoning": "Southwest Airlines announced a new service to Santa Rosa, including a unique 'Sip and Ship' program.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "B",
       "finviz_theme": "Others",
-      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. A significant **gap down** on extremely **low volume (0.1x RVOL)** without fundamental backing suggests technical pressure or stop-running, rather than a high-conviction sell-off. High risk of **gap and trap** or continued weakness if no news emerges.",
-      "analysis_details": "• **What Happened**\nANNA shares experienced a **gap down** as reported by MarketBeat, with the headline questioning if it's \"Time to Sell?\". This move occurred without any apparent company-specific fundamental news, earnings, or analyst updates. The **RVOL of 0.1x** indicates extremely **low trading volume** compared to its 20-day average, suggesting limited participation in this price action.\n\n• **Key Consideration**\nThe absence of a clear catalyst combined with **low relative volume** suggests this **gap down** might be primarily technical, possibly driven by stop-loss triggers or opportunistic shorting rather than strong fundamental conviction. Investors should exercise **caution**, as moves on thin volume can be less reliable and prone to whipsaws.",
+      "analysis_detail": "Catalyst: Southwest Airlines **launched** new flights to Santa Rosa, CA, complemented by a unique 'Sip and Ship' program starting April 24, allowing passengers to check a case of wine for **free**. This new offering differentiates LUV from competitors. | Impact: This initiative is a strategic play to **attract** specific customer segments (wine tourists) and **enhance** customer experience, potentially leading to **increased** passenger traffic on key routes and **improved** brand loyalty amidst rising competitor fees.",
+      "analysis_details": "• **The Narrative**\nSouthwest Airlines is **strategically enhancing** its customer experience by launching new service to Santa Rosa, CA, a prime wine region. A key differentiator is the 'Sip and Ship' program, offering passengers the ability to check a **free case of wine** starting April 24. This move aims to **attract** a valuable niche market and **strengthen** LUV's reputation for customer-friendly policies, contrasting with competitors like Delta **raising** baggage fees.\n\n• **Explosiveness**\nThe market reaction has been **positive**, with LUV stock **taking off** on the news, supported by a **1.2x RVOL**. While this is an incremental service launch rather than a massive structural change, the **clear differentiation** and **favorable comparison** to competitors' fee hikes provide a **strong narrative** for momentum traders. The catalyst is **specific** and **actionable**, suggesting further upside potential as the story gains traction.",
       "headlines": [
         {
-          "title": "AleAnna (NASDAQ:ANNA) Shares Gap Down - Time to Sell? - MarketBeat",
+          "title": "Why Southwest Airlines Stock Is Suddenly Taking Off - TipRanks",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQbTNOY04wTDd4QjhQWWpxdjdQUm03WUU5THc2czZCMmxMamMyS0FpUlFJSENHN3N0NjZ3dTdOUTA0Z2duMHppaWtYQy02bXQyU1NQaXR3T0RmZURuTXo3ZkJkcl9vWVJ2aGEtcWluTjlDYkw2MHFScUF0NnlWZ1NiLWM2ZUduSVFiWW5ucXMyTlFZdEdJN19pZ3BXMnVtZm9QTGJ3?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPeVJmcDdKbHhSaUxYcW9EbnVaazYyX1RYZ0EtcHBTQl9PNThCSWFvNFR4UFc1Z1FRNHFrci1GVW1BbzJ5U0RKMGhBWFRJcGdXQk5fd0NCNl9QS2o0eXJQRlV4N1ltcjZoN2dtSzF3RzlueUplTGdISVpsSml5RlVpOXRpdWZEVVQxcUZHNGN3U0Vwckd1?oc=5"
+        },
+        {
+          "title": "Southwest’s Wine-Friendly Santa Rosa Push Might Change The Case For Investing In Southwest Airlines (LUV) - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPLUxkbTdRMGpqVkZOSU51bFdCbHVvZXQ2QVFsNXBWWEs2T2pfUGt1TnZTUUhhbmFNb2tzWmpUVXU3MkhyRTMyeXZTX1JQT1VTMG5XaHVKbU5LdmlPZEluWEJoQUVJbUJ5aUtUalVvYS1rekdaaE9CazliNGV5UjJJaE1OaGE4akZmM0xrcXpFR0VEdE15c1F5T2JNSGFVTkRqM2w1OG0wNFJSUzRoczFGdURlVFFseFJNZ1cxNHFrNU5LaDJkRkExdUhrdXI5NkFBYTc1eWdRVdIB3AFBVV95cUxPa2NjcGxRVmo3Vzl4SEVSTDIxQ1FiUUdNRU1rUjN2Qm1hMERCeG5vOEFLSHBTS3BBbE5hVTY5WUZtT3c4ODZWQjNmc21peFZCanpOQ29zVmxQR3p1RzhXaGp2S093MEUtVzVhSXNFT3lQM0EwYVk4eUpFcklYTFpjR0VwNjBOS1QwM1dpUy1ncjNRcWdrdHRGbUt3ZWt5cFpDY1JDRmlpalUwRXE1OTJtdWRJbGl1RHAwVHBWQ0JSN2hRYUpYbmJmLXdGd2ZNaXlDc3dLUDRNZE81ZE93?oc=5"
+        },
+        {
+          "title": "Southwest adds a free checked wine case as Sonoma flights begin - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOa0d2MW91SWVyejVrbWREWldmcl9TZ0hqdkNBdFVoMjJHV1ZHMjRxd2o5LXhBdlByaVdWaXFsbDdhclQ4clIwSFBFZ2lxT1JNazdBR0lFel9MRDZ5eVZRT2VtdWNGMnJyMzdhNWs4NFNtTWRtUnJLd0JzV3puVXhGSjhRTE1kMXdrT0FYWk9VQ1JscTNxMmUtdDlZLUN4YVFleV85R3Z2dmJodmZVblRWREx6dXA2U0VYc245OQ?oc=5"
+        },
+        {
+          "title": "SOUTHWEST AIRLINES POPS THE CORK ON SANTA ROSA SERVICE, PAIRED WITH SIP AND SHIP PROGRAM FOR WINE LOVERS STARTING APRIL 24",
+          "source": "Finviz",
+          "url": "/news/343023/southwest-airlines-pops-the-cork-on-santa-rosa-service-paired-with-sip-and-ship-program-for-wine-lovers-starting-april-24"
+        },
+        {
+          "title": "Delta hikes its baggage fees to offset rising jet fuel costs",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/video/delta-hikes-its-baggage-fees-to-offset-rising-jet-fuel-costs-200500253.html"
         }
       ],
-      "float_shares": "2.73M",
-      "short_float": "5.54%",
-      "daily_pct": -1.01,
+      "float_shares": "485.20M",
+      "short_float": "4.63%",
+      "daily_pct": -0.81,
       "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $89M < $100M)",
+      "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 75,
@@ -215,70 +615,734 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "ANNA shares experienced a gap down.",
-        "discrepancy_note": "Source B (Google News/MarketBeat) explicitly states 'AleAnna (NASDAQ:ANNA) Shares Gap Down'. Source A (Finviz News) contains no news items and therefore does not confirm or deny this claim."
+        "primary_claim": "Southwest Airlines announced a unique 'Sip and Ship' program.",
+        "discrepancy_note": "Source A explicitly mentions 'Sip and Ship Program'. Source B mentions 'free checked wine case' and 'Wine-Friendly Santa Rosa Push', which describe the concept of the program but do not explicitly use the name 'Sip and Ship'."
       }
     },
     {
-      "ticker": "AVGO",
-      "price": 314.43,
-      "gap_pct": 3.24,
-      "pm_volume": 329969,
-      "avg_vol_10d": 21365323,
-      "avg_dollar_vol": 6717898511,
-      "mkt_cap": 1488721614736,
-      "rvol": 0.5,
-      "adr_pct": 3.48,
-      "category": "New Contract/Partnership",
-      "theme": "New AI Chip & Compute Partnerships",
-      "reasoning": "Broadcom secured landmark deals to supply AI chips to Google and computing capacity to Anthropic, significantly strengthening its AI segment.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 75,
-      "grade": "B",
-      "finviz_theme": "Semiconductors - Compute",
-      "analysis_detail": "Catalyst: Broadcom announced **expanded collaborations** with **Google** and **Anthropic**, involving the supply of **AI chips to Google** and **3.5 GW of next-gen compute capacity** to Anthropic. | Impact: These **Tier-1 partnerships** position AVGO as a critical supplier in the **AI infrastructure build-out**, validating its custom silicon strategy and potentially **driving substantial revenue growth** in its AI segment.",
-      "analysis_details": "• **Impact**\nThe new agreements with **Google** and **Anthropic** represent a **major strategic win** for Broadcom, solidifying its role in the rapidly expanding **AI compute market**. Supplying **AI chips to Google** strengthens its custom silicon business, while providing **3.5 GW of next-gen compute** to Anthropic highlights AVGO's infrastructure capabilities. This move is a **strong validation** of Broadcom's diversified semiconductor and infrastructure software strategy, addressing a high-growth sector.\n\n• **Strategic Value**\nThese partnerships with **Tier-1 hyperscalers and AI leaders** are crucial for Broadcom's long-term growth trajectory, especially after four months of declining stock performance. They provide **significant revenue visibility** and enhance the company's credibility and competitive positioning against peers in the **AI supply chain**. The collaborations are likely to foster deeper integrations and future opportunities, cementing Broadcom's relevance in the **high-growth AI sector**.",
+      "ticker": "TECK",
+      "price": 52.54,
+      "gap_pct": 11.44,
+      "pm_volume": 90498,
+      "avg_vol_10d": 3288852,
+      "avg_dollar_vol": 172796284,
+      "mkt_cap": 25698408564,
+      "rvol": 0.72,
+      "adr_pct": 3.49,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Materials - Metals & Mining",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nTeck Resources stock is reported to be **surging** today, despite a lack of specific fundamental news catalysts in the last 24 hours. Previous headlines indicated the stock had fallen yesterday, making today's reversal on seemingly no news particularly notable. The surge appears to be a technical or flow-driven event.\n\n• **Key Consideration**\nWith a relative volume of **0.7x**, the stock is surging on below-average volume, which can indicate a lack of strong conviction behind the move or potential for rapid reversals. Without a clear fundamental catalyst, the current upward momentum is speculative and carries a **high risk** for momentum traders due to potential profit-taking or a lack of sustained buying interest.",
       "headlines": [
         {
-          "title": "Stocks making the biggest moves premarket: Broadcom, UnitedHealth, Casey's General Stores and more - CNBC",
+          "title": "Why Teck Resources Stock Is Surging Despite Doubts - TipRanks",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNdGZZSEF2VjJyZE1GRHlaVnhtXzREZ09HblZRbUczaGVKbVZ0M3RIZlRKUUtFRFA5aXhkUm5FcWhCZWkwRENjMkdkLWtEZXRvTVNPd2xaMjNjUFNiM2RTVnlaaUFVeHRyZzhlbnBRMHdHTkhiOFFaZVNBTkVGS281bHk1S1N1dFhzQjgwcFEzVWlfRUhUbDdJ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPUnJtQVNKVDZTUVFiTm1lbHo2cFJFbUNwLWtLdFl1bmpBdGVyb3kwSjhkU09JM0RCTnRIeVFRanFGeU53MjZMWm14c0RXeUZMV01lRjkxREVSQkdwMjc2cnBkU1RWQU9aRGkyOGhrUW9SRjFfY3A1UjA0dFlTRnNTaGNJQkVHd0JpcnZxa0kydXp5WnM?oc=5"
         },
         {
-          "title": "AVGO Stock Has Declined For 4 Months Straight – Will Google TPU Deal Make April Green Again? - Stocktwits",
+          "title": "Assessing Teck Resources (TSX:TECK.B) Valuation After Strong Long Term Shareholder Returns - simplywall.st",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNTk9sdVlZM01USGdIN2c4enN1MTNRTEpMdVo0TUE0UDZEX3hrQTJBb2wxLXBtU1VuUktUV0ZrazNaMjJaNjVpdzYwckpfR2ZYYXoxMHJjTHZCdWRKQ3ViZ0lBdFJfaGNoRERueUJteWJrWEVYM08xZWd5ZUJSWF8tZk1aR19IR012aFVfWWRPbHRVampoUUNVQ2U0ZVVJX3ZJNWhILXRVS0pHUGdCSVhRWGpUbnVTZHRwalB4TEo2bVpfNTNGZlZucy1tejhWSFJyMl8xUFdubWprRWl0bk1VU3UzLTlOVEFC?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQZEtKWmxsLW9YcTMtb3ozNm9zNTRBLXFmOHdaaFRuWnZhZXdyU25jNWo1Q24wZ0NKTnFpS3AzM3ItZWV5WHJQeVdVUUNZdXpfWjlUTVFoZEVtV191WmZGekZleGNCbFdPaFN1UFFfejd3NjVhNVp5N1hJbVJMQlJneWhaT2U0MlYxODB4ckYxQVNTXzZDLXF0cFptOFU2MmlLLThGbExhcFBtVDVZY2RKVDlyNURvYkI0S3d5aVBxd0tuME83MTV6OUJDVzc0VG1rZ3h1aDNkQdIB3AFBVV95cUxNc2xYWjJXSElNNUxRTlk1NHdkekhvZDNNaFlUVFY0SUdlcm9lSTk2RjBtVUp3aE9uVTVNXzQ5V3BXWjFkX3JxLWFTQ0Y1X3liLVZxd1lOUnlvV24weUFncVhUX1lrajAwOVZ6QnNxeVdtVGVhamVpSERfLTFVeHFEVHY1Q252UmVWVk1qd24yaHJMQzNVZFNyM2NYM0JvSnhKb3Q0WkhfT09TY3Y4aUZCZVpHeFMzQ2MyU29adjh2Y1lJOVdxTEk1RDhTVmo5NVkyNjFoZEdtYUlSc1J4?oc=5"
         },
         {
-          "title": "Broadcom (AVGO) Stock Rises on Google, Anthropic Chip Deals - TipRanks",
+          "title": "Teck Resources Limited (TECK-B.TO) stock price, news, quote and history - Yahoo Finance Singapore",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxORzZGYVl6SFU1NTFuVU5vbi1FUjVFWEVZQnRLTklDeUpQYXJDSXFESkwwY1R4WE54d1FON1BqVTRBbjJaNmozYVg5bTA5bU1PR2xSakNsZl9FQmo2djhrQUxyRlZ0VkxVNC13am1MdVJ4amVGZklDX3RtdFk3SklKeEhhdGE4cjZQMk5GVURvQQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9wVVFvVzVzaDNJYTVKQUZEcHRPNWtPdlRkMk4wNkdiLXo2YWxvN0FPdjR1UlQ3T1JzWnBZSWQzdFptMWdsSWV1OE56ZUxibnZ1T0k0US1tNEU?oc=5"
         },
         {
-          "title": "Broadcom Stock Climbs On New Deals With Google, Anthropic - Broadcom (NASDAQ:AVGO) - Benzinga",
+          "title": "Teck Resources Ltd. Cl B stock falls Tuesday, underperforms market - MarketWatch",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNV2k1VFpuc2ZId0gzMjlBelp4a3Z2bmREYzNzNmFrZGwyQmllVTctSXc1Wk5BR3d6Q3l3bEtmTDJBeWl0ZHRqVVZaU1hzYVU1V2l3VXRjWkkxX3BGZjBjX0JrZTRHcVdFdGFZS1dlUnFwbWhrYXVzSzVfS0tSbXZLNm5WNTFic0pOZ21YXzdsS3NGZVh1QTBleDJpaGFhTkViLUotNGktUzhjRkVtM2QxNXJoQklKVzNr?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQOVJ5aFRva3VlRmJHa1c2cmp0S2N2aGZBVkwxZzJHbWl2eVNyR1p2YmFBNVpPUGFQdFVvcERoM3kxdzNMN3h1SFgtUzBRZFRRdld6VkFWb2NEcHgzREp2N0E3QjBzd1hCS19kTDFBWmJORE5fcEtBMHMyX1oyRWlSVGVyRThJSlRrTTdvc2dQd0lGb2lBZDh2SXdyczZlRkpiUGctUU1WdTFwVFlVcFdYY05WZHdRZzJ2SjZFdnlBVlVMUQ?oc=5"
         },
         {
-          "title": "Anthropic secures 3.5 GW of next-gen compute via landmark alliance with Google and Broadcom",
-          "source": "Finviz",
-          "url": "https://www.digitimes.com/news/a20260407VL200/anthropic-broadcom-google-alliance-computing-power-expansion.html"
+          "title": "TECK SEC Filings - Teck Resources 10-K, 10-Q, 8-K Forms - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE5CcjJuODZlaUVTMmNHY2JrZGNlaHR1MW9IOFVfT3piQnhYMDBrOFpfOWJackplYlhBNEE1bnpjdU5CLWw1QnBYRkV5SGRpUlZNa0F3NTNpdzNWN2t6MzR5dDdNdHQxZw?oc=5"
         }
       ],
-      "float_shares": "4.64B",
-      "short_float": "1.13%",
-      "daily_pct": -0.04,
-      "industry": "Semiconductors - Compute",
+      "float_shares": "466.42M",
+      "short_float": "1.46%",
+      "daily_pct": -0.61,
+      "industry": "Materials - Metals & Mining",
       "technical_status": "Fail (ADR 3.5% < 4%)",
       "verification": {
         "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found for TECK.",
+        "discrepancy_note": null
+      }
+    },
+    {
+      "ticker": "ALK",
+      "price": 36.93,
+      "gap_pct": 11.37,
+      "pm_volume": 66518,
+      "avg_vol_10d": 4682508,
+      "avg_dollar_vol": 172925020,
+      "mkt_cap": 4233709027,
+      "rvol": 1.13,
+      "adr_pct": 5.06,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakdown or institutional selling.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant decline on no apparent news suggests technical stop-running or concerted institutional selling. High risk of continued weakness without clear fundamental support.",
+      "analysis_details": "• **What Happened**\nAlaska Air Group (ALK) shares experienced a notable **decline** over the last 24 hours, despite broader market gains. Multiple news outlets reported on the stock's drop, implying underlying reasons, but none specified a concrete fundamental catalyst such as an earnings miss, analyst downgrade, or significant company-specific news. This suggests the move was primarily driven by non-fundamental factors.\n\n• **Key Consideration**\nThe absence of a clear fundamental trigger indicates that the **sell-off** is likely technical in nature or driven by institutional flow dynamics. Such moves, without supporting news, can be indicative of stop-loss cascades being triggered or significant selling pressure from a large holder. Without a confirmed catalyst, the move carries a **higher risk** of being a \"dead cat bounce\" or continuing its downward trend, making it difficult to establish a high-conviction momentum play.",
+      "headlines": [
+        {
+          "title": "Why Alaska Air Shares Are Suddenly Losing Altitude - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNOXlycDBMVkhvdXQtTlpBT2U4YVpmQjcxLUpiSm5ScEQyX0dFRVhpQjd3ZXlobV9VbThoSHc2X2x2X0RWQVpPelB6QnlCZHprcm45ZzNtTzlSZF8zUksySk1ja3lOSF8wWkUzRTJSTzBydXRUY2EyQTh0SUQ2NWY2eVBuT0xjYmlUM3RycndvRlVvOWc?oc=5"
+        },
+        {
+          "title": "Alaska Air Group (ALK) Shares Drop While Market Moves Higher: The Reason Explained - Bitget",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE4xaFhMSHFlYmQ0Vk5UT0huQl9OX3phYlZHQ1cxeF9ySDZNMzkxa0ZkY0tQUEtxUWczdEF6N3RCV2FsX1UxWWlqNVZQdTlzN1JWWmE3N2VVdk0wZEp2M2VBblh0Z9IBY0FVX3lxTE4xaFhMSHFlYmQ0Vk5UT0huQl9OX3phYlZHQ1cxeF9ySDZNMzkxa0ZkY0tQUEtxUWczdEF6N3RCV2FsX1UxWWlqNVZQdTlzN1JWWmE3N2VVdk0wZEp2M2VBblh0Zw?oc=5"
+        },
+        {
+          "title": "Alaska Air Group (ALK) Stock Sinks As Market Gains: Here's Why - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOM1l1Q0NFai1MLVlFUV9JVjdBeWVkVGtVbVU4LU1oUWR2SUNQTEl0TUJfWVhOM1NkenAyR3d5aktmZ3E1YUcwZXZUeEE0WnNjcmRMZlRtWU5CVEV4N2U2S1MzdHUxVGpBX01oYnZKZWkzMFliR1pQTV9jbmtXQ0ppY2lEUUhJZzJWeGF2eHZJeUlOQ25HSnc?oc=5"
+        }
+      ],
+      "float_shares": "113.88M",
+      "short_float": "11.36%",
+      "daily_pct": -2.76,
+      "industry": "Others",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; likely technical breakdown or institutional selling.",
+        "discrepancy_note": ""
+      }
+    },
+    {
+      "ticker": "CCL",
+      "price": 25.2,
+      "gap_pct": 11.11,
+      "pm_volume": 622082,
+      "avg_vol_10d": 27897778,
+      "avg_dollar_vol": 703024006,
+      "mkt_cap": 34857337371,
+      "rvol": 0.85,
+      "adr_pct": 4.01,
+      "category": "Government Policy",
+      "theme": "Geopolitical Stability",
+      "reasoning": "The travel sector, including Carnival, rallied significantly following news of an Iran-U.S. ceasefire, reducing geopolitical risk and boosting market sentiment.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 56,
+      "grade": "B",
+      "finviz_theme": "Others",
+      "analysis_detail": "Catalyst: News of an **Iran-U.S. ceasefire** has significantly **de-risked** the travel and cruise line sector. This geopolitical development is expected to **boost consumer confidence** in international travel and potentially **stabilize oil prices**, a major operating cost for cruise companies. | Impact: The **positive sentiment** directly led to a **\"big jump\"** in travel stocks like Carnival, reflecting improved future operating conditions and reduced uncertainty. This shift could support sustained yield growth and alleviate pressure from recent oil price volatility.",
+      "analysis_details": "• **The Policy**\nNews emerged of a **ceasefire agreement** between Iran and the U.S., a significant geopolitical de-escalation event. This development is perceived as highly **positive for global stability** and, specifically, for sectors sensitive to international relations and fuel costs.\n\n• **Direct Impact**\nThe ceasefire directly contributes to a **reduction in geopolitical risk**, making international travel more appealing and potentially **lowering the risk premium** on crude oil prices. For Carnival, this implies a more stable and favorable operating environment, boosting **investor confidence** and directly contributing to a **\"big jump\"** in its stock price today.",
+      "headlines": [
+        {
+          "title": "Oak Thistle LLC Makes New Investment in Carnival Corporation $CCL - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPaFBrVXRRQmNRNWtuWlo1dWJWdjdBc1VIb0k3cU5ZdUZYSlplemlzZGZ1V0N6OW45SFZrcnRLTTAxV3R5NGZkSE5WVzFTX3dkekRkZWRGZ01ONXR5bEhYekVwOTJtTDJUb0dzY0ZOSWE5UDktYlBWbXJFNUpJWGRMVDVxYmxKd0NaX0sxMXoxcW4tYnJqYXdJSjVpRlpGM0Z5RXlySDdSZmZfQ3ZmSU83TGIzaVFkRGJjaXNoUW9jWF9DU1k?oc=5"
+        },
+        {
+          "title": "Carnival and Royal Caribbean lead a big jump in travel stocks after the Iran-U.S. ceasefire (CCL:NYSE) - Seeking Alpha",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQZ0w2WHFhdzNyYkQ0U29OUk45OHMwa1oyREVOVG4wSklLd0NGWkQ0Q0xJTzZxbTNYOU9OZVhBXzZKSUVjTDBDS0plUk1QRnVYaUhTUlcyY3pUNHRyb0tCNjNMZGN3YlZjSThEdUdiRm52LUx0bEpxcHlsUlRhWnFxWHRsUEExeklIZ0dIU213OW1KSVA4cUtxOW81azlDQUtOUzEwXzF5Wmd5SExfWmRmNzE2VUtrNEprSTk4dmFSMUFXSUdVc1E?oc=5"
+        },
+        {
+          "title": "Carnival Stock Slides As Recovery Hype Fades - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNc2JFakh1U0VuX3ppWVpxaWo5dkVOMGZFby1jQnNqUHBXNktHcWRpZ3hTUnRMYTFYRzQ2NjZaUXRHZmt6M05OeGc3T3lQeDZNT0ZHWlJBSTcxSmxtWlNYQk1SX05TS2RhVmFCLUNYeUFtNzhCV2t1WlVqUmJLOHZWT29BNXJ2cmJrVDZJ?oc=5"
+        },
+        {
+          "title": "Oil shock sorts cruise lines into the hedged and hedged nots",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/oil-shock-sorts-cruise-lines-160221366.html"
+        },
+        {
+          "title": "Carnival, Norwegian Cruise Line, Compass, Blink Charging, and Taylor Morrison Home Stocks Trade Down, What You Need To Know - The Globe and Mail",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqgJBVV95cUxNUHFac2pXbjlHc1ZqZ21BUDNTdXd6US1jZTQxQXVvSjdzaXpEcWZnamRsR1M5cGFIMkRnaWppX3BXMmo5VElZZTVLM1Y5YTQ4NHZqRTl1eVJBZ3Q3OEtRZzBtUDRFelJUNFBwV1NmTnFVek04LVQxUFAycldrbEE1VFlYSmh0dXNybXR6bTItcEtsQlFEVzUtOExRdHg1SWhDSUF2M09xQS1nTWdYTmpFWS1GdHlfd1lPWW5ZVm5BOTFTSHZLaDhIeXN6NVZHTkI2bzRITGpWQTdIZm1vZklPSmRWdzBaNmF2bXdtWDZFc0dsY2JCZF9nYWxQeld4SVluSm1STXJIeEpXTXlKZm1udWlQR1ZyUzhlQjZ4Um5LY3pIT2N3My14R2xB?oc=5"
+        }
+      ],
+      "float_shares": "1.14B",
+      "short_float": "3.70%",
+      "daily_pct": -2.96,
+      "industry": "Others",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "An Iran-U.S. ceasefire occurred, leading to the travel sector, including Carnival, rallying significantly.",
+        "discrepancy_note": "Source A (Finviz) does not mention an Iran-U.S. ceasefire or its impact on Carnival's stock. Source B (Google News) has one article (B[1]) mentioning 'Carnival and Royal Caribbean lead a big jump in travel stocks after the Iran-U.S. ceasefire', but also two other articles (B[3] and B[4]) indicating 'Carnival Stock Slides' or 'Stocks Trade Down', creating a discrepancy regarding the claimed 'rallied significantly' effect."
+      }
+    },
+    {
+      "ticker": "CUK",
+      "price": 25.2,
+      "gap_pct": 11.11,
+      "pm_volume": 99570,
+      "avg_vol_10d": 3037123,
+      "avg_dollar_vol": 76535500,
+      "mkt_cap": 34984961021,
+      "rvol": 0.84,
+      "adr_pct": 3.89,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nA TipRanks headline from this morning indicates Carnival shares are **suddenly surging** again, however, no specific fundamental catalyst for this **upward move** has been disclosed within the provided news. The other articles analyze **onboard spending momentum** and the **impact of oil prices** on the cruise sector, but these are thematic discussions rather than immediate triggers for a rapid stock movement today.\n\n• **Key Consideration**\nGiven the absence of a distinct fundamental news catalyst, the recent surge in CUK's price is likely driven by **technical factors** or **institutional flow**. With **RVOL at 0.8x** and an **ADR of 3.9%**, such a move without clear news carries **elevated risk** of being unsustainable, potentially setting up a **Gap and Trap** scenario if fundamental support does not materialize.",
+      "headlines": [
+        {
+          "title": "Why Carnival Shares Are Suddenly Surging Again - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNcmxxZHBYbG5TQ05pRUktTmtycXRuTVhXS1VwNld1akliV0xYYWpHaEp4YkQ2WkxQSW8xMzhVUC0tdWdjS2dWOWNzTV9ITnd2amRuZHVTR083TVM5TTBwSnlLN3NONjJpOEdRdjJQcllaOWtmcEl5OTItR0RCbUQtUk1pNVFJV2x3WlRNLTd3?oc=5"
+        },
+        {
+          "title": "Can Carnival's Onboard Spending Momentum Sustain Yield Growth in FY26?",
+          "source": "Finviz",
+          "url": "https://qz.com/can-carnival-s-onboard-spending-momentum-sustain-yield-growth-in-fy26"
+        },
+        {
+          "title": "Oil shock sorts cruise lines into the hedged and hedged nots",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/oil-shock-sorts-cruise-lines-160221366.html"
+        }
+      ],
+      "float_shares": "146.14M",
+      "short_float": "0.92%",
+      "daily_pct": -2.63,
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $77M < $100M, ADR 3.9% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "The primary claim states no immediate fundamental catalyst was found. However, Source B [1] ('Why Carnival Shares Are Suddenly Surging Again') directly implies there is an immediate fundamental reason for the surge. Source A [2] ('Oil shock sorts cruise lines into the hedged and hedged nots') also points to an 'oil shock' as a fundamental factor impacting cruise lines, which could be an immediate catalyst. Both sources suggest the presence of fundamental factors/catalysts, contradicting the claim that none were found."
+      }
+    },
+    {
+      "ticker": "USAS",
+      "price": 5.35,
+      "gap_pct": 10.84,
+      "pm_volume": 84198,
+      "avg_vol_10d": 6069797,
+      "avg_dollar_vol": 32473414,
+      "mkt_cap": 1743528086,
+      "rvol": 0.74,
+      "adr_pct": 8.56,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Materials - Metals & Mining",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nA recent MSN article speculatively highlighted Americas Gold and Silver Corporation (USAS) as a potential **multibagger penny stock**. This appears to be an editorial or promotional piece rather than a report on **company-specific fundamental news**, such as earnings, new contracts, or operational updates.\n\n• **Key Consideration**\nGiven the lack of a **concrete fundamental catalyst**, any significant price action is likely driven by **technical factors**, short-term retail interest, or low-float dynamics. Investors should exercise extreme caution as such moves are often unsustainable and carry a **high risk of a rapid reversal** without underlying business improvements.",
+      "headlines": [
+        {
+          "title": "Is Americas Gold and Silver Corporation (USAS) One of the Best Multibagger Penny Stocks to Invest In? - MSN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi_gJBVV95cUxNT2lxUndOazdjZjJUUnotY0cxNFc1bjB6a2VkT2lOVlkwd2NSSEFqbWs4VW9Eb2JiRTFkQmJyY2VUX2NMdThheEtfMkNURHdpX1oxNFVlV2VwN2VFY0xJSmswQTMxOGFuMG56V3QxUEtxVEZMUGFCcHFSczZkWWoxd3RoOFRDUVBER1FWQlF4MG9FdjVXc19ZVFhuT0I1ei16dDNpMVhkdm53ZEJ1VUYza1djSlNjVV9XNGhhOHlHR0xLUTEwSWFzMW53b0k3Z2ZKLXZMQ1dKT2RsOTV2N1YzMERXc0VidEpwbGtJSkN1c1hLRWp5YUZaVjF4SlMxdDVNbFAxc2RScWpScFltalRNQjdnNS1QQldkNGxsQ1BRNExOWklPcUZibDdHWGtzQWhqc0dEVTNzejJTeXVPTlF1VTh4OXV6SU1RalNTS1NBVGJoTFlLcjhGaXlRcDdxVHY0ZU9PT3U4UlcyZU9QRkxyRTJVeWVyQzl1NkxzcjZB?oc=5"
+        }
+      ],
+      "float_shares": "213.42M",
+      "short_float": "4.07%",
+      "daily_pct": -2.55,
+      "industry": "Materials - Metals & Mining",
+      "technical_status": "Fail (Avg $Vol $32M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "The primary claim states the absence of a specific factual catalyst (dollar amount, percentage, date, approval decision, etc.) rather than providing one. While both sources provided are consistent with the claim (Finviz shows 'none' and Google News shows a speculative article, neither presenting a fundamental catalyst), the claim itself is a universal negative ('No immediate fundamental catalyst found'). Confirming such a broad negative definitively with limited sources is difficult. Additionally, the 'Verified' status requires exact number agreement, which is not applicable here."
+      }
+    },
+    {
+      "ticker": "LEVI",
+      "price": 19.71,
+      "gap_pct": 10.6,
+      "pm_volume": 57682,
+      "avg_vol_10d": 2972924,
+      "avg_dollar_vol": 58596332,
+      "mkt_cap": 7696109914,
+      "rvol": 3.33,
+      "adr_pct": 3.44,
+      "category": "Earnings",
+      "theme": "Beat & Raise",
+      "reasoning": "Levi Strauss **beat** Q1 estimates and **raised** full-year guidance on **strong global sales**.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 83,
+      "grade": "C",
+      "finviz_theme": "Consumer - E-Commerce",
+      "analysis_detail": "Catalyst: Levi Strauss **reported** Q1 2026 earnings that **beat** analyst estimates, driven by **strong global growth**. The company also **raised** its full-year sales outlook, demonstrating resilience and defying macro concerns. | Impact: This **positive surprise** and **upgraded guidance** suggest **strong underlying demand** and potentially **increased market share**, significantly de-risking previous market apprehensions.",
+      "analysis_details": "• **The 'Beats' (Surprise Factor)**\nLevi Strauss & Co. (LEVI) **surpassed** Q1 2026 analyst expectations on both the top and bottom lines. This **strong beat** signals effective operational execution and robust consumer demand for its denim and apparel, especially in key global markets. The positive surprise is a strong indicator of management's ability to navigate current market conditions.\n\n• **The Growth (Momentum)**\nThe company highlighted **strong global growth** as a key driver for its Q1 performance. This suggests **broad-based strength** across geographies and product categories, reinforcing positive momentum. Despite broader concerns, Levi's appears to be capturing market share and resonating with consumers globally, particularly with its core denim offerings and expanding casual wear.\n\n• **The Guide**\nManagement **raised its full-year sales outlook**, a highly **bullish signal** that **defies** prior concerns, including those related to global conflicts. This **increased guidance** indicates **management's strong confidence** in continued performance and future profitability, providing a significant positive re-rating opportunity for the stock. This revised outlook suggests an **accelerated growth trajectory** for the remainder of 2026.",
+      "headlines": [
+        {
+          "title": "US Premarket Movers: Chevron, Delta, Exxon, Levi Strauss, Meta - Bloomberg.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOWTJ0RjUwWkVTMWl3Tmc1azNFSUh5WjBpTG5vNnhjck5HTXRlVnotTUZTZHVRbE5GaldKc002UU1pNDBNVWN5Y2tlSm1iN3pzUkRPSVQ4RE04VHZiWnJJTFg1MmlPcmdaQm9MS29ma3AyV0FneDYyZXRjQTdrMVY5N1o5MmhweWxRakg3SUtWNGQ0UW5DaXRMal9HNVltM0tBWHNZWU9KbGtyc0ZNcXlTbg?oc=5"
+        },
+        {
+          "title": "Levi’s boosts its sales outlook, defying concerns about the impact of the Iran conflict - MSN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPOGdpNzg4dDlTdVNxZWRjYVZqNS1LYTVXQzJfVG5Mb0hOZkN4MEp6aExaMHgyVU1Denk5U2ctZkxpNENQY2luUzhBcHNQeHEtOTRTdzNtR2lDSkxsNFprcVVfWXF1X0RXVTEtYThGQTNiVkNZbDBtQ0R5SGFlM2h5QU8yZndDSWpqX2JpeTN2blR3WnFRUlBzbGRaN2t4Wjl6Q094Ry02eFd5ejNqWnViSzZIQks0dWZLRlNIaXJGNGc5Z0VJbGJPOW9vSXFGWmhzUFUtMw?oc=5"
+        },
+        {
+          "title": "Biggest stock movers Wednesday: LEVI, SHEL, and more - Seeking Alpha",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPaEpYalJNcF9WdzlLemZyMjk3WEdIbjN6aExpcVpfX2lTR0ViLXZ0OEhZMVB5MTlBd3hYQkFFTHQ1TzQxMVB1cG1ZejdzWkxONnFCT2ctbXZSOGZxZmtrYlFQX3J4ZWd0MnZxcFpMdkZhN0ZqUVVBd0lUNXdmQmdLWG5mRkk0cHRibGdZbG5vaE4?oc=5"
+        },
+        {
+          "title": "Barclays reiterates Levi Strauss stock rating with $26 target - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOUlBjZFFja1RCVnFBZWVIaUcxeEZIVEI2eWk5RnRrOFVPN0VKTlBjaHhybzRocFFGQXJSYWxxczFFT3d3cnBTT1lzVkNGYzNteGd5MGYyYVFVNWZEV0hhTE05RzFGOHZocThLSjNWeVV0amxTcm9zSmxET2NUb1Q0S3lzTkdfYi1QOXJzeDlDU0hLVUY5MTl5dHdwcHZTMncza1JnMUwxU3pEOVhEQWlIaThBczdkcU4yVHZ3bA?oc=5"
+        },
+        {
+          "title": "Levi Strauss & Co (LEVI) Q1 2026 Earnings Call Highlights: Strong Global Growth and Raised ...",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/levi-strauss-co-levi-q1-030042626.html"
+        }
+      ],
+      "float_shares": "95.09M",
+      "short_float": "10.74%",
+      "daily_pct": 0.31,
+      "industry": "Consumer - E-Commerce",
+      "technical_status": "Fail (Avg $Vol $59M < $100M, ADR 3.4% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
         "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Broadcom secured deals to supply AI chips to Google and computing capacity to Anthropic.",
+        "primary_claim": "Levi Strauss's specific new full-year guidance (e.g., a specific revenue range or percentage growth)",
         "discrepancy_note": null
+      }
+    },
+    {
+      "ticker": "NVTS",
+      "price": 8.57,
+      "gap_pct": 10.5,
+      "pm_volume": 295916,
+      "avg_vol_10d": 16771428,
+      "avg_dollar_vol": 143731138,
+      "mkt_cap": 1977893972,
+      "rvol": 0.51,
+      "adr_pct": 8.73,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 55,
+      "grade": "C",
+      "finviz_theme": "Semiconductors - Analog",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nThe provided news headlines from baoquankhu1.vn and TipRanks offer commentary on existing analyst sentiment and a recent slump in NVTS stock. However, they do not pinpoint a specific, new fundamental catalyst, such as earnings, an upgrade, a new contract, or other impactful company-specific news, that would drive a significant price action.\n\n• **Key Consideration**\nWith no identifiable fundamental driver in the last 24 hours, any notable price movement in NVTS is likely attributable to **technical factors** or **institutional flow**. Investors should exercise caution and be wary of potential **gap and trap** scenarios, especially given the current low relative volume (**RVOL: 0.5x**), which suggests a lack of broad interest or conviction supporting any price action.",
+      "headlines": [
+        {
+          "title": "Profit Review: What analysts say about NVTS stock - Quarterly Portfolio Review & Weekly Watchlist of Top Performers - baoquankhu1.vn",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFBfMmJzMVBHVmhEZVBFbEtyc0FrNS1TbmM2WDVRQ2FfSGRxSGxiZHV0NlBEXzlIRW9ndnM3T1dJdE80UGlaQ0RhXzMxUnYyNFQ3UVMxZUJBSVo1aWx3ck9aSzRfOXQ4RHFhWmtXLXhXUHpTS1VycEE?oc=5"
+        },
+        {
+          "title": "Why Navitas Semiconductor Stock Is Suddenly Slumping - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPWWZ3V2NjY0lwcEVOUnlmQlNYWWMyMlhvUUtIbF9nTXBQeVZ1SnZWVVZkZXY1RHc4WmktcDF1RVdoM0JqcGQ1X2FBR0pRN3JVNllST21EejZGV2h2TXV2bnNqeHJLeEtOak40SnlNWFl0WmlFVkVtZEZ5Yjl3LXJoa3VLZnV3M2NlaGZjZDM0NlZXVFE2X3c?oc=5"
+        }
+      ],
+      "float_shares": "189.85M",
+      "short_float": "23.07%",
+      "daily_pct": -3.0,
+      "industry": "Semiconductors - Analog",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found for NVTS; likely technical breakout or institutional flow.",
+        "discrepancy_note": "The primary claim states 'No immediate fundamental catalyst found,' attributing NVTS's movement to technical or institutional factors. However, Google News headlines point to fundamental discussions, such as '[1] Profit Review: What analysts say about NVTS stock' and '[2] Why Navitas Semiconductor Stock Is Suddenly Slumping.' These suggest that fundamental factors are actively being analyzed or sought as reasons for stock movement, contradicting the claim that no immediate fundamental catalyst is found."
+      }
+    },
+    {
+      "ticker": "QBTS",
+      "price": 13.74,
+      "gap_pct": 10.33,
+      "pm_volume": 447449,
+      "avg_vol_10d": 19012629,
+      "avg_dollar_vol": 261233522,
+      "mkt_cap": 5082613815,
+      "rvol": 0.78,
+      "adr_pct": 6.54,
+      "category": "Upgrade",
+      "theme": "Analyst Downgrade / Price Target Cut",
+      "reasoning": "Mizuho analysts **slashed** price targets for quantum computing stocks, including QBTS, leading to a negative price reaction.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 31,
+      "grade": "B",
+      "finviz_theme": "AI Compute",
+      "analysis_detail": "Catalyst: Mizuho Securities analysts **cut** price targets for quantum computing stocks **IonQ, D-Wave (QBTS), and Rigetti** by approximately **25%** across the board. The downgrades followed a re-evaluation of the sector. | Impact: This analyst action caused a **significant sell-off** in QBTS and peers, with QBTS stock **down 3.3%** yesterday and slipping further today, reflecting **diminished near-term growth expectations** and **increased valuation concerns**.",
+      "analysis_details": "• **The Firm & Rating**\nMizuho Securities, a notable investment bank, **slashed** price targets for key quantum computing players including D-Wave (QBTS) by roughly **25%**. This broad-based downgrade reflects a **re-evaluation** of the sector's near-term prospects and valuation by a prominent research firm.\n\n• **The Thesis**\nThe analyst's **downgrade** likely stems from **softening growth outlooks**, **increased competitive pressures**, or a **re-assessment of adoption timelines** for quantum computing technology. This creates **downward pressure** on QBTS's stock as investors recalibrate expectations for future revenue and profitability.",
+      "headlines": [
+        {
+          "title": "Why D-Wave Quantum Stock Is Slipping Again - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOTm9Kei1nTVFXWFJ6SE5vQ1RQVzYwQzliNUZ0R21idDBqLW1XamhmNlplWXR0cGktREZuYWFmR0pVWjFTRklrSkJEOGp5QXpNVWxxRERmdk9tMTdVYXRyRnVCMTlOU1k1SUpibDlHWkpzOVdGV2xoTEplVkVEVllFMThNMFJxN1Iw?oc=5"
+        },
+        {
+          "title": "D-Wave Quantum (NYSE:QBTS) Stock Price Down 3.3% - Should You Sell? - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNdXJFekEyeVZSUmdjWnVuckRaQncwNHpCQk1hdVZ4OFo2ZnQ4X0pnTU9WUmR3TjNoRjZURG1qTkVsUDdOU3NSd2EyNVJuTFo3RzZ2Y0I5SU1OSXAtbTFjTTZmZ1haZTdOemppWm9fWEdSREpLX0diMzVKUlNZRHNGVklpY2dONFlfX3JWY1lFcWFGMkZ6Z0VPb2xtN3hOb1ZmZVBPNkgyanp1ZDlVNDl4YVVBaw?oc=5"
+        },
+        {
+          "title": "Is D-Wave the Latest Threat to Bitcoin? - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPOE93TDZpOGZsbldMUlhyc0s1ZGFWQ1ZuRHc1cURXV3VZTjV3ZEFxRmgwZGlXMmlGUV9DZnR5Z09LNmR4Nk5ZX3lBSnc0SThPUTJOeHd1T0M2TUhJVFlqemJyQ3pEQWxibU00c2RDODl5NU5ETml3UHh3eTY3RDlVYVlB?oc=5"
+        },
+        {
+          "title": "IonQ, D-Wave, Rigetti stocks tumble as Mizuho slashes price targets by 25%",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/ionq-d-wave-rigetti-stocks-180614152.html"
+        },
+        {
+          "title": "D-Wave, IonQ and Rigetti's price targets cut at Mizuho - Seeking Alpha",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNd3FFLXBOanppczN2dkp3bUNSNWd4WEZpa3R6VEowYVBTV3c0ck9qanhoN0VUUFA2dFVBZmRuN3JLS0ZEOGc0dVctbTdtRXFNWHBPRGl0S3NRVF9aZzV2aEdLTkpDRG5DMWwzZzc5TXdHMlAzWkxCSlJCMWlrTjFlWXBzT0hQVEdoR2MzWGJzRDJfSkU4?oc=5"
+        }
+      ],
+      "float_shares": "357.93M",
+      "short_float": "15.19%",
+      "daily_pct": -2.83,
+      "industry": "AI Compute",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Mizuho slashes price targets by 25%",
+        "discrepancy_note": "Finviz [1] states 'Mizuho slashes price targets by 25%'. Google News sources [3] and [5] confirm Mizuho cut price targets for QBTS and other quantum stocks, but neither specifies the '25%' figure."
+      }
+    },
+    {
+      "ticker": "OKLO",
+      "price": 46.59,
+      "gap_pct": 10.3,
+      "pm_volume": 237361,
+      "avg_vol_10d": 7268549,
+      "avg_dollar_vol": 338641698,
+      "mkt_cap": 8086569795,
+      "rvol": 0.84,
+      "adr_pct": 6.95,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakdown or profit-taking after previous news.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Clean Energy - Nuclear",
+      "analysis_detail": "Catalyst: Market observers noted Oklo's stock **declined 5.9%** on **below-average volume** despite recent positive regulatory approvals. No new company-specific fundamental news emerged to explain the drop. | Impact: Speculative selling pressure likely overshadowed prior positive developments, creating a potential **bearish trap** for momentum traders.",
+      "analysis_details": "• **What Happened**\nOklo Inc. (OKLO) experienced a **5.9% decline** in its stock price within the last 24 hours, trading on **below-average volume (0.8x RVOL)**. This decline occurred despite recent reports highlighting significant regulatory approvals for the nuclear start-up, prompting several financial news outlets to question the reason for the unexpected downturn. The lack of a clear, new fundamental negative catalyst suggests the move is driven by market mechanics rather than specific news.\n\n• **Key Consideration**\nThe price action indicates a potential **profit-taking wave** or a technical breakdown that triggered stop-losses, overriding the positive sentiment from earlier regulatory news. While Cathie Wood's Ark Invest reportedly bought the dip, the overall market flow was clearly negative. This creates a volatile setup; without a fresh fundamental catalyst, the stock faces high risk of further technical selling or could become a speculative long opportunity if previous support levels hold.",
+      "headlines": [
+        {
+          "title": "Oklo (NYSE:OKLO) Stock Price Down 5.9% - Time to Sell? - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOUzZkYURQbDhMdFJzcEdMaXoxZFRQelpjNkNRSjdjOEJSTmNObE1xUUt0Y2ozM3ZxZVhyREFmOFFqVFhHaGduSXZ3QW1NOFFYWGxXQXd0SkZZMW1MbVhPVnQ2RF9Fa3ZCVlgtSWNXc1VWWGozUnZGa1pkaFhwSk9zSG5oVTVEdkR5V0J3QnZPaklGdjVaTFhlaHNfTEViWTRLcUE?oc=5"
+        },
+        {
+          "title": "Why Oklo Shares Are Falling Tuesday? - Benzinga",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOenRvRmQyNWRoeVJFbGJMNGcwM2JMU0J3Yno0bmdlb0NSYjdYUDlCLW9JTVQ5cUxEb0stT0MwaEwzSHdGYjdwVmdMRGFWc1RXUU54OENXOERxNHZUTV9HbUhqWVYwZE1Zb09Qa0RRaXdkTW1zNkFMQWlPQUxjNGFzX2dSU0RXNDBZVGJobjRhNEZaZWVfd2lnek5JUG4?oc=5"
+        },
+        {
+          "title": "Cathie Wood Is Buying the Oklo Stock Dip. Should You? - Barchart",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNdHFXQ3VZYjl4RWkxVUNGRTQyUTV5VTg0WTZ0ZFNhSGc1dXRLVnJOTVAyclIwazZXdFlkX3NQX1JYMk5rT0FISDk5VFpWLTFTUlFFR1YtZTJYbGlIMTh5aFFHY202SnJBdHpTSDQ0UFBuOUF3WV9SRUVuV1dab213QmFVaG1OSFhGVkR2TnVQd1JocGdESkRoSDNXdw?oc=5"
+        },
+        {
+          "title": "Why Oklo Inc. Stock Is Suddenly Sinking - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQX0czaVc2VlI2d0lJTmxuNE9jTTh5MWVGcnVieGJqSy00Ym0yOG5aZ0drNFJpVFhEaVFsZUNXUWdvdWx6MkI1RHZRdHVvak1CU3ptRnJicXhFYWhYY29tSFdOYl9TWHRERnhNYnd4X0dLazFUbG81dXpoZl96Rk0yVDNLTQ?oc=5"
+        },
+        {
+          "title": "Nuclear Start-up Oklo Just Scored Key Regulatory Approvals. Why Hasn't the Stock Gone Up? - The Motley Fool",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxORVc5ZXZvQ1hMYzBTdlkzb3JGMi1USGhzYm9vQmlBaWdad2JJZE41UWxaV0V0SnEtTXRSRFBRWDlUSUZRWFZ3ZHVwcVhGNjFwOXhuUGRhTFVVMHp2SWRpM21Lc1Y1UUtMNUVYTjdFOV9DbV9yREphZVNXNlRCM0k4cUROOUxsWkNRU29YTEt5SQ?oc=5"
+        }
+      ],
+      "float_shares": "137.43M",
+      "short_float": "15.38%",
+      "daily_pct": -4.45,
+      "industry": "Clean Energy - Nuclear",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; likely technical breakdown or profit-taking after previous news.",
+        "discrepancy_note": null
+      }
+    },
+    {
+      "ticker": "FLNC",
+      "price": 13.25,
+      "gap_pct": 10.19,
+      "pm_volume": 88460,
+      "avg_vol_10d": 3765351,
+      "avg_dollar_vol": 49890901,
+      "mkt_cap": 2437142406,
+      "rvol": 0.95,
+      "adr_pct": 7.05,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Clean Energy - Grid",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nFluence Energy (FLNC) has seen conflicting sentiment headlines recently, including a \"Strong Sell\" rating from The Globe and Mail and articles speculating on a potential cool-down of its rally. Conversely, other reports highlight \"3 Big Reasons to Love\" the stock. Despite this mixed media coverage, no immediate fundamental catalyst such as earnings, major contract wins, or institutional upgrades/downgrades has been reported in the last 24 hours. The stock was reported **down 3.79%** on April 7th.\n\n• **Key Consideration**\nThe absence of a specific fundamental driver amidst conflicting speculative articles suggests current price movements are likely driven by technical factors or institutional flow. With an average daily volume of **$50M** and **7.0%** ADR, the stock is volatile. Investors should be wary of potential technical squeezes or stop-running scenarios, as such moves without a clear catalyst carry a high risk of being a \"Gap and Trap\" without fundamental backing.",
+      "headlines": [
+        {
+          "title": "New Strong Sell Stocks for April 8th - The Globe and Mail",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPUEhnN1Z5N1JZa2tJWTlDY0Zoa0xBcjU2QmhrQ2ppY2dEOC1QZ1o0d3M0dUgtaXdpZDBvX1Q1emZJSDZJcGRUbW9jUFJGNlNyczNEc2FPSWpmdVN5VVVQLWlqamUxSWFBSnJRUmh0RXhtN1JiQ082UDZ2bTBSOTdLd2FLMVlhSXRpWFk5dEVmSF9XUjJ0WVI3MGNKVFlJeVdMcUNCZUhYT0NoMkE3cUR0bHQwMU9mbVAtRW01Ykdn?oc=5"
+        },
+        {
+          "title": "Why Fluence Energy’s Hot Stock Rally May Cool - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQUW5MaVZZOXJnSnQzRmJNYkdXT1QzeWFoa1JQTEloV1hwNkg0Mi1DQjZiNi05ZUdUNmFQVjE2eUphNzI4aTJtRDBJS1ZSNTNUVE9FX1BTbTJSVENMWl9QdWlHcWpxX0pfeWRqLTlabHNXZ1FhZGJ1RU9VMG5XQmFLQ3ZMSGlFRHlUSmdZ?oc=5"
+        },
+        {
+          "title": "3 Big Reasons to Love Fluence Energy (FLNC) - TradingView",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOblVFQmdMZWlrT1VMOWpGUFMwb3I1WjkzNnFDT1ZmZnI4bkdTZlE3NTF6dnRjbmlDV0Fza1dzVDNqSGZVN0xCdUltTHhYRmE2bWh4RWdiT1ZjbXp2MHNDbnBrUS1YeHVvQWUxSWNGUkFLc1JsM2ZDU2JsOHNVdm55bDA5LTA2QnJjUzM5LUNZb1RVSE1Bbnd3STJkRW1qMkc3ZkFUXw?oc=5"
+        },
+        {
+          "title": "3 Big Reasons to Love Fluence Energy (FLNC) - The Globe and Mail",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNdVhUQ2dmc0pJM09Jb0RWVUJ0YlFsbTE3QldhcUxrcEZlY3hqQWMtZERxSllxMjFuZjJjWUtVRkRubzhNMDhhMnpZTzhkS25nUl9mZHUycmJqQkpKYzh6aGZubHlsQXpZUTRKQXJFRjdITG1DTGtmWV9qSDllNzZtTGhpTkUxZFIzaWt3T1NteF81aTNOODVnaGNvYkxyM0VfT1czVjhnWjJ2eVlOQWpFc3EzWFMzWkdTd3VVZ0JOc0dyY09y?oc=5"
+        },
+        {
+          "title": "Fluence Energy Inc (FLNC) Shares Down 3.79% on Apr 7 - gurufocus.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPXzhET2hubDBHdG1UNlFJdWY4VFRYeEhqY0R5anNyenJEcENGZW5LX214OVhoZVFZN09nOElLZmg0cjRKV3VPNkhsSjd6YmU5MndzblZOc0h2RnhUc1JBS3hRYzEyTEJfODA3LWhJWXEwYXNfeUdwdk5ONkQwN0duSjcxWWQ4d3dOUTlZM3JCMG5Ha0dUUGs1SVJwQ19zSWRf?oc=5"
+        }
+      ],
+      "float_shares": "97.17M",
+      "short_float": "22.64%",
+      "daily_pct": 0.38,
+      "industry": "Clean Energy - Grid",
+      "technical_status": "Fail (Avg $Vol $50M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "Google News headlines like '3 Big Reasons to Love Fluence Energy' (Source B [1, 3]) suggest the presence of fundamental catalysts, directly contradicting the claim of 'no immediate fundamental catalyst found'. Finviz (Source A) provides no information."
+      }
+    },
+    {
+      "ticker": "ASM",
+      "price": 6.73,
+      "gap_pct": 9.96,
+      "pm_volume": 75485,
+      "avg_vol_10d": 4627495,
+      "avg_dollar_vol": 31143041,
+      "mkt_cap": 1130933819,
+      "rvol": 0.73,
+      "adr_pct": 7.07,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Materials - Metals & Mining",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nThe recent positive price action in Avino Silver & Gold Mines (ASM) appears **unsupported** by new fundamental catalysts. Headlines from Yahoo Finance and MSN merely recap ASM's **strong** past performance over the last year, rather than announcing new operational or strategic developments. This suggests the move is likely technically driven.\n\n• **Key Consideration**\nWithout concrete news such as earnings, new discoveries, or analyst upgrades, the current momentum is **speculative** and could be attributed to technical factors like a short squeeze or significant institutional flow. Investors should exercise **caution**, as moves lacking fundamental backing often carry increased risk of a rapid reversal or a \"gap and trap\" scenario.",
+      "headlines": [
+        {
+          "title": "A Look At Avino Silver & Gold Mines (TSX:ASM) Valuation After A Strong One Year Shareholder Return - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxONHpwRkxOMnBOdGZ2NWxWeWR0dzlacEFOb0FaX0Z0MnlnT3lGaFU4TXpDdlhFYXJqeWpjd2FPRmRla2dvcnJ3MzVOU3UxWjYtaXlfQUdURnZTSFZ5TXdUWXVIdWtxbm9nZE5QVUZaTEo5MWpYVTlyZnF3cGJfbFZIa01uTE5PMUM4VjhmMkRyeFJNVl9qc1ZNaw?oc=5"
+        },
+        {
+          "title": "Avino Silver (ASM) outpaces stock market gains: What you should know - MSN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQeWUxeEVqdjFqcUYyRWZxREVWTHFPeEZwb01JZlRUaXN6QUlHUXRFVXhoeXdQVElwTWVkTHF1dVpXbDZ1ZGdEY2RLbmlNX0JDSTBQcmRRUmlRendFLVVyaklta3dxY2tTUXFydHNpRDc1Ul80d3drcFhEcExHTUpHRFcwR3ctTTREcmtGSU1rT00xZXlOZTRERVRPcENWYk9tYmNzT0MyM3dwdXpqSXdXMTI0bWRZOGlwLWtF?oc=5"
+        }
+      ],
+      "float_shares": "157.16M",
+      "short_float": "4.55%",
+      "daily_pct": -0.59,
+      "industry": "Materials - Metals & Mining",
+      "technical_status": "Fail (Avg $Vol $31M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": null
+      }
+    },
+    {
+      "ticker": "OSCR",
+      "price": 12.97,
+      "gap_pct": 9.87,
+      "pm_volume": 224818,
+      "avg_vol_10d": 6418197,
+      "avg_dollar_vol": 83244015,
+      "mkt_cap": 3400176528,
+      "rvol": 1.03,
+      "adr_pct": 5.13,
+      "category": "Government Policy",
+      "theme": "Medicare Advantage Payment Update",
+      "reasoning": "Oscar Health rallied following the CMS finalizing its 2027 Medicare Advantage payment update, supported by significant insider buying.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Digital Health",
+      "analysis_detail": "Catalyst: The Centers for Medicare & Medicaid Services (CMS) **finalized** the 2027 Medicare Advantage (MA) payment rates. This crucial annual update dictates reimbursement rates for health insurers' MA plans. | Impact: The finalization **removes significant uncertainty** regarding future MA revenue streams and is implicitly viewed as **favorable** given the stock's positive reaction and a **$11.92 million** insider buy, de-risking a key operational variable for Oscar Health.",
+      "analysis_details": "• **The Policy**\nThe Centers for Medicare & Medicaid Services (CMS) has **finalized** the 2027 Medicare Advantage (MA) payment updates. For health insurers like Oscar Health, these annual updates are critical as they dictate the reimbursement rates for their MA plans, directly impacting their revenue and profitability outlook for a significant market segment.\n\n• **Direct Impact**\nWhile the specific details of the 2027 update's impact on OSCR's financials will require further analysis, the **finalization removes uncertainty**, which is generally positive for publicly traded companies. The market's positive reaction, along with a **$11.92 million** insider share purchase by Bertolini, suggests the update is perceived as **favorable** or at least less negative than feared, de-risking a key operational variable.",
+      "headlines": [
+        {
+          "title": "Why did OSCR shares rally in extended trading hours today? - MSN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQUTJtVF9OUGkyS3NGazR4UFJoekFrZDdOckxXWXZPeVByeHlGOTRod0FHQndsVUI2RzYzcUVsb29xaUNJZE94aENiX2tNRGxaVHZpU3dJVTUwLWZpQS1RaG5aSmNZd3JsUzhrVjlvbFNBUGMwbzdOdnpWU3p2YWlfZzNzYzIzeVN1WWt3aHVqNURuS01hT1FMTHpVdWhzTVQwRHk4OG8xd0dzOGN6WGJCMQ?oc=5"
+        },
+        {
+          "title": "Bertolini buys Oscar Health (OSCR) shares for $11.92 million - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQRzgtX3FhTzRXX0tXQUlRb1FuQkZ3cXdfdHg2dUtLVk9rU3NGWVhSQzNzaUlYcmhnLUtLSjNmSWlOc0twMnJuNFV1eXFGd2xSRURoYnRfMFhncEtnV0xfY24zRkJSM2M2dVdqSktYU0UtbllUbnVXRjBPTnQydmZieHBXVEw1WFVlOW1JRXlSZ3RyZDdtSzhFN0dBN3MyNVhOc3ZROUpzUXRqMm5fV043LThCSGlDVHFmdV9YWEdIUi1aTUlyeUpWQw?oc=5"
+        },
+        {
+          "title": "Why Oscar Health (OSCR) Stock Is Trading Up Today - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQVWVYcTNKalNCRlhzUldxc2dMZGFkbDc5T3RNd2NpdlIyUGg2T1owREdra29MM21ZbkVMeEpVWE94N2NaVEVkN0RLTWVsLUEyVmZ2Nl9sWHcwcDByMXk4el9QRkdSRk5jYkdodzdvUkJITzVPVmNNX29YUGtsUGFLZTY1SUlnNkJNakNubDdmZmNJTlBmeG4w?oc=5"
+        },
+        {
+          "title": "Oscar Health Stock Rises After CMS Finalizes 2027 Medicare Advantage Payment Update - Fidelity",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQS1pwZmZBc1kzZzNkNFJWR3Uya0Y2ZFRmR3ZXVkZnb1lFaUlQaXRkM1IxQ1pTUl9SSm5lQU9ydU9tb0NpMVBrbUV3UXBDSTlGOUJKOGNrUnEtSy1FVUpadHNnemtLNk9kajJDYXhmdElZaW1pNFNXRDlhdXc2WDlxUUZnV1N4SGhzdXc4VFUyOXg?oc=5"
+        }
+      ],
+      "float_shares": "242.17M",
+      "short_float": "10.88%",
+      "daily_pct": 1.65,
+      "industry": "Digital Health",
+      "technical_status": "Fail (Avg $Vol $83M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "CMS finalizing its 2027 Medicare Advantage payment update",
+        "discrepancy_note": ""
+      }
+    },
+    {
+      "ticker": "TMC",
+      "price": 4.41,
+      "gap_pct": 9.86,
+      "pm_volume": 143396,
+      "avg_vol_10d": 8048609,
+      "avg_dollar_vol": 35494366,
+      "mkt_cap": 1910359904,
+      "rvol": 0.58,
+      "adr_pct": 7.51,
+      "category": "Thematic Narratives",
+      "theme": "Critical Minerals Geopolitical Narrative",
+      "reasoning": "TMC is benefiting from a strengthening geopolitical narrative around critical minerals supply chains and potential regulatory progress.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 55,
+      "grade": "C",
+      "finviz_theme": "Materials - Metals & Mining",
+      "analysis_detail": "Catalyst: Geopolitical developments, specifically the US and Japan collaborating to secure critical mineral supplies, coupled with reported progress on US mining applications under new NOAA rules, are driving investor interest in TMC. | Impact: This narrative de-risks future deep-sea mining operations for TMC by providing potential government support and accelerating regulatory clarity, attracting retail investor flow.",
+      "analysis_details": "• **The Narrative**\nTMC is seeing increased investor interest, particularly from retail, fueled by a strengthening geopolitical narrative. The **United States and Japan are actively collaborating** to secure critical mineral supplies, aligning with TMC's deep-sea mining strategy as a potential solution to reduce reliance on existing supply chains.\n\n• **Explosiveness**\nThis macro tailwind, combined with reported progress on U.S. mining applications under **new NOAA rules**, suggests a potentially more favorable regulatory environment for TMC's operations. While not an immediate revenue driver, this narrative **de-risks** future development and highlights the strategic importance of TMC's deep-sea assets in the global critical minerals landscape.",
+      "headlines": [
+        {
+          "title": "Metals Royalty to Start Trading on Nasdaq - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPbFFFckJWUGpQWnBTMnR0NGh4OWJaS0lEY1gwTE8tNjkxbktHcEZyRFBxUGEybjR3dENnc3VibDB6bC1fM0V1UVVlRG9uYUowTHN6ZUpldjhLQ2NzaXh4c3ZuWFM3X25OQWc4U0pueE5IdXNkdEIyekhrSU1YY3ZEc2JmVm4yQW9JMXdjNUI0OUtTV0JyX21YQjFn?oc=5"
+        },
+        {
+          "title": "Direct listing puts Metals Royalty on Nasdaq with no new shares - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQU1JCQk1abzFZWXM3SDlsdnRsZVpobmFfSlZhQWVBSTBkd0JlSXEtZ1h4bEk3OUVpSmh1VkVqekFiSlJnTnBDTlY5MGlVa3FZZ2J2TlNMUk9qTEV5aXRScHh0N0xKd0Z2M3YtRXRaRjQ1SWNTVzRYamZwWlJBd0lOaFg5VmFoX2xlT2FRbkttdWw1YlJBZFN0ZUcwRDNuMS1zd0JKUWhmekN1bElIaWk3WGhpNENjcUhWdnc?oc=5"
+        },
+        {
+          "title": "A Look At TMC The Metals (TMC) Valuation As U.S. Mining Application Progresses Under New NOAA Rules - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQMU5DeTVfYkoySXp5cWVLaGVoQXZXakJRcGx6WHVTYlYzQlBjem1MZVVCU0ZRcWJERlREcUFsYUVlR21HeEdrUnpNdGw4WUJRWUo2WnZaOFBQNGZxbVc0dUZkS1NkZG1wb3FLTm9DeGsyNTkxNW5rR1dLY0MxWDdOWmpkd0EzOWlQcDd3LW5vaFJXNDhCQUVyVl9tcVhMWlZoRS1xd2ptOEhLcDRuSFJpVXltTFBuTHNqX1hKbTItekRaY2l1TU9vTXQzMm9lQdIB0wFBVV95cUxOU0RudExmVklXX0xraDE1YmVwNjZUZFJsV0RYMTdCb2FucnJ6RVhMQzhIMzd0UGctMjY4WHFmZldXSnB1YU5hZEt3SjdTNm5kczVNaGNuV2pCNE5VT2J3YXVqUGl1T2pVX0tldEF6Qjd4RXhmSTBTMnRqZE9LN283U0NWV0s0UlBaenQzaW02Q0lVaUlhUTdMSjlIZXNQR2V6SloyNnc2ODVDVnRPNlB0dUN6ajRUbHVPTVdIbGFzWHpxVjhTYTVOcFlMVWdEa056R3c0?oc=5"
+        },
+        {
+          "title": "TMC stock is up with retail investors as the US and Japan team up to challenge China's grip on critical minerals - MSN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi-AFBVV95cUxOaDlFQWxYMDkyVHBIYjBVVDFQVDlKbkdyVjJxSW5zdDJTaGJDVkpEdVFTUVBQWlNPd01ESEFnY0xOMlpWaFBmalBUVnduTl8wTTUtNVZMN0FsVWFDQ3J5Sy1RSE5paUdxZmVRdEtyeWZiU3pGTEt6cG1heHM1azdBLWwtNzhCYXhJQzBVM2M1QzFHcWtGTGU0RW9BLTh0ZEg2UlhNWGx4bU1zNXZwMnlzdGpyRkp5M1JqNTJtREQweEVLQ2NsSjhxQ1k5UDZVYnc4UXFXazFzMm4yZm0yd2xDTEhjVXRsbTEwUldqckZFeUhGWWU1YVUzWg?oc=5"
+        }
+      ],
+      "float_shares": "193.85M",
+      "short_float": "14.34%",
+      "daily_pct": -3.92,
+      "industry": "Materials - Metals & Mining",
+      "technical_status": "Fail (Avg $Vol $35M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "TMC's U.S. mining application progress under new NOAA rules",
+        "discrepancy_note": "Source A (Finviz) contains no news items to confirm or deny the claim. Source B (Google News) article [2] mentions 'U.S. Mining Application Progresses Under New NOAA Rules', which supports the 'potential regulatory progress' aspect of the catalyst, but without confirmation from both sources, the claim remains Unconfirmed."
       }
     }
   ]
