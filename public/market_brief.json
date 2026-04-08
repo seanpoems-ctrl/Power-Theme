@@ -1,57 +1,57 @@
 {
-  "generated_at": "April 08, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "April 08, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6616.85,
-      "change": 5.02,
-      "change_pct": 0.08
+      "price": 6782.81,
+      "change": 165.96,
+      "change_pct": 2.51
     },
     {
       "label": "Nasdaq 100",
-      "price": 24202.37,
-      "change": 10.2,
-      "change_pct": 0.04
+      "price": 24903.17,
+      "change": 700.8,
+      "change_pct": 2.9
     },
     {
       "label": "VIX",
-      "price": 20.34,
-      "change": -5.44,
+      "price": 21.04,
+      "change": -4.74,
       "change_pct": null,
       "zone_label": "Elevated"
     },
     {
       "label": "10Y Yield",
-      "price": 4.34,
-      "change": 0.01,
+      "price": 4.29,
+      "change": -0.05,
       "change_pct": null,
-      "trend_label": "Stable"
+      "trend_label": "Falling"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 56308.42,
-      "change_pct": 5.39
+      "price": 53429.56,
+      "change_pct": 0.03
     },
     "dax": {
       "label": "DAX",
-      "price": 24135.74,
-      "change_pct": 5.3
+      "price": 24080.63,
+      "change_pct": 5.06
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10679.94,
-      "change_pct": 3.2
+      "price": 10608.88,
+      "change_pct": 2.51
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 36.1,
-    "mmth": 51.5,
+    "s5fi": 52.8,
+    "mmth": 57.7,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Global Rally, US Pause, Elevated VIX",
+  "mood": "Broad Risk-On Relief Rally",
   "analysis": {
-    "analysis_para1": "Global markets are exhibiting extraordinary strength, with the Nikkei 225 surging +5.39%, DAX +5.30%, and FTSE 100 +3.20%, signaling a strong risk-on sentiment internationally. While US credit data (BAML HY Spread) is currently unavailable, domestic market breadth remains mixed to cautious. Only 36.1% of S&P 500 stocks are above their 50-day moving average (S5FI), though 51.5% are above their 200-day moving average (MMTH). This suggests a potential disconnect, where strong overseas momentum has yet to fully translate into broad participation across US equities, alongside an elevated VIX at 20.34 indicating underlying caution.",
-    "analysis_para2": "The Mechanical Plan for today involves monitoring whether the significant global market strength translates into sustained upward momentum for US indices, which are currently only marginally positive. Watch for the S&P 500 to either decisively break above yesterday's high for a confirmed bullish continuation, or conversely, a failure to hold current levels could signal a potential divergence. The elevated VIX at 20.34 suggests that any upward moves should be accompanied by broad market participation to be considered robust. Traders should prioritize identifying individual stocks demonstrating strong relative strength and momentum within leading themes, ready to capitalize on either a breakout or to preserve capital on a fade.",
-    "technical_signal": "No reversal pattern confirmed yet. US futures are flat despite robust global rallies, indicating a potential consolidation or divergence rather than a clear reversal setup.",
+    "analysis_para1": "Global markets exhibited a bifurcated but largely positive session, with the DAX surging an impressive +5.06% and the FTSE 100 advancing +2.51%, overshadowing the Nikkei's flat +0.03%. In the US, the backdrop of a falling 10Y Yield to 4.29% provided tailwinds, yet the VIX remains elevated at 21.04, signaling persistent underlying volatility despite today's strong gains. US market breadth, measured by S5FI at 52.8% and MMTH at 57.7%, indicates only a slight majority of stocks are above key moving averages, suggesting the index-level rally may be somewhat concentrated rather than universally broad.",
+    "analysis_para2": "Following today's powerful rally, the mechanical plan involves monitoring the sustainability of this momentum, especially with the S&P 500 now at 6782.81 and the Nasdaq 100 at 24903.17. Key support for the S&P 500 should be watched around the 6700 level for any retest, while the 24500 area is crucial for the Nasdaq 100. A failure to hold these levels on follow-through volume would suggest today's move was a short-covering rally rather than a sustained uptrend. Conversely, decisive breakouts above recent highs on increased volume would confirm bullish intent and signal a potential shift in market character.",
+    "technical_signal": "No reversal pattern confirmed yet. Despite today's significant rally, further confirmation is needed for a sustained trend change.",
     "ticker_intel": [
-      {
-        "ticker": "AXTI",
-        "company": "AXT Inc",
-        "grade": "A+",
-        "reason": "This semiconductor leader boasts an exceptional RS of 99 and a staggering +198.3% 3-month return, making it a high-conviction play in a strong theme."
-      },
       {
         "ticker": "TSEM",
         "company": "Tower Semiconductor Ltd",
+        "grade": "A+",
+        "reason": "TSEM demonstrates exceptional leadership with an RS of 98 and a staggering +49.0% 1-month return, aligning with strong capital rotation into the Semiconductor theme."
+      },
+      {
+        "ticker": "AXTI",
+        "company": "AXT Inc",
         "grade": "A",
-        "reason": "With an RS of 98 and an explosive +49.0% 1-month gain, TSEM demonstrates outstanding short-term momentum within the robust semiconductor sector."
+        "reason": "AXTI commands an impressive RS of 99 and a massive +198.3% 3-month gain, indicating sustained institutional accumulation within the robust Semiconductor sector."
       },
       {
         "ticker": "MRVL",
         "company": "Marvell Technology Inc",
         "grade": "C",
-        "reason": "Despite a strong +37.7% 1-month return, Marvell Technology Inc's RS of 85 is the lowest among candidates, and its +23.0% 3-month performance significantly trails top peers, suggesting relative underperformance within the leading semiconductor theme."
+        "reason": "MRVL exhibits the lowest Relative Strength of 85 among the candidates and its 3-month performance of +23.0% significantly lags peers, indicating underlying weakness despite recent 1-month gains."
       }
     ]
   }
