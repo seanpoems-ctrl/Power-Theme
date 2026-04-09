@@ -40,7 +40,7 @@ jobs:
           restore-keys: pip-scraper-
 
       - name: Install Python deps
-        run: pip install requests beautifulsoup4 yfinance lxml exchange_calendars pandas google-genai tradingview_screener python-dotenv
+        run: pip install requests beautifulsoup4 yfinance lxml exchange_calendars pandas google-genai tradingview_screener python-dotenv ib_insync
 
       - name: Check ET window (9:00 AM – 5:00 PM) + trading day
         id: trading_day
@@ -91,6 +91,8 @@ jobs:
         continue-on-error: true
         env:
           CI: true
+          IBKR_HOST: ${{ secrets.IBKR_HOST }}
+          IBKR_PORT: ${{ secrets.IBKR_PORT }}
         run: |
           python earnings_calendar.py  || echo "earnings_calendar.py failed (non-fatal)"
           python econ_calendar.py      || echo "econ_calendar.py failed (non-fatal)"
@@ -130,6 +132,7 @@ jobs:
         env:
           CI: false
           REACT_APP_FINNHUB_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          REACT_APP_GEMINI_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - uses: actions/configure-pages@v4
         if: steps.trading_day.outputs.is_trading_day == 'true'

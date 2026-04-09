@@ -109,12 +109,19 @@ jobs:
           echo "Gapper failed after 3 attempts"
           exit 1
 
+      - name: Run earnings calendar for gapper strip
+        if: steps.trading_day.outputs.is_trading_day == 'true'
+        run: python earnings_calendar.py
+        env:
+          CI: true
+
+      # 把最新的 gapper_data.json 存回 repo，讓 daily scrape build 也能用到新資料
       - name: Commit gapper data to repo
         if: steps.trading_day.outputs.is_trading_day == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/gapper_data.json
+          git add public/gapper_data.json public/earnings_calendar.json
           git diff --staged --quiet || git commit -m "data: gapper_data $(date -u +%Y-%m-%dT%H:%M) [skip ci]"
           for i in 1 2 3; do git pull --rebase --autostash && git push && break || sleep 5; done
 
@@ -137,6 +144,7 @@ jobs:
         env:
           CI: false
           REACT_APP_FINNHUB_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          REACT_APP_GEMINI_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - uses: actions/configure-pages@v4
         if: steps.trading_day.outputs.is_trading_day == 'true'

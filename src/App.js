@@ -139,6 +139,15 @@ const Dist52wCell = ({ value }) => {
   return <td className={`text-center py-3 px-2 text-[13px] font-mono ${txt}`}>{v.toFixed(1)}%</td>;
 };
 
+/* ──────────────────────────────────────────────────────── HOOKS ── */
+function useHoverDelay(delay = 2000) {
+  const [active, setActive] = useState(false);
+  const timerRef = useRef(null);
+  const onEnter = () => { timerRef.current = setTimeout(() => setActive(true), delay); };
+  const onLeave = () => { clearTimeout(timerRef.current); setActive(false); };
+  return { active, onEnter, onLeave };
+}
+
 const RVolCell = ({ value }) => {
   if (value == null) return <td className="text-center py-3 px-2 text-[13px] text-zinc-600">—</td>;
   const v = parseFloat(value);
@@ -1738,6 +1747,133 @@ const VixGauge = ({ initialVix }) => {
         <p className="text-[10px] leading-relaxed text-zinc-600">{active.impact}</p>
       </div>
 
+    </div>
+  );
+};
+
+/* ──────────────────────────────────────────────── POSITION CALCULATOR ── */
+const PositionCalc = ({ ibkrThemesData }) => {
+  const [equity, setEquity] = React.useState('');
+  const [entry, setEntry] = React.useState('');
+  const [atr, setAtr] = React.useState('');
+  const [riskPct, setRiskPct] = React.useState('1');
+  const [stopStrategy, setStopStrategy] = React.useState('3');
+  const [stopMode, setStopMode] = React.useState('atr');
+  const [manualStop, setManualStop] = React.useState('');
+
+  const accountEquity = ibkrThemesData?.account_equity ?? null;
+  const effectiveEquity = accountEquity != null ? accountEquity : (parseFloat(equity) || 0);
+
+  const e = parseFloat(entry) || 0;
+  const a = parseFloat(atr) || 0;
+  const r = parseFloat(riskPct) || 1;
+
+  const shares = (effectiveEquity > 0 && a > 0)
+    ? Math.floor((effectiveEquity * r / 100) / a)
+    : null;
+
+  let stops = [];
+  if (e > 0) {
+    if (stopMode === 'manual') {
+      const ms = parseFloat(manualStop);
+      if (ms > 0) stops = [ms];
+    } else if (a > 0) {
+      stops = stopStrategy === '3'
+        ? [e - a, e - 2 * a, e - 3 * a]
+        : [e - 1.5 * a, e - 3 * a];
+    }
+  }
+
+  const dollarRisk = shares != null && a > 0 ? shares * a : null;
+  const target2r = e > 0 && a > 0 ? e + 2 * a : null;
+
+  const fmtPrice = v => v != null ? `$${v.toFixed(2)}` : '—';
+  const fmtDollar = v => v != null ? `$${v.toLocaleString('en-US', { maximumFractionDigits: 0 })}` : '—';
+
+  const Tog = ({ active, onClick, children }) => (
+    <button onClick={onClick}
+      className={`flex-1 text-[10px] font-bold py-1 rounded transition-colors ${active ? 'bg-zinc-700 text-white' : 'text-zinc-500 hover:text-zinc-300'}`}>
+      {children}
+    </button>
+  );
+
+  const numInput = (val, onChange, placeholder) => (
+    <input type="number" value={val} onChange={ev => onChange(ev.target.value)} placeholder={placeholder}
+      className="w-full bg-zinc-800/60 border border-zinc-700/50 rounded px-1.5 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"/>
+  );
+
+  return (
+    <div className="bg-zinc-900/60 rounded-xl border border-zinc-800/60 p-3">
+      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.18em] mb-2">Position Calc</div>
+
+      {/* Equity row */}
+      <div className="mb-2">
+        {accountEquity != null ? (
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-zinc-500">Account Equity</span>
+            <span className="text-[12px] font-mono font-bold text-zinc-200">
+              {accountEquity.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })}
+            </span>
+          </div>
+        ) : (
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] text-zinc-500 flex-shrink-0">Equity $</span>
+            <input type="number" value={equity} onChange={ev => setEquity(ev.target.value)} placeholder="e.g. 25000"
+              className="flex-1 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"/>
+          </div>
+        )}
+      </div>
+
+      {/* Entry / ATR / Risk % */}
+      <div className="grid grid-cols-3 gap-1.5 mb-2">
+        <div><div className="text-[9px] text-zinc-600 mb-0.5">Entry</div>{numInput(entry, setEntry, '0.00')}</div>
+        <div><div className="text-[9px] text-zinc-600 mb-0.5">ATR-14</div>{numInput(atr, setAtr, '0.00')}</div>
+        <div><div className="text-[9px] text-zinc-600 mb-0.5">Risk %</div>{numInput(riskPct, setRiskPct, '1')}</div>
+      </div>
+
+      {/* Stop Strategy toggle */}
+      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-1.5">
+        <Tog active={stopStrategy === '3'} onClick={() => setStopStrategy('3')}>3-Stop</Tog>
+        <Tog active={stopStrategy === '2'} onClick={() => setStopStrategy('2')}>2-Stop</Tog>
+      </div>
+
+      {/* Stop Mode toggle */}
+      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-2">
+        <Tog active={stopMode === 'atr'} onClick={() => setStopMode('atr')}>ATR Auto</Tog>
+        <Tog active={stopMode === 'lod'} onClick={() => setStopMode('lod')}>LOD</Tog>
+        <Tog active={stopMode === 'manual'} onClick={() => setStopMode('manual')}>Manual</Tog>
+      </div>
+
+      {/* Manual stop price input */}
+      {stopMode === 'manual' && (
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-[10px] text-zinc-500 flex-shrink-0">Stop $</span>
+          <input type="number" value={manualStop} onChange={ev => setManualStop(ev.target.value)} placeholder="0.00"
+            className="flex-1 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"/>
+        </div>
+      )}
+
+      {/* Results grid */}
+      <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 pt-2 border-t border-zinc-800/60">
+        <div>
+          <div className="text-[9px] text-zinc-600 mb-0.5">Shares</div>
+          <div className="text-[13px] font-mono font-bold text-zinc-100">{shares ?? '—'}</div>
+        </div>
+        {stops.map((s, i) => (
+          <div key={i}>
+            <div className="text-[9px] text-zinc-600 mb-0.5">Stop {i + 1}</div>
+            <div className="text-[13px] font-mono font-bold text-zinc-300">{fmtPrice(s)}</div>
+          </div>
+        ))}
+        <div>
+          <div className="text-[9px] text-zinc-600 mb-0.5">$ at Risk</div>
+          <div className="text-[13px] font-mono font-bold text-red-400">{fmtDollar(dollarRisk)}</div>
+        </div>
+        <div>
+          <div className="text-[9px] text-zinc-600 mb-0.5">2R Target</div>
+          <div className="text-[13px] font-mono font-bold text-emerald-400">{fmtPrice(target2r)}</div>
+        </div>
+      </div>
     </div>
   );
 };
@@ -3765,6 +3901,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
   const [gapperData, setGapperData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState(null);
+  const { active: tvActive, onEnter: tvOnEnter, onLeave: tvOnLeave } = useHoverDelay(2000);
   const [tickerDb, setTickerDb] = useState({});
 
   // Filter state — human-friendly units: PMVol/AvgVol in K, MktCap in $B, DolVol in $M
@@ -3919,7 +4056,8 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                 <td className="py-2 px-1.5 text-center">
                   <span
                     className="font-bold text-zinc-100 text-[13px] hover:text-blue-400 transition-colors cursor-pointer"
-                    onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === g.ticker ? null : { ticker: g.ticker, rect }); }}
+                    onMouseEnter={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered({ ticker: g.ticker, rect }); tvOnEnter(); }}
+                    onMouseLeave={() => { setHovered(null); tvOnLeave(); }}
                   >
                     {g.ticker}
                   </span>
@@ -4025,7 +4163,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
       </div>
       <LeaderColumn ibkrThemesData={ibkrThemesData} gapperData={gapperData} mode="gapper" />
     </div>
-    {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
+    {tvActive && hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
     </>
   );
 };
@@ -4189,6 +4327,17 @@ const CATALYST_CATEGORIES = [
       "added to s&p 500", "removed from s&p 500", "joins s&p 500",
       "added to russell", "removed from russell", "index addition",
       "index removal", "s&p 500 inclusion", "s&p 500 constituent",
+    ],
+  },
+  {
+    key: "analyst",
+    label: "Analyst",
+    color: "text-amber-400 bg-amber-500/10 border-amber-500/30",
+    keywords: [
+      "upgrades to buy", "upgrades to overweight", "upgrades to outperform",
+      "downgrades to sell", "downgrades to underweight", "downgrades to underperform",
+      "downgrades to neutral", "initiates with buy", "initiates with overweight",
+      "raises price target to", "lowers price target to",
     ],
   },
   {
@@ -5493,6 +5642,7 @@ export default function App() {
   const nextFetchAt = useRef(null);
   const lastGeneratedAt = useRef(null);
   const [macroHover, setMacroHover] = useState(null);
+  const [ibkrData, setIbkrData] = useState(null);
 
   // ── Market store (global macro alerts + reversal) ─────────────────────────
   // Use separate selectors — object selectors create new refs every render → infinite loop
@@ -5625,6 +5775,19 @@ export default function App() {
     };
     fetchNews();
     const id = setInterval(fetchNews, 5 * 60 * 1000);
+    return () => clearInterval(id);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // IBKR themes — poll every 5 min (fallback to null when TWS offline)
+  useEffect(() => {
+    const fetchIbkr = () => {
+      fetch(process.env.PUBLIC_URL + "/ibkr_themes.json?v=" + Date.now())
+        .then(r => r.ok ? r.json() : null)
+        .then(d => { if (d) setIbkrData(d); })
+        .catch(() => {});
+    };
+    fetchIbkr();
+    const id = setInterval(fetchIbkr, 5 * 60 * 1000);
     return () => clearInterval(id);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -5959,6 +6122,7 @@ const filtered = useMemo(() => {
           <div className="flex items-stretch gap-6 mb-2">
             <div className="w-[300px] flex-shrink-0 flex flex-col gap-4">
               <VixGauge initialVix={data?.vix}/>
+              <PositionCalc ibkrThemesData={ibkrData}/>
               <ScannerBriefFeed briefData={briefData} newsData={newsData}/>
             </div>
             {/* Right: Leaderboard */}
