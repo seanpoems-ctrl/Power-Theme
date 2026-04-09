@@ -564,7 +564,125 @@ const IbkrSourceBadge = ({ source }) => {
   );
 };
 
-const IbkrLeaderboard = ({ ibkrThemesData, onTickerHover }) => {
+const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData }) => {
+  const fmtMktCap = (v) => {
+    if (!v) return '—';
+    if (v >= 1e12) return `$${(v/1e12).toFixed(1)}T`;
+    if (v >= 1e9)  return `$${(v/1e9).toFixed(1)}B`;
+    if (v >= 1e6)  return `$${(v/1e6).toFixed(0)}M`;
+    return `$${v}`;
+  };
+  const setupCls = (label) => {
+    if (label === 'Flag') return 'text-amber-400 bg-amber-500/10 border-amber-500/30';
+    if (label === 'Base') return 'text-emerald-400 bg-emerald-500/10 border-emerald-500/30';
+    if (label === 'Watch') return 'text-blue-400 bg-blue-500/10 border-blue-500/30';
+    return 'text-zinc-500 bg-zinc-800/60 border-zinc-700/40';
+  };
+
+  const { themeName, stocks, themeRS, analysis } = useMemo(() => {
+    const name = spotlightThemeName
+      || (lbView === 'ibkr' ? ibkrThemesData?.power_themes?.[0]?.name : data?.themes?.[0]?.name)
+      || null;
+    if (!name) return { themeName: null, stocks: [], themeRS: null, analysis: null };
+
+    if (lbView === 'ibkr') {
+      const pt = (ibkrThemesData?.power_themes || []).find(t => t.name === name);
+      if (!pt) return { themeName: name, stocks: [], themeRS: null, analysis: null };
+      return {
+        themeName: name,
+        stocks: (pt.leaders || []).map(l => ({ ...l, float_shares: null, short_pct: null })),
+        themeRS: pt.theme_rs,
+        analysis: null,
+      };
+    }
+
+    const theme = (data?.themes || []).find(t => t.name === name);
+    if (!theme) return { themeName: name, stocks: [], themeRS: null, analysis: null };
+    const allStocks = (theme.subthemes || []).flatMap(s => s.stocks || []);
+    const sorted = [...allStocks].sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0)).slice(0, 10);
+    const avgRS = sorted.length ? Math.round(sorted.reduce((s, x) => s + (x.rs_52w || 0), 0) / sorted.length) : null;
+    const topAnalysis = sorted[0]?.analysis_details || sorted[0]?.reasoning || null;
+    return { themeName: name, stocks: sorted, themeRS: avgRS, analysis: topAnalysis };
+  }, [spotlightThemeName, lbView, data, ibkrThemesData]);
+
+  if (!themeName) return null;
+
+  return (
+    <div className="mb-4 bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
+      <div className="flex items-center gap-2 mb-3">
+        <span className="text-[13px] font-semibold text-emerald-400">
+          ✦ Thematic Spotlight — {themeName}{themeRS != null ? ` · RS ${themeRS}` : ''}
+        </span>
+        {lbView === 'ibkr' && (
+          <span className={`px-1.5 py-0.5 text-[10px] font-bold rounded border font-mono ${ibkrThemesData?.data_source === 'ibkr' ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/40' : 'bg-orange-500/15 text-orange-400 border-orange-500/40'}`}>
+            {ibkrThemesData?.data_source === 'ibkr' ? '● LIVE' : '◐ DELAYED'}
+          </span>
+        )}
+      </div>
+
+      {analysis && (
+        <div className="mb-3 border border-emerald-800/40 bg-emerald-900/10 rounded-lg p-3">
+          <div className="flex items-center gap-1.5 mb-1.5">
+            <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">✦ GEMINI CATALYST</span>
+          </div>
+          <p className="text-[12px] text-zinc-300 leading-relaxed">{analysis}</p>
+        </div>
+      )}
+
+      {stocks.length > 0 ? (
+        <div className="overflow-x-auto">
+          <table className="w-full text-left">
+            <thead>
+              <tr className="border-b border-zinc-800/60">
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Ticker</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Price</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">ADR%</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">RS</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right whitespace-nowrap">Vol Surge</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right whitespace-nowrap">Mkt Cap</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Float</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Short%</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">Gates</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">Setup</th>
+              </tr>
+            </thead>
+            <tbody>
+              {stocks.map(s => {
+                const gp = s.gates_passed ?? 5;
+                const gatesCls = gp === 5 ? 'text-emerald-400' : gp >= 4 ? 'text-yellow-400' : 'text-zinc-500';
+                const rsCls = (s.rs_52w || 0) >= 85 ? 'text-emerald-400' : (s.rs_52w || 0) >= 70 ? 'text-yellow-400' : 'text-red-400';
+                return (
+                  <tr key={s.ticker} className="border-b border-zinc-800/20 hover:bg-zinc-800/30 transition-colors">
+                    <td className="px-2 py-1.5 text-[12px] font-mono font-semibold text-zinc-100">{s.ticker}</td>
+                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{s.price ? `$${Number(s.price).toFixed(2)}` : '—'}</td>
+                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{s.adr_pct ? `${Number(s.adr_pct).toFixed(1)}%` : '—'}</td>
+                    <td className={`px-2 py-1.5 text-[12px] font-mono font-bold text-right ${rsCls}`}>{s.rs_52w ?? '—'}</td>
+                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">
+                      {(s.vol_surge || s.rvol) ? `${Number(s.vol_surge || s.rvol).toFixed(1)}x` : '—'}
+                    </td>
+                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{fmtMktCap(s.mkt_cap)}</td>
+                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-500 text-right">{s.float_shares ? fmtMktCap(s.float_shares) : '—'}</td>
+                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-500 text-right">{s.short_pct != null ? `${Number(s.short_pct).toFixed(1)}%` : '—'}</td>
+                    <td className={`px-2 py-1.5 text-[12px] font-mono font-bold text-center ${gatesCls}`}>{gp === 5 ? '✓ 5/5' : `${gp}/5`}</td>
+                    <td className="px-2 py-1.5 text-center">
+                      {s.setup_label
+                        ? <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${setupCls(s.setup_label)}`}>{s.setup_label}</span>
+                        : '—'}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      ) : (
+        <div className="text-center py-6 text-zinc-600 text-[12px]">No stocks found for this theme</div>
+      )}
+    </div>
+  );
+};
+
+const IbkrLeaderboard = ({ ibkrThemesData, onTickerHover, onThemeSelect }) => {
   const powerThemes = ibkrThemesData?.power_themes || [];
   const isLive = ibkrThemesData?.data_source === 'ibkr';
 
@@ -626,7 +744,8 @@ const IbkrLeaderboard = ({ ibkrThemesData, onTickerHover }) => {
 
             return (
               <tr key={theme.name}
-                className={`border-b border-zinc-800/30 transition-colors ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
+                onClick={() => onThemeSelect && onThemeSelect(theme.name)}
+                className={`border-b border-zinc-800/30 transition-colors cursor-pointer ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
                 <td className={`px-1 py-2 text-[12px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
                 <td className="px-2 py-2 min-w-0">
                   <div className="text-[12px] font-semibold text-zinc-200 whitespace-nowrap">{theme.name}</div>
@@ -676,7 +795,7 @@ const IbkrLeaderboard = ({ ibkrThemesData, onTickerHover }) => {
   );
 };
 
-const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData }) => {
+const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData, onViewChange, onThemeSelect }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
   const [expanded, setExpanded] = useState(null);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
@@ -791,7 +910,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         <div className="flex-1"></div>
         <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 flex-shrink-0">
           {[{k:"themes",l:"Themes Map"},{k:"industry",l:"Industry"},{k:"ibkr",l:"IBKR Power"}].map(v => (
-            <button key={v.k} onClick={() => { setView(v.k); setExpanded(null); }}
+            <button key={v.k} onClick={() => { setView(v.k); setExpanded(null); onViewChange && onViewChange(v.k); }}
               className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all flex items-center gap-1 ${view === v.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
               {v.l}
               {v.k === "ibkr" && (
@@ -808,6 +927,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
           <IbkrLeaderboard
             ibkrThemesData={ibkrThemesData}
             onTickerHover={(ticker, rect) => setThemeHover(prev => prev?.ticker === ticker ? null : { ticker, rect })}
+            onThemeSelect={onThemeSelect}
           />
         ) : (
         <table className="w-full text-left">
@@ -830,6 +950,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                     if (isIndustryView) { setExpanded(isExpanded ? null : t.name); return; }
                     const rect = e.currentTarget.getBoundingClientRect();
                     setThemeStats(prev => prev?.themeName === t.name ? null : { themeName: t.name, anchorRect: rect });
+                    onThemeSelect && onThemeSelect(t.name);
                   }}
                   className={`border-b border-zinc-800/30 transition-colors cursor-pointer ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
                   <td className={`px-1 py-2 text-[12px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
@@ -2404,7 +2525,1242 @@ const EarningsStrip = ({ earningsData, gapperTickers = new Set(), onTickerClick 
   );
 };
 
-const GapperScanner = ({ earningsData }) => {
+// ── Trade Journal Tab ─────────────────────────────────────────────────────────
+
+const JOURNAL_KEY     = "power_theme_journal";
+const JOURNAL_AI_KEY  = process.env.REACT_APP_GEMINI_KEY || "";
+
+const EMPTY_TRADE = {
+  id: "", date: "", ticker: "", theme: "", entry_price: "", exit_price: "",
+  shares: "", stop_used: "ATR", stop_price: "", pnl_dollars: "", pnl_pct: "",
+  r_multiple: "", grade: "", notes: "",
+};
+
+function loadTrades() {
+  try { return JSON.parse(localStorage.getItem(JOURNAL_KEY) || "[]"); } catch { return []; }
+}
+function saveTrades(arr) {
+  try { localStorage.setItem(JOURNAL_KEY, JSON.stringify(arr)); } catch { /* quota */ }
+}
+function newId() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+
+function calcDerived(t) {
+  const entry = parseFloat(t.entry_price);
+  const exit  = parseFloat(t.exit_price);
+  const sh    = parseFloat(t.shares);
+  const stop  = parseFloat(t.stop_price);
+  const out   = { ...t };
+  if (!isNaN(entry) && !isNaN(exit) && !isNaN(sh)) {
+    out.pnl_dollars = ((exit - entry) * sh).toFixed(2);
+    out.pnl_pct     = (((exit - entry) / entry) * 100).toFixed(2);
+  }
+  if (!isNaN(entry) && !isNaN(stop) && Math.abs(entry - stop) > 0 &&
+      !isNaN(parseFloat(out.pnl_dollars))) {
+    const risk = Math.abs(entry - stop) * (isNaN(sh) ? 1 : sh);
+    out.r_multiple = risk > 0 ? (parseFloat(out.pnl_dollars) / risk).toFixed(2) : "";
+  }
+  return out;
+}
+
+const STOP_OPTS = ["ATR", "LOD", "Manual"];
+const GRADE_OPTS = ["A", "B", "C", "D"];
+const GRADE_CLS = { A: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30", B: "text-blue-400 bg-blue-500/10 border-blue-500/30", C: "text-amber-400 bg-amber-500/10 border-amber-500/30", D: "text-red-400 bg-red-500/10 border-red-500/30" };
+
+const InlineSelect = ({ value, options, onChange, placeholder, cls }) => {
+  const [editing, setEditing] = useState(false);
+  if (!editing) return (
+    <span onClick={() => setEditing(true)} className={`cursor-pointer hover:opacity-70 transition-opacity ${cls || "text-zinc-400"} text-[11px]`}>
+      {value || <span className="text-zinc-700 italic">{placeholder || "—"}</span>}
+    </span>
+  );
+  return (
+    <select autoFocus value={value || ""} onBlur={() => setEditing(false)}
+      onChange={e => { onChange(e.target.value); setEditing(false); }}
+      className="text-[11px] bg-zinc-800 border border-zinc-600 rounded px-1 py-0.5 text-zinc-200 outline-none">
+      <option value="">—</option>
+      {options.map(o => <option key={o} value={o}>{o}</option>)}
+    </select>
+  );
+};
+
+const InlineText = ({ value, onChange, placeholder, mono, cls }) => {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft]     = useState(value || "");
+  if (!editing) return (
+    <span onClick={() => { setDraft(value || ""); setEditing(true); }}
+      className={`cursor-pointer hover:opacity-70 transition-opacity ${cls || "text-zinc-400"} text-[11px] ${mono ? "font-mono" : ""} whitespace-normal break-words max-w-[160px] block`}>
+      {value || <span className="text-zinc-700 italic">{placeholder || "—"}</span>}
+    </span>
+  );
+  return (
+    <input autoFocus value={draft} onChange={e => setDraft(e.target.value)}
+      onBlur={() => { onChange(draft); setEditing(false); }}
+      onKeyDown={e => { if (e.key === "Enter") { onChange(draft); setEditing(false); } if (e.key === "Escape") setEditing(false); }}
+      className="text-[11px] bg-zinc-800 border border-zinc-600 rounded px-1.5 py-0.5 text-zinc-200 outline-none w-full min-w-[80px]"
+      placeholder={placeholder}/>
+  );
+};
+
+const TradeJournalTab = ({ data }) => {
+  const [trades, setTrades]         = useState(() => loadTrades());
+  const [filter, setFilter]         = useState("all");
+  const [showForm, setShowForm]     = useState(false);
+  const [draft, setDraft]           = useState({ ...EMPTY_TRADE, id: newId() });
+  const [aiResult, setAiResult]     = useState(null);
+  const [aiLoading, setAiLoading]   = useState(false);
+
+  const persist = (arr) => { setTrades(arr); saveTrades(arr); };
+
+  const updateField = (id, field, value) => {
+    const updated = trades.map(t => t.id === id ? calcDerived({ ...t, [field]: value }) : t);
+    persist(updated);
+  };
+
+  const addTrade = () => {
+    const filled = calcDerived({ ...draft, id: draft.id || newId() });
+    persist([filled, ...trades]);
+    setDraft({ ...EMPTY_TRADE, id: newId() });
+    setShowForm(false);
+  };
+
+  const deleteTrade = (id) => { if (window.confirm("Delete this trade?")) persist(trades.filter(t => t.id !== id)); };
+
+  // ── Summary cards ────────────────────────────────────────────────────────────
+  const closed = trades.filter(t => t.exit_price !== "" && t.exit_price != null);
+  const open   = trades.filter(t => !t.exit_price);
+  const today  = new Date();
+  const mtd    = closed.filter(t => {
+    if (!t.date) return false;
+    const d = new Date(t.date);
+    return d.getFullYear() === today.getFullYear() && d.getMonth() === today.getMonth();
+  });
+  const pnlMTD   = mtd.reduce((s, t) => s + (parseFloat(t.pnl_dollars) || 0), 0);
+  const rMults   = closed.map(t => parseFloat(t.r_multiple)).filter(v => !isNaN(v) && v !== 0);
+  const avgR     = rMults.length ? (rMults.reduce((a, v) => a + v, 0) / rMults.length) : null;
+  const holdDays = closed.map(t => {
+    if (!t.date || !t.exit_date) return null;
+    return (new Date(t.exit_date) - new Date(t.date)) / 86400000;
+  }).filter(v => v != null && v >= 0);
+  const avgHold  = holdDays.length ? (holdDays.reduce((a, v) => a + v, 0) / holdDays.length) : null;
+
+  // ── Filtered trades ──────────────────────────────────────────────────────────
+  const visible = trades.filter(t => {
+    const r = parseFloat(t.r_multiple);
+    if (filter === "winners") return !isNaN(r) && r > 0;
+    if (filter === "losers")  return !isNaN(r) && r < 0;
+    if (filter === "open")    return !t.exit_price;
+    return true;
+  });
+
+  // ── Performance by theme ─────────────────────────────────────────────────────
+  const byTheme = useMemo(() => {
+    const m = {};
+    for (const t of closed) {
+      const th = t.theme || "Unthemed";
+      if (!m[th]) m[th] = { pnl: 0, count: 0, wins: 0 };
+      m[th].pnl   += parseFloat(t.pnl_dollars) || 0;
+      m[th].count += 1;
+      if ((parseFloat(t.r_multiple) || 0) > 0) m[th].wins += 1;
+    }
+    return Object.entries(m).sort((a, b) => b[1].pnl - a[1].pnl);
+  }, [trades]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ── Gemini analysis ──────────────────────────────────────────────────────────
+  const runAI = async () => {
+    if (!JOURNAL_AI_KEY) { setAiResult("Set REACT_APP_GEMINI_KEY to enable AI analysis."); return; }
+    setAiLoading(true);
+    try {
+      const last20 = trades.slice(0, 20).map(t => ({
+        ticker: t.ticker, theme: t.theme, stop_used: t.stop_used,
+        pnl_dollars: t.pnl_dollars, r_multiple: t.r_multiple, grade: t.grade,
+      }));
+      const url  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${JOURNAL_AI_KEY}`;
+      const prompt = `You are a trading coach analysing a trader's journal. Given the last 20 trades as JSON, provide: (1) Win rate and avg R-multiple by theme, (2) avg R-multiple by stop mode (ATR / LOD / Manual), (3) a concise one-paragraph actionable recommendation. Be specific.\n\nTrades:\n${JSON.stringify(last20, null, 2)}`;
+      const body = { contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.3, maxOutputTokens: 400 } };
+      const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      const json = await res.json();
+      setAiResult(json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "No response from Gemini.");
+    } catch (e) {
+      setAiResult("Error calling Gemini: " + e.message);
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
+  // ── Row bg ────────────────────────────────────────────────────────────────────
+  const rowBg = (t) => {
+    if (!t.exit_price) return "bg-blue-500/5 hover:bg-blue-500/10";
+    const r = parseFloat(t.r_multiple);
+    if (!isNaN(r) && r > 0) return "bg-emerald-500/5 hover:bg-emerald-500/8";
+    if (!isNaN(r) && r < 0) return "bg-red-500/5 hover:bg-red-500/8";
+    return "hover:bg-zinc-800/30";
+  };
+
+  // Theme options from thematic_data for the form
+  const themeOptions = useMemo(() => {
+    const names = (data?.themes || []).map(t => t.name);
+    const extra = [...new Set(trades.map(t => t.theme).filter(Boolean))];
+    return [...new Set([...names, ...extra])].sort();
+  }, [data, trades]);
+
+  const pnlCls  = (v) => { const n = parseFloat(v); return isNaN(n) ? "text-zinc-500" : n > 0 ? "text-emerald-400 font-semibold" : n < 0 ? "text-red-400 font-semibold" : "text-zinc-400"; };
+  const rCls    = (v) => { const n = parseFloat(v); return isNaN(n) ? "text-zinc-500" : n >= 2 ? "text-emerald-400 font-bold" : n > 0 ? "text-emerald-400" : n < 0 ? "text-red-400" : "text-zinc-500"; };
+
+  const TH = ({ children, w }) => (
+    <th className={`px-2 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap ${w || ""}`}>{children}</th>
+  );
+
+  return (
+    <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-8">
+
+      {/* ── Summary cards ────────────────────────────────────────────────── */}
+      <div className="grid grid-cols-4 gap-3 mb-5">
+        {[
+          { label: "Realized P&L MTD", value: pnlMTD !== 0 || mtd.length ? `${pnlMTD >= 0 ? "+" : ""}$${pnlMTD.toFixed(0)}`, cls: pnlMTD >= 0 ? "text-emerald-400" : "text-red-400", sub: `${mtd.length} closed trades` },
+          { label: "Open Positions",   value: open.length,   cls: open.length > 0 ? "text-blue-400" : "text-zinc-400", sub: `${trades.length} total trades` },
+          { label: "Avg R:R",          value: avgR != null ? avgR.toFixed(2) + "R" : "—", cls: avgR != null && avgR >= 1 ? "text-emerald-400" : avgR != null && avgR < 0 ? "text-red-400" : "text-zinc-400", sub: `${rMults.length} closed with R` },
+          { label: "Avg Hold",         value: avgHold != null ? `${avgHold.toFixed(1)}d` : "—", cls: "text-zinc-300", sub: `${holdDays.length} trades with exit date` },
+        ].map(m => (
+          <div key={m.label} className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
+            <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1.5">{m.label}</div>
+            <div className={`text-[22px] font-bold font-mono leading-none mb-1 ${m.cls}`}>{m.value}</div>
+            <div className="text-[11px] text-zinc-600">{m.sub}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* ── Filter tabs + Add button ─────────────────────────────────────── */}
+      <div className="flex items-center gap-3 mb-3">
+        <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+          {[{k:"all",l:"All"},{k:"winners",l:"Winners"},{k:"losers",l:"Losers"},{k:"open",l:"Open"}].map(v => (
+            <button key={v.k} onClick={() => setFilter(v.k)}
+              className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all ${filter === v.k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
+              {v.l}
+            </button>
+          ))}
+        </div>
+        <span className="text-[11px] text-zinc-600">{visible.length} trades</span>
+        <div className="flex-1"/>
+        <button onClick={() => setShowForm(f => !f)}
+          className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded-lg hover:bg-blue-500/30 transition-colors">
+          {showForm ? "✕ Cancel" : "+ Add Trade"}
+        </button>
+      </div>
+
+      {/* ── Trade table ──────────────────────────────────────────────────── */}
+      <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl overflow-hidden mb-5">
+        <div className="overflow-x-auto">
+          <table className="w-full text-left min-w-[1100px]">
+            <thead className="border-b border-zinc-800/60 bg-zinc-900/80">
+              <tr>
+                <TH w="w-8"/>
+                <TH>Date</TH>
+                <TH>Ticker</TH>
+                <TH>Theme</TH>
+                <TH>Entry</TH>
+                <TH>Exit</TH>
+                <TH>Shares</TH>
+                <TH>Stop</TH>
+                <TH>P&L $</TH>
+                <TH>P&L %</TH>
+                <TH>R</TH>
+                <TH>Grade</TH>
+                <TH w="w-48">Notes</TH>
+              </tr>
+            </thead>
+            <tbody>
+              {/* ── Inline add form row ── */}
+              {showForm && (
+                <tr className="border-b border-zinc-700/60 bg-blue-500/5">
+                  <td className="px-2 py-2"/>
+                  {[
+                    { f:"date",        type:"date",   ph:"Date"    },
+                    { f:"ticker",      type:"text",   ph:"NVDA"    },
+                    { f:"theme",       type:"text",   ph:"AI"      },
+                    { f:"entry_price", type:"number", ph:"Entry"   },
+                    { f:"exit_price",  type:"number", ph:"Exit"    },
+                    { f:"shares",      type:"number", ph:"Shares"  },
+                  ].map(({ f, type, ph }) => (
+                    <td key={f} className="px-1.5 py-2">
+                      <input type={type} placeholder={ph} value={draft[f] || ""}
+                        onChange={e => setDraft(d => ({ ...d, [f]: e.target.value }))}
+                        className="w-full text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none focus:border-blue-500/60 min-w-[60px]"/>
+                    </td>
+                  ))}
+                  <td className="px-1.5 py-2">
+                    <select value={draft.stop_used} onChange={e => setDraft(d => ({ ...d, stop_used: e.target.value }))}
+                      className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1 py-1 text-zinc-200 outline-none w-full">
+                      {STOP_OPTS.map(o => <option key={o} value={o}>{o}</option>)}
+                    </select>
+                  </td>
+                  <td className="px-1.5 py-2 text-[11px] text-zinc-500 font-mono" colSpan={3}>auto-calc</td>
+                  <td className="px-1.5 py-2">
+                    <select value={draft.grade} onChange={e => setDraft(d => ({ ...d, grade: e.target.value }))}
+                      className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1 py-1 text-zinc-200 outline-none w-full">
+                      <option value="">—</option>
+                      {GRADE_OPTS.map(o => <option key={o} value={o}>{o}</option>)}
+                    </select>
+                  </td>
+                  <td className="px-1.5 py-2">
+                    <input type="text" placeholder="Notes…" value={draft.notes || ""}
+                      onChange={e => setDraft(d => ({ ...d, notes: e.target.value }))}
+                      className="w-full text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none focus:border-blue-500/60"/>
+                  </td>
+                  <td className="px-1.5 py-2">
+                    <button onClick={addTrade} className="text-[11px] px-2 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded hover:bg-emerald-500/30 transition-colors whitespace-nowrap">
+                      Save
+                    </button>
+                  </td>
+                </tr>
+              )}
+
+              {/* ── Existing trades ── */}
+              {visible.length === 0 ? (
+                <tr><td colSpan={13} className="py-12 text-center text-zinc-600 text-[12px] italic">No trades yet — click "+ Add Trade" to begin</td></tr>
+              ) : visible.map(t => (
+                <tr key={t.id} className={`border-b border-zinc-800/30 transition-colors ${rowBg(t)}`}>
+                  <td className="px-2 py-2">
+                    <button onClick={() => deleteTrade(t.id)} className="text-zinc-700 hover:text-red-400 transition-colors text-[11px]">✕</button>
+                  </td>
+                  <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-500 whitespace-nowrap">{t.date || "—"}</td>
+                  <td className="px-2 py-1.5 text-[12px] font-mono font-semibold text-zinc-100 whitespace-nowrap">{t.ticker || "—"}</td>
+                  <td className="px-2 py-1.5">
+                    <InlineText value={t.theme} onChange={v => updateField(t.id, "theme", v)} placeholder="Theme"/>
+                  </td>
+                  <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">{t.entry_price ? `$${t.entry_price}` : "—"}</td>
+                  <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">{t.exit_price ? `$${t.exit_price}` : <span className="text-blue-400 text-[10px]">Open</span>}</td>
+                  <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-400">{t.shares || "—"}</td>
+                  <td className="px-2 py-1.5">
+                    <InlineSelect value={t.stop_used} options={STOP_OPTS} onChange={v => updateField(t.id, "stop_used", v)}
+                      cls="text-[10px] font-mono text-zinc-500"/>
+                  </td>
+                  <td className={`px-2 py-1.5 text-[11px] font-mono ${pnlCls(t.pnl_dollars)}`}>
+                    {t.pnl_dollars ? `${parseFloat(t.pnl_dollars) >= 0 ? "+" : ""}$${parseFloat(t.pnl_dollars).toFixed(0)}` : "—"}
+                  </td>
+                  <td className={`px-2 py-1.5 text-[11px] font-mono ${pnlCls(t.pnl_pct)}`}>
+                    {t.pnl_pct ? `${parseFloat(t.pnl_pct) >= 0 ? "+" : ""}${parseFloat(t.pnl_pct).toFixed(2)}%` : "—"}
+                  </td>
+                  <td className={`px-2 py-1.5 text-[12px] font-mono font-bold ${rCls(t.r_multiple)}`}>
+                    {t.r_multiple ? `${parseFloat(t.r_multiple) >= 0 ? "+" : ""}${t.r_multiple}R` : "—"}
+                  </td>
+                  <td className="px-2 py-1.5">
+                    <InlineSelect value={t.grade} options={GRADE_OPTS} onChange={v => updateField(t.id, "grade", v)}
+                      cls={`text-[11px] font-bold px-1.5 py-0.5 rounded border leading-none ${GRADE_CLS[t.grade] || "text-zinc-600"}`}/>
+                  </td>
+                  <td className="px-2 py-1.5 min-w-[120px] max-w-[200px]">
+                    <InlineText value={t.notes} onChange={v => updateField(t.id, "notes", v)} placeholder="Add notes…"/>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* ── Performance by theme ─────────────────────────────────────────── */}
+      {byTheme.length > 0 && (
+        <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl overflow-hidden mb-5">
+          <div className="px-4 py-2.5 border-b border-zinc-800/60">
+            <span className="text-[12px] font-semibold text-zinc-300">Performance by Theme</span>
+          </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left">
+              <thead className="border-b border-zinc-800/40">
+                <tr>
+                  {["Theme","Trades","Wins","Win %","Total P&L","Avg P&L"].map(h => (
+                    <th key={h} className="px-3 py-2 text-[10px] font-semibold text-zinc-600 uppercase tracking-wider">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {byTheme.map(([theme, s]) => (
+                  <tr key={theme} className="border-b border-zinc-800/20 hover:bg-zinc-800/20 transition-colors">
+                    <td className="px-3 py-2 text-[12px] font-medium text-zinc-200">{theme}</td>
+                    <td className="px-3 py-2 text-[12px] font-mono text-zinc-400">{s.count}</td>
+                    <td className="px-3 py-2 text-[12px] font-mono text-zinc-400">{s.wins}</td>
+                    <td className="px-3 py-2 text-[12px] font-mono text-zinc-300">{s.count ? `${((s.wins/s.count)*100).toFixed(0)}%` : "—"}</td>
+                    <td className={`px-3 py-2 text-[12px] font-mono font-semibold ${s.pnl >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                      {s.pnl >= 0 ? "+" : ""}${s.pnl.toFixed(0)}
+                    </td>
+                    <td className={`px-3 py-2 text-[12px] font-mono ${s.count ? (s.pnl/s.count >= 0 ? "text-emerald-400" : "text-red-400") : "text-zinc-500"}`}>
+                      {s.count ? `${s.pnl/s.count >= 0 ? "+" : ""}$${(s.pnl/s.count).toFixed(0)}` : "—"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* ── Gemini Journal Analysis ──────────────────────────────────────── */}
+      <div className="border border-emerald-800/40 bg-emerald-900/10 rounded-xl p-4">
+        <div className="flex items-center gap-3 mb-2">
+          <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">✦ GEMINI JOURNAL ANALYSIS</span>
+          <button onClick={runAI} disabled={aiLoading || trades.length === 0}
+            className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/30 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+            {aiLoading ? <><RefreshCw size={10} className="animate-spin"/> Analysing…</> : "Analyse Journal"}
+          </button>
+          {!JOURNAL_AI_KEY && <span className="text-[10px] text-zinc-600">Set REACT_APP_GEMINI_KEY to enable</span>}
+        </div>
+        {aiResult
+          ? <pre className="text-[12px] text-zinc-200 leading-relaxed whitespace-pre-wrap font-sans">{aiResult}</pre>
+          : <p className="text-[12px] text-zinc-600 italic">Click "Analyse Journal" to get AI feedback on your last 20 trades.</p>
+        }
+      </div>
+
+    </div>
+  );
+};
+
+// ── News & Econ Tab ───────────────────────────────────────────────────────────
+
+const NEWS_GEMINI_KEY   = process.env.REACT_APP_GEMINI_KEY || "";
+const NEWS_CACHE_PREFIX = "gemini_news_v1_";
+
+async function fetchGeminiNewsSynthesis(headlines) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${NEWS_GEMINI_KEY}`;
+  const prompt = `You are a concise equity trader. Given these market headlines, write ONE short paragraph (3-4 sentences) synthesizing the key trading implication for today. Be specific about sectors/themes affected.\n\nHeadlines:\n${headlines.map((h, i) => `${i + 1}. ${h}`).join("\n")}`;
+  const body = { contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.4, maxOutputTokens: 200 } };
+  const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  const json = await res.json();
+  return json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
+}
+
+const IMPACT_CFG = {
+  High:   { cls: "bg-red-500/20 text-red-400 border-red-500/30",    dot: "bg-red-400"    },
+  Medium: { cls: "bg-amber-500/20 text-amber-400 border-amber-500/30", dot: "bg-amber-400" },
+  Low:    { cls: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30", dot: "bg-emerald-400" },
+  "🔴":   { cls: "bg-red-500/20 text-red-400 border-red-500/30",    dot: "bg-red-400"    },
+  "🟡":   { cls: "bg-amber-500/20 text-amber-400 border-amber-500/30", dot: "bg-amber-400" },
+  "🟢":   { cls: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30", dot: "bg-emerald-400" },
+};
+
+const SOURCE_CFG = {
+  ibkr:        { cls: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30", label: "IBKR"       },
+  benzinga:    { cls: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",   label: "Benzinga"   },
+  finviz:      { cls: "bg-zinc-700/60 text-zinc-400 border-zinc-600/40",         label: "Finviz"     },
+  tradingview: { cls: "bg-blue-500/20 text-blue-400 border-blue-500/30",         label: "TV"         },
+  google:      { cls: "bg-zinc-700/60 text-zinc-400 border-zinc-600/40",         label: "Google"     },
+};
+
+const EconEventRow = ({ event }) => {
+  const impact = event.impact || "Low";
+  const cfg    = IMPACT_CFG[impact] || IMPACT_CFG.Low;
+  return (
+    <div className="flex items-start gap-3 p-3 bg-zinc-900/60 border border-zinc-800/60 rounded-xl flex-shrink-0 min-w-[200px] max-w-[260px]">
+      <div className={`w-2 h-2 rounded-full flex-shrink-0 mt-1 ${cfg.dot}`}/>
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-1.5 mb-0.5 flex-wrap">
+          {event.time_et && <span className="text-[10px] font-mono text-zinc-500">{event.time_et}</span>}
+          <span className={`text-[9px] font-bold px-1 py-0.5 rounded border leading-none ${cfg.cls}`}>{impact}</span>
+          {event.currency && event.currency !== "USD" && (
+            <span className="text-[9px] text-zinc-600 bg-zinc-800/60 px-1 py-0.5 rounded border border-zinc-700/40 leading-none">{event.currency}</span>
+          )}
+        </div>
+        <div className="text-[12px] font-medium text-zinc-200 leading-tight mb-1">{event.event || event.name}</div>
+        {(event.forecast != null || event.previous != null) && (
+          <div className="flex items-center gap-2 text-[10px]">
+            {event.forecast != null && <span className="text-zinc-500">Fcst: <span className="text-zinc-300 font-mono">{event.forecast}</span></span>}
+            {event.previous != null && <span className="text-zinc-600">Prev: <span className="text-zinc-500 font-mono">{event.previous}</span></span>}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+const NewsEconTab = ({ data, econData, earningsData, newsData }) => {
+  const [gapperData, setGapperData]   = useState(null);
+  const [calView, setCalView]         = useState("today");   // "today" | "week" | "earnings"
+  const [activeThemes, setActiveThemes] = useState(new Set()); // empty = show all
+
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/gapper_data.json`)
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d) setGapperData(d); })
+      .catch(() => {});
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const [synthText, setSynthText]     = useState(null);
+  const [synthLoading, setSynthLoading] = useState(false);
+  const todayKey = new Date().toISOString().slice(0, 10);
+
+  // ── Calendar data ────────────────────────────────────────────────────────────
+  const todayEvents = useMemo(() => {
+    const today = new Date().toISOString().slice(0, 10);
+    return (econData?.today || []).filter(e => !e.date || e.date === today);
+  }, [econData]);
+
+  const weekEvents = useMemo(() => {
+    const now     = new Date();
+    const cutoff  = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+    const today   = now.toISOString().slice(0, 10);
+    const all     = [...(econData?.today || []), ...(econData?.upcoming || [])];
+    return all.filter(e => e.date && e.date >= today && e.date <= cutoff);
+  }, [econData]);
+
+  // ── News feed — aggregate from gapper headlines ──────────────────────────────
+  const allHeadlines = useMemo(() => {
+    const rows = [];
+    for (const g of (gapperData?.gappers || [])) {
+      const theme  = g.category || g.theme || "";
+      const source = g.news_source || "google";
+      for (const h of (g.headlines || [])) {
+        rows.push({ text: h, ticker: g.ticker, theme, source, ts: null });
+      }
+    }
+    // breaking_news alerts
+    for (const a of (newsData?.alerts || [])) {
+      rows.push({ text: a.headline, ticker: a.ticker || "", theme: a.category || "", source: a.source || "ibkr", ts: a.timestamp || null });
+    }
+    return rows;
+  }, [gapperData, newsData]);
+
+  const filteredNews = useMemo(() => {
+    if (activeThemes.size === 0) return allHeadlines;
+    return allHeadlines.filter(h => activeThemes.has(h.theme));
+  }, [allHeadlines, activeThemes]);
+
+  // ── Theme filter buttons (unique themes from news) ───────────────────────────
+  const newsThemes = useMemo(() => [...new Set(allHeadlines.map(h => h.theme).filter(Boolean))].sort(), [allHeadlines]);
+
+  const toggleTheme = (t) => setActiveThemes(prev => {
+    const next = new Set(prev);
+    next.has(t) ? next.delete(t) : next.add(t);
+    return next;
+  });
+
+  // ── Gemini news synthesis ────────────────────────────────────────────────────
+  useEffect(() => {
+    const cacheKey = NEWS_CACHE_PREFIX + todayKey;
+    const cached   = (() => { try { return localStorage.getItem(cacheKey); } catch { return null; } })();
+    if (cached) { setSynthText(cached); return; }
+    const top3 = allHeadlines.slice(0, 3).map(h => h.text).filter(Boolean);
+    if (!NEWS_GEMINI_KEY || top3.length === 0) return;
+    setSynthLoading(true);
+    fetchGeminiNewsSynthesis(top3)
+      .then(t => {
+        if (t) {
+          setSynthText(t);
+          try { localStorage.setItem(cacheKey, t); } catch { /* quota */ }
+        }
+      })
+      .catch(() => {})
+      .finally(() => setSynthLoading(false));
+  }, [allHeadlines, todayKey]);
+
+  // ── Upcoming earnings (next 7 days) ─────────────────────────────────────────
+  const upcomingEarnings = useMemo(() => {
+    const today  = new Date().toISOString().slice(0, 10);
+    const cutoff = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
+    const rows   = [...(earningsData?.today || []), ...(earningsData?.upcoming || [])];
+    return rows.filter(e => e.date && e.date >= today && e.date <= cutoff)
+               .sort((a, b) => a.date < b.date ? -1 : 1)
+               .slice(0, 20);
+  }, [earningsData]);
+
+  const calEvents = calView === "today" ? todayEvents : calView === "week" ? weekEvents : [];
+
+  // group week events by date for the "week" view header labels
+  const weekByDate = useMemo(() => {
+    if (calView !== "week") return {};
+    const m = {};
+    for (const e of weekEvents) {
+      const d = e.date || "—";
+      (m[d] = m[d] || []).push(e);
+    }
+    return m;
+  }, [weekEvents, calView]);
+
+  return (
+    <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-8 flex items-start gap-5">
+      {/* ── Left main area ────────────────────────────────────────────────── */}
+      <div className="flex-1 min-w-0">
+
+        {/* ── Economic Calendar ────────────────────────────────────────────── */}
+        <div className="mb-5">
+          <div className="flex items-center gap-3 mb-3">
+            <span className="text-[13px] font-semibold text-zinc-200">Economic Calendar</span>
+            <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+              {[{k:"today",l:"Today"},{k:"week",l:"This Week"},{k:"earnings",l:"Earnings"}].map(v => (
+                <button key={v.k} onClick={() => setCalView(v.k)}
+                  className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all ${calView === v.k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
+                  {v.l}
+                </button>
+              ))}
+            </div>
+            {calView !== "earnings" && (
+              <span className="text-[11px] text-zinc-600">{calEvents.length} events</span>
+            )}
+          </div>
+
+          {calView === "earnings" ? (
+            <div className="overflow-x-auto pb-2">
+              {upcomingEarnings.length === 0 ? (
+                <div className="text-[12px] text-zinc-600 italic py-4">No earnings data — run earnings_calendar.py</div>
+              ) : (
+                <div className="flex flex-wrap gap-2">
+                  {upcomingEarnings.map((e, i) => {
+                    const tod = e.time_of_day || e.timing;
+                    const todCls = tod === "BMO" ? "text-sky-400" : tod === "AMC" ? "text-violet-400" : "text-zinc-500";
+                    return (
+                      <div key={i} className="flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-900/60 border border-zinc-800/60 rounded-lg">
+                        <span className="text-[12px] font-mono font-semibold text-zinc-100">{e.ticker}</span>
+                        <span className="text-[10px] text-zinc-600">{e.date?.slice(5)}</span>
+                        {tod && <span className={`text-[9px] font-bold ${todCls}`}>{tod}</span>}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          ) : calView === "week" ? (
+            <div className="flex flex-col gap-3">
+              {Object.entries(weekByDate).map(([date, evts]) => (
+                <div key={date}>
+                  <div className="text-[10px] font-semibold text-zinc-600 uppercase tracking-wider mb-1.5">{date}</div>
+                  <div className="flex gap-2 flex-wrap">
+                    {evts.map((e, i) => <EconEventRow key={i} event={e}/>)}
+                  </div>
+                </div>
+              ))}
+              {Object.keys(weekByDate).length === 0 && (
+                <div className="text-[12px] text-zinc-600 italic py-4">No events — run econ_calendar.py</div>
+              )}
+            </div>
+          ) : (
+            <div className="overflow-x-auto pb-2">
+              {calEvents.length === 0 ? (
+                <div className="text-[12px] text-zinc-600 italic py-4">No events today — run econ_calendar.py</div>
+              ) : (
+                <div className="flex gap-2 pb-1" style={{ minWidth: "max-content" }}>
+                  {calEvents.map((e, i) => <EconEventRow key={i} event={e}/>)}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* ── Theme filter pills ─────────────────────────────────────────── */}
+        {newsThemes.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-3">
+            <button
+              onClick={() => setActiveThemes(new Set())}
+              className={`text-[11px] px-2 py-0.5 rounded-full border transition-colors ${activeThemes.size === 0 ? "bg-blue-500/20 text-blue-400 border-blue-500/30" : "text-zinc-500 border-zinc-700/40 hover:text-zinc-300"}`}>
+              All
+            </button>
+            {newsThemes.map(t => (
+              <button key={t} onClick={() => toggleTheme(t)}
+                className={`text-[11px] px-2 py-0.5 rounded-full border transition-colors ${activeThemes.has(t) ? "bg-blue-500/20 text-blue-400 border-blue-500/30" : "text-zinc-500 border-zinc-700/40 hover:text-zinc-300"}`}>
+                {t}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* ── News feed ─────────────────────────────────────────────────── */}
+        <div className="mb-5">
+          <div className="text-[12px] font-semibold text-zinc-400 mb-2">
+            Headlines
+            <span className="text-zinc-600 font-normal ml-1.5">({filteredNews.length})</span>
+          </div>
+          {filteredNews.length === 0 ? (
+            <div className="text-[12px] text-zinc-600 italic py-6 text-center">No headlines available — run premarket-gapper.yml</div>
+          ) : (
+            <div className="flex flex-col divide-y divide-zinc-800/30">
+              {filteredNews.slice(0, 60).map((item, i) => {
+                const srcCfg = SOURCE_CFG[item.source?.toLowerCase()] || SOURCE_CFG.google;
+                return (
+                  <div key={i} className="flex items-start gap-2.5 py-2.5 hover:bg-zinc-800/20 transition-colors px-1 rounded">
+                    <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border flex-shrink-0 mt-0.5 leading-none ${srcCfg.cls}`}>
+                      {srcCfg.label}
+                    </span>
+                    <p className="text-[12px] text-zinc-300 leading-snug flex-1">{item.text}</p>
+                    <div className="flex flex-col items-end gap-1 flex-shrink-0">
+                      {item.ticker && (
+                        <span className="text-[10px] font-mono font-semibold text-blue-400">{item.ticker}</span>
+                      )}
+                      {item.theme && (
+                        <span className="text-[9px] text-zinc-600 bg-zinc-800/60 px-1.5 py-0.5 rounded border border-zinc-700/40 leading-none whitespace-nowrap">{item.theme}</span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* ── Gemini News Synthesis ─────────────────────────────────────── */}
+        <div className="border border-emerald-800/40 bg-emerald-900/10 rounded-xl p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">✦ GEMINI NEWS SYNTHESIS</span>
+            {synthLoading && <RefreshCw size={10} className="text-emerald-600 animate-spin"/>}
+            {!NEWS_GEMINI_KEY && <span className="text-[10px] text-zinc-600">Set REACT_APP_GEMINI_KEY to enable</span>}
+          </div>
+          {synthText
+            ? <p className="text-[13px] text-zinc-200 leading-relaxed">{synthText}</p>
+            : !synthLoading && <p className="text-[12px] text-zinc-600 italic">{NEWS_GEMINI_KEY ? "Awaiting headlines…" : "API key not configured"}</p>
+          }
+        </div>
+      </div>
+
+      {/* ── Right sidebar ─────────────────────────────────────────────────── */}
+      <div className="w-52 flex-shrink-0 flex flex-col gap-4">
+
+        {/* Upcoming Earnings */}
+        <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Upcoming Earnings · 7d</div>
+          {upcomingEarnings.length === 0 ? (
+            <div className="text-[11px] text-zinc-600 italic">No data</div>
+          ) : (
+            <div className="flex flex-col gap-1.5 max-h-64 overflow-y-auto">
+              {upcomingEarnings.map((e, i) => {
+                const tod = e.time_of_day || e.timing;
+                const todCls = tod === "BMO" ? "text-sky-400" : tod === "AMC" ? "text-violet-400" : "text-zinc-500";
+                return (
+                  <div key={i} className="flex items-center justify-between">
+                    <span className="text-[12px] font-mono font-semibold text-zinc-200">{e.ticker}</span>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[10px] text-zinc-600 font-mono">{e.date?.slice(5)}</span>
+                      {tod && <span className={`text-[9px] font-bold ${todCls}`}>{tod}</span>}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+
+        {/* Theme News Filters */}
+        {newsThemes.length > 0 && (
+          <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Theme News Filters</div>
+            <div className="flex flex-col gap-1">
+              <button
+                onClick={() => setActiveThemes(new Set())}
+                className={`text-left text-[11px] px-2 py-1 rounded transition-colors ${activeThemes.size === 0 ? "bg-blue-500/20 text-blue-400" : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/40"}`}>
+                All themes
+              </button>
+              {newsThemes.map(t => (
+                <button key={t} onClick={() => toggleTheme(t)}
+                  className={`text-left text-[11px] px-2 py-1 rounded transition-colors truncate ${activeThemes.has(t) ? "bg-blue-500/20 text-blue-400" : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/40"}`}>
+                  {t}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Source Priority */}
+        <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Source Priority</div>
+          <div className="flex flex-col gap-1.5">
+            {[
+              { src: "ibkr",        pri: "1st" },
+              { src: "benzinga",    pri: "2nd" },
+              { src: "finviz",      pri: "3rd" },
+              { src: "tradingview", pri: "4th" },
+            ].map(({ src, pri }) => {
+              const cfg = SOURCE_CFG[src];
+              return (
+                <div key={src} className="flex items-center justify-between">
+                  <span className="text-[10px] text-zinc-600">{pri}</span>
+                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border leading-none font-mono ${cfg.cls}`}>{cfg.label}</span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+// ── Market Breadth Tab ────────────────────────────────────────────────────────
+
+const BREADTH_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
+const BREADTH_CACHE_KEY  = "gemini_breadth_v1";
+
+async function fetchGeminiBreadthAnalysis(payload) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${BREADTH_GEMINI_KEY}`;
+  const body = {
+    contents: [{
+      parts: [{
+        text: `You are a concise stock market analyst. Given these market breadth numbers, write exactly 3 sentences: (1) current breadth regime, (2) key risk or opportunity, (3) tactical stance for swing traders. Be direct and specific.\n\nData: ${JSON.stringify(payload)}`,
+      }],
+    }],
+    generationConfig: { temperature: 0.4, maxOutputTokens: 180 },
+  };
+  const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  const json = await res.json();
+  return json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
+}
+
+const GeminiBreathAnalysis = ({ mc, internalsData }) => {
+  const [text, setText] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const todayKey = new Date().toISOString().slice(0, 10);
+
+  useEffect(() => {
+    const cached = (() => { try { const r = JSON.parse(localStorage.getItem(BREADTH_CACHE_KEY)); return r?.date === todayKey ? r.text : null; } catch { return null; } })();
+    if (cached) { setText(cached); return; }
+    if (!BREADTH_GEMINI_KEY || !mc) return;
+    setLoading(true);
+    const payload = {
+      signal:        mc.signal,
+      adv_pct:       mc.adv_dec?.adv_pct,
+      dec_pct:       mc.adv_dec?.dec_pct,
+      new_high:      mc.new_hl?.new_high,
+      new_low:       mc.new_hl?.new_low,
+      above_sma50:   mc.sma50_counts?.above_pct,
+      above_sma200:  mc.sma200_counts?.above_pct,
+      breadth_50d:   mc.breadth_50d,
+      breadth_200d:  mc.breadth_200d,
+      vix:           internalsData?.vix,
+      t2108:         internalsData?.t2108,
+      yield_10y:     internalsData?.yield_10y,
+    };
+    fetchGeminiBreadthAnalysis(payload)
+      .then(t => {
+        if (t) { setText(t); try { localStorage.setItem(BREADTH_CACHE_KEY, JSON.stringify({ date: todayKey, text: t })); } catch { /* quota */ } }
+      })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [mc, internalsData, todayKey]);
+
+  if (!mc) return null;
+
+  return (
+    <div className="mb-4 border border-emerald-800/40 bg-emerald-900/10 rounded-xl p-4">
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">✦ GEMINI BREADTH READ</span>
+        {loading && <RefreshCw size={10} className="text-emerald-600 animate-spin"/>}
+        {!BREADTH_GEMINI_KEY && <span className="text-[10px] text-zinc-600">Set REACT_APP_GEMINI_KEY to enable</span>}
+      </div>
+      {text
+        ? <p className="text-[13px] text-zinc-200 leading-relaxed">{text}</p>
+        : !loading && <p className="text-[12px] text-zinc-600 italic">{BREADTH_GEMINI_KEY ? "Awaiting data…" : "API key not configured"}</p>
+      }
+    </div>
+  );
+};
+
+const MarketBreadthTab = ({ data, internalsData, econData }) => {
+  const mc  = data?.market_condition || {};
+  const adv = mc.adv_dec;
+  const hl  = mc.new_hl;
+  const s50 = mc.sma50_counts;
+  const s200= mc.sma200_counts;
+
+  // ── 8 metric cards ──────────────────────────────────────────────────────────
+  const metrics = [
+    {
+      label: "UP 4%+",
+      value: mc.up4_pct  != null ? `${mc.up4_pct.toFixed(1)}%`  : adv ? `${adv.adv_pct.toFixed(1)}%` : "—",
+      sub:   mc.up4_count != null ? `${mc.up4_count} stocks` : adv ? `${adv.advancing} adv` : null,
+      color: (mc.up4_pct ?? adv?.adv_pct ?? 0) >= 50 ? "text-emerald-400" : "text-red-400",
+    },
+    {
+      label: "DN 4%+",
+      value: mc.dn4_pct  != null ? `${mc.dn4_pct.toFixed(1)}%`  : adv ? `${adv.dec_pct.toFixed(1)}%` : "—",
+      sub:   mc.dn4_count != null ? `${mc.dn4_count} stocks` : adv ? `${adv.declining} dec` : null,
+      color: (mc.dn4_pct ?? adv?.dec_pct ?? 0) >= 25 ? "text-red-400" : "text-zinc-400",
+    },
+    {
+      label: "T2108",
+      value: internalsData?.t2108 != null ? `${internalsData.t2108.toFixed(1)}%` : "—",
+      sub:   internalsData?.t2108 != null
+               ? internalsData.t2108 >= 60 ? "Overbought" : internalsData.t2108 <= 20 ? "Oversold" : "Neutral"
+               : null,
+      color: internalsData?.t2108 >= 60 ? "text-amber-400" : internalsData?.t2108 <= 20 ? "text-emerald-400" : "text-zinc-300",
+    },
+    {
+      label: "S&P 500 Signal",
+      value: mc.signal ? mc.signal.charAt(0).toUpperCase() + mc.signal.slice(1) : "—",
+      sub:   mc.spy?.sma200_pct != null ? `SMA200: ${mc.spy.sma200_pct > 0 ? "+" : ""}${mc.spy.sma200_pct.toFixed(1)}%` : null,
+      color: mc.signal === "green" ? "text-emerald-400" : mc.signal === "yellow" ? "text-amber-400" : mc.signal === "red" ? "text-red-400" : "text-zinc-400",
+    },
+    {
+      label: "SMA50 Above",
+      value: s50?.above_pct != null ? `${s50.above_pct.toFixed(1)}%`
+           : mc.breadth_50d  != null ? `${mc.breadth_50d.toFixed(1)}%`
+           : internalsData?.s5fi_50d != null ? `${internalsData.s5fi_50d.toFixed(1)}%` : "—",
+      sub:   s50?.above != null ? `${s50.above} / ${(s50.above + (s50.below || 0))}` : null,
+      color: (s50?.above_pct ?? mc.breadth_50d ?? internalsData?.s5fi_50d ?? 0) >= 60 ? "text-emerald-400"
+           : (s50?.above_pct ?? mc.breadth_50d ?? internalsData?.s5fi_50d ?? 0) >= 40 ? "text-yellow-400" : "text-red-400",
+    },
+    {
+      label: "SMA200 Above",
+      value: s200?.above_pct != null ? `${s200.above_pct.toFixed(1)}%`
+           : mc.breadth_200d  != null ? `${mc.breadth_200d.toFixed(1)}%`
+           : internalsData?.mmth_200d != null ? `${internalsData.mmth_200d.toFixed(1)}%` : "—",
+      sub:   s200?.above != null ? `${s200.above} / ${(s200.above + (s200.below || 0))}` : null,
+      color: (s200?.above_pct ?? mc.breadth_200d ?? internalsData?.mmth_200d ?? 0) >= 60 ? "text-emerald-400"
+           : (s200?.above_pct ?? mc.breadth_200d ?? internalsData?.mmth_200d ?? 0) >= 40 ? "text-yellow-400" : "text-red-400",
+    },
+    {
+      label: "UP 25% (Qtrly)",
+      value: mc.up25_pct != null ? `${mc.up25_pct.toFixed(1)}%` : hl ? `${hl.nh_pct.toFixed(1)}%` : "—",
+      sub:   mc.up25_count != null ? `${mc.up25_count} stocks` : hl ? `${hl.new_high} new highs` : null,
+      color: (mc.up25_pct ?? hl?.nh_pct ?? 0) >= 20 ? "text-emerald-400" : "text-zinc-400",
+    },
+    {
+      label: "10Y Yield",
+      value: internalsData?.yield_10y != null ? `${internalsData.yield_10y.toFixed(2)}%` : "—",
+      sub:   internalsData?.yield_10y != null
+               ? internalsData.yield_10y >= 4.5 ? "Elevated — risk-off pressure" : internalsData.yield_10y <= 3.8 ? "Low — growth supportive" : "Moderate"
+               : null,
+      color: internalsData?.yield_10y >= 4.5 ? "text-red-400" : internalsData?.yield_10y <= 3.8 ? "text-emerald-400" : "text-zinc-300",
+    },
+  ];
+
+  // ── Right sidebar verdicts ───────────────────────────────────────────────────
+  const sma50Val  = s50?.above_pct ?? mc.breadth_50d ?? internalsData?.s5fi_50d;
+  const sma200Val = s200?.above_pct ?? mc.breadth_200d ?? internalsData?.mmth_200d;
+  const t2108Val  = internalsData?.t2108;
+
+  const shortTermVerdict = (() => {
+    if (mc.signal === "green" && (sma50Val ?? 0) >= 55) return { label: "Bullish", cls: "text-emerald-400", detail: "Breadth expanding, momentum leaders valid" };
+    if (mc.signal === "red"   || (sma50Val ?? 50) < 35) return { label: "Bearish", cls: "text-red-400",     detail: "Breadth contracting, avoid new longs" };
+    return { label: "Neutral", cls: "text-yellow-400", detail: "Mixed signals — selective entries only" };
+  })();
+  const quarterlyVerdict = (() => {
+    if ((sma200Val ?? 0) >= 65 && mc.signal !== "red") return { label: "Stage 2 Uptrend", cls: "text-emerald-400", detail: "Majority of S&P above 200D MA" };
+    if ((sma200Val ?? 50) < 40) return { label: "Stage 4 Downtrend", cls: "text-red-400", detail: "Broad distribution, cash preservation" };
+    return { label: "Transition Zone", cls: "text-yellow-400", detail: "Trend undefined — reduce size" };
+  })();
+  const t2108Verdict = (() => {
+    if (t2108Val == null) return { label: "N/A", cls: "text-zinc-600", detail: "Data unavailable" };
+    if (t2108Val >= 70) return { label: "Overbought", cls: "text-amber-400", detail: `${t2108Val.toFixed(1)}% — expect mean reversion` };
+    if (t2108Val <= 20) return { label: "Oversold", cls: "text-emerald-400", detail: `${t2108Val.toFixed(1)}% — watch for reversal` };
+    return { label: "Neutral", cls: "text-zinc-300", detail: `${t2108Val.toFixed(1)}% — no extreme` };
+  })();
+
+  // ── Macro risk flags from econData ──────────────────────────────────────────
+  const macroFlags = useMemo(() => {
+    const today = new Date().toISOString().slice(0, 10);
+    const events = [...(econData?.today || []), ...(econData?.upcoming || [])]
+      .filter(e => e.date === today && (e.impact === "High" || e.impact === "🔴") && (e.currency === "USD" || !e.currency));
+    return events.slice(0, 5);
+  }, [econData]);
+
+  // ── Leading themes ───────────────────────────────────────────────────────────
+  const leadingThemes = useMemo(() => {
+    const rankings = data?.finviz_theme_rankings || data?.theme_rankings || [];
+    return [...rankings]
+      .filter(t => t.perf_1d != null)
+      .sort((a, b) => (b.perf_1d || 0) - (a.perf_1d || 0))
+      .slice(0, 5);
+  }, [data]);
+
+  // ── Internals block ──────────────────────────────────────────────────────────
+  const internals = [
+    { label: "VIX",    value: internalsData?.vix      != null ? internalsData.vix.toFixed(2)      : "—", color: internalsData?.vix >= 25 ? "text-red-400" : internalsData?.vix <= 15 ? "text-emerald-400" : "text-zinc-300" },
+    { label: "TICK",   value: internalsData?.tick     != null ? internalsData.tick.toFixed(0)     : "—", color: internalsData?.tick > 600 ? "text-emerald-400" : internalsData?.tick < -600 ? "text-red-400" : "text-zinc-300" },
+    { label: "TRIN",   value: internalsData?.trin     != null ? internalsData.trin.toFixed(2)     : "—", color: internalsData?.trin > 1.5 ? "text-red-400" : internalsData?.trin < 0.7 ? "text-emerald-400" : "text-zinc-300" },
+    { label: "S5FI",   value: internalsData?.s5fi_50d  != null ? `${internalsData.s5fi_50d.toFixed(1)}%`  : mc.breadth_50d  != null ? `${mc.breadth_50d.toFixed(1)}%`  : "—", color: "text-zinc-300" },
+    { label: "MMTH",   value: internalsData?.mmth_200d != null ? `${internalsData.mmth_200d.toFixed(1)}%` : mc.breadth_200d != null ? `${mc.breadth_200d.toFixed(1)}%` : "—", color: "text-zinc-300" },
+    { label: "10Y",    value: internalsData?.yield_10y != null ? `${internalsData.yield_10y.toFixed(2)}%` : "—", color: internalsData?.yield_10y >= 4.5 ? "text-red-400" : "text-zinc-300" },
+  ];
+
+  // ── Breadth bar table rows ───────────────────────────────────────────────────
+  const breadthRows = [
+    adv  && { label: "Advancing / Declining", leftPct: adv.adv_pct,  rightPct: adv.dec_pct,  leftCount: adv.advancing,  rightCount: adv.declining },
+    hl   && { label: "New High / New Low",    leftPct: hl.nh_pct,   rightPct: hl.nl_pct,   leftCount: hl.new_high,    rightCount: hl.new_low },
+    s50  && { label: "Above SMA50",           leftPct: s50.above_pct, rightPct: s50.below_pct, leftCount: s50.above, rightCount: s50.below },
+    s200 && { label: "Above SMA200",          leftPct: s200.above_pct, rightPct: s200.below_pct, leftCount: s200.above, rightCount: s200.below },
+  ].filter(Boolean);
+
+  return (
+    <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-8 flex items-start gap-5">
+      {/* ── Left main area ────────────────────────────────────────────────── */}
+      <div className="flex-1 min-w-0">
+        <GeminiBreathAnalysis mc={mc} internalsData={internalsData} />
+
+        {/* 8 metric cards — 4×2 grid */}
+        <div className="grid grid-cols-4 gap-3 mb-5">
+          {metrics.map(m => (
+            <div key={m.label} className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+              <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1.5">{m.label}</div>
+              <div className={`text-[22px] font-bold font-mono leading-none mb-1 ${m.color}`}>{m.value}</div>
+              {m.sub && <div className="text-[11px] text-zinc-600">{m.sub}</div>}
+            </div>
+          ))}
+        </div>
+
+        {/* Breadth bar table */}
+        {breadthRows.length > 0 && (
+          <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl overflow-hidden mb-5">
+            <div className="px-4 py-2.5 border-b border-zinc-800/60">
+              <span className="text-[12px] font-semibold text-zinc-300">Market Breadth — NYSE / S&P 500</span>
+              {data?.last_updated && <span className="text-[11px] text-zinc-600 ml-2">{data.last_updated}</span>}
+            </div>
+            <div className="divide-y divide-zinc-800/40">
+              {breadthRows.map(row => {
+                const lp = row.leftPct ?? 0;
+                const rp = row.rightPct ?? 0;
+                return (
+                  <div key={row.label} className="px-4 py-3">
+                    <div className="flex justify-between items-baseline mb-1.5">
+                      <span className="text-[12px] text-zinc-400">{row.label}</span>
+                      <span className="text-[11px] text-zinc-600">
+                        <span className="text-emerald-400 font-mono font-semibold">{lp.toFixed(1)}%</span>
+                        {row.leftCount != null && <span className="text-zinc-600"> ({row.leftCount})</span>}
+                        <span className="mx-1.5 text-zinc-700">/</span>
+                        <span className="text-red-400 font-mono font-semibold">{rp.toFixed(1)}%</span>
+                        {row.rightCount != null && <span className="text-zinc-600"> ({row.rightCount})</span>}
+                      </span>
+                    </div>
+                    <div className="flex h-2 rounded-full overflow-hidden gap-0.5">
+                      <div className="bg-emerald-500/70 rounded-l-full transition-all" style={{ width: `${lp}%` }}/>
+                      <div className="bg-red-500/70 rounded-r-full transition-all" style={{ width: `${rp}%` }}/>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* Spy / QQQ index cards */}
+        {(mc.spy || mc.qqq) && (
+          <div className="grid grid-cols-2 gap-3 mb-5">
+            {[["SPY", mc.spy], ["QQQ", mc.qqq]].map(([name, idx]) => idx && (
+              <div key={name} className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
+                <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-2">{name}</div>
+                <div className="grid grid-cols-3 gap-2">
+                  {[
+                    { k: "sma50_pct",  l: "vs SMA50" },
+                    { k: "sma200_pct", l: "vs SMA200" },
+                    { k: "ema10_pct",  l: "vs EMA10" },
+                  ].map(({ k, l }) => idx[k] != null && (
+                    <div key={k}>
+                      <div className="text-[9px] text-zinc-600 mb-0.5">{l}</div>
+                      <div className={`text-[13px] font-mono font-bold ${idx[k] > 0 ? "text-emerald-400" : "text-red-400"}`}>
+                        {idx[k] > 0 ? "+" : ""}{idx[k].toFixed(2)}%
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* ── Right sidebar ─────────────────────────────────────────────────── */}
+      <div className="w-52 flex-shrink-0 flex flex-col gap-4">
+
+        {/* Daily Brief cards */}
+        <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2.5">Daily Brief</div>
+          <div className="flex flex-col gap-2.5">
+            {[
+              { label: "Short-term",  verdict: shortTermVerdict },
+              { label: "Quarterly",   verdict: quarterlyVerdict },
+              { label: "T2108",       verdict: t2108Verdict },
+            ].map(({ label, verdict }) => (
+              <div key={label}>
+                <div className="text-[10px] text-zinc-600 mb-0.5">{label}</div>
+                <div className={`text-[12px] font-semibold ${verdict.cls} leading-tight`}>{verdict.label}</div>
+                <div className="text-[10px] text-zinc-600 leading-tight mt-0.5">{verdict.detail}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Internals block */}
+        <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Internals</div>
+          <div className="flex flex-col gap-1">
+            {internals.map(({ label, value, color }) => (
+              <div key={label} className="flex items-center justify-between">
+                <span className="text-[11px] text-zinc-500">{label}</span>
+                <span className={`text-[12px] font-mono font-semibold ${color}`}>{value}</span>
+              </div>
+            ))}
+          </div>
+          {internalsData?.generated_at && (
+            <div className="text-[9px] text-zinc-700 mt-2 border-t border-zinc-800/40 pt-1.5">
+              {new Date(internalsData.generated_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+            </div>
+          )}
+        </div>
+
+        {/* Leading Themes */}
+        {leadingThemes.length > 0 && (
+          <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Leading Themes · 1D</div>
+            <div className="flex flex-col gap-1.5">
+              {leadingThemes.map((t, i) => (
+                <div key={t.name} className="flex items-center gap-1.5">
+                  <span className="text-[10px] text-zinc-700 font-mono w-4 text-right">{i + 1}</span>
+                  <span className="text-[11px] text-zinc-300 flex-1 truncate leading-tight">{t.name}</span>
+                  <span className={`text-[11px] font-mono font-bold flex-shrink-0 ${(t.perf_1d || 0) > 0 ? "text-emerald-400" : "text-red-400"}`}>
+                    {(t.perf_1d || 0) > 0 ? "+" : ""}{(t.perf_1d || 0).toFixed(1)}%
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Macro Risk Flags */}
+        <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Macro Risk · Today</div>
+          {macroFlags.length > 0 ? (
+            <div className="flex flex-col gap-2">
+              {macroFlags.map((e, i) => (
+                <div key={i} className="flex items-start gap-1.5">
+                  <span className="text-[9px] font-bold text-red-400 mt-0.5 flex-shrink-0">●</span>
+                  <div>
+                    <div className="text-[11px] text-zinc-300 leading-tight">{e.event || e.name}</div>
+                    {e.time && <div className="text-[9px] text-zinc-600">{e.time} ET</div>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="text-[11px] text-zinc-600 italic">No high-impact USD events today</div>
+          )}
+        </div>
+
+      </div>
+    </div>
+  );
+};
+
+const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
+  // mode: "scanner" (ibkr power leaders) | "gapper" (gate-passing gappers + peers)
+  const hoverTimer = useRef(null);
+  const [hovered, setHovered] = useState(null);
+
+  const startHover = (ticker, rect) => {
+    hoverTimer.current = setTimeout(() => setHovered({ ticker, rect }), 2000);
+  };
+  const cancelHover = () => {
+    clearTimeout(hoverTimer.current);
+  };
+
+  const leaders = useMemo(() => {
+    if (mode === "gapper") {
+      const gappers = gapperData?.gappers || [];
+      const rows = [];
+      const seen = new Set();
+      for (const g of gappers) {
+        if (g.meets_all_gates) {
+          if (!seen.has(g.ticker)) { seen.add(g.ticker); rows.push({ ticker: g.ticker, rs: g.rs_52w ?? null, isPeer: false }); }
+          for (const p of (g.peer_tickers || [])) {
+            if (!seen.has(p)) { seen.add(p); rows.push({ ticker: p, rs: null, isPeer: true }); }
+          }
+        }
+      }
+      return rows.slice(0, 12);
+    }
+    // scanner mode: collect all leaders that pass all 5 gates
+    const rows = [];
+    const seen = new Set();
+    for (const pt of (ibkrThemesData?.power_themes || [])) {
+      for (const l of (pt.leaders || [])) {
+        if ((l.gates_passed ?? 0) === 5 && !seen.has(l.ticker)) {
+          seen.add(l.ticker);
+          rows.push({ ticker: l.ticker, rs: l.rs_52w ?? null, isPeer: false });
+        }
+      }
+    }
+    return rows.sort((a, b) => (b.rs ?? 0) - (a.rs ?? 0)).slice(0, 12);
+  }, [ibkrThemesData, gapperData, mode]);
+
+  const isLive = ibkrThemesData?.data_source === "ibkr";
+  const dataSource = ibkrThemesData?.data_source || null;
+
+  return (
+    <div className="w-48 flex-shrink-0 flex flex-col gap-0 bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3 self-start sticky top-[60px]">
+      {/* Header */}
+      <div className="mb-2">
+        <div className="text-[12px] font-semibold text-zinc-200 mb-0.5">
+          {mode === "gapper" ? "Gate Leaders" : "Leaders — All Themes"}
+        </div>
+        <div className="text-[9px] text-zinc-600 leading-tight">
+          {mode === "gapper"
+            ? "Gappers passing all 5 gates + peers"
+            : "RS>85 · Price>$12 · Vol>$100M · Cap>$2B · ADR≥4%"}
+        </div>
+      </div>
+
+      {/* Leaders list */}
+      <div className="flex flex-col gap-0.5 mb-3">
+        {leaders.length === 0 ? (
+          <div className="text-[11px] text-zinc-600 py-2 text-center">No qualifying leaders</div>
+        ) : leaders.map(({ ticker, rs, isPeer }) => {
+          const rsCls = rs != null && rs >= 90 ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                      : rs != null && rs >= 85 ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
+                      : "bg-zinc-800/60 text-zinc-500 border-zinc-700/40";
+          return (
+            <div key={ticker}
+              className={`flex items-center justify-between px-1.5 py-1 rounded hover:bg-zinc-800/50 transition-colors ${isPeer ? "opacity-60" : ""}`}>
+              <span
+                className="text-[12px] font-mono font-semibold text-blue-400 cursor-pointer hover:text-blue-300 transition-colors leading-none"
+                onClick={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect }); }}
+                onMouseEnter={e => startHover(ticker, e.currentTarget.getBoundingClientRect())}
+                onMouseLeave={cancelHover}
+              >
+                {ticker}
+                {isPeer && <span className="text-[8px] text-zinc-600 ml-0.5">peer</span>}
+              </span>
+              {rs != null && (
+                <span className={`text-[9px] font-bold font-mono px-1 py-0.5 rounded border leading-none ${rsCls}`}>
+                  {rs}
+                </span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Separator */}
+      <div className="border-t border-zinc-800/60 mb-2"/>
+
+      {/* Active Alerts */}
+      <div className="mb-3">
+        <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Active Alerts</div>
+        <div className="text-[11px] text-zinc-600 italic">Configure in settings</div>
+      </div>
+
+      {/* Separator */}
+      <div className="border-t border-zinc-800/60 mb-2"/>
+
+      {/* Data Sources */}
+      <div>
+        <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Data Sources</div>
+        <div className="flex flex-col gap-1">
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-zinc-600">Primary</span>
+            {dataSource === "ibkr" ? (
+              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded border bg-emerald-500/15 text-emerald-400 border-emerald-500/30 font-mono">IBKR</span>
+            ) : (
+              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded border bg-red-500/10 text-red-400 border-red-500/20 font-mono">Unavailable</span>
+            )}
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-zinc-600">Fallback 1</span>
+            <span className={`text-[9px] font-mono px-1 py-0.5 rounded border ${!isLive ? "text-amber-400 bg-amber-500/10 border-amber-500/20" : "text-zinc-600 bg-zinc-800/40 border-zinc-700/30"}`}>Finviz</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <span className="text-[10px] text-zinc-600">Fallback 2</span>
+            <span className={`text-[9px] font-mono px-1 py-0.5 rounded border ${!isLive ? "text-sky-400 bg-sky-500/10 border-sky-500/20" : "text-zinc-600 bg-zinc-800/40 border-zinc-700/30"}`}>yfinance</span>
+          </div>
+        </div>
+      </div>
+
+      {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
+    </div>
+  );
+};
+
+const GapperScanner = ({ earningsData, ibkrThemesData }) => {
   const creditRegime = useMarketStore((s) => s.creditRegime);
   const [gapperData, setGapperData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -2478,7 +3834,8 @@ const GapperScanner = ({ earningsData }) => {
 
   return (
     <>
-    <div className="max-w-[1800px] mx-auto px-4 py-4">
+    <div className="max-w-[1900px] mx-auto px-4 py-4 flex items-start gap-4">
+      <div className="flex-1 min-w-0">
       <EarningsStrip
         earningsData={earningsData}
         gapperTickers={gapperTickerSet}
@@ -2665,6 +4022,8 @@ const GapperScanner = ({ earningsData }) => {
         ibkrScanner={gapperData?.ibkr_scanner}
         onTickerClick={(ticker, rect) => setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect })}
       />
+      </div>
+      <LeaderColumn ibkrThemesData={ibkrThemesData} gapperData={gapperData} mode="gapper" />
     </div>
     {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
     </>
@@ -4098,6 +5457,8 @@ export default function App() {
   const [earningsData, setEarningsData]     = useState(null);
   const [econData, setEconData]             = useState(null);
   const [internalsData, setInternalsData]   = useState(null);
+  const [lbView, setLbView]                 = useState("themes");
+  const [spotlightThemeName, setSpotlightThemeName] = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [filtersOn, setFiltersOn] = useState(false);
@@ -4357,6 +5718,15 @@ const filtered = useMemo(() => {
                 <button onClick={() => setTab("gapper")} className={`px-3 py-1 text-[13px] font-medium rounded-md transition-colors ${tab === "gapper" ? "bg-emerald-500/25 text-emerald-300 border border-emerald-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
                   Pre-Market Gappers
                 </button>
+                <button onClick={() => setTab("breadth")} className={`px-3 py-1 text-[13px] font-medium rounded-md transition-colors ${tab === "breadth" ? "bg-violet-500/25 text-violet-300 border border-violet-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
+                  Market Breadth
+                </button>
+                <button onClick={() => setTab("news")} className={`px-3 py-1 text-[13px] font-medium rounded-md transition-colors ${tab === "news" ? "bg-sky-500/25 text-sky-300 border border-sky-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
+                  News &amp; Econ
+                </button>
+                <button onClick={() => setTab("journal")} className={`px-3 py-1 text-[13px] font-medium rounded-md transition-colors ${tab === "journal" ? "bg-orange-500/25 text-orange-300 border border-orange-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
+                  Trade Journal
+                </button>
               </div>
               {data && (
                 <div className="text-right leading-tight">
@@ -4506,8 +5876,9 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData}/> : (
-        <div className="max-w-[1400px] mx-auto px-4 pt-2 pb-4">
+      {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <NewsEconTab data={data} econData={econData} earningsData={earningsData} newsData={newsData}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
+        <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-4">
+        <div className="flex-1 min-w-0">
           {/* Market Condition — full-width row */}
           {data?.market_condition && (() => {
             const { signal, adv_dec, new_hl, sma50_counts, sma200_counts } = data.market_condition;
@@ -4574,13 +5945,14 @@ const filtered = useMemo(() => {
             </div>
             {/* Right: Leaderboard */}
             <div className="flex-1 min-w-0">
-              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} themes={data.themes} ibkrThemesData={ibkrThemesData} />}
+              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} themes={data.themes} ibkrThemesData={ibkrThemesData} onViewChange={v => { setLbView(v); setSpotlightThemeName(null); }} onThemeSelect={name => setSpotlightThemeName(name)} />}
             </div>
           </div>
           <div className="mb-4">
             {data && <CorrelationGuard themes={data.themes}/>}
             {data && <CounterTrendWarning themes={data.themes}/>}
           </div>
+          <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData} />
           {filtered.length === 0 ? (
             <div className="text-center py-16 text-zinc-500">
               <BarChart3 size={28} className="mx-auto mb-3 opacity-40"/>
@@ -4588,6 +5960,8 @@ const filtered = useMemo(() => {
               <button onClick={()=>{setFiltersOn(false);setSearch("");}} className="mt-2 text-[13px] text-blue-400 hover:underline">Reset</button>
             </div>
           ) : filtered.map((t,i) => <ThemeSection key={t.name+i} theme={t} lbPerfKey={lbPerfKey} spyPerf={data?.spy_benchmarks?.[rsSPYKey]} rsSPYKey={rsSPYKey} isTopTheme={i===0} topADRTickers={topADRTickers} themeRankings={data?.theme_rankings} finvizThemeRankings={data?.finviz_theme_rankings}/>)}
+        </div>
+        <LeaderColumn ibkrThemesData={ibkrThemesData} mode="scanner" />
         </div>
       )}
       {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect} chartUrl={macroHover.chartUrl} onClose={() => setMacroHover(null)}/>}
