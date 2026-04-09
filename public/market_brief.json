@@ -1,57 +1,57 @@
 {
-  "generated_at": "April 09, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "April 09, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6782.81,
-      "change": 165.96,
-      "change_pct": 2.51
+      "price": 6824.66,
+      "change": 41.85,
+      "change_pct": 0.62
     },
     {
       "label": "Nasdaq 100",
-      "price": 24903.17,
-      "change": 700.8,
-      "change_pct": 2.9
+      "price": 25082.09,
+      "change": 178.92,
+      "change_pct": 0.72
     },
     {
       "label": "VIX",
-      "price": 21.28,
-      "change": 0.24,
+      "price": 19.49,
+      "change": -1.55,
       "change_pct": null,
-      "zone_label": "Elevated"
+      "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
       "price": 4.29,
-      "change": -0.05,
+      "change": 0.0,
       "change_pct": null,
-      "trend_label": "Falling"
+      "trend_label": "Stable"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 55895.32,
-      "change_pct": -0.73
+      "price": 56308.42,
+      "change_pct": 5.39
     },
     "dax": {
       "label": "DAX",
-      "price": 23838.86,
-      "change_pct": -1.0
+      "price": 23806.99,
+      "change_pct": -1.14
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10586.27,
-      "change_pct": -0.21
+      "price": 10603.48,
+      "change_pct": -0.05
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 52.6,
-    "mmth": 57.7,
+    "s5fi": 51.6,
+    "mmth": 58.0,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Risk-On US / Divergent Global Tape",
+  "mood": "US Resilience Amidst Mixed Global",
   "analysis": {
-    "analysis_para1": "Global markets are showing weakness this morning, with the Nikkei 225 down 0.73%, DAX falling 1.00%, and FTSE 100 dropping 0.21%. Despite this international headwind and an elevated VIX at 21.28, US indices are poised for a strong open, with the S&P 500 up +2.51% and Nasdaq 100 up +2.90%. Market breadth indicators are moderate, with 52.6% of S&P 500 stocks above their 50-day moving average and 57.7% above their 200-day moving average, signaling a mixed underlying health despite today's strong index gains.",
-    "analysis_para2": "The mechanical plan for today involves monitoring the sustainability of the strong pre-market rally in the S&P 500 at 6782.81 and Nasdaq 100 at 24903.17. Given the elevated VIX at 21.28, any early market open weakness could quickly trigger increased volatility and profit-taking. Watch for the S&P 500 to hold above its recent support levels, with a sustained move below 6700 potentially signaling a reversal of the pre-market strength. The falling 10Y yield, now at 4.29%, provides a tailwind for risk assets, suggesting continued focus on growth-oriented sectors if the rally holds.",
-    "technical_signal": "No reversal pattern confirmed yet. US indices are showing strong pre-market gains, pushing higher despite global market weakness.",
+    "analysis_para1": "Today presented a mixed global picture, with the Nikkei 225 surging an impressive +5.39% while European markets like the DAX (-1.14%) and FTSE 100 (-0.05%) showed weakness or flat performance. US credit conditions remain in an unknown regime due to the N/A BAML HY Spread, though the 10-year yield held stable at 4.29%. Domestically, market breadth maintained a healthy but not aggressive stance, with 51.6% of stocks above their 50-day moving average (S5FI) and 58.0% above their 200-day moving average (MMTH), indicating underlying resilience.",
+    "analysis_para2": "Given the S&P 500's +0.62% gain to 6824.66 and the Nasdaq 100's +0.72% move to 25082.09, the immediate mechanical plan involves observing continued strength above today's close. A sustained push above these levels with corresponding VIX stability below 20 would confirm bullish continuation. Conversely, a failure to hold these gains, especially if accompanied by a rise in the VIX, would signal caution and potential for short-term profit-taking. Traders should monitor breadth indicators like S5FI and MMTH for any significant deterioration below 50% as a warning sign. The focus remains on sector rotation into the demonstrated leadership themes.",
+    "technical_signal": "No reversal pattern confirmed yet. US indices ended the day higher with normal VIX levels, suggesting continued upward momentum.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "AXTI boasts an exceptional RS of 99 and a parabolic 3-month gain of +198.3%, indicating strong leadership within the high-beta Semiconductor theme supported by falling yields."
+        "reason": "AXTI demonstrates exceptional leadership in Semiconductors with an RS of 99 and a phenomenal 3-month return of +198.3%, fitting the strong growth theme."
       },
       {
         "ticker": "TSEM",
         "company": "Tower Semiconductor Ltd",
         "grade": "A",
-        "reason": "TSEM shows robust momentum with an RS of 98 and a +49.0% 1-month return, positioning it as a leading Semiconductor play in a risk-on environment with falling yields."
+        "reason": "TSEM exhibits robust strength in Semiconductors, boasting an RS of 98 and an impressive 1-month return of +49.0%, indicating significant recent momentum."
       },
       {
         "ticker": "MRVL",
         "company": "Marvell Technology Inc",
         "grade": "C",
-        "reason": "MRVL, despite a strong 1-month return of +37.7%, exhibits the lowest Relative Strength (RS=85) among candidates, indicating it lags peers and may face distribution in an otherwise strong Semiconductor theme."
+        "reason": "Despite a +37.7% 1-month gain, MRVL's relatively lower RS of 85 compared to peers in the strong semiconductor sector suggests it may lag prime leaders, making it a relative underperformer to avoid."
       }
     ]
   }
