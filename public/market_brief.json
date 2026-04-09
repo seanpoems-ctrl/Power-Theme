@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 08, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 09, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 21.04,
-      "change": -4.74,
+      "price": 21.28,
+      "change": 0.24,
       "change_pct": null,
       "zone_label": "Elevated"
     },
@@ -32,25 +32,25 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 53429.56,
-      "change_pct": 0.03
+      "price": 55895.32,
+      "change_pct": -0.73
     },
     "dax": {
       "label": "DAX",
-      "price": 24080.63,
-      "change_pct": 5.06
+      "price": 23838.86,
+      "change_pct": -1.0
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10608.88,
-      "change_pct": 2.51
+      "price": 10586.27,
+      "change_pct": -0.21
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 52.8,
+    "s5fi": 52.6,
     "mmth": 57.7,
     "breadth_flush": false,
     "generational": false,
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Broad Risk-On Relief Rally",
+  "mood": "Risk-On US / Divergent Global Tape",
   "analysis": {
-    "analysis_para1": "Global markets exhibited a bifurcated but largely positive session, with the DAX surging an impressive +5.06% and the FTSE 100 advancing +2.51%, overshadowing the Nikkei's flat +0.03%. In the US, the backdrop of a falling 10Y Yield to 4.29% provided tailwinds, yet the VIX remains elevated at 21.04, signaling persistent underlying volatility despite today's strong gains. US market breadth, measured by S5FI at 52.8% and MMTH at 57.7%, indicates only a slight majority of stocks are above key moving averages, suggesting the index-level rally may be somewhat concentrated rather than universally broad.",
-    "analysis_para2": "Following today's powerful rally, the mechanical plan involves monitoring the sustainability of this momentum, especially with the S&P 500 now at 6782.81 and the Nasdaq 100 at 24903.17. Key support for the S&P 500 should be watched around the 6700 level for any retest, while the 24500 area is crucial for the Nasdaq 100. A failure to hold these levels on follow-through volume would suggest today's move was a short-covering rally rather than a sustained uptrend. Conversely, decisive breakouts above recent highs on increased volume would confirm bullish intent and signal a potential shift in market character.",
-    "technical_signal": "No reversal pattern confirmed yet. Despite today's significant rally, further confirmation is needed for a sustained trend change.",
+    "analysis_para1": "Global markets are showing weakness this morning, with the Nikkei 225 down 0.73%, DAX falling 1.00%, and FTSE 100 dropping 0.21%. Despite this international headwind and an elevated VIX at 21.28, US indices are poised for a strong open, with the S&P 500 up +2.51% and Nasdaq 100 up +2.90%. Market breadth indicators are moderate, with 52.6% of S&P 500 stocks above their 50-day moving average and 57.7% above their 200-day moving average, signaling a mixed underlying health despite today's strong index gains.",
+    "analysis_para2": "The mechanical plan for today involves monitoring the sustainability of the strong pre-market rally in the S&P 500 at 6782.81 and Nasdaq 100 at 24903.17. Given the elevated VIX at 21.28, any early market open weakness could quickly trigger increased volatility and profit-taking. Watch for the S&P 500 to hold above its recent support levels, with a sustained move below 6700 potentially signaling a reversal of the pre-market strength. The falling 10Y yield, now at 4.29%, provides a tailwind for risk assets, suggesting continued focus on growth-oriented sectors if the rally holds.",
+    "technical_signal": "No reversal pattern confirmed yet. US indices are showing strong pre-market gains, pushing higher despite global market weakness.",
     "ticker_intel": [
-      {
-        "ticker": "TSEM",
-        "company": "Tower Semiconductor Ltd",
-        "grade": "A+",
-        "reason": "TSEM demonstrates exceptional leadership with an RS of 98 and a staggering +49.0% 1-month return, aligning with strong capital rotation into the Semiconductor theme."
-      },
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
+        "grade": "A+",
+        "reason": "AXTI boasts an exceptional RS of 99 and a parabolic 3-month gain of +198.3%, indicating strong leadership within the high-beta Semiconductor theme supported by falling yields."
+      },
+      {
+        "ticker": "TSEM",
+        "company": "Tower Semiconductor Ltd",
         "grade": "A",
-        "reason": "AXTI commands an impressive RS of 99 and a massive +198.3% 3-month gain, indicating sustained institutional accumulation within the robust Semiconductor sector."
+        "reason": "TSEM shows robust momentum with an RS of 98 and a +49.0% 1-month return, positioning it as a leading Semiconductor play in a risk-on environment with falling yields."
       },
       {
         "ticker": "MRVL",
         "company": "Marvell Technology Inc",
         "grade": "C",
-        "reason": "MRVL exhibits the lowest Relative Strength of 85 among the candidates and its 3-month performance of +23.0% significantly lags peers, indicating underlying weakness despite recent 1-month gains."
+        "reason": "MRVL, despite a strong 1-month return of +37.7%, exhibits the lowest Relative Strength (RS=85) among candidates, indicating it lags peers and may face distribution in an otherwise strong Semiconductor theme."
       }
     ]
   }
