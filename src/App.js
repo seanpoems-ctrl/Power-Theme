@@ -2228,7 +2228,55 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
 };
 
 
-const GapperScanner = () => {
+const EarningsStrip = ({ earningsData, gapperTickers = new Set(), onTickerClick }) => {
+  const today = earningsData?.today;
+  if (!today?.length) return null;
+
+  return (
+    <div className="mb-3 bg-zinc-900/60 border border-zinc-800/50 rounded-lg px-3 py-2">
+      <div className="flex items-center gap-1.5 mb-1.5">
+        <Clock size={11} className="text-zinc-500 flex-shrink-0"/>
+        <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest">Earnings Today</span>
+        <span className="text-[10px] text-zinc-700">{today.length} co.</span>
+      </div>
+      <div className="flex gap-2 overflow-x-auto pb-0.5" style={{ scrollbarWidth: 'none' }}>
+        {today.map(entry => {
+          const isGapper = gapperTickers.has(entry.ticker);
+          const timeCls  = entry.time_of_day === 'BMO'
+            ? 'bg-sky-500/15 text-sky-400 border-sky-500/30'
+            : entry.time_of_day === 'AMC'
+            ? 'bg-violet-500/15 text-violet-400 border-violet-500/30'
+            : 'bg-zinc-700/40 text-zinc-500 border-zinc-600/40';
+          return (
+            <div key={entry.ticker}
+              className={`flex-shrink-0 flex items-center gap-1.5 bg-zinc-800/60 rounded-lg px-3 py-1.5 border transition-colors ${isGapper ? 'border-blue-500/60 bg-blue-500/5' : 'border-zinc-700/40'}`}>
+              <span
+                className="text-[13px] font-bold font-mono text-blue-400 hover:text-blue-300 cursor-pointer transition-colors leading-none"
+                onClick={e => onTickerClick && onTickerClick(entry.ticker, e.currentTarget.getBoundingClientRect())}>
+                {entry.ticker}
+              </span>
+              {entry.time_of_day && (
+                <span className={`px-1 py-0.5 text-[9px] font-bold rounded border leading-none ${timeCls}`}>
+                  {entry.time_of_day}
+                </span>
+              )}
+              {entry.eps_estimate != null && (
+                <span className="text-[11px] font-mono text-zinc-400 leading-none">
+                  EPS&nbsp;{entry.eps_estimate > 0 ? '+' : ''}{entry.eps_estimate.toFixed(2)}
+                </span>
+              )}
+              {isGapper && (
+                <span className="text-[9px] font-bold text-blue-400 leading-none">⚡GAP</span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+const GapperScanner = ({ earningsData }) => {
   const creditRegime = useMarketStore((s) => s.creditRegime);
   const [gapperData, setGapperData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -2295,9 +2343,19 @@ const GapperScanner = () => {
     setFMinAvgVol(500); setFMinMktCap(2); setFMinDolVol(50);
   };
 
+  const gapperTickerSet = useMemo(
+    () => new Set((gapperData?.gappers || []).map(g => g.ticker)),
+    [gapperData]
+  );
+
   return (
     <>
     <div className="max-w-[1800px] mx-auto px-4 py-4">
+      <EarningsStrip
+        earningsData={earningsData}
+        gapperTickers={gapperTickerSet}
+        onTickerClick={(ticker, rect) => setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect })}
+      />
       {/* Filter Bar */}
       <div className="mb-4 p-3 bg-zinc-800/40 border border-zinc-700/40 rounded-lg">
         <div className="grid grid-cols-6 gap-3 mb-2">
@@ -4316,7 +4374,7 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []}/> : (
+      {tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData}/> : (
         <div className="max-w-[1400px] mx-auto px-4 pt-2 pb-4">
           {/* Market Condition — full-width row */}
           {data?.market_condition && (() => {
