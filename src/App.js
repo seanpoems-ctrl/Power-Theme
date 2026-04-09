@@ -139,6 +139,15 @@ const Dist52wCell = ({ value }) => {
   return <td className={`text-center py-3 px-2 text-[13px] font-mono ${txt}`}>{v.toFixed(1)}%</td>;
 };
 
+/* ──────────────────────────────────────────────────────── HOOKS ── */
+function useHoverDelay(delay = 2000) {
+  const [active, setActive] = useState(false);
+  const timerRef = useRef(null);
+  const onEnter = () => { timerRef.current = setTimeout(() => setActive(true), delay); };
+  const onLeave = () => { clearTimeout(timerRef.current); setActive(false); };
+  return { active, onEnter, onLeave };
+}
+
 const RVolCell = ({ value }) => {
   if (value == null) return <td className="text-center py-3 px-2 text-[13px] text-zinc-600">—</td>;
   const v = parseFloat(value);
@@ -2072,6 +2081,7 @@ const GapperScanner = () => {
   const [gapperData, setGapperData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState(null);
+  const { active: tvActive, onEnter: tvOnEnter, onLeave: tvOnLeave } = useHoverDelay(2000);
   const [tickerDb, setTickerDb] = useState({});
 
   // Filter state — human-friendly units: PMVol/AvgVol in K, MktCap in $B, DolVol in $M
@@ -2215,7 +2225,8 @@ const GapperScanner = () => {
                 <td className="py-2 px-1.5 text-center">
                   <span
                     className="font-bold text-zinc-100 text-[13px] hover:text-blue-400 transition-colors cursor-pointer"
-                    onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === g.ticker ? null : { ticker: g.ticker, rect }); }}
+                    onMouseEnter={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered({ ticker: g.ticker, rect }); tvOnEnter(); }}
+                    onMouseLeave={() => { setHovered(null); tvOnLeave(); }}
                   >
                     {g.ticker}
                   </span>
@@ -2315,7 +2326,7 @@ const GapperScanner = () => {
         </table>
       </div>
     </div>
-    {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
+    {tvActive && hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
     </>
   );
 };
