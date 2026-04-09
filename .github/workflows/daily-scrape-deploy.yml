@@ -131,6 +131,7 @@ jobs:
         env:
           CI: false
           REACT_APP_FINNHUB_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          REACT_APP_GEMINI_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - uses: actions/configure-pages@v4
         if: steps.trading_day.outputs.is_trading_day == 'true'
