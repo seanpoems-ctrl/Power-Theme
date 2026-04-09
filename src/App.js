@@ -2716,7 +2716,7 @@ const TradeJournalTab = ({ data }) => {
       {/* ── Summary cards ────────────────────────────────────────────────── */}
       <div className="grid grid-cols-4 gap-3 mb-5">
         {[
-          { label: "Realized P&L MTD", value: pnlMTD !== 0 || mtd.length ? `${pnlMTD >= 0 ? "+" : ""}$${pnlMTD.toFixed(0)}`, cls: pnlMTD >= 0 ? "text-emerald-400" : "text-red-400", sub: `${mtd.length} closed trades` },
+          { label: "Realized P&L MTD", value: pnlMTD !== 0 || mtd.length ? `${pnlMTD >= 0 ? "+" : ""}$${pnlMTD.toFixed(0)}` : "—", cls: pnlMTD >= 0 ? "text-emerald-400" : "text-red-400", sub: `${mtd.length} closed trades` },
           { label: "Open Positions",   value: open.length,   cls: open.length > 0 ? "text-blue-400" : "text-zinc-400", sub: `${trades.length} total trades` },
           { label: "Avg R:R",          value: avgR != null ? avgR.toFixed(2) + "R" : "—", cls: avgR != null && avgR >= 1 ? "text-emerald-400" : avgR != null && avgR < 0 ? "text-red-400" : "text-zinc-400", sub: `${rMults.length} closed with R` },
           { label: "Avg Hold",         value: avgHold != null ? `${avgHold.toFixed(1)}d` : "—", cls: "text-zinc-300", sub: `${holdDays.length} trades with exit date` },
@@ -3801,6 +3801,11 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
     return () => clearInterval(id);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const gapperTickerSet = useMemo(
+    () => new Set((gapperData?.gappers || []).map(g => g.ticker)),
+    [gapperData]
+  );
+
   if (loading) return <div className="flex items-center justify-center py-20"><RefreshCw size={20} className="text-zinc-500 animate-spin"/></div>;
 
   if (!gapperData || !gapperData.gappers?.length) return (
@@ -3826,11 +3831,6 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
     setFMinGap(5); setFMinPMVol(200); setFMinPrice(5);
     setFMinAvgVol(500); setFMinMktCap(2); setFMinDolVol(50);
   };
-
-  const gapperTickerSet = useMemo(
-    () => new Set((gapperData?.gappers || []).map(g => g.ticker)),
-    [gapperData]
-  );
 
   return (
     <>
