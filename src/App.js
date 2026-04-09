@@ -5861,7 +5861,7 @@ const filtered = useMemo(() => {
         <div className="max-w-[1400px] mx-auto px-4 py-3">
           <div className="flex items-center justify-between mb-2.5">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center"><Activity size={16} className="text-white"/></div>
+              <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center"><Activity size={16} className="text-white"/></div>
               <div>
                 <h1 className="text-base font-bold tracking-tight">Thematic Scanner</h1>
                 <p className="text-[12px] text-zinc-500">美股強勢主題篩選器</p>
@@ -5897,21 +5897,21 @@ const filtered = useMemo(() => {
               })()}
             </div>
             <div className="flex items-center gap-2">
-              <div className="flex items-center gap-1 bg-zinc-800/60 border border-zinc-700/50 rounded-lg p-1">
-                <button onClick={() => setTab("scanner")} className={`px-3 py-1 text-[13px] font-medium rounded-md transition-colors ${tab === "scanner" ? "bg-blue-500/25 text-blue-300 border border-blue-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
-                  Thematic Scanner
+              <div className="flex items-center gap-0.5">
+                <button onClick={() => setTab("scanner")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors ${tab === "scanner" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                  Scanner
                 </button>
-                <button onClick={() => setTab("gapper")} className={`px-3 py-1 text-[13px] font-medium rounded-md transition-colors ${tab === "gapper" ? "bg-emerald-500/25 text-emerald-300 border border-emerald-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
-                  Pre-Market Gappers
+                <button onClick={() => setTab("gapper")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors ${tab === "gapper" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                  Gappers
                 </button>
-                <button onClick={() => setTab("breadth")} className={`px-3 py-1 text-[13px] font-medium rounded-md transition-colors ${tab === "breadth" ? "bg-violet-500/25 text-violet-300 border border-violet-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
-                  Market Breadth
+                <button onClick={() => setTab("breadth")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors ${tab === "breadth" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                  Breadth
                 </button>
-                <button onClick={() => setTab("news")} className={`px-3 py-1 text-[13px] font-medium rounded-md transition-colors ${tab === "news" ? "bg-sky-500/25 text-sky-300 border border-sky-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
+                <button onClick={() => setTab("news")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors ${tab === "news" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                   News &amp; Econ
                 </button>
-                <button onClick={() => setTab("journal")} className={`px-3 py-1 text-[13px] font-medium rounded-md transition-colors ${tab === "journal" ? "bg-orange-500/25 text-orange-300 border border-orange-500/40" : "text-zinc-500 hover:text-zinc-300"}`}>
-                  Trade Journal
+                <button onClick={() => setTab("journal")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors ${tab === "journal" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                  Journal
                 </button>
               </div>
               {data && (
