@@ -1469,6 +1469,170 @@ const PositionCalc = ({ ibkrThemesData }) => {
   );
 };
 
+/* ─────────────────────────────────────────────── LEADER COLUMN ── */
+const LeaderColumn = ({ themes }) => {
+  const [hovered, setHovered] = useState(null);
+  const { active: tvActive, onEnter: tvOnEnter, onLeave: tvOnLeave } = useHoverDelay(2000);
+
+  const leaders = useMemo(() => {
+    if (!themes?.length) return [];
+    const seen = new Set();
+    const out = [];
+    const sorted = [...themes].sort((a, b) => {
+      const aRS = Math.max(...(a.subthemes || []).flatMap(s => (s.stocks || []).map(x => x.rs_52w ?? 0)));
+      const bRS = Math.max(...(b.subthemes || []).flatMap(s => (s.stocks || []).map(x => x.rs_52w ?? 0)));
+      return bRS - aRS;
+    });
+    for (const theme of sorted.slice(0, 5)) {
+      const stocks = (theme.subthemes || []).flatMap(s => s.stocks || []);
+      const top = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0));
+      for (const s of top) {
+        if (!seen.has(s.ticker)) { seen.add(s.ticker); out.push({ ...s, themeName: theme.name }); break; }
+      }
+    }
+    return out.slice(0, 5);
+  }, [themes]);
+
+  if (!leaders.length) return null;
+
+  return (
+    <div className="bg-zinc-900/60 rounded-xl border border-zinc-800/60 p-3">
+      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.18em] mb-2">Theme Leaders</div>
+      <div className="flex flex-col gap-1">
+        {leaders.map((s, i) => {
+          const pos = (s.perf_1d ?? s.change_pct ?? 0) >= 0;
+          return (
+            <div key={s.ticker} className="flex items-center gap-2 py-1 border-b border-zinc-800/40 last:border-0">
+              <span className="text-[10px] text-zinc-700 w-3 text-right flex-shrink-0">{i + 1}</span>
+              <span
+                className="text-[12px] font-bold text-zinc-100 hover:text-blue-400 transition-colors cursor-pointer w-12 flex-shrink-0"
+                onMouseEnter={e => { setHovered({ ticker: s.ticker, rect: e.currentTarget.getBoundingClientRect() }); tvOnEnter(); }}
+                onMouseLeave={() => { setHovered(null); tvOnLeave(); }}
+              >{s.ticker}</span>
+              <span className="text-[10px] text-zinc-600 flex-1 truncate">{s.themeName}</span>
+              <span className={`text-[11px] font-mono font-bold flex-shrink-0 ${pos ? "text-emerald-400" : "text-red-400"}`}>
+                {pos ? "+" : ""}{(s.perf_1d ?? s.change_pct ?? 0).toFixed(1)}%
+              </span>
+              <span className="text-[10px] font-mono text-zinc-500 flex-shrink-0 w-6 text-right">{s.rs_52w ?? "—"}</span>
+            </div>
+          );
+        })}
+      </div>
+      {tvActive && hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
+    </div>
+  );
+};
+
+/* ──────────────────────────────────────────── IBKR SCANNER TABLE ── */
+const IBKRScannerTable = ({ ibkrData }) => {
+  const [hovered, setHovered] = useState(null);
+  const { active: tvActive, onEnter: tvOnEnter, onLeave: tvOnLeave } = useHoverDelay(2000);
+
+  const scanner = ibkrData?.scanner ?? [];
+  const connected = ibkrData?.connected ?? false;
+
+  return (
+    <div className="bg-zinc-900/60 rounded-xl border border-zinc-800/60 p-3">
+      <div className="flex items-center justify-between mb-2">
+        <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.18em]">IBKR Scanner</span>
+        <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded-full ${connected ? "bg-emerald-900/40 text-emerald-400" : "bg-zinc-800 text-zinc-600"}`}>
+          {connected ? "LIVE" : "OFFLINE"}
+        </span>
+      </div>
+      {scanner.length === 0 ? (
+        <div className="text-[11px] text-zinc-700 text-center py-3">
+          {connected ? "No signals" : "TWS not running — fallback mode"}
+        </div>
+      ) : (
+        <div className="flex flex-col gap-0.5">
+          {scanner.map(s => {
+            const pos = (s.change_pct ?? 0) >= 0;
+            return (
+              <div key={s.ticker} className="flex items-center gap-2 py-1 border-b border-zinc-800/40 last:border-0">
+                <span
+                  className="text-[12px] font-bold text-zinc-100 hover:text-blue-400 transition-colors cursor-pointer w-12 flex-shrink-0"
+                  onMouseEnter={e => { setHovered({ ticker: s.ticker, rect: e.currentTarget.getBoundingClientRect() }); tvOnEnter(); }}
+                  onMouseLeave={() => { setHovered(null); tvOnLeave(); }}
+                >{s.ticker}</span>
+                <span className="text-[10px] text-zinc-600 flex-1">{s.signal ?? "—"}</span>
+                <span className={`text-[11px] font-mono font-bold flex-shrink-0 ${pos ? "text-emerald-400" : "text-red-400"}`}>
+                  {pos ? "+" : ""}{(s.change_pct ?? 0).toFixed(1)}%
+                </span>
+                {s.rs != null && <span className="text-[10px] font-mono text-zinc-500 flex-shrink-0 w-6 text-right">{s.rs}</span>}
+              </div>
+            );
+          })}
+        </div>
+      )}
+      {tvActive && hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
+    </div>
+  );
+};
+
+/* ──────────────────────────────────────────── THEMATIC SPOTLIGHT ── */
+const ThematicSpotlight = ({ themes }) => {
+  const [hovered, setHovered] = useState(null);
+  const { active: tvActive, onEnter: tvOnEnter, onLeave: tvOnLeave } = useHoverDelay(2000);
+
+  const { topTheme, stocks } = useMemo(() => {
+    if (!themes?.length) return { topTheme: null, stocks: [] };
+    const t = themes[0];
+    const allStocks = (t.subthemes || []).flatMap(s => s.stocks || []);
+    const top = [...allStocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0)).slice(0, 5);
+    return { topTheme: t.name, stocks: top };
+  }, [themes]);
+
+  if (!stocks.length) return null;
+
+  return (
+    <div className="bg-zinc-900/60 rounded-xl border border-zinc-800/60 p-3 mb-4">
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.18em]">Thematic Spotlight</span>
+        {topTheme && <span className="text-[10px] text-zinc-600">·</span>}
+        {topTheme && <span className="text-[11px] text-zinc-400 font-medium">{topTheme}</span>}
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-left border-collapse">
+          <thead>
+            <tr className="border-b border-zinc-800/60">
+              {["Ticker","Company","Price","1D%","RS"].map(h => (
+                <th key={h} className="text-[9px] text-zinc-600 font-medium pb-1.5 px-1.5 first:pl-0">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {stocks.map(s => {
+              const pos = (s.perf_1d ?? s.change_pct ?? 0) >= 0;
+              const rs = s.rs_52w ?? 0;
+              const rsColor = rs >= 90 ? "text-emerald-400" : rs >= 70 ? "text-yellow-400" : "text-zinc-500";
+              return (
+                <tr key={s.ticker} className="border-b border-zinc-800/30 last:border-0 hover:bg-zinc-800/20 transition-colors">
+                  <td className="py-1.5 px-1.5 pl-0">
+                    <span
+                      className="text-[12px] font-bold text-zinc-100 hover:text-blue-400 transition-colors cursor-pointer"
+                      onMouseEnter={e => { setHovered({ ticker: s.ticker, rect: e.currentTarget.getBoundingClientRect() }); tvOnEnter(); }}
+                      onMouseLeave={() => { setHovered(null); tvOnLeave(); }}
+                    >{s.ticker}</span>
+                  </td>
+                  <td className="py-1.5 px-1.5 text-[11px] text-zinc-500 max-w-[120px]">
+                    <span className="truncate block">{s.company ?? "—"}</span>
+                  </td>
+                  <td className="py-1.5 px-1.5 text-[11px] font-mono text-zinc-300">${(s.price ?? 0).toFixed(2)}</td>
+                  <td className={`py-1.5 px-1.5 text-[11px] font-mono font-bold ${pos ? "text-emerald-400" : "text-red-400"}`}>
+                    {pos ? "+" : ""}{(s.perf_1d ?? s.change_pct ?? 0).toFixed(2)}%
+                  </td>
+                  <td className={`py-1.5 px-1.5 text-[11px] font-mono font-bold ${rsColor}`}>{s.rs_52w ?? "—"}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+      {tvActive && hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
+    </div>
+  );
+};
+
 // Color-coded keyword categories for breaking news highlighting
 const _KW_CATEGORIES = [
   // Geopolitical / conflict — orange
@@ -3788,6 +3952,7 @@ export default function App() {
   const nextFetchAt = useRef(null);
   const lastGeneratedAt = useRef(null);
   const [macroHover, setMacroHover] = useState(null);
+  const [ibkrData, setIbkrData] = useState(null);
 
   // ── Market store (global macro alerts + reversal) ─────────────────────────
   // Use separate selectors — object selectors create new refs every render → infinite loop
@@ -3898,6 +4063,19 @@ export default function App() {
     };
     fetchNews();
     const id = setInterval(fetchNews, 5 * 60 * 1000);
+    return () => clearInterval(id);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // IBKR themes — poll every 5 min (fallback to null when TWS offline)
+  useEffect(() => {
+    const fetchIbkr = () => {
+      fetch(process.env.PUBLIC_URL + "/ibkr_themes.json?v=" + Date.now())
+        .then(r => r.ok ? r.json() : null)
+        .then(d => { if (d) setIbkrData(d); })
+        .catch(() => {});
+    };
+    fetchIbkr();
+    const id = setInterval(fetchIbkr, 5 * 60 * 1000);
     return () => clearInterval(id);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -4214,7 +4392,9 @@ const filtered = useMemo(() => {
           <div className="flex items-stretch gap-6 mb-2">
             <div className="w-[300px] flex-shrink-0 flex flex-col gap-4">
               <VixGauge initialVix={data?.vix}/>
-              <PositionCalc ibkrThemesData={undefined}/>
+              {data && <LeaderColumn themes={data.themes}/>}
+              <PositionCalc ibkrThemesData={ibkrData}/>
+              <IBKRScannerTable ibkrData={ibkrData}/>
               <ScannerBriefFeed briefData={briefData} newsData={newsData}/>
             </div>
             {/* Right: Leaderboard */}
@@ -4222,6 +4402,7 @@ const filtered = useMemo(() => {
               {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} />}
             </div>
           </div>
+          {data && <ThematicSpotlight themes={data.themes}/>}
           <div className="mb-4">
             {data && <CorrelationGuard themes={data.themes}/>}
             {data && <CounterTrendWarning themes={data.themes}/>}
