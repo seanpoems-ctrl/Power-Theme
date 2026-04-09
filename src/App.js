@@ -3142,7 +3142,9 @@ const NewsEconTab = ({ data, econData, earningsData, newsData }) => {
       const theme  = g.category || g.theme || "";
       const source = g.news_source || "google";
       for (const h of (g.headlines || [])) {
-        rows.push({ text: h, ticker: g.ticker, theme, source, ts: null });
+        const text = typeof h === 'string' ? h : (h?.title || '');
+        const url  = typeof h === 'object' ? (h?.url || null) : null;
+        if (text) rows.push({ text, url, ticker: g.ticker, theme, source, ts: null });
       }
     }
     // breaking_news alerts
@@ -3311,7 +3313,10 @@ const NewsEconTab = ({ data, econData, earningsData, newsData }) => {
                     <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border flex-shrink-0 mt-0.5 leading-none ${srcCfg.cls}`}>
                       {srcCfg.label}
                     </span>
-                    <p className="text-[12px] text-zinc-300 leading-snug flex-1">{item.text}</p>
+                    {item.url
+                      ? <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-[12px] text-zinc-300 leading-snug flex-1 hover:text-blue-400 transition-colors">{item.text}</a>
+                      : <p className="text-[12px] text-zinc-300 leading-snug flex-1">{item.text}</p>
+                    }
                     <div className="flex flex-col items-end gap-1 flex-shrink-0">
                       {item.ticker && (
                         <span className="text-[10px] font-mono font-semibold text-blue-400">{item.ticker}</span>
