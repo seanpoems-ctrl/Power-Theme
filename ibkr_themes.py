@@ -331,6 +331,15 @@ def run() -> dict:
     }
 
 
+def build_ibkr_themes() -> None:
+    """
+    Named entry point for scraper.py integration.
+    Runs the full pipeline and writes public/ibkr_themes.json.
+    Identical to main() — use this name when importing from scraper.
+    """
+    main()
+
+
 def main() -> None:
     result = run()
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)

@@ -1629,6 +1629,16 @@ def build_data() -> dict:
     rs_universe, sp500_breadth, sp500_breadth_200, sp500_prices = _build_sp500_rs_universe()
     logger.info(f"  RS universe: {len(rs_universe)} stocks | S&P 500 breadth 50D: {sp500_breadth}% | 200D: {sp500_breadth_200}%")
 
+    # Build market internals now — reuse the breadth values already computed above
+    # so market_internals.py doesn't re-download the entire S&P 500 universe.
+    logger.info("  Building market internals (VIX, TICK, TRIN, T2108, 10Y yield)...")
+    try:
+        from market_internals import build_internals
+        market_internals_data = build_internals(s5fi=sp500_breadth, mmth=sp500_breadth_200)
+    except Exception as _mi_err:
+        logger.warning(f"  market_internals failed (non-fatal): {_mi_err}")
+        market_internals_data = None
+
     logger.info("  Fetching full-market breadth from Finviz screener...")
     finviz_adv_dec, finviz_new_hl, finviz_sma50, finviz_sma200 = _fetch_finviz_market_breadth()
 
@@ -1745,6 +1755,7 @@ def build_data() -> dict:
         "vix": vix_value,
         "macro_news": macro_news,
         "ticker_extra_subthemes": ticker_extra_subthemes,
+        "market_internals": market_internals_data,
         "_sp500_prices": sp500_prices,
     }
 
@@ -2024,6 +2035,14 @@ def main():
     out_path = Path("public/thematic_data.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(output, indent=2, ensure_ascii=False, allow_nan=False), encoding="utf-8")
+
+    # Write public/ibkr_themes.json — non-fatal if IBKR is unavailable
+    try:
+        from ibkr_themes import build_ibkr_themes
+        logger.info("Running ibkr_themes pipeline...")
+        build_ibkr_themes()
+    except Exception as _ibt_err:
+        logger.warning(f"ibkr_themes failed (non-fatal): {_ibt_err}")
 
     logger.info("Fetching SEC ticker list...")
     all_tickers = fetch_all_tickers()

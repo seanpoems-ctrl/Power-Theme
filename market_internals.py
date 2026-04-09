@@ -159,11 +159,27 @@ def _fetch_yield_10y() -> tuple[float | None, str]:
 
 # ─── Main ────────────────────────────────────────────────────────────────────
 
-def run() -> dict:
+def build_internals(
+    s5fi: float | None = None,
+    mmth: float | None = None,
+) -> dict:
+    """
+    Entry point for scraper.py integration.
+
+    When *s5fi* and *mmth* are supplied (already computed by scraper's step 5),
+    the expensive S&P 500 batch download is skipped.  Called from build_data()
+    and also from main() as a standalone run.
+
+    Returns the internals dict without writing any file.
+    """
     import ibkr_client
 
-    # Run breadth first — it's the slowest call (S&P 500 batch download)
-    s5fi, mmth, breadth_src = _fetch_breadth()
+    if s5fi is not None or mmth is not None:
+        # Use pre-computed breadth values — skip the re-download
+        breadth_src = "scraper"
+        logger.info("market_internals: using pre-computed breadth from scraper (s5fi=%s, mmth=%s)", s5fi, mmth)
+    else:
+        s5fi, mmth, breadth_src = _fetch_breadth()
 
     vix,      vix_src   = _fetch_vix()
     tick,     tick_src  = _fetch_ibkr_index("$TICK")
@@ -192,6 +208,11 @@ def run() -> dict:
             "yield_10y": y10_src,
         },
     }
+
+
+def run() -> dict:
+    """Standalone run: fetches breadth independently then delegates to build_internals()."""
+    return build_internals()
 
 
 def main() -> None:
