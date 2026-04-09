@@ -198,6 +198,44 @@ def fetch_ticker_fundamentals(ticker: str) -> dict:
     return result
 
 
+# ──────────────────────────────────────────────────────────────
+# Hard Gates
+# ──────────────────────────────────────────────────────────────
+
+_HIGH_IMPACT_CATS = {"Earnings", "New Contract/Partnership", "FDA"}
+
+def _compute_gates(stock: dict) -> tuple[int, dict, bool]:
+    """
+    Evaluate 5 hard gates against a stock dict.
+    rs_52w defaults to True (pass) when not present in TV data.
+    Returns (gates_passed, gates_detail, meets_all_gates).
+    """
+    gates = {
+        "gate_rs":         stock.get("rs_52w") is None or stock.get("rs_52w", 0) > 85,
+        "gate_price":      (stock.get("price") or 0) > 12,
+        "gate_dollar_vol": (stock.get("avg_dollar_vol") or 0) > 100_000_000,
+        "gate_mkt_cap":    (stock.get("mkt_cap") or 0) > 2_000_000_000,
+        "gate_adr":        (stock.get("adr_pct") or 0) >= 4.0,
+    }
+    passed = sum(gates.values())
+    return passed, gates, passed == 5
+
+
+def _compute_tier(grade: str, category: str, meets_all_gates: bool, hypothesis: str) -> tuple[str, str]:
+    """
+    Map grade + context to a tier label.
+    Priority: T1 → T2 → Fail → T3.
+    """
+    if grade in ("A+", "A") and category in _HIGH_IMPACT_CATS:
+        return "T1", "Major Catalyst"
+    high_conviction = "High Conviction" in hypothesis or grade == "A+"
+    if grade in ("A", "B") and high_conviction:
+        return "T2", "Strong Catalyst"
+    if grade == "C" and not meets_all_gates:
+        return "Fail", "Excluded"
+    return "T3", "Minor Catalyst"
+
+
 def _apply_technical_floor(analysis: dict, avg_dollar_vol: float, adr_pct: float | None) -> tuple[dict, str]:
     """Enforce the Hard Technical Floor on grade and return (updated_analysis, technical_status)."""
     dvol_m  = (avg_dollar_vol or 0) / 1_000_000
@@ -463,6 +501,7 @@ def analyze_with_gemini(
             "finviz_theme":    "—",
             "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
             "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+            "peer_tickers":    [],
         }
     try:
         from google import genai
@@ -533,8 +572,10 @@ Consumer - E-Commerce | Consumer - Streaming | Consumer - Social Media | Consume
 Energy - Oil & Gas | Energy - LNG | Materials - Metals & Mining |
 Real Estate | REITs | Infrastructure | Others
 
+PEER TICKERS: After your analysis, add a JSON key "peer_tickers": a list of 2-3 ticker symbols in the same industry/theme that could see sympathy moves. These should be real tickers with RS > 80 that are NOT {ticker}.
+
 Respond in this exact JSON format only (no extra text):
-{{"category": "<category>", "theme": "<specific catalyst name, e.g. 'Beat & Raise', 'New Contracts', 'Sector Sympathy', 'Technical / Flow'>", "reasoning": "<1 sentence mechanical trigger>", "grade": "<A+|A|B|C>", "finviz_theme": "<industry>", "analysis_detail": "Catalyst: [news facts 2-3 sentences] | Impact: [quantify shift, e.g. adds X% to revenue, de-risks pipeline]", "analysis_details": "<detailed multi-section analysis>"}}"""
+{{"category": "<category>", "theme": "<specific catalyst name, e.g. 'Beat & Raise', 'New Contracts', 'Sector Sympathy', 'Technical / Flow'>", "reasoning": "<1 sentence mechanical trigger>", "grade": "<A+|A|B|C>", "finviz_theme": "<industry>", "analysis_detail": "Catalyst: [news facts 2-3 sentences] | Impact: [quantify shift, e.g. adds X% to revenue, de-risks pipeline]", "analysis_details": "<detailed multi-section analysis>", "peer_tickers": ["TICK1", "TICK2"]}}"""
 
         response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
         text = response.text.strip()
@@ -555,6 +596,8 @@ Respond in this exact JSON format only (no extra text):
         finviz_theme     = result.get("finviz_theme", "—")
         analysis_detail  = result.get("analysis_detail", f"Catalyst: {reasoning} | Impact: See analysis.")
         analysis_details = result.get("analysis_details", reasoning)
+        raw_peers        = result.get("peer_tickers", [])
+        peer_tickers     = [str(p).upper().strip() for p in raw_peers if p and str(p).upper() != ticker][:3]
 
         hypothesis_label, strategy = HYPOTHESIS_RULES.get(category, HYPOTHESIS_RULES["Others"])
         base_conviction = {"High Conviction (Gap & Go)": 80, "Medium Conviction (RS Hold)": 60,
@@ -571,6 +614,7 @@ Respond in this exact JSON format only (no extra text):
             "finviz_theme":    finviz_theme,
             "analysis_detail": analysis_detail,
             "analysis_details": analysis_details,
+            "peer_tickers":    peer_tickers,
         }
     except Exception as e:
         logger.warning(f"  Gemini failed for {ticker}: {e}")
@@ -605,6 +649,7 @@ def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
         "finviz_theme":    "—",
         "analysis_detail": f"Catalyst: {rsn} | Impact: See analysis.",
         "analysis_details": rsn,
+        "peer_tickers":    [],
     }
 
 
@@ -612,9 +657,65 @@ def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
 # Main
 # ──────────────────────────────────────────────────────────────
 
+def _build_ibkr_scanner() -> list[dict]:
+    """
+    Mirror table: fetch pre-market movers from IBKR and apply gate logic.
+    Returns [] when IBKR is unavailable or on any error.
+    """
+    try:
+        import ibkr_client
+        if not ibkr_client.IS_LIVE:
+            return []
+        raw = ibkr_client.get_premarket_scanner() or []
+        results = []
+        for item in raw:
+            ticker = (item.get("ticker") or "").upper()
+            if not ticker:
+                continue
+            stock = {
+                "ticker":        ticker,
+                "price":         item.get("last") or 0.0,
+                "change_pct":    item.get("change_pct"),
+                "volume":        item.get("volume"),
+                "rs_placeholder": item.get("rs_placeholder"),
+            }
+            gates_passed, gates_detail, meets_all = _compute_gates(stock)
+            results.append({
+                **stock,
+                "gates_passed":   gates_passed,
+                "gates_detail":   gates_detail,
+                "meets_all_gates": meets_all,
+            })
+        logger.info(f"  IBKR scanner: {len(results)} tickers")
+        return results
+    except Exception as e:
+        logger.warning(f"  IBKR scanner mirror failed: {e}")
+        return []
+
+
+def _load_earnings_today() -> list[dict]:
+    """
+    Read public/earnings_calendar.json and return today's earnings list.
+    Returns [] when file is absent or unreadable.
+    """
+    try:
+        ec_path = Path("public/earnings_calendar.json")
+        if not ec_path.exists():
+            return []
+        data = json.loads(ec_path.read_text(encoding="utf-8"))
+        return data.get("today", [])
+    except Exception as e:
+        logger.warning(f"  Could not load earnings_calendar.json: {e}")
+        return []
+
+
 def main():
     now_et = datetime.now(ET)
     logger.info(f"Pre-Market Gapper Scanner — {now_et.strftime('%Y-%m-%d %H:%M ET')}")
+
+    # ── Earnings strip (read before the slow per-ticker loop) ────────────────
+    earnings_today = _load_earnings_today()
+    logger.info(f"  Earnings today: {len(earnings_today)} events")
 
     logger.info("Fetching gappers from TradingView...")
     gappers = fetch_gappers()[:25]
@@ -649,6 +750,9 @@ def main():
         adr_pct            = fundamentals["adr_pct"]
         stock["adr_pct"]   = adr_pct
 
+        # Hard gates (adr_pct now available)
+        gates_passed, gates_detail, meets_all_gates = _compute_gates(stock)
+
         # AI analysis — Momentum Catalyst Intelligence
         analysis = analyze_with_gemini(
             ticker, headlines, stock["rvol"], last_earnings_date,
@@ -659,6 +763,14 @@ def main():
         # Hard Technical Floor — enforce grade cap + compute technical_status
         analysis, technical_status = _apply_technical_floor(
             analysis, stock.get("avg_dollar_vol", 0), adr_pct
+        )
+
+        # Tier label
+        tier, tier_label = _compute_tier(
+            analysis.get("grade", "C"),
+            analysis.get("category", "Others"),
+            meets_all_gates,
+            analysis.get("hypothesis", ""),
         )
 
         # Fact-check verification (Skeptical Auditor — second Gemini call)
@@ -682,11 +794,21 @@ def main():
             "industry":         analysis.get("finviz_theme", "—"),
             "technical_status": technical_status,
             "verification":     verification,
+            "gates_passed":     gates_passed,
+            "gates_detail":     gates_detail,
+            "meets_all_gates":  meets_all_gates,
+            "tier":             tier,
+            "tier_label":       tier_label,
         })
 
+    # ── IBKR mirror table ────────────────────────────────────────────────────
+    ibkr_scanner = _build_ibkr_scanner()
+
     result = {
-        "scan_time": now_et.strftime("%Y-%m-%d %H:%M ET"),
-        "gappers":   output,
+        "scan_time":     now_et.strftime("%Y-%m-%d %H:%M ET"),
+        "earnings_today": earnings_today,
+        "gappers":       output,
+        "ibkr_scanner":  ibkr_scanner,
     }
 
     out_path = Path("public/gapper_data.json")
