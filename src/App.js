@@ -4222,6 +4222,18 @@ function detectCatalyst(headline, summary) {
   return null;
 }
 
+const CATALYST_SENTIMENT = {
+  fda: "good",
+  clinical: "good",
+  earnings: "good",
+  ma: "good",
+  partnership: "good",
+  contract: "good",
+  index: "good",
+  analyst: "neutral",
+  short: "bad",
+  buyback: "good",
+};
 
 // ── Merged Search + Ticker Lookup ──
 const SearchBar = ({ data, search, setSearch }) => {
@@ -4458,7 +4470,8 @@ const SearchBar = ({ data, search, setSearch }) => {
         });
 
         if (!isDuplicate) {
-          dedupedGroups.push({ article: { ...a, catalyst: cat }, words, timestamp: a.datetime });
+          const sentiment = CATALYST_SENTIMENT[cat.key] || "neutral";
+          dedupedGroups.push({ article: { ...a, catalyst: cat, sentiment }, words, timestamp: a.datetime });
         }
       }
 
@@ -4687,6 +4700,11 @@ const SearchBar = ({ data, search, setSearch }) => {
                         <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border ${item.catalyst.color}`}>
                           {item.catalyst.label}
                         </span>
+                        {item.sentiment && (
+                          <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border ${item.sentiment === "good" ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/30" : item.sentiment === "bad" ? "text-red-400 bg-red-500/10 border-red-500/30" : "text-zinc-400 bg-zinc-700/20 border-zinc-600/30"}`}>
+                            {item.sentiment}
+                          </span>
+                        )}
                         {date && (
                           <span className="text-[10px] text-zinc-600">{date}</span>
                         )}
