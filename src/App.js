@@ -2228,6 +2228,134 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
 };
 
 
+const IBKRScannerTable = ({ ibkrScanner, onTickerClick }) => {
+  const hoverTimer = useRef(null);
+
+  const startHover = (ticker, rect) => {
+    clearTimeout(hoverTimer.current);
+    hoverTimer.current = setTimeout(() => onTickerClick && onTickerClick(ticker, rect), 2000);
+  };
+  const cancelHover = () => clearTimeout(hoverTimer.current);
+
+  const isEmpty = !ibkrScanner || ibkrScanner.length === 0;
+
+  return (
+    <div className="mt-6">
+      {/* Section header */}
+      <div className="flex items-center gap-2 mb-2">
+        <Activity size={12} className="text-emerald-400 flex-shrink-0"/>
+        <span className="text-[12px] font-bold text-zinc-300 uppercase tracking-wide">
+          IBKR TWS Scanner — Pre-Market <span className="normal-case">(mirrored)</span>
+        </span>
+        <span className="px-1.5 py-0.5 text-[9px] font-bold rounded border bg-emerald-500/15 text-emerald-400 border-emerald-500/30 font-mono leading-none">
+          IBKR
+        </span>
+      </div>
+
+      {isEmpty ? (
+        <p className="text-[12px] text-zinc-600 py-3 px-1">
+          IBKR TWS scanner data unavailable — connect IB Gateway
+        </p>
+      ) : (
+        <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
+          <table className="w-full text-left text-[12px]">
+            <thead>
+              <tr className="text-[11px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40">
+                <th className="py-2 px-3 font-medium text-center">Ticker</th>
+                <th className="py-2 px-3 font-medium text-center">Last</th>
+                <th className="py-2 px-3 font-medium text-center">Chg%</th>
+                <th className="py-2 px-3 font-medium text-center">Vol</th>
+                <th className="py-2 px-3 font-medium text-center">RS</th>
+                <th className="py-2 px-3 font-medium text-center">Gate Status</th>
+                <th className="py-2 px-3 font-medium text-center">Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ibkrScanner.map((row, i) => {
+                const ticker = row.ticker || '—';
+                const failedGates = row.gates_detail
+                  ? Object.entries(row.gates_detail)
+                      .filter(([, v]) => !v)
+                      .map(([k]) => k.replace('gate_', ''))
+                  : [];
+                const passed = row.gates_passed ?? (5 - failedGates.length);
+
+                return (
+                  <tr key={ticker + i}
+                    className="border-t border-zinc-800/40 hover:bg-zinc-800/20 transition-colors align-middle">
+                    {/* Ticker */}
+                    <td className="py-2 px-3 text-center">
+                      <span
+                        className="font-bold text-[13px] text-zinc-100 hover:text-blue-400 transition-colors cursor-pointer"
+                        onClick={e => {
+                          cancelHover();
+                          const rect = e.currentTarget.getBoundingClientRect();
+                          onTickerClick && onTickerClick(ticker, rect);
+                        }}
+                        onMouseEnter={e => startHover(ticker, e.currentTarget.getBoundingClientRect())}
+                        onMouseLeave={cancelHover}
+                      >
+                        {ticker}
+                      </span>
+                    </td>
+                    {/* Last */}
+                    <td className="py-2 px-3 text-center font-mono text-zinc-300">
+                      {row.price != null && row.price !== 0 ? `$${Number(row.price).toFixed(2)}` : '—'}
+                    </td>
+                    {/* Chg% */}
+                    <td className="py-2 px-3 text-center font-mono">
+                      {row.change_pct != null
+                        ? <span className={row.change_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}>
+                            {row.change_pct >= 0 ? '+' : ''}{Number(row.change_pct).toFixed(2)}%
+                          </span>
+                        : <span className="text-zinc-600">—</span>}
+                    </td>
+                    {/* Vol */}
+                    <td className="py-2 px-3 text-center font-mono text-zinc-400">
+                      {row.volume != null ? fmtNum(row.volume) : '—'}
+                    </td>
+                    {/* RS */}
+                    <td className="py-2 px-3 text-center font-mono">
+                      {row.rs_placeholder != null
+                        ? <span className={row.rs_placeholder >= 85 ? 'text-emerald-400 font-bold' : 'text-zinc-400'}>
+                            {row.rs_placeholder}
+                          </span>
+                        : <span className="text-zinc-600">—</span>}
+                    </td>
+                    {/* Gate Status */}
+                    <td className="py-2 px-3 text-center">
+                      {row.meets_all_gates ? (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded border text-[11px] font-bold font-mono bg-emerald-500/15 text-emerald-400 border-emerald-500/30">
+                          ✓ All 5
+                        </span>
+                      ) : (
+                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded border text-[11px] font-bold font-mono ${passed >= 4 ? 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30' : 'bg-red-500/15 text-red-400 border-red-500/30'}`}>
+                          {passed}/5
+                          {failedGates.length > 0 && (
+                            <span className="font-normal text-[10px] opacity-80">
+                              · {failedGates.join(', ')} fail
+                            </span>
+                          )}
+                        </span>
+                      )}
+                    </td>
+                    {/* Source */}
+                    <td className="py-2 px-3 text-center">
+                      <span className="px-1.5 py-0.5 text-[10px] font-bold rounded border bg-emerald-500/15 text-emerald-400 border-emerald-500/30 font-mono leading-none">
+                        IBKR
+                      </span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const EarningsStrip = ({ earningsData, gapperTickers = new Set(), onTickerClick }) => {
   const today = earningsData?.today;
   if (!today?.length) return null;
@@ -2533,6 +2661,10 @@ const GapperScanner = ({ earningsData }) => {
           </tbody>
         </table>
       </div>
+      <IBKRScannerTable
+        ibkrScanner={gapperData?.ibkr_scanner}
+        onTickerClick={(ticker, rect) => setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect })}
+      />
     </div>
     {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
     </>
