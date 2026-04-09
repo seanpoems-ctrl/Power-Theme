@@ -543,7 +543,140 @@ const PerfCellLB = ({ val }) => {
 const LB_PERF_COLS = new Set(['perf_1d','perf_1w','perf_1m','perf_3m','perf_6m']);
 
 
-const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {} }) => {
+const IbkrGatesBadge = ({ passed }) => {
+  const total = 5;
+  const cls = passed === 5 ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
+            : passed === 4 ? 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30'
+            :                'bg-red-500/15 text-red-400 border-red-500/30';
+  return (
+    <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-bold rounded border font-mono ${cls}`}>
+      ✓ {passed}/{total}
+    </span>
+  );
+};
+
+const IbkrSourceBadge = ({ source }) => {
+  const isIbkr = source === 'ibkr';
+  return (
+    <span className={`px-1.5 py-0.5 text-[10px] font-bold rounded border font-mono ${isIbkr ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' : 'bg-zinc-700/40 text-zinc-500 border-zinc-600/40'}`}>
+      {isIbkr ? 'IBKR' : 'Finviz'}
+    </span>
+  );
+};
+
+const IbkrLeaderboard = ({ ibkrThemesData, onTickerHover }) => {
+  const powerThemes = ibkrThemesData?.power_themes || [];
+  const isLive = ibkrThemesData?.data_source === 'ibkr';
+
+  if (!ibkrThemesData) {
+    return (
+      <div className="flex items-center justify-center py-12 text-zinc-600 text-[12px]">
+        IBKR themes not yet generated — run ibkr_themes.py
+      </div>
+    );
+  }
+
+  if (powerThemes.length === 0) {
+    return (
+      <div className="flex items-center justify-center py-12 text-zinc-600 text-[12px]">
+        No power themes found in current scan
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {/* Data source status bar */}
+      <div className="flex items-center gap-2 px-2 pb-2 border-b border-zinc-800/40 mb-1">
+        <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono ${isLive ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/40' : 'bg-orange-500/15 text-orange-400 border-orange-500/40'}`}>
+          {isLive ? '● LIVE' : '◐ DELAYED'}
+        </span>
+        <span className="text-[10px] text-zinc-600">{ibkrThemesData.data_source} · {powerThemes.length} themes · {powerThemes.reduce((n, t) => n + t.leaders.length, 0)} leaders</span>
+        {ibkrThemesData.generated_at && (
+          <span className="text-[10px] text-zinc-700 ml-auto">
+            {new Date(ibkrThemesData.generated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          </span>
+        )}
+      </div>
+      <table className="w-full text-left">
+        <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
+          <tr className="border-b border-zinc-800/60">
+            <th className="px-2 py-2 w-6 text-[11px] text-zinc-600 select-none">#</th>
+            <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Theme</th>
+            <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center whitespace-nowrap">Leaders</th>
+            <th className="px-2 py-2 w-14 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">1D</th>
+            <th className="px-2 py-2 w-14 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">RS</th>
+            <th className="px-2 py-2 w-16 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">Gates</th>
+            <th className="px-2 py-2 w-16 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">Src</th>
+          </tr>
+        </thead>
+        <tbody>
+          {powerThemes.map((theme, i) => {
+            const perf1d = theme.perf_1d;
+            const perfCls = perf1d == null ? 'text-zinc-600' : perf1d > 0 ? 'text-emerald-400' : perf1d < 0 ? 'text-red-400' : 'text-zinc-500';
+            const rsCls = (theme.theme_rs || 0) >= 85 ? 'text-emerald-400' : 'text-red-400';
+            const leaders = theme.leaders || [];
+            const topLeaders = leaders.slice(0, 3);
+            // Gates: use the min gates_passed among leaders as the theme-level indicator
+            const minGates = topLeaders.reduce((m, l) => Math.min(m, l.gates_passed ?? 5), 5);
+            // Secondary themes: collect unique secondary themes across top leaders
+            const secThemes = [...new Set(topLeaders.flatMap(l => l.secondary_themes || []))].slice(0, 3);
+            // Source: theme-level is live/fallback from ibkrThemesData
+            const themeSource = ibkrThemesData?.data_source || 'fallback';
+
+            return (
+              <tr key={theme.name}
+                className={`border-b border-zinc-800/30 transition-colors ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
+                <td className={`px-1 py-2 text-[12px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
+                <td className="px-2 py-2 min-w-0">
+                  <div className="text-[12px] font-semibold text-zinc-200 whitespace-nowrap">{theme.name}</div>
+                  {secThemes.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mt-0.5">
+                      {secThemes.map(s => (
+                        <span key={s} className="text-[9px] text-zinc-600 bg-zinc-800/60 px-1 py-0.5 rounded leading-none">{s}</span>
+                      ))}
+                    </div>
+                  )}
+                </td>
+                <td className="px-2 py-1.5">
+                  <div className="flex flex-wrap gap-1">
+                    {topLeaders.map(l => {
+                      const setupCls = l.setup_label === 'Flag' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
+                                     : l.setup_label === 'Base' ? 'text-blue-400 bg-blue-500/10 border-blue-500/20'
+                                     : l.setup_label === 'Watch' ? 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20'
+                                     : 'text-zinc-500 bg-zinc-800/60 border-zinc-700/40';
+                      return (
+                        <span key={l.ticker}
+                          className={`text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded border cursor-pointer transition-colors hover:opacity-80 ${setupCls}`}
+                          onClick={e => onTickerHover && onTickerHover(l.ticker, e.currentTarget.getBoundingClientRect())}>
+                          {l.ticker}
+                        </span>
+                      );
+                    })}
+                  </div>
+                </td>
+                <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${perfCls}`}>
+                  {perf1d != null ? `${perf1d > 0 ? '+' : ''}${perf1d.toFixed(1)}%` : '—'}
+                </td>
+                <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${rsCls}`}>
+                  {theme.theme_rs != null ? Math.round(theme.theme_rs) : '—'}
+                </td>
+                <td className="px-1 py-1.5 text-center">
+                  <IbkrGatesBadge passed={minGates} />
+                </td>
+                <td className="px-1 py-1.5 text-center">
+                  <IbkrSourceBadge source={themeSource} />
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
   const [expanded, setExpanded] = useState(null);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
@@ -657,15 +790,26 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         )}
         <div className="flex-1"></div>
         <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 flex-shrink-0">
-          {[{k:"themes",l:"Themes Map"},{k:"industry",l:"Industry"}].map(v => (
+          {[{k:"themes",l:"Themes Map"},{k:"industry",l:"Industry"},{k:"ibkr",l:"IBKR Power"}].map(v => (
             <button key={v.k} onClick={() => { setView(v.k); setExpanded(null); }}
-              className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all ${view === v.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
+              className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all flex items-center gap-1 ${view === v.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
               {v.l}
+              {v.k === "ibkr" && (
+                ibkrThemesData?.data_source === "ibkr"
+                  ? <span className="px-1 py-0.5 text-[9px] font-bold rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 leading-none">LIVE</span>
+                  : <span className="px-1 py-0.5 text-[9px] font-bold rounded bg-orange-500/20 text-orange-400 border border-orange-500/30 leading-none">DELAYED</span>
+              )}
             </button>
           ))}
         </div>
       </div>
       <div className="overflow-y-auto overflow-x-auto" style={{ maxHeight: '497px' }}>
+        {view === "ibkr" ? (
+          <IbkrLeaderboard
+            ibkrThemesData={ibkrThemesData}
+            onTickerHover={(ticker, rect) => setThemeHover(prev => prev?.ticker === ticker ? null : { ticker, rect })}
+          />
+        ) : (
         <table className="w-full text-left">
           <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
             <tr className="border-b border-zinc-800/60">
@@ -718,6 +862,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
             })}
           </tbody>
         </table>
+        )}
       </div>
     </div>
     {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => setThemeHover(null)}/>}
@@ -4239,7 +4384,7 @@ const filtered = useMemo(() => {
             </div>
             {/* Right: Leaderboard */}
             <div className="flex-1 min-w-0">
-              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} themes={data.themes} />}
+              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} themes={data.themes} ibkrThemesData={ibkrThemesData} />}
             </div>
           </div>
           <div className="mb-4">
