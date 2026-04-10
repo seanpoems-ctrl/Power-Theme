@@ -2028,6 +2028,282 @@ const PositionCalc = ({ ibkrThemesData }) => {
   );
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Compact widgets for the new Thematic Scanner v2 layout (matches screenshot)
+// ─────────────────────────────────────────────────────────────────────────────
+
+const PanelLabel = ({ children, badge, badgeClass = "bg-emerald-500/10 text-emerald-400 border-emerald-500/30" }) => (
+  <div className="flex items-center justify-between mb-2">
+    <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em]">{children}</div>
+    {badge && <span className={`px-1.5 py-0.5 text-[9px] font-bold rounded border ${badgeClass}`}>{badge}</span>}
+  </div>
+);
+
+const VixFearGaugeV2 = ({ vix }) => {
+  const v = vix ?? 0;
+  const cfg =
+    v >= 30 ? { label: "EXTREME FEAR", cls: "text-red-400" } :
+    v >= 24 ? { label: "ELEVATED CONCERN", cls: "text-amber-400" } :
+    v >= 18 ? { label: "CAUTION", cls: "text-yellow-400" } :
+    v >= 14 ? { label: "NORMAL", cls: "text-emerald-400" } :
+              { label: "COMPLACENT", cls: "text-blue-400" };
+  const expectedMove = v ? (v / 16).toFixed(2) : "—";
+  return (
+    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+      <PanelLabel badge="IBKR">VIX Fear Gauge</PanelLabel>
+      <div className="text-[28px] leading-none font-bold font-mono text-zinc-100">{v ? v.toFixed(1) : "—"}</div>
+      <div className={`text-[11px] font-semibold mt-1 ${cfg.cls}`}>⚠ {cfg.label}</div>
+      <div className="mt-2 pt-2 border-t border-zinc-800/60">
+        <div className="text-[10px] text-zinc-500">SPX Expected Move</div>
+        <div className="text-[14px] font-bold font-mono text-zinc-200">±{expectedMove}%</div>
+      </div>
+    </div>
+  );
+};
+
+const GeminiCommentaryCard = ({ vix }) => {
+  const v = vix ?? 0;
+  const text =
+    v >= 30 ? "VIX > 30 = panic regime. Cash heavy, only A+ setups, half size."
+    : v >= 24 ? "VIX > 24 = institutional hedging active. Reduce size, tighten stops. Avoid chasing."
+    : v >= 18 ? "VIX in caution zone. Trade selectively — favor RS leaders only."
+    : "Low VIX = trend friendly. Standard entries on RS leaders OK.";
+  return (
+    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+      <div className="flex items-center gap-1.5 mb-1.5">
+        <span className="text-[12px] text-blue-400">✦</span>
+        <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em]">Gemini</div>
+      </div>
+      <div className="text-[11px] leading-snug text-zinc-300">{text}</div>
+    </div>
+  );
+};
+
+const MarketInternalsV2 = ({ mc, internalsData }) => {
+  if (!mc) return null;
+  const { adv_dec, new_hl, sma50_counts, sma200_counts } = mc;
+  const advTxt = adv_dec ? `${adv_dec.advancing}/${adv_dec.declining}` : "—";
+  const advPct = adv_dec ? (adv_dec.adv_pct ?? 0) : 0;
+  const sma50pct = sma50_counts?.above_pct ?? 0;
+  const sma200pct = sma200_counts?.above_pct ?? 0;
+  const advCls = advPct >= 60 ? "text-emerald-400" : advPct >= 40 ? "text-amber-400" : "text-red-400";
+  const sma50cls = sma50pct >= 60 ? "text-emerald-400" : sma50pct >= 40 ? "text-amber-400" : "text-red-400";
+  const sma200cls = sma200pct >= 60 ? "text-emerald-400" : sma200pct >= 40 ? "text-amber-400" : "text-red-400";
+  const advBar = advPct >= 60 ? "bg-emerald-500" : advPct >= 40 ? "bg-amber-500" : "bg-red-500";
+  const sma50bar = sma50pct >= 60 ? "bg-emerald-500" : sma50pct >= 40 ? "bg-amber-500" : "bg-red-500";
+  const sma200bar = sma200pct >= 60 ? "bg-emerald-500" : sma200pct >= 40 ? "bg-amber-500" : "bg-red-500";
+  const newHigh = new_hl?.new_high ?? 0;
+  const newLow = new_hl?.new_low ?? 0;
+  const tick = internalsData?.tick;
+  const trin = internalsData?.trin;
+  const t2108 = internalsData?.t2108;
+  const interpret = (k, v) => {
+    if (v == null) return "—";
+    if (k === "trin") return v < 0.7 ? "Buy" : v > 1.3 ? "Sell" : "Neutral";
+    if (k === "t2108") return v < 20 ? "Oversold" : v > 80 ? "Overbought" : "Neutral";
+    return "";
+  };
+  return (
+    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+      <PanelLabel badge="IBKR">Market Internals</PanelLabel>
+      <div className="space-y-1.5">
+        <div>
+          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">ADV/DEC</span><span className={`font-mono font-semibold ${advCls}`}>{advTxt}</span></div>
+          <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className={`h-full ${advBar}`} style={{ width: `${Math.min(100, Math.max(0, advPct))}%` }}/></div>
+        </div>
+        <div>
+          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">SMA50 ↑</span><span className={`font-mono font-semibold ${sma50cls}`}>{sma50pct.toFixed(0)}%</span></div>
+          <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className={`h-full ${sma50bar}`} style={{ width: `${Math.min(100, sma50pct)}%` }}/></div>
+        </div>
+        <div>
+          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">SMA200 ↑</span><span className={`font-mono font-semibold ${sma200cls}`}>{sma200pct.toFixed(0)}%</span></div>
+          <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className={`h-full ${sma200bar}`} style={{ width: `${Math.min(100, sma200pct)}%` }}/></div>
+        </div>
+      </div>
+      <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 mt-2 pt-2 border-t border-zinc-800/60 text-[10px] font-mono">
+        <span className="text-zinc-500">52W Hi</span><span className="text-blue-400 text-right">{newHigh}</span>
+        <span className="text-zinc-500">52W Lo</span><span className="text-red-400 text-right">{newLow}</span>
+        <span className="text-zinc-500">TICK</span><span className={`text-right ${tick == null ? "text-zinc-600" : tick >= 0 ? "text-emerald-400" : "text-red-400"}`}>{tick == null ? "—" : (tick > 0 ? "+" : "") + tick}</span>
+        <span className="text-zinc-500">TRIN</span><span className="text-zinc-300 text-right">{trin == null ? "—" : `${trin.toFixed(2)} ${interpret("trin", trin)}`}</span>
+        <span className="text-zinc-500">T2108</span><span className="text-zinc-300 text-right">{t2108 == null ? "—" : `${t2108.toFixed(2)} ${interpret("t2108", t2108)}`}</span>
+      </div>
+    </div>
+  );
+};
+
+const AlertRulesCard = () => (
+  <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+    <PanelLabel badge="ntfy.sh" badgeClass="bg-blue-500/10 text-blue-400 border-blue-500/30">Alert Rules</PanelLabel>
+    <div className="space-y-1.5">
+      <div className="bg-emerald-500/[0.06] border border-emerald-500/20 rounded-md px-2 py-1.5">
+        <div className="text-[11px] font-semibold text-emerald-400">AI &amp; Semi RS &gt; 95</div>
+        <div className="text-[9px] text-zinc-500 mt-0.5">Push · ntfy.sh · Active</div>
+      </div>
+      <div className="bg-amber-500/[0.06] border border-amber-500/20 rounded-md px-2 py-1.5">
+        <div className="text-[11px] font-semibold text-amber-400">Gapper T1 Catalyst</div>
+        <div className="text-[9px] text-zinc-500 mt-0.5">Push · Pushover · Active</div>
+      </div>
+      <button className="w-full text-left text-[11px] text-zinc-500 hover:text-zinc-300 px-2 py-1.5 border border-dashed border-zinc-800 rounded-md">
+        + Add Rule
+        <div className="text-[9px] text-zinc-700">Theme RS · Grade · ADR · RS cross</div>
+      </button>
+    </div>
+  </div>
+);
+
+const LeadersAllThemesCard = ({ themes }) => {
+  const all = (themes || []).flatMap(t => (t.subthemes || []).flatMap(s => s.stocks || []));
+  const seen = new Set();
+  const dedup = [];
+  for (const s of all) { if (!seen.has(s.ticker)) { seen.add(s.ticker); dedup.push(s); } }
+  const filtered = dedup
+    .filter(s => (s.rs_52w ?? 0) >= 85 && (s.price ?? 0) >= 12 && (s.adr_pct ?? 0) >= 4)
+    .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))
+    .slice(0, 12);
+  return (
+    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em] mb-1">Leaders — All Themes</div>
+      <div className="text-[9px] text-zinc-600 mb-2 leading-tight">RS&gt;85 · Price&gt;$12 · Vol&gt;$100M · Cap&gt;$2B · ADR≥4%</div>
+      {filtered.length === 0 ? (
+        <div className="text-[10px] text-zinc-600 italic">No qualifiers</div>
+      ) : (
+        <div className="space-y-0.5">
+          {filtered.map(s => (
+            <div key={s.ticker} className="flex items-center justify-between text-[12px] py-1 border-b border-zinc-800/40 last:border-0">
+              <span className="font-bold text-blue-400 font-mono">{s.ticker}</span>
+              <span className="font-mono text-emerald-400 font-semibold">{s.rs_52w}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const ActiveAlertsCardV2 = () => (
+  <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+    <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em] mb-2">Active Alerts</div>
+    <div className="space-y-1.5">
+      <div className="bg-emerald-500/[0.06] border border-emerald-500/20 rounded-md px-2 py-1.5">
+        <div className="text-[11px] font-semibold text-emerald-400">AI Semi RS &gt; 95</div>
+        <div className="text-[9px] text-zinc-500 mt-0.5">Fired · ntfy.sh ✓</div>
+      </div>
+      <div className="bg-amber-500/[0.06] border border-amber-500/20 rounded-md px-2 py-1.5">
+        <div className="text-[11px] font-semibold text-amber-400">RKLB T1 Gapper</div>
+        <div className="text-[9px] text-zinc-500 mt-0.5">Fired · Pushover ✓</div>
+      </div>
+    </div>
+  </div>
+);
+
+const IBKRTWSScannerCard = ({ ibkrData }) => {
+  const scanner = ibkrData?.scanner || [];
+  const top = scanner.slice(0, 5);
+  return (
+    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em] mb-1">IBKR TWS Scanner</div>
+      <div className="text-[9px] text-zinc-600 mb-2">Mirroring: Top Pre-Mkt Gainers</div>
+      {top.length === 0 ? (
+        <div className="text-[10px] text-zinc-600 italic">TWS offline</div>
+      ) : (
+        <div className="space-y-0.5">
+          {top.map(s => {
+            const chg = s.change_pct ?? 0;
+            const cls = chg >= 10 ? "text-emerald-400" : chg >= 0 ? "text-amber-400" : "text-red-400";
+            return (
+              <div key={s.ticker} className="flex items-center justify-between text-[12px] py-1 border-b border-zinc-800/40 last:border-0">
+                <span className="font-bold text-blue-400 font-mono">{s.ticker}</span>
+                <span className={`font-mono font-semibold ${cls}`}>{chg >= 0 ? "+" : ""}{chg.toFixed(1)}%</span>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const DataSourcesCard = ({ ibkrData }) => {
+  const ibkrLive = ibkrData?.connected;
+  return (
+    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em] mb-2">Data Sources</div>
+      <div className="space-y-1 text-[10px]">
+        <div className="flex items-center justify-between">
+          <span className="text-zinc-500">Primary</span>
+          <span className={`px-1.5 py-0.5 text-[9px] font-bold rounded border ${ibkrLive ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30" : "bg-zinc-800 text-zinc-500 border-zinc-700"}`}>IBKR TWS</span>
+        </div>
+        <div className="flex items-center justify-between"><span className="text-zinc-500">Fallback 1</span><span className="text-zinc-400">Finviz</span></div>
+        <div className="flex items-center justify-between"><span className="text-zinc-500">Fallback 2</span><span className="text-zinc-400">yfinance</span></div>
+        <div className="flex items-center justify-between"><span className="text-zinc-500">News</span><span className="text-zinc-400">IBKR→Benzinga</span></div>
+      </div>
+    </div>
+  );
+};
+
+const SectorRSBars = ({ themes, finvizThemeRankings }) => {
+  const data = (() => {
+    const rankings = finvizThemeRankings || [];
+    if (rankings.length > 0) {
+      return rankings.slice(0, 8).map(r => ({
+        name: r.name,
+        rs: Math.round(r.rs_score ?? r.perf_1m ?? 0),
+      }));
+    }
+    return (themes || []).slice(0, 8).map(t => {
+      const stocks = (t.subthemes || []).flatMap(s => s.stocks || []);
+      const avgRS = stocks.length ? stocks.reduce((a, s) => a + (s.rs_52w ?? 0), 0) / stocks.length : 0;
+      return { name: t.name, rs: Math.round(avgRS) };
+    });
+  })();
+  if (!data.length) return null;
+  const colorOf = (rs) =>
+    rs >= 85 ? "bg-emerald-500" : rs >= 70 ? "bg-emerald-400/80" : rs >= 55 ? "bg-amber-400/80" : rs >= 40 ? "bg-orange-500/80" : "bg-red-500/80";
+  const textOf = (rs) =>
+    rs >= 85 ? "text-emerald-400" : rs >= 70 ? "text-emerald-300" : rs >= 55 ? "text-amber-400" : rs >= 40 ? "text-orange-400" : "text-red-400";
+  return (
+    <div className="bg-zinc-900/40 border border-zinc-800/50 rounded-xl p-3 mb-3">
+      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em] mb-2">Sector RS Bars (Finviz 1D Proxy)</div>
+      <div className="space-y-1.5">
+        {data.map(d => (
+          <div key={d.name} className="flex items-center gap-2">
+            <div className="w-44 text-[11px] text-zinc-300 truncate">{d.name}</div>
+            <div className="flex-1 h-2 bg-zinc-800/60 rounded-full overflow-hidden">
+              <div className={`h-full rounded-full ${colorOf(d.rs)} transition-all`} style={{ width: `${Math.min(100, Math.max(2, d.rs))}%` }}/>
+            </div>
+            <div className={`w-14 text-right text-[11px] font-mono font-semibold ${textOf(d.rs)}`}>{d.rs} RS</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const BottomStatusBar = ({ ibkrData, briefData }) => {
+  const ibkrLive = ibkrData?.connected;
+  return (
+    <div className="border-t border-zinc-800/60 bg-zinc-950/80 px-4 py-1.5 mt-3 flex items-center justify-between text-[10px] font-mono text-zinc-500 flex-wrap gap-2">
+      <div className="flex items-center gap-3 flex-wrap">
+        <span className="flex items-center gap-1">
+          <span className={`w-1.5 h-1.5 rounded-full ${ibkrLive ? "bg-emerald-400" : "bg-zinc-600"}`}/>
+          {ibkrLive ? "IBKR Connected · TWS 10.19" : "IBKR Offline"}
+        </span>
+        <span className="flex items-center gap-1">
+          <span className={`w-1.5 h-1.5 rounded-full ${briefData ? "bg-emerald-400" : "bg-zinc-600"}`}/>
+          Gemini API {briefData ? "Active" : "—"}
+        </span>
+        <span className="flex items-center gap-1">
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"/>
+          ntfy.sh Alerts Live
+        </span>
+        <span className="text-zinc-700">|</span>
+        <span>Fallback: Finviz · yfinance · Benzinga · TradingView Screener</span>
+      </div>
+      <div>Backend: localhost:8000 · Frontend: Render</div>
+    </div>
+  );
+};
+
 // Color-coded keyword categories for breaking news highlighting
 const _KW_CATEGORIES = [
   // Geopolitical / conflict — orange
@@ -6267,94 +6543,72 @@ const filtered = useMemo(() => {
       </div>
 
       {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <NewsEconTab data={data} econData={econData} earningsData={earningsData} newsData={newsData}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
-        <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-4">
-        <div className="flex-1 min-w-0">
-          {/* Market Condition — full-width row */}
-          {data?.market_condition && (() => {
-            const { signal, adv_dec, new_hl, sma50_counts, sma200_counts } = data.market_condition;
-            const sigCfg = signal === "green"
-              ? { dot: "bg-emerald-400", glow: "#34d39980", border: "border-emerald-500/30", bg: "bg-emerald-500/[0.06]", label: "Market Uptrend",    guide: "正常執行突破單 — SPY & QQQ 站上所有均線" }
-              : signal === "yellow"
-              ? { dot: "bg-amber-400",   glow: "#fbbf2480", border: "border-amber-500/30",  bg: "bg-amber-500/[0.06]",  label: "Market Correction", guide: "暫停常規突破，只做 RS 最強的少數股票" }
-              : { dot: "bg-red-400",     glow: "#f8717180", border: "border-red-500/30",    bg: "bg-red-500/[0.06]",    label: "Market Downtrend",  guide: "停止所有新倉突破單，現金為王" };
-            const BC = ({ leftLabel, leftVal, leftCount, rightLabel, rightVal, rightCount, centerLabel }) => {
-              const lp = leftVal ?? 0;
-              const rp = rightVal ?? 0;
-              return (
-                <div className="flex-1 min-w-[120px] bg-zinc-900/60 border border-zinc-700/40 rounded-lg px-3 py-2">
-                  <div className="flex justify-between items-baseline mb-1.5">
-                    <span className="text-[11px] font-semibold text-emerald-400">{leftLabel}</span>
-                    {centerLabel && <span className="text-[10px] text-zinc-500 font-medium">{centerLabel}</span>}
-                    <span className="text-[11px] font-semibold text-red-400">{rightLabel}</span>
-                  </div>
-                  <div className="flex justify-between items-baseline mb-1">
-                    <span className="text-[13px] font-bold text-emerald-300">{lp.toFixed(1)}%{leftCount != null ? ` (${leftCount})` : ""}</span>
-                    <span className="text-[13px] font-bold text-red-300">{rp.toFixed(1)}%{rightCount != null ? ` (${rightCount})` : ""}</span>
-                  </div>
-                  <div className="flex gap-0.5 h-1.5 rounded-full overflow-hidden">
-                    <div className="bg-emerald-500 rounded-l-full transition-all" style={{ width: `${lp}%` }}/>
-                    <div className="bg-red-500 rounded-r-full transition-all" style={{ width: `${rp}%` }}/>
-                  </div>
-                </div>
-              );
-            };
-            return (
-              <div className={`rounded-xl border ${sigCfg.border} ${sigCfg.bg} p-3 mb-2`}>
-                <div className="flex items-center gap-2 pb-1.5 mb-2 border-b border-zinc-800/50">
-                  <span className={`w-2.5 h-2.5 rounded-full flex-shrink-0 ${sigCfg.dot}`} style={{ boxShadow: `0 0 8px 3px ${sigCfg.glow}` }}/>
-                  <span className="text-[13px] font-semibold text-zinc-100">{sigCfg.label}</span>
-                  <span className="text-[10px] text-zinc-500 ml-auto">{sigCfg.guide}</span>
-                </div>
-                <div className="flex gap-2">
-                  {adv_dec && (
-                    <BC leftLabel="Advancing" leftVal={adv_dec.adv_pct} leftCount={adv_dec.advancing}
-                        rightLabel="Declining" rightVal={adv_dec.dec_pct} rightCount={adv_dec.declining} />
-                  )}
-                  {new_hl && (
-                    <BC leftLabel="New High" leftVal={new_hl.nh_pct} leftCount={new_hl.new_high}
-                        rightLabel="New Low" rightVal={new_hl.nl_pct} rightCount={new_hl.new_low} />
-                  )}
-                  {sma50_counts && (
-                    <BC leftLabel="Above" leftVal={sma50_counts.above_pct} leftCount={sma50_counts.above}
-                        rightLabel="Below" rightVal={sma50_counts.below_pct} rightCount={sma50_counts.below}
-                        centerLabel="SMA50" />
-                  )}
-                  {sma200_counts && (
-                    <BC leftLabel="Above" leftVal={sma200_counts.above_pct} leftCount={sma200_counts.above}
-                        rightLabel="Below" rightVal={sma200_counts.below_pct} rightCount={sma200_counts.below}
-                        centerLabel="SMA200" />
-                  )}
-                </div>
-              </div>
-            );
-          })()}
-          <ThemeHeatmap themes={data?.themes} finvizThemeRankings={data?.finviz_theme_rankings}/>
-          <div className="flex items-stretch gap-6 mb-2">
-            <div className="w-[300px] flex-shrink-0 flex flex-col gap-4">
-              <VixGauge initialVix={data?.vix}/>
-              <PositionCalc ibkrThemesData={ibkrData}/>
-              <ScannerBriefFeed briefData={briefData} newsData={newsData}/>
-            </div>
-            {/* Right: Leaderboard */}
-            <div className="flex-1 min-w-0">
-              {data && <Leaderboard themeRankings={data.theme_rankings} industryRankings={data.industry_rankings} finvizThemeRankings={data.finviz_theme_rankings} themes={data.themes} ibkrThemesData={ibkrThemesData} onViewChange={v => { setLbView(v); setSpotlightThemeName(null); }} onThemeSelect={name => setSpotlightThemeName(name)} />}
-            </div>
-          </div>
-          <div className="mb-4">
+        <>
+        <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
+          {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
+          <aside className="w-[260px] flex-shrink-0 flex flex-col gap-3">
+            <VixFearGaugeV2 vix={data?.vix}/>
+            <GeminiCommentaryCard vix={data?.vix}/>
+            <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData}/>
+            <PositionCalc ibkrThemesData={ibkrData}/>
+            <AlertRulesCard/>
+          </aside>
+
+          {/* ── CENTER MAIN CONTENT ──────────────────────────────── */}
+          <main className="flex-1 min-w-0 flex flex-col gap-3">
+            <ThemeHeatmap themes={data?.themes} finvizThemeRankings={data?.finviz_theme_rankings}/>
+            {data && <Leaderboard
+              themeRankings={data.theme_rankings}
+              industryRankings={data.industry_rankings}
+              finvizThemeRankings={data.finviz_theme_rankings}
+              themes={data.themes}
+              ibkrThemesData={ibkrThemesData}
+              onViewChange={v => { setLbView(v); setSpotlightThemeName(null); }}
+              onThemeSelect={name => setSpotlightThemeName(name)}
+            />}
             {data && <CorrelationGuard themes={data.themes}/>}
             {data && <CounterTrendWarning themes={data.themes}/>}
+            <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData}/>
+            <SectorRSBars themes={data?.themes} finvizThemeRankings={data?.finviz_theme_rankings}/>
+          </main>
+
+          {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
+          <aside className="w-[200px] flex-shrink-0 flex flex-col gap-3">
+            <LeadersAllThemesCard themes={data?.themes}/>
+            <ActiveAlertsCardV2/>
+            <IBKRTWSScannerCard ibkrData={ibkrData}/>
+            <DataSourcesCard ibkrData={ibkrData}/>
+          </aside>
+        </div>
+
+        {/* ── FULL THEME DETAIL SECTIONS (collapsible deep dive) ── */}
+        {filtered.length > 0 && (
+          <div className="max-w-[1560px] mx-auto px-4 pb-4">
+            {filtered.map((t,i) => (
+              <ThemeSection
+                key={t.name+i}
+                theme={t}
+                lbPerfKey={lbPerfKey}
+                spyPerf={data?.spy_benchmarks?.[rsSPYKey]}
+                rsSPYKey={rsSPYKey}
+                isTopTheme={i===0}
+                topADRTickers={topADRTickers}
+                themeRankings={data?.theme_rankings}
+                finvizThemeRankings={data?.finviz_theme_rankings}
+              />
+            ))}
           </div>
-          <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData} />
-          {filtered.length === 0 ? (
-            <div className="text-center py-16 text-zinc-500">
-              <BarChart3 size={28} className="mx-auto mb-3 opacity-40"/>
-              <p className="text-sm">No results</p>
-              <button onClick={()=>{setFiltersOn(false);setSearch("");}} className="mt-2 text-[13px] text-blue-400 hover:underline">Reset</button>
-            </div>
-          ) : filtered.map((t,i) => <ThemeSection key={t.name+i} theme={t} lbPerfKey={lbPerfKey} spyPerf={data?.spy_benchmarks?.[rsSPYKey]} rsSPYKey={rsSPYKey} isTopTheme={i===0} topADRTickers={topADRTickers} themeRankings={data?.theme_rankings} finvizThemeRankings={data?.finviz_theme_rankings}/>)}
-        </div>
-        <LeaderColumn ibkrThemesData={ibkrThemesData} mode="scanner" />
-        </div>
+        )}
+        {filtered.length === 0 && data && (
+          <div className="max-w-[1560px] mx-auto text-center py-8 text-zinc-500">
+            <BarChart3 size={24} className="mx-auto mb-2 opacity-40"/>
+            <p className="text-sm">No themes match current filters</p>
+            <button onClick={()=>{setFiltersOn(false);setSearch("");}} className="mt-2 text-[13px] text-blue-400 hover:underline">Reset</button>
+          </div>
+        )}
+
+        <BottomStatusBar ibkrData={ibkrData} briefData={briefData}/>
+        </>
       )}
       {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect} chartUrl={macroHover.chartUrl} onClose={() => setMacroHover(null)}/>}
     </div>
