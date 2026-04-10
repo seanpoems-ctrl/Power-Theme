@@ -687,51 +687,6 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
       ) : (
         <div className="text-center py-6 text-zinc-600 text-[12px]">No stocks found for this theme</div>
       )}
-      {/* Sector RS Bars */}
-      {(() => {
-        const allThemeRS = [];
-        if (lbView === 'ibkr' && ibkrThemesData?.power_themes) {
-          for (const pt of ibkrThemesData.power_themes) {
-            if (pt.theme_rs != null) allThemeRS.push({ name: pt.name, rs: Math.round(pt.theme_rs) });
-          }
-        } else if (data?.themes) {
-          for (const theme of data.themes) {
-            const norm = theme.subthemes ? theme : { ...theme, subthemes: [{ stocks: theme.stocks || [] }] };
-            const stocks = norm.subthemes.flatMap(s => s.stocks);
-            const vals = stocks.map(s => s.rs_52w).filter(v => v != null);
-            if (vals.length) {
-              const avg = Math.round(vals.reduce((a, v) => a + v, 0) / vals.length);
-              allThemeRS.push({ name: norm.name, rs: avg });
-            }
-          }
-        }
-        if (!allThemeRS.length) return null;
-        const sorted = [...allThemeRS].sort((a, b) => b.rs - a.rs).slice(0, 8);
-        const maxRS = 99;
-        return (
-          <div className="mt-4 pt-3 border-t border-zinc-800/50">
-            <div className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.15em] mb-2">
-              Sector RS Bars (Finviz 1D Proxy)
-            </div>
-            <div className="flex flex-col gap-1.5">
-              {sorted.map(item => {
-                const pct = (item.rs / maxRS) * 100;
-                const barColor = item.rs >= 85 ? 'bg-emerald-500' : item.rs >= 70 ? 'bg-yellow-500' : 'bg-red-500';
-                const textColor = item.rs >= 85 ? 'text-emerald-400' : item.rs >= 70 ? 'text-yellow-400' : 'text-red-400';
-                return (
-                  <div key={item.name} className="flex items-center gap-2">
-                    <div className="w-36 text-[11px] text-zinc-400 truncate flex-shrink-0">{item.name}</div>
-                    <div className="flex-1 h-1.5 bg-zinc-800/60 rounded-full overflow-hidden">
-                      <div className={`h-full rounded-full ${barColor}`} style={{ width: `${pct}%` }}/>
-                    </div>
-                    <div className={`text-[11px] font-bold font-mono w-10 text-right flex-shrink-0 ${textColor}`}>{item.rs} RS</div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        );
-      })()}
     </div>
   );
 };
