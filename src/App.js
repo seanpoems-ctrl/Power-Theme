@@ -865,7 +865,14 @@ const ThemeHeatmap = ({ themes, finvizThemeRankings }) => {
     return rankings.map(r => ({ name: r.name, perf_1d: r.perf_1d }));
   }, [themes, finvizThemeRankings]);
 
-  const sorted = [...heatData].sort((a, b) => (b.perf_1d ?? -99) - (a.perf_1d ?? -99));
+  const { topBottom, hasEnough } = useMemo(() => {
+    const withVal = heatData.filter(h => h.perf_1d != null);
+    const sorted = [...withVal].sort((a, b) => (b.perf_1d ?? -99) - (a.perf_1d ?? -99));
+    if (sorted.length <= 10) return { topBottom: sorted, hasEnough: false };
+    const top5 = sorted.slice(0, 5);
+    const bottom5 = sorted.slice(-5);
+    return { topBottom: [...top5, ...bottom5], hasEnough: true };
+  }, [heatData]);
 
   const getColor = (v) => {
     if (v == null) return { bg: 'bg-zinc-800/60', text: 'text-zinc-500' };
@@ -879,18 +886,23 @@ const ThemeHeatmap = ({ themes, finvizThemeRankings }) => {
     return { bg: 'bg-red-500/60', text: 'text-red-100' };
   };
 
-  if (!sorted.length) return null;
+  if (!topBottom.length) return null;
 
   return (
     <div className="mb-3 bg-zinc-900/40 border border-zinc-800/50 rounded-xl p-3">
-      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.18em] mb-2">
-        Theme Heatmap — 1D RS Performance
+      <div className="flex items-center justify-between mb-2">
+        <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.18em]">
+          Theme Heatmap — 1D RS Performance
+        </div>
+        {hasEnough && (
+          <div className="text-[9px] text-zinc-600 uppercase tracking-wider">Top 5 · Bottom 5</div>
+        )}
       </div>
-      <div className="grid gap-1" style={{ gridTemplateColumns: 'repeat(6, 1fr)' }}>
-        {sorted.map(item => {
+      <div className="grid gap-1" style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}>
+        {topBottom.map((item, idx) => {
           const { bg, text } = getColor(item.perf_1d);
           return (
-            <div key={item.name} className={`rounded-lg p-2 ${bg} text-center`}>
+            <div key={`${item.name}-${idx}`} className={`rounded-lg p-2 ${bg} text-center`}>
               <div className={`text-[11px] font-semibold leading-tight truncate ${text}`}>{item.name}</div>
               <div className={`text-[12px] font-bold font-mono mt-0.5 ${text}`}>
                 {item.perf_1d != null ? `${item.perf_1d >= 0 ? '+' : ''}${item.perf_1d.toFixed(1)}%` : '—'}
