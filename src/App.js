@@ -2060,6 +2060,11 @@ const VixFearGaugeV2 = ({ vix }) => {
     v >= 14 ? { label: "NORMAL", cls: "text-emerald-400" } :
               { label: "COMPLACENT", cls: "text-blue-400" };
   const expectedMove = v ? (v / 16).toFixed(2) : "—";
+  const geminiText =
+    v >= 30 ? "VIX > 30 = panic regime. Cash heavy, only A+ setups, half size."
+    : v >= 24 ? "VIX > 24 = institutional hedging active. Reduce size, tighten stops. Avoid chasing."
+    : v >= 18 ? "VIX in caution zone. Trade selectively — favor RS leaders only."
+    : "Low VIX = trend friendly. Standard entries on RS leaders OK.";
   return (
     <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
       <PanelLabel badge="IBKR">VIX Fear Gauge</PanelLabel>
@@ -2069,24 +2074,13 @@ const VixFearGaugeV2 = ({ vix }) => {
         <div className="text-[10px] text-zinc-500">SPX Expected Move</div>
         <div className="text-[14px] font-bold font-mono text-zinc-200">±{expectedMove}%</div>
       </div>
-    </div>
-  );
-};
-
-const GeminiCommentaryCard = ({ vix }) => {
-  const v = vix ?? 0;
-  const text =
-    v >= 30 ? "VIX > 30 = panic regime. Cash heavy, only A+ setups, half size."
-    : v >= 24 ? "VIX > 24 = institutional hedging active. Reduce size, tighten stops. Avoid chasing."
-    : v >= 18 ? "VIX in caution zone. Trade selectively — favor RS leaders only."
-    : "Low VIX = trend friendly. Standard entries on RS leaders OK.";
-  return (
-    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-      <div className="flex items-center gap-1.5 mb-1.5">
-        <span className="text-[12px] text-blue-400">✦</span>
-        <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em]">Gemini</div>
+      <div className="mt-2 pt-2 border-t border-zinc-800/60">
+        <div className="flex items-center gap-1.5 mb-1">
+          <span className="text-[11px] text-blue-400">✦</span>
+          <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em]">Gemini</div>
+        </div>
+        <div className="text-[11px] leading-snug text-zinc-300">{geminiText}</div>
       </div>
-      <div className="text-[11px] leading-snug text-zinc-300">{text}</div>
     </div>
   );
 };
@@ -2259,43 +2253,6 @@ const DataSourcesCard = ({ ibkrData }) => {
   );
 };
 
-const SectorRSBars = ({ themes, finvizThemeRankings }) => {
-  const data = (() => {
-    const rankings = finvizThemeRankings || [];
-    if (rankings.length > 0) {
-      return rankings.slice(0, 8).map(r => ({
-        name: r.name,
-        rs: Math.round(r.rs_score ?? r.perf_1m ?? 0),
-      }));
-    }
-    return (themes || []).slice(0, 8).map(t => {
-      const stocks = (t.subthemes || []).flatMap(s => s.stocks || []);
-      const avgRS = stocks.length ? stocks.reduce((a, s) => a + (s.rs_52w ?? 0), 0) / stocks.length : 0;
-      return { name: t.name, rs: Math.round(avgRS) };
-    });
-  })();
-  if (!data.length) return null;
-  const colorOf = (rs) =>
-    rs >= 85 ? "bg-emerald-500" : rs >= 70 ? "bg-emerald-400/80" : rs >= 55 ? "bg-amber-400/80" : rs >= 40 ? "bg-orange-500/80" : "bg-red-500/80";
-  const textOf = (rs) =>
-    rs >= 85 ? "text-emerald-400" : rs >= 70 ? "text-emerald-300" : rs >= 55 ? "text-amber-400" : rs >= 40 ? "text-orange-400" : "text-red-400";
-  return (
-    <div className="bg-zinc-900/40 border border-zinc-800/50 rounded-xl p-3 mb-3">
-      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em] mb-2">Sector RS Bars (Finviz 1D Proxy)</div>
-      <div className="space-y-1.5">
-        {data.map(d => (
-          <div key={d.name} className="flex items-center gap-2">
-            <div className="w-44 text-[11px] text-zinc-300 truncate">{d.name}</div>
-            <div className="flex-1 h-2 bg-zinc-800/60 rounded-full overflow-hidden">
-              <div className={`h-full rounded-full ${colorOf(d.rs)} transition-all`} style={{ width: `${Math.min(100, Math.max(2, d.rs))}%` }}/>
-            </div>
-            <div className={`w-14 text-right text-[11px] font-mono font-semibold ${textOf(d.rs)}`}>{d.rs} RS</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
 
 const BottomStatusBar = ({ ibkrData, briefData }) => {
   const ibkrLive = ibkrData?.connected;
@@ -6566,7 +6523,6 @@ const filtered = useMemo(() => {
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
           <aside className="w-[260px] flex-shrink-0 flex flex-col gap-3">
             <VixFearGaugeV2 vix={data?.vix}/>
-            <GeminiCommentaryCard vix={data?.vix}/>
             <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData}/>
             <PositionCalc ibkrThemesData={ibkrData}/>
             <AlertRulesCard/>
@@ -6587,7 +6543,6 @@ const filtered = useMemo(() => {
             {data && <CorrelationGuard themes={data.themes}/>}
             {data && <CounterTrendWarning themes={data.themes}/>}
             <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData}/>
-            <SectorRSBars themes={data?.themes} finvizThemeRankings={data?.finviz_theme_rankings}/>
           </main>
 
           {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
