@@ -3369,6 +3369,8 @@ const NewsEconTab = ({ data, econData, earningsData, newsData }) => {
         <div className="mb-5">
           <div className="flex items-center gap-3 mb-3">
             <span className="text-[13px] font-semibold text-zinc-200">Economic Calendar</span>
+            <span className="text-[9px] font-bold px-1.5 py-0.5 bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 rounded leading-none">IBKR First</span>
+            <div className="flex-1"/>
             <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
               {[{k:"today",l:"Today"},{k:"week",l:"This Week"},{k:"earnings",l:"Earnings"}].map(v => (
                 <button key={v.k} onClick={() => setCalView(v.k)}
@@ -3449,7 +3451,7 @@ const NewsEconTab = ({ data, econData, earningsData, newsData }) => {
         {/* ── News feed ─────────────────────────────────────────────────── */}
         <div className="mb-5">
           <div className="text-[12px] font-semibold text-zinc-400 mb-2">
-            Headlines
+            Breaking News — IBKR — Benzinga — Finviz
             <span className="text-zinc-600 font-normal ml-1.5">({filteredNews.length})</span>
           </div>
           {filteredNews.length === 0 ? (
@@ -3501,7 +3503,8 @@ const NewsEconTab = ({ data, econData, earningsData, newsData }) => {
 
         {/* Upcoming Earnings */}
         <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Upcoming Earnings · 7d</div>
+          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-0.5">Upcoming Earnings</div>
+          <div className="text-[9px] text-zinc-600 mb-2">IBKR native · Next 7 days</div>
           {upcomingEarnings.length === 0 ? (
             <div className="text-[11px] text-zinc-600 italic">No data</div>
           ) : (
@@ -3526,19 +3529,21 @@ const NewsEconTab = ({ data, econData, earningsData, newsData }) => {
         {/* Theme News Filters */}
         {newsThemes.length > 0 && (
           <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Theme News Filters</div>
-            <div className="flex flex-col gap-1">
-              <button
-                onClick={() => setActiveThemes(new Set())}
-                className={`text-left text-[11px] px-2 py-1 rounded transition-colors ${activeThemes.size === 0 ? "bg-blue-500/20 text-blue-400" : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/40"}`}>
-                All themes
-              </button>
-              {newsThemes.map(t => (
-                <button key={t} onClick={() => toggleTheme(t)}
-                  className={`text-left text-[11px] px-2 py-1 rounded transition-colors truncate ${activeThemes.has(t) ? "bg-blue-500/20 text-blue-400" : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/40"}`}>
-                  {t}
-                </button>
-              ))}
+            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-0.5">Theme News Filters</div>
+            <div className="text-[9px] text-zinc-600 mb-2">Toggle to filter news by theme</div>
+            <div className="flex flex-col gap-1.5">
+              {newsThemes.map(t => {
+                const isOn = activeThemes.size === 0 || activeThemes.has(t);
+                return (
+                  <div key={t} className="flex items-center justify-between">
+                    <span className="text-[11px] text-zinc-300 truncate flex-1">{t}</span>
+                    <button onClick={() => toggleTheme(t)}
+                      className={`text-[9px] font-bold px-1.5 py-0.5 rounded border leading-none ml-1 flex-shrink-0 transition-colors ${isOn ? "bg-blue-500/20 text-blue-400 border-blue-500/30" : "bg-zinc-700/40 text-zinc-600 border-zinc-600/30"}`}>
+                      {isOn ? "ON" : "OFF"}
+                    </button>
+                  </div>
+                );
+              })}
             </div>
           </div>
         )}
@@ -3548,16 +3553,16 @@ const NewsEconTab = ({ data, econData, earningsData, newsData }) => {
           <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Source Priority</div>
           <div className="flex flex-col gap-1.5">
             {[
-              { src: "ibkr",        pri: "1st" },
-              { src: "benzinga",    pri: "2nd" },
-              { src: "finviz",      pri: "3rd" },
-              { src: "tradingview", pri: "4th" },
-            ].map(({ src, pri }) => {
+              { src: "ibkr",        pri: "1st", name: "IBKR News" },
+              { src: "benzinga",    pri: "2nd", name: "Benzinga" },
+              { src: "finviz",      pri: "3rd", name: "Finviz News" },
+              { src: "tradingview", pri: "4th", name: "TradingView" },
+            ].map(({ src, pri, name }) => {
               const cfg = SOURCE_CFG[src];
               return (
                 <div key={src} className="flex items-center justify-between">
                   <span className="text-[10px] text-zinc-600">{pri}</span>
-                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border leading-none font-mono ${cfg.cls}`}>{cfg.label}</span>
+                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border leading-none font-mono ${cfg.cls}`}>{name}</span>
                 </div>
               );
             })}
@@ -3768,6 +3773,19 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
     <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-8 flex items-start gap-5">
       {/* ── Left main area ────────────────────────────────────────────────── */}
       <div className="flex-1 min-w-0">
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-3">
+          <span className="text-[14px] font-bold text-zinc-100">Market Breadth</span>
+          <span className="text-[11px] px-2 py-0.5 bg-zinc-800/60 border border-zinc-700/40 rounded text-zinc-400">
+            Stockbee Market Monitor
+            {internalsData?.generated_at && ` · ${new Date(internalsData.generated_at).toLocaleString([], { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}`}
+          </span>
+          <span className="text-[10px] px-2 py-0.5 bg-emerald-500/15 border border-emerald-500/30 rounded text-emerald-400 font-bold">IBKR + Finviz</span>
+          <div className="flex-1"/>
+          <button onClick={() => window.location.reload()} className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] bg-zinc-800/60 border border-zinc-700/40 rounded text-zinc-400 hover:text-zinc-200 hover:border-zinc-600 transition-colors">
+            <RefreshCw size={11}/>Refresh
+          </button>
+        </div>
         <GeminiBreathAnalysis mc={mc} internalsData={internalsData} />
 
         {/* 8 metric cards — 4×2 grid */}
@@ -3864,7 +3882,10 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
 
         {/* Internals block */}
         <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Internals</div>
+          <div className="flex items-center gap-1.5 mb-2">
+            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Internals</div>
+            <span className="text-[9px] px-1.5 py-0.5 bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 rounded font-bold leading-none">IBKR Live</span>
+          </div>
           <div className="flex flex-col gap-1">
             {internals.map(({ label, value, color }) => (
               <div key={label} className="flex items-center justify-between">
@@ -3883,7 +3904,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
         {/* Leading Themes */}
         {leadingThemes.length > 0 && (
           <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Leading Themes · 1D</div>
+            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Leading Themes (Finviz 10)</div>
             <div className="flex flex-col gap-1.5">
               {leadingThemes.map((t, i) => (
                 <div key={t.name} className="flex items-center gap-1.5">
@@ -3900,7 +3921,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
 
         {/* Macro Risk Flags */}
         <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Macro Risk · Today</div>
+          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Macro Risk Flags</div>
           {macroFlags.length > 0 ? (
             <div className="flex flex-col gap-2">
               {macroFlags.map((e, i) => (
@@ -3936,20 +3957,6 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
   };
 
   const leaders = useMemo(() => {
-    if (mode === "gapper") {
-      const gappers = gapperData?.gappers || [];
-      const rows = [];
-      const seen = new Set();
-      for (const g of gappers) {
-        if (g.meets_all_gates) {
-          if (!seen.has(g.ticker)) { seen.add(g.ticker); rows.push({ ticker: g.ticker, rs: g.rs_52w ?? null, isPeer: false }); }
-          for (const p of (g.peer_tickers || [])) {
-            if (!seen.has(p)) { seen.add(p); rows.push({ ticker: p, rs: null, isPeer: true }); }
-          }
-        }
-      }
-      return rows.slice(0, 12);
-    }
     // scanner mode: collect all leaders that pass all 5 gates
     const rows = [];
     const seen = new Set();
@@ -3962,10 +3969,100 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
       }
     }
     return rows.sort((a, b) => (b.rs ?? 0) - (a.rs ?? 0)).slice(0, 12);
-  }, [ibkrThemesData, gapperData, mode]);
+  }, [ibkrThemesData]);
+
+  // For gapper mode: build gapper leaders with gap% and sympathy peers
+  const gapperLeaders = useMemo(() => {
+    if (mode !== "gapper") return [];
+    return (gapperData?.gappers || [])
+      .filter(g => g.meets_all_gates)
+      .slice(0, 5)
+      .map(g => ({ ticker: g.ticker, gap_pct: g.gap_pct, tier: g.tier }));
+  }, [gapperData, mode]);
+
+  const sympathyPeers = useMemo(() => {
+    if (mode !== "gapper") return [];
+    const peers = [];
+    const seen = new Set();
+    for (const g of (gapperData?.gappers || []).slice(0, 3)) {
+      const theme = g.theme || g.category || "";
+      for (const p of (g.peer_tickers || [])) {
+        if (!seen.has(p)) { seen.add(p); peers.push({ ticker: p, theme }); }
+      }
+    }
+    return peers.slice(0, 6);
+  }, [gapperData, mode]);
 
   const isLive = ibkrThemesData?.data_source === "ibkr";
   const dataSource = ibkrThemesData?.data_source || null;
+
+  if (mode === "gapper") {
+    return (
+      <div className="w-52 flex-shrink-0 flex flex-col gap-3 self-start sticky top-[60px]">
+        {/* GAPPER LEADERS */}
+        <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+          <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Gapper Leaders</div>
+          <div className="text-[9px] text-zinc-600 mb-2">Meeting all 5 hard gates</div>
+          {gapperLeaders.length === 0 ? (
+            <div className="text-[11px] text-zinc-600 italic">No gate leaders yet</div>
+          ) : (
+            <div className="flex flex-col gap-1">
+              {gapperLeaders.map(({ ticker, gap_pct }) => (
+                <div key={ticker} className="flex items-center justify-between">
+                  <span className="text-[13px] font-bold font-mono text-zinc-100 cursor-pointer hover:text-blue-400 transition-colors"
+                    onClick={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect }); }}
+                    onMouseEnter={e => startHover(ticker, e.currentTarget.getBoundingClientRect())}
+                    onMouseLeave={cancelHover}>
+                    {ticker}
+                  </span>
+                  <span className="text-[13px] font-bold font-mono text-emerald-400">+{gap_pct?.toFixed(1)}%</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        {sympathyPeers.length > 0 && (
+          <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+            <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Theme Sympathy Peers</div>
+            <div className="text-[9px] text-zinc-600 mb-2">Based on top gapper themes</div>
+            <div className="flex flex-col gap-1.5">
+              {sympathyPeers.map(({ ticker, theme }) => (
+                <div key={ticker} className="flex items-center justify-between">
+                  <span className="text-[12px] font-bold font-mono text-blue-400 cursor-pointer hover:text-blue-300 transition-colors"
+                    onClick={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect }); }}
+                    onMouseEnter={e => startHover(ticker, e.currentTarget.getBoundingClientRect())}
+                    onMouseLeave={cancelHover}>
+                    {ticker}
+                  </span>
+                  {theme && <span className="text-[10px] text-zinc-500 truncate ml-1 max-w-[90px] text-right">{theme}</span>}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+          <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider mb-2">Catalyst Tier Guide</div>
+          <div className="flex flex-col gap-2">
+            {[
+              { tier: "T1", label: "Major", cls: "bg-emerald-500/20 text-emerald-300 border-emerald-500/30", desc: "Earnings beat, M&A, FDA approval, guidance raise" },
+              { tier: "T2", label: "Strong", cls: "bg-teal-500/20 text-teal-300 border-teal-500/30", desc: "Hyperscale order, major contract, secondary raise" },
+              { tier: "T3", label: "Minor", cls: "bg-zinc-700/40 text-zinc-400 border-zinc-600/30", desc: "Analyst reit, minor partnership, product launch" },
+              { tier: "Fail", label: "Exclude", cls: "bg-red-500/15 text-red-400 border-red-500/25", desc: "Doesn't meet gate criteria" },
+            ].map(({ tier, label, cls, desc }) => (
+              <div key={tier}>
+                <div className="flex items-center gap-1.5 mb-0.5">
+                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border leading-none ${cls}`}>{tier}</span>
+                  <span className="text-[11px] font-semibold text-zinc-300">{label}</span>
+                </div>
+                <div className="text-[10px] text-zinc-600 leading-tight pl-0.5">{desc}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+        {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
+      </div>
+    );
+  }
 
   return (
     <div className="w-48 flex-shrink-0 flex flex-col gap-0 bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3 self-start sticky top-[60px]">
@@ -4072,13 +4169,13 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
   const { active: tvActive, onEnter: tvOnEnter, onLeave: tvOnLeave } = useHoverDelay(2000);
   const [tickerDb, setTickerDb] = useState({});
 
-  // Filter state — human-friendly units: PMVol/AvgVol in K, MktCap in $B, DolVol in $M
-  const [fMinGap,    setFMinGap]    = useState(0);
-  const [fMinPMVol,  setFMinPMVol]  = useState(0);    // K
-  const [fMinPrice,  setFMinPrice]  = useState(0);
-  const [fMinAvgVol, setFMinAvgVol] = useState(0);    // K
-  const [fMinMktCap, setFMinMktCap] = useState(0);      // $B
-  const [fMinDolVol, setFMinDolVol] = useState(0);     // $M
+  // Filter state — human-friendly units: PMVol in K, MktCap in $B
+  const [fMinGap,    setFMinGap]    = useState(5);
+  const [fMinPMVol,  setFMinPMVol]  = useState(500);  // K
+  const [fMinPrice,  setFMinPrice]  = useState(12);
+  const [fMinMktCap, setFMinMktCap] = useState(2);    // $B
+  const [fMinRS,     setFMinRS]     = useState(85);
+  const [fMinADR,    setFMinADR]    = useState(4);
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/stock_db.json`)
@@ -4125,16 +4222,16 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
     g.gap_pct   >= fMinGap &&
     g.pm_volume >= fMinPMVol * 1000 &&
     g.price     >= fMinPrice &&
-    (g.avg_vol_10d || 0)     >= fMinAvgVol * 1000 &&
     (g.mkt_cap   || 0)       >= fMinMktCap * 1e9 &&
-    (g.avg_dollar_vol || g.price * (g.avg_vol_10d || 0)) >= fMinDolVol * 1e6 &&
+    (g.rs_52w != null ? g.rs_52w : 99) >= fMinRS &&
+    (g.adr_pct != null ? g.adr_pct : 99) >= fMinADR &&
     // In Stress regime: hide C-grade gappers to reduce noise
     (creditRegime !== "Stress" || (g.grade && g.grade !== "C"))
   );
 
   const resetFilters = () => {
-    setFMinGap(5); setFMinPMVol(200); setFMinPrice(5);
-    setFMinAvgVol(500); setFMinMktCap(2); setFMinDolVol(50);
+    setFMinGap(5); setFMinPMVol(500); setFMinPrice(12);
+    setFMinMktCap(2); setFMinRS(85); setFMinADR(4);
   };
 
   return (
@@ -4147,25 +4244,30 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
         onTickerClick={(ticker, rect) => setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect })}
       />
       {/* Filter Bar */}
-      <div className="mb-4 p-3 bg-zinc-800/40 border border-zinc-700/40 rounded-lg">
-        <div className="grid grid-cols-6 gap-3 mb-2">
-          <FInput label="Min Gap (%)"          value={fMinGap}    onChange={setFMinGap}    hint="e.g. 5 = 5%"/>
-          <FInput label="Min PM Vol (K)"       value={fMinPMVol}  onChange={setFMinPMVol}  hint={`= ${fmtNum(fMinPMVol * 1000)}`}/>
-          <FInput label="Min Price ($)"        value={fMinPrice}  onChange={setFMinPrice}/>
-          <FInput label="Min Avg Vol 10d (K)"  value={fMinAvgVol} onChange={setFMinAvgVol} hint={`= ${fmtNum(fMinAvgVol * 1000)}`}/>
-          <FInput label="Min Mkt Cap ($B)"     value={fMinMktCap} onChange={setFMinMktCap} hint={`= ${fmtCap(fMinMktCap * 1e9)}`}/>
-          <FInput label="Min Avg $ Vol ($M)"   value={fMinDolVol} onChange={setFMinDolVol} hint={`= ${fmtVol(fMinDolVol * 1e6)}`}/>
-        </div>
-        <div className="flex items-center justify-between pt-1 border-t border-zinc-700/30">
-          <button onClick={resetFilters} className="text-[12px] px-2.5 py-1 bg-zinc-700/50 border border-zinc-600/40 rounded text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition-colors">
-            Reset
+      <div className="mb-4 flex items-center gap-2 flex-wrap">
+        <span className="text-[11px] text-zinc-500 font-medium">Filters:</span>
+        {[
+          { label: `Gap% ≥ ${fMinGap}`,    onClick: () => { const v = prompt("Min Gap %", fMinGap); if (v !== null) setFMinGap(Number(v)); } },
+          { label: `PM Vol ≥ ${fMinPMVol >= 1000 ? (fMinPMVol/1000).toFixed(0)+"M" : fMinPMVol+"K"}`, onClick: () => { const v = prompt("Min PM Vol (K)", fMinPMVol); if (v !== null) setFMinPMVol(Number(v)); } },
+          { label: `Price ≥ $${fMinPrice}`, onClick: () => { const v = prompt("Min Price ($)", fMinPrice); if (v !== null) setFMinPrice(Number(v)); } },
+          { label: `MCap ≥ $${fMinMktCap}B`, onClick: () => { const v = prompt("Min MCap ($B)", fMinMktCap); if (v !== null) setFMinMktCap(Number(v)); } },
+          { label: `RS ≥ ${fMinRS}`,        onClick: () => { const v = prompt("Min RS", fMinRS); if (v !== null) setFMinRS(Number(v)); } },
+          { label: `ADR ≥ ${fMinADR}%`,     onClick: () => { const v = prompt("Min ADR%", fMinADR); if (v !== null) setFMinADR(Number(v)); } },
+        ].map(pill => (
+          <button key={pill.label} onClick={pill.onClick}
+            className="text-[11px] px-2.5 py-1 bg-zinc-800/60 border border-zinc-700/40 rounded-full text-zinc-300 hover:border-zinc-500 hover:text-zinc-100 transition-colors font-mono">
+            {pill.label}
           </button>
-          <span className="text-[12px] text-zinc-500">
-            Scanned: <span className="text-zinc-400">{gapperData.scan_time}</span>
-            <span className="ml-3 text-zinc-600">{filtered.length} / {gapperData.gappers.length} shown</span>
-            <span className="ml-3 text-zinc-600">· Next: <span className="text-zinc-500">{getNextGapperScanTime(gapperData.scan_time)}</span></span>
-          </span>
-        </div>
+        ))}
+        <button onClick={resetFilters} className="text-[11px] px-2.5 py-1 bg-blue-500/15 border border-blue-500/30 rounded-full text-blue-400 hover:bg-blue-500/25 transition-colors">
+          Reset
+        </button>
+        <div className="flex-1"/>
+        <span className="text-[11px] text-zinc-600">
+          Sources: <span className="text-zinc-500">IBKR · Finviz · TradingView Screener</span>
+          <span className="ml-3">· Scanned <span className="text-zinc-400">{gapperData.scan_time}</span></span>
+          <span className="ml-2 text-zinc-600">· {filtered.length} shown</span>
+        </span>
       </div>
 
       <div className="flex items-center justify-between mb-3">
@@ -4181,32 +4283,34 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
             <col style={{width:"5%"}}/>
             <col style={{width:"5%"}}/>
             <col style={{width:"5%"}}/>
-            <col style={{width:"4%"}}/>
+            <col style={{width:"5%"}}/>
             <col style={{width:"4%"}}/>
             <col style={{width:"4%"}}/>
             <col style={{width:"5%"}}/>
             <col style={{width:"6%"}}/>
+            <col style={{width:"6%"}}/>
             <col style={{width:"8%"}}/>
             <col style={{width:"8%"}}/>
             <col style={{width:"4%"}}/>
-            <col style={{width:"18%"}}/>
-            <col style={{width:"24%"}}/>
+            <col style={{width:"10%"}}/>
+            <col style={{width:"25%"}}/>
           </colgroup>
           <thead>
             <tr className="text-[11px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40 align-middle">
               <th className="text-center py-2 px-1.5 font-medium align-middle">Ticker</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">Premkt<br/>Price<br/>Chg %</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">Premkt<br/>Vol</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip text="Relative Volume：今日成交量 ÷ 過去10天平均量。🟢 ≥5x 極強  🟡 ≥3x 強  ⚪ ≥2x 中等  灰色 &lt;2x 弱">RVol</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip text="Daily %：昨日收盤漲跌幅（非盤前）">Daily %</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight"><Tip text="Short Interest：放空股數佔流通股比例。>20% 有軋空 (Short Squeeze) 潛力，但也代表市場看空">Short<br/>Int</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip text="Float：市場上可自由買賣的流通股數。Float 越小，股價越容易被大幅推動">Float</Tip></th>
+              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">PM<br/>Price</th>
+              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">Gap%</th>
+              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">PM<br/>Vol</th>
+              <th className="text-center py-2 px-1.5 font-medium align-middle">RVol</th>
+              <th className="text-center py-2 px-1.5 font-medium align-middle">Daily%</th>
+              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">Short<br/>Int</th>
+              <th className="text-center py-2 px-1.5 font-medium align-middle">Float</th>
               <th className="text-center py-2 px-1.5 font-medium align-middle">Sector</th>
               <th className="text-center py-2 px-1.5 font-medium align-middle">Industry</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip width="w-72" text="催化劑分類：Earnings 財報｜Upgrade 分析師升評｜FDA 藥品審批｜Government Policy 政策｜Contract/Partnership 合約｜Institutional/Insider Buying 機構/內部人買入｜Thematic Narratives 主題敘事｜Technical/Flow 無明確催化劑">Category</Tip></th>
-              <th className="text-center py-2 px-1 font-medium align-middle"><Tip width="w-64" text="Gemini 信心評分：A+ 極高 (90+)｜A 高 (75-89)｜B 中 (50-74)｜C 低 (&lt;50)。Pass/Fail = 技術門檻 ($Vol >$100M 且 ADR >4%)">Grade</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle">Reasoning</th>
-              <th className="text-center py-2 px-2 font-medium align-middle">Analysis Details</th>
+              <th className="text-center py-2 px-1.5 font-medium align-middle">Theme</th>
+              <th className="text-center py-2 px-1 font-medium align-middle">Grade</th>
+              <th className="text-center py-2 px-1.5 font-medium align-middle">Tier</th>
+              <th className="text-center py-2 px-2 font-medium align-middle">Catalyst Summary</th>
             </tr>
           </thead>
           <tbody>
@@ -4222,21 +4326,20 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
               <tr key={g.ticker + i} className={rowCls}>
                 {/* Ticker */}
                 <td className="py-2 px-1.5 text-center">
-                  <span
-                    className="font-bold text-zinc-100 text-[13px] hover:text-blue-400 transition-colors cursor-pointer"
-                    onMouseEnter={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered({ ticker: g.ticker, rect }); tvOnEnter(); }}
-                    onMouseLeave={() => { setHovered(null); tvOnLeave(); }}
-                  >
+                  <span className="font-bold text-zinc-100 text-[13px] hover:text-blue-400 transition-colors cursor-pointer"
+                    onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === g.ticker ? null : { ticker: g.ticker, rect }); }}>
                     {g.ticker}
                   </span>
                   <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer" className="ml-1">
                     <ExternalLink size={8} className="inline text-zinc-600 hover:text-blue-400"/>
                   </a>
-                  <div className="text-[11px] font-mono text-zinc-500">${g.price.toFixed(2)}</div>
                 </td>
-                {/* Premkt % */}
+                {/* PM Price */}
                 <td className="py-2 px-1.5 text-center">
-                  <div className="text-[12px] font-mono text-zinc-300">${g.price.toFixed(2)}</div>
+                  <span className="text-[13px] font-bold font-mono text-zinc-200">${g.price.toFixed(2)}</span>
+                </td>
+                {/* Gap% */}
+                <td className="py-2 px-1.5 text-center">
                   <span className="text-[13px] font-bold font-mono text-emerald-400">+{g.gap_pct.toFixed(1)}%</span>
                 </td>
                 {/* Premkt Vol */}
@@ -4260,64 +4363,51 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                   const industry = db.industry || g.industry || "";
                   return (
                     <>
-                      <td className="py-2 px-1.5 text-center text-[11px] text-zinc-200 align-middle">{sector || <span className="text-zinc-600">—</span>}</td>
-                      <td className="py-2 px-1.5 text-center text-[11px] text-zinc-200 align-middle">{industry || <span className="text-zinc-600">—</span>}</td>
+                      <td className="py-2 px-1.5 text-center text-[11px] text-zinc-300 align-middle">{sector || <span className="text-zinc-600">—</span>}</td>
+                      <td className="py-2 px-1.5 text-center text-[11px] text-zinc-300 align-middle">{industry || <span className="text-zinc-600">—</span>}</td>
                     </>
                   );
                 })()}
-                {/* Category */}
+                {/* Theme */}
                 <td className="py-2 px-1.5 text-center">
-                  <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full border ${CATEGORY_STYLE[g.category] || CATEGORY_STYLE["Others"]}`}>
-                    {g.category}
-                  </span>
+                  {g.theme ? (
+                    <span className="text-[11px] font-semibold px-1.5 py-0.5 rounded border bg-blue-500/15 text-blue-400 border-blue-500/25">
+                      {g.theme}
+                    </span>
+                  ) : (g.category ? (
+                    <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full border ${CATEGORY_STYLE[g.category] || CATEGORY_STYLE["Others"]}`}>
+                      {g.category}
+                    </span>
+                  ) : <span className="text-zinc-600">—</span>)}
                 </td>
-                {/* Grade + Technical Status + Verification */}
-                <td className="py-2 px-1 text-center">
-                  <div className="flex flex-col items-center gap-0.5">
-                    <div className="flex items-center gap-1">
-                      {g.grade
-                        ? <Tip text={{ "A+": "極高信心 (90+)：催化劑強、成交量爆發、技術全達標。Gap & Go 策略首選", A: "高信心 (75-89)：催化劑明確，技術面佳，可積極參與", B: "中等信心 (50-74)：催化劑存在但強度不足，或技術面稍弱，謹慎操作", C: "低信心 (<50)：催化劑不明確或技術不達標，建議觀望" }[g.grade] || `信心評分：${g.grade}`}><span className={`text-[11px] font-bold px-1 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span></Tip>
-                        : <span className="text-zinc-600">—</span>}
+                {/* Grade — T1/T2/T3/Fail */}
+                {(() => {
+                  const tier = g.tier || (() => {
+                    const cat = g.category || "";
+                    if (!g.meets_all_gates) return "Fail";
+                    if (["Earnings","FDA"].includes(cat)) return "T1";
+                    if (cat.includes("Contract") || cat.includes("Partnership") || cat.includes("Policy") || cat.includes("M&A")) return "T2";
+                    return "T3";
+                  })();
+                  const tierStyle = tier === "T1" ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
+                    : tier === "T2" ? "bg-teal-500/20 text-teal-300 border-teal-500/30"
+                    : tier === "T3" ? "bg-zinc-700/40 text-zinc-400 border-zinc-600/30"
+                    : "bg-red-500/15 text-red-400 border-red-500/25";
+                  return (
+                    <td className="py-2 px-1 text-center">
+                      <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded border ${tierStyle}`}>{tier}</span>
                       <VerificationBadge verification={g.verification} headlines={g.headlines}/>
-                    </div>
-                    {g.technical_status && (
-                      <Tip text={(g.technical_status || "").startsWith("Fail")
-                        ? `✗ 未通過技術門檻：${g.technical_status.replace("Fail — ", "")}。整排灰色 = 不建議交易`
-                        : "✓ 通過技術門檻：平均日成交金額 >$100M 且 ADR >4%，具備足夠流動性與波動性"}>
-                        <span className={`text-[9px] font-semibold px-1 py-0.5 rounded leading-none ${
-                          (g.technical_status || "").startsWith("Fail")
-                            ? "text-red-400 bg-red-500/10 border border-red-500/20"
-                            : "text-emerald-400 bg-emerald-500/10 border border-emerald-500/20"
-                        }`}>
-                          {(g.technical_status || "").startsWith("Fail") ? "✗ Fail" : "✓ Pass"}
-                        </span>
-                      </Tip>
-                    )}
-                    {(g.theme || g.category) === "Technical / Flow" && (
-                      <Tip text="找不到明確催化劑（無財報、合約、政策等新聞）。歸類為資金流向/技術突破。自動降為 C 級，風險較高，謹慎操作">
-                        <span className="text-[9px] text-amber-500 font-semibold">🔍 Flow</span>
-                      </Tip>
-                    )}
-                  </div>
+                    </td>
+                  );
+                })()}
+                {/* Tier label */}
+                <td className="py-2 px-1.5 text-center">
+                  <span className="text-[11px] font-medium text-teal-400">{g.tier_label || g.category || "—"}</span>
                 </td>
-                {/* Reasoning — shows analysis_detail with bold Catalyst/Impact */}
-                <td className="py-2 px-1.5 text-[12px] text-zinc-400 leading-relaxed align-middle whitespace-normal break-words">
-                  {g.analysis_detail ? (() => {
-                    const parts = g.analysis_detail.split(" | Impact: ");
-                    if (parts.length === 2) {
-                      const catalystText = parts[0].replace(/^Catalyst:\s*/i, "");
-                      return (
-                        <div className="space-y-1">
-                          <p><span className="font-bold text-zinc-300">Catalyst:</span> {catalystText}</p>
-                          <p><span className="font-bold text-zinc-300">Impact:</span> {parts[1]}</p>
-                        </div>
-                      );
-                    }
-                    return g.analysis_detail;
-                  })() : g.reasoning}
+                {/* Catalyst Summary */}
+                <td className="py-2 px-2 text-[12px] text-zinc-300 leading-snug align-middle whitespace-normal break-words">
+                  {g.catalyst_summary || g.reasoning || (g.analysis_detail ? g.analysis_detail.replace(/^Catalyst:\s*/i,"").split(" | Impact:")[0] : "—")}
                 </td>
-                {/* Analysis Details */}
-                <td className="py-2 px-2 align-middle"><AnalysisCell text={g.analysis_details}/></td>
               </tr>
               );
             })}
