@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 09, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 10, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 19.49,
-      "change": -1.55,
+      "price": 19.33,
+      "change": -0.16,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 56308.42,
-      "change_pct": 5.39
+      "price": 56924.11,
+      "change_pct": 1.84
     },
     "dax": {
       "label": "DAX",
-      "price": 23806.99,
-      "change_pct": -1.14
+      "price": 23989.62,
+      "change_pct": 0.77
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10603.48,
-      "change_pct": -0.05
+      "price": 10641.9,
+      "change_pct": 0.36
     }
   },
   "macro_breadth": {
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "US Resilience Amidst Mixed Global",
+  "mood": "Risk-On / Global Strength",
   "analysis": {
-    "analysis_para1": "Today presented a mixed global picture, with the Nikkei 225 surging an impressive +5.39% while European markets like the DAX (-1.14%) and FTSE 100 (-0.05%) showed weakness or flat performance. US credit conditions remain in an unknown regime due to the N/A BAML HY Spread, though the 10-year yield held stable at 4.29%. Domestically, market breadth maintained a healthy but not aggressive stance, with 51.6% of stocks above their 50-day moving average (S5FI) and 58.0% above their 200-day moving average (MMTH), indicating underlying resilience.",
-    "analysis_para2": "Given the S&P 500's +0.62% gain to 6824.66 and the Nasdaq 100's +0.72% move to 25082.09, the immediate mechanical plan involves observing continued strength above today's close. A sustained push above these levels with corresponding VIX stability below 20 would confirm bullish continuation. Conversely, a failure to hold these gains, especially if accompanied by a rise in the VIX, would signal caution and potential for short-term profit-taking. Traders should monitor breadth indicators like S5FI and MMTH for any significant deterioration below 50% as a warning sign. The focus remains on sector rotation into the demonstrated leadership themes.",
-    "technical_signal": "No reversal pattern confirmed yet. US indices ended the day higher with normal VIX levels, suggesting continued upward momentum.",
+    "analysis_para1": "Global markets are showing robust strength this morning, with the Nikkei 225 leading the charge at +1.84%, followed by the DAX at +0.77% and FTSE 100 at +0.36%. This positive momentum has translated into a strong pre-market open for US indices, with the S&P 500 up +0.62% and Nasdaq 100 gaining +0.72%. While the BAML HY Spread is currently an unknown regime, indicating no clear credit signal, US market breadth remains healthy with 51.6% of stocks above their 50-day moving average (S5FI) and 58.0% above their 200-day moving average (MMTH), supporting broad participation.",
+    "analysis_para2": "The mechanical plan for today is to lean into the prevailing strength, observing for continuation or any signs of divergence. With the S&P 500 trading at 6824.66 and the Nasdaq 100 at 25082.09, traders should monitor these levels for sustained upward pressure. Key action involves identifying sectors and stocks demonstrating relative strength in sync with the broader market's positive trend. Should indices fail to hold early gains or breadth metrics start to wane significantly, a cautious approach would be warranted, but for now, the path of least resistance appears to be higher.",
+    "technical_signal": "No reversal pattern confirmed yet. The market exhibits clear pre-market strength across global indices and US futures, indicating continued positive momentum.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "AXTI demonstrates exceptional leadership in Semiconductors with an RS of 99 and a phenomenal 3-month return of +198.3%, fitting the strong growth theme."
+        "reason": "AXTI earns an A+ with an RS of 99 and a phenomenal 3-month return of +198.3%, making it a top semiconductor play in this risk-on, tech-favored environment."
       },
       {
         "ticker": "TSEM",
         "company": "Tower Semiconductor Ltd",
         "grade": "A",
-        "reason": "TSEM exhibits robust strength in Semiconductors, boasting an RS of 98 and an impressive 1-month return of +49.0%, indicating significant recent momentum."
+        "reason": "TSEM is an A-grade long with an RS of 98 and a powerful 1-month gain of +49.0%, solidifying its position as a leading semiconductor growth story consistent with current market themes."
       },
       {
         "ticker": "MRVL",
         "company": "Marvell Technology Inc",
         "grade": "C",
-        "reason": "Despite a +37.7% 1-month gain, MRVL's relatively lower RS of 85 compared to peers in the strong semiconductor sector suggests it may lag prime leaders, making it a relative underperformer to avoid."
+        "reason": "MRVL is graded C despite a decent 1-month gain of +37.7% because its RS of 85 is the lowest among highly-ranked peers, suggesting it may underperform or consolidate relative to stronger semiconductor plays in this regime."
       }
     ]
   }
