@@ -1,30 +1,30 @@
 {
-  "generated_at": "April 10, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "April 10, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6824.66,
-      "change": 41.85,
-      "change_pct": 0.62
+      "price": 6816.89,
+      "change": -7.77,
+      "change_pct": -0.11
     },
     {
       "label": "Nasdaq 100",
-      "price": 25082.09,
-      "change": 178.92,
-      "change_pct": 0.72
+      "price": 25116.34,
+      "change": 34.25,
+      "change_pct": 0.14
     },
     {
       "label": "VIX",
-      "price": 19.33,
-      "change": -0.16,
+      "price": 19.23,
+      "change": -0.26,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.29,
-      "change": 0.0,
+      "price": 4.32,
+      "change": 0.02,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 56924.11,
-      "change_pct": 1.84
+      "price": 55895.32,
+      "change_pct": -0.73
     },
     "dax": {
       "label": "DAX",
-      "price": 23989.62,
-      "change_pct": 0.77
+      "price": 23803.95,
+      "change_pct": -0.01
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10641.9,
-      "change_pct": 0.36
+      "price": 10600.53,
+      "change_pct": -0.03
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 51.6,
-    "mmth": 58.0,
+    "s5fi": 48.1,
+    "mmth": 54.7,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Risk-On / Global Strength",
+  "mood": "Mixed session, thematic leadership",
   "analysis": {
-    "analysis_para1": "Global markets are showing robust strength this morning, with the Nikkei 225 leading the charge at +1.84%, followed by the DAX at +0.77% and FTSE 100 at +0.36%. This positive momentum has translated into a strong pre-market open for US indices, with the S&P 500 up +0.62% and Nasdaq 100 gaining +0.72%. While the BAML HY Spread is currently an unknown regime, indicating no clear credit signal, US market breadth remains healthy with 51.6% of stocks above their 50-day moving average (S5FI) and 58.0% above their 200-day moving average (MMTH), supporting broad participation.",
-    "analysis_para2": "The mechanical plan for today is to lean into the prevailing strength, observing for continuation or any signs of divergence. With the S&P 500 trading at 6824.66 and the Nasdaq 100 at 25082.09, traders should monitor these levels for sustained upward pressure. Key action involves identifying sectors and stocks demonstrating relative strength in sync with the broader market's positive trend. Should indices fail to hold early gains or breadth metrics start to wane significantly, a cautious approach would be warranted, but for now, the path of least resistance appears to be higher.",
-    "technical_signal": "No reversal pattern confirmed yet. The market exhibits clear pre-market strength across global indices and US futures, indicating continued positive momentum.",
+    "analysis_para1": "Global markets displayed slight weakness today, with the Nikkei down 0.73% and European indices like the DAX (-0.01%) and FTSE 100 (-0.03%) barely lower. In the US, the S&P 500 dipped 0.11% while the Nasdaq 100 eked out a 0.14% gain, indicating a mixed sentiment rather than broad-based directional conviction. The 10-year yield remained stable at 4.32%, providing no immediate credit market concerns, though the BAML HY Spread's regime is currently unknown. Market breadth indicators suggest a neutral environment, with 48.1% of stocks above their 50-day moving average and 54.7% above their 200-day moving average, lacking strong conviction either way.",
+    "analysis_para2": "Given the mixed tape, the mechanical plan involves focusing on high Relative Strength (RS) leaders within confirmed strong thematic sectors. With the S&P 500 closing at 6816.89 and the Nasdaq 100 at 25116.34, key levels to watch are today's closes as immediate support or resistance. A sustained move above these levels could indicate renewed broad market strength, while a breakdown below could signal a shift towards greater caution. Our strategy will prioritize robust breakouts and continuations in themes like Semiconductors, Commodities Metals, and Energy Traditional, identified by their exceptional performance despite the broader market's indecision.",
+    "technical_signal": "No reversal pattern confirmed yet. The market exhibits mixed signals across indices and breadth, preventing clear directional reversal detection.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "AXTI earns an A+ with an RS of 99 and a phenomenal 3-month return of +198.3%, making it a top semiconductor play in this risk-on, tech-favored environment."
+        "reason": "AXTI exhibits exceptional Relative Strength of 99 and phenomenal 3-month performance of +198.3%, making it a top-tier Semiconductor leader in the current environment."
       },
       {
         "ticker": "TSEM",
         "company": "Tower Semiconductor Ltd",
         "grade": "A",
-        "reason": "TSEM is an A-grade long with an RS of 98 and a powerful 1-month gain of +49.0%, solidifying its position as a leading semiconductor growth story consistent with current market themes."
+        "reason": "TSEM demonstrates robust Relative Strength of 98 and strong recent momentum with a +49.0% 1-month return, highlighting its leadership within the resurgent Semiconductor theme."
       },
       {
-        "ticker": "MRVL",
-        "company": "Marvell Technology Inc",
+        "ticker": "YPF",
+        "company": "YPF ADR",
         "grade": "C",
-        "reason": "MRVL is graded C despite a decent 1-month gain of +37.7% because its RS of 85 is the lowest among highly-ranked peers, suggesting it may underperform or consolidate relative to stronger semiconductor plays in this regime."
+        "reason": "Despite a high Relative Strength of 97, YPF's 3-month performance of +22.8% lags significantly behind its Energy Traditional peers, indicating weaker sustained momentum within the theme."
       }
     ]
   }
