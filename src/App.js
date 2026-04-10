@@ -687,6 +687,51 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
       ) : (
         <div className="text-center py-6 text-zinc-600 text-[12px]">No stocks found for this theme</div>
       )}
+      {/* Sector RS Bars */}
+      {(() => {
+        const allThemeRS = [];
+        if (lbView === 'ibkr' && ibkrThemesData?.power_themes) {
+          for (const pt of ibkrThemesData.power_themes) {
+            if (pt.theme_rs != null) allThemeRS.push({ name: pt.name, rs: Math.round(pt.theme_rs) });
+          }
+        } else if (data?.themes) {
+          for (const theme of data.themes) {
+            const norm = theme.subthemes ? theme : { ...theme, subthemes: [{ stocks: theme.stocks || [] }] };
+            const stocks = norm.subthemes.flatMap(s => s.stocks);
+            const vals = stocks.map(s => s.rs_52w).filter(v => v != null);
+            if (vals.length) {
+              const avg = Math.round(vals.reduce((a, v) => a + v, 0) / vals.length);
+              allThemeRS.push({ name: norm.name, rs: avg });
+            }
+          }
+        }
+        if (!allThemeRS.length) return null;
+        const sorted = [...allThemeRS].sort((a, b) => b.rs - a.rs).slice(0, 8);
+        const maxRS = 99;
+        return (
+          <div className="mt-4 pt-3 border-t border-zinc-800/50">
+            <div className="text-[10px] font-bold text-zinc-600 uppercase tracking-[0.15em] mb-2">
+              Sector RS Bars (Finviz 1D Proxy)
+            </div>
+            <div className="flex flex-col gap-1.5">
+              {sorted.map(item => {
+                const pct = (item.rs / maxRS) * 100;
+                const barColor = item.rs >= 85 ? 'bg-emerald-500' : item.rs >= 70 ? 'bg-yellow-500' : 'bg-red-500';
+                const textColor = item.rs >= 85 ? 'text-emerald-400' : item.rs >= 70 ? 'text-yellow-400' : 'text-red-400';
+                return (
+                  <div key={item.name} className="flex items-center gap-2">
+                    <div className="w-36 text-[11px] text-zinc-400 truncate flex-shrink-0">{item.name}</div>
+                    <div className="flex-1 h-1.5 bg-zinc-800/60 rounded-full overflow-hidden">
+                      <div className={`h-full rounded-full ${barColor}`} style={{ width: `${pct}%` }}/>
+                    </div>
+                    <div className={`text-[11px] font-bold font-mono w-10 text-right flex-shrink-0 ${textColor}`}>{item.rs} RS</div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 };
@@ -800,6 +845,60 @@ const IbkrLeaderboard = ({ ibkrThemesData, onTickerHover, onThemeSelect }) => {
           })}
         </tbody>
       </table>
+    </div>
+  );
+};
+
+const ThemeHeatmap = ({ themes, finvizThemeRankings }) => {
+  const heatData = useMemo(() => {
+    const rankings = finvizThemeRankings || [];
+    if (rankings.length === 0) {
+      // fallback: compute from themes data
+      return (themes || []).map(t => {
+        const norm = t.subthemes ? t : { ...t, subthemes: [{ stocks: t.stocks || [] }] };
+        const stocks = norm.subthemes.flatMap(s => s.stocks);
+        const vals = stocks.map(s => s.perf_1d).filter(v => v != null);
+        const avg1d = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
+        return { name: norm.name, perf_1d: avg1d };
+      });
+    }
+    return rankings.map(r => ({ name: r.name, perf_1d: r.perf_1d }));
+  }, [themes, finvizThemeRankings]);
+
+  const sorted = [...heatData].sort((a, b) => (b.perf_1d ?? -99) - (a.perf_1d ?? -99));
+
+  const getColor = (v) => {
+    if (v == null) return { bg: 'bg-zinc-800/60', text: 'text-zinc-500' };
+    if (v >= 3)  return { bg: 'bg-emerald-500/60', text: 'text-emerald-100' };
+    if (v >= 1.5) return { bg: 'bg-emerald-500/40', text: 'text-emerald-200' };
+    if (v >= 0.5) return { bg: 'bg-emerald-500/25', text: 'text-emerald-300' };
+    if (v >= 0)   return { bg: 'bg-emerald-500/12', text: 'text-emerald-400' };
+    if (v >= -0.5) return { bg: 'bg-red-500/12', text: 'text-red-400' };
+    if (v >= -1.5) return { bg: 'bg-red-500/25', text: 'text-red-300' };
+    if (v >= -3)  return { bg: 'bg-red-500/40', text: 'text-red-200' };
+    return { bg: 'bg-red-500/60', text: 'text-red-100' };
+  };
+
+  if (!sorted.length) return null;
+
+  return (
+    <div className="mb-3 bg-zinc-900/40 border border-zinc-800/50 rounded-xl p-3">
+      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.18em] mb-2">
+        Theme Heatmap — 1D RS Performance
+      </div>
+      <div className="grid gap-1" style={{ gridTemplateColumns: 'repeat(6, 1fr)' }}>
+        {sorted.map(item => {
+          const { bg, text } = getColor(item.perf_1d);
+          return (
+            <div key={item.name} className={`rounded-lg p-2 ${bg} text-center`}>
+              <div className={`text-[11px] font-semibold leading-tight truncate ${text}`}>{item.name}</div>
+              <div className={`text-[12px] font-bold font-mono mt-0.5 ${text}`}>
+                {item.perf_1d != null ? `${item.perf_1d >= 0 ? '+' : ''}${item.perf_1d.toFixed(1)}%` : '—'}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
@@ -944,8 +1043,17 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
             <tr className="border-b border-zinc-800/60">
               <th className="px-2 py-2 w-6 text-[11px] text-zinc-600 select-none whitespace-nowrap">#</th>
               <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Theme</th>
+              {view === "themes" && (
+                <>
+                  <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Sub-Themes</th>
+                  <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Leaders</th>
+                </>
+              )}
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
               <LBSortHeader k="rs_score" label="RS" w="w-14" />
+              {view === "themes" && (
+                <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap text-center">Source</th>
+              )}
             </tr>
           </thead>
           <tbody>
@@ -953,6 +1061,26 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
               const isIndustryView = view === "industry";
               const isExpanded = isIndustryView && expanded === t.name;
               const industries = isIndustryView ? (industryMap[t.name] || []) : [];
+
+              // Sub-themes & leaders for themes view
+              let subThemeNames = [];
+              let leaderTickers = [];
+              let hasIbkrSource = false;
+              if (view === "themes") {
+                const matchedTheme = themes.find(th => (th.name || '').toLowerCase() === (t.name || '').toLowerCase());
+                if (matchedTheme) {
+                  subThemeNames = (matchedTheme.subthemes || []).slice(0, 3).map(s => s.name);
+                }
+                const ibkrPT = ibkrThemesData?.power_themes?.find(pt => pt.name?.toLowerCase() === t.name?.toLowerCase());
+                if (ibkrPT) {
+                  hasIbkrSource = true;
+                  leaderTickers = (ibkrPT.leaders || []).slice(0, 3).map(l => ({ ticker: l.ticker, setupCls: l.setup_label === 'Flag' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' : l.setup_label === 'Base' ? 'text-blue-400 bg-blue-500/10 border-blue-500/20' : 'text-zinc-400 bg-zinc-800/60 border-zinc-700/40' }));
+                } else if (matchedTheme) {
+                  const allStocks = (matchedTheme.subthemes || []).flatMap(s => s.stocks || []);
+                  leaderTickers = [...allStocks].sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0)).slice(0, 3).map(s => ({ ticker: s.ticker, setupCls: 'text-zinc-400 bg-zinc-800/60 border-zinc-700/40' }));
+                }
+              }
+
               return (<React.Fragment key={`lb-${t.name}`}>
                 <tr
                   onClick={e => {
@@ -973,10 +1101,32 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                       {t.n_industries && <span className="text-[10px] text-zinc-600">{t.n_industries} ind</span>}
                     </div>
                   </td>
+                  {view === "themes" && (
+                    <>
+                      <td className="px-2 py-1.5 min-w-[120px]">
+                        <div className="text-[11px] text-zinc-400 leading-tight">
+                          {subThemeNames.join(' · ') || <span className="text-zinc-600">—</span>}
+                        </div>
+                      </td>
+                      <td className="px-2 py-1.5">
+                        <div className="flex flex-wrap gap-1">
+                          {leaderTickers.map(l => (
+                            <span key={l.ticker} className={`text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded border ${l.setupCls}`}>{l.ticker}</span>
+                          ))}
+                          {leaderTickers.length === 0 && <span className="text-zinc-600 text-[11px]">—</span>}
+                        </div>
+                      </td>
+                    </>
+                  )}
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
                   <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${(themeAvgRS[t.name?.toLowerCase()] ?? 0) >= 85 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {themeAvgRS[t.name?.toLowerCase()] ?? '—'}
                   </td>
+                  {view === "themes" && (
+                    <td className="px-1 py-1.5 text-center">
+                      <IbkrSourceBadge source={hasIbkrSource ? 'ibkr' : 'fallback'} />
+                    </td>
+                  )}
                 </tr>
                 {isExpanded && industries.map(ind => (
                   <tr key={ind.name} className="bg-zinc-800/20 border-b border-zinc-800/20">
@@ -3867,33 +4017,46 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
       {/* Active Alerts */}
       <div className="mb-3">
         <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Active Alerts</div>
-        <div className="text-[11px] text-zinc-600 italic">Configure in settings</div>
+        {ibkrThemesData?.power_themes?.slice(0, 2).map(pt => pt.theme_rs >= 90 ? (
+          <div key={pt.name} className="mb-1 p-1.5 rounded-lg bg-emerald-500/5 border border-emerald-500/15">
+            <div className="text-[10px] font-bold text-emerald-400">{pt.name.split(' ')[0]} {pt.name.split(' ')[1] || ''} RS &gt; 90</div>
+            <div className="text-[9px] text-zinc-600 mt-0.5 font-mono">
+              {isLive ? '● ntfy.sh ✓' : '◐ Pending'}
+            </div>
+          </div>
+        ) : null).filter(Boolean)}
+        {(!ibkrThemesData?.power_themes?.some(pt => pt.theme_rs >= 90)) && (
+          <div className="text-[11px] text-zinc-600 py-1">No active alerts</div>
+        )}
       </div>
 
       {/* Separator */}
       <div className="border-t border-zinc-800/60 mb-2"/>
 
-      {/* Data Sources */}
+      {/* IBKR TWS Scanner */}
       <div>
-        <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Data Sources</div>
-        <div className="flex flex-col gap-1">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] text-zinc-600">Primary</span>
-            {dataSource === "ibkr" ? (
-              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded border bg-emerald-500/15 text-emerald-400 border-emerald-500/30 font-mono">IBKR</span>
-            ) : (
-              <span className="text-[9px] font-bold px-1.5 py-0.5 rounded border bg-red-500/10 text-red-400 border-red-500/20 font-mono">Unavailable</span>
-            )}
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] text-zinc-600">Fallback 1</span>
-            <span className={`text-[9px] font-mono px-1 py-0.5 rounded border ${!isLive ? "text-amber-400 bg-amber-500/10 border-amber-500/20" : "text-zinc-600 bg-zinc-800/40 border-zinc-700/30"}`}>Finviz</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] text-zinc-600">Fallback 2</span>
-            <span className={`text-[9px] font-mono px-1 py-0.5 rounded border ${!isLive ? "text-sky-400 bg-sky-500/10 border-sky-500/20" : "text-zinc-600 bg-zinc-800/40 border-zinc-700/30"}`}>yfinance</span>
-          </div>
+        <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">
+          IBKR TWS Scanner
         </div>
+        {ibkrThemesData?.ibkr_scanner?.length > 0 ? (
+          <div className="flex flex-col gap-0.5">
+            <div className="text-[9px] text-zinc-600 mb-1">Mirroring: Top Pre-Mkt Gainers</div>
+            {ibkrThemesData.ibkr_scanner.slice(0, 4).map(row => (
+              <div key={row.ticker} className="flex items-center justify-between px-1 py-0.5 rounded hover:bg-zinc-800/40 transition-colors">
+                <span className="text-[11px] font-mono font-semibold text-zinc-200">{row.ticker}</span>
+                {row.change_pct != null && (
+                  <span className={`text-[10px] font-mono font-bold ${row.change_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                    {row.change_pct >= 0 ? '+' : ''}{Number(row.change_pct).toFixed(1)}%
+                  </span>
+                )}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-[11px] text-zinc-600">
+            {isLive ? 'No scanner data' : 'Connect IB Gateway'}
+          </div>
+        )}
       </div>
 
       {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
@@ -5858,70 +6021,94 @@ const filtered = useMemo(() => {
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
       <GlobalAlertBanner />
       <div id="app-navbar" className="border-b border-zinc-800/60 bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-20">
-        <div className="max-w-[1400px] mx-auto px-4 py-3">
-          <div className="flex items-center justify-between mb-2.5">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center"><Activity size={16} className="text-white"/></div>
-              <div>
-                <h1 className="text-base font-bold tracking-tight">Thematic Scanner</h1>
-                <p className="text-[12px] text-zinc-500">美股強勢主題篩選器</p>
-              </div>
-              {/* Index tickers — inline with logo */}
+        <div className="max-w-[1400px] mx-auto px-4 py-2">
+          {/* Row 1: Logo + Full Ticker Tape + IBKR badge */}
+          <div className="flex items-center gap-2 mb-1">
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <div className="w-7 h-7 rounded-lg bg-blue-600 flex items-center justify-center"><Zap size={14} className="text-white"/></div>
+              <span className="text-[14px] font-bold tracking-tight whitespace-nowrap">Power Theme</span>
+            </div>
+            {/* Full ticker tape */}
+            <div className="flex-1 min-w-0 overflow-hidden">
               {data?.market_condition && (() => {
-                const { spy, qqq, iwm } = data.market_condition;
+                const { spy, qqq, iwm, btc, gld, oil, dxy, breadth_50d, breadth_200d } = data.market_condition;
                 const fmtChg = v => v == null ? null : v > 0
                   ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
                   : <span className="text-red-400">{v.toFixed(2)}%</span>;
-                const statusColor = st => st === "Strong" ? "text-emerald-400" : st === "Weak" || st === "Lagging" ? "text-red-400" : st === "Mediocre" ? "text-yellow-400" : "text-zinc-500";
-                const TV_SYMBOLS = { "NQ1!": "CME_MINI:NQ1!", "ES1!": "CME_MINI:ES1!", "RTY1!": "CME_MINI:RTY1!" };
-                const Tag = ({ label, d }) => d ? (
-                  <span
-                    className="flex items-center gap-1 text-[12px] font-mono cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
-                    onClick={() => { const sym = TV_SYMBOLS[label]; if (sym) window.open(`https://www.tradingview.com/chart/?symbol=${encodeURIComponent(sym)}`, "_blank"); }}
-                  >
-                    <span className="text-zinc-500">{label}</span>
-                    {d.price != null && <span className="text-zinc-300">${d.price.toFixed(2)}</span>}
-                    {fmtChg(d.change_pct)}
-                    {d.index_status && <span className={statusColor(d.index_status)}>{d.index_status}</span>}
-                  </span>
-                ) : null;
+                const TV_SYMBOLS = { "NQ!": "CME_MINI:NQ1!", "ES!": "CME_MINI:ES1!", "RTY!": "CME_MINI:RTY1!" };
+                const CHART = { btc: 'IBIT', gld: 'GLD', oil: 'USO', dxy: 'UUP', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R' };
+                const mkClick = (key, e) => { const ticker = CHART[key]; const rect = e.currentTarget.getBoundingClientRect(); setMacroHover(prev => prev?.ticker === ticker ? null : { ticker, rect }); };
+                const breadthColor = v => v >= 60 ? "text-emerald-400" : v >= 40 ? "text-yellow-400" : "text-red-400";
+                const Sep = () => <span className="text-zinc-700 mx-1">|</span>;
                 return (
-                  <div className="hidden lg:flex items-center gap-3 ml-4 pl-4 border-l border-zinc-700/50">
-                    <Tag label="NQ1!" d={qqq}/>
-                    <span className="text-zinc-700">·</span>
-                    <Tag label="ES1!" d={spy}/>
-                    <span className="text-zinc-700">·</span>
-                    <Tag label="RTY1!" d={iwm}/>
+                  <div className="hidden lg:flex items-center gap-1 text-[11px] font-mono flex-wrap overflow-hidden">
+                    {qqq && (
+                      <span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors"
+                        onClick={() => window.open(`https://www.tradingview.com/chart/?symbol=${encodeURIComponent(TV_SYMBOLS["NQ!"])}`, "_blank")}>
+                        <span className="text-zinc-500">NQ!</span>
+                        {qqq.price != null && <span className="text-zinc-300">{qqq.price.toFixed(0)}</span>}
+                        {fmtChg(qqq.change_pct)}
+                      </span>
+                    )}
+                    {spy && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors"
+                        onClick={() => window.open(`https://www.tradingview.com/chart/?symbol=${encodeURIComponent(TV_SYMBOLS["ES!"])}`, "_blank")}>
+                        <span className="text-zinc-500">ES!</span>
+                        {spy.price != null && <span className="text-zinc-300">{spy.price.toFixed(0)}</span>}
+                        {fmtChg(spy.change_pct)}
+                      </span></>}
+                    {iwm && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors"
+                        onClick={() => window.open(`https://www.tradingview.com/chart/?symbol=CME_MINI:RTY1!`, "_blank")}>
+                        <span className="text-zinc-500">RTY!</span>
+                        {iwm.price != null && <span className="text-zinc-300">{iwm.price.toFixed(0)}</span>}
+                        {fmtChg(iwm.change_pct)}
+                      </span></>}
+                    {breadth_50d != null && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_50d', e)}>
+                        <span className="text-zinc-600">S5FI</span>
+                        <span className={breadthColor(breadth_50d)}>{breadth_50d.toFixed(1)}%</span>
+                      </span></>}
+                    {btc && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('btc', e)}>
+                        <span className="text-zinc-600">BTC</span>
+                        {btc.price != null && <span className="text-zinc-300">{btc.price.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>}
+                        {fmtChg(btc.change_pct)}
+                      </span></>}
+                    {gld && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('gld', e)}>
+                        <span className="text-zinc-600">GC1!</span>
+                        {gld.price != null && <span className="text-zinc-300">{gld.price.toFixed(0)}</span>}
+                        {fmtChg(gld.change_pct)}
+                      </span></>}
+                    {oil && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('oil', e)}>
+                        <span className="text-zinc-600">CL1!</span>
+                        {oil.price != null && <span className="text-zinc-300">${oil.price.toFixed(2)}</span>}
+                        {fmtChg(oil.change_pct)}
+                      </span></>}
+                    {dxy && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('dxy', e)}>
+                        <span className="text-zinc-600">DXY</span>
+                        {dxy.price != null && <span className={dxy.change_pct > 0 ? "text-red-400" : dxy.change_pct < 0 ? "text-emerald-400" : "text-zinc-300"}>{dxy.price.toFixed(2)}</span>}
+                        {dxy.change_pct != null && <span className={dxy.change_pct > 0 ? "text-red-400" : dxy.change_pct < 0 ? "text-emerald-400" : "text-zinc-400"}>{dxy.change_pct > 0 ? "+" : ""}{dxy.change_pct.toFixed(2)}%</span>}
+                      </span></>}
+                    {breadth_200d != null && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_200d', e)}>
+                        <span className="text-zinc-600">MMTH 200D</span>
+                        <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span>
+                      </span></>}
                   </div>
                 );
               })()}
             </div>
-            <div className="flex items-center gap-2">
-              <div className="flex items-center gap-0.5">
-                <button onClick={() => setTab("scanner")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "scanner" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                  Scanner
-                </button>
-                <button onClick={() => setTab("gapper")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "gapper" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                  Gappers
-                </button>
-                <button onClick={() => setTab("breadth")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "breadth" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                  Breadth
-                </button>
-                <button onClick={() => setTab("news")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "news" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                  News &amp; Econ
-                </button>
-                <button onClick={() => setTab("journal")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "journal" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                  Journal
-                </button>
-              </div>
+            {/* IBKR Live badge + Updated time */}
+            <div className="flex items-center gap-2 flex-shrink-0">
+              {ibkrThemesData?.data_source === "ibkr" ? (
+                <span className="px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono bg-emerald-500/15 text-emerald-400 border-emerald-500/40 whitespace-nowrap">● IBKR Live</span>
+              ) : (
+                <span className="px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono bg-zinc-800/60 text-zinc-500 border-zinc-700/40 whitespace-nowrap">◐ IBKR Offline</span>
+              )}
               {data && (
                 <div className="text-right leading-tight">
-                  <div className="text-[12px] font-medium text-emerald-400">
-                    Updated {data.generated_at || data.last_updated}
+                  <div className="text-[11px] font-medium text-emerald-400 whitespace-nowrap">
+                    {data.generated_at || data.last_updated}
                   </div>
                   {countdown != null && (
-                    <div className="text-[11px] text-zinc-500">
-                      Next refresh in <span className="text-zinc-400 font-mono">{countdown >= 60 ? `${Math.floor(countdown/60)}m ${countdown%60}s` : `${countdown}s`}</span>
+                    <div className="text-[10px] text-zinc-500">
+                      <span className="font-mono">{countdown >= 60 ? `${Math.floor(countdown/60)}m ${countdown%60}s` : `${countdown}s`}</span>
                     </div>
                   )}
                 </div>
@@ -5929,97 +6116,114 @@ const filtered = useMemo(() => {
             </div>
           </div>
 
-          {/* Macro ticker bar */}
+          {/* Row 2: ECON TODAY bar */}
           {data?.market_condition && (() => {
             const { btc, gld, oil, dxy, credit_spread, breadth_50d, breadth_200d } = data.market_condition;
-            const hasAny = btc || gld || oil || dxy || credit_spread != null || breadth_50d != null;
+            const hasAny = btc || gld || oil || dxy || credit_spread != null || breadth_50d != null || (econData?.events?.length > 0);
             if (!hasAny) return null;
             const CHART = { btc: 'IBIT', gld: 'GLD', oil: 'USO', dxy: 'UUP', credit_spread: 'HYG', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R' };
             const mkClick = (key, e) => { const ticker = CHART[key]; const rect = e.currentTarget.getBoundingClientRect(); setMacroHover(prev => prev?.ticker === ticker ? null : { ticker, rect }); };
-            const fmtChg = v => v == null ? null : v > 0
-              ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
-              : <span className="text-red-400">{v.toFixed(2)}%</span>;
-            const Tag = ({ label, d, chartKey }) => d ? (
-              <span
-                className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
-                onClick={e => mkClick(chartKey, e)}
-              >
-                <span className="text-zinc-600">{label}</span>
-                {d.price != null && <span className="text-zinc-300">${d.price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>}
-                {fmtChg(d.change_pct)}
-              </span>
-            ) : null;
-            const Sep = () => <span className="text-zinc-800">|</span>;
-            const Dot = () => <span className="text-zinc-700 mx-0.5">·</span>;
+            const Sep = () => <span className="text-zinc-800 mx-1">|</span>;
             const breadthColor = v => v >= 60 ? "text-emerald-400" : v >= 40 ? "text-yellow-400" : "text-red-400";
+            const todayEvents = (econData?.events || []).filter(e => {
+              if (!e.date) return false;
+              const today = new Date().toISOString().slice(0, 10);
+              return e.date === today;
+            }).slice(0, 3);
             return (
-              <div className="hidden lg:flex items-center gap-2 text-[12px] font-mono py-1 mt-1 border-t border-zinc-800/50 flex-wrap">
-                {btc && <Tag label="BTC CME" d={btc} chartKey="btc"/>}
-                {gld && <><Dot/><Tag label="GC1! COMEX" d={gld} chartKey="gld"/></>}
-                {oil && <><Dot/><Tag label="CL1! NYMEX" d={oil} chartKey="oil"/></>}
-                {dxy && <><Sep/><span
-                  className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
-                  onClick={e => mkClick('dxy', e)}
-                >
-                  <span className="text-zinc-600">DXY</span>
-                  {dxy.price != null && <span className={dxy.change_pct > 0 ? "text-red-400" : dxy.change_pct < 0 ? "text-emerald-400" : "text-zinc-300"}>{dxy.price.toFixed(2)}</span>}
-                  {dxy.change_pct != null && <span className={dxy.change_pct > 0 ? "text-red-400" : dxy.change_pct < 0 ? "text-emerald-400" : "text-zinc-400"}>{dxy.change_pct > 0 ? "+" : ""}{dxy.change_pct.toFixed(2)}%</span>}
-                </span></>}
+              <div className="hidden lg:flex items-center gap-1 text-[11px] font-mono py-0.5 border-t border-zinc-800/40 flex-wrap overflow-hidden">
+                <span className="text-zinc-600 font-semibold mr-1 whitespace-nowrap">ECON TODAY →</span>
+                {todayEvents.map((ev, idx) => (
+                  <React.Fragment key={idx}>
+                    <span className="flex items-center gap-1 whitespace-nowrap">
+                      {ev.time && <span className="text-zinc-600">{ev.time}</span>}
+                      <span className="text-zinc-400">{ev.event || ev.name}</span>
+                      {ev.estimate != null && <span className="text-zinc-600">Est {ev.estimate}</span>}
+                    </span>
+                    <Sep/>
+                  </React.Fragment>
+                ))}
+                {breadth_200d != null && (
+                  <><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_200d', e)}>
+                    <span className="text-zinc-600">MMTH 200D</span>
+                    <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span>
+                  </span><Sep/></>
+                )}
+                {breadth_50d != null && (
+                  <><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_50d', e)}>
+                    <span className="text-zinc-600">S5FI 50D</span>
+                    <span className={breadthColor(breadth_50d)}>{breadth_50d.toFixed(1)}%</span>
+                  </span><Sep/></>
+                )}
+                {oil && (
+                  <><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('oil', e)}>
+                    <span className="text-zinc-600">CL1!</span>
+                    {oil.price != null && <span className="text-zinc-300">${oil.price.toFixed(2)}</span>}
+                    {oil.change_pct != null && <span className={oil.change_pct >= 0 ? "text-emerald-400" : "text-red-400"}>{oil.change_pct >= 0 ? "+" : ""}{oil.change_pct.toFixed(2)}%</span>}
+                  </span><Sep/></>
+                )}
+                {dxy && (
+                  <span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('dxy', e)}>
+                    <span className="text-zinc-600">DXY</span>
+                    {dxy.price != null && <span className={dxy.change_pct > 0 ? "text-red-400" : dxy.change_pct < 0 ? "text-emerald-400" : "text-zinc-300"}>{dxy.price.toFixed(2)}</span>}
+                  </span>
+                )}
                 {credit_spread != null && (
-                  <><Sep/>
-                  <span
-                    className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
-                    onClick={e => mkClick('credit_spread', e)}
-                  >
+                  <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('credit_spread', e)}>
                     <span className="text-zinc-600">HY Spread</span>
                     <span className="text-zinc-300">{credit_spread.value.toFixed(2)}%</span>
-                    {credit_spread.change !== 0 && (
-                      <span className={credit_spread.change > 0 ? "text-red-400" : "text-emerald-400"}>
-                        {credit_spread.change > 0 ? "+" : ""}{credit_spread.change.toFixed(3)}
-                      </span>
-                    )}
                   </span></>
-                )}
-                {(breadth_50d != null || breadth_200d != null) && (
-                  <><Sep/>
-                  <span className="text-zinc-600">Market Breadth</span>
-                  {breadth_50d != null && (
-                    <span
-                      className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
-                      onClick={e => mkClick('breadth_50d', e)}
-                    >
-                      <span className="text-zinc-500">S5FI 50D</span>
-                      <span className={breadthColor(breadth_50d)}>{breadth_50d.toFixed(1)}%</span>
-                    </span>
-                  )}
-                  {breadth_200d != null && (
-                    <><Dot/>
-                    <span
-                      className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 -mx-1 transition-colors"
-                      onClick={e => mkClick('breadth_200d', e)}
-                    >
-                      <span className="text-zinc-500">MMTH 200D</span>
-                      <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span>
-                    </span></>
-                  )}</>
                 )}
               </div>
             );
           })()}
 
 
+          {/* Row 3: Tabs + right-side actions */}
+          <div className="flex items-center border-t border-zinc-800/50 pt-1 mt-0.5">
+            <div className="flex items-center gap-0 flex-1">
+              <button onClick={() => setTab("scanner")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "scanner" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                Thematic Scanner
+              </button>
+              <button onClick={() => setTab("gapper")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "gapper" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                Pre-Market Gappers
+              </button>
+              <button onClick={() => setTab("breadth")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "breadth" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                Market Breadth
+              </button>
+              <button onClick={() => setTab("news")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "news" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                News &amp; Econ
+              </button>
+            </div>
+            <div className="flex items-center gap-2">
+              <button onClick={() => setTab("journal")} className={`px-2.5 py-1 text-[12px] font-medium rounded-md border transition-colors whitespace-nowrap ${tab === "journal" ? "bg-blue-500/15 border-blue-500/30 text-blue-400" : "bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-300"}`}>
+                Trade Journal
+              </button>
+              <SearchBar data={data} search={search} setSearch={setSearch}/>
+              <button className="flex items-center gap-1 px-2.5 py-1 text-[12px] rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-300 transition-colors whitespace-nowrap">
+                Alerts
+              </button>
+            </div>
+          </div>
+
           {tab === "scanner" && (
             <>
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-3 text-[12px]">
-                <span className="text-zinc-500">{filtered.length} themes</span>
-                <span className="text-zinc-600">·</span>
-                <span className="text-zinc-500">{totalSubs} sub-themes</span>
-                <span className="text-zinc-600">·</span>
-                <span className="text-zinc-500">{unique.length} tickers</span>
-              </div>
-              <div className="flex-1"/>
-              <SearchBar data={data} search={search} setSearch={setSearch}/>
+            <div className="flex flex-wrap items-center gap-3 mt-1.5">
+              {(() => {
+                const signal = data?.market_condition?.signal;
+                const signalLabel = signal === "green" ? "Market Uptrend" : signal === "yellow" ? "Market Correction" : "Market Downtrend";
+                const signalArrow = signal === "green" ? "↑" : signal === "yellow" ? "→" : "↓";
+                const signalCls = signal === "green" ? "text-emerald-400" : signal === "yellow" ? "text-amber-400" : "text-red-400";
+                return (
+                  <div className="flex items-center gap-2 text-[12px] font-mono flex-1 min-w-0 overflow-hidden">
+                    <span className={`font-semibold whitespace-nowrap ${signalCls}`}>{signalArrow} {signalLabel}</span>
+                    <span className="text-zinc-700">|</span>
+                    <span className="text-zinc-500 whitespace-nowrap">{filtered.length} themes · {unique.length} tickers</span>
+                    <span className="text-zinc-700">|</span>
+                    <span className="text-zinc-600 whitespace-nowrap">Superperf gate: RS&gt;85 · Price&gt;$12 · Vol&gt;$100M · MCap&gt;$2B · ADR≥4%</span>
+                  </div>
+                );
+              })()}
               <button onClick={()=>setShowFP(!showFP)} className={`flex items-center gap-1.5 px-2.5 py-1.5 text-[13px] rounded-md border transition-colors ${filtersOn?'bg-blue-500/15 border-blue-500/30 text-blue-400':'bg-zinc-800/60 border-zinc-700/50 text-zinc-400'}`}>
                 <SlidersHorizontal size={12}/> Filters
               </button>
@@ -6124,6 +6328,7 @@ const filtered = useMemo(() => {
               </div>
             );
           })()}
+          <ThemeHeatmap themes={data?.themes} finvizThemeRankings={data?.finviz_theme_rankings}/>
           <div className="flex items-stretch gap-6 mb-2">
             <div className="w-[300px] flex-shrink-0 flex flex-col gap-4">
               <VixGauge initialVix={data?.vix}/>
