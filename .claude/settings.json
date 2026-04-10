@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"require\\(''zustand''\\)\")",
+      "WebFetch(domain:fred.stlouisfed.org)",
+      "WebFetch(domain:finance.yahoo.com)",
+      "Bash(npx vercel:*)"
+    ],
+    "additionalDirectories": [
+      "/Users/ryanchen/Documents/thematic-scanner"
+    ]
+  }
+}
