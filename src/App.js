@@ -1020,7 +1020,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
       <div className="flex items-center mb-3 gap-2">
         <BarChart3 size={13} className="text-blue-400 flex-shrink-0"/>
         <span className="text-[13px] font-semibold text-zinc-300 whitespace-nowrap">Theme Leaderboard</span>
-        <span className="text-[11px] text-zinc-600">{ranked.length} themes</span>
+        <span className="text-[11px] text-zinc-600">Top 5 of {ranked.length} themes</span>
         {secondaryKey && (
           <button onClick={() => setSortPriority([{ key: 'rs_score', direction: 'desc' }])}
             className="text-[10px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">
@@ -1069,7 +1069,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
             </tr>
           </thead>
           <tbody>
-            {ranked.map((t, i) => {
+            {ranked.slice(0, 5).map((t, i) => {
               const isIndustryView = view === "industry";
               const isExpanded = isIndustryView && expanded === t.name;
               const industries = isIndustryView ? (industryMap[t.name] || []) : [];
