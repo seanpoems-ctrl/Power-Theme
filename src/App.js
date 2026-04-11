@@ -1075,9 +1075,13 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                               const zoomVal = parseFloat(getComputedStyle(document.body).zoom) || 1;
                               const nameRight = e.currentTarget.getBoundingClientRect().right;
                               const pinLeft = nameRight / zoomVal + 8;
+                              // Push chart down so there's always room above it for the stats popup
+                              const navBottom = document.getElementById("app-navbar")?.getBoundingClientRect().bottom ?? 170;
+                              const STATS_H_EST = 390; // conservative estimate of stats popup height
+                              const hintTop = (navBottom + 8 + STATS_H_EST + 8) / zoomVal;
                               setThemeHover({ ticker: etf, rect: {
                                 left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom,
-                                width: rect.width, height: rect.height, pinLeft,
+                                width: rect.width, height: rect.height, pinLeft, hintTop,
                               }});
                             } else {
                               setThemeHover(null);
@@ -1182,7 +1186,8 @@ function computeTVPopupRect(anchorRect, opts = {}) {
       left = Math.max(edgeX, left);
     }
   }
-  let top = anchorRect.top;
+  // hintTop: caller can request a minimum top to leave room above for a stacked stats popup
+  let top = Math.max(anchorRect.top, anchorRect.hintTop ?? 0);
   top = Math.max(edgeTop, Math.min(top, vh - H - edgeBot));
   return { left, top, width: W, height: H };
 }
@@ -1244,16 +1249,15 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
     const vh = window.innerHeight;
     const aboveTop = chartTop - gap - popupH;
     const belowTop = chartTop + chartHeight + gap;
-    const clampedBelow = vh - popupH - 8; // bottom-border aligned
     let desiredTop;
     if (aboveTop >= minTop) {
-      desiredTop = aboveTop; // fits above cleanly
+      desiredTop = aboveTop; // fits above cleanly (chart was pushed down to make room)
     } else if (belowTop + popupH <= vh - 8) {
       desiredTop = belowTop; // fits below cleanly
-    } else if (clampedBelow >= chartTop + chartHeight) {
-      desiredTop = clampedBelow; // below clamped to bottom border, no chart overlap
     } else {
-      desiredTop = minTop; // top-border aligned — chart may be partially behind popup
+      // Neither fits cleanly: clamp to bottom border if no chart overlap, else top border
+      const clampedBelow = vh - popupH - 8;
+      desiredTop = clampedBelow >= chartTop + chartHeight ? clampedBelow : minTop;
     }
     const desiredLeft = chartLeft;
     setStacked({ top: Math.max(8, desiredTop), left: Math.max(8, desiredLeft) });
