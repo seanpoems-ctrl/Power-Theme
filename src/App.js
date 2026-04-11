@@ -1053,17 +1053,23 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                   onClick={e => {
                     if (isIndustryView) { setExpanded(isExpanded ? null : t.name); return; }
                     const rect = e.currentTarget.getBoundingClientRect();
-                    setThemeStats(prev => prev?.themeName === t.name ? null : { themeName: t.name, anchorRect: rect });
+                    const sameTheme = themeStats?.themeName === t.name;
+                    if (sameTheme) {
+                      setThemeStats(null);
+                      setThemeHover(null);
+                    } else {
+                      setThemeStats({ themeName: t.name, anchorRect: rect });
+                      const etf = THEME_ETF_MAP[t.name];
+                      if (etf) setThemeHover({ ticker: etf, rect });
+                      else setThemeHover(null);
+                    }
                     onThemeSelect && onThemeSelect(t.name);
                   }}
                   className={`border-b border-zinc-800/30 transition-colors cursor-pointer ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
                   <td className={`px-1 py-2 text-[12px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
                   <td className="px-2 py-2">
                     <div className="flex items-center gap-1.5">
-                      <span
-                        className="text-[12px] font-semibold text-zinc-200 cursor-pointer hover:text-blue-400 transition-colors"
-                        onClick={e => { e.stopPropagation(); const etf = THEME_ETF_MAP[t.name]; if (!etf) return; const rect = e.currentTarget.getBoundingClientRect(); setThemeHover(prev => prev?.ticker === etf ? null : { ticker: etf, rect }); }}
-                      >{t.name}</span>
+                      <span className="text-[12px] font-semibold text-zinc-200 hover:text-blue-400 transition-colors">{t.name}</span>
                       {t.stage2_momentum && <span className="px-1.5 py-0.5 text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full leading-none">STAGE 2</span>}
                       {t.n_industries && <span className="text-[10px] text-zinc-600">{t.n_industries} ind</span>}
                     </div>
@@ -1157,7 +1163,7 @@ const TVPopup = ({ ticker, anchorRect, chartUrl, onClose }) => {
   return (
     <>
       {onClose && <div style={{ position:"fixed", inset:0, zIndex:9998 }} onClick={onClose}/>}
-      <div style={{ position:"fixed", left, top, width:W, height:H, zIndex:9999, borderRadius:8, overflow:"hidden", border:"1px solid #27272a", boxShadow:"0 24px 64px rgba(0,0,0,0.85)", pointerEvents:"none", background:"#fff" }}>
+      <div id="tv-popup-chart" style={{ position:"fixed", left, top, width:W, height:H, zIndex:9999, borderRadius:8, overflow:"hidden", border:"1px solid #27272a", boxShadow:"0 24px 64px rgba(0,0,0,0.85)", pointerEvents:"none", background:"#fff" }}>
         <img src={src} alt={ticker} referrerPolicy="no-referrer" style={{ width:"100%", height:"100%", objectFit:"fill", display:"block" }}/>
       </div>
     </>
@@ -1185,20 +1191,28 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
   const worst     = sorted.filter(s => (s.perf_1d ?? 0) < 0).slice(-3).reverse();
 
   const popupRef = useRef(null);
-  const [stackedTop, setStackedTop] = useState(null);
+  const [stacked, setStacked] = useState(null); // { top, left } in CSS px (matches chart popup's inline coords)
 
   // When the chart popup is also open, align this popup's BOTTOM to the chart's TOP
-  // (with a small gap) so the two don't overlap. Measured after render so we know our height.
+  // (with a small gap) so the two don't overlap. Read the chart popup's actual inline
+  // CSS coordinates so the math stays in the same coord space (avoids body-zoom mismatch
+  // between getBoundingClientRect and inline styles).
   useLayoutEffect(() => {
-    if (!chartAnchor || !popupRef.current) { setStackedTop(null); return; }
-    const chartRect = computeTVPopupRect(chartAnchor);
-    if (!chartRect) { setStackedTop(null); return; }
-    const h = popupRef.current.offsetHeight;
+    if (!chartAnchor || !popupRef.current) { setStacked(null); return; }
+    const chartEl = document.getElementById("tv-popup-chart");
+    if (!chartEl) { setStacked(null); return; }
+    const chartTop   = parseFloat(chartEl.style.top)   || 0;
+    const chartLeft  = parseFloat(chartEl.style.left)  || 0;
+    const chartWidth = parseFloat(chartEl.style.width) || 0;
+    const popupH = popupRef.current.offsetHeight;
+    const popupW = popupRef.current.offsetWidth;
     const gap = 8;
-    const navEl = document.getElementById("app-navbar");
-    const edgeTop2 = navEl ? navEl.getBoundingClientRect().bottom + 8 : 72;
-    const desired = chartRect.top - gap - h;
-    setStackedTop(Math.max(edgeTop2, desired));
+    // Keep alignment strict (data bottom == chart top - gap). Allow the popup to
+    // extend over the navbar if needed — z-index keeps it on top and the modal
+    // overlay dims everything underneath anyway.
+    const desiredTop = Math.max(8, chartTop - gap - popupH);
+    const desiredLeft = chartLeft + (chartWidth - popupW) / 2;
+    setStacked({ top: desiredTop, left: Math.max(8, desiredLeft) });
   }, [chartAnchor, themeName, stocks.length]);
 
   if (!anchorRect) return null;
@@ -1208,15 +1222,8 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
   const edgeTop = navEl ? navEl.getBoundingClientRect().bottom + 8 : 72;
 
   let left;
-  if (chartAnchor) {
-    // Horizontally center over the chart popup for an intentional stacked feel
-    const chartRect = computeTVPopupRect(chartAnchor);
-    if (chartRect) {
-      left = chartRect.left + (chartRect.width - MAX_W) / 2;
-      left = Math.max(EDGE, Math.min(left, vw - MAX_W - EDGE));
-    } else {
-      left = Math.max(EDGE, Math.min(anchorRect.left, vw - MAX_W - EDGE));
-    }
+  if (stacked) {
+    left = stacked.left;
   } else {
     const spaceRight = vw - anchorRect.right - EDGE;
     const spaceLeft  = anchorRect.left - EDGE;
@@ -1228,8 +1235,8 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
       left = Math.max(EDGE, Math.min(anchorRect.left, vw - MAX_W - EDGE));
     }
   }
-  const top = stackedTop != null
-    ? stackedTop
+  const top = stacked
+    ? stacked.top
     : Math.max(edgeTop, Math.min(anchorRect.top, vh - EDGE - 300));
 
   const rsColor = avgRS >= 70 ? 'text-emerald-400' : avgRS >= 50 ? 'text-yellow-400' : 'text-red-400';
