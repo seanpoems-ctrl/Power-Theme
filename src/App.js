@@ -1075,13 +1075,9 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                               const zoomVal = parseFloat(getComputedStyle(document.body).zoom) || 1;
                               const nameRight = e.currentTarget.getBoundingClientRect().right;
                               const pinLeft = nameRight / zoomVal + 8;
-                              // Push chart down so there's always room above it for the stats popup
-                              const navBottom = document.getElementById("app-navbar")?.getBoundingClientRect().bottom ?? 170;
-                              const STATS_H_EST = 390; // conservative estimate of stats popup height
-                              const hintTop = (navBottom + 8 + STATS_H_EST + 8) / zoomVal;
                               setThemeHover({ ticker: etf, rect: {
                                 left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom,
-                                width: rect.width, height: rect.height, pinLeft, hintTop,
+                                width: rect.width, height: rect.height, pinLeft,
                               }});
                             } else {
                               setThemeHover(null);
@@ -1149,6 +1145,10 @@ function computeTVPopupRect(anchorRect, opts = {}) {
   const MAX_W = 600, MAX_H = 200;
   const vw = window.innerWidth;
   const vh = window.innerHeight;
+  // CSS zoom on body causes window.innerHeight to NOT reflect the true usable space
+  // for fixed-position elements. Divide by zoom to get the effective viewport height.
+  const zoomBody = parseFloat(getComputedStyle(document.body).zoom) || 1;
+  const effVh = vh / zoomBody;
   const edgeX = 8, edgeBot = 8;
   const navEl = document.getElementById("app-navbar");
   const edgeTop = navEl ? (navEl.getBoundingClientRect().bottom + 8) : 110;
@@ -1186,9 +1186,8 @@ function computeTVPopupRect(anchorRect, opts = {}) {
       left = Math.max(edgeX, left);
     }
   }
-  // hintTop: caller can request a minimum top to leave room above for a stacked stats popup
-  let top = Math.max(anchorRect.top, anchorRect.hintTop ?? 0);
-  top = Math.max(edgeTop, Math.min(top, vh - H - edgeBot));
+  let top = anchorRect.top;
+  top = Math.max(edgeTop, Math.min(top, effVh - H - edgeBot));
   return { left, top, width: W, height: H };
 }
 
@@ -1246,18 +1245,21 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
     const gap = 8;
     const navEl = document.getElementById("app-navbar");
     const minTop = navEl ? (navEl.getBoundingClientRect().bottom + gap) : 80;
-    const vh = window.innerHeight;
+    const zoomBody = parseFloat(getComputedStyle(document.body).zoom) || 1;
+    const effVh = window.innerHeight / zoomBody;
     const aboveTop = chartTop - gap - popupH;
     const belowTop = chartTop + chartHeight + gap;
     let desiredTop;
     if (aboveTop >= minTop) {
-      desiredTop = aboveTop; // fits above cleanly (chart was pushed down to make room)
-    } else if (belowTop + popupH <= vh - 8) {
+      desiredTop = aboveTop; // fits above cleanly
+    } else if (belowTop + popupH <= effVh - 8) {
       desiredTop = belowTop; // fits below cleanly
+    } else if (aboveTop >= minTop - popupH) {
+      // Above with top-border clamping (aligned to navbar bottom)
+      desiredTop = minTop;
     } else {
-      // Neither fits cleanly: clamp to bottom border if no chart overlap, else top border
-      const clampedBelow = vh - popupH - 8;
-      desiredTop = clampedBelow >= chartTop + chartHeight ? clampedBelow : minTop;
+      // Below with bottom-border clamping (aligned to viewport bottom)
+      desiredTop = Math.max(belowTop, effVh - popupH - 8);
     }
     const desiredLeft = chartLeft;
     setStacked({ top: Math.max(8, desiredTop), left: Math.max(8, desiredLeft) });
@@ -1265,7 +1267,9 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
 
   if (!anchorRect) return null;
   const MAX_W = 420, EDGE = 12;
-  const vw = window.innerWidth, vh = window.innerHeight;
+  const vw = window.innerWidth;
+  const zoomBody = parseFloat(getComputedStyle(document.body).zoom) || 1;
+  const vh = window.innerHeight / zoomBody; // effective viewport height for fixed positioning
   const navEl = document.getElementById("app-navbar");
   const edgeTop = navEl ? navEl.getBoundingClientRect().bottom + 8 : 72;
 
