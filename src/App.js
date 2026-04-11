@@ -1145,10 +1145,6 @@ function computeTVPopupRect(anchorRect, opts = {}) {
   const MAX_W = 600, MAX_H = 200;
   const vw = window.innerWidth;
   const vh = window.innerHeight;
-  // CSS zoom on body causes window.innerHeight to NOT reflect the true usable space
-  // for fixed-position elements. Divide by zoom to get the effective viewport height.
-  const zoomBody = parseFloat(getComputedStyle(document.body).zoom) || 1;
-  const effVh = vh / zoomBody;
   const edgeX = 8, edgeBot = 8;
   const navEl = document.getElementById("app-navbar");
   const edgeTop = navEl ? (navEl.getBoundingClientRect().bottom + 8) : 110;
@@ -1187,20 +1183,32 @@ function computeTVPopupRect(anchorRect, opts = {}) {
     }
   }
   let top = anchorRect.top;
-  top = Math.max(edgeTop, Math.min(top, effVh - H - edgeBot));
+  top = Math.max(edgeTop, Math.min(top, vh - H - edgeBot));
   return { left, top, width: W, height: H };
 }
 
 const TVPopup = ({ ticker, anchorRect, chartUrl, onClose }) => {
-  if (!ticker || !anchorRect) return null;
+  const [topAdj, setTopAdj] = React.useState(0);
+  const chartRef = React.useRef(null);
   const rect = computeTVPopupRect(anchorRect);
-  if (!rect) return null;
+
+  // After render, measure actual position and clamp to viewport using real getBoundingClientRect
+  // This is zoom-agnostic: getBoundingClientRect always returns true visual coordinates.
+  React.useLayoutEffect(() => {
+    if (!chartRef.current) return;
+    const el = chartRef.current;
+    const bounding = el.getBoundingClientRect();
+    const overflow = bounding.bottom - (window.innerHeight - 8);
+    setTopAdj(overflow > 0 ? -overflow : 0);
+  }, [rect?.top, rect?.height]);
+
+  if (!ticker || !anchorRect || !rect) return null;
   const { left, top, width: W, height: H } = rect;
   const src = chartUrl || `https://finviz.com/chart.ashx?t=${encodeURIComponent(ticker)}&ty=c&ta=1&p=d&s=l`;
   return (
     <>
       {onClose && <div style={{ position:"fixed", inset:0, zIndex:9998 }} onClick={onClose}/>}
-      <div id="tv-popup-chart" style={{ position:"fixed", left, top, width:W, height:H, zIndex:9999, borderRadius:8, overflow:"hidden", border:"1px solid #27272a", boxShadow:"0 24px 64px rgba(0,0,0,0.85)", pointerEvents:"none", background:"#fff" }}>
+      <div ref={chartRef} id="tv-popup-chart" style={{ position:"fixed", left, top: top + topAdj, width:W, height:H, zIndex:9999, borderRadius:8, overflow:"hidden", border:"1px solid #27272a", boxShadow:"0 24px 64px rgba(0,0,0,0.85)", pointerEvents:"none", background:"#fff" }}>
         <img src={src} alt={ticker} referrerPolicy="no-referrer" style={{ width:"100%", height:"100%", objectFit:"fill", display:"block" }}/>
       </div>
     </>
@@ -1238,28 +1246,29 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
     if (!chartAnchor || !popupRef.current) { setStacked(null); return; }
     const chartEl = document.getElementById("tv-popup-chart");
     if (!chartEl) { setStacked(null); return; }
-    const chartTop    = parseFloat(chartEl.style.top)    || 0;
-    const chartLeft   = parseFloat(chartEl.style.left)   || 0;
-    const chartHeight = parseFloat(chartEl.style.height) || 200;
-    const popupH = popupRef.current.offsetHeight;
+    // Use getBoundingClientRect for actual visual coordinates — zoom-agnostic
+    const chartBound = chartEl.getBoundingClientRect();
+    const chartTop    = chartBound.top;
+    const chartLeft   = parseFloat(chartEl.style.left) || 0;
+    const chartHeight = chartBound.height;
+    const popupH = popupRef.current.getBoundingClientRect().height;
     const gap = 8;
     const navEl = document.getElementById("app-navbar");
     const minTop = navEl ? (navEl.getBoundingClientRect().bottom + gap) : 80;
-    const zoomBody = parseFloat(getComputedStyle(document.body).zoom) || 1;
-    const effVh = window.innerHeight / zoomBody;
+    const vh = window.innerHeight; // same coordinate system as getBoundingClientRect
     const aboveTop = chartTop - gap - popupH;
     const belowTop = chartTop + chartHeight + gap;
     let desiredTop;
     if (aboveTop >= minTop) {
       desiredTop = aboveTop; // fits above cleanly
-    } else if (belowTop + popupH <= effVh - 8) {
+    } else if (belowTop + popupH <= vh - 8) {
       desiredTop = belowTop; // fits below cleanly
     } else if (aboveTop >= minTop - popupH) {
       // Above with top-border clamping (aligned to navbar bottom)
       desiredTop = minTop;
     } else {
       // Below with bottom-border clamping (aligned to viewport bottom)
-      desiredTop = Math.max(belowTop, effVh - popupH - 8);
+      desiredTop = Math.max(belowTop, vh - popupH - 8);
     }
     const desiredLeft = chartLeft;
     setStacked({ top: Math.max(8, desiredTop), left: Math.max(8, desiredLeft) });
@@ -1268,8 +1277,7 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
   if (!anchorRect) return null;
   const MAX_W = 420, EDGE = 12;
   const vw = window.innerWidth;
-  const zoomBody = parseFloat(getComputedStyle(document.body).zoom) || 1;
-  const vh = window.innerHeight / zoomBody; // effective viewport height for fixed positioning
+  const vh = window.innerHeight;
   const navEl = document.getElementById("app-navbar");
   const edgeTop = navEl ? navEl.getBoundingClientRect().bottom + 8 : 72;
 
