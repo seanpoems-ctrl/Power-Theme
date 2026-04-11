@@ -1061,17 +1061,18 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                       setThemeStats({ themeName: t.name, anchorRect: rect });
                       const etf = THEME_ETF_MAP[t.name];
                       if (etf) {
-                        // Pin the popup pair's right edge to the leaderboard table's right edge
-                        // so the stack sits flush against the right side of the theme.
-                        const tableEl = e.currentTarget.closest('table');
+                        // Pin the popup pair's left edge to just-right-of the theme name text
+                        // so the stack sits flush against the right side of the theme name.
+                        const nameEl = Array.from(e.currentTarget.querySelectorAll('span'))
+                          .find(s => s.textContent.trim() === t.name);
                         const zoomVal = parseFloat(getComputedStyle(document.body).zoom) || 1;
-                        const tableRight = tableEl ? tableEl.getBoundingClientRect().right : rect.right;
-                        const pinRight = tableRight / zoomVal;
+                        const nameRight = nameEl ? nameEl.getBoundingClientRect().right : rect.left;
+                        const pinLeft = nameRight / zoomVal + 8; // 8px inline gap
                         // DOMRect properties are not own enumerable, so spread silently drops them.
                         // Copy each field explicitly so anchorRect.top etc. survive.
                         setThemeHover({ ticker: etf, rect: {
                           left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom,
-                          width: rect.width, height: rect.height, pinRight,
+                          width: rect.width, height: rect.height, pinLeft,
                         }});
                       } else {
                         setThemeHover(null);
@@ -1148,8 +1149,13 @@ function computeTVPopupRect(anchorRect, opts = {}) {
   const edgeTop = navEl ? (navEl.getBoundingClientRect().bottom + 8) : 110;
   const forceRight = opts.forceRight || anchorRect.forceRight;
   const pinRight = opts.pinRight ?? anchorRect.pinRight; // logical (inline) x to align chart's right edge to
+  const pinLeft = opts.pinLeft ?? anchorRect.pinLeft;   // logical (inline) x to align chart's left edge to
   let W, H, left;
-  if (pinRight != null) {
+  if (pinLeft != null) {
+    // Pin chart's left edge to a specific x (used to flush popup against the theme name text)
+    W = MAX_W; H = MAX_H;
+    left = pinLeft;
+  } else if (pinRight != null) {
     // Pin chart's right edge to a specific x (used to flush popup against the theme leaderboard's right edge)
     W = MAX_W; H = MAX_H;
     left = pinRight - W;
@@ -1237,10 +1243,9 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
     // extend over the navbar if needed — z-index keeps it on top and the modal
     // overlay dims everything underneath anyway.
     const desiredTop = Math.max(8, chartTop - gap - popupH);
-    // Right-align the stats popup with the chart so the whole stack sits flush
-    // against the same right edge (matches "貼齊 theme 右邊" intent).
-    const chartRight = chartLeft + chartWidth;
-    const desiredLeft = chartRight - popupW;
+    // Left-align the stats popup with the chart so both share the same left edge
+    // (which is itself flush against the theme name text).
+    const desiredLeft = chartLeft;
     setStacked({ top: desiredTop, left: Math.max(8, desiredLeft) });
   }, [chartAnchor, themeName, stocks.length]);
 
