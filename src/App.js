@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import React, { useState, useEffect, useLayoutEffect, useMemo, useCallback, useRef } from "react";
 import { ChevronDown, ChevronRight, Star, Activity, BarChart3, RefreshCw, Search, SlidersHorizontal, X, Layers, Zap, TrendingUp, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink, FlaskConical } from "lucide-react";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
 import useMarketStore from "./useMarketStore";
@@ -1113,21 +1113,19 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
       </div>
     </div>
     {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => setThemeHover(null)}/>}
-    {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} anchorRect={themeStats.anchorRect} onClose={() => setThemeStats(null)}/>}
+    {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => setThemeStats(null)}/>}
     </>
   );
 };
 
-const TVPopup = ({ ticker, anchorRect, chartUrl, onClose }) => {
-  if (!ticker || !anchorRect) return null;
+function computeTVPopupRect(anchorRect) {
+  if (!anchorRect) return null;
   const MAX_W = 600, MAX_H = 200;
   const vw = window.innerWidth;
   const vh = window.innerHeight;
   const edgeX = 8, edgeBot = 130;
-  // Clear the sticky navbar
   const navEl = document.getElementById("app-navbar");
   const edgeTop = navEl ? (navEl.getBoundingClientRect().bottom + 8) : 110;
-  // Pick side based on anchor center
   const anchorCenterX = anchorRect.left + anchorRect.width / 2;
   const useLeft = anchorCenterX > vw / 2;
   let W, H, left;
@@ -1147,6 +1145,14 @@ const TVPopup = ({ ticker, anchorRect, chartUrl, onClose }) => {
   }
   let top = anchorRect.top;
   top = Math.max(edgeTop, Math.min(top, vh - H - edgeBot));
+  return { left, top, width: W, height: H };
+}
+
+const TVPopup = ({ ticker, anchorRect, chartUrl, onClose }) => {
+  if (!ticker || !anchorRect) return null;
+  const rect = computeTVPopupRect(anchorRect);
+  if (!rect) return null;
+  const { left, top, width: W, height: H } = rect;
   const src = chartUrl || `https://finviz.com/chart.ashx?t=${encodeURIComponent(ticker)}&ty=c&ta=1&p=d&s=l`;
   return (
     <>
@@ -1158,7 +1164,7 @@ const TVPopup = ({ ticker, anchorRect, chartUrl, onClose }) => {
   );
 };
 
-const ThemeStatsPopup = ({ themeName, themes, anchorRect, onClose }) => {
+const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }) => {
   const stocks = useMemo(() => {
     if (!themeName || !themes) return [];
     const theme = themes.find(t => normalizeTheme(t).name.toLowerCase() === themeName.toLowerCase());
@@ -1178,22 +1184,53 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, onClose }) => {
   const best      = sorted.filter(s => (s.perf_1d ?? 0) > 0).slice(0, 3);
   const worst     = sorted.filter(s => (s.perf_1d ?? 0) < 0).slice(-3).reverse();
 
+  const popupRef = useRef(null);
+  const [stackedTop, setStackedTop] = useState(null);
+
+  // When the chart popup is also open, align this popup's BOTTOM to the chart's TOP
+  // (with a small gap) so the two don't overlap. Measured after render so we know our height.
+  useLayoutEffect(() => {
+    if (!chartAnchor || !popupRef.current) { setStackedTop(null); return; }
+    const chartRect = computeTVPopupRect(chartAnchor);
+    if (!chartRect) { setStackedTop(null); return; }
+    const h = popupRef.current.offsetHeight;
+    const gap = 8;
+    const navEl = document.getElementById("app-navbar");
+    const edgeTop2 = navEl ? navEl.getBoundingClientRect().bottom + 8 : 72;
+    const desired = chartRect.top - gap - h;
+    setStackedTop(Math.max(edgeTop2, desired));
+  }, [chartAnchor, themeName, stocks.length]);
+
   if (!anchorRect) return null;
   const MAX_W = 420, EDGE = 12;
   const vw = window.innerWidth, vh = window.innerHeight;
-  const spaceRight = vw - anchorRect.right - EDGE;
-  const spaceLeft  = anchorRect.left - EDGE;
-  let left;
-  if (spaceRight >= MAX_W) {
-    left = anchorRect.right + 8;
-  } else if (spaceLeft >= MAX_W) {
-    left = anchorRect.left - MAX_W - 8;
-  } else {
-    left = Math.max(EDGE, Math.min(anchorRect.left, vw - MAX_W - EDGE));
-  }
   const navEl = document.getElementById("app-navbar");
   const edgeTop = navEl ? navEl.getBoundingClientRect().bottom + 8 : 72;
-  const top = Math.max(edgeTop, Math.min(anchorRect.top, vh - EDGE - 300));
+
+  let left;
+  if (chartAnchor) {
+    // Horizontally center over the chart popup for an intentional stacked feel
+    const chartRect = computeTVPopupRect(chartAnchor);
+    if (chartRect) {
+      left = chartRect.left + (chartRect.width - MAX_W) / 2;
+      left = Math.max(EDGE, Math.min(left, vw - MAX_W - EDGE));
+    } else {
+      left = Math.max(EDGE, Math.min(anchorRect.left, vw - MAX_W - EDGE));
+    }
+  } else {
+    const spaceRight = vw - anchorRect.right - EDGE;
+    const spaceLeft  = anchorRect.left - EDGE;
+    if (spaceRight >= MAX_W) {
+      left = anchorRect.right + 8;
+    } else if (spaceLeft >= MAX_W) {
+      left = anchorRect.left - MAX_W - 8;
+    } else {
+      left = Math.max(EDGE, Math.min(anchorRect.left, vw - MAX_W - EDGE));
+    }
+  }
+  const top = stackedTop != null
+    ? stackedTop
+    : Math.max(edgeTop, Math.min(anchorRect.top, vh - EDGE - 300));
 
   const rsColor = avgRS >= 70 ? 'text-emerald-400' : avgRS >= 50 ? 'text-yellow-400' : 'text-red-400';
   const perfColor = (v) => v >= 0 ? 'text-emerald-400' : 'text-red-400';
@@ -1202,7 +1239,7 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, onClose }) => {
   return (
     <>
       <div style={{ position:'fixed', inset:0, zIndex:9998 }} onClick={onClose}/>
-      <div style={{ position:'fixed', left, top, width:MAX_W, zIndex:9999, borderRadius:10, border:'1px solid rgba(63,63,70,0.7)', boxShadow:'0 24px 64px rgba(0,0,0,0.85)', background:'#18181b', overflow:'hidden' }}
+      <div ref={popupRef} style={{ position:'fixed', left, top, width:MAX_W, zIndex:9999, borderRadius:10, border:'1px solid rgba(63,63,70,0.7)', boxShadow:'0 24px 64px rgba(0,0,0,0.85)', background:'#18181b', overflow:'hidden' }}
         onClick={e => e.stopPropagation()}>
         {/* Header */}
         <div style={{ background: avg1d >= 0 ? 'rgba(16,185,129,0.12)' : 'rgba(239,68,68,0.12)', borderBottom:'1px solid rgba(63,63,70,0.5)' }}
