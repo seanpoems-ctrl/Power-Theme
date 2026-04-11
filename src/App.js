@@ -1060,8 +1060,13 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                     } else {
                       setThemeStats({ themeName: t.name, anchorRect: rect });
                       const etf = THEME_ETF_MAP[t.name];
-                      if (etf) setThemeHover({ ticker: etf, rect });
-                      else setThemeHover(null);
+                      if (etf) {
+                        // Synthesize an anchor that forces the chart to the right edge
+                        // so the stacked popup pair sits on the right side of the viewport.
+                        setThemeHover({ ticker: etf, rect: { ...rect, top: rect.top, bottom: rect.bottom, forceRight: true } });
+                      } else {
+                        setThemeHover(null);
+                      }
                     }
                     onThemeSelect && onThemeSelect(t.name);
                   }}
@@ -1118,13 +1123,13 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         )}
       </div>
     </div>
-    {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => setThemeHover(null)}/>}
-    {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => setThemeStats(null)}/>}
+    {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => { setThemeHover(null); setThemeStats(null); }}/>}
+    {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => { setThemeStats(null); setThemeHover(null); }}/>}
     </>
   );
 };
 
-function computeTVPopupRect(anchorRect) {
+function computeTVPopupRect(anchorRect, opts = {}) {
   if (!anchorRect) return null;
   const MAX_W = 600, MAX_H = 200;
   const vw = window.innerWidth;
@@ -1132,22 +1137,29 @@ function computeTVPopupRect(anchorRect) {
   const edgeX = 8, edgeBot = 130;
   const navEl = document.getElementById("app-navbar");
   const edgeTop = navEl ? (navEl.getBoundingClientRect().bottom + 8) : 110;
-  const anchorCenterX = anchorRect.left + anchorRect.width / 2;
-  const useLeft = anchorCenterX > vw / 2;
+  const forceRight = opts.forceRight || anchorRect.forceRight;
   let W, H, left;
-  if (useLeft) {
-    // panelLeft captured at hover time (most reliable — avoids render-time layout issues)
-    const panelLeft = anchorRect.panelLeft != null
-      ? anchorRect.panelLeft
-      : (document.getElementById("search-result-panel")?.getBoundingClientRect().left ?? anchorRect.left);
-    const maxRight = panelLeft - 20;         // chart right edge stays 20px left of panel
-    W = Math.max(220, Math.min(MAX_W, maxRight - edgeX));
-    H = Math.round(W * MAX_H / MAX_W);
-    left = Math.max(edgeX, maxRight - W);
-  } else {
+  if (forceRight) {
+    // Pin chart to the right edge of the viewport (used when stacking with stats popup)
     W = MAX_W; H = MAX_H;
-    left = Math.min(anchorRect.right + 4, vw - W - edgeX);
-    left = Math.max(edgeX, left);
+    left = vw - W - edgeX;
+  } else {
+    const anchorCenterX = anchorRect.left + anchorRect.width / 2;
+    const useLeft = anchorCenterX > vw / 2;
+    if (useLeft) {
+      // panelLeft captured at hover time (most reliable — avoids render-time layout issues)
+      const panelLeft = anchorRect.panelLeft != null
+        ? anchorRect.panelLeft
+        : (document.getElementById("search-result-panel")?.getBoundingClientRect().left ?? anchorRect.left);
+      const maxRight = panelLeft - 20;         // chart right edge stays 20px left of panel
+      W = Math.max(220, Math.min(MAX_W, maxRight - edgeX));
+      H = Math.round(W * MAX_H / MAX_W);
+      left = Math.max(edgeX, maxRight - W);
+    } else {
+      W = MAX_W; H = MAX_H;
+      left = Math.min(anchorRect.right + 4, vw - W - edgeX);
+      left = Math.max(edgeX, left);
+    }
   }
   let top = anchorRect.top;
   top = Math.max(edgeTop, Math.min(top, vh - H - edgeBot));
@@ -1243,10 +1255,16 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
   const perfColor = (v) => v >= 0 ? 'text-emerald-400' : 'text-red-400';
   const fmt = (v) => `${v >= 0 ? '+' : ''}${v.toFixed(1)}%`;
 
+  // When stacked above the chart, drop the downward-projecting box-shadow so it
+  // doesn't paint a dark band on top of the chart below.
+  const popupShadow = stacked
+    ? '0 -8px 32px rgba(0,0,0,0.6)'
+    : '0 24px 64px rgba(0,0,0,0.85)';
+
   return (
     <>
       <div style={{ position:'fixed', inset:0, zIndex:9998 }} onClick={onClose}/>
-      <div ref={popupRef} style={{ position:'fixed', left, top, width:MAX_W, zIndex:9999, borderRadius:10, border:'1px solid rgba(63,63,70,0.7)', boxShadow:'0 24px 64px rgba(0,0,0,0.85)', background:'#18181b', overflow:'hidden' }}
+      <div ref={popupRef} style={{ position:'fixed', left, top, width:MAX_W, zIndex:9999, borderRadius:10, border:'1px solid rgba(63,63,70,0.7)', boxShadow:popupShadow, background:'#18181b', overflow:'hidden' }}
         onClick={e => e.stopPropagation()}>
         {/* Header */}
         <div style={{ background: avg1d >= 0 ? 'rgba(16,185,129,0.12)' : 'rgba(239,68,68,0.12)', borderBottom:'1px solid rgba(63,63,70,0.5)' }}
