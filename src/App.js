@@ -1052,39 +1052,40 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                 <tr
                   onClick={e => {
                     if (isIndustryView) { setExpanded(isExpanded ? null : t.name); return; }
-                    const rect = e.currentTarget.getBoundingClientRect();
-                    const sameTheme = themeStats?.themeName === t.name;
-                    if (sameTheme) {
-                      setThemeStats(null);
-                      setThemeHover(null);
-                    } else {
-                      setThemeStats({ themeName: t.name, anchorRect: rect });
-                      const etf = THEME_ETF_MAP[t.name];
-                      if (etf) {
-                        // Pin the popup pair's left edge to just-right-of the theme name text
-                        // so the stack sits flush against the right side of the theme name.
-                        const nameEl = Array.from(e.currentTarget.querySelectorAll('span'))
-                          .find(s => s.textContent.trim() === t.name);
-                        const zoomVal = parseFloat(getComputedStyle(document.body).zoom) || 1;
-                        const nameRight = nameEl ? nameEl.getBoundingClientRect().right : rect.left;
-                        const pinLeft = nameRight / zoomVal + 8; // 8px inline gap
-                        // DOMRect properties are not own enumerable, so spread silently drops them.
-                        // Copy each field explicitly so anchorRect.top etc. survive.
-                        setThemeHover({ ticker: etf, rect: {
-                          left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom,
-                          width: rect.width, height: rect.height, pinLeft,
-                        }});
-                      } else {
-                        setThemeHover(null);
-                      }
-                    }
                     onThemeSelect && onThemeSelect(t.name);
                   }}
                   className={`border-b border-zinc-800/30 transition-colors cursor-pointer ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
                   <td className={`px-1 py-2 text-[12px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
                   <td className="px-2 py-2">
                     <div className="flex items-center gap-1.5">
-                      <span className="text-[12px] font-semibold text-zinc-200 hover:text-blue-400 transition-colors">{t.name}</span>
+                      <span
+                        className="text-[12px] font-semibold text-zinc-200 hover:text-blue-400 transition-colors cursor-pointer"
+                        onClick={e => {
+                          e.stopPropagation();
+                          const row = e.currentTarget.closest('tr');
+                          const rect = row ? row.getBoundingClientRect() : e.currentTarget.getBoundingClientRect();
+                          const sameTheme = themeStats?.themeName === t.name;
+                          if (sameTheme) {
+                            setThemeStats(null);
+                            setThemeHover(null);
+                          } else {
+                            setThemeStats({ themeName: t.name, anchorRect: rect });
+                            const etf = THEME_ETF_MAP[t.name];
+                            if (etf) {
+                              const zoomVal = parseFloat(getComputedStyle(document.body).zoom) || 1;
+                              const nameRight = e.currentTarget.getBoundingClientRect().right;
+                              const pinLeft = nameRight / zoomVal + 8;
+                              setThemeHover({ ticker: etf, rect: {
+                                left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom,
+                                width: rect.width, height: rect.height, pinLeft,
+                              }});
+                            } else {
+                              setThemeHover(null);
+                            }
+                          }
+                          onThemeSelect && onThemeSelect(t.name);
+                        }}
+                      >{t.name}</span>
                       {t.stage2_momentum && <span className="px-1.5 py-0.5 text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full leading-none">STAGE 2</span>}
                       {t.n_industries && <span className="text-[10px] text-zinc-600">{t.n_industries} ind</span>}
                     </div>
