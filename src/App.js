@@ -1244,12 +1244,16 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
     const vh = window.innerHeight;
     const aboveTop = chartTop - gap - popupH;
     const belowTop = chartTop + chartHeight + gap;
+    const clampedBelow = vh - popupH - 8; // bottom-border aligned
     let desiredTop;
     if (aboveTop >= minTop) {
-      desiredTop = aboveTop; // enough room above, show above chart
+      desiredTop = aboveTop; // fits above cleanly
+    } else if (belowTop + popupH <= vh - 8) {
+      desiredTop = belowTop; // fits below cleanly
+    } else if (clampedBelow >= chartTop + chartHeight) {
+      desiredTop = clampedBelow; // below clamped to bottom border, no chart overlap
     } else {
-      // not enough room above: show below, clamp to viewport bottom
-      desiredTop = Math.min(belowTop, vh - popupH - 8);
+      desiredTop = minTop; // top-border aligned — chart may be partially behind popup
     }
     const desiredLeft = chartLeft;
     setStacked({ top: Math.max(8, desiredTop), left: Math.max(8, desiredLeft) });
