@@ -1145,7 +1145,7 @@ function computeTVPopupRect(anchorRect, opts = {}) {
   const MAX_W = 600, MAX_H = 200;
   const vw = window.innerWidth;
   const vh = window.innerHeight;
-  const edgeX = 8, edgeBot = 130;
+  const edgeX = 8, edgeBot = 8;
   const navEl = document.getElementById("app-navbar");
   const edgeTop = navEl ? (navEl.getBoundingClientRect().bottom + 8) : 110;
   const forceRight = opts.forceRight || anchorRect.forceRight;
@@ -1241,9 +1241,16 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
     const gap = 8;
     const navEl = document.getElementById("app-navbar");
     const minTop = navEl ? (navEl.getBoundingClientRect().bottom + gap) : 80;
+    const vh = window.innerHeight;
     const aboveTop = chartTop - gap - popupH;
-    // If not enough room above the chart, place stats popup below the chart instead
-    const desiredTop = aboveTop >= minTop ? aboveTop : chartTop + chartHeight + gap;
+    const belowTop = chartTop + chartHeight + gap;
+    let desiredTop;
+    if (aboveTop >= minTop) {
+      desiredTop = aboveTop; // enough room above, show above chart
+    } else {
+      // not enough room above: show below, clamp to viewport bottom
+      desiredTop = Math.min(belowTop, vh - popupH - 8);
+    }
     const desiredLeft = chartLeft;
     setStacked({ top: Math.max(8, desiredTop), left: Math.max(8, desiredLeft) });
   }, [chartAnchor, themeName, stocks.length]);
