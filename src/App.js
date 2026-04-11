@@ -1072,12 +1072,11 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                             setThemeStats({ themeName: t.name, anchorRect: rect });
                             const etf = THEME_ETF_MAP[t.name];
                             if (etf) {
-                              const zoomVal = parseFloat(getComputedStyle(document.body).zoom) || 1;
-                              const nameRight = e.currentTarget.getBoundingClientRect().right;
-                              const pinLeft = nameRight / zoomVal + 8;
+                              // Pin chart to viewport's right edge so the stats popup has
+                              // clean horizontal space on the left (no overlap).
                               setThemeHover({ ticker: etf, rect: {
                                 left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom,
-                                width: rect.width, height: rect.height, pinLeft,
+                                width: rect.width, height: rect.height, forceRight: true,
                               }});
                             } else {
                               setThemeHover(null);
@@ -1143,14 +1142,23 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
 function computeTVPopupRect(anchorRect, opts = {}) {
   if (!anchorRect) return null;
   const MAX_W = 600, MAX_H = 200;
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
+  // Inline styles (left/width/top/height) live in pre-zoom CSS px, while
+  // getBoundingClientRect / window.innerWidth report visual (post-zoom) px when
+  // body { zoom: N } is in effect. Convert everything to pre-zoom CSS px so
+  // all the math below stays in one coordinate space.
+  const zoom = parseFloat(getComputedStyle(document.body).zoom) || 1;
+  const vw = window.innerWidth / zoom;
+  const vh = window.innerHeight / zoom;
+  const aLeft   = anchorRect.left   / zoom;
+  const aRight  = anchorRect.right  / zoom;
+  const aTop    = anchorRect.top    / zoom;
+  const aWidth  = anchorRect.width  / zoom;
   const edgeX = 8, edgeBot = 8;
   const navEl = document.getElementById("app-navbar");
-  const edgeTop = navEl ? (navEl.getBoundingClientRect().bottom + 8) : 110;
+  const edgeTop = navEl ? (navEl.getBoundingClientRect().bottom / zoom + 8) : 110;
   const forceRight = opts.forceRight || anchorRect.forceRight;
-  const pinRight = opts.pinRight ?? anchorRect.pinRight; // logical (inline) x to align chart's right edge to
-  const pinLeft = opts.pinLeft ?? anchorRect.pinLeft;   // logical (inline) x to align chart's left edge to
+  const pinRight = opts.pinRight ?? anchorRect.pinRight; // CSS x to align chart's right edge to
+  const pinLeft = opts.pinLeft ?? anchorRect.pinLeft;   // CSS x to align chart's left edge to
   let W, H, left;
   if (pinLeft != null) {
     // Pin chart's left edge to a specific x (used to flush popup against the theme name text)
@@ -1165,24 +1173,25 @@ function computeTVPopupRect(anchorRect, opts = {}) {
     W = MAX_W; H = MAX_H;
     left = vw - W - edgeX;
   } else {
-    const anchorCenterX = anchorRect.left + anchorRect.width / 2;
+    const anchorCenterX = aLeft + aWidth / 2;
     const useLeft = anchorCenterX > vw / 2;
     if (useLeft) {
       // panelLeft captured at hover time (most reliable — avoids render-time layout issues)
-      const panelLeft = anchorRect.panelLeft != null
+      const panelLeftRaw = anchorRect.panelLeft != null
         ? anchorRect.panelLeft
         : (document.getElementById("search-result-panel")?.getBoundingClientRect().left ?? anchorRect.left);
+      const panelLeft = panelLeftRaw / zoom;
       const maxRight = panelLeft - 20;         // chart right edge stays 20px left of panel
       W = Math.max(220, Math.min(MAX_W, maxRight - edgeX));
       H = Math.round(W * MAX_H / MAX_W);
       left = Math.max(edgeX, maxRight - W);
     } else {
       W = MAX_W; H = MAX_H;
-      left = Math.min(anchorRect.right + 4, vw - W - edgeX);
+      left = Math.min(aRight + 4, vw - W - edgeX);
       left = Math.max(edgeX, left);
     }
   }
-  let top = anchorRect.top;
+  let top = aTop;
   top = Math.max(edgeTop, Math.min(top, vh - H - edgeBot));
   return { left, top, width: W, height: H };
 }
@@ -1238,75 +1247,98 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
   const popupRef = useRef(null);
   const [stacked, setStacked] = useState(null); // { top, left } in CSS px (matches chart popup's inline coords)
 
-  // When the chart popup is also open, align this popup's BOTTOM to the chart's TOP
-  // (with a small gap) so the two don't overlap. Read the chart popup's actual inline
-  // CSS coordinates so the math stays in the same coord space (avoids body-zoom mismatch
-  // between getBoundingClientRect and inline styles).
+  // When the chart popup is also open, place this popup horizontally adjacent on
+  // the LEFT of the chart so the two never overlap. All math is done in pre-zoom
+  // CSS px (same coord space as the inline left/top styles we set below). When
+  // body { zoom: N } is in effect, getBoundingClientRect / innerWidth report
+  // visual (post-zoom) px, so we divide by zoom to convert.
   useLayoutEffect(() => {
     if (!chartAnchor || !popupRef.current) { setStacked(null); return; }
     const chartEl = document.getElementById("tv-popup-chart");
     if (!chartEl) { setStacked(null); return; }
-    // Use getBoundingClientRect for actual visual coordinates — zoom-agnostic
-    const chartBound = chartEl.getBoundingClientRect();
-    const chartTop    = chartBound.top;
-    const chartLeft   = parseFloat(chartEl.style.left) || 0;
-    const chartHeight = chartBound.height;
-    const popupH = popupRef.current.getBoundingClientRect().height;
+    const zoom = parseFloat(getComputedStyle(document.body).zoom) || 1;
+    const chartBoundV = chartEl.getBoundingClientRect();
+    const popupBoundV = popupRef.current.getBoundingClientRect();
+    const chartLeft   = chartBoundV.left   / zoom;
+    const chartRight  = chartBoundV.right  / zoom;
+    const chartTop    = chartBoundV.top    / zoom;
+    const chartBottom = chartBoundV.bottom / zoom;
+    const popupW = popupBoundV.width  / zoom;
+    const popupH = popupBoundV.height / zoom;
     const gap = 8;
+    const edgeX = 8;
     const navEl = document.getElementById("app-navbar");
-    const minTop = navEl ? (navEl.getBoundingClientRect().bottom + gap) : 80;
-    const vh = window.innerHeight; // same coordinate system as getBoundingClientRect
-    const aboveTop = chartTop - gap - popupH;
-    const belowTop = chartTop + chartHeight + gap;
+    const minTop = navEl ? (navEl.getBoundingClientRect().bottom / zoom + gap) : 80;
+    const vw = window.innerWidth  / zoom;
+    const vh = window.innerHeight / zoom;
+
+    // Prefer: immediately LEFT of chart (horizontally adjacent, no overlap).
+    // Fall back: immediately RIGHT of chart if left has no room.
+    // Last resort: vertical stacking above/below.
+    let desiredLeft;
     let desiredTop;
-    if (aboveTop >= minTop) {
-      desiredTop = aboveTop; // fits above cleanly
-    } else if (belowTop + popupH <= vh - 8) {
-      desiredTop = belowTop; // fits below cleanly
-    } else if (aboveTop >= minTop - popupH) {
-      // Above with top-border clamping (aligned to navbar bottom)
-      desiredTop = minTop;
+    const leftOfChart  = chartLeft - gap - popupW;
+    const rightOfChart = chartRight + gap;
+    if (leftOfChart >= edgeX) {
+      desiredLeft = leftOfChart;
+      desiredTop  = Math.max(minTop, Math.min(chartTop, vh - popupH - 8));
+    } else if (rightOfChart + popupW <= vw - edgeX) {
+      desiredLeft = rightOfChart;
+      desiredTop  = Math.max(minTop, Math.min(chartTop, vh - popupH - 8));
     } else {
-      // Below with bottom-border clamping (aligned to viewport bottom)
-      desiredTop = Math.max(belowTop, vh - popupH - 8);
+      // Vertical stacking fallback — keep them from overlapping.
+      const aboveTop = chartTop - gap - popupH;
+      const belowTop = chartBottom + gap;
+      if (aboveTop >= minTop) {
+        desiredTop = aboveTop;
+      } else if (belowTop + popupH <= vh - 8) {
+        desiredTop = belowTop;
+      } else {
+        desiredTop = minTop;
+      }
+      desiredLeft = Math.max(edgeX, Math.min(chartLeft, vw - popupW - edgeX));
     }
-    const desiredLeft = chartLeft;
     setStacked({ top: Math.max(8, desiredTop), left: Math.max(8, desiredLeft) });
   }, [chartAnchor, themeName, stocks.length]);
 
   if (!anchorRect) return null;
   const MAX_W = 420, EDGE = 12;
-  const vw = window.innerWidth;
-  const vh = window.innerHeight;
+  // Inline styles below are pre-zoom CSS px; convert visual-px sources to match.
+  const zoom = parseFloat(getComputedStyle(document.body).zoom) || 1;
+  const vw = window.innerWidth  / zoom;
+  const vh = window.innerHeight / zoom;
+  const aLeft  = anchorRect.left  / zoom;
+  const aRight = anchorRect.right / zoom;
+  const aTop   = anchorRect.top   / zoom;
   const navEl = document.getElementById("app-navbar");
-  const edgeTop = navEl ? navEl.getBoundingClientRect().bottom + 8 : 72;
+  const edgeTop = navEl ? navEl.getBoundingClientRect().bottom / zoom + 8 : 72;
 
   let left;
   if (stacked) {
     left = stacked.left;
   } else {
-    const spaceRight = vw - anchorRect.right - EDGE;
-    const spaceLeft  = anchorRect.left - EDGE;
+    const spaceRight = vw - aRight - EDGE;
+    const spaceLeft  = aLeft - EDGE;
     if (spaceRight >= MAX_W) {
-      left = anchorRect.right + 8;
+      left = aRight + 8;
     } else if (spaceLeft >= MAX_W) {
-      left = anchorRect.left - MAX_W - 8;
+      left = aLeft - MAX_W - 8;
     } else {
-      left = Math.max(EDGE, Math.min(anchorRect.left, vw - MAX_W - EDGE));
+      left = Math.max(EDGE, Math.min(aLeft, vw - MAX_W - EDGE));
     }
   }
   const top = stacked
     ? stacked.top
-    : Math.max(edgeTop, Math.min(anchorRect.top, vh - EDGE - 300));
+    : Math.max(edgeTop, Math.min(aTop, vh - EDGE - 300));
 
   const rsColor = avgRS >= 70 ? 'text-emerald-400' : avgRS >= 50 ? 'text-yellow-400' : 'text-red-400';
   const perfColor = (v) => v >= 0 ? 'text-emerald-400' : 'text-red-400';
   const fmt = (v) => `${v >= 0 ? '+' : ''}${v.toFixed(1)}%`;
 
-  // When stacked above the chart, drop the downward-projecting box-shadow so it
-  // doesn't paint a dark band on top of the chart below.
+  // Use an all-sided shadow when placed next to the chart so it doesn't paint a
+  // dark band onto the chart on whichever side they're adjacent.
   const popupShadow = stacked
-    ? '0 -8px 32px rgba(0,0,0,0.6)'
+    ? '0 0 32px rgba(0,0,0,0.7)'
     : '0 24px 64px rgba(0,0,0,0.85)';
 
   return (
