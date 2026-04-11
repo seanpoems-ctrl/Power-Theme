@@ -1234,20 +1234,18 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
     if (!chartAnchor || !popupRef.current) { setStacked(null); return; }
     const chartEl = document.getElementById("tv-popup-chart");
     if (!chartEl) { setStacked(null); return; }
-    const chartTop   = parseFloat(chartEl.style.top)   || 0;
-    const chartLeft  = parseFloat(chartEl.style.left)  || 0;
-    const chartWidth = parseFloat(chartEl.style.width) || 0;
+    const chartTop    = parseFloat(chartEl.style.top)    || 0;
+    const chartLeft   = parseFloat(chartEl.style.left)   || 0;
+    const chartHeight = parseFloat(chartEl.style.height) || 200;
     const popupH = popupRef.current.offsetHeight;
-    const popupW = popupRef.current.offsetWidth;
     const gap = 8;
-    // Keep alignment strict (data bottom == chart top - gap). Allow the popup to
-    // extend over the navbar if needed — z-index keeps it on top and the modal
-    // overlay dims everything underneath anyway.
-    const desiredTop = Math.max(8, chartTop - gap - popupH);
-    // Left-align the stats popup with the chart so both share the same left edge
-    // (which is itself flush against the theme name text).
+    const navEl = document.getElementById("app-navbar");
+    const minTop = navEl ? (navEl.getBoundingClientRect().bottom + gap) : 80;
+    const aboveTop = chartTop - gap - popupH;
+    // If not enough room above the chart, place stats popup below the chart instead
+    const desiredTop = aboveTop >= minTop ? aboveTop : chartTop + chartHeight + gap;
     const desiredLeft = chartLeft;
-    setStacked({ top: desiredTop, left: Math.max(8, desiredLeft) });
+    setStacked({ top: Math.max(8, desiredTop), left: Math.max(8, desiredLeft) });
   }, [chartAnchor, themeName, stocks.length]);
 
   if (!anchorRect) return null;
