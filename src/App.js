@@ -1072,11 +1072,15 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                             setThemeStats({ themeName: t.name, anchorRect: rect });
                             const etf = THEME_ETF_MAP[t.name];
                             if (etf) {
-                              // Pin chart to viewport's right edge so the stats popup has
-                              // clean horizontal space on the left (no overlap).
+                              // Pin the chart's left edge flush to the right side of the
+                              // clicked theme name — the stats popup will stack directly
+                              // BELOW the chart so they never overlap.
+                              const zoomVal = parseFloat(getComputedStyle(document.body).zoom) || 1;
+                              const nameRight = e.currentTarget.getBoundingClientRect().right;
+                              const pinLeft = nameRight / zoomVal + 8;
                               setThemeHover({ ticker: etf, rect: {
                                 left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom,
-                                width: rect.width, height: rect.height, forceRight: true,
+                                width: rect.width, height: rect.height, pinLeft,
                               }});
                             } else {
                               setThemeHover(null);
@@ -1191,8 +1195,16 @@ function computeTVPopupRect(anchorRect, opts = {}) {
       left = Math.max(edgeX, left);
     }
   }
-  let top = aTop;
-  top = Math.max(edgeTop, Math.min(top, vh - H - edgeBot));
+  // When pinLeft is set (leaderboard click that also opens the stats popup),
+  // pin the chart to the top of the content area so the stats popup can stack
+  // directly beneath it without overflowing the viewport.
+  let top;
+  if (pinLeft != null) {
+    top = edgeTop;
+  } else {
+    top = aTop;
+    top = Math.max(edgeTop, Math.min(top, vh - H - edgeBot));
+  }
   return { left, top, width: W, height: H };
 }
 
@@ -1247,11 +1259,11 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
   const popupRef = useRef(null);
   const [stacked, setStacked] = useState(null); // { top, left } in CSS px (matches chart popup's inline coords)
 
-  // When the chart popup is also open, place this popup horizontally adjacent on
-  // the LEFT of the chart so the two never overlap. All math is done in pre-zoom
-  // CSS px (same coord space as the inline left/top styles we set below). When
-  // body { zoom: N } is in effect, getBoundingClientRect / innerWidth report
-  // visual (post-zoom) px, so we divide by zoom to convert.
+  // When the chart popup is also open, place this popup directly BELOW the chart
+  // (chart on top, stats data beneath) with a small gap so the two never overlap.
+  // All math is done in pre-zoom CSS px (same coord space as the inline left/top
+  // styles we set below). When body { zoom: N } is in effect, getBoundingClientRect
+  // and innerWidth/innerHeight report visual (post-zoom) px, so we divide by zoom.
   useLayoutEffect(() => {
     if (!chartAnchor || !popupRef.current) { setStacked(null); return; }
     const chartEl = document.getElementById("tv-popup-chart");
@@ -1260,8 +1272,6 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
     const chartBoundV = chartEl.getBoundingClientRect();
     const popupBoundV = popupRef.current.getBoundingClientRect();
     const chartLeft   = chartBoundV.left   / zoom;
-    const chartRight  = chartBoundV.right  / zoom;
-    const chartTop    = chartBoundV.top    / zoom;
     const chartBottom = chartBoundV.bottom / zoom;
     const popupW = popupBoundV.width  / zoom;
     const popupH = popupBoundV.height / zoom;
@@ -1272,32 +1282,24 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
     const vw = window.innerWidth  / zoom;
     const vh = window.innerHeight / zoom;
 
-    // Prefer: immediately LEFT of chart (horizontally adjacent, no overlap).
-    // Fall back: immediately RIGHT of chart if left has no room.
-    // Last resort: vertical stacking above/below.
-    let desiredLeft;
-    let desiredTop;
-    const leftOfChart  = chartLeft - gap - popupW;
-    const rightOfChart = chartRight + gap;
-    if (leftOfChart >= edgeX) {
-      desiredLeft = leftOfChart;
-      desiredTop  = Math.max(minTop, Math.min(chartTop, vh - popupH - 8));
-    } else if (rightOfChart + popupW <= vw - edgeX) {
-      desiredLeft = rightOfChart;
-      desiredTop  = Math.max(minTop, Math.min(chartTop, vh - popupH - 8));
-    } else {
-      // Vertical stacking fallback — keep them from overlapping.
-      const aboveTop = chartTop - gap - popupH;
-      const belowTop = chartBottom + gap;
+    // Align the stats popup's left edge with the chart's left edge (keeps them
+    // in the same column). Place it directly below the chart's bottom edge.
+    let desiredLeft = chartLeft;
+    let desiredTop  = chartBottom + gap;
+
+    // Clamp vertically to the viewport — if it doesn't fit below, fall back to
+    // placing above. This should rarely happen unless the chart sits near the
+    // bottom of the viewport.
+    if (desiredTop + popupH > vh - 8) {
+      const aboveTop = (chartBoundV.top / zoom) - gap - popupH;
       if (aboveTop >= minTop) {
         desiredTop = aboveTop;
-      } else if (belowTop + popupH <= vh - 8) {
-        desiredTop = belowTop;
       } else {
-        desiredTop = minTop;
+        desiredTop = Math.max(minTop, vh - popupH - 8);
       }
-      desiredLeft = Math.max(edgeX, Math.min(chartLeft, vw - popupW - edgeX));
     }
+    // Clamp horizontally inside the viewport.
+    desiredLeft = Math.max(edgeX, Math.min(desiredLeft, vw - popupW - edgeX));
     setStacked({ top: Math.max(8, desiredTop), left: Math.max(8, desiredLeft) });
   }, [chartAnchor, themeName, stocks.length]);
 
