@@ -574,6 +574,7 @@ const IbkrSourceBadge = ({ source }) => {
 };
 
 const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData }) => {
+  const containerRef = React.useRef(null);
   const fmtMktCap = (v) => {
     if (!v) return '—';
     if (v >= 1e12) return `$${(v/1e12).toFixed(1)}T`;
@@ -614,10 +615,19 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
     return { themeName: name, stocks: sorted, themeRS: avgRS, analysis: topAnalysis };
   }, [spotlightThemeName, lbView, data, ibkrThemesData]);
 
+  React.useEffect(() => {
+    if (!spotlightThemeName || !containerRef.current) return;
+    const nav = document.getElementById('app-navbar');
+    const navH = nav ? nav.getBoundingClientRect().height : 0;
+    const rect = containerRef.current.getBoundingClientRect();
+    const scrollTop = window.scrollY + rect.top - navH - 8;
+    window.scrollTo({ top: scrollTop, behavior: 'smooth' });
+  }, [spotlightThemeName]);
+
   if (!themeName) return null;
 
   return (
-    <div className="mb-4 bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
+    <div ref={containerRef} className="mb-4 bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
       <div className="flex items-center gap-2 mb-3">
         <span className="text-[13px] font-semibold text-emerald-400">
           ✦ Thematic Spotlight — {themeName}{themeRS != null ? ` · RS ${themeRS}` : ''}
@@ -639,9 +649,9 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
       )}
 
       {stocks.length > 0 ? (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto overflow-y-auto" style={{ maxHeight: '240px' }}>
           <table className="w-full text-left">
-            <thead>
+            <thead className="sticky top-0 z-10" style={{ background: '#18181b' }}>
               <tr className="border-b border-zinc-800/60">
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Ticker</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Price</th>
