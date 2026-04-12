@@ -83,7 +83,7 @@ const Sparkline = ({ data, width = 72, height = 26 }) => {
   );
 };
 
-const PerfCell = ({ value }) => {
+const PerfCell = ({ value, ticker }) => {
   if (value == null) return <td className="text-center py-3 px-2 text-[13px] text-zinc-600">—</td>;
   const v = parseFloat(value);
   let bg, txt;
@@ -97,7 +97,10 @@ const PerfCell = ({ value }) => {
   else { bg = "bg-red-500/30"; txt = "text-red-300"; }
   return (
     <td className="text-center py-3 px-1">
-      <span className={`inline-block rounded-md px-2 py-1.5 text-[13px] font-mono font-medium ${txt} ${bg}`}>
+      <span
+        className={`inline-block rounded-md px-2 py-1.5 text-[13px] font-mono font-medium ${txt} ${bg}`}
+        {...(ticker ? { "data-chg-cell": ticker } : {})}
+      >
         {v >= 0 ? "+" : ""}{v.toFixed(1)}%
       </span>
     </td>
@@ -1581,8 +1584,8 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
                   </div>
                 </div>
               </td>
-              <td className="text-center py-3 px-2 font-mono text-zinc-200 text-[13px]">${s.price.toFixed(2)}</td>
-              {PERF_KEYS.map(p => <PerfCell key={p.key} value={s[p.key]}/>)}
+              <td className="text-center py-3 px-2 font-mono text-zinc-200 text-[13px]" data-price-cell={s.ticker}>${s.price.toFixed(2)}</td>
+              {PERF_KEYS.map(p => <PerfCell key={p.key} value={s[p.key]} ticker={p.key === 'perf_1d' ? s.ticker : undefined}/>)}
               <EarningsCell value={s.earnings}/>
               <td className="text-center py-3 px-2"><div className="flex justify-center"><Sparkline data={sparklineSeries(s)}/></div></td>
               <td className="text-center py-3 px-2 font-mono text-zinc-400 text-[13px]">{s["52w_high"] ? `$${s["52w_high"].toFixed(2)}` : "—"}</td>
@@ -6168,6 +6171,13 @@ export default function App() {
   const [macroHover, setMacroHover] = useState(null);
   const [ibkrData, setIbkrData] = useState(null);
 
+  // ── IBKR WebSocket live price stream ──────────────────────────────────────
+  // livePricesRef: { TICKER: { price, change_pct } } — mutated directly, no re-render
+  // wsStatus: drives the ⚡ LIVE badge only ("connecting" | "live" | "offline")
+  const [wsStatus, setWsStatus] = useState("offline");
+  const livePricesRef = useRef({});
+  const wsRef = useRef(null);
+
   // ── Market store (global macro alerts + reversal) ─────────────────────────
   // Use separate selectors — object selectors create new refs every render → infinite loop
   const updateFromIntel = useMarketStore((s) => s.updateFromIntel);
@@ -6315,6 +6325,104 @@ export default function App() {
     return () => clearInterval(id);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // ── IBKR TWS WebSocket price stream (ibkr_ws_server.py on port 5003) ──────
+  // Receives live prices every ~1 second and patches the DOM directly for zero
+  // re-render overhead. Falls back silently if the server is not running.
+  useEffect(() => {
+    let ws = null;
+    let reconnectTimer = null;
+    let alive = true;
+
+    const applyPrices = (data) => {
+      // Store in ref (no re-render)
+      Object.assign(livePricesRef.current, data);
+      // DOM-patch visible price + 1D change cells directly
+      for (const [ticker, info] of Object.entries(data)) {
+        if (info == null) continue;
+        // Price cell: data-price-cell="TICKER"
+        const priceEl = document.querySelector(`[data-price-cell="${ticker}"]`);
+        if (priceEl && info.price != null) {
+          priceEl.textContent = `$${Number(info.price).toFixed(2)}`;
+        }
+        // 1D change cell: data-chg-cell="TICKER"
+        const chgEl = document.querySelector(`[data-chg-cell="${ticker}"]`);
+        if (chgEl && info.change_pct != null) {
+          const v = info.change_pct;
+          chgEl.textContent = `${v >= 0 ? "+" : ""}${v.toFixed(2)}%`;
+          // Update color class
+          chgEl.className = `inline-block rounded-md px-2 py-1.5 text-[13px] font-mono font-medium ${
+            v >= 20 ? "text-emerald-300 bg-emerald-500/30"
+            : v >= 10 ? "text-emerald-400 bg-emerald-500/20"
+            : v >= 5  ? "text-emerald-400 bg-emerald-500/10"
+            : v >= 0  ? "text-emerald-400/80 bg-emerald-500/5"
+            : v >= -5 ? "text-red-400/80 bg-red-500/5"
+            : v >= -10? "text-red-400 bg-red-500/10"
+            : v >= -20? "text-red-400 bg-red-500/20"
+            :           "text-red-300 bg-red-500/30"
+          }`;
+        }
+        // Navbar ticker tape: data-tape-price="SPY" / data-tape-price="QQQ"
+        const tapeEl = document.querySelector(`[data-tape-price="${ticker}"]`);
+        if (tapeEl && info.price != null) {
+          tapeEl.textContent = Number(info.price).toFixed(ticker === "QQQ" || ticker === "SPY" ? 2 : 2);
+        }
+        const tapeChgEl = document.querySelector(`[data-tape-chg="${ticker}"]`);
+        if (tapeChgEl && info.change_pct != null) {
+          const v = info.change_pct;
+          tapeChgEl.textContent = `${v >= 0 ? "+" : ""}${v.toFixed(2)}%`;
+          tapeChgEl.className = v >= 0 ? "text-emerald-400" : "text-red-400";
+        }
+      }
+    };
+
+    const connect = () => {
+      if (!alive) return;
+      setWsStatus("connecting");
+      try {
+        ws = new WebSocket("ws://localhost:5003");
+        wsRef.current = ws;
+      } catch {
+        setWsStatus("offline");
+        reconnectTimer = setTimeout(connect, 5000);
+        return;
+      }
+
+      ws.onopen = () => {
+        if (!alive) { ws.close(); return; }
+        setWsStatus("live");
+        // Apply any pre-existing cached prices from livePricesRef immediately
+      };
+
+      ws.onmessage = (evt) => {
+        try {
+          const msg = JSON.parse(evt.data);
+          // Both "snapshot" and "prices" messages carry a "data" dict
+          if ((msg.type === "snapshot" || msg.type === "prices") && msg.data) {
+            applyPrices(msg.data);
+          }
+        } catch { /* ignore malformed */ }
+      };
+
+      ws.onerror = () => {}; // onclose will handle reconnect
+
+      ws.onclose = () => {
+        if (!alive) return;
+        setWsStatus("offline");
+        reconnectTimer = setTimeout(connect, 5000); // retry every 5 s
+      };
+    };
+
+    connect();
+
+    return () => {
+      alive = false;
+      clearTimeout(reconnectTimer);
+      if (ws) { try { ws.close(); } catch {} }
+      wsRef.current = null;
+      setWsStatus("offline");
+    };
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
 const filtered = useMemo(() => {
     if (!data) return [];
     return data.themes.map(t => {
@@ -6452,6 +6560,12 @@ const filtered = useMemo(() => {
             </div>
             {/* IBKR Live badge + Updated time */}
             <div className="flex items-center gap-2 flex-shrink-0">
+              {wsStatus === "live" && (
+                <span className="px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono bg-blue-500/15 text-blue-400 border-blue-500/40 whitespace-nowrap animate-pulse">⚡ LIVE</span>
+              )}
+              {wsStatus === "connecting" && (
+                <span className="px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono bg-yellow-500/10 text-yellow-500 border-yellow-500/30 whitespace-nowrap">◌ WS...</span>
+              )}
               {ibkrThemesData?.data_source === "ibkr" ? (
                 <span className="px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono bg-emerald-500/15 text-emerald-400 border-emerald-500/40 whitespace-nowrap">● IBKR Live</span>
               ) : (
