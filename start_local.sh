@@ -20,8 +20,11 @@ python ibkr_themes.py
 echo "=== [6/7] gapper_service.py ==="
 python gapper_service.py
 
-echo "=== [7/7] breadth_monitor.py ==="
+echo "=== [7/8] breadth_monitor.py ==="
 python breadth_monitor.py || echo "breadth_monitor.py failed (non-fatal)"
+
+echo "=== [8/8] breadth_stocks_builder.py ==="
+python breadth_stocks_builder.py || echo "breadth_stocks_builder.py failed (non-fatal)"
 
 echo ""
 echo "=== All data scripts complete. Starting React dev server... ==="

@@ -10,8 +10,9 @@
  *          10x ATR Ext | >50 DMA | Share Universe | T2108 | S&P
  */
 
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useRef, useState } from "react";
 import { BarChart3, ExternalLink, RefreshCw } from "lucide-react";
+import BreadthStockModal from "./BreadthStockModal";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -116,10 +117,27 @@ const AnalysisPanel = memo(function AnalysisPanel({ row }) {
 });
 
 // ---------------------------------------------------------------------------
+// Clickable column map — latest row only
+// ---------------------------------------------------------------------------
+
+const CLICKABLE_COLS = {
+  up_4_pct:    { filter: "up4",     label: "Up 4%+ Today" },
+  down_4_pct:  { filter: "dn4",     label: "Down 4%+ Today" },
+  up_25_q:     { filter: "up25q",   label: "Up 25%+ Quarterly" },
+  down_25_q:   { filter: "dn25q",   label: "Down 25%+ Quarterly" },
+  up_25_m:     { filter: "up25m",   label: "Up 25%+ Monthly" },
+  down_25_m:   { filter: "dn25m",   label: "Down 25%+ Monthly" },
+  up_50_m:     { filter: "up50m",   label: "Up 50%+ Monthly" },
+  down_50_m:   { filter: "dn50m",   label: "Down 50%+ Monthly" },
+  up_13_34d:   { filter: "up13_34", label: "Up 13%+ 34-Day" },
+  down_13_34d: { filter: "dn13_34", label: "Down 13%+ 34-Day" },
+};
+
+// ---------------------------------------------------------------------------
 // Main table
 // ---------------------------------------------------------------------------
 
-const BreadthTable = memo(function BreadthTable({ rows }) {
+const BreadthTable = memo(function BreadthTable({ rows, onOpenModal }) {
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-[1040px] border-collapse text-left">
@@ -153,6 +171,24 @@ const BreadthTable = memo(function BreadthTable({ rows }) {
             const up4hi = r.up_4_pct != null && r.up_4_pct > 600;
             const t2108Low = r.t2108 != null && r.t2108 < 20;
 
+            // Helper: wrap a cell value in a clickable span on the latest row
+            const cell = (field, content, extraCls = "") => {
+              const col = CLICKABLE_COLS[field];
+              if (isLatest && col) {
+                return (
+                  <td
+                    className={`px-1 py-1 text-right whitespace-nowrap cursor-pointer
+                      underline decoration-dotted underline-offset-2 hover:text-white ${extraCls}`}
+                    onClick={() => onOpenModal(col.filter, col.label)}
+                    title={`View ${col.label} stocks`}
+                  >
+                    {content}
+                  </td>
+                );
+              }
+              return <td className={`px-1 py-1 text-right whitespace-nowrap ${extraCls}`}>{content}</td>;
+            };
+
             return (
               <tr
                 key={r.date}
@@ -162,73 +198,40 @@ const BreadthTable = memo(function BreadthTable({ rows }) {
               >
                 {/* DATE — sticky */}
                 <td className="sticky left-0 z-10 bg-gray-900 py-1 pr-3 font-mono text-xs whitespace-nowrap">
-                  {isLatest ? (
-                    <span className="font-semibold text-emerald-400">{r.date_display}</span>
-                  ) : (
-                    r.date_display
-                  )}
+                  {isLatest
+                    ? <span className="font-semibold text-emerald-400">{r.date_display}</span>
+                    : r.date_display}
                 </td>
 
-                {/* UP 4%+ */}
-                <td className={`px-1 py-1 text-right whitespace-nowrap ${up4hi ? "font-semibold text-emerald-300" : ""}`}>
-                  {fmtN(r.up_4_pct)}
-                </td>
-
-                {/* DN 4%+ */}
-                <td className="px-1 py-1 text-right whitespace-nowrap">{fmtN(r.down_4_pct)}</td>
-
-                {/* 5D R */}
+                {cell("up_4_pct",    fmtN(r.up_4_pct),    up4hi ? "font-semibold text-emerald-300" : "")}
+                {cell("down_4_pct",  fmtN(r.down_4_pct))}
                 <td className="px-1 py-1 text-right whitespace-nowrap">{fmtN(r.ratio_5d)}</td>
-
-                {/* 10D R */}
                 <td className="px-1 py-1 text-right whitespace-nowrap">{fmtN(r.ratio_10d)}</td>
+                {cell("up_25_q",     fmtN(r.up_25_q))}
+                {cell("down_25_q",   fmtN(r.down_25_q),   bearish ? "text-rose-400" : "")}
+                {cell("up_25_m",     fmtN(r.up_25_m))}
+                {cell("down_25_m",   fmtN(r.down_25_m))}
+                {cell("up_50_m",     fmtN(r.up_50_m))}
+                {cell("down_50_m",   fmtN(r.down_50_m))}
+                {cell("up_13_34d",   fmtN(r.up_13_34d))}
+                {cell("down_13_34d", fmtN(r.down_13_34d))}
 
-                {/* UP 25% Q */}
-                <td className="px-1 py-1 text-right whitespace-nowrap">{fmtN(r.up_25_q)}</td>
-
-                {/* DN 25% Q */}
-                <td className={`px-1 py-1 text-right whitespace-nowrap ${bearish ? "text-rose-400" : ""}`}>
-                  {fmtN(r.down_25_q)}
-                </td>
-
-                {/* UP 25% M */}
-                <td className="px-1 py-1 text-right whitespace-nowrap">{fmtN(r.up_25_m)}</td>
-
-                {/* DN 25% M */}
-                <td className="px-1 py-1 text-right whitespace-nowrap">{fmtN(r.down_25_m)}</td>
-
-                {/* UP 50% M */}
-                <td className="px-1 py-1 text-right whitespace-nowrap">{fmtN(r.up_50_m)}</td>
-
-                {/* DN 50% M */}
-                <td className="px-1 py-1 text-right whitespace-nowrap">{fmtN(r.down_50_m)}</td>
-
-                {/* UP 13% 34D */}
-                <td className="px-1 py-1 text-right whitespace-nowrap">{fmtN(r.up_13_34d)}</td>
-
-                {/* DN 13% 34D */}
-                <td className="px-1 py-1 text-right whitespace-nowrap">{fmtN(r.down_13_34d)}</td>
-
-                {/* 10x ATR Ext */}
+                {/* 10x ATR Ext — not clickable */}
                 <td className="px-1 py-1 text-right text-purple-300 whitespace-nowrap">
                   {r.atr_10x_ext != null ? fmtN(r.atr_10x_ext) : "—"}
                 </td>
-
                 {/* >50 DMA */}
                 <td className="px-1 py-1 text-right text-sky-300 whitespace-nowrap">
                   {r.above_50dma_pct != null ? `${r.above_50dma_pct.toFixed(1)}%` : "—"}
                 </td>
-
                 {/* Share Universe */}
                 <td className="px-1 py-1 text-right text-amber-300/80 whitespace-nowrap">
                   {fmtN(r.worden_universe)}
                 </td>
-
                 {/* T2108 */}
                 <td className={`px-1 py-1 text-right whitespace-nowrap ${t2108Low ? "font-semibold text-rose-400" : "text-amber-300/80"}`}>
                   {r.t2108 != null ? `${r.t2108.toFixed(1)}%` : "—"}
                 </td>
-
                 {/* S&P */}
                 <td className="px-1 py-1 text-right text-amber-300/80 whitespace-nowrap">
                   {fmtN(r.sp_index)}
@@ -250,8 +253,11 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [lastRefresh, setLastRefresh] = useState(null);
+  const [modal, setModal] = useState(null); // { filter, label }
   const abortRef = useRef(null);
+
+  const openModal  = useCallback((filter, label) => setModal({ filter, label }), []);
+  const closeModal = useCallback(() => setModal(null), []);
 
   const load = async () => {
     setLoading(true);
@@ -355,7 +361,7 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
         {rows.length === 0 ? (
           <p className="text-center text-sm text-slate-500 py-8">No breadth data available.</p>
         ) : (
-          <BreadthTable rows={rows} />
+          <BreadthTable rows={rows} onOpenModal={openModal} />
         )}
       </div>
 
@@ -363,9 +369,19 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
       <div className="border-t border-gray-800 px-4 py-2">
         <p className="text-xs text-slate-600">
           Data from Stockbee Market Monitor spreadsheet. Refreshed daily after market close.
+          Click any cell on the latest row to drill into individual stocks.
           10x ATR Ext and &gt;50 DMA columns appear when available.
         </p>
       </div>
+
+      {/* Drill-down modal */}
+      {modal && (
+        <BreadthStockModal
+          filter={modal.filter}
+          filterLabel={modal.label}
+          onClose={closeModal}
+        />
+      )}
     </div>
   );
 });
