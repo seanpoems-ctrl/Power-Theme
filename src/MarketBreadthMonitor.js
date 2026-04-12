@@ -274,7 +274,6 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
       setData(json);
-      setLastRefresh(new Date());
     } catch (e) {
       if (e.name === "AbortError") return;
       setError(e.message);
