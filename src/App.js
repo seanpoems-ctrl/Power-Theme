@@ -649,9 +649,9 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
       )}
 
       {stocks.length > 0 ? (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto overflow-y-auto" style={{ maxHeight: '240px' }}>
           <table className="w-full text-left">
-            <thead>
+            <thead className="sticky top-0 z-10" style={{ background: '#18181b' }}>
               <tr className="border-b border-zinc-800/60">
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Ticker</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Price</th>
