@@ -574,7 +574,6 @@ const IbkrSourceBadge = ({ source }) => {
 };
 
 const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData }) => {
-  const containerRef = React.useRef(null);
   const fmtMktCap = (v) => {
     if (!v) return '—';
     if (v >= 1e12) return `$${(v/1e12).toFixed(1)}T`;
@@ -615,19 +614,10 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
     return { themeName: name, stocks: sorted, themeRS: avgRS, analysis: topAnalysis };
   }, [spotlightThemeName, lbView, data, ibkrThemesData]);
 
-  React.useEffect(() => {
-    if (!spotlightThemeName || !containerRef.current) return;
-    const nav = document.getElementById('app-navbar');
-    const navH = nav ? nav.getBoundingClientRect().height : 0;
-    const rect = containerRef.current.getBoundingClientRect();
-    const scrollTop = window.scrollY + rect.top - navH - 8;
-    window.scrollTo({ top: scrollTop, behavior: 'smooth' });
-  }, [spotlightThemeName]);
-
   if (!themeName) return null;
 
   return (
-    <div ref={containerRef} className="mb-4 bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
+    <div className="mb-4 bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
       <div className="flex items-center gap-2 mb-3">
         <span className="text-[13px] font-semibold text-emerald-400">
           ✦ Thematic Spotlight — {themeName}{themeRS != null ? ` · RS ${themeRS}` : ''}
