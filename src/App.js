@@ -3,6 +3,7 @@ import { ChevronDown, ChevronRight, Star, Activity, BarChart3, RefreshCw, Search
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
 import useMarketStore from "./useMarketStore";
 import GlobalAlertBanner from "./GlobalAlertBanner";
+import MarketBreadthMonitor from "./MarketBreadthMonitor";
 
 // eslint-disable-next-line no-unused-vars
 const MOCK_DATA = {
@@ -4189,6 +4190,11 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
             ))}
           </div>
         )}
+
+        {/* ── Stockbee Market Monitor table ─────────────────────────────── */}
+        <div className="mt-5">
+          <MarketBreadthMonitor />
+        </div>
       </div>
 
       {/* ── Right sidebar ─────────────────────────────────────────────────── */}
