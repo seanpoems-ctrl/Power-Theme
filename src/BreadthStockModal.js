@@ -201,6 +201,46 @@ function detectNewsCatalyst(title) {
   return { key: "others", label: "Others", color: "text-zinc-400 bg-zinc-700/40 border-zinc-600/40" };
 }
 
+// Sources that publish primarily opinion / editorial content — filtered out of the news feed
+const OPINION_SOURCES = new Set([
+  "seeking alpha", "seekingalpha", "the motley fool", "motley fool",
+  "investorplace", "investor place", "zacks", "zacks.com",
+  "thestreet", "the street", "investopedia", "kiplinger",
+  "moneymorning", "money morning", "fool.com", "nasdaq.com",
+  "24/7 wall st.", "24/7 wall st", "247wallst", "simply wall st",
+  "wisesheets", "stockanalysis", "stock analysis",
+]);
+
+// Title patterns that signal opinion / listicle content rather than hard news
+const OPINION_TITLE_PATTERNS = [
+  /\bbetter buy\b/i,
+  /\bbest stocks?\b/i,
+  /\btop \d+ stocks?\b/i,
+  /\b\d+ stocks? (to buy|to watch|to sell|you should)\b/i,
+  /\bshould you buy\b/i,
+  /\btime to buy\b/i,
+  /\btime to sell\b/i,
+  /\bis it time\b/i,
+  /\bworth buying\b/i,
+  /\bwhy (i|we) (own|bought|sold|like|think)\b/i,
+  /\bhere'?s why\b/i,
+  /\bwhy investors should\b/i,
+  /\bmy (top|favorite|best)\b/i,
+  /\b(buy|sell|hold) (or|vs\.?)\b/i,
+  /\b(bull|bear) case\b/i,
+  /\bprediction(s)? for\b/i,
+  /\bforecast(s|ing)? for\b/i,
+  /\bopinion\b/i,
+];
+
+function isOpinionPost(title, source) {
+  const srcLower = (source || "").toLowerCase();
+  if (OPINION_SOURCES.has(srcLower)) return true;
+  // Partial match for sources (e.g. "Seeking Alpha - Premium")
+  if ([...OPINION_SOURCES].some(s => srcLower.includes(s))) return true;
+  return OPINION_TITLE_PATTERNS.some(re => re.test(title || ""));
+}
+
 // ---------------------------------------------------------------------------
 // Per-filter column label for the Change% column
 // ---------------------------------------------------------------------------
@@ -326,18 +366,20 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
       .then((r) => r.text())
       .then((xml) => {
         const doc   = new DOMParser().parseFromString(xml, "text/xml");
-        const items = Array.from(doc.querySelectorAll("item")).slice(0, 20).map((el) => {
-          const rawLink = el.querySelector("link")?.textContent ?? "";
-          const source  = el.querySelector("source")?.textContent ?? "";
-          const title   = el.querySelector("title")?.textContent ?? "";
-          return {
-            title,
-            link:     rawLink,
-            date:     el.querySelector("pubDate")?.textContent ?? "",
-            source,
-            catalyst: detectNewsCatalyst(title),
-          };
-        });
+        const items = Array.from(doc.querySelectorAll("item"))
+          .map((el) => {
+            const source = el.querySelector("source")?.textContent ?? "";
+            const title  = el.querySelector("title")?.textContent ?? "";
+            return {
+              title,
+              link:     el.querySelector("link")?.textContent ?? "",
+              date:     el.querySelector("pubDate")?.textContent ?? "",
+              source,
+              catalyst: detectNewsCatalyst(title),
+            };
+          })
+          .filter((item) => !isOpinionPost(item.title, item.source))
+          .slice(0, 20);
         setNews(items);
         setNewsLoading(false);
       })
