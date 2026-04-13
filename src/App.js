@@ -4124,13 +4124,13 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
       <div className="flex-1 min-w-0">
         <GeminiBreathAnalysis mc={mc} internalsData={internalsData} />
 
-        {/* 8 metric cards — 4×2 grid */}
-        <div className="grid grid-cols-4 gap-3 mb-5">
+        {/* 8 metric chips — compact single row */}
+        <div className="flex flex-wrap gap-2 mb-4">
           {metrics.map(m => (
-            <div key={m.label} className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-              <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1.5">{m.label}</div>
-              <div className={`text-[22px] font-bold font-mono leading-none mb-1 ${m.color}`}>{m.value}</div>
-              {m.sub && <div className="text-[11px] text-zinc-600">{m.sub}</div>}
+            <div key={m.label} className="flex-1 min-w-[100px] bg-zinc-900/60 border border-zinc-800/60 rounded-lg px-2.5 py-1.5">
+              <div className="text-[9px] text-zinc-500 uppercase tracking-wider">{m.label}</div>
+              <div className={`text-[15px] font-bold font-mono leading-tight ${m.color}`}>{m.value}</div>
+              {m.sub && <div className="text-[9px] text-zinc-600 truncate">{m.sub}</div>}
             </div>
           ))}
         </div>
