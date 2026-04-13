@@ -229,7 +229,7 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
       className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="relative flex h-[85vh] w-full max-w-2xl flex-col rounded-xl border border-zinc-600 bg-zinc-950 shadow-2xl">
+      <div className="relative flex h-[92vh] w-full max-w-4xl flex-col rounded-xl border border-zinc-600 bg-zinc-950 shadow-2xl">
 
         {/* Header */}
         <div className="flex items-center gap-2 border-b border-zinc-800 px-4 py-2.5">
