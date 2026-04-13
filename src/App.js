@@ -4135,62 +4135,68 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
           ))}
         </div>
 
-        {/* Breadth bar table */}
-        {breadthRows.length > 0 && (
+        {/* ── Unified breadth + index row card ──────────────────────────── */}
+        {(breadthRows.length > 0 || mc.spy || mc.qqq) && (
           <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl overflow-hidden mb-5">
-            <div className="px-4 py-2.5 border-b border-zinc-800/60">
-              <span className="text-[12px] font-semibold text-zinc-300">Market Breadth — NYSE / S&P 500</span>
-              {data?.last_updated && <span className="text-[11px] text-zinc-600 ml-2">{data.last_updated}</span>}
+            {/* Title header */}
+            <div className="px-4 py-2 border-b border-zinc-800/60 flex items-center gap-2">
+              <span className="text-[11px] font-semibold text-zinc-300">Market Breadth — NYSE / S&P 500</span>
+              {data?.last_updated && <span className="text-[10px] text-zinc-600">{data.last_updated}</span>}
             </div>
-            <div className="divide-y divide-zinc-800/40">
-              {breadthRows.map(row => {
+
+            {/* Single horizontal row */}
+            <div className="flex flex-wrap lg:flex-nowrap divide-y lg:divide-y-0 lg:divide-x divide-zinc-800/60">
+
+              {/* Breadth columns 1–4 */}
+              {breadthRows.map((row, i) => {
                 const lp = row.leftPct ?? 0;
                 const rp = row.rightPct ?? 0;
                 return (
-                  <div key={row.label} className="px-4 py-3">
-                    <div className="flex justify-between items-baseline mb-1.5">
-                      <span className="text-[12px] text-zinc-400">{row.label}</span>
-                      <span className="text-[11px] text-zinc-600">
-                        <span className="text-emerald-400 font-mono font-semibold">{lp.toFixed(1)}%</span>
-                        {row.leftCount != null && <span className="text-zinc-600"> ({row.leftCount})</span>}
-                        <span className="mx-1.5 text-zinc-700">/</span>
-                        <span className="text-red-400 font-mono font-semibold">{rp.toFixed(1)}%</span>
-                        {row.rightCount != null && <span className="text-zinc-600"> ({row.rightCount})</span>}
-                      </span>
+                  <div key={row.label}
+                    className="flex-1 min-w-[140px] px-3 py-2.5 flex flex-col justify-between gap-1">
+                    <div className="text-[9px] text-zinc-500 uppercase tracking-wide truncate">{row.label}</div>
+                    <div className="flex items-baseline gap-1 text-[12px] font-mono font-semibold leading-none">
+                      <span className="text-emerald-400">{lp.toFixed(1)}%</span>
+                      {row.leftCount  != null && <span className="text-[9px] text-zinc-600">({row.leftCount})</span>}
+                      <span className="text-zinc-700 mx-0.5">/</span>
+                      <span className="text-red-400">{rp.toFixed(1)}%</span>
+                      {row.rightCount != null && <span className="text-[9px] text-zinc-600">({row.rightCount})</span>}
                     </div>
-                    <div className="flex h-2 rounded-full overflow-hidden gap-0.5">
-                      <div className="bg-emerald-500/70 rounded-l-full transition-all" style={{ width: `${lp}%` }}/>
-                      <div className="bg-red-500/70 rounded-r-full transition-all" style={{ width: `${rp}%` }}/>
+                    <div className="flex h-[4px] rounded-full overflow-hidden gap-px">
+                      <div className="bg-emerald-500/70 rounded-l-full" style={{ width: `${lp}%` }} />
+                      <div className="bg-red-500/70 rounded-r-full"     style={{ width: `${rp}%` }} />
                     </div>
                   </div>
                 );
               })}
-            </div>
-          </div>
-        )}
 
-        {/* Spy / QQQ index cards */}
-        {(mc.spy || mc.qqq) && (
-          <div className="grid grid-cols-2 gap-3 mb-5">
-            {[["SPY", mc.spy], ["QQQ", mc.qqq]].map(([name, idx]) => idx && (
-              <div key={name} className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
-                <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-2">{name}</div>
-                <div className="grid grid-cols-3 gap-2">
-                  {[
-                    { k: "sma50_pct",  l: "vs SMA50" },
-                    { k: "sma200_pct", l: "vs SMA200" },
-                    { k: "ema10_pct",  l: "vs EMA10" },
-                  ].map(({ k, l }) => idx[k] != null && (
-                    <div key={k}>
-                      <div className="text-[9px] text-zinc-600 mb-0.5">{l}</div>
-                      <div className={`text-[13px] font-mono font-bold ${idx[k] > 0 ? "text-emerald-400" : "text-red-400"}`}>
-                        {idx[k] > 0 ? "+" : ""}{idx[k].toFixed(2)}%
+              {/* Prominent divider before index columns */}
+              {(mc.spy || mc.qqq) && breadthRows.length > 0 && (
+                <div className="hidden lg:block w-px bg-zinc-600/60 self-stretch" />
+              )}
+
+              {/* SPY / QQQ columns */}
+              {[["SPY", mc.spy], ["QQQ", mc.qqq]].map(([name, idx]) => idx && (
+                <div key={name} className="flex-1 min-w-[130px] px-3 py-2.5 flex flex-col gap-1">
+                  <div className="text-[10px] font-semibold text-zinc-300">{name}</div>
+                  <div className="flex gap-4">
+                    {[
+                      { k: "sma50_pct",  l: "vs SMA50"  },
+                      { k: "sma200_pct", l: "vs SMA200" },
+                      { k: "ema10_pct",  l: "vs EMA10"  },
+                    ].filter(({ k }) => idx[k] != null).map(({ k, l }) => (
+                      <div key={k}>
+                        <div className="text-[9px] text-zinc-600">{l}</div>
+                        <div className={`text-[12px] font-mono font-bold ${idx[k] > 0 ? "text-emerald-400" : "text-red-400"}`}>
+                          {idx[k] > 0 ? "+" : ""}{idx[k].toFixed(2)}%
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+
+            </div>
           </div>
         )}
 
