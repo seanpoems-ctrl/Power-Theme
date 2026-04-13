@@ -176,24 +176,30 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
   const { ticker, company } = stock;
   const perfVal = getPerfValue(stock, perfField);
 
-  // Fetch news EAGERLY on mount so it's ready when the user clicks the News tab.
-  // Uses corsproxy.io which is significantly faster than allorigins.win.
+  // Fetch news EAGERLY on mount — Google News RSS (same source as gapper_service.py).
+  // Company-specific: searches ticker + "stock" to filter market-relevant articles.
   useEffect(() => {
     setNewsLoading(true);
     setNewsError(null);
     setNews([]);
-    const rss   = `https://feeds.finance.yahoo.com/rss/2.0/headline?s=${ticker}&region=US&lang=en-US`;
+    const rss   = `https://news.google.com/rss/search?q=${encodeURIComponent(ticker + " stock")}&hl=en-US&gl=US&ceid=US:en`;
     const proxy = `https://corsproxy.io/?url=${encodeURIComponent(rss)}`;
     const ctrl  = new AbortController();
     fetch(proxy, { signal: ctrl.signal })
       .then((r) => r.text())
       .then((xml) => {
         const doc   = new DOMParser().parseFromString(xml, "text/xml");
-        const items = Array.from(doc.querySelectorAll("item")).slice(0, 12).map((el) => ({
-          title: el.querySelector("title")?.textContent ?? "",
-          link:  el.querySelector("link")?.textContent ?? "",
-          date:  el.querySelector("pubDate")?.textContent ?? "",
-        }));
+        const items = Array.from(doc.querySelectorAll("item")).slice(0, 20).map((el) => {
+          const rawLink = el.querySelector("link")?.textContent ?? "";
+          // Google News RSS wraps the real URL — extract from source element if present
+          const source  = el.querySelector("source")?.textContent ?? "";
+          return {
+            title: el.querySelector("title")?.textContent ?? "",
+            link:  rawLink,
+            date:  el.querySelector("pubDate")?.textContent ?? "",
+            source,
+          };
+        });
         setNews(items);
         setNewsLoading(false);
       })
@@ -229,7 +235,7 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
       className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="relative flex h-[92vh] w-full max-w-4xl flex-col rounded-xl border border-zinc-600 bg-zinc-950 shadow-2xl">
+      <div className="relative flex h-[82vh] w-full max-w-4xl flex-col rounded-xl border border-zinc-600 bg-zinc-950 shadow-2xl">
 
         {/* Header */}
         <div className="flex items-center gap-2 border-b border-zinc-800 px-4 py-2.5">
@@ -291,9 +297,9 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
               ) : newsError ? (
                 <div className="py-10 text-center">
                   <p className="text-sm text-rose-400">{newsError}</p>
-                  <a href={`https://finance.yahoo.com/quote/${ticker}/news`} target="_blank" rel="noopener noreferrer"
+                  <a href={`https://news.google.com/search?q=${ticker}+stock`} target="_blank" rel="noopener noreferrer"
                      className="mt-2 block text-xs text-zinc-400 hover:text-cyan-400">
-                    View on Yahoo Finance →
+                    Search on Google News →
                   </a>
                 </div>
               ) : news.length === 0 ? (
@@ -304,11 +310,14 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
                     <a key={i} href={item.link} target="_blank" rel="noopener noreferrer"
                        className="block rounded-lg bg-zinc-800/50 px-3 py-2 hover:bg-zinc-700/60 transition-colors">
                       <div className="text-xs leading-snug text-zinc-200">{item.title}</div>
-                      {item.date && (
-                        <div className="mt-0.5 text-[10px] text-zinc-500">
-                          {new Date(item.date).toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
-                        </div>
-                      )}
+                      <div className="mt-0.5 flex items-center gap-2">
+                        {item.source && <span className="text-[10px] text-cyan-600">{item.source}</span>}
+                        {item.date && (
+                          <span className="text-[10px] text-zinc-500">
+                            {new Date(item.date).toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
+                          </span>
+                        )}
+                      </div>
                     </a>
                   ))}
                 </div>
