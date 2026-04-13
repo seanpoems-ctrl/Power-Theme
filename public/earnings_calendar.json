@@ -1,14 +1,15 @@
 {
-  "generated_at": "2026-04-10T12:12:05.559673+00:00",
+  "generated_at": "2026-04-13T12:09:34.321744+00:00",
   "data_source": "fallback",
-  "today": [],
-  "upcoming": [
+  "today": [
     {
       "ticker": "BMM",
-      "date": "2026-04-13",
       "time_of_day": "",
-      "eps_estimate": null
-    },
+      "eps_estimate": null,
+      "source": "yfinance"
+    }
+  ],
+  "upcoming": [
     {
       "ticker": "TRX",
       "date": "2026-04-14",
@@ -19,7 +20,7 @@
       "ticker": "AA",
       "date": "2026-04-16",
       "time_of_day": "",
-      "eps_estimate": 1.41
+      "eps_estimate": 1.51
     }
   ]
 }
