@@ -3553,372 +3553,437 @@ const TradeJournalTab = ({ data }) => {
   );
 };
 
-// ── News & Econ Tab ───────────────────────────────────────────────────────────
+// ── Calendar Tab ─────────────────────────────────────────────────────────────
 
-const NEWS_GEMINI_KEY   = process.env.REACT_APP_GEMINI_KEY || "";
-const NEWS_CACHE_PREFIX = "gemini_news_v1_";
+// Currency → country flag + name (for economic calendar)
+const CURRENCY_COUNTRY = {
+  USD: { flag: "🇺🇸", name: "United States" },
+  EUR: { flag: "🇪🇺", name: "European Union" },
+  GBP: { flag: "🇬🇧", name: "United Kingdom" },
+  JPY: { flag: "🇯🇵", name: "Japan" },
+  CAD: { flag: "🇨🇦", name: "Canada" },
+  AUD: { flag: "🇦🇺", name: "Australia" },
+  NZD: { flag: "🇳🇿", name: "New Zealand" },
+  CHF: { flag: "🇨🇭", name: "Switzerland" },
+  CNY: { flag: "🇨🇳", name: "Mainland China" },
+  CNH: { flag: "🇨🇳", name: "Mainland China" },
+  HKD: { flag: "🇭🇰", name: "Hong Kong" },
+  SGD: { flag: "🇸🇬", name: "Singapore" },
+  KRW: { flag: "🇰🇷", name: "South Korea" },
+  INR: { flag: "🇮🇳", name: "India" },
+  BRL: { flag: "🇧🇷", name: "Brazil" },
+  MXN: { flag: "🇲🇽", name: "Mexico" },
+  ZAR: { flag: "🇿🇦", name: "South Africa" },
+  SEK: { flag: "🇸🇪", name: "Sweden" },
+  NOK: { flag: "🇳🇴", name: "Norway" },
+  DKK: { flag: "🇩🇰", name: "Denmark" },
+  PLN: { flag: "🇵🇱", name: "Poland" },
+  TRY: { flag: "🇹🇷", name: "Turkey" },
+  DEU: { flag: "🇩🇪", name: "Germany" },
+};
 
-async function fetchGeminiNewsSynthesis(headlines) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${NEWS_GEMINI_KEY}`;
-  const prompt = `You are a concise equity trader. Given these market headlines, write ONE short paragraph (3-4 sentences) synthesizing the key trading implication for today. Be specific about sectors/themes affected.\n\nHeadlines:\n${headlines.map((h, i) => `${i + 1}. ${h}`).join("\n")}`;
-  const body = { contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.4, maxOutputTokens: 200 } };
-  const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-  const json = await res.json();
-  return json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
+const CAL_DAY_NAMES   = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+const CAL_MONTH_NAMES = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const CAL_MONTH_FULL  = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const CAL_DAY_FULL    = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+
+function calGetWeekDays(weekOffset = 0) {
+  const now = new Date();
+  const day = now.getDay(); // 0=Sun
+  const diffToMonday = day === 0 ? -6 : 1 - day;
+  const monday = new Date(now);
+  monday.setDate(now.getDate() + diffToMonday + weekOffset * 7);
+  monday.setHours(0, 0, 0, 0);
+  return Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    return d;
+  });
 }
 
-const IMPACT_CFG = {
-  High:   { cls: "bg-red-500/20 text-red-400 border-red-500/30",    dot: "bg-red-400"    },
-  Medium: { cls: "bg-amber-500/20 text-amber-400 border-amber-500/30", dot: "bg-amber-400" },
-  Low:    { cls: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30", dot: "bg-emerald-400" },
-  "🔴":   { cls: "bg-red-500/20 text-red-400 border-red-500/30",    dot: "bg-red-400"    },
-  "🟡":   { cls: "bg-amber-500/20 text-amber-400 border-amber-500/30", dot: "bg-amber-400" },
-  "🟢":   { cls: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30", dot: "bg-emerald-400" },
-};
+function calToDateStr(d) { return d.toISOString().slice(0, 10); }
 
-const SOURCE_CFG = {
-  ibkr:        { cls: "bg-emerald-500/20 text-emerald-400 border-emerald-500/30", label: "IBKR"       },
-  benzinga:    { cls: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",   label: "Benzinga"   },
-  finviz:      { cls: "bg-zinc-700/60 text-zinc-400 border-zinc-600/40",         label: "Finviz"     },
-  tradingview: { cls: "bg-blue-500/20 text-blue-400 border-blue-500/30",         label: "TV"         },
-  google:      { cls: "bg-zinc-700/60 text-zinc-400 border-zinc-600/40",         label: "Google"     },
-};
+function calFmtWeekRange(days) {
+  const first = days[0], last = days[6];
+  const m1 = CAL_MONTH_NAMES[first.getMonth()], m2 = CAL_MONTH_NAMES[last.getMonth()];
+  const y  = last.getFullYear();
+  return m1 === m2
+    ? `${m1} ${first.getDate()} — ${last.getDate()}, ${y}`
+    : `${m1} ${first.getDate()} — ${m2} ${last.getDate()}, ${y}`;
+}
 
-const EconEventRow = ({ event }) => {
-  const impact = event.impact || "Low";
-  const cfg    = IMPACT_CFG[impact] || IMPACT_CFG.Low;
+function calFmtDateHeader(dateStr) {
+  const d = new Date(dateStr + "T12:00:00");
+  return `${CAL_DAY_FULL[d.getDay()]}, ${CAL_MONTH_FULL[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+}
+
+function calFmtMktCap(v) {
+  if (v == null) return "—";
+  if (v >= 1e12) return `$${(v/1e12).toFixed(2)}T`;
+  if (v >= 1e9)  return `$${(v/1e9).toFixed(2)}B`;
+  if (v >= 1e6)  return `$${(v/1e6).toFixed(0)}M`;
+  return `$${v.toFixed(0)}`;
+}
+
+function calFmtRev(v) {
+  if (v == null) return "—";
+  if (v >= 1e12) return `$${(v/1e12).toFixed(2)}T`;
+  if (v >= 1e9)  return `$${(v/1e9).toFixed(2)}B`;
+  if (v >= 1e6)  return `$${(v/1e6).toFixed(0)}M`;
+  if (v >= 1e3)  return `$${(v/1e3).toFixed(0)}K`;
+  return `$${v.toFixed(0)}`;
+}
+
+function calSurpCls(v) {
+  if (v == null) return "text-zinc-600";
+  return v > 0 ? "text-emerald-400" : "text-rose-400";
+}
+
+function calFmtSurp(v) {
+  if (v == null) return "—";
+  return `${v > 0 ? "+" : ""}${v.toFixed(2)}%`;
+}
+
+// 3-bar impact indicator
+const ImpactBars = ({ impact }) => {
+  const h = (impact || "").toLowerCase();
+  const count = h === "high" ? 3 : h === "medium" ? 2 : 1;
+  const color = h === "high" ? "bg-red-500" : h === "medium" ? "bg-amber-400" : "bg-zinc-500";
   return (
-    <div className="flex items-start gap-3 p-3 bg-zinc-900/60 border border-zinc-800/60 rounded-xl flex-shrink-0 min-w-[200px] max-w-[260px]">
-      <div className={`w-2 h-2 rounded-full flex-shrink-0 mt-1 ${cfg.dot}`}/>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-1.5 mb-0.5 flex-wrap">
-          {event.time_et && <span className="text-[10px] font-mono text-zinc-500">{event.time_et}</span>}
-          <span className={`text-[9px] font-bold px-1 py-0.5 rounded border leading-none ${cfg.cls}`}>{impact}</span>
-          {event.currency && event.currency !== "USD" && (
-            <span className="text-[9px] text-zinc-600 bg-zinc-800/60 px-1 py-0.5 rounded border border-zinc-700/40 leading-none">{event.currency}</span>
-          )}
-        </div>
-        <div className="text-[12px] font-medium text-zinc-200 leading-tight mb-1">{event.event || event.name}</div>
-        {(event.forecast != null || event.previous != null) && (
-          <div className="flex items-center gap-2 text-[10px]">
-            {event.forecast != null && <span className="text-zinc-500">Fcst: <span className="text-zinc-300 font-mono">{event.forecast}</span></span>}
-            {event.previous != null && <span className="text-zinc-600">Prev: <span className="text-zinc-500 font-mono">{event.previous}</span></span>}
-          </div>
-        )}
-      </div>
+    <div className="flex items-end gap-[2px] h-3.5 flex-shrink-0">
+      {[1,2,3].map(i => (
+        <div key={i} className={`w-[3px] rounded-[1px] ${i <= count ? color : "bg-zinc-700"}`}
+             style={{ height: `${33 * i}%` }} />
+      ))}
     </div>
   );
 };
 
-const NewsEconTab = ({ data, econData, earningsData, newsData }) => {
-  const [gapperData, setGapperData]   = useState(null);
-  const [calView, setCalView]         = useState("today");   // "today" | "week" | "earnings"
-  const [activeThemes, setActiveThemes] = useState(new Set()); // empty = show all
+const CalendarTab = ({ econData, earningsData }) => {
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const [calSubTab, setCalSubTab] = useState("economic");  // "economic" | "earnings"
+  const [selectedDay, setSelectedDay] = useState(todayStr);
+  const [weekOffset, setWeekOffset]   = useState(0);
 
-  useEffect(() => {
-    fetch(`${process.env.PUBLIC_URL}/gapper_data.json`)
-      .then(r => r.ok ? r.json() : null)
-      .then(d => { if (d) setGapperData(d); })
-      .catch(() => {});
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-  const [synthText, setSynthText]     = useState(null);
-  const [synthLoading, setSynthLoading] = useState(false);
-  const todayKey = new Date().toISOString().slice(0, 10);
+  const weekDays = useMemo(() => calGetWeekDays(weekOffset), [weekOffset]);
 
-  // ── Calendar data ────────────────────────────────────────────────────────────
-  const todayEvents = useMemo(() => {
-    const today = new Date().toISOString().slice(0, 10);
-    return (econData?.today || []).filter(e => !e.date || e.date === today);
+  const goToToday = () => { setWeekOffset(0); setSelectedDay(todayStr); };
+
+  // ── Normalise all econ events into flat array ──────────────────────────────
+  // Supports both {events:[]} (new schema from econ_calendar.py) and
+  // legacy {today:[], upcoming:[]} fallback.
+  const allEconEvents = useMemo(() => {
+    const raw = econData?.events
+      ?? [...(econData?.today || []), ...(econData?.upcoming || [])];
+    return raw.map(e => ({
+      ...e,
+      date:    e.date    ?? (e.datetime_et ? e.datetime_et.slice(0, 10) : null),
+      time_et: e.time_et ?? (e.datetime_et ? e.datetime_et.slice(11, 16) : null),
+      event:   e.event   ?? e.event_name ?? e.name ?? "",
+    }));
   }, [econData]);
 
-  const weekEvents = useMemo(() => {
-    const now     = new Date();
-    const cutoff  = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
-    const today   = now.toISOString().slice(0, 10);
-    const all     = [...(econData?.today || []), ...(econData?.upcoming || [])];
-    return all.filter(e => e.date && e.date >= today && e.date <= cutoff);
-  }, [econData]);
+  // ── Normalise all earnings ─────────────────────────────────────────────────
+  const allEarnings = useMemo(() =>
+    [...(earningsData?.today || []), ...(earningsData?.upcoming || [])],
+  [earningsData]);
 
-  // ── News feed — aggregate from gapper headlines ──────────────────────────────
-  const allHeadlines = useMemo(() => {
-    const rows = [];
-    for (const g of (gapperData?.gappers || [])) {
-      const theme  = g.category || g.theme || "";
-      const source = g.news_source || "google";
-      for (const h of (g.headlines || [])) {
-        const text = typeof h === 'string' ? h : (h?.title || '');
-        const url  = typeof h === 'object' ? (h?.url || null) : null;
-        if (text) rows.push({ text, url, ticker: g.ticker, theme, source, ts: null });
-      }
-    }
-    // breaking_news alerts
-    for (const a of (newsData?.alerts || [])) {
-      rows.push({ text: a.headline, ticker: a.ticker || "", theme: a.category || "", source: a.source || "ibkr", ts: a.timestamp || null });
-    }
-    return rows;
-  }, [gapperData, newsData]);
-
-  const filteredNews = useMemo(() => {
-    if (activeThemes.size === 0) return allHeadlines;
-    return allHeadlines.filter(h => activeThemes.has(h.theme));
-  }, [allHeadlines, activeThemes]);
-
-  // ── Theme filter buttons (unique themes from news) ───────────────────────────
-  const newsThemes = useMemo(() => [...new Set(allHeadlines.map(h => h.theme).filter(Boolean))].sort(), [allHeadlines]);
-
-  const toggleTheme = (t) => setActiveThemes(prev => {
-    const next = new Set(prev);
-    next.has(t) ? next.delete(t) : next.add(t);
-    return next;
-  });
-
-  // ── Gemini news synthesis ────────────────────────────────────────────────────
-  useEffect(() => {
-    const cacheKey = NEWS_CACHE_PREFIX + todayKey;
-    const cached   = (() => { try { return localStorage.getItem(cacheKey); } catch { return null; } })();
-    if (cached) { setSynthText(cached); return; }
-    const top3 = allHeadlines.slice(0, 3).map(h => h.text).filter(Boolean);
-    if (!NEWS_GEMINI_KEY || top3.length === 0) return;
-    setSynthLoading(true);
-    fetchGeminiNewsSynthesis(top3)
-      .then(t => {
-        if (t) {
-          setSynthText(t);
-          try { localStorage.setItem(cacheKey, t); } catch { /* quota */ }
-        }
-      })
-      .catch(() => {})
-      .finally(() => setSynthLoading(false));
-  }, [allHeadlines, todayKey]);
-
-  // ── Upcoming earnings (next 7 days) ─────────────────────────────────────────
-  const upcomingEarnings = useMemo(() => {
-    const today  = new Date().toISOString().slice(0, 10);
-    const cutoff = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
-    const rows   = [...(earningsData?.today || []), ...(earningsData?.upcoming || [])];
-    return rows.filter(e => e.date && e.date >= today && e.date <= cutoff)
-               .sort((a, b) => a.date < b.date ? -1 : 1)
-               .slice(0, 20);
-  }, [earningsData]);
-
-  const calEvents = calView === "today" ? todayEvents : calView === "week" ? weekEvents : [];
-
-  // group week events by date for the "week" view header labels
-  const weekByDate = useMemo(() => {
-    if (calView !== "week") return {};
+  // ── Count by day (for weekly strip badges) ────────────────────────────────
+  const econCountByDay = useMemo(() => {
     const m = {};
-    for (const e of weekEvents) {
-      const d = e.date || "—";
-      (m[d] = m[d] || []).push(e);
-    }
+    for (const e of allEconEvents) if (e.date) m[e.date] = (m[e.date] || 0) + 1;
     return m;
-  }, [weekEvents, calView]);
+  }, [allEconEvents]);
+
+  const earnCountByDay = useMemo(() => {
+    const m = {};
+    for (const e of allEarnings) if (e.date) m[e.date] = (m[e.date] || 0) + 1;
+    return m;
+  }, [allEarnings]);
+
+  // Days with at least one high-impact econ event (red dot in strip)
+  const highImpactDays = useMemo(() => {
+    const s = new Set();
+    for (const e of allEconEvents)
+      if (e.date && (e.impact || "").toLowerCase() === "high") s.add(e.date);
+    return s;
+  }, [allEconEvents]);
+
+  // ── Filtered events for selected day ──────────────────────────────────────
+  const dayEconEvents = useMemo(() =>
+    allEconEvents
+      .filter(e => e.date === selectedDay)
+      .sort((a, b) => (a.time_et || "").localeCompare(b.time_et || "")),
+  [allEconEvents, selectedDay]);
+
+  const dayEarnings = useMemo(() => {
+    const ORDER = { BMO: 0, AMC: 1 };
+    return allEarnings
+      .filter(e => e.date === selectedDay)
+      .sort((a, b) => (ORDER[a.time_of_day] ?? 2) - (ORDER[b.time_of_day] ?? 2));
+  }, [allEarnings, selectedDay]);
+
+  // ── Group econ events by time slot ────────────────────────────────────────
+  const econByTime = useMemo(() => {
+    const groups = {};
+    for (const e of dayEconEvents) {
+      const t = e.time_et || "—";
+      (groups[t] = groups[t] || []).push(e);
+    }
+    return groups;
+  }, [dayEconEvents]);
+
+  // index of first upcoming time slot (for red pill highlight)
+  const nowTimeStr = new Date().toTimeString().slice(0, 5);
+  const timeKeys   = Object.keys(econByTime);
+  const nextTimeIdx = selectedDay === todayStr
+    ? timeKeys.findIndex(t => t !== "—" && t >= nowTimeStr)
+    : -1;
+
+  // ── Earnings row sub-component ────────────────────────────────────────────
+  const EarningsRow = ({ e }) => {
+    const tod    = e.time_of_day || "";
+    const todCls = tod === "BMO" ? "text-amber-400" : tod === "AMC" ? "text-violet-400" : "text-zinc-500";
+    return (
+      <div className="grid gap-0 items-center px-3 py-2.5 border-b border-zinc-800/30 last:border-b-0 hover:bg-zinc-800/20 transition-colors min-w-[900px]"
+           style={{ gridTemplateColumns: "90px 1fr 70px 90px 80px 80px 90px 90px 90px 90px" }}>
+        <a href={`https://www.tradingview.com/chart/?symbol=${e.ticker}`} target="_blank" rel="noopener noreferrer"
+           className="text-[13px] font-mono font-bold text-sky-400 hover:text-sky-300 transition-colors">{e.ticker}</a>
+        <span className="text-[12px] text-zinc-300 truncate pr-2">{e.company || "—"}</span>
+        <span className={`text-[11px] font-bold ${todCls}`}>{tod || "—"}</span>
+        <span className="text-[12px] text-zinc-400 text-right font-mono">{calFmtMktCap(e.mkt_cap)}</span>
+        <span className="text-[12px] text-zinc-400 text-right font-mono">{e.eps_estimate != null ? e.eps_estimate.toFixed(2) : "—"}</span>
+        <span className="text-[12px] font-bold text-zinc-200 text-right font-mono">{e.eps_act != null ? e.eps_act.toFixed(2) : "—"}</span>
+        <span className={`text-[12px] text-right font-mono ${calSurpCls(e.eps_surp_pct)}`}>{calFmtSurp(e.eps_surp_pct)}</span>
+        <span className="text-[12px] text-zinc-400 text-right font-mono">{calFmtRev(e.rev_est)}</span>
+        <span className="text-[12px] font-bold text-zinc-200 text-right font-mono">{calFmtRev(e.rev_act)}</span>
+        <span className={`text-[12px] text-right font-mono ${calSurpCls(e.rev_surp_pct)}`}>{calFmtSurp(e.rev_surp_pct)}</span>
+      </div>
+    );
+  };
 
   return (
-    <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-8 flex items-start gap-5">
-      {/* ── Left main area ────────────────────────────────────────────────── */}
-      <div className="flex-1 min-w-0">
+    <div className="max-w-[1400px] mx-auto px-4 pt-4 pb-8">
 
-        {/* ── Economic Calendar ────────────────────────────────────────────── */}
-        <div className="mb-5">
-          <div className="flex items-center gap-3 mb-3">
-            <span className="text-[13px] font-semibold text-zinc-200">Economic Calendar</span>
-            <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
-              {[{k:"today",l:"Today"},{k:"week",l:"This Week"},{k:"earnings",l:"Earnings"}].map(v => (
-                <button key={v.k} onClick={() => setCalView(v.k)}
-                  className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all ${calView === v.k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
-                  {v.l}
-                </button>
-              ))}
-            </div>
-            {calView !== "earnings" && (
-              <span className="text-[11px] text-zinc-600">{calEvents.length} events</span>
-            )}
-          </div>
-
-          {calView === "earnings" ? (
-            <div className="overflow-x-auto pb-2">
-              {upcomingEarnings.length === 0 ? (
-                <div className="text-[12px] text-zinc-600 italic py-4">No earnings data — run earnings_calendar.py</div>
-              ) : (
-                <div className="flex flex-wrap gap-2">
-                  {upcomingEarnings.map((e, i) => {
-                    const tod = e.time_of_day || e.timing;
-                    const todCls = tod === "BMO" ? "text-sky-400" : tod === "AMC" ? "text-violet-400" : "text-zinc-500";
-                    return (
-                      <div key={i} className="flex items-center gap-1.5 px-2.5 py-1.5 bg-zinc-900/60 border border-zinc-800/60 rounded-lg">
-                        <span className="text-[12px] font-mono font-semibold text-zinc-100">{e.ticker}</span>
-                        <span className="text-[10px] text-zinc-600">{e.date?.slice(5)}</span>
-                        {tod && <span className={`text-[9px] font-bold ${todCls}`}>{tod}</span>}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          ) : calView === "week" ? (
-            <div className="flex flex-col gap-3">
-              {Object.entries(weekByDate).map(([date, evts]) => (
-                <div key={date}>
-                  <div className="text-[10px] font-semibold text-zinc-600 uppercase tracking-wider mb-1.5">{date}</div>
-                  <div className="flex gap-2 flex-wrap">
-                    {evts.map((e, i) => <EconEventRow key={i} event={e}/>)}
-                  </div>
-                </div>
-              ))}
-              {Object.keys(weekByDate).length === 0 && (
-                <div className="text-[12px] text-zinc-600 italic py-4">No events — run econ_calendar.py</div>
-              )}
-            </div>
-          ) : (
-            <div className="overflow-x-auto pb-2">
-              {calEvents.length === 0 ? (
-                <div className="text-[12px] text-zinc-600 italic py-4">No events today — run econ_calendar.py</div>
-              ) : (
-                <div className="flex gap-2 pb-1" style={{ minWidth: "max-content" }}>
-                  {calEvents.map((e, i) => <EconEventRow key={i} event={e}/>)}
-                </div>
-              )}
-            </div>
-          )}
+      {/* ── Weekly strip ──────────────────────────────────────────────────── */}
+      <div className="mb-4 bg-zinc-900/60 border border-zinc-800/60 rounded-xl overflow-hidden">
+        {/* Title bar */}
+        <div className="flex items-center gap-2 px-3 py-2 border-b border-zinc-800/60">
+          <button onClick={goToToday}
+            className="px-2.5 py-1 text-[11px] font-semibold rounded-md bg-zinc-700/60 border border-zinc-600/40 text-zinc-300 hover:bg-zinc-600/60 transition-colors">
+            Today
+          </button>
+          <button onClick={() => setWeekOffset(w => w - 1)}
+            className="w-6 h-6 flex items-center justify-center rounded text-lg text-zinc-400 hover:bg-zinc-700/60 hover:text-zinc-200 transition-colors leading-none">
+            ‹
+          </button>
+          <button onClick={() => setWeekOffset(w => w + 1)}
+            className="w-6 h-6 flex items-center justify-center rounded text-lg text-zinc-400 hover:bg-zinc-700/60 hover:text-zinc-200 transition-colors leading-none">
+            ›
+          </button>
+          <span className="text-[13px] font-semibold text-zinc-200 ml-1">{calFmtWeekRange(weekDays)}</span>
         </div>
 
-        {/* ── Theme filter pills ─────────────────────────────────────────── */}
-        {newsThemes.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mb-3">
-            <button
-              onClick={() => setActiveThemes(new Set())}
-              className={`text-[11px] px-2 py-0.5 rounded-full border transition-colors ${activeThemes.size === 0 ? "bg-blue-500/20 text-blue-400 border-blue-500/30" : "text-zinc-500 border-zinc-700/40 hover:text-zinc-300"}`}>
-              All
-            </button>
-            {newsThemes.map(t => (
-              <button key={t} onClick={() => toggleTheme(t)}
-                className={`text-[11px] px-2 py-0.5 rounded-full border transition-colors ${activeThemes.has(t) ? "bg-blue-500/20 text-blue-400 border-blue-500/30" : "text-zinc-500 border-zinc-700/40 hover:text-zinc-300"}`}>
-                {t}
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* ── News feed ─────────────────────────────────────────────────── */}
-        <div className="mb-5">
-          <div className="text-[12px] font-semibold text-zinc-400 mb-2">
-            Headlines
-            <span className="text-zinc-600 font-normal ml-1.5">({filteredNews.length})</span>
-          </div>
-          {filteredNews.length === 0 ? (
-            <div className="text-[12px] text-zinc-600 italic py-6 text-center">No headlines available — run premarket-gapper.yml</div>
-          ) : (
-            <div className="flex flex-col divide-y divide-zinc-800/30">
-              {filteredNews.slice(0, 60).map((item, i) => {
-                const srcCfg = SOURCE_CFG[item.source?.toLowerCase()] || SOURCE_CFG.google;
-                return (
-                  <div key={i} className="flex items-start gap-2.5 py-2.5 hover:bg-zinc-800/20 transition-colors px-1 rounded">
-                    <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded border flex-shrink-0 mt-0.5 leading-none ${srcCfg.cls}`}>
-                      {srcCfg.label}
-                    </span>
-                    {item.url
-                      ? <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-[12px] text-zinc-300 leading-snug flex-1 hover:text-blue-400 transition-colors">{item.text}</a>
-                      : <p className="text-[12px] text-zinc-300 leading-snug flex-1">{item.text}</p>
-                    }
-                    <div className="flex flex-col items-end gap-1 flex-shrink-0">
-                      {item.ticker && (
-                        <span className="text-[10px] font-mono font-semibold text-blue-400">{item.ticker}</span>
-                      )}
-                      {item.theme && (
-                        <span className="text-[9px] text-zinc-600 bg-zinc-800/60 px-1.5 py-0.5 rounded border border-zinc-700/40 leading-none whitespace-nowrap">{item.theme}</span>
-                      )}
+        {/* 7-column day grid — responsive: all 7 on lg, Mon-Fri on md, 3 days on sm */}
+        <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7">
+          {weekDays.map((d, i) => {
+            const ds      = calToDateStr(d);
+            const isToday = ds === todayStr;
+            const isSel   = ds === selectedDay;
+            const econCnt = econCountByDay[ds] || 0;
+            const earnCnt = earnCountByDay[ds]  || 0;
+            const hasHigh = highImpactDays.has(ds);
+            const isWeekend = i >= 5;
+            // sm: show Mon/Thu only · md: Mon–Fri · lg: all 7
+            const hideSm = (i === 1 || i === 2 || i === 4 || i === 5 || i === 6) ? "hidden md:flex" : "flex";
+            return (
+              <button key={ds} onClick={() => setSelectedDay(ds)}
+                className={`flex-col gap-1 px-2 py-3 text-left transition-colors border-r border-zinc-800/40 last:border-r-0
+                  ${hideSm} ${isWeekend ? "lg:flex" : ""}
+                  ${isSel   ? "bg-zinc-700/60" : isWeekend ? "bg-zinc-900/20 hover:bg-zinc-800/30" : "hover:bg-zinc-800/40"}
+                  ${isToday ? "ring-1 ring-inset ring-blue-500/40" : ""}`}>
+                <div className="flex items-center gap-1.5">
+                  <span className={`text-[11px] font-semibold ${isToday ? "text-blue-400" : isSel ? "text-zinc-200" : "text-zinc-500"}`}>
+                    {CAL_DAY_NAMES[i]}
+                  </span>
+                  <span className={`text-[14px] font-bold ${isToday ? "text-blue-400" : isSel ? "text-zinc-100" : "text-zinc-400"}`}>
+                    {d.getDate()}
+                  </span>
+                  {hasHigh && <span className="w-1.5 h-1.5 rounded-full bg-red-500 flex-shrink-0 ml-0.5"/>}
+                </div>
+                <div className="flex flex-col gap-0.5 w-full">
+                  {econCnt > 0 && (
+                    <div className="flex items-center justify-between">
+                      <span className="text-[9px] text-zinc-600">Economic</span>
+                      <span className="text-[9px] font-mono text-zinc-400">{econCnt}</span>
                     </div>
+                  )}
+                  {earnCnt > 0 && (
+                    <div className="flex items-center justify-between">
+                      <span className="text-[9px] text-zinc-600">Earnings</span>
+                      <span className="text-[9px] font-mono text-zinc-400">{earnCnt}</span>
+                    </div>
+                  )}
+                  {econCnt === 0 && earnCnt === 0 && (
+                    <span className="text-[9px] text-zinc-700">—</span>
+                  )}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ── Sub-tabs ──────────────────────────────────────────────────────── */}
+      <div className="flex gap-2 mb-4">
+        {[{k:"economic",l:"Economic"},{k:"earnings",l:"Earnings"}].map(({k,l}) => (
+          <button key={k} onClick={() => setCalSubTab(k)}
+            className={`px-4 py-1.5 text-[12px] font-semibold rounded-full border transition-colors
+              ${calSubTab===k
+                ? "bg-blue-500/20 border-blue-500/40 text-blue-400"
+                : "border-zinc-700/40 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600"}`}>
+            {l}
+          </button>
+        ))}
+      </div>
+
+      {/* ── ECONOMIC SUB-TAB ──────────────────────────────────────────────── */}
+      {calSubTab === "economic" && (
+        <div>
+          <div className="text-[11px] font-semibold text-zinc-500 mb-3 uppercase tracking-wider">
+            {calFmtDateHeader(selectedDay)}
+            {dayEconEvents.length > 0 && <span className="text-zinc-700 font-normal normal-case ml-2">· {dayEconEvents.length} events</span>}
+          </div>
+
+          {dayEconEvents.length === 0 ? (
+            <div className="py-16 text-center rounded-xl border border-zinc-800/40">
+              <p className="text-[13px] text-zinc-600 italic">No economic events for this day</p>
+              {!econData && <p className="text-[11px] text-zinc-700 mt-1.5">Run <code className="bg-zinc-800 px-1 py-0.5 rounded text-zinc-400">econ_calendar.py</code> to generate data</p>}
+            </div>
+          ) : (
+            <div className="rounded-xl border border-zinc-800/60 overflow-hidden">
+              {/* Table header */}
+              <div className="grid items-center border-b border-zinc-800/60 bg-zinc-800/40 px-4 py-2"
+                   style={{ gridTemplateColumns: "72px 180px 20px 1fr 110px 100px 100px" }}>
+                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Time</span>
+                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Country</span>
+                <span/>
+                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider pl-2">Event</span>
+                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Actual</span>
+                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Forecast</span>
+                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Prior</span>
+              </div>
+
+              {timeKeys.map((time, gi) => {
+                const events  = econByTime[time];
+                const isPast  = time !== "—" && time < nowTimeStr && selectedDay <= todayStr;
+                const isNextSlot = gi === nextTimeIdx;
+                return (
+                  <div key={time} className={isNextSlot ? "bg-red-950/10" : ""}>
+                    {events.map((ev, j) => {
+                      const cc       = CURRENCY_COUNTRY[ev.currency] || { flag: "🌐", name: ev.currency || "" };
+                      const actual   = ev.actual   ?? null;
+                      const forecast = ev.forecast  ?? null;
+                      const prior    = ev.previous  ?? null;
+                      const actualColor =
+                        actual == null ? "" :
+                        forecast != null && parseFloat(actual) > parseFloat(forecast) ? "text-emerald-400" :
+                        forecast != null && parseFloat(actual) < parseFloat(forecast) ? "text-rose-400" :
+                        "text-zinc-200";
+                      return (
+                        <div key={j}
+                          className="grid items-center px-4 py-2.5 border-b border-zinc-800/30 last:border-b-0 hover:bg-zinc-800/20 transition-colors"
+                          style={{ gridTemplateColumns: "72px 180px 20px 1fr 110px 100px 100px" }}>
+
+                          {/* Time — only show on first row of time group */}
+                          {j === 0 ? (
+                            isNextSlot
+                              ? <span className="inline-flex w-fit items-center px-1.5 py-0.5 rounded bg-red-500 text-white text-[10px] font-bold leading-none">{time}</span>
+                              : <span className={`text-[12px] font-mono font-semibold ${isPast ? "text-zinc-600" : "text-amber-400"}`}>{time}</span>
+                          ) : <span/>}
+
+                          {/* Flag + country */}
+                          <div className="flex items-center gap-1.5 min-w-0">
+                            <span className="text-[15px] leading-none">{cc.flag}</span>
+                            <span className={`text-[11px] truncate ${isPast ? "text-zinc-600" : "text-zinc-400"}`}>{cc.name}</span>
+                          </div>
+
+                          {/* Impact bars */}
+                          <div className="flex justify-center">
+                            <ImpactBars impact={ev.impact}/>
+                          </div>
+
+                          {/* Event name */}
+                          <div className={`text-[12px] font-medium truncate pl-2 ${isPast ? "text-zinc-500" : "text-zinc-200"}`}>
+                            {ev.event}
+                          </div>
+
+                          {/* Actual */}
+                          <div className="text-right">
+                            {actual == null
+                              ? <span className="text-[10px] text-amber-500/70 font-medium">Coming soon</span>
+                              : <span className={`text-[12px] font-mono font-semibold ${actualColor}`}>{actual}</span>}
+                          </div>
+
+                          {/* Forecast */}
+                          <div className="text-[12px] font-mono text-zinc-500 text-right">{forecast ?? "—"}</div>
+
+                          {/* Prior */}
+                          <div className="text-[12px] font-mono text-zinc-600 text-right">{prior ?? "—"}</div>
+                        </div>
+                      );
+                    })}
                   </div>
                 );
               })}
             </div>
           )}
         </div>
+      )}
 
-        {/* ── Gemini News Synthesis ─────────────────────────────────────── */}
-        <div className="border border-emerald-800/40 bg-emerald-900/10 rounded-xl p-4">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">✦ GEMINI NEWS SYNTHESIS</span>
-            {synthLoading && <RefreshCw size={10} className="text-emerald-600 animate-spin"/>}
-            {!NEWS_GEMINI_KEY && <span className="text-[10px] text-zinc-600">Set REACT_APP_GEMINI_KEY to enable</span>}
+      {/* ── EARNINGS SUB-TAB ──────────────────────────────────────────────── */}
+      {calSubTab === "earnings" && (
+        <div>
+          <div className="text-[11px] font-semibold text-zinc-500 mb-3 uppercase tracking-wider">
+            {calFmtDateHeader(selectedDay)}
+            {dayEarnings.length > 0 && <span className="text-zinc-700 font-normal normal-case ml-2">· {dayEarnings.length} companies</span>}
           </div>
-          {synthText
-            ? <p className="text-[13px] text-zinc-200 leading-relaxed">{synthText}</p>
-            : !synthLoading && <p className="text-[12px] text-zinc-600 italic">{NEWS_GEMINI_KEY ? "Awaiting headlines…" : "API key not configured"}</p>
-          }
-        </div>
-      </div>
 
-      {/* ── Right sidebar ─────────────────────────────────────────────────── */}
-      <div className="w-52 flex-shrink-0 flex flex-col gap-4">
-
-        {/* Upcoming Earnings */}
-        <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Upcoming Earnings · 7d</div>
-          {upcomingEarnings.length === 0 ? (
-            <div className="text-[11px] text-zinc-600 italic">No data</div>
+          {dayEarnings.length === 0 ? (
+            <div className="py-16 text-center rounded-xl border border-zinc-800/40">
+              <p className="text-[13px] text-zinc-600 italic">No earnings for this day</p>
+              {!earningsData && <p className="text-[11px] text-zinc-700 mt-1.5">Run <code className="bg-zinc-800 px-1 py-0.5 rounded text-zinc-400">earnings_calendar.py</code> to generate data</p>}
+            </div>
           ) : (
-            <div className="flex flex-col gap-1.5 max-h-64 overflow-y-auto">
-              {upcomingEarnings.map((e, i) => {
-                const tod = e.time_of_day || e.timing;
-                const todCls = tod === "BMO" ? "text-sky-400" : tod === "AMC" ? "text-violet-400" : "text-zinc-500";
-                return (
-                  <div key={i} className="flex items-center justify-between">
-                    <span className="text-[12px] font-mono font-semibold text-zinc-200">{e.ticker}</span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-[10px] text-zinc-600 font-mono">{e.date?.slice(5)}</span>
-                      {tod && <span className={`text-[9px] font-bold ${todCls}`}>{tod}</span>}
-                    </div>
-                  </div>
-                );
-              })}
+            <div className="rounded-xl border border-zinc-800/60 overflow-x-auto">
+              {/* Table header */}
+              <div className="grid items-center border-b border-zinc-800/60 bg-zinc-800/40 px-3 py-2 min-w-[900px]"
+                   style={{ gridTemplateColumns: "90px 1fr 70px 90px 80px 80px 90px 90px 90px 90px" }}>
+                {["Ticker","Company","Time","Mkt Cap","EPS Est","EPS Act","EPS Surp","Rev Est","Rev Act","Rev Surp"].map((col, ci) => (
+                  <span key={ci} className={`text-[10px] font-semibold text-zinc-500 uppercase tracking-wider ${ci >= 4 ? "text-right" : ""}`}>{col}</span>
+                ))}
+              </div>
+
+              {/* BMO rows */}
+              {dayEarnings.filter(e => e.time_of_day === "BMO").map((e, i) => <EarningsRow key={`bmo-${i}`} e={e}/>)}
+
+              {/* AMC divider */}
+              {dayEarnings.some(e => e.time_of_day === "BMO") && dayEarnings.some(e => e.time_of_day === "AMC") && (
+                <div className="px-3 py-1.5 bg-zinc-800/30 border-y border-zinc-800/60">
+                  <span className="text-[9px] text-zinc-600 uppercase tracking-widest font-semibold">After Market Close</span>
+                </div>
+              )}
+
+              {/* AMC rows */}
+              {dayEarnings.filter(e => e.time_of_day === "AMC").map((e, i) => <EarningsRow key={`amc-${i}`} e={e}/>)}
+
+              {/* Unknown timing rows */}
+              {dayEarnings.filter(e => !e.time_of_day || (e.time_of_day !== "BMO" && e.time_of_day !== "AMC"))
+                .map((e, i) => <EarningsRow key={`unk-${i}`} e={e}/>)}
             </div>
           )}
         </div>
-
-        {/* Theme News Filters */}
-        {newsThemes.length > 0 && (
-          <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Theme News Filters</div>
-            <div className="flex flex-col gap-1">
-              <button
-                onClick={() => setActiveThemes(new Set())}
-                className={`text-left text-[11px] px-2 py-1 rounded transition-colors ${activeThemes.size === 0 ? "bg-blue-500/20 text-blue-400" : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/40"}`}>
-                All themes
-              </button>
-              {newsThemes.map(t => (
-                <button key={t} onClick={() => toggleTheme(t)}
-                  className={`text-left text-[11px] px-2 py-1 rounded transition-colors truncate ${activeThemes.has(t) ? "bg-blue-500/20 text-blue-400" : "text-zinc-500 hover:text-zinc-300 hover:bg-zinc-800/40"}`}>
-                  {t}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Source Priority */}
-        <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Source Priority</div>
-          <div className="flex flex-col gap-1.5">
-            {[
-              { src: "ibkr",        pri: "1st" },
-              { src: "benzinga",    pri: "2nd" },
-              { src: "finviz",      pri: "3rd" },
-              { src: "tradingview", pri: "4th" },
-            ].map(({ src, pri }) => {
-              const cfg = SOURCE_CFG[src];
-              return (
-                <div key={src} className="flex items-center justify-between">
-                  <span className="text-[10px] text-zinc-600">{pri}</span>
-                  <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border leading-none font-mono ${cfg.cls}`}>{cfg.label}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-      </div>
+      )}
     </div>
   );
 };
@@ -6668,7 +6733,7 @@ const filtered = useMemo(() => {
                 Market Breadth
               </button>
               <button onClick={() => setTab("news")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "news" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                News &amp; Econ
+                Calendar
               </button>
             </div>
             <div className="flex items-center gap-2">
@@ -6742,7 +6807,7 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <NewsEconTab data={data} econData={econData} earningsData={earningsData} newsData={newsData}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
+      {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
