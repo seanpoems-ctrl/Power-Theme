@@ -151,10 +151,10 @@ const TradingViewFinancials = memo(function TradingViewFinancials({ ticker }) {
     script.textContent = JSON.stringify({
       symbol: ticker,
       width: "100%",
-      height: "100%",
+      height: 830,
       locale: "en",
       colorTheme: "dark",
-      isTransparent: true,
+      isTransparent: false,
       displayMode: "regular",
     });
     containerRef.current.appendChild(script);
@@ -275,8 +275,8 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
                   </div>
                 ))}
               </div>
-              {/* TradingView Financials widget fills the rest */}
-              <div className="flex-1 min-h-0">
+              {/* TradingView Financials widget — fixed height, scrollable */}
+              <div className="flex-1 overflow-y-auto">
                 <TradingViewFinancials ticker={ticker} />
               </div>
             </div>
