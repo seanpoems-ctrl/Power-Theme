@@ -81,6 +81,31 @@ const CHANGE_COL_LABEL = {
   dn13_34: "1.5M Change%",
 };
 
+// Which field to read for the last (perf) column, keyed by scanner filter id.
+// For 34D scanners: perf_34d is not yet in the schema; perf_1m is used as the
+// closest approximation until breadth_stocks_builder.py provides perf_34d.
+const PERF_FIELD = {
+  up4:     "change_pct",
+  dn4:     "change_pct",
+  up25q:   "perf_3m",
+  dn25q:   "perf_3m",
+  up25m:   "perf_1m",
+  dn25m:   "perf_1m",
+  up50m:   "perf_1m",
+  dn50m:   "perf_1m",
+  up13_34: "perf_34d", // TODO: replace with dedicated field once schema has it
+  dn13_34: "perf_34d",
+};
+
+// Read a stock's perf value for the given field, with fallback for perf_34d.
+function getPerfValue(s, field) {
+  if (field === "perf_34d") {
+    // perf_34d not yet available — fall back to perf_1m as approximation
+    return s.perf_34d ?? s.perf_1m ?? null;
+  }
+  return s[field] ?? null;
+}
+
 // Parse dollar_volume which may arrive as a formatted string ("$1.2B") or number
 function parseDollarVolume(v) {
   if (v == null) return null;
@@ -96,13 +121,13 @@ function parseDollarVolume(v) {
 // List view — matches screenshot exactly: #, Ticker, Company, $Vol, ADR%, Change%
 // ---------------------------------------------------------------------------
 
-// Column definitions for sortable columns 2–6 (0-indexed from col 1 = '#')
-const SORT_COLS = [
+// Static column definitions for the first four sortable columns.
+// The fifth (perf) column is built dynamically inside ListView using the filter prop.
+const BASE_SORT_COLS = [
   { key: "ticker",        label: "Ticker",  align: "left",  numeric: false },
   { key: "company",       label: "Company", align: "left",  numeric: false },
   { key: "dollar_volume", label: "$ Vol",   align: "right", numeric: true  },
   { key: "adr_pct",       label: "ADR%",    align: "right", numeric: true  },
-  { key: "change_pct",    label: null,      align: "right", numeric: true  }, // label overridden by changeColLabel
 ];
 
 const ListView = memo(function ListView({ stocks, filter }) {
@@ -110,33 +135,46 @@ const ListView = memo(function ListView({ stocks, filter }) {
   const [sortDir, setSortDir] = useState("asc");
 
   const changeColLabel = CHANGE_COL_LABEL[filter] ?? "Change%";
+  const perfField = PERF_FIELD[filter] ?? "change_pct";
 
+  // Build full column list with dynamic perf column appended
+  const sortCols = [
+    ...BASE_SORT_COLS,
+    { key: perfField, label: null, align: "right", numeric: true },
+  ];
+
+  // Fixed handleSort — reads sortKey/sortDir directly from closure, no functional updater side-effects
   const handleSort = (key) => {
-    setSortKey((prev) => {
-      if (prev === key) {
-        setSortDir((d) => (d === "asc" ? "desc" : "asc"));
-        return key;
-      }
+    if (sortKey === key) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortKey(key);
       setSortDir("asc");
-      return key;
-    });
+    }
   };
 
   const sortedStocks = useMemo(() => {
     if (!sortKey) return stocks;
     return [...stocks].sort((a, b) => {
-      let av = sortKey === "dollar_volume" ? parseDollarVolume(a.dollar_volume) : a[sortKey];
-      let bv = sortKey === "dollar_volume" ? parseDollarVolume(b.dollar_volume) : b[sortKey];
+      let av, bv;
+      if (sortKey === "dollar_volume") {
+        av = parseDollarVolume(a.dollar_volume);
+        bv = parseDollarVolume(b.dollar_volume);
+      } else if (sortKey === perfField) {
+        av = getPerfValue(a, perfField);
+        bv = getPerfValue(b, perfField);
+      } else {
+        av = a[sortKey];
+        bv = b[sortKey];
+      }
       // Nulls always last
       if (av == null && bv == null) return 0;
       if (av == null) return 1;
       if (bv == null) return -1;
-      const cmp = typeof av === "string"
-        ? av.localeCompare(bv)
-        : av - bv;
+      const cmp = typeof av === "string" ? av.localeCompare(bv) : av - bv;
       return sortDir === "asc" ? cmp : -cmp;
     });
-  }, [stocks, sortKey, sortDir]);
+  }, [stocks, sortKey, sortDir, perfField]);
 
   if (!stocks.length) {
     return <p className="py-12 text-center text-sm text-zinc-500">No stocks match the current filters.</p>;
@@ -153,8 +191,8 @@ const ListView = memo(function ListView({ stocks, filter }) {
         <thead>
           <tr className="border-b border-zinc-800 text-zinc-500">
             <th className="w-8 py-2 pr-2 text-right font-medium">#</th>
-            {SORT_COLS.map((col) => {
-              const label = col.key === "change_pct" ? changeColLabel : col.label;
+            {sortCols.map((col) => {
+              const label = col.key === perfField && col.label === null ? changeColLabel : col.label;
               return (
                 <th
                   key={col.key}
@@ -194,8 +232,8 @@ const ListView = memo(function ListView({ stocks, filter }) {
               <td className="px-2 py-1.5 text-right font-mono text-zinc-300">
                 {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
               </td>
-              <td className={`px-2 py-1.5 text-right font-mono font-semibold ${changeCls(s.change_pct)}`}>
-                {fmtPct(s.change_pct)}
+              <td className={`px-2 py-1.5 text-right font-mono font-semibold ${changeCls(getPerfValue(s, perfField))}`}>
+                {fmtPct(getPerfValue(s, perfField))}
               </td>
             </tr>
           ))}
