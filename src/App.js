@@ -3667,12 +3667,170 @@ const ImpactBars = ({ impact }) => {
   );
 };
 
+const EARNINGS_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
+
+async function fetchEarningsAnalysis(ticker, company, eps_estimate, eps_act, eps_surp_pct, rev_est, rev_act, rev_surp_pct, mkt_cap) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-04-17:generateContent?key=${EARNINGS_GEMINI_KEY}`;
+  const fmtV = v => v != null ? v : "N/A";
+  const prompt = `You are a senior equity research analyst. Perform a comprehensive post-earnings analysis for ${company} (${ticker}).
+
+REPORTED FINANCIALS:
+- EPS Estimate: ${fmtV(eps_estimate)} | EPS Actual: ${fmtV(eps_act)} | EPS Surprise: ${fmtV(eps_surp_pct)}%
+- Revenue Estimate: ${fmtV(rev_est)} | Revenue Actual: ${fmtV(rev_act)} | Revenue Surprise: ${fmtV(rev_surp_pct)}%
+- Market Cap: ${mkt_cap ? `$${(mkt_cap/1e9).toFixed(1)}B` : "N/A"}
+
+Using your knowledge of this company's most recent earnings report and call, provide a structured analysis covering:
+
+1. **EARNINGS SUMMARY** — Did they beat/miss on EPS and revenue? What drove the result?
+
+2. **KEY CATALYSTS** — What are the main growth drivers management highlighted? Any new products, contracts, partnerships, or market tailwinds?
+
+3. **MANAGEMENT COMMENTARY** — Summarise the prepared remarks and key guidance points. What tone did management strike — confident, cautious, defensive?
+
+4. **Q&A HIGHLIGHTS** — What did analysts probe on? What were the sharpest questions and how did management respond?
+
+5. **RISK FACTORS & SOFT SPOTS** — List recurring concerns, headwinds, margin pressure, competitive threats, regulatory risks, or anything management side-stepped or apologised for.
+
+6. **PEER & MARKET REACTION** — How did peers/competitors react? Any read-throughs to the sector?
+
+7. **VERDICT** — One paragraph: Is this a buy-the-dip, sell-the-rip, or hold-and-monitor situation? What price action would confirm or invalidate the thesis?
+
+Be specific, cite actual numbers where possible, and be candid about weaknesses.`;
+
+  const body = {
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: { temperature: 0.3, maxOutputTokens: 1200 },
+  };
+  const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  if (!res.ok) throw new Error(`Gemini ${res.status}`);
+  const json = await res.json();
+  return json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
+}
+
+// Simple markdown bold renderer (for **text** patterns)
+function renderMarkdown(text) {
+  return text.split(/(\*\*[^*]+\*\*)/).map((seg, i) => {
+    if (seg.startsWith("**") && seg.endsWith("**")) {
+      return <strong key={i} className="text-zinc-100 font-semibold">{seg.slice(2, -2)}</strong>;
+    }
+    return <span key={i}>{seg}</span>;
+  });
+}
+
+const EarningsAnalysisDrawer = ({ stock, onClose }) => {
+  const [analysis, setAnalysis] = useState(null);
+  const [loading,  setLoading]  = useState(true);
+  const [error,    setError]    = useState(null);
+
+  useEffect(() => {
+    if (!EARNINGS_GEMINI_KEY) {
+      setError("Set REACT_APP_GEMINI_KEY to enable AI analysis.");
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    setError(null);
+    fetchEarningsAnalysis(
+      stock.ticker, stock.company,
+      stock.eps_estimate, stock.eps_act, stock.eps_surp_pct,
+      stock.rev_est, stock.rev_act, stock.rev_surp_pct,
+      stock.mkt_cap,
+    )
+      .then(text => { setAnalysis(text); setLoading(false); })
+      .catch(e  => { setError(`Failed: ${e.message}`); setLoading(false); });
+  }, [stock.ticker]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Escape key closes drawer
+  useEffect(() => {
+    const h = e => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/70 backdrop-blur-sm"
+         onClick={e => { if (e.target === e.currentTarget) onClose(); }}>
+      <div className="relative flex flex-col w-full max-w-2xl max-h-[85vh] rounded-xl border border-zinc-600 bg-zinc-950 shadow-2xl">
+
+        {/* Header */}
+        <div className="flex items-center gap-3 border-b border-zinc-800 px-4 py-3 flex-shrink-0">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-[15px] font-bold text-white">{stock.ticker}</span>
+              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 leading-none">✦ AI ANALYSIS</span>
+            </div>
+            <span className="text-[11px] text-zinc-500 truncate block">{stock.company}</span>
+          </div>
+          {/* Quick stats */}
+          <div className="flex items-center gap-3 text-[11px] font-mono flex-shrink-0">
+            {stock.eps_act != null && (
+              <span>EPS <span className={stock.eps_surp_pct > 0 ? "text-emerald-400" : "text-rose-400"}>{stock.eps_act.toFixed(2)}</span></span>
+            )}
+            {stock.eps_surp_pct != null && (
+              <span className={`font-bold ${stock.eps_surp_pct > 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                {stock.eps_surp_pct > 0 ? "+" : ""}{stock.eps_surp_pct.toFixed(2)}%
+              </span>
+            )}
+          </div>
+          <button onClick={onClose} className="rounded p-1 text-zinc-500 hover:bg-zinc-700 hover:text-zinc-200" aria-label="Close">
+            <X size={16}/>
+          </button>
+        </div>
+
+        {/* Body */}
+        <div className="flex-1 overflow-y-auto p-4">
+          {loading ? (
+            <div className="flex flex-col items-center justify-center py-16 gap-3">
+              <RefreshCw size={20} className="text-emerald-500 animate-spin"/>
+              <p className="text-[12px] text-zinc-500">Gemini is analysing {stock.ticker} earnings…</p>
+            </div>
+          ) : error ? (
+            <div className="py-10 text-center">
+              <p className="text-[13px] text-rose-400">{error}</p>
+            </div>
+          ) : analysis ? (
+            <div className="space-y-1">
+              {analysis.split("\n").map((line, i) => {
+                if (!line.trim()) return <div key={i} className="h-2"/>;
+                // Section headers (lines starting with number + dot or pure bold)
+                if (/^\d+\.\s+\*\*/.test(line) || /^\*\*[A-Z]/.test(line)) {
+                  return (
+                    <div key={i} className="mt-4 mb-1.5 text-[12px] font-bold text-zinc-200 uppercase tracking-wide">
+                      {renderMarkdown(line.replace(/^\d+\.\s*/, ""))}
+                    </div>
+                  );
+                }
+                return (
+                  <p key={i} className="text-[12px] text-zinc-400 leading-relaxed">
+                    {renderMarkdown(line)}
+                  </p>
+                );
+              })}
+            </div>
+          ) : null}
+        </div>
+
+        {/* Footer */}
+        <div className="border-t border-zinc-800/60 px-4 py-2 flex-shrink-0 flex items-center justify-between">
+          <span className="text-[10px] text-zinc-700">Powered by Gemini 2.5 Flash · Based on latest available earnings data</span>
+          <a href={`https://www.tradingview.com/chart/?symbol=${stock.ticker}`}
+             target="_blank" rel="noopener noreferrer"
+             className="text-[10px] text-zinc-500 hover:text-cyan-400 transition-colors flex items-center gap-1">
+            Open chart <ExternalLink size={9}/>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const CalendarTab = ({ econData, earningsData }) => {
   const _todayD = new Date();
   const todayStr = `${_todayD.getFullYear()}-${String(_todayD.getMonth()+1).padStart(2,"0")}-${String(_todayD.getDate()).padStart(2,"0")}`;
   const [calSubTab, setCalSubTab] = useState("economic");  // "economic" | "earnings"
   const [selectedDay, setSelectedDay] = useState(todayStr);
   const [weekOffset, setWeekOffset]   = useState(0);
+  const [analysisStock, setAnalysisStock] = useState(null); // stock object for AI drawer
 
   const weekDays = useMemo(() => calGetWeekDays(weekOffset), [weekOffset]);
 
@@ -3754,14 +3912,40 @@ const CalendarTab = ({ econData, earningsData }) => {
   // ── Earnings row sub-component ────────────────────────────────────────────
   const EarningsRow = ({ e }) => {
     const tod    = e.time_of_day || "";
-    const todCls = tod === "BMO" ? "text-amber-400" : tod === "AMC" ? "text-violet-400" : "text-zinc-500";
+    // TIME label: amber pill for BMO, violet for AMC, gray dash if unknown
+    const todLabel = tod === "BMO" ? "BMO" : tod === "AMC" ? "AMC" : "—";
+    const todCls   = tod === "BMO"
+      ? "text-amber-400 bg-amber-500/10 border-amber-500/30"
+      : tod === "AMC"
+        ? "text-violet-400 bg-violet-500/10 border-violet-500/30"
+        : "text-zinc-600";
     return (
       <div className="grid gap-0 items-center px-3 py-2.5 border-b border-zinc-800/30 last:border-b-0 hover:bg-zinc-800/20 transition-colors min-w-[900px]"
-           style={{ gridTemplateColumns: "90px 1fr 70px 90px 80px 80px 90px 90px 90px 90px" }}>
+           style={{ gridTemplateColumns: "90px 1fr 90px 90px 80px 80px 90px 90px 90px 90px" }}>
+
+        {/* Ticker */}
         <a href={`https://www.tradingview.com/chart/?symbol=${e.ticker}`} target="_blank" rel="noopener noreferrer"
            className="text-[13px] font-mono font-bold text-sky-400 hover:text-sky-300 transition-colors">{e.ticker}</a>
-        <span className="text-[12px] text-zinc-300 truncate pr-2">{e.company || "—"}</span>
-        <span className={`text-[11px] font-bold ${todCls}`}>{tod || "—"}</span>
+
+        {/* Company + AI icon */}
+        <div className="flex items-center gap-1.5 min-w-0 pr-2">
+          <span className="text-[12px] text-zinc-300 truncate">{e.company || "—"}</span>
+          <button
+            onClick={() => setAnalysisStock(e)}
+            title="Gemini AI earnings analysis"
+            className="flex-shrink-0 w-4 h-4 flex items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 hover:bg-emerald-500/25 hover:border-emerald-500/50 transition-colors leading-none text-[9px] font-bold"
+            aria-label="AI analysis">
+            ✦
+          </button>
+        </div>
+
+        {/* Time — pill badge */}
+        <div className="flex justify-start">
+          {tod
+            ? <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border leading-none ${todCls}`}>{todLabel}</span>
+            : <span className="text-[12px] text-zinc-600">—</span>}
+        </div>
+
         <span className="text-[12px] text-zinc-400 text-right font-mono">{calFmtMktCap(e.mkt_cap)}</span>
         <span className="text-[12px] text-zinc-400 text-right font-mono">{e.eps_estimate != null ? e.eps_estimate.toFixed(2) : "—"}</span>
         <span className="text-[12px] font-bold text-zinc-200 text-right font-mono">{e.eps_act != null ? e.eps_act.toFixed(2) : "—"}</span>
@@ -3969,9 +4153,9 @@ const CalendarTab = ({ econData, earningsData }) => {
             <div className="rounded-xl border border-zinc-800/60 overflow-x-auto">
               {/* Table header */}
               <div className="grid items-center border-b border-zinc-800/60 bg-zinc-800/40 px-3 py-2 min-w-[900px]"
-                   style={{ gridTemplateColumns: "90px 1fr 70px 90px 80px 80px 90px 90px 90px 90px" }}>
+                   style={{ gridTemplateColumns: "90px 1fr 90px 90px 80px 80px 90px 90px 90px 90px" }}>
                 {["Ticker","Company","Time","Mkt Cap","EPS Est","EPS Act","EPS Surp","Rev Est","Rev Act","Rev Surp"].map((col, ci) => (
-                  <span key={ci} className={`text-[10px] font-semibold text-zinc-500 uppercase tracking-wider ${ci >= 4 ? "text-right" : ""}`}>{col}</span>
+                  <span key={ci} className={`text-[10px] font-semibold text-zinc-500 uppercase tracking-wider ${ci >= 3 ? "text-right" : ""} ${ci === 2 ? "!text-left" : ""}`}>{col}</span>
                 ))}
               </div>
 
@@ -3994,6 +4178,14 @@ const CalendarTab = ({ econData, earningsData }) => {
             </div>
           )}
         </div>
+      )}
+
+      {/* ── AI Earnings Analysis Drawer ────────────────────────────────── */}
+      {analysisStock && (
+        <EarningsAnalysisDrawer
+          stock={analysisStock}
+          onClose={() => setAnalysisStock(null)}
+        />
       )}
     </div>
   );
