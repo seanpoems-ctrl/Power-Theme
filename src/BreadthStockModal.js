@@ -65,6 +65,143 @@ const CopyButton = memo(function CopyButton({ tickers, label }) {
 });
 
 // ---------------------------------------------------------------------------
+// News catalyst detection (mirrors App.js CATALYST_CATEGORIES / detectCatalyst)
+// ---------------------------------------------------------------------------
+
+const NEWS_CATALYST_CATEGORIES = [
+  {
+    key: "earnings",
+    label: "Earnings",
+    color: "text-yellow-400 bg-yellow-500/10 border-yellow-500/30",
+    keywords: [
+      "beats estimates","misses estimates","beat expectations","missed expectations",
+      "beats earnings","earnings beat","earnings miss","quarterly results","quarterly earnings",
+      "eps beat","eps miss","revenue beat","revenue miss","profit warning","revenue warning",
+      "guides higher","guides lower","after earnings","fiscal q1","fiscal q2","fiscal q3","fiscal q4",
+      "reports q1","reports q2","reports q3","reports q4","preliminary results","restates earnings",
+    ],
+  },
+  {
+    key: "analyst",
+    label: "Upgrade",
+    color: "text-amber-400 bg-amber-500/10 border-amber-500/30",
+    keywords: [
+      "upgrades to buy","upgrades to overweight","upgrades to outperform",
+      "downgrades to sell","downgrades to underweight","downgrades to underperform",
+      "downgrades to neutral","initiates with buy","initiates with overweight",
+      "raises price target","lowers price target","price target raised","price target lowered",
+      "outperform","overweight rating",
+    ],
+  },
+  {
+    key: "fda",
+    label: "FDA",
+    color: "text-violet-400 bg-violet-500/10 border-violet-500/30",
+    keywords: [
+      "fda approved","fda approval","fda rejected","fda rejection","fda grants","fda accepts",
+      "complete response letter","nda approved","bla approved","pdufa date",
+      "fast track designation","breakthrough therapy","accelerated approval","priority review",
+    ],
+  },
+  {
+    key: "clinical",
+    label: "Clinical Trial",
+    color: "text-blue-400 bg-blue-500/10 border-blue-500/30",
+    keywords: [
+      "phase 3 trial","phase iii trial","phase 2 trial","phase ii trial",
+      "phase 3 results","phase 3 data","met primary endpoint","failed to meet",
+      "interim analysis","trial discontinued","trial halted","overall survival",
+    ],
+  },
+  {
+    key: "contract",
+    label: "New Contract",
+    color: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30",
+    keywords: [
+      "awarded contract","wins contract","government contract","defense contract",
+      "multi-year contract","exclusive supply","selected as supplier","contract worth $","awarded $",
+    ],
+  },
+  {
+    key: "partnership",
+    label: "Partnership",
+    color: "text-emerald-400 bg-emerald-500/10 border-emerald-500/30",
+    keywords: [
+      "partnership","collaboration agreement","strategic collaboration",
+      "license agreement","licensing deal","co-development","joint development",
+      "milestone payment","royalty agreement","exclusive license",
+    ],
+  },
+  {
+    key: "institutional",
+    label: "Institutional",
+    color: "text-sky-400 bg-sky-500/10 border-sky-500/30",
+    keywords: [
+      "institutional buying","major shareholder","13f filing","13g filing","13d filing",
+      "stake increased","stake acquired","purchased shares","accumulated shares",
+      "warrant exercised","convertible note","equity offering","secondary offering",
+    ],
+  },
+  {
+    key: "insider",
+    label: "Insider Buying",
+    color: "text-pink-400 bg-pink-500/10 border-pink-500/30",
+    keywords: [
+      "insider buying","ceo buys","cfo buys","director buys","insider purchase",
+      "executive purchases","form 4","insider acquired","open market purchase",
+    ],
+  },
+  {
+    key: "policy",
+    label: "Gov Policy",
+    color: "text-orange-400 bg-orange-500/10 border-orange-500/30",
+    keywords: [
+      "tariff","executive order","federal reserve","interest rate","inflation data",
+      "treasury","senate bill","house bill","legislation","regulatory approval",
+      "sec investigation","doj","antitrust","department of defense","pentagon",
+      "government policy","stimulus","infrastructure","subsidy","ira funding",
+    ],
+  },
+  {
+    key: "thematic",
+    label: "Thematic",
+    color: "text-indigo-400 bg-indigo-500/10 border-indigo-500/30",
+    keywords: [
+      "artificial intelligence","ai boom","ai demand","ai adoption","ai infrastructure",
+      "semiconductor","chip demand","data center","cloud computing","ev demand",
+      "electric vehicle","battery technology","renewable energy","solar","nuclear",
+      "quantum computing","robotics","automation","cybersecurity","biotech surge",
+    ],
+  },
+  {
+    key: "ma",
+    label: "M&A",
+    color: "text-rose-400 bg-rose-500/10 border-rose-500/30",
+    keywords: [
+      "agrees to acquire","to be acquired","acquisition agreement","merger agreement",
+      "takeover bid","buyout offer","tender offer","strategic review","exploring sale",
+    ],
+  },
+  {
+    key: "buyback",
+    label: "Buyback",
+    color: "text-teal-400 bg-teal-500/10 border-teal-500/30",
+    keywords: [
+      "share repurchase","buyback program","stock repurchase",
+      "dividend increase","raises dividend","special dividend","initiates dividend",
+    ],
+  },
+];
+
+function detectNewsCatalyst(title) {
+  const text = (title || "").toLowerCase();
+  for (const cat of NEWS_CATALYST_CATEGORIES) {
+    if (cat.keywords.some(kw => text.includes(kw))) return cat;
+  }
+  return { key: "others", label: "Others", color: "text-zinc-400 bg-zinc-700/40 border-zinc-600/40" };
+}
+
+// ---------------------------------------------------------------------------
 // Per-filter column label for the Change% column
 // ---------------------------------------------------------------------------
 
@@ -191,13 +328,14 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
         const doc   = new DOMParser().parseFromString(xml, "text/xml");
         const items = Array.from(doc.querySelectorAll("item")).slice(0, 20).map((el) => {
           const rawLink = el.querySelector("link")?.textContent ?? "";
-          // Google News RSS wraps the real URL — extract from source element if present
           const source  = el.querySelector("source")?.textContent ?? "";
+          const title   = el.querySelector("title")?.textContent ?? "";
           return {
-            title: el.querySelector("title")?.textContent ?? "",
-            link:  rawLink,
-            date:  el.querySelector("pubDate")?.textContent ?? "",
+            title,
+            link:     rawLink,
+            date:     el.querySelector("pubDate")?.textContent ?? "",
             source,
+            catalyst: detectNewsCatalyst(title),
           };
         });
         setNews(items);
@@ -308,16 +446,25 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
                 <div className="space-y-1.5">
                   {news.map((item, i) => (
                     <a key={i} href={item.link} target="_blank" rel="noopener noreferrer"
-                       className="block rounded-lg bg-zinc-800/50 px-3 py-2 hover:bg-zinc-700/60 transition-colors">
-                      <div className="text-xs leading-snug text-zinc-200">{item.title}</div>
-                      <div className="mt-0.5 flex items-center gap-2">
-                        {item.source && <span className="text-[10px] text-cyan-600">{item.source}</span>}
-                        {item.date && (
-                          <span className="text-[10px] text-zinc-500">
-                            {new Date(item.date).toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
-                          </span>
-                        )}
+                       className="flex items-start gap-2 rounded-lg bg-zinc-800/50 px-3 py-2 hover:bg-zinc-700/60 transition-colors">
+                      {/* Left: headline + meta */}
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs leading-snug text-zinc-200">{item.title}</div>
+                        <div className="mt-0.5 flex items-center gap-2">
+                          {item.source && <span className="text-[10px] text-cyan-600">{item.source}</span>}
+                          {item.date && (
+                            <span className="text-[10px] text-zinc-500">
+                              {new Date(item.date).toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
+                            </span>
+                          )}
+                        </div>
                       </div>
+                      {/* Right: catalyst tag */}
+                      {item.catalyst && (
+                        <span className={`shrink-0 self-center rounded border px-1.5 py-0.5 text-[10px] font-semibold leading-none ${item.catalyst.color}`}>
+                          {item.catalyst.label}
+                        </span>
+                      )}
                     </a>
                   ))}
                 </div>
