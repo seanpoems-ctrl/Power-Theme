@@ -72,6 +72,20 @@ MAX_PAGES = 25
 MIN_CAP_B = 1.0
 YFINANCE_BATCH = 200
 
+# Which field to use when re-sorting after yfinance enrichment (mirrors PERF_FIELD in BreadthStockModal.js)
+SORT_FIELD_MAP: dict[str, str] = {
+    "up4":     "change_pct",
+    "dn4":     "change_pct",
+    "up25q":   "perf_3m",
+    "dn25q":   "perf_3m",
+    "up25m":   "perf_1m",
+    "dn25m":   "perf_1m",
+    "up50m":   "perf_1m",
+    "dn50m":   "perf_1m",
+    "up13_34": "perf_34d",
+    "dn13_34": "perf_34d",
+}
+
 BROWSER_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -167,18 +181,28 @@ def _parse_rows(html: str) -> list[dict]:
 
 
 # ---------------------------------------------------------------------------
-# yfinance ADR% (batch, yfinance ≥1.0 compatible)
+# yfinance metrics: ADR%, perf_1m, perf_3m, perf_34d (one batch download)
 # ---------------------------------------------------------------------------
 
-def _compute_adr(tickers: list[str]) -> dict[str, float | None]:
-    result: dict[str, float | None] = {t: None for t in tickers}
+def _compute_yf_metrics(tickers: list[str]) -> dict[str, dict]:
+    """
+    Download ~4 months of daily OHLC for all tickers in batches.
+    Returns a dict keyed by ticker with:
+      adr_pct  — 14-day average daily range %
+      perf_1m  — ~21-trading-day return %
+      perf_3m  — ~63-trading-day return %
+      perf_34d — 34-trading-day return %
+    Any value that can't be computed is None.
+    """
+    empty = {"adr_pct": None, "perf_1m": None, "perf_3m": None, "perf_34d": None}
+    result: dict[str, dict] = {t: dict(empty) for t in tickers}
     if not tickers:
         return result
 
     chunks = [tickers[i:i+YFINANCE_BATCH] for i in range(0, len(tickers), YFINANCE_BATCH)]
     for chunk in chunks:
         try:
-            df = yf.download(chunk, period="30d", interval="1d",
+            df = yf.download(chunk, period="4mo", interval="1d",
                              auto_adjust=True, progress=False)
         except Exception as exc:
             logger.warning("yfinance download failed: %s", exc)
@@ -212,13 +236,32 @@ def _compute_adr(tickers: list[str]) -> dict[str, float | None]:
                     low   = df[tkr]["Low"].dropna()
                     close = df[tkr]["Close"].dropna()
 
-                n = min(len(high), len(low), len(close), 14)
-                if n < 5:
+                nc = len(close)
+                if nc < 2:
                     continue
-                adr = float(
-                    ((high.iloc[-n:] - low.iloc[-n:]) / close.iloc[-n:] * 100).mean()
-                )
-                result[tkr] = round(adr, 1)
+
+                # ADR% — 14-day average of (High-Low)/Close
+                n = min(len(high), len(low), nc, 14)
+                if n >= 5:
+                    adr = float(
+                        ((high.iloc[-n:] - low.iloc[-n:]) / close.iloc[-n:] * 100).mean()
+                    )
+                    result[tkr]["adr_pct"] = round(adr, 1)
+
+                latest = float(close.iloc[-1])
+
+                # perf_1m — ~21 trading days
+                if nc >= 21:
+                    result[tkr]["perf_1m"] = round((latest / float(close.iloc[-21]) - 1) * 100, 2)
+
+                # perf_3m — ~63 trading days
+                if nc >= 63:
+                    result[tkr]["perf_3m"] = round((latest / float(close.iloc[-63]) - 1) * 100, 2)
+
+                # perf_34d — 34 trading days
+                if nc >= 34:
+                    result[tkr]["perf_34d"] = round((latest / float(close.iloc[-34]) - 1) * 100, 2)
+
             except Exception:
                 pass
     return result
@@ -302,16 +345,21 @@ async def _fetch_filter(filter_key: str) -> dict[str, Any]:
 
     logger.info("[%s] fetched %d stocks", filter_key, len(qualifying))
 
-    # ADR% enrichment (sync in thread)
+    # Enrich with ADR% + performance metrics (sync in thread to avoid blocking event loop)
     if qualifying:
         tickers = [s["ticker"] for s in qualifying]
-        adr_map = await asyncio.to_thread(_compute_adr, tickers)
+        metrics = await asyncio.to_thread(_compute_yf_metrics, tickers)
         for s in qualifying:
-            s["adr_pct"] = adr_map.get(s["ticker"])
+            m = metrics.get(s["ticker"], {})
+            s["adr_pct"]  = m.get("adr_pct")
+            s["perf_1m"]  = m.get("perf_1m")
+            s["perf_3m"]  = m.get("perf_3m")
+            s["perf_34d"] = m.get("perf_34d")
 
-    # Sort
+    # Re-sort by the canonical field for this filter (nulls last)
+    sort_field = SORT_FIELD_MAP.get(filter_key, "change_pct")
     qualifying.sort(
-        key=lambda s: (s["change_pct"] is None, s["change_pct"] or 0.0),
+        key=lambda s: (s.get(sort_field) is None, s.get(sort_field) or 0.0),
         reverse=not sort_asc,
     )
 
