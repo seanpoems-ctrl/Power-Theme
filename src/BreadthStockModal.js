@@ -284,12 +284,14 @@ function groupByIndustry(stocks) {
     .sort((a, b) => b.items.length - a.items.length);
 }
 
-const GroupRow = memo(function GroupRow({ industry, items }) {
+// GroupRow receives pre-sorted items and the active perf field from GroupView.
+const GroupRow = memo(function GroupRow({ industry, items, perfField }) {
   const [open, setOpen] = useState(false);
   const tickers = items.map((s) => s.ticker);
 
   return (
     <div className="border-t border-zinc-800 first:border-t-0">
+      {/* Industry header row */}
       <div
         className="group flex cursor-pointer items-center gap-2 px-3 py-2 hover:bg-zinc-800/40"
         onClick={() => setOpen((o) => !o)}
@@ -304,49 +306,122 @@ const GroupRow = memo(function GroupRow({ industry, items }) {
 
       {open && (
         <div className="ml-4 border-l border-zinc-700 pb-1">
-          {items.map((s) => (
-            <div
-              key={s.ticker}
-              className="flex items-center gap-3 px-3 py-1 text-xs hover:bg-zinc-800/30"
-            >
-              <a
-                href={`https://finviz.com/quote.ashx?t=${s.ticker}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-14 font-mono font-semibold text-cyan-400 hover:underline"
+          {items.map((s) => {
+            const perfVal = getPerfValue(s, perfField);
+            return (
+              <div
+                key={s.ticker}
+                className="flex items-center gap-3 px-3 py-1 text-xs hover:bg-zinc-800/30"
               >
-                {s.ticker}
-              </a>
-              <span className="flex-1 truncate text-zinc-400">{s.company}</span>
-              <span className="font-mono text-zinc-500">
-                {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
-              </span>
-              <span className={`w-16 text-right font-mono font-semibold ${changeCls(s.change_pct)}`}>
-                {fmtPct(s.change_pct)}
-              </span>
-            </div>
-          ))}
+                <a
+                  href={`https://finviz.com/quote.ashx?t=${s.ticker}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-14 font-mono font-semibold text-cyan-400 hover:underline"
+                >
+                  {s.ticker}
+                </a>
+                <span className="flex-1 truncate text-zinc-400">{s.company}</span>
+                <span className="w-12 text-right font-mono text-zinc-500">
+                  {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
+                </span>
+                <span className={`w-16 text-right font-mono font-semibold ${changeCls(perfVal)}`}>
+                  {fmtPct(perfVal)}
+                </span>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
   );
 });
 
-const GroupView = memo(function GroupView({ stocks }) {
-  const groups = groupByIndustry(stocks);
+const GroupView = memo(function GroupView({ stocks, filter }) {
+  const [sortKey, setSortKey] = useState(null);
+  const [sortDir, setSortDir] = useState("asc");
+
+  const perfField     = PERF_FIELD[filter] ?? "change_pct";
+  const changeColLabel = CHANGE_COL_LABEL[filter] ?? "Change%";
+
+  // Fixed handleSort — reads state from closure, no functional-updater side-effects
+  const handleSort = (key) => {
+    if (sortKey === key) {
+      setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    } else {
+      setSortKey(key);
+      setSortDir("asc");
+    }
+  };
+
+  const SortIcon = ({ colKey }) => {
+    if (sortKey !== colKey) return <span className="ml-0.5 text-zinc-600">⇅</span>;
+    return <span className="ml-0.5 text-white">{sortDir === "asc" ? "↑" : "↓"}</span>;
+  };
+
+  // Build groups then sort each group's items by the active column
+  const groups = useMemo(() => {
+    const raw = groupByIndustry(stocks);
+    if (!sortKey) return raw;
+    return raw.map((g) => ({
+      ...g,
+      items: [...g.items].sort((a, b) => {
+        let av, bv;
+        if (sortKey === perfField) {
+          av = getPerfValue(a, perfField);
+          bv = getPerfValue(b, perfField);
+        } else if (sortKey === "adr_pct") {
+          av = a.adr_pct;
+          bv = b.adr_pct;
+        } else {
+          av = a[sortKey];
+          bv = b[sortKey];
+        }
+        if (av == null && bv == null) return 0;
+        if (av == null) return 1;
+        if (bv == null) return -1;
+        const cmp = typeof av === "string" ? av.localeCompare(bv) : av - bv;
+        return sortDir === "asc" ? cmp : -cmp;
+      }),
+    }));
+  }, [stocks, sortKey, sortDir, perfField]);
 
   if (!groups.length) {
     return <p className="py-12 text-center text-sm text-zinc-500">No groups to display.</p>;
   }
 
+  // Column config for the stock-row header (mirrors the expanded row layout)
+  const GROUP_STOCK_COLS = [
+    { key: "ticker",   label: "Ticker",       align: "left",  cls: "w-14" },
+    { key: "company",  label: "Company",       align: "left",  cls: "flex-1" },
+    { key: "adr_pct",  label: "ADR%",          align: "right", cls: "w-12" },
+    { key: perfField,  label: changeColLabel,  align: "right", cls: "w-16" },
+  ];
+
   return (
     <div>
+      {/* Industry / Count header */}
       <div className="flex items-center gap-2 border-b border-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-600">
         <span className="flex-1">Industry</span>
         <span>Count</span>
       </div>
+
+      {/* Stock-column sort header (always visible) */}
+      <div className="flex items-center gap-3 border-b border-zinc-800 bg-zinc-900/80 px-3 py-1 pl-[3.25rem] text-xs font-medium text-zinc-500 sticky top-0 z-10">
+        {GROUP_STOCK_COLS.map((col) => (
+          <button
+            key={col.key}
+            onClick={() => handleSort(col.key)}
+            className={`${col.cls} cursor-pointer select-none hover:text-zinc-300 transition-colors
+              ${col.align === "right" ? "text-right" : "text-left"}`}
+          >
+            {col.label}<SortIcon colKey={col.key} />
+          </button>
+        ))}
+      </div>
+
       {groups.map((g) => (
-        <GroupRow key={g.industry} industry={g.industry} items={g.items} />
+        <GroupRow key={g.industry} industry={g.industry} items={g.items} perfField={perfField} />
       ))}
     </div>
   );
@@ -489,7 +564,7 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
           ) : view === "list" ? (
             <ListView stocks={displayStocks} filter={filter} />
           ) : (
-            <GroupView stocks={displayStocks} />
+            <GroupView stocks={displayStocks} filter={filter} />
           )}
         </div>
       </div>
