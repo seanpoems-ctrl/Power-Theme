@@ -3118,7 +3118,11 @@ const IBKRScannerTable = ({ ibkrScanner, onTickerClick }) => {
 };
 
 const EarningsStrip = ({ earningsData, gapperTickers = new Set(), onTickerClick }) => {
-  const today = earningsData?.today;
+  const todayStr = new Date().toISOString().slice(0, 10);
+  // Support both new flat {earnings:[]} schema and legacy {today:[]} schema
+  const today = earningsData?.earnings
+    ? earningsData.earnings.filter(e => e.date === todayStr)
+    : (earningsData?.today || []);
   if (!today?.length) return null;
 
   return (
@@ -3684,8 +3688,10 @@ const CalendarTab = ({ econData, earningsData }) => {
   }, [econData]);
 
   // ── Normalise all earnings ─────────────────────────────────────────────────
+  // Support both new flat schema {earnings:[]} and legacy {today:[], upcoming:[]}
   const allEarnings = useMemo(() =>
-    [...(earningsData?.today || []), ...(earningsData?.upcoming || [])],
+    earningsData?.earnings
+      ?? [...(earningsData?.today || []), ...(earningsData?.upcoming || [])],
   [earningsData]);
 
   // ── Count by day (for weekly strip badges) ────────────────────────────────
