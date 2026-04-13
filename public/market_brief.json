@@ -1,30 +1,30 @@
 {
-  "generated_at": "April 13, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "April 13, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6816.89,
-      "change": -7.77,
-      "change_pct": -0.11
+      "price": 6886.24,
+      "change": 69.35,
+      "change_pct": 1.02
     },
     {
       "label": "Nasdaq 100",
-      "price": 25116.34,
-      "change": 34.25,
-      "change_pct": 0.14
+      "price": 25383.72,
+      "change": 267.38,
+      "change_pct": 1.06
     },
     {
       "label": "VIX",
-      "price": 21.36,
-      "change": 2.13,
+      "price": 19.12,
+      "change": -0.11,
       "change_pct": null,
-      "zone_label": "Elevated"
+      "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.32,
-      "change": 0.02,
+      "price": 4.3,
+      "change": -0.02,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 56502.77,
-      "change_pct": -0.74
+      "price": 56924.11,
+      "change_pct": 1.84
     },
     "dax": {
       "label": "DAX",
-      "price": 23520.28,
-      "change_pct": -1.19
+      "price": 23742.44,
+      "change_pct": -0.26
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10543.98,
-      "change_pct": -0.53
+      "price": 10582.96,
+      "change_pct": -0.17
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 48.3,
-    "mmth": 54.7,
+    "s5fi": 55.0,
+    "mmth": 57.0,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Global Weakness / Elevated Volatility",
+  "mood": "US-Led Rally, Mixed Global Cues",
   "analysis": {
-    "analysis_para1": "Pre-market action shows a cautious tone globally, with European and Asian markets broadly lower; the Nikkei 225 is down -0.74%, DAX -1.19%, and FTSE 100 -0.53%. This global risk-off sentiment translates into mixed US pre-market, with the S&P 500 down -0.11% while the Nasdaq 100 shows resilience, up +0.14%. US breadth metrics remain uninspiring, with only 48.3% of S&P 500 stocks above their 50-day moving average (S5FI) and 54.7% above their 200-day (MMTH), indicating underlying fragility. The elevated VIX at 21.36 further confirms a heightened state of investor apprehension.",
-    "analysis_para2": "Our mechanical plan for today emphasizes vigilance around key index levels and a focus on relative strength. Watch the S&P 500's ability to hold above the 6800 psychological level; a sustained break below could signal deeper distribution. The Nasdaq 100's outperformance suggests a potential rotation into growth or defensive tech, making it a key area to monitor for sustained strength. Given the elevated VIX, an increase past 22-23 would warrant further caution and a defensive posture. In this environment, prioritize themes exhibiting clear relative strength, such as Semiconductors and Energy, but maintain tight stops.",
-    "technical_signal": "No reversal pattern confirmed yet. Given the mixed US indices and global weakness, caution remains advised.",
+    "analysis_para1": "Today's global tape presented a divergent picture, with the Nikkei 225 advancing a strong +1.84% while European markets like the DAX (-0.26%) and FTSE 100 (-0.17%) experienced slight pullbacks. US credit conditions, as indicated by the unknown BAML HY Spread, offered no clear directional signal for broader risk appetite. Domestically, market breadth remained moderate with 55.0% of stocks above their 50-day moving average (S5FI) and 57.0% above their 200-day moving average (MMTH), indicating underlying stability rather than exuberant participation.",
+    "analysis_para2": "Following today's robust gains in both the S&P 500 and Nasdaq 100, the mechanical plan is to monitor for continued upside momentum and consolidation above recent resistance. Key action involves observing if support can be established above today's closing levels, with a sustained pullback below prior day's close signaling caution. Specifically, a breach of 6800 on the S&P 500 or 25000 on the Nasdaq 100 would necessitate a more defensive posture. Conversely, maintaining exposure to high relative strength themes like Semiconductors and Energy is warranted as long as underlying breadth metrics hold above 50%.",
+    "technical_signal": "No reversal pattern confirmed yet. The market closed higher on broad-based gains.",
     "ticker_intel": [
-      {
-        "ticker": "TSEM",
-        "company": "Tower Semiconductor Ltd",
-        "grade": "A+",
-        "reason": "TSEM demonstrates elite leadership within Semiconductors with an RS of 98 and a phenomenal +49.0% 1-month return, making it a high conviction long in a resilient sector."
-      },
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
+        "grade": "A+",
+        "reason": "AXTI merits an A+ grade with an exceptional RS of 99 and a powerful 3-month return of +198.3%, positioning it as a leading conviction play in the robust Semiconductors theme."
+      },
+      {
+        "ticker": "TSEM",
+        "company": "Tower Semiconductor Ltd",
         "grade": "A",
-        "reason": "As a Semiconductor play, AXTI boasts top-tier relative strength (RS=99) and an exceptional +198.3% 3-month return, highlighting its dominant momentum in a leading industry."
+        "reason": "TSEM earns an A grade for its impressive RS of 98 and a significant +49.0% one-month surge, making it a strong high-momentum choice within the resilient Semiconductors sector."
       },
       {
         "ticker": "MRVL",
         "company": "Marvell Technology Inc",
         "grade": "C",
-        "reason": "While in the strong Semiconductor theme, MRVL exhibits a comparatively lower RS of 85 and a weaker 3-month return of +23.0% versus its peers, suggesting relative underperformance or distribution risk."
+        "reason": "MRVL receives a C grade despite its 1-month gain, as its RS of 85 and weaker 3-month performance relative to peers suggest potential underperformance within the strong Semiconductor theme."
       }
     ]
   }
