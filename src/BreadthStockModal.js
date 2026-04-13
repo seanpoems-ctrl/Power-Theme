@@ -65,13 +65,30 @@ const CopyButton = memo(function CopyButton({ tickers, label }) {
 });
 
 // ---------------------------------------------------------------------------
+// Per-filter column label for the Change% column
+// ---------------------------------------------------------------------------
+
+const CHANGE_COL_LABEL = {
+  up4:     "1D Change%",
+  dn4:     "1D Change%",
+  up25q:   "Quarterly Change%",
+  dn25q:   "Quarterly Change%",
+  up25m:   "Monthly Change%",
+  dn25m:   "Monthly Change%",
+  up13_34: "1.5M Change%",
+  dn13_34: "1.5M Change%",
+};
+
+// ---------------------------------------------------------------------------
 // List view — matches screenshot exactly: #, Ticker, Company, $Vol, ADR%, Change%
 // ---------------------------------------------------------------------------
 
-const ListView = memo(function ListView({ stocks }) {
+const ListView = memo(function ListView({ stocks, filter }) {
   if (!stocks.length) {
     return <p className="py-12 text-center text-sm text-zinc-500">No stocks match the current filters.</p>;
   }
+
+  const changeColLabel = CHANGE_COL_LABEL[filter] ?? "Change%";
 
   return (
     <div className="overflow-x-auto">
@@ -83,7 +100,7 @@ const ListView = memo(function ListView({ stocks }) {
             <th className="px-2 py-2 font-medium">Company</th>
             <th className="px-2 py-2 text-right font-medium">$ Vol</th>
             <th className="px-2 py-2 text-right font-medium">ADR%</th>
-            <th className="px-2 py-2 text-right font-medium">Change%</th>
+            <th className="px-2 py-2 text-right font-medium">{changeColLabel}</th>
           </tr>
         </thead>
         <tbody>
@@ -262,7 +279,13 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
     return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
 
-  const allTickers = stocks.map((s) => s.ticker);
+  // Apply client-side guard for down scanners so only genuinely negative
+  // stocks appear even if the pre-built JSON contains edge-case entries.
+  const displayStocks = filter === "dn4"
+    ? stocks.filter((s) => (s.change_pct ?? s.perf_1d ?? 0) <= -4)
+    : stocks;
+
+  const allTickers = displayStocks.map((s) => s.ticker);
 
   return (
     /* Backdrop */
@@ -338,9 +361,9 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
               </button>
             </div>
           ) : view === "list" ? (
-            <ListView stocks={stocks} />
+            <ListView stocks={displayStocks} filter={filter} />
           ) : (
-            <GroupView stocks={stocks} />
+            <GroupView stocks={displayStocks} />
           )}
         </div>
       </div>
