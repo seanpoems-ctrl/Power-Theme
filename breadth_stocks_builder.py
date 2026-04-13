@@ -39,7 +39,7 @@ logger = logging.getLogger(__name__)
 
 PUBLIC_DIR = Path(__file__).parent / "public"
 
-_BASE = "geo_usa,sh_avgvol_o100,sh_price_o5,cap_midover"
+_BASE = "sh_avgvol_o100,sh_price_o5,cap_midover"
 
 FILTER_MAP: dict[str, tuple[str, bool]] = {
     "up4":     (f"/screener.ashx?v=111&f={_BASE},ta_change_u4&o=-change",    False),
