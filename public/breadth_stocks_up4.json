@@ -3,7 +3,7 @@
   "filter": "up4",
   "label": "Up 4%+ Today",
   "min_cap_b": 1.0,
-  "count": 34,
+  "count": 41,
   "stocks": [
     {
       "ticker": "OGN",
@@ -69,6 +69,19 @@
       "perf_1m": 27.72,
       "perf_3m": 27.28,
       "perf_34d": 12.29
+    },
+    {
+      "ticker": "CRDO",
+      "company": "Credo Technology Group Holding Ltd",
+      "industry": "Semiconductors",
+      "market_cap_b": 22.06,
+      "price": 119.59,
+      "change_pct": 10.8,
+      "dollar_volume": "$1.0B",
+      "adr_pct": 6.8,
+      "perf_1m": 7.19,
+      "perf_3m": -20.5,
+      "perf_34d": -3.6
     },
     {
       "ticker": "CVLT",
@@ -162,6 +175,32 @@
       "perf_34d": 65.26
     },
     {
+      "ticker": "FN",
+      "company": "Fabrinet",
+      "industry": "Electronic Components",
+      "market_cap_b": 23.72,
+      "price": 662.13,
+      "change_pct": 7.1,
+      "dollar_volume": "$710M",
+      "adr_pct": 7.5,
+      "perf_1m": 29.12,
+      "perf_3m": 48.05,
+      "perf_34d": 14.81
+    },
+    {
+      "ticker": "NIO",
+      "company": "NIO Inc ADR",
+      "industry": "Auto Manufacturers",
+      "market_cap_b": 13.63,
+      "price": 6.5,
+      "change_pct": 7.08,
+      "dollar_volume": "$381M",
+      "adr_pct": 5.2,
+      "perf_1m": 17.12,
+      "perf_3m": 40.09,
+      "perf_34d": 22.87
+    },
+    {
       "ticker": "SATS",
       "company": "EchoStar Corp",
       "industry": "Telecom Services",
@@ -175,6 +214,19 @@
       "perf_34d": 19.71
     },
     {
+      "ticker": "CLS",
+      "company": "Celestica, Inc",
+      "industry": "Electronic Components",
+      "market_cap_b": 40.39,
+      "price": 351.31,
+      "change_pct": 7.0,
+      "dollar_volume": "$1.2B",
+      "adr_pct": 6.3,
+      "perf_1m": 32.62,
+      "perf_3m": 16.21,
+      "perf_34d": 18.41
+    },
+    {
       "ticker": "AMPX",
       "company": "Amprius Technologies Inc",
       "industry": "Electrical Equipment & Parts",
@@ -186,6 +238,32 @@
       "perf_1m": -5.85,
       "perf_3m": 81.65,
       "perf_34d": 68.82
+    },
+    {
+      "ticker": "NBIS",
+      "company": "Nebius Group N.V",
+      "industry": "Software - Infrastructure",
+      "market_cap_b": 36.49,
+      "price": 144.97,
+      "change_pct": 6.34,
+      "dollar_volume": "$3.7B",
+      "adr_pct": 7.7,
+      "perf_1m": 34.18,
+      "perf_3m": 48.03,
+      "perf_34d": 44.09
+    },
+    {
+      "ticker": "IREN",
+      "company": "IREN Ltd",
+      "industry": "Capital Markets",
+      "market_cap_b": 13.04,
+      "price": 39.32,
+      "change_pct": 6.1,
+      "dollar_volume": "$1.4B",
+      "adr_pct": 8.0,
+      "perf_1m": -4.96,
+      "perf_3m": -14.58,
+      "perf_34d": -7.18
     },
     {
       "ticker": "INFQ",
@@ -422,6 +500,19 @@
       "perf_34d": 20.59
     },
     {
+      "ticker": "BTDR",
+      "company": "Bitdeer Technologies Group",
+      "industry": "Software - Application",
+      "market_cap_b": 2.59,
+      "price": 10.76,
+      "change_pct": 4.11,
+      "dollar_volume": "$50M",
+      "adr_pct": 7.8,
+      "perf_1m": 46.53,
+      "perf_3m": -6.56,
+      "perf_34d": 34.1
+    },
+    {
       "ticker": "BE",
       "company": "Bloom Energy Corp",
       "industry": "Electrical Equipment & Parts",
@@ -448,5 +539,5 @@
       "perf_34d": -4.27
     }
   ],
-  "fetched_at_utc": "2026-04-13T03:56:07+00:00"
+  "fetched_at_utc": "2026-04-13T07:22:58+00:00"
 }

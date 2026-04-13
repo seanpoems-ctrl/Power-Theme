@@ -3,7 +3,7 @@
   "filter": "up25m",
   "label": "Up 25%+ Monthly",
   "min_cap_b": 1.0,
-  "count": 208,
+  "count": 218,
   "stocks": [
     {
       "ticker": "CAR",
@@ -43,6 +43,19 @@
       "perf_1m": 86.25,
       "perf_3m": 113.85,
       "perf_34d": 78.81
+    },
+    {
+      "ticker": "TSEM",
+      "company": "Tower Semiconductor Ltd",
+      "industry": "Semiconductors",
+      "market_cap_b": 22.75,
+      "price": 203.59,
+      "change_pct": -0.11,
+      "dollar_volume": "$391M",
+      "adr_pct": 7.6,
+      "perf_1m": 71.75,
+      "perf_3m": 69.62,
+      "perf_34d": 59.77
     },
     {
       "ticker": "YSS",
@@ -123,6 +136,19 @@
       "perf_34d": 65.26
     },
     {
+      "ticker": "BTDR",
+      "company": "Bitdeer Technologies Group",
+      "industry": "Software - Application",
+      "market_cap_b": 2.59,
+      "price": 10.76,
+      "change_pct": 4.11,
+      "dollar_volume": "$50M",
+      "adr_pct": 7.8,
+      "perf_1m": 46.53,
+      "perf_3m": -6.56,
+      "perf_34d": 34.1
+    },
+    {
       "ticker": "LITE",
       "company": "Lumentum Holdings Inc",
       "industry": "Communication Equipment",
@@ -134,6 +160,32 @@
       "perf_1m": 45.64,
       "perf_3m": 155.34,
       "perf_34d": 32.99
+    },
+    {
+      "ticker": "CNTA",
+      "company": "Centessa Pharmaceuticals plc ADR",
+      "industry": "Biotechnology",
+      "market_cap_b": 5.89,
+      "price": 39.48,
+      "change_pct": -0.7,
+      "dollar_volume": "$50M",
+      "adr_pct": 3.6,
+      "perf_1m": 45.04,
+      "perf_3m": 76.09,
+      "perf_34d": 54.88
+    },
+    {
+      "ticker": "MRX",
+      "company": "Marex Group Plc",
+      "industry": "Capital Markets",
+      "market_cap_b": 3.64,
+      "price": 49.94,
+      "change_pct": -0.09,
+      "dollar_volume": "$54M",
+      "adr_pct": 4.4,
+      "perf_1m": 43.78,
+      "perf_3m": 31.52,
+      "perf_34d": 25.53
     },
     {
       "ticker": "SLNO",
@@ -344,6 +396,19 @@
       "perf_34d": 23.71
     },
     {
+      "ticker": "NBIS",
+      "company": "Nebius Group N.V",
+      "industry": "Software - Infrastructure",
+      "market_cap_b": 36.49,
+      "price": 144.97,
+      "change_pct": 6.34,
+      "dollar_volume": "$3.7B",
+      "adr_pct": 7.7,
+      "perf_1m": 34.18,
+      "perf_3m": 48.03,
+      "perf_34d": 44.09
+    },
+    {
       "ticker": "TTMI",
       "company": "TTM Technologies Inc",
       "industry": "Electronic Components",
@@ -368,6 +433,19 @@
       "perf_1m": 33.62,
       "perf_3m": 26.99,
       "perf_34d": 29.93
+    },
+    {
+      "ticker": "CLS",
+      "company": "Celestica, Inc",
+      "industry": "Electronic Components",
+      "market_cap_b": 40.39,
+      "price": 351.31,
+      "change_pct": 7.0,
+      "dollar_volume": "$1.2B",
+      "adr_pct": 6.3,
+      "perf_1m": 32.62,
+      "perf_3m": 16.21,
+      "perf_34d": 18.41
     },
     {
       "ticker": "SNEX",
@@ -485,6 +563,45 @@
       "perf_1m": 29.57,
       "perf_3m": 18.55,
       "perf_34d": 40.08
+    },
+    {
+      "ticker": "ARM",
+      "company": "Arm Holdings plc. ADR",
+      "industry": "Semiconductors",
+      "market_cap_b": 158.16,
+      "price": 148.93,
+      "change_pct": -0.58,
+      "dollar_volume": "$1.1B",
+      "adr_pct": 6.1,
+      "perf_1m": 29.37,
+      "perf_3m": 33.22,
+      "perf_34d": 20.32
+    },
+    {
+      "ticker": "FN",
+      "company": "Fabrinet",
+      "industry": "Electronic Components",
+      "market_cap_b": 23.72,
+      "price": 662.13,
+      "change_pct": 7.1,
+      "dollar_volume": "$710M",
+      "adr_pct": 7.5,
+      "perf_1m": 29.12,
+      "perf_3m": 48.05,
+      "perf_34d": 14.81
+    },
+    {
+      "ticker": "SKM",
+      "company": "SK Telecom Co Ltd ADR",
+      "industry": "Telecom Services",
+      "market_cap_b": 13.84,
+      "price": 36.41,
+      "change_pct": 2.25,
+      "dollar_volume": "$70M",
+      "adr_pct": 3.6,
+      "perf_1m": 28.98,
+      "perf_3m": 79.45,
+      "perf_34d": 19.46
     },
     {
       "ticker": "WULF",
@@ -968,6 +1085,19 @@
       "perf_34d": 29.71
     },
     {
+      "ticker": "JBS",
+      "company": "JBS N.V",
+      "industry": "Packaged Foods",
+      "market_cap_b": 19.58,
+      "price": 18.32,
+      "change_pct": -0.54,
+      "dollar_volume": "$59M",
+      "adr_pct": 3.3,
+      "perf_1m": 21.24,
+      "perf_3m": 31.33,
+      "perf_34d": 13.51
+    },
+    {
       "ticker": "FLEX",
       "company": "Flex Ltd",
       "industry": "Electronic Components",
@@ -979,6 +1109,19 @@
       "perf_1m": 21.23,
       "perf_3m": 24.78,
       "perf_34d": 21.23
+    },
+    {
+      "ticker": "NVT",
+      "company": "nVent Electric plc",
+      "industry": "Electrical Equipment & Parts",
+      "market_cap_b": 21.12,
+      "price": 130.56,
+      "change_pct": 1.5,
+      "dollar_volume": "$168M",
+      "adr_pct": 4.0,
+      "perf_1m": 21.03,
+      "perf_3m": 24.13,
+      "perf_34d": 13.6
     },
     {
       "ticker": "VSAT",
@@ -1007,6 +1150,19 @@
       "perf_34d": -2.08
     },
     {
+      "ticker": "ALKS",
+      "company": "Alkermes plc",
+      "industry": "Drug Manufacturers - Specialty & Generic",
+      "market_cap_b": 5.55,
+      "price": 33.36,
+      "change_pct": -4.47,
+      "dollar_volume": "$68M",
+      "adr_pct": 4.5,
+      "perf_1m": 20.69,
+      "perf_3m": 12.47,
+      "perf_34d": 3.63
+    },
+    {
       "ticker": "CRUS",
       "company": "Cirrus Logic, Inc",
       "industry": "Semiconductors",
@@ -1033,6 +1189,19 @@
       "perf_34d": 8.61
     },
     {
+      "ticker": "CSTM",
+      "company": "Constellium SE",
+      "industry": "Aluminum",
+      "market_cap_b": 4.0,
+      "price": 29.64,
+      "change_pct": 0.58,
+      "dollar_volume": "$51M",
+      "adr_pct": 5.0,
+      "perf_1m": 20.54,
+      "perf_3m": 42.23,
+      "perf_34d": 16.78
+    },
+    {
       "ticker": "ALGM",
       "company": "Allegro Microsystems Inc",
       "industry": "Semiconductors",
@@ -1044,6 +1213,19 @@
       "perf_1m": 20.35,
       "perf_3m": 19.85,
       "perf_34d": -2.55
+    },
+    {
+      "ticker": "TIGO",
+      "company": "Millicom International Cellular S.A",
+      "industry": "Telecom Services",
+      "market_cap_b": 13.91,
+      "price": 83.03,
+      "change_pct": 0.3,
+      "dollar_volume": "$92M",
+      "adr_pct": 3.4,
+      "perf_1m": 19.98,
+      "perf_3m": 69.74,
+      "perf_34d": 26.92
     },
     {
       "ticker": "PLXS",
@@ -1137,6 +1319,19 @@
       "perf_34d": 19.26
     },
     {
+      "ticker": "STM",
+      "company": "ST Microelectronics",
+      "industry": "Semiconductors",
+      "market_cap_b": 35.09,
+      "price": 39.48,
+      "change_pct": 0.87,
+      "dollar_volume": "$298M",
+      "adr_pct": 3.7,
+      "perf_1m": 19.11,
+      "perf_3m": 37.28,
+      "perf_34d": 16.48
+    },
+    {
       "ticker": "GKOS",
       "company": "Glaukos Corporation",
       "industry": "Medical Devices",
@@ -1163,6 +1358,19 @@
       "perf_34d": -1.18
     },
     {
+      "ticker": "GLNG",
+      "company": "Golar Lng",
+      "industry": "Oil & Gas Midstream",
+      "market_cap_b": 5.41,
+      "price": 53.28,
+      "change_pct": -0.21,
+      "dollar_volume": "$64M",
+      "adr_pct": 3.5,
+      "perf_1m": 18.96,
+      "perf_3m": 37.59,
+      "perf_34d": 17.96
+    },
+    {
       "ticker": "KNX",
       "company": "Knight-Swift Transportation Holdings Inc",
       "industry": "Trucking",
@@ -1187,6 +1395,19 @@
       "perf_1m": 18.78,
       "perf_3m": 32.48,
       "perf_34d": 14.63
+    },
+    {
+      "ticker": "SEDG",
+      "company": "Solaredge Technologies Inc",
+      "industry": "Solar",
+      "market_cap_b": 2.52,
+      "price": 41.76,
+      "change_pct": -0.19,
+      "dollar_volume": "$122M",
+      "adr_pct": 9.0,
+      "perf_1m": 18.67,
+      "perf_3m": 26.97,
+      "perf_34d": 6.04
     },
     {
       "ticker": "DELL",
@@ -1241,6 +1462,19 @@
       "perf_34d": 3.17
     },
     {
+      "ticker": "ASX",
+      "company": "ASE Technology Holding Co.Ltd ADR",
+      "industry": "Semiconductors",
+      "market_cap_b": 54.33,
+      "price": 24.84,
+      "change_pct": 1.35,
+      "dollar_volume": "$139M",
+      "adr_pct": 3.2,
+      "perf_1m": 18.34,
+      "perf_3m": 40.82,
+      "perf_34d": 5.79
+    },
+    {
       "ticker": "ODFL",
       "company": "Old Dominion Freight Line, Inc",
       "industry": "Trucking",
@@ -1278,6 +1512,19 @@
       "perf_1m": 18.12,
       "perf_3m": 47.49,
       "perf_34d": 14.94
+    },
+    {
+      "ticker": "NVMI",
+      "company": "Nova Ltd",
+      "industry": "Semiconductor Equipment & Materials",
+      "market_cap_b": 15.77,
+      "price": 496.06,
+      "change_pct": 0.4,
+      "dollar_volume": "$116M",
+      "adr_pct": 4.4,
+      "perf_1m": 18.08,
+      "perf_3m": 25.88,
+      "perf_34d": 12.1
     },
     {
       "ticker": "WCC",
@@ -1345,6 +1592,19 @@
       "perf_34d": 3.93
     },
     {
+      "ticker": "AXIA",
+      "company": "Axia Energia ADR",
+      "industry": "Utilities - Renewable",
+      "market_cap_b": 25.54,
+      "price": 13.03,
+      "change_pct": 3.09,
+      "dollar_volume": "$78M",
+      "adr_pct": 3.0,
+      "perf_1m": 17.39,
+      "perf_3m": 35.59,
+      "perf_34d": 11.27
+    },
+    {
       "ticker": "CHH",
       "company": "Choice Hotels International, Inc",
       "industry": "Lodging",
@@ -1369,6 +1629,32 @@
       "perf_1m": 17.31,
       "perf_3m": 20.78,
       "perf_34d": 13.35
+    },
+    {
+      "ticker": "STLA",
+      "company": "Stellantis N.V",
+      "industry": "Auto Manufacturers",
+      "market_cap_b": 23.25,
+      "price": 8.04,
+      "change_pct": 1.39,
+      "dollar_volume": "$158M",
+      "adr_pct": 3.2,
+      "perf_1m": 17.2,
+      "perf_3m": -26.31,
+      "perf_34d": 5.79
+    },
+    {
+      "ticker": "NIO",
+      "company": "NIO Inc ADR",
+      "industry": "Auto Manufacturers",
+      "market_cap_b": 13.63,
+      "price": 6.5,
+      "change_pct": 7.08,
+      "dollar_volume": "$381M",
+      "adr_pct": 5.2,
+      "perf_1m": 17.12,
+      "perf_3m": 40.09,
+      "perf_34d": 22.87
     },
     {
       "ticker": "DAL",
@@ -1462,6 +1748,19 @@
       "perf_34d": 15.36
     },
     {
+      "ticker": "CUK",
+      "company": "Carnival plc ADR",
+      "industry": "Travel Services",
+      "market_cap_b": 4.08,
+      "price": 27.9,
+      "change_pct": 0.29,
+      "dollar_volume": "$67M",
+      "adr_pct": 3.9,
+      "perf_1m": 16.69,
+      "perf_3m": -11.99,
+      "perf_34d": -7.98
+    },
+    {
       "ticker": "ESE",
       "company": "Esco Technologies, Inc",
       "industry": "Scientific & Technical Instruments",
@@ -1512,6 +1811,32 @@
       "perf_1m": 16.26,
       "perf_3m": 19.38,
       "perf_34d": 6.46
+    },
+    {
+      "ticker": "NOK",
+      "company": "Nokia Corp ADR",
+      "industry": "Communication Equipment",
+      "market_cap_b": 52.81,
+      "price": 9.46,
+      "change_pct": -0.94,
+      "dollar_volume": "$766M",
+      "adr_pct": 4.2,
+      "perf_1m": 16.22,
+      "perf_3m": 45.99,
+      "perf_34d": 24.97
+    },
+    {
+      "ticker": "TEL",
+      "company": "TE Connectivity plc",
+      "industry": "Electronic Components",
+      "market_cap_b": 67.43,
+      "price": 229.78,
+      "change_pct": 0.5,
+      "dollar_volume": "$275M",
+      "adr_pct": 3.0,
+      "perf_1m": 16.14,
+      "perf_3m": -0.48,
+      "perf_34d": -0.65
     },
     {
       "ticker": "HPE",
@@ -1618,6 +1943,19 @@
       "perf_34d": 6.91
     },
     {
+      "ticker": "ETN",
+      "company": "Eaton Corporation plc",
+      "industry": "Specialty Industrial Machinery",
+      "market_cap_b": 156.36,
+      "price": 403.0,
+      "change_pct": 0.64,
+      "dollar_volume": "$894M",
+      "adr_pct": 3.2,
+      "perf_1m": 15.59,
+      "perf_3m": 24.57,
+      "perf_34d": 11.66
+    },
+    {
       "ticker": "AXSM",
       "company": "Axsome Therapeutics Inc",
       "industry": "Biotechnology",
@@ -1644,19 +1982,6 @@
       "perf_34d": -0.13
     },
     {
-      "ticker": "CRS",
-      "company": "Carpenter Technology Corp",
-      "industry": "Metal Fabrication",
-      "market_cap_b": 21.68,
-      "price": 435.3,
-      "change_pct": 0.95,
-      "dollar_volume": "$287M",
-      "adr_pct": 4.7,
-      "perf_1m": 15.4,
-      "perf_3m": 32.53,
-      "perf_34d": 13.05
-    },
-    {
       "ticker": "APA",
       "company": "APA Corporation",
       "industry": "Oil & Gas E&P",
@@ -1681,19 +2006,6 @@
       "perf_1m": 14.92,
       "perf_3m": -27.38,
       "perf_34d": 3.45
-    },
-    {
-      "ticker": "LAZ",
-      "company": "Lazard Inc",
-      "industry": "Capital Markets",
-      "market_cap_b": 4.38,
-      "price": 46.68,
-      "change_pct": 1.52,
-      "dollar_volume": "$69M",
-      "adr_pct": 3.9,
-      "perf_1m": 14.75,
-      "perf_3m": -8.61,
-      "perf_34d": -5.35
     },
     {
       "ticker": "KEYS",
@@ -1761,6 +2073,19 @@
       "perf_34d": 3.96
     },
     {
+      "ticker": "CAMT",
+      "company": "Camtek Ltd",
+      "industry": "Semiconductor Equipment & Materials",
+      "market_cap_b": 8.0,
+      "price": 174.53,
+      "change_pct": -1.12,
+      "dollar_volume": "$62M",
+      "adr_pct": 5.9,
+      "perf_1m": 14.41,
+      "perf_3m": 32.55,
+      "perf_34d": 13.99
+    },
+    {
       "ticker": "DOCN",
       "company": "DigitalOcean Holdings Inc",
       "industry": "Software - Infrastructure",
@@ -1813,6 +2138,19 @@
       "perf_34d": 7.18
     },
     {
+      "ticker": "PBR-A",
+      "company": "Petroleo Brasileiro S.A. Petrobras ADR",
+      "industry": "Oil & Gas Integrated",
+      "market_cap_b": 53.24,
+      "price": 19.55,
+      "change_pct": 3.49,
+      "dollar_volume": "$127M",
+      "adr_pct": 3.0,
+      "perf_1m": 13.86,
+      "perf_3m": 72.4,
+      "perf_34d": 30.51
+    },
+    {
       "ticker": "NPO",
       "company": "Enpro Inc",
       "industry": "Specialty Industrial Machinery",
@@ -1852,17 +2190,30 @@
       "perf_34d": 4.35
     },
     {
-      "ticker": "SHAK",
-      "company": "Shake Shack Inc",
-      "industry": "Restaurants",
-      "market_cap_b": 4.21,
-      "price": 98.61,
-      "change_pct": 1.09,
-      "dollar_volume": "$112M",
-      "adr_pct": 4.3,
-      "perf_1m": 13.59,
-      "perf_3m": 5.7,
-      "perf_34d": 10.1
+      "ticker": "PBR",
+      "company": "Petroleo Brasileiro S.A. Petrobras ADR",
+      "industry": "Oil & Gas Integrated",
+      "market_cap_b": 80.04,
+      "price": 21.51,
+      "change_pct": 3.96,
+      "dollar_volume": "$591M",
+      "adr_pct": 3.4,
+      "perf_1m": 13.39,
+      "perf_3m": 81.06,
+      "perf_34d": 33.27
+    },
+    {
+      "ticker": "EQNR",
+      "company": "Equinor ASA ADR",
+      "industry": "Oil & Gas Integrated",
+      "market_cap_b": 98.76,
+      "price": 38.96,
+      "change_pct": 1.06,
+      "dollar_volume": "$217M",
+      "adr_pct": 3.7,
+      "perf_1m": 13.35,
+      "perf_3m": 68.0,
+      "perf_34d": 34.21
     },
     {
       "ticker": "FLR",
@@ -1969,19 +2320,6 @@
       "perf_34d": -0.64
     },
     {
-      "ticker": "BX",
-      "company": "Blackstone Inc",
-      "industry": "Asset Management",
-      "market_cap_b": 140.35,
-      "price": 114.83,
-      "change_pct": -1.77,
-      "dollar_volume": "$511M",
-      "adr_pct": 3.6,
-      "perf_1m": 12.45,
-      "perf_3m": -26.3,
-      "perf_34d": 0.98
-    },
-    {
       "ticker": "SSRM",
       "company": "SSR Mining Inc",
       "industry": "Gold",
@@ -1995,17 +2333,17 @@
       "perf_34d": 9.34
     },
     {
-      "ticker": "BKR",
-      "company": "Baker Hughes Co",
-      "industry": "Oil & Gas Equipment & Services",
-      "market_cap_b": 62.09,
-      "price": 62.83,
-      "change_pct": -0.93,
-      "dollar_volume": "$390M",
-      "adr_pct": 3.1,
-      "perf_1m": 12.4,
-      "perf_3m": 26.21,
-      "perf_34d": -1.32
+      "ticker": "SIG",
+      "company": "Signet Jewelers Ltd",
+      "industry": "Luxury Goods",
+      "market_cap_b": 3.75,
+      "price": 93.63,
+      "change_pct": 0.61,
+      "dollar_volume": "$61M",
+      "adr_pct": 4.4,
+      "perf_1m": 12.27,
+      "perf_3m": 10.96,
+      "perf_34d": -0.91
     },
     {
       "ticker": "CARR",
@@ -2060,19 +2398,6 @@
       "perf_34d": 10.19
     },
     {
-      "ticker": "FLS",
-      "company": "Flowserve Corp",
-      "industry": "Specialty Industrial Machinery",
-      "market_cap_b": 10.74,
-      "price": 84.38,
-      "change_pct": -0.08,
-      "dollar_volume": "$102M",
-      "adr_pct": 3.8,
-      "perf_1m": 11.83,
-      "perf_3m": 15.2,
-      "perf_34d": -4.19
-    },
-    {
       "ticker": "MUR",
       "company": "Murphy Oil Corp",
       "industry": "Oil & Gas E&P",
@@ -2086,19 +2411,6 @@
       "perf_34d": 17.62
     },
     {
-      "ticker": "UAL",
-      "company": "United Airlines Holdings Inc",
-      "industry": "Airlines",
-      "market_cap_b": 31.18,
-      "price": 96.4,
-      "change_pct": -1.3,
-      "dollar_volume": "$446M",
-      "adr_pct": 4.7,
-      "perf_1m": 11.41,
-      "perf_3m": -17.83,
-      "perf_34d": -10.05
-    },
-    {
       "ticker": "SM",
       "company": "SM Energy Co",
       "industry": "Oil & Gas E&P",
@@ -2110,6 +2422,19 @@
       "perf_1m": 11.38,
       "perf_3m": 60.98,
       "perf_34d": 25.81
+    },
+    {
+      "ticker": "HBM",
+      "company": "Hudbay Minerals Inc",
+      "industry": "Copper",
+      "market_cap_b": 9.66,
+      "price": 24.33,
+      "change_pct": 3.66,
+      "dollar_volume": "$101M",
+      "adr_pct": 4.6,
+      "perf_1m": 11.35,
+      "perf_3m": 12.88,
+      "perf_34d": -6.61
     },
     {
       "ticker": "OLN",
@@ -2149,19 +2474,6 @@
       "perf_1m": 11.23,
       "perf_3m": 80.45,
       "perf_34d": 20.28
-    },
-    {
-      "ticker": "AIT",
-      "company": "Applied Industrial Technologies Inc",
-      "industry": "Industrial Distribution",
-      "market_cap_b": 10.78,
-      "price": 289.01,
-      "change_pct": 0.91,
-      "dollar_volume": "$74M",
-      "adr_pct": 3.0,
-      "perf_1m": 11.21,
-      "perf_3m": 6.35,
-      "perf_34d": 3.68
     },
     {
       "ticker": "OSCR",
@@ -2229,19 +2541,6 @@
       "perf_34d": -0.61
     },
     {
-      "ticker": "OC",
-      "company": "Owens Corning",
-      "industry": "Building Products & Equipment",
-      "market_cap_b": 9.19,
-      "price": 114.28,
-      "change_pct": -0.58,
-      "dollar_volume": "$95M",
-      "adr_pct": 3.7,
-      "perf_1m": 10.9,
-      "perf_3m": -5.96,
-      "perf_34d": -11.02
-    },
-    {
       "ticker": "AVGO",
       "company": "Broadcom Inc",
       "industry": "Semiconductors",
@@ -2268,56 +2567,17 @@
       "perf_34d": 22.3
     },
     {
-      "ticker": "STRL",
-      "company": "Sterling Infrastructure Inc",
-      "industry": "Engineering & Construction",
-      "market_cap_b": 13.69,
-      "price": 446.36,
-      "change_pct": 2.46,
-      "dollar_volume": "$151M",
-      "adr_pct": 6.1,
-      "perf_1m": 10.32,
-      "perf_3m": 44.86,
-      "perf_34d": 2.7
-    },
-    {
-      "ticker": "DY",
-      "company": "Dycom Industries, Inc",
-      "industry": "Engineering & Construction",
-      "market_cap_b": 11.78,
-      "price": 393.0,
-      "change_pct": 0.35,
-      "dollar_volume": "$179M",
-      "adr_pct": 3.9,
-      "perf_1m": 10.01,
-      "perf_3m": 15.99,
-      "perf_34d": -6.5
-    },
-    {
-      "ticker": "GTES",
-      "company": "Gates Industrial Corporation plc",
-      "industry": "Specialty Industrial Machinery",
-      "market_cap_b": 6.47,
-      "price": 25.48,
-      "change_pct": 0.28,
-      "dollar_volume": "$51M",
-      "adr_pct": 4.2,
-      "perf_1m": 9.97,
-      "perf_3m": 11.8,
-      "perf_34d": -8.15
-    },
-    {
-      "ticker": "ANET",
-      "company": "Arista Networks Inc",
-      "industry": "Computer Hardware",
-      "market_cap_b": 185.15,
-      "price": 147.35,
-      "change_pct": 0.89,
-      "dollar_volume": "$1.0B",
-      "adr_pct": 4.3,
-      "perf_1m": 9.94,
-      "perf_3m": 19.9,
-      "perf_34d": 15.63
+      "ticker": "CVE",
+      "company": "Cenovus Energy Inc",
+      "industry": "Oil & Gas Integrated",
+      "market_cap_b": 48.72,
+      "price": 25.87,
+      "change_pct": 0.82,
+      "dollar_volume": "$201M",
+      "adr_pct": 3.6,
+      "perf_1m": 10.31,
+      "perf_3m": 58.64,
+      "perf_34d": 15.44
     },
     {
       "ticker": "CVLT",
@@ -2344,32 +2604,6 @@
       "perf_1m": 9.57,
       "perf_3m": -1.16,
       "perf_34d": -5.87
-    },
-    {
-      "ticker": "VERA",
-      "company": "Vera Therapeutics Inc",
-      "industry": "Biotechnology",
-      "market_cap_b": 3.21,
-      "price": 45.04,
-      "change_pct": 10.04,
-      "dollar_volume": "$132M",
-      "adr_pct": 5.6,
-      "perf_1m": 9.4,
-      "perf_3m": -7.53,
-      "perf_34d": 7.09
-    },
-    {
-      "ticker": "PR",
-      "company": "Permian Resources Holdings Inc",
-      "industry": "Oil & Gas E&P",
-      "market_cap_b": 17.9,
-      "price": 20.66,
-      "change_pct": 1.37,
-      "dollar_volume": "$204M",
-      "adr_pct": 3.3,
-      "perf_1m": 9.25,
-      "perf_3m": 48.49,
-      "perf_34d": 17.37
     },
     {
       "ticker": "NFLX",
@@ -2411,19 +2645,6 @@
       "perf_34d": 13.11
     },
     {
-      "ticker": "PSKY",
-      "company": "Paramount Skydance Corp",
-      "industry": "Entertainment",
-      "market_cap_b": 11.81,
-      "price": 10.62,
-      "change_pct": -2.12,
-      "dollar_volume": "$101M",
-      "adr_pct": 5.1,
-      "perf_1m": 8.93,
-      "perf_3m": -11.48,
-      "perf_34d": 1.09
-    },
-    {
       "ticker": "MARA",
       "company": "MARA Holdings Inc",
       "industry": "Capital Markets",
@@ -2435,19 +2656,6 @@
       "perf_1m": 8.9,
       "perf_3m": -6.65,
       "perf_34d": 21.07
-    },
-    {
-      "ticker": "APG",
-      "company": "APi Group Corporation",
-      "industry": "Engineering & Construction",
-      "market_cap_b": 19.34,
-      "price": 44.41,
-      "change_pct": 0.61,
-      "dollar_volume": "$108M",
-      "adr_pct": 3.1,
-      "perf_1m": 8.9,
-      "perf_3m": 6.07,
-      "perf_34d": 0.68
     },
     {
       "ticker": "DAR",
@@ -2463,17 +2671,17 @@
       "perf_34d": 18.65
     },
     {
-      "ticker": "CRGY",
-      "company": "Crescent Energy Co",
-      "industry": "Oil & Gas E&P",
-      "market_cap_b": 4.18,
-      "price": 12.74,
-      "change_pct": 0.71,
-      "dollar_volume": "$67M",
-      "adr_pct": 4.3,
-      "perf_1m": 8.52,
-      "perf_3m": 58.5,
-      "perf_34d": 23.4
+      "ticker": "CPRI",
+      "company": "Capri Holdings Ltd",
+      "industry": "Luxury Goods",
+      "market_cap_b": 2.37,
+      "price": 19.88,
+      "change_pct": 0.3,
+      "dollar_volume": "$51M",
+      "adr_pct": 4.4,
+      "perf_1m": 8.69,
+      "perf_3m": -23.89,
+      "perf_34d": -2.88
     },
     {
       "ticker": "MUSA",
@@ -2487,19 +2695,6 @@
       "perf_1m": 8.31,
       "perf_3m": 15.67,
       "perf_34d": 25.98
-    },
-    {
-      "ticker": "PCVX",
-      "company": "Vaxcyte Inc",
-      "industry": "Biotechnology",
-      "market_cap_b": 8.76,
-      "price": 60.88,
-      "change_pct": -1.31,
-      "dollar_volume": "$53M",
-      "adr_pct": 4.0,
-      "perf_1m": 8.31,
-      "perf_3m": 32.2,
-      "perf_34d": 1.03
     },
     {
       "ticker": "DKS",
@@ -2528,30 +2723,30 @@
       "perf_34d": -7.05
     },
     {
-      "ticker": "URBN",
-      "company": "Urban Outfitters, Inc",
-      "industry": "Apparel Retail",
-      "market_cap_b": 5.87,
-      "price": 68.6,
-      "change_pct": -0.17,
-      "dollar_volume": "$56M",
-      "adr_pct": 3.7,
-      "perf_1m": 7.61,
-      "perf_3m": -15.89,
-      "perf_34d": 4.1
+      "ticker": "ABVX",
+      "company": "Abivax ADR",
+      "industry": "Biotechnology",
+      "market_cap_b": 10.0,
+      "price": 126.14,
+      "change_pct": 0.36,
+      "dollar_volume": "$126M",
+      "adr_pct": 5.1,
+      "perf_1m": 7.83,
+      "perf_3m": 10.26,
+      "perf_34d": -5.09
     },
     {
-      "ticker": "BMI",
-      "company": "Badger Meter Inc",
-      "industry": "Scientific & Technical Instruments",
-      "market_cap_b": 4.53,
-      "price": 155.23,
-      "change_pct": -0.12,
-      "dollar_volume": "$65M",
-      "adr_pct": 3.3,
-      "perf_1m": 7.57,
-      "perf_3m": -10.87,
-      "perf_34d": -0.37
+      "ticker": "SU",
+      "company": "Suncor Energy, Inc",
+      "industry": "Oil & Gas Integrated",
+      "market_cap_b": 76.47,
+      "price": 64.43,
+      "change_pct": 1.64,
+      "dollar_volume": "$246M",
+      "adr_pct": 3.1,
+      "perf_1m": 7.83,
+      "perf_3m": 39.06,
+      "perf_34d": 15.39
     },
     {
       "ticker": "ACHC",
@@ -2567,32 +2762,6 @@
       "perf_34d": 49.25
     },
     {
-      "ticker": "VISN",
-      "company": "Vistance Networks Inc",
-      "industry": "Communication Equipment",
-      "market_cap_b": 4.28,
-      "price": 18.97,
-      "change_pct": 1.28,
-      "dollar_volume": "$95M",
-      "adr_pct": 3.6,
-      "perf_1m": 6.69,
-      "perf_3m": 2.54,
-      "perf_34d": 5.98
-    },
-    {
-      "ticker": "MTDR",
-      "company": "Matador Resources Co",
-      "industry": "Oil & Gas E&P",
-      "market_cap_b": 7.44,
-      "price": 59.86,
-      "change_pct": 0.17,
-      "dollar_volume": "$62M",
-      "adr_pct": 3.8,
-      "perf_1m": 6.59,
-      "perf_3m": 42.76,
-      "perf_34d": 17.9
-    },
-    {
       "ticker": "EMN",
       "company": "Eastman Chemical Co",
       "industry": "Specialty Chemicals",
@@ -2606,19 +2775,6 @@
       "perf_34d": -1.86
     },
     {
-      "ticker": "FANG",
-      "company": "Diamondback Energy Inc",
-      "industry": "Oil & Gas E&P",
-      "market_cap_b": 52.94,
-      "price": 188.21,
-      "change_pct": 1.02,
-      "dollar_volume": "$555M",
-      "adr_pct": 3.3,
-      "perf_1m": 6.33,
-      "perf_3m": 28.44,
-      "perf_34d": 8.93
-    },
-    {
       "ticker": "CE",
       "company": "Celanese Corp",
       "industry": "Chemicals",
@@ -2630,58 +2786,6 @@
       "perf_1m": 5.92,
       "perf_3m": 38.61,
       "perf_34d": 20.68
-    },
-    {
-      "ticker": "LNG",
-      "company": "Cheniere Energy Inc",
-      "industry": "Oil & Gas Midstream",
-      "market_cap_b": 55.82,
-      "price": 265.54,
-      "change_pct": -0.09,
-      "dollar_volume": "$613M",
-      "adr_pct": 3.7,
-      "perf_1m": 4.61,
-      "perf_3m": 37.11,
-      "perf_34d": 18.89
-    },
-    {
-      "ticker": "CTRA",
-      "company": "Coterra Energy Inc",
-      "industry": "Oil & Gas E&P",
-      "market_cap_b": 25.37,
-      "price": 33.41,
-      "change_pct": -0.21,
-      "dollar_volume": "$180M",
-      "adr_pct": 3.4,
-      "perf_1m": 4.47,
-      "perf_3m": 35.59,
-      "perf_34d": 9.44
-    },
-    {
-      "ticker": "PRAX",
-      "company": "Praxis Precision Medicines Inc",
-      "industry": "Biotechnology",
-      "market_cap_b": 8.8,
-      "price": 316.14,
-      "change_pct": -1.28,
-      "dollar_volume": "$80M",
-      "adr_pct": 5.9,
-      "perf_1m": 4.21,
-      "perf_3m": 9.6,
-      "perf_34d": -7.69
-    },
-    {
-      "ticker": "CART",
-      "company": "Maplebear Inc",
-      "industry": "Internet Retail",
-      "market_cap_b": 9.44,
-      "price": 39.25,
-      "change_pct": -2.7,
-      "dollar_volume": "$121M",
-      "adr_pct": 3.6,
-      "perf_1m": 4.08,
-      "perf_3m": -4.66,
-      "perf_34d": 8.55
     },
     {
       "ticker": "DOW",
@@ -2708,7 +2812,33 @@
       "perf_1m": 3.63,
       "perf_3m": 42.98,
       "perf_34d": 27.89
+    },
+    {
+      "ticker": "MEOH",
+      "company": "Methanex Corp",
+      "industry": "Chemicals",
+      "market_cap_b": 4.63,
+      "price": 59.87,
+      "change_pct": 3.33,
+      "dollar_volume": "$181M",
+      "adr_pct": 6.9,
+      "perf_1m": 3.5,
+      "perf_3m": 28.26,
+      "perf_34d": 23.19
+    },
+    {
+      "ticker": "LYB",
+      "company": "LyondellBasell Industries NV",
+      "industry": "Specialty Chemicals",
+      "market_cap_b": 23.75,
+      "price": 73.72,
+      "change_pct": 2.01,
+      "dollar_volume": "$362M",
+      "adr_pct": 4.8,
+      "perf_1m": -0.82,
+      "perf_3m": 53.18,
+      "perf_34d": 31.69
     }
   ],
-  "fetched_at_utc": "2026-04-13T03:57:29+00:00"
+  "fetched_at_utc": "2026-04-13T07:24:36+00:00"
 }

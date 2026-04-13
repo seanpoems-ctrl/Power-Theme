@@ -3,7 +3,7 @@
   "filter": "dn50m",
   "label": "Down 50%+ Monthly",
   "min_cap_b": 1.0,
-  "count": 240,
+  "count": 243,
   "stocks": [
     {
       "ticker": "SNOW",
@@ -110,6 +110,19 @@
       "perf_34d": -3.49
     },
     {
+      "ticker": "WIX",
+      "company": "Wix.com Ltd",
+      "industry": "Software - Infrastructure",
+      "market_cap_b": 3.59,
+      "price": 65.13,
+      "change_pct": -3.75,
+      "dollar_volume": "$260M",
+      "adr_pct": 5.7,
+      "perf_1m": -25.06,
+      "perf_3m": -32.04,
+      "perf_34d": 3.71
+    },
+    {
       "ticker": "TTD",
       "company": "Trade Desk Inc",
       "industry": "Advertising Agencies",
@@ -121,6 +134,19 @@
       "perf_1m": -24.26,
       "perf_3m": -46.12,
       "perf_34d": -16.88
+    },
+    {
+      "ticker": "CLBT",
+      "company": "Cellebrite DI Ltd",
+      "industry": "Software - Infrastructure",
+      "market_cap_b": 2.75,
+      "price": 11.03,
+      "change_pct": -11.12,
+      "dollar_volume": "$56M",
+      "adr_pct": 5.7,
+      "perf_1m": -24.09,
+      "perf_3m": -40.25,
+      "perf_34d": -7.62
     },
     {
       "ticker": "NXST",
@@ -318,6 +344,19 @@
       "perf_34d": -21.05
     },
     {
+      "ticker": "MNDY",
+      "company": "Monday.Com Ltd",
+      "industry": "Software - Application",
+      "market_cap_b": 3.01,
+      "price": 58.81,
+      "change_pct": -5.74,
+      "dollar_volume": "$148M",
+      "adr_pct": 5.1,
+      "perf_1m": -20.07,
+      "perf_3m": -60.27,
+      "perf_34d": -16.14
+    },
+    {
       "ticker": "INTU",
       "company": "Intuit Inc",
       "industry": "Software - Application",
@@ -329,6 +368,19 @@
       "perf_1m": -19.1,
       "perf_3m": -45.58,
       "perf_34d": -2.09
+    },
+    {
+      "ticker": "SRAD",
+      "company": "Sportradar Group AG",
+      "industry": "Software - Application",
+      "market_cap_b": 4.82,
+      "price": 15.47,
+      "change_pct": 1.51,
+      "dollar_volume": "$52M",
+      "adr_pct": 5.3,
+      "perf_1m": -19.09,
+      "perf_3m": -25.91,
+      "perf_34d": -9.9
     },
     {
       "ticker": "ZETA",
@@ -420,6 +472,19 @@
       "perf_1m": -18.23,
       "perf_3m": -6.54,
       "perf_34d": -14.05
+    },
+    {
+      "ticker": "NICE",
+      "company": "NICE Ltd ADR",
+      "industry": "Software - Application",
+      "market_cap_b": 5.86,
+      "price": 97.0,
+      "change_pct": -7.14,
+      "dollar_volume": "$82M",
+      "adr_pct": 4.1,
+      "perf_1m": -18.05,
+      "perf_3m": -17.14,
+      "perf_34d": -15.18
     },
     {
       "ticker": "PATH",
@@ -578,6 +643,19 @@
       "perf_34d": -8.65
     },
     {
+      "ticker": "AG",
+      "company": "First Majestic Silver Corporation",
+      "industry": "Silver",
+      "market_cap_b": 10.16,
+      "price": 20.58,
+      "change_pct": -0.05,
+      "dollar_volume": "$241M",
+      "adr_pct": 6.9,
+      "perf_1m": -16.44,
+      "perf_3m": 8.86,
+      "perf_34d": -28.02
+    },
+    {
       "ticker": "ESTC",
       "company": "Elastic N.V",
       "industry": "Software - Application",
@@ -602,6 +680,19 @@
       "perf_1m": -16.24,
       "perf_3m": -36.94,
       "perf_34d": -12.05
+    },
+    {
+      "ticker": "TRI",
+      "company": "Thomson-Reuters Corp",
+      "industry": "Specialty Business Services",
+      "market_cap_b": 37.04,
+      "price": 83.27,
+      "change_pct": -1.89,
+      "dollar_volume": "$131M",
+      "adr_pct": 3.7,
+      "perf_1m": -16.13,
+      "perf_3m": -35.08,
+      "perf_34d": 2.98
     },
     {
       "ticker": "WDAY",
@@ -1007,6 +1098,19 @@
       "perf_34d": -11.41
     },
     {
+      "ticker": "CHKP",
+      "company": "Check Point Software Technologies Ltd",
+      "industry": "Software - Infrastructure",
+      "market_cap_b": 14.09,
+      "price": 135.22,
+      "change_pct": -4.67,
+      "dollar_volume": "$207M",
+      "adr_pct": 3.6,
+      "perf_1m": -13.2,
+      "perf_3m": -29.82,
+      "perf_34d": -12.61
+    },
+    {
       "ticker": "COIN",
       "company": "Coinbase Global Inc",
       "industry": "Financial Data & Stock Exchanges",
@@ -1111,6 +1215,19 @@
       "perf_34d": -6.47
     },
     {
+      "ticker": "XPEV",
+      "company": "XPeng Inc ADR",
+      "industry": "Auto Manufacturers",
+      "market_cap_b": 13.61,
+      "price": 17.42,
+      "change_pct": 0.75,
+      "dollar_volume": "$95M",
+      "adr_pct": 3.4,
+      "perf_1m": -12.81,
+      "perf_3m": -12.99,
+      "perf_34d": -0.8
+    },
+    {
       "ticker": "LCID",
       "company": "Lucid Group Inc",
       "industry": "Auto Manufacturers",
@@ -1135,6 +1252,19 @@
       "perf_1m": -12.75,
       "perf_3m": -10.76,
       "perf_34d": -6.39
+    },
+    {
+      "ticker": "EXK",
+      "company": "Endeavour Silver Corp",
+      "industry": "Silver",
+      "market_cap_b": 2.79,
+      "price": 9.42,
+      "change_pct": -1.77,
+      "dollar_volume": "$66M",
+      "adr_pct": 6.6,
+      "perf_1m": -12.62,
+      "perf_3m": -11.3,
+      "perf_34d": -27.43
     },
     {
       "ticker": "ADSK",
@@ -1174,6 +1304,19 @@
       "perf_1m": -12.2,
       "perf_3m": -38.71,
       "perf_34d": -22.41
+    },
+    {
+      "ticker": "SHOP",
+      "company": "Shopify Inc",
+      "industry": "Software - Application",
+      "market_cap_b": 144.48,
+      "price": 110.79,
+      "change_pct": -1.41,
+      "dollar_volume": "$972M",
+      "adr_pct": 4.8,
+      "perf_1m": -12.19,
+      "perf_3m": -32.64,
+      "perf_34d": -5.53
     },
     {
       "ticker": "NTNX",
@@ -1241,6 +1384,19 @@
       "perf_34d": -12.73
     },
     {
+      "ticker": "ONON",
+      "company": "On Holding AG",
+      "industry": "Footwear & Accessories",
+      "market_cap_b": 11.1,
+      "price": 33.55,
+      "change_pct": -2.58,
+      "dollar_volume": "$199M",
+      "adr_pct": 5.2,
+      "perf_1m": -11.62,
+      "perf_3m": -31.7,
+      "perf_34d": -29.28
+    },
+    {
       "ticker": "ONDS",
       "company": "Ondas Inc",
       "industry": "Communication Equipment",
@@ -1254,6 +1410,19 @@
       "perf_34d": -10.4
     },
     {
+      "ticker": "NTR",
+      "company": "Nutrien Ltd",
+      "industry": "Agricultural Inputs",
+      "market_cap_b": 35.48,
+      "price": 73.75,
+      "change_pct": 1.33,
+      "dollar_volume": "$130M",
+      "adr_pct": 3.5,
+      "perf_1m": -11.5,
+      "perf_3m": 24.18,
+      "perf_34d": 3.3
+    },
+    {
       "ticker": "DLTR",
       "company": "Dollar Tree Inc",
       "industry": "Discount Stores",
@@ -1265,6 +1434,19 @@
       "perf_1m": -10.88,
       "perf_3m": -24.8,
       "perf_34d": -23.66
+    },
+    {
+      "ticker": "KLAR",
+      "company": "Klarna Group plc",
+      "industry": "Software - Infrastructure",
+      "market_cap_b": 4.92,
+      "price": 13.04,
+      "change_pct": -0.46,
+      "dollar_volume": "$69M",
+      "adr_pct": 6.0,
+      "perf_1m": -10.81,
+      "perf_3m": -58.54,
+      "perf_34d": 1.72
     },
     {
       "ticker": "IT",
@@ -1304,6 +1486,32 @@
       "perf_1m": -10.26,
       "perf_3m": -25.16,
       "perf_34d": -27.69
+    },
+    {
+      "ticker": "PSLV",
+      "company": "Sprott Physical Silver Trust",
+      "industry": "Asset Management",
+      "market_cap_b": 14.39,
+      "price": 24.78,
+      "change_pct": 1.18,
+      "dollar_volume": "$179M",
+      "adr_pct": 3.7,
+      "perf_1m": -9.99,
+      "perf_3m": -6.31,
+      "perf_34d": -16.34
+    },
+    {
+      "ticker": "G",
+      "company": "Genpact Ltd",
+      "industry": "Information Technology Services",
+      "market_cap_b": 5.8,
+      "price": 34.18,
+      "change_pct": -3.83,
+      "dollar_volume": "$103M",
+      "adr_pct": 3.4,
+      "perf_1m": -9.96,
+      "perf_3m": -28.8,
+      "perf_34d": -8.5
     },
     {
       "ticker": "EPAM",
@@ -1553,6 +1761,19 @@
       "perf_34d": 2.73
     },
     {
+      "ticker": "ACN",
+      "company": "Accenture plc",
+      "industry": "Information Technology Services",
+      "market_cap_b": 110.22,
+      "price": 179.53,
+      "change_pct": -3.49,
+      "dollar_volume": "$1.3B",
+      "adr_pct": 3.4,
+      "perf_1m": -7.65,
+      "perf_3m": -35.49,
+      "perf_34d": -10.0
+    },
+    {
       "ticker": "PANW",
       "company": "Palo Alto Networks Inc",
       "industry": "Software - Infrastructure",
@@ -1709,6 +1930,19 @@
       "perf_34d": -2.08
     },
     {
+      "ticker": "SPOT",
+      "company": "Spotify Technology S.A",
+      "industry": "Internet Content & Information",
+      "market_cap_b": 97.97,
+      "price": 475.99,
+      "change_pct": -2.18,
+      "dollar_volume": "$750M",
+      "adr_pct": 3.9,
+      "perf_1m": -6.59,
+      "perf_3m": -11.75,
+      "perf_34d": 1.74
+    },
+    {
       "ticker": "HYMC",
       "company": "Hycroft Mining Holding Corporation",
       "industry": "Gold",
@@ -1746,6 +1980,19 @@
       "perf_1m": -6.45,
       "perf_3m": -7.81,
       "perf_34d": -11.9
+    },
+    {
+      "ticker": "IAG",
+      "company": "Iamgold Corp",
+      "industry": "Gold",
+      "market_cap_b": 11.79,
+      "price": 20.02,
+      "change_pct": 1.21,
+      "dollar_volume": "$68M",
+      "adr_pct": 4.9,
+      "perf_1m": -6.36,
+      "perf_3m": 16.33,
+      "perf_34d": -12.04
     },
     {
       "ticker": "MSTR",
@@ -1824,6 +2071,19 @@
       "perf_1m": -6.1,
       "perf_3m": 20.75,
       "perf_34d": 11.44
+    },
+    {
+      "ticker": "EGO",
+      "company": "Eldorado Gold Corp",
+      "industry": "Gold",
+      "market_cap_b": 7.24,
+      "price": 36.46,
+      "change_pct": 2.13,
+      "dollar_volume": "$76M",
+      "adr_pct": 5.2,
+      "perf_1m": -6.08,
+      "perf_3m": -4.6,
+      "perf_34d": -16.81
     },
     {
       "ticker": "TMDX",
@@ -1956,17 +2216,17 @@
       "perf_34d": -5.25
     },
     {
-      "ticker": "PBF",
-      "company": "PBF Energy Inc",
-      "industry": "Oil & Gas Refining & Marketing",
-      "market_cap_b": 4.76,
-      "price": 40.67,
-      "change_pct": 0.3,
-      "dollar_volume": "$88M",
-      "adr_pct": 5.9,
-      "perf_1m": -5.24,
-      "perf_3m": 25.09,
-      "perf_34d": 19.44
+      "ticker": "EQX",
+      "company": "Equinox Gold Corp",
+      "industry": "Gold",
+      "market_cap_b": 11.89,
+      "price": 15.08,
+      "change_pct": 1.34,
+      "dollar_volume": "$95M",
+      "adr_pct": 5.3,
+      "perf_1m": -5.28,
+      "perf_3m": 6.6,
+      "perf_34d": -15.44
     },
     {
       "ticker": "HL",
@@ -2045,6 +2305,19 @@
       "perf_1m": -4.97,
       "perf_3m": -17.56,
       "perf_34d": -21.28
+    },
+    {
+      "ticker": "IREN",
+      "company": "IREN Ltd",
+      "industry": "Capital Markets",
+      "market_cap_b": 13.04,
+      "price": 39.32,
+      "change_pct": 6.1,
+      "dollar_volume": "$1.4B",
+      "adr_pct": 8.0,
+      "perf_1m": -4.96,
+      "perf_3m": -14.58,
+      "perf_34d": -7.18
     },
     {
       "ticker": "GME",
@@ -2203,6 +2476,19 @@
       "perf_34d": -33.69
     },
     {
+      "ticker": "PAAS",
+      "company": "Pan American Silver Corp",
+      "industry": "Gold",
+      "market_cap_b": 24.32,
+      "price": 57.64,
+      "change_pct": 1.39,
+      "dollar_volume": "$164M",
+      "adr_pct": 4.7,
+      "perf_1m": -4.05,
+      "perf_3m": 6.49,
+      "perf_34d": -11.34
+    },
+    {
       "ticker": "UEC",
       "company": "Uranium Energy Corp",
       "industry": "Uranium",
@@ -2333,19 +2619,6 @@
       "perf_34d": 11.58
     },
     {
-      "ticker": "COKE",
-      "company": "Coca-Cola Consolidated Inc",
-      "industry": "Beverages - Non-Alcoholic",
-      "market_cap_b": 13.54,
-      "price": 203.42,
-      "change_pct": -2.69,
-      "dollar_volume": "$85M",
-      "adr_pct": 4.3,
-      "perf_1m": -2.99,
-      "perf_3m": 35.52,
-      "perf_34d": 9.78
-    },
-    {
       "ticker": "FLUT",
       "company": "Flutter Entertainment Plc",
       "industry": "Gambling",
@@ -2357,19 +2630,6 @@
       "perf_1m": -2.98,
       "perf_3m": -52.45,
       "perf_34d": -11.3
-    },
-    {
-      "ticker": "VST",
-      "company": "Vistra Corp",
-      "industry": "Utilities - Independent Power Producers",
-      "market_cap_b": 52.38,
-      "price": 154.73,
-      "change_pct": 1.3,
-      "dollar_volume": "$448M",
-      "adr_pct": 4.4,
-      "perf_1m": -2.91,
-      "perf_3m": -6.87,
-      "perf_34d": -7.66
     },
     {
       "ticker": "KBH",
@@ -2489,6 +2749,19 @@
       "perf_34d": -6.74
     },
     {
+      "ticker": "B",
+      "company": "Barrick Mining Corp",
+      "industry": "Gold",
+      "market_cap_b": 72.96,
+      "price": 43.55,
+      "change_pct": 2.64,
+      "dollar_volume": "$421M",
+      "adr_pct": 3.8,
+      "perf_1m": -2.11,
+      "perf_3m": -8.14,
+      "perf_34d": -10.78
+    },
+    {
       "ticker": "TPG",
       "company": "TPG Inc",
       "industry": "Asset Management",
@@ -2541,19 +2814,6 @@
       "perf_34d": -17.04
     },
     {
-      "ticker": "TKO",
-      "company": "TKO Group Holdings Inc",
-      "industry": "Entertainment",
-      "market_cap_b": 38.31,
-      "price": 197.37,
-      "change_pct": 0.15,
-      "dollar_volume": "$128M",
-      "adr_pct": 3.4,
-      "perf_1m": -1.54,
-      "perf_3m": -0.73,
-      "perf_34d": -3.78
-    },
-    {
       "ticker": "BLDR",
       "company": "Builders Firstsource Inc",
       "industry": "Building Products & Equipment",
@@ -2591,19 +2851,6 @@
       "perf_1m": -1.41,
       "perf_3m": -19.91,
       "perf_34d": -12.88
-    },
-    {
-      "ticker": "HRB",
-      "company": "H&R Block Inc",
-      "industry": "Personal Services",
-      "market_cap_b": 3.78,
-      "price": 29.8,
-      "change_pct": -3.47,
-      "dollar_volume": "$54M",
-      "adr_pct": 3.7,
-      "perf_1m": -1.39,
-      "perf_3m": -33.0,
-      "perf_34d": 4.15
     },
     {
       "ticker": "MIDD",
@@ -2658,17 +2905,30 @@
       "perf_34d": -1.08
     },
     {
-      "ticker": "WHR",
-      "company": "Whirlpool Corp",
-      "industry": "Furnishings, Fixtures & Appliances",
-      "market_cap_b": 3.67,
-      "price": 56.51,
-      "change_pct": -0.65,
-      "dollar_volume": "$74M",
-      "adr_pct": 4.3,
-      "perf_1m": -1.1,
-      "perf_3m": -31.39,
-      "perf_34d": -31.19
+      "ticker": "ROIV",
+      "company": "Roivant Sciences Ltd",
+      "industry": "Biotechnology",
+      "market_cap_b": 20.19,
+      "price": 28.21,
+      "change_pct": -0.95,
+      "dollar_volume": "$88M",
+      "adr_pct": 3.4,
+      "perf_1m": -1.19,
+      "perf_3m": 28.34,
+      "perf_34d": 1.62
+    },
+    {
+      "ticker": "INFY",
+      "company": "Infosys Ltd ADR",
+      "industry": "Information Technology Services",
+      "market_cap_b": 53.9,
+      "price": 13.29,
+      "change_pct": -3.42,
+      "dollar_volume": "$257M",
+      "adr_pct": 3.0,
+      "perf_1m": -1.12,
+      "perf_3m": -25.46,
+      "perf_34d": -4.46
     },
     {
       "ticker": "INDV",
@@ -2697,19 +2957,6 @@
       "perf_34d": -6.28
     },
     {
-      "ticker": "VVV",
-      "company": "Valvoline Inc",
-      "industry": "Auto & Truck Dealerships",
-      "market_cap_b": 4.3,
-      "price": 33.77,
-      "change_pct": -2.99,
-      "dollar_volume": "$50M",
-      "adr_pct": 3.3,
-      "perf_1m": -0.79,
-      "perf_3m": 4.81,
-      "perf_34d": -13.19
-    },
-    {
       "ticker": "RKLB",
       "company": "Rocket Lab Corp",
       "industry": "Aerospace & Defense",
@@ -2736,19 +2983,6 @@
       "perf_34d": -18.79
     },
     {
-      "ticker": "PSTG",
-      "company": "Everpure Inc",
-      "industry": "Computer Hardware",
-      "market_cap_b": 20.14,
-      "price": 60.94,
-      "change_pct": 1.25,
-      "dollar_volume": "$131M",
-      "adr_pct": 4.6,
-      "perf_1m": -0.1,
-      "perf_3m": -9.02,
-      "perf_34d": -10.96
-    },
-    {
       "ticker": "FISV",
       "company": "Fiserv, Inc",
       "industry": "Information Technology Services",
@@ -2760,19 +2994,6 @@
       "perf_1m": 0.04,
       "perf_3m": -19.7,
       "perf_34d": -3.96
-    },
-    {
-      "ticker": "KBR",
-      "company": "KBR Inc",
-      "industry": "Engineering & Construction",
-      "market_cap_b": 4.64,
-      "price": 36.67,
-      "change_pct": -2.21,
-      "dollar_volume": "$73M",
-      "adr_pct": 3.2,
-      "perf_1m": 0.12,
-      "perf_3m": -16.96,
-      "perf_34d": -8.67
     },
     {
       "ticker": "LYV",
@@ -2788,19 +3009,6 @@
       "perf_34d": 1.46
     },
     {
-      "ticker": "MHK",
-      "company": "Mohawk Industries, Inc",
-      "industry": "Furnishings, Fixtures & Appliances",
-      "market_cap_b": 6.36,
-      "price": 103.48,
-      "change_pct": 0.29,
-      "dollar_volume": "$61M",
-      "adr_pct": 3.9,
-      "perf_1m": 0.47,
-      "perf_3m": -12.84,
-      "perf_34d": -16.65
-    },
-    {
       "ticker": "FOUR",
       "company": "Shift4 Payments Inc",
       "industry": "Software - Infrastructure",
@@ -2812,19 +3020,6 @@
       "perf_1m": 0.61,
       "perf_3m": -33.94,
       "perf_34d": -23.13
-    },
-    {
-      "ticker": "AMBA",
-      "company": "Ambarella Inc",
-      "industry": "Semiconductor Equipment & Materials",
-      "market_cap_b": 2.31,
-      "price": 52.78,
-      "change_pct": -0.86,
-      "dollar_volume": "$64M",
-      "adr_pct": 4.2,
-      "perf_1m": 0.69,
-      "perf_3m": -23.78,
-      "perf_34d": -21.38
     },
     {
       "ticker": "RIVN",
@@ -2853,32 +3048,6 @@
       "perf_34d": 4.88
     },
     {
-      "ticker": "EQH",
-      "company": "Equitable Holdings Inc",
-      "industry": "Asset Management",
-      "market_cap_b": 10.53,
-      "price": 37.43,
-      "change_pct": -2.73,
-      "dollar_volume": "$195M",
-      "adr_pct": 4.2,
-      "perf_1m": 1.0,
-      "perf_3m": -22.43,
-      "perf_34d": -6.27
-    },
-    {
-      "ticker": "CLF",
-      "company": "Cleveland-Cliffs Inc",
-      "industry": "Steel",
-      "market_cap_b": 5.16,
-      "price": 9.04,
-      "change_pct": -2.06,
-      "dollar_volume": "$86M",
-      "adr_pct": 4.5,
-      "perf_1m": 1.35,
-      "perf_3m": -29.15,
-      "perf_34d": -16.14
-    },
-    {
       "ticker": "RVMD",
       "company": "Revolution Medicines Inc",
       "industry": "Biotechnology",
@@ -2892,82 +3061,17 @@
       "perf_34d": -7.0
     },
     {
-      "ticker": "GNRC",
-      "company": "Generac Holdings Inc",
-      "industry": "Specialty Industrial Machinery",
-      "market_cap_b": 12.15,
-      "price": 207.03,
-      "change_pct": -0.15,
-      "dollar_volume": "$89M",
-      "adr_pct": 4.7,
-      "perf_1m": 1.44,
-      "perf_3m": 35.51,
-      "perf_34d": -8.98
-    },
-    {
-      "ticker": "SWK",
-      "company": "Stanley Black & Decker Inc",
-      "industry": "Tools & Accessories",
-      "market_cap_b": 11.21,
-      "price": 72.19,
-      "change_pct": -1.69,
-      "dollar_volume": "$115M",
-      "adr_pct": 3.6,
-      "perf_1m": 1.55,
-      "perf_3m": -11.36,
-      "perf_34d": -16.38
-    },
-    {
-      "ticker": "TOL",
-      "company": "Toll Brothers Inc",
-      "industry": "Residential Construction",
-      "market_cap_b": 13.27,
-      "price": 140.12,
-      "change_pct": -0.08,
-      "dollar_volume": "$173M",
-      "adr_pct": 3.0,
-      "perf_1m": 1.71,
-      "perf_3m": -3.44,
-      "perf_34d": -11.4
-    },
-    {
-      "ticker": "CHTR",
-      "company": "Charter Communications Inc",
-      "industry": "Telecom Services",
-      "market_cap_b": 30.89,
-      "price": 218.82,
-      "change_pct": -1.98,
-      "dollar_volume": "$299M",
-      "adr_pct": 3.6,
-      "perf_1m": 1.74,
-      "perf_3m": 3.91,
-      "perf_34d": -3.82
-    },
-    {
-      "ticker": "RKT",
-      "company": "Rocket Companies Inc",
-      "industry": "Mortgage Finance",
-      "market_cap_b": 41.87,
-      "price": 14.85,
-      "change_pct": -1.13,
-      "dollar_volume": "$318M",
-      "adr_pct": 4.7,
-      "perf_1m": 1.85,
-      "perf_3m": -36.24,
-      "perf_34d": -13.11
-    },
-    {
-      "ticker": "ASO",
-      "company": "Academy Sports and Outdoors Inc",
-      "industry": "Specialty Retail",
-      "market_cap_b": 3.63,
-      "price": 56.37,
-      "change_pct": 1.24,
-      "dollar_volume": "$67M",
-      "adr_pct": 4.5,
-      "perf_1m": 1.86,
-      "perf_3m": 3.5,
-      "perf_34d": -4.01
+      "ticker": "STNE",
+      "company": "StoneCo Ltd",
+      "industry": "Software - Infrastructure",
+      "market_cap_b": 3.81,
+      "price": 14.06,
+      "change_pct": 0.14,
+      "dollar_volume": "$58M",
+      "adr_pct": 4.2,
+      "perf_1m": 1.59,
+      "perf_3m": -5.57,
+      "perf_34d": -15.61
     },
     {
       "ticker": "ALK",
@@ -3009,45 +3113,6 @@
       "perf_34d": -21.94
     },
     {
-      "ticker": "CHWY",
-      "company": "Chewy Inc",
-      "industry": "Internet Retail",
-      "market_cap_b": 10.5,
-      "price": 25.21,
-      "change_pct": -3.04,
-      "dollar_volume": "$185M",
-      "adr_pct": 4.2,
-      "perf_1m": 2.48,
-      "perf_3m": -21.64,
-      "perf_34d": 2.02
-    },
-    {
-      "ticker": "NCLH",
-      "company": "Norwegian Cruise Line Holdings Ltd",
-      "industry": "Travel Services",
-      "market_cap_b": 9.09,
-      "price": 19.96,
-      "change_pct": 0.0,
-      "dollar_volume": "$232M",
-      "adr_pct": 4.7,
-      "perf_1m": 2.57,
-      "perf_3m": -18.63,
-      "perf_34d": -15.03
-    },
-    {
-      "ticker": "IQV",
-      "company": "IQVIA Holdings Inc",
-      "industry": "Diagnostics & Research",
-      "market_cap_b": 28.4,
-      "price": 167.34,
-      "change_pct": -0.97,
-      "dollar_volume": "$243M",
-      "adr_pct": 3.7,
-      "perf_1m": 2.71,
-      "perf_3m": -30.97,
-      "perf_34d": 3.1
-    },
-    {
       "ticker": "XYZ",
       "company": "Block Inc",
       "industry": "Software - Infrastructure",
@@ -3074,19 +3139,6 @@
       "perf_34d": -8.0
     },
     {
-      "ticker": "LW",
-      "company": "Lamb Weston Holdings Inc",
-      "industry": "Packaged Foods",
-      "market_cap_b": 5.83,
-      "price": 42.19,
-      "change_pct": 1.39,
-      "dollar_volume": "$79M",
-      "adr_pct": 3.8,
-      "perf_1m": 4.3,
-      "perf_3m": 2.83,
-      "perf_34d": -10.65
-    },
-    {
       "ticker": "AFRM",
       "company": "Affirm Holdings Inc",
       "industry": "Credit Services",
@@ -3098,19 +3150,6 @@
       "perf_1m": 4.64,
       "perf_3m": -40.67,
       "perf_34d": 2.97
-    },
-    {
-      "ticker": "ARES",
-      "company": "Ares Management Corp",
-      "industry": "Asset Management",
-      "market_cap_b": 33.1,
-      "price": 100.46,
-      "change_pct": -4.14,
-      "dollar_volume": "$445M",
-      "adr_pct": 4.6,
-      "perf_1m": 5.52,
-      "perf_3m": -42.11,
-      "perf_34d": -11.12
     },
     {
       "ticker": "FTAI",
@@ -3126,5 +3165,5 @@
       "perf_34d": -11.39
     }
   ],
-  "fetched_at_utc": "2026-04-13T03:59:03+00:00"
+  "fetched_at_utc": "2026-04-13T07:26:14+00:00"
 }
