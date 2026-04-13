@@ -3,7 +3,7 @@
   "filter": "up4",
   "label": "Up 4%+ Today",
   "min_cap_b": 1.0,
-  "count": 41,
+  "count": 34,
   "stocks": [
     {
       "ticker": "OGN",
@@ -30,19 +30,6 @@
       "perf_1m": 24.31,
       "perf_3m": -8.34,
       "perf_34d": 16.23
-    },
-    {
-      "ticker": "MANE",
-      "company": "Veradermics Inc",
-      "industry": "Biotechnology",
-      "market_cap_b": 2.57,
-      "price": 68.8,
-      "change_pct": 14.7,
-      "dollar_volume": "$43M",
-      "adr_pct": 9.8,
-      "perf_1m": 33.41,
-      "perf_3m": null,
-      "perf_34d": 52.89
     },
     {
       "ticker": "TTMI",
@@ -201,32 +188,6 @@
       "perf_34d": 68.82
     },
     {
-      "ticker": "LB",
-      "company": "Landbridge Company LLC",
-      "industry": "Oil & Gas Equipment & Services",
-      "market_cap_b": 5.24,
-      "price": 68.01,
-      "change_pct": 6.47,
-      "dollar_volume": "$36M",
-      "adr_pct": 5.7,
-      "perf_1m": -6.48,
-      "perf_3m": 34.94,
-      "perf_34d": 2.5
-    },
-    {
-      "ticker": "EMAT",
-      "company": "Evolution Metals & Technologies Corp",
-      "industry": "Other Industrial Metals & Mining",
-      "market_cap_b": 4.71,
-      "price": 7.93,
-      "change_pct": 6.3,
-      "dollar_volume": "$1M",
-      "adr_pct": 8.8,
-      "perf_1m": -0.25,
-      "perf_3m": -51.65,
-      "perf_34d": -19.49
-    },
-    {
       "ticker": "INFQ",
       "company": "Infleqtion Inc",
       "industry": "Software - Infrastructure",
@@ -305,32 +266,6 @@
       "perf_34d": 23.37
     },
     {
-      "ticker": "MWH",
-      "company": "SOLV Energy Inc",
-      "industry": "Utilities - Renewable",
-      "market_cap_b": 6.41,
-      "price": 31.66,
-      "change_pct": 5.04,
-      "dollar_volume": "$26M",
-      "adr_pct": 5.8,
-      "perf_1m": 10.93,
-      "perf_3m": null,
-      "perf_34d": 1.02
-    },
-    {
-      "ticker": "FLOC",
-      "company": "Flowco Holdings Inc",
-      "industry": "Oil & Gas Equipment & Services",
-      "market_cap_b": 2.08,
-      "price": 22.79,
-      "change_pct": 4.78,
-      "dollar_volume": "$40M",
-      "adr_pct": 4.3,
-      "perf_1m": 2.38,
-      "perf_3m": 18.33,
-      "perf_34d": 0.8
-    },
-    {
       "ticker": "AVGO",
       "company": "Broadcom Inc",
       "industry": "Semiconductors",
@@ -368,32 +303,6 @@
       "perf_1m": 23.01,
       "perf_3m": 18.27,
       "perf_34d": 15.92
-    },
-    {
-      "ticker": "COCO",
-      "company": "Vita Coco Company Inc",
-      "industry": "Beverages - Non-Alcoholic",
-      "market_cap_b": 2.91,
-      "price": 51.0,
-      "change_pct": 4.44,
-      "dollar_volume": "$43M",
-      "adr_pct": 5.0,
-      "perf_1m": -12.05,
-      "perf_3m": -7.22,
-      "perf_34d": -4.89
-    },
-    {
-      "ticker": "IE",
-      "company": "Ivanhoe Electric Inc",
-      "industry": "Copper",
-      "market_cap_b": 2.12,
-      "price": 13.44,
-      "change_pct": 4.43,
-      "dollar_volume": "$27M",
-      "adr_pct": 5.7,
-      "perf_1m": 4.02,
-      "perf_3m": -19.76,
-      "perf_34d": -13.68
     },
     {
       "ticker": "MKC",
@@ -539,5 +448,5 @@
       "perf_34d": -4.27
     }
   ],
-  "fetched_at_utc": "2026-04-13T02:45:50+00:00"
+  "fetched_at_utc": "2026-04-13T03:56:07+00:00"
 }

@@ -70,6 +70,8 @@ FILTER_LABELS: dict[str, str] = {
 FINVIZ_BASE = "https://finviz.com"
 MAX_PAGES = 25
 MIN_CAP_B = 1.0
+MIN_DOLLAR_VOL = 50_000_000   # $50M average daily dollar volume
+MIN_ADR_PCT    = 3.0          # 3% average daily range
 YFINANCE_BATCH = 200
 
 # Which field to use when re-sorting after yfinance enrichment (mirrors PERF_FIELD in BreadthStockModal.js)
@@ -343,7 +345,7 @@ async def _fetch_filter(filter_key: str) -> dict[str, Any]:
             if len(raw) < 20:
                 break
 
-    logger.info("[%s] fetched %d stocks", filter_key, len(qualifying))
+    logger.info("[%s] fetched %d stocks before liquidity filter", filter_key, len(qualifying))
 
     # Enrich with ADR% + performance metrics (sync in thread to avoid blocking event loop)
     if qualifying:
@@ -355,6 +357,23 @@ async def _fetch_filter(filter_key: str) -> dict[str, Any]:
             s["perf_1m"]  = m.get("perf_1m")
             s["perf_3m"]  = m.get("perf_3m")
             s["perf_34d"] = m.get("perf_34d")
+
+    # Liquidity filter: $50M avg daily dollar volume AND ADR >= 3%
+    def _parse_dv(v: str) -> float:
+        if not v or v == "—": return 0.0
+        v = str(v).replace("$", "").strip()
+        mult = {"K": 1e3, "M": 1e6, "B": 1e9}.get(v[-1].upper(), 1)
+        try: return float(v[:-1]) * mult if v[-1].upper() in "KMB" else float(v)
+        except: return 0.0
+
+    before = len(qualifying)
+    qualifying = [
+        s for s in qualifying
+        if _parse_dv(s.get("dollar_volume", "")) >= MIN_DOLLAR_VOL
+        and (s.get("adr_pct") or 0) >= MIN_ADR_PCT
+    ]
+    logger.info("[%s] %d → %d stocks after liquidity filter ($%.0fM, ADR>=%.1f%%)",
+                filter_key, before, len(qualifying), MIN_DOLLAR_VOL/1e6, MIN_ADR_PCT)
 
     # Re-sort by the canonical field for this filter (nulls last)
     sort_field = SORT_FIELD_MAP.get(filter_key, "change_pct")
