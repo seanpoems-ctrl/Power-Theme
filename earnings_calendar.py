@@ -63,12 +63,13 @@ WEEK_END     = TODAY_ET + timedelta(days=7)
 OUTPUT_PATH  = Path("public/earnings_calendar.json")
 THEMATIC_JSON = Path("public/thematic_data.json")
 
-# Quality filters (same as breadth_stocks_builder.py)
+# Quality filters for earnings calendar.
+# ADR% is intentionally NOT filtered — large stable caps (GS, JPM, AAPL) have low
+# normal ADR but are exactly the stocks we want to track on earnings day.
 MIN_MKT_CAP_B  = 1.0          # $1B
 MIN_AVG_VOL    = 100_000       # shares
 MIN_PRICE      = 5.0           # dollars
-MIN_DOLLAR_VOL = 50_000_000    # $50M
-MIN_ADR_PCT    = 2.5           # %
+MIN_DOLLAR_VOL = 20_000_000    # $20M (lower than breadth scanner — coverage > liquidity)
 
 FINVIZ_HEADERS = {
     "User-Agent": (
@@ -492,9 +493,7 @@ def _apply_filters(records: list[dict]) -> list[dict]:
             logger.debug("Filter: %s dollar_vol $%,.0f < $%,.0f",
                          r["ticker"], r.get("dollar_volume",0), MIN_DOLLAR_VOL)
             continue
-        if (r.get("adr_pct") or 0) < MIN_ADR_PCT:
-            logger.debug("Filter: %s ADR%% %.1f < %.1f", r["ticker"], r.get("adr_pct",0), MIN_ADR_PCT)
-            continue
+        # ADR% not filtered — large caps like GS/JPM/AAPL have low normal ADR
         passed.append(r)
 
     logger.info("Quality filter: %d → %d records", len(records), len(passed))

@@ -1,26 +1,23 @@
 {
-  "generated_at": "2026-04-13T12:09:34.321744+00:00",
-  "data_source": "fallback",
-  "today": [
+  "generated_at": "2026-04-13T12:45:19.584137+00:00",
+  "data_source": "yfinance",
+  "earnings": [
     {
-      "ticker": "BMM",
-      "time_of_day": "",
-      "eps_estimate": null,
-      "source": "yfinance"
-    }
-  ],
-  "upcoming": [
-    {
-      "ticker": "TRX",
-      "date": "2026-04-14",
-      "time_of_day": "",
-      "eps_estimate": 0.02
-    },
-    {
+      "date": "2026-04-17",
       "ticker": "AA",
-      "date": "2026-04-16",
+      "company": "Alcoa Corporation",
       "time_of_day": "",
-      "eps_estimate": 1.51
+      "mkt_cap": 19269884772.0,
+      "eps_estimate": 1.51,
+      "eps_act": null,
+      "eps_surp_pct": null,
+      "rev_est": null,
+      "rev_act": 3449000000.0,
+      "rev_surp_pct": null,
+      "price": 73.03,
+      "avg_volume": 7376391,
+      "adr_pct": 4.3,
+      "dollar_volume": 538697835.0
     }
   ]
 }

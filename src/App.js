@@ -3118,7 +3118,8 @@ const IBKRScannerTable = ({ ibkrScanner, onTickerClick }) => {
 };
 
 const EarningsStrip = ({ earningsData, gapperTickers = new Set(), onTickerClick }) => {
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const _now = new Date();
+  const todayStr = `${_now.getFullYear()}-${String(_now.getMonth()+1).padStart(2,"0")}-${String(_now.getDate()).padStart(2,"0")}`;
   // Support both new flat {earnings:[]} schema and legacy {today:[]} schema
   const today = earningsData?.earnings
     ? earningsData.earnings.filter(e => e.date === todayStr)
@@ -3605,7 +3606,10 @@ function calGetWeekDays(weekOffset = 0) {
   });
 }
 
-function calToDateStr(d) { return d.toISOString().slice(0, 10); }
+// Use local date parts — toISOString() returns UTC which shifts the date in non-UTC timezones
+function calToDateStr(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`;
+}
 
 function calFmtWeekRange(days) {
   const first = days[0], last = days[6];
@@ -3664,7 +3668,8 @@ const ImpactBars = ({ impact }) => {
 };
 
 const CalendarTab = ({ econData, earningsData }) => {
-  const todayStr = new Date().toISOString().slice(0, 10);
+  const _todayD = new Date();
+  const todayStr = `${_todayD.getFullYear()}-${String(_todayD.getMonth()+1).padStart(2,"0")}-${String(_todayD.getDate()).padStart(2,"0")}`;
   const [calSubTab, setCalSubTab] = useState("economic");  // "economic" | "earnings"
   const [selectedDay, setSelectedDay] = useState(todayStr);
   const [weekOffset, setWeekOffset]   = useState(0);
