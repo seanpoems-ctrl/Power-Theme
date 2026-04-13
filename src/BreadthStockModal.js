@@ -97,20 +97,15 @@ const PERF_FIELD = {
   dn13_34: "perf_34d",
 };
 
-// Minimum absolute threshold for the last column, per scanner.
-// Positive value = must be >= threshold (up scanners).
-// Negative value = must be <= threshold (down scanners).
+// Client-side threshold guard for the last column.
+// Only applied to up4/dn4 because change_pct comes directly from Finviz and
+// is reliable. For quarterly/monthly/34D scanners, Finviz already pre-filters
+// to the stated threshold using its own period calculation; our yfinance-based
+// perf_1m/perf_3m/perf_34d uses a different lookback window and does not match
+// closely enough to use as a hard filter without excluding valid stocks.
 const PERF_THRESHOLD = {
-  up4:      4,
-  dn4:     -4,
-  up25q:   25,
-  dn25q:  -25,
-  up25m:   25,
-  dn25m:  -25,
-  up50m:   50,
-  dn50m:  -50,
-  up13_34: 13,
-  dn13_34:-13,
+  up4:  4,
+  dn4: -4,
 };
 
 // Read a stock's perf value for the given field, with fallback for perf_34d.
@@ -305,7 +300,7 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField }) {
       </div>
 
       {open && (
-        <div className="ml-4 border-l border-zinc-700 pb-1">
+        <div className="ml-4 max-h-64 overflow-y-auto border-l border-zinc-700 pb-1">
           {items.map((s) => {
             const perfVal = getPerfValue(s, perfField);
             return (
