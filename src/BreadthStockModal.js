@@ -97,6 +97,22 @@ const PERF_FIELD = {
   dn13_34: "perf_34d",
 };
 
+// Minimum absolute threshold for the last column, per scanner.
+// Positive value = must be >= threshold (up scanners).
+// Negative value = must be <= threshold (down scanners).
+const PERF_THRESHOLD = {
+  up4:      4,
+  dn4:     -4,
+  up25q:   25,
+  dn25q:  -25,
+  up25m:   25,
+  dn25m:  -25,
+  up50m:   50,
+  dn50m:  -50,
+  up13_34: 13,
+  dn13_34:-13,
+};
+
 // Read a stock's perf value for the given field, with fallback for perf_34d.
 function getPerfValue(s, field) {
   if (field === "perf_34d") {
@@ -382,11 +398,18 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
     return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
 
-  // Apply client-side guard for down scanners so only genuinely negative
-  // stocks appear even if the pre-built JSON contains edge-case entries.
-  const displayStocks = filter === "dn4"
-    ? stocks.filter((s) => (s.change_pct ?? s.perf_1d ?? 0) <= -4)
-    : stocks;
+  // Client-side threshold guard: enforce each scanner's minimum perf cutoff
+  // so edge-case entries from Finviz never slip through to the table.
+  const displayStocks = useMemo(() => {
+    const threshold = PERF_THRESHOLD[filter];
+    if (threshold == null) return stocks;
+    const field = PERF_FIELD[filter] ?? "change_pct";
+    if (threshold > 0) {
+      return stocks.filter((s) => (getPerfValue(s, field) ?? -Infinity) >= threshold);
+    } else {
+      return stocks.filter((s) => (getPerfValue(s, field) ?? Infinity) <= threshold);
+    }
+  }, [stocks, filter]);
 
   const allTickers = displayStocks.map((s) => s.ticker);
 
