@@ -9,7 +9,7 @@
  *   Group   — grouped by industry with copy-ticker buttons
  */
 
-import { memo, useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Check, Copy, Layers, LayoutList, Loader2, X } from "lucide-react";
 
 // ---------------------------------------------------------------------------
@@ -73,22 +73,79 @@ const CHANGE_COL_LABEL = {
   dn4:     "1D Change%",
   up25q:   "Quarterly Change%",
   dn25q:   "Quarterly Change%",
-  up25m:   "Monthly Change%",
-  dn25m:   "Monthly Change%",
+  up25m:   "25% Monthly Change%",
+  dn25m:   "25% Monthly Change%",
+  up50m:   "50% Monthly Change%",
+  dn50m:   "50% Monthly Change%",
   up13_34: "1.5M Change%",
   dn13_34: "1.5M Change%",
 };
+
+// Parse dollar_volume which may arrive as a formatted string ("$1.2B") or number
+function parseDollarVolume(v) {
+  if (v == null) return null;
+  if (typeof v === "number") return v;
+  const s = String(v).replace(/[$,\s]/g, "");
+  const m = s.match(/^([\d.]+)([KMBT]?)$/i);
+  if (!m) return null;
+  const mult = { K: 1e3, M: 1e6, B: 1e9, T: 1e12 }[m[2].toUpperCase()] ?? 1;
+  return parseFloat(m[1]) * mult;
+}
 
 // ---------------------------------------------------------------------------
 // List view — matches screenshot exactly: #, Ticker, Company, $Vol, ADR%, Change%
 // ---------------------------------------------------------------------------
 
+// Column definitions for sortable columns 2–6 (0-indexed from col 1 = '#')
+const SORT_COLS = [
+  { key: "ticker",        label: "Ticker",  align: "left",  numeric: false },
+  { key: "company",       label: "Company", align: "left",  numeric: false },
+  { key: "dollar_volume", label: "$ Vol",   align: "right", numeric: true  },
+  { key: "adr_pct",       label: "ADR%",    align: "right", numeric: true  },
+  { key: "change_pct",    label: null,      align: "right", numeric: true  }, // label overridden by changeColLabel
+];
+
 const ListView = memo(function ListView({ stocks, filter }) {
+  const [sortKey, setSortKey] = useState(null);
+  const [sortDir, setSortDir] = useState("asc");
+
+  const changeColLabel = CHANGE_COL_LABEL[filter] ?? "Change%";
+
+  const handleSort = (key) => {
+    setSortKey((prev) => {
+      if (prev === key) {
+        setSortDir((d) => (d === "asc" ? "desc" : "asc"));
+        return key;
+      }
+      setSortDir("asc");
+      return key;
+    });
+  };
+
+  const sortedStocks = useMemo(() => {
+    if (!sortKey) return stocks;
+    return [...stocks].sort((a, b) => {
+      let av = sortKey === "dollar_volume" ? parseDollarVolume(a.dollar_volume) : a[sortKey];
+      let bv = sortKey === "dollar_volume" ? parseDollarVolume(b.dollar_volume) : b[sortKey];
+      // Nulls always last
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      const cmp = typeof av === "string"
+        ? av.localeCompare(bv)
+        : av - bv;
+      return sortDir === "asc" ? cmp : -cmp;
+    });
+  }, [stocks, sortKey, sortDir]);
+
   if (!stocks.length) {
     return <p className="py-12 text-center text-sm text-zinc-500">No stocks match the current filters.</p>;
   }
 
-  const changeColLabel = CHANGE_COL_LABEL[filter] ?? "Change%";
+  const SortIcon = ({ colKey }) => {
+    if (sortKey !== colKey) return <span className="ml-0.5 text-zinc-600">⇅</span>;
+    return <span className="ml-0.5 text-white">{sortDir === "asc" ? "↑" : "↓"}</span>;
+  };
 
   return (
     <div className="overflow-x-auto">
@@ -96,15 +153,23 @@ const ListView = memo(function ListView({ stocks, filter }) {
         <thead>
           <tr className="border-b border-zinc-800 text-zinc-500">
             <th className="w-8 py-2 pr-2 text-right font-medium">#</th>
-            <th className="px-2 py-2 font-medium">Ticker</th>
-            <th className="px-2 py-2 font-medium">Company</th>
-            <th className="px-2 py-2 text-right font-medium">$ Vol</th>
-            <th className="px-2 py-2 text-right font-medium">ADR%</th>
-            <th className="px-2 py-2 text-right font-medium">{changeColLabel}</th>
+            {SORT_COLS.map((col) => {
+              const label = col.key === "change_pct" ? changeColLabel : col.label;
+              return (
+                <th
+                  key={col.key}
+                  onClick={() => handleSort(col.key)}
+                  className={`px-2 py-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors
+                    ${col.align === "right" ? "text-right" : ""}`}
+                >
+                  {label}<SortIcon colKey={col.key} />
+                </th>
+              );
+            })}
           </tr>
         </thead>
         <tbody>
-          {stocks.map((s, i) => (
+          {sortedStocks.map((s, i) => (
             <tr
               key={s.ticker}
               className="border-b border-zinc-800/50 hover:bg-zinc-800/30"
