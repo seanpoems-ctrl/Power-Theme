@@ -132,10 +132,43 @@ function parseDollarVolume(v) {
 // Stock detail modal — Chart / Fundamentals / News
 // ---------------------------------------------------------------------------
 
+// TradingView Financials widget — injected via script tag (iframe blocks financials pages)
+const TradingViewFinancials = memo(function TradingViewFinancials({ ticker }) {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    containerRef.current.innerHTML = "";
+    const widget = document.createElement("div");
+    widget.className = "tradingview-widget-container__widget";
+    widget.style.cssText = "height:100%;width:100%";
+    containerRef.current.appendChild(widget);
+
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://s3.tradingview.com/external-embedding/embed-widget-financials.js";
+    script.async = true;
+    script.textContent = JSON.stringify({
+      symbol: ticker,
+      width: "100%",
+      height: "100%",
+      locale: "en",
+      colorTheme: "dark",
+      isTransparent: true,
+      displayMode: "regular",
+    });
+    containerRef.current.appendChild(script);
+
+    return () => { if (containerRef.current) containerRef.current.innerHTML = ""; };
+  }, [ticker]);
+
+  return <div ref={containerRef} className="tradingview-widget-container h-full w-full" />;
+});
+
 const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose }) {
   const [tab, setTab] = useState("chart");
   const [news, setNews] = useState([]);
-  const [newsLoading, setNewsLoading] = useState(false);
+  const [newsLoading, setNewsLoading] = useState(true);
   const [newsError, setNewsError] = useState(null);
 
   const perfField      = PERF_FIELD[filter] ?? "change_pct";
@@ -143,18 +176,19 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
   const { ticker, company } = stock;
   const perfVal = getPerfValue(stock, perfField);
 
-  // Fetch Yahoo Finance RSS news when the News tab is opened
+  // Fetch news EAGERLY on mount so it's ready when the user clicks the News tab.
+  // Uses corsproxy.io which is significantly faster than allorigins.win.
   useEffect(() => {
-    if (tab !== "news") return;
     setNewsLoading(true);
     setNewsError(null);
     setNews([]);
     const rss   = `https://feeds.finance.yahoo.com/rss/2.0/headline?s=${ticker}&region=US&lang=en-US`;
-    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(rss)}`;
-    fetch(proxy)
-      .then((r) => r.json())
-      .then((data) => {
-        const doc   = new DOMParser().parseFromString(data.contents, "text/xml");
+    const proxy = `https://corsproxy.io/?url=${encodeURIComponent(rss)}`;
+    const ctrl  = new AbortController();
+    fetch(proxy, { signal: ctrl.signal })
+      .then((r) => r.text())
+      .then((xml) => {
+        const doc   = new DOMParser().parseFromString(xml, "text/xml");
         const items = Array.from(doc.querySelectorAll("item")).slice(0, 12).map((el) => ({
           title: el.querySelector("title")?.textContent ?? "",
           link:  el.querySelector("link")?.textContent ?? "",
@@ -163,28 +197,31 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
         setNews(items);
         setNewsLoading(false);
       })
-      .catch(() => {
+      .catch((e) => {
+        if (e.name === "AbortError") return;
         setNewsError("Failed to load news.");
         setNewsLoading(false);
       });
-  }, [tab, ticker]);
+    return () => ctrl.abort();
+  }, [ticker]);
 
-  // Escape closes only this panel (not the parent BreadthStockModal)
+  // Escape closes only this panel (capture phase stops propagation to parent)
   useEffect(() => {
     const handler = (e) => { if (e.key === "Escape") { e.stopPropagation(); onClose(); } };
     window.addEventListener("keydown", handler, true);
     return () => window.removeEventListener("keydown", handler, true);
   }, [onClose]);
 
-  const metrics = [
-    { label: "Price",        value: stock.price != null ? `$${stock.price.toFixed(2)}` : "—",                   cls: "" },
-    { label: "1D Change",    value: fmtPct(stock.change_pct),                                                    cls: changeCls(stock.change_pct) },
-    { label: "ADR%",         value: stock.adr_pct != null ? `${stock.adr_pct.toFixed(1)}%` : "—",               cls: "" },
-    { label: "$ Volume",     value: stock.dollar_volume || "—",                                                  cls: "" },
-    { label: "Market Cap",   value: stock.market_cap_b != null ? `$${stock.market_cap_b.toFixed(1)}B` : "—",    cls: "" },
-    { label: changeColLabel, value: fmtPct(perfVal),                                                             cls: changeCls(perfVal) },
-    { label: "1M Perf",      value: fmtPct(stock.perf_1m),                                                      cls: changeCls(stock.perf_1m) },
-    { label: "3M Perf",      value: fmtPct(stock.perf_3m),                                                      cls: changeCls(stock.perf_3m) },
+  // Compact scanner metrics shown above the TradingView fundamentals widget
+  const scannerMetrics = [
+    { label: "Price",        value: stock.price != null ? `$${stock.price.toFixed(2)}` : "—", cls: "text-zinc-200" },
+    { label: "1D Chg",       value: fmtPct(stock.change_pct),  cls: changeCls(stock.change_pct)  },
+    { label: "ADR%",         value: stock.adr_pct != null ? `${stock.adr_pct.toFixed(1)}%` : "—", cls: "text-zinc-200" },
+    { label: "$ Vol",        value: stock.dollar_volume || "—", cls: "text-zinc-200" },
+    { label: "Mkt Cap",      value: stock.market_cap_b != null ? `$${stock.market_cap_b.toFixed(1)}B` : "—", cls: "text-zinc-200" },
+    { label: changeColLabel, value: fmtPct(perfVal),            cls: changeCls(perfVal)            },
+    { label: "1M",           value: fmtPct(stock.perf_1m),     cls: changeCls(stock.perf_1m)      },
+    { label: "3M",           value: fmtPct(stock.perf_3m),     cls: changeCls(stock.perf_3m)      },
   ];
 
   return (
@@ -192,20 +229,15 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
       className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
-      <div className="relative flex h-[82vh] w-full max-w-2xl flex-col rounded-xl border border-zinc-600 bg-zinc-950 shadow-2xl">
+      <div className="relative flex h-[85vh] w-full max-w-2xl flex-col rounded-xl border border-zinc-600 bg-zinc-950 shadow-2xl">
 
         {/* Header */}
-        <div className="flex items-center gap-3 border-b border-zinc-800 px-4 py-3">
-          <span className="font-mono text-lg font-bold text-white">{ticker}</span>
-          <span className="flex-1 truncate text-sm text-zinc-400">{company}</span>
-          <a
-            href={`https://finviz.com/quote.ashx?t=${ticker}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Open in Finviz"
-            className="text-zinc-500 hover:text-cyan-400 transition-colors"
-          >
-            <ExternalLink className="h-4 w-4" />
+        <div className="flex items-center gap-2 border-b border-zinc-800 px-4 py-2.5">
+          <span className="font-mono text-base font-bold text-white">{ticker}</span>
+          <span className="flex-1 truncate text-xs text-zinc-400">{company}</span>
+          <a href={`https://finviz.com/quote.ashx?t=${ticker}`} target="_blank" rel="noopener noreferrer"
+             title="Open in Finviz" className="text-zinc-500 hover:text-cyan-400 transition-colors">
+            <ExternalLink className="h-3.5 w-3.5" />
           </a>
           <button onClick={onClose} className="rounded p-1 text-zinc-500 hover:bg-zinc-700 hover:text-zinc-200" aria-label="Close">
             <X className="h-4 w-4" />
@@ -215,86 +247,65 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
         {/* Tab bar */}
         <div className="flex gap-1 border-b border-zinc-800 px-4">
           {["chart", "fundamentals", "news"].map((t) => (
-            <button
-              key={t}
-              onClick={() => setTab(t)}
-              className={`capitalize px-4 py-2 text-sm border-b-2 -mb-px transition-colors
-                ${tab === t ? "border-cyan-400 text-cyan-400" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}
-            >
+            <button key={t} onClick={() => setTab(t)}
+              className={`capitalize px-3 py-1.5 text-xs border-b-2 -mb-px transition-colors
+                ${tab === t ? "border-cyan-400 text-cyan-400" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
               {t}
             </button>
           ))}
         </div>
 
         {/* Tab body */}
-        <div className="min-h-0 flex-1">
+        <div className="min-h-0 flex-1 flex flex-col">
 
           {tab === "chart" && (
-            <iframe
-              key={ticker}
-              title={`${ticker} chart`}
+            <iframe key={ticker} title={`${ticker} chart`}
               src={`https://www.tradingview.com/widgetembed/?symbol=${ticker}&interval=D&theme=dark&style=1&withdateranges=1&hide_legend=0&saveimage=1&hide_side_toolbar=0&allow_symbol_change=1`}
-              className="w-full h-full border-0 rounded-b-xl"
-              allowFullScreen
-            />
+              className="w-full flex-1 border-0 rounded-b-xl" allowFullScreen />
           )}
 
           {tab === "fundamentals" && (
-            <div className="h-full overflow-y-auto p-4">
-              <div className="grid grid-cols-2 gap-3">
-                {metrics.map(({ label, value, cls }) => (
-                  <div key={label} className="rounded-lg bg-zinc-800/70 px-3 py-2.5">
-                    <div className="mb-1 text-xs text-zinc-500">{label}</div>
-                    <div className={`font-mono text-sm font-semibold ${cls || "text-zinc-200"}`}>{value}</div>
+            <div className="flex flex-col flex-1 min-h-0">
+              {/* Compact scanner metrics strip */}
+              <div className="flex flex-wrap gap-x-4 gap-y-1 border-b border-zinc-800 px-4 py-2">
+                {scannerMetrics.map(({ label, value, cls }) => (
+                  <div key={label} className="flex items-baseline gap-1.5">
+                    <span className="text-[10px] text-zinc-500 uppercase tracking-wide">{label}</span>
+                    <span className={`font-mono text-xs font-semibold ${cls}`}>{value}</span>
                   </div>
                 ))}
               </div>
-              <p className="mt-5 text-center">
-                <a
-                  href={`https://finviz.com/quote.ashx?t=${ticker}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-xs text-zinc-500 hover:text-cyan-400 transition-colors"
-                >
-                  Full fundamentals on Finviz →
-                </a>
-              </p>
+              {/* TradingView Financials widget fills the rest */}
+              <div className="flex-1 min-h-0">
+                <TradingViewFinancials ticker={ticker} />
+              </div>
             </div>
           )}
 
           {tab === "news" && (
-            <div className="h-full overflow-y-auto p-4">
+            <div className="flex-1 overflow-y-auto p-3">
               {newsLoading ? (
-                <div className="flex justify-center py-12">
+                <div className="flex justify-center py-10">
                   <Loader2 className="h-5 w-5 animate-spin text-zinc-500" />
                 </div>
               ) : newsError ? (
-                <div className="py-12 text-center">
+                <div className="py-10 text-center">
                   <p className="text-sm text-rose-400">{newsError}</p>
-                  <a
-                    href={`https://finance.yahoo.com/quote/${ticker}/news`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 block text-xs text-zinc-400 hover:text-cyan-400"
-                  >
-                    View news on Yahoo Finance →
+                  <a href={`https://finance.yahoo.com/quote/${ticker}/news`} target="_blank" rel="noopener noreferrer"
+                     className="mt-2 block text-xs text-zinc-400 hover:text-cyan-400">
+                    View on Yahoo Finance →
                   </a>
                 </div>
               ) : news.length === 0 ? (
-                <p className="py-12 text-center text-sm text-zinc-500">No recent news found.</p>
+                <p className="py-10 text-center text-sm text-zinc-500">No recent news found.</p>
               ) : (
-                <div className="space-y-2">
+                <div className="space-y-1.5">
                   {news.map((item, i) => (
-                    <a
-                      key={i}
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block rounded-lg bg-zinc-800/60 px-3 py-2.5 hover:bg-zinc-700/60 transition-colors"
-                    >
-                      <div className="text-sm leading-snug text-zinc-200">{item.title}</div>
+                    <a key={i} href={item.link} target="_blank" rel="noopener noreferrer"
+                       className="block rounded-lg bg-zinc-800/50 px-3 py-2 hover:bg-zinc-700/60 transition-colors">
+                      <div className="text-xs leading-snug text-zinc-200">{item.title}</div>
                       {item.date && (
-                        <div className="mt-1 text-xs text-zinc-500">
+                        <div className="mt-0.5 text-[10px] text-zinc-500">
                           {new Date(item.date).toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
                         </div>
                       )}
