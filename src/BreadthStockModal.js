@@ -10,7 +10,7 @@
  */
 
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Check, Copy, Layers, LayoutList, Loader2, X } from "lucide-react";
+import { Check, Copy, ExternalLink, Layers, LayoutList, Loader2, X } from "lucide-react";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -129,6 +129,189 @@ function parseDollarVolume(v) {
 }
 
 // ---------------------------------------------------------------------------
+// Stock detail modal — Chart / Fundamentals / News
+// ---------------------------------------------------------------------------
+
+const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose }) {
+  const [tab, setTab] = useState("chart");
+  const [news, setNews] = useState([]);
+  const [newsLoading, setNewsLoading] = useState(false);
+  const [newsError, setNewsError] = useState(null);
+
+  const perfField      = PERF_FIELD[filter] ?? "change_pct";
+  const changeColLabel = CHANGE_COL_LABEL[filter] ?? "Change%";
+  const { ticker, company } = stock;
+  const perfVal = getPerfValue(stock, perfField);
+
+  // Fetch Yahoo Finance RSS news when the News tab is opened
+  useEffect(() => {
+    if (tab !== "news") return;
+    setNewsLoading(true);
+    setNewsError(null);
+    setNews([]);
+    const rss   = `https://feeds.finance.yahoo.com/rss/2.0/headline?s=${ticker}&region=US&lang=en-US`;
+    const proxy = `https://api.allorigins.win/get?url=${encodeURIComponent(rss)}`;
+    fetch(proxy)
+      .then((r) => r.json())
+      .then((data) => {
+        const doc   = new DOMParser().parseFromString(data.contents, "text/xml");
+        const items = Array.from(doc.querySelectorAll("item")).slice(0, 12).map((el) => ({
+          title: el.querySelector("title")?.textContent ?? "",
+          link:  el.querySelector("link")?.textContent ?? "",
+          date:  el.querySelector("pubDate")?.textContent ?? "",
+        }));
+        setNews(items);
+        setNewsLoading(false);
+      })
+      .catch(() => {
+        setNewsError("Failed to load news.");
+        setNewsLoading(false);
+      });
+  }, [tab, ticker]);
+
+  // Escape closes only this panel (not the parent BreadthStockModal)
+  useEffect(() => {
+    const handler = (e) => { if (e.key === "Escape") { e.stopPropagation(); onClose(); } };
+    window.addEventListener("keydown", handler, true);
+    return () => window.removeEventListener("keydown", handler, true);
+  }, [onClose]);
+
+  const metrics = [
+    { label: "Price",        value: stock.price != null ? `$${stock.price.toFixed(2)}` : "—",                   cls: "" },
+    { label: "1D Change",    value: fmtPct(stock.change_pct),                                                    cls: changeCls(stock.change_pct) },
+    { label: "ADR%",         value: stock.adr_pct != null ? `${stock.adr_pct.toFixed(1)}%` : "—",               cls: "" },
+    { label: "$ Volume",     value: stock.dollar_volume || "—",                                                  cls: "" },
+    { label: "Market Cap",   value: stock.market_cap_b != null ? `$${stock.market_cap_b.toFixed(1)}B` : "—",    cls: "" },
+    { label: changeColLabel, value: fmtPct(perfVal),                                                             cls: changeCls(perfVal) },
+    { label: "1M Perf",      value: fmtPct(stock.perf_1m),                                                      cls: changeCls(stock.perf_1m) },
+    { label: "3M Perf",      value: fmtPct(stock.perf_3m),                                                      cls: changeCls(stock.perf_3m) },
+  ];
+
+  return (
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm"
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
+      <div className="relative flex h-[82vh] w-full max-w-2xl flex-col rounded-xl border border-zinc-600 bg-zinc-950 shadow-2xl">
+
+        {/* Header */}
+        <div className="flex items-center gap-3 border-b border-zinc-800 px-4 py-3">
+          <span className="font-mono text-lg font-bold text-white">{ticker}</span>
+          <span className="flex-1 truncate text-sm text-zinc-400">{company}</span>
+          <a
+            href={`https://finviz.com/quote.ashx?t=${ticker}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open in Finviz"
+            className="text-zinc-500 hover:text-cyan-400 transition-colors"
+          >
+            <ExternalLink className="h-4 w-4" />
+          </a>
+          <button onClick={onClose} className="rounded p-1 text-zinc-500 hover:bg-zinc-700 hover:text-zinc-200" aria-label="Close">
+            <X className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Tab bar */}
+        <div className="flex gap-1 border-b border-zinc-800 px-4">
+          {["chart", "fundamentals", "news"].map((t) => (
+            <button
+              key={t}
+              onClick={() => setTab(t)}
+              className={`capitalize px-4 py-2 text-sm border-b-2 -mb-px transition-colors
+                ${tab === t ? "border-cyan-400 text-cyan-400" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+
+        {/* Tab body */}
+        <div className="min-h-0 flex-1">
+
+          {tab === "chart" && (
+            <iframe
+              key={ticker}
+              title={`${ticker} chart`}
+              src={`https://www.tradingview.com/widgetembed/?symbol=${ticker}&interval=D&theme=dark&style=1&withdateranges=1&hide_legend=0&saveimage=1&hide_side_toolbar=0&allow_symbol_change=1`}
+              className="w-full h-full border-0 rounded-b-xl"
+              allowFullScreen
+            />
+          )}
+
+          {tab === "fundamentals" && (
+            <div className="h-full overflow-y-auto p-4">
+              <div className="grid grid-cols-2 gap-3">
+                {metrics.map(({ label, value, cls }) => (
+                  <div key={label} className="rounded-lg bg-zinc-800/70 px-3 py-2.5">
+                    <div className="mb-1 text-xs text-zinc-500">{label}</div>
+                    <div className={`font-mono text-sm font-semibold ${cls || "text-zinc-200"}`}>{value}</div>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-5 text-center">
+                <a
+                  href={`https://finviz.com/quote.ashx?t=${ticker}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-zinc-500 hover:text-cyan-400 transition-colors"
+                >
+                  Full fundamentals on Finviz →
+                </a>
+              </p>
+            </div>
+          )}
+
+          {tab === "news" && (
+            <div className="h-full overflow-y-auto p-4">
+              {newsLoading ? (
+                <div className="flex justify-center py-12">
+                  <Loader2 className="h-5 w-5 animate-spin text-zinc-500" />
+                </div>
+              ) : newsError ? (
+                <div className="py-12 text-center">
+                  <p className="text-sm text-rose-400">{newsError}</p>
+                  <a
+                    href={`https://finance.yahoo.com/quote/${ticker}/news`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 block text-xs text-zinc-400 hover:text-cyan-400"
+                  >
+                    View news on Yahoo Finance →
+                  </a>
+                </div>
+              ) : news.length === 0 ? (
+                <p className="py-12 text-center text-sm text-zinc-500">No recent news found.</p>
+              ) : (
+                <div className="space-y-2">
+                  {news.map((item, i) => (
+                    <a
+                      key={i}
+                      href={item.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block rounded-lg bg-zinc-800/60 px-3 py-2.5 hover:bg-zinc-700/60 transition-colors"
+                    >
+                      <div className="text-sm leading-snug text-zinc-200">{item.title}</div>
+                      {item.date && (
+                        <div className="mt-1 text-xs text-zinc-500">
+                          {new Date(item.date).toLocaleString("en-US", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" })}
+                        </div>
+                      )}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+
+        </div>
+      </div>
+    </div>
+  );
+});
+
+// ---------------------------------------------------------------------------
 // List view — matches screenshot exactly: #, Ticker, Company, $Vol, ADR%, Change%
 // ---------------------------------------------------------------------------
 
@@ -141,7 +324,7 @@ const BASE_SORT_COLS = [
   { key: "adr_pct",       label: "ADR%",    align: "right", numeric: true  },
 ];
 
-const ListView = memo(function ListView({ stocks, filter }) {
+const ListView = memo(function ListView({ stocks, filter, onStockClick }) {
   const [sortKey, setSortKey] = useState(null);
   const [sortDir, setSortDir] = useState("asc");
 
@@ -225,14 +408,12 @@ const ListView = memo(function ListView({ stocks, filter }) {
             >
               <td className="py-1.5 pr-2 text-right font-mono text-zinc-600">{i + 1}</td>
               <td className="px-2 py-1.5 font-mono font-semibold text-cyan-400">
-                <a
-                  href={`https://finviz.com/quote.ashx?t=${s.ticker}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:underline"
+                <button
+                  onClick={() => onStockClick(s)}
+                  className="hover:underline hover:text-white transition-colors"
                 >
                   {s.ticker}
-                </a>
+                </button>
               </td>
               <td className="max-w-[220px] truncate px-2 py-1.5 text-zinc-300">
                 {s.company || "—"}
@@ -280,7 +461,7 @@ function groupByIndustry(stocks) {
 }
 
 // GroupRow receives pre-sorted items and the active perf field from GroupView.
-const GroupRow = memo(function GroupRow({ industry, items, perfField }) {
+const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockClick }) {
   const [open, setOpen] = useState(false);
   const tickers = items.map((s) => s.ticker);
 
@@ -308,14 +489,12 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField }) {
                 key={s.ticker}
                 className="flex items-center gap-3 px-3 py-1 text-xs hover:bg-zinc-800/30"
               >
-                <a
-                  href={`https://finviz.com/quote.ashx?t=${s.ticker}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-14 font-mono font-semibold text-cyan-400 hover:underline"
+                <button
+                  onClick={() => onStockClick(s)}
+                  className="w-14 font-mono font-semibold text-cyan-400 hover:underline hover:text-white transition-colors text-left"
                 >
                   {s.ticker}
-                </a>
+                </button>
                 <span className="flex-1 truncate text-zinc-400">{s.company}</span>
                 <span className="w-12 text-right font-mono text-zinc-500">
                   {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
@@ -332,7 +511,7 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField }) {
   );
 });
 
-const GroupView = memo(function GroupView({ stocks, filter }) {
+const GroupView = memo(function GroupView({ stocks, filter, onStockClick }) {
   const [sortKey, setSortKey] = useState(null);
   const [sortDir, setSortDir] = useState("asc");
 
@@ -416,7 +595,7 @@ const GroupView = memo(function GroupView({ stocks, filter }) {
       </div>
 
       {groups.map((g) => (
-        <GroupRow key={g.industry} industry={g.industry} items={g.items} perfField={perfField} />
+        <GroupRow key={g.industry} industry={g.industry} items={g.items} perfField={perfField} onStockClick={onStockClick} />
       ))}
     </div>
   );
@@ -431,6 +610,7 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
   const [stocks, setStocks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedStock, setSelectedStock] = useState(null);
   const abortRef = useRef(null);
 
   const load = useCallback(async () => {
@@ -484,7 +664,8 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
   const allTickers = displayStocks.map((s) => s.ticker);
 
   return (
-    /* Backdrop */
+    <>
+    {/* Backdrop */}
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
@@ -557,13 +738,23 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
               </button>
             </div>
           ) : view === "list" ? (
-            <ListView stocks={displayStocks} filter={filter} />
+            <ListView stocks={displayStocks} filter={filter} onStockClick={setSelectedStock} />
           ) : (
-            <GroupView stocks={displayStocks} filter={filter} />
+            <GroupView stocks={displayStocks} filter={filter} onStockClick={setSelectedStock} />
           )}
         </div>
       </div>
     </div>
+
+    {/* Stock detail overlay — Chart / Fundamentals / News */}
+    {selectedStock && (
+      <StockDetailModal
+        stock={selectedStock}
+        filter={filter}
+        onClose={() => setSelectedStock(null)}
+      />
+    )}
+    </>
   );
 });
 
