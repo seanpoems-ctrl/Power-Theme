@@ -270,6 +270,67 @@ def _compute_yf_metrics(tickers: list[str]) -> dict[str, dict]:
 
 
 # ---------------------------------------------------------------------------
+# SPX benchmark returns
+# ---------------------------------------------------------------------------
+
+def _fetch_spx_benchmarks() -> dict:
+    """
+    Download ^GSPC via yfinance and return benchmark returns for the same
+    periods used by _compute_yf_metrics (1D, 1M ~21 td, 3M ~63 td, 34D).
+    Any value that can't be computed is None.
+    """
+    result: dict = {"spx_1d": None, "spx_1m": None, "spx_3m": None, "spx_34d": None}
+    try:
+        df = yf.download("^GSPC", period="4mo", interval="1d",
+                         auto_adjust=True, progress=False)
+    except Exception as exc:
+        logger.warning("SPX benchmark download failed: %s", exc)
+        return result
+
+    if df is None or getattr(df, "empty", True):
+        return result
+
+    try:
+        # Handle both single-ticker (flat) and multi-index frames
+        if isinstance(df.columns, pd.MultiIndex):
+            l0 = set(df.columns.get_level_values(0))
+            l1 = set(df.columns.get_level_values(1))
+            if "Close" in l0:
+                close = df["Close"].iloc[:, 0].dropna()
+            else:
+                close = df.iloc[:, 0].dropna()
+        else:
+            close = df["Close"].dropna()
+
+        nc = len(close)
+        if nc < 2:
+            return result
+
+        latest = float(close.iloc[-1])
+
+        # 1D return
+        if nc >= 2:
+            result["spx_1d"] = round((latest / float(close.iloc[-2]) - 1) * 100, 2)
+
+        # 1M ~21 trading days
+        if nc >= 21:
+            result["spx_1m"] = round((latest / float(close.iloc[-21]) - 1) * 100, 2)
+
+        # 3M ~63 trading days
+        if nc >= 63:
+            result["spx_3m"] = round((latest / float(close.iloc[-63]) - 1) * 100, 2)
+
+        # 34D trading days
+        if nc >= 34:
+            result["spx_34d"] = round((latest / float(close.iloc[-34]) - 1) * 100, 2)
+
+    except Exception as exc:
+        logger.warning("SPX benchmark computation failed: %s", exc)
+
+    return result
+
+
+# ---------------------------------------------------------------------------
 # Finviz fetcher (async with 429 backoff)
 # ---------------------------------------------------------------------------
 
@@ -389,6 +450,7 @@ async def _fetch_filter(filter_key: str) -> dict[str, Any]:
         "min_cap_b": MIN_CAP_B,
         "count": len(qualifying),
         "stocks": qualifying,
+        "spx_benchmarks": _fetch_spx_benchmarks(),
         "fetched_at_utc": now,
     }
 

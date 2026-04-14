@@ -246,16 +246,16 @@ function isOpinionPost(title, source) {
 // ---------------------------------------------------------------------------
 
 const CHANGE_COL_LABEL = {
-  up4:     "1D Change%",
-  dn4:     "1D Change%",
-  up25q:   "Quarterly Change%",
-  dn25q:   "Quarterly Change%",
-  up25m:   "25% Monthly Change%",
-  dn25m:   "25% Monthly Change%",
-  up50m:   "50% Monthly Change%",
-  dn50m:   "50% Monthly Change%",
-  up13_34: "1.5M Change%",
-  dn13_34: "1.5M Change%",
+  up4:     <><span>1D</span><br/><span>Change%</span></>,
+  dn4:     <><span>1D</span><br/><span>Change%</span></>,
+  up25q:   <><span>Quarterly</span><br/><span>Change%</span></>,
+  dn25q:   <><span>Quarterly</span><br/><span>Change%</span></>,
+  up25m:   <><span>25% Monthly</span><br/><span>Change%</span></>,
+  dn25m:   <><span>25% Monthly</span><br/><span>Change%</span></>,
+  up50m:   <><span>50% Monthly</span><br/><span>Change%</span></>,
+  dn50m:   <><span>50% Monthly</span><br/><span>Change%</span></>,
+  up13_34: <><span>1.5M</span><br/><span>Change%</span></>,
+  dn13_34: <><span>1.5M</span><br/><span>Change%</span></>,
 };
 
 // Which field to read for the last (perf) column, keyed by scanner filter id.
@@ -273,6 +273,27 @@ const PERF_FIELD = {
   up13_34: "perf_34d", // TODO: replace with dedicated field once schema has it
   dn13_34: "perf_34d",
 };
+
+// Which spx_benchmarks field maps to each scanner's primary perf period
+const SPX_FIELD = {
+  up4:     "spx_1d", dn4:     "spx_1d",
+  up25q:   "spx_3m", dn25q:   "spx_3m",
+  up25m:   "spx_1m", dn25m:   "spx_1m",
+  up50m:   "spx_1m", dn50m:   "spx_1m",
+  up13_34: "spx_34d", dn13_34: "spx_34d",
+};
+
+function calcRS(stock, perfField, spxReturn) {
+  const v = getPerfValue(stock, perfField);
+  if (v == null || spxReturn == null) return null;
+  return Math.round((v - spxReturn) * 10) / 10;
+}
+
+function fmtRS(v) {
+  if (v == null) return "—";
+  const s = Math.abs(v).toFixed(1);
+  return v > 0 ? `+${s}` : `-${s}`;
+}
 
 // Client-side threshold guard for the last column.
 // Only applied to up4/dn4 because change_pct comes directly from Finviz and
@@ -529,16 +550,18 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
 const BASE_SORT_COLS = [
   { key: "ticker",        label: "Ticker",  align: "left",  numeric: false },
   { key: "company",       label: "Company", align: "left",  numeric: false },
-  { key: "dollar_volume", label: "$ Vol",   align: "right", numeric: true  },
+  { key: "rs",            label: "RS",      align: "right", numeric: true  },
   { key: "adr_pct",       label: "ADR%",    align: "right", numeric: true  },
+  { key: "dollar_volume", label: "$ Vol",   align: "right", numeric: true  },
 ];
 
-const ListView = memo(function ListView({ stocks, filter, onStockClick }) {
+const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData }) {
   const [sortKey, setSortKey] = useState(null);
   const [sortDir, setSortDir] = useState("asc");
 
   const changeColLabel = CHANGE_COL_LABEL[filter] ?? "Change%";
   const perfField = PERF_FIELD[filter] ?? "change_pct";
+  const spxReturn = spxData?.[SPX_FIELD[filter]] ?? null;
 
   // Build full column list with dynamic perf column appended
   const sortCols = [
@@ -560,7 +583,10 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick }) {
     if (!sortKey) return stocks;
     return [...stocks].sort((a, b) => {
       let av, bv;
-      if (sortKey === "dollar_volume") {
+      if (sortKey === "rs") {
+        av = calcRS(a, perfField, spxReturn);
+        bv = calcRS(b, perfField, spxReturn);
+      } else if (sortKey === "dollar_volume") {
         av = parseDollarVolume(a.dollar_volume);
         bv = parseDollarVolume(b.dollar_volume);
       } else if (sortKey === perfField) {
@@ -577,7 +603,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick }) {
       const cmp = typeof av === "string" ? av.localeCompare(bv) : av - bv;
       return sortDir === "asc" ? cmp : -cmp;
     });
-  }, [stocks, sortKey, sortDir, perfField]);
+  }, [stocks, sortKey, sortDir, perfField, spxReturn]);
 
   if (!stocks.length) {
     return <p className="py-12 text-center text-sm text-zinc-500">No stocks match the current filters.</p>;
@@ -627,11 +653,14 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick }) {
               <td className="max-w-[220px] truncate px-2 py-1.5 text-zinc-300">
                 {s.company || "—"}
               </td>
-              <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
-                {s.dollar_volume || "—"}
+              <td className={`px-2 py-1.5 text-right font-mono font-semibold ${changeCls(calcRS(s, perfField, spxReturn))}`}>
+                {fmtRS(calcRS(s, perfField, spxReturn))}
               </td>
               <td className="px-2 py-1.5 text-right font-mono text-zinc-300">
                 {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
+              </td>
+              <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
+                {s.dollar_volume || "—"}
               </td>
               <td className={`px-2 py-1.5 text-right font-mono font-semibold ${changeCls(getPerfValue(s, perfField))}`}>
                 {fmtPct(getPerfValue(s, perfField))}
@@ -645,7 +674,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick }) {
             <td colSpan={3} className="py-1.5 pr-2 text-right font-mono">
               {stocks.length} stocks
             </td>
-            <td colSpan={3} />
+            <td colSpan={4} />
           </tr>
         </tfoot>
       </table>
@@ -670,7 +699,7 @@ function groupByIndustry(stocks) {
 }
 
 // GroupRow receives pre-sorted items and the active perf field from GroupView.
-const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockClick, cols, sortKey, sortDir, onSort }) {
+const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockClick, cols, sortKey, sortDir, onSort, spxReturn, countPct, groupRS }) {
   const [open, setOpen] = useState(false);
   const tickers = items.map((s) => s.ticker);
 
@@ -688,7 +717,9 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
       >
         <span className="text-zinc-500 text-xs">{open ? "▾" : "▸"}</span>
         <span className="flex-1 text-sm font-medium text-zinc-200">{industry}</span>
-        <span className="text-xs text-zinc-500">{items.length}</span>
+        <span className="text-xs text-zinc-500 w-8 text-right">{items.length}</span>
+        <span className="text-xs text-zinc-600 w-14 text-right">{countPct != null ? `${countPct.toFixed(1)}%` : "—"}</span>
+        <span className={`text-xs font-mono w-12 text-right ${changeCls(groupRS)}`}>{fmtRS(groupRS)}</span>
         <span className="opacity-0 transition-opacity group-hover:opacity-100">
           <CopyButton tickers={tickers} />
         </span>
@@ -724,10 +755,13 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
                     {s.ticker}
                   </button>
                   <span className="flex-1 truncate text-zinc-400">{s.company}</span>
+                  <span className={`w-12 text-right font-mono font-semibold ${changeCls(calcRS(s, perfField, spxReturn))}`}>
+                    {fmtRS(calcRS(s, perfField, spxReturn))}
+                  </span>
                   <span className="w-12 text-right font-mono text-zinc-500">
                     {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
                   </span>
-                  <span className={`w-16 text-right font-mono font-semibold ${changeCls(perfVal)}`}>
+                  <span className={`w-20 text-right font-mono font-semibold ${changeCls(perfVal)}`}>
                     {fmtPct(perfVal)}
                   </span>
                 </div>
@@ -740,14 +774,18 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
   );
 });
 
-const GroupView = memo(function GroupView({ stocks, filter, onStockClick }) {
+const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxData }) {
   const [sortKey, setSortKey] = useState(null);
   const [sortDir, setSortDir] = useState("asc");
+  const [groupSortKey, setGroupSortKey] = useState("count");
+  const [groupSortDir, setGroupSortDir] = useState("desc");
 
-  const perfField     = PERF_FIELD[filter] ?? "change_pct";
+  const perfField      = PERF_FIELD[filter] ?? "change_pct";
   const changeColLabel = CHANGE_COL_LABEL[filter] ?? "Change%";
+  const spxReturn      = spxData?.[SPX_FIELD[filter]] ?? null;
+  const totalCount     = stocks.length;
 
-  // Fixed handleSort — reads state from closure, no functional-updater side-effects
+  // Fixed handleSort (stock-level, within groups)
   const handleSort = (key) => {
     if (sortKey === key) {
       setSortDir((d) => (d === "asc" ? "desc" : "asc"));
@@ -757,15 +795,56 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick }) {
     }
   };
 
-  // Build groups then sort each group's items by the active column
+  // Group-level sort
+  const handleGroupSort = (key) => {
+    if (groupSortKey === key) setGroupSortDir((d) => (d === "asc" ? "desc" : "asc"));
+    else { setGroupSortKey(key); setGroupSortDir("desc"); }
+  };
+
+  const GroupSortIcon = ({ colKey }) => {
+    if (groupSortKey !== colKey) return <span className="ml-0.5 text-zinc-700">⇅</span>;
+    return <span className="ml-0.5 text-zinc-300">{groupSortDir === "asc" ? "↑" : "↓"}</span>;
+  };
+
+  // Build groups, enrich with countPct + groupRS, sort at group level, sort each group's items
   const groups = useMemo(() => {
     const raw = groupByIndustry(stocks);
-    if (!sortKey) return raw;
-    return raw.map((g) => ({
+
+    // Enrich each group with countPct and groupRS
+    const enriched = raw.map((g) => {
+      const countPct = totalCount > 0 ? (g.items.length / totalCount) * 100 : null;
+      const rsVals = g.items
+        .map((s) => calcRS(s, perfField, spxReturn))
+        .filter((v) => v != null);
+      const groupRS = rsVals.length > 0
+        ? Math.round((rsVals.reduce((a, b) => a + b, 0) / rsVals.length) * 10) / 10
+        : null;
+      return { ...g, countPct, groupRS };
+    });
+
+    // Sort groups by groupSortKey
+    const sorted = [...enriched].sort((a, b) => {
+      let av, bv;
+      if (groupSortKey === "count") { av = a.items.length; bv = b.items.length; }
+      else if (groupSortKey === "countPct") { av = a.countPct; bv = b.countPct; }
+      else if (groupSortKey === "rs") { av = a.groupRS; bv = b.groupRS; }
+      else { av = a.items.length; bv = b.items.length; }
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      return groupSortDir === "asc" ? av - bv : bv - av;
+    });
+
+    // Sort each group's items by the active stock-level sort key
+    if (!sortKey) return sorted;
+    return sorted.map((g) => ({
       ...g,
       items: [...g.items].sort((a, b) => {
         let av, bv;
-        if (sortKey === perfField) {
+        if (sortKey === "rs") {
+          av = calcRS(a, perfField, spxReturn);
+          bv = calcRS(b, perfField, spxReturn);
+        } else if (sortKey === perfField) {
           av = getPerfValue(a, perfField);
           bv = getPerfValue(b, perfField);
         } else if (sortKey === "adr_pct") {
@@ -782,7 +861,7 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick }) {
         return sortDir === "asc" ? cmp : -cmp;
       }),
     }));
-  }, [stocks, sortKey, sortDir, perfField]);
+  }, [stocks, sortKey, sortDir, perfField, spxReturn, totalCount, groupSortKey, groupSortDir]);
 
   if (!groups.length) {
     return <p className="py-12 text-center text-sm text-zinc-500">No groups to display.</p>;
@@ -792,16 +871,19 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick }) {
   const GROUP_STOCK_COLS = [
     { key: "ticker",   label: "Ticker",       align: "left",  cls: "w-14" },
     { key: "company",  label: "Company",       align: "left",  cls: "flex-1" },
+    { key: "rs",       label: "RS",            align: "right", cls: "w-12" },
     { key: "adr_pct",  label: "ADR%",          align: "right", cls: "w-12" },
-    { key: perfField,  label: changeColLabel,  align: "right", cls: "w-16" },
+    { key: perfField,  label: changeColLabel,  align: "right", cls: "w-20" },
   ];
 
   return (
     <div>
-      {/* Industry / Count header */}
+      {/* Industry / Count / Count% / RS header */}
       <div className="flex items-center gap-2 border-b border-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-600">
         <span className="flex-1">Industry</span>
-        <span>Count</span>
+        <button onClick={() => handleGroupSort("count")} className="w-8 text-right cursor-pointer hover:text-zinc-300">Count<GroupSortIcon colKey="count"/></button>
+        <button onClick={() => handleGroupSort("countPct")} className="w-14 text-right cursor-pointer hover:text-zinc-300">Count%<GroupSortIcon colKey="countPct"/></button>
+        <button onClick={() => handleGroupSort("rs")} className="w-12 text-right cursor-pointer hover:text-zinc-300">RS<GroupSortIcon colKey="rs"/></button>
       </div>
 
       {groups.map((g) => (
@@ -815,6 +897,9 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick }) {
           sortKey={sortKey}
           sortDir={sortDir}
           onSort={handleSort}
+          spxReturn={spxReturn}
+          countPct={g.countPct}
+          groupRS={g.groupRS}
         />
       ))}
     </div>
@@ -828,6 +913,7 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick }) {
 const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel, onClose }) {
   const [view, setView] = useState("list");
   const [stocks, setStocks] = useState([]);
+  const [spxData, setSpxData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedStock, setSelectedStock] = useState(null);
@@ -848,6 +934,7 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
       if (!res.ok) throw new Error(`HTTP ${res.status} — stock list not found. Run breadth_stocks_builder.py first.`);
       const data = await res.json();
       setStocks(data.stocks ?? []);
+      setSpxData(data.spx_benchmarks ?? null);
     } catch (e) {
       if (e.name === "AbortError") return;
       setError(e.message);
@@ -958,9 +1045,9 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
               </button>
             </div>
           ) : view === "list" ? (
-            <ListView stocks={displayStocks} filter={filter} onStockClick={setSelectedStock} />
+            <ListView stocks={displayStocks} filter={filter} onStockClick={setSelectedStock} spxData={spxData} />
           ) : (
-            <GroupView stocks={displayStocks} filter={filter} onStockClick={setSelectedStock} />
+            <GroupView stocks={displayStocks} filter={filter} onStockClick={setSelectedStock} spxData={spxData} />
           )}
         </div>
       </div>
