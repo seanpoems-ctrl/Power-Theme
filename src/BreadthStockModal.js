@@ -878,12 +878,16 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
 
   return (
     <div>
-      {/* Industry / Count / Count% / RS header */}
+      {/* Industry / Count / Count% / RS header — spacers match data-row chevron + CopyButton */}
       <div className="flex items-center gap-2 border-b border-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-600">
+        <span className="w-3 shrink-0" />  {/* aligns with ▸ chevron in data rows */}
         <span className="flex-1">Industry</span>
-        <button onClick={() => handleGroupSort("count")} className="w-8 text-right cursor-pointer hover:text-zinc-300">Count<GroupSortIcon colKey="count"/></button>
-        <button onClick={() => handleGroupSort("countPct")} className="w-14 text-right cursor-pointer hover:text-zinc-300">Count%<GroupSortIcon colKey="countPct"/></button>
-        <button onClick={() => handleGroupSort("rs")} className="w-12 text-right cursor-pointer hover:text-zinc-300">RS<GroupSortIcon colKey="rs"/></button>
+        <button onClick={() => handleGroupSort("count")} className="w-8 text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">Count<GroupSortIcon colKey="count"/></button>
+        <button onClick={() => handleGroupSort("countPct")} className="w-14 text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">Count%<GroupSortIcon colKey="countPct"/></button>
+        <button onClick={() => handleGroupSort("rs")} className="w-12 text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">RS<GroupSortIcon colKey="rs"/></button>
+        <span className="invisible pointer-events-none shrink-0">  {/* aligns with hover CopyButton */}
+          <CopyButton tickers={[]} />
+        </span>
       </div>
 
       {groups.map((g) => (
