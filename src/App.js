@@ -2037,18 +2037,29 @@ const PositionCalc = ({ ibkrThemesData }) => {
   const a = parseFloat(atr) || 0;
   const r = parseFloat(riskPct) || 1;
 
-  const fetchLOD = React.useCallback(async (sym) => {
+  const fetchTickerData = React.useCallback(async (sym) => {
     const s = sym.trim().toUpperCase();
     if (!s) return;
     setLodLoading(true);
     setLodError(false);
     setLod(null);
     try {
-      const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`);
-      const data = await res.json();
-      const low = data?.l;
+      const now = Math.floor(Date.now() / 1000);
+      const from = now - 90 * 86400;
+      const [quoteRes, atrRes] = await Promise.all([
+        fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`),
+        fetch(`https://finnhub.io/api/v1/indicator?symbol=${s}&resolution=D&from=${from}&to=${now}&indicator=atr&timeperiod=14&token=${FINNHUB_KEY}`)
+      ]);
+      const quoteData = await quoteRes.json();
+      const atrData = await atrRes.json();
+      const low = quoteData?.l;
       if (low != null && low > 0) setLod(parseFloat(low.toFixed(2)));
       else setLodError(true);
+      const atrValues = atrData?.atr;
+      if (atrValues?.length > 0) {
+        const latestAtr = atrValues[atrValues.length - 1];
+        if (latestAtr != null && latestAtr > 0) setAtr(latestAtr.toFixed(2));
+      }
     } catch {
       setLodError(true);
     } finally {
@@ -2056,9 +2067,11 @@ const PositionCalc = ({ ibkrThemesData }) => {
     }
   }, []);
 
-  // risk unit: entry − LOD (LOD mode), ATR (ATR/manual mode)
+  // risk unit: entry − LOD (LOD mode), entry − manualStop (manual mode), ATR (ATR mode)
   const lodRisk = lod != null && e > lod ? e - lod : 0;
-  const riskUnit = stopMode === 'lod' ? lodRisk : a;
+  const ms = parseFloat(manualStop);
+  const manualRisk = stopMode === 'manual' && ms > 0 && e > ms ? e - ms : 0;
+  const riskUnit = stopMode === 'lod' ? lodRisk : stopMode === 'manual' ? manualRisk : a;
 
   const shares = (effectiveEquity > 0 && riskUnit > 0)
     ? Math.floor((effectiveEquity * r / 100) / riskUnit)
@@ -2067,7 +2080,6 @@ const PositionCalc = ({ ibkrThemesData }) => {
   let stops = [];
   if (e > 0) {
     if (stopMode === 'manual') {
-      const ms = parseFloat(manualStop);
       if (ms > 0) stops = [ms];
     } else if (stopMode === 'lod') {
       if (lod != null && lod > 0) stops = [lod];
@@ -2138,25 +2150,23 @@ const PositionCalc = ({ ibkrThemesData }) => {
         <Tog active={stopMode === 'manual'} onClick={() => setStopMode('manual')}>Manual</Tog>
       </div>
 
-      {/* LOD ticker input */}
-      {stopMode === 'lod' && (
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-[10px] text-zinc-500 flex-shrink-0">Ticker</span>
-          <input
-            type="text" value={lodTicker}
-            onChange={ev => { setLodTicker(ev.target.value.toUpperCase()); setLod(null); setLodError(false); }}
-            onBlur={() => fetchLOD(lodTicker)}
-            onKeyDown={ev => ev.key === 'Enter' && fetchLOD(lodTicker)}
-            placeholder="e.g. AAPL"
-            className="flex-1 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600 uppercase"/>
-          <span className="text-[11px] font-mono min-w-[48px] text-right">
-            {lodLoading ? <span className="text-zinc-500">...</span>
-              : lodError ? <span className="text-red-400">ERR</span>
-              : lod != null ? <span className="text-amber-400">${lod.toFixed(2)}</span>
-              : null}
-          </span>
-        </div>
-      )}
+      {/* Ticker input — always visible; auto-fetches ATR-14 + LOD from Finnhub */}
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-[10px] text-zinc-500 flex-shrink-0">Ticker</span>
+        <input
+          type="text" value={lodTicker}
+          onChange={ev => { setLodTicker(ev.target.value.toUpperCase()); setLod(null); setLodError(false); }}
+          onBlur={() => fetchTickerData(lodTicker)}
+          onKeyDown={ev => ev.key === 'Enter' && fetchTickerData(lodTicker)}
+          placeholder="e.g. AAPL"
+          className="flex-1 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600 uppercase"/>
+        <span className="text-[11px] font-mono min-w-[48px] text-right">
+          {lodLoading ? <span className="text-zinc-500">...</span>
+            : lodError ? <span className="text-red-400">ERR</span>
+            : lod != null ? <span className="text-amber-400">${lod.toFixed(2)}</span>
+            : null}
+        </span>
+      </div>
 
       {/* Manual stop price input */}
       {stopMode === 'manual' && (
