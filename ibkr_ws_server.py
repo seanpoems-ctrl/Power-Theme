@@ -28,6 +28,13 @@ import logging
 import math
 import os
 import time
+
+# Load .env file automatically (python-dotenv)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # dotenv not installed, rely on shell env vars
 from pathlib import Path
 
 import websockets
