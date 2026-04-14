@@ -10,7 +10,7 @@
  */
 
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { Check, Copy, ExternalLink, Layers, LayoutList, Loader2, X } from "lucide-react";
+import { Check, Clipboard, ClipboardCheck, Copy, ExternalLink, Layers, LayoutList, Loader2, X } from "lucide-react";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -60,6 +60,36 @@ const CopyButton = memo(function CopyButton({ tickers, label }) {
     >
       {copied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
       <span>{copied ? "Copied" : (label ?? tickers.length)}</span>
+    </button>
+  );
+});
+
+// "Add to Clipboard" button — shown in the modal header, adds tickers to the
+// persistent WatchlistClipboard in MarketBreadthMonitor.
+const AddToClipboardButton = memo(function AddToClipboardButton({ label, tickers, filter, onAdd }) {
+  const [added, setAdded] = useState(false);
+  const timer = useRef(null);
+
+  const handleClick = useCallback(() => {
+    onAdd(label, tickers, filter);
+    setAdded(true);
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setAdded(false), 1800);
+  }, [label, tickers, filter, onAdd]);
+
+  useEffect(() => () => clearTimeout(timer.current), []);
+
+  return (
+    <button
+      onClick={handleClick}
+      className={`inline-flex items-center gap-1.5 rounded px-2.5 py-1 text-xs transition-colors
+        ${added
+          ? "bg-emerald-600/20 text-emerald-400 border border-emerald-600/40"
+          : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-zinc-100 border border-zinc-700"
+        }`}
+    >
+      {added ? <ClipboardCheck className="h-3.5 w-3.5" /> : <Clipboard className="h-3.5 w-3.5" />}
+      {added ? "Added!" : "Add to Clipboard"}
     </button>
   );
 });
@@ -699,7 +729,7 @@ function groupByIndustry(stocks) {
 }
 
 // GroupRow receives pre-sorted items and the active perf field from GroupView.
-const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockClick, cols, sortKey, sortDir, onSort, spxReturn, countPct, groupRS }) {
+const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockClick, cols, sortKey, sortDir, onSort, spxReturn, countPct, groupRS, filter, onAddToClipboard }) {
   const [open, setOpen] = useState(false);
   const tickers = items.map((s) => s.ticker);
 
@@ -720,8 +750,11 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
         <span className="text-xs text-zinc-500 w-8 text-right">{items.length}</span>
         <span className="text-xs text-zinc-600 w-14 text-right">{countPct != null ? `${countPct.toFixed(1)}%` : "—"}</span>
         <span className={`text-xs font-mono w-12 text-right ${changeCls(groupRS)}`}>{fmtRS(groupRS)}</span>
-        <span className="opacity-0 transition-opacity group-hover:opacity-100">
-          <CopyButton tickers={tickers} />
+        <span className="opacity-0 transition-opacity group-hover:opacity-100" onClick={(e) => e.stopPropagation()}>
+          {onAddToClipboard
+            ? <AddToClipboardButton label={industry} tickers={tickers} filter={filter} onAdd={onAddToClipboard} />
+            : <CopyButton tickers={tickers} />
+          }
         </span>
       </div>
 
@@ -774,7 +807,7 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
   );
 });
 
-const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxData }) {
+const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxData, onAddToClipboard }) {
   const [sortKey, setSortKey] = useState(null);
   const [sortDir, setSortDir] = useState("asc");
   const [groupSortKey, setGroupSortKey] = useState("count");
@@ -904,6 +937,8 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
           spxReturn={spxReturn}
           countPct={g.countPct}
           groupRS={g.groupRS}
+          filter={filter}
+          onAddToClipboard={onAddToClipboard}
         />
       ))}
     </div>
@@ -914,7 +949,7 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
 // Main modal
 // ---------------------------------------------------------------------------
 
-const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel, onClose }) {
+const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel, onClose, onAddToClipboard }) {
   const [view, setView] = useState("list");
   const [stocks, setStocks] = useState([]);
   const [spxData, setSpxData] = useState(null);
@@ -1017,9 +1052,14 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
             </button>
           </div>
 
-          {/* Copy all */}
-          {allTickers.length > 0 && (
-            <CopyButton tickers={allTickers} label="Copy" />
+          {/* Add to Clipboard */}
+          {allTickers.length > 0 && onAddToClipboard && (
+            <AddToClipboardButton
+              label={filterLabel}
+              tickers={allTickers}
+              filter={filter}
+              onAdd={onAddToClipboard}
+            />
           )}
 
           {/* Close */}
@@ -1051,7 +1091,7 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
           ) : view === "list" ? (
             <ListView stocks={displayStocks} filter={filter} onStockClick={setSelectedStock} spxData={spxData} />
           ) : (
-            <GroupView stocks={displayStocks} filter={filter} onStockClick={setSelectedStock} spxData={spxData} />
+            <GroupView stocks={displayStocks} filter={filter} onStockClick={setSelectedStock} spxData={spxData} onAddToClipboard={onAddToClipboard} />
           )}
         </div>
       </div>

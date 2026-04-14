@@ -11,8 +11,136 @@
  */
 
 import { memo, useCallback, useEffect, useRef, useState } from "react";
-import { BarChart3, ExternalLink, RefreshCw } from "lucide-react";
+import { BarChart3, Check, Clipboard, Copy, Download, ExternalLink, RefreshCw, Trash2, X } from "lucide-react";
 import BreadthStockModal from "./BreadthStockModal";
+
+// ---------------------------------------------------------------------------
+// Constants
+// ---------------------------------------------------------------------------
+
+const BULLISH_FILTERS = new Set(["up4", "up25q", "up25m", "up50m", "up13_34"]);
+
+// ---------------------------------------------------------------------------
+// WatchlistClipboard panel
+// ---------------------------------------------------------------------------
+
+const WatchlistClipboard = memo(function WatchlistClipboard({ groups, onRemoveGroup, onClear, onClose }) {
+  const [tab, setTab]       = useState("bullish");
+  const [copied, setCopied] = useState(false);
+  const timerRef            = useRef(null);
+
+  const bullish = groups.filter((g) => g.sentiment === "bullish");
+  const bearish = groups.filter((g) => g.sentiment === "bearish");
+  const active  = tab === "bullish" ? bullish : bearish;
+
+  const allTickers = active.flatMap((g) => g.tickers);
+  const uniqueTickers = [...new Set(allTickers)];
+
+  const handleCopy = () => {
+    if (!uniqueTickers.length) return;
+    navigator.clipboard.writeText(uniqueTickers.join(",")).then(() => {
+      setCopied(true);
+      clearTimeout(timerRef.current);
+      timerRef.current = setTimeout(() => setCopied(false), 1800);
+    });
+  };
+
+  const handleDownload = () => {
+    if (!uniqueTickers.length) return;
+    const csv = "Ticker\n" + uniqueTickers.join("\n");
+    const blob = new Blob([csv], { type: "text/csv" });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement("a");
+    a.href = url; a.download = `${tab}_tickers.csv`; a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  useEffect(() => () => clearTimeout(timerRef.current), []);
+
+  return (
+    <div className="absolute right-0 top-full mt-1 z-50 w-80 rounded-xl border border-zinc-700 bg-zinc-900 shadow-2xl">
+      {/* Header */}
+      <div className="flex items-center justify-between border-b border-zinc-800 px-3 py-2">
+        <span className="text-xs font-semibold text-zinc-300">Watchlist Clipboard</span>
+        <button onClick={onClose} className="rounded p-0.5 text-zinc-500 hover:text-zinc-200">
+          <X className="h-3.5 w-3.5" />
+        </button>
+      </div>
+
+      {/* Tabs */}
+      <div className="flex gap-1 border-b border-zinc-800 px-3 py-2">
+        <button
+          onClick={() => setTab("bullish")}
+          className={`rounded-full px-3 py-0.5 text-xs font-medium transition-colors
+            ${tab === "bullish" ? "bg-emerald-600 text-white" : "bg-zinc-800 text-zinc-400 hover:text-zinc-200"}`}
+        >
+          Bullish ({bullish.reduce((s, g) => s + g.tickers.length, 0)})
+        </button>
+        <button
+          onClick={() => setTab("bearish")}
+          className={`rounded-full px-3 py-0.5 text-xs font-medium transition-colors
+            ${tab === "bearish" ? "bg-rose-600 text-white" : "bg-zinc-800 text-zinc-400 hover:text-zinc-200"}`}
+        >
+          Bearish ({bearish.reduce((s, g) => s + g.tickers.length, 0)})
+        </button>
+      </div>
+
+      {/* Groups */}
+      <div className="max-h-56 overflow-y-auto">
+        {active.length === 0 ? (
+          <p className="py-6 text-center text-xs text-zinc-600">No {tab} tickers yet.</p>
+        ) : (
+          active.map((g) => (
+            <div key={g.id} className="border-b border-zinc-800/60 px-3 py-2">
+              {/* Group label row */}
+              <div className="flex items-center justify-between mb-1">
+                <span className="text-xs font-semibold text-zinc-200">{g.label}</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-zinc-500">{g.tickers.length}</span>
+                  <button
+                    onClick={() => onRemoveGroup(g.id)}
+                    className="text-zinc-600 hover:text-rose-400 transition-colors"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </div>
+              </div>
+              {/* Tickers text */}
+              <p className="text-[11px] leading-relaxed text-zinc-400 break-all">
+                {g.tickers.join(",")}
+              </p>
+            </div>
+          ))
+        )}
+      </div>
+
+      {/* Footer actions */}
+      <div className="flex items-center justify-between border-t border-zinc-800 px-3 py-2">
+        <button
+          onClick={handleCopy}
+          className="flex items-center gap-1 text-xs text-zinc-400 hover:text-zinc-200 transition-colors"
+        >
+          {copied ? <Check className="h-3 w-3 text-emerald-400" /> : <Copy className="h-3 w-3" />}
+          {copied ? "Copied!" : "Copy"}
+        </button>
+        <button
+          onClick={handleDownload}
+          className="flex items-center gap-1 text-xs text-zinc-400 hover:text-zinc-200 transition-colors"
+        >
+          <Download className="h-3 w-3" />
+          Download CSV
+        </button>
+        <button
+          onClick={() => onClear(tab)}
+          className="flex items-center gap-1 text-xs text-zinc-400 hover:text-rose-400 transition-colors"
+        >
+          <Trash2 className="h-3 w-3" />
+          Clear
+        </button>
+      </div>
+    </div>
+  );
+});
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -250,14 +378,43 @@ const BreadthTable = memo(function BreadthTable({ rows, onOpenModal }) {
 // ---------------------------------------------------------------------------
 
 const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [modal, setModal] = useState(null); // { filter, label }
-  const abortRef = useRef(null);
+  const [data, setData]             = useState(null);
+  const [loading, setLoading]       = useState(true);
+  const [error, setError]           = useState(null);
+  const [modal, setModal]           = useState(null); // { filter, label }
+  const [clipGroups, setClipGroups] = useState([]);   // [{ id, label, tickers, sentiment }]
+  const [clipOpen, setClipOpen]     = useState(false);
+  const abortRef                    = useRef(null);
 
   const openModal  = useCallback((filter, label) => setModal({ filter, label }), []);
   const closeModal = useCallback(() => setModal(null), []);
+
+  // Add a group of tickers to the clipboard
+  const addToClipboard = useCallback((label, tickers, filter) => {
+    if (!tickers.length) return;
+    const sentiment = BULLISH_FILTERS.has(filter) ? "bullish" : "bearish";
+    setClipGroups((prev) => {
+      // If a group with the same label+sentiment already exists, replace it
+      const exists = prev.findIndex((g) => g.label === label && g.sentiment === sentiment);
+      if (exists >= 0) {
+        const next = [...prev];
+        next[exists] = { ...next[exists], tickers: [...new Set([...next[exists].tickers, ...tickers])] };
+        return next;
+      }
+      return [...prev, { id: Date.now(), label, tickers, sentiment }];
+    });
+    setClipOpen(true);
+  }, []);
+
+  const removeGroup = useCallback((id) => {
+    setClipGroups((prev) => prev.filter((g) => g.id !== id));
+  }, []);
+
+  const clearTab = useCallback((tab) => {
+    setClipGroups((prev) => prev.filter((g) => g.sentiment !== tab));
+  }, []);
+
+  const totalClipCount = clipGroups.reduce((s, g) => s + g.tickers.length, 0);
 
   const load = async () => {
     setLoading(true);
@@ -345,6 +502,32 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
             <RefreshCw className="h-3 w-3" />
             Refresh
           </button>
+
+          {/* Clipboard badge */}
+          <div className="relative">
+            <button
+              onClick={() => setClipOpen((o) => !o)}
+              title="Watchlist Clipboard"
+              className={`relative flex items-center gap-1 rounded px-2 py-1 text-xs transition-colors
+                ${clipOpen ? "bg-zinc-700 text-zinc-100" : "text-slate-400 hover:bg-gray-800 hover:text-slate-200"}`}
+            >
+              <Clipboard className="h-4 w-4" />
+              {totalClipCount > 0 && (
+                <span className="absolute -right-1.5 -top-1.5 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 text-[10px] font-bold text-white leading-none">
+                  {totalClipCount > 99 ? "99+" : totalClipCount}
+                </span>
+              )}
+            </button>
+
+            {clipOpen && (
+              <WatchlistClipboard
+                groups={clipGroups}
+                onRemoveGroup={removeGroup}
+                onClear={clearTab}
+                onClose={() => setClipOpen(false)}
+              />
+            )}
+          </div>
         </div>
       </div>
 
@@ -379,6 +562,7 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
           filter={modal.filter}
           filterLabel={modal.label}
           onClose={closeModal}
+          onAddToClipboard={addToClipboard}
         />
       )}
     </div>
