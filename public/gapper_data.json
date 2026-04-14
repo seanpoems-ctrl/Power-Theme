@@ -1,105 +1,63 @@
 {
-  "scan_time": "2026-04-13 08:05 ET",
+  "scan_time": "2026-04-14 08:05 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "SYRE",
-      "price": 51.29,
-      "gap_pct": 25.44,
-      "pm_volume": 118723,
-      "avg_vol_10d": 763991,
-      "avg_dollar_vol": 39185098,
-      "mkt_cap": 4028324936,
-      "rvol": 0.54,
-      "adr_pct": 5.72,
-      "category": "FDA",
-      "theme": "Positive Trial Results",
-      "reasoning": "Spyre Therapeutics announced positive results from a clinical trial for one of its drug candidates.",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 20,
-      "grade": "C",
-      "finviz_theme": "Biotech - Immunology",
-      "analysis_detail": "Catalyst: Spyre Therapeutics announced **positive clinical trial results** for one of its investigational drug candidates, which initially led to a **surge** in the stock price. | Impact: These positive results **significantly de-risk** the development pipeline for SYRE, moving the candidate closer to potential **FDA approval** and commercialization, thereby increasing the drug's probability of success and market potential.",
-      "analysis_details": "• **The Drug**\nSpyre Therapeutics reported **positive trial results** for an undisclosed investigational drug candidate. While initial reports indicate a 'win,' the specific details regarding efficacy endpoints, safety profile, and phase of the trial are critical for full assessment. The initial market reaction was volatile, with an early surge followed by a subsequent decline.\n\n• **The Significance**\nPositive trial results are a **major milestone** for a biotechnology company, **de-risking** the development pipeline and increasing the probability of eventual **FDA approval**. This event validates the therapeutic potential of the drug, potentially opening up a significant market opportunity if the drug targets a large unmet medical need, likely in inflammatory diseases given SYRE's focus.\n\n• **Risk Profile**\nDespite the positive headlines, the stock's subsequent dip suggests that either the market is 'selling the news' or there are nuances in the trial data (e.g., secondary endpoints, safety concerns, or competitive landscape implications) that warrant caution. Investors will scrutinize the **full data release** for long-term implications and competitive differentiation.",
-      "peer_tickers": [
-        "ALXO",
-        "VKTX",
-        "CRTX"
-      ],
-      "headlines": [
-        {
-          "title": "Why Spyre Therapeutics Stock Is Sinking Despite Trial Win - TipRanks",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQZElEajZibS1KTExmakh6ZE01QjBZWllhVFl2QngzOGlRd2FMeTBMcjVhRmtMTmFpRFVrZmtpWkVnTDd2MTBfUjRPSlpVb1hQS3pKSGhVQlVLODhTQkhKOXpQT0Nyb3RvVnZ3WXl2cU9PU19IMG4tT2FTZVJzNlc1c1p4RWhLT0dsdXlCWFUyWlV3WW8zam5ISjZnemE?oc=5"
-        },
-        {
-          "title": "Spyre Therapeutics stock surges on positive trial results - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOOHFNQndld3cwT1lJQVZZOU1pU1pMWFlTQ25VLWo1MjdvOTR5MXFCZEh5cXVGWk90amxVVG10OU9zT2NycmdRTjd6VkRfa0xJbGg1UDhMVDlVaUE5QjhWZGR1Q0s3Q01hT3JPVjZpSmhuQ2hRMDEtamxrOEh1allRcHVaTnJhM3BUd05keGNWZmdINEdnZmNfV2tRRDR0dUtib0R5eElVT0kzdXdBYnJFSmFQc1I4MnN0YWQ0?oc=5"
-        }
-      ],
-      "float_shares": "64.30M",
-      "short_float": "16.23%",
-      "daily_pct": -0.93,
-      "industry": "Biotech - Immunology",
-      "technical_status": "Fail (Avg $Vol $39M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "positive results from a clinical trial for one of its drug candidates",
-        "discrepancy_note": "Finviz (Source A) has no news for SYRE, while Google News (Source B) confirms positive trial results."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "ALLO",
-      "price": 2.72,
-      "gap_pct": 15.81,
-      "pm_volume": 213790,
-      "avg_vol_10d": 4790840,
-      "avg_dollar_vol": 13031085,
-      "mkt_cap": 663075959,
-      "rvol": 1.28,
-      "adr_pct": 9.69,
+      "ticker": "AVNS",
+      "price": 14.53,
+      "gap_pct": 68.96,
+      "pm_volume": 5350871,
+      "avg_vol_10d": 385227,
+      "avg_dollar_vol": 5597348,
+      "mkt_cap": 675757698,
+      "rvol": 1.19,
+      "adr_pct": 3.06,
       "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "theme": "Acquisition / Take-Private",
+      "reasoning": "Avanos Medical surged following the announcement of its acquisition by American Industrial Partners for $1.27 billion, taking the company private at $25 per share.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 57,
       "grade": "C",
-      "finviz_theme": "Biotech - Oncology",
-      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. The recent Yahoo Finance article highlights existing analyst sentiment but provides no new fundamental catalyst for Allogene Therapeutics (ALLO). This suggests the move is driven by technical factors or trading flows, increasing the risk of a swift reversal.",
-      "analysis_details": "• **What Happened**\nAllogene Therapeutics (ALLO) has seen significant trading activity following a Yahoo Finance article discussing existing analyst price targets and potential upside. There is **no new company-specific fundamental news** such as earnings, FDA updates, or new contracts that would typically drive such a move. The article is descriptive of existing sentiment rather than an initiating catalyst.\n\n• **Key Consideration**\nGiven the absence of a concrete, *new* fundamental catalyst, the price action is likely attributable to **technical momentum**, short covering, or retail flow reacting to the headline. Investors should be wary of a potential **'Gap and Trap'** scenario as the move lacks underlying fundamental support, making it highly susceptible to profit-taking and a swift reversal.",
+      "finviz_theme": "Medical Devices",
+      "analysis_detail": "Catalyst: Avanos Medical (AVNS) announced it will be acquired by American Industrial Partners (AIP) for **$1.27 billion**, or **$25 per share** in cash, taking the company private. This represents a significant premium to its previous trading price. | Impact: The acquisition immediately eliminates AVNS as a public trading vehicle, crystallizing value for existing shareholders at the acquisition price.",
+      "analysis_details": "• **What Happened**\nAvanos Medical (AVNS) stock **surged 67%** after announcing an agreement to be acquired by American Industrial Partners (AIP) for approximately **$1.27 billion**. The all-cash deal values AVNS at **$25 per share**, taking the medical device company private. This acquisition provides a substantial premium to Avanos's recent trading prices.\n\n• **Key Consideration**\nThe acquisition price of **$25 per share** effectively sets a ceiling for the stock's immediate trading range, assuming the deal closes as expected. Momentum investors should be aware that the significant upside is largely realized, and further appreciation beyond the acquisition price would be speculative, tied only to potential competing bids or an extremely rare higher revised offer. The stock will likely trade very close to $25 until delisting.",
       "peer_tickers": [
-        "CRSP",
-        "KRTX"
+        "ISRG",
+        "RMD",
+        "DXCM"
       ],
       "headlines": [
         {
-          "title": "Why Do Analysts See 180%+ Upside for Allogene Therapeutics (ALLO)? - Yahoo Finance",
+          "title": "Avanos (AVNS) Stock Surges 67% on $1.27 Billion Acquisition Deal - GuruFocus",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNV01MZjF5d0VTLWg1S0Zaem5qSjZZeE81UU5lYXV1VW1qMmpXYkpGNWFsc2w4Vkw2TjRYWUtPSnM5ckcwREh6bzViSjQwODJPSGtaY1FkYURqU2NJRVUxNnJBbEdmY0M2Z2NNeGtBZEZDTEFfOUFLNHZJaVl1ZDRCMzltbzZFVmZDeVp4dDBrYjgzaXBRbVpV?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNUVZhNElIUmpfbTJXOTZlb29VWFZmNU43UW9VSFAxaDlmanJLYmNxN3NWUU16anlCb3JheHVHNm41RW1RSWhMLVNvWU5nZHhfWGs3SEZVQno3dk94Y1FEc0dNcG9sQUZaY0dQYzMwUkh6OVNaRWlMWlgxVjdsYlJKeks5YkZqX0hGUEJ1TklsTWxtQ0hpRm4wQWVIeGtoZ3c?oc=5"
+        },
+        {
+          "title": "Avanos Medical to Be Acquired, Taken Private - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNX2VaeWRlRXlBN21qVW1URWU2blZqdVBZbTA1amVZOENuLXNiNnZZcFJaSE1PbXBDNmg5QUVLeXFyQ3J3MkVFWm1oQ0VOSTBKcHpzN1N1Nkd0TEtIbFRGMEJzc3VvR3NVSFo4aHBXeDAzbEQ0cEktd2Q3NnRTT3FqQXZNMHJ5ZEFwUXJTc0h3anFiVnZ3YjVVMjRocw?oc=5"
+        },
+        {
+          "title": "Avanos Medical rockets 67% on $1.27B acquisition by American Industrial Partners - MSN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPZjhfa0N0aUxVZXVoa2dfUHNhOFJ5NU9TR3NyWG9LQmJDSGlJeTY1SmhIMjNKdkd4Q3Y1MDgwbWoyQW5tbDctb1ltUk1kdFQweUl1RWFlS3VjeExiaWhPaW53OEVnR181NXNKZE9zSzRlOHgxSTBuY2t5ZlFwdWQ1NTVsN1hjZXhEaWkteFB0RHJZM2xWYnZ5RENWNlFPeFhpRF9nWkdXT1BHQjNEVHdUNzg5TFJpcGg2bW53dUZlaDd4d1NzRzdNS0VOMFdOS3EyYzdWRFFRX0U3Z21WZVRYZjlUa3NQTllGcTRGYVRQNA?oc=5"
+        },
+        {
+          "title": "AIP to take Avanos (NYSE: AVNS) private at $25 per share - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQWGRvQ243WE9DWmM2cXVMLXlTWExvSkNBRkFxOG5VY1JQUHZpa201a3M5RkNObG5GVnpKb0NvMmZZS292bjlhaXE5MFBweGNtMG5NZVpFLWpfODVOZG5OeGludzZKczRjdl9YTkVzYmxjME5GcHFJLXA4M1o1ai1KekJ5eGhiZ29scHhlNE56eTlLbU5LMGxWVDNvR2hhZTJzRG9HNl9xSkVDdFU?oc=5"
+        },
+        {
+          "title": "Avanos holders get $25 a share as AIP takes company private - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQRlF4SVFGQW5rZFFwcV9fQVZpLUJOLU9yU3NIcW1uMTg3S2U1UU1aX2FkR3pUbHlIdktjNnhwcVhWcXBTdkJFVEIyd0g5NHY3UDZYRmhnWEFUNkg2UW8zQV9ZUmZEeWZGOGVVNjNiUnRueE93NHoxQ1ZpTms1b1drSmxES3dFdkFoUjlQSEtfN3lkUkhIR2UwOGNUdmdtMWNUVEUyWm5ZYV9SME1CY09ScDN2QW92SVhGemc?oc=5"
         }
       ],
-      "float_shares": "162.20M",
-      "short_float": "19.77%",
-      "daily_pct": -6.53,
-      "industry": "Biotech - Oncology",
-      "technical_status": "Fail (Avg $Vol $13M < $100M)",
+      "float_shares": "44.74M",
+      "short_float": "4.85%",
+      "daily_pct": 2.47,
+      "industry": "Medical Devices",
+      "technical_status": "Fail (Avg $Vol $6M < $100M, ADR 3.1% < 4%)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 95,
@@ -107,86 +65,85 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": "The initial analysis claims 'No immediate fundamental catalyst found', however, both Source B articles (Yahoo Finance and Insider Monkey) highlight '180%+ Upside for Allogene Therapeutics (ALLO)' based on analyst estimates. This analyst outlook represents a potential fundamental catalyst, contradicting the summary's claim."
+        "primary_claim": "The company will be taken private at $25 per share.",
+        "discrepancy_note": "Source A (Finviz News) contains no information to confirm or deny the claim. Source B (Google News) confirms the $25 per share acquisition price in multiple articles ([1], [5]). However, because 'BOTH sources' are required to confirm for 'Verified' status, and Source A provides no information, the status is marked as Discrepancy."
       },
       "gates_passed": 2,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": false,
+        "gate_price": true,
         "gate_dollar_vol": false,
         "gate_mkt_cap": false,
-        "gate_adr": true
+        "gate_adr": false
       },
       "meets_all_gates": false,
       "tier": "Fail",
       "tier_label": "Excluded"
     },
     {
-      "ticker": "IDYA",
-      "price": 30.5,
-      "gap_pct": 15.57,
-      "pm_volume": 916065,
-      "avg_vol_10d": 1061782,
-      "avg_dollar_vol": 32384351,
-      "mkt_cap": 2678327789,
-      "rvol": 1.05,
-      "adr_pct": 4.98,
+      "ticker": "TVTX",
+      "price": 30.7,
+      "gap_pct": 39.61,
+      "pm_volume": 1051391,
+      "avg_vol_10d": 1860737,
+      "avg_dollar_vol": 57124626,
+      "mkt_cap": 2831815392,
+      "rvol": 1.63,
+      "adr_pct": 5.36,
       "category": "FDA",
-      "theme": "Positive Clinical Trial Results",
-      "reasoning": "IDEAYA Biosciences reported strong positive clinical trial results for its eye cancer drug combo, significantly outperforming standard care.",
+      "theme": "FDA Approval",
+      "reasoning": "Travere Therapeutics (TVTX) stock surged after receiving full FDA approval for FILSPARI (sparsentan) for the treatment of FSGS.",
       "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 22,
+      "conviction": 23,
       "grade": "C",
-      "finviz_theme": "Biotech - Oncology",
-      "analysis_detail": "Catalyst: IDEAYA Biosciences' drug combo for uveal melanoma demonstrated superior efficacy, holding the disease for **6.9 months** vs **3.1 months** for standard care in a clinical trial, representing a **122% improvement**. Impact: This significant clinical de-risking event substantially increases the probability of future regulatory approval and the drug's commercial potential in a high unmet need area.",
-      "analysis_details": "• **The Drug**\nIDEAYA Biosciences' drug combination for uveal melanoma has shown **highly positive** results in a recent clinical trial. The combo effectively held the progression of uveal melanoma for **6.9 months**, a substantial improvement compared to the **3.1 months** observed with standard care. This represents a **122% increase** in progression-free survival.\n\n• **The Significance**\nThis outcome is a **major clinical milestone** for IDYA, significantly de-risking its pipeline asset for uveal melanoma, a rare and aggressive form of eye cancer with high unmet needs. Beating standard care by such a wide margin positions the drug favorably for future regulatory submissions and potential expedited review, enhancing its commercial viability and market opportunity. The stock reacted with a **26% jump**, reflecting market confidence in these results.\n\n• **Risk Profile**\nWhile the trial results are **highly promising**, the drug is still in the clinical development phase and not yet FDA approved. Remaining risks include the need for larger trials, potential unforeseen side effects, and the complexities of the regulatory approval process. However, today's data **substantially lowers** the overall development risk and provides a strong foundation for continued progress.",
+      "finviz_theme": "Biotech - Rare Disease",
+      "analysis_detail": "Catalyst: Travere Therapeutics secured **full FDA approval** for FILSPARI (sparsentan) for the treatment of focal segmental glomerulosclerosis (FSGS), making it the **first and only approved medicine** for this rare kidney disease. | Impact: This approval **de-risks** a significant portion of TVTX's future revenue streams, establishing a **monopoly position** in a market with substantial unmet medical need. The stock **surged 44%** on the news, reflecting strong market validation and significant commercial potential.",
+      "analysis_details": "• **The Drug**\nFILSPARI (sparsentan) has now received **full FDA approval** for the treatment of focal segmental glomerulosclerosis (FSGS), building on its previous accelerated approval for IgA nephropathy. This makes FILSPARI the **first and only approved medicine** specifically indicated for FSGS, a rare and progressive kidney disease that often leads to kidney failure.\n\n• **The Significance**\nThis full FDA approval is a **transformative event** for Travere Therapeutics, as it significantly **de-risks** the drug's commercial future and secures a **monopoly position** in a critical unmet medical need. The **44% surge** in stock price immediately following the announcement reflects strong investor confidence in the drug's sales potential and the company's ability to capitalize on this expanded market opportunity. This approval validates years of research and development and provides a clear runway for revenue growth.\n\n• **Risk Profile**\nWhile the FDA approval **substantially reduces regulatory and clinical risk**, the primary focus now shifts to commercial execution. Key considerations include the rate of physician adoption, market penetration, and the eventual impact of any future competing therapies. However, FILSPARI's status as the **first and only approved treatment** for FSGS provides a strong initial competitive advantage and pricing power.",
       "peer_tickers": [
-        "ARWR",
-        "VRTX",
-        "RAPT"
+        "SRPT",
+        "CPRX"
       ],
       "headlines": [
         {
-          "title": "IDEAYA Biosciences (IDYA) Stock Jumps 26% After Eye Cancer Trial Blows Past Standard Care - CoinCentral",
+          "title": "Travere Therapeutics (TVTX) Stock Surges 44% After FDA Approves FILSPARI for Rare Kidney Disease - CoinCentral",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQeWZxQUw0UDZYR0pOenF4QWxFbWtaNVY5ODQtYlE3TkRNZmhMQnl2MDR0NnV1bFFjbkpSWExMS3RWZ3Rna1lTTWc5ZGt0UnJ6ZXZGS25PT2w3Qjl4bVlXVGNtdHdBZkhjdkQ4ZkUzbHZ3ZDltaWZtQjVXTE14a3JkRlJCd0RDWTY5dXU0VTBTdzZucFY1dWlTYjFPT3RFdWU2UlRzZlhlSDRYQURucDhraw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQUE43VWlNOE9fdVpiTEtJWi03RG8zWnpsWWZzTzRoSUFuY3NXU2kyOGlFTFlXYTZrOUNGWWZzN29JMXZHaDA1SHphc0hGYmNvOVR2RkwzT0hNaGlCR3R3ZWxuX3k4YXdHc0ZPRnBBX3RhcFo2MkVXRFJzNWVpekRmQXBDOGtWUnEtVUNuOEpxc2ZnSzZtTGZCUmJKR1Z4amg0d0pxRmxCcHlCZVloajREQUJoZ2VzRFlzVnc?oc=5"
         },
         {
-          "title": "IDEAYA drug combo held uveal melanoma for 6.9 months vs 3.1 - Stock Titan",
+          "title": "Travere, Ligand win FDA label expansion for Filspari (TVTX) - Seeking Alpha",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPTnZKUEpfUkIxNlVfUmpZTWVfWHRDVDVTdFI5dEJLOHRfTnFUeW1YVS14T1FTQWlaTXlQZ3NhTjJXUWRyUlFidVRiYzNiUDQ1UC1oTVVxbG5IWjJkZDJRdEt1dkJiQ2xSbXV0UmhUNl9obXcweVB4VUhqWmNEaGNvQW9pMXAzNVZRSU5kcXhKX1JQcDR2TkZqbVZlVlpKaWtmVjduZEtsN1VRTTBtVktjWmZrMHBxMC1GRnJz?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxNc0NFWkpBUGVGb0NxTnhiR2dMWW4ybU4yTm1hLVBUU0JpSEc2aGlXN3hnRTdwRHhFR24wNDRjQ3doaXh1Mlp1eGo2TmRQS0pqNzJrOTVhcEZMcVNxSUpiRW1SN1lXMWhkdThfMlN1cmRWNzFJY3M5LUc4VE81d01OZDN5cTNuY1V0VFBqUDZiMzlncHYwdVhhTk03bWZ5S2lZdTRtTmladkVrWWJxYkVFZFZXQi1iNTMzQkV0TEF4NFBBblMyd0syVl90MWZzb2VIdkxnNDFUdVYxcXhTMnZr?oc=5"
         },
         {
-          "title": "Why IDEAYA Biosciences Shares Are Trading Higher By 18%; Here Are 20 Stocks Moving Premarket - Benzinga",
+          "title": "Travere Wins FDA Approval for FILSPARI in FSGS - TipRanks",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNWlRZYzVNU0h2bTN0TXltejIwSmUzSjRQaTlLcHhPWXJtNmJZU2M2cUlrT1ZrMGgxQV9fVkdJZzZZUTV5OXNEMk5GdEpKTlRNZE5yR0k0QlAzYVdZblpWeUN1R290ZFhzNGUwV01BQTJqLTlnNmlSU29WcVJSdDJ2dVRRYVh1clNjc01SSzMyWFBjSWs2ZDNxTFJqaEdBYVJrSTk5THRENFVMTUsyNUI4ejZCbWtRUno2cDNUcjhCa1F6cnRvQjVXeEZiUXVIUmxf?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQeFY3S3VPSU9RcnRtd0NYOHJWTkY3VTloMWF6bS1sSzRDUlBjb3NIZUtuaWNram91Y0cxOUhpdExOcHl6c1ltQ3ZhSmplUnJmNjVLN3lCYXJBdHcwaThqY0pZWWlpd2oyMjhWQXVrT0dMZllTSG9jRlZyQTFTX1l5dTJxY282VkF6RnE1aWNLcXQ5RTNsTHAyTW5mVm5yYnM?oc=5"
         },
         {
-          "title": "Nasdaq, S&P 500 Futures Slip As Hormuz Blockade Escalates Tensions: Why BATL, INTC, PLTR, IDYA Are On Traders' Radar Today - Stocktwits",
+          "title": "FDA approves FILSPARI for FSGS in Travere (NASDAQ: TVTX) patients - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNWDhNMmY5RFZ3RGNZMjlWTkJzemtvWFRmcmctYmZLZE5qZVpaUjJSNmU4WjlRakp5cXU1bzlHMklOUDRXRmEya0NUOXV5ei1vRWxEM2dhakItVEdlRHVGYzVOX2J4Nm4ybnhmUVRyRXdMQXhBMXNkOUdXUHJ1TXRCSVhDbzFQODZ5RUg3c1llQWZBLVpaTU9WTldoaXExZTA5LUJMRzRycW5oSXdMMjRySWpGNzloTE9WemMtMzRQQi1hQ25uSFdCbmZvc082NFYxNWlldld1MGc3eXBf?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPdElWWFh6SWJVODNSal9IZ1FOVnh4SGlzcmFVaHFxLVowNkJRUmlEbmhWV2N1aS1MbmYxbkJHQnhibkZjQkluY0l6N2NNNVVUek9XTDl3TlZVTGRWMVdaU0ZCdlNfRjRIZWoxcmFNaUhfNlprcThRWWxvenFfZHlqZzNGYjduWkFvS3VpTmNCcko4dW1pU2VhS1ZJQXVmV2tPemhzZ2p2c21ZNUxpRjAyVEtvZw?oc=5"
         },
         {
-          "title": "Why Is Ideaya Biosciences (IDYA) Stock Surging Over 20% Overnight? - Stocktwits",
+          "title": "Travere Therapeutics (TVTX) Secures FDA Approval for FILSPARI - GuruFocus",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQQ0d1eWtNUzI2MGV4amx0NkN0c0VGNjBWWURDRVM3dTJ5WS1kZjNqaUhyMXhqeFdQb2JfZFVoaXFFSEM4ZnZCQW16SnFFN0RwT1J0R2JNdG5sUEp2RFB1NlFGZDZUR3hudXA2emNTUVFJYlJsS1NycUhaQWVlX0FONmowZUV6Znd6TVBtN2t6Yk1ycndSUVNycUlkWVY2cnQ4?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQS042cVR5THN3aE5TblVRS3JtWFZ3REhvTjEwOHdJUjFnbUc1VzRNdFU3czBVMGlNQklhcURjWW1BdkZPc3JPbzNGYmJwSFJmeHBjVDNiaTNXVGhGZXpEMUx3WHlmbm1teDNUVVpZX2EwQmlvUFgyNUZKWUg2V21KZ0dtdXFlejRqeHg3VUpicGVmek9kbm1hTk9Sa0xUczdVZmdXOVV5NDhuMHR4Y3BVZ0w0MTU1Q2NhcFhaN3dxMzUxQ0VQVC1taEdERTR0TnpfWE54SA?oc=5"
         }
       ],
-      "float_shares": "82.63M",
-      "short_float": "11.81%",
-      "daily_pct": -1.61,
-      "industry": "Biotech - Oncology",
-      "technical_status": "Fail (Avg $Vol $32M < $100M)",
+      "float_shares": "90.50M",
+      "short_float": "14.86%",
+      "daily_pct": 6.01,
+      "industry": "Biotech - Rare Disease",
+      "technical_status": "Fail (Avg $Vol $57M < $100M)",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 70,
+        "status": "Verified",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "IDEAYA Biosciences drug combo held uveal melanoma for 6.9 months vs 3.1 months for standard care.",
-        "discrepancy_note": "Only Google News (via Stock Titan) provides the specific numerical comparison of 6.9 months vs 3.1 months for the drug combo's performance versus standard care. Finviz has no information, and other Google News articles mention the trial 'blowing past standard care' but do not provide these specific numbers for cross-verification."
+        "primary_claim": "full FDA approval for FILSPARI (sparsentan) for the treatment of FSGS",
+        "discrepancy_note": null
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -201,69 +158,70 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "LWLG",
-      "price": 10.6,
-      "gap_pct": 10.74,
-      "pm_volume": 509904,
-      "avg_vol_10d": 5414984,
-      "avg_dollar_vol": 57398830,
-      "mkt_cap": 1577610045,
-      "rvol": 3.0,
-      "adr_pct": 11.94,
-      "category": "Institutional Buying",
-      "theme": "Insider Selling",
-      "reasoning": "Lightwave Logic's CFO sold **20,000** option shares after a **939%** one-year stock run.",
-      "hypothesis": "Medium Conviction (RS Hold) — Large fund accumulation; watch for continuation.",
-      "conviction": 63,
+      "ticker": "SANA",
+      "price": 3.21,
+      "gap_pct": 27.73,
+      "pm_volume": 1252926,
+      "avg_vol_10d": 2673206,
+      "avg_dollar_vol": 8580991,
+      "mkt_cap": 856642766,
+      "rvol": 0.59,
+      "adr_pct": 6.48,
+      "category": "New Contract/Partnership",
+      "theme": "New Contracts",
+      "reasoning": "SANA announced a strategic collaboration with Mayo Clinic to accelerate development of SC451 for Type 1 Diabetes.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 75,
       "grade": "C",
-      "finviz_theme": "AI Networking",
-      "analysis_detail": "Catalyst: LWLG's CFO sold **20,000** option shares after a **939%** one-year stock appreciation. | Impact: This insider selling creates a **bearish overhang**, suggesting potential overvaluation or lack of conviction from management at current levels, potentially limiting future momentum.",
-      "analysis_details": "• **The Buyer**\nLightwave Logic's **CFO** sold **20,000** option shares on **April 12th**, as reported across multiple financial news outlets. This sale occurred following an impressive **939%** increase in the stock price over the last year, indicating significant profit-taking by a key insider.\n\n• **Conviction Signal**\nInsider selling, especially after a substantial rally, typically sends a **negative signal** regarding management's conviction in the stock's immediate upside potential. While this could be for personal financial planning, the magnitude and timing after such a massive run-up suggest a belief that the stock may be overextended, raising questions about sustainability of the momentum.",
+      "finviz_theme": "Biotech - Immunology",
+      "analysis_detail": "Catalyst: Sana Biotechnology formed a **strategic collaboration** with the **Mayo Clinic** focused on improving care in **Type 1 Diabetes** and accelerating development of **SC451**. | Impact: This partnership **validates** SANA's therapeutic approach and **de-risks** the development pathway for SC451, potentially **significantly expanding** its market opportunity and **accelerating** time to market.",
+      "analysis_details": "• **Impact**\nThe collaboration with the **Mayo Clinic**, a leading medical institution, provides significant **validation** for Sana Biotechnology's **SC451** program targeting **Type 1 Diabetes**. This partnership is expected to **accelerate** the development and clinical translation of SC451, potentially **reducing clinical risk** and enhancing its market prospects in a substantial therapeutic area.\n\n• **Strategic Value**\nBeyond financial implications, the collaboration leverages Mayo Clinic's **clinical expertise** and patient network, which is **invaluable** for a biotech firm in the development stage. This strategic alignment could lead to a **more robust clinical trial design** and **faster patient enrollment**, ultimately **expediting** SC451's path towards regulatory approval and commercialization.",
       "peer_tickers": [
-        "COHR",
-        "LITE"
+        "CRSP",
+        "VKTX",
+        "NTLA"
       ],
       "headlines": [
         {
-          "title": "Lightwave Logic (LWLG) Stock CFO Sells 20,000 Option Shares After 939% One-Year Run - CoinCentral",
+          "title": "H.C. Wainwright reiterates Sana Biotechnology stock rating at buy By Investing.com - Investing.com Canada",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQQ3luRmxZWjY4TkJtUjdSeERkOUZjMnNmMkNncVVGZGx3MUEtTmo0MnQxRmU5Y05YVXVUWHZaLTJkUk1hb1dkMGhDR3kydG9mWTZUX1B1RHhWY2wyY25adzFLbk9mMll5Z0c0em9FYjNoUGhFNUc5QnhpYzlYX2RTU2lmTnBveXRtbDd5dEV1NzRIMFZJYlZ2ZnhNdVRCV0RIV3NINm45cw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNWmlCSzdhSktwTTBmME8wWmN4WEhxa1dBdnlDcHJBdWtoOXd5MVFtR1pudjlnWTFqOTM2eWl2VTBiazNITzlydms5c0NKUXdFRVN5aTdYa25CWFFtbFk4M09HZzA3WFpxaWZfbEJFYjVUZnVjOWJlajdRdTZyMUdVZDNIOFc5clJ4bnhoQjhLWkI4d2sxNmQ2REJFNW10czgzeTl2MTN3TE5iekUwRF9yb19hVS1TcVhXZHJMMGZBXzQxUQ?oc=5"
         },
         {
-          "title": "INTC, SNDK, LWLG Stocks Hit 52-Week Highs Last Week: What’s Driving The Rally? - Stocktwits",
+          "title": "Sana Biotech rises after Mayo Clinic deal (SANA:NASDAQ) - Seeking Alpha",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOUXFiVDhuMVRfR2kyWlBUejNLY3JZZE1pM1dJWVFpQWNPMmxqOXJ0SV9UQ0xCMkNUTFgxdzc4ZjRrUmpFUW4ydWdXZUEwMGZGMG1WS3lzV25LeWJQVjRncHJoaW14MkdfRjhrSG5CZmVSMUNQQmIyQklvZlRCMjJVMlpaLUVmbmNtM3Q2QTNIV19PbWJ0al9kNVRTWDVFR18tZHVGOUQ1OUlVamJLMERZX1RrVGJFRGFEUlk2NElxSy1qNEtMSFVoU3Zn?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPYzRIa21QWDdwMUVMb2hKM2UxQWhSSXY4U3gxck80djdkRkRXT1Y0RmRncDRsNGpidnZrd3RqMlpPTG85OTNzX3ZveFZLQ2dCRWNMd1ZBZnU0aXRBV0VyVmF5RTIxUTNySkNlWWNMYmhPamZURi1oLTRobGhoWWNrWGNWaWdmYld4b2REdm5oeFZOUUZ1RFNuYzBmclYxeGRUeElPNmVNdw?oc=5"
         },
         {
-          "title": "Does Lightwave Logic’s (LWLG) Design Integration Quietly Redefine Its Long‑Term Commercialization Path? - simplywall.st",
+          "title": "Citigroup, JPMorgan And 3 Stocks To Watch Heading Into Tuesday - Benzinga",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQblRWdGV2dkg5ekJ2RW1tQmxNbU50ZUExTUVQUGNON28zMV9EcVB6cjlqZEpvdDdwT2REZDhVOHpjdFNZSWRDc2pwdkdJekE1VHRDSV9QYnZ2d0VqSlZwLWpmbkVZRnUyU3BfdGYxX3NvcTNTOWFvd0o2bUVaNEUyT19EZmlQeXBfTGJBc2xJODFDeXdoVGFrc1cwZWp6T2JoQWR2eVBRRkhTMTdnLUV4U25RMklLS0NQSVZOVGNSZi1RVHFaaEtYc3NrR3BDb0XSAc8BQVVfeXFMUG5UVnRldnZIOXpCdkVtbUJsTW1OdGVBMU1FUFBjTjdvMzFfRHFQenI5amRKb3Q3cE9kRGQ4VTh6Y3RTWUlkQ3NqcHZHSXpBNVR0Q0lfUGJ2dndFakpWcC1qZm5FWUZ1MlNwX3RmMV9zb3EzUzlhb3dKNm1FWjRFMk9fRGZpUHlwX0xiQXNsSTgxQ3l3aFRha3NXMGVqek9iaEFkdnlQUUZIUzE3Zy1FeFNuUTJJS0tDUElWTlRjUmYtUVRxWmhLWHNza0dwQ29F?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPeXFmNU03bGFMQXJLeEdWN1RjdFMyTDVlNXBGZTBVTE1wc0ZQSXNfUEJ0dHVJTmRISUczVWo2emJFX3dmMUdmRXgtamFnN0tXS2FVa1hQMmdQRVY3R1dGZlJVMnpMQmdlVEptOGlIQWxrdGdJM2tJWEJuUjVpYUtKRnhJeXhoNlNTelJRNi1hdzBrSGtuNERBSmloMWIwRmpTbklTYlFONkRhdTBpVGV0V2NhQkMwZWRmM0E?oc=5"
         },
         {
-          "title": "Do Lightwave Logic’s (LWLG) New Foundry Ties Quietly Redefine Its Commercialization Path? - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQcFBvRWpOdTV1N09rUWRGV2EwRXNNX1VJZHJBUHhRNFRIYkR1RWRhcVVXUXBEVWcwM3NWdUFobDdXNTBicFExLVFFdXB0SVJGZ1JudWhROTVzZ1VNZFpPeUEwUzM4MmZyUHlFdUI1QnRnWFM4aXFoeUNXaEpGV08zeVRmaFplQ0hwNmdlZzdEazhMbzNQbGgyakVPMWZmQzA?oc=5"
+          "title": "Sana Biotechnology and Mayo Clinic Announce Strategic Collaboration Focused on Improving Care in Type 1 Diabetes and Accelerating Development of SC451",
+          "source": "Finviz",
+          "url": "/news/344177/sana-biotechnology-and-mayo-clinic-announce-strategic-collaboration-focused-on-improving-care-in-type-1-diabetes-and-accelerating-development-of-sc451"
         },
         {
-          "title": "A Lightwave Logic (LWLG) Insider Sold 20,000 Shares After a Huge Run Up - The Motley Fool",
+          "title": "SANA Stock Rallies 24% After Hours — How Much Is Mayo Clinic Investing In The Company? - Stocktwits",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQdTBWVVdFUG1OSDFXcm9QRXJxY1doSFB4RWd5NWZWZl81akp1aTZ5VFhLOU1MMzFOR0hVbk1VRXE4cTJRRURVazBHbGt0a0sxcF9Rc3ROLS1NekVFRk1SZ2xUS0VZcGhnbUYtcWZvYmQ0WHM2Y2dBWG1ORFdIZU9EWXhkR0R0UEtYQldpa01PYzhhYzd0RG5rSUc3V2ZSV3VhbFJpU2RBcjhGTVZHQzlPRWZ1Yi1GTnBIZWVV?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPY2JiZ0dnN21XZVpxTGlfVGgzbE1Ka1ozcUhpVllScVBUdGY1RGc5MzNQelByTDhOT2tFVU9PWllVZzJ2QWQyd0kxOFZGV2Z1TmNrMVJaNHdtSG1ZZno2amIyZjhyaXd2Q2J3Y3ZSMkZzUFRZUkp0d3F1Q29pN2tCaDNlS1dINEFHd0x5TmZ1NUl0X1duMHFBZjB6YkRWTHRLYWtoenh3UXJwSXlSYkFGYU9Xd1dzMFdFZ1VpSnhtS1VWMFZKcHpYOVNxNzViZURuWjlWZXdn?oc=5"
         }
       ],
-      "float_shares": "146.46M",
-      "short_float": "8.80%",
-      "daily_pct": 25.59,
-      "industry": "AI Networking",
-      "technical_status": "Fail (Avg $Vol $57M < $100M)",
+      "float_shares": "166.17M",
+      "short_float": "23.70%",
+      "daily_pct": 3.88,
+      "industry": "Biotech - Immunology",
+      "technical_status": "Fail (Avg $Vol $9M < $100M)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 60,
+        "status": "Discrepancy",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "CFO sold 20,000 option shares",
-        "discrepancy_note": "Finviz News (Source A) has no articles to confirm the claim. While Google News (Source B) provides multiple articles supporting the '20,000 shares' claim, the absence of confirmation from one of the required sources means it cannot be 'Verified'."
+        "primary_claim": "SANA announced a strategic collaboration with Mayo Clinic to accelerate development of SC451 for Type 1 Diabetes.",
+        "discrepancy_note": "Source A (Finviz) explicitly confirms all details: 'Sana Biotechnology and Mayo Clinic Announce Strategic Collaboration Focused on Improving Care in Type 1 Diabetes and Accelerating Development of SC451'. However, Source B headlines only refer to a general 'Mayo Clinic deal' or 'collaboration' between SANA and Mayo Clinic, without specifying the 'strategic' nature, the drug 'SC451', or the focus on 'Type 1 Diabetes'."
       },
       "gates_passed": 2,
       "gates_detail": {
@@ -278,75 +236,353 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "ASX",
-      "price": 24.84,
-      "gap_pct": 6.24,
-      "pm_volume": 52967,
-      "avg_vol_10d": 6762697,
-      "avg_dollar_vol": 167985393,
-      "mkt_cap": 54090586555,
-      "rvol": 0.82,
-      "adr_pct": 3.28,
-      "category": "Others",
-      "theme": "Share Buyback Program",
-      "reasoning": "News Corp **updated** its **US$1B share buyback program**, providing detailed ASX information, signaling **strong capital management** and potential **shareholder value enhancement**.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "B",
-      "finviz_theme": "Consumer - E-Commerce",
-      "analysis_detail": "Catalyst: News Corp **updated** its **US$1B share buyback** program, providing detailed ASX data. This program aims to **return capital to shareholders** and reflects **management's confidence** in the company's valuation and future cash flows. | Impact: The buyback can **reduce the outstanding share count**, potentially **boosting EPS**, and provides **price support**. It demonstrates a proactive approach to **capital allocation**.",
-      "analysis_details": "• **What Happened**\nNews Corp (NWS) announced an **update** to its ongoing **US$1B share buyback program**, providing specific details relevant to ASX trading. This corporate action signals a commitment to **returning capital** to shareholders and underscores **management's belief** in the underlying value of the company's shares.\n\n• **Key Consideration**\nA **US$1B** buyback is a **significant capital allocation** decision for NWS. This action typically leads to a **reduction** in the outstanding share count, which can be **accretive** to earnings per share (EPS) and provide a **floor** for the stock price. It reflects a **strong balance sheet** and **positive cash flow outlook**, making NWS potentially attractive for momentum investors.",
+      "ticker": "CRDO",
+      "price": 134.36,
+      "gap_pct": 20.59,
+      "pm_volume": 449955,
+      "avg_vol_10d": 6165655,
+      "avg_dollar_vol": 828417406,
+      "mkt_cap": 24782692629,
+      "rvol": 1.93,
+      "adr_pct": 7.69,
+      "category": "New Contract/Partnership",
+      "theme": "Acquisition Deal",
+      "reasoning": "CRDO surged following news of its acquisition of a photonics company, building on previous analyst upgrades.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 79,
+      "grade": "A",
+      "finviz_theme": "AI Networking",
+      "analysis_detail": "Catalyst: Credo announced a **deal to acquire a photonics company**, leading to a **20% stock surge**. This follows an earlier **15% surge** from analyst upgrades. Impact: This acquisition likely expands Credo's offerings in **optical interconnects**, critical for **AI and data center infrastructure**, potentially adding new revenue streams and strengthening its competitive position.",
+      "analysis_details": "• **Impact**\nCredo Technology (CRDO) experienced a **significant surge of 20%** today, primarily driven by the announcement of a **deal to acquire a photonics company**. This strategic move follows a **15% jump** yesterday fueled by bullish analyst re-ratings, consolidating strong positive momentum. The acquisition is poised to expand CRDO's technological capabilities and product offerings in high-growth areas.\n\n• **Strategic Value**\nThe acquisition of a photonics company is strategically important for Credo, a leader in data infrastructure connectivity. It enables CRDO to deepen its expertise and potentially integrate **optical interconnect solutions** directly into its portfolio, which is crucial for next-generation **AI/ML workloads** and **hyperscale data centers**. This move could significantly enhance CRDO's competitive edge and total addressable market in the rapidly evolving high-speed networking sector.",
       "peer_tickers": [
-        "IAC",
-        "Z",
-        "NYT"
+        "MRVL",
+        "AVGO"
       ],
       "headlines": [
         {
-          "title": "News Corp (NWS) updates US$1B share buyback with detailed ASX data - Stock Titan",
+          "title": "Credo stock surges 20% after deal to acquire photonics company - Seeking Alpha",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNVGlWR3Nqc3RmbjlGT1Bzd1pDb2xsQU93QWNDLVZKZGtPUGhzSUd3QmJwNnFfeHFJVmZaZll6THh2NXkwcWJUMGxvOWZkVGo0Vk9CRTBxX0pEZktITlV6Y3NnVi1obVE4RmgwNWVpTWpXMEZXRzJRbXZmNTI4MnU1WkVaOGk1T2ZFYXI1MkxfX2lCbW9DNnIzeDlIcHp0dw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQUFNhcTNFQkhSTVRYZUNQVjQ5MzRPdUFNRW1keWhRUElyWUFRLWRpX3VmcTVlRWVVdEtxd3EwOHlZUlVBVEdiWEVuUXVXSC1XOFpfR2JEQkxtMHNiLTNycWxoUU11RVUyNGI2NVdXcE1SWFZYRk9yay02dnFqd2ZwTGNJcng1NGZWTUxUdEVBNzBndmVka2l3cw?oc=5"
         },
         {
-          "title": "Atomos plans major ASX share issue to bolster capital base - TipRanks",
+          "title": "Early Movers: JPMorgan, Oracle, Bloom Energy, Credo, American Air - Investor's Business Daily",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPd05HWUhZbWdwS2xHUzloNmx3ZUsxOXBlTENKNXoySVQzQjQ2VG9vVlpTQXg5ZEh6emdfazRzaEZKM3I0aGZsQXB1WEpQYkJ0emxRMVNybjBSQ1ViTm9aVXFKQUpuVHo2N2hFOGdZY1NDcHk1S08tMWRjU21sdlVVTTFmYzZJd2ZNa2hYRDkySFRCUjVLZXA4bkx3Vzh6d1NEaHRYT1hWd0xEUjZ4QTdv?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxObUJOSHNrV1ZUQTVKbWt6NXdWSW1WNDNwcHEzZ25laklndG9FRC03MDRwcUVmYXZxU21JWFptQU55eTIxVFhEbDJ2U19Ldm9RRWltSGpMMkoweWMxREpYWTlQVFY0aFpVNTM1Y0NEeGlxR2REd3JlemJtRUp0bHV5LVZFOVA4anFTM3FnWmJXU2VKQzZCcl9LLTl0XzFpUUZIUU9xdEtGQlhQejVBMEE?oc=5"
         },
         {
-          "title": "Australia stocks lower at close of trade; S&P/ASX 200 down 0.39% - Investing.com",
+          "title": "Marvell Technology vs Credo Technology: Which Stock Could Rally? - Trefis",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPZEhYNll4R2Y3STVlaF9hM3hGNkdTVWh3THdFN0QwSTAwcDFlVVFyRHAxeHZFQ29ndi1GYUdrTFhLUmpld3hFb2lGbHhNcVI1UkNZZGN6RlpmT2xOZERaVUZkanhzRjBvOXJnQWltQ19RdW93OG9Ka21KWHdsa3dJWWRRT3hwd090SmVWSUlXZE9XY29zQ3NFaktQN3haNVd4M3NsYzdYVTdVbWV5NFFBc0huTkRBU2c?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOeUtHMzBlVDAxZ2JoUTNpLUFVaTZnMExXMXI3emVXZ25XVmFkZjBla0gxQWluRTdJNFRkczFEVlA2SG1YU3ZKeS1SNmVoMWdCRlpOa2prRU9MV2xyV3p2Y0lGQVU5X0VLNGloT1NSNjhpSFBsUVBXSlN5MTh1RjJiVGc1U1JBLTFpYlpQd0pCWEpIWEVEYVN1Y1hVTnF5RlpUaUZaTjZtaVoxXzM2UmpGVnVrT2xrTEVHZ005OXljYWM?oc=5"
         },
         {
-          "title": "3 Top ASX Shares to Buy Now: Expert Broker Insights - National Today",
+          "title": "Credo soars 15% as analysts flag ‘significant disconnect’ - thestreet.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPbkFTZlVfRFA5NGZud05aS0V6SmhYMDFEVUhBNndoRi14b3JhWnpycExHak9sSFVmTm9FYm05R25DVU5mcVNKZ0hwLXlLMHZPRzFlYUNMVzd2MkYxc1dJMlFBb1BnN0VhQVlDTncxZ1dienpCTU50NS14VWl3WFBNaDV2d3BHd2hKNUlxNmFhLWoyRUpUVHI4aHlyWkx4dzROOEtBUUZibFd3dExrUVcxaA?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPZUJ0cVdBWEltb1ZkUGR1SFRhaUtmQnhXc1VHMVM1OHo0eGtNUlRNdjZNVV9Wbm9YLW8xZjJFeXlTYjMzekx1THAzZkdwQ2JHTXJmS25Gc0RkSEJQbmtCVG9DczVyNWRqY24zOG8tcnkwUXd1Q3o4cGhwTlpjWlNLaE9CY1NlQWlvYkE4MDgteU12N1JZdU1hamhxQnpvZw?oc=5"
         },
         {
-          "title": "DUG Technology And 2 Other Promising ASX Penny Stocks - Yahoo Finance",
+          "title": "Credo Technology Stock (CRDO) Opinions on Q3 Earnings and Upcoming Report - Quiver Quantitative",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPVFY3dTVvdVFmNTlMMEpNNUZkTGRtbVl2RGc1ZE8taFoydWZ5cWNtQ2tHd2JQZ0V0TWRlYlQ5dXBfRU9aOERxU0Q0VlNPRFZTNG96QTJjR2NKMjB1RWlmd1QyX2dySTlkUHBhTXhkZjZrX19fcl9rR0tFWUJfQV9uMl9LLTdCQnNDWjhHUU9uRGVHaVlOSlpoQXUyNmxYZw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOby1NdXQ2bmt1d0NBWmlzajN5WlVqVi1DQjN2YVBMZkl2MHB1XzZRQlRNejJYNmFBQlQtUGZhaWNlSVNHN0lMMXk3WlNzVE1oQU9VS1hJNnV5NVliTmhoV1lXWXhIUzZvSERKeUdrT3o5RkFuSHg5Zk1LajVGRzNsN3NCdWE5Sl9RVVEwdzROS2RoUmRDVGIyemFPY0FsMDZQMzBLZGJTRm1qaUd5V1VR?oc=5"
         }
       ],
-      "float_shares": "2.19B",
-      "short_float": "0.22%",
-      "daily_pct": 1.35,
-      "industry": "Consumer - E-Commerce",
-      "technical_status": "Fail (ADR 3.3% < 4%)",
+      "float_shares": "164.88M",
+      "short_float": "4.52%",
+      "daily_pct": 12.35,
+      "industry": "AI Networking",
+      "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 100,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "US$1B share buyback program",
-        "discrepancy_note": null
+        "primary_claim": "acquisition of a photonics company",
+        "discrepancy_note": "Source B (Google News [2]) explicitly mentions 'deal to acquire photonics company', confirming the claim. Source A (Finviz) does not mention any acquisition of a photonics company in its provided headlines."
       },
-      "gates_passed": 4,
+      "gates_passed": 5,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "BE",
+      "price": 176.67,
+      "gap_pct": 13.55,
+      "pm_volume": 177800,
+      "avg_vol_10d": 9303019,
+      "avg_dollar_vol": 1643564367,
+      "mkt_cap": 49564452727,
+      "rvol": 0.8,
+      "adr_pct": 9.27,
+      "category": "New Contract/Partnership",
+      "theme": "New Contracts",
+      "reasoning": "Bloom Energy secured a massive expanded contract with Oracle to supply up to 2.8 GW of fuel cells for AI data centers.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "A+",
+      "finviz_theme": "Clean Energy - Hydrogen",
+      "analysis_detail": "Catalyst: Bloom Energy announced an **expanded partnership with Oracle** to supply up to **2.8 GW of fuel cells** for AI data centers. | Impact: This monumental deal provides significant long-term revenue visibility and strategically positions BE as a key enabler for the **surging AI infrastructure power demand**.",
+      "analysis_details": "• **Impact**\nThe expanded deal with Oracle for up to **2.8 GW** of fuel cell capacity is a **transformative win** for Bloom Energy. This massive contract significantly de-risks BE's long-term growth trajectory and provides substantial revenue visibility for years to come. The direct link to **AI data center power demand** positions BE at the forefront of a burgeoning, high-growth market.\n\n• **Strategic Value**\nThis partnership with a tech titan like Oracle not only validates Bloom Energy's technology but also establishes them as a critical infrastructure provider for the energy-intensive AI sector. It's a strong endorsement that could catalyze further adoption of fuel cell technology across other hyperscale data center operators. The scale of the deal highlights the **increasing urgency for reliable, scalable, and cleaner power solutions** for AI workloads.",
+      "peer_tickers": [
+        "PLUG",
+        "FCEL"
+      ],
+      "headlines": [
+        {
+          "title": "Biggest stock movers Tuesday: BE, GSAT, and more (NASDAQ:ALLO) - Seeking Alpha",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPc2Jway1FUF82UkxtQ18xTUV4dEN2NmNGYkdOcENMcjJBVUh6UXhxeFgwM2s2VklJMExqaUlUSVlGMkxNa2hLZ1lyUENkakpqSGdVb25WOWdaNFpzTHNPMTVJYzRNSmMtWVlDR1Y3MTYyVENHUjlXejZtR3pSTlVuakkxYWE1bmtkLUhv?oc=5"
+        },
+        {
+          "title": "Bloom Energy (BE) Stock Jumps 15% After Oracle Expands Energy Deal - CoinCentral",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQZUU4R3ItejdLNDFkUllodzJpYl8wSnBqckdhRnQ5emNSck9Wb1VGYTBHSXJvQ1A2RHZZSlFpVXVTbEtaN01jREpUczl6QzJKSUlfWG0wMUNwOFlqTkp4aFlvWUpoSmZkaG9kOVFIWUdQcnllOUtoeFRfRWk3ZFUyc3NmMzVuSUUxUG11cG4xTWFoZw?oc=5"
+        },
+        {
+          "title": "Bloom Energy Corp (BE) Stock Up 6.0% but GF Value Says Overvalued -- GF Score: 67/100 - GuruFocus",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitgJBVV95cUxORHdHcHd1X2JpLTg1a0V4cmFFWmZ1bmhTZlJCQ2daclZxbGgyUnVwSHFQUEZYNnlPX1VRRTVGeDUyUi1lSEFWZWtXOFhEclNtUDJMQVVRSEpmblhaV3JZbHB2aGxubHdEbFQyaHExNmU1cDJKdXF3V1JIbXphMG9sbVZUdmVsdEI0RHA2ZjNtM29SZHZEZ2VPU1JzY2tPdF9RUUVfLXJ1MU8wUkpNZm52QWMyTEJUMW9kdDFUR180OFhRSUtSTTdLbnA3aGhPRy1oT3lmaUhSajhja1I0NkN4ckdUd0FwRnplMTVQYW02eTA2dExWS1lOUFhoTWVnWURKYzN4OHEtT2JfQTZhOUtva3hPd19RVEVlZGNUWUxSNTdGcGRKTldvYUxDcjlETGRaOW9XVGJ3?oc=5"
+        },
+        {
+          "title": "Bloom Energy Stock Surges On Expanded Oracle Partnership - Bloom Energy (NYSE:BE) - Benzinga",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQLXBkUlVHS0F4TWoxOHVnaGkzbnlseXl5Qy16LU8tZjdNVHMtVlVkNEJ3ZktoRjJLU2xjblZHRXRzUEJWRUdQV01nODI1RjJ1VFVhTktzTmVsUTFEMnpwLW5mOEZRTmhtdmlKQjhnS0g2VHlYUjU0QjFBaVV6T29pbWhRWUlqaXRxSFpUdEtOaVRiaE9xZU50MTEwSC02ZEtRcUdzSHhCUHQwT0lTb2hPVEpsQl9ER1Aw?oc=5"
+        },
+        {
+          "title": "Oracle lines up 2.8 GW of fuel cells as AI power demand climbs - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPNzVLMVJoVEJoLURxbVVxMjZwWmxGLVh4NllFekFxd1A5YjJtRDZyaDhDdDl0VnRQQ1dZbHZGNVJXWmdhQmFrai1kWGRFT3NNNjlKZC03bV9sTTBXNnJFY0RCYUMwYkV4U3BEV0dRYTNKakpuMTByMWxRZEhUX1Q1ZjFnVHZxMWVrYWljcUJ3a2NDbzhhVXc2S3BBdXVvRXdRbjF5TF80WTU3bXdGTnhYcEROSi1DUFpHSUVUaFFB?oc=5"
+        }
+      ],
+      "float_shares": "259.14M",
+      "short_float": "9.46%",
+      "daily_pct": 5.98,
+      "industry": "Clean Energy - Hydrogen",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "up to 2.8 GW of fuel cells",
+        "discrepancy_note": null
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "IRWD",
+      "price": 3.65,
+      "gap_pct": 9.32,
+      "pm_volume": 69280,
+      "avg_vol_10d": 1673126,
+      "avg_dollar_vol": 6106910,
+      "mkt_cap": 595162883,
+      "rvol": 0.48,
+      "adr_pct": 6.49,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "headlines": [],
+      "float_shares": "157.17M",
+      "short_float": "11.39%",
+      "daily_pct": 0.55,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $6M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": null
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "GSAT",
+      "price": 72.89,
+      "gap_pct": 9.0,
+      "pm_volume": 102341,
+      "avg_vol_10d": 1557357,
+      "avg_dollar_vol": 113515752,
+      "mkt_cap": 9370327172,
+      "rvol": 0.35,
+      "adr_pct": 7.09,
+      "category": "New Contract/Partnership",
+      "theme": "M&A Acquisition",
+      "reasoning": "Globalstar (GSAT) stock surged on reports that Amazon (AMZN) is in advanced talks to acquire the satellite communications company.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 75,
+      "grade": "A+",
+      "finviz_theme": "Space",
+      "analysis_detail": "Catalyst: Bloomberg News and other outlets reported that Amazon is nearing a deal to acquire Globalstar, with formal announcements potentially coming soon. This strategic move aims to challenge SpaceX's Starlink. | Impact: This represents a **transformative event** for Globalstar, likely leading to a **significant acquisition premium** and offering Amazon a direct, accelerated entry into the satellite internet market.",
+      "analysis_details": "• **Impact**\nReports indicate Amazon (AMZN) is in **advanced talks** to acquire Globalstar (GSAT). This potential acquisition represents a **fundamental, structural change** for GSAT, expected to lead to a substantial premium over its current market valuation. The news has already driven a **significant surge** in GSAT's stock price, highlighting the market's positive reaction to this development, despite current low relative volume.\n\n• **Strategic Value**\nFor Amazon, acquiring Globalstar would provide a **direct and immediate entry** into the competitive satellite internet market, positioning it as a strong challenger to SpaceX's Starlink. Globalstar's existing satellite constellation and critical spectrum licenses offer Amazon a crucial strategic advantage, potentially accelerating its own connectivity initiatives. This move underscores the increasing strategic importance of **space-based internet infrastructure** within major tech ecosystems.",
+      "peer_tickers": [
+        "IRDM",
+        "ASTS"
+      ],
+      "headlines": [
+        {
+          "title": "Biggest stock movers Tuesday: BE, GSAT, and more (NASDAQ:ALLO) - Seeking Alpha",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPc2Jway1FUF82UkxtQ18xTUV4dEN2NmNGYkdOcENMcjJBVUh6UXhxeFgwM2s2VklJMExqaUlUSVlGMkxNa2hLZ1lyUENkakpqSGdVb25WOWdaNFpzTHNPMTVJYzRNSmMtWVlDR1Y3MTYyVENHUjlXejZtR3pSTlVuakkxYWE1bmtkLUhv?oc=5"
+        },
+        {
+          "title": "Amazon (AMZN) in Advanced Talks to Acquire Globalstar (GSAT) - GuruFocus",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQZGV3QmgxdVRQakh5VUtXaThjbHVtOHZXUldjN3VTRUxRdEhvYmdoN0lHSXBkejhZQ1FhU05BbHpXUE5VQ19MYnpXN09WbDlhV1BYU1pCb1dudVhVTDlBS2lTanhnRTdPSmxXUmJqLVh1RHgyMlJFYlpzbEhuV0RkVmdNb0J4c0s2M1ZSSkRBb0t3eDBfNHpfSHY1ZzRCRUQ5c3NNdGo3ZThFd3M?oc=5"
+        },
+        {
+          "title": "GSAT Stock Surges Overnight: Amazon May Drop Official Takeover Deal Soon After Landing Carrier Deals For Its SpaceX Starlink Rival - Stocktwits",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxNZms4Vy1IMTVmTlVzV050S25PYlc2NHZNaEdMdlktTWZpMDJuMDkzSUI0R2V0VnV2ck9URDRJSUkwbjl1Sm9lOXhOUV9uUHVDRU1sYWdzbE50dXVpNWs3UHpyS2xVOVhRWmRqTmRjbFFxSFpSeGwxMzBWczRpNHdGRjNLQXphbWdEVUdZUVBTOTdkTE56VHM3V0M3RWUtMnhNdGF1azlnTlpmNjNkQU9Jc0NaMkNaQTJaVzNJUzNweDBPMXNRejNkWTVYUWcxZERDb1FZ?oc=5"
+        },
+        {
+          "title": "M&A News: Globalstar Stock (GSAT) Soars as Amazon Nears Acquisition to Challenge SpaceX’s Starlink - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNbEtVcWVIT0VCUlpxS2tOempYVmhzczlNZzliOWpGeHNuREszYzljMVZ0SUJfcEh1QkxzeElXcFdyX2JVM1E0dENLTjZkNEtKR0tmRXMwS05LekJsZzdxM1JRM0RzYU50TjBSNU9sYmNVeVNkeUFLSW1maENhazBOb3BlUU9rMlQwYVVKUk5yUmJaU01QdDJaRWIzeVhrZFFfbEUzWmRB?oc=5"
+        },
+        {
+          "title": "Amazon nears deal to buy Globalstar, Bloomberg News reports",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/sectors/technology/articles/amazon-nears-deal-buy-globalstar-025323808.html"
+        }
+      ],
+      "float_shares": "50.91M",
+      "short_float": "6.35%",
+      "daily_pct": -0.37,
+      "industry": "Space",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Amazon (AMZN) is in advanced talks to acquire Globalstar (GSAT)",
+        "discrepancy_note": null
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "AAL",
+      "price": 11.23,
+      "gap_pct": 8.83,
+      "pm_volume": 2281466,
+      "avg_vol_10d": 51892023,
+      "avg_dollar_vol": 582747418,
+      "mkt_cap": 7415220069,
+      "rvol": 0.88,
+      "adr_pct": 3.76,
+      "category": "Thematic Narratives",
+      "theme": "Merger Speculation",
+      "reasoning": "AAL shares surged on reports of potential merger discussions with United Airlines, initiated by United's CEO.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 56,
+      "grade": "B",
+      "finviz_theme": "Others",
+      "analysis_detail": "Catalyst: Reports emerged that United Airlines' CEO pitched a merger with American Airlines in a meeting, driving significant speculative interest in AAL shares. | Impact: The news of potential consolidation could fundamentally reshape the domestic airline industry, leading to significant re-valuation of AAL and potential synergies if a deal materializes.",
+      "analysis_details": "• **The Narrative**\nAmerican Airlines (AAL) stock saw a significant **surge of over 5%** today following reports that United Airlines' (UAL) CEO directly pitched a potential **merger** between the two carriers. The news stems from sources indicating UAL's CEO discussed the tie-up in a meeting with former President Trump. This creates a strong narrative around potential **industry consolidation** and a major shift in the competitive landscape.\n\n• **Explosiveness**\nSustained market reaction demonstrates the **explosive potential** of merger news in the highly scrutinized airline sector. While currently speculative, confirmed talks or further details could lead to sustained momentum or significant volatility. Investors are actively pricing in the possibility of **synergies, reduced competition**, and a potential **acquisition premium** for AAL shares, making this a high-impact catalyst despite the 'talks' phase.",
+      "peer_tickers": [
+        "DAL",
+        "LUV"
+      ],
+      "headlines": [
+        {
+          "title": "American Airlines Stock (AAL) Climbs 5% as United Eyes Blockbuster Merger - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNZmE4THp3MzNFUjczYU9KR3FIZ2RyTy13SHh2ZmpmRlNfNFNTMmc1UXhmUmVUdVJBeUhZZGc2Sl95VUtpZHBMbk5pWWkyS0s4RjA2RUczYWN4ZmFJQ2tCbkxYRGRIZkhOd2xYRzJtakJRVlIxWExTSXVHNWRoMEk3ZGJMQzhUbzdSVnctbkR6ZEhCOXVrTTlUZ0lhN1ZNWVg0ZGc?oc=5"
+        },
+        {
+          "title": "United Airlines (UAL) and American Airlines (AAL) Stock Rise on Merger Talk - CoinCentral",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNMFlVUHVqdlBYZjFJMmxSWDdCMlh5WHRjelBYRmlCVU55OGlFWXpIQUhLNVIwa29ONGZaa3dpcW02cDJnUVI4bldfYm1JYXFzbkRuVnQtdDhjeU5sRUV5NHZaR0lUVDloWkxmQTAwZHBOMXU5ZFAxNDFoQWhKbzBhdUhwWUZvUDB0ZEd3V2I5cGtIWnZqUUg4NF9Wd1k?oc=5"
+        },
+        {
+          "title": "3 Reasons to Sell AAL and 1 Stock to Buy Instead - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOamNnRmR5d1RyZlU5TEVORWQ3NUhkaVBOVkt4MnJZR1VPNnJ3TDk3dlJEeGFpTUphUV9fdnBOdUpRQ3VTYklzZmFENHdnZFJrc3dEUGVzWkNwSnl2eGhuSEhaQlVaby1MYlFHbnZnSHNKaVF5RmhzT2VfX3Bwanh1VUtJM0p1cTdnSzA4akhR?oc=5"
+        },
+        {
+          "title": "American Airlines (AAL) Experiences Share Surge Amid Merger Talks - GuruFocus",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQOXd6ZVNTTjRtVlY4akhKckE3QVM2RTZ2YkJUVXRBaU9zeWhOcHZkYjM2U1ZNUzc4MTJNMTd4dHdLa2xOQmZXUk5jeFZndTN3d2dNZ1p2NlM1OXpFNlVxT0xXRUxNSXpPV1V2VVhXM0I0RFU5UUVTTmpNTGVVdG1lSGw2bXdxY1BrdUJ1dXBoUmZxeEtCSWxlYmJpYVdjZW40cHZ0NA?oc=5"
+        },
+        {
+          "title": "United Airlines CEO pitched American Airlines tie-up in meeting with Trump, sources say",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/news/united-airlines-ceo-pitched-possible-230437608.html"
+        }
+      ],
+      "float_shares": "648.50M",
+      "short_float": "11.49%",
+      "daily_pct": -0.8,
+      "industry": "Others",
+      "technical_status": "Fail (ADR 3.8% < 4%)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Merger discussions between AAL and United Airlines were initiated by United's CEO.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
         "gate_dollar_vol": true,
         "gate_mkt_cap": true,
         "gate_adr": false
@@ -356,112 +592,69 @@
       "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "KOS",
-      "price": 2.57,
-      "gap_pct": 5.82,
-      "pm_volume": 438003,
-      "avg_vol_10d": 29492921,
-      "avg_dollar_vol": 75796807,
-      "mkt_cap": 1524395209,
-      "rvol": 0.54,
-      "adr_pct": 7.92,
-      "category": "Upgrade",
-      "theme": "Analyst Downgrade & Dilutive Equity Offering",
-      "reasoning": "KOS moved on an analyst downgrade from Goldman Sachs and news of a dilutive equity offering.",
-      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
-      "conviction": 30,
+      "ticker": "OKLO",
+      "price": 53.94,
+      "gap_pct": 8.03,
+      "pm_volume": 312621,
+      "avg_vol_10d": 7579282,
+      "avg_dollar_vol": 408826471,
+      "mkt_cap": 9362300350,
+      "rvol": 1.15,
+      "adr_pct": 7.44,
+      "category": "Institutional Buying",
+      "theme": "Insider Selling / Valuation Concerns",
+      "reasoning": "Reports of significant insider selling, combined with market skepticism over unproven technology versus an $8B valuation, triggered a sharp decline in the stock price.",
+      "hypothesis": "Medium Conviction (RS Hold) — Large fund accumulation; watch for continuation.",
+      "conviction": 57,
       "grade": "C",
-      "finviz_theme": "Energy - Oil & Gas",
-      "analysis_detail": "Catalyst: Goldman Sachs **downgraded** KOS and the company announced a **dilutive equity offering**, significantly impacting investor sentiment and future valuation. | Impact: The downgrade signals **diminishing** institutional confidence, while the equity offering will **increase** the share count, leading to **EPS dilution** and downward pressure on the stock price.",
-      "analysis_details": "• **The Firm & Rating**\nGoldman Sachs, a Tier-1 investment bank, has **downgraded** Kosmos Energy. A downgrade from such a prominent firm often indicates a **loss of institutional confidence** or a fundamental re-evaluation of the company's future prospects and valuation trajectory. This move signals a **deterioration** in sentiment.\n\n• **The Thesis**\nThe downgrade is coupled with the announcement of a **dilutive equity offering**. This capital raise suggests a potential need for external funding, which will **increase** the number of outstanding shares. This action directly leads to **EPS dilution**, thereby **reducing** per-share earnings and placing **downward pressure** on the stock price. This combination presents a **strong negative catalyst**.",
+      "finviz_theme": "Clean Energy - Nuclear",
+      "analysis_detail": "Catalyst: Reports of **$50M** in insider stock sales, alongside growing market skepticism regarding Oklo's **unproven technology** and its **$8B valuation** | Impact: These factors combined led to a **precipitous decline of over 40%** in the stock, signaling a significant loss of investor confidence and a potential re-evaluation of the company's fundamentals.",
+      "analysis_details": "• **The Buyer**\nInsiders at Oklo **sold $50M in stock**, as reported by CoinCentral. This substantial selling comes amidst an already volatile period for the company, highlighting a potential lack of conviction from those closest to the company's operations and future prospects.\n\n• **Conviction Signal**\nThe significant insider selling, combined with market skepticism regarding Oklo's **unproven technology** and its **$8B valuation**, sends a strong negative signal to investors. This event has contributed to the stock's **precipitous fall of over 40%**, suggesting that the smart money may be taking profits or reducing exposure ahead of potential further weakness. The company's inability to capitalize on the broader positive narrative surrounding nuclear energy for AI data centers is a major red flag.",
       "peer_tickers": [
-        "EOG",
-        "MRO",
-        "OVV"
+        "CEG",
+        "LEU"
       ],
       "headlines": [
         {
-          "title": "A Look At Kosmos Energy (KOS) Valuation After Goldman Downgrade And Dilutive Equity Offering - simplywall.st",
+          "title": "Oklo Stock: Insiders Sold $50M in Stock — What Investors Should Know - CoinCentral",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNSUNaTFNuMUxhd2JydS1ZRExsUzlaM0NGVHlaOC0xb2wydmR1MTBBd3lQLTBzckt3LU93eTEzZmR6bHNvTlYxOHlQUEo2OG1ZRk1iUzdlNWV0ZjRpTGFwOXlhYURaYjY3bVlBY0N3N1VocUNlQ2FKaHl3WDBCYUEtdlJXQlYwRjRwdU53NDcyZXJQbnFEMzVsT1pMZEdydVc2Mmswb2FHcl9EdkhIcmw0bzJOeXNPTW85MlR0ZU54LWhmNElTSHfSAcsBQVVfeXFMUFZyOUxxNW9iZWFXZUNzaUo4TjU2NEstYk5rNjNzVzhEX05XWjBNM05Cb1FnY3o1eTBRZDNLYm5fUHBOa3FfVW9xazdJbkJQRlJadVlwUHdGTExSY3FrZVJXRzFfbVpxRElnUmVlXy1vd1N5NUdENUp4bHAxMVAwRXQzRnRRR2VHZEswWU1rb3dxcUluU1BHdDdSaTFWQ19JTUpaSTRxQ05hbWNwZVVkb0pUbl9ZVVg0R19iY3pfSWFNZnd3UUhNX0FWLWM?oc=5"
-        }
-      ],
-      "float_shares": "568.80M",
-      "short_float": "5.56%",
-      "daily_pct": 0.78,
-      "industry": "Energy - Oil & Gas",
-      "technical_status": "Fail (Avg $Vol $76M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "analyst downgrade from Goldman Sachs and news of a dilutive equity offering",
-        "discrepancy_note": "Source B confirms 'Goldman Downgrade And Dilutive Equity Offering'; Source A contains no information to confirm or deny the claim."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "VG",
-      "price": 12.97,
-      "gap_pct": 4.55,
-      "pm_volume": 302147,
-      "avg_vol_10d": 32345622,
-      "avg_dollar_vol": 419522717,
-      "mkt_cap": 31866905481,
-      "rvol": 0.75,
-      "adr_pct": 9.15,
-      "category": "Others",
-      "theme": "Debt Refinancing",
-      "reasoning": "Venture Global secured a **$1.75B loan** to refinance an LNG project, but the stock is **sliding** as investors react negatively or indifferently.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Energy - LNG",
-      "analysis_detail": "Catalyst: Venture Global, Inc. secured a **$1.75B loan** to refinance an existing LNG project. This financial move aims to optimize the company's capital structure and provide funding stability for its ongoing energy infrastructure. | Impact: Despite the significant financing, the stock is **sliding**, indicating the market views this as neutral to negative, potentially due to terms, timing, or broader sector headwinds, failing to generate positive momentum.",
-      "analysis_details": "• **What Happened**\nVenture Global, Inc. (VG) announced it has **secured a $1.75 billion loan** facility. This significant financing is specifically designated to **refinance** an existing Liquefied Natural Gas (LNG) project, aiming to enhance the company's financial flexibility and capital structure efficiency for its large-scale energy infrastructure.\n\n• **Key Consideration**\nDespite the substantial loan aimed at de-risking project financing, the stock is **sliding** as per recent reports. This suggests the market may have already priced in such a refinancing, or investors perceive the terms as unfavorable, or there are other overarching negative factors impacting the stock. For momentum traders, this news is not acting as a positive catalyst, making VG a **'C' grade** opportunity for upward momentum.",
-      "peer_tickers": [
-        "LNG",
-        "NEXT"
-      ],
-      "headlines": [
-        {
-          "title": "Why Venture Global, Inc. Class A Is Sliding - TipRanks",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNNlUweWhUXzlvZkxOSU5pWFE0a2swNldXNmxNT3JqWW9wT2VNaWVTVmtGMlplWkFkQkQ0OVhVbXB5dlZQVDJET3VhUUIzbWpud0xubTRXSnE3VlBDNDkwSktiQUwzLTBzdHNxM0lCdHV3REV3ZmF3T25UY2E3RzZQS2lrQ1BmTUE?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOZGI5WFg4b09JWjQtZjFlelZycE4weVRqTWw2eERqdjhxYjJjdVVBLUN5eFRna3ppTmNjanZKSjRCZmp0elJwOHVSeHFhSWVFVXdiUk9NZGdTQVBwcXJFLUZsQXNKLXZOdGpnU1pSWWVUY3ZuY0t2VXhETzZBWTJIVjNHczlyM0F2d0lLazhndHYzczA?oc=5"
         },
         {
-          "title": "Venture Global Secures $1.75B Loan to Refinance LNG Project",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/sectors/energy/articles/venture-global-secures-1-75b-030700774.html"
+          "title": "Why Oklo Inc. Stock Is Sliding Despite Hype - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQb2NVQXZBTFJZemM3QXh4dTM3ZFM4Q2g3eWlmWXVURThBLWlrcXpWa3BRTndrQnF4LXBYXzdCenBHTmZwakxyT1NUWDZQSXR5TUo4VVBhOFRyeHhjWnBUdFNtNW1acUZWQ1ZRTHhETlNsRThLN0d2YXRHVXd4aENvTmVrT0QxVnVN?oc=5"
+        },
+        {
+          "title": "Oklo Stock Value & Future: AI Data Centers Drive Nuclear Energy Demand - News and Statistics - IndexBox",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOWGxneEp3Y1JQMENKcVp1a3pNTXJJYVNDTjlsMlpiU2w1YWh4WGlqZV95clFIN1Z1VkM2dDlmSWxFWXA3bWZfZld0OUxRaGp1OTBEd2MtY3hONmdwZzdvTG8tSUhjTjV1OE1qMHFQU0tIa3dFLUFaRENRNGV4M0w3Qlp4MHZYZ0hSVmN6YUpxdkE?oc=5"
+        },
+        {
+          "title": "2 Nuclear Stocks Worth Owning for the Entire Year as Power Demand Keeps Climbing - The Motley Fool",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPN2gyR2Y1WlJuaXBuVHlmVUNFejFlZXA5cjREcTVKd0JqQzlhb3l0UkY4UTVGWFI5OUFLelo5MmxHbTFfa2lRUm8yZGRfay1VNi00MU0xSmxUUWxHT0czdWxMbnplSHdyVzNYRzNTVlFEUWNkU0NlMWlnY0NhZTJ6MWpjbE5RanltakFtRmUzMk9aaE9JT2Jn?oc=5"
+        },
+        {
+          "title": "Oklo Stock Fall Over 40%: Unproven Tech vs. $8B Valuation - News and Statistics - IndexBox",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPS3kwcURHYWZ3dnJhWkVzU09nN3l3Nk5OQzU2UEplVEhuUnpna01aUi1zRGRjUDd3aFFyelBpZlllZmlZVkw2MkdYRVhEU3VmRkNhWnliUjVwNHhramFkZldPeVVvM1hUMmMzb01PVTg0LXozOVcyeHFoVjFrd19TTWhSWjJLSlNpSklJTmlJU2ZOTHpHUXN5YWJNVkNKQWctY0E?oc=5"
         }
       ],
-      "float_shares": "477.35M",
-      "short_float": "8.03%",
-      "daily_pct": -0.15,
-      "industry": "Energy - LNG",
+      "float_shares": "137.43M",
+      "short_float": "17.56%",
+      "daily_pct": 7.34,
+      "industry": "Clean Energy - Nuclear",
       "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 90,
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "$1.75B loan",
-        "discrepancy_note": "Source A (Finviz News) confirms the '$1.75B loan'. Source B (Google News) discusses why the stock is sliding but does not mention the loan amount or the loan itself, therefore it cannot confirm the claim."
+        "primary_claim": "insider selling of $50M",
+        "discrepancy_note": "Source A (Finviz) does not mention insider selling or a specific dollar amount. Source B (Google News) headline [3] reports 'Insiders Sold $50M in Stock'."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -476,59 +669,55 @@
       "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "SGML",
-      "price": 14.85,
-      "gap_pct": 4.44,
-      "pm_volume": 97263,
-      "avg_vol_10d": 6089672,
-      "avg_dollar_vol": 90431629,
-      "mkt_cap": 1654334159,
-      "rvol": 0.28,
-      "adr_pct": 10.64,
+      "ticker": "PURR",
+      "price": 6.5,
+      "gap_pct": 6.77,
+      "pm_volume": 112683,
+      "avg_vol_10d": 4738602,
+      "avg_dollar_vol": 30800913,
+      "mkt_cap": 805788822,
+      "rvol": 1.6,
+      "adr_pct": 9.02,
       "category": "Others",
       "theme": "Technical / Flow",
       "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 54,
+      "conviction": 58,
       "grade": "C",
-      "finviz_theme": "Materials - Metals & Mining",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
       "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
-      "analysis_details": "• **What Happened**\nSigma Lithium (**SGML**) experienced a significant rally of **41.97%** today, as reported by headlines, despite the absence of any immediate fundamental news catalyst over the last 24 hours. News outlets indicate that 'big money' or institutional buying was not a primary driver, suggesting the move was likely fueled by retail interest or technical factors rather than a change in underlying company fundamentals.\n\n• **Key Consideration**\nThe low relative volume of **0.3x** accompanying such a large price move is a critical red flag, suggesting a potential low-float squeeze or aggressive stop-loss triggering rather than genuine broad-based conviction. Without fundamental backing, this price action carries a **high risk** of a 'gap and trap' scenario or rapid reversal once the technical momentum dissipates, particularly given the stock's **10.6% ADR**.",
+      "analysis_details": "• **What Happened**\nThe only news available for Hyperliquid Strategies (PURR) is a MarketBeat headline concerning its earnings date and reports for 2026. This headline does not provide any specific financial results such as EPS, revenue figures, or guidance changes that would typically drive a significant price movement. In the absence of quantifiable fundamental news, any recent price action is likely attributed to technical factors or market flow.\n\n• **Key Consideration**\nThe lack of a clear, company-specific fundamental catalyst increases the speculative nature of any recent stock appreciation. Such moves are often the result of technical breakouts, short squeezes, or shifts in institutional or retail trading flow. Investors should proceed with caution, as a lack of concrete fundamental backing makes the move susceptible to rapid reversals, potentially leading to a 'Gap and Trap' scenario.",
       "peer_tickers": [
-        "PLL",
-        "LAC"
+        "COIN",
+        "MSTR",
+        "MARA"
       ],
       "headlines": [
         {
-          "title": "Sigma Lithium Rallies 41.97% as Big Money Holds Back - Bitget",
+          "title": "Hyperliquid Strategies (PURR) Earnings Date and Reports 2026 $PURR - MarketBeat",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE9wRm9COU1HR1JYQkZoT1pRWFVXMWllQ3J6ZkEwVmcwRWppN1N0UWtlbmFFYlJOYUFDOUZGNXB1YmlxendjUjhvbGVSRVVxM0R5WTRpRkZyRU9FVGJVTzBmUlFQWdIBY0FVX3lxTE9wRm9COU1HR1JYQkZoT1pRWFVXMWllQ3J6ZkEwVmcwRWppN1N0UWtlbmFFYlJOYUFDOUZGNXB1YmlxendjUjhvbGVSRVVxM0R5WTRpRkZyRU9FVGJVTzBmUlFQWQ?oc=5"
-        },
-        {
-          "title": "Trading the Move, Not the Narrative: (SGML) Edition - Stock Traders Daily",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNc083dFVzN2k3Sy16ODNyM0xPS0RqZlQ4S3Z3RTluM2pocEpyWE8yMWpYZFQ3aklmaEQxMm1WRUVDUm4xd01KektvdFVlTzVqOUFzMlVSdW5IYVF0bHZFcHZGTHNvd0NJRk1qZDMtTVdvcHVCQzUxVmtIT3BIWWYza1BRNzA4OEFfcGNrdVp3V3NzSUZhb1JjSlJkZ0dreFcyWjl6ZmFBbUI5SE9JODZpOGR2eUh1WGRxWXZoMmVERzk3OUVHUThpTw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiZkFVX3lxTE9UOENJY0FaTU9hTDhYLU4tLTdZV2pHRjBkTGJMSXBYYTFXenBfcDR1VGg3eUx4cUhNRTZ0dEtvWlRZbks5eXBhWUt3V0VUMjhWNFZRSzdFbkwxcm1ab3ZndEhXTy00UQ?oc=5"
         }
       ],
-      "float_shares": "106.37M",
-      "short_float": "6.85%",
-      "daily_pct": 8.16,
-      "industry": "Materials - Metals & Mining",
-      "technical_status": "Fail (Avg $Vol $90M < $100M)",
+      "float_shares": "104.11M",
+      "short_float": "8.86%",
+      "daily_pct": 8.15,
+      "industry": "Fintech - Blockchain/Crypto",
+      "technical_status": "Fail (Avg $Vol $31M < $100M)",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 100,
+        "status": "Verified",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "likely institutional flow",
-        "discrepancy_note": "Source B [2] 'Sigma Lithium Rallies 41.97% as Big Money Holds Back' directly contradicts the claim of 'likely institutional flow' as a catalyst for the rally, indicating big money is not driving the move."
+        "primary_claim": "No immediate fundamental catalyst found for PURR.",
+        "discrepancy_note": ""
       },
-      "gates_passed": 3,
+      "gates_passed": 2,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": true,
+        "gate_price": false,
         "gate_dollar_vol": false,
         "gate_mkt_cap": false,
         "gate_adr": true
@@ -538,56 +727,122 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "OXY",
-      "price": 57.97,
-      "gap_pct": 3.11,
-      "pm_volume": 238566,
-      "avg_vol_10d": 20573384,
-      "avg_dollar_vol": 1192639070,
-      "mkt_cap": 57173876097,
-      "rvol": 0.43,
-      "adr_pct": 3.48,
-      "category": "Upgrade",
-      "theme": "Analyst Price Target Hike",
-      "reasoning": "UBS raised its price target on OXY due to a stronger outlook, but the stock's low relative volume indicates limited immediate conviction behind any corresponding price movement.",
-      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
-      "conviction": 30,
-      "grade": "C",
-      "finviz_theme": "Energy - Oil & Gas",
-      "analysis_detail": "Catalyst: UBS raised its price target for Occidental Petroleum, citing a stronger outlook for the company. | Impact: This provides an incremental positive signal, but the extremely low relative volume (**0.4x**) suggests the market is not yet strongly accumulating the stock based on this upgrade, potentially limiting immediate upside momentum.",
-      "analysis_details": "• **The Firm & Rating**\nUBS has **upgraded** its price target for Occidental Petroleum. This move from a major financial institution typically provides a positive signal to the market, indicating a professional re-evaluation of the company's valuation potential. However, the specific rating (e.g., Buy, Hold) and the magnitude of the target raise are not detailed, which limits the assessment of conviction.\n\n• **The Thesis**\nThe basis for UBS's increased price target is a \"stronger outlook\" for Occidental Petroleum. This suggests an expectation of **improved** fundamentals, potentially related to commodity prices, production forecasts, or operational efficiencies. Despite the positive fundamental view, the extremely **low relative volume (0.4x)** indicates that immediate market participation and conviction are **weak**, posing a risk for sustained momentum from this catalyst alone.",
+      "ticker": "SMR",
+      "price": 9.58,
+      "gap_pct": 5.74,
+      "pm_volume": 967944,
+      "avg_vol_10d": 23828568,
+      "avg_dollar_vol": 228277681,
+      "mkt_cap": 3238196497,
+      "rvol": 1.15,
+      "adr_pct": 6.26,
+      "category": "Institutional Buying",
+      "theme": "Major Institutional Selling & Operational Setbacks",
+      "reasoning": "Fluor Corp, a major institutional shareholder, sold $162.9 million in SMR shares, reducing its stake to 7.8%, alongside reports of ENTRA1 issues and a pending class action, leading to a 12% stock drop and a new 52-week low.",
+      "hypothesis": "Medium Conviction (RS Hold) — Large fund accumulation; watch for continuation.",
+      "conviction": 57,
+      "grade": "A",
+      "finviz_theme": "Clean Energy - Nuclear",
+      "analysis_detail": "Catalyst: Fluor Corp, a key institutional investor, **sold $162.9 million** of SMR shares, reducing its ownership to **7.8%**. This significant divestment coincided with reports of **ENTRA1 issues** and the filing of a **securities class action**. | Impact: Significant loss of institutional conviction and new operational/legal risks, resulting in a **12% stock decline** and **new 52-week lows**.",
+      "analysis_details": "• **The Buyer (or Seller, in this case)**\nFluor Corp, a major institutional shareholder and long-time partner, significantly **reduced** its stake in NuScale Power by **selling $162.9 million** worth of shares. This move slashes their ownership to **7.8%**, indicating a substantial **loss of conviction** in SMR's future prospects, particularly for a company still in development stages.\n\n• **Conviction Signal**\nThis divestment by a key institutional player is a **strong negative signal**, suggesting a re-evaluation of SMR's value proposition and risks. Compounding this, reports of **ENTRA1 issues** and a pending **securities class action** further **eroded investor confidence**, culminating in a **12% stock drop** and the company hitting a **new 52-week low** following the news.",
       "peer_tickers": [
-        "XOM",
-        "CVX",
-        "COP"
+        "BWXT",
+        "LEU"
       ],
       "headlines": [
         {
-          "title": "Occidental Petroleum Is Getting a New CEO in 2026. Here's What Investors Can Expect From Richard Jackson Once Vicki Hollub Retires. - AOL.com",
+          "title": "SMR Stock Drop: NuScale Power ENTRA1 Issues Lead to 12% Stock Drop - Securities Class Action to Recover Losses Pending - PR Newswire",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxOMjhOYnBCU3dubVRLbHJDR3JnTkdjVUpQX0xaY1dTYnVwRzJMRXp5bTJKS000Tnlma25OTUxWU2NQR2w3WGR6amlQYWsxRGlyeGRuQmJBclZZNU56LUtVbm9MLUJwUTVFWXZEYjc1QURSRGFDYWN3eWN1RmhiUFp5NjJSMkdMcHgz?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxOUGhoLXRxVzBScHJjSThMN2lpMndPNmRwTjhyQWZrcWljb2pWeENhY0hsTU13ek9QUld1NjBGWGRra04xS0lCS2pEMnVPd19WZTM1cFR0RlA1SnhDclYzUXdyUDZwN0xBRlRiVDU1WWNNQk9pVjdMM0N2anNDX2l2OGh1RWpmS25ZR0l0aDRNdzJnTVZCMEplQ0J5RlRSaXZmUGZtbEVqM05fNVhuczhVRDlLdS1mVC1iQk1JejlxYlBBcmxjSU54R0Q2cUlvUUlEVmQ4QUVQdnVDV2d5dlNXOXVZcnF6Z3A1R0R0cmhrLWZpTzNCdEFfc2h5SEVNSE82?oc=5"
         },
         {
-          "title": "UBS raises Occidental Petroleum stock price target on stronger outlook - Investing.com",
+          "title": "NuScale Power (NYSE:SMR) Hits New 52-Week Low on Insider Selling - MarketBeat",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQeVNrSE9peW52T1RIaERXbEhTTFFpNk02aWtqd1F3MUU3TzJUdXBVOW9EVm1TZi02MlNhRFBzUUF3bnhraTh4VFBuc0tRVkg2bGxPeWllUGYxaVRTV3QtaVRiUW5HTkRjai15ZnIyVjFpYzFjSkRpUHBSdVUtUFd5RUhETW5PQ0hRcDFPR2dtVGVqWGVORDlJa3RGd2ladkI3VW1UUGtLanp1VU1hQVQxQlM0VlFnd2tnVy1xblR2Y3RXbWt4OTVBSmdB?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOQzFuUHZZVWw5cEh0Nzlha3RzekhuSnhkVWhCRUxwWWpsQlJla3ZrTmxlRi1HNVp4aWhVdHFMeVRVRG02SmlPbk9rVHhXdXpxaWpyQ1J4QVk2RTlfTnJGR0RMaUplR1hJTFh5MEdsX3pjWHVLUzJfcXFVZWVZTmRTeE5yZUdzMWI0UGxQbkVhQkxnXy1aT1VqYkpLN0VzWWgxMDBxYzdocEx2VlNwT2tUMDBSSjFrdw?oc=5"
         },
         {
-          "title": "Prediction: Occidental Petroleum Stock Is a Buy Before May 6 - The Motley Fool",
+          "title": "Major Insider Move Rocks NuScale Power Shares - TipRanks",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQVzZPNEFHWlJ3QkZHOUxEODBmX3ZpQ2EwSHg1eUY3NlBKbE9fZnJuTExrTTRNNGl6djVreTJxcVl5NGV3Z0tKdVVKeUFCWF9yM3pzTnR5LW5HeXJncnJYWXAtaW82TzBFaXZvUkR2OFFCTDBjQml1TVRBUWNCOXl0VXZwQ1llbmVoQjhiNjl4S0VmeTVpSmZZUg?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQUWZvd04tVng0bHJxd1VfNG5XOU01TEh0SlRzZ09SWWtHUVQtQWMzTllkeEJUOEwySGdVSWxsaEVRd1pyck9uU1hwSU1oeTQ0d2JBUmpFdWhQVzJjWkRsd3lCMktWOUwzV0l5V3JVZHpCM3FBUjF3YlZ0NTJLaHRTLXBaX1FkVEt6NEYtOUtzNVdjdEVhc0JSTVlWR0F6dnlFaDdEUnZ3UldrSUFyR255dG93?oc=5"
         },
         {
-          "title": "Occidental Petroleum Will Appoint a New CEO in 2026. What Should Investors Anticipate From Richard Jackson After Vicki Hollub Steps Down? - Bitget",
+          "title": "Fluor Corp sells $162.9 million in NuScale Power (SMR) shares By Investing.com - Investing.com India",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiXkFVX3lxTE56VGJtY3pYMkNUZ1JIMWlDb1FRa2RJUXp1WmlxcVl1dmpkNmlnM2tHczN5M0dMUFl3bVRhQmh5ZVI0eFp0NUllbW9qLUxvSENtU2pHczZrNEpma2hrX1HSAWNBVV95cUxQRlU3a01RQVhDWkJicHRONU5ZRGxIak9TVGhUSjR0emlvdm5HWTRzY3h2bW1NRklIenc1YU5odXNSWjlCNlFxUHE4enh2MnA3SkMzempwaWowTGMwRzRzVXpBLWM?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQa0lhcmhTNzR2d0FpNm9jZm92V3F3R3JqWHlvaldXWXo2UXhLYWM5YmxhNFRXUG5vLTJxb2lNc1JPQnVYdloxTGRmWGZ6SS1TT2NyZDVxcEx3aG5Wb0N3dzNmbEowcHUxM0tCcHQ2SGN6dFQ2dkk3TjdrMzU1WjVaWVZfaW9lVXNpN2E0enlHMzdNdG9SUEl3QTd5RnpPY0FCTkU5dW03aGZFTmRNTmNGckJ5bnJxRVN6bTA5UGln?oc=5"
+        },
+        {
+          "title": "Fluor (SMR stakeholder) updates NuScale ownership to 7.8% after share sale - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNWENsUnQ0Yjg3OTgyTW9CLUYyZGtTNDRhQ2Z5dUdlbFRQdHpNWWUxU2xfQnBUVDhfOWlkY01TeXpMd3ppY1YtYmI2QTFzSERRQTNHa1Zoa2pJNGE3MTQ3cWYyNnhXVHZadF9vblhFWERHLWU1VDJ4Nnl2dE1leTlSTEphVHAwcm5YeXU5ZnRTYnBLUWxoRjM3Z3Bac25xVWllVnpxUnpNOVBpZmxjS1dYYnVRRVo5aG9nbzZDU2YyWXI3NTAyWUE?oc=5"
         }
       ],
-      "float_shares": "982.69M",
-      "short_float": "2.95%",
-      "daily_pct": -0.96,
-      "industry": "Energy - Oil & Gas",
-      "technical_status": "Fail (ADR 3.5% < 4%)",
+      "float_shares": "260.94M",
+      "short_float": "20.52%",
+      "daily_pct": 4.02,
+      "industry": "Clean Energy - Nuclear",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Fluor Corp sold $162.9 million in SMR shares",
+        "discrepancy_note": "Source A (Finviz News) contains no information. Source B (Google News) contains a link [5] from Investing.com which confirms 'Fluor Corp sells $162.9 million in NuScale Power (SMR) shares'. However, since Source A is empty, BOTH sources do not confirm this claim."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "LUNR",
+      "price": 24.41,
+      "gap_pct": 5.61,
+      "pm_volume": 184586,
+      "avg_vol_10d": 18708567,
+      "avg_dollar_vol": 456676120,
+      "mkt_cap": 5292106082,
+      "rvol": 1.25,
+      "adr_pct": 11.31,
+      "category": "Others",
+      "theme": "Shelf Filing / Dilution Risk",
+      "reasoning": "Stock is sinking following news of a new shelf filing and Artemis contracts, with dilution concerns likely outweighing contract optimism.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Space",
+      "analysis_detail": "Catalyst: Intuitive Machines announced a new shelf filing and also secured new Artemis Contracts. | Impact: The market's reaction, indicated by the stock 'sinking', suggests investors are primarily focused on the potential **dilution risk** from the shelf filing, which is overshadowing the positive implications of the new contracts.",
+      "analysis_details": "• **What Happened**\nIntuitive Machines (LUNR) is experiencing a **significant decline** today, as indicated by recent headlines. This follows the disclosure of a **new shelf filing**, which suggests the company may issue new shares, alongside news of securing additional **Artemis Contracts**. The negative price action implies the market is prioritizing the potential **dilution** from the shelf offering over the positive revenue implications of the new space contracts.\n\n• **Key Consideration**\nInvestors are grappling with conflicting signals: long-term growth potential from government space contracts versus immediate concerns about **shareholder dilution**. While the Artemis program offers a strong narrative for space exploration, a shelf filing can create an overhang on the stock, pressuring valuation as the market prices in a larger share count. The **high ADR% (11.3%)** suggests LUNR is already volatile, exacerbating the downside on negative news.",
+      "peer_tickers": [
+        "RKLB",
+        "ASTS"
+      ],
+      "headlines": [
+        {
+          "title": "Why Intuitive Machines Stock Is Suddenly Sinking - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPYUpqRV9KMkxkM2VTcnlQZWZfcHZicHQydDhTRzRMZ19CZDhZbGk5MlhxLTlMYkpXOTJUQUpzdU9CMTNHSFRtTm9HMkVkS3AwQ0xxQll6eFBPcjQ4c3Rqc3BIRmwyWUw3TXZQOUVwVHg5X3NQeEU1MGUyZHZmNHhKZTlIbGVTeHR2bEVjenpYT3JKaDg?oc=5"
+        },
+        {
+          "title": "Does Intuitive Machines’ New Shelf Filing And Artemis Contracts Change The Bull Case For LUNR? - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOSUxxNTg5cnlvQVRGMmlRdW9fSFA2X29jYWx4b1hVQTltbmFhVE5UM3NEY3p2dmdHeGJjR2ZlTEJKYkI0dGgtVVN3QjNJNkdwRERUSkxpZEFxd3BBZkJlRVNKdlhXU3ZLN29pZjRkQ1FWcXNSNThUb3Z2OThTTzY3cGhzazhiNFNDRG80ODg2bWpkOXI2UFBQS0c4dFU1X2htTzNjYUhlNzBncEt5OU5iZjYzVXBJWl9oN2RlX3lZcmwtOG4xZThMbkVQWWN5WldWWk5SeE1sNWxQZ9IB3wFBVV95cUxPcWoyTVhraXUxdklhdVhUWG1kVEpNb25mUFRhcmtBeHFyWk4tWFRVWnp2dl9Ta0haeGxwUGtrY0Q4LUdldklaa05mbFF1S182Smp2dkRwaDQ4b0tYRTBLRVI1bGR1T015NG5UQnVIV29kMGxaV2czUnlqb2xWQVQ0d0x4cEJaY0szREFER3otNzhmaS1QMTNqOUlFQjhpcWhXTklsUUVmWS1kWWtwYm1fV01oMnc1WDNEb2xpQTZmbExPMmkxWFdTSTRZWXRxcnUwdmpReFJlOGhDaktwd2VJ?oc=5"
+        }
+      ],
+      "float_shares": "102.81M",
+      "short_float": "31.06%",
+      "daily_pct": 3.56,
+      "industry": "Space",
+      "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 90,
@@ -595,16 +850,930 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "UBS raised its price target on OXY due to a stronger outlook.",
-        "discrepancy_note": "Only Google News [2] confirms the claim that UBS raised Occidental Petroleum's stock price target on a stronger outlook. Finviz News provided no relevant information, preventing full verification across both sources."
+        "primary_claim": "news of a new shelf filing and Artemis contracts",
+        "discrepancy_note": "Finviz News provides no information regarding a new shelf filing or Artemis contracts. Google News (specifically the simplywall.st article) explicitly mentions both 'New Shelf Filing And Artemis Contracts' as part of the catalyst."
       },
-      "gates_passed": 4,
+      "gates_passed": 5,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
         "gate_dollar_vol": true,
         "gate_mkt_cap": true,
-        "gate_adr": false
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "CRWV",
+      "price": 110.27,
+      "gap_pct": 4.97,
+      "pm_volume": 768323,
+      "avg_vol_10d": 36248367,
+      "avg_dollar_vol": 3997107429,
+      "mkt_cap": 57967633258,
+      "rvol": 1.81,
+      "adr_pct": 7.3,
+      "category": "New Contract/Partnership",
+      "theme": "Major AI Cloud Partnerships & Analyst Upgrades",
+      "reasoning": "CoreWeave's stock surged on news of significant new partnerships with Anthropic and Meta AI, triggering multiple analyst upgrades.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 79,
+      "grade": "A+",
+      "finviz_theme": "AI Cloud",
+      "analysis_detail": "Catalyst: CoreWeave secured new partnerships with **Anthropic** and **Meta AI**, establishing it as a 'neocloud of choice' for AI compute. These deals prompted multiple analyst firms, including **Macquarie**, to **upgrade** the stock to Outperform, leading to double-digit percentage gains. | Impact: These high-profile partnerships structurally **de-risk** CoreWeave's future growth and validate its specialized GPU cloud infrastructure, potentially adding significant, long-term revenue streams and market share in the competitive AI compute sector.",
+      "analysis_details": "• **Impact**\nThe news highlights **CoreWeave's** success in securing **major partnerships** with **Anthropic** and **Meta AI**, positioning it as a preferred 'neocloud' provider for generative AI workloads. This direct validation from leading AI developers indicates strong demand for CoreWeave's specialized GPU infrastructure, driving the stock up **10%+** on **1.8x RVOL**. The deals are likely substantial, given the nature of AI development at these companies.\n\n• **Strategic Value**\nThese partnerships are not merely incremental; they represent a **structural shift** in CoreWeave's market position, significantly bolstering its revenue visibility and competitive moat against larger cloud providers. The subsequent **analyst upgrades**, including Macquarie's to Outperform, underscore the market's recognition of this **enhanced strategic value** and CoreWeave's long-term growth trajectory in the rapidly expanding AI compute landscape.",
+      "peer_tickers": [
+        "NVDA",
+        "SMCI"
+      ],
+      "headlines": [
+        {
+          "title": "“CoreWeave Is Becoming the Neocloud of Choice”: CRWV Stock Soars on Praises for Anthropic Deal - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNd0V2U09fT0l0dVg5YjY0V2o3WXZtODYxdzh4dGRjOElUZDBSVDJDNVFIaWVuZTYtYm05SEhXUkd6Vlh3MlZXTERhbXdGVWRlRHFWdmpxbGdaREhaQnZNLUF0Sy1iZndva0V1bVpnZk1tQ2xqdDBiTldmUXczeTNyWjI5bmVuR28yTkVDcHNrNkZLOU1sTU9pQ05wbW11aVZIWkJaaHp4V3NJRHpBellPNDNkWklybXlsTHRUY2tn?oc=5"
+        },
+        {
+          "title": "CoreWeave (CRWV) Stock Jumps 10.9%: Will It Continue to Soar? - qz.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1oV1VvbXZYTU14Nm9Xd3hlb1F2QW5aWjh2RTVfV1hBNHdTdG8zZ3pXVkpwaXdEclRzYzhaR3dxVUprcHd6cmEwVjJrVHMzZi0tUUY0UVhnSjJ5X0JWWXViWElYUU4tallKVDE1c2ZGc2FSbzJ6WFdrTjhWdw?oc=5"
+        },
+        {
+          "title": "Sandisk to join Nasdaq-100, CoreWeave stock surges on upgrade",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/video/sandisk-to-join-nasdaq-100-coreweave-stock-surges-on-upgrade-180923052.html"
+        },
+        {
+          "title": "CoreWeave Stock Soars 10% After Major Upgrade on Meta AI Deal",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/coreweave-stock-soars-10-major-180908240.html"
+        },
+        {
+          "title": "Software stocks rebound as Oracle leads gains",
+          "source": "Finviz",
+          "url": "https://www.marketwatch.com/livecoverage/s-p-500-dow-jones-nasdaq-brent-crude-oil-100-persian-gulf-blockade-iran-war/card/software-stocks-rebound-as-oracle-leads-gains-1dk9VrkHiRHyh1THdqTP?mod=mw_FV"
+        }
+      ],
+      "float_shares": "320.04M",
+      "short_float": "20.19%",
+      "daily_pct": 8.11,
+      "industry": "AI Cloud",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "CoreWeave's stock jumped 10.9%",
+        "discrepancy_note": "Finviz (Source A) reports conflicting stock surge percentages: 'Stock Jumps 10.9%' in [1] and 'Stock Soars 10%' in [4]. Google News (Source B) reports 'Stock Jumps 10.9%' in [5], matching only one of Finviz's figures."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "AAOI",
+      "price": 153.19,
+      "gap_pct": 4.94,
+      "pm_volume": 205061,
+      "avg_vol_10d": 15365982,
+      "avg_dollar_vol": 2353914783,
+      "mkt_cap": 11519708011,
+      "rvol": 0.69,
+      "adr_pct": 12.91,
+      "category": "New Contract/Partnership",
+      "theme": "New Contracts",
+      "reasoning": "AAOI secured a major surge in 800G AI transceiver orders, significantly boosting its presence in the AI data center market.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "A",
+      "finviz_theme": "AI Networking",
+      "analysis_detail": "Catalyst: Applied Optoelectronics reported a **major surge** in orders for its **800G AI transceivers**, as highlighted by an 8-K filing and subsequent market reports. This positions the company directly in the rapidly expanding AI data center infrastructure market. | Impact: This event has already driven the stock up **40.2%** and signifies a **significant revenue opportunity** and strategic shift towards high-growth AI-driven demand, **de-risking** its future revenue streams and **strengthening** its competitive position.",
+      "analysis_details": "• **Impact**\nThe **major surge** in **800G AI transceiver orders** represents a substantial commercial breakthrough for Applied Optoelectronics. This direct participation in the burgeoning **AI data center build-out** validates the company's product strategy and technological capabilities in a high-demand, high-growth sector. The news prompted a **40.2% stock jump** and a new 12-month high.\n\n• **Strategic Value**\nSecuring these orders for **800G transceivers** is critical as the industry transitions to higher speeds to meet the intensive demands of AI workloads. This positions AAOI as a key component supplier in the **AI networking infrastructure**, potentially attracting further large-scale contracts and improving its long-term revenue visibility. The move suggests a **de-risking** of previous business segments and a **re-rating** potential based on AI exposure.",
+      "peer_tickers": [
+        "COHR",
+        "MRVL",
+        "LITE"
+      ],
+      "headlines": [
+        {
+          "title": "Applied Optoelectronics (NASDAQ:AAOI) Hits New 12-Month High - Here's Why - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPR3M2QndWQzlwZFNpS0M0OExrQWZBQkJscHVaRnlLTFdmcWlXM1E2enc0ekppNFdXNDBLYS1EamNuS3RULUhQejBXSkRuMU5OVDFVU2gybGJTTDB0UDByNjFsbmJOOE1aWGpBMmwtOFNQWWszQ2NlRVRQZ1praG9VbFlZelZaZmYzdGtMYzdNbGpxSTNTOThzbUtPSDV4dVJacDB4ZGZoRDVxQmFGSjhQM0ZSdGNEZ2pmUVVpejR3?oc=5"
+        },
+        {
+          "title": "Why Applied Optoelectronics Stock Is Suddenly Sinking - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQR2RGQ3JjTHQtdW9qQ2loeHV3Z2xNOE85eEtWWUlLMVZKcHZZd0xTVVdMNldoR0xoVi14Y255SGNObUJ0UlhhckFQUmFHS1NRcHRBdjNzN2M2LWU0WW5XU2VlSzdvMXlVWEhmUlFjUWpRdTAwQ0NXOE9ndlpicV9zZzROUWlQRk9nZm1xT1RYWTM5dHdSTHMwNDlB?oc=5"
+        },
+        {
+          "title": "Strength Seen in Applied Optoelectronics (AAOI): Can Its 13.0% Jump Turn into More Strength? - qz.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOVS1GTnV2Q2NmWFJlem85endxMVFUbGJqcVdTQnpOVzJwUVlETzdIdGxWWVA0SHQxNDB0djl4SXlYRlYtN1JaNTR2ZmVudHFmSnp0c3ZXYjZ2ZmFGZ0M2SjBDNUdzT1ZCQ1RuNXAzT1RaS1BfZEQtbmtvOTd2MTRKMzc0b3JvUVRISkd4eWVQUFdwYUYyWk1HeVFTSXpDdjFPdjhoSQ?oc=5"
+        },
+        {
+          "title": "[8-K] APPLIED OPTOELECTRONICS, INC. Reports Material Event - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOM3piVE1DbGJBNV9ld0JjS045TEozaHRuamVBalhZS28zY1h6UTl1Zjl3LWdacUpzZnR0Q2FzNngtYTBTQ2UxNTRmTEg4NXJZeXpVWWFLRy1nVmVUeFIwVVN4WDZYQ01hQ0o4MDhPX0VPcFc0bmtkdmJBLTRnQzFEMGJKVU1QUTJyQkJXMHQ4M0s5SWZxbFJHMC1GMU5vZFV6d18zRkh0R2UyNHZSN1RVazZRX2FCV1E?oc=5"
+        },
+        {
+          "title": "Applied Optoelectronics (AAOI) Is Up 40.2% After Major 800G AI Transceiver Order Surge Has The Bull Case Changed? - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNc1pzU0lSX1dkWXh5cHJ6UnpRRWdzQ3FCODRPTHdPWThVeFNsVkJKZ1hSNUNSNl85aG9FcU9nTVpLS1l1eTJwbGo1cV9nSmh4NVFpR3hKVy1hdFh2Q256eXlzZU5ROTB2TENWOGlfdnAwTWN6ZW1fRkI3TXJTb3FRLWZGTlp5endQS3M2NUhXb3AzT01NbVNKUnp4dEYtRWRlcVFjaUtNbExPMjFNWV9sWjJJMzIzWHA2cEpDQ2xEcUVtTjlaNGQtd0o0ODRzVnRrNUwyT9IB2gFBVV95cUxPeWdnM3R2RzZlTGxYcjMzNnJycktDVXFGLTBYYVVtM1MyNEtWeEVENVRiWFBXNlJycDBQTE1oaW9qYzlPZ0swMlU4YkRrSlJUdDZsdDhNZXEtU1JTcDA2YVRrMDhzcElaYmlVT0ZWZXEtMXV0WFdEbVlaeF9FWXJNWV9IWlR3WmJUREhjMkd6NnNROGhqVlczYWd4YjQtUmRnaTdTbDdjNDZ5b28zUXlpdGtXMXdVRW51azJQVGI3SjhnREpFZmF3Mmk1WlZaeXdCQzNVMy00cm9Wdw?oc=5"
+        }
+      ],
+      "float_shares": "70.92M",
+      "short_float": "12.95%",
+      "daily_pct": 1.72,
+      "industry": "AI Networking",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "AAOI secured a major surge in 800G AI transceiver orders",
+        "discrepancy_note": "Source B [4] (simplywall.st) explicitly states 'Major 800G AI Transceiver Order Surge', directly confirming the core of the claim. However, Source A [1] (Finviz) only mentions 'Strength Seen in Applied Optoelectronics (AAOI)' and does not provide any specific details about 800G AI transceiver orders or a surge in such orders."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "SBET",
+      "price": 6.7,
+      "gap_pct": 4.78,
+      "pm_volume": 129345,
+      "avg_vol_10d": 7635912,
+      "avg_dollar_vol": 51160610,
+      "mkt_cap": 1320964046,
+      "rvol": 0.72,
+      "adr_pct": 5.35,
+      "category": "Upgrade",
+      "theme": "Analyst Initiation / Crypto Treasury Endorsement",
+      "reasoning": "TD Cowen initiated coverage on SBET with a positive outlook, emphasizing the value of its ETH treasury holdings, driving investor interest.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 31,
+      "grade": "C",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "analysis_detail": "Catalyst: TD Cowen initiated coverage on Sharplink Gaming (SBET), drawing attention to its significant Ethereum (ETH) treasury holdings as a key valuation driver. This move aligns with the firm's broader positive view on companies with substantial crypto asset exposure. | Impact: The initiation by a reputable firm like TD Cowen **validates** SBET's strategy and **de-risks** its valuation by highlighting an often overlooked asset. It could significantly **increase** institutional awareness and liquidity for the stock.",
+      "analysis_details": "• **The Firm & Rating**\nTD Cowen has initiated coverage on Sharplink Gaming (SBET), a significant event for a micro-cap company, suggesting growing institutional interest. While a specific price target or formal rating isn't explicitly stated, the context of \"bets big on crypto treasuries\" implies a **bullish** initiation. This brings the stock onto the radar of a broader investor base.\n\n• **The Thesis**\nThe core of TD Cowen's positive thesis revolves around SBET's **Ethereum (ETH) treasury exposure**, positioning it as a play on the rising value of digital assets. This highlights a potentially **undervalued** aspect of SBET's balance sheet, separating it from traditional gaming or technology valuations and linking it to the **high-growth** crypto narrative.",
+      "peer_tickers": [
+        "MSTR",
+        "COIN",
+        "RIOT"
+      ],
+      "headlines": [
+        {
+          "title": "Sharplink (NASDAQ: SBET) investors back board slate, KPMG and pay plan - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPcjNINFY4WlJnWTNuRUVRM0ZoNlByYk44RHhzOVJ5UkVLNnFGd3AtdlppeXVCWmNGNlk0LWNHcnVudFgwVk8yd3J5OE42cW1zc2FzR05qRGJEOC11dnJ5SGtEandzaVlTbDJTeVBRQnJQS04wcE5RaHlsdF9WM3NsVDBRa3ZLVzQ4LTNOWG0tRzRqNU40c011bUxTU2lQS0hYWUg0dA?oc=5"
+        },
+        {
+          "title": "Assessing Sharplink Gaming (SBET) Valuation After TD Cowen Initiates Coverage And Highlights ETH Treasury Exposure - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOZEZ6TFBzZllaVTlPX3lncXlKdm96SjFQVXRGY3QteW9wcVZLaEFpNlY0SzdvZ2dobFp0ckR5ek9BVFdmZ28zLUIzNEwxb3R4WUNWNmxSMjFlNlZwQXBuSzl6SVByUkwyRU9WbW82Wk9lWFFnd2s0dTh6SjVCcjNxOTFlbVdiWHdwYlVmeXZxd1pmQkk3R3ZzXzNEWE5kSENXQ2FkS21JWUdPUkhIdEFkcV9IazVaMjg4Q3RmZnJDZkxCc2hiRkhmTE0wTjZsYzRsc0s40gHYAUFVX3lxTE1tNzlza24xa0dzSXQwODVFZDItX1dCdm85QnhGbGJDRmt2aWxBV2RMVC04S1NWa3Z6RFBGeF9nRm0wRXhXdzFSbzlWaXYyeUpJbzIzQ3lNWUljU3RNSGlveFlRQ0lRYnpfbjl2U21pVjRHNHNuVDJVLTZaMmstcWJPWHNILTlsdmxWbXdpQmZ5M3l3SFNSQWNBSGxGc0M3V1doRkcwbXg1bHhPTVJSUkprbi1sYjMtZ2tzZWJ4VjdVVWlWWHdMM2lFeWxTd21QZGx3UU95czRKdw?oc=5"
+        },
+        {
+          "title": "ASST, SBET, NAKA rally as TD Cowen bets big on crypto treasuries — but trims MSTR target - MSN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi6wJBVV95cUxOa2FXOFpXRGtZZE9INjlqM1JTenZOcmZuN2doMEs1dWdGaEhEQkNfQXdZYWI5OGxXcUN0cEhPQkhlcWpteWVqWlAxcHhocEpEdlZscnYzY2xtUTNxZ3ZIQXRhNjUxVzNTeUJFYl81T2RaWkVUTnM3cTdIQ1owZ2RoQ2hXWUJFTGlGaVc2djdmSGZxamZ1dmFsOE45SXVBYnduUXR6TlJKaXY4Y243dThGbjdXU1BqZDFMWWwzdFdjMEh5WEtQWEJTS3pWdjZxaFM3bmJUSi1EaDBlT2hNMGJ5ZkVCeGdYSFd5cllRSVFfdTkzSVF1dmNiMEpNMzhuUUhPdXVTZG5CdkpzRVRBZXdfNFZvM0hheGJydzBFWHpwZHZXM2VzNWhXakx1T0tnSXhERFlOZjR3RGF1ZkRpZkJydW9lcnFmQnhQc0JjV280bzhHVU9HbnY1Zjl2azZGa3g4bkhxNktIbU5QWHM?oc=5"
+        }
+      ],
+      "float_shares": "191.79M",
+      "short_float": "12.46%",
+      "daily_pct": 2.76,
+      "industry": "Fintech - Blockchain/Crypto",
+      "technical_status": "Fail (Avg $Vol $51M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 80,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "TD Cowen initiated coverage on SBET.",
+        "discrepancy_note": "Source A (Finviz News) contains no mention of TD Cowen initiating coverage on SBET. Source B (Google News articles [2] and [3]) confirms that TD Cowen initiated coverage on SBET and highlighted its ETH treasury exposure."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "USAS",
+      "price": 5.7,
+      "gap_pct": 4.74,
+      "pm_volume": 59434,
+      "avg_vol_10d": 5440179,
+      "avg_dollar_vol": 31009020,
+      "mkt_cap": 1857590702,
+      "rvol": 0.6,
+      "adr_pct": 8.49,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "headlines": [],
+      "float_shares": "254.18M",
+      "short_float": "4.41%",
+      "daily_pct": 1.6,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $31M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": null
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "PLUG",
+      "price": 2.77,
+      "gap_pct": 4.71,
+      "pm_volume": 1544877,
+      "avg_vol_10d": 66803521,
+      "avg_dollar_vol": 185045753,
+      "mkt_cap": 3861255579,
+      "rvol": 0.89,
+      "adr_pct": 7.24,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Clean Energy - Hydrogen",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nThe stock has seen conflicting reports on its recent performance, with some noting a rise while others describe a rally as \"fizzling.\" Crucially, there is **no specific fundamental catalyst** such as an earnings report, new contract, or analyst upgrade reported in the last 24 hours that would explain significant price movement. Headlines primarily discuss the general investment thesis around green hydrogen execution or observe recent price action.\n\n• **Key Consideration**\nWithout a clear fundamental trigger, any recent price movements are likely attributable to **technical factors** or **trading flow**. The ADR% of **7.2%** suggests volatility, but an RVOL of **0.9x** indicates volume is slightly below average. This suggests potential short-term speculative trading or technical adjustments rather than a strong conviction move, increasing the risk of a quick reversal.",
+      "peer_tickers": [
+        "BLDP",
+        "BE"
+      ],
+      "headlines": [
+        {
+          "title": "Why Plug Power’s Hot Rally Is Suddenly Fizzling - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNZkw0dldBcklSZzhNNWU4Y2o4ZjJ5d2prbjlIdkZWQ21ELTl4WXFwS0Zub0R2WENTOHBaamYxOXRLbUw1VFNub2VXbXQ1X0hGdkx3X0ZhNjVIT25MZzNEeUV5aTkzMjN4UDVlT0tXOFhYemwwaHNwRDV4YzBnLXRkLWx0ZUJ2R1pid1lfdUJR?oc=5"
+        },
+        {
+          "title": "Plug Power Inc stock (US72919P2020): Is hydrogen execution now the real test for green energy invest - AD HOC NEWS",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPXzNHZ00wVGdQR1NNaFBOZU1sbVhyM3N2LUNfWm1heDRSd3hmYzVrR1RvcUIwZkRpWU9vOFpLUVVfSnVBb0RuREFxdEZNWmU0RFFvSGJubnZ4am5rdU1rTWdjSHlKRkdza1h2ZnZNS1FUWV9EZTlhTlBLbTFHUlg1TWFvMTdhYXZxMjFYa2o2bFVpNkhUMXUtMmtwNGVSSGFkenA2b0ktc1VuTDY3MkFpSVRVUk9hSEJiSGk0Qlc1b1R6aWgtUmc?oc=5"
+        },
+        {
+          "title": "Plug Power (PLUG) Outperforms Broader Market: What You Need to Know - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNUWZJQmFHdE1xSWt1bGI4MlRRMExBM1VMWXE1X3ZfSGpsM3BmMXdXTFlvVk5tVW5KeWo2U25fekxDTzhhRWRFellmOVg4b1E4dGFhQVFDV2xXLUNUMnJRbFNLaDNHUVpUQ195TkRGYy1YNDdtSEhVTkdTTWhXUUJNQTBYSkFwV1Vfc3ROcmFtTDVxOFpHT2VFaFlYcDVqLTQxZkE?oc=5"
+        },
+        {
+          "title": "Plug Power Inc. stock rises Monday, still underperforms market - MarketWatch",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPMnFyWVFtTGdlVGwtTy1yWWJXTTd4VGhWcGlRMU1ab1NyelpuQ25way1nc3BjbDNvSFRuT01Ib2l2VXZBX1dvendtZk9kSlM2d3hkbVVJS0x1a0lIVEJFT3J6aVhycXloRkw2ZjNROHE1WWpkbnJfR3N6QXI2NlVyMDYyV2xTaldIWmJEWksyMk1XNXlHY2RaeURwdjBUTTRLMFpsOGo2WmhBMEN6N1otQmxyWTFabm9faV85ZA?oc=5"
+        },
+        {
+          "title": "Plug Power Inc stock (US72919P2020): Is green hydrogen execution now the real test for investors? - AD HOC NEWS",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQcEY2M3ZPWmdVNDRRX2tLVThjNDVEb0wtVHllXzUyWjFabUdKdjhMS1JqZFJOa1R6ZHRObGhncHlfbEIyUmljUzl2M3pnMkZkdE8ydF94THlRRzlSb0t6MzdLTVR1TXNueUdRMThNVmhiWFVlOGtFTGNjSGhGT05vWTVuRGNvb19KVFBoSUNEYUFsb0loN1NySFFLVk1FSE9KRzFmYTA2RnhGZGxBSzdJajZvNzFDcFBnUHJ5WXlDN2U?oc=5"
+        }
+      ],
+      "float_shares": "1.33B",
+      "short_float": "25.53%",
+      "daily_pct": 1.09,
+      "industry": "Clean Energy - Hydrogen",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": null
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "EOSE",
+      "price": 6.16,
+      "gap_pct": 4.71,
+      "pm_volume": 529964,
+      "avg_vol_10d": 26009260,
+      "avg_dollar_vol": 160217042,
+      "mkt_cap": 2090915030,
+      "rvol": 1.14,
+      "adr_pct": 9.72,
+      "category": "Earnings",
+      "theme": "Preliminary Q1 Update",
+      "reasoning": "EOSE traded up significantly following an announcement of preliminary Q1 revenue and capacity ramp.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "B",
+      "finviz_theme": "Clean Energy - Grid",
+      "analysis_detail": "Catalyst: Eos Energy announced **preliminary Q1 revenue** figures and an impressive **capacity ramp**, suggesting stronger-than-expected operational performance. | Impact: The positive update provides a short-term catalyst, potentially **de-risking** Q1 expectations and signaling future growth in production.",
+      "analysis_details": "• **The 'Beats' (Surprise Factor)**\nEos Energy Enterprises provided a **positive preliminary update** on its Q1 performance, highlighting encouraging revenue figures and a significant **capacity ramp**. While specific numbers are not fully detailed in the headlines, the market reaction with the stock **trading up 11.3%** indicates that these preliminary results **impressed** traders. This suggests a potential **upside surprise** relative to prior expectations for the quarter.\n\n• **The Growth (Momentum)**\nThe mention of an \"impressive **capacity ramp**\" is particularly important for a growth company like EOSE, which operates in the expanding energy storage sector. This signals **strong operational execution** and an ability to scale production to meet increasing demand. This operational momentum is a key driver for future revenue growth and market penetration, affirming the company's long-term potential in grid-scale battery solutions despite a concurrent securities fraud lawsuit.",
+      "peer_tickers": [
+        "ENPH",
+        "FSLR",
+        "ARRY"
+      ],
+      "headlines": [
+        {
+          "title": "EOS Energy Enterprises Faces Securities Fraud Lawsuit - National Today",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPdTBOdFExSWlqRlVmRjhCZm9vdTluQlBIM3diRmdZSXhnT21HREZ1NGxZQThoSUhkWHc1cXF5cGF2MEp6cEJkcWFGdE1hMDV6MmMtTUwwRDNZbUlSVzRVYmEyQWNNbjdvOFNYcFhGSTJTZHp6Y1ZQSFBVaElkTm0wTU1lMmI2bEhzcm9fTFphUWsxY1VpWHQ0dDJIWk5DU1J4d0RRREdCbV90Mjdjb0pGSQ?oc=5"
+        },
+        {
+          "title": "Eos Energy Enterprises (NASDAQ:EOSE) Trading Up 11.3% - Should You Buy? - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNblM2V1NIM3d3VnctQ1pwXzkyWTVRelRJam5wajJNY3B3NWctUFZVRWw2S3c0QUItLXByRlJqa0VVN3pQR3Y1eWtObWFLaHFHQnRrZnhCVDcyV05CUkxpQkQ0bmtrRFFHWjFhNXdmaTB2OXlXQnlqVXEtNDJ2cTFBODRNa09LdnB4S3FGMnVTQnhYU2wzRlplNTN4Vk1mdWQxT2VBSERfTjFsZVczOG95Z3FJaHhGb0xt?oc=5"
+        },
+        {
+          "title": "EOSE Stock Climbs As Preliminary Q1 Revenue And Capacity Ramp Impress Traders - StocksToTrade",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOT29kTWtlTUF6SXN5aExFQUxvLUpNdThQMW5sRjdKSFNhbHF1UE92N3NVZFRZX3Fua3FyUl8zNkNIYzdCc0J5MzRkQkhIWHg5T2U0QmU5bVE2bnFnbGo5QUlOMlk1R0Z5V2RLUGphbmZ4ajY3NVlCS1MtSGZKWVVWY2lJUU0wUQ?oc=5"
+        },
+        {
+          "title": "EOSE Stock Pops As Q1 Revenue, Capacity Ramp Impress Traders - timothysykes.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPQ2ZtUjEzY3lmeGFVWXFESHUxVGg2RDZCZG5qOUd4ZVlFX1hGWGItc3dfUDhmN3UxTXJYa0drMVRwUS02NlJFMGY1dGlndkJzWkF1OEhyV0xfVXo0bjdCTnFsNW9lZHpFREhFUy1GTFFkNGloR1NCTi0xMk5HRV9hMDdWNVdLNFhJcWc?oc=5"
+        },
+        {
+          "title": "Why I Sold Eos Energy (NASDAQ:EOSE) - Seeking Alpha",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTFAyYjA4UVBwMi1TX1gwTWpBTEZjeDF2Z0JSZURYMWNBeWJwUVllaFgyNzFMemNCUmwwZTdHWGlLWlhrc0t5OUlveVctNzRGSXQ2Tm03Z01jUzAtdmNndDBVTUdybUZxMVk?oc=5"
+        }
+      ],
+      "float_shares": "332.32M",
+      "short_float": "29.66%",
+      "daily_pct": 9.61,
+      "industry": "Clean Energy - Grid",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "EOSE traded up 11.3% following an announcement of preliminary Q1 revenue and capacity ramp.",
+        "discrepancy_note": "Finviz News provides no details on EOSE's trade-up or its percentage. Google News [1] explicitly states EOSE traded up 11.3%, while other Google News articles [2,4] confirm EOSE traded up due to Q1 revenue and capacity ramp, but without a specific percentage."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "ORCL",
+      "price": 155.62,
+      "gap_pct": 4.42,
+      "pm_volume": 1183829,
+      "avg_vol_10d": 23940372,
+      "avg_dollar_vol": 3725600691,
+      "mkt_cap": 447570250845,
+      "rvol": 2.56,
+      "adr_pct": 4.07,
+      "category": "New Contract/Partnership",
+      "theme": "New Contracts - AI Infrastructure",
+      "reasoning": "Oracle announced an expanded partnership with Bloom Energy for up to 2.8 GW of fuel cells to power its AI data centers, leading to a significant stock surge.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 81,
+      "grade": "A+",
+      "finviz_theme": "AI Cloud",
+      "analysis_detail": "Catalyst: Oracle **expanded** its partnership with Bloom Energy, committing to purchase **up to 2.8 GW** of fuel cell power for its rapidly expanding AI data centers. | Impact: This **massive infrastructure investment** directly addresses critical power demands for Oracle's AI strategy, enabling **significant scaling** of its Oracle Cloud Infrastructure (OCI) AI offerings and **de-risking** future growth constraints.",
+      "analysis_details": "• **Impact**\nThe expanded partnership with Bloom Energy for **up to 2.8 GW** of fuel cell energy is a **transformative commitment** for Oracle. This **substantial power capacity** is dedicated to fueling its rapidly growing AI data centers, directly addressing the immense energy demands of AI compute. The deal demonstrates Oracle's **aggressive strategy** to build out its foundational infrastructure for AI.\n\n• **Strategic Value**\nThis agreement **strategically positions** Oracle as a key player in the competitive AI cloud market by securing a vast, reliable, and potentially cleaner energy source. It enables Oracle Cloud Infrastructure (OCI) to **scale its AI offerings significantly**, attracting more AI workloads and de-risking future power supply challenges. This investment underscores Oracle's ambition to become a dominant AI infrastructure provider, enhancing its long-term competitive moat.",
+      "peer_tickers": [
+        "MSFT",
+        "AMZN",
+        "GOOGL"
+      ],
+      "headlines": [
+        {
+          "title": "Oracle adds AI tools to help capital projects move faster with audit trails - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQdUwxc1NsRC1ienllOWMwNjVzNy1JRWpnenRxVjBwWEVMXzk1UkpjOUdhYnpMcG5ac0tjWWY5X28xQzdxVFp3Y0pDRTNKMHlSdlB4QVBENFEzSWxRUl9HMjJfM0V2VnV5Mi1fVXRmUmZwYkFmRkxPRmJsRFdrZkN4MjdoRXlrd3YtRy1ncGFrLVdhaEhEVXU1T25BTnpTSDFpQW5QOEhpQW0?oc=5"
+        },
+        {
+          "title": "Why Oracle Stock Rebounded Today - The Motley Fool",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQMEQxQ0pKRDZUVUg1X1hCS1RKQkk4S0I0N09XTk1QVEdWazI5LWhTWml5d3NZcjhKaDlpTTRTQ0FMT0dBMzdnSmV5RGMzUHJJTXEzaTQ2SF93X245ZjR4TEs3VmYzdHNoQjItUG53TVdRb1NkMlRzazk0NmdCOWN4WQ?oc=5"
+        },
+        {
+          "title": "Oracle Stock (ORCL) Is Surging over 11% on Monday – Here’s Why - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNQk1hLWllSGZWNmVOZWU2WV9QZVl6bVY1YkZzOHpKdmViT2xieUlXaF91Uk1pcEtHWkZiTkFzam1LZHoyOFpCN09KUkZ5M0ItY2dTNDdRVVhGZm92ellvU01LOFFzR2ItMzV5blhzRjRiN0V2VWFkb2xqZmZjQmhsZUd2Q05WTzVTSU5YbTgtVVU?oc=5"
+        },
+        {
+          "title": "Bloom Energy Stock Jumps on Expanded Fuel Cell Deal for Oracle",
+          "source": "Finviz",
+          "url": "https://www.barrons.com/articles/bloom-energy-oracle-fuel-cell-deal-stock-d42b6523?mod=bar_FV"
+        },
+        {
+          "title": "Oracle Agrees to Buy Power From Bloom for AI Data Centers",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/sectors/energy/articles/oracle-agrees-buy-power-bloom-220211426.html"
+        }
+      ],
+      "float_shares": "1.71B",
+      "short_float": "1.62%",
+      "daily_pct": 12.69,
+      "industry": "AI Cloud",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "up to 2.8 GW of fuel cells",
+        "discrepancy_note": "Source A (Finviz [3]) explicitly states 'Bloom Energy to supply up to 2.8 GW of fuel cells under expanded Oracle deal'. Source B (Google News) articles mention Oracle's stock surge reasons but do not contain any specific details about '2.8 GW' or the Bloom Energy fuel cell partnership."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "GLXY",
+      "price": 22.5,
+      "gap_pct": 4.27,
+      "pm_volume": 67132,
+      "avg_vol_10d": 5937800,
+      "avg_dollar_vol": 133600500,
+      "mkt_cap": 8754668654,
+      "rvol": 1.04,
+      "adr_pct": 7.48,
+      "category": "Upgrade",
+      "theme": "Analyst Reiteration / AI Narrative",
+      "reasoning": "BTIG reiterated Galaxy Digital's rating, linking its potential to AI infrastructure growth.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 32,
+      "grade": "B",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "analysis_detail": "Catalyst: BTIG reiterated its stock rating for Galaxy Digital, explicitly citing the company's exposure to 'AI infrastructure growth' as a key driver. This provides a narrative bridge between digital assets and the high-momentum AI sector. | Impact: This analyst action serves as an incremental positive re-rating of the investment thesis, potentially drawing new institutional interest by framing GLXY within the lucrative AI thematic while affirming its existing digital asset focus.",
+      "analysis_details": "• **The Firm & Rating**\nBTIG has **reiterated** its stock rating on Galaxy Digital (GLXY), a significant move that signals continued confidence from the sell-side. This reiteration comes at a time when market participants are highly sensitive to new growth narratives.\n\n• **The Thesis**\nThe core of BTIG's reiterated thesis centers on Galaxy Digital's potential to benefit from the burgeoning **AI infrastructure growth**. This strategic linking of a digital asset firm to the AI theme suggests an expanded and more diversified growth vector, appealing to a broader investor base looking for indirect AI exposure within the fintech space.",
+      "peer_tickers": [
+        "COIN",
+        "MSTR"
+      ],
+      "headlines": [
+        {
+          "title": "BTIG reiterates Galaxy Digital stock rating on AI infrastructure growth By Investing.com - Investing.com South Africa",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPNmRIRmVZWEFwWDczcGtwVFFuX1BMRkVsLUhIbHVtTnVEdFdGMVRvRmpJTnE4cEctT0dMaUZ4aXlCR082cXpQdXVrNEFwdkU4LXBUTFZzR0RjdWM5T2Q2LXNMMWZ1UnowdFdJdDNoVGNrMTM3TUQydVNMMHpENkJodjQ2YXk4MVVFbER5ZElocTRZR2tvb3h4QWpkRFFrUlRzSkNwV3FTVy1FV1lTZzdTaUoxWEs3QWVfd2ViNWp6eWZMSHlDVEpOa1E5Njk?oc=5"
+        },
+        {
+          "title": "The One Simple Reason AI Agents Arent Ready to Trade Crypto",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/m/6a3578f7-9b5d-35b5-973f-6ee4d6e5c2a2/the-one-simple-reason-ai.html"
+        },
+        {
+          "title": "Why Your AI Agent Cant Trade Crypto Yet",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/m/eb054df8-2ac0-37d3-a104-8b49fef309fa/why-your-ai-agent-can%E2%80%99t-trade.html"
+        }
+      ],
+      "float_shares": "186.15M",
+      "short_float": "13.83%",
+      "daily_pct": 3.88,
+      "industry": "Fintech - Blockchain/Crypto",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "BTIG reiterated Galaxy Digital's rating",
+        "discrepancy_note": "Source A (Finviz) does not mention BTIG, Galaxy Digital, or a rating reiteration. Only Source B confirms the claim."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "BMNR",
+      "price": 21.51,
+      "gap_pct": 4.23,
+      "pm_volume": 1113525,
+      "avg_vol_10d": 43973859,
+      "avg_dollar_vol": 945877707,
+      "mkt_cap": 9784091115,
+      "rvol": 1.26,
+      "adr_pct": 5.52,
+      "category": "Thematic Narratives",
+      "theme": "Crypto Treasury Expansion & NYSE Uplisting",
+      "reasoning": "BitMine Immersion Technologies announced a significant expansion of its Ethereum treasury, reaching 4.875 million tokens and $11.8 billion in total crypto and cash holdings, alongside an uplisting to the NYSE.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "A+",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "analysis_detail": "Catalyst: BitMine Immersion Technologies (BMNR) announced a substantial expansion of its Ethereum holdings to **4.875 million tokens**, bringing total crypto and cash holdings to an astounding **$11.8 billion**. Concurrently, the company announced its uplisting to the NYSE, enhancing visibility and liquidity. | Impact: This move fundamentally strengthens BMNR's balance sheet, validates its crypto-centric strategy, and significantly increases its market profile and investor accessibility, potentially leading to a re-rating.",
+      "analysis_details": "• **The Narrative**\nBitMine Immersion Technologies has significantly bolstered its position as a major player in the crypto space by expanding its Ethereum treasury to **4.875 million tokens**. This strategic accumulation has propelled its total crypto and cash holdings to an impressive **$11.8 billion**, fundamentally strengthening its financial foundation and balance sheet. This move underscores a strong conviction in the long-term value of Ethereum and other digital assets.\n\n• **Explosiveness**\nThe simultaneous announcement of an uplisting to the NYSE is a critical catalyst, promising enhanced institutional investor access, increased trading liquidity, and greater market visibility. The sheer scale of the **$11.8 billion** in total holdings, combined with the uplisting, creates a potent narrative for significant capital appreciation and a potential re-rating of the company's valuation as it transitions to a more prominent exchange. This dual catalyst suggests **explosive** upside potential.",
+      "peer_tickers": [
+        "MARA",
+        "RIOT",
+        "CLSK"
+      ],
+      "headlines": [
+        {
+          "title": "Sumitomo Mitsui Trust Group Inc. Has $133.48 Million Position in BitMine Immersion Technologies, Inc. $BMNR - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxPV3hkZWZwa2VsLU5XU2JnelJFc2dfVjlieUdaZEdjWFJSV1Fya25HeHViWjI2S19YanRtbkZDb2RNeHM2MWpoRU1zdk5YSWR3U0NicGxwd3l2bkJQVGs0cWVtSGVxb0VmdXF2aC1DSFJ6d3hGcmdaT2tsb3dpek56ZUFVbVMxZWkyVTdQNTdqV0hQZWlScDVtc0FGa1F0Qnl1Rm43RGVMb19Jd1lSYzQwd3Izc25FRUVHdi1MbHhZLWdwT08wMlczSi1mNXZqbzQ0YW9PenFXV3JwaTFMN3hTNWxXU2lvbkRqRnVJN2tWREtsdWRs?oc=5"
+        },
+        {
+          "title": "Dow, S&P 500, Nasdaq Futures Gain As Trump Signals Iran Talks Could Resume: Why SNDK, BMNR, ORCL, BE, TVTX Kept Traders On Edge Today - Stocktwits",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOZVVBSVZKY3pieHE0QnljWTRFa1ViYXJsTFhxWkhTc0ZpRFo0cWN4QmpYQTdBcXdLclpUSFlON1ZRb3NVLURheUV5eGtWNFdZbGNKeVVYYzZsWXhaei1Lbnl5RC1OZnk2dUZ3VldHMmJ3Y3I5OHdNMUJoU1JtcVlqLTlHMTJSZTRUNUY1TmYzMUhGeVFkb0d6Y1NGUkZvZzJvMlBnUzJVbkdDTndyWlhLQXZHek1uV1RyQ0p3Y1dNLXdseUV5RUZUR2Q2d2ZFTHRjVDJuTEtrSGM?oc=5"
+        },
+        {
+          "title": "Tom Lee’s BitMine Makes Biggest Ethereum Buy Since December - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOcC1SVUJsYmNrenRpX0FUZFBWV05aek1nVUhPRkU5cEZ4SHVoWlNBZTJxaDNwNmRPVWNTTFN1VW1sdVJIN1FWUzY0a1FUdDBxUUJ0ZzNqdkxqSEZSaGpZUENDWk5FNWlqMHhDM19teTZnUHFpQ19tMklMZldjQUJoZVRpdmNRdGxUYzl2NU1KYlVnZlBlRXVLYWtB?oc=5"
+        },
+        {
+          "title": "BitMine Expands Ethereum Treasury and Uplists to NYSE - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQZ04zM053UlM0NTkzSUpWVmFVNU1vdGFDZTZsZTJmZzBsa0FGS2g0M1pGUHBCVTJvSDlNMmctZTVwLUp6Mk9jQzFIOTc0Q0JNT1ZIX1oxUnVEQkN6WGlBV3RSRW9KVVB6ejJwbkxRa3EwQmRkX3dFM3RZVm1nNHI3Y1J0SUg2WGJxbFJVRWx1enhNWjVmUnM1V3BET1ZoQjVRSTRSUTRiN1c?oc=5"
+        },
+        {
+          "title": "Bitmine Immersion Technologies (BMNR) Announces ETH Holdings Reach 4.875 Million Tokens, and Total Crypto and Total Cash Holdings of $11.8 Billion - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxOdFIyOVZ3YmE4cEw0SFJqa21JOUpmQzFnOUxkOFlvOVp0N0FIcVl2aFhZN1M5NnJEdTh4ckhMS3hfeHk1VHl2YkR5UTBsS24xMGU3UzFPeVY5cUdDWEs2SC16cGlhT2ZWWnYwTmF0VFlNU016cFBWdG9hc1l0bmtnUmxRTkRNSVFaMGUycWlwcTdOUjdNSERiZXNWQnhMYkZVdEFPS2VQOEV3UVlsd2JUd3NpQkZLS0M2OW9qelpmaGdjcmJfRl9QUGRqU3pFSzM5ZDVTeDBOTVZrRHEtQjJKcjNKaUs?oc=5"
+        }
+      ],
+      "float_shares": "432.95M",
+      "short_float": "8.48%",
+      "daily_pct": 1.08,
+      "industry": "Fintech - Blockchain/Crypto",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 75,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "4.875 million Ethereum tokens in treasury",
+        "discrepancy_note": "Source B (Google News, entry [3]) explicitly confirms 'ETH Holdings Reach 4.875 Million Tokens'. However, Source A (Finviz News) provides no information regarding this claim, preventing dual-source verification."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "IREN",
+      "price": 43.07,
+      "gap_pct": 4.23,
+      "pm_volume": 631026,
+      "avg_vol_10d": 31588504,
+      "avg_dollar_vol": 1360516867,
+      "mkt_cap": 14288868107,
+      "rvol": 1.31,
+      "adr_pct": 7.48,
+      "category": "Thematic Narratives",
+      "theme": "AI Compute Narrative",
+      "reasoning": "The stock is benefiting from a strong thematic narrative around its strategic positioning in AI compute, particularly its 'Bold AI and Mining Bet' and perceived connection to Nvidia-linked entities.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "B",
+      "finviz_theme": "AI Compute",
+      "analysis_detail": "Catalyst: Market focus on IREN's **pivot to AI compute** and its strategic positioning within the 'Neocloud AI Trade' following reports of its connection to **Nvidia-linked Nebius**. | Impact: The narrative is driving significant **momentum**, leading to an **eighth consecutive day of gains** as investors embrace the 'Bold AI and Mining Bet.'",
+      "analysis_details": "• **The Narrative**\nIris Energy is experiencing strong upward momentum driven by the burgeoning \"Neocloud AI Trade\" and its strategic positioning as an \"AI and Mining Bet.\" Recent reports highlight its perceived connection to **Nvidia-linked Nebius**, lending significant weight to the narrative that IREN can successfully leverage its infrastructure for high-demand AI compute. This thematic tailwind is fueling investor interest and sentiment.\n\n• **Explosiveness**\nThe stock is closing in on its **eighth consecutive day of gains**, underscoring the strong market conviction in this AI narrative. Despite a report of institutional selling from Baillie Gifford & Co., the overriding theme of AI compute potential is dominating price action, showcasing the **explosive momentum** driven by thematic sector rotation and speculative interest in companies with dual mining and AI infrastructure potential.",
+      "peer_tickers": [
+        "HUT",
+        "RIOT",
+        "MARA"
+      ],
+      "headlines": [
+        {
+          "title": "Nvidia-Linked Nebius, Iren Stocks Close In On Eighth Day Of Gains As Neocloud AI Trade Runs Hot - Stocktwits",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxNRk5UaWlUOEFucWtmdzR0WlNNcEd1NDFlOTJXd2VrMDhiVVp5c1gxUko3QUFCSkVDUWRVbFlNZHdYRkl3dHU3enFiWDZSdV93VUowZXZaMUJxLTN1LWpGX0dSUExCQ2x3bTlPNXpnR000LWZXT0JMV0tLdVQ0T2t3S0ZHRmh5ZExzYkVkTkhtbVgtbkJEMkZYNmd4QmR5MEtNTW5Vblp6bVRxaHZXcUdRLWFiYnZCUlZTYVBvVzFuUi1YN0lJZlVDWUlocXNtQnIwQVdzXzlUQS1GV01kaWxiR3R1Um43V1JwaElCWTVLdw?oc=5"
+        },
+        {
+          "title": "Baillie Gifford & Co. Sells 35,307 Shares of IREN Limited $IREN - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPNlR0MUZYVmEwbHk0aEtoSG5Ybk9YZTBvZXc1S0FMSTBlZVk5bGFBWGhqRTBkMW5jMm5SWHV0bm1NMXdRZmNpWVpEZGZnbE9xTlJPQm1fdHFUMFFCaDFLVkNGYW9DLUhscWljNnliNWwyNzI0SlloNE53S1Y0UkxfQ1FicUFfbzY0cTFFM3V3ZkhxQmhHZjdoR2xOQmtZRXFqSy05QnlQejlPNDQ2TEtyU2pvTE1ncVdMZWtB?oc=5"
+        },
+        {
+          "title": "Iris Energy Stock (IREN) Opinions on Sweetwater Energization Progress - Quiver Quantitative",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNUEtoaTVCNm9kQUNLeGt4ZEtMUm11NzdTdTFZT001Mjc1bHVuaUs3ODF4MG5CSTF2SzE4Wm9OaHVndHpsNXBzdkVibjdGRXJfcnZuU25NTTVuMnkySERSeENrbnRyLVRDUllWNHpISUdMbi11MFM2VmU2Z0JDbkItNDN4cG1RNXNrUUdJYlZ5SXJWNjlocFJvYWJXUldIVXJDbWpsUHprMUVXdw?oc=5"
+        },
+        {
+          "title": "Iris Energy Stock Jumps on Bold AI and Mining Bet - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNQjdXZlVxMTRSeElhSklrYlZFSURQME15ZkJFRGdKcWJ1MmlDSmROcWkwTU53aDBHenpsdUhZSzk4UGZqUVIwVldjOXFteWs1ZVBoWVdDWGpEWWloa1JROUh3aVpBVnR3Ry1iM2Zvemo4MkNXZy1GYkV6SlZRRDVFY2ZCWTl5Uk53MzBFdHp5SUVVdw?oc=5"
+        },
+        {
+          "title": "IREN stock analysis amid CoreWeave, Nebius market share gains - Invezz",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQX19Tbllac0xlVzBMTHFVYjh5MkctTDBvUGVHZThIRVgxTlVUSUhFUVlJT2Nlalg0Smd6UDhjYjR3cWtCc1Q0S0VObTVFZHVKRzVFcW5vTXBNeVp4dGE3QmpBYWhEMjFESEZPRmZ1dS03VzVvdW5BUmFqUmdGR1ZaUFpHeXE5b1RTWnpNTnI2R1lfVkM0T0lIeExPZ2I?oc=5"
+        }
+      ],
+      "float_shares": "298.77M",
+      "short_float": "18.70%",
+      "daily_pct": 9.54,
+      "industry": "AI Compute",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 85,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "perceived connection to Nvidia-linked entities",
+        "discrepancy_note": "Source A (Finviz News) has no news items to confirm the claim. Source B (Google News) headline [5] explicitly mentions 'Nvidia-Linked Nebius' in connection with IREN, supporting the claim of a perceived connection to Nvidia-linked entities."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "CRML",
+      "price": 9.01,
+      "gap_pct": 4.22,
+      "pm_volume": 160006,
+      "avg_vol_10d": 8185978,
+      "avg_dollar_vol": 73755662,
+      "mkt_cap": 1099893989,
+      "rvol": 0.77,
+      "adr_pct": 8.64,
+      "category": "Thematic Narratives",
+      "theme": "Rare Earth Recovery Improvement & Geopolitical Tailwinds",
+      "reasoning": "CRML surged after announcing successful Tanbreez tests boosted rare earth recoveries above 85%, supported by escalating US-China trade tensions favoring domestic rare earth producers.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Materials - Metals & Mining",
+      "analysis_detail": "Catalyst: Critical Metals (CRML) reported **positive test results** from its Tanbreez project, showing rare earth recoveries **above 85%**. This operational improvement significantly enhances the project's economic viability and de-risks future production. | Impact: The improved recovery rates could **substantially boost profitability** and production efficiency for CRML, strengthening its position as a key player in the rare earth supply chain amid increasing geopolitical demand for non-Chinese sources.",
+      "analysis_details": "• **The Narrative**\nCritical Metals (CRML) received a significant boost from **positive Tanbreez project test results**, indicating rare earth recoveries **exceeding 85%**. This development is crucial for the company's operational efficiency and strengthens its position within the critical minerals sector. The timing also coincides with **heightened US-China trade disputes**, which are pushing for more diversified and secure rare earth supply chains outside of China.\n\n• **Explosiveness**\nThe **+11.2% premarket move** reflects the market's positive reaction to the improved recovery rates, signaling enhanced project economics and de-risked production for CRML. While the **RVOL of 0.8x** suggests the current volume is below its 20-day average, the initial price surge indicates strong buying interest driven by both company-specific news and **broader geopolitical tailwinds** supporting the rare earth industry. This combination provides a potentially **exploitable momentum play** within the thematic narrative of critical minerals independence.",
+      "peer_tickers": [
+        "MP",
+        "LAC"
+      ],
+      "headlines": [
+        {
+          "title": "Critical Metals (CRML) Is Up 11.2% After Tanbreez Tests Boost Rare Earth Recoveries Above 85% - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQeGZBel9hUWQzYW96UmlBamI3a3dibWJQNktmM1lQZXV6Y2NoVzNjYmcxOGhvUFBhMlNFaGFzOHJFRFp1a2pKYXNfaVlOaXVXN1NpOFg4TDBCd3ZtazNPWVpGNEliTnQ2aXJxOXhJMXFWdndzWFRZMktLMC1GU0dYLXNaZi1LRzNKbnlvWFdqUXI5NzhXemlvRS1oak1mZEJ3VHcySnhiMEpoQ0lHenVsQTd1Yjg3QWtzckFjRTZRZVdNYVl5WHIxaER6aGhIeWFL0gHWAUFVX3lxTE9BdUpnMG9UNlBtZnRUTHhHeXhpQTJpNFhQcGZWU0pieEUycW1iOUVEczRQc215d1BfNDRVUHUzTUs3REx4dDdXZWVuclZ3VTYwQ2I3ZGVzSEctamFZbnRZSEtjQnBrd0p4VmlsWl9MbzN4aFNhQ1p6aFY3bU1NVE9PRl92blV0WkRrRWV6Z3U1RER6Q29IbF9la21jbVg4M3hnN3ZuVWRfLS1veTBFYW5OaW9EN2hDckc5Sld5bkVIeHNQQTNPcXNHSWpVSlItczFCdFd5SEE?oc=5"
+        },
+        {
+          "title": "TMQ, CRML, USAR: Lithium, Rare Earth Stocks Rally Premarket As US-China Trade Dispute Heats Up - Dailyhunt",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMihAJBVV95cUxORkx5c01YZ3VaYjlrV1QxZzVhUUJhYWw4N2dEREx6OHB6N09XOFZXeS1DaW5ERU0zYXRFY2xBS1JHSG5jcG1xUXUwV21SM0dvZVFKR2pnUlpkZXlTUkpodnZiU2V6RlJFTURIOEdQRVp5ZWVKZmZSSzVBMTd1ZHQzRVh2dTdNNFY1UHFXSFhPZ3V0aW5POV9pdnhyR0xfSkpObGZKc3BpX1FOZWdaNmhYQkxDckFGU1cydFlBc3R2b3JyRDN5b2h5Wmh3QlZqMzduZUpSaVIwZ29JQ1ZyTGF4cHFNZkZBamFUcEFZMGxfYXhWRE5mNldpbm9LZDRNOVo1SHN5dw?oc=5"
+        }
+      ],
+      "float_shares": "62.78M",
+      "short_float": "31.76%",
+      "daily_pct": 1.58,
+      "industry": "Materials - Metals & Mining",
+      "technical_status": "Fail (Avg $Vol $74M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "rare earth recoveries above 85%",
+        "discrepancy_note": "Source B [1] (simplywall.st) explicitly confirms 'Rare Earth Recoveries Above 85%'. However, Source A (Finviz) has no information, and Source B [2] (Dailyhunt) does not mention the specific recovery percentage, thus failing the requirement for *both* sources to confirm the claim."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "HIVE",
+      "price": 2.17,
+      "gap_pct": 4.15,
+      "pm_volume": 173619,
+      "avg_vol_10d": 9555336,
+      "avg_dollar_vol": 20735079,
+      "mkt_cap": 551166938,
+      "rvol": 1.07,
+      "adr_pct": 6.11,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "headlines": [],
+      "float_shares": "252.37M",
+      "short_float": "10.95%",
+      "daily_pct": 4.33,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $21M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "BLDP",
+      "price": 2.7,
+      "gap_pct": 4.05,
+      "pm_volume": 96665,
+      "avg_vol_10d": 2675499,
+      "avg_dollar_vol": 7223847,
+      "mkt_cap": 812466427,
+      "rvol": 0.98,
+      "adr_pct": 5.8,
+      "category": "Others",
+      "theme": "Management Change",
+      "reasoning": "BLDP announced a new COO, a potentially positive operational change, but this was countered by an average analyst rating of 'Reduce' and a recent **4.1%** share price decline.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Clean Energy - Hydrogen",
+      "analysis_detail": "Catalyst: Ballard Power Systems appointed operations veteran Ralph Robinett as its new Chief Operating Officer to drive growth and efficiency. | Impact: This operational update is largely overshadowed by a recent average analyst rating of **'Reduce'** and the stock's **4.1% decline** in the prior session, leading to a muted or negative market reaction.",
+      "analysis_details": "• **What Happened**\nBallard Power Systems announced the appointment of Ralph Robinett, an operations veteran, as its new Chief Operating Officer. The company emphasized that this strategic hire is intended to **drive growth** and enhance operational efficiency. This positive management change, however, occurred concurrently with a reported average analyst rating of **\"Reduce\"** for BLDP shares.\n\n• **Key Consideration**\nDespite the new COO appointment, which typically signals a push for operational improvements, the stock experienced a **4.1% decline** in the prior trading session. This suggests that the market is either not viewing this as a significant catalyst or that the news is being overshadowed by broader negative sentiment, including recent analyst downgrades. The immediate impact on momentum is therefore likely **neutral to negative**.",
+      "peer_tickers": [
+        "PLUG",
+        "FCEL"
+      ],
+      "headlines": [
+        {
+          "title": "Ballard Power Systems, Inc. (NASDAQ:BLDP) Given Average Rating of \"Reduce\" by Analysts - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPRkdRdDZRM2VGZ195QnZmWTFmeWNpMGJ6cjVBdmRLSDUySXgxOGRsRjlWaGFoNUp3Y1VQRDlXQVF6dHRfQk1QbWR0QmdYMzFrWk5LSGdqSTNyYVFXZHc2ZDB2YVNtdFhpbzBSS2lCWVFBMXJEN044TzRqcHNaTURuRXFEZkhsc2ViUlAyRnRNMEwyX1hqRmFwY1FwZnJuTDFnNms0VmhfZVowRm5SUXYxUUMwUGlLZEcxVnljdDh1NWNsZEFzOXB3bG5HQTFhdw?oc=5"
+        },
+        {
+          "title": "Ballard Power Systems (NASDAQ:BLDP) Shares Down 4.1% - What's Next? - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNRWxPcFRwdDRVNERlUHJBcVhJSFlTOTFGTElybXFHSVZpUnhnandwVkVmNV9hTkRWMTJuY2F4RTFsMnJDanJVMVRrQ3p3QXMyNklTcE50VUdyREQ3TkxQYkMySllIeDV6MjJnNGVEMml3RDhIaU9WNzdBb21VYzB5SHo3ajlZeGdjWkcwZ0RNYWdmRjI1WWFXdEFTLW90VnE0NEhUcFpEVDYtaW8yM2FCT29n?oc=5"
+        },
+        {
+          "title": "Ballard Power Systems (BLDP) Appoints Ralph Robinett as COO Effe - GuruFocus",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuAJBVV95cUxPdXU2TV9IX0lOcHpDSG45LTJzM1NtOXp1cllfUHU3dkp6WmNfSDR0ZkNDbzkweFFqZkk0clgyWGVlZm0wbTZrSDhmNTNBblQzTmZPOVh5LV9vNXowbF9Xdlk1aktwYTNjUkJjNll4bXppYjR2RFUxdFplcXdIT0xqSW5Xd1pNeGh6UjZaTDhMQ3U4dlRyc2g4UDdwUG1RNnhsNlZLMHQtS1d2UnBRMjBKM3RtT0RhTzJNV2Y4SVh2REJxY3lTRlBOZnJhM3p4b0UtRi1lelAwWmQ4NlV4SHhIcHEwczNrX2J2UW9Dblc5cmcxVDRwSnAyV1BmRnhLY0xieVNjXzhlYkV6dFNkR3BxbHloOVdGQUsxbDM2X3NSWFVfV1FiUkZXTGg4NVFxckpDMDQySHJCaU8?oc=5"
+        },
+        {
+          "title": "Ballard Names Operations Veteran Ralph Robinett as New COO to Drive Growth - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNMG1acEFWX3RYc3h0S0tDV0VvTV9OZjRPVWRtYWFNZUsxRWxqZ3o4cjBvbnQ3RU52dUJsSmxWQ3ZtNkIwcFA3QkNNdk5MbnR5dzg0eDYxQUltNk83S1luaFFWZS1FaE5kNVg3a3dLWFBlQVBxWWlvYnBlWnQ4SzJ1Y1lkNERKczRRelZueWlHRk1fMV9iZlRtSWFsZDBBcVYyOUd6NGprejJ1XzBZV0ZrcXdYajcxV2E1WkxrMmN4ZHRxNWI0?oc=5"
+        },
+        {
+          "title": "Ballard Power Systems (NASDAQ: BLDP) appoints Ralph Robinett COO - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOWC0xVTUyX2xVdy1mWEI1bWxzT0dvdUtpdzd6YmxMRFFDdWdpc3prbmF6X1JnTEtob2MxMWg2VWZ1VWlXaGt2a2FURnQ2SUM2c29XYjZEOURQejNISGlCVDBlcFRrSTNBX0JZR2JNbmV5WDVDaUJ3cU5SME5GdlF6eE54eXZiS25xLW1KckdzUlhuWE50LVVadTVXZFRnUW1mbGd1TV90clRvOGN3V21HQVhpOUJTNlRHQUUxejVB?oc=5"
+        }
+      ],
+      "float_shares": "296.76M",
+      "short_float": "6.93%",
+      "daily_pct": -3.91,
+      "industry": "Clean Energy - Hydrogen",
+      "technical_status": "Fail (Avg $Vol $7M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "4.1% share price decline",
+        "discrepancy_note": "Source A (Finviz) has no information regarding a share price decline. Source B (Google News, specifically MarketBeat) confirms a 4.1% share price decline."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
       },
       "meets_all_gates": false,
       "tier": "Fail",
