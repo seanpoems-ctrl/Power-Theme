@@ -153,6 +153,9 @@ async def subscribe_all(symbols_ranked: list[tuple[str, int]]) -> None:
     # Register the batch callback (more efficient than per-ticker updateEvent)
     ib.pendingTickersEvent += _on_pending_tickers
 
+    # Force delayed data (type 3) for ALL subscriptions — avoids "competing live session" error
+    ib.reqMarketDataType(3)
+
     # 1. Market internals
     for spec in INTERNALS:
         try:
@@ -166,11 +169,7 @@ async def subscribe_all(symbols_ranked: list[tuple[str, int]]) -> None:
             log.warning("  ✗ internal %s: %s", spec["key"], exc)
         await asyncio.sleep(0.05)
 
-    # 2. Stock tickers — use delayed data (type 3) to avoid "competing live session" errors.
-    #    Delayed = 15-min lag, free on all IBKR accounts, no session conflicts.
-    #    Switch to reqMarketDataType(1) here if you have a dedicated live data subscription.
-    ib.reqMarketDataType(3)
-
+    # 2. Stock tickers
     all_tickers = [s for s, _ in symbols_ranked[:MAX_TICKERS]]
     log.info("Subscribing %d tickers (delayed data, limit=%d)…", len(all_tickers), MAX_TICKERS)
     for i, symbol in enumerate(all_tickers):
