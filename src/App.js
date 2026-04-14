@@ -2045,20 +2045,32 @@ const PositionCalc = ({ ibkrThemesData }) => {
     setLod(null);
     try {
       const now = Math.floor(Date.now() / 1000);
-      const from = now - 90 * 86400;
-      const [quoteRes, atrRes] = await Promise.all([
+      const from = now - 60 * 86400; // 60 days for ATR-14 candles
+      const [quoteRes, candleRes] = await Promise.all([
         fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`),
-        fetch(`https://finnhub.io/api/v1/indicator?symbol=${s}&resolution=D&from=${from}&to=${now}&indicator=atr&timeperiod=14&token=${FINNHUB_KEY}`)
+        fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${s}&resolution=D&from=${from}&to=${now}&token=${FINNHUB_KEY}`)
       ]);
       const quoteData = await quoteRes.json();
-      const atrData = await atrRes.json();
+      const candleData = await candleRes.json();
+
+      // LOD from quote
       const low = quoteData?.l;
       if (low != null && low > 0) setLod(parseFloat(low.toFixed(2)));
       else setLodError(true);
-      const atrValues = atrData?.atr;
-      if (atrValues?.length > 0) {
-        const latestAtr = atrValues[atrValues.length - 1];
-        if (latestAtr != null && latestAtr > 0) setAtr(latestAtr.toFixed(2));
+
+      // ATR-14 calculated from daily candles
+      if (candleData?.s === 'ok' && candleData.h?.length >= 15) {
+        const { h, l, c } = candleData;
+        const trs = [];
+        for (let i = 1; i < h.length; i++) {
+          trs.push(Math.max(h[i] - l[i], Math.abs(h[i] - c[i - 1]), Math.abs(l[i] - c[i - 1])));
+        }
+        // Wilder's smoothing: seed with simple average of first 14, then smooth
+        let atr14 = trs.slice(0, 14).reduce((a, b) => a + b, 0) / 14;
+        for (let i = 14; i < trs.length; i++) {
+          atr14 = (atr14 * 13 + trs[i]) / 14;
+        }
+        setAtr(atr14.toFixed(2));
       }
     } catch {
       setLodError(true);
