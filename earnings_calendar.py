@@ -142,12 +142,25 @@ def _top20_tickers() -> list[str]:
 
 # ─── Source 0: TradingView Screener (broad, 7-day reliable) ──────────────────
 
+def _tv_time_of_day(ts_secs: float) -> str:
+    """Derive BMO/AMC from TradingView earnings timestamp (UTC seconds)."""
+    try:
+        dt_et = datetime.fromtimestamp(ts_secs, tz=timezone.utc).astimezone(ET)
+        h = dt_et.hour
+        if h < 12:
+            return "BMO"
+        if h >= 16:
+            return "AMC"
+    except Exception:
+        pass
+    return ""
+
+
 def _fetch_tradingview_screener() -> list[dict]:
     """
     Primary broad source: TradingView screener filtered to stocks with
     earnings dates within the next 7 days.  Works on weekends / holidays.
-    Returns tickers with date, time_of_day (empty — TV doesn't expose BMO/AMC),
-    and basic price/volume data that enrichment will fill in.
+    Derives BMO/AMC from the embedded timestamp (pre-market = BMO, post = AMC).
     """
     results: list[dict] = []
     try:
@@ -192,7 +205,8 @@ def _fetch_tradingview_screener() -> list[dict]:
             if not raw_ts:
                 continue
             try:
-                d = datetime.fromtimestamp(float(raw_ts), tz=timezone.utc).date()
+                ts_f = float(raw_ts)
+                d    = datetime.fromtimestamp(ts_f, tz=timezone.utc).date()
             except Exception:
                 continue
             if d < TODAY_ET or d > WEEK_END:
@@ -202,7 +216,7 @@ def _fetch_tradingview_screener() -> list[dict]:
                 "ticker":       ticker,
                 "company":      "",
                 "date":         d.isoformat(),
-                "time_of_day":  "",
+                "time_of_day":  _tv_time_of_day(ts_f),
                 "eps_estimate": None,
                 "source":       "tradingview",
             })
@@ -474,6 +488,22 @@ def _enrich_with_yfinance(records: list[dict]) -> list[dict]:
             except Exception:
                 pass
 
+            # ── EPS estimate + Revenue estimate from yfinance calendar ──────────
+            eps_estimate = rec.get("eps_estimate")   # may already have from source
+            rev_est      = None
+            try:
+                cal = t.calendar
+                if cal:
+                    if eps_estimate is None:
+                        eps_estimate = _safe_float(
+                            cal.get("Earnings Average") or cal.get("Earnings High")
+                        )
+                    rev_est = _safe_float(
+                        cal.get("Revenue Average") or cal.get("Revenue High"), ndigits=0
+                    )
+            except Exception:
+                pass
+
             # ── EPS actual + surprise from earnings_dates ────────────────────
             eps_act      = None
             eps_surp_pct = None
@@ -491,12 +521,16 @@ def _enrich_with_yfinance(records: list[dict]) -> list[dict]:
                             eps_act = _safe_float(row[rep_col])
                         if surp_col:
                             eps_surp_pct = _safe_float(row[surp_col])
+                        # Also grab EPS estimate from earnings_dates if still missing
+                        if eps_estimate is None:
+                            est_col = next((c for c in past.columns if "estimate" in c.lower()), None)
+                            if est_col:
+                                eps_estimate = _safe_float(row[est_col])
             except Exception:
                 pass
 
             # ── Revenue actual from quarterly_financials ─────────────────────
             rev_act      = None
-            rev_est      = None
             rev_surp_pct = None
             try:
                 qf = t.quarterly_financials
@@ -512,6 +546,10 @@ def _enrich_with_yfinance(records: list[dict]) -> list[dict]:
             except Exception:
                 pass
 
+            # ── Revenue surprise % ────────────────────────────────────────────
+            if rev_act and rev_est and rev_est != 0:
+                rev_surp_pct = round((rev_act - rev_est) / abs(rev_est) * 100, 2)
+
             # ── Dollar volume ────────────────────────────────────────────────
             dollar_vol = None
             if price and avg_vol_i:
@@ -519,17 +557,18 @@ def _enrich_with_yfinance(records: list[dict]) -> list[dict]:
 
             enriched.append({
                 **rec,
-                "company":      company,
-                "mkt_cap":      mkt_cap,
-                "price":        price,
-                "avg_volume":   avg_vol_i,
-                "adr_pct":      adr_pct,
+                "company":       company,
+                "mkt_cap":       mkt_cap,
+                "price":         price,
+                "avg_volume":    avg_vol_i,
+                "adr_pct":       adr_pct,
                 "dollar_volume": dollar_vol,
-                "eps_act":      eps_act,
-                "eps_surp_pct": eps_surp_pct,
-                "rev_est":      rev_est,
-                "rev_act":      rev_act,
-                "rev_surp_pct": rev_surp_pct,
+                "eps_estimate":  eps_estimate,
+                "eps_act":       eps_act,
+                "eps_surp_pct":  eps_surp_pct,
+                "rev_est":       rev_est,
+                "rev_act":       rev_act,
+                "rev_surp_pct":  rev_surp_pct,
             })
             time.sleep(0.4)   # light rate-limiting
 

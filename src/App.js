@@ -3812,7 +3812,7 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
 
         {/* Footer */}
         <div className="border-t border-zinc-800/60 px-4 py-2 flex-shrink-0 flex items-center justify-between">
-          <span className="text-[10px] text-zinc-700">Powered by Gemini 2.5 Flash · Based on latest available earnings data</span>
+          <span className="text-[10px] text-zinc-700">Powered by Gemini 2.0 Flash · Based on latest available earnings data</span>
           <a href={`https://www.tradingview.com/chart/?symbol=${stock.ticker}`}
              target="_blank" rel="noopener noreferrer"
              className="text-[10px] text-zinc-500 hover:text-cyan-400 transition-colors flex items-center gap-1">
