@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Fix for Python 3.10+: ib_insync's eventkit calls get_event_loop() at import time
+# which raises RuntimeError if no loop exists. Create one before importing ib_insync.
+import asyncio
+asyncio.set_event_loop(asyncio.new_event_loop())
+
 """
 IBKR TWS WebSocket Bridge — ibkr_ws_server.py
 ==============================================
