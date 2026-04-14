@@ -140,6 +140,81 @@ def _top20_tickers() -> list[str]:
         return []
 
 
+# ─── Source 0: TradingView Screener (broad, 7-day reliable) ──────────────────
+
+def _fetch_tradingview_screener() -> list[dict]:
+    """
+    Primary broad source: TradingView screener filtered to stocks with
+    earnings dates within the next 7 days.  Works on weekends / holidays.
+    Returns tickers with date, time_of_day (empty — TV doesn't expose BMO/AMC),
+    and basic price/volume data that enrichment will fill in.
+    """
+    results: list[dict] = []
+    try:
+        from tradingview_screener import Query, col
+
+        # earnings_release_next_date is stored as Unix timestamp (seconds UTC)
+        today_ts    = int(datetime.combine(TODAY_ET,    datetime.min.time()).replace(tzinfo=timezone.utc).timestamp())
+        week_end_ts = int(datetime.combine(WEEK_END + timedelta(days=1), datetime.min.time()).replace(tzinfo=timezone.utc).timestamp())
+
+        _, df = (
+            Query()
+            .select(
+                "name",
+                "earnings_release_next_date",
+                "close",
+                "market_cap_basic",
+                "average_volume_10d_calc",
+            )
+            .where(
+                col("earnings_release_next_date") >= today_ts,
+                col("earnings_release_next_date") < week_end_ts,
+                col("market_cap_basic") >= 1e9,          # $1B+ mkt cap
+                col("close") >= 5,                        # price ≥ $5
+                col("average_volume_10d_calc") >= 100_000,
+                col("type").isin(["stock", "dr"]),        # exclude ETFs
+            )
+            .order_by("market_cap_basic", ascending=False)
+            .limit(300)
+            .get_scanner_data()
+        )
+
+        if df is None or df.empty:
+            logger.info("TradingView screener: 0 earnings entries")
+            return results
+
+        for _, row in df.iterrows():
+            ticker = str(row.get("name", "")).strip().upper()
+            if not ticker or not re.match(r"^[A-Z]{1,5}$", ticker):
+                continue
+
+            raw_ts = row.get("earnings_release_next_date")
+            if not raw_ts:
+                continue
+            try:
+                d = datetime.fromtimestamp(float(raw_ts), tz=timezone.utc).date()
+            except Exception:
+                continue
+            if d < TODAY_ET or d > WEEK_END:
+                continue
+
+            results.append({
+                "ticker":       ticker,
+                "company":      "",
+                "date":         d.isoformat(),
+                "time_of_day":  "",
+                "eps_estimate": None,
+                "source":       "tradingview",
+            })
+
+        logger.info("TradingView screener: %d earnings entries", len(results))
+
+    except Exception as exc:
+        logger.error("TradingView screener earnings fetch failed: %s", exc)
+
+    return results
+
+
 # ─── Source 1: Finviz calendar ────────────────────────────────────────────────
 
 _MONTH_MAP = {m: i for i, m in enumerate(
@@ -314,7 +389,7 @@ def _fetch_yfinance_calendar(tickers: list[str]) -> list[dict]:
 
 def _merge(*source_lists) -> dict[str, dict]:
     """Merge sources in priority order; higher-priority sources win."""
-    priority = {"ibkr": 3, "finviz": 2, "yfinance": 1}
+    priority = {"ibkr": 4, "finviz": 3, "tradingview": 2, "yfinance": 1}
     merged: dict[str, dict] = {}
     for items in source_lists:
         for item in items:
@@ -504,13 +579,16 @@ def _apply_filters(records: list[dict]) -> list[dict]:
 
 def run() -> dict:
     # ── 1. Fetch all sources ─────────────────────────────────────────────────
-    fv_data   = _fetch_finviz_calendar()
-    ibkr_data = _fetch_ibkr()
+    tv_data   = _fetch_tradingview_screener()      # broad, reliable, 7-day
+    fv_data   = _fetch_finviz_calendar()           # adds BMO/AMC + EPS est
+    ibkr_data = _fetch_ibkr()                      # live data if available
     top20     = _top20_tickers()
-    yf_cal    = _fetch_yfinance_calendar(top20)
+    yf_cal    = _fetch_yfinance_calendar(top20)    # gap-fill for RS leaders
 
-    # ── 2. Merge (Finviz primary, IBKR overrides, yfinance fills gaps) ───────
-    merged = _merge(yf_cal, fv_data, ibkr_data)   # highest priority last
+    # ── 2. Merge — highest priority last wins for shared fields ───────────────
+    # Priority: IBKR (4) > Finviz (3) > TradingView (2) > yfinance (1)
+    # Finviz fills BMO/AMC + EPS estimate on top of TV's broad ticker list
+    merged = _merge(yf_cal, tv_data, fv_data, ibkr_data)
     logger.info("Merged: %d unique tickers", len(merged))
 
     records = sorted(merged.values(), key=lambda r: (r["date"], r["ticker"]))

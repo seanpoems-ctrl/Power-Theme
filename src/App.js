@@ -3670,7 +3670,7 @@ const ImpactBars = ({ impact }) => {
 const EARNINGS_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
 
 async function fetchEarningsAnalysis(ticker, company, eps_estimate, eps_act, eps_surp_pct, rev_est, rev_act, rev_surp_pct, mkt_cap) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-04-17:generateContent?key=${EARNINGS_GEMINI_KEY}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${EARNINGS_GEMINI_KEY}`;
   const fmtV = v => v != null ? v : "N/A";
   const prompt = `You are a senior equity research analyst. Perform a comprehensive post-earnings analysis for ${company} (${ticker}).
 
