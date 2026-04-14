@@ -167,42 +167,25 @@ async def subscribe_all(symbols_ranked: list[tuple[str, int]]) -> None:
             log.warning("  ✗ internal %s: %s", spec["key"], exc)
         await asyncio.sleep(0.05)
 
-    # 2. Stock tickers: top MAX_LIVE by RS get live data; remainder get delayed
-    live_slots  = MAX_LIVE
-    live_tickers  = [s for s, _ in symbols_ranked[:live_slots]]
-    delay_tickers = [s for s, _ in symbols_ranked[live_slots:]]
+    # 2. Stock tickers — use delayed data (type 3) to avoid "competing live session" errors.
+    #    Delayed = 15-min lag, free on all IBKR accounts, no session conflicts.
+    #    Switch to reqMarketDataType(1) here if you have a dedicated live data subscription.
+    ib.reqMarketDataType(3)
 
-    # Request live data type (1=live, 3=delayed)
-    ib.reqMarketDataType(1)
-
-    log.info("Subscribing %d LIVE + %d DELAYED stock tickers…", len(live_tickers), len(delay_tickers))
-    for i, symbol in enumerate(live_tickers):
+    all_tickers = [s for s, _ in symbols_ranked]
+    log.info("Subscribing %d tickers (delayed data)…", len(all_tickers))
+    for i, symbol in enumerate(all_tickers):
         try:
             contract = Stock(symbol, "SMART", "USD")
             ib.reqMktData(contract, "", False, False)
         except Exception as exc:
-            log.warning("  ✗ live %s: %s", symbol, exc)
+            log.warning("  ✗ %s: %s", symbol, exc)
         if i % 25 == 24:
             await asyncio.sleep(0.3)
         else:
             await asyncio.sleep(0.02)
 
-    # Switch to delayed for the remaining tickers
-    if delay_tickers:
-        ib.reqMarketDataType(3)
-        for i, symbol in enumerate(delay_tickers):
-            try:
-                contract = Stock(symbol, "SMART", "USD")
-                ib.reqMktData(contract, "", False, False)
-            except Exception as exc:
-                log.warning("  ✗ delayed %s: %s", symbol, exc)
-            if i % 25 == 24:
-                await asyncio.sleep(0.3)
-            else:
-                await asyncio.sleep(0.02)
-        ib.reqMarketDataType(1)  # restore default
-
-    log.info("All subscriptions placed.")
+    log.info("All subscriptions placed (%d tickers + internals).", len(all_tickers))
 
 
 async def ibkr_connect(symbols_ranked: list[tuple[str, int]]) -> bool:
