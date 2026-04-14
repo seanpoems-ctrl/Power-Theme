@@ -1,57 +1,57 @@
 {
-  "generated_at": "April 14, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "April 14, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6886.24,
-      "change": 69.35,
-      "change_pct": 1.02
+      "price": 6967.38,
+      "change": 81.14,
+      "change_pct": 1.18
     },
     {
       "label": "Nasdaq 100",
-      "price": 25383.72,
-      "change": 267.38,
-      "change_pct": 1.06
+      "price": 25842.0,
+      "change": 458.28,
+      "change_pct": 1.81
     },
     {
       "label": "VIX",
-      "price": 18.28,
-      "change": -0.84,
+      "price": 18.36,
+      "change": -0.76,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.3,
-      "change": -0.02,
+      "price": 4.26,
+      "change": -0.04,
       "change_pct": null,
-      "trend_label": "Stable"
+      "trend_label": "Falling"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 57877.39,
-      "change_pct": 2.43
+      "price": 56502.77,
+      "change_pct": -0.74
     },
     "dax": {
       "label": "DAX",
-      "price": 23970.78,
-      "change_pct": 0.96
+      "price": 24044.22,
+      "change_pct": 1.27
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10590.8,
-      "change_pct": 0.07
+      "price": 10609.06,
+      "change_pct": 0.25
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 55.1,
-    "mmth": 57.1,
+    "s5fi": 57.8,
+    "mmth": 60.2,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Positive Momentum / Broad Strength",
+  "mood": "Strong Risk-On / Cyclical Leadership",
   "analysis": {
-    "analysis_para1": "Global markets are showing robust strength this morning, with the Nikkei 225 leading the charge up +2.43%, followed by a solid +0.96% gain in the DAX. While the FTSE 100 saw a modest +0.07% rise, the overall sentiment points to a risk-on environment. US futures are reflecting this positive momentum, with the S&P 500 up +1.02% and Nasdaq 100 gaining +1.06% pre-market. The 10Y yield remains stable at 4.30%, indicating no immediate credit market concerns, and underlying US breadth metrics at 55.1% (S5FI) and 57.1% (MMTH) confirm a healthy majority of stocks are participating in the broader market advance.",
-    "analysis_para2": "With S&P 500 futures trading significantly higher at 6886.24, the mechanical plan is to confirm strength if the market opens and holds above this level, signaling continuation. Initial resistance could emerge around the 6900 psychological mark, where a sustained breakout would confirm strong buying conviction. Conversely, a failure to maintain momentum and a dip below 6850 could indicate weakness, prompting a reduction in risk, while a decisive break below 6800 would suggest a shift in sentiment and call for a defensive posture. Focus on price action in the opening hour to validate the pre-market gains.",
-    "technical_signal": "No reversal pattern confirmed yet. The market is showing strong positive momentum in pre-market trading, suggesting a continuation of the upward trend.",
+    "analysis_para1": "Global markets presented a mixed picture with the Nikkei 225 slipping by 0.74%, while European indices like the DAX (+1.27%) and FTSE 100 (+0.25%) showed resilience. In the US, the 10-year Treasury yield continued its decline to 4.26%, providing a tailwind for equities. Market breadth remained constructive, with 57.8% of S&P 500 stocks above their 50-day moving average (S5FI) and 60.2% above their 200-day (MMTH). These figures, combined with the S&P 500's 1.18% surge and Nasdaq 100's 1.81% jump, suggest a healthy underlying participation amidst a supportive interest rate environment.",
+    "analysis_para2": "The mechanical plan suggests maintaining a risk-on posture given today's robust gains and declining yields. For the S&P 500, holding above the 6900 level would confirm continued momentum, with further upside targets towards 7000. Nasdaq 100's strong showing above 25500 indicates tech leadership, and any pullback towards this level should be monitored for buying opportunities. A critical signal for maintaining this bullish stance is the VIX remaining below 20 and US breadth metrics (S5FI, MMTH) staying above the 50% threshold. Focus should remain on the strong thematic leaders identified, with conviction longs initiating on pullbacks to support or breakouts from consolidations.",
+    "technical_signal": "No reversal pattern confirmed yet. The market exhibited strong bullish momentum today, with major indices closing significantly higher, negating any immediate signs of reversal.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "AXTI, with an RS of 99 and an astounding +198.3% 3-month return, represents strong momentum within the leading Semiconductors theme in a risk-on environment."
+        "reason": "AXTI shows exceptional leadership in Semiconductors with an RS of 99 and an explosive 3-month return of +198.3%, perfectly aligning with the strong risk-on environment and tech leadership."
       },
       {
         "ticker": "TSEM",
         "company": "Tower Semiconductor Ltd",
         "grade": "A",
-        "reason": "TSEM exhibits robust short-term strength with an RS of 98 and a +49.0% 1-month return, making it a high-momentum play in the favored Semiconductors sector."
+        "reason": "TSEM demonstrates robust momentum within the Semiconductor theme with an RS of 98 and a significant 1-month return of +49.0%, indicating strong investor interest in leading growth sectors."
       },
       {
         "ticker": "MRVL",
         "company": "Marvell Technology Inc",
         "grade": "C",
-        "reason": "MRVL, despite a recent +37.7% 1-month gain, carries the lowest RS of 85 among candidates, signaling relative underperformance and potential for distribution in this positive market."
+        "reason": "Despite a positive 1-month return, Marvell's relatively lower RS of 85 and weaker 3-month performance (+23.0%) compared to its semiconductor peers suggest potential underperformance or distribution within a strong sector."
       }
     ]
   }
