@@ -7107,7 +7107,7 @@ const filtered = useMemo(() => {
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
           <aside className="w-[260px] flex-shrink-0 flex flex-col gap-3">
-            <VixFearGaugeV2 vix={data?.vix}/>
+            <VixFearGaugeV2 vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix}/>
             <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData}/>
             <PositionCalc ibkrThemesData={ibkrData}/>
             <AlertRulesCard/>
