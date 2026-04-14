@@ -459,6 +459,143 @@ async def _fetch_filter(filter_key: str) -> dict[str, Any]:
 # Main
 # ---------------------------------------------------------------------------
 
+# ---------------------------------------------------------------------------
+# TradingView screener — ATR Ext + >50 DMA scanner builders
+# ---------------------------------------------------------------------------
+
+def _build_tv_scanners_sync() -> tuple[dict, dict]:
+    """
+    Use TradingView screener to build:
+      - atr_ext    : stocks where |change%| > 10 × (ATR / close × 100)
+      - above50dma : stocks where close > SMA50
+
+    Returns (atr_ext_data, above50dma_data).
+    Runs synchronously; call via asyncio.to_thread in async context.
+    """
+    now = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+
+    empty_atr = {
+        "ok": False, "filter": "atr_ext", "label": "10x ATR Extended",
+        "stocks": [], "count": 0, "fetched_at_utc": now,
+    }
+    empty_dma = {
+        "ok": False, "filter": "above50dma", "label": ">50 DMA",
+        "stocks": [], "count": 0, "fetched_at_utc": now,
+    }
+
+    try:
+        from tradingview_screener import Query, col as tv_col  # type: ignore
+    except ImportError as exc:
+        logger.warning("tradingview_screener not installed: %s", exc)
+        return empty_atr, empty_dma
+
+    try:
+        logger.info("Fetching TradingView screener for ATR Ext / >50 DMA scanners …")
+        _, df = (
+            Query()
+            .select(
+                "name", "description", "close", "change", "ATR", "SMA50",
+                "industry", "market_cap_basic", "average_volume_10d_calc", "sector",
+            )
+            .where(
+                tv_col("close") >= 2,
+                tv_col("average_volume_10d_calc") >= 50_000,
+                tv_col("type").isin(["stock", "dr"]),
+                tv_col("exchange").isin(["NYSE", "NASDAQ", "AMEX", "NYSE ARCA"]),
+            )
+            .limit(10_000)
+            .get_scanner_data()
+        )
+    except Exception as exc:
+        logger.warning("TradingView screener fetch failed: %s", exc)
+        return empty_atr, empty_dma
+
+    if df is None or getattr(df, "empty", True):
+        logger.warning("TradingView screener returned empty result")
+        return empty_atr, empty_dma
+
+    logger.info("TradingView screener: %d rows fetched", len(df))
+
+    # Shared SPX benchmarks (reused by both outputs)
+    spx = _fetch_spx_benchmarks()
+
+    # Clean up — require close, change, ATR
+    df = df.dropna(subset=["name", "close", "change", "ATR"]).copy()
+    df = df[df["close"] > 0].copy()
+    df["atr_pct"] = df["ATR"] / df["close"] * 100  # ATR as % of price
+
+    def _cap_b(row):
+        v = row.get("market_cap_basic")
+        try:
+            return round(float(v) / 1e9, 3) if v is not None and not pd.isna(v) else None
+        except Exception:
+            return None
+
+    def _base(row):
+        industry = str(row.get("industry") or row.get("sector") or "")
+        return {
+            "ticker":      str(row["name"]),
+            "company":     str(row.get("description") or ""),
+            "industry":    industry,
+            "price":       round(float(row["close"]), 2),
+            "change_pct":  round(float(row["change"]), 2),
+            "adr_pct":     round(float(row["atr_pct"]), 1),
+            "market_cap_b": _cap_b(row),
+        }
+
+    # ── ATR Ext scanner ──────────────────────────────────────────────────────
+    df_atr = df.copy()
+    df_atr["atr_ext_val"] = df_atr["change"].abs() / df_atr["atr_pct"]
+    df_atr = df_atr[df_atr["atr_ext_val"] > 10].copy()
+    df_atr = df_atr.sort_values("atr_ext_val", ascending=False)
+
+    atr_stocks = []
+    for _, row in df_atr.iterrows():
+        s = _base(row)
+        s["atr_ext_val"] = round(float(row["atr_ext_val"]), 2)
+        atr_stocks.append(s)
+
+    logger.info("ATR Ext scanner: %d stocks (|change%%| > 10×ATR%%)", len(atr_stocks))
+    atr_data = {
+        "ok": True,
+        "filter": "atr_ext",
+        "label":  "10x ATR Extended",
+        "count":  len(atr_stocks),
+        "stocks": atr_stocks,
+        "spx_benchmarks": spx,
+        "fetched_at_utc": now,
+    }
+
+    # ── >50 DMA scanner ──────────────────────────────────────────────────────
+    df_dma = df.dropna(subset=["SMA50"]).copy()
+    df_dma = df_dma[df_dma["close"] > df_dma["SMA50"]].copy()
+    df_dma["above50dma_pct"] = ((df_dma["close"] - df_dma["SMA50"]) / df_dma["SMA50"] * 100)
+    df_dma = df_dma.sort_values("above50dma_pct", ascending=False)
+
+    dma_stocks = []
+    for _, row in df_dma.iterrows():
+        s = _base(row)
+        s["above50dma_pct"] = round(float(row["above50dma_pct"]), 1)
+        dma_stocks.append(s)
+
+    logger.info(">50 DMA scanner: %d stocks (close > SMA50)", len(dma_stocks))
+    dma_data = {
+        "ok": True,
+        "filter": "above50dma",
+        "label":  ">50 DMA",
+        "count":  len(dma_stocks),
+        "stocks": dma_stocks,
+        "spx_benchmarks": spx,
+        "fetched_at_utc": now,
+    }
+
+    return atr_data, dma_data
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
 async def main() -> None:
     PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
     errors = []
@@ -485,6 +622,25 @@ async def main() -> None:
 
         # polite delay between filters
         await asyncio.sleep(1.0)
+
+    # ── TradingView-based scanners: ATR Ext + >50 DMA ────────────────────────
+    logger.info("=== Building TradingView scanners: atr_ext + above50dma ===")
+    t0 = monotonic()
+    try:
+        atr_data, dma_data = await asyncio.to_thread(_build_tv_scanners_sync)
+    except Exception as exc:
+        logger.error("TradingView scanners failed: %s", exc)
+        errors.extend(["atr_ext", "above50dma"])
+        atr_data = {"ok": False, "filter": "atr_ext",    "label": "10x ATR Extended",
+                    "stocks": [], "count": 0, "fetched_at_utc": datetime.now(timezone.utc).isoformat()}
+        dma_data = {"ok": False, "filter": "above50dma", "label": ">50 DMA",
+                    "stocks": [], "count": 0, "fetched_at_utc": datetime.now(timezone.utc).isoformat()}
+
+    for key, data in [("atr_ext", atr_data), ("above50dma", dma_data)]:
+        out = PUBLIC_DIR / f"breadth_stocks_{key}.json"
+        out.write_text(json.dumps(data, indent=2), encoding="utf-8")
+        logger.info("[%s] wrote %s (%d stocks, %.1fs)",
+                    key, out.name, data["count"], monotonic() - t0)
 
     if errors:
         logger.warning("Filters with errors: %s", errors)

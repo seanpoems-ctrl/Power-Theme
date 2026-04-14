@@ -291,26 +291,48 @@ const CHANGE_COL_LABEL = {
 // Which field to read for the last (perf) column, keyed by scanner filter id.
 // For 34D scanners: perf_34d is not yet in the schema; perf_1m is used as the
 // closest approximation until breadth_stocks_builder.py provides perf_34d.
+// For custom-column scanners (atr_ext, above50dma) this is used only for RS calc.
 const PERF_FIELD = {
-  up4:     "change_pct",
-  dn4:     "change_pct",
-  up25q:   "perf_3m",
-  dn25q:   "perf_3m",
-  up25m:   "perf_1m",
-  dn25m:   "perf_1m",
-  up50m:   "perf_1m",
-  dn50m:   "perf_1m",
-  up13_34: "perf_34d", // TODO: replace with dedicated field once schema has it
-  dn13_34: "perf_34d",
+  up4:       "change_pct",
+  dn4:       "change_pct",
+  up25q:     "perf_3m",
+  dn25q:     "perf_3m",
+  up25m:     "perf_1m",
+  dn25m:     "perf_1m",
+  up50m:     "perf_1m",
+  dn50m:     "perf_1m",
+  up13_34:   "perf_34d", // TODO: replace with dedicated field once schema has it
+  dn13_34:   "perf_34d",
+  atr_ext:   "change_pct",  // RS uses 1D change for these TV-based scanners
+  above50dma:"change_pct",
 };
 
 // Which spx_benchmarks field maps to each scanner's primary perf period
 const SPX_FIELD = {
-  up4:     "spx_1d", dn4:     "spx_1d",
-  up25q:   "spx_3m", dn25q:   "spx_3m",
-  up25m:   "spx_1m", dn25m:   "spx_1m",
-  up50m:   "spx_1m", dn50m:   "spx_1m",
-  up13_34: "spx_34d", dn13_34: "spx_34d",
+  up4:       "spx_1d", dn4:     "spx_1d",
+  up25q:     "spx_3m", dn25q:   "spx_3m",
+  up25m:     "spx_1m", dn25m:   "spx_1m",
+  up50m:     "spx_1m", dn50m:   "spx_1m",
+  up13_34:   "spx_34d", dn13_34: "spx_34d",
+  atr_ext:   "spx_1d",
+  above50dma:"spx_1d",
+};
+
+// Scanners that replace the standard $Vol + Change% columns with a single
+// custom metric column.  Key = filter id.
+const CUSTOM_COL = {
+  atr_ext: {
+    key:   "atr_ext_val",
+    label: "ATR Ext",
+    fmt:   (v) => v != null ? `${v.toFixed(2)}×` : "—",
+    cls:   "text-purple-300",
+  },
+  above50dma: {
+    key:   "above50dma_pct",
+    label: ">50DMA",
+    fmt:   (v) => v != null ? `${v.toFixed(1)}%` : "—",
+    cls:   "text-sky-300",
+  },
 };
 
 function calcRS(stock, perfField, spxReturn) {
@@ -592,12 +614,23 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
   const changeColLabel = CHANGE_COL_LABEL[filter] ?? "Change%";
   const perfField = PERF_FIELD[filter] ?? "change_pct";
   const spxReturn = spxData?.[SPX_FIELD[filter]] ?? null;
+  const customCol = CUSTOM_COL[filter] ?? null;
 
-  // Build full column list with dynamic perf column appended
-  const sortCols = [
-    ...BASE_SORT_COLS,
-    { key: perfField, label: null, align: "right", numeric: true },
-  ];
+  // Build full column list:
+  // — custom-column scanners (atr_ext, above50dma): Ticker, Company, RS, ADR%, <custom>
+  // — standard scanners: Ticker, Company, RS, ADR%, $Vol, Change%
+  const sortCols = customCol
+    ? [
+        { key: "ticker",        label: "Ticker",        align: "left",  numeric: false },
+        { key: "company",       label: "Company",       align: "left",  numeric: false },
+        { key: "rs",            label: "RS",            align: "right", numeric: true  },
+        { key: "adr_pct",       label: "ADR%",          align: "right", numeric: true  },
+        { key: customCol.key,   label: customCol.label, align: "right", numeric: true  },
+      ]
+    : [
+        ...BASE_SORT_COLS,
+        { key: perfField, label: null, align: "right", numeric: true },
+      ];
 
   // Fixed handleSort — reads sortKey/sortDir directly from closure, no functional updater side-effects
   const handleSort = (key) => {
@@ -633,7 +666,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
       const cmp = typeof av === "string" ? av.localeCompare(bv) : av - bv;
       return sortDir === "asc" ? cmp : -cmp;
     });
-  }, [stocks, sortKey, sortDir, perfField, spxReturn]);
+  }, [stocks, sortKey, sortDir, perfField, spxReturn, customCol]);
 
   if (!stocks.length) {
     return <p className="py-12 text-center text-sm text-zinc-500">No stocks match the current filters.</p>;
@@ -689,12 +722,20 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
               <td className="px-2 py-1.5 text-right font-mono text-zinc-300">
                 {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
               </td>
-              <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
-                {s.dollar_volume || "—"}
-              </td>
-              <td className={`px-2 py-1.5 text-right font-mono font-semibold ${changeCls(getPerfValue(s, perfField))}`}>
-                {fmtPct(getPerfValue(s, perfField))}
-              </td>
+              {customCol ? (
+                <td className={`px-2 py-1.5 text-right font-mono font-semibold ${customCol.cls}`}>
+                  {customCol.fmt(s[customCol.key])}
+                </td>
+              ) : (
+                <>
+                  <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
+                    {s.dollar_volume || "—"}
+                  </td>
+                  <td className={`px-2 py-1.5 text-right font-mono font-semibold ${changeCls(getPerfValue(s, perfField))}`}>
+                    {fmtPct(getPerfValue(s, perfField))}
+                  </td>
+                </>
+              )}
             </tr>
           ))}
         </tbody>
@@ -704,7 +745,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
             <td colSpan={3} className="py-1.5 pr-2 text-right font-mono">
               {stocks.length} stocks
             </td>
-            <td colSpan={4} />
+            <td colSpan={customCol ? 2 : 4} />
           </tr>
         </tfoot>
       </table>
@@ -729,7 +770,7 @@ function groupByIndustry(stocks) {
 }
 
 // GroupRow receives pre-sorted items and the active perf field from GroupView.
-const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockClick, cols, sortKey, sortDir, onSort, spxReturn, countPct, groupRS, filter, onAddToClipboard }) {
+const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockClick, cols, sortKey, sortDir, onSort, spxReturn, countPct, groupRS, filter, onAddToClipboard, customCol }) {
   const [open, setOpen] = useState(false);
   const tickers = items.map((s) => s.ticker);
 
@@ -794,9 +835,15 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
                   <span className="w-12 text-right font-mono text-zinc-500">
                     {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
                   </span>
-                  <span className={`w-20 text-right font-mono font-semibold ${changeCls(perfVal)}`}>
-                    {fmtPct(perfVal)}
-                  </span>
+                  {customCol ? (
+                    <span className={`w-20 text-right font-mono font-semibold ${customCol.cls}`}>
+                      {customCol.fmt(s[customCol.key])}
+                    </span>
+                  ) : (
+                    <span className={`w-20 text-right font-mono font-semibold ${changeCls(perfVal)}`}>
+                      {fmtPct(perfVal)}
+                    </span>
+                  )}
                 </div>
               );
             })}
@@ -817,6 +864,7 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
   const changeColLabel = CHANGE_COL_LABEL[filter] ?? "Change%";
   const spxReturn      = spxData?.[SPX_FIELD[filter]] ?? null;
   const totalCount     = stocks.length;
+  const customCol      = CUSTOM_COL[filter] ?? null;
 
   // Fixed handleSort (stock-level, within groups)
   const handleSort = (key) => {
@@ -901,13 +949,21 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
   }
 
   // Column config for the stock-row header (mirrors the expanded row layout)
-  const GROUP_STOCK_COLS = [
-    { key: "ticker",   label: "Ticker",       align: "left",  cls: "w-14" },
-    { key: "company",  label: "Company",       align: "left",  cls: "flex-1" },
-    { key: "rs",       label: "RS",            align: "right", cls: "w-12" },
-    { key: "adr_pct",  label: "ADR%",          align: "right", cls: "w-12" },
-    { key: perfField,  label: changeColLabel,  align: "right", cls: "w-20" },
-  ];
+  const GROUP_STOCK_COLS = customCol
+    ? [
+        { key: "ticker",       label: "Ticker",       align: "left",  cls: "w-14" },
+        { key: "company",      label: "Company",      align: "left",  cls: "flex-1" },
+        { key: "rs",           label: "RS",           align: "right", cls: "w-12" },
+        { key: "adr_pct",      label: "ADR%",         align: "right", cls: "w-12" },
+        { key: customCol.key,  label: customCol.label, align: "right", cls: "w-20" },
+      ]
+    : [
+        { key: "ticker",   label: "Ticker",      align: "left",  cls: "w-14" },
+        { key: "company",  label: "Company",     align: "left",  cls: "flex-1" },
+        { key: "rs",       label: "RS",          align: "right", cls: "w-12" },
+        { key: "adr_pct",  label: "ADR%",        align: "right", cls: "w-12" },
+        { key: perfField,  label: changeColLabel, align: "right", cls: "w-20" },
+      ];
 
   return (
     <div>
@@ -939,6 +995,7 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
           groupRS={g.groupRS}
           filter={filter}
           onAddToClipboard={onAddToClipboard}
+          customCol={customCol}
         />
       ))}
     </div>

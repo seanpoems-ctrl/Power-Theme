@@ -18,7 +18,7 @@ import BreadthStockModal from "./BreadthStockModal";
 // Constants
 // ---------------------------------------------------------------------------
 
-const BULLISH_FILTERS = new Set(["up4", "up25q", "up25m", "up50m", "up13_34"]);
+const BULLISH_FILTERS = new Set(["up4", "up25q", "up25m", "up50m", "up13_34", "above50dma"]);
 
 // ---------------------------------------------------------------------------
 // WatchlistClipboard panel
@@ -399,15 +399,33 @@ const BreadthTable = memo(function BreadthTable({ rows, onOpenModal }) {
                 {cell("up_13_34d",   fmtN(r.up_13_34d))}
                 {cell("down_13_34d", fmtN(r.down_13_34d))}
 
-                {/* 10x ATR Ext — not clickable */}
-                <td className="px-1 py-1 text-right text-purple-300 whitespace-nowrap">
+                {/* 10x ATR Ext — clickable on latest row */}
+                <td
+                  className={`px-1 py-1 text-right whitespace-nowrap font-mono
+                    ${isLatest && r.atr_10x_ext != null
+                      ? "cursor-pointer underline decoration-dotted underline-offset-2 hover:text-purple-100 text-purple-300"
+                      : "text-purple-300"}`}
+                  onClick={isLatest && r.atr_10x_ext != null
+                    ? () => onOpenModal("atr_ext", "10x ATR Extended")
+                    : undefined}
+                  title={isLatest && r.atr_10x_ext != null ? "View 10x ATR Extended stocks" : undefined}
+                >
                   {r.atr_10x_ext != null ? fmtN(r.atr_10x_ext) : "—"}
                 </td>
-                {/* >50 DMA — red cell fill when < 30% */}
-                <td className={`px-1 py-1 text-right whitespace-nowrap font-mono
-                  ${r.above_50dma_pct != null && r.above_50dma_pct < 30
-                    ? "bg-rose-900/70 text-rose-200 font-semibold"
-                    : "text-sky-300"}`}>
+                {/* >50 DMA — red cell fill when < 30%; clickable on latest row */}
+                <td
+                  className={`px-1 py-1 text-right whitespace-nowrap font-mono
+                    ${r.above_50dma_pct != null && r.above_50dma_pct < 30
+                      ? "bg-rose-900/70 text-rose-200 font-semibold"
+                      : "text-sky-300"}
+                    ${isLatest && r.above_50dma_pct != null
+                      ? "cursor-pointer underline decoration-dotted underline-offset-2"
+                      : ""}`}
+                  onClick={isLatest && r.above_50dma_pct != null
+                    ? () => onOpenModal("above50dma", ">50 DMA")
+                    : undefined}
+                  title={isLatest && r.above_50dma_pct != null ? "View stocks above 50 DMA" : undefined}
+                >
                   {r.above_50dma_pct != null ? `${r.above_50dma_pct.toFixed(1)}%` : "—"}
                 </td>
                 {/* Share Universe */}
@@ -609,8 +627,8 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
       <div className="border-t border-gray-800 px-4 py-2">
         <p className="text-xs text-slate-600">
           Data from Stockbee Market Monitor spreadsheet. Refreshed daily after market close.
-          Click any cell on the latest row to drill into individual stocks.
-          10x ATR Ext and &gt;50 DMA columns appear when available.
+          Click any highlighted cell on the latest row to drill into individual stocks.
+          10x ATR Ext and &gt;50 DMA are live from TradingView screener.
         </p>
       </div>
 
