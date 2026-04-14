@@ -46,7 +46,7 @@ TWS_PORT   = int(os.getenv("TWS_PORT",  "7497"))   # 7497=TWS live | 7496=paper 
 CLIENT_ID  = int(os.getenv("TWS_CLIENT_ID", "20")) # must differ from other scripts (ibkr_client uses 1)
 WS_PORT    = int(os.getenv("WS_PORT",   "5003"))
 DATA_PATH  = Path(os.getenv("THEMATIC_JSON", "public/thematic_data.json"))
-MAX_LIVE   = 95   # live subscriptions for stock tickers (internals use ~5 slots)
+MAX_TICKERS = 85  # max stock ticker subscriptions (IBKR delayed limit ~100, keep buffer)
 BROADCAST_INTERVAL = 1.0  # seconds between price broadcasts
 
 logging.basicConfig(
@@ -57,12 +57,11 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 # ── Market internals to always subscribe ─────────────────────────────────────
+# Note: $TICK and $TRIN require a separate IBKR market data subscription — removed for now
 INTERNALS = [
-    {"key": "SPY",   "symbol": "SPY",  "secType": "STK", "exchange": "ARCA",  "currency": "USD"},
-    {"key": "QQQ",   "symbol": "QQQ",  "secType": "STK", "exchange": "NASDAQ","currency": "USD"},
-    {"key": "$VIX",  "symbol": "VIX",  "secType": "IND", "exchange": "CBOE",  "currency": "USD"},
-    {"key": "$TICK", "symbol": "TICK", "secType": "IND", "exchange": "NYSE",  "currency": "USD"},
-    {"key": "$TRIN", "symbol": "TRIN", "secType": "IND", "exchange": "NYSE",  "currency": "USD"},
+    {"key": "SPY",  "symbol": "SPY", "secType": "STK", "exchange": "ARCA",  "currency": "USD"},
+    {"key": "QQQ",  "symbol": "QQQ", "secType": "STK", "exchange": "NASDAQ","currency": "USD"},
+    {"key": "$VIX", "symbol": "VIX", "secType": "IND", "exchange": "CBOE",  "currency": "USD"},
 ]
 
 # ── Global state (single-threaded asyncio — no locks needed) ─────────────────
@@ -172,8 +171,8 @@ async def subscribe_all(symbols_ranked: list[tuple[str, int]]) -> None:
     #    Switch to reqMarketDataType(1) here if you have a dedicated live data subscription.
     ib.reqMarketDataType(3)
 
-    all_tickers = [s for s, _ in symbols_ranked]
-    log.info("Subscribing %d tickers (delayed data)…", len(all_tickers))
+    all_tickers = [s for s, _ in symbols_ranked[:MAX_TICKERS]]
+    log.info("Subscribing %d tickers (delayed data, limit=%d)…", len(all_tickers), MAX_TICKERS)
     for i, symbol in enumerate(all_tickers):
         try:
             contract = Stock(symbol, "SMART", "USD")
