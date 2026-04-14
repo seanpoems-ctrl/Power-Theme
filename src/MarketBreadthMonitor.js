@@ -271,25 +271,80 @@ const BreadthTable = memo(function BreadthTable({ rows, onOpenModal }) {
       <table className="w-full min-w-[1040px] border-collapse text-left">
         <caption className="sr-only">Stockbee Market Monitor breadth history.</caption>
         <thead>
-          <tr className="border-b border-gray-800">
-            <th className="sticky left-0 z-10 bg-gray-900 py-2 pr-3 text-xs font-medium text-emerald-400 whitespace-nowrap">DATE</th>
-            <th className="px-1 py-2 text-xs font-medium text-emerald-400 whitespace-nowrap">UP 4%+</th>
-            <th className="px-1 py-2 text-xs font-medium text-emerald-400 whitespace-nowrap">DN 4%+</th>
-            <th className="px-1 py-2 text-xs font-medium text-emerald-400 whitespace-nowrap">5D R</th>
-            <th className="px-1 py-2 text-xs font-medium text-emerald-400 whitespace-nowrap">10D R</th>
-            <th className="px-1 py-2 text-xs font-medium text-emerald-400 whitespace-nowrap">UP 25% Q</th>
-            <th className="px-1 py-2 text-xs font-medium text-emerald-400 whitespace-nowrap">DN 25% Q</th>
-            <th className="px-1 py-2 text-xs font-medium text-emerald-400 whitespace-nowrap">UP 25% M</th>
-            <th className="px-1 py-2 text-xs font-medium text-emerald-400 whitespace-nowrap">DN 25% M</th>
-            <th className="px-1 py-2 text-xs font-medium text-emerald-400 whitespace-nowrap">UP 50% M</th>
-            <th className="px-1 py-2 text-xs font-medium text-emerald-400 whitespace-nowrap">DN 50% M</th>
-            <th className="px-1 py-2 text-xs font-medium text-emerald-400 whitespace-nowrap">UP 13% 34D</th>
-            <th className="px-1 py-2 text-xs font-medium text-emerald-400 whitespace-nowrap">DN 13% 34D</th>
-            <th className="px-1 py-2 text-xs font-medium text-purple-400 whitespace-nowrap">10x ATR Ext</th>
-            <th className="px-1 py-2 text-xs font-medium text-sky-400 whitespace-nowrap">&gt;50 DMA</th>
-            <th className="px-1 py-2 text-xs font-medium text-amber-400 whitespace-nowrap">Share Universe</th>
-            <th className="px-1 py-2 text-xs font-medium text-amber-400 whitespace-nowrap">T2108</th>
-            <th className="px-1 py-2 text-xs font-medium text-amber-400 whitespace-nowrap">S&amp;P</th>
+          {/* ── Row 1: group headers ────────────────────────────── */}
+          <tr>
+            {/* Date — rowSpan=2 */}
+            <th rowSpan={2}
+                className="sticky left-0 z-10 bg-amber-500 text-black text-xs font-bold px-2 py-1 text-center whitespace-nowrap border border-amber-600 align-middle">
+              Date
+            </th>
+            {/* Primary Breadth Indicators — 4 cols */}
+            <th colSpan={4}
+                className="bg-amber-400 text-black text-xs font-bold px-1 py-1 text-center border border-amber-500">
+              Primary Breadth Indicators
+            </th>
+            {/* Secondary Breadth Indicators — 8 cols */}
+            <th colSpan={8}
+                className="bg-emerald-500 text-black text-xs font-bold px-1 py-1 text-center border border-emerald-600">
+              Secondary Breadth Indicators
+            </th>
+            {/* 10x ATR Ext — rowSpan=2 */}
+            <th rowSpan={2}
+                className="bg-amber-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-pre-line border border-amber-500 align-middle leading-tight">
+              {"10x ATR\nExt."}
+            </th>
+            {/* >50dma — rowSpan=2 */}
+            <th rowSpan={2}
+                className="bg-sky-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-nowrap border border-sky-500 align-middle">
+              {">50dma"}
+            </th>
+            {/* Stock Universe — rowSpan=2 */}
+            <th rowSpan={2}
+                className="bg-violet-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-pre-line border border-violet-500 align-middle leading-tight">
+              {"Stock\nUniverse"}
+            </th>
+            {/* T2108 — rowSpan=2 */}
+            <th rowSpan={2}
+                className="bg-amber-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-nowrap border border-amber-500 align-middle">
+              T2108
+            </th>
+            {/* S&P — rowSpan=2 */}
+            <th rowSpan={2}
+                className="bg-amber-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-nowrap border border-amber-500 align-middle">
+              S&amp;P
+            </th>
+          </tr>
+
+          {/* ── Row 2: individual sub-headers ──────────────────── */}
+          <tr className="border-b border-gray-700">
+            {/* Primary — 4 cols */}
+            {[
+              "Stocks Up\n4%+ Today",
+              "Stocks Down\n4%+ Today",
+              "5 Day\nRatio",
+              "10 Day\nRatio",
+            ].map((label) => (
+              <th key={label}
+                  className="bg-amber-300 text-black text-[10px] font-semibold px-1 py-1 text-center whitespace-pre-line border border-amber-400 leading-tight">
+                {label}
+              </th>
+            ))}
+            {/* Secondary — 8 cols */}
+            {[
+              "Up 25%+\nQuarter",
+              "Down 25%+\nQuarter",
+              "Up 25%+\nMonth",
+              "Down 25%+\nMonth",
+              "Up 50%+\nMonth",
+              "Down 50%+\nMonth",
+              "Up 13%+\n34 Days",
+              "Down 13%+\n34 Days",
+            ].map((label) => (
+              <th key={label}
+                  className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center whitespace-pre-line border border-emerald-400 leading-tight">
+                {label}
+              </th>
+            ))}
           </tr>
         </thead>
         <tbody>
@@ -348,8 +403,11 @@ const BreadthTable = memo(function BreadthTable({ rows, onOpenModal }) {
                 <td className="px-1 py-1 text-right text-purple-300 whitespace-nowrap">
                   {r.atr_10x_ext != null ? fmtN(r.atr_10x_ext) : "—"}
                 </td>
-                {/* >50 DMA */}
-                <td className="px-1 py-1 text-right text-sky-300 whitespace-nowrap">
+                {/* >50 DMA — red cell fill when < 30% */}
+                <td className={`px-1 py-1 text-right whitespace-nowrap font-mono
+                  ${r.above_50dma_pct != null && r.above_50dma_pct < 30
+                    ? "bg-rose-900/70 text-rose-200 font-semibold"
+                    : "text-sky-300"}`}>
                   {r.above_50dma_pct != null ? `${r.above_50dma_pct.toFixed(1)}%` : "—"}
                 </td>
                 {/* Share Universe */}

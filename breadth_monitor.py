@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Any
 
 import httpx
+import pandas as pd
 from bs4 import BeautifulSoup
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
@@ -203,6 +204,66 @@ def _row_to_record(cells: list[str]) -> dict[str, Any] | None:
     }
 
 # ---------------------------------------------------------------------------
+# TradingView screener — compute 10x ATR Ext count and % above 50 DMA
+# ---------------------------------------------------------------------------
+
+def _compute_breadth_extras() -> dict[str, Any]:
+    """
+    Fetch the broad US equity universe from TradingView screener and compute:
+      atr_10x_ext    — count of stocks with |change%| > 10 × (ATR / close × 100)
+      above_50dma_pct — % of stocks where close > SMA50
+
+    Universe: US stocks & DRs, price ≥ $2, avg 10-day vol ≥ 50K shares.
+    Mirrors Stockbee's Worden-T universe (~6 000–7 000 names).
+    """
+    extras: dict[str, Any] = {"atr_10x_ext": None, "above_50dma_pct": None}
+    try:
+        from tradingview_screener import Query, col  # type: ignore
+
+        logger.info("Fetching TradingView screener for breadth extras …")
+        _, df = (
+            Query()
+            .select("name", "close", "change", "ATR", "SMA50")
+            .where(
+                col("close") >= 2,
+                col("average_volume_10d_calc") >= 50_000,
+                col("type").isin(["stock", "dr"]),
+                col("exchange").isin(["NYSE", "NASDAQ", "AMEX", "NYSE ARCA"]),
+            )
+            .limit(10_000)
+            .get_scanner_data()
+        )
+
+        if df is None or df.empty:
+            logger.warning("TradingView screener returned empty result for breadth extras")
+            return extras
+
+        logger.info("TradingView screener returned %d rows for breadth extras", len(df))
+
+        # ── 10x ATR Extension ────────────────────────────────────────────────
+        df_atr = df.dropna(subset=["close", "ATR", "change"]).copy()
+        df_atr = df_atr[df_atr["close"] > 0]
+        if len(df_atr) > 0:
+            df_atr["atr_pct"] = df_atr["ATR"] / df_atr["close"] * 100
+            df_atr["is_ext"]  = df_atr["change"].abs() > 10 * df_atr["atr_pct"]
+            extras["atr_10x_ext"] = int(df_atr["is_ext"].sum())
+            logger.info("10x ATR ext count: %d / %d", extras["atr_10x_ext"], len(df_atr))
+
+        # ── % above 50 DMA ───────────────────────────────────────────────────
+        df_sma = df.dropna(subset=["close", "SMA50"]).copy()
+        if len(df_sma) > 0:
+            above = int((df_sma["close"] > df_sma["SMA50"]).sum())
+            extras["above_50dma_pct"] = round(above / len(df_sma) * 100, 1)
+            logger.info(">50 DMA: %.1f%% (%d / %d)",
+                        extras["above_50dma_pct"], above, len(df_sma))
+
+    except Exception as exc:
+        logger.warning("breadth extras compute failed: %s", exc)
+
+    return extras
+
+
+# ---------------------------------------------------------------------------
 # Fetch & parse
 # ---------------------------------------------------------------------------
 
@@ -251,8 +312,18 @@ def fetch_breadth_monitor(*, timeout: float = 45.0) -> dict[str, Any]:
             rows.append(rec)
 
     rows.sort(key=lambda r: r["date"], reverse=True)
-
     logger.info("Parsed %d breadth rows", len(rows))
+
+    # Enrich the latest row with live TradingView breadth extras (10x ATR ext, >50 DMA).
+    # Only fill fields that the sheet didn't provide (atr_10x_ext / above_50dma_pct are
+    # None for most historical rows since Stockbee only added them recently).
+    if rows:
+        extras = _compute_breadth_extras()
+        if extras["atr_10x_ext"] is not None:
+            rows[0]["atr_10x_ext"] = extras["atr_10x_ext"]
+        if extras["above_50dma_pct"] is not None:
+            rows[0]["above_50dma_pct"] = extras["above_50dma_pct"]
+
     return {
         "ok": True,
         "rows": rows,
