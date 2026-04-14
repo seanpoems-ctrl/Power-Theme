@@ -255,6 +255,7 @@ async def _ws_handler(ws) -> None:
 
 async def _broadcast_loop() -> None:
     """Every BROADCAST_INTERVAL seconds, push dirty price updates to all clients."""
+    global CLIENTS, dirty
     while True:
         await asyncio.sleep(BROADCAST_INTERVAL)
         if not CLIENTS or not dirty:
@@ -272,7 +273,7 @@ async def _broadcast_loop() -> None:
                 await ws.send(msg)
             except websockets.exceptions.ConnectionClosed:
                 dead.add(ws)
-        CLIENTS -= dead
+        CLIENTS.difference_update(dead)  # in-place, avoids Python treating CLIENTS as local
 
 
 # ─────────────────────────────────────────────────────────────────────────────
