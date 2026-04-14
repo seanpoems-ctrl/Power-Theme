@@ -282,19 +282,23 @@ async def _broadcast_loop() -> None:
 async def main() -> None:
     symbols_ranked = load_tickers_from_json()
 
-    # Start WebSocket server first so the frontend can connect even while IBKR loads
+    # Start WebSocket server — use serve_forever() for compatibility with websockets 13/14+
     log.info("Starting WebSocket server on ws://localhost:%d …", WS_PORT)
-    async with websockets.serve(_ws_handler, "0.0.0.0", WS_PORT):
-        log.info("WebSocket server ready ✅")
+    server = await websockets.serve(_ws_handler, "0.0.0.0", WS_PORT)
+    log.info("WebSocket server ready ✅  (ws://localhost:%d)", WS_PORT)
 
-        # Set up reconnect handler before first connect
-        _setup_reconnect(symbols_ranked)
+    # Set up reconnect handler before first connect
+    _setup_reconnect(symbols_ranked)
 
-        # Connect to IBKR (non-fatal if offline)
-        await ibkr_connect(symbols_ranked)
+    # Connect to IBKR (non-fatal if TWS is offline)
+    await ibkr_connect(symbols_ranked)
 
-        # Broadcast loop runs forever
+    # Broadcast loop runs forever; server stays alive until Ctrl+C
+    try:
         await _broadcast_loop()
+    finally:
+        server.close()
+        await server.wait_closed()
 
 
 if __name__ == "__main__":
