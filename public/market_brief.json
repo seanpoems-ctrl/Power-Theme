@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 13, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 14, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 19.12,
-      "change": -0.11,
+      "price": 18.28,
+      "change": -0.84,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 56924.11,
-      "change_pct": 1.84
+      "price": 57877.39,
+      "change_pct": 2.43
     },
     "dax": {
       "label": "DAX",
-      "price": 23742.44,
-      "change_pct": -0.26
+      "price": 23970.78,
+      "change_pct": 0.96
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10582.96,
-      "change_pct": -0.17
+      "price": 10590.8,
+      "change_pct": 0.07
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 55.0,
-    "mmth": 57.0,
+    "s5fi": 55.1,
+    "mmth": 57.1,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "US-Led Rally, Mixed Global Cues",
+  "mood": "Positive Momentum / Broad Strength",
   "analysis": {
-    "analysis_para1": "Today's global tape presented a divergent picture, with the Nikkei 225 advancing a strong +1.84% while European markets like the DAX (-0.26%) and FTSE 100 (-0.17%) experienced slight pullbacks. US credit conditions, as indicated by the unknown BAML HY Spread, offered no clear directional signal for broader risk appetite. Domestically, market breadth remained moderate with 55.0% of stocks above their 50-day moving average (S5FI) and 57.0% above their 200-day moving average (MMTH), indicating underlying stability rather than exuberant participation.",
-    "analysis_para2": "Following today's robust gains in both the S&P 500 and Nasdaq 100, the mechanical plan is to monitor for continued upside momentum and consolidation above recent resistance. Key action involves observing if support can be established above today's closing levels, with a sustained pullback below prior day's close signaling caution. Specifically, a breach of 6800 on the S&P 500 or 25000 on the Nasdaq 100 would necessitate a more defensive posture. Conversely, maintaining exposure to high relative strength themes like Semiconductors and Energy is warranted as long as underlying breadth metrics hold above 50%.",
-    "technical_signal": "No reversal pattern confirmed yet. The market closed higher on broad-based gains.",
+    "analysis_para1": "Global markets are showing robust strength this morning, with the Nikkei 225 leading the charge up +2.43%, followed by a solid +0.96% gain in the DAX. While the FTSE 100 saw a modest +0.07% rise, the overall sentiment points to a risk-on environment. US futures are reflecting this positive momentum, with the S&P 500 up +1.02% and Nasdaq 100 gaining +1.06% pre-market. The 10Y yield remains stable at 4.30%, indicating no immediate credit market concerns, and underlying US breadth metrics at 55.1% (S5FI) and 57.1% (MMTH) confirm a healthy majority of stocks are participating in the broader market advance.",
+    "analysis_para2": "With S&P 500 futures trading significantly higher at 6886.24, the mechanical plan is to confirm strength if the market opens and holds above this level, signaling continuation. Initial resistance could emerge around the 6900 psychological mark, where a sustained breakout would confirm strong buying conviction. Conversely, a failure to maintain momentum and a dip below 6850 could indicate weakness, prompting a reduction in risk, while a decisive break below 6800 would suggest a shift in sentiment and call for a defensive posture. Focus on price action in the opening hour to validate the pre-market gains.",
+    "technical_signal": "No reversal pattern confirmed yet. The market is showing strong positive momentum in pre-market trading, suggesting a continuation of the upward trend.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "AXTI merits an A+ grade with an exceptional RS of 99 and a powerful 3-month return of +198.3%, positioning it as a leading conviction play in the robust Semiconductors theme."
+        "reason": "AXTI, with an RS of 99 and an astounding +198.3% 3-month return, represents strong momentum within the leading Semiconductors theme in a risk-on environment."
       },
       {
         "ticker": "TSEM",
         "company": "Tower Semiconductor Ltd",
         "grade": "A",
-        "reason": "TSEM earns an A grade for its impressive RS of 98 and a significant +49.0% one-month surge, making it a strong high-momentum choice within the resilient Semiconductors sector."
+        "reason": "TSEM exhibits robust short-term strength with an RS of 98 and a +49.0% 1-month return, making it a high-momentum play in the favored Semiconductors sector."
       },
       {
         "ticker": "MRVL",
         "company": "Marvell Technology Inc",
         "grade": "C",
-        "reason": "MRVL receives a C grade despite its 1-month gain, as its RS of 85 and weaker 3-month performance relative to peers suggest potential underperformance within the strong Semiconductor theme."
+        "reason": "MRVL, despite a recent +37.7% 1-month gain, carries the lowest RS of 85 among candidates, signaling relative underperformance and potential for distribution in this positive market."
       }
     ]
   }
