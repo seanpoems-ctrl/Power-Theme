@@ -670,9 +670,14 @@ function groupByIndustry(stocks) {
 }
 
 // GroupRow receives pre-sorted items and the active perf field from GroupView.
-const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockClick }) {
+const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockClick, cols, sortKey, sortDir, onSort }) {
   const [open, setOpen] = useState(false);
   const tickers = items.map((s) => s.ticker);
+
+  const SortIcon = ({ colKey }) => {
+    if (sortKey !== colKey) return <span className="ml-0.5 text-zinc-600">⇅</span>;
+    return <span className="ml-0.5 text-white">{sortDir === "asc" ? "↑" : "↓"}</span>;
+  };
 
   return (
     <div className="border-t border-zinc-800 first:border-t-0">
@@ -690,30 +695,45 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
       </div>
 
       {open && (
-        <div className="ml-4 max-h-64 overflow-y-auto border-l border-zinc-700 pb-1">
-          {items.map((s) => {
-            const perfVal = getPerfValue(s, perfField);
-            return (
-              <div
-                key={s.ticker}
-                className="flex items-center gap-3 px-3 py-1 text-xs hover:bg-zinc-800/30"
+        <div className="ml-4 border-l border-zinc-700 pb-1">
+          {/* Column sort header — only shown when group is open */}
+          <div className="flex items-center gap-3 border-b border-zinc-800 bg-zinc-900/80 px-3 py-1 text-xs font-medium text-zinc-500 sticky top-0 z-10">
+            {cols.map((col) => (
+              <button
+                key={col.key}
+                onClick={() => onSort(col.key)}
+                className={`${col.cls} cursor-pointer select-none hover:text-zinc-300 transition-colors
+                  ${col.align === "right" ? "text-right" : "text-left"}`}
               >
-                <button
-                  onClick={() => onStockClick(s)}
-                  className="w-14 font-mono font-semibold text-cyan-400 hover:underline hover:text-white transition-colors text-left"
+                {col.label}<SortIcon colKey={col.key} />
+              </button>
+            ))}
+          </div>
+          <div className="max-h-64 overflow-y-auto">
+            {items.map((s) => {
+              const perfVal = getPerfValue(s, perfField);
+              return (
+                <div
+                  key={s.ticker}
+                  className="flex items-center gap-3 px-3 py-1 text-xs hover:bg-zinc-800/30"
                 >
-                  {s.ticker}
-                </button>
-                <span className="flex-1 truncate text-zinc-400">{s.company}</span>
-                <span className="w-12 text-right font-mono text-zinc-500">
-                  {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
-                </span>
-                <span className={`w-16 text-right font-mono font-semibold ${changeCls(perfVal)}`}>
-                  {fmtPct(perfVal)}
-                </span>
-              </div>
-            );
-          })}
+                  <button
+                    onClick={() => onStockClick(s)}
+                    className="w-14 font-mono font-semibold text-cyan-400 hover:underline hover:text-white transition-colors text-left"
+                  >
+                    {s.ticker}
+                  </button>
+                  <span className="flex-1 truncate text-zinc-400">{s.company}</span>
+                  <span className="w-12 text-right font-mono text-zinc-500">
+                    {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
+                  </span>
+                  <span className={`w-16 text-right font-mono font-semibold ${changeCls(perfVal)}`}>
+                    {fmtPct(perfVal)}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
         </div>
       )}
     </div>
@@ -735,11 +755,6 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick }) {
       setSortKey(key);
       setSortDir("asc");
     }
-  };
-
-  const SortIcon = ({ colKey }) => {
-    if (sortKey !== colKey) return <span className="ml-0.5 text-zinc-600">⇅</span>;
-    return <span className="ml-0.5 text-white">{sortDir === "asc" ? "↑" : "↓"}</span>;
   };
 
   // Build groups then sort each group's items by the active column
@@ -789,22 +804,18 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick }) {
         <span>Count</span>
       </div>
 
-      {/* Stock-column sort header (always visible) */}
-      <div className="flex items-center gap-3 border-b border-zinc-800 bg-zinc-900/80 px-3 py-1 pl-[3.25rem] text-xs font-medium text-zinc-500 sticky top-0 z-10">
-        {GROUP_STOCK_COLS.map((col) => (
-          <button
-            key={col.key}
-            onClick={() => handleSort(col.key)}
-            className={`${col.cls} cursor-pointer select-none hover:text-zinc-300 transition-colors
-              ${col.align === "right" ? "text-right" : "text-left"}`}
-          >
-            {col.label}<SortIcon colKey={col.key} />
-          </button>
-        ))}
-      </div>
-
       {groups.map((g) => (
-        <GroupRow key={g.industry} industry={g.industry} items={g.items} perfField={perfField} onStockClick={onStockClick} />
+        <GroupRow
+          key={g.industry}
+          industry={g.industry}
+          items={g.items}
+          perfField={perfField}
+          onStockClick={onStockClick}
+          cols={GROUP_STOCK_COLS}
+          sortKey={sortKey}
+          sortDir={sortDir}
+          onSort={handleSort}
+        />
       ))}
     </div>
   );
