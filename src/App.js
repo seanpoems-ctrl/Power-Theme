@@ -3743,32 +3743,38 @@ const EARNINGS_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
 async function fetchEarningsAnalysis(ticker, company, eps_estimate, eps_act, eps_surp_pct, rev_est, rev_act, rev_surp_pct, mkt_cap) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${EARNINGS_GEMINI_KEY}`;
   const fmtV = v => v != null ? v : "N/A";
-  const prompt = `You are a senior equity research analyst writing a concise post-earnings briefing for ${company} (${ticker}).
+  const prompt = `You are an experienced buy-side analyst and trader writing a post-earnings intelligence brief for ${company} (${ticker}).
 
 REPORTED FINANCIALS:
 - EPS Estimate: ${fmtV(eps_estimate)} | EPS Actual: ${fmtV(eps_act)} | EPS Surprise: ${fmtV(eps_surp_pct)}%
 - Revenue Estimate: ${fmtV(rev_est)} | Revenue Actual: ${fmtV(rev_act)} | Revenue Surprise: ${fmtV(rev_surp_pct)}%
 - Market Cap: ${mkt_cap ? `$${(mkt_cap/1e9).toFixed(1)}B` : "N/A"}
 
-Draw on your knowledge of this company's most recent earnings report and call. If you are unsure which quarter is the most recent or do not have reliable details, say so explicitly in that section rather than fabricating.
+Draw on your training knowledge of this company's most recent earnings report and conference call. If you are not confident about a specific quarter or detail, say so in that section rather than fabricating.
 
-STRICT OUTPUT RULES — follow exactly:
-- DO NOT include any title, document header, date line, "Analyst:" line, "[YOUR NAME/FIRM]" placeholder, or horizontal rules.
-- DO NOT use markdown heading syntax (no #, ##, ###).
-- Start your response directly with section "1." — nothing before it.
-- Use EXACTLY this section format on its own line: \`1. **EARNINGS SUMMARY** — ...\` then a blank line, then the body paragraphs for that section.
-- Keep each section to 2–4 tight sentences. Be specific, cite numbers when known, and call out weaknesses candidly.
-- Do not invent dates; if you mention a quarter, only do so if you are confident.
+STRICT OUTPUT FORMAT — follow exactly or the output will break:
+- DO NOT output any title, date, "Analyst:", "[YOUR NAME]", horizontal rule, or preamble.
+- DO NOT use # ## ### markdown headings.
+- Start IMMEDIATELY with "1." — nothing before it.
+- Each section header must appear on its own line in this exact format: 1. **SECTION TITLE** — one-line summary
+- Follow each header with a blank line, then 2–4 tight sentences of substance.
+- Cite real numbers and quarter labels only when you are confident. Be candid about weaknesses.
 
-Sections to produce (in this order, using the exact titles):
+7 sections to produce in order:
 
-1. **EARNINGS SUMMARY** — Beat/miss on EPS and revenue, and what drove it.
-2. **KEY CATALYSTS** — Growth drivers, products, contracts, partnerships, tailwinds management highlighted.
-3. **MANAGEMENT COMMENTARY** — Prepared-remarks tone and forward guidance (confident / cautious / defensive).
-4. **Q&A HIGHLIGHTS** — What analysts probed and how management answered.
-5. **RISK FACTORS & SOFT SPOTS** — Headwinds, margin pressure, competition, regulatory risks, anything side-stepped.
-6. **PEER & MARKET REACTION** — Sector read-through if relevant.
-7. **VERDICT** — One paragraph: buy-the-dip / sell-the-rip / hold-and-monitor, plus the price action that would confirm or invalidate it.`;
+1. **EARNINGS SUMMARY** — Did they beat or miss? By how much on EPS and revenue? What was the single biggest driver of the result?
+
+2. **STORY & KEY CATALYSTS** — What is the investment narrative management is pushing? New products, contracts, AI/macro tailwinds, market share gains, geographic expansion? What's the bull thesis in 3 sentences?
+
+3. **MANAGEMENT PREPARED REMARKS** — What did the CEO/CFO lead with? Overall tone (confident / cautious / defensive / damage-control)? Key guidance numbers or outlook language.
+
+4. **Q&A HIGHLIGHTS** — What did the sharpest analyst questions probe — execution gaps, guidance credibility, competitive threats, balance sheet? How did management respond — direct, evasive, or spin?
+
+5. **RISK FACTORS, SOFT SPOTS & APOLOGY TOURS** — Recurring headwinds, margin pressure, slowing segments, anything management had to apologise for or explain away. Note if there was a "kitchen sink" quarter, walk-back of prior guidance, or repeated excuses. Call out what was side-stepped.
+
+6. **MARKET & PEER REACTION** — How did the stock move post-earnings (up/down roughly)? Any competitor or peer earnings that confirm or contradict this company's narrative? Sector read-through?
+
+7. **TRADER VERDICT** — Buy-the-dip, sell-the-rip, or hold-and-monitor? What price action or catalyst in the next 30–60 days would confirm the bull case? What would break it?`;
 
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
