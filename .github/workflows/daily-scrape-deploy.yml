@@ -44,7 +44,7 @@ jobs:
       - name: Install Python deps
         run: pip install requests beautifulsoup4 yfinance lxml exchange_calendars pandas google-genai tradingview_screener python-dotenv ib_insync
 
-      - name: Check ET window (9:00 AM – 5:00 PM) + trading day
+      - name: Check ET window (9:00 AM – 6:00 PM) + trading day
         id: trading_day
         run: |
           python - <<'EOF'
@@ -57,7 +57,7 @@ jobs:
 
           et_now = datetime.now(ZoneInfo("America/New_York"))
           et_minutes = et_now.hour * 60 + et_now.minute
-          in_window = 540 <= et_minutes <= 1020  # 9:00 AM – 5:00 PM ET
+          in_window = 540 <= et_minutes <= 1080  # 9:00 AM – 6:00 PM ET
 
           if is_manual:
               should_run = True
