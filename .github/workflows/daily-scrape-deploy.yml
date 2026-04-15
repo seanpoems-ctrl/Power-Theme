@@ -108,12 +108,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add public/thematic_data.json \
-                  public/earnings_calendar.json \
-                  public/econ_calendar.json \
-                  public/market_internals.json \
-                  public/ibkr_themes.json \
-                  2>/dev/null || true
+          git add -f public/thematic_data.json \
+                     public/earnings_calendar.json \
+                     public/econ_calendar.json \
+                     public/market_internals.json \
+                     public/ibkr_themes.json \
+                     2>/dev/null || true
+          echo "=== Staged files ==="
+          git diff --staged --stat
           git diff --staged --quiet || git commit -m "data: thematic_data $(date -u +%Y-%m-%dT%H:%M) [skip ci]"
           for i in 1 2 3; do git pull --rebase --autostash && git push && break || sleep 5; done
 
