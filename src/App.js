@@ -5441,7 +5441,7 @@ const SearchBar = ({ data, search, setSearch }) => {
     setNewsError(false);
     try {
       const to   = new Date();
-      const from = new Date(to.getTime() - 180 * 24 * 60 * 60 * 1000); // 6 months
+      const from = new Date(to.getTime() - 1825 * 24 * 60 * 60 * 1000); // 5 years
       const fmt  = d => d.toISOString().split("T")[0];
       const res  = await fetch(
         `https://finnhub.io/api/v1/company-news?symbol=${ticker}` +
@@ -5471,7 +5471,13 @@ const SearchBar = ({ data, search, setSearch }) => {
           .split(/\s+/)
           .filter(w => w.length >= 4 && !companyStopWords.has(w)),
       ];
+      // Roundup articles mention many companies in one headline (e.g. "Apple, Amazon, Nvidia And More On CNBC...")
+      const isRoundup = (headline) => {
+        const h = (headline || "").toLowerCase();
+        return h.includes("and more") && h.includes(",");
+      };
       const isRelevant = (a) => {
+        if (isRoundup(a.headline)) return false;
         const text = ((a.headline || "") + " " + (a.summary || "")).toLowerCase();
         return companyKeywords.some(kw => text.includes(kw));
       };
@@ -5501,7 +5507,7 @@ const SearchBar = ({ data, search, setSearch }) => {
       const filtered = dedupedGroups
         .map(g => g.article)
         .sort((a, b) => b.datetime - a.datetime)
-        .slice(0, 20); // keep up to 20 high-impact catalysts after dedup
+        .slice(0, 50); // keep up to 50 high-impact catalysts after dedup
 
       setNews(filtered);
     } catch {
