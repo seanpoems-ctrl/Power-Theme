@@ -3743,34 +3743,36 @@ const EARNINGS_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
 async function fetchEarningsAnalysis(ticker, company, eps_estimate, eps_act, eps_surp_pct, rev_est, rev_act, rev_surp_pct, mkt_cap) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${EARNINGS_GEMINI_KEY}`;
   const fmtV = v => v != null ? v : "N/A";
-  const prompt = `You are a senior equity research analyst. Perform a comprehensive post-earnings analysis for ${company} (${ticker}).
+  const prompt = `You are a senior equity research analyst writing a concise post-earnings briefing for ${company} (${ticker}).
 
 REPORTED FINANCIALS:
 - EPS Estimate: ${fmtV(eps_estimate)} | EPS Actual: ${fmtV(eps_act)} | EPS Surprise: ${fmtV(eps_surp_pct)}%
 - Revenue Estimate: ${fmtV(rev_est)} | Revenue Actual: ${fmtV(rev_act)} | Revenue Surprise: ${fmtV(rev_surp_pct)}%
 - Market Cap: ${mkt_cap ? `$${(mkt_cap/1e9).toFixed(1)}B` : "N/A"}
 
-Using your knowledge of this company's most recent earnings report and call, provide a structured analysis covering:
+Draw on your knowledge of this company's most recent earnings report and call. If you are unsure which quarter is the most recent or do not have reliable details, say so explicitly in that section rather than fabricating.
 
-1. **EARNINGS SUMMARY** — Did they beat/miss on EPS and revenue? What drove the result?
+STRICT OUTPUT RULES — follow exactly:
+- DO NOT include any title, document header, date line, "Analyst:" line, "[YOUR NAME/FIRM]" placeholder, or horizontal rules.
+- DO NOT use markdown heading syntax (no #, ##, ###).
+- Start your response directly with section "1." — nothing before it.
+- Use EXACTLY this section format on its own line: \`1. **EARNINGS SUMMARY** — ...\` then a blank line, then the body paragraphs for that section.
+- Keep each section to 2–4 tight sentences. Be specific, cite numbers when known, and call out weaknesses candidly.
+- Do not invent dates; if you mention a quarter, only do so if you are confident.
 
-2. **KEY CATALYSTS** — What are the main growth drivers management highlighted? Any new products, contracts, partnerships, or market tailwinds?
+Sections to produce (in this order, using the exact titles):
 
-3. **MANAGEMENT COMMENTARY** — Summarise the prepared remarks and key guidance points. What tone did management strike — confident, cautious, defensive?
-
-4. **Q&A HIGHLIGHTS** — What did analysts probe on? What were the sharpest questions and how did management respond?
-
-5. **RISK FACTORS & SOFT SPOTS** — List recurring concerns, headwinds, margin pressure, competitive threats, regulatory risks, or anything management side-stepped or apologised for.
-
-6. **PEER & MARKET REACTION** — How did peers/competitors react? Any read-throughs to the sector?
-
-7. **VERDICT** — One paragraph: Is this a buy-the-dip, sell-the-rip, or hold-and-monitor situation? What price action would confirm or invalidate the thesis?
-
-Be specific, cite actual numbers where possible, and be candid about weaknesses.`;
+1. **EARNINGS SUMMARY** — Beat/miss on EPS and revenue, and what drove it.
+2. **KEY CATALYSTS** — Growth drivers, products, contracts, partnerships, tailwinds management highlighted.
+3. **MANAGEMENT COMMENTARY** — Prepared-remarks tone and forward guidance (confident / cautious / defensive).
+4. **Q&A HIGHLIGHTS** — What analysts probed and how management answered.
+5. **RISK FACTORS & SOFT SPOTS** — Headwinds, margin pressure, competition, regulatory risks, anything side-stepped.
+6. **PEER & MARKET REACTION** — Sector read-through if relevant.
+7. **VERDICT** — One paragraph: buy-the-dip / sell-the-rip / hold-and-monitor, plus the price action that would confirm or invalidate it.`;
 
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.3, maxOutputTokens: 1200 },
+    generationConfig: { temperature: 0.3, maxOutputTokens: 2000 },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   if (!res.ok) throw new Error(`Gemini ${res.status}`);
@@ -3862,12 +3864,25 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
           ) : analysis ? (
             <div className="space-y-1">
               {analysis.split("\n").map((line, i) => {
-                if (!line.trim()) return <div key={i} className="h-2"/>;
-                // Section headers (lines starting with number + dot or pure bold)
-                if (/^\d+\.\s+\*\*/.test(line) || /^\*\*[A-Z]/.test(line)) {
+                const raw = line.trim();
+                if (!raw) return <div key={i} className="h-2"/>;
+                // Strip horizontal rules and any stray template lines (Date:, Analyst:)
+                if (/^-{3,}$/.test(raw)) return null;
+                if (/^(date|analyst)\s*:/i.test(raw)) return null;
+                // Markdown ATX headers (## / ###) → uppercase section header
+                const atx = raw.match(/^#{1,6}\s+(.*)$/);
+                if (atx) {
                   return (
                     <div key={i} className="mt-4 mb-1.5 text-[12px] font-bold text-zinc-200 uppercase tracking-wide">
-                      {renderMarkdown(line.replace(/^\d+\.\s*/, ""))}
+                      {renderMarkdown(atx[1])}
+                    </div>
+                  );
+                }
+                // Section headers (lines starting with number + dot or pure bold)
+                if (/^\d+\.\s+\*\*/.test(raw) || /^\*\*[A-Z]/.test(raw)) {
+                  return (
+                    <div key={i} className="mt-4 mb-1.5 text-[12px] font-bold text-zinc-200 uppercase tracking-wide">
+                      {renderMarkdown(raw.replace(/^\d+\.\s*/, ""))}
                     </div>
                   );
                 }
@@ -3883,7 +3898,7 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
 
         {/* Footer */}
         <div className="border-t border-zinc-800/60 px-4 py-2 flex-shrink-0 flex items-center justify-between">
-          <span className="text-[10px] text-zinc-700">Powered by Gemini 2.0 Flash · Based on latest available earnings data</span>
+          <span className="text-[10px] text-zinc-700">Powered by Gemini 2.5 Flash · Based on latest available earnings data</span>
           <a href={`https://www.tradingview.com/chart/?symbol=${stock.ticker}`}
              target="_blank" rel="noopener noreferrer"
              className="text-[10px] text-zinc-500 hover:text-cyan-400 transition-colors flex items-center gap-1">
