@@ -3390,7 +3390,7 @@ const TradeJournalTab = ({ data }) => {
         ticker: t.ticker, theme: t.theme, stop_used: t.stop_used,
         pnl_dollars: t.pnl_dollars, r_multiple: t.r_multiple, grade: t.grade,
       }));
-      const url  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${JOURNAL_AI_KEY}`;
+      const url  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${JOURNAL_AI_KEY}`;
       const prompt = `You are a trading coach analysing a trader's journal. Given the last 20 trades as JSON, provide: (1) Win rate and avg R-multiple by theme, (2) avg R-multiple by stop mode (ATR / LOD / Manual), (3) a concise one-paragraph actionable recommendation. Be specific.\n\nTrades:\n${JSON.stringify(last20, null, 2)}`;
       const body = { contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.3, maxOutputTokens: 400 } };
       const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
@@ -3741,7 +3741,7 @@ const ImpactBars = ({ impact }) => {
 const EARNINGS_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
 
 async function fetchEarningsAnalysis(ticker, company, eps_estimate, eps_act, eps_surp_pct, rev_est, rev_act, rev_surp_pct, mkt_cap) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${EARNINGS_GEMINI_KEY}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${EARNINGS_GEMINI_KEY}`;
   const fmtV = v => v != null ? v : "N/A";
   const prompt = `You are a senior equity research analyst. Perform a comprehensive post-earnings analysis for ${company} (${ticker}).
 
@@ -4268,7 +4268,7 @@ const BREADTH_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
 const BREADTH_CACHE_KEY  = "gemini_breadth_v1";
 
 async function fetchGeminiBreadthAnalysis(payload) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${BREADTH_GEMINI_KEY}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${BREADTH_GEMINI_KEY}`;
   const body = {
     contents: [{
       parts: [{
