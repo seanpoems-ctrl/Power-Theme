@@ -5490,12 +5490,18 @@ const SearchBar = ({ data, search, setSearch }) => {
         const words = new Set(sigWords(a.headline));
         if (words.size === 0) continue;
 
-        // Check if a similar article exists within 24 hours
+        // Dedup: same category within 48h uses lower threshold (25%) to catch
+        // same-event articles with different headlines (e.g. 3 outlets covering
+        // the same trial result). Cross-category keeps stricter 45%.
         const isDuplicate = dedupedGroups.some(({ article: existing, words: exWords }) => {
-          if (Math.abs(a.datetime - existing.datetime) > 86400) return false; // >24h apart = not dup
+          const diffSec = Math.abs(a.datetime - existing.datetime);
+          const sameCategory = cat.key === existing.catalyst.key;
+          const windowSec = sameCategory ? 172800 : 86400; // 48h same-cat, 24h otherwise
+          if (diffSec > windowSec) return false;
           const overlap = [...words].filter(w => exWords.has(w)).length;
           const similarity = overlap / Math.max(words.size, exWords.size);
-          return similarity >= 0.45; // 45% word overlap = duplicate
+          const threshold = sameCategory ? 0.25 : 0.45;
+          return similarity >= threshold;
         });
 
         if (!isDuplicate) {
