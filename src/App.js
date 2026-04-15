@@ -5145,7 +5145,6 @@ const CATALYST_CATEGORIES = [
       // reaction headlines published same day
       "plunging after earnings", "climbs after earnings", "rallies after earnings",
       "surges after earnings", "falls after earnings", "drops after earnings",
-      "after earnings",
     ],
   },
   {
@@ -5197,7 +5196,6 @@ const CATALYST_CATEGORIES = [
       "upgrades to buy", "upgrades to overweight", "upgrades to outperform",
       "downgrades to sell", "downgrades to underweight", "downgrades to underperform",
       "downgrades to neutral", "initiates with buy", "initiates with overweight",
-      "raises price target to", "lowers price target to",
     ],
   },
   {
@@ -5463,8 +5461,24 @@ const SearchBar = ({ data, search, setSearch }) => {
           .split(/\s+/)
           .filter(w => w.length >= 4 && !STOPWORDS.has(w));
 
+      // Company relevance keywords — ticker substring catches "goog" inside "google"
+      const companyStopWords = new Set(["inc", "corp", "corporation", "ltd", "llc", "co", "group", "holdings", "the", "and"]);
+      const companyKeywords = [
+        ticker.toLowerCase(),
+        ...(fullResult?.company || "")
+          .toLowerCase()
+          .replace(/[^a-z0-9 ]/g, " ")
+          .split(/\s+/)
+          .filter(w => w.length >= 4 && !companyStopWords.has(w)),
+      ];
+      const isRelevant = (a) => {
+        const text = ((a.headline || "") + " " + (a.summary || "")).toLowerCase();
+        return companyKeywords.some(kw => text.includes(kw));
+      };
+
       const dedupedGroups = []; // Each entry = { article, words, timestamp }
       for (const a of (Array.isArray(articles) ? articles : [])) {
+        if (!isRelevant(a)) continue; // skip articles not mentioning this company
         const cat = detectCatalyst(a.headline, a.summary);
         if (!cat) continue;
         const words = new Set(sigWords(a.headline));
@@ -5487,7 +5501,7 @@ const SearchBar = ({ data, search, setSearch }) => {
       const filtered = dedupedGroups
         .map(g => g.article)
         .sort((a, b) => b.datetime - a.datetime)
-        .slice(0, 40); // keep up to 40 after dedup
+        .slice(0, 20); // keep up to 20 high-impact catalysts after dedup
 
       setNews(filtered);
     } catch {
