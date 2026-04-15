@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 14, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 15, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 18.36,
-      "change": -0.76,
+      "price": 18.15,
+      "change": -0.21,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 56502.77,
-      "change_pct": -0.74
+      "price": 58134.24,
+      "change_pct": 0.44
     },
     "dax": {
       "label": "DAX",
-      "price": 24044.22,
-      "change_pct": 1.27
+      "price": 24061.8,
+      "change_pct": 0.07
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10609.06,
-      "change_pct": 0.25
+      "price": 10624.69,
+      "change_pct": 0.15
     }
   },
   "macro_breadth": {
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Strong Risk-On / Cyclical Leadership",
+  "mood": "Strong Bullish Momentum / Risk-On",
   "analysis": {
-    "analysis_para1": "Global markets presented a mixed picture with the Nikkei 225 slipping by 0.74%, while European indices like the DAX (+1.27%) and FTSE 100 (+0.25%) showed resilience. In the US, the 10-year Treasury yield continued its decline to 4.26%, providing a tailwind for equities. Market breadth remained constructive, with 57.8% of S&P 500 stocks above their 50-day moving average (S5FI) and 60.2% above their 200-day (MMTH). These figures, combined with the S&P 500's 1.18% surge and Nasdaq 100's 1.81% jump, suggest a healthy underlying participation amidst a supportive interest rate environment.",
-    "analysis_para2": "The mechanical plan suggests maintaining a risk-on posture given today's robust gains and declining yields. For the S&P 500, holding above the 6900 level would confirm continued momentum, with further upside targets towards 7000. Nasdaq 100's strong showing above 25500 indicates tech leadership, and any pullback towards this level should be monitored for buying opportunities. A critical signal for maintaining this bullish stance is the VIX remaining below 20 and US breadth metrics (S5FI, MMTH) staying above the 50% threshold. Focus should remain on the strong thematic leaders identified, with conviction longs initiating on pullbacks to support or breakouts from consolidations.",
-    "technical_signal": "No reversal pattern confirmed yet. The market exhibited strong bullish momentum today, with major indices closing significantly higher, negating any immediate signs of reversal.",
+    "analysis_para1": "Global markets show a positive tone this morning, with the Nikkei 225 up +0.44%, DAX +0.07%, and FTSE 100 +0.15% providing a constructive backdrop for US open. While the BAML HY Spread regime is unknown, US market breadth remains healthy with 57.8% of S&P 500 stocks above their 50-day moving average and 60.2% above their 200-day moving average. This robust internal strength, coupled with a falling 10Y Yield at 4.26%, underpins the S&P 500's +1.18% gain and the Nasdaq 100's stronger +1.81% performance, signaling broad-based risk appetite.",
+    "analysis_para2": "The market opens with significant upward momentum, challenging traders to identify continuation plays rather than reversals. Key price levels to monitor include the S&P 500's ability to hold above 6960 and the Nasdaq 100 above 25800, which would confirm pre-market strength. A mechanical plan involves observing initial price action for follow-through buying, especially if the 10Y Yield continues its decline, bolstering growth-oriented sectors. Any intraday dip that holds above the prior day's close or established support could represent a buying opportunity, signaling continued conviction from institutional players. Conversely, a failure to hold these levels could signal profit-taking and a potential intraday reversal.",
+    "technical_signal": "No reversal pattern confirmed yet. The strong pre-market gains suggest a continuation of the recent trend rather than an immediate reversal.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "AXTI shows exceptional leadership in Semiconductors with an RS of 99 and an explosive 3-month return of +198.3%, perfectly aligning with the strong risk-on environment and tech leadership."
+        "reason": "AXTI exhibits exceptional relative strength (RS=99) and parabolic three-month momentum (+198.3%), making it a prime semiconductor play in a risk-on environment."
       },
       {
         "ticker": "TSEM",
         "company": "Tower Semiconductor Ltd",
         "grade": "A",
-        "reason": "TSEM demonstrates robust momentum within the Semiconductor theme with an RS of 98 and a significant 1-month return of +49.0%, indicating strong investor interest in leading growth sectors."
+        "reason": "TSEM demonstrates outstanding one-month performance (+49.0%) and strong relative strength (RS=98), positioning it as a high-momentum semiconductor leader."
       },
       {
         "ticker": "MRVL",
         "company": "Marvell Technology Inc",
         "grade": "C",
-        "reason": "Despite a positive 1-month return, Marvell's relatively lower RS of 85 and weaker 3-month performance (+23.0%) compared to its semiconductor peers suggest potential underperformance or distribution within a strong sector."
+        "reason": "Despite a strong 1-month gain (+37.7%), Marvell Technology's lower relative strength (RS=85) and more modest three-month performance (+23.0%) compared to peers suggest it may be a laggard in the current powerful rally."
       }
     ]
   }
