@@ -1,11 +1,13 @@
-# Thematic Scanner — triggered externally via cron-job.org at 4:35 PM ET (20:35 UTC) Mon–Fri
-# workflow_dispatch bypasses ET-window check (manual or external trigger)
+# Thematic Scanner — runs at 4:35 PM ET Mon–Fri via GitHub cron
+# EDT: 20:35 UTC | EST: 21:35 UTC (both schedules active to cover DST)
+# workflow_dispatch bypasses ET-window check (manual trigger)
 name: Daily scrape & deploy
 
 on:
   workflow_dispatch: {}
-  # Schedule removed — triggered externally via cron-job.org for reliable timing
-  # 20:35 UTC = 4:35 PM ET (EDT) — Finviz finalizes closing data at 4:30 PM ET
+  schedule:
+    - cron: "35 20 * * 1-5"   # 4:35 PM EDT (Mar–Nov)
+    - cron: "35 21 * * 1-5"   # 4:35 PM EST (Nov–Mar)
 
 concurrency:
   group: thematic-scrape
