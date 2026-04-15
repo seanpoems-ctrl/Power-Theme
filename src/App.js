@@ -5509,8 +5509,25 @@ const SearchBar = ({ data, search, setSearch }) => {
         const h = (headline || "").toLowerCase();
         return h.includes("and more") && h.includes(",");
       };
+      // Clickbait / opinion / preview articles — not confirmed events
+      const CLICKBAIT_PHRASES = [
+        "time to buy", "hold or sell", "buy or sell", "should you buy", "should investors",
+        "is it a buy", "is a buy", "is now a buy",
+        "what you should know", "what's going on", "what to expect",
+        "ahead of earnings", "before earnings", "earnings preview",
+        "will it beat", "will report", "could report",
+        "recovers some", "recovers losses", "bounce back",
+        "post q1", "post q2", "post q3", "post q4",
+        "what happened", "here's why", "here is why",
+      ];
+      const isClickbait = (headline) => {
+        const h = (headline || "").trim().toLowerCase();
+        if (h.endsWith("?")) return true; // question headlines are almost always clickbait
+        return CLICKBAIT_PHRASES.some(p => h.includes(p));
+      };
       const isRelevant = (a) => {
         if (isRoundup(a.headline)) return false;
+        if (isClickbait(a.headline)) return false;
         const text = ((a.headline || "") + " " + (a.summary || "")).toLowerCase();
         return companyKeywords.some(kw => text.includes(kw));
       };
