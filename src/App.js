@@ -5166,6 +5166,11 @@ const CATALYST_CATEGORIES = [
       "license agreement", "licensing deal", "collaboration agreement",
       "co-development agreement", "milestone payment", "royalty agreement",
       "exclusive license", "joint development", "strategic collaboration",
+      // broader commercial partnership signals
+      "partners with", "partnership with", "strategic partnership",
+      "signs agreement", "signs deal", "announces deal",
+      "agreement with", "agreement to supply", "power purchase agreement",
+      "supply agreement", "offtake agreement", "memorandum of understanding",
     ],
   },
   {
@@ -5176,6 +5181,7 @@ const CATALYST_CATEGORIES = [
       "awarded contract", "wins contract", "government contract awarded",
       "defense contract", "multi-year contract", "exclusive supply agreement",
       "selected as supplier", "awarded $", "contract worth $",
+      "secures contract", "signs contract", "long-term contract",
     ],
   },
   {
@@ -5486,6 +5492,8 @@ const SearchBar = ({ data, search, setSearch }) => {
         "recovers some", "recovers losses", "bounce back",
         "post q1", "post q2", "post q3", "post q4",
         "what happened", "here's why", "here is why",
+        "stock picks", "top picks", "week of", "stocks to watch",
+        "best stocks", "top stocks", "final trades",
       ];
       const isClickbait = (headline) => {
         const h = (headline || "").trim().toLowerCase();
