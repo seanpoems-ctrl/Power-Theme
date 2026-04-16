@@ -3859,47 +3859,53 @@ const EARNINGS_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
 async function fetchEarningsAnalysis(ticker, company, eps_estimate, eps_act, eps_surp_pct, rev_est, rev_act, rev_surp_pct, mkt_cap) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${EARNINGS_GEMINI_KEY}`;
   const fmtV = v => v != null ? v : "N/A";
-  const prompt = `You are an experienced buy-side analyst and trader writing a post-earnings intelligence brief for ${company} (${ticker}).
+  const prompt = `You are an experienced buy-side analyst writing a concise post-earnings brief for ${company} (${ticker}).
 
 REPORTED FINANCIALS:
 - EPS Estimate: ${fmtV(eps_estimate)} | EPS Actual: ${fmtV(eps_act)} | EPS Surprise: ${fmtV(eps_surp_pct)}%
 - Revenue Estimate: ${fmtV(rev_est)} | Revenue Actual: ${fmtV(rev_act)} | Revenue Surprise: ${fmtV(rev_surp_pct)}%
 - Market Cap: ${mkt_cap ? `$${(mkt_cap/1e9).toFixed(1)}B` : "N/A"}
 
-Draw on your training knowledge of this company's most recent earnings report and conference call. If you are not confident about a specific quarter or detail, say so in that section rather than fabricating.
+Draw on your training knowledge of this company's most recent earnings report. Be candid; do not fabricate specific numbers you are unsure of.
 
-STRICT OUTPUT FORMAT — follow exactly or the output will break:
-- DO NOT output any title, date, "Analyst:", "[YOUR NAME]", horizontal rule, or preamble.
-- DO NOT use # ## ### markdown headings.
-- Start IMMEDIATELY with "1." — nothing before it.
-- Each section header must appear on its own line in this exact format: 1. **SECTION TITLE** — one-line summary
-- Follow each header with a blank line, then 2–4 tight sentences of substance.
-- Cite real numbers and quarter labels only when you are confident. Be candid about weaknesses.
+OUTPUT STRICT JSON ONLY — no markdown, no code fences, no explanation outside the JSON.
 
-7 sections to produce in order:
+Return this exact structure:
+{
+  "en": [
+    { "title": "EARNINGS SUMMARY", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
+    { "title": "STORY & CATALYSTS", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
+    { "title": "MANAGEMENT TONE", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
+    { "title": "Q&A HIGHLIGHTS", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
+    { "title": "RISKS & SOFT SPOTS", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
+    { "title": "MARKET REACTION", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
+    { "title": "TRADER VERDICT", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] }
+  ],
+  "zh": [
+    { "title": "財報摘要", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
+    { "title": "故事與催化劑", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
+    { "title": "管理層語氣", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
+    { "title": "Q&A 重點", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
+    { "title": "風險與弱點", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
+    { "title": "市場反應", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
+    { "title": "交易判斷", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] }
+  ]
+}
 
-1. **EARNINGS SUMMARY** — Did they beat or miss? By how much on EPS and revenue? What was the single biggest driver of the result?
-
-2. **STORY & KEY CATALYSTS** — What is the investment narrative management is pushing? New products, contracts, AI/macro tailwinds, market share gains, geographic expansion? What's the bull thesis in 3 sentences?
-
-3. **MANAGEMENT PREPARED REMARKS** — What did the CEO/CFO lead with? Overall tone (confident / cautious / defensive / damage-control)? Key guidance numbers or outlook language.
-
-4. **Q&A HIGHLIGHTS** — What did the sharpest analyst questions probe — execution gaps, guidance credibility, competitive threats, balance sheet? How did management respond — direct, evasive, or spin?
-
-5. **RISK FACTORS, SOFT SPOTS & APOLOGY TOURS** — Recurring headwinds, margin pressure, slowing segments, anything management had to apologise for or explain away. Note if there was a "kitchen sink" quarter, walk-back of prior guidance, or repeated excuses. Call out what was side-stepped.
-
-6. **MARKET & PEER REACTION** — How did the stock move post-earnings (up/down roughly)? Any competitor or peer earnings that confirm or contradict this company's narrative? Sector read-through?
-
-7. **TRADER VERDICT** — Buy-the-dip, sell-the-rip, or hold-and-monitor? What price action or catalyst in the next 30–60 days would confirm the bull case? What would break it?`;
+Rules for keywords: each is a short phrase (2–4 words), factual, no fluff. Mix numbers, sentiment words, and category labels.`;
 
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.3, maxOutputTokens: 2000 },
+    generationConfig: { temperature: 0.3, maxOutputTokens: 1500 },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   if (!res.ok) throw new Error(`Gemini ${res.status}`);
   const json = await res.json();
-  return json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
+  const raw = json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
+  if (!raw) return null;
+  // Strip markdown code fences if present
+  const cleaned = raw.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "").trim();
+  try { return JSON.parse(cleaned); } catch { return null; }
 }
 
 // Simple markdown bold renderer (for **text** patterns)
@@ -3916,6 +3922,7 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
   const [analysis, setAnalysis] = useState(null);
   const [loading,  setLoading]  = useState(true);
   const [error,    setError]    = useState(null);
+  const [lang,     setLang]     = useState("en");
 
   useEffect(() => {
     if (!EARNINGS_GEMINI_KEY) {
@@ -3931,7 +3938,7 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
       stock.rev_est, stock.rev_act, stock.rev_surp_pct,
       stock.mkt_cap,
     )
-      .then(text => { setAnalysis(text); setLoading(false); })
+      .then(data => { setAnalysis(data); setLoading(false); })
       .catch(e  => { setError(`Failed: ${e.message}`); setLoading(false); });
   }, [stock.ticker]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -3941,6 +3948,17 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
     window.addEventListener("keydown", h);
     return () => window.removeEventListener("keydown", h);
   }, [onClose]);
+
+  const sections = analysis?.[lang] || [];
+
+  // Keyword chip colour palette (cycles by index)
+  const chipColors = [
+    "bg-sky-500/10 border-sky-500/25 text-sky-400",
+    "bg-violet-500/10 border-violet-500/25 text-violet-400",
+    "bg-amber-500/10 border-amber-500/25 text-amber-400",
+    "bg-emerald-500/10 border-emerald-500/25 text-emerald-400",
+    "bg-rose-500/10 border-rose-500/25 text-rose-400",
+  ];
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/70 backdrop-blur-sm"
@@ -3967,6 +3985,15 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
               </span>
             )}
           </div>
+          {/* Language tabs */}
+          <div className="flex items-center rounded-md border border-zinc-700 overflow-hidden flex-shrink-0">
+            {[["en","EN"],["zh","中文"]].map(([key,label]) => (
+              <button key={key} onClick={() => setLang(key)}
+                className={`px-2.5 py-1 text-[11px] font-semibold transition-colors ${lang===key ? "bg-zinc-700 text-white" : "text-zinc-500 hover:text-zinc-300"}`}>
+                {label}
+              </button>
+            ))}
+          </div>
           <button onClick={onClose} className="rounded p-1 text-zinc-500 hover:bg-zinc-700 hover:text-zinc-200" aria-label="Close">
             <X size={16}/>
           </button>
@@ -3983,37 +4010,21 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
             <div className="py-10 text-center">
               <p className="text-[13px] text-rose-400">{error}</p>
             </div>
-          ) : analysis ? (
-            <div className="space-y-1">
-              {analysis.split("\n").map((line, i) => {
-                const raw = line.trim();
-                if (!raw) return <div key={i} className="h-2"/>;
-                // Strip horizontal rules and any stray template lines (Date:, Analyst:)
-                if (/^-{3,}$/.test(raw)) return null;
-                if (/^(date|analyst)\s*:/i.test(raw)) return null;
-                // Markdown ATX headers (## / ###) → uppercase section header
-                const atx = raw.match(/^#{1,6}\s+(.*)$/);
-                if (atx) {
-                  return (
-                    <div key={i} className="mt-4 mb-1.5 text-[12px] font-bold text-zinc-200 uppercase tracking-wide">
-                      {renderMarkdown(atx[1])}
-                    </div>
-                  );
-                }
-                // Section headers (lines starting with number + dot or pure bold)
-                if (/^\d+\.\s+\*\*/.test(raw) || /^\*\*[A-Z]/.test(raw)) {
-                  return (
-                    <div key={i} className="mt-4 mb-1.5 text-[12px] font-bold text-zinc-200 uppercase tracking-wide">
-                      {renderMarkdown(raw.replace(/^\d+\.\s*/, ""))}
-                    </div>
-                  );
-                }
-                return (
-                  <p key={i} className="text-[12px] text-zinc-400 leading-relaxed">
-                    {renderMarkdown(line)}
-                  </p>
-                );
-              })}
+          ) : sections.length > 0 ? (
+            <div className="space-y-3">
+              {sections.map((sec, i) => (
+                <div key={i} className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2.5">
+                  <div className="text-[10px] font-bold tracking-widest text-zinc-500 uppercase mb-1">{sec.title}</div>
+                  <p className="text-[12px] text-zinc-300 leading-snug mb-2">{sec.summary}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {(sec.keywords || []).map((kw, ki) => (
+                      <span key={ki} className={`text-[10px] font-medium px-2 py-0.5 rounded-full border ${chipColors[ki % chipColors.length]}`}>
+                        {kw}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </div>
           ) : null}
         </div>
