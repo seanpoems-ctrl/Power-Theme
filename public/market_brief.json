@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 15, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 16, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 18.17,
-      "change": -0.19,
+      "price": 18.28,
+      "change": 0.11,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 57877.39,
-      "change_pct": 2.43
+      "price": 59518.34,
+      "change_pct": 2.38
     },
     "dax": {
       "label": "DAX",
-      "price": 24066.7,
-      "change_pct": 0.09
+      "price": 24225.61,
+      "change_pct": 0.66
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10559.58,
-      "change_pct": -0.47
+      "price": 10635.96,
+      "change_pct": 0.72
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 58.9,
-    "mmth": 56.8,
+    "s5fi": 59.0,
+    "mmth": 57.0,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech-Led Strength, Broadening Rally",
+  "mood": "Strong Risk-On / Global Momentum",
   "analysis": {
-    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 surging +2.43%, while the DAX saw a modest gain of +0.09%, and the FTSE 100 closed down -0.47%. In the US, stable 10-year yields at 4.28% and a normal VIX at 18.17 suggest a lack of immediate credit stress, despite an unknown BAML HY Spread regime. US market breadth improved, with 58.9% of stocks above their 50-day moving average (S5FI) and 56.8% above their 200-day moving average (MMTH), indicating a healthy and broadening participation in today's S&P 500 (+0.80%) and Nasdaq 100 (+1.40%) rally.",
-    "analysis_para2": "The mechanical plan suggests monitoring for continued strength in leading sectors, particularly Semiconductors and Hardware, as seen in today's Nasdaq 100 outperformance. Key action involves identifying and riding momentum in high Relative Strength stocks, considering current breadth levels (S5FI 58.9%, MMTH 56.8%) support further upside. Watch for any potential weakening in breadth metrics or a rise in the VIX as early warning signals for distribution. For now, focus remains on buying dips in strong leaders or consolidating breakouts, using market structure and volume to confirm entry and exit points, with S&P 500's 7000 level acting as a psychological support.",
-    "technical_signal": "No reversal pattern confirmed yet. Today's strong closes for major US indices, coupled with a normal VIX and stable bond yields, indicate a continuation of positive momentum without signs of an imminent top.",
+    "analysis_para1": "Global markets are showing significant strength this morning, with the Nikkei surging +2.38%, the DAX up +0.66%, and the FTSE 100 gaining +0.72%. This bullish sentiment is translating positively to the US pre-market, as the S&P 500 registers a +0.80% increase to 7022.95 and the Nasdaq 100 leads with a robust +1.40% climb to 26204.58. Credit conditions appear stable, indicated by a normal VIX at 18.28 and a steady 10Y Yield at 4.28%, suggesting no immediate financial stress. US market breadth confirms this broad-based participation, with 59.0% of stocks above their 50-day moving average (S5FI) and 57.0% above their 200-day moving average (MMTH).",
+    "analysis_para2": "Given the strong pre-market performance, the mechanical plan for today is to favor long entries, particularly in leading sectors, as the S&P 500 pushes past 7020 and the Nasdaq 100 maintains gains above 26200. Initial support levels to monitor are the opening price points for both major indices, with a breach below signaling potential weakness. Watch for continuous institutional accumulation in high relative strength names and sectors like Semiconductors. Any significant decrease in volume accompanying price advances or a shift in the VIX from its current normal state would warrant a re-evaluation of bullish positions. The overall strategy is to lean into the prevailing momentum, but remain vigilant for intraday distribution signals.",
+    "technical_signal": "No reversal pattern confirmed yet. The market is showing strong bullish momentum across global indices and US futures, with no indications of a technical reversal based on current data.",
     "ticker_intel": [
       {
         "ticker": "AEHR",
         "company": "Aehr Test Systems",
         "grade": "A+",
-        "reason": "AEHR is a top conviction long with RS=98 and a staggering 1-month return of +87.1%, demonstrating explosive momentum perfectly aligned with the current tech-led strength in the semiconductor sector."
+        "reason": "This semiconductor equipment leader demonstrates exceptional momentum with RS=98 and a staggering 1M return of +95.4%, making it a top conviction long in the current strong risk-on, tech-led regime."
       },
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A",
-        "reason": "AXTI exhibits exceptional relative strength (RS=99) and a strong 1-month return of +23.2%, making it a prime candidate for continued outperformance in the robust semiconductor theme."
+        "reason": "As another strong semiconductor play, AXTI commands an RS=99 and a 1M return of +30.1%, signifying strong outperformance well-suited for a market showing global bullish momentum."
       },
       {
-        "ticker": "INTC",
-        "company": "Intel Corp",
+        "ticker": "HBM",
+        "company": "Hudbay Minerals Inc",
         "grade": "C",
-        "reason": "Despite a positive 1-month return of +39.6%, INTC's lower RS=95 and significantly weaker 3-month return relative to its peers suggests it may be a laggard within the strong semiconductor sector, making it less compelling for current market leadership."
+        "reason": "Despite positive returns, Hudbay Minerals has the lowest RS=90 and the weakest 3-month performance (+10.5%) among the candidates, making it a relatively less compelling choice compared to leading tech themes in a strong risk-on environment."
       }
     ]
   }
