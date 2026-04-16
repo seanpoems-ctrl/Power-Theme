@@ -7028,12 +7028,12 @@ const filtered = useMemo(() => {
             {/* Full ticker tape */}
             <div className="flex-1 min-w-0 overflow-hidden">
               {data?.market_condition && (() => {
-                const { spy, qqq, iwm, btc, gld, oil, dxy, breadth_50d, breadth_200d } = data.market_condition;
+                const { spy, qqq, iwm, btc, gld, oil, dxy, breadth_50d, breadth_200d, credit_spread } = data.market_condition;
                 const fmtChg = v => v == null ? null : v > 0
                   ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
                   : <span className="text-red-400">{v.toFixed(2)}%</span>;
                 const TV_SYMBOLS = { "NQ!": "CME_MINI:NQ1!", "ES!": "CME_MINI:ES1!", "RTY!": "CME_MINI:RTY1!" };
-                const CHART = { btc: 'IBIT', gld: 'GLD', oil: 'USO', dxy: 'UUP', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R' };
+                const CHART = { btc: 'IBIT', gld: 'GLD', oil: 'USO', dxy: 'UUP', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R', credit_spread: 'HYG' };
                 const mkClick = (key, e) => { const ticker = CHART[key]; const rect = e.currentTarget.getBoundingClientRect(); setMacroHover(prev => prev?.ticker === ticker ? null : { ticker, rect }); };
                 const breadthColor = v => v >= 60 ? "text-emerald-400" : v >= 40 ? "text-yellow-400" : "text-red-400";
                 const Sep = () => <span className="text-zinc-700 mx-1">|</span>;
@@ -7087,6 +7087,10 @@ const filtered = useMemo(() => {
                         <span className="text-zinc-600">MMTH 200D</span>
                         <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span>
                       </span></>}
+                    {credit_spread != null && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('credit_spread', e)}>
+                        <span className="text-zinc-600">HY Spread</span>
+                        <span className="text-zinc-300">{credit_spread.value.toFixed(2)}%</span>
+                      </span></>}
                   </div>
                 );
               })()}
@@ -7120,17 +7124,14 @@ const filtered = useMemo(() => {
           </div>
 
           {/* Row 2: ECON TODAY bar */}
-          {data?.market_condition && (() => {
-            const { credit_spread } = data.market_condition;
-            const hasAny = credit_spread != null || (econData?.events?.length > 0);
-            if (!hasAny) return null;
-            const mkClick = (key, e) => { const CHART = { credit_spread: 'HYG' }; const ticker = CHART[key]; const rect = e.currentTarget.getBoundingClientRect(); setMacroHover(prev => prev?.ticker === ticker ? null : { ticker, rect }); };
+          {econData?.events?.length > 0 && (() => {
             const Sep = () => <span className="text-zinc-800 mx-1">|</span>;
             const todayEvents = (econData?.events || []).filter(e => {
               if (!e.date) return false;
               const today = new Date().toISOString().slice(0, 10);
               return e.date === today;
             }).slice(0, 3);
+            if (!todayEvents.length) return null;
             return (
               <div className="hidden lg:flex items-center gap-1 text-[11px] font-mono py-0.5 border-t border-zinc-800/40 flex-wrap overflow-hidden">
                 <span className="text-zinc-600 font-semibold mr-1 whitespace-nowrap">ECON TODAY →</span>
@@ -7141,15 +7142,9 @@ const filtered = useMemo(() => {
                       <span className="text-zinc-400">{ev.event || ev.name}</span>
                       {ev.estimate != null && <span className="text-zinc-600">Est {ev.estimate}</span>}
                     </span>
-                    <Sep/>
+                    {idx < todayEvents.length - 1 && <Sep/>}
                   </React.Fragment>
                 ))}
-                {credit_spread != null && (
-                  <span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('credit_spread', e)}>
-                    <span className="text-zinc-600">HY Spread</span>
-                    <span className="text-zinc-300">{credit_spread.value.toFixed(2)}%</span>
-                  </span>
-                )}
               </div>
             );
           })()}
