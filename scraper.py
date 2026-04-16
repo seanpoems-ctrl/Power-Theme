@@ -40,6 +40,11 @@ TOP_THEMES = 5
 TOP_SUBTHEMES_PER_THEME = 5
 TOP_STOCKS_PER_SUBTHEME = 10
 
+# Hardcoded themes not available as Finviz industry groups
+HARDCODED_THEMES: dict[str, list[str]] = {
+    "Quantum Computing": ["IONQ", "RGTI", "QUBT", "QBTS", "QMCO"],
+}
+
 _NYSE = xcals.get_calendar("XNYS")
 
 
@@ -891,6 +896,62 @@ def aggregate_theme_performance(industries: list[dict]) -> list[dict]:
     return results
 
 
+def _build_hardcoded_theme_entry(theme_name: str, tickers: list[str]) -> dict | None:
+    """Build a theme_rankings-style entry for a hardcoded ticker list using yfinance."""
+    try:
+        import yfinance as yf
+        hist = yf.download(tickers, period="7mo", interval="1d",
+                           auto_adjust=True, progress=False, group_by="ticker")
+
+        perf_keys = ["perf_1d", "perf_1w", "perf_1m", "perf_3m", "perf_6m"]
+        trading_days = {"perf_1d": 2, "perf_1w": 5, "perf_1m": 21, "perf_3m": 63, "perf_6m": 126}
+
+        all_perfs: dict[str, list[float]] = {k: [] for k in perf_keys}
+        for ticker in tickers:
+            try:
+                col = hist[ticker]["Close"].dropna() if len(tickers) > 1 else hist["Close"].dropna()
+                if len(col) < 3:
+                    continue
+                for k, days in trading_days.items():
+                    if len(col) >= days:
+                        pct = (col.iloc[-1] / col.iloc[-days] - 1) * 100
+                        all_perfs[k].append(float(pct))
+            except Exception:
+                continue
+
+        avg_perfs = {}
+        for k in perf_keys:
+            vals = all_perfs[k]
+            avg_perfs[k] = round(sum(vals) / len(vals), 2) if vals else 0.0
+
+        rs_score = round(
+            avg_perfs.get("perf_1d", 0) * 0.05 +
+            avg_perfs.get("perf_1w", 0) * 0.15 +
+            avg_perfs.get("perf_1m", 0) * 0.25 +
+            avg_perfs.get("perf_3m", 0) * 0.30 +
+            avg_perfs.get("perf_6m", 0) * 0.25, 2)
+
+        stage2 = all(avg_perfs.get(k, 0) > 0 for k in perf_keys)
+
+        logger.info(f"  Hardcoded '{theme_name}': RS={rs_score:+.2f}  "
+                    f"1D={avg_perfs['perf_1d']:+.1f}%  1W={avg_perfs['perf_1w']:+.1f}%  "
+                    f"1M={avg_perfs['perf_1m']:+.1f}%  3M={avg_perfs['perf_3m']:+.1f}%  "
+                    f"6M={avg_perfs['perf_6m']:+.1f}%")
+        return {
+            "name": theme_name,
+            "industries": [theme_name],
+            "n_industries": 1,
+            "rs_score": rs_score,
+            "stage2_momentum": stage2,
+            "_hardcoded": True,
+            "_tickers": tickers,
+            **avg_perfs,
+        }
+    except Exception as e:
+        logger.warning(f"  Hardcoded theme '{theme_name}' failed: {e}")
+        return None
+
+
 # ──────────────────────────────────────────────────────────────
 # Screener table parser
 # ──────────────────────────────────────────────────────────────
@@ -1576,6 +1637,14 @@ def build_data() -> dict:
         badge = " ★ Stage2" if t["stage2_momentum"] else ""
         logger.info(f"  {t['name']:30} RS={t['rs_score']:+7.2f}  1D={t['perf_1d']:+.1f}%  1W={t['perf_1w']:+.1f}%  1M={t['perf_1m']:+.1f}%  3M={t['perf_3m']:+.1f}%  6M={t['perf_6m']:+.1f}%{badge}")
 
+    # ── Step 2b: Inject hardcoded themes (e.g., Quantum Computing not in Finviz) ──
+    logger.info("Step 2b: Injecting hardcoded themes...")
+    for hname, htickers in HARDCODED_THEMES.items():
+        entry = _build_hardcoded_theme_entry(hname, htickers)
+        if entry:
+            theme_rankings.append(entry)
+    theme_rankings.sort(key=lambda t: t["rs_score"], reverse=True)
+
     # ── Step 3: For top themes, drill into industries → stocks ──
     top_themes = theme_rankings[:TOP_THEMES]
     logger.info(f"\nStep 3: Drilling into top {len(top_themes)} themes for stock details...")
@@ -1586,6 +1655,17 @@ def build_data() -> dict:
         theme_name = theme["name"]
         logger.info(f"\n{'─'*50}")
         logger.info(f"Theme: {theme_name} ({theme['n_industries']} industries)")
+
+        # Hardcoded themes: fetch stock details directly from ticker list
+        if theme.get("_hardcoded"):
+            picks = [{"ticker": t} for t in theme["_tickers"]]
+            sub_stocks = _fetch_details(picks, all_detail_cache)
+            if sub_stocks:
+                output_themes.append({
+                    "name": theme_name,
+                    "subthemes": [{"name": theme_name, "stocks": sub_stocks}],
+                })
+            continue
 
         # Sort industries within this theme by their composite perf
         theme_industries = [i for i in industries if i["parent_theme"] == theme_name]
