@@ -1,133 +1,56 @@
 {
-  "scan_time": "2026-04-15 08:05 ET",
+  "scan_time": "2026-04-16 08:05 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "XNDU",
-      "price": 14.83,
-      "gap_pct": 13.15,
-      "pm_volume": 150819,
-      "avg_vol_10d": 1035864,
-      "avg_dollar_vol": 15361863,
-      "mkt_cap": 641908228,
-      "rvol": 4.46,
-      "adr_pct": 17.59,
+      "ticker": "SLDP",
+      "price": 3.26,
+      "gap_pct": 18.4,
+      "pm_volume": 1431685,
+      "avg_vol_10d": 3957177,
+      "avg_dollar_vol": 12900397,
+      "mkt_cap": 719085332,
+      "rvol": 2.08,
+      "adr_pct": 4.9,
       "category": "Others",
       "theme": "Technical / Flow",
       "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 67,
+      "conviction": 60,
       "grade": "C",
-      "finviz_theme": "AI Compute",
+      "finviz_theme": "EV Batteries",
       "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
-      "analysis_details": "• **What Happened**\nXanadu Quantum Technologies (XNDU) is exhibiting substantial trading activity, evidenced by a Relative Volume (RVOL) of **4.5x** and an average daily range (ADR%) of **17.6%**. This indicates significant intraday price volatility. However, no specific company-level fundamental news, such as earnings reports, new contracts, or analyst upgrades, has been released in the last 24 hours to explain this surge in interest or price movement. News headlines primarily cover generic market updates, broader industry trends in quantum computing, or comparative analyses with peers.\n\n• **Key Consideration**\nThe absence of a direct, company-specific catalyst suggests that XNDU's current move is likely driven by **technical factors** or short-term **institutional flow**. This pattern can be indicative of a low-float squeeze, algorithmic trading, or stop-running activity rather than a fundamental re-rating. Such moves carry **high risk** for momentum traders, as they are often **ephemeral** and prone to rapid reversals without underlying news support, making a 'Gap and Trap' scenario a significant concern.",
+      "analysis_details": "• **What Happened**\nSolid Power (SLDP) saw a **significant upward move** on April 15th, trading **6.5% higher** with volume at **2.1x** its 20-day average. This price action occurred without any apparent company-specific fundamental news, such as an earnings report, contract win, or analyst upgrade. A MarketBeat headline reported the move but did not cite an underlying catalyst.\n\n• **Key Consideration**\nThe absence of a specific news catalyst suggests that the price appreciation is primarily **technically driven**, possibly indicating a **short squeeze** or increased **institutional buying interest** fueling momentum. Given the lack of fundamental backing, this move is inherently **speculative** and presents a **higher risk** for sustained momentum without new developments.",
       "peer_tickers": [
-        "INFQ",
-        "HQ"
+        "QS",
+        "FREY"
       ],
       "headlines": [
         {
-          "title": "Xanadu Quantum Technologies Limited Class B Subordinate Voting Shares (XNDU) News Today - MarketBeat",
+          "title": "QuantumScape Vs. Solid Power: Structuring The Trade Around Relative Risks (NASDAQ:QS) - Seeking Alpha",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE1zUGZScTFPVUVfUWlQTGVYc2taX1QteUlSdHVkeEgtdHRFV3JCUjJrNklRdnplc2pOLU1tRnozRmdXNlp3d0R4TzY5YVloOWtmRnMtN3MtbTdOWlJVb2kteg?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOd0xEUHlCeXQ5SU9BMkMzbFBzLUVXREs3SFRtU2NCbkREX0YzSkVWV1FDQk1WOXdKczg1SjJiS1VIcHotc3o3U0FQbHhJeXJSZTZYWjVDa3ZnVng5Rk5qWXc3REFnUk93Vm9DajFObWdZeGJSUmN3dkRSMTFWM3F5S0lESVdsNTc1YVZRSV9vbUVyVi1RYWRwWkRqXzNoRjA2N3pOOEdyYTBLcFptMy1UU2ln?oc=5"
         },
         {
-          "title": "It's Anyone's Game: What China's Five-Year Plan Means for Quantum Computing",
-          "source": "Finviz",
-          "url": "https://www.barrons.com/articles/quantum-computing-china-us-ionq-d0e58bbb?mod=bar_FV"
-        },
-        {
-          "title": "XNDU vs INFQ vs HQ: Three New Quantum Stocks, Three Paths to Value - TipRanks",
+          "title": "Solid Power (NASDAQ:SLDP) Trading 6.5% Higher - Here's Why - MarketBeat",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQbWwzdHBaLW9Ia29wZ1llVWp5ZUJaTlV1SnF2VTVBc1F6eTBWdU9Fc0RPTFRtS09QWEw5aVNJSWxwdVVyNFhHZF95MkQxNFJzSG5rOUVmSzR1cWVyU0E3RmxHYWQ0Y0V0VjljNEF3Znpwa0pkYUYtcm94eHFmTnlRZndQcUptVnY4bXhxY0RHaUY4dkJWajBsY1FR?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNdW1XQkp3Rk1jVmtuWlN2cktGbF93Yl84YVR1di1KcTZVWnRjT05zSHNRWF9CNHh3akhXaG42MFBocXdqdjduYWZJWGI4RTR4UGZBX1MydkY0SE9GYzhWODhPcTlwOFZzVll1LU9RdnNtR0t4cUg0dl9sdGZUbWNZa0N6MkFuZGsxbHNiQUY3NXRHbTR5TkZGZzBqbVJYYWttRnFOTUJJQQ?oc=5"
         }
       ],
-      "float_shares": "20.68M",
-      "short_float": "1.67%",
-      "daily_pct": 29.07,
-      "industry": "AI Compute",
-      "technical_status": "Fail (Avg $Vol $15M < $100M)",
+      "float_shares": "172.76M",
+      "short_float": "15.35%",
+      "daily_pct": 3.49,
+      "industry": "EV Batteries",
+      "technical_status": "Fail (Avg $Vol $13M < $100M)",
       "verification": {
-        "status": "Verified",
+        "status": "Discrepancy",
         "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst (e.g., specific dollar amount, percentage, date, or approval decision) found for XNDU.",
-        "discrepancy_note": null
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "LAES",
-      "price": 2.59,
-      "gap_pct": 10.42,
-      "pm_volume": 3740718,
-      "avg_vol_10d": 12916631,
-      "avg_dollar_vol": 33454074,
-      "mkt_cap": 596407056,
-      "rvol": 1.8,
-      "adr_pct": 8.3,
-      "category": "Thematic Narratives",
-      "theme": "Quantum Security Acceleration",
-      "reasoning": "News regarding a planned 100-satellite quantum security network accelerates the thematic narrative around quantum security, benefiting LAES, compounded by a CFO option exercise.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 59,
-      "grade": "C",
-      "finviz_theme": "AI Security",
-      "analysis_detail": "Catalyst: A **100-satellite quantum security network** is planned for launch starting in November, fueling the narrative of accelerating quantum security growth, a key market for LAES. This development is supported by the LAES CFO's exercise of **130,500 shares** through a 10b5-1 plan. | Impact: This event significantly **validates** the long-term growth trajectory for quantum security, enhancing LAES's market positioning and investor confidence by providing a tangible, ambitious project within its target sector.",
-      "analysis_details": "• **The Narrative**\nA significant thematic tailwind has emerged with the announcement of a planned **100-satellite quantum security network**, set to commence launches in November. This ambitious project directly validates the accelerating growth and importance of quantum security solutions, a core business area for SEALSQ. The news from timothysykes.com further emphasizes that **\"Quantum Security Growth Accelerates\"**, drawing increased trader interest to related stocks like LAES.\n\n• **Explosiveness**\nThe market is reacting positively to the expanding quantum security ecosystem, which is expected to drive demand for LAES's specialized hardware and software solutions. This macro-level catalyst, coupled with the LAES CFO gaining **130,500 shares** through an option exercise, provides a strong conviction signal. With an **RVOL of 1.8x** and **ADR% of 8.3%**, the stock exhibits strong technical momentum, suggesting potential for further upside as this thematic narrative unfolds.",
-      "peer_tickers": [
-        "IONQ",
-        "RGTI"
-      ],
-      "headlines": [
-        {
-          "title": "SEALSQ (LAES) CFO gains 130,500 shares through option exercise under 10b5-1 plan - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQX0kxbmYtZnRlUDhOZ0w3N1NDTGhoekRKaEF1VHJMR01IREFjSV9MNTR3d0ZiVElBOHdYQmN3T2JKVk8wM0d5eU9CRHA2LWZNMHNvRzFMVUI1THZUdlY2b3pyTUZSZFg4RnBuUnp0dmw4Nk9YRjJoTlZTVzlvSzRzc2lnSEFubzdXdnBjN2ZGZmR1MnJIUC01bDBZM1FOX2NaMkZEUjFNQzE?oc=5"
-        },
-        {
-          "title": "LAES Stock Draws Traders As Quantum Security Growth Accelerates - timothysykes.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE0ySER2c3BodUpqMUdUZHJwY1VfZThsT29EdkN3NGdZeXpqTmFnWGh0LTBXQ1JOTFBjdE5jMllZVnpqX1NHRzUtV1V5TThpRGJzdGNnWUlMS3ZGbmM1dE51YTFzRGFERHpEQ1RrQU5VeG96Y25ZZnc?oc=5"
-        },
-        {
-          "title": "LAES stock price forecast: $2.20 support underpins LAES surge of 14.60% - Traders Union",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPUGxLeG9vYjN5YUZRd2xzYTYxTjVOVGRyZEdpbGhpV3dsV25pTzNtU293bHN3eHR3VlFZZkRodHF3TG5IaHEtMllOMlBDT0JuZk9qNHhnZWJCdnBsWVJibW1nQXA0dzBVb3RvS0g4UURmTk9jYmlFRHVZbU1neDQ5RjEzNkdCUnRMb2sxdGppUXN1V1UtMGVMLQ?oc=5"
-        },
-        {
-          "title": "A 100-satellite quantum security network is planned, with first launch in November - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNNFdOREc1Z0hJZnk3SlU4dGJWbFBIdzhEUGtCdUVzR0dCVGdNaFJSYnp6RGtNVElCNVNXOU9QMUN5Qzg4bURtRkZuaVVCeHFVeDZWaTFic0UxbV9CM1dldlllTHRDWm5Pd2FKVHF2cmhsYThrLTdJRm01UHVLY0Q0Z3E3VjBPbDg0c0YwVFlyeXNvMWJkZGNRdWtZdHNvU3BteE1wUC14QUJjZDFCUkNMT0ltdEdoUnU5MEhralV2QQ?oc=5"
-        }
-      ],
-      "float_shares": "215.24M",
-      "short_float": "7.96%",
-      "daily_pct": 21.03,
-      "industry": "AI Security",
-      "technical_status": "Fail (Avg $Vol $33M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "a planned 100-satellite quantum security network",
-        "discrepancy_note": "Source B (Google News) article [5] mentions 'A 100-satellite quantum security network is planned', but Source A (Finviz) contains no news items and therefore does not confirm this claim."
+        "primary_claim": "SLDP trading 6.5% higher",
+        "discrepancy_note": "Only Source B[2] (MarketBeat) reports SLDP trading 6.5% higher. Source A (Finviz) and Source B[1] (Seeking Alpha) do not mention this specific percentage."
       },
       "gates_passed": 2,
       "gates_detail": {
@@ -142,370 +65,60 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "QBTS",
-      "price": 16.97,
-      "gap_pct": 9.13,
-      "pm_volume": 2315607,
-      "avg_vol_10d": 20770734,
-      "avg_dollar_vol": 352479356,
-      "mkt_cap": 6277434817,
-      "rvol": 2.41,
-      "adr_pct": 6.89,
-      "category": "Thematic Narratives",
-      "theme": "Sector Sympathy",
-      "reasoning": "QBTS is moving in sympathy with the quantum computing sector after Nvidia launched new quantum AI models.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 61,
-      "grade": "B",
-      "finviz_theme": "AI Compute",
-      "analysis_detail": "Catalyst: Nvidia launched new quantum AI models on World Quantum Day, creating a strong thematic tailwind for the quantum computing sector. | Impact: QBTS is experiencing a **secondary lift** due to broader sector optimism and increased investor interest, leading to **significant** trading volume.",
-      "analysis_details": "• **The Narrative**\nQuantum computing stocks, including QBTS, are **soaring** after **Nvidia** launched new quantum AI models on World Quantum Day. This event has ignited a **broader thematic rally** for the sector, with D-Wave's CEO also making bullish comments on the competitive landscape against traditional AI GPUs. This solidifies the quantum computing narrative as a key future growth area, drawing substantial investor attention.\n\n• **Explosiveness**\nDespite being primarily a sympathy move, the high **RVOL of 2.4x** and average daily volume of **$352M** indicate substantial investor interest and **exploitable momentum**. The sector-wide tailwind, driven by a major player like Nvidia entering the quantum AI space, suggests that this narrative has strong potential for continued short-term momentum trading, even without direct company-specific fundamental news.",
-      "peer_tickers": [
-        "IONQ",
-        "RGTI"
-      ],
-      "headlines": [
-        {
-          "title": "D-Wave Quantum Vs. Quantum Computing: Early Revenue Premium Masks Long-Term Parity (NYSE:QBTS) - Seeking Alpha",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQRW1nMjRpeFBUNXhTMjFQQ3hIUjNfakE0ZjJrVjFmalBPM2U4ckw5aTZVV1B3cGxsenFIUTJieFYxbGJDTzNHMlpKdHdWS1NWdHpfSnlHdUM2MVI2Rk05aDE0OWxVUldMM1hqZ0xUUzFBb0N2T0RJRVJwOC1RTFZmUk5za2I3OW9GRHdiTlQzQ2tnaFBLWWdFbGdBaERxTTZOSFV6M05jMW5YdVVZUGc1c0ExUVZmMlpRd2M0bXFSSnBTcGNaY3NfLUo0dF9UaDFWS2ZlcU9ROA?oc=5"
-        },
-        {
-          "title": "Meta, Broadcom, IonQ, D-Wave Quantum And Robinhood: Why These 5 Stocks Are On Investors' Radars Today - Benzinga",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxNdng5NW41cFU2bk5fb1NaczlycExLVmtoblRWZ2dJM2lCa0xHdW1leEVhMU5TRWc2UnNVenJYNzdKeEJHNjRXZmtSWjhVdjd3NDNHNDBGc1NSVmJtT0lpcDVhdGV5VlJWYmdoczMyYjA2RWpmSnBwMEphRE4zMWZSVUYxYjZSRm5VNWRKdllzN0NJd0REdUZGMjROeGZxY3dYQVdJN3V5bHl4eTkyMmt3X3kzSFRSWnl3VFY3SUR2SEtSSUd3dS1CYUx0TzNQY2hCV0hWREJ6MVQwWHJXVS11dnB1QjJ5TjFI?oc=5"
-        },
-        {
-          "title": "D-Wave Quantum: Extreme Valuation Meets Execution Reality (NYSE:QBTS) - Seeking Alpha",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNbXlvQnA5S3gzUGx1R0NfSGE2ek5XYmdPU3F4MUZBV2ZRdjVidWVVTkpkemhBUjVHczh0bkhEdXZXZERxWjdGT0c4cVoxYzJPUmlzT2JoSERHc0d3ZkNib3lSdHdhVzhRRldMQlJfSWFqV0dJZnpQTUFlVVNVaVJXSDRpOGdCZl9aelhpNzNLNmRZWUtGTEJXOVc0OTJfQQ?oc=5"
-        },
-        {
-          "title": "QBTS Builds Early 2026 Momentum on Bookings, Deals and Acquisition",
-          "source": "Finviz",
-          "url": "https://qz.com/qbts-builds-early-2026-momentum-on-bookings-deals-and-acquisition"
-        },
-        {
-          "title": "D-Wave CEO says Nvidia should be 'shaking in their boots' as quantum computing battles AI GPUs",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/news/d-wave-ceo-says-nvidia-should-be-shaking-in-their-boots-as-quantum-computing-battles-ai-gpus-180249321.html"
-        }
-      ],
-      "float_shares": "357.93M",
-      "short_float": "16.42%",
-      "daily_pct": 15.84,
-      "industry": "AI Compute",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Nvidia launched new quantum AI models",
-        "discrepancy_note": null
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "SNAP",
-      "price": 5.6,
-      "gap_pct": 8.57,
-      "pm_volume": 7393763,
-      "avg_vol_10d": 66498307,
-      "avg_dollar_vol": 372390519,
-      "mkt_cap": 9458131307,
-      "rvol": 1.23,
-      "adr_pct": 6.28,
-      "category": "Thematic Narratives",
-      "theme": "Corporate Restructuring for Profitability & AI Efficiency",
-      "reasoning": "Snap announced significant job cuts (up to 16% of its workforce) driven by activist pressure and a strategic focus on AI-driven efficiency and profitability, causing the stock to jump.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 57,
-      "grade": "B",
-      "finviz_theme": "Consumer - Social Media",
-      "analysis_detail": "Catalyst: Snap announced plans to **lay off up to 16% of its workforce** (approximately **1,000 jobs**) in response to activist pressure, aiming to improve profitability and leverage AI for greater efficiency. Impact: The news prompted a significant positive market reaction, with SNAP's stock **jumping 7-11%** on the announcement, signaling investor confidence in the company's renewed focus on financial discipline and operational optimization.",
-      "analysis_details": "• **The Narrative**\nSnap is undergoing a significant corporate restructuring, cutting **up to 16% of its workforce**, or **1,000 jobs**, in response to **activist pressure**. This move is explicitly framed around leveraging **AI efficiencies** to drive the company towards **profitability**. Investors are clearly responding positively to this narrative, seeing it as a critical step for the social media platform to improve its financial health and operational agility.\n\n• **Explosiveness**\nThe market's reaction has been **strong**, with SNAP shares **jumping between 7% and 11%** immediately following the announcement, on **1.2x average volume**. This indicates high conviction among traders and investors that these cost-cutting measures, combined with a focus on AI-driven efficiency, will significantly benefit the company's bottom line and future outlook. The sustained upward momentum suggests this is an exploitable move.",
-      "peer_tickers": [
-        "META",
-        "PINS",
-        "TTD"
-      ],
-      "headlines": [
-        {
-          "title": "Snap to cut 1,000 jobs after activist pressure, bets on AI efficiency - Reuters",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQeXhCWnBQOUtZeEEyUmZXUzlfVFVYTFR1N1FmQkx5TVE3SThobUJxWG41YnJ2Wnd6MXVselBtT0t4NW1hQXVpX0VCNHBpQ2xTaUI4SnFkbnU4ZllCY0hSLXJDNm5HVmFFcTVSLTdsYWN4MlBHTGhPbFRxeWVJaWR4NnIyeGx5VUIzZ21STzNlcw?oc=5"
-        },
-        {
-          "title": "Snap's stock jumps 7% after announcing plans to lay off up to 16% of its workforce - MSN",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi8gFBVV95cUxOOHo0TmZyblBZMXN3U0JIY2d2N1YyVFg1WFFmYXIwM1doVms0Z0U1cDMweUNhODRBWGZ3SzJHU2hvX2VmdjMtMHAxVFdTYnhGM3F4RFRiVXVGcmhvUFRWeURkMVVHRFYxUmhHaVc4RHlJekFVUzRLYnUwQnBPUHFieGpSQ21SeU1PSUFONkpnai1UbDNNMU9QWDVNR1FMMG52ODdUV2hsUVRRc3AtTDZzbDBlMUppdmdfQnBhZXlaOTNmUzZQOWc4Wk84SXJNM2ZEMWpFSWFNY0RCMFlPVHpnVVlONmJidTNTQVYwNzdpbTc2Zw?oc=5"
-        },
-        {
-          "title": "Snap's stock jumps 11% on plans to axe 16% of its workforce citing AI efficiencies - CNBC",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPWkxlOEVFVDQ5eFZlcDhMbWl0dzRndDEyWkZpdnR1bVlxWmtZTWZPMDk5NG8wdUJvYUh4cFNZZE5xNl9qOWpuWXNnWW5rV3hrYlZkaWVDSWVYek1rTDRmLTJ0NktWSHB2QVRzMFVhYkxiZGJ1VWZrcTBIcVliOEpuTE1B0gGHAUFVX3lxTE9ydU1ZMllneFVuZ3VoOFMxX0dNbjNRc3Z2VTk5LUZ4TGFxdDE5VmFMaEJxUG1OdVJJSmlNZE8yVjRUaGhmVTl4a2JLVHM5eWt0aXUzUVlIY3BEaFEtZUQxTzNrWmY1X2pIdkU1dkhpQ0h4dDQ0WVJrcHBubm85VUZ1bzlkMENGTQ?oc=5"
-        },
-        {
-          "title": "Snap stock jumps as layoffs target profitability push - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQZWdDeVlYYTdfRmwwRlE4SFV2aUVVQURLTGpNNjNJbEFIUEp6R1N4d21BY1d5cDFNbFFzbF9vU1RKbTE4WV90aEN3ZWNLcWVGMjdrb1RDS18wTGhfZXBKSUl2N1FpNDM2dHA0WkQybTNGUXAyTUREOHg3a29UOE1XcU9YNXRseUJxZk1HRmpfOG5EQjZXMjRqa01wMEJnbVlIVmxQS3JyQ0lDeUlSLWR1ZUctNWNNQQ?oc=5"
-        },
-        {
-          "title": "Snap jumps as investors refocus on Specs AR roadmap and AI narrative - Quiver Quantitative",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPWmcwMlFpRDdUZTBaM0dTMld2N3BsVzRxdGU3LXJEUHZLVk5EcTZQRjRIMHJCTEVWaDlOUV80OUhVTTh0ZnRXQmhuRVg4RjR0S0FnY0ttRlNkU01vVmdkZmVWS0tKMTVuWEdsSkQ4MzRWeXFORDZnN0FtaTlDb0lVY1g3SzNheWVKdzh4eFNMTTl1RzVmVTlhcGw5ajZud05Vd19R?oc=5"
-        }
-      ],
-      "float_shares": "1.10B",
-      "short_float": "9.65%",
-      "daily_pct": 8.74,
-      "industry": "Consumer - Social Media",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "up to 16% of its workforce (job cuts)",
-        "discrepancy_note": "Source A (Finviz) does not mention job cuts or a percentage of the workforce. Source B (Google News) contains multiple articles that confirm '16%' or 'up to 16% of its workforce' for job cuts (CNBC, MSN)."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "BULL",
-      "price": 5.82,
-      "gap_pct": 8.25,
-      "pm_volume": 693822,
-      "avg_vol_10d": 9479695,
-      "avg_dollar_vol": 55171825,
-      "mkt_cap": 3094128614,
-      "rvol": 1.4,
-      "adr_pct": 4.96,
-      "category": "Government Policy",
-      "theme": "Regulatory Change",
-      "reasoning": "SEC clears a major barrier that previously restricted retail investors from active day trading, directly impacting market participation.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 58,
-      "grade": "C",
-      "finviz_theme": "Fintech - Trading",
-      "analysis_detail": "Catalyst: The SEC has reportedly cleared a significant barrier, enabling retail investors to participate more freely in active day trading. | Impact: This policy change is expected to drive increased retail investor engagement and trading activity in stocks favored by day traders, potentially increasing volume and volatility for BULL.",
-      "analysis_details": "• **The Policy**\nThe SEC has reportedly **cleared a major barrier** that previously restricted retail investors from active day trading. This regulatory shift aims to **democratize access** to trading strategies and market participation for individual investors, potentially leading to a more dynamic trading environment.\n\n• **Direct Impact**\nThis policy change is a **significant tailwind** for stocks like BULL, which are frequently targeted by active retail traders. Increased retail participation is likely to **boost liquidity** and trading **volume**, potentially driving **higher volatility** and price action as this investor segment gains greater freedom to execute strategies previously inaccessible.",
-      "peer_tickers": [
-        "HOOD",
-        "GME",
-        "PLTR"
-      ],
-      "headlines": [
-        {
-          "title": "Victory Giant's $2.2 billion Hong Kong listing seen pricing at top on demand, sources say - Reuters",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxQSHRjVW1Xa3BHTjhIRTR5VVk1bHZ4eEtZR0tNcDFTTVhtRWUzNnRIUEZPZ2xzd180bElqU0hiVlZJUmJvZzlOM3MyWk90ZHZ3VlhScGluaWE2c3JLRlc3d1drNTdIa2IwNS1ZckZVdm5MRzBtaWxwSEpxTW5uRjFZZE9mekJPRHViZWRGbVpGaUhBTEJoYkNRSFY0UXQ2MTJYRGk4Z1ZBd3REVmladjBTUnVuUWkzc01fb0hORVZMcG1uYjhmanc?oc=5"
-        },
-        {
-          "title": "The Bull Case For HOYA (TSE:7741) Could Change Following Buyback And Possible Stock Split - Learn Why - Yahoo Finance Singapore",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9zUm56dDYyRl9tV1Z5LUJUNEt4YXVsb0didGxPUXZuNkpOdXlTb25Pb1N6ZVBqdjQ2Zk1yNVVScEZIVUxCczdsWVZ5dUNYNTcxUEpXbzEtRGlTYUp3X3Y4UHpJX041SXNpYVRhVXdOaWtyRzVsSnVnZTF1Q0E?oc=5"
-        },
-        {
-          "title": "BULL, HOOD Stocks Pop After-Hours As SEC Clears Major Barrier That Locked Retail Investors Out Of Active Day Trading - Stocktwits",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQeGdNV004WWtVM1NQV1U2OVlOUC1hYkpSbDhhbWVTa1JiTFY5T1NTcm51eUlrLUxjQ09LYVZMSjA2b2tJbHBOVFVEUVJXYjZzWGVEWFhMVERIRnZsc0pocUdlcGIyZER4cDBGVThGdlpIdmNZZXFzSlBPWkJEc2I4N1JibjJpT1V0NElCYjVULWhuWDh4RU9EdmxCREw0aDZIaTJUQndfNDV0RG5xMW1tbFg2TFJHQkg5ZGU2aWx1cWRrUQ?oc=5"
-        },
-        {
-          "title": "Silver Bull (SVBL) CEO adds 195,800 shares in open-market buys - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPcHpkeENOc0lrV2p1NlFrU1AtaEgxRVpycnBQMEo4S1NJQWloX1RlUlgyc2lxX2ptRmhGOUpLTUhuNzI2MHlLSlhDZnp1dkxhWHRTbThRM2lEenB6OHdWaUJ0dDR0NG1ueTBBSjRmS20tQm1GUW80dVFOU0Q1VFRlR19uNWNYdGF1SlRxaGhxb1FEWVlRclhtRVNPQ3lUem5peW5xTWpIYWpfNDJ4bGxFY1FKMm10OGpHRmZR?oc=5"
-        },
-        {
-          "title": "Direxion Daily MU Bull 2X Shares (NASDAQ:MUU) Stock Price Up 13.5% - Here's What Happened - MarketBeat",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNd2R6QnJpcUd6OFJiMWZtVGxvVEdGWmxBSTRQYUxPV1A1VXJEdElpYVV2RWdIX0RiZEV3WlVYYktxb0UwUGFLek9IR2RIejhtNGk1ampRN3NtbTdOWmJBbU00TjdlS09XWFhsWEtUTW9ZZ2lDbS1ETTBJemI5Ml9HMHd2Q2NsTmpwWjNaQXVzb0ZLOWx1OHhxblFwT1pkNzh2Y2JzVnZRN0hza3NERXNkZ2FHbmlneTU0bWFwS3E2THRDelVUcHUtbGROenNwUXky?oc=5"
-        }
-      ],
-      "float_shares": "277.36M",
-      "short_float": "6.23%",
-      "daily_pct": 10.23,
-      "industry": "Fintech - Trading",
-      "technical_status": "Fail (Avg $Vol $55M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 60,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "SEC clears a major barrier that previously restricted retail investors from active day trading.",
-        "discrepancy_note": "Source A (Finviz News) has no information to confirm or deny the claim. Source B (Google News [1]) directly states: 'SEC Clears Major Barrier That Locked Retail Investors Out Of Active Day Trading'."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "OKLO",
-      "price": 58.58,
-      "gap_pct": 7.2,
-      "pm_volume": 385275,
-      "avg_vol_10d": 8337751,
-      "avg_dollar_vol": 488425454,
-      "mkt_cap": 10167659838,
-      "rvol": 2.52,
-      "adr_pct": 7.69,
-      "category": "Government Policy",
-      "theme": "Lunar Nuclear Initiative / AI Energy Demand",
-      "reasoning": "Oklo shares jumped following reports of Trump's plan to deploy nuclear reactors on the moon and renewed investor focus on AI-driven nuclear demand.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 61,
-      "grade": "B",
-      "finviz_theme": "AI Energy",
-      "analysis_detail": "Catalyst: Trump's proposed initiative to deploy nuclear reactors on the moon, coupled with investors revisiting Oklo's potential role in Meta-backed power campuses and broader AI-driven nuclear demand, has fueled significant investor interest. | Impact: This narrative amplifies Oklo's long-term growth potential by aligning it with both government-backed space initiatives and the critical energy demands of the rapidly expanding AI sector, though immediate financial impacts are still speculative.",
-      "analysis_details": "• **The Policy**\nPresident Trump's reported plan to deploy **nuclear reactors on the moon** has ignited speculation about potential beneficiaries, with Oklo being highlighted. This high-level government interest provides a **strong thematic tailwind** for companies developing advanced nuclear technologies, signaling a future demand shift towards resilient, off-grid power solutions.\n\n• **Direct Impact**\nWhile direct contracts for Oklo related to the lunar initiative are not yet announced, the policy proposal significantly **elevates the profile** of advanced nuclear solutions. Concurrently, headlines revisiting Oklo's Meta-backed Ohio power campus plans and broader **AI-driven demand for reliable power** further solidify its narrative as a key player in future energy infrastructure. The synergy of space exploration and AI energy needs creates an **exploitable momentum play**.",
-      "peer_tickers": [
-        "BWXT",
-        "SMR",
-        "CEG"
-      ],
-      "headlines": [
-        {
-          "title": "Oklo and 3 More Stocks That Benefit From Trump’s Plan to Put Nuclear Reactors on the Moon - Barron's",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNV0RxUVRfbWt2LW5qNldZc1lmUUM5SEIzNHZBUm8tWmI3THI4WnV0Y2dmcVVidkU2V3gyRXhNTlpUdk1rZnZEWS01bXp5TEZsc2ptckpuZWI1aDFyRVlwU3FKOGVhbENTc1E1X2VyeGdqVGtoRFRKRjlibjFqWlRUWGhzZEdFekFlc2gzN09ZWmNLRGxPcEE?oc=5"
-        },
-        {
-          "title": "Is Oklo (OKLO) One of the Best AI Energy Stocks to Buy in 2026? - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQTjN2LWJqeklZY3ZzMjFuSHhLUS14bkQxU2h1TlJLa2hnNHFKbnpPeWpXRGdkcDRYdHpTNDMyaHdrUzRleURpNy1JVXNqVzdObGRUSV9MeEh0c3hTRjhwd0Uzc1VTZVl0LURkNVNnQzY4SDdDdWp6RHhiUVdhNGtOdkMtbFJ3d3l5NjFTc0RaYw?oc=5"
-        },
-        {
-          "title": "Why Did Oklo Power Stock Pop Today? - The Motley Fool",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNUWp4bXlGZ0hnWHB3RktoQTVmekdhUk1yZDlldXRSM216b1N4cDlPY05KZjRBdjU5TXU1ZER1b0xOY1B2NksyMGM0bzZJOFJUa0pvRWVzdGxxejg5UG5SY2Z0Mm45NUdrTmQ0cHpTWmNqMXBJVUdWaFh2YU5TeTFoSU1lVQ?oc=5"
-        },
-        {
-          "title": "Why Did Oklo Power Stock Pop Today? - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOMVpjcEx0Q1dLNWVmakJQZVlwN1NTLWkyZ29DMWZHc0F0WWNHQl9yZVdjMWtTQ0paZUJZeC15ZVVVY0VrZkV5YnZhbk5Tc2tlbk81Zm10anBNSXNQcUU1TFFBZFRtWk1tLVkyNm92RVBpMWl3c1lEa3B2R0VBb2o3VF8wcGEwNjFYR3pZeGpzU0tNVzg?oc=5"
-        },
-        {
-          "title": "Oklo Announces Changes to its Board of Directors and Management Team to Support its Continued Growth",
-          "source": "Finviz",
-          "url": "https://www.businesswire.com/news/home/20260414372491/en"
-        }
-      ],
-      "float_shares": "137.43M",
-      "short_float": "17.56%",
-      "daily_pct": 8.6,
-      "industry": "AI Energy",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Trump's plan to deploy nuclear reactors on the moon",
-        "discrepancy_note": null
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "HOOD",
-      "price": 79.09,
-      "gap_pct": 7.2,
-      "pm_volume": 1174643,
-      "avg_vol_10d": 27959499,
-      "avg_dollar_vol": 2211316776,
-      "mkt_cap": 71205385090,
-      "rvol": 1.62,
-      "adr_pct": 4.85,
-      "category": "Government Policy",
-      "theme": "Regulatory Policy Shift & New Growth Narratives",
-      "reasoning": "SEC policy change clears a major barrier for retail day trading, reinforced by analyst upgrades on prediction market growth.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 58,
+      "ticker": "AEHR",
+      "price": 73.22,
+      "gap_pct": 17.96,
+      "pm_volume": 330148,
+      "avg_vol_10d": 5254610,
+      "avg_dollar_vol": 384742544,
+      "mkt_cap": 2303007348,
+      "rvol": 0.5,
+      "adr_pct": 11.15,
+      "category": "Earnings",
+      "theme": "Beat & Raise",
+      "reasoning": "Aehr Test Systems' stock surged following strong earnings, highlighted by a **new $41 million AI chip order** that propelled half-year bookings **past $92 million**.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 75,
       "grade": "A",
-      "finviz_theme": "Fintech - Trading",
-      "analysis_detail": "Catalyst: The SEC has reportedly cleared a major barrier for retail investors engaging in active day trading, which directly benefits platforms like Robinhood by potentially increasing transaction volumes and user engagement. This policy shift is coupled with multiple analyst firms (Bernstein, Cantor Fitzgerald) forecasting significant upside for HOOD (up to **65%**) based on the emerging prediction market boom. | Impact: This combination of regulatory tailwinds and new thematic growth narratives could lead to a **substantial increase** in Robinhood's core trading revenues and open up new, high-growth business lines, significantly **re-rating** the company's long-term growth prospects.",
-      "analysis_details": "• **The Policy**\nThe SEC has reportedly removed a significant regulatory barrier that previously restricted retail investors from active day trading. This policy change is a **direct tailwind** for Robinhood, whose business model heavily relies on retail investor engagement and transaction volumes. It is expected to **increase** the addressable market for frequent traders and potentially **boost** payment for order flow revenues.\n\n• **Direct Impact**\nThis regulatory shift, combined with strong analyst sentiment from firms like Bernstein and Cantor Fitzgerald, projects a **significant upside** for HOOD, with price targets implying up to a **65% increase** or even a doubling of the stock. The new growth thesis around prediction markets, where Robinhood and Coinbase are seen as best positioned, adds another **high-potential revenue stream** that could further **accelerate** user monetization and expand their total addressable market beyond traditional equity and crypto trading.",
+      "finviz_theme": "AI Compute",
+      "analysis_detail": "Catalyst: Aehr Test Systems reported strong earnings, underpinned by a significant **new $41 million AI chip order** that drove half-year bookings **past $92 million**. The report indicates robust demand for their semiconductor test solutions. | Impact: This performance suggests a **substantial beat** on revenue and bookings expectations, likely leading to a **raised outlook** and reinforcing AEHR's critical role in the accelerating AI semiconductor market.",
+      "analysis_details": "• **The 'Beats' (Surprise Factor)**\nAehr Test Systems delivered a **strong earnings report**, with the highlight being a **new $41 million AI chip order** that significantly propelled half-year bookings **past $92 million**. This performance indicates robust demand for their critical semiconductor test and burn-in solutions, particularly within the booming artificial intelligence sector. The magnitude of the order and bookings likely surpassed market expectations.\n\n• **The Growth (Momentum)**\nThe substantial **$92 million+** in half-year bookings underscores strong operational momentum and an accelerating growth trajectory. This sustained demand, especially from the AI chip segment, positions AEHR as a key enabler for the expanding semiconductor industry. The continued influx of large orders suggests further revenue acceleration and market share gains.\n\n• **The Guide**\nWhile explicit guidance details aren't provided in the headlines, the impressive **$41 million AI chip order** and **over $92 million** in half-year bookings strongly imply a **raised future outlook**. This robust booking performance de-risks upcoming quarters and sets a positive tone for sustained growth, signaling confidence in the company's ability to capitalize on the AI driven semiconductor boom.",
       "peer_tickers": [
-        "COIN",
-        "MSTR"
+        "TER",
+        "KLAC",
+        "LRCX"
       ],
       "headlines": [
         {
-          "title": "Stocks making the biggest moves premarket: Bank of America, Broadcom, Robinhood & more - CNBC",
+          "title": "$41M AI chip order pushes Aehr's half-year bookings past $92M - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOYWVFZlZhbjhfNldpZkluc093V2c0UlpYRS15cktXcnp2elBJdEZUeGpnVGNaakgzZ1NVcV9BUmU1TXRndUFxRlZaUDNOZzFNaEl5NG5yN3U0bUNxMGcwdmcxcmlkSHVjR3ZTbm5teVloWEk0UjBhU0xjc3BHSWMwMlJRa0NrYWMwVHZoVHFPT1ZtMFdoaXlz?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQcE9LWERUVk1HZUJ1UGlDVDdPb0FDbzFlVFNDbWEyTWxaSHd0R0ZiQXZVYnI4Qm5kWEtTUkprTE9nM0RfZHRPQzN4dWJtV1cxTkRTSFkyREp6dHhoOVROOHFZZVNxUG9pZXM2SGE5djNCUjVyZHJmMzFJcy1qcUJUUWNibTFGY2N6WmFMUkZGODJ6VktyMVdUcXlXd3Bhd01XWDQ1US1nX0pfM3o3Qkgtd3A4Zw?oc=5"
         },
         {
-          "title": "BULL, HOOD Stocks Pop After-Hours As SEC Clears Major Barrier That Locked Retail Investors Out Of Active Day Trading - Stocktwits",
+          "title": "Why Aehr Test Systems Stock Skyrocketed Today - AOL.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQeGdNV004WWtVM1NQV1U2OVlOUC1hYkpSbDhhbWVTa1JiTFY5T1NTcm51eUlrLUxjQ09LYVZMSjA2b2tJbHBOVFVEUVJXYjZzWGVEWFhMVERIRnZsc0pocUdlcGIyZER4cDBGVThGdlpIdmNZZXFzSlBPWkJEc2I4N1JibjJpT1V0NElCYjVULWhuWDh4RU9EdmxCREw0aDZIaTJUQndfNDV0RG5xMW1tbFg2TFJHQkg5ZGU2aWx1cWRrUQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBSZXprUUl6WVloY0trenJqcFBTVmRNRjVjNnVkU2lQOU9XX2pKR25lOGVISEpmdXJZSFhRWGZMOGhoU1RXTF8xQ0NzbHMzS3VRcGtjNDA2N1NLUmVTUTBiYlR6eDJhUjlXOUx2S0V4X3hEWnR2SU4wYVpFTQ?oc=5"
         },
         {
-          "title": "Robinhood Stock (HOOD) Soars as Bernstein Forecasts 65% Upside on Prediction Market Boom - TipRanks",
+          "title": "Didier Wimmers of Aehr Test Systems sells $385k in stock - Investing.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQOHMtZ0VnQjB1RHdYaV9lS2FLaThiZGFJT2wtS1dxWE8td1FpZFJaYXlrNFM0SFRadHJMVHBCc1RNRmp1clFLbElIendrVElUUzFOVWs2STdUcDRhWEN5ZjVmUlZBcmhINkx0RTdDZDdlYjd3SHVrSmFadVFiRFlENk9rbjJZOXpFb3hOTUIwWklUR05uekdIZDQxbWpLaHp5T0QtZXpjWUl0Y083cG1EcVVFenN4Zw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQeEpRTkZOeWhOcFRZa2M0T0IxWkgtV1NzVjNLNE1KTUtzWWpGdzZsQWduRGNYdmpXLUREd1lMcGFSLTVvVGVMUmJ3bHprUGFtUVlXQnhETGlPSHY4bXAyT1dvblYtcHJYOUhqNzB3Uk5kZ1FXRnFjY094eFdfeUVlcWlKYjhrQ2l0M3FuV1pGaXV2MHpXNDNfVFVJWjR2b01CMEZQOXV0dHMzWWxIZkRhTTNGYnNzNk5RYlFuaQ?oc=5"
         },
         {
-          "title": "Robinhood shares jump following raised price target",
-          "source": "Finviz",
-          "url": "https://www.youtube.com/shorts/IPKxGHQQaCQ"
+          "title": "Didier Wimmers Sells 3,500 Shares of Aehr Test Systems (NASDAQ:AEHR) Stock - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOeG5tSmtNd21NM0h3aVZ5ajg3UzRmS1dfMlVkZWlYN3NLRWhPQWNZTVdBNTJHUDdaQTVsUUdUYmJ5aXh3LWxKTEMwSFhTWlJORm91cXBPUi1IdVpOWDVCS2psNkhTbzlKVW8zOHhSUDRSb0pvd0pDTVBDbjF0MEwxd2FuOEN6eUxhRlZDMElwZV9jelZUeXdydG5iSkwwdUxjOXVkZXgyNDFaTzNUclN0dS1mU1lDaXQwSFk1QUpETnpaZw?oc=5"
         },
         {
-          "title": "Why Robinhood shares are seen to double",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/981a10fb-ad1e-390f-873b-c194e6524986/why-robinhood-shares-are-seen.html"
+          "title": "This red-hot chip stock is surging 27% after earnings. What Wall Street thinks. - MSN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQRmhycHpIN0ZVN0h2enhDWDc0VHJybU9rZVZSUVkwOXM5VEFaNlloZ2NFZjZvVy01RjV6OUxSWEJ1Tzl3R1Nla2stLVhQNTM1dzM2VkdsTUlkV1NNWjFOWlprOGdWYnlVMWw0TlhqVjFaNDA5U1BFXzRmWXYtaWpQMjlhOFNvYjkzYW0zQ0xySWNBOWs2M3luYWwxLWc4Nm5UTjNManJ1YzdRUl91ZmFObkh4Rnhzbm1VTDg1Mi1TNEJ5TWs4Tmw1OGFCdUxkWU1Xa1ZBbjl6SQ?oc=5"
         }
       ],
-      "float_shares": "762.54M",
-      "short_float": "4.39%",
-      "daily_pct": 10.35,
-      "industry": "Fintech - Trading",
+      "float_shares": "29.21M",
+      "short_float": "14.00%",
+      "daily_pct": -1.56,
+      "industry": "AI Compute",
       "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
@@ -514,163 +127,8 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "SEC policy change clears a major barrier for retail day trading",
-        "discrepancy_note": "Source B [4] from Stocktwits explicitly mentions 'SEC Clears Major Barrier That Locked Retail Investors Out Of Active Day Trading', which directly confirms the claim. However, Source A contains no mention of an SEC policy change clearing any barrier for retail day trading."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "IONQ",
-      "price": 35.76,
-      "gap_pct": 6.68,
-      "pm_volume": 2580099,
-      "avg_vol_10d": 22203916,
-      "avg_dollar_vol": 794012036,
-      "mkt_cap": 13111072500,
-      "rvol": 4.23,
-      "adr_pct": 6.85,
-      "category": "Thematic Narratives",
-      "theme": "Quantum Computing Breakthrough",
-      "reasoning": "IonQ stock **soared 20%** after announcing a significant **quantum-computing first**, reinforced by broader sector tailwinds from Nvidia's AI push into quantum models.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 66,
-      "grade": "A",
-      "finviz_theme": "AI Compute",
-      "analysis_detail": "Catalyst: IonQ announced a significant 'quantum-computing first', marking a technological breakthrough in the nascent industry. | Impact: This achievement potentially validates IonQ's technological leadership and drove a **20% surge** in its stock, amplified by broader positive sentiment around Nvidia's new quantum AI models.",
-      "analysis_details": "• **The Narrative**\nIonQ's stock **surged 20%** today following reports of the company achieving a **\"quantum-computing first\"**, signaling a significant technological milestone in the competitive quantum computing landscape. This achievement highlights IonQ's potential leadership and innovation, providing a strong fundamental catalyst in a sector highly sensitive to technological breakthroughs. The news was further amplified by general excitement in the quantum space, spurred by Nvidia's recent announcement of new quantum AI models.\n\n• **Explosiveness**\nThe market reaction was highly **explosive**, with IONQ's stock experiencing a **20% increase** on **4.2x** its average 20-day trading volume. This robust price action, coupled with a high average dollar volume of **$794M**, indicates strong institutional and retail interest. The concurrent news of Nvidia's expansion into quantum models likely provided additional tailwinds, creating a perfect storm for a significant momentum play as investors flock to the next potential disruptive technology.",
-      "peer_tickers": [
-        "QBTS",
-        "RGTI"
-      ],
-      "headlines": [
-        {
-          "title": "IonQ will discuss Q1 results and business outlook after the May 6 close - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNRnpUcGpJVkI4ZktJWXBpMUZ6WWdzYmxGZ1kyUGloZ0ZRVlh5emUyVGY5bGphWUdNUG9jMnpuU3FlTi02djRVOEFpTjhNSE9TUWZEeE14WUxrRTdOdVkzTnRNcWg3RHdqMTE3LXVYLVlpZU5yQ0JaRnBTWEJudjVwaEIyWlU0Mk11NWlraEpMNjltOW8wMVEzVVhpQjdvd3lwUFZrQzNITnMyaWRXaHFPUnJTb2RLc2c?oc=5"
-        },
-        {
-          "title": "IonQ Stock Soars 20% After Pulling Off a Quantum-Computing First - MEXC",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE90a1piM3FEcUo1OEc3Qlp4WjctUVVWaTVLWlJQc2tmV3BOekM0RXFnYmcwWWZmWnRpVHQ2Z0tlX21aQWVxRHA5aQ?oc=5"
-        },
-        {
-          "title": "Why IonQ Stock Skyrocketed Today - The Motley Fool",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQMV8zMnlyY1lLZnVMR1FzWHB5SEI0MzVXWkdTX096U1ZmRW44WVFIX1ZHYkFld0kta0NMX0lpQmFIbFRWRHUweDQ4NWFyMlloQTd2RWNDT1hUOHZCejI5dkI4WG02alItTjZFclNVRmFtSS10b1kwbG4wajJYcEVlXw?oc=5"
-        },
-        {
-          "title": "Why Is IonQ (IONQ) Stock Soaring Today - StockStory",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQU0FHUHRabGRSaTA4Qm5vTHZWNmR3OVhqc3FzbklZaFV3cHNYc2ZISGlXT1pwVHFzTmNsYklmREFZNVBHd1NQZ3VVdWdWVTZtTDRfZ0RCTUdGVDJGVUVNUHBDVEJJLVpTNFM1b1dacVNxb2NLdFpwTzlkVklIdTh4NHp5Sm1WVHNsdk1NSy1hb0cyTDdMNVN5MGVlcHAxbEE?oc=5"
-        },
-        {
-          "title": "Nvidia Expands AI Push With Quantum Models",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/sectors/technology/articles/nvidia-expands-ai-push-quantum-194027542.html"
-        }
-      ],
-      "float_shares": "357.28M",
-      "short_float": "22.65%",
-      "daily_pct": 20.16,
-      "industry": "AI Compute",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "IonQ stock soared 20%",
-        "discrepancy_note": null
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "GTLB",
-      "price": 20.08,
-      "gap_pct": 6.42,
-      "pm_volume": 97792,
-      "avg_vol_10d": 6951731,
-      "avg_dollar_vol": 139590758,
-      "mkt_cap": 3416250424,
-      "rvol": 0.67,
-      "adr_pct": 5.24,
-      "category": "New Contract/Partnership",
-      "theme": "Expanded AI Collaboration",
-      "reasoning": "GTLB surged after announcing an expanded AI collaboration with Google Cloud to integrate AI coding agents running on Google models.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "A",
-      "finviz_theme": "AI Enterprise Software",
-      "analysis_detail": "Catalyst: GitLab announced an **expanded AI collaboration** with Google Cloud, integrating enterprise AI coding agents that run on Google models. | Impact: This strategic partnership **strengthens** GitLab's AI offering, **enhancing** its DevOps platform capabilities and potentially **widening** its competitive moat.",
-      "analysis_details": "• **Impact**\nGitLab's announcement of an **expanded AI collaboration** with Google Cloud is a **significant development**. The partnership will enable enterprise AI coding agents to run directly on Google models within the GitLab platform, directly **enhancing** developer productivity and code quality. This integration is crucial for maintaining competitiveness in the rapidly evolving AI-driven software development landscape.\n\n• **Strategic Value**\nThis collaboration positions GitLab more strongly in the **AI Enterprise Software** space, leveraging Google Cloud's advanced AI capabilities. It helps GitLab **de-risk** potential AI disruption, turning it into an opportunity to **bolster** its product offering. The move is likely to resonate positively with enterprise clients seeking robust, AI-accelerated DevOps solutions, potentially **driving** increased adoption and stickiness for GitLab's platform.",
-      "peer_tickers": [
-        "DDOG",
-        "MSFT",
-        "CRWD"
-      ],
-      "headlines": [
-        {
-          "title": "Biggest stock movers Wednesday: GTLB, AVGO, and more (NASDAQ:WULF) - Seeking Alpha",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxONmxjbVlINWcxdnFpenp3MWpyQ3YySXZubjhyRWg3dlEyOWhVTFdqWkgyNU1UYlgtcURfeXNaYWhzVTNJQUdaUlMydkhoNTlXSk9LRWhkdFVzUmIwTmdoREg0N1Vnc05kSGNaMzltOEV4d0tFeEE0UDR4aVRnM2ltNkhlcmJ3WlRiZjAzLW1qc2E?oc=5"
-        },
-        {
-          "title": "Why Is GTLB Stock Up 7% After Hours Today? - Stocktwits",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNbkF5SUR2OTBMZU84RlVObFVVSGV0WmVrMnZiQ1A3V0xtZHFIV0NkYXRCM2RadDU2azRHUlROZ1ZxTlI4YzZTZDJJQTF3RHpfTHZVejk4ekhndUNBZHZfZ1ZybXloZFhhZFd0Y1l4V3F0OGtvNFI5SUpRaGpvOW5lNWZ6WW90QTZzN09TamJDaldpY0RUZjRVUW9ucFZ4dmV4TEhHbg?oc=5"
-        },
-        {
-          "title": "GitLab Stock Jumps On Expanded AI Collaboration With Google Cloud - Benzinga",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQRV9vRVJVQTdldk5XeERPUnUyVlJoY3ZEaDVqMnlZLTQ1MDVGbXF1SFF1QkNlYVl1a0JwUlh6dXNUTW4tOFdWdVpDWV8wUDVvWWh2UW9ydU1Jd3NEZ09XY1BvT1FuRzItaDBMUDhUY3hQb1NtZkJhek9oeGhEZkFYSmtFVnFtd0loeDVfS3lQVEFibUV6Wl94M1R1M3VRZjJ0MEZpRGV1N25sMjA5clVrc3V4MFowanI2Z3Atcm4xR3VFWS1U?oc=5"
-        },
-        {
-          "title": "GitLab lets enterprise AI coding agents run on Google models - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNTUxXOUFBb2J2Nm82REdSLTdQYTRfY1B1VlExdnhkNk5SWGtyXzUxVWhRQ2pLUExqakJZcjZpbXNBdmtJcWtkc1FGU3hvY21fYXpid19MeVNLSkEyeDlUV0VxdFprVWlhaHZlM3VWakhzZEJiUGF1OTNzeUh1S3NZb0UtdGwxVkI4STl6c2pzSWNKOFdoamVILVEwQ3NOYkVBdGpCVUFPRWk2UXpaWENuLXRsdWs0cU80VHZHWEJhcw?oc=5"
-        },
-        {
-          "title": "A Look At GitLab (GTLB) Valuation After Guggenheim Downgrade On AI Disruption Risks - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxOeFFSeWdpb09UXzhRQnZ1TXhLQUtRUW9YT0tDVDBpTk9KZmQ3cTZmWThINUw2Rk1nNzdoMlA3NXBVeF9aYUFHeHFQNUJVTzJGRndkZGFBald3S3BvQ2ZJU1Z6a1Q5cF9xQnJncm1hVTQzTlVQWEp0UU9jWGwtYkw1OXVMVjkxXzBtNUtqLVBtalVMUGZqUzFoVk9zUVp3MHAtWkx3Z1A0dzQweDBvSVYyQVRHNUxYeHN0NmVrOEFuaTMtcmPSAcgBQVVfeXFMT3pLQTZhTzdUSmpta2c3ZXRQbGNTdlBTZTdvWk9EaTFxWk82MWVaQ2hCS1RKcy1vZDZKcW1IQ3FXUFppTi02QlgyU3hLYUlEMGt2Zkg0aUotTDR1am9kUFJ6LTgxcHZyN01qcHFEUjY0cHp1ck1Gd0VfZFhqWXZzaGNxd2piajc1UkJ2MWU2ZVFfcDF6MjFNNjh5YTlXR1VySnlnZ3hmaHBnOENrTm5kNG9YWDVMUDhxT08zWGQ3cmtRdVYxNVRRZHI?oc=5"
-        }
-      ],
-      "float_shares": "143.21M",
-      "short_float": "12.19%",
-      "daily_pct": 0.25,
-      "industry": "AI Enterprise Software",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "GTLB announced an expanded AI collaboration with Google Cloud to integrate AI coding agents running on Google models.",
-        "discrepancy_note": "Finviz (Source A) provides no information regarding this claim. Google News (Source B), specifically articles [3] and [4], confirms the collaboration with Google Cloud and the integration of AI coding agents running on Google models, but a second independent source is needed for full verification."
+        "primary_claim": "new $41 million AI chip order that propelled half-year bookings past $92 million",
+        "discrepancy_note": "Source A (Finviz News) contains no information to confirm the claim. Source B (Google News) contains one headline ('$41M AI chip order pushes Aehr's half-year bookings past $92M - Stock Titan') that explicitly confirms the claim. Since only one of the two primary sources provides confirmation, it is marked as Discrepancy."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -685,69 +143,281 @@
       "tier_label": "Major Catalyst"
     },
     {
-      "ticker": "RGTI",
-      "price": 16.87,
-      "gap_pct": 6.05,
-      "pm_volume": 1259287,
-      "avg_vol_10d": 24900821,
-      "avg_dollar_vol": 420076850,
-      "mkt_cap": 5603380458,
-      "rvol": 2.74,
-      "adr_pct": 6.77,
-      "category": "Thematic Narratives",
-      "theme": "Quantum Computing Breakthrough & Sector Momentum",
-      "reasoning": "Rigetti Computing's 108-qubit system went live, generating excitement around its on-premises order pipeline, further fueled by NVIDIA's quantum AI model launch, driving a broad quantum sector rally.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 62,
-      "grade": "A",
-      "finviz_theme": "AI Compute",
-      "analysis_detail": "Catalyst: Rigetti Computing officially launched its **108-qubit Aspen-M system** and highlighted its **on-premises order pipeline**, coinciding with NVIDIA's announcement of new quantum AI models. | Impact: This combination has significantly **re-rated RGTI's short-term momentum**, validating its technology in a rapidly evolving sector and attracting Wall Street attention.",
-      "analysis_details": "• **The Narrative**\nRigetti Computing experienced a significant surge, with its stock up over **11%**, driven by two key catalysts. The company officially announced its **108-qubit Aspen-M quantum computing system** is now live, drawing attention to its potential for **on-premises orders**. This company-specific milestone coincided with broader sector excitement as **NVIDIA launched new quantum AI models**, creating a positive ripple effect across quantum computing stocks.\n\n• **Explosiveness**\nThe combination of a core product breakthrough and sector-wide tailwinds provided a powerful catalyst. RGTI's stock reacted with an **11.5%+ jump** on volume that was **2.7x its average**, indicating strong institutional and retail interest. The **6.8% ADR** suggests this stock has a history of volatility, making it highly susceptible to momentum-driven moves. This dual catalyst creates a compelling narrative for continued short-term momentum.",
+      "ticker": "ANL",
+      "price": 13.25,
+      "gap_pct": 15.25,
+      "pm_volume": 93038,
+      "avg_vol_10d": 744285,
+      "avg_dollar_vol": 9861776,
+      "mkt_cap": 530003547,
+      "rvol": 1.64,
+      "adr_pct": 15.89,
+      "category": "Institutional Buying",
+      "theme": "Capital Raise / Institutional Investment",
+      "reasoning": "Adlai Nortye secured **$150M** in funding from investors, providing capital for its cancer drug development and operations.",
+      "hypothesis": "Medium Conviction (RS Hold) — Large fund accumulation; watch for continuation.",
+      "conviction": 58,
+      "grade": "C",
+      "finviz_theme": "Biotech - Oncology",
+      "analysis_detail": "Catalyst: Adlai Nortye, a cancer drug developer, successfully secured **$150M** in funding from investors on 2026-04-16, following a recent **11.7% decline**. | Impact: This significant capital injection provides crucial funding for ongoing cancer drug development, **de-risking** its financial position and extending its cash runway, signaling strong investor confidence.",
+      "analysis_details": "• **The Buyer**\nAdlai Nortye, a cancer drug developer, successfully **lined up $150M** from a group of investors. This significant capital raise demonstrates external confidence in the company's pipeline and strategic direction, providing a substantial infusion of capital into its operations.\n\n• **Conviction Signal**\nThe **$150M** investment provides critical funding, substantially **de-risking** ANL's balance sheet and extending its cash runway for ongoing oncology drug development. This financial backing signals strong institutional conviction, potentially mitigating previous selling pressure and attracting new momentum buyers.",
       "peer_tickers": [
-        "IONQ",
-        "QBTS"
+        "KURA",
+        "BNTX"
       ],
       "headlines": [
         {
-          "title": "Rigetti Computing (NASDAQ:RGTI) Stock Price Up 11.5% - Still a Buy? - MarketBeat",
+          "title": "Cancer drug developer Adlai Nortye lines up $150M from investors - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQem5LZ2FoRUItZzNRc1lZVVZWbC1pOTYtN1V6TW1jM0hCWkw3c3RzTGdGaWZ5TEc5ZVBHVU9vakE3NnM3QzE0b2tINk1MNnhKUUk4STBYS2FsLTdVcGZEa0RKeHozRms2cjVsbFFWZmx3YmRZTWptQndvLTNFeUwzYUxUcUFhNE4wLU8zOEN3TmpSaGxXc1dOSl9lUGZjeXk3R2tUa3Npb2phNGpCRUJuSnhaQQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxONFVSbzdQb3FWUkV2RDR3Y2VuTU9pS3Y1OF9CS00zSG1IcGMzY0YtTmNtWmVFMmNlTlNGWm85Rkp5NEh1S1M3bUEwU0JHSkJVZkY3TlY3QlhfU2kwSzlFbmRoWnlsdFAteXlpclFzSzRlUVA3VXVyeGhkeWEzY3dUSy03aTBoTFZXZUZmSFIxbVdfZ3A4dzFrOXhTN0ZvUXhWMHRQbEZUclI3anhIWlB0VTk2VzVXdw?oc=5"
         },
         {
-          "title": "Rigetti (RGTI) jumps 11.8% as attention returns to its 108‑qubit system rollout and on-premises order pipeline - Quiver Quantitative",
+          "title": "Adlai Nortye (NASDAQ:ANL) Trading Down 11.7% - Here's What Happened - MarketBeat",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxONHZtNDhZQU5vWGo3czItd3kyLUZiU05RZERza1JBU3hQNDBOX3pHQ1RwNVd6d2lvZlBmQXJJQzZ4X3lhaG9fWGdBLXctbFdvdXVYSnVPb1dWTmt3dERQb1BiVG9TZ2p0ZUZLWnd4OU1iMWhrdHF3YkpnYjU2eEZpV0N5LVo4b1MtTmpDbVZNV2ZqTnNoVDYxVURHRFZHdTZqUXRDU2QtRHRHazZaOXg0b2VtVTJHS3pfWEtNZEthSFE5VFVjRFA4TXdXTDRhVTBGQ0MyUXRnTzdNQ1pUS2hUTmxZUU40LVI3eV85LXBB?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPclpQdXJRaWJMOU1uNC1mN2NSQlB0TjVwbnJiTmVSOGs1c0xVRnpKTHNRRXBYdjViU0lwUjdKU2hZRFRnS3hsOTJNNDUyYTlGZkpHTW1pU1J3OGFGYWFRNFNjTUxpLUNfUVp2TG4tUnh1b1U4TDhQeTI5YWlQcF9kMG5NTEJSNi1WT3YwdHc4UFRGZlNXR1lIUURxOXEwUjRNUklFUTBheENic0t5QVpfUGY5dw?oc=5"
         },
         {
-          "title": "Rigetti Computing (RGTI) Stock Jumps 10% After 108-Qubit System Goes Live - CoinCentral",
+          "title": "Wednesday's session: gap up and gap down stocks - ChartMill",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPZjc5UlFYSjYtUHZoX2FaU3VBMjdXclVaN2k1cEdYcmMxbG16a3dURjFMeWFvN1hLRGFRZHB3VC1rOTBRam0zdk5NZ2tiWVhNWkR6NFV2QUh2bVZ1Y0tGTTVKaG1VTk9RNEJDWWFHOWo3WUl5VTZxbEhCR3RwVS1ZUVRLWnRXbEY3SUFBZ2Q0TUZuTFcyTlpUOE9GRQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNUG1Na3VjSmxlVWQzTG9CVklvQ0d3NWlQeURtTmdyaWM0V1pYUU1lNlk5d1dLNUQ3U0dsZndKa3MtVEtmcldlVmZfT2IxQWFfcDlUWXdFQ1E0bW9pWlhkR0pYZHZ4UUN2MzhCVm9hSlczb09WQlphSGtXT0JfTlVYc1hKbDk0Q3dxRVNZbENjZUw1VFhlN0JBVV9tTTRTZw?oc=5"
         },
         {
-          "title": "RGTI Stock Pops As Quantum Breakthrough Draws Wall Street - StocksToTrade",
+          "title": "ANL SEC Filings - Adlai Nortye Ltd. 10-K, 10-Q, 8-K Forms - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOdXBieE9fTzg1XzNEUFg2eUw1R2hEUWxiQWRSbmF4TE1Jel9ZOUZmOUhQa2hZR0dMMmx0VUNOQ2NPVmwzVGpua29KMGZBNkdIbjcxLWFjdVFiR2NaOV9oX25GNkN0WE1VSDloU2JoN1ZPYUQ5TmNrYTN0azF3NUVEOVRB?oc=5"
-        },
-        {
-          "title": "IONQ, RGTI, QBTS: Quantum Stocks See Double-Digit Rally Following NVIDIA’s ‘Ising’ Launch - TipRanks",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNbDVVbko1d0Fkam5LTHRWQ0NaNDRQbnVPZmtLb244OEhKNUZMYVR2RWtwME96bmNTZ2NKOUxjS2Y5a3JHb1VPdkg3UmFSa2lVOGFuVHZqcDByTzh6SXFRWHVmdG1WTDBaVUlSU2dIQVVyclZYc3BmYzRPWDF1OExaclZhZUF3cFJvSnlRMUhhakJsOXpLQVlDVEJjWkwwekZra3VJWVpmZkhVNGhqck1OS1EwRQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1xTURJa0dROVE1MVBsd2hrOVoteXBiUkhCaEVfbTJVRUpIaWpMUEQxa2dXSjQ4VTBNeDlpd2t0WTk4eFBvOWRFM05Ua1VDX1ZRVWxKOFoxemVRSGFiZFJpMDF2Y3M?oc=5"
         }
       ],
-      "float_shares": "324.87M",
-      "short_float": "15.15%",
-      "daily_pct": 11.5,
-      "industry": "AI Compute",
-      "technical_status": "Pass",
+      "float_shares": "30.81M",
+      "short_float": "4.08%",
+      "daily_pct": -15.5,
+      "industry": "Biotech - Oncology",
+      "technical_status": "Fail (Avg $Vol $10M < $100M)",
       "verification": {
         "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "$150M in funding",
+        "discrepancy_note": "Source A (Finviz News) has no mention of the funding amount. Source B (Google News) includes one headline (Stock Titan) confirming $150M, but no other listed Google News articles corroborate this specific amount, and Finviz is silent."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "NEXA",
+      "price": 14.65,
+      "gap_pct": 12.63,
+      "pm_volume": 52558,
+      "avg_vol_10d": 1326373,
+      "avg_dollar_vol": 19431364,
+      "mkt_cap": 1940225643,
+      "rvol": 24.13,
+      "adr_pct": 6.18,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 99,
+      "grade": "C",
+      "finviz_theme": "Materials - Metals & Mining",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nNexa Resources (**NEXA**) has experienced a **significant surge** in its stock price, with **MarketBeat** reporting a **15.3%** increase on April 15th, followed by a further **22.7%** jump on April 16th, as highlighted by **Yahoo Finance**. This rapid upward movement has occurred without any discernible company-specific fundamental news, earnings announcements, or analyst upgrades being released in the last 24 hours.\n\n• **Key Consideration**\nThe absence of a clear catalyst suggests this move is primarily **technical or flow-driven**, potentially indicating a low-float squeeze or aggressive institutional buying. With an average daily volume of **$19M** and a current RVOL of **24.1x**, the trading volume is exceptionally high, further supporting a technically induced rally. However, lacking fundamental backing, there is a **high risk** of a \"gap and trap\" scenario or a swift reversal once the technical momentum wanes.",
+      "peer_tickers": [
+        "FCX",
+        "VALE",
+        "SCCO"
+      ],
+      "headlines": [
+        {
+          "title": "Nexa Resources (NEXA) Surges 22.7%: Is This an Indication of Further Gains? - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPUW81d1lMLXRiZXFxLS1hVzNPVk5mbmNHZ19LdkI2eDRNNkhBMGhhNEc1UzBnMlJTOThmU2VSN1hyWUhUVFkzWmpVRzJ5RnNOR2E4ZW1SdjhjeU1UZWgtcXlVSHZCbG9NTUp1eUkzcy10LXZnRmNsVTdqbEo0ZXYxVlFfVU94UExOWkdGTEd5VDVxUjM0UGk0RUR3?oc=5"
+        },
+        {
+          "title": "Nexa Resources (NYSE:NEXA) Stock Price Up 15.3% - Should You Buy? - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOWEEweGQ1bG83c3dXbURPcjlSc2p3LUdSYzVCcTRrNENyTVkwZ1ZNT0s4MGZLTHRta1h1VUgwdG9hRUpYTjNaaEdTYS1XUlktRkstTTVEeV9ab0k1cjNQdnpGY1o5OFZDZkttUGhBQjBRRnQwUURiTVM4Nld1VmdvTDUzRkkwd09vbWp6bjJuZjR5YnlNdHhfUGxkcE42V2FDaGx3cUNsZmxFcm91SzhCWQ?oc=5"
+        }
+      ],
+      "float_shares": "43.52M",
+      "short_float": "0.59%",
+      "daily_pct": 22.7,
+      "industry": "Materials - Metals & Mining",
+      "technical_status": "Fail (Avg $Vol $19M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "SMR",
+      "price": 11.71,
+      "gap_pct": 10.76,
+      "pm_volume": 4360395,
+      "avg_vol_10d": 29932196,
+      "avg_dollar_vol": 350506015,
+      "mkt_cap": 3958171289,
+      "rvol": 2.12,
+      "adr_pct": 6.89,
+      "category": "Government Policy",
+      "theme": "US Space Nuclear Power Initiative",
+      "reasoning": "NuScale Power (SMR) rallied following news of a US Space Nuclear Power Initiative, driving broader optimism in the Small Modular Reactor (SMR) sector.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 60,
+      "grade": "B",
+      "finviz_theme": "Clean Energy - Nuclear",
+      "analysis_detail": "Catalyst: The **US Space Nuclear Power Initiative** announced recently has fueled significant **optimism** around Small Modular Reactor (SMR) technology. This broad policy support is driving interest in companies like NuScale Power. | Impact: While not a direct contract, the initiative signals **increased government backing** and potential future opportunities for SMR deployment, potentially de-risking long-term growth prospects for the sector.",
+      "analysis_details": "• **The Policy**\nThe recent announcement of a **US Space Nuclear Power Initiative** has ignited a **strong rally** across the nuclear power sector, with NuScale Power (SMR) being a primary beneficiary. This initiative signifies a strategic shift towards leveraging nuclear technology for space applications and potentially broader energy needs, bolstering the thematic narrative for SMRs.\n\n• **Direct Impact**\nThis policy creates a **favorable macro environment** for SMR developers like NuScale, suggesting potential for **increased government contracts**, R&D funding, and accelerated regulatory pathways in the future. SMR's stock saw a **14.7% surge** yesterday on **2.1x average volume**, extending its rally today as investors factor in this long-term growth catalyst.",
+      "peer_tickers": [
+        "OKLO",
+        "UEC"
+      ],
+      "headlines": [
+        {
+          "title": "Quant check on nuclear stocks as SMR optimism drives rally - Seeking Alpha",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQRjdUQk94d2Yta3IzSm1sOVVNM0pIeGZ1NE1yQVktTkFXdC1MOFZsTHJ5VnhRN3ZVMUNBU2x4T2p4UmlUZExISGpGT21iQlU3aFpRaFBUbGRqMXFOOFFtTjZUMkR2cjFkbWg3bGJjZUlELTUwS2JVSWdZTjV0MUs2VkVsV3ZtZGY3d1BSWVBEbXpCanhOVzI3QVVPNWs?oc=5"
+        },
+        {
+          "title": "NuScale Power Stock (SMR) Extends Its Rally — Why RBC Says Don’t Chase It - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPMWd1NVltcF80REtBTkRHdzk0UXJ2bFFqeFBzSWZFSW81RHkwSkMxY1lZLWtzZkx1a1lmQU9FRnhCUkRnN09zYmpLaFhwNzdQOWR6eEl3T19xeEhWakQ4ekctQzcwT284bkNnOF9xLUNlMmpCOENiYnVJejRGZkhTdks2UFhPQ044THRwODlKcGwwY2VOU2pDeGwtbnlDZVk?oc=5"
+        },
+        {
+          "title": "NuScale Power (NYSE:SMR) Stock Price Up 14.7% - Here's Why - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQQTBSdHd4c2VCM3Nra2J4SUVlVUVvNHB5MzMxcmJ4dWctaVd4V0RDX0NpV196d2FpOUtZNHBUazUtVTZ6TXJvNldiUWRzWWNpc3E4RnRBdnY5VVgxRERlVF9fb040NV9wU0J5Z2d1WW9sUUJkUUNXaHVuODJKNGI4a2EzVVNsS1RIclRKRkkteTJLbW1wbFNNd0FGZ18tV2xYMjRZSC0yUQ?oc=5"
+        },
+        {
+          "title": "Oklo, NuScale Stocks Rally On US Space Nuclear Power Initiative - Benzinga",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPdjkyZkVlSnAtaXktVW8yWnljazZFYXFCTGdvcXhvSHlsd2VVWXlVV0k4VW1tSjAyUUJiM0FEbVhwZzhnY0I5VEg1SnBGT0Z3blFpYkFmOXJCZnhIeFJxakJOZWxSX2NXSDVfU3hndGJyYnRvU1I5dkpRNXlHa1dhckk5YXp0a2Jyd3pkbWFVYWUycDlOOFowVnA5WXRhVnNNRG55a0lOYm5UVXY3WTJUVkxFWW1vbXM3aXpRM2FkM2k?oc=5"
+        },
+        {
+          "title": "Why Is NuScale Power Stock (SMR) Up 15% Today, 4/15/26? - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOc3AzWWU0NzZRMk9DMEN0QngyZ3dZc2o2eDdnT1hhLVUwSnZIWDQ2MGRrZ3FOdXhKS3BrYUd2d2k3SktMODQxcFF6VGJGOFNuZDlBLUhQZFZVRW9rQlFFY3JRcU1aM3pqcFJOUG1iNzNUbC1BbXNsUEhVc0RIclltRmh4WWg3Vlk?oc=5"
+        }
+      ],
+      "float_shares": "260.94M",
+      "short_float": "20.52%",
+      "daily_pct": 14.24,
+      "industry": "Clean Energy - Nuclear",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "NuScale Power (SMR) rallied following news of a US Space Nuclear Power Initiative",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "HIMS",
+      "price": 24.29,
+      "gap_pct": 9.84,
+      "pm_volume": 2077870,
+      "avg_vol_10d": 23188214,
+      "avg_dollar_vol": 563241718,
+      "mkt_cap": 5536632810,
+      "rvol": 1.92,
+      "adr_pct": 7.31,
+      "category": "Government Policy",
+      "theme": "Regulatory Reassessment",
+      "reasoning": "HIMS stock is rallying on news that the U.S. government is moving forward with a plan to reassess regulations for popular peptide treatments.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 59,
+      "grade": "A",
+      "finviz_theme": "Digital Health",
+      "analysis_detail": "Catalyst: The U.S. government, potentially via the FDA, is reportedly reassessing or signaling looser regulations on peptide treatments. This news is driving HIMS stock higher. | Impact: This policy shift could **expand market access** and **reduce regulatory hurdles** for a class of treatments that HIMS offers, potentially **boosting future revenue streams** and **de-risking** related product development.",
+      "analysis_details": "• **The Policy**\nReports indicate the U.S. government is considering or moving towards a reassessment of regulations concerning popular peptide treatments. This shift is being interpreted by the market as a move towards **looser rules**, potentially making these treatments more accessible. The news specifically mentions the FDA's announcement and signals from figures like RFK Jr., indicating a broad regulatory focus on this therapeutic class.\n\n• **Direct Impact**\nFor Hims & Hers, a prominent digital health platform that provides personalized health and wellness treatments, a relaxation of rules on peptide treatments could be a **significant tailwind**. If HIMS offers or plans to offer such treatments, this policy could **broaden their addressable market**, simplify product offerings, and **reduce compliance costs**. The market's **strong positive reaction**, with the stock **surging over 11%** after-hours and continuing to **soar** on **1.9x average volume**, suggests investors anticipate a clear path to **increased revenue potential** and **accelerated growth** from this development.",
+      "peer_tickers": [
+        "LFMD",
+        "GDRX"
+      ],
+      "headlines": [
+        {
+          "title": "Why Is Hims & Hers Stock Soaring After FDA's Announcment? - Benzinga",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNUEI2V0ZoRkRCanV4a0FsbnVXeWM5TDE3TjJqdGh4SVBQTE5TZldmRFJlNHJzREE5ODVYUU02V3YtZ2p1a0tyVm95bk1kVTI4bGVLY29laVZZVEt6b3pzMV9EWXVjODM3TFFQTkszZ2RSSHk4cjIzMThaRHhhYWt3OHFUaXppUlFlMHBaVXYxczdVU09zT21tNTVnTmUzUnZaZmhNMUtlenR6Y0V6aTJJ?oc=5"
+        },
+        {
+          "title": "Biggest stock movers Thursday: HIMS, quantum computing stocks, and more (NASDAQ:QUBT) - Seeking Alpha",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQTXNCZFJWXzZRN1Y4QXVMb1lXLXk3XzhZQ2tzTEswSlVzOFE1ck1KelZyZS0wamNYTkxVZm9BUndmMXhjUUpSR0ZWR0hGaDJOZ1pONlJlVVhHTGFfbDR3NGt6RlFvNGd6MTZKUkhrRDhpNG1McmEwbjgzUXZmMFk2bW5nOEprNDlKVzVUTTYxaHBQLVpBNVFNQ1ZvX0kxOFg1UEhSZlB0OS1YZw?oc=5"
+        },
+        {
+          "title": "Why Is HIMS Stock Surging More Than 11% After-Hours Today? - Stocktwits",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOUTZ2WDJaQWxwbUhKYnB3cDhMdTV1RDBqQ293UFhtTUYtRXFVMnJzNm40Sl9kNFozamZ2dVl3U3V6ZEtvRzhMcHYtSjc3Q0dVWE5jMTAxbk5zRFFhVTYyT2R4SEJuNVdVLU1XdEVUQ3I3aS1WVU1CYkVNWk5mQno3TkJ5dEpLQzZoeTRsTGlwNTJSMmVMbUEtamtzcUdLT0NaLTRhMg?oc=5"
+        },
+        {
+          "title": "Hims & Hers stock jumps as U.S. moves forward with plan to reassess popular peptides - MarketWatch",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNTlNzMUlBUmNmYmlFNE03UkFaNHNKZW4yZWM2QWpIT1pGRHNBaHh3SjUwc3MyRG5GU0NoR0xOMGR3RFl1RWlaUUlmLVhVRVNvZlpLVDlKUGgwVmtSM3R0WGtkanU2b2xrS2JZQ0JscGlUNldsOXFDdUpVQ1RsOFVzS0VxdExfZm1kMHVLZmZiWFNMNGl2ajlNeUNCNmQ0ZHQzNWp0OElMYk5UNFMwbWFPY0xHd09yUG15QmhMeDVVVUx1dw?oc=5"
+        },
+        {
+          "title": "Hims & Hers Stock (HIMS) Soars after RFK Jr. Signals Looser Rules on Peptide Treatments - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNV2lnU0diWlFMcFB3LU5aX2Vubjg3WDFQZjU2M04yVGtKMEJ5aEZtb2lieG9CQXNEZUpEYzRhWWhoY1JRN2FqMlIyNzJCZVhHMXM2aVBBYTNRQVJHc090eTZWRWdHTFhIQnVRdi0yLV9yLXBzVWlIUmJaQVBORDNNcVJGYS1vWkFwUUhqMFNaXy12NF9ObkV1QkNUSlAzWk8tbkJnU3pyLVBBeHdGV3F2MERB?oc=5"
+        }
+      ],
+      "float_shares": "207.07M",
+      "short_float": "34.46%",
+      "daily_pct": 13.72,
+      "industry": "Digital Health",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
         "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Rigetti Computing's 108-qubit system went live",
-        "discrepancy_note": "Finviz (Source A) does not mention Rigetti's 108-qubit system going live. Google News (Source B) confirms the 108-qubit system rollout/going live in multiple articles ([2], [3])."
+        "primary_claim": "U.S. government is moving forward with a plan to reassess regulations for popular peptide treatments.",
+        "discrepancy_note": ""
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -762,71 +432,231 @@
       "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "STNE",
-      "price": 14.61,
-      "gap_pct": 5.89,
-      "pm_volume": 71945,
-      "avg_vol_10d": 3833440,
-      "avg_dollar_vol": 56006558,
-      "mkt_cap": 3957237747,
-      "rvol": 1.09,
-      "adr_pct": 4.2,
-      "category": "Others",
-      "theme": "Capital Allocation (Extraordinary Dividend)",
-      "reasoning": "StoneCo announced a significant R$3.08B one-time extraordinary dividend, although the stock reacted negatively despite market gains, indicating a 'sell the news' event.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 57,
-      "grade": "C",
-      "finviz_theme": "Fintech - Payments",
-      "analysis_detail": "Catalyst: StoneCo (STNE) approved a **one-time extraordinary payout of R$3.08 billion** to shareholders, stemming from the sale of Linx. This significant capital return translates to approximately **R$9.96 per share**. | Impact: Despite the substantial return of capital, the stock **declined** following the announcement, suggesting investors may have had higher expectations or preferred alternative capital deployment strategies like share buybacks or reinvestment in growth.",
-      "analysis_details": "• **What Happened**\nStoneCo (STNE) announced an **extraordinary one-time dividend of R$3.08 billion** following the sale of its stake in Linx. This significant capital payout translates to approximately **R$9.96 per share**, representing a substantial return of capital to shareholders. The company confirmed this distribution will occur in the near future.\n\n• **Key Consideration**\nDespite the large cash distribution, STNE's stock **declined** significantly on the news, even as the broader market gained. This suggests investors may have expected a different form of capital allocation, such as a share buyback, or view the payout as a signal of limited reinvestment opportunities. For momentum traders, the negative price action on a seemingly positive catalyst makes this a **'sell the news'** event, indicating a lack of immediate upside conviction.",
+      "ticker": "QBTS",
+      "price": 20.81,
+      "gap_pct": 8.79,
+      "pm_volume": 3340588,
+      "avg_vol_10d": 28162933,
+      "avg_dollar_vol": 586070636,
+      "mkt_cap": 7697903386,
+      "rvol": 4.7,
+      "adr_pct": 7.49,
+      "category": "Thematic Narratives",
+      "theme": "Sector Sympathy",
+      "reasoning": "QBTS is experiencing a significant rally in sympathy with the broader quantum computing sector following Nvidia's announcement of new quantum software tools.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 68,
+      "grade": "B",
+      "finviz_theme": "AI Compute",
+      "analysis_detail": "Catalyst: Quantum Computing sector gaining significant tailwinds from Nvidia's introduction of new software tools. | Impact: QBTS is rallying strongly as a key player in the quantum computing space, benefiting from increased sector interest and potential future ecosystem integration, driving a **43% gain** in 5 days.",
+      "analysis_details": "• **The Narrative**\nD-Wave Quantum (QBTS) is experiencing a **substantial rally**, gaining **22%** in the last 24 hours and **43%** over five days, primarily driven by a broader surge in quantum computing stocks. This sector-wide momentum is attributed to Nvidia's announcement of new software tools aimed at quantum computing, lending significant credibility and potential demand to the nascent industry. The news suggests a growing ecosystem and institutional support for quantum technologies.\n\n• **Explosiveness**\nThe stock's **explosive move** is marked by **4.7x relative volume** and an **ADR of 7.5%**, indicating high investor interest and volatility. Crossing the **100-DMA** for the first time since January signals a potential shift in short-term trend. While the catalyst is sector-driven rather than company-specific, Nvidia's involvement is a strong positive for the overall narrative, making this a potentially **exploitable momentum play** as the thematic tailwind gathers strength.",
       "peer_tickers": [
-        "PAGS",
-        "XP"
+        "IONQ",
+        "RGTI"
       ],
       "headlines": [
         {
-          "title": "After Linx sale, StoneCo approves one-time R$3.08B payout - Stock Titan",
+          "title": "QBTS Stock On Track To Cross 100-DMA For First Time Since January After Gaining 43% In 5 Days — What Is Powering The Surge? - Stocktwits",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNVFJtTkZiS3NJd25aVEFxYmtmYm5Zc2dIVy1GVDRtT3pnOXdNSEtrSmVlRGo5RjF5alVmZWNRTDluckRFaWdIRkV0TFF3dzRLLW9IdzdrU3lvTi1iYXFtbjI5b3JLRDB3d0ppSXo2alFWY01oRWRLYVdyQzc2SmlWMUhGSGNZY2dzNWl4dUVQRDY?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQclkyWndGUkZxY2tjdGhzSWtseW1RQ1lvN1l3TkxqNGJzOGZiemlYQWJ0WHNiLTZBNEpwLTF5a3VUNUI2RWs1OWxJcW5IWVU4c3NVUGZkYnEwOFZmOFdfVDVocDRkbmh4RGYxYjFpQ2tyZ3hTdFFSb2doT2hndkl5NXlaLVRYdWZEeUNHNnpJRmg3bWx0UGFjWkZIWFFTZHFyWXMzMFdRVTFKeU0?oc=5"
         },
         {
-          "title": "StoneCo Ltd. (STNE) Stock Sinks As Market Gains: What You Should Know - Yahoo Finance",
+          "title": "D-Wave Quantum (QBTS) Soars 22% on Nvidia Quantum Support - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPNUxrZm1MRENEZnFPUlVuM0VuaGprZ24xNXBMaml2MFl1cTJtY1pCellpZWw3c21GM3dEUzlNRG5uVkViMXNXRjZzUEQwMjQzRGZZaE91ejVpVlVSaVJVVjZWaEVpNzNUZlNmWWZXUnBHcTNpU1VGRHZpaURIUUs0TXZRMVVySmNkMmZWb2VHY0RJR0s2QnZpNQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPUk92UmFEMU9VdWZlNExoMFJtanozSGxfZ1hsTzZiMmJKREJLdVUzWklPOFpDTmNVRHd4WWtvT00wSy1zT0tMT2xxLVNIU2Q2aGdQUkFiaU1FZWFjMUJHbzU4ZVZlRm1fVkJGWm1Gd3ZqNE5wWFVRQ2kzSHVnSHpFVW1mVXhndlNuTW1hOFZYc09HZTlG?oc=5"
         },
         {
-          "title": "StoneCo (Nasdaq: STNE) sets R$3.08B one-time extraordinary dividend - Stock Titan",
+          "title": "D-Wave Quantum (QBTS) CFO uses 8,607 shares to cover RSU taxes - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPbUxBVmdmNXphdFBWWnhjeHhOZkY1SXVTMWVWa1BOOGw3R3VuRzJWWUg0aVZMQ3lVZFNaMHZxYXdtdUtCSnlpRF9tcXdLZ0lWalZLVmRvakF5UHlmUDQzei1uaFNubUFNV0IyeVRudXdsT1k1TVp6bkpGaS1NR0tma3h4aXVwNUU0UWRaLXJmSWF6NnVCMGZyTjFzU0pqeGVldDhVUEp3SUZBUW9B?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPUkg0d1V5a3VWNjVDN1lXZHkwajkyOHFOS0RLTUM2R0Uwa09mRTdwZnU5WllQZ3kyQmVUbDNrYjMwcXJYTlhmZWRnblZVMUFEbnpPNWZ4MVpQRWJEdkprM2VHN2s4aWVuSVFBNG9sMEI2Nl9QNG9uTDZ4cFJMMEs5VklRX2RVM3hDb0MxTzhJRU5DUnNjX3BTREJhNG11ZlEzbmhJSERqYU9vUGs3ZHJwU2RR?oc=5"
         },
         {
-          "title": "StoneCo Announces Extraordinary Dividend",
+          "title": "D-Wave CEO says quantum computing is already past its ChatGPT moment",
           "source": "Finviz",
-          "url": "https://www.newsfilecorp.com/release/292608/StoneCo-Announces-Extraordinary-Dividend"
+          "url": "https://finance.yahoo.com/news/d-wave-ceo-says-quantum-computing-is-already-past-its-chatgpt-moment-214253705.html"
+        },
+        {
+          "title": "Are Quantum Stocks Back? The Sector is Rallying",
+          "source": "Finviz",
+          "url": "/news/344875/are-quantum-stocks-back-the-sector-is-rallying"
         }
       ],
-      "float_shares": "243.69M",
-      "short_float": "7.76%",
-      "daily_pct": -1.15,
-      "industry": "Fintech - Payments",
-      "technical_status": "Fail (Avg $Vol $56M < $100M)",
+      "float_shares": "357.93M",
+      "short_float": "16.42%",
+      "daily_pct": 22.63,
+      "industry": "AI Compute",
+      "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 70,
+        "status": "Discrepancy",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "StoneCo announced a R$3.08B one-time extraordinary dividend.",
-        "discrepancy_note": ""
+        "primary_claim": "QBTS's specific percentage gain in its recent rally",
+        "discrepancy_note": "Source B [1] states 'QBTS Soars 22%', while Source B [3] states 'QBTS ... Gaining 43% In 5 Days'. Source A does not provide a specific percentage gain for QBTS."
       },
-      "gates_passed": 4,
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "OKLO",
+      "price": 63.35,
+      "gap_pct": 7.88,
+      "pm_volume": 553305,
+      "avg_vol_10d": 9588160,
+      "avg_dollar_vol": 607409936,
+      "mkt_cap": 10995582368,
+      "rvol": 2.81,
+      "adr_pct": 7.57,
+      "category": "New Contract/Partnership",
+      "theme": "Expanded Partnership",
+      "reasoning": "Oklo expanded its partnership with Blykalla to advance fast reactor commercialization, coinciding with a new US Space Nuclear Power Initiative and a board overhaul signaling aggressive scaling.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 82,
+      "grade": "A",
+      "finviz_theme": "Clean Energy - Nuclear",
+      "analysis_detail": "Catalyst: Oklo significantly advanced its commercialization efforts by expanding its partnership with Blykalla, a move amplified by a new US Space Nuclear Power Initiative and strategic board changes. | Impact: This confluence of events de-risks future revenue streams, potentially opens up a vast new market in space nuclear power, and signals strong internal commitment to aggressive growth.",
+      "analysis_details": "• **Impact**\nOklo's **expanded partnership** with Blykalla to advance fast reactor commercialization is a crucial step towards monetizing its technology. This development is **highly synergistic** with the newly announced **US Space Nuclear Power Initiative**, which presents a potentially **massive new market** for Oklo's advanced nuclear solutions. Furthermore, a **board overhaul** signals an **aggressive strategic push** to capitalize on these tailwinds and **accelerate growth**.\n\n• **Strategic Value**\nThe partnership **deepens commercialization efforts**, moving Oklo closer to tangible revenue generation from its fast reactor technology. Leveraging government policy support via the **US Space Nuclear Power Initiative** provides **significant de-risking** and a powerful **catalyst for long-term growth**. The internal strategic changes underscore the company's commitment to scaling operations and solidifying its position within the burgeoning advanced nuclear energy sector.",
+      "peer_tickers": [
+        "SMR",
+        "LEU",
+        "BWXT"
+      ],
+      "headlines": [
+        {
+          "title": "Nuclear energy stocks extend gains in busy news week (OKLO:NYSE) - Seeking Alpha",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQenhRLTN2Tl9WTzFoblUzbmE0LUcyamJGRWU0RDkzUkhHWXdVQmlNb0ZiX3hqSWxhX2VCQm5tbk56UUFHaVVMZm5qaGxvbk9ZV1k2SU9yVm8xWFBORUQ3bEZnQ1VCRVdpNE5BeGxCLWJWSFd6WWMzWnZPOFg3cVkwdFpzWlh3Y09RbG9JSUdyREx2eDRD?oc=5"
+        },
+        {
+          "title": "Oklo, NuScale Stocks Rally On US Space Nuclear Power Initiative - Benzinga",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPdjkyZkVlSnAtaXktVW8yWnljazZFYXFCTGdvcXhvSHlsd2VVWXlVV0k4VW1tSjAyUUJiM0FEbVhwZzhnY0I5VEg1SnBGT0Z3blFpYkFmOXJCZnhIeFJxakJOZWxSX2NXSDVfU3hndGJyYnRvU1I5dkpRNXlHa1dhckk5YXp0a2Jyd3pkbWFVYWUycDlOOFowVnA5WXRhVnNNRG55a0lOYm5UVXY3WTJUVkxFWW1vbXM3aXpRM2FkM2k?oc=5"
+        },
+        {
+          "title": "Oklo Soars In Big News Week For Nuclear Energy Stocks - Investor's Business Daily",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPZUw4UTIzekNQUmtIb2tNQWdaVXJMRVBpcnNfTm1reE1Dc3Y4d3dwMmR4cG1ON1NRaENKNVlfd1lzNnF0RVJwM2MzQzN2dEpoLWM0Ymo5VmdDN1BHQ0dWS3llZU9fcHF3Tml0S2tpR0hrNjdmVC1YVlMtb29rc3FkTElXRnNVS20zOHB0UkdSS29kdFJwOFE?oc=5"
+        },
+        {
+          "title": "OKLO Stock Rises Pre-Market: Board Overhaul Signals Push To Scale Nuclear Ambitions - Stocktwits",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNVGNDbnJRNWNhTTloallUYUdtRk96eFV1QkdYdVliSDEwUEVjbkJ3QTNhRGxkOXlqc1pvVWlKZllkdDlsdXhRWUk3NnpJRzVMRGd3X3JpV1drZlVla2ZmekN1Ym1VeDlic1dZTjlXRFpYUUNjcnFsWFNSRmZIOWk5TVlYWllFT0hvcTJScXlwSV9RbU43TWkxMWg3UVY?oc=5"
+        },
+        {
+          "title": "Oklo (OKLO) and Blykalla Expand Partnership to Advance Fast Reactor Commercialization - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPRGlHZzMzbWtkUjlVc0dkMXF1NVZpcEJ0cEN5OG1FeExkOTdVazNxS1Rvc2NBUldNWVRVSjFuUWJaTFZGWmktdXdrU3JocW9uODJxTXo1cmFXZzM5dzFXZlRhdkhuVlZyZU16cGVKY3l6OWprdDY3WDF3TW5OTDdGSGwtRFdaYVpZdGRF?oc=5"
+        }
+      ],
+      "float_shares": "137.43M",
+      "short_float": "17.56%",
+      "daily_pct": 8.14,
+      "industry": "Clean Energy - Nuclear",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Oklo expanded its partnership with Blykalla to advance fast reactor commercialization",
+        "discrepancy_note": "Source B (Google News [5] - Yahoo Finance) reports that Oklo and Blykalla expanded their partnership. However, Source A (Finviz News) contains no information regarding this claim."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "XNDU",
+      "price": 25.18,
+      "gap_pct": 7.23,
+      "pm_volume": 459944,
+      "avg_vol_10d": 1846091,
+      "avg_dollar_vol": 46484571,
+      "mkt_cap": 1089902189,
+      "rvol": 8.14,
+      "adr_pct": 19.38,
+      "category": "Thematic Narratives",
+      "theme": "Sector Sympathy",
+      "reasoning": "XNDU is moving in sympathy with Nvidia following its breakthrough in the quantum sector.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 78,
+      "grade": "C",
+      "finviz_theme": "AI Compute",
+      "analysis_detail": "Catalyst: Sector Tailwinds | Impact: Secondary. No company-specific news; move correlated to broader Quantum Computing industry trend driven by **Nvidia's breakthrough**.",
+      "analysis_details": "• **The Narrative**\nXanadu (XNDU) saw its stock **surge** by **29%** (and briefly **60%** before a trading halt) as the broader quantum computing sector experienced a significant boost. This came after a reported **breakthrough** by sector leader **Nvidia**, which appears to have rekindled investor interest and speculative capital flows into related quantum plays.\n\n• **Explosiveness**\nThe price action was characterized by extreme technicals, including an **8.1x** relative volume and a **19.4%** average daily range, indicating intense trading activity. This significant volatility and volume suggest strong speculative interest, likely from retail and momentum funds chasing the sector tailwind, positioning XNDU as an **exploitable** short-term momentum play.",
+      "peer_tickers": [
+        "IONQ",
+        "RGTI"
+      ],
+      "headlines": [
+        {
+          "title": "Market Movers | Winners: BIRD, XNDU, CUE | Losers: CTNT, ASBP, SNAL - Trefis",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPNjVycDlzbzNiSWJubnBGbVJkMU91Ym1Namh5UTd2LWRoZzV4UV8wZ1dDUDdQVWNRNlh5djIyLWtwazdBRU9IaGo5NjU5TjFsTC16Sllkdnk1V3lmNEJSMlQ3UEJLWnFpZGxZelZrY19YOHBrTG15X0VVRDhMNGhpWlIxNm5Bc25EM1hoSnpNSUY5MWxDU3BnR1ljNTlFcXkzQ0gtRmktalFyYVg5RHdIWEt5MXVjTWd2?oc=5"
+        },
+        {
+          "title": "Xanadu TSX stock trading briefly halted after 60 percent price spike - BetaKit",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQM2NmUzNDNl9OWi1uNTdwMnR3T0xOVGRTN0trdmttZll0UkJ3b09QMUdUaXNUSmVybkF5YXZaMENWLTJGNGNnR1BYMXZyLWkxTldzczh1NUV1VDU1a2RjQV83Vnl0WkNrMG5CamFRNFlHTTRpQTg1WnE4MHNUUlY0R05QcHR6X2dNazlSczR0dWJnNlE?oc=5"
+        },
+        {
+          "title": "Shares of newly public Xanadu take wild ride as Nvidia breakthrough boosts quantum sector - The Globe and Mail",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPRGVLdnVLaFZjRWdLcWtfNl9objdfRkhYMlY3TkhSVzNvRnlHV3hVLXAtLTFRTlRtbVdtZnRvVm1idC1kUnFxd1l6b19xNWNobnJ4V1M0UWlKWUJSX0JCazJRR0ZmMkE1NXRRUVRWZHFwaUxHSE9sdGw4WjNLNDg3MDdVWUU4Z2ExaFFIeEpQMWZEQ0VQWDQySENkVjl6aVVGSV9UZV9BY3RqVjIzR3hPdlNDbGlVUQ?oc=5"
+        },
+        {
+          "title": "Why Is Xanadu Quantum Stock Surging Wednesday? - Benzinga",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQYnkzQkRFVGdXRFE3NV85MmdsUnJCZHBHa0hiUmhrNnF4NldpMUF6OWZiY0t3S25LSGRWQ3FUSUh0LVM3VmpQZ3plMXNyN2Z6S1FfT1JKM1dPYVZhV09XNWxmalZOd1o0cUtWZjRlQ256cFRFdG44aWdYRnU2NTJTQVIzQmtWUjdMRlpWSFZ4VzJFaG9KT0ZqLVYxNkdZY2RoMEFuaVBueUVzdw?oc=5"
+        },
+        {
+          "title": "Xanadu (XNDU) Stock Jumps 29% as Nvidia (NVDA) Lifts Quantum Sector - TipRanks",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOYXNiQVFBWmdJWDE5S3F5U2dkTkpnbTJ4ck1jVFlDQ1FIZDhYZ0pWOUpVZVA2UV9TSWNscnlIQUdfUmRvbWtkRHBFQ29VcGhTdTlJN0pPTkotWkY5OWRBNkVFQV9tS1U1c2FiWjJnZWJMUTRVNFNjTDZobk0tT2w1SnVNWWxwalRNdWJFU1hCY3prVk01allR?oc=5"
+        }
+      ],
+      "float_shares": "20.68M",
+      "short_float": "1.67%",
+      "daily_pct": 69.79,
+      "industry": "AI Compute",
+      "technical_status": "Fail (Avg $Vol $46M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "XNDU's percentage stock gain",
+        "discrepancy_note": "Source B[2] states XNDU stock 'Jumps 29%', while Source B[4] reports a '60 percent price spike'."
+      },
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
         "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
+        "gate_mkt_cap": false,
         "gate_adr": true
       },
       "meets_all_gates": false,
@@ -834,60 +664,118 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "SMR",
-      "price": 10.25,
-      "gap_pct": 5.85,
-      "pm_volume": 911245,
-      "avg_vol_10d": 26005324,
-      "avg_dollar_vol": 266554571,
-      "mkt_cap": 3464667428,
-      "rvol": 1.8,
-      "adr_pct": 6.67,
-      "category": "Government Policy",
-      "theme": "SMR Sector Funding Policy",
-      "reasoning": "NuScale Power shares jumped following the announcement of a significant UK government funding deal for small modular reactors, boosting sector sentiment.",
+      "ticker": "RGTI",
+      "price": 19.11,
+      "gap_pct": 6.96,
+      "pm_volume": 3769235,
+      "avg_vol_10d": 29948738,
+      "avg_dollar_vol": 572320383,
+      "mkt_cap": 6347397667,
+      "rvol": 3.03,
+      "adr_pct": 7.16,
+      "category": "Thematic Narratives",
+      "theme": "Sector Sympathy",
+      "reasoning": "Moving in sympathy with Nvidia following its new quantum models announcement.",
       "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 59,
-      "grade": "B",
-      "finviz_theme": "Clean Energy - Nuclear",
-      "analysis_detail": "Catalyst: The UK government announced a significant funding deal aimed at accelerating the development and deployment of small modular reactor (SMR) technology. | Impact: This policy move significantly de-risks the SMR market, validates the technology's future, and drove substantial investor interest in NuScale Power, evidenced by a stock jump and **1.8x RVOL**.",
-      "analysis_details": "• **The Policy**\nThe UK government announced a significant funding deal aimed at advancing small modular reactor (SMR) technology. This initiative is designed to accelerate the deployment of next-generation nuclear power solutions within the UK, creating a more favorable regulatory and financial environment for SMR developers. This policy move signifies a strong governmental commitment to nuclear energy as a key component of future energy security and decarbonization efforts.\n\n• **Direct Impact**\nNuScale Power (SMR) immediately benefited from this announcement, with shares **jumping** as the market priced in increased sector confidence and potential future contract opportunities. While not a direct contract for NuScale, the UK's policy validation and funding commitment for SMR technology **de-risks** the market for companies operating in this space. This could lead to a **tailwind** for NuScale's international expansion efforts and future project pipeline, attracting **institutional flow** as evidenced by the **1.8x RVOL**.",
+      "conviction": 63,
+      "grade": "C",
+      "finviz_theme": "AI Compute",
+      "analysis_detail": "Catalyst: Sector Tailwinds | Impact: Secondary. No company-specific news; RGTI's move is correlated to the broader Quantum Computing trend, spurred by Nvidia's new models.",
+      "analysis_details": "• **The Narrative**\nRigetti Computing (RGTI) has seen a **significant rally** in sympathy with the broader quantum computing sector, ignited by Nvidia's recent announcements regarding new quantum models. This broader market enthusiasm is driving interest in quantum pure-plays, despite explicit warnings from analysts that company-specific **fundamentals may be lagging** behind the recent stock performance.\n\n• **Explosiveness**\nRGTI's stock has demonstrated considerable technical strength with an **Average Daily Volume of $572M** and an **ADR% of 7.2%**, indicating high volatility. The **Relative Volume (RVOL) of 3.0x** confirms heavy trading activity, suggesting strong short-term speculative interest driven by the sector narrative rather than an immediate fundamental shift. This makes the move potentially **explosive** but also vulnerable to profit-taking due to the lack of specific company news.",
       "peer_tickers": [
-        "BWXT",
-        "CCJ"
+        "IONQ",
+        "QBTS",
+        "DWAC"
       ],
       "headlines": [
         {
-          "title": "RBC Capital Sticks to Its Hold Rating for NuScale Power (SMR) - The Globe and Mail",
+          "title": "Nvidia Sparks Quantum Stock Rally Across IONQ, RGTI, QBTS, but Fundamentals Lag Behind - TipRanks",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPSlVGZ1hWaTRCeGxPUHhiVGt3LVdvWThieE5EUFRBRzBkd25xZXpYTlFNc0x1OUZPR3pQM04yQWV4ZndGeVZpb1JHOU1vYXIzWmZmbDRkY3cyWXJ0NThFdWx1b081NlFuZVdlanJvZEFkcnZrekVVNnhMS2hOSlBqN3p1bWEwY2RhOV9xRjhyTlBicVliNkYyT2tjMzM3STE0MzhDV3JqSy0wQld3Wk1tblA5SVpHbUV5RVQ0UUZzb0lnakRST2VqTjF0N3RUNzJXWG9ndlgwRzlzOUk?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNVDlUdjVyZWZjdVdTbFBfS0RuU0RKcTVVd1lNb3diZFBHenR4aHJlbnpwSThUWjBYbDY5Vnl4VzhzekVzM1RsMEFSWVRVZmtFSDhTVFJCd3FoTmFLTXR5bnVLWm13dHJYNlhSTXpySnp5VVBORVNVZnN2VHJHU2NNTVVDRFlWeDV6UGpNc2d0dzJ1NnJRc2hBZk9kSGllZ3RPaUQ3Z25kenZ0SlpzcWRqQWNNYw?oc=5"
         },
         {
-          "title": "NuScale Power shares jump as UK small-modular-reactor funding deal boosts sentiment across nuclear sector - Quiver Quantitative",
+          "title": "Rigetti Computing (RGTI) Valuation Check After Recent Short Term Share Price Swings - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQcVlnSlctenZ3elFxeG4yanhjN0x3V0p3QXpRRGsyN0pKR3RQbVBCdlpxYW5RS1dTWVRmYWNxWl9LdkFtZDNtdDRGOVdLRzY2THlnTWJkRVM0SENValdBZUxwYm5kYVQtcXItckc0UmVaMlo0ZTYwcS10bDFieHJiX2tOb1E0Qmg2R3ltT0RJUS16eVJSb2JBbk9jWDlsNTNvWWpzY2xLVjVRbWZsZmhmMWh6RzVycTFld2RVckU4akhaejNlUTlLeEUyWi0za3pYQW5QRg?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNTHpqLVZLOXltdDJuNVRBMWljNmFBeFo5ZG03Q2gtTUpyeUZ4cnZCdHNVeFFRYnNoS2JGeWVBMml5X1dKdUF1MTJSSUNuSkx3c3ZKRkhyWjlQem4xcDhNNzhPYmUtM0lxMWNYSXdVRXM2RUJxNDduRHFzS2dPanFPZThfcmFLcVRnM2pfVkZSanFzbW1qd19LQ3E2RlVNYmhMeXl3NTdR?oc=5"
         },
         {
-          "title": "NuScale Power Stock (SMR) Opinions on Institutional Selling Pressure Easing - Quiver Quantitative",
+          "title": "What's Going On With Rigetti Stock Wednesday - TradingView — Track All Markets",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxNNkpmY1NLQ1REeHNVczBSY2tEV1ZzTDBTTXROb2hac1hGQnlGd29lUnlicnRNVXB5WUpJdTlab3ZkTWcyaFJPTmhRYWx6Wmc2SVlFOVJSQS1aa1BjMGd1YnlHTVZ5eVFiWXNpdkVhekJLUEduZFBjRnBOdS1Nck1GbEs3RVNnMTliOXd4ZEt2Wm5TbmRhTmZieG1SNkZmVURMcTRiaV94dW84eWpNemlyMFJR?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxObDQ2QVYwWHpTU1RKZkF2OHhCUzFrU1VqZUhvZm4zR1lVNFhwd0c3U3ZVZ1czRlhIbEEwSDdtSWQwbi03UHRHNUN2bk9ZbVpKQUZleVNXUU5hWVdQTVZxOVJvWnNuUXBNLUNRVnBYRXJIckNLc1VOaHlIb0xtSjNlME9CR3AyRkQ2UHkyaVNwcDgzb3VuUEoxY2dvdTdvSnZvZE52dndXUQ?oc=5"
         },
         {
-          "title": "Why Did NuScale Power Stock Pop Today? - The Motley Fool",
+          "title": "Why Rigetti Computing Stock Keeps Going Up - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQMENTM3c5MnlZazNrb1hGRGFoYWZKNlpaUGowcWdCZUo0YWx0azJmaEZyNEVxR2N3OFVnNl9henNORzlaX0p5UG9RdDEyNXR2TjZ4RHdMOFdyNDlyOUxxNU4wM01KeFNyVnpXRDdiLVZhd3FZQlpVeTJ5VTVSRmhNZURJNjRPZXc?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPRUlHWHBoSHd4X00xdDdOQ1RUYW5GLUxuMFpNSHFfVWJfV2NEZXd3VTJZc29weWdmQ0tYZ0dnTy02ZGpWTFFKQ0ZKTS1mWV93bzlnTGhsQ05MXzlGNGp3STRrc21SN2dwNExOcVFtNTNnY01MazljMVdBZU1wVlZJc0NhTGNwQnlKcWFNdUJlQ1JaSjdHSkRWY0VFd0JVb3M?oc=5"
         },
         {
-          "title": "NUSCALE POWER CORPORATION (SMR) - MSN",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxORURZQU8yMlVIOVhIa0phYUhuQmdhaXFBLXd6QlZUaDY5bk9oTkNIbmoxQlFvbFVobXNINkRmZVJ5V2tsa2h5ZmhHZkpKaGM0N1ctNTBRSlM1bzRaQU10X3VfWW1DdWl1VXBzakZyZHpnc0VsMW9NSi00b2l4aHQyMmkxQnJzOW0zX0R6YXp2SDhqcGM?oc=5"
+          "title": "What's Going On With Rigetti Stock Wednesday",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/whats-going-rigetti-stock-wednesday-190829976.html"
         }
       ],
-      "float_shares": "260.94M",
-      "short_float": "20.52%",
-      "daily_pct": 6.99,
-      "industry": "Clean Energy - Nuclear",
+      "float_shares": "324.87M",
+      "short_float": "15.15%",
+      "daily_pct": 13.28,
+      "industry": "AI Compute",
       "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "RGTI is moving in sympathy with Nvidia following its new quantum models announcement.",
+        "discrepancy_note": "Source A (Finviz [3]) explicitly states 'New Models From Nvidia Are Helping Drive the Rally' in quantum computing stocks, directly confirming 'new quantum models' as the specific catalyst. Source B (Google News [3]) states 'Nvidia Sparks Quantum Stock Rally Across IONQ, RGTI, QBTS' but does not specifically mention 'new quantum models announcement' as the reason, only broadly attributing the rally to Nvidia."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "NNE",
+      "price": 24.29,
+      "gap_pct": 6.71,
+      "pm_volume": 103586,
+      "avg_vol_10d": 2096547,
+      "avg_dollar_vol": 50925127,
+      "mkt_cap": 1265100848,
+      "rvol": 1.63,
+      "adr_pct": 6.59,
+      "category": "New Contract/Partnership",
+      "theme": "Government Funding / Voucher Win",
+      "reasoning": "NANO Nuclear Energy secured a Department of Energy voucher to advance its Kronos reactor technology, signaling government support and validating its progress.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 78,
+      "grade": "C",
+      "finviz_theme": "Clean Energy - Nuclear",
+      "analysis_detail": "Catalyst: NANO Nuclear Energy (NNE) **won** a Department of Energy (DOE) voucher on 2026-04-15 for its Kronos microreactor technology. This **validates** their technology and provides **financial support** for its development. | Impact: This voucher **de-risks** the Kronos project, potentially accelerating its development roadmap and attracting further investment in the **microreactor space**.",
+      "analysis_details": "• **Impact**\nNANO Nuclear Energy's **successful acquisition** of a Department of Energy (DOE) voucher for its Kronos reactor is a **significant positive development**. While the exact monetary value of the voucher is not disclosed, such awards typically provide crucial funding and validation for early-stage energy projects, especially in the capital-intensive nuclear sector. This **de-risks** the development pathway for Kronos and signals government confidence in NNE's technology.\n\n• **Strategic Value**\nWinning a DOE voucher is not just about the funding; it confers considerable strategic value. It enhances NNE's credibility, potentially attracting **further investment** and partnership opportunities. This public sector support positions NNE favorably within the burgeoning **clean energy** and **microreactor** markets, highlighting its potential contribution to domestic energy security and decarbonization goals.",
+      "peer_tickers": [
+        "BWXT",
+        "SMR"
+      ],
+      "headlines": [
+        {
+          "title": "NANO Nuclear Energy (NNE) Wins DOE Voucher for Kronos - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE94SDFBOUVuX09FWHA0WGZkNUpGWEZMR1MxbEV2ajhvek9UOHlpZTVsYm9lcFFGcTMtOExmQnh3UkxjUkVsdThrR2RUb3Zmak1BQkJDd1daVGZleHdyM0tMZVJtQmpscVVJMkJ0VHBkSGl3UURzOUl4RkkzQTYyR1E?oc=5"
+        }
+      ],
+      "float_shares": "42.05M",
+      "short_float": "20.03%",
+      "daily_pct": 3.27,
+      "industry": "Clean Energy - Nuclear",
+      "technical_status": "Fail (Avg $Vol $51M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 50,
@@ -895,8 +783,143 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "a significant UK government funding deal for small modular reactors",
-        "discrepancy_note": "Source B [5] mentions a 'UK small-modular-reactor funding deal' as a catalyst for NuScale Power shares jumping, boosting sector sentiment. Source A does not mention any UK government funding deal for SMRs."
+        "primary_claim": "NANO Nuclear Energy secured a Department of Energy voucher to advance its Kronos reactor technology.",
+        "discrepancy_note": "Source A (Finviz) has no information regarding the claim. Source B (Yahoo Finance via Google News) confirms NANO Nuclear Energy (NNE) won a DOE voucher for Kronos."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "RR",
+      "price": 2.41,
+      "gap_pct": 6.64,
+      "pm_volume": 375836,
+      "avg_vol_10d": 7807451,
+      "avg_dollar_vol": 18815957,
+      "mkt_cap": 538866291,
+      "rvol": 1.49,
+      "adr_pct": 6.61,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 58,
+      "grade": "C",
+      "finviz_theme": "AI Robotics",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nRichtech Robotics (RR) saw its stock price **increase by 7%** on April 15, 2026, as reported by MarketBeat. This move occurred on **1.5x average daily volume** ($28.5M compared to the $19M 20-day average), indicating significant buying interest. However, no company-specific fundamental news, such as an earnings announcement, new contract, or analyst upgrade, was released to explain this surge.\n\n• **Key Consideration**\nThe absence of a clear fundamental driver for the **7% price appreciation** points towards a technically driven move, possibly a **short squeeze**, **low float dynamics**, or **institutional order flow**. While the momentum is present, the lack of an underlying catalyst increases the **risk of a reversal** without sustained fundamental support. Investors should exercise caution as the move lacks a clear narrative beyond mere price action.",
+      "peer_tickers": [
+        "ZBRA",
+        "ROCK"
+      ],
+      "headlines": [
+        {
+          "title": "Richtech Robotics (NASDAQ:RR) Stock Price Up 7% - What's Next? - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPNFJhX1YwOGRFcW5SYlFFYTlHZmpIdVI5SFJIQl9aRG05eFNYR3RZQVItUlREeTRfM3VxSHRWWXRxekxlREZYTU9jY1hfeTI4X051UGVzNjRfVi1EcHRJYnJnc19RcHJHSFVQOHN2bTBiRjdMU1FzUjhKYkN6OUJGaFFxT056RE1FNWw0ZjltM000eUNMeHdkRkpsbC1ncnAwM2pnaXRtN0licEVV?oc=5"
+        }
+      ],
+      "float_shares": "177.97M",
+      "short_float": "27.72%",
+      "daily_pct": 8.07,
+      "industry": "AI Robotics",
+      "technical_status": "Fail (Avg $Vol $19M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "QUBT",
+      "price": 9.4,
+      "gap_pct": 6.6,
+      "pm_volume": 1744038,
+      "avg_vol_10d": 12549506,
+      "avg_dollar_vol": 117965356,
+      "mkt_cap": 2110659500,
+      "rvol": 4.67,
+      "adr_pct": 6.66,
+      "category": "Thematic Narratives",
+      "theme": "Quantum Computing Resurgence",
+      "reasoning": "Quantum computing stocks are surging following Nvidia's launch of new AI models, with QUBT additionally benefiting from its Dirac-3 going live on the quantum network.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 68,
+      "grade": "A",
+      "finviz_theme": "AI Compute",
+      "analysis_detail": "Catalyst: Nvidia's launch of new AI models, particularly the Ising model, has sparked a significant rally in quantum computing stocks, creating a strong thematic narrative. Concurrently, QUBT announced its Dirac-3 quantum processor went live on the network. Impact: This combination of sector tailwinds and a specific product milestone for QUBT drives a **strong positive re-rating** for the company and the broader quantum computing industry.",
+      "analysis_details": "• **The Narrative**\nThe quantum computing sector is experiencing a significant **resurgence** driven by **Nvidia's game-changing launch** of new AI models, including the Ising model. This has ignited market enthusiasm for advanced computing solutions and their potential synergy with AI, fundamentally **re-framing** the investment thesis for quantum plays.\n\n• **Explosiveness**\nQUBT has capitalized on this macro tailwind with its **Dirac-3 quantum processor going live** on the quantum network, providing a tangible, company-specific catalyst amidst the sector-wide rally. The stock's **4.7x RVOL** and **6.7% ADR** indicate highly **explosive** price action and strong investor engagement, suggesting significant momentum behind both the thematic narrative and QUBT's specific execution.",
+      "peer_tickers": [
+        "IONQ",
+        "QBTS",
+        "RGTI"
+      ],
+      "headlines": [
+        {
+          "title": "Biggest stock movers Thursday: HIMS, quantum computing stocks, and more (NASDAQ:QUBT) - Seeking Alpha",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQTXNCZFJWXzZRN1Y4QXVMb1lXLXk3XzhZQ2tzTEswSlVzOFE1ck1KelZyZS0wamNYTkxVZm9BUndmMXhjUUpSR0ZWR0hGaDJOZ1pONlJlVVhHTGFfbDR3NGt6RlFvNGd6MTZKUkhrRDhpNG1McmEwbjgzUXZmMFk2bW5nOEprNDlKVzVUTTYxaHBQLVpBNVFNQ1ZvX0kxOFg1UEhSZlB0OS1YZw?oc=5"
+        },
+        {
+          "title": "QUBT CEO Says Anthropic Mythos Demands ‘Urgent’ Quantum Security Push Now - Stocktwits",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOVjBwSXAxTWVPNGM2RFVnRnFMTm9Db2dMVFVXdkdpaS0wWmlhb2pScnB5YTA3NTBBYzhROXdTVW9DOXhnazVzRzVIcTJMblpMb1FmQWtDQjRjdU1PN2hNbXgzejhzalBCVnl2NTctWEFmMmFKUUFwOFF3aTk2Q2pubXlDdlUxdDZKclJ1ZTB0QURVWjU2Wm5YT0dnRENsX3FiM2tHd3pOTXI0SDhmRVVNUEZyd2VWZnpoYURZRHNGRHZwZWV0eFpQQkxRSQ?oc=5"
+        },
+        {
+          "title": "Quantum Computing (NASDAQ:QUBT) Shares Gap Up - Should You Buy? - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPa2JWajFPQmU2cVhZMHhGWDYzYlVsRjluSG41RHU1VUFNV3hZMlM5bjdfT29qSy1YcEZicnU4czl6TmUxeWM5SVNtSXBUanV2cGYtNjNweGJtVllDRjEzTERkblVUb2ZDMDFwOE91dnp3dDFpWDlhYXpveWN6c1lFUDNwTkZpUEw1WkFraGUtWnhpZC1PMFRidkdVWC1qbE51TU1iTkJHeTVjNm1xLS1NUA?oc=5"
+        },
+        {
+          "title": "QUBT Stock Pops As Dirac-3 Goes Live On Quantum Network - timothysykes.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQME8tS29jNDFDcE1LVjZVdkV2c3Y5cVVkd2ZvWFYzZUtTS3RiMFhHOEpzVHZkYm1SbUNpLXJMYmFDZzlFb0RTa2d0Y013ZG0xX056MmlXRlQtX1YwWHFBN3BuVGd5T2xnWGJQemZ2QWhMR29BZjd0X0tCQmc1LTAtbXJTOA?oc=5"
+        },
+        {
+          "title": "Quantum Computing Stocks Are Surging. New Models From Nvidia Are Helping Drive the Rally.",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/m/1376349d-39d8-3dc2-85d5-ffa79cb6e0f3/quantum-computing-stocks-are.html"
+        }
+      ],
+      "float_shares": "197.31M",
+      "short_float": "28.98%",
+      "daily_pct": 15.91,
+      "industry": "AI Compute",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "QUBT's Dirac-3 going live on the quantum network",
+        "discrepancy_note": "Finviz news (Source A) does not mention QUBT's Dirac-3 going live. Google News (Source B), specifically entry [3], confirms 'QUBT Stock Pops As Dirac-3 Goes Live On Quantum Network'."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -911,60 +934,122 @@
       "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "INFQ",
-      "price": 14.12,
-      "gap_pct": 4.96,
-      "pm_volume": 293906,
-      "avg_vol_10d": 3602214,
-      "avg_dollar_vol": 50863262,
-      "mkt_cap": 3056583540,
-      "rvol": 3.27,
-      "adr_pct": 9.32,
-      "category": "Thematic Narratives",
-      "theme": "Quantum Geopolitical Opportunity",
-      "reasoning": "CEO articulated a potential **billion-dollar** opportunity for quantum technology in mitigating GPS disruptions from geopolitical conflicts, significantly expanding the company's perceived market relevance and future growth prospects.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 63,
+      "ticker": "QS",
+      "price": 7.17,
+      "gap_pct": 6.56,
+      "pm_volume": 460572,
+      "avg_vol_10d": 9790884,
+      "avg_dollar_vol": 70200638,
+      "mkt_cap": 4392212232,
+      "rvol": 2.0,
+      "adr_pct": 5.14,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 60,
       "grade": "C",
-      "finviz_theme": "AI AGI",
-      "analysis_detail": "Catalyst: Infleqtion (INFQ) CEO stated that US-Iran war-related GPS disruptions could evolve into a **billion-dollar** quantum computing opportunity, directly linking their technology to a critical and urgent global need. This statement follows yesterday's news of a 'Buy' rating due to a significant **Nvidia Pact**. | Impact: This narrative drastically expands INFQ's perceived total addressable market, attracting attention from defense/government sectors and institutional investors. It positions INFQ at the forefront of a high-growth, high-impact application of quantum technology.",
-      "analysis_details": "• **The Narrative**\nINFQ's CEO articulated a compelling new market opportunity, linking current geopolitical instability (US-Iran war and GPS disruptions) to a potential **billion-dollar** demand for quantum-based solutions. This frames quantum technology as a critical, real-world problem solver, extending beyond theoretical applications and highlighting an immediate need.\n\n• **Explosiveness**\nThis forward-looking statement, coupled with **3.3x** relative volume, high **9.3%** average daily range, and recent positive sentiment from an **Nvidia Pact**, creates an explosive narrative for this newly public company. The potential for substantial government and defense contracts related to critical infrastructure security could drive significant long-term growth and investor interest.",
+      "finviz_theme": "EV Batteries",
+      "analysis_detail": "Catalyst: No specific fundamental news or company-specific event occurred in the last 24 hours. The price action appears driven by technical levels and market sentiment. | Impact: The speculative nature of the move means impact on fundamental value is nil, and the stock is at high risk of a reversal without new information.",
+      "analysis_details": "• **What Happened**\nQS stock exhibits significant momentum with an RVOL of **2.0x** and an ADR% of **5.1%**, yet there is no discernible, company-specific fundamental catalyst in the past 24 hours. News headlines predominantly consist of market commentary, analyst opinions, and technical analysis regarding price levels, specifically noting QS overcoming **$7** resistance, rather than new material business developments.\n\n• **Key Consideration**\nThe current price action for QS seems to be primarily driven by technical factors, potentially a low-float squeeze, or institutional/retail order flow, rather than any news that would fundamentally alter the company's long-term outlook. Without a tangible catalyst, the sustainability of this momentum is highly questionable. Investors should approach with caution, as such moves are prone to sharp reversals or 'gap and trap' scenarios without solid fundamental backing.",
       "peer_tickers": [
-        "IONQ",
-        "RGTI"
+        "SLDP",
+        "FREY"
       ],
       "headlines": [
         {
-          "title": "INFQ CEO Says US-Iran War GPS Disruptions Could Turn Into Billion-Dollar Quantum Opportunity - Stocktwits",
+          "title": "QS Stock Overcomes the 1st Resistance above $7, Yet Faces More Obstacles Above - FXLeaders",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQczlldUJsTDN3TVJQR2c4ZE9VMWpYc1BjZVpSdEF5b2xqcmV3RzNvcDZCdjBmWWRrejdzX0RzdHdoT05MbDZnY3RTRmFpQWVLeGtMTG1vMW53ZGVpQmtudUNoMFllX2Q5dmNoeVNDRXJuT0tfTXFxVThFNmozN05Sa2ZlUVRXbmc2ZEFscWhBbGpJR1V2ZjNyTzgzMUJiU1lTdG5rVkhRZ2NpTmZaSFRvMkM5VjIyR1Vublo3a0xzQ1JnY2hyMnVFbWpEaUFSdWFMcFc2UUtwS1dudw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxORVVLS3FlV05xb0dqN1ptOTVwV2l0UDJTWThiRllQRWlvU2JZbGY1TzdhNFhLVDZGQUpoVDBQNzh4NEpuNmpqYzJZU0ZtdlRlQ3RkWVJYdXJoU1gtLXhlNHNxVDNKNXRnRkhkZUNiWlNzSFZKeFhuNGppc0lyQ3V2dDZMbWFyd3dkX1JRaVdnX0o3MmN4MkN4Z01hRmpWSURNYVZfYUVYTzlxLUZ1RkpqZVlQWHlUdDV3X0xV?oc=5"
         },
         {
-          "title": "INFQ Price Today: Infleqtion, Inc. Stock Price, Quote & Chart - MEXC",
+          "title": "QuantumScape Corp stock (US7491621036): Is solid-state battery progress now the real test for invest - AD HOC NEWS",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE1fU2lwVTloVGE3RzI4Nm1KMTluVVliZTFQaDZEZGQyUElpVk1MbFQ1Q1REVEdiMGF4czdIZkhqcnBydWJBLWN3?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPZlpjZ28wbXdBLWR2ZV9oVWt6ZEZ5TExTeTNDZmc3MEtVTk9yUm5FUFNJek5WU1I5LWtpYlhhLVBuX0hRSG4ybGRqc0tCbF85c1F6SUd5M1ZIa29YckoxRldNN0xGemY5VHVNZkp5cDVJSzQ4MHNuNlNTODgtbGxyb01FUy1aNkNPMXZwbUx0dVRGLXJGS3BlQk50Vll3RXp0eFF0RG9INS1nWHQ0cTBPYjJ2eWpXNDMxcFo2STI5UQ?oc=5"
         },
         {
-          "title": "Infleqtion (INFQ) Stock Forecast and Price Target 2026 $INFQ - MarketBeat",
+          "title": "QuantumScape Vs. Solid Power: Structuring The Trade Around Relative Risks (NASDAQ:QS) - Seeking Alpha",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTE5VQWVUdENzT2d5dHpMY0poaFVMMk91Y2laZlZZVUVkX3Q5RUYzQVpxWlp1U3NYQ0xvazNqMUJXdFRXZEVtejF2cTNWVlQzbTNQaVRtdFgzT0tsS3IybmNtUG9iZw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOd0xEUHlCeXQ5SU9BMkMzbFBzLUVXREs3SFRtU2NCbkREX0YzSkVWV1FDQk1WOXdKczg1SjJiS1VIcHotc3o3U0FQbHhJeXJSZTZYWjVDa3ZnVng5Rk5qWXc3REFnUk93Vm9DajFObWdZeGJSUmN3dkRSMTFWM3F5S0lESVdsNTc1YVZRSV9vbUVyVi1RYWRwWkRqXzNoRjA2N3pOOEdyYTBLcFptMy1UU2ln?oc=5"
         },
         {
-          "title": "Infleqtion (NASDAQ: INFQ) director receives 33,928 stock options grant - Stock Titan",
+          "title": "3 Stocks With Monster Potential to Hold Through the Next Decade of Uncertainty - The Motley Fool",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPVkptUk1lUEF2OTRBZmZNWkJaX1VaQXBTbDdCWDh2QUFMYTdLVTZCYmNXcFlYQ1pvTUFaUkRlUldSNWJOdkV5OTg3TkhOcGxPSzRUaC1kY1BDQzc5THI2SGd0MHZjekhaYVgwMmp1YTV6bzJqTUU5TklIVXAtV09WalJrOUJ3VzFqSlk0WS1jblZVWjM5Y0VNRlJNVk16czFISDRBREtJbkJmWWpJ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOajhfOUNreTgxVklPbWt2ZzI2VENkV3lyaEV6dVBEUk1SREVlbHJyV1VxcGpIU2Q3V2NmYjlXZUxBTk40dEpvbkwwc2hmS28waTR6M1Z0NXdackxOY2ZZUC1QWlliVGZ3RmZmcUxzdXcwenNQMGFTRUlLaW5NTTE3UXBDMURuTE9UMm94ZjFFNzFSemZCcEFZaQ?oc=5"
         },
         {
-          "title": "Newly Public Quantum Computing Firm Rated Buy On Nvidia Pact - Investor's Business Daily",
+          "title": "Promising Lithium Stocks To Add to Your Watchlist - April 15th - MarketBeat",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOYS1hNUtuS2p2UWY2UllRVXB0eVhUa1ZhZ1JPYi1rSVFIUk50SnZOb2RER3N1dnBkYnNUcm1oZVk0OVZybHVfeEM2YnNvY1luNlY5N2k4VlpvZUdUSjRVeTNSUmktVmxLbmlzZTVIc0txOWs1NFJmcnJOd01OWVhyQ1g0QTdaS1NhQXU0RzBDUHYzX2dXR1hYel9RQllHb1ZVV1lPQUc4XzlRMXFZN0ZoX1Jn?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOUV90VExJSU9YNXV3OU40aHVZSFBIUndZVm5GdHRtOFUxM2RlenU0SFZ0Wm5HN0pMV1BZY2dNSks5cnRlQy1oazVZVk5lUHEyT3BVRGlHaWdmb2JubjRTMlVaS1AwUHcxUllHdnpOcmRmZEV1LW9yS3I5NGxIdXRQZU9zMTJQLUxSd0luMzJvdlMzZzZPT0ZUODhqcnVBd2ltRlZodl9zQVVqYjRtVk5yQVBKbWM?oc=5"
         }
       ],
-      "float_shares": "142.34M",
-      "short_float": "2.06%",
-      "daily_pct": 12.15,
-      "industry": "AI AGI",
-      "technical_status": "Fail (Avg $Vol $51M < $100M)",
+      "float_shares": "469.29M",
+      "short_float": "18.96%",
+      "daily_pct": 4.52,
+      "industry": "EV Batteries",
+      "technical_status": "Fail (Avg $Vol $70M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "UMC",
+      "price": 9.95,
+      "gap_pct": 6.53,
+      "pm_volume": 122556,
+      "avg_vol_10d": 8405258,
+      "avg_dollar_vol": 83632317,
+      "mkt_cap": 24688281237,
+      "rvol": 0.82,
+      "adr_pct": 2.45,
+      "category": "Others",
+      "theme": "Anticipation of Operational Update",
+      "reasoning": "Stock is climbing ahead of anticipated March sales figures and dividend announcements, with actual data not yet released.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Semiconductors - Foundries",
+      "analysis_detail": "Catalyst: Stock is **climbing 9.08%** on anticipation of upcoming March sales figures and dividend announcements. Impact: The move is driven by market expectations for **positive operational data** and shareholder returns, signaling potential **strong demand** for its foundry services. This creates a front-running scenario ahead of official data release.",
+      "analysis_details": "• **What Happened**\nUMC shares are experiencing a significant uptick, climbing **9.08%**, as investors position themselves ahead of anticipated positive news. The market is reacting to the upcoming release of March sales figures and expected dividend announcements, suggesting bullish sentiment regarding the company's operational performance and shareholder returns. This move is currently based on **pre-emptive buying**, rather than confirmed results.\n\n• **Key Consideration**\nThe strong move is predicated on **market expectations**, which introduces a notable risk profile. While anticipation of robust March sales and favorable dividends can drive price appreciation, the actual release of this data will be crucial. Disappointing figures or a \"buy the rumor, sell the news\" event could lead to a swift reversal. Investors should monitor the official announcements closely for confirmation of the market's current positive outlook.",
+      "peer_tickers": [
+        "TSM",
+        "GFS"
+      ],
+      "headlines": [
+        {
+          "title": "United Microelectronics (UMC) climbs 9.08% ahead of dividends, March sales - MSN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOank2QnpjcmdzWWE3NFVhUEk1WnpjVWZud1FYSXB3d0J0UC1jX3NOaE83OGp6MVBRam1JdWxEQkJLRzJmZGw1QXhGa1pSQ0dNYjBsQmZLSW1sdEJBNU10VGxuLXdEMkQ3N2lDSlBuU3k4OExmZXV0OWRuSGdmUDc5M1d5bUNPSlRiLU5OVDhkU0l3SWhVamRabGRzY1VsdGVHUkR0VEl2Sm04cXgweDI4ZzJDdTRXRlVzenBnQXJJOA?oc=5"
+        },
+        {
+          "title": "UMC or IFNNY: Which Is the Better Value Stock Right Now? - MSN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizwJBVV95cUxPeEZqZG96ZTdVZTdzM1ZKU3lYVUhsZTBjakxkQUtLRVZNZXoyM3pWd2dTc1ZHUXR0U3BSeVJPdmVsLUFhQWJIUzFHXzRERnFOdlo1d3RfenRpWW9HdENtZ0VuekRKV0hTX2tHaU5hWmliM1Z4YTd6VE5mVDJiQXpIVFRsbWNmenRWYVdPanZ4UGJMbU5aM0ZOTlY3d3FnVzZod19FSnRZNEt6RVNKSWwyTDlSdE56enBseFY3MkFqNHNSYnV0aHlUc0IwRm1tTmVSbWVrTnp6RE4tSzQyaVQ1NWFBSEZLNzNUbk1YWUgxZDEwaVVRckxnSVZUTF85dDZmLUxrMmotejhUNTN0WVExU2ZkZFNQRzdlSUx4RXkzdzdQd2xZOG9IVDBrYVhCV1Z0b19paEpCZFB1bGdrUVNDcGRReXNFc1dJeUhIZ29MMA?oc=5"
+        }
+      ],
+      "float_shares": "2.52B",
+      "short_float": "1.20%",
+      "daily_pct": 3.75,
+      "industry": "Semiconductors - Foundries",
+      "technical_status": "Fail (Avg $Vol $84M < $100M, ADR 2.5% < 4%)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 90,
@@ -972,90 +1057,91 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "billion-dollar opportunity",
-        "discrepancy_note": "Source B ([4] from Google News via Stocktwits) specifically mentions a 'Billion-Dollar Quantum Opportunity' related to GPS disruptions, confirming the claim. However, Source A (Finviz News) has no mention of this claim."
+        "primary_claim": "UMC stock climbed 9.08%",
+        "discrepancy_note": "Source B [1] states 'United Microelectronics (UMC) climbs 9.08%', while Source A (Finviz News) provides no information regarding UMC's stock performance."
       },
-      "gates_passed": 4,
+      "gates_passed": 2,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": true,
+        "gate_price": false,
         "gate_dollar_vol": false,
         "gate_mkt_cap": true,
-        "gate_adr": true
+        "gate_adr": false
       },
       "meets_all_gates": false,
       "tier": "Fail",
       "tier_label": "Excluded"
     },
     {
-      "ticker": "QUBT",
-      "price": 8.11,
-      "gap_pct": 4.56,
-      "pm_volume": 749276,
-      "avg_vol_10d": 9524206,
-      "avg_dollar_vol": 77241311,
-      "mkt_cap": 1821005161,
-      "rvol": 3.09,
-      "adr_pct": 6.15,
-      "category": "Thematic Narratives",
-      "theme": "Product Launch / Commercialization",
-      "reasoning": "Quantum Computing (QUBT) stock surged after its Dirac-3 quantum machine went live and hit a commercial network.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 63,
+      "ticker": "PGY",
+      "price": 14.2,
+      "gap_pct": 6.41,
+      "pm_volume": 184429,
+      "avg_vol_10d": 3024171,
+      "avg_dollar_vol": 42943228,
+      "mkt_cap": 1171875413,
+      "rvol": 1.3,
+      "adr_pct": 6.13,
+      "category": "Others",
+      "theme": "Securitization Deals / Operational Validation",
+      "reasoning": "Pagaya Technologies announced the completion of a significant $368 million re-securitization deal and discussed a $600 million AAA ABS deal, validating its AI credit platform and securing funding.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
       "grade": "C",
-      "finviz_theme": "AI Compute",
-      "analysis_detail": "Catalyst: Quantum Computing (QUBT) announced its Dirac-3 quantum machine has **gone live** and connected to a **commercial network**. This marks a crucial step in the commercialization of its quantum computing technology. | Impact: The launch **validates** QUBT's technological progress and opens pathways for future revenue generation, significantly **de-risking** the company's product roadmap.",
-      "analysis_details": "• **The Narrative**\nQuantum Computing (QUBT) shares experienced a **significant surge** following the announcement that its Dirac-3 quantum machine is now **live** and integrated into a **commercial network**. This event is a pivotal moment for the company, demonstrating tangible progress in bringing its quantum solutions to market. It reinforces the broader narrative around quantum computing transitioning from theoretical research to practical, **revenue-generating applications**.\n\n• **Explosiveness**\nThe news has ignited investor interest, as evidenced by the stock's reported **10% jump** and a **3.1x RVOL**, indicating strong institutional and retail participation. The commercialization of Dirac-3 positions QUBT as a potential leader in a rapidly evolving, high-growth sector. This catalyst provides strong momentum, suggesting further upside potential as the market assesses the long-term implications of this product launch and potential customer adoption.",
+      "finviz_theme": "Fintech - Lending",
+      "analysis_detail": "Catalyst: Pagaya Technologies announced the **completion** of a **$368 million re-securitization deal** and reports highlighted a **$600 million AAA ABS deal**. This validates the strength of its AI credit platform and ability to secure funding. | Impact: These deals provide **significant liquidity** and **de-risk** the company's funding model, enabling further growth and demonstrating market confidence in its underlying assets.",
+      "analysis_details": "• **What Happened**\nPagaya Technologies (PGY) has **completed** a **$368 million re-securitization deal**, and reports are highlighting a **$600 million AAA ABS deal**. These financial transactions are core to Pagaya's business model as an AI credit platform, demonstrating its capability to package and sell asset-backed securities to institutional investors. This news spurred a **gap up** in shares.\n\n• **Key Consideration**\nThe successful execution of these large securitization deals is a strong validation of Pagaya's AI-driven credit analysis and lending platform. It signifies continued access to institutional capital, which is crucial for the company's growth and expansion. These deals also reflect market confidence in the quality of the underlying assets originated through Pagaya's platform, **de-risking** its balance sheet and providing **operational runway**.",
       "peer_tickers": [
-        "IONQ",
-        "QBTS"
+        "UPST",
+        "SOFI",
+        "AFRM"
       ],
       "headlines": [
         {
-          "title": "D-Wave Quantum Vs. Quantum Computing: Early Revenue Premium Masks Long-Term Parity (NYSE:QBTS) - Seeking Alpha",
+          "title": "Insider-Favored Growth Stocks Including Pagaya Technologies - simplywall.st",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQRW1nMjRpeFBUNXhTMjFQQ3hIUjNfakE0ZjJrVjFmalBPM2U4ckw5aTZVV1B3cGxsenFIUTJieFYxbGJDTzNHMlpKdHdWS1NWdHpfSnlHdUM2MVI2Rk05aDE0OWxVUldMM1hqZ0xUUzFBb0N2T0RJRVJwOC1RTFZmUk5za2I3OW9GRHdiTlQzQ2tnaFBLWWdFbGdBaERxTTZOSFV6M05jMW5YdVVZUGc1c0ExUVZmMlpRd2M0bXFSSnBTcGNaY3NfLUo0dF9UaDFWS2ZlcU9ROA?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPUldaS3JXZWxoRFZQQVJtT29FTERWYl8tNFE3VUFBNWhMUEp1RVltSDNWTGgtTUpnQlpjS2dJOTkxMVNXeTBZMFUwek5UWUxIazVvWXREWWgwUEVvR05vYnkzdzRSWENBRndnMm9iOHFMMktYMk9qN2t3YWdnTEZkOE9Wd2JDRUFNdlJjSk9xQjNlMUpkY3R3TG9UVi1rM1RGQVNlUnA3TFAyMVlEOGpGdE11S25fSFVlV3c5VlNDZnZTYUdRdy00ZDVVRjZ5Vk5rZ3fSAdcBQVVfeXFMT1kxeUZOd0xubnkzY1JCNEpITmEtVGNGV1N5aWx3cTJybXV4TkV2cXM4YXFYZDZTUnMwdWxESEdtOTdRcEloRWVsWHpWUVVQemNod0dST3ZFSlQ0a1QxZmhJU29aemNwVjZBNVBHV0IwdzZtcFdTQjlndWY3Q1BiVUFiYld4aTBqRDhiOXlPRFg4dkc2QUZfMEw3d1FBR0NmR202aER2SUZ3ODRvRWFkZ21RYy1PcVRQM1AwV3dUaXg2Vmg2Q2ExVC1vOFk3eU00NC1ucDZYS0k?oc=5"
         },
         {
-          "title": "Director at Quantum Computing (QUBT) receives 22,123 RSUs - Stock Titan",
+          "title": "Pagaya’s $600 Million AAA ABS Deal And What It Means For PGY Stock - simplywall.st",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQMHFpSENnd0l2X0dkTGhGTnNmbnlXZFNPaHA0Ymd3Zl9xeHl6R0o3UmU4TWxYN2NhUnEwRmVLQlAxMW9TS1FQYVNWSENyWlEtaDJMR2xzVTdpaFBCUG1RclVyXzFNU3B4NlNDbWNXT2J1MXdkcFdKRkRDSmMtWW1sbjNuWm1OVkJhZHRsMnY5UmNHbXVibk1tMTdUMVhDeUxIeXZ0VTczT3VaV190QjZjYloyaXJrQQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPNXEtcVY1bF9tZl93RmJLNXBJU0tTUDBNa1ZxdGwzMVZIZ0xDOW9zcUJJT0preTVuaG5Jdk1mX3NDQmpGemMyYnBBdTZXQ01UN3N6bzl2UUR0d3BxMWZpRnFhbWFuZnVidm5lbEdHZWFCamVEUTlqNzFIcU1WWlBmbGJTSDdTLU9EV1hoMzFYV3h1RGlzNWtJYlFrX0xCd0RCVjlhZVhMUmZ4all3NzRvN2NTaS1rVnJFLWRNR0FrcUxJbGttLWp6WkFOclc5ekVvLTJJ0gHYAUFVX3lxTE4wTGMzdzlvbDFEaVQ2eHJBTnRIWi1YTUVFUTFMX3h6MklnWll2RmRIX3o0MjNZdmZiSW9Ba1UwVXltNHUxWElkdzExMVRhUHYwQUFHWktWU1Q1VkdqczFEbW9yMGNKZWxvVGdIUlJGWFVheF9CUUoyTjVtMkRsY2JmVG82NVk5R1JObDBuenJnNFJ5RkJEc2RzUEtGTkpBWFdxS2hLUmJyZ1BKZUZuOUJLbnU1NHNnN3BGVnVCaGJYbVVNckhHZUZnR2xkaEd6SkJoa2xBYjk1Rg?oc=5"
         },
         {
-          "title": "QUBT Stock Jumps As Dirac-3 Hits Commercial Network - StocksToTrade",
+          "title": "Pagaya (PGY) Completes $368 Million Resecuritization Deal - GuruFocus",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9yWElyY2tvbmVZZjVuV2RlcEttRVV6UmNrUGdNTGJxSU9BdmNZeUZsUGVJa3ZsT1p5WjEtZG5OWEJPd3VzWDlwWVNYdjIyUUlPYVR2b21WQVA4c01SbHBmUURSZlp2cDNYTHViXzJGVDdjN2c2aGpOaDFORzdrZWM?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMimAJBVV95cUxQdGJ1TWdwSlpKSEFIQk1udWdpb1B2eFQ2eTY1Y2RYTjVDLUszYUxJWGQwVUxOSS0tRmExOGU1Zl9KLUl5aDYxV2E4VGRuRnpQSWktcEtxMFBVUHROdE9veFA2QVBKNEpuRDRoT19hR0dqR3RiWFc4WllEZ3Y2ZUVrM1pLdm1qSkJScXNYS19BOUZmUkhkSXVnRWZMVUR4LWp3RHNfM1BTV0pkYjNpT2Jwa2pWZVRVeG5WZ1pRWGFOdjVjcGhUcXVoWU5HRlBZV3V2VUNiS3NGOVhQSlRPOExpS09yUkc2T0hiejNpQ2xCblk3cE9VQW1TZm1nMmRobXBIS05WMGRyRTcwM1FIQ2FBYlZFVFZwaWgy?oc=5"
         },
         {
-          "title": "QUBT Stock Jumps As Dirac-3 Quantum Machine Goes Live - timothysykes.com",
+          "title": "Pagaya: A Mispriced AI Credit Platform Hiding In Plain Sight (NASDAQ:PGY) - Seeking Alpha",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNU1RqRzJzWlRHN0Vyb3RFa2U0aGRuVmVCaXJmY25xSXRkLWJsR2d5QlUyNi1YY1IxUXNUc0ctemZOUWhxRkVwc0ZfNC11SVJkZHREUXVscmNCdFJVTXc5dFNqWDhiLXRzTzBYeVladzVjUXF5MUhqWXh2VnRSTlpsWUVKdw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPR2hvdUxxenkzU2wtZzYzZ3hCazBXVWpGblUxSXF4Z0tMSnR2LTVwNGtyeUFwQW1SNWk1X21SckRQWW1ydlV3R29RYWJOb091N0lGTEVYY2YzOHpZMXNPOTRfQWZMXzVzNEY1c0dFNXJxQWZtYUNVVW9HUW02WUtDanNpNzNHYmxnZF9zWWhyakpFOFdKaXVVOW5JVTZfZTMzQnc?oc=5"
         },
         {
-          "title": "$QUBT stock is up 10% today. Here's what we see in our data. - Quiver Quantitative",
+          "title": "Pagaya Technologies (NASDAQ:PGY) Shares Gap Up - Here's What Happened - MarketBeat",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPaURicWI5aEtBX053V2xSUkNGNVo3NFExS1B1djlRT1J0bjBPMFFDQ3l0cFl6MDJ4WFJPOEo2NlZOZHhYbFFQa2tmeERINGdkNVRGUFZGMlVwWFlIX3E3X1VEYkYxVm1PcVctZW9wRmc2MHBxdW1lM2VmcHI4SGtEQmN6QUtRSWhzaDd4bUFjdVg0RlpMTjNGWHduZTd0YVE?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOSlJUT1U5bllQanAzcWFnM2xOdHVsVmVHbGNrSkkwaUhmUXhBa3VEZ2pVZlE0WHZUZzBXT0ViOEJ1eThJRWl6OEFodE9BX2M2b01MQlFZeThxaXFtZ01PM0lmcG1PMm9qRXVmUUg1YURGa3JSNzNvWmJzZ3pWN1lQWHBrNjVMbE9adDZRLUQ0N1NGdU94YXJha19tTHBzWFphQU01cmRndVp3ckRCeWdwRlN6NEg0REw1?oc=5"
         }
       ],
-      "float_shares": "197.31M",
-      "short_float": "28.98%",
-      "daily_pct": 11.55,
-      "industry": "AI Compute",
-      "technical_status": "Fail (Avg $Vol $77M < $100M)",
+      "float_shares": "62.02M",
+      "short_float": "22.82%",
+      "daily_pct": 9.15,
+      "industry": "Fintech - Lending",
+      "technical_status": "Fail (Avg $Vol $43M < $100M)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 85,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "QUBT's Dirac-3 quantum machine went live and hit a commercial network.",
-        "discrepancy_note": ""
+        "primary_claim": "$368 million re-securitization deal",
+        "discrepancy_note": "Finviz News has no information regarding the $368 million re-securitization deal. Google News article [3] (GuruFocus) explicitly confirms Pagaya (PGY) Completes $368 Million Resecuritization Deal."
       },
-      "gates_passed": 2,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": false,
+        "gate_price": true,
         "gate_dollar_vol": false,
         "gate_mkt_cap": false,
         "gate_adr": true
@@ -1065,138 +1151,186 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "ASX",
-      "price": 26.87,
-      "gap_pct": 4.54,
-      "pm_volume": 94533,
-      "avg_vol_10d": 6110451,
-      "avg_dollar_vol": 164187818,
-      "mkt_cap": 58807945169,
-      "rvol": 0.7,
-      "adr_pct": 3.19,
-      "category": "Insider Buying",
-      "theme": "Insider Selling",
-      "reasoning": "ASE Technology director's spouse sold 27,000 shares.",
-      "hypothesis": "Medium Conviction (RS Hold) — Insider conviction signal; look for base breakout.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Semiconductors - Packaging",
-      "analysis_detail": "Catalyst: ASE Technology (NYSE: ASX) director's spouse sold **27,000 shares** on April 15, 2026. This transaction reflects a modest reduction in insider holdings, as reported to Stock Titan. | Impact: This type of insider selling typically signals a **minor negative sentiment** or a personal liquidity event rather than a fundamental shift in company prospects. The volume is not significant enough to suggest a major change in conviction, but it warrants monitoring.",
-      "analysis_details": "• **The Buyer**\nThe news indicates a director's spouse at ASE Technology (ASX) **sold 27,000 shares**. While this is technically insider activity, sales by a spouse are often viewed with less weight than direct sales by key executives, as they can be related to personal financial planning rather than a definitive statement about the company's future.\n\n• **Conviction Signal**\nA sale of **27,000 shares** by a director's spouse is generally not considered a high-conviction signal for a company of ASE Technology's market capitalization. It implies a minor reduction in insider exposure, which could be interpreted as a slight **negative overhang** but is unlikely to trigger a significant shift in institutional perception or long-term momentum. Investors should monitor for further, larger insider transactions.",
+      "ticker": "IONQ",
+      "price": 43.25,
+      "gap_pct": 6.34,
+      "pm_volume": 5292977,
+      "avg_vol_10d": 29586113,
+      "avg_dollar_vol": 1279599387,
+      "mkt_cap": 15857212310,
+      "rvol": 4.25,
+      "adr_pct": 7.37,
+      "category": "Others",
+      "theme": "Sector Sympathy",
+      "reasoning": "Moving in sympathy with Nvidia following its new quantum models announcement.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 66,
+      "grade": "B",
+      "finviz_theme": "AI Compute",
+      "analysis_detail": "Catalyst: Quantum computing sector rally | Impact: Secondary. IONQ's **20% surge** is primarily a sympathy move driven by **Nvidia's new quantum models**, rather than company-specific news. This correlates to a broader positive trend for quantum stocks.",
+      "analysis_details": "• **What Happened**\nIonQ (IONQ) shares experienced a significant **20% surge** today, leading a broader rally across the quantum computing sector. This substantial move appears to be primarily **sparked by Nvidia's recent announcement** of new quantum models, generating renewed enthusiasm and speculative interest in the future potential of quantum technology. The rally was sector-wide, affecting other quantum players such as RGTI and QBTS, indicating a general positive sentiment rather than a specific fundamental development for IonQ.\n\n• **Key Consideration**\nWhile the stock saw strong upward momentum with an impressive **RVOL of 4.2x**, indicating high trading activity and liquidity, the underlying fundamentals for quantum stocks are noted by TipRanks to **lag behind** the current speculative rally. Although there's a mention of Congressman Greg Steube buying IonQ stock ahead of a potential DARPA contract announcement, this remains a speculative catalyst and is not confirmed as the primary driver for today's price action. Investors should approach this sympathy-driven move with caution, as it lacks concrete, company-specific positive news.",
       "peer_tickers": [
-        "AMKR",
-        "UMS"
+        "RGTI",
+        "QBTS"
       ],
       "headlines": [
         {
-          "title": "ASE Technology (NYSE: ASX) director logs spouse’s sale of 27,000 shares - Stock Titan",
+          "title": "Nvidia Sparks Quantum Stock Rally Across IONQ, RGTI, QBTS, but Fundamentals Lag Behind - TipRanks",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPUlNUR0s2UG9SSGZhQUdhdDZwa2Y1TUU1RFFNd0JoOFFxT0Jhb1FXRlZXbzI5cHdpUTNNZGVVLXhDNzZhVXdQVTd5dGMyTUVYaEI2TWlKQWpRVnlxQm03TUpGTi1Bbk5yYlFfTTVZVWpTdUVENTBPb2gxVV9sOXNBMEVtVHlWTF9HaUdKWW5VR01acjI1V2lFS1dVMXUxWE8yVXJERi1meHp5WGZmVlpIRTQ3R1BmZjNEQjI3QThqZw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNVDlUdjVyZWZjdVdTbFBfS0RuU0RKcTVVd1lNb3diZFBHenR4aHJlbnpwSThUWjBYbDY5Vnl4VzhzekVzM1RsMEFSWVRVZmtFSDhTVFJCd3FoTmFLTXR5bnVLWm13dHJYNlhSTXpySnp5VVBORVNVZnN2VHJHU2NNTVVDRFlWeDV6UGpNc2d0dzJ1NnJRc2hBZk9kSGllZ3RPaUQ3Z25kenZ0SlpzcWRqQWNNYw?oc=5"
         },
         {
-          "title": "Australia stocks higher at close of trade; S&P/ASX 200 up 0.09% - Investing.com",
+          "title": "IonQ Stock Surges 20% Today: What Is Driving IONQ Higher - 24/7 Wall St.",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxORjJBTjk2X2tzU3pua2VaRnM1VlBnYzlFejZPRzB4NWNrWTZrUUNDeWUwZjR3U0NhaEJxRFZ0SE11aUlULXl1ckFYcmZMa0VZWDgxdXduTFRuY0RPTkF6QTdJWjJscVZSLUl1a0F3Yk1fTnA4U2xIdkRkQVRZLW4xRDJaV1I0YmJJaTJoSEZacmItMDBfUHUtc0R3R29iVnN6SUNIME5xd1A0UTlJbS1maDRaV0xpdw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPMkJVOExDbDg2eDB0Wm0yQ3FXcVZ4SFZFMkZQamhWMi00YVdsOTJRblB2QlRxbGpIOWNTUW1Qd2ZlM1JMS3hxd0p3SEZnRVNKb1RSNU9xZlRHdEU3RjJuQmlHZmtMYV9vZGY5VDJhVFFBMTJ4RWd2aUFkLXJZQkhpM1RNLXQ5SnNQdTdObmRkZGkzZ1RyUzR0M3lpOU8zeVU?oc=5"
         },
         {
-          "title": "Cann Group to List 15.4 Million New Shares on ASX - TipRanks",
+          "title": "Congressman Greg Steube Buys IonQ Stock Ahead of DARPA Contract Announcement as Shares Surge - Quiver Quantitative",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNRFRZZ1c5TDRpSzVQY3VEZ2hlZVZTVlhwaGZVWTBaSWFQa09DTzZneWU2UmVpVmZIWXJCT2tqUEc0TDV2X19VOVFDMzFKNkdwODNZSjRUemZwR2ZQNnZOZEpmSHdGcklpYlQ3bnVoXy1HZ2xCdHFuMEFJYnhRR25BZUtxeGhQbWN6QzhmVTRqRWx5SnJuU2JlMXplM0ZCNnZlUXBn?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxNUjZjVGtPUkpGNXo4NWhoRTFJb0Y4cmhpQ2tBbW9Ka2RDVy1MYTdDaGtzUjR0VU5XQXJGeUp1el9EXy1OU2ZWQlp4TlcwTzc3VmFvNTRxRk43eF9qMjVsTXVzSlhpWlJxQjB2RlZBcUdmdWQ1d0ZSOE80Z09RMEJkcVk5QzRuV1ZCVXZYU2Z2UGFfYlhyVXZJeF9XUXhvdzB5VTNGU0ZSVWhWU09rQ0JINUVFakZkNk4zZHI4Uk1CbkoxZVk?oc=5"
         },
         {
-          "title": "News Corp Details US$1 Billion Nasdaq Stock Buy-Back, Excluding ASX CDIs - The Globe and Mail",
+          "title": "IonQ (IONQ) Shares Skyrocket, What You Need To Know - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxQUUprWXlnQlFxbmNlY3VZcDlSV3kzRUZYTFZMR09oVkpxbV80NXlhTnEwUWtmQlBFVzY3eFBWMXpsSVB0TVJIQnNTZjZKZk51T1BnQ3BoYXdVYmM1b281UEZtOFVfOUVGMkZmdGhndXBfRHFBRHNxbUxNRnE5VjFSdlJVMVpFVEY3aVBzR1c3MlhnRjJGT1VFbDdiMjhLa3RpUU9jUEFfYzZ1b0hlRmprbnJTd053dV9XdGsyRF9QblFhdnIyX0c1RnNHWENpNFRQNG1leVIyWmRFVE5HUFNyb3dtRzZmdw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQaG8xdHNrdlozaklUOVdpcWd0VjFQLTRZSWh2Rkw5X1k2ekstN2M1dWE4Z2JHZTY1dnpLeFhyUnBhM3JRSUtNcTR0OXF4TGZTR1RwNFNkemRyZXRBNzdkc1V4QmROeUpQTUlvV1BSU3RoenlPQ2lNV0RiTFA5bzg4Sm1IM2ZkQnFnQWY3UGV6b25yd1V4TVpQd2VRV20?oc=5"
         },
         {
-          "title": "We Ran A Stock Scan For Earnings Growth And EDU Holdings (ASX:EDU) Passed With Ease - Yahoo Finance",
+          "title": "Why IonQ Stock Keeps Going Up - The Motley Fool",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPNGgyejBJS01yQU81UnFmMGtqZ05oS19WOWRkUGVIYVNPTGtLb09jZUxzUkw0Z3dYSGVUQVBtNF9kcXdKSGY5NWRxTkFoaVFUVUF6dVZoZWRnM2hOak9oQnN6endSQ0oyVVp2dzd5UlZEWUEwSGJVZW1lX0lXZGg3aE9oQW41Vm5KQkozNmNmVHowZjcwRV9NcVR0Zw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBLZ3I1bVJDY1laMlh1RktZLTNrUmotSmtHRWJOMzBleG16bi1fMGx0a1lZeEtVX3ItV3ZtTnZUREwxM21BRWIxTncyM3NnRzVpcU9UNVVkSFRvdGJNcFhKVDdKNUZZLWg3TG1Ublc4Wklra0paZW9Eb1FfMFA?oc=5"
         }
       ],
-      "float_shares": "2.19B",
-      "short_float": "0.22%",
-      "daily_pct": 1.21,
-      "industry": "Semiconductors - Packaging",
-      "technical_status": "Fail (ADR 3.2% < 4%)",
+      "float_shares": "357.28M",
+      "short_float": "22.65%",
+      "daily_pct": 20.95,
+      "industry": "AI Compute",
+      "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 80,
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "ASE Technology director's spouse sold 27,000 shares",
-        "discrepancy_note": "Only Source B (Google News - Stock Titan) mentions the sale of 27,000 shares by ASE Technology director's spouse; Source A (Finviz) has no relevant news."
+        "primary_claim": "IONQ stock surged 20%",
+        "discrepancy_note": "Source B (Google News [1]) explicitly states 'IonQ Stock Surges 20% Today', quantifying the 'moving in sympathy' claim. However, Source A (Finviz) mentions a general 'rally' and 'surge' in quantum stocks but does not provide a specific percentage for IONQ's movement across any of its headlines."
       },
-      "gates_passed": 4,
+      "gates_passed": 5,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
         "gate_dollar_vol": true,
         "gate_mkt_cap": true,
-        "gate_adr": false
+        "gate_adr": true
       },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "POET",
-      "price": 6.71,
-      "gap_pct": 3.71,
-      "pm_volume": 339668,
-      "avg_vol_10d": 12444937,
-      "avg_dollar_vol": 83505527,
-      "mkt_cap": 1024692035,
-      "rvol": 2.19,
-      "adr_pct": 8.82,
-      "category": "Others",
-      "theme": "Short Seller Report & Corporate Response",
-      "reasoning": "The stock experienced high volatility due to a short seller report causing a significant decline, partially mitigated by the company's clarity on PFIC status, creating an unclear momentum signal.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 60,
-      "grade": "C",
-      "finviz_theme": "Semiconductors - Packaging",
-      "analysis_detail": "Catalyst: A short seller report triggered a sharp sell-off in POET stock on Tuesday, followed by a partial recovery in after-hours trading attributed to the company providing clarity on its Passive Foreign Investment Company (PFIC) status for US shareholders. | Impact: The combined news flow created extreme intraday volatility and uncertainty. The short report introduces a negative narrative and potential downside risk, while the PFIC clarification aims to de-risk for US investors by offering a path to avoid tax inclusion in 2025.",
-      "analysis_details": "• **What Happened**\nPOET Technologies' stock was **torched** on Tuesday following the release of a **short seller report**, causing a significant decline. This negative pressure was partially offset by a corporate announcement providing **clarity** on its Passive Foreign Investment Company (PFIC) status and a path for U.S. shareholders to **avoid** 2025 tax inclusion, which contributed to an after-hours **bounce back**.\n\n• **Key Consideration**\nThe conflicting news flow introduces **substantial volatility** and **uncertainty**, making clear directional momentum difficult to establish. While the PFIC clarity is a **positive** for U.S. shareholders, de-risking a potential tax issue, the short seller report presents a **material headwind** that requires thorough evaluation for its claims and the company's eventual response to fully assess its long-term impact.",
+      "ticker": "SOUN",
+      "price": 7.85,
+      "gap_pct": 6.11,
+      "pm_volume": 2465556,
+      "avg_vol_10d": 19773136,
+      "avg_dollar_vol": 155219118,
+      "mkt_cap": 3319091320,
+      "rvol": 2.44,
+      "adr_pct": 6.54,
+      "category": "New Contract/Partnership",
+      "theme": "New Contracts",
+      "reasoning": "SoundHound AI's new deals and platform expansion sparked momentum, leading to a rally amplified by short squeeze chatter and significant call option buying.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 81,
+      "grade": "B",
+      "finviz_theme": "AI Applications",
+      "analysis_detail": "Catalyst: Headlines indicate SoundHound AI (SOUN) has secured 'new deals' and is expanding its platform, driving renewed investor focus. | Impact: This fundamental news, though lacking specific financial details, appears to be a significant catalyst for the stock's recent **9% rally** on high volume, suggesting a positive shift in sentiment after a 'rough Q1'.",
+      "analysis_details": "• **Impact**\nSoundHound AI shares experienced a significant **9% rally** on April 15th, driven by headlines referencing 'new deals' and platform expansion, which are 'sparking momentum' for the stock. This move was further amplified by heavy call option buying and 'short squeeze chatter', indicating strong technical buying interest with an RVOL of **2.4x**.\n\n• **Strategic Value**\nThese unspecified new deals and platform expansions are critical for SoundHound AI, as they validate its voice AI technology and broaden its market penetration. The narrative of 'automation as the catalyst' suggests increasing adoption of its AI platform, shifting investor focus from past performance towards future growth opportunities and potentially de-risking its trajectory.",
       "peer_tickers": [
-        "MRVL",
-        "LITE",
-        "COHR"
+        "AI",
+        "PLTR",
+        "NOW"
       ],
       "headlines": [
         {
-          "title": "Why Did POET Stock Bounce Back In After-Hours Trading? - Stocktwits",
+          "title": "SOUN Stock Back In Focus After A Rough Q1 As SoundHound AI’s New Deals Spark Momentum - Stocktwits",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPM1pUNUdmNzVFWUtrMldYMkNkWHpaM25vWEdaLTdDa0gzYmZuSXpWYXdMeEJ1cDV3RU9saUhvd29UcWJNcDVycmtjMHF1ZzlnMmtZNGFwUTJvdXlVOFpoSzhHeUw1VVF5WFpYektLeUs1NEtOcE5NbWg1S1VYTTdXS1UwWkJjejY4aXQxbEhOTWEyUTl5TmluenVvcHpjYld1ekpLbkVrdjhiTDZxSmhOa2tqRjRBS3h2Y25DWGtLMUlzTUtzUW1nRG5oR2JFTUZYLXFsalJBSURDaVZudWpTLXZpTnBqaGI4QTlQOEdB?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxPU0pFLXo2RHdaaVVZTnpHYVcxTHlZLTdGWmdidG5XWEZoUm5hNDZmX2ZRelpWOFNLdFNCeGFhanR4ajk2VnY4SnctazFfYkhTSTQwSEo3YkY1S2h5YnFiXzNxOEd6bXJwU1lsLVpOZnhwZnNyWGhuNFVBdWNlWkViY3IyT29oTkVFel9vTkdlVllLdWZwVHE3ZVVrNFpGQ1B1WV9ic3kxaVNHV0F3ZTFLSnc0SGY4aldnRGdRcjd4U2Y4cGFPLVc3NVMzRlRlLUlCQVNHYUE2LTA2UDQ?oc=5"
         },
         {
-          "title": "Why Poet Technologies Stock Got Torched on Tuesday - The Motley Fool",
+          "title": "Should You Chase the Rally in SoundHound Stock Today? - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOaGEwN0lyR2pVTGk2LXc2dFlQTTJBV0wtT2x0QmRyeU1OSkstcGZpTzVELTNCanhqT0ZvZ01OU01ZUm9ielp0WVVENGxQdk41ZERnaUFONVNnQm5CWDFLb0FrVWVyUV80bDdVd0ppNzJJYnUyMk4zN3p3WV9UM0wtYW1tNWpUSW9NcHQ4TG84NGtfV2xEVDVFMg?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNa3VBV08yNUhseGNtWEJpVnBPSUlaRXpPZjRsYU9DTnQwcGhGSXd3alNBMjRlckpEN1VOYy1mQlpidzVGLVJUWlV1a2lxVjBHWUhhWmNyLVdUd2h4WTB0TGN2NXotaXhZNzF4akE5XzFkcXdJaTQ1ZzI0TVkwUjluVjlfUHc1LWpueU1MZ1YydFIwVGpoQkFTZHFTd0tIQ0tE?oc=5"
         },
         {
-          "title": "Why Poet Technologies Stock Got Torched on Tuesday - Yahoo Finance",
+          "title": "SoundHound AI Rallies 9% as Short Squeeze Chatter Heats Up Ahead of Earnings - 24/7 Wall St.",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQUm9KSVZfV1ZSMzE2Q3ROdlpTRWVzSERGcFZMT2dkZEtETm9LT08zcURIZVlUSVdHRkQwR3lfanZHcURYUUNoQWtoS2FmVUxDcjI4RzZ3WkhXNlhNaXdTVS01YWVjenNoOE4tMGtPaWNrM1pISGdxNmhXeFhBdEE3UGNyQzEzOG5MYkhNSDJqZnpHYUZKNXpCMjk2ZXc?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQV0JKNGx0UVQzbmxMNzJtZkw5cHBqSFg0aG1XU1lPOWZqaFNtdkttUU1DSVVvdmdVVGYzdFphRU4ybExWaXBLdzhad3o4MVR6anZEV19zUHpZY3pmTnIwUUI2RkhaaFZTMnJmalZCazM5S2NKM2x0cGtrZjNDWHJFWTQ0OUVQSnROemlWZ2pyUnB3UlVtMkhER0g5VmNrb0dCNUNWdjJFU2JpZVRsVDg4NXlDeVJXNFpxNlo4?oc=5"
         },
         {
-          "title": "POET gives U.S. shareholders a path to avoid 2025 PFIC tax inclusion - Stock Titan",
+          "title": "Investors Buy Large Volume of SoundHound AI Call Options (NASDAQ:SOUN) - MarketBeat",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNbDVKSmdCeXNqdWJiVDNieTl4UExfY2NUVFVLNmstUHFPZzctMm01UTJJbVdjRXloSHNlRmtIWjZ4SzI0RUxVTWRrQUFxS0VMS3haX3RZdHlNbWZJUEx5enVqVEZjckZQV0N4ZVlHS0RvbXBMQW5EZnNvWHF0ajVWY04zZDVJeFdzQVNkRHJ0LWFKb2piNEpxbFYwTm9rTm94bW9nRHo5dlMzRzhGVWJsSlRtQlNGblRIY3pqejhENHM?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNZU1QNVU0UDJQWWJycVdfaTNzNktJX1hzNkdWc1BJZTlneTlwTk9Xc2cxc01LbzM4Rmo4b2xKWTBsNHYyYVIydldzNm5QdWU3dlBVeWJSNW1qUTBWYkpjNi1oOXNkZ0RPQ1ZhRWZXYUtWQnJCOE9xSGU5MEg4Tmw1eUNvbUFNQ2hDVmJFSENXcEJJMlVyNVdFZVEzU2hmZGkxcDFuenBuMzlwaU0wUFM2Q3BQQnlkM055YlZHeDB3?oc=5"
         },
         {
-          "title": "POET Technologies stock falls after short seller report - Investing.com",
+          "title": "SoundHound AI Platform Expands: Is Automation the Catalyst? - Zacks Investment Research",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQRTVuLTJmc0lwUlJGMXZFQ0tzUFdZeXZzd1A2T2xtdFdLcFd1Ty1hVUJRVGxOcmtBU2sxc1ByWmVfRXNuSHZHVl94X1c5eWYyUjQtQnNzT241T0ZmSHFsVnlha0pHYnBXZzRJdk5DRkJlcE1pV2hyUVItdFJqYzM5aEtYY1FPbEpSMktyVm1oQmRkR1dYT0NkOFpLaFBSV1dfSk54U0lHYlptWWlTRU80dVlsUF9QSkx4?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQT3lzYXAySjVZdUE0WVJ3ZGpub2UzcVJYRHcxdkx4ckJXcjJWTUx4TXdYamYwSDFudmtDc3c5dDkzSnYzVGZ6dlRuUGZCb1J3d05aYUQ1Vjd6dUZQVDNFdVkxejQ0anJjaWMwQU1GUGIyN3lpdTA0SW9nbXdoNXBpT2FTRkRuUW5ZV1pTTXprSF9jN3ltUzFxNlhVVU5zTzA?oc=5"
         }
       ],
-      "float_shares": "90.31M",
-      "short_float": "14.55%",
-      "daily_pct": -8.08,
-      "industry": "Semiconductors - Packaging",
-      "technical_status": "Fail (Avg $Vol $84M < $100M)",
+      "float_shares": "381.81M",
+      "short_float": "36.86%",
+      "daily_pct": 12.63,
+      "industry": "AI Applications",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "SoundHound AI having new deals and platform expansion.",
+        "discrepancy_note": "Source A (Finviz News) contains no information regarding new deals or platform expansion. Source B (Google News) confirms 'Platform Expands' and 'New Deals' in separate headlines, but without specific details like dollar amounts or dates across both sources."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "SGML",
+      "price": 18.22,
+      "gap_pct": 6.09,
+      "pm_volume": 100515,
+      "avg_vol_10d": 3856571,
+      "avg_dollar_vol": 70266724,
+      "mkt_cap": 2029762172,
+      "rvol": 0.61,
+      "adr_pct": 10.67,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "headlines": [],
+      "float_shares": "106.37M",
+      "short_float": "6.85%",
+      "daily_pct": 3.7,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $70M < $100M)",
       "verification": {
         "status": "Verified",
         "confidence_score": 100,
@@ -1204,15 +1338,15 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "the company's clarity on PFIC status",
+        "primary_claim": "No immediate fundamental catalyst found",
         "discrepancy_note": null
       },
-      "gates_passed": 2,
+      "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": false,
+        "gate_price": true,
         "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
+        "gate_mkt_cap": true,
         "gate_adr": true
       },
       "meets_all_gates": false,
@@ -1220,41 +1354,415 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "CMBT",
-      "price": 12.92,
-      "gap_pct": 3.41,
-      "pm_volume": 52145,
-      "avg_vol_10d": 1672472,
-      "avg_dollar_vol": 21608338,
-      "mkt_cap": 3748993406,
-      "rvol": 1.1,
-      "adr_pct": 3.32,
+      "ticker": "INFQ",
+      "price": 15.0,
+      "gap_pct": 5.6,
+      "pm_volume": 455979,
+      "avg_vol_10d": 4666665,
+      "avg_dollar_vol": 69999975,
+      "mkt_cap": 3247078856,
+      "rvol": 3.58,
+      "adr_pct": 9.48,
+      "category": "Thematic Narratives",
+      "theme": "Quantum Hardware Milestone",
+      "reasoning": "Infleqtion (INFQ) reported an 'ISS Quantum Hardware Milestone' and announced 'Ecosystem Event Plans,' signaling significant technological progress and future growth potential in the quantum computing space.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 64,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_detail": "Catalyst: Infleqtion announced an **ISS Quantum Hardware Milestone** and detailed plans for future **Ecosystem Events**, highlighting significant advancements in its quantum technology. | Impact: This development **validates** the company's technological roadmap and **strengthens** its position in the nascent quantum computing sector, potentially attracting further investment and partnerships.",
+      "analysis_details": "• **The Narrative**\nInfleqtion (INFQ) has announced an **ISS Quantum Hardware Milestone**, indicating a significant technological achievement in its core quantum computing business. Coupled with plans for future **Ecosystem Events**, this news suggests the company is not only advancing its foundational technology but also actively working to expand its market presence and potential partnerships within the quantum sector. This milestone serves as a key validation point for their technological capabilities.\n\n• **Explosiveness**\nThe market's reaction suggests strong interest, with INFQ displaying a **3.6x** Relative Volume (RVOL), indicating substantial institutional and retail participation. An Average Daily Range (ADR%) of **9.5%** confirms the stock's high volatility and potential for significant price swings on such news. This combination of a positive, company-specific fundamental catalyst and robust technical action positions INFQ as a compelling momentum play, albeit with inherent risks associated with early-stage, high-growth technologies.",
+      "peer_tickers": [
+        "IONQ",
+        "RGTI",
+        "QANT"
+      ],
+      "headlines": [
+        {
+          "title": "Assessing Infleqtion’s (INFQ) Valuation After ISS Quantum Hardware Milestone And Ecosystem Event Plans - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPZjlIanplVjB5TFpqc203eTBNb1NaemdkWE44bVhENHJsMURQNUUzbUlhZjZFalhvRmJXWlREMExJLXhxRXdob0Q0SGNRdWxHalQ1RkV6bEV0SktjLUlGeTdoQ3ktNG9RV2hlT1IyQTBHWktsaGpHakRldEE3VTFSMG5vUTN5NjVORDRrMVVqdzJNV2Y2NDZXeE5ncUZBQVlSalpaY2dMN19ibnNwd1FyckFlWk5zaUUzRVY3dkJkTljSAcYBQVVfeXFMTmpGLUtZV1JtWUpCbk5CTXNzTUNjZkZmSVZvVUJGa1JOTzRNRHdrOWlncnBudFptYkNoV3JTNk9NNWpqcExEeHlDX2N5WmVWcHRuZmNzOTQ1eVliaUpjWVY4b2ltNVNwU3BSUENQclBTVngtVkQ0M3N5MzBQMzBRWVlnVnV3SXVjSWZVOUJ2ZHhxU1pna2FxbGZzU3E4czdIUzkxYl9lUVhYWlJzR0tFS25vQlhVZmZvWktmcFp2Z2VkUjl6VjFR?oc=5"
+        },
+        {
+          "title": "INFQ Price Today: Infleqtion, Inc. Stock Price, Quote & Chart - MEXC",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiR0FVX3lxTE1fU2lwVTloVGE3RzI4Nm1KMTluVVliZTFQaDZEZGQyUElpVk1MbFQ1Q1REVEdiMGF4czdIZkhqcnBydWJBLWN3?oc=5"
+        },
+        {
+          "title": "INFQ | Infleqtion, Inc. Insider Trading - Quiver Quantitative",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE0wUFM1Q0pQQ2gyU0VReW50bDBKbzF4Q3g2RUdpZGd5dXZKSnNyZ29wQmdKR01WQXNJWlNkaURNLTBLT3A4MW16aWRHNkFSTk5DRl9VMWVZMUl5RE9Q?oc=5"
+        },
+        {
+          "title": "Assessing Infleqtion (INFQ) Valuation After Recent Share Price Momentum - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNNjFwQTlVci0yQ2VHMzM5UDRTZVB0TzlTY0RyUWlNaUhBV09VZUhNY3dpWWZkTlAtb1Fwb1VKcWFUYW9iazdFa1JENHpPQlFxeEx6RE0zUzVPazlrOHdnR050eERwbkNTb0tlYXpLazI3WHJteTA3SGNDUVdvUWdhM2ZsTWM3STRiWEJxRU9NNnhubVVzdm9uT2hPcFlUdG5ELURmazZGaENvbVE?oc=5"
+        },
+        {
+          "title": "Infleqtion (CCCX) director awarded 33,928 options at $12.59 strike - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOSW4xV2c1WE5QZGp1eTB3NktWcDBoWkVRc0tCWmVQcTB4TzdZT3dzU3dsZm5xMDY5QlB3SVRHR0I4c29ONFhFVC0teV9IT1ZFRXJNSmdqNi1MTDBaNU1KZHZzSFAxSTVDaHZhR0VGUy1sSTBfcmZSa0FadEV4eXVwNFhJYmtxN25mQWZocHVWbUViemI2N0tSekxUTjlJVXhORGkzVWNJVVE3R2xKUU1BZHY3ZGFNOEFYdlE?oc=5"
+        }
+      ],
+      "float_shares": "142.34M",
+      "short_float": "2.06%",
+      "daily_pct": 6.23,
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $70M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Infleqtion (INFQ) reported an 'ISS Quantum Hardware Milestone'",
+        "discrepancy_note": "Finviz contains no mention of an 'ISS Quantum Hardware Milestone'. Only one Google News article (simplywall.st) explicitly references the 'ISS Quantum Hardware Milestone' in its headline, indicating it's a topic of discussion but lacking confirmation from a second distinct source."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "HMY",
+      "price": 16.86,
+      "gap_pct": 5.4,
+      "pm_volume": 420426,
+      "avg_vol_10d": 5299868,
+      "avg_dollar_vol": 89355774,
+      "mkt_cap": 10784977747,
+      "rvol": 1.37,
+      "adr_pct": 4.49,
       "category": "Others",
       "theme": "Technical / Flow",
       "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 57,
+      "conviction": 58,
       "grade": "C",
-      "finviz_theme": "Others",
+      "finviz_theme": "Materials - Metals & Mining",
       "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
-      "analysis_details": "• **What Happened**\nCMBT is experiencing significant price action, likely driven by **technical signals** and **institutional flow**, as highlighted by Stock Traders Daily. There is **no specific fundamental news** released in the last 24 hours to support the move, suggesting a momentum-driven trade without an underlying fundamental trigger.\n\n• **Key Consideration**\nWithout a clear fundamental catalyst, the move carries **elevated risk** for momentum traders. The lack of underlying news increases the potential for a **\"Gap and Trap\"** scenario or quick reversals if technical support fails. Due diligence on internal company developments is crucial before committing capital.",
+      "analysis_details": "• **What Happened**\nHarmony Gold Mining (HMY) is exhibiting significant price action today without any specific, material fundamental news reported within the last **24 hours**. The only relevant headline notes a presentation at the Mining Forum Europe 2026, which typically does not serve as a primary catalyst unless it contains undisclosed, market-moving information. This suggests the momentum is primarily influenced by **technical factors** and **order flow** rather than a new fundamental development.\n\n• **Key Consideration**\nThe lack of a clear fundamental catalyst increases the risk profile of this move, making it potentially unsustainable. Without underlying news to justify the price change, the stock could be susceptible to a **'gap and trap'** or a rapid reversal. Investors should approach with caution and prioritize technical analysis and volume patterns while awaiting any potential disclosures from the company's presentation.",
       "peer_tickers": [
-        "SMCI",
-        "ANET",
-        "NOW"
+        "NEM",
+        "GOLD",
+        "AU"
       ],
       "headlines": [
         {
-          "title": "The Technical Signals Behind (CMBT) That Institutions Follow - Stock Traders Daily",
+          "title": "Harmony Gold Mining Company Limited (HMY) Presents at Mining Forum Europe 2026 - Slideshow - Seeking Alpha",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOdWY3ejE1TWZWQXJRWEstUE4yaThuWG5WUVhBc1lUN0VKMjhUZF9NRmhsOTlqV2VnQ282aExBR192SWdIQmxrc1hReFNURHBOT1dzSW92aWZ2eGNFb3lMY1Bib1FqSFNIc1JrY3dPSUFGQ0p4X2NOUEdDcVk2bDg4RWUtaW44blpzUl9YcVZPcW50MFNOSzdwNmM1cnUwemk1TThpdnY0TnpZMHpyLWtqLWladTNkRko5eFk0cjBTTktUdWpjbXVQWnZLaWpDbUZjeGpzWQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOQUcyVThxNlZWN1NaVXl4cmdNZzBkdFFyVUtNTXpQVDZ0SnhCUjktVi1vdV9kVU5KVDZpUTZiOVVjWGVZWFlsZzM5ZV84aGl5VGpGVEhpTVd2X3Z1UHU2V0RLb1VFSWgxMC03N0ZjSFZtanRQYUxVUVRBeU4tRUltWUg3bnNuanZlcGlaM3MtdWRiMHh2cE84S0U1aDJnNjNxd0F4d2ZwaE9yOE1lUE90Q1NIdENJYlZ2blJ1c0dKQ0hSYjlzWHc?oc=5"
         }
       ],
-      "float_shares": "85.61M",
-      "short_float": "1.44%",
-      "daily_pct": 2.05,
+      "float_shares": "624.74M",
+      "short_float": "0.63%",
+      "daily_pct": -1.29,
+      "industry": "Materials - Metals & Mining",
+      "technical_status": "Fail (Avg $Vol $89M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found for HMY",
+        "discrepancy_note": null
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "OGN",
+      "price": 9.21,
+      "gap_pct": 4.46,
+      "pm_volume": 104071,
+      "avg_vol_10d": 9900997,
+      "avg_dollar_vol": 91188182,
+      "mkt_cap": 2397507085,
+      "rvol": 1.14,
+      "adr_pct": 6.41,
+      "category": "Thematic Narratives",
+      "theme": "Buyout Speculation",
+      "reasoning": "OGN is experiencing a surge in price driven by speculative interest regarding potential buyout activity.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Pharma - Large Cap",
+      "analysis_detail": "Catalyst: News reports indicate Organon (OGN) is experiencing a surge in stock price as speculation regarding buyout interest **gains traction**. This narrative suggests increasing market confidence in a potential acquisition. | Impact: While unconfirmed, this speculation serves as a strong short-term catalyst, potentially pushing the stock higher on M&A premiums.",
+      "analysis_details": "• **The Narrative**\nThe primary driver for OGN's recent price action is **speculation** surrounding potential **buyout interest** in the company. Reports suggest this interest is **gaining traction**, implying increasing market confidence in the likelihood of an acquisition. This M&A narrative often leads to significant, albeit **volatile**, short-term price movements as investors price in potential premiums.\n\n• **Explosiveness**\nDespite the speculative nature, the explicit mention of the stock **surging** due to this narrative indicates considerable market attention. The **1.1x RVOL** shows slightly elevated trading volume supporting the move, though not indicative of a massive institutional influx yet. Given the **6.4% ADR%**, OGN is accustomed to decent daily moves, and a confirmed buyout would represent a **structural change** with substantial upside for shareholders.",
+      "peer_tickers": [
+        "VTRS",
+        "TEVA",
+        "JAZZ"
+      ],
+      "headlines": [
+        {
+          "title": "Organon posts Q1 results May 7, then opens investor call at 8:30 ET - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQMVQ3ZFBVWllzNXBHOG5KcVFud1pndDVEeTNrQnNhSEZFNVVCSVpTalhOYWtyT29iS1BabU5Bc21YTW9vbEhOWTRmMlJCS095TkxRNjVhQi1BalN4bGhpaEJqcUZMN0l2ZC1XUHVFVlVGY3NubjFwVXRrWGtxUFl0aFRmSHk1MWE3NS04Ull3Z2U4RnhPRVFvOHJLWEdCeVFsUHdkamI0R3hmMW0tcXVQbXl1OGItcHVNbVE?oc=5"
+        },
+        {
+          "title": "Organon & Co. (NYSE:OGN) Upgraded by Zacks Research to \"Hold\" Rating - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNV0ZvMDI4dEZweVhyV0hCNW1JdlBnaExMNlJWMjU2Sk1iYXJfLXYyaHIzTTdIS05mVlh3Q2YzYTRxT01iMU5WNEN0UVU0c053OHpURHNxVzNOVl9xYTlGYVRRMF9jMXpRN2pfNEQwWVRNY2x1LW1yWXZoblNTTUY0X0lNc1VJNDBMMk9sOFRSUzMyS3VvTU8zRVlXWmYxbU96NXQyZ25yc1FnU2FlTVZUZWc5aWQ?oc=5"
+        },
+        {
+          "title": "Why Organon (OGN) Is Surging as Buyout Interest Gains Traction - Insider Monkey",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPaERHZ3JFUmJCRzRDNWNpSzQyQXlsczByV1Z5elFqUXJOLWpwUFRCT2tsMzlxeTRqNXQxT1Zxdk4taVlJQkh6RXg3WXdJWUt4ZmZGc00xNGxHQmRRRGVXRm51OFBjLXV4OTdYTmVSTDQzNkZHQURpTzZUTHNFTGlDV3VTcjlWS3Q4elVVa3ZXRzk5eVhvMEJQN05CUi10TzJDYlJJZ0I5NDVwMGZ0eVJ30gGvAUFVX3lxTE9oREdnckVSYkJHNEM1Y2lLNDJBeWxzMHJXVnl6UWpRck4tanBQVEJPa2wzOXF5NGo1dDFPVnF2Ti1pWUlCSHpFeDdZd0lZS3hmZkZzTTE0bEdCZFFEZVdGbnU4UGMtdXg5N1hOZVJMNDM2RkdBRGlPNlRMc0VMaUNXdVNyOVZLdDh6VVVrdldHOTl5WG8wQlA3TkJSLXRPMkNiUklnQjk0NXAwZnR5Unc?oc=5"
+        }
+      ],
+      "float_shares": "259.11M",
+      "short_float": "8.54%",
+      "daily_pct": 5.86,
+      "industry": "Pharma - Large Cap",
+      "technical_status": "Fail (Avg $Vol $91M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "OGN is experiencing a surge in price driven by speculative interest regarding potential buyout activity.",
+        "discrepancy_note": "Source A (Finviz News) has no information regarding OGN's price surge or potential buyout activity. Source B (Google News) contains articles [3] and [4] that confirm the claim of 'buyout interest' driving a surge, but other articles [1] and [2] do not mention it. Since Source A provides no corroboration, 'both sources' do not confirm the claim."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "FRMI",
+      "price": 5.83,
+      "gap_pct": 4.46,
+      "pm_volume": 272409,
+      "avg_vol_10d": 12401316,
+      "avg_dollar_vol": 72299672,
+      "mkt_cap": 3671965884,
+      "rvol": 1.0,
+      "adr_pct": 9.74,
+      "category": "New Contract/Partnership",
+      "theme": "Committed Financing",
+      "reasoning": "Fermi secured up to $156.25M in committed financing, boosting liquidity and de-risking its balance sheet.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_detail": "Catalyst: Fermi (FRMI) **secured up to $156.25M** in committed financing, providing crucial capital. | Impact: This financing **de-risks** the company's balance sheet and offers liquidity amidst reported headwinds, potentially funding operations or strategic initiatives.",
+      "analysis_details": "• **Impact**\nFermi (FRMI) has **secured** up to **$156.25 million** in committed financing. This significant capital injection provides crucial liquidity, which is particularly vital as the company reportedly faces **persisting headwinds**. The immediate financial relief can support ongoing operations and potentially strategic investments.\n\n• **Strategic Value**\nThis financing arrangement **de-risks** FRMI's balance sheet and demonstrates an ability to attract capital, despite challenging conditions. While a CFO's subsequent share sale suggests ongoing internal concerns and potential caps on upside, the committed financing itself signals a strengthened financial position, providing a necessary buffer and potentially buying time for operational improvements or a turnaround.",
+      "peer_tickers": [
+        "SMCI",
+        "VRT",
+        "ZS"
+      ],
+      "headlines": [
+        {
+          "title": "Fermi CFO Sells 774,000 Shares as Headwinds Persist - The Motley Fool",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQTU9tNzNMajJ5SEM4MzhfdGZDVDlWbUFmbVVuc1BHMGFjUXZlWnQzSjBhaTZ2WjdPd3JZWDhNX3RrLWJRWElOZG52YXFzZTVYTURUUUJkcWYzU3RhZ0pHQXZreTF5bTRPYTBkM0dOZndmYld3Z3l5YnpGekwwdThiaVVKTVI5VVFZaWdsYTdzbXliOEdpemhFQ0VtYXVDbDRFSFhvZGJ3?oc=5"
+        },
+        {
+          "title": "$FRMI stock is up 13% today. Here's what we see in our data. - Quiver Quantitative",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPYjhhaldWQjBpVlhMemg2TldpaHNXMWVsRHBxTjdBYXhLdXRWcXhXWncwZ0x2dTlwZGlMSElCM05maFphb00tdHloeWFVZEJoOEdZVlRTdFlWcXRfaVZZbVg5Y3hrRXdJR3EzeUpia1BDa2ZOSE02MURrNjhfWnc5SDZzMlNIVUprUXdISmVmazNESXNhZ19DOWl0anZpNVR6?oc=5"
+        },
+        {
+          "title": "Fermi (NASDAQ:FRMI) Stock Price Up 9.9% - Here's What Happened - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOck12Vm03ejVKQ3RkSV95VlI0VWpVVWpxanRjektwRlI0SnhKWFI5Z1lmS0dnbm5mdjc5VkxwNThPQXpXNGtIR29LUnZ4MWZMQ2ZBUXFGTzNyOGVOZFVYWG9NVTJlczRjcU1iWElHempuNUR1dUt0TlV0Z1l6QUQ3SUpmSDhyRXFSTUhJeGZJZEVEMGhNbm5WV1VHa19XVF9ISzF5NVZJNzRhb0hT?oc=5"
+        },
+        {
+          "title": "Fermi (FRMI) secures up to $156.25M in committed financing - MSN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQMFAwODJxak8yUC1WY2w4Y2h0T3cxQnZ0ck5pLVQxOE1WWWw3dkcxcV9xSDZqOUxoOGJaM0VBNUFsdzl4RXcyQmtyN0YtZHhPeTM4bmxJcXEtczNTSWtqN0d2d3dDUmVGMUUyUkpUbEZNeUhsbHRGTjM3UlN1Uk1Nb2I3b0lWaC1lYkprUExGYXZyQ3E0czdDenNVYlBHR0ZIcU5aQzVwUXIyZmNxSWc?oc=5"
+        }
+      ],
+      "float_shares": "239.61M",
+      "short_float": "9.10%",
+      "daily_pct": 10.42,
       "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $22M < $100M, ADR 3.3% < 4%)",
+      "technical_status": "Fail (Avg $Vol $72M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Fermi secured up to $156.25M in committed financing",
+        "discrepancy_note": "Source B (MSN article from Google News) confirms 'up to $156.25M in committed financing', but Source A (Finviz News) has no information on this claim."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "OKTA",
+      "price": 67.35,
+      "gap_pct": 4.45,
+      "pm_volume": 78910,
+      "avg_vol_10d": 4400969,
+      "avg_dollar_vol": 296405262,
+      "mkt_cap": 11913402554,
+      "rvol": 1.05,
+      "adr_pct": 5.05,
+      "category": "Upgrade",
+      "theme": "Raymond James Upgrade",
+      "reasoning": "Raymond James upgraded Okta's stock rating to Outperform, citing easing renewal headwinds and a more favorable valuation.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 32,
+      "grade": "A",
+      "finviz_theme": "Cybersecurity - Identity/IAM",
+      "analysis_detail": "Catalyst: Raymond James upgraded Okta's stock rating to **Outperform** from Market Perform, citing easing renewal headwinds and a more favorable valuation. | Impact: This upgrade provides a significant vote of confidence, potentially **de-risking** the perception of Okta's growth trajectory and attracting new institutional buying interest.",
+      "analysis_details": "• **The Firm & Rating**\nRaymond James has upgraded Okta's stock rating to **Outperform** from Market Perform, a notable shift that signals increased confidence from a prominent financial institution. This move is a direct catalyst for increased investor attention and potential capital inflow.\n\n• **The Thesis**\nThe upgrade is predicated on **easing renewal headwinds**, suggesting that concerns about customer churn and contract renewals are mitigating. This fundamental improvement in business operations, combined with a perceived more **favorable valuation**, forms the core of Raymond James's bullish thesis, potentially pointing to a re-rating opportunity for the stock.",
+      "peer_tickers": [
+        "CRWD",
+        "ZS"
+      ],
+      "headlines": [
+        {
+          "title": "Is Okta Stock Finally Turning the Corner? Raymond James Thinks So - CoinCentral",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNd0xoOF9vcWVuNHlDX3ZERnJWZVJQZTJBMlp3LXlNUTFhRVdwT1J1Unh2MEpLd0QzTFZNUlFFUy1HZjhLZGlyU2FjV0FaN1lGcnFpS2FjV0xGR043ZXhVNldWZTV0MTFxRHlVT05wLTBtaV9tSEpNMzJwV0s2QlB6bGFUYjlHMjNjWVFTNm5KZ1NBSk0?oc=5"
+        },
+        {
+          "title": "This Okta Analyst Turns Bullish; Here Are Top 5 Upgrades For Thursday - Benzinga",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxQUDMxb29CeUtKTGlwLW9zMFlrbHZYRlNzQ19SNC00MGtFNTZPRjlGdWRVNjFFUHA2NEgxVHZQYnlLcWtGLXlOUC1tQ2dkekJaQ3FhX1QxSnZiSGVHYlIwMFNtTXlzUURKSURhWE45RzNoTnBrZ2VnY0RnZXNwaGpvdUtVRTJ6a2xZTjlQOGV0cW96UnRBMGxpaGs5T1B0eDFsU1kzU0FrWTZnTURUNEQycG1fX3dMM0xBazVTbFVJb3Y3RElLRU5fTnRObmdjQ1cySTFmQw?oc=5"
+        },
+        {
+          "title": "Raymond James upgrades Okta stock rating on easing renewal headwinds - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPcTR5MldDR014NWNaY1NqYV8zTTFtUDFLekhvdGdDUzhkUWFDT1lMZGYxZlotX0s1SnBpdFd6QTdxTVNGMjQwTHJPeDc5djVuWkRzekJ2OUo3VnhmckxYaXowY09NVHF1MkNRMExqNVJTeW44S1NSVEdaUGNYSTlkU2MxV2NtZ1lUU3pSTGQwWEU2eFgzWDJnZGZlcEc3cmU0S0tGOUs4NWFPRF9mLVB6SGo2SUVrM0M2LW5zdzUwc3NLTjRXbzdv?oc=5"
+        },
+        {
+          "title": "8x8, Intuit, Okta, and Box Stocks Trade Up, What You Need To Know - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOWjNnMUVqc3VTc25IdFpLT2NvYnl2SmxuRk9RdzJWVE01MVRSaXFvNzRIWExPTHBPS2VYLVdIdWZkblJBa3M0SkVGeG5lYWpKa1pabEF4dFNmQkFvTzJ6QzNGZHlYRENzTnhaLW05MVpfNW42RDFIc3dvTnpXQlFrWWw5Vi02NV9HOHNuR0o0eG40ZGQ1Ync?oc=5"
+        },
+        {
+          "title": "Okta Inc (OKTA) Stock Up 5.1% and Still Undervalued -- GF Score: 69/100 - GuruFocus",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPeE1oUTJtZS1POWU5TGpRZWYzbXVMRG5jWHdqSm8wODVOWWhLYzZ3U1BwaG5fZzdqdzdjV2JLTThVQWd5Q0J0Q1UwYi1Rc3RqVUs1LXljMEl4RXlVWDVmYW1FSm5PTGg5VURTd0gyLTJ0R09qTGxPdXdhaGJybkFPMHB0QnhXNzRpQnpGOE1jektuV2JkU1d0bHZSUjZEeV9Lc0xv?oc=5"
+        }
+      ],
+      "float_shares": "168.30M",
+      "short_float": "4.48%",
+      "daily_pct": 5.09,
+      "industry": "Cybersecurity - Identity/IAM",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Raymond James upgraded Okta's stock rating to Outperform.",
+        "discrepancy_note": "Source B (Google News) confirms that Raymond James upgraded Okta's stock rating and notes a bullish sentiment/easing headwinds. However, none of the provided headlines explicitly state that the new rating is 'Outperform'. Source A (Finviz) has no mention."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "FIG",
+      "price": 20.34,
+      "gap_pct": 4.33,
+      "pm_volume": 353961,
+      "avg_vol_10d": 13478200,
+      "avg_dollar_vol": 274146588,
+      "mkt_cap": 10611705791,
+      "rvol": 1.4,
+      "adr_pct": 7.74,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate positive fundamental catalyst found; the stock's **double-digit gain today** is likely attributed to a short squeeze, fueled by a reported **38.0%** rise in short interest.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 58,
+      "grade": "C",
+      "finviz_theme": "Cloud SaaS",
+      "analysis_detail": "Catalyst: Technical / Flow | Impact: Short-term price volatility due to a likely short squeeze. The reported **38.0%** increase in short interest created conditions for significant short covering, driving a **double-digit gain** despite ongoing negative fundamental news regarding board oversight.",
+      "analysis_details": "• **What Happened**\nFigma (FIG) experienced a **double-digit gain today**, a move that appears to be primarily driven by a **technical short squeeze**. This comes on the heels of reports indicating a **38.0% rise in short interest**, which likely compelled shorts to cover positions. This price action occurred despite recent headlines pointing to a board member's exit and heightened scrutiny on valuation.\n\n• **Key Consideration**\nToday's significant price movement lacks a clear positive fundamental catalyst, suggesting it is a **flow-driven event**. The underlying negative news, specifically the exit of board member Krieger and the increased short interest, still points to potential fundamental challenges and bearish sentiment. This makes the current upward momentum potentially **unsustainable** without more robust company-specific positive developments.",
+      "peer_tickers": [
+        "ADBE",
+        "ASAN",
+        "SMAR"
+      ],
+      "headlines": [
+        {
+          "title": "Jim Cramer Addresses the Reason Behind Figma Stock’s Decline - Insider Monkey",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQeGo5ejNCT1pxR2JMRWpXVl84ZXpMaGFNdGdUN0R4UW9wcDVGdnNjRDEzRWU1WEZMRDA5QXJJcS1OT1RtVy0yN0FoWlBSRW9KdU00WDVQWHZQUmNxV0tLdjVrTm9LUVE3ajVrTUF6RGsta2lWRXY4dDJQRGszczNhRVRmVjQxMHB6RlVzZ0Z2X0FVUWNoZW5meGtEQ05hWmkwWm85Uzd30gGuAUFVX3lxTFBpMmJ3ZDlFRkU5YkZ2dzllX1lZYURSNE15RTQ0azlRNTlKemQ0d3dlNFdvcGYyXzFsZlRwUGNsTG9ERS1sMmw3VzktY3hXVWV6Ti1FM0JZeTBMQ3lZRlBNam1XaEJkTl9aZ3NZQTRrZVhiSlNGVGZTclpTLUtvQ1Y3YVZWRHIwdkkwdC1PMkZhTXRBN2hNQWtndVcyTzZNX0VlcXhEU1pQc3AxckF4Zw?oc=5"
+        },
+        {
+          "title": "Why Market Bets Are Shifting Around Figma Amid Volatility? - Kalkine Media",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPclhQVjJFblBDTy1EeXpXYURVS0ZMb2NDZmY2UzJWcnhLa0R0Ti02cW9uamluZjVLQWpIaEl2Q0R4ZWJmTVFTcF90bTlPbUZyQUluaDR2UDhUWFdOVTFmRTZtQjFudEZmVzlYdUlJZ25JMUprOXJWc1ZvYi1McE0xNkozSjFLbTJUQUpva01MNFRtZXdQeFlTa2ZaRG00MEFFTEFGampB?oc=5"
+        },
+        {
+          "title": "Krieger Exit Puts Figma Board Oversight And Valuation Discount In Focus - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPOGZFY2RkZ1RBNU5pOVRXbFowT21ya1dmQTA1cW9Na2t0MUhHd1hPdUJZY1R0akZBRHVFcXVqeXFPU3RhbWt6WTRfUEk5WHBXUjVuS1hHTjR2aHJHRnI2ZnRfMHgzTWswY2tnbWQtcWEySkpUZ1ZBVXlMNDhOck83bVF0ZFMwZENIZlBGU1ZJSW9EVmt0b2tJYks3RGZGUXV5WVBKTm1uVERMUW41ZmFuZkFFdk1DdWZrTWhHM1hn0gHDAUFVX3lxTE40eFRWWGVoMWlqX3Z6b3NoYmRQYks5SERwdVhqN1dGZDA5bU9EdS1nNUZvdExUdlhCSktaYlpLWnZMWmw3dHptRXNwQ25jN0g1WnRaVVpJMVd6aFFNcnd2dlNSZ1g4TENxbXpRNmF0YmkzN21XTVJZUFVJbkNlc3R3Zzc0N21ENXlTWnZqREs2VWIyX1g1cVp3MlQxbXZLSHFiM3pIeUx5YkUwanBzaGpoblduQUNtVnpnZnlDaHVIOHM0WQ?oc=5"
+        },
+        {
+          "title": "Short Interest in Figma, Inc. (NYSE:FIG) Rises By 38.0% - MarketBeat",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNVzhmaXZqVVZ5M2tIaGFMeUJQbERtRVRwbVUxQ3dDSmFKNzN2ZzJJTE5ldTZsdEtpdHQ0Y0xfcVRCOFZLNXpmNjBNY1RFRWFWcHlkVG5SLWNac081QWoxdFpWLS1SNzZ3SlVRSXR0cGJoVGNjd1ZjcjUwT05ad2hyLVJuRmFIaS1DZXBkQzlPTG1hcE5QbS1obzB4NlI4TFpCYS0wQg?oc=5"
+        },
+        {
+          "title": "This Propelled Figma’s (FIG) Double-Digit Gain Today - Yahoo! Finance Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxORGt2RXVqaDNQbWI3anczNF9nbkx5Uk5meXBOWnR2UjZCcjNnY2JfbHZGd2Iwa3IyS3lSTjBwbTBueDJOQnE2cDg3bUtINjk4czZSU0lydWJxbEZnZVRGWFFmbzBFRE9RcUZfY2Z5UkNQdWJCZkJySllsX0lWVlEwTmlLTGlZeWFL?oc=5"
+        }
+      ],
+      "float_shares": "184.04M",
+      "short_float": "21.29%",
+      "daily_pct": 10.42,
+      "industry": "Cloud SaaS",
+      "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 75,
@@ -1262,20 +1770,20 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "CMBT's movement is likely due to technical breakout or institutional flow.",
-        "discrepancy_note": "Source A (Finviz News) provides no information. Source B (Google News) headline 'The Technical Signals Behind (CMBT) That Institutions Follow' supports the claim of technical signals and institutional flow, but is not corroborated by a second source."
+        "primary_claim": "38.0% rise in short interest",
+        "discrepancy_note": "Only Source B (Google News, specifically MarketBeat) mentions a '38.0% rise in short interest'. Source A (Finviz) contains no news items."
       },
-      "gates_passed": 3,
+      "gates_passed": 5,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": false,
+        "gate_dollar_vol": true,
         "gate_mkt_cap": true,
-        "gate_adr": false
+        "gate_adr": true
       },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": []
