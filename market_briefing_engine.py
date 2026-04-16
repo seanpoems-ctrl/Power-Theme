@@ -549,6 +549,10 @@ FRED Macro Data:
     Name the mechanical catalyst (policy decision, macro data, positioning squeeze, etc.)
     and explain why it drives the observed price action.
 
+**Analysis Para 3 — Mechanical Plan**
+  - 3-5 sentences giving the actionable trading plan: specific price levels to watch (e.g. SPY 540 as support),
+    key triggers for long/short entries, risk-off thresholds, and what the trader should do TODAY.
+
 **Technical Signal**
   {tech_instruction}
 
@@ -569,6 +573,7 @@ Return ONLY a single valid JSON object — no markdown wrapping, no code blocks:
   "macro_section":    "<BAMLH0A0HYM2 + T10Y2Y regime analysis, 2-3 sentences>",
   "analysis_para1":   "<Global tape → Credit Spreads, 3-5 sentences with specific numbers>",
   "analysis_para2":   "<Mechanical Catalyst — the dominant Why, 3-5 sentences>",
+  "analysis_para3":   "<Mechanical Plan — actionable price levels, entry triggers, risk thresholds, 3-5 sentences>",
   "technical_signal": "<technical signal per instruction above>",
   "ticker_intel": {{
     "a_grade": [
@@ -693,6 +698,8 @@ def build_telegram_message(analysis: dict, pulse: dict, regime: dict, phase: str
         lines += ["*📊 Macro:*", _esc(analysis["macro_section"][:500]), ""]
     if analysis.get("analysis_para2"):
         lines += ["*⚙️ Mechanical Catalyst:*", _esc(analysis["analysis_para2"][:480]), ""]
+    if analysis.get("analysis_para3"):
+        lines += ["*🗺️ Mechanical Plan:*", _esc(analysis["analysis_para3"][:480]), ""]
     if analysis.get("technical_signal"):
         lines += ["*🔍 Technical Signal:*", _esc(analysis["technical_signal"][:280]), ""]
 
