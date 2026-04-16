@@ -111,28 +111,40 @@ async def _fetch_fred_series(client: httpx.AsyncClient, series_id: str) -> float
     return None
 
 
-def _load_cached_hy_oas() -> float | None:
+def _load_cached_fred(key: str) -> float | None:
     """
-    Load the last known BAML HY OAS from the previously committed
-    public/market_intelligence.json.  Handles both the new engine schema
-    (fred.hy_oas) and the old market_intelligence.py schema (credit.baml_hy).
+    Load the last known FRED value from public/market_intelligence.json.
+    key: "hy_oas" or "yield_curve"
     """
     try:
         p = Path("public/market_intelligence.json")
         if not p.exists():
             return None
         data = json.loads(p.read_text(encoding="utf-8"))
-        # New schema: market_briefing_engine.py
-        v = (data.get("fred") or {}).get("hy_oas")
+        # New schema: market_briefing_engine.py stores fred.hy_oas / fred.yield_curve
+        v = (data.get("fred") or {}).get(key)
         if v is not None:
             return float(v)
-        # Old schema: market_intelligence.py
-        v = (data.get("credit") or {}).get("baml_hy")
-        if v is not None:
-            return float(v)
+        # market_briefs.json fallback (compact entries array)
+        briefs_p = Path("public/market_briefs.json")
+        if briefs_p.exists():
+            briefs = json.loads(briefs_p.read_text(encoding="utf-8"))
+            for entry in briefs:
+                v = entry.get(key)
+                if v is not None:
+                    return float(v)
+        # Old schema: market_intelligence.py (hy_oas only)
+        if key == "hy_oas":
+            v = (data.get("credit") or {}).get("baml_hy")
+            if v is not None:
+                return float(v)
     except Exception:
         pass
     return None
+
+
+def _load_cached_hy_oas() -> float | None:
+    return _load_cached_fred("hy_oas")
 
 
 async def _fetch_fred_data() -> dict:
@@ -151,18 +163,29 @@ async def _fetch_fred_data() -> dict:
             _fetch_fred_series(client, "T10Y2Y"),
         )
 
-    hy_oas_stale = False
+    hy_oas_stale     = False
+    yield_curve_stale = False
+
     if hy_oas is None:
         cached = _load_cached_hy_oas()
         if cached is not None:
-            hy_oas      = cached
+            hy_oas       = cached
             hy_oas_stale = True
             log.info(f"FRED BAMLH0A0HYM2: live fetch failed — using cached value {hy_oas:.2f}%")
         else:
             log.warning("FRED BAMLH0A0HYM2: live fetch failed and no cached value available")
 
-    log.info(f"FRED: HY OAS={hy_oas}{'(cached)' if hy_oas_stale else ''}  T10Y2Y={yield_curve}")
-    return {"hy_oas": hy_oas, "yield_curve": yield_curve, "hy_oas_stale": hy_oas_stale}
+    if yield_curve is None:
+        cached_yc = _load_cached_fred("yield_curve")
+        if cached_yc is not None:
+            yield_curve       = cached_yc
+            yield_curve_stale = True
+            log.info(f"FRED T10Y2Y: live fetch failed — using cached value {yield_curve:+.3f}")
+        else:
+            log.warning("FRED T10Y2Y: live fetch failed and no cached value available")
+
+    log.info(f"FRED: HY OAS={hy_oas}{'(cached)' if hy_oas_stale else ''}  T10Y2Y={yield_curve}{'(cached)' if yield_curve_stale else ''}")
+    return {"hy_oas": hy_oas, "yield_curve": yield_curve, "hy_oas_stale": hy_oas_stale, "yield_curve_stale": yield_curve_stale}
 
 
 def _fetch_prices_sync() -> dict:
@@ -521,7 +544,7 @@ def _generate_brief_sync(
 
 FRED Macro Data:
   BAMLH0A0HYM2 (HY Credit Spread): {f"{hy_oas:.2f}%{'  ⚠ CACHED — live FRED fetch failed, value is from previous run' if fred.get('hy_oas_stale') else ''}" if hy_oas is not None else "N/A — live FRED fetch failed and no cache available"} → {regime["credit_status"]}
-  T10Y2Y (10Y-2Y Yield Curve):      {f"{yield_curve:+.3f}" if yield_curve is not None else "N/A"} → {regime["yc_status"]}
+  T10Y2Y (10Y-2Y Yield Curve):      {f"{yield_curve:+.3f}{'  ⚠ CACHED — live FRED fetch failed, value is from previous run' if fred.get('yield_curve_stale') else ''}" if yield_curve is not None else "N/A — live FRED fetch failed and no cache available"} → {regime["yc_status"]}
   S5FI  (% stocks > 50DMA):         {f"{s5fi:.1f}%" if s5fi is not None else "N/A"}
   MMTH  (% stocks > 200DMA):        {f"{mmth:.1f}%" if mmth is not None else "N/A"}
 {recycled_note}{gapper_note}
