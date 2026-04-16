@@ -3859,6 +3859,11 @@ const EARNINGS_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
 async function fetchEarningsAnalysis(ticker, company, eps_estimate, eps_act, eps_surp_pct, rev_est, rev_act, rev_surp_pct, mkt_cap) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${EARNINGS_GEMINI_KEY}`;
   const fmtV = v => v != null ? v : "N/A";
+  const hasActuals = eps_act != null || rev_act != null;
+  const dataNote = hasActuals
+    ? "Use the REPORTED FINANCIALS above as the primary source."
+    : "The REPORTED FINANCIALS above are not yet available (N/A). Use Google Search to find the most recent actual earnings data for this company, then write the brief based on what you find.";
+
   const prompt = `You are an experienced buy-side analyst writing a concise post-earnings brief for ${company} (${ticker}).
 
 REPORTED FINANCIALS:
@@ -3866,14 +3871,14 @@ REPORTED FINANCIALS:
 - Revenue Estimate: ${fmtV(rev_est)} | Revenue Actual: ${fmtV(rev_act)} | Revenue Surprise: ${fmtV(rev_surp_pct)}%
 - Market Cap: ${mkt_cap ? `$${(mkt_cap/1e9).toFixed(1)}B` : "N/A"}
 
-Draw on your training knowledge of this company's most recent earnings report. Be candid; do not fabricate specific numbers you are unsure of.
+${dataNote}
 
-OUTPUT STRICT JSON ONLY — no markdown, no code fences, no explanation outside the JSON.
+OUTPUT STRICT JSON ONLY — no markdown, no code fences, no explanation outside the JSON. Do NOT include search citations or footnotes.
 
 Return this exact structure:
 {
   "en": [
-    { "title": "EARNINGS SUMMARY", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
+    { "title": "EARNINGS SUMMARY", "summary": "one concise sentence with actual numbers", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
     { "title": "STORY & CATALYSTS", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
     { "title": "MANAGEMENT TONE", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
     { "title": "Q&A HIGHLIGHTS", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
@@ -3882,7 +3887,7 @@ Return this exact structure:
     { "title": "TRADER VERDICT", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] }
   ],
   "zh": [
-    { "title": "財報摘要", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
+    { "title": "財報摘要", "summary": "一句話摘要，含實際數字", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
     { "title": "故事與催化劑", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
     { "title": "管理層語氣", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
     { "title": "Q&A 重點", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
@@ -3896,16 +3901,22 @@ Rules for keywords: each is a short phrase (2–4 words), factual, no fluff. Mix
 
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
+    tools: [{ google_search: {} }],
     generationConfig: { temperature: 0.3, maxOutputTokens: 1500 },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   if (!res.ok) throw new Error(`Gemini ${res.status}`);
   const json = await res.json();
-  const raw = json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
+  // Concatenate all text parts (search grounding may split into multiple parts)
+  const parts = json?.candidates?.[0]?.content?.parts || [];
+  const raw = parts.map(p => p.text || "").join("").trim();
   if (!raw) return null;
-  // Strip markdown code fences if present
+  // Strip markdown code fences and extract JSON object
   const cleaned = raw.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "").trim();
-  try { return JSON.parse(cleaned); } catch { return null; }
+  // Extract first {...} block in case grounding adds trailing text
+  const match = cleaned.match(/\{[\s\S]*\}/);
+  if (!match) return null;
+  try { return JSON.parse(match[0]); } catch { return null; }
 }
 
 // Simple markdown bold renderer (for **text** patterns)
