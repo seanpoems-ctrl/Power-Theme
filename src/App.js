@@ -7121,13 +7121,11 @@ const filtered = useMemo(() => {
 
           {/* Row 2: ECON TODAY bar */}
           {data?.market_condition && (() => {
-            const { btc, gld, oil, dxy, credit_spread, breadth_50d, breadth_200d } = data.market_condition;
-            const hasAny = btc || gld || oil || dxy || credit_spread != null || breadth_50d != null || (econData?.events?.length > 0);
+            const { credit_spread } = data.market_condition;
+            const hasAny = credit_spread != null || (econData?.events?.length > 0);
             if (!hasAny) return null;
-            const CHART = { btc: 'IBIT', gld: 'GLD', oil: 'USO', dxy: 'UUP', credit_spread: 'HYG', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R' };
-            const mkClick = (key, e) => { const ticker = CHART[key]; const rect = e.currentTarget.getBoundingClientRect(); setMacroHover(prev => prev?.ticker === ticker ? null : { ticker, rect }); };
+            const mkClick = (key, e) => { const CHART = { credit_spread: 'HYG' }; const ticker = CHART[key]; const rect = e.currentTarget.getBoundingClientRect(); setMacroHover(prev => prev?.ticker === ticker ? null : { ticker, rect }); };
             const Sep = () => <span className="text-zinc-800 mx-1">|</span>;
-            const breadthColor = v => v >= 60 ? "text-emerald-400" : v >= 40 ? "text-yellow-400" : "text-red-400";
             const todayEvents = (econData?.events || []).filter(e => {
               if (!e.date) return false;
               const today = new Date().toISOString().slice(0, 10);
@@ -7146,36 +7144,11 @@ const filtered = useMemo(() => {
                     <Sep/>
                   </React.Fragment>
                 ))}
-                {breadth_200d != null && (
-                  <><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_200d', e)}>
-                    <span className="text-zinc-600">MMTH 200D</span>
-                    <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span>
-                  </span><Sep/></>
-                )}
-                {breadth_50d != null && (
-                  <><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_50d', e)}>
-                    <span className="text-zinc-600">S5FI 50D</span>
-                    <span className={breadthColor(breadth_50d)}>{breadth_50d.toFixed(1)}%</span>
-                  </span><Sep/></>
-                )}
-                {oil && (
-                  <><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('oil', e)}>
-                    <span className="text-zinc-600">CL1!</span>
-                    {oil.price != null && <span className="text-zinc-300">${oil.price.toFixed(2)}</span>}
-                    {oil.change_pct != null && <span className={oil.change_pct >= 0 ? "text-emerald-400" : "text-red-400"}>{oil.change_pct >= 0 ? "+" : ""}{oil.change_pct.toFixed(2)}%</span>}
-                  </span><Sep/></>
-                )}
-                {dxy && (
-                  <span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('dxy', e)}>
-                    <span className="text-zinc-600">DXY</span>
-                    {dxy.price != null && <span className={dxy.change_pct > 0 ? "text-red-400" : dxy.change_pct < 0 ? "text-emerald-400" : "text-zinc-300"}>{dxy.price.toFixed(2)}</span>}
-                  </span>
-                )}
                 {credit_spread != null && (
-                  <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('credit_spread', e)}>
+                  <span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('credit_spread', e)}>
                     <span className="text-zinc-600">HY Spread</span>
                     <span className="text-zinc-300">{credit_spread.value.toFixed(2)}%</span>
-                  </span></>
+                  </span>
                 )}
               </div>
             );
