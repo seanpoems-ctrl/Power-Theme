@@ -119,6 +119,8 @@ jobs:
                      public/ibkr_themes.json \
                      public/market_intelligence.json \
                      public/market_briefs.json \
+                     public/breadth_monitor.json \
+                     public/breadth_stocks_*.json \
                      2>/dev/null || true
           echo "=== Staged files ==="
           git diff --staged --stat
