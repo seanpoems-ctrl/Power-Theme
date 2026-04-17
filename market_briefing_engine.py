@@ -24,6 +24,8 @@ Required env vars:
     TELEGRAM_CHAT_ID     — Telegram chat / channel ID
 
 Optional:
+    FRED_API_KEY         — Free FRED API key (https://fred.stlouisfed.org/docs/api/api_key.html)
+                           Required for reliable HY Credit Spread + Yield Curve data
     DATABASE_URL         — PostgreSQL connection string (Supabase / Postgres)
 """
 
@@ -55,6 +57,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY", "")
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT  = os.getenv("TELEGRAM_CHAT_ID", "")
 DATABASE_URL   = os.getenv("DATABASE_URL", "")
+FRED_API_KEY   = os.getenv("FRED_API_KEY", "")
 
 ET          = ZoneInfo("America/New_York")
 BRIEFS_FILE = Path("public/market_briefs.json")
@@ -88,8 +91,34 @@ def _flatten_df(df: pd.DataFrame) -> pd.DataFrame:
 async def _fetch_fred_series(client: httpx.AsyncClient, series_id: str) -> float | None:
     """
     Fetch the latest non-null value from a FRED series.
-    Tries the free CSV endpoint; on failure retries once after 3 seconds.
+    Uses official FRED API if FRED_API_KEY is set; otherwise tries free CSV endpoint.
     """
+    if FRED_API_KEY:
+        url = (
+            f"https://api.stlouisfed.org/fred/series/observations"
+            f"?series_id={series_id}&api_key={FRED_API_KEY}"
+            f"&sort_order=desc&limit=10&file_type=json"
+        )
+        for attempt in range(2):
+            try:
+                r = await client.get(url, timeout=20)
+                r.raise_for_status()
+                obs = r.json().get("observations", [])
+                for o in obs:
+                    v = o.get("value", ".")
+                    if v not in (".", ""):
+                        try:
+                            return float(v)
+                        except ValueError:
+                            continue
+                return None
+            except Exception as e:
+                log.warning(f"FRED API {series_id} attempt {attempt + 1}: {e}")
+                if attempt == 0:
+                    await asyncio.sleep(3)
+        return None
+
+    # Fallback: free CSV endpoint
     url = f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={series_id}"
     for attempt in range(2):
         try:
@@ -102,10 +131,9 @@ async def _fetch_fred_series(client: httpx.AsyncClient, series_id: str) -> float
                         return float(parts[1])
                     except ValueError:
                         continue
-            # CSV parsed but all recent values were "." — data not yet published today
             return None
         except Exception as e:
-            log.warning(f"FRED {series_id} attempt {attempt + 1}: {e}")
+            log.warning(f"FRED CSV {series_id} attempt {attempt + 1}: {e}")
             if attempt == 0:
                 await asyncio.sleep(3)
     return None
