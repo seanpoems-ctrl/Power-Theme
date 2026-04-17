@@ -5075,10 +5075,11 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
           <tbody>
             {filtered.map((g, i) => {
               const techFail   = (g.technical_status || "").startsWith("Fail");
+              if (techFail) return null;
               const flowTheme  = (g.theme || g.category || "") === "Technical / Flow";
               const rowCls     = [
                 "border-t align-middle transition-colors",
-                techFail  ? "opacity-40 grayscale border-zinc-800/30" : "border-zinc-800/40 hover:bg-zinc-800/20",
+                "border-zinc-800/40 hover:bg-zinc-800/20",
                 flowTheme ? "border-dashed border-amber-800/40" : "",
               ].join(" ");
               return (
