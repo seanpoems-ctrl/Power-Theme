@@ -40,10 +40,14 @@ TOP_THEMES = 5
 TOP_SUBTHEMES_PER_THEME = 5
 TOP_STOCKS_PER_SUBTHEME = 10
 
-# Hardcoded themes not available as Finviz industry groups
-HARDCODED_THEMES: dict[str, list[str]] = {
-    "Quantum Computing": ["IONQ", "RGTI", "QUBT", "QBTS", "QMCO"],
-}
+def _load_config_json(filename: str) -> dict:
+    p = Path(__file__).parent / "config" / filename
+    with open(p, encoding="utf-8") as f:
+        return json.load(f)
+
+
+# Hardcoded themes not available as Finviz industry groups — edit config/hardcoded_themes.json
+HARDCODED_THEMES: dict[str, list[str]] = _load_config_json("hardcoded_themes.json")
 
 _NYSE = xcals.get_calendar("XNYS")
 
@@ -507,159 +511,18 @@ INDUSTRY_TO_SUBTHEME = {
 
 
 # ──────────────────────────────────────────────────────────────
-# Ticker-level overrides — stocks that Finviz themes map places
-# in a different theme/subtheme than their industry would suggest
+# Ticker-level overrides — edit config/ticker_theme_override.json
 # ──────────────────────────────────────────────────────────────
-TICKER_THEME_OVERRIDE = {
-    # Electric Vehicles — Self-Driving
-    "AUR":   ("Electric Vehicles", "Self-Driving"),
-    "MBLY":  ("Electric Vehicles", "Self-Driving"),
-    "INVZ":  ("Electric Vehicles", "Self-Driving"),
-    "APTV":  ("Electric Vehicles", "Self-Driving"),
-    "HSAI":  ("Electric Vehicles", "Self-Driving"),
-    "LYFT":  ("Electric Vehicles", "Self-Driving"),
-    "UBER":  ("Electric Vehicles", "Self-Driving"),
-    "TSLA":  ("Electric Vehicles", "Self-Driving"),
-    # EV — Chips
-    "NVDA":  ("Semiconductors", "Compute"),       # primary; also EV/Chips
-    "QCOM":  ("Semiconductors", "Wireless"),      # primary; also EV/Self-Driving
-    # EV — Batteries
-    "QS":    ("Electric Vehicles", "Batteries"),
-    "FREYR": ("Electric Vehicles", "Batteries"),
-    "ENVX":  ("Electric Vehicles", "Batteries"),
-    "CBAT":  ("Electric Vehicles", "Batteries"),
-    # EV — Charging
-    "CHPT":  ("Electric Vehicles", "Charging"),
-    "BLNK":  ("Electric Vehicles", "Charging"),
-    "EVGO":  ("Electric Vehicles", "Charging"),
-    # EV — Manufacturers
-    "RIVN":  ("Electric Vehicles", "Manufacturers"),
-    "LCID":  ("Electric Vehicles", "Manufacturers"),
-    "NIO":   ("Electric Vehicles", "Manufacturers"),
-    "XPEV":  ("Electric Vehicles", "Manufacturers"),
-    "LI":    ("Electric Vehicles", "Manufacturers"),
-    "NKLA":  ("Electric Vehicles", "Manufacturers"),
-    "HYZN":  ("Electric Vehicles", "Manufacturers"),
-    "ARVL":  ("Electric Vehicles", "Manufacturers"),
-    "WKHS":  ("Electric Vehicles", "Manufacturers"),  # electric delivery vehicles
-    "ZAPP":  ("Electric Vehicles", "Manufacturers"),  # electric motorcycles
-    # AI — specific overrides
-    "GOOGL": ("Artificial Intelligence", "Ads & Search"),
-    "GOOG":  ("Artificial Intelligence", "Ads & Search"),
-    "META":  ("Artificial Intelligence", "Ads & Search"),
-    "MSFT":  ("Artificial Intelligence", "Enterprise"),
-    "AMZN":  ("Cloud Computing", "Hyperscalers"),
-    "ORCL":  ("Cloud Computing", "Databases"),
-    "CRM":   ("Software", "CRM"),
-    "NOW":   ("Software", "Enterprise"),
-    "SNOW":  ("Cloud Computing", "Databases"),
-    "MDB":   ("Cloud Computing", "Databases"),
-    "PLTR":  ("Artificial Intelligence", "Data"),
-    "AI":    ("Artificial Intelligence", "Enterprise"),
-    "BBAI":  ("Artificial Intelligence", "Enterprise"),
-    "SOUN":  ("Artificial Intelligence", "Models"),
-    "CEVA":  ("Artificial Intelligence", "Compute"),
-    # Cybersecurity — overrides from Software/IT industry
-    "CRWD":  ("Cybersecurity", "Endpoint"),
-    "PANW":  ("Cybersecurity", "Network"),
-    "S":     ("Cybersecurity", "Endpoint"),
-    "OKTA":  ("Cybersecurity", "Identity IAM"),
-    "ZS":    ("Cybersecurity", "Cloud"),
-    "QLYS":  ("Cybersecurity", "Cloud"),
-    "TENB":  ("Cybersecurity", "Cloud"),
-    "VRNS":  ("Cybersecurity", "ZeroTrust"),
-    "SAIL":  ("Cybersecurity", "Identity IAM"),
-    "CYBR":  ("Cybersecurity", "Identity IAM"),
-    "FTNT":  ("Cybersecurity", "Network"),
-    "CHKP":  ("Cybersecurity", "Network"),
-    "RPD":   ("Cybersecurity", "Endpoint"),
-    # Space Tech
-    "RKLB":  ("Space Tech", "Launch"),
-    "ASTS":  ("Space Tech", "Satellites"),
-    "SPCE":  ("Space Tech", "Launch"),
-    "LMT":   ("Defense & Aerospace", "Aviation"),
-    "BA":    ("Defense & Aerospace", "Aviation"),
-    "NOC":   ("Defense & Aerospace", "Weapons"),
-    "RTX":   ("Defense & Aerospace", "Aviation"),
-    "GD":    ("Defense & Aerospace", "Aviation"),
-    "HII":   ("Defense & Aerospace", "Weapons"),
-    "AXON":  ("Defense & Aerospace", "Drones"),
-    "KTOS":  ("Defense & Aerospace", "Drones"),
-    "AVAV":  ("Defense & Aerospace", "Drones"),
-    # Quantum Computing
-    "IONQ":  ("Quantum Computing", "Hardware"),
-    "RGTI":  ("Quantum Computing", "Hardware"),
-    "QUBT":  ("Quantum Computing", "Hardware"),
-    "QBTS":  ("Quantum Computing", "Hardware"),
-    "IBM":   ("Quantum Computing", "Hardware"),
-    # Robotics
-    "IRBT":  ("Robotics", "Consumer"),
-    "ISRG":  ("Robotics", "Medical"),
-    "AGCO":  ("Robotics", "Automation"),
-    # Fintech — overrides from financial industry
-    "COIN":  ("Fintech", "Blockchain"),
-    "HOOD":  ("Fintech", "Trading"),
-    "SOFI":  ("Fintech", "Neobanks"),
-    "AFRM":  ("Fintech", "Lending"),
-    "UPST":  ("Fintech", "Lending"),
-    "PAYC":  ("Software", "Enterprise"),   # Paycom = HR/payroll software, not payments
-    "PYPL":  ("Fintech", "Payments"),
-    "SQ":    ("Fintech", "Payments"),
-    "V":     ("Fintech", "Payments"),
-    "MA":    ("Fintech", "Payments"),
-    "ADYEY": ("Fintech", "Payments"),
-    # Power semiconductors — EV charging / solar (not compute)
-    "NVTS":  ("Electric Vehicles", "Charging"),   # GaN/SiC power ICs for EV charging & solar
-    # Energy storage / renewables — misclassified as EV batteries
-    "STEM":  ("Energy Renewable", "Storage"),     # AI-driven battery storage optimization, not EV
+TICKER_THEME_OVERRIDE: dict[str, tuple[str, str]] = {
+    k: tuple(v) for k, v in _load_config_json("ticker_theme_override.json").items()
 }
 
 # ──────────────────────────────────────────────────────────────
-# Ticker extra sub-themes — companies that belong to multiple
-# (theme, subtheme) pairs beyond their primary classification.
-# Format: ticker → list of (theme, subtheme) tuples.
-# These supplement (not replace) the primary TICKER_THEME_OVERRIDE.
+# Ticker extra sub-themes — edit config/ticker_extra_subthemes.json
 # ──────────────────────────────────────────────────────────────
 TICKER_EXTRA_SUBTHEMES: dict[str, list[tuple[str, str]]] = {
-    # Semiconductors that are core EV chip suppliers
-    "NVDA":  [("Electric Vehicles", "Chips"), ("Artificial Intelligence", "Compute")],
-    "QCOM":  [("Electric Vehicles", "Self-Driving"), ("Artificial Intelligence", "Edge")],
-    "INTC":  [("Electric Vehicles", "Self-Driving")],
-    "ON":    [("Electric Vehicles", "Chips")],       # ON Semiconductor — EV power mgmt
-    "STM":   [("Electric Vehicles", "Chips")],       # STMicroelectronics — EV/industrial
-    "TXN":   [("Electric Vehicles", "Chips")],       # Texas Instruments — EV power/BMS
-    "MCHP":  [("Electric Vehicles", "Chips")],       # Microchip Technology — EV MCUs
-    "WOLF":  [("Electric Vehicles", "Chips")],       # Wolfspeed — SiC for EV
-    "SWKS":  [("Electric Vehicles", "Chips")],       # Skyworks — RF + EV connectivity
-    # AI-adjacent hyperscalers / platform companies
-    "GOOGL": [("Cloud Computing", "Hyperscalers"), ("Electric Vehicles", "Self-Driving")],
-    "GOOG":  [("Cloud Computing", "Hyperscalers"), ("Electric Vehicles", "Self-Driving")],
-    "MSFT":  [("Cloud Computing", "Hyperscalers"), ("Artificial Intelligence", "Enterprise")],
-    "AMZN":  [("Artificial Intelligence", "Cloud"), ("E-commerce", "Platforms")],
-    "AAPL":  [("Semiconductors", "Chips"), ("Hardware", "Consumer")],
-    "META":  [("Artificial Intelligence", "Ads & Search"), ("Virtual & Augmented Reality", "AR/VR")],
-    # Tesla — spans EV manufacturing + self-driving + energy
-    "TSLA":  [("Electric Vehicles", "Manufacturers"), ("Artificial Intelligence", "Edge")],
-    # EV adjacent — battery + charging crossover
-    "ALB":   [("Electric Vehicles", "Batteries")],   # Albemarle — lithium for EV batteries
-    "LTHM":  [("Electric Vehicles", "Batteries")],   # Livent — lithium
-    "LAC":   [("Electric Vehicles", "Batteries")],   # Lithium Americas
-    "SQM":   [("Electric Vehicles", "Batteries")],   # Sociedad Quimica — lithium
-    # Defense companies with drone/autonomy angle
-    "LMT":   [("Defense & Aerospace", "Drones")],
-    "NOC":   [("Defense & Aerospace", "Drones")],
-    "RTX":   [("Defense & Aerospace", "Drones")],
-    # Robotics + industrial automation crossover
-    "ABB":   [("Industrial Automation", "Robotics")],
-    "ROK":   [("Industrial Automation", "Robotics")],
-    "EMR":   [("Industrial Automation", "Robotics")],
-    # Biotech with diagnostics angle
-    "ILMN":  [("Healthcare & Biotech", "Diagnostics")],
-    "TMO":   [("Healthcare & Biotech", "Diagnostics")],
-    "DHR":   [("Healthcare & Biotech", "Diagnostics")],
-    # Space + defense crossover
-    "RKLB":  [("Defense & Aerospace", "Aviation")],  # Rocket Lab — launch + defense payloads
-    "ASTS":  [("Telecommunications", "Wireless")],   # AST SpaceMobile — satellite broadband
+    k: [tuple(pair) for pair in pairs]
+    for k, pairs in _load_config_json("ticker_extra_subthemes.json").items()
 }
 
 # ──────────────────────────────────────────────────────────────
