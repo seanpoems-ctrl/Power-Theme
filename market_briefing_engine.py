@@ -652,7 +652,15 @@ def _esc(text: str) -> str:
     return _MD2.sub(r"\\\1", str(text))
 
 
-def build_telegram_message(analysis: dict, pulse: dict, regime: dict, phase: str) -> str:
+def build_telegram_messages(analysis: dict, pulse: dict, regime: dict, phase: str) -> list[str]:
+    """
+    Build Telegram MarkdownV2 messages split into two parts to stay well under
+    the 4096-character limit per message.
+
+    Part 1 — Market Pulse: header + asset snapshot + macro rows + reversal alert
+    Part 2 — Analysis:     all AI sections (Macro, Global Tape, Catalyst, Plan,
+                           Technical Signal) + Ticker Intel
+    """
     assets   = pulse["assets"]
     fred     = pulse["fred"]
     breadth  = pulse["breadth"]
@@ -661,12 +669,20 @@ def build_telegram_message(analysis: dict, pulse: dict, regime: dict, phase: str
     phase_icon  = "🌅" if phase == "PRE" else "🌙"
     phase_label = "Pre-Market" if phase == "PRE" else "Post-Market"
 
-    lines: list[str] = [
+    hy   = fred.get("hy_oas")
+    yc   = fred.get("yield_curve")
+    s5fi = breadth.get("s5fi")
+    mmth = breadth.get("mmth")
+    hy_stale = fred.get("hy_oas_stale", False)
+    yc_stale = fred.get("yield_curve_stale", False)
+
+    # ── Part 1: Market Pulse ──────────────────────────────────────────────────
+    p1: list[str] = [
         f"*{phase_icon} {_esc(phase_label.upper())} BRIEF*",
         f"*{_esc(analysis.get('title', '').replace(f'{phase_label} Brief: ', ''))}* "
         f"{analysis.get('mood_emoji', '')}",
         f"_{_esc(analysis.get('mood', ''))}_",
-        f"_{_esc((analysis.get('narrative') or '')[:220])}_",
+        f"_{_esc((analysis.get('narrative') or '')[:280])}_",
         "",
     ]
 
@@ -678,25 +694,20 @@ def build_telegram_message(analysis: dict, pulse: dict, regime: dict, phase: str
         chg  = d.get("change_pct")
         icon = "🟢" if (chg or 0) >= 0 else "🔴"
         chg_s = f"{chg:+.2f}%" if chg is not None else "—"
-        lines.append(f"{icon} *{_esc(label)}* `{d['price']:.2f}` `{chg_s}`")
-    lines.append("")
+        p1.append(f"{icon} *{_esc(label)}* `{d['price']:.2f}` `{chg_s}`")
+    p1.append("")
 
-    # Macro
-    hy   = fred.get("hy_oas")
-    yc   = fred.get("yield_curve")
-    s5fi = breadth.get("s5fi")
-    mmth = breadth.get("mmth")
-
+    # FRED + breadth rows (with ⚠️ cached warning)
     if hy is not None:
-        r_icon = {"Complacent": "🟢", "Yellow Flag": "🟡", "Stress": "🔴"}.get(
-            regime["credit_status"], "⚪"
-        )
-        lines.append(f"{r_icon} *HY Spread:* `{hy:.2f}%` — *{_esc(regime['credit_status'])}*")
+        r_icon   = {"Complacent": "🟢", "Yellow Flag": "🟡", "Stress": "🔴"}.get(regime["credit_status"], "⚪")
+        stale_tag = " ⚠️ _cached_" if hy_stale else ""
+        p1.append(f"{r_icon} *HY Spread:* `{hy:.2f}%`{stale_tag} — *{_esc(regime['credit_status'])}*")
 
     if yc is not None:
-        sign = "+" if yc >= 0 else ""
-        lines.append(
-            f"📐 *Yield Curve \\(T10Y2Y\\):* `{sign}{yc:.3f}` — {_esc(regime['yc_status'])}"
+        sign      = "+" if yc >= 0 else ""
+        stale_tag = " ⚠️ _cached_" if yc_stale else ""
+        p1.append(
+            f"📐 *Yield Curve \\(T10Y2Y\\):* `{sign}{yc:.3f}`{stale_tag} — {_esc(regime['yc_status'])}"
         )
 
     if s5fi is not None:
@@ -704,72 +715,90 @@ def build_telegram_message(analysis: dict, pulse: dict, regime: dict, phase: str
         parts  = [f"S5FI `{s5fi:.1f}%`"]
         if mmth is not None:
             parts.append(f"MMTH `{mmth:.1f}%`")
-        lines.append(f"{b_icon} *Breadth:* " + " \\| ".join(parts))
+        p1.append(f"{b_icon} *Breadth:* " + " \\| ".join(parts))
 
-    lines.append("")
+    p1.append("")
 
     # Reversal alert
     if reversal.get("signal_detected"):
-        lines += [
+        p1 += [
             "🚨 *\\[REVERSAL SIGNAL DETECTED\\]*",
             _esc(reversal.get("signal_description", "")),
             "",
         ]
 
-    # Analysis sections
+    # ── Part 2: Analysis ──────────────────────────────────────────────────────
+    p2: list[str] = []
+
     if analysis.get("macro_section"):
-        lines += ["*📊 Macro:*", _esc(analysis["macro_section"][:500]), ""]
+        p2 += [f"*{phase_icon} {_esc(phase_label.upper())} ANALYSIS*", ""]
+        p2 += ["*📊 Macro:*", _esc(analysis["macro_section"][:450]), ""]
+
+    if analysis.get("analysis_para1"):
+        p2 += ["*🌐 Global Tape:*", _esc(analysis["analysis_para1"][:400]), ""]
+
     if analysis.get("analysis_para2"):
-        lines += ["*⚙️ Mechanical Catalyst:*", _esc(analysis["analysis_para2"][:480]), ""]
+        p2 += ["*⚙️ Mechanical Catalyst:*", _esc(analysis["analysis_para2"][:420]), ""]
+
     if analysis.get("analysis_para3"):
-        lines += ["*🗺️ Mechanical Plan:*", _esc(analysis["analysis_para3"][:480]), ""]
+        p2 += ["*🗺️ Mechanical Plan:*", _esc(analysis["analysis_para3"][:420]), ""]
+
     if analysis.get("technical_signal"):
-        lines += ["*🔍 Technical Signal:*", _esc(analysis["technical_signal"][:280]), ""]
+        p2 += ["*🔍 Technical Signal:*", _esc(analysis["technical_signal"][:300]), ""]
 
     # Ticker intel
     ti     = analysis.get("ticker_intel", {})
     a_list = ti.get("a_grade", [])
     c_list = ti.get("c_grade", [])
     if a_list or c_list:
-        lines.append("*🎯 Ticker Intel:*")
+        p2.append("*🎯 Ticker Intel:*")
         for t in a_list[:2]:
-            lines.append(
+            p2.append(
                 f"  ✅ `{t.get('ticker','')}` *{_esc(t.get('company','')[:40])}* "
-                f"— {_esc(str(t.get('reason',''))[:120])}"
+                f"— {_esc(str(t.get('reason',''))[:200])}"
             )
         for t in c_list[:1]:
-            lines.append(
+            p2.append(
                 f"  ❌ `{t.get('ticker','')}` *{_esc(t.get('company','')[:40])}* "
-                f"— {_esc(str(t.get('reason',''))[:120])}"
+                f"— {_esc(str(t.get('reason',''))[:200])}"
             )
 
-    return "\n".join(lines)[:4090]
+    messages = ["\n".join(p1)[:4090]]
+    if p2:
+        messages.append("\n".join(p2)[:4090])
+    return messages
 
 
-async def send_telegram(text: str) -> bool:
+async def send_telegram(messages: "str | list[str]") -> bool:
+    """Send one or more messages to all configured Telegram chat IDs."""
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT:
         log.info("Telegram: not configured (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID missing)")
         return False
+    if isinstance(messages, str):
+        messages = [messages]
     chat_ids = [cid.strip() for cid in TELEGRAM_CHAT.split(",")]
     ok = False
     async with httpx.AsyncClient() as client:
         for chat_id in chat_ids:
-            try:
-                r = await client.post(
-                    f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-                    json={
-                        "chat_id":                  chat_id,
-                        "text":                     text,
-                        "parse_mode":               "MarkdownV2",
-                        "disable_web_page_preview": True,
-                    },
-                    timeout=15,
-                )
-                r.raise_for_status()
-                log.info(f"Telegram: sent to {chat_id} ✓")
-                ok = True
-            except Exception as e:
-                log.warning(f"Telegram failed for {chat_id}: {e}")
+            for i, text in enumerate(messages):
+                try:
+                    r = await client.post(
+                        f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+                        json={
+                            "chat_id":                  chat_id,
+                            "text":                     text,
+                            "parse_mode":               "MarkdownV2",
+                            "disable_web_page_preview": True,
+                        },
+                        timeout=15,
+                    )
+                    r.raise_for_status()
+                    log.info(f"Telegram: sent msg {i+1}/{len(messages)} to {chat_id} ✓")
+                    ok = True
+                    if i < len(messages) - 1:
+                        await asyncio.sleep(0.5)  # avoid Telegram flood limits
+                except Exception as e:
+                    log.warning(f"Telegram msg {i+1} failed for {chat_id}: {e}")
     return ok
 
 
@@ -931,8 +960,8 @@ async def run_brief(phase: Literal["PRE", "POST"]) -> None:
         log.error(f"Gemini error: {analysis['error']}")
 
     # [5] Build and send Telegram message (MarkdownV2)
-    tg_msg = build_telegram_message(analysis, pulse, regime, phase)
-    await send_telegram(tg_msg)
+    tg_msgs = build_telegram_messages(analysis, pulse, regime, phase)
+    await send_telegram(tg_msgs)
 
     # [6] Persist (JSON always; PostgreSQL if DATABASE_URL is set)
     _save_json(phase, pulse, regime, analysis, now_et)
