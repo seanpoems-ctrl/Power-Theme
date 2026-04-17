@@ -2371,27 +2371,11 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
               : "border-zinc-700 text-zinc-500 hover:text-zinc-300 hover:border-zinc-500"
           }`}
         >
-          {showNotes ? "▲ 注釋" : "▼ 注釋"}
+          {showNotes ? "▲ Notes" : "▼ Notes"}
         </button>
       </div>
-      {showNotes ? (
-        <div className="space-y-2.5">
-          {INTERNALS_NOTES.map(n => (
-            <div key={n.label} className="border-b border-zinc-800/60 pb-2 last:border-0 last:pb-0">
-              <div className="flex items-baseline gap-1.5 mb-0.5">
-                <span className="text-[10px] font-semibold text-zinc-200">{n.label}</span>
-                <span className="text-[9px] text-zinc-500">{n.desc}</span>
-              </div>
-              <ul className="space-y-0.5">
-                {n.lines.map((l, i) => (
-                  <li key={i} className="text-[9px] text-zinc-400 leading-snug pl-2 before:content-['·'] before:mr-1 before:text-zinc-600">{l}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <>
+      <div className={showNotes ? "flex gap-3" : ""}>
+        <div className={showNotes ? "flex-1 min-w-0" : ""}>
           <div className="space-y-1.5">
             <div>
               <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">ADV/DEC</span><span className={`font-mono font-semibold ${advCls}`}>{advTxt}</span></div>
@@ -2419,8 +2403,22 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
             <span className="text-zinc-500">TRIN</span><span className="text-zinc-300 text-right">{trin == null ? "—" : `${trin.toFixed(2)} ${interpret("trin", trin)}`}</span>
             <span className="text-zinc-500">T2108</span><span className="text-zinc-300 text-right">{t2108 == null ? "—" : `${t2108.toFixed(2)} ${interpret("t2108", t2108)}`}</span>
           </div>
-        </>
-      )}
+        </div>
+        {showNotes && (
+          <div className="w-48 flex-shrink-0 border-l border-zinc-800/60 pl-3 space-y-2">
+            {INTERNALS_NOTES.map(n => (
+              <div key={n.label} className="border-b border-zinc-800/40 pb-1.5 last:border-0 last:pb-0">
+                <div className="text-[10px] font-semibold text-zinc-300 mb-0.5">{n.label}</div>
+                <ul className="space-y-0.5">
+                  {n.lines.map((l, i) => (
+                    <li key={i} className="text-[9px] text-zinc-500 leading-snug pl-1 before:content-['·'] before:mr-1 before:text-zinc-700">{l}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
