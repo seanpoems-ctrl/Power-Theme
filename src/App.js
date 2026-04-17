@@ -3897,12 +3897,20 @@ Rules for keywords: each is a short phrase (2–4 words), factual, no fluff. Mix
   const parts = json?.candidates?.[0]?.content?.parts || [];
   const raw = parts.map(p => p.text || "").join("").trim();
   if (!raw) throw new Error("Gemini returned an empty response — please retry");
-  // Strip markdown code fences and extract JSON object
-  const cleaned = raw.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "").trim();
-  // Extract first {...} block in case grounding adds trailing text
-  const match = cleaned.match(/\{[\s\S]*\}/);
-  if (!match) throw new Error("Could not parse Gemini response — please retry");
-  try { return JSON.parse(match[0]); } catch { throw new Error("Invalid JSON from Gemini — please retry"); }
+  // Strip markdown code fences
+  const cleaned = raw.replace(/```(?:json)?\n?/g, "").replace(/\n?```/g, "").trim();
+  // Use balanced brace counting to extract the first complete JSON object
+  // (greedy regex fails when google_search grounding appends citation footnotes)
+  const start = cleaned.indexOf("{");
+  if (start === -1) throw new Error("Could not find JSON in Gemini response — please retry");
+  let depth = 0, end = -1;
+  for (let i = start; i < cleaned.length; i++) {
+    if (cleaned[i] === "{") depth++;
+    else if (cleaned[i] === "}") { depth--; if (depth === 0) { end = i; break; } }
+  }
+  if (end === -1) throw new Error("Incomplete JSON from Gemini — please retry");
+  try { return JSON.parse(cleaned.slice(start, end + 1)); }
+  catch { throw new Error("Invalid JSON from Gemini — please retry"); }
 }
 
 // Simple markdown bold renderer (for **text** patterns)
