@@ -3891,18 +3891,18 @@ Rules for keywords: each is a short phrase (2–4 words), factual, no fluff. Mix
     generationConfig: { temperature: 0.3, maxOutputTokens: 1500 },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-  if (!res.ok) throw new Error(`Gemini ${res.status}`);
+  if (!res.ok) throw new Error(`Gemini API error ${res.status}`);
   const json = await res.json();
   // Concatenate all text parts (search grounding may split into multiple parts)
   const parts = json?.candidates?.[0]?.content?.parts || [];
   const raw = parts.map(p => p.text || "").join("").trim();
-  if (!raw) return null;
+  if (!raw) throw new Error("Gemini returned an empty response — please retry");
   // Strip markdown code fences and extract JSON object
   const cleaned = raw.replace(/^```(?:json)?\n?/, "").replace(/\n?```$/, "").trim();
   // Extract first {...} block in case grounding adds trailing text
   const match = cleaned.match(/\{[\s\S]*\}/);
-  if (!match) return null;
-  try { return JSON.parse(match[0]); } catch { return null; }
+  if (!match) throw new Error("Could not parse Gemini response — please retry");
+  try { return JSON.parse(match[0]); } catch { throw new Error("Invalid JSON from Gemini — please retry"); }
 }
 
 // Simple markdown bold renderer (for **text** patterns)
@@ -3920,6 +3920,7 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
   const [loading,  setLoading]  = useState(true);
   const [error,    setError]    = useState(null);
   const [lang,     setLang]     = useState("en");
+  const [retryKey, setRetryKey] = useState(0);
 
   useEffect(() => {
     if (!EARNINGS_GEMINI_KEY) {
@@ -3929,6 +3930,7 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
     }
     setLoading(true);
     setError(null);
+    setAnalysis(null);
     fetchEarningsAnalysis(
       stock.ticker, stock.company,
       stock.eps_estimate, stock.eps_act, stock.eps_surp_pct,
@@ -3936,8 +3938,8 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
       stock.mkt_cap,
     )
       .then(data => { setAnalysis(data); setLoading(false); })
-      .catch(e  => { setError(`Failed: ${e.message}`); setLoading(false); });
-  }, [stock.ticker]); // eslint-disable-line react-hooks/exhaustive-deps
+      .catch(e  => { setError(e.message); setLoading(false); });
+  }, [stock.ticker, retryKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Escape key closes drawer
   useEffect(() => {
@@ -4004,8 +4006,12 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
               <p className="text-[12px] text-zinc-500">Gemini is analysing {stock.ticker} earnings…</p>
             </div>
           ) : error ? (
-            <div className="py-10 text-center">
+            <div className="py-10 text-center flex flex-col items-center gap-3">
               <p className="text-[13px] text-rose-400">{error}</p>
+              <button onClick={() => setRetryKey(k => k + 1)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-800 hover:bg-zinc-700 text-[11px] text-zinc-300 transition-colors">
+                <RefreshCw size={11}/> Retry
+              </button>
             </div>
           ) : sections.length > 0 ? (
             <div className="space-y-3">
