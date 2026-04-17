@@ -652,6 +652,14 @@ def _esc(text: str) -> str:
     return _MD2.sub(r"\\\1", str(text))
 
 
+def _trim(text: str, limit: int) -> str:
+    """Trim to `limit` chars at a word boundary, appending '…' if truncated."""
+    if len(text) <= limit:
+        return text
+    cut = text[:limit].rsplit(" ", 1)[0].rstrip(" ,;:")
+    return cut + "…"
+
+
 def build_telegram_messages(analysis: dict, pulse: dict, regime: dict, phase: str) -> list[str]:
     """
     Build Telegram MarkdownV2 messages split into two parts to stay well under
@@ -682,7 +690,7 @@ def build_telegram_messages(analysis: dict, pulse: dict, regime: dict, phase: st
         f"*{_esc(analysis.get('title', '').replace(f'{phase_label} Brief: ', ''))}* "
         f"{analysis.get('mood_emoji', '')}",
         f"_{_esc(analysis.get('mood', ''))}_",
-        f"_{_esc((analysis.get('narrative') or '')[:280])}_",
+        f"_{_esc(_trim(analysis.get('narrative') or '', 300))}_",
         "",
     ]
 
@@ -732,19 +740,19 @@ def build_telegram_messages(analysis: dict, pulse: dict, regime: dict, phase: st
 
     if analysis.get("macro_section"):
         p2 += [f"*{phase_icon} {_esc(phase_label.upper())} ANALYSIS*", ""]
-        p2 += ["*📊 Macro:*", _esc(analysis["macro_section"][:450]), ""]
+        p2 += ["*📊 Macro:*", _esc(_trim(analysis["macro_section"], 550)), ""]
 
     if analysis.get("analysis_para1"):
-        p2 += ["*🌐 Global Tape:*", _esc(analysis["analysis_para1"][:400]), ""]
+        p2 += ["*🌐 Global Tape:*", _esc(_trim(analysis["analysis_para1"], 500)), ""]
 
     if analysis.get("analysis_para2"):
-        p2 += ["*⚙️ Mechanical Catalyst:*", _esc(analysis["analysis_para2"][:420]), ""]
+        p2 += ["*⚙️ Mechanical Catalyst:*", _esc(_trim(analysis["analysis_para2"], 550)), ""]
 
     if analysis.get("analysis_para3"):
-        p2 += ["*🗺️ Mechanical Plan:*", _esc(analysis["analysis_para3"][:420]), ""]
+        p2 += ["*🗺️ Mechanical Plan:*", _esc(_trim(analysis["analysis_para3"], 550)), ""]
 
     if analysis.get("technical_signal"):
-        p2 += ["*🔍 Technical Signal:*", _esc(analysis["technical_signal"][:300]), ""]
+        p2 += ["*🔍 Technical Signal:*", _esc(_trim(analysis["technical_signal"], 380)), ""]
 
     # Ticker intel
     ti     = analysis.get("ticker_intel", {})
@@ -755,12 +763,12 @@ def build_telegram_messages(analysis: dict, pulse: dict, regime: dict, phase: st
         for t in a_list[:2]:
             p2.append(
                 f"  ✅ `{t.get('ticker','')}` *{_esc(t.get('company','')[:40])}* "
-                f"— {_esc(str(t.get('reason',''))[:200])}"
+                f"— {_esc(_trim(str(t.get('reason','')), 220))}"
             )
         for t in c_list[:1]:
             p2.append(
                 f"  ❌ `{t.get('ticker','')}` *{_esc(t.get('company','')[:40])}* "
-                f"— {_esc(str(t.get('reason',''))[:200])}"
+                f"— {_esc(_trim(str(t.get('reason','')), 220))}"
             )
 
     messages = ["\n".join(p1)[:4090]]
