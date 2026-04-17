@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 16, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 17, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 17.94,
-      "change": -0.23,
+      "price": 17.83,
+      "change": -0.11,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 58134.24,
-      "change_pct": 0.44
+      "price": 58475.9,
+      "change_pct": -1.75
     },
     "dax": {
       "label": "DAX",
-      "price": 24154.47,
-      "change_pct": 0.36
+      "price": 24262.64,
+      "change_pct": 0.45
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10589.99,
-      "change_pct": 0.29
+      "price": 10558.8,
+      "change_pct": -0.29
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 59.1,
-    "mmth": 56.8,
+    "s5fi": 59.6,
+    "mmth": 57.0,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Broadly Positive, Stable Growth",
+  "mood": "Tech Momentum Continues, Global Mixed",
   "analysis": {
-    "analysis_para1": "Global equity markets displayed a uniform positive trend today, with the Nikkei 225 gaining +0.44%, the DAX +0.36%, and the FTSE 100 +0.29%. This positive sentiment extended to the US, where the S&P 500 closed up +0.26% and the Nasdaq 100 led with a +0.49% rise. While the BAML HY Spread remains in an unknown regime, US market breadth indicators S5FI at 59.1% and MMTH at 56.8% suggest healthy, albeit not overheated, participation across stocks. This confluence points to a stable, broadly constructive market environment.",
-    "analysis_para2": "The immediate mechanical plan involves monitoring for sustained momentum above today's closing levels of 7041 for the S&P 500 and 26333 for the Nasdaq 100. A definitive break below these levels, coupled with a VIX spike above its normal 17.94 reading, would signal a potential shift in sentiment. We will continue to favor high RS leaders and observe if breadth indicators like S5FI and MMTH hold above 50% to confirm underlying market health. Should the market maintain its upward trajectory, scaling into leading thematic plays remains the preferred action.",
-    "technical_signal": "No reversal pattern confirmed yet. The market's positive close and stable VIX suggest a continuation of current trends.",
+    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 down -1.75% while the DAX posts a gain of +0.45% and the FTSE 100 dips -0.29%. Despite this international divergence, US pre-market futures show strength, supported by a stable 10-year yield at 4.31% and a normal VIX at 17.83, suggesting no immediate credit distress or widespread panic. Underlying US market breadth remains healthy, with 59.6% of stocks above their 50-day moving average (S5FI) and 57.0% above their 200-day moving average (MMTH), indicating broad participation in the current rally.",
+    "analysis_para2": "The mechanical plan for today focuses on confirming the positive pre-market momentum, particularly in leading sectors like Semiconductors and Hardware. Traders should observe whether the S&P 500 can hold above 7040 and the Nasdaq 100 above 26330, with sustained moves above these levels signaling continuation. A failure to hold yesterday's closing levels would warrant caution, but current conditions favor aggressive relative strength plays. Key action involves identifying setups in high RS names within strong themes, leveraging any intraday dips as potential entry points, while monitoring for any shifts in global sentiment that could impact US open.",
+    "technical_signal": "No reversal pattern confirmed yet. US indices are showing positive pre-market action with healthy underlying breadth, indicating continued upside momentum.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "AXT Inc (AXTI), with an RS of 99 and a 1-month return of +30.1%, demonstrates dominant leadership within the high-growth semiconductor theme."
+        "reason": "AXT Inc (AXTI) earns an A+ for its leading RS 99, stellar 1-month +30.1% and 3-month +192.6% performance, positioning it as a top semiconductor play in the current tech-driven rally."
       },
       {
-        "ticker": "SNDK",
-        "company": "Sandisk Corp",
+        "ticker": "AEHR",
+        "company": "Aehr Test Systems",
         "grade": "A",
-        "reason": "Sandisk Corp (SNDK), with an RS of 99 and a 1-month return of +26.7%, positions itself as a strong leader in the thriving hardware sector amidst current market conditions."
+        "reason": "Aehr Test Systems (AEHR) receives an A grade due to its strong RS 98 and exceptional 1-month +95.4% surge, demonstrating strong momentum within the dominant semiconductor theme."
       },
       {
         "ticker": "HBM",
         "company": "Hudbay Minerals Inc",
         "grade": "C",
-        "reason": "With an RS of 90 and a comparatively low 3-month return of +10.5%, Hudbay Minerals Inc (HBM) lags significantly behind stronger thematic plays, indicating potential underperformance in the current regime."
+        "reason": "Hudbay Minerals Inc (HBM) is a C-grade avoid due to its comparatively low RS 90 and weakest 3-month +10.5% return among candidates, indicating underperformance relative to market leaders."
       }
     ]
   }
