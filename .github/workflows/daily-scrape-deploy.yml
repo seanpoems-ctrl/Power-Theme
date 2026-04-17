@@ -113,6 +113,8 @@ jobs:
                      public/econ_calendar.json \
                      public/market_internals.json \
                      public/ibkr_themes.json \
+                     public/breadth_monitor.json \
+                     public/breadth_stocks_*.json \
                      2>/dev/null || true
           echo "=== Staged files ==="
           git diff --staged --stat
