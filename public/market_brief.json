@@ -1,57 +1,57 @@
 {
-  "generated_at": "April 17, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "April 17, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7041.28,
-      "change": 18.33,
-      "change_pct": 0.26
+      "price": 7126.06,
+      "change": 84.78,
+      "change_pct": 1.2
     },
     {
       "label": "Nasdaq 100",
-      "price": 26333.0,
-      "change": 128.42,
-      "change_pct": 0.49
+      "price": 26672.43,
+      "change": 339.43,
+      "change_pct": 1.29
     },
     {
       "label": "VIX",
-      "price": 17.83,
-      "change": -0.11,
+      "price": 17.48,
+      "change": -0.46,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.31,
-      "change": 0.03,
+      "price": 4.25,
+      "change": -0.06,
       "change_pct": null,
-      "trend_label": "Stable"
+      "trend_label": "Falling"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 58475.9,
-      "change_pct": -1.75
+      "price": 59518.34,
+      "change_pct": 2.38
     },
     "dax": {
       "label": "DAX",
-      "price": 24262.64,
-      "change_pct": 0.45
+      "price": 24702.24,
+      "change_pct": 2.27
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10558.8,
-      "change_pct": -0.29
+      "price": 10667.63,
+      "change_pct": 0.73
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 59.6,
-    "mmth": 57.0,
+    "s5fi": 64.8,
+    "mmth": 64.1,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech Momentum Continues, Global Mixed",
+  "mood": "Broad Rally / Growth-Led Strength",
   "analysis": {
-    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 down -1.75% while the DAX posts a gain of +0.45% and the FTSE 100 dips -0.29%. Despite this international divergence, US pre-market futures show strength, supported by a stable 10-year yield at 4.31% and a normal VIX at 17.83, suggesting no immediate credit distress or widespread panic. Underlying US market breadth remains healthy, with 59.6% of stocks above their 50-day moving average (S5FI) and 57.0% above their 200-day moving average (MMTH), indicating broad participation in the current rally.",
-    "analysis_para2": "The mechanical plan for today focuses on confirming the positive pre-market momentum, particularly in leading sectors like Semiconductors and Hardware. Traders should observe whether the S&P 500 can hold above 7040 and the Nasdaq 100 above 26330, with sustained moves above these levels signaling continuation. A failure to hold yesterday's closing levels would warrant caution, but current conditions favor aggressive relative strength plays. Key action involves identifying setups in high RS names within strong themes, leveraging any intraday dips as potential entry points, while monitoring for any shifts in global sentiment that could impact US open.",
-    "technical_signal": "No reversal pattern confirmed yet. US indices are showing positive pre-market action with healthy underlying breadth, indicating continued upside momentum.",
+    "analysis_para1": "Global markets demonstrated robust performance today, with the Nikkei 225 surging +2.38% and the DAX gaining +2.27%, signaling a strong risk-on appetite extending from Asia and Europe. The falling 10-year yield, now at 4.25%, suggests easing inflationary pressures and provides a favorable backdrop for risk assets. This positive global momentum translated to healthy breadth in the US market, as evidenced by 64.8% of stocks trading above their 50-day moving average (S5FI) and 64.1% above their 200-day moving average (MMTH), reflecting widespread participation in today's gains. While the BAML HY Spread is an unknown regime, the overall picture points to significant bullishness.",
+    "analysis_para2": "The S&P 500's strong close at 7126.06 and the Nasdaq 100's push above 26672.43 establish clear upward momentum. Traders should monitor sustained closes above these key levels for confirmation of continued strength. A mechanical plan would involve targeting pullbacks to retest intraday breakout levels or short-term moving averages, assuming the current positive momentum endures. Any sharp reversal in the VIX from its normal 17.48 level or a significant rebound in the 10-year yield could signal a sentiment shift, warranting tighter stops and reduced exposure. For now, the path of least resistance remains higher, favoring long positions in leading growth sectors.",
+    "technical_signal": "No reversal pattern confirmed yet. The market is showing broad-based strength with indices closing significantly higher and healthy breadth metrics.",
     "ticker_intel": [
-      {
-        "ticker": "AXTI",
-        "company": "AXT Inc",
-        "grade": "A+",
-        "reason": "AXT Inc (AXTI) earns an A+ for its leading RS 99, stellar 1-month +30.1% and 3-month +192.6% performance, positioning it as a top semiconductor play in the current tech-driven rally."
-      },
       {
         "ticker": "AEHR",
         "company": "Aehr Test Systems",
+        "grade": "A+",
+        "reason": "With an RS of 98 and an exceptional 1-month return of +95.4%, AEHR demonstrates strong short-term leadership within the dominant semiconductor theme, fitting the current growth-led rally."
+      },
+      {
+        "ticker": "AXTI",
+        "company": "AXT Inc",
         "grade": "A",
-        "reason": "Aehr Test Systems (AEHR) receives an A grade due to its strong RS 98 and exceptional 1-month +95.4% surge, demonstrating strong momentum within the dominant semiconductor theme."
+        "reason": "Boasting an RS of 99 and a robust 1-month return of +30.1%, AXTI exhibits sustained relative strength and momentum in the leading semiconductor sector, perfectly aligned with today's risk-on environment."
       },
       {
         "ticker": "HBM",
         "company": "Hudbay Minerals Inc",
         "grade": "C",
-        "reason": "Hudbay Minerals Inc (HBM) is a C-grade avoid due to its comparatively low RS 90 and weakest 3-month +10.5% return among candidates, indicating underperformance relative to market leaders."
+        "reason": "Despite a 1-month gain of +17.7%, Hudbay Minerals' RS of 90 and comparatively weak 3-month performance of +10.5% suggest it is lagging the broad market and leading sectors, making it a weaker choice in a growth-led rally."
       }
     ]
   }
