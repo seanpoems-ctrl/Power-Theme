@@ -4942,6 +4942,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
   const [fMinAvgVol, setFMinAvgVol] = useState(0);    // K
   const [fMinMktCap, setFMinMktCap] = useState(0);      // $B
   const [fMinDolVol, setFMinDolVol] = useState(0);     // $M
+  const [modalData, setModalData] = useState(null);
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/stock_db.json`)
@@ -5039,21 +5040,21 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
       </div>
 
       <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
-        <table className="w-full table-fixed min-w-[1300px]">
+        <table className="table-fixed min-w-[1120px]" style={{width:"1120px"}}>
           <colgroup>
-            <col style={{width:"5%"}}/>
-            <col style={{width:"5%"}}/>
-            <col style={{width:"5%"}}/>
-            <col style={{width:"4%"}}/>
-            <col style={{width:"4%"}}/>
-            <col style={{width:"4%"}}/>
-            <col style={{width:"5%"}}/>
-            <col style={{width:"6%"}}/>
-            <col style={{width:"8%"}}/>
-            <col style={{width:"8%"}}/>
-            <col style={{width:"4%"}}/>
-            <col style={{width:"18%"}}/>
-            <col style={{width:"24%"}}/>
+            <col style={{width:"80px"}}/>
+            <col style={{width:"80px"}}/>
+            <col style={{width:"70px"}}/>
+            <col style={{width:"55px"}}/>
+            <col style={{width:"60px"}}/>
+            <col style={{width:"55px"}}/>
+            <col style={{width:"65px"}}/>
+            <col style={{width:"90px"}}/>
+            <col style={{width:"110px"}}/>
+            <col style={{width:"90px"}}/>
+            <col style={{width:"45px"}}/>
+            <col style={{width:"150px"}}/>
+            <col style={{width:"170px"}}/>
           </colgroup>
           <thead>
             <tr className="text-[11px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40 align-middle">
@@ -5085,7 +5086,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
               return (
               <tr key={g.ticker + i} className={rowCls}>
                 {/* Ticker */}
-                <td className="py-2 px-1.5 text-center">
+                <td className="py-1 px-1 text-center">
                   <span
                     className="font-bold text-zinc-100 text-[13px] hover:text-blue-400 transition-colors cursor-pointer"
                     onMouseEnter={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered({ ticker: g.ticker, rect }); tvOnEnter(); }}
@@ -5099,24 +5100,24 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                   <div className="text-[11px] font-mono text-zinc-500">${g.price.toFixed(2)}</div>
                 </td>
                 {/* Premkt % */}
-                <td className="py-2 px-1.5 text-center">
+                <td className="py-1 px-1 text-center">
                   <div className="text-[12px] font-mono text-zinc-300">${g.price.toFixed(2)}</div>
                   <span className="text-[13px] font-bold font-mono text-emerald-400">+{g.gap_pct.toFixed(1)}%</span>
                 </td>
                 {/* Premkt Vol */}
-                <td className="py-2 px-1.5 text-center text-[12px] font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
+                <td className="py-1 px-1 text-center text-[12px] font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
                 {/* RVol */}
-                <td className="py-2 px-1.5 text-center">
+                <td className="py-1 px-1 text-center">
                   <span className={`text-[12px] font-bold font-mono ${g.rvol >= 5 ? "text-emerald-300" : g.rvol >= 3 ? "text-emerald-400" : g.rvol >= 2 ? "text-amber-400" : "text-zinc-500"}`}>
                     {g.rvol.toFixed(2)}x
                   </span>
                 </td>
                 {/* Daily % */}
-                <td className="py-2 px-1.5 text-center"><DailyChg val={g.daily_pct}/></td>
+                <td className="py-1 px-1 text-center"><DailyChg val={g.daily_pct}/></td>
                 {/* Short Int */}
-                <td className="py-2 px-1.5 text-center text-[12px] font-mono text-zinc-400">{g.short_float || "—"}</td>
+                <td className="py-1 px-1 text-center text-[12px] font-mono text-zinc-400">{g.short_float || "—"}</td>
                 {/* Float */}
-                <td className="py-2 px-1.5 text-center text-[12px] font-mono text-zinc-400">{g.float_shares || "—"}</td>
+                <td className="py-1 px-1 text-center text-[12px] font-mono text-zinc-400">{g.float_shares || "—"}</td>
                 {/* Sector / Industry */}
                 {(() => {
                   const db = tickerDb[g.ticker] || {};
@@ -5124,19 +5125,19 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                   const industry = db.industry || g.industry || "";
                   return (
                     <>
-                      <td className="py-2 px-1.5 text-center text-[11px] text-zinc-200 align-middle">{sector || <span className="text-zinc-600">—</span>}</td>
-                      <td className="py-2 px-1.5 text-center text-[11px] text-zinc-200 align-middle">{industry || <span className="text-zinc-600">—</span>}</td>
+                      <td className="py-1 px-1 text-center text-[11px] text-zinc-200 align-middle">{sector || <span className="text-zinc-600">—</span>}</td>
+                      <td className="py-1 px-1 text-center text-[11px] text-zinc-200 align-middle">{industry || <span className="text-zinc-600">—</span>}</td>
                     </>
                   );
                 })()}
                 {/* Category */}
-                <td className="py-2 px-1.5 text-center">
+                <td className="py-1 px-1 text-center">
                   <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full border ${CATEGORY_STYLE[g.category] || CATEGORY_STYLE["Others"]}`}>
                     {g.category}
                   </span>
                 </td>
                 {/* Grade + Technical Status + Verification */}
-                <td className="py-2 px-1 text-center">
+                <td className="py-1 px-1 text-center">
                   <div className="flex flex-col items-center gap-0.5">
                     <div className="flex items-center gap-1">
                       {g.grade
@@ -5164,24 +5165,20 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                     )}
                   </div>
                 </td>
-                {/* Reasoning — shows analysis_detail with bold Catalyst/Impact */}
-                <td className="py-2 px-1.5 text-[12px] text-zinc-400 leading-relaxed align-middle whitespace-normal break-words">
+                {/* Reasoning — click to open modal */}
+                <td className="py-1 px-1 text-[11px] text-zinc-400 leading-relaxed align-top cursor-pointer hover:text-zinc-200 transition-colors" onClick={() => setModalData(g)}>
                   {g.analysis_detail ? (() => {
                     const parts = g.analysis_detail.split(" | Impact: ");
                     if (parts.length === 2) {
-                      const catalystText = parts[0].replace(/^Catalyst:\s*/i, "");
-                      return (
-                        <div className="space-y-1">
-                          <p><span className="font-bold text-zinc-300">Catalyst:</span> {catalystText}</p>
-                          <p><span className="font-bold text-zinc-300">Impact:</span> {parts[1]}</p>
-                        </div>
-                      );
+                      return <p className="line-clamp-3"><span className="font-bold text-zinc-300">Catalyst:</span> {parts[0].replace(/^Catalyst:\s*/i, "")}</p>;
                     }
-                    return g.analysis_detail;
-                  })() : g.reasoning}
+                    return <p className="line-clamp-3">{g.analysis_detail}</p>;
+                  })() : <p className="line-clamp-3">{g.reasoning}</p>}
                 </td>
-                {/* Analysis Details */}
-                <td className="py-2 px-2 align-middle"><AnalysisCell text={g.analysis_details}/></td>
+                {/* Analysis Details — click to open modal */}
+                <td className="py-1 px-1 align-top cursor-pointer hover:opacity-80 transition-opacity" onClick={() => setModalData(g)}>
+                  <AnalysisCell text={g.analysis_details}/>
+                </td>
               </tr>
               );
             })}
@@ -5196,6 +5193,68 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
       <LeaderColumn ibkrThemesData={ibkrThemesData} gapperData={gapperData} mode="gapper" />
     </div>
     {tvActive && hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
+    {modalData && (
+      <div
+        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center"
+        onClick={() => setModalData(null)}
+      >
+        <div
+          className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 max-w-2xl w-full mx-4 shadow-2xl relative max-h-[85vh] overflow-y-auto"
+          onClick={e => e.stopPropagation()}
+        >
+          <button
+            onClick={() => setModalData(null)}
+            className="absolute top-3 right-3 text-zinc-400 hover:text-zinc-100 transition-colors"
+          >
+            <X size={16}/>
+          </button>
+          {/* Header */}
+          <div className="flex items-center gap-2 mb-5 flex-wrap">
+            <span className="text-xl font-bold font-mono text-zinc-100">{modalData.ticker}</span>
+            <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full border ${CATEGORY_STYLE[modalData.category] || CATEGORY_STYLE["Others"]}`}>
+              {modalData.category}
+            </span>
+            {modalData.grade && (
+              <span className={`text-[11px] font-bold px-1 py-0.5 rounded border ${gradeStyle(modalData.grade)}`}>
+                {modalData.grade}
+              </span>
+            )}
+          </div>
+          {/* Sections */}
+          {(() => {
+            let catalyst = null, impact = null;
+            if (modalData.analysis_detail) {
+              if (typeof modalData.analysis_detail === "object") {
+                catalyst = modalData.analysis_detail.catalyst;
+                impact = modalData.analysis_detail.impact;
+              } else {
+                const parts = modalData.analysis_detail.split(" | Impact: ");
+                catalyst = parts[0]?.replace(/^Catalyst:\s*/i, "") || null;
+                impact = parts[1] || null;
+              }
+            }
+            catalyst = catalyst || modalData.category;
+            const hypothesis = [modalData.hypothesis, modalData.hypothesis_detail].filter(Boolean).join("\n\n") || null;
+            const sections = [
+              { label: "CATALYST",   value: catalyst },
+              { label: "IMPACT",     value: impact },
+              { label: "REASONING",  value: modalData.reasoning },
+              { label: "HYPOTHESIS", value: hypothesis },
+            ];
+            return (
+              <div className="space-y-4">
+                {sections.filter(s => s.value).map(s => (
+                  <div key={s.label}>
+                    <div className="text-[11px] uppercase text-zinc-500 mb-1 font-semibold tracking-wider">{s.label}</div>
+                    <div className="text-[13px] text-zinc-200 leading-relaxed whitespace-pre-wrap">{s.value}</div>
+                  </div>
+                ))}
+              </div>
+            );
+          })()}
+        </div>
+      </div>
+    )}
     </>
   );
 };
