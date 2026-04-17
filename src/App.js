@@ -1761,109 +1761,135 @@ const renderStyledText = (text) => {
   });
 };
 
-const AnalysisCell = ({ text }) => {
-  const [expanded, setExpanded] = useState(false);
-  if (!text) return <span className="text-zinc-600 text-[12px]">—</span>;
-  const sections = text.split(/\n\n(?=•)/).map(s => s.trim()).filter(Boolean);
-  const hasContent = sections.some(s => s.indexOf("\n") > -1);
-  return (
-    <div className="text-[11px] leading-relaxed min-w-0 w-[220px]">
-      {sections.map((sec, i) => {
-        const nl = sec.indexOf("\n");
-        const header = nl > -1 ? sec.slice(0, nl) : sec;
-        const body   = nl > -1 ? sec.slice(nl + 1) : "";
-        if (!expanded) {
-          // collapsed: show only headers as compact pills
-          return (
-            <div key={i} className={i > 0 ? "mt-1" : ""}>
-              <div className="text-zinc-300 font-medium">{renderStyledText(header)}</div>
-            </div>
-          );
-        }
+const GapperDetailModal = ({ g, onClose }) => {
+  useEffect(() => {
+    const onKey = e => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [onClose]);
+
+  const renderReasoning = () => {
+    if (g.analysis_detail) {
+      const parts = g.analysis_detail.split(" | Impact: ");
+      if (parts.length === 2) {
+        const catalystText = parts[0].replace(/^Catalyst:\s*/i, "");
         return (
-          <div key={i} className={i > 0 ? "mt-2 pt-2 border-t border-zinc-800/60" : ""}>
-            <div className="text-zinc-200 font-medium mb-0.5">{renderStyledText(header)}</div>
-            {body && <div className="text-zinc-400">{renderStyledText(body)}</div>}
+          <div className="space-y-2 text-[13px]">
+            <p><span className="font-semibold text-zinc-300">Catalyst:</span> <span className="text-zinc-400">{catalystText}</span></p>
+            <p><span className="font-semibold text-zinc-300">Impact:</span> <span className="text-zinc-400">{parts[1]}</span></p>
           </div>
         );
-      })}
-      {hasContent && (
+      }
+      return <p className="text-[13px] text-zinc-400">{g.analysis_detail}</p>;
+    }
+    if (g.reasoning) return <p className="text-[13px] text-zinc-400">{g.reasoning}</p>;
+    return <span className="text-zinc-600">—</span>;
+  };
+
+  const renderAnalysis = () => {
+    const text = g.analysis_details;
+    if (!text) return <span className="text-zinc-600">—</span>;
+    const sections = text.split(/\n\n(?=•)/).map(s => s.trim()).filter(Boolean);
+    return (
+      <div className="space-y-3">
+        {sections.map((sec, i) => {
+          const nl = sec.indexOf("\n");
+          const header = nl > -1 ? sec.slice(0, nl) : sec;
+          const body   = nl > -1 ? sec.slice(nl + 1) : "";
+          return (
+            <div key={i} className={i > 0 ? "pt-3 border-t border-zinc-800/60" : ""}>
+              <div className="text-zinc-200 font-semibold text-[13px] mb-1">{renderStyledText(header)}</div>
+              {body && <div className="text-zinc-400 text-[13px] leading-relaxed">{renderStyledText(body)}</div>}
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  return (
+    <div
+      className="fixed inset-0 z-[200] flex items-center justify-center"
+      style={{ backgroundColor: "rgba(0,0,0,0.72)" }}
+      onClick={onClose}
+    >
+      <div
+        className="relative bg-zinc-900 border border-zinc-700/60 rounded-xl shadow-2xl w-full max-w-2xl mx-4 max-h-[80vh] flex flex-col"
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between px-5 py-4 border-b border-zinc-800/60 shrink-0">
+          <div className="flex items-center gap-3">
+            <span className="text-lg font-bold text-zinc-100">{g.ticker}</span>
+            <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full border ${CATEGORY_STYLE[g.category] || CATEGORY_STYLE["Others"]}`}>
+              {g.category}
+            </span>
+          </div>
+          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded hover:bg-zinc-800">
+            <X size={16}/>
+          </button>
+        </div>
+        {/* Body */}
+        <div className="px-5 py-4 overflow-y-auto space-y-5">
+          <div>
+            <div className="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold mb-2">Reasoning</div>
+            {renderReasoning()}
+          </div>
+          <div className="border-t border-zinc-800/60 pt-4">
+            <div className="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold mb-2">Analysis Details</div>
+            {renderAnalysis()}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const AnalysisCell = ({ text, onOpen }) => {
+  if (!text) return <span className="text-zinc-600 text-[12px]">—</span>;
+  const sections = text.split(/\n\n(?=•)/).map(s => s.trim()).filter(Boolean);
+  const firstSec = sections[0] || "";
+  const nl = firstSec.indexOf("\n");
+  const header = nl > -1 ? firstSec.slice(0, nl) : firstSec;
+  const hasMore = sections.some(s => s.indexOf("\n") > -1);
+  return (
+    <div className="text-[11px] leading-relaxed w-[220px] flex items-start gap-1.5">
+      <span className="text-zinc-300 font-medium">{renderStyledText(header)}</span>
+      {hasMore && (
         <button
-          onClick={e => { e.stopPropagation(); setExpanded(x => !x); }}
-          className="mt-1.5 flex items-center gap-1 text-[10px] text-zinc-500 hover:text-zinc-300 transition-colors"
-        >
-          <span className="flex items-center justify-center w-4 h-4 rounded-full border border-zinc-600/60 font-bold">{expanded ? "−" : "+"}</span>
-          {expanded ? "收合" : "展開"}
-        </button>
+          onClick={e => { e.stopPropagation(); onOpen(); }}
+          className="flex-shrink-0 flex items-center justify-center w-4 h-4 rounded-full border border-zinc-600/60 text-[10px] font-bold text-zinc-500 hover:text-zinc-200 hover:border-zinc-400 transition-colors mt-0.5"
+        >+</button>
       )}
     </div>
   );
 };
 
-const ReasoningCell = ({ g }) => {
-  const [expanded, setExpanded] = useState(false);
-  const LIMIT = 130;
-  let content = null;
+const ReasoningCell = ({ g, onOpen }) => {
   if (g.analysis_detail) {
-    const parts = g.analysis_detail.split(" | Impact: ");
-    if (parts.length === 2) {
-      const catalystText = parts[0].replace(/^Catalyst:\s*/i, "");
-      const full = (
-        <div className="space-y-1">
-          <p><span className="font-semibold text-zinc-300">Catalyst:</span> {catalystText}</p>
-          <p><span className="font-semibold text-zinc-300">Impact:</span> {parts[1]}</p>
-        </div>
-      );
-      const short = catalystText.length > LIMIT ? catalystText.slice(0, LIMIT) + "…" : catalystText;
-      const collapsed = <p><span className="font-semibold text-zinc-300">Catalyst:</span> {short}</p>;
-      const needsToggle = catalystText.length > LIMIT || parts[1];
-      content = (
-        <div>
-          {expanded ? full : collapsed}
-          {needsToggle && (
-            <button onClick={e => { e.stopPropagation(); setExpanded(x => !x); }}
-              className="mt-1 flex items-center gap-1 text-[10px] text-zinc-500 hover:text-zinc-300 transition-colors">
-              <span className="flex items-center justify-center w-4 h-4 rounded-full border border-zinc-600/60 font-bold">{expanded ? "−" : "+"}</span>
-              {expanded ? "收合" : "展開"}
-            </button>
-          )}
-        </div>
-      );
-    } else {
-      const raw = g.analysis_detail;
-      const needsToggle = raw.length > LIMIT;
-      content = (
-        <div>
-          <p>{expanded ? raw : raw.slice(0, LIMIT) + (needsToggle ? "…" : "")}</p>
-          {needsToggle && (
-            <button onClick={e => { e.stopPropagation(); setExpanded(x => !x); }}
-              className="mt-1 flex items-center gap-1 text-[10px] text-zinc-500 hover:text-zinc-300 transition-colors">
-              <span className="flex items-center justify-center w-4 h-4 rounded-full border border-zinc-600/60 font-bold">{expanded ? "−" : "+"}</span>
-              {expanded ? "收合" : "展開"}
-            </button>
-          )}
-        </div>
-      );
-    }
-  } else if (g.reasoning) {
-    const raw = g.reasoning;
-    const needsToggle = raw.length > LIMIT;
-    content = (
-      <div>
-        <p>{expanded ? raw : raw.slice(0, LIMIT) + (needsToggle ? "…" : "")}</p>
-        {needsToggle && (
-          <button onClick={e => { e.stopPropagation(); setExpanded(x => !x); }}
-            className="mt-1 flex items-center gap-1 text-[10px] text-zinc-500 hover:text-zinc-300 transition-colors">
-            <span className="flex items-center justify-center w-4 h-4 rounded-full border border-zinc-600/60 font-bold">{expanded ? "−" : "+"}</span>
-            {expanded ? "收合" : "展開"}
-          </button>
-        )}
+    const catalystText = g.analysis_detail.split(" | Impact: ")[0].replace(/^Catalyst:\s*/i, "");
+    return (
+      <div className="text-[11px] text-zinc-400 leading-relaxed w-[200px] flex items-start gap-1.5">
+        <span><span className="font-semibold text-zinc-300">Catalyst:</span> {catalystText}</span>
+        <button
+          onClick={e => { e.stopPropagation(); onOpen(); }}
+          className="flex-shrink-0 flex items-center justify-center w-4 h-4 rounded-full border border-zinc-600/60 text-[10px] font-bold text-zinc-500 hover:text-zinc-200 hover:border-zinc-400 transition-colors mt-0.5"
+        >+</button>
       </div>
     );
-  } else {
-    content = <span className="text-zinc-600">—</span>;
   }
-  return <div className="text-[11px] text-zinc-400 leading-relaxed w-[200px]">{content}</div>;
+  if (g.reasoning) {
+    return (
+      <div className="text-[11px] text-zinc-400 leading-relaxed w-[200px] flex items-start gap-1.5">
+        <span className="line-clamp-2">{g.reasoning}</span>
+        <button
+          onClick={e => { e.stopPropagation(); onOpen(); }}
+          className="flex-shrink-0 flex items-center justify-center w-4 h-4 rounded-full border border-zinc-600/60 text-[10px] font-bold text-zinc-500 hover:text-zinc-200 hover:border-zinc-400 transition-colors mt-0.5"
+        >+</button>
+      </div>
+    );
+  }
+  return <div className="text-[11px] text-zinc-600 w-[200px]">—</div>;
 };
 
 const CATEGORY_STYLE = {
@@ -5017,6 +5043,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
   const [fMinAvgVol, setFMinAvgVol] = useState(0);    // K
   const [fMinMktCap, setFMinMktCap] = useState(0);      // $B
   const [fMinDolVol, setFMinDolVol] = useState(0);     // $M
+  const [popupGapper, setPopupGapper] = useState(null);
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/stock_db.json`)
@@ -5240,9 +5267,9 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                   </div>
                 </td>
                 {/* Reasoning */}
-                <td className="py-2 px-1.5 align-top"><ReasoningCell g={g}/></td>
+                <td className="py-2 px-1.5 align-top"><ReasoningCell g={g} onOpen={() => setPopupGapper(g)}/></td>
                 {/* Analysis Details */}
-                <td className="py-2 px-1.5 align-top"><AnalysisCell text={g.analysis_details}/></td>
+                <td className="py-2 px-1.5 align-top"><AnalysisCell text={g.analysis_details} onOpen={() => setPopupGapper(g)}/></td>
               </tr>
               );
             })}
@@ -5257,6 +5284,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
       <LeaderColumn ibkrThemesData={ibkrThemesData} gapperData={gapperData} mode="gapper" />
     </div>
     {tvActive && hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
+    {popupGapper && <GapperDetailModal g={popupGapper} onClose={() => setPopupGapper(null)}/>}
     </>
   );
 };
