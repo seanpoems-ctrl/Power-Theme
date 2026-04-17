@@ -1767,7 +1767,7 @@ const AnalysisCell = ({ text }) => {
   const sections = text.split(/\n\n(?=•)/).map(s => s.trim()).filter(Boolean);
   const visible = expanded ? sections : sections.slice(0, 1);
   return (
-    <div className="text-[12px] leading-relaxed min-w-0 max-w-full">
+    <div className="text-[11px] leading-relaxed min-w-0 w-[220px]">
       {visible.map((sec, i) => {
         const nl = sec.indexOf("\n");
         const header = nl > -1 ? sec.slice(0, nl) : sec;
@@ -1782,13 +1782,80 @@ const AnalysisCell = ({ text }) => {
       {sections.length > 1 && (
         <button
           onClick={e => { e.stopPropagation(); setExpanded(x => !x); }}
-          className="mt-2 flex items-center justify-center w-5 h-5 rounded-full border border-zinc-600/60 text-zinc-500 hover:border-zinc-400 hover:text-zinc-300 transition-colors text-[11px] font-bold"
+          className="mt-1.5 flex items-center gap-1 text-[10px] text-zinc-500 hover:text-zinc-300 transition-colors"
         >
-          {expanded ? "−" : "+"}
+          <span className="flex items-center justify-center w-4 h-4 rounded-full border border-zinc-600/60 font-bold">{expanded ? "−" : "+"}</span>
+          {expanded ? "收合" : `+${sections.length - 1} 更多`}
         </button>
       )}
     </div>
   );
+};
+
+const ReasoningCell = ({ g }) => {
+  const [expanded, setExpanded] = useState(false);
+  const LIMIT = 130;
+  let content = null;
+  if (g.analysis_detail) {
+    const parts = g.analysis_detail.split(" | Impact: ");
+    if (parts.length === 2) {
+      const catalystText = parts[0].replace(/^Catalyst:\s*/i, "");
+      const full = (
+        <div className="space-y-1">
+          <p><span className="font-semibold text-zinc-300">Catalyst:</span> {catalystText}</p>
+          <p><span className="font-semibold text-zinc-300">Impact:</span> {parts[1]}</p>
+        </div>
+      );
+      const short = catalystText.length > LIMIT ? catalystText.slice(0, LIMIT) + "…" : catalystText;
+      const collapsed = <p><span className="font-semibold text-zinc-300">Catalyst:</span> {short}</p>;
+      const needsToggle = catalystText.length > LIMIT || parts[1];
+      content = (
+        <div>
+          {expanded ? full : collapsed}
+          {needsToggle && (
+            <button onClick={e => { e.stopPropagation(); setExpanded(x => !x); }}
+              className="mt-1 flex items-center gap-1 text-[10px] text-zinc-500 hover:text-zinc-300 transition-colors">
+              <span className="flex items-center justify-center w-4 h-4 rounded-full border border-zinc-600/60 font-bold">{expanded ? "−" : "+"}</span>
+              {expanded ? "收合" : "展開"}
+            </button>
+          )}
+        </div>
+      );
+    } else {
+      const raw = g.analysis_detail;
+      const needsToggle = raw.length > LIMIT;
+      content = (
+        <div>
+          <p>{expanded ? raw : raw.slice(0, LIMIT) + (needsToggle ? "…" : "")}</p>
+          {needsToggle && (
+            <button onClick={e => { e.stopPropagation(); setExpanded(x => !x); }}
+              className="mt-1 flex items-center gap-1 text-[10px] text-zinc-500 hover:text-zinc-300 transition-colors">
+              <span className="flex items-center justify-center w-4 h-4 rounded-full border border-zinc-600/60 font-bold">{expanded ? "−" : "+"}</span>
+              {expanded ? "收合" : "展開"}
+            </button>
+          )}
+        </div>
+      );
+    }
+  } else if (g.reasoning) {
+    const raw = g.reasoning;
+    const needsToggle = raw.length > LIMIT;
+    content = (
+      <div>
+        <p>{expanded ? raw : raw.slice(0, LIMIT) + (needsToggle ? "…" : "")}</p>
+        {needsToggle && (
+          <button onClick={e => { e.stopPropagation(); setExpanded(x => !x); }}
+            className="mt-1 flex items-center gap-1 text-[10px] text-zinc-500 hover:text-zinc-300 transition-colors">
+            <span className="flex items-center justify-center w-4 h-4 rounded-full border border-zinc-600/60 font-bold">{expanded ? "−" : "+"}</span>
+            {expanded ? "收合" : "展開"}
+          </button>
+        )}
+      </div>
+    );
+  } else {
+    content = <span className="text-zinc-600">—</span>;
+  }
+  return <div className="text-[11px] text-zinc-400 leading-relaxed w-[200px]">{content}</div>;
 };
 
 const CATEGORY_STYLE = {
@@ -5068,17 +5135,18 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
               <th className="text-center py-2 px-1.5 font-medium align-middle">Industry</th>
               <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip width="w-72" text="催化劑分類：Earnings 財報｜Upgrade 分析師升評｜FDA 藥品審批｜Government Policy 政策｜Contract/Partnership 合約｜Institutional/Insider Buying 機構/內部人買入｜Thematic Narratives 主題敘事｜Technical/Flow 無明確催化劑">Category</Tip></th>
               <th className="text-center py-2 px-1 font-medium align-middle"><Tip width="w-64" text="Gemini 信心評分：A+ 極高 (90+)｜A 高 (75-89)｜B 中 (50-74)｜C 低 (&lt;50)。Pass/Fail = 技術門檻 ($Vol >$100M 且 ADR >4%)">Grade</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle">Reasoning</th>
-              <th className="text-center py-2 px-2 font-medium align-middle">Analysis Details</th>
+              <th className="text-center py-2 px-1 font-medium align-middle w-[200px]">Reasoning</th>
+              <th className="text-center py-2 px-1 font-medium align-middle w-[220px]">Analysis Details</th>
             </tr>
           </thead>
           <tbody>
             {filtered.map((g, i) => {
               const techFail   = (g.technical_status || "").startsWith("Fail");
+              if (techFail) return null;
               const flowTheme  = (g.theme || g.category || "") === "Technical / Flow";
               const rowCls     = [
                 "border-t align-middle transition-colors",
-                techFail  ? "opacity-40 grayscale border-zinc-800/30" : "border-zinc-800/40 hover:bg-zinc-800/20",
+                "border-zinc-800/40 hover:bg-zinc-800/20",
                 flowTheme ? "border-dashed border-amber-800/40" : "",
               ].join(" ");
               return (
@@ -5163,24 +5231,10 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                     )}
                   </div>
                 </td>
-                {/* Reasoning — shows analysis_detail with bold Catalyst/Impact */}
-                <td className="py-2 px-1.5 text-[12px] text-zinc-400 leading-relaxed align-middle whitespace-normal break-words">
-                  {g.analysis_detail ? (() => {
-                    const parts = g.analysis_detail.split(" | Impact: ");
-                    if (parts.length === 2) {
-                      const catalystText = parts[0].replace(/^Catalyst:\s*/i, "");
-                      return (
-                        <div className="space-y-1">
-                          <p><span className="font-bold text-zinc-300">Catalyst:</span> {catalystText}</p>
-                          <p><span className="font-bold text-zinc-300">Impact:</span> {parts[1]}</p>
-                        </div>
-                      );
-                    }
-                    return g.analysis_detail;
-                  })() : g.reasoning}
-                </td>
+                {/* Reasoning */}
+                <td className="py-2 px-1.5 align-top"><ReasoningCell g={g}/></td>
                 {/* Analysis Details */}
-                <td className="py-2 px-2 align-middle"><AnalysisCell text={g.analysis_details}/></td>
+                <td className="py-2 px-1.5 align-top"><AnalysisCell text={g.analysis_details}/></td>
               </tr>
               );
             })}
