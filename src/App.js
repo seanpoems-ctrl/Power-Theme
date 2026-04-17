@@ -1765,13 +1765,21 @@ const AnalysisCell = ({ text }) => {
   const [expanded, setExpanded] = useState(false);
   if (!text) return <span className="text-zinc-600 text-[12px]">—</span>;
   const sections = text.split(/\n\n(?=•)/).map(s => s.trim()).filter(Boolean);
-  const visible = expanded ? sections : sections.slice(0, 1);
+  const hasContent = sections.some(s => s.indexOf("\n") > -1);
   return (
     <div className="text-[11px] leading-relaxed min-w-0 w-[220px]">
-      {visible.map((sec, i) => {
+      {sections.map((sec, i) => {
         const nl = sec.indexOf("\n");
         const header = nl > -1 ? sec.slice(0, nl) : sec;
         const body   = nl > -1 ? sec.slice(nl + 1) : "";
+        if (!expanded) {
+          // collapsed: show only headers as compact pills
+          return (
+            <div key={i} className={i > 0 ? "mt-1" : ""}>
+              <div className="text-zinc-300 font-medium">{renderStyledText(header)}</div>
+            </div>
+          );
+        }
         return (
           <div key={i} className={i > 0 ? "mt-2 pt-2 border-t border-zinc-800/60" : ""}>
             <div className="text-zinc-200 font-medium mb-0.5">{renderStyledText(header)}</div>
@@ -1779,13 +1787,13 @@ const AnalysisCell = ({ text }) => {
           </div>
         );
       })}
-      {sections.length > 1 && (
+      {hasContent && (
         <button
           onClick={e => { e.stopPropagation(); setExpanded(x => !x); }}
           className="mt-1.5 flex items-center gap-1 text-[10px] text-zinc-500 hover:text-zinc-300 transition-colors"
         >
           <span className="flex items-center justify-center w-4 h-4 rounded-full border border-zinc-600/60 font-bold">{expanded ? "−" : "+"}</span>
-          {expanded ? "收合" : `+${sections.length - 1} 更多`}
+          {expanded ? "收合" : "展開"}
         </button>
       )}
     </div>
