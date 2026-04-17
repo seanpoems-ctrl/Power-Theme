@@ -2360,7 +2360,7 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
     return "";
   };
   return (
-    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+    <div className="relative bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
       <div className="flex items-center justify-between mb-2">
         <PanelLabel badge="IBKR">Market Internals</PanelLabel>
         <button
@@ -2374,51 +2374,47 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
           {showNotes ? "▲ Notes" : "▼ Notes"}
         </button>
       </div>
-      <div className={showNotes ? "flex gap-3" : ""}>
-        <div className={showNotes ? "flex-1 min-w-0" : ""}>
-          <div className="space-y-1.5">
-            <div>
-              <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">ADV/DEC</span><span className={`font-mono font-semibold ${advCls}`}>{advTxt}</span></div>
-              <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className={`h-full ${advBar}`} style={{ width: `${Math.min(100, Math.max(0, advPct))}%` }}/></div>
-            </div>
-            <div>
-              <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">SMA50 ↑</span><span className={`font-mono font-semibold ${sma50cls}`}>{sma50pct.toFixed(0)}%</span></div>
-              <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className={`h-full ${sma50bar}`} style={{ width: `${Math.min(100, sma50pct)}%` }}/></div>
-            </div>
-            <div>
-              <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">SMA200 ↑</span><span className={`font-mono font-semibold ${sma200cls}`}>{sma200pct.toFixed(0)}%</span></div>
-              <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className={`h-full ${sma200bar}`} style={{ width: `${Math.min(100, sma200pct)}%` }}/></div>
-            </div>
-            <div>
-              <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">52W Hi</span><span className="font-mono font-semibold text-blue-400">{newHigh}</span></div>
-              <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className="h-full bg-blue-500" style={{ width: `${Math.min(100, (newHigh / 500) * 100)}%` }}/></div>
-            </div>
-            <div>
-              <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">52W Lo</span><span className="font-mono font-semibold text-red-400">{newLow}</span></div>
-              <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className="h-full bg-red-500" style={{ width: `${Math.min(100, (newLow / 500) * 100)}%` }}/></div>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 mt-2 pt-2 border-t border-zinc-800/60 text-[10px] font-mono">
-            <span className="text-zinc-500">TICK</span><span className={`text-right ${tick == null ? "text-zinc-600" : tick >= 0 ? "text-emerald-400" : "text-red-400"}`}>{tick == null ? "—" : (tick > 0 ? "+" : "") + tick}</span>
-            <span className="text-zinc-500">TRIN</span><span className="text-zinc-300 text-right">{trin == null ? "—" : `${trin.toFixed(2)} ${interpret("trin", trin)}`}</span>
-            <span className="text-zinc-500">T2108</span><span className="text-zinc-300 text-right">{t2108 == null ? "—" : `${t2108.toFixed(2)} ${interpret("t2108", t2108)}`}</span>
-          </div>
+      <div className="space-y-1.5">
+        <div>
+          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">ADV/DEC</span><span className={`font-mono font-semibold ${advCls}`}>{advTxt}</span></div>
+          <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className={`h-full ${advBar}`} style={{ width: `${Math.min(100, Math.max(0, advPct))}%` }}/></div>
         </div>
-        {showNotes && (
-          <div className="w-48 flex-shrink-0 border-l border-zinc-800/60 pl-3 space-y-2">
-            {INTERNALS_NOTES.map(n => (
-              <div key={n.label} className="border-b border-zinc-800/40 pb-1.5 last:border-0 last:pb-0">
-                <div className="text-[10px] font-semibold text-zinc-300 mb-0.5">{n.label}</div>
-                <ul className="space-y-0.5">
-                  {n.lines.map((l, i) => (
-                    <li key={i} className="text-[9px] text-zinc-500 leading-snug pl-1 before:content-['·'] before:mr-1 before:text-zinc-700">{l}</li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        )}
+        <div>
+          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">SMA50 ↑</span><span className={`font-mono font-semibold ${sma50cls}`}>{sma50pct.toFixed(0)}%</span></div>
+          <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className={`h-full ${sma50bar}`} style={{ width: `${Math.min(100, sma50pct)}%` }}/></div>
+        </div>
+        <div>
+          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">SMA200 ↑</span><span className={`font-mono font-semibold ${sma200cls}`}>{sma200pct.toFixed(0)}%</span></div>
+          <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className={`h-full ${sma200bar}`} style={{ width: `${Math.min(100, sma200pct)}%` }}/></div>
+        </div>
+        <div>
+          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">52W Hi</span><span className="font-mono font-semibold text-blue-400">{newHigh}</span></div>
+          <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className="h-full bg-blue-500" style={{ width: `${Math.min(100, (newHigh / 500) * 100)}%` }}/></div>
+        </div>
+        <div>
+          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">52W Lo</span><span className="font-mono font-semibold text-red-400">{newLow}</span></div>
+          <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className="h-full bg-red-500" style={{ width: `${Math.min(100, (newLow / 500) * 100)}%` }}/></div>
+        </div>
       </div>
+      <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 mt-2 pt-2 border-t border-zinc-800/60 text-[10px] font-mono">
+        <span className="text-zinc-500">TICK</span><span className={`text-right ${tick == null ? "text-zinc-600" : tick >= 0 ? "text-emerald-400" : "text-red-400"}`}>{tick == null ? "—" : (tick > 0 ? "+" : "") + tick}</span>
+        <span className="text-zinc-500">TRIN</span><span className="text-zinc-300 text-right">{trin == null ? "—" : `${trin.toFixed(2)} ${interpret("trin", trin)}`}</span>
+        <span className="text-zinc-500">T2108</span><span className="text-zinc-300 text-right">{t2108 == null ? "—" : `${t2108.toFixed(2)} ${interpret("t2108", t2108)}`}</span>
+      </div>
+      {showNotes && (
+        <div className="absolute top-0 left-full ml-1 z-50 w-56 bg-zinc-900 border border-zinc-700 rounded-xl p-3 shadow-xl space-y-2 overflow-y-auto max-h-[80vh]">
+          {INTERNALS_NOTES.map(n => (
+            <div key={n.label} className="border-b border-zinc-800/40 pb-1.5 last:border-0 last:pb-0">
+              <div className="text-[10px] font-semibold text-zinc-200 mb-0.5">{n.label}</div>
+              <ul className="space-y-0.5">
+                {n.lines.map((l, i) => (
+                  <li key={i} className="text-[9px] text-zinc-400 leading-snug pl-1 before:content-['·'] before:mr-1 before:text-zinc-600">{l}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
