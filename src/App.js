@@ -4942,6 +4942,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
   const [fMinAvgVol, setFMinAvgVol] = useState(0);    // K
   const [fMinMktCap, setFMinMktCap] = useState(0);      // $B
   const [fMinDolVol, setFMinDolVol] = useState(0);     // $M
+  const [modalData, setModalData] = useState(null);
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/stock_db.json`)
@@ -5041,35 +5042,35 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
       <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
         <table className="w-full table-fixed min-w-[1300px]">
           <colgroup>
-            <col style={{width:"5%"}}/>
-            <col style={{width:"5%"}}/>
-            <col style={{width:"5%"}}/>
-            <col style={{width:"4%"}}/>
-            <col style={{width:"4%"}}/>
-            <col style={{width:"4%"}}/>
-            <col style={{width:"5%"}}/>
-            <col style={{width:"6%"}}/>
-            <col style={{width:"8%"}}/>
-            <col style={{width:"8%"}}/>
-            <col style={{width:"4%"}}/>
-            <col style={{width:"18%"}}/>
-            <col style={{width:"24%"}}/>
+            <col style={{width:"80px"}}/>
+            <col style={{width:"80px"}}/>
+            <col style={{width:"70px"}}/>
+            <col style={{width:"55px"}}/>
+            <col style={{width:"60px"}}/>
+            <col style={{width:"55px"}}/>
+            <col style={{width:"65px"}}/>
+            <col style={{width:"90px"}}/>
+            <col style={{width:"110px"}}/>
+            <col style={{width:"90px"}}/>
+            <col style={{width:"45px"}}/>
+            <col style={{width:"150px"}}/>
+            <col style={{width:"170px"}}/>
           </colgroup>
           <thead>
             <tr className="text-[11px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40 align-middle">
-              <th className="text-center py-2 px-1.5 font-medium align-middle">Ticker</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">Premkt<br/>Price<br/>Chg %</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">Premkt<br/>Vol</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip text="Relative Volume：今日成交量 ÷ 過去10天平均量。🟢 ≥5x 極強  🟡 ≥3x 強  ⚪ ≥2x 中等  灰色 &lt;2x 弱">RVol</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip text="Daily %：昨日收盤漲跌幅（非盤前）">Daily %</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight"><Tip text="Short Interest：放空股數佔流通股比例。>20% 有軋空 (Short Squeeze) 潛力，但也代表市場看空">Short<br/>Int</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip text="Float：市場上可自由買賣的流通股數。Float 越小，股價越容易被大幅推動">Float</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle">Sector</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle">Industry</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip width="w-72" text="催化劑分類：Earnings 財報｜Upgrade 分析師升評｜FDA 藥品審批｜Government Policy 政策｜Contract/Partnership 合約｜Institutional/Insider Buying 機構/內部人買入｜Thematic Narratives 主題敘事｜Technical/Flow 無明確催化劑">Category</Tip></th>
-              <th className="text-center py-2 px-1 font-medium align-middle"><Tip width="w-64" text="Gemini 信心評分：A+ 極高 (90+)｜A 高 (75-89)｜B 中 (50-74)｜C 低 (&lt;50)。Pass/Fail = 技術門檻 ($Vol >$100M 且 ADR >4%)">Grade</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle">Reasoning</th>
-              <th className="text-center py-2 px-2 font-medium align-middle">Analysis Details</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle">Ticker</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle leading-tight">Premkt<br/>Price<br/>Chg %</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle leading-tight">Premkt<br/>Vol</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip text="Relative Volume：今日成交量 ÷ 過去10天平均量。🟢 ≥5x 極強  🟡 ≥3x 強  ⚪ ≥2x 中等  灰色 &lt;2x 弱">RVol</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip text="Daily %：昨日收盤漲跌幅（非盤前）">Daily %</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle leading-tight"><Tip text="Short Interest：放空股數佔流通股比例。>20% 有軋空 (Short Squeeze) 潛力，但也代表市場看空">Short<br/>Int</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip text="Float：市場上可自由買賣的流通股數。Float 越小，股價越容易被大幅推動">Float</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle">Sector</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle">Industry</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip width="w-72" text="催化劑分類：Earnings 財報｜Upgrade 分析師升評｜FDA 藥品審批｜Government Policy 政策｜Contract/Partnership 合約｜Institutional/Insider Buying 機構/內部人買入｜Thematic Narratives 主題敘事｜Technical/Flow 無明確催化劑">Category</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip width="w-64" text="Gemini 信心評分：A+ 極高 (90+)｜A 高 (75-89)｜B 中 (50-74)｜C 低 (&lt;50)。Pass/Fail = 技術門檻 ($Vol >$100M 且 ADR >4%)">Grade</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle">Reasoning</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle">Analysis Details</th>
             </tr>
           </thead>
           <tbody>
@@ -5085,7 +5086,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
               return (
               <tr key={g.ticker + i} className={rowCls}>
                 {/* Ticker */}
-                <td className="py-2 px-1.5 text-center">
+                <td className="py-1 px-2 align-middle text-center">
                   <span
                     className="font-bold text-zinc-100 text-[13px] hover:text-blue-400 transition-colors cursor-pointer"
                     onMouseEnter={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered({ ticker: g.ticker, rect }); tvOnEnter(); }}
@@ -5099,24 +5100,24 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                   <div className="text-[11px] font-mono text-zinc-500">${g.price.toFixed(2)}</div>
                 </td>
                 {/* Premkt % */}
-                <td className="py-2 px-1.5 text-center">
+                <td className="py-1 px-2 align-middle text-center">
                   <div className="text-[12px] font-mono text-zinc-300">${g.price.toFixed(2)}</div>
                   <span className="text-[13px] font-bold font-mono text-emerald-400">+{g.gap_pct.toFixed(1)}%</span>
                 </td>
                 {/* Premkt Vol */}
-                <td className="py-2 px-1.5 text-center text-[12px] font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
+                <td className="py-1 px-2 align-middle text-center text-[12px] font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
                 {/* RVol */}
-                <td className="py-2 px-1.5 text-center">
+                <td className="py-1 px-2 align-middle text-center">
                   <span className={`text-[12px] font-bold font-mono ${g.rvol >= 5 ? "text-emerald-300" : g.rvol >= 3 ? "text-emerald-400" : g.rvol >= 2 ? "text-amber-400" : "text-zinc-500"}`}>
                     {g.rvol.toFixed(2)}x
                   </span>
                 </td>
                 {/* Daily % */}
-                <td className="py-2 px-1.5 text-center"><DailyChg val={g.daily_pct}/></td>
+                <td className="py-1 px-2 align-middle text-center"><DailyChg val={g.daily_pct}/></td>
                 {/* Short Int */}
-                <td className="py-2 px-1.5 text-center text-[12px] font-mono text-zinc-400">{g.short_float || "—"}</td>
+                <td className="py-1 px-2 align-middle text-center text-[12px] font-mono text-zinc-400">{g.short_float || "—"}</td>
                 {/* Float */}
-                <td className="py-2 px-1.5 text-center text-[12px] font-mono text-zinc-400">{g.float_shares || "—"}</td>
+                <td className="py-1 px-2 align-middle text-center text-[12px] font-mono text-zinc-400">{g.float_shares || "—"}</td>
                 {/* Sector / Industry */}
                 {(() => {
                   const db = tickerDb[g.ticker] || {};
@@ -5124,19 +5125,19 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                   const industry = db.industry || g.industry || "";
                   return (
                     <>
-                      <td className="py-2 px-1.5 text-center text-[11px] text-zinc-200 align-middle">{sector || <span className="text-zinc-600">—</span>}</td>
-                      <td className="py-2 px-1.5 text-center text-[11px] text-zinc-200 align-middle">{industry || <span className="text-zinc-600">—</span>}</td>
+                      <td className="py-1 px-2 align-middle text-center text-[11px] text-zinc-200">{sector || <span className="text-zinc-600">—</span>}</td>
+                      <td className="py-1 px-2 align-middle text-center text-[11px] text-zinc-200">{industry || <span className="text-zinc-600">—</span>}</td>
                     </>
                   );
                 })()}
                 {/* Category */}
-                <td className="py-2 px-1.5 text-center">
+                <td className="py-1 px-2 align-middle text-center">
                   <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full border ${CATEGORY_STYLE[g.category] || CATEGORY_STYLE["Others"]}`}>
                     {g.category}
                   </span>
                 </td>
                 {/* Grade + Technical Status + Verification */}
-                <td className="py-2 px-1 text-center">
+                <td className="py-1 px-2 align-middle text-center">
                   <div className="flex flex-col items-center gap-0.5">
                     <div className="flex items-center gap-1">
                       {g.grade
@@ -5164,24 +5165,30 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                     )}
                   </div>
                 </td>
-                {/* Reasoning — shows analysis_detail with bold Catalyst/Impact */}
-                <td className="py-2 px-1.5 text-[12px] text-zinc-400 leading-relaxed align-middle whitespace-normal break-words">
-                  {g.analysis_detail ? (() => {
-                    const parts = g.analysis_detail.split(" | Impact: ");
-                    if (parts.length === 2) {
-                      const catalystText = parts[0].replace(/^Catalyst:\s*/i, "");
-                      return (
-                        <div className="space-y-1">
-                          <p><span className="font-bold text-zinc-300">Catalyst:</span> {catalystText}</p>
-                          <p><span className="font-bold text-zinc-300">Impact:</span> {parts[1]}</p>
-                        </div>
-                      );
-                    }
-                    return g.analysis_detail;
-                  })() : g.reasoning}
+                {/* Reasoning */}
+                <td className="py-1 px-2 align-middle">
+                  <span className="line-clamp-2 text-[11px] text-zinc-400 block">
+                    {g.reasoning || "—"}
+                  </span>
                 </td>
                 {/* Analysis Details */}
-                <td className="py-2 px-2 align-middle"><AnalysisCell text={g.analysis_details}/></td>
+                <td className="py-1 px-2 align-middle">
+                  {(() => {
+                    const d = g.analysis_detail;
+                    const catalyst = typeof d === "object"
+                      ? d?.catalyst
+                      : (typeof d === "string" ? d.split(" | Impact: ")[0].replace(/^Catalyst:\s*/i, "") : null);
+                    return (
+                      <div>
+                        <span className="line-clamp-1 text-[11px] text-zinc-300 block">{catalyst || "—"}</span>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setModalData(g); }}
+                          className="text-[10px] text-blue-400 hover:text-blue-300 mt-0.5"
+                        >•••</button>
+                      </div>
+                    );
+                  })()}
+                </td>
               </tr>
               );
             })}
@@ -5196,6 +5203,65 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
       <LeaderColumn ibkrThemesData={ibkrThemesData} gapperData={gapperData} mode="gapper" />
     </div>
     {tvActive && hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
+    {modalData && (
+      <div
+        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center"
+        onClick={() => setModalData(null)}
+      >
+        <div
+          className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 max-w-2xl w-full mx-4 shadow-2xl relative max-h-[85vh] overflow-y-auto"
+          onClick={e => e.stopPropagation()}
+        >
+          <button
+            onClick={() => setModalData(null)}
+            className="absolute top-3 right-3 text-zinc-400 hover:text-zinc-100 transition-colors"
+          >
+            <X size={16}/>
+          </button>
+          <div className="flex items-center gap-2 mb-5 flex-wrap">
+            <span className="text-xl font-bold font-mono text-zinc-100">{modalData.ticker}</span>
+            <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full border ${CATEGORY_STYLE[modalData.category] || CATEGORY_STYLE["Others"]}`}>
+              {modalData.category}
+            </span>
+            {modalData.grade && (
+              <span className={`text-[11px] font-bold px-1 py-0.5 rounded border ${gradeStyle(modalData.grade)}`}>
+                {modalData.grade}
+              </span>
+            )}
+          </div>
+          {(() => {
+            const d = modalData.analysis_detail;
+            let catalyst = null, impact = null;
+            if (d && typeof d === "object") {
+              catalyst = d.catalyst;
+              impact = d.impact;
+            } else if (typeof d === "string") {
+              const parts = d.split(" | Impact: ");
+              catalyst = parts[0]?.replace(/^Catalyst:\s*/i, "") || null;
+              impact = parts[1] || null;
+            }
+            catalyst = catalyst || modalData.category;
+            const hypothesis = [modalData.hypothesis, modalData.hypothesis_detail].filter(Boolean).join("\n\n") || null;
+            const sections = [
+              { label: "CATALYST",   value: catalyst },
+              { label: "IMPACT",     value: impact },
+              { label: "REASONING",  value: modalData.reasoning },
+              { label: "HYPOTHESIS", value: hypothesis },
+            ];
+            return (
+              <div className="space-y-4">
+                {sections.map(({ label, value }) => value ? (
+                  <div key={label}>
+                    <div className="text-[11px] uppercase text-zinc-500 mb-1 font-semibold tracking-wider">{label}</div>
+                    <p className="text-[13px] text-zinc-200 leading-relaxed whitespace-pre-line">{value}</p>
+                  </div>
+                ) : null)}
+              </div>
+            );
+          })()}
+        </div>
+      </div>
+    )}
     </>
   );
 };
