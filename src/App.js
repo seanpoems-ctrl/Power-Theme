@@ -4943,6 +4943,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
   const [fMinMktCap, setFMinMktCap] = useState(0);      // $B
   const [fMinDolVol, setFMinDolVol] = useState(0);     // $M
   const [modalData, setModalData] = useState(null);
+  const [chartAnchorRect, setChartAnchorRect] = useState(null);
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/stock_db.json`)
@@ -5206,14 +5207,14 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
     {modalData && (
       <div
         className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center"
-        onClick={() => setModalData(null)}
+        onClick={() => { setModalData(null); setChartAnchorRect(null); }}
       >
         <div
           className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 max-w-2xl w-full mx-4 shadow-2xl relative flex flex-col max-h-[85vh] overflow-y-auto"
           onClick={e => e.stopPropagation()}
         >
           <button
-            onClick={() => setModalData(null)}
+            onClick={() => { setModalData(null); setChartAnchorRect(null); }}
             className="absolute top-3 right-3 text-zinc-400 hover:text-zinc-100 transition-colors"
           >
             <X size={16}/>
@@ -5228,6 +5229,16 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                 {modalData.grade}
               </span>
             )}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                const rect = e.currentTarget.getBoundingClientRect();
+                setChartAnchorRect(chartAnchorRect ? null : rect);
+              }}
+              className={`text-[11px] border rounded px-2 py-0.5 transition-colors ${chartAnchorRect ? "text-emerald-300 border-emerald-500/50 bg-emerald-500/10" : "text-emerald-400 hover:text-emerald-300 border-emerald-500/30"}`}
+            >
+              📊 Chart
+            </button>
             <a
               href={`https://www.tradingview.com/chart/?symbol=${modalData?.ticker}`}
               target="_blank"
@@ -5264,30 +5275,18 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                     <p className="text-[13px] text-zinc-200 leading-relaxed whitespace-pre-line">{renderMarkdown(value)}</p>
                   </div>
                 ) : null)}
-                <div className="mt-4 pt-4 border-t border-zinc-700/50">
-                  <div className="text-[11px] uppercase text-zinc-500 mb-2 tracking-wider">Chart</div>
-                  <a
-                    href={`https://finviz.com/quote.ashx?t=${modalData?.ticker}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block"
-                  >
-                    <img
-                      src={`https://finviz.com/chart.ashx?t=${modalData?.ticker}&ty=c&ta=1&p=d&s=l`}
-                      alt={`${modalData?.ticker} chart`}
-                      className="w-full rounded-lg border border-zinc-700/40 hover:border-blue-500/50 transition-colors"
-                      onError={(e) => { e.target.style.display='none'; }}
-                    />
-                    <div className="text-[10px] text-blue-400 hover:text-blue-300 mt-1 text-center">
-                      Open full chart on Finviz ↗
-                    </div>
-                  </a>
-                </div>
               </div>
             );
           })()}
         </div>
       </div>
+    )}
+    {chartAnchorRect && modalData && (
+      <TVPopup
+        ticker={modalData.ticker}
+        anchorRect={chartAnchorRect}
+        onClose={() => setChartAnchorRect(null)}
+      />
     )}
     </>
   );
