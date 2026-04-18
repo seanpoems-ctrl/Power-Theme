@@ -5224,9 +5224,9 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
               onClick={(e) => {
                 e.stopPropagation();
                 const rect = e.currentTarget.getBoundingClientRect();
-                setChartAnchorRect(chartAnchorRect ? null : rect);
+                setChartAnchorRect(rect);
               }}
-              className={`text-xl font-bold font-mono transition-colors ${chartAnchorRect ? "text-blue-300" : "text-zinc-100 hover:text-blue-400"}`}
+              className="text-xl font-bold font-mono text-zinc-100 hover:text-blue-400 transition-colors"
             >
               {modalData.ticker} ↗
             </button>
