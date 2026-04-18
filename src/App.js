@@ -578,6 +578,7 @@ const IbkrSourceBadge = ({ source }) => {
 };
 
 const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData }) => {
+  const [hovered, setHovered] = useState(null);
   const fmtMktCap = (v) => {
     if (!v) return '—';
     if (v >= 1e12) return `$${(v/1e12).toFixed(1)}T`;
@@ -666,7 +667,7 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
                 const rsCls = (s.rs_52w || 0) >= 85 ? 'text-emerald-400' : (s.rs_52w || 0) >= 70 ? 'text-yellow-400' : 'text-red-400';
                 return (
                   <tr key={s.ticker} className="border-b border-zinc-800/20 hover:bg-zinc-800/30 transition-colors">
-                    <td className="px-2 py-1.5 text-[12px] font-mono font-semibold text-zinc-100">{s.ticker}</td>
+                    <td className="px-2 py-1.5 text-[12px] font-mono font-semibold text-blue-400 hover:text-blue-300 cursor-pointer transition-colors" onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === s.ticker ? null : { ticker: s.ticker, rect }); }}>{s.ticker}</td>
                     <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{s.price ? `$${Number(s.price).toFixed(2)}` : '—'}</td>
                     <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{s.adr_pct ? `${Number(s.adr_pct).toFixed(1)}%` : '—'}</td>
                     <td className={`px-2 py-1.5 text-[12px] font-mono font-bold text-right ${rsCls}`}>{s.rs_52w ?? '—'}</td>
@@ -691,6 +692,7 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
       ) : (
         <div className="text-center py-6 text-zinc-600 text-[12px]">No stocks found for this theme</div>
       )}
+      {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
     </div>
   );
 };
