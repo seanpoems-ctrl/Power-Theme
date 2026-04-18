@@ -4927,6 +4927,16 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
   );
 };
 
+const renderMarkdown = (text) => {
+  if (!text) return null;
+  const parts = text.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, i) =>
+    part.startsWith('**') && part.endsWith('**')
+      ? <strong key={i} className="text-zinc-100 font-semibold">{part.slice(2, -2)}</strong>
+      : <span key={i}>{part}</span>
+  );
+};
+
 const GapperScanner = ({ earningsData, ibkrThemesData }) => {
   const creditRegime = useMarketStore((s) => s.creditRegime);
   const [gapperData, setGapperData] = useState(null);
@@ -5209,7 +5219,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
         onClick={() => setModalData(null)}
       >
         <div
-          className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 max-w-2xl w-full mx-4 shadow-2xl relative max-h-[85vh] overflow-y-auto"
+          className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 max-w-2xl w-full mx-4 shadow-2xl relative flex flex-col max-h-[85vh] overflow-y-auto"
           onClick={e => e.stopPropagation()}
         >
           <button
@@ -5228,6 +5238,14 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                 {modalData.grade}
               </span>
             )}
+            <a
+              href={`https://www.tradingview.com/chart/?symbol=${modalData?.ticker}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[11px] text-blue-400 hover:text-blue-300 border border-blue-500/30 rounded px-2 py-0.5"
+            >
+              TV Chart ↗
+            </a>
           </div>
           {(() => {
             const d = modalData.analysis_detail;
@@ -5253,9 +5271,28 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                 {sections.map(({ label, value }) => value ? (
                   <div key={label}>
                     <div className="text-[11px] uppercase text-zinc-500 mb-1 font-semibold tracking-wider">{label}</div>
-                    <p className="text-[13px] text-zinc-200 leading-relaxed whitespace-pre-line">{value}</p>
+                    <p className="text-[13px] text-zinc-200 leading-relaxed whitespace-pre-line">{renderMarkdown(value)}</p>
                   </div>
                 ) : null)}
+                <div className="mt-4 pt-4 border-t border-zinc-700/50">
+                  <div className="text-[11px] uppercase text-zinc-500 mb-2 tracking-wider">Chart</div>
+                  <a
+                    href={`https://finviz.com/quote.ashx?t=${modalData?.ticker}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <img
+                      src={`https://finviz.com/chart.ashx?t=${modalData?.ticker}&ty=c&ta=1&p=d&s=l`}
+                      alt={`${modalData?.ticker} chart`}
+                      className="w-full rounded-lg border border-zinc-700/40 hover:border-blue-500/50 transition-colors"
+                      onError={(e) => { e.target.style.display='none'; }}
+                    />
+                    <div className="text-[10px] text-blue-400 hover:text-blue-300 mt-1 text-center">
+                      Open full chart on Finviz ↗
+                    </div>
+                  </a>
+                </div>
               </div>
             );
           })()}
