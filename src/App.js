@@ -5220,7 +5220,16 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
             <X size={16}/>
           </button>
           <div className="flex items-center gap-2 mb-5 flex-wrap">
-            <span className="text-xl font-bold font-mono text-zinc-100">{modalData.ticker}</span>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                const rect = e.currentTarget.getBoundingClientRect();
+                setChartAnchorRect(chartAnchorRect ? null : rect);
+              }}
+              className={`text-xl font-bold font-mono transition-colors ${chartAnchorRect ? "text-blue-300" : "text-zinc-100 hover:text-blue-400"}`}
+            >
+              {modalData.ticker} ↗
+            </button>
             <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full border ${CATEGORY_STYLE[modalData.category] || CATEGORY_STYLE["Others"]}`}>
               {modalData.category}
             </span>
@@ -5229,24 +5238,6 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                 {modalData.grade}
               </span>
             )}
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                const rect = e.currentTarget.getBoundingClientRect();
-                setChartAnchorRect(chartAnchorRect ? null : rect);
-              }}
-              className={`text-[11px] border rounded px-2 py-0.5 transition-colors ${chartAnchorRect ? "text-emerald-300 border-emerald-500/50 bg-emerald-500/10" : "text-emerald-400 hover:text-emerald-300 border-emerald-500/30"}`}
-            >
-              📊 Chart
-            </button>
-            <a
-              href={`https://www.tradingview.com/chart/?symbol=${modalData?.ticker}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-[11px] text-blue-400 hover:text-blue-300 border border-blue-500/30 rounded px-2 py-0.5"
-            >
-              TV Chart ↗
-            </a>
           </div>
           {(() => {
             const d = modalData.analysis_detail;
