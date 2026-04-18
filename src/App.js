@@ -4927,16 +4927,6 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
   );
 };
 
-const renderMarkdown = (text) => {
-  if (!text) return null;
-  const parts = text.split(/(\*\*.*?\*\*)/g);
-  return parts.map((part, i) =>
-    part.startsWith('**') && part.endsWith('**')
-      ? <strong key={i} className="text-zinc-100 font-semibold">{part.slice(2, -2)}</strong>
-      : <span key={i}>{part}</span>
-  );
-};
-
 const GapperScanner = ({ earningsData, ibkrThemesData }) => {
   const creditRegime = useMarketStore((s) => s.creditRegime);
   const [gapperData, setGapperData] = useState(null);
