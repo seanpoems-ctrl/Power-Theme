@@ -1,45 +1,19 @@
 {
-  "generated_at": "2026-04-16T01:44:59.542946+00:00",
+  "generated_at": "2026-04-18T18:27:31.892123+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
-      "name": "Software",
-      "theme_rs": 98.0,
-      "perf_1d": 11.6,
-      "leaders": [
-        {
-          "ticker": "FSLY",
-          "price": 23.38,
-          "rs_52w": 98,
-          "adr_pct": 13.34,
-          "vol_surge": 1.04,
-          "mkt_cap": 3549083872,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Software",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
       "name": "Energy Traditional",
-      "theme_rs": 93.0,
-      "perf_1d": 3.89,
+      "theme_rs": 94.0,
+      "perf_1d": 5.63,
       "leaders": [
         {
           "ticker": "FRO",
-          "price": 35.49,
-          "rs_52w": 93,
-          "adr_pct": 4.59,
-          "vol_surge": 0.83,
-          "mkt_cap": 7900886739,
+          "price": 37.13,
+          "rs_52w": 94,
+          "adr_pct": 4.55,
+          "vol_surge": 1.83,
+          "mkt_cap": 8265988143,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -49,6 +23,179 @@
             "adr_pct >= 4.0": true
           },
           "primary_theme": "Energy Traditional",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    },
+    {
+      "name": "Semiconductors",
+      "theme_rs": 93.2,
+      "perf_1d": 5.25,
+      "leaders": [
+        {
+          "ticker": "AEHR",
+          "price": 83.86,
+          "rs_52w": 98,
+          "adr_pct": 8.06,
+          "vol_surge": 1.69,
+          "mkt_cap": 2637669899,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "SMTC",
+          "price": 107.71,
+          "rs_52w": 93,
+          "adr_pct": 5.79,
+          "vol_surge": 1.72,
+          "mkt_cap": 10011770112,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "GFS",
+          "price": 54.75,
+          "rs_52w": 93,
+          "adr_pct": 4.26,
+          "vol_surge": 1.29,
+          "mkt_cap": 30061714830,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        },
+        {
+          "ticker": "ASML",
+          "price": 1459.8,
+          "rs_52w": 89,
+          "adr_pct": 4.09,
+          "vol_surge": 1.02,
+          "mkt_cap": 573203166075,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    },
+    {
+      "name": "Commodities Metals",
+      "theme_rs": 92.3,
+      "perf_1d": 4.27,
+      "leaders": [
+        {
+          "ticker": "HYMC",
+          "price": 44.17,
+          "rs_52w": 98,
+          "adr_pct": 8.69,
+          "vol_surge": 0.63,
+          "mkt_cap": 4021594454,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Commodities Metals",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "AG",
+          "price": 21.49,
+          "rs_52w": 92,
+          "adr_pct": 6.65,
+          "vol_surge": 0.82,
+          "mkt_cap": 10597520227,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Commodities Metals",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "HL",
+          "price": 19.54,
+          "rs_52w": 87,
+          "adr_pct": 5.78,
+          "vol_surge": 0.57,
+          "mkt_cap": 13102858124,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Commodities Metals",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    },
+    {
+      "name": "Fintech",
+      "theme_rs": 92.0,
+      "perf_1d": 3.17,
+      "leaders": [
+        {
+          "ticker": "PSLV",
+          "price": 26.39,
+          "rs_52w": 92,
+          "adr_pct": 4.51,
+          "vol_surge": 0.47,
+          "mkt_cap": 16830810211,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Fintech",
           "secondary_themes": [],
           "setup_label": "Base"
         }
