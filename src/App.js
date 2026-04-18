@@ -599,9 +599,9 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
       || null;
     if (!name) return { themeName: null, stocks: [], themeRS: null, analysis: null };
 
-    if (lbView === 'ibkr') {
-      const pt = (ibkrThemesData?.power_themes || []).find(t => t.name === name);
-      if (!pt) return { themeName: name, stocks: [], themeRS: null, analysis: null };
+    // Try ibkr data first (regardless of lbView), then fall back to thematic_data
+    const pt = (ibkrThemesData?.power_themes || []).find(t => t.name === name);
+    if (pt) {
       return {
         themeName: name,
         stocks: (pt.leaders || []).map(l => ({ ...l, float_shares: null, short_pct: null })),
