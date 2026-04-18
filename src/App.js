@@ -6281,6 +6281,7 @@ const MomentumCockpit = () => {
   const [selectedTicker, setSelectedTicker] = useState(null);
   const [analysis, setAnalysis] = useState(null);
   const [analyzing, setAnalyzing] = useState(false);
+  const [modalData, setModalData] = useState(null);
 
   // Gapper data — poll every 5 min (matches scanner schedule)
   useEffect(() => {
@@ -6375,17 +6376,29 @@ const MomentumCockpit = () => {
     },
     {
       id: "reasoning", header: "Reasoning", accessorKey: "reasoning",
-      cell: ({ getValue }) => <span className="text-[11px] text-zinc-400 leading-tight line-clamp-2">{getValue() || "—"}</span>
+      cell: ({ getValue }) => (
+        <span className="text-[11px] text-zinc-400 line-clamp-2 leading-tight block max-w-[150px]">
+          {getValue() || "—"}
+        </span>
+      )
     },
     {
       id: "analysis", header: "Analysis Detail",
       cell: ({ row }) => {
         const d = row.original.analysis_detail;
-        if (!d) return <span className="text-zinc-600 text-[11px]">—</span>;
+        const text = d?.catalyst || d?.impact || "";
+        if (!text) return <span className="text-zinc-600 text-[10px]">—</span>;
         return (
-          <div className="text-[11px] leading-snug space-y-1">
-            {d.catalyst && <div className="text-zinc-300 line-clamp-2">{d.catalyst}</div>}
-            {d.impact && <div className="text-zinc-500 italic line-clamp-1">{d.impact}</div>}
+          <div className="flex flex-col gap-0.5">
+            <span className="text-[11px] text-zinc-300 line-clamp-1 leading-tight">
+              {text}
+            </span>
+            <button
+              onClick={(e) => { e.stopPropagation(); setModalData(row.original); }}
+              className="text-[10px] text-blue-400 hover:text-blue-300 self-start"
+            >
+              ••• more
+            </button>
           </div>
         );
       }
@@ -6430,14 +6443,14 @@ const MomentumCockpit = () => {
               const isSelected = selectedTicker === g.ticker;
               return (
                 <tr key={row.id}
-                  className={`border-b border-zinc-800/40 transition-colors cursor-pointer
+                  className={`border-b border-zinc-800/40 transition-colors cursor-pointer h-[56px]
                     ${isSelected ? "bg-blue-500/10" : "hover:bg-zinc-800/20"}
                     ${isFail ? "opacity-40" : ""}
                   `}
                   onClick={() => fetchAnalysis(g.ticker, g)}
                 >
                   {row.getVisibleCells().map(cell => (
-                    <td key={cell.id} className={`py-1.5 px-2 align-top ${cell.column.id === "analysis" ? "min-w-[280px]" : ""}`}>
+                    <td key={cell.id} className={`py-1 px-2 align-top max-h-[56px] overflow-hidden ${cell.column.id === "analysis" ? "min-w-[280px]" : ""}`}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </td>
                   ))}
