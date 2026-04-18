@@ -4932,7 +4932,6 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
   const [gapperData, setGapperData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState(null);
-  const { active: tvActive, onEnter: tvOnEnter, onLeave: tvOnLeave } = useHoverDelay(2000);
   const [tickerDb, setTickerDb] = useState({});
 
   // Filter state — human-friendly units: PMVol/AvgVol in K, MktCap in $B, DolVol in $M
@@ -5090,8 +5089,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                 <td className="py-1 px-2 align-middle text-center">
                   <span
                     className="font-bold text-zinc-100 text-[13px] hover:text-blue-400 transition-colors cursor-pointer"
-                    onMouseEnter={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered({ ticker: g.ticker, rect }); tvOnEnter(); }}
-                    onMouseLeave={() => { setHovered(null); tvOnLeave(); }}
+                    onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === g.ticker ? null : { ticker: g.ticker, rect }); }}
                   >
                     {g.ticker}
                   </span>
@@ -5203,7 +5201,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
       </div>
       <LeaderColumn ibkrThemesData={ibkrThemesData} gapperData={gapperData} mode="gapper" />
     </div>
-    {tvActive && hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
+    {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
     {modalData && (
       <div
         className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center"
