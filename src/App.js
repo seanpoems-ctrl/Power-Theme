@@ -4131,8 +4131,13 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
     const ORDER = { BMO: 0, AMC: 1 };
     return allEarnings
       .filter(e => e.date === selectedDay)
-      .sort((a, b) => (ORDER[a.time_of_day] ?? 2) - (ORDER[b.time_of_day] ?? 2));
-  }, [allEarnings, selectedDay]);
+      .sort((a, b) => {
+        const aHasTheme = tickerThemeMap[a.ticker] ? 0 : 1;
+        const bHasTheme = tickerThemeMap[b.ticker] ? 0 : 1;
+        if (aHasTheme !== bHasTheme) return aHasTheme - bHasTheme;
+        return (ORDER[a.time_of_day] ?? 2) - (ORDER[b.time_of_day] ?? 2);
+      });
+  }, [allEarnings, selectedDay, tickerThemeMap]);
 
   // ── Group econ events by time slot ────────────────────────────────────────
   const econByTime = useMemo(() => {
@@ -4404,22 +4409,35 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
                 ))}
               </div>
 
-              {/* BMO rows */}
-              {dayEarnings.filter(e => e.time_of_day === "BMO").map((e, i) => <EarningsRow key={`bmo-${i}`} e={e}/>)}
-
-              {/* AMC divider */}
-              {dayEarnings.some(e => e.time_of_day === "BMO") && dayEarnings.some(e => e.time_of_day === "AMC") && (
-                <div className="px-3 py-1.5 bg-zinc-800/30 border-y border-zinc-800/60">
-                  <span className="text-[9px] text-zinc-600 uppercase tracking-widest font-semibold">After Market Close</span>
-                </div>
-              )}
-
-              {/* AMC rows */}
-              {dayEarnings.filter(e => e.time_of_day === "AMC").map((e, i) => <EarningsRow key={`amc-${i}`} e={e}/>)}
-
-              {/* Unknown timing rows */}
-              {dayEarnings.filter(e => !e.time_of_day || (e.time_of_day !== "BMO" && e.time_of_day !== "AMC"))
-                .map((e, i) => <EarningsRow key={`unk-${i}`} e={e}/>)}
+              {/* Thematic Scanner stocks first */}
+              {(() => {
+                const thematic = dayEarnings.filter(e => tickerThemeMap[e.ticker]);
+                const rest     = dayEarnings.filter(e => !tickerThemeMap[e.ticker]);
+                const bmo      = rest.filter(e => e.time_of_day === "BMO");
+                const amc      = rest.filter(e => e.time_of_day === "AMC");
+                const unk      = rest.filter(e => !e.time_of_day || (e.time_of_day !== "BMO" && e.time_of_day !== "AMC"));
+                return <>
+                  {thematic.length > 0 && <>
+                    <div className="px-3 py-1.5 bg-sky-900/20 border-b border-sky-800/30">
+                      <span className="text-[9px] text-sky-500 uppercase tracking-widest font-semibold">Thematic Scanner</span>
+                    </div>
+                    {thematic.map((e, i) => <EarningsRow key={`th-${i}`} e={e}/>)}
+                  </>}
+                  {bmo.length > 0 && <>
+                    <div className="px-3 py-1.5 bg-zinc-800/30 border-y border-zinc-800/60">
+                      <span className="text-[9px] text-zinc-600 uppercase tracking-widest font-semibold">Before Market Open</span>
+                    </div>
+                    {bmo.map((e, i) => <EarningsRow key={`bmo-${i}`} e={e}/>)}
+                  </>}
+                  {amc.length > 0 && <>
+                    <div className="px-3 py-1.5 bg-zinc-800/30 border-y border-zinc-800/60">
+                      <span className="text-[9px] text-zinc-600 uppercase tracking-widest font-semibold">After Market Close</span>
+                    </div>
+                    {amc.map((e, i) => <EarningsRow key={`amc-${i}`} e={e}/>)}
+                  </>}
+                  {unk.map((e, i) => <EarningsRow key={`unk-${i}`} e={e}/>)}
+                </>;
+              })()}
             </div>
           )}
         </div>
