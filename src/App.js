@@ -2767,21 +2767,9 @@ const BreakingNewsAlert = ({ newsData }) => {
                   <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(top.pub_time || top.timestamp)}</span>
                 )}
               </div>
-              <p className="text-red-500 font-extrabold text-sm uppercase leading-snug mb-3">
+              <p className="text-red-500 font-extrabold text-sm uppercase leading-snug">
                 {highlightText(top.headline)}
               </p>
-              {top.analysis && (
-                <div className="mb-2">
-                  <h4 className="text-sky-400 font-bold text-[10px] uppercase tracking-widest mb-1">Analysis</h4>
-                  <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(top.analysis)}</p>
-                </div>
-              )}
-              {top.impact && (
-                <div>
-                  <h4 className="text-amber-400 font-bold text-[10px] uppercase tracking-widest mb-1">Impact</h4>
-                  <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(top.impact)}</p>
-                </div>
-              )}
             </div>
 
             {/* Secondary alerts */}
@@ -2799,19 +2787,7 @@ const BreakingNewsAlert = ({ newsData }) => {
                     <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(alert.pub_time || alert.timestamp)}</span>
                   )}
                 </div>
-                <p className="text-red-700 font-bold text-xs uppercase leading-snug mb-2">{highlightText(alert.headline)}</p>
-                {alert.analysis && (
-                  <div className="mb-1">
-                    <h4 className="text-sky-400 font-bold text-[9px] uppercase tracking-widest mb-0.5">Analysis</h4>
-                    <p className="text-zinc-400 text-[11px] leading-relaxed">{highlightText(alert.analysis)}</p>
-                  </div>
-                )}
-                {alert.impact && (
-                  <div>
-                    <h4 className="text-amber-400 font-bold text-[9px] uppercase tracking-widest mb-0.5">Impact</h4>
-                    <p className="text-zinc-400 text-[11px] leading-relaxed">{highlightText(alert.impact)}</p>
-                  </div>
-                )}
+                <p className="text-red-700 font-bold text-xs uppercase leading-snug">{highlightText(alert.headline)}</p>
               </div>
             ))}
 
@@ -3095,21 +3071,9 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
                     {alert.source && <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{alert.source}</span>}
                     {formatAlertTime(alert.pub_time || alert.timestamp) && <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(alert.pub_time || alert.timestamp)}</span>}
                   </div>
-                  <p className={`font-extrabold text-sm uppercase leading-snug mb-3 ${i === 0 ? "text-red-500" : "text-red-700"}`}>
+                  <p className={`font-extrabold text-sm uppercase leading-snug ${i === 0 ? "text-red-500" : "text-red-700"}`}>
                     {highlightText(alert.headline)}
                   </p>
-                  {alert.analysis && (
-                    <div className="mb-2">
-                      <h4 className="text-sky-400 font-bold text-[10px] uppercase tracking-widest mb-1">Analysis</h4>
-                      <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(alert.analysis)}</p>
-                    </div>
-                  )}
-                  {alert.impact && (
-                    <div>
-                      <h4 className="text-amber-400 font-bold text-[10px] uppercase tracking-widest mb-1">Impact</h4>
-                      <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(alert.impact)}</p>
-                    </div>
-                  )}
                 </div>
               ))}
               {newsData?.last_checked && (
