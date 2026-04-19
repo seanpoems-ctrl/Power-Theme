@@ -212,9 +212,7 @@ For each use EXACTLY the source label shown in brackets:
 {{
   "headline": "exact headline text",
   "source": "source label from brackets",
-  "grade": 9,
-  "analysis": "2–3 sentences: macro context and why this matters globally",
-  "impact": "2–3 sentences: which asset classes, sectors move and in which direction"
+  "grade": 9
 }}
 
 If NO headlines score 8+, return: []
@@ -332,8 +330,6 @@ def send_telegram(alert: dict) -> bool:
     grade    = alert.get("grade", 0)
     headline = alert.get("headline", "")
     source   = alert.get("source", "")
-    analysis = alert.get("analysis", "")
-    impact   = alert.get("impact", "")
 
     lines = [
         "🚨 *BREAKING NEWS ALERT* 🚨",
@@ -341,12 +337,7 @@ def send_telegram(alert: dict) -> bool:
         "",
         f"*{_esc(headline.upper())}*",
         f"_{_esc(source)}_",
-        "",
     ]
-    if analysis:
-        lines += ["*Analysis*", _esc(str(analysis)), ""]
-    if impact:
-        lines += ["*Impact*", _esc(str(impact))]
     text = "\n".join(lines)[:4090]
 
     chat_ids = [cid.strip() for cid in TELEGRAM_CHAT.split(",")]
