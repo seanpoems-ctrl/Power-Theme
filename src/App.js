@@ -4169,9 +4169,12 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
         <a href={`https://www.tradingview.com/chart/?symbol=${e.ticker}`} target="_blank" rel="noopener noreferrer"
            className="text-[13px] font-mono font-bold text-sky-400 hover:text-sky-300 transition-colors">{e.ticker}</a>
 
-        {/* Company + AI icon */}
+        {/* Company + theme tag + AI icon */}
         <div className="flex items-center gap-1.5 min-w-0 pr-2">
           <span className="text-[12px] text-zinc-300 truncate">{e.company || "—"}</span>
+          {tickerThemeMap[e.ticker] && (
+            <span className="flex-shrink-0 text-[9px] font-medium px-1 py-0.5 rounded bg-sky-500/10 border border-sky-500/25 text-sky-400 leading-none truncate max-w-[90px]">{tickerThemeMap[e.ticker]}</span>
+          )}
           <button
             onClick={() => setAnalysisStock(e)}
             title="Gemini AI earnings analysis"
