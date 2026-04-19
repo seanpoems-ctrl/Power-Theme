@@ -3925,7 +3925,7 @@ function renderMarkdown(text) {
   });
 }
 
-const EarningsAnalysisDrawer = ({ stock, onClose }) => {
+const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
   const [analysis, setAnalysis] = useState(null);
   const [loading,  setLoading]  = useState(true);
   const [error,    setError]    = useState(null);
@@ -3980,6 +3980,7 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
             <div className="flex items-center gap-2">
               <span className="font-mono text-[15px] font-bold text-white">{stock.ticker}</span>
               <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 leading-none">✦ AI ANALYSIS</span>
+              {themeName && <span className="text-[10px] font-medium px-1.5 py-0.5 rounded bg-sky-500/10 border border-sky-500/25 text-sky-400 leading-none">{themeName}</span>}
             </div>
             <span className="text-[11px] text-zinc-500 truncate block">{stock.company}</span>
           </div>
@@ -4056,13 +4057,22 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
   );
 };
 
-const CalendarTab = ({ econData, earningsData }) => {
+const CalendarTab = ({ econData, earningsData, thematicData }) => {
   const _todayD = new Date();
   const todayStr = `${_todayD.getFullYear()}-${String(_todayD.getMonth()+1).padStart(2,"0")}-${String(_todayD.getDate()).padStart(2,"0")}`;
   const [calSubTab, setCalSubTab] = useState("economic");  // "economic" | "earnings"
   const [selectedDay, setSelectedDay] = useState(todayStr);
   const [weekOffset, setWeekOffset]   = useState(0);
   const [analysisStock, setAnalysisStock] = useState(null); // stock object for AI drawer
+
+  const tickerThemeMap = useMemo(() => {
+    const m = {};
+    for (const theme of thematicData?.themes || [])
+      for (const sub of theme.subthemes || [])
+        for (const s of sub.stocks || [])
+          if (s.ticker && !m[s.ticker]) m[s.ticker] = theme.name;
+    return m;
+  }, [thematicData]);
 
   const weekDays = useMemo(() => calGetWeekDays(weekOffset), [weekOffset]);
 
@@ -4417,6 +4427,7 @@ const CalendarTab = ({ econData, earningsData }) => {
         <EarningsAnalysisDrawer
           stock={analysisStock}
           onClose={() => setAnalysisStock(null)}
+          themeName={tickerThemeMap[analysisStock.ticker] || null}
         />
       )}
     </div>
@@ -7356,7 +7367,7 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
+      {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
