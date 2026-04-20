@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 17, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 20, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 17.48,
-      "change": -0.46,
+      "price": 19.4,
+      "change": 1.92,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 59518.34,
-      "change_pct": 2.38
+      "price": 58824.89,
+      "change_pct": 0.6
     },
     "dax": {
       "label": "DAX",
-      "price": 24702.24,
-      "change_pct": 2.27
+      "price": 24389.8,
+      "change_pct": -1.26
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10667.63,
-      "change_pct": 0.73
+      "price": 10596.53,
+      "change_pct": -0.67
     }
   },
   "macro_breadth": {
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Broad Rally / Growth-Led Strength",
+  "mood": "Tech-led Momentum Surges Ahead",
   "analysis": {
-    "analysis_para1": "Global markets demonstrated robust performance today, with the Nikkei 225 surging +2.38% and the DAX gaining +2.27%, signaling a strong risk-on appetite extending from Asia and Europe. The falling 10-year yield, now at 4.25%, suggests easing inflationary pressures and provides a favorable backdrop for risk assets. This positive global momentum translated to healthy breadth in the US market, as evidenced by 64.8% of stocks trading above their 50-day moving average (S5FI) and 64.1% above their 200-day moving average (MMTH), reflecting widespread participation in today's gains. While the BAML HY Spread is an unknown regime, the overall picture points to significant bullishness.",
-    "analysis_para2": "The S&P 500's strong close at 7126.06 and the Nasdaq 100's push above 26672.43 establish clear upward momentum. Traders should monitor sustained closes above these key levels for confirmation of continued strength. A mechanical plan would involve targeting pullbacks to retest intraday breakout levels or short-term moving averages, assuming the current positive momentum endures. Any sharp reversal in the VIX from its normal 17.48 level or a significant rebound in the 10-year yield could signal a sentiment shift, warranting tighter stops and reduced exposure. For now, the path of least resistance remains higher, favoring long positions in leading growth sectors.",
-    "technical_signal": "No reversal pattern confirmed yet. The market is showing broad-based strength with indices closing significantly higher and healthy breadth metrics.",
+    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 showing strength at +0.60% while European indices like the DAX (-1.26%) and FTSE 100 (-0.67%) are notably weaker. Despite this divergence, US equity futures for the S&P 500 (+1.20%) and Nasdaq 100 (+1.29%) are demonstrating significant pre-market strength, signaling robust domestic sentiment. The falling 10-year Treasury yield to 4.25% provides a supportive backdrop for growth-oriented sectors, though the BAML HY Spread regime remains unknown. Underlying market health appears strong, with breadth indicators S5FI at 64.8% and MMTH at 64.1% showing broad participation above key moving averages.",
+    "analysis_para2": "Our mechanical plan for the open involves closely monitoring the S&P 500 around its current 7126 level and the Nasdaq 100 near 26672. A sustained push above these pre-market levels on the open would confirm continued bullish momentum, favoring long positions in leading growth names. Conversely, a failure to hold these gains and a retreat below 7100 on the S&P 500 could signal absorption of early strength, warranting caution. Given the strong pre-market action, the focus remains on identifying breakout opportunities in high Relative Strength sectors such as Semiconductors and Telecommunications.",
+    "technical_signal": "No reversal pattern confirmed yet. Strong pre-market opens suggest continuation of current trends, particularly in tech-driven sectors.",
     "ticker_intel": [
       {
         "ticker": "AEHR",
         "company": "Aehr Test Systems",
         "grade": "A+",
-        "reason": "With an RS of 98 and an exceptional 1-month return of +95.4%, AEHR demonstrates strong short-term leadership within the dominant semiconductor theme, fitting the current growth-led rally."
+        "reason": "AEHR, with an RS of 98 and a staggering +131.0% 1-month return, is a standout leader in the red-hot Semiconductor theme, making it a prime momentum candidate in this tech-driven regime."
       },
       {
-        "ticker": "AXTI",
-        "company": "AXT Inc",
+        "ticker": "AAOI",
+        "company": "Applied Optoelectronics Inc",
         "grade": "A",
-        "reason": "Boasting an RS of 99 and a robust 1-month return of +30.1%, AXTI exhibits sustained relative strength and momentum in the leading semiconductor sector, perfectly aligned with today's risk-on environment."
+        "reason": "AAOI exhibits exceptional strength with an RS of 98 and a +72.1% 1-month return, underpinned by an astounding +330.9% 3-month gain, marking it as a top performer within the strong Telecommunications sector."
       },
       {
-        "ticker": "HBM",
-        "company": "Hudbay Minerals Inc",
+        "ticker": "AMKR",
+        "company": "AMKOR Technology Inc",
         "grade": "C",
-        "reason": "Despite a 1-month gain of +17.7%, Hudbay Minerals' RS of 90 and comparatively weak 3-month performance of +10.5% suggest it is lagging the broad market and leading sectors, making it a weaker choice in a growth-led rally."
+        "reason": "Despite a respectable RS of 97 and +43.7% 1-month return, AMKR's +36.9% 3-month return is among the weakest in this strong candidate list, indicating potential relative underperformance within the Semiconductor theme over a longer timeframe."
       }
     ]
   }
