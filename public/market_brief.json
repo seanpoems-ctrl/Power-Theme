@@ -1,57 +1,57 @@
 {
-  "generated_at": "April 20, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "April 20, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7126.06,
-      "change": 84.78,
-      "change_pct": 1.2
+      "price": 7109.14,
+      "change": -16.92,
+      "change_pct": -0.24
     },
     {
       "label": "Nasdaq 100",
-      "price": 26672.43,
-      "change": 339.43,
-      "change_pct": 1.29
+      "price": 26590.34,
+      "change": -82.09,
+      "change_pct": -0.31
     },
     {
       "label": "VIX",
-      "price": 19.4,
-      "change": 1.92,
+      "price": 18.87,
+      "change": 1.39,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
       "price": 4.25,
-      "change": -0.06,
+      "change": 0.0,
       "change_pct": null,
-      "trend_label": "Falling"
+      "trend_label": "Stable"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 58824.89,
-      "change_pct": 0.6
+      "price": 58475.9,
+      "change_pct": -1.75
     },
     "dax": {
       "label": "DAX",
-      "price": 24389.8,
-      "change_pct": -1.26
+      "price": 24417.8,
+      "change_pct": -1.15
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10596.53,
-      "change_pct": -0.67
+      "price": 10609.08,
+      "change_pct": -0.55
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 64.8,
-    "mmth": 64.1,
+    "s5fi": 66.6,
+    "mmth": 63.1,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech-led Momentum Surges Ahead",
+  "mood": "Global Weakness, Mild Risk-Off",
   "analysis": {
-    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 showing strength at +0.60% while European indices like the DAX (-1.26%) and FTSE 100 (-0.67%) are notably weaker. Despite this divergence, US equity futures for the S&P 500 (+1.20%) and Nasdaq 100 (+1.29%) are demonstrating significant pre-market strength, signaling robust domestic sentiment. The falling 10-year Treasury yield to 4.25% provides a supportive backdrop for growth-oriented sectors, though the BAML HY Spread regime remains unknown. Underlying market health appears strong, with breadth indicators S5FI at 64.8% and MMTH at 64.1% showing broad participation above key moving averages.",
-    "analysis_para2": "Our mechanical plan for the open involves closely monitoring the S&P 500 around its current 7126 level and the Nasdaq 100 near 26672. A sustained push above these pre-market levels on the open would confirm continued bullish momentum, favoring long positions in leading growth names. Conversely, a failure to hold these gains and a retreat below 7100 on the S&P 500 could signal absorption of early strength, warranting caution. Given the strong pre-market action, the focus remains on identifying breakout opportunities in high Relative Strength sectors such as Semiconductors and Telecommunications.",
-    "technical_signal": "No reversal pattern confirmed yet. Strong pre-market opens suggest continuation of current trends, particularly in tech-driven sectors.",
+    "analysis_para1": "Global markets displayed broad weakness today, with the Nikkei 225 falling -1.75%, the DAX -1.15%, and the FTSE 100 -0.55%, setting a cautious tone. This sentiment translated to the US, where the S&P 500 dipped -0.24% and the Nasdaq 100 declined -0.31%. While the 10Y Yield remained stable at 4.25%, the unknown BAML HY Spread introduces a degree of credit market uncertainty. US breadth metrics, with S5FI at 66.6% and MMTH at 63.1%, remain healthy but show a slight deceleration from prior strength, aligning with the day's moderate downturn.",
+    "analysis_para2": "The mechanical plan dictates careful monitoring of key index levels following today's global dip. Traders should observe whether the S&P 500 can hold immediate support around the 7100 mark and if the Nasdaq 100 can defend its 26500 level in tomorrow's open. A sustained break below these points could signal a deeper correction, necessitating a reduction in long exposure or the initiation of hedging strategies. Conversely, a swift recovery above today's open would indicate resilience, although the slightly deteriorating breadth figures suggest a measured approach to new positions. The VIX holding at 18.87 indicates no widespread panic, but vigilance for distribution patterns is crucial.",
+    "technical_signal": "No reversal pattern confirmed yet. The market saw a moderate daily dip across major indices without panic-driven spikes in volatility or clear capitulation signals.",
     "ticker_intel": [
       {
-        "ticker": "AEHR",
-        "company": "Aehr Test Systems",
+        "ticker": "AXTI",
+        "company": "AXT Inc",
         "grade": "A+",
-        "reason": "AEHR, with an RS of 98 and a staggering +131.0% 1-month return, is a standout leader in the red-hot Semiconductor theme, making it a prime momentum candidate in this tech-driven regime."
+        "reason": "AXT Inc. (AXTI) earns an A+ for its exceptional RS 99 and 1-month gain of +69.3%, leading the highly active Semiconductor theme amidst broader market weakness."
       },
       {
         "ticker": "AAOI",
         "company": "Applied Optoelectronics Inc",
         "grade": "A",
-        "reason": "AAOI exhibits exceptional strength with an RS of 98 and a +72.1% 1-month return, underpinned by an astounding +330.9% 3-month gain, marking it as a top performer within the strong Telecommunications sector."
+        "reason": "Applied Optoelectronics Inc (AAOI) merits an A, showing robust RS 98 and a remarkable 3-month surge of +330.9% within the strong Telecommunications sector."
       },
       {
-        "ticker": "AMKR",
-        "company": "AMKOR Technology Inc",
+        "ticker": "ONTO",
+        "company": "Onto Innovation Inc",
         "grade": "C",
-        "reason": "Despite a respectable RS of 97 and +43.7% 1-month return, AMKR's +36.9% 3-month return is among the weakest in this strong candidate list, indicating potential relative underperformance within the Semiconductor theme over a longer timeframe."
+        "reason": "Onto Innovation Inc. (ONTO) receives a C grade despite its RS 97, as its 3-month performance of +33.5% significantly lags its peers in the Semiconductor space, suggesting comparative underperformance."
       }
     ]
   }
