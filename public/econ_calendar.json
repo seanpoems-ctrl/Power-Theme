@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-18T18:31:03.935188+00:00",
+  "generated_at": "2026-04-20T21:36:06.554171+00:00",
   "data_source": "tradingview",
   "events": [
     {
@@ -7,7 +7,7 @@
       "time_et": "11:30",
       "event": "6-Month Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "3.59",
       "forecast": null,
       "previous": "3.61",
       "currency": "USD"
@@ -17,7 +17,7 @@
       "time_et": "11:30",
       "event": "3-Month Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "3.61",
       "forecast": null,
       "previous": "3.62",
       "currency": "USD"
@@ -38,7 +38,7 @@
       "event": "Retail Sales MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": "1.3",
+      "forecast": "1.4",
       "previous": "0.6",
       "currency": "USD"
     },
@@ -48,7 +48,7 @@
       "event": "Retail Sales Ex Autos MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": "1",
+      "forecast": "1.4",
       "previous": "0.5",
       "currency": "USD"
     },
@@ -78,7 +78,7 @@
       "event": "Retail Sales Control Group MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "0.2",
       "previous": "0.5",
       "currency": "USD"
     },
@@ -108,7 +108,7 @@
       "event": "Business Inventories MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": "0.1",
+      "forecast": "0.3",
       "previous": "-0.1",
       "currency": "USD"
     },
@@ -128,8 +128,18 @@
       "event": "Pending Home Sales MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": "0.5",
+      "forecast": "0.1",
       "previous": "1.8",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-04-21",
+      "time_et": "10:00",
+      "event": "Fed Chair Nominee Kevin Warsh Confirmation Hearing",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
       "currency": "USD"
     },
     {
@@ -328,7 +338,7 @@
       "event": "Continuing Jobless Claims",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "1820",
       "previous": "1818",
       "currency": "USD"
     },
@@ -368,7 +378,7 @@
       "event": "S&P Global Services PMI Flash",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "50",
       "previous": "49.8",
       "currency": "USD"
     },
@@ -378,7 +388,7 @@
       "event": "S&P Global Manufacturing PMI Flash",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "52.5",
       "previous": "52.3",
       "currency": "USD"
     },
@@ -550,6 +560,66 @@
       "actual": null,
       "forecast": null,
       "previous": "410",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-04-27",
+      "time_et": "10:20",
+      "event": "NY Fed Bill Purchases 4 to 12 months",
+      "impact": "Low",
+      "actual": null,
+      "forecast": "5.058",
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-04-27",
+      "time_et": "10:30",
+      "event": "Dallas Fed Manufacturing Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "-0.2",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-04-27",
+      "time_et": "11:30",
+      "event": "6-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-04-27",
+      "time_et": "11:30",
+      "event": "3-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-04-27",
+      "time_et": "13:00",
+      "event": "5-Year Note Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-04-27",
+      "time_et": "13:00",
+      "event": "2-Year Note Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "3.936",
       "currency": "USD"
     }
   ]

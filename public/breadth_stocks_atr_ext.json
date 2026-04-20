@@ -2,24 +2,13 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 1,
-  "stocks": [
-    {
-      "ticker": "EFOI",
-      "company": "Energy Focus, Inc.",
-      "industry": "Electrical Products",
-      "price": 6.49,
-      "change_pct": 210.53,
-      "adr_pct": 10.7,
-      "market_cap_b": 0.041,
-      "atr_ext_val": 19.7
-    }
-  ],
+  "count": 0,
+  "stocks": [],
   "spx_benchmarks": {
-    "spx_1d": 1.2,
-    "spx_1m": 7.86,
-    "spx_3m": 2.68,
-    "spx_34d": 3.55
+    "spx_1d": -0.24,
+    "spx_1m": 9.26,
+    "spx_3m": 4.59,
+    "spx_34d": 4.29
   },
-  "fetched_at_utc": "2026-04-18T18:38:40+00:00"
+  "fetched_at_utc": "2026-04-20T21:43:04+00:00"
 }
