@@ -119,10 +119,16 @@ async def _fetch_fred_series(client: httpx.AsyncClient, series_id: str) -> float
         return None
 
     # Fallback: free CSV endpoint
+    user_agents = [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+        "python-requests/2.31.0",
+    ]
     url = f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={series_id}"
-    for attempt in range(2):
+    for attempt in range(3):
         try:
-            r = await client.get(url, timeout=20, headers={"User-Agent": "Mozilla/5.0"})
+            headers = {"User-Agent": user_agents[attempt % len(user_agents)]}
+            r = await client.get(url, timeout=25, headers=headers)
             r.raise_for_status()
             for line in reversed(r.text.strip().split("\n")[1:]):
                 parts = line.strip().split(",")
@@ -134,8 +140,47 @@ async def _fetch_fred_series(client: httpx.AsyncClient, series_id: str) -> float
             return None
         except Exception as e:
             log.warning(f"FRED CSV {series_id} attempt {attempt + 1}: {e}")
-            if attempt == 0:
-                await asyncio.sleep(3)
+            if attempt < 2:
+                await asyncio.sleep(5 if attempt == 0 else 10)
+    return None
+
+
+async def _fetch_t10y2y_treasury(client: httpx.AsyncClient) -> float | None:
+    """
+    Compute 10Y-2Y spread from US Treasury XML feed — free, no API key, reliable.
+    Used as fallback when FRED T10Y2Y fetch fails.
+    """
+    import xml.etree.ElementTree as ET
+    from datetime import date, timedelta
+
+    for months_back in range(3):
+        d = date.today().replace(day=1)
+        for _ in range(months_back):
+            d = (d - timedelta(days=1)).replace(day=1)
+        ym = d.strftime("%Y%m")
+        url = (
+            "https://home.treasury.gov/resource-center/data-chart-center"
+            f"/interest-rates/pages/xml?data=daily_treasury_yield_curve"
+            f"&field_tdr_date_value={ym}"
+        )
+        try:
+            r = await client.get(url, timeout=20, headers={"User-Agent": "Mozilla/5.0"})
+            r.raise_for_status()
+            root = ET.fromstring(r.text)
+            ns_m = "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+            ns_d = "http://schemas.microsoft.com/ado/2007/08/dataservices"
+            entries = root.findall(f".//{{{ns_m}}}properties")
+            for props in reversed(entries):
+                y2_el  = props.find(f"{{{ns_d}}}BC_2YEAR")
+                y10_el = props.find(f"{{{ns_d}}}BC_10YEAR")
+                if (y2_el is not None and y10_el is not None
+                        and y2_el.text and y10_el.text
+                        and y2_el.text.strip() and y10_el.text.strip()):
+                    spread = float(y10_el.text) - float(y2_el.text)
+                    log.info(f"Treasury API T10Y2Y: {spread:+.3f} (from {ym})")
+                    return spread
+        except Exception as e:
+            log.warning(f"Treasury API T10Y2Y {ym}: {e}")
     return None
 
 
@@ -190,6 +235,12 @@ async def _fetch_fred_data() -> dict:
             _fetch_fred_series(client, "BAMLH0A0HYM2"),
             _fetch_fred_series(client, "T10Y2Y"),
         )
+
+        # Treasury API fallback for T10Y2Y while client is still open
+        if yield_curve is None:
+            yield_curve = await _fetch_t10y2y_treasury(client)
+            if yield_curve is not None:
+                log.info(f"FRED T10Y2Y: using Treasury API fallback {yield_curve:+.3f}")
 
     hy_oas_stale     = False
     yield_curve_stale = False
@@ -588,8 +639,7 @@ FRED Macro Data:
 **Snapshot Table** — reproduce the table above exactly
 
 **Macro Section**
-  - 2-3 sentences explicitly naming the BAMLH0A0HYM2 value, the identified regime ({regime["credit_status"]}),
-    the yield curve reading ({regime["yc_status"]}), and what this implies for institutional risk appetite.
+{"  - FRED data unavailable today. Write exactly one sentence: 'FRED macro data (HY Credit Spread, Yield Curve) was unavailable at publication time.' Do NOT speculate or discuss uncertainty further." if hy_oas is None and yield_curve is None else f"  - 2-3 sentences explicitly naming the BAMLH0A0HYM2 value, the identified regime ({regime['credit_status']}), the yield curve reading ({regime['yc_status']}), and what this implies for institutional risk appetite."}
 
 **Analysis Para 1 — Global Tape → Credit**
   - 3-5 sentences connecting Nikkei / DAX / Oil performance to US HY credit spreads.
