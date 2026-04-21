@@ -1,57 +1,57 @@
 {
-  "generated_at": "April 21, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "April 21, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7109.14,
-      "change": -16.92,
-      "change_pct": -0.24
+      "price": 7064.01,
+      "change": -45.13,
+      "change_pct": -0.63
     },
     {
       "label": "Nasdaq 100",
-      "price": 26590.34,
-      "change": -82.09,
-      "change_pct": -0.31
+      "price": 26479.47,
+      "change": -110.87,
+      "change_pct": -0.42
     },
     {
       "label": "VIX",
-      "price": 18.79,
-      "change": -0.08,
+      "price": 19.5,
+      "change": 0.63,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.25,
-      "change": 0.0,
+      "price": 4.29,
+      "change": 0.04,
       "change_pct": null,
-      "trend_label": "Stable"
+      "trend_label": "Rising"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 59349.17,
-      "change_pct": 0.89
+      "price": 58824.89,
+      "change_pct": 0.6
     },
     "dax": {
       "label": "DAX",
-      "price": 24545.54,
-      "change_pct": 0.52
+      "price": 24270.87,
+      "change_pct": -0.6
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10597.24,
-      "change_pct": -0.11
+      "price": 10498.09,
+      "change_pct": -1.05
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 66.9,
-    "mmth": 62.9,
+    "s5fi": 63.2,
+    "mmth": 60.2,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Slight Pullback, Sector Strength Persists",
+  "mood": "Mixed Global Tape, Rising Yields",
   "analysis": {
-    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 up +0.89% and the DAX gaining +0.52%, while the FTSE 100 lags at -0.11%. In the US, major indices are experiencing a slight pullback in pre-market trading, with the S&P 500 down -0.24% at 7109.14 and the Nasdaq 100 lower by -0.31% at 26590.34. Despite this modest dip, underlying market health appears robust, as evidenced by a normal VIX at 18.79 and a stable 10Y Yield at 4.25%, indicating no immediate credit market stress. Furthermore, market breadth remains strong with 66.9% of stocks above their 50-day moving average (S5FI) and 62.9% above their 200-day moving average (MMTH), suggesting sustained participation beneath the index level.",
-    "analysis_para2": "Our mechanical plan for today focuses on monitoring key support levels for the major US indices. For the S&P 500, holding above 7100 will be crucial to prevent further downside, with a potential rebound targeting 7150; a breach could see a test of 7050. Similarly, the Nasdaq 100 should ideally hold above 26500, where a bounce would signal continued tech resilience. Given the strong underlying breadth, we will prioritize identifying relative strength within leading sectors like Semiconductors, Hardware, and Telecommunications, looking for entries on dips if major index support holds and individual stocks exhibit sustained buying volume.",
-    "technical_signal": "No reversal pattern confirmed yet. US indices are experiencing a minor pre-market pullback, but strong market breadth indicators suggest underlying strength is still present.",
+    "analysis_para1": "Global markets exhibited a mixed performance today, with the Nikkei 225 gaining +0.60% against notable declines in the DAX (-0.60%) and FTSE 100 (-1.05%). Domestically, the rising 10-year yield, now at 4.29%, indicates a tightening credit environment, though the BAML HY Spread regime remains unknown. US market breadth, represented by 63.2% of stocks above their 50-day moving average (S5FI) and 60.2% above their 200-day moving average (MMTH), suggests a market still holding above key technical levels despite today's -0.63% drop in the S&P 500.",
+    "analysis_para2": "The mechanical plan dictates cautious monitoring, particularly as the S&P 500 pulled back by -0.63% to 7064.01. Key action points include observing if the index can stabilize above recent support, perhaps around the 7000 level, to avoid further distribution. A sustained break below this psychological and potential technical level would necessitate increased defensive positioning. Conversely, a rebound accompanied by a VIX remaining near its normal 19.50 level and robust breadth would signal opportunities in leading themes.",
+    "technical_signal": "No reversal pattern confirmed yet. The market experienced a modest pullback today, with indexes closing lower, but without signaling an immediate shift in trend.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "With an RS of 99 and a +35.6% return over the last month, AXTI is a top-tier semiconductor play poised for continued outperformance in a tech-favored market."
+        "reason": "With an RS of 99 and a 1-month return of +35.6%, AXTI demonstrates top-tier momentum in the leading Semiconductors theme, making it a high-conviction long candidate."
       },
       {
-        "ticker": "AAOI",
-        "company": "Applied Optoelectronics Inc",
+        "ticker": "AEHR",
+        "company": "Aehr Test Systems",
         "grade": "A",
-        "reason": "AAOI boasts an RS of 98 and an astounding +60.4% monthly gain, positioning it as a leading momentum stock within the robust Telecommunications sector."
+        "reason": "AEHR exhibits exceptional short-term strength, boasting an RS of 98 and a staggering +138.7% 1-month return within the robust Semiconductors sector, confirming its strong leadership."
       },
       {
-        "ticker": "AMKR",
-        "company": "AMKOR Technology Inc",
+        "ticker": "LITE",
+        "company": "Lumentum Holdings Inc",
         "grade": "C",
-        "reason": "Despite an RS of 97 and a +44.3% 1-month return, AMKR's 1-month gain nearly equals its 3-month performance, suggesting a recently overheated move that could be vulnerable to profit-taking in a mixed market."
+        "reason": "Despite a high RS of 98, LITE's relatively modest +15.9% 1-month return compared to its peers suggests a recent slowing of momentum, making it a weaker choice in the current high-growth environment."
       }
     ]
   }
