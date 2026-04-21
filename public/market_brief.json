@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 20, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 21, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 18.87,
-      "change": 1.39,
+      "price": 18.79,
+      "change": -0.08,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 58475.9,
-      "change_pct": -1.75
+      "price": 59349.17,
+      "change_pct": 0.89
     },
     "dax": {
       "label": "DAX",
-      "price": 24417.8,
-      "change_pct": -1.15
+      "price": 24545.54,
+      "change_pct": 0.52
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10609.08,
-      "change_pct": -0.55
+      "price": 10597.24,
+      "change_pct": -0.11
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 66.6,
-    "mmth": 63.1,
+    "s5fi": 66.9,
+    "mmth": 62.9,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Global Weakness, Mild Risk-Off",
+  "mood": "Slight Pullback, Sector Strength Persists",
   "analysis": {
-    "analysis_para1": "Global markets displayed broad weakness today, with the Nikkei 225 falling -1.75%, the DAX -1.15%, and the FTSE 100 -0.55%, setting a cautious tone. This sentiment translated to the US, where the S&P 500 dipped -0.24% and the Nasdaq 100 declined -0.31%. While the 10Y Yield remained stable at 4.25%, the unknown BAML HY Spread introduces a degree of credit market uncertainty. US breadth metrics, with S5FI at 66.6% and MMTH at 63.1%, remain healthy but show a slight deceleration from prior strength, aligning with the day's moderate downturn.",
-    "analysis_para2": "The mechanical plan dictates careful monitoring of key index levels following today's global dip. Traders should observe whether the S&P 500 can hold immediate support around the 7100 mark and if the Nasdaq 100 can defend its 26500 level in tomorrow's open. A sustained break below these points could signal a deeper correction, necessitating a reduction in long exposure or the initiation of hedging strategies. Conversely, a swift recovery above today's open would indicate resilience, although the slightly deteriorating breadth figures suggest a measured approach to new positions. The VIX holding at 18.87 indicates no widespread panic, but vigilance for distribution patterns is crucial.",
-    "technical_signal": "No reversal pattern confirmed yet. The market saw a moderate daily dip across major indices without panic-driven spikes in volatility or clear capitulation signals.",
+    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 up +0.89% and the DAX gaining +0.52%, while the FTSE 100 lags at -0.11%. In the US, major indices are experiencing a slight pullback in pre-market trading, with the S&P 500 down -0.24% at 7109.14 and the Nasdaq 100 lower by -0.31% at 26590.34. Despite this modest dip, underlying market health appears robust, as evidenced by a normal VIX at 18.79 and a stable 10Y Yield at 4.25%, indicating no immediate credit market stress. Furthermore, market breadth remains strong with 66.9% of stocks above their 50-day moving average (S5FI) and 62.9% above their 200-day moving average (MMTH), suggesting sustained participation beneath the index level.",
+    "analysis_para2": "Our mechanical plan for today focuses on monitoring key support levels for the major US indices. For the S&P 500, holding above 7100 will be crucial to prevent further downside, with a potential rebound targeting 7150; a breach could see a test of 7050. Similarly, the Nasdaq 100 should ideally hold above 26500, where a bounce would signal continued tech resilience. Given the strong underlying breadth, we will prioritize identifying relative strength within leading sectors like Semiconductors, Hardware, and Telecommunications, looking for entries on dips if major index support holds and individual stocks exhibit sustained buying volume.",
+    "technical_signal": "No reversal pattern confirmed yet. US indices are experiencing a minor pre-market pullback, but strong market breadth indicators suggest underlying strength is still present.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "AXT Inc. (AXTI) earns an A+ for its exceptional RS 99 and 1-month gain of +69.3%, leading the highly active Semiconductor theme amidst broader market weakness."
+        "reason": "With an RS of 99 and a +35.6% return over the last month, AXTI is a top-tier semiconductor play poised for continued outperformance in a tech-favored market."
       },
       {
         "ticker": "AAOI",
         "company": "Applied Optoelectronics Inc",
         "grade": "A",
-        "reason": "Applied Optoelectronics Inc (AAOI) merits an A, showing robust RS 98 and a remarkable 3-month surge of +330.9% within the strong Telecommunications sector."
+        "reason": "AAOI boasts an RS of 98 and an astounding +60.4% monthly gain, positioning it as a leading momentum stock within the robust Telecommunications sector."
       },
       {
-        "ticker": "ONTO",
-        "company": "Onto Innovation Inc",
+        "ticker": "AMKR",
+        "company": "AMKOR Technology Inc",
         "grade": "C",
-        "reason": "Onto Innovation Inc. (ONTO) receives a C grade despite its RS 97, as its 3-month performance of +33.5% significantly lags its peers in the Semiconductor space, suggesting comparative underperformance."
+        "reason": "Despite an RS of 97 and a +44.3% 1-month return, AMKR's 1-month gain nearly equals its 3-month performance, suggesting a recently overheated move that could be vulnerable to profit-taking in a mixed market."
       }
     ]
   }
