@@ -7283,13 +7283,14 @@ const filtered = useMemo(() => {
             if (!todayEvents.length) return null;
             return (
               <div className="hidden lg:flex items-center gap-1 text-[11px] font-mono py-0.5 border-t border-zinc-800/40 flex-wrap overflow-hidden">
-                <span className="text-zinc-600 font-semibold mr-1 whitespace-nowrap">ECON TODAY →</span>
+                <span className="text-amber-400 font-bold mr-1 whitespace-nowrap tracking-wide">ECON TODAY</span>
+                <span className="text-zinc-600 mr-1">→</span>
                 {todayEvents.map((ev, idx) => (
                   <React.Fragment key={idx}>
                     <span className="flex items-center gap-1 whitespace-nowrap">
-                      {ev.time && <span className="text-zinc-600">{ev.time}</span>}
-                      <span className="text-zinc-400">{ev.event || ev.name}</span>
-                      {ev.estimate != null && <span className="text-zinc-600">Est {ev.estimate}</span>}
+                      {ev.time && <span className="text-zinc-500">{ev.time}</span>}
+                      <span className="text-zinc-300">{(ev.event || ev.name || '').replace(/\s+Index$/i, '')}</span>
+                      {ev.estimate != null && <span className="text-zinc-500">Est {ev.estimate}</span>}
                     </span>
                     {idx < todayEvents.length - 1 && <Sep/>}
                   </React.Fragment>
