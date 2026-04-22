@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 21, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 22, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 19.5,
-      "change": 0.63,
+      "price": 19.18,
+      "change": -0.32,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,25 +32,25 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 58824.89,
-      "change_pct": 0.6
+      "price": 59585.86,
+      "change_pct": 0.4
     },
     "dax": {
       "label": "DAX",
-      "price": 24270.87,
-      "change_pct": -0.6
+      "price": 24279.56,
+      "change_pct": 0.04
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10498.09,
-      "change_pct": -1.05
+      "price": 10501.24,
+      "change_pct": 0.03
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 63.2,
+    "s5fi": 63.1,
     "mmth": 60.2,
     "breadth_flush": false,
     "generational": false,
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Mixed Global Tape, Rising Yields",
+  "mood": "Mild Weakness / Yield Pressure",
   "analysis": {
-    "analysis_para1": "Global markets exhibited a mixed performance today, with the Nikkei 225 gaining +0.60% against notable declines in the DAX (-0.60%) and FTSE 100 (-1.05%). Domestically, the rising 10-year yield, now at 4.29%, indicates a tightening credit environment, though the BAML HY Spread regime remains unknown. US market breadth, represented by 63.2% of stocks above their 50-day moving average (S5FI) and 60.2% above their 200-day moving average (MMTH), suggests a market still holding above key technical levels despite today's -0.63% drop in the S&P 500.",
-    "analysis_para2": "The mechanical plan dictates cautious monitoring, particularly as the S&P 500 pulled back by -0.63% to 7064.01. Key action points include observing if the index can stabilize above recent support, perhaps around the 7000 level, to avoid further distribution. A sustained break below this psychological and potential technical level would necessitate increased defensive positioning. Conversely, a rebound accompanied by a VIX remaining near its normal 19.50 level and robust breadth would signal opportunities in leading themes.",
-    "technical_signal": "No reversal pattern confirmed yet. The market experienced a modest pullback today, with indexes closing lower, but without signaling an immediate shift in trend.",
+    "analysis_para1": "Global markets show marginal gains with Nikkei up +0.40%, DAX +0.04%, and FTSE 100 +0.03%, pointing to a largely stable overseas session. Domestically, however, US futures are pulling back, with the S&P 500 down -0.63% and Nasdaq 100 -0.42%, as the 10Y yield rises to 4.29%. Despite this pre-market weakness and yield pressure, market breadth remains robust, with 63.1% of stocks above their 50-day MA and 60.2% above their 200-day MA, suggesting underlying resilience.",
+    "analysis_para2": "Today's plan is to monitor key support levels for the major indices, particularly S&P 500's performance around the 7064 mark. A decisive break below the psychological 7000 level would signal further downside, while a bounce could present opportunistic entry points. With the 10Y yield continuing its ascent to 4.29%, growth sectors may face headwinds, emphasizing the need to focus on names exhibiting superior relative strength. Maintain a disciplined approach, prioritizing high-momentum thematic leaders that defy broader market softness.",
+    "technical_signal": "No reversal pattern confirmed yet. The market is currently experiencing a modest pre-market pullback without clear signs of an immediate trend change or exhaustion.",
     "ticker_intel": [
-      {
-        "ticker": "AXTI",
-        "company": "AXT Inc",
-        "grade": "A+",
-        "reason": "With an RS of 99 and a 1-month return of +35.6%, AXTI demonstrates top-tier momentum in the leading Semiconductors theme, making it a high-conviction long candidate."
-      },
       {
         "ticker": "AEHR",
         "company": "Aehr Test Systems",
-        "grade": "A",
-        "reason": "AEHR exhibits exceptional short-term strength, boasting an RS of 98 and a staggering +138.7% 1-month return within the robust Semiconductors sector, confirming its strong leadership."
+        "grade": "A+",
+        "reason": "Aehr Test Systems is a standout leader in Semiconductors, boasting an RS of 98 and an astounding +171.5% 1-month return, demonstrating exceptional momentum in a robust sector."
       },
       {
-        "ticker": "LITE",
-        "company": "Lumentum Holdings Inc",
+        "ticker": "AXTI",
+        "company": "AXT Inc",
+        "grade": "A",
+        "reason": "AXT Inc. exhibits superior relative strength (RS=99) and an explosive +38.2% 1-month gain, making it a high-conviction semiconductor play well-suited for continued thematic strength."
+      },
+      {
+        "ticker": "VELO",
+        "company": "Velo3D Inc",
         "grade": "C",
-        "reason": "Despite a high RS of 98, LITE's relatively modest +15.9% 1-month return compared to its peers suggests a recent slowing of momentum, making it a weaker choice in the current high-growth environment."
+        "reason": "Despite a strong recent 1-month return of +30.6% and an RS of 98, Velo3D Inc. carries concern due to its significant -20.3% 3-month performance, suggesting potential underlying weakness or high volatility not present in stronger peers."
       }
     ]
   }
