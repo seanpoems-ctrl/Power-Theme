@@ -2404,6 +2404,8 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
         <span className="text-zinc-500">T2108</span><span className="text-zinc-300 text-right">{t2108 == null ? "—" : `${t2108.toFixed(2)} ${interpret("t2108", t2108)}`}</span>
       </div>
       {showNotes && (
+        <>
+        <div className="fixed inset-0 z-40" onClick={() => setShowNotes(false)} />
         <div className="absolute top-0 left-full ml-1 z-50 w-64 bg-zinc-900 border border-zinc-700 rounded-xl p-3 shadow-xl space-y-2 overflow-y-auto max-h-[80vh]">
           {(() => {
             const hiLoRatio = newLow > 0 ? newHigh / newLow : null;
@@ -2442,6 +2444,7 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
             });
           })()}
         </div>
+        </>
       )}
     </div>
   );
