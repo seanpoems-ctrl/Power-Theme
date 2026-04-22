@@ -949,14 +949,6 @@ const SubThemeStocksModal = ({ subthemeName, stocks, onClose }) => {
   );
 };
 
-const RS_MODES = [
-  { key: '1d',  label: '1D',  perfKey: 'perf_1d',  spyKey: null       },
-  { key: '1w',  label: '1W',  perfKey: 'perf_1w',  spyKey: 'perf_1w'  },
-  { key: '1m',  label: '1M',  perfKey: 'perf_1m',  spyKey: 'perf_1m'  },
-  { key: '3m',  label: '3M',  perfKey: 'perf_3m',  spyKey: 'perf_3m'  },
-  { key: '6m',  label: '6M',  perfKey: 'perf_6m',  spyKey: 'perf_6m'  },
-  { key: '52w', label: '52W', perfKey: 'rs_52w',   spyKey: null       },
-];
 
 const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, onViewChange, onThemeSelect }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
@@ -965,7 +957,6 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
   const [themeHover, setThemeHover] = useState(null); // { ticker, rect }
   const [themeStats, setThemeStats] = useState(null); // { themeName, anchorRect }
   const [subThemeModal, setSubThemeModal] = useState(null); // { subthemeName, stocks }
-  const [rsMode, setRsMode] = useState('52w');
 
   const activeData = view === "themes" ? finvizThemeRankings : themeRankings;
 
@@ -993,23 +984,14 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
   // Build theme name → avg rs_52w map from actual stock data
   const themeAvgRS = useMemo(() => {
     const map = {};
-    const mode = RS_MODES.find(m => m.key === rsMode) ?? RS_MODES[RS_MODES.length - 1];
-    const spyVal = mode.spyKey ? (spyBenchmarks?.[mode.spyKey] ?? null) : null;
     for (const theme of (themes || [])) {
       const norm = normalizeTheme(theme);
       const stocks = norm.subthemes.flatMap(s => s.stocks);
-      if (rsMode === '52w') {
-        const vals = stocks.map(s => s.rs_52w).filter(v => v != null);
-        map[norm.name.toLowerCase()] = vals.length ? Math.round(vals.reduce((a, v) => a + v, 0) / vals.length) : null;
-      } else {
-        const vals = stocks.map(s => s[mode.perfKey]).filter(v => v != null);
-        if (!vals.length) { map[norm.name.toLowerCase()] = null; continue; }
-        const avg = vals.reduce((a, v) => a + v, 0) / vals.length;
-        map[norm.name.toLowerCase()] = spyVal != null ? Math.round((avg - spyVal) * 10) / 10 : Math.round(avg * 10) / 10;
-      }
+      const vals = stocks.map(s => s.rs_52w).filter(v => v != null);
+      map[norm.name.toLowerCase()] = vals.length ? Math.round(vals.reduce((a, v) => a + v, 0) / vals.length) : null;
     }
     return map;
-  }, [themes, rsMode, spyBenchmarks]);
+  }, [themes]);
 
   const ranked = useMemo(() => {
     if (!activeData || !activeData.length) return [];
@@ -1116,24 +1098,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                 </>
               )}
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
-              <th onClick={e => handleLBSort('rs_score', e.shiftKey)}
-                className={`px-1 py-2 text-center cursor-pointer select-none w-14 ${sortPriority[0]?.key === 'rs_score' ? 'text-blue-400' : 'text-zinc-500 hover:text-zinc-300'}`}>
-                <div className="flex flex-col items-center gap-0.5">
-                  <span className="inline-flex items-center gap-0.5 text-[11px] font-semibold uppercase tracking-wider">
-                    RS
-                    {sortPriority[0]?.key === 'rs_score' && <span className="text-[9px] text-blue-400/70">①{sortPriority[0].direction === 'desc' ? '▼' : '▲'}</span>}
-                  </span>
-                  <div className="flex gap-0.5" onClick={e => e.stopPropagation()}>
-                    {RS_MODES.map(m => (
-                      <button key={m.key}
-                        onClick={() => { setRsMode(m.key); setSortPriority([{ key: 'rs_score', direction: 'desc' }]); }}
-                        className={`text-[8px] px-0.5 py-px rounded leading-none transition-colors ${rsMode === m.key ? 'bg-blue-500/30 text-blue-300' : 'text-zinc-600 hover:text-zinc-400'}`}>
-                        {m.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </th>
+              <LBSortHeader k="rs_score" label="RS" w="w-14" />
               {view === "themes" && (
                 <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap text-center">Source</th>
               )}
@@ -1247,13 +1212,8 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
                   {(() => {
                     const rsVal = themeAvgRS[t.name?.toLowerCase()];
-                    const cls = rsVal == null ? 'text-zinc-600'
-                      : rsMode === '52w' ? (rsVal >= 85 ? 'text-emerald-400' : 'text-red-400')
-                      : (rsVal > 0 ? 'text-emerald-400' : rsVal < 0 ? 'text-red-400' : 'text-zinc-400');
-                    const display = rsVal == null ? '—'
-                      : rsMode === '52w' ? rsVal
-                      : `${rsVal}`;
-                    return <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${cls}`}>{display}</td>;
+                    const cls = rsVal == null ? 'text-zinc-600' : rsVal >= 85 ? 'text-emerald-400' : 'text-red-400';
+                    return <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${cls}`}>{rsVal ?? '—'}</td>;
                   })()}
                   {view === "themes" && (
                     <td className="px-1 py-1.5 text-center">
