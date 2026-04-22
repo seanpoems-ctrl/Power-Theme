@@ -4882,7 +4882,7 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
           return (
             <div key={ticker}
               className={`flex items-center justify-between px-1.5 py-1 rounded hover:bg-zinc-800/50 transition-colors ${isPeer ? "opacity-60" : ""}`}>
-              <div className="flex flex-col min-w-0">
+              <div className="flex items-center gap-1.5 min-w-0 flex-wrap">
                 <span
                   className="text-[12px] font-mono font-semibold text-blue-400 cursor-pointer hover:text-blue-300 transition-colors leading-none"
                   onClick={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect }); }}
@@ -4892,14 +4892,8 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
                   {ticker}
                   {isPeer && <span className="text-[8px] text-zinc-600 ml-0.5">peer</span>}
                 </span>
-                {price != null && (
-                  <div className="flex items-center gap-1 mt-0.5">
-                    <span className="text-[9px] font-mono text-zinc-500">${price.toFixed(2)}</span>
-                    {gap_pct != null && (
-                      <span className="text-[9px] font-mono font-bold text-emerald-400">+{gap_pct.toFixed(1)}%</span>
-                    )}
-                  </div>
-                )}
+                {price != null && <span className="text-[9px] font-mono text-zinc-500">${price.toFixed(2)}</span>}
+                {gap_pct != null && <span className="text-[9px] font-mono font-bold text-emerald-400">+{gap_pct.toFixed(1)}%</span>}
               </div>
               {rs != null && (
                 <span className={`text-[9px] font-bold font-mono px-1 py-0.5 rounded border leading-none flex-shrink-0 ${rsCls}`}>
