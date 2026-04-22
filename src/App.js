@@ -4832,9 +4832,9 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
       const seen = new Set();
       for (const g of gappers) {
         if (g.meets_all_gates) {
-          if (!seen.has(g.ticker)) { seen.add(g.ticker); rows.push({ ticker: g.ticker, rs: g.rs_52w ?? null, isPeer: false }); }
+          if (!seen.has(g.ticker)) { seen.add(g.ticker); rows.push({ ticker: g.ticker, rs: g.rs_52w ?? null, isPeer: false, price: g.price ?? null, gap_pct: g.gap_pct ?? null }); }
           for (const p of (g.peer_tickers || [])) {
-            if (!seen.has(p)) { seen.add(p); rows.push({ ticker: p, rs: null, isPeer: true }); }
+            if (!seen.has(p)) { seen.add(p); rows.push({ ticker: p, rs: null, isPeer: true, price: null, gap_pct: null }); }
           }
         }
       }
@@ -4875,24 +4875,34 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
       <div className="flex flex-col gap-0.5 mb-3">
         {leaders.length === 0 ? (
           <div className="text-[11px] text-zinc-600 py-2 text-center">No qualifying leaders</div>
-        ) : leaders.map(({ ticker, rs, isPeer }) => {
+        ) : leaders.map(({ ticker, rs, isPeer, price, gap_pct }) => {
           const rsCls = rs != null && rs >= 90 ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
                       : rs != null && rs >= 85 ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
                       : "bg-zinc-800/60 text-zinc-500 border-zinc-700/40";
           return (
             <div key={ticker}
               className={`flex items-center justify-between px-1.5 py-1 rounded hover:bg-zinc-800/50 transition-colors ${isPeer ? "opacity-60" : ""}`}>
-              <span
-                className="text-[12px] font-mono font-semibold text-blue-400 cursor-pointer hover:text-blue-300 transition-colors leading-none"
-                onClick={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect }); }}
-                onMouseEnter={e => startHover(ticker, e.currentTarget.getBoundingClientRect())}
-                onMouseLeave={cancelHover}
-              >
-                {ticker}
-                {isPeer && <span className="text-[8px] text-zinc-600 ml-0.5">peer</span>}
-              </span>
+              <div className="flex flex-col min-w-0">
+                <span
+                  className="text-[12px] font-mono font-semibold text-blue-400 cursor-pointer hover:text-blue-300 transition-colors leading-none"
+                  onClick={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect }); }}
+                  onMouseEnter={e => startHover(ticker, e.currentTarget.getBoundingClientRect())}
+                  onMouseLeave={cancelHover}
+                >
+                  {ticker}
+                  {isPeer && <span className="text-[8px] text-zinc-600 ml-0.5">peer</span>}
+                </span>
+                {price != null && (
+                  <div className="flex items-center gap-1 mt-0.5">
+                    <span className="text-[9px] font-mono text-zinc-500">${price.toFixed(2)}</span>
+                    {gap_pct != null && (
+                      <span className="text-[9px] font-mono font-bold text-emerald-400">+{gap_pct.toFixed(1)}%</span>
+                    )}
+                  </div>
+                )}
+              </div>
               {rs != null && (
-                <span className={`text-[9px] font-bold font-mono px-1 py-0.5 rounded border leading-none ${rsCls}`}>
+                <span className={`text-[9px] font-bold font-mono px-1 py-0.5 rounded border leading-none flex-shrink-0 ${rsCls}`}>
                   {rs}
                 </span>
               )}
