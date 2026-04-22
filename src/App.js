@@ -2382,9 +2382,9 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
             <span className="text-zinc-500">ADV/DEC</span>
             {adv_dec ? (
               <span className="font-mono font-semibold">
-                <span className="text-emerald-400">{adv_dec.adv_pct?.toFixed(1)}%</span>
+                <span className="text-emerald-300">{adv_dec.adv_pct?.toFixed(1)}%</span>
                 <span className="text-zinc-500"> ({adv_dec.advancing}) / </span>
-                <span className="text-red-400">{adv_dec.dec_pct?.toFixed(1)}%</span>
+                <span className="text-red-300">{adv_dec.dec_pct?.toFixed(1)}%</span>
                 <span className="text-zinc-500"> ({adv_dec.declining})</span>
               </span>
             ) : <span className={`font-mono font-semibold ${advCls}`}>—</span>}
