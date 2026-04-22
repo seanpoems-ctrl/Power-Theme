@@ -2378,7 +2378,17 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
       </div>
       <div className="space-y-1.5">
         <div>
-          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">ADV/DEC</span><span className={`font-mono font-semibold ${advCls}`}>{advTxt}</span></div>
+          <div className="flex items-baseline justify-between text-[10px]">
+            <span className="text-zinc-500">ADV/DEC</span>
+            {adv_dec ? (
+              <span className="font-mono font-semibold">
+                <span className="text-emerald-400">{adv_dec.adv_pct?.toFixed(1)}%</span>
+                <span className="text-zinc-500"> ({adv_dec.advancing}) / </span>
+                <span className="text-red-400">{adv_dec.dec_pct?.toFixed(1)}%</span>
+                <span className="text-zinc-500"> ({adv_dec.declining})</span>
+              </span>
+            ) : <span className={`font-mono font-semibold ${advCls}`}>—</span>}
+          </div>
           <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className={`h-full ${advBar}`} style={{ width: `${Math.min(100, Math.max(0, advPct))}%` }}/></div>
         </div>
         <div>
