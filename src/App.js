@@ -2411,7 +2411,7 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
               "ADV/DEC":  { raw: adv_dec ? advPct : null,  display: adv_dec ? `${advPct.toFixed(0)}% (${advTxt})` : null },
               "SMA50 ↑":  { raw: sma50pct,                 display: `${sma50pct.toFixed(0)}%` },
               "SMA200 ↑": { raw: sma200pct,                display: `${sma200pct.toFixed(0)}%` },
-              "52W Hi":   { raw: hiLoRatio,                 display: `${newHigh} (比 ${newLow > 0 ? `ratio ${hiLoRatio?.toFixed(1)}` : "—"})` },
+              "52W Hi":   { raw: hiLoRatio,                 display: `${newHigh} (Hi/Lo ${newLow > 0 ? `ratio ${hiLoRatio?.toFixed(1)}` : "—"})` },
               "52W Lo":   { raw: newLow,                   display: `${newLow}` },
               "TICK":     { raw: tick,                     display: tick != null ? (tick > 0 ? `+${tick}` : `${tick}`) : null },
               "TRIN":     { raw: trin,                     display: trin != null ? trin.toFixed(2) : null },
