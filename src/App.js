@@ -4656,8 +4656,8 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
                     <div className="flex items-baseline gap-1 text-[12px] font-mono font-semibold leading-none">
                       <span className="text-emerald-400">{lp.toFixed(1)}%</span>
                       {row.leftCount  != null && <span className="text-[9px] text-zinc-600">({row.leftCount})</span>}
-                      <span className="text-zinc-700 mx-0.5">/</span>
-                      <span className="text-red-400">{rp.toFixed(1)}%</span>
+                      <span className="text-zinc-300 mx-0.5">/</span>
+                      <span className="text-red-500">{rp.toFixed(1)}%</span>
                       {row.rightCount != null && <span className="text-[9px] text-zinc-600">({row.rightCount})</span>}
                     </div>
                     <div className="flex h-[4px] rounded-full overflow-hidden gap-px">
