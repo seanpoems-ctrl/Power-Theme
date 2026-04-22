@@ -2266,72 +2266,72 @@ const INTERNALS_NOTES = [
     label: "ADV/DEC",
     desc: "Advancing / Declining stocks ratio",
     lines: [
-      "≥60% advancing → healthy breadth",
-      "40–60% → neutral, be selective",
-      "<40% → bad breadth, avoid chasing",
+      { text: "≥60% advancing → healthy breadth", active: v => v >= 60 },
+      { text: "40–60% → neutral, be selective", active: v => v >= 40 && v < 60 },
+      { text: "<40% → bad breadth, avoid chasing", active: v => v < 40 },
     ],
   },
   {
     label: "SMA50 ↑",
     desc: "% of stocks above 50-day MA",
     lines: [
-      "≥60% → bull momentum healthy",
-      "40–60% → borderline, buy leaders only",
-      "<40% → weak market internals",
+      { text: "≥60% → bull momentum healthy", active: v => v >= 60 },
+      { text: "40–60% → borderline, buy leaders only", active: v => v >= 40 && v < 60 },
+      { text: "<40% → weak market internals", active: v => v < 40 },
     ],
   },
   {
     label: "SMA200 ↑",
     desc: "% of stocks above 200-day MA",
     lines: [
-      "≥60% → long-term bull structure",
-      "50–60% → caution zone",
-      "<50% → majority in downtrend",
+      { text: "≥60% → long-term bull structure", active: v => v >= 60 },
+      { text: "50–60% → caution zone", active: v => v >= 50 && v < 60 },
+      { text: "<50% → majority in downtrend", active: v => v < 50 },
     ],
   },
   {
     label: "52W Hi",
     desc: "Stocks making 52-week highs",
     lines: [
-      "More highs = stronger bull momentum",
-      "Healthy: Hi/Lo ratio >5",
+      { text: "More highs = stronger bull momentum" },
+      { text: "Healthy: Hi/Lo ratio >5", active: v => v > 5 },
     ],
   },
   {
     label: "52W Lo",
     desc: "Stocks making 52-week lows",
     lines: [
-      "Low number = limited panic",
-      "Sudden spike in Lo → market breakdown",
+      { text: "Low number = limited panic", active: v => v < 50 },
+      { text: "Sudden spike in Lo → market breakdown", active: v => v >= 100 },
     ],
   },
   {
     label: "TICK",
     desc: "NYSE intraday upticks minus downticks",
     lines: [
-      ">+800 → institutional buying, very strong",
-      "+200 to +800 → bullish",
-      "-200 to +200 → neutral",
-      "<-800 → panic selling",
+      { text: ">+800 → institutional buying, very strong", active: v => v > 800 },
+      { text: "+200 to +800 → bullish", active: v => v >= 200 && v <= 800 },
+      { text: "-200 to +200 → neutral", active: v => v > -200 && v < 200 },
+      { text: "<-800 → panic selling", active: v => v < -800 },
     ],
   },
   {
     label: "TRIN",
     desc: "Arms Index — volume-weighted adv/dec ratio",
     lines: [
-      "<0.7 → volume in advancing stocks → Buy",
-      "0.7–1.3 → neutral",
-      ">1.3 → volume in declining stocks → Sell",
-      ">2.0 → extreme panic, oversold bounce possible",
+      { text: "<0.7 → volume in advancing stocks → Buy", active: v => v < 0.7 },
+      { text: "0.7–1.3 → neutral", active: v => v >= 0.7 && v <= 1.3 },
+      { text: ">1.3 → volume in declining stocks → Sell", active: v => v > 1.3 && v <= 2.0 },
+      { text: ">2.0 → extreme panic, oversold bounce possible", active: v => v > 2.0 },
     ],
   },
   {
     label: "T2108",
     desc: "% of stocks above 40-day MA (Worden)",
     lines: [
-      "<20% → oversold, look for bounce",
-      "20–70% → normal range",
-      ">70% → overbought, watch for pullback",
+      { text: "<20% → oversold, look for bounce", active: v => v < 20 },
+      { text: "20–70% → normal range", active: v => v >= 20 && v <= 70 },
+      { text: ">70% → overbought, watch for pullback", active: v => v > 70 },
     ],
   },
 ];
@@ -2404,17 +2404,43 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
         <span className="text-zinc-500">T2108</span><span className="text-zinc-300 text-right">{t2108 == null ? "—" : `${t2108.toFixed(2)} ${interpret("t2108", t2108)}`}</span>
       </div>
       {showNotes && (
-        <div className="absolute top-0 left-full ml-1 z-50 w-56 bg-zinc-900 border border-zinc-700 rounded-xl p-3 shadow-xl space-y-2 overflow-y-auto max-h-[80vh]">
-          {INTERNALS_NOTES.map(n => (
-            <div key={n.label} className="border-b border-zinc-800/40 pb-1.5 last:border-0 last:pb-0">
-              <div className="text-[10px] font-semibold text-zinc-200 mb-0.5">{n.label}</div>
-              <ul className="space-y-0.5">
-                {n.lines.map((l, i) => (
-                  <li key={i} className="text-[9px] text-zinc-400 leading-snug pl-1 before:content-['·'] before:mr-1 before:text-zinc-600">{l}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        <div className="absolute top-0 left-full ml-1 z-50 w-64 bg-zinc-900 border border-zinc-700 rounded-xl p-3 shadow-xl space-y-2 overflow-y-auto max-h-[80vh]">
+          {(() => {
+            const hiLoRatio = newLow > 0 ? newHigh / newLow : null;
+            const noteVals = {
+              "ADV/DEC":  { raw: adv_dec ? advPct : null,  display: adv_dec ? `${advPct.toFixed(0)}% (${advTxt})` : null },
+              "SMA50 ↑":  { raw: sma50pct,                 display: `${sma50pct.toFixed(0)}%` },
+              "SMA200 ↑": { raw: sma200pct,                display: `${sma200pct.toFixed(0)}%` },
+              "52W Hi":   { raw: hiLoRatio,                 display: `${newHigh} (比 ${newLow > 0 ? `ratio ${hiLoRatio?.toFixed(1)}` : "—"})` },
+              "52W Lo":   { raw: newLow,                   display: `${newLow}` },
+              "TICK":     { raw: tick,                     display: tick != null ? (tick > 0 ? `+${tick}` : `${tick}`) : null },
+              "TRIN":     { raw: trin,                     display: trin != null ? trin.toFixed(2) : null },
+              "T2108":    { raw: t2108,                    display: t2108 != null ? `${t2108.toFixed(1)}%` : null },
+            };
+            return INTERNALS_NOTES.map(n => {
+              const { raw, display } = noteVals[n.label] || {};
+              return (
+                <div key={n.label} className="border-b border-zinc-800/40 pb-1.5 last:border-0 last:pb-0">
+                  <div className="flex items-baseline justify-between mb-0.5">
+                    <span className="text-[10px] font-semibold text-zinc-200">{n.label}</span>
+                    {display != null && <span className="text-[9px] font-mono text-amber-300">{display}</span>}
+                  </div>
+                  <ul className="space-y-0.5">
+                    {n.lines.map((l, i) => {
+                      const isActive = raw != null && l.active && l.active(raw);
+                      return (
+                        <li key={i} className={`text-[9px] leading-snug pl-1 before:content-['·'] before:mr-1 ${
+                          isActive
+                            ? "text-white font-semibold before:text-amber-400"
+                            : "text-zinc-500 before:text-zinc-700"
+                        }`}>{l.text}</li>
+                      );
+                    })}
+                  </ul>
+                </div>
+              );
+            });
+          })()}
         </div>
       )}
     </div>
