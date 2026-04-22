@@ -1252,7 +1252,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                       : (rsVal > 0 ? 'text-emerald-400' : rsVal < 0 ? 'text-red-400' : 'text-zinc-400');
                     const display = rsVal == null ? '—'
                       : rsMode === '52w' ? rsVal
-                      : (rsVal > 0 ? `+${rsVal}` : `${rsVal}`);
+                      : `${rsVal}`;
                     return <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${cls}`}>{display}</td>;
                   })()}
                   {view === "themes" && (
