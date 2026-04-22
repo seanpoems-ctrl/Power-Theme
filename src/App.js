@@ -876,12 +876,86 @@ const ThemeHeatmap = ({ themes, finvizThemeRankings }) => {
   );
 };
 
+const SubThemeStocksModal = ({ subthemeName, stocks, onClose }) => {
+  const sorted = useMemo(() => [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0)), [stocks]);
+  const [hovered, setHovered] = useState(null); // { ticker, rect }
+
+  useEffect(() => {
+    const handler = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
+      <div className="relative w-full max-w-2xl max-h-[80vh] bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl flex flex-col overflow-hidden" onClick={e => e.stopPropagation()}>
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 shrink-0">
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-semibold text-zinc-100">{subthemeName}</span>
+            <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{sorted.length} stocks · sorted by RS</span>
+          </div>
+          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-300 transition-colors p-1 rounded hover:bg-zinc-800">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
+          </button>
+        </div>
+        {/* Table */}
+        <div className="overflow-y-auto flex-1 px-2 py-1">
+          <table className="w-full border-collapse text-left text-xs">
+            <thead className="sticky top-0 bg-zinc-900 z-10">
+              <tr className="border-b border-zinc-800 text-zinc-500">
+                <th className="w-8 py-2 pr-2 text-right font-medium">#</th>
+                <th className="px-2 py-2 font-medium">Ticker</th>
+                <th className="px-2 py-2 font-medium">Company</th>
+                <th className="px-2 py-2 font-medium text-right">RS</th>
+                <th className="px-2 py-2 font-medium text-right">ADR%</th>
+                <th className="px-2 py-2 font-medium text-right">$ Vol</th>
+                <th className="px-2 py-2 font-medium text-right">1D Change%</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sorted.map((s, i) => {
+                const rsCls = s.rs_52w >= 90 ? "text-emerald-300" : s.rs_52w >= 70 ? "text-emerald-400" : s.rs_52w >= 50 ? "text-zinc-300" : "text-red-400";
+                const chgCls = (s.change_pct ?? 0) > 0 ? "text-emerald-400" : (s.change_pct ?? 0) < 0 ? "text-red-400" : "text-zinc-400";
+                const fmtVol = (v) => { if (v == null) return "—"; if (v >= 1e9) return `$${(v/1e9).toFixed(1)}B`; if (v >= 1e6) return `$${(v/1e6).toFixed(0)}M`; return `$${(v/1e3).toFixed(0)}K`; };
+                const fmtPct = (v) => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(2)}%`;
+                return (
+                  <tr key={s.ticker} className="border-b border-zinc-800/50 hover:bg-zinc-800/30 cursor-pointer"
+                    onClick={e => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setHovered(h => h?.ticker === s.ticker ? null : { ticker: s.ticker, rect });
+                    }}>
+                    <td className="py-1.5 pr-2 text-right font-mono text-zinc-600">{i + 1}</td>
+                    <td className="px-2 py-1.5 font-mono font-semibold text-cyan-400">{s.ticker}</td>
+                    <td className="px-2 py-1.5 text-zinc-300 max-w-[180px] truncate">{s.company || "—"}</td>
+                    <td className={`px-2 py-1.5 text-right font-mono font-bold ${rsCls}`}>{s.rs_52w ?? "—"}</td>
+                    <td className="px-2 py-1.5 text-right font-mono text-zinc-300">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
+                    <td className="px-2 py-1.5 text-right font-mono text-zinc-400">{fmtVol(s.dollar_volume)}</td>
+                    <td className={`px-2 py-1.5 text-right font-mono font-semibold ${chgCls}`}>{fmtPct(s.change_pct)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+            <tfoot>
+              <tr className="border-t border-zinc-700 text-zinc-600 text-xs">
+                <td colSpan={7} className="py-1.5 pr-2 text-right font-mono">{sorted.length} stocks</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
+    </div>
+  );
+};
+
 const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData, onViewChange, onThemeSelect }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
   const [expanded, setExpanded] = useState(null);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
   const [themeHover, setThemeHover] = useState(null); // { ticker, rect }
   const [themeStats, setThemeStats] = useState(null); // { themeName, anchorRect }
+  const [subThemeModal, setSubThemeModal] = useState(null); // { subthemeName, stocks }
 
   const activeData = view === "themes" ? finvizThemeRankings : themeRankings;
 
@@ -1102,8 +1176,26 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                   {view === "themes" && (
                     <>
                       <td className="px-2 py-1.5 min-w-[120px]">
-                        <div className="text-[11px] text-zinc-400 leading-tight">
-                          {subThemeNames.join(' · ') || <span className="text-zinc-600">—</span>}
+                        <div className="text-[11px] text-zinc-400 leading-tight flex flex-wrap gap-x-1 gap-y-0.5">
+                          {subThemeNames.length === 0
+                            ? <span className="text-zinc-600">—</span>
+                            : subThemeNames.map((sn, si) => {
+                                const matchedTheme = themes.find(th => (th.name || '').toLowerCase() === (t.name || '').toLowerCase());
+                                const subObj = matchedTheme?.subthemes?.find(s => s.name === sn);
+                                return (
+                                  <React.Fragment key={sn}>
+                                    {si > 0 && <span className="text-zinc-700">·</span>}
+                                    <button
+                                      className="hover:text-blue-400 hover:underline transition-colors cursor-pointer"
+                                      onClick={e => {
+                                        e.stopPropagation();
+                                        if (subObj) setSubThemeModal({ subthemeName: sn, stocks: subObj.stocks || [] });
+                                      }}
+                                    >{sn}</button>
+                                  </React.Fragment>
+                                );
+                              })
+                          }
                         </div>
                       </td>
                       <td className="px-2 py-1.5">
@@ -1145,6 +1237,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     </div>
     {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => { setThemeHover(null); setThemeStats(null); }}/>}
     {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => { setThemeStats(null); setThemeHover(null); }}/>}
+    {subThemeModal && <SubThemeStocksModal subthemeName={subThemeModal.subthemeName} stocks={subThemeModal.stocks} onClose={() => setSubThemeModal(null)}/>}
     </>
   );
 };
