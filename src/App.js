@@ -2404,6 +2404,8 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
         <span className="text-zinc-500">T2108</span><span className="text-zinc-300 text-right">{t2108 == null ? "—" : `${t2108.toFixed(2)} ${interpret("t2108", t2108)}`}</span>
       </div>
       {showNotes && (
+        <>
+        <div className="fixed inset-0 z-40" onClick={() => setShowNotes(false)} />
         <div className="absolute top-0 left-full ml-1 z-50 w-64 bg-zinc-900 border border-zinc-700 rounded-xl p-3 shadow-xl space-y-2 overflow-y-auto max-h-[80vh]">
           {(() => {
             const hiLoRatio = newLow > 0 ? newHigh / newLow : null;
@@ -2442,6 +2444,7 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
             });
           })()}
         </div>
+        </>
       )}
     </div>
   );
@@ -5009,6 +5012,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
     </div>
   );
 
+  const GRADE_RANK = { "A+": 4, "A": 3, "B": 2, "C": 1 };
   const filtered = gapperData.gappers.filter(g =>
     g.gap_pct   >= fMinGap &&
     g.pm_volume >= fMinPMVol * 1000 &&
@@ -5018,7 +5022,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
     (g.avg_dollar_vol || g.price * (g.avg_vol_10d || 0)) >= fMinDolVol * 1e6 &&
     // In Stress regime: hide C-grade gappers to reduce noise
     (creditRegime !== "Stress" || (g.grade && g.grade !== "C"))
-  );
+  ).sort((a, b) => (GRADE_RANK[b.grade] || 0) - (GRADE_RANK[a.grade] || 0));
 
   const resetFilters = () => {
     setFMinGap(5); setFMinPMVol(200); setFMinPrice(5);
