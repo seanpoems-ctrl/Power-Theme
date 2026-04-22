@@ -2266,27 +2266,27 @@ const INTERNALS_NOTES = [
     label: "ADV/DEC",
     desc: "Advancing / Declining stocks ratio",
     lines: [
-      { text: "≥60% advancing → healthy breadth", active: v => v >= 60 },
-      { text: "40–60% → neutral, be selective", active: v => v >= 40 && v < 60 },
-      { text: "<40% → bad breadth, avoid chasing", active: v => v < 40 },
+      { text: "≥60% advancing → healthy breadth", active: v => v >= 60, signal: "green" },
+      { text: "40–60% → neutral, be selective", active: v => v >= 40 && v < 60, signal: "yellow" },
+      { text: "<40% → bad breadth, avoid chasing", active: v => v < 40, signal: "red" },
     ],
   },
   {
     label: "SMA50 ↑",
     desc: "% of stocks above 50-day MA",
     lines: [
-      { text: "≥60% → bull momentum healthy", active: v => v >= 60 },
-      { text: "40–60% → borderline, buy leaders only", active: v => v >= 40 && v < 60 },
-      { text: "<40% → weak market internals", active: v => v < 40 },
+      { text: "≥60% → bull momentum healthy", active: v => v >= 60, signal: "green" },
+      { text: "40–60% → borderline, buy leaders only", active: v => v >= 40 && v < 60, signal: "yellow" },
+      { text: "<40% → weak market internals", active: v => v < 40, signal: "red" },
     ],
   },
   {
     label: "SMA200 ↑",
     desc: "% of stocks above 200-day MA",
     lines: [
-      { text: "≥60% → long-term bull structure", active: v => v >= 60 },
-      { text: "50–60% → caution zone", active: v => v >= 50 && v < 60 },
-      { text: "<50% → majority in downtrend", active: v => v < 50 },
+      { text: "≥60% → long-term bull structure", active: v => v >= 60, signal: "green" },
+      { text: "50–60% → caution zone", active: v => v >= 50 && v < 60, signal: "yellow" },
+      { text: "<50% → majority in downtrend", active: v => v < 50, signal: "red" },
     ],
   },
   {
@@ -2294,44 +2294,44 @@ const INTERNALS_NOTES = [
     desc: "Stocks making 52-week highs",
     lines: [
       { text: "More highs = stronger bull momentum" },
-      { text: "Healthy: Hi/Lo ratio >5", active: v => v > 5 },
+      { text: "Healthy: Hi/Lo ratio >5", active: v => v > 5, signal: "green" },
     ],
   },
   {
     label: "52W Lo",
     desc: "Stocks making 52-week lows",
     lines: [
-      { text: "Low number = limited panic", active: v => v < 50 },
-      { text: "Sudden spike in Lo → market breakdown", active: v => v >= 100 },
+      { text: "Low number = limited panic", active: v => v < 50, signal: "green" },
+      { text: "Sudden spike in Lo → market breakdown", active: v => v >= 100, signal: "red" },
     ],
   },
   {
     label: "TICK",
     desc: "NYSE intraday upticks minus downticks",
     lines: [
-      { text: ">+800 → institutional buying, very strong", active: v => v > 800 },
-      { text: "+200 to +800 → bullish", active: v => v >= 200 && v <= 800 },
-      { text: "-200 to +200 → neutral", active: v => v > -200 && v < 200 },
-      { text: "<-800 → panic selling", active: v => v < -800 },
+      { text: ">+800 → institutional buying, very strong", active: v => v > 800, signal: "green" },
+      { text: "+200 to +800 → bullish", active: v => v >= 200 && v <= 800, signal: "green" },
+      { text: "-200 to +200 → neutral", active: v => v > -200 && v < 200, signal: "yellow" },
+      { text: "<-800 → panic selling", active: v => v < -800, signal: "red" },
     ],
   },
   {
     label: "TRIN",
     desc: "Arms Index — volume-weighted adv/dec ratio",
     lines: [
-      { text: "<0.7 → volume in advancing stocks → Buy", active: v => v < 0.7 },
-      { text: "0.7–1.3 → neutral", active: v => v >= 0.7 && v <= 1.3 },
-      { text: ">1.3 → volume in declining stocks → Sell", active: v => v > 1.3 && v <= 2.0 },
-      { text: ">2.0 → extreme panic, oversold bounce possible", active: v => v > 2.0 },
+      { text: "<0.7 → volume in advancing stocks → Buy", active: v => v < 0.7, signal: "green" },
+      { text: "0.7–1.3 → neutral", active: v => v >= 0.7 && v <= 1.3, signal: "yellow" },
+      { text: ">1.3 → volume in declining stocks → Sell", active: v => v > 1.3 && v <= 2.0, signal: "red" },
+      { text: ">2.0 → extreme panic, oversold bounce possible", active: v => v > 2.0, signal: "red" },
     ],
   },
   {
     label: "T2108",
     desc: "% of stocks above 40-day MA (Worden)",
     lines: [
-      { text: "<20% → oversold, look for bounce", active: v => v < 20 },
-      { text: "20–70% → normal range", active: v => v >= 20 && v <= 70 },
-      { text: ">70% → overbought, watch for pullback", active: v => v > 70 },
+      { text: "<20% → oversold, look for bounce", active: v => v < 20, signal: "yellow" },
+      { text: "20–70% → normal range", active: v => v >= 20 && v <= 70, signal: "green" },
+      { text: ">70% → overbought, watch for pullback", active: v => v > 70, signal: "red" },
     ],
   },
 ];
@@ -2383,9 +2383,9 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
             {adv_dec ? (
               <span className="font-mono font-semibold">
                 <span className="text-emerald-300">{adv_dec.adv_pct?.toFixed(1)}%</span>
-                <span className="text-zinc-500"> ({adv_dec.advancing}) / </span>
+                <span className="text-emerald-300"> ({adv_dec.advancing}) / </span>
                 <span className="text-red-300">{adv_dec.dec_pct?.toFixed(1)}%</span>
-                <span className="text-zinc-500"> ({adv_dec.declining})</span>
+                <span className="text-red-300"> ({adv_dec.declining})</span>
               </span>
             ) : <span className={`font-mono font-semibold ${advCls}`}>—</span>}
           </div>
@@ -2433,22 +2433,31 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
               const { raw, display } = noteVals[n.label] || {};
               return (
                 <div key={n.label} className="border-b border-zinc-800/40 pb-1.5 last:border-0 last:pb-0">
-                  <div className="flex items-baseline justify-between mb-0.5">
-                    <span className="text-[10px] font-semibold text-zinc-200">{n.label}</span>
-                    {display != null && <span className="text-[9px] font-mono text-amber-300">{display}</span>}
-                  </div>
-                  <ul className="space-y-0.5">
-                    {n.lines.map((l, i) => {
-                      const isActive = raw != null && l.active && l.active(raw);
-                      return (
-                        <li key={i} className={`text-[9px] leading-snug pl-1 before:content-['·'] before:mr-1 ${
-                          isActive
-                            ? "text-white font-semibold before:text-amber-400"
-                            : "text-zinc-500 before:text-zinc-700"
-                        }`}>{l.text}</li>
-                      );
-                    })}
-                  </ul>
+                  {(() => {
+                    const activeLine = raw != null ? n.lines.find(l => l.active && l.active(raw)) : null;
+                    const sig = activeLine?.signal;
+                    const sigCls = sig === "green" ? "text-emerald-400" : sig === "yellow" ? "text-amber-400" : sig === "red" ? "text-red-400" : "text-zinc-500";
+                    const dotCls = sig === "green" ? "before:text-emerald-400" : sig === "yellow" ? "before:text-amber-400" : sig === "red" ? "before:text-red-400" : "before:text-amber-400";
+                    return (
+                      <>
+                      <div className="flex items-baseline justify-between mb-0.5">
+                        <span className="text-[10px] font-semibold text-zinc-200">{n.label}</span>
+                        {display != null && <span className={`text-[9px] font-mono ${sigCls}`}>{display}</span>}
+                      </div>
+                      <ul className="space-y-0.5">
+                        {n.lines.map((l, i) => {
+                          const isActive = raw != null && l.active && l.active(raw);
+                          const lineDot = isActive ? dotCls : "before:text-zinc-700";
+                          return (
+                            <li key={i} className={`text-[9px] leading-snug pl-1 before:content-['·'] before:mr-1 ${
+                              isActive ? `font-semibold ${sigCls} ${lineDot}` : "text-zinc-500 before:text-zinc-700"
+                            }`}>{l.text}</li>
+                          );
+                        })}
+                      </ul>
+                      </>
+                    );
+                  })()}
                 </div>
               );
             });
