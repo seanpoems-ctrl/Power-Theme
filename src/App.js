@@ -394,7 +394,7 @@ const MarketCondition = ({ mc }) => {
         </div>
         <div className="flex justify-between items-baseline mb-1">
           <span className="text-[13px] font-bold text-emerald-300">{leftPct.toFixed(1)}%{leftCount != null ? ` (${leftCount})` : ""}</span>
-          <span className="text-[13px] font-bold text-red-300">{rightPct.toFixed(1)}%{rightCount != null ? ` (${rightCount})` : ""}</span>
+          <span className="text-[13px] font-bold text-red-500">{rightPct.toFixed(1)}%{rightCount != null ? ` (${rightCount})` : ""}</span>
         </div>
         <div className="flex gap-0.5 h-1.5 rounded-full overflow-hidden">
           <div className="bg-emerald-500 rounded-l-full transition-all" style={{ width: `${leftPct}%` }}/>
