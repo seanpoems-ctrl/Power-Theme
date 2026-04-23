@@ -7088,11 +7088,12 @@ export default function App() {
         .then(r => r.ok ? r.json() : null)
         .catch(() => null);
 
+    const v = Date.now();
     Promise.all([
-      safeFetch("ibkr_themes.json"),
-      safeFetch("earnings_calendar.json"),
-      safeFetch("econ_calendar.json"),
-      safeFetch("market_internals.json"),
+      safeFetch(`ibkr_themes.json?v=${v}`),
+      safeFetch(`earnings_calendar.json?v=${v}`),
+      safeFetch(`econ_calendar.json?v=${v}`),
+      safeFetch(`market_internals.json?v=${v}`),
     ]).then(([ibkrThemes, earnings, econ, internals]) => {
       setIbkrThemesData(ibkrThemes);
       setEarningsData(earnings);
