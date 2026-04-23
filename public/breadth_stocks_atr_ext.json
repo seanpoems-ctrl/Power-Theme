@@ -2,34 +2,24 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 2,
+  "count": 1,
   "stocks": [
     {
-      "ticker": "AKAN",
-      "company": "Akanda Corp.",
-      "industry": "Agricultural Commodities/Milling",
-      "price": 10.21,
-      "change_pct": 214.15,
-      "adr_pct": 10.1,
-      "market_cap_b": 0.002,
-      "atr_ext_val": 21.28
-    },
-    {
-      "ticker": "TORO",
-      "company": "Toro Corp.",
-      "industry": "Marine Shipping",
-      "price": 6.75,
-      "change_pct": 72.76,
-      "adr_pct": 6.9,
-      "market_cap_b": 0.195,
-      "atr_ext_val": 10.6
+      "ticker": "SKLZ",
+      "company": "Skillz Inc.",
+      "industry": "Data Processing Services",
+      "price": 12.45,
+      "change_pct": 238.32,
+      "adr_pct": 12.0,
+      "market_cap_b": 0.057,
+      "atr_ext_val": 19.82
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 1.05,
-    "spx_1m": 8.87,
-    "spx_3m": 3.25,
-    "spx_34d": 4.5
+    "spx_1d": -0.41,
+    "spx_1m": 7.84,
+    "spx_3m": 2.79,
+    "spx_34d": 5.47
   },
-  "fetched_at_utc": "2026-04-22T21:40:53+00:00"
+  "fetched_at_utc": "2026-04-23T21:38:46+00:00"
 }
