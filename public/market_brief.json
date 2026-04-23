@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 22, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 23, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -11,13 +11,13 @@
     {
       "label": "Nasdaq 100",
       "price": 26937.28,
-      "change": 457.8,
+      "change": 457.81,
       "change_pct": 1.73
     },
     {
       "label": "VIX",
-      "price": 18.92,
-      "change": -0.58,
+      "price": 19.31,
+      "change": 0.39,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 59349.17,
-      "change_pct": 0.89
+      "price": 59140.23,
+      "change_pct": -0.75
     },
     "dax": {
       "label": "DAX",
-      "price": 24194.9,
-      "change_pct": -0.31
+      "price": 24124.1,
+      "change_pct": -0.29
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10476.46,
-      "change_pct": -0.21
+      "price": 10403.11,
+      "change_pct": -0.7
     }
   },
   "macro_breadth": {
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech-led Rally / Broad Strength",
+  "mood": "Tech-Led US Strength, Global Weakness",
   "analysis": {
-    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 gaining +0.89% while European indices like the DAX and FTSE 100 saw minor declines of -0.31% and -0.21% respectively. Despite the European softness, the US market demonstrated strong upward momentum, particularly in tech, with the Nasdaq 100 soaring +1.73%. While high-yield credit spreads remain an unknown, US market breadth indicators S5FI at 62.8% and MMTH at 60.9% signal healthy participation, confirming a constructive internal market structure for equity gains.",
-    "analysis_para2": "With the S&P 500 closing at 7137.90 and the Nasdaq 100 at 26937.28, the immediate plan is to monitor for continued follow-through above these levels. A sustained push with breadth remaining above 60% (S5FI/MMTH) would confirm the current upward trend. Key support for the S&P 500 could be considered at the 7100 level, while the Nasdaq 100 should ideally hold above 26800 to maintain its strong momentum. A failure to hold these supports or a sudden spike in the VIX above 20 would necessitate a re-evaluation of risk positioning.",
-    "technical_signal": "No reversal pattern confirmed yet. The market's strong close and positive breadth suggest continuation rather than an immediate top.",
+    "analysis_para1": "Global markets are broadly lower this morning, with the Nikkei 225 down -0.75%, the DAX -0.29%, and the FTSE 100 -0.70%, signaling persistent international headwinds. While US credit conditions remain uncertain with the BAML HY Spread unavailable, underlying US market breadth shows resilience, with 62.8% of stocks above their 50-day moving average (S5FI) and 60.9% above their 200-day moving average (MMTH). This robust internal health, coupled with a normal VIX at 19.31, suggests a domestic market capable of shrugging off global malaise.",
+    "analysis_para2": "Anticipate a significant gap-up open for US indices, with the S&P 500 up +1.05% and the Nasdaq 100 leading with a +1.73% gain in the pre-market. The mechanical plan for today involves monitoring the opening range for signs of sustained buying pressure, particularly if the Nasdaq 100 can hold above its opening print. For bullish continuation, look for leading stocks to consolidate early gains or extend higher, while a failure to hold the gap or a swift fill of the opening gap could signal profit-taking. Focus on high relative strength names in leading sectors to capitalize on this momentum.",
+    "technical_signal": "No reversal pattern confirmed yet. The market is showing strong positive momentum pre-market, suggesting a bullish continuation rather than a reversal at this time.",
     "ticker_intel": [
-      {
-        "ticker": "AXTI",
-        "company": "AXT Inc",
-        "grade": "A+",
-        "reason": "AXT Inc. stands out with an RS of 99 and a staggering 3-month return of +250.2%, indicating robust demand in the leading Semiconductor theme amid a tech-led rally."
-      },
       {
         "ticker": "AEHR",
         "company": "Aehr Test Systems",
-        "grade": "A",
-        "reason": "Aehr Test Systems demonstrates exceptional momentum with an RS of 98 and a 1-month return of +171.5%, signaling strong outperformance within the active Semiconductor sector."
+        "grade": "A+",
+        "reason": "With RS=98 and a staggering 1M return of +162.1%, this semiconductor stock demonstrates exceptional momentum, aligning perfectly with today's tech-led bullish market."
       },
       {
-        "ticker": "VELO",
-        "company": "Velo3D Inc",
+        "ticker": "AXTI",
+        "company": "AXT Inc",
+        "grade": "A",
+        "reason": "Boasting an RS=99 and a 1M return of +34.9%, AXTI is a top-tier semiconductor leader showing sustained outperformance crucial for a high-momentum trading environment."
+      },
+      {
+        "ticker": "PARR",
+        "company": "Par Pacific Holdings Inc",
         "grade": "C",
-        "reason": "Velo3D Inc., despite a recent +30.6% 1-month gain and an RS of 98, shows underlying weakness with a -20.3% 3-month return, suggesting an inconsistent trend susceptible to reversal."
+        "reason": "Despite an RS=96, PARR's comparatively modest 1M return of +13.8% and its traditional energy theme make it a potential laggard in a market primarily driven by tech sector strength."
       }
     ]
   }
