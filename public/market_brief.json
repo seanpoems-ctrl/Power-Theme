@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 23, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 24, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -10,14 +10,14 @@
     },
     {
       "label": "Nasdaq 100",
-      "price": 26782.62,
+      "price": 26782.63,
       "change": -154.65,
       "change_pct": -0.57
     },
     {
       "label": "VIX",
-      "price": 19.31,
-      "change": 0.39,
+      "price": 18.78,
+      "change": -0.53,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 59585.86,
-      "change_pct": 0.4
+      "price": 59716.18,
+      "change_pct": 0.97
     },
     "dax": {
       "label": "DAX",
-      "price": 24155.45,
-      "change_pct": -0.16
+      "price": 24179.76,
+      "change_pct": 0.1
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10457.01,
-      "change_pct": -0.19
+      "price": 10418.16,
+      "change_pct": -0.37
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 60.7,
-    "mmth": 58.9,
+    "s5fi": 60.9,
+    "mmth": 59.1,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Minor US pull-back, breadth stable.",
+  "mood": "Slight Risk-Off, US Weakness",
   "analysis": {
-    "analysis_para1": "Global markets displayed a mixed performance today, with European indices (DAX -0.16%, FTSE 100 -0.19%) slightly dipping, while the Nikkei 225 posted a moderate gain of +0.40%. In the US, major indices experienced minor pullbacks, with the S&P 500 down -0.41% and the Nasdaq 100 retreating -0.57%. Despite the daily retreat, underlying market breadth remains healthy, indicated by 60.7% of stocks trading above their 50-day moving average (S5FI) and 58.9% above their 200-day moving average (MMTH). The 10-year yield remained stable at 4.32%, and with the BAML HY Spread data unavailable, there are no immediate credit market concerns influencing sentiment.",
-    "analysis_para2": "Given today's minor index pullbacks, the mechanical plan is to monitor for stabilization around key short-term moving averages. A decisive reclaim of previous day's highs or a strong bounce off the 8-day exponential moving average would signal a continuation of the upward trend. Conversely, a sustained break below today's lows should warrant increased caution, potentially signaling a deeper, albeit healthy, consolidation. Traders should maintain focus on accumulating positions within leading themes, particularly the high-growth Semiconductors and Hardware sectors, which continue to exhibit exceptional relative strength. Look for individual setups that are either breaking out on volume or forming tight, high-volume consolidations.",
-    "technical_signal": "No reversal pattern confirmed yet. The minor daily pullback occurred with normal VIX levels and healthy underlying breadth.",
+    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 gaining +0.97% and the DAX up +0.10%, while the FTSE 100 declined by -0.37%. In the US, major indices like the S&P 500 and Nasdaq 100 are pointing lower, down -0.41% and -0.57% respectively. While specific credit regime data remains unavailable, market breadth metrics show 60.9% of S&P 500 stocks above their 50-day moving average and 59.1% above their 200-day, indicating underlying resilience despite the current pre-market dip.",
+    "analysis_para2": "Traders should closely monitor the S&P 500 for a potential hold above the 7100 level and the Nasdaq 100 for support near 26700 as initial price action develops. A decisive break below these points on increased volume would signal further downside potential for the day. Conversely, a reversal higher from these levels, especially if accompanied by a stable VIX at 18.78, could suggest an intraday bounce. Given the pre-market weakness, prioritizing strong relative strength names from leading sectors is prudent.",
+    "technical_signal": "No reversal pattern confirmed yet. The pre-market decline in US indices does not currently show signs of immediate capitulation or reversal.",
     "ticker_intel": [
       {
         "ticker": "AEHR",
         "company": "Aehr Test Systems",
         "grade": "A+",
-        "reason": "Aehr Test Systems (AEHR) earns an A+ for its exceptional relative strength of 98, demonstrating a parabolic 1-month return of +162.1% within the leading Semiconductors theme, signaling explosive momentum."
+        "reason": "AEHR leads the robust Semiconductor theme with an exceptional RS of 98 and a staggering +143.7% return over the past month, demonstrating unparalleled momentum in the current environment."
       },
       {
-        "ticker": "AXTI",
-        "company": "AXT Inc",
+        "ticker": "TRT",
+        "company": "Trio-Tech International",
         "grade": "A",
-        "reason": "AXT Inc (AXTI) secures an A grade with a top-tier RS of 99 and an outstanding 3-month return of +339.5%, indicating sustained leadership and high-momentum in the Semiconductors sector."
+        "reason": "TRT showcases strong leadership in the Semiconductor theme with an RS of 98 and a robust +128.2% monthly gain, positioning it as a top performer amidst sector strength."
       },
       {
-        "ticker": "PARR",
-        "company": "Par Pacific Holdings Inc",
+        "ticker": "TSEM",
+        "company": "Tower Semiconductor Ltd",
         "grade": "C",
-        "reason": "Par Pacific Holdings Inc (PARR) receives a C grade due to its comparatively lower 1-month return of +13.8% despite a strong RS of 96, suggesting it may be a relative laggard within less dominant themes compared to current market leaders."
+        "reason": "Despite a strong RS of 98, TSEM's comparatively low +11.3% 1-month return lags significantly behind its semiconductor peers, indicating weaker short-term momentum in a highly competitive sector."
       }
     ]
   }
