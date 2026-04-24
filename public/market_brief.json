@@ -1,30 +1,30 @@
 {
-  "generated_at": "April 24, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "April 24, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7108.4,
-      "change": -29.5,
-      "change_pct": -0.41
+      "price": 7165.08,
+      "change": 56.68,
+      "change_pct": 0.8
     },
     {
       "label": "Nasdaq 100",
-      "price": 26782.63,
-      "change": -154.65,
-      "change_pct": -0.57
+      "price": 27303.67,
+      "change": 521.04,
+      "change_pct": 1.95
     },
     {
       "label": "VIX",
-      "price": 18.78,
-      "change": -0.53,
+      "price": 18.71,
+      "change": -0.6,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.32,
-      "change": 0.03,
+      "price": 4.31,
+      "change": -0.01,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 59716.18,
-      "change_pct": 0.97
+      "price": 59140.23,
+      "change_pct": -0.75
     },
     "dax": {
       "label": "DAX",
-      "price": 24179.76,
-      "change_pct": 0.1
+      "price": 24128.98,
+      "change_pct": -0.11
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10418.16,
-      "change_pct": -0.37
+      "price": 10379.08,
+      "change_pct": -0.75
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 60.9,
-    "mmth": 59.1,
+    "s5fi": 58.7,
+    "mmth": 58.9,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Slight Risk-Off, US Weakness",
+  "mood": "US Tech-Led Rally, Global Weakness",
   "analysis": {
-    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 gaining +0.97% and the DAX up +0.10%, while the FTSE 100 declined by -0.37%. In the US, major indices like the S&P 500 and Nasdaq 100 are pointing lower, down -0.41% and -0.57% respectively. While specific credit regime data remains unavailable, market breadth metrics show 60.9% of S&P 500 stocks above their 50-day moving average and 59.1% above their 200-day, indicating underlying resilience despite the current pre-market dip.",
-    "analysis_para2": "Traders should closely monitor the S&P 500 for a potential hold above the 7100 level and the Nasdaq 100 for support near 26700 as initial price action develops. A decisive break below these points on increased volume would signal further downside potential for the day. Conversely, a reversal higher from these levels, especially if accompanied by a stable VIX at 18.78, could suggest an intraday bounce. Given the pre-market weakness, prioritizing strong relative strength names from leading sectors is prudent.",
-    "technical_signal": "No reversal pattern confirmed yet. The pre-market decline in US indices does not currently show signs of immediate capitulation or reversal.",
+    "analysis_para1": "Today's session showcased a clear divergence between US markets and their global counterparts. While the Nikkei 225, DAX, and FTSE 100 all posted declines of -0.75%, -0.11%, and -0.75% respectively, US indices surged higher, with the Nasdaq 100 leading the charge with a +1.95% gain. Market breadth indicators remained constructive, with 58.7% of S&P 500 stocks above their 50-day moving average and 58.9% above their 200-day moving average, signaling healthy underlying momentum. The BAML HY Spread data was unavailable, leaving the credit regime status unknown, but the VIX at 18.71 suggests normal volatility.",
+    "analysis_para2": "The mechanical plan for upcoming sessions involves monitoring the leadership in Semiconductor and Hardware themes, which dominated today's thematic scanner. For the S&P 500 at 7165.08, defending the 5-day moving average and the 7100 level will be crucial for sustained upside. A continued VIX below 20 would support risk-on behavior, despite global headwinds. Should the Nasdaq 100 (27303.67) maintain its strong upward momentum, dips within its leading components offer potential entry points. Maintain strict risk management, especially given the divergence from international markets, and watch for any deterioration in US breadth below 50% for signs of internal weakness.",
+    "technical_signal": "No reversal pattern confirmed yet. Today's strong closes in major US indices, particularly the Nasdaq 100, indicate continued upward momentum.",
     "ticker_intel": [
       {
         "ticker": "AEHR",
         "company": "Aehr Test Systems",
         "grade": "A+",
-        "reason": "AEHR leads the robust Semiconductor theme with an exceptional RS of 98 and a staggering +143.7% return over the past month, demonstrating unparalleled momentum in the current environment."
+        "reason": "Aehr Test Systems shows exceptional relative strength (RS=98) and an explosive 1-month gain of +143.7%, positioning it as a top leader in the dominant Semiconductors theme amidst the current tech-led rally."
       },
       {
         "ticker": "TRT",
         "company": "Trio-Tech International",
         "grade": "A",
-        "reason": "TRT showcases strong leadership in the Semiconductor theme with an RS of 98 and a robust +128.2% monthly gain, positioning it as a top performer amidst sector strength."
+        "reason": "Trio-Tech International exhibits strong relative strength (RS=98) and a remarkable +128.2% 1-month return, highlighting its robust momentum within the leading Semiconductors sector."
       },
       {
         "ticker": "TSEM",
         "company": "Tower Semiconductor Ltd",
         "grade": "C",
-        "reason": "Despite a strong RS of 98, TSEM's comparatively low +11.3% 1-month return lags significantly behind its semiconductor peers, indicating weaker short-term momentum in a highly competitive sector."
+        "reason": "Despite a high relative strength (RS=98), Tower Semiconductor's comparatively muted +11.3% 1-month return among its semiconductor peers suggests it may be lagging the strongest momentum plays, making it a less compelling candidate for aggressive allocation in the current environment."
       }
     ]
   }
