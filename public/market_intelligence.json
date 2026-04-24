@@ -1,90 +1,90 @@
 {
-  "generated_at": "2026-04-24 08:05 ET",
-  "phase": "PRE",
-  "session": "Pre-Market",
+  "generated_at": "2026-04-24 17:05 ET",
+  "phase": "POST",
+  "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 708.45,
-      "open": 709.5,
-      "high": 712.36,
-      "low": 702.28,
-      "close": 708.45,
-      "prev_open": 709.15,
-      "prev_close": 711.21,
-      "volume": 56047300,
-      "change_pct": -0.39
+      "price": 713.94,
+      "open": 710.75,
+      "high": 714.47,
+      "low": 709.01,
+      "close": 713.94,
+      "prev_open": 709.5,
+      "prev_close": 708.45,
+      "volume": 44463821,
+      "change_pct": 0.77
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 651.42,
-      "open": 653.55,
-      "high": 656.92,
-      "low": 645.52,
-      "close": 651.42,
-      "prev_open": 650.15,
-      "prev_close": 655.11,
-      "volume": 39722800,
-      "change_pct": -0.56
+      "price": 663.88,
+      "open": 658.47,
+      "high": 664.51,
+      "low": 656.53,
+      "close": 663.88,
+      "prev_open": 653.55,
+      "prev_close": 651.42,
+      "volume": 42442578,
+      "change_pct": 1.91
     },
     "^VIX": {
       "label": "VIX",
-      "price": 18.79,
+      "price": 18.71,
       "open": 18.89,
-      "high": 19.33,
+      "high": 19.35,
       "low": 18.46,
-      "close": 18.79,
+      "close": 18.71,
       "prev_open": 19.42,
       "prev_close": 19.31,
       "volume": 0,
-      "change_pct": -2.69
+      "change_pct": -3.11
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 94.76,
+      "price": 94.9,
       "open": 96.62,
       "high": 97.85,
-      "low": 93.63,
-      "close": 94.76,
+      "low": 92.68,
+      "close": 94.9,
       "prev_open": 92.9,
       "prev_close": 95.85,
-      "volume": 102071,
-      "change_pct": -1.14
+      "volume": 306354,
+      "change_pct": -0.99
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 59716.18,
-      "open": 59407.44,
-      "high": 59763.68,
-      "low": 59225.37,
-      "close": 59716.18,
-      "prev_open": 59758.64,
-      "prev_close": 59140.23,
-      "volume": 0,
-      "change_pct": 0.97
+      "price": 59140.23,
+      "open": 59758.64,
+      "high": 60013.98,
+      "low": 58621.48,
+      "close": 59140.23,
+      "prev_open": 59104.11,
+      "prev_close": 59585.86,
+      "volume": 165300000,
+      "change_pct": -0.75
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24177.48,
+      "price": 24128.98,
       "open": 24217.7,
       "high": 24330.62,
       "low": 23998.07,
-      "close": 24177.48,
+      "close": 24128.98,
       "prev_open": 24076.7,
       "prev_close": 24155.45,
       "volume": 0,
-      "change_pct": 0.09
+      "change_pct": -0.11
     }
   },
   "fred": {
-    "hy_oas": 2.84,
+    "hy_oas": 2.86,
     "yield_curve": 0.51,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 60.9,
-    "mmth": 59.1
+    "s5fi": 58.9,
+    "mmth": 59.0
   },
   "regime": {
     "credit_status": "Complacent",
@@ -98,34 +98,34 @@
     }
   },
   "analysis": {
-    "title": "Pre-Market Brief: April 24, 2026",
-    "mood_emoji": "🤔",
-    "mood": "Cautious Pullback / Complacent Credit",
-    "narrative": "US equities are showing a pre-market pullback, with tech leading losses, yet global markets largely held steady. Despite the dip, credit spreads remain tight, indicating institutional complacency regarding near-term risk.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 708.45 | -0.39% | ➡️ |\n| Nasdaq 100 ETF | 651.42 | -0.56% | 📉 |\n| VIX | 18.79 | -2.69% | 📉 |\n| Crude Oil | 94.76 | -1.14% | 📉 |\n| Nikkei 225 | 59716.18 | +0.97% | 📈 |\n| DAX | 24177.48 | +0.09% | ➡️ |",
-    "macro_section": "High Yield Credit Spreads (BAMLH0A0HYM2) remain at a complacent 2.84%, signaling robust institutional risk appetite despite recent equity softness. Concurrently, the 10Y-2Y yield curve (T10Y2Y) sits at a normal/steepening +0.510, typically reflective of a healthy economic outlook or expectations for future growth, reinforcing the complacent credit environment.",
-    "analysis_para1": "Despite a modest pre-market pullback in US equity futures, global markets present a mixed picture with Asian and European resilience. The Nikkei 225 climbed +0.97% and the DAX registered a slight gain of +0.09%, suggesting a contained regional risk-off sentiment. Crude Oil, however, dipped by -1.14% to $94.76, possibly reflecting demand concerns or a broader commodity cooling. This mixed global tape, coupled with US High Yield Credit Spreads (BAMLH0A0HYM2) holding at a complacent 2.84%, implies that while US equities are seeing some profit-taking, institutional credit markets are not yet pricing in widespread US risk aversion.",
-    "analysis_para2": "Today's primary flow appears driven by mechanical positioning and a mild de-risking sentiment rather than a distinct macro catalyst. With no major economic data scheduled pre-market, the observed pullback in US equity futures, especially in tech, likely reflects pre-weekend profit-taking or sector rotation following recent gains. The concurrent drop in the VIX by -2.69% to 18.79 further suggests this is an orderly unwinding of positions, not a panic-driven sell-off, indicating a controlled rebalancing of risk exposures.",
-    "analysis_para3": "Traders should monitor key support levels closely today, particularly for the S&P 500 ETF (SPY equivalent) around the 705-707 range, which could act as a bounce zone if the pullback extends. A break below 705 could signal further downside towards 700. For long entries, look for confirmation of support hold above 707 and a reclaim of 710, targeting a reversal of the morning weakness. Conversely, short opportunities could arise on failed rallies back to 710, with a risk-off threshold set if the S&P 500 ETF decisively breaks below 700, potentially accelerating declines.",
-    "technical_signal": "No reversal pattern confirmed yet. The current pre-market weakness sees US indices testing minor support levels, but without significant volume or a clear candlestick pattern, confirmation of a trend change or bounce is pending. Watch for intraday retests of daily moving averages for potential turning points.",
+    "title": "Post-Market Brief: April 24, 2026",
+    "mood_emoji": "🚀",
+    "mood": "Tech Momentum Surge",
+    "narrative": "US equities soared today, led by a robust rally in technology stocks, even as global markets showed signs of caution. This surge was driven by strong corporate catalysts and a seemingly complacent credit environment.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 713.94 | +0.77% | 📈 |\n| Nasdaq 100 ETF | 663.88 | +1.91% | 📈 |\n| VIX | 18.71 | -3.11% | 📉 |\n| Crude Oil | 94.90 | -0.99% | 📉 |\n| Nikkei 225 | 59140.23 | -0.75% | 📉 |\n| DAX | 24128.98 | -0.11% | ➡️ |",
+    "macro_section": "The high-yield credit spread (BAMLH0A0HYM2) remains 'Complacent' at 2.86%, signaling institutional investors' continued comfort with risk-taking. Concurrently, the 10-year minus 2-year yield curve (T10Y2Y) stands at a 'Normal / Steepening' +0.510, suggesting a healthy economic outlook and further supporting a risk-on appetite for equities.",
+    "analysis_para1": "Despite a cautious global tape seeing the Nikkei 225 drop -0.75% and the DAX decline -0.11%, US equities exhibited significant decoupling today. Crude Oil also softened by -0.99%, hinting at broader global demand concerns. However, the domestic high-yield credit spread, holding at a 'Complacent' 2.86%, indicates that while international sentiment may be subdued, US institutional risk appetite remains robust, particularly for growth assets, allowing the S&P 500 and Nasdaq to climb confidently.",
+    "analysis_para2": "Today's primary market flow was unequivocally driven by a powerful mechanical catalyst: robust earnings momentum and strategic AI-related partnerships. Key gappers like INTC, following a significant 'Beat & Raise' report, and OKLO, announcing an impactful Nvidia Partnership, injected substantial capital into the technology sector. This confluence of strong corporate fundamentals and high-profile strategic alignments created a self-reinforcing buying frenzy, particularly benefiting the Nasdaq 100 with its impressive +1.91% gain.",
+    "analysis_para3": "Given the strong momentum, the actionable trading plan for now is to lean long on shallow pullbacks, particularly in high-beta tech. Traders should watch SPY 710 as immediate support and QQQ 660 as a key level for entry on any retest. A sustained break above today's highs could trigger further upside, while a clear risk-off threshold for caution would be a close below SPY 700 or QQQ 650, signaling potential exhaustion. Today, focus on identifying continuation plays among leading tech names.",
+    "technical_signal": "No reversal pattern confirmed yet. The market continues its bullish trajectory, with strong momentum indicated by rising indices and a declining VIX. Traders should monitor for any divergence in breadth or volume that could precede a shift, but current signals suggest continued upside bias.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "JNJ",
-          "company": "Johnson & Johnson",
-          "reason": "Johnson & Johnson announced surprisingly robust Q1 earnings and raised full-year guidance, driven by strong pharmaceutical sales and an optimistic outlook for its medical device segment."
+          "ticker": "INTC",
+          "company": "Intel Corporation",
+          "reason": "Intel, a major semiconductor player, demonstrated strong operational execution with its 'Beat & Raise' report, reinforcing its competitive position in a crucial sector."
         },
         {
-          "ticker": "AVGO",
-          "company": "Broadcom Inc.",
-          "reason": "Broadcom secured a multi-year, multi-billion dollar AI infrastructure supply deal with a major hyperscaler, significantly boosting its backlog and revenue projections."
+          "ticker": "OKLO",
+          "company": "Oklo Inc.",
+          "reason": "Oklo Inc., a small nuclear reactor company, surged on news of a strategic partnership with Nvidia, aligning it with the high-growth AI infrastructure theme."
         }
       ],
       "c_grade": [
         {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla continues to exhibit high volatility, primarily driven by technical trading flows and ongoing sentiment regarding EV demand, with no fresh material news catalyst today."
+          "ticker": "NVDA",
+          "company": "Nvidia Corporation",
+          "reason": "Nvidia Corporation continues to be a central topic for AI-driven investment flows, but today's interest is largely a continuation of existing narratives rather than fresh, specific news."
         }
       ]
     }
