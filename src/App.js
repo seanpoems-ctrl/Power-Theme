@@ -2241,6 +2241,7 @@ const PositionCalc = ({ ibkrThemesData }) => {
   }
 
   const dollarRisk = shares != null && riskUnit > 0 ? shares * riskUnit : null;
+  const positionValue = shares != null && e > 0 ? shares * e : null;
   const target2r = e > 0 && riskUnit > 0 ? e + 2 * riskUnit : null;
 
   const fmtPrice = v => v != null ? `$${v.toFixed(2)}` : '—';
@@ -2280,27 +2281,7 @@ const PositionCalc = ({ ibkrThemesData }) => {
         )}
       </div>
 
-      {/* Entry / ATR / Risk % */}
-      <div className="grid grid-cols-3 gap-1.5 mb-2">
-        <div><div className="text-[9px] text-zinc-600 mb-0.5">Entry</div>{numInput(entry, setEntry, '0.00')}</div>
-        <div><div className="text-[9px] text-zinc-600 mb-0.5">ATR-14</div>{numInput(atr, setAtr, '0.00')}</div>
-        <div><div className="text-[9px] text-zinc-600 mb-0.5">Risk %</div>{numInput(riskPct, setRiskPct, '1')}</div>
-      </div>
-
-      {/* Stop Strategy toggle */}
-      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-1.5">
-        <Tog active={stopStrategy === '3'} onClick={() => setStopStrategy('3')}>3-Stop</Tog>
-        <Tog active={stopStrategy === '2'} onClick={() => setStopStrategy('2')}>2-Stop</Tog>
-      </div>
-
-      {/* Stop Mode toggle */}
-      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-2">
-        <Tog active={stopMode === 'atr'} onClick={() => setStopMode('atr')}>ATR Auto</Tog>
-        <Tog active={stopMode === 'lod'} onClick={() => setStopMode('lod')}>LOD</Tog>
-        <Tog active={stopMode === 'manual'} onClick={() => setStopMode('manual')}>Manual</Tog>
-      </div>
-
-      {/* Ticker input — always visible; auto-fetches ATR-14 + LOD from Finnhub */}
+      {/* Ticker input — above Entry; auto-fetches ATR-14 + LOD from Finnhub */}
       <div className="flex items-center gap-2 mb-2">
         <span className="text-[10px] text-zinc-500 flex-shrink-0">Ticker</span>
         <input
@@ -2316,6 +2297,34 @@ const PositionCalc = ({ ibkrThemesData }) => {
             : lod != null ? <span className="text-amber-400">${lod.toFixed(2)}</span>
             : null}
         </span>
+      </div>
+
+      {/* Entry / ATR / Risk % */}
+      <div className="grid grid-cols-3 gap-1.5 mb-2">
+        <div>
+          <div className="text-[9px] text-zinc-600 mb-0.5">Entry</div>
+          {numInput(entry, setEntry, '0.00')}
+          <div className="text-[9px] text-zinc-500 mt-0.5 font-mono">{positionValue != null ? fmtDollar(positionValue) : <span className="text-zinc-700">—</span>}</div>
+        </div>
+        <div><div className="text-[9px] text-zinc-600 mb-0.5">ATR-14</div>{numInput(atr, setAtr, '0.00')}</div>
+        <div>
+          <div className="text-[9px] text-zinc-600 mb-0.5">Risk %</div>
+          {numInput(riskPct, setRiskPct, '1')}
+          <div className="text-[9px] text-red-400/80 mt-0.5 font-mono">{dollarRisk != null ? fmtDollar(dollarRisk) : <span className="text-zinc-700">—</span>}</div>
+        </div>
+      </div>
+
+      {/* Stop Strategy toggle */}
+      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-1.5">
+        <Tog active={stopStrategy === '3'} onClick={() => setStopStrategy('3')}>3-Stop</Tog>
+        <Tog active={stopStrategy === '2'} onClick={() => setStopStrategy('2')}>2-Stop</Tog>
+      </div>
+
+      {/* Stop Mode toggle */}
+      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-2">
+        <Tog active={stopMode === 'atr'} onClick={() => setStopMode('atr')}>ATR Auto</Tog>
+        <Tog active={stopMode === 'lod'} onClick={() => setStopMode('lod')}>LOD</Tog>
+        <Tog active={stopMode === 'manual'} onClick={() => setStopMode('manual')}>Manual</Tog>
       </div>
 
       {/* Manual stop price input */}
