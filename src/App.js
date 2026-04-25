@@ -2222,7 +2222,9 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
       const candleData = await candleRes.json().catch(() => null);
 
       const low = quoteData?.l;
+      const prevClose = quoteData?.pc;
       if (low != null && low > 0) setLod(parseFloat(low.toFixed(2)));
+      else if (prevClose != null && prevClose > 0) setLod(parseFloat(prevClose.toFixed(2)));
 
       if (candleData?.s === 'ok' && candleData.h?.length >= 15) {
         const { h, l, c } = candleData;
