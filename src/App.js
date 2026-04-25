@@ -2265,6 +2265,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
     }
   }
 
+  const maxLossBudget = effectiveEquity > 0 && r > 0 ? effectiveEquity * r / 100 : null;
   const dollarRisk = shares != null && riskUnit > 0 ? shares * riskUnit : null;
   const positionValue = shares != null && e > 0 ? shares * e : null;
 
@@ -2346,7 +2347,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
           {numInput(riskPct, setRiskPct, '1')}
           <div className="mt-0.5 leading-tight">
             <div className="text-[8px] text-zinc-600 uppercase tracking-wider">Max Loss</div>
-            <div className="text-[10px] font-mono font-bold text-red-400/90">{dollarRisk != null ? `−${fmtDollar(dollarRisk)}` : <span className="text-zinc-700">—</span>}</div>
+            <div className="text-[10px] font-mono font-bold text-red-400/90">{maxLossBudget != null ? `−${fmtDollar(maxLossBudget)}` : <span className="text-zinc-700">—</span>}</div>
           </div>
         </div>
       </div>
