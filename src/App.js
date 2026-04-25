@@ -2210,22 +2210,35 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
       return;
     }
 
-    // Fall back to Finnhub: quote (LOD) + metric (ATR-14) — both free tier
+    // Fall back to Finnhub quote (LOD) + Yahoo Finance via corsproxy (ATR-14)
     try {
-      const [quoteRes, metricRes] = await Promise.all([
+      const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${s}?range=30d&interval=1d`;
+      const [quoteRes, yahooRes] = await Promise.all([
         fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`),
-        fetch(`https://finnhub.io/api/v1/stock/metric?symbol=${s}&metric=all&token=${FINNHUB_KEY}`)
+        fetch(`https://corsproxy.io/?${encodeURIComponent(yahooUrl)}`)
       ]);
       const quoteData = await quoteRes.json();
-      const metricData = await metricRes.json().catch(() => null);
+      const yahooData = await yahooRes.json().catch(() => null);
 
       const low = quoteData?.l;
       const prevClose = quoteData?.pc;
       if (low != null && low > 0) setLod(parseFloat(low.toFixed(2)));
       else if (prevClose != null && prevClose > 0) setLod(parseFloat(prevClose.toFixed(2)));
 
-      const atrVal = metricData?.metric?.atrD;
-      if (atrVal != null && atrVal > 0) setAtr(parseFloat(atrVal).toFixed(2));
+      const q = yahooData?.chart?.result?.[0]?.indicators?.quote?.[0];
+      if (q?.high?.length >= 15) {
+        const { high: h, low: l, close: c } = q;
+        const trs = [];
+        for (let i = 1; i < h.length; i++) {
+          if (h[i] == null || l[i] == null || c[i - 1] == null) continue;
+          trs.push(Math.max(h[i] - l[i], Math.abs(h[i] - c[i - 1]), Math.abs(l[i] - c[i - 1])));
+        }
+        if (trs.length >= 14) {
+          let atr14 = trs.slice(0, 14).reduce((a, b) => a + b, 0) / 14;
+          for (let i = 14; i < trs.length; i++) atr14 = (atr14 * 13 + trs[i]) / 14;
+          setAtr(atr14.toFixed(2));
+        }
+      }
     } catch {
       // silent — leave ATR/LOD blank
     } finally {
