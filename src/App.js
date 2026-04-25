@@ -394,7 +394,7 @@ const MarketCondition = ({ mc }) => {
         </div>
         <div className="flex justify-between items-baseline mb-1">
           <span className="text-[13px] font-bold text-emerald-300">{leftPct.toFixed(1)}%{leftCount != null ? ` (${leftCount})` : ""}</span>
-          <span className="text-[13px] font-bold text-red-300">{rightPct.toFixed(1)}%{rightCount != null ? ` (${rightCount})` : ""}</span>
+          <span className="text-[13px] font-bold text-red-500">{rightPct.toFixed(1)}%{rightCount != null ? ` (${rightCount})` : ""}</span>
         </div>
         <div className="flex gap-0.5 h-1.5 rounded-full overflow-hidden">
           <div className="bg-emerald-500 rounded-l-full transition-all" style={{ width: `${leftPct}%` }}/>
@@ -2543,9 +2543,9 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
   const advPct = adv_dec ? (adv_dec.adv_pct ?? 0) : 0;
   const sma50pct = sma50_counts?.above_pct ?? 0;
   const sma200pct = sma200_counts?.above_pct ?? 0;
-  const advCls = advPct >= 60 ? "text-emerald-400" : advPct >= 40 ? "text-amber-400" : "text-red-400";
-  const sma50cls = sma50pct >= 60 ? "text-emerald-400" : sma50pct >= 40 ? "text-amber-400" : "text-red-400";
-  const sma200cls = sma200pct >= 60 ? "text-emerald-400" : sma200pct >= 40 ? "text-amber-400" : "text-red-400";
+  const advCls = advPct >= 60 ? "text-emerald-400" : advPct >= 40 ? "text-amber-400" : "text-red-500";
+  const sma50cls = sma50pct >= 60 ? "text-emerald-400" : sma50pct >= 40 ? "text-amber-400" : "text-red-500";
+  const sma200cls = sma200pct >= 60 ? "text-emerald-400" : sma200pct >= 40 ? "text-amber-400" : "text-red-500";
   const advBar = advPct >= 60 ? "bg-emerald-500" : advPct >= 40 ? "bg-amber-500" : "bg-red-500";
   const sma50bar = sma50pct >= 60 ? "bg-emerald-500" : sma50pct >= 40 ? "bg-amber-500" : "bg-red-500";
   const sma200bar = sma200pct >= 60 ? "bg-emerald-500" : sma200pct >= 40 ? "bg-amber-500" : "bg-red-500";
@@ -2582,9 +2582,10 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
             {adv_dec ? (
               <span className="font-mono font-semibold">
                 <span className="text-emerald-300">{adv_dec.adv_pct?.toFixed(1)}%</span>
-                <span className="text-emerald-300"> ({adv_dec.advancing}) / </span>
-                <span className="text-red-300">{adv_dec.dec_pct?.toFixed(1)}%</span>
-                <span className="text-red-300"> ({adv_dec.declining})</span>
+                <span className="text-emerald-300"> ({adv_dec.advancing})</span>
+                <span className="text-zinc-300"> / </span>
+                <span className="text-red-500">{adv_dec.dec_pct?.toFixed(1)}%</span>
+                <span className="text-red-500"> ({adv_dec.declining})</span>
               </span>
             ) : <span className={`font-mono font-semibold ${advCls}`}>—</span>}
           </div>
@@ -2603,12 +2604,12 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
           <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className="h-full bg-blue-500" style={{ width: `${Math.min(100, (newHigh / 500) * 100)}%` }}/></div>
         </div>
         <div>
-          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">52W Lo</span><span className="font-mono font-semibold text-red-400">{newLow}</span></div>
+          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">52W Lo</span><span className="font-mono font-semibold text-red-500">{newLow}</span></div>
           <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className="h-full bg-red-500" style={{ width: `${Math.min(100, (newLow / 500) * 100)}%` }}/></div>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 mt-2 pt-2 border-t border-zinc-800/60 text-[10px] font-mono">
-        <span className="text-zinc-500">TICK</span><span className={`text-right ${tick == null ? "text-zinc-600" : tick >= 0 ? "text-emerald-400" : "text-red-400"}`}>{tick == null ? "—" : (tick > 0 ? "+" : "") + tick}</span>
+        <span className="text-zinc-500">TICK</span><span className={`text-right ${tick == null ? "text-zinc-600" : tick >= 0 ? "text-emerald-400" : "text-red-500"}`}>{tick == null ? "—" : (tick > 0 ? "+" : "") + tick}</span>
         <span className="text-zinc-500">TRIN</span><span className="text-zinc-300 text-right">{trin == null ? "—" : `${trin.toFixed(2)} ${interpret("trin", trin)}`}</span>
         <span className="text-zinc-500">T2108</span><span className="text-zinc-300 text-right">{t2108 == null ? "—" : `${t2108.toFixed(2)} ${interpret("t2108", t2108)}`}</span>
       </div>
@@ -2705,12 +2706,23 @@ const LeadersAllThemesCard = ({ themes }) => {
         <div className="text-[10px] text-zinc-600 italic">No qualifiers</div>
       ) : (
         <div className="space-y-0.5">
-          {filtered.map(s => (
-            <div key={s.ticker} className="flex items-center justify-between text-[12px] py-1 border-b border-zinc-800/40 last:border-0">
-              <span className="font-bold text-blue-400 font-mono">{s.ticker}</span>
-              <span className="font-mono text-emerald-400 font-semibold">{s.rs_52w}</span>
-            </div>
-          ))}
+          <div className="flex items-center justify-between text-[9px] text-zinc-600 pb-0.5 mb-0.5 border-b border-zinc-800/60">
+            <span>Ticker · Price · Chg</span>
+            <span>RS</span>
+          </div>
+          {filtered.map(s => {
+            const chg = s.change_pct ?? s.perf_1d ?? null;
+            return (
+              <div key={s.ticker} className="flex items-center justify-between text-[12px] py-1 border-b border-zinc-800/40 last:border-0">
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="font-bold text-blue-400 font-mono">{s.ticker}</span>
+                  {s.price != null && <span className="text-[9px] font-mono text-zinc-500">${s.price.toFixed(2)}</span>}
+                  {chg != null && <span className={`text-[9px] font-mono font-bold ${chg >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>{chg >= 0 ? '+' : ''}{chg.toFixed(1)}%</span>}
+                </div>
+                <span className="font-mono text-emerald-400 font-semibold">{s.rs_52w}</span>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>
@@ -4901,8 +4913,8 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
                     <div className="flex items-baseline gap-1 text-[12px] font-mono font-semibold leading-none">
                       <span className="text-emerald-400">{lp.toFixed(1)}%</span>
                       {row.leftCount  != null && <span className="text-[9px] text-zinc-600">({row.leftCount})</span>}
-                      <span className="text-zinc-700 mx-0.5">/</span>
-                      <span className="text-red-400">{rp.toFixed(1)}%</span>
+                      <span className="text-zinc-300 mx-0.5">/</span>
+                      <span className="text-red-500">{rp.toFixed(1)}%</span>
                       {row.rightCount != null && <span className="text-[9px] text-zinc-600">({row.rightCount})</span>}
                     </div>
                     <div className="flex h-[4px] rounded-full overflow-hidden gap-px">
@@ -5091,6 +5103,12 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
 
       {/* Leaders list */}
       <div className="flex flex-col gap-0.5 mb-3">
+        {leaders.length > 0 && (
+          <div className="flex items-center justify-between text-[9px] text-zinc-600 pb-0.5 mb-0.5 border-b border-zinc-800/60">
+            <span>Ticker · Price · Chg</span>
+            <span>RS</span>
+          </div>
+        )}
         {leaders.length === 0 ? (
           <div className="text-[11px] text-zinc-600 py-2 text-center">No qualifying leaders</div>
         ) : leaders.map(({ ticker, rs, isPeer, price, gap_pct }) => {
@@ -7173,11 +7191,12 @@ export default function App() {
         .then(r => r.ok ? r.json() : null)
         .catch(() => null);
 
+    const v = Date.now();
     Promise.all([
-      safeFetch("ibkr_themes.json"),
-      safeFetch("earnings_calendar.json"),
-      safeFetch("econ_calendar.json"),
-      safeFetch("market_internals.json"),
+      safeFetch(`ibkr_themes.json?v=${v}`),
+      safeFetch(`earnings_calendar.json?v=${v}`),
+      safeFetch(`econ_calendar.json?v=${v}`),
+      safeFetch(`market_internals.json?v=${v}`),
     ]).then(([ibkrThemes, earnings, econ, internals]) => {
       setIbkrThemesData(ibkrThemes);
       setEarningsData(earnings);

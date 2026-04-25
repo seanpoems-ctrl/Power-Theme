@@ -2,13 +2,24 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 0,
-  "stocks": [],
+  "count": 1,
+  "stocks": [
+    {
+      "ticker": "MXL",
+      "company": "MaxLinear, Inc",
+      "industry": "Semiconductors",
+      "price": 60.32,
+      "change_pct": 76.12,
+      "adr_pct": 6.5,
+      "market_cap_b": 5.4,
+      "atr_ext_val": 11.69
+    }
+  ],
   "spx_benchmarks": {
-    "spx_1d": -0.63,
-    "spx_1m": 7.34,
-    "spx_3m": 2.74,
-    "spx_34d": 2.83
+    "spx_1d": 0.8,
+    "spx_1m": 10.62,
+    "spx_3m": 3.09,
+    "spx_34d": 5.43
   },
-  "fetched_at_utc": "2026-04-21T21:42:25+00:00"
+  "fetched_at_utc": "2026-04-24T21:40:16+00:00"
 }
