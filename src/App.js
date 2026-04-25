@@ -2210,34 +2210,24 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
       return;
     }
 
-    // Fall back to Finnhub (quote always works free; candle requires paid plan)
+    // Fall back to Finnhub: quote (LOD) + metric (ATR-14) — both free tier
     try {
-      const now = Math.floor(Date.now() / 1000);
-      const from = now - 60 * 86400;
-      const [quoteRes, candleRes] = await Promise.all([
+      const [quoteRes, metricRes] = await Promise.all([
         fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`),
-        fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${s}&resolution=D&from=${from}&to=${now}&token=${FINNHUB_KEY}`)
+        fetch(`https://finnhub.io/api/v1/stock/metric?symbol=${s}&metric=all&token=${FINNHUB_KEY}`)
       ]);
       const quoteData = await quoteRes.json();
-      const candleData = await candleRes.json().catch(() => null);
+      const metricData = await metricRes.json().catch(() => null);
 
       const low = quoteData?.l;
       const prevClose = quoteData?.pc;
       if (low != null && low > 0) setLod(parseFloat(low.toFixed(2)));
       else if (prevClose != null && prevClose > 0) setLod(parseFloat(prevClose.toFixed(2)));
 
-      if (candleData?.s === 'ok' && candleData.h?.length >= 15) {
-        const { h, l, c } = candleData;
-        const trs = [];
-        for (let i = 1; i < h.length; i++) {
-          trs.push(Math.max(h[i] - l[i], Math.abs(h[i] - c[i - 1]), Math.abs(l[i] - c[i - 1])));
-        }
-        let atr14 = trs.slice(0, 14).reduce((a, b) => a + b, 0) / 14;
-        for (let i = 14; i < trs.length; i++) atr14 = (atr14 * 13 + trs[i]) / 14;
-        setAtr(atr14.toFixed(2));
-      }
+      const atrVal = metricData?.metric?.atrD;
+      if (atrVal != null && atrVal > 0) setAtr(parseFloat(atrVal).toFixed(2));
     } catch {
-      setLodError(true);
+      // silent — leave ATR/LOD blank
     } finally {
       setLodLoading(false);
     }
