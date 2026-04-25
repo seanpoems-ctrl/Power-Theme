@@ -2223,7 +2223,6 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
 
       const low = quoteData?.l;
       if (low != null && low > 0) setLod(parseFloat(low.toFixed(2)));
-      else setLodError(true);
 
       if (candleData?.s === 'ok' && candleData.h?.length >= 15) {
         const { h, l, c } = candleData;
