@@ -949,6 +949,14 @@ const SubThemeStocksModal = ({ subthemeName, stocks, onClose }) => {
   );
 };
 
+const RS_MODES = [
+  { key: '1d',  label: '1D',  perfKey: 'perf_1d',  spyKey: null       },
+  { key: '1w',  label: '1W',  perfKey: 'perf_1w',  spyKey: 'perf_1w'  },
+  { key: '1m',  label: '1M',  perfKey: 'perf_1m',  spyKey: 'perf_1m'  },
+  { key: '3m',  label: '3M',  perfKey: 'perf_3m',  spyKey: 'perf_3m'  },
+  { key: '6m',  label: '6M',  perfKey: 'perf_6m',  spyKey: 'perf_6m'  },
+  { key: '52w', label: '52W', perfKey: 'rs_52w',   spyKey: null       },
+];
 
 const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, onViewChange, onThemeSelect }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
@@ -957,6 +965,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
   const [themeHover, setThemeHover] = useState(null); // { ticker, rect }
   const [themeStats, setThemeStats] = useState(null); // { themeName, anchorRect }
   const [subThemeModal, setSubThemeModal] = useState(null); // { subthemeName, stocks }
+  const [rsMode, setRsMode] = useState('52w');
 
   const activeData = view === "themes" ? finvizThemeRankings : themeRankings;
 
@@ -984,14 +993,23 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
   // Build theme name → avg rs_52w map from actual stock data
   const themeAvgRS = useMemo(() => {
     const map = {};
+    const mode = RS_MODES.find(m => m.key === rsMode) ?? RS_MODES[RS_MODES.length - 1];
+    const spyVal = mode.spyKey ? (spyBenchmarks?.[mode.spyKey] ?? null) : null;
     for (const theme of (themes || [])) {
       const norm = normalizeTheme(theme);
       const stocks = norm.subthemes.flatMap(s => s.stocks);
-      const vals = stocks.map(s => s.rs_52w).filter(v => v != null);
-      map[norm.name.toLowerCase()] = vals.length ? Math.round(vals.reduce((a, v) => a + v, 0) / vals.length) : null;
+      if (rsMode === '52w') {
+        const vals = stocks.map(s => s.rs_52w).filter(v => v != null);
+        map[norm.name.toLowerCase()] = vals.length ? Math.round(vals.reduce((a, v) => a + v, 0) / vals.length) : null;
+      } else {
+        const vals = stocks.map(s => s[mode.perfKey]).filter(v => v != null);
+        if (!vals.length) { map[norm.name.toLowerCase()] = null; continue; }
+        const avg = vals.reduce((a, v) => a + v, 0) / vals.length;
+        map[norm.name.toLowerCase()] = spyVal != null ? Math.round((avg - spyVal) * 10) / 10 : Math.round(avg * 10) / 10;
+      }
     }
     return map;
-  }, [themes]);
+  }, [themes, rsMode, spyBenchmarks]);
 
   const ranked = useMemo(() => {
     if (!activeData || !activeData.length) return [];
@@ -1098,7 +1116,24 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                 </>
               )}
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
-              <LBSortHeader k="rs_score" label="RS" w="w-14" />
+              <th onClick={e => handleLBSort('rs_score', e.shiftKey)}
+                className={`px-1 py-2 text-center cursor-pointer select-none w-14 ${sortPriority[0]?.key === 'rs_score' ? 'text-blue-400' : 'text-zinc-500 hover:text-zinc-300'}`}>
+                <div className="flex flex-col items-center gap-0.5">
+                  <span className="inline-flex items-center gap-0.5 text-[11px] font-semibold uppercase tracking-wider">
+                    RS
+                    {sortPriority[0]?.key === 'rs_score' && <span className="text-[9px] text-blue-400/70">①{sortPriority[0].direction === 'desc' ? '▼' : '▲'}</span>}
+                  </span>
+                  <div className="flex gap-0.5" onClick={e => e.stopPropagation()}>
+                    {RS_MODES.map(m => (
+                      <button key={m.key}
+                        onClick={() => { setRsMode(m.key); setSortPriority([{ key: 'rs_score', direction: 'desc' }]); }}
+                        className={`text-[8px] px-0.5 py-px rounded leading-none transition-colors ${rsMode === m.key ? 'bg-blue-500/30 text-blue-300' : 'text-zinc-600 hover:text-zinc-400'}`}>
+                        {m.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </th>
               {view === "themes" && (
                 <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap text-center">Source</th>
               )}
@@ -1212,8 +1247,13 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
                   {(() => {
                     const rsVal = themeAvgRS[t.name?.toLowerCase()];
-                    const cls = rsVal == null ? 'text-zinc-600' : rsVal >= 85 ? 'text-emerald-400' : 'text-red-400';
-                    return <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${cls}`}>{rsVal ?? '—'}</td>;
+                    const cls = rsVal == null ? 'text-zinc-600'
+                      : rsMode === '52w' ? (rsVal >= 85 ? 'text-emerald-400' : 'text-red-400')
+                      : (rsVal > 0 ? 'text-emerald-400' : rsVal < 0 ? 'text-red-400' : 'text-zinc-400');
+                    const display = rsVal == null ? '—'
+                      : rsMode === '52w' ? rsVal
+                      : (rsVal > 0 ? `+${rsVal}` : `${rsVal}`);
+                    return <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${cls}`}>{display}</td>;
                   })()}
                   {view === "themes" && (
                     <td className="px-1 py-1.5 text-center">
@@ -2201,6 +2241,7 @@ const PositionCalc = ({ ibkrThemesData }) => {
   }
 
   const dollarRisk = shares != null && riskUnit > 0 ? shares * riskUnit : null;
+  const positionValue = shares != null && e > 0 ? shares * e : null;
   const target2r = e > 0 && riskUnit > 0 ? e + 2 * riskUnit : null;
 
   const fmtPrice = v => v != null ? `$${v.toFixed(2)}` : '—';
@@ -2240,27 +2281,7 @@ const PositionCalc = ({ ibkrThemesData }) => {
         )}
       </div>
 
-      {/* Entry / ATR / Risk % */}
-      <div className="grid grid-cols-3 gap-1.5 mb-2">
-        <div><div className="text-[9px] text-zinc-600 mb-0.5">Entry</div>{numInput(entry, setEntry, '0.00')}</div>
-        <div><div className="text-[9px] text-zinc-600 mb-0.5">ATR-14</div>{numInput(atr, setAtr, '0.00')}</div>
-        <div><div className="text-[9px] text-zinc-600 mb-0.5">Risk %</div>{numInput(riskPct, setRiskPct, '1')}</div>
-      </div>
-
-      {/* Stop Strategy toggle */}
-      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-1.5">
-        <Tog active={stopStrategy === '3'} onClick={() => setStopStrategy('3')}>3-Stop</Tog>
-        <Tog active={stopStrategy === '2'} onClick={() => setStopStrategy('2')}>2-Stop</Tog>
-      </div>
-
-      {/* Stop Mode toggle */}
-      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-2">
-        <Tog active={stopMode === 'atr'} onClick={() => setStopMode('atr')}>ATR Auto</Tog>
-        <Tog active={stopMode === 'lod'} onClick={() => setStopMode('lod')}>LOD</Tog>
-        <Tog active={stopMode === 'manual'} onClick={() => setStopMode('manual')}>Manual</Tog>
-      </div>
-
-      {/* Ticker input — always visible; auto-fetches ATR-14 + LOD from Finnhub */}
+      {/* Ticker input — above Entry; auto-fetches ATR-14 + LOD from Finnhub */}
       <div className="flex items-center gap-2 mb-2">
         <span className="text-[10px] text-zinc-500 flex-shrink-0">Ticker</span>
         <input
@@ -2276,6 +2297,34 @@ const PositionCalc = ({ ibkrThemesData }) => {
             : lod != null ? <span className="text-amber-400">${lod.toFixed(2)}</span>
             : null}
         </span>
+      </div>
+
+      {/* Entry / ATR / Risk % */}
+      <div className="grid grid-cols-3 gap-1.5 mb-2">
+        <div>
+          <div className="text-[9px] text-zinc-600 mb-0.5">Entry</div>
+          {numInput(entry, setEntry, '0.00')}
+          <div className="text-[9px] text-zinc-500 mt-0.5 font-mono">{positionValue != null ? fmtDollar(positionValue) : <span className="text-zinc-700">—</span>}</div>
+        </div>
+        <div><div className="text-[9px] text-zinc-600 mb-0.5">ATR-14</div>{numInput(atr, setAtr, '0.00')}</div>
+        <div>
+          <div className="text-[9px] text-zinc-600 mb-0.5">Risk %</div>
+          {numInput(riskPct, setRiskPct, '1')}
+          <div className="text-[9px] text-red-400/80 mt-0.5 font-mono">{dollarRisk != null ? fmtDollar(dollarRisk) : <span className="text-zinc-700">—</span>}</div>
+        </div>
+      </div>
+
+      {/* Stop Strategy toggle */}
+      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-1.5">
+        <Tog active={stopStrategy === '3'} onClick={() => setStopStrategy('3')}>3-Stop</Tog>
+        <Tog active={stopStrategy === '2'} onClick={() => setStopStrategy('2')}>2-Stop</Tog>
+      </div>
+
+      {/* Stop Mode toggle */}
+      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-2">
+        <Tog active={stopMode === 'atr'} onClick={() => setStopMode('atr')}>ATR Auto</Tog>
+        <Tog active={stopMode === 'lod'} onClick={() => setStopMode('lod')}>LOD</Tog>
+        <Tog active={stopMode === 'manual'} onClick={() => setStopMode('manual')}>Manual</Tog>
       </div>
 
       {/* Manual stop price input */}
