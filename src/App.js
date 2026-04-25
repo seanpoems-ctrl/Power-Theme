@@ -2155,7 +2155,7 @@ const VixGauge = ({ initialVix }) => {
 };
 
 /* ──────────────────────────────────────────────── POSITION CALCULATOR ── */
-const PositionCalc = ({ ibkrThemesData }) => {
+const PositionCalc = ({ ibkrThemesData, thematicData }) => {
   const [equity, setEquity] = React.useState('');
   const [entry, setEntry] = React.useState('');
   const [atr, setAtr] = React.useState('');
@@ -2181,33 +2181,58 @@ const PositionCalc = ({ ibkrThemesData }) => {
     setLodLoading(true);
     setLodError(false);
     setLod(null);
+
+    // Try local thematic data first — has bars_30d (HLCV) and is always available
+    let stockMatch = null;
+    if (thematicData?.themes) {
+      outer: for (const t of thematicData.themes) {
+        for (const sub of (t.subthemes || [])) {
+          for (const stk of (sub.stocks || [])) {
+            if (stk.ticker?.toUpperCase() === s) { stockMatch = stk; break outer; }
+          }
+        }
+      }
+    }
+
+    if (stockMatch?.bars_30d?.length >= 15) {
+      const bars = stockMatch.bars_30d;
+      const trs = [];
+      for (let i = 1; i < bars.length; i++) {
+        trs.push(Math.max(bars[i].h - bars[i].l, Math.abs(bars[i].h - bars[i - 1].c), Math.abs(bars[i].l - bars[i - 1].c)));
+      }
+      const seedLen = Math.min(14, trs.length);
+      let atr14 = trs.slice(0, seedLen).reduce((x, y) => x + y, 0) / seedLen;
+      for (let i = seedLen; i < trs.length; i++) atr14 = (atr14 * 13 + trs[i]) / 14;
+      setAtr(atr14.toFixed(2));
+      const last = bars[bars.length - 1];
+      if (last?.l > 0) setLod(parseFloat(last.l.toFixed(2)));
+      setLodLoading(false);
+      return;
+    }
+
+    // Fall back to Finnhub (quote always works free; candle requires paid plan)
     try {
       const now = Math.floor(Date.now() / 1000);
-      const from = now - 60 * 86400; // 60 days for ATR-14 candles
+      const from = now - 60 * 86400;
       const [quoteRes, candleRes] = await Promise.all([
         fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`),
         fetch(`https://finnhub.io/api/v1/stock/candle?symbol=${s}&resolution=D&from=${from}&to=${now}&token=${FINNHUB_KEY}`)
       ]);
       const quoteData = await quoteRes.json();
-      const candleData = await candleRes.json();
+      const candleData = await candleRes.json().catch(() => null);
 
-      // LOD from quote
       const low = quoteData?.l;
       if (low != null && low > 0) setLod(parseFloat(low.toFixed(2)));
       else setLodError(true);
 
-      // ATR-14 calculated from daily candles
       if (candleData?.s === 'ok' && candleData.h?.length >= 15) {
         const { h, l, c } = candleData;
         const trs = [];
         for (let i = 1; i < h.length; i++) {
           trs.push(Math.max(h[i] - l[i], Math.abs(h[i] - c[i - 1]), Math.abs(l[i] - c[i - 1])));
         }
-        // Wilder's smoothing: seed with simple average of first 14, then smooth
         let atr14 = trs.slice(0, 14).reduce((a, b) => a + b, 0) / 14;
-        for (let i = 14; i < trs.length; i++) {
-          atr14 = (atr14 * 13 + trs[i]) / 14;
-        }
+        for (let i = 14; i < trs.length; i++) atr14 = (atr14 * 13 + trs[i]) / 14;
         setAtr(atr14.toFixed(2));
       }
     } catch {
@@ -2215,7 +2240,7 @@ const PositionCalc = ({ ibkrThemesData }) => {
     } finally {
       setLodLoading(false);
     }
-  }, []);
+  }, [thematicData]);
 
   // risk unit: entry − LOD (LOD mode), entry − manualStop (manual mode), ATR (ATR mode)
   const lodRisk = lod != null && e > lod ? e - lod : 0;
@@ -2242,7 +2267,6 @@ const PositionCalc = ({ ibkrThemesData }) => {
 
   const dollarRisk = shares != null && riskUnit > 0 ? shares * riskUnit : null;
   const positionValue = shares != null && e > 0 ? shares * e : null;
-  const target2r = e > 0 && riskUnit > 0 ? e + 2 * riskUnit : null;
 
   const fmtPrice = v => v != null ? `$${v.toFixed(2)}` : '—';
   const fmtDollar = v => v != null ? `$${v.toLocaleString('en-US', { maximumFractionDigits: 0 })}` : '—';
@@ -2287,8 +2311,8 @@ const PositionCalc = ({ ibkrThemesData }) => {
         <input
           type="text" value={lodTicker}
           onChange={ev => { setLodTicker(ev.target.value.toUpperCase()); setLod(null); setLodError(false); }}
-          onBlur={() => fetchTickerData(lodTicker)}
-          onKeyDown={ev => ev.key === 'Enter' && fetchTickerData(lodTicker)}
+          onBlur={ev => fetchTickerData(ev.target.value)}
+          onKeyDown={ev => ev.key === 'Enter' && fetchTickerData(ev.target.value)}
           placeholder="e.g. AAPL"
           className="flex-1 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600 uppercase"/>
         <span className="text-[11px] font-mono min-w-[48px] text-right">
@@ -2304,13 +2328,26 @@ const PositionCalc = ({ ibkrThemesData }) => {
         <div>
           <div className="text-[9px] text-zinc-600 mb-0.5">Entry</div>
           {numInput(entry, setEntry, '0.00')}
-          <div className="text-[9px] text-zinc-500 mt-0.5 font-mono">{positionValue != null ? fmtDollar(positionValue) : <span className="text-zinc-700">—</span>}</div>
+          <div className="mt-0.5 leading-tight">
+            <div className="text-[8px] text-zinc-600 uppercase tracking-wider">Position</div>
+            <div className="text-[10px] font-mono font-bold text-zinc-300">{positionValue != null ? fmtDollar(positionValue) : <span className="text-zinc-700">—</span>}</div>
+          </div>
         </div>
-        <div><div className="text-[9px] text-zinc-600 mb-0.5">ATR-14</div>{numInput(atr, setAtr, '0.00')}</div>
+        <div>
+          <div className="text-[9px] text-zinc-600 mb-0.5">ATR-14</div>
+          {numInput(atr, setAtr, '0.00')}
+          <div className="mt-0.5 leading-tight">
+            <div className="text-[8px] text-zinc-600 uppercase tracking-wider">ATR %</div>
+            <div className="text-[10px] font-mono font-bold text-zinc-300">{(a > 0 && e > 0) ? `${(a / e * 100).toFixed(2)}%` : <span className="text-zinc-700">—</span>}</div>
+          </div>
+        </div>
         <div>
           <div className="text-[9px] text-zinc-600 mb-0.5">Risk %</div>
           {numInput(riskPct, setRiskPct, '1')}
-          <div className="text-[9px] text-red-400/80 mt-0.5 font-mono">{dollarRisk != null ? fmtDollar(dollarRisk) : <span className="text-zinc-700">—</span>}</div>
+          <div className="mt-0.5 leading-tight">
+            <div className="text-[8px] text-zinc-600 uppercase tracking-wider">Max Loss</div>
+            <div className="text-[10px] font-mono font-bold text-red-400/90">{dollarRisk != null ? `−${fmtDollar(dollarRisk)}` : <span className="text-zinc-700">—</span>}</div>
+          </div>
         </div>
       </div>
 
@@ -2337,25 +2374,41 @@ const PositionCalc = ({ ibkrThemesData }) => {
       )}
 
       {/* Results grid */}
-      <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 pt-2 border-t border-zinc-800/60">
-        <div>
-          <div className="text-[9px] text-zinc-600 mb-0.5">Shares</div>
-          <div className="text-[13px] font-mono font-bold text-zinc-100">{shares ?? '—'}</div>
-        </div>
-        {stops.map((s, i) => (
-          <div key={i}>
-            <div className="text-[9px] text-zinc-600 mb-0.5">{stopMode === 'lod' ? 'LOD Stop' : `Stop ${i + 1}`}</div>
-            <div className="text-[13px] font-mono font-bold text-zinc-300">{fmtPrice(s)}</div>
+      <div className="pt-2 border-t border-zinc-800/60 space-y-2">
+        <div className="grid grid-cols-2 gap-x-3">
+          <div>
+            <div className="text-[9px] text-zinc-600 mb-0.5">Shares</div>
+            <div className="text-[14px] font-mono font-bold text-zinc-100">{shares ?? '—'}</div>
           </div>
-        ))}
-        <div>
-          <div className="text-[9px] text-zinc-600 mb-0.5">$ at Risk</div>
-          <div className="text-[13px] font-mono font-bold text-red-400">{fmtDollar(dollarRisk)}</div>
+          <div>
+            <div className="text-[9px] text-zinc-600 mb-0.5">$ at Risk</div>
+            <div className="text-[14px] font-mono font-bold text-red-400">{fmtDollar(dollarRisk)}</div>
+          </div>
         </div>
-        <div>
-          <div className="text-[9px] text-zinc-600 mb-0.5">2R Target</div>
-          <div className="text-[13px] font-mono font-bold text-emerald-400">{fmtPrice(target2r)}</div>
-        </div>
+        {stops.length > 0 && (
+          <div>
+            <div className="text-[9px] text-zinc-600 mb-1 uppercase tracking-wider">
+              {stopMode === 'lod' ? 'LOD Stop' : stopMode === 'manual' ? 'Manual Stop' : `${stopStrategy}-Stop Levels`}
+            </div>
+            <div className={`grid gap-2 ${stops.length === 3 ? 'grid-cols-3' : stops.length === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              {stops.map((s, i) => {
+                const lossPerShare = e > 0 && s > 0 ? e - s : 0;
+                const lossPct = e > 0 && lossPerShare > 0 ? (lossPerShare / e * 100) : 0;
+                return (
+                  <div key={i} className="bg-zinc-800/40 rounded px-2 py-1.5">
+                    <div className="text-[8px] text-zinc-500 uppercase">
+                      {stopMode === 'atr'
+                        ? (stopStrategy === '3' ? `−${i + 1}× ATR` : (i === 0 ? '−1.5× ATR' : '−3× ATR'))
+                        : `Stop ${i + 1}`}
+                    </div>
+                    <div className="text-[12px] font-mono font-bold text-zinc-200">{fmtPrice(s)}</div>
+                    {lossPct > 0 && <div className="text-[9px] font-mono text-red-400/80">−{lossPct.toFixed(2)}%</div>}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -7558,7 +7611,7 @@ const filtered = useMemo(() => {
           <aside className="w-[260px] flex-shrink-0 flex flex-col gap-3">
             <VixFearGaugeV2 vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix}/>
             <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData}/>
-            <PositionCalc ibkrThemesData={ibkrData}/>
+            <PositionCalc ibkrThemesData={ibkrData} thematicData={data}/>
             <AlertRulesCard/>
           </aside>
 
