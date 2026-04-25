@@ -2,34 +2,24 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 2,
+  "count": 1,
   "stocks": [
     {
-      "ticker": "AKAN",
-      "company": "Akanda Corp.",
-      "industry": "Agricultural Commodities/Milling",
-      "price": 10.21,
-      "change_pct": 214.15,
-      "adr_pct": 10.1,
-      "market_cap_b": 0.002,
-      "atr_ext_val": 21.28
-    },
-    {
-      "ticker": "TORO",
-      "company": "Toro Corp.",
-      "industry": "Marine Shipping",
-      "price": 6.75,
-      "change_pct": 72.76,
-      "adr_pct": 6.9,
-      "market_cap_b": 0.195,
-      "atr_ext_val": 10.6
+      "ticker": "MXL",
+      "company": "MaxLinear, Inc",
+      "industry": "Semiconductors",
+      "price": 60.32,
+      "change_pct": 76.12,
+      "adr_pct": 6.5,
+      "market_cap_b": 5.4,
+      "atr_ext_val": 11.69
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 1.05,
-    "spx_1m": 8.87,
-    "spx_3m": 3.25,
-    "spx_34d": 4.5
+    "spx_1d": 0.8,
+    "spx_1m": 10.62,
+    "spx_3m": 3.09,
+    "spx_34d": 5.43
   },
-  "fetched_at_utc": "2026-04-22T21:40:53+00:00"
+  "fetched_at_utc": "2026-04-24T21:40:16+00:00"
 }
