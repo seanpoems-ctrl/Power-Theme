@@ -2161,7 +2161,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
   const [atr, setAtr] = React.useState('');
   const [riskPct, setRiskPct] = React.useState('1');
   const [stopStrategy, setStopStrategy] = React.useState('3');
-  const [stopMode, setStopMode] = React.useState('atr');
+  const [stopMode, setStopMode] = React.useState('lod');
   const [manualStop, setManualStop] = React.useState('');
   const [lodTicker, setLodTicker] = React.useState('');
   const [lod, setLod] = React.useState(null);
@@ -2207,6 +2207,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
       setAtr(atr14.toFixed(2));
       const last = bars[bars.length - 1];
       if (last?.l > 0) setLod(parseFloat(last.l.toFixed(2)));
+      if (stockMatch.price > 0) setCurrentPrice(parseFloat(stockMatch.price.toFixed(2)));
       setLodLoading(false);
       return;
     }
@@ -2380,7 +2381,6 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
 
       {/* Stop Mode toggle */}
       <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-2">
-        <Tog active={stopMode === 'atr'} onClick={() => setStopMode('atr')}>ATR Auto</Tog>
         <Tog active={stopMode === 'lod'} onClick={() => setStopMode('lod')}>LOD</Tog>
         <Tog active={stopMode === 'manual'} onClick={() => setStopMode('manual')}>Manual</Tog>
       </div>
