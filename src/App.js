@@ -2027,6 +2027,7 @@ const PositionCalc = ({ ibkrThemesData }) => {
   const [manualStop, setManualStop] = React.useState('');
   const [lodTicker, setLodTicker] = React.useState('');
   const [lod, setLod] = React.useState(null);
+  const [currentPrice, setCurrentPrice] = React.useState(null);
   const [lodLoading, setLodLoading] = React.useState(false);
   const [lodError, setLodError] = React.useState(false);
 
@@ -2053,7 +2054,9 @@ const PositionCalc = ({ ibkrThemesData }) => {
       const quoteData = await quoteRes.json();
       const candleData = await candleRes.json();
 
-      // LOD from quote
+      // Current price + LOD from quote
+      const cur = quoteData?.c;
+      if (cur != null && cur > 0) setCurrentPrice(parseFloat(cur.toFixed(2)));
       const low = quoteData?.l;
       if (low != null && low > 0) setLod(parseFloat(low.toFixed(2)));
       else setLodError(true);
@@ -2167,17 +2170,23 @@ const PositionCalc = ({ ibkrThemesData }) => {
         <span className="text-[10px] text-zinc-500 flex-shrink-0">Ticker</span>
         <input
           type="text" value={lodTicker}
-          onChange={ev => { setLodTicker(ev.target.value.toUpperCase()); setLod(null); setLodError(false); }}
+          onChange={ev => { setLodTicker(ev.target.value.toUpperCase()); setLod(null); setCurrentPrice(null); setLodError(false); }}
           onBlur={() => fetchTickerData(lodTicker)}
           onKeyDown={ev => ev.key === 'Enter' && fetchTickerData(lodTicker)}
           placeholder="e.g. AAPL"
           className="flex-1 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600 uppercase"/>
-        <span className="text-[11px] font-mono min-w-[48px] text-right">
-          {lodLoading ? <span className="text-zinc-500">...</span>
-            : lodError ? <span className="text-red-400">ERR</span>
-            : lod != null ? <span className="text-amber-400">${lod.toFixed(2)}</span>
+        <div className="flex flex-col items-end min-w-[52px]">
+          {lodLoading
+            ? <span className="text-[11px] font-mono text-zinc-500">...</span>
+            : lodError
+            ? <span className="text-[11px] font-mono text-red-400">ERR</span>
+            : currentPrice != null
+            ? <span className="text-[12px] font-mono font-bold text-zinc-100">${currentPrice.toFixed(2)}</span>
             : null}
-        </span>
+          {!lodLoading && !lodError && lod != null && (
+            <span className="text-[9px] font-mono text-amber-400/70">L {lod.toFixed(2)}</span>
+          )}
+        </div>
       </div>
 
       {/* Manual stop price input */}
@@ -2195,10 +2204,11 @@ const PositionCalc = ({ ibkrThemesData }) => {
           <div className="text-[9px] text-zinc-600 mb-0.5">Shares</div>
           <div className="text-[13px] font-mono font-bold text-zinc-100">{shares ?? '—'}</div>
         </div>
-        {stops.map((s, i) => (
+        {/* Always render at least one stop slot */}
+        {(stops.length > 0 ? stops : [null]).map((s, i) => (
           <div key={i}>
             <div className="text-[9px] text-zinc-600 mb-0.5">{stopMode === 'lod' ? 'LOD Stop' : `Stop ${i + 1}`}</div>
-            <div className="text-[13px] font-mono font-bold text-zinc-300">{fmtPrice(s)}</div>
+            <div className="text-[13px] font-mono font-bold text-zinc-300">{s != null ? fmtPrice(s) : '—'}</div>
           </div>
         ))}
         <div>
