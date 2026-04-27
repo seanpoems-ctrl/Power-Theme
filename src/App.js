@@ -2216,14 +2216,15 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
       const quoteData = await quoteRes.json();
       const yahooData = yahooRes ? await yahooRes.json().catch(() => null) : null;
 
-      // Live price from Finnhub (fall back to thematic data if Finnhub returns 0)
+      // Live price from Finnhub; pc = previous close as fallback on weekends/after-hours
       const cur = quoteData?.c;
-      if (cur != null && cur > 0) setCurrentPrice(parseFloat(cur.toFixed(2)));
+      const prevClose = quoteData?.pc;
+      const livePrice = (cur != null && cur > 0) ? cur : (prevClose != null && prevClose > 0) ? prevClose : null;
+      if (livePrice != null) setCurrentPrice(parseFloat(livePrice.toFixed(2)));
       else if (thematicBarsFallbackPrice != null) setCurrentPrice(thematicBarsFallbackPrice);
 
       // LOD from Finnhub
       const low = quoteData?.l;
-      const prevClose = quoteData?.pc;
       if (low != null && low > 0) setLod(parseFloat(low.toFixed(2)));
       else if (prevClose != null && prevClose > 0) setLod(parseFloat(prevClose.toFixed(2)));
 
