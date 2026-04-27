@@ -2260,7 +2260,13 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
   let stops = [];
   if (e > 0) {
     if (stopMode === 'manual') {
-      if (ms > 0) stops = [ms];
+      if (ms > 0 && e > ms) {
+        const n = parseInt(stopStrategy, 10);
+        const dist = e - ms;
+        stops = Array.from({ length: n }, (_, i) => e - dist * (i + 1) / n);
+      } else if (ms > 0) {
+        stops = [ms];
+      }
     } else if (stopMode === 'lod') {
       if (effectiveLod != null && effectiveLod > 0 && e > effectiveLod) {
         const n = parseInt(stopStrategy, 10);
@@ -2388,7 +2394,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
         </div>
       )}
 
-      {/* Results grid */}
+      {/* Results */}
       <div className="pt-2 border-t border-zinc-800/60 space-y-2">
         <div className="grid grid-cols-2 gap-x-3">
           <div>
@@ -2407,16 +2413,13 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
           {stops.length > 0 ? (
             <div className={`grid gap-2 ${stops.length === 3 ? 'grid-cols-3' : stops.length === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
               {stops.map((s, i) => {
-                const lossPerShare = e > 0 && s > 0 ? e - s : 0;
-                const lossPct = e > 0 && lossPerShare > 0 ? (lossPerShare / e * 100) : 0;
+                const lossPct = e > 0 && s > 0 && e > s ? (e - s) / e * 100 : 0;
                 return (
                   <div key={i} className="bg-zinc-800/40 rounded px-2 py-1.5">
                     <div className="text-[8px] text-zinc-500 uppercase">
-                      {stopMode === 'atr'
-                        ? (stopStrategy === '3' ? `−${i + 1}× ATR` : (i === 0 ? '−1.5× ATR' : '−3× ATR'))
-                        : stopMode === 'lod'
-                          ? (i === stops.length - 1 ? 'LOD −0.08%' : `${Math.round((i + 1) / stops.length * 100)}% LOD`)
-                          : `Stop ${i + 1}`}
+                      {stopMode === 'lod'
+                        ? (i === stops.length - 1 ? 'LOD −0.08%' : `${Math.round((i + 1) / stops.length * 100)}% LOD`)
+                        : `Stop ${i + 1}`}
                     </div>
                     <div className="text-[12px] font-mono font-bold text-zinc-200">{fmtPrice(s)}</div>
                     {lossPct > 0 && <div className="text-[9px] font-mono text-red-400/80">−{lossPct.toFixed(2)}%</div>}
