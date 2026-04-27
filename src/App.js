@@ -809,10 +809,11 @@ const IbkrLeaderboard = ({ ibkrThemesData, onTickerHover, onThemeSelect }) => {
 };
 
 const ThemeHeatmap = ({ themes, finvizThemeRankings }) => {
+  const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks }
+
   const heatData = useMemo(() => {
     const rankings = finvizThemeRankings || [];
     if (rankings.length === 0) {
-      // fallback: compute from themes data
       return (themes || []).map(t => {
         const norm = t.subthemes ? t : { ...t, subthemes: [{ stocks: t.stocks || [] }] };
         const stocks = norm.subthemes.flatMap(s => s.stocks);
@@ -845,32 +846,139 @@ const ThemeHeatmap = ({ themes, finvizThemeRankings }) => {
     return { bg: 'bg-red-500/60', text: 'text-red-100' };
   };
 
+  const handleCardClick = (itemName) => {
+    const norm = (themes || []).find(t => {
+      const n = t.subthemes ? t : { ...t, subthemes: [] };
+      return n.name?.toLowerCase() === itemName.toLowerCase();
+    });
+    if (!norm) { setSelectedTheme({ name: itemName, stocks: [] }); return; }
+    const themeObj = norm.subthemes ? norm : { ...norm, subthemes: [{ name: norm.name, stocks: norm.stocks || [] }] };
+    const stocks = themeObj.subthemes.flatMap(s =>
+      (s.stocks || []).map(st => ({ ...st, _subtheme: s.name }))
+    );
+    const sorted = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0));
+    setSelectedTheme({ name: itemName, stocks: sorted });
+  };
+
   if (!topBottom.length) return null;
 
   return (
-    <div className="mb-3 bg-zinc-900/40 border border-zinc-800/50 rounded-xl p-3">
-      <div className="flex items-center justify-between mb-2">
-        <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.18em]">
-          Theme Heatmap — 1D RS Performance
+    <>
+      <div className="mb-3 bg-zinc-900/40 border border-zinc-800/50 rounded-xl p-3">
+        <div className="flex items-center justify-between mb-2">
+          <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.18em]">
+            Theme Heatmap — 1D RS Performance
+          </div>
+          {hasEnough && (
+            <div className="text-[9px] text-zinc-600 uppercase tracking-wider">Top 5 · Bottom 5</div>
+          )}
         </div>
-        {hasEnough && (
-          <div className="text-[9px] text-zinc-600 uppercase tracking-wider">Top 5 · Bottom 5</div>
-        )}
-      </div>
-      <div className="grid gap-1" style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}>
-        {topBottom.map((item, idx) => {
-          const { bg, text } = getColor(item.perf_1d);
-          return (
-            <div key={`${item.name}-${idx}`} className={`rounded-lg p-2 ${bg} text-center`}>
-              <div className={`text-[11px] font-semibold leading-tight truncate ${text}`}>{item.name}</div>
-              <div className={`text-[12px] font-bold font-mono mt-0.5 ${text}`}>
-                {item.perf_1d != null ? `${item.perf_1d >= 0 ? '+' : ''}${item.perf_1d.toFixed(1)}%` : '—'}
+        <div className="grid gap-1" style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}>
+          {topBottom.map((item, idx) => {
+            const { bg, text } = getColor(item.perf_1d);
+            return (
+              <div
+                key={`${item.name}-${idx}`}
+                className={`rounded-lg p-2 ${bg} text-center cursor-pointer hover:ring-1 hover:ring-white/20 transition-all`}
+                onClick={() => handleCardClick(item.name)}
+              >
+                <div className={`text-[11px] font-semibold leading-tight truncate ${text}`}>{item.name}</div>
+                <div className={`text-[12px] font-bold font-mono mt-0.5 ${text}`}>
+                  {item.perf_1d != null ? `${item.perf_1d >= 0 ? '+' : ''}${item.perf_1d.toFixed(1)}%` : '—'}
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
-    </div>
+
+      {selectedTheme && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          onClick={() => setSelectedTheme(null)}
+        >
+          <div
+            className="bg-zinc-900 border border-zinc-700/60 rounded-2xl shadow-2xl w-[min(92vw,780px)] max-h-[80vh] flex flex-col"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
+              <div>
+                <div className="text-sm font-bold text-zinc-100">{selectedTheme.name}</div>
+                <div className="text-[10px] text-zinc-500 mt-0.5">{selectedTheme.stocks.length} 檔股票</div>
+              </div>
+              <button
+                onClick={() => setSelectedTheme(null)}
+                className="text-zinc-500 hover:text-zinc-200 transition-colors p-1"
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            {/* Stock list */}
+            <div className="overflow-y-auto flex-1">
+              {selectedTheme.stocks.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-12 gap-2 text-center px-6">
+                  <div className="text-zinc-400 text-sm font-medium">此主題無詳細股票資料</div>
+                  <div className="text-zinc-600 text-xs leading-relaxed">只有今日掃描的前 5 大主題有股票明細。<br/>此主題僅有 Finviz 整體排名資料。</div>
+                </div>
+              ) : (
+                <table className="w-full text-xs">
+                  <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800">
+                    <tr className="text-zinc-500 text-[10px] uppercase tracking-wider">
+                      <th className="text-left px-4 py-2 font-medium">Ticker</th>
+                      <th className="text-left px-4 py-2 font-medium hidden sm:table-cell">公司</th>
+                      <th className="text-right px-3 py-2 font-medium">價格</th>
+                      <th className="text-right px-3 py-2 font-medium">1D</th>
+                      <th className="text-right px-3 py-2 font-medium">1W</th>
+                      <th className="text-right px-3 py-2 font-medium">1M</th>
+                      <th className="text-right px-3 py-2 font-medium">RS</th>
+                      <th className="text-right px-3 py-2 font-medium hidden sm:table-cell">ADR%</th>
+                      <th className="text-left px-3 py-2 font-medium hidden md:table-cell">Sub-Theme</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {selectedTheme.stocks.map((s, i) => {
+                      const fmtPct = (v) => v != null
+                        ? <span className={v >= 0 ? 'text-emerald-400' : 'text-red-400'}>{v >= 0 ? '+' : ''}{v.toFixed(1)}%</span>
+                        : <span className="text-zinc-600">—</span>;
+                      return (
+                        <tr key={`${s.ticker}-${i}`} className="border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors">
+                          <td className="px-4 py-2">
+                            <a
+                              href={`https://finviz.com/quote.ashx?t=${s.ticker}`}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="font-bold text-sky-400 hover:text-sky-300"
+                              onClick={e => e.stopPropagation()}
+                            >
+                              {s.ticker}
+                            </a>
+                            {s.pure_play && <span className="ml-1 text-[9px] bg-violet-500/20 text-violet-300 px-1 rounded">PP</span>}
+                          </td>
+                          <td className="px-4 py-2 text-zinc-400 truncate max-w-[140px] hidden sm:table-cell">{s.company || '—'}</td>
+                          <td className="px-3 py-2 text-right text-zinc-200 font-mono">{s.price != null ? `$${s.price.toFixed(2)}` : '—'}</td>
+                          <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1d)}</td>
+                          <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1w)}</td>
+                          <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1m)}</td>
+                          <td className="px-3 py-2 text-right font-mono">
+                            {s.rs_52w != null
+                              ? <span className={s.rs_52w >= 80 ? 'text-emerald-400 font-bold' : s.rs_52w >= 60 ? 'text-zinc-200' : 'text-zinc-500'}>{s.rs_52w}</span>
+                              : <span className="text-zinc-600">—</span>}
+                          </td>
+                          <td className="px-3 py-2 text-right text-zinc-400 hidden sm:table-cell">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : '—'}</td>
+                          <td className="px-3 py-2 text-zinc-500 text-[10px] hidden md:table-cell truncate max-w-[120px]">{s._subtheme || '—'}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
