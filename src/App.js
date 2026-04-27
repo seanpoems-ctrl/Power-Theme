@@ -2197,14 +2197,9 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
 
     if (stockMatch?.bars_30d?.length >= 15) {
       const bars = stockMatch.bars_30d;
-      const trs = [];
-      for (let i = 1; i < bars.length; i++) {
-        trs.push(Math.max(bars[i].h - bars[i].l, Math.abs(bars[i].h - bars[i - 1].c), Math.abs(bars[i].l - bars[i - 1].c)));
-      }
-      const seedLen = Math.min(14, trs.length);
-      let atr14 = trs.slice(0, seedLen).reduce((x, y) => x + y, 0) / seedLen;
-      for (let i = seedLen; i < trs.length; i++) atr14 = (atr14 * 13 + trs[i]) / 14;
-      setAtr(atr14.toFixed(2));
+      const slice = bars.slice(-20);
+      const adr20 = slice.reduce((sum, b) => sum + (b.l > 0 ? (b.h - b.l) / b.l * 100 : 0), 0) / slice.length;
+      setAtr(adr20.toFixed(2));
       const last = bars[bars.length - 1];
       if (last?.l > 0) setLod(parseFloat(last.l.toFixed(2)));
       if (stockMatch.price > 0) setCurrentPrice(parseFloat(stockMatch.price.toFixed(2)));
@@ -2232,16 +2227,15 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
 
       const q = yahooData?.chart?.result?.[0]?.indicators?.quote?.[0];
       if (q?.high?.length >= 15) {
-        const { high: h, low: l, close: c } = q;
-        const trs = [];
-        for (let i = 1; i < h.length; i++) {
-          if (h[i] == null || l[i] == null || c[i - 1] == null) continue;
-          trs.push(Math.max(h[i] - l[i], Math.abs(h[i] - c[i - 1]), Math.abs(l[i] - c[i - 1])));
+        const { high: h, low: l } = q;
+        const valid = [];
+        for (let i = 0; i < h.length; i++) {
+          if (h[i] != null && l[i] != null && l[i] > 0) valid.push((h[i] - l[i]) / l[i] * 100);
         }
-        if (trs.length >= 14) {
-          let atr14 = trs.slice(0, 14).reduce((a, b) => a + b, 0) / 14;
-          for (let i = 14; i < trs.length; i++) atr14 = (atr14 * 13 + trs[i]) / 14;
-          setAtr(atr14.toFixed(2));
+        const slice = valid.slice(-20);
+        if (slice.length > 0) {
+          const adr20 = slice.reduce((a, b) => a + b, 0) / slice.length;
+          setAtr(adr20.toFixed(2));
         }
       }
     } catch {
@@ -2356,11 +2350,11 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
           </div>
         </div>
         <div>
-          <div className="text-[9px] text-zinc-600 mb-0.5">ATR-14</div>
+          <div className="text-[9px] text-zinc-600 mb-0.5">ADR-20</div>
           {numInput(atr, setAtr, '0.00')}
           <div className="mt-0.5 leading-tight">
-            <div className="text-[8px] text-zinc-600 uppercase tracking-wider">ATR %</div>
-            <div className="text-[10px] font-mono font-bold text-zinc-300">{(a > 0 && e > 0) ? `${(a / e * 100).toFixed(2)}%` : <span className="text-zinc-700">—</span>}</div>
+            <div className="text-[8px] text-zinc-600 uppercase tracking-wider">ADR %</div>
+            <div className="text-[10px] font-mono font-bold text-zinc-300">{a > 0 ? `${a.toFixed(2)}%` : <span className="text-zinc-700">—</span>}</div>
           </div>
         </div>
         <div>
