@@ -2183,63 +2183,68 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
     setLodError(false);
     setLod(null);
 
-    // Try local thematic data first — has bars_30d (HLCV) and is always available
-    let stockMatch = null;
+    // Use local thematic data for ADR-20 (fast, no API call needed)
+    let thematicBarsFallbackPrice = null;
+    let thematicBarsFound = false;
     if (thematicData?.themes) {
       outer: for (const t of thematicData.themes) {
         for (const sub of (t.subthemes || [])) {
           for (const stk of (sub.stocks || [])) {
-            if (stk.ticker?.toUpperCase() === s) { stockMatch = stk; break outer; }
+            if (stk.ticker?.toUpperCase() === s) {
+              if (stk.bars_30d?.length >= 15) {
+                thematicBarsFound = true;
+                const bars = stk.bars_30d;
+                const slice = bars.slice(-20);
+                const adr20 = slice.reduce((sum, b) => sum + (b.l > 0 ? (b.h - b.l) / b.l * 100 : 0), 0) / slice.length;
+                setAtr(adr20.toFixed(2));
+              }
+              if (stk.price > 0) thematicBarsFallbackPrice = parseFloat(stk.price.toFixed(2));
+              break outer;
+            }
           }
         }
       }
     }
 
-    if (stockMatch?.bars_30d?.length >= 15) {
-      const bars = stockMatch.bars_30d;
-      const slice = bars.slice(-20);
-      const adr20 = slice.reduce((sum, b) => sum + (b.l > 0 ? (b.h - b.l) / b.l * 100 : 0), 0) / slice.length;
-      setAtr(adr20.toFixed(2));
-      const last = bars[bars.length - 1];
-      if (last?.l > 0) setLod(parseFloat(last.l.toFixed(2)));
-      if (stockMatch.price > 0) setCurrentPrice(parseFloat(stockMatch.price.toFixed(2)));
-      setLodLoading(false);
-      return;
-    }
-
-    // Fall back to Finnhub quote (LOD) + Yahoo Finance via corsproxy (ATR-14)
+    // Always fetch live price + LOD from Finnhub; Yahoo Finance only when no thematic bars
     try {
-      const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${s}?range=30d&interval=1d`;
-      const [quoteRes, yahooRes] = await Promise.all([
-        fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`),
-        fetch(`https://corsproxy.io/?${encodeURIComponent(yahooUrl)}`)
-      ]);
+      const requests = [fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`)];
+      if (!thematicBarsFound) {
+        requests.push(fetch(`https://corsproxy.io/?${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${s}?range=30d&interval=1d`)}`));
+      }
+      const [quoteRes, yahooRes] = await Promise.all(requests);
       const quoteData = await quoteRes.json();
-      const yahooData = await yahooRes.json().catch(() => null);
+      const yahooData = yahooRes ? await yahooRes.json().catch(() => null) : null;
 
-      // Current price + LOD from quote
+      // Live price from Finnhub (fall back to thematic data if Finnhub returns 0)
       const cur = quoteData?.c;
       if (cur != null && cur > 0) setCurrentPrice(parseFloat(cur.toFixed(2)));
+      else if (thematicBarsFallbackPrice != null) setCurrentPrice(thematicBarsFallbackPrice);
+
+      // LOD from Finnhub
       const low = quoteData?.l;
       const prevClose = quoteData?.pc;
       if (low != null && low > 0) setLod(parseFloat(low.toFixed(2)));
       else if (prevClose != null && prevClose > 0) setLod(parseFloat(prevClose.toFixed(2)));
 
-      const q = yahooData?.chart?.result?.[0]?.indicators?.quote?.[0];
-      if (q?.high?.length >= 15) {
-        const { high: h, low: l } = q;
-        const valid = [];
-        for (let i = 0; i < h.length; i++) {
-          if (h[i] != null && l[i] != null && l[i] > 0) valid.push((h[i] - l[i]) / l[i] * 100);
-        }
-        const slice = valid.slice(-20);
-        if (slice.length > 0) {
-          const adr20 = slice.reduce((a, b) => a + b, 0) / slice.length;
-          setAtr(adr20.toFixed(2));
+      // ADR-20 from Yahoo Finance (only when thematic bars not available)
+      if (!thematicBarsFound && yahooData) {
+        const q = yahooData?.chart?.result?.[0]?.indicators?.quote?.[0];
+        if (q?.high?.length >= 15) {
+          const { high: h, low: l } = q;
+          const valid = [];
+          for (let i = 0; i < h.length; i++) {
+            if (h[i] != null && l[i] != null && l[i] > 0) valid.push((h[i] - l[i]) / l[i] * 100);
+          }
+          const slice = valid.slice(-20);
+          if (slice.length > 0) {
+            const adr20 = slice.reduce((a, b) => a + b, 0) / slice.length;
+            setAtr(adr20.toFixed(2));
+          }
         }
       }
     } catch {
-      // silent — leave ATR/LOD blank
+      if (thematicBarsFallbackPrice != null) setCurrentPrice(thematicBarsFallbackPrice);
     } finally {
       setLodLoading(false);
     }
