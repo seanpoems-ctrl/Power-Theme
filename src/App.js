@@ -2376,11 +2376,9 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
           </div>
         </div>
         <div>
-          <div className="text-[9px] text-zinc-600 mb-0.5">ADR-20</div>
-          {numInput(atr, setAtr, '0.00')}
-          <div className="mt-0.5 leading-tight">
-            <div className="text-[8px] text-zinc-600 uppercase tracking-wider">ADR %</div>
-            <div className="text-[10px] font-mono font-bold text-zinc-300">{a > 0 ? `${a.toFixed(2)}%` : <span className="text-zinc-700">—</span>}</div>
+          <div className="text-[9px] text-zinc-600 mb-0.5">ADR %</div>
+          <div className="bg-zinc-800/60 border border-zinc-700/50 rounded px-1.5 py-1 text-[11px] font-mono font-bold text-zinc-200">
+            {a > 0 ? `${a.toFixed(2)}%` : <span className="text-zinc-700">—</span>}
           </div>
         </div>
         <div>
@@ -2416,7 +2414,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
 
       {/* Results */}
       <div className="pt-2 border-t border-zinc-800/60 space-y-2">
-        <div className="grid grid-cols-2 gap-x-3">
+        <div className="grid grid-cols-3 gap-x-3">
           <div>
             <div className="text-[9px] text-zinc-600 mb-0.5">Shares</div>
             <div className="text-[14px] font-mono font-bold text-zinc-100">{shares ?? '—'}</div>
@@ -2424,6 +2422,10 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
           <div>
             <div className="text-[9px] text-zinc-600 mb-0.5">$ at Risk</div>
             <div className="text-[14px] font-mono font-bold text-red-400">{fmtDollar(dollarRisk)}</div>
+          </div>
+          <div>
+            <div className="text-[9px] text-zinc-600 mb-0.5">Stop Loss %</div>
+            <div className="text-[14px] font-mono font-bold text-red-400">{riskUnit > 0 && e > 0 ? `−${(riskUnit / e * 100).toFixed(2)}%` : '—'}</div>
           </div>
         </div>
         <div>
