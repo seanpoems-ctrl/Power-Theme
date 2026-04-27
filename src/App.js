@@ -2095,9 +2095,19 @@ const PositionCalc = ({ ibkrThemesData }) => {
   let stops = [];
   if (e > 0) {
     if (stopMode === 'manual') {
-      if (ms > 0) stops = [ms];
+      if (ms > 0 && e > ms) {
+        const n = parseInt(stopStrategy, 10);
+        const dist = e - ms;
+        stops = Array.from({ length: n }, (_, i) => e - dist * (i + 1) / n);
+      } else if (ms > 0) {
+        stops = [ms];
+      }
     } else if (stopMode === 'lod') {
-      if (lod != null && lod > 0) stops = [lod];
+      if (lod != null && lod > 0 && e > lod) {
+        const n = parseInt(stopStrategy, 10);
+        const dist = e - lod;
+        stops = Array.from({ length: n }, (_, i) => e - dist * (i + 1) / n);
+      }
     } else if (a > 0) {
       stops = stopStrategy === '3'
         ? [e - a, e - 2 * a, e - 3 * a]
@@ -2106,7 +2116,8 @@ const PositionCalc = ({ ibkrThemesData }) => {
   }
 
   const dollarRisk = shares != null && riskUnit > 0 ? shares * riskUnit : null;
-  const target2r = e > 0 && riskUnit > 0 ? e + 2 * riskUnit : null;
+  const positionValue = shares != null && e > 0 ? shares * e : null;
+  const maxLossBudget = effectiveEquity > 0 && r > 0 ? effectiveEquity * r / 100 : null;
 
   const fmtPrice = v => v != null ? `$${v.toFixed(2)}` : '—';
   const fmtDollar = v => v != null ? `$${v.toLocaleString('en-US', { maximumFractionDigits: 0 })}` : '—';
@@ -2198,26 +2209,44 @@ const PositionCalc = ({ ibkrThemesData }) => {
         </div>
       )}
 
-      {/* Results grid */}
-      <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 pt-2 border-t border-zinc-800/60">
-        <div>
-          <div className="text-[9px] text-zinc-600 mb-0.5">Shares</div>
-          <div className="text-[13px] font-mono font-bold text-zinc-100">{shares ?? '—'}</div>
-        </div>
-        {/* Always render at least one stop slot */}
-        {(stops.length > 0 ? stops : [null]).map((s, i) => (
-          <div key={i}>
-            <div className="text-[9px] text-zinc-600 mb-0.5">{stopMode === 'lod' ? 'LOD Stop' : `Stop ${i + 1}`}</div>
-            <div className="text-[13px] font-mono font-bold text-zinc-300">{s != null ? fmtPrice(s) : '—'}</div>
+      {/* Results */}
+      <div className="pt-2 border-t border-zinc-800/60 space-y-2">
+        <div className="grid grid-cols-2 gap-x-3">
+          <div>
+            <div className="text-[9px] text-zinc-600 mb-0.5">Shares</div>
+            <div className="text-[14px] font-mono font-bold text-zinc-100">{shares ?? '—'}</div>
           </div>
-        ))}
-        <div>
-          <div className="text-[9px] text-zinc-600 mb-0.5">$ at Risk</div>
-          <div className="text-[13px] font-mono font-bold text-red-400">{fmtDollar(dollarRisk)}</div>
+          <div>
+            <div className="text-[9px] text-zinc-600 mb-0.5">$ at Risk</div>
+            <div className="text-[14px] font-mono font-bold text-red-400">{fmtDollar(dollarRisk)}</div>
+          </div>
         </div>
         <div>
-          <div className="text-[9px] text-zinc-600 mb-0.5">2R Target</div>
-          <div className="text-[13px] font-mono font-bold text-emerald-400">{fmtPrice(target2r)}</div>
+          <div className="text-[9px] text-zinc-600 mb-1 uppercase tracking-wider">
+            {stopMode === 'lod' ? 'LOD Stop' : stopMode === 'manual' ? 'Manual Stop' : `${stopStrategy}-Stop Levels`}
+          </div>
+          {stops.length > 0 ? (
+            <div className={`grid gap-2 ${stops.length === 3 ? 'grid-cols-3' : stops.length === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              {stops.map((s, i) => {
+                const lossPct = e > 0 && s > 0 && e > s ? (e - s) / e * 100 : 0;
+                return (
+                  <div key={i} className="bg-zinc-800/40 rounded px-2 py-1.5">
+                    <div className="text-[8px] text-zinc-500 uppercase">
+                      {stopMode === 'lod'
+                        ? (i === stops.length - 1 ? 'LOD' : `${Math.round((i + 1) / stops.length * 100)}% LOD`)
+                        : `Stop ${i + 1}`}
+                    </div>
+                    <div className="text-[12px] font-mono font-bold text-zinc-200">{fmtPrice(s)}</div>
+                    {lossPct > 0 && <div className="text-[9px] font-mono text-red-400/80">−{lossPct.toFixed(2)}%</div>}
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="bg-zinc-800/40 rounded px-2 py-1.5">
+              <div className="text-[12px] font-mono font-bold text-zinc-600">—</div>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -7276,7 +7305,7 @@ const filtered = useMemo(() => {
           <aside className="w-[260px] flex-shrink-0 flex flex-col gap-3">
             <VixFearGaugeV2 vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix}/>
             <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData}/>
-            <PositionCalc ibkrThemesData={ibkrData}/>
+            <PositionCalc ibkrThemesData={ibkrData} thematicData={data}/>
             <AlertRulesCard/>
           </aside>
 
