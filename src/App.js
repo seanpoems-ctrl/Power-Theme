@@ -2208,25 +2208,39 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
 
     // Always fetch live price + LOD from Finnhub; Yahoo Finance only when no thematic bars
     try {
-      const requests = [fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`)];
-      if (!thematicBarsFound) {
-        requests.push(fetch(`https://corsproxy.io/?${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${s}?range=30d&interval=1d`)}`));
-      }
-      const [quoteRes, yahooRes] = await Promise.all(requests);
-      const quoteData = await quoteRes.json();
-      const yahooData = yahooRes ? await yahooRes.json().catch(() => null) : null;
+      // Always call Yahoo (also has price + LOD via meta), call Finnhub when key is set
+      const yahooFetch = fetch(`https://corsproxy.io/?${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${s}?range=30d&interval=1d`)}`);
+      const finnhubFetch = FINNHUB_KEY
+        ? fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`).then(r => r.ok ? r.json() : null).catch(() => null)
+        : Promise.resolve(null);
+      const [yahooRes, quoteData] = await Promise.all([yahooFetch, finnhubFetch]);
+      const yahooData = await yahooRes.json().catch(() => null);
 
-      // Live price from Finnhub; pc = previous close as fallback on weekends/after-hours
-      const cur = quoteData?.c;
-      const prevClose = quoteData?.pc;
-      const livePrice = (cur != null && cur > 0) ? cur : (prevClose != null && prevClose > 0) ? prevClose : null;
-      if (livePrice != null) setCurrentPrice(parseFloat(livePrice.toFixed(2)));
-      else if (thematicBarsFallbackPrice != null) setCurrentPrice(thematicBarsFallbackPrice);
+      // Yahoo meta has live regularMarketPrice + previousClose
+      const yMeta = yahooData?.chart?.result?.[0]?.meta;
+      const yPrice = yMeta?.regularMarketPrice;
+      const yPrevClose = yMeta?.previousClose ?? yMeta?.chartPreviousClose;
+      const yLow = yMeta?.regularMarketDayLow;
 
-      // LOD from Finnhub
-      const low = quoteData?.l;
-      if (low != null && low > 0) setLod(parseFloat(low.toFixed(2)));
-      else if (prevClose != null && prevClose > 0) setLod(parseFloat(prevClose.toFixed(2)));
+      // Live price: Finnhub.c → Finnhub.pc → Yahoo regularMarketPrice → Yahoo previousClose → thematic data
+      const fCur = quoteData?.c;
+      const fPrevClose = quoteData?.pc;
+      const livePrice =
+        (fCur != null && fCur > 0) ? fCur :
+        (yPrice != null && yPrice > 0) ? yPrice :
+        (fPrevClose != null && fPrevClose > 0) ? fPrevClose :
+        (yPrevClose != null && yPrevClose > 0) ? yPrevClose :
+        thematicBarsFallbackPrice;
+      if (livePrice != null) setCurrentPrice(parseFloat(parseFloat(livePrice).toFixed(2)));
+
+      // LOD: Finnhub.l → Yahoo regularMarketDayLow → Finnhub.pc → Yahoo previousClose
+      const fLow = quoteData?.l;
+      const lodVal =
+        (fLow != null && fLow > 0) ? fLow :
+        (yLow != null && yLow > 0) ? yLow :
+        (fPrevClose != null && fPrevClose > 0) ? fPrevClose :
+        (yPrevClose != null && yPrevClose > 0) ? yPrevClose : null;
+      if (lodVal != null) setLod(parseFloat(parseFloat(lodVal).toFixed(2)));
 
       // ADR-20 from Yahoo Finance (only when thematic bars not available)
       if (!thematicBarsFound && yahooData) {
