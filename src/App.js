@@ -810,7 +810,7 @@ const IbkrLeaderboard = ({ ibkrThemesData, onTickerHover, onThemeSelect }) => {
   );
 };
 
-const ThemeHeatmap = ({ themes, finvizThemeRankings }) => {
+const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings }) => {
   const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks }
 
   const heatData = useMemo(() => {
@@ -849,10 +849,8 @@ const ThemeHeatmap = ({ themes, finvizThemeRankings }) => {
   };
 
   const handleCardClick = (itemName) => {
-    const norm = (themes || []).find(t => {
-      const n = t.subthemes ? t : { ...t, subthemes: [] };
-      return n.name?.toLowerCase() === itemName.toLowerCase();
-    });
+    const allSources = [...(themes || []), ...(heatmapThemes || [])];
+    const norm = allSources.find(t => t.name?.toLowerCase() === itemName.toLowerCase());
     if (!norm) { setSelectedTheme({ name: itemName, stocks: [] }); return; }
     const themeObj = norm.subthemes ? norm : { ...norm, subthemes: [{ name: norm.name, stocks: norm.stocks || [] }] };
     const stocks = themeObj.subthemes.flatMap(s =>
@@ -7786,7 +7784,7 @@ const filtered = useMemo(() => {
 
           {/* ── CENTER MAIN CONTENT ──────────────────────────────── */}
           <main className="flex-1 min-w-0 flex flex-col gap-3">
-            <ThemeHeatmap themes={data?.themes} finvizThemeRankings={data?.finviz_theme_rankings}/>
+            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings}/>
             {data && <Leaderboard
               themeRankings={data.theme_rankings}
               industryRankings={data.industry_rankings}
