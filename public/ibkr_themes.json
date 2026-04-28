@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-04-27T21:34:48.247355+00:00",
+  "generated_at": "2026-04-28T21:35:18.526251+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
       "name": "Healthcare & Biotech",
-      "theme_rs": 96.0,
-      "perf_1d": 16.87,
+      "theme_rs": 98.0,
+      "perf_1d": 9.99,
       "leaders": [
         {
-          "ticker": "OGN",
-          "price": 13.16,
-          "rs_52w": 96,
-          "adr_pct": 6.38,
-          "vol_surge": 23.15,
-          "mkt_cap": 3425753914,
+          "ticker": "RVMD",
+          "price": 144.83,
+          "rs_52w": 98,
+          "adr_pct": 5.42,
+          "vol_surge": 1.99,
+          "mkt_cap": 30629327460,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -23,6 +23,32 @@
             "adr_pct >= 4.0": true
           },
           "primary_theme": "Healthcare & Biotech",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    },
+    {
+      "name": "Industrials",
+      "theme_rs": 93.0,
+      "perf_1d": 14.56,
+      "leaders": [
+        {
+          "ticker": "SANM",
+          "price": 215.46,
+          "rs_52w": 93,
+          "adr_pct": 5.01,
+          "vol_surge": 4.06,
+          "mkt_cap": 11765169535,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Industrials",
           "secondary_themes": [],
           "setup_label": "Flag"
         }

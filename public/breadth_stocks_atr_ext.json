@@ -2,34 +2,24 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 2,
+  "count": 1,
   "stocks": [
     {
-      "ticker": "HTCO",
-      "company": "High-Trend International Group",
-      "industry": "Marine Shipping",
-      "price": 38.22,
-      "change_pct": 239.73,
-      "adr_pct": 11.7,
-      "market_cap_b": 0.083,
-      "atr_ext_val": 20.46
-    },
-    {
-      "ticker": "YAAS",
-      "company": "Youxin Technology Ltd",
-      "industry": "Packaged Software",
-      "price": 2.32,
-      "change_pct": 149.62,
-      "adr_pct": 7.6,
-      "market_cap_b": 0.01,
-      "atr_ext_val": 19.81
+      "ticker": "VNRX",
+      "company": "VolitionRX Limited",
+      "industry": "Medical Specialties",
+      "price": 2.78,
+      "change_pct": 1941.12,
+      "adr_pct": 7.3,
+      "market_cap_b": 0.432,
+      "atr_ext_val": 265.11
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.12,
-    "spx_1m": 12.64,
-    "spx_3m": 2.8,
-    "spx_34d": 5.79
+    "spx_1d": -0.49,
+    "spx_1m": 12.53,
+    "spx_3m": 2.3,
+    "spx_34d": 5.36
   },
-  "fetched_at_utc": "2026-04-27T21:43:38+00:00"
+  "fetched_at_utc": "2026-04-28T21:37:47+00:00"
 }
