@@ -1,30 +1,30 @@
 {
-  "generated_at": "April 28, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "April 28, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7173.91,
-      "change": 8.83,
-      "change_pct": 0.12
+      "price": 7138.8,
+      "change": -35.11,
+      "change_pct": -0.49
     },
     {
       "label": "Nasdaq 100",
-      "price": 27305.68,
-      "change": 2.01,
-      "change_pct": 0.01
+      "price": 27029.01,
+      "change": -276.67,
+      "change_pct": -1.01
     },
     {
       "label": "VIX",
-      "price": 19.05,
-      "change": 1.03,
+      "price": 17.83,
+      "change": -0.19,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.34,
-      "change": 0.03,
+      "price": 4.35,
+      "change": 0.02,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 59917.46,
-      "change_pct": -1.02
+      "price": 60537.36,
+      "change_pct": 1.38
     },
     "dax": {
       "label": "DAX",
-      "price": 23970.64,
-      "change_pct": -0.47
+      "price": 24018.26,
+      "change_pct": -0.27
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10318.2,
-      "change_pct": -0.03
+      "price": 10332.79,
+      "change_pct": 0.11
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 58.2,
-    "mmth": 59.7,
+    "s5fi": 57.2,
+    "mmth": 58.7,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "US resilience amidst global weakness",
+  "mood": "US Tech Weakness, Mixed Global",
   "analysis": {
-    "analysis_para1": "Overseas markets are displaying caution this morning, with the Nikkei 225 down -1.02% and the DAX losing -0.47%, while the FTSE 100 is marginally lower by -0.03%. Despite this global weakness, US equity futures are showing modest gains, with the S&P 500 up +0.12% and Nasdaq 100 up +0.01%, indicating a degree of domestic resilience. Market breadth, as measured by S5FI at 58.2% and MMTH at 59.7%, suggests that a healthy majority of stocks are holding above their short and long-term moving averages, providing a supportive backdrop even as the BAML HY Spread's regime remains unknown.",
-    "analysis_para2": "Today's action will center on whether US indices can sustain their nascent pre-market gains above current levels, specifically monitoring the S&P 500 near 7170 and the Nasdaq 100 around 27300. A failure to hold these levels could signal a move to test prior session lows, aligning with the weaker global sentiment. Conversely, a sustained push higher, especially on increased volume, would confirm domestic strength and potentially lead to new intraday highs. Traders should watch for any shifts in VIX, currently at 19.05, as a rapid increase could signal developing volatility or a reversal of the current positive lean.",
-    "technical_signal": "No reversal pattern confirmed yet. US futures are flat-to-slightly positive, offsetting weaker global markets, without clear directional signals for the open.",
+    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 surging +1.38% while European indices like the DAX (-0.27%) and FTSE 100 (+0.11%) remained subdued. In the US, major indices faced headwinds, particularly the Nasdaq 100 which declined -1.01%. Market breadth, as indicated by S5FI at 57.2% and MMTH at 58.7%, suggests a market still above critical moving averages, yet not showing strong conviction in the rally. With the BAML HY Spread's regime currently unknown, a definitive assessment of credit market stability remains elusive, contributing to a cautious undertone despite a normal VIX at 17.83.",
+    "analysis_para2": "The immediate mechanical plan involves closely monitoring key support levels for the major US indices. A critical support zone for the S&P 500 lies around the 7100-7120 range, with a break below potentially signaling further downside pressure. For the Nasdaq 100, the 27000 mark is a significant psychological and technical level to watch; sustained weakness below this could indicate a deeper correction in growth names. Investors should maintain exposure to themes demonstrating strong relative strength, such as Semiconductors, while keeping an eye on market breadth (S5FI 57.2%, MMTH 58.7%) for signs of deterioration below 50%. A definitive move below these breadth levels, coupled with a breakdown of index support, would necessitate a more defensive posture.",
+    "technical_signal": "No reversal pattern confirmed yet. US indices declined today, but breadth remains above 50% and the VIX is in a normal range, indicating no immediate capitulation or exhaustion signal.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "Exhibiting extreme momentum with an astounding +201.0% 1-month return and RS 98, it leads the dominant Semiconductor theme."
+        "reason": "Demonstrating explosive 1-month returns of +201.0% and an RS of 98 within the leading Semiconductor theme, MXL is a top momentum play in the current market."
       },
       {
         "ticker": "AEHR",
         "company": "Aehr Test Systems",
         "grade": "A",
-        "reason": "With a +155.9% 1-month return and RS 98, this semiconductor play confirms strong sector leadership and continued demand."
+        "reason": "With an outstanding 1-month gain of +155.9%, AEHR exhibits superior relative strength (RS=98) within the robust Semiconductor sector, making it a strong contender in today's momentum environment."
       },
       {
         "ticker": "LBRT",
         "company": "Liberty Energy Inc",
         "grade": "C",
-        "reason": "Despite a high RS 97, its +10.0% 1-month return is the weakest among peers in a less dominant theme, suggesting it may be a relative laggard to avoid."
+        "reason": "Despite a strong RS of 97, LBRT's comparatively subdued 1-month return of +10.0% places it behind current market leaders, suggesting it might underperform in a momentum-driven environment."
       }
     ]
   }
