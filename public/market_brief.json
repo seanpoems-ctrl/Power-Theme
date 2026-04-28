@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 27, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 28, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 18.02,
-      "change": -0.69,
+      "price": 19.05,
+      "change": 1.03,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 59716.18,
-      "change_pct": 0.97
+      "price": 59917.46,
+      "change_pct": -1.02
     },
     "dax": {
       "label": "DAX",
-      "price": 24083.53,
-      "change_pct": -0.19
+      "price": 23970.64,
+      "change_pct": -0.47
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10321.09,
-      "change_pct": -0.56
+      "price": 10318.2,
+      "change_pct": -0.03
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 58.0,
-    "mmth": 59.5,
+    "s5fi": 58.2,
+    "mmth": 59.7,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Subdued upside, sector strength",
+  "mood": "US resilience amidst global weakness",
   "analysis": {
-    "analysis_para1": "Global markets displayed a mixed performance, with the Nikkei 225 posting a strong +0.97% gain, while European indices DAX (-0.19%) and FTSE 100 (-0.56%) ended lower. In the US, credit conditions appear stable with the 10Y Yield at 4.34% and the VIX remaining 'Normal' at 18.02, suggesting no immediate broad market distress. This stability is further reflected in US market breadth, where 58.0% of stocks are above their 50-day moving average (S5FI) and 59.5% above their 200-day moving average (MMTH), indicating underlying health despite modest index gains.",
-    "analysis_para2": "The mechanical plan for navigating this environment emphasizes continuing to prioritize thematic leadership, particularly within the robust Semiconductors and Hardware sectors identified by our scanner. Given the S&P 500 and Nasdaq 100's marginal gains today, watch for sustained momentum in these high-RS, high-momentum groups as key to outperformance. Critical signals to monitor include any significant deterioration in market breadth (S5FI or MMTH falling below 50%) which could signal broader weakness, or a spike in the VIX above its 'Normal' range. For now, the strategy remains to seek out continued strength in established sector leaders.",
-    "technical_signal": "No reversal pattern confirmed yet. US indices posted slight gains with VIX remaining normal, indicating stable, albeit quiet, market conditions without immediate signs of a downturn.",
+    "analysis_para1": "Overseas markets are displaying caution this morning, with the Nikkei 225 down -1.02% and the DAX losing -0.47%, while the FTSE 100 is marginally lower by -0.03%. Despite this global weakness, US equity futures are showing modest gains, with the S&P 500 up +0.12% and Nasdaq 100 up +0.01%, indicating a degree of domestic resilience. Market breadth, as measured by S5FI at 58.2% and MMTH at 59.7%, suggests that a healthy majority of stocks are holding above their short and long-term moving averages, providing a supportive backdrop even as the BAML HY Spread's regime remains unknown.",
+    "analysis_para2": "Today's action will center on whether US indices can sustain their nascent pre-market gains above current levels, specifically monitoring the S&P 500 near 7170 and the Nasdaq 100 around 27300. A failure to hold these levels could signal a move to test prior session lows, aligning with the weaker global sentiment. Conversely, a sustained push higher, especially on increased volume, would confirm domestic strength and potentially lead to new intraday highs. Traders should watch for any shifts in VIX, currently at 19.05, as a rapid increase could signal developing volatility or a reversal of the current positive lean.",
+    "technical_signal": "No reversal pattern confirmed yet. US futures are flat-to-slightly positive, offsetting weaker global markets, without clear directional signals for the open.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "With an RS of 98 and a staggering +238.9% 1-month return, MXL exemplifies explosive leadership within the highly favored semiconductor theme in this market regime."
+        "reason": "Exhibiting extreme momentum with an astounding +201.0% 1-month return and RS 98, it leads the dominant Semiconductor theme."
       },
       {
-        "ticker": "TRT",
-        "company": "Trio-Tech International",
+        "ticker": "AEHR",
+        "company": "Aehr Test Systems",
         "grade": "A",
-        "reason": "TRT displays exceptional thematic strength, boasting an RS of 98 and a +161.4% 1-month return, making it a powerful contender in the leading semiconductor sector."
+        "reason": "With a +155.9% 1-month return and RS 98, this semiconductor play confirms strong sector leadership and continued demand."
       },
       {
-        "ticker": "AMKR",
-        "company": "AMKOR Technology Inc",
+        "ticker": "LBRT",
+        "company": "Liberty Energy Inc",
         "grade": "C",
-        "reason": "Despite an RS of 97, AMKR's +57.1% 3-month return, while positive, lags significantly behind the more explosive gains of its semiconductor peers on the scanner, suggesting relative underperformance."
+        "reason": "Despite a high RS 97, its +10.0% 1-month return is the weakest among peers in a less dominant theme, suggesting it may be a relative laggard to avoid."
       }
     ]
   }
