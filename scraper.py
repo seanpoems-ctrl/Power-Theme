@@ -1556,6 +1556,36 @@ def build_data() -> dict:
         if theme_subthemes:
             output_themes.append({"name": theme_name, "subthemes": theme_subthemes})
 
+    # ── Step 3b: Fetch stocks for remaining heatmap themes (top5 + bottom5 by 1D) ──
+    _theme_name_to_prefix = {name: prefix for prefix, name in _THEME_MAP_PREFIXES.items()}
+    output_theme_names = {t["name"] for t in output_themes}
+    sorted_1d = sorted(finviz_theme_rankings, key=lambda x: x.get("perf_1d", 0))
+    heatmap_theme_names = {t["name"] for t in sorted_1d[:5]} | {t["name"] for t in sorted_1d[-5:]}
+    heatmap_extra_names = [t["name"] for t in sorted_1d[:5] + sorted_1d[-5:]
+                           if t["name"] not in output_theme_names]
+
+    logger.info(f"\nStep 3b: Fetching stocks for {len(heatmap_extra_names)} remaining heatmap themes...")
+    heatmap_themes: list[dict] = []
+    for theme_name in heatmap_extra_names:
+        prefix = _theme_name_to_prefix.get(theme_name)
+        if not prefix:
+            logger.warning(f"  No prefix mapping for heatmap theme: {theme_name}")
+            continue
+        logger.info(f"  Fetching: {theme_name} (idx_{prefix})")
+        stocks = fetch_screener_stocks("idx", prefix, max_pages=3)
+        if not stocks:
+            logger.warning(f"  No stocks found for {theme_name}")
+            continue
+        stocks.sort(key=_stock_score, reverse=True)
+        picks = stocks[:TOP_STOCKS_PER_SUBTHEME]
+        sub_stocks = _fetch_details(picks, all_detail_cache)
+        if sub_stocks:
+            heatmap_themes.append({
+                "name": theme_name,
+                "subthemes": [{"name": theme_name, "stocks": sub_stocks}],
+            })
+        _sleep()
+
     # ── Step 4: Mark pure_play (appears in only one subtheme across all themes) ──
     ticker_count: dict[str, int] = {}
     for th in output_themes:
@@ -1586,7 +1616,7 @@ def build_data() -> dict:
     finviz_adv_dec, finviz_new_hl, finviz_sma50, finviz_sma200 = _fetch_finviz_market_breadth()
 
     all_stocks_flat = []
-    for th in output_themes:
+    for th in output_themes + heatmap_themes:
         for sub in th.get("subthemes", []):
             all_stocks_flat.extend(sub["stocks"])
 
@@ -1605,7 +1635,7 @@ def build_data() -> dict:
         for rank, (idx, _) in enumerate(perfs):
             all_stocks_flat[idx]["rs_52w"] = max(1, min(99, int((rank / max(n - 1, 1)) * 98) + 1))
 
-    for th in output_themes:
+    for th in output_themes + heatmap_themes:
         for sub in th.get("subthemes", []):
             sub["stocks"].sort(key=lambda s: s.get("rs_52w", 0), reverse=True)
 
@@ -1690,6 +1720,7 @@ def build_data() -> dict:
         "last_updated": updated.isoformat(),
         "generated_at": generated_at,
         "themes": output_themes,
+        "heatmap_themes": heatmap_themes,
         "theme_rankings": theme_rankings,
         "industry_rankings": industry_rankings,
         "finviz_theme_rankings": finviz_theme_rankings,
