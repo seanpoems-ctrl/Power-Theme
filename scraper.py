@@ -1557,34 +1557,57 @@ def build_data() -> dict:
             output_themes.append({"name": theme_name, "subthemes": theme_subthemes})
 
     # ── Step 3b: Fetch stocks for remaining heatmap themes (top5 + bottom5 by 1D) ──
-    _theme_name_to_prefix = {name: prefix for prefix, name in _THEME_MAP_PREFIXES.items()}
+    # Map finviz map theme names that don't exist in theme_rankings to industry names
+    _HEATMAP_FALLBACK_INDUSTRIES: dict[str, list[str]] = {
+        "Education Technology":        ["Education & Training Services"],
+        "Social Media":                ["Internet Content & Information"],
+        "Biometrics":                  ["Security & Protection Services"],
+        "Nanotechnology":              ["Specialty Chemicals"],
+        "Crypto & Blockchain":         ["Financial Data & Stock Exchanges", "Capital Markets"],
+        "Virtual & Augmented Reality": ["Electronic Gaming & Multimedia", "Computer Hardware"],
+        "Wearables":                   ["Consumer Electronics"],
+        "Smart Home":                  ["Consumer Electronics", "Specialty Industrial Machinery"],
+        "Aging Population & Longevity":["Biotechnology", "Medical Devices"],
+        "Healthy Food & Nutrition":    ["Packaged Foods", "Farm Products"],
+        "Agriculture & FoodTech":      ["Agricultural Inputs", "Farm Products"],
+    }
+
+    # Build theme_name → industries lookup from theme_rankings
+    _tr_industries = {t["name"]: t.get("industries", []) for t in theme_rankings}
+
     output_theme_names = {t["name"] for t in output_themes}
     sorted_1d = sorted(finviz_theme_rankings, key=lambda x: x.get("perf_1d", 0))
-    heatmap_theme_names = {t["name"] for t in sorted_1d[:5]} | {t["name"] for t in sorted_1d[-5:]}
     heatmap_extra_names = [t["name"] for t in sorted_1d[:5] + sorted_1d[-5:]
                            if t["name"] not in output_theme_names]
 
     logger.info(f"\nStep 3b: Fetching stocks for {len(heatmap_extra_names)} remaining heatmap themes...")
     heatmap_themes: list[dict] = []
     for theme_name in heatmap_extra_names:
-        prefix = _theme_name_to_prefix.get(theme_name)
-        if not prefix:
-            logger.warning(f"  No prefix mapping for heatmap theme: {theme_name}")
+        # Prefer industry codes from theme_rankings, fall back to HEATMAP_FALLBACK_INDUSTRIES
+        ind_names = _tr_industries.get(theme_name) or _HEATMAP_FALLBACK_INDUSTRIES.get(theme_name, [])
+        if not ind_names:
+            logger.warning(f"  No industry mapping for heatmap theme: {theme_name}")
             continue
-        logger.info(f"  Fetching: {theme_name} (idx_{prefix})")
-        stocks = fetch_screener_stocks("idx", prefix, max_pages=3)
-        if not stocks:
-            logger.warning(f"  No stocks found for {theme_name}")
-            continue
-        stocks.sort(key=_stock_score, reverse=True)
-        picks = stocks[:TOP_STOCKS_PER_SUBTHEME]
-        sub_stocks = _fetch_details(picks, all_detail_cache)
-        if sub_stocks:
-            heatmap_themes.append({
-                "name": theme_name,
-                "subthemes": [{"name": theme_name, "stocks": sub_stocks}],
-            })
-        _sleep()
+
+        logger.info(f"  Fetching: {theme_name} via industries: {ind_names}")
+        theme_subthemes = []
+        for ind_name in ind_names[:TOP_SUBTHEMES_PER_THEME]:
+            ind_code = ind_codes.get(ind_name)
+            if not ind_code:
+                logger.warning(f"    No filter code for: {ind_name}")
+                continue
+            stocks = fetch_screener_stocks("ind", ind_code, max_pages=3)
+            if not stocks:
+                continue
+            stocks.sort(key=_stock_score, reverse=True)
+            picks = stocks[:TOP_STOCKS_PER_SUBTHEME]
+            sub_stocks = _fetch_details(picks, all_detail_cache)
+            if sub_stocks:
+                theme_subthemes.append({"name": ind_name, "stocks": sub_stocks})
+            _sleep()
+
+        if theme_subthemes:
+            heatmap_themes.append({"name": theme_name, "subthemes": theme_subthemes})
 
     # ── Step 4: Mark pure_play (appears in only one subtheme across all themes) ──
     ticker_count: dict[str, int] = {}
