@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 28, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 29, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 17.83,
-      "change": -0.19,
+      "price": 18.02,
+      "change": 0.19,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 60537.36,
-      "change_pct": 1.38
+      "price": 59917.46,
+      "change_pct": -1.02
     },
     "dax": {
       "label": "DAX",
-      "price": 24018.26,
-      "change_pct": -0.27
+      "price": 23975.63,
+      "change_pct": -0.18
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10332.79,
-      "change_pct": 0.11
+      "price": 10248.39,
+      "change_pct": -0.82
     }
   },
   "macro_breadth": {
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "US Tech Weakness, Mixed Global",
+  "mood": "Tech Weakness / Global Drags",
   "analysis": {
-    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 surging +1.38% while European indices like the DAX (-0.27%) and FTSE 100 (+0.11%) remained subdued. In the US, major indices faced headwinds, particularly the Nasdaq 100 which declined -1.01%. Market breadth, as indicated by S5FI at 57.2% and MMTH at 58.7%, suggests a market still above critical moving averages, yet not showing strong conviction in the rally. With the BAML HY Spread's regime currently unknown, a definitive assessment of credit market stability remains elusive, contributing to a cautious undertone despite a normal VIX at 17.83.",
-    "analysis_para2": "The immediate mechanical plan involves closely monitoring key support levels for the major US indices. A critical support zone for the S&P 500 lies around the 7100-7120 range, with a break below potentially signaling further downside pressure. For the Nasdaq 100, the 27000 mark is a significant psychological and technical level to watch; sustained weakness below this could indicate a deeper correction in growth names. Investors should maintain exposure to themes demonstrating strong relative strength, such as Semiconductors, while keeping an eye on market breadth (S5FI 57.2%, MMTH 58.7%) for signs of deterioration below 50%. A definitive move below these breadth levels, coupled with a breakdown of index support, would necessitate a more defensive posture.",
-    "technical_signal": "No reversal pattern confirmed yet. US indices declined today, but breadth remains above 50% and the VIX is in a normal range, indicating no immediate capitulation or exhaustion signal.",
+    "analysis_para1": "Global markets are signaling a cautious open, with the Nikkei 225 down -1.02%, the FTSE 100 off -0.82%, and the DAX showing a modest -0.18% decline. This global weakness is translating into pre-market pressure on US equities, highlighted by the S&P 500's -0.49% dip and the Nasdaq 100's more pronounced -1.01% decline. While the 10Y Yield remains stable at 4.35% and the VIX is normal at 18.02, the absence of BAML HY Spread data leaves the credit regime unclear. Meanwhile, US market breadth, with 57.2% of stocks above their 50-day moving average (S5FI) and 58.7% above their 200-day (MMTH), suggests underlying strength but could be vulnerable to further selling.",
+    "analysis_para2": "Our mechanical plan for today focuses on observing the market's reaction to potential support levels as global weakness permeates. Watch for the S&P 500 to hold above the 7100 level, with a break suggesting deeper correction. The Nasdaq 100 is critical; a failure to hold above 27000 could signal further tech sector distribution. Traders should monitor intraday volume profiles for signs of either capitulation selling or renewed buying interest at key prior support zones. Should breadth indicators like S5FI and MMTH start to fall significantly below current levels, it would confirm a broader weakening of market internals.",
+    "technical_signal": "No reversal pattern confirmed yet. The market is showing pre-market weakness, particularly in tech, without clear signs of a buy or sell climax pattern emerging.",
     "ticker_intel": [
+      {
+        "ticker": "AXTI",
+        "company": "AXT Inc",
+        "grade": "A+",
+        "reason": "AXTI, with an RS of 99 and an astounding +299.5% 3-month return, leads the red-hot Semiconductors theme with significant relative strength despite today's market weakness."
+      },
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
-        "grade": "A+",
-        "reason": "Demonstrating explosive 1-month returns of +201.0% and an RS of 98 within the leading Semiconductor theme, MXL is a top momentum play in the current market."
-      },
-      {
-        "ticker": "AEHR",
-        "company": "Aehr Test Systems",
         "grade": "A",
-        "reason": "With an outstanding 1-month gain of +155.9%, AEHR exhibits superior relative strength (RS=98) within the robust Semiconductor sector, making it a strong contender in today's momentum environment."
+        "reason": "MXL, boasting an RS of 98 and a staggering +205.9% 1-month return, demonstrates exceptional recent momentum within the robust Semiconductor sector."
       },
       {
         "ticker": "LBRT",
         "company": "Liberty Energy Inc",
         "grade": "C",
-        "reason": "Despite a strong RS of 97, LBRT's comparatively subdued 1-month return of +10.0% places it behind current market leaders, suggesting it might underperform in a momentum-driven environment."
+        "reason": "LBRT, despite a strong RS of 97, exhibits the lowest 1-month return of +13.8% among filtered candidates, suggesting relative underperformance and potential rotational weakness in a risk-off environment."
       }
     ]
   }
