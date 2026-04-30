@@ -2552,9 +2552,9 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
       {/* EMA value display */}
       {stopMode === 'ema' && (
         <div className="flex items-center justify-between mb-2 px-1">
-          <span className="text-[10px] text-zinc-500">EMA {emaMode}</span>
+          <span className="text-[10px] text-zinc-500">EMA {emaMode} −1.5%</span>
           {activeEmaPrice != null
-            ? <span className="text-[11px] font-mono text-cyan-400">${activeEmaPrice.toFixed(2)} → stop ${emaStop?.toFixed(2)}</span>
+            ? <span className="text-[11px] font-mono text-cyan-400">${emaStop?.toFixed(2)}</span>
             : <span className="text-[10px] font-mono text-zinc-600">輸入 Ticker 後自動計算</span>}
         </div>
       )}
