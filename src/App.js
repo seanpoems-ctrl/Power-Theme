@@ -2271,6 +2271,8 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
   const [stopStrategy, setStopStrategy] = React.useState('3');
   const [stopMode, setStopMode] = React.useState('lod');
   const [manualStop, setManualStop] = React.useState('');
+  const [emaMode, setEmaMode] = React.useState('9');
+  const [emaValues, setEmaValues] = React.useState({ 9: null, 21: null, 50: null });
   const [lodTicker, setLodTicker] = React.useState('');
   const [lod, setLod] = React.useState(null);
   const [currentPrice, setCurrentPrice] = React.useState(null);
@@ -2317,7 +2319,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
     // Always fetch live price + LOD from Finnhub; Yahoo Finance only when no thematic bars
     try {
       // Always call Yahoo (also has price + LOD via meta), call Finnhub when key is set
-      const yahooFetch = fetch(`https://corsproxy.io/?${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${s}?range=30d&interval=1d`)}`);
+      const yahooFetch = fetch(`https://corsproxy.io/?${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${s}?range=90d&interval=1d`)}`);
       const finnhubFetch = FINNHUB_KEY
         ? fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`).then(r => r.ok ? r.json() : null).catch(() => null)
         : Promise.resolve(null);
@@ -2351,20 +2353,34 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
       if (lodVal != null) setLod(parseFloat(parseFloat(lodVal).toFixed(2)));
 
       // ADR-20 from Yahoo Finance (only when thematic bars not available)
-      if (!thematicBarsFound && yahooData) {
-        const q = yahooData?.chart?.result?.[0]?.indicators?.quote?.[0];
-        if (q?.high?.length >= 15) {
-          const { high: h, low: l } = q;
-          const valid = [];
-          for (let i = 0; i < h.length; i++) {
-            if (h[i] != null && l[i] != null && l[i] > 0) valid.push((h[i] - l[i]) / l[i] * 100);
-          }
-          const slice = valid.slice(-20);
-          if (slice.length > 0) {
-            const adr20 = slice.reduce((a, b) => a + b, 0) / slice.length;
-            setAtr(adr20.toFixed(2));
-          }
+      const q = yahooData?.chart?.result?.[0]?.indicators?.quote?.[0];
+      if (!thematicBarsFound && q?.high?.length >= 15) {
+        const { high: h, low: l } = q;
+        const valid = [];
+        for (let i = 0; i < h.length; i++) {
+          if (h[i] != null && l[i] != null && l[i] > 0) valid.push((h[i] - l[i]) / l[i] * 100);
         }
+        const slice = valid.slice(-20);
+        if (slice.length > 0) {
+          const adr20 = slice.reduce((a, b) => a + b, 0) / slice.length;
+          setAtr(adr20.toFixed(2));
+        }
+      }
+      // EMA 9 / 21 / 50 from Yahoo Finance closes
+      if (q?.close) {
+        const closes = q.close.filter(c => c != null);
+        const calcEMA = (prices, p) => {
+          if (prices.length < p) return null;
+          const k = 2 / (p + 1);
+          let ema = prices.slice(0, p).reduce((a, b) => a + b, 0) / p;
+          for (let i = p; i < prices.length; i++) ema = prices[i] * k + ema * (1 - k);
+          return ema;
+        };
+        setEmaValues({
+          9: calcEMA(closes, 9),
+          21: calcEMA(closes, 21),
+          50: calcEMA(closes, 50),
+        });
       }
     } catch {
       if (thematicBarsFallbackPrice != null) setCurrentPrice(thematicBarsFallbackPrice);
@@ -2373,13 +2389,16 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
     }
   }, [thematicData]);
 
-  // risk unit: entry − LOD (LOD mode), entry − manualStop (manual mode), ATR (ATR mode)
+  // risk unit: entry − LOD (LOD mode), entry − manualStop (manual mode), entry − emaStop (EMA mode)
   // LOD stop is placed 0.08% below the actual LOD to avoid being stopped by brief wicks
   const effectiveLod = lod != null && lod > 0 ? parseFloat((lod * (1 - 0.0008)).toFixed(2)) : null;
   const lodRisk = effectiveLod != null && e > effectiveLod ? e - effectiveLod : 0;
   const ms = parseFloat(manualStop);
   const manualRisk = stopMode === 'manual' && ms > 0 && e > ms ? e - ms : 0;
-  const riskUnit = stopMode === 'lod' ? lodRisk : stopMode === 'manual' ? manualRisk : a;
+  const activeEmaPrice = stopMode === 'ema' ? (emaValues[parseInt(emaMode)] ?? null) : null;
+  const emaStop = activeEmaPrice != null ? parseFloat((activeEmaPrice * 0.99).toFixed(2)) : null;
+  const emaRisk = emaStop != null && e > emaStop ? e - emaStop : 0;
+  const riskUnit = stopMode === 'lod' ? lodRisk : stopMode === 'manual' ? manualRisk : stopMode === 'ema' ? emaRisk : 0;
 
   const shares = (effectiveEquity > 0 && riskUnit > 0)
     ? Math.floor((effectiveEquity * r / 100) / riskUnit)
@@ -2401,10 +2420,8 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
         const dist = e - effectiveLod;
         stops = Array.from({ length: n }, (_, i) => e - dist * (i + 1) / n);
       }
-    } else if (a > 0) {
-      stops = stopStrategy === '3'
-        ? [e - a, e - 2 * a, e - 3 * a]
-        : [e - 1.5 * a, e - 3 * a];
+    } else if (stopMode === 'ema') {
+      if (emaStop != null && emaStop > 0 && e > emaStop) stops = [emaStop];
     }
   }
 
@@ -2454,7 +2471,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
         <span className="text-[10px] text-zinc-500 flex-shrink-0">Ticker</span>
         <input
           type="text" value={lodTicker}
-          onChange={ev => { setLodTicker(ev.target.value.toUpperCase()); setLod(null); setCurrentPrice(null); setLodError(false); }}
+          onChange={ev => { setLodTicker(ev.target.value.toUpperCase()); setLod(null); setCurrentPrice(null); setLodError(false); setEmaValues({ 9: null, 21: null, 50: null }); }}
           onBlur={ev => fetchTickerData(ev.target.value)}
           onKeyDown={ev => ev.key === 'Enter' && fetchTickerData(ev.target.value)}
           placeholder="e.g. AAPL"
@@ -2499,17 +2516,29 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
         </div>
       </div>
 
-      {/* Stop Strategy toggle */}
-      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-1.5">
-        <Tog active={stopStrategy === '3'} onClick={() => setStopStrategy('3')}>3-Stop</Tog>
-        <Tog active={stopStrategy === '2'} onClick={() => setStopStrategy('2')}>2-Stop</Tog>
-      </div>
-
-      {/* Stop Mode toggle */}
-      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-2">
+      {/* Stop Mode main toggle */}
+      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-1">
         <Tog active={stopMode === 'lod'} onClick={() => setStopMode('lod')}>LOD</Tog>
         <Tog active={stopMode === 'manual'} onClick={() => setStopMode('manual')}>Manual</Tog>
+        <Tog active={stopMode === 'ema'} onClick={() => setStopMode('ema')}>EMA</Tog>
       </div>
+
+      {/* Sub-row: 2-Stop / 3-Stop (LOD and Manual only) */}
+      {(stopMode === 'lod' || stopMode === 'manual') && (
+        <div className="flex gap-0.5 bg-zinc-800/30 rounded p-0.5 mb-2">
+          <Tog active={stopStrategy === '2'} onClick={() => setStopStrategy('2')}>2-Stop</Tog>
+          <Tog active={stopStrategy === '3'} onClick={() => setStopStrategy('3')}>3-Stop</Tog>
+        </div>
+      )}
+
+      {/* Sub-row: EMA period selector */}
+      {stopMode === 'ema' && (
+        <div className="flex gap-0.5 bg-zinc-800/30 rounded p-0.5 mb-2">
+          <Tog active={emaMode === '9'} onClick={() => setEmaMode('9')}>EMA 9</Tog>
+          <Tog active={emaMode === '21'} onClick={() => setEmaMode('21')}>EMA 21</Tog>
+          <Tog active={emaMode === '50'} onClick={() => setEmaMode('50')}>EMA 50</Tog>
+        </div>
+      )}
 
       {/* Manual stop price input */}
       {stopMode === 'manual' && (
@@ -2517,6 +2546,16 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
           <span className="text-[10px] text-zinc-500 flex-shrink-0">Stop $</span>
           <input type="number" value={manualStop} onChange={ev => setManualStop(ev.target.value)} placeholder="0.00"
             className="flex-1 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"/>
+        </div>
+      )}
+
+      {/* EMA value display */}
+      {stopMode === 'ema' && (
+        <div className="flex items-center justify-between mb-2 px-1">
+          <span className="text-[10px] text-zinc-500">EMA {emaMode}</span>
+          {activeEmaPrice != null
+            ? <span className="text-[11px] font-mono text-cyan-400">${activeEmaPrice.toFixed(2)} → stop ${emaStop?.toFixed(2)}</span>
+            : <span className="text-[10px] font-mono text-zinc-600">輸入 Ticker 後自動計算</span>}
         </div>
       )}
 
@@ -2534,7 +2573,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
         </div>
         <div>
           <div className="text-[9px] text-zinc-600 mb-1 uppercase tracking-wider">
-            {stopMode === 'lod' ? 'LOD Stop' : stopMode === 'manual' ? 'Manual Stop' : `${stopStrategy}-Stop Levels`}
+            {stopMode === 'lod' ? 'LOD Stop' : stopMode === 'manual' ? 'Manual Stop' : stopMode === 'ema' ? `EMA ${emaMode} Stop (−1%)` : `${stopStrategy}-Stop Levels`}
           </div>
           {stops.length > 0 ? (
             <div className={`grid gap-2 ${stops.length === 3 ? 'grid-cols-3' : stops.length === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
@@ -2545,6 +2584,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
                     <div className="text-[8px] text-zinc-500 uppercase">
                       {stopMode === 'lod'
                         ? (i === stops.length - 1 ? 'LOD −0.08%' : `${Math.round((i + 1) / stops.length * 100)}% LOD`)
+                        : stopMode === 'ema' ? `EMA ${emaMode} −1%`
                         : `Stop ${i + 1}`}
                     </div>
                     <div className="text-[12px] font-mono font-bold text-zinc-200">{fmtPrice(s)}</div>
