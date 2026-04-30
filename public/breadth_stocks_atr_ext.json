@@ -2,24 +2,13 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 1,
-  "stocks": [
-    {
-      "ticker": "RDAC",
-      "company": "Rising Dragon Acquisition Corp.",
-      "industry": "Financial Conglomerates",
-      "price": 20.51,
-      "change_pct": 318.57,
-      "adr_pct": 9.0,
-      "market_cap_b": 0.029,
-      "atr_ext_val": 35.36
-    }
-  ],
+  "count": 0,
+  "stocks": [],
   "spx_benchmarks": {
-    "spx_1d": -0.04,
-    "spx_1m": 9.3,
-    "spx_3m": 2.4,
-    "spx_34d": 6.94
+    "spx_1d": 1.02,
+    "spx_1m": 9.64,
+    "spx_3m": 3.89,
+    "spx_34d": 8.7
   },
-  "fetched_at_utc": "2026-04-29T21:52:59+00:00"
+  "fetched_at_utc": "2026-04-30T21:38:47+00:00"
 }
