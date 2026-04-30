@@ -810,7 +810,7 @@ const IbkrLeaderboard = ({ ibkrThemesData, onTickerHover, onThemeSelect }) => {
   );
 };
 
-const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings }) => {
+const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt }) => {
   const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks }
 
   const heatData = useMemo(() => {
@@ -869,9 +869,10 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings }) => {
           <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.18em]">
             Theme Heatmap — 1D RS Performance
           </div>
-          {hasEnough && (
-            <div className="text-[9px] text-zinc-600 uppercase tracking-wider">Top 5 · Bottom 5</div>
-          )}
+          <div className="flex items-center gap-2">
+            <UpdatedAt ts={generatedAt}/>
+            {hasEnough && <div className="text-[9px] text-zinc-600 uppercase tracking-wider">Top 5 · Bottom 5</div>}
+          </div>
         </div>
         <div className="grid gap-1" style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}>
           {topBottom.map((item, idx) => {
@@ -1064,7 +1065,7 @@ const RS_MODES = [
   { key: '52w', label: '52W', perfKey: 'rs_52w',   spyKey: null       },
 ];
 
-const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, onViewChange, onThemeSelect }) => {
+const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, generatedAt, onViewChange, onThemeSelect }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
   const [expanded, setExpanded] = useState(null);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
@@ -1181,6 +1182,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         <BarChart3 size={13} className="text-blue-400 flex-shrink-0"/>
         <span className="text-[13px] font-semibold text-zinc-300 whitespace-nowrap">Theme Leaderboard</span>
         <span className="text-[11px] text-zinc-600">Top 5 of {ranked.length} themes</span>
+        <UpdatedAt ts={generatedAt}/>
         {secondaryKey && (
           <button onClick={() => setSortPriority([{ key: 'rs_score', direction: 'desc' }])}
             className="text-[10px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">
@@ -2573,7 +2575,15 @@ const PanelLabel = ({ children, badge, badgeClass = "bg-emerald-500/10 text-emer
   </div>
 );
 
-const VixFearGaugeV2 = ({ vix }) => {
+// 從各種格式的時間字串擷取 HH:MM TZ，顯示在 panel 角落
+const UpdatedAt = ({ ts }) => {
+  if (!ts) return null;
+  const m = ts.match(/(\d{1,2}:\d{2})\s*(EDT|EST|ET)?/);
+  const display = m ? `${m[1]} ${m[2] || 'ET'}` : ts;
+  return <span className="text-[9px] text-zinc-600 font-mono tabular-nums">↻ {display}</span>;
+};
+
+const VixFearGaugeV2 = ({ vix, generatedAt }) => {
   const v = vix ?? 0;
   const cfg =
     v >= 30 ? { label: "EXTREME FEAR", cls: "text-red-400" } :
@@ -2589,7 +2599,10 @@ const VixFearGaugeV2 = ({ vix }) => {
     : "Low VIX = trend friendly. Standard entries on RS leaders OK.";
   return (
     <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-      <PanelLabel badge="IBKR">VIX Fear Gauge</PanelLabel>
+      <div className="flex items-center justify-between mb-2">
+        <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em]">VIX Fear Gauge</div>
+        <div className="flex items-center gap-1.5"><UpdatedAt ts={generatedAt}/><span className="px-1.5 py-0.5 text-[9px] font-bold rounded border bg-emerald-500/10 text-emerald-400 border-emerald-500/30">IBKR</span></div>
+      </div>
       <div className="text-[28px] leading-none font-bold font-mono text-zinc-100">{v ? v.toFixed(1) : "—"}</div>
       <div className={`text-[11px] font-semibold mt-1 ${cfg.cls}`}>⚠ {cfg.label}</div>
       <div className="mt-2 pt-2 border-t border-zinc-800/60">
@@ -2682,7 +2695,7 @@ const INTERNALS_NOTES = [
   },
 ];
 
-const MarketInternalsV2 = ({ mc, internalsData }) => {
+const MarketInternalsV2 = ({ mc, internalsData, generatedAt }) => {
   const [showNotes, setShowNotes] = React.useState(false);
   if (!mc) return null;
   const { adv_dec, new_hl, sma50_counts, sma200_counts } = mc;
@@ -2710,17 +2723,21 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
   return (
     <div className="relative bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
       <div className="flex items-center justify-between mb-2">
-        <PanelLabel badge="IBKR">Market Internals</PanelLabel>
-        <button
-          onClick={() => setShowNotes(v => !v)}
-          className={`text-[10px] px-2 py-0.5 rounded border transition-colors ${
-            showNotes
-              ? "border-zinc-500 text-zinc-300 bg-zinc-800"
-              : "border-zinc-700 text-zinc-500 hover:text-zinc-300 hover:border-zinc-500"
-          }`}
-        >
-          {showNotes ? "▲ Notes" : "▼ Notes"}
-        </button>
+        <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em]">Market Internals</div>
+        <div className="flex items-center gap-1.5">
+          <UpdatedAt ts={generatedAt}/>
+          <span className="px-1.5 py-0.5 text-[9px] font-bold rounded border bg-emerald-500/10 text-emerald-400 border-emerald-500/30">IBKR</span>
+          <button
+            onClick={() => setShowNotes(v => !v)}
+            className={`text-[10px] px-2 py-0.5 rounded border transition-colors ${
+              showNotes
+                ? "border-zinc-500 text-zinc-300 bg-zinc-800"
+                : "border-zinc-700 text-zinc-500 hover:text-zinc-300 hover:border-zinc-500"
+            }`}
+          >
+            {showNotes ? "▲ Notes" : "▼ Notes"}
+          </button>
+        </div>
       </div>
       <div className="space-y-1.5">
         <div>
@@ -7776,15 +7793,15 @@ const filtered = useMemo(() => {
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
           <aside className="w-[260px] flex-shrink-0 flex flex-col gap-3">
-            <VixFearGaugeV2 vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix}/>
-            <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData}/>
+            <VixFearGaugeV2 vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix} generatedAt={data?.generated_at}/>
+            <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData} generatedAt={data?.generated_at}/>
             <PositionCalc ibkrThemesData={ibkrData} thematicData={data}/>
             <AlertRulesCard/>
           </aside>
 
           {/* ── CENTER MAIN CONTENT ──────────────────────────────── */}
           <main className="flex-1 min-w-0 flex flex-col gap-3">
-            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings}/>
+            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} generatedAt={data?.generated_at}/>
             {data && <Leaderboard
               themeRankings={data.theme_rankings}
               industryRankings={data.industry_rankings}
@@ -7792,6 +7809,7 @@ const filtered = useMemo(() => {
               themes={data.themes}
               spyBenchmarks={data.spy_benchmarks}
               ibkrThemesData={ibkrThemesData}
+              generatedAt={data.generated_at}
               onViewChange={v => { setLbView(v); setSpotlightThemeName(null); }}
               onThemeSelect={name => setSpotlightThemeName(name)}
             />}
