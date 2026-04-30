@@ -1,57 +1,57 @@
 {
-  "generated_at": "April 30, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "April 30, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7135.95,
-      "change": -2.85,
-      "change_pct": -0.04
+      "price": 7209.01,
+      "change": 73.06,
+      "change_pct": 1.02
     },
     {
       "label": "Nasdaq 100",
-      "price": 27186.98,
-      "change": 157.97,
-      "change_pct": 0.58
+      "price": 27452.12,
+      "change": 265.14,
+      "change_pct": 0.98
     },
     {
       "label": "VIX",
-      "price": 17.96,
-      "change": -0.85,
+      "price": 16.89,
+      "change": -1.92,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.42,
-      "change": 0.06,
+      "price": 4.39,
+      "change": -0.03,
       "change_pct": null,
-      "trend_label": "Rising"
+      "trend_label": "Stable"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 59284.92,
-      "change_pct": -1.06
+      "price": 59917.46,
+      "change_pct": -1.02
     },
     "dax": {
       "label": "DAX",
-      "price": 24139.35,
-      "change_pct": 0.77
+      "price": 24292.38,
+      "change_pct": 1.41
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10352.72,
-      "change_pct": 1.37
+      "price": 10378.82,
+      "change_pct": 1.62
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 54.3,
-    "mmth": 59.2,
+    "s5fi": 63.1,
+    "mmth": 63.7,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Mixed Global, US Tech Resilience",
+  "mood": "Broad US & Euro Rally",
   "analysis": {
-    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 down -1.06% contrasting sharply with strong European gains in the DAX (+0.77%) and FTSE 100 (+1.37%). US credit conditions remain opaque given the 'N/A' High Yield spread, precluding a clear read on risk appetite from that sector. Domestically, while the S&P 500 sits nearly flat at -0.04%, the Nasdaq 100 is outperforming significantly with a +0.58% gain, signaling continued leadership from growth and technology sectors. Market breadth, with 54.3% of stocks above their 50-day moving average (S5FI) and 59.2% above their 200-day (MMTH), suggests underlying health without being overextended.",
-    "analysis_para2": "The key mechanical plan today involves closely monitoring the Nasdaq 100 for continued outperformance, particularly given its +0.58% move pre-market. A decisive break and hold above yesterday's Nasdaq 100 high would confirm sustained strength, while weakness below the psychological 27000 level could signal a broader pullback. The rising 10-year yield, currently at 4.42%, remains a critical macro factor; sustained increases could pressure growth names despite current enthusiasm. For the broader market, maintaining the S&P 500 above the 7100 level would indicate resilience, otherwise, we could see a retest of support. Focus on relative strength within the technology and semiconductor sectors, which appear to be driving current market action.",
-    "technical_signal": "No reversal pattern confirmed yet. The market exhibits mixed global sentiment but underlying US tech strength.",
+    "analysis_para1": "Today's global market tape presented a mixed but largely positive picture, with strong bullish sentiment in US and European equities offsetting weakness in Asia. The Nikkei 225 dipped by 1.02%, contrasting sharply with robust gains of +1.41% for the DAX and +1.62% for the FTSE 100. In the US, the S&P 500 advanced 1.02% to 7209.01 and the Nasdaq 100 gained 0.98% to 27452.12, reflecting strong broad participation. While the BAML HY Spread remains an unknown regime, US market breadth signals healthy underlying conditions, with 63.1% of stocks above their 50-day moving average (S5FI) and 63.7% above their 200-day moving average (MMTH).",
+    "analysis_para2": "Given the broad market strength and improving breadth, the mechanical plan remains to maintain exposure to leading sectors and individual names exhibiting superior relative strength. Key levels to watch on the upside for the S&P 500 would be a break above yesterday's high, confirming continued momentum, while a retest of the 7150 support area should be monitored for buying opportunities. Focus on high-growth themes, particularly Semiconductors and Hardware, which are generating numerous top-tier candidates. Exiting positions should be considered only on definitive breaches of short-term support or clear technical distribution patterns, none of which are currently evident.",
+    "technical_signal": "No reversal pattern confirmed yet. The market closed with strong upward momentum, driven by broad participation and leading growth sectors, indicating a continuation of the bullish trend.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MaxLinear Inc. exhibits exceptional strength with an RS of 98 and a staggering 1-month return of +319.9%, making it a top conviction play within the surging semiconductor sector."
+        "reason": "With an RS of 98 and a staggering +319.9% 1-month return, MaxLinear Inc. exhibits exceptional momentum in the leading Semiconductors theme, ideal for a strong growth market."
       },
       {
         "ticker": "SNDK",
         "company": "Sandisk Corp",
         "grade": "A",
-        "reason": "Sandisk Corp. stands out with an RS of 99 and robust 1-month performance of +85.9%, indicating strong momentum within the hardware segment, aligning with current tech leadership."
+        "reason": "Sandisk Corp, with an RS of 99 and a robust +85.9% 1-month return, demonstrates top-tier relative strength and consistent performance within the Hardware sector."
       },
       {
         "ticker": "AMKR",
         "company": "AMKOR Technology Inc",
         "grade": "C",
-        "reason": "Despite its high RS of 97, AMKOR Technology Inc. shows a 1-month return of +71.2% significantly outpacing its 3-month return of +38.5%, suggesting a potentially overextended recent parabolic move prone to a pullback."
+        "reason": "Despite a decent 1-month gain of +71.2% and RS=97, AMKOR Technology's comparatively weaker +38.5% 3-month return suggests less sustained leadership compared to its peers."
       }
     ]
   }
