@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 29, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "April 30, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 18.81,
-      "change": 0.98,
+      "price": 17.96,
+      "change": -0.85,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 59917.46,
-      "change_pct": -1.02
+      "price": 59284.92,
+      "change_pct": -1.06
     },
     "dax": {
       "label": "DAX",
-      "price": 23954.56,
-      "change_pct": -0.27
+      "price": 24139.35,
+      "change_pct": 0.77
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10213.11,
-      "change_pct": -1.16
+      "price": 10352.72,
+      "change_pct": 1.37
     }
   },
   "macro_breadth": {
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech Outperformance, Global Weakness Persists",
+  "mood": "Mixed Global, US Tech Resilience",
   "analysis": {
-    "analysis_para1": "Global equities registered broad declines today, with the Nikkei 225 retreating 1.02%, the DAX down 0.27%, and the FTSE 100 falling 1.16%, reflecting a pervasive international risk-off sentiment. Domestically, the S&P 500 remained largely flat, yet the Nasdaq 100 surged 0.58%, showcasing significant US tech outperformance despite a rising 10-year Treasury yield at 4.42%. US market breadth indicators, with 54.3% of S&P 500 stocks above their 50-day MA (S5FI) and 59.2% above their 200-day MA (MMTH), indicate underlying positive trending strength for a majority of stocks, which is diverging from the global tape. The unknown BAML HY Spread regime prevents a clear assessment of credit market stress, leaving yield as the primary fixed income signal.",
-    "analysis_para2": "The mechanical plan focuses on maintaining exposure to leading sectors while monitoring key index levels for any spillover from global weakness. With the Nasdaq 100 showing strong relative strength, holding above the 27,000 level would confirm bullish momentum in tech. For the broader market, S&P 500 support around 7100 should be watched closely as a potential inflection point. Investors should prioritize high-RS (Relative Strength) stocks within the Semiconductor and Hardware themes, which are clearly exhibiting leadership and strong price action. A breakdown below these key index supports, particularly if accompanied by a rising VIX or further global declines, would signal a need to reduce risk exposure.",
-    "technical_signal": "No reversal pattern confirmed yet. The market exhibits mixed signals with strong tech outperformance, but broad global weakness prevents a clear overall directional shift.",
+    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 down -1.06% contrasting sharply with strong European gains in the DAX (+0.77%) and FTSE 100 (+1.37%). US credit conditions remain opaque given the 'N/A' High Yield spread, precluding a clear read on risk appetite from that sector. Domestically, while the S&P 500 sits nearly flat at -0.04%, the Nasdaq 100 is outperforming significantly with a +0.58% gain, signaling continued leadership from growth and technology sectors. Market breadth, with 54.3% of stocks above their 50-day moving average (S5FI) and 59.2% above their 200-day (MMTH), suggests underlying health without being overextended.",
+    "analysis_para2": "The key mechanical plan today involves closely monitoring the Nasdaq 100 for continued outperformance, particularly given its +0.58% move pre-market. A decisive break and hold above yesterday's Nasdaq 100 high would confirm sustained strength, while weakness below the psychological 27000 level could signal a broader pullback. The rising 10-year yield, currently at 4.42%, remains a critical macro factor; sustained increases could pressure growth names despite current enthusiasm. For the broader market, maintaining the S&P 500 above the 7100 level would indicate resilience, otherwise, we could see a retest of support. Focus on relative strength within the technology and semiconductor sectors, which appear to be driving current market action.",
+    "technical_signal": "No reversal pattern confirmed yet. The market exhibits mixed global sentiment but underlying US tech strength.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MXL earns an A+ for its outstanding RS=98 and a staggering +205.9% 1-month return, demonstrating exceptional leadership within the dominant Semiconductor sector."
+        "reason": "MaxLinear Inc. exhibits exceptional strength with an RS of 98 and a staggering 1-month return of +319.9%, making it a top conviction play within the surging semiconductor sector."
       },
       {
-        "ticker": "AEHR",
-        "company": "Aehr Test Systems",
+        "ticker": "SNDK",
+        "company": "Sandisk Corp",
         "grade": "A",
-        "reason": "AEHR merits an A grade for its robust RS=98 and impressive +153.5% 1-month gain, positioning it as a standout performer in the high-momentum Semiconductor industry."
+        "reason": "Sandisk Corp. stands out with an RS of 99 and robust 1-month performance of +85.9%, indicating strong momentum within the hardware segment, aligning with current tech leadership."
       },
       {
-        "ticker": "LBRT",
-        "company": "Liberty Energy Inc",
+        "ticker": "AMKR",
+        "company": "AMKOR Technology Inc",
         "grade": "C",
-        "reason": "LBRT receives a C grade as its +13.8% 1-month return, though positive, significantly lags the exponential gains seen in leading sectors, making it a weaker pick outside the dominant tech narrative."
+        "reason": "Despite its high RS of 97, AMKOR Technology Inc. shows a 1-month return of +71.2% significantly outpacing its 3-month return of +38.5%, suggesting a potentially overextended recent parabolic move prone to a pullback."
       }
     ]
   }
