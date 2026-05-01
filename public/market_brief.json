@@ -1,6 +1,6 @@
 {
-  "generated_at": "April 30, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "May 01, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 16.89,
-      "change": -1.92,
+      "price": 16.96,
+      "change": 0.07,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,8 +32,8 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 59917.46,
-      "change_pct": -1.02
+      "price": 59513.12,
+      "change_pct": 0.38
     },
     "dax": {
       "label": "DAX",
@@ -42,15 +42,15 @@
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10378.82,
-      "change_pct": 1.62
+      "price": 10321.37,
+      "change_pct": -0.55
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 63.1,
+    "s5fi": 63.0,
     "mmth": 63.7,
     "breadth_flush": false,
     "generational": false,
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Broad US & Euro Rally",
+  "mood": "Broad market strength, tech leads",
   "analysis": {
-    "analysis_para1": "Today's global market tape presented a mixed but largely positive picture, with strong bullish sentiment in US and European equities offsetting weakness in Asia. The Nikkei 225 dipped by 1.02%, contrasting sharply with robust gains of +1.41% for the DAX and +1.62% for the FTSE 100. In the US, the S&P 500 advanced 1.02% to 7209.01 and the Nasdaq 100 gained 0.98% to 27452.12, reflecting strong broad participation. While the BAML HY Spread remains an unknown regime, US market breadth signals healthy underlying conditions, with 63.1% of stocks above their 50-day moving average (S5FI) and 63.7% above their 200-day moving average (MMTH).",
-    "analysis_para2": "Given the broad market strength and improving breadth, the mechanical plan remains to maintain exposure to leading sectors and individual names exhibiting superior relative strength. Key levels to watch on the upside for the S&P 500 would be a break above yesterday's high, confirming continued momentum, while a retest of the 7150 support area should be monitored for buying opportunities. Focus on high-growth themes, particularly Semiconductors and Hardware, which are generating numerous top-tier candidates. Exiting positions should be considered only on definitive breaches of short-term support or clear technical distribution patterns, none of which are currently evident.",
-    "technical_signal": "No reversal pattern confirmed yet. The market closed with strong upward momentum, driven by broad participation and leading growth sectors, indicating a continuation of the bullish trend.",
+    "analysis_para1": "Global markets present a mixed but generally positive picture pre-market, with the DAX notably strong at +1.41% offsetting a lagging FTSE 100 at -0.55%, while the Nikkei saw modest gains. US credit conditions appear stable with the 10Y Yield at 4.39%. This supportive environment is reflected in healthy domestic market breadth, as 63.0% of S&P 500 stocks trade above their 50-day moving average and 63.7% remain above their 200-day moving average, indicating broad participation in the current advance.",
+    "analysis_para2": "With the S&P 500 indicating a strong gap-up above 7200, the mechanical plan is to monitor for sustained upside follow-through post-open. A crucial signal will be whether the market holds above its opening price; a failure to do so could suggest a potential fade or profit-taking. Given the healthy breadth and normal VIX levels, maintaining exposure to leading sectors, particularly Semiconductors and Hardware which show strong momentum, is prudent. Any pullback towards the previous day's close should be watched as a potential re-entry point for conviction names, assuming overall market structure remains intact.",
+    "technical_signal": "No reversal pattern confirmed yet. The market is showing strong positive momentum pre-market, suggesting continued upside.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "With an RS of 98 and a staggering +319.9% 1-month return, MaxLinear Inc. exhibits exceptional momentum in the leading Semiconductors theme, ideal for a strong growth market."
+        "reason": "MXL earns an A+ due to its exceptional 1M return of +306.8% and RS of 98, demonstrating leading momentum within the strong Semiconductors theme."
       },
       {
-        "ticker": "SNDK",
-        "company": "Sandisk Corp",
+        "ticker": "AXTI",
+        "company": "AXT Inc",
         "grade": "A",
-        "reason": "Sandisk Corp, with an RS of 99 and a robust +85.9% 1-month return, demonstrates top-tier relative strength and consistent performance within the Hardware sector."
+        "reason": "AXTI receives an A grade with its RS of 99 and robust 3M return of +383.6%, indicating sustained leadership in the current Semiconductors rally."
       },
       {
-        "ticker": "AMKR",
-        "company": "AMKOR Technology Inc",
+        "ticker": "PUMP",
+        "company": "ProPetro Holding Corp",
         "grade": "C",
-        "reason": "Despite a decent 1-month gain of +71.2% and RS=97, AMKOR Technology's comparatively weaker +38.5% 3-month return suggests less sustained leadership compared to its peers."
+        "reason": "Despite its RS of 97 and 1M gain of +18.9%, PUMP receives a C grade as its performance significantly lags the explosive growth seen in tech sectors, making it a relative underperformer in the current risk-on regime."
       }
     ]
   }
