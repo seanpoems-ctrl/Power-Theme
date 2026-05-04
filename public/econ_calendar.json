@@ -1,75 +1,15 @@
 {
-  "generated_at": "2026-05-01T21:38:29.931921+00:00",
+  "generated_at": "2026-05-04T21:39:57.204505+00:00",
   "data_source": "tradingview",
   "events": [
     {
-      "date": "2026-05-01",
-      "time_et": "09:45",
-      "event": "S&P Global Manufacturing PMI Final",
+      "date": "2026-05-04",
+      "time_et": "08:00",
+      "event": "Total Vehicle Sales",
       "impact": "Low",
-      "actual": "54.5",
-      "forecast": "54",
-      "previous": "52.3",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-05-01",
-      "time_et": "10:00",
-      "event": "ISM Manufacturing PMI",
-      "impact": "Low",
-      "actual": "52.7",
-      "forecast": "53",
-      "previous": "52.7",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-05-01",
-      "time_et": "10:00",
-      "event": "ISM Manufacturing New Orders",
-      "impact": "Low",
-      "actual": "54.1",
-      "forecast": null,
-      "previous": "53.5",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-05-01",
-      "time_et": "10:00",
-      "event": "ISM Manufacturing Prices",
-      "impact": "Low",
-      "actual": "84.6",
-      "forecast": "80",
-      "previous": "78.3",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-05-01",
-      "time_et": "10:00",
-      "event": "ISM Manufacturing Employment",
-      "impact": "Low",
-      "actual": "46.4",
-      "forecast": "49",
-      "previous": "48.7",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-05-01",
-      "time_et": "13:00",
-      "event": "Baker Hughes Oil Rig Count",
-      "impact": "Low",
-      "actual": "408",
-      "forecast": null,
-      "previous": "407",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-05-01",
-      "time_et": "13:00",
-      "event": "Baker Hughes Total Rigs Count",
-      "impact": "Low",
-      "actual": "547",
-      "forecast": null,
-      "previous": "544",
+      "actual": "15.9",
+      "forecast": "16",
+      "previous": "16.3",
       "currency": "USD"
     },
     {
@@ -77,9 +17,9 @@
       "time_et": "10:00",
       "event": "Factory Orders ex Transportation",
       "impact": "Low",
-      "actual": null,
+      "actual": "1.6",
       "forecast": null,
-      "previous": "1.2",
+      "previous": "1.6",
       "currency": "USD"
     },
     {
@@ -87,9 +27,9 @@
       "time_et": "10:00",
       "event": "Factory Orders MoM",
       "impact": "Low",
-      "actual": null,
-      "forecast": "0.4",
-      "previous": null,
+      "actual": "1.5",
+      "forecast": "0.5",
+      "previous": "0.3",
       "currency": "USD"
     },
     {
@@ -97,7 +37,7 @@
       "time_et": "11:30",
       "event": "6-Month Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "3.61",
       "forecast": null,
       "previous": "3.59",
       "currency": "USD"
@@ -107,7 +47,7 @@
       "time_et": "11:30",
       "event": "3-Month Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "3.61",
       "forecast": null,
       "previous": "3.59",
       "currency": "USD"
@@ -120,16 +60,6 @@
       "actual": null,
       "forecast": null,
       "previous": null,
-      "currency": "USD"
-    },
-    {
-      "date": "2026-05-04",
-      "time_et": "14:00",
-      "event": "Total Vehicle Sales",
-      "impact": "Low",
-      "actual": null,
-      "forecast": "16",
-      "previous": "16.3",
       "currency": "USD"
     },
     {
@@ -198,7 +128,7 @@
       "event": "Balance of Trade",
       "impact": "Low",
       "actual": null,
-      "forecast": "-59",
+      "forecast": "-60.5",
       "previous": "-57.3",
       "currency": "USD"
     },
@@ -248,7 +178,7 @@
       "event": "ISM Services PMI",
       "impact": "Low",
       "actual": null,
-      "forecast": "53.8",
+      "forecast": "53.7",
       "previous": "54",
       "currency": "USD"
     },
@@ -318,7 +248,7 @@
       "event": "JOLTs Job Openings",
       "impact": "Low",
       "actual": null,
-      "forecast": "6.87",
+      "forecast": "6.83",
       "previous": "6.882",
       "currency": "USD"
     },
@@ -458,7 +388,7 @@
       "event": "ADP Employment Change",
       "impact": "Low",
       "actual": null,
-      "forecast": "79",
+      "forecast": "99",
       "previous": "62",
       "currency": "USD"
     },
@@ -618,7 +548,7 @@
       "event": "Continuing Jobless Claims",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "1800",
       "previous": "1785",
       "currency": "USD"
     },
@@ -638,7 +568,7 @@
       "event": "Initial Jobless Claims",
       "impact": "Low",
       "actual": null,
-      "forecast": "199",
+      "forecast": "205",
       "previous": "189",
       "currency": "USD"
     },
@@ -648,7 +578,7 @@
       "event": "Unit Labour Costs QoQ Prel",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "2.6",
       "previous": "4.4",
       "currency": "USD"
     },
@@ -658,7 +588,7 @@
       "event": "Nonfarm Productivity QoQ Prel",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "1.4",
       "previous": "1.8",
       "currency": "USD"
     },
@@ -688,7 +618,7 @@
       "event": "Construction Spending MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "0.2",
       "previous": "-0.3",
       "currency": "USD"
     },
@@ -729,7 +659,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "3.6",
       "currency": "USD"
     },
     {
@@ -739,7 +669,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "3.62",
       "currency": "USD"
     },
     {
@@ -778,7 +708,7 @@
       "event": "Consumer Credit Change",
       "impact": "Low",
       "actual": null,
-      "forecast": "12.5",
+      "forecast": "11",
       "previous": "9.48",
       "currency": "USD"
     },
@@ -818,7 +748,7 @@
       "event": "Manufacturing Payrolls",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "5",
       "previous": "15",
       "currency": "USD"
     },
@@ -828,7 +758,7 @@
       "event": "Non Farm Payrolls",
       "impact": "Low",
       "actual": null,
-      "forecast": "73",
+      "forecast": "60",
       "previous": "178",
       "currency": "USD"
     },
@@ -858,7 +788,7 @@
       "event": "Average Hourly Earnings YoY",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "3.8",
       "previous": "3.5",
       "currency": "USD"
     },
@@ -868,7 +798,7 @@
       "event": "Nonfarm Payrolls Private",
       "impact": "Low",
       "actual": null,
-      "forecast": "60",
+      "forecast": "73",
       "previous": "186",
       "currency": "USD"
     },
@@ -1026,6 +956,66 @@
       "date": "2026-05-08",
       "time_et": "19:30",
       "event": "Fed Bowman Speech",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-05-11",
+      "time_et": "10:00",
+      "event": "Existing Home Sales",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "3.98",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-05-11",
+      "time_et": "10:00",
+      "event": "Existing Home Sales MoM",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "-3.6",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-05-11",
+      "time_et": "10:20",
+      "event": "NY Fed Bill Purchases 1 to 4 months",
+      "impact": "Low",
+      "actual": null,
+      "forecast": "7.585",
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-05-11",
+      "time_et": "11:30",
+      "event": "6-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-05-11",
+      "time_et": "11:30",
+      "event": "3-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-05-11",
+      "time_et": "13:00",
+      "event": "3-Year Note Auction",
       "impact": "Low",
       "actual": null,
       "forecast": null,
