@@ -115,6 +115,7 @@ jobs:
           git status --short public/
           git add -u public/
           git add -f public/breadth_stocks_*.json 2>/dev/null || true
+          git add -f public/breadth_history/*.json 2>/dev/null || true
           echo "=== Staged files ==="
           git diff --staged --stat
           git diff --staged --quiet || git commit -m "data: thematic_data $(date -u +%Y-%m-%dT%H:%M) [skip ci]"

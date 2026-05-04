@@ -1003,10 +1003,32 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
 });
 
 // ---------------------------------------------------------------------------
+// Normalize compact history record → standard stock shape
+// ---------------------------------------------------------------------------
+
+function normalizeHistoricalStock(s) {
+  return {
+    ticker:        s.t  ?? "",
+    company:       s.co ?? "",
+    price:         s.p  ?? null,
+    change_pct:    s.c  ?? null,
+    adr_pct:       s.adr ?? null,
+    dollar_volume: null,
+    industry:      null,
+    market_cap_b:  null,
+    perf_1m:       null,
+    perf_3m:       null,
+    perf_34d:      null,
+    atr_ext_val:   null,
+    above50dma_pct: null,
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Main modal
 // ---------------------------------------------------------------------------
 
-const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel, onClose, onAddToClipboard }) {
+const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel, date, isLatest, onClose, onAddToClipboard }) {
   const [view, setView] = useState("list");
   const [stocks, setStocks] = useState([]);
   const [spxData, setSpxData] = useState(null);
@@ -1023,21 +1045,39 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
     abortRef.current = ctrl;
 
     try {
-      const res = await fetch(
-        `${process.env.PUBLIC_URL}/breadth_stocks_${filter}.json?_=${Date.now()}`,
-        { signal: ctrl.signal }
-      );
-      if (!res.ok) throw new Error(`HTTP ${res.status} — stock list not found. Run breadth_stocks_builder.py first.`);
-      const data = await res.json();
-      setStocks(data.stocks ?? []);
-      setSpxData(data.spx_benchmarks ?? null);
+      if (isLatest) {
+        // Latest row: use the full live stock file
+        const res = await fetch(
+          `${process.env.PUBLIC_URL}/breadth_stocks_${filter}.json?_=${Date.now()}`,
+          { signal: ctrl.signal }
+        );
+        if (!res.ok) throw new Error(`HTTP ${res.status} — stock list not found. Run breadth_stocks_builder.py first.`);
+        const data = await res.json();
+        setStocks(data.stocks ?? []);
+        setSpxData(data.spx_benchmarks ?? null);
+      } else {
+        // Historical row: load compact archive file
+        const res = await fetch(
+          `${process.env.PUBLIC_URL}/breadth_history/${date}.json`,
+          { signal: ctrl.signal }
+        );
+        if (!res.ok) throw new Error(
+          res.status === 404
+            ? `No historical data saved for ${date}. Archive collection started from the next trading day after this feature was deployed.`
+            : `HTTP ${res.status}`
+        );
+        const data = await res.json();
+        const raw = data.filters?.[filter] ?? [];
+        setStocks(raw.map(normalizeHistoricalStock));
+        setSpxData(null);
+      }
     } catch (e) {
       if (e.name === "AbortError") return;
       setError(e.message);
     } finally {
       setLoading(false);
     }
-  }, [filter]);
+  }, [filter, date, isLatest]);
 
   useEffect(() => {
     void load();
@@ -1052,8 +1092,9 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
   }, [onClose]);
 
   // Client-side threshold guard: enforce each scanner's minimum perf cutoff
-  // so edge-case entries from Finviz never slip through to the table.
+  // Only applied to latest data since historical compact data already passed Finviz filter
   const displayStocks = useMemo(() => {
+    if (!isLatest) return stocks;
     const threshold = PERF_THRESHOLD[filter];
     if (threshold == null) return stocks;
     const field = PERF_FIELD[filter] ?? "change_pct";
@@ -1062,7 +1103,7 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
     } else {
       return stocks.filter((s) => (getPerfValue(s, field) ?? Infinity) <= threshold);
     }
-  }, [stocks, filter]);
+  }, [stocks, filter, isLatest]);
 
   const allTickers = displayStocks.map((s) => s.ticker);
 
@@ -1079,10 +1120,17 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
         {/* Header */}
         <div className="flex items-center gap-3 border-b border-zinc-800 px-4 py-3">
           <div className="flex-1">
-            <h2 className="text-sm font-semibold text-zinc-100">{filterLabel}</h2>
+            <div className="flex items-center gap-2">
+              <h2 className="text-sm font-semibold text-zinc-100">{filterLabel}</h2>
+              {!isLatest && date && (
+                <span className="rounded bg-amber-900/50 px-1.5 py-0.5 text-[10px] font-medium text-amber-300 border border-amber-700/50">
+                  {date}
+                </span>
+              )}
+            </div>
             {!loading && (
               <p className="text-xs text-zinc-500">
-                {stocks.length} stocks · min $1B mkt cap
+                {stocks.length} stocks{isLatest ? " · min $1B mkt cap" : " · historical snapshot"}
               </p>
             )}
           </div>
