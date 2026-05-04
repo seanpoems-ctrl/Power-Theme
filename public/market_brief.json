@@ -1,6 +1,6 @@
 {
-  "generated_at": "May 01, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "May 04, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 16.99,
-      "change": 0.1,
+      "price": 18.13,
+      "change": 1.14,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,17 +32,17 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 59284.92,
-      "change_pct": -1.06
+      "price": 59513.12,
+      "change_pct": 0.38
     },
     "dax": {
       "label": "DAX",
-      "price": 24292.38,
-      "change_pct": 1.41
+      "price": 24244.44,
+      "change_pct": -0.2
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10363.93,
+      "price": 10363.9,
       "change_pct": -0.14
     }
   },
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "US Tech Outperformance, Healthy Breadth",
+  "mood": "Tech-Led Strength Amid Mixed Globals",
   "analysis": {
-    "analysis_para1": "Global markets displayed a mixed performance today, with the Nikkei 225 and FTSE 100 showing slight declines, while the DAX surged by +1.41%. US credit conditions remain unquantifiable given the unknown BAML HY Spread regime. Domestically, market breadth continues to be healthy, indicated by 60.5% of S&P 500 stocks trading above their 50-day moving average (S5FI) and 59.3% above their 200-day moving average (MMTH). This broad participation supports the indices' modest gains, suggesting underlying strength despite the mixed international picture.",
-    "analysis_para2": "The current market environment encourages continued participation in leading themes, particularly within technology and semiconductors. Traders should monitor the S&P 500 for holding above the 7200 level, while the Nasdaq 100's strong performance suggests keeping an eye on 27500 as key support. A decisive break above today's highs for both indices would signal further upward momentum and warrant aggressive positioning in high-relative-strength names. Conversely, a failure to hold these immediate support levels could indicate a pause or shallow pullback, urging caution but not necessarily a full risk-off posture given healthy breadth.",
-    "technical_signal": "No reversal pattern confirmed yet. The indices closed higher with healthy internal breadth, suggesting continued momentum rather than a shift in trend.",
+    "analysis_para1": "Ahead of the US open, global markets present a mixed picture with the Nikkei 225 gaining 0.38%, while European indices like the DAX (-0.20%) and FTSE 100 (-0.14%) show slight weakness. The US 10-year yield remains stable at 4.38%, suggesting no immediate credit distress, despite the unknown BAML HY Spread regime. Domestically, market breadth indicators remain healthy, with 60.5% of S&P 500 stocks above their 50-day moving average (S5FI) and 59.3% above their 200-day moving average (MMTH), supporting a constructive underlying market structure.",
+    "analysis_para2": "The mechanical plan for today focuses on identifying continuation in leading sectors given the Nasdaq 100's robust 0.94% pre-market gain, significantly outpacing the S&P 500's 0.29%. Traders should monitor the S&P 500 around the 7230 level for sustained momentum and the Nasdaq 100 near 27710 for signs of continued strength in technology and growth names. A failure to hold these pre-market gains, especially in the Nasdaq, could signal a quick reversal, but current trends suggest leaning into sector strength, particularly in Semiconductors and Hardware. Utilize tight stops and let winners run in high Relative Strength candidates.",
+    "technical_signal": "No reversal pattern confirmed yet. The market is showing constructive pre-market gains, particularly in the Nasdaq 100.",
     "ticker_intel": [
       {
-        "ticker": "MXL",
-        "company": "MaxLinear Inc",
+        "ticker": "AXTI",
+        "company": "AXT Inc",
         "grade": "A+",
-        "reason": "This semiconductor stock boasts an exceptional RS of 98 and a staggering 1-month return of +306.8%, positioning it as a top-tier momentum play in the tech-led market."
+        "reason": "Exhibits exceptional leadership with an RS of 99 and a phenomenal 1-month return of +103.7%, perfectly aligning with the robust semiconductor theme."
       },
       {
-        "ticker": "SNDK",
-        "company": "Sandisk Corp",
+        "ticker": "AAOI",
+        "company": "Applied Optoelectronics Inc",
         "grade": "A",
-        "reason": "With an RS of 99 and a robust 1-month return of +72.6%, this hardware leader exemplifies the strength in the current tech-driven market outperformance."
+        "reason": "Demonstrates strong thematic momentum with an RS of 98 and a robust 1-month return of +112.5%, highlighting strength in the telecommunications sector."
       },
       {
-        "ticker": "PUMP",
-        "company": "ProPetro Holding Corp",
+        "ticker": "UCTT",
+        "company": "Ultra Clean Hldgs Inc",
         "grade": "C",
-        "reason": "Despite a respectable RS of 97 and a 1-month return of +18.9%, its relative underperformance compared to tech leaders and 'Energy Traditional' theme make it a less compelling choice in the current environment."
+        "reason": "Despite an RS of 98, its comparatively weaker 1-month return of +17.5% suggests it is a relative underperformer within the current high-octane tech rally, potentially signaling distribution."
       }
     ]
   }
