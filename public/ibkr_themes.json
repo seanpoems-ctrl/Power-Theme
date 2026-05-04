@@ -1,19 +1,180 @@
 {
-  "generated_at": "2026-05-01T21:36:19.365914+00:00",
+  "generated_at": "2026-05-04T21:38:19.232572+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
-      "name": "Industrials",
-      "theme_rs": 88.0,
-      "perf_1d": 11.21,
+      "name": "Materials & Mining",
+      "theme_rs": 98.0,
+      "perf_1d": -2.95,
       "leaders": [
         {
-          "ticker": "NVT",
-          "price": 158.92,
-          "rs_52w": 88,
-          "adr_pct": 4.07,
-          "vol_surge": 2.13,
-          "mkt_cap": 25697093381,
+          "ticker": "LWLG",
+          "price": 15.79,
+          "rs_52w": 98,
+          "adr_pct": 11.08,
+          "vol_surge": 3.0,
+          "mkt_cap": 2378143105,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Materials & Mining",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    },
+    {
+      "name": "Telecommunications",
+      "theme_rs": 98.0,
+      "perf_1d": 2.76,
+      "leaders": [
+        {
+          "ticker": "LITE",
+          "price": 976.18,
+          "rs_52w": 98,
+          "adr_pct": 7.17,
+          "vol_surge": 0.86,
+          "mkt_cap": 69699251477,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Telecommunications",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    },
+    {
+      "name": "Semiconductors",
+      "theme_rs": 96.5,
+      "perf_1d": 5.34,
+      "leaders": [
+        {
+          "ticker": "MU",
+          "price": 576.45,
+          "rs_52w": 97,
+          "adr_pct": 5.15,
+          "vol_surge": 1.11,
+          "mkt_cap": 650082307465,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "GFS",
+          "price": 67.75,
+          "rs_52w": 96,
+          "adr_pct": 4.16,
+          "vol_surge": 1.47,
+          "mkt_cap": 37199656184,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    },
+    {
+      "name": "Healthcare & Biotech",
+      "theme_rs": 96.0,
+      "perf_1d": 15.38,
+      "leaders": [
+        {
+          "ticker": "CELC",
+          "price": 144.98,
+          "rs_52w": 96,
+          "adr_pct": 5.8,
+          "vol_surge": 5.53,
+          "mkt_cap": 7007850934,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Healthcare & Biotech",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    },
+    {
+      "name": "Industrials",
+      "theme_rs": 93.0,
+      "perf_1d": 1.42,
+      "leaders": [
+        {
+          "ticker": "COHR",
+          "price": 329.89,
+          "rs_52w": 97,
+          "adr_pct": 6.79,
+          "vol_surge": 0.87,
+          "mkt_cap": 61848390902,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Industrials",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "GLW",
+          "price": 159.96,
+          "rs_52w": 95,
+          "adr_pct": 5.82,
+          "vol_surge": 0.69,
+          "mkt_cap": 137414617124,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Industrials",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "FPS",
+          "price": 40.42,
+          "rs_52w": 87,
+          "adr_pct": 5.54,
+          "vol_surge": 1.04,
+          "mkt_cap": 9867283470,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -25,6 +186,58 @@
           "primary_theme": "Industrials",
           "secondary_themes": [],
           "setup_label": "Base"
+        }
+      ]
+    },
+    {
+      "name": "Cloud Computing",
+      "theme_rs": 91.0,
+      "perf_1d": 14.2,
+      "leaders": [
+        {
+          "ticker": "NBIS",
+          "price": 176.42,
+          "rs_52w": 91,
+          "adr_pct": 6.99,
+          "vol_surge": 1.54,
+          "mkt_cap": 44637253560,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Cloud Computing",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    },
+    {
+      "name": "Commodities Metals",
+      "theme_rs": 91.0,
+      "perf_1d": -2.85,
+      "leaders": [
+        {
+          "ticker": "USAR",
+          "price": 25.58,
+          "rs_52w": 91,
+          "adr_pct": 8.37,
+          "vol_surge": 1.2,
+          "mkt_cap": 5576071836,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Commodities Metals",
+          "secondary_themes": [],
+          "setup_label": "Flag"
         }
       ]
     }
