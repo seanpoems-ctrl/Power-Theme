@@ -1,32 +1,32 @@
 {
-  "generated_at": "May 04, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "May 04, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7230.12,
-      "change": 21.11,
-      "change_pct": 0.29
+      "price": 7200.75,
+      "change": -29.37,
+      "change_pct": -0.41
     },
     {
       "label": "Nasdaq 100",
-      "price": 27710.36,
-      "change": 258.24,
-      "change_pct": 0.94
+      "price": 27651.82,
+      "change": -58.54,
+      "change_pct": -0.21
     },
     {
       "label": "VIX",
-      "price": 18.13,
-      "change": 1.14,
+      "price": 18.29,
+      "change": 1.3,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.38,
-      "change": -0.01,
+      "price": 4.45,
+      "change": 0.07,
       "change_pct": null,
-      "trend_label": "Stable"
+      "trend_label": "Rising"
     }
   ],
   "global_indices": {
@@ -37,8 +37,8 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 24244.44,
-      "change_pct": -0.2
+      "price": 23991.27,
+      "change_pct": -1.24
     },
     "ftse": {
       "label": "FTSE 100",
@@ -50,8 +50,8 @@
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 60.5,
-    "mmth": 59.3,
+    "s5fi": 59.5,
+    "mmth": 57.8,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech-Led Strength Amid Mixed Globals",
+  "mood": "Modest Weakness / Rising Yields",
   "analysis": {
-    "analysis_para1": "Ahead of the US open, global markets present a mixed picture with the Nikkei 225 gaining 0.38%, while European indices like the DAX (-0.20%) and FTSE 100 (-0.14%) show slight weakness. The US 10-year yield remains stable at 4.38%, suggesting no immediate credit distress, despite the unknown BAML HY Spread regime. Domestically, market breadth indicators remain healthy, with 60.5% of S&P 500 stocks above their 50-day moving average (S5FI) and 59.3% above their 200-day moving average (MMTH), supporting a constructive underlying market structure.",
-    "analysis_para2": "The mechanical plan for today focuses on identifying continuation in leading sectors given the Nasdaq 100's robust 0.94% pre-market gain, significantly outpacing the S&P 500's 0.29%. Traders should monitor the S&P 500 around the 7230 level for sustained momentum and the Nasdaq 100 near 27710 for signs of continued strength in technology and growth names. A failure to hold these pre-market gains, especially in the Nasdaq, could signal a quick reversal, but current trends suggest leaning into sector strength, particularly in Semiconductors and Hardware. Utilize tight stops and let winners run in high Relative Strength candidates.",
-    "technical_signal": "No reversal pattern confirmed yet. The market is showing constructive pre-market gains, particularly in the Nasdaq 100.",
+    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 gaining +0.38% while the DAX and FTSE 100 retreated by -1.24% and -0.14% respectively. This cautious sentiment extended to the US, where the S&P 500 declined -0.41% to 7200.75 and the Nasdaq 100 fell -0.21% to 27651.82. The 10-year Treasury yield continued its upward trend, potentially signaling increased pressure on growth assets, though the BAML HY Spread remains an unknown factor for credit conditions. Despite the minor index declines, market breadth indicators S5FI at 59.5% and MMTH at 57.8% suggest underlying resilience with a majority of stocks still above key moving averages.",
+    "analysis_para2": "Our mechanical plan for the coming sessions requires close monitoring of key technical levels. The S&P 500 needs to hold firm above the 7200 mark; a sustained break below this could signal further downside potential. Similarly, for the Nasdaq 100, maintaining strength above 27650 is crucial to avoid a deeper pullback. The VIX remains in a normal range at 18.29, indicating no immediate panic, but any sudden spikes would warrant a defensive posture. Furthermore, continued ascent of the 10-year yield must be watched as it could cap rallies in interest-rate-sensitive sectors, while breadth indicators S5FI and MMTH should ideally stay above 50% to confirm continued underlying market health.",
+    "technical_signal": "No reversal pattern confirmed yet. The market experienced a slight retreat without exhibiting distinct bottoming or topping signals today.",
     "ticker_intel": [
+      {
+        "ticker": "MXL",
+        "company": "MaxLinear Inc",
+        "grade": "A+",
+        "reason": "With an RS of 98 and a staggering +336.3% 1-month return, MaxLinear demonstrates extreme relative strength and parabolic momentum, making it a top conviction long in the strong semiconductor theme."
+      },
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
-        "grade": "A+",
-        "reason": "Exhibits exceptional leadership with an RS of 99 and a phenomenal 1-month return of +103.7%, perfectly aligning with the robust semiconductor theme."
-      },
-      {
-        "ticker": "AAOI",
-        "company": "Applied Optoelectronics Inc",
         "grade": "A",
-        "reason": "Demonstrates strong thematic momentum with an RS of 98 and a robust 1-month return of +112.5%, highlighting strength in the telecommunications sector."
+        "reason": "AXT showcases exceptional relative strength (RS=99) and a +103.7% 1-month gain, underscoring its leadership and significant institutional interest within the robust semiconductor sector."
       },
       {
         "ticker": "UCTT",
         "company": "Ultra Clean Hldgs Inc",
         "grade": "C",
-        "reason": "Despite an RS of 98, its comparatively weaker 1-month return of +17.5% suggests it is a relative underperformer within the current high-octane tech rally, potentially signaling distribution."
+        "reason": "Despite a strong RS of 98, Ultra Clean Holdings' +17.5% 1-month return is comparatively modest among its peers, indicating it may be a relative laggard in current momentum and warranting caution."
       }
     ]
   }
