@@ -7735,31 +7735,6 @@ const filtered = useMemo(() => {
           </aside>
         </div>
 
-        {/* ── FULL THEME DETAIL SECTIONS (collapsible deep dive) ── */}
-        {filtered.length > 0 && (
-          <div className="max-w-[1560px] mx-auto px-4 pb-4">
-            {filtered.map((t,i) => (
-              <ThemeSection
-                key={t.name+i}
-                theme={t}
-                lbPerfKey={lbPerfKey}
-                spyPerf={data?.spy_benchmarks?.[rsSPYKey]}
-                rsSPYKey={rsSPYKey}
-                isTopTheme={i===0}
-                topADRTickers={topADRTickers}
-                themeRankings={data?.theme_rankings}
-                finvizThemeRankings={data?.finviz_theme_rankings}
-              />
-            ))}
-          </div>
-        )}
-        {filtered.length === 0 && data && (
-          <div className="max-w-[1560px] mx-auto text-center py-8 text-zinc-500">
-            <BarChart3 size={24} className="mx-auto mb-2 opacity-40"/>
-            <p className="text-sm">No themes match current filters</p>
-            <button onClick={()=>{setFiltersOn(false);setSearch("");}} className="mt-2 text-[13px] text-blue-400 hover:underline">Reset</button>
-          </div>
-        )}
 
         <BottomStatusBar ibkrData={ibkrData} briefData={briefData}/>
         </>
