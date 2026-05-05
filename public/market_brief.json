@@ -1,32 +1,32 @@
 {
-  "generated_at": "May 05, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "May 05, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7200.75,
-      "change": -29.37,
-      "change_pct": -0.41
+      "price": 7259.22,
+      "change": 58.47,
+      "change_pct": 0.81
     },
     {
       "label": "Nasdaq 100",
-      "price": 27651.82,
-      "change": -58.54,
-      "change_pct": -0.21
+      "price": 28015.06,
+      "change": 363.24,
+      "change_pct": 1.31
     },
     {
       "label": "VIX",
-      "price": 17.67,
-      "change": -0.62,
+      "price": 17.38,
+      "change": -0.91,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.45,
-      "change": 0.07,
+      "price": 4.42,
+      "change": -0.03,
       "change_pct": null,
-      "trend_label": "Rising"
+      "trend_label": "Stable"
     }
   ],
   "global_indices": {
@@ -37,13 +37,13 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 24347.6,
-      "change_pct": 1.49
+      "price": 24401.7,
+      "change_pct": 1.71
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10231.2,
-      "change_pct": -1.28
+      "price": 10219.11,
+      "change_pct": -1.4
     }
   },
   "macro_breadth": {
@@ -51,7 +51,7 @@
     "credit_date": null,
     "credit_regime": null,
     "s5fi": 59.5,
-    "mmth": 57.8,
+    "mmth": 58.1,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Mixed Global, US Softness Continues",
+  "mood": "Risk-On / Tech-Led Rally",
   "analysis": {
-    "analysis_para1": "Global markets present a mixed picture this morning, with the DAX leading European gains at +1.49% while the FTSE 100 lags significantly at -1.28%, and the Nikkei 225 posted a modest +0.38%. Stateside, the rising 10-year yield at 4.45% is a notable factor influencing early sentiment, despite the unknown BAML HY Spread regime. US market breadth, though decent with 59.5% of stocks above their 50DMA and 57.8% above their 200DMA, is not preventing the S&P 500 from indicating a -0.41% open. This suggests underlying caution despite broad participation.",
-    "analysis_para2": "Our mechanical plan for today focuses on monitoring the S&P 500's ability to hold above the 7200 level, as a sustained break below this could signal further downside in this cautious environment. While the VIX remains normal at 17.67, any sudden spike would warrant immediate attention as a risk-off indicator. We will also closely watch the 10-year yield for continued upward pressure or a reversal, which could impact growth sectors. Given the current market tone, identifying pockets of clear relative strength, particularly in the tech-related themes highlighted by our scanner, will be crucial for potential long opportunities.",
-    "technical_signal": "No reversal pattern confirmed yet. US indices are indicating pre-market softness after global mixed trading.",
+    "analysis_para1": "Global markets presented a mixed picture today, with Europe's DAX surging by +1.71% and Nikkei posting a modest gain of +0.38%, though the FTSE 100 lagged with a -1.40% decline. US credit conditions remained stable, with the 10-year yield holding at 4.42%, while the BAML HY Spread's regime remains unknown. Domestically, market breadth signals remain healthy, as 59.5% of S&P 500 stocks are above their 50-day moving average (S5FI) and 58.1% are above their 200-day moving average (MMTH), indicating broad-based participation supporting the rally. This internal strength suggests US markets are largely shrugging off mixed international performance.",
+    "analysis_para2": "The current market strength, particularly in the Nasdaq 100 which surged +1.31% to 28015.06, suggests a continued 'buy the dip' mentality is in play. Key resistance levels for the S&P 500 should be watched around 7300, while Nasdaq 100 could target 28200 if momentum persists. A mechanical plan involves monitoring for any break below today's lows, or a significant rise in the VIX from its normal 17.38 level, as potential reversal signals. Until such signals emerge, the focus remains on sector leadership, particularly in Semiconductors and Hardware, and managing existing long positions with tight stops.",
+    "technical_signal": "No reversal pattern confirmed yet. Major indices continue their strong upward trajectory without significant technical warning signs.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "This semiconductor leader boasts exceptional relative strength at 98 and a staggering +334.5% 1-month return, indicative of robust institutional demand in a high-growth thematic."
+        "reason": "Explosive semiconductor leader with RS 98 and exceptional 1-month momentum (+334.5%), fitting the current tech-led risk-on regime."
       },
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A",
-        "reason": "With an RS of 99 and a phenomenal +100.6% 1-month return, AXTI demonstrates superior outperformance and clear leadership within the strong semiconductor theme."
+        "reason": "Top-tier semiconductor play exhibiting elite RS 99 and triple-digit 1-month returns (+100.6%), indicative of high conviction in a momentum-driven market."
       },
       {
-        "ticker": "LITE",
-        "company": "Lumentum Holdings Inc",
+        "ticker": "AMKR",
+        "company": "AMKOR Technology Inc",
         "grade": "C",
-        "reason": "Despite strong long-term gains, its comparatively low +18.1% 1-month return (RS 98) indicates relative underperformance against its peers in the current fast-moving telecommunications thematic, making it a potential laggard."
+        "reason": "Despite decent 1-month gains (+52.0%), its comparatively weaker 3-month performance (+47.2%) and lower RS 97 among peers suggest potential for relative underperformance in this strong market."
       }
     ]
   }
