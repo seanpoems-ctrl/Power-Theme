@@ -747,6 +747,139 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
   );
 };
 
+// ── Hero Zone — 3-column dashboard row above the heatmap ──────────────────
+const HeroZone = ({ data, briefData, themesCount, tickersCount }) => {
+  const mc = data?.market_condition;
+  const signal = mc?.signal;
+
+  const signalCfg = {
+    green:  { dot: 'bg-emerald-400', label: 'Market Uptrend',    cardBg: '#0d2818', leftBorder: '#22c55e', borderColor: '#16a34a' },
+    yellow: { dot: 'bg-amber-400',   label: 'Market Correction', cardBg: '#1a1500', leftBorder: '#d97706', borderColor: '#b45309' },
+    red:    { dot: 'bg-red-400',     label: 'Market Downtrend',  cardBg: '#1a0a0a', leftBorder: '#ef4444', borderColor: '#dc2626' },
+  }[signal] || { dot: 'bg-zinc-500', label: '—', cardBg: '#18181b', leftBorder: '#52525b', borderColor: '#3f3f46' };
+
+  const advDec = mc?.adv_dec;
+  const breadthLine = advDec
+    ? `${advDec.adv_pct?.toFixed(0) ?? '—'}% advancing · ${advDec.advancing ?? '—'} adv / ${advDec.declining ?? '—'} dec`
+    : `${themesCount} themes · ${tickersCount} tickers`;
+
+  // AI action line: prefer briefData.analysis.action_line, then para1 snippet, then fallback
+  const rawAction = briefData?.analysis?.action_line
+    ?? briefData?.analysis?.analysis_para1
+    ?? null;
+  const aiAction = rawAction
+    ? '→ ' + (rawAction.length > 130 ? rawAction.slice(0, 127) + '…' : rawAction)
+    : '→ Scan top themes for RS leaders.';
+
+  // Column 2: top 3 stocks by RS (deduped across all themes)
+  const top3 = useMemo(() => {
+    if (!data?.themes) return [];
+    const seen = new Set();
+    const stocks = [];
+    for (const t of data.themes) {
+      const norm = t.subthemes ? t : { ...t, subthemes: [{ stocks: t.stocks || [] }] };
+      for (const sub of norm.subthemes) {
+        for (const s of (sub.stocks || [])) {
+          if (!seen.has(s.ticker) && s.rs_52w != null) {
+            seen.add(s.ticker);
+            stocks.push(s);
+          }
+        }
+      }
+    }
+    return stocks.sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0)).slice(0, 3);
+  }, [data]);
+
+  // Column 3: top 5 themes by 1D perf
+  const themeRows = useMemo(() => {
+    const rankings = data?.finviz_theme_rankings || [];
+    const source = rankings.length > 0
+      ? rankings.map(r => ({ name: r.name, perf_1d: r.perf_1d }))
+      : (data?.themes || []).map(t => {
+          const norm = t.subthemes ? t : { ...t, subthemes: [{ stocks: t.stocks || [] }] };
+          const stocks = norm.subthemes.flatMap(s => s.stocks);
+          const vals = stocks.map(s => s.perf_1d).filter(v => v != null);
+          return { name: norm.name, perf_1d: vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null };
+        });
+    return source.filter(r => r.perf_1d != null)
+      .sort((a, b) => (b.perf_1d || 0) - (a.perf_1d || 0))
+      .slice(0, 5);
+  }, [data]);
+
+  const maxPerf = Math.max(...themeRows.map(r => Math.abs(r.perf_1d || 0)), 1);
+
+  return (
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', padding: '10px 0 0' }}>
+      {/* ── Col 1: Market Signal + AI Pulse ── */}
+      <div style={{
+        background: signalCfg.cardBg,
+        borderLeft: `2px solid ${signalCfg.leftBorder}`,
+        border: `0.5px solid ${signalCfg.borderColor}`,
+        borderRadius: '8px',
+        padding: '12px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '8px',
+      }}>
+        <div className="flex items-center gap-2">
+          <span className={`w-2 h-2 rounded-full flex-shrink-0 ${signalCfg.dot}`}/>
+          <span className="text-[13px] font-semibold text-zinc-100">{signalCfg.label}</span>
+        </div>
+        <span className="text-[11px] text-zinc-500 leading-snug">{breadthLine}</span>
+        <div style={{ borderTop: '1px solid rgba(63,63,70,0.4)', paddingTop: '8px' }}>
+          <span className="text-[12px] text-emerald-400 leading-snug">{aiAction}</span>
+        </div>
+      </div>
+
+      {/* ── Col 2: Top 3 RS Leaders ── */}
+      <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg p-3 flex flex-col" style={{ gap: '6px' }}>
+        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Top 3 RS Leaders</div>
+        {top3.length === 0 && <span className="text-[11px] text-zinc-600 italic">No data loaded</span>}
+        {top3.map(s => {
+          const gp = s.gates_passed ?? null;
+          return (
+            <div key={s.ticker} className="flex items-center justify-between gap-2">
+              <div className="min-w-0">
+                <span className="text-[13px] font-mono font-bold text-blue-400">{s.ticker}</span>
+                <div className="text-[11px] text-zinc-500 font-mono leading-tight">
+                  {s.price != null ? `$${s.price.toFixed(2)}` : '—'} · {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : '—'} · RS {s.rs_52w ?? '—'}
+                </div>
+              </div>
+              {gp != null && (
+                <span className={`flex-shrink-0 text-[11px] font-mono font-bold px-1.5 py-0.5 rounded border whitespace-nowrap ${
+                  gp === 5 ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
+                  : gp >= 4 ? 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30'
+                  : 'bg-zinc-700/40 text-zinc-500 border-zinc-600/30'
+                }`}>✓ {gp}/5</span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ── Col 3: Top 5 Themes Today ── */}
+      <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg p-3 flex flex-col" style={{ gap: '5px' }}>
+        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Top 5 Themes Today</div>
+        {themeRows.length === 0 && <span className="text-[11px] text-zinc-600 italic">No data loaded</span>}
+        {themeRows.map(r => (
+          <div key={r.name} className="flex items-center gap-2">
+            <span className="text-[11px] text-zinc-400 truncate flex-1 min-w-0">{r.name}</span>
+            <div className="w-14 h-1.5 bg-zinc-800 rounded-full overflow-hidden flex-shrink-0">
+              <div
+                className={`h-full rounded-full ${(r.perf_1d || 0) >= 0 ? 'bg-emerald-500' : 'bg-red-500'}`}
+                style={{ width: `${Math.min(100, Math.abs(r.perf_1d || 0) / maxPerf * 100)}%` }}
+              />
+            </div>
+            <span className={`text-[11px] font-mono font-medium w-10 text-right flex-shrink-0 ${(r.perf_1d || 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+              {(r.perf_1d || 0) >= 0 ? '+' : ''}{(r.perf_1d || 0).toFixed(1)}%
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
 const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt }) => {
   const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks }
 
@@ -7498,22 +7631,7 @@ const filtered = useMemo(() => {
 
           {tab === "scanner" && (
             <>
-            <div className="flex flex-wrap items-center gap-3 mt-1.5">
-              {(() => {
-                const signal = data?.market_condition?.signal;
-                const signalLabel = signal === "green" ? "Market Uptrend" : signal === "yellow" ? "Market Correction" : "Market Downtrend";
-                const signalArrow = signal === "green" ? "↑" : signal === "yellow" ? "→" : "↓";
-                const signalCls = signal === "green" ? "text-emerald-400" : signal === "yellow" ? "text-amber-400" : "text-red-400";
-                return (
-                  <div className="flex items-center gap-2 text-[12px] font-mono flex-1 min-w-0 overflow-hidden">
-                    <span className={`font-semibold whitespace-nowrap ${signalCls}`}>{signalArrow} {signalLabel}</span>
-                    <span className="text-zinc-700">|</span>
-                    <span className="text-zinc-500 whitespace-nowrap">{filtered.length} themes · {unique.length} tickers</span>
-                    <span className="text-zinc-700">|</span>
-                    <span className="text-zinc-600 whitespace-nowrap">Superperf gate: RS&gt;85 · Price&gt;$12 · Vol&gt;$100M · MCap&gt;$2B · ADR≥4%</span>
-                  </div>
-                );
-              })()}
+            <div className="flex flex-wrap items-center justify-end gap-3 mt-1.5">
               <button onClick={()=>setShowFP(!showFP)} className={`flex items-center gap-1.5 px-2.5 py-1.5 text-[13px] rounded-md border transition-colors ${filtersOn?'bg-blue-500/15 border-blue-500/30 text-blue-400':'bg-zinc-800/60 border-zinc-700/50 text-zinc-400'}`}>
                 <SlidersHorizontal size={12}/> Filters
               </button>
@@ -7569,6 +7687,7 @@ const filtered = useMemo(() => {
 
           {/* ── CENTER MAIN CONTENT ──────────────────────────────── */}
           <main className="flex-1 min-w-0 flex flex-col gap-3">
+            <HeroZone data={data} briefData={briefData} themesCount={filtered.length} tickersCount={unique.length}/>
             <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} generatedAt={data?.generated_at}/>
             {data && <Leaderboard
               themeRankings={data.theme_rankings}
