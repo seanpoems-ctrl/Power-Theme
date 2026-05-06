@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-05-05T21:36:39.240792+00:00",
+  "generated_at": "2026-05-06T21:38:19.997786+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
-      "name": "Cloud Computing",
-      "theme_rs": 98.0,
-      "perf_1d": 40.4,
+      "name": "Industrials",
+      "theme_rs": 97.0,
+      "perf_1d": 25.85,
       "leaders": [
         {
-          "ticker": "DOCN",
-          "price": 152.77,
-          "rs_52w": 98,
-          "adr_pct": 6.4,
-          "vol_surge": 3.46,
-          "mkt_cap": 15942075780,
+          "ticker": "FLEX",
+          "price": 134.73,
+          "rs_52w": 97,
+          "adr_pct": 4.42,
+          "vol_surge": 5.06,
+          "mkt_cap": 49536706209,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -22,159 +22,43 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Cloud Computing",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
-      "name": "Software",
-      "theme_rs": 98.0,
-      "perf_1d": 17.72,
-      "leaders": [
-        {
-          "ticker": "FSLY",
-          "price": 32.36,
-          "rs_52w": 98,
-          "adr_pct": 8.65,
-          "vol_surge": 0.88,
-          "mkt_cap": 5060066698,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Software",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
-      "name": "Hardware",
-      "theme_rs": 98.0,
-      "perf_1d": 5.18,
-      "leaders": [
-        {
-          "ticker": "WDC",
-          "price": 465.26,
-          "rs_52w": 98,
-          "adr_pct": 5.46,
-          "vol_surge": 1.1,
-          "mkt_cap": 160366811635,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Hardware",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
-      "name": "Telecommunications",
-      "theme_rs": 96.0,
-      "perf_1d": 2.13,
-      "leaders": [
-        {
-          "ticker": "NOK",
-          "price": 13.42,
-          "rs_52w": 96,
-          "adr_pct": 4.77,
-          "vol_surge": 1.29,
-          "mkt_cap": 74917609000,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Telecommunications",
+          "primary_theme": "Industrials",
           "secondary_themes": [],
           "setup_label": "Base"
+        },
+        {
+          "ticker": "GLW",
+          "price": 181.57,
+          "rs_52w": 97,
+          "adr_pct": 6.12,
+          "vol_surge": 2.54,
+          "mkt_cap": 156266016188,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Industrials",
+          "secondary_themes": [],
+          "setup_label": "Flag"
         }
       ]
     },
     {
       "name": "Semiconductors",
-      "theme_rs": 95.5,
-      "perf_1d": 8.05,
+      "theme_rs": 94.0,
+      "perf_1d": 12.18,
       "leaders": [
         {
-          "ticker": "INTC",
-          "price": 108.15,
-          "rs_52w": 98,
-          "adr_pct": 5.15,
-          "vol_surge": 1.83,
-          "mkt_cap": 543561907669,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "MU",
-          "price": 640.2,
-          "rs_52w": 97,
-          "adr_pct": 5.15,
-          "vol_surge": 1.5,
-          "mkt_cap": 721975353216,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "GFS",
-          "price": 74.04,
-          "rs_52w": 97,
-          "adr_pct": 4.19,
-          "vol_surge": 2.27,
-          "mkt_cap": 40653322183,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Base"
-        },
-        {
           "ticker": "UMC",
-          "price": 14.01,
+          "price": 15.23,
           "rs_52w": 96,
-          "adr_pct": 4.35,
-          "vol_surge": 2.46,
-          "mkt_cap": 35240712181,
+          "adr_pct": 4.4,
+          "vol_surge": 3.1,
+          "mkt_cap": 38309494762,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -188,12 +72,12 @@
           "setup_label": "Base"
         },
         {
-          "ticker": "MRVL",
-          "price": 168.75,
+          "ticker": "LRCX",
+          "price": 297.17,
           "rs_52w": 95,
-          "adr_pct": 4.56,
-          "vol_surge": 0.94,
-          "mkt_cap": 147564828843,
+          "adr_pct": 4.39,
+          "vol_surge": 1.47,
+          "mkt_cap": 371622691421,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -208,11 +92,11 @@
         },
         {
           "ticker": "AMD",
-          "price": 355.26,
-          "rs_52w": 90,
-          "adr_pct": 4.63,
-          "vol_surge": 1.4,
-          "mkt_cap": 579219772361,
+          "price": 421.39,
+          "rs_52w": 94,
+          "adr_pct": 4.9,
+          "vol_surge": 2.31,
+          "mkt_cap": 687038849436,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -224,21 +108,40 @@
           "primary_theme": "Semiconductors",
           "secondary_themes": [],
           "setup_label": "Base"
+        },
+        {
+          "ticker": "ARM",
+          "price": 237.3,
+          "rs_52w": 91,
+          "adr_pct": 6.01,
+          "vol_surge": 3.04,
+          "mkt_cap": 252012263664,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
         }
       ]
     },
     {
-      "name": "Defense & Aerospace",
-      "theme_rs": 95.0,
-      "perf_1d": -3.85,
+      "name": "Fintech",
+      "theme_rs": 92.5,
+      "perf_1d": 16.89,
       "leaders": [
         {
-          "ticker": "LUNR",
-          "price": 24.8,
+          "ticker": "HUT",
+          "price": 108.94,
           "rs_52w": 97,
-          "adr_pct": 9.6,
-          "vol_surge": 1.09,
-          "mkt_cap": 3967054005,
+          "adr_pct": 6.09,
+          "vol_surge": 4.44,
+          "mkt_cap": 12261485530,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -247,17 +150,17 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Defense & Aerospace",
+          "primary_theme": "Fintech",
           "secondary_themes": [],
           "setup_label": "Flag"
         },
         {
-          "ticker": "FLY",
-          "price": 31.52,
-          "rs_52w": 93,
-          "adr_pct": 11.83,
-          "vol_surge": 1.64,
-          "mkt_cap": 5046547875,
+          "ticker": "WULF",
+          "price": 25.74,
+          "rs_52w": 95,
+          "adr_pct": 5.91,
+          "vol_surge": 1.36,
+          "mkt_cap": 12680421080,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -266,9 +169,206 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Defense & Aerospace",
+          "primary_theme": "Fintech",
           "secondary_themes": [],
           "setup_label": "Flag"
+        },
+        {
+          "ticker": "PSLV",
+          "price": 25.05,
+          "rs_52w": 91,
+          "adr_pct": 4.03,
+          "vol_surge": 0.75,
+          "mkt_cap": 15976195252,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Fintech",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        },
+        {
+          "ticker": "RIOT",
+          "price": 23.7,
+          "rs_52w": 87,
+          "adr_pct": 6.12,
+          "vol_surge": 2.01,
+          "mkt_cap": 8962184439,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Fintech",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    },
+    {
+      "name": "Commodities Metals",
+      "theme_rs": 90.0,
+      "perf_1d": 9.93,
+      "leaders": [
+        {
+          "ticker": "AG",
+          "price": 21.18,
+          "rs_52w": 95,
+          "adr_pct": 5.76,
+          "vol_surge": 0.8,
+          "mkt_cap": 10457444442,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Commodities Metals",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "SSRM",
+          "price": 32.62,
+          "rs_52w": 92,
+          "adr_pct": 5.67,
+          "vol_surge": 1.31,
+          "mkt_cap": 6680005942,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Commodities Metals",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "PAAS",
+          "price": 56.59,
+          "rs_52w": 92,
+          "adr_pct": 4.56,
+          "vol_surge": 1.21,
+          "mkt_cap": 23877512342,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Commodities Metals",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        },
+        {
+          "ticker": "FCX",
+          "price": 60.89,
+          "rs_52w": 91,
+          "adr_pct": 4.35,
+          "vol_surge": 1.01,
+          "mkt_cap": 87531243202,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Commodities Metals",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        },
+        {
+          "ticker": "IAG",
+          "price": 18.5,
+          "rs_52w": 89,
+          "adr_pct": 5.3,
+          "vol_surge": 1.37,
+          "mkt_cap": 10771106426,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Commodities Metals",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        },
+        {
+          "ticker": "AU",
+          "price": 98.6,
+          "rs_52w": 89,
+          "adr_pct": 4.69,
+          "vol_surge": 1.0,
+          "mkt_cap": 49794458509,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Commodities Metals",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        },
+        {
+          "ticker": "NEM",
+          "price": 115.1,
+          "rs_52w": 86,
+          "adr_pct": 4.11,
+          "vol_surge": 0.73,
+          "mkt_cap": 122875321507,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Commodities Metals",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        },
+        {
+          "ticker": "AGI",
+          "price": 42.0,
+          "rs_52w": 86,
+          "adr_pct": 4.83,
+          "vol_surge": 1.2,
+          "mkt_cap": 17638547262,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Commodities Metals",
+          "secondary_themes": [],
+          "setup_label": "Base"
         }
       ]
     }
