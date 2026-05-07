@@ -1,57 +1,57 @@
 {
-  "generated_at": "May 07, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "May 07, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7365.12,
-      "change": 105.9,
-      "change_pct": 1.46
+      "price": 7337.11,
+      "change": -28.01,
+      "change_pct": -0.38
     },
     {
       "label": "Nasdaq 100",
-      "price": 28599.17,
-      "change": 584.11,
-      "change_pct": 2.08
+      "price": 28563.95,
+      "change": -35.22,
+      "change_pct": -0.12
     },
     {
       "label": "VIX",
-      "price": 17.45,
-      "change": 0.06,
+      "price": 17.08,
+      "change": -0.31,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.36,
-      "change": -0.06,
+      "price": 4.39,
+      "change": 0.04,
       "change_pct": null,
-      "trend_label": "Falling"
+      "trend_label": "Rising"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 62833.84,
-      "change_pct": 5.58
+      "price": 59513.12,
+      "change_pct": 0.38
     },
     "dax": {
       "label": "DAX",
-      "price": 24868.94,
-      "change_pct": -0.2
+      "price": 24663.61,
+      "change_pct": -1.02
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10376.74,
-      "change_pct": -0.59
+      "price": 10276.95,
+      "change_pct": -1.55
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 62.1,
-    "mmth": 61.6,
+    "s5fi": 57.6,
+    "mmth": 63.4,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "US-led Tech Rally, Mixed Global",
+  "mood": "US Mixed, Global Weakness Persists",
   "analysis": {
-    "analysis_para1": "The pre-market session shows a clear divergence with US indices leading significantly, as the S&P 500 climbs 1.46% and the Nasdaq 100 jumps 2.08%. This strength comes despite mixed global cues, evidenced by the Nikkei 225 soaring 5.58% but European markets like the DAX (-0.20%) and FTSE 100 (-0.59%) pulling back. Supporting the bullish sentiment, the 10Y Yield is falling, providing a favorable backdrop for risk assets. US market breadth remains robust, with 62.1% of stocks above their 50-day moving average and 61.6% above their 200-day, indicating healthy underlying participation.",
-    "analysis_para2": "For today's mechanical plan, focus will be on the opening hour to confirm the sustainability of pre-market gains. Key levels to watch are the S&P 500 holding above 7350 and the Nasdaq 100 maintaining above 28500, which would signal conviction. Continued weakness in the 10Y Yield would serve as a further tailwind, particularly for high-growth tech and semiconductor names which dominate our scanner results. Should these key indices fail to hold their initial gains, especially with a sharp pullback below the opening price, a cautious approach and reduced exposure would be warranted.",
-    "technical_signal": "No reversal pattern confirmed yet. The market is showing strong positive momentum pre-market, particularly in US indices.",
+    "analysis_para1": "The global tape presents a mixed picture today, with the Nikkei 225 posting a modest gain of +0.38%, contrasting sharply with significant weakness across Europe as the DAX fell -1.02% and the FTSE 100 declined -1.55%. In the US, major indices like the S&P 500 (-0.38%) and Nasdaq 100 (-0.12%) saw minor pullbacks, outperforming their European counterparts. The rising 10Y Yield at 4.39% indicates tightening credit conditions, though the BAML HY Spread is unavailable to confirm credit stress. US market breadth remains resilient with 57.6% of stocks above their 50-day moving average (S5FI) and 63.4% above their 200-day (MMTH), suggesting underlying health despite the day's slight dip.",
+    "analysis_para2": "Our mechanical plan for navigating this environment involves closely monitoring key index levels; a decisive close above prior day highs on the S&P 500 or Nasdaq 100 would signal renewed buying interest, while a break below short-term support could prompt caution. Given the rising 10Y yield and global volatility, a defensive posture with a focus on cash remains prudent. Our strategy emphasizes isolating high relative strength leaders within confirmed thematic trends, as these names are demonstrating independent momentum. We continue to prioritize stocks that can thrive in a potentially choppy market, rather than relying on broad market uplift.",
+    "technical_signal": "No reversal pattern confirmed yet. The slight negative close on US indices, combined with mixed global performance, suggests continued chop rather than a clear directional shift.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MXL is a top-tier semiconductor play, boasting an RS of 98 and an astounding 1-month return of +341.2%, making it a prime candidate to lead in the current tech rally."
+        "reason": "MXL demonstrates exceptional leadership with an RS of 98 and a staggering 1-month return of +341.2%, making it a top contender in the booming Semiconductor theme despite broader market choppiness."
       },
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A",
-        "reason": "AXTI, with an RS of 99 and a 1-month return of +130.6%, exemplifies the explosive upside potential within the semiconductor theme driving today's market strength."
+        "reason": "AXTI exhibits formidable relative strength at 99 and a robust 1-month gain of +130.6%, positioning it as a prime candidate within the high-momentum Semiconductor sector."
       },
       {
         "ticker": "ALM",
         "company": "Almonty Industries Inc",
         "grade": "C",
-        "reason": "Despite an RS of 98, ALM's comparatively weaker 1-month return of +33.6% and off-theme sector of Commodities Metals make it a less compelling choice amidst the robust semiconductor-led rally."
+        "reason": "Despite a strong RS of 98, Almonty Industries' 1-month return of +33.6% is among the weakest in this high-momentum screening, suggesting comparatively lower conviction within the Commodities Metals theme in the current environment."
       }
     ]
   }
