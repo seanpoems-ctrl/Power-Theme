@@ -164,7 +164,7 @@ def _parse_rows(html: str) -> list[dict]:
         tds = tr.find_all("td", recursive=False)
         if len(tds) < 11:
             continue
-        link = tds[1].find("a", href=lambda h: h and "quote.ashx?t=" in h)
+        link = tds[1].find("a", href=lambda h: h and "quote?t=" in h)
         if not link:
             continue
         sym = link["href"].split("t=")[-1].split("&")[0].strip().upper()
