@@ -1,6 +1,6 @@
 {
-  "generated_at": "May 07, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "May 08, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 17.08,
-      "change": -0.31,
+      "price": 17.09,
+      "change": 0.01,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 59513.12,
-      "change_pct": 0.38
+      "price": 62713.65,
+      "change_pct": -0.19
     },
     "dax": {
       "label": "DAX",
-      "price": 24663.61,
+      "price": 24412.26,
       "change_pct": -1.02
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10276.95,
-      "change_pct": -1.55
+      "price": 10250.66,
+      "change_pct": -0.26
     }
   },
   "macro_breadth": {
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "US Mixed, Global Weakness Persists",
+  "mood": "Global Weakness, Cautious Ahead of Open",
   "analysis": {
-    "analysis_para1": "The global tape presents a mixed picture today, with the Nikkei 225 posting a modest gain of +0.38%, contrasting sharply with significant weakness across Europe as the DAX fell -1.02% and the FTSE 100 declined -1.55%. In the US, major indices like the S&P 500 (-0.38%) and Nasdaq 100 (-0.12%) saw minor pullbacks, outperforming their European counterparts. The rising 10Y Yield at 4.39% indicates tightening credit conditions, though the BAML HY Spread is unavailable to confirm credit stress. US market breadth remains resilient with 57.6% of stocks above their 50-day moving average (S5FI) and 63.4% above their 200-day (MMTH), suggesting underlying health despite the day's slight dip.",
-    "analysis_para2": "Our mechanical plan for navigating this environment involves closely monitoring key index levels; a decisive close above prior day highs on the S&P 500 or Nasdaq 100 would signal renewed buying interest, while a break below short-term support could prompt caution. Given the rising 10Y yield and global volatility, a defensive posture with a focus on cash remains prudent. Our strategy emphasizes isolating high relative strength leaders within confirmed thematic trends, as these names are demonstrating independent momentum. We continue to prioritize stocks that can thrive in a potentially choppy market, rather than relying on broad market uplift.",
-    "technical_signal": "No reversal pattern confirmed yet. The slight negative close on US indices, combined with mixed global performance, suggests continued chop rather than a clear directional shift.",
+    "analysis_para1": "Global markets are signaling a cautious start, with the DAX down significantly by -1.02%, and the Nikkei and FTSE 100 also registering losses of -0.19% and -0.26% respectively. The rising 10Y Yield, now at 4.39%, introduces an underlying tone of credit concern, though the BAML HY Spread regime remains unknown. Domestically, while market breadth indicators S5FI (57.6%) and MMTH (63.4%) are still above neutral, the pre-market declines in the S&P 500 (-0.38%) and Nasdaq 100 (-0.12%) suggest early selling pressure, aligning with the international weakness. This confluence indicates a potentially soft open for US equities.",
+    "analysis_para2": "For the mechanical plan, traders should monitor the S&P 500's open against its previous day's close of 7337.11 as an immediate resistance/support indicator. The Nasdaq 100, currently down -0.12% at 28563.95, shows relative resilience, making its initial reaction critical for broader tech sector sentiment. A failure to recover above yesterday's closing levels on either index, particularly if accompanied by increased volume, could signal a continuation of the global downturn. Conversely, a sharp reversal higher would indicate strong buying interest absorbing the pre-market selling; specific attention should be paid to the 10Y Yield and its impact on growth stock valuations throughout the session.",
+    "technical_signal": "No reversal pattern confirmed yet. The indices are trending lower pre-market, suggesting continued downside pressure.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MXL demonstrates exceptional leadership with an RS of 98 and a staggering 1-month return of +341.2%, making it a top contender in the booming Semiconductor theme despite broader market choppiness."
+        "reason": "MXL, with an RS of 99 and a staggering 1-month return of +330.4%, demonstrates exceptional relative strength and leadership within the currently hot Semiconductors theme."
       },
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A",
-        "reason": "AXTI exhibits formidable relative strength at 99 and a robust 1-month gain of +130.6%, positioning it as a prime candidate within the high-momentum Semiconductor sector."
+        "reason": "AXTI, boasting an RS of 99 and a +103.9% 1-month gain, shows strong momentum in Semiconductors, indicating it's a key player capturing capital flows in a volatile market."
       },
       {
         "ticker": "ALM",
         "company": "Almonty Industries Inc",
         "grade": "C",
-        "reason": "Despite a strong RS of 98, Almonty Industries' 1-month return of +33.6% is among the weakest in this high-momentum screening, suggesting comparatively lower conviction within the Commodities Metals theme in the current environment."
+        "reason": "ALM, despite a strong RS of 98, has the lowest 1-month gain (+12.4%) among these top candidates and is in the less dominant Commodities Metals theme, suggesting it may lack the immediate catalytic momentum seen in Semiconductors."
       }
     ]
   }
