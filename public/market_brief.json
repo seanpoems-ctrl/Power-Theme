@@ -1,57 +1,57 @@
 {
-  "generated_at": "May 11, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "May 11, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7398.93,
-      "change": 61.82,
-      "change_pct": 0.84
+      "price": 7412.84,
+      "change": 13.91,
+      "change_pct": 0.19
     },
     {
       "label": "Nasdaq 100",
-      "price": 29234.99,
-      "change": 671.04,
-      "change_pct": 2.35
+      "price": 29320.66,
+      "change": 85.67,
+      "change_pct": 0.29
     },
     {
       "label": "VIX",
-      "price": 18.13,
-      "change": 0.94,
+      "price": 18.38,
+      "change": 1.19,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.36,
-      "change": -0.03,
+      "price": 4.41,
+      "change": 0.05,
       "change_pct": null,
-      "trend_label": "Stable"
+      "trend_label": "Rising"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 62417.88,
-      "change_pct": -0.47
+      "price": 62713.65,
+      "change_pct": -0.19
     },
     "dax": {
       "label": "DAX",
-      "price": 24257.4,
-      "change_pct": -0.33
+      "price": 24350.28,
+      "change_pct": 0.05
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10236.76,
-      "change_pct": 0.04
+      "price": 10269.43,
+      "change_pct": 0.36
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 57.0,
-    "mmth": 61.3,
+    "s5fi": 56.0,
+    "mmth": 61.9,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Strong Tech-Led Rally / Risk-On",
+  "mood": "Cautious Strength, Tech Leadership",
   "analysis": {
-    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 down -0.47% and the DAX off -0.33%, while the FTSE 100 edged up +0.04%. Despite this international softness, US futures are showing robust strength, particularly in the Nasdaq 100 which is up a significant +2.35%, contrasting sharply with a more modest +0.84% for the S&P 500. Underlying market breadth indicators remain supportive, with 57.0% of stocks above their 50-day moving average (S5FI) and 61.3% above their 200-day (MMTH), indicating decent internal health, though credit conditions cannot be fully assessed due to unavailable BAML HY Spread data.",
-    "analysis_para2": "Given the substantial pre-market strength, particularly in tech, the mechanical plan for today focuses on identifying continuation in leading sectors and managing potential profit-taking. Traders should monitor the S&P 500's ability to hold its opening gains above the 7400 level, using it as a key support reference. For the Nasdaq 100, maintaining above 29200 would confirm the strong upward momentum and suggest further upside potential in tech and semiconductor names. Any intraday pullback that holds key short-term moving averages on these indices would present potential buying opportunities for long setups, while a failure to sustain early strength could indicate a period of consolidation.",
-    "technical_signal": "No reversal pattern confirmed yet. The market is showing strong pre-market momentum, particularly in growth sectors.",
+    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 down -0.19% while the DAX and FTSE 100 posted modest gains of +0.05% and +0.36% respectively. Domestically, the 10-year yield rose to 4.41%, indicating a tightening of financial conditions, though the absence of the BAML HY Spread leaves the broader credit regime opaque. Despite this, market breadth remained constructive, with 56.0% of stocks above their 50-day moving average and 61.9% above their 200-day, providing a solid foundation for the S&P 500's +0.19% gain.",
+    "analysis_para2": "The S&P 500 closed at 7412.84 and the Nasdaq 100 at 29320.66, indicating sustained, albeit mild, upward momentum. For a mechanical plan, critical support levels to watch are 7400 for the S&P 500 and 29200 for the Nasdaq 100, which must hold to confirm continued market strength. A breakdown below these levels, especially if accompanied by a VIX surge above 20, would signal increased systemic risk and necessitate a reduction in market exposure. Conversely, consolidation above these supports would endorse tactical long positions in leading sectors.",
+    "technical_signal": "No reversal pattern confirmed yet. The market continues to show mild upward momentum with normal volatility, indicating a lack of significant bearish catalysts for now.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MXL is a clear standout, leading the dominant Semiconductor theme with an RS of 99 and an astounding +403.2% 1-month return, making it ideal for the current risk-on tech rally."
+        "reason": "MaxLinear Inc. (MXL) earns an A+ for its exceptional relative strength of 99 and astounding 1-month return of +403.2%, demonstrating extreme leadership within the robust Semiconductor sector."
       },
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A",
-        "reason": "AXTI demonstrates exceptional momentum within the strong Semiconductor sector, boasting an RS of 99 and a powerful +84.3% 1-month return, aligning perfectly with today's tech-led market."
+        "reason": "AXT Inc. (AXTI) is an A-grade long due to its strong relative strength of 99 and remarkable 1-month return of +84.3%, signaling sustained momentum in the high-performing Semiconductor theme."
       },
       {
         "ticker": "ALM",
         "company": "Almonty Industries Inc",
         "grade": "C",
-        "reason": "Despite a high RS of 98, ALM's +11.6% 1-month return and Commodities Metals theme are significantly underperforming the leading tech and hardware stocks, making it a weaker candidate for today's market regime."
+        "reason": "Almonty Industries Inc. (ALM) receives a C grade for its comparatively modest 1-month return of +11.6% despite a strong RS of 98, suggesting it lags its high-momentum peers in the current market surge."
       }
     ]
   }
