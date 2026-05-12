@@ -1,204 +1,19 @@
 {
-  "generated_at": "2026-05-11T21:57:42.163084+00:00",
+  "generated_at": "2026-05-12T21:37:51.337345+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
-      "name": "Telecommunications",
-      "theme_rs": 98.0,
-      "perf_1d": 16.52,
-      "leaders": [
-        {
-          "ticker": "LITE",
-          "price": 1053.09,
-          "rs_52w": 98,
-          "adr_pct": 7.58,
-          "vol_surge": 1.51,
-          "mkt_cap": 81930399340,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Telecommunications",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
-      "name": "Industrials",
-      "theme_rs": 97.0,
-      "perf_1d": 12.09,
-      "leaders": [
-        {
-          "ticker": "GLW",
-          "price": 207.39,
-          "rs_52w": 97,
-          "adr_pct": 5.83,
-          "vol_surge": 1.73,
-          "mkt_cap": 178487678001,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Industrials",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "COHR",
-          "price": 379.69,
-          "rs_52w": 97,
-          "adr_pct": 6.66,
-          "vol_surge": 1.26,
-          "mkt_cap": 74282294268,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Industrials",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
       "name": "Semiconductors",
-      "theme_rs": 96.0,
-      "perf_1d": 9.05,
+      "theme_rs": 96.5,
+      "perf_1d": 6.44,
       "leaders": [
         {
-          "ticker": "MU",
-          "price": 795.33,
-          "rs_52w": 98,
-          "adr_pct": 5.22,
-          "vol_surge": 1.66,
-          "mkt_cap": 896920742054,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "INTC",
-          "price": 129.44,
-          "rs_52w": 98,
-          "adr_pct": 5.32,
-          "vol_surge": 1.63,
-          "mkt_cap": 650565452270,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "AEHR",
-          "price": 104.56,
-          "rs_52w": 98,
-          "adr_pct": 8.97,
-          "vol_surge": 1.07,
-          "mkt_cap": 3288752161,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "POET",
-          "price": 13.9,
+          "ticker": "UMC",
+          "price": 16.06,
           "rs_52w": 97,
-          "adr_pct": 12.3,
-          "vol_surge": 3.57,
-          "mkt_cap": 2122685385,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "WOLF",
-          "price": 50.31,
-          "rs_52w": 97,
-          "adr_pct": 9.04,
-          "vol_surge": 2.93,
-          "mkt_cap": 2431917095,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "FORM",
-          "price": 151.4,
-          "rs_52w": 97,
-          "adr_pct": 6.63,
-          "vol_surge": 2.35,
-          "mkt_cap": 11802352005,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "QCOM",
-          "price": 237.53,
-          "rs_52w": 87,
-          "adr_pct": 5.54,
-          "vol_surge": 2.96,
-          "mkt_cap": 250356618713,
+          "adr_pct": 4.23,
+          "vol_surge": 1.92,
+          "mkt_cap": 40375457352,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -210,21 +25,14 @@
           "primary_theme": "Semiconductors",
           "secondary_themes": [],
           "setup_label": "Base"
-        }
-      ]
-    },
-    {
-      "name": "Healthcare & Biotech",
-      "theme_rs": 96.0,
-      "perf_1d": -2.7,
-      "leaders": [
+        },
         {
-          "ticker": "MRNA",
-          "price": 52.88,
+          "ticker": "Q",
+          "price": 168.36,
           "rs_52w": 96,
-          "adr_pct": 7.0,
-          "vol_surge": 3.0,
-          "mkt_cap": 20982057799,
+          "adr_pct": 4.09,
+          "vol_surge": 2.02,
+          "mkt_cap": 35298173710,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -233,69 +41,24 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Healthcare & Biotech",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
-      "name": "Commodities Metals",
-      "theme_rs": 93.5,
-      "perf_1d": 6.6,
-      "leaders": [
-        {
-          "ticker": "AG",
-          "price": 23.58,
-          "rs_52w": 95,
-          "adr_pct": 5.51,
-          "vol_surge": 1.26,
-          "mkt_cap": 11642423777,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Commodities Metals",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "PAAS",
-          "price": 62.29,
-          "rs_52w": 92,
-          "adr_pct": 4.46,
-          "vol_surge": 0.89,
-          "mkt_cap": 26245891885,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Commodities Metals",
+          "primary_theme": "Semiconductors",
           "secondary_themes": [],
           "setup_label": "Base"
         }
       ]
     },
     {
-      "name": "Fintech",
-      "theme_rs": 90.0,
-      "perf_1d": 15.91,
+      "name": "Energy Traditional",
+      "theme_rs": 92.0,
+      "perf_1d": 14.2,
       "leaders": [
         {
-          "ticker": "CRCL",
-          "price": 131.76,
-          "rs_52w": 90,
-          "adr_pct": 7.73,
-          "vol_surge": 2.7,
-          "mkt_cap": 32572443581,
+          "ticker": "VG",
+          "price": 13.27,
+          "rs_52w": 92,
+          "adr_pct": 7.54,
+          "vol_surge": 1.6,
+          "mkt_cap": 32943686206,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -304,7 +67,7 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Fintech",
+          "primary_theme": "Energy Traditional",
           "secondary_themes": [],
           "setup_label": "Flag"
         }
