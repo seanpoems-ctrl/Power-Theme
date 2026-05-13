@@ -1,57 +1,57 @@
 {
-  "generated_at": "May 13, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "May 13, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7400.96,
-      "change": -11.88,
-      "change_pct": -0.16
+      "price": 7444.25,
+      "change": 43.29,
+      "change_pct": 0.58
     },
     {
       "label": "Nasdaq 100",
-      "price": 29064.8,
-      "change": -255.86,
-      "change_pct": -0.87
+      "price": 29366.94,
+      "change": 302.14,
+      "change_pct": 1.04
     },
     {
       "label": "VIX",
-      "price": 17.85,
-      "change": -0.14,
+      "price": 17.87,
+      "change": -0.12,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.46,
-      "change": 0.05,
+      "price": 4.48,
+      "change": 0.02,
       "change_pct": null,
-      "trend_label": "Rising"
+      "trend_label": "Stable"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 63272.11,
-      "change_pct": 0.84
+      "price": 62742.57,
+      "change_pct": 0.52
     },
     "dax": {
       "label": "DAX",
-      "price": 24185.83,
-      "change_pct": 0.96
+      "price": 24136.81,
+      "change_pct": 0.76
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10279.13,
-      "change_pct": 0.13
+      "price": 10325.35,
+      "change_pct": 0.58
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 56.3,
-    "mmth": 61.2,
+    "s5fi": 53.4,
+    "mmth": 60.3,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Yields Pressure US Tech, Global Resilience",
+  "mood": "Tech-Led Rally, Broad Market Strength",
   "analysis": {
-    "analysis_para1": "Overseas markets opened with broad strength, with the Nikkei up +0.84% and the DAX rising +0.96%, suggesting global resilience. However, US pre-market activity shows a diverging trend, as the S&P 500 dips -0.16% and the Nasdaq 100 notably lags with a -0.87% decline. This internal weakness, especially in tech, is occurring alongside rising 10Y yields at 4.46%, which typically pressures growth sectors. Market breadth metrics, with 56.3% of stocks above their 50-day MA and 61.2% above their 200-day MA, indicate a mixed internal picture, not signaling broad strength despite global optimism.",
-    "analysis_para2": "The immediate mechanical plan involves closely monitoring the S&P 500 at the 7400 level, as a sustained break below this point could accelerate downside momentum. For the Nasdaq 100, the 29000 mark is a critical pivot; failure to hold this level suggests increased selling pressure in tech. Given the upward pressure on 10Y yields, maintaining a high cash position is prudent, and any new long exposure should be highly selective. Prioritize candidates exhibiting superior relative strength, especially those consolidating tight bases or showing constructive action within the Semiconductors and Hardware themes, avoiding anything showing price rejection or breaking short-term support.",
-    "technical_signal": "No reversal pattern confirmed yet. US indices are showing modest pre-market weakness after a mixed global session, without clear signs of a bullish or bearish reversal.",
+    "analysis_para1": "Global markets set a positive tone with the Nikkei 225 advancing +0.52%, DAX +0.76%, and FTSE 100 +0.58%, reflecting a broad risk-on sentiment. While the BAML HY Spread remains unknown, preventing a definitive credit regime assessment, US market breadth signals underlying health. With 53.4% of stocks above their 50-day moving average (S5FI) and 60.3% above their 200-day moving average (MMTH), participation appears constructive, supporting today's S&P 500 (+0.58%) and Nasdaq 100 (+1.04%) gains.",
+    "analysis_para2": "The market's momentum, particularly within the Nasdaq 100 which led with a +1.04% gain, indicates continued strength in growth and technology sectors. Investors should maintain focus on leading themes and observe the Nasdaq 100's ability to hold current levels or push higher as a key barometer for broader market direction. A sustained move above today's close would signal further upside potential, while any significant breakdown or an unexpected spike in the VIX from its normal 17.87 level would warrant a re-evaluation of risk exposure. Continue to favor high RS leaders in strong thematic groups.",
+    "technical_signal": "No reversal pattern confirmed yet. The VIX remains normal at 17.87, and major indices closed higher, suggesting continued positive sentiment.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MXL earns an A+ grade with RS 99 and a staggering +331.4% 1-month return, leading the Semiconductor theme with extreme momentum despite broader market choppiness."
+        "reason": "Graded A+ for its leading RS=99 and extraordinary 1-month return of +331.4%, making it a prime candidate in the robust Semiconductor rally."
       },
       {
-        "ticker": "MRAM",
-        "company": "Everspin Technologies Inc",
+        "ticker": "AXTI",
+        "company": "AXT Inc",
         "grade": "A",
-        "reason": "MRAM receives an A grade, boasting an RS 98 and a +296.1% 1-month return, demonstrating exceptional leadership within the robust Semiconductor sector."
+        "reason": "Graded A for its impressive RS=99 and remarkable 3-month gain of +404.7%, showcasing sustained leadership within the strong Semiconductor sector."
       },
       {
         "ticker": "KLIC",
         "company": "Kulicke & Soffa Industries Inc",
         "grade": "C",
-        "reason": "KLIC is graded C due to its comparatively modest +25.7% 1-month return and +30.9% 3-month return, suggesting it may lack the aggressive momentum required to outperform the market's current tech-specific headwinds relative to its peers."
+        "reason": "Graded C as an avoid due to its comparatively weaker 1-month return of +25.7% despite RS=97, indicating underperformance relative to its high-flying Semiconductor peers."
       }
     ]
   }
