@@ -1,6 +1,6 @@
 {
-  "generated_at": "May 12, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "May 13, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 17.99,
-      "change": -0.39,
+      "price": 17.85,
+      "change": -0.14,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 62417.88,
-      "change_pct": -0.47
+      "price": 63272.11,
+      "change_pct": 0.84
     },
     "dax": {
       "label": "DAX",
-      "price": 23954.93,
-      "change_pct": -1.62
+      "price": 24185.83,
+      "change_pct": 0.96
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10265.32,
-      "change_pct": -0.04
+      "price": 10279.13,
+      "change_pct": 0.13
     }
   },
   "macro_breadth": {
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech Weakness, Global Caution Persists.",
+  "mood": "Yields Pressure US Tech, Global Resilience",
   "analysis": {
-    "analysis_para1": "European markets, particularly the DAX, showed notable weakness today with a -1.62% decline, while the Nikkei 225 (-0.47%) and FTSE 100 (-0.04%) saw more moderate dips. The rising 10-year yield at 4.46% presents a potential headwind for growth sectors, though the high-yield credit spread regime remains undefined. Despite the S&P 500's slight dip of 0.16%, market breadth indicators S5FI at 56.3% and MMTH at 61.2% suggest a resilient underlying structure. However, the Nasdaq 100's more significant decline of 0.87% indicates concentrated weakness in tech. ",
-    "analysis_para2": "Focus remains on key support levels for the S&P 500 near 7400 and the Nasdaq 100 around 29000, as a break below these could signal deeper corrective action. Continued rising 10Y yields above 4.50% would likely exert further pressure on growth-oriented sectors, making defensive rotations more appealing. Monitor VIX for any significant jump above 20, which would indicate increasing market fear and a potential shift to a risk-off environment. Conversely, a strong close above today's highs, especially in Nasdaq leadership, could indicate a resumption of momentum. Maintain a disciplined approach, favoring strong relative strength stocks but remaining vigilant for breadth deterioration.",
-    "technical_signal": "No reversal pattern confirmed yet. The market displayed intraday chop without forming a distinct reversal candle or pattern, suggesting ongoing indecision.",
+    "analysis_para1": "Overseas markets opened with broad strength, with the Nikkei up +0.84% and the DAX rising +0.96%, suggesting global resilience. However, US pre-market activity shows a diverging trend, as the S&P 500 dips -0.16% and the Nasdaq 100 notably lags with a -0.87% decline. This internal weakness, especially in tech, is occurring alongside rising 10Y yields at 4.46%, which typically pressures growth sectors. Market breadth metrics, with 56.3% of stocks above their 50-day MA and 61.2% above their 200-day MA, indicate a mixed internal picture, not signaling broad strength despite global optimism.",
+    "analysis_para2": "The immediate mechanical plan involves closely monitoring the S&P 500 at the 7400 level, as a sustained break below this point could accelerate downside momentum. For the Nasdaq 100, the 29000 mark is a critical pivot; failure to hold this level suggests increased selling pressure in tech. Given the upward pressure on 10Y yields, maintaining a high cash position is prudent, and any new long exposure should be highly selective. Prioritize candidates exhibiting superior relative strength, especially those consolidating tight bases or showing constructive action within the Semiconductors and Hardware themes, avoiding anything showing price rejection or breaking short-term support.",
+    "technical_signal": "No reversal pattern confirmed yet. US indices are showing modest pre-market weakness after a mixed global session, without clear signs of a bullish or bearish reversal.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MXL holds an RS of 99 with a staggering +394.3% in one month, demonstrating extreme leadership in the thriving Semiconductor sector amidst broader tech weakness."
+        "reason": "MXL earns an A+ grade with RS 99 and a staggering +331.4% 1-month return, leading the Semiconductor theme with extreme momentum despite broader market choppiness."
       },
       {
         "ticker": "MRAM",
         "company": "Everspin Technologies Inc",
         "grade": "A",
-        "reason": "MRAM boasts an RS of 98 and a robust +288.5% 1-month gain, positioning it as a strong high-momentum play within the resilient Semiconductors theme."
+        "reason": "MRAM receives an A grade, boasting an RS 98 and a +296.1% 1-month return, demonstrating exceptional leadership within the robust Semiconductor sector."
       },
       {
-        "ticker": "ALM",
-        "company": "Almonty Industries Inc",
+        "ticker": "KLIC",
+        "company": "Kulicke & Soffa Industries Inc",
         "grade": "C",
-        "reason": "Despite an RS of 98, ALM's +17.0% 1-month return significantly underperforms other candidates, suggesting it lacks the explosive momentum characteristic of current market leaders."
+        "reason": "KLIC is graded C due to its comparatively modest +25.7% 1-month return and +30.9% 3-month return, suggesting it may lack the aggressive momentum required to outperform the market's current tech-specific headwinds relative to its peers."
       }
     ]
   }
