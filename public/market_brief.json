@@ -1,6 +1,6 @@
 {
-  "generated_at": "May 13, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "May 14, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 17.87,
-      "change": -0.12,
+      "price": 17.84,
+      "change": -0.03,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 62742.57,
-      "change_pct": 0.52
+      "price": 62654.05,
+      "change_pct": -0.98
     },
     "dax": {
       "label": "DAX",
-      "price": 24136.81,
-      "change_pct": 0.76
+      "price": 24473.93,
+      "change_pct": 1.4
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10325.35,
-      "change_pct": 0.58
+      "price": 10371.07,
+      "change_pct": 0.44
     }
   },
   "macro_breadth": {
@@ -51,7 +51,7 @@
     "credit_date": null,
     "credit_regime": null,
     "s5fi": 53.4,
-    "mmth": 60.3,
+    "mmth": 60.5,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech-Led Rally, Broad Market Strength",
+  "mood": "Tech-led Rally Continues, Asia Drags",
   "analysis": {
-    "analysis_para1": "Global markets set a positive tone with the Nikkei 225 advancing +0.52%, DAX +0.76%, and FTSE 100 +0.58%, reflecting a broad risk-on sentiment. While the BAML HY Spread remains unknown, preventing a definitive credit regime assessment, US market breadth signals underlying health. With 53.4% of stocks above their 50-day moving average (S5FI) and 60.3% above their 200-day moving average (MMTH), participation appears constructive, supporting today's S&P 500 (+0.58%) and Nasdaq 100 (+1.04%) gains.",
-    "analysis_para2": "The market's momentum, particularly within the Nasdaq 100 which led with a +1.04% gain, indicates continued strength in growth and technology sectors. Investors should maintain focus on leading themes and observe the Nasdaq 100's ability to hold current levels or push higher as a key barometer for broader market direction. A sustained move above today's close would signal further upside potential, while any significant breakdown or an unexpected spike in the VIX from its normal 17.87 level would warrant a re-evaluation of risk exposure. Continue to favor high RS leaders in strong thematic groups.",
-    "technical_signal": "No reversal pattern confirmed yet. The VIX remains normal at 17.87, and major indices closed higher, suggesting continued positive sentiment.",
+    "analysis_para1": "US indices are showing strong pre-market gains despite mixed global sentiment with Europe (DAX +1.40%, FTSE +0.44%) leading while Asia (Nikkei -0.98%) retreats. Breadth indicators are constructive, with 53.4% of stocks above their 50-day moving average (S5FI) and 60.5% above their 200-day (MMTH), suggesting underlying market health. The 10-year yield remains stable at 4.48%, although the BAML HY Spread's unknown regime prevents a clear read on broader credit conditions, not posing an immediate red flag.",
+    "analysis_para2": "The pre-market strength in S&P 500 (+0.58%) and particularly the Nasdaq 100 (+1.04%) signals continued upside momentum, favoring long positions in leading sectors. Traders should watch for the S&P 500 to hold above the 7400 level as initial support if any pullback occurs, while Nasdaq 100's push past 29300 opens the door for further advances. The mechanical plan is to maintain exposure to high-relative-strength names within Semiconductors and Hardware, considering entries on any intraday dips that hold key technical levels. Aggressive risk management remains crucial given the sharp run-up in these thematic leaders.",
+    "technical_signal": "No reversal pattern confirmed yet. Major US indices are exhibiting significant pre-market strength, with the Nasdaq 100 leading the charge higher, suggesting a continuation of the upward trend.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "Graded A+ for its leading RS=99 and extraordinary 1-month return of +331.4%, making it a prime candidate in the robust Semiconductor rally."
+        "reason": "MXL is a top leader with an RS of 99 and a staggering 1-month return of +306.9%, perfectly aligning with the robust semiconductor theme driving current market strength."
       },
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A",
-        "reason": "Graded A for its impressive RS=99 and remarkable 3-month gain of +404.7%, showcasing sustained leadership within the strong Semiconductor sector."
+        "reason": "AXTI exhibits exceptional relative strength (RS 99) and robust momentum with an 81.2% 1-month return, making it a strong play within the leading semiconductor sector."
       },
       {
         "ticker": "KLIC",
         "company": "Kulicke & Soffa Industries Inc",
         "grade": "C",
-        "reason": "Graded C as an avoid due to its comparatively weaker 1-month return of +25.7% despite RS=97, indicating underperformance relative to its high-flying Semiconductor peers."
+        "reason": "While positive, KLIC's 1-month return of +30.5% and 3-month return of +39.3% are comparatively subdued among its high-flying semiconductor peers (RS 97), suggesting it may lack the aggressive momentum of sector leaders in this regime."
       }
     ]
   }
