@@ -2,24 +2,34 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 1,
+  "count": 2,
   "stocks": [
     {
-      "ticker": "TDIC",
-      "company": "Dreamland Limited",
-      "industry": "Miscellaneous Commercial Services",
-      "price": 23.05,
-      "change_pct": 876.69,
-      "adr_pct": 10.0,
+      "ticker": "QUCY",
+      "company": "Quantum Cyber N.V.",
+      "industry": "Biotechnology",
+      "price": 3.0,
+      "change_pct": 123.88,
+      "adr_pct": 10.8,
       "market_cap_b": 0.017,
-      "atr_ext_val": 87.74
+      "atr_ext_val": 11.52
+    },
+    {
+      "ticker": "LESL",
+      "company": "Leslie's, Inc.",
+      "industry": "Specialty Stores",
+      "price": 3.5,
+      "change_pct": 144.76,
+      "adr_pct": 12.8,
+      "market_cap_b": 0.013,
+      "atr_ext_val": 11.28
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.58,
-    "spx_1m": 6.0,
-    "spx_3m": 8.95,
-    "spx_34d": 14.93
+    "spx_1d": 0.77,
+    "spx_1m": 6.53,
+    "spx_3m": 9.73,
+    "spx_34d": 17.78
   },
-  "fetched_at_utc": "2026-05-13T22:16:13+00:00"
+  "fetched_at_utc": "2026-05-14T21:50:43+00:00"
 }
