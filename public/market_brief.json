@@ -1,30 +1,30 @@
 {
-  "generated_at": "May 14, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "May 14, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7444.25,
-      "change": 43.29,
-      "change_pct": 0.58
+      "price": 7501.24,
+      "change": 56.99,
+      "change_pct": 0.77
     },
     {
       "label": "Nasdaq 100",
-      "price": 29366.94,
-      "change": 302.14,
-      "change_pct": 1.04
+      "price": 29580.3,
+      "change": 213.36,
+      "change_pct": 0.73
     },
     {
       "label": "VIX",
-      "price": 17.84,
-      "change": -0.03,
+      "price": 17.26,
+      "change": -0.61,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.48,
-      "change": 0.02,
+      "price": 4.46,
+      "change": -0.02,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 62654.05,
-      "change_pct": -0.98
+      "price": 63272.11,
+      "change_pct": 0.84
     },
     "dax": {
       "label": "DAX",
-      "price": 24473.93,
-      "change_pct": 1.4
+      "price": 24456.26,
+      "change_pct": 1.32
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10371.07,
-      "change_pct": 0.44
+      "price": 10372.93,
+      "change_pct": 0.46
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 53.4,
-    "mmth": 60.5,
+    "s5fi": 54.1,
+    "mmth": 61.5,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech-led Rally Continues, Asia Drags",
+  "mood": "Positive Momentum / Semiconductor Surge",
   "analysis": {
-    "analysis_para1": "US indices are showing strong pre-market gains despite mixed global sentiment with Europe (DAX +1.40%, FTSE +0.44%) leading while Asia (Nikkei -0.98%) retreats. Breadth indicators are constructive, with 53.4% of stocks above their 50-day moving average (S5FI) and 60.5% above their 200-day (MMTH), suggesting underlying market health. The 10-year yield remains stable at 4.48%, although the BAML HY Spread's unknown regime prevents a clear read on broader credit conditions, not posing an immediate red flag.",
-    "analysis_para2": "The pre-market strength in S&P 500 (+0.58%) and particularly the Nasdaq 100 (+1.04%) signals continued upside momentum, favoring long positions in leading sectors. Traders should watch for the S&P 500 to hold above the 7400 level as initial support if any pullback occurs, while Nasdaq 100's push past 29300 opens the door for further advances. The mechanical plan is to maintain exposure to high-relative-strength names within Semiconductors and Hardware, considering entries on any intraday dips that hold key technical levels. Aggressive risk management remains crucial given the sharp run-up in these thematic leaders.",
-    "technical_signal": "No reversal pattern confirmed yet. Major US indices are exhibiting significant pre-market strength, with the Nasdaq 100 leading the charge higher, suggesting a continuation of the upward trend.",
+    "analysis_para1": "Global markets showed robust performance today, with the Nikkei 225 gaining +0.84%, the DAX surging +1.32%, and the FTSE 100 up +0.46%, setting a positive tone for US trading. While the BAML High Yield Spread data is currently unavailable, suggesting an unknown credit regime, US market breadth indicators remain healthy. Specifically, the percentage of S&P 500 stocks above their 50-day moving average (S5FI) stands at 54.1%, and stocks above their 200-day moving average (MMTH) is 61.5%, both reflecting solid underlying participation. The stable 10-year Treasury yield at 4.46% further contributes to a constructive market environment.",
+    "analysis_para2": "With both the S&P 500 and Nasdaq 100 closing significantly higher, the immediate mechanical plan involves monitoring for continued strength above today's closing levels of 7501.24 and 29580.30, respectively. Key support for any potential pullback would be the prior day's close or the daily opening price, as a break below these could signal short-term weakness. Traders should look to maintain long exposure, adding to positions on constructive pullbacks within leading sectors, particularly semiconductors. A failure of these indices to hold critical support levels or a sudden spike in the VIX from its normal 17.26 reading would be crucial signals to re-evaluate risk.",
+    "technical_signal": "No reversal pattern confirmed yet. The market continues its upward trajectory, with strong positive closes for both the S&P 500 and Nasdaq 100, supported by broad market participation.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MXL is a top leader with an RS of 99 and a staggering 1-month return of +306.9%, perfectly aligning with the robust semiconductor theme driving current market strength."
+        "reason": "MaxLinear Inc (MXL) receives an A+ grade due to its unparalleled RS 99 and a staggering +306.9% 1-month return, making it a definitive leader in the current semiconductor-led market surge."
       },
       {
-        "ticker": "AXTI",
-        "company": "AXT Inc",
+        "ticker": "MRAM",
+        "company": "Everspin Technologies Inc",
         "grade": "A",
-        "reason": "AXTI exhibits exceptional relative strength (RS 99) and robust momentum with an 81.2% 1-month return, making it a strong play within the leading semiconductor sector."
+        "reason": "Everspin Technologies Inc (MRAM) earns an A grade with an RS 98 and a robust +257.4% 1-month return, demonstrating strong momentum within the dominant semiconductor theme."
       },
       {
         "ticker": "KLIC",
         "company": "Kulicke & Soffa Industries Inc",
         "grade": "C",
-        "reason": "While positive, KLIC's 1-month return of +30.5% and 3-month return of +39.3% are comparatively subdued among its high-flying semiconductor peers (RS 97), suggesting it may lack the aggressive momentum of sector leaders in this regime."
+        "reason": "Kulicke & Soffa Industries Inc (KLIC) is graded C as an avoid because, despite its strong RS 97, its +30.5% 1-month return is comparatively modest among today's explosively performing semiconductor names."
       }
     ]
   }
