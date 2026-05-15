@@ -1,6 +1,6 @@
 {
-  "generated_at": "May 14, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "May 15, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 17.26,
-      "change": -0.61,
+      "price": 18.9,
+      "change": 1.64,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 63272.11,
-      "change_pct": 0.84
+      "price": 61409.29,
+      "change_pct": -1.99
     },
     "dax": {
       "label": "DAX",
-      "price": 24456.26,
-      "change_pct": 1.32
+      "price": 24029.42,
+      "change_pct": -1.75
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10372.93,
-      "change_pct": 0.46
+      "price": 10192.57,
+      "change_pct": -1.74
     }
   },
   "macro_breadth": {
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Positive Momentum / Semiconductor Surge",
+  "mood": "US Resilience Amid Global Weakness",
   "analysis": {
-    "analysis_para1": "Global markets showed robust performance today, with the Nikkei 225 gaining +0.84%, the DAX surging +1.32%, and the FTSE 100 up +0.46%, setting a positive tone for US trading. While the BAML High Yield Spread data is currently unavailable, suggesting an unknown credit regime, US market breadth indicators remain healthy. Specifically, the percentage of S&P 500 stocks above their 50-day moving average (S5FI) stands at 54.1%, and stocks above their 200-day moving average (MMTH) is 61.5%, both reflecting solid underlying participation. The stable 10-year Treasury yield at 4.46% further contributes to a constructive market environment.",
-    "analysis_para2": "With both the S&P 500 and Nasdaq 100 closing significantly higher, the immediate mechanical plan involves monitoring for continued strength above today's closing levels of 7501.24 and 29580.30, respectively. Key support for any potential pullback would be the prior day's close or the daily opening price, as a break below these could signal short-term weakness. Traders should look to maintain long exposure, adding to positions on constructive pullbacks within leading sectors, particularly semiconductors. A failure of these indices to hold critical support levels or a sudden spike in the VIX from its normal 17.26 reading would be crucial signals to re-evaluate risk.",
-    "technical_signal": "No reversal pattern confirmed yet. The market continues its upward trajectory, with strong positive closes for both the S&P 500 and Nasdaq 100, supported by broad market participation.",
+    "analysis_para1": "Global markets are displaying significant weakness this morning, with the Nikkei 225 down nearly 2% and European indices like the DAX and FTSE 100 falling over 1.7%. Despite this international retreat, U.S. futures are indicating a positive open, with the S&P 500 up 0.77% and Nasdaq 100 up 0.73%, suggesting a potential decoupling. US market breadth remains moderate, with 54.1% of stocks above their 50-day moving average and 61.5% above their 200-day, indicating underlying stability rather than extreme bullishness. The absence of BAML HY Spread data prevents a clear assessment of credit risk, leaving the overall regime undefined.",
+    "analysis_para2": "The mechanical plan for today centers on monitoring the U.S. market's ability to maintain its pre-market strength in the face of global selling pressure. A key level to watch for the S&P 500 is its current positive trajectory around 7500; a sustained hold above this level would confirm U.S. resilience. Given the pronounced thematic strength in Semiconductors and Hardware, as evidenced by the scanner's top candidates, focus should be on these sectors for potential long opportunities. Traders should look for breakouts or continuations in leading names, while also being prepared to reduce exposure if U.S. indices begin to falter and follow the global downswing, particularly if breadth indicators weaken throughout the day.",
+    "technical_signal": "No reversal pattern confirmed yet. The U.S. market exhibits pre-market strength, diverging from weaker global indices.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MaxLinear Inc (MXL) receives an A+ grade due to its unparalleled RS 99 and a staggering +306.9% 1-month return, making it a definitive leader in the current semiconductor-led market surge."
+        "reason": "MaxLinear exhibits unparalleled relative strength (RS=99) and an astonishing 1-month return of +303.4%, making it a prime leader in the thriving Semiconductor theme despite broader global market concerns."
       },
       {
-        "ticker": "MRAM",
-        "company": "Everspin Technologies Inc",
+        "ticker": "AXTI",
+        "company": "AXT Inc",
         "grade": "A",
-        "reason": "Everspin Technologies Inc (MRAM) earns an A grade with an RS 98 and a robust +257.4% 1-month return, demonstrating strong momentum within the dominant semiconductor theme."
+        "reason": "AXT Inc. shows exceptional relative strength (RS=99) and a robust 1-month return of +82.7%, solidifying its position as a high-momentum play within the dominant Semiconductor sector."
       },
       {
-        "ticker": "KLIC",
-        "company": "Kulicke & Soffa Industries Inc",
+        "ticker": "LITE",
+        "company": "Lumentum Holdings Inc",
         "grade": "C",
-        "reason": "Kulicke & Soffa Industries Inc (KLIC) is graded C as an avoid because, despite its strong RS 97, its +30.5% 1-month return is comparatively modest among today's explosively performing semiconductor names."
+        "reason": "Despite its strong relative strength (RS=98), Lumentum's 1-month return of +21.6% is significantly underperforming its peers within the Telecommunications theme and broader tech leaders, making it a relatively weaker choice for high-momentum plays."
       }
     ]
   }
