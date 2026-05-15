@@ -2,34 +2,24 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 2,
+  "count": 1,
   "stocks": [
     {
-      "ticker": "QUCY",
-      "company": "Quantum Cyber N.V.",
-      "industry": "Biotechnology",
-      "price": 3.0,
-      "change_pct": 123.88,
-      "adr_pct": 10.8,
-      "market_cap_b": 0.017,
-      "atr_ext_val": 11.52
-    },
-    {
-      "ticker": "LESL",
-      "company": "Leslie's, Inc.",
-      "industry": "Specialty Stores",
-      "price": 3.5,
-      "change_pct": 144.76,
-      "adr_pct": 12.8,
-      "market_cap_b": 0.013,
-      "atr_ext_val": 11.28
+      "ticker": "PIII",
+      "company": "P3 Health Partners Inc.",
+      "industry": "Miscellaneous Commercial Services",
+      "price": 11.29,
+      "change_pct": 180.15,
+      "adr_pct": 9.3,
+      "market_cap_b": 0.029,
+      "atr_ext_val": 19.35
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.77,
-    "spx_1m": 6.53,
-    "spx_3m": 9.73,
-    "spx_34d": 17.78
+    "spx_1d": -1.24,
+    "spx_1m": 3.96,
+    "spx_3m": 8.26,
+    "spx_34d": 16.78
   },
-  "fetched_at_utc": "2026-05-14T21:50:43+00:00"
+  "fetched_at_utc": "2026-05-15T21:45:15+00:00"
 }
