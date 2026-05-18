@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-05-18 17:05 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Drifting Sideways / Mixed Cues",
+    "spy_price": 738.65,
+    "spy_change_pct": -0.07,
+    "vix": 17.82,
+    "hy_oas": 2.8,
+    "yield_curve": 0.54,
+    "credit_status": "Complacent",
+    "s5fi": 53.9,
+    "mmth": 59.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "RDW",
+          "company": "Redwire Corporation",
+          "reason": "Secured a substantial new government contract for advanced space infrastructure, significantly boosting future revenue projections and market position."
+        },
+        {
+          "ticker": "POET",
+          "company": "POET Technologies Inc.",
+          "reason": "Announced a new strategic supply agreement for its integrated optoelectronics platform, opening up significant market expansion opportunities."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "Continues to see speculative interest based on ongoing AI sector strength and anticipation of future product announcements, lacking fresh fundamental catalysts today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-05-18 08:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corp.",
           "reason": "Continued consolidation around recent highs suggests ongoing investor indecision following its previous earnings-driven rally."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-03-24 12:18 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Oil surge, equity divergence",
-    "spy_price": 655.76,
-    "spy_change_pct": 0.06,
-    "vix": 26.34,
-    "hy_oas": null,
-    "yield_curve": null,
-    "credit_status": "Unknown",
-    "s5fi": 31.3,
-    "mmth": 51.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "VG",
-          "company": "Company Name",
-          "reason": "Secured significant new contracts, signaling strong business momentum and future revenue growth."
-        },
-        {
-          "ticker": "CVX",
-          "company": "Chevron Corporation",
-          "reason": "Benefited directly from the near 5% surge in crude oil prices, signaling improved profitability outlook for the energy giant."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Traded on general tech sector cautiousness and profit-taking after the Nasdaq 100 ETF's slight decline, without fresh fundamental catalysts."
         }
       ]
     }
