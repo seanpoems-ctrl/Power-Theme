@@ -1,6 +1,6 @@
 {
-  "generated_at": "May 15, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "May 18, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,14 +16,14 @@
     },
     {
       "label": "VIX",
-      "price": 18.43,
-      "change": 1.17,
+      "price": 18.7,
+      "change": 0.27,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.6,
+      "price": 4.59,
       "change": 0.13,
       "change_pct": null,
       "trend_label": "Rising"
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 62654.05,
-      "change_pct": -0.98
+      "price": 60815.95,
+      "change_pct": -0.97
     },
     "dax": {
       "label": "DAX",
-      "price": 23950.57,
-      "change_pct": -2.07
+      "price": 24171.19,
+      "change_pct": 0.92
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10195.37,
-      "change_pct": -1.71
+      "price": 10259.14,
+      "change_pct": 0.63
     }
   },
   "macro_breadth": {
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Global Weakness, Broad Market Selling",
+  "mood": "Risk-Off / Broad US Weakness",
   "analysis": {
-    "analysis_para1": "Global markets experienced a broad sell-off today, with the Nikkei 225 down -0.98%, the DAX plummeting -2.07%, and the FTSE 100 losing -1.71%. This coordinated global weakness provided significant headwinds to US markets, where the S&P 500 fell -1.24% and the Nasdaq 100 declined -1.54%. The rising 10-year yield, now at 4.60%, further contributed to the risk-off sentiment, impacting growth-oriented sectors. US market breadth deteriorated noticeably, with only 49.7% of stocks above their 50-day moving average (S5FI), indicating widespread participation in the decline.",
-    "analysis_para2": "Given today's broad market distribution, the mechanical plan is to remain cautious and monitor for a potential stabilization or breakdown of key support levels. The S&P 500's close at 7408.50 and Nasdaq 100's close at 29125.20 are critical reference points; a decisive break below recent lows would signal further downside. We will be observing for any signs of institutional buying returning, particularly in leading sectors like Semiconductors, or a significant decrease in the VIX from its current 'Normal' level of 18.43. Until clear reversal patterns emerge, maintaining higher cash levels and protecting capital remains paramount.",
-    "technical_signal": "No reversal pattern confirmed yet. Today's broad-based market declines across major indices and deteriorating breadth indicate continued selling pressure rather than a capitulation low.",
+    "analysis_para1": "US markets are set to open significantly lower, with S&P 500 futures down -1.24% and Nasdaq 100 futures leading losses at -1.54%. This weakness follows a mixed global session, where the Nikkei 225 declined by -0.97% but European indices like the DAX (+0.92%) and FTSE 100 (+0.63%) posted gains. Contributing to the domestic pressure, the 10-year Treasury yield is rising to 4.59%, often a headwind for growth stocks. Market breadth indicators are also concerning, with S5FI falling below 50% to 49.7%, signaling deteriorating short-term participation.",
+    "analysis_para2": "With major indices showing significant pre-market weakness, the immediate focus is on identifying key support levels for the S&P 500 and Nasdaq 100, currently at 7408.50 and 29125.20 respectively. A failure to hold these levels could signal further downside in this distribution phase. Investors should closely monitor the VIX, which at 18.70 is normal but could quickly surge above 20, indicating heightened fear and potential capitulation. The deterioration in market breadth, particularly S5FI at 49.7%, suggests caution is warranted, and any sustained move below 40% would confirm broader market weakness. Given the broad market negativity, the mechanical plan involves strict risk management, prioritizing capital preservation, and identifying true relative strength outliers that defy the broader downturn.",
+    "technical_signal": "No reversal pattern confirmed yet. The significant decline in major indices and deteriorating breadth point towards continued downside pressure.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "As a Semiconductor leader, MXL boasts an RS of 99 and a phenomenal +303.4% 1-month return, demonstrating exceptional relative strength in a challenging market."
+        "reason": "MaxLinear exhibits exceptional relative strength (RS=99) and extreme short-term momentum with a +295.5% 1-month return, making it a conviction long in a selective market."
       },
       {
-        "ticker": "MRAM",
-        "company": "Everspin Technologies Inc",
+        "ticker": "TRT",
+        "company": "Trio-Tech International",
         "grade": "A",
-        "reason": "MRAM, another strong Semiconductor play, exhibits an RS of 98 and a robust +244.0% 1-month return, indicating strong upside momentum despite broad market weakness."
+        "reason": "Trio-Tech International demonstrates outstanding relative strength (RS=99) and significant recent performance, up +185.2% in one month, positioning it as a leading growth play despite broad market weakness."
       },
       {
-        "ticker": "LITE",
-        "company": "Lumentum Holdings Inc",
+        "ticker": "UCTT",
+        "company": "Ultra Clean Hldgs Inc",
         "grade": "C",
-        "reason": "While having a high RS of 98, LITE's relatively modest +21.6% 1-month return compared to semiconductor leaders makes it a comparatively weaker choice in a market seeking explosive growth."
+        "reason": "Despite a high RS=98, Ultra Clean Holdings shows comparatively weaker 1-month (+12.4%) and 3-month (+55.1%) returns within its leading Semiconductor theme, suggesting it may be more vulnerable during a risk-off environment."
       }
     ]
   }
