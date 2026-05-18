@@ -1,57 +1,57 @@
 {
-  "generated_at": "May 18, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "May 18, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7408.5,
-      "change": -92.74,
-      "change_pct": -1.24
+      "price": 7403.05,
+      "change": -5.45,
+      "change_pct": -0.07
     },
     {
       "label": "Nasdaq 100",
-      "price": 29125.2,
-      "change": -455.1,
-      "change_pct": -1.54
+      "price": 28994.37,
+      "change": -130.83,
+      "change_pct": -0.45
     },
     {
       "label": "VIX",
-      "price": 18.7,
-      "change": 0.27,
+      "price": 17.82,
+      "change": -0.61,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.59,
-      "change": 0.13,
+      "price": 4.62,
+      "change": 0.03,
       "change_pct": null,
-      "trend_label": "Rising"
+      "trend_label": "Stable"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 60815.95,
-      "change_pct": -0.97
+      "price": 61409.29,
+      "change_pct": -1.99
     },
     "dax": {
       "label": "DAX",
-      "price": 24171.19,
-      "change_pct": 0.92
+      "price": 24307.92,
+      "change_pct": 1.49
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10259.14,
-      "change_pct": 0.63
+      "price": 10323.75,
+      "change_pct": 1.26
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 49.7,
-    "mmth": 58.8,
+    "s5fi": 53.9,
+    "mmth": 59.2,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Risk-Off / Broad US Weakness",
+  "mood": "Global Divergence, US Soft",
   "analysis": {
-    "analysis_para1": "US markets are set to open significantly lower, with S&P 500 futures down -1.24% and Nasdaq 100 futures leading losses at -1.54%. This weakness follows a mixed global session, where the Nikkei 225 declined by -0.97% but European indices like the DAX (+0.92%) and FTSE 100 (+0.63%) posted gains. Contributing to the domestic pressure, the 10-year Treasury yield is rising to 4.59%, often a headwind for growth stocks. Market breadth indicators are also concerning, with S5FI falling below 50% to 49.7%, signaling deteriorating short-term participation.",
-    "analysis_para2": "With major indices showing significant pre-market weakness, the immediate focus is on identifying key support levels for the S&P 500 and Nasdaq 100, currently at 7408.50 and 29125.20 respectively. A failure to hold these levels could signal further downside in this distribution phase. Investors should closely monitor the VIX, which at 18.70 is normal but could quickly surge above 20, indicating heightened fear and potential capitulation. The deterioration in market breadth, particularly S5FI at 49.7%, suggests caution is warranted, and any sustained move below 40% would confirm broader market weakness. Given the broad market negativity, the mechanical plan involves strict risk management, prioritizing capital preservation, and identifying true relative strength outliers that defy the broader downturn.",
-    "technical_signal": "No reversal pattern confirmed yet. The significant decline in major indices and deteriorating breadth point towards continued downside pressure.",
+    "analysis_para1": "Today’s global tape presented a significant divergence, with the Nikkei 225 retreating by -1.99% while European markets, the DAX (+1.49%) and FTSE 100 (+1.26%), posted strong gains. US credit conditions remain opaque with the BAML HY Spread unavailable, preventing a clear assessment of risk appetite. Meanwhile, US market breadth, indicated by S5FI at 53.9% and MMTH at 59.2%, remains above neutral, suggesting underlying resilience despite the S&P 500's (-0.07%) and Nasdaq 100's (-0.45%) slight daily declines.",
+    "analysis_para2": "The S&P 500's close at 7403.05 and Nasdaq 100's close at 28994.37 reflect minor daily pullbacks amidst this global divergence. The mechanical plan involves monitoring these key index levels; a sustained move above today's open for both would signal a recovery from this minor consolidation. Conversely, a failure to hold these levels could invite further downside, especially if accompanied by an uptick in the VIX from its current 'Normal' 17.82 reading. Given the robust thematic performance in Semiconductors, focus remains on identifying leading stocks within this sector, initiating positions on strength with disciplined risk management. The healthy breadth figures suggest any deeper index pullback could present strategic accumulation opportunities in high-quality setups.",
+    "technical_signal": "No reversal pattern confirmed yet. US indices saw minor declines, but overall market health indicators and volatility remain stable, not signaling a definitive trend change.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MaxLinear exhibits exceptional relative strength (RS=99) and extreme short-term momentum with a +295.5% 1-month return, making it a conviction long in a selective market."
+        "reason": "MaxLinear Inc. exhibits exceptional strength with RS 99 and a staggering +295.5% 1-month return, demonstrating clear leadership in the current Semiconductor-driven market."
       },
       {
-        "ticker": "TRT",
-        "company": "Trio-Tech International",
+        "ticker": "AXTI",
+        "company": "AXT Inc",
         "grade": "A",
-        "reason": "Trio-Tech International demonstrates outstanding relative strength (RS=99) and significant recent performance, up +185.2% in one month, positioning it as a leading growth play despite broad market weakness."
+        "reason": "AXT Inc. shows robust performance with RS 99 and a remarkable +410.6% 3-month return, making it a strong contender in the accelerating Semiconductor theme."
       },
       {
         "ticker": "UCTT",
         "company": "Ultra Clean Hldgs Inc",
         "grade": "C",
-        "reason": "Despite a high RS=98, Ultra Clean Holdings shows comparatively weaker 1-month (+12.4%) and 3-month (+55.1%) returns within its leading Semiconductor theme, suggesting it may be more vulnerable during a risk-off environment."
+        "reason": "Despite an RS of 98, Ultra Clean Holdings Inc.'s +12.4% 1-month and +55.1% 3-month returns are notably weaker than its sector peers, suggesting relative underperformance in this strong Semiconductor regime."
       }
     ]
   }
