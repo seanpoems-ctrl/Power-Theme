@@ -1,57 +1,57 @@
 {
-  "generated_at": "May 19, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "May 19, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7403.05,
-      "change": -5.45,
-      "change_pct": -0.07
+      "price": 7353.61,
+      "change": -49.44,
+      "change_pct": -0.67
     },
     {
       "label": "Nasdaq 100",
-      "price": 28994.37,
-      "change": -130.83,
-      "change_pct": -0.45
+      "price": 28818.84,
+      "change": -175.53,
+      "change_pct": -0.61
     },
     {
       "label": "VIX",
-      "price": 18.04,
-      "change": 0.22,
+      "price": 18.06,
+      "change": 0.24,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.62,
-      "change": 0.03,
+      "price": 4.67,
+      "change": 0.04,
       "change_pct": null,
-      "trend_label": "Stable"
+      "trend_label": "Rising"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 60550.59,
-      "change_pct": -0.44
+      "price": 60815.95,
+      "change_pct": -0.97
     },
     "dax": {
       "label": "DAX",
-      "price": 24599.77,
-      "change_pct": 1.2
+      "price": 24400.65,
+      "change_pct": 0.38
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10375.32,
-      "change_pct": 0.5
+      "price": 10330.55,
+      "change_pct": 0.07
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 53.9,
-    "mmth": 59.2,
+    "s5fi": 49.9,
+    "mmth": 57.6,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,29 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Mixed sentiment, US tech under pressure",
+  "mood": "US Weakness Amidst Mixed Global Tape",
   "analysis": {
-    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 down -0.44%, while European indices show strength as the DAX surges +1.20% and the FTSE 100 gains +0.50%. Domestically, US indices are signaling weakness pre-market, with the S&P 500 down -0.07% and the Nasdaq 100 leading the decline at -0.45%. Credit conditions remain an unknown as the BAML HY Spread is unavailable, but internal market breadth is holding above critical levels, with S5FI at 53.9% and MMTH at 59.2%, indicating underlying health despite the current index dip.",
-    "analysis_para2": "Our mechanical plan for the session will focus on key index levels and relative strength. The S&P 500's ability to hold above 7400 and the Nasdaq 100 near 29000 will be crucial for any potential intraday rebound. With the VIX at a normal 18.04, there's no immediate signal of heightened volatility, suggesting price action will be driven by specific sector and stock dynamics rather than broad panic. We will prioritize identifying opportunities in themes demonstrating persistent relative strength, particularly if the broader market attempts to stabilize or reverse its pre-market weakness.",
-    "technical_signal": "No reversal pattern confirmed yet. US indices are trading slightly lower pre-market, without clear signs of a reversal setup at current levels.",
+    "analysis_para1": "The global market presented a mixed picture today, with the Nikkei 225 retreating by 0.97% while European indices like the DAX (+0.38%) and FTSE 100 (+0.07%) showed modest gains. However, US equity markets closed lower, with the S&P 500 down 0.67% to 7353.61 and the Nasdaq 100 dropping 0.61% to 28818.84. Adding pressure, the 10Y Yield continued its upward trend, now at 4.67%, suggesting persistent inflation concerns or tighter financial conditions. Market breadth indicates short-term weakening, as the S5FI (% stocks > 50DMA) dipped below 50% to 49.9%, though MMTH (% stocks > 200DMA) remains above 50% at 57.6%.",
+    "analysis_para2": "In this environment, the mechanical plan calls for heightened vigilance on key index levels and breadth metrics. Investors should closely monitor the S&P 500 at 7353.61 and Nasdaq 100 at 28818.84 for decisive breaks or bounces, as these define short-term trends. A critical watch will be the 10Y Yield, as continued upward pressure from its current 4.67% could challenge equity valuations, particularly growth stocks. The mechanical plan involves observing S5FI; a sustained move below 50% would confirm further short-term weakness, while a rebound could indicate a temporary relief rally. Given the mixed tape, focus remains on individual names demonstrating exceptional relative strength (RS > 98) in leading sectors like Semiconductors. Avoid broad market exposure until breadth, particularly S5FI, shows signs of stabilization above 50%, or VIX spikes to capitulation levels.",
+    "technical_signal": "No reversal pattern confirmed yet. US indices closed lower with declining breadth, and the 10Y yield continues to rise, indicating no immediate bullish reversal.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MXL, with an RS of 99 and a staggering 1-month return of +232.9%, exhibits extreme relative strength and momentum within the high-growth semiconductor sector."
+        "reason": "MXL shows exceptional momentum with RS 99 and a 1-month return of +232.9%, making it a clear leader in the strong semiconductor theme."
       },
       {
         "ticker": "MRAM",
         "company": "Everspin Technologies Inc",
         "grade": "A",
-        "reason": "MRAM maintains robust leadership with an RS of 98 and a 1-month gain of +169.6%, indicating strong participation in the dominant semiconductor rally."
+        "reason": "MRAM demonstrates robust price strength with RS 98 and an impressive 1-month gain of +169.6%, indicating strong participation in the semiconductor rally."
       },
       {
         "ticker": "KLIC",
         "company": "Kulicke & Soffa Industries Inc",
         "grade": "C",
-        "reason": "Despite its RS of 97, KLIC's 1-month return of +21.4% is comparatively weak among its strong peers, suggesting it may lack the explosive momentum preferred in the current market."
+        "reason": "KLIC, despite an RS of 97, lags significantly with only +21.4% over 1 month and +38.4% over 3 months, indicating weaker relative performance within the robust semiconductor theme."
       }
     ]
   }
