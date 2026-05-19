@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-05-19 17:05 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off Sentiment / Volatility Up",
+    "spy_price": 733.73,
+    "spy_change_pct": -0.67,
+    "vix": 18.06,
+    "hy_oas": 2.83,
+    "yield_curve": 0.54,
+    "credit_status": "Complacent",
+    "s5fi": 49.9,
+    "mmth": 57.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NOW",
+          "company": "ServiceNow",
+          "reason": "ServiceNow surged on news of strategic partnerships expanding its AI-powered platform into new enterprise verticals, driving strong pre-market interest."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft showed resilience on news of a significant AI integration deal with a major financial institution, further solidifying its leadership in enterprise AI adoption."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla experienced volatile trading, recycling headlines around production targets and CEO Elon Musk's social media activity, lacking fresh fundamental drivers."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-05-19 08:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Ongoing AI infrastructure expansion and cloud services growth continue to drive investor interest, reflecting sustained technological leadership."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-03-25 12:44 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Global Risk-On Momentum",
-    "spy_price": 658.09,
-    "spy_change_pct": 0.75,
-    "vix": 25.7,
-    "hy_oas": null,
-    "yield_curve": null,
-    "credit_status": "Unknown",
-    "s5fi": 34.8,
-    "mmth": 52.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Reported a groundbreaking AI integration into its Azure cloud services, signaling accelerated enterprise adoption and future revenue growth."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "Announced a higher-than-expected dividend increase and strong Q1 earnings guidance, reassuring investors about financial sector stability."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "Extended gains on continued investor enthusiasm for the AI sector, driven by general market momentum rather than a specific fresh catalyst today."
         }
       ]
     }
