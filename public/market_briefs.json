@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-05-20 08:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Risk-Off Sentiment",
+    "spy_price": 733.73,
+    "spy_change_pct": -0.67,
+    "vix": 18.03,
+    "hy_oas": 2.83,
+    "yield_curve": 0.54,
+    "credit_status": "Complacent",
+    "s5fi": 49.9,
+    "mmth": 57.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Reports of a landmark AI partnership with a major automotive manufacturer position it favorably for future innovation and market share in autonomous driving solutions."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "Analyst upgrade following optimistic guidance on Q2 net interest income amid shifting rate expectations, boosting confidence in its financial outlook."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continues to see heightened volatility as traders adjust positions around previous momentum narratives, with key technical levels in focus after recent market weakness."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-05-19 17:05 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continued institutional flow and short-term technicals are driving price action in this bellwether AI semiconductor stock."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-03-25 19:06 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On Optimism",
-    "spy_price": 656.82,
-    "spy_change_pct": 0.56,
-    "vix": 25.33,
-    "hy_oas": null,
-    "yield_curve": null,
-    "credit_status": "Unknown",
-    "s5fi": 34.8,
-    "mmth": 52.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "ARM",
-          "company": "Arm Holdings plc",
-          "reason": "Shares surged on news of a strategic shift towards new chip architecture and expanded AI integration, signaling significant growth potential."
-        },
-        {
-          "ticker": "CHWY",
-          "company": "Chewy, Inc.",
-          "reason": "The company's stock rallied strongly following a robust earnings beat and an upward revision to its full-year guidance."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Ongoing AI infrastructure expansion and cloud services growth continue to drive investor interest, reflecting sustained technological leadership."
         }
       ]
     }
