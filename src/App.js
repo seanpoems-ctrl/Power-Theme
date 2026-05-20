@@ -4132,47 +4132,53 @@ const ImpactBars = ({ impact }) => {
 
 const EARNINGS_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
 
-async function fetchEarningsAnalysis(ticker, company, eps_estimate, eps_act, eps_surp_pct, rev_est, rev_act, rev_surp_pct, mkt_cap) {
+async function fetchEarningsAnalysis(ticker, company, eps_estimate, eps_act, eps_surp_pct, rev_est, rev_act, rev_surp_pct, mkt_cap, techData) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${EARNINGS_GEMINI_KEY}`;
   const fmtV = v => v != null ? v : "N/A";
-  const hasActuals = eps_act != null || rev_act != null;
-  const dataNote = hasActuals
-    ? "Use the REPORTED FINANCIALS above as the primary source."
-    : "The REPORTED FINANCIALS above are not yet available (N/A). Use Google Search to find the most recent actual earnings data for this company, then write the brief based on what you find.";
+  const fmtPct = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "N/A";
 
-  const prompt = `You are an experienced buy-side analyst writing a concise post-earnings brief for ${company} (${ticker}).
+  const techSection = techData ? `
+TECHNICAL SIGNALS (from our scanner):
+- Price performance: 1D: ${fmtPct(techData.perf_1d)} | 1W: ${fmtPct(techData.perf_1w)} | 1M: ${fmtPct(techData.perf_1m)} | 3M: ${fmtPct(techData.perf_3m)} | 6M: ${fmtPct(techData.perf_6m)}
+- vs Moving Averages: SMA20: ${fmtPct(techData.sma20_pct)} | SMA50: ${fmtPct(techData.sma50_pct)} | SMA200: ${fmtPct(techData.sma200_pct)}
+- RS Score: ${techData.rs_52w != null ? techData.rs_52w + "/99" : "N/A"} | ADR%: ${techData.adr_pct != null ? techData.adr_pct.toFixed(1) + "%" : "N/A"}
+- Dist from 52W High: ${fmtPct(techData.dist_52w_high)}` : "";
 
-REPORTED FINANCIALS:
-- EPS Estimate: ${fmtV(eps_estimate)} | EPS Actual: ${fmtV(eps_act)} | EPS Surprise: ${fmtV(eps_surp_pct)}%
-- Revenue Estimate: ${fmtV(rev_est)} | Revenue Actual: ${fmtV(rev_act)} | Revenue Surprise: ${fmtV(rev_surp_pct)}%
+  const prompt = `You are an experienced buy-side analyst making a PRE-EARNINGS PREDICTION for ${company} (${ticker}) based on all currently available information.
+
+CONSENSUS ESTIMATES:
+- EPS Estimate: ${fmtV(eps_estimate)} | Revenue Estimate: ${fmtV(rev_est)}
 - Market Cap: ${mkt_cap ? `$${(mkt_cap/1e9).toFixed(1)}B` : "N/A"}
+${techSection}
 
-${dataNote}
+Use Google Search to find: recent analyst upgrades/downgrades, sector tailwinds/headwinds, recent company news, supply chain signals, and management guidance revisions for ${ticker}.
 
-OUTPUT STRICT JSON ONLY — no markdown, no code fences, no explanation outside the JSON. Do NOT include search citations or footnotes.
+Based on ALL available evidence, predict whether ${ticker} will BEAT, MEET, or MISS consensus expectations.
+
+OUTPUT STRICT JSON ONLY — no markdown, no code fences, no explanation outside the JSON.
 
 Return this exact structure:
 {
+  "verdict": "beat|neutral|miss",
   "en": [
-    { "title": "EARNINGS SUMMARY", "summary": "one concise sentence with actual numbers", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
-    { "title": "STORY & CATALYSTS", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
-    { "title": "MANAGEMENT TONE", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
-    { "title": "Q&A HIGHLIGHTS", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
-    { "title": "RISKS & SOFT SPOTS", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
-    { "title": "MARKET REACTION", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
-    { "title": "TRADER VERDICT", "summary": "one concise sentence", "keywords": ["tag1","tag2","tag3","tag4","tag5"] }
+    { "title": "EPS FORECAST", "summary": "one concise sentence predicting EPS outcome with specific numbers and **bold** key figures", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
+    { "title": "REVENUE OUTLOOK", "summary": "one concise sentence on revenue trajectory with **bold** key drivers", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
+    { "title": "BULL CASE", "summary": "one concise sentence on strongest beat catalysts with **bold** key points", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
+    { "title": "BEAR CASE", "summary": "one concise sentence on miss risks with **bold** key points", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
+    { "title": "KEY RISKS", "summary": "one concise sentence on top risks to watch with **bold** key risks", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
+    { "title": "TRADE SETUP", "summary": "one concise sentence on pre-earnings positioning and price targets with **bold** levels", "keywords": ["tag1","tag2","tag3","tag4","tag5"] }
   ],
   "zh": [
-    { "title": "財報摘要", "summary": "一句話摘要，含實際數字", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
-    { "title": "故事與催化劑", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
-    { "title": "管理層語氣", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
-    { "title": "Q&A 重點", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
-    { "title": "風險與弱點", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
-    { "title": "市場反應", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
-    { "title": "交易判斷", "summary": "一句話摘要", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] }
+    { "title": "EPS 預測", "summary": "一句話預測EPS結果，含具體數字，**粗體**標記關鍵數字", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
+    { "title": "營收展望", "summary": "一句話分析營收走勢，**粗體**標記關鍵驅動因素", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
+    { "title": "多頭論點", "summary": "一句話說明最強的超預期催化劑，**粗體**標記重點", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
+    { "title": "空頭論點", "summary": "一句話說明低於預期的風險，**粗體**標記重點", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
+    { "title": "關鍵風險", "summary": "一句話說明最需關注的風險，**粗體**標記關鍵詞", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
+    { "title": "交易策略", "summary": "一句話說明財報前的倉位建議與價格目標，**粗體**標記關鍵價位", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] }
   ]
 }
 
+verdict must be exactly one of: "beat", "neutral", "miss"
 Rules for keywords: each is a short phrase (2–4 words), factual, no fluff. Mix numbers, sentiment words, and category labels.`;
 
   const body = {
@@ -4234,6 +4240,7 @@ const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
       stock.eps_estimate, stock.eps_act, stock.eps_surp_pct,
       stock.rev_est, stock.rev_act, stock.rev_surp_pct,
       stock.mkt_cap,
+      stock.perf_1d != null ? stock : null,
     )
       .then(data => { setAnalysis(data); setLoading(false); })
       .catch(e  => { setError(e.message); setLoading(false); });
@@ -4247,6 +4254,14 @@ const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
   }, [onClose]);
 
   const sections = analysis?.[lang] || [];
+  const verdict  = analysis?.verdict; // "beat" | "neutral" | "miss"
+
+  const verdictCfg = {
+    beat:    { label: lang === "zh" ? "超乎預期" : "BEAT EXPECTED",    bg: "bg-emerald-500/15", border: "border-emerald-500/40", text: "text-emerald-300", glow: "shadow-emerald-500/20" },
+    neutral: { label: lang === "zh" ? "符合預期" : "IN-LINE",          bg: "bg-amber-500/15",   border: "border-amber-500/40",   text: "text-amber-300",   glow: "shadow-amber-500/20"   },
+    miss:    { label: lang === "zh" ? "低於預期" : "MISS EXPECTED",    bg: "bg-rose-500/15",    border: "border-rose-500/40",    text: "text-rose-300",    glow: "shadow-rose-500/20"    },
+  };
+  const vc = verdict ? verdictCfg[verdict] : null;
 
   // Keyword chip colour palette (cycles by index)
   const chipColors = [
@@ -4267,20 +4282,15 @@ const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <span className="font-mono text-[15px] font-bold text-white">{stock.ticker}</span>
-              <span className="text-[11px] font-bold px-1.5 py-0.5 rounded bg-zinc-700/40 border border-zinc-700/60 text-zinc-300 leading-none">✦ AI ANALYSIS</span>
+              <span className="text-[11px] font-bold px-1.5 py-0.5 rounded bg-violet-500/15 border border-violet-500/30 text-violet-300 leading-none">✦ AI 預測</span>
               {themeName && <span className="text-[11px] font-medium px-1.5 py-0.5 rounded bg-sky-500/10 border border-sky-500/25 text-sky-400 leading-none">{themeName}</span>}
             </div>
             <span className="text-[11px] text-zinc-500 truncate block">{stock.company}</span>
           </div>
-          {/* Quick stats */}
-          <div className="flex items-center gap-3 text-[11px] font-mono flex-shrink-0">
-            {stock.eps_act != null && (
-              <span>EPS <span className={stock.eps_surp_pct > 0 ? "text-emerald-400" : "text-rose-400"}>{stock.eps_act.toFixed(2)}</span></span>
-            )}
-            {stock.eps_surp_pct != null && (
-              <span className={`font-bold ${stock.eps_surp_pct > 0 ? "text-emerald-400" : "text-rose-400"}`}>
-                {stock.eps_surp_pct > 0 ? "+" : ""}{stock.eps_surp_pct.toFixed(2)}%
-              </span>
+          {/* EPS estimate chip */}
+          <div className="flex items-center gap-2 text-[11px] font-mono flex-shrink-0">
+            {stock.eps_estimate != null && (
+              <span className="text-zinc-500">EPS Est <span className="text-zinc-300">{stock.eps_estimate.toFixed(2)}</span></span>
             )}
           </div>
           {/* Language tabs */}
@@ -4301,8 +4311,8 @@ const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
         <div className="flex-1 overflow-y-auto p-4">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-16 gap-3">
-              <RefreshCw size={20} className="text-zinc-500 animate-spin"/>
-              <p className="text-[12px] text-zinc-500">Gemini is analysing {stock.ticker} earnings…</p>
+              <RefreshCw size={20} className="text-violet-500 animate-spin"/>
+              <p className="text-[12px] text-zinc-500">Gemini 正在預測 {stock.ticker} 財報結果…</p>
             </div>
           ) : error ? (
             <div className="py-10 text-center flex flex-col items-center gap-3">
@@ -4314,10 +4324,16 @@ const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
             </div>
           ) : sections.length > 0 ? (
             <div className="space-y-3">
+              {/* Verdict Banner */}
+              {vc && (
+                <div className={`rounded-xl border ${vc.bg} ${vc.border} px-4 py-3 flex items-center justify-center shadow-lg ${vc.glow}`}>
+                  <span className={`text-[22px] font-black tracking-wide ${vc.text}`}>{vc.label}</span>
+                </div>
+              )}
               {sections.map((sec, i) => (
                 <div key={i} className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2.5">
                   <div className="text-[11px] font-bold tracking-widest text-zinc-500 uppercase mb-1">{sec.title}</div>
-                  <p className="text-[12px] text-zinc-300 leading-snug mb-2">{sec.summary}</p>
+                  <p className="text-[12px] text-zinc-300 leading-snug mb-2">{renderMarkdown(sec.summary)}</p>
                   <div className="flex flex-wrap gap-1.5">
                     {(sec.keywords || []).map((kw, ki) => (
                       <span key={ki} className={`text-[11px] font-medium px-2 py-0.5 rounded-full border ${chipColors[ki % chipColors.length]}`}>
@@ -4333,7 +4349,7 @@ const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
 
         {/* Footer */}
         <div className="border-t border-zinc-800/60 px-4 py-2 flex-shrink-0 flex items-center justify-between">
-          <span className="text-[11px] text-zinc-700">Powered by Gemini 2.5 Flash · Based on latest available earnings data</span>
+          <span className="text-[11px] text-zinc-700">Powered by Gemini 2.5 Flash · AI prediction, not financial advice</span>
           <a href={`https://www.tradingview.com/chart/?symbol=${stock.ticker}`}
              target="_blank" rel="noopener noreferrer"
              className="text-[11px] text-zinc-500 hover:text-blue-400 transition-colors flex items-center gap-1">
@@ -4359,6 +4375,15 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
       for (const sub of theme.subthemes || [])
         for (const s of sub.stocks || [])
           if (s.ticker && !m[s.ticker]) m[s.ticker] = theme.name;
+    return m;
+  }, [thematicData]);
+
+  const tickerStockMap = useMemo(() => {
+    const m = {};
+    for (const theme of thematicData?.themes || [])
+      for (const sub of theme.subthemes || [])
+        for (const s of sub.stocks || [])
+          if (s.ticker && !m[s.ticker]) m[s.ticker] = s;
     return m;
   }, [thematicData]);
 
@@ -4469,7 +4494,7 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
             <span className="flex-shrink-0 text-[11px] font-medium px-1 py-0.5 rounded bg-sky-500/10 border border-sky-500/25 text-sky-400 leading-none truncate max-w-[90px]">{tickerThemeMap[e.ticker]}</span>
           )}
           <button
-            onClick={() => setAnalysisStock(e)}
+            onClick={() => setAnalysisStock({ ...e, ...(tickerStockMap[e.ticker] || {}) })}
             title="Gemini AI earnings analysis"
             className="flex-shrink-0 w-4 h-4 flex items-center justify-center rounded-full bg-zinc-700/40 border border-zinc-700/60 text-zinc-400 hover:bg-zinc-700/60 hover:border-zinc-600 transition-colors leading-none text-[11px] font-bold"
             aria-label="AI analysis">
