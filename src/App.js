@@ -4144,16 +4144,19 @@ TECHNICAL SIGNALS (from our scanner):
 - RS Score: ${techData.rs_52w != null ? techData.rs_52w + "/99" : "N/A"} | ADR%: ${techData.adr_pct != null ? techData.adr_pct.toFixed(1) + "%" : "N/A"}
 - Dist from 52W High: ${fmtPct(techData.dist_52w_high)}` : "";
 
-  const prompt = `You are an experienced buy-side analyst making a PRE-EARNINGS PREDICTION for ${company} (${ticker}) based on all currently available information.
+  const prompt = `你是一位幫散戶看財報的分析師，用最簡單、最白話的中文，預測 ${company} (${ticker}) 這次財報的表現。
 
-CONSENSUS ESTIMATES:
-- EPS Estimate: ${fmtV(eps_estimate)} | Revenue Estimate: ${fmtV(rev_est)}
-- Market Cap: ${mkt_cap ? `$${(mkt_cap/1e9).toFixed(1)}B` : "N/A"}
+參考數據：
+- 分析師預期 EPS：${fmtV(eps_estimate)}，預期營收：${fmtV(rev_est)}
+- 市值：${mkt_cap ? `$${(mkt_cap/1e9).toFixed(1)}B` : "N/A"}
 ${techSection}
 
-Use Google Search to find: recent analyst upgrades/downgrades, sector tailwinds/headwinds, recent company news, supply chain signals, and management guidance revisions for ${ticker}.
+用 Google Search 搜尋：最近的分析師評級、產業動態、公司新聞、管理層指引，判斷這次財報是否會超出預期。
 
-Based on ALL available evidence, predict whether ${ticker} will BEAT, MEET, or MISS consensus expectations.
+語氣要求：
+- 像朋友聊天一樣，不用金融術語，讓完全不懂股票的人也能看懂
+- 每段 summary 只需一到兩句話，說重點就好
+- 每段 summary 中，用 [[文字]] 標記 1 到 2 個最重要的詞（數字或關鍵名詞），不要標記太多
 
 OUTPUT STRICT JSON ONLY — no markdown, no code fences, no explanation outside the JSON.
 
@@ -4161,25 +4164,24 @@ Return this exact structure:
 {
   "verdict": "beat|neutral|miss",
   "en": [
-    { "title": "EPS FORECAST", "summary": "one concise sentence predicting EPS outcome with specific numbers and **bold** key figures", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
-    { "title": "REVENUE OUTLOOK", "summary": "one concise sentence on revenue trajectory with **bold** key drivers", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
-    { "title": "BULL CASE", "summary": "one concise sentence on strongest beat catalysts with **bold** key points", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
-    { "title": "BEAR CASE", "summary": "one concise sentence on miss risks with **bold** key points", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
-    { "title": "KEY RISKS", "summary": "one concise sentence on top risks to watch with **bold** key risks", "keywords": ["tag1","tag2","tag3","tag4","tag5"] },
-    { "title": "TRADE SETUP", "summary": "one concise sentence on pre-earnings positioning and price targets with **bold** levels", "keywords": ["tag1","tag2","tag3","tag4","tag5"] }
+    { "title": "EPS FORECAST", "summary": "Plain English, 1-2 sentences. Wrap 1-2 key words/numbers in [[double brackets]]." },
+    { "title": "REVENUE OUTLOOK", "summary": "Plain English, 1-2 sentences. Wrap 1-2 key words/numbers in [[double brackets]]." },
+    { "title": "BULL CASE", "summary": "Plain English, 1-2 sentences. Wrap 1-2 key words/numbers in [[double brackets]]." },
+    { "title": "BEAR CASE", "summary": "Plain English, 1-2 sentences. Wrap 1-2 key words/numbers in [[double brackets]]." },
+    { "title": "KEY RISKS", "summary": "Plain English, 1-2 sentences. Wrap 1-2 key words/numbers in [[double brackets]]." },
+    { "title": "TRADE SETUP", "summary": "Plain English, 1-2 sentences. Wrap 1-2 key words/numbers in [[double brackets]]." }
   ],
   "zh": [
-    { "title": "EPS 預測", "summary": "一句話預測EPS結果，含具體數字，**粗體**標記關鍵數字", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
-    { "title": "營收展望", "summary": "一句話分析營收走勢，**粗體**標記關鍵驅動因素", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
-    { "title": "多頭論點", "summary": "一句話說明最強的超預期催化劑，**粗體**標記重點", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
-    { "title": "空頭論點", "summary": "一句話說明低於預期的風險，**粗體**標記重點", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
-    { "title": "關鍵風險", "summary": "一句話說明最需關注的風險，**粗體**標記關鍵詞", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] },
-    { "title": "交易策略", "summary": "一句話說明財報前的倉位建議與價格目標，**粗體**標記關鍵價位", "keywords": ["標籤1","標籤2","標籤3","標籤4","標籤5"] }
+    { "title": "EPS 預測", "summary": "白話中文，1到2句話。用 [[]] 標記 1 到 2 個最重要的詞。" },
+    { "title": "營收展望", "summary": "白話中文，1到2句話。用 [[]] 標記 1 到 2 個最重要的詞。" },
+    { "title": "多頭論點", "summary": "白話中文，1到2句話。用 [[]] 標記 1 到 2 個最重要的詞。" },
+    { "title": "空頭論點", "summary": "白話中文，1到2句話。用 [[]] 標記 1 到 2 個最重要的詞。" },
+    { "title": "關鍵風險", "summary": "白話中文，1到2句話。用 [[]] 標記 1 到 2 個最重要的詞。" },
+    { "title": "交易策略", "summary": "白話中文，1到2句話。用 [[]] 標記 1 到 2 個最重要的詞。" }
   ]
 }
 
-verdict must be exactly one of: "beat", "neutral", "miss"
-Rules for keywords: each is a short phrase (2–4 words), factual, no fluff. Mix numbers, sentiment words, and category labels.`;
+verdict 必須是以下其中之一："beat"、"neutral"、"miss"`;
 
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
@@ -4209,11 +4211,11 @@ Rules for keywords: each is a short phrase (2–4 words), factual, no fluff. Mix
   catch { throw new Error("Invalid JSON from Gemini — please retry"); }
 }
 
-// Simple markdown bold renderer (for **text** patterns)
+// Renders [[word]] as highlighted colored text (amber), plain text otherwise
 function renderMarkdown(text) {
-  return text.split(/(\*\*[^*]+\*\*)/).map((seg, i) => {
-    if (seg.startsWith("**") && seg.endsWith("**")) {
-      return <strong key={i} className="text-zinc-100 font-semibold">{seg.slice(2, -2)}</strong>;
+  return text.split(/(\[\[[^\]]+\]\])/).map((seg, i) => {
+    if (seg.startsWith("[[") && seg.endsWith("]]")) {
+      return <span key={i} className="text-amber-300 font-semibold">{seg.slice(2, -2)}</span>;
     }
     return <span key={i}>{seg}</span>;
   });
@@ -4263,14 +4265,6 @@ const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
   };
   const vc = verdict ? verdictCfg[verdict] : null;
 
-  // Keyword chip colour palette (cycles by index)
-  const chipColors = [
-    "bg-sky-500/10 border-sky-500/25 text-sky-400",
-    "bg-violet-500/10 border-violet-500/25 text-violet-400",
-    "bg-amber-500/10 border-amber-500/25 text-amber-400",
-    "bg-emerald-500/10 border-emerald-500/25 text-emerald-400",
-    "bg-rose-500/10 border-rose-500/25 text-rose-400",
-  ];
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/70 backdrop-blur-sm"
@@ -4333,14 +4327,7 @@ const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
               {sections.map((sec, i) => (
                 <div key={i} className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2.5">
                   <div className="text-[11px] font-bold tracking-widest text-zinc-500 uppercase mb-1">{sec.title}</div>
-                  <p className="text-[12px] text-zinc-300 leading-snug mb-2">{renderMarkdown(sec.summary)}</p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {(sec.keywords || []).map((kw, ki) => (
-                      <span key={ki} className={`text-[11px] font-medium px-2 py-0.5 rounded-full border ${chipColors[ki % chipColors.length]}`}>
-                        {kw}
-                      </span>
-                    ))}
-                  </div>
+                  <p className="text-[13px] text-zinc-300 leading-relaxed">{renderMarkdown(sec.summary)}</p>
                 </div>
               ))}
             </div>
