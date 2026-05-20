@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-05-20 17:05 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Broad Risk-On Rally",
+    "spy_price": 741.25,
+    "spy_change_pct": 1.02,
+    "vix": 17.44,
+    "hy_oas": 2.86,
+    "yield_curve": 0.54,
+    "credit_status": "Complacent",
+    "s5fi": 56.3,
+    "mmth": 60.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CAVA",
+          "company": "CAVA Group",
+          "reason": "CAVA Group rallied strongly post-earnings, delivering a beat & raise that signals robust underlying business momentum and growth."
+        },
+        {
+          "ticker": "INTC",
+          "company": "Intel Corporation",
+          "reason": "Intel Corporation surged following its strategic re-positioning in the AI sector, confirming its commitment to competitive innovation and market share."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation continued its upward trend, primarily driven by persistent institutional flow chasing AI infrastructure demand rather than a fresh news catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-05-20 08:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continued sector-wide momentum and institutional accumulation, driven by ongoing AI narrative dominance, are sustaining price action despite broader market weakness."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-03-26 12:42 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Volatility Spike",
-    "spy_price": 649.35,
-    "spy_change_pct": -1.14,
-    "vix": 27.36,
-    "hy_oas": null,
-    "yield_curve": null,
-    "credit_status": "Unknown",
-    "s5fi": 31.2,
-    "mmth": 52.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "ARM",
-          "company": "ARM Holdings",
-          "reason": "Strategic Pivot to AI Chip Sales is driving significant investor interest and potential for future revenue growth."
-        },
-        {
-          "ticker": "CHWY",
-          "company": "Chewy, Inc.",
-          "reason": "Strong Beat & Raise earnings report signals robust fundamental performance in a challenging market."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continued institutional flow and short-term technicals are driving price action in this bellwether AI semiconductor stock."
         }
       ]
     }
