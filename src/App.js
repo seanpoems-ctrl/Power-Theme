@@ -2533,7 +2533,7 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
     v >= 14 ? { label: "NORMAL", cls: "text-emerald-400" } :
               { label: "COMPLACENT", cls: "text-blue-400" };
   const expectedMove = v ? (v / 16).toFixed(2) : "—";
-  const vixRule =
+  const vixFallback =
     v >= 30 ? "VIX > 30 = panic regime. Cash heavy, only A+ setups, half size."
     : v >= 24 ? "VIX > 24 = institutional hedging active. Reduce size, tighten stops. Avoid chasing."
     : v >= 18 ? "VIX in caution zone. Trade selectively — favor RS leaders only."
@@ -2551,10 +2551,7 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
     ? `${advDec.adv_pct?.toFixed(0) ?? '—'}% advancing · ${advDec.advancing ?? '—'} adv / ${advDec.declining ?? '—'} dec`
     : null;
 
-  const rawAction = briefData?.analysis?.action_line ?? briefData?.analysis?.analysis_para1 ?? null;
-  const aiAction = rawAction
-    ? (rawAction.length > 130 ? rawAction.slice(0, 127) + '…' : rawAction)
-    : null;
+  const actionLine = briefData?.analysis?.action_line || null;
 
   return (
     <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
@@ -2589,8 +2586,9 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
           <span className="text-[11px] text-blue-400">✦</span>
           <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.15em]">Gemini</div>
         </div>
-        <div className="text-[11px] leading-snug text-zinc-300">{vixRule}</div>
-        {aiAction && <div className="text-[11px] leading-snug text-emerald-400 mt-1">→ {aiAction}</div>}
+        <div className="text-[11px] leading-snug text-zinc-300">
+          {actionLine || vixFallback}
+        </div>
       </div>
     </div>
   );
