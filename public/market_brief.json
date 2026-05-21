@@ -1,57 +1,57 @@
 {
-  "generated_at": "May 20, 2026 (08:03 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "May 20, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7353.61,
-      "change": -49.44,
-      "change_pct": -0.67
+      "price": 7432.97,
+      "change": 79.36,
+      "change_pct": 1.08
     },
     {
       "label": "Nasdaq 100",
-      "price": 28818.84,
-      "change": -175.53,
-      "change_pct": -0.61
+      "price": 29297.7,
+      "change": 478.86,
+      "change_pct": 1.66
     },
     {
       "label": "VIX",
-      "price": 17.98,
-      "change": -0.08,
+      "price": 17.44,
+      "change": -0.62,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.67,
-      "change": 0.04,
+      "price": 4.57,
+      "change": -0.09,
       "change_pct": null,
-      "trend_label": "Rising"
+      "trend_label": "Falling"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 59804.41,
-      "change_pct": -1.23
+      "price": 60550.59,
+      "change_pct": -0.44
     },
     "dax": {
       "label": "DAX",
-      "price": 24529.27,
-      "change_pct": 0.53
+      "price": 24737.24,
+      "change_pct": 1.38
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10349.9,
-      "change_pct": 0.19
+      "price": 10432.34,
+      "change_pct": 0.98
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 49.9,
-    "mmth": 57.6,
+    "s5fi": 56.3,
+    "mmth": 60.7,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,31 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Pre-market weakness, sector divergence",
+  "mood": "Tech-Led Strength, Risk-On Appetite",
   "analysis": {
-    "analysis_para1": "Global markets present a mixed picture this morning, with Asia's Nikkei 225 falling 1.23% while European bourses like the DAX (+0.53%) and FTSE 100 (+0.19%) show modest gains. However, US futures are reflecting pre-market weakness, with the S&P 500 down 0.67% and the Nasdaq 100 losing 0.61%. The rising 10Y Yield at 4.67% continues to exert pressure, indicating potential headwinds for growth stocks, while the unknown BAML HY Spread prevents a clear assessment of credit health. Market breadth indicators show internal weakening, with only 49.9% of stocks above their 50-day moving average (S5FI) and 57.6% above their 200-day (MMTH).",
-    "analysis_para2": "Given the pre-market weakness, the mechanical plan for today involves vigilant monitoring of key index levels. Watch for S&P 500 to hold above 7350 and Nasdaq 100 above 28800; a sustained break below these could trigger further downside momentum. The VIX remains in a 'Normal' regime at 17.98, suggesting no immediate panic, but the rising yields signal underlying caution. Traders should prioritize strong relative strength leaders on any dips, while being quick to cut laggards. Initial resistance will be tested if markets attempt to reclaim yesterday's closing levels.",
-    "technical_signal": "No reversal pattern confirmed yet. Major indices are showing pre-market weakness, suggesting continued bearish pressure unless key support levels hold.",
+    "analysis_para1": "Global markets presented a mixed picture today, with a slight dip in the Nikkei 225 at -0.44% contrasted by strong gains in European equities, notably the DAX rising +1.38% and the FTSE 100 up +0.98%. This positive sentiment flowed into US markets, where the S&P 500 gained +1.08% and the Nasdaq 100 surged +1.66%. The falling 10-year yield at 4.57% suggests a more accommodative environment, supporting equity valuations. Market breadth remains healthy, with 56.3% of stocks above their 50-day moving average (S5FI) and 60.7% above their 200-day moving average (MMTH), indicating broad participation beyond just mega-caps.",
+    "analysis_para2": "With the S&P 500 closing at 7432.97 and the Nasdaq 100 at 29297.70, the immediate mechanical plan is to monitor for continued upside momentum, especially if these indices can hold above their intraday lows. Key support levels to watch are yesterday's closing prices for any significant breakdown, which would indicate a shift in sentiment. A VIX maintaining its normal level around 17.44 would further confirm the current risk-on environment, while a sharp spike would signal caution. Traders should prioritize strong relative strength names from the semiconductor and hardware sectors as the prevailing trend suggests further outperformance in these areas.",
+    "technical_signal": "No reversal pattern confirmed yet. Major indices like the S&P 500 and Nasdaq 100 closed strongly higher, and market breadth remains positive.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MXL boasts an exceptional RS of 98 and a staggering +199.0% 1-month return, making it a clear leader within the dominant Semiconductors theme."
+        "reason": "MaxLinear (MXL) displays exceptional leadership with RS 98 and a staggering +199.0% 1-month return, aligning perfectly with the robust semiconductor strength driving current market upside."
       },
       {
-        "ticker": "MRAM",
-        "company": "Everspin Technologies Inc",
+        "ticker": "WOLF",
+        "company": "Wolfspeed Inc",
         "grade": "A",
-        "reason": "MRAM exhibits strong momentum with an RS of 98 and a +155.0% 1-month return, highlighting its robust participation in the thriving Semiconductor sector."
+        "reason": "Wolfspeed (WOLF) is a strong semiconductor play, boasting an RS of 98 and a significant +123.4% 1-month return, making it a prime candidate for continued outperformance in the tech-driven rally."
       },
       {
         "ticker": "VIAV",
         "company": "Viavi Solutions Inc",
         "grade": "C",
-        "reason": "Despite a high RS of 97, VIAV's comparatively modest +10.4% 1-month return suggests it is significantly lagging the potent momentum seen in other tech leaders."
+        "reason": "Despite an RS of 97, Viavi Solutions (VIAV)'s comparatively modest +10.4% 1-month return places it behind the semiconductor and hardware leaders, suggesting it may underperform in the current highly focused tech rally."
       }
-    ]
+    ],
+    "action_line": "VIX 17.44, breadth 60.7%, DAX +1.38% indicates European strength. → trade RS leaders selectively."
   }
 }
