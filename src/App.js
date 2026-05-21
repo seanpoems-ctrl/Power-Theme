@@ -2524,7 +2524,16 @@ const UpdatedAt = ({ ts }) => {
   return <span className="text-[11px] text-zinc-600 font-mono tabular-nums">↻ {display}</span>;
 };
 
+const VIX_ZONES_NOTE = [
+  { range: "< 14",  label: "COMPLACENT",       cls: "text-blue-400",   tip: "市場過度樂觀，小心突然反轉" },
+  { range: "14–18", label: "NORMAL",            cls: "text-emerald-400",tip: "趨勢友好，正常執行突破單" },
+  { range: "18–24", label: "CAUTION",           cls: "text-yellow-400", tip: "謹慎選股，只做 RS leaders" },
+  { range: "24–30", label: "ELEVATED CONCERN",  cls: "text-amber-400",  tip: "法人開始避險，縮小倉位、收緊停損" },
+  { range: "30+",   label: "EXTREME FEAR",      cls: "text-red-400",    tip: "恐慌模式，持大量現金，只做 A+ setup" },
+];
+
 const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
+  const [showVixNote, setShowVixNote] = React.useState(false);
   const v = vix ?? 0;
   const vixCfg =
     v >= 30 ? { label: "EXTREME FEAR", cls: "text-red-400" } :
@@ -2572,13 +2581,34 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
         <div>
           <div className="text-[11px] text-zinc-500 mb-0.5">VIX Fear Gauge</div>
           <div className="text-[26px] leading-none font-bold font-mono text-zinc-100">{v ? v.toFixed(1) : "—"}</div>
-          <div className={`text-[11px] font-semibold mt-0.5 ${vixCfg.cls}`}>⚠ {vixCfg.label}</div>
+          <div className="flex items-center gap-1.5 mt-0.5">
+            <span className={`text-[11px] font-semibold ${vixCfg.cls}`}>⚠ {vixCfg.label}</span>
+            <button
+              onClick={() => setShowVixNote(n => !n)}
+              className={`text-[10px] w-4 h-4 rounded-full border flex items-center justify-center transition-colors flex-shrink-0 ${
+                showVixNote ? "border-zinc-400 text-zinc-200 bg-zinc-700" : "border-zinc-600 text-zinc-500 hover:border-zinc-400 hover:text-zinc-300"
+              }`}
+            >?</button>
+          </div>
         </div>
         <div className="text-right">
           <div className="text-[11px] text-zinc-500">SPX Exp. Move</div>
           <div className="text-[14px] font-bold font-mono text-zinc-200">±{expectedMove}%</div>
         </div>
       </div>
+      {showVixNote && (
+        <div className="mt-2 rounded-lg border border-zinc-700/60 bg-zinc-800/60 overflow-hidden">
+          {VIX_ZONES_NOTE.map(z => (
+            <div key={z.range} className={`flex items-start gap-2 px-2.5 py-1.5 border-b border-zinc-700/40 last:border-0 ${z.label === vixCfg.label ? "bg-zinc-700/40" : ""}`}>
+              <span className="font-mono text-[11px] text-zinc-500 w-10 flex-shrink-0 pt-px">{z.range}</span>
+              <div className="min-w-0">
+                <span className={`text-[11px] font-semibold ${z.cls}`}>{z.label}</span>
+                <span className="text-[11px] text-zinc-400 ml-1.5">{z.tip}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* AI section */}
       <div className="mt-2 pt-2 border-t border-zinc-800/60">
