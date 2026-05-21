@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-05-21 08:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Risk-On / Growth Optimism",
+    "spy_price": 741.25,
+    "spy_change_pct": 1.02,
+    "vix": 17.64,
+    "hy_oas": 2.86,
+    "yield_curve": 0.53,
+    "credit_status": "Complacent",
+    "s5fi": 56.3,
+    "mmth": 60.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "AWS announced winning a massive new multi-year cloud contract with a major government agency, reinforcing its market dominance in enterprise AI solutions."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "The company announced surprisingly robust Phase 3 trial results for its new Alzheimer's drug, exceeding analyst expectations and pointing to a significant market opportunity."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continues to benefit from an ongoing tailwind of robust AI chip demand, a theme that has been consistent for months without a fresh specific catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-05-20 17:05 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corp.",
           "reason": "Continues to see institutional flow based on its long-term AI narrative, though no fresh catalysts today beyond general market sentiment."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-03-26 18:01 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Broad Risk Aversion / Volatility Spike",
-    "spy_price": 645.09,
-    "spy_change_pct": -1.79,
-    "vix": 27.44,
-    "hy_oas": null,
-    "yield_curve": null,
-    "credit_status": "Unknown",
-    "s5fi": 28.9,
-    "mmth": 51.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CHWY",
-          "company": "Chewy Inc.",
-          "reason": "Strong Q4 earnings beat and raised full-year guidance demonstrate robust pet care demand and effective strategic execution."
-        },
-        {
-          "ticker": "ARM",
-          "company": "Arm Holdings plc",
-          "reason": "Strategic pivot towards AI chip sales, including new design wins and expanded partnerships, positions the company as a pivotal player in the evolving AI hardware ecosystem."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continued sector-wide momentum and institutional accumulation, driven by ongoing AI narrative dominance, are sustaining price action despite broader market weakness."
         }
       ]
     }
