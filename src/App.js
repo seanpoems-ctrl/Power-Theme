@@ -2525,11 +2525,31 @@ const UpdatedAt = ({ ts }) => {
 };
 
 const VIX_ZONES_NOTE = [
-  { range: "< 14",  label: "COMPLACENT",       cls: "text-blue-400",   tip: "市場過度樂觀，小心突然反轉" },
-  { range: "14–18", label: "NORMAL",            cls: "text-emerald-400",tip: "趨勢友好，正常執行突破單" },
-  { range: "18–24", label: "CAUTION",           cls: "text-yellow-400", tip: "謹慎選股，只做 RS leaders" },
-  { range: "24–30", label: "ELEVATED CONCERN",  cls: "text-amber-400",  tip: "法人開始避險，縮小倉位、收緊停損" },
-  { range: "30+",   label: "EXTREME FEAR",      cls: "text-red-400",    tip: "恐慌模式，持大量現金，只做 A+ setup" },
+  {
+    range: "< 14",  label: "COMPLACENT",      cls: "text-blue-400",
+    tip: "慢牛環境，可正常做多",
+    rules: ["Max Loss 0.3% / trade", "Stop 比 pivot 近 1%，不追高", "倉位正常"],
+  },
+  {
+    range: "14–18", label: "NORMAL",           cls: "text-emerald-400",
+    tip: "最佳交易環境，正常執行",
+    rules: ["Max Loss 0.5% / trade", "正常突破單、標準停損", "倉位 100%"],
+  },
+  {
+    range: "18–24", label: "CAUTION",          cls: "text-yellow-400",
+    tip: "市場轉波動，只做強勢股",
+    rules: ["Max Loss 0.3% / trade", "只做 RS leaders，不買弱股", "倉位 75%"],
+  },
+  {
+    range: "24–30", label: "ELEVATED CONCERN", cls: "text-amber-400",
+    tip: "法人開始避險，縮手",
+    rules: ["Max Loss 0.2% / trade", "只做 A+ setup，快進快出", "倉位 50%"],
+  },
+  {
+    range: "30+",   label: "EXTREME FEAR",     cls: "text-red-400",
+    tip: "恐慌模式，持現金等回落",
+    rules: ["不開新單", "持現金為主（75–100%）", "等 VIX 回落 < 25 再考慮進場"],
+  },
 ];
 
 const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
@@ -2599,11 +2619,16 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
       {showVixNote && (
         <div className="mt-2 rounded-lg border border-zinc-700/60 bg-zinc-800/60 overflow-hidden">
           {VIX_ZONES_NOTE.map(z => (
-            <div key={z.range} className={`flex items-start gap-2 px-2.5 py-1.5 border-b border-zinc-700/40 last:border-0 ${z.label === vixCfg.label ? "bg-zinc-700/40" : ""}`}>
-              <span className="font-mono text-[11px] text-zinc-500 w-10 flex-shrink-0 pt-px">{z.range}</span>
-              <div className="min-w-0">
-                <span className={`text-[11px] font-semibold ${z.cls}`}>{z.label}</span>
-                <span className="text-[11px] text-zinc-400 ml-1.5">{z.tip}</span>
+            <div key={z.range} className={`px-2.5 py-2 border-b border-zinc-700/40 last:border-0 ${z.label === vixCfg.label ? "bg-zinc-700/40" : ""}`}>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="font-mono text-[10px] text-zinc-500 w-9 flex-shrink-0">{z.range}</span>
+                <span className={`text-[11px] font-bold ${z.cls}`}>{z.label}</span>
+                <span className="text-[10px] text-zinc-500">{z.tip}</span>
+              </div>
+              <div className="pl-11 space-y-0.5">
+                {z.rules.map((r, i) => (
+                  <div key={i} className="text-[10px] text-zinc-400 before:content-['·'] before:mr-1 before:text-zinc-600">{r}</div>
+                ))}
               </div>
             </div>
           ))}
