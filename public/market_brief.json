@@ -1,6 +1,6 @@
 {
-  "generated_at": "May 20, 2026 (17:30 EDT)",
-  "session": "Post-Market",
+  "generated_at": "May 21, 2026 (08:03 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,8 +16,8 @@
     },
     {
       "label": "VIX",
-      "price": 17.44,
-      "change": -0.62,
+      "price": 17.64,
+      "change": 0.2,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 60550.59,
-      "change_pct": -0.44
+      "price": 61684.14,
+      "change_pct": 3.14
     },
     "dax": {
       "label": "DAX",
-      "price": 24737.24,
-      "change_pct": 1.38
+      "price": 24621.98,
+      "change_pct": -0.47
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10432.34,
-      "change_pct": 0.98
+      "price": 10391.72,
+      "change_pct": -0.39
     }
   },
   "macro_breadth": {
@@ -60,31 +60,31 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech-Led Strength, Risk-On Appetite",
+  "mood": "Tech-Led Rally / Risk-On Sentiment",
   "analysis": {
-    "analysis_para1": "Global markets presented a mixed picture today, with a slight dip in the Nikkei 225 at -0.44% contrasted by strong gains in European equities, notably the DAX rising +1.38% and the FTSE 100 up +0.98%. This positive sentiment flowed into US markets, where the S&P 500 gained +1.08% and the Nasdaq 100 surged +1.66%. The falling 10-year yield at 4.57% suggests a more accommodative environment, supporting equity valuations. Market breadth remains healthy, with 56.3% of stocks above their 50-day moving average (S5FI) and 60.7% above their 200-day moving average (MMTH), indicating broad participation beyond just mega-caps.",
-    "analysis_para2": "With the S&P 500 closing at 7432.97 and the Nasdaq 100 at 29297.70, the immediate mechanical plan is to monitor for continued upside momentum, especially if these indices can hold above their intraday lows. Key support levels to watch are yesterday's closing prices for any significant breakdown, which would indicate a shift in sentiment. A VIX maintaining its normal level around 17.44 would further confirm the current risk-on environment, while a sharp spike would signal caution. Traders should prioritize strong relative strength names from the semiconductor and hardware sectors as the prevailing trend suggests further outperformance in these areas.",
-    "technical_signal": "No reversal pattern confirmed yet. Major indices like the S&P 500 and Nasdaq 100 closed strongly higher, and market breadth remains positive.",
+    "action_line": "VIX 17.64 Normal + S5FI 56.3% breadth + Nikkei strong / Europe soft → focus on leading tech names near support.",
+    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 surging by an impressive +3.14% while European indices like the DAX (-0.47%) and FTSE 100 (-0.39%) show slight weakness. Despite the divergence, US equity futures are indicating a robust open, especially in technology. Underlying market breadth remains constructive with S5FI at 56.3% and MMTH at 60.7%, indicating healthy participation above key moving averages. The falling 10-year yield, now at 4.57%, further provides a tailwind for growth-oriented sectors.",
+    "analysis_para2": "Given the strong pre-market showing, traders should monitor for initial resistance breakouts followed by potential retests as entry points. The Nasdaq 100's significant strength, up +1.66%, suggests tech leadership will persist into the open. Key support levels for the S&P 500 will be yesterday's close, while breakout above current pre-market highs could signal further upside momentum. Prioritize high Relative Strength names, particularly in the semiconductor and hardware sectors, seeking entries on pullbacks to short-term moving averages or validated support zones. Confirm entries with increased volume.",
+    "technical_signal": "No reversal pattern confirmed yet. The strong pre-market gains indicate continuation of upward momentum.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MaxLinear (MXL) displays exceptional leadership with RS 98 and a staggering +199.0% 1-month return, aligning perfectly with the robust semiconductor strength driving current market upside."
+        "reason": "MXL earns an A+ as a top semiconductor leader with an RS of 99 and an astounding +187.2% gain in the last month, making it a prime candidate in the current tech-led rally."
       },
       {
         "ticker": "WOLF",
         "company": "Wolfspeed Inc",
         "grade": "A",
-        "reason": "Wolfspeed (WOLF) is a strong semiconductor play, boasting an RS of 98 and a significant +123.4% 1-month return, making it a prime candidate for continued outperformance in the tech-driven rally."
+        "reason": "WOLF receives an A grade for its exceptional RS of 98 and strong +137.3% one-month performance, riding the robust momentum in the semiconductor sector."
       },
       {
-        "ticker": "VIAV",
-        "company": "Viavi Solutions Inc",
+        "ticker": "SATS",
+        "company": "EchoStar Corp",
         "grade": "C",
-        "reason": "Despite an RS of 97, Viavi Solutions (VIAV)'s comparatively modest +10.4% 1-month return places it behind the semiconductor and hardware leaders, suggesting it may underperform in the current highly focused tech rally."
+        "reason": "SATS is graded C for avoidance despite a positive 1-month return of +14.5% due to its comparatively lower RS of 96 and weaker momentum relative to the dominant semiconductor and hardware leaders."
       }
-    ],
-    "action_line": "VIX 17.44, breadth 60.7%, DAX +1.38% indicates European strength. → trade RS leaders selectively."
+    ]
   }
 }
