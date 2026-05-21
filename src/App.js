@@ -2164,11 +2164,27 @@ const VIX_ZONES = [
 
 
 /* ──────────────────────────────────────────────── POSITION CALCULATOR ── */
-const PositionCalc = ({ ibkrThemesData, thematicData }) => {
+const vixToRiskPct = (v) => {
+  if (!v) return null;
+  if (v >= 30) return null;       // EXTREME FEAR — no new trades
+  if (v >= 24) return '0.2';      // ELEVATED CONCERN
+  if (v >= 18) return '0.3';      // CAUTION
+  if (v >= 14) return '0.5';      // NORMAL
+  return '0.3';                   // COMPLACENT
+};
+
+const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
   const [equity, setEquity] = React.useState('');
   const [entry, setEntry] = React.useState('');
   const [atr, setAtr] = React.useState('');
-  const [riskPct, setRiskPct] = React.useState('1');
+  const [riskPct, setRiskPct] = React.useState('0.5');
+  const [riskAutoSet, setRiskAutoSet] = React.useState(false);
+
+  React.useEffect(() => {
+    const suggested = vixToRiskPct(vix);
+    if (suggested) { setRiskPct(suggested); setRiskAutoSet(true); }
+    else setRiskAutoSet(false);
+  }, [vix]);
   const [stopStrategy, setStopStrategy] = React.useState('3');
   const [stopMode, setStopMode] = React.useState('lod');
   const [manualStop, setManualStop] = React.useState('');
@@ -2408,8 +2424,11 @@ const PositionCalc = ({ ibkrThemesData, thematicData }) => {
           </div>
         </div>
         <div>
-          <div className="text-[11px] text-zinc-600 mb-0.5">Risk %</div>
-          {numInput(riskPct, setRiskPct, '1')}
+          <div className="flex items-center gap-1 mb-0.5">
+            <div className="text-[11px] text-zinc-600">Risk %</div>
+            {riskAutoSet && <span className="text-[9px] px-1 py-px rounded bg-blue-500/15 text-blue-400 border border-blue-500/20 leading-none">VIX</span>}
+          </div>
+          {numInput(riskPct, v => { setRiskPct(v); setRiskAutoSet(false); }, '0.5')}
           <div className="mt-0.5 leading-tight">
             <div className="text-[11px] text-zinc-600 uppercase tracking-wider">Max Loss</div>
             <div className="text-[11px] font-mono font-bold text-red-400/90">{maxLossBudget != null ? `−${fmtDollar(maxLossBudget)}` : <span className="text-zinc-700">—</span>}</div>
@@ -7738,7 +7757,7 @@ const filtered = useMemo(() => {
           <aside className="w-[260px] flex-shrink-0 flex flex-col gap-3">
             <MarketPulseCard vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix} generatedAt={data?.generated_at} mc={data?.market_condition} briefData={briefData}/>
             <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData} generatedAt={data?.generated_at}/>
-            <PositionCalc ibkrThemesData={ibkrData} thematicData={data}/>
+            <PositionCalc ibkrThemesData={ibkrData} thematicData={data} vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix}/>
             <AlertRulesCard/>
           </aside>
 
