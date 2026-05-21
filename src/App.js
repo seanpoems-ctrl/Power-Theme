@@ -748,30 +748,8 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
 };
 
 // ── Hero Zone — 3-column dashboard row above the heatmap ──────────────────
-const HeroZone = ({ data, briefData, themesCount, tickersCount }) => {
-  const mc = data?.market_condition;
-  const signal = mc?.signal;
-
-  const signalCfg = {
-    green:  { dot: 'bg-emerald-400', label: 'Market Uptrend',    cardBg: '#0d2818', leftBorder: '#22c55e', borderColor: '#16a34a' },
-    yellow: { dot: 'bg-amber-400',   label: 'Market Correction', cardBg: '#1a1500', leftBorder: '#d97706', borderColor: '#b45309' },
-    red:    { dot: 'bg-red-400',     label: 'Market Downtrend',  cardBg: '#1a0a0a', leftBorder: '#ef4444', borderColor: '#dc2626' },
-  }[signal] || { dot: 'bg-zinc-500', label: '—', cardBg: '#18181b', leftBorder: '#52525b', borderColor: '#3f3f46' };
-
-  const advDec = mc?.adv_dec;
-  const breadthLine = advDec
-    ? `${advDec.adv_pct?.toFixed(0) ?? '—'}% advancing · ${advDec.advancing ?? '—'} adv / ${advDec.declining ?? '—'} dec`
-    : `${themesCount} themes · ${tickersCount} tickers`;
-
-  // AI action line: prefer briefData.analysis.action_line, then para1 snippet, then fallback
-  const rawAction = briefData?.analysis?.action_line
-    ?? briefData?.analysis?.analysis_para1
-    ?? null;
-  const aiAction = rawAction
-    ? '→ ' + (rawAction.length > 130 ? rawAction.slice(0, 127) + '…' : rawAction)
-    : '→ Scan top themes for RS leaders.';
-
-  // Column 2: top 3 stocks by RS (deduped across all themes)
+const HeroZone = ({ data, themesCount, tickersCount }) => {
+  // Column 1: top 3 stocks by RS (deduped across all themes)
   const top3 = useMemo(() => {
     if (!data?.themes) return [];
     const seen = new Set();
@@ -809,29 +787,8 @@ const HeroZone = ({ data, briefData, themesCount, tickersCount }) => {
   const maxPerf = Math.max(...themeRows.map(r => Math.abs(r.perf_1d || 0)), 1);
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '10px', padding: '10px 0 0' }}>
-      {/* ── Col 1: Market Signal + AI Pulse ── */}
-      <div style={{
-        background: signalCfg.cardBg,
-        borderLeft: `2px solid ${signalCfg.leftBorder}`,
-        border: `0.5px solid ${signalCfg.borderColor}`,
-        borderRadius: '8px',
-        padding: '12px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '8px',
-      }}>
-        <div className="flex items-center gap-2">
-          <span className={`w-2 h-2 rounded-full flex-shrink-0 ${signalCfg.dot}`}/>
-          <span className="text-[13px] font-semibold text-zinc-100">{signalCfg.label}</span>
-        </div>
-        <span className="text-[11px] text-zinc-500 leading-snug">{breadthLine}</span>
-        <div style={{ borderTop: '1px solid rgba(63,63,70,0.4)', paddingTop: '8px' }}>
-          <span className="text-[12px] text-emerald-400 leading-snug">{aiAction}</span>
-        </div>
-      </div>
-
-      {/* ── Col 2: Top 3 RS Leaders ── */}
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', padding: '10px 0 0' }}>
+      {/* ── Col 1: Top 3 RS Leaders ── */}
       <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg p-3 flex flex-col" style={{ gap: '6px' }}>
         <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Top 3 RS Leaders</div>
         {top3.length === 0 && <span className="text-[11px] text-zinc-600 italic">No data loaded</span>}
@@ -2567,38 +2524,73 @@ const UpdatedAt = ({ ts }) => {
   return <span className="text-[11px] text-zinc-600 font-mono tabular-nums">↻ {display}</span>;
 };
 
-const VixFearGaugeV2 = ({ vix, generatedAt }) => {
+const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
   const v = vix ?? 0;
-  const cfg =
+  const vixCfg =
     v >= 30 ? { label: "EXTREME FEAR", cls: "text-red-400" } :
     v >= 24 ? { label: "ELEVATED CONCERN", cls: "text-amber-400" } :
     v >= 18 ? { label: "CAUTION", cls: "text-yellow-400" } :
     v >= 14 ? { label: "NORMAL", cls: "text-emerald-400" } :
               { label: "COMPLACENT", cls: "text-blue-400" };
   const expectedMove = v ? (v / 16).toFixed(2) : "—";
-  const geminiText =
+  const vixRule =
     v >= 30 ? "VIX > 30 = panic regime. Cash heavy, only A+ setups, half size."
     : v >= 24 ? "VIX > 24 = institutional hedging active. Reduce size, tighten stops. Avoid chasing."
     : v >= 18 ? "VIX in caution zone. Trade selectively — favor RS leaders only."
     : "Low VIX = trend friendly. Standard entries on RS leaders OK.";
+
+  const signal = mc?.signal;
+  const signalCfg = {
+    green:  { dot: 'bg-emerald-400', label: 'Market Uptrend',    borderCls: 'border-emerald-500/40' },
+    yellow: { dot: 'bg-amber-400',   label: 'Market Correction', borderCls: 'border-amber-500/40' },
+    red:    { dot: 'bg-red-400',     label: 'Market Downtrend',  borderCls: 'border-red-500/40' },
+  }[signal] || { dot: 'bg-zinc-500', label: '—', borderCls: 'border-zinc-700/40' };
+
+  const advDec = mc?.adv_dec;
+  const breadthLine = advDec
+    ? `${advDec.adv_pct?.toFixed(0) ?? '—'}% advancing · ${advDec.advancing ?? '—'} adv / ${advDec.declining ?? '—'} dec`
+    : null;
+
+  const rawAction = briefData?.analysis?.action_line ?? briefData?.analysis?.analysis_para1 ?? null;
+  const aiAction = rawAction
+    ? (rawAction.length > 130 ? rawAction.slice(0, 127) + '…' : rawAction)
+    : null;
+
   return (
     <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
       <div className="flex items-center justify-between mb-2">
-        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.15em]">VIX Fear Gauge</div>
+        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.15em]">Market Pulse</div>
         <div className="flex items-center gap-1.5"><UpdatedAt ts={generatedAt}/><span className="px-1.5 py-0.5 text-[11px] font-bold rounded border bg-zinc-700/60 text-zinc-300 border-zinc-600/40">IBKR</span></div>
       </div>
-      <div className="text-[28px] leading-none font-bold font-mono text-zinc-100">{v ? v.toFixed(1) : "—"}</div>
-      <div className={`text-[11px] font-semibold mt-1 ${cfg.cls}`}>⚠ {cfg.label}</div>
-      <div className="mt-2 pt-2 border-t border-zinc-800/60">
-        <div className="text-[11px] text-zinc-500">SPX Expected Move</div>
-        <div className="text-[14px] font-bold font-mono text-zinc-200">±{expectedMove}%</div>
+
+      {/* Market signal row */}
+      <div className="flex items-center gap-2 mb-1">
+        <span className={`w-2 h-2 rounded-full flex-shrink-0 ${signalCfg.dot}`}/>
+        <span className="text-[13px] font-semibold text-zinc-100">{signalCfg.label}</span>
       </div>
+      {breadthLine && <div className="text-[11px] text-zinc-500 leading-snug mb-2">{breadthLine}</div>}
+
+      {/* VIX row */}
+      <div className="mt-1 pt-2 border-t border-zinc-800/60 flex items-end justify-between">
+        <div>
+          <div className="text-[11px] text-zinc-500 mb-0.5">VIX Fear Gauge</div>
+          <div className="text-[26px] leading-none font-bold font-mono text-zinc-100">{v ? v.toFixed(1) : "—"}</div>
+          <div className={`text-[11px] font-semibold mt-0.5 ${vixCfg.cls}`}>⚠ {vixCfg.label}</div>
+        </div>
+        <div className="text-right">
+          <div className="text-[11px] text-zinc-500">SPX Exp. Move</div>
+          <div className="text-[14px] font-bold font-mono text-zinc-200">±{expectedMove}%</div>
+        </div>
+      </div>
+
+      {/* AI section */}
       <div className="mt-2 pt-2 border-t border-zinc-800/60">
         <div className="flex items-center gap-1.5 mb-1">
           <span className="text-[11px] text-blue-400">✦</span>
           <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.15em]">Gemini</div>
         </div>
-        <div className="text-[11px] leading-snug text-zinc-300">{geminiText}</div>
+        <div className="text-[11px] leading-snug text-zinc-300">{vixRule}</div>
+        {aiAction && <div className="text-[11px] leading-snug text-emerald-400 mt-1">→ {aiAction}</div>}
       </div>
     </div>
   );
@@ -7691,7 +7683,7 @@ const filtered = useMemo(() => {
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
           <aside className="w-[260px] flex-shrink-0 flex flex-col gap-3">
-            <VixFearGaugeV2 vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix} generatedAt={data?.generated_at}/>
+            <MarketPulseCard vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix} generatedAt={data?.generated_at} mc={data?.market_condition} briefData={briefData}/>
             <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData} generatedAt={data?.generated_at}/>
             <PositionCalc ibkrThemesData={ibkrData} thematicData={data}/>
             <AlertRulesCard/>
@@ -7699,7 +7691,7 @@ const filtered = useMemo(() => {
 
           {/* ── CENTER MAIN CONTENT ──────────────────────────────── */}
           <main className="flex-1 min-w-0 flex flex-col gap-3">
-            <HeroZone data={data} briefData={briefData} themesCount={filtered.length} tickersCount={unique.length}/>
+            <HeroZone data={data} themesCount={filtered.length} tickersCount={unique.length}/>
             <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} generatedAt={data?.generated_at}/>
             {data && <Leaderboard
               themeRankings={data.theme_rankings}
