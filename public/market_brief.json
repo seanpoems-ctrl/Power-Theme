@@ -1,30 +1,30 @@
 {
-  "generated_at": "May 21, 2026 (12:17 EDT)",
-  "session": "Market Hours",
+  "generated_at": "May 21, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7410.69,
-      "change": -22.28,
-      "change_pct": -0.3
+      "price": 7445.72,
+      "change": 12.75,
+      "change_pct": 0.17
     },
     {
       "label": "Nasdaq 100",
-      "price": 29186.62,
-      "change": -111.08,
-      "change_pct": -0.38
+      "price": 29357.27,
+      "change": 59.57,
+      "change_pct": 0.2
     },
     {
       "label": "VIX",
-      "price": 17.25,
-      "change": -0.19,
+      "price": 16.76,
+      "change": -0.68,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.6,
-      "change": 0.03,
+      "price": 4.59,
+      "change": 0.01,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -50,8 +50,8 @@
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 55.9,
-    "mmth": 60.2,
+    "s5fi": 58.9,
+    "mmth": 61.7,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Mild Risk-Off / Choppy Consolidation",
+  "mood": "US Resilience Amid Mixed Global Cues",
   "analysis": {
-    "action_line": "VIX 17.25 Normal + S5FI 55.9% breadth + mixed global tape (Nikkei down, FTSE up) → trade RS leaders selectively near support.",
-    "analysis_para1": "Global markets show a somewhat cautious tone today, with the Nikkei 225 down 1.23% and the DAX off 0.53%, though the FTSE 100 posted a modest gain of 0.11%. This mixed sentiment provides little directional conviction for US equities, which are slightly lower. With the BAML HY Spread in an unknown regime, direct credit market signals are unavailable, but US equity breadth remains resilient. Specifically, 55.9% of S&P 500 stocks are above their 50-day moving average, and 60.2% are above their 200-day moving average, indicating underlying health despite the daily dip.",
-    "analysis_para2": "The current mild pullback in the S&P 500 to 7410.69 and Nasdaq 100 to 29186.62 presents an opportunity to monitor for support at key short-term moving averages. Given the normal VIX at 17.25, panic selling is not evident, suggesting dips may be bought. Focus should remain on high relative strength leaders that show resilience on down days. Traders should look for constructive action off these levels, perhaps forming higher lows, before committing to new long positions. Maintain discipline and protect profits in existing positions.",
-    "technical_signal": "No reversal pattern confirmed yet. Current market action reflects minor distribution, not a significant reversal.",
+    "action_line": "VIX 16.76 Normal + S5FI 58.9% breadth + Nikkei -1.23% weakness → selectively favor relative strength leaders on dips.",
+    "analysis_para1": "Global markets presented a mixed picture today, with Asian and European indices showing divergence. The Nikkei 225 fell 1.23% and the DAX declined 0.53%, indicating some weakness in key international hubs. In contrast, the FTSE 100 managed a slight gain of 0.11%. Despite this international choppiness and an unknown BAML HY Spread regime, US equity breadth remains healthy with S5FI at 58.9% and MMTH at 61.7%, suggesting underlying resilience in the domestic market supported by a stable 10Y Yield at 4.59%.",
+    "analysis_para2": "The current environment dictates a strategy of favoring leading sectors and individual stocks exhibiting strong relative strength. With the S&P 500 and Nasdaq 100 showing modest gains and VIX remaining normal at 16.76, the path of least resistance remains higher for quality assets. Traders should monitor key support levels on sector leaders, initiating positions on constructive pullbacks or confirmed breakouts above resistance. Maintaining discipline and tightly managing risk remains paramount, as mixed global signals could introduce volatility.",
+    "technical_signal": "No reversal pattern confirmed yet. US indices posted modest gains and breadth remains supportive, indicating continued upward momentum rather than a bearish reversal.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "With an RS of 99 and a phenomenal 1-month return of +187.2%, MXL is a top relative strength leader in the strong Semiconductors theme, signaling exceptional momentum."
+        "reason": "MXL demonstrates extreme leadership with RS=99 and a phenomenal 1M return of +187.2%, fitting the strong thematic rally in Semiconductors."
       },
       {
-        "ticker": "WOLF",
-        "company": "Wolfspeed Inc",
+        "ticker": "AXTI",
+        "company": "AXT Inc",
         "grade": "A",
-        "reason": "WOLF boasts an RS of 98 and a +137.3% 1-month gain, demonstrating significant outperformance within the active Semiconductors theme, suitable for continued strength."
+        "reason": "AXTI is a top-tier Semiconductor player with RS=99 and a robust 1M return of +39.5%, poised to capitalize on continued sector strength."
       },
       {
         "ticker": "SATS",
         "company": "EchoStar Corp",
         "grade": "C",
-        "reason": "Despite an RS of 96, its 1-month return of +14.5% is significantly weaker compared to its peers in this strong thematic group, suggesting relative underperformance in a selective market."
+        "reason": "Despite an RS of 96, SATS's significantly weaker 1M return of +14.5% compared to its peers suggests underperformance within the Telecommunications theme."
       }
     ]
   }
