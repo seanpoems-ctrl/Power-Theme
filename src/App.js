@@ -2613,8 +2613,6 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
         <span className={`w-2 h-2 rounded-full flex-shrink-0 ${signalCfg.dot}`}/>
         <span className="text-[13px] font-semibold text-zinc-100">{signalCfg.label}</span>
       </div>
-      {breadthLine && <div className="text-[11px] text-zinc-500 leading-snug mb-2">{breadthLine}</div>}
-
       {/* VIX row */}
       <div className="mt-1 pt-2 border-t border-zinc-800/60 flex items-end justify-between">
         <div>
