@@ -1139,7 +1139,7 @@ const EtfHoldingsPopup = ({ etfTicker, holdingsData = {}, onClose }) => {
   );
 };
 
-const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, generatedAt, onViewChange, onThemeSelect }) => {
+const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, generatedAt, onViewChange, onThemeSelect, etfHoldings = {} }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
   const [expanded, setExpanded] = useState(null);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
@@ -1393,7 +1393,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => { setThemeHover(null); setThemeStats(null); }}/>}
     {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => { setThemeStats(null); setThemeHover(null); }}/>}
     {subThemeModal && <SubThemeStocksModal subthemeName={subThemeModal.subthemeName} stocks={subThemeModal.stocks} onClose={() => setSubThemeModal(null)}/>}
-    {etfPopup && <EtfHoldingsPopup etfTicker={etfPopup.etf} holdingsData={data?.etf_holdings || {}} onClose={() => setEtfPopup(null)}/>}
+    {etfPopup && <EtfHoldingsPopup etfTicker={etfPopup.etf} holdingsData={etfHoldings} onClose={() => setEtfPopup(null)}/>}
     </>
   );
 };
@@ -2881,43 +2881,6 @@ const MarketInternalsV2 = ({ mc, internalsData, generatedAt }) => {
     </div>
   );
 };
-
-const AlertRulesCard = () => (
-  <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-    <PanelLabel badge="ntfy.sh" badgeClass="bg-blue-500/10 text-blue-400 border-blue-500/30">Alert Rules</PanelLabel>
-    <div className="space-y-1.5">
-      <div className="bg-emerald-500/[0.06] border border-emerald-500/20 rounded-md px-2 py-1.5">
-        <div className="text-[11px] font-semibold text-emerald-400">AI &amp; Semi RS &gt; 95</div>
-        <div className="text-[11px] text-zinc-500 mt-0.5">Push · ntfy.sh · Active</div>
-      </div>
-      <div className="bg-amber-500/[0.06] border border-amber-500/20 rounded-md px-2 py-1.5">
-        <div className="text-[11px] font-semibold text-amber-400">Gapper T1 Catalyst</div>
-        <div className="text-[11px] text-zinc-500 mt-0.5">Push · Pushover · Active</div>
-      </div>
-      <button className="w-full text-left text-[11px] text-zinc-500 hover:text-zinc-300 px-2 py-1.5 border border-dashed border-zinc-800 rounded-md">
-        + Add Rule
-        <div className="text-[11px] text-zinc-700">Theme RS · Grade · ADR · RS cross</div>
-      </button>
-    </div>
-  </div>
-);
-
-
-const ActiveAlertsCardV2 = () => (
-  <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-    <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.15em] mb-2">Active Alerts</div>
-    <div className="space-y-1.5">
-      <div className="bg-emerald-500/[0.06] border border-emerald-500/20 rounded-md px-2 py-1.5">
-        <div className="text-[11px] font-semibold text-emerald-400">AI Semi RS &gt; 95</div>
-        <div className="text-[11px] text-zinc-500 mt-0.5">Fired · ntfy.sh ✓</div>
-      </div>
-      <div className="bg-amber-500/[0.06] border border-amber-500/20 rounded-md px-2 py-1.5">
-        <div className="text-[11px] font-semibold text-amber-400">RKLB T1 Gapper</div>
-        <div className="text-[11px] text-zinc-500 mt-0.5">Fired · Pushover ✓</div>
-      </div>
-    </div>
-  </div>
-);
 
 
 
@@ -7733,7 +7696,6 @@ const filtered = useMemo(() => {
             <MarketPulseCard vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix} generatedAt={data?.generated_at} mc={data?.market_condition} briefData={briefData}/>
             <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData} generatedAt={data?.generated_at}/>
             <PositionCalc ibkrThemesData={ibkrData} thematicData={data} vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix}/>
-            <AlertRulesCard/>
           </aside>
 
           {/* ── CENTER MAIN CONTENT ──────────────────────────────── */}
@@ -7748,6 +7710,7 @@ const filtered = useMemo(() => {
               spyBenchmarks={data.spy_benchmarks}
               ibkrThemesData={ibkrThemesData}
               generatedAt={data.generated_at}
+              etfHoldings={data.etf_holdings || {}}
               onViewChange={v => { setLbView(v); setSpotlightThemeName(null); }}
               onThemeSelect={name => setSpotlightThemeName(name)}
             />}
@@ -7755,10 +7718,6 @@ const filtered = useMemo(() => {
             <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData}/>
           </main>
 
-          {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
-          <aside className="w-[200px] flex-shrink-0 flex flex-col gap-3">
-            <ActiveAlertsCardV2/>
-          </aside>
         </div>
 
 
