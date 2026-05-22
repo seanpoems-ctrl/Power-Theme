@@ -695,14 +695,23 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
 
       {stocks.length > 0 ? (
         <div className="overflow-x-auto overflow-y-auto" style={{ maxHeight: '240px' }}>
-          <table className="w-full text-left">
+          <table className="text-left" style={{ width: '100%', minWidth: '480px', tableLayout: 'fixed' }}>
+            <colgroup>
+              <col style={{ width: '16%' }} />
+              <col style={{ width: '14%' }} />
+              <col style={{ width: '12%' }} />
+              <col style={{ width: '10%' }} />
+              <col style={{ width: '16%' }} />
+              <col style={{ width: '16%' }} />
+              <col style={{ width: '16%' }} />
+            </colgroup>
             <thead className="sticky top-0 z-10" style={{ background: '#18181b' }}>
               <tr className="border-b border-zinc-800/60">
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Ticker</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">Ticker</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Price</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">ADR%</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">RS</th>
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right whitespace-nowrap">Vol Surge</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Vol Surge</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Short%</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">Setup</th>
               </tr>
