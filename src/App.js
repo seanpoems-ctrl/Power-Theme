@@ -2573,6 +2573,17 @@ const VIX_ZONES_NOTE = [
 
 const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
   const [showVixNote, setShowVixNote] = React.useState(false);
+  const vixNoteRef = React.useRef(null);
+  React.useEffect(() => {
+    if (!showVixNote) return;
+    const handler = (e) => {
+      if (vixNoteRef.current && !vixNoteRef.current.contains(e.target)) {
+        setShowVixNote(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [showVixNote]);
   const v = vix ?? 0;
   const vixCfg =
     v >= 30 ? { label: "EXTREME FEAR", cls: "text-red-400" } :
@@ -2602,7 +2613,7 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
   const actionLine = briefData?.analysis?.action_line || null;
 
   return (
-    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+    <div ref={vixNoteRef} className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
       <div className="flex items-center justify-between mb-2">
         <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.15em]">Market Pulse</div>
         <div className="flex items-center gap-1.5"><UpdatedAt ts={generatedAt}/><span className="px-1.5 py-0.5 text-[11px] font-bold rounded border bg-zinc-700/60 text-zinc-300 border-zinc-600/40">IBKR</span></div>
