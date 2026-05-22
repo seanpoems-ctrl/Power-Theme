@@ -7589,35 +7589,9 @@ const filtered = useMemo(() => {
                         {spy.price != null && <span className="text-zinc-300">{spy.price.toFixed(0)}</span>}
                         {fmtChg(spy.change_pct)}
                       </span></>}
-                    {iwm && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors"
-                        onClick={() => window.open(`https://www.tradingview.com/chart/?symbol=CME_MINI:RTY1!`, "_blank")}>
-                        <span className="text-zinc-500">RTY!</span>
-                        {iwm.price != null && <span className="text-zinc-300">{iwm.price.toFixed(0)}</span>}
-                        {fmtChg(iwm.change_pct)}
-                      </span></>}
                     {breadth_50d != null && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_50d', e)}>
                         <span className="text-zinc-600">S5FI</span>
                         <span className={breadthColor(breadth_50d)}>{breadth_50d.toFixed(1)}%</span>
-                      </span></>}
-                    {btc && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('btc', e)}>
-                        <span className="text-zinc-600">BTC</span>
-                        {btc.price != null && <span className="text-zinc-300">{btc.price.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>}
-                        {fmtChg(btc.change_pct)}
-                      </span></>}
-                    {gld && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('gld', e)}>
-                        <span className="text-zinc-600">GC1!</span>
-                        {gld.price != null && <span className="text-zinc-300">{gld.price.toFixed(0)}</span>}
-                        {fmtChg(gld.change_pct)}
-                      </span></>}
-                    {oil && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('oil', e)}>
-                        <span className="text-zinc-600">CL1!</span>
-                        {oil.price != null && <span className="text-zinc-300">${oil.price.toFixed(2)}</span>}
-                        {fmtChg(oil.change_pct)}
-                      </span></>}
-                    {dxy && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('dxy', e)}>
-                        <span className="text-zinc-600">DXY</span>
-                        {dxy.price != null && <span className={dxy.change_pct > 0 ? "text-red-400" : dxy.change_pct < 0 ? "text-emerald-400" : "text-zinc-300"}>{dxy.price.toFixed(2)}</span>}
-                        {dxy.change_pct != null && <span className={dxy.change_pct > 0 ? "text-red-400" : dxy.change_pct < 0 ? "text-emerald-400" : "text-zinc-400"}>{dxy.change_pct > 0 ? "+" : ""}{dxy.change_pct.toFixed(2)}%</span>}
                       </span></>}
                     {breadth_200d != null && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_200d', e)}>
                         <span className="text-zinc-600">MMTH 200D</span>
