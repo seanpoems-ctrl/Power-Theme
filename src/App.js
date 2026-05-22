@@ -1092,7 +1092,7 @@ const RS_MODES = [
   { key: '52w', label: '52W', perfKey: 'rs_52w',   spyKey: null       },
 ];
 
-const EtfHoldingsPopup = ({ etfTicker, anchorRect, onClose }) => {
+const EtfHoldingsPopup = ({ etfTicker, onClose }) => {
   const [holdings, setHoldings] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -1105,44 +1105,52 @@ const EtfHoldingsPopup = ({ etfTicker, anchorRect, onClose }) => {
       .catch(() => { setHoldings([]); setLoading(false); });
   }, [etfTicker]);
 
-  const style = { position: 'fixed', zIndex: 200 };
-  if (anchorRect) {
-    const popupW = 300;
-    const viewW = window.innerWidth;
-    style.top = Math.max(60, Math.min(anchorRect.top, window.innerHeight - 420));
-    if (anchorRect.right + popupW + 12 < viewW) {
-      style.left = anchorRect.right + 8;
-    } else {
-      style.right = viewW - anchorRect.left + 8;
-    }
-  }
+  useEffect(() => {
+    const handler = e => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [onClose]);
 
   return (
-    <div className="bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl flex flex-col" style={{ ...style, width: 300, maxHeight: 460 }}>
-      <div className="flex items-center justify-between px-3 py-2 border-b border-zinc-800 flex-shrink-0">
-        <span className="text-[13px] font-bold text-zinc-100">{etfTicker} · Top Holdings</span>
-        <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors"><X size={13}/></button>
-      </div>
-      <div className="overflow-y-auto flex-1">
-        {loading ? (
-          <div className="text-[12px] text-zinc-500 text-center py-6">Loading...</div>
-        ) : !holdings || holdings.length === 0 ? (
-          <div className="text-[12px] text-zinc-500 text-center py-6">No holdings data</div>
-        ) : (<>
-          <div className="flex items-center justify-between px-3 py-1 border-b border-zinc-800/60">
-            <span className="text-[10px] text-zinc-600 uppercase tracking-wider">Ticker · Name</span>
-            <span className="text-[10px] text-zinc-600 uppercase tracking-wider">Weight</span>
+    <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
+      <div className="relative w-full max-w-xl max-h-[80vh] bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl flex flex-col overflow-hidden" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 shrink-0">
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-semibold text-zinc-100">{etfTicker} · Top Holdings</span>
+            {holdings && <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{holdings.length} holdings · sorted by weight</span>}
           </div>
-          {holdings.map((h, i) => (
-            <div key={i} className="flex items-center justify-between px-3 py-1.5 border-b border-zinc-800/30 hover:bg-zinc-800/30 transition-colors">
-              <div className="flex items-center gap-2 min-w-0">
-                <span className="text-[12px] font-mono font-bold text-blue-400 flex-shrink-0 w-12">{h.ticker || '—'}</span>
-                <span className="text-[11px] text-zinc-400 truncate">{h.name}</span>
-              </div>
-              <span className="text-[12px] font-mono text-zinc-200 flex-shrink-0 ml-2">{h.weight.toFixed(2)}%</span>
-            </div>
-          ))}
-        </>)}
+          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-300 transition-colors p-1 rounded hover:bg-zinc-800">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
+          </button>
+        </div>
+        <div className="overflow-y-auto flex-1 px-2 py-1">
+          {loading ? (
+            <div className="text-[12px] text-zinc-500 text-center py-10">Loading...</div>
+          ) : !holdings || holdings.length === 0 ? (
+            <div className="text-[12px] text-zinc-500 text-center py-10">No holdings data</div>
+          ) : (
+            <table className="w-full border-collapse text-left text-xs">
+              <thead className="sticky top-0 bg-zinc-900 z-10">
+                <tr className="border-b border-zinc-800 text-zinc-500">
+                  <th className="w-8 py-2 pr-2 text-right font-medium">#</th>
+                  <th className="px-2 py-2 font-medium">Ticker</th>
+                  <th className="px-2 py-2 font-medium">Name</th>
+                  <th className="px-2 py-2 font-medium text-right">Weight %</th>
+                </tr>
+              </thead>
+              <tbody>
+                {holdings.map((h, i) => (
+                  <tr key={i} className="border-b border-zinc-800/50 hover:bg-zinc-800/30">
+                    <td className="py-1.5 pr-2 text-right font-mono text-zinc-600">{i + 1}</td>
+                    <td className="px-2 py-1.5 font-mono font-semibold text-blue-400">{h.ticker || '—'}</td>
+                    <td className="px-2 py-1.5 text-zinc-300 max-w-[240px] truncate">{h.name || '—'}</td>
+                    <td className="px-2 py-1.5 text-right font-mono text-emerald-400 font-semibold">{h.weight.toFixed(2)}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
       </div>
     </div>
   );
@@ -1412,7 +1420,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => { setThemeHover(null); setThemeStats(null); }}/>}
     {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => { setThemeStats(null); setThemeHover(null); }}/>}
     {subThemeModal && <SubThemeStocksModal subthemeName={subThemeModal.subthemeName} stocks={subThemeModal.stocks} onClose={() => setSubThemeModal(null)}/>}
-    {etfPopup && <EtfHoldingsPopup etfTicker={etfPopup.etf} anchorRect={etfPopup.anchorRect} onClose={() => setEtfPopup(null)}/>}
+    {etfPopup && <EtfHoldingsPopup etfTicker={etfPopup.etf} onClose={() => setEtfPopup(null)}/>}
     </>
   );
 };
