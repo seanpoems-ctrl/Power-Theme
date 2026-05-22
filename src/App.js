@@ -1235,7 +1235,6 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
               {view === "themes" && (
                 <>
                   <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Sub-Themes</th>
-                  <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Leaders</th>
                 </>
               )}
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
@@ -1359,14 +1358,6 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                                 </>);
                               })()
                           }
-                        </div>
-                      </td>
-                      <td className="px-2 py-1.5 align-middle">
-                        <div className="flex flex-nowrap gap-1">
-                          {leaderTickers.map(l => (
-                            <span key={l.ticker} className={`text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded border whitespace-nowrap ${l.setupCls}`}>{l.ticker}</span>
-                          ))}
-                          {leaderTickers.length === 0 && <span className="text-zinc-600 text-[11px]">—</span>}
                         </div>
                       </td>
                     </>
