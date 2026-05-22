@@ -868,8 +868,8 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt 
     if (v >= 3)   return { bg: 'bg-emerald-500/60', text: 'text-emerald-100' };
     if (v >= 1.5) return { bg: 'bg-emerald-500/40', text: 'text-emerald-200' };
     if (v >= 0.5) return { bg: 'bg-emerald-500/25', text: 'text-emerald-300' };
-    if (v >= 0)   return { bg: 'bg-emerald-500/10', text: 'text-zinc-400' };
-    if (v >= -0.5) return { bg: 'bg-red-500/10', text: 'text-zinc-400' };
+    if (v >= 0)   return { bg: 'bg-zinc-700/60', text: 'text-zinc-100' };
+    if (v >= -0.5) return { bg: 'bg-zinc-700/60', text: 'text-zinc-100' };
     if (v >= -1.5) return { bg: 'bg-red-500/25', text: 'text-red-300' };
     if (v >= -3)  return { bg: 'bg-red-500/40', text: 'text-red-200' };
     return { bg: 'bg-red-500/60', text: 'text-red-100' };
