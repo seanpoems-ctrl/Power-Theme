@@ -1299,9 +1299,6 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
             <tr className="border-b border-zinc-800/60">
               <th className="px-2 py-2 w-6 text-[11px] text-zinc-600 select-none whitespace-nowrap">#</th>
               <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Theme</th>
-              {view === "themes" && (
-                <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">ETF</th>
-              )}
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
               <th onClick={e => handleLBSort('rs_score', e.shiftKey)}
                 className={`px-1 py-2 text-center cursor-pointer select-none w-14 ${sortPriority[0]?.key === 'rs_score' ? 'text-blue-400' : 'text-zinc-500 hover:text-zinc-300'}`}>
@@ -1372,25 +1369,18 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                           onThemeSelect && onThemeSelect(t.name);
                         }}
                       >{t.name}</span>
-                      {t.stage2_momentum && <span className="px-1 py-0.5 text-[10px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full leading-none flex-shrink-0 whitespace-nowrap">STAGE 2</span>}
+                      {etfTicker && (
+                        <button
+                          className={`text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded border transition-colors whitespace-nowrap flex-shrink-0 ${etfPopup?.etf === etfTicker ? 'text-emerald-300 bg-emerald-500/25 border-emerald-400/40' : 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20 hover:bg-emerald-500/20'}`}
+                          onClick={e => {
+                            e.stopPropagation();
+                            setEtfPopup(prev => prev?.etf === etfTicker ? null : { etf: etfTicker });
+                          }}
+                        >{etfTicker}</button>
+                      )}
                       {t.n_industries && <span className="text-[11px] text-zinc-600">{t.n_industries} ind</span>}
                     </div>
                   </td>
-                  {view === "themes" && (
-                    <td className="px-2 py-1.5 align-middle" onClick={e => e.stopPropagation()}>
-                      {etfTicker ? (
-                        <button
-                          className={`text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded border transition-colors whitespace-nowrap ${etfPopup?.etf === etfTicker ? 'text-emerald-300 bg-emerald-500/25 border-emerald-400/40' : 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20 hover:bg-emerald-500/20'}`}
-                          onClick={e => {
-                            const rect = e.currentTarget.getBoundingClientRect();
-                            setEtfPopup(prev => prev?.etf === etfTicker ? null : { etf: etfTicker, anchorRect: rect });
-                          }}
-                        >{etfTicker}</button>
-                      ) : (
-                        <span className="text-zinc-600 text-[11px]">—</span>
-                      )}
-                    </td>
-                  )}
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
                   {(() => {
                     const rsVal = themeAvgRS[t.name?.toLowerCase()];
