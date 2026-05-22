@@ -704,7 +704,6 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">RS</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right whitespace-nowrap">Vol Surge</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right whitespace-nowrap">Mkt Cap</th>
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Float</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Short%</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">Setup</th>
               </tr>
@@ -722,7 +721,6 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
                       {(s.vol_surge || s.rvol) ? `${Number(s.vol_surge || s.rvol).toFixed(1)}x` : '—'}
                     </td>
                     <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{fmtMktCap(s.mkt_cap)}</td>
-                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-500 text-right">{s.float_shares ? fmtMktCap(s.float_shares) : '—'}</td>
                     <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-500 text-right">{s.short_pct != null ? `${Number(s.short_pct).toFixed(1)}%` : '—'}</td>
                     <td className="px-2 py-1.5 text-center">
                       {s.setup_label
