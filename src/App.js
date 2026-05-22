@@ -697,13 +697,7 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
         <div className="overflow-x-auto overflow-y-auto" style={{ maxHeight: '240px' }}>
           <table className="text-left" style={{ width: '100%', minWidth: '480px', tableLayout: 'fixed' }}>
             <colgroup>
-              <col style={{ width: '16%' }} />
-              <col style={{ width: '14%' }} />
-              <col style={{ width: '12%' }} />
-              <col style={{ width: '10%' }} />
-              <col style={{ width: '16%' }} />
-              <col style={{ width: '16%' }} />
-              <col style={{ width: '16%' }} />
+              {Array(7).fill(0).map((_, i) => <col key={i} style={{ width: '14.28%' }} />)}
             </colgroup>
             <thead className="sticky top-0 z-10" style={{ background: '#18181b' }}>
               <tr className="border-b border-zinc-800/60">
