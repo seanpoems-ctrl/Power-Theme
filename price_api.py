@@ -27,6 +27,27 @@ class Handler(BaseHTTPRequestHandler):
                 body = json.dumps({"error": str(e)})
                 self.send_response(500)
 
+        elif path.startswith("/etf_holdings/"):
+            ticker = path.split("/etf_holdings/")[1].upper()
+            try:
+                t = yf.Ticker(ticker)
+                holdings_df = t.get_top_holdings()
+                if holdings_df is not None and not holdings_df.empty:
+                    rows = []
+                    for _, row in holdings_df.iterrows():
+                        sym = str(row.get("Symbol", "")).strip()
+                        name = str(row.get("holdingName", "")).strip()
+                        pct = float(row.get("holdingPercent", 0)) * 100
+                        rows.append({"ticker": sym, "name": name, "weight": round(pct, 2)})
+                    rows.sort(key=lambda x: x["weight"], reverse=True)
+                    body = json.dumps({"etf": ticker, "holdings": rows})
+                else:
+                    body = json.dumps({"etf": ticker, "holdings": []})
+                self.send_response(200)
+            except Exception as e:
+                body = json.dumps({"etf": ticker, "holdings": [], "error": str(e)})
+                self.send_response(200)
+
         elif path.startswith("/price/"):
             ticker = path.split("/price/")[1].upper()
             try:

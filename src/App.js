@@ -1092,6 +1092,62 @@ const RS_MODES = [
   { key: '52w', label: '52W', perfKey: 'rs_52w',   spyKey: null       },
 ];
 
+const EtfHoldingsPopup = ({ etfTicker, anchorRect, onClose }) => {
+  const [holdings, setHoldings] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(true);
+    setHoldings(null);
+    fetch(`http://localhost:5001/etf_holdings/${etfTicker}`)
+      .then(r => r.json())
+      .then(d => { setHoldings(d.holdings || []); setLoading(false); })
+      .catch(() => { setHoldings([]); setLoading(false); });
+  }, [etfTicker]);
+
+  const style = { position: 'fixed', zIndex: 200 };
+  if (anchorRect) {
+    const popupW = 300;
+    const viewW = window.innerWidth;
+    style.top = Math.max(60, Math.min(anchorRect.top, window.innerHeight - 420));
+    if (anchorRect.right + popupW + 12 < viewW) {
+      style.left = anchorRect.right + 8;
+    } else {
+      style.right = viewW - anchorRect.left + 8;
+    }
+  }
+
+  return (
+    <div className="bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl flex flex-col" style={{ ...style, width: 300, maxHeight: 460 }}>
+      <div className="flex items-center justify-between px-3 py-2 border-b border-zinc-800 flex-shrink-0">
+        <span className="text-[13px] font-bold text-zinc-100">{etfTicker} · Top Holdings</span>
+        <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors"><X size={13}/></button>
+      </div>
+      <div className="overflow-y-auto flex-1">
+        {loading ? (
+          <div className="text-[12px] text-zinc-500 text-center py-6">Loading...</div>
+        ) : !holdings || holdings.length === 0 ? (
+          <div className="text-[12px] text-zinc-500 text-center py-6">No holdings data</div>
+        ) : (<>
+          <div className="flex items-center justify-between px-3 py-1 border-b border-zinc-800/60">
+            <span className="text-[10px] text-zinc-600 uppercase tracking-wider">Ticker · Name</span>
+            <span className="text-[10px] text-zinc-600 uppercase tracking-wider">Weight</span>
+          </div>
+          {holdings.map((h, i) => (
+            <div key={i} className="flex items-center justify-between px-3 py-1.5 border-b border-zinc-800/30 hover:bg-zinc-800/30 transition-colors">
+              <div className="flex items-center gap-2 min-w-0">
+                <span className="text-[12px] font-mono font-bold text-blue-400 flex-shrink-0 w-12">{h.ticker || '—'}</span>
+                <span className="text-[11px] text-zinc-400 truncate">{h.name}</span>
+              </div>
+              <span className="text-[12px] font-mono text-zinc-200 flex-shrink-0 ml-2">{h.weight.toFixed(2)}%</span>
+            </div>
+          ))}
+        </>)}
+      </div>
+    </div>
+  );
+};
+
 const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, generatedAt, onViewChange, onThemeSelect }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
   const [expanded, setExpanded] = useState(null);
@@ -1100,6 +1156,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
   const [themeStats, setThemeStats] = useState(null); // { themeName, anchorRect }
   const [subThemeModal, setSubThemeModal] = useState(null); // { subthemeName, stocks }
   const [rsMode, setRsMode] = useState('52w');
+  const [etfPopup, setEtfPopup] = useState(null); // { etf, anchorRect }
 
   const activeData = view === "themes" ? finvizThemeRankings : themeRankings;
 
@@ -1233,9 +1290,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
               <th className="px-2 py-2 w-6 text-[11px] text-zinc-600 select-none whitespace-nowrap">#</th>
               <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Theme</th>
               {view === "themes" && (
-                <>
-                  <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Sub-Themes</th>
-                </>
+                <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">ETF</th>
               )}
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
               <th onClick={e => handleLBSort('rs_score', e.shiftKey)}
@@ -1264,24 +1319,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
               const isExpanded = isIndustryView && expanded === t.name;
               const industries = isIndustryView ? (industryMap[t.name] || []) : [];
 
-              // Sub-themes & leaders for themes view
-              let subThemeNames = [];
-              let leaderTickers = [];
-              let hasIbkrSource = false;
-              if (view === "themes") {
-                const matchedTheme = themes.find(th => (th.name || '').toLowerCase() === (t.name || '').toLowerCase());
-                if (matchedTheme) {
-                  subThemeNames = (matchedTheme.subthemes || []).slice(0, 3).map(s => s.name);
-                }
-                const ibkrPT = ibkrThemesData?.power_themes?.find(pt => pt.name?.toLowerCase() === t.name?.toLowerCase());
-                if (ibkrPT) {
-                  hasIbkrSource = true;
-                  leaderTickers = (ibkrPT.leaders || []).slice(0, 3).map(l => ({ ticker: l.ticker, setupCls: l.setup_label === 'Flag' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' : l.setup_label === 'Base' ? 'text-blue-400 bg-blue-500/10 border-blue-500/20' : 'text-zinc-400 bg-zinc-800/60 border-zinc-700/40' }));
-                } else if (matchedTheme) {
-                  const allStocks = (matchedTheme.subthemes || []).flatMap(s => s.stocks || []);
-                  leaderTickers = [...allStocks].sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0)).slice(0, 3).map(s => ({ ticker: s.ticker, setupCls: 'text-zinc-400 bg-zinc-800/60 border-zinc-700/40' }));
-                }
-              }
+              const etfTicker = view === "themes" ? (THEME_ETF_MAP[t.name] || null) : null;
 
               return (<React.Fragment key={`lb-${t.name}`}>
                 <tr
@@ -1329,38 +1367,19 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                     </div>
                   </td>
                   {view === "themes" && (
-                    <>
-                      <td className="px-2 py-1.5 align-middle max-w-[200px] overflow-hidden">
-                        <div className="text-[11px] text-zinc-400 leading-tight flex items-center gap-x-1 flex-nowrap overflow-hidden">
-                          {subThemeNames.length === 0
-                            ? <span className="text-zinc-600">—</span>
-                            : (() => {
-                                const visible = subThemeNames.slice(0, 2);
-                                const extra = subThemeNames.length - 2;
-                                const matchedThemeInner = themes.find(th => (th.name || '').toLowerCase() === (t.name || '').toLowerCase());
-                                return (<>
-                                  {visible.map((sn, si) => {
-                                    const subObj = matchedThemeInner?.subthemes?.find(s => s.name === sn);
-                                    return (
-                                      <React.Fragment key={sn}>
-                                        {si > 0 && <span className="text-zinc-700 flex-shrink-0">·</span>}
-                                        <button
-                                          className="hover:text-blue-400 hover:underline transition-colors cursor-pointer whitespace-nowrap truncate"
-                                          onClick={e => {
-                                            e.stopPropagation();
-                                            if (subObj) setSubThemeModal({ subthemeName: sn, stocks: subObj.stocks || [] });
-                                          }}
-                                        >{sn}</button>
-                                      </React.Fragment>
-                                    );
-                                  })}
-                                  {extra > 0 && <span className="text-zinc-600 flex-shrink-0 whitespace-nowrap">+{extra}</span>}
-                                </>);
-                              })()
-                          }
-                        </div>
-                      </td>
-                    </>
+                    <td className="px-2 py-1.5 align-middle" onClick={e => e.stopPropagation()}>
+                      {etfTicker ? (
+                        <button
+                          className={`text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded border transition-colors whitespace-nowrap ${etfPopup?.etf === etfTicker ? 'text-emerald-300 bg-emerald-500/25 border-emerald-400/40' : 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20 hover:bg-emerald-500/20'}`}
+                          onClick={e => {
+                            const rect = e.currentTarget.getBoundingClientRect();
+                            setEtfPopup(prev => prev?.etf === etfTicker ? null : { etf: etfTicker, anchorRect: rect });
+                          }}
+                        >{etfTicker}</button>
+                      ) : (
+                        <span className="text-zinc-600 text-[11px]">—</span>
+                      )}
+                    </td>
                   )}
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
                   {(() => {
@@ -1393,6 +1412,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => { setThemeHover(null); setThemeStats(null); }}/>}
     {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => { setThemeStats(null); setThemeHover(null); }}/>}
     {subThemeModal && <SubThemeStocksModal subthemeName={subThemeModal.subthemeName} stocks={subThemeModal.stocks} onClose={() => setSubThemeModal(null)}/>}
+    {etfPopup && <EtfHoldingsPopup etfTicker={etfPopup.etf} anchorRect={etfPopup.anchorRect} onClose={() => setEtfPopup(null)}/>}
     </>
   );
 };
