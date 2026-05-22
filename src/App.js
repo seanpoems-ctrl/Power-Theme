@@ -763,23 +763,10 @@ const HeroZone = ({ data, themesCount, tickersCount }) => {
     return stocks.sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0)).slice(0, 3);
   }, [data]);
 
-  // Column 3: top 5 themes by 1D perf
-  const themeRows = useMemo(() => {
-    const rankings = data?.finviz_theme_rankings || [];
-    const source = rankings.length > 0
-      ? rankings.map(r => ({ name: r.name, perf_1d: r.perf_1d }))
-      : (data?.themes || []).map(t => {
-          const norm = t.subthemes ? t : { ...t, subthemes: [{ stocks: t.stocks || [] }] };
-          const stocks = norm.subthemes.flatMap(s => s.stocks);
-          const vals = stocks.map(s => s.perf_1d).filter(v => v != null);
-          return { name: norm.name, perf_1d: vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null };
-        });
-    return source.filter(r => r.perf_1d != null)
-      .sort((a, b) => (b.perf_1d || 0) - (a.perf_1d || 0))
-      .slice(0, 5);
-  }, [data]);
-
-  const maxPerf = Math.max(...themeRows.map(r => Math.abs(r.perf_1d || 0)), 1);
+  // Column 3: ETFs flagged as breakout / support by the scraper
+  const etfSignals = useMemo(() => (
+    Array.isArray(data?.etf_signals) ? data.etf_signals : []
+  ), [data]);
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', padding: '10px 0 0' }}>
@@ -809,24 +796,32 @@ const HeroZone = ({ data, themesCount, tickersCount }) => {
         })}
       </div>
 
-      {/* ── Col 3: Top 5 Themes Today ── */}
+      {/* ── Col 3: ETF Breakout / Support Signals ── */}
       <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg p-3 flex flex-col" style={{ gap: '5px' }}>
-        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Top 5 Themes Today</div>
-        {themeRows.length === 0 && <span className="text-[11px] text-zinc-600 italic">No data loaded</span>}
-        {themeRows.map(r => (
-          <div key={r.name} className="flex items-center gap-2">
-            <span className="text-[11px] text-zinc-400 truncate flex-1 min-w-0">{r.name}</span>
-            <div className="w-14 h-1.5 bg-zinc-800 rounded-full overflow-hidden flex-shrink-0">
-              <div
-                className={`h-full rounded-full ${(r.perf_1d || 0) >= 0 ? 'bg-emerald-500' : 'bg-red-500'}`}
-                style={{ width: `${Math.min(100, Math.abs(r.perf_1d || 0) / maxPerf * 100)}%` }}
-              />
-            </div>
-            <span className={`text-[11px] font-mono font-medium w-10 text-right flex-shrink-0 ${(r.perf_1d || 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-              {(r.perf_1d || 0) >= 0 ? '+' : ''}{(r.perf_1d || 0).toFixed(1)}%
-            </span>
-          </div>
-        ))}
+        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">ETF Breakout / Support</div>
+        {etfSignals.length === 0 && <span className="text-[11px] text-zinc-600 italic">No breakout / support ETFs</span>}
+        <div className="flex flex-col" style={{ gap: '5px', maxHeight: '184px', overflowY: 'auto' }}>
+          {etfSignals.map(s => {
+            const isBreakout = s.signal === 'breakout';
+            const perf = s.perf_1d ?? 0;
+            return (
+              <div key={s.etf} className="flex items-center gap-2">
+                <span className="text-[12px] font-mono font-bold text-zinc-200 flex-shrink-0" style={{ width: '38px' }}>{s.etf}</span>
+                <span className="text-[11px] text-zinc-500 truncate flex-1 min-w-0">{s.theme}</span>
+                <span className={`text-[10px] font-semibold uppercase tracking-wide px-1.5 py-0.5 rounded border flex-shrink-0 ${
+                  isBreakout
+                    ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
+                    : 'bg-sky-500/15 text-sky-400 border-sky-500/30'
+                }`}>
+                  {isBreakout ? 'Breakout' : (s.level ? `Support·${s.level}` : 'Support')}
+                </span>
+                <span className={`text-[11px] font-mono font-medium text-right flex-shrink-0 ${perf >= 0 ? 'text-emerald-400' : 'text-red-400'}`} style={{ width: '44px' }}>
+                  {perf >= 0 ? '+' : ''}{perf.toFixed(1)}%
+                </span>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

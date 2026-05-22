@@ -71486,5 +71486,315 @@
       "t2108": "null",
       "yield_10y": "yfinance"
     }
-  }
+  },
+  "etf_signals": [
+    {
+      "etf": "UFO",
+      "theme": "Space Tech",
+      "signal": "breakout",
+      "level": null,
+      "price": 61.56,
+      "perf_1d": 4.41,
+      "sma20_pct": 12.94,
+      "sma50_pct": 20.28,
+      "sma200_pct": 48.16
+    },
+    {
+      "etf": "QTUM",
+      "theme": "Quantum Computing",
+      "signal": "breakout",
+      "level": null,
+      "price": 154.47,
+      "perf_1d": 3.44,
+      "sma20_pct": 9.32,
+      "sma50_pct": 22.59,
+      "sma200_pct": 36.52
+    },
+    {
+      "etf": "SOXX",
+      "theme": "Semiconductors",
+      "signal": "breakout",
+      "level": null,
+      "price": 540.85,
+      "perf_1d": 3.08,
+      "sma20_pct": 8.94,
+      "sma50_pct": 29.02,
+      "sma200_pct": 63.99
+    },
+    {
+      "etf": "SNSR",
+      "theme": "Internet of Things",
+      "signal": "breakout",
+      "level": null,
+      "price": 50.42,
+      "perf_1d": 2.91,
+      "sma20_pct": 8.7,
+      "sma50_pct": 19.35,
+      "sma200_pct": 28.45
+    },
+    {
+      "etf": "CIBR",
+      "theme": "Cybersecurity",
+      "signal": "breakout",
+      "level": null,
+      "price": 84.23,
+      "perf_1d": 2.53,
+      "sma20_pct": 12.99,
+      "sma50_pct": 22.94,
+      "sma200_pct": 17.9
+    },
+    {
+      "etf": "AAPL",
+      "theme": "Smart Home",
+      "signal": "breakout",
+      "level": null,
+      "price": 309.47,
+      "perf_1d": 1.47,
+      "sma20_pct": 6.94,
+      "sma50_pct": 14.38,
+      "sma200_pct": 18.32
+    },
+    {
+      "etf": "ICLN",
+      "theme": "Energy Renewable",
+      "signal": "breakout",
+      "level": null,
+      "price": 22.42,
+      "perf_1d": 1.1,
+      "sma20_pct": 5.61,
+      "sma50_pct": 13.65,
+      "sma200_pct": 28.91
+    },
+    {
+      "etf": "AIQ",
+      "theme": "Artificial Intelligence",
+      "signal": "breakout",
+      "level": null,
+      "price": 63.24,
+      "perf_1d": 1.01,
+      "sma20_pct": 5.93,
+      "sma50_pct": 17.72,
+      "sma200_pct": 24.67
+    },
+    {
+      "etf": "ESGU",
+      "theme": "Environmental Sustainability",
+      "signal": "breakout",
+      "level": null,
+      "price": 163.11,
+      "perf_1d": 0.74,
+      "sma20_pct": 2.36,
+      "sma50_pct": 7.62,
+      "sma200_pct": 10.14
+    },
+    {
+      "etf": "BOTZ",
+      "theme": "Robotics",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 40.44,
+      "perf_1d": 1.99,
+      "sma20_pct": 2.14,
+      "sma50_pct": 9.71,
+      "sma200_pct": 11.23
+    },
+    {
+      "etf": "LIT",
+      "theme": "Electric Vehicles",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 85.35,
+      "perf_1d": 1.15,
+      "sma20_pct": -1.73,
+      "sma50_pct": 6.5,
+      "sma200_pct": 28.68
+    },
+    {
+      "etf": "ITA",
+      "theme": "Defense & Aerospace",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 225.55,
+      "perf_1d": 1.08,
+      "sma20_pct": 2.32,
+      "sma50_pct": 0.85,
+      "sma200_pct": 3.67
+    },
+    {
+      "etf": "XLI",
+      "theme": "Industrials",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 172.36,
+      "perf_1d": 1.07,
+      "sma20_pct": -0.09,
+      "sma50_pct": 1.81,
+      "sma200_pct": 7.05
+    },
+    {
+      "etf": "IHF",
+      "theme": "Aging Population & Longevity",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 50.59,
+      "perf_1d": 0.78,
+      "sma20_pct": 1.99,
+      "sma50_pct": 9.62,
+      "sma200_pct": 6.83
+    },
+    {
+      "etf": "METV",
+      "theme": "Virtual & Augmented Reality",
+      "signal": "support",
+      "level": "SMA200",
+      "price": 19.03,
+      "perf_1d": 0.74,
+      "sma20_pct": 2.73,
+      "sma50_pct": 9.67,
+      "sma200_pct": 2.05
+    },
+    {
+      "etf": "XLY",
+      "theme": "Consumer Goods",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 119.4,
+      "perf_1d": 0.59,
+      "sma20_pct": 1.04,
+      "sma50_pct": 4.02,
+      "sma200_pct": 1.71
+    },
+    {
+      "etf": "XLB",
+      "theme": "Materials & Mining",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 50.21,
+      "perf_1d": 0.37,
+      "sma20_pct": -1.77,
+      "sma50_pct": -0.83,
+      "sma200_pct": 5.63
+    },
+    {
+      "etf": "XLE",
+      "theme": "Energy Traditional",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 59.25,
+      "perf_1d": 0.2,
+      "sma20_pct": 1.33,
+      "sma50_pct": 1.42,
+      "sma200_pct": 19.26
+    },
+    {
+      "etf": "XLP",
+      "theme": "Consumer Staples",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 84.75,
+      "perf_1d": 0.1,
+      "sma20_pct": 0.53,
+      "sma50_pct": 2.01,
+      "sma200_pct": 4.12
+    },
+    {
+      "etf": "XBI",
+      "theme": "Healthcare & Biotech",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 132.77,
+      "perf_1d": -0.01,
+      "sma20_pct": 0.17,
+      "sma50_pct": 2.06,
+      "sma200_pct": 13.55
+    },
+    {
+      "etf": "VNQ",
+      "theme": "Real Estate & REITs",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 96.62,
+      "perf_1d": -0.05,
+      "sma20_pct": 0.78,
+      "sma50_pct": 3.37,
+      "sma200_pct": 5.52
+    },
+    {
+      "etf": "FCOM",
+      "theme": "Telecom",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 73.93,
+      "perf_1d": -0.09,
+      "sma20_pct": -0.24,
+      "sma50_pct": 2.49,
+      "sma200_pct": 3.54
+    },
+    {
+      "etf": "DBA",
+      "theme": "Commodities Agriculture",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 27.56,
+      "perf_1d": -0.18,
+      "sma20_pct": -1.85,
+      "sma50_pct": 0.43,
+      "sma200_pct": 5.12
+    },
+    {
+      "etf": "GDX",
+      "theme": "Commodities Metals",
+      "signal": "support",
+      "level": "SMA200",
+      "price": 85.81,
+      "perf_1d": -0.21,
+      "sma20_pct": -4.35,
+      "sma50_pct": -6.11,
+      "sma200_pct": 1.05
+    },
+    {
+      "etf": "MOO",
+      "theme": "Agriculture & FoodTech",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 80.26,
+      "perf_1d": -0.25,
+      "sma20_pct": -2.33,
+      "sma50_pct": -3.37,
+      "sma200_pct": 3.48
+    },
+    {
+      "etf": "XLC",
+      "theme": "Telecommunications",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 115.71,
+      "perf_1d": -0.34,
+      "sma20_pct": -0.49,
+      "sma50_pct": 0.76,
+      "sma200_pct": 0.43
+    },
+    {
+      "etf": "USO",
+      "theme": "Commodities Energy",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 141.38,
+      "perf_1d": -0.81,
+      "sma20_pct": -0.98,
+      "sma50_pct": 7.35,
+      "sma200_pct": 59.09
+    },
+    {
+      "etf": "NVDA",
+      "theme": "Nanotechnology",
+      "signal": "support",
+      "level": "SMA20",
+      "price": 217.63,
+      "perf_1d": -0.85,
+      "sma20_pct": 1.29,
+      "sma50_pct": 10.56,
+      "sma200_pct": 16.36
+    }
+  ]
 }

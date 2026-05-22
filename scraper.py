@@ -2109,6 +2109,72 @@ def fetch_etf_holdings(etf_ticker: str) -> list:
         return []
 
 
+def _classify_etf_signal(detail: dict, closes: list) -> tuple:
+    """Classify a theme ETF as a breakout or support setup.
+
+    breakout — fresh ~5-week closing high while holding above SMA50 & SMA200
+    support  — price hugging a rising key MA with the long-term trend intact
+    Returns (signal, level): signal is 'breakout' | 'support' | None.
+    """
+    s20 = detail.get("sma20_pct")
+    s50 = detail.get("sma50_pct")
+    s200 = detail.get("sma200_pct")
+
+    if closes and len(closes) >= 35 and s50 is not None and s200 is not None:
+        last = closes[-1]
+        recent_high = max(closes[-6:])
+        base_high = max(closes[-35:-6])
+        if s50 > 0 and s200 > 0 and last >= recent_high * 0.985 and recent_high > base_high:
+            return ("breakout", None)
+
+    if s200 is not None and s200 > 0:
+        for pct, name, tol in ((s20, "SMA20", 2.5), (s50, "SMA50", 2.5), (s200, "SMA200", 3.5)):
+            if pct is not None and -tol <= pct <= tol:
+                return ("support", name)
+
+    return (None, None)
+
+
+def build_etf_signals(unique_etfs: list) -> list:
+    """Fetch technicals for each theme ETF and flag breakout / support setups.
+
+    Returns a list (breakouts first, then supports) telling the dashboard
+    which themes are worth watching next.
+    """
+    etf_theme = {}
+    for theme, etf in _THEME_ETF_MAP.items():
+        etf_theme.setdefault(etf, theme)
+
+    signals = []
+    for etf in unique_etfs:
+        detail = fetch_stock_detail(etf)
+        _sleep()
+        if not detail:
+            logger.warning(f"  ETF signal: no detail for {etf}")
+            continue
+        closes = fetch_sparkline(etf).get("sparkline", [])
+        _sleep()
+        signal, level = _classify_etf_signal(detail, closes)
+        if signal is None:
+            continue
+        signals.append({
+            "etf": etf,
+            "theme": etf_theme.get(etf, etf),
+            "signal": signal,
+            "level": level,
+            "price": detail.get("price"),
+            "perf_1d": detail.get("perf_1d"),
+            "sma20_pct": detail.get("sma20_pct"),
+            "sma50_pct": detail.get("sma50_pct"),
+            "sma200_pct": detail.get("sma200_pct"),
+        })
+        logger.info(f"  ETF signal: {etf} → {signal}{(' @ ' + level) if level else ''}")
+
+    signals.sort(key=lambda x: ({"breakout": 0, "support": 1}.get(x["signal"], 9),
+                                -(x.get("perf_1d") or 0)))
+    return signals
+
+
 def main():
     output = build_data()
     sp500_prices = output.pop("_sp500_prices", {})
@@ -2120,6 +2186,9 @@ def main():
     for etf in unique_etfs:
         etf_holdings[etf] = fetch_etf_holdings(etf)
     output["etf_holdings"] = etf_holdings
+
+    logger.info("Building ETF breakout / support signals...")
+    output["etf_signals"] = build_etf_signals(unique_etfs)
 
     out_path = Path("public/thematic_data.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
