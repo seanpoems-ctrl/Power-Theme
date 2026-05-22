@@ -175,44 +175,57 @@ def grade_with_gemini(headlines: list[dict]) -> list[dict]:
         for i, h in enumerate(headlines[:30])
     )
 
-    prompt = f"""You are a senior macro trader. Your job is to flag only the most extreme, \
-market-moving headlines. Be brutally strict.
+    prompt = f"""You are a senior equity trader. Your ONLY job is to flag headlines that will \
+move stock prices TODAY. Be brutally strict — if it won't move the S&P 500 by ≥1% or a \
+major sector by ≥3%, it does not qualify.
 
-Grade each headline 1–10 for IMMEDIATE broad market impact:
+Grade each headline 1–10 based on likelihood of immediate stock market price movement:
 
-GRADE 9–10 (alert-worthy — include these):
+GRADE 9–10 — BEARISH market shocks (include these):
   - Fed emergency action / surprise rate hike or cut outside scheduled FOMC
-  - Declared war, military strikes between major nations (US, China, Russia, Iran, Israel, NATO)
-  - Nuclear threat escalation (confirmed, not speculative)
-  - President / head of state announces attack, invasion, or military operation
+  - Declared war or military strikes between major nations (US, China, Russia, Iran, Israel, NATO)
   - Major country sovereign default or IMF bailout (G20 level)
   - Surprise tariff announcement affecting entire sectors (e.g. 25% on all semiconductors)
   - Stock market circuit breaker triggered
   - Major central bank emergency meeting / policy reversal
   - Catastrophic natural disaster disrupting global supply chain
 
-GRADE 8 (include only if truly sector-wide, not company-specific):
+GRADE 9–10 — BULLISH market catalysts (include these):
+  - Major ceasefire agreement or peace deal signed between warring nations (risk-on rally)
+  - Surprise tariff removal or major trade deal signed (US-China, US-EU, etc.)
+  - Fed surprise rate cut or QE announcement outside scheduled FOMC
+  - Large government funding, investment, or policy mandate for high-growth sectors:
+      Quantum Computing, Artificial Intelligence, Semiconductors/Chips, Nuclear/SMR,
+      Space technology, Defense tech, Biotechnology/Pharma
+  - Major breakthrough announcement in any of the above sectors with government backing
+
+GRADE 8 (include only if sector-wide impact, not single-company):
   - FOMC decision that surprises consensus by ≥25bps
   - G7/G20 coordinated sanctions on a major economy
-  - Confirmed ceasefire collapse in an active war zone
-  - Major country election result that reverses geopolitical alignment
+  - Ceasefire collapse / peace deal breakdown in an active war zone
+  - Confirmed government ban or restriction on an entire technology sector
 
 AUTOMATICALLY GRADE 7 OR BELOW — DO NOT INCLUDE:
   - Any individual company earnings, upgrades, downgrades, or price targets
   - "Concerns about", "fears of", "expected to", speculative/opinion headlines
+  - Nuclear threats or military posturing unless confirmed action taken
   - Oil price moves unless caused by a declared supply disruption
   - Economic data releases (CPI, PPI, jobs) unless they cause an emergency Fed response
   - Any headline about a single stock, ETF, or sector fund
+  - Geopolitical events in regions with no material impact on global trade or supply chains
+  - Election results unless they immediately reverse major economic policy
 
 Headlines:
 {headlines_text}
 
 Return ONLY a valid JSON array. Include ONLY headlines graded 8+.
-For each use EXACTLY the source label shown in brackets:
+For each include a "direction" field: "bullish" or "bearish".
+Use EXACTLY the source label shown in brackets:
 {{
   "headline": "exact headline text",
   "source": "source label from brackets",
-  "grade": 9
+  "grade": 9,
+  "direction": "bullish"
 }}
 
 If NO headlines score 8+, return: []
@@ -327,13 +340,21 @@ def send_telegram(alert: dict) -> bool:
         print("  Telegram: not configured — skipping")
         return False
 
-    grade    = alert.get("grade", 0)
-    headline = alert.get("headline", "")
-    source   = alert.get("source", "")
+    grade     = alert.get("grade", 0)
+    headline  = alert.get("headline", "")
+    source    = alert.get("source", "")
+    direction = alert.get("direction", "")
+
+    if direction == "bullish":
+        icon = "🟢 *BULLISH*"
+    elif direction == "bearish":
+        icon = "🔴 *BEARISH*"
+    else:
+        icon = ""
 
     lines = [
         "🚨 *BREAKING NEWS ALERT* 🚨",
-        f"*Grade: {grade}/10*",
+        f"*Grade: {grade}/10*  {icon}",
         "",
         f"*{_esc(headline.upper())}*",
         f"_{_esc(source)}_",
