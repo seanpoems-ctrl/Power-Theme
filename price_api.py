@@ -31,14 +31,13 @@ class Handler(BaseHTTPRequestHandler):
             ticker = path.split("/etf_holdings/")[1].upper()
             try:
                 t = yf.Ticker(ticker)
-                holdings_df = t.get_top_holdings()
+                holdings_df = t.get_funds_data().top_holdings
                 if holdings_df is not None and not holdings_df.empty:
                     rows = []
-                    for _, row in holdings_df.iterrows():
-                        sym = str(row.get("Symbol", "")).strip()
-                        name = str(row.get("holdingName", "")).strip()
-                        pct = float(row.get("holdingPercent", 0)) * 100
-                        rows.append({"ticker": sym, "name": name, "weight": round(pct, 2)})
+                    for sym, row in holdings_df.iterrows():
+                        name = str(row.get("Name", "")).strip()
+                        pct = float(row.get("Holding Percent", 0)) * 100
+                        rows.append({"ticker": str(sym).strip(), "name": name, "weight": round(pct, 2)})
                     rows.sort(key=lambda x: x["weight"], reverse=True)
                     body = json.dumps({"etf": ticker, "holdings": rows})
                 else:
