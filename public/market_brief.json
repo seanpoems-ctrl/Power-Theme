@@ -1,30 +1,30 @@
 {
-  "generated_at": "May 22, 2026 (11:50 EDT)",
-  "session": "Market Hours",
+  "generated_at": "May 22, 2026 (17:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7492.14,
-      "change": 46.42,
-      "change_pct": 0.62
+      "price": 7473.47,
+      "change": 27.75,
+      "change_pct": 0.37
     },
     {
       "label": "Nasdaq 100",
-      "price": 29587.74,
-      "change": 230.47,
-      "change_pct": 0.79
+      "price": 29481.64,
+      "change": 124.37,
+      "change_pct": 0.42
     },
     {
       "label": "VIX",
-      "price": 16.61,
-      "change": -0.15,
+      "price": 16.7,
+      "change": -0.06,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.58,
-      "change": -0.01,
+      "price": 4.56,
+      "change": -0.03,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -50,8 +50,8 @@
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 59.5,
-    "mmth": 62.9,
+    "s5fi": 61.4,
+    "mmth": 63.4,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Risk-On / Broad Market Strength",
+  "mood": "Broad Strength, Tech Sector Leadership",
   "analysis": {
-    "action_line": "VIX 16.61 Normal + S5FI 59.5% breadth + strong Nikkei +3.14% tape → trade RS leaders selectively near support.",
-    "analysis_para1": "Global markets are leading the charge this morning, with the Nikkei 225 surging +3.14% and the DAX adding +1.15%, setting a decidedly risk-on tone. While the BAML HY Spread's regime remains unknown, US market breadth indicators are robust. A healthy 59.5% of S&P 500 stocks are above their 50-day moving average (S5FI), complemented by 62.9% above their 200-day (MMTH). This positive global momentum combined with strong internal market health indicates broad-based participation.",
-    "analysis_para2": "The current market strength on both the S&P 500 at 7492.14 and Nasdaq 100 at 29587.74 suggests a continuation of the upward trend. Investors should look to buy strong relative strength leaders on any minor pullbacks, with key support levels to watch around the prior day's close or the 10-day moving average for confirmation. Maintain exposure to leading sectors like Semiconductors, which dominate our scanner results. A break below the 50-day moving average on major indices could signal a tactical shift, but for now, the path of least resistance remains higher.",
-    "technical_signal": "No reversal pattern confirmed yet. The market currently exhibits strong momentum with major indices pushing higher.",
+    "action_line": "VIX 16.70 Normal + S5FI 61.4% breadth + strong Nikkei → focus on high RS leaders near support.",
+    "analysis_para1": "Global markets exhibited significant strength today, with the Nikkei 225 surging +3.14% and the DAX gaining +1.15%, signaling a strong risk-on appetite abroad. Domestically, US market breadth is constructive, as reflected by S5FI at 61.4% and MMTH at 63.4%, indicating solid participation across stocks. While the BAML HY Spread remains unknown, the broad market action aligns with positive global momentum and improving internal health.",
+    "analysis_para2": "The mechanical plan involves monitoring for continued strength in leading sectors, particularly Semiconductors and Hardware, identified by their high Relative Strength. Traders should look to establish or add to positions in RS leaders on minor pullbacks, with clear stop-loss levels defined below their 10-day or 20-day moving averages. A close below the S&P 500's prior day low or a sustained drop in S5FI below 50% would warrant caution. Maintain exposure to high-growth, high-momentum names while the VIX remains below 20 and breadth indicators stay elevated.",
+    "technical_signal": "No reversal pattern confirmed yet. The market continues to show constructive price action and healthy participation, especially in leading sectors.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MaxLinear Inc. (MXL) earns an A+ for its dominant RS 99 and explosive +194.1% 1-month return, making it a top growth candidate in the leading Semiconductors theme."
+        "reason": "This semiconductor leader displays exceptional momentum with RS 99 and a staggering +194.1% 1-month return, making it a prime candidate for continued outperformance in the current tech-led rally."
       },
       {
-        "ticker": "AXTI",
-        "company": "AXT Inc",
+        "ticker": "WOLF",
+        "company": "Wolfspeed Inc",
         "grade": "A",
-        "reason": "AXT Inc. (AXTI) is graded A due to its elite RS 99 and robust +307.8% 3-month performance, highlighting its sustained strength within the high-flying Semiconductors sector."
+        "reason": "A high-beta semiconductor play with RS 98 and a robust +150.4% 1-month return, indicating strong institutional sponsorship and potential for further gains."
       },
       {
         "ticker": "LITE",
         "company": "Lumentum Holdings Inc",
         "grade": "C",
-        "reason": "Lumentum Holdings Inc. (LITE) receives a C as its relatively weaker +10.4% 1-month return, despite high RS 98, indicates potential underperformance compared to its peers in a strong market."
+        "reason": "Despite its high RS 98, its comparatively modest +10.4% 1-month return lags sector peers, suggesting weaker relative momentum for conviction long entries."
       }
     ]
   }
