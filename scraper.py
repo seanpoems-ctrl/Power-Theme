@@ -2026,9 +2026,101 @@ def fetch_all_tickers() -> list[dict]:
         return []
 
 
+# ETF → theme mapping (mirrors THEME_ETF_MAP in App.js)
+_THEME_ETF_MAP = {
+    "Artificial Intelligence":       "AIQ",
+    "Semiconductors":                "SOXX",
+    "Cloud Computing":               "WCLD",
+    "Cybersecurity":                 "CIBR",
+    "Electric Vehicles":             "LIT",
+    "Autonomous Systems":            "DRIV",
+    "Defense & Aerospace":           "ITA",
+    "Healthcare & Biotech":          "XBI",
+    "FinTech":                       "FINX",
+    "Crypto & Blockchain":           "MSTR",
+    "Space Tech":                    "UFO",
+    "Quantum Computing":             "QTUM",
+    "Robotics":                      "BOTZ",
+    "Energy Renewable":              "ICLN",
+    "Energy Traditional":            "XLE",
+    "Software":                      "IGV",
+    "E-commerce":                    "IBUY",
+    "Social Media":                  "SOCL",
+    "Real Estate & REITs":           "VNQ",
+    "Internet of Things":            "SNSR",
+    "Industrial Automation":         "IRBO",
+    "Big Data":                      "META",
+    "Consumer Goods":                "XLY",
+    "Commodities Metals":            "GDX",
+    "Commodities Energy":            "USO",
+    "Commodities Agriculture":       "DBA",
+    "Transportation & Logistics":    "XTN",
+    "Telecommunications":            "XLC",
+    "Virtual & Augmented Reality":   "METV",
+    "Agriculture & FoodTech":        "MOO",
+    "Environmental Sustainability":  "ESGU",
+    "Hardware":                      "AMAT",
+    "Smart Home":                    "AAPL",
+    "Wearables":                     "AAPL",
+    "Digital Entertainment":         "HERO",
+    "Aging Population & Longevity":  "IHF",
+    "Healthy Food & Nutrition":      "MOO",
+    "Education Technology":          "INST",
+    "Biometrics":                    "MSFT",
+    "Nanotechnology":                "NVDA",
+    "Telecom":                       "FCOM",
+    "Clean Energy & Utilities":      "ICLN",
+    "Industrials":                   "XLI",
+    "Consumer Staples":              "XLP",
+    "Consumer Discretionary":        "XLY",
+    "Financials":                    "XLF",
+    "Real Estate":                   "VNQ",
+    "Software & Cloud":              "IGV",
+    "Internet & E-Commerce":         "IBUY",
+    "Media & Entertainment":         "SOCL",
+    "Materials & Mining":            "XLB",
+    "Agriculture & Food":            "MOO",
+    "E-Commerce":                    "IBUY",
+    "Fintech":                       "FINX",
+}
+
+
+def fetch_etf_holdings(etf_ticker: str) -> list:
+    """Fetch top holdings for an ETF via yfinance. Returns [] on any failure."""
+    try:
+        import yfinance as yf
+        t = yf.Ticker(etf_ticker)
+        fd = t.get_funds_data()
+        if fd is None:
+            return []
+        th = fd.top_holdings
+        if th is None or th.empty:
+            return []
+        rows = []
+        for sym, row in th.iterrows():
+            name = str(row.get("Name", "")).strip()
+            pct = float(row.get("Holding Percent", 0)) * 100
+            rows.append({"ticker": str(sym).strip(), "name": name, "weight": round(pct, 2)})
+        rows.sort(key=lambda x: x["weight"], reverse=True)
+        logger.info(f"  ETF holdings: {etf_ticker} → {len(rows)} holdings")
+        return rows
+    except Exception as e:
+        logger.warning(f"  ETF holdings failed for {etf_ticker}: {e}")
+        return []
+
+
 def main():
     output = build_data()
     sp500_prices = output.pop("_sp500_prices", {})
+
+    # Pre-fetch ETF holdings for all unique ETFs in the theme map
+    unique_etfs = sorted(set(_THEME_ETF_MAP.values()))
+    logger.info(f"Fetching ETF holdings for {len(unique_etfs)} ETFs...")
+    etf_holdings = {}
+    for etf in unique_etfs:
+        etf_holdings[etf] = fetch_etf_holdings(etf)
+    output["etf_holdings"] = etf_holdings
+
     out_path = Path("public/thematic_data.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(output, indent=2, ensure_ascii=False, allow_nan=False), encoding="utf-8")

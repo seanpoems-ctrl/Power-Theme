@@ -1087,18 +1087,8 @@ const RS_MODES = [
   { key: '52w', label: '52W', perfKey: 'rs_52w',   spyKey: null       },
 ];
 
-const EtfHoldingsPopup = ({ etfTicker, onClose }) => {
-  const [holdings, setHoldings] = useState(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    setLoading(true);
-    setHoldings(null);
-    fetch(`http://localhost:5001/etf_holdings/${etfTicker}`)
-      .then(r => r.json())
-      .then(d => { setHoldings(d.holdings || []); setLoading(false); })
-      .catch(() => { setHoldings([]); setLoading(false); });
-  }, [etfTicker]);
+const EtfHoldingsPopup = ({ etfTicker, holdingsData = {}, onClose }) => {
+  const holdings = holdingsData[etfTicker] ?? null;
 
   useEffect(() => {
     const handler = e => { if (e.key === "Escape") onClose(); };
@@ -1119,9 +1109,7 @@ const EtfHoldingsPopup = ({ etfTicker, onClose }) => {
           </button>
         </div>
         <div className="overflow-y-auto flex-1 px-2 py-1">
-          {loading ? (
-            <div className="text-[12px] text-zinc-500 text-center py-10">Loading...</div>
-          ) : !holdings || holdings.length === 0 ? (
+          {!holdings || holdings.length === 0 ? (
             <div className="text-[12px] text-zinc-500 text-center py-10">No holdings data</div>
           ) : (
             <table className="w-full border-collapse text-left text-xs">
@@ -1405,7 +1393,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => { setThemeHover(null); setThemeStats(null); }}/>}
     {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => { setThemeStats(null); setThemeHover(null); }}/>}
     {subThemeModal && <SubThemeStocksModal subthemeName={subThemeModal.subthemeName} stocks={subThemeModal.stocks} onClose={() => setSubThemeModal(null)}/>}
-    {etfPopup && <EtfHoldingsPopup etfTicker={etfPopup.etf} onClose={() => setEtfPopup(null)}/>}
+    {etfPopup && <EtfHoldingsPopup etfTicker={etfPopup.etf} holdingsData={data?.etf_holdings || {}} onClose={() => setEtfPopup(null)}/>}
     </>
   );
 };
