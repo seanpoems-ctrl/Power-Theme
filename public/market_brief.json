@@ -1,39 +1,39 @@
 {
-  "generated_at": "May 20, 2026 (17:30 EDT)",
+  "generated_at": "May 21, 2026 (18:47 EDT)",
   "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7432.97,
-      "change": 79.36,
-      "change_pct": 1.08
+      "price": 7445.72,
+      "change": 12.75,
+      "change_pct": 0.17
     },
     {
       "label": "Nasdaq 100",
-      "price": 29297.7,
-      "change": 478.86,
-      "change_pct": 1.66
+      "price": 29357.27,
+      "change": 59.57,
+      "change_pct": 0.2
     },
     {
       "label": "VIX",
-      "price": 17.44,
-      "change": -0.62,
+      "price": 16.76,
+      "change": -0.68,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.57,
-      "change": -0.09,
+      "price": 4.59,
+      "change": 0.01,
       "change_pct": null,
-      "trend_label": "Falling"
+      "trend_label": "Stable"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 60550.59,
-      "change_pct": -0.44
+      "price": 59804.41,
+      "change_pct": -1.23
     },
     "dax": {
       "label": "DAX",
@@ -42,16 +42,16 @@
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10432.34,
-      "change_pct": 0.98
+      "price": 10443.47,
+      "change_pct": 0.11
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 56.3,
-    "mmth": 60.7,
+    "s5fi": 58.9,
+    "mmth": 61.7,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,31 +60,31 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech-Led Strength, Risk-On Appetite",
+  "mood": "Sectoral Strength, Moderate Gains",
   "analysis": {
-    "analysis_para1": "Global markets presented a mixed picture today, with a slight dip in the Nikkei 225 at -0.44% contrasted by strong gains in European equities, notably the DAX rising +1.38% and the FTSE 100 up +0.98%. This positive sentiment flowed into US markets, where the S&P 500 gained +1.08% and the Nasdaq 100 surged +1.66%. The falling 10-year yield at 4.57% suggests a more accommodative environment, supporting equity valuations. Market breadth remains healthy, with 56.3% of stocks above their 50-day moving average (S5FI) and 60.7% above their 200-day moving average (MMTH), indicating broad participation beyond just mega-caps.",
-    "analysis_para2": "With the S&P 500 closing at 7432.97 and the Nasdaq 100 at 29297.70, the immediate mechanical plan is to monitor for continued upside momentum, especially if these indices can hold above their intraday lows. Key support levels to watch are yesterday's closing prices for any significant breakdown, which would indicate a shift in sentiment. A VIX maintaining its normal level around 17.44 would further confirm the current risk-on environment, while a sharp spike would signal caution. Traders should prioritize strong relative strength names from the semiconductor and hardware sectors as the prevailing trend suggests further outperformance in these areas.",
-    "technical_signal": "No reversal pattern confirmed yet. Major indices like the S&P 500 and Nasdaq 100 closed strongly higher, and market breadth remains positive.",
+    "action_line": "VIX 16.76 Normal + S5FI 58.9% breadth + mixed global tape (Nikkei down, DAX up) → trade RS leaders selectively near support.",
+    "analysis_para1": "The global equity landscape presented a mixed picture today, with the Nikkei 225 down -1.23% while the DAX surged +1.38% and the FTSE 100 posted a modest +0.11% gain. Despite this international divergence, US markets edged higher on healthy underlying breadth. The percentage of stocks above their 50-day moving average (S5FI) stood at 58.9%, with 61.7% of stocks above their 200-day moving average (MMTH), indicating broad participation supporting modest S&P 500 (+0.17%) and Nasdaq 100 (+0.20%) gains. The credit market regime remains unknown as BAML HY Spread data was unavailable, leaving a gap in that dimension of market health.",
+    "analysis_para2": "The mechanical plan emphasizes leveraging the current constructive, yet mixed, market environment. With the VIX at a normal 16.76 and breadth indicators S5FI/MMTH above 50%, the focus remains on high relative strength (RS) leaders. Traders should monitor the S&P 500 for holding key support levels like the 21-day exponential moving average. Entries are best sought on pullbacks to defined support, confirming institutional demand. Should the VIX spike above 20 or broad market breadth indicators rapidly deteriorate, a more defensive posture and reduced position sizing would be warranted.",
+    "technical_signal": "No reversal pattern confirmed yet. US indices maintain upward momentum on moderate volume and normal volatility.",
     "ticker_intel": [
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
         "grade": "A+",
-        "reason": "MaxLinear (MXL) displays exceptional leadership with RS 98 and a staggering +199.0% 1-month return, aligning perfectly with the robust semiconductor strength driving current market upside."
+        "reason": "Exhibiting extraordinary relative strength (RS=99) and explosive monthly returns (+194.1%), making it a prime momentum leader in the robust Semiconductors theme."
       },
       {
         "ticker": "WOLF",
         "company": "Wolfspeed Inc",
         "grade": "A",
-        "reason": "Wolfspeed (WOLF) is a strong semiconductor play, boasting an RS of 98 and a significant +123.4% 1-month return, making it a prime candidate for continued outperformance in the tech-driven rally."
+        "reason": "A strong relative strength performer (RS=98) with impressive 1-month (+150.4%) and 3-month (+272.4%) gains, cementing its leadership in the booming Semiconductors sector."
       },
       {
-        "ticker": "VIAV",
-        "company": "Viavi Solutions Inc",
+        "ticker": "LITE",
+        "company": "Lumentum Holdings Inc",
         "grade": "C",
-        "reason": "Despite an RS of 97, Viavi Solutions (VIAV)'s comparatively modest +10.4% 1-month return places it behind the semiconductor and hardware leaders, suggesting it may underperform in the current highly focused tech rally."
+        "reason": "Despite an RS of 98, its 1-month (+10.4%) and 3-month (+44.4%) returns significantly lag peers within its high RS cohort, indicating relative underperformance within the leading group."
       }
-    ],
-    "action_line": "VIX 17.44, breadth 60.7%, DAX +1.38% indicates European strength. → trade RS leaders selectively."
+    ]
   }
 }
