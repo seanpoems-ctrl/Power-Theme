@@ -2593,13 +2593,13 @@ const VIX_ZONES_NOTE = [
 ];
 
 const MARKET_PULSE_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
-const MARKET_PULSE_CACHE_KEY  = "gemini_market_pulse_v2";
+const MARKET_PULSE_CACHE_KEY  = "gemini_market_pulse_v3";
 
 async function fetchGeminiMarketPulse(payload) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_PULSE_GEMINI_KEY}`;
   const body = {
     contents: [{ parts: [{ text: `You are a concise stock market analyst. Given these live market indicators, write exactly 2 sentences in English: (1) summarize today's market regime by citing VIX level, S5FI breadth %, ADV/DEC ratio, and SMA50/SMA200 internals; (2) give a specific tactical verdict for breakout swing traders — whether to be aggressive or selective, what setup quality is required, and key condition to watch. Cite specific numbers. Be direct and actionable.\n\nData: ${JSON.stringify(payload)}` }] }],
-    generationConfig: { temperature: 0.3, maxOutputTokens: 180 },
+    generationConfig: { temperature: 0.3, maxOutputTokens: 350 },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   const json = await res.json();
