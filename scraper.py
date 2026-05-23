@@ -2111,56 +2111,43 @@ def fetch_etf_holdings(etf_ticker: str) -> list:
 
 def _classify_etf_signal(detail: dict, closes: list) -> tuple:
     """
-    Classify a top-10-theme ETF into one of two setups:
+    BREAKOUT: ETF just made a new 11-week closing high this past week,
+              and is still within 8% of the level it broke through.
+              (Filters out extended ETFs that have been running for months.)
 
-    BREAKOUT — ETF just cleared a 10-week resistance within the past week
-               and hasn't run more than 8% above that level yet.
-      Conditions (all required):
-        1. Price > SMA50 > SMA200  (full uptrend alignment)
-        2. Past-week high > prior-10-week high  (new multi-week high)
-        3. Current price within 3% of the past-week high  (still at the top)
-        4. Current price within 8% above the prior 10-week resistance
+    PULLBACK: ETF is in an uptrend and currently sitting within 5% above
+              SMA20, SMA50, or SMA200 — a re-entry / add point.
 
-    SUPPORT — ETF is in an uptrend and currently testing a key moving average
-              as support from above (good re-entry / add point).
-      SMA20 support:  price 0–3% above SMA20, AND above SMA50 & SMA200
-      SMA50 support:  price 0–4% above SMA50, AND above SMA200
-      SMA200 support: price 0–5% above SMA200
-
-    Returns (signal, level):  signal ∈ {'breakout', 'support', None}
+    Returns (signal, level): signal in {'breakout', 'support', None}.
     """
-    s20  = detail.get("sma20_pct")   # (price/SMA20  − 1) × 100, from Finviz
+    s20  = detail.get("sma20_pct")   # (price / SMA20 − 1) × 100, from Finviz
     s50  = detail.get("sma50_pct")
     s200 = detail.get("sma200_pct")
 
     # ── BREAKOUT ──────────────────────────────────────────────────────────────
-    if (closes and len(closes) >= 50
+    if (closes and len(closes) >= 55
             and s50 is not None and s200 is not None
-            and s50 > 0 and s200 > 0):          # must be above SMA50 and SMA200
+            and s50 > 0 and s200 > 0):
 
         last      = closes[-1]
-        week_high = max(closes[-5:])             # highest close in the past week
-        base_high = max(closes[-50:-5])          # prior 10-week resistance
+        week_high = max(closes[-5:])     # highest close this past week
+        base_high = max(closes[-55:-5])  # prior 11-week resistance
         dist_pct  = (last - base_high) / base_high * 100 if base_high > 0 else 999
 
-        if (week_high > base_high                # cleared the resistance
-                and last >= week_high * 0.97     # still within 3% of new high
-                and dist_pct <= 8):              # not more than 8% above breakout point
+        if (week_high > base_high        # this week broke the prior 11-week high
+                and dist_pct <= 8):      # still within 8% of that breakout level
             return ("breakout", None)
 
-    # ── SUPPORT ───────────────────────────────────────────────────────────────
-    # Check from tightest (SMA20) to widest (SMA200); return the first match.
-    if s200 is not None and s200 > 0:            # long-term uptrend intact
+    # ── PULLBACK ──────────────────────────────────────────────────────────────
+    if s200 is not None and s200 > 0:    # long-term uptrend intact
 
-        if (s20 is not None and 0 <= s20 <= 3    # touching SMA20 from above
-                and s50 is not None and s50 > 0  # still above SMA50
-                and s200 > 0):
+        if s20 is not None and 0 <= s20 <= 5 and s50 is not None and s50 > 0:
             return ("support", "SMA20")
 
-        if s50 is not None and 0 <= s50 <= 4:    # touching SMA50 from above
+        if s50 is not None and 0 <= s50 <= 5:
             return ("support", "SMA50")
 
-        if 0 <= s200 <= 5:                       # touching SMA200 from above
+        if 0 <= s200 <= 5:
             return ("support", "SMA200")
 
     return (None, None)
