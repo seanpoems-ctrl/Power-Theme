@@ -2593,17 +2593,29 @@ const VIX_ZONES_NOTE = [
 ];
 
 const MARKET_PULSE_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
-const MARKET_PULSE_CACHE_KEY  = "gemini_market_pulse_v3";
+const MARKET_PULSE_CACHE_KEY  = "gemini_market_pulse_v4";
 
 async function fetchGeminiMarketPulse(payload) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_PULSE_GEMINI_KEY}`;
+  const { vix, vix_zone, s5fi_breadth_pct, adv_dec_pct, sma50_above_pct, sma200_above_pct, new_52w_highs, new_52w_lows } = payload;
+  const prompt =
+    `Market data: VIX=${vix} (${vix_zone}), S5FI=${s5fi_breadth_pct ?? "N/A"}%, ADV/DEC=${adv_dec_pct ?? "N/A"}%, ` +
+    `SMA50 above=${sma50_above_pct ?? "N/A"}%, SMA200 above=${sma200_above_pct ?? "N/A"}%, ` +
+    `52W Hi=${new_52w_highs ?? "N/A"}, 52W Lo=${new_52w_lows ?? "N/A"}.\n\n` +
+    `Write exactly 2 SHORT sentences for a swing trader:\n` +
+    `1. Market regime (cite 2-3 of the numbers above).\n` +
+    `2. Breakout trade stance: aggressive / selective / avoid, and why.\n` +
+    `No preamble. Total response under 60 words.`;
   const body = {
-    contents: [{ parts: [{ text: `You are a concise stock market analyst. Given these live market indicators, write exactly 2 sentences in English: (1) summarize today's market regime by citing VIX level, S5FI breadth %, ADV/DEC ratio, and SMA50/SMA200 internals; (2) give a specific tactical verdict for breakout swing traders — whether to be aggressive or selective, what setup quality is required, and key condition to watch. Cite specific numbers. Be direct and actionable.\n\nData: ${JSON.stringify(payload)}` }] }],
-    generationConfig: { temperature: 0.3, maxOutputTokens: 350 },
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: { temperature: 0.3, maxOutputTokens: 500 },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   const json = await res.json();
-  return json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
+  // Join all parts (Gemini 2.5 Flash thinking model may split response across parts)
+  const parts = json?.candidates?.[0]?.content?.parts ?? [];
+  const text = parts.map(p => p.text ?? "").join("").trim();
+  return text || null;
 }
 
 const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
