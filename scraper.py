@@ -2214,14 +2214,12 @@ def main():
         etf_holdings[etf] = fetch_etf_holdings(etf)
     output["etf_holdings"] = etf_holdings
 
-    # Build ETF signals for the top 10 ranked themes (broader than the top-5 used for stocks)
-    top10_theme_names = {t["name"] for t in output.get("theme_rankings", [])[:10]}
-    hot_etfs = sorted({
-        etf for theme, etf in _THEME_ETF_MAP.items()
-        if theme in top10_theme_names
-    })
-    logger.info(f"Building ETF breakout / support signals for {len(hot_etfs)} top-10-theme ETFs: {hot_etfs}")
-    output["etf_signals"] = build_etf_signals(hot_etfs)
+    # Scan all unique theme ETFs — let technical conditions (breakout/support) do the filtering.
+    # Theme ranking is too volatile to use as a candidate filter; good setups like UFO or SNSR
+    # can appear on days when their theme is outside the top 10.
+    all_theme_etfs = sorted(set(_THEME_ETF_MAP.values()))
+    logger.info(f"Building ETF breakout / support signals for all {len(all_theme_etfs)} theme ETFs")
+    output["etf_signals"] = build_etf_signals(all_theme_etfs)
 
     out_path = Path("public/thematic_data.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
