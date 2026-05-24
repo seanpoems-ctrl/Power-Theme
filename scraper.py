@@ -2176,10 +2176,13 @@ def build_etf_signals(unique_etfs: list) -> list:
         signal, level = _classify_etf_signal(detail, closes)
         if signal is None:
             continue
-        # Require positive 3M momentum to qualify as a "hot theme" ETF
+        # Require positive 1M AND 3M momentum — ensures the ETF is in an
+        # uptrend before flagging it as breakout or pullback.
+        # Negative 1M means it's in a short-term downtrend (not a real pullback).
+        perf_1m = detail.get("perf_1m") or 0
         perf_3m = detail.get("perf_3m") or 0
-        if perf_3m <= 0:
-            logger.info(f"  ETF signal: {etf} skipped (3M perf {perf_3m:.1f}% ≤ 0)")
+        if perf_1m <= 0 or perf_3m <= 0:
+            logger.info(f"  ETF signal: {etf} skipped (1M {perf_1m:.1f}% or 3M {perf_3m:.1f}% ≤ 0)")
             continue
         signals.append({
             "etf": etf,
