@@ -2123,19 +2123,24 @@ def _classify_etf_signal(detail: dict, closes: list) -> tuple:
     # ── BREAKOUT: broke above SMA20 (purple line) ────────────────────────────
     # Conditions:
     #   1. Price is above all three MAs (s20 > 0, s50 > 0, s200 > 0)
-    #   2. This week made a new 11-week closing high (fresh move)
-    #   3. Still within 12% of the prior resistance (not months-old breakout)
+    #   2. Broke the prior resistance within the last 3 weeks (fresh move)
+    #   3. Still within 12% of that resistance — not an old breakout that's
+    #      been running for months (e.g. CIBR breakout 7 weeks ago → excluded)
+    #
+    # Key: base_high excludes the last 3 weeks (closes[-55:-15]).
+    # An ETF that broke out >3 weeks ago will have current price >> base_high
+    # → dist_pct > 12% → filtered out as "too extended / stale".
     if (closes and len(closes) >= 55
             and s20 is not None and s50 is not None and s200 is not None
             and s20 > 0 and s50 > 0 and s200 > 0):
 
-        last      = closes[-1]
-        week_high = max(closes[-5:])     # highest close this past week
-        base_high = max(closes[-55:-5])  # prior 11-week resistance ceiling
-        dist_pct  = (last - base_high) / base_high * 100 if base_high > 0 else 999
+        last        = closes[-1]
+        recent_high = max(closes[-15:])   # highest close in the last 3 weeks
+        base_high   = max(closes[-55:-15])  # resistance from 3–11 weeks ago
+        dist_pct    = (last - base_high) / base_high * 100 if base_high > 0 else 999
 
-        if (week_high > base_high   # price cleared the prior 11-week ceiling
-                and dist_pct <= 12):  # still fresh, not extended beyond 12%
+        if (recent_high > base_high   # broke the 3-to-11-week resistance ceiling
+                and dist_pct <= 12):  # still fresh — within 12% of that level
             return ("breakout", None)
 
     # ── PULLBACK: testing SMA50 (blue line) as support ────────────────────────
