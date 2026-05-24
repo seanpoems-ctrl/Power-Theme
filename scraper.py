@@ -2112,7 +2112,7 @@ def _classify_etf_signal(detail: dict, closes: list) -> tuple:
     PULLBACK: ETF is in an uptrend and currently sitting within 5% above
               SMA20, SMA50, or SMA200 — a re-entry / add point.
 
-    Returns (signal, level): signal in {'breakout', 'support', None}.
+    Returns (signal, level): signal in {'breakout', 'pullback', None}.
     """
     s20  = detail.get("sma20_pct")   # (price / SMA20 − 1) × 100, from Finviz
     s50  = detail.get("sma50_pct")
@@ -2136,13 +2136,13 @@ def _classify_etf_signal(detail: dict, closes: list) -> tuple:
     if s200 is not None and s200 > 0:    # long-term uptrend intact
 
         if s20 is not None and 0 <= s20 <= 5 and s50 is not None and s50 > 0:
-            return ("support", "SMA20")
+            return ("pullback", "SMA20")
 
         if s50 is not None and 0 <= s50 <= 5:
-            return ("support", "SMA50")
+            return ("pullback", "SMA50")
 
         if 0 <= s200 <= 5:
-            return ("support", "SMA200")
+            return ("pullback", "SMA200")
 
     return (None, None)
 
@@ -2191,7 +2191,7 @@ def build_etf_signals(unique_etfs: list) -> list:
         })
         logger.info(f"  ETF signal: {etf} → {signal}{(' @ ' + level) if level else ''}")
 
-    signals.sort(key=lambda x: ({"breakout": 0, "support": 1}.get(x["signal"], 9),
+    signals.sort(key=lambda x: ({"breakout": 0, "pullback": 1}.get(x["signal"], 9),
                                 -(x.get("perf_1d") or 0)))
     return signals
 
