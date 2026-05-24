@@ -74574,21 +74574,6 @@
       "sma200_pct": 62.93
     },
     {
-      "etf": "AAPL",
-      "theme": "Smart Home",
-      "signal": "breakout",
-      "level": null,
-      "price": 308.82,
-      "perf_1d": 1.26,
-      "perf_1w": 2.86,
-      "perf_1m": 12.94,
-      "perf_3m": 16.02,
-      "perf_6m": 14.99,
-      "sma20_pct": 6.73,
-      "sma50_pct": 14.14,
-      "sma200_pct": 18.07
-    },
-    {
       "etf": "ICLN",
       "theme": "Energy Renewable",
       "signal": "breakout",
@@ -74621,7 +74606,7 @@
     {
       "etf": "BOTZ",
       "theme": "Robotics",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 40.29,
       "perf_1d": 1.61,
@@ -74636,7 +74621,7 @@
     {
       "etf": "LIT",
       "theme": "Electric Vehicles",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 85.28,
       "perf_1d": 1.07,
@@ -74651,7 +74636,7 @@
     {
       "etf": "ITA",
       "theme": "Defense & Aerospace",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 225.37,
       "perf_1d": 0.99,
@@ -74666,7 +74651,7 @@
     {
       "etf": "IHF",
       "theme": "Aging Population & Longevity",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 50.66,
       "perf_1d": 0.92,
@@ -74681,7 +74666,7 @@
     {
       "etf": "XLI",
       "theme": "Industrials",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 171.77,
       "perf_1d": 0.73,
@@ -74696,7 +74681,7 @@
     {
       "etf": "XLE",
       "theme": "Energy Traditional",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 59.49,
       "perf_1d": 0.61,
@@ -74711,7 +74696,7 @@
     {
       "etf": "XLB",
       "theme": "Materials & Mining",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 50.29,
       "perf_1d": 0.54,
@@ -74726,7 +74711,7 @@
     {
       "etf": "ESGU",
       "theme": "Environmental Sustainability",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 162.72,
       "perf_1d": 0.5,
@@ -74741,7 +74726,7 @@
     {
       "etf": "XLY",
       "theme": "Consumer Goods",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 119.18,
       "perf_1d": 0.4,
@@ -74756,7 +74741,7 @@
     {
       "etf": "METV",
       "theme": "Virtual & Augmented Reality",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 18.94,
       "perf_1d": 0.26,
@@ -74771,7 +74756,7 @@
     {
       "etf": "VNQ",
       "theme": "Real Estate & REITs",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 96.77,
       "perf_1d": 0.1,
@@ -74786,7 +74771,7 @@
     {
       "etf": "DBA",
       "theme": "Commodities Agriculture",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 27.56,
       "perf_1d": -0.18,
@@ -74801,7 +74786,7 @@
     {
       "etf": "FCOM",
       "theme": "Telecom",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 73.86,
       "perf_1d": -0.19,
@@ -74816,7 +74801,7 @@
     {
       "etf": "MOO",
       "theme": "Agriculture & FoodTech",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 80.27,
       "perf_1d": -0.24,
@@ -74831,7 +74816,7 @@
     {
       "etf": "XLC",
       "theme": "Telecommunications",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 115.46,
       "perf_1d": -0.55,
@@ -74846,7 +74831,7 @@
     {
       "etf": "XBI",
       "theme": "Healthcare & Biotech",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 131.66,
       "perf_1d": -0.84,
@@ -74861,7 +74846,7 @@
     {
       "etf": "GDX",
       "theme": "Commodities Metals",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA200",
       "price": 85.02,
       "perf_1d": -1.13,
@@ -74876,7 +74861,7 @@
     {
       "etf": "USO",
       "theme": "Commodities Energy",
-      "signal": "support",
+      "signal": "pullback",
       "level": "SMA20",
       "price": 140.92,
       "perf_1d": -1.14,
@@ -74887,21 +74872,6 @@
       "sma20_pct": -1.29,
       "sma50_pct": 7.0,
       "sma200_pct": 58.57
-    },
-    {
-      "etf": "NVDA",
-      "theme": "Nanotechnology",
-      "signal": "support",
-      "level": "SMA20",
-      "price": 215.33,
-      "perf_1d": -1.9,
-      "perf_1w": -4.43,
-      "perf_1m": 7.86,
-      "perf_3m": 12.41,
-      "perf_6m": 15.45,
-      "sma20_pct": 0.27,
-      "sma50_pct": 9.41,
-      "sma200_pct": 15.13
     }
   ]
 }
