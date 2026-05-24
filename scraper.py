@@ -2143,12 +2143,19 @@ def _classify_etf_signal(detail: dict, closes: list) -> tuple:
                 and dist_pct <= 12):  # still fresh — within 12% of that level
             return ("breakout", None)
 
-    # ── PULLBACK: testing SMA50 (blue line) as support ────────────────────────
+    # ── PULLBACK: price broke below SMA20, now testing SMA50 as support ─────
     # Conditions:
-    #   1. Long-term uptrend intact: price above SMA200 (s200 > 0)
-    #   2. Price is within ±2% of SMA50 — truly touching the line
-    if (s200 is not None and s200 > 0
-            and s50 is not None and -2.0 <= s50 <= 2.0):
+    #   1. s20 < 0  — price has already pulled back THROUGH SMA20 (the line
+    #                 is now overhead resistance, not support). This excludes
+    #                 ETFs where SMA20 ≈ SMA50 are both clustered at the same
+    #                 level (e.g. XLE where s20≈+1.7% and s50≈+1.8%).
+    #   2. -2% ≤ s50 ≤ 2%  — price is right at SMA50 (the blue line).
+    #   3. s200 > 5%  — long-term uptrend firmly intact; price at least 5%
+    #                   above SMA200. Filters out ETFs barely clinging to
+    #                   SMA200 (e.g. XLC s200≈+0.2%).
+    if (s20 is not None and s20 < 0
+            and s50 is not None and -2.0 <= s50 <= 2.0
+            and s200 is not None and s200 > 5.0):
         return ("pullback", "SMA50")
 
     return (None, None)
@@ -2176,13 +2183,12 @@ def build_etf_signals(unique_etfs: list) -> list:
         signal, level = _classify_etf_signal(detail, closes)
         if signal is None:
             continue
-        # Require positive 1M AND 3M momentum — ensures the ETF is in an
-        # uptrend before flagging it as breakout or pullback.
-        # Negative 1M means it's in a short-term downtrend (not a real pullback).
+        # Breakout requires positive 1M AND 3M momentum (trending up).
+        # Pullback allows negative 1M — price is pulling back by definition.
         perf_1m = detail.get("perf_1m") or 0
         perf_3m = detail.get("perf_3m") or 0
-        if perf_1m <= 0 or perf_3m <= 0:
-            logger.info(f"  ETF signal: {etf} skipped (1M {perf_1m:.1f}% or 3M {perf_3m:.1f}% ≤ 0)")
+        if signal == "breakout" and (perf_1m <= 0 or perf_3m <= 0):
+            logger.info(f"  ETF signal: {etf} breakout skipped (1M {perf_1m:.1f}% or 3M {perf_3m:.1f}% ≤ 0)")
             continue
         signals.append({
             "etf": etf,
