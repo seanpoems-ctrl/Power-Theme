@@ -2749,6 +2749,26 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
         <div className="text-[11px] leading-snug text-zinc-300">
           {aiText || actionLine || vixFallback}
         </div>
+        {(() => {
+          const displayText = aiText || actionLine || "";
+          const t = displayText.toLowerCase();
+          const tag = t.includes("avoid") ? "avoid"
+            : t.includes("aggressive") ? "aggressive"
+            : t.includes("selective") || t.includes("select") ? "selective"
+            : null;
+          const strategyMap = {
+            aggressive: { text: "策略：積極佈局突破單，RS 強 + 量能放大即可進場",   cls: "text-emerald-400 border-emerald-500/30 bg-emerald-500/8" },
+            selective:  { text: "策略：只做 RS 最強、setup 最乾淨的突破單，不要每個都追", cls: "text-amber-400 border-amber-500/30 bg-amber-500/8" },
+            avoid:      { text: "策略：暫停新突破單，現金觀望等待市場穩定",           cls: "text-red-400 border-red-500/30 bg-red-500/8" },
+          };
+          const s = tag ? strategyMap[tag] : null;
+          if (!s) return null;
+          return (
+            <div className={`mt-2 px-2 py-1.5 rounded-lg border text-[11px] font-medium leading-snug ${s.cls}`}>
+              {s.text}
+            </div>
+          );
+        })()}
       </div>
     </div>
   );
