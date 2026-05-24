@@ -2105,12 +2105,14 @@ def fetch_etf_holdings(etf_ticker: str) -> list:
 
 def _classify_etf_signal(detail: dict, closes: list) -> tuple:
     """
-    BREAKOUT: ETF just made a new 11-week closing high this past week,
-              and is still within 8% of the level it broke through.
-              (Filters out extended ETFs that have been running for months.)
+    BREAKOUT: Price broke above SMA20 (purple line in Finviz) which was acting
+              as resistance. Detected by: this week made a new 11-week high,
+              price is above SMA20 & SMA50 & SMA200, and is still within 12%
+              of the prior resistance level (not too extended).
 
-    PULLBACK: ETF is in an uptrend and currently sitting within 5% above
-              SMA20, SMA50, or SMA200 — a re-entry / add point.
+    PULLBACK: Price pulled back to test SMA50 (blue line in Finviz) as support.
+              Very tight band: within ±2% of SMA50, with SMA200 still rising
+              (s200 > 0) to confirm the long-term uptrend is intact.
 
     Returns (signal, level): signal in {'breakout', 'pullback', None}.
     """
@@ -2118,31 +2120,31 @@ def _classify_etf_signal(detail: dict, closes: list) -> tuple:
     s50  = detail.get("sma50_pct")
     s200 = detail.get("sma200_pct")
 
-    # ── BREAKOUT ──────────────────────────────────────────────────────────────
+    # ── BREAKOUT: broke above SMA20 (purple line) ────────────────────────────
+    # Conditions:
+    #   1. Price is above all three MAs (s20 > 0, s50 > 0, s200 > 0)
+    #   2. This week made a new 11-week closing high (fresh move)
+    #   3. Still within 12% of the prior resistance (not months-old breakout)
     if (closes and len(closes) >= 55
-            and s50 is not None and s200 is not None
-            and s50 > 0 and s200 > 0):
+            and s20 is not None and s50 is not None and s200 is not None
+            and s20 > 0 and s50 > 0 and s200 > 0):
 
         last      = closes[-1]
         week_high = max(closes[-5:])     # highest close this past week
-        base_high = max(closes[-55:-5])  # prior 11-week resistance
+        base_high = max(closes[-55:-5])  # prior 11-week resistance ceiling
         dist_pct  = (last - base_high) / base_high * 100 if base_high > 0 else 999
 
-        if (week_high > base_high        # this week broke the prior 11-week high
-                and dist_pct <= 8):      # still within 8% of that breakout level
+        if (week_high > base_high   # price cleared the prior 11-week ceiling
+                and dist_pct <= 12):  # still fresh, not extended beyond 12%
             return ("breakout", None)
 
-    # ── PULLBACK ──────────────────────────────────────────────────────────────
-    if s200 is not None and s200 > 0:    # long-term uptrend intact
-
-        if s20 is not None and 0 <= s20 <= 5 and s50 is not None and s50 > 0:
-            return ("pullback", "SMA20")
-
-        if s50 is not None and 0 <= s50 <= 5:
-            return ("pullback", "SMA50")
-
-        if 0 <= s200 <= 5:
-            return ("pullback", "SMA200")
+    # ── PULLBACK: testing SMA50 (blue line) as support ────────────────────────
+    # Conditions:
+    #   1. Long-term uptrend intact: price above SMA200 (s200 > 0)
+    #   2. Price is within ±2% of SMA50 — truly touching the line
+    if (s200 is not None and s200 > 0
+            and s50 is not None and -2.0 <= s50 <= 2.0):
+        return ("pullback", "SMA50")
 
     return (None, None)
 
