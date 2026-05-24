@@ -2593,7 +2593,7 @@ const VIX_ZONES_NOTE = [
 ];
 
 const MARKET_PULSE_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
-const MARKET_PULSE_CACHE_KEY  = "gemini_market_pulse_v4";
+const MARKET_PULSE_CACHE_KEY  = "gemini_market_pulse_v5";
 
 async function fetchGeminiMarketPulse(payload) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_PULSE_GEMINI_KEY}`;
@@ -2602,17 +2602,18 @@ async function fetchGeminiMarketPulse(payload) {
     `Market data: VIX=${vix} (${vix_zone}), S5FI=${s5fi_breadth_pct ?? "N/A"}%, ADV/DEC=${adv_dec_pct ?? "N/A"}%, ` +
     `SMA50 above=${sma50_above_pct ?? "N/A"}%, SMA200 above=${sma200_above_pct ?? "N/A"}%, ` +
     `52W Hi=${new_52w_highs ?? "N/A"}, 52W Lo=${new_52w_lows ?? "N/A"}.\n\n` +
-    `Write exactly 2 SHORT sentences for a swing trader:\n` +
-    `1. Market regime (cite 2-3 of the numbers above).\n` +
-    `2. Breakout trade stance: aggressive / selective / avoid, and why.\n` +
-    `No preamble. Total response under 60 words.`;
+    `Write exactly 2 sentences for a breakout swing trader:\n` +
+    `1. Market regime: summarize breadth conditions using the numbers above.\n` +
+    `2. Breakout trade action: state whether to be aggressive / selective / avoid new breakouts, and the key condition to watch.\n` +
+    `No preamble. Under 70 words total.`;
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.3, maxOutputTokens: 500 },
+    // thinkingBudget:0 disables Gemini 2.5 Flash internal reasoning so maxOutputTokens
+    // goes entirely to the visible response (otherwise thinking tokens eat the budget).
+    generationConfig: { temperature: 0.3, maxOutputTokens: 300, thinkingConfig: { thinkingBudget: 0 } },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   const json = await res.json();
-  // Join all parts (Gemini 2.5 Flash thinking model may split response across parts)
   const parts = json?.candidates?.[0]?.content?.parts ?? [];
   const text = parts.map(p => p.text ?? "").join("").trim();
   return text || null;
