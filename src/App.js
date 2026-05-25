@@ -974,8 +974,8 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt 
             <div className="overflow-y-auto flex-1">
               {selectedTheme.stocks.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 gap-2 text-center px-6">
-                  <div className="text-zinc-400 text-sm font-medium">此主題無詳細股票資料</div>
-                  <div className="text-zinc-600 text-xs leading-relaxed">只有今日掃描的前 5 大主題有股票明細。<br/>此主題僅有 Finviz 整體排名資料。</div>
+                  <div className="text-zinc-400 text-sm font-medium">此主題暫無股票資料</div>
+                  <div className="text-zinc-600 text-xs leading-relaxed">將於下次每日掃描後更新。</div>
                 </div>
               ) : (
                 <table className="w-full text-xs">

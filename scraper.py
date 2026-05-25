@@ -1576,8 +1576,8 @@ def build_data() -> dict:
     _tr_industries = {t["name"]: t.get("industries", []) for t in theme_rankings}
 
     output_theme_names = {t["name"] for t in output_themes}
-    sorted_1d = sorted(finviz_theme_rankings, key=lambda x: x.get("perf_1d", 0))
-    heatmap_extra_names = [t["name"] for t in sorted_1d[:5] + sorted_1d[-5:]
+    # Fetch stocks for ALL remaining themes so every heatmap card is clickable
+    heatmap_extra_names = [t["name"] for t in finviz_theme_rankings
                            if t["name"] not in output_theme_names]
 
     logger.info(f"\nStep 3b: Fetching stocks for {len(heatmap_extra_names)} remaining heatmap themes...")
