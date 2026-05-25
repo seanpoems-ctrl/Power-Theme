@@ -4328,8 +4328,9 @@ verdict 必須是以下其中之一："beat"、"neutral"、"miss"`;
   if (!res.ok) throw new Error(`Gemini API error ${res.status}`);
   const json = await res.json();
   // Concatenate all text parts (search grounding may split into multiple parts)
+  // Filter out thought parts (gemini-2.5-flash thinking has thought:true flag)
   const parts = json?.candidates?.[0]?.content?.parts || [];
-  const raw = parts.map(p => p.text || "").join("").trim();
+  const raw = parts.filter(p => !p.thought).map(p => p.text || "").join("").trim();
   if (!raw) throw new Error("Gemini returned an empty response — please retry");
   // Strip markdown code fences
   const cleaned = raw.replace(/```(?:json)?\n?/g, "").replace(/\n?```/g, "").trim();
