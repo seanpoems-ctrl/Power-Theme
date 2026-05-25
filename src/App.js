@@ -846,7 +846,7 @@ const HeroZone = ({ data, themesCount, tickersCount }) => {
                             ? 'bg-amber-500/15 text-amber-400 border-amber-500/30'
                             : 'bg-sky-500/15 text-sky-400 border-sky-500/30'
                         }`}>
-                          {isBreakout ? 'Breakout' : isPullback ? (s.level ? `Pullback·${s.level}` : 'Pullback') : (s.level ? `${s.level}` : '—')}
+                          {isBreakout ? 'Breakout' : isPullback ? 'Pullback' : '—'}
                         </span>
                       </td>
                     </tr>
