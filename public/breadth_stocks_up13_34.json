@@ -100,7 +100,7 @@
       "ticker": "RKLB",
       "company": "Rocket Lab Corp",
       "industry": "Aerospace & Defense",
-      "market_cap_b": 78.57,
+      "market_cap_b": 78.59,
       "price": 135.76,
       "change_pct": 8.22,
       "dollar_volume": "$4.4B",
@@ -108,6 +108,19 @@
       "perf_1m": 70.38,
       "perf_3m": 94.03,
       "perf_34d": 104.7
+    },
+    {
+      "ticker": "XNDU",
+      "company": "Xanadu Quantum Technologies Ltd",
+      "industry": "Software - Infrastructure",
+      "market_cap_b": 4.53,
+      "price": 15.18,
+      "change_pct": 5.05,
+      "dollar_volume": "$127M",
+      "adr_pct": 13.4,
+      "perf_1m": -50.95,
+      "perf_3m": null,
+      "perf_34d": 103.21
     },
     {
       "ticker": "SYNA",
@@ -568,7 +581,7 @@
       "ticker": "VIAV",
       "company": "Viavi Solutions Inc",
       "industry": "Communication Equipment",
-      "market_cap_b": 11.58,
+      "market_cap_b": 12.13,
       "price": 49.51,
       "change_pct": 1.08,
       "dollar_volume": "$225M",
@@ -591,6 +604,19 @@
       "perf_34d": 28.35
     },
     {
+      "ticker": "VTRS",
+      "company": "Viatris Inc",
+      "industry": "Drug Manufacturers - Specialty & Generic",
+      "market_cap_b": 19.39,
+      "price": 16.65,
+      "change_pct": 1.15,
+      "dollar_volume": "$86M",
+      "adr_pct": 3.4,
+      "perf_1m": 14.96,
+      "perf_3m": 5.26,
+      "perf_34d": 27.45
+    },
+    {
       "ticker": "ROKU",
       "company": "Roku Inc",
       "industry": "Entertainment",
@@ -604,23 +630,10 @@
       "perf_34d": 27.42
     },
     {
-      "ticker": "VTRS",
-      "company": "Viatris Inc",
-      "industry": "Drug Manufacturers - Specialty & Generic",
-      "market_cap_b": 19.39,
-      "price": 16.65,
-      "change_pct": 1.15,
-      "dollar_volume": "$86M",
-      "adr_pct": 3.4,
-      "perf_1m": 14.12,
-      "perf_3m": 4.49,
-      "perf_34d": 26.52
-    },
-    {
       "ticker": "ZM",
       "company": "Zoom Communications Inc",
       "industry": "Software - Application",
-      "market_cap_b": 31.14,
+      "market_cap_b": 31.13,
       "price": 105.64,
       "change_pct": 9.19,
       "dollar_volume": "$1.0B",
@@ -741,7 +754,7 @@
       "price": 316.42,
       "change_pct": 0.09,
       "dollar_volume": "$169M",
-      "adr_pct": 3.0,
+      "adr_pct": 3.1,
       "perf_1m": 3.43,
       "perf_3m": 29.05,
       "perf_34d": 22.1
@@ -836,19 +849,6 @@
       "perf_1m": 7.19,
       "perf_3m": 10.66,
       "perf_34d": 19.53
-    },
-    {
-      "ticker": "RH",
-      "company": "RH",
-      "industry": "Specialty Retail",
-      "market_cap_b": 2.58,
-      "price": 136.42,
-      "change_pct": -1.91,
-      "dollar_volume": "$89M",
-      "adr_pct": 5.6,
-      "perf_1m": -0.79,
-      "perf_3m": -28.35,
-      "perf_34d": 19.32
     },
     {
       "ticker": "WHD",
@@ -976,9 +976,9 @@
       "change_pct": 0.64,
       "dollar_volume": "$86M",
       "adr_pct": 3.3,
-      "perf_1m": -2.79,
-      "perf_3m": 18.74,
-      "perf_34d": 14.93
+      "perf_1m": -2.54,
+      "perf_3m": 19.05,
+      "perf_34d": 15.22
     },
     {
       "ticker": "TTWO",
@@ -1014,7 +1014,7 @@
       "price": 53.74,
       "change_pct": -1.83,
       "dollar_volume": "$69M",
-      "adr_pct": 3.8,
+      "adr_pct": 3.9,
       "perf_1m": 3.71,
       "perf_3m": 18.17,
       "perf_34d": 13.9
@@ -1036,7 +1036,7 @@
       "ticker": "XYZ",
       "company": "Block Inc",
       "industry": "Software - Infrastructure",
-      "market_cap_b": 40.55,
+      "market_cap_b": 40.52,
       "price": 68.08,
       "change_pct": -0.83,
       "dollar_volume": "$383M",
@@ -1105,7 +1105,7 @@
       "price": 86.71,
       "change_pct": 1.55,
       "dollar_volume": "$171M",
-      "adr_pct": 4.5,
+      "adr_pct": 4.6,
       "perf_1m": 18.85,
       "perf_3m": 17.25,
       "perf_34d": 12.44
@@ -1378,7 +1378,7 @@
       "price": 519.86,
       "change_pct": 6.11,
       "dollar_volume": "$2.7B",
-      "adr_pct": 4.7,
+      "adr_pct": 4.8,
       "perf_1m": 0.36,
       "perf_3m": 11.64,
       "perf_34d": 7.59
@@ -1673,7 +1673,7 @@
       "ticker": "WDAY",
       "company": "Workday Inc",
       "industry": "Software - Application",
-      "market_cap_b": 32.13,
+      "market_cap_b": 32.0,
       "price": 128.14,
       "change_pct": 5.16,
       "dollar_volume": "$1.4B",
@@ -1898,7 +1898,7 @@
       "price": 32.68,
       "change_pct": -1.89,
       "dollar_volume": "$59M",
-      "adr_pct": 4.6,
+      "adr_pct": 4.7,
       "perf_1m": -5.18,
       "perf_3m": -15.55,
       "perf_34d": -2.45
@@ -1995,6 +1995,19 @@
       "perf_34d": -3.2
     },
     {
+      "ticker": "TEL",
+      "company": "TE Connectivity plc",
+      "industry": "Electronic Components",
+      "market_cap_b": 59.19,
+      "price": 202.78,
+      "change_pct": 0.1,
+      "dollar_volume": "$437M",
+      "adr_pct": 3.1,
+      "perf_1m": -5.17,
+      "perf_3m": -15.69,
+      "perf_34d": -3.52
+    },
+    {
       "ticker": "STNE",
       "company": "StoneCo Ltd",
       "industry": "Software - Infrastructure",
@@ -2019,19 +2032,6 @@
       "perf_1m": -14.86,
       "perf_3m": -9.25,
       "perf_34d": -3.88
-    },
-    {
-      "ticker": "TEL",
-      "company": "TE Connectivity plc",
-      "industry": "Electronic Components",
-      "market_cap_b": 59.19,
-      "price": 202.78,
-      "change_pct": 0.1,
-      "dollar_volume": "$437M",
-      "adr_pct": 3.1,
-      "perf_1m": -5.54,
-      "perf_3m": -16.01,
-      "perf_34d": -3.89
     },
     {
       "ticker": "WEX",
@@ -2063,7 +2063,7 @@
       "ticker": "WMS",
       "company": "Advanced Drainage Systems Inc",
       "industry": "Building Products & Equipment",
-      "market_cap_b": 10.36,
+      "market_cap_b": 10.19,
       "price": 133.0,
       "change_pct": -1.59,
       "dollar_volume": "$203M",
@@ -2184,7 +2184,7 @@
       "price": 79.29,
       "change_pct": -2.35,
       "dollar_volume": "$59M",
-      "adr_pct": 4.1,
+      "adr_pct": 4.2,
       "perf_1m": -10.43,
       "perf_3m": -0.18,
       "perf_34d": -8.07
@@ -2353,7 +2353,7 @@
       "price": 9.77,
       "change_pct": -2.98,
       "dollar_volume": "$56M",
-      "adr_pct": 3.4,
+      "adr_pct": 3.5,
       "perf_1m": -13.08,
       "perf_3m": -10.86,
       "perf_34d": -12.61
@@ -2534,5 +2534,5 @@
     "spx_3m": 8.47,
     "spx_34d": 12.95
   },
-  "fetched_at_utc": "2026-05-22T21:58:45+00:00"
+  "fetched_at_utc": "2026-05-25T21:50:45+00:00"
 }

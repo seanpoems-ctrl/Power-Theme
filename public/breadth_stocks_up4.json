@@ -3,7 +3,7 @@
   "filter": "up4",
   "label": "Up 4%+ Today",
   "min_cap_b": 1.0,
-  "count": 102,
+  "count": 103,
   "stocks": [
     {
       "ticker": "NVTS",
@@ -91,7 +91,7 @@
       "price": 49.5,
       "change_pct": 15.49,
       "dollar_volume": "$434M",
-      "adr_pct": 11.8,
+      "adr_pct": 11.9,
       "perf_1m": 40.91,
       "perf_3m": 139.13,
       "perf_34d": 39.16
@@ -360,7 +360,7 @@
       "ticker": "ZM",
       "company": "Zoom Communications Inc",
       "industry": "Software - Application",
-      "market_cap_b": 31.14,
+      "market_cap_b": 31.13,
       "price": 105.64,
       "change_pct": 9.19,
       "dollar_volume": "$1.0B",
@@ -464,7 +464,7 @@
       "ticker": "RKLB",
       "company": "Rocket Lab Corp",
       "industry": "Aerospace & Defense",
-      "market_cap_b": 78.57,
+      "market_cap_b": 78.59,
       "price": 135.76,
       "change_pct": 8.22,
       "dollar_volume": "$4.4B",
@@ -715,7 +715,7 @@
       "price": 519.86,
       "change_pct": 6.11,
       "dollar_volume": "$2.7B",
-      "adr_pct": 4.7,
+      "adr_pct": 4.8,
       "perf_1m": 0.36,
       "perf_3m": 11.64,
       "perf_34d": 7.59
@@ -958,7 +958,7 @@
       "ticker": "WDAY",
       "company": "Workday Inc",
       "industry": "Software - Application",
-      "market_cap_b": 32.13,
+      "market_cap_b": 32.0,
       "price": 128.14,
       "change_pct": 5.16,
       "dollar_volume": "$1.4B",
@@ -979,6 +979,19 @@
       "perf_1m": 28.25,
       "perf_3m": 55.81,
       "perf_34d": 86.95
+    },
+    {
+      "ticker": "XNDU",
+      "company": "Xanadu Quantum Technologies Ltd",
+      "industry": "Software - Infrastructure",
+      "market_cap_b": 4.53,
+      "price": 15.18,
+      "change_pct": 5.05,
+      "dollar_volume": "$127M",
+      "adr_pct": 13.4,
+      "perf_1m": -50.95,
+      "perf_3m": null,
+      "perf_34d": 103.21
     },
     {
       "ticker": "JOBY",
@@ -1080,9 +1093,9 @@
       "change_pct": 4.66,
       "dollar_volume": "$64M",
       "adr_pct": 3.7,
-      "perf_1m": 3.29,
-      "perf_3m": -20.32,
-      "perf_34d": -17.17
+      "perf_1m": 3.64,
+      "perf_3m": -20.06,
+      "perf_34d": -16.9
     },
     {
       "ticker": "MP",
@@ -1338,5 +1351,5 @@
     "spx_3m": 8.47,
     "spx_34d": 12.95
   },
-  "fetched_at_utc": "2026-05-22T21:54:38+00:00"
+  "fetched_at_utc": "2026-05-25T21:46:25+00:00"
 }

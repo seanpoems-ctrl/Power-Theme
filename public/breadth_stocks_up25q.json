@@ -3,8 +3,21 @@
   "filter": "up25q",
   "label": "Up 25%+ Quarterly",
   "min_cap_b": 1.0,
-  "count": 295,
+  "count": 296,
   "stocks": [
+    {
+      "ticker": "XNDU",
+      "company": "Xanadu Quantum Technologies Ltd",
+      "industry": "Software - Infrastructure",
+      "market_cap_b": 4.53,
+      "price": 15.18,
+      "change_pct": 5.05,
+      "dollar_volume": "$127M",
+      "adr_pct": 13.4,
+      "perf_1m": -50.95,
+      "perf_3m": null,
+      "perf_34d": 103.21
+    },
     {
       "ticker": "MXL",
       "company": "MaxLinear Inc",
@@ -195,7 +208,7 @@
       "price": 49.5,
       "change_pct": 15.49,
       "dollar_volume": "$434M",
-      "adr_pct": 11.8,
+      "adr_pct": 11.9,
       "perf_1m": 40.91,
       "perf_3m": 139.13,
       "perf_34d": 39.16
@@ -295,7 +308,7 @@
       "ticker": "DDOG",
       "company": "Datadog Inc",
       "industry": "Software - Application",
-      "market_cap_b": 79.17,
+      "market_cap_b": 79.14,
       "price": 222.32,
       "change_pct": 1.96,
       "dollar_volume": "$1.0B",
@@ -351,7 +364,7 @@
       "price": 19.04,
       "change_pct": -7.3,
       "dollar_volume": "$62M",
-      "adr_pct": 10.2,
+      "adr_pct": 10.3,
       "perf_1m": 31.31,
       "perf_3m": 107.41,
       "perf_34d": 11.93
@@ -490,7 +503,7 @@
       "ticker": "RKLB",
       "company": "Rocket Lab Corp",
       "industry": "Aerospace & Defense",
-      "market_cap_b": 78.57,
+      "market_cap_b": 78.59,
       "price": 135.76,
       "change_pct": 8.22,
       "dollar_volume": "$4.4B",
@@ -867,7 +880,7 @@
       "ticker": "VIAV",
       "company": "Viavi Solutions Inc",
       "industry": "Communication Equipment",
-      "market_cap_b": 11.58,
+      "market_cap_b": 12.13,
       "price": 49.51,
       "change_pct": 1.08,
       "dollar_volume": "$225M",
@@ -1859,7 +1872,7 @@
       "price": 38.8,
       "change_pct": 1.2,
       "dollar_volume": "$150M",
-      "adr_pct": 3.8,
+      "adr_pct": 3.9,
       "perf_1m": 2.84,
       "perf_3m": 36.48,
       "perf_34d": -9.08
@@ -1881,7 +1894,7 @@
       "ticker": "AFRM",
       "company": "Affirm Holdings Inc",
       "industry": "Credit Services",
-      "market_cap_b": 21.72,
+      "market_cap_b": 21.85,
       "price": 65.22,
       "change_pct": -2.92,
       "dollar_volume": "$361M",
@@ -2002,7 +2015,7 @@
       "price": 156.93,
       "change_pct": 2.73,
       "dollar_volume": "$246M",
-      "adr_pct": 4.6,
+      "adr_pct": 4.7,
       "perf_1m": 8.62,
       "perf_3m": 34.46,
       "perf_34d": 31.89
@@ -2037,7 +2050,7 @@
       "ticker": "XYZ",
       "company": "Block Inc",
       "industry": "Software - Infrastructure",
-      "market_cap_b": 40.55,
+      "market_cap_b": 40.52,
       "price": 68.08,
       "change_pct": -0.83,
       "dollar_volume": "$383M",
@@ -2301,7 +2314,7 @@
       "price": 316.42,
       "change_pct": 0.09,
       "dollar_volume": "$169M",
-      "adr_pct": 3.0,
+      "adr_pct": 3.1,
       "perf_1m": 3.43,
       "perf_3m": 29.05,
       "perf_34d": 22.1
@@ -2827,6 +2840,19 @@
       "perf_34d": 23.55
     },
     {
+      "ticker": "MCHP",
+      "company": "Microchip Technology Inc",
+      "industry": "Semiconductors",
+      "market_cap_b": 50.65,
+      "price": 93.43,
+      "change_pct": 2.55,
+      "dollar_volume": "$814M",
+      "adr_pct": 4.2,
+      "perf_1m": 4.99,
+      "perf_3m": 23.67,
+      "perf_34d": 39.09
+    },
+    {
       "ticker": "INSW",
       "company": "International Seaways Inc",
       "industry": "Oil & Gas Midstream",
@@ -2890,19 +2916,6 @@
       "perf_1m": 14.81,
       "perf_3m": 23.16,
       "perf_34d": 30.51
-    },
-    {
-      "ticker": "MCHP",
-      "company": "Microchip Technology Inc",
-      "industry": "Semiconductors",
-      "market_cap_b": 50.56,
-      "price": 93.43,
-      "change_pct": 2.55,
-      "dollar_volume": "$814M",
-      "adr_pct": 4.2,
-      "perf_1m": 4.46,
-      "perf_3m": 23.05,
-      "perf_34d": 38.39
     },
     {
       "ticker": "AMBA",
@@ -3038,7 +3051,7 @@
       "ticker": "ZM",
       "company": "Zoom Communications Inc",
       "industry": "Software - Application",
-      "market_cap_b": 31.14,
+      "market_cap_b": 31.13,
       "price": 105.64,
       "change_pct": 9.19,
       "dollar_volume": "$1.0B",
@@ -3081,7 +3094,7 @@
       "price": 703.86,
       "change_pct": 0.08,
       "dollar_volume": "$341M",
-      "adr_pct": 7.3,
+      "adr_pct": 7.4,
       "perf_1m": -2.27,
       "perf_3m": 20.14,
       "perf_34d": 26.2
@@ -3147,9 +3160,9 @@
       "change_pct": 0.64,
       "dollar_volume": "$86M",
       "adr_pct": 3.3,
-      "perf_1m": -2.79,
-      "perf_3m": 18.74,
-      "perf_34d": 14.93
+      "perf_1m": -2.54,
+      "perf_3m": 19.05,
+      "perf_34d": 15.22
     },
     {
       "ticker": "CAVA",
@@ -3185,7 +3198,7 @@
       "price": 53.74,
       "change_pct": -1.83,
       "dollar_volume": "$69M",
-      "adr_pct": 3.8,
+      "adr_pct": 3.9,
       "perf_1m": 3.71,
       "perf_3m": 18.17,
       "perf_34d": 13.9
@@ -3207,7 +3220,7 @@
       "ticker": "CRUS",
       "company": "Cirrus Logic Inc",
       "industry": "Semiconductors",
-      "market_cap_b": 8.73,
+      "market_cap_b": 8.66,
       "price": 171.17,
       "change_pct": 2.73,
       "dollar_volume": "$70M",
@@ -3259,7 +3272,7 @@
       "ticker": "ALGM",
       "company": "Allegro Microsystems Inc",
       "industry": "Semiconductors",
-      "market_cap_b": 8.51,
+      "market_cap_b": 8.56,
       "price": 45.95,
       "change_pct": 2.8,
       "dollar_volume": "$85M",
@@ -3328,7 +3341,7 @@
       "price": 86.71,
       "change_pct": 1.55,
       "dollar_volume": "$171M",
-      "adr_pct": 4.5,
+      "adr_pct": 4.6,
       "perf_1m": 18.85,
       "perf_3m": 17.25,
       "perf_34d": 12.44
@@ -3519,7 +3532,7 @@
       "ticker": "BELFB",
       "company": "Bel Fuse Inc",
       "industry": "Electronic Components",
-      "market_cap_b": 3.79,
+      "market_cap_b": 3.8,
       "price": 270.01,
       "change_pct": 3.69,
       "dollar_volume": "$97M",
@@ -3623,7 +3636,7 @@
       "ticker": "AMAT",
       "company": "Applied Materials Inc",
       "industry": "Semiconductor Equipment & Materials",
-      "market_cap_b": 342.97,
+      "market_cap_b": 343.12,
       "price": 432.16,
       "change_pct": 1.12,
       "dollar_volume": "$2.1B",
@@ -3847,5 +3860,5 @@
     "spx_3m": 8.47,
     "spx_34d": 12.95
   },
-  "fetched_at_utc": "2026-05-22T21:55:24+00:00"
+  "fetched_at_utc": "2026-05-25T21:47:13+00:00"
 }

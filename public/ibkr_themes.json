@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-22T21:52:18.590878+00:00",
+  "generated_at": "2026-05-25T21:43:59.043533+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
@@ -13,7 +13,7 @@
           "rs_52w": 98,
           "adr_pct": 7.5,
           "vol_surge": 1.35,
-          "mkt_cap": 78571231223,
+          "mkt_cap": 78587045226,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -51,6 +51,172 @@
             "adr_pct >= 4.0": true
           },
           "primary_theme": "Defense & Aerospace",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    },
+    {
+      "name": "Semiconductors",
+      "theme_rs": 97.0,
+      "perf_1d": 6.99,
+      "leaders": [
+        {
+          "ticker": "VSH",
+          "price": 47.25,
+          "rs_52w": 98,
+          "adr_pct": 4.97,
+          "vol_surge": 2.85,
+          "mkt_cap": 6431000325,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        },
+        {
+          "ticker": "ASX",
+          "price": 34.81,
+          "rs_52w": 97,
+          "adr_pct": 4.14,
+          "vol_surge": 1.08,
+          "mkt_cap": 76371255928,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        },
+        {
+          "ticker": "SMTC",
+          "price": 156.78,
+          "rs_52w": 97,
+          "adr_pct": 6.07,
+          "vol_surge": 2.54,
+          "mkt_cap": 14598491353,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "GFS",
+          "price": 85.64,
+          "rs_52w": 97,
+          "adr_pct": 5.31,
+          "vol_surge": 2.75,
+          "mkt_cap": 46966383586,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "AMD",
+          "price": 467.51,
+          "rs_52w": 96,
+          "adr_pct": 5.4,
+          "vol_surge": 0.89,
+          "mkt_cap": 762322120662,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    },
+    {
+      "name": "Industrials",
+      "theme_rs": 97.0,
+      "perf_1d": 2.77,
+      "leaders": [
+        {
+          "ticker": "BE",
+          "price": 302.49,
+          "rs_52w": 98,
+          "adr_pct": 8.23,
+          "vol_surge": 0.89,
+          "mkt_cap": 86041422853,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Industrials",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "TTMI",
+          "price": 189.92,
+          "rs_52w": 97,
+          "adr_pct": 6.38,
+          "vol_surge": 1.51,
+          "mkt_cap": 19723203015,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Industrials",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "VRT",
+          "price": 327.46,
+          "rs_52w": 96,
+          "adr_pct": 5.49,
+          "vol_surge": 0.63,
+          "mkt_cap": 125780269605,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Industrials",
           "secondary_themes": [],
           "setup_label": "Flag"
         }
@@ -103,172 +269,6 @@
             "adr_pct >= 4.0": true
           },
           "primary_theme": "Telecommunications",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
-      "name": "Semiconductors",
-      "theme_rs": 96.8,
-      "perf_1d": 6.99,
-      "leaders": [
-        {
-          "ticker": "VSH",
-          "price": 47.25,
-          "rs_52w": 98,
-          "adr_pct": 4.97,
-          "vol_surge": 2.85,
-          "mkt_cap": 6431000325,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Base"
-        },
-        {
-          "ticker": "ASX",
-          "price": 34.81,
-          "rs_52w": 97,
-          "adr_pct": 4.14,
-          "vol_surge": 1.08,
-          "mkt_cap": 76371255928,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Base"
-        },
-        {
-          "ticker": "GFS",
-          "price": 85.64,
-          "rs_52w": 97,
-          "adr_pct": 5.31,
-          "vol_surge": 2.75,
-          "mkt_cap": 46966383586,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "SMTC",
-          "price": 156.78,
-          "rs_52w": 96,
-          "adr_pct": 6.07,
-          "vol_surge": 2.54,
-          "mkt_cap": 14598491353,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "AMD",
-          "price": 467.51,
-          "rs_52w": 96,
-          "adr_pct": 5.4,
-          "vol_surge": 0.89,
-          "mkt_cap": 762322120662,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
-      "name": "Industrials",
-      "theme_rs": 96.7,
-      "perf_1d": 2.77,
-      "leaders": [
-        {
-          "ticker": "BE",
-          "price": 302.49,
-          "rs_52w": 98,
-          "adr_pct": 8.23,
-          "vol_surge": 0.89,
-          "mkt_cap": 86041422853,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Industrials",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "TTMI",
-          "price": 189.92,
-          "rs_52w": 97,
-          "adr_pct": 6.38,
-          "vol_surge": 1.51,
-          "mkt_cap": 19723203015,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Industrials",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "VRT",
-          "price": 327.46,
-          "rs_52w": 95,
-          "adr_pct": 5.49,
-          "vol_surge": 0.63,
-          "mkt_cap": 125780269605,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Industrials",
           "secondary_themes": [],
           "setup_label": "Flag"
         }

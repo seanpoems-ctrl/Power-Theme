@@ -3,8 +3,21 @@
   "filter": "dn25m",
   "label": "Down 25%+ Monthly",
   "min_cap_b": 1.0,
-  "count": 232,
+  "count": 233,
   "stocks": [
+    {
+      "ticker": "XNDU",
+      "company": "Xanadu Quantum Technologies Ltd",
+      "industry": "Software - Infrastructure",
+      "market_cap_b": 4.53,
+      "price": 15.18,
+      "change_pct": 5.05,
+      "dollar_volume": "$127M",
+      "adr_pct": 13.4,
+      "perf_1m": -50.95,
+      "perf_3m": null,
+      "perf_34d": 103.21
+    },
     {
       "ticker": "FUTU",
       "company": "Futu Holdings Ltd ADR",
@@ -169,7 +182,7 @@
       "price": 52.05,
       "change_pct": 3.11,
       "dollar_volume": "$96M",
-      "adr_pct": 5.9,
+      "adr_pct": 6.0,
       "perf_1m": -25.24,
       "perf_3m": -36.99,
       "perf_34d": -29.89
@@ -399,7 +412,7 @@
       "ticker": "ELF",
       "company": "e.l.f. Beauty Inc",
       "industry": "Household & Personal Products",
-      "market_cap_b": 3.12,
+      "market_cap_b": 3.14,
       "price": 52.9,
       "change_pct": -0.41,
       "dollar_volume": "$273M",
@@ -552,19 +565,6 @@
       "perf_34d": -34.53
     },
     {
-      "ticker": "CDW",
-      "company": "CDW Corp",
-      "industry": "Information Technology Services",
-      "market_cap_b": 14.16,
-      "price": 110.82,
-      "change_pct": 3.69,
-      "dollar_volume": "$168M",
-      "adr_pct": 5.2,
-      "perf_1m": -18.11,
-      "perf_3m": -11.27,
-      "perf_34d": -10.41
-    },
-    {
       "ticker": "BLDR",
       "company": "Builders Firstsource Inc",
       "industry": "Building Products & Equipment",
@@ -576,6 +576,19 @@
       "perf_1m": -17.65,
       "perf_3m": -32.39,
       "perf_34d": -6.06
+    },
+    {
+      "ticker": "CDW",
+      "company": "CDW Corp",
+      "industry": "Information Technology Services",
+      "market_cap_b": 14.16,
+      "price": 110.82,
+      "change_pct": 3.69,
+      "dollar_volume": "$168M",
+      "adr_pct": 5.2,
+      "perf_1m": -17.62,
+      "perf_3m": -10.75,
+      "perf_34d": -9.87
     },
     {
       "ticker": "CAMT",
@@ -741,10 +754,10 @@
       "price": 324.86,
       "change_pct": 0.33,
       "dollar_volume": "$197M",
-      "adr_pct": 4.9,
-      "perf_1m": -16.11,
-      "perf_3m": -3.24,
-      "perf_34d": -4.26
+      "adr_pct": 5.0,
+      "perf_1m": -16.08,
+      "perf_3m": -3.21,
+      "perf_34d": -4.23
     },
     {
       "ticker": "CAVA",
@@ -1313,7 +1326,7 @@
       "price": 9.77,
       "change_pct": -2.98,
       "dollar_volume": "$56M",
-      "adr_pct": 3.4,
+      "adr_pct": 3.5,
       "perf_1m": -13.08,
       "perf_3m": -10.86,
       "perf_34d": -12.61
@@ -1465,7 +1478,7 @@
       "ticker": "WMS",
       "company": "Advanced Drainage Systems Inc",
       "industry": "Building Products & Equipment",
-      "market_cap_b": 10.36,
+      "market_cap_b": 10.19,
       "price": 133.0,
       "change_pct": -1.59,
       "dollar_volume": "$203M",
@@ -1573,7 +1586,7 @@
       "price": 16.3,
       "change_pct": -1.03,
       "dollar_volume": "$305M",
-      "adr_pct": 4.7,
+      "adr_pct": 4.8,
       "perf_1m": -11.94,
       "perf_3m": -31.97,
       "perf_34d": -12.97
@@ -1664,7 +1677,7 @@
       "price": 77.26,
       "change_pct": 1.01,
       "dollar_volume": "$94M",
-      "adr_pct": 4.2,
+      "adr_pct": 4.3,
       "perf_1m": -11.3,
       "perf_3m": -18.67,
       "perf_34d": -21.13
@@ -1846,7 +1859,7 @@
       "price": 79.29,
       "change_pct": -2.35,
       "dollar_volume": "$59M",
-      "adr_pct": 4.1,
+      "adr_pct": 4.2,
       "perf_1m": -10.43,
       "perf_3m": -0.18,
       "perf_34d": -8.07
@@ -1938,9 +1951,9 @@
       "change_pct": -1.85,
       "dollar_volume": "$201M",
       "adr_pct": 6.3,
-      "perf_1m": -9.68,
-      "perf_3m": -28.16,
-      "perf_34d": -12.25
+      "perf_1m": -9.66,
+      "perf_3m": -28.14,
+      "perf_34d": -12.23
     },
     {
       "ticker": "GEV",
@@ -1969,32 +1982,6 @@
       "perf_34d": -12.63
     },
     {
-      "ticker": "J",
-      "company": "Jacobs Solutions Inc",
-      "industry": "Engineering & Construction",
-      "market_cap_b": 13.54,
-      "price": 114.69,
-      "change_pct": 0.57,
-      "dollar_volume": "$102M",
-      "adr_pct": 4.6,
-      "perf_1m": -9.41,
-      "perf_3m": -14.75,
-      "perf_34d": -9.83
-    },
-    {
-      "ticker": "FBIN",
-      "company": "Fortune Brands Innovations Inc",
-      "industry": "Building Products & Equipment",
-      "market_cap_b": 4.49,
-      "price": 37.65,
-      "change_pct": 3.69,
-      "dollar_volume": "$122M",
-      "adr_pct": 4.6,
-      "perf_1m": -9.36,
-      "perf_3m": -33.0,
-      "perf_34d": 0.72
-    },
-    {
       "ticker": "DASH",
       "company": "DoorDash Inc",
       "industry": "Internet Retail",
@@ -2006,19 +1993,6 @@
       "perf_1m": -9.35,
       "perf_3m": -2.51,
       "perf_34d": 2.79
-    },
-    {
-      "ticker": "MAS",
-      "company": "Masco Corp",
-      "industry": "Building Products & Equipment",
-      "market_cap_b": 13.57,
-      "price": 67.26,
-      "change_pct": 0.16,
-      "dollar_volume": "$155M",
-      "adr_pct": 3.0,
-      "perf_1m": -9.33,
-      "perf_3m": -8.96,
-      "perf_34d": 13.81
     },
     {
       "ticker": "ESAB",
@@ -2099,6 +2073,19 @@
       "perf_34d": -3.28
     },
     {
+      "ticker": "J",
+      "company": "Jacobs Solutions Inc",
+      "industry": "Engineering & Construction",
+      "market_cap_b": 13.54,
+      "price": 114.69,
+      "change_pct": 0.57,
+      "dollar_volume": "$102M",
+      "adr_pct": 4.6,
+      "perf_1m": -9.12,
+      "perf_3m": -14.48,
+      "perf_34d": -9.54
+    },
+    {
       "ticker": "SYM",
       "company": "Symbotic Inc",
       "industry": "Specialty Industrial Machinery",
@@ -2138,6 +2125,19 @@
       "perf_34d": -1.12
     },
     {
+      "ticker": "MAS",
+      "company": "Masco Corp",
+      "industry": "Building Products & Equipment",
+      "market_cap_b": 13.57,
+      "price": 67.26,
+      "change_pct": 0.16,
+      "dollar_volume": "$155M",
+      "adr_pct": 3.0,
+      "perf_1m": -8.89,
+      "perf_3m": -8.52,
+      "perf_34d": 14.35
+    },
+    {
       "ticker": "KRMN",
       "company": "Karman Holdings Inc",
       "industry": "Aerospace & Defense",
@@ -2164,6 +2164,19 @@
       "perf_34d": -10.33
     },
     {
+      "ticker": "FBIN",
+      "company": "Fortune Brands Innovations Inc",
+      "industry": "Building Products & Equipment",
+      "market_cap_b": 4.49,
+      "price": 37.65,
+      "change_pct": 3.69,
+      "dollar_volume": "$122M",
+      "adr_pct": 4.6,
+      "perf_1m": -8.71,
+      "perf_3m": -32.51,
+      "perf_34d": 1.45
+    },
+    {
       "ticker": "CDE",
       "company": "Coeur Mining Inc",
       "industry": "Gold",
@@ -2172,9 +2185,9 @@
       "change_pct": -1.12,
       "dollar_volume": "$230M",
       "adr_pct": 5.5,
-      "perf_1m": -8.7,
-      "perf_3m": -28.85,
-      "perf_34d": -7.21
+      "perf_1m": -8.6,
+      "perf_3m": -28.77,
+      "perf_34d": -7.11
     },
     {
       "ticker": "RDDT",
@@ -2801,19 +2814,6 @@
       "perf_34d": 2.56
     },
     {
-      "ticker": "TEL",
-      "company": "TE Connectivity plc",
-      "industry": "Electronic Components",
-      "market_cap_b": 59.19,
-      "price": 202.78,
-      "change_pct": 0.1,
-      "dollar_volume": "$437M",
-      "adr_pct": 3.1,
-      "perf_1m": -5.54,
-      "perf_3m": -16.01,
-      "perf_34d": -3.89
-    },
-    {
       "ticker": "CG",
       "company": "Carlyle Group Inc",
       "industry": "Asset Management",
@@ -2847,10 +2847,23 @@
       "price": 32.68,
       "change_pct": -1.89,
       "dollar_volume": "$59M",
-      "adr_pct": 4.6,
+      "adr_pct": 4.7,
       "perf_1m": -5.18,
       "perf_3m": -15.55,
       "perf_34d": -2.45
+    },
+    {
+      "ticker": "TEL",
+      "company": "TE Connectivity plc",
+      "industry": "Electronic Components",
+      "market_cap_b": 59.19,
+      "price": 202.78,
+      "change_pct": 0.1,
+      "dollar_volume": "$437M",
+      "adr_pct": 3.1,
+      "perf_1m": -5.17,
+      "perf_3m": -15.69,
+      "perf_34d": -3.52
     },
     {
       "ticker": "PVH",
@@ -2892,19 +2905,6 @@
       "perf_34d": -5.89
     },
     {
-      "ticker": "EFX",
-      "company": "Equifax Inc",
-      "industry": "Consulting Services",
-      "market_cap_b": 19.53,
-      "price": 164.04,
-      "change_pct": 0.58,
-      "dollar_volume": "$172M",
-      "adr_pct": 3.6,
-      "perf_1m": -4.89,
-      "perf_3m": -15.35,
-      "perf_34d": -9.79
-    },
-    {
       "ticker": "HLNE",
       "company": "Hamilton Lane Inc",
       "industry": "Asset Management",
@@ -2944,6 +2944,19 @@
       "perf_34d": -4.04
     },
     {
+      "ticker": "EFX",
+      "company": "Equifax Inc",
+      "industry": "Consulting Services",
+      "market_cap_b": 19.53,
+      "price": 164.04,
+      "change_pct": 0.58,
+      "dollar_volume": "$172M",
+      "adr_pct": 3.6,
+      "perf_1m": -4.56,
+      "perf_3m": -15.06,
+      "perf_34d": -9.48
+    },
+    {
       "ticker": "CRWV",
       "company": "CoreWeave Inc",
       "industry": "Software - Infrastructure",
@@ -2955,19 +2968,6 @@
       "perf_1m": -4.22,
       "perf_3m": 6.23,
       "perf_34d": 23.76
-    },
-    {
-      "ticker": "IP",
-      "company": "International Paper Co",
-      "industry": "Packaging & Containers",
-      "market_cap_b": 16.57,
-      "price": 31.29,
-      "change_pct": -0.67,
-      "dollar_volume": "$191M",
-      "adr_pct": 3.4,
-      "perf_1m": -4.17,
-      "perf_3m": -28.92,
-      "perf_34d": -9.41
     },
     {
       "ticker": "THC",
@@ -3009,6 +3009,19 @@
       "perf_34d": 5.25
     },
     {
+      "ticker": "IP",
+      "company": "International Paper Co",
+      "industry": "Packaging & Containers",
+      "market_cap_b": 16.57,
+      "price": 31.29,
+      "change_pct": -0.67,
+      "dollar_volume": "$191M",
+      "adr_pct": 3.4,
+      "perf_1m": -2.74,
+      "perf_3m": -27.86,
+      "perf_34d": -8.06
+    },
+    {
       "ticker": "CRSP",
       "company": "CRISPR Therapeutics AG",
       "industry": "Biotechnology",
@@ -3028,5 +3041,5 @@
     "spx_3m": 8.47,
     "spx_34d": 12.95
   },
-  "fetched_at_utc": "2026-05-22T21:57:08+00:00"
+  "fetched_at_utc": "2026-05-25T21:49:00+00:00"
 }

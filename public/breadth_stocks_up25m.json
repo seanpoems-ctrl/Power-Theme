@@ -126,7 +126,7 @@
       "ticker": "DDOG",
       "company": "Datadog Inc",
       "industry": "Software - Application",
-      "market_cap_b": 79.17,
+      "market_cap_b": 79.14,
       "price": 222.32,
       "change_pct": 1.96,
       "dollar_volume": "$1.0B",
@@ -139,7 +139,7 @@
       "ticker": "RKLB",
       "company": "Rocket Lab Corp",
       "industry": "Aerospace & Defense",
-      "market_cap_b": 78.57,
+      "market_cap_b": 78.59,
       "price": 135.76,
       "change_pct": 8.22,
       "dollar_volume": "$4.4B",
@@ -637,7 +637,7 @@
       "price": 49.5,
       "change_pct": 15.49,
       "dollar_volume": "$434M",
-      "adr_pct": 11.8,
+      "adr_pct": 11.9,
       "perf_1m": 40.91,
       "perf_3m": 139.13,
       "perf_34d": 39.16
@@ -936,7 +936,7 @@
       "price": 19.04,
       "change_pct": -7.3,
       "dollar_volume": "$62M",
-      "adr_pct": 10.2,
+      "adr_pct": 10.3,
       "perf_1m": 31.31,
       "perf_3m": 107.41,
       "perf_34d": 11.93
@@ -984,7 +984,7 @@
       "ticker": "GEN",
       "company": "Gen Digital Inc",
       "industry": "Software - Infrastructure",
-      "market_cap_b": 15.03,
+      "market_cap_b": 14.95,
       "price": 24.82,
       "change_pct": -0.12,
       "dollar_volume": "$138M",
@@ -1755,7 +1755,7 @@
       "price": 86.71,
       "change_pct": 1.55,
       "dollar_volume": "$171M",
-      "adr_pct": 4.5,
+      "adr_pct": 4.6,
       "perf_1m": 18.85,
       "perf_3m": 17.25,
       "perf_34d": 12.44
@@ -1846,7 +1846,7 @@
       "price": 76.94,
       "change_pct": -1.43,
       "dollar_volume": "$77M",
-      "adr_pct": 4.6,
+      "adr_pct": 4.7,
       "perf_1m": 17.79,
       "perf_3m": 9.76,
       "perf_34d": 17.5
@@ -2099,6 +2099,19 @@
       "perf_34d": 28.93
     },
     {
+      "ticker": "VTRS",
+      "company": "Viatris Inc",
+      "industry": "Drug Manufacturers - Specialty & Generic",
+      "market_cap_b": 19.39,
+      "price": 16.65,
+      "change_pct": 1.15,
+      "dollar_volume": "$86M",
+      "adr_pct": 3.4,
+      "perf_1m": 14.96,
+      "perf_3m": 5.26,
+      "perf_34d": 27.45
+    },
+    {
       "ticker": "WCC",
       "company": "Wesco International Inc",
       "industry": "Industrial Distribution",
@@ -2115,7 +2128,7 @@
       "ticker": "ZM",
       "company": "Zoom Communications Inc",
       "industry": "Software - Application",
-      "market_cap_b": 31.14,
+      "market_cap_b": 31.13,
       "price": 105.64,
       "change_pct": 9.19,
       "dollar_volume": "$1.0B",
@@ -2216,19 +2229,6 @@
       "perf_34d": 35.42
     },
     {
-      "ticker": "VTRS",
-      "company": "Viatris Inc",
-      "industry": "Drug Manufacturers - Specialty & Generic",
-      "market_cap_b": 19.39,
-      "price": 16.65,
-      "change_pct": 1.15,
-      "dollar_volume": "$86M",
-      "adr_pct": 3.4,
-      "perf_1m": 14.12,
-      "perf_3m": 4.49,
-      "perf_34d": 26.52
-    },
-    {
       "ticker": "MKSI",
       "company": "MKS Inc",
       "industry": "Scientific & Technical Instruments",
@@ -2297,7 +2297,7 @@
       "ticker": "HEI",
       "company": "Heico Corp",
       "industry": "Aerospace & Defense",
-      "market_cap_b": 35.48,
+      "market_cap_b": 35.5,
       "price": 301.04,
       "change_pct": -0.05,
       "dollar_volume": "$144M",
@@ -2665,7 +2665,7 @@
       "price": 50.15,
       "change_pct": 1.01,
       "dollar_volume": "$77M",
-      "adr_pct": 3.4,
+      "adr_pct": 3.5,
       "perf_1m": 11.59,
       "perf_3m": 11.1,
       "perf_34d": 14.0
@@ -3081,7 +3081,7 @@
       "price": 156.93,
       "change_pct": 2.73,
       "dollar_volume": "$246M",
-      "adr_pct": 4.6,
+      "adr_pct": 4.7,
       "perf_1m": 8.62,
       "perf_3m": 34.46,
       "perf_34d": 31.89
@@ -3324,7 +3324,7 @@
       "ticker": "WDAY",
       "company": "Workday Inc",
       "industry": "Software - Application",
-      "market_cap_b": 32.13,
+      "market_cap_b": 32.0,
       "price": 128.14,
       "change_pct": 5.16,
       "dollar_volume": "$1.4B",
@@ -3506,7 +3506,7 @@
       "ticker": "VIAV",
       "company": "Viavi Solutions Inc",
       "industry": "Communication Equipment",
-      "market_cap_b": 11.58,
+      "market_cap_b": 12.13,
       "price": 49.51,
       "change_pct": 1.08,
       "dollar_volume": "$225M",
@@ -3626,5 +3626,5 @@
     "spx_3m": 8.47,
     "spx_34d": 12.95
   },
-  "fetched_at_utc": "2026-05-22T21:56:34+00:00"
+  "fetched_at_utc": "2026-05-25T21:48:24+00:00"
 }

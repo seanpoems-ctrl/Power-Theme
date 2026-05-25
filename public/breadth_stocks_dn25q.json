@@ -22,7 +22,7 @@
       "ticker": "ELF",
       "company": "e.l.f. Beauty Inc",
       "industry": "Household & Personal Products",
-      "market_cap_b": 3.12,
+      "market_cap_b": 3.14,
       "price": 52.9,
       "change_pct": -0.41,
       "dollar_volume": "$273M",
@@ -195,7 +195,7 @@
       "price": 52.05,
       "change_pct": 3.11,
       "dollar_volume": "$96M",
-      "adr_pct": 5.9,
+      "adr_pct": 6.0,
       "perf_1m": -25.24,
       "perf_3m": -36.99,
       "perf_34d": -29.89
@@ -318,19 +318,6 @@
       "perf_34d": -34.83
     },
     {
-      "ticker": "FBIN",
-      "company": "Fortune Brands Innovations Inc",
-      "industry": "Building Products & Equipment",
-      "market_cap_b": 4.49,
-      "price": 37.65,
-      "change_pct": 3.69,
-      "dollar_volume": "$122M",
-      "adr_pct": 4.6,
-      "perf_1m": -9.36,
-      "perf_3m": -33.0,
-      "perf_34d": 0.72
-    },
-    {
       "ticker": "PONY",
       "company": "Pony AI Inc ADR",
       "industry": "Information Technology Services",
@@ -357,6 +344,19 @@
       "perf_34d": -18.25
     },
     {
+      "ticker": "FBIN",
+      "company": "Fortune Brands Innovations Inc",
+      "industry": "Building Products & Equipment",
+      "market_cap_b": 4.49,
+      "price": 37.65,
+      "change_pct": 3.69,
+      "dollar_volume": "$122M",
+      "adr_pct": 4.6,
+      "perf_1m": -8.71,
+      "perf_3m": -32.51,
+      "perf_34d": 1.45
+    },
+    {
       "ticker": "BLDR",
       "company": "Builders Firstsource Inc",
       "industry": "Building Products & Equipment",
@@ -377,7 +377,7 @@
       "price": 16.3,
       "change_pct": -1.03,
       "dollar_volume": "$305M",
-      "adr_pct": 4.7,
+      "adr_pct": 4.8,
       "perf_1m": -11.94,
       "perf_3m": -31.97,
       "perf_34d": -12.97
@@ -500,19 +500,6 @@
       "perf_34d": -17.24
     },
     {
-      "ticker": "IP",
-      "company": "International Paper Co",
-      "industry": "Packaging & Containers",
-      "market_cap_b": 16.57,
-      "price": 31.29,
-      "change_pct": -0.67,
-      "dollar_volume": "$191M",
-      "adr_pct": 3.4,
-      "perf_1m": -4.17,
-      "perf_3m": -28.92,
-      "perf_34d": -9.41
-    },
-    {
       "ticker": "CDE",
       "company": "Coeur Mining Inc",
       "industry": "Gold",
@@ -521,9 +508,9 @@
       "change_pct": -1.12,
       "dollar_volume": "$230M",
       "adr_pct": 5.5,
-      "perf_1m": -8.7,
-      "perf_3m": -28.85,
-      "perf_34d": -7.21
+      "perf_1m": -8.6,
+      "perf_3m": -28.77,
+      "perf_34d": -7.11
     },
     {
       "ticker": "GFI",
@@ -565,19 +552,6 @@
       "perf_34d": -16.24
     },
     {
-      "ticker": "HL",
-      "company": "Hecla Mining Co",
-      "industry": "Other Precious Metals & Mining",
-      "market_cap_b": 11.39,
-      "price": 16.98,
-      "change_pct": -1.85,
-      "dollar_volume": "$201M",
-      "adr_pct": 6.3,
-      "perf_1m": -9.68,
-      "perf_3m": -28.16,
-      "perf_34d": -12.25
-    },
-    {
       "ticker": "HII",
       "company": "Huntington Ingalls Industries Inc",
       "industry": "Aerospace & Defense",
@@ -589,6 +563,19 @@
       "perf_1m": -10.76,
       "perf_3m": -28.16,
       "perf_34d": -20.3
+    },
+    {
+      "ticker": "HL",
+      "company": "Hecla Mining Co",
+      "industry": "Other Precious Metals & Mining",
+      "market_cap_b": 11.39,
+      "price": 16.98,
+      "change_pct": -1.85,
+      "dollar_volume": "$201M",
+      "adr_pct": 6.3,
+      "perf_1m": -9.66,
+      "perf_3m": -28.14,
+      "perf_34d": -12.23
     },
     {
       "ticker": "IAG",
@@ -628,6 +615,19 @@
       "perf_1m": -8.45,
       "perf_3m": -27.89,
       "perf_34d": -10.75
+    },
+    {
+      "ticker": "IP",
+      "company": "International Paper Co",
+      "industry": "Packaging & Containers",
+      "market_cap_b": 16.57,
+      "price": 31.29,
+      "change_pct": -0.67,
+      "dollar_volume": "$191M",
+      "adr_pct": 3.4,
+      "perf_1m": -2.74,
+      "perf_3m": -27.86,
+      "perf_34d": -8.06
     },
     {
       "ticker": "AEM",
@@ -754,7 +754,7 @@
       "price": 57.36,
       "change_pct": 2.7,
       "dollar_volume": "$163M",
-      "adr_pct": 4.4,
+      "adr_pct": 4.5,
       "perf_1m": -4.56,
       "perf_3m": -26.17,
       "perf_34d": -1.48
@@ -1049,7 +1049,7 @@
       "ticker": "LEN",
       "company": "Lennar Corp",
       "industry": "Residential Construction",
-      "market_cap_b": 21.83,
+      "market_cap_b": 21.82,
       "price": 88.86,
       "change_pct": 0.03,
       "dollar_volume": "$194M",
@@ -1166,7 +1166,7 @@
       "ticker": "WMS",
       "company": "Advanced Drainage Systems Inc",
       "industry": "Building Products & Equipment",
-      "market_cap_b": 10.36,
+      "market_cap_b": 10.19,
       "price": 133.0,
       "change_pct": -1.59,
       "dollar_volume": "$203M",
@@ -1293,19 +1293,6 @@
       "perf_34d": 20.0
     },
     {
-      "ticker": "BMI",
-      "company": "Badger Meter Inc",
-      "industry": "Scientific & Technical Instruments",
-      "market_cap_b": 3.67,
-      "price": 125.84,
-      "change_pct": 4.66,
-      "dollar_volume": "$64M",
-      "adr_pct": 3.7,
-      "perf_1m": 3.29,
-      "perf_3m": -20.32,
-      "perf_34d": -17.17
-    },
-    {
       "ticker": "TEM",
       "company": "Tempus AI Inc",
       "industry": "Health Information Services",
@@ -1330,6 +1317,19 @@
       "perf_1m": -13.69,
       "perf_3m": -20.28,
       "perf_34d": -23.49
+    },
+    {
+      "ticker": "BMI",
+      "company": "Badger Meter Inc",
+      "industry": "Scientific & Technical Instruments",
+      "market_cap_b": 3.67,
+      "price": 125.84,
+      "change_pct": 4.66,
+      "dollar_volume": "$64M",
+      "adr_pct": 3.7,
+      "perf_1m": 3.64,
+      "perf_3m": -20.06,
+      "perf_34d": -16.9
     },
     {
       "ticker": "MTD",
@@ -1508,7 +1508,7 @@
       "price": 77.26,
       "change_pct": 1.01,
       "dollar_volume": "$94M",
-      "adr_pct": 4.2,
+      "adr_pct": 4.3,
       "perf_1m": -11.3,
       "perf_3m": -18.67,
       "perf_34d": -21.13
@@ -1917,19 +1917,6 @@
       "perf_34d": 4.49
     },
     {
-      "ticker": "TEL",
-      "company": "TE Connectivity plc",
-      "industry": "Electronic Components",
-      "market_cap_b": 59.19,
-      "price": 202.78,
-      "change_pct": 0.1,
-      "dollar_volume": "$437M",
-      "adr_pct": 3.1,
-      "perf_1m": -5.54,
-      "perf_3m": -16.01,
-      "perf_34d": -3.89
-    },
-    {
       "ticker": "BZ",
       "company": "Kanzhun Ltd ADR",
       "industry": "Internet Content & Information",
@@ -1937,7 +1924,7 @@
       "price": 13.75,
       "change_pct": -0.36,
       "dollar_volume": "$88M",
-      "adr_pct": 3.6,
+      "adr_pct": 3.7,
       "perf_1m": 0.95,
       "perf_3m": -15.9,
       "perf_34d": 4.48
@@ -1995,6 +1982,19 @@
       "perf_34d": 1.12
     },
     {
+      "ticker": "TEL",
+      "company": "TE Connectivity plc",
+      "industry": "Electronic Components",
+      "market_cap_b": 59.19,
+      "price": 202.78,
+      "change_pct": 0.1,
+      "dollar_volume": "$437M",
+      "adr_pct": 3.1,
+      "perf_1m": -5.17,
+      "perf_3m": -15.69,
+      "perf_34d": -3.52
+    },
+    {
       "ticker": "TTEK",
       "company": "Tetra Tech Inc",
       "industry": "Engineering & Construction",
@@ -2028,7 +2028,7 @@
       "price": 32.68,
       "change_pct": -1.89,
       "dollar_volume": "$59M",
-      "adr_pct": 4.6,
+      "adr_pct": 4.7,
       "perf_1m": -5.18,
       "perf_3m": -15.55,
       "perf_34d": -2.45
@@ -2073,19 +2073,6 @@
       "perf_34d": -6.23
     },
     {
-      "ticker": "EFX",
-      "company": "Equifax Inc",
-      "industry": "Consulting Services",
-      "market_cap_b": 19.53,
-      "price": 164.04,
-      "change_pct": 0.58,
-      "dollar_volume": "$172M",
-      "adr_pct": 3.6,
-      "perf_1m": -4.89,
-      "perf_3m": -15.35,
-      "perf_34d": -9.79
-    },
-    {
       "ticker": "ATAT",
       "company": "Atour Lifestyle Holdings Ltd ADR",
       "industry": "Lodging",
@@ -2128,7 +2115,7 @@
       "ticker": "BABA",
       "company": "Alibaba Group Holding Ltd ADR",
       "industry": "Internet Retail",
-      "market_cap_b": 311.88,
+      "market_cap_b": 311.89,
       "price": 130.0,
       "change_pct": -1.12,
       "dollar_volume": "$1.5B",
@@ -2136,6 +2123,19 @@
       "perf_1m": -4.29,
       "perf_3m": -15.09,
       "perf_34d": 8.59
+    },
+    {
+      "ticker": "EFX",
+      "company": "Equifax Inc",
+      "industry": "Consulting Services",
+      "market_cap_b": 19.53,
+      "price": 164.04,
+      "change_pct": 0.58,
+      "dollar_volume": "$172M",
+      "adr_pct": 3.6,
+      "perf_1m": -4.56,
+      "perf_3m": -15.06,
+      "perf_34d": -9.48
     },
     {
       "ticker": "IRTC",
@@ -2203,19 +2203,6 @@
       "perf_34d": -13.74
     },
     {
-      "ticker": "J",
-      "company": "Jacobs Solutions Inc",
-      "industry": "Engineering & Construction",
-      "market_cap_b": 13.54,
-      "price": 114.69,
-      "change_pct": 0.57,
-      "dollar_volume": "$102M",
-      "adr_pct": 4.6,
-      "perf_1m": -9.41,
-      "perf_3m": -14.75,
-      "perf_34d": -9.83
-    },
-    {
       "ticker": "RGEN",
       "company": "Repligen Corp",
       "industry": "Medical Instruments & Supplies",
@@ -2223,7 +2210,7 @@
       "price": 115.06,
       "change_pct": 1.49,
       "dollar_volume": "$83M",
-      "adr_pct": 5.4,
+      "adr_pct": 5.5,
       "perf_1m": -2.16,
       "perf_3m": -14.56,
       "perf_34d": -0.2
@@ -2242,6 +2229,19 @@
       "perf_34d": 6.33
     },
     {
+      "ticker": "J",
+      "company": "Jacobs Solutions Inc",
+      "industry": "Engineering & Construction",
+      "market_cap_b": 13.54,
+      "price": 114.69,
+      "change_pct": 0.57,
+      "dollar_volume": "$102M",
+      "adr_pct": 4.6,
+      "perf_1m": -9.12,
+      "perf_3m": -14.48,
+      "perf_34d": -9.54
+    },
+    {
       "ticker": "CACI",
       "company": "Caci International Inc",
       "industry": "Information Technology Services",
@@ -2258,7 +2258,7 @@
       "ticker": "HEI",
       "company": "Heico Corp",
       "industry": "Aerospace & Defense",
-      "market_cap_b": 35.48,
+      "market_cap_b": 35.5,
       "price": 301.04,
       "change_pct": -0.05,
       "dollar_volume": "$144M",
@@ -2762,19 +2762,6 @@
       "perf_34d": -3.28
     },
     {
-      "ticker": "CDW",
-      "company": "CDW Corp",
-      "industry": "Information Technology Services",
-      "market_cap_b": 14.16,
-      "price": 110.82,
-      "change_pct": 3.69,
-      "dollar_volume": "$168M",
-      "adr_pct": 5.2,
-      "perf_1m": -18.11,
-      "perf_3m": -11.27,
-      "perf_34d": -10.41
-    },
-    {
       "ticker": "WWD",
       "company": "Woodward Inc",
       "industry": "Aerospace & Defense",
@@ -2799,6 +2786,19 @@
       "perf_1m": -4.77,
       "perf_3m": -10.76,
       "perf_34d": -6.47
+    },
+    {
+      "ticker": "CDW",
+      "company": "CDW Corp",
+      "industry": "Information Technology Services",
+      "market_cap_b": 14.16,
+      "price": 110.82,
+      "change_pct": 3.69,
+      "dollar_volume": "$168M",
+      "adr_pct": 5.2,
+      "perf_1m": -17.62,
+      "perf_3m": -10.75,
+      "perf_34d": -9.87
     },
     {
       "ticker": "INTU",
@@ -2911,5 +2911,5 @@
     "spx_3m": 8.47,
     "spx_34d": 12.95
   },
-  "fetched_at_utc": "2026-05-22T21:55:58+00:00"
+  "fetched_at_utc": "2026-05-25T21:47:49+00:00"
 }
