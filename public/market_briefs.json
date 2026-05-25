@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-05-25 17:05 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Global Risk-On Accumulation",
+    "spy_price": 745.64,
+    "spy_change_pct": 0.39,
+    "vix": 16.59,
+    "hy_oas": 2.78,
+    "yield_curve": 0.43,
+    "credit_status": "Complacent",
+    "s5fi": 61.4,
+    "mmth": 63.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GFS",
+          "company": "GlobalFoundries Inc.",
+          "reason": "Shares surged on news of a new US-backed quantum manufacturing initiative, highlighting significant governmental support for advanced semiconductor production."
+        },
+        {
+          "ticker": "NOK",
+          "company": "Nokia Corporation",
+          "reason": "Stock benefited from reports detailing its aggressive pivot into AI infrastructure solutions, positioning the company for growth in a critical technology segment."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp",
+          "reason": "While no new specific catalyst emerged today, NVDA continues to attract momentum flows driven by its dominant position in AI hardware and ongoing technical strength."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-05-25 08:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Moved on continued AI sector momentum and technical buying, without specific new fundamental catalysts beyond existing industry trends."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-03-31 12:16 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Strong US Risk-On",
-    "spy_price": 641.71,
-    "spy_change_pct": 1.54,
-    "vix": 27.68,
-    "hy_oas": null,
-    "yield_curve": null,
-    "credit_status": "Unknown",
-    "s5fi": 25.0,
-    "mmth": 47.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp",
-          "reason": "Microsoft (MSFT) unveiled a new enterprise AI solution, Project Chronos, designed to significantly enhance cloud infrastructure efficiency, driving analyst upgrades."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc",
-          "reason": "Tesla (TSLA) announced record Q1 delivery numbers, exceeding analyst estimates by a substantial margin, signaling strong demand and production ramp-up."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp",
-          "reason": "NVIDIA (NVDA) experienced continued strong buying pressure, extending its recent uptrend driven by ongoing AI sector enthusiasm and speculative flow."
         }
       ]
     }
