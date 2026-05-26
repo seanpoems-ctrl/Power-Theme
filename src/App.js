@@ -1011,7 +1011,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
                   )}
                 </div>
               ) : selectedTheme.fromEtf ? (
-                /* ETF holdings table — same columns as stock table, weight replaces sub-theme */
+                /* ETF holdings table — same columns as stock table, sub-theme = theme name */
                 <table className="w-full text-xs">
                   <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800">
                     <tr className="text-zinc-500 text-[11px] uppercase tracking-wider">
@@ -1023,35 +1023,42 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
                       <th className="text-right px-3 py-2 font-medium">1M</th>
                       <th className="text-right px-3 py-2 font-medium">RS</th>
                       <th className="text-right px-3 py-2 font-medium hidden sm:table-cell">ADR%</th>
-                      <th className="text-right px-3 py-2 font-medium hidden md:table-cell">Weight %</th>
+                      <th className="text-left px-3 py-2 font-medium hidden md:table-cell">Sub-Theme</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {selectedTheme.stocks.map((h, i) => (
-                      <tr key={`${h.ticker}-${i}`} className="border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors">
-                        <td className="px-4 py-2">
-                          <a
-                            href={`https://finviz.com/quote.ashx?t=${h.ticker}`}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="font-bold text-sky-400 hover:text-sky-300"
-                            onClick={e => e.stopPropagation()}
-                          >
-                            {h.ticker}
-                          </a>
-                        </td>
-                        <td className="px-4 py-2 text-zinc-400 truncate max-w-[140px] hidden sm:table-cell">{h.name || '—'}</td>
-                        <td className="px-3 py-2 text-right text-zinc-600 font-mono">—</td>
-                        <td className="px-3 py-2 text-right text-zinc-600 font-mono">—</td>
-                        <td className="px-3 py-2 text-right text-zinc-600 font-mono">—</td>
-                        <td className="px-3 py-2 text-right text-zinc-600 font-mono">—</td>
-                        <td className="px-3 py-2 text-right text-zinc-600 font-mono">—</td>
-                        <td className="px-3 py-2 text-right text-zinc-600 font-mono hidden sm:table-cell">—</td>
-                        <td className="px-3 py-2 text-right font-mono text-emerald-400 font-semibold hidden md:table-cell">
-                          {h.weight != null ? `${h.weight.toFixed(2)}%` : '—'}
-                        </td>
-                      </tr>
-                    ))}
+                    {selectedTheme.stocks.map((h, i) => {
+                      const fmtPct = (v) => v != null
+                        ? <span className={v >= 0 ? 'text-emerald-400' : 'text-red-400'}>{v >= 0 ? '+' : ''}{v.toFixed(1)}%</span>
+                        : <span className="text-zinc-600">—</span>;
+                      return (
+                        <tr key={`${h.ticker}-${i}`} className="border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors">
+                          <td className="px-4 py-2">
+                            <a
+                              href={`https://finviz.com/quote.ashx?t=${h.ticker}`}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="font-bold text-sky-400 hover:text-sky-300"
+                              onClick={e => e.stopPropagation()}
+                            >
+                              {h.ticker}
+                            </a>
+                          </td>
+                          <td className="px-4 py-2 text-zinc-400 truncate max-w-[140px] hidden sm:table-cell">{h.name || '—'}</td>
+                          <td className="px-3 py-2 text-right text-zinc-200 font-mono">{h.price != null ? `$${h.price.toFixed(2)}` : '—'}</td>
+                          <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_1d)}</td>
+                          <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_1w)}</td>
+                          <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_1m)}</td>
+                          <td className="px-3 py-2 text-right font-mono">
+                            {h.rs != null
+                              ? <span className={h.rs >= 80 ? 'text-emerald-400 font-bold' : h.rs >= 60 ? 'text-zinc-200' : 'text-zinc-500'}>{h.rs}</span>
+                              : <span className="text-zinc-600">—</span>}
+                          </td>
+                          <td className="px-3 py-2 text-right text-zinc-400 hidden sm:table-cell">{h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : '—'}</td>
+                          <td className="px-3 py-2 text-zinc-500 text-[11px] hidden md:table-cell">{selectedTheme.name}</td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
                 </table>
               ) : (

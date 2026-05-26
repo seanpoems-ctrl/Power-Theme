@@ -2103,6 +2103,111 @@ def fetch_etf_holdings(etf_ticker: str) -> list:
         return []
 
 
+def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
+    """
+    Enrich all ETF holdings with price, 1D/1W/1M perf, ADR%, and RS score.
+    Downloads 6 months of daily OHLC data in a single yfinance batch call.
+    RS is a percentile rank within the combined universe of all ETF holding tickers.
+    """
+    import yfinance as yf
+
+    # Collect all unique tickers across all ETFs
+    all_tickers = sorted({
+        h["ticker"]
+        for holdings in etf_holdings_dict.values()
+        for h in holdings
+    })
+    if not all_tickers:
+        return etf_holdings_dict
+
+    logger.info(f"Enriching {len(all_tickers)} ETF holding tickers with price/perf data...")
+    try:
+        hist = yf.download(
+            all_tickers, period="7mo", interval="1d",
+            auto_adjust=True, progress=False, group_by="ticker"
+        )
+        if hist is None or hist.empty:
+            logger.warning("yfinance batch download returned empty for ETF holdings enrichment")
+            return etf_holdings_dict
+    except Exception as e:
+        logger.warning(f"ETF holdings enrichment download failed: {e}")
+        return etf_holdings_dict
+
+    trading_days = {"perf_1d": 2, "perf_1w": 5, "perf_1m": 21}
+
+    # ── Per-ticker stats ────────────────────────────────────────────────────
+    stats: dict[str, dict] = {}
+    composites: dict[str, float] = {}   # 6-month return for RS ranking
+
+    for tkr in all_tickers:
+        try:
+            closes = hist[tkr]["Close"].dropna() if len(all_tickers) > 1 else hist["Close"].dropna()
+            highs  = hist[tkr]["High"].dropna()  if len(all_tickers) > 1 else hist["High"].dropna()
+            lows   = hist[tkr]["Low"].dropna()   if len(all_tickers) > 1 else hist["Low"].dropna()
+        except Exception:
+            continue
+
+        if len(closes) < 2:
+            continue
+
+        price = round(float(closes.iloc[-1]), 2)
+
+        perfs = {}
+        for key, days in trading_days.items():
+            if len(closes) >= days:
+                perfs[key] = round(float((closes.iloc[-1] / closes.iloc[-days] - 1) * 100), 2)
+            else:
+                perfs[key] = None
+
+        # ADR% — 20-day average (High − Low) / Close
+        n_adr = min(20, len(highs), len(lows), len(closes))
+        adr_pct = None
+        if n_adr > 0:
+            try:
+                adr_pct = round(
+                    float(((highs.iloc[-n_adr:].values - lows.iloc[-n_adr:].values)
+                           / closes.iloc[-n_adr:].values).mean() * 100), 1
+                )
+            except Exception:
+                pass
+
+        # 6-month return for RS computation
+        days_6m = min(126, len(closes) - 1)
+        if days_6m > 0:
+            composites[tkr] = float((closes.iloc[-1] / closes.iloc[-days_6m - 1] - 1) * 100)
+
+        stats[tkr] = {"price": price, "adr_pct": adr_pct, **perfs}
+
+    # ── RS percentile within the ETF holdings universe ──────────────────────
+    rs_lookup: dict[str, int] = {}
+    if composites:
+        all_vals = sorted(composites.values())
+        n = len(all_vals)
+        rs_lookup = {
+            tkr: max(1, min(99, round(sum(1 for v in all_vals if v < comp) / n * 98) + 1))
+            for tkr, comp in composites.items()
+        }
+
+    # ── Apply to holdings ────────────────────────────────────────────────────
+    enriched: dict[str, list] = {}
+    for etf_ticker, holdings in etf_holdings_dict.items():
+        enriched[etf_ticker] = []
+        for h in holdings:
+            new_h = dict(h)
+            s = stats.get(h["ticker"], {})
+            new_h["price"]    = s.get("price")
+            new_h["perf_1d"]  = s.get("perf_1d")
+            new_h["perf_1w"]  = s.get("perf_1w")
+            new_h["perf_1m"]  = s.get("perf_1m")
+            new_h["adr_pct"]  = s.get("adr_pct")
+            new_h["rs"]       = rs_lookup.get(h["ticker"])
+            enriched[etf_ticker].append(new_h)
+
+    enriched_count = sum(1 for s in stats.values() if s.get("price") is not None)
+    logger.info(f"ETF holdings enrichment complete: {enriched_count}/{len(all_tickers)} tickers enriched")
+    return enriched
+
+
 def _classify_etf_signal(detail: dict, closes: list) -> tuple:
     """
     BREAKOUT: Price broke above SMA20 (purple line in Finviz) which was acting
@@ -2222,6 +2327,7 @@ def main():
     etf_holdings = {}
     for etf in unique_etfs:
         etf_holdings[etf] = fetch_etf_holdings(etf)
+    etf_holdings = enrich_etf_holdings(etf_holdings)   # add price/perf/RS
     output["etf_holdings"] = etf_holdings
 
     # Scan all unique theme ETFs — let technical conditions (breakout/support) do the filtering.
