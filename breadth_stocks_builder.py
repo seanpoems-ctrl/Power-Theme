@@ -88,6 +88,24 @@ SORT_FIELD_MAP: dict[str, str] = {
     "dn13_34": "perf_34d",
 }
 
+# Server-side threshold: drop stocks where the yfinance-computed perf field
+# doesn't actually meet the scanner's stated minimum.  Finviz's own filters
+# can return borderline stocks that are slightly below the threshold once
+# yfinance recalculates using exact calendar periods.
+# Positive value → field must be >= threshold; negative → must be <= threshold.
+PERF_THRESHOLD_MAP: dict[str, tuple[str, float]] = {
+    "up4":      ("change_pct", 4),
+    "dn4":      ("change_pct", -4),
+    "up25q":    ("perf_qtd",   25),
+    "dn25q":    ("perf_qtd",  -25),
+    "up25m":    ("perf_mtd",   25),
+    "dn25m":    ("perf_mtd",  -25),
+    "up50m":    ("perf_mtd",   50),
+    "dn50m":    ("perf_mtd",  -50),
+    "up13_34":  ("perf_34d",   13),
+    "dn13_34":  ("perf_34d",  -13),
+}
+
 BROWSER_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -495,6 +513,26 @@ async def _fetch_filter(filter_key: str) -> dict[str, Any]:
     ]
     logger.info("[%s] %d → %d stocks after liquidity filter ($%.0fM, ADR>=%.1f%%)",
                 filter_key, before, len(qualifying), MIN_DOLLAR_VOL/1e6, MIN_ADR_PCT)
+
+    # Period-threshold filter: enforce the scanner's stated minimum using the
+    # yfinance-computed field.  Stocks where the field is None (yfinance failed)
+    # are kept so we don't silently discard data; only confirmed failures are dropped.
+    if filter_key in PERF_THRESHOLD_MAP:
+        perf_field, perf_min = PERF_THRESHOLD_MAP[filter_key]
+        before = len(qualifying)
+        if perf_min >= 0:
+            qualifying = [
+                s for s in qualifying
+                if s.get(perf_field) is None or s[perf_field] >= perf_min
+            ]
+        else:
+            qualifying = [
+                s for s in qualifying
+                if s.get(perf_field) is None or s[perf_field] <= perf_min
+            ]
+        logger.info("[%s] %d → %d stocks after period threshold (%s %s %.0f%%)",
+                    filter_key, before, len(qualifying), perf_field,
+                    ">=" if perf_min >= 0 else "<=", perf_min)
 
     # Re-sort by the canonical field for this filter (nulls last)
     sort_field = SORT_FIELD_MAP.get(filter_key, "change_pct")
