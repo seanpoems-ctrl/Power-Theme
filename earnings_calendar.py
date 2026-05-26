@@ -46,6 +46,7 @@ Writes public/earnings_calendar.json with flat schema:
 
 import json
 import logging
+import os
 import re
 import time
 from datetime import date, datetime, timedelta, timezone
@@ -54,8 +55,17 @@ from zoneinfo import ZoneInfo
 
 import requests
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
+
+# Finnhub API key — set FINNHUB_API_KEY in .env or environment
+FINNHUB_KEY = os.getenv("FINNHUB_API_KEY") or os.getenv("REACT_APP_FINNHUB_KEY") or ""
 
 ET           = ZoneInfo("America/New_York")
 TODAY_ET     = datetime.now(ET).date()
@@ -422,6 +432,40 @@ def _merge(*source_lists) -> dict[str, dict]:
     return merged
 
 
+# ─── Finnhub EPS fallback ─────────────────────────────────────────────────────
+
+def _fetch_finnhub_eps(ticker: str) -> tuple:
+    """
+    Fetch the most recent quarterly EPS actual + surprise% from Finnhub.
+    Returns (eps_act, eps_surp_pct) — both None on any failure.
+    Finnhub endpoint: GET /api/v1/stock/earnings?symbol=X&limit=4&token=KEY
+    Response: [{ actual, estimate, period, surprise, surprisePercent, ... }]
+    """
+    if not FINNHUB_KEY:
+        return None, None
+    try:
+        url = (
+            f"https://finnhub.io/api/v1/stock/earnings"
+            f"?symbol={ticker}&limit=4&token={FINNHUB_KEY}"
+        )
+        resp = requests.get(url, timeout=10)
+        if not resp.ok:
+            return None, None
+        data = resp.json()
+        if not isinstance(data, list) or not data:
+            return None, None
+        # Most recent quarter is first; skip entries where actual is null
+        for entry in data:
+            eps_act  = entry.get("actual")
+            surp_pct = entry.get("surprisePercent")
+            if eps_act is not None:
+                return _safe_float(eps_act), _safe_float(surp_pct)
+        return None, None
+    except Exception as exc:
+        logger.debug("Finnhub EPS fetch failed for %s: %s", ticker, exc)
+        return None, None
+
+
 # ─── yfinance enrichment ──────────────────────────────────────────────────────
 
 def _enrich_with_yfinance(records: list[dict]) -> list[dict]:
@@ -528,6 +572,16 @@ def _enrich_with_yfinance(records: list[dict]) -> list[dict]:
                                 eps_estimate = _safe_float(row[est_col])
             except Exception:
                 pass
+
+            # ── Finnhub fallback: fill eps_act / eps_surp_pct if yfinance missed ──
+            if eps_act is None and FINNHUB_KEY:
+                fh_act, fh_surp = _fetch_finnhub_eps(ticker)
+                if fh_act is not None:
+                    eps_act      = fh_act
+                    eps_surp_pct = fh_surp
+                    logger.debug("  %s: EPS actual from Finnhub: %.2f (surp %.1f%%)",
+                                 ticker, eps_act, eps_surp_pct or 0)
+                time.sleep(0.12)   # Finnhub free tier: 60 req/min
 
             # ── Revenue actual from quarterly_financials ─────────────────────
             rev_act      = None
