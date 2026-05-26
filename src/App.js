@@ -870,9 +870,9 @@ const HeroZone = ({ data, themesCount, tickersCount }) => {
   );
 };
 
-const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt }) => {
+const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt, etfHoldings = {} }) => {
   const lang = useLang();
-  const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks, inTop5 }
+  const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks, inTop5, fromEtf }
 
   const heatData = useMemo(() => {
     const rankings = finvizThemeRankings || [];
@@ -912,13 +912,19 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt 
   const handleCardClick = (itemName) => {
     const allSources = [...(themes || []), ...(heatmapThemes || [])];
     const norm = allSources.find(t => t.name?.toLowerCase() === itemName.toLowerCase());
-    if (!norm) { setSelectedTheme({ name: itemName, stocks: [], inTop5: false }); return; }
+    if (!norm) {
+      // Not in top-5 themes — try ETF holdings fallback
+      const etfTicker = THEME_ETF_MAP[itemName];
+      const holdings = etfTicker ? (etfHoldings[etfTicker] ?? []) : [];
+      setSelectedTheme({ name: itemName, stocks: holdings, inTop5: false, fromEtf: etfTicker || null });
+      return;
+    }
     const themeObj = norm.subthemes ? norm : { ...norm, subthemes: [{ name: norm.name, stocks: norm.stocks || [] }] };
     const stocks = themeObj.subthemes.flatMap(s =>
       (s.stocks || []).map(st => ({ ...st, _subtheme: s.name }))
     );
     const sorted = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0));
-    setSelectedTheme({ name: itemName, stocks: sorted, inTop5: true });
+    setSelectedTheme({ name: itemName, stocks: sorted, inTop5: true, fromEtf: null });
   };
 
   if (!topBottom.length) return null;
@@ -967,7 +973,14 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt 
             <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
               <div>
                 <div className="text-sm font-bold text-zinc-100">{selectedTheme.name}</div>
-                <div className="text-[11px] text-zinc-500 mt-0.5">{selectedTheme.stocks.length} {lang === 'zh' ? '檔股票' : 'stocks'}</div>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <span className="text-[11px] text-zinc-500">{selectedTheme.stocks.length} {lang === 'zh' ? '檔股票' : 'stocks'}</span>
+                  {selectedTheme.fromEtf && (
+                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-500/15 border border-sky-500/30 text-sky-400">
+                      {selectedTheme.fromEtf} ETF
+                    </span>
+                  )}
+                </div>
               </div>
               <button
                 onClick={() => setSelectedTheme(null)}
@@ -984,7 +997,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt 
                   {selectedTheme.inTop5 === false ? (
                     <>
                       <div className="text-zinc-400 text-sm font-medium">
-                        {lang === 'zh' ? '此主題未進入今日前5名' : 'This theme is not in today\'s top 5'}
+                        {lang === 'zh' ? '此主題未進入今日前5名，且無 ETF 持股資料' : 'Not in today\'s top 5 and no ETF holdings available'}
                       </div>
                       <div className="text-zinc-600 text-xs leading-relaxed">
                         {lang === 'zh' ? '個股資料僅收錄表現最強的前5個主題。' : 'Stock data is only collected for the top 5 performing themes each day.'}
@@ -997,7 +1010,40 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt 
                     </>
                   )}
                 </div>
+              ) : selectedTheme.fromEtf ? (
+                /* ETF holdings table — weight-sorted, no price/perf data */
+                <table className="w-full text-xs">
+                  <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800">
+                    <tr className="text-zinc-500 text-[11px] uppercase tracking-wider">
+                      <th className="w-8 text-right px-3 py-2 font-medium">#</th>
+                      <th className="text-left px-4 py-2 font-medium">Ticker</th>
+                      <th className="text-left px-4 py-2 font-medium">{lang === 'zh' ? '公司' : 'Company'}</th>
+                      <th className="text-right px-4 py-2 font-medium">Weight %</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {selectedTheme.stocks.map((h, i) => (
+                      <tr key={`${h.ticker}-${i}`} className="border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors">
+                        <td className="px-3 py-2 text-right font-mono text-zinc-600">{i + 1}</td>
+                        <td className="px-4 py-2">
+                          <a
+                            href={`https://finviz.com/quote.ashx?t=${h.ticker}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-bold text-sky-400 hover:text-sky-300"
+                            onClick={e => e.stopPropagation()}
+                          >
+                            {h.ticker}
+                          </a>
+                        </td>
+                        <td className="px-4 py-2 text-zinc-300 truncate max-w-[220px]">{h.name || '—'}</td>
+                        <td className="px-4 py-2 text-right font-mono text-emerald-400 font-semibold">{h.weight != null ? `${h.weight.toFixed(2)}%` : '—'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               ) : (
+                /* Full stock table — top-5 theme data */
                 <table className="w-full text-xs">
                   <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800">
                     <tr className="text-zinc-500 text-[11px] uppercase tracking-wider">
@@ -7847,7 +7893,7 @@ const filtered = useMemo(() => {
           {/* ── CENTER MAIN CONTENT ──────────────────────────────── */}
           <main className="flex-1 min-w-0 flex flex-col gap-3">
             <HeroZone data={data} themesCount={filtered.length} tickersCount={unique.length}/>
-            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} generatedAt={data?.generated_at}/>
+            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}}/>
             {data && <Leaderboard
               themeRankings={data.theme_rankings}
               industryRankings={data.industry_rankings}
