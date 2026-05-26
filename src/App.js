@@ -971,16 +971,16 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
           >
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
-              <div>
-                <div className="text-sm font-bold text-zinc-100">{selectedTheme.name}</div>
-                <div className="flex items-center gap-2 mt-0.5">
-                  <span className="text-[11px] text-zinc-500">{selectedTheme.stocks.length} {lang === 'zh' ? '檔股票' : 'stocks'}</span>
-                  {selectedTheme.fromEtf && (
-                    <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-500/15 border border-sky-500/30 text-sky-400">
-                      {selectedTheme.fromEtf} ETF
-                    </span>
-                  )}
-                </div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <span className="text-sm font-semibold text-zinc-100">{selectedTheme.name}</span>
+                <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">
+                  {selectedTheme.stocks.length} {lang === 'zh' ? '檔股票' : 'stocks'}{selectedTheme.inTop5 ? ` · ${lang === 'zh' ? '依 RS 排序' : 'sorted by RS'}` : selectedTheme.fromEtf ? ` · ${lang === 'zh' ? '依權重排序' : 'sorted by weight'}` : ''}
+                </span>
+                {selectedTheme.fromEtf && (
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-500/15 border border-sky-500/30 text-sky-400">
+                    {selectedTheme.fromEtf} ETF
+                  </span>
+                )}
               </div>
               <button
                 onClick={() => setSelectedTheme(null)}
