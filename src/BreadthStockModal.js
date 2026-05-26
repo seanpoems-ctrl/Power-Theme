@@ -804,16 +804,16 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
 
   return (
     <div className="border-t border-zinc-800 first:border-t-0">
-      {/* Industry header row */}
+      {/* Industry header row — grid matches GroupView header exactly */}
       <div
-        className="group flex cursor-pointer items-center gap-2 px-3 py-2 hover:bg-zinc-800/40"
+        className="group grid grid-cols-[16px_1fr_40px_60px_48px_auto] cursor-pointer items-center gap-2 px-3 py-2 hover:bg-zinc-800/40"
         onClick={() => setOpen((o) => !o)}
       >
         <span className="text-zinc-500 text-xs">{open ? "▾" : "▸"}</span>
-        <span className="flex-1 text-sm font-medium text-zinc-200">{industry}</span>
-        <span className="text-xs text-zinc-500 w-8 text-right">{items.length}</span>
-        <span className="text-xs text-zinc-600 w-14 text-right">{countPct != null ? `${countPct.toFixed(1)}%` : "—"}</span>
-        <span className={`text-xs font-mono w-12 text-right ${rsColor(groupRS)}`}>{fmtRS(groupRS)}</span>
+        <span className="text-sm font-medium text-zinc-200">{industry}</span>
+        <span className="text-xs text-zinc-500 text-right">{items.length}</span>
+        <span className="text-xs text-zinc-600 text-right">{countPct != null ? `${countPct.toFixed(1)}%` : "—"}</span>
+        <span className={`text-xs font-mono text-right ${rsColor(groupRS)}`}>{fmtRS(groupRS)}</span>
         <span className="opacity-0 transition-opacity group-hover:opacity-100" onClick={(e) => e.stopPropagation()}>
           {onAddToClipboard
             ? <AddToClipboardButton label={industry} tickers={tickers} filter={filter} onAdd={onAddToClipboard} />
@@ -993,14 +993,14 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
 
   return (
     <div>
-      {/* Industry / Count / Count% / RS header — spacers match data-row chevron + CopyButton */}
-      <div className="flex items-center gap-2 border-b border-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-600">
-        <span className="w-3 shrink-0" />  {/* aligns with ▸ chevron in data rows */}
-        <span className="flex-1">Industry</span>
-        <button onClick={() => handleGroupSort("count")} className="w-8 text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">Count<GroupSortIcon colKey="count"/></button>
-        <button onClick={() => handleGroupSort("countPct")} className="w-14 text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">Count%<GroupSortIcon colKey="countPct"/></button>
-        <button onClick={() => handleGroupSort("rs")} className="w-12 text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">RS<GroupSortIcon colKey="rs"/></button>
-        <span className="invisible pointer-events-none shrink-0">  {/* aligns with hover CopyButton */}
+      {/* Industry / Count / Count% / RS header — grid mirrors GroupRow data grid exactly */}
+      <div className="grid grid-cols-[16px_1fr_40px_60px_48px_auto] items-center gap-2 border-b border-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-600">
+        <span />  {/* chevron column */}
+        <span>Industry</span>
+        <button onClick={() => handleGroupSort("count")} className="text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">Count<GroupSortIcon colKey="count"/></button>
+        <button onClick={() => handleGroupSort("countPct")} className="text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">Count%<GroupSortIcon colKey="countPct"/></button>
+        <button onClick={() => handleGroupSort("rs")} className="text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">RS<GroupSortIcon colKey="rs"/></button>
+        <span className="invisible pointer-events-none">
           <CopyButton tickers={[]} />
         </span>
       </div>
