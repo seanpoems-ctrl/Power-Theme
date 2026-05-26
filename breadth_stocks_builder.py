@@ -430,7 +430,7 @@ async def _fetch_page(client: httpx.AsyncClient, path: str, retries: int = 3) ->
     return ""
 
 
-async def _fetch_filter(filter_key: str) -> dict[str, Any]:
+async def _fetch_filter(filter_key: str, rs_lookup: dict[str, int] | None = None) -> dict[str, Any]:
     path, sort_asc = FILTER_MAP[filter_key]
     label = FILTER_LABELS[filter_key]
     now = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
@@ -534,6 +534,11 @@ async def _fetch_filter(filter_key: str) -> dict[str, Any]:
                     filter_key, before, len(qualifying), perf_field,
                     ">=" if perf_min >= 0 else "<=", perf_min)
 
+    # Apply IBD RS from pre-built TradingView universe lookup
+    if rs_lookup:
+        for s in qualifying:
+            s["rs_ibd"] = rs_lookup.get(s["ticker"])
+
     # Re-sort by the canonical field for this filter (nulls last)
     sort_field = SORT_FIELD_MAP.get(filter_key, "change_pct")
     qualifying.sort(
@@ -561,13 +566,59 @@ async def _fetch_filter(filter_key: str) -> dict[str, Any]:
 # TradingView screener — ATR Ext + >50 DMA scanner builders
 # ---------------------------------------------------------------------------
 
-def _build_tv_scanners_sync() -> tuple[dict, dict]:
-    """
-    Use TradingView screener to build:
-      - atr_ext    : stocks where |change%| > 10 × (ATR / close × 100)
-      - above50dma : stocks where close > SMA50
+# ---------------------------------------------------------------------------
+# IBD RS helpers
+# ---------------------------------------------------------------------------
 
-    Returns (atr_ext_data, above50dma_data).
+def _ibd_composite(p3m: float | None, p6m: float | None, p12m: float | None) -> float | None:
+    """
+    IBD-style RS composite using incremental quarterly returns.
+      Q4 (0-3 mo, weight 40%): p3m
+      Q3 (3-6 mo, weight 20%): incremental from p3m→p6m
+      Q2+Q1 (6-12 mo, weight 40%): incremental from p6m→p12m
+    Returns None when required data is missing or NaN.
+    """
+    def ok(v): return v is not None and v == v  # not None and not NaN
+
+    if not (ok(p3m) and ok(p12m)):
+        return None
+
+    q4 = p3m
+    if ok(p6m):
+        q3   = ((1 + p6m  / 100) / (1 + p3m  / 100) - 1) * 100
+        q2q1 = ((1 + p12m / 100) / (1 + p6m  / 100) - 1) * 100
+        return 0.4 * q4 + 0.2 * q3 + 0.4 * q2q1
+    else:
+        # p6m unavailable — fold remaining 60% onto the 3-12 mo incremental
+        rem = ((1 + p12m / 100) / (1 + p3m / 100) - 1) * 100
+        return 0.4 * q4 + 0.6 * rem
+
+
+def _build_rs_lookup(composites: dict[str, float]) -> dict[str, int]:
+    """
+    Rank a dict of {ticker: composite_score} as percentile 1-99.
+    Ties are broken by fraction (standard competition ranking).
+    """
+    if not composites:
+        return {}
+    all_vals = sorted(composites.values())
+    n = len(all_vals)
+    result: dict[str, int] = {}
+    for tkr, comp in composites.items():
+        below = sum(1 for v in all_vals if v < comp)
+        result[tkr] = max(1, min(99, round(below / n * 98) + 1))
+    return result
+
+
+def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
+    """
+    Use TradingView screener (~8 000+ US stocks) to:
+      1. Build the IBD RS universe: fetch Perf.3M / Perf.6M / Perf.Y,
+         compute the IBD composite, rank 1-99 → returns rs_lookup dict.
+      2. atr_ext    : stocks where |change%| > 10 × (ATR / close × 100)
+      3. above50dma : stocks where close > SMA50
+
+    Returns (rs_lookup, atr_ext_data, above50dma_data).
     Runs synchronously; call via asyncio.to_thread in async context.
     """
     now = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
@@ -585,15 +636,16 @@ def _build_tv_scanners_sync() -> tuple[dict, dict]:
         from tradingview_screener import Query, col as tv_col  # type: ignore
     except ImportError as exc:
         logger.warning("tradingview_screener not installed: %s", exc)
-        return empty_atr, empty_dma
+        return {}, empty_atr, empty_dma
 
     try:
-        logger.info("Fetching TradingView screener for ATR Ext / >50 DMA scanners …")
+        logger.info("Fetching TradingView screener for RS universe / ATR Ext / >50 DMA …")
         _, df = (
             Query()
             .select(
                 "name", "description", "close", "change", "ATR", "SMA50",
                 "industry", "market_cap_basic", "average_volume_10d_calc", "sector",
+                "Perf.3M", "Perf.6M", "Perf.Y",   # IBD RS inputs
             )
             .where(
                 tv_col("close") >= 2,
@@ -606,11 +658,11 @@ def _build_tv_scanners_sync() -> tuple[dict, dict]:
         )
     except Exception as exc:
         logger.warning("TradingView screener fetch failed: %s", exc)
-        return empty_atr, empty_dma
+        return {}, empty_atr, empty_dma
 
     if df is None or getattr(df, "empty", True):
         logger.warning("TradingView screener returned empty result")
-        return empty_atr, empty_dma
+        return {}, empty_atr, empty_dma
 
     logger.info("TradingView screener: %d rows fetched", len(df))
 
@@ -622,6 +674,26 @@ def _build_tv_scanners_sync() -> tuple[dict, dict]:
     df = df[df["close"] > 0].copy()
     df["atr_pct"] = df["ATR"] / df["close"] * 100  # ATR as % of price
 
+    # ── Build IBD RS universe ────────────────────────────────────────────────
+    composites: dict[str, float] = {}
+    for _, row in df.iterrows():
+        tkr = str(row["name"])
+        p3m  = row.get("Perf.3M")
+        p6m  = row.get("Perf.6M")
+        p12m = row.get("Perf.Y")
+        try:
+            p3m  = float(p3m)  if p3m  is not None else None
+            p6m  = float(p6m)  if p6m  is not None else None
+            p12m = float(p12m) if p12m is not None else None
+        except (TypeError, ValueError):
+            p3m = p6m = p12m = None
+        c = _ibd_composite(p3m, p6m, p12m)
+        if c is not None:
+            composites[tkr] = c
+
+    rs_lookup = _build_rs_lookup(composites)
+    logger.info("IBD RS universe: %d stocks ranked", len(rs_lookup))
+
     def _cap_b(row):
         v = row.get("market_cap_basic")
         try:
@@ -630,15 +702,17 @@ def _build_tv_scanners_sync() -> tuple[dict, dict]:
             return None
 
     def _base(row):
+        tkr      = str(row["name"])
         industry = str(row.get("industry") or row.get("sector") or "")
         return {
-            "ticker":      str(row["name"]),
+            "ticker":      tkr,
             "company":     str(row.get("description") or ""),
             "industry":    industry,
             "price":       round(float(row["close"]), 2),
             "change_pct":  round(float(row["change"]), 2),
             "adr_pct":     round(float(row["atr_pct"]), 1),
             "market_cap_b": _cap_b(row),
+            "rs_ibd":      rs_lookup.get(tkr),
         }
 
     # ── ATR Ext scanner ──────────────────────────────────────────────────────
@@ -687,7 +761,7 @@ def _build_tv_scanners_sync() -> tuple[dict, dict]:
         "fetched_at_utc": now,
     }
 
-    return atr_data, dma_data
+    return rs_lookup, atr_data, dma_data
 
 
 # ---------------------------------------------------------------------------
@@ -716,6 +790,7 @@ def _build_compact_history(all_data: dict[str, dict], date_et: str) -> None:
                 "qtd":  s.get("perf_qtd"),
                 "mtd":  s.get("perf_mtd"),
                 "d34":  s.get("perf_34d"),
+                "rs":   s.get("rs_ibd"),             # IBD RS 1-99
             }
             for s in stocks[:MAX_PER_FILTER]
         ]
@@ -739,11 +814,27 @@ async def main() -> None:
     except Exception:
         date_et = datetime.now().strftime("%Y-%m-%d")
 
+    # ── TradingView: build IBD RS universe + ATR Ext + >50 DMA ─────────────
+    # Runs FIRST so rs_lookup is available for all Finviz filter enrichments.
+    logger.info("=== Building TradingView RS universe / ATR Ext / >50 DMA ===")
+    t0 = monotonic()
+    rs_lookup: dict[str, int] = {}
+    try:
+        rs_lookup, atr_data, dma_data = await asyncio.to_thread(_build_tv_scanners_sync)
+    except Exception as exc:
+        logger.error("TradingView scanners failed: %s", exc)
+        errors.extend(["atr_ext", "above50dma"])
+        atr_data = {"ok": False, "filter": "atr_ext",    "label": "10x ATR Extended",
+                    "stocks": [], "count": 0, "fetched_at_utc": datetime.now(timezone.utc).isoformat()}
+        dma_data = {"ok": False, "filter": "above50dma", "label": ">50 DMA",
+                    "stocks": [], "count": 0, "fetched_at_utc": datetime.now(timezone.utc).isoformat()}
+    logger.info("TradingView done (%.1fs) — RS universe: %d tickers", monotonic() - t0, len(rs_lookup))
+
     for filter_key in FILTER_MAP:
         logger.info("=== Processing filter: %s ===", filter_key)
         t0 = monotonic()
         try:
-            data = await _fetch_filter(filter_key)
+            data = await _fetch_filter(filter_key, rs_lookup)
         except Exception as exc:
             logger.error("[%s] failed: %s", filter_key, exc)
             errors.append(filter_key)
@@ -762,19 +853,6 @@ async def main() -> None:
 
         # polite delay between filters
         await asyncio.sleep(1.0)
-
-    # ── TradingView-based scanners: ATR Ext + >50 DMA ────────────────────────
-    logger.info("=== Building TradingView scanners: atr_ext + above50dma ===")
-    t0 = monotonic()
-    try:
-        atr_data, dma_data = await asyncio.to_thread(_build_tv_scanners_sync)
-    except Exception as exc:
-        logger.error("TradingView scanners failed: %s", exc)
-        errors.extend(["atr_ext", "above50dma"])
-        atr_data = {"ok": False, "filter": "atr_ext",    "label": "10x ATR Extended",
-                    "stocks": [], "count": 0, "fetched_at_utc": datetime.now(timezone.utc).isoformat()}
-        dma_data = {"ok": False, "filter": "above50dma", "label": ">50 DMA",
-                    "stocks": [], "count": 0, "fetched_at_utc": datetime.now(timezone.utc).isoformat()}
 
     for key, data in [("atr_ext", atr_data), ("above50dma", dma_data)]:
         all_data[key] = data
