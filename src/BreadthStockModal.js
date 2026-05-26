@@ -1091,19 +1091,27 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
     return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
 
-  // Client-side threshold guard: enforce each scanner's minimum perf cutoff
-  // Only applied to latest data since historical compact data already passed Finviz filter
+  // Client-side threshold guard: enforce each scanner's minimum perf cutoff.
+  // Uses the NATIVE field directly (no fallback) so that:
+  //   - Old JSON files that lack perf_qtd/perf_mtd/perf_34d pass through unfiltered.
+  //   - Regenerated JSON files with the native field get proper threshold enforcement.
+  //   - change_pct is always native, so dn4/up4 are always enforced.
+  // Applied to both latest and historical rows so every click shows clean data.
   const displayStocks = useMemo(() => {
-    if (!isLatest) return stocks;
     const threshold = PERF_THRESHOLD[filter];
     if (threshold == null) return stocks;
     const field = PERF_FIELD[filter] ?? "change_pct";
-    if (threshold > 0) {
-      return stocks.filter((s) => (getPerfValue(s, field) ?? -Infinity) >= threshold);
-    } else {
-      return stocks.filter((s) => (getPerfValue(s, field) ?? Infinity) <= threshold);
-    }
-  }, [stocks, filter, isLatest]);
+
+    return stocks.filter((s) => {
+      const val = s[field] ?? null;
+      if (val == null) {
+        // Native field absent: pass through for period fields (old JSON / historical),
+        // but exclude for change_pct (should always be present).
+        return field !== "change_pct";
+      }
+      return threshold > 0 ? val >= threshold : val <= threshold;
+    });
+  }, [stocks, filter]);
 
   const allTickers = displayStocks.map((s) => s.ticker);
 
@@ -1130,7 +1138,7 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
             </div>
             {!loading && (
               <p className="text-xs text-zinc-500">
-                {stocks.length} stocks{isLatest ? " · min $1B mkt cap" : " · historical snapshot"}
+                {displayStocks.length} stocks{isLatest ? " · min $1B mkt cap" : " · historical snapshot"}
               </p>
             )}
           </div>
