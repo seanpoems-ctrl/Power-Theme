@@ -669,11 +669,15 @@ def _build_compact_history(all_data: dict[str, dict], date_et: str) -> None:
         stocks = data.get("stocks") or []
         compact["filters"][filter_key] = [
             {
-                "t":  s.get("ticker", ""),
-                "co": s.get("company", ""),
-                "p":  s.get("price"),
-                "c":  s.get("change_pct"),
-                "adr": s.get("adr_pct"),
+                "t":    s.get("ticker", ""),
+                "co":   s.get("company", ""),
+                "p":    s.get("price"),
+                "c":    s.get("change_pct"),
+                "adr":  s.get("adr_pct"),
+                "dv":   s.get("dollar_volume"),      # e.g. "$12.5M"
+                "qtd":  s.get("perf_qtd"),
+                "mtd":  s.get("perf_mtd"),
+                "d34":  s.get("perf_34d"),
             }
             for s in stocks[:MAX_PER_FILTER]
         ]

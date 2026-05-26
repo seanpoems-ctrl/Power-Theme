@@ -1008,18 +1008,20 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
 
 function normalizeHistoricalStock(s) {
   return {
-    ticker:        s.t  ?? "",
-    company:       s.co ?? "",
-    price:         s.p  ?? null,
-    change_pct:    s.c  ?? null,
-    adr_pct:       s.adr ?? null,
-    dollar_volume: null,
-    industry:      null,
-    market_cap_b:  null,
-    perf_1m:       null,
-    perf_3m:       null,
-    perf_34d:      null,
-    atr_ext_val:   null,
+    ticker:         s.t   ?? "",
+    company:        s.co  ?? "",
+    price:          s.p   ?? null,
+    change_pct:     s.c   ?? null,
+    adr_pct:        s.adr ?? null,
+    dollar_volume:  s.dv  ?? null,
+    perf_qtd:       s.qtd ?? null,
+    perf_mtd:       s.mtd ?? null,
+    perf_34d:       s.d34 ?? null,
+    industry:       null,
+    market_cap_b:   null,
+    perf_1m:        null,
+    perf_3m:        null,
+    atr_ext_val:    null,
     above50dma_pct: null,
   };
 }
