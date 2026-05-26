@@ -5096,12 +5096,54 @@ const GeminiBreathAnalysis = ({ mc, internalsData }) => {
   );
 };
 
-const MarketBreadthTab = ({ data, internalsData, econData, onThemeClick }) => {
+const MarketBreadthTab = ({ data, internalsData, econData }) => {
   const mc  = data?.market_condition || {};
   const adv = mc.adv_dec;
   const hl  = mc.new_hl;
   const s50 = mc.sma50_counts;
   const s200= mc.sma200_counts;
+
+  // ── Leading Themes modal ──────────────────────────────────────────────────────
+  const [selectedLeadingTheme, setSelectedLeadingTheme] = useState(null);
+  const [ltSort, setLtSort] = useState({ col: null, dir: 'desc' });
+
+  React.useEffect(() => { setLtSort({ col: null, dir: 'desc' }); }, [selectedLeadingTheme?.name]);
+
+  const handleLeadingThemeClick = (themeName) => {
+    const allSources = [...(data?.themes || []), ...(data?.heatmap_themes || [])];
+    const norm = allSources.find(t => t.name?.toLowerCase() === themeName.toLowerCase());
+    if (!norm) {
+      const etfTicker = THEME_ETF_MAP[themeName];
+      const holdings = etfTicker ? ((data?.etf_holdings || {})[etfTicker] ?? []) : [];
+      setSelectedLeadingTheme({ name: themeName, stocks: holdings, inTop5: false, fromEtf: etfTicker || null });
+      return;
+    }
+    const themeObj = norm.subthemes ? norm : { ...norm, subthemes: [{ name: norm.name, stocks: norm.stocks || [] }] };
+    const stocks = themeObj.subthemes.flatMap(s =>
+      (s.stocks || []).map(st => ({ ...st, _subtheme: s.name }))
+    );
+    const sorted = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0));
+    setSelectedLeadingTheme({ name: themeName, stocks: sorted, inTop5: true, fromEtf: null });
+  };
+
+  const ltSortedStocks = React.useMemo(() => {
+    if (!selectedLeadingTheme?.stocks?.length) return [];
+    const { col, dir } = ltSort;
+    if (!col) return selectedLeadingTheme.stocks;
+    return [...selectedLeadingTheme.stocks].sort((a, b) => {
+      const av = a[col], bv = b[col];
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      if (typeof av === 'string') return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      return dir === 'asc' ? av - bv : bv - av;
+    });
+  }, [selectedLeadingTheme, ltSort]);
+
+  const handleLtColSort = (col) =>
+    setLtSort(prev => prev.col === col
+      ? { col, dir: prev.dir === 'desc' ? 'asc' : 'desc' }
+      : { col, dir: 'desc' });
 
   // ── 8 metric cards ──────────────────────────────────────────────────────────
   const metrics = [
@@ -5367,7 +5409,7 @@ const MarketBreadthTab = ({ data, internalsData, econData, onThemeClick }) => {
               {leadingThemes.map((t, i) => (
                 <div key={t.name}
                   className="flex items-center gap-1.5 cursor-pointer hover:bg-zinc-800/40 rounded px-1 -mx-1 transition-colors"
-                  onClick={() => onThemeClick && onThemeClick(t.name)}
+                  onClick={() => handleLeadingThemeClick(t.name)}
                 >
                   <span className="text-[11px] text-zinc-700 font-mono w-4 text-right">{i + 1}</span>
                   <span className="text-[11px] text-zinc-300 flex-1 truncate leading-tight hover:text-white">{t.name}</span>
@@ -5402,6 +5444,120 @@ const MarketBreadthTab = ({ data, internalsData, econData, onThemeClick }) => {
 
       </div>
     </div>
+
+    {/* ── Leading Theme modal ────────────────────────────────────────────── */}
+    {selectedLeadingTheme && (
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+        onClick={() => setSelectedLeadingTheme(null)}
+      >
+        <div
+          className="bg-zinc-900 border border-zinc-700/60 rounded-2xl shadow-2xl w-[min(92vw,780px)] max-h-[80vh] flex flex-col"
+          onClick={e => e.stopPropagation()}
+        >
+          {/* Header */}
+          <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="text-sm font-semibold text-zinc-100">{selectedLeadingTheme.name}</span>
+              <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">
+                {selectedLeadingTheme.stocks.length} stocks
+              </span>
+              {selectedLeadingTheme.fromEtf && (
+                <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-500/15 border border-sky-500/30 text-sky-400">
+                  {selectedLeadingTheme.fromEtf} ETF
+                </span>
+              )}
+            </div>
+            <button onClick={() => setSelectedLeadingTheme(null)} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1">
+              <X size={16} />
+            </button>
+          </div>
+
+          {/* Stock list */}
+          <div className="overflow-y-auto flex-1">
+            {selectedLeadingTheme.stocks.length === 0 ? (
+              <div className="flex flex-col items-center justify-center py-12 gap-2 text-center px-6">
+                {selectedLeadingTheme.inTop5 === false ? (
+                  <>
+                    <div className="text-zinc-400 text-sm font-medium">Not in today's top 5 — no ETF holdings available</div>
+                    <div className="text-zinc-600 text-xs">Run the scraper to populate data for this theme</div>
+                  </>
+                ) : (
+                  <div className="text-zinc-500 text-sm">No stock data for this theme</div>
+                )}
+              </div>
+            ) : (
+              <table className="w-full text-[12px] text-zinc-300">
+                <thead className="sticky top-0 bg-zinc-900 text-[11px] text-zinc-500 uppercase tracking-wider z-10">
+                  <tr>
+                    <th className="px-3 py-2 font-medium text-left cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                        onClick={() => handleLtColSort('ticker')}>
+                      Ticker{ltSort.col === 'ticker' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                    </th>
+                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                        onClick={() => handleLtColSort('price')}>
+                      Price{ltSort.col === 'price' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                    </th>
+                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                        onClick={() => handleLtColSort('change_pct')}>
+                      1D%{ltSort.col === 'change_pct' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                    </th>
+                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                        onClick={() => handleLtColSort('rs_52w')}>
+                      RS{ltSort.col === 'rs_52w' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                    </th>
+                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap hidden md:table-cell"
+                        onClick={() => handleLtColSort('perf_1w')}>
+                      1W%{ltSort.col === 'perf_1w' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                    </th>
+                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap hidden md:table-cell"
+                        onClick={() => handleLtColSort('perf_1m')}>
+                      1M%{ltSort.col === 'perf_1m' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                    </th>
+                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap hidden md:table-cell"
+                        onClick={() => handleLtColSort('dollar_volume')}>
+                      $Vol{ltSort.col === 'dollar_volume' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                    </th>
+                    <th className="px-3 py-2 font-medium text-left hidden md:table-cell">Sub-theme</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-zinc-800/40">
+                  {ltSortedStocks.map(s => (
+                    <tr key={s.ticker} className="hover:bg-zinc-800/30 transition-colors">
+                      <td className="px-3 py-2">
+                        <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noreferrer"
+                           className="font-mono font-bold text-sky-400 hover:text-sky-300 transition-colors"
+                           onClick={e => e.stopPropagation()}>
+                          {s.ticker}
+                        </a>
+                        {s.company && <div className="text-[10px] text-zinc-600 truncate max-w-[100px]">{s.company}</div>}
+                      </td>
+                      <td className="px-3 py-2 text-right font-mono">${s.price != null ? s.price.toFixed(2) : '—'}</td>
+                      <td className={`px-3 py-2 text-right font-mono font-bold ${(s.change_pct ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                        {s.change_pct != null ? `${s.change_pct >= 0 ? '+' : ''}${s.change_pct.toFixed(2)}%` : '—'}
+                      </td>
+                      <td className="px-3 py-2 text-right font-mono">
+                        {s.rs_52w != null ? <span className={`font-bold ${s.rs_52w >= 90 ? 'text-emerald-400' : s.rs_52w >= 70 ? 'text-zinc-200' : 'text-zinc-500'}`}>{s.rs_52w}</span> : '—'}
+                      </td>
+                      <td className={`px-3 py-2 text-right font-mono hidden md:table-cell ${(s.perf_1w ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                        {s.perf_1w != null ? `${s.perf_1w >= 0 ? '+' : ''}${s.perf_1w.toFixed(1)}%` : '—'}
+                      </td>
+                      <td className={`px-3 py-2 text-right font-mono hidden md:table-cell ${(s.perf_1m ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                        {s.perf_1m != null ? `${s.perf_1m >= 0 ? '+' : ''}${s.perf_1m.toFixed(1)}%` : '—'}
+                      </td>
+                      <td className="px-3 py-2 text-right font-mono text-zinc-400 hidden md:table-cell">
+                        {s.dollar_volume != null ? `$${(s.dollar_volume / 1e6).toFixed(0)}M` : '—'}
+                      </td>
+                      <td className="px-3 py-2 text-zinc-500 text-[11px] hidden md:table-cell">{s._subtheme || selectedLeadingTheme.name}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </div>
+        </div>
+      </div>
+    )}
   );
 };
 
@@ -7949,7 +8105,7 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} onThemeClick={name => { setTab("scanner"); setPendingTheme(name); }}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
+      {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
