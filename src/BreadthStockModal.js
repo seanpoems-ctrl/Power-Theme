@@ -1076,6 +1076,23 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
     const ctrl = new AbortController();
     abortRef.current = ctrl;
 
+    // Helper: try loading from the compact archive for `date`
+    const loadFromArchive = async () => {
+      const res = await fetch(
+        `${process.env.PUBLIC_URL}/breadth_history/${date}.json`,
+        { signal: ctrl.signal }
+      );
+      if (!res.ok) throw new Error(
+        res.status === 404
+          ? `No historical data saved for ${date}. Archive collection started from the next trading day after this feature was deployed.`
+          : `HTTP ${res.status}`
+      );
+      const data = await res.json();
+      const raw = data.filters?.[filter] ?? [];
+      setStocks(raw.map(normalizeHistoricalStock));
+      setSpxData(null);
+    };
+
     try {
       if (isLatest) {
         // Latest row: use the full live stock file
@@ -1085,23 +1102,25 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
         );
         if (!res.ok) throw new Error(`HTTP ${res.status} — stock list not found. Run breadth_stocks_builder.py first.`);
         const data = await res.json();
-        setStocks(data.stocks ?? []);
-        setSpxData(data.spx_benchmarks ?? null);
+        const liveStocks = data.stocks ?? [];
+
+        // If the live file is empty (scraper ran with 0 results or is stale),
+        // fall back to the archive for this date so historical data still shows.
+        if (liveStocks.length === 0 && date) {
+          try {
+            await loadFromArchive();
+          } catch (_) {
+            // Archive also unavailable — just show empty live result
+            setStocks([]);
+          }
+          setSpxData(data.spx_benchmarks ?? null);
+        } else {
+          setStocks(liveStocks);
+          setSpxData(data.spx_benchmarks ?? null);
+        }
       } else {
         // Historical row: load compact archive file
-        const res = await fetch(
-          `${process.env.PUBLIC_URL}/breadth_history/${date}.json`,
-          { signal: ctrl.signal }
-        );
-        if (!res.ok) throw new Error(
-          res.status === 404
-            ? `No historical data saved for ${date}. Archive collection started from the next trading day after this feature was deployed.`
-            : `HTTP ${res.status}`
-        );
-        const data = await res.json();
-        const raw = data.filters?.[filter] ?? [];
-        setStocks(raw.map(normalizeHistoricalStock));
-        setSpxData(null);
+        await loadFromArchive();
       }
     } catch (e) {
       if (e.name === "AbortError") return;
