@@ -1,0 +1,19 @@
+{
+  "generated_at": "2026-05-26T07:34:10.047150+00:00",
+  "vix": 16.93,
+  "tick": null,
+  "trin": null,
+  "s5fi_50d": 58.0,
+  "mmth_200d": 59.4,
+  "t2108": 50.31,
+  "yield_10y": 4.56,
+  "data_sources": {
+    "vix": "yfinance",
+    "tick": "null",
+    "trin": "null",
+    "s5fi_50d": "scraper",
+    "mmth_200d": "scraper",
+    "t2108": "breadth_monitor",
+    "yield_10y": "yfinance"
+  }
+}

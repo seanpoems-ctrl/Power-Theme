@@ -153,9 +153,11 @@ function fmtN(n) {
 
 function t2108Badge(v) {
   if (v == null || !Number.isFinite(v)) return null;
-  if (v < 20) return { label: "Oversold (<20)", cls: "bg-rose-900/60 text-rose-300" };
-  if (v > 70) return { label: "Overbought (>70)", cls: "bg-amber-900/60 text-amber-300" };
-  return { label: "Neutral (20–70)", cls: "bg-slate-700/60 text-slate-300" };
+  if (v >= 80) return { label: "Extreme Overbought (≥80%)", cls: "bg-red-900/60 text-red-300" };
+  if (v >= 70) return { label: "Overbought (≥70%)",         cls: "bg-amber-900/60 text-amber-300" };
+  if (v <= 20) return { label: "Extreme Oversold (≤20%)",   cls: "bg-cyan-900/60 text-cyan-300" };
+  if (v <= 30) return { label: "Oversold (≤30%)",           cls: "bg-emerald-900/60 text-emerald-300" };
+  return { label: "Neutral (30–70%)", cls: "bg-slate-700/60 text-slate-300" };
 }
 
 // ---------------------------------------------------------------------------

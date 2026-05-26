@@ -2209,7 +2209,7 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
   const interpret = (k, v) => {
     if (v == null) return "—";
     if (k === "trin") return v < 0.7 ? "Buy" : v > 1.3 ? "Sell" : "Neutral";
-    if (k === "t2108") return v < 20 ? "Oversold" : v > 80 ? "Overbought" : "Neutral";
+    if (k === "t2108") return v >= 80 ? "Extreme OB" : v >= 70 ? "Overbought" : v <= 20 ? "Extreme OS" : v <= 30 ? "Oversold" : "Neutral";
     return "";
   };
   return (
@@ -4285,9 +4285,17 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
       label: "T2108",
       value: internalsData?.t2108 != null ? `${internalsData.t2108.toFixed(1)}%` : "—",
       sub:   internalsData?.t2108 != null
-               ? internalsData.t2108 >= 60 ? "Overbought" : internalsData.t2108 <= 20 ? "Oversold" : "Neutral"
+               ? internalsData.t2108 >= 80 ? "Extreme Overbought"
+               : internalsData.t2108 >= 70 ? "Overbought"
+               : internalsData.t2108 <= 20 ? "Extreme Oversold"
+               : internalsData.t2108 <= 30 ? "Oversold"
+               : "Neutral"
                : null,
-      color: internalsData?.t2108 >= 60 ? "text-amber-400" : internalsData?.t2108 <= 20 ? "text-emerald-400" : "text-zinc-300",
+      color: internalsData?.t2108 >= 80 ? "text-red-400"
+           : internalsData?.t2108 >= 70 ? "text-amber-400"
+           : internalsData?.t2108 <= 20 ? "text-cyan-300"
+           : internalsData?.t2108 <= 30 ? "text-emerald-400"
+           : "text-zinc-300",
     },
     {
       label: "S&P 500 Signal",
@@ -4346,9 +4354,11 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
   })();
   const t2108Verdict = (() => {
     if (t2108Val == null) return { label: "N/A", cls: "text-zinc-600", detail: "Data unavailable" };
-    if (t2108Val >= 70) return { label: "Overbought", cls: "text-amber-400", detail: `${t2108Val.toFixed(1)}% — expect mean reversion` };
-    if (t2108Val <= 20) return { label: "Oversold", cls: "text-emerald-400", detail: `${t2108Val.toFixed(1)}% — watch for reversal` };
-    return { label: "Neutral", cls: "text-zinc-300", detail: `${t2108Val.toFixed(1)}% — no extreme` };
+    if (t2108Val >= 80) return { label: "Extreme Overbought", cls: "text-red-400",     detail: `${t2108Val.toFixed(1)}% — strong mean-reversion risk` };
+    if (t2108Val >= 70) return { label: "Overbought",         cls: "text-amber-400",   detail: `${t2108Val.toFixed(1)}% — expect choppiness / pullback` };
+    if (t2108Val <= 20) return { label: "Extreme Oversold",   cls: "text-cyan-300",    detail: `${t2108Val.toFixed(1)}% — high-probability snap-back zone` };
+    if (t2108Val <= 30) return { label: "Oversold",           cls: "text-emerald-400", detail: `${t2108Val.toFixed(1)}% — watch for reversal` };
+    return { label: "Neutral", cls: "text-zinc-300", detail: `${t2108Val.toFixed(1)}% — no extreme reading` };
   })();
 
   // ── Macro risk flags from econData ──────────────────────────────────────────

@@ -136,13 +136,54 @@ def _fetch_breadth() -> tuple[float | None, float | None, str]:
 
 
 # ─── T2108 ────────────────────────────────────────────────────────────────────
+# ^T2108 was delisted from Yahoo Finance (Worden Brothers proprietary indicator).
+# Primary source: breadth_monitor.json (Stockbee spreadsheet — updated daily).
+# Fallback: TradingView screener — compute % of US stocks above their 50-day SMA
+# as a close proxy (same concept, slightly different MA period).
 
 def _fetch_t2108() -> tuple[float | None, str]:
-    val = _yfinance_last("^T2108")
-    if val is not None:
-        logger.info("T2108 from yfinance: %.2f", val)
-        return val, "yfinance"
-    logger.warning("T2108 unavailable")
+    # Source 1: breadth_monitor.json (Stockbee spreadsheet value)
+    try:
+        bm_path = OUTPUT_PATH.parent / "breadth_monitor.json"
+        if bm_path.exists():
+            import json as _json
+            bm = _json.loads(bm_path.read_text(encoding="utf-8"))
+            rows = bm.get("rows", [])
+            if rows:
+                val = rows[0].get("t2108")
+                if val is not None:
+                    logger.info("T2108 from breadth_monitor.json: %.2f", val)
+                    return _round2(val), "breadth_monitor"
+    except Exception as exc:
+        logger.warning("T2108 from breadth_monitor.json failed: %s", exc)
+
+    # Source 2: TradingView screener — % US stocks (price ≥ $2) above SMA50
+    # This is the same concept as T2108 (% above a medium-term MA), slightly
+    # different period (50 vs 40 days) but directionally equivalent.
+    try:
+        from tradingview_screener import Query, col as tv_col  # type: ignore
+        _, df = (
+            Query()
+            .select("name", "close", "SMA50")
+            .where(
+                tv_col("close") >= 2,
+                tv_col("average_volume_10d_calc") >= 50_000,
+                tv_col("type").isin(["stock", "dr"]),
+                tv_col("exchange").isin(["NYSE", "NASDAQ", "AMEX", "NYSE ARCA"]),
+            )
+            .limit(10_000)
+            .get_scanner_data()
+        )
+        if df is not None and not df.empty:
+            df = df.dropna(subset=["close", "SMA50"])
+            df = df[df["close"] > 0]
+            pct = round((df["close"] > df["SMA50"]).sum() / len(df) * 100, 2)
+            logger.info("T2108 proxy (>SMA50) from TradingView: %.2f%%", pct)
+            return pct, "tradingview"
+    except Exception as exc:
+        logger.warning("T2108 TradingView fallback failed: %s", exc)
+
+    logger.warning("T2108 unavailable from all sources")
     return None, "null"
 
 
