@@ -2264,7 +2264,7 @@ def _classify_etf_signal(detail: dict, closes: list) -> tuple:
     #                   above SMA200. Filters out ETFs barely clinging to
     #                   SMA200 (e.g. XLC s200≈+0.2%).
     if (s20 is not None and s20 < 0
-            and s50 is not None and -2.0 <= s50 <= 2.0
+            and s50 is not None and -1.5 <= s50 <= 1.5
             and s200 is not None and s200 > 5.0):
         return ("pullback", "SMA50")
 
@@ -2297,8 +2297,8 @@ def build_etf_signals(unique_etfs: list) -> list:
         # Pullback allows negative 1M — price is pulling back by definition.
         perf_1m = detail.get("perf_1m") or 0
         perf_3m = detail.get("perf_3m") or 0
-        if signal == "breakout" and (perf_1m <= 0 or perf_3m <= 0):
-            logger.info(f"  ETF signal: {etf} breakout skipped (1M {perf_1m:.1f}% or 3M {perf_3m:.1f}% ≤ 0)")
+        if signal == "breakout" and (perf_1m <= 0 or perf_3m < 8):
+            logger.info(f"  ETF signal: {etf} breakout skipped (1M {perf_1m:.1f}% or 3M {perf_3m:.1f}% < 8%)")
             continue
         signals.append({
             "etf": etf,
