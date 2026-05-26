@@ -806,7 +806,7 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
     <div className="border-t border-zinc-800 first:border-t-0">
       {/* Industry header row — grid matches GroupView header exactly */}
       <div
-        className="group grid grid-cols-[16px_1fr_40px_60px_48px_auto] cursor-pointer items-center gap-2 px-3 py-2 hover:bg-zinc-800/40"
+        className="group grid grid-cols-[16px_1fr_48px_64px_48px_auto] cursor-pointer items-center gap-2 px-3 py-2 hover:bg-zinc-800/40"
         onClick={() => setOpen((o) => !o)}
       >
         <span className="text-zinc-500 text-xs">{open ? "▾" : "▸"}</span>
@@ -994,14 +994,17 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
   return (
     <div>
       {/* Industry / Count / Count% / RS header — grid mirrors GroupRow data grid exactly */}
-      <div className="grid grid-cols-[16px_1fr_40px_60px_48px_auto] items-center gap-2 border-b border-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-600">
+      <div className="grid grid-cols-[16px_1fr_48px_64px_48px_auto] items-center gap-2 border-b border-zinc-800 px-3 py-1.5 text-xs font-medium text-zinc-600">
         <span />  {/* chevron column */}
         <span>Industry</span>
-        <button onClick={() => handleGroupSort("count")} className="text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">Count<GroupSortIcon colKey="count"/></button>
-        <button onClick={() => handleGroupSort("countPct")} className="text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">Count%<GroupSortIcon colKey="countPct"/></button>
-        <button onClick={() => handleGroupSort("rs")} className="text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">RS<GroupSortIcon colKey="rs"/></button>
+        <button onClick={() => handleGroupSort("count")} className="block w-full text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">Count<GroupSortIcon colKey="count"/></button>
+        <button onClick={() => handleGroupSort("countPct")} className="block w-full text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">Count%<GroupSortIcon colKey="countPct"/></button>
+        <button onClick={() => handleGroupSort("rs")} className="block w-full text-right cursor-pointer select-none hover:text-zinc-300 transition-colors">RS<GroupSortIcon colKey="rs"/></button>
+        {/* placeholder must match the data-row button to keep 'auto' column same width */}
         <span className="invisible pointer-events-none">
-          <CopyButton tickers={[]} />
+          {onAddToClipboard
+            ? <AddToClipboardButton label="" tickers={[]} filter={filter} onAdd={() => {}} />
+            : <CopyButton tickers={[]} />}
         </span>
       </div>
 
