@@ -2048,7 +2048,7 @@ _THEME_ETF_MAP = {
     "Social Media":                  "SOCL",
     "Real Estate & REITs":           "VNQ",
     "Internet of Things":            "SNSR",
-    "Industrial Automation":         "IRBO",
+    "Industrial Automation":         "ROBO",
     "Consumer Goods":                "XLY",
     "Commodities Metals":            "GDX",
     "Commodities Energy":            "USO",
@@ -2241,11 +2241,16 @@ def _classify_etf_signal(detail: dict, closes: list) -> tuple:
 
         last        = closes[-1]
         recent_high = max(closes[-15:])   # highest close in the last 3 weeks
-        base_high   = max(closes[-55:-15])  # resistance from 3–11 weeks ago
+        base_closes = closes[-55:-15]
+        base_high   = max(base_closes)    # resistance from 3–11 weeks ago
+        base_low    = min(base_closes)
+        # A true base is a tight consolidation. Steady uptrends have wide range.
+        base_range_pct = (base_high - base_low) / base_low * 100 if base_low > 0 else 999
         dist_pct    = (last - base_high) / base_high * 100 if base_high > 0 else 999
 
-        if (recent_high > base_high   # broke the 3-to-11-week resistance ceiling
-                and dist_pct <= 12):  # still fresh — within 12% of that level
+        if (recent_high > base_high * 1.01  # broke meaningfully above resistance
+                and base_range_pct <= 25    # base was a consolidation, not an uptrend
+                and dist_pct <= 12):        # still fresh — within 12% of that level
             return ("breakout", None)
 
     # ── PULLBACK: price broke below SMA20, now testing SMA50 as support ─────

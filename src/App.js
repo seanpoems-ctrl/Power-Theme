@@ -5933,7 +5933,7 @@ const THEME_ETF_MAP = {
   "Social Media":                  "SOCL",
   "Real Estate & REITs":           "VNQ",
   "Internet of Things":            "SNSR",
-  "Industrial Automation":         "IRBO",
+  "Industrial Automation":         "ROBO",
   "Consumer Goods":                "XLY",
   "Commodities Metals":            "GDX",
   "Commodities Energy":            "USO",
