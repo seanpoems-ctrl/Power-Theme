@@ -1052,7 +1052,7 @@ function normalizeHistoricalStock(s) {
     perf_1m:        null,
     perf_3m:        null,
     atr_ext_val:    null,
-    above50dma_pct: null,
+    above50dma_pct: s.dma ?? null,   // stored in compact archive as "dma" since 2026-05-27
   };
 }
 
