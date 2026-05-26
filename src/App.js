@@ -5,6 +5,10 @@ import useMarketStore from "./useMarketStore";
 import GlobalAlertBanner from "./GlobalAlertBanner";
 import MarketBreadthMonitor from "./MarketBreadthMonitor";
 
+// ── Language context (ZH / EN toggle) ────────────────────────────────────────
+const LangCtx = React.createContext('zh');
+const useLang = () => React.useContext(LangCtx);
+
 // eslint-disable-next-line no-unused-vars
 const MOCK_DATA = {
   last_updated: "2026-03-13",
@@ -352,12 +356,13 @@ const RSvsSPYBadge = ({ stockPerf, spyPerf }) => {
 // ── Market Condition ──
 // eslint-disable-next-line no-unused-vars
 const MarketCondition = ({ mc }) => {
+  const lang = useLang();
   if (!mc) return null;
   const { signal } = mc;
   const cfg = {
-    green:  { dot: "bg-emerald-400", ring: "border-emerald-500/40 bg-emerald-500/8",  label: "🟢 Market Uptrend",    sub: "SPY & QQQ 站上 SMA50 & SMA200，200SMA 向上，正常執行突破單" },
-    yellow: { dot: "bg-amber-400",   ring: "border-amber-500/40 bg-amber-500/8",   label: "🟡 Market Correction", sub: "SPY 或 QQQ 跌破 SMA50，暫停常規突破，只做 RS 最強的少數股票" },
-    red:    { dot: "bg-red-400",     ring: "border-red-500/40 bg-red-500/8",       label: "🔴 Market Downtrend",  sub: "停止所有新倉突破單" },
+    green:  { dot: "bg-emerald-400", ring: "border-emerald-500/40 bg-emerald-500/8",  label: "🟢 Market Uptrend",    sub: lang === 'zh' ? "SPY & QQQ 站上 SMA50 & SMA200，200SMA 向上，正常執行突破單" : "SPY & QQQ above SMA50 & SMA200, 200SMA rising — run normal breakout entries" },
+    yellow: { dot: "bg-amber-400",   ring: "border-amber-500/40 bg-amber-500/8",   label: "🟡 Market Correction", sub: lang === 'zh' ? "SPY 或 QQQ 跌破 SMA50，暫停常規突破，只做 RS 最強的少數股票" : "SPY or QQQ below SMA50 — pause breakouts, only trade highest RS stocks" },
+    red:    { dot: "bg-red-400",     ring: "border-red-500/40 bg-red-500/8",       label: "🔴 Market Downtrend",  sub: lang === 'zh' ? "停止所有新倉突破單" : "Stop all new breakout entries" },
   }[signal] || {};
 
   const fmtChg = (v) => {
@@ -744,6 +749,7 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
 
 // ── Hero Zone — 3-column dashboard row above the heatmap ──────────────────
 const HeroZone = ({ data, themesCount, tickersCount }) => {
+  const lang = useLang();
   const [etfChart, setEtfChart] = useState(null);         // { ticker, rect }
   const [etfHoldingsPopup, setEtfHoldingsPopup] = useState(null); // { etf }
 
@@ -831,7 +837,7 @@ const HeroZone = ({ data, themesCount, tickersCount }) => {
                           >{s.etf}</button>
                           <button
                             onClick={() => setEtfHoldingsPopup({ etf: s.etf })}
-                            title={`${s.etf} 成分股`}
+                            title={`${s.etf} ${lang === 'zh' ? '成分股' : 'components'}`}
                             className="text-emerald-400/70 hover:text-emerald-300 hover:bg-emerald-500/15 rounded p-0.5 transition-colors"
                           ><Layers size={11}/></button>
                           <span className="text-[10px] text-zinc-600 truncate" style={{ maxWidth: '88px' }}>{s.theme}</span>
@@ -865,7 +871,8 @@ const HeroZone = ({ data, themesCount, tickersCount }) => {
 };
 
 const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt }) => {
-  const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks }
+  const lang = useLang();
+  const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks, inTop5 }
 
   const heatData = useMemo(() => {
     const rankings = finvizThemeRankings || [];
@@ -905,13 +912,13 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt 
   const handleCardClick = (itemName) => {
     const allSources = [...(themes || []), ...(heatmapThemes || [])];
     const norm = allSources.find(t => t.name?.toLowerCase() === itemName.toLowerCase());
-    if (!norm) { setSelectedTheme({ name: itemName, stocks: [] }); return; }
+    if (!norm) { setSelectedTheme({ name: itemName, stocks: [], inTop5: false }); return; }
     const themeObj = norm.subthemes ? norm : { ...norm, subthemes: [{ name: norm.name, stocks: norm.stocks || [] }] };
     const stocks = themeObj.subthemes.flatMap(s =>
       (s.stocks || []).map(st => ({ ...st, _subtheme: s.name }))
     );
     const sorted = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0));
-    setSelectedTheme({ name: itemName, stocks: sorted });
+    setSelectedTheme({ name: itemName, stocks: sorted, inTop5: true });
   };
 
   if (!topBottom.length) return null;
@@ -960,7 +967,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt 
             <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
               <div>
                 <div className="text-sm font-bold text-zinc-100">{selectedTheme.name}</div>
-                <div className="text-[11px] text-zinc-500 mt-0.5">{selectedTheme.stocks.length} 檔股票</div>
+                <div className="text-[11px] text-zinc-500 mt-0.5">{selectedTheme.stocks.length} {lang === 'zh' ? '檔股票' : 'stocks'}</div>
               </div>
               <button
                 onClick={() => setSelectedTheme(null)}
@@ -974,16 +981,29 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt 
             <div className="overflow-y-auto flex-1">
               {selectedTheme.stocks.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 gap-2 text-center px-6">
-                  <div className="text-zinc-400 text-sm font-medium">此主題暫無股票資料</div>
-                  <div className="text-zinc-600 text-xs leading-relaxed">將於下次每日掃描後更新。</div>
+                  {selectedTheme.inTop5 === false ? (
+                    <>
+                      <div className="text-zinc-400 text-sm font-medium">
+                        {lang === 'zh' ? '此主題未進入今日前5名' : 'This theme is not in today\'s top 5'}
+                      </div>
+                      <div className="text-zinc-600 text-xs leading-relaxed">
+                        {lang === 'zh' ? '個股資料僅收錄表現最強的前5個主題。' : 'Stock data is only collected for the top 5 performing themes each day.'}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="text-zinc-400 text-sm font-medium">{lang === 'zh' ? '此主題暫無股票資料' : 'No stock data for this theme'}</div>
+                      <div className="text-zinc-600 text-xs leading-relaxed">{lang === 'zh' ? '將於下次每日掃描後更新。' : 'Will update after the next daily scan.'}</div>
+                    </>
+                  )}
                 </div>
               ) : (
                 <table className="w-full text-xs">
                   <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800">
                     <tr className="text-zinc-500 text-[11px] uppercase tracking-wider">
                       <th className="text-left px-4 py-2 font-medium">Ticker</th>
-                      <th className="text-left px-4 py-2 font-medium hidden sm:table-cell">公司</th>
-                      <th className="text-right px-3 py-2 font-medium">價格</th>
+                      <th className="text-left px-4 py-2 font-medium hidden sm:table-cell">{lang === 'zh' ? '公司' : 'Company'}</th>
+                      <th className="text-right px-3 py-2 font-medium">{lang === 'zh' ? '價格' : 'Price'}</th>
                       <th className="text-right px-3 py-2 font-medium">1D</th>
                       <th className="text-right px-3 py-2 font-medium">1W</th>
                       <th className="text-right px-3 py-2 font-medium">1M</th>
@@ -2198,6 +2218,7 @@ const vixToRiskPct = (v) => {
 };
 
 const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
+  const lang = useLang();
   const [equity, setEquity] = React.useState('');
   const [entry, setEntry] = React.useState('');
   const [atr, setAtr] = React.useState('');
@@ -2499,7 +2520,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
           <span className="text-[11px] text-zinc-500">EMA {emaMode} −1.5%</span>
           {activeEmaPrice != null
             ? <span className="text-[11px] font-mono text-blue-400">${emaStop?.toFixed(2)}</span>
-            : <span className="text-[11px] font-mono text-zinc-600">輸入 Ticker 後自動計算</span>}
+            : <span className="text-[11px] font-mono text-zinc-600">{lang === 'zh' ? '輸入 Ticker 後自動計算' : 'Enter ticker to auto-calculate'}</span>}
         </div>
       )}
 
@@ -2570,28 +2591,28 @@ const UpdatedAt = ({ ts }) => {
 const VIX_ZONES_NOTE = [
   {
     range: "< 14",  label: "COMPLACENT",      cls: "text-blue-400",
-    tip: "慢牛環境，可正常做多",
-    rules: ["Max Loss 0.3% / trade", "Stop 比 pivot 近 1%，不追高", "倉位正常"],
+    tip: { zh: "慢牛環境，可正常做多", en: "Slow bull — normal long entries" },
+    rules: { zh: ["Max Loss 0.3% / trade", "Stop 比 pivot 近 1%，不追高", "倉位正常"], en: ["Max Loss 0.3% / trade", "Stop 1% from pivot, don't chase", "Normal position size"] },
   },
   {
     range: "14–18", label: "NORMAL",           cls: "text-emerald-400",
-    tip: "最佳交易環境，正常執行",
-    rules: ["Max Loss 0.5% / trade", "正常突破單、標準停損", "倉位 100%"],
+    tip: { zh: "最佳交易環境，正常執行", en: "Optimal trading environment — execute normally" },
+    rules: { zh: ["Max Loss 0.5% / trade", "正常突破單、標準停損", "倉位 100%"], en: ["Max Loss 0.5% / trade", "Normal breakouts, standard stops", "Position 100%"] },
   },
   {
     range: "18–24", label: "CAUTION",          cls: "text-yellow-400",
-    tip: "市場轉波動，只做強勢股",
-    rules: ["Max Loss 0.3% / trade", "只做 RS leaders，不買弱股", "倉位 75%"],
+    tip: { zh: "市場轉波動，只做強勢股", en: "Market turning volatile — only trade strong RS stocks" },
+    rules: { zh: ["Max Loss 0.3% / trade", "只做 RS leaders，不買弱股", "倉位 75%"], en: ["Max Loss 0.3% / trade", "RS leaders only, avoid weak stocks", "Position 75%"] },
   },
   {
     range: "24–30", label: "ELEVATED CONCERN", cls: "text-amber-400",
-    tip: "法人開始避險，縮手",
-    rules: ["Max Loss 0.2% / trade", "只做 A+ setup，快進快出", "倉位 50%"],
+    tip: { zh: "法人開始避險，縮手", en: "Institutions hedging — reduce exposure" },
+    rules: { zh: ["Max Loss 0.2% / trade", "只做 A+ setup，快進快出", "倉位 50%"], en: ["Max Loss 0.2% / trade", "A+ setups only, quick in-out", "Position 50%"] },
   },
   {
     range: "30+",   label: "EXTREME FEAR",     cls: "text-red-400",
-    tip: "恐慌模式，持現金等回落",
-    rules: ["不開新單", "持現金為主（75–100%）", "等 VIX 回落 < 25 再考慮進場"],
+    tip: { zh: "恐慌模式，持現金等回落", en: "Panic mode — hold cash and wait for pullback" },
+    rules: { zh: ["不開新單", "持現金為主（75–100%）", "等 VIX 回落 < 25 再考慮進場"], en: ["No new entries", "Hold cash (75–100%)", "Wait for VIX to drop below 25"] },
   },
 ];
 
@@ -2623,6 +2644,7 @@ async function fetchGeminiMarketPulse(payload) {
 }
 
 const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
+  const lang = useLang();
   const [showVixNote, setShowVixNote] = React.useState(false);
   const [aiText, setAiText] = React.useState(null);
   const [aiLoading, setAiLoading] = React.useState(false);
@@ -2730,10 +2752,10 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
               <div className="flex items-center gap-2 mb-1">
                 <span className="font-mono text-[10px] text-zinc-500 w-9 flex-shrink-0">{z.range}</span>
                 <span className={`text-[11px] font-bold ${z.cls}`}>{z.label}</span>
-                <span className="text-[10px] text-zinc-500">{z.tip}</span>
+                <span className="text-[10px] text-zinc-500">{z.tip[lang] ?? z.tip.zh}</span>
               </div>
               <div className="pl-11 space-y-0.5">
-                {z.rules.map((r, i) => (
+                {(z.rules[lang] ?? z.rules.zh).map((r, i) => (
                   <div key={i} className="text-[10px] text-zinc-400 before:content-['·'] before:mr-1 before:text-zinc-600">{r}</div>
                 ))}
               </div>
@@ -2760,9 +2782,9 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
             : t.includes("selective") || t.includes("select") ? "selective"
             : null;
           const strategyMap = {
-            aggressive: { text: "策略：積極佈局突破單，RS 強 + 量能放大即可進場",   cls: "text-emerald-400 border-emerald-500/30 bg-emerald-500/8" },
-            selective:  { text: "策略：只做 RS 最強、setup 最乾淨的突破單，不要每個都追", cls: "text-amber-400 border-amber-500/30 bg-amber-500/8" },
-            avoid:      { text: "策略：暫停新突破單，現金觀望等待市場穩定",           cls: "text-red-400 border-red-500/30 bg-red-500/8" },
+            aggressive: { text: lang === 'zh' ? "策略：積極佈局突破單，RS 強 + 量能放大即可進場" : "Strategy: Aggressively enter breakouts — strong RS + volume surge = entry", cls: "text-emerald-400 border-emerald-500/30 bg-emerald-500/8" },
+            selective:  { text: lang === 'zh' ? "策略：只做 RS 最強、setup 最乾淨的突破單，不要每個都追" : "Strategy: Only cleanest RS setups — don't chase every breakout", cls: "text-amber-400 border-amber-500/30 bg-amber-500/8" },
+            avoid:      { text: lang === 'zh' ? "策略：暫停新突破單，現金觀望等待市場穩定" : "Strategy: Pause all new breakouts — hold cash, wait for stabilization", cls: "text-red-400 border-red-500/30 bg-red-500/8" },
           };
           const s = tag ? strategyMap[tag] : null;
           if (!s) return null;
@@ -3317,6 +3339,7 @@ function getNextBriefTime() {
 
 /** Thematic Scanner 側欄：以 Market Brief（market_brief.json）取代原 macro_news 列表 */
 const ScannerBriefFeed = ({ briefData, newsData }) => {
+  const lang = useLang();
   const [showFullBrief, setShowFullBrief] = useState(false);
   const [showBreakingNews, setShowBreakingNews] = useState(false);
   const [dismissedNews, setDismissedNews] = useState(() => {
@@ -3355,7 +3378,7 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
   // Shared content renderer (used in both the card and the full-brief modal)
   const briefContent = (maxH) => !briefData ? (
     <div className="flex-1 flex items-center justify-center" style={{ minHeight: 120 }}>
-      <span className="text-[11px] text-zinc-600">載入簡報中…</span>
+      <span className="text-[11px] text-zinc-600">{lang === 'zh' ? '載入簡報中…' : 'Loading brief...'}</span>
     </div>
   ) : (
     <div className="overflow-y-auto flex-1 space-y-3" style={maxH ? { maxHeight: maxH } : {}}>
@@ -4359,6 +4382,7 @@ function renderMarkdown(text) {
 }
 
 const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
+  const uiLang = useLang();
   const [analysis, setAnalysis] = useState(null);
   const [loading,  setLoading]  = useState(true);
   const [error,    setError]    = useState(null);
@@ -4413,7 +4437,7 @@ const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <span className="font-mono text-[15px] font-bold text-white">{stock.ticker}</span>
-              <span className="text-[11px] font-bold px-1.5 py-0.5 rounded bg-violet-500/15 border border-violet-500/30 text-violet-300 leading-none">✦ AI 預測</span>
+              <span className="text-[11px] font-bold px-1.5 py-0.5 rounded bg-violet-500/15 border border-violet-500/30 text-violet-300 leading-none">✦ {uiLang === 'zh' ? 'AI 預測' : 'AI Forecast'}</span>
               {themeName && <span className="text-[11px] font-medium px-1.5 py-0.5 rounded bg-sky-500/10 border border-sky-500/25 text-sky-400 leading-none">{themeName}</span>}
             </div>
             <span className="text-[11px] text-zinc-500 truncate block">{stock.company}</span>
@@ -4443,7 +4467,7 @@ const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
           {loading ? (
             <div className="flex flex-col items-center justify-center py-16 gap-3">
               <RefreshCw size={20} className="text-violet-500 animate-spin"/>
-              <p className="text-[12px] text-zinc-500">Gemini 正在預測 {stock.ticker} 財報結果…</p>
+              <p className="text-[12px] text-zinc-500">{uiLang === 'zh' ? `Gemini 正在預測 ${stock.ticker} 財報結果…` : `Predicting ${stock.ticker} earnings...`}</p>
             </div>
           ) : error ? (
             <div className="py-10 text-center flex flex-col items-center gap-3">
@@ -5419,6 +5443,7 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
 };
 
 const GapperScanner = ({ earningsData, ibkrThemesData }) => {
+  const lang = useLang();
   const creditRegime = useMarketStore((s) => s.creditRegime);
   const [gapperData, setGapperData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -5553,14 +5578,14 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
               <th className="text-center py-1.5 px-2 font-medium align-middle">Ticker</th>
               <th className="text-center py-1.5 px-2 font-medium align-middle leading-tight">Premkt<br/>Price<br/>Chg %</th>
               <th className="text-center py-1.5 px-2 font-medium align-middle leading-tight">Premkt<br/>Vol</th>
-              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip text="Relative Volume：今日成交量 ÷ 過去10天平均量。🟢 ≥5x 極強  🟡 ≥3x 強  ⚪ ≥2x 中等  灰色 &lt;2x 弱">RVol</Tip></th>
-              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip text="Daily %：昨日收盤漲跌幅（非盤前）">Daily %</Tip></th>
-              <th className="text-center py-1.5 px-2 font-medium align-middle leading-tight"><Tip text="Short Interest：放空股數佔流通股比例。>20% 有軋空 (Short Squeeze) 潛力，但也代表市場看空">Short<br/>Int</Tip></th>
-              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip text="Float：市場上可自由買賣的流通股數。Float 越小，股價越容易被大幅推動">Float</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip text={lang === 'zh' ? "Relative Volume：今日成交量 ÷ 過去10天平均量。🟢 ≥5x 極強  🟡 ≥3x 強  ⚪ ≥2x 中等  灰色 <2x 弱" : "Relative Volume: Today's vol ÷ 10-day avg. 🟢 ≥5x Extreme  🟡 ≥3x Strong  ⚪ ≥2x Normal  Gray <2x Weak"}>RVol</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip text={lang === 'zh' ? "Daily %：昨日收盤漲跌幅（非盤前）" : "Daily %: Prior close change (not pre-market)"}>Daily %</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle leading-tight"><Tip text={lang === 'zh' ? "Short Interest：放空股數佔流通股比例。>20% 有軋空 (Short Squeeze) 潛力，但也代表市場看空" : "Short Interest: % of float sold short. >20% = short squeeze potential but also bearish sentiment"}>Short<br/>Int</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip text={lang === 'zh' ? "Float：市場上可自由買賣的流通股數。Float 越小，股價越容易被大幅推動" : "Float: Freely tradable shares. Smaller float = easier to move price significantly"}>Float</Tip></th>
               <th className="text-center py-1.5 px-2 font-medium align-middle">Sector</th>
               <th className="text-center py-1.5 px-2 font-medium align-middle">Industry</th>
-              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip width="w-72" text="催化劑分類：Earnings 財報｜Upgrade 分析師升評｜FDA 藥品審批｜Government Policy 政策｜Contract/Partnership 合約｜Institutional/Insider Buying 機構/內部人買入｜Thematic Narratives 主題敘事｜Technical/Flow 無明確催化劑">Category</Tip></th>
-              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip width="w-64" text="Gemini 信心評分：A+ 極高 (90+)｜A 高 (75-89)｜B 中 (50-74)｜C 低 (&lt;50)。Pass/Fail = 技術門檻 ($Vol >$100M 且 ADR >4%)">Grade</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip width="w-72" text={lang === 'zh' ? "催化劑分類：Earnings 財報｜Upgrade 分析師升評｜FDA 藥品審批｜Government Policy 政策｜Contract/Partnership 合約｜Institutional/Insider Buying 機構/內部人買入｜Thematic Narratives 主題敘事｜Technical/Flow 無明確催化劑" : "Catalyst type: Earnings｜Analyst Upgrade｜FDA Approval｜Government Policy｜Contract/Partnership｜Institutional/Insider Buying｜Thematic Narratives｜Technical/Flow (no clear catalyst)"}>Category</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip width="w-64" text={lang === 'zh' ? "Gemini 信心評分：A+ 極高 (90+)｜A 高 (75-89)｜B 中 (50-74)｜C 低 (<50)。Pass/Fail = 技術門檻 ($Vol >$100M 且 ADR >4%)" : "Gemini conviction: A+ Extreme (90+)｜A High (75-89)｜B Medium (50-74)｜C Low (<50). Pass/Fail = technical threshold ($Vol >$100M & ADR >4%)"}>Grade</Tip></th>
               <th className="text-center py-1.5 px-2 font-medium align-middle">Reasoning</th>
               <th className="text-center py-1.5 px-2 font-medium align-middle">Analysis Details</th>
             </tr>
@@ -5632,14 +5657,14 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                   <div className="flex flex-col items-center gap-0.5">
                     <div className="flex items-center gap-1">
                       {g.grade
-                        ? <Tip text={{ "A+": "極高信心 (90+)：催化劑強、成交量爆發、技術全達標。Gap & Go 策略首選", A: "高信心 (75-89)：催化劑明確，技術面佳，可積極參與", B: "中等信心 (50-74)：催化劑存在但強度不足，或技術面稍弱，謹慎操作", C: "低信心 (<50)：催化劑不明確或技術不達標，建議觀望" }[g.grade] || `信心評分：${g.grade}`}><span className={`text-[11px] font-bold px-1 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span></Tip>
+                        ? <Tip text={lang === 'zh' ? ({ "A+": "極高信心 (90+)：催化劑強、成交量爆發、技術全達標。Gap & Go 策略首選", A: "高信心 (75-89)：催化劑明確，技術面佳，可積極參與", B: "中等信心 (50-74)：催化劑存在但強度不足，或技術面稍弱，謹慎操作", C: "低信心 (<50)：催化劑不明確或技術不達標，建議觀望" }[g.grade] || `信心評分：${g.grade}`) : ({ "A+": "Extreme conviction (90+): Strong catalyst, volume spike, all technicals met. Top Gap & Go candidate", A: "High conviction (75-89): Clear catalyst, good technicals, participate actively", B: "Medium conviction (50-74): Catalyst exists but weak, or technicals slightly off — trade cautiously", C: "Low conviction (<50): Unclear catalyst or technicals don't qualify — stand aside" }[g.grade] || `Conviction: ${g.grade}`)}><span className={`text-[11px] font-bold px-1 py-0.5 rounded border ${gradeStyle(g.grade)}`}>{g.grade}</span></Tip>
                         : <span className="text-zinc-600">—</span>}
                       <VerificationBadge verification={g.verification} headlines={g.headlines}/>
                     </div>
                     {g.technical_status && (
                       <Tip text={(g.technical_status || "").startsWith("Fail")
-                        ? `✗ 未通過技術門檻：${g.technical_status.replace("Fail — ", "")}。整排灰色 = 不建議交易`
-                        : "✓ 通過技術門檻：平均日成交金額 >$100M 且 ADR >4%，具備足夠流動性與波動性"}>
+                        ? (lang === 'zh' ? `✗ 未通過技術門檻：${g.technical_status.replace("Fail — ", "")}。整排灰色 = 不建議交易` : `✗ Failed technical threshold: ${g.technical_status.replace("Fail — ", "")}. Gray row = not recommended`)
+                        : (lang === 'zh' ? "✓ 通過技術門檻：平均日成交金額 >$100M 且 ADR >4%，具備足夠流動性與波動性" : "✓ Passed technical threshold: avg daily $vol >$100M & ADR >4% — sufficient liquidity and volatility")}>
                         <span className={`text-[11px] font-semibold px-1 py-0.5 rounded leading-none ${
                           (g.technical_status || "").startsWith("Fail")
                             ? "text-red-400 bg-red-500/10 border border-red-500/20"
@@ -5650,7 +5675,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                       </Tip>
                     )}
                     {(g.theme || g.category) === "Technical / Flow" && (
-                      <Tip text="找不到明確催化劑（無財報、合約、政策等新聞）。歸類為資金流向/技術突破。自動降為 C 級，風險較高，謹慎操作">
+                      <Tip text={lang === 'zh' ? "找不到明確催化劑（無財報、合約、政策等新聞）。歸類為資金流向/技術突破。自動降為 C 級，風險較高，謹慎操作" : "No clear catalyst found (no earnings, contract, or policy news). Classified as flow/technical breakout. Auto-downgraded to C — trade cautiously"}>
                         <span className="text-[11px] text-amber-500 font-semibold">🔍 Flow</span>
                       </Tip>
                     )}
@@ -5989,6 +6014,7 @@ const CATALYST_SENTIMENT = {
 
 // ── Merged Search + Ticker Lookup ──
 const SearchBar = ({ data, search, setSearch }) => {
+  const lang = useLang();
   const [open, setOpen] = useState(false);
   const [allTickers, setAllTickers] = useState([]);
   const [livePrice, setLivePrice] = useState(null); // { price, change_pct } for non-scanner stocks
@@ -6309,8 +6335,8 @@ const SearchBar = ({ data, search, setSearch }) => {
       {open && q.length === 0 && searchHistory.length > 0 && (
         <div className="absolute top-full right-0 mt-1.5 w-72 bg-zinc-900 border border-zinc-700/60 rounded-lg shadow-2xl z-50 py-1">
           <div className="px-3 py-1 flex items-center justify-between">
-            <span className="text-[11px] text-zinc-600 uppercase tracking-widest">最近搜尋</span>
-            <button onMouseDown={e => { e.preventDefault(); setSearchHistory([]); localStorage.removeItem('searchHistory'); }} className="text-[11px] text-zinc-600 hover:text-zinc-400">清除</button>
+            <span className="text-[11px] text-zinc-600 uppercase tracking-widest">{lang === 'zh' ? '最近搜尋' : 'Recent'}</span>
+            <button onMouseDown={e => { e.preventDefault(); setSearchHistory([]); localStorage.removeItem('searchHistory'); }} className="text-[11px] text-zinc-600 hover:text-zinc-400">{lang === 'zh' ? '清除' : 'Clear'}</button>
           </div>
           {searchHistory.map(h => (
             <button key={h} onMouseDown={e => { e.preventDefault(); setSearch(h); setOpen(true); }}
@@ -6345,7 +6371,7 @@ const SearchBar = ({ data, search, setSearch }) => {
               onClick={e => { const panel = e.currentTarget.closest('[class*="shadow-2xl"]') || e.currentTarget; const rect = panel.getBoundingClientRect(); setTickerHover(prev => prev?.ticker === fullResult.ticker ? null : { ticker: fullResult.ticker, rect }); }}
             >{fullResult.ticker}</span>
             {livePriceLoading && !displayPrice && (
-              <span className="text-[13px] text-zinc-600 animate-pulse">載入中…</span>
+              <span className="text-[13px] text-zinc-600 animate-pulse">{lang === 'zh' ? '載入中…' : 'Loading...'}</span>
             )}
             {displayPrice?.price != null && (
               <span className="flex items-baseline gap-1.5">
@@ -7147,6 +7173,7 @@ const MomentumCockpit = () => {
 
 // ── Market Brief Panel (RSS 全文 + Gemini：可信度、交叉驗證、突破單建議) ──
 const MarketBriefPanel = ({ data }) => {
+  const lang = useLang();
   if (!data) {
     return (
       <div className="max-w-[1400px] mx-auto px-4 py-16 text-center">
@@ -7183,33 +7210,33 @@ const MarketBriefPanel = ({ data }) => {
       <div className="flex flex-wrap items-center gap-3 mb-5">
         <span className="text-[12px] text-zinc-500">
           {generated_at}
-          {article_count != null && ` · RSS ${article_count} 則`}
+          {article_count != null && ` · RSS ${article_count} ${lang === 'zh' ? '則' : 'articles'}`}
           {fulltext_articles != null && fulltext_success_count != null
-            && ` · 全文 ${fulltext_success_count}/${fulltext_articles} 篇`}
+            && ` · ${lang === 'zh' ? '全文' : 'full text'} ${fulltext_success_count}/${fulltext_articles}`}
         </span>
       </div>
 
       {isPendingSetup && (
         <div className="text-sm text-zinc-300 bg-zinc-800/50 border border-zinc-600/50 rounded-lg p-4 mb-5 leading-relaxed">
-          {b.pending_message || "尚未產生簡報。請設定 GEMINI_API_KEY 並執行 python market_brief.py。"}
+          {b.pending_message || (lang === 'zh' ? "尚未產生簡報。請設定 GEMINI_API_KEY 並執行 python market_brief.py。" : "Brief not yet generated. Set GEMINI_API_KEY and run python market_brief.py.")}
         </div>
       )}
       {b.error && !isPendingSetup && (
         <div className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-5">
-          分析錯誤：{b.error}
+          {lang === 'zh' ? '分析錯誤：' : 'Analysis error: '}{b.error}
         </div>
       )}
 
       {isLegacyBrief && (
         <p className="text-[13px] text-amber-400/90 bg-amber-500/10 border border-amber-500/25 rounded-lg px-3 py-2 mb-5">
-          此檔為舊版格式。請重新執行 <code className="text-amber-200">python market_brief.py</code> 以產生新聞全文分析與突破單建議。
+          {lang === 'zh' ? <>此檔為舊版格式。請重新執行 <code className="text-amber-200">python market_brief.py</code> 以產生新聞全文分析與突破單建議。</> : <>Legacy format detected. Re-run <code className="text-amber-200">python market_brief.py</code> to generate full-text analysis and breakout advice.</>}
         </p>
       )}
 
       {/* 交叉驗證 */}
       {b.cross_check_note && (
         <div className="mb-5 bg-zinc-900/80 border border-zinc-700/50 rounded-xl p-4">
-          <h3 className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">交叉驗證</h3>
+          <h3 className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">{lang === 'zh' ? '交叉驗證' : 'Cross-Check'}</h3>
           <p className="text-sm text-zinc-300 leading-relaxed">{b.cross_check_note}</p>
         </div>
       )}
@@ -7217,7 +7244,7 @@ const MarketBriefPanel = ({ data }) => {
       {/* 三大市場觀點 */}
       {b.top_market_views?.length > 0 && (
         <div className="mb-5">
-          <h3 className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-3">波動主因（精簡）</h3>
+          <h3 className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-3">{lang === 'zh' ? '波動主因（精簡）' : 'Key Market Drivers'}</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {b.top_market_views.map((line, i) => (
               <div key={i} className="bg-zinc-900 border border-zinc-800/60 rounded-lg p-4">
@@ -7232,7 +7259,7 @@ const MarketBriefPanel = ({ data }) => {
       {/* 突破單建議 */}
       {b.breakout_trading_advice && (
         <div className="mb-5 rounded-xl border border-amber-500/30 bg-amber-500/5 p-4">
-          <h3 className="text-[11px] font-semibold text-amber-400/90 uppercase tracking-wider mb-2">突破單建議</h3>
+          <h3 className="text-[11px] font-semibold text-amber-400/90 uppercase tracking-wider mb-2">{lang === 'zh' ? '突破單建議' : 'Breakout Trade Advice'}</h3>
           <p className="text-sm text-zinc-200 leading-relaxed whitespace-pre-wrap">{renderBold(b.breakout_trading_advice)}</p>
         </div>
       )}
@@ -7240,7 +7267,7 @@ const MarketBriefPanel = ({ data }) => {
       {/* 各則可信度 */}
       {b.articles_reviewed?.length > 0 && (
         <div className="mb-5">
-          <h3 className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-3">新聞可信度（逐則）</h3>
+          <h3 className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-3">{lang === 'zh' ? '新聞可信度（逐則）' : 'Article Credibility'}</h3>
           <div className="space-y-2">
             {b.articles_reviewed.map((row, i) => (
               <div key={i} className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg px-3 py-2.5 flex flex-wrap gap-2 items-start">
@@ -7279,6 +7306,8 @@ const MarketBriefPanel = ({ data }) => {
 };
 
 export default function App() {
+  const [lang, setLang] = useState(() => localStorage.getItem('ui_lang') || 'zh');
+  const toggleLang = useCallback(() => setLang(l => { const next = l === 'zh' ? 'en' : 'zh'; localStorage.setItem('ui_lang', next); return next; }), []);
   const [tab, setTab] = useState("scanner");
   const [data, setData] = useState(null);
   const [briefData, setBriefData] = useState(null);
@@ -7619,6 +7648,7 @@ const filtered = useMemo(() => {
   if (loading) return <div className="min-h-screen bg-zinc-950 flex items-center justify-center"><RefreshCw size={24} className="text-zinc-500 animate-spin"/></div>;
 
   return (
+    <LangCtx.Provider value={lang}>
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
       <GlobalAlertBanner />
       <div id="app-navbar" className="border-b border-zinc-800/60 bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-20">
@@ -7750,6 +7780,9 @@ const filtered = useMemo(() => {
                 Trade Journal
               </button>
               <SearchBar data={data} search={search} setSearch={setSearch}/>
+              <button onClick={toggleLang} title="Toggle language" className="px-2.5 py-1 text-[12px] font-bold rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-200 transition-colors whitespace-nowrap">
+                {lang === 'zh' ? '中' : 'EN'}
+              </button>
               <button className="flex items-center gap-1 px-2.5 py-1 text-[12px] rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-300 transition-colors whitespace-nowrap">
                 Alerts
               </button>
@@ -7843,5 +7876,6 @@ const filtered = useMemo(() => {
       )}
       {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect} chartUrl={macroHover.chartUrl} onClose={() => setMacroHover(null)}/>}
     </div>
+    </LangCtx.Provider>
   );
 }
