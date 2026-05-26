@@ -78,12 +78,12 @@ YFINANCE_BATCH = 200
 SORT_FIELD_MAP: dict[str, str] = {
     "up4":     "change_pct",
     "dn4":     "change_pct",
-    "up25q":   "perf_3m",
-    "dn25q":   "perf_3m",
-    "up25m":   "perf_1m",
-    "dn25m":   "perf_1m",
-    "up50m":   "perf_1m",
-    "dn50m":   "perf_1m",
+    "up25q":   "perf_qtd",   # quarter-to-date — matches Finviz's quarterly definition
+    "dn25q":   "perf_qtd",
+    "up25m":   "perf_mtd",   # month-to-date — matches Finviz's monthly definition
+    "dn25m":   "perf_mtd",
+    "up50m":   "perf_mtd",
+    "dn50m":   "perf_mtd",
     "up13_34": "perf_34d",
     "dn13_34": "perf_34d",
 }
@@ -194,9 +194,22 @@ def _compute_yf_metrics(tickers: list[str]) -> dict[str, dict]:
       perf_1m  — ~21-trading-day return %
       perf_3m  — ~63-trading-day return %
       perf_34d — 34-trading-day return %
+      perf_qtd — quarter-to-date return (from first trading day of current quarter)
+      perf_mtd — month-to-date return (from first trading day of current month)
     Any value that can't be computed is None.
     """
-    empty = {"adr_pct": None, "perf_1m": None, "perf_3m": None, "perf_34d": None}
+    from datetime import date as date_type
+
+    today = date_type.today()
+    # Quarter start: Jan 1 / Apr 1 / Jul 1 / Oct 1
+    q_month = ((today.month - 1) // 3) * 3 + 1
+    quarter_start = pd.Timestamp(f"{today.year}-{q_month:02d}-01")
+    month_start   = pd.Timestamp(f"{today.year}-{today.month:02d}-01")
+
+    empty = {
+        "adr_pct":  None, "perf_1m":  None, "perf_3m": None,
+        "perf_34d": None, "perf_qtd": None, "perf_mtd": None,
+    }
     result: dict[str, dict] = {t: dict(empty) for t in tickers}
     if not tickers:
         return result
@@ -264,6 +277,25 @@ def _compute_yf_metrics(tickers: list[str]) -> dict[str, dict]:
                 if nc >= 34:
                     result[tkr]["perf_34d"] = round((latest / float(close.iloc[-34]) - 1) * 100, 2)
 
+                # perf_qtd — quarter-to-date (matches Finviz quarterly definition)
+                # Use the last close ON OR BEFORE the quarter start date as the base.
+                tz = close.index.tz
+                qs = quarter_start.tz_localize(tz) if tz is not None else quarter_start
+                ms = month_start.tz_localize(tz) if tz is not None else month_start
+
+                qtd_closes = close[close.index <= qs]
+                if not qtd_closes.empty:
+                    base_qtd = float(qtd_closes.iloc[-1])
+                    if base_qtd > 0:
+                        result[tkr]["perf_qtd"] = round((latest / base_qtd - 1) * 100, 2)
+
+                # perf_mtd — month-to-date (matches Finviz monthly definition)
+                mtd_closes = close[close.index <= ms]
+                if not mtd_closes.empty:
+                    base_mtd = float(mtd_closes.iloc[-1])
+                    if base_mtd > 0:
+                        result[tkr]["perf_mtd"] = round((latest / base_mtd - 1) * 100, 2)
+
             except Exception:
                 pass
     return result
@@ -276,10 +308,19 @@ def _compute_yf_metrics(tickers: list[str]) -> dict[str, dict]:
 def _fetch_spx_benchmarks() -> dict:
     """
     Download ^GSPC via yfinance and return benchmark returns for the same
-    periods used by _compute_yf_metrics (1D, 1M ~21 td, 3M ~63 td, 34D).
+    periods used by _compute_yf_metrics (1D, 1M ~21 td, 3M ~63 td, 34D, QTD, MTD).
     Any value that can't be computed is None.
     """
-    result: dict = {"spx_1d": None, "spx_1m": None, "spx_3m": None, "spx_34d": None}
+    from datetime import date as date_type
+    today = date_type.today()
+    q_month = ((today.month - 1) // 3) * 3 + 1
+    quarter_start = pd.Timestamp(f"{today.year}-{q_month:02d}-01")
+    month_start   = pd.Timestamp(f"{today.year}-{today.month:02d}-01")
+
+    result: dict = {
+        "spx_1d": None, "spx_1m": None, "spx_3m": None,
+        "spx_34d": None, "spx_qtd": None, "spx_mtd": None,
+    }
     try:
         df = yf.download("^GSPC", period="4mo", interval="1d",
                          auto_adjust=True, progress=False)
@@ -294,7 +335,6 @@ def _fetch_spx_benchmarks() -> dict:
         # Handle both single-ticker (flat) and multi-index frames
         if isinstance(df.columns, pd.MultiIndex):
             l0 = set(df.columns.get_level_values(0))
-            l1 = set(df.columns.get_level_values(1))
             if "Close" in l0:
                 close = df["Close"].iloc[:, 0].dropna()
             else:
@@ -323,6 +363,24 @@ def _fetch_spx_benchmarks() -> dict:
         # 34D trading days
         if nc >= 34:
             result["spx_34d"] = round((latest / float(close.iloc[-34]) - 1) * 100, 2)
+
+        # QTD — quarter-to-date (last close on or before start of current quarter)
+        tz = close.index.tz
+        qs = quarter_start.tz_localize(tz) if tz is not None else quarter_start
+        ms = month_start.tz_localize(tz) if tz is not None else month_start
+
+        qtd_closes = close[close.index <= qs]
+        if not qtd_closes.empty:
+            base = float(qtd_closes.iloc[-1])
+            if base > 0:
+                result["spx_qtd"] = round((latest / base - 1) * 100, 2)
+
+        # MTD — month-to-date
+        mtd_closes = close[close.index <= ms]
+        if not mtd_closes.empty:
+            base = float(mtd_closes.iloc[-1])
+            if base > 0:
+                result["spx_mtd"] = round((latest / base - 1) * 100, 2)
 
     except Exception as exc:
         logger.warning("SPX benchmark computation failed: %s", exc)
@@ -418,6 +476,8 @@ async def _fetch_filter(filter_key: str) -> dict[str, Any]:
             s["perf_1m"]  = m.get("perf_1m")
             s["perf_3m"]  = m.get("perf_3m")
             s["perf_34d"] = m.get("perf_34d")
+            s["perf_qtd"] = m.get("perf_qtd")
+            s["perf_mtd"] = m.get("perf_mtd")
 
     # Liquidity filter: $50M avg daily dollar volume AND ADR >= 3%
     def _parse_dv(v: str) -> float:

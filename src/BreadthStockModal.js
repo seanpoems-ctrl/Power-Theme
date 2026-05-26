@@ -278,41 +278,42 @@ function isOpinionPost(title, source) {
 const CHANGE_COL_LABEL = {
   up4:     <><span>1D</span><br/><span>Change%</span></>,
   dn4:     <><span>1D</span><br/><span>Change%</span></>,
-  up25q:   <><span>Quarterly</span><br/><span>Change%</span></>,
-  dn25q:   <><span>Quarterly</span><br/><span>Change%</span></>,
-  up25m:   <><span>25% Monthly</span><br/><span>Change%</span></>,
-  dn25m:   <><span>25% Monthly</span><br/><span>Change%</span></>,
-  up50m:   <><span>50% Monthly</span><br/><span>Change%</span></>,
-  dn50m:   <><span>50% Monthly</span><br/><span>Change%</span></>,
-  up13_34: <><span>1.5M</span><br/><span>Change%</span></>,
-  dn13_34: <><span>1.5M</span><br/><span>Change%</span></>,
+  up25q:   <><span>QTD</span><br/><span>Change%</span></>,
+  dn25q:   <><span>QTD</span><br/><span>Change%</span></>,
+  up25m:   <><span>MTD</span><br/><span>Change%</span></>,
+  dn25m:   <><span>MTD</span><br/><span>Change%</span></>,
+  up50m:   <><span>MTD</span><br/><span>Change%</span></>,
+  dn50m:   <><span>MTD</span><br/><span>Change%</span></>,
+  up13_34: <><span>34D</span><br/><span>Change%</span></>,
+  dn13_34: <><span>34D</span><br/><span>Change%</span></>,
 };
 
 // Which field to read for the last (perf) column, keyed by scanner filter id.
-// For 34D scanners: perf_34d is not yet in the schema; perf_1m is used as the
-// closest approximation until breadth_stocks_builder.py provides perf_34d.
+// perf_qtd = quarter-to-date (from start of current calendar quarter).
+// perf_mtd = month-to-date  (from start of current calendar month).
+// These match Finviz's "Quarterly" and "Monthly" period definitions.
 // For custom-column scanners (atr_ext, above50dma) this is used only for RS calc.
 const PERF_FIELD = {
   up4:       "change_pct",
   dn4:       "change_pct",
-  up25q:     "perf_3m",
-  dn25q:     "perf_3m",
-  up25m:     "perf_1m",
-  dn25m:     "perf_1m",
-  up50m:     "perf_1m",
-  dn50m:     "perf_1m",
-  up13_34:   "perf_34d", // TODO: replace with dedicated field once schema has it
+  up25q:     "perf_qtd",
+  dn25q:     "perf_qtd",
+  up25m:     "perf_mtd",
+  dn25m:     "perf_mtd",
+  up50m:     "perf_mtd",
+  dn50m:     "perf_mtd",
+  up13_34:   "perf_34d",
   dn13_34:   "perf_34d",
-  atr_ext:   "change_pct",  // RS uses 1D change for these TV-based scanners
+  atr_ext:   "change_pct",
   above50dma:"change_pct",
 };
 
 // Which spx_benchmarks field maps to each scanner's primary perf period
 const SPX_FIELD = {
-  up4:       "spx_1d", dn4:     "spx_1d",
-  up25q:     "spx_3m", dn25q:   "spx_3m",
-  up25m:     "spx_1m", dn25m:   "spx_1m",
-  up50m:     "spx_1m", dn50m:   "spx_1m",
+  up4:       "spx_1d",  dn4:     "spx_1d",
+  up25q:     "spx_qtd", dn25q:   "spx_qtd",
+  up25m:     "spx_mtd", dn25m:   "spx_mtd",
+  up50m:     "spx_mtd", dn50m:   "spx_mtd",
   up13_34:   "spx_34d", dn13_34: "spx_34d",
   atr_ext:   "spx_1d",
   above50dma:"spx_1d",
@@ -347,23 +348,22 @@ function fmtRS(v) {
   return v > 0 ? `+${s}` : `-${s}`;
 }
 
-// Client-side threshold guard for the last column.
-// Only applied to up4/dn4 because change_pct comes directly from Finviz and
-// is reliable. For quarterly/monthly/34D scanners, Finviz already pre-filters
-// to the stated threshold using its own period calculation; our yfinance-based
-// perf_1m/perf_3m/perf_34d uses a different lookback window and does not match
-// closely enough to use as a hard filter without excluding valid stocks.
+// Client-side threshold guard — only show stocks that actually meet the filter's
+// stated minimum.  perf_qtd / perf_mtd / perf_34d now match Finviz's own period
+// definitions, so the threshold filter is accurate rather than causing exclusions.
 const PERF_THRESHOLD = {
-  up4:  4,
-  dn4: -4,
+  up4:      4,    dn4:      -4,
+  up25q:   25,    dn25q:   -25,
+  up25m:   25,    dn25m:   -25,
+  up50m:   50,    dn50m:   -50,
+  up13_34: 13,    dn13_34: -13,
 };
 
-// Read a stock's perf value for the given field, with fallback for perf_34d.
+// Read a stock's perf value for the given field, with fallbacks for older JSON files.
 function getPerfValue(s, field) {
-  if (field === "perf_34d") {
-    // perf_34d not yet available — fall back to perf_1m as approximation
-    return s.perf_34d ?? s.perf_1m ?? null;
-  }
+  if (field === "perf_qtd") return s.perf_qtd ?? s.perf_3m ?? null;  // fallback to 3M if older JSON
+  if (field === "perf_mtd") return s.perf_mtd ?? s.perf_1m ?? null;  // fallback to 1M if older JSON
+  if (field === "perf_34d") return s.perf_34d ?? s.perf_1m ?? null;
   return s[field] ?? null;
 }
 
