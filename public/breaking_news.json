@@ -1,7 +1,15 @@
 {
-  "last_checked": "May 26, 2026 (14:50 EST)",
+  "last_checked": "May 26, 2026 (14:55 EST)",
   "has_alert": true,
   "alerts": [
+    {
+      "headline": "[CNBC] Brent oil jumps more than 3% after Iran vows to retaliate for U.S. strikes",
+      "source": "CNBC",
+      "grade": 9,
+      "direction": "bearish",
+      "timestamp": "2026-05-26T14:55:24.100491-04:00",
+      "pub_time": null
+    },
     {
       "headline": "Dollar firms as fresh US strikes dim Iran ceasefire hopes",
       "source": "Yahoo Finance",
@@ -41,14 +49,6 @@
       "direction": "bearish",
       "timestamp": "2026-05-26T04:25:26.726308-04:00",
       "pub_time": "2026-05-26T04:11:14-04:00"
-    },
-    {
-      "headline": "European stocks open mixed following U.S. strikes on Iran, mixed messages on peace talks",
-      "source": "CNBC",
-      "grade": 9,
-      "direction": "bearish",
-      "timestamp": "2026-05-26T03:10:21.654875-04:00",
-      "pub_time": "2026-05-26T03:06:26-04:00"
     }
   ],
   "seen_keys": [
@@ -3255,6 +3255,14 @@
     {
       "k": "autozone stock on pace for worst trading day since march 2020 despite retailer beating wall street",
       "ts": "2026-05-26T18:50:26.212641+00:00"
+    },
+    {
+      "k": "brent oil jumps more than 3 after iran vows to retaliate for us strikes",
+      "ts": "2026-05-26T18:55:24.752194+00:00"
+    },
+    {
+      "k": "polkadot change could strip two largest barriers facing dot stakers",
+      "ts": "2026-05-26T18:55:24.752194+00:00"
     }
   ]
 }
