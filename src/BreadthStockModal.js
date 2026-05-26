@@ -1044,7 +1044,7 @@ function normalizeHistoricalStock(s) {
     perf_mtd:       s.mtd ?? null,
     perf_34d:       s.d34 ?? null,
     rs_ibd:         s.rs  ?? null,
-    industry:       null,
+    industry:       s.ind ?? null,
     market_cap_b:   null,
     perf_1m:        null,
     perf_3m:        null,

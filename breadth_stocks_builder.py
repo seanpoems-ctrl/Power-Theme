@@ -791,6 +791,7 @@ def _build_compact_history(all_data: dict[str, dict], date_et: str) -> None:
                 "mtd":  s.get("perf_mtd"),
                 "d34":  s.get("perf_34d"),
                 "rs":   s.get("rs_ibd"),             # IBD RS 1-99
+                "ind":  s.get("industry") or None,   # Industry group
             }
             for s in stocks[:MAX_PER_FILTER]
         ]

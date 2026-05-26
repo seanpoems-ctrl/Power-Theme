@@ -1,7 +1,7 @@
 """
 backfill_rs_history.py
 ======================
-One-time backfill: stamps IBD RS ratings onto all existing
+One-time backfill: stamps IBD RS ratings AND industry onto all existing
 public/breadth_history/YYYY-MM-DD.json archive files.
 
 Uses TODAY's TradingView RS universe (the same computation as
@@ -9,12 +9,14 @@ breadth_stocks_builder.py).  IBD RS is a 12-month weighted metric that
 changes slowly, so applying current ranks to files from the past few
 weeks is a reasonable approximation.
 
+Industry is a static classification that does not change over time.
+
 Run once:
     python backfill_rs_history.py
 
-Also automatically stamps rs_ibd onto the latest live JSON files
-(breadth_stocks_*.json) so the modal shows IBD RS immediately without
-waiting for tonight's nightly scraper.
+Also automatically stamps rs_ibd and industry onto the latest live JSON files
+(breadth_stocks_*.json) so the modal shows IBD RS and groups immediately
+without waiting for tonight's nightly scraper.
 """
 
 import json
@@ -59,22 +61,24 @@ def _build_rs_lookup(composites: dict) -> dict:
 
 
 # ---------------------------------------------------------------------------
-# Fetch RS universe from TradingView
+# Fetch RS universe AND industry from TradingView (single call)
 # ---------------------------------------------------------------------------
 
-def build_rs_lookup() -> dict:
+def build_lookups() -> tuple[dict, dict]:
+    """Returns (rs_lookup, industry_lookup) both keyed by ticker."""
     try:
         from tradingview_screener import Query, col as tv_col
     except ImportError:
         logger.error("tradingview_screener not installed — pip install tradingview_screener")
-        return {}
+        return {}, {}
 
-    logger.info("Fetching TradingView screener for IBD RS universe …")
+    logger.info("Fetching TradingView screener for IBD RS + industry …")
     try:
         _, df = (
             Query()
             .select(
                 "name", "close", "Perf.3M", "Perf.6M", "Perf.Y",
+                "industry", "sector",
             )
             .where(
                 tv_col("close") >= 2,
@@ -87,17 +91,26 @@ def build_rs_lookup() -> dict:
         )
     except Exception as exc:
         logger.error("TradingView fetch failed: %s", exc)
-        return {}
+        return {}, {}
 
     if df is None or getattr(df, "empty", True):
         logger.error("TradingView returned empty result")
-        return {}
+        return {}, {}
 
     logger.info("TradingView: %d rows fetched", len(df))
 
-    composites = {}
+    composites    = {}
+    industry_lookup: dict[str, str] = {}
+
     for _, row in df.iterrows():
         tkr = str(row["name"])
+
+        # Industry: prefer industry field, fall back to sector
+        ind = row.get("industry") or row.get("sector") or None
+        if ind and str(ind).strip() and str(ind) != "nan":
+            industry_lookup[tkr] = str(ind).strip()
+
+        # IBD RS composite
         try:
             p3m  = float(row["Perf.3M"]) if row.get("Perf.3M")  is not None else None
             p6m  = float(row["Perf.6M"]) if row.get("Perf.6M")  is not None else None
@@ -110,22 +123,20 @@ def build_rs_lookup() -> dict:
 
     rs_lookup = _build_rs_lookup(composites)
     logger.info("RS universe built: %d tickers ranked", len(rs_lookup))
-    return rs_lookup
+    logger.info("Industry lookup built: %d tickers classified", len(industry_lookup))
+    return rs_lookup, industry_lookup
 
 
 # ---------------------------------------------------------------------------
 # Backfill history archives
 # ---------------------------------------------------------------------------
 
-def backfill_history(rs_lookup: dict) -> None:
-    if not rs_lookup:
-        logger.warning("Empty RS lookup — skipping history backfill")
-        return
-
+def backfill_history(rs_lookup: dict, industry_lookup: dict) -> None:
     files = sorted(HISTORY_DIR.glob("*.json"))
     logger.info("Backfilling %d history archive files …", len(files))
 
-    total_stamped = 0
+    total_rs = 0
+    total_ind = 0
     total_missing = 0
 
     for path in files:
@@ -139,14 +150,24 @@ def backfill_history(rs_lookup: dict) -> None:
         for filt, stocks in data.get("filters", {}).items():
             for s in stocks:
                 tkr = s.get("t", "")
-                rs  = rs_lookup.get(tkr)
-                if rs is not None:
-                    if s.get("rs") != rs:
-                        s["rs"] = rs
-                        changed = True
-                    total_stamped += 1
-                else:
-                    total_missing += 1
+
+                # Stamp RS
+                if rs_lookup:
+                    rs = rs_lookup.get(tkr)
+                    if rs is not None:
+                        if s.get("rs") != rs:
+                            s["rs"] = rs
+                            changed = True
+                        total_rs += 1
+                    else:
+                        total_missing += 1
+
+                # Stamp industry
+                ind = industry_lookup.get(tkr)
+                if ind and s.get("ind") != ind:
+                    s["ind"] = ind
+                    changed = True
+                    total_ind += 1
 
         if changed:
             path.write_text(
@@ -158,8 +179,8 @@ def backfill_history(rs_lookup: dict) -> None:
             logger.info("  Unchanged %s", path.name)
 
     logger.info(
-        "History backfill complete: %d entries stamped, %d tickers not in RS universe",
-        total_stamped, total_missing,
+        "History backfill complete: %d RS stamped, %d industry stamped, %d tickers not in RS universe",
+        total_rs, total_ind, total_missing,
     )
 
 
@@ -167,10 +188,7 @@ def backfill_history(rs_lookup: dict) -> None:
 # Also stamp the live breadth_stocks_*.json files
 # ---------------------------------------------------------------------------
 
-def stamp_live_files(rs_lookup: dict) -> None:
-    if not rs_lookup:
-        return
-
+def stamp_live_files(rs_lookup: dict, industry_lookup: dict) -> None:
     live_files = list(PUBLIC_DIR.glob("breadth_stocks_*.json"))
     logger.info("Stamping %d live breadth_stocks_*.json files …", len(live_files))
 
@@ -184,9 +202,16 @@ def stamp_live_files(rs_lookup: dict) -> None:
         changed = False
         for s in data.get("stocks", []):
             tkr = s.get("ticker", "")
-            rs  = rs_lookup.get(tkr)
-            if rs is not None and s.get("rs_ibd") != rs:
-                s["rs_ibd"] = rs
+
+            if rs_lookup:
+                rs = rs_lookup.get(tkr)
+                if rs is not None and s.get("rs_ibd") != rs:
+                    s["rs_ibd"] = rs
+                    changed = True
+
+            ind = industry_lookup.get(tkr)
+            if ind and not s.get("industry"):
+                s["industry"] = ind
                 changed = True
 
         if changed:
@@ -204,9 +229,9 @@ def stamp_live_files(rs_lookup: dict) -> None:
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    rs_lookup = build_rs_lookup()
-    if rs_lookup:
-        backfill_history(rs_lookup)
-        stamp_live_files(rs_lookup)
+    rs_lookup, industry_lookup = build_lookups()
+    if rs_lookup or industry_lookup:
+        backfill_history(rs_lookup, industry_lookup)
+        stamp_live_files(rs_lookup, industry_lookup)
     else:
-        logger.error("No RS data — nothing updated")
+        logger.error("No data fetched — nothing updated")
