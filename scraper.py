@@ -40,6 +40,15 @@ TOP_THEMES = 5
 TOP_SUBTHEMES_PER_THEME = 5
 TOP_STOCKS_PER_SUBTHEME = 10
 
+def _load_config_json(filename: str) -> dict:
+    p = Path(__file__).parent / "config" / filename
+    with open(p, encoding="utf-8") as f:
+        return json.load(f)
+
+
+# Hardcoded themes not available as Finviz industry groups — edit config/hardcoded_themes.json
+HARDCODED_THEMES: dict[str, list[str]] = _load_config_json("hardcoded_themes.json")
+
 _NYSE = xcals.get_calendar("XNYS")
 
 
@@ -502,159 +511,18 @@ INDUSTRY_TO_SUBTHEME = {
 
 
 # ──────────────────────────────────────────────────────────────
-# Ticker-level overrides — stocks that Finviz themes map places
-# in a different theme/subtheme than their industry would suggest
+# Ticker-level overrides — edit config/ticker_theme_override.json
 # ──────────────────────────────────────────────────────────────
-TICKER_THEME_OVERRIDE = {
-    # Electric Vehicles — Self-Driving
-    "AUR":   ("Electric Vehicles", "Self-Driving"),
-    "MBLY":  ("Electric Vehicles", "Self-Driving"),
-    "INVZ":  ("Electric Vehicles", "Self-Driving"),
-    "APTV":  ("Electric Vehicles", "Self-Driving"),
-    "HSAI":  ("Electric Vehicles", "Self-Driving"),
-    "LYFT":  ("Electric Vehicles", "Self-Driving"),
-    "UBER":  ("Electric Vehicles", "Self-Driving"),
-    "TSLA":  ("Electric Vehicles", "Self-Driving"),
-    # EV — Chips
-    "NVDA":  ("Semiconductors", "Compute"),       # primary; also EV/Chips
-    "QCOM":  ("Semiconductors", "Wireless"),      # primary; also EV/Self-Driving
-    # EV — Batteries
-    "QS":    ("Electric Vehicles", "Batteries"),
-    "FREYR": ("Electric Vehicles", "Batteries"),
-    "ENVX":  ("Electric Vehicles", "Batteries"),
-    "CBAT":  ("Electric Vehicles", "Batteries"),
-    # EV — Charging
-    "CHPT":  ("Electric Vehicles", "Charging"),
-    "BLNK":  ("Electric Vehicles", "Charging"),
-    "EVGO":  ("Electric Vehicles", "Charging"),
-    # EV — Manufacturers
-    "RIVN":  ("Electric Vehicles", "Manufacturers"),
-    "LCID":  ("Electric Vehicles", "Manufacturers"),
-    "NIO":   ("Electric Vehicles", "Manufacturers"),
-    "XPEV":  ("Electric Vehicles", "Manufacturers"),
-    "LI":    ("Electric Vehicles", "Manufacturers"),
-    "NKLA":  ("Electric Vehicles", "Manufacturers"),
-    "HYZN":  ("Electric Vehicles", "Manufacturers"),
-    "ARVL":  ("Electric Vehicles", "Manufacturers"),
-    "WKHS":  ("Electric Vehicles", "Manufacturers"),  # electric delivery vehicles
-    "ZAPP":  ("Electric Vehicles", "Manufacturers"),  # electric motorcycles
-    # AI — specific overrides
-    "GOOGL": ("Artificial Intelligence", "Ads & Search"),
-    "GOOG":  ("Artificial Intelligence", "Ads & Search"),
-    "META":  ("Artificial Intelligence", "Ads & Search"),
-    "MSFT":  ("Artificial Intelligence", "Enterprise"),
-    "AMZN":  ("Cloud Computing", "Hyperscalers"),
-    "ORCL":  ("Cloud Computing", "Databases"),
-    "CRM":   ("Software", "CRM"),
-    "NOW":   ("Software", "Enterprise"),
-    "SNOW":  ("Cloud Computing", "Databases"),
-    "MDB":   ("Cloud Computing", "Databases"),
-    "PLTR":  ("Artificial Intelligence", "Data"),
-    "AI":    ("Artificial Intelligence", "Enterprise"),
-    "BBAI":  ("Artificial Intelligence", "Enterprise"),
-    "SOUN":  ("Artificial Intelligence", "Models"),
-    "CEVA":  ("Artificial Intelligence", "Compute"),
-    # Cybersecurity — overrides from Software/IT industry
-    "CRWD":  ("Cybersecurity", "Endpoint"),
-    "PANW":  ("Cybersecurity", "Network"),
-    "S":     ("Cybersecurity", "Endpoint"),
-    "OKTA":  ("Cybersecurity", "Identity IAM"),
-    "ZS":    ("Cybersecurity", "Cloud"),
-    "QLYS":  ("Cybersecurity", "Cloud"),
-    "TENB":  ("Cybersecurity", "Cloud"),
-    "VRNS":  ("Cybersecurity", "ZeroTrust"),
-    "SAIL":  ("Cybersecurity", "Identity IAM"),
-    "CYBR":  ("Cybersecurity", "Identity IAM"),
-    "FTNT":  ("Cybersecurity", "Network"),
-    "CHKP":  ("Cybersecurity", "Network"),
-    "RPD":   ("Cybersecurity", "Endpoint"),
-    # Space Tech
-    "RKLB":  ("Space Tech", "Launch"),
-    "ASTS":  ("Space Tech", "Satellites"),
-    "SPCE":  ("Space Tech", "Launch"),
-    "LMT":   ("Defense & Aerospace", "Aviation"),
-    "BA":    ("Defense & Aerospace", "Aviation"),
-    "NOC":   ("Defense & Aerospace", "Weapons"),
-    "RTX":   ("Defense & Aerospace", "Aviation"),
-    "GD":    ("Defense & Aerospace", "Aviation"),
-    "HII":   ("Defense & Aerospace", "Weapons"),
-    "AXON":  ("Defense & Aerospace", "Drones"),
-    "KTOS":  ("Defense & Aerospace", "Drones"),
-    "AVAV":  ("Defense & Aerospace", "Drones"),
-    # Quantum Computing
-    "IONQ":  ("Quantum Computing", "Hardware"),
-    "RGTI":  ("Quantum Computing", "Hardware"),
-    "QUBT":  ("Quantum Computing", "Hardware"),
-    "QBTS":  ("Quantum Computing", "Hardware"),
-    "IBM":   ("Quantum Computing", "Hardware"),
-    # Robotics
-    "IRBT":  ("Robotics", "Consumer"),
-    "ISRG":  ("Robotics", "Medical"),
-    "AGCO":  ("Robotics", "Automation"),
-    # Fintech — overrides from financial industry
-    "COIN":  ("Fintech", "Blockchain"),
-    "HOOD":  ("Fintech", "Trading"),
-    "SOFI":  ("Fintech", "Neobanks"),
-    "AFRM":  ("Fintech", "Lending"),
-    "UPST":  ("Fintech", "Lending"),
-    "PAYC":  ("Software", "Enterprise"),   # Paycom = HR/payroll software, not payments
-    "PYPL":  ("Fintech", "Payments"),
-    "SQ":    ("Fintech", "Payments"),
-    "V":     ("Fintech", "Payments"),
-    "MA":    ("Fintech", "Payments"),
-    "ADYEY": ("Fintech", "Payments"),
-    # Power semiconductors — EV charging / solar (not compute)
-    "NVTS":  ("Electric Vehicles", "Charging"),   # GaN/SiC power ICs for EV charging & solar
-    # Energy storage / renewables — misclassified as EV batteries
-    "STEM":  ("Energy Renewable", "Storage"),     # AI-driven battery storage optimization, not EV
+TICKER_THEME_OVERRIDE: dict[str, tuple[str, str]] = {
+    k: tuple(v) for k, v in _load_config_json("ticker_theme_override.json").items()
 }
 
 # ──────────────────────────────────────────────────────────────
-# Ticker extra sub-themes — companies that belong to multiple
-# (theme, subtheme) pairs beyond their primary classification.
-# Format: ticker → list of (theme, subtheme) tuples.
-# These supplement (not replace) the primary TICKER_THEME_OVERRIDE.
+# Ticker extra sub-themes — edit config/ticker_extra_subthemes.json
 # ──────────────────────────────────────────────────────────────
 TICKER_EXTRA_SUBTHEMES: dict[str, list[tuple[str, str]]] = {
-    # Semiconductors that are core EV chip suppliers
-    "NVDA":  [("Electric Vehicles", "Chips"), ("Artificial Intelligence", "Compute")],
-    "QCOM":  [("Electric Vehicles", "Self-Driving"), ("Artificial Intelligence", "Edge")],
-    "INTC":  [("Electric Vehicles", "Self-Driving")],
-    "ON":    [("Electric Vehicles", "Chips")],       # ON Semiconductor — EV power mgmt
-    "STM":   [("Electric Vehicles", "Chips")],       # STMicroelectronics — EV/industrial
-    "TXN":   [("Electric Vehicles", "Chips")],       # Texas Instruments — EV power/BMS
-    "MCHP":  [("Electric Vehicles", "Chips")],       # Microchip Technology — EV MCUs
-    "WOLF":  [("Electric Vehicles", "Chips")],       # Wolfspeed — SiC for EV
-    "SWKS":  [("Electric Vehicles", "Chips")],       # Skyworks — RF + EV connectivity
-    # AI-adjacent hyperscalers / platform companies
-    "GOOGL": [("Cloud Computing", "Hyperscalers"), ("Electric Vehicles", "Self-Driving")],
-    "GOOG":  [("Cloud Computing", "Hyperscalers"), ("Electric Vehicles", "Self-Driving")],
-    "MSFT":  [("Cloud Computing", "Hyperscalers"), ("Artificial Intelligence", "Enterprise")],
-    "AMZN":  [("Artificial Intelligence", "Cloud"), ("E-commerce", "Platforms")],
-    "AAPL":  [("Semiconductors", "Chips"), ("Hardware", "Consumer")],
-    "META":  [("Artificial Intelligence", "Ads & Search"), ("Virtual & Augmented Reality", "AR/VR")],
-    # Tesla — spans EV manufacturing + self-driving + energy
-    "TSLA":  [("Electric Vehicles", "Manufacturers"), ("Artificial Intelligence", "Edge")],
-    # EV adjacent — battery + charging crossover
-    "ALB":   [("Electric Vehicles", "Batteries")],   # Albemarle — lithium for EV batteries
-    "LTHM":  [("Electric Vehicles", "Batteries")],   # Livent — lithium
-    "LAC":   [("Electric Vehicles", "Batteries")],   # Lithium Americas
-    "SQM":   [("Electric Vehicles", "Batteries")],   # Sociedad Quimica — lithium
-    # Defense companies with drone/autonomy angle
-    "LMT":   [("Defense & Aerospace", "Drones")],
-    "NOC":   [("Defense & Aerospace", "Drones")],
-    "RTX":   [("Defense & Aerospace", "Drones")],
-    # Robotics + industrial automation crossover
-    "ABB":   [("Industrial Automation", "Robotics")],
-    "ROK":   [("Industrial Automation", "Robotics")],
-    "EMR":   [("Industrial Automation", "Robotics")],
-    # Biotech with diagnostics angle
-    "ILMN":  [("Healthcare & Biotech", "Diagnostics")],
-    "TMO":   [("Healthcare & Biotech", "Diagnostics")],
-    "DHR":   [("Healthcare & Biotech", "Diagnostics")],
-    # Space + defense crossover
-    "RKLB":  [("Defense & Aerospace", "Aviation")],  # Rocket Lab — launch + defense payloads
-    "ASTS":  [("Telecommunications", "Wireless")],   # AST SpaceMobile — satellite broadband
+    k: [tuple(pair) for pair in pairs]
+    for k, pairs in _load_config_json("ticker_extra_subthemes.json").items()
 }
 
 # ──────────────────────────────────────────────────────────────
@@ -889,6 +757,62 @@ def aggregate_theme_performance(industries: list[dict]) -> list[dict]:
 
     results.sort(key=lambda t: t["rs_score"], reverse=True)
     return results
+
+
+def _build_hardcoded_theme_entry(theme_name: str, tickers: list[str]) -> dict | None:
+    """Build a theme_rankings-style entry for a hardcoded ticker list using yfinance."""
+    try:
+        import yfinance as yf
+        hist = yf.download(tickers, period="7mo", interval="1d",
+                           auto_adjust=True, progress=False, group_by="ticker")
+
+        perf_keys = ["perf_1d", "perf_1w", "perf_1m", "perf_3m", "perf_6m"]
+        trading_days = {"perf_1d": 2, "perf_1w": 5, "perf_1m": 21, "perf_3m": 63, "perf_6m": 126}
+
+        all_perfs: dict[str, list[float]] = {k: [] for k in perf_keys}
+        for ticker in tickers:
+            try:
+                col = hist[ticker]["Close"].dropna() if len(tickers) > 1 else hist["Close"].dropna()
+                if len(col) < 3:
+                    continue
+                for k, days in trading_days.items():
+                    if len(col) >= days:
+                        pct = (col.iloc[-1] / col.iloc[-days] - 1) * 100
+                        all_perfs[k].append(float(pct))
+            except Exception:
+                continue
+
+        avg_perfs = {}
+        for k in perf_keys:
+            vals = all_perfs[k]
+            avg_perfs[k] = round(sum(vals) / len(vals), 2) if vals else 0.0
+
+        rs_score = round(
+            avg_perfs.get("perf_1d", 0) * 0.05 +
+            avg_perfs.get("perf_1w", 0) * 0.15 +
+            avg_perfs.get("perf_1m", 0) * 0.25 +
+            avg_perfs.get("perf_3m", 0) * 0.30 +
+            avg_perfs.get("perf_6m", 0) * 0.25, 2)
+
+        stage2 = all(avg_perfs.get(k, 0) > 0 for k in perf_keys)
+
+        logger.info(f"  Hardcoded '{theme_name}': RS={rs_score:+.2f}  "
+                    f"1D={avg_perfs['perf_1d']:+.1f}%  1W={avg_perfs['perf_1w']:+.1f}%  "
+                    f"1M={avg_perfs['perf_1m']:+.1f}%  3M={avg_perfs['perf_3m']:+.1f}%  "
+                    f"6M={avg_perfs['perf_6m']:+.1f}%")
+        return {
+            "name": theme_name,
+            "industries": [theme_name],
+            "n_industries": 1,
+            "rs_score": rs_score,
+            "stage2_momentum": stage2,
+            "_hardcoded": True,
+            "_tickers": tickers,
+            **avg_perfs,
+        }
+    except Exception as e:
+        logger.warning(f"  Hardcoded theme '{theme_name}' failed: {e}")
+        return None
 
 
 # ──────────────────────────────────────────────────────────────
@@ -1576,6 +1500,14 @@ def build_data() -> dict:
         badge = " ★ Stage2" if t["stage2_momentum"] else ""
         logger.info(f"  {t['name']:30} RS={t['rs_score']:+7.2f}  1D={t['perf_1d']:+.1f}%  1W={t['perf_1w']:+.1f}%  1M={t['perf_1m']:+.1f}%  3M={t['perf_3m']:+.1f}%  6M={t['perf_6m']:+.1f}%{badge}")
 
+    # ── Step 2b: Inject hardcoded themes (e.g., Quantum Computing not in Finviz) ──
+    logger.info("Step 2b: Injecting hardcoded themes...")
+    for hname, htickers in HARDCODED_THEMES.items():
+        entry = _build_hardcoded_theme_entry(hname, htickers)
+        if entry:
+            theme_rankings.append(entry)
+    theme_rankings.sort(key=lambda t: t["rs_score"], reverse=True)
+
     # ── Step 3: For top themes, drill into industries → stocks ──
     top_themes = theme_rankings[:TOP_THEMES]
     logger.info(f"\nStep 3: Drilling into top {len(top_themes)} themes for stock details...")
@@ -1586,6 +1518,17 @@ def build_data() -> dict:
         theme_name = theme["name"]
         logger.info(f"\n{'─'*50}")
         logger.info(f"Theme: {theme_name} ({theme['n_industries']} industries)")
+
+        # Hardcoded themes: fetch stock details directly from ticker list
+        if theme.get("_hardcoded"):
+            picks = [{"ticker": t} for t in theme["_tickers"]]
+            sub_stocks = _fetch_details(picks, all_detail_cache)
+            if sub_stocks:
+                output_themes.append({
+                    "name": theme_name,
+                    "subthemes": [{"name": theme_name, "stocks": sub_stocks}],
+                })
+            continue
 
         # Sort industries within this theme by their composite perf
         theme_industries = [i for i in industries if i["parent_theme"] == theme_name]
@@ -1612,6 +1555,59 @@ def build_data() -> dict:
 
         if theme_subthemes:
             output_themes.append({"name": theme_name, "subthemes": theme_subthemes})
+
+    # ── Step 3b: Fetch stocks for remaining heatmap themes (top5 + bottom5 by 1D) ──
+    # Map finviz map theme names that don't exist in theme_rankings to industry names
+    _HEATMAP_FALLBACK_INDUSTRIES: dict[str, list[str]] = {
+        "Education Technology":        ["Education & Training Services"],
+        "Social Media":                ["Internet Content & Information"],
+        "Biometrics":                  ["Security & Protection Services"],
+        "Nanotechnology":              ["Specialty Chemicals"],
+        "Crypto & Blockchain":         ["Financial Data & Stock Exchanges", "Capital Markets"],
+        "Virtual & Augmented Reality": ["Electronic Gaming & Multimedia", "Computer Hardware"],
+        "Wearables":                   ["Consumer Electronics"],
+        "Smart Home":                  ["Consumer Electronics", "Specialty Industrial Machinery"],
+        "Aging Population & Longevity":["Biotechnology", "Medical Devices"],
+        "Healthy Food & Nutrition":    ["Packaged Foods", "Farm Products"],
+        "Agriculture & FoodTech":      ["Agricultural Inputs", "Farm Products"],
+    }
+
+    # Build theme_name → industries lookup from theme_rankings
+    _tr_industries = {t["name"]: t.get("industries", []) for t in theme_rankings}
+
+    output_theme_names = {t["name"] for t in output_themes}
+    # Fetch stocks for ALL remaining themes so every heatmap card is clickable
+    heatmap_extra_names = [t["name"] for t in finviz_theme_rankings
+                           if t["name"] not in output_theme_names]
+
+    logger.info(f"\nStep 3b: Fetching stocks for {len(heatmap_extra_names)} remaining heatmap themes...")
+    heatmap_themes: list[dict] = []
+    for theme_name in heatmap_extra_names:
+        # Prefer industry codes from theme_rankings, fall back to HEATMAP_FALLBACK_INDUSTRIES
+        ind_names = _tr_industries.get(theme_name) or _HEATMAP_FALLBACK_INDUSTRIES.get(theme_name, [])
+        if not ind_names:
+            logger.warning(f"  No industry mapping for heatmap theme: {theme_name}")
+            continue
+
+        logger.info(f"  Fetching: {theme_name} via industries: {ind_names}")
+        theme_subthemes = []
+        for ind_name in ind_names[:TOP_SUBTHEMES_PER_THEME]:
+            ind_code = ind_codes.get(ind_name)
+            if not ind_code:
+                logger.warning(f"    No filter code for: {ind_name}")
+                continue
+            stocks = fetch_screener_stocks("ind", ind_code, max_pages=3)
+            if not stocks:
+                continue
+            stocks.sort(key=_stock_score, reverse=True)
+            picks = stocks[:TOP_STOCKS_PER_SUBTHEME]
+            sub_stocks = _fetch_details(picks, all_detail_cache)
+            if sub_stocks:
+                theme_subthemes.append({"name": ind_name, "stocks": sub_stocks})
+            _sleep()
+
+        if theme_subthemes:
+            heatmap_themes.append({"name": theme_name, "subthemes": theme_subthemes})
 
     # ── Step 4: Mark pure_play (appears in only one subtheme across all themes) ──
     ticker_count: dict[str, int] = {}
@@ -1643,7 +1639,7 @@ def build_data() -> dict:
     finviz_adv_dec, finviz_new_hl, finviz_sma50, finviz_sma200 = _fetch_finviz_market_breadth()
 
     all_stocks_flat = []
-    for th in output_themes:
+    for th in output_themes + heatmap_themes:
         for sub in th.get("subthemes", []):
             all_stocks_flat.extend(sub["stocks"])
 
@@ -1662,7 +1658,7 @@ def build_data() -> dict:
         for rank, (idx, _) in enumerate(perfs):
             all_stocks_flat[idx]["rs_52w"] = max(1, min(99, int((rank / max(n - 1, 1)) * 98) + 1))
 
-    for th in output_themes:
+    for th in output_themes + heatmap_themes:
         for sub in th.get("subthemes", []):
             sub["stocks"].sort(key=lambda s: s.get("rs_52w", 0), reverse=True)
 
@@ -1747,6 +1743,7 @@ def build_data() -> dict:
         "last_updated": updated.isoformat(),
         "generated_at": generated_at,
         "themes": output_themes,
+        "heatmap_themes": heatmap_themes,
         "theme_rankings": theme_rankings,
         "industry_rankings": industry_rankings,
         "finviz_theme_rankings": finviz_theme_rankings,
@@ -2029,9 +2026,211 @@ def fetch_all_tickers() -> list[dict]:
         return []
 
 
+# ETF → theme mapping (mirrors THEME_ETF_MAP in App.js)
+_THEME_ETF_MAP = {
+    "Artificial Intelligence":       "AIQ",
+    "Semiconductors":                "SOXX",
+    "Cloud Computing":               "WCLD",
+    "Cybersecurity":                 "CIBR",
+    "Electric Vehicles":             "LIT",
+    "Autonomous Systems":            "DRIV",
+    "Defense & Aerospace":           "ITA",
+    "Healthcare & Biotech":          "XBI",
+    "FinTech":                       "FINX",
+    "Crypto & Blockchain":           "BLOK",
+    "Space Tech":                    "UFO",
+    "Quantum Computing":             "QTUM",
+    "Robotics":                      "BOTZ",
+    "Energy Renewable":              "ICLN",
+    "Energy Traditional":            "XLE",
+    "Software":                      "IGV",
+    "E-commerce":                    "IBUY",
+    "Social Media":                  "SOCL",
+    "Real Estate & REITs":           "VNQ",
+    "Internet of Things":            "SNSR",
+    "Industrial Automation":         "IRBO",
+    "Consumer Goods":                "XLY",
+    "Commodities Metals":            "GDX",
+    "Commodities Energy":            "USO",
+    "Commodities Agriculture":       "DBA",
+    "Transportation & Logistics":    "XTN",
+    "Telecommunications":            "XLC",
+    "Virtual & Augmented Reality":   "METV",
+    "Agriculture & FoodTech":        "MOO",
+    "Environmental Sustainability":  "ESGU",
+    "Digital Entertainment":         "HERO",
+    "Aging Population & Longevity":  "IHF",
+    "Healthy Food & Nutrition":      "MOO",
+    "Education Technology":          "INST",
+    "Telecom":                       "FCOM",
+    "Clean Energy & Utilities":      "ICLN",
+    "Industrials":                   "XLI",
+    "Consumer Staples":              "XLP",
+    "Consumer Discretionary":        "XLY",
+    "Financials":                    "XLF",
+    "Real Estate":                   "VNQ",
+    "Software & Cloud":              "IGV",
+    "Internet & E-Commerce":         "IBUY",
+    "Media & Entertainment":         "SOCL",
+    "Materials & Mining":            "XLB",
+    "Agriculture & Food":            "MOO",
+    "E-Commerce":                    "IBUY",
+    "Fintech":                       "FINX",
+}
+
+
+def fetch_etf_holdings(etf_ticker: str) -> list:
+    """Fetch top holdings for an ETF via yfinance. Returns [] on any failure."""
+    try:
+        import yfinance as yf
+        t = yf.Ticker(etf_ticker)
+        fd = t.get_funds_data()
+        if fd is None:
+            return []
+        th = fd.top_holdings
+        if th is None or th.empty:
+            return []
+        rows = []
+        for sym, row in th.iterrows():
+            name = str(row.get("Name", "")).strip()
+            pct = float(row.get("Holding Percent", 0)) * 100
+            rows.append({"ticker": str(sym).strip(), "name": name, "weight": round(pct, 2)})
+        rows.sort(key=lambda x: x["weight"], reverse=True)
+        logger.info(f"  ETF holdings: {etf_ticker} → {len(rows)} holdings")
+        return rows
+    except Exception as e:
+        logger.warning(f"  ETF holdings failed for {etf_ticker}: {e}")
+        return []
+
+
+def _classify_etf_signal(detail: dict, closes: list) -> tuple:
+    """
+    BREAKOUT: Price broke above SMA20 (purple line in Finviz) which was acting
+              as resistance. Detected by: this week made a new 11-week high,
+              price is above SMA20 & SMA50 & SMA200, and is still within 12%
+              of the prior resistance level (not too extended).
+
+    PULLBACK: Price pulled back to test SMA50 (blue line in Finviz) as support.
+              Very tight band: within ±2% of SMA50, with SMA200 still rising
+              (s200 > 0) to confirm the long-term uptrend is intact.
+
+    Returns (signal, level): signal in {'breakout', 'pullback', None}.
+    """
+    s20  = detail.get("sma20_pct")   # (price / SMA20 − 1) × 100, from Finviz
+    s50  = detail.get("sma50_pct")
+    s200 = detail.get("sma200_pct")
+
+    # ── BREAKOUT: broke above SMA20 (purple line) ────────────────────────────
+    # Conditions:
+    #   1. Price is above all three MAs (s20 > 0, s50 > 0, s200 > 0)
+    #   2. Broke the prior resistance within the last 3 weeks (fresh move)
+    #   3. Still within 12% of that resistance — not an old breakout that's
+    #      been running for months (e.g. CIBR breakout 7 weeks ago → excluded)
+    #
+    # Key: base_high excludes the last 3 weeks (closes[-55:-15]).
+    # An ETF that broke out >3 weeks ago will have current price >> base_high
+    # → dist_pct > 12% → filtered out as "too extended / stale".
+    if (closes and len(closes) >= 55
+            and s20 is not None and s50 is not None and s200 is not None
+            and s20 > 0 and s50 > 0 and s200 > 0):
+
+        last        = closes[-1]
+        recent_high = max(closes[-15:])   # highest close in the last 3 weeks
+        base_high   = max(closes[-55:-15])  # resistance from 3–11 weeks ago
+        dist_pct    = (last - base_high) / base_high * 100 if base_high > 0 else 999
+
+        if (recent_high > base_high   # broke the 3-to-11-week resistance ceiling
+                and dist_pct <= 12):  # still fresh — within 12% of that level
+            return ("breakout", None)
+
+    # ── PULLBACK: price broke below SMA20, now testing SMA50 as support ─────
+    # Conditions:
+    #   1. s20 < 0  — price has already pulled back THROUGH SMA20 (the line
+    #                 is now overhead resistance, not support). This excludes
+    #                 ETFs where SMA20 ≈ SMA50 are both clustered at the same
+    #                 level (e.g. XLE where s20≈+1.7% and s50≈+1.8%).
+    #   2. -2% ≤ s50 ≤ 2%  — price is right at SMA50 (the blue line).
+    #   3. s200 > 5%  — long-term uptrend firmly intact; price at least 5%
+    #                   above SMA200. Filters out ETFs barely clinging to
+    #                   SMA200 (e.g. XLC s200≈+0.2%).
+    if (s20 is not None and s20 < 0
+            and s50 is not None and -2.0 <= s50 <= 2.0
+            and s200 is not None and s200 > 5.0):
+        return ("pullback", "SMA50")
+
+    return (None, None)
+
+
+def build_etf_signals(unique_etfs: list) -> list:
+    """Fetch technicals for each theme ETF and flag breakout / support setups.
+
+    Returns a list (breakouts first, then supports) telling the dashboard
+    which themes are worth watching next.
+    """
+    etf_theme = {}
+    for theme, etf in _THEME_ETF_MAP.items():
+        etf_theme.setdefault(etf, theme)
+
+    signals = []
+    for etf in unique_etfs:
+        detail = fetch_stock_detail(etf)
+        _sleep()
+        if not detail:
+            logger.warning(f"  ETF signal: no detail for {etf}")
+            continue
+        closes = fetch_sparkline(etf).get("sparkline", [])
+        _sleep()
+        signal, level = _classify_etf_signal(detail, closes)
+        if signal is None:
+            continue
+        # Breakout requires positive 1M AND 3M momentum (trending up).
+        # Pullback allows negative 1M — price is pulling back by definition.
+        perf_1m = detail.get("perf_1m") or 0
+        perf_3m = detail.get("perf_3m") or 0
+        if signal == "breakout" and (perf_1m <= 0 or perf_3m <= 0):
+            logger.info(f"  ETF signal: {etf} breakout skipped (1M {perf_1m:.1f}% or 3M {perf_3m:.1f}% ≤ 0)")
+            continue
+        signals.append({
+            "etf": etf,
+            "theme": etf_theme.get(etf, etf),
+            "signal": signal,
+            "level": level,
+            "price": detail.get("price"),
+            "perf_1d": detail.get("perf_1d"),
+            "perf_1w": detail.get("perf_1w"),
+            "perf_1m": detail.get("perf_1m"),
+            "perf_3m": detail.get("perf_3m"),
+            "perf_6m": detail.get("perf_6m"),
+            "sma20_pct": detail.get("sma20_pct"),
+            "sma50_pct": detail.get("sma50_pct"),
+            "sma200_pct": detail.get("sma200_pct"),
+        })
+        logger.info(f"  ETF signal: {etf} → {signal}{(' @ ' + level) if level else ''}")
+
+    signals.sort(key=lambda x: ({"breakout": 0, "pullback": 1}.get(x["signal"], 9),
+                                -(x.get("perf_1d") or 0)))
+    return signals
+
+
 def main():
     output = build_data()
     sp500_prices = output.pop("_sp500_prices", {})
+
+    # Pre-fetch ETF holdings for all unique ETFs in the theme map
+    unique_etfs = sorted(set(_THEME_ETF_MAP.values()))
+    logger.info(f"Fetching ETF holdings for {len(unique_etfs)} ETFs...")
+    etf_holdings = {}
+    for etf in unique_etfs:
+        etf_holdings[etf] = fetch_etf_holdings(etf)
+    output["etf_holdings"] = etf_holdings
+
+    # Scan all unique theme ETFs — let technical conditions (breakout/support) do the filtering.
+    # Theme ranking is too volatile to use as a candidate filter; good setups like UFO or SNSR
+    # can appear on days when their theme is outside the top 10.
+    all_theme_etfs = sorted(set(_THEME_ETF_MAP.values()))
+    logger.info(f"Building ETF breakout / support signals for all {len(all_theme_etfs)} theme ETFs")
+    output["etf_signals"] = build_etf_signals(all_theme_etfs)
+
     out_path = Path("public/thematic_data.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(json.dumps(output, indent=2, ensure_ascii=False, allow_nan=False), encoding="utf-8")

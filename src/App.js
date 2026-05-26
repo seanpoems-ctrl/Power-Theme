@@ -123,7 +123,7 @@ const RSBadge = ({ value, trend }) => {
   return (
     <span className="inline-flex items-center gap-0.5">
       <span className={`inline-flex items-center px-1.5 py-0.5 text-[12px] font-semibold rounded border ${cl}`}>{value}</span>
-      {trend === "up"   && <span className="text-[11px] font-bold text-cyan-400" title="RS Improving">▲</span>}
+      {trend === "up"   && <span className="text-[11px] font-bold text-blue-400" title="RS Improving">▲</span>}
       {trend === "down" && <span className="text-[11px] font-bold text-rose-400" title="RS Declining">▼</span>}
     </span>
   );
@@ -344,9 +344,9 @@ const RSvsSPYBadge = ({ stockPerf, spyPerf }) => {
   if (stockPerf == null || spyPerf == null)
     return <span className="text-[11px] text-zinc-700">—</span>;
   const diff = stockPerf - spyPerf;
-  if (diff > 5) return <span className="px-1 py-0.5 text-[10px] font-bold rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">Leader</span>;
-  if (diff < -5) return <span className="px-1 py-0.5 text-[10px] font-bold rounded bg-orange-500/15 text-orange-400 border border-orange-500/20">Lagging</span>;
-  return <span className="px-1 py-0.5 text-[10px] font-bold rounded bg-zinc-700/40 text-zinc-500 border border-zinc-600/30">In-Line</span>;
+  if (diff > 5) return <span className="px-1 py-0.5 text-[11px] font-bold rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">Leader</span>;
+  if (diff < -5) return <span className="px-1 py-0.5 text-[11px] font-bold rounded bg-orange-500/15 text-orange-400 border border-orange-500/20">Lagging</span>;
+  return <span className="px-1 py-0.5 text-[11px] font-bold rounded bg-zinc-700/40 text-zinc-500 border border-zinc-600/30">In-Line</span>;
 };
 
 // ── Market Condition ──
@@ -389,12 +389,12 @@ const MarketCondition = ({ mc }) => {
       <div className="flex-1 min-w-[160px] bg-zinc-900/60 border border-zinc-700/40 rounded-lg px-3 py-2">
         <div className="flex justify-between items-baseline mb-1.5">
           <span className="text-[11px] font-semibold text-emerald-400">{leftLabel}</span>
-          {centerLabel && <span className="text-[10px] text-zinc-500 font-medium">{centerLabel}</span>}
+          {centerLabel && <span className="text-[11px] text-zinc-500 font-medium">{centerLabel}</span>}
           <span className="text-[11px] font-semibold text-red-400">{rightLabel}</span>
         </div>
         <div className="flex justify-between items-baseline mb-1">
           <span className="text-[13px] font-bold text-emerald-300">{leftPct.toFixed(1)}%{leftCount != null ? ` (${leftCount})` : ""}</span>
-          <span className="text-[13px] font-bold text-red-300">{rightPct.toFixed(1)}%{rightCount != null ? ` (${rightCount})` : ""}</span>
+          <span className="text-[13px] font-bold text-red-500">{rightPct.toFixed(1)}%{rightCount != null ? ` (${rightCount})` : ""}</span>
         </div>
         <div className="flex gap-0.5 h-1.5 rounded-full overflow-hidden">
           <div className="bg-emerald-500 rounded-l-full transition-all" style={{ width: `${leftPct}%` }}/>
@@ -531,6 +531,56 @@ const CorrelationGuard = ({ themes }) => {
   );
 };
 
+const MarketWarnings = ({ themes }) => {
+  const counterTrend = useMemo(() => {
+    const themeAvg = (t, key) => {
+      const norm = t.subthemes ? t : { ...t, subthemes: [{ name: t.name, stocks: t.stocks || [] }] };
+      const vals = norm.subthemes.flatMap(s => s.stocks).map(s => s[key]).filter(v => v != null);
+      return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
+    };
+    const ranked1d = [...themes]
+      .map(t => ({ name: (t.subthemes ? t : { ...t, subthemes: [] }).name, avg1d: themeAvg(t, "perf_1d"), avg6m: themeAvg(t, "perf_6m") }))
+      .filter(t => t.avg1d != null && t.avg6m != null)
+      .sort((a, b) => b.avg1d - a.avg1d);
+    return ranked1d.find((t, i) => i === 0 && t.avg6m <= -15) ?? null;
+  }, [themes]);
+
+  const correlation = useMemo(() => {
+    const top5 = themes.slice(0, 5);
+    const tr = top5.map(t => ({ name: (t.subthemes ? t : { ...t, subthemes: [{ name: t.name, stocks: t.stocks || [] }] }).name, returns: getThemeDailyReturns(t) })).filter(t => t.returns.length >= 3);
+    for (let i = 0; i < tr.length; i++)
+      for (let j = i + 1; j < tr.length; j++)
+        for (let k = j + 1; k < tr.length; k++) {
+          const len = Math.min(tr[i].returns.length, tr[j].returns.length, tr[k].returns.length);
+          if (pearson(tr[i].returns.slice(-len), tr[j].returns.slice(-len)) > 0.80 &&
+              pearson(tr[i].returns.slice(-len), tr[k].returns.slice(-len)) > 0.80 &&
+              pearson(tr[j].returns.slice(-len), tr[k].returns.slice(-len)) > 0.80)
+            return [tr[i].name, tr[j].name, tr[k].name];
+        }
+    return null;
+  }, [themes]);
+
+  if (!counterTrend && !correlation) return null;
+  return (
+    <div className="flex flex-wrap items-center gap-2 mb-1">
+      {correlation && (
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-orange-500/10 border border-orange-500/30 rounded-full text-[11px] text-orange-400">
+          <AlertTriangle size={10} className="flex-shrink-0"/>
+          <span className="font-semibold">Concentration:</span>
+          <span className="text-orange-300/80">{correlation.join(' · ')}</span>
+        </span>
+      )}
+      {counterTrend && (
+        <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-rose-500/10 border border-rose-500/30 rounded-full text-[11px] text-rose-400">
+          <AlertTriangle size={10} className="flex-shrink-0"/>
+          <span className="font-semibold">Dead-Cat:</span>
+          <span className="text-rose-300/80">{counterTrend.name} ({counterTrend.avg6m?.toFixed(1)}% 6M)</span>
+        </span>
+      )}
+    </div>
+  );
+};
+
 function normalizeThemeRaw(t) {
   if (t.subthemes) return t;
   return { ...t, subthemes: [{ name: t.name, stocks: t.stocks || [] }] };
@@ -543,11 +593,11 @@ function formatSubthemeName(name) {
 }
 
 const PerfCellLB = ({ val }) => {
-  if (val == null) return <td className="px-1 py-1.5 text-center text-[11px] text-zinc-600">—</td>;
+  if (val == null) return <td className="px-1 py-1.5 align-middle text-center text-[11px] text-zinc-600">—</td>;
   const color = val > 0 ? 'text-emerald-400' : val < 0 ? 'text-red-400' : 'text-zinc-400';
   const bg = val > 5 ? 'bg-emerald-500/10' : val < -5 ? 'bg-red-500/10' : '';
   return (
-    <td className="px-1 py-1.5 text-center">
+    <td className="px-1 py-1.5 align-middle text-center">
       <span className={`inline-block rounded-md px-1 py-0.5 text-[11px] font-mono font-medium ${color} ${bg}`}>{val > 0 ? '+' : ''}{val.toFixed(1)}%</span>
     </td>
   );
@@ -562,7 +612,7 @@ const IbkrGatesBadge = ({ passed }) => {
             : passed === 4 ? 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30'
             :                'bg-red-500/15 text-red-400 border-red-500/30';
   return (
-    <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-bold rounded border font-mono ${cls}`}>
+    <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[11px] font-bold rounded border font-mono ${cls}`}>
       ✓ {passed}/{total}
     </span>
   );
@@ -571,13 +621,14 @@ const IbkrGatesBadge = ({ passed }) => {
 const IbkrSourceBadge = ({ source }) => {
   const isIbkr = source === 'ibkr';
   return (
-    <span className={`px-1.5 py-0.5 text-[10px] font-bold rounded border font-mono ${isIbkr ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' : 'bg-zinc-700/40 text-zinc-500 border-zinc-600/40'}`}>
+    <span className={`px-1.5 py-0.5 text-[11px] font-bold rounded border font-mono ${isIbkr ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' : 'bg-zinc-700/40 text-zinc-500 border-zinc-600/40'}`}>
       {isIbkr ? 'IBKR' : 'Finviz'}
     </span>
   );
 };
 
 const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData }) => {
+  const [hovered, setHovered] = useState(null);
   const fmtMktCap = (v) => {
     if (!v) return '—';
     if (v >= 1e12) return `$${(v/1e12).toFixed(1)}T`;
@@ -598,9 +649,9 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
       || null;
     if (!name) return { themeName: null, stocks: [], themeRS: null, analysis: null };
 
-    if (lbView === 'ibkr') {
-      const pt = (ibkrThemesData?.power_themes || []).find(t => t.name === name);
-      if (!pt) return { themeName: name, stocks: [], themeRS: null, analysis: null };
+    // Try ibkr data first (regardless of lbView), then fall back to thematic_data
+    const pt = (ibkrThemesData?.power_themes || []).find(t => t.name === name);
+    if (pt) {
       return {
         themeName: name,
         stocks: (pt.leaders || []).map(l => ({ ...l, float_shares: null, short_pct: null })),
@@ -627,16 +678,16 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
           ✦ Thematic Spotlight — {themeName}{themeRS != null ? ` · RS ${themeRS}` : ''}
         </span>
         {lbView === 'ibkr' && (
-          <span className={`px-1.5 py-0.5 text-[10px] font-bold rounded border font-mono ${ibkrThemesData?.data_source === 'ibkr' ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/40' : 'bg-orange-500/15 text-orange-400 border-orange-500/40'}`}>
+          <span className={`px-1.5 py-0.5 text-[11px] font-bold rounded border font-mono ${ibkrThemesData?.data_source === 'ibkr' ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/40' : 'bg-orange-500/15 text-orange-400 border-orange-500/40'}`}>
             {ibkrThemesData?.data_source === 'ibkr' ? '● LIVE' : '◐ DELAYED'}
           </span>
         )}
       </div>
 
       {analysis && (
-        <div className="mb-3 border border-emerald-800/40 bg-emerald-900/10 rounded-lg p-3">
+        <div className="mb-3 border border-zinc-700/40 bg-zinc-800/20 rounded-lg p-3">
           <div className="flex items-center gap-1.5 mb-1.5">
-            <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">✦ GEMINI CATALYST</span>
+            <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">✦ GEMINI CATALYST</span>
           </div>
           <p className="text-[12px] text-zinc-300 leading-relaxed">{analysis}</p>
         </div>
@@ -644,42 +695,37 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
 
       {stocks.length > 0 ? (
         <div className="overflow-x-auto overflow-y-auto" style={{ maxHeight: '240px' }}>
-          <table className="w-full text-left">
+          <table className="text-left" style={{ width: '100%', minWidth: '480px', tableLayout: 'fixed' }}>
+            <colgroup>
+              {Array(7).fill(0).map((_, i) => <col key={i} style={{ width: '14.28%' }} />)}
+            </colgroup>
             <thead className="sticky top-0 z-10" style={{ background: '#18181b' }}>
               <tr className="border-b border-zinc-800/60">
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Ticker</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">Ticker</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Price</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">ADR%</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">RS</th>
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right whitespace-nowrap">Vol Surge</th>
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right whitespace-nowrap">Mkt Cap</th>
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Float</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Vol Surge</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Short%</th>
-                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">Gates</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">Setup</th>
               </tr>
             </thead>
             <tbody>
               {stocks.map(s => {
-                const gp = s.gates_passed ?? 5;
-                const gatesCls = gp === 5 ? 'text-emerald-400' : gp >= 4 ? 'text-yellow-400' : 'text-zinc-500';
                 const rsCls = (s.rs_52w || 0) >= 85 ? 'text-emerald-400' : (s.rs_52w || 0) >= 70 ? 'text-yellow-400' : 'text-red-400';
                 return (
                   <tr key={s.ticker} className="border-b border-zinc-800/20 hover:bg-zinc-800/30 transition-colors">
-                    <td className="px-2 py-1.5 text-[12px] font-mono font-semibold text-zinc-100">{s.ticker}</td>
+                    <td className="px-2 py-1.5"><span className="text-[12px] font-mono font-semibold text-blue-400 hover:text-blue-300 cursor-pointer transition-colors" onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === s.ticker ? null : { ticker: s.ticker, rect }); }}>{s.ticker}</span></td>
                     <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{s.price ? `$${Number(s.price).toFixed(2)}` : '—'}</td>
                     <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{s.adr_pct ? `${Number(s.adr_pct).toFixed(1)}%` : '—'}</td>
                     <td className={`px-2 py-1.5 text-[12px] font-mono font-bold text-right ${rsCls}`}>{s.rs_52w ?? '—'}</td>
                     <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">
                       {(s.vol_surge || s.rvol) ? `${Number(s.vol_surge || s.rvol).toFixed(1)}x` : '—'}
                     </td>
-                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{fmtMktCap(s.mkt_cap)}</td>
-                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-500 text-right">{s.float_shares ? fmtMktCap(s.float_shares) : '—'}</td>
                     <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-500 text-right">{s.short_pct != null ? `${Number(s.short_pct).toFixed(1)}%` : '—'}</td>
-                    <td className={`px-2 py-1.5 text-[12px] font-mono font-bold text-center ${gatesCls}`}>{gp === 5 ? '✓ 5/5' : `${gp}/5`}</td>
                     <td className="px-2 py-1.5 text-center">
                       {s.setup_label
-                        ? <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${setupCls(s.setup_label)}`}>{s.setup_label}</span>
+                        ? <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded border ${setupCls(s.setup_label)}`}>{s.setup_label}</span>
                         : '—'}
                     </td>
                   </tr>
@@ -691,128 +737,139 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
       ) : (
         <div className="text-center py-6 text-zinc-600 text-[12px]">No stocks found for this theme</div>
       )}
+      {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
     </div>
   );
 };
 
-const IbkrLeaderboard = ({ ibkrThemesData, onTickerHover, onThemeSelect }) => {
-  const powerThemes = ibkrThemesData?.power_themes || [];
-  const isLive = ibkrThemesData?.data_source === 'ibkr';
+// ── Hero Zone — 3-column dashboard row above the heatmap ──────────────────
+const HeroZone = ({ data, themesCount, tickersCount }) => {
+  const [etfChart, setEtfChart] = useState(null);         // { ticker, rect }
+  const [etfHoldingsPopup, setEtfHoldingsPopup] = useState(null); // { etf }
 
-  if (!ibkrThemesData) {
-    return (
-      <div className="flex items-center justify-center py-12 text-zinc-600 text-[12px]">
-        IBKR themes not yet generated — run ibkr_themes.py
-      </div>
-    );
-  }
+  // Column 1: top 3 stocks by RS (deduped across all themes)
+  const top3 = useMemo(() => {
+    if (!data?.themes) return [];
+    const seen = new Set();
+    const stocks = [];
+    for (const t of data.themes) {
+      const norm = t.subthemes ? t : { ...t, subthemes: [{ stocks: t.stocks || [] }] };
+      for (const sub of norm.subthemes) {
+        for (const s of (sub.stocks || [])) {
+          if (!seen.has(s.ticker) && s.rs_52w != null) {
+            seen.add(s.ticker);
+            stocks.push(s);
+          }
+        }
+      }
+    }
+    return stocks.sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0)).slice(0, 3);
+  }, [data]);
 
-  if (powerThemes.length === 0) {
-    return (
-      <div className="flex items-center justify-center py-12 text-zinc-600 text-[12px]">
-        No power themes found in current scan
-      </div>
-    );
-  }
+  // Column 2: ETFs flagged as breakout / support by the scraper
+  const etfSignals = useMemo(() => (
+    Array.isArray(data?.etf_signals) ? data.etf_signals : []
+  ), [data]);
 
   return (
-    <div>
-      {/* Data source status bar */}
-      <div className="flex items-center gap-2 px-2 pb-2 border-b border-zinc-800/40 mb-1">
-        <span className={`px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono ${isLive ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/40' : 'bg-orange-500/15 text-orange-400 border-orange-500/40'}`}>
-          {isLive ? '● LIVE' : '◐ DELAYED'}
-        </span>
-        <span className="text-[10px] text-zinc-600">{ibkrThemesData.data_source} · {powerThemes.length} themes · {powerThemes.reduce((n, t) => n + t.leaders.length, 0)} leaders</span>
-        {ibkrThemesData.generated_at && (
-          <span className="text-[10px] text-zinc-700 ml-auto">
-            {new Date(ibkrThemesData.generated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-          </span>
+    <>
+    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', padding: '10px 0 0' }}>
+      {/* ── Col 1: Top 3 RS Leaders ── */}
+      <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg p-3 flex flex-col" style={{ gap: '6px' }}>
+        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Top 3 RS Leaders</div>
+        {top3.length === 0 && <span className="text-[11px] text-zinc-600 italic">No data loaded</span>}
+        {top3.map(s => {
+          const gp = s.gates_passed ?? null;
+          return (
+            <div key={s.ticker} className="flex items-center justify-between gap-2">
+              <div className="min-w-0">
+                <span className="text-[13px] font-mono font-bold text-blue-400">{s.ticker}</span>
+                <div className="text-[11px] text-zinc-500 font-mono leading-tight">
+                  {s.price != null ? `$${s.price.toFixed(2)}` : '—'} · {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : '—'} · RS {s.rs_52w ?? '—'}
+                </div>
+              </div>
+              {gp != null && (
+                <span className={`flex-shrink-0 text-[11px] font-mono font-bold px-1.5 py-0.5 rounded border whitespace-nowrap ${
+                  gp === 5 ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
+                  : gp >= 4 ? 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30'
+                  : 'bg-zinc-700/40 text-zinc-500 border-zinc-600/30'
+                }`}>✓ {gp}/5</span>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ── Col 2: ETF Breakout / Pullback Leaderboard ── */}
+      <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg p-3 flex flex-col" style={{ gap: '6px' }}>
+        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">ETF Breakout / Pullback</div>
+        {etfSignals.length === 0 ? (
+          <span className="text-[11px] text-zinc-600 italic">No breakout / pullback ETFs</span>
+        ) : (
+          <div className="overflow-y-auto overflow-x-auto" style={{ maxHeight: '210px' }}>
+            <table className="w-full text-left">
+              <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
+                <tr className="border-b border-zinc-800/60">
+                  <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">ETF</th>
+                  {LB_KEYS.map(k => (
+                    <th key={k.key} className="px-1 py-1.5 text-center text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">{k.label}</th>
+                  ))}
+                  <th className="px-1 py-1.5 text-center text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">Signal</th>
+                </tr>
+              </thead>
+              <tbody>
+                {etfSignals.map(s => {
+                  const isBreakout = s.signal === 'breakout';
+                  const isPullback = s.signal === 'pullback';
+                  return (
+                    <tr key={s.etf} className="border-b border-zinc-800/30 hover:bg-zinc-800/40 transition-colors">
+                      <td className="px-2 py-1.5 align-middle whitespace-nowrap">
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            onClick={e => setEtfChart({ ticker: s.etf, rect: e.currentTarget.getBoundingClientRect() })}
+                            className="text-[12px] font-mono font-bold text-zinc-100 hover:text-blue-400 transition-colors"
+                          >{s.etf}</button>
+                          <button
+                            onClick={() => setEtfHoldingsPopup({ etf: s.etf })}
+                            title={`${s.etf} 成分股`}
+                            className="text-emerald-400/70 hover:text-emerald-300 hover:bg-emerald-500/15 rounded p-0.5 transition-colors"
+                          ><Layers size={11}/></button>
+                          <span className="text-[10px] text-zinc-600 truncate" style={{ maxWidth: '88px' }}>{s.theme}</span>
+                        </div>
+                      </td>
+                      {LB_KEYS.map(k => <PerfCellLB key={k.key} val={s[k.key]}/>)}
+                      <td className="px-1 py-1.5 align-middle text-center">
+                        <span className={`text-[10px] font-semibold uppercase tracking-wide px-1.5 py-0.5 rounded border whitespace-nowrap ${
+                          isBreakout
+                            ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
+                            : isPullback
+                            ? 'bg-amber-500/15 text-amber-400 border-amber-500/30'
+                            : 'bg-sky-500/15 text-sky-400 border-sky-500/30'
+                        }`}>
+                          {isBreakout ? 'Breakout' : isPullback ? 'Pullback' : '—'}
+                        </span>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
-      <table className="w-full text-left">
-        <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
-          <tr className="border-b border-zinc-800/60">
-            <th className="px-2 py-2 w-6 text-[11px] text-zinc-600 select-none">#</th>
-            <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Theme</th>
-            <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center whitespace-nowrap">Leaders</th>
-            <th className="px-2 py-2 w-14 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">1D</th>
-            <th className="px-2 py-2 w-14 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">RS</th>
-            <th className="px-2 py-2 w-16 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">Gates</th>
-            <th className="px-2 py-2 w-16 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">Src</th>
-          </tr>
-        </thead>
-        <tbody>
-          {powerThemes.map((theme, i) => {
-            const perf1d = theme.perf_1d;
-            const perfCls = perf1d == null ? 'text-zinc-600' : perf1d > 0 ? 'text-emerald-400' : perf1d < 0 ? 'text-red-400' : 'text-zinc-500';
-            const rsCls = (theme.theme_rs || 0) >= 85 ? 'text-emerald-400' : 'text-red-400';
-            const leaders = theme.leaders || [];
-            const topLeaders = leaders.slice(0, 3);
-            // Gates: use the min gates_passed among leaders as the theme-level indicator
-            const minGates = topLeaders.reduce((m, l) => Math.min(m, l.gates_passed ?? 5), 5);
-            // Secondary themes: collect unique secondary themes across top leaders
-            const secThemes = [...new Set(topLeaders.flatMap(l => l.secondary_themes || []))].slice(0, 3);
-            // Source: theme-level is live/fallback from ibkrThemesData
-            const themeSource = ibkrThemesData?.data_source || 'fallback';
-
-            return (
-              <tr key={theme.name}
-                onClick={() => onThemeSelect && onThemeSelect(theme.name)}
-                className={`border-b border-zinc-800/30 transition-colors cursor-pointer ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
-                <td className={`px-1 py-2 text-[12px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
-                <td className="px-2 py-2 min-w-0">
-                  <div className="text-[12px] font-semibold text-zinc-200 whitespace-nowrap">{theme.name}</div>
-                  {secThemes.length > 0 && (
-                    <div className="flex flex-wrap gap-1 mt-0.5">
-                      {secThemes.map(s => (
-                        <span key={s} className="text-[9px] text-zinc-600 bg-zinc-800/60 px-1 py-0.5 rounded leading-none">{s}</span>
-                      ))}
-                    </div>
-                  )}
-                </td>
-                <td className="px-2 py-1.5">
-                  <div className="flex flex-wrap gap-1">
-                    {topLeaders.map(l => {
-                      const setupCls = l.setup_label === 'Flag' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20'
-                                     : l.setup_label === 'Base' ? 'text-blue-400 bg-blue-500/10 border-blue-500/20'
-                                     : l.setup_label === 'Watch' ? 'text-yellow-400 bg-yellow-500/10 border-yellow-500/20'
-                                     : 'text-zinc-500 bg-zinc-800/60 border-zinc-700/40';
-                      return (
-                        <span key={l.ticker}
-                          className={`text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded border cursor-pointer transition-colors hover:opacity-80 ${setupCls}`}
-                          onClick={e => onTickerHover && onTickerHover(l.ticker, e.currentTarget.getBoundingClientRect())}>
-                          {l.ticker}
-                        </span>
-                      );
-                    })}
-                  </div>
-                </td>
-                <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${perfCls}`}>
-                  {perf1d != null ? `${perf1d > 0 ? '+' : ''}${perf1d.toFixed(1)}%` : '—'}
-                </td>
-                <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${rsCls}`}>
-                  {theme.theme_rs != null ? Math.round(theme.theme_rs) : '—'}
-                </td>
-                <td className="px-1 py-1.5 text-center">
-                  <IbkrGatesBadge passed={minGates} />
-                </td>
-                <td className="px-1 py-1.5 text-center">
-                  <IbkrSourceBadge source={themeSource} />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
     </div>
+    {etfChart && <TVPopup ticker={etfChart.ticker} anchorRect={etfChart.rect} onClose={() => setEtfChart(null)}/>}
+    {etfHoldingsPopup && <EtfHoldingsPopup etfTicker={etfHoldingsPopup.etf} holdingsData={data?.etf_holdings || {}} onClose={() => setEtfHoldingsPopup(null)}/>}
+    </>
   );
 };
 
-const ThemeHeatmap = ({ themes, finvizThemeRankings }) => {
+const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt }) => {
+  const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks }
+
   const heatData = useMemo(() => {
     const rankings = finvizThemeRankings || [];
     if (rankings.length === 0) {
-      // fallback: compute from themes data
       return (themes || []).map(t => {
         const norm = t.subthemes ? t : { ...t, subthemes: [{ stocks: t.stocks || [] }] };
         const stocks = norm.subthemes.flatMap(s => s.stocks);
@@ -835,51 +892,294 @@ const ThemeHeatmap = ({ themes, finvizThemeRankings }) => {
 
   const getColor = (v) => {
     if (v == null) return { bg: 'bg-zinc-800/60', text: 'text-zinc-500' };
-    if (v >= 3)  return { bg: 'bg-emerald-500/60', text: 'text-emerald-100' };
+    if (v >= 3)   return { bg: 'bg-emerald-500/60', text: 'text-emerald-100' };
     if (v >= 1.5) return { bg: 'bg-emerald-500/40', text: 'text-emerald-200' };
     if (v >= 0.5) return { bg: 'bg-emerald-500/25', text: 'text-emerald-300' };
-    if (v >= 0)   return { bg: 'bg-emerald-500/12', text: 'text-emerald-400' };
-    if (v >= -0.5) return { bg: 'bg-red-500/12', text: 'text-red-400' };
+    if (v >= 0)   return { bg: 'bg-zinc-700/60', text: 'text-zinc-100' };
+    if (v >= -0.5) return { bg: 'bg-zinc-700/60', text: 'text-zinc-100' };
     if (v >= -1.5) return { bg: 'bg-red-500/25', text: 'text-red-300' };
     if (v >= -3)  return { bg: 'bg-red-500/40', text: 'text-red-200' };
     return { bg: 'bg-red-500/60', text: 'text-red-100' };
   };
 
+  const handleCardClick = (itemName) => {
+    const allSources = [...(themes || []), ...(heatmapThemes || [])];
+    const norm = allSources.find(t => t.name?.toLowerCase() === itemName.toLowerCase());
+    if (!norm) { setSelectedTheme({ name: itemName, stocks: [] }); return; }
+    const themeObj = norm.subthemes ? norm : { ...norm, subthemes: [{ name: norm.name, stocks: norm.stocks || [] }] };
+    const stocks = themeObj.subthemes.flatMap(s =>
+      (s.stocks || []).map(st => ({ ...st, _subtheme: s.name }))
+    );
+    const sorted = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0));
+    setSelectedTheme({ name: itemName, stocks: sorted });
+  };
+
   if (!topBottom.length) return null;
 
   return (
-    <div className="mb-3 bg-zinc-900/40 border border-zinc-800/50 rounded-xl p-3">
-      <div className="flex items-center justify-between mb-2">
-        <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.18em]">
-          Theme Heatmap — 1D RS Performance
+    <>
+      <div className="mb-3 bg-zinc-900/40 border border-zinc-800/50 rounded-xl p-3">
+        <div className="flex items-center justify-between mb-2">
+          <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.18em]">
+            Theme Heatmap — 1D RS Performance
+          </div>
+          <div className="flex items-center gap-2">
+            <UpdatedAt ts={generatedAt}/>
+            {hasEnough && <div className="text-[11px] text-zinc-600 uppercase tracking-wider">Top 5 · Bottom 5</div>}
+          </div>
         </div>
-        {hasEnough && (
-          <div className="text-[9px] text-zinc-600 uppercase tracking-wider">Top 5 · Bottom 5</div>
-        )}
-      </div>
-      <div className="grid gap-1" style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}>
-        {topBottom.map((item, idx) => {
-          const { bg, text } = getColor(item.perf_1d);
-          return (
-            <div key={`${item.name}-${idx}`} className={`rounded-lg p-2 ${bg} text-center`}>
-              <div className={`text-[11px] font-semibold leading-tight truncate ${text}`}>{item.name}</div>
-              <div className={`text-[12px] font-bold font-mono mt-0.5 ${text}`}>
-                {item.perf_1d != null ? `${item.perf_1d >= 0 ? '+' : ''}${item.perf_1d.toFixed(1)}%` : '—'}
+        <div className="grid gap-1" style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}>
+          {topBottom.map((item, idx) => {
+            const { bg, text } = getColor(item.perf_1d);
+            return (
+              <div
+                key={`${item.name}-${idx}`}
+                className={`rounded-lg p-2 ${bg} text-center cursor-pointer hover:ring-1 hover:ring-white/20 transition-all`}
+                onClick={() => handleCardClick(item.name)}
+              >
+                <div className={`text-[11px] font-semibold leading-tight truncate ${text}`}>{item.name}</div>
+                <div className={`text-[12px] font-bold font-mono mt-0.5 ${text}`}>
+                  {item.perf_1d != null ? `${item.perf_1d >= 0 ? '+' : ''}${item.perf_1d.toFixed(1)}%` : '—'}
+                </div>
               </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {selectedTheme && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          onClick={() => setSelectedTheme(null)}
+        >
+          <div
+            className="bg-zinc-900 border border-zinc-700/60 rounded-2xl shadow-2xl w-[min(92vw,780px)] max-h-[80vh] flex flex-col"
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Header */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
+              <div>
+                <div className="text-sm font-bold text-zinc-100">{selectedTheme.name}</div>
+                <div className="text-[11px] text-zinc-500 mt-0.5">{selectedTheme.stocks.length} 檔股票</div>
+              </div>
+              <button
+                onClick={() => setSelectedTheme(null)}
+                className="text-zinc-500 hover:text-zinc-200 transition-colors p-1"
+              >
+                <X size={16} />
+              </button>
             </div>
-          );
-        })}
+
+            {/* Stock list */}
+            <div className="overflow-y-auto flex-1">
+              {selectedTheme.stocks.length === 0 ? (
+                <div className="flex flex-col items-center justify-center py-12 gap-2 text-center px-6">
+                  <div className="text-zinc-400 text-sm font-medium">此主題暫無股票資料</div>
+                  <div className="text-zinc-600 text-xs leading-relaxed">將於下次每日掃描後更新。</div>
+                </div>
+              ) : (
+                <table className="w-full text-xs">
+                  <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800">
+                    <tr className="text-zinc-500 text-[11px] uppercase tracking-wider">
+                      <th className="text-left px-4 py-2 font-medium">Ticker</th>
+                      <th className="text-left px-4 py-2 font-medium hidden sm:table-cell">公司</th>
+                      <th className="text-right px-3 py-2 font-medium">價格</th>
+                      <th className="text-right px-3 py-2 font-medium">1D</th>
+                      <th className="text-right px-3 py-2 font-medium">1W</th>
+                      <th className="text-right px-3 py-2 font-medium">1M</th>
+                      <th className="text-right px-3 py-2 font-medium">RS</th>
+                      <th className="text-right px-3 py-2 font-medium hidden sm:table-cell">ADR%</th>
+                      <th className="text-left px-3 py-2 font-medium hidden md:table-cell">Sub-Theme</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {selectedTheme.stocks.map((s, i) => {
+                      const fmtPct = (v) => v != null
+                        ? <span className={v >= 0 ? 'text-emerald-400' : 'text-red-400'}>{v >= 0 ? '+' : ''}{v.toFixed(1)}%</span>
+                        : <span className="text-zinc-600">—</span>;
+                      return (
+                        <tr key={`${s.ticker}-${i}`} className="border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors">
+                          <td className="px-4 py-2">
+                            <a
+                              href={`https://finviz.com/quote.ashx?t=${s.ticker}`}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="font-bold text-sky-400 hover:text-sky-300"
+                              onClick={e => e.stopPropagation()}
+                            >
+                              {s.ticker}
+                            </a>
+                            {s.pure_play && <span className="ml-1 text-[11px] bg-violet-500/20 text-violet-300 px-1 rounded">PP</span>}
+                          </td>
+                          <td className="px-4 py-2 text-zinc-400 truncate max-w-[140px] hidden sm:table-cell">{s.company || '—'}</td>
+                          <td className="px-3 py-2 text-right text-zinc-200 font-mono">{s.price != null ? `$${s.price.toFixed(2)}` : '—'}</td>
+                          <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1d)}</td>
+                          <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1w)}</td>
+                          <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1m)}</td>
+                          <td className="px-3 py-2 text-right font-mono">
+                            {s.rs_52w != null
+                              ? <span className={s.rs_52w >= 80 ? 'text-emerald-400 font-bold' : s.rs_52w >= 60 ? 'text-zinc-200' : 'text-zinc-500'}>{s.rs_52w}</span>
+                              : <span className="text-zinc-600">—</span>}
+                          </td>
+                          <td className="px-3 py-2 text-right text-zinc-400 hidden sm:table-cell">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : '—'}</td>
+                          <td className="px-3 py-2 text-zinc-500 text-[11px] hidden md:table-cell truncate max-w-[120px]">{s._subtheme || '—'}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+const SubThemeStocksModal = ({ subthemeName, stocks, onClose }) => {
+  const sorted = useMemo(() => [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0)), [stocks]);
+  const [hovered, setHovered] = useState(null); // { ticker, rect }
+
+  useEffect(() => {
+    const handler = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
+      <div className="relative w-full max-w-2xl max-h-[80vh] bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl flex flex-col overflow-hidden" onClick={e => e.stopPropagation()}>
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 shrink-0">
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-semibold text-zinc-100">{subthemeName}</span>
+            <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{sorted.length} stocks · sorted by RS</span>
+          </div>
+          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-300 transition-colors p-1 rounded hover:bg-zinc-800">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
+          </button>
+        </div>
+        {/* Table */}
+        <div className="overflow-y-auto flex-1 px-2 py-1">
+          <table className="w-full border-collapse text-left text-xs">
+            <thead className="sticky top-0 bg-zinc-900 z-10">
+              <tr className="border-b border-zinc-800 text-zinc-500">
+                <th className="w-8 py-2 pr-2 text-right font-medium">#</th>
+                <th className="px-2 py-2 font-medium">Ticker</th>
+                <th className="px-2 py-2 font-medium">Company</th>
+                <th className="px-2 py-2 font-medium text-right">RS</th>
+                <th className="px-2 py-2 font-medium text-right">ADR%</th>
+                <th className="px-2 py-2 font-medium text-right">$ Vol</th>
+                <th className="px-2 py-2 font-medium text-right">1D Change%</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sorted.map((s, i) => {
+                const rsCls = s.rs_52w >= 90 ? "text-emerald-300" : s.rs_52w >= 70 ? "text-emerald-400" : s.rs_52w >= 50 ? "text-zinc-300" : "text-red-400";
+                const chgCls = (s.change_pct ?? 0) > 0 ? "text-emerald-400" : (s.change_pct ?? 0) < 0 ? "text-red-400" : "text-zinc-400";
+                const fmtVol = (v) => { if (v == null) return "—"; if (v >= 1e9) return `$${(v/1e9).toFixed(1)}B`; if (v >= 1e6) return `$${(v/1e6).toFixed(0)}M`; return `$${(v/1e3).toFixed(0)}K`; };
+                const fmtPct = (v) => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(2)}%`;
+                return (
+                  <tr key={s.ticker} className="border-b border-zinc-800/50 hover:bg-zinc-800/30 cursor-pointer"
+                    onClick={e => {
+                      const rect = e.currentTarget.getBoundingClientRect();
+                      setHovered(h => h?.ticker === s.ticker ? null : { ticker: s.ticker, rect });
+                    }}>
+                    <td className="py-1.5 pr-2 text-right font-mono text-zinc-600">{i + 1}</td>
+                    <td className="px-2 py-1.5 font-mono font-semibold text-blue-400">{s.ticker}</td>
+                    <td className="px-2 py-1.5 text-zinc-300 max-w-[180px] truncate">{s.company || "—"}</td>
+                    <td className={`px-2 py-1.5 text-right font-mono font-bold ${rsCls}`}>{s.rs_52w ?? "—"}</td>
+                    <td className="px-2 py-1.5 text-right font-mono text-zinc-300">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
+                    <td className="px-2 py-1.5 text-right font-mono text-zinc-400">{fmtVol(s.dollar_volume)}</td>
+                    <td className={`px-2 py-1.5 text-right font-mono font-semibold ${chgCls}`}>{fmtPct(s.change_pct)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+            <tfoot>
+              <tr className="border-t border-zinc-700 text-zinc-600 text-xs">
+                <td colSpan={7} className="py-1.5 pr-2 text-right font-mono">{sorted.length} stocks</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
+    </div>
+  );
+};
+
+const RS_MODES = [
+  { key: '1d',  label: '1D',  perfKey: 'perf_1d',  spyKey: null       },
+  { key: '1w',  label: '1W',  perfKey: 'perf_1w',  spyKey: 'perf_1w'  },
+  { key: '1m',  label: '1M',  perfKey: 'perf_1m',  spyKey: 'perf_1m'  },
+  { key: '3m',  label: '3M',  perfKey: 'perf_3m',  spyKey: 'perf_3m'  },
+  { key: '6m',  label: '6M',  perfKey: 'perf_6m',  spyKey: 'perf_6m'  },
+  { key: '52w', label: '52W', perfKey: 'rs_52w',   spyKey: null       },
+];
+
+const EtfHoldingsPopup = ({ etfTicker, holdingsData = {}, onClose }) => {
+  const holdings = holdingsData[etfTicker] ?? null;
+
+  useEffect(() => {
+    const handler = e => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
+      <div className="relative w-full max-w-xl max-h-[80vh] bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl flex flex-col overflow-hidden" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 shrink-0">
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-semibold text-zinc-100">{etfTicker} · Top Holdings</span>
+            {holdings && <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{holdings.length} holdings · sorted by weight</span>}
+          </div>
+          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-300 transition-colors p-1 rounded hover:bg-zinc-800">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
+          </button>
+        </div>
+        <div className="overflow-y-auto flex-1 px-2 py-1">
+          {!holdings || holdings.length === 0 ? (
+            <div className="text-[12px] text-zinc-500 text-center py-10">No holdings data</div>
+          ) : (
+            <table className="w-full border-collapse text-left text-xs">
+              <thead className="sticky top-0 bg-zinc-900 z-10">
+                <tr className="border-b border-zinc-800 text-zinc-500">
+                  <th className="w-8 py-2 pr-2 text-right font-medium">#</th>
+                  <th className="px-2 py-2 font-medium">Ticker</th>
+                  <th className="px-2 py-2 font-medium">Name</th>
+                  <th className="px-2 py-2 font-medium text-right">Weight %</th>
+                </tr>
+              </thead>
+              <tbody>
+                {holdings.map((h, i) => (
+                  <tr key={i} className="border-b border-zinc-800/50 hover:bg-zinc-800/30">
+                    <td className="py-1.5 pr-2 text-right font-mono text-zinc-600">{i + 1}</td>
+                    <td className="px-2 py-1.5 font-mono font-semibold text-blue-400">{h.ticker || '—'}</td>
+                    <td className="px-2 py-1.5 text-zinc-300 max-w-[240px] truncate">{h.name || '—'}</td>
+                    <td className="px-2 py-1.5 text-right font-mono text-emerald-400 font-semibold">{h.weight.toFixed(2)}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
       </div>
     </div>
   );
 };
 
-const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData, onViewChange, onThemeSelect }) => {
+const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, generatedAt, onViewChange, onThemeSelect, etfHoldings = {} }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
   const [expanded, setExpanded] = useState(null);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
   const [themeHover, setThemeHover] = useState(null); // { ticker, rect }
   const [themeStats, setThemeStats] = useState(null); // { themeName, anchorRect }
+  const [subThemeModal, setSubThemeModal] = useState(null); // { subthemeName, stocks }
+  const [rsMode, setRsMode] = useState('52w');
+  const [etfPopup, setEtfPopup] = useState(null); // { etf, anchorRect }
 
   const activeData = view === "themes" ? finvizThemeRankings : themeRankings;
 
@@ -907,14 +1207,23 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
   // Build theme name → avg rs_52w map from actual stock data
   const themeAvgRS = useMemo(() => {
     const map = {};
+    const mode = RS_MODES.find(m => m.key === rsMode) ?? RS_MODES[RS_MODES.length - 1];
+    const spyVal = mode.spyKey ? (spyBenchmarks?.[mode.spyKey] ?? null) : null;
     for (const theme of (themes || [])) {
       const norm = normalizeTheme(theme);
       const stocks = norm.subthemes.flatMap(s => s.stocks);
-      const vals = stocks.map(s => s.rs_52w).filter(v => v != null);
-      map[norm.name.toLowerCase()] = vals.length ? Math.round(vals.reduce((a, v) => a + v, 0) / vals.length) : null;
+      if (rsMode === '52w') {
+        const vals = stocks.map(s => s.rs_52w).filter(v => v != null);
+        map[norm.name.toLowerCase()] = vals.length ? Math.round(vals.reduce((a, v) => a + v, 0) / vals.length) : null;
+      } else {
+        const vals = stocks.map(s => s[mode.perfKey]).filter(v => v != null);
+        if (!vals.length) { map[norm.name.toLowerCase()] = null; continue; }
+        const avg = vals.reduce((a, v) => a + v, 0) / vals.length;
+        map[norm.name.toLowerCase()] = spyVal != null ? Math.round((avg - spyVal) * 10) / 10 : Math.round(avg * 10) / 10;
+      }
     }
     return map;
-  }, [themes]);
+  }, [themes, rsMode, spyBenchmarks]);
 
   const ranked = useMemo(() => {
     if (!activeData || !activeData.length) return [];
@@ -966,8 +1275,8 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         className={`px-1 py-2 text-center cursor-pointer select-none ${w || 'w-12'} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500 hover:text-zinc-300'}`}>
         <span className="inline-flex items-center justify-center gap-0.5 text-[11px] font-semibold uppercase tracking-wider">
           {label}
-          {isPrimary   && <span className="text-[9px] text-blue-400/70">①{dir === 'desc' ? '▼' : '▲'}</span>}
-          {isSecondary && <span className="text-[9px] text-violet-400/70">②{dir === 'desc' ? '▼' : '▲'}</span>}
+          {isPrimary   && <span className="text-[11px] text-blue-400/70">①{dir === 'desc' ? '▼' : '▲'}</span>}
+          {isSecondary && <span className="text-[11px] text-violet-400/70">②{dir === 'desc' ? '▼' : '▲'}</span>}
         </span>
       </th>
     );
@@ -980,51 +1289,48 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         <BarChart3 size={13} className="text-blue-400 flex-shrink-0"/>
         <span className="text-[13px] font-semibold text-zinc-300 whitespace-nowrap">Theme Leaderboard</span>
         <span className="text-[11px] text-zinc-600">Top 5 of {ranked.length} themes</span>
+        <UpdatedAt ts={generatedAt}/>
         {secondaryKey && (
           <button onClick={() => setSortPriority([{ key: 'rs_score', direction: 'desc' }])}
-            className="text-[10px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">
+            className="text-[11px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">
             ✕ Reset
           </button>
         )}
         <div className="flex-1"></div>
         <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 flex-shrink-0">
-          {[{k:"themes",l:"Themes Map"},{k:"industry",l:"Industry"},{k:"ibkr",l:"IBKR Power"}].map(v => (
+          {[{k:"themes",l:"Themes Map"},{k:"industry",l:"Industry"}].map(v => (
             <button key={v.k} onClick={() => { setView(v.k); setExpanded(null); onViewChange && onViewChange(v.k); }}
               className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all flex items-center gap-1 ${view === v.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
               {v.l}
-              {v.k === "ibkr" && (
-                ibkrThemesData?.data_source === "ibkr"
-                  ? <span className="px-1 py-0.5 text-[9px] font-bold rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 leading-none">LIVE</span>
-                  : <span className="px-1 py-0.5 text-[9px] font-bold rounded bg-orange-500/20 text-orange-400 border border-orange-500/30 leading-none">DELAYED</span>
-              )}
             </button>
           ))}
         </div>
       </div>
       <div className="overflow-y-auto overflow-x-auto" style={{ maxHeight: '497px' }}>
-        {view === "ibkr" ? (
-          <IbkrLeaderboard
-            ibkrThemesData={ibkrThemesData}
-            onTickerHover={(ticker, rect) => setThemeHover(prev => prev?.ticker === ticker ? null : { ticker, rect })}
-            onThemeSelect={onThemeSelect}
-          />
-        ) : (
         <table className="w-full text-left">
           <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
             <tr className="border-b border-zinc-800/60">
               <th className="px-2 py-2 w-6 text-[11px] text-zinc-600 select-none whitespace-nowrap">#</th>
               <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Theme</th>
-              {view === "themes" && (
-                <>
-                  <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Sub-Themes</th>
-                  <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Leaders</th>
-                </>
-              )}
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
-              <LBSortHeader k="rs_score" label="RS" w="w-14" />
-              {view === "themes" && (
-                <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap text-center">Source</th>
-              )}
+              <th onClick={e => handleLBSort('rs_score', e.shiftKey)}
+                className={`px-1 py-2 text-center cursor-pointer select-none w-14 ${sortPriority[0]?.key === 'rs_score' ? 'text-blue-400' : 'text-zinc-500 hover:text-zinc-300'}`}>
+                <div className="flex flex-col items-center gap-0.5">
+                  <span className="inline-flex items-center gap-0.5 text-[11px] font-semibold uppercase tracking-wider">
+                    RS
+                    {sortPriority[0]?.key === 'rs_score' && <span className="text-[11px] text-blue-400/70">①{sortPriority[0].direction === 'desc' ? '▼' : '▲'}</span>}
+                  </span>
+                  <div className="flex gap-0.5" onClick={e => e.stopPropagation()}>
+                    {RS_MODES.map(m => (
+                      <button key={m.key}
+                        onClick={() => { setRsMode(m.key); setSortPriority([{ key: 'rs_score', direction: 'desc' }]); }}
+                        className={`text-[11px] px-0.5 py-px rounded leading-none transition-colors ${rsMode === m.key ? 'bg-blue-500/30 text-blue-300' : 'text-zinc-600 hover:text-zinc-400'}`}>
+                        {m.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -1033,24 +1339,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
               const isExpanded = isIndustryView && expanded === t.name;
               const industries = isIndustryView ? (industryMap[t.name] || []) : [];
 
-              // Sub-themes & leaders for themes view
-              let subThemeNames = [];
-              let leaderTickers = [];
-              let hasIbkrSource = false;
-              if (view === "themes") {
-                const matchedTheme = themes.find(th => (th.name || '').toLowerCase() === (t.name || '').toLowerCase());
-                if (matchedTheme) {
-                  subThemeNames = (matchedTheme.subthemes || []).slice(0, 3).map(s => s.name);
-                }
-                const ibkrPT = ibkrThemesData?.power_themes?.find(pt => pt.name?.toLowerCase() === t.name?.toLowerCase());
-                if (ibkrPT) {
-                  hasIbkrSource = true;
-                  leaderTickers = (ibkrPT.leaders || []).slice(0, 3).map(l => ({ ticker: l.ticker, setupCls: l.setup_label === 'Flag' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' : l.setup_label === 'Base' ? 'text-blue-400 bg-blue-500/10 border-blue-500/20' : 'text-zinc-400 bg-zinc-800/60 border-zinc-700/40' }));
-                } else if (matchedTheme) {
-                  const allStocks = (matchedTheme.subthemes || []).flatMap(s => s.stocks || []);
-                  leaderTickers = [...allStocks].sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0)).slice(0, 3).map(s => ({ ticker: s.ticker, setupCls: 'text-zinc-400 bg-zinc-800/60 border-zinc-700/40' }));
-                }
-              }
+              const etfTicker = view === "themes" ? (THEME_ETF_MAP[t.name] || null) : null;
 
               return (<React.Fragment key={`lb-${t.name}`}>
                 <tr
@@ -1058,12 +1347,12 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                     if (isIndustryView) { setExpanded(isExpanded ? null : t.name); return; }
                     onThemeSelect && onThemeSelect(t.name);
                   }}
-                  className={`border-b border-zinc-800/30 transition-colors cursor-pointer ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
-                  <td className={`px-1 py-2 text-[12px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
-                  <td className="px-2 py-2">
-                    <div className="flex items-center gap-1.5">
+                  className={`h-14 border-b border-zinc-800/30 transition-colors cursor-pointer ${i === 0 ? 'bg-blue-500/5' : 'hover:bg-zinc-800/40'}`}>
+                  <td className={`px-1 py-2 align-middle text-[12px] font-bold font-mono whitespace-nowrap ${i === 0 ? 'text-blue-400' : 'text-zinc-600'}`}>{i + 1}</td>
+                  <td className="px-2 py-2 align-middle min-w-0">
+                    <div className="flex items-center gap-1.5 flex-nowrap min-w-0">
                       <span
-                        className="text-[12px] font-semibold text-zinc-200 hover:text-blue-400 transition-colors cursor-pointer"
+                        className="text-[12px] font-semibold text-zinc-200 hover:text-blue-400 transition-colors cursor-pointer truncate"
                         onClick={e => {
                           e.stopPropagation();
                           const row = e.currentTarget.closest('tr');
@@ -1093,36 +1382,29 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                           onThemeSelect && onThemeSelect(t.name);
                         }}
                       >{t.name}</span>
-                      {t.stage2_momentum && <span className="px-1.5 py-0.5 text-[9px] font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full leading-none">STAGE 2</span>}
-                      {t.n_industries && <span className="text-[10px] text-zinc-600">{t.n_industries} ind</span>}
+                      {etfTicker && (
+                        <button
+                          className={`text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded border transition-colors whitespace-nowrap flex-shrink-0 ${etfPopup?.etf === etfTicker ? 'text-emerald-300 bg-emerald-500/25 border-emerald-400/40' : 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20 hover:bg-emerald-500/20'}`}
+                          onClick={e => {
+                            e.stopPropagation();
+                            setEtfPopup(prev => prev?.etf === etfTicker ? null : { etf: etfTicker });
+                          }}
+                        >{etfTicker}</button>
+                      )}
+                      {t.n_industries && <span className="text-[11px] text-zinc-600">{t.n_industries} ind</span>}
                     </div>
                   </td>
-                  {view === "themes" && (
-                    <>
-                      <td className="px-2 py-1.5 min-w-[120px]">
-                        <div className="text-[11px] text-zinc-400 leading-tight">
-                          {subThemeNames.join(' · ') || <span className="text-zinc-600">—</span>}
-                        </div>
-                      </td>
-                      <td className="px-2 py-1.5">
-                        <div className="flex flex-wrap gap-1">
-                          {leaderTickers.map(l => (
-                            <span key={l.ticker} className={`text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded border ${l.setupCls}`}>{l.ticker}</span>
-                          ))}
-                          {leaderTickers.length === 0 && <span className="text-zinc-600 text-[11px]">—</span>}
-                        </div>
-                      </td>
-                    </>
-                  )}
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
-                  <td className={`px-1 py-1.5 text-center text-[11px] font-mono font-bold ${(themeAvgRS[t.name?.toLowerCase()] ?? 0) >= 85 ? 'text-emerald-400' : 'text-red-400'}`}>
-                    {themeAvgRS[t.name?.toLowerCase()] ?? '—'}
-                  </td>
-                  {view === "themes" && (
-                    <td className="px-1 py-1.5 text-center">
-                      <IbkrSourceBadge source={hasIbkrSource ? 'ibkr' : 'fallback'} />
-                    </td>
-                  )}
+                  {(() => {
+                    const rsVal = themeAvgRS[t.name?.toLowerCase()];
+                    const cls = rsVal == null ? 'text-zinc-600'
+                      : rsMode === '52w' ? (rsVal >= 85 ? 'text-emerald-400' : 'text-red-400')
+                      : (rsVal > 0 ? 'text-emerald-400' : rsVal < 0 ? 'text-red-400' : 'text-zinc-400');
+                    const display = rsVal == null ? '—'
+                      : rsMode === '52w' ? rsVal
+                      : (rsVal > 0 ? `+${rsVal}` : `${rsVal}`);
+                    return <td className={`px-1 py-1.5 align-middle text-center text-[11px] font-mono font-bold ${cls}`}>{display}</td>;
+                  })()}
                 </tr>
                 {isExpanded && industries.map(ind => (
                   <tr key={ind.name} className="bg-zinc-800/20 border-b border-zinc-800/20">
@@ -1138,11 +1420,12 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
             })}
           </tbody>
         </table>
-        )}
       </div>
     </div>
     {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => { setThemeHover(null); setThemeStats(null); }}/>}
     {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => { setThemeStats(null); setThemeHover(null); }}/>}
+    {subThemeModal && <SubThemeStocksModal subthemeName={subThemeModal.subthemeName} stocks={subThemeModal.stocks} onClose={() => setSubThemeModal(null)}/>}
+    {etfPopup && <EtfHoldingsPopup etfTicker={etfPopup.etf} holdingsData={etfHoldings} onClose={() => setEtfPopup(null)}/>}
     </>
   );
 };
@@ -1374,14 +1657,14 @@ const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }
             { label:'AVG RS',      val:String(avgRS || '—'),                cls:rsColor },
           ].map(({ label, val, cls }) => (
             <div key={label} className="px-3 py-2.5 text-center">
-              <div className="text-[9px] font-semibold text-zinc-500 uppercase tracking-widest mb-1">{label}</div>
+              <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-widest mb-1">{label}</div>
               <div className={`text-[15px] font-bold font-mono ${cls}`}>{val}</div>
             </div>
           ))}
         </div>
         {/* Movers */}
         <div className="px-4 py-3 border-b border-zinc-700/50">
-          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest mb-2">TODAY'S MOVERS</div>
+          <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-widest mb-2">TODAY'S MOVERS</div>
           <div className="flex flex-col gap-1.5">
             <div className="flex items-center gap-2">
               <TrendingUp size={11} className="text-emerald-400 flex-shrink-0"/>
@@ -1451,7 +1734,7 @@ const AlphaLeaderBadge = ({ stock, sortPriority = [], spyPerf1d = 0 }) => {
   const style = grade === 'A+'
     ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
     : 'bg-blue-500/20 text-blue-300 border-blue-500/40';
-  return <span className={`inline-flex items-center gap-0.5 px-1 py-0.5 text-[10px] font-bold rounded border ${style}`}>🔥 {grade}</span>;
+  return <span className={`inline-flex items-center gap-0.5 px-1 py-0.5 text-[11px] font-bold rounded border ${style}`}>🔥 {grade}</span>;
 };
 
 const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, themeName, subthemeName }) => {
@@ -1518,8 +1801,8 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
         className={`py-3 px-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors text-${align} ${w || ''} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500'}`}>
         <span className="inline-flex items-center gap-0.5">
           {label}
-          {isPrimary && <span className="text-[9px] text-blue-400/70 ml-0.5">①{dir === 'desc' ? '▼' : '▲'}</span>}
-          {isSecondary && <span className="text-[9px] text-violet-400/70 ml-0.5">②{dir === 'desc' ? '▼' : '▲'}</span>}
+          {isPrimary && <span className="text-[11px] text-blue-400/70 ml-0.5">①{dir === 'desc' ? '▼' : '▲'}</span>}
+          {isSecondary && <span className="text-[11px] text-violet-400/70 ml-0.5">②{dir === 'desc' ? '▼' : '▲'}</span>}
         </span>
       </th>
     );
@@ -1533,7 +1816,7 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
           <span className="text-blue-400">①{primaryKey}</span>
           {' → '}<span className="text-violet-400">②{secondaryKey}</span>
         </span>
-        <button onClick={() => setSortPriority([{ key: 'rs_52w', direction: 'desc' }])} className="text-[10px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">✕ Reset</button>
+        <button onClick={() => setSortPriority([{ key: 'rs_52w', direction: 'desc' }])} className="text-[11px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">✕ Reset</button>
       </div>
     )}
     <div className="overflow-x-auto overflow-y-auto rounded-lg border border-zinc-700/40" style={{maxHeight:'520px'}}>
@@ -1572,10 +1855,10 @@ const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, them
                       >{s.ticker}</span>
                       <GradeBadge grade={getEliteGrade(s)}/>
                       <AlphaLeaderBadge stock={s} sortPriority={sortPriority} spyPerf1d={spyPerf || 0}/>
-                      {isVCPStage1(s) && <Tip text="Narrowing consolidation + VDU + near 52W high" color="violet"><span className="text-[10px] font-bold text-violet-400 bg-violet-500/15 border border-violet-500/30 px-1 py-0.5 rounded cursor-pointer">🎯 VCP S1</span></Tip>}
-                      {!isVCPStage1(s) && isVDU(s) && <Tip text="Volume below 50% of 10-day avg — selling pressure exhausted" color="blue"><span className="text-[10px] font-bold text-blue-400 bg-blue-500/15 border border-blue-500/30 px-1 py-0.5 rounded cursor-pointer">VDU</span></Tip>}
-                      {isTight(s) && <Tip text="Last 3 days range < 1.5% — extremely tight" color="fuchsia"><span className="text-[10px] font-bold text-fuchsia-400 bg-fuchsia-500/15 border border-fuchsia-500/30 px-1 py-0.5 rounded cursor-pointer">Tight</span></Tip>}
-                      {isInsideDay(s) && <Tip text="Today's range inside yesterday's range" color="slate"><span className="text-[10px] font-bold text-slate-400 bg-slate-500/15 border border-slate-500/30 px-1 py-0.5 rounded cursor-pointer">ID</span></Tip>}
+                      {isVCPStage1(s) && <Tip text="Narrowing consolidation + VDU + near 52W high" color="violet"><span className="text-[11px] font-bold text-violet-400 bg-violet-500/15 border border-violet-500/30 px-1 py-0.5 rounded cursor-pointer">🎯 VCP S1</span></Tip>}
+                      {!isVCPStage1(s) && isVDU(s) && <Tip text="Volume below 50% of 10-day avg — selling pressure exhausted" color="blue"><span className="text-[11px] font-bold text-blue-400 bg-blue-500/15 border border-blue-500/30 px-1 py-0.5 rounded cursor-pointer">VDU</span></Tip>}
+                      {isTight(s) && <Tip text="Last 3 days range < 1.5% — extremely tight" color="fuchsia"><span className="text-[11px] font-bold text-fuchsia-400 bg-fuchsia-500/15 border border-fuchsia-500/30 px-1 py-0.5 rounded cursor-pointer">Tight</span></Tip>}
+                      {isInsideDay(s) && <Tip text="Today's range inside yesterday's range" color="slate"><span className="text-[11px] font-bold text-slate-400 bg-slate-500/15 border border-slate-500/30 px-1 py-0.5 rounded cursor-pointer">ID</span></Tip>}
                       <span className="hidden sm:flex items-center gap-0.5">
                         {getEliteBadges(s, { isTopTheme, isTopADR: topADRTickers?.has(s.ticker) }).map(b => <EliteBadge key={b} type={b}/>)}
                       </span>
@@ -1796,7 +2079,7 @@ const CATEGORY_STYLE = {
   "New Contract/Partnership": "bg-blue-500/15 text-blue-400 border-blue-500/25",
   "Thematic Narratives":      "bg-violet-500/15 text-violet-400 border-violet-500/25",
   "Government Policy":        "bg-amber-500/15 text-amber-400 border-amber-500/25",
-  "Institutional Buying":     "bg-cyan-500/15 text-cyan-400 border-cyan-500/25",
+  "Institutional Buying":     "bg-blue-500/15 text-blue-400 border-blue-500/25",
   "Insider Buying":           "bg-fuchsia-500/15 text-fuchsia-400 border-fuchsia-500/25",
   "Upgrade":                  "bg-zinc-700/40 text-zinc-400 border-zinc-600/30",
   "FDA":                      "bg-rose-500/15 text-rose-400 border-rose-500/25",
@@ -1872,7 +2155,7 @@ const VerificationBadge = ({ verification, headlines }) => {
           {discrepancy_note && <div className="text-[11px] text-amber-300 mb-1.5 leading-snug">⚠ {discrepancy_note}</div>}
           {headlines?.length > 0 && (
             <div className="border-t border-zinc-800 pt-1.5 space-y-1">
-              <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1">Sources</div>
+              <div className="text-[11px] text-zinc-600 uppercase tracking-widest mb-1">Sources</div>
               {headlines.map((h, i) => (
                 <div key={i} className="text-[11px] text-zinc-400 leading-snug">
                   <span className="text-zinc-600">[{h.source}]</span>{" "}
@@ -1903,128 +2186,39 @@ const VIX_ZONES = [
   { name: "Extreme Panic",       range: "VIX 30+",   color: "#ff1744", vMin: 30, vMax: 40, aStart: 45,  aEnd: 0,   label: ["EXTREME","PANIC"],         impact: "Maximum fear. While painful initially, extreme VIX spikes are historically the best entry points for massive SPX rallies." },
 ];
 
-const VixGauge = ({ initialVix }) => {
-  const vix = initialVix ?? 18;
-
-  const VMAX = 40;
-  const zoneOf = v => VIX_ZONES.find(z => v >= z.vMin && v < z.vMax) ?? VIX_ZONES[VIX_ZONES.length - 1];
-  const active = zoneOf(vix);
-  const expectedMovePct = vix / 16;
-  const arrowPct = Math.min(Math.max(vix, 0), VMAX) / VMAX * 100;
-
-  /* Glow color for ambient effect */
-  const glowRgb = active.color === '#00e676' ? '0,230,118'
-    : active.color === '#ffee58' ? '255,238,88'
-    : active.color === '#ff9100' ? '255,145,0'
-    : '255,23,68';
-
-  return (
-    <div className="px-5 pt-3 pb-4 rounded-2xl h-[240px] flex flex-col relative overflow-hidden"
-      style={{
-        background: 'linear-gradient(145deg, #141414 0%, #0f0f0f 100%)',
-        border: `1px solid rgba(${glowRgb},0.18)`,
-        boxShadow: `0 0 32px rgba(${glowRgb},0.07), inset 0 1px 0 rgba(255,255,255,0.04)`,
-      }}>
-
-      {/* Ambient glow blob */}
-      <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full pointer-events-none"
-        style={{ background: `radial-gradient(circle, rgba(${glowRgb},0.12) 0%, transparent 70%)` }} />
-
-      {/* Header */}
-      <div className="flex items-center justify-between mb-2 relative z-10">
-        <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.18em]">VIX Fear Gauge</span>
-        <span className="text-[9px] text-zinc-700 border border-zinc-800/80 rounded-md px-1.5 py-0.5 font-mono tracking-wider">CBOE · SPX</span>
-      </div>
-
-      {/* VIX number + badge */}
-      <div className="flex items-end gap-3 mb-2 relative z-10">
-        <div>
-          <span className="text-[32px] font-black font-mono tabular-nums leading-none"
-            style={{
-              color: active.color,
-              textShadow: `0 0 24px rgba(${glowRgb},0.55), 0 0 8px rgba(${glowRgb},0.3)`,
-              letterSpacing: '-0.02em',
-            }}>
-            {vix.toFixed(1)}
-          </span>
-        </div>
-        <div className="mb-1.5 flex flex-col gap-0.5">
-          <span className="text-[9px] font-bold uppercase tracking-[0.15em] leading-none"
-            style={{ color: active.color, opacity: 0.6 }}>VIX Index</span>
-          <span className="text-[11px] font-extrabold uppercase tracking-wider leading-tight"
-            style={{ color: active.color }}>{active.name}</span>
-        </div>
-      </div>
-
-      {/* Gradient bar section */}
-      <div className="relative mt-3 mb-1 z-10">
-        {/* Arrow marker */}
-        <div className="relative h-3 mb-1">
-          <div className="absolute transition-all duration-500" style={{ left: `calc(${arrowPct}% - 6px)` }}>
-            <svg width="12" height="9" viewBox="0 0 12 9">
-              <defs>
-                <filter id="arrow-glow">
-                  <feGaussianBlur stdDeviation="1.5" result="blur"/>
-                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
-              </defs>
-              <polygon points="6,9 0,0 12,0" fill={active.color} filter="url(#arrow-glow)" />
-            </svg>
-          </div>
-        </div>
-
-        {/* Bar with inner shadow and segment dividers */}
-        <div className="relative h-2.5 rounded-full overflow-hidden"
-          style={{
-            background: 'linear-gradient(to right, #00e676 0%, #39e07a 30%, #ffee58 30%, #ffd600 50%, #ff9100 50%, #ff6d00 75%, #ff1744 75%, #d50000 100%)',
-            boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.5), inset 0 -1px 0 rgba(255,255,255,0.06)',
-          }}>
-          {/* Segment dividers */}
-          {[30, 50, 75].map(p => (
-            <div key={p} className="absolute top-0 bottom-0 w-px"
-              style={{ left: `${p}%`, background: 'rgba(0,0,0,0.4)' }} />
-          ))}
-          {/* Gloss overlay */}
-          <div className="absolute inset-0 rounded-full"
-            style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.12) 0%, transparent 60%)' }} />
-        </div>
-
-        {/* Tick labels */}
-        <div className="flex mt-1">
-          {VIX_ZONES.map((z, i) => (
-            <div key={i} className="flex-shrink-0 text-[9px] font-mono text-zinc-700"
-              style={{ width: `${(z.vMax - z.vMin) / VMAX * 100}%` }}>
-              {z.vMin}
-            </div>
-          ))}
-          <span className="text-[9px] font-mono text-zinc-700">40</span>
-        </div>
-      </div>
-
-      {/* Expected move + description */}
-      <div className="mt-2 pt-2 border-t z-10 relative" style={{ borderColor: `rgba(${glowRgb},0.12)` }}>
-        <div className="flex items-center gap-2 mb-0.5">
-          <span className="text-[9px] font-bold text-zinc-600 uppercase tracking-[0.14em]">Expected Move</span>
-          <span className="text-[9px] text-zinc-700 font-mono">$SPX</span>
-          <span className="text-[13px] font-extrabold font-mono tabular-nums ml-auto"
-            style={{ color: active.color }}>±{expectedMovePct.toFixed(2)}%</span>
-        </div>
-        <p className="text-[10px] leading-relaxed text-zinc-600">{active.impact}</p>
-      </div>
-
-    </div>
-  );
-};
 
 /* ──────────────────────────────────────────────── POSITION CALCULATOR ── */
-const PositionCalc = ({ ibkrThemesData }) => {
+const vixToRiskPct = (v) => {
+  if (!v) return null;
+  if (v >= 30) return null;       // EXTREME FEAR — no new trades
+  if (v >= 24) return '0.2';      // ELEVATED CONCERN
+  if (v >= 18) return '0.3';      // CAUTION
+  if (v >= 14) return '0.5';      // NORMAL
+  return '0.3';                   // COMPLACENT
+};
+
+const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
   const [equity, setEquity] = React.useState('');
   const [entry, setEntry] = React.useState('');
   const [atr, setAtr] = React.useState('');
-  const [riskPct, setRiskPct] = React.useState('1');
+  const [riskPct, setRiskPct] = React.useState('0.5');
+  const [riskAutoSet, setRiskAutoSet] = React.useState(false);
+
+  React.useEffect(() => {
+    const suggested = vixToRiskPct(vix);
+    if (suggested) { setRiskPct(suggested); setRiskAutoSet(true); }
+    else setRiskAutoSet(false);
+  }, [vix]);
   const [stopStrategy, setStopStrategy] = React.useState('3');
-  const [stopMode, setStopMode] = React.useState('atr');
+  const [stopMode, setStopMode] = React.useState('lod');
   const [manualStop, setManualStop] = React.useState('');
+  const [emaMode, setEmaMode] = React.useState('9');
+  const [emaValues, setEmaValues] = React.useState({ 9: null, 21: null, 50: null });
+  const [lodTicker, setLodTicker] = React.useState('');
+  const [lod, setLod] = React.useState(null);
+  const [currentPrice, setCurrentPrice] = React.useState(null);
+  const [lodLoading, setLodLoading] = React.useState(false);
+  const [lodError, setLodError] = React.useState(false);
 
   const accountEquity = ibkrThemesData?.account_equity ?? null;
   const effectiveEquity = accountEquity != null ? accountEquity : (parseFloat(equity) || 0);
@@ -2033,31 +2227,155 @@ const PositionCalc = ({ ibkrThemesData }) => {
   const a = parseFloat(atr) || 0;
   const r = parseFloat(riskPct) || 1;
 
-  const shares = (effectiveEquity > 0 && a > 0)
-    ? Math.floor((effectiveEquity * r / 100) / a)
+  const fetchTickerData = React.useCallback(async (sym) => {
+    const s = sym.trim().toUpperCase();
+    if (!s) return;
+    setLodLoading(true);
+    setLodError(false);
+    setLod(null);
+
+    // Use local thematic data for ADR-20 (fast, no API call needed)
+    let thematicBarsFallbackPrice = null;
+    let thematicBarsFound = false;
+    if (thematicData?.themes) {
+      outer: for (const t of thematicData.themes) {
+        for (const sub of (t.subthemes || [])) {
+          for (const stk of (sub.stocks || [])) {
+            if (stk.ticker?.toUpperCase() === s) {
+              if (stk.bars_30d?.length >= 15) {
+                thematicBarsFound = true;
+                const bars = stk.bars_30d;
+                const slice = bars.slice(-20);
+                const adr20 = slice.reduce((sum, b) => sum + (b.l > 0 ? (b.h - b.l) / b.l * 100 : 0), 0) / slice.length;
+                setAtr(adr20.toFixed(2));
+              }
+              if (stk.price > 0) thematicBarsFallbackPrice = parseFloat(stk.price.toFixed(2));
+              break outer;
+            }
+          }
+        }
+      }
+    }
+
+    // Always fetch live price + LOD from Finnhub; Yahoo Finance only when no thematic bars
+    try {
+      // Always call Yahoo (also has price + LOD via meta), call Finnhub when key is set
+      const yahooFetch = fetch(`https://corsproxy.io/?${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${s}?range=90d&interval=1d`)}`);
+      const finnhubFetch = FINNHUB_KEY
+        ? fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`).then(r => r.ok ? r.json() : null).catch(() => null)
+        : Promise.resolve(null);
+      const [yahooRes, quoteData] = await Promise.all([yahooFetch, finnhubFetch]);
+      const yahooData = await yahooRes.json().catch(() => null);
+
+      // Yahoo meta has live regularMarketPrice + previousClose
+      const yMeta = yahooData?.chart?.result?.[0]?.meta;
+      const yPrice = yMeta?.regularMarketPrice;
+      const yPrevClose = yMeta?.previousClose ?? yMeta?.chartPreviousClose;
+      const yLow = yMeta?.regularMarketDayLow;
+
+      // Live price: Finnhub.c → Finnhub.pc → Yahoo regularMarketPrice → Yahoo previousClose → thematic data
+      const fCur = quoteData?.c;
+      const fPrevClose = quoteData?.pc;
+      const livePrice =
+        (fCur != null && fCur > 0) ? fCur :
+        (yPrice != null && yPrice > 0) ? yPrice :
+        (fPrevClose != null && fPrevClose > 0) ? fPrevClose :
+        (yPrevClose != null && yPrevClose > 0) ? yPrevClose :
+        thematicBarsFallbackPrice;
+      if (livePrice != null) setCurrentPrice(parseFloat(parseFloat(livePrice).toFixed(2)));
+
+      // LOD: Finnhub.l → Yahoo regularMarketDayLow → Finnhub.pc → Yahoo previousClose
+      const fLow = quoteData?.l;
+      const lodVal =
+        (fLow != null && fLow > 0) ? fLow :
+        (yLow != null && yLow > 0) ? yLow :
+        (fPrevClose != null && fPrevClose > 0) ? fPrevClose :
+        (yPrevClose != null && yPrevClose > 0) ? yPrevClose : null;
+      if (lodVal != null) setLod(parseFloat(parseFloat(lodVal).toFixed(2)));
+
+      // ADR-20 from Yahoo Finance (only when thematic bars not available)
+      const q = yahooData?.chart?.result?.[0]?.indicators?.quote?.[0];
+      if (!thematicBarsFound && q?.high?.length >= 15) {
+        const { high: h, low: l } = q;
+        const valid = [];
+        for (let i = 0; i < h.length; i++) {
+          if (h[i] != null && l[i] != null && l[i] > 0) valid.push((h[i] - l[i]) / l[i] * 100);
+        }
+        const slice = valid.slice(-20);
+        if (slice.length > 0) {
+          const adr20 = slice.reduce((a, b) => a + b, 0) / slice.length;
+          setAtr(adr20.toFixed(2));
+        }
+      }
+      // EMA 9 / 21 / 50 from Yahoo Finance closes
+      if (q?.close) {
+        const closes = q.close.filter(c => c != null);
+        const calcEMA = (prices, p) => {
+          if (prices.length < p) return null;
+          const k = 2 / (p + 1);
+          let ema = prices.slice(0, p).reduce((a, b) => a + b, 0) / p;
+          for (let i = p; i < prices.length; i++) ema = prices[i] * k + ema * (1 - k);
+          return ema;
+        };
+        setEmaValues({
+          9: calcEMA(closes, 9),
+          21: calcEMA(closes, 21),
+          50: calcEMA(closes, 50),
+        });
+      }
+    } catch {
+      if (thematicBarsFallbackPrice != null) setCurrentPrice(thematicBarsFallbackPrice);
+    } finally {
+      setLodLoading(false);
+    }
+  }, [thematicData]);
+
+  // risk unit: entry − LOD (LOD mode), entry − manualStop (manual mode), entry − emaStop (EMA mode)
+  // LOD stop is placed 0.08% below the actual LOD to avoid being stopped by brief wicks
+  const effectiveLod = lod != null && lod > 0 ? parseFloat((lod * (1 - 0.0008)).toFixed(2)) : null;
+  const lodRisk = effectiveLod != null && e > effectiveLod ? e - effectiveLod : 0;
+  const ms = parseFloat(manualStop);
+  const manualRisk = stopMode === 'manual' && ms > 0 && e > ms ? e - ms : 0;
+  const activeEmaPrice = stopMode === 'ema' ? (emaValues[parseInt(emaMode)] ?? null) : null;
+  const emaStop = activeEmaPrice != null ? parseFloat((activeEmaPrice * 0.985).toFixed(2)) : null;
+  const emaRisk = emaStop != null && e > emaStop ? e - emaStop : 0;
+  const riskUnit = stopMode === 'lod' ? lodRisk : stopMode === 'manual' ? manualRisk : stopMode === 'ema' ? emaRisk : 0;
+
+  const shares = (effectiveEquity > 0 && riskUnit > 0)
+    ? Math.floor((effectiveEquity * r / 100) / riskUnit)
     : null;
 
   let stops = [];
   if (e > 0) {
     if (stopMode === 'manual') {
-      const ms = parseFloat(manualStop);
-      if (ms > 0) stops = [ms];
-    } else if (a > 0) {
-      stops = stopStrategy === '3'
-        ? [e - a, e - 2 * a, e - 3 * a]
-        : [e - 1.5 * a, e - 3 * a];
+      if (ms > 0 && e > ms) {
+        const n = parseInt(stopStrategy, 10);
+        const dist = e - ms;
+        stops = Array.from({ length: n }, (_, i) => e - dist * (i + 1) / n);
+      } else if (ms > 0) {
+        stops = [ms];
+      }
+    } else if (stopMode === 'lod') {
+      if (effectiveLod != null && effectiveLod > 0 && e > effectiveLod) {
+        const n = parseInt(stopStrategy, 10);
+        const dist = e - effectiveLod;
+        stops = Array.from({ length: n }, (_, i) => e - dist * (i + 1) / n);
+      }
+    } else if (stopMode === 'ema') {
+      if (emaStop != null && emaStop > 0 && e > emaStop) stops = [emaStop];
     }
   }
 
-  const dollarRisk = shares != null && a > 0 ? shares * a : null;
-  const target2r = e > 0 && a > 0 ? e + 2 * a : null;
+  const maxLossBudget = effectiveEquity > 0 && r > 0 ? effectiveEquity * r / 100 : null;
+  const dollarRisk = shares != null && riskUnit > 0 ? shares * riskUnit : null;
+  const positionValue = shares != null && e > 0 ? shares * e : null;
 
   const fmtPrice = v => v != null ? `$${v.toFixed(2)}` : '—';
   const fmtDollar = v => v != null ? `$${v.toLocaleString('en-US', { maximumFractionDigits: 0 })}` : '—';
 
   const Tog = ({ active, onClick, children }) => (
     <button onClick={onClick}
-      className={`flex-1 text-[10px] font-bold py-1 rounded transition-colors ${active ? 'bg-zinc-700 text-white' : 'text-zinc-500 hover:text-zinc-300'}`}>
+      className={`flex-1 text-[11px] font-bold py-1 rounded transition-colors ${active ? 'bg-zinc-700 text-white' : 'text-zinc-500 hover:text-zinc-300'}`}>
       {children}
     </button>
   );
@@ -2069,74 +2387,161 @@ const PositionCalc = ({ ibkrThemesData }) => {
 
   return (
     <div className="bg-zinc-900/60 rounded-xl border border-zinc-800/60 p-3">
-      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.18em] mb-2">Position Calc</div>
+      <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.18em] mb-2">Position Calc</div>
 
       {/* Equity row */}
       <div className="mb-2">
         {accountEquity != null ? (
           <div className="flex items-center justify-between">
-            <span className="text-[10px] text-zinc-500">Account Equity</span>
+            <span className="text-[11px] text-zinc-500">Account Equity</span>
             <span className="text-[12px] font-mono font-bold text-zinc-200">
               {accountEquity.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })}
             </span>
           </div>
         ) : (
           <div className="flex items-center gap-2">
-            <span className="text-[10px] text-zinc-500 flex-shrink-0">Equity $</span>
+            <span className="text-[11px] text-zinc-500 flex-shrink-0">Equity $</span>
             <input type="number" value={equity} onChange={ev => setEquity(ev.target.value)} placeholder="e.g. 25000"
               className="flex-1 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"/>
           </div>
         )}
       </div>
 
+      {/* Ticker input — above Entry; auto-fetches ATR-14 + LOD from Finnhub */}
+      <div className="flex items-center gap-2 mb-2">
+        <span className="text-[11px] text-zinc-500 flex-shrink-0">Ticker</span>
+        <input
+          type="text" value={lodTicker}
+          onChange={ev => { setLodTicker(ev.target.value.toUpperCase()); setLod(null); setCurrentPrice(null); setLodError(false); setEmaValues({ 9: null, 21: null, 50: null }); }}
+          onBlur={ev => fetchTickerData(ev.target.value)}
+          onKeyDown={ev => ev.key === 'Enter' && fetchTickerData(ev.target.value)}
+          placeholder="e.g. AAPL"
+          className="flex-1 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600 uppercase"/>
+        <div className="flex flex-col items-end min-w-[52px]">
+          {lodLoading
+            ? <span className="text-[11px] font-mono text-zinc-500">...</span>
+            : lodError
+            ? <span className="text-[11px] font-mono text-red-400">ERR</span>
+            : currentPrice != null
+            ? <span className="text-[12px] font-mono font-bold text-zinc-100">${currentPrice.toFixed(2)}</span>
+            : null}
+          {!lodLoading && !lodError && lod != null && (
+            <span className="text-[11px] font-mono text-amber-400/70">L {lod.toFixed(2)}</span>
+          )}
+        </div>
+      </div>
+
       {/* Entry / ATR / Risk % */}
       <div className="grid grid-cols-3 gap-1.5 mb-2">
-        <div><div className="text-[9px] text-zinc-600 mb-0.5">Entry</div>{numInput(entry, setEntry, '0.00')}</div>
-        <div><div className="text-[9px] text-zinc-600 mb-0.5">ATR-14</div>{numInput(atr, setAtr, '0.00')}</div>
-        <div><div className="text-[9px] text-zinc-600 mb-0.5">Risk %</div>{numInput(riskPct, setRiskPct, '1')}</div>
+        <div>
+          <div className="text-[11px] text-zinc-600 mb-0.5">Entry</div>
+          {numInput(entry, setEntry, '0.00')}
+          <div className="mt-0.5 leading-tight">
+            <div className="text-[11px] text-zinc-600 uppercase tracking-wider">Position</div>
+            <div className="text-[11px] font-mono font-bold text-zinc-300">{positionValue != null ? fmtDollar(positionValue) : <span className="text-zinc-700">—</span>}</div>
+          </div>
+        </div>
+        <div>
+          <div className="text-[11px] text-zinc-600 mb-0.5">ADR %</div>
+          <div className="bg-zinc-800/60 border border-zinc-700/50 rounded px-1.5 py-1 text-[11px] font-mono font-bold text-zinc-200">
+            {a > 0 ? `${a.toFixed(2)}%` : <span className="text-zinc-700">—</span>}
+          </div>
+        </div>
+        <div>
+          <div className="flex items-center gap-1 mb-0.5">
+            <div className="text-[11px] text-zinc-600">Risk %</div>
+            {riskAutoSet && <span className="text-[9px] px-1 py-px rounded bg-blue-500/15 text-blue-400 border border-blue-500/20 leading-none">VIX</span>}
+          </div>
+          {numInput(riskPct, v => { setRiskPct(v); setRiskAutoSet(false); }, '0.5')}
+          <div className="mt-0.5 leading-tight">
+            <div className="text-[11px] text-zinc-600 uppercase tracking-wider">Max Loss</div>
+            <div className="text-[11px] font-mono font-bold text-red-400/90">{maxLossBudget != null ? `−${fmtDollar(maxLossBudget)}` : <span className="text-zinc-700">—</span>}</div>
+          </div>
+        </div>
       </div>
 
-      {/* Stop Strategy toggle */}
-      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-1.5">
-        <Tog active={stopStrategy === '3'} onClick={() => setStopStrategy('3')}>3-Stop</Tog>
-        <Tog active={stopStrategy === '2'} onClick={() => setStopStrategy('2')}>2-Stop</Tog>
-      </div>
-
-      {/* Stop Mode toggle */}
-      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-2">
-        <Tog active={stopMode === 'atr'} onClick={() => setStopMode('atr')}>ATR Auto</Tog>
+      {/* Stop Mode main toggle */}
+      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-1">
         <Tog active={stopMode === 'lod'} onClick={() => setStopMode('lod')}>LOD</Tog>
         <Tog active={stopMode === 'manual'} onClick={() => setStopMode('manual')}>Manual</Tog>
+        <Tog active={stopMode === 'ema'} onClick={() => setStopMode('ema')}>EMA</Tog>
       </div>
+
+      {/* Sub-row: 2-Stop / 3-Stop (LOD and Manual only) */}
+      {(stopMode === 'lod' || stopMode === 'manual') && (
+        <div className="flex gap-0.5 bg-zinc-800/30 rounded p-0.5 mb-2">
+          <Tog active={stopStrategy === '2'} onClick={() => setStopStrategy('2')}>2-Stop</Tog>
+          <Tog active={stopStrategy === '3'} onClick={() => setStopStrategy('3')}>3-Stop</Tog>
+        </div>
+      )}
+
+      {/* Sub-row: EMA period selector */}
+      {stopMode === 'ema' && (
+        <div className="flex gap-0.5 bg-zinc-800/30 rounded p-0.5 mb-2">
+          <Tog active={emaMode === '9'} onClick={() => setEmaMode('9')}>EMA 9</Tog>
+          <Tog active={emaMode === '21'} onClick={() => setEmaMode('21')}>EMA 21</Tog>
+          <Tog active={emaMode === '50'} onClick={() => setEmaMode('50')}>EMA 50</Tog>
+        </div>
+      )}
 
       {/* Manual stop price input */}
       {stopMode === 'manual' && (
         <div className="flex items-center gap-2 mb-2">
-          <span className="text-[10px] text-zinc-500 flex-shrink-0">Stop $</span>
+          <span className="text-[11px] text-zinc-500 flex-shrink-0">Stop $</span>
           <input type="number" value={manualStop} onChange={ev => setManualStop(ev.target.value)} placeholder="0.00"
             className="flex-1 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"/>
         </div>
       )}
 
-      {/* Results grid */}
-      <div className="grid grid-cols-2 gap-x-3 gap-y-1.5 pt-2 border-t border-zinc-800/60">
-        <div>
-          <div className="text-[9px] text-zinc-600 mb-0.5">Shares</div>
-          <div className="text-[13px] font-mono font-bold text-zinc-100">{shares ?? '—'}</div>
+      {/* EMA value display */}
+      {stopMode === 'ema' && (
+        <div className="flex items-center justify-between mb-2 px-1">
+          <span className="text-[11px] text-zinc-500">EMA {emaMode} −1.5%</span>
+          {activeEmaPrice != null
+            ? <span className="text-[11px] font-mono text-blue-400">${emaStop?.toFixed(2)}</span>
+            : <span className="text-[11px] font-mono text-zinc-600">輸入 Ticker 後自動計算</span>}
         </div>
-        {stops.map((s, i) => (
-          <div key={i}>
-            <div className="text-[9px] text-zinc-600 mb-0.5">Stop {i + 1}</div>
-            <div className="text-[13px] font-mono font-bold text-zinc-300">{fmtPrice(s)}</div>
+      )}
+
+      {/* Results */}
+      <div className="pt-2 border-t border-zinc-800/60 space-y-2">
+        <div className="grid grid-cols-2 gap-x-3">
+          <div>
+            <div className="text-[11px] text-zinc-600 mb-0.5">Shares</div>
+            <div className="text-[14px] font-mono font-bold text-zinc-100">{shares ?? '—'}</div>
           </div>
-        ))}
-        <div>
-          <div className="text-[9px] text-zinc-600 mb-0.5">$ at Risk</div>
-          <div className="text-[13px] font-mono font-bold text-red-400">{fmtDollar(dollarRisk)}</div>
+          <div>
+            <div className="text-[11px] text-zinc-600 mb-0.5">$ at Risk</div>
+            <div className="text-[14px] font-mono font-bold text-red-400">{fmtDollar(dollarRisk)}</div>
+          </div>
         </div>
         <div>
-          <div className="text-[9px] text-zinc-600 mb-0.5">2R Target</div>
-          <div className="text-[13px] font-mono font-bold text-emerald-400">{fmtPrice(target2r)}</div>
+          <div className="text-[11px] text-zinc-600 mb-1 uppercase tracking-wider">
+            {stopMode === 'lod' ? 'LOD Stop' : stopMode === 'manual' ? 'Manual Stop' : stopMode === 'ema' ? `EMA ${emaMode} Stop (−1.5%)` : `${stopStrategy}-Stop Levels`}
+          </div>
+          {stops.length > 0 ? (
+            <div className={`grid gap-2 ${stops.length === 3 ? 'grid-cols-3' : stops.length === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              {stops.map((s, i) => {
+                const lossPct = e > 0 && s > 0 && e > s ? (e - s) / e * 100 : 0;
+                return (
+                  <div key={i} className="bg-zinc-800/40 rounded px-2 py-1.5">
+                    <div className="text-[11px] text-zinc-500 uppercase">
+                      {stopMode === 'lod'
+                        ? (i === stops.length - 1 ? 'LOD −0.08%' : `${Math.round((i + 1) / stops.length * 100)}% LOD`)
+                        : stopMode === 'ema' ? `EMA ${emaMode} −1.5%`
+                        : `Stop ${i + 1}`}
+                    </div>
+                    <div className="text-[12px] font-mono font-bold text-zinc-200">{fmtPrice(s)}</div>
+                    {lossPct > 0 && <div className="text-[11px] font-mono text-red-400/80">−{lossPct.toFixed(2)}%</div>}
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <div className="bg-zinc-800/40 rounded px-2 py-1.5">
+              <div className="text-[12px] font-mono font-bold text-zinc-600">—</div>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -2149,55 +2554,315 @@ const PositionCalc = ({ ibkrThemesData }) => {
 
 const PanelLabel = ({ children, badge, badgeClass = "bg-emerald-500/10 text-emerald-400 border-emerald-500/30" }) => (
   <div className="flex items-center justify-between mb-2">
-    <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em]">{children}</div>
-    {badge && <span className={`px-1.5 py-0.5 text-[9px] font-bold rounded border ${badgeClass}`}>{badge}</span>}
+    <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.15em]">{children}</div>
+    {badge && <span className={`px-1.5 py-0.5 text-[11px] font-bold rounded border ${badgeClass}`}>{badge}</span>}
   </div>
 );
 
-const VixFearGaugeV2 = ({ vix }) => {
+// 從各種格式的時間字串擷取 HH:MM TZ，顯示在 panel 角落
+const UpdatedAt = ({ ts }) => {
+  if (!ts) return null;
+  const m = ts.match(/(\d{1,2}:\d{2})\s*(EDT|EST|ET)?/);
+  const display = m ? `${m[1]} ${m[2] || 'ET'}` : ts;
+  return <span className="text-[11px] text-zinc-600 font-mono tabular-nums">↻ {display}</span>;
+};
+
+const VIX_ZONES_NOTE = [
+  {
+    range: "< 14",  label: "COMPLACENT",      cls: "text-blue-400",
+    tip: "慢牛環境，可正常做多",
+    rules: ["Max Loss 0.3% / trade", "Stop 比 pivot 近 1%，不追高", "倉位正常"],
+  },
+  {
+    range: "14–18", label: "NORMAL",           cls: "text-emerald-400",
+    tip: "最佳交易環境，正常執行",
+    rules: ["Max Loss 0.5% / trade", "正常突破單、標準停損", "倉位 100%"],
+  },
+  {
+    range: "18–24", label: "CAUTION",          cls: "text-yellow-400",
+    tip: "市場轉波動，只做強勢股",
+    rules: ["Max Loss 0.3% / trade", "只做 RS leaders，不買弱股", "倉位 75%"],
+  },
+  {
+    range: "24–30", label: "ELEVATED CONCERN", cls: "text-amber-400",
+    tip: "法人開始避險，縮手",
+    rules: ["Max Loss 0.2% / trade", "只做 A+ setup，快進快出", "倉位 50%"],
+  },
+  {
+    range: "30+",   label: "EXTREME FEAR",     cls: "text-red-400",
+    tip: "恐慌模式，持現金等回落",
+    rules: ["不開新單", "持現金為主（75–100%）", "等 VIX 回落 < 25 再考慮進場"],
+  },
+];
+
+const MARKET_PULSE_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
+const MARKET_PULSE_CACHE_KEY  = "gemini_market_pulse_v5";
+
+async function fetchGeminiMarketPulse(payload) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_PULSE_GEMINI_KEY}`;
+  const { vix, vix_zone, s5fi_breadth_pct, adv_dec_pct, sma50_above_pct, sma200_above_pct, new_52w_highs, new_52w_lows } = payload;
+  const prompt =
+    `Market data: VIX=${vix} (${vix_zone}), S5FI=${s5fi_breadth_pct ?? "N/A"}%, ADV/DEC=${adv_dec_pct ?? "N/A"}%, ` +
+    `SMA50 above=${sma50_above_pct ?? "N/A"}%, SMA200 above=${sma200_above_pct ?? "N/A"}%, ` +
+    `52W Hi=${new_52w_highs ?? "N/A"}, 52W Lo=${new_52w_lows ?? "N/A"}.\n\n` +
+    `Write exactly 2 sentences for a breakout swing trader:\n` +
+    `1. Market regime: summarize breadth conditions using the numbers above.\n` +
+    `2. Breakout trade action: state whether to be aggressive / selective / avoid new breakouts, and the key condition to watch.\n` +
+    `No preamble. Under 70 words total.`;
+  const body = {
+    contents: [{ parts: [{ text: prompt }] }],
+    // thinkingBudget:0 disables Gemini 2.5 Flash internal reasoning so maxOutputTokens
+    // goes entirely to the visible response (otherwise thinking tokens eat the budget).
+    generationConfig: { temperature: 0.3, maxOutputTokens: 300, thinkingConfig: { thinkingBudget: 0 } },
+  };
+  const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  const json = await res.json();
+  const parts = json?.candidates?.[0]?.content?.parts ?? [];
+  const text = parts.map(p => p.text ?? "").join("").trim();
+  return text || null;
+}
+
+const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
+  const [showVixNote, setShowVixNote] = React.useState(false);
+  const [aiText, setAiText] = React.useState(null);
+  const [aiLoading, setAiLoading] = React.useState(false);
+  const todayKey = new Date().toISOString().slice(0, 10);
+  const vixNoteRef = React.useRef(null);
+  React.useEffect(() => {
+    if (!showVixNote) return;
+    const handler = (e) => {
+      if (vixNoteRef.current && !vixNoteRef.current.contains(e.target)) {
+        setShowVixNote(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [showVixNote]);
+  React.useEffect(() => {
+    const cached = (() => { try { const r = JSON.parse(localStorage.getItem(MARKET_PULSE_CACHE_KEY)); return r?.date === todayKey ? r.text : null; } catch { return null; } })();
+    if (cached) { setAiText(cached); return; }
+    if (!MARKET_PULSE_GEMINI_KEY) return;
+    const v = vix ?? 0;
+    const s5fi = briefData?.macro_breadth?.s5fi;
+    const adv_pct = mc?.adv_dec?.adv_pct;
+    if (!v && s5fi == null && adv_pct == null) return;
+    setAiLoading(true);
+    fetchGeminiMarketPulse({
+      vix: v,
+      vix_zone: v >= 30 ? "EXTREME FEAR" : v >= 24 ? "ELEVATED CONCERN" : v >= 18 ? "CAUTION" : v >= 14 ? "NORMAL" : "COMPLACENT",
+      s5fi_breadth_pct: s5fi,
+      adv_dec_pct: adv_pct,
+      sma50_above_pct: mc?.sma50_counts?.above_pct,
+      sma200_above_pct: mc?.sma200_counts?.above_pct,
+      new_52w_highs: mc?.new_hl?.new_high,
+      new_52w_lows: mc?.new_hl?.new_low,
+    })
+      .then(t => {
+        if (t) { setAiText(t); try { localStorage.setItem(MARKET_PULSE_CACHE_KEY, JSON.stringify({ date: todayKey, text: t })); } catch { /* quota */ } }
+      })
+      .catch(() => {})
+      .finally(() => setAiLoading(false));
+  }, [vix, mc, briefData, todayKey]);
   const v = vix ?? 0;
-  const cfg =
+  const vixCfg =
     v >= 30 ? { label: "EXTREME FEAR", cls: "text-red-400" } :
     v >= 24 ? { label: "ELEVATED CONCERN", cls: "text-amber-400" } :
     v >= 18 ? { label: "CAUTION", cls: "text-yellow-400" } :
     v >= 14 ? { label: "NORMAL", cls: "text-emerald-400" } :
               { label: "COMPLACENT", cls: "text-blue-400" };
   const expectedMove = v ? (v / 16).toFixed(2) : "—";
-  const geminiText =
+  const vixFallback =
     v >= 30 ? "VIX > 30 = panic regime. Cash heavy, only A+ setups, half size."
     : v >= 24 ? "VIX > 24 = institutional hedging active. Reduce size, tighten stops. Avoid chasing."
     : v >= 18 ? "VIX in caution zone. Trade selectively — favor RS leaders only."
     : "Low VIX = trend friendly. Standard entries on RS leaders OK.";
+
+  const signal = mc?.signal;
+  const signalCfg = {
+    green:  { dot: 'bg-emerald-400', label: 'Market Uptrend',    borderCls: 'border-emerald-500/40' },
+    yellow: { dot: 'bg-amber-400',   label: 'Market Correction', borderCls: 'border-amber-500/40' },
+    red:    { dot: 'bg-red-400',     label: 'Market Downtrend',  borderCls: 'border-red-500/40' },
+  }[signal] || { dot: 'bg-zinc-500', label: '—', borderCls: 'border-zinc-700/40' };
+
+  const advDec = mc?.adv_dec;
+  const breadthLine = advDec
+    ? `${advDec.adv_pct?.toFixed(0) ?? '—'}% advancing · ${advDec.advancing ?? '—'} adv / ${advDec.declining ?? '—'} dec`
+    : null;
+
+  const actionLine = briefData?.analysis?.action_line || null;
+
   return (
-    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-      <PanelLabel badge="IBKR">VIX Fear Gauge</PanelLabel>
-      <div className="text-[28px] leading-none font-bold font-mono text-zinc-100">{v ? v.toFixed(1) : "—"}</div>
-      <div className={`text-[11px] font-semibold mt-1 ${cfg.cls}`}>⚠ {cfg.label}</div>
-      <div className="mt-2 pt-2 border-t border-zinc-800/60">
-        <div className="text-[10px] text-zinc-500">SPX Expected Move</div>
-        <div className="text-[14px] font-bold font-mono text-zinc-200">±{expectedMove}%</div>
+    <div ref={vixNoteRef} className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+      <div className="flex items-center justify-between mb-2">
+        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.15em]">Market Pulse</div>
+        <div className="flex items-center gap-1.5"><UpdatedAt ts={generatedAt}/><span className="px-1.5 py-0.5 text-[11px] font-bold rounded border bg-zinc-700/60 text-zinc-300 border-zinc-600/40">IBKR</span></div>
       </div>
+
+      {/* Market signal row */}
+      <div className="flex items-center gap-2 mb-1">
+        <span className={`w-2 h-2 rounded-full flex-shrink-0 ${signalCfg.dot}`}/>
+        <span className="text-[13px] font-semibold text-zinc-100">{signalCfg.label}</span>
+      </div>
+      {/* VIX row */}
+      <div className="mt-1 pt-2 border-t border-zinc-800/60 flex items-end justify-between">
+        <div>
+          <div className="text-[11px] text-zinc-500 mb-0.5">VIX Fear Gauge</div>
+          <div className="text-[26px] leading-none font-bold font-mono text-zinc-100">{v ? v.toFixed(1) : "—"}</div>
+          <div className="flex items-center gap-1.5 mt-0.5">
+            <span className={`text-[11px] font-semibold ${vixCfg.cls}`}>⚠ {vixCfg.label}</span>
+            <button
+              onClick={() => setShowVixNote(n => !n)}
+              className={`text-[10px] w-4 h-4 rounded-full border flex items-center justify-center transition-colors flex-shrink-0 ${
+                showVixNote ? "border-zinc-400 text-zinc-200 bg-zinc-700" : "border-zinc-600 text-zinc-500 hover:border-zinc-400 hover:text-zinc-300"
+              }`}
+            >?</button>
+          </div>
+        </div>
+        <div className="text-right">
+          <div className="text-[11px] text-zinc-500">SPX Exp. Move</div>
+          <div className="text-[14px] font-bold font-mono text-zinc-200">±{expectedMove}%</div>
+        </div>
+      </div>
+      {showVixNote && (
+        <div className="mt-2 rounded-lg border border-zinc-700/60 bg-zinc-800/60 overflow-hidden">
+          {VIX_ZONES_NOTE.map(z => (
+            <div key={z.range} className={`px-2.5 py-2 border-b border-zinc-700/40 last:border-0 ${z.label === vixCfg.label ? "bg-zinc-700/40" : ""}`}>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="font-mono text-[10px] text-zinc-500 w-9 flex-shrink-0">{z.range}</span>
+                <span className={`text-[11px] font-bold ${z.cls}`}>{z.label}</span>
+                <span className="text-[10px] text-zinc-500">{z.tip}</span>
+              </div>
+              <div className="pl-11 space-y-0.5">
+                {z.rules.map((r, i) => (
+                  <div key={i} className="text-[10px] text-zinc-400 before:content-['·'] before:mr-1 before:text-zinc-600">{r}</div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* AI section */}
       <div className="mt-2 pt-2 border-t border-zinc-800/60">
         <div className="flex items-center gap-1.5 mb-1">
           <span className="text-[11px] text-blue-400">✦</span>
-          <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em]">Gemini</div>
+          <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.15em]">Gemini</div>
+          {aiLoading && <RefreshCw size={10} className="text-zinc-500 animate-spin"/>}
         </div>
-        <div className="text-[11px] leading-snug text-zinc-300">{geminiText}</div>
+        <div className="text-[11px] leading-snug text-zinc-300">
+          {aiText || actionLine || vixFallback}
+        </div>
+        {(() => {
+          const displayText = aiText || actionLine || "";
+          const t = displayText.toLowerCase();
+          const tag = t.includes("avoid") ? "avoid"
+            : t.includes("aggressive") ? "aggressive"
+            : t.includes("selective") || t.includes("select") ? "selective"
+            : null;
+          const strategyMap = {
+            aggressive: { text: "策略：積極佈局突破單，RS 強 + 量能放大即可進場",   cls: "text-emerald-400 border-emerald-500/30 bg-emerald-500/8" },
+            selective:  { text: "策略：只做 RS 最強、setup 最乾淨的突破單，不要每個都追", cls: "text-amber-400 border-amber-500/30 bg-amber-500/8" },
+            avoid:      { text: "策略：暫停新突破單，現金觀望等待市場穩定",           cls: "text-red-400 border-red-500/30 bg-red-500/8" },
+          };
+          const s = tag ? strategyMap[tag] : null;
+          if (!s) return null;
+          return (
+            <div className={`mt-2 px-2 py-1.5 rounded-lg border text-[11px] font-medium leading-snug ${s.cls}`}>
+              {s.text}
+            </div>
+          );
+        })()}
       </div>
     </div>
   );
 };
 
-const MarketInternalsV2 = ({ mc, internalsData }) => {
+const INTERNALS_NOTES = [
+  {
+    label: "ADV/DEC",
+    desc: "Advancing / Declining stocks ratio",
+    lines: [
+      { text: "≥60% advancing → healthy breadth", active: v => v >= 60, signal: "green" },
+      { text: "40–60% → neutral, be selective", active: v => v >= 40 && v < 60, signal: "yellow" },
+      { text: "<40% → bad breadth, avoid chasing", active: v => v < 40, signal: "red" },
+    ],
+  },
+  {
+    label: "SMA50 ↑",
+    desc: "% of stocks above 50-day MA",
+    lines: [
+      { text: "≥60% → bull momentum healthy", active: v => v >= 60, signal: "green" },
+      { text: "40–60% → borderline, buy leaders only", active: v => v >= 40 && v < 60, signal: "yellow" },
+      { text: "<40% → weak market internals", active: v => v < 40, signal: "red" },
+    ],
+  },
+  {
+    label: "SMA200 ↑",
+    desc: "% of stocks above 200-day MA",
+    lines: [
+      { text: "≥60% → long-term bull structure", active: v => v >= 60, signal: "green" },
+      { text: "50–60% → caution zone", active: v => v >= 50 && v < 60, signal: "yellow" },
+      { text: "<50% → majority in downtrend", active: v => v < 50, signal: "red" },
+    ],
+  },
+  {
+    label: "52W Hi",
+    desc: "Stocks making 52-week highs",
+    lines: [
+      { text: "More highs = stronger bull momentum" },
+      { text: "Healthy: Hi/Lo ratio >5", active: v => v > 5, signal: "green" },
+    ],
+  },
+  {
+    label: "52W Lo",
+    desc: "Stocks making 52-week lows",
+    lines: [
+      { text: "Low number = limited panic", active: v => v < 50, signal: "green" },
+      { text: "Sudden spike in Lo → market breakdown", active: v => v >= 100, signal: "red" },
+    ],
+  },
+  {
+    label: "TICK",
+    desc: "NYSE intraday upticks minus downticks",
+    lines: [
+      { text: ">+800 → institutional buying, very strong", active: v => v > 800, signal: "green" },
+      { text: "+200 to +800 → bullish", active: v => v >= 200 && v <= 800, signal: "green" },
+      { text: "-200 to +200 → neutral", active: v => v > -200 && v < 200, signal: "yellow" },
+      { text: "<-800 → panic selling", active: v => v < -800, signal: "red" },
+    ],
+  },
+  {
+    label: "TRIN",
+    desc: "Arms Index — volume-weighted adv/dec ratio",
+    lines: [
+      { text: "<0.7 → volume in advancing stocks → Buy", active: v => v < 0.7, signal: "green" },
+      { text: "0.7–1.3 → neutral", active: v => v >= 0.7 && v <= 1.3, signal: "yellow" },
+      { text: ">1.3 → volume in declining stocks → Sell", active: v => v > 1.3 && v <= 2.0, signal: "red" },
+      { text: ">2.0 → extreme panic, oversold bounce possible", active: v => v > 2.0, signal: "red" },
+    ],
+  },
+  {
+    label: "T2108",
+    desc: "% of stocks above 40-day MA (Worden)",
+    lines: [
+      { text: "<20% → oversold, look for bounce", active: v => v < 20, signal: "yellow" },
+      { text: "20–70% → normal range", active: v => v >= 20 && v <= 70, signal: "green" },
+      { text: ">70% → overbought, watch for pullback", active: v => v > 70, signal: "red" },
+    ],
+  },
+];
+
+const MarketInternalsV2 = ({ mc, internalsData, generatedAt }) => {
+  const [showNotes, setShowNotes] = React.useState(false);
   if (!mc) return null;
   const { adv_dec, new_hl, sma50_counts, sma200_counts } = mc;
   const advTxt = adv_dec ? `${adv_dec.advancing}/${adv_dec.declining}` : "—";
   const advPct = adv_dec ? (adv_dec.adv_pct ?? 0) : 0;
   const sma50pct = sma50_counts?.above_pct ?? 0;
   const sma200pct = sma200_counts?.above_pct ?? 0;
-  const advCls = advPct >= 60 ? "text-emerald-400" : advPct >= 40 ? "text-amber-400" : "text-red-400";
-  const sma50cls = sma50pct >= 60 ? "text-emerald-400" : sma50pct >= 40 ? "text-amber-400" : "text-red-400";
-  const sma200cls = sma200pct >= 60 ? "text-emerald-400" : sma200pct >= 40 ? "text-amber-400" : "text-red-400";
+  const advCls = advPct >= 60 ? "text-emerald-400" : advPct >= 40 ? "text-amber-400" : "text-red-500";
+  const sma50cls = sma50pct >= 60 ? "text-emerald-400" : sma50pct >= 40 ? "text-amber-400" : "text-red-500";
+  const sma200cls = sma200pct >= 60 ? "text-emerald-400" : sma200pct >= 40 ? "text-amber-400" : "text-red-500";
   const advBar = advPct >= 60 ? "bg-emerald-500" : advPct >= 40 ? "bg-amber-500" : "bg-red-500";
   const sma50bar = sma50pct >= 60 ? "bg-emerald-500" : sma50pct >= 40 ? "bg-amber-500" : "bg-red-500";
   const sma200bar = sma200pct >= 60 ? "bg-emerald-500" : sma200pct >= 40 ? "bg-amber-500" : "bg-red-500";
@@ -2213,154 +2878,124 @@ const MarketInternalsV2 = ({ mc, internalsData }) => {
     return "";
   };
   return (
-    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-      <PanelLabel badge="IBKR">Market Internals</PanelLabel>
+    <div className="relative bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
+      <div className="flex items-center justify-between mb-2">
+        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.15em]">Market Internals</div>
+        <div className="flex items-center gap-1.5">
+          <UpdatedAt ts={generatedAt}/>
+          <span className="px-1.5 py-0.5 text-[11px] font-bold rounded border bg-zinc-700/60 text-zinc-300 border-zinc-600/40">IBKR</span>
+          <button
+            onClick={() => setShowNotes(v => !v)}
+            className={`text-[11px] px-2 py-0.5 rounded border transition-colors ${
+              showNotes
+                ? "border-zinc-500 text-zinc-300 bg-zinc-800"
+                : "border-zinc-700 text-zinc-500 hover:text-zinc-300 hover:border-zinc-500"
+            }`}
+          >
+            {showNotes ? "▲ Notes" : "▼ Notes"}
+          </button>
+        </div>
+      </div>
       <div className="space-y-1.5">
         <div>
-          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">ADV/DEC</span><span className={`font-mono font-semibold ${advCls}`}>{advTxt}</span></div>
+          <div className="flex items-baseline justify-between text-[11px]">
+            <span className="text-zinc-500">ADV/DEC</span>
+            {adv_dec ? (
+              <span className="font-mono font-semibold">
+                <span className="text-emerald-300">{adv_dec.adv_pct?.toFixed(1)}%</span>
+                <span className="text-emerald-300"> ({adv_dec.advancing})</span>
+                <span className="text-zinc-300"> / </span>
+                <span className="text-red-500">{adv_dec.dec_pct?.toFixed(1)}%</span>
+                <span className="text-red-500"> ({adv_dec.declining})</span>
+              </span>
+            ) : <span className={`font-mono font-semibold ${advCls}`}>—</span>}
+          </div>
           <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className={`h-full ${advBar}`} style={{ width: `${Math.min(100, Math.max(0, advPct))}%` }}/></div>
         </div>
         <div>
-          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">SMA50 ↑</span><span className={`font-mono font-semibold ${sma50cls}`}>{sma50pct.toFixed(0)}%</span></div>
+          <div className="flex items-baseline justify-between text-[11px]"><span className="text-zinc-500">SMA50 ↑</span><span className={`font-mono font-semibold ${sma50cls}`}>{sma50pct.toFixed(0)}%</span></div>
           <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className={`h-full ${sma50bar}`} style={{ width: `${Math.min(100, sma50pct)}%` }}/></div>
         </div>
         <div>
-          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">SMA200 ↑</span><span className={`font-mono font-semibold ${sma200cls}`}>{sma200pct.toFixed(0)}%</span></div>
+          <div className="flex items-baseline justify-between text-[11px]"><span className="text-zinc-500">SMA200 ↑</span><span className={`font-mono font-semibold ${sma200cls}`}>{sma200pct.toFixed(0)}%</span></div>
           <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className={`h-full ${sma200bar}`} style={{ width: `${Math.min(100, sma200pct)}%` }}/></div>
         </div>
         <div>
-          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">52W Hi</span><span className="font-mono font-semibold text-blue-400">{newHigh}</span></div>
+          <div className="flex items-baseline justify-between text-[11px]"><span className="text-zinc-500">52W Hi</span><span className="font-mono font-semibold text-blue-400">{newHigh}</span></div>
           <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className="h-full bg-blue-500" style={{ width: `${Math.min(100, (newHigh / 500) * 100)}%` }}/></div>
         </div>
         <div>
-          <div className="flex items-baseline justify-between text-[10px]"><span className="text-zinc-500">52W Lo</span><span className="font-mono font-semibold text-red-400">{newLow}</span></div>
+          <div className="flex items-baseline justify-between text-[11px]"><span className="text-zinc-500">52W Lo</span><span className="font-mono font-semibold text-red-500">{newLow}</span></div>
           <div className="h-1.5 rounded-full bg-zinc-800 overflow-hidden mt-0.5"><div className="h-full bg-red-500" style={{ width: `${Math.min(100, (newLow / 500) * 100)}%` }}/></div>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 mt-2 pt-2 border-t border-zinc-800/60 text-[10px] font-mono">
-        <span className="text-zinc-500">TICK</span><span className={`text-right ${tick == null ? "text-zinc-600" : tick >= 0 ? "text-emerald-400" : "text-red-400"}`}>{tick == null ? "—" : (tick > 0 ? "+" : "") + tick}</span>
+      <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 mt-2 pt-2 border-t border-zinc-800/60 text-[11px] font-mono">
+        <span className="text-zinc-500">TICK</span><span className={`text-right ${tick == null ? "text-zinc-600" : tick >= 0 ? "text-emerald-400" : "text-red-500"}`}>{tick == null ? "—" : (tick > 0 ? "+" : "") + tick}</span>
         <span className="text-zinc-500">TRIN</span><span className="text-zinc-300 text-right">{trin == null ? "—" : `${trin.toFixed(2)} ${interpret("trin", trin)}`}</span>
         <span className="text-zinc-500">T2108</span><span className="text-zinc-300 text-right">{t2108 == null ? "—" : `${t2108.toFixed(2)} ${interpret("t2108", t2108)}`}</span>
       </div>
-    </div>
-  );
-};
-
-const AlertRulesCard = () => (
-  <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-    <PanelLabel badge="ntfy.sh" badgeClass="bg-blue-500/10 text-blue-400 border-blue-500/30">Alert Rules</PanelLabel>
-    <div className="space-y-1.5">
-      <div className="bg-emerald-500/[0.06] border border-emerald-500/20 rounded-md px-2 py-1.5">
-        <div className="text-[11px] font-semibold text-emerald-400">AI &amp; Semi RS &gt; 95</div>
-        <div className="text-[9px] text-zinc-500 mt-0.5">Push · ntfy.sh · Active</div>
-      </div>
-      <div className="bg-amber-500/[0.06] border border-amber-500/20 rounded-md px-2 py-1.5">
-        <div className="text-[11px] font-semibold text-amber-400">Gapper T1 Catalyst</div>
-        <div className="text-[9px] text-zinc-500 mt-0.5">Push · Pushover · Active</div>
-      </div>
-      <button className="w-full text-left text-[11px] text-zinc-500 hover:text-zinc-300 px-2 py-1.5 border border-dashed border-zinc-800 rounded-md">
-        + Add Rule
-        <div className="text-[9px] text-zinc-700">Theme RS · Grade · ADR · RS cross</div>
-      </button>
-    </div>
-  </div>
-);
-
-const LeadersAllThemesCard = ({ themes }) => {
-  const all = (themes || []).flatMap(t => (t.subthemes || []).flatMap(s => s.stocks || []));
-  const seen = new Set();
-  const dedup = [];
-  for (const s of all) { if (!seen.has(s.ticker)) { seen.add(s.ticker); dedup.push(s); } }
-  const filtered = dedup
-    .filter(s => (s.rs_52w ?? 0) >= 85 && (s.price ?? 0) >= 12 && (s.adr_pct ?? 0) >= 4)
-    .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))
-    .slice(0, 12);
-  return (
-    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em] mb-1">Leaders — All Themes</div>
-      <div className="text-[9px] text-zinc-600 mb-2 leading-tight">RS&gt;85 · Price&gt;$12 · Vol&gt;$100M · Cap&gt;$2B · ADR≥4%</div>
-      {filtered.length === 0 ? (
-        <div className="text-[10px] text-zinc-600 italic">No qualifiers</div>
-      ) : (
-        <div className="space-y-0.5">
-          {filtered.map(s => (
-            <div key={s.ticker} className="flex items-center justify-between text-[12px] py-1 border-b border-zinc-800/40 last:border-0">
-              <span className="font-bold text-blue-400 font-mono">{s.ticker}</span>
-              <span className="font-mono text-emerald-400 font-semibold">{s.rs_52w}</span>
-            </div>
-          ))}
+      {showNotes && (
+        <>
+        <div className="fixed inset-0 z-40" onClick={() => setShowNotes(false)} />
+        <div className="absolute top-0 left-full ml-1 z-50 w-64 bg-zinc-900 border border-zinc-700 rounded-xl p-3 shadow-xl space-y-2 overflow-y-auto max-h-[80vh]">
+          {(() => {
+            const hiLoRatio = newLow > 0 ? newHigh / newLow : null;
+            const noteVals = {
+              "ADV/DEC":  { raw: adv_dec ? advPct : null,  display: adv_dec ? `${advPct.toFixed(0)}% (${advTxt})` : null },
+              "SMA50 ↑":  { raw: sma50pct,                 display: `${sma50pct.toFixed(0)}%` },
+              "SMA200 ↑": { raw: sma200pct,                display: `${sma200pct.toFixed(0)}%` },
+              "52W Hi":   { raw: hiLoRatio,                 display: `${newHigh} (Hi/Lo ${newLow > 0 ? `ratio ${hiLoRatio?.toFixed(1)}` : "—"})` },
+              "52W Lo":   { raw: newLow,                   display: `${newLow}` },
+              "TICK":     { raw: tick,                     display: tick != null ? (tick > 0 ? `+${tick}` : `${tick}`) : null },
+              "TRIN":     { raw: trin,                     display: trin != null ? trin.toFixed(2) : null },
+              "T2108":    { raw: t2108,                    display: t2108 != null ? `${t2108.toFixed(1)}%` : null },
+            };
+            return INTERNALS_NOTES.map(n => {
+              const { raw, display } = noteVals[n.label] || {};
+              return (
+                <div key={n.label} className="border-b border-zinc-800/40 pb-1.5 last:border-0 last:pb-0">
+                  {(() => {
+                    const activeLine = raw != null ? n.lines.find(l => l.active && l.active(raw)) : null;
+                    const sig = activeLine?.signal;
+                    const sigCls = sig === "green" ? "text-emerald-400" : sig === "yellow" ? "text-amber-400" : sig === "red" ? "text-red-400" : "text-zinc-500";
+                    const dotCls = sig === "green" ? "before:text-emerald-400" : sig === "yellow" ? "before:text-amber-400" : sig === "red" ? "before:text-red-400" : "before:text-amber-400";
+                    return (
+                      <>
+                      <div className="flex items-baseline justify-between mb-0.5">
+                        <span className="text-[11px] font-semibold text-zinc-200">{n.label}</span>
+                        {display != null && <span className={`text-[11px] font-mono ${sigCls}`}>{display}</span>}
+                      </div>
+                      <ul className="space-y-0.5">
+                        {n.lines.map((l, i) => {
+                          const isActive = raw != null && l.active && l.active(raw);
+                          const lineDot = isActive ? dotCls : "before:text-zinc-700";
+                          return (
+                            <li key={i} className={`text-[11px] leading-snug pl-1 before:content-['·'] before:mr-1 ${
+                              isActive ? `font-semibold ${sigCls} ${lineDot}` : "text-zinc-500 before:text-zinc-700"
+                            }`}>{l.text}</li>
+                          );
+                        })}
+                      </ul>
+                      </>
+                    );
+                  })()}
+                </div>
+              );
+            });
+          })()}
         </div>
+        </>
       )}
     </div>
   );
 };
 
-const ActiveAlertsCardV2 = () => (
-  <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-    <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em] mb-2">Active Alerts</div>
-    <div className="space-y-1.5">
-      <div className="bg-emerald-500/[0.06] border border-emerald-500/20 rounded-md px-2 py-1.5">
-        <div className="text-[11px] font-semibold text-emerald-400">AI Semi RS &gt; 95</div>
-        <div className="text-[9px] text-zinc-500 mt-0.5">Fired · ntfy.sh ✓</div>
-      </div>
-      <div className="bg-amber-500/[0.06] border border-amber-500/20 rounded-md px-2 py-1.5">
-        <div className="text-[11px] font-semibold text-amber-400">RKLB T1 Gapper</div>
-        <div className="text-[9px] text-zinc-500 mt-0.5">Fired · Pushover ✓</div>
-      </div>
-    </div>
-  </div>
-);
-
-const IBKRTWSScannerCard = ({ ibkrData }) => {
-  const scanner = ibkrData?.scanner || [];
-  const top = scanner.slice(0, 5);
-  return (
-    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em] mb-1">IBKR TWS Scanner</div>
-      <div className="text-[9px] text-zinc-600 mb-2">Mirroring: Top Pre-Mkt Gainers</div>
-      {top.length === 0 ? (
-        <div className="text-[10px] text-zinc-600 italic">TWS offline</div>
-      ) : (
-        <div className="space-y-0.5">
-          {top.map(s => {
-            const chg = s.change_pct ?? 0;
-            const cls = chg >= 10 ? "text-emerald-400" : chg >= 0 ? "text-amber-400" : "text-red-400";
-            return (
-              <div key={s.ticker} className="flex items-center justify-between text-[12px] py-1 border-b border-zinc-800/40 last:border-0">
-                <span className="font-bold text-blue-400 font-mono">{s.ticker}</span>
-                <span className={`font-mono font-semibold ${cls}`}>{chg >= 0 ? "+" : ""}{chg.toFixed(1)}%</span>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
-};
-
-const DataSourcesCard = ({ ibkrData }) => {
-  const ibkrLive = ibkrData?.connected;
-  return (
-    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-      <div className="text-[10px] font-bold text-zinc-500 uppercase tracking-[0.15em] mb-2">Data Sources</div>
-      <div className="space-y-1 text-[10px]">
-        <div className="flex items-center justify-between">
-          <span className="text-zinc-500">Primary</span>
-          <span className={`px-1.5 py-0.5 text-[9px] font-bold rounded border ${ibkrLive ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30" : "bg-zinc-800 text-zinc-500 border-zinc-700"}`}>IBKR TWS</span>
-        </div>
-        <div className="flex items-center justify-between"><span className="text-zinc-500">Fallback 1</span><span className="text-zinc-400">Finviz</span></div>
-        <div className="flex items-center justify-between"><span className="text-zinc-500">Fallback 2</span><span className="text-zinc-400">yfinance</span></div>
-        <div className="flex items-center justify-between"><span className="text-zinc-500">News</span><span className="text-zinc-400">IBKR→Benzinga</span></div>
-      </div>
-    </div>
-  );
-};
 
 
 const BottomStatusBar = ({ ibkrData, briefData }) => {
   const ibkrLive = ibkrData?.connected;
   return (
-    <div className="border-t border-zinc-800/60 bg-zinc-950/80 px-4 py-1.5 mt-3 flex items-center justify-between text-[10px] font-mono text-zinc-500 flex-wrap gap-2">
+    <div className="border-t border-zinc-800/60 bg-zinc-950/80 px-4 py-1.5 mt-3 flex items-center justify-between text-[11px] font-mono text-zinc-500 flex-wrap gap-2">
       <div className="flex items-center gap-3 flex-wrap">
         <span className="flex items-center gap-1">
           <span className={`w-1.5 h-1.5 rounded-full ${ibkrLive ? "bg-emerald-400" : "bg-zinc-600"}`}/>
@@ -2548,7 +3183,7 @@ const BreakingNewsAlert = ({ newsData }) => {
           style={{ animationDuration: "2s" }}
         >
           <span className="text-red-600 font-black text-xs tracking-widest italic">⚡ BREAKING NEWS</span>
-          <span className="bg-red-600 text-white text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center">
+          <span className="bg-red-600 text-white text-[11px] font-black rounded-full w-4 h-4 flex items-center justify-center">
             {visible.length}
           </span>
         </button>
@@ -2566,7 +3201,7 @@ const BreakingNewsAlert = ({ newsData }) => {
               <span className="text-red-600 font-black text-sm tracking-widest italic animate-pulse" style={{ animationDuration: "2s" }}>
                 ⚡ BREAKING NEWS
               </span>
-              <span className="text-red-800 text-[10px] font-bold border border-red-900 px-1">{visible.length}</span>
+              <span className="text-red-800 text-[11px] font-bold border border-red-900 px-1">{visible.length}</span>
             </div>
             <button
               onClick={() => setExpanded(false)}
@@ -2587,26 +3222,14 @@ const BreakingNewsAlert = ({ newsData }) => {
               >×</button>
               <div className="flex items-center gap-2 mb-2 pr-5">
                 <span className="text-red-700 font-black text-[11px] border border-red-700 px-1">{top.grade}/10</span>
-                <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{top.source}</span>
+                <span className="text-red-900 text-[11px] font-semibold uppercase tracking-widest">{top.source}</span>
                 {formatAlertTime(top.pub_time || top.timestamp) && (
-                  <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(top.pub_time || top.timestamp)}</span>
+                  <span className="text-zinc-600 text-[11px] font-mono">{formatAlertTime(top.pub_time || top.timestamp)}</span>
                 )}
               </div>
-              <p className="text-red-500 font-extrabold text-sm uppercase leading-snug mb-3">
+              <p className="text-red-500 font-extrabold text-sm uppercase leading-snug">
                 {highlightText(top.headline)}
               </p>
-              {top.analysis && (
-                <div className="mb-2">
-                  <h4 className="text-sky-400 font-bold text-[10px] uppercase tracking-widest mb-1">Analysis</h4>
-                  <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(top.analysis)}</p>
-                </div>
-              )}
-              {top.impact && (
-                <div>
-                  <h4 className="text-amber-400 font-bold text-[10px] uppercase tracking-widest mb-1">Impact</h4>
-                  <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(top.impact)}</p>
-                </div>
-              )}
             </div>
 
             {/* Secondary alerts */}
@@ -2618,30 +3241,18 @@ const BreakingNewsAlert = ({ newsData }) => {
                   aria-label="Dismiss"
                 >×</button>
                 <div className="flex items-center gap-2 mb-1 pr-5">
-                  <span className="text-red-800 text-[10px] font-bold border border-red-900 px-1">{alert.grade}/10</span>
-                  <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{alert.source}</span>
+                  <span className="text-red-800 text-[11px] font-bold border border-red-900 px-1">{alert.grade}/10</span>
+                  <span className="text-red-900 text-[11px] font-semibold uppercase tracking-widest">{alert.source}</span>
                   {formatAlertTime(alert.pub_time || alert.timestamp) && (
-                    <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(alert.pub_time || alert.timestamp)}</span>
+                    <span className="text-zinc-600 text-[11px] font-mono">{formatAlertTime(alert.pub_time || alert.timestamp)}</span>
                   )}
                 </div>
-                <p className="text-red-700 font-bold text-xs uppercase leading-snug mb-2">{highlightText(alert.headline)}</p>
-                {alert.analysis && (
-                  <div className="mb-1">
-                    <h4 className="text-sky-400 font-bold text-[9px] uppercase tracking-widest mb-0.5">Analysis</h4>
-                    <p className="text-zinc-400 text-[11px] leading-relaxed">{highlightText(alert.analysis)}</p>
-                  </div>
-                )}
-                {alert.impact && (
-                  <div>
-                    <h4 className="text-amber-400 font-bold text-[9px] uppercase tracking-widest mb-0.5">Impact</h4>
-                    <p className="text-zinc-400 text-[11px] leading-relaxed">{highlightText(alert.impact)}</p>
-                  </div>
-                )}
+                <p className="text-red-700 font-bold text-xs uppercase leading-snug">{highlightText(alert.headline)}</p>
               </div>
             ))}
 
             {newsData.last_checked && (
-              <p className="text-[10px] text-zinc-700 text-right px-3 py-2">
+              <p className="text-[11px] text-zinc-700 text-right px-3 py-2">
                 Last checked: {newsData.last_checked}
               </p>
             )}
@@ -2755,15 +3366,15 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
           <span className="text-sm flex-shrink-0">🔥</span>
           <div>
             <div className="text-[11px] font-bold text-amber-400">[REVERSAL SIGNAL DETECTED]</div>
-            <div className="text-[10px] text-amber-300/70 mt-0.5">{reversal_signals.description}</div>
+            <div className="text-[11px] text-amber-300/70 mt-0.5">{reversal_signals.description}</div>
           </div>
         </div>
       )}
       {/* 1. Global Snapshot */}
       {global_snapshot.length > 0 && (
         <div>
-          <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">1. Global Snapshot</div>
-          <table className="w-full text-[10px]">
+          <div className="text-[11px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">1. Global Snapshot</div>
+          <table className="w-full text-[11px]">
             <thead>
               <tr className="text-zinc-600 border-b border-zinc-800/60">
                 <th className="text-left py-0.5 font-medium">Asset</th>
@@ -2805,7 +3416,7 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
           {Object.values(global_indices).some(g => g?.change_pct != null) && (
             <div className="flex gap-2 mt-1.5 flex-wrap">
               {Object.entries(global_indices).map(([k, g]) => g?.change_pct != null && (
-                <span key={k} className="text-[10px]">
+                <span key={k} className="text-[11px]">
                   <span className="text-zinc-600">{g.label?.split(" ")[0]}</span>
                   <span className={`ml-0.5 font-mono ${g.change_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
                     {g.change_pct >= 0 ? "+" : ""}{g.change_pct.toFixed(2)}%
@@ -2819,7 +3430,7 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
       {/* 2. Macro Risk & Breadth */}
       {(macro_breadth.credit_spread != null || macro_breadth.s5fi != null) && (
         <div>
-          <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">2. Macro Risk &amp; Breadth</div>
+          <div className="text-[11px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">2. Macro Risk &amp; Breadth</div>
           <div className="space-y-1">
             {macro_breadth.credit_spread != null && (
               <div className="text-[11px] text-zinc-400">
@@ -2852,7 +3463,7 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
       {/* 3. Analysis & Lessons */}
       {(analysis.analysis_para1 || analysis.analysis_para2) && (
         <div>
-          <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">3. Analysis &amp; Lessons</div>
+          <div className="text-[11px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">3. Analysis &amp; Lessons</div>
           <div className="space-y-2">
             {analysis.analysis_para1 && <p className="text-[11px] text-zinc-300 leading-relaxed">{analysis.analysis_para1}</p>}
             {analysis.analysis_para2 && <p className="text-[11px] text-zinc-400 leading-relaxed">{analysis.analysis_para2}</p>}
@@ -2862,15 +3473,15 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
       {/* 4. Ticker Intelligence */}
       {analysis.ticker_intel?.length > 0 && (
         <div>
-          <div className="text-[10px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">4. Ticker Intel</div>
+          <div className="text-[11px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">4. Ticker Intel</div>
           <div className="space-y-1.5">
             {analysis.ticker_intel.map((t, i) => (
               <div key={i} className="flex gap-1.5 items-start">
-                <span className={`text-[10px] font-bold px-1 py-0.5 rounded border flex-shrink-0 mt-0.5 ${gradeCls(t.grade)}`}>{t.grade}</span>
+                <span className={`text-[11px] font-bold px-1 py-0.5 rounded border flex-shrink-0 mt-0.5 ${gradeCls(t.grade)}`}>{t.grade}</span>
                 <div>
                   <span className="text-[11px] font-bold text-zinc-200 font-mono">${t.ticker}</span>
-                  {t.company && <span className="text-[10px] text-zinc-500 ml-1">({t.company})</span>}
-                  {t.reason && <p className="text-[10px] text-zinc-400 leading-snug mt-0.5">{t.reason}</p>}
+                  {t.company && <span className="text-[11px] text-zinc-500 ml-1">({t.company})</span>}
+                  {t.reason && <p className="text-[11px] text-zinc-400 leading-snug mt-0.5">{t.reason}</p>}
                 </div>
               </div>
             ))}
@@ -2890,7 +3501,7 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
               <div className="flex items-center gap-2">
                 <span className="text-base">{sessionEmoji}</span>
                 <span className="text-sm font-bold text-zinc-200 uppercase tracking-wide">{sessionLabel}</span>
-                {generated_at && <span className="text-[10px] text-zinc-500 ml-1">{generated_at}</span>}
+                {generated_at && <span className="text-[11px] text-zinc-500 ml-1">{generated_at}</span>}
               </div>
               <button onClick={() => setShowFullBrief(false)} className="text-zinc-500 hover:text-zinc-300 text-xl leading-none ml-4">×</button>
             </div>
@@ -2908,7 +3519,7 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
             <div className="flex items-center justify-between px-5 py-3 border-b border-red-900/40 sticky top-0 bg-zinc-950 z-10">
               <div className="flex items-center gap-2">
                 <span className="text-red-600 font-black text-sm tracking-widest italic animate-pulse" style={{ animationDuration: "2s" }}>⚡ BREAKING NEWS</span>
-                <span className="bg-red-600 text-white text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center">{visibleAlerts.length}</span>
+                <span className="bg-red-600 text-white text-[11px] font-black rounded-full w-4 h-4 flex items-center justify-center">{visibleAlerts.length}</span>
               </div>
               <button onClick={() => setShowBreakingNews(false)} className="text-zinc-500 hover:text-zinc-300 text-xl leading-none ml-4">×</button>
             </div>
@@ -2917,28 +3528,16 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
                 <div key={alert.headline} className={i > 0 ? "pt-4 border-t border-red-900/20" : ""}>
                   <div className="flex items-center gap-2 mb-2 flex-wrap">
                     {alert.grade != null && <span className="text-red-700 font-black text-[11px] border border-red-700 px-1">{alert.grade}/10</span>}
-                    {alert.source && <span className="text-red-900 text-[10px] font-semibold uppercase tracking-widest">{alert.source}</span>}
-                    {formatAlertTime(alert.pub_time || alert.timestamp) && <span className="text-zinc-600 text-[9px] font-mono">{formatAlertTime(alert.pub_time || alert.timestamp)}</span>}
+                    {alert.source && <span className="text-red-900 text-[11px] font-semibold uppercase tracking-widest">{alert.source}</span>}
+                    {formatAlertTime(alert.pub_time || alert.timestamp) && <span className="text-zinc-600 text-[11px] font-mono">{formatAlertTime(alert.pub_time || alert.timestamp)}</span>}
                   </div>
-                  <p className={`font-extrabold text-sm uppercase leading-snug mb-3 ${i === 0 ? "text-red-500" : "text-red-700"}`}>
+                  <p className={`font-extrabold text-sm uppercase leading-snug ${i === 0 ? "text-red-500" : "text-red-700"}`}>
                     {highlightText(alert.headline)}
                   </p>
-                  {alert.analysis && (
-                    <div className="mb-2">
-                      <h4 className="text-sky-400 font-bold text-[10px] uppercase tracking-widest mb-1">Analysis</h4>
-                      <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(alert.analysis)}</p>
-                    </div>
-                  )}
-                  {alert.impact && (
-                    <div>
-                      <h4 className="text-amber-400 font-bold text-[10px] uppercase tracking-widest mb-1">Impact</h4>
-                      <p className="text-zinc-300 text-xs leading-relaxed">{highlightText(alert.impact)}</p>
-                    </div>
-                  )}
                 </div>
               ))}
               {newsData?.last_checked && (
-                <p className="text-[10px] text-zinc-700 text-right pt-2 border-t border-zinc-800/60">Last checked: {newsData.last_checked}</p>
+                <p className="text-[11px] text-zinc-700 text-right pt-2 border-t border-zinc-800/60">Last checked: {newsData.last_checked}</p>
               )}
             </div>
           </div>
@@ -2955,15 +3554,15 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
               <span className="text-[11px] font-bold text-zinc-300 uppercase tracking-wide">{session ? `${session} Brief` : "Market Brief"}</span>
             </div>
             <div className="flex-shrink-0 ml-2">
-              {generated_at && <div className="text-[10px] text-zinc-600">{generated_at}</div>}
-              <div className="text-[10px] text-zinc-500">Next: {getNextBriefTime()}</div>
+              {generated_at && <div className="text-[11px] text-zinc-600">{generated_at}</div>}
+              <div className="text-[11px] text-zinc-500">Next: {getNextBriefTime()}</div>
             </div>
           </div>
           <div className="flex items-center gap-1.5">
             {/* Full brief expand button */}
             <button
               onClick={() => setShowFullBrief(true)}
-              className="text-[10px] text-zinc-500 hover:text-zinc-300 border border-zinc-700/50 rounded px-1.5 py-0.5 transition-colors flex items-center gap-1"
+              className="text-[11px] text-zinc-500 hover:text-zinc-300 border border-zinc-700/50 rounded px-1.5 py-0.5 transition-colors flex items-center gap-1"
             >
               {sessionLabel} <ExternalLink size={9}/>
             </button>
@@ -2971,10 +3570,10 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
             {visibleAlerts.length > 0 && (
               <button
                 onClick={() => setShowBreakingNews(true)}
-                className="flex items-center gap-1 bg-black border border-red-400/30 px-2 py-0.5 text-[10px] font-semibold italic tracking-wider text-red-400/70 hover:border-red-400/50 hover:text-red-400 transition-colors"
+                className="flex items-center gap-1 bg-black border border-red-400/30 px-2 py-0.5 text-[11px] font-semibold italic tracking-wider text-red-400/70 hover:border-red-400/50 hover:text-red-400 transition-colors"
               >
                 ⚡ NEWS
-                <span className="bg-red-400/40 text-red-200 text-[9px] font-semibold rounded-full w-3.5 h-3.5 flex items-center justify-center">
+                <span className="bg-red-400/40 text-red-200 text-[11px] font-semibold rounded-full w-3.5 h-3.5 flex items-center justify-center">
                   {visibleAlerts.length}
                 </span>
               </button>
@@ -3004,11 +3603,11 @@ const IBKRScannerTable = ({ ibkrScanner, onTickerClick }) => {
     <div className="mt-6">
       {/* Section header */}
       <div className="flex items-center gap-2 mb-2">
-        <Activity size={12} className="text-emerald-400 flex-shrink-0"/>
+        <Activity size={12} className="text-zinc-400 flex-shrink-0"/>
         <span className="text-[12px] font-bold text-zinc-300 uppercase tracking-wide">
           IBKR TWS Scanner — Pre-Market <span className="normal-case">(mirrored)</span>
         </span>
-        <span className="px-1.5 py-0.5 text-[9px] font-bold rounded border bg-emerald-500/15 text-emerald-400 border-emerald-500/30 font-mono leading-none">
+        <span className="px-1.5 py-0.5 text-[11px] font-bold rounded border bg-zinc-700/60 text-zinc-300 border-zinc-600/40 font-mono leading-none">
           IBKR
         </span>
       </div>
@@ -3093,7 +3692,7 @@ const IBKRScannerTable = ({ ibkrScanner, onTickerClick }) => {
                         <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded border text-[11px] font-bold font-mono ${passed >= 4 ? 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30' : 'bg-red-500/15 text-red-400 border-red-500/30'}`}>
                           {passed}/5
                           {failedGates.length > 0 && (
-                            <span className="font-normal text-[10px] opacity-80">
+                            <span className="font-normal text-[11px] opacity-80">
                               · {failedGates.join(', ')} fail
                             </span>
                           )}
@@ -3102,7 +3701,7 @@ const IBKRScannerTable = ({ ibkrScanner, onTickerClick }) => {
                     </td>
                     {/* Source */}
                     <td className="py-2 px-3 text-center">
-                      <span className="px-1.5 py-0.5 text-[10px] font-bold rounded border bg-emerald-500/15 text-emerald-400 border-emerald-500/30 font-mono leading-none">
+                      <span className="px-1.5 py-0.5 text-[11px] font-bold rounded border bg-zinc-700/60 text-zinc-300 border-zinc-600/40 font-mono leading-none">
                         IBKR
                       </span>
                     </td>
@@ -3130,8 +3729,8 @@ const EarningsStrip = ({ earningsData, gapperTickers = new Set(), onTickerClick 
     <div className="mb-3 bg-zinc-900/60 border border-zinc-800/50 rounded-lg px-3 py-2">
       <div className="flex items-center gap-1.5 mb-1.5">
         <Clock size={11} className="text-zinc-500 flex-shrink-0"/>
-        <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-widest">Earnings Today</span>
-        <span className="text-[10px] text-zinc-700">{today.length} co.</span>
+        <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-widest">Earnings Today</span>
+        <span className="text-[11px] text-zinc-700">{today.length} co.</span>
       </div>
       <div className="flex gap-2 overflow-x-auto pb-0.5" style={{ scrollbarWidth: 'none' }}>
         {today.map(entry => {
@@ -3150,7 +3749,7 @@ const EarningsStrip = ({ earningsData, gapperTickers = new Set(), onTickerClick 
                 {entry.ticker}
               </span>
               {entry.time_of_day && (
-                <span className={`px-1 py-0.5 text-[9px] font-bold rounded border leading-none ${timeCls}`}>
+                <span className={`px-1 py-0.5 text-[11px] font-bold rounded border leading-none ${timeCls}`}>
                   {entry.time_of_day}
                 </span>
               )}
@@ -3160,7 +3759,7 @@ const EarningsStrip = ({ earningsData, gapperTickers = new Set(), onTickerClick 
                 </span>
               )}
               {isGapper && (
-                <span className="text-[9px] font-bold text-blue-400 leading-none">⚡GAP</span>
+                <span className="text-[11px] font-bold text-blue-400 leading-none">⚡GAP</span>
               )}
             </div>
           );
@@ -3319,7 +3918,7 @@ const TradeJournalTab = ({ data }) => {
         ticker: t.ticker, theme: t.theme, stop_used: t.stop_used,
         pnl_dollars: t.pnl_dollars, r_multiple: t.r_multiple, grade: t.grade,
       }));
-      const url  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${JOURNAL_AI_KEY}`;
+      const url  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${JOURNAL_AI_KEY}`;
       const prompt = `You are a trading coach analysing a trader's journal. Given the last 20 trades as JSON, provide: (1) Win rate and avg R-multiple by theme, (2) avg R-multiple by stop mode (ATR / LOD / Manual), (3) a concise one-paragraph actionable recommendation. Be specific.\n\nTrades:\n${JSON.stringify(last20, null, 2)}`;
       const body = { contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.3, maxOutputTokens: 400 } };
       const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
@@ -3352,7 +3951,7 @@ const TradeJournalTab = ({ data }) => {
   const rCls    = (v) => { const n = parseFloat(v); return isNaN(n) ? "text-zinc-500" : n >= 2 ? "text-emerald-400 font-bold" : n > 0 ? "text-emerald-400" : n < 0 ? "text-red-400" : "text-zinc-500"; };
 
   const TH = ({ children, w }) => (
-    <th className={`px-2 py-2 text-[10px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap ${w || ""}`}>{children}</th>
+    <th className={`px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap ${w || ""}`}>{children}</th>
   );
 
   return (
@@ -3367,7 +3966,7 @@ const TradeJournalTab = ({ data }) => {
           { label: "Avg Hold",         value: avgHold != null ? `${avgHold.toFixed(1)}d` : "—", cls: "text-zinc-300", sub: `${holdDays.length} trades with exit date` },
         ].map(m => (
           <div key={m.label} className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
-            <div className="text-[10px] text-zinc-500 uppercase tracking-wider mb-1.5">{m.label}</div>
+            <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-1.5">{m.label}</div>
             <div className={`text-[22px] font-bold font-mono leading-none mb-1 ${m.cls}`}>{m.value}</div>
             <div className="text-[11px] text-zinc-600">{m.sub}</div>
           </div>
@@ -3473,11 +4072,11 @@ const TradeJournalTab = ({ data }) => {
                     <InlineText value={t.theme} onChange={v => updateField(t.id, "theme", v)} placeholder="Theme"/>
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">{t.entry_price ? `$${t.entry_price}` : "—"}</td>
-                  <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">{t.exit_price ? `$${t.exit_price}` : <span className="text-blue-400 text-[10px]">Open</span>}</td>
+                  <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">{t.exit_price ? `$${t.exit_price}` : <span className="text-blue-400 text-[11px]">Open</span>}</td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-400">{t.shares || "—"}</td>
                   <td className="px-2 py-1.5">
                     <InlineSelect value={t.stop_used} options={STOP_OPTS} onChange={v => updateField(t.id, "stop_used", v)}
-                      cls="text-[10px] font-mono text-zinc-500"/>
+                      cls="text-[11px] font-mono text-zinc-500"/>
                   </td>
                   <td className={`px-2 py-1.5 text-[11px] font-mono ${pnlCls(t.pnl_dollars)}`}>
                     {t.pnl_dollars ? `${parseFloat(t.pnl_dollars) >= 0 ? "+" : ""}$${parseFloat(t.pnl_dollars).toFixed(0)}` : "—"}
@@ -3513,7 +4112,7 @@ const TradeJournalTab = ({ data }) => {
               <thead className="border-b border-zinc-800/40">
                 <tr>
                   {["Theme","Trades","Wins","Win %","Total P&L","Avg P&L"].map(h => (
-                    <th key={h} className="px-3 py-2 text-[10px] font-semibold text-zinc-600 uppercase tracking-wider">{h}</th>
+                    <th key={h} className="px-3 py-2 text-[11px] font-semibold text-zinc-600 uppercase tracking-wider">{h}</th>
                   ))}
                 </tr>
               </thead>
@@ -3539,14 +4138,14 @@ const TradeJournalTab = ({ data }) => {
       )}
 
       {/* ── Gemini Journal Analysis ──────────────────────────────────────── */}
-      <div className="border border-emerald-800/40 bg-emerald-900/10 rounded-xl p-4">
+      <div className="border border-zinc-700/40 bg-zinc-800/20 rounded-xl p-4">
         <div className="flex items-center gap-3 mb-2">
-          <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">✦ GEMINI JOURNAL ANALYSIS</span>
+          <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">✦ GEMINI JOURNAL ANALYSIS</span>
           <button onClick={runAI} disabled={aiLoading || trades.length === 0}
             className="flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-lg hover:bg-emerald-500/30 transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
             {aiLoading ? <><RefreshCw size={10} className="animate-spin"/> Analysing…</> : "Analyse Journal"}
           </button>
-          {!JOURNAL_AI_KEY && <span className="text-[10px] text-zinc-600">Set REACT_APP_GEMINI_KEY to enable</span>}
+          {!JOURNAL_AI_KEY && <span className="text-[11px] text-zinc-600">Set REACT_APP_GEMINI_KEY to enable</span>}
         </div>
         {aiResult
           ? <pre className="text-[12px] text-zinc-200 leading-relaxed whitespace-pre-wrap font-sans">{aiResult}</pre>
@@ -3669,58 +4268,102 @@ const ImpactBars = ({ impact }) => {
 
 const EARNINGS_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
 
-async function fetchEarningsAnalysis(ticker, company, eps_estimate, eps_act, eps_surp_pct, rev_est, rev_act, rev_surp_pct, mkt_cap) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${EARNINGS_GEMINI_KEY}`;
+async function fetchEarningsAnalysis(ticker, company, eps_estimate, eps_act, eps_surp_pct, rev_est, rev_act, rev_surp_pct, mkt_cap, techData) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${EARNINGS_GEMINI_KEY}`;
   const fmtV = v => v != null ? v : "N/A";
-  const prompt = `You are a senior equity research analyst. Perform a comprehensive post-earnings analysis for ${company} (${ticker}).
+  const fmtPct = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "N/A";
 
-REPORTED FINANCIALS:
-- EPS Estimate: ${fmtV(eps_estimate)} | EPS Actual: ${fmtV(eps_act)} | EPS Surprise: ${fmtV(eps_surp_pct)}%
-- Revenue Estimate: ${fmtV(rev_est)} | Revenue Actual: ${fmtV(rev_act)} | Revenue Surprise: ${fmtV(rev_surp_pct)}%
-- Market Cap: ${mkt_cap ? `$${(mkt_cap/1e9).toFixed(1)}B` : "N/A"}
+  const techSection = techData ? `
+TECHNICAL SIGNALS (from our scanner):
+- Price performance: 1D: ${fmtPct(techData.perf_1d)} | 1W: ${fmtPct(techData.perf_1w)} | 1M: ${fmtPct(techData.perf_1m)} | 3M: ${fmtPct(techData.perf_3m)} | 6M: ${fmtPct(techData.perf_6m)}
+- vs Moving Averages: SMA20: ${fmtPct(techData.sma20_pct)} | SMA50: ${fmtPct(techData.sma50_pct)} | SMA200: ${fmtPct(techData.sma200_pct)}
+- RS Score: ${techData.rs_52w != null ? techData.rs_52w + "/99" : "N/A"} | ADR%: ${techData.adr_pct != null ? techData.adr_pct.toFixed(1) + "%" : "N/A"}
+- Dist from 52W High: ${fmtPct(techData.dist_52w_high)}` : "";
 
-Using your knowledge of this company's most recent earnings report and call, provide a structured analysis covering:
+  const prompt = `你是一位幫散戶看財報的分析師，用最簡單、最白話的中文，預測 ${company} (${ticker}) 這次財報的表現。
 
-1. **EARNINGS SUMMARY** — Did they beat/miss on EPS and revenue? What drove the result?
+參考數據：
+- 分析師預期 EPS：${fmtV(eps_estimate)}，預期營收：${fmtV(rev_est)}
+- 市值：${mkt_cap ? `$${(mkt_cap/1e9).toFixed(1)}B` : "N/A"}
+${techSection}
 
-2. **KEY CATALYSTS** — What are the main growth drivers management highlighted? Any new products, contracts, partnerships, or market tailwinds?
+用 Google Search 搜尋：最近的分析師評級、產業動態、公司新聞、管理層指引，判斷這次財報是否會超出預期。
 
-3. **MANAGEMENT COMMENTARY** — Summarise the prepared remarks and key guidance points. What tone did management strike — confident, cautious, defensive?
+語氣要求：
+- 像朋友聊天一樣，不用金融術語，讓完全不懂股票的人也能看懂
+- 每段 summary 只需一到兩句話，說重點就好
+- 每段 summary 中，用 [[文字]] 標記 1 到 2 個最重要的詞（數字或關鍵名詞），不要標記太多
 
-4. **Q&A HIGHLIGHTS** — What did analysts probe on? What were the sharpest questions and how did management respond?
+OUTPUT STRICT JSON ONLY — no markdown, no code fences, no explanation outside the JSON.
 
-5. **RISK FACTORS & SOFT SPOTS** — List recurring concerns, headwinds, margin pressure, competitive threats, regulatory risks, or anything management side-stepped or apologised for.
+Return this exact structure:
+{
+  "verdict": "beat|neutral|miss",
+  "en": [
+    { "title": "EPS FORECAST", "summary": "Plain English, 1-2 sentences. Wrap 1-2 key words/numbers in [[double brackets]]." },
+    { "title": "REVENUE OUTLOOK", "summary": "Plain English, 1-2 sentences. Wrap 1-2 key words/numbers in [[double brackets]]." },
+    { "title": "BULL CASE", "summary": "Plain English, 1-2 sentences. Wrap 1-2 key words/numbers in [[double brackets]]." },
+    { "title": "BEAR CASE", "summary": "Plain English, 1-2 sentences. Wrap 1-2 key words/numbers in [[double brackets]]." },
+    { "title": "KEY RISKS", "summary": "Plain English, 1-2 sentences. Wrap 1-2 key words/numbers in [[double brackets]]." },
+    { "title": "TRADE SETUP", "summary": "Plain English, 1-2 sentences. Wrap 1-2 key words/numbers in [[double brackets]]." }
+  ],
+  "zh": [
+    { "title": "EPS 預測", "summary": "白話中文，1到2句話。用 [[]] 標記 1 到 2 個最重要的詞。" },
+    { "title": "營收展望", "summary": "白話中文，1到2句話。用 [[]] 標記 1 到 2 個最重要的詞。" },
+    { "title": "多頭論點", "summary": "白話中文，1到2句話。用 [[]] 標記 1 到 2 個最重要的詞。" },
+    { "title": "空頭論點", "summary": "白話中文，1到2句話。用 [[]] 標記 1 到 2 個最重要的詞。" },
+    { "title": "關鍵風險", "summary": "白話中文，1到2句話。用 [[]] 標記 1 到 2 個最重要的詞。" },
+    { "title": "交易策略", "summary": "白話中文，1到2句話。用 [[]] 標記 1 到 2 個最重要的詞。" }
+  ]
+}
 
-6. **PEER & MARKET REACTION** — How did peers/competitors react? Any read-throughs to the sector?
-
-7. **VERDICT** — One paragraph: Is this a buy-the-dip, sell-the-rip, or hold-and-monitor situation? What price action would confirm or invalidate the thesis?
-
-Be specific, cite actual numbers where possible, and be candid about weaknesses.`;
+verdict 必須是以下其中之一："beat"、"neutral"、"miss"`;
 
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.3, maxOutputTokens: 1200 },
+    tools: [{ google_search: {} }],
+    generationConfig: { temperature: 0.3, maxOutputTokens: 4000, thinkingConfig: { thinkingBudget: 0 } },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-  if (!res.ok) throw new Error(`Gemini ${res.status}`);
+  if (!res.ok) throw new Error(`Gemini API error ${res.status}`);
   const json = await res.json();
-  return json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
+  // Concatenate all text parts (search grounding may split into multiple parts)
+  // Filter out thought parts (gemini-2.5-flash thinking has thought:true flag)
+  const parts = json?.candidates?.[0]?.content?.parts || [];
+  const raw = parts.filter(p => !p.thought).map(p => p.text || "").join("").trim();
+  if (!raw) throw new Error("Gemini returned an empty response — please retry");
+  // Strip markdown code fences
+  const cleaned = raw.replace(/```(?:json)?\n?/g, "").replace(/\n?```/g, "").trim();
+  // Use balanced brace counting to extract the first complete JSON object
+  // (greedy regex fails when google_search grounding appends citation footnotes)
+  const start = cleaned.indexOf("{");
+  if (start === -1) throw new Error("Could not find JSON in Gemini response — please retry");
+  let depth = 0, end = -1;
+  for (let i = start; i < cleaned.length; i++) {
+    if (cleaned[i] === "{") depth++;
+    else if (cleaned[i] === "}") { depth--; if (depth === 0) { end = i; break; } }
+  }
+  if (end === -1) throw new Error("Incomplete JSON from Gemini — please retry");
+  try { return JSON.parse(cleaned.slice(start, end + 1)); }
+  catch { throw new Error("Invalid JSON from Gemini — please retry"); }
 }
 
-// Simple markdown bold renderer (for **text** patterns)
+// Renders [[word]] as highlighted colored text (amber), plain text otherwise
 function renderMarkdown(text) {
-  return text.split(/(\*\*[^*]+\*\*)/).map((seg, i) => {
-    if (seg.startsWith("**") && seg.endsWith("**")) {
-      return <strong key={i} className="text-zinc-100 font-semibold">{seg.slice(2, -2)}</strong>;
+  return text.split(/(\[\[[^\]]+\]\])/).map((seg, i) => {
+    if (seg.startsWith("[[") && seg.endsWith("]]")) {
+      return <span key={i} className="text-amber-300 font-semibold">{seg.slice(2, -2)}</span>;
     }
     return <span key={i}>{seg}</span>;
   });
 }
 
-const EarningsAnalysisDrawer = ({ stock, onClose }) => {
+const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
   const [analysis, setAnalysis] = useState(null);
   const [loading,  setLoading]  = useState(true);
   const [error,    setError]    = useState(null);
+  const [lang,     setLang]     = useState("en");
+  const [retryKey, setRetryKey] = useState(0);
 
   useEffect(() => {
     if (!EARNINGS_GEMINI_KEY) {
@@ -3730,15 +4373,17 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
     }
     setLoading(true);
     setError(null);
+    setAnalysis(null);
     fetchEarningsAnalysis(
       stock.ticker, stock.company,
       stock.eps_estimate, stock.eps_act, stock.eps_surp_pct,
       stock.rev_est, stock.rev_act, stock.rev_surp_pct,
       stock.mkt_cap,
+      stock.perf_1d != null ? stock : null,
     )
-      .then(text => { setAnalysis(text); setLoading(false); })
-      .catch(e  => { setError(`Failed: ${e.message}`); setLoading(false); });
-  }, [stock.ticker]); // eslint-disable-line react-hooks/exhaustive-deps
+      .then(data => { setAnalysis(data); setLoading(false); })
+      .catch(e  => { setError(e.message); setLoading(false); });
+  }, [stock.ticker, retryKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Escape key closes drawer
   useEffect(() => {
@@ -3746,6 +4391,17 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
     window.addEventListener("keydown", h);
     return () => window.removeEventListener("keydown", h);
   }, [onClose]);
+
+  const sections = analysis?.[lang] || [];
+  const verdict  = analysis?.verdict; // "beat" | "neutral" | "miss"
+
+  const verdictCfg = {
+    beat:    { label: lang === "zh" ? "超乎預期" : "BEAT EXPECTED",    bg: "bg-emerald-500/15", border: "border-emerald-500/40", text: "text-emerald-300", glow: "shadow-emerald-500/20" },
+    neutral: { label: lang === "zh" ? "符合預期" : "IN-LINE",          bg: "bg-amber-500/15",   border: "border-amber-500/40",   text: "text-amber-300",   glow: "shadow-amber-500/20"   },
+    miss:    { label: lang === "zh" ? "低於預期" : "MISS EXPECTED",    bg: "bg-rose-500/15",    border: "border-rose-500/40",    text: "text-rose-300",    glow: "shadow-rose-500/20"    },
+  };
+  const vc = verdict ? verdictCfg[verdict] : null;
+
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/70 backdrop-blur-sm"
@@ -3757,20 +4413,25 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2">
               <span className="font-mono text-[15px] font-bold text-white">{stock.ticker}</span>
-              <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 leading-none">✦ AI ANALYSIS</span>
+              <span className="text-[11px] font-bold px-1.5 py-0.5 rounded bg-violet-500/15 border border-violet-500/30 text-violet-300 leading-none">✦ AI 預測</span>
+              {themeName && <span className="text-[11px] font-medium px-1.5 py-0.5 rounded bg-sky-500/10 border border-sky-500/25 text-sky-400 leading-none">{themeName}</span>}
             </div>
             <span className="text-[11px] text-zinc-500 truncate block">{stock.company}</span>
           </div>
-          {/* Quick stats */}
-          <div className="flex items-center gap-3 text-[11px] font-mono flex-shrink-0">
-            {stock.eps_act != null && (
-              <span>EPS <span className={stock.eps_surp_pct > 0 ? "text-emerald-400" : "text-rose-400"}>{stock.eps_act.toFixed(2)}</span></span>
+          {/* EPS estimate chip */}
+          <div className="flex items-center gap-2 text-[11px] font-mono flex-shrink-0">
+            {stock.eps_estimate != null && (
+              <span className="text-zinc-500">EPS Est <span className="text-zinc-300">{stock.eps_estimate.toFixed(2)}</span></span>
             )}
-            {stock.eps_surp_pct != null && (
-              <span className={`font-bold ${stock.eps_surp_pct > 0 ? "text-emerald-400" : "text-rose-400"}`}>
-                {stock.eps_surp_pct > 0 ? "+" : ""}{stock.eps_surp_pct.toFixed(2)}%
-              </span>
-            )}
+          </div>
+          {/* Language tabs */}
+          <div className="flex items-center rounded-md border border-zinc-700 overflow-hidden flex-shrink-0">
+            {[["en","EN"],["zh","中文"]].map(([key,label]) => (
+              <button key={key} onClick={() => setLang(key)}
+                className={`px-2.5 py-1 text-[11px] font-semibold transition-colors ${lang===key ? "bg-zinc-700 text-white" : "text-zinc-500 hover:text-zinc-300"}`}>
+                {label}
+              </button>
+            ))}
           </div>
           <button onClick={onClose} className="rounded p-1 text-zinc-500 hover:bg-zinc-700 hover:text-zinc-200" aria-label="Close">
             <X size={16}/>
@@ -3781,41 +4442,41 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
         <div className="flex-1 overflow-y-auto p-4">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-16 gap-3">
-              <RefreshCw size={20} className="text-emerald-500 animate-spin"/>
-              <p className="text-[12px] text-zinc-500">Gemini is analysing {stock.ticker} earnings…</p>
+              <RefreshCw size={20} className="text-violet-500 animate-spin"/>
+              <p className="text-[12px] text-zinc-500">Gemini 正在預測 {stock.ticker} 財報結果…</p>
             </div>
           ) : error ? (
-            <div className="py-10 text-center">
+            <div className="py-10 text-center flex flex-col items-center gap-3">
               <p className="text-[13px] text-rose-400">{error}</p>
+              <button onClick={() => setRetryKey(k => k + 1)}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-800 hover:bg-zinc-700 text-[11px] text-zinc-300 transition-colors">
+                <RefreshCw size={11}/> Retry
+              </button>
             </div>
-          ) : analysis ? (
-            <div className="space-y-1">
-              {analysis.split("\n").map((line, i) => {
-                if (!line.trim()) return <div key={i} className="h-2"/>;
-                // Section headers (lines starting with number + dot or pure bold)
-                if (/^\d+\.\s+\*\*/.test(line) || /^\*\*[A-Z]/.test(line)) {
-                  return (
-                    <div key={i} className="mt-4 mb-1.5 text-[12px] font-bold text-zinc-200 uppercase tracking-wide">
-                      {renderMarkdown(line.replace(/^\d+\.\s*/, ""))}
-                    </div>
-                  );
-                }
-                return (
-                  <p key={i} className="text-[12px] text-zinc-400 leading-relaxed">
-                    {renderMarkdown(line)}
-                  </p>
-                );
-              })}
+          ) : sections.length > 0 ? (
+            <div className="space-y-3">
+              {/* Verdict Banner */}
+              {vc && (
+                <div className={`rounded-xl border ${vc.bg} ${vc.border} px-4 py-3 flex items-center justify-center shadow-lg ${vc.glow}`}>
+                  <span className={`text-[22px] font-black tracking-wide ${vc.text}`}>{vc.label}</span>
+                </div>
+              )}
+              {sections.map((sec, i) => (
+                <div key={i} className="rounded-lg border border-zinc-800 bg-zinc-900/50 px-3 py-2.5">
+                  <div className="text-[11px] font-bold tracking-widest text-zinc-500 uppercase mb-1">{sec.title}</div>
+                  <p className="text-[13px] text-zinc-300 leading-relaxed">{renderMarkdown(sec.summary)}</p>
+                </div>
+              ))}
             </div>
           ) : null}
         </div>
 
         {/* Footer */}
         <div className="border-t border-zinc-800/60 px-4 py-2 flex-shrink-0 flex items-center justify-between">
-          <span className="text-[10px] text-zinc-700">Powered by Gemini 2.0 Flash · Based on latest available earnings data</span>
+          <span className="text-[11px] text-zinc-700">Powered by Gemini 2.5 Flash · AI prediction, not financial advice</span>
           <a href={`https://www.tradingview.com/chart/?symbol=${stock.ticker}`}
              target="_blank" rel="noopener noreferrer"
-             className="text-[10px] text-zinc-500 hover:text-cyan-400 transition-colors flex items-center gap-1">
+             className="text-[11px] text-zinc-500 hover:text-blue-400 transition-colors flex items-center gap-1">
             Open chart <ExternalLink size={9}/>
           </a>
         </div>
@@ -3824,13 +4485,31 @@ const EarningsAnalysisDrawer = ({ stock, onClose }) => {
   );
 };
 
-const CalendarTab = ({ econData, earningsData }) => {
+const CalendarTab = ({ econData, earningsData, thematicData }) => {
   const _todayD = new Date();
   const todayStr = `${_todayD.getFullYear()}-${String(_todayD.getMonth()+1).padStart(2,"0")}-${String(_todayD.getDate()).padStart(2,"0")}`;
   const [calSubTab, setCalSubTab] = useState("economic");  // "economic" | "earnings"
   const [selectedDay, setSelectedDay] = useState(todayStr);
   const [weekOffset, setWeekOffset]   = useState(0);
   const [analysisStock, setAnalysisStock] = useState(null); // stock object for AI drawer
+
+  const tickerThemeMap = useMemo(() => {
+    const m = {};
+    for (const theme of thematicData?.themes || [])
+      for (const sub of theme.subthemes || [])
+        for (const s of sub.stocks || [])
+          if (s.ticker && !m[s.ticker]) m[s.ticker] = theme.name;
+    return m;
+  }, [thematicData]);
+
+  const tickerStockMap = useMemo(() => {
+    const m = {};
+    for (const theme of thematicData?.themes || [])
+      for (const sub of theme.subthemes || [])
+        for (const s of sub.stocks || [])
+          if (s.ticker && !m[s.ticker]) m[s.ticker] = s;
+    return m;
+  }, [thematicData]);
 
   const weekDays = useMemo(() => calGetWeekDays(weekOffset), [weekOffset]);
 
@@ -3889,8 +4568,13 @@ const CalendarTab = ({ econData, earningsData }) => {
     const ORDER = { BMO: 0, AMC: 1 };
     return allEarnings
       .filter(e => e.date === selectedDay)
-      .sort((a, b) => (ORDER[a.time_of_day] ?? 2) - (ORDER[b.time_of_day] ?? 2));
-  }, [allEarnings, selectedDay]);
+      .sort((a, b) => {
+        const aHasTheme = tickerThemeMap[a.ticker] ? 0 : 1;
+        const bHasTheme = tickerThemeMap[b.ticker] ? 0 : 1;
+        if (aHasTheme !== bHasTheme) return aHasTheme - bHasTheme;
+        return (ORDER[a.time_of_day] ?? 2) - (ORDER[b.time_of_day] ?? 2);
+      });
+  }, [allEarnings, selectedDay, tickerThemeMap]);
 
   // ── Group econ events by time slot ────────────────────────────────────────
   const econByTime = useMemo(() => {
@@ -3927,13 +4611,16 @@ const CalendarTab = ({ econData, earningsData }) => {
         <a href={`https://www.tradingview.com/chart/?symbol=${e.ticker}`} target="_blank" rel="noopener noreferrer"
            className="text-[13px] font-mono font-bold text-sky-400 hover:text-sky-300 transition-colors">{e.ticker}</a>
 
-        {/* Company + AI icon */}
+        {/* Company + theme tag + AI icon */}
         <div className="flex items-center gap-1.5 min-w-0 pr-2">
           <span className="text-[12px] text-zinc-300 truncate">{e.company || "—"}</span>
+          {tickerThemeMap[e.ticker] && (
+            <span className="flex-shrink-0 text-[11px] font-medium px-1 py-0.5 rounded bg-sky-500/10 border border-sky-500/25 text-sky-400 leading-none truncate max-w-[90px]">{tickerThemeMap[e.ticker]}</span>
+          )}
           <button
-            onClick={() => setAnalysisStock(e)}
+            onClick={() => setAnalysisStock({ ...e, ...(tickerStockMap[e.ticker] || {}) })}
             title="Gemini AI earnings analysis"
-            className="flex-shrink-0 w-4 h-4 flex items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 hover:bg-emerald-500/25 hover:border-emerald-500/50 transition-colors leading-none text-[9px] font-bold"
+            className="flex-shrink-0 w-4 h-4 flex items-center justify-center rounded-full bg-zinc-700/40 border border-zinc-700/60 text-zinc-400 hover:bg-zinc-700/60 hover:border-zinc-600 transition-colors leading-none text-[11px] font-bold"
             aria-label="AI analysis">
             ✦
           </button>
@@ -3942,7 +4629,7 @@ const CalendarTab = ({ econData, earningsData }) => {
         {/* Time — pill badge */}
         <div className="flex justify-start">
           {tod
-            ? <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border leading-none ${todCls}`}>{todLabel}</span>
+            ? <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded border leading-none ${todCls}`}>{todLabel}</span>
             : <span className="text-[12px] text-zinc-600">—</span>}
         </div>
 
@@ -4009,18 +4696,18 @@ const CalendarTab = ({ econData, earningsData }) => {
                 <div className="flex flex-col gap-0.5 w-full">
                   {econCnt > 0 && (
                     <div className="flex items-center justify-between">
-                      <span className="text-[9px] text-zinc-600">Economic</span>
-                      <span className="text-[9px] font-mono text-zinc-400">{econCnt}</span>
+                      <span className="text-[11px] text-zinc-600">Economic</span>
+                      <span className="text-[11px] font-mono text-zinc-400">{econCnt}</span>
                     </div>
                   )}
                   {earnCnt > 0 && (
                     <div className="flex items-center justify-between">
-                      <span className="text-[9px] text-zinc-600">Earnings</span>
-                      <span className="text-[9px] font-mono text-zinc-400">{earnCnt}</span>
+                      <span className="text-[11px] text-zinc-600">Earnings</span>
+                      <span className="text-[11px] font-mono text-zinc-400">{earnCnt}</span>
                     </div>
                   )}
                   {econCnt === 0 && earnCnt === 0 && (
-                    <span className="text-[9px] text-zinc-700">—</span>
+                    <span className="text-[11px] text-zinc-700">—</span>
                   )}
                 </div>
               </button>
@@ -4060,13 +4747,13 @@ const CalendarTab = ({ econData, earningsData }) => {
               {/* Table header */}
               <div className="grid items-center border-b border-zinc-800/60 bg-zinc-800/40 px-4 py-2"
                    style={{ gridTemplateColumns: "72px 180px 20px 1fr 110px 100px 100px" }}>
-                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Time</span>
-                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider">Country</span>
+                <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">Time</span>
+                <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">Country</span>
                 <span/>
-                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider pl-2">Event</span>
-                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Actual</span>
-                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Forecast</span>
-                <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Prior</span>
+                <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider pl-2">Event</span>
+                <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Actual</span>
+                <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Forecast</span>
+                <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Prior</span>
               </div>
 
               {timeKeys.map((time, gi) => {
@@ -4093,7 +4780,7 @@ const CalendarTab = ({ econData, earningsData }) => {
                           {/* Time — only show on first row of time group */}
                           {j === 0 ? (
                             isNextSlot
-                              ? <span className="inline-flex w-fit items-center px-1.5 py-0.5 rounded bg-red-500 text-white text-[10px] font-bold leading-none">{time}</span>
+                              ? <span className="inline-flex w-fit items-center px-1.5 py-0.5 rounded bg-red-500 text-white text-[11px] font-bold leading-none">{time}</span>
                               : <span className={`text-[12px] font-mono font-semibold ${isPast ? "text-zinc-600" : "text-amber-400"}`}>{time}</span>
                           ) : <span/>}
 
@@ -4116,7 +4803,7 @@ const CalendarTab = ({ econData, earningsData }) => {
                           {/* Actual */}
                           <div className="text-right">
                             {actual == null
-                              ? <span className="text-[10px] text-amber-500/70 font-medium">Coming soon</span>
+                              ? <span className="text-[11px] text-amber-500/70 font-medium">Coming soon</span>
                               : <span className={`text-[12px] font-mono font-semibold ${actualColor}`}>{actual}</span>}
                           </div>
 
@@ -4155,26 +4842,39 @@ const CalendarTab = ({ econData, earningsData }) => {
               <div className="grid items-center border-b border-zinc-800/60 bg-zinc-800/40 px-3 py-2 min-w-[900px]"
                    style={{ gridTemplateColumns: "90px 1fr 90px 90px 80px 80px 90px 90px 90px 90px" }}>
                 {["Ticker","Company","Time","Mkt Cap","EPS Est","EPS Act","EPS Surp","Rev Est","Rev Act","Rev Surp"].map((col, ci) => (
-                  <span key={ci} className={`text-[10px] font-semibold text-zinc-500 uppercase tracking-wider ${ci >= 3 ? "text-right" : ""} ${ci === 2 ? "!text-left" : ""}`}>{col}</span>
+                  <span key={ci} className={`text-[11px] font-semibold text-zinc-500 uppercase tracking-wider ${ci >= 3 ? "text-right" : ""} ${ci === 2 ? "!text-left" : ""}`}>{col}</span>
                 ))}
               </div>
 
-              {/* BMO rows */}
-              {dayEarnings.filter(e => e.time_of_day === "BMO").map((e, i) => <EarningsRow key={`bmo-${i}`} e={e}/>)}
-
-              {/* AMC divider */}
-              {dayEarnings.some(e => e.time_of_day === "BMO") && dayEarnings.some(e => e.time_of_day === "AMC") && (
-                <div className="px-3 py-1.5 bg-zinc-800/30 border-y border-zinc-800/60">
-                  <span className="text-[9px] text-zinc-600 uppercase tracking-widest font-semibold">After Market Close</span>
-                </div>
-              )}
-
-              {/* AMC rows */}
-              {dayEarnings.filter(e => e.time_of_day === "AMC").map((e, i) => <EarningsRow key={`amc-${i}`} e={e}/>)}
-
-              {/* Unknown timing rows */}
-              {dayEarnings.filter(e => !e.time_of_day || (e.time_of_day !== "BMO" && e.time_of_day !== "AMC"))
-                .map((e, i) => <EarningsRow key={`unk-${i}`} e={e}/>)}
+              {/* Thematic Scanner stocks first */}
+              {(() => {
+                const thematic = dayEarnings.filter(e => tickerThemeMap[e.ticker]);
+                const rest     = dayEarnings.filter(e => !tickerThemeMap[e.ticker]);
+                const bmo      = rest.filter(e => e.time_of_day === "BMO");
+                const amc      = rest.filter(e => e.time_of_day === "AMC");
+                const unk      = rest.filter(e => !e.time_of_day || (e.time_of_day !== "BMO" && e.time_of_day !== "AMC"));
+                return <>
+                  {thematic.length > 0 && <>
+                    <div className="px-3 py-1.5 bg-sky-900/20 border-b border-sky-800/30">
+                      <span className="text-[11px] text-sky-500 uppercase tracking-widest font-semibold">Thematic Scanner</span>
+                    </div>
+                    {thematic.map((e, i) => <EarningsRow key={`th-${i}`} e={e}/>)}
+                  </>}
+                  {bmo.length > 0 && <>
+                    <div className="px-3 py-1.5 bg-zinc-800/30 border-y border-zinc-800/60">
+                      <span className="text-[11px] text-zinc-600 uppercase tracking-widest font-semibold">Before Market Open</span>
+                    </div>
+                    {bmo.map((e, i) => <EarningsRow key={`bmo-${i}`} e={e}/>)}
+                  </>}
+                  {amc.length > 0 && <>
+                    <div className="px-3 py-1.5 bg-zinc-800/30 border-y border-zinc-800/60">
+                      <span className="text-[11px] text-zinc-600 uppercase tracking-widest font-semibold">After Market Close</span>
+                    </div>
+                    {amc.map((e, i) => <EarningsRow key={`amc-${i}`} e={e}/>)}
+                  </>}
+                  {unk.map((e, i) => <EarningsRow key={`unk-${i}`} e={e}/>)}
+                </>;
+              })()}
             </div>
           )}
         </div>
@@ -4185,6 +4885,7 @@ const CalendarTab = ({ econData, earningsData }) => {
         <EarningsAnalysisDrawer
           stock={analysisStock}
           onClose={() => setAnalysisStock(null)}
+          themeName={tickerThemeMap[analysisStock.ticker] || null}
         />
       )}
     </div>
@@ -4197,7 +4898,7 @@ const BREADTH_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
 const BREADTH_CACHE_KEY  = "gemini_breadth_v1";
 
 async function fetchGeminiBreadthAnalysis(payload) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${BREADTH_GEMINI_KEY}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${BREADTH_GEMINI_KEY}`;
   const body = {
     contents: [{
       parts: [{
@@ -4246,11 +4947,11 @@ const GeminiBreathAnalysis = ({ mc, internalsData }) => {
   if (!mc) return null;
 
   return (
-    <div className="mb-4 border border-emerald-800/40 bg-emerald-900/10 rounded-xl p-4">
+    <div className="mb-4 border border-zinc-700/40 bg-zinc-800/20 rounded-xl p-4">
       <div className="flex items-center gap-2 mb-2">
-        <span className="text-[10px] font-bold text-emerald-500 uppercase tracking-wider">✦ GEMINI BREADTH READ</span>
-        {loading && <RefreshCw size={10} className="text-emerald-600 animate-spin"/>}
-        {!BREADTH_GEMINI_KEY && <span className="text-[10px] text-zinc-600">Set REACT_APP_GEMINI_KEY to enable</span>}
+        <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">✦ GEMINI BREADTH READ</span>
+        {loading && <RefreshCw size={10} className="text-zinc-500 animate-spin"/>}
+        {!BREADTH_GEMINI_KEY && <span className="text-[11px] text-zinc-600">Set REACT_APP_GEMINI_KEY to enable</span>}
       </div>
       {text
         ? <p className="text-[13px] text-zinc-200 leading-relaxed">{text}</p>
@@ -4406,9 +5107,9 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
         <div className="flex flex-wrap gap-2 mb-4">
           {metrics.map(m => (
             <div key={m.label} className="flex-1 min-w-[100px] bg-zinc-900/60 border border-zinc-800/60 rounded-lg px-2.5 py-1.5">
-              <div className="text-[9px] text-zinc-500 uppercase tracking-wider">{m.label}</div>
+              <div className="text-[11px] text-zinc-500 uppercase tracking-wider">{m.label}</div>
               <div className={`text-[15px] font-bold font-mono leading-tight ${m.color}`}>{m.value}</div>
-              {m.sub && <div className="text-[9px] text-zinc-600 truncate">{m.sub}</div>}
+              {m.sub && <div className="text-[11px] text-zinc-600 truncate">{m.sub}</div>}
             </div>
           ))}
         </div>
@@ -4419,7 +5120,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
             {/* Title header */}
             <div className="px-4 py-2 border-b border-zinc-800/60 flex items-center gap-2">
               <span className="text-[11px] font-semibold text-zinc-300">Market Breadth — NYSE / S&P 500</span>
-              {data?.last_updated && <span className="text-[10px] text-zinc-600">{data.last_updated}</span>}
+              {data?.last_updated && <span className="text-[11px] text-zinc-600">{data.last_updated}</span>}
             </div>
 
             {/* Single horizontal row */}
@@ -4432,13 +5133,13 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
                 return (
                   <div key={row.label}
                     className="flex-1 min-w-[140px] px-3 py-2.5 flex flex-col justify-between gap-1">
-                    <div className="text-[9px] text-zinc-500 uppercase tracking-wide truncate">{row.label}</div>
+                    <div className="text-[11px] text-zinc-500 uppercase tracking-wide truncate">{row.label}</div>
                     <div className="flex items-baseline gap-1 text-[12px] font-mono font-semibold leading-none">
                       <span className="text-emerald-400">{lp.toFixed(1)}%</span>
-                      {row.leftCount  != null && <span className="text-[9px] text-zinc-600">({row.leftCount})</span>}
-                      <span className="text-zinc-700 mx-0.5">/</span>
-                      <span className="text-red-400">{rp.toFixed(1)}%</span>
-                      {row.rightCount != null && <span className="text-[9px] text-zinc-600">({row.rightCount})</span>}
+                      {row.leftCount  != null && <span className="text-[11px] text-zinc-600">({row.leftCount})</span>}
+                      <span className="text-zinc-300 mx-0.5">/</span>
+                      <span className="text-red-500">{rp.toFixed(1)}%</span>
+                      {row.rightCount != null && <span className="text-[11px] text-zinc-600">({row.rightCount})</span>}
                     </div>
                     <div className="flex h-[4px] rounded-full overflow-hidden gap-px">
                       <div className="bg-emerald-500/70 rounded-l-full" style={{ width: `${lp}%` }} />
@@ -4456,7 +5157,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
               {/* SPY / QQQ columns */}
               {[["SPY", mc.spy], ["QQQ", mc.qqq]].map(([name, idx]) => idx && (
                 <div key={name} className="flex-1 min-w-[130px] px-3 py-2.5 flex flex-col gap-1">
-                  <div className="text-[10px] font-semibold text-zinc-300">{name}</div>
+                  <div className="text-[11px] font-semibold text-zinc-300">{name}</div>
                   <div className="flex gap-4">
                     {[
                       { k: "sma50_pct",  l: "vs SMA50"  },
@@ -4464,7 +5165,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
                       { k: "ema10_pct",  l: "vs EMA10"  },
                     ].filter(({ k }) => idx[k] != null).map(({ k, l }) => (
                       <div key={k}>
-                        <div className="text-[9px] text-zinc-600">{l}</div>
+                        <div className="text-[11px] text-zinc-600">{l}</div>
                         <div className={`text-[12px] font-mono font-bold ${idx[k] > 0 ? "text-emerald-400" : "text-red-400"}`}>
                           {idx[k] > 0 ? "+" : ""}{idx[k].toFixed(2)}%
                         </div>
@@ -4489,7 +5190,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
 
         {/* Daily Brief cards */}
         <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2.5">Daily Brief</div>
+          <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-2.5">Daily Brief</div>
           <div className="flex flex-col gap-2.5">
             {[
               { label: "Short-term",  verdict: shortTermVerdict },
@@ -4497,9 +5198,9 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
               { label: "T2108",       verdict: t2108Verdict },
             ].map(({ label, verdict }) => (
               <div key={label}>
-                <div className="text-[10px] text-zinc-600 mb-0.5">{label}</div>
+                <div className="text-[11px] text-zinc-600 mb-0.5">{label}</div>
                 <div className={`text-[12px] font-semibold ${verdict.cls} leading-tight`}>{verdict.label}</div>
-                <div className="text-[10px] text-zinc-600 leading-tight mt-0.5">{verdict.detail}</div>
+                <div className="text-[11px] text-zinc-600 leading-tight mt-0.5">{verdict.detail}</div>
               </div>
             ))}
           </div>
@@ -4507,7 +5208,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
 
         {/* Internals block */}
         <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Internals</div>
+          <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Internals</div>
           <div className="flex flex-col gap-1">
             {internals.map(({ label, value, color }) => (
               <div key={label} className="flex items-center justify-between">
@@ -4517,7 +5218,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
             ))}
           </div>
           {internalsData?.generated_at && (
-            <div className="text-[9px] text-zinc-700 mt-2 border-t border-zinc-800/40 pt-1.5">
+            <div className="text-[11px] text-zinc-700 mt-2 border-t border-zinc-800/40 pt-1.5">
               {new Date(internalsData.generated_at).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
             </div>
           )}
@@ -4526,11 +5227,11 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
         {/* Leading Themes */}
         {leadingThemes.length > 0 && (
           <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-            <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Leading Themes · 1D</div>
+            <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Leading Themes · 1D</div>
             <div className="flex flex-col gap-1.5">
               {leadingThemes.map((t, i) => (
                 <div key={t.name} className="flex items-center gap-1.5">
-                  <span className="text-[10px] text-zinc-700 font-mono w-4 text-right">{i + 1}</span>
+                  <span className="text-[11px] text-zinc-700 font-mono w-4 text-right">{i + 1}</span>
                   <span className="text-[11px] text-zinc-300 flex-1 truncate leading-tight">{t.name}</span>
                   <span className={`text-[11px] font-mono font-bold flex-shrink-0 ${(t.perf_1d || 0) > 0 ? "text-emerald-400" : "text-red-400"}`}>
                     {(t.perf_1d || 0) > 0 ? "+" : ""}{(t.perf_1d || 0).toFixed(1)}%
@@ -4543,15 +5244,15 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
 
         {/* Macro Risk Flags */}
         <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
-          <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Macro Risk · Today</div>
+          <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Macro Risk · Today</div>
           {macroFlags.length > 0 ? (
             <div className="flex flex-col gap-2">
               {macroFlags.map((e, i) => (
                 <div key={i} className="flex items-start gap-1.5">
-                  <span className="text-[9px] font-bold text-red-400 mt-0.5 flex-shrink-0">●</span>
+                  <span className="text-[11px] font-bold text-red-400 mt-0.5 flex-shrink-0">●</span>
                   <div>
                     <div className="text-[11px] text-zinc-300 leading-tight">{e.event || e.name}</div>
-                    {e.time && <div className="text-[9px] text-zinc-600">{e.time} ET</div>}
+                    {e.time && <div className="text-[11px] text-zinc-600">{e.time} ET</div>}
                   </div>
                 </div>
               ))}
@@ -4585,9 +5286,9 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
       const seen = new Set();
       for (const g of gappers) {
         if (g.meets_all_gates) {
-          if (!seen.has(g.ticker)) { seen.add(g.ticker); rows.push({ ticker: g.ticker, rs: g.rs_52w ?? null, isPeer: false }); }
+          if (!seen.has(g.ticker)) { seen.add(g.ticker); rows.push({ ticker: g.ticker, rs: g.rs_52w ?? null, isPeer: false, price: g.price ?? null, gap_pct: g.gap_pct ?? null }); }
           for (const p of (g.peer_tickers || [])) {
-            if (!seen.has(p)) { seen.add(p); rows.push({ ticker: p, rs: null, isPeer: true }); }
+            if (!seen.has(p)) { seen.add(p); rows.push({ ticker: p, rs: null, isPeer: true, price: null, gap_pct: null }); }
           }
         }
       }
@@ -4617,7 +5318,7 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
         <div className="text-[12px] font-semibold text-zinc-200 mb-0.5">
           {mode === "gapper" ? "Gate Leaders" : "Leaders — All Themes"}
         </div>
-        <div className="text-[9px] text-zinc-600 leading-tight">
+        <div className="text-[11px] text-zinc-600 leading-tight">
           {mode === "gapper"
             ? "Gappers passing all 5 gates + peers"
             : "RS>85 · Price>$12 · Vol>$100M · Cap>$2B · ADR≥4%"}
@@ -4626,26 +5327,36 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
 
       {/* Leaders list */}
       <div className="flex flex-col gap-0.5 mb-3">
+        {leaders.length > 0 && (
+          <div className="flex items-center justify-between text-[11px] text-zinc-600 pb-0.5 mb-0.5 border-b border-zinc-800/60">
+            <span>Ticker · Price · Chg</span>
+            <span>RS</span>
+          </div>
+        )}
         {leaders.length === 0 ? (
           <div className="text-[11px] text-zinc-600 py-2 text-center">No qualifying leaders</div>
-        ) : leaders.map(({ ticker, rs, isPeer }) => {
+        ) : leaders.map(({ ticker, rs, isPeer, price, gap_pct }) => {
           const rsCls = rs != null && rs >= 90 ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
                       : rs != null && rs >= 85 ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
                       : "bg-zinc-800/60 text-zinc-500 border-zinc-700/40";
           return (
             <div key={ticker}
               className={`flex items-center justify-between px-1.5 py-1 rounded hover:bg-zinc-800/50 transition-colors ${isPeer ? "opacity-60" : ""}`}>
-              <span
-                className="text-[12px] font-mono font-semibold text-blue-400 cursor-pointer hover:text-blue-300 transition-colors leading-none"
-                onClick={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect }); }}
-                onMouseEnter={e => startHover(ticker, e.currentTarget.getBoundingClientRect())}
-                onMouseLeave={cancelHover}
-              >
-                {ticker}
-                {isPeer && <span className="text-[8px] text-zinc-600 ml-0.5">peer</span>}
-              </span>
+              <div className="flex items-center gap-1.5 min-w-0 flex-wrap">
+                <span
+                  className="text-[12px] font-mono font-semibold text-blue-400 cursor-pointer hover:text-blue-300 transition-colors leading-none"
+                  onClick={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect }); }}
+                  onMouseEnter={e => startHover(ticker, e.currentTarget.getBoundingClientRect())}
+                  onMouseLeave={cancelHover}
+                >
+                  {ticker}
+                  {isPeer && <span className="text-[11px] text-zinc-600 ml-0.5">peer</span>}
+                </span>
+                {price != null && <span className="text-[11px] font-mono text-zinc-500">${price.toFixed(2)}</span>}
+                {gap_pct != null && <span className="text-[11px] font-mono font-bold text-emerald-400">+{gap_pct.toFixed(1)}%</span>}
+              </div>
               {rs != null && (
-                <span className={`text-[9px] font-bold font-mono px-1 py-0.5 rounded border leading-none ${rsCls}`}>
+                <span className={`text-[11px] font-bold font-mono px-1 py-0.5 rounded border leading-none flex-shrink-0 ${rsCls}`}>
                   {rs}
                 </span>
               )}
@@ -4659,11 +5370,11 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
 
       {/* Active Alerts */}
       <div className="mb-3">
-        <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Active Alerts</div>
+        <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">Active Alerts</div>
         {ibkrThemesData?.power_themes?.slice(0, 2).map(pt => pt.theme_rs >= 90 ? (
           <div key={pt.name} className="mb-1 p-1.5 rounded-lg bg-emerald-500/5 border border-emerald-500/15">
-            <div className="text-[10px] font-bold text-emerald-400">{pt.name.split(' ')[0]} {pt.name.split(' ')[1] || ''} RS &gt; 90</div>
-            <div className="text-[9px] text-zinc-600 mt-0.5 font-mono">
+            <div className="text-[11px] font-bold text-emerald-400">{pt.name.split(' ')[0]} {pt.name.split(' ')[1] || ''} RS &gt; 90</div>
+            <div className="text-[11px] text-zinc-600 mt-0.5 font-mono">
               {isLive ? '● ntfy.sh ✓' : '◐ Pending'}
             </div>
           </div>
@@ -4678,17 +5389,17 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
 
       {/* IBKR TWS Scanner */}
       <div>
-        <div className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">
+        <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">
           IBKR TWS Scanner
         </div>
         {ibkrThemesData?.ibkr_scanner?.length > 0 ? (
           <div className="flex flex-col gap-0.5">
-            <div className="text-[9px] text-zinc-600 mb-1">Mirroring: Top Pre-Mkt Gainers</div>
+            <div className="text-[11px] text-zinc-600 mb-1">Mirroring: Top Pre-Mkt Gainers</div>
             {ibkrThemesData.ibkr_scanner.slice(0, 4).map(row => (
               <div key={row.ticker} className="flex items-center justify-between px-1 py-0.5 rounded hover:bg-zinc-800/40 transition-colors">
                 <span className="text-[11px] font-mono font-semibold text-zinc-200">{row.ticker}</span>
                 {row.change_pct != null && (
-                  <span className={`text-[10px] font-mono font-bold ${row.change_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                  <span className={`text-[11px] font-mono font-bold ${row.change_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                     {row.change_pct >= 0 ? '+' : ''}{Number(row.change_pct).toFixed(1)}%
                   </span>
                 )}
@@ -4712,7 +5423,6 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
   const [gapperData, setGapperData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [hovered, setHovered] = useState(null);
-  const { active: tvActive, onEnter: tvOnEnter, onLeave: tvOnLeave } = useHoverDelay(2000);
   const [tickerDb, setTickerDb] = useState({});
 
   // Filter state — human-friendly units: PMVol/AvgVol in K, MktCap in $B, DolVol in $M
@@ -4722,6 +5432,8 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
   const [fMinAvgVol, setFMinAvgVol] = useState(0);    // K
   const [fMinMktCap, setFMinMktCap] = useState(0);      // $B
   const [fMinDolVol, setFMinDolVol] = useState(0);     // $M
+  const [modalData, setModalData] = useState(null);
+  const [chartAnchorRect, setChartAnchorRect] = useState(null);
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/stock_db.json`)
@@ -4764,6 +5476,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
     </div>
   );
 
+  const GRADE_RANK = { "A+": 4, "A": 3, "B": 2, "C": 1 };
   const filtered = gapperData.gappers.filter(g =>
     g.gap_pct   >= fMinGap &&
     g.pm_volume >= fMinPMVol * 1000 &&
@@ -4773,7 +5486,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
     (g.avg_dollar_vol || g.price * (g.avg_vol_10d || 0)) >= fMinDolVol * 1e6 &&
     // In Stress regime: hide C-grade gappers to reduce noise
     (creditRegime !== "Stress" || (g.grade && g.grade !== "C"))
-  );
+  ).sort((a, b) => (GRADE_RANK[b.grade] || 0) - (GRADE_RANK[a.grade] || 0));
 
   const resetFilters = () => {
     setFMinGap(5); setFMinPMVol(200); setFMinPrice(5);
@@ -4821,54 +5534,54 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
       <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
         <table className="w-full table-fixed min-w-[1300px]">
           <colgroup>
-            <col style={{width:"5%"}}/>
-            <col style={{width:"5%"}}/>
-            <col style={{width:"5%"}}/>
-            <col style={{width:"4%"}}/>
-            <col style={{width:"4%"}}/>
-            <col style={{width:"4%"}}/>
-            <col style={{width:"5%"}}/>
-            <col style={{width:"6%"}}/>
-            <col style={{width:"8%"}}/>
-            <col style={{width:"8%"}}/>
-            <col style={{width:"4%"}}/>
-            <col style={{width:"18%"}}/>
-            <col style={{width:"24%"}}/>
+            <col style={{width:"80px"}}/>
+            <col style={{width:"80px"}}/>
+            <col style={{width:"70px"}}/>
+            <col style={{width:"55px"}}/>
+            <col style={{width:"60px"}}/>
+            <col style={{width:"55px"}}/>
+            <col style={{width:"65px"}}/>
+            <col style={{width:"90px"}}/>
+            <col style={{width:"110px"}}/>
+            <col style={{width:"90px"}}/>
+            <col style={{width:"45px"}}/>
+            <col style={{width:"150px"}}/>
+            <col style={{width:"170px"}}/>
           </colgroup>
           <thead>
             <tr className="text-[11px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40 align-middle">
-              <th className="text-center py-2 px-1.5 font-medium align-middle">Ticker</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">Premkt<br/>Price<br/>Chg %</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight">Premkt<br/>Vol</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip text="Relative Volume：今日成交量 ÷ 過去10天平均量。🟢 ≥5x 極強  🟡 ≥3x 強  ⚪ ≥2x 中等  灰色 &lt;2x 弱">RVol</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip text="Daily %：昨日收盤漲跌幅（非盤前）">Daily %</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle leading-tight"><Tip text="Short Interest：放空股數佔流通股比例。>20% 有軋空 (Short Squeeze) 潛力，但也代表市場看空">Short<br/>Int</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip text="Float：市場上可自由買賣的流通股數。Float 越小，股價越容易被大幅推動">Float</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle">Sector</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle">Industry</th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle"><Tip width="w-72" text="催化劑分類：Earnings 財報｜Upgrade 分析師升評｜FDA 藥品審批｜Government Policy 政策｜Contract/Partnership 合約｜Institutional/Insider Buying 機構/內部人買入｜Thematic Narratives 主題敘事｜Technical/Flow 無明確催化劑">Category</Tip></th>
-              <th className="text-center py-2 px-1 font-medium align-middle"><Tip width="w-64" text="Gemini 信心評分：A+ 極高 (90+)｜A 高 (75-89)｜B 中 (50-74)｜C 低 (&lt;50)。Pass/Fail = 技術門檻 ($Vol >$100M 且 ADR >4%)">Grade</Tip></th>
-              <th className="text-center py-2 px-1.5 font-medium align-middle">Reasoning</th>
-              <th className="text-center py-2 px-2 font-medium align-middle">Analysis Details</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle">Ticker</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle leading-tight">Premkt<br/>Price<br/>Chg %</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle leading-tight">Premkt<br/>Vol</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip text="Relative Volume：今日成交量 ÷ 過去10天平均量。🟢 ≥5x 極強  🟡 ≥3x 強  ⚪ ≥2x 中等  灰色 &lt;2x 弱">RVol</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip text="Daily %：昨日收盤漲跌幅（非盤前）">Daily %</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle leading-tight"><Tip text="Short Interest：放空股數佔流通股比例。>20% 有軋空 (Short Squeeze) 潛力，但也代表市場看空">Short<br/>Int</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip text="Float：市場上可自由買賣的流通股數。Float 越小，股價越容易被大幅推動">Float</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle">Sector</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle">Industry</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip width="w-72" text="催化劑分類：Earnings 財報｜Upgrade 分析師升評｜FDA 藥品審批｜Government Policy 政策｜Contract/Partnership 合約｜Institutional/Insider Buying 機構/內部人買入｜Thematic Narratives 主題敘事｜Technical/Flow 無明確催化劑">Category</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle"><Tip width="w-64" text="Gemini 信心評分：A+ 極高 (90+)｜A 高 (75-89)｜B 中 (50-74)｜C 低 (&lt;50)。Pass/Fail = 技術門檻 ($Vol >$100M 且 ADR >4%)">Grade</Tip></th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle">Reasoning</th>
+              <th className="text-center py-1.5 px-2 font-medium align-middle">Analysis Details</th>
             </tr>
           </thead>
           <tbody>
             {filtered.map((g, i) => {
               const techFail   = (g.technical_status || "").startsWith("Fail");
+              if (techFail) return null;
               const flowTheme  = (g.theme || g.category || "") === "Technical / Flow";
               const rowCls     = [
                 "border-t align-middle transition-colors",
-                techFail  ? "opacity-40 grayscale border-zinc-800/30" : "border-zinc-800/40 hover:bg-zinc-800/20",
+                "border-zinc-800/40 hover:bg-zinc-800/20",
                 flowTheme ? "border-dashed border-amber-800/40" : "",
               ].join(" ");
               return (
               <tr key={g.ticker + i} className={rowCls}>
                 {/* Ticker */}
-                <td className="py-2 px-1.5 text-center">
+                <td className="py-1 px-2 align-middle text-center">
                   <span
                     className="font-bold text-zinc-100 text-[13px] hover:text-blue-400 transition-colors cursor-pointer"
-                    onMouseEnter={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered({ ticker: g.ticker, rect }); tvOnEnter(); }}
-                    onMouseLeave={() => { setHovered(null); tvOnLeave(); }}
+                    onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === g.ticker ? null : { ticker: g.ticker, rect }); }}
                   >
                     {g.ticker}
                   </span>
@@ -4878,24 +5591,24 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                   <div className="text-[11px] font-mono text-zinc-500">${g.price.toFixed(2)}</div>
                 </td>
                 {/* Premkt % */}
-                <td className="py-2 px-1.5 text-center">
+                <td className="py-1 px-2 align-middle text-center">
                   <div className="text-[12px] font-mono text-zinc-300">${g.price.toFixed(2)}</div>
                   <span className="text-[13px] font-bold font-mono text-emerald-400">+{g.gap_pct.toFixed(1)}%</span>
                 </td>
                 {/* Premkt Vol */}
-                <td className="py-2 px-1.5 text-center text-[12px] font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
+                <td className="py-1 px-2 align-middle text-center text-[12px] font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
                 {/* RVol */}
-                <td className="py-2 px-1.5 text-center">
+                <td className="py-1 px-2 align-middle text-center">
                   <span className={`text-[12px] font-bold font-mono ${g.rvol >= 5 ? "text-emerald-300" : g.rvol >= 3 ? "text-emerald-400" : g.rvol >= 2 ? "text-amber-400" : "text-zinc-500"}`}>
                     {g.rvol.toFixed(2)}x
                   </span>
                 </td>
                 {/* Daily % */}
-                <td className="py-2 px-1.5 text-center"><DailyChg val={g.daily_pct}/></td>
+                <td className="py-1 px-2 align-middle text-center"><DailyChg val={g.daily_pct}/></td>
                 {/* Short Int */}
-                <td className="py-2 px-1.5 text-center text-[12px] font-mono text-zinc-400">{g.short_float || "—"}</td>
+                <td className="py-1 px-2 align-middle text-center text-[12px] font-mono text-zinc-400">{g.short_float || "—"}</td>
                 {/* Float */}
-                <td className="py-2 px-1.5 text-center text-[12px] font-mono text-zinc-400">{g.float_shares || "—"}</td>
+                <td className="py-1 px-2 align-middle text-center text-[12px] font-mono text-zinc-400">{g.float_shares || "—"}</td>
                 {/* Sector / Industry */}
                 {(() => {
                   const db = tickerDb[g.ticker] || {};
@@ -4903,19 +5616,19 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                   const industry = db.industry || g.industry || "";
                   return (
                     <>
-                      <td className="py-2 px-1.5 text-center text-[11px] text-zinc-200 align-middle">{sector || <span className="text-zinc-600">—</span>}</td>
-                      <td className="py-2 px-1.5 text-center text-[11px] text-zinc-200 align-middle">{industry || <span className="text-zinc-600">—</span>}</td>
+                      <td className="py-1 px-2 align-middle text-center text-[11px] text-zinc-200">{sector || <span className="text-zinc-600">—</span>}</td>
+                      <td className="py-1 px-2 align-middle text-center text-[11px] text-zinc-200">{industry || <span className="text-zinc-600">—</span>}</td>
                     </>
                   );
                 })()}
                 {/* Category */}
-                <td className="py-2 px-1.5 text-center">
+                <td className="py-1 px-2 align-middle text-center">
                   <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full border ${CATEGORY_STYLE[g.category] || CATEGORY_STYLE["Others"]}`}>
                     {g.category}
                   </span>
                 </td>
                 {/* Grade + Technical Status + Verification */}
-                <td className="py-2 px-1 text-center">
+                <td className="py-1 px-2 align-middle text-center">
                   <div className="flex flex-col items-center gap-0.5">
                     <div className="flex items-center gap-1">
                       {g.grade
@@ -4927,7 +5640,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                       <Tip text={(g.technical_status || "").startsWith("Fail")
                         ? `✗ 未通過技術門檻：${g.technical_status.replace("Fail — ", "")}。整排灰色 = 不建議交易`
                         : "✓ 通過技術門檻：平均日成交金額 >$100M 且 ADR >4%，具備足夠流動性與波動性"}>
-                        <span className={`text-[9px] font-semibold px-1 py-0.5 rounded leading-none ${
+                        <span className={`text-[11px] font-semibold px-1 py-0.5 rounded leading-none ${
                           (g.technical_status || "").startsWith("Fail")
                             ? "text-red-400 bg-red-500/10 border border-red-500/20"
                             : "text-emerald-400 bg-emerald-500/10 border border-emerald-500/20"
@@ -4938,29 +5651,35 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
                     )}
                     {(g.theme || g.category) === "Technical / Flow" && (
                       <Tip text="找不到明確催化劑（無財報、合約、政策等新聞）。歸類為資金流向/技術突破。自動降為 C 級，風險較高，謹慎操作">
-                        <span className="text-[9px] text-amber-500 font-semibold">🔍 Flow</span>
+                        <span className="text-[11px] text-amber-500 font-semibold">🔍 Flow</span>
                       </Tip>
                     )}
                   </div>
                 </td>
-                {/* Reasoning — shows analysis_detail with bold Catalyst/Impact */}
-                <td className="py-2 px-1.5 text-[12px] text-zinc-400 leading-relaxed align-middle whitespace-normal break-words">
-                  {g.analysis_detail ? (() => {
-                    const parts = g.analysis_detail.split(" | Impact: ");
-                    if (parts.length === 2) {
-                      const catalystText = parts[0].replace(/^Catalyst:\s*/i, "");
-                      return (
-                        <div className="space-y-1">
-                          <p><span className="font-bold text-zinc-300">Catalyst:</span> {catalystText}</p>
-                          <p><span className="font-bold text-zinc-300">Impact:</span> {parts[1]}</p>
-                        </div>
-                      );
-                    }
-                    return g.analysis_detail;
-                  })() : g.reasoning}
+                {/* Reasoning */}
+                <td className="py-1 px-2 align-middle">
+                  <span className="line-clamp-2 text-[11px] text-zinc-400 block">
+                    {g.reasoning || "—"}
+                  </span>
                 </td>
                 {/* Analysis Details */}
-                <td className="py-2 px-2 align-middle"><AnalysisCell text={g.analysis_details}/></td>
+                <td className="py-1 px-2 align-middle">
+                  {(() => {
+                    const d = g.analysis_detail;
+                    const catalyst = typeof d === "object"
+                      ? d?.catalyst
+                      : (typeof d === "string" ? d.split(" | Impact: ")[0].replace(/^Catalyst:\s*/i, "") : null);
+                    return (
+                      <div>
+                        <span className="line-clamp-1 text-[11px] text-zinc-300 block">{catalyst || "—"}</span>
+                        <button
+                          onClick={(e) => { e.stopPropagation(); setModalData(g); }}
+                          className="text-[11px] text-blue-400 hover:text-blue-300 mt-0.5"
+                        >•••</button>
+                      </div>
+                    );
+                  })()}
+                </td>
               </tr>
               );
             })}
@@ -4974,7 +5693,82 @@ const GapperScanner = ({ earningsData, ibkrThemesData }) => {
       </div>
       <LeaderColumn ibkrThemesData={ibkrThemesData} gapperData={gapperData} mode="gapper" />
     </div>
-    {tvActive && hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect}/>}
+    {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
+    {modalData && (
+      <div
+        className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center"
+        onClick={() => { setModalData(null); setChartAnchorRect(null); }}
+      >
+        <div
+          className="bg-zinc-900 border border-zinc-700 rounded-xl p-6 max-w-2xl w-full mx-4 shadow-2xl relative flex flex-col max-h-[85vh] overflow-y-auto"
+          onClick={e => e.stopPropagation()}
+        >
+          <button
+            onClick={() => { setModalData(null); setChartAnchorRect(null); }}
+            className="absolute top-3 right-3 text-zinc-400 hover:text-zinc-100 transition-colors"
+          >
+            <X size={16}/>
+          </button>
+          <div className="flex items-center gap-2 mb-5 flex-wrap">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                const rect = e.currentTarget.getBoundingClientRect();
+                setChartAnchorRect(rect);
+              }}
+              className="text-xl font-bold font-mono text-zinc-100 hover:text-blue-400 transition-colors"
+            >
+              {modalData.ticker} ↗
+            </button>
+            <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded-full border ${CATEGORY_STYLE[modalData.category] || CATEGORY_STYLE["Others"]}`}>
+              {modalData.category}
+            </span>
+            {modalData.grade && (
+              <span className={`text-[11px] font-bold px-1 py-0.5 rounded border ${gradeStyle(modalData.grade)}`}>
+                {modalData.grade}
+              </span>
+            )}
+          </div>
+          {(() => {
+            const d = modalData.analysis_detail;
+            let catalyst = null, impact = null;
+            if (d && typeof d === "object") {
+              catalyst = d.catalyst;
+              impact = d.impact;
+            } else if (typeof d === "string") {
+              const parts = d.split(" | Impact: ");
+              catalyst = parts[0]?.replace(/^Catalyst:\s*/i, "") || null;
+              impact = parts[1] || null;
+            }
+            catalyst = catalyst || modalData.category;
+            const hypothesis = [modalData.hypothesis, modalData.hypothesis_detail].filter(Boolean).join("\n\n") || null;
+            const sections = [
+              { label: "CATALYST",   value: catalyst },
+              { label: "IMPACT",     value: impact },
+              { label: "REASONING",  value: modalData.reasoning },
+              { label: "HYPOTHESIS", value: hypothesis },
+            ];
+            return (
+              <div className="space-y-4">
+                {sections.map(({ label, value }) => value ? (
+                  <div key={label}>
+                    <div className="text-[11px] uppercase text-zinc-500 mb-1 font-semibold tracking-wider">{label}</div>
+                    <p className="text-[13px] text-zinc-200 leading-relaxed whitespace-pre-line">{renderMarkdown(value)}</p>
+                  </div>
+                ) : null)}
+              </div>
+            );
+          })()}
+        </div>
+      </div>
+    )}
+    {chartAnchorRect && modalData && (
+      <TVPopup
+        ticker={modalData.ticker}
+        anchorRect={chartAnchorRect}
+        onClose={() => setChartAnchorRect(null)}
+      />
+    )}
     </>
   );
 };
@@ -5000,7 +5794,7 @@ const THEME_ETF_MAP = {
   "Defense & Aerospace":           "ITA",
   "Healthcare & Biotech":          "XBI",
   "FinTech":                       "FINX",
-  "Crypto & Blockchain":           "MSTR",
+  "Crypto & Blockchain":           "BLOK",
   "Space Tech":                    "UFO",
   "Quantum Computing":             "QTUM",
   "Robotics":                      "BOTZ",
@@ -5012,7 +5806,6 @@ const THEME_ETF_MAP = {
   "Real Estate & REITs":           "VNQ",
   "Internet of Things":            "SNSR",
   "Industrial Automation":         "IRBO",
-  "Big Data":                      "META",
   "Consumer Goods":                "XLY",
   "Commodities Metals":            "GDX",
   "Commodities Energy":            "USO",
@@ -5022,15 +5815,10 @@ const THEME_ETF_MAP = {
   "Virtual & Augmented Reality":   "METV",
   "Agriculture & FoodTech":        "MOO",
   "Environmental Sustainability":  "ESGU",
-  "Hardware":                      "AMAT",
-  "Smart Home":                    "AAPL",
-  "Wearables":                     "AAPL",
   "Digital Entertainment":         "HERO",
   "Aging Population & Longevity":  "IHF",
   "Healthy Food & Nutrition":      "MOO",
   "Education Technology":          "INST",
-  "Biometrics":                    "MSFT",
-  "Nanotechnology":                "NVDA",
   // ── Industry view theme names ──
   "Telecom":                       "FCOM",
   "Clean Energy & Utilities":      "ICLN",
@@ -5096,7 +5884,6 @@ const CATALYST_CATEGORIES = [
       // reaction headlines published same day
       "plunging after earnings", "climbs after earnings", "rallies after earnings",
       "surges after earnings", "falls after earnings", "drops after earnings",
-      "after earnings",
     ],
   },
   {
@@ -5118,16 +5905,22 @@ const CATALYST_CATEGORIES = [
       "license agreement", "licensing deal", "collaboration agreement",
       "co-development agreement", "milestone payment", "royalty agreement",
       "exclusive license", "joint development", "strategic collaboration",
+      // broader commercial partnership signals
+      "partners with", "partnership with", "strategic partnership",
+      "signs agreement", "signs deal", "announces deal",
+      "agreement with", "agreement to supply", "power purchase agreement",
+      "supply agreement", "offtake agreement", "memorandum of understanding",
     ],
   },
   {
     key: "contract",
     label: "Contract",
-    color: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30",
+    color: "text-blue-400 bg-blue-500/10 border-blue-500/30",
     keywords: [
       "awarded contract", "wins contract", "government contract awarded",
       "defense contract", "multi-year contract", "exclusive supply agreement",
       "selected as supplier", "awarded $", "contract worth $",
+      "secures contract", "signs contract", "long-term contract",
     ],
   },
   {
@@ -5148,7 +5941,6 @@ const CATALYST_CATEGORIES = [
       "upgrades to buy", "upgrades to overweight", "upgrades to outperform",
       "downgrades to sell", "downgrades to underweight", "downgrades to underperform",
       "downgrades to neutral", "initiates with buy", "initiates with overweight",
-      "raises price target to", "lowers price target to",
     ],
   },
   {
@@ -5394,7 +6186,7 @@ const SearchBar = ({ data, search, setSearch }) => {
     setNewsError(false);
     try {
       const to   = new Date();
-      const from = new Date(to.getTime() - 180 * 24 * 60 * 60 * 1000); // 6 months
+      const from = new Date(to.getTime() - 1825 * 24 * 60 * 60 * 1000); // 5 years
       const fmt  = d => d.toISOString().split("T")[0];
       const res  = await fetch(
         `https://finnhub.io/api/v1/company-news?symbol=${ticker}` +
@@ -5414,19 +6206,66 @@ const SearchBar = ({ data, search, setSearch }) => {
           .split(/\s+/)
           .filter(w => w.length >= 4 && !STOPWORDS.has(w));
 
+      // Company relevance keywords — ticker substring catches "goog" inside "google"
+      const companyStopWords = new Set(["inc", "corp", "corporation", "ltd", "llc", "co", "group", "holdings", "the", "and"]);
+      const companyKeywords = [
+        ticker.toLowerCase(),
+        ...(fullResult?.company || "")
+          .toLowerCase()
+          .replace(/[^a-z0-9 ]/g, " ")
+          .split(/\s+/)
+          .filter(w => w.length >= 4 && !companyStopWords.has(w)),
+      ];
+      // Roundup articles mention many companies in one headline (e.g. "Apple, Amazon, Nvidia And More On CNBC...")
+      const isRoundup = (headline) => {
+        const h = (headline || "").toLowerCase();
+        return h.includes("and more") && h.includes(",");
+      };
+      // Clickbait / opinion / preview articles — not confirmed events
+      const CLICKBAIT_PHRASES = [
+        "time to buy", "hold or sell", "buy or sell", "should you buy", "should investors",
+        "is it a buy", "is a buy", "is now a buy",
+        "what you should know", "what's going on", "what to expect",
+        "ahead of earnings", "before earnings", "earnings preview",
+        "will it beat", "will report", "could report",
+        "recovers some", "recovers losses", "bounce back",
+        "post q1", "post q2", "post q3", "post q4",
+        "what happened", "here's why", "here is why",
+        "stock picks", "top picks", "week of", "stocks to watch",
+        "best stocks", "top stocks", "final trades",
+      ];
+      const isClickbait = (headline) => {
+        const h = (headline || "").trim().toLowerCase();
+        if (h.endsWith("?")) return true; // question headlines are almost always clickbait
+        return CLICKBAIT_PHRASES.some(p => h.includes(p));
+      };
+      const isRelevant = (a) => {
+        if (isRoundup(a.headline)) return false;
+        if (isClickbait(a.headline)) return false;
+        const text = ((a.headline || "") + " " + (a.summary || "")).toLowerCase();
+        return companyKeywords.some(kw => text.includes(kw));
+      };
+
       const dedupedGroups = []; // Each entry = { article, words, timestamp }
       for (const a of (Array.isArray(articles) ? articles : [])) {
+        if (!isRelevant(a)) continue; // skip articles not mentioning this company
         const cat = detectCatalyst(a.headline, a.summary);
         if (!cat) continue;
         const words = new Set(sigWords(a.headline));
         if (words.size === 0) continue;
 
-        // Check if a similar article exists within 24 hours
+        // Dedup: same category within 48h uses lower threshold (25%) to catch
+        // same-event articles with different headlines (e.g. 3 outlets covering
+        // the same trial result). Cross-category keeps stricter 45%.
         const isDuplicate = dedupedGroups.some(({ article: existing, words: exWords }) => {
-          if (Math.abs(a.datetime - existing.datetime) > 86400) return false; // >24h apart = not dup
+          const diffSec = Math.abs(a.datetime - existing.datetime);
+          const sameCategory = cat.key === existing.catalyst.key;
+          const windowSec = sameCategory ? 172800 : 86400; // 48h same-cat, 24h otherwise
+          if (diffSec > windowSec) return false;
           const overlap = [...words].filter(w => exWords.has(w)).length;
           const similarity = overlap / Math.max(words.size, exWords.size);
-          return similarity >= 0.45; // 45% word overlap = duplicate
+          const threshold = sameCategory ? 0.25 : 0.45;
+          return similarity >= threshold;
         });
 
         if (!isDuplicate) {
@@ -5438,7 +6277,7 @@ const SearchBar = ({ data, search, setSearch }) => {
       const filtered = dedupedGroups
         .map(g => g.article)
         .sort((a, b) => b.datetime - a.datetime)
-        .slice(0, 40); // keep up to 40 after dedup
+        .slice(0, 50); // keep up to 50 high-impact catalysts after dedup
 
       setNews(filtered);
     } catch {
@@ -5470,8 +6309,8 @@ const SearchBar = ({ data, search, setSearch }) => {
       {open && q.length === 0 && searchHistory.length > 0 && (
         <div className="absolute top-full right-0 mt-1.5 w-72 bg-zinc-900 border border-zinc-700/60 rounded-lg shadow-2xl z-50 py-1">
           <div className="px-3 py-1 flex items-center justify-between">
-            <span className="text-[10px] text-zinc-600 uppercase tracking-widest">最近搜尋</span>
-            <button onMouseDown={e => { e.preventDefault(); setSearchHistory([]); localStorage.removeItem('searchHistory'); }} className="text-[10px] text-zinc-600 hover:text-zinc-400">清除</button>
+            <span className="text-[11px] text-zinc-600 uppercase tracking-widest">最近搜尋</span>
+            <button onMouseDown={e => { e.preventDefault(); setSearchHistory([]); localStorage.removeItem('searchHistory'); }} className="text-[11px] text-zinc-600 hover:text-zinc-400">清除</button>
           </div>
           {searchHistory.map(h => (
             <button key={h} onMouseDown={e => { e.preventDefault(); setSearch(h); setOpen(true); }}
@@ -5491,7 +6330,7 @@ const SearchBar = ({ data, search, setSearch }) => {
               className="w-full flex items-center gap-2 px-3 py-1.5 hover:bg-zinc-800 text-left">
               <span className="text-[13px] font-bold text-zinc-200 w-14 flex-shrink-0">{s.ticker}</span>
               <span className="text-[12px] text-zinc-500 truncate flex-1">{s.company}</span>
-              {s.inScanner && <span className="text-[10px] text-blue-400 flex-shrink-0">in scanner</span>}
+              {s.inScanner && <span className="text-[11px] text-blue-400 flex-shrink-0">in scanner</span>}
             </button>
           ))}
         </div>
@@ -5572,7 +6411,7 @@ const SearchBar = ({ data, search, setSearch }) => {
                               onClick={() => setSelectedSubTheme(isOpen ? null : a.subtheme)}
                             >
                               {a.subtheme}
-                              <span className="text-zinc-500 text-[10px] ml-0.5">{isOpen ? '▲' : '▼'}</span>
+                              <span className="text-zinc-500 text-[11px] ml-0.5">{isOpen ? '▲' : '▼'}</span>
                             </button>
                           );
                         })}
@@ -5657,23 +6496,23 @@ const SearchBar = ({ data, search, setSearch }) => {
                       onMouseDown={e => e.preventDefault()}
                     >
                       <div className="flex items-center gap-1.5 mb-1">
-                        <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border ${item.catalyst.color}`}>
+                        <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded border ${item.catalyst.color}`}>
                           {item.catalyst.label}
                         </span>
                         {item.sentiment && (
-                          <span className={`text-[10px] font-semibold px-1.5 py-0.5 rounded border ${item.sentiment === "good" ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/30" : item.sentiment === "bad" ? "text-red-400 bg-red-500/10 border-red-500/30" : "text-zinc-400 bg-zinc-700/20 border-zinc-600/30"}`}>
+                          <span className={`text-[11px] font-semibold px-1.5 py-0.5 rounded border ${item.sentiment === "good" ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/30" : item.sentiment === "bad" ? "text-red-400 bg-red-500/10 border-red-500/30" : "text-zinc-400 bg-zinc-700/20 border-zinc-600/30"}`}>
                             {item.sentiment}
                           </span>
                         )}
                         {date && (
-                          <span className="text-[10px] text-zinc-600">{date}</span>
+                          <span className="text-[11px] text-zinc-600">{date}</span>
                         )}
                       </div>
                       <p className="text-[12px] text-zinc-300 group-hover:text-blue-400 leading-snug transition-colors">
                         {item.headline}
                       </p>
                       {item.source && (
-                        <p className="text-[10px] text-zinc-700 mt-0.5">{item.source}</p>
+                        <p className="text-[11px] text-zinc-700 mt-0.5">{item.source}</p>
                       )}
                     </a>
                   );
@@ -5829,7 +6668,7 @@ const MacroRiskCard = () => {
             </div>
             <PctChange v={d.change_pct}/>
             {!isVix && d.open != null && (
-              <div className="text-[10px] text-zinc-700 mt-1 font-mono">
+              <div className="text-[11px] text-zinc-700 mt-1 font-mono">
                 O:{d.open.toFixed(2)} H:{d.high?.toFixed(2)} L:{d.low?.toFixed(2)}
               </div>
             )}
@@ -5851,7 +6690,7 @@ const MacroRiskCard = () => {
               <span className={`text-[11px] font-bold px-2 py-0.5 rounded border mt-1 inline-block ${regimeCls(credit.regime)}`}>
                 {credit.regime}
               </span>
-              {credit.date && <div className="text-[10px] text-zinc-700 mt-1.5">FRED · {credit.date}</div>}
+              {credit.date && <div className="text-[11px] text-zinc-700 mt-1.5">FRED · {credit.date}</div>}
             </>
           ) : <div className="text-zinc-600 text-[13px]">No data</div>}
         </div>
@@ -5944,7 +6783,7 @@ const MacroRiskCard = () => {
                 )}
                 {ana.analysis_para2 && (
                   <div>
-                    <div className="text-[10px] text-zinc-600 uppercase tracking-wide mb-1">Mechanical Catalyst</div>
+                    <div className="text-[11px] text-zinc-600 uppercase tracking-wide mb-1">Mechanical Catalyst</div>
                     <p className="text-[13px] text-zinc-300 leading-relaxed">{ana.analysis_para2}</p>
                   </div>
                 )}
@@ -5971,7 +6810,7 @@ const MacroRiskCard = () => {
               <div className="grid grid-cols-2 gap-2">
                 {(ana.ticker_intel.a_grade || []).map((t, i) => (
                   <div key={i} className="bg-emerald-500/10 border border-emerald-500/20 rounded p-2 flex gap-2 items-start">
-                    <span className="text-[10px] font-bold text-emerald-500 border border-emerald-500/40 rounded px-1 mt-0.5 flex-shrink-0">A</span>
+                    <span className="text-[11px] font-bold text-emerald-500 border border-emerald-500/40 rounded px-1 mt-0.5 flex-shrink-0">A</span>
                     <div>
                       <div className="font-mono text-[13px] font-bold text-zinc-200">{t.ticker}</div>
                       <div className="text-[11px] text-zinc-400 leading-tight mt-0.5">{t.reason}</div>
@@ -5980,7 +6819,7 @@ const MacroRiskCard = () => {
                 ))}
                 {(ana.ticker_intel.c_grade || []).map((t, i) => (
                   <div key={i} className="bg-red-500/10 border border-red-500/20 rounded p-2 flex gap-2 items-start">
-                    <span className="text-[10px] font-bold text-red-400 border border-red-500/40 rounded px-1 mt-0.5 flex-shrink-0">C</span>
+                    <span className="text-[11px] font-bold text-red-400 border border-red-500/40 rounded px-1 mt-0.5 flex-shrink-0">C</span>
                     <div>
                       <div className="font-mono text-[13px] font-bold text-zinc-200">{t.ticker}</div>
                       <div className="text-[11px] text-zinc-400 leading-tight mt-0.5">{t.reason}</div>
@@ -6009,6 +6848,7 @@ const MomentumCockpit = () => {
   const [selectedTicker, setSelectedTicker] = useState(null);
   const [analysis, setAnalysis] = useState(null);
   const [analyzing, setAnalyzing] = useState(false);
+  const [modalData, setModalData] = useState(null);
 
   // Gapper data — poll every 5 min (matches scanner schedule)
   useEffect(() => {
@@ -6049,7 +6889,7 @@ const MomentumCockpit = () => {
         return (
           <div>
             <div className="font-bold font-mono text-[13px] text-zinc-100 hover:text-blue-400 cursor-pointer" onClick={() => fetchAnalysis(g.ticker, g)}>{g.ticker}</div>
-            <div className="text-[10px] text-zinc-500 truncate max-w-[90px]">{g.company || ""}</div>
+            <div className="text-[11px] text-zinc-500 truncate max-w-[90px]">{g.company || ""}</div>
           </div>
         );
       }
@@ -6103,17 +6943,29 @@ const MomentumCockpit = () => {
     },
     {
       id: "reasoning", header: "Reasoning", accessorKey: "reasoning",
-      cell: ({ getValue }) => <span className="text-[11px] text-zinc-400 leading-tight line-clamp-2">{getValue() || "—"}</span>
+      cell: ({ getValue }) => (
+        <span className="text-[11px] text-zinc-400 line-clamp-2 leading-tight block max-w-[150px]">
+          {getValue() || "—"}
+        </span>
+      )
     },
     {
       id: "analysis", header: "Analysis Detail",
       cell: ({ row }) => {
         const d = row.original.analysis_detail;
-        if (!d) return <span className="text-zinc-600 text-[11px]">—</span>;
+        const text = d?.catalyst || d?.impact || "";
+        if (!text) return <span className="text-zinc-600 text-[11px]">—</span>;
         return (
-          <div className="text-[11px] leading-snug space-y-1">
-            {d.catalyst && <div className="text-zinc-300 line-clamp-2">{d.catalyst}</div>}
-            {d.impact && <div className="text-zinc-500 italic line-clamp-1">{d.impact}</div>}
+          <div className="flex flex-col gap-0.5">
+            <span className="text-[11px] text-zinc-300 line-clamp-1 leading-tight">
+              {text}
+            </span>
+            <button
+              onClick={(e) => { e.stopPropagation(); setModalData(row.original); }}
+              className="text-[11px] text-blue-400 hover:text-blue-300 self-start"
+            >
+              ••• more
+            </button>
           </div>
         );
       }
@@ -6142,7 +6994,7 @@ const MomentumCockpit = () => {
         <table className="w-full min-w-[1100px] text-left border-collapse">
           <thead>
             {table.getHeaderGroups().map(hg => (
-              <tr key={hg.id} className="text-[10px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40">
+              <tr key={hg.id} className="text-[11px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40">
                 {hg.headers.map(h => (
                   <th key={h.id} className="py-2 px-2 font-medium whitespace-nowrap">
                     {flexRender(h.column.columnDef.header, h.getContext())}
@@ -6158,14 +7010,14 @@ const MomentumCockpit = () => {
               const isSelected = selectedTicker === g.ticker;
               return (
                 <tr key={row.id}
-                  className={`border-b border-zinc-800/40 transition-colors cursor-pointer
+                  className={`border-b border-zinc-800/40 transition-colors cursor-pointer h-[56px]
                     ${isSelected ? "bg-blue-500/10" : "hover:bg-zinc-800/20"}
                     ${isFail ? "opacity-40" : ""}
                   `}
                   onClick={() => fetchAnalysis(g.ticker, g)}
                 >
                   {row.getVisibleCells().map(cell => (
-                    <td key={cell.id} className={`py-1.5 px-2 align-top ${cell.column.id === "analysis" ? "min-w-[280px]" : ""}`}>
+                    <td key={cell.id} className={`py-1 px-2 align-top max-h-[56px] overflow-hidden ${cell.column.id === "analysis" ? "min-w-[280px]" : ""}`}>
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </td>
                   ))}
@@ -6183,7 +7035,7 @@ const MomentumCockpit = () => {
             <span className="font-bold font-mono text-zinc-100">{selectedTicker}</span>
             {analysis?.grade && <span className={`text-[13px] font-bold px-1.5 py-0.5 rounded border ${gradeStyle(analysis.grade)}`}>{analysis.grade}</span>}
             {analysis?.technical_status && (
-              <span className={`text-[10px] px-1.5 py-0.5 rounded ${analysis.technical_status === "Pass" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" : "bg-red-500/20 text-red-400 border border-red-500/30"}`}>
+              <span className={`text-[11px] px-1.5 py-0.5 rounded ${analysis.technical_status === "Pass" ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30" : "bg-red-500/20 text-red-400 border border-red-500/30"}`}>
                 {analysis.technical_status}
               </span>
             )}
@@ -6214,7 +7066,7 @@ const MomentumCockpit = () => {
                   { label: "Avg Vol",  value: analysis.avg_vol_10d != null ? `${(analysis.avg_vol_10d/1000).toFixed(0)}K` : "—" },
                 ].map(({ label, value }) => (
                   <div key={label} className="bg-zinc-900 rounded p-2">
-                    <div className="text-[10px] text-zinc-500 uppercase tracking-wide">{label}</div>
+                    <div className="text-[11px] text-zinc-500 uppercase tracking-wide">{label}</div>
                     <div className="font-mono text-[13px] text-zinc-200 mt-0.5">{value}</div>
                   </div>
                 ))}
@@ -6223,11 +7075,11 @@ const MomentumCockpit = () => {
               {/* Category + Conviction */}
               <div className="flex gap-2">
                 <div className="flex-1 bg-zinc-900 rounded p-2">
-                  <div className="text-[10px] text-zinc-500 uppercase mb-0.5">Category</div>
+                  <div className="text-[11px] text-zinc-500 uppercase mb-0.5">Category</div>
                   <div className="text-[13px] text-zinc-200">{analysis.category || "—"}</div>
                 </div>
                 <div className="bg-zinc-900 rounded p-2 text-center w-20">
-                  <div className="text-[10px] text-zinc-500 uppercase mb-0.5">Conviction</div>
+                  <div className="text-[11px] text-zinc-500 uppercase mb-0.5">Conviction</div>
                   <div className={`text-base font-bold ${analysis.conviction >= 70 ? "text-emerald-400" : analysis.conviction >= 50 ? "text-amber-400" : "text-zinc-500"}`}>{analysis.conviction ?? "—"}</div>
                 </div>
               </div>
@@ -6235,7 +7087,7 @@ const MomentumCockpit = () => {
               {/* Reasoning */}
               {analysis.reasoning && (
                 <div>
-                  <div className="text-[10px] text-zinc-500 uppercase tracking-wide mb-1">Mechanical Trigger</div>
+                  <div className="text-[11px] text-zinc-500 uppercase tracking-wide mb-1">Mechanical Trigger</div>
                   <div className="text-[13px] text-zinc-300 bg-zinc-900 rounded p-2.5 leading-relaxed">{analysis.reasoning}</div>
                 </div>
               )}
@@ -6243,7 +7095,7 @@ const MomentumCockpit = () => {
               {/* Catalyst + Impact */}
               {analysis.analysis_detail && (
                 <div>
-                  <div className="text-[10px] text-zinc-500 uppercase tracking-wide mb-1">Catalyst Breakdown</div>
+                  <div className="text-[11px] text-zinc-500 uppercase tracking-wide mb-1">Catalyst Breakdown</div>
                   <div className="bg-zinc-900 rounded p-3 space-y-2">
                     {analysis.analysis_detail.catalyst && (
                       <div className="text-[12px] text-zinc-300 leading-relaxed"
@@ -6259,7 +7111,7 @@ const MomentumCockpit = () => {
               {/* Full Analysis markdown */}
               {analysis.analysis_details && (
                 <div>
-                  <div className="text-[10px] text-zinc-500 uppercase tracking-wide mb-1">Full Analysis</div>
+                  <div className="text-[11px] text-zinc-500 uppercase tracking-wide mb-1">Full Analysis</div>
                   <div className="text-[12px] text-zinc-400 bg-zinc-900 rounded p-3 leading-relaxed whitespace-pre-line"
                     dangerouslySetInnerHTML={{ __html: analysis.analysis_details
                       .replace(/\*\*(.*?)\*\*/g, '<strong class="text-zinc-200">$1</strong>') }}/>
@@ -6269,7 +7121,7 @@ const MomentumCockpit = () => {
               {/* Trade Hypothesis */}
               {analysis.hypothesis && (
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
-                  <div className="text-[10px] text-blue-400 uppercase tracking-wide mb-1">Trade Hypothesis</div>
+                  <div className="text-[11px] text-blue-400 uppercase tracking-wide mb-1">Trade Hypothesis</div>
                   <div className="text-[12px] text-blue-300 leading-relaxed">{analysis.hypothesis}</div>
                 </div>
               )}
@@ -6277,7 +7129,7 @@ const MomentumCockpit = () => {
               {/* Headlines */}
               {analysis.headlines?.length > 0 && (
                 <div>
-                  <div className="text-[10px] text-zinc-500 uppercase tracking-wide mb-1">Recent Headlines</div>
+                  <div className="text-[11px] text-zinc-500 uppercase tracking-wide mb-1">Recent Headlines</div>
                   <div className="space-y-1">
                     {analysis.headlines.map((h, i) => (
                       <div key={i} className="text-[11px] text-zinc-400 bg-zinc-900/60 rounded px-2 py-1.5 leading-snug">· {h}</div>
@@ -6392,7 +7244,7 @@ const MarketBriefPanel = ({ data }) => {
           <div className="space-y-2">
             {b.articles_reviewed.map((row, i) => (
               <div key={i} className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg px-3 py-2.5 flex flex-wrap gap-2 items-start">
-                <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded border shrink-0 ${credStyle(row.credibility)}`}>
+                <span className={`text-[11px] font-bold uppercase px-2 py-0.5 rounded border shrink-0 ${credStyle(row.credibility)}`}>
                   {row.credibility || "—"}
                 </span>
                 <div className="min-w-0 flex-1">
@@ -6557,11 +7409,12 @@ export default function App() {
         .then(r => r.ok ? r.json() : null)
         .catch(() => null);
 
+    const v = Date.now();
     Promise.all([
-      safeFetch("ibkr_themes.json"),
-      safeFetch("earnings_calendar.json"),
-      safeFetch("econ_calendar.json"),
-      safeFetch("market_internals.json"),
+      safeFetch(`ibkr_themes.json?v=${v}`),
+      safeFetch(`earnings_calendar.json?v=${v}`),
+      safeFetch(`econ_calendar.json?v=${v}`),
+      safeFetch(`market_internals.json?v=${v}`),
     ]).then(([ibkrThemes, earnings, econ, internals]) => {
       setIbkrThemesData(ibkrThemes);
       setEarningsData(earnings);
@@ -6779,12 +7632,12 @@ const filtered = useMemo(() => {
             {/* Full ticker tape */}
             <div className="flex-1 min-w-0 overflow-hidden">
               {data?.market_condition && (() => {
-                const { spy, qqq, iwm, btc, gld, oil, dxy, breadth_50d, breadth_200d } = data.market_condition;
+                const { spy, qqq, iwm, btc, gld, oil, dxy, breadth_50d, breadth_200d, credit_spread } = data.market_condition;
                 const fmtChg = v => v == null ? null : v > 0
                   ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
                   : <span className="text-red-400">{v.toFixed(2)}%</span>;
                 const TV_SYMBOLS = { "NQ!": "CME_MINI:NQ1!", "ES!": "CME_MINI:ES1!", "RTY!": "CME_MINI:RTY1!" };
-                const CHART = { btc: 'IBIT', gld: 'GLD', oil: 'USO', dxy: 'UUP', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R' };
+                const CHART = { btc: 'IBIT', gld: 'GLD', oil: 'USO', dxy: 'UUP', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R', credit_spread: 'HYG' };
                 const mkClick = (key, e) => { const ticker = CHART[key]; const rect = e.currentTarget.getBoundingClientRect(); setMacroHover(prev => prev?.ticker === ticker ? null : { ticker, rect }); };
                 const breadthColor = v => v >= 60 ? "text-emerald-400" : v >= 40 ? "text-yellow-400" : "text-red-400";
                 const Sep = () => <span className="text-zinc-700 mx-1">|</span>;
@@ -6804,39 +7657,17 @@ const filtered = useMemo(() => {
                         {spy.price != null && <span className="text-zinc-300">{spy.price.toFixed(0)}</span>}
                         {fmtChg(spy.change_pct)}
                       </span></>}
-                    {iwm && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors"
-                        onClick={() => window.open(`https://www.tradingview.com/chart/?symbol=CME_MINI:RTY1!`, "_blank")}>
-                        <span className="text-zinc-500">RTY!</span>
-                        {iwm.price != null && <span className="text-zinc-300">{iwm.price.toFixed(0)}</span>}
-                        {fmtChg(iwm.change_pct)}
-                      </span></>}
                     {breadth_50d != null && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_50d', e)}>
                         <span className="text-zinc-600">S5FI</span>
                         <span className={breadthColor(breadth_50d)}>{breadth_50d.toFixed(1)}%</span>
                       </span></>}
-                    {btc && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('btc', e)}>
-                        <span className="text-zinc-600">BTC</span>
-                        {btc.price != null && <span className="text-zinc-300">{btc.price.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>}
-                        {fmtChg(btc.change_pct)}
-                      </span></>}
-                    {gld && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('gld', e)}>
-                        <span className="text-zinc-600">GC1!</span>
-                        {gld.price != null && <span className="text-zinc-300">{gld.price.toFixed(0)}</span>}
-                        {fmtChg(gld.change_pct)}
-                      </span></>}
-                    {oil && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('oil', e)}>
-                        <span className="text-zinc-600">CL1!</span>
-                        {oil.price != null && <span className="text-zinc-300">${oil.price.toFixed(2)}</span>}
-                        {fmtChg(oil.change_pct)}
-                      </span></>}
-                    {dxy && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('dxy', e)}>
-                        <span className="text-zinc-600">DXY</span>
-                        {dxy.price != null && <span className={dxy.change_pct > 0 ? "text-red-400" : dxy.change_pct < 0 ? "text-emerald-400" : "text-zinc-300"}>{dxy.price.toFixed(2)}</span>}
-                        {dxy.change_pct != null && <span className={dxy.change_pct > 0 ? "text-red-400" : dxy.change_pct < 0 ? "text-emerald-400" : "text-zinc-400"}>{dxy.change_pct > 0 ? "+" : ""}{dxy.change_pct.toFixed(2)}%</span>}
-                      </span></>}
                     {breadth_200d != null && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_200d', e)}>
                         <span className="text-zinc-600">MMTH 200D</span>
                         <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span>
+                      </span></>}
+                    {credit_spread != null && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('credit_spread', e)}>
+                        <span className="text-zinc-600">HY Spread</span>
+                        <span className="text-zinc-300">{credit_spread.value.toFixed(2)}%</span>
                       </span></>}
                   </div>
                 );
@@ -6845,15 +7676,15 @@ const filtered = useMemo(() => {
             {/* IBKR Live badge + Updated time */}
             <div className="flex items-center gap-2 flex-shrink-0">
               {wsStatus === "live" && (
-                <span className="px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono bg-blue-500/15 text-blue-400 border-blue-500/40 whitespace-nowrap animate-pulse">⚡ LIVE</span>
+                <span className="px-2 py-0.5 text-[11px] font-bold rounded-full border font-mono bg-blue-500/15 text-blue-400 border-blue-500/40 whitespace-nowrap animate-pulse">⚡ LIVE</span>
               )}
               {wsStatus === "connecting" && (
-                <span className="px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono bg-yellow-500/10 text-yellow-500 border-yellow-500/30 whitespace-nowrap">◌ WS...</span>
+                <span className="px-2 py-0.5 text-[11px] font-bold rounded-full border font-mono bg-yellow-500/10 text-yellow-500 border-yellow-500/30 whitespace-nowrap">◌ WS...</span>
               )}
               {ibkrThemesData?.data_source === "ibkr" ? (
-                <span className="px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono bg-emerald-500/15 text-emerald-400 border-emerald-500/40 whitespace-nowrap">● IBKR Live</span>
+                <span className="px-2 py-0.5 text-[11px] font-bold rounded-full border font-mono bg-emerald-500/15 text-emerald-400 border-emerald-500/40 whitespace-nowrap">● IBKR Live</span>
               ) : (
-                <span className="px-2 py-0.5 text-[10px] font-bold rounded-full border font-mono bg-zinc-800/60 text-zinc-500 border-zinc-700/40 whitespace-nowrap">◐ IBKR Offline</span>
+                <span className="px-2 py-0.5 text-[11px] font-bold rounded-full border font-mono bg-zinc-800/60 text-zinc-500 border-zinc-700/40 whitespace-nowrap">◐ IBKR Offline</span>
               )}
               {data && (
                 <div className="text-right leading-tight">
@@ -6861,7 +7692,7 @@ const filtered = useMemo(() => {
                     {data.generated_at || data.last_updated}
                   </div>
                   {countdown != null && (
-                    <div className="text-[10px] text-zinc-500">
+                    <div className="text-[11px] text-zinc-500">
                       <span className="font-mono">{countdown >= 60 ? `${Math.floor(countdown/60)}m ${countdown%60}s` : `${countdown}s`}</span>
                     </div>
                   )}
@@ -6871,63 +7702,28 @@ const filtered = useMemo(() => {
           </div>
 
           {/* Row 2: ECON TODAY bar */}
-          {data?.market_condition && (() => {
-            const { btc, gld, oil, dxy, credit_spread, breadth_50d, breadth_200d } = data.market_condition;
-            const hasAny = btc || gld || oil || dxy || credit_spread != null || breadth_50d != null || (econData?.events?.length > 0);
-            if (!hasAny) return null;
-            const CHART = { btc: 'IBIT', gld: 'GLD', oil: 'USO', dxy: 'UUP', credit_spread: 'HYG', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R' };
-            const mkClick = (key, e) => { const ticker = CHART[key]; const rect = e.currentTarget.getBoundingClientRect(); setMacroHover(prev => prev?.ticker === ticker ? null : { ticker, rect }); };
+          {econData?.events?.length > 0 && (() => {
             const Sep = () => <span className="text-zinc-800 mx-1">|</span>;
-            const breadthColor = v => v >= 60 ? "text-emerald-400" : v >= 40 ? "text-yellow-400" : "text-red-400";
             const todayEvents = (econData?.events || []).filter(e => {
               if (!e.date) return false;
               const today = new Date().toISOString().slice(0, 10);
               return e.date === today;
             }).slice(0, 3);
+            if (!todayEvents.length) return null;
             return (
               <div className="hidden lg:flex items-center gap-1 text-[11px] font-mono py-0.5 border-t border-zinc-800/40 flex-wrap overflow-hidden">
-                <span className="text-zinc-600 font-semibold mr-1 whitespace-nowrap">ECON TODAY →</span>
+                <span className="text-amber-400 font-bold mr-1 whitespace-nowrap tracking-wide">ECON TODAY</span>
+                <span className="text-zinc-600 mr-1">→</span>
                 {todayEvents.map((ev, idx) => (
                   <React.Fragment key={idx}>
                     <span className="flex items-center gap-1 whitespace-nowrap">
-                      {ev.time && <span className="text-zinc-600">{ev.time}</span>}
-                      <span className="text-zinc-400">{ev.event || ev.name}</span>
-                      {ev.estimate != null && <span className="text-zinc-600">Est {ev.estimate}</span>}
+                      {ev.time && <span className="text-zinc-500">{ev.time}</span>}
+                      <span className="text-zinc-300">{(ev.event || ev.name || '').replace(/\s+Index$/i, '')}</span>
+                      {ev.estimate != null && <span className="text-zinc-500">Est {ev.estimate}</span>}
                     </span>
-                    <Sep/>
+                    {idx < todayEvents.length - 1 && <Sep/>}
                   </React.Fragment>
                 ))}
-                {breadth_200d != null && (
-                  <><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_200d', e)}>
-                    <span className="text-zinc-600">MMTH 200D</span>
-                    <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span>
-                  </span><Sep/></>
-                )}
-                {breadth_50d != null && (
-                  <><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_50d', e)}>
-                    <span className="text-zinc-600">S5FI 50D</span>
-                    <span className={breadthColor(breadth_50d)}>{breadth_50d.toFixed(1)}%</span>
-                  </span><Sep/></>
-                )}
-                {oil && (
-                  <><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('oil', e)}>
-                    <span className="text-zinc-600">CL1!</span>
-                    {oil.price != null && <span className="text-zinc-300">${oil.price.toFixed(2)}</span>}
-                    {oil.change_pct != null && <span className={oil.change_pct >= 0 ? "text-emerald-400" : "text-red-400"}>{oil.change_pct >= 0 ? "+" : ""}{oil.change_pct.toFixed(2)}%</span>}
-                  </span><Sep/></>
-                )}
-                {dxy && (
-                  <span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('dxy', e)}>
-                    <span className="text-zinc-600">DXY</span>
-                    {dxy.price != null && <span className={dxy.change_pct > 0 ? "text-red-400" : dxy.change_pct < 0 ? "text-emerald-400" : "text-zinc-300"}>{dxy.price.toFixed(2)}</span>}
-                  </span>
-                )}
-                {credit_spread != null && (
-                  <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('credit_spread', e)}>
-                    <span className="text-zinc-600">HY Spread</span>
-                    <span className="text-zinc-300">{credit_spread.value.toFixed(2)}%</span>
-                  </span></>
-                )}
               </div>
             );
           })()}
@@ -6962,22 +7758,7 @@ const filtered = useMemo(() => {
 
           {tab === "scanner" && (
             <>
-            <div className="flex flex-wrap items-center gap-3 mt-1.5">
-              {(() => {
-                const signal = data?.market_condition?.signal;
-                const signalLabel = signal === "green" ? "Market Uptrend" : signal === "yellow" ? "Market Correction" : "Market Downtrend";
-                const signalArrow = signal === "green" ? "↑" : signal === "yellow" ? "→" : "↓";
-                const signalCls = signal === "green" ? "text-emerald-400" : signal === "yellow" ? "text-amber-400" : "text-red-400";
-                return (
-                  <div className="flex items-center gap-2 text-[12px] font-mono flex-1 min-w-0 overflow-hidden">
-                    <span className={`font-semibold whitespace-nowrap ${signalCls}`}>{signalArrow} {signalLabel}</span>
-                    <span className="text-zinc-700">|</span>
-                    <span className="text-zinc-500 whitespace-nowrap">{filtered.length} themes · {unique.length} tickers</span>
-                    <span className="text-zinc-700">|</span>
-                    <span className="text-zinc-600 whitespace-nowrap">Superperf gate: RS&gt;85 · Price&gt;$12 · Vol&gt;$100M · MCap&gt;$2B · ADR≥4%</span>
-                  </div>
-                );
-              })()}
+            <div className="flex flex-wrap items-center justify-end gap-3 mt-1.5">
               <button onClick={()=>setShowFP(!showFP)} className={`flex items-center gap-1.5 px-2.5 py-1.5 text-[13px] rounded-md border transition-colors ${filtersOn?'bg-blue-500/15 border-blue-500/30 text-blue-400':'bg-zinc-800/60 border-zinc-700/50 text-zinc-400'}`}>
                 <SlidersHorizontal size={12}/> Filters
               </button>
@@ -7020,68 +7801,42 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
+      {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
           <aside className="w-[260px] flex-shrink-0 flex flex-col gap-3">
-            <VixFearGaugeV2 vix={data?.vix}/>
-            <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData}/>
-            <PositionCalc ibkrThemesData={ibkrData}/>
-            <AlertRulesCard/>
+            <MarketPulseCard vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix} generatedAt={data?.generated_at} mc={data?.market_condition} briefData={briefData}/>
+            <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData} generatedAt={data?.generated_at}/>
+            <PositionCalc ibkrThemesData={ibkrData} thematicData={data} vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix}/>
           </aside>
 
           {/* ── CENTER MAIN CONTENT ──────────────────────────────── */}
           <main className="flex-1 min-w-0 flex flex-col gap-3">
-            <ThemeHeatmap themes={data?.themes} finvizThemeRankings={data?.finviz_theme_rankings}/>
+            <HeroZone data={data} themesCount={filtered.length} tickersCount={unique.length}/>
+            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} generatedAt={data?.generated_at}/>
             {data && <Leaderboard
               themeRankings={data.theme_rankings}
               industryRankings={data.industry_rankings}
               finvizThemeRankings={data.finviz_theme_rankings}
               themes={data.themes}
+              spyBenchmarks={data.spy_benchmarks}
               ibkrThemesData={ibkrThemesData}
+              generatedAt={data.generated_at}
+              etfHoldings={data.etf_holdings || {}}
               onViewChange={v => { setLbView(v); setSpotlightThemeName(null); }}
               onThemeSelect={name => setSpotlightThemeName(name)}
             />}
-            {data && <CorrelationGuard themes={data.themes}/>}
-            {data && <CounterTrendWarning themes={data.themes}/>}
+            {data && <MarketWarnings themes={data.themes}/>}
             <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData}/>
           </main>
 
           {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
-          <aside className="w-[200px] flex-shrink-0 flex flex-col gap-3">
-            <LeadersAllThemesCard themes={data?.themes}/>
-            <ActiveAlertsCardV2/>
-            <IBKRTWSScannerCard ibkrData={ibkrData}/>
-            <DataSourcesCard ibkrData={ibkrData}/>
+          <aside className="w-[280px] flex-shrink-0 flex flex-col gap-3">
           </aside>
+
         </div>
 
-        {/* ── FULL THEME DETAIL SECTIONS (collapsible deep dive) ── */}
-        {filtered.length > 0 && (
-          <div className="max-w-[1560px] mx-auto px-4 pb-4">
-            {filtered.map((t,i) => (
-              <ThemeSection
-                key={t.name+i}
-                theme={t}
-                lbPerfKey={lbPerfKey}
-                spyPerf={data?.spy_benchmarks?.[rsSPYKey]}
-                rsSPYKey={rsSPYKey}
-                isTopTheme={i===0}
-                topADRTickers={topADRTickers}
-                themeRankings={data?.theme_rankings}
-                finvizThemeRankings={data?.finviz_theme_rankings}
-              />
-            ))}
-          </div>
-        )}
-        {filtered.length === 0 && data && (
-          <div className="max-w-[1560px] mx-auto text-center py-8 text-zinc-500">
-            <BarChart3 size={24} className="mx-auto mb-2 opacity-40"/>
-            <p className="text-sm">No themes match current filters</p>
-            <button onClick={()=>{setFiltersOn(false);setSearch("");}} className="mt-2 text-[13px] text-blue-400 hover:underline">Reset</button>
-          </div>
-        )}
 
         <BottomStatusBar ibkrData={ibkrData} briefData={briefData}/>
         </>

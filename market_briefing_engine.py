@@ -24,6 +24,8 @@ Required env vars:
     TELEGRAM_CHAT_ID     — Telegram chat / channel ID
 
 Optional:
+    FRED_API_KEY         — Free FRED API key (https://fred.stlouisfed.org/docs/api/api_key.html)
+                           Required for reliable HY Credit Spread + Yield Curve data
     DATABASE_URL         — PostgreSQL connection string (Supabase / Postgres)
 """
 
@@ -55,6 +57,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY") or os.getenv("GOOGLE_API_KEY", "")
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT  = os.getenv("TELEGRAM_CHAT_ID", "")
 DATABASE_URL   = os.getenv("DATABASE_URL", "")
+FRED_API_KEY   = os.getenv("FRED_API_KEY", "")
 
 ET          = ZoneInfo("America/New_York")
 BRIEFS_FILE = Path("public/market_briefs.json")
@@ -88,12 +91,44 @@ def _flatten_df(df: pd.DataFrame) -> pd.DataFrame:
 async def _fetch_fred_series(client: httpx.AsyncClient, series_id: str) -> float | None:
     """
     Fetch the latest non-null value from a FRED series.
-    Tries the free CSV endpoint; on failure retries once after 3 seconds.
+    Uses official FRED API if FRED_API_KEY is set; otherwise tries free CSV endpoint.
     """
+    if FRED_API_KEY:
+        url = (
+            f"https://api.stlouisfed.org/fred/series/observations"
+            f"?series_id={series_id}&api_key={FRED_API_KEY}"
+            f"&sort_order=desc&limit=10&file_type=json"
+        )
+        for attempt in range(2):
+            try:
+                r = await client.get(url, timeout=20)
+                r.raise_for_status()
+                obs = r.json().get("observations", [])
+                for o in obs:
+                    v = o.get("value", ".")
+                    if v not in (".", ""):
+                        try:
+                            return float(v)
+                        except ValueError:
+                            continue
+                return None
+            except Exception as e:
+                log.warning(f"FRED API {series_id} attempt {attempt + 1}: {e}")
+                if attempt == 0:
+                    await asyncio.sleep(3)
+        return None
+
+    # Fallback: free CSV endpoint
+    user_agents = [
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36",
+        "python-requests/2.31.0",
+    ]
     url = f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={series_id}"
-    for attempt in range(2):
+    for attempt in range(3):
         try:
-            r = await client.get(url, timeout=20, headers={"User-Agent": "Mozilla/5.0"})
+            headers = {"User-Agent": user_agents[attempt % len(user_agents)]}
+            r = await client.get(url, timeout=25, headers=headers)
             r.raise_for_status()
             for line in reversed(r.text.strip().split("\n")[1:]):
                 parts = line.strip().split(",")
@@ -102,37 +137,87 @@ async def _fetch_fred_series(client: httpx.AsyncClient, series_id: str) -> float
                         return float(parts[1])
                     except ValueError:
                         continue
-            # CSV parsed but all recent values were "." — data not yet published today
             return None
         except Exception as e:
-            log.warning(f"FRED {series_id} attempt {attempt + 1}: {e}")
-            if attempt == 0:
-                await asyncio.sleep(3)
+            log.warning(f"FRED CSV {series_id} attempt {attempt + 1}: {e}")
+            if attempt < 2:
+                await asyncio.sleep(5 if attempt == 0 else 10)
     return None
 
 
-def _load_cached_hy_oas() -> float | None:
+async def _fetch_t10y2y_treasury(client: httpx.AsyncClient) -> float | None:
     """
-    Load the last known BAML HY OAS from the previously committed
-    public/market_intelligence.json.  Handles both the new engine schema
-    (fred.hy_oas) and the old market_intelligence.py schema (credit.baml_hy).
+    Compute 10Y-2Y spread from US Treasury XML feed — free, no API key, reliable.
+    Used as fallback when FRED T10Y2Y fetch fails.
+    """
+    import xml.etree.ElementTree as ET
+    from datetime import date, timedelta
+
+    for months_back in range(3):
+        d = date.today().replace(day=1)
+        for _ in range(months_back):
+            d = (d - timedelta(days=1)).replace(day=1)
+        ym = d.strftime("%Y%m")
+        url = (
+            "https://home.treasury.gov/resource-center/data-chart-center"
+            f"/interest-rates/pages/xml?data=daily_treasury_yield_curve"
+            f"&field_tdr_date_value={ym}"
+        )
+        try:
+            r = await client.get(url, timeout=20, headers={"User-Agent": "Mozilla/5.0"})
+            r.raise_for_status()
+            root = ET.fromstring(r.text)
+            ns_m = "http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+            ns_d = "http://schemas.microsoft.com/ado/2007/08/dataservices"
+            entries = root.findall(f".//{{{ns_m}}}properties")
+            for props in reversed(entries):
+                y2_el  = props.find(f"{{{ns_d}}}BC_2YEAR")
+                y10_el = props.find(f"{{{ns_d}}}BC_10YEAR")
+                if (y2_el is not None and y10_el is not None
+                        and y2_el.text and y10_el.text
+                        and y2_el.text.strip() and y10_el.text.strip()):
+                    spread = float(y10_el.text) - float(y2_el.text)
+                    log.info(f"Treasury API T10Y2Y: {spread:+.3f} (from {ym})")
+                    return spread
+        except Exception as e:
+            log.warning(f"Treasury API T10Y2Y {ym}: {e}")
+    return None
+
+
+def _load_cached_fred(key: str) -> float | None:
+    """
+    Load the last known FRED value from public/market_intelligence.json.
+    key: "hy_oas" or "yield_curve"
     """
     try:
         p = Path("public/market_intelligence.json")
         if not p.exists():
             return None
         data = json.loads(p.read_text(encoding="utf-8"))
-        # New schema: market_briefing_engine.py
-        v = (data.get("fred") or {}).get("hy_oas")
+        # New schema: market_briefing_engine.py stores fred.hy_oas / fred.yield_curve
+        v = (data.get("fred") or {}).get(key)
         if v is not None:
             return float(v)
-        # Old schema: market_intelligence.py
-        v = (data.get("credit") or {}).get("baml_hy")
-        if v is not None:
-            return float(v)
+        # market_briefs.json fallback (compact entries array)
+        briefs_p = Path("public/market_briefs.json")
+        if briefs_p.exists():
+            briefs = json.loads(briefs_p.read_text(encoding="utf-8"))
+            for entry in briefs:
+                v = entry.get(key)
+                if v is not None:
+                    return float(v)
+        # Old schema: market_intelligence.py (hy_oas only)
+        if key == "hy_oas":
+            v = (data.get("credit") or {}).get("baml_hy")
+            if v is not None:
+                return float(v)
     except Exception:
         pass
     return None
+
+
+def _load_cached_hy_oas() -> float | None:
+    return _load_cached_fred("hy_oas")
 
 
 async def _fetch_fred_data() -> dict:
@@ -151,18 +236,35 @@ async def _fetch_fred_data() -> dict:
             _fetch_fred_series(client, "T10Y2Y"),
         )
 
-    hy_oas_stale = False
+        # Treasury API fallback for T10Y2Y while client is still open
+        if yield_curve is None:
+            yield_curve = await _fetch_t10y2y_treasury(client)
+            if yield_curve is not None:
+                log.info(f"FRED T10Y2Y: using Treasury API fallback {yield_curve:+.3f}")
+
+    hy_oas_stale     = False
+    yield_curve_stale = False
+
     if hy_oas is None:
         cached = _load_cached_hy_oas()
         if cached is not None:
-            hy_oas      = cached
+            hy_oas       = cached
             hy_oas_stale = True
             log.info(f"FRED BAMLH0A0HYM2: live fetch failed — using cached value {hy_oas:.2f}%")
         else:
             log.warning("FRED BAMLH0A0HYM2: live fetch failed and no cached value available")
 
-    log.info(f"FRED: HY OAS={hy_oas}{'(cached)' if hy_oas_stale else ''}  T10Y2Y={yield_curve}")
-    return {"hy_oas": hy_oas, "yield_curve": yield_curve, "hy_oas_stale": hy_oas_stale}
+    if yield_curve is None:
+        cached_yc = _load_cached_fred("yield_curve")
+        if cached_yc is not None:
+            yield_curve       = cached_yc
+            yield_curve_stale = True
+            log.info(f"FRED T10Y2Y: live fetch failed — using cached value {yield_curve:+.3f}")
+        else:
+            log.warning("FRED T10Y2Y: live fetch failed and no cached value available")
+
+    log.info(f"FRED: HY OAS={hy_oas}{'(cached)' if hy_oas_stale else ''}  T10Y2Y={yield_curve}{'(cached)' if yield_curve_stale else ''}")
+    return {"hy_oas": hy_oas, "yield_curve": yield_curve, "hy_oas_stale": hy_oas_stale, "yield_curve_stale": yield_curve_stale}
 
 
 def _fetch_prices_sync() -> dict:
@@ -521,7 +623,7 @@ def _generate_brief_sync(
 
 FRED Macro Data:
   BAMLH0A0HYM2 (HY Credit Spread): {f"{hy_oas:.2f}%{'  ⚠ CACHED — live FRED fetch failed, value is from previous run' if fred.get('hy_oas_stale') else ''}" if hy_oas is not None else "N/A — live FRED fetch failed and no cache available"} → {regime["credit_status"]}
-  T10Y2Y (10Y-2Y Yield Curve):      {f"{yield_curve:+.3f}" if yield_curve is not None else "N/A"} → {regime["yc_status"]}
+  T10Y2Y (10Y-2Y Yield Curve):      {f"{yield_curve:+.3f}{'  ⚠ CACHED — live FRED fetch failed, value is from previous run' if fred.get('yield_curve_stale') else ''}" if yield_curve is not None else "N/A — live FRED fetch failed and no cache available"} → {regime["yc_status"]}
   S5FI  (% stocks > 50DMA):         {f"{s5fi:.1f}%" if s5fi is not None else "N/A"}
   MMTH  (% stocks > 200DMA):        {f"{mmth:.1f}%" if mmth is not None else "N/A"}
 {recycled_note}{gapper_note}
@@ -537,8 +639,7 @@ FRED Macro Data:
 **Snapshot Table** — reproduce the table above exactly
 
 **Macro Section**
-  - 2-3 sentences explicitly naming the BAMLH0A0HYM2 value, the identified regime ({regime["credit_status"]}),
-    the yield curve reading ({regime["yc_status"]}), and what this implies for institutional risk appetite.
+{"  - FRED data unavailable today. Write exactly one sentence: 'FRED macro data (HY Credit Spread, Yield Curve) was unavailable at publication time.' Do NOT speculate or discuss uncertainty further." if hy_oas is None and yield_curve is None else f"  - 2-3 sentences explicitly naming the BAMLH0A0HYM2 value, the identified regime ({regime['credit_status']}), the yield curve reading ({regime['yc_status']}), and what this implies for institutional risk appetite."}
 
 **Analysis Para 1 — Global Tape → Credit**
   - 3-5 sentences connecting Nikkei / DAX / Oil performance to US HY credit spreads.
@@ -548,6 +649,10 @@ FRED Macro Data:
   - 3-5 sentences identifying the single dominant 'Why' behind today's primary flow.
     Name the mechanical catalyst (policy decision, macro data, positioning squeeze, etc.)
     and explain why it drives the observed price action.
+
+**Analysis Para 3 — Mechanical Plan**
+  - 3-5 sentences giving the actionable trading plan: specific price levels to watch (e.g. SPY 540 as support),
+    key triggers for long/short entries, risk-off thresholds, and what the trader should do TODAY.
 
 **Technical Signal**
   {tech_instruction}
@@ -569,6 +674,7 @@ Return ONLY a single valid JSON object — no markdown wrapping, no code blocks:
   "macro_section":    "<BAMLH0A0HYM2 + T10Y2Y regime analysis, 2-3 sentences>",
   "analysis_para1":   "<Global tape → Credit Spreads, 3-5 sentences with specific numbers>",
   "analysis_para2":   "<Mechanical Catalyst — the dominant Why, 3-5 sentences>",
+  "analysis_para3":   "<Mechanical Plan — actionable price levels, entry triggers, risk thresholds, 3-5 sentences>",
   "technical_signal": "<technical signal per instruction above>",
   "ticker_intel": {{
     "a_grade": [
@@ -624,7 +730,23 @@ def _esc(text: str) -> str:
     return _MD2.sub(r"\\\1", str(text))
 
 
-def build_telegram_message(analysis: dict, pulse: dict, regime: dict, phase: str) -> str:
+def _trim(text: str, limit: int) -> str:
+    """Trim to `limit` chars at a word boundary, appending '…' if truncated."""
+    if len(text) <= limit:
+        return text
+    cut = text[:limit].rsplit(" ", 1)[0].rstrip(" ,;:")
+    return cut + "…"
+
+
+def build_telegram_messages(analysis: dict, pulse: dict, regime: dict, phase: str) -> list[str]:
+    """
+    Build Telegram MarkdownV2 messages split into two parts to stay well under
+    the 4096-character limit per message.
+
+    Part 1 — Market Pulse: header + asset snapshot + macro rows + reversal alert
+    Part 2 — Analysis:     all AI sections (Macro, Global Tape, Catalyst, Plan,
+                           Technical Signal) + Ticker Intel
+    """
     assets   = pulse["assets"]
     fred     = pulse["fred"]
     breadth  = pulse["breadth"]
@@ -633,12 +755,20 @@ def build_telegram_message(analysis: dict, pulse: dict, regime: dict, phase: str
     phase_icon  = "🌅" if phase == "PRE" else "🌙"
     phase_label = "Pre-Market" if phase == "PRE" else "Post-Market"
 
-    lines: list[str] = [
+    hy   = fred.get("hy_oas")
+    yc   = fred.get("yield_curve")
+    s5fi = breadth.get("s5fi")
+    mmth = breadth.get("mmth")
+    hy_stale = fred.get("hy_oas_stale", False)
+    yc_stale = fred.get("yield_curve_stale", False)
+
+    # ── Part 1: Market Pulse ──────────────────────────────────────────────────
+    p1: list[str] = [
         f"*{phase_icon} {_esc(phase_label.upper())} BRIEF*",
         f"*{_esc(analysis.get('title', '').replace(f'{phase_label} Brief: ', ''))}* "
         f"{analysis.get('mood_emoji', '')}",
         f"_{_esc(analysis.get('mood', ''))}_",
-        f"_{_esc((analysis.get('narrative') or '')[:220])}_",
+        f"_{_esc(_trim(analysis.get('narrative') or '', 300))}_",
         "",
     ]
 
@@ -650,25 +780,20 @@ def build_telegram_message(analysis: dict, pulse: dict, regime: dict, phase: str
         chg  = d.get("change_pct")
         icon = "🟢" if (chg or 0) >= 0 else "🔴"
         chg_s = f"{chg:+.2f}%" if chg is not None else "—"
-        lines.append(f"{icon} *{_esc(label)}* `{d['price']:.2f}` `{chg_s}`")
-    lines.append("")
+        p1.append(f"{icon} *{_esc(label)}* `{d['price']:.2f}` `{chg_s}`")
+    p1.append("")
 
-    # Macro
-    hy   = fred.get("hy_oas")
-    yc   = fred.get("yield_curve")
-    s5fi = breadth.get("s5fi")
-    mmth = breadth.get("mmth")
-
+    # FRED + breadth rows (with ⚠️ cached warning)
     if hy is not None:
-        r_icon = {"Complacent": "🟢", "Yellow Flag": "🟡", "Stress": "🔴"}.get(
-            regime["credit_status"], "⚪"
-        )
-        lines.append(f"{r_icon} *HY Spread:* `{hy:.2f}%` — *{_esc(regime['credit_status'])}*")
+        r_icon   = {"Complacent": "🟢", "Yellow Flag": "🟡", "Stress": "🔴"}.get(regime["credit_status"], "⚪")
+        stale_tag = " ⚠️ _cached_" if hy_stale else ""
+        p1.append(f"{r_icon} *HY Spread:* `{hy:.2f}%`{stale_tag} — *{_esc(regime['credit_status'])}*")
 
     if yc is not None:
-        sign = "+" if yc >= 0 else ""
-        lines.append(
-            f"📐 *Yield Curve \\(T10Y2Y\\):* `{sign}{yc:.3f}` — {_esc(regime['yc_status'])}"
+        sign      = "+" if yc >= 0 else ""
+        stale_tag = " ⚠️ _cached_" if yc_stale else ""
+        p1.append(
+            f"📐 *Yield Curve \\(T10Y2Y\\):* `{sign}{yc:.3f}`{stale_tag} — {_esc(regime['yc_status'])}"
         )
 
     if s5fi is not None:
@@ -676,70 +801,90 @@ def build_telegram_message(analysis: dict, pulse: dict, regime: dict, phase: str
         parts  = [f"S5FI `{s5fi:.1f}%`"]
         if mmth is not None:
             parts.append(f"MMTH `{mmth:.1f}%`")
-        lines.append(f"{b_icon} *Breadth:* " + " \\| ".join(parts))
+        p1.append(f"{b_icon} *Breadth:* " + " \\| ".join(parts))
 
-    lines.append("")
+    p1.append("")
 
     # Reversal alert
     if reversal.get("signal_detected"):
-        lines += [
+        p1 += [
             "🚨 *\\[REVERSAL SIGNAL DETECTED\\]*",
             _esc(reversal.get("signal_description", "")),
             "",
         ]
 
-    # Analysis sections
+    # ── Part 2: Analysis ──────────────────────────────────────────────────────
+    p2: list[str] = []
+
     if analysis.get("macro_section"):
-        lines += ["*📊 Macro:*", _esc(analysis["macro_section"][:500]), ""]
+        p2 += [f"*{phase_icon} {_esc(phase_label.upper())} ANALYSIS*", ""]
+        p2 += ["*📊 Macro:*", _esc(_trim(analysis["macro_section"], 550)), ""]
+
+    if analysis.get("analysis_para1"):
+        p2 += ["*🌐 Global Tape:*", _esc(_trim(analysis["analysis_para1"], 500)), ""]
+
     if analysis.get("analysis_para2"):
-        lines += ["*⚙️ Mechanical Catalyst:*", _esc(analysis["analysis_para2"][:480]), ""]
+        p2 += ["*⚙️ Mechanical Catalyst:*", _esc(_trim(analysis["analysis_para2"], 550)), ""]
+
+    if analysis.get("analysis_para3"):
+        p2 += ["*🗺️ Mechanical Plan:*", _esc(_trim(analysis["analysis_para3"], 550)), ""]
+
     if analysis.get("technical_signal"):
-        lines += ["*🔍 Technical Signal:*", _esc(analysis["technical_signal"][:280]), ""]
+        p2 += ["*🔍 Technical Signal:*", _esc(_trim(analysis["technical_signal"], 380)), ""]
 
     # Ticker intel
     ti     = analysis.get("ticker_intel", {})
     a_list = ti.get("a_grade", [])
     c_list = ti.get("c_grade", [])
     if a_list or c_list:
-        lines.append("*🎯 Ticker Intel:*")
+        p2.append("*🎯 Ticker Intel:*")
         for t in a_list[:2]:
-            lines.append(
+            p2.append(
                 f"  ✅ `{t.get('ticker','')}` *{_esc(t.get('company','')[:40])}* "
-                f"— {_esc(str(t.get('reason',''))[:120])}"
+                f"— {_esc(_trim(str(t.get('reason','')), 220))}"
             )
         for t in c_list[:1]:
-            lines.append(
+            p2.append(
                 f"  ❌ `{t.get('ticker','')}` *{_esc(t.get('company','')[:40])}* "
-                f"— {_esc(str(t.get('reason',''))[:120])}"
+                f"— {_esc(_trim(str(t.get('reason','')), 220))}"
             )
 
-    return "\n".join(lines)[:4090]
+    messages = ["\n".join(p1)[:4090]]
+    if p2:
+        messages.append("\n".join(p2)[:4090])
+    return messages
 
 
-async def send_telegram(text: str) -> bool:
+async def send_telegram(messages: "str | list[str]") -> bool:
+    """Send one or more messages to all configured Telegram chat IDs."""
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT:
         log.info("Telegram: not configured (TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID missing)")
         return False
+    if isinstance(messages, str):
+        messages = [messages]
     chat_ids = [cid.strip() for cid in TELEGRAM_CHAT.split(",")]
     ok = False
     async with httpx.AsyncClient() as client:
         for chat_id in chat_ids:
-            try:
-                r = await client.post(
-                    f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
-                    json={
-                        "chat_id":                  chat_id,
-                        "text":                     text,
-                        "parse_mode":               "MarkdownV2",
-                        "disable_web_page_preview": True,
-                    },
-                    timeout=15,
-                )
-                r.raise_for_status()
-                log.info(f"Telegram: sent to {chat_id} ✓")
-                ok = True
-            except Exception as e:
-                log.warning(f"Telegram failed for {chat_id}: {e}")
+            for i, text in enumerate(messages):
+                try:
+                    r = await client.post(
+                        f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+                        json={
+                            "chat_id":                  chat_id,
+                            "text":                     text,
+                            "parse_mode":               "MarkdownV2",
+                            "disable_web_page_preview": True,
+                        },
+                        timeout=15,
+                    )
+                    r.raise_for_status()
+                    log.info(f"Telegram: sent msg {i+1}/{len(messages)} to {chat_id} ✓")
+                    ok = True
+                    if i < len(messages) - 1:
+                        await asyncio.sleep(0.5)  # avoid Telegram flood limits
+                except Exception as e:
+                    log.warning(f"Telegram msg {i+1} failed for {chat_id}: {e}")
     return ok
 
 
@@ -901,8 +1046,8 @@ async def run_brief(phase: Literal["PRE", "POST"]) -> None:
         log.error(f"Gemini error: {analysis['error']}")
 
     # [5] Build and send Telegram message (MarkdownV2)
-    tg_msg = build_telegram_message(analysis, pulse, regime, phase)
-    await send_telegram(tg_msg)
+    tg_msgs = build_telegram_messages(analysis, pulse, regime, phase)
+    await send_telegram(tg_msgs)
 
     # [6] Persist (JSON always; PostgreSQL if DATABASE_URL is set)
     _save_json(phase, pulse, regime, analysis, now_et)

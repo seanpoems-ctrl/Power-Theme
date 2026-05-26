@@ -247,7 +247,7 @@ const AnalysisPanel = memo(function AnalysisPanel({ row }) {
 });
 
 // ---------------------------------------------------------------------------
-// Clickable column map — latest row only
+// Clickable column map — all rows
 // ---------------------------------------------------------------------------
 
 const CLICKABLE_COLS = {
@@ -267,7 +267,7 @@ const CLICKABLE_COLS = {
 // Main table
 // ---------------------------------------------------------------------------
 
-const BreadthTable = memo(function BreadthTable({ rows, onOpenModal }) {
+const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal }) {
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-[1040px] border-collapse text-left">
@@ -351,21 +351,22 @@ const BreadthTable = memo(function BreadthTable({ rows, onOpenModal }) {
         </thead>
         <tbody>
           {rows.map((r, i) => {
-            const isLatest = i === 0;
+            const isLatest = r.date === latestDate;
             const bearish = r.up_25_q != null && r.down_25_q != null && r.up_25_q < r.down_25_q;
             const up4hi = r.up_4_pct != null && r.up_4_pct > 600;
             const t2108Low = r.t2108 != null && r.t2108 < 20;
 
-            // Helper: wrap a cell value in a clickable span on the latest row
+            // All rows are clickable: latest row uses live breadth_stocks_*.json,
+            // historical rows use breadth_history/YYYY-MM-DD.json archive.
             const cell = (field, content, extraCls = "") => {
               const col = CLICKABLE_COLS[field];
-              if (isLatest && col) {
+              if (col) {
                 return (
                   <td
                     className={`px-1 py-1 text-right whitespace-nowrap cursor-pointer
                       underline decoration-dotted underline-offset-2 hover:text-white ${extraCls}`}
-                    onClick={() => onOpenModal(col.filter, col.label)}
-                    title={`View ${col.label} stocks`}
+                    onClick={() => onOpenModal(col.filter, col.label, r.date, isLatest)}
+                    title={`View ${col.label} stocks — ${r.date_display}`}
                   >
                     {content}
                   </td>
@@ -401,32 +402,32 @@ const BreadthTable = memo(function BreadthTable({ rows, onOpenModal }) {
                 {cell("up_13_34d",   fmtN(r.up_13_34d))}
                 {cell("down_13_34d", fmtN(r.down_13_34d))}
 
-                {/* 10x ATR Ext — clickable on latest row */}
+                {/* 10x ATR Ext — clickable on all rows with data */}
                 <td
                   className={`px-1 py-1 text-right whitespace-nowrap font-mono
-                    ${isLatest && r.atr_10x_ext != null
+                    ${r.atr_10x_ext != null
                       ? "cursor-pointer underline decoration-dotted underline-offset-2 hover:text-purple-100 text-purple-300"
                       : "text-purple-300"}`}
-                  onClick={isLatest && r.atr_10x_ext != null
-                    ? () => onOpenModal("atr_ext", "10x ATR Extended")
+                  onClick={r.atr_10x_ext != null
+                    ? () => onOpenModal("atr_ext", "10x ATR Extended", r.date, isLatest)
                     : undefined}
-                  title={isLatest && r.atr_10x_ext != null ? "View 10x ATR Extended stocks" : undefined}
+                  title={r.atr_10x_ext != null ? `View 10x ATR Extended stocks — ${r.date_display}` : undefined}
                 >
                   {r.atr_10x_ext != null ? fmtN(r.atr_10x_ext) : "—"}
                 </td>
-                {/* >50 DMA — red cell fill when < 30%; clickable on latest row */}
+                {/* >50 DMA — red cell fill when < 30%; clickable on all rows with data */}
                 <td
                   className={`px-1 py-1 text-right whitespace-nowrap font-mono
                     ${r.above_50dma_pct != null && r.above_50dma_pct < 30
                       ? "bg-rose-900/70 text-rose-200 font-semibold"
                       : "text-sky-300"}
-                    ${isLatest && r.above_50dma_pct != null
+                    ${r.above_50dma_pct != null
                       ? "cursor-pointer underline decoration-dotted underline-offset-2"
                       : ""}`}
-                  onClick={isLatest && r.above_50dma_pct != null
-                    ? () => onOpenModal("above50dma", ">50 DMA")
+                  onClick={r.above_50dma_pct != null
+                    ? () => onOpenModal("above50dma", ">50 DMA", r.date, isLatest)
                     : undefined}
-                  title={isLatest && r.above_50dma_pct != null ? "View stocks above 50 DMA" : undefined}
+                  title={r.above_50dma_pct != null ? `View stocks above 50 DMA — ${r.date_display}` : undefined}
                 >
                   {r.above_50dma_pct != null ? `${r.above_50dma_pct.toFixed(1)}%` : "—"}
                 </td>
@@ -459,12 +460,12 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
   const [data, setData]             = useState(null);
   const [loading, setLoading]       = useState(true);
   const [error, setError]           = useState(null);
-  const [modal, setModal]           = useState(null); // { filter, label }
+  const [modal, setModal]           = useState(null); // { filter, label, date, isLatest }
   const [clipGroups, setClipGroups] = useState([]);   // [{ id, label, tickers, sentiment }]
   const [clipOpen, setClipOpen]     = useState(false);
   const abortRef                    = useRef(null);
 
-  const openModal  = useCallback((filter, label) => setModal({ filter, label }), []);
+  const openModal  = useCallback((filter, label, date, isLatest) => setModal({ filter, label, date, isLatest }), []);
   const closeModal = useCallback(() => setModal(null), []);
 
   // Add a group of tickers to the clipboard
@@ -543,6 +544,7 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
 
   const rows = data.rows ?? [];
   const latest = rows[0] ?? null;
+  const latestDate = latest?.date ?? null;
 
   return (
     <div className="rounded-xl border border-gray-800 bg-gray-900">
@@ -621,7 +623,7 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
         {rows.length === 0 ? (
           <p className="text-center text-sm text-slate-500 py-8">No breadth data available.</p>
         ) : (
-          <BreadthTable rows={rows} onOpenModal={openModal} />
+          <BreadthTable rows={rows} latestDate={latestDate} onOpenModal={openModal} />
         )}
       </div>
 
@@ -629,8 +631,8 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
       <div className="border-t border-gray-800 px-4 py-2">
         <p className="text-xs text-slate-600">
           Data from Stockbee Market Monitor spreadsheet. Refreshed daily after market close.
-          Click any highlighted cell on the latest row to drill into individual stocks.
-          10x ATR Ext and &gt;50 DMA are live from TradingView screener.
+          Click any cell to drill into individual stocks for that day.
+          Historical data is archived starting from the next trading day after this update.
         </p>
       </div>
 
@@ -639,6 +641,8 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
         <BreadthStockModal
           filter={modal.filter}
           filterLabel={modal.label}
+          date={modal.date}
+          isLatest={modal.isLatest}
           onClose={closeModal}
           onAddToClipboard={addToClipboard}
         />

@@ -2,7 +2,9 @@ name: Market Brief (AM + PM)
 
 on:
   workflow_dispatch: {}
-  # DISABLED — superseded by market-intelligence.yml (market_briefing_engine.py)
+  schedule:
+    - cron: '5 13 * * 1-5'   # 09:05 ET (EDT) — AM brief, after open
+    - cron: '30 21 * * 1-5'  # 17:30 ET (EDT) — PM brief, after close
 
 jobs:
   market-brief:
@@ -49,8 +51,6 @@ jobs:
         run: python market_brief.py
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
       - name: Commit market brief data to repo
         if: steps.trading_day.outputs.is_trading_day == 'true'

@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+# Fix for Python 3.10+: ib_insync's eventkit calls get_event_loop() at import time
+# which raises RuntimeError if no loop exists. Create one before importing ib_insync.
+import asyncio
+asyncio.set_event_loop(asyncio.new_event_loop())
+
 """
 IBKR TWS WebSocket Bridge — ibkr_ws_server.py
 ==============================================
@@ -23,6 +28,13 @@ import logging
 import math
 import os
 import time
+
+# Load .env file automatically (python-dotenv)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass  # dotenv not installed, rely on shell env vars
 from pathlib import Path
 
 import websockets
@@ -34,7 +46,7 @@ TWS_PORT   = int(os.getenv("TWS_PORT",  "7497"))   # 7497=TWS live | 7496=paper 
 CLIENT_ID  = int(os.getenv("TWS_CLIENT_ID", "20")) # must differ from other scripts (ibkr_client uses 1)
 WS_PORT    = int(os.getenv("WS_PORT",   "5003"))
 DATA_PATH  = Path(os.getenv("THEMATIC_JSON", "public/thematic_data.json"))
-MAX_LIVE   = 95   # live subscriptions for stock tickers (internals use ~5 slots)
+MAX_TICKERS = 85  # max stock ticker subscriptions (IBKR delayed limit ~100, keep buffer)
 BROADCAST_INTERVAL = 1.0  # seconds between price broadcasts
 
 logging.basicConfig(
@@ -45,12 +57,11 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 # ── Market internals to always subscribe ─────────────────────────────────────
+# Note: $TICK and $TRIN require a separate IBKR market data subscription — removed for now
 INTERNALS = [
-    {"key": "SPY",   "symbol": "SPY",  "secType": "STK", "exchange": "ARCA",  "currency": "USD"},
-    {"key": "QQQ",   "symbol": "QQQ",  "secType": "STK", "exchange": "NASDAQ","currency": "USD"},
-    {"key": "$VIX",  "symbol": "VIX",  "secType": "IND", "exchange": "CBOE",  "currency": "USD"},
-    {"key": "$TICK", "symbol": "TICK", "secType": "IND", "exchange": "NYSE",  "currency": "USD"},
-    {"key": "$TRIN", "symbol": "TRIN", "secType": "IND", "exchange": "NYSE",  "currency": "USD"},
+    {"key": "SPY",  "symbol": "SPY", "secType": "STK", "exchange": "ARCA",  "currency": "USD"},
+    {"key": "QQQ",  "symbol": "QQQ", "secType": "STK", "exchange": "NASDAQ","currency": "USD"},
+    {"key": "$VIX", "symbol": "VIX", "secType": "IND", "exchange": "CBOE",  "currency": "USD"},
 ]
 
 # ── Global state (single-threaded asyncio — no locks needed) ─────────────────
@@ -142,6 +153,9 @@ async def subscribe_all(symbols_ranked: list[tuple[str, int]]) -> None:
     # Register the batch callback (more efficient than per-ticker updateEvent)
     ib.pendingTickersEvent += _on_pending_tickers
 
+    # Force delayed data (type 3) for ALL subscriptions — avoids "competing live session" error
+    ib.reqMarketDataType(3)
+
     # 1. Market internals
     for spec in INTERNALS:
         try:
@@ -155,42 +169,21 @@ async def subscribe_all(symbols_ranked: list[tuple[str, int]]) -> None:
             log.warning("  ✗ internal %s: %s", spec["key"], exc)
         await asyncio.sleep(0.05)
 
-    # 2. Stock tickers: top MAX_LIVE by RS get live data; remainder get delayed
-    live_slots  = MAX_LIVE
-    live_tickers  = [s for s, _ in symbols_ranked[:live_slots]]
-    delay_tickers = [s for s, _ in symbols_ranked[live_slots:]]
-
-    # Request live data type (1=live, 3=delayed)
-    ib.reqMarketDataType(1)
-
-    log.info("Subscribing %d LIVE + %d DELAYED stock tickers…", len(live_tickers), len(delay_tickers))
-    for i, symbol in enumerate(live_tickers):
+    # 2. Stock tickers
+    all_tickers = [s for s, _ in symbols_ranked[:MAX_TICKERS]]
+    log.info("Subscribing %d tickers (delayed data, limit=%d)…", len(all_tickers), MAX_TICKERS)
+    for i, symbol in enumerate(all_tickers):
         try:
             contract = Stock(symbol, "SMART", "USD")
             ib.reqMktData(contract, "", False, False)
         except Exception as exc:
-            log.warning("  ✗ live %s: %s", symbol, exc)
+            log.warning("  ✗ %s: %s", symbol, exc)
         if i % 25 == 24:
             await asyncio.sleep(0.3)
         else:
             await asyncio.sleep(0.02)
 
-    # Switch to delayed for the remaining tickers
-    if delay_tickers:
-        ib.reqMarketDataType(3)
-        for i, symbol in enumerate(delay_tickers):
-            try:
-                contract = Stock(symbol, "SMART", "USD")
-                ib.reqMktData(contract, "", False, False)
-            except Exception as exc:
-                log.warning("  ✗ delayed %s: %s", symbol, exc)
-            if i % 25 == 24:
-                await asyncio.sleep(0.3)
-            else:
-                await asyncio.sleep(0.02)
-        ib.reqMarketDataType(1)  # restore default
-
-    log.info("All subscriptions placed.")
+    log.info("All subscriptions placed (%d tickers + internals).", len(all_tickers))
 
 
 async def ibkr_connect(symbols_ranked: list[tuple[str, int]]) -> bool:
@@ -250,6 +243,7 @@ async def _ws_handler(ws) -> None:
 
 async def _broadcast_loop() -> None:
     """Every BROADCAST_INTERVAL seconds, push dirty price updates to all clients."""
+    global CLIENTS, dirty
     while True:
         await asyncio.sleep(BROADCAST_INTERVAL)
         if not CLIENTS or not dirty:
@@ -267,7 +261,7 @@ async def _broadcast_loop() -> None:
                 await ws.send(msg)
             except websockets.exceptions.ConnectionClosed:
                 dead.add(ws)
-        CLIENTS -= dead
+        CLIENTS.difference_update(dead)  # in-place, avoids Python treating CLIENTS as local
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -277,19 +271,23 @@ async def _broadcast_loop() -> None:
 async def main() -> None:
     symbols_ranked = load_tickers_from_json()
 
-    # Start WebSocket server first so the frontend can connect even while IBKR loads
+    # Start WebSocket server — use serve_forever() for compatibility with websockets 13/14+
     log.info("Starting WebSocket server on ws://localhost:%d …", WS_PORT)
-    async with websockets.serve(_ws_handler, "0.0.0.0", WS_PORT):
-        log.info("WebSocket server ready ✅")
+    server = await websockets.serve(_ws_handler, "0.0.0.0", WS_PORT)
+    log.info("WebSocket server ready ✅  (ws://localhost:%d)", WS_PORT)
 
-        # Set up reconnect handler before first connect
-        _setup_reconnect(symbols_ranked)
+    # Set up reconnect handler before first connect
+    _setup_reconnect(symbols_ranked)
 
-        # Connect to IBKR (non-fatal if offline)
-        await ibkr_connect(symbols_ranked)
+    # Connect to IBKR (non-fatal if TWS is offline)
+    await ibkr_connect(symbols_ranked)
 
-        # Broadcast loop runs forever
+    # Broadcast loop runs forever; server stays alive until Ctrl+C
+    try:
         await _broadcast_loop()
+    finally:
+        server.close()
+        await server.wait_closed()
 
 
 if __name__ == "__main__":

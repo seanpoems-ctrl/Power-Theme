@@ -1,30 +1,30 @@
 {
-  "generated_at": "April 13, 2026 (17:30 EDT)",
+  "generated_at": "May 22, 2026 (18:32 EDT)",
   "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 6886.24,
-      "change": 69.35,
-      "change_pct": 1.02
+      "price": 7473.47,
+      "change": 27.75,
+      "change_pct": 0.37
     },
     {
       "label": "Nasdaq 100",
-      "price": 25383.72,
-      "change": 267.38,
-      "change_pct": 1.06
+      "price": 29481.64,
+      "change": 124.37,
+      "change_pct": 0.42
     },
     {
       "label": "VIX",
-      "price": 19.12,
-      "change": -0.11,
+      "price": 16.7,
+      "change": -0.06,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.3,
-      "change": -0.02,
+      "price": 4.56,
+      "change": -0.03,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 56924.11,
-      "change_pct": 1.84
+      "price": 61684.14,
+      "change_pct": 3.14
     },
     "dax": {
       "label": "DAX",
-      "price": 23742.44,
-      "change_pct": -0.26
+      "price": 24606.77,
+      "change_pct": -0.53
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10582.96,
-      "change_pct": -0.17
+      "price": 10466.26,
+      "change_pct": 0.22
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 55.0,
-    "mmth": 57.0,
+    "s5fi": 61.4,
+    "mmth": 63.4,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,29 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "US-Led Rally, Mixed Global Cues",
+  "mood": "Tech-led momentum continues, global mixed",
   "analysis": {
-    "analysis_para1": "Today's global tape presented a divergent picture, with the Nikkei 225 advancing a strong +1.84% while European markets like the DAX (-0.26%) and FTSE 100 (-0.17%) experienced slight pullbacks. US credit conditions, as indicated by the unknown BAML HY Spread, offered no clear directional signal for broader risk appetite. Domestically, market breadth remained moderate with 55.0% of stocks above their 50-day moving average (S5FI) and 57.0% above their 200-day moving average (MMTH), indicating underlying stability rather than exuberant participation.",
-    "analysis_para2": "Following today's robust gains in both the S&P 500 and Nasdaq 100, the mechanical plan is to monitor for continued upside momentum and consolidation above recent resistance. Key action involves observing if support can be established above today's closing levels, with a sustained pullback below prior day's close signaling caution. Specifically, a breach of 6800 on the S&P 500 or 25000 on the Nasdaq 100 would necessitate a more defensive posture. Conversely, maintaining exposure to high relative strength themes like Semiconductors and Energy is warranted as long as underlying breadth metrics hold above 50%.",
-    "technical_signal": "No reversal pattern confirmed yet. The market closed higher on broad-based gains.",
+    "action_line": "VIX 16.70 Normal + S5FI 61.4% breadth + mixed global tape (strong Nikkei) → trade RS leaders selectively near support.",
+    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 surging 3.14% while the DAX saw a modest retreat of 0.53%, contrasting with the FTSE 100's slight gain. Domestically, US market breadth remains robust, evidenced by 61.4% of stocks above their 50-day moving average (S5FI) and 63.4% above their 200-day moving average (MMTH). This healthy breadth suggests underlying market participation, even as the high-yield credit spread remains unquantified, leaving the current credit regime unclear. Despite some international variance, the US equity market shows a resilient internal structure.",
+    "analysis_para2": "Given the ongoing tech-led momentum, the mechanical plan involves closely monitoring the major indices for any signs of a deeper pullback. For the S&P 500, defending the 7450 level would be key, while the Nasdaq 100 needs to hold above 29400 to maintain its current trajectory. Traders should prioritize high relative strength leaders within strong themes like Semiconductors and Hardware, looking for entries on shallow pullbacks to their 10-day or 20-day exponential moving averages. Failure to hold these levels could signal a shift, but for now, the bias remains towards buying strength on dips.",
+    "technical_signal": "No reversal pattern confirmed yet. Major indices are showing continued upside momentum with healthy breadth supporting the move.",
     "ticker_intel": [
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A+",
-        "reason": "AXTI merits an A+ grade with an exceptional RS of 99 and a powerful 3-month return of +198.3%, positioning it as a leading conviction play in the robust Semiconductors theme."
+        "reason": "Exhibiting unparalleled relative strength (RS=99) and a staggering 1-month gain of +87.1%, AXTI is a top semiconductor play poised for further upside in the current tech-driven rally."
       },
       {
-        "ticker": "TSEM",
-        "company": "Tower Semiconductor Ltd",
+        "ticker": "MXL",
+        "company": "MaxLinear Inc",
         "grade": "A",
-        "reason": "TSEM earns an A grade for its impressive RS of 98 and a significant +49.0% one-month surge, making it a strong high-momentum choice within the resilient Semiconductors sector."
+        "reason": "With an impressive RS=99 and a phenomenal 1-month return of +189.5%, MXL is another high-momentum semiconductor leader demonstrating significant market demand."
       },
       {
-        "ticker": "MRVL",
-        "company": "Marvell Technology Inc",
+        "ticker": "LITE",
+        "company": "Lumentum Holdings Inc",
         "grade": "C",
-        "reason": "MRVL receives a C grade despite its 1-month gain, as its RS of 85 and weaker 3-month performance relative to peers suggest potential underperformance within the strong Semiconductor theme."
+        "reason": "Despite a strong RS=98, LITE's modest 1-month return of +11.8% and lower 3-month growth of +40.3% indicate underperformance compared to its high-momentum peers in this rally, suggesting it lacks the immediate conviction of sector leaders."
       }
     ]
   }

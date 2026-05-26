@@ -1,93 +1,94 @@
 {
-  "generated_at": "2026-04-01 12:13 ET",
+  "generated_at": "2026-05-25 17:05 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 657.71,
-      "open": 653.9,
-      "high": 658.09,
-      "low": 653.0,
-      "close": 657.71,
-      "prev_open": 638.94,
-      "prev_close": 650.34,
-      "volume": 42947712,
-      "change_pct": 1.13
+      "price": 745.64,
+      "open": 746.24,
+      "high": 748.94,
+      "low": 744.48,
+      "close": 745.64,
+      "prev_open": 738.64,
+      "prev_close": 742.72,
+      "volume": 41671800,
+      "change_pct": 0.39
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 586.76,
-      "open": 581.48,
-      "high": 587.2,
-      "low": 580.42,
-      "close": 586.76,
-      "prev_open": 564.29,
-      "prev_close": 577.18,
-      "volume": 35633788,
-      "change_pct": 1.66
+      "price": 717.54,
+      "open": 718.07,
+      "high": 722.12,
+      "low": 715.95,
+      "close": 717.54,
+      "prev_open": 708.99,
+      "prev_close": 714.51,
+      "volume": 32999600,
+      "change_pct": 0.42
     },
     "^VIX": {
       "label": "VIX",
-      "price": 23.54,
-      "open": 24.3,
-      "high": 25.3,
-      "low": 23.54,
-      "close": 23.54,
-      "prev_open": 29.53,
-      "prev_close": 25.25,
+      "price": 16.59,
+      "open": 16.81,
+      "high": 16.87,
+      "low": 16.53,
+      "close": 16.59,
+      "prev_open": 16.83,
+      "prev_close": 16.7,
       "volume": 0,
-      "change_pct": -6.77
+      "change_pct": -0.66
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 99.79,
-      "open": 101.72,
-      "high": 103.31,
-      "low": 96.5,
-      "close": 99.79,
-      "prev_open": 105.07,
-      "prev_close": 101.38,
-      "volume": 280997,
-      "change_pct": -1.57
+      "price": 96.6,
+      "open": 93.88,
+      "high": 93.9,
+      "low": 89.41,
+      "close": 96.6,
+      "prev_open": 98.0,
+      "prev_close": 96.6,
+      "volume": 112313,
+      "change_pct": 0.0
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 51063.72,
-      "open": 51382.53,
-      "high": 52169.01,
-      "low": 50558.91,
-      "close": 51063.72,
-      "prev_open": 52054.68,
-      "prev_close": 51885.85,
-      "volume": 174500000,
-      "change_pct": -1.58
+      "price": 63339.07,
+      "open": 61913.36,
+      "high": 63432.41,
+      "low": 61842.56,
+      "close": 63339.07,
+      "prev_open": 60374.84,
+      "prev_close": 61684.14,
+      "volume": 158800000,
+      "change_pct": 2.68
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 23298.89,
-      "open": 23326.89,
-      "high": 23377.65,
-      "low": 23027.04,
-      "close": 23298.89,
-      "prev_open": 22578.84,
-      "prev_close": 22680.04,
+      "price": 25389.1,
+      "open": 25181.27,
+      "high": 25438.41,
+      "low": 25062.72,
+      "close": 25389.1,
+      "prev_open": 24768.49,
+      "prev_close": 24888.56,
       "volume": 0,
-      "change_pct": 2.73
+      "change_pct": 2.01
     }
   },
   "fred": {
-    "hy_oas": null,
-    "yield_curve": null,
-    "hy_oas_stale": false
+    "hy_oas": 2.78,
+    "yield_curve": 0.43,
+    "hy_oas_stale": false,
+    "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 35.9,
-    "mmth": 53.3
+    "s5fi": 61.4,
+    "mmth": 63.4
   },
   "regime": {
-    "credit_status": "Unknown",
-    "yc_status": "Unknown",
+    "credit_status": "Complacent",
+    "yc_status": "Normal / Steepening",
     "breadth_flush": false,
     "generational_buy_zone": false,
     "reversal": {
@@ -97,33 +98,34 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: April 01, 2026",
-    "mood_emoji": "🚀",
-    "mood": "Risk-On / Equities Surge",
-    "narrative": "US and European equities roared higher today, propelled by robust institutional inflows and a retreat in volatility. Despite some weakness in Asian markets and oil, the overall sentiment favored growth assets.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 657.71 | +1.13% | 📈 |\n| Nasdaq 100 ETF | 586.76 | +1.66% | 📈 |\n| VIX | 23.54 | -6.77% | 📉 |\n| Crude Oil | 99.79 | -1.57% | 📉 |\n| Nikkei 225 | 51063.72 | -1.58% | 📉 |\n| DAX | 23298.89 | +2.73% | 📈 |",
-    "macro_section": "Key macro indicators for institutional risk appetite remain opaque today, with the BAMLH0A0HYM2 (HY Credit Spread) value registering as Unknown due to a FRED data fetch failure. Similarly, the T10Y2Y (10Y-2Y Yield Curve) also returned an Unknown reading. This lack of clear guidance from critical credit and rates metrics implies institutions are navigating with reduced visibility into underlying financial stress or easing conditions.",
-    "analysis_para1": "The global tape presented a mixed picture, with the Nikkei 225 declining by -1.58% and Crude Oil falling by -1.57%, signaling potential pockets of caution or profit-taking in some markets. However, the DAX surged by +2.73%, suggesting strong European market conviction that largely overshadowed these declines. Without a current reading for BAMLH0A0HYM2 (US HY Credit Spreads), it's challenging to directly correlate this global divergence to US credit conditions, but the robust DAX performance alongside falling oil prices could imply a shift in global capital towards developed market equities, potentially putting upward pressure on US risk appetite despite mixed international signals.",
-    "analysis_para2": "Today's dominant 'Why' behind the broad equity surge appears to be strong start-of-quarter institutional inflows and rebalancing, following a period of cautious positioning. With the new quarter officially underway, large asset allocators likely deployed capital, particularly into growth-oriented US equities, driving the S&P 500 ETF up +1.13% and the Nasdaq 100 ETF up +1.66%. This mechanical flow-driven buying, coupled with the significant -6.77% drop in the VIX, indicates a broad-based conviction shift towards risk assets, rather than a specific macro data point or policy announcement.",
-    "technical_signal": "No reversal pattern confirmed yet. Equities continue to exhibit strong upside momentum, with the VIX retreating significantly. While % stocks above their 50DMA (S5FI) sits at a lukewarm 35.9% and 200DMA (MMTH) at 53.3%, indicating underlying mixed breadth, the headline indices are powering higher, suggesting continued positive sentiment; watch for any signs of exhaustion near prior resistance levels.",
+    "title": "Post-Market Brief: May 25, 2026",
+    "mood_emoji": "📈",
+    "mood": "Global Risk-On Accumulation",
+    "narrative": "Today's market saw major global indices surge, while US benchmarks posted modest gains, underpinned by stable credit conditions. This positive momentum was fueled by significant government-backed tech initiatives and robust corporate performance.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 745.64 | +0.39% | ➡️ |\n| Nasdaq 100 ETF | 717.54 | +0.42% | ➡️ |\n| VIX | 16.59 | -0.66% | 📉 |\n| Crude Oil | 96.60 | +0.00% | ➡️ |\n| Nikkei 225 | 63339.07 | +2.68% | 📈 |\n| DAX | 25389.10 | +2.01% | 📈 |",
+    "macro_section": "High-Yield Credit Spreads (BAMLH0A0HYM2) stand at a complacent 2.78%, signaling investor comfort with corporate debt risk. Concurrently, the 10Y-2Y yield curve (T10Y2Y) maintains a normal and steepening posture at +0.430. This combination of loose credit conditions and a healthy yield curve strongly implies a robust risk appetite among institutional investors.",
+    "analysis_para1": "The global tape showed significant strength today, with the Nikkei 225 surging +2.68% and the DAX adding +2.01%, indicating a strong appetite for risk overseas. This positive international sentiment is directly reflected in the domestic market's credit conditions, as evidenced by the High-Yield Credit Spread (BAMLH0A0HYM2) remaining complacent at 2.78%. Stability in Crude Oil at $96.60 further reinforces this picture of sustained demand and economic activity. This confluence of global strength and calm credit markets implies that US risk appetite remains firm, with investors willing to embrace growth opportunities.",
+    "analysis_para2": "The single dominant 'Why' behind today's primary flow appears to be a resurgence in government-backed strategic investment and technological policy initiatives. Specific catalysts around the CHIPS Act, quantum computing manufacturing, and AI infrastructure pivots, exemplified by today's top gappers, are driving significant capital into key sectors. This mechanical catalyst is fostering a strong environment for innovation and growth, pushing equity values higher as investors anticipate future revenue streams underpinned by governmental support and long-term strategic commitments.",
+    "analysis_para3": "The actionable plan for traders today is to maintain long exposure, focusing on selective dip-buying opportunities in strong sectors. Watch for the S&P 500 ETF to find support around the 742-743 level, and the Nasdaq 100 ETF at 715, where any consolidation could present entry points. Key triggers for long positions would be a bounce from these levels accompanied by increasing volume, especially in names benefiting from the identified tech initiatives. A definitive risk-off threshold would be a break below S&P 500 ETF 740 on heightened volume, warranting a reassessment of current positions.",
+    "technical_signal": "No reversal pattern confirmed yet. Breadth metrics remain supportive, with 61.4% of stocks above their 50-day moving average and 63.4% above their 200-day moving average, confirming the underlying strength. Traders should monitor these breadth figures for any sharp decline below 50% as a potential early warning of a trend reversal.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet surged today after unveiling a new AI-powered suite of enterprise tools aimed at significantly boosting productivity and capturing market share from competitors."
+          "ticker": "GFS",
+          "company": "GlobalFoundries Inc.",
+          "reason": "Shares surged on news of a new US-backed quantum manufacturing initiative, highlighting significant governmental support for advanced semiconductor production."
         },
         {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase saw strong buying interest following a major analyst upgrade citing robust Q1 loan growth and an improving outlook for net interest margins."
+          "ticker": "NOK",
+          "company": "Nokia Corporation",
+          "reason": "Stock benefited from reports detailing its aggressive pivot into AI infrastructure solutions, positioning the company for growth in a critical technology segment."
         }
       ],
       "c_grade": [
         {
           "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA traded higher on general enthusiasm for AI-related stocks, a continuation of the prevailing narrative without specific new company news today."
+          "company": "NVIDIA Corp",
+          "reason": "While no new specific catalyst emerged today, NVDA continues to attract momentum flows driven by its dominant position in AI hardware and ongoing technical strength."
         }
       ]
     }

@@ -164,7 +164,7 @@ def _parse_rows(html: str) -> list[dict]:
         tds = tr.find_all("td", recursive=False)
         if len(tds) < 11:
             continue
-        link = tds[1].find("a", href=lambda h: h and "quote.ashx?t=" in h)
+        link = tds[1].find("a", href=lambda h: h and "quote?t=" in h)
         if not link:
             continue
         sym = link["href"].split("t=")[-1].split("&")[0].strip().upper()
@@ -596,9 +596,46 @@ def _build_tv_scanners_sync() -> tuple[dict, dict]:
 # Main
 # ---------------------------------------------------------------------------
 
+def _build_compact_history(all_data: dict[str, dict], date_et: str) -> None:
+    """
+    Write a compact daily snapshot to public/breadth_history/YYYY-MM-DD.json.
+    Stores up to 500 stocks per filter with only the essential fields.
+    This lets the frontend load historical stock lists for any past trading day.
+    """
+    MAX_PER_FILTER = 500
+    compact: dict[str, Any] = {"date": date_et, "filters": {}}
+
+    for filter_key, data in all_data.items():
+        stocks = data.get("stocks") or []
+        compact["filters"][filter_key] = [
+            {
+                "t":  s.get("ticker", ""),
+                "co": s.get("company", ""),
+                "p":  s.get("price"),
+                "c":  s.get("change_pct"),
+                "adr": s.get("adr_pct"),
+            }
+            for s in stocks[:MAX_PER_FILTER]
+        ]
+
+    history_dir = PUBLIC_DIR / "breadth_history"
+    history_dir.mkdir(parents=True, exist_ok=True)
+    out = history_dir / f"{date_et}.json"
+    out.write_text(json.dumps(compact, separators=(",", ":")), encoding="utf-8")
+    total = sum(len(v) for v in compact["filters"].values())
+    logger.info("Wrote history archive: %s (%d total stock entries)", out.name, total)
+
+
 async def main() -> None:
     PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
     errors = []
+    all_data: dict[str, dict] = {}
+
+    try:
+        from zoneinfo import ZoneInfo
+        date_et = datetime.now(ZoneInfo("America/New_York")).strftime("%Y-%m-%d")
+    except Exception:
+        date_et = datetime.now().strftime("%Y-%m-%d")
 
     for filter_key in FILTER_MAP:
         logger.info("=== Processing filter: %s ===", filter_key)
@@ -615,6 +652,7 @@ async def main() -> None:
                 "fetched_at_utc": datetime.now(timezone.utc).isoformat(),
             }
 
+        all_data[filter_key] = data
         out = PUBLIC_DIR / f"breadth_stocks_{filter_key}.json"
         out.write_text(json.dumps(data, indent=2), encoding="utf-8")
         logger.info("[%s] wrote %s (%d stocks, %.1fs)",
@@ -637,10 +675,17 @@ async def main() -> None:
                     "stocks": [], "count": 0, "fetched_at_utc": datetime.now(timezone.utc).isoformat()}
 
     for key, data in [("atr_ext", atr_data), ("above50dma", dma_data)]:
+        all_data[key] = data
         out = PUBLIC_DIR / f"breadth_stocks_{key}.json"
         out.write_text(json.dumps(data, indent=2), encoding="utf-8")
         logger.info("[%s] wrote %s (%d stocks, %.1fs)",
                     key, out.name, data["count"], monotonic() - t0)
+
+    # ── Save compact daily history archive ───────────────────────────────────
+    try:
+        _build_compact_history(all_data, date_et)
+    except Exception as exc:
+        logger.warning("History archive write failed: %s", exc)
 
     if errors:
         logger.warning("Filters with errors: %s", errors)

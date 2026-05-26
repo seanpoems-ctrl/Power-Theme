@@ -332,6 +332,7 @@ Market data:
 Output ONLY valid JSON (no markdown wrapping):
 {{
   "mood": "2-6 word market mood — e.g. 'Risk-Off / Global Weakness' or 'Capitulation / Distribution'",
+  "action_line": "1 sentence (max 120 chars) synthesizing VIX level + breadth (S5FI/MMTH) + global tape into a single actionable verdict. Example: 'VIX 18 Normal + S5FI 50% breadth + mixed global tape → trade RS leaders selectively near support.'",
   "analysis_para1": "1 paragraph connecting global tape (Nikkei/DAX/FTSE) to US credit and breadth",
   "analysis_para2": "1 paragraph: the 'Mechanical Plan' — specific price levels, signals, and action to watch",
   "technical_signal": "{tech_instruction}",
@@ -344,6 +345,7 @@ Output ONLY valid JSON (no markdown wrapping):
 
 Rules:
   mood: captures today's market character in a phrase
+  action_line: exactly 1 sentence, cite VIX number + S5FI% + at least one global index, end with a clear trade stance
   analysis_para1: 3-5 sentences, connect global → credit → US breadth, cite specific numbers
   analysis_para2: 3-5 sentences, the actionable mechanical plan with key price levels
   technical_signal: {tech_instruction}
@@ -568,6 +570,7 @@ def main():
         "reversal_signals": reversal,
         "mood":            analysis.get("mood", ""),
         "analysis": {
+            "action_line":      analysis.get("action_line", ""),
             "analysis_para1":   analysis.get("analysis_para1", ""),
             "analysis_para2":   analysis.get("analysis_para2", ""),
             "technical_signal": analysis.get("technical_signal", ""),
