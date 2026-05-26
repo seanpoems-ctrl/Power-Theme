@@ -1011,20 +1011,24 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
                   )}
                 </div>
               ) : selectedTheme.fromEtf ? (
-                /* ETF holdings table — weight-sorted, no price/perf data */
+                /* ETF holdings table — same columns as stock table, weight replaces sub-theme */
                 <table className="w-full text-xs">
                   <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800">
                     <tr className="text-zinc-500 text-[11px] uppercase tracking-wider">
-                      <th className="w-8 text-right px-3 py-2 font-medium">#</th>
                       <th className="text-left px-4 py-2 font-medium">Ticker</th>
-                      <th className="text-left px-4 py-2 font-medium">{lang === 'zh' ? '公司' : 'Company'}</th>
-                      <th className="text-right px-4 py-2 font-medium">Weight %</th>
+                      <th className="text-left px-4 py-2 font-medium hidden sm:table-cell">{lang === 'zh' ? '公司' : 'Company'}</th>
+                      <th className="text-right px-3 py-2 font-medium">{lang === 'zh' ? '價格' : 'Price'}</th>
+                      <th className="text-right px-3 py-2 font-medium">1D</th>
+                      <th className="text-right px-3 py-2 font-medium">1W</th>
+                      <th className="text-right px-3 py-2 font-medium">1M</th>
+                      <th className="text-right px-3 py-2 font-medium">RS</th>
+                      <th className="text-right px-3 py-2 font-medium hidden sm:table-cell">ADR%</th>
+                      <th className="text-right px-3 py-2 font-medium hidden md:table-cell">Weight %</th>
                     </tr>
                   </thead>
                   <tbody>
                     {selectedTheme.stocks.map((h, i) => (
                       <tr key={`${h.ticker}-${i}`} className="border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors">
-                        <td className="px-3 py-2 text-right font-mono text-zinc-600">{i + 1}</td>
                         <td className="px-4 py-2">
                           <a
                             href={`https://finviz.com/quote.ashx?t=${h.ticker}`}
@@ -1036,8 +1040,16 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
                             {h.ticker}
                           </a>
                         </td>
-                        <td className="px-4 py-2 text-zinc-300 truncate max-w-[220px]">{h.name || '—'}</td>
-                        <td className="px-4 py-2 text-right font-mono text-emerald-400 font-semibold">{h.weight != null ? `${h.weight.toFixed(2)}%` : '—'}</td>
+                        <td className="px-4 py-2 text-zinc-400 truncate max-w-[140px] hidden sm:table-cell">{h.name || '—'}</td>
+                        <td className="px-3 py-2 text-right text-zinc-600 font-mono">—</td>
+                        <td className="px-3 py-2 text-right text-zinc-600 font-mono">—</td>
+                        <td className="px-3 py-2 text-right text-zinc-600 font-mono">—</td>
+                        <td className="px-3 py-2 text-right text-zinc-600 font-mono">—</td>
+                        <td className="px-3 py-2 text-right text-zinc-600 font-mono">—</td>
+                        <td className="px-3 py-2 text-right text-zinc-600 font-mono hidden sm:table-cell">—</td>
+                        <td className="px-3 py-2 text-right font-mono text-emerald-400 font-semibold hidden md:table-cell">
+                          {h.weight != null ? `${h.weight.toFixed(2)}%` : '—'}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
