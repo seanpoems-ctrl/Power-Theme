@@ -873,6 +873,44 @@ const HeroZone = ({ data, themesCount, tickersCount }) => {
 const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt, etfHoldings = {} }) => {
   const lang = useLang();
   const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks, inTop5, fromEtf }
+  const [tblSort, setTblSort] = useState({ col: null, dir: 'desc' });
+
+  // Reset sort whenever a new theme is opened
+  React.useEffect(() => { setTblSort({ col: null, dir: 'desc' }); }, [selectedTheme?.name]);
+
+  const handleColSort = (col) =>
+    setTblSort(prev => prev.col === col
+      ? { col, dir: prev.dir === 'desc' ? 'asc' : 'desc' }
+      : { col, dir: 'desc' });
+
+  const sortedStocks = React.useMemo(() => {
+    if (!selectedTheme?.stocks?.length) return [];
+    const { col, dir } = tblSort;
+    if (!col) return selectedTheme.stocks;
+    return [...selectedTheme.stocks].sort((a, b) => {
+      const av = a[col], bv = b[col];
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      if (typeof av === 'string') return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      return dir === 'asc' ? av - bv : bv - av;
+    });
+  }, [selectedTheme, tblSort]);
+
+  // Sortable <th> helper — defined as a closure so it captures tblSort/handleColSort
+  const SortTh = ({ col, label, align = 'right', className = '' }) => {
+    const active = tblSort.col === col;
+    const arrow = active ? (tblSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍';
+    return (
+      <th
+        onClick={() => handleColSort(col)}
+        className={`px-3 py-2 font-medium cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap
+          ${align === 'right' ? 'text-right' : 'text-left'} ${active ? 'text-zinc-200' : ''} ${className}`}
+      >
+        {label}<span className="text-[9px] ml-0.5 opacity-70">{arrow}</span>
+      </th>
+    );
+  };
 
   const heatData = useMemo(() => {
     const rankings = finvizThemeRankings || [];
@@ -974,7 +1012,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-sm font-semibold text-zinc-100">{selectedTheme.name}</span>
                 <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">
-                  {selectedTheme.stocks.length} {lang === 'zh' ? '檔股票' : 'stocks'}{selectedTheme.inTop5 ? ` · ${lang === 'zh' ? '依 RS 排序' : 'sorted by RS'}` : selectedTheme.fromEtf ? ` · ${lang === 'zh' ? '依權重排序' : 'sorted by weight'}` : ''}
+                  {selectedTheme.stocks.length} {lang === 'zh' ? '檔股票' : 'stocks'}
                 </span>
                 {selectedTheme.fromEtf && (
                   <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-500/15 border border-sky-500/30 text-sky-400">
@@ -1015,19 +1053,19 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
                 <table className="w-full text-xs">
                   <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800">
                     <tr className="text-zinc-500 text-[11px] uppercase tracking-wider">
-                      <th className="text-left px-4 py-2 font-medium">Ticker</th>
-                      <th className="text-left px-4 py-2 font-medium hidden sm:table-cell">{lang === 'zh' ? '公司' : 'Company'}</th>
-                      <th className="text-right px-3 py-2 font-medium">{lang === 'zh' ? '價格' : 'Price'}</th>
-                      <th className="text-right px-3 py-2 font-medium">1D</th>
-                      <th className="text-right px-3 py-2 font-medium">1W</th>
-                      <th className="text-right px-3 py-2 font-medium">1M</th>
-                      <th className="text-right px-3 py-2 font-medium">RS</th>
-                      <th className="text-right px-3 py-2 font-medium hidden sm:table-cell">ADR%</th>
+                      <SortTh col="ticker"   label="Ticker"                           align="left"  className="px-4" />
+                      <SortTh col="name"     label={lang === 'zh' ? '公司' : 'Company'} align="left"  className="px-4 hidden sm:table-cell" />
+                      <SortTh col="price"    label={lang === 'zh' ? '價格' : 'Price'}   align="right" />
+                      <SortTh col="perf_1d"  label="1D"                               align="right" />
+                      <SortTh col="perf_1w"  label="1W"                               align="right" />
+                      <SortTh col="perf_1m"  label="1M"                               align="right" />
+                      <SortTh col="rs"       label="RS"                               align="right" />
+                      <SortTh col="adr_pct"  label="ADR%"                             align="right" className="hidden sm:table-cell" />
                       <th className="text-left px-3 py-2 font-medium hidden md:table-cell">Sub-Theme</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {selectedTheme.stocks.map((h, i) => {
+                    {sortedStocks.map((h, i) => {
                       const fmtPct = (v) => v != null
                         ? <span className={v >= 0 ? 'text-emerald-400' : 'text-red-400'}>{v >= 0 ? '+' : ''}{v.toFixed(1)}%</span>
                         : <span className="text-zinc-600">—</span>;
@@ -1066,19 +1104,19 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
                 <table className="w-full text-xs">
                   <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800">
                     <tr className="text-zinc-500 text-[11px] uppercase tracking-wider">
-                      <th className="text-left px-4 py-2 font-medium">Ticker</th>
-                      <th className="text-left px-4 py-2 font-medium hidden sm:table-cell">{lang === 'zh' ? '公司' : 'Company'}</th>
-                      <th className="text-right px-3 py-2 font-medium">{lang === 'zh' ? '價格' : 'Price'}</th>
-                      <th className="text-right px-3 py-2 font-medium">1D</th>
-                      <th className="text-right px-3 py-2 font-medium">1W</th>
-                      <th className="text-right px-3 py-2 font-medium">1M</th>
-                      <th className="text-right px-3 py-2 font-medium">RS</th>
-                      <th className="text-right px-3 py-2 font-medium hidden sm:table-cell">ADR%</th>
-                      <th className="text-left px-3 py-2 font-medium hidden md:table-cell">Sub-Theme</th>
+                      <SortTh col="ticker"   label="Ticker"                           align="left"  className="px-4" />
+                      <SortTh col="company"  label={lang === 'zh' ? '公司' : 'Company'} align="left"  className="px-4 hidden sm:table-cell" />
+                      <SortTh col="price"    label={lang === 'zh' ? '價格' : 'Price'}   align="right" />
+                      <SortTh col="perf_1d"  label="1D"                               align="right" />
+                      <SortTh col="perf_1w"  label="1W"                               align="right" />
+                      <SortTh col="perf_1m"  label="1M"                               align="right" />
+                      <SortTh col="rs_52w"   label="RS"                               align="right" />
+                      <SortTh col="adr_pct"  label="ADR%"                             align="right" className="hidden sm:table-cell" />
+                      <SortTh col="_subtheme" label="Sub-Theme"                        align="left"  className="hidden md:table-cell" />
                     </tr>
                   </thead>
                   <tbody>
-                    {selectedTheme.stocks.map((s, i) => {
+                    {sortedStocks.map((s, i) => {
                       const fmtPct = (v) => v != null
                         ? <span className={v >= 0 ? 'text-emerald-400' : 'text-red-400'}>{v >= 0 ? '+' : ''}{v.toFixed(1)}%</span>
                         : <span className="text-zinc-600">—</span>;
