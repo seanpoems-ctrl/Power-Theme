@@ -339,22 +339,36 @@ const CUSTOM_COL = {
 // IBD RS: pre-computed 1-99 percentile rank stored on each stock as rs_ibd.
 // Ranked against the full TradingView US equity universe (~8 000 stocks).
 // Formula: 0.4×Q4(0-3mo) + 0.2×Q3(3-6mo) + 0.4×Q2Q1(6-12mo), then percentile.
-function getRS(stock) {
-  return stock.rs_ibd ?? null;
+// Fallback: until rs_ibd is populated by the scraper, show stock's period
+// return minus SPX's return for the same period (old behaviour, ±decimal).
+function getRS(stock, spxReturn) {
+  if (stock.rs_ibd != null) return { v: stock.rs_ibd, ibd: true };
+  if (spxReturn != null) {
+    const perf = stock.change_pct ?? null;   // used only in fallback context
+    if (perf != null) return { v: Math.round((perf - spxReturn) * 10) / 10, ibd: false };
+  }
+  return { v: null, ibd: false };
 }
 
-function fmtRS(v) {
-  return v == null ? "—" : String(v);
+function fmtRS({ v, ibd }) {
+  if (v == null) return "—";
+  if (ibd) return String(v);
+  const s = Math.abs(v).toFixed(1);
+  return v > 0 ? `+${s}` : `-${s}`;
 }
 
-function rsColor(v) {
+function rsColor({ v, ibd }) {
   if (v == null) return "text-zinc-500";
-  if (v >= 90)   return "text-emerald-300 font-bold";
-  if (v >= 80)   return "text-emerald-400";
-  if (v >= 70)   return "text-green-400";
-  if (v >= 50)   return "text-zinc-300";
-  if (v >= 30)   return "text-zinc-500";
-  return "text-rose-400";
+  if (ibd) {
+    if (v >= 90) return "text-emerald-300 font-bold";
+    if (v >= 80) return "text-emerald-400";
+    if (v >= 70) return "text-green-400";
+    if (v >= 50) return "text-zinc-300";
+    if (v >= 30) return "text-zinc-500";
+    return "text-rose-400";
+  }
+  // fallback: relative-to-SPX ±value
+  return v > 0 ? "text-emerald-400" : v < 0 ? "text-rose-400" : "text-zinc-500";
 }
 
 // Client-side threshold guard — only show stocks that actually meet the filter's
@@ -622,6 +636,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
 
   const changeColLabel = CHANGE_COL_LABEL[filter] ?? "Change%";
   const perfField = PERF_FIELD[filter] ?? "change_pct";
+  const spxReturn = spxData?.[SPX_FIELD[filter]] ?? null;
   const customCol = CUSTOM_COL[filter] ?? null;
 
   // Build full column list:
@@ -655,8 +670,8 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
     return [...stocks].sort((a, b) => {
       let av, bv;
       if (sortKey === "rs") {
-        av = getRS(a);
-        bv = getRS(b);
+        av = getRS(a, spxReturn).v;
+        bv = getRS(b, spxReturn).v;
       } else if (sortKey === "dollar_volume") {
         av = parseDollarVolume(a.dollar_volume);
         bv = parseDollarVolume(b.dollar_volume);
@@ -674,7 +689,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
       const cmp = typeof av === "string" ? av.localeCompare(bv) : av - bv;
       return sortDir === "asc" ? cmp : -cmp;
     });
-  }, [stocks, sortKey, sortDir, perfField]);
+  }, [stocks, sortKey, sortDir, perfField, spxReturn]);
 
   if (!stocks.length) {
     return <p className="py-12 text-center text-sm text-zinc-500">No stocks match the current filters.</p>;
@@ -724,8 +739,8 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
               <td className="max-w-[220px] truncate px-2 py-1.5 text-zinc-300">
                 {s.company || "—"}
               </td>
-              <td className={`px-2 py-1.5 text-right font-mono font-semibold ${rsColor(getRS(s))}`}>
-                {fmtRS(getRS(s))}
+              <td className={`px-2 py-1.5 text-right font-mono font-semibold ${rsColor(getRS(s, spxReturn))}`}>
+                {fmtRS(getRS(s, spxReturn))}
               </td>
               <td className="px-2 py-1.5 text-right font-mono text-zinc-300">
                 {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
@@ -837,8 +852,8 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
                     {s.ticker}
                   </button>
                   <span className="flex-1 truncate text-zinc-400">{s.company}</span>
-                  <span className={`w-12 text-right font-mono font-semibold ${rsColor(getRS(s))}`}>
-                    {fmtRS(getRS(s))}
+                  <span className={`w-12 text-right font-mono font-semibold ${rsColor(getRS(s, spxReturn))}`}>
+                    {fmtRS(getRS(s, spxReturn))}
                   </span>
                   <span className="w-12 text-right font-mono text-zinc-500">
                     {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
@@ -902,10 +917,15 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
     // Enrich each group with countPct and groupRS
     const enriched = raw.map((g) => {
       const countPct = totalCount > 0 ? (g.items.length / totalCount) * 100 : null;
-      const rsVals = g.items.map(getRS).filter((v) => v != null);
-      const groupRS = rsVals.length > 0
-        ? Math.round(rsVals.reduce((a, b) => a + b, 0) / rsVals.length)
+      const rsVals = g.items.map((s) => getRS(s, spxReturn).v).filter((v) => v != null);
+      const rawGroupRS = rsVals.length > 0
+        ? rsVals.reduce((a, b) => a + b, 0) / rsVals.length
         : null;
+      // groupRS stored as {v, ibd} so fmtRS/rsColor work correctly
+      const firstIbd = rsVals.length > 0 ? (g.items[0]?.rs_ibd != null) : false;
+      const groupRS = rawGroupRS != null
+        ? { v: firstIbd ? Math.round(rawGroupRS) : Math.round(rawGroupRS * 10) / 10, ibd: firstIbd }
+        : { v: null, ibd: false };
       return { ...g, countPct, groupRS };
     });
 
@@ -929,8 +949,8 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
       items: [...g.items].sort((a, b) => {
         let av, bv;
         if (sortKey === "rs") {
-          av = getRS(a);
-          bv = getRS(b);
+          av = getRS(a, spxReturn).v;
+          bv = getRS(b, spxReturn).v;
         } else if (sortKey === perfField) {
           av = getPerfValue(a, perfField);
           bv = getPerfValue(b, perfField);
@@ -948,7 +968,7 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
         return sortDir === "asc" ? cmp : -cmp;
       }),
     }));
-  }, [stocks, sortKey, sortDir, perfField, totalCount, groupSortKey, groupSortDir]);
+  }, [stocks, sortKey, sortDir, perfField, spxReturn, totalCount, groupSortKey, groupSortDir]);
 
   if (!groups.length) {
     return <p className="py-12 text-center text-sm text-zinc-500">No groups to display.</p>;
