@@ -870,13 +870,21 @@ const HeroZone = ({ data, themesCount, tickersCount }) => {
   );
 };
 
-const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt, etfHoldings = {} }) => {
+const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt, etfHoldings = {}, openTheme = null, onThemeOpened = null }) => {
   const lang = useLang();
   const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks, inTop5, fromEtf }
   const [tblSort, setTblSort] = useState({ col: null, dir: 'desc' });
 
   // Reset sort whenever a new theme is opened
   React.useEffect(() => { setTblSort({ col: null, dir: 'desc' }); }, [selectedTheme?.name]);
+
+  // External open — triggered when user clicks a theme in Leading Themes (breadth tab)
+  React.useEffect(() => {
+    if (!openTheme) return;
+    handleCardClick(openTheme);
+    if (onThemeOpened) onThemeOpened();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [openTheme]);
 
   const handleColSort = (col) =>
     setTblSort(prev => prev.col === col
@@ -5088,7 +5096,7 @@ const GeminiBreathAnalysis = ({ mc, internalsData }) => {
   );
 };
 
-const MarketBreadthTab = ({ data, internalsData, econData }) => {
+const MarketBreadthTab = ({ data, internalsData, econData, onThemeClick }) => {
   const mc  = data?.market_condition || {};
   const adv = mc.adv_dec;
   const hl  = mc.new_hl;
@@ -5357,9 +5365,12 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
             <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">Leading Themes · 1D</div>
             <div className="flex flex-col gap-1.5">
               {leadingThemes.map((t, i) => (
-                <div key={t.name} className="flex items-center gap-1.5">
+                <div key={t.name}
+                  className="flex items-center gap-1.5 cursor-pointer hover:bg-zinc-800/40 rounded px-1 -mx-1 transition-colors"
+                  onClick={() => onThemeClick && onThemeClick(t.name)}
+                >
                   <span className="text-[11px] text-zinc-700 font-mono w-4 text-right">{i + 1}</span>
-                  <span className="text-[11px] text-zinc-300 flex-1 truncate leading-tight">{t.name}</span>
+                  <span className="text-[11px] text-zinc-300 flex-1 truncate leading-tight hover:text-white">{t.name}</span>
                   <span className={`text-[11px] font-mono font-bold flex-shrink-0 ${(t.perf_1d || 0) > 0 ? "text-emerald-400" : "text-red-400"}`}>
                     {(t.perf_1d || 0) > 0 ? "+" : ""}{(t.perf_1d || 0).toFixed(1)}%
                   </span>
@@ -7412,6 +7423,7 @@ export default function App() {
   const [lang, setLang] = useState(() => localStorage.getItem('ui_lang') || 'zh');
   const toggleLang = useCallback(() => setLang(l => { const next = l === 'zh' ? 'en' : 'zh'; localStorage.setItem('ui_lang', next); return next; }), []);
   const [tab, setTab] = useState("scanner");
+  const [pendingTheme, setPendingTheme] = useState(null); // theme to auto-open in ThemeHeatmap
   const [data, setData] = useState(null);
   const [briefData, setBriefData] = useState(null);
   const [newsData, setNewsData]   = useState(null);
@@ -7937,7 +7949,7 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
+      {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} onThemeClick={name => { setTab("scanner"); setPendingTheme(name); }}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
@@ -7950,7 +7962,7 @@ const filtered = useMemo(() => {
           {/* ── CENTER MAIN CONTENT ──────────────────────────────── */}
           <main className="flex-1 min-w-0 flex flex-col gap-3">
             <HeroZone data={data} themesCount={filtered.length} tickersCount={unique.length}/>
-            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}}/>
+            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}} openTheme={pendingTheme} onThemeOpened={() => setPendingTheme(null)}/>
             {data && <Leaderboard
               themeRankings={data.theme_rankings}
               industryRankings={data.industry_rankings}
