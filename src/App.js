@@ -5275,7 +5275,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
   ].filter(Boolean);
 
   return (
-    <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-8 flex items-start gap-5">
+    <><div className="max-w-[1560px] mx-auto px-4 pt-4 pb-8 flex items-start gap-5">
       {/* ── Left main area ────────────────────────────────────────────────── */}
       <div className="flex-1 min-w-0">
         <GeminiBreathAnalysis mc={mc} internalsData={internalsData} />
@@ -5557,7 +5557,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
           </div>
         </div>
       </div>
-    )}
+    )}</>
   );
 };
 
