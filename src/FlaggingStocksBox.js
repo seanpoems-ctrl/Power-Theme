@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import { createPortal } from 'react-dom';
 import { createChart, ColorType, CandlestickSeries, LineSeries, HistogramSeries } from 'lightweight-charts';
 import { X, TrendingUp, ChevronDown, BarChart2 } from 'lucide-react';
 
@@ -157,6 +158,8 @@ function TriangleChartModal({ stock, onClose }) {
   const [hasSaved, setHasSaved] = useState(() => !!localStorage.getItem(lsKey(stock.ticker)));
   // During drag: override handle pixel position with raw mouse coords (no bar-snapping)
   const [dragOverride, setDragOverride] = useState(null); // { key: string, pos: {x,y} }
+  // Tracks when containerRef.current is ready so the portal can render
+  const [containerMounted, setContainerMounted] = useState(false);
 
   const bars = useMemo(() => stock.bars_30d || [], [stock]);
   const triangle = useMemo(() => detectTriangle(bars), [bars]);
@@ -257,6 +260,10 @@ function TriangleChartModal({ stock, onClose }) {
     timesRef.current = chartBars.map(b => b.t);
     chartBarsLenRef.current = chartBars.length;
 
+    // Handles are portalled inside containerRef so coordinates match exactly
+    containerRef.current.style.position = 'relative';
+    containerRef.current.style.overflow = 'hidden';
+
     const chart = createChart(containerRef.current, {
       layout: { background: { type: ColorType.Solid, color: '#18181b' }, textColor: '#a1a1aa' },
       grid: { vertLines: { color: '#27272a' }, horzLines: { color: '#27272a' } },
@@ -266,6 +273,7 @@ function TriangleChartModal({ stock, onClose }) {
       timeScale: { borderColor: '#3f3f46', timeVisible: true, secondsVisible: false },
     });
     chartRef.current = chart;
+    setContainerMounted(true);
 
     const cSeries = chart.addSeries(CandlestickSeries, {
       upColor: '#22c55e', downColor: '#ef4444',
@@ -352,6 +360,7 @@ function TriangleChartModal({ stock, onClose }) {
       chartRef.current = null;
       upperSerRef.current = null;
       lowerSerRef.current = null;
+      setContainerMounted(false);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartBars]);
@@ -509,9 +518,9 @@ function TriangleChartModal({ stock, onClose }) {
             )}
             <div ref={containerRef} className="w-full"/>
 
-            {/* Drag handles overlay */}
-            {handlePx && (
-              <div className="absolute inset-0" style={{ pointerEvents: 'none', zIndex: 10 }}>
+            {/* Drag handles — portalled directly into containerRef so LWC coordinates match exactly */}
+            {containerMounted && containerRef.current && handlePx && createPortal(
+              <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 10 }}>
                 {(['upper', 'lower']).flatMap(line =>
                   (handlePx[line] || []).map((p, i) => {
                     if (!p) return null;
@@ -538,7 +547,8 @@ function TriangleChartModal({ stock, onClose }) {
                     );
                   })
                 )}
-              </div>
+              </div>,
+              containerRef.current
             )}
           </div>
 
