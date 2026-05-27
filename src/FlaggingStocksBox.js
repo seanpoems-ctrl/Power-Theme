@@ -268,9 +268,9 @@ function TriangleChartModal({ stock, onClose }) {
     chartRef.current = chart;
 
     const cSeries = chart.addSeries(CandlestickSeries, {
-      upColor: '#e2e8f0', downColor: '#64748b',
-      borderUpColor: '#e2e8f0', borderDownColor: '#64748b',
-      wickUpColor: '#94a3b8', wickDownColor: '#64748b',
+      upColor: '#22c55e', downColor: '#ef4444',
+      borderUpColor: '#22c55e', borderDownColor: '#ef4444',
+      wickUpColor: '#22c55e', wickDownColor: '#ef4444',
     });
     cSeries.setData(chartBars.map(b => ({
       time: b.t, open: b.o, high: b.h, low: b.l, close: b.c,
