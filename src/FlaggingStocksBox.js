@@ -43,18 +43,40 @@ function detectTriangle(bars) {
   if (!upper || !lower) return null;
 
   const last = bars.length - 1;
-  if (upper.at(last) <= lower.at(last)) return null;
-  if (upper.slope - lower.slope >= 0) return null;
+  const avgPrice = (bars[last].h + bars[last].l + bars[last].c) / 3;
 
+  // ── True triangle only (no wedge / channel) ──────────────────────────────
+  // Upper resistance must be flat or descending (not ascending)
+  // Lower support must be flat or ascending (not descending)
+  // Tolerance: 0.2% per bar (handles minor noise)
+  const slopeTol = avgPrice * 0.002;
+  if (upper.slope > slopeTol) return null;   // reject: ascending resistance = rising wedge
+  if (lower.slope < -slopeTol) return null;  // reject: descending support = falling wedge
+
+  const uLast = upper.at(last);
+  const lLast = lower.at(last);
+  if (uLast <= lLast) return null;
+  if (upper.slope - lower.slope >= 0) return null; // must still be converging
+
+  // ── Genuine tightening: range must have contracted ≥ 25% ─────────────────
+  const startIdx = Math.min(rh[0].x, rl[0].x);
+  const rangeAtStart = upper.at(startIdx) - lower.at(startIdx);
+  const rangeAtEnd = uLast - lLast;
+  if (rangeAtEnd >= rangeAtStart * 0.75) return null;
+
+  // Pattern must span ≥ 5 bars
+  if (last - startIdx < 5) return null;
+
+  // Apex must be within reasonable future window
   const apexX = (lower.intercept - upper.intercept) / (upper.slope - lower.slope);
   const barsToApex = apexX - last;
   if (barsToApex < 1 || barsToApex > 45) return null;
 
-  const startIdx = Math.min(rh[0].x, rl[0].x);
-  if (last - startIdx < 5) return null;
-
-  const cur = bars[last].c;
-  if (cur > upper.at(last) * 1.04 || cur < lower.at(last) * 0.96) return null;
+  // ── Price must still be INSIDE triangle (not broken out) ─────────────────
+  const close = bars[last].c;
+  const lastHigh = bars[last].h;
+  if (close > uLast * 1.01 || close < lLast * 0.99) return null; // close outside
+  if (lastHigh > uLast * 1.03) return null; // high pierced resistance by > 3% = breakout
 
   return { upper, lower, startIdx, barsToApex: Math.round(barsToApex) };
 }
