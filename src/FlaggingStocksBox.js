@@ -59,10 +59,63 @@ function detectTriangle(bars) {
   return { upper, lower, startIdx, barsToApex: Math.round(barsToApex) };
 }
 
+// ─── localStorage persistence helpers ─────────────────────────────────────────
+
+const lsKey = ticker => `flagging_lines_v1_${ticker}`;
+
+function loadSavedLines(ticker, barsLen) {
+  try {
+    const raw = localStorage.getItem(lsKey(ticker));
+    if (!raw) return null;
+    const saved = JSON.parse(raw);
+    const last = barsLen - 1;
+    // Convert end-relative offsets back to absolute barIdx
+    return {
+      upper: saved.upper.map(p => ({ barIdx: Math.max(0, Math.min(last, last + p.endOffset)), price: p.price })),
+      lower: saved.lower.map(p => ({ barIdx: Math.max(0, Math.min(last, last + p.endOffset)), price: p.price })),
+    };
+  } catch { return null; }
+}
+
+function saveLines(ticker, barsLen, uPts, lPts) {
+  if (!uPts || !lPts) return;
+  const last = barsLen - 1;
+  const toRel = p => ({ endOffset: p.barIdx - last, price: p.price });
+  localStorage.setItem(lsKey(ticker), JSON.stringify({
+    upper: uPts.map(toRel),
+    lower: lPts.map(toRel),
+    savedAt: Date.now(),
+  }));
+}
+
+function clearSavedLines(ticker) {
+  localStorage.removeItem(lsKey(ticker));
+}
+
 // ─── Chart Modal ───────────────────────────────────────────────────────────────
 
 const BASE_TIME = 1700000000;
 const mkTime = idx => BASE_TIME + idx * 86400;
+
+function buildAutoEndpoints(bars, triangle) {
+  const last = bars.length - 1;
+  if (triangle) {
+    const { upper, lower, startIdx } = triangle;
+    return {
+      upper: [{ barIdx: startIdx, price: upper.at(startIdx) }, { barIdx: last, price: upper.at(last) }],
+      lower: [{ barIdx: startIdx, price: lower.at(startIdx) }, { barIdx: last, price: lower.at(last) }],
+    };
+  }
+  const start = Math.max(0, bars.length - 20);
+  const slice = bars.slice(start);
+  const topS = Math.max(...slice.slice(0, 5).map(b => b.h));
+  const botS = Math.min(...slice.slice(0, 5).map(b => b.l));
+  const prRange = Math.max(...bars.map(b => b.h)) - Math.min(...bars.map(b => b.l));
+  return {
+    upper: [{ barIdx: start, price: topS }, { barIdx: last, price: bars[last].c + prRange * 0.02 }],
+    lower: [{ barIdx: start, price: botS }, { barIdx: last, price: bars[last].c - prRange * 0.02 }],
+  };
+}
 
 function TriangleChartModal({ stock, onClose }) {
   const containerRef = useRef(null);
@@ -76,6 +129,7 @@ function TriangleChartModal({ stock, onClose }) {
   const [upperPts, setUpperPts] = useState(null);
   const [lowerPts, setLowerPts] = useState(null);
   const [handlePx, setHandlePx] = useState(null);
+  const [hasSaved, setHasSaved] = useState(() => !!localStorage.getItem(lsKey(stock.ticker)));
 
   const bars = useMemo(() => stock.bars_30d || [], [stock]);
   const triangle = useMemo(() => detectTriangle(bars), [bars]);
@@ -123,22 +177,11 @@ function TriangleChartModal({ stock, onClose }) {
       high: b.h, low: b.l, close: b.c,
     })));
 
-    // Initial trendline endpoints
-    const last = bars.length - 1;
-    let initU, initL;
-    if (triangle) {
-      const { upper, lower, startIdx } = triangle;
-      initU = [{ barIdx: startIdx, price: upper.at(startIdx) }, { barIdx: last, price: upper.at(last) }];
-      initL = [{ barIdx: startIdx, price: lower.at(startIdx) }, { barIdx: last, price: lower.at(last) }];
-    } else {
-      const start = Math.max(0, bars.length - 20);
-      const slice = bars.slice(start);
-      const topS = Math.max(...slice.slice(0, 5).map(b => b.h));
-      const botS = Math.min(...slice.slice(0, 5).map(b => b.l));
-      const prRange = Math.max(...bars.map(b => b.h)) - Math.min(...bars.map(b => b.l));
-      initU = [{ barIdx: start, price: topS }, { barIdx: last, price: bars[last].c + prRange * 0.02 }];
-      initL = [{ barIdx: start, price: botS }, { barIdx: last, price: bars[last].c - prRange * 0.02 }];
-    }
+    // Initial trendline endpoints — prefer saved, fall back to auto-detect
+    const saved = loadSavedLines(stock.ticker, bars.length);
+    const auto = buildAutoEndpoints(bars, triangle);
+    const initU = saved?.upper ?? auto.upper;
+    const initL = saved?.lower ?? auto.lower;
 
     setUpperPts(initU); upperPtsRef.current = initU;
     setLowerPts(initL); lowerPtsRef.current = initL;
@@ -251,6 +294,9 @@ function TriangleChartModal({ stock, onClose }) {
     const onUp = () => {
       dragging.current = null;
       computeHandles();
+      // Persist after drag ends
+      saveLines(stock.ticker, bars.length, upperPtsRef.current, lowerPtsRef.current);
+      setHasSaved(true);
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseup', onUp);
     };
@@ -269,7 +315,7 @@ function TriangleChartModal({ stock, onClose }) {
         <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-white font-bold text-[15px]">{stock.ticker}</span>
-            <span className="text-zinc-400 text-sm truncate max-w-[220px]">{stock.company}</span>
+            <span className="text-zinc-400 text-sm truncate max-w-[180px]">{stock.company}</span>
             {triangle ? (
               <span className="px-2 py-0.5 rounded text-[11px] bg-amber-500/20 text-amber-400 border border-amber-500/30">
                 Triangle · apex ~{triangle.barsToApex}d
@@ -279,10 +325,33 @@ function TriangleChartModal({ stock, onClose }) {
                 Manual
               </span>
             )}
+            {hasSaved && (
+              <span className="flex items-center gap-1 px-2 py-0.5 rounded text-[11px] bg-blue-500/15 text-blue-400 border border-blue-500/25">
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 inline-block"/>
+                已儲存
+              </span>
+            )}
           </div>
-          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-300 p-1 ml-2">
-            <X size={16}/>
-          </button>
+          <div className="flex items-center gap-2 ml-2">
+            {hasSaved && (
+              <button
+                onClick={() => {
+                  clearSavedLines(stock.ticker);
+                  setHasSaved(false);
+                  const auto = buildAutoEndpoints(bars, triangle);
+                  setUpperPts(auto.upper);
+                  setLowerPts(auto.lower);
+                }}
+                className="px-2 py-1 text-[11px] rounded border border-zinc-600/50 text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition-colors"
+                title="清除儲存，還原自動偵測"
+              >
+                Reset
+              </button>
+            )}
+            <button onClick={onClose} className="text-zinc-500 hover:text-zinc-300 p-1">
+              <X size={16}/>
+            </button>
+          </div>
         </div>
 
         {/* Chart area */}
