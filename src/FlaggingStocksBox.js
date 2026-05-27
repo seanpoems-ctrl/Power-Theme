@@ -141,7 +141,8 @@ function buildAutoEndpoints(bars, triangle) {
 }
 
 function TriangleChartModal({ stock, onClose }) {
-  const containerRef = useRef(null);
+  const outerRef = useRef(null);      // outer wrapper div (position:relative) — portal target
+  const containerRef = useRef(null);  // LWC chart container — never gets extra styles
   const chartRef = useRef(null);
   const upperSerRef = useRef(null);
   const lowerSerRef = useRef(null);
@@ -158,8 +159,6 @@ function TriangleChartModal({ stock, onClose }) {
   const [hasSaved, setHasSaved] = useState(() => !!localStorage.getItem(lsKey(stock.ticker)));
   // During drag: override handle pixel position with raw mouse coords (no bar-snapping)
   const [dragOverride, setDragOverride] = useState(null); // { key: string, pos: {x,y} }
-  // Tracks when containerRef.current is ready so the portal can render
-  const [containerMounted, setContainerMounted] = useState(false);
 
   const bars = useMemo(() => stock.bars_30d || [], [stock]);
   const triangle = useMemo(() => detectTriangle(bars), [bars]);
@@ -260,10 +259,6 @@ function TriangleChartModal({ stock, onClose }) {
     timesRef.current = chartBars.map(b => b.t);
     chartBarsLenRef.current = chartBars.length;
 
-    // Handles are portalled inside containerRef so coordinates match exactly
-    containerRef.current.style.position = 'relative';
-    containerRef.current.style.overflow = 'hidden';
-
     const chart = createChart(containerRef.current, {
       layout: { background: { type: ColorType.Solid, color: '#18181b' }, textColor: '#a1a1aa' },
       grid: { vertLines: { color: '#27272a' }, horzLines: { color: '#27272a' } },
@@ -273,7 +268,6 @@ function TriangleChartModal({ stock, onClose }) {
       timeScale: { borderColor: '#3f3f46', timeVisible: true, secondsVisible: false },
     });
     chartRef.current = chart;
-    setContainerMounted(true);
 
     const cSeries = chart.addSeries(CandlestickSeries, {
       upColor: '#22c55e', downColor: '#ef4444',
@@ -360,7 +354,6 @@ function TriangleChartModal({ stock, onClose }) {
       chartRef.current = null;
       upperSerRef.current = null;
       lowerSerRef.current = null;
-      setContainerMounted(false);
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartBars]);
@@ -506,7 +499,8 @@ function TriangleChartModal({ stock, onClose }) {
 
         {/* Chart area */}
         <div className="p-3">
-          <div className="relative rounded-lg overflow-hidden" style={{ minHeight: 440 }}>
+          {/* outerRef: position:relative already via className — used as portal target for handles */}
+          <div ref={outerRef} className="relative rounded-lg overflow-hidden" style={{ minHeight: 440 }}>
             {/* Loading spinner */}
             {!chartBars && (
               <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/80 rounded-lg z-20">
@@ -516,10 +510,13 @@ function TriangleChartModal({ stock, onClose }) {
                 </div>
               </div>
             )}
+            {/* containerRef: plain div, NO extra styles — LWC chart attaches here */}
             <div ref={containerRef} className="w-full"/>
 
-            {/* Drag handles — portalled directly into containerRef so LWC coordinates match exactly */}
-            {containerMounted && containerRef.current && handlePx && createPortal(
+            {/* Drag handles — portalled into outerRef (position:relative, same origin as containerRef)
+                LWC coordinates are relative to containerRef; containerRef sits at (0,0) of outerRef,
+                so the two coordinate spaces are identical. We never mutate containerRef styles. */}
+            {outerRef.current && handlePx && createPortal(
               <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 10 }}>
                 {(['upper', 'lower']).flatMap(line =>
                   (handlePx[line] || []).map((p, i) => {
@@ -548,7 +545,7 @@ function TriangleChartModal({ stock, onClose }) {
                   })
                 )}
               </div>,
-              containerRef.current
+              outerRef.current
             )}
           </div>
 
