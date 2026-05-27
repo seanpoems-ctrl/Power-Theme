@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
-import { createChart, ColorType, CandlestickSeries, LineSeries } from 'lightweight-charts';
+import { createChart, ColorType, CandlestickSeries, LineSeries, HistogramSeries } from 'lightweight-charts';
 import { X, TrendingUp, ChevronDown, BarChart2 } from 'lucide-react';
 
 // ─── Triangle / Pennant Detection ─────────────────────────────────────────────
@@ -197,20 +197,21 @@ function TriangleChartModal({ stock, onClose }) {
           const full = ts.map((t, i) => ({
             t, h: q.high[i], l: q.low[i], c: q.close[i],
             o: q.open?.[i] ?? (i > 0 ? q.close[i - 1] : q.close[i]),
+            v: q.volume?.[i] ?? 0,
           })).filter(b => b.h != null && b.l != null && b.c != null && b.h > 0 && b.l > 0);
           if (full.length >= 10) { setChartBars(full); return; }
         }
         // fallback to bars_30d with sequential timestamps
         setChartBars(bars.map((b, i) => ({
           t: BASE_TIME + i * 86400,
-          o: i > 0 ? bars[i - 1].c : b.c, h: b.h, l: b.l, c: b.c,
+          o: i > 0 ? bars[i - 1].c : b.c, h: b.h, l: b.l, c: b.c, v: b.v ?? 0,
         })));
       })
       .catch(() => {
         if (cancelled) return;
         setChartBars(bars.map((b, i) => ({
           t: BASE_TIME + i * 86400,
-          o: i > 0 ? bars[i - 1].c : b.c, h: b.h, l: b.l, c: b.c,
+          o: i > 0 ? bars[i - 1].c : b.c, h: b.h, l: b.l, c: b.c, v: b.v ?? 0,
         })));
       });
     return () => { cancelled = true; };
@@ -260,7 +261,7 @@ function TriangleChartModal({ stock, onClose }) {
       layout: { background: { type: ColorType.Solid, color: '#18181b' }, textColor: '#a1a1aa' },
       grid: { vertLines: { color: '#27272a' }, horzLines: { color: '#27272a' } },
       width: containerRef.current.clientWidth,
-      height: 360,
+      height: 440,
       rightPriceScale: { borderColor: '#3f3f46' },
       timeScale: { borderColor: '#3f3f46', timeVisible: true, secondsVisible: false },
     });
@@ -310,6 +311,25 @@ function TriangleChartModal({ stock, onClose }) {
       { time: getT(initL[1].barIdx), value: initL[1].price },
     ]);
     lowerSerRef.current = lSer;
+
+    // ── Volume histogram (pane 1) ────────────────────────────────────────────
+    const hasVolume = chartBars.some(b => (b.v ?? 0) > 0);
+    if (hasVolume) {
+      const volSer = chart.addSeries(HistogramSeries, {
+        priceFormat: { type: 'volume' },
+        priceScaleId: 'vol',
+        lastValueVisible: false,
+        priceLineVisible: false,
+      }, 1); // second pane
+      volSer.priceScale().applyOptions({
+        scaleMargins: { top: 0.1, bottom: 0 },
+      });
+      volSer.setData(chartBars.map(b => ({
+        time: b.t,
+        value: b.v ?? 0,
+        color: (b.c >= b.o) ? 'rgba(34,197,94,0.45)' : 'rgba(239,68,68,0.45)',
+      })));
+    }
 
     chart.timeScale().fitContent();
 
@@ -477,7 +497,7 @@ function TriangleChartModal({ stock, onClose }) {
 
         {/* Chart area */}
         <div className="p-3">
-          <div className="relative rounded-lg overflow-hidden" style={{ minHeight: 360 }}>
+          <div className="relative rounded-lg overflow-hidden" style={{ minHeight: 440 }}>
             {/* Loading spinner */}
             {!chartBars && (
               <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/80 rounded-lg z-20">
