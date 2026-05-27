@@ -2,71 +2,60 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 5,
+  "count": 4,
   "stocks": [
     {
-      "ticker": "WGRX",
-      "company": "Wellgistics Health, Inc.",
-      "industry": "Medical Distributors",
-      "price": 3.82,
-      "change_pct": 4519.11,
-      "adr_pct": 8.6,
-      "market_cap_b": 0.01,
-      "rs_ibd": 99,
-      "atr_ext_val": 523.1
+      "ticker": "SDOT",
+      "company": "Sadot Group Inc.",
+      "industry": "Restaurants",
+      "price": 2.87,
+      "change_pct": 1888.91,
+      "adr_pct": 11.6,
+      "market_cap_b": 0.002,
+      "rs_ibd": 6,
+      "atr_ext_val": 162.32
     },
     {
-      "ticker": "VSA",
-      "company": "VisionSys AI Inc.",
-      "industry": "Miscellaneous Commercial Services",
-      "price": 3.97,
-      "change_pct": 1121.91,
-      "adr_pct": 9.7,
-      "market_cap_b": 0.015,
-      "rs_ibd": 58,
-      "atr_ext_val": 115.82
+      "ticker": "CUPR",
+      "company": "Cuprina Holdings (Cayman) Limited",
+      "industry": "Pharmaceuticals: Major",
+      "price": 2.21,
+      "change_pct": 803.34,
+      "adr_pct": 8.5,
+      "market_cap_b": 0.042,
+      "rs_ibd": 98,
+      "atr_ext_val": 93.99
     },
     {
-      "ticker": "AIMD",
-      "company": "Ainos, Inc.",
-      "industry": "Electronic Equipment/Instruments",
-      "price": 3.16,
-      "change_pct": 106.54,
-      "adr_pct": 8.6,
-      "market_cap_b": 0.013,
-      "rs_ibd": 77,
-      "atr_ext_val": 12.43
-    },
-    {
-      "ticker": "MNTS",
-      "company": "Momentus Inc.",
+      "ticker": "ASTC",
+      "company": "Astrotech Corporation",
       "industry": "Aerospace & Defense",
-      "price": 15.48,
-      "change_pct": 109.76,
-      "adr_pct": 9.9,
-      "market_cap_b": 0.074,
-      "rs_ibd": 89,
-      "atr_ext_val": 11.12
+      "price": 13.81,
+      "change_pct": 459.11,
+      "adr_pct": 10.8,
+      "market_cap_b": 0.004,
+      "rs_ibd": 98,
+      "atr_ext_val": 42.69
     },
     {
-      "ticker": "VCIG",
-      "company": "VCI Global Limited",
-      "industry": "Miscellaneous Commercial Services",
-      "price": 2.9,
-      "change_pct": 118.05,
-      "adr_pct": 10.7,
-      "market_cap_b": 0.009,
-      "rs_ibd": 1,
-      "atr_ext_val": 11.01
+      "ticker": "QTTB",
+      "company": "Q32 Bio Inc.",
+      "industry": "Biotechnology",
+      "price": 12.85,
+      "change_pct": 81.24,
+      "adr_pct": 8.1,
+      "market_cap_b": 0.218,
+      "rs_ibd": 97,
+      "atr_ext_val": 10.01
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.61,
-    "spx_1m": 4.81,
-    "spx_3m": 8.25,
-    "spx_34d": 10.86,
-    "spx_qtd": 14.35,
-    "spx_mtd": 4.0
+    "spx_1d": 0.02,
+    "spx_1m": 5.34,
+    "spx_3m": 8.85,
+    "spx_34d": 10.19,
+    "spx_qtd": 14.37,
+    "spx_mtd": 4.01
   },
-  "fetched_at_utc": "2026-05-26T21:54:15+00:00"
+  "fetched_at_utc": "2026-05-27T21:53:50+00:00"
 }
