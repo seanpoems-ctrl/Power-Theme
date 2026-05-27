@@ -1388,6 +1388,14 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     return [...activeData].sort((a, b) => {
       for (let i = 0; i < sortPriority.length; i++) {
         const { key, direction } = sortPriority[i];
+        // String sort for name column
+        if (key === 'name') {
+          const sa = (a.name ?? '').toLowerCase();
+          const sb = (b.name ?? '').toLowerCase();
+          if (sa === sb) continue;
+          const cmp = sa < sb ? -1 : 1;
+          return direction === 'asc' ? cmp : -cmp;
+        }
         let va = key === 'rs_score' ? (themeAvgRS[a.name?.toLowerCase()] ?? 0) : (a[key] ?? 0);
         let vb = key === 'rs_score' ? (themeAvgRS[b.name?.toLowerCase()] ?? 0) : (b[key] ?? 0);
         if (i === 0 && LB_PERF_COLS.has(key)) {
@@ -1421,20 +1429,23 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     return m;
   }, [industryRankings]);
 
-  const LBSortHeader = ({ k, label, w }) => {
+  const LBSortHeader = ({ k, label, w, align = 'center' }) => {
     const priIdx = sortPriority.findIndex(p => p.key === k);
     const isActive = priIdx >= 0;
     const dir = isActive ? sortPriority[priIdx].direction : null;
     const isPrimary = priIdx === 0;
     const isSecondary = priIdx === 1;
     const isBlocked = LB_PERF_COLS.has(k) && LB_PERF_COLS.has(primaryKey) && !isPrimary;
+    const textAlign = align === 'left' ? 'text-left' : 'text-center';
     return (
       <th onClick={e => handleLBSort(k, e.shiftKey)}
-        className={`px-1 py-2 text-center cursor-pointer select-none ${w || 'w-12'} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500 hover:text-zinc-300'}`}>
-        <span className="inline-flex items-center justify-center gap-0.5 text-[11px] font-semibold uppercase tracking-wider">
+        className={`px-1 py-2 ${textAlign} cursor-pointer select-none ${w || 'w-12'} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500 hover:text-zinc-300'}`}>
+        <span className={`inline-flex items-center ${align === 'left' ? 'justify-start' : 'justify-center'} gap-0.5 text-[11px] font-semibold uppercase tracking-wider`}>
           {label}
-          {isPrimary   && <span className="text-[11px] text-blue-400/70">①{dir === 'desc' ? '▼' : '▲'}</span>}
-          {isSecondary && <span className="text-[11px] text-violet-400/70">②{dir === 'desc' ? '▼' : '▲'}</span>}
+          {isPrimary   ? <span className="text-[11px] text-blue-400/70">①{dir === 'desc' ? '▼' : '▲'}</span>
+          : isSecondary ? <span className="text-[11px] text-violet-400/70">②{dir === 'desc' ? '▼' : '▲'}</span>
+          : !isBlocked  ? <span className="text-[10px] opacity-30">⬍</span>
+          : null}
         </span>
       </th>
     );
@@ -1448,7 +1459,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         <span className="text-[13px] font-semibold text-zinc-300 whitespace-nowrap">Theme Leaderboard</span>
         <span className="text-[11px] text-zinc-600">Top 5 of {ranked.length} themes</span>
         <UpdatedAt ts={generatedAt}/>
-        {secondaryKey && (
+        {(secondaryKey || primaryKey !== 'rs_score') && (
           <button onClick={() => setSortPriority([{ key: 'rs_score', direction: 'desc' }])}
             className="text-[11px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">
             ✕ Reset
@@ -1468,15 +1479,20 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         <table className="w-full text-left">
           <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
             <tr className="border-b border-zinc-800/60">
-              <th className="px-2 py-2 w-6 text-[11px] text-zinc-600 select-none whitespace-nowrap">#</th>
-              <th className="px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">Theme</th>
+              <th
+                title="Reset to default sort"
+                onClick={() => setSortPriority([{ key: 'rs_score', direction: 'desc' }])}
+                className="px-2 py-2 w-6 text-[11px] text-zinc-600 select-none whitespace-nowrap cursor-pointer hover:text-zinc-400 transition-colors">#</th>
+              <LBSortHeader k="name" label="Theme" w="min-w-[120px]" align="left" />
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
               <th onClick={e => handleLBSort('rs_score', e.shiftKey)}
                 className={`px-1 py-2 text-center cursor-pointer select-none w-14 ${sortPriority[0]?.key === 'rs_score' ? 'text-blue-400' : 'text-zinc-500 hover:text-zinc-300'}`}>
                 <div className="flex flex-col items-center gap-0.5">
                   <span className="inline-flex items-center gap-0.5 text-[11px] font-semibold uppercase tracking-wider">
                     RS
-                    {sortPriority[0]?.key === 'rs_score' && <span className="text-[11px] text-blue-400/70">①{sortPriority[0].direction === 'desc' ? '▼' : '▲'}</span>}
+                    {sortPriority[0]?.key === 'rs_score'
+                      ? <span className="text-[11px] text-blue-400/70">①{sortPriority[0].direction === 'desc' ? '▼' : '▲'}</span>
+                      : <span className="text-[10px] opacity-30">⬍</span>}
                   </span>
                   <div className="flex gap-0.5" onClick={e => e.stopPropagation()}>
                     {RS_MODES.map(m => (
