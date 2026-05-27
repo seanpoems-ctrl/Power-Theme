@@ -361,6 +361,11 @@ function TriangleChartModal({ stock, onClose }) {
     dragging.current = { line, ptIdx };
     const key = `${line}-${ptIdx}`;
 
+    // Lock chart pan/zoom so it doesn't move while we drag a handle
+    if (chartRef.current) {
+      chartRef.current.applyOptions({ handleScroll: false, handleScale: false });
+    }
+
     const onMove = (ev) => {
       if (!dragging.current || !containerRef.current || !chartRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
@@ -401,6 +406,10 @@ function TriangleChartModal({ stock, onClose }) {
 
     const onUp = () => {
       dragging.current = null;
+      // Re-enable chart pan/zoom
+      if (chartRef.current) {
+        chartRef.current.applyOptions({ handleScroll: true, handleScale: true });
+      }
       setDragOverride(null); // Remove mouse-position override; snap handle to final bar position
       computeHandles();
       saveLines(stock.ticker, chartBarsLenRef.current, upperPtsRef.current, lowerPtsRef.current);
