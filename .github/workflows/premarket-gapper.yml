@@ -114,6 +114,7 @@ jobs:
         run: python earnings_calendar.py
         env:
           CI: true
+          FINNHUB_KEY: ${{ secrets.FINNHUB_KEY }}
 
       # 把最新的 gapper_data.json 存回 repo，讓 daily scrape build 也能用到新資料
       - name: Commit gapper data to repo
