@@ -4,6 +4,7 @@ import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-tabl
 import useMarketStore from "./useMarketStore";
 import GlobalAlertBanner from "./GlobalAlertBanner";
 import MarketBreadthMonitor from "./MarketBreadthMonitor";
+import FlaggingStocksBox from "./FlaggingStocksBox";
 
 // ── Language context (ZH / EN toggle) ────────────────────────────────────────
 const LangCtx = React.createContext('zh');
@@ -8137,6 +8138,7 @@ const filtered = useMemo(() => {
 
           {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
           <aside className="w-[280px] flex-shrink-0 flex flex-col gap-3">
+            <FlaggingStocksBox data={data}/>
           </aside>
 
         </div>
