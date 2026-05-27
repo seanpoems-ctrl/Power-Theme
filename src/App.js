@@ -1336,26 +1336,52 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
   const primaryKey = sortPriority[0]?.key;
   const secondaryKey = sortPriority[1]?.key;
 
-  // Build theme name → avg rs_52w map from actual stock data
+  // Build theme name → IBD-style RS rank (1–99) from actual stock data.
+  // 52W: average of each stock's rs_52w (already a 1–99 TradingView score).
+  // 1D/1W/1M/3M/6M: compute each theme's avg perf for that period, then
+  //   percentile-rank ALL themes against each other → 1–99 (IBD methodology).
   const themeAvgRS = useMemo(() => {
     const map = {};
     const mode = RS_MODES.find(m => m.key === rsMode) ?? RS_MODES[RS_MODES.length - 1];
-    const spyVal = mode.spyKey ? (spyBenchmarks?.[mode.spyKey] ?? null) : null;
+
+    // Step 1 — raw score per theme
+    const rawScores = {}; // name.toLowerCase() → number | null
     for (const theme of (themes || [])) {
       const norm = normalizeTheme(theme);
       const stocks = norm.subthemes.flatMap(s => s.stocks);
       if (rsMode === '52w') {
         const vals = stocks.map(s => s.rs_52w).filter(v => v != null);
-        map[norm.name.toLowerCase()] = vals.length ? Math.round(vals.reduce((a, v) => a + v, 0) / vals.length) : null;
+        rawScores[norm.name.toLowerCase()] = vals.length
+          ? vals.reduce((a, v) => a + v, 0) / vals.length
+          : null;
       } else {
         const vals = stocks.map(s => s[mode.perfKey]).filter(v => v != null);
-        if (!vals.length) { map[norm.name.toLowerCase()] = null; continue; }
-        const avg = vals.reduce((a, v) => a + v, 0) / vals.length;
-        map[norm.name.toLowerCase()] = spyVal != null ? Math.round((avg - spyVal) * 10) / 10 : Math.round(avg * 10) / 10;
+        rawScores[norm.name.toLowerCase()] = vals.length
+          ? vals.reduce((a, v) => a + v, 0) / vals.length
+          : null;
       }
     }
+
+    if (rsMode === '52w') {
+      // 52W: already on a 1–99 scale — just round
+      for (const [k, v] of Object.entries(rawScores)) {
+        map[k] = v != null ? Math.round(v) : null;
+      }
+    } else {
+      // Non-52W: percentile-rank themes 1–99 (IBD style)
+      const valid = Object.entries(rawScores).filter(([, v]) => v != null);
+      const n = valid.length;
+      if (n > 0) {
+        const sorted = [...valid].sort((a, b) => a[1] - b[1]); // ascending
+        sorted.forEach(([key], i) => {
+          // rank: 1 (worst) … 99 (best)
+          map[key] = Math.round(1 + (i / Math.max(n - 1, 1)) * 98);
+        });
+      }
+      // themes with null score stay absent from map → rendered as '—'
+    }
     return map;
-  }, [themes, rsMode, spyBenchmarks]);
+  }, [themes, rsMode]);
 
   const ranked = useMemo(() => {
     if (!activeData || !activeData.length) return [];
@@ -1529,12 +1555,14 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
                   {(() => {
                     const rsVal = themeAvgRS[t.name?.toLowerCase()];
+                    // All modes now return a 1–99 IBD-style percentile rank
                     const cls = rsVal == null ? 'text-zinc-600'
-                      : rsMode === '52w' ? (rsVal >= 85 ? 'text-emerald-400' : 'text-red-400')
-                      : (rsVal > 0 ? 'text-emerald-400' : rsVal < 0 ? 'text-red-400' : 'text-zinc-400');
-                    const display = rsVal == null ? '—'
-                      : rsMode === '52w' ? rsVal
-                      : (rsVal > 0 ? `+${rsVal}` : `${rsVal}`);
+                      : rsVal >= 90 ? 'text-emerald-300'
+                      : rsVal >= 70 ? 'text-emerald-500'
+                      : rsVal >= 50 ? 'text-zinc-300'
+                      : rsVal >= 30 ? 'text-orange-400'
+                      : 'text-red-400';
+                    const display = rsVal == null ? '—' : rsVal;
                     return <td className={`px-1 py-1.5 align-middle text-center text-[11px] font-mono font-bold ${cls}`}>{display}</td>;
                   })()}
                 </tr>
