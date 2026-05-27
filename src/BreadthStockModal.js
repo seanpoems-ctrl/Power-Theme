@@ -1067,11 +1067,13 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedStock, setSelectedStock] = useState(null);
+  const [archiveRawCount, setArchiveRawCount] = useState(null); // null = live, 0+ = archive raw count
   const abortRef = useRef(null);
 
   const load = useCallback(async () => {
     setLoading(true);
     setError(null);
+    setArchiveRawCount(null);
     abortRef.current?.abort();
     const ctrl = new AbortController();
     abortRef.current = ctrl;
@@ -1089,6 +1091,7 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
       );
       const data = await res.json();
       const raw = data.filters?.[filter] ?? [];
+      setArchiveRawCount(raw.length);
       setStocks(raw.map(normalizeHistoricalStock));
       setSpxData(null);
     };
@@ -1251,6 +1254,16 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
               >
                 Retry
               </button>
+            </div>
+          ) : !isLatest && archiveRawCount === 0 ? (
+            /* Archive existed but filter had 0 stocks — data wasn't captured that run */
+            <div className="flex h-full flex-col items-center justify-center gap-3 px-8 text-center">
+              <p className="text-sm font-medium text-zinc-400">No data captured for this filter on {date}</p>
+              <p className="text-xs text-zinc-600 leading-relaxed max-w-sm">
+                The scraper ran on this date but returned 0 stocks for <span className="text-zinc-400 font-mono">{filterLabel}</span>.
+                This can happen when Finviz was temporarily unavailable, the market was closed, or this filter
+                was not yet included in the scraper at the time.
+              </p>
             </div>
           ) : view === "list" ? (
             <ListView stocks={displayStocks} filter={filter} onStockClick={setSelectedStock} spxData={spxData} />
