@@ -133,6 +133,8 @@ function TriangleChartModal({ stock, onClose }) {
   const [lowerPts, setLowerPts] = useState(null);
   const [handlePx, setHandlePx] = useState(null);
   const [hasSaved, setHasSaved] = useState(() => !!localStorage.getItem(lsKey(stock.ticker)));
+  // During drag: override handle pixel position with raw mouse coords (no bar-snapping)
+  const [dragOverride, setDragOverride] = useState(null); // { key: string, pos: {x,y} }
 
   const bars = useMemo(() => stock.bars_30d || [], [stock]);
   const triangle = useMemo(() => detectTriangle(bars), [bars]);
@@ -312,7 +314,8 @@ function TriangleChartModal({ stock, onClose }) {
       { time: getT(lowerPts[0].barIdx), value: lowerPts[0].price },
       { time: getT(lowerPts[1].barIdx), value: lowerPts[1].price },
     ]);
-    computeHandles();
+    // Skip recomputing handle pixels while dragging — dragOverride is used instead
+    if (!dragging.current) computeHandles();
   }, [upperPts, lowerPts, computeHandles]);
 
   // ── Drag interaction ─────────────────────────────────────────────────────
@@ -320,19 +323,23 @@ function TriangleChartModal({ stock, onClose }) {
     e.preventDefault();
     e.stopPropagation();
     dragging.current = { line, ptIdx };
+    const key = `${line}-${ptIdx}`;
 
     const onMove = (ev) => {
       if (!dragging.current || !containerRef.current || !chartRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      const y = ev.clientY - rect.top;
-      const x = ev.clientX - rect.left;
+      const mouseX = ev.clientX - rect.left;
+      const mouseY = ev.clientY - rect.top;
+
+      // 1. Move the visible handle dot exactly with the mouse (no snapping)
+      setDragOverride({ key, pos: { x: mouseX, y: mouseY } });
+
+      // 2. Update the trendline in the chart (price + bar conversion happens here)
       const ser = dragging.current.line === 'upper' ? upperSerRef.current : lowerSerRef.current;
       if (!ser) return;
-
-      const price = ser.coordinateToPrice(y);
+      const price = ser.coordinateToPrice(mouseY);
       if (price == null) return;
-
-      const rawTime = chartRef.current.timeScale().coordinateToTime(x);
+      const rawTime = chartRef.current.timeScale().coordinateToTime(mouseX);
       const barIdx = rawTime != null ? timeToIdx(rawTime) : null;
 
       const setter = dragging.current.line === 'upper' ? setUpperPts : setLowerPts;
@@ -344,7 +351,7 @@ function TriangleChartModal({ stock, onClose }) {
           barIdx: barIdx ?? next[dragging.current.ptIdx].barIdx,
           price,
         };
-        // Update series directly for smooth real-time dragging
+        // Update chart series directly (bypasses React render cycle for smooth line)
         if (serRef.current) {
           const getT = idx => timesRef.current[idx] ?? BASE_TIME + idx * 86400;
           serRef.current.setData([
@@ -358,6 +365,7 @@ function TriangleChartModal({ stock, onClose }) {
 
     const onUp = () => {
       dragging.current = null;
+      setDragOverride(null); // Remove mouse-position override; snap handle to final bar position
       computeHandles();
       saveLines(stock.ticker, chartBarsLenRef.current, upperPtsRef.current, lowerPtsRef.current);
       setHasSaved(true);
@@ -440,24 +448,30 @@ function TriangleChartModal({ stock, onClose }) {
             {handlePx && (
               <div className="absolute inset-0" style={{ pointerEvents: 'none', zIndex: 10 }}>
                 {(['upper', 'lower']).flatMap(line =>
-                  (handlePx[line] || []).map((p, i) => p ? (
-                    <div
-                      key={`${line}-${i}`}
-                      style={{
-                        position: 'absolute',
-                        left: p.x - 7, top: p.y - 7,
-                        width: 14, height: 14,
-                        borderRadius: '50%',
-                        background: line === 'upper' ? '#ef4444' : '#22c55e',
-                        border: '2px solid rgba(255,255,255,0.85)',
-                        cursor: 'grab',
-                        pointerEvents: 'auto',
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.6)',
-                        userSelect: 'none',
-                      }}
-                      onMouseDown={ev => onHandleMouseDown(line, i, ev)}
-                    />
-                  ) : null)
+                  (handlePx[line] || []).map((p, i) => {
+                    if (!p) return null;
+                    const key = `${line}-${i}`;
+                    // While dragging this handle, use raw mouse position (no bar-snapping)
+                    const pos = (dragOverride?.key === key) ? dragOverride.pos : p;
+                    return (
+                      <div
+                        key={key}
+                        style={{
+                          position: 'absolute',
+                          left: pos.x - 7, top: pos.y - 7,
+                          width: 14, height: 14,
+                          borderRadius: '50%',
+                          background: line === 'upper' ? '#ef4444' : '#22c55e',
+                          border: '2px solid rgba(255,255,255,0.85)',
+                          cursor: dragOverride?.key === key ? 'grabbing' : 'grab',
+                          pointerEvents: 'auto',
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.6)',
+                          userSelect: 'none',
+                        }}
+                        onMouseDown={ev => onHandleMouseDown(line, i, ev)}
+                      />
+                    );
+                  })
                 )}
               </div>
             )}
