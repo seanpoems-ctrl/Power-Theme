@@ -196,7 +196,8 @@ function TriangleChartModal({ stock, onClose }) {
   }, [stock.ticker]);
 
   const computeHandles = useCallback(() => {
-    if (!chartRef.current || !upperSerRef.current || !lowerSerRef.current) return;
+    // Skip while dragging — dragOverride provides real-time position
+    if (!chartRef.current || !upperSerRef.current || !lowerSerRef.current || dragging.current) return;
     const uPts = upperPtsRef.current;
     const lPts = lowerPtsRef.current;
     if (!uPts || !lPts) return;
@@ -210,7 +211,18 @@ function TriangleChartModal({ stock, onClose }) {
     const up1 = px(uPts[1].barIdx, uPts[1].price, upperSerRef.current);
     const lo0 = px(lPts[0].barIdx, lPts[0].price, lowerSerRef.current);
     const lo1 = px(lPts[1].barIdx, lPts[1].price, lowerSerRef.current);
-    if (up0 && up1 && lo0 && lo1) setHandlePx({ upper: [up0, up1], lower: [lo0, lo1] });
+    if (up0 && up1 && lo0 && lo1) {
+      // Bail out if all positions moved < 0.5px — avoids unnecessary re-renders
+      setHandlePx(prev => {
+        if (prev &&
+          Math.abs(prev.upper[0].x - up0.x) < 0.5 && Math.abs(prev.upper[0].y - up0.y) < 0.5 &&
+          Math.abs(prev.upper[1].x - up1.x) < 0.5 && Math.abs(prev.upper[1].y - up1.y) < 0.5 &&
+          Math.abs(prev.lower[0].x - lo0.x) < 0.5 && Math.abs(prev.lower[0].y - lo0.y) < 0.5 &&
+          Math.abs(prev.lower[1].x - lo1.x) < 0.5 && Math.abs(prev.lower[1].y - lo1.y) < 0.5
+        ) return prev;
+        return { upper: [up0, up1], lower: [lo0, lo1] };
+      });
+    }
   }, []);
 
   // ── Build chart once chartBars are ready ─────────────────────────────────
@@ -278,19 +290,21 @@ function TriangleChartModal({ stock, onClose }) {
     lowerSerRef.current = lSer;
 
     chart.timeScale().fitContent();
-    chart.timeScale().subscribeVisibleTimeRangeChange(computeHandles);
-    const t = setTimeout(computeHandles, 120);
+
+    // rAF loop: recomputes handle pixel positions every frame.
+    // Handles ALL zoom/pan/price-scale changes without needing separate subscriptions.
+    // Equality check inside computeHandles prevents unnecessary React re-renders.
+    let rafId;
+    const rafLoop = () => { computeHandles(); rafId = requestAnimationFrame(rafLoop); };
+    rafId = requestAnimationFrame(rafLoop);
 
     const ro = new ResizeObserver(() => {
-      if (containerRef.current) {
-        chart.applyOptions({ width: containerRef.current.clientWidth });
-        setTimeout(computeHandles, 50);
-      }
+      if (containerRef.current) chart.applyOptions({ width: containerRef.current.clientWidth });
     });
     ro.observe(containerRef.current);
 
     return () => {
-      clearTimeout(t);
+      cancelAnimationFrame(rafId);
       ro.disconnect();
       chart.remove();
       chartRef.current = null;
