@@ -1,57 +1,57 @@
 {
-  "generated_at": "May 27, 2026 (08:04 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "May 27, 2026 (12:43 EDT)",
+  "session": "Market Hours",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7519.12,
-      "change": 45.65,
-      "change_pct": 0.61
+      "price": 7519.93,
+      "change": 0.81,
+      "change_pct": 0.01
     },
     {
       "label": "Nasdaq 100",
-      "price": 30001.32,
-      "change": 519.68,
-      "change_pct": 1.76
+      "price": 29960.01,
+      "change": -41.31,
+      "change_pct": -0.14
     },
     {
       "label": "VIX",
-      "price": 16.88,
-      "change": -0.13,
+      "price": 16.82,
+      "change": -0.19,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.49,
-      "change": -0.07,
+      "price": 4.48,
+      "change": -0.02,
       "change_pct": null,
-      "trend_label": "Falling"
+      "trend_label": "Stable"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 64999.41,
-      "change_pct": 0.01
+      "price": 64996.09,
+      "change_pct": -0.25
     },
     "dax": {
       "label": "DAX",
-      "price": 25281.67,
-      "change_pct": 0.38
+      "price": 25177.8,
+      "change_pct": -0.03
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10505.62,
-      "change_pct": 0.14
+      "price": 10505.01,
+      "change_pct": 0.13
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 60.2,
-    "mmth": 64.5,
+    "s5fi": 60.5,
+    "mmth": 64.7,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech Momentum Surge",
+  "mood": "Selective Strength Amidst Mixed Indices",
   "analysis": {
-    "action_line": "VIX 16.88 Normal + S5FI 60.2% breadth + DAX +0.38% → trade RS leaders aggressively near support.",
-    "analysis_para1": "Global markets are starting the day with cautious optimism as Nikkei 225 edged up +0.01%, DAX gained +0.38%, and FTSE 100 rose +0.14%. The falling 10Y Yield to 4.49% provides a supportive backdrop for equities, easing bond market pressures, though the BAML HY Spread's unknown status leaves credit sentiment ambiguous. Domestically, market breadth remains constructive, with 60.2% of stocks above their 50-day moving average (S5FI) and 64.5% above their 200-day moving average (MMTH). This solid breadth underpins the Nasdaq 100's robust +1.76% pre-market rally, signaling concentrated strength in growth and tech sectors.",
-    "analysis_para2": "The mechanical plan focuses on confirming strength in the leading indices, with the S&P 500 at 7519.12 requiring a sustained hold above 7500. The Nasdaq 100, now over 30,000 at 30001.32, is the clear market leader, and its ability to maintain this psychological level will be key. Traders should prioritize relative strength (RS) leaders from the Semiconductor and Hardware themes, which continue to exhibit exceptional momentum. Entry points should target early-day pullbacks to key short-term moving averages or prior breakout levels. A decisive break below S&P 7480 or Nasdaq 29,800 would be the first signal to reduce exposure or reassess the bullish bias.",
-    "technical_signal": "No reversal pattern confirmed yet. Market momentum strongly favors the upside, particularly in tech-driven sectors, with indices pushing towards new highs.",
+    "action_line": "VIX 16.82 Normal + S5FI 60.5% breadth + Nikkei -0.25% & FTSE +0.13% → trade RS leaders selectively near support.",
+    "analysis_para1": "Global markets are presenting a mixed picture today, with the Nikkei 225 down 0.25% and the DAX showing a slight decline of 0.03%, while the FTSE 100 ekes out a 0.13% gain. This lack of clear directional consensus internationally is mirrored in the US tape, where the S&P 500 is nearly flat and the Nasdaq 100 shows minor weakness. With the BAML HY Spread regime unknown, credit signals remain opaque. However, underlying market breadth remains healthy, indicated by 60.5% of stocks above their 50-day moving average (S5FI) and 64.7% above their 200-day moving average (MMTH), suggesting resilient internal market structure despite indecisive headline indices.",
+    "analysis_para2": "The mechanical plan for today focuses on monitoring key index levels for signs of conviction. The S&P 500's ability to hold above 7500 is crucial for maintaining bullish sentiment, while the Nasdaq 100 must defend the 29900 level to prevent further erosion of momentum. Traders should look for continued outperformance from high RS leaders, particularly those in the Semiconductor and Hardware themes, on any intraday pullbacks. A clear break and close below these support levels on increased volume would warrant a defensive posture, otherwise, opportunistic buying of strength remains viable.",
+    "technical_signal": "No reversal pattern confirmed yet. The market currently exhibits consolidative action with mixed index performance rather than definitive reversal signals.",
     "ticker_intel": [
-      {
-        "ticker": "WOLF",
-        "company": "Wolfspeed Inc",
-        "grade": "A+",
-        "reason": "WOLF, with an RS of 98 and a staggering 1-month return of +135.3%, is a prime semiconductor leader showing explosive momentum in this risk-on tech environment."
-      },
       {
         "ticker": "MXL",
         "company": "MaxLinear Inc",
+        "grade": "A+",
+        "reason": "MaxLinear Inc (MXL) earns an A+ for its exceptional RS=99 and incredible 3-month return of +426.7%, making it a top-tier Semiconductor leader in this selective strength market."
+      },
+      {
+        "ticker": "AXTI",
+        "company": "AXT Inc",
         "grade": "A",
-        "reason": "MXL, boasting an RS of 99 and a phenomenal +426.7% 3-month gain, is a top-tier semiconductor play benefiting from the strong thematic surge."
+        "reason": "AXT Inc (AXTI) is an A-grade Semiconductor pick with RS=99 and a powerful 1-month gain of +74.1%, demonstrating strong relative momentum aligned with market leadership."
       },
       {
         "ticker": "VIAV",
         "company": "Viavi Solutions Inc",
         "grade": "C",
-        "reason": "While VIAV has an RS of 98, its +12.7% 1-month return is comparatively modest among this high-flying list, making it a weaker leader within the current concentrated tech surge."
+        "reason": "Viavi Solutions Inc (VIAV) receives a C grade despite its RS=98 as its +12.7% 1-month return lags significantly behind the top-performing themes, indicating relative underperformance within strong candidates."
       }
     ]
   }
