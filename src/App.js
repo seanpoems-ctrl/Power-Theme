@@ -1223,6 +1223,7 @@ const RS_MODES = [
 
 const EtfHoldingsPopup = ({ etfTicker, holdingsData = {}, onClose }) => {
   const holdings = holdingsData[etfTicker] ?? null;
+  const [sort, setSort] = useState({ col: 'weight', dir: 'desc' });
 
   useEffect(() => {
     const handler = e => { if (e.key === "Escape") onClose(); };
@@ -1230,38 +1231,121 @@ const EtfHoldingsPopup = ({ etfTicker, holdingsData = {}, onClose }) => {
     return () => document.removeEventListener("keydown", handler);
   }, [onClose]);
 
+  const handleSort = col => setSort(prev =>
+    prev.col === col ? { col, dir: prev.dir === 'desc' ? 'asc' : 'desc' } : { col, dir: 'desc' }
+  );
+
+  const sorted = useMemo(() => {
+    if (!holdings?.length) return [];
+    const { col, dir } = sort;
+    return [...holdings].sort((a, b) => {
+      const av = a[col], bv = b[col];
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      if (typeof av === 'string') return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      return dir === 'asc' ? av - bv : bv - av;
+    });
+  }, [holdings, sort]);
+
+  const SortHdr = ({ col, label, align = 'right' }) => (
+    <th
+      className={`px-3 py-2 font-medium cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap text-${align} text-[11px] uppercase tracking-wider`}
+      onClick={() => handleSort(col)}
+    >
+      {label}{sort.col === col ? (sort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+    </th>
+  );
+
   return (
     <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
-      <div className="relative w-full max-w-xl max-h-[80vh] bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl flex flex-col overflow-hidden" onClick={e => e.stopPropagation()}>
+      <div className="relative w-full max-w-5xl max-h-[80vh] bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl flex flex-col overflow-hidden" onClick={e => e.stopPropagation()}>
+
+        {/* ── Header ── */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 shrink-0">
           <div className="flex items-center gap-2">
             <span className="text-sm font-semibold text-zinc-100">{etfTicker} · Top Holdings</span>
-            {holdings && <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{holdings.length} holdings · sorted by weight</span>}
+            {holdings && (
+              <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">
+                {holdings.length} holdings · sorted by weight
+              </span>
+            )}
           </div>
           <button onClick={onClose} className="text-zinc-500 hover:text-zinc-300 transition-colors p-1 rounded hover:bg-zinc-800">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
           </button>
         </div>
-        <div className="overflow-y-auto flex-1 px-2 py-1">
+
+        {/* ── Table ── */}
+        <div className="overflow-y-auto flex-1">
           {!holdings || holdings.length === 0 ? (
             <div className="text-[12px] text-zinc-500 text-center py-10">No holdings data</div>
           ) : (
-            <table className="w-full border-collapse text-left text-xs">
-              <thead className="sticky top-0 bg-zinc-900 z-10">
-                <tr className="border-b border-zinc-800 text-zinc-500">
-                  <th className="w-8 py-2 pr-2 text-right font-medium">#</th>
-                  <th className="px-2 py-2 font-medium">Ticker</th>
-                  <th className="px-2 py-2 font-medium">Name</th>
-                  <th className="px-2 py-2 font-medium text-right">Weight %</th>
+            <table className="w-full border-collapse text-xs">
+              <thead className="sticky top-0 bg-zinc-900 z-10 border-b border-zinc-800 text-zinc-500">
+                <tr>
+                  <SortHdr col="ticker"        label="Ticker"   align="left" />
+                  <SortHdr col="name"          label="Company"  align="left" />
+                  <SortHdr col="price"         label="Price"    />
+                  <SortHdr col="perf_1d"       label="1D"       />
+                  <SortHdr col="perf_1w"       label="1W"       />
+                  <SortHdr col="perf_1m"       label="1M"       />
+                  <SortHdr col="dollar_volume" label="$Vol"     />
+                  <SortHdr col="rs"            label="RS"       />
+                  <SortHdr col="adr_pct"       label="ADR%"     />
+                  <SortHdr col="weight"        label="Weight %"  />
                 </tr>
               </thead>
-              <tbody>
-                {holdings.map((h, i) => (
-                  <tr key={i} className="border-b border-zinc-800/50 hover:bg-zinc-800/30">
-                    <td className="py-1.5 pr-2 text-right font-mono text-zinc-600">{i + 1}</td>
-                    <td className="px-2 py-1.5 font-mono font-semibold text-blue-400">{h.ticker || '—'}</td>
-                    <td className="px-2 py-1.5 text-zinc-300 max-w-[240px] truncate">{h.name || '—'}</td>
-                    <td className="px-2 py-1.5 text-right font-mono text-emerald-400 font-semibold">{h.weight.toFixed(2)}%</td>
+              <tbody className="divide-y divide-zinc-800/40">
+                {sorted.map((h, i) => (
+                  <tr key={i} className="hover:bg-zinc-800/30 transition-colors">
+                    {/* Ticker */}
+                    <td className="px-3 py-2">
+                      <a href={`https://finviz.com/quote.ashx?t=${h.ticker}`}
+                         target="_blank" rel="noreferrer"
+                         className="font-mono font-bold text-sky-400 hover:text-sky-300 transition-colors"
+                         onClick={e => e.stopPropagation()}>
+                        {h.ticker || '—'}
+                      </a>
+                    </td>
+                    {/* Company — TradingView full name, ETF abbreviated name as fallback */}
+                    <td className="px-3 py-2 text-zinc-300 truncate max-w-[200px]">{h.name || '—'}</td>
+                    {/* Price */}
+                    <td className="px-3 py-2 text-right font-mono text-zinc-200">
+                      {h.price != null ? `$${h.price.toFixed(2)}` : '—'}
+                    </td>
+                    {/* 1D */}
+                    <td className={`px-3 py-2 text-right font-mono font-bold ${(h.perf_1d ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                      {h.perf_1d != null ? `${h.perf_1d >= 0 ? '+' : ''}${h.perf_1d.toFixed(1)}%` : '—'}
+                    </td>
+                    {/* 1W */}
+                    <td className={`px-3 py-2 text-right font-mono ${(h.perf_1w ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                      {h.perf_1w != null ? `${h.perf_1w >= 0 ? '+' : ''}${h.perf_1w.toFixed(1)}%` : '—'}
+                    </td>
+                    {/* 1M */}
+                    <td className={`px-3 py-2 text-right font-mono ${(h.perf_1m ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                      {h.perf_1m != null ? `${h.perf_1m >= 0 ? '+' : ''}${h.perf_1m.toFixed(1)}%` : '—'}
+                    </td>
+                    {/* $Vol */}
+                    <td className="px-3 py-2 text-right font-mono text-zinc-400">
+                      {h.dollar_volume != null ? fmtVol(h.dollar_volume) : '—'}
+                    </td>
+                    {/* RS — 4-tier colouring */}
+                    <td className="px-3 py-2 text-right font-mono">
+                      {h.rs != null
+                        ? <span className={`font-bold ${h.rs >= 90 ? 'text-emerald-300' : h.rs >= 70 ? 'text-emerald-500' : h.rs >= 50 ? 'text-zinc-300' : 'text-zinc-500'}`}>
+                            {h.rs}
+                          </span>
+                        : '—'}
+                    </td>
+                    {/* ADR% */}
+                    <td className="px-3 py-2 text-right font-mono text-zinc-300">
+                      {h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : '—'}
+                    </td>
+                    {/* Weight % */}
+                    <td className="px-3 py-2 text-right font-mono text-emerald-400 font-semibold">
+                      {h.weight != null ? `${h.weight.toFixed(2)}%` : '—'}
+                    </td>
                   </tr>
                 ))}
               </tbody>
