@@ -8429,6 +8429,9 @@ const filtered = useMemo(() => {
               <button onClick={() => setTab("breadth")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "breadth" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Market Breadth
               </button>
+              <button onClick={() => setTab("leaders")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "leaders" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                Thematic Leaders
+              </button>
               <button onClick={() => setTab("news")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "news" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Calendar
               </button>
@@ -8492,7 +8495,11 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
+      {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "leaders" ? (
+        <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-6">
+          <ThematicLeaders etfHoldings={data?.etf_holdings || {}}/>
+        </div>
+      ) : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
@@ -8519,7 +8526,6 @@ const filtered = useMemo(() => {
               onThemeSelect={name => setSpotlightThemeName(name)}
             />}
             {data && <MarketWarnings themes={data.themes}/>}
-            {data?.etf_holdings && <ThematicLeaders etfHoldings={data.etf_holdings}/>}
             <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData}/>
           </main>
 
