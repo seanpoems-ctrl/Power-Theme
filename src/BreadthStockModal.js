@@ -1051,7 +1051,7 @@ function normalizeHistoricalStock(s) {
     market_cap_b:   null,
     perf_1m:        null,
     perf_3m:        null,
-    atr_ext_val:    null,
+    atr_ext_val:    s.ae  ?? null,   // stored in compact archive as "ae"
     above50dma_pct: s.dma ?? null,   // stored in compact archive as "dma" since 2026-05-27
   };
 }

@@ -794,6 +794,7 @@ def _build_compact_history(all_data: dict[str, dict], date_et: str) -> None:
                 "rs":   s.get("rs_ibd"),             # IBD RS 1-99
                 "ind":  s.get("industry") or None,   # Industry group
                 "dma":  s.get("above50dma_pct"),     # % above 50DMA (above50dma filter only)
+                "ae":   s.get("atr_ext_val"),        # ATR extension multiple (atr_ext filter only)
             }
             for s in stocks[:MAX_PER_FILTER]
         ]
