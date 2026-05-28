@@ -5497,31 +5497,35 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
                         onClick={() => handleLtColSort('ticker')}>
                       Ticker{ltSort.col === 'ticker' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
                     </th>
+                    <th className="px-3 py-2 font-medium text-left cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                        onClick={() => handleLtColSort('company')}>
+                      Company{ltSort.col === 'company' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                    </th>
                     <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
                         onClick={() => handleLtColSort('price')}>
                       Price{ltSort.col === 'price' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
                     </th>
                     <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
                         onClick={() => handleLtColSort('change_pct')}>
-                      1D%{ltSort.col === 'change_pct' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                      1D{ltSort.col === 'change_pct' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                    </th>
+                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                        onClick={() => handleLtColSort('perf_1w')}>
+                      1W{ltSort.col === 'perf_1w' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                    </th>
+                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                        onClick={() => handleLtColSort('perf_1m')}>
+                      1M{ltSort.col === 'perf_1m' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
                     </th>
                     <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
                         onClick={() => handleLtColSort('rs_52w')}>
                       RS{ltSort.col === 'rs_52w' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
                     </th>
-                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap hidden md:table-cell"
-                        onClick={() => handleLtColSort('perf_1w')}>
-                      1W%{ltSort.col === 'perf_1w' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                        onClick={() => handleLtColSort('adr_pct')}>
+                      ADR%{ltSort.col === 'adr_pct' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
                     </th>
-                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap hidden md:table-cell"
-                        onClick={() => handleLtColSort('perf_1m')}>
-                      1M%{ltSort.col === 'perf_1m' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
-                    </th>
-                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap hidden md:table-cell"
-                        onClick={() => handleLtColSort('dollar_volume')}>
-                      $Vol{ltSort.col === 'dollar_volume' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
-                    </th>
-                    <th className="px-3 py-2 font-medium text-left hidden md:table-cell">Sub-theme</th>
+                    <th className="px-3 py-2 font-medium text-left">Sub-Theme</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-zinc-800/40">
@@ -5533,25 +5537,25 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
                            onClick={e => e.stopPropagation()}>
                           {s.ticker}
                         </a>
-                        {s.company && <div className="text-[10px] text-zinc-600 truncate max-w-[100px]">{s.company}</div>}
                       </td>
+                      <td className="px-3 py-2 text-zinc-300 truncate max-w-[160px]">{s.company || '—'}</td>
                       <td className="px-3 py-2 text-right font-mono">${s.price != null ? s.price.toFixed(2) : '—'}</td>
                       <td className={`px-3 py-2 text-right font-mono font-bold ${(s.change_pct ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                        {s.change_pct != null ? `${s.change_pct >= 0 ? '+' : ''}${s.change_pct.toFixed(2)}%` : '—'}
+                        {s.change_pct != null ? `${s.change_pct >= 0 ? '+' : ''}${s.change_pct.toFixed(1)}%` : '—'}
                       </td>
-                      <td className="px-3 py-2 text-right font-mono">
-                        {s.rs_52w != null ? <span className={`font-bold ${s.rs_52w >= 90 ? 'text-emerald-400' : s.rs_52w >= 70 ? 'text-zinc-200' : 'text-zinc-500'}`}>{s.rs_52w}</span> : '—'}
-                      </td>
-                      <td className={`px-3 py-2 text-right font-mono hidden md:table-cell ${(s.perf_1w ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                      <td className={`px-3 py-2 text-right font-mono ${(s.perf_1w ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                         {s.perf_1w != null ? `${s.perf_1w >= 0 ? '+' : ''}${s.perf_1w.toFixed(1)}%` : '—'}
                       </td>
-                      <td className={`px-3 py-2 text-right font-mono hidden md:table-cell ${(s.perf_1m ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                      <td className={`px-3 py-2 text-right font-mono ${(s.perf_1m ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                         {s.perf_1m != null ? `${s.perf_1m >= 0 ? '+' : ''}${s.perf_1m.toFixed(1)}%` : '—'}
                       </td>
-                      <td className="px-3 py-2 text-right font-mono text-zinc-400 hidden md:table-cell">
-                        {s.dollar_volume != null ? `$${(s.dollar_volume / 1e6).toFixed(0)}M` : '—'}
+                      <td className="px-3 py-2 text-right font-mono">
+                        {s.rs_52w != null ? <span className={`font-bold ${s.rs_52w >= 90 ? 'text-emerald-300 font-bold' : s.rs_52w >= 70 ? 'text-emerald-500' : s.rs_52w >= 50 ? 'text-zinc-300' : 'text-zinc-500'}`}>{s.rs_52w}</span> : '—'}
                       </td>
-                      <td className="px-3 py-2 text-zinc-500 text-[11px] hidden md:table-cell">{s._subtheme || selectedLeadingTheme.name}</td>
+                      <td className="px-3 py-2 text-right font-mono text-zinc-300">
+                        {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : '—'}
+                      </td>
+                      <td className="px-3 py-2 text-zinc-500 text-[11px]">{s._subtheme || selectedLeadingTheme.name}</td>
                     </tr>
                   ))}
                 </tbody>
