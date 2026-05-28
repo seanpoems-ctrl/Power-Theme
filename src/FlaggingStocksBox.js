@@ -34,44 +34,58 @@ function findSwings(bars, win = 2) {
 
 function detectTriangle(bars) {
   if (!bars || bars.length < 12) return null;
-  const { highs, lows } = findSwings(bars, 2);
-  if (highs.length < 2 || lows.length < 2) return null;
 
-  const rh = highs.slice(-3);
-  const rl = lows.slice(-3);
-  const upper = linReg(rh);
-  const lower = linReg(rl);
-  if (!upper || !lower) return null;
+  // Try win=3 first for cleaner pivots; fall back to win=2 for tight consolidations
+  let highs = [], lows = [];
+  for (const win of [3, 2]) {
+    const s = findSwings(bars, win);
+    if (s.highs.length >= 2 && s.lows.length >= 2) {
+      highs = s.highs; lows = s.lows; break;
+    }
+  }
+  if (highs.length < 2 || lows.length < 2) return null;
 
   const last = bars.length - 1;
   const avgPrice = (bars[last].h + bars[last].l + bars[last].c) / 3;
 
-  const slopeTol = avgPrice * 0.002;
-  if (upper.slope > slopeTol) return null;
-  if (lower.slope < -slopeTol) return null;
+  // Use up to 4 recent pivots for a more robust regression
+  const rh = highs.slice(-4);
+  const rl = lows.slice(-4);
+  const upper = linReg(rh);
+  const lower = linReg(rl);
+  if (!upper || !lower) return null;
 
   const uLast = upper.at(last);
   const lLast = lower.at(last);
   if (uLast <= lLast) return null;
-  if (upper.slope - lower.slope >= 0) return null;
+  // Lines must be converging — no restriction on individual slope direction
+  if (upper.slope >= lower.slope) return null;
 
   const startIdx = Math.min(rh[0].x, rl[0].x);
+  if (last - startIdx < 8) return null;
+
   const rangeAtStart = upper.at(startIdx) - lower.at(startIdx);
   const rangeAtEnd = uLast - lLast;
-  if (rangeAtEnd >= rangeAtStart * 0.90) return null;
+  if (rangeAtStart <= 0 || rangeAtEnd <= 0) return null;
 
-  if (last - startIdx < 5) return null;
+  // Require at least 20% contraction over the visible pattern (was 10%)
+  if (rangeAtEnd >= rangeAtStart * 0.80) return null;
+
+  // Current range must be meaningfully tight relative to price
+  if (rangeAtEnd / avgPrice > 0.25) return null;
 
   const apexX = (lower.intercept - upper.intercept) / (upper.slope - lower.slope);
   const barsToApex = apexX - last;
-  if (barsToApex < 1 || barsToApex > 60) return null;
+  // Allow apex upcoming ≤80 bars, or just-passed ≥−5 bars (breakout candidate)
+  if (barsToApex < -5 || barsToApex > 80) return null;
 
+  // Price should be inside or just touching the boundaries
   const close = bars[last].c;
-  const lastHigh = bars[last].h;
-  if (close > uLast * 1.01 || close < lLast * 0.99) return null;
-  if (lastHigh > uLast * 1.03) return null;
+  const tol = rangeAtEnd * 0.20;
+  if (close > uLast + tol || close < lLast - tol) return null;
+  if (bars[last].h > uLast * 1.05) return null;
 
-  return { upper, lower, startIdx, barsToApex: Math.round(barsToApex) };
+  return { upper, lower, startIdx, barsToApex: Math.max(0, Math.round(barsToApex)) };
 }
 
 // ─── localStorage persistence (time-based offsets so positions survive bar rolls) ──
