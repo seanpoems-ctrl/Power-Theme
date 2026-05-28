@@ -309,6 +309,12 @@ function TriangleChartModal({ stock, onClose }) {
         value: b.v ?? 0,
         color: (b.c >= b.o) ? 'rgba(34,197,94,0.45)' : 'rgba(239,68,68,0.45)',
       })));
+      // Fix pane height ratio: candles 350px, volume 90px
+      const panes = chart.panes();
+      if (panes.length >= 2) {
+        panes[0].setHeight(350);
+        panes[1].setHeight(90);
+      }
     }
 
     chart.timeScale().fitContent();
