@@ -570,10 +570,13 @@ def _enrich_with_yfinance(records: list[dict]) -> list[dict]:
             except Exception:
                 pass
 
-            # ── EPS actual + surprise from earnings_dates ────────────────────
-            # IMPORTANT: only accept actuals whose reported date is on or after
-            # the scheduled earnings date. This prevents showing last quarter's
-            # actuals for a company that hasn't reported yet today.
+            # ── EPS actual + surprise + estimate from earnings_dates ────────
+            # Rules:
+            #   eps_act / eps_surp_pct — only if reported_date >= sched_date
+            #     (company has actually reported this event, not last quarter)
+            #   eps_estimate — from the UPCOMING row closest to sched_date
+            #     (future side of earnings_dates holds the current consensus;
+            #      past.iloc[0] would give last quarter's estimate — wrong)
             eps_act      = None
             eps_surp_pct = None
             sched_date   = _parse_date(rec.get("date"))  # calendar's expected date
@@ -581,11 +584,11 @@ def _enrich_with_yfinance(records: list[dict]) -> list[dict]:
                 ed = t.earnings_dates
                 if ed is not None and not ed.empty:
                     today_aware = pd.Timestamp.now(tz="UTC")
+
+                    # ── Actuals: must come from a past row on/after sched_date ──
                     past = ed[ed.index <= today_aware].sort_index(ascending=False)
                     if not past.empty:
                         reported_date = past.index[0].date()
-                        # Only use actuals if the most recently reported date matches
-                        # this earnings event (within 1 day — same day or next morning).
                         if sched_date and reported_date >= sched_date:
                             row = past.iloc[0]
                             rep_col  = next((c for c in past.columns if "reported" in c.lower()), None)
@@ -594,12 +597,22 @@ def _enrich_with_yfinance(records: list[dict]) -> list[dict]:
                                 eps_act = _safe_float(row[rep_col])
                             if surp_col:
                                 eps_surp_pct = _safe_float(row[surp_col])
-                        # Grab EPS estimate regardless of whether actuals are available
-                        if eps_estimate is None:
-                            row0    = past.iloc[0]
-                            est_col = next((c for c in past.columns if "estimate" in c.lower()), None)
+
+                    # ── Estimate: take from the upcoming row nearest sched_date ──
+                    # yfinance stores the current-quarter consensus in future rows.
+                    # Past rows hold last quarter's estimate — deliberately avoided.
+                    if eps_estimate is None and sched_date:
+                        sched_ts  = pd.Timestamp(sched_date, tz="UTC")
+                        # Look ±14 days around the scheduled date in all rows
+                        window    = ed[
+                            (ed.index >= sched_ts - pd.Timedelta(days=14)) &
+                            (ed.index <= sched_ts + pd.Timedelta(days=14))
+                        ]
+                        if not window.empty:
+                            closest   = window.iloc[(window.index - sched_ts).abs().argsort()[0]]
+                            est_col   = next((c for c in window.columns if "estimate" in c.lower()), None)
                             if est_col:
-                                eps_estimate = _safe_float(row0[est_col])
+                                eps_estimate = _safe_float(closest[est_col])
             except Exception:
                 pass
 
