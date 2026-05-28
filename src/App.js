@@ -1026,6 +1026,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
                       <SortTh col="perf_1d"  label="1D"                               align="right" />
                       <SortTh col="perf_1w"  label="1W"                               align="right" />
                       <SortTh col="perf_1m"  label="1M"                               align="right" />
+                      <SortTh col="dollar_volume" label="$Vol"                          align="right" className="hidden sm:table-cell" />
                       <SortTh col="rs"       label="RS"                               align="right" />
                       <SortTh col="adr_pct"  label="ADR%"                             align="right" className="hidden sm:table-cell" />
                       <th className="text-left px-3 py-2 font-medium hidden md:table-cell">Sub-Theme</th>
@@ -1054,6 +1055,9 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_1d)}</td>
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_1w)}</td>
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_1m)}</td>
+                          <td className="px-3 py-2 text-right font-mono text-zinc-400 hidden sm:table-cell">
+                            {h.dollar_volume != null ? `$${(h.dollar_volume / 1e6).toFixed(0)}M` : '—'}
+                          </td>
                           <td className="px-3 py-2 text-right font-mono">
                             {h.rs != null
                               ? <span className={h.rs >= 80 ? 'text-emerald-400 font-bold' : h.rs >= 60 ? 'text-zinc-200' : 'text-zinc-500'}>{h.rs}</span>
@@ -1077,6 +1081,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
                       <SortTh col="perf_1d"  label="1D"                               align="right" />
                       <SortTh col="perf_1w"  label="1W"                               align="right" />
                       <SortTh col="perf_1m"  label="1M"                               align="right" />
+                      <SortTh col="dollar_volume" label="$Vol"                          align="right" className="hidden sm:table-cell" />
                       <SortTh col="rs_52w"   label="RS"                               align="right" />
                       <SortTh col="adr_pct"  label="ADR%"                             align="right" className="hidden sm:table-cell" />
                       <SortTh col="_subtheme" label="Sub-Theme"                        align="left"  className="hidden md:table-cell" />
@@ -1106,6 +1111,9 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1d)}</td>
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1w)}</td>
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1m)}</td>
+                          <td className="px-3 py-2 text-right font-mono text-zinc-400 hidden sm:table-cell">
+                            {s.dollar_volume != null ? `$${(s.dollar_volume / 1e6).toFixed(0)}M` : '—'}
+                          </td>
                           <td className="px-3 py-2 text-right font-mono">
                             {s.rs_52w != null
                               ? <span className={s.rs_52w >= 80 ? 'text-emerald-400 font-bold' : s.rs_52w >= 60 ? 'text-zinc-200' : 'text-zinc-500'}>{s.rs_52w}</span>
@@ -5518,6 +5526,10 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
                       1M{ltSort.col === 'perf_1m' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
                     </th>
                     <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
+                        onClick={() => handleLtColSort('dollar_volume')}>
+                      $Vol{ltSort.col === 'dollar_volume' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+                    </th>
+                    <th className="px-3 py-2 font-medium text-right cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap"
                         onClick={() => handleLtColSort('rs_52w')}>
                       RS{ltSort.col === 'rs_52w' ? (ltSort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
                     </th>
@@ -5548,6 +5560,9 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
                       </td>
                       <td className={`px-3 py-2 text-right font-mono ${(s.perf_1m ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
                         {s.perf_1m != null ? `${s.perf_1m >= 0 ? '+' : ''}${s.perf_1m.toFixed(1)}%` : '—'}
+                      </td>
+                      <td className="px-3 py-2 text-right font-mono text-zinc-400">
+                        {s.dollar_volume != null ? `$${(s.dollar_volume / 1e6).toFixed(0)}M` : '—'}
                       </td>
                       <td className="px-3 py-2 text-right font-mono">
                         {s.rs_52w != null ? <span className={`font-bold ${s.rs_52w >= 90 ? 'text-emerald-300 font-bold' : s.rs_52w >= 70 ? 'text-emerald-500' : s.rs_52w >= 50 ? 'text-zinc-300' : 'text-zinc-500'}`}>{s.rs_52w}</span> : '—'}
