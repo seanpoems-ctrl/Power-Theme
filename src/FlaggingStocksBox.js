@@ -314,7 +314,7 @@ function TriangleChartModal({ stock, onClose }) {
       if (!document.getElementById('lwc-no-resize')) {
         const s = document.createElement('style');
         s.id = 'lwc-no-resize';
-        s.textContent = 'tr[style*="height: 1px"] td { pointer-events: none !important; cursor: default !important; }';
+        s.textContent = 'tr[style*="height: 1px"] { display: none !important; }';
         document.head.appendChild(s);
       }
     }
