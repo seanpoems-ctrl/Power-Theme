@@ -204,7 +204,7 @@ function TriangleChartModal({ stock, onClose }) {
       { time: lPts[1].time, value: lPts[1].price },
     ]);
 
-    // Volume histogram (pane 1)
+    // Volume histogram (pane 1) — separator locked via enableResize: false
     const hasVolume = chartBars.some(b => (b.v ?? 0) > 0);
     if (hasVolume) {
       const volSer = chart.addSeries(HistogramSeries, {
@@ -223,6 +223,13 @@ function TriangleChartModal({ stock, onClose }) {
       if (panes.length >= 2) {
         panes[0].setHeight(350);
         panes[1].setHeight(90);
+      }
+      // Inject CSS to block separator drag (cursor + pointer-events)
+      if (!document.getElementById('lwc-no-resize')) {
+        const s = document.createElement('style');
+        s.id = 'lwc-no-resize';
+        s.textContent = 'tr[style*="height: 1px"] td { pointer-events: none !important; cursor: default !important; }';
+        document.head.appendChild(s);
       }
     }
 
