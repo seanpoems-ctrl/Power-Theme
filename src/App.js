@@ -5137,7 +5137,14 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
     const norm = allSources.find(t => t.name?.toLowerCase() === themeName.toLowerCase());
     if (!norm) {
       const etfTicker = THEME_ETF_MAP[themeName];
-      const holdings = etfTicker ? ((data?.etf_holdings || {})[etfTicker] ?? []) : [];
+      const rawHoldings = etfTicker ? ((data?.etf_holdings || {})[etfTicker] ?? []) : [];
+      // Normalize ETF holdings field names → same schema as thematic stocks
+      const holdings = rawHoldings.map(h => ({
+        ...h,
+        company:    h.company    ?? h.name,        // ETF uses 'name', modal renders 'company'
+        change_pct: h.change_pct ?? h.perf_1d,     // ETF uses 'perf_1d', modal renders 'change_pct'
+        rs_52w:     h.rs_52w     ?? h.rs,          // ETF uses 'rs', modal renders 'rs_52w'
+      }));
       setSelectedLeadingTheme({ name: themeName, stocks: holdings, inTop5: false, fromEtf: etfTicker || null });
       return;
     }
