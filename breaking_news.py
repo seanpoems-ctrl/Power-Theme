@@ -35,7 +35,7 @@ TELEGRAM_TOKEN  = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT   = os.getenv("TELEGRAM_CHAT_ID", "")
 
 ALERT_THRESHOLD = 9    # Gemini grade >= 9 triggers alert
-HOURS_LOOKBACK  = 2    # Only consider headlines from last N hours
+HOURS_LOOKBACK  = 0.5  # Only consider headlines from last 30 min
 MAX_ALERTS      = 6    # Keep at most N alerts in rolling store
 ALERT_TTL_HOURS = 12   # Expire alerts older than N hours
 
@@ -293,8 +293,8 @@ def is_duplicate_alert(headline: str, existing: dict) -> bool:
 
 
 def expire_seen_keys(seen: list[dict]) -> list[dict]:
-    """Expire seen keys older than 48 hours."""
-    cutoff = datetime.now(timezone.utc) - timedelta(hours=48)
+    """Expire seen keys older than 7 days."""
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=168)
     result = []
     for s in seen:
         try:
