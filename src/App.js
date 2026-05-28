@@ -2648,7 +2648,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
 
       {/* Results */}
       <div className="pt-2 border-t border-zinc-800/60 space-y-2">
-        <div className="grid grid-cols-2 gap-x-3">
+        <div className="grid grid-cols-3 gap-x-3">
           <div>
             <div className="text-[11px] text-zinc-600 mb-0.5">Shares</div>
             <div className="text-[14px] font-mono font-bold text-zinc-100">{shares ?? '—'}</div>
@@ -2656,6 +2656,10 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
           <div>
             <div className="text-[11px] text-zinc-600 mb-0.5">$ at Risk</div>
             <div className="text-[14px] font-mono font-bold text-red-400">{fmtDollar(dollarRisk)}</div>
+          </div>
+          <div>
+            <div className="text-[11px] text-zinc-600 mb-0.5">Pos Size</div>
+            <div className="text-[14px] font-mono font-bold text-zinc-100">{positionValue != null ? fmtDollar(positionValue) : '—'}</div>
           </div>
         </div>
         <div>
