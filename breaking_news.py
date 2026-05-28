@@ -196,14 +196,21 @@ GRADE 9–10 — BULLISH market catalysts (include these):
   - Fed surprise rate cut or QE announcement outside scheduled FOMC
   - Large government funding, investment, or policy mandate for high-growth sectors:
       Quantum Computing, Artificial Intelligence, Semiconductors/Chips, Nuclear/SMR,
-      Space technology, Defense tech, Biotechnology/Pharma
-  - Major breakthrough announcement in any of the above sectors with government backing
+      Space technology, Defense tech, Drones/UAV/Unmanned Systems,
+      Autonomous Vehicles/Robotics, Cybersecurity, Biotechnology/Pharma,
+      Renewable Energy/Clean Tech, Infrastructure/Grid modernization
+  - New government law, executive order, or policy that opens/expands a high-growth sector
+      (e.g. deregulation, new spending bill, national security mandate affecting any sector above)
+  - Major government contract award or procurement program benefiting an ENTIRE sector
+      (e.g. DoD awards $X billion drone fleet contract, Pentagon expands AI procurement)
+  - Major breakthrough announcement in any of the above sectors with government or military backing
 
 GRADE 8 (include only if sector-wide impact, not single-company):
   - FOMC decision that surprises consensus by ≥25bps
   - G7/G20 coordinated sanctions on a major economy
   - Ceasefire collapse / peace deal breakdown in an active war zone
   - Confirmed government ban or restriction on an entire technology sector
+  - New government funding bill or budget allocation ≥$1B for any high-growth sector above
 
 AUTOMATICALLY GRADE 7 OR BELOW — DO NOT INCLUDE:
   - Any individual company earnings, upgrades, downgrades, or price targets
@@ -211,9 +218,14 @@ AUTOMATICALLY GRADE 7 OR BELOW — DO NOT INCLUDE:
   - Nuclear threats or military posturing unless confirmed action taken
   - Oil price moves unless caused by a declared supply disruption
   - Economic data releases (CPI, PPI, jobs) unless they cause an emergency Fed response
-  - Any headline about a single stock, ETF, or sector fund
+  - Contract awards or policy news that only names ONE specific company (not sector-wide)
   - Geopolitical events in regions with no material impact on global trade or supply chains
   - Election results unless they immediately reverse major economic policy
+
+IMPORTANT: Government drone fleet contracts, UAV procurement programs, autonomous weapons \
+policy, DoD AI spending mandates, and similar sector-wide defense-tech catalysts ALWAYS \
+qualify as Grade 9. Do not downgrade these to single-company news unless ONLY one company \
+is mentioned with no broader sector implication.
 
 Headlines:
 {headlines_text}
