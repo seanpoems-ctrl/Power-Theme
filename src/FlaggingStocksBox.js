@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { createChart, ColorType, CandlestickSeries, LineSeries, HistogramSeries } from 'lightweight-charts';
-import { X, ChevronDown, BarChart2 } from 'lucide-react';
+import { X, BarChart2 } from 'lucide-react';
 
 // ─── Triangle / Pennant Detection ─────────────────────────────────────────────
 
@@ -58,13 +58,13 @@ function detectTriangle(bars) {
   const startIdx = Math.min(rh[0].x, rl[0].x);
   const rangeAtStart = upper.at(startIdx) - lower.at(startIdx);
   const rangeAtEnd = uLast - lLast;
-  if (rangeAtEnd >= rangeAtStart * 0.75) return null;
+  if (rangeAtEnd >= rangeAtStart * 0.90) return null;
 
   if (last - startIdx < 5) return null;
 
   const apexX = (lower.intercept - upper.intercept) / (upper.slope - lower.slope);
   const barsToApex = apexX - last;
-  if (barsToApex < 1 || barsToApex > 45) return null;
+  if (barsToApex < 1 || barsToApex > 60) return null;
 
   const close = bars[last].c;
   const lastHigh = bars[last].h;
@@ -534,7 +534,6 @@ function TriangleChartModal({ stock, onClose }) {
 
 export default function FlaggingStocksBox({ data }) {
   const [selectedStock, setSelectedStock] = useState(null);
-  const [collapsed, setCollapsed] = useState(false);
 
   const flagging = useMemo(() => {
     if (!data?.themes) return [];
@@ -560,50 +559,42 @@ export default function FlaggingStocksBox({ data }) {
   return (
     <>
       <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-xl overflow-hidden">
-        <button
-          className="w-full flex items-center justify-between px-3 py-2.5 hover:bg-zinc-800/40 transition-colors"
-          onClick={() => setCollapsed(c => !c)}
-        >
-          <div className="flex items-center gap-2">
-            <BarChart2 size={13} className="text-amber-400"/>
-            <span className="text-[13px] font-semibold text-zinc-200">Flagging</span>
-            <span className="px-1.5 py-0.5 rounded text-[11px] bg-amber-500/20 text-amber-400 font-mono">
-              {flagging.length}
-            </span>
-          </div>
-          <ChevronDown size={13} className={`text-zinc-500 transition-transform ${collapsed ? '-rotate-90' : ''}`}/>
-        </button>
+        <div className="flex items-center gap-2 px-3 py-2.5">
+          <BarChart2 size={13} className="text-amber-400"/>
+          <span className="text-[13px] font-semibold text-zinc-200">Flagging</span>
+          <span className="px-1.5 py-0.5 rounded text-[11px] bg-amber-500/20 text-amber-400 font-mono">
+            {flagging.length}
+          </span>
+        </div>
 
-        {!collapsed && (
-          <div className="px-2 pb-2 flex flex-col gap-0.5 max-h-[420px] overflow-y-auto custom-scrollbar">
-            {flagging.length === 0 ? (
-              <p className="text-[12px] text-zinc-600 px-2 py-3 text-center">No triangles detected</p>
-            ) : (
-              flagging.map(s => (
-                <button
-                  key={s.ticker}
-                  onClick={() => setSelectedStock(s)}
-                  className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-zinc-800/60 transition-colors group"
-                >
-                  <div className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2 min-w-0">
-                      <span className="text-[13px] font-mono font-semibold text-zinc-200 group-hover:text-white shrink-0">
-                        {s.ticker}
-                      </span>
-                      <span className="text-[11px] text-zinc-500 truncate">{s._sub}</span>
-                    </div>
-                    <div className="flex items-center gap-2 shrink-0">
-                      <span className="text-[11px] text-amber-400/80 font-mono">~{s._triangle.barsToApex}d</span>
-                      <span className={`text-[12px] font-mono ${(s.perf_1d ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                        {(s.perf_1d ?? 0) >= 0 ? '+' : ''}{(s.perf_1d ?? 0).toFixed(1)}%
-                      </span>
-                    </div>
+        <div className="px-2 pb-2 flex flex-col gap-0.5 max-h-[420px] overflow-y-auto custom-scrollbar">
+          {flagging.length === 0 ? (
+            <p className="text-[12px] text-zinc-600 px-2 py-3 text-center">No triangles detected</p>
+          ) : (
+            flagging.map(s => (
+              <button
+                key={s.ticker}
+                onClick={() => setSelectedStock(s)}
+                className="w-full text-left px-2 py-1.5 rounded-lg hover:bg-zinc-800/60 transition-colors group"
+              >
+                <div className="flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="text-[13px] font-mono font-semibold text-zinc-200 group-hover:text-white shrink-0">
+                      {s.ticker}
+                    </span>
+                    <span className="text-[11px] text-zinc-500 truncate">{s._sub}</span>
                   </div>
-                </button>
-              ))
-            )}
-          </div>
-        )}
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className="text-[11px] text-amber-400/80 font-mono">~{s._triangle.barsToApex}d</span>
+                    <span className={`text-[12px] font-mono ${(s.perf_1d ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                      {(s.perf_1d ?? 0) >= 0 ? '+' : ''}{(s.perf_1d ?? 0).toFixed(1)}%
+                    </span>
+                  </div>
+                </div>
+              </button>
+            ))
+          )}
+        </div>
       </div>
 
       {selectedStock && (
