@@ -754,25 +754,6 @@ const HeroZone = ({ data, themesCount, tickersCount }) => {
   const [etfChart, setEtfChart] = useState(null);         // { ticker, rect }
   const [etfHoldingsPopup, setEtfHoldingsPopup] = useState(null); // { etf }
 
-  // Column 1: top 3 stocks by RS (deduped across all themes)
-  const top3 = useMemo(() => {
-    if (!data?.themes) return [];
-    const seen = new Set();
-    const stocks = [];
-    for (const t of data.themes) {
-      const norm = t.subthemes ? t : { ...t, subthemes: [{ stocks: t.stocks || [] }] };
-      for (const sub of norm.subthemes) {
-        for (const s of (sub.stocks || [])) {
-          if (!seen.has(s.ticker) && s.rs_52w != null) {
-            seen.add(s.ticker);
-            stocks.push(s);
-          }
-        }
-      }
-    }
-    return stocks.sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0)).slice(0, 3);
-  }, [data]);
-
   // Column 2: ETFs flagged as breakout / support by the scraper
   const etfSignals = useMemo(() => (
     Array.isArray(data?.etf_signals) ? data.etf_signals : []
@@ -781,31 +762,8 @@ const HeroZone = ({ data, themesCount, tickersCount }) => {
   return (
     <>
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', padding: '10px 0 0' }}>
-      {/* ── Col 1: Top 3 RS Leaders ── */}
-      <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg p-3 flex flex-col" style={{ gap: '6px' }}>
-        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider mb-0.5">Top 3 RS Leaders</div>
-        {top3.length === 0 && <span className="text-[11px] text-zinc-600 italic">No data loaded</span>}
-        {top3.map(s => {
-          const gp = s.gates_passed ?? null;
-          return (
-            <div key={s.ticker} className="flex items-center justify-between gap-2">
-              <div className="min-w-0">
-                <span className="text-[13px] font-mono font-bold text-blue-400">{s.ticker}</span>
-                <div className="text-[11px] text-zinc-500 font-mono leading-tight">
-                  {s.price != null ? `$${s.price.toFixed(2)}` : '—'} · {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : '—'} · RS {s.rs_52w ?? '—'}
-                </div>
-              </div>
-              {gp != null && (
-                <span className={`flex-shrink-0 text-[11px] font-mono font-bold px-1.5 py-0.5 rounded border whitespace-nowrap ${
-                  gp === 5 ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
-                  : gp >= 4 ? 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30'
-                  : 'bg-zinc-700/40 text-zinc-500 border-zinc-600/30'
-                }`}>✓ {gp}/5</span>
-              )}
-            </div>
-          );
-        })}
-      </div>
+      {/* ── Col 1: Flagging ── */}
+      <div><FlaggingStocksBox data={data}/></div>
 
       {/* ── Col 2: ETF Breakout / Pullback Leaderboard ── */}
       <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg p-3 flex flex-col" style={{ gap: '6px' }}>
@@ -8180,10 +8138,6 @@ const filtered = useMemo(() => {
             <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData}/>
           </main>
 
-          {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
-          <aside className="w-[280px] flex-shrink-0 flex flex-col gap-3">
-            <FlaggingStocksBox data={data}/>
-          </aside>
 
         </div>
 
