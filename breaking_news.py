@@ -34,7 +34,7 @@ GEMINI_API_KEY  = os.getenv("GEMINI_API_KEY", "")
 TELEGRAM_TOKEN  = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT   = os.getenv("TELEGRAM_CHAT_ID", "")
 
-ALERT_THRESHOLD = 9    # Gemini grade >= 9 triggers alert
+ALERT_THRESHOLD = 8    # Gemini grade >= 8 triggers alert
 HOURS_LOOKBACK  = 0.5  # Only consider headlines from last 30 min
 MAX_ALERTS      = 6    # Keep at most N alerts in rolling store
 ALERT_TTL_HOURS = 12   # Expire alerts older than N hours
@@ -175,57 +175,59 @@ def grade_with_gemini(headlines: list[dict]) -> list[dict]:
         for i, h in enumerate(headlines[:30])
     )
 
-    prompt = f"""You are a senior equity trader. Your ONLY job is to flag headlines that will \
-move stock prices TODAY. Be brutally strict — if it won't move the S&P 500 by ≥1% or a \
-major sector by ≥3%, it does not qualify.
+    prompt = f"""You are a senior equity trader. Your job is to flag ANY headline that could \
+cause a significant move in a stock sector TODAY — including sectors that are not currently \
+in the spotlight. A policy or funding announcement that seems niche today may trigger a \
+sector-wide surge. When in doubt, include it.
 
-Grade each headline 1–10 based on likelihood of immediate stock market price movement:
+Grade each headline 1–10 based on likelihood of causing sector-wide or market-wide price movement:
 
-GRADE 9–10 — BEARISH market shocks (include these):
+GRADE 9–10 — Major macro shocks or catalysts (BEARISH):
   - Fed emergency action / surprise rate hike or cut outside scheduled FOMC
   - Declared war or military strikes between major nations (US, China, Russia, Iran, Israel, NATO)
   - Major country sovereign default or IMF bailout (G20 level)
-  - Surprise tariff announcement affecting entire sectors (e.g. 25% on all semiconductors)
+  - Surprise tariff announcement affecting entire industries
   - Stock market circuit breaker triggered
   - Major central bank emergency meeting / policy reversal
   - Catastrophic natural disaster disrupting global supply chain
 
-GRADE 9–10 — BULLISH market catalysts (include these):
-  - Major ceasefire agreement or peace deal signed between warring nations (risk-on rally)
-  - Surprise tariff removal or major trade deal signed (US-China, US-EU, etc.)
+GRADE 9–10 — Major macro shocks or catalysts (BULLISH):
+  - Major ceasefire or peace deal signed between warring nations
+  - Surprise tariff removal or landmark trade deal (US-China, US-EU, etc.)
   - Fed surprise rate cut or QE announcement outside scheduled FOMC
-  - Large government funding, investment, or policy mandate for high-growth sectors:
-      Quantum Computing, Artificial Intelligence, Semiconductors/Chips, Nuclear/SMR,
-      Space technology, Defense tech, Drones/UAV/Unmanned Systems,
-      Autonomous Vehicles/Robotics, Cybersecurity, Biotechnology/Pharma,
-      Renewable Energy/Clean Tech, Infrastructure/Grid modernization
-  - New government law, executive order, or policy that opens/expands a high-growth sector
-      (e.g. deregulation, new spending bill, national security mandate affecting any sector above)
-  - Major government contract award or procurement program benefiting an ENTIRE sector
-      (e.g. DoD awards $X billion drone fleet contract, Pentagon expands AI procurement)
-  - Major breakthrough announcement in any of the above sectors with government or military backing
 
-GRADE 8 (include only if sector-wide impact, not single-company):
+GRADE 8–9 — Government policy / spending / mandate for ANY sector (BULLISH):
+  - Any new government law, executive order, or policy that creates or expands demand \
+for ANY industry sector (e.g. drones, AI, chips, nuclear, biotech, EVs, defense, \
+cybersecurity, space, infrastructure, energy, agriculture, construction — ANY sector)
+  - Any government funding bill, budget allocation, or procurement program ≥$500M \
+for any technology or industry sector
+  - Pentagon / DoD / NASA / DOE / DARPA announcing a new major program or fleet contract \
+that benefits a sector (not just one company)
+  - Government deregulation or fast-track approval that unlocks an entire industry \
+(e.g. FAA drone corridor approval, FDA accelerated pathway for a drug class)
+  - Foreign government (China, EU, UK, Japan, South Korea, etc.) announcing major \
+national investment in a tech sector that competes with or impacts US equities
+
+GRADE 8 — Other sector-wide catalysts:
   - FOMC decision that surprises consensus by ≥25bps
   - G7/G20 coordinated sanctions on a major economy
   - Ceasefire collapse / peace deal breakdown in an active war zone
   - Confirmed government ban or restriction on an entire technology sector
-  - New government funding bill or budget allocation ≥$1B for any high-growth sector above
 
 AUTOMATICALLY GRADE 7 OR BELOW — DO NOT INCLUDE:
-  - Any individual company earnings, upgrades, downgrades, or price targets
-  - "Concerns about", "fears of", "expected to", speculative/opinion headlines
-  - Nuclear threats or military posturing unless confirmed action taken
-  - Oil price moves unless caused by a declared supply disruption
-  - Economic data releases (CPI, PPI, jobs) unless they cause an emergency Fed response
-  - Contract awards or policy news that only names ONE specific company (not sector-wide)
-  - Geopolitical events in regions with no material impact on global trade or supply chains
-  - Election results unless they immediately reverse major economic policy
+  - Individual company earnings beats/misses, guidance, upgrades, downgrades, price targets
+  - Speculative headlines: "could", "may", "expected to", "concerns about", "fears of"
+  - Nuclear threats or military posturing unless confirmed action is taken
+  - Oil price moves unless caused by a confirmed declared supply disruption
+  - Economic data releases (CPI, PPI, NFP) unless they trigger an emergency Fed response
+  - News about a SINGLE named company with no broader sector implication
+  - Routine geopolitical commentary with no direct supply chain or trade impact
+  - Election results unless they immediately enact a major economic policy change
 
-IMPORTANT: Government drone fleet contracts, UAV procurement programs, autonomous weapons \
-policy, DoD AI spending mandates, and similar sector-wide defense-tech catalysts ALWAYS \
-qualify as Grade 9. Do not downgrade these to single-company news unless ONLY one company \
-is mentioned with no broader sector implication.
+CRITICAL RULE: If a headline mentions government action, law, spending, contract, mandate, \
+or deregulation that affects ANY identifiable stock sector — even one that seems minor or \
+niche today — grade it 8 or higher. We want to be notified early, before the market reacts.
 
 Headlines:
 {headlines_text}
