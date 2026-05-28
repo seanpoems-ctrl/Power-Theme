@@ -1501,7 +1501,7 @@ def _tv_enrich_thematic_stocks(stocks: list[dict]) -> None:
         try:
             _, df = (
                 Query()
-                .select("name", "description", "close", "volume", "average_volume_10d_calc")
+                .select("name", "description", "close", "average_volume_10d_calc")
                 .where(tv_col("name").isin(chunk))
                 .limit(len(chunk) + 50)
                 .get_scanner_data()
@@ -1513,14 +1513,9 @@ def _tv_enrich_thematic_stocks(stocks: list[dict]) -> None:
                     company_map[tkr] = desc
                 try:
                     tv_close   = float(row["close"])
-                    tv_vol     = float(row["volume"])
                     tv_avg_vol = float(row["average_volume_10d_calc"])
-                    if tv_close > 0 and tv_vol > 0:
-                        # dollar_volume = last close × last volume (shown in $Vol column)
-                        dvol_map[tkr] = round(tv_close * tv_vol)
                     if tv_close > 0 and tv_avg_vol > 0:
-                        # avg_dollar_volume = 10-day avg (used by StockTable filter)
-                        dvol_map[tkr + "__avg"] = round(tv_close * tv_avg_vol)
+                        dvol_map[tkr] = round(tv_close * tv_avg_vol)
                 except (TypeError, ValueError, KeyError):
                     pass
         except Exception as exc:
@@ -1536,11 +1531,8 @@ def _tv_enrich_thematic_stocks(stocks: list[dict]) -> None:
         if tkr in company_map:
             s["company"] = company_map[tkr]
         if tkr in dvol_map:
-            # dollar_volume = last close × last volume (displayed in $Vol column)
-            s["dollar_volume"] = dvol_map[tkr]
-        if tkr + "__avg" in dvol_map:
-            # avg_dollar_volume = 10-day avg × close (used by StockTable $Vol filter)
-            s["avg_dollar_volume"] = dvol_map[tkr + "__avg"]
+            s["dollar_volume"]     = dvol_map[tkr]
+            s["avg_dollar_volume"] = dvol_map[tkr]
 
 
 # ──────────────────────────────────────────────────────────────
@@ -2283,7 +2275,7 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
         }
 
     # ── Fetch company names + $Vol from TradingView screener (US tickers only) ──
-    # description → full company name  |  close × volume (last day) → $Vol
+    # description → full company name  |  average_volume_10d_calc × close → $Vol
     # Foreign tickers (contain ".") fall back to ETF holding name / yfinance $Vol.
     company_names: dict[str, str] = {}
     tv_dollar_volumes: dict[str, int] = {}
@@ -2300,7 +2292,7 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
                 try:
                     _, df = (
                         Query()
-                        .select("name", "description", "close", "volume")
+                        .select("name", "description", "close", "average_volume_10d_calc")
                         .where(tv_col("name").isin(chunk))
                         .limit(len(chunk) + 50)
                         .get_scanner_data()
@@ -2311,10 +2303,10 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
                         if desc:
                             company_names[tkr] = desc
                         try:
-                            tv_close = float(row["close"])
-                            tv_vol   = float(row["volume"])
-                            if tv_close > 0 and tv_vol > 0:
-                                tv_dollar_volumes[tkr] = round(tv_close * tv_vol)
+                            tv_close   = float(row["close"])
+                            tv_avg_vol = float(row["average_volume_10d_calc"])
+                            if tv_close > 0 and tv_avg_vol > 0:
+                                tv_dollar_volumes[tkr] = round(tv_close * tv_avg_vol)
                         except (TypeError, ValueError, KeyError):
                             pass
                 except Exception as exc:
