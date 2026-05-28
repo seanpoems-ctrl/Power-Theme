@@ -2104,54 +2104,84 @@ def fetch_all_tickers() -> list[dict]:
 
 
 # ETF → theme mapping (mirrors THEME_ETF_MAP in App.js)
+# Purpose: peer discovery & theme tracking only (not trading signals).
+# Covers all thematic ETFs regardless of volume.
 _THEME_ETF_MAP = {
+    # ── Technology & Innovation ──────────────────────────────────────────────
     "Artificial Intelligence":       "AIQ",
     "Semiconductors":                "SOXX",
     "Cloud Computing":               "WCLD",
+    "Cloud Computing Alt":           "CLOU",
     "Cybersecurity":                 "CIBR",
+    "Software":                      "IGV",
+    "Disruptive Innovation":         "ARKK",
+    "Internet of Things":            "SNSR",
+    "FinTech":                       "FINX",
+    "Quantum Computing":             "QTUM",
+
+    # ── Energy & Resources ───────────────────────────────────────────────────
+    "Energy Renewable":              "ICLN",
+    "Solar Energy":                  "TAN",
+    "Uranium & Nuclear":             "URA",
+    "Nuclear Renaissance":           "NUKZ",
+    "Nuclear Energy":                "NLR",
+    "Energy Traditional":            "XLE",
+    "Commodities Energy":            "USO",
+    "Commodities Metals":            "GDX",
+    "Copper Miners":                 "COPX",
+    "Rare Earth & Strategic Metals": "REMX",
+    "Commodities Agriculture":       "DBA",
+
+    # ── Mobility & Industrials ───────────────────────────────────────────────
     "Electric Vehicles":             "LIT",
     "Autonomous Systems":            "DRIV",
-    "Defense & Aerospace":           "ITA",
-    "Healthcare & Biotech":          "XBI",
-    "FinTech":                       "FINX",
-    "Crypto & Blockchain":           "BLOK",
-    "Space Tech":                    "UFO",
-    "Quantum Computing":             "QTUM",
     "Robotics":                      "BOTZ",
-    "Energy Renewable":              "ICLN",
-    "Energy Traditional":            "XLE",
-    "Software":                      "IGV",
-    "E-commerce":                    "IBUY",
-    "Social Media":                  "SOCL",
-    "Real Estate & REITs":           "VNQ",
-    "Internet of Things":            "SNSR",
     "Industrial Automation":         "ROBO",
-    "Consumer Goods":                "XLY",
-    "Commodities Metals":            "GDX",
-    "Commodities Energy":            "USO",
-    "Commodities Agriculture":       "DBA",
+    "Defense & Aerospace":           "ITA",
     "Transportation & Logistics":    "XTN",
-    "Telecommunications":            "XLC",
-    "Virtual & Augmented Reality":   "METV",
-    "Agriculture & FoodTech":        "MOO",
-    "Environmental Sustainability":  "ESGU",
-    "Digital Entertainment":         "HERO",
+    "Airlines & Travel":             "JETS",
+    "Infrastructure":                "PAVE",
+
+    # ── Healthcare & Life Sciences ───────────────────────────────────────────
+    "Healthcare & Biotech":          "XBI",
     "Aging Population & Longevity":  "IHF",
-    "Healthy Food & Nutrition":      "MOO",
-    "Education Technology":          "INST",
-    "Telecom":                       "FCOM",
-    "Clean Energy & Utilities":      "ICLN",
+    "Genomics":                      "GNOM",
+
+    # ── Finance & Crypto ─────────────────────────────────────────────────────
+    "Crypto & Blockchain":           "BLOK",
+    "Cannabis":                      "MSOS",
+
+    # ── Consumer & Media ─────────────────────────────────────────────────────
+    "E-Commerce":                    "IBUY",
+    "Social Media":                  "SOCL",
+    "Digital Entertainment":         "HERO",
+    "Virtual & Augmented Reality":   "METV",
+    "Sports Betting & iGaming":      "BETZ",
+
+    # ── Space, Environment & Agriculture ────────────────────────────────────
+    "Space Tech":                    "UFO",
+    "Environmental Sustainability":  "ESGU",
+    "Agriculture & FoodTech":        "MOO",
+
+    # ── Broad Sector (for Finviz theme matching) ─────────────────────────────
     "Industrials":                   "XLI",
     "Consumer Staples":              "XLP",
     "Consumer Discretionary":        "XLY",
     "Financials":                    "XLF",
+    "Telecommunications":            "XLC",
+    "Telecom":                       "FCOM",
+    "Real Estate & REITs":           "VNQ",
     "Real Estate":                   "VNQ",
-    "Software & Cloud":              "IGV",
+    "Materials & Mining":            "XLB",
+    "Consumer Goods":                "XLY",
+
+    # ── Aliases (Finviz sub-theme name variants) ─────────────────────────────
+    "Clean Energy & Utilities":      "ICLN",
+    "Healthy Food & Nutrition":      "MOO",
+    "Agriculture & Food":            "MOO",
     "Internet & E-Commerce":         "IBUY",
     "Media & Entertainment":         "SOCL",
-    "Materials & Mining":            "XLB",
-    "Agriculture & Food":            "MOO",
-    "E-Commerce":                    "IBUY",
+    "Software & Cloud":              "IGV",
     "Fintech":                       "FINX",
 }
 
