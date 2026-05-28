@@ -1365,7 +1365,7 @@ const ThematicLeaders = ({ etfHoldings = {} }) => {
   const [minRS,     setMinRS]     = useState(90);
   const [minDVol,   setMinDVol]   = useState(200e6);
   const [minADR,    setMinADR]    = useState(5);
-  const [minMktCap, setMinMktCap] = useState(100e6);
+  const [minMktCap, setMinMktCap] = useState(20e9);
 
   // Reverse map: ETF ticker → first matching theme label in THEME_ETF_MAP
   const etfToTheme = useMemo(() => {
@@ -1434,7 +1434,7 @@ const ThematicLeaders = ({ etfHoldings = {} }) => {
             <span className="bg-zinc-800 px-1.5 py-0.5 rounded">RS ≥ {minRS}</span>
             <span className="bg-zinc-800 px-1.5 py-0.5 rounded">$Vol ≥ $200M</span>
             <span className="bg-zinc-800 px-1.5 py-0.5 rounded">ADR ≥ {minADR}%</span>
-            <span className="bg-zinc-800 px-1.5 py-0.5 rounded">Mkt Cap ≥ $100M</span>
+            <span className="bg-zinc-800 px-1.5 py-0.5 rounded">Mkt Cap ≥ $20B</span>
           </div>
           <svg className={`w-4 h-4 text-zinc-500 transition-transform ${collapsed ? '' : 'rotate-180'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/></svg>
         </div>
@@ -1449,7 +1449,7 @@ const ThematicLeaders = ({ etfHoldings = {} }) => {
               { label: 'RS ≥', value: minRS,     setter: setMinRS,     opts: [80, 85, 90, 95] },
               { label: '$Vol ≥', value: minDVol/1e6, setter: v => setMinDVol(v*1e6), opts: [50, 100, 200, 500], fmt: v => `$${v}M` },
               { label: 'ADR ≥', value: minADR,   setter: setMinADR,   opts: [3, 4, 5, 7], fmt: v => `${v}%` },
-              { label: 'Mkt Cap ≥', value: minMktCap/1e6, setter: v => setMinMktCap(v*1e6), opts: [100, 500, 1000, 5000], fmt: v => v >= 1000 ? `$${v/1000}B` : `$${v}M` },
+              { label: 'Mkt Cap ≥', value: minMktCap/1e9, setter: v => setMinMktCap(v*1e9), opts: [1, 5, 10, 20, 50, 100], fmt: v => `$${v}B` },
             ].map(({ label, value, setter, opts, fmt }) => (
               <div key={label} className="flex items-center gap-1">
                 <span className="text-zinc-500">{label}</span>
