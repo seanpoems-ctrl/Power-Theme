@@ -438,10 +438,17 @@ def _merge(*source_lists) -> dict[str, dict]:
 
 # ─── Finnhub EPS fallback ─────────────────────────────────────────────────────
 
-def _fetch_finnhub_eps(ticker: str) -> tuple:
+def _fetch_finnhub_eps(ticker: str, report_date: date | None = None) -> tuple:
     """
     Fetch the most recent quarterly EPS actual + surprise% from Finnhub.
     Returns (eps_act, eps_surp_pct) — both None on any failure.
+
+    report_date: the expected earnings reporting date from the calendar.
+    Only returns actuals where Finnhub's report period end falls within
+    90 days BEFORE report_date, meaning the quarter that should be reported
+    on that date. Prevents showing last quarter's actuals for a not-yet-
+    reported event.
+
     Finnhub endpoint: GET /api/v1/stock/earnings?symbol=X&limit=4&token=KEY
     Response: [{ actual, estimate, period, surprise, surprisePercent, ... }]
     """
@@ -458,12 +465,23 @@ def _fetch_finnhub_eps(ticker: str) -> tuple:
         data = resp.json()
         if not isinstance(data, list) or not data:
             return None, None
-        # Most recent quarter is first; skip entries where actual is null
+        # Most recent quarter is first; skip entries where actual is null.
+        # When report_date is given, the Finnhub entry's period (fiscal quarter end)
+        # must fall within the 90 days before report_date — confirming this is the
+        # quarter being reported NOW, not last quarter's already-public data.
         for entry in data:
             eps_act  = entry.get("actual")
             surp_pct = entry.get("surprisePercent")
-            if eps_act is not None:
-                return _safe_float(eps_act), _safe_float(surp_pct)
+            if eps_act is None:
+                continue
+            if report_date:
+                period_str = entry.get("period") or ""
+                period_d   = _parse_date(period_str)
+                if period_d:
+                    days_before = (report_date - period_d).days
+                    if not (0 <= days_before <= 90):
+                        continue   # wrong quarter — skip
+            return _safe_float(eps_act), _safe_float(surp_pct)
         return None, None
     except Exception as exc:
         logger.debug("Finnhub EPS fetch failed for %s: %s", ticker, exc)
@@ -553,33 +571,42 @@ def _enrich_with_yfinance(records: list[dict]) -> list[dict]:
                 pass
 
             # ── EPS actual + surprise from earnings_dates ────────────────────
+            # IMPORTANT: only accept actuals whose reported date is on or after
+            # the scheduled earnings date. This prevents showing last quarter's
+            # actuals for a company that hasn't reported yet today.
             eps_act      = None
             eps_surp_pct = None
+            sched_date   = _parse_date(rec.get("date"))  # calendar's expected date
             try:
                 ed = t.earnings_dates
                 if ed is not None and not ed.empty:
-                    # earnings_dates index is timezone-aware; find the most recent past date
                     today_aware = pd.Timestamp.now(tz="UTC")
                     past = ed[ed.index <= today_aware].sort_index(ascending=False)
                     if not past.empty:
-                        row = past.iloc[0]
-                        rep_col  = next((c for c in past.columns if "reported" in c.lower()), None)
-                        surp_col = next((c for c in past.columns if "surprise" in c.lower()), None)
-                        if rep_col:
-                            eps_act = _safe_float(row[rep_col])
-                        if surp_col:
-                            eps_surp_pct = _safe_float(row[surp_col])
-                        # Also grab EPS estimate from earnings_dates if still missing
+                        reported_date = past.index[0].date()
+                        # Only use actuals if the most recently reported date matches
+                        # this earnings event (within 1 day — same day or next morning).
+                        if sched_date and reported_date >= sched_date:
+                            row = past.iloc[0]
+                            rep_col  = next((c for c in past.columns if "reported" in c.lower()), None)
+                            surp_col = next((c for c in past.columns if "surprise" in c.lower()), None)
+                            if rep_col:
+                                eps_act = _safe_float(row[rep_col])
+                            if surp_col:
+                                eps_surp_pct = _safe_float(row[surp_col])
+                        # Grab EPS estimate regardless of whether actuals are available
                         if eps_estimate is None:
+                            row0    = past.iloc[0]
                             est_col = next((c for c in past.columns if "estimate" in c.lower()), None)
                             if est_col:
-                                eps_estimate = _safe_float(row[est_col])
+                                eps_estimate = _safe_float(row0[est_col])
             except Exception:
                 pass
 
             # ── Finnhub fallback: fill eps_act and/or eps_surp_pct if yfinance missed ──
+            # Pass sched_date so Finnhub validates the fiscal period matches this event.
             if (eps_act is None or eps_surp_pct is None) and FINNHUB_KEY:
-                fh_act, fh_surp = _fetch_finnhub_eps(ticker)
+                fh_act, fh_surp = _fetch_finnhub_eps(ticker, report_date=sched_date)
                 if fh_act is not None and eps_act is None:
                     eps_act = fh_act
                     logger.debug("  %s: EPS actual from Finnhub: %.2f", ticker, eps_act)
@@ -594,14 +621,26 @@ def _enrich_with_yfinance(records: list[dict]) -> list[dict]:
             try:
                 qf = t.quarterly_financials
                 if qf is not None and not qf.empty:
+                    # quarterly_financials columns are fiscal period-end dates.
+                    # Only use revenue from a column whose date is on or after the
+                    # scheduled report date — i.e. the company has actually reported.
                     rev_row = next(
                         (r for r in qf.index
                          if "total revenue" in str(r).lower() or "revenue" == str(r).lower()),
                         None,
                     )
                     if rev_row is not None:
-                        val = qf.loc[rev_row].iloc[0]
-                        rev_act = _safe_float(val, ndigits=0)
+                        # Find the most recent column whose period-end >= sched_date
+                        col_dates = [c for c in qf.columns if hasattr(c, 'date')]
+                        if sched_date and col_dates:
+                            valid_cols = [c for c in col_dates if c.date() >= sched_date - timedelta(days=90)]
+                            if valid_cols:
+                                latest_col = max(valid_cols)
+                                val = qf.loc[rev_row, latest_col]
+                                rev_act = _safe_float(val, ndigits=0)
+                        elif not sched_date:
+                            val = qf.loc[rev_row].iloc[0]
+                            rev_act = _safe_float(val, ndigits=0)
             except Exception:
                 pass
 
@@ -634,7 +673,8 @@ def _enrich_with_yfinance(records: list[dict]) -> list[dict]:
         except Exception as exc:
             logger.warning("yfinance enrichment failed for %s: %s", ticker, exc)
             # yfinance failed entirely — still try Finnhub for EPS actual
-            fh_act, fh_surp = _fetch_finnhub_eps(ticker) if FINNHUB_KEY else (None, None)
+            sched_date = _parse_date(rec.get("date"))
+            fh_act, fh_surp = _fetch_finnhub_eps(ticker, report_date=sched_date) if FINNHUB_KEY else (None, None)
             enriched.append({
                 **rec,
                 "mkt_cap": None, "price": None, "avg_volume": None,
