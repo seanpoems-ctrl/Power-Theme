@@ -374,9 +374,9 @@ function TriangleChartModal({ stock, onClose }) {
     const onMove = (ev) => {
       if (!dragging.current || !containerRef.current || !chartRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      const mouseX = (ev.clientX - rect.left) * bodyZoom;
-      const mouseY = (ev.clientY - rect.top) * bodyZoom;
-      setDragOverride({ key, pos: { x: ev.clientX - rect.left, y: ev.clientY - rect.top } });
+      const mouseX = ev.clientX - rect.left;
+      const mouseY = ev.clientY - rect.top;
+      setDragOverride({ key, pos: { x: mouseX, y: mouseY } });
       const ser = dragging.current.line === 'upper' ? upperSerRef.current : lowerSerRef.current;
       if (!ser) return;
       const price = ser.coordinateToPrice(mouseY);
@@ -411,7 +411,7 @@ function TriangleChartModal({ stock, onClose }) {
 
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
-  }, [computeHandles, stock.ticker, bodyZoom]);
+  }, [computeHandles, stock.ticker]);
 
   // ── Reset trendlines ──────────────────────────────────────────────────────
   const handleReset = useCallback(() => {
