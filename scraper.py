@@ -2350,12 +2350,13 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
     # Foreign tickers (contain ".") fall back to ETF holding name / yfinance $Vol.
     company_names: dict[str, str] = {}
     tv_dollar_volumes: dict[str, int] = {}
+    tv_mkt_caps: dict[str, float] = {}
     us_tickers = [t for t in all_tickers if "." not in t]
     if us_tickers:
         try:
             from tradingview_screener import Query, col as tv_col  # type: ignore
             logger.info(
-                f"Fetching company names + $Vol from TradingView for {len(us_tickers)} US ETF tickers …"
+                f"Fetching company names + $Vol + mkt cap from TradingView for {len(us_tickers)} US ETF tickers …"
             )
             batch_size = 1500
             for i in range(0, len(us_tickers), batch_size):
@@ -2363,7 +2364,8 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
                 try:
                     _, df = (
                         Query()
-                        .select("name", "description", "close", "average_volume_10d_calc")
+                        .select("name", "description", "close", "average_volume_10d_calc",
+                                "market_cap_basic")
                         .where(tv_col("name").isin(chunk))
                         .limit(len(chunk) + 50)
                         .get_scanner_data()
@@ -2380,11 +2382,18 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
                                 tv_dollar_volumes[tkr] = round(tv_close * tv_avg_vol)
                         except (TypeError, ValueError, KeyError):
                             pass
+                        try:
+                            mc = float(row["market_cap_basic"])
+                            if mc > 0:
+                                tv_mkt_caps[tkr] = mc
+                        except (TypeError, ValueError, KeyError):
+                            pass
                 except Exception as exc:
                     logger.warning(f"TradingView ETF enrichment batch {i} failed: {exc}")
             logger.info(
                 f"  ETF TV enrichment: {len(company_names)} names, "
-                f"{len(tv_dollar_volumes)} $Vol resolved / {len(us_tickers)} US tickers"
+                f"{len(tv_dollar_volumes)} $Vol, {len(tv_mkt_caps)} mkt caps "
+                f"resolved / {len(us_tickers)} US tickers"
             )
         except ImportError:
             logger.warning("tradingview_screener not available; using ETF holding names / yfinance $Vol as fallback")
@@ -2405,6 +2414,7 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             # yfinance last-day price×volume as fallback.
             new_h["dollar_volume"] = tv_dollar_volumes.get(h["ticker"]) or s.get("dollar_volume")
             new_h["rs"]            = rs_lookup.get(h["ticker"])
+            new_h["mkt_cap"]       = tv_mkt_caps.get(h["ticker"])
             # Full company name: TradingView description (primary),
             # ETF holding name as fallback for foreign/unlisted tickers.
             new_h["name"] = company_names.get(h["ticker"]) or h.get("name", "")
