@@ -421,6 +421,12 @@ function TriangleChartModal({ stock, onClose }) {
     setLowerPts(auto.lower);
   }, [stock.ticker, bars, triangle]);
 
+  // body { zoom: 1.15 } causes LWC to use visual-px offsets as CSS-px chart coordinates
+  // (clientX - rect.left is visual px, but chart coordinate space is CSS px).
+  // Applying the inverse zoom to outerRef makes the canvas's net effective zoom = 1,
+  // so visual px === CSS px within the chart — crosshair and drag handles both align.
+  const bodyZoom = parseFloat(getComputedStyle(document.body).zoom) || 1;
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75" onClick={onClose}>
       <div
@@ -466,7 +472,7 @@ function TriangleChartModal({ stock, onClose }) {
 
         {/* Chart area */}
         <div className="p-3">
-          <div ref={outerRef} className="relative rounded-lg overflow-hidden" style={{ minHeight: 440 }}>
+          <div ref={outerRef} className="relative rounded-lg overflow-hidden" style={{ minHeight: 440, zoom: 1 / bodyZoom }}>
             {/* Loading spinner */}
             {!chartBars && (
               <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/80 rounded-lg z-20">
