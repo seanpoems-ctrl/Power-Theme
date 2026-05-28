@@ -2197,6 +2197,36 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             for tkr, comp in composites.items()
         }
 
+    # ── Fetch full company names from TradingView screener (US tickers only) ──
+    # Uses TradingView's "description" field which contains the full company name.
+    # Foreign tickers (contain ".") fall back to the ETF's own holding name.
+    company_names: dict[str, str] = {}
+    us_tickers = [t for t in all_tickers if "." not in t]
+    if us_tickers:
+        try:
+            from tradingview_screener import Query, col as tv_col  # type: ignore
+            logger.info(f"Fetching full company names from TradingView for {len(us_tickers)} US tickers …")
+            batch_size = 1500
+            for i in range(0, len(us_tickers), batch_size):
+                chunk = us_tickers[i : i + batch_size]
+                try:
+                    _, df = (
+                        Query()
+                        .select("name", "description")
+                        .where(tv_col("name").isin(chunk))
+                        .limit(len(chunk) + 50)
+                        .get_scanner_data()
+                    )
+                    for _, row in df.iterrows():
+                        desc = str(row.get("description", "")).strip()
+                        if desc:
+                            company_names[str(row["name"])] = desc
+                except Exception as exc:
+                    logger.warning(f"TradingView company name batch {i} failed: {exc}")
+            logger.info(f"Company names resolved: {len(company_names)}/{len(us_tickers)}")
+        except ImportError:
+            logger.warning("tradingview_screener not available; using ETF holding names as fallback")
+
     # ── Apply to holdings ────────────────────────────────────────────────────
     enriched: dict[str, list] = {}
     for etf_ticker, holdings in etf_holdings_dict.items():
@@ -2211,6 +2241,10 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             new_h["adr_pct"]       = s.get("adr_pct")
             new_h["dollar_volume"] = s.get("dollar_volume")
             new_h["rs"]            = rs_lookup.get(h["ticker"])
+            # Full company name: TradingView description for US tickers,
+            # ETF holding name as fallback for foreign/unlisted tickers.
+            etf_name = h.get("name", "")
+            new_h["name"] = company_names.get(h["ticker"]) or etf_name
             enriched[etf_ticker].append(new_h)
 
     enriched_count = sum(1 for s in stats.values() if s.get("price") is not None)
