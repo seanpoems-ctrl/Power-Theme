@@ -2157,7 +2157,20 @@ _THEME_ETF_MAP = {
 
 
 def fetch_etf_holdings(etf_ticker: str) -> list:
-    """Fetch top holdings for an ETF via yfinance. Returns [] on any failure."""
+    """Fetch top holdings for an ETF via yfinance. Returns [] on any failure.
+
+    Foreign-listed tickers (non-US exchanges, e.g. 600900.SS, VWS.CO, SUZLON.BO)
+    are excluded — only US-listed stocks and ADRs are kept.  A ticker is
+    considered foreign if it contains a '.' whose suffix matches a known
+    non-US exchange code.
+    """
+    import re
+    _FOREIGN_SUFFIX_RE = re.compile(
+        r"\.(SS|SZ|HK|CO|SA|BO|NS|LS|PA|DE|MC|MI|AS|BR|OL|ST|HE|TA"
+        r"|L|AX|TO|T|KS|KQ|TW|VX|ME|JK|BK|NZ|SG|MX|AT|WA|VI|BE|IR|IC|TL|SW|BA|MU|CL|LM|SN|IS)$",
+        re.IGNORECASE,
+    )
+
     try:
         import yfinance as yf
         t = yf.Ticker(etf_ticker)
@@ -2168,12 +2181,20 @@ def fetch_etf_holdings(etf_ticker: str) -> list:
         if th is None or th.empty:
             return []
         rows = []
+        skipped = 0
         for sym, row in th.iterrows():
+            ticker = str(sym).strip()
+            if _FOREIGN_SUFFIX_RE.search(ticker):
+                skipped += 1
+                continue          # drop foreign-listed tickers
             name = str(row.get("Name", "")).strip()
             pct = float(row.get("Holding Percent", 0)) * 100
-            rows.append({"ticker": str(sym).strip(), "name": name, "weight": round(pct, 2)})
+            rows.append({"ticker": ticker, "name": name, "weight": round(pct, 2)})
         rows.sort(key=lambda x: x["weight"], reverse=True)
-        logger.info(f"  ETF holdings: {etf_ticker} → {len(rows)} holdings")
+        logger.info(
+            f"  ETF holdings: {etf_ticker} → {len(rows)} holdings"
+            + (f" ({skipped} foreign-listed removed)" if skipped else "")
+        )
         return rows
     except Exception as e:
         logger.warning(f"  ETF holdings failed for {etf_ticker}: {e}")
