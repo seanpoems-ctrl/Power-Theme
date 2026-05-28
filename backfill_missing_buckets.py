@@ -208,6 +208,7 @@ def _download_history(tickers: list[str], start: str, end: str) -> tuple[pd.Data
                 chunk,
                 start=start,
                 end=(pd.Timestamp(end) + pd.Timedelta(days=1)).strftime("%Y-%m-%d"),
+                timeout=60,
                 interval="1d",
                 auto_adjust=True,
                 progress=False,
@@ -243,8 +244,7 @@ def _download_history(tickers: list[str], start: str, end: str) -> tuple[pd.Data
             except Exception:
                 continue
 
-        if i % 5 == 0:
-            logger.info("  … batch %d/%d done", i, len(chunks))
+        logger.info("  … batch %d/%d done", i, len(chunks))
 
     if not all_close:
         return pd.DataFrame(), pd.DataFrame(), pd.DataFrame()

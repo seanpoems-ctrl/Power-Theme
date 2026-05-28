@@ -1463,6 +1463,79 @@ def _composite_ind(ind: dict) -> float:
 
 
 # ──────────────────────────────────────────────────────────────
+# TradingView enrichment for thematic stocks
+# ──────────────────────────────────────────────────────────────
+
+def _tv_enrich_thematic_stocks(stocks: list[dict]) -> None:
+    """
+    Enrich thematic stock dicts in-place using TradingView screener as the
+    primary source for two fields:
+
+      company        — TradingView 'description' (full legal name).
+                       Overrides the abbreviated name scraped from Finviz HTML.
+                       Foreign tickers (contain '.') keep the Finviz name.
+
+      dollar_volume  — TradingView average_volume_10d_calc × close.
+                       More stable than the partial-day volume Finviz returns
+                       during market hours.  Finviz value kept as fallback.
+
+    All tickers are resolved in a single batched screener call (≤1 500 per
+    batch) — no extra per-ticker requests.
+    """
+    us_tickers = list({s["ticker"] for s in stocks if "." not in s.get("ticker", "")})
+    if not us_tickers:
+        return
+
+    try:
+        from tradingview_screener import Query, col as tv_col  # type: ignore
+    except ImportError:
+        logger.warning("tradingview_screener not available; skipping TV enrichment for thematic stocks")
+        return
+
+    company_map: dict[str, str] = {}
+    dvol_map:    dict[str, int] = {}
+
+    batch_size = 1500
+    for i in range(0, len(us_tickers), batch_size):
+        chunk = us_tickers[i : i + batch_size]
+        try:
+            _, df = (
+                Query()
+                .select("name", "description", "close", "average_volume_10d_calc")
+                .where(tv_col("name").isin(chunk))
+                .limit(len(chunk) + 50)
+                .get_scanner_data()
+            )
+            for _, row in df.iterrows():
+                tkr  = str(row["name"])
+                desc = str(row.get("description", "")).strip()
+                if desc:
+                    company_map[tkr] = desc
+                try:
+                    tv_close   = float(row["close"])
+                    tv_avg_vol = float(row["average_volume_10d_calc"])
+                    if tv_close > 0 and tv_avg_vol > 0:
+                        dvol_map[tkr] = round(tv_close * tv_avg_vol)
+                except (TypeError, ValueError, KeyError):
+                    pass
+        except Exception as exc:
+            logger.warning(f"TV thematic enrichment batch {i} failed: {exc}")
+
+    logger.info(
+        f"  TV thematic enrichment: {len(company_map)} names, "
+        f"{len(dvol_map)} $Vol resolved / {len(us_tickers)} unique US tickers"
+    )
+
+    for s in stocks:
+        tkr = s.get("ticker", "")
+        if tkr in company_map:
+            s["company"] = company_map[tkr]
+        if tkr in dvol_map:
+            s["dollar_volume"]     = dvol_map[tkr]
+            s["avg_dollar_volume"] = dvol_map[tkr]
+
+
+# ──────────────────────────────────────────────────────────────
 # Build pipeline
 # ──────────────────────────────────────────────────────────────
 
@@ -1661,6 +1734,10 @@ def build_data() -> dict:
     for th in output_themes + heatmap_themes:
         for sub in th.get("subthemes", []):
             sub["stocks"].sort(key=lambda s: s.get("rs_52w", 0), reverse=True)
+
+    # ── Step 5b: Enrich thematic stocks with TradingView company names + $Vol ──
+    logger.info("\nStep 5b: Enriching thematic stocks from TradingView (company names + $Vol)...")
+    _tv_enrich_thematic_stocks(all_stocks_flat)
 
     # ── Step 6: Fetch SPY benchmark + market condition ──
     logger.info("\nStep 6: Fetching SPY & QQQ market condition...")
@@ -2197,35 +2274,49 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             for tkr, comp in composites.items()
         }
 
-    # ── Fetch full company names from TradingView screener (US tickers only) ──
-    # Uses TradingView's "description" field which contains the full company name.
-    # Foreign tickers (contain ".") fall back to the ETF's own holding name.
+    # ── Fetch company names + $Vol from TradingView screener (US tickers only) ──
+    # description → full company name  |  average_volume_10d_calc × close → $Vol
+    # Foreign tickers (contain ".") fall back to ETF holding name / yfinance $Vol.
     company_names: dict[str, str] = {}
+    tv_dollar_volumes: dict[str, int] = {}
     us_tickers = [t for t in all_tickers if "." not in t]
     if us_tickers:
         try:
             from tradingview_screener import Query, col as tv_col  # type: ignore
-            logger.info(f"Fetching full company names from TradingView for {len(us_tickers)} US tickers …")
+            logger.info(
+                f"Fetching company names + $Vol from TradingView for {len(us_tickers)} US ETF tickers …"
+            )
             batch_size = 1500
             for i in range(0, len(us_tickers), batch_size):
                 chunk = us_tickers[i : i + batch_size]
                 try:
                     _, df = (
                         Query()
-                        .select("name", "description")
+                        .select("name", "description", "close", "average_volume_10d_calc")
                         .where(tv_col("name").isin(chunk))
                         .limit(len(chunk) + 50)
                         .get_scanner_data()
                     )
                     for _, row in df.iterrows():
+                        tkr = str(row["name"])
                         desc = str(row.get("description", "")).strip()
                         if desc:
-                            company_names[str(row["name"])] = desc
+                            company_names[tkr] = desc
+                        try:
+                            tv_close   = float(row["close"])
+                            tv_avg_vol = float(row["average_volume_10d_calc"])
+                            if tv_close > 0 and tv_avg_vol > 0:
+                                tv_dollar_volumes[tkr] = round(tv_close * tv_avg_vol)
+                        except (TypeError, ValueError, KeyError):
+                            pass
                 except Exception as exc:
-                    logger.warning(f"TradingView company name batch {i} failed: {exc}")
-            logger.info(f"Company names resolved: {len(company_names)}/{len(us_tickers)}")
+                    logger.warning(f"TradingView ETF enrichment batch {i} failed: {exc}")
+            logger.info(
+                f"  ETF TV enrichment: {len(company_names)} names, "
+                f"{len(tv_dollar_volumes)} $Vol resolved / {len(us_tickers)} US tickers"
+            )
         except ImportError:
-            logger.warning("tradingview_screener not available; using ETF holding names as fallback")
+            logger.warning("tradingview_screener not available; using ETF holding names / yfinance $Vol as fallback")
 
     # ── Apply to holdings ────────────────────────────────────────────────────
     enriched: dict[str, list] = {}
@@ -2239,12 +2330,13 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             new_h["perf_1w"]       = s.get("perf_1w")
             new_h["perf_1m"]       = s.get("perf_1m")
             new_h["adr_pct"]       = s.get("adr_pct")
-            new_h["dollar_volume"] = s.get("dollar_volume")
+            # $Vol: TradingView avg 10-day dollar volume (primary),
+            # yfinance last-day price×volume as fallback.
+            new_h["dollar_volume"] = tv_dollar_volumes.get(h["ticker"]) or s.get("dollar_volume")
             new_h["rs"]            = rs_lookup.get(h["ticker"])
-            # Full company name: TradingView description for US tickers,
+            # Full company name: TradingView description (primary),
             # ETF holding name as fallback for foreign/unlisted tickers.
-            etf_name = h.get("name", "")
-            new_h["name"] = company_names.get(h["ticker"]) or etf_name
+            new_h["name"] = company_names.get(h["ticker"]) or h.get("name", "")
             enriched[etf_ticker].append(new_h)
 
     enriched_count = sum(1 for s in stats.values() if s.get("price") is not None)

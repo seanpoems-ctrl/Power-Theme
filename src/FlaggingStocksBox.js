@@ -74,30 +74,42 @@ function detectTriangle(bars) {
   return { upper, lower, startIdx, barsToApex: Math.round(barsToApex) };
 }
 
-// ─── Chart Modal ───────────────────────────────────────────────────────────────
+// ─── localStorage persistence (time-based offsets so positions survive bar rolls) ──
 
-const BASE_TIME = 1700000000;
-const LS_PREFIX = 'tri_lines_v2_';
-const lsKey = ticker => LS_PREFIX + ticker;
+const lsKey = ticker => `flagging_lines_v2_${ticker}`;
 
-function loadSavedLines(ticker) {
+function loadSavedLines(ticker, lastBarTime) {
   try {
     const raw = localStorage.getItem(lsKey(ticker));
     if (!raw) return null;
     const saved = JSON.parse(raw);
-    if (!saved?.upper?.[0]?.time || !saved?.lower?.[0]?.time) return null;
-    return saved;
+    return {
+      upper: saved.upper.map(p => ({ time: lastBarTime + p.timeOffset, price: p.price })),
+      lower: saved.lower.map(p => ({ time: lastBarTime + p.timeOffset, price: p.price })),
+    };
   } catch { return null; }
 }
 
-function saveLines(ticker, upper, lower) {
-  try { localStorage.setItem(lsKey(ticker), JSON.stringify({ upper, lower })); } catch {}
+function saveLines(ticker, lastBarTime, uPts, lPts) {
+  if (!uPts || !lPts) return;
+  localStorage.setItem(lsKey(ticker), JSON.stringify({
+    upper: uPts.map(p => ({ timeOffset: p.time - lastBarTime, price: p.price })),
+    lower: lPts.map(p => ({ timeOffset: p.time - lastBarTime, price: p.price })),
+    savedAt: Date.now(),
+  }));
 }
 
 function clearSavedLines(ticker) {
   localStorage.removeItem(lsKey(ticker));
+  localStorage.removeItem(`flagging_lines_v1_${ticker}`);
 }
 
+// ─── Chart Modal ───────────────────────────────────────────────────────────────
+
+const BASE_TIME = 1700000000;
+
+// Build auto trendline endpoints as { time, price } pairs.
+// getT(barIdx) converts a bars_30d index → full-chart Unix timestamp.
 function buildAutoEndpoints(bars, triangle, getT) {
   const last = bars.length - 1;
   if (triangle) {
@@ -131,30 +143,25 @@ function buildAutoEndpoints(bars, triangle, getT) {
 }
 
 function TriangleChartModal({ stock, onClose }) {
-  // outerRef = wrapper with inverse zoom applied — portal target for drag handles.
-  // containerRef = LWC chart container — no extra styles so chart coords are clean.
-  // With zoom: 1/bodyZoom on outerRef, net effective zoom inside = 1.0, meaning
-  // visual px === CSS px. Mouse offsets (clientX - rect.left) are therefore already
-  // in chart coordinate space — no extra division needed anywhere.
-  const outerRef    = useRef(null);
+  const outerRef = useRef(null);
   const containerRef = useRef(null);
-  const chartRef    = useRef(null);
+  const chartRef = useRef(null);
   const upperSerRef = useRef(null);
   const lowerSerRef = useRef(null);
   const upperPtsRef = useRef(null);
   const lowerPtsRef = useRef(null);
-  const timesRef    = useRef([]);
+  const timesRef = useRef([]);
   const chartBarsLenRef = useRef(0);
-  const dragging    = useRef(null);
+  const dragging = useRef(null);
 
-  const [chartBars,    setChartBars]    = useState(null);
-  const [upperPts,     setUpperPts]     = useState(null);
-  const [lowerPts,     setLowerPts]     = useState(null);
-  const [handlePx,     setHandlePx]     = useState(null);
-  const [hasSaved,     setHasSaved]     = useState(() => !!loadSavedLines(stock.ticker));
+  const [chartBars, setChartBars] = useState(null);
+  const [upperPts, setUpperPts] = useState(null);
+  const [lowerPts, setLowerPts] = useState(null);
+  const [handlePx, setHandlePx] = useState(null);
+  const [hasSaved, setHasSaved] = useState(() => !!localStorage.getItem(lsKey(stock.ticker)));
   const [dragOverride, setDragOverride] = useState(null);
 
-  const bars     = useMemo(() => stock.bars_30d || [], [stock]);
+  const bars = useMemo(() => stock.bars_30d || [], [stock]);
   const triangle = useMemo(() => detectTriangle(bars), [bars]);
 
   // ── Fetch 6-month Yahoo Finance data ─────────────────────────────────────
@@ -172,7 +179,7 @@ function TriangleChartModal({ stock, onClose }) {
         if (cancelled) return;
         const result = data?.chart?.result?.[0];
         const ts = result?.timestamp;
-        const q  = result?.indicators?.quote?.[0];
+        const q = result?.indicators?.quote?.[0];
         if (ts?.length && q) {
           const full = ts.map((t, i) => ({
             t, h: q.high[i], l: q.low[i], c: q.close[i],
@@ -197,7 +204,7 @@ function TriangleChartModal({ stock, onClose }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stock.ticker]);
 
-  // ── Recompute handle pixel positions from { time, price } endpoints ───────
+  // ── Recompute drag handle pixel positions ─────────────────────────────────
   const computeHandles = useCallback(() => {
     if (!chartRef.current || !upperSerRef.current || !lowerSerRef.current || dragging.current) return;
     const uPts = upperPtsRef.current;
@@ -254,8 +261,10 @@ function TriangleChartModal({ stock, onClose }) {
     })));
 
     const getT = idx => timesRef.current[idx + offset] ?? BASE_TIME + (idx + offset) * 86400;
-    const saved = loadSavedLines(stock.ticker);
-    const auto  = buildAutoEndpoints(bars, triangle, getT);
+    const lastBarTime = timesRef.current[chartBars.length - 1] ?? BASE_TIME + (chartBars.length - 1) * 86400;
+
+    const saved = loadSavedLines(stock.ticker, lastBarTime);
+    const auto = buildAutoEndpoints(bars, triangle, getT);
     const initU = saved?.upper ?? auto.upper;
     const initL = saved?.lower ?? auto.lower;
 
@@ -282,6 +291,7 @@ function TriangleChartModal({ stock, onClose }) {
     ]);
     lowerSerRef.current = lSer;
 
+    // Volume histogram (pane 1) — pane separator locked
     const hasVolume = chartBars.some(b => (b.v ?? 0) > 0);
     if (hasVolume) {
       const volSer = chart.addSeries(HistogramSeries, {
@@ -297,18 +307,20 @@ function TriangleChartModal({ stock, onClose }) {
         color: (b.c >= b.o) ? 'rgba(34,197,94,0.45)' : 'rgba(239,68,68,0.45)',
       })));
       const panes = chart.panes();
-      if (panes.length >= 2) { panes[0].setHeight(350); panes[1].setHeight(90); }
+      if (panes.length >= 2) {
+        panes[0].setHeight(350);
+        panes[1].setHeight(90);
+      }
       if (!document.getElementById('lwc-no-resize')) {
         const s = document.createElement('style');
         s.id = 'lwc-no-resize';
-        s.textContent = 'tr[style*="height: 1px"] td { pointer-events: none !important; cursor: default !important; }';
+        s.textContent = 'tr[style*="height: 1px"] { display: none !important; }';
         document.head.appendChild(s);
       }
     }
 
     chart.timeScale().fitContent();
 
-    // rAF loop keeps handle dots in sync during chart pan/zoom
     let rafId;
     const rafLoop = () => { computeHandles(); rafId = requestAnimationFrame(rafLoop); };
     rafId = requestAnimationFrame(rafLoop);
@@ -329,7 +341,13 @@ function TriangleChartModal({ stock, onClose }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartBars]);
 
-  // ── Sync series data when endpoints change ────────────────────────────────
+  // body { zoom: 1.15 } causes LWC to use visual-px offsets as CSS-px chart coordinates
+  // (clientX - rect.left is visual px, but chart coordinate space is CSS px).
+  // Applying inverse zoom to the chart wrapper makes net effective zoom = 1,
+  // so visual px === CSS px — crosshair aligns with the mouse cursor.
+  const bodyZoom = parseFloat(getComputedStyle(document.body).zoom) || 1;
+
+  // ── Sync series when endpoints change ─────────────────────────────────────
   useEffect(() => {
     if (!upperSerRef.current || !lowerSerRef.current || !upperPts || !lowerPts) return;
     upperPtsRef.current = upperPts;
@@ -346,43 +364,34 @@ function TriangleChartModal({ stock, onClose }) {
   }, [upperPts, lowerPts, computeHandles]);
 
   // ── Drag interaction ──────────────────────────────────────────────────────
-  // outerRef has zoom: 1/bodyZoom so net effective zoom = 1.0 inside.
-  // That means clientX - rect.left is already in chart CSS-px coordinate space —
-  // no extra division needed.
   const onHandleMouseDown = useCallback((line, ptIdx, e) => {
     e.preventDefault();
     e.stopPropagation();
     dragging.current = { line, ptIdx };
     const key = `${line}-${ptIdx}`;
-
     if (chartRef.current) chartRef.current.applyOptions({ handleScroll: false, handleScale: false });
 
     const onMove = (ev) => {
       if (!dragging.current || !containerRef.current || !chartRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      const mouseX = ev.clientX - rect.left;
-      const mouseY = ev.clientY - rect.top;
-
-      setDragOverride({ key, pos: { x: mouseX, y: mouseY } });
-
+      const mouseX = (ev.clientX - rect.left) * bodyZoom;
+      const mouseY = (ev.clientY - rect.top) * bodyZoom;
+      setDragOverride({ key, pos: { x: ev.clientX - rect.left, y: ev.clientY - rect.top } });
       const ser = dragging.current.line === 'upper' ? upperSerRef.current : lowerSerRef.current;
       if (!ser) return;
-      const price   = ser.coordinateToPrice(mouseY);
+      const price = ser.coordinateToPrice(mouseY);
       const rawTime = chartRef.current.timeScale().coordinateToTime(mouseX);
       if (price == null || rawTime == null) return;
-
       const setter = dragging.current.line === 'upper' ? setUpperPts : setLowerPts;
-      const serRef  = dragging.current.line === 'upper' ? upperSerRef : lowerSerRef;
+      const serRef = dragging.current.line === 'upper' ? upperSerRef : lowerSerRef;
       setter(prev => {
         if (!prev) return prev;
         const next = [...prev];
         next[dragging.current.ptIdx] = { time: rawTime, price };
-        if (serRef.current) {
-          serRef.current.setData([
-            { time: next[0].time, value: next[0].price },
-            { time: next[1].time, value: next[1].price },
-          ]);
-        }
+        if (serRef.current) serRef.current.setData([
+          { time: next[0].time, value: next[0].price },
+          { time: next[1].time, value: next[1].price },
+        ]);
         return next;
       });
     };
@@ -392,7 +401,9 @@ function TriangleChartModal({ stock, onClose }) {
       if (chartRef.current) chartRef.current.applyOptions({ handleScroll: true, handleScale: true });
       setDragOverride(null);
       computeHandles();
-      saveLines(stock.ticker, upperPtsRef.current, lowerPtsRef.current);
+      const lastBarTime = timesRef.current[timesRef.current.length - 1]
+        ?? BASE_TIME + (timesRef.current.length - 1) * 86400;
+      saveLines(stock.ticker, lastBarTime, upperPtsRef.current, lowerPtsRef.current);
       setHasSaved(true);
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseup', onUp);
@@ -400,9 +411,9 @@ function TriangleChartModal({ stock, onClose }) {
 
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
-  }, [computeHandles, stock.ticker]);
+  }, [computeHandles, stock.ticker, bodyZoom]);
 
-  // ── Reset to auto-detected endpoints ─────────────────────────────────────
+  // ── Reset trendlines ──────────────────────────────────────────────────────
   const handleReset = useCallback(() => {
     clearSavedLines(stock.ticker);
     setHasSaved(false);
@@ -412,13 +423,6 @@ function TriangleChartModal({ stock, onClose }) {
     setUpperPts(auto.upper);
     setLowerPts(auto.lower);
   }, [stock.ticker, bars, triangle]);
-
-  // ── Zoom correction ───────────────────────────────────────────────────────
-  // body { zoom: 1.15 } makes getBoundingClientRect() return visual (post-zoom) px
-  // while CSS style positions are pre-zoom px. Applying zoom: 1/bodyZoom to outerRef
-  // cancels this out — net zoom inside = 1.0, so visual px === CSS px everywhere
-  // inside the chart wrapper (crosshair, drag handles, coordinateToTime all align).
-  const bodyZoom = parseFloat(getComputedStyle(document.body).zoom) || 1;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75" onClick={onClose}>
@@ -431,19 +435,14 @@ function TriangleChartModal({ stock, onClose }) {
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-white font-bold text-[15px]">{stock.ticker}</span>
             <span className="text-zinc-400 text-sm truncate max-w-[180px]">{stock.company}</span>
-            {triangle ? (
+            {triangle && (
               <span className="px-2 py-0.5 rounded text-[11px] bg-amber-500/20 text-amber-400 border border-amber-500/30">
                 Triangle · apex ~{triangle.barsToApex}d
-              </span>
-            ) : (
-              <span className="px-2 py-0.5 rounded text-[11px] bg-zinc-700/60 text-zinc-400 border border-zinc-600/30">
-                Manual
               </span>
             )}
             {hasSaved && (
               <span className="flex items-center gap-1 px-2 py-0.5 rounded text-[11px] bg-blue-500/15 text-blue-400 border border-blue-500/25">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 inline-block"/>
-                已儲存
+                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 inline-block"/>已儲存
               </span>
             )}
           </div>
@@ -452,9 +451,7 @@ function TriangleChartModal({ stock, onClose }) {
               <button
                 onClick={handleReset}
                 className="px-2 py-1 text-[11px] rounded border border-zinc-600/50 text-zinc-400 hover:text-zinc-200 hover:border-zinc-500 transition-colors"
-              >
-                Reset
-              </button>
+              >Reset</button>
             )}
             <button onClick={onClose} className="text-zinc-500 hover:text-zinc-300 p-1">
               <X size={16}/>
@@ -464,12 +461,7 @@ function TriangleChartModal({ stock, onClose }) {
 
         {/* Chart area */}
         <div className="p-3">
-          <div
-            ref={outerRef}
-            className="relative rounded-lg overflow-hidden"
-            style={{ minHeight: 440, zoom: 1 / bodyZoom }}
-          >
-            {/* Loading spinner */}
+          <div ref={outerRef} className="relative rounded-lg overflow-hidden" style={{ minHeight: 440, zoom: 1 / bodyZoom }}>
             {!chartBars && (
               <div className="absolute inset-0 flex items-center justify-center bg-zinc-900/80 rounded-lg z-20">
                 <div className="flex flex-col items-center gap-2">
@@ -478,10 +470,9 @@ function TriangleChartModal({ stock, onClose }) {
                 </div>
               </div>
             )}
-            {/* LWC chart container — no extra styles so chart coordinates are undisturbed */}
             <div ref={containerRef} className="w-full"/>
 
-            {/* Drag handles portalled into outerRef so they share the same coordinate space */}
+            {/* Drag handles */}
             {outerRef.current && handlePx && createPortal(
               <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 10 }}>
                 {(['upper', 'lower']).flatMap(line =>
