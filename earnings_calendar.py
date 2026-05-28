@@ -64,8 +64,11 @@ except ImportError:
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
-# Finnhub API key — set FINNHUB_API_KEY in .env or environment
-FINNHUB_KEY = os.getenv("FINNHUB_API_KEY") or os.getenv("REACT_APP_FINNHUB_KEY") or ""
+# Finnhub API key — workflow injects as FINNHUB_KEY; also accept legacy names
+FINNHUB_KEY = (os.getenv("FINNHUB_KEY")
+               or os.getenv("FINNHUB_API_KEY")
+               or os.getenv("REACT_APP_FINNHUB_KEY")
+               or "")
 
 ET            = ZoneInfo("America/New_York")
 TODAY_ET      = datetime.now(ET).date()
@@ -574,14 +577,15 @@ def _enrich_with_yfinance(records: list[dict]) -> list[dict]:
             except Exception:
                 pass
 
-            # ── Finnhub fallback: fill eps_act / eps_surp_pct if yfinance missed ──
-            if eps_act is None and FINNHUB_KEY:
+            # ── Finnhub fallback: fill eps_act and/or eps_surp_pct if yfinance missed ──
+            if (eps_act is None or eps_surp_pct is None) and FINNHUB_KEY:
                 fh_act, fh_surp = _fetch_finnhub_eps(ticker)
-                if fh_act is not None:
-                    eps_act      = fh_act
+                if fh_act is not None and eps_act is None:
+                    eps_act = fh_act
+                    logger.debug("  %s: EPS actual from Finnhub: %.2f", ticker, eps_act)
+                if fh_surp is not None and eps_surp_pct is None:
                     eps_surp_pct = fh_surp
-                    logger.debug("  %s: EPS actual from Finnhub: %.2f (surp %.1f%%)",
-                                 ticker, eps_act, eps_surp_pct or 0)
+                    logger.debug("  %s: EPS surprise from Finnhub: %.1f%%", ticker, eps_surp_pct)
                 time.sleep(0.12)   # Finnhub free tier: 60 req/min
 
             # ── Revenue actual from quarterly_financials ─────────────────────
@@ -629,12 +633,13 @@ def _enrich_with_yfinance(records: list[dict]) -> list[dict]:
 
         except Exception as exc:
             logger.warning("yfinance enrichment failed for %s: %s", ticker, exc)
-            # Keep record without enrichment so it still appears
+            # yfinance failed entirely — still try Finnhub for EPS actual
+            fh_act, fh_surp = _fetch_finnhub_eps(ticker) if FINNHUB_KEY else (None, None)
             enriched.append({
                 **rec,
                 "mkt_cap": None, "price": None, "avg_volume": None,
                 "adr_pct": None, "dollar_volume": None,
-                "eps_act": None, "eps_surp_pct": None,
+                "eps_act": fh_act, "eps_surp_pct": fh_surp,
                 "rev_est": None, "rev_act": None, "rev_surp_pct": None,
             })
 
