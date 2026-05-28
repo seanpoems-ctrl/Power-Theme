@@ -2667,7 +2667,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
           </div>
           <div>
             <div className="text-[11px] text-zinc-600 mb-0.5">Pos Size</div>
-            <div className="text-[14px] font-mono font-bold text-zinc-100">{positionValue != null ? fmtDollar(positionValue) : '—'}</div>
+            <div className="text-[14px] font-mono font-bold text-zinc-100">{positionValue != null && effectiveEquity > 0 ? `${(positionValue / effectiveEquity * 100).toFixed(1)}%` : '—'}</div>
           </div>
         </div>
         <div>
