@@ -8138,6 +8138,8 @@ const filtered = useMemo(() => {
             <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData}/>
           </main>
 
+          {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
+          <aside className="w-[280px] flex-shrink-0"/>
 
         </div>
 
