@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-05-28 08:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Caution / Global Weakness",
+    "spy_price": 750.46,
+    "spy_change_pct": -0.02,
+    "vix": 16.77,
+    "hy_oas": 2.72,
+    "yield_curve": 0.48,
+    "credit_status": "Complacent",
+    "s5fi": 58.8,
+    "mmth": 64.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Amazon (AMZN) secures exclusive streaming rights for a major global sporting event through AWS integration, boosting Prime subscriptions."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA (NVDA) unveils a new generation of AI accelerators with significant performance leaps, solidifying its market dominance in data centers."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla (TSLA) continues to be influenced by recycled headlines regarding EV competitive dynamics and production targets, offering tactical trading based purely on flow."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-05-27 17:05 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continues its strong momentum as institutional investors further accumulate positions ahead of anticipated AI infrastructure spending reports."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-04-15 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Strong Risk Appetite",
-    "spy_price": 699.94,
-    "spy_change_pct": 0.79,
-    "vix": 18.17,
-    "hy_oas": null,
-    "yield_curve": null,
-    "credit_status": "Unknown",
-    "s5fi": 58.9,
-    "mmth": 56.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "HOOD",
-          "company": "Robinhood Markets, Inc.",
-          "reason": "Regulatory policy shifts are creating new growth narratives for the company, attracting significant investor interest and driving fresh capital into the stock."
-        },
-        {
-          "ticker": "IONQ",
-          "company": "IonQ, Inc.",
-          "reason": "A significant breakthrough in quantum computing technology has reignited excitement for the sector, positioning IONQ as a key player in this nascent, high-growth industry."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "Continued strength driven by broad AI sector momentum and technical follow-through, rather than a fresh, specific catalyst today."
         }
       ]
     }
