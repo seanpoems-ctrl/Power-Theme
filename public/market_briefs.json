@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-05-28 17:05 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On / Growth Focus",
+    "spy_price": 754.6,
+    "spy_change_pct": 0.55,
+    "vix": 15.74,
+    "hy_oas": 2.71,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 58.9,
+    "mmth": 64.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "DELL",
+          "company": "Dell Technologies",
+          "reason": "Awarded significant new contracts, signaling robust demand for its enterprise solutions and a positive revenue outlook."
+        },
+        {
+          "ticker": "SNOW",
+          "company": "Snowflake Inc.",
+          "reason": "Delivered a strong earnings beat and raised full-year guidance, confirming accelerated demand for its cloud data platform."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Continued to exhibit volatility on technical flow and short-term positioning, lacking a fresh fundamental catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-05-28 08:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Shares saw continued positive momentum driven by a general sector uplift and sustained investor interest in AI infrastructure, rather than a specific fresh catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-04-16 08:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Tech-Led Optimism",
-    "spy_price": 699.94,
-    "spy_change_pct": 0.79,
-    "vix": 18.25,
-    "hy_oas": null,
-    "yield_curve": null,
-    "credit_status": "Unknown",
-    "s5fi": 59.0,
-    "mmth": 57.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Reported stronger-than-expected iPhone sales figures in Asian markets for Q1, exceeding analyst estimates."
-        },
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Unveiled significant advancements in its generative AI model for enterprise clients, projecting substantial future revenue streams."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continues its strong momentum as institutional investors further accumulate positions ahead of anticipated AI infrastructure spending reports."
         }
       ]
     }
