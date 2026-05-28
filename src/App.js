@@ -181,14 +181,18 @@ const TIP_COLORS = {
 const Tip = ({ text, color = 'zinc', width = "w-56", children }) => {
   const [pos, setPos] = React.useState(null);
   const handleEnter = (e) => {
-    const r = e.currentTarget.getBoundingClientRect();
+    const zoom = parseFloat(getComputedStyle(document.body).zoom) || 1;
     const tipW = 224; // w-56
-    const rawLeft = (r.right + 6 + tipW > window.innerWidth ? r.left - tipW - 6 : r.right + 6) - 113;
-    const top = Math.max(8, r.top - 76);
+    const vw = window.innerWidth / zoom;
+    const vh = window.innerHeight / zoom;
+    const mx = e.clientX / zoom;
+    const my = e.clientY / zoom;
+    const rawLeft = mx - tipW / 2;
+    const top = Math.max(8, my - 80);
     setPos({
-      left:      Math.max(8, Math.min(rawLeft, window.innerWidth - tipW - 8)),
+      left:      Math.max(8, Math.min(rawLeft, vw - tipW - 8)),
       top,
-      maxHeight: window.innerHeight - top - 8,
+      maxHeight: vh - top - 8,
     });
   };
   return (
@@ -2294,14 +2298,18 @@ const VerificationBadge = ({ verification, headlines }) => {
   }[status] || { icon: "?", color: "text-zinc-500", bg: "bg-zinc-700/20 border-zinc-600/30", label: status };
 
   const handleEnter = (e) => {
-    const r = e.currentTarget.getBoundingClientRect();
+    const zoom = parseFloat(getComputedStyle(document.body).zoom) || 1;
     const tipW = 288; // w-72
-    const rawLeft = (r.right + 6 + tipW > window.innerWidth ? r.left - tipW - 6 : r.right + 6) - 113;
-    const top = Math.max(8, r.top - 76);
+    const vw = window.innerWidth / zoom;
+    const vh = window.innerHeight / zoom;
+    const mx = e.clientX / zoom;
+    const my = e.clientY / zoom;
+    const rawLeft = mx - tipW / 2;
+    const top = Math.max(8, my - 80);
     setTooltipPos({
-      left:      Math.max(8, Math.min(rawLeft, window.innerWidth - tipW - 8)),
+      left:      Math.max(8, Math.min(rawLeft, vw - tipW - 8)),
       top,
-      maxHeight: window.innerHeight - top - 8,
+      maxHeight: vh - top - 8,
     });
   };
 
