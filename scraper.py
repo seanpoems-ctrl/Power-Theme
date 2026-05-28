@@ -2141,9 +2141,10 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
 
     for tkr in all_tickers:
         try:
-            closes = hist[tkr]["Close"].dropna() if len(all_tickers) > 1 else hist["Close"].dropna()
-            highs  = hist[tkr]["High"].dropna()  if len(all_tickers) > 1 else hist["High"].dropna()
-            lows   = hist[tkr]["Low"].dropna()   if len(all_tickers) > 1 else hist["Low"].dropna()
+            closes  = hist[tkr]["Close"].dropna()  if len(all_tickers) > 1 else hist["Close"].dropna()
+            highs   = hist[tkr]["High"].dropna()   if len(all_tickers) > 1 else hist["High"].dropna()
+            lows    = hist[tkr]["Low"].dropna()    if len(all_tickers) > 1 else hist["Low"].dropna()
+            volumes = hist[tkr]["Volume"].dropna() if len(all_tickers) > 1 else hist["Volume"].dropna()
         except Exception:
             continue
 
@@ -2176,7 +2177,15 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
         if days_6m > 0:
             composites[tkr] = float((closes.iloc[-1] / closes.iloc[-days_6m - 1] - 1) * 100)
 
-        stats[tkr] = {"price": price, "adr_pct": adr_pct, **perfs}
+        # Dollar volume — last day's close × volume
+        dollar_volume = None
+        if len(volumes) > 0 and price is not None:
+            try:
+                dollar_volume = round(float(volumes.iloc[-1]) * price)
+            except Exception:
+                pass
+
+        stats[tkr] = {"price": price, "adr_pct": adr_pct, "dollar_volume": dollar_volume, **perfs}
 
     # ── RS percentile within the ETF holdings universe ──────────────────────
     rs_lookup: dict[str, int] = {}
@@ -2195,12 +2204,13 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
         for h in holdings:
             new_h = dict(h)
             s = stats.get(h["ticker"], {})
-            new_h["price"]    = s.get("price")
-            new_h["perf_1d"]  = s.get("perf_1d")
-            new_h["perf_1w"]  = s.get("perf_1w")
-            new_h["perf_1m"]  = s.get("perf_1m")
-            new_h["adr_pct"]  = s.get("adr_pct")
-            new_h["rs"]       = rs_lookup.get(h["ticker"])
+            new_h["price"]         = s.get("price")
+            new_h["perf_1d"]       = s.get("perf_1d")
+            new_h["perf_1w"]       = s.get("perf_1w")
+            new_h["perf_1m"]       = s.get("perf_1m")
+            new_h["adr_pct"]       = s.get("adr_pct")
+            new_h["dollar_volume"] = s.get("dollar_volume")
+            new_h["rs"]            = rs_lookup.get(h["ticker"])
             enriched[etf_ticker].append(new_h)
 
     enriched_count = sum(1 for s in stats.values() if s.get("price") is not None)

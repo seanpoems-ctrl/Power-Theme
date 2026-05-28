@@ -1056,7 +1056,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_1w)}</td>
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_1m)}</td>
                           <td className="px-3 py-2 text-right font-mono text-zinc-400 hidden sm:table-cell">
-                            {h.dollar_volume != null ? `$${(h.dollar_volume / 1e6).toFixed(0)}M` : '—'}
+                            {h.dollar_volume != null ? fmtVol(h.dollar_volume) : '—'}
                           </td>
                           <td className="px-3 py-2 text-right font-mono">
                             {h.rs != null
@@ -1112,7 +1112,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1w)}</td>
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1m)}</td>
                           <td className="px-3 py-2 text-right font-mono text-zinc-400 hidden sm:table-cell">
-                            {s.dollar_volume != null ? `$${(s.dollar_volume / 1e6).toFixed(0)}M` : '—'}
+                            {s.dollar_volume != null ? fmtVol(s.dollar_volume) : '—'}
                           </td>
                           <td className="px-3 py-2 text-right font-mono">
                             {s.rs_52w != null
@@ -5566,7 +5566,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
                         {s.perf_1m != null ? `${s.perf_1m >= 0 ? '+' : ''}${s.perf_1m.toFixed(1)}%` : '—'}
                       </td>
                       <td className="px-3 py-2 text-right font-mono text-zinc-400">
-                        {s.dollar_volume != null ? `$${(s.dollar_volume / 1e6).toFixed(0)}M` : '—'}
+                        {s.dollar_volume != null ? fmtVol(s.dollar_volume) : '—'}
                       </td>
                       <td className="px-3 py-2 text-right font-mono">
                         {s.rs_52w != null ? <span className={`font-bold ${s.rs_52w >= 90 ? 'text-emerald-300 font-bold' : s.rs_52w >= 70 ? 'text-emerald-500' : s.rs_52w >= 50 ? 'text-zinc-300' : 'text-zinc-500'}`}>{s.rs_52w}</span> : '—'}
