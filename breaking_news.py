@@ -34,7 +34,7 @@ GEMINI_API_KEY  = os.getenv("GEMINI_API_KEY", "")
 TELEGRAM_TOKEN  = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT   = os.getenv("TELEGRAM_CHAT_ID", "")
 
-ALERT_THRESHOLD = 8    # Gemini grade >= 8 triggers alert
+ALERT_THRESHOLD = 9    # Gemini grade >= 9 triggers alert
 HOURS_LOOKBACK  = 0.5  # Only consider headlines from last 30 min
 MAX_ALERTS      = 6    # Keep at most N alerts in rolling store
 ALERT_TTL_HOURS = 12   # Expire alerts older than N hours
@@ -158,6 +158,63 @@ def fetch_finviz_headlines() -> list[dict]:
     return headlines
 
 
+# ── Government Policy Fast-Track ────────────────────────────────────────────
+# Headlines matching these keyword patterns are sent to Telegram immediately,
+# bypassing Gemini scoring entirely.
+
+_GOV_ACTORS = [
+    "white house", "president", "congress", "senate", "house of representatives",
+    "pentagon", "dod", "department of defense", "department of energy", "doe",
+    "department of commerce", "darpa", "nasa", "faa", "fda", "epa", "sec",
+    "treasury", "federal reserve", "fed ", "fomc",
+    "european union", "eu ", "china", "beijing", "japan", "south korea",
+    "uk government", "g7", "g20", "nato",
+]
+
+_GOV_ACTIONS = [
+    "invest", "fund", "allocat", "spend", "budget", "billion", "trillion",
+    "contract", "program", "initiative", "mandate", "policy", "law", "bill",
+    "executive order", "regulation", "deregulat", "approv", "ban", "sanction",
+    "subsid", "grant", "procure", "deploy", "launch", "creat", "expand",
+    "national strategy", "strategic reserve", "defense authorization",
+]
+
+def is_gov_policy_headline(title: str) -> bool:
+    """Return True if the headline looks like a government policy/investment announcement."""
+    t = title.lower()
+    has_actor  = any(kw in t for kw in _GOV_ACTORS)
+    has_action = any(kw in t for kw in _GOV_ACTIONS)
+    return has_actor and has_action
+
+
+def send_telegram_gov_policy(headline: dict) -> None:
+    """Send a fast-track government policy alert (no Gemini grade)."""
+    if not TELEGRAM_TOKEN or not TELEGRAM_CHAT:
+        return
+    title  = headline.get("title", "")
+    source = headline.get("source", "")
+    lines = [
+        "🏛️ *GOVERNMENT POLICY ALERT* 🏛️",
+        "",
+        f"*{_esc(title.upper())}*",
+        f"_{_esc(source)}_",
+    ]
+    text = "\n".join(lines)[:4090]
+    chat_ids = [cid.strip() for cid in TELEGRAM_CHAT.split(",")]
+    for chat_id in chat_ids:
+        try:
+            r = requests.post(
+                f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+                json={"chat_id": chat_id, "text": text, "parse_mode": "MarkdownV2",
+                      "disable_web_page_preview": True},
+                timeout=15,
+            )
+            r.raise_for_status()
+            print(f"  Telegram [GOV]: sent to {chat_id} — {title[:60]}")
+        except Exception as e:
+            print(f"  Telegram [GOV] failed for {chat_id}: {e}")
+
+
 # ── Gemini Grading ──────────────────────────────────────────────────────────
 
 ALLOWED_SOURCES = {"CNBC", "CNBC Markets", "Yahoo Finance", "Finviz"}
@@ -175,14 +232,10 @@ def grade_with_gemini(headlines: list[dict]) -> list[dict]:
         for i, h in enumerate(headlines[:30])
     )
 
-    prompt = f"""You are a senior equity trader. Your job is to flag ANY headline that could \
-cause a significant move in a stock sector TODAY — including sectors that are not currently \
-in the spotlight. A policy or funding announcement that seems niche today may trigger a \
-sector-wide surge. When in doubt, include it.
+    prompt = f"""You are a senior equity trader. Grade each headline 1–10 for likelihood of \
+causing an immediate large market move.
 
-Grade each headline 1–10 based on likelihood of causing sector-wide or market-wide price movement:
-
-GRADE 9–10 — Major macro shocks or catalysts (BEARISH):
+GRADE 9–10 — BEARISH macro shocks:
   - Fed emergency action / surprise rate hike or cut outside scheduled FOMC
   - Declared war or military strikes between major nations (US, China, Russia, Iran, Israel, NATO)
   - Major country sovereign default or IMF bailout (G20 level)
@@ -191,54 +244,25 @@ GRADE 9–10 — Major macro shocks or catalysts (BEARISH):
   - Major central bank emergency meeting / policy reversal
   - Catastrophic natural disaster disrupting global supply chain
 
-GRADE 9–10 — Major macro shocks or catalysts (BULLISH):
+GRADE 9–10 — BULLISH macro catalysts:
   - Major ceasefire or peace deal signed between warring nations
   - Surprise tariff removal or landmark trade deal (US-China, US-EU, etc.)
   - Fed surprise rate cut or QE announcement outside scheduled FOMC
 
-GRADE 8–9 — Government policy / spending / mandate for ANY sector (BULLISH):
-  - Any new government law, executive order, or policy that creates or expands demand \
-for ANY industry sector (e.g. drones, AI, chips, nuclear, biotech, EVs, defense, \
-cybersecurity, space, infrastructure, energy, agriculture, construction — ANY sector)
-  - Any government funding bill, budget allocation, or procurement program ≥$500M \
-for any technology or industry sector
-  - Pentagon / DoD / NASA / DOE / DARPA announcing a new major program or fleet contract \
-that benefits a sector (not just one company)
-  - Government deregulation or fast-track approval that unlocks an entire industry \
-(e.g. FAA drone corridor approval, FDA accelerated pathway for a drug class)
-  - Foreign government (China, EU, UK, Japan, South Korea, etc.) announcing major \
-national investment in a tech sector that competes with or impacts US equities
-
-GRADE 8 — Other sector-wide catalysts:
-  - FOMC decision that surprises consensus by ≥25bps
-  - G7/G20 coordinated sanctions on a major economy
-  - Ceasefire collapse / peace deal breakdown in an active war zone
-  - Confirmed government ban or restriction on an entire technology sector
-
-GRADE 8 — Single company earnings pre-market surge (BULLISH exception):
-  - A headline reporting that a SPECIFIC company is up ≥10% pre-market / after-hours \
-BECAUSE OF its earnings results (e.g. "XYZ surges 12% premarket on earnings beat")
-  - This exception applies ONLY when: (1) the move is confirmed ≥10%, AND \
-(2) the cause is explicitly earnings / results / guidance
+GRADE 9 — Single company earnings pre-market surge ≥10% (BULLISH):
+  - Headline confirms a specific stock is up ≥10% pre-market or after-hours due to earnings
+  - ONLY if: (1) move is explicitly stated as ≥10%, AND (2) cause is earnings/results/guidance
 
 AUTOMATICALLY GRADE 7 OR BELOW — DO NOT INCLUDE:
-  - Individual company earnings beats/misses with NO stated price move ≥10%
-  - Upgrades, downgrades, analyst price targets (any company)
+  - Any government policy, spending, investment, contract, or mandate (handled separately)
+  - Individual company earnings with no stated ≥10% price move
+  - Upgrades, downgrades, analyst price targets
   - Speculative headlines: "could", "may", "expected to", "concerns about", "fears of"
   - Nuclear threats or military posturing unless confirmed action is taken
-  - Oil price moves unless caused by a confirmed declared supply disruption
+  - Oil price moves unless caused by a confirmed supply disruption
   - Economic data releases (CPI, PPI, NFP) unless they trigger an emergency Fed response
-  - News about a single company with no broader sector implication AND no ≥10% price move
-  - Routine geopolitical commentary with no direct supply chain or trade impact
+  - Routine geopolitical commentary with no direct trade/supply-chain impact
   - Election results unless they immediately enact a major economic policy change
-
-CRITICAL RULE 1: If a headline mentions government action, law, spending, contract, mandate, \
-or deregulation that affects ANY identifiable stock sector — even one that seems minor or \
-niche today — grade it 8 or higher. We want to be notified early, before the market reacts.
-
-CRITICAL RULE 2: If a headline confirms a single stock is surging ≥10% pre-market or \
-after-hours due to earnings, grade it 8. Ignore this rule if no percentage is stated \
-or the move is below 10%.
 
 Headlines:
 {headlines_text}
@@ -435,22 +459,48 @@ def main():
     new_seen = [{"k": _headline_key(h["title"]), "ts": ts_now} for h in fresh_headlines]
     all_seen = expire_seen_keys(existing.get("seen_keys", []) + new_seen)
 
+    ts = now_et.isoformat()
+    pub_time_map = {h["title"]: h.get("pub_time") for h in deduped}
     new_alerts: list[dict] = []
-    if fresh_headlines:
-        print(f"  [2/2] Grading {len(fresh_headlines)} new headline(s) with Gemini…")
-        candidates = grade_with_gemini(fresh_headlines)
-        # Also skip if already an active alert
-        new_alerts = [
+
+    # ── Fast-track: government policy headlines bypass Gemini ────────────────
+    gov_hits = [
+        h for h in fresh_headlines
+        if is_gov_policy_headline(h["title"])
+        and not is_duplicate_alert(h["title"], existing)
+    ]
+    if gov_hits:
+        print(f"  [GOV] {len(gov_hits)} government policy headline(s) → direct Telegram")
+    for h in gov_hits:
+        send_telegram_gov_policy(h)
+        new_alerts.append({
+            "headline":  h["title"],
+            "source":    h["source"],
+            "grade":     "GOV",
+            "direction": "bullish",
+            "timestamp": ts,
+            "pub_time":  h.get("pub_time"),
+        })
+
+    # Exclude gov-policy hits from Gemini batch (already handled)
+    gov_titles   = {h["title"] for h in gov_hits}
+    gemini_batch = [h for h in fresh_headlines if h["title"] not in gov_titles]
+
+    # ── Gemini grading for remaining headlines ────────────────────────────────
+    if gemini_batch:
+        print(f"  [2/2] Grading {len(gemini_batch)} headline(s) with Gemini…")
+        candidates = grade_with_gemini(gemini_batch)
+        graded = [
             a for a in candidates
             if not is_duplicate_alert(a.get("headline", ""), existing)
         ]
+        new_alerts += graded
     else:
-        print("  [2/2] All headlines already seen — skipping Gemini")
+        print("  [2/2] All headlines already seen or handled — skipping Gemini")
+        graded = []
 
-    # Timestamp and send Telegram for each new alert
-    ts = now_et.isoformat()
-    pub_time_map = {h["title"]: h.get("pub_time") for h in deduped}
-    for a in new_alerts:
+    # Timestamp and send Telegram for Gemini-graded alerts
+    for a in graded:
         a["timestamp"] = ts
         a["pub_time"] = pub_time_map.get(a.get("headline", ""))
         send_telegram(a)
