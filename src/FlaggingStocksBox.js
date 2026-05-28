@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { createChart, ColorType, CandlestickSeries, LineSeries, HistogramSeries } from 'lightweight-charts';
-import { X, TrendingUp, ChevronDown, BarChart2 } from 'lucide-react';
+import { X, ChevronDown, BarChart2 } from 'lucide-react';
 
 // ─── Triangle / Pennant Detection ─────────────────────────────────────────────
 
@@ -46,138 +46,125 @@ function detectTriangle(bars) {
   const last = bars.length - 1;
   const avgPrice = (bars[last].h + bars[last].l + bars[last].c) / 3;
 
-  // ── True triangle only (no wedge / channel) ──────────────────────────────
-  // Upper resistance must be flat or descending (not ascending)
-  // Lower support must be flat or ascending (not descending)
-  // Tolerance: 0.2% per bar (handles minor noise)
   const slopeTol = avgPrice * 0.002;
-  if (upper.slope > slopeTol) return null;   // reject: ascending resistance = rising wedge
-  if (lower.slope < -slopeTol) return null;  // reject: descending support = falling wedge
+  if (upper.slope > slopeTol) return null;
+  if (lower.slope < -slopeTol) return null;
 
   const uLast = upper.at(last);
   const lLast = lower.at(last);
   if (uLast <= lLast) return null;
-  if (upper.slope - lower.slope >= 0) return null; // must still be converging
+  if (upper.slope - lower.slope >= 0) return null;
 
-  // ── Genuine tightening: range must have contracted ≥ 25% ─────────────────
   const startIdx = Math.min(rh[0].x, rl[0].x);
   const rangeAtStart = upper.at(startIdx) - lower.at(startIdx);
   const rangeAtEnd = uLast - lLast;
   if (rangeAtEnd >= rangeAtStart * 0.75) return null;
 
-  // Pattern must span ≥ 5 bars
   if (last - startIdx < 5) return null;
 
-  // Apex must be within reasonable future window
   const apexX = (lower.intercept - upper.intercept) / (upper.slope - lower.slope);
   const barsToApex = apexX - last;
   if (barsToApex < 1 || barsToApex > 45) return null;
 
-  // ── Price must still be INSIDE triangle (not broken out) ─────────────────
   const close = bars[last].c;
   const lastHigh = bars[last].h;
-  if (close > uLast * 1.01 || close < lLast * 0.99) return null; // close outside
-  if (lastHigh > uLast * 1.03) return null; // high pierced resistance by > 3% = breakout
+  if (close > uLast * 1.01 || close < lLast * 0.99) return null;
+  if (lastHigh > uLast * 1.03) return null;
 
   return { upper, lower, startIdx, barsToApex: Math.round(barsToApex) };
 }
 
-// ─── localStorage persistence helpers ─────────────────────────────────────────
+// ─── localStorage persistence helpers (v2: time-based offsets) ────────────────
+// v2 stores timeOffset = pt.time - lastBarTime, so positions survive daily bar rolls.
 
-const lsKey = ticker => `flagging_lines_v1_${ticker}`;
+const lsKey = ticker => `flagging_lines_v2_${ticker}`;
 
-function loadSavedLines(ticker, barsLen) {
+function loadSavedLines(ticker, lastBarTime) {
   try {
     const raw = localStorage.getItem(lsKey(ticker));
     if (!raw) return null;
     const saved = JSON.parse(raw);
-    const last = barsLen - 1;
-    // Convert end-relative offsets back to absolute barIdx
     return {
-      upper: saved.upper.map(p => ({ barIdx: Math.max(0, Math.min(last, last + p.endOffset)), price: p.price })),
-      lower: saved.lower.map(p => ({ barIdx: Math.max(0, Math.min(last, last + p.endOffset)), price: p.price })),
+      upper: saved.upper.map(p => ({ time: lastBarTime + p.timeOffset, price: p.price })),
+      lower: saved.lower.map(p => ({ time: lastBarTime + p.timeOffset, price: p.price })),
     };
   } catch { return null; }
 }
 
-function saveLines(ticker, barsLen, uPts, lPts) {
+function saveLines(ticker, lastBarTime, uPts, lPts) {
   if (!uPts || !lPts) return;
-  const last = barsLen - 1;
-  const toRel = p => ({ endOffset: p.barIdx - last, price: p.price });
   localStorage.setItem(lsKey(ticker), JSON.stringify({
-    upper: uPts.map(toRel),
-    lower: lPts.map(toRel),
+    upper: uPts.map(p => ({ timeOffset: p.time - lastBarTime, price: p.price })),
+    lower: lPts.map(p => ({ timeOffset: p.time - lastBarTime, price: p.price })),
     savedAt: Date.now(),
   }));
 }
 
 function clearSavedLines(ticker) {
   localStorage.removeItem(lsKey(ticker));
+  localStorage.removeItem(`flagging_lines_v1_${ticker}`); // clean up old format
 }
 
 // ─── Chart Modal ───────────────────────────────────────────────────────────────
 
 const BASE_TIME = 1700000000;
-const mkTime = idx => BASE_TIME + idx * 86400;
 
-function buildAutoEndpoints(bars, triangle) {
+// Build auto trendline endpoints as { time, price } pairs.
+// getT(barIdx) converts a bars_30d index → full-chart Unix timestamp.
+function buildAutoEndpoints(bars, triangle, getT) {
   const last = bars.length - 1;
   if (triangle) {
     const { upper, lower, startIdx } = triangle;
     return {
-      upper: [{ barIdx: startIdx, price: upper.at(startIdx) }, { barIdx: last, price: upper.at(last) }],
-      lower: [{ barIdx: startIdx, price: lower.at(startIdx) }, { barIdx: last, price: lower.at(last) }],
+      upper: [
+        { time: getT(startIdx), price: upper.at(startIdx) },
+        { time: getT(last),     price: upper.at(last) },
+      ],
+      lower: [
+        { time: getT(startIdx), price: lower.at(startIdx) },
+        { time: getT(last),     price: lower.at(last) },
+      ],
     };
   }
-  const start = Math.max(0, bars.length - 20);
+  const start = Math.max(0, last - 19);
   const slice = bars.slice(start);
   const topS = Math.max(...slice.slice(0, 5).map(b => b.h));
   const botS = Math.min(...slice.slice(0, 5).map(b => b.l));
   const prRange = Math.max(...bars.map(b => b.h)) - Math.min(...bars.map(b => b.l));
   return {
-    upper: [{ barIdx: start, price: topS }, { barIdx: last, price: bars[last].c + prRange * 0.02 }],
-    lower: [{ barIdx: start, price: botS }, { barIdx: last, price: bars[last].c - prRange * 0.02 }],
+    upper: [
+      { time: getT(start), price: topS },
+      { time: getT(last),  price: bars[last].c + prRange * 0.02 },
+    ],
+    lower: [
+      { time: getT(start), price: botS },
+      { time: getT(last),  price: bars[last].c - prRange * 0.02 },
+    ],
   };
 }
 
 function TriangleChartModal({ stock, onClose }) {
-  const outerRef = useRef(null);      // outer wrapper div (position:relative) — portal target
+  const outerRef = useRef(null);      // outer wrapper (position:relative) — portal target
   const containerRef = useRef(null);  // LWC chart container — never gets extra styles
   const chartRef = useRef(null);
   const upperSerRef = useRef(null);
   const lowerSerRef = useRef(null);
-  const upperPtsRef = useRef(null);
-  const lowerPtsRef = useRef(null);
-  const timesRef = useRef([]);       // actual timestamps per barIdx (from Yahoo or fallback)
-  const chartBarsLenRef = useRef(0); // total bar count in the chart
+  const upperPtsRef = useRef(null);   // { time, price }[]
+  const lowerPtsRef = useRef(null);   // { time, price }[]
+  const timesRef = useRef([]);        // Unix timestamps per chart bar index
+  const chartBarsLenRef = useRef(0);  // total bar count (needed for handleReset offset)
   const dragging = useRef(null);
 
-  const [chartBars, setChartBars] = useState(null); // null = loading
+  const [chartBars, setChartBars] = useState(null);
   const [upperPts, setUpperPts] = useState(null);
   const [lowerPts, setLowerPts] = useState(null);
   const [handlePx, setHandlePx] = useState(null);
   const [hasSaved, setHasSaved] = useState(() => !!localStorage.getItem(lsKey(stock.ticker)));
-  // During drag: override handle pixel position with raw mouse coords (no bar-snapping)
-  const [dragOverride, setDragOverride] = useState(null); // { key: string, pos: {x,y} }
+  // Raw mouse position during drag — bypasses bar-snapping for the visual dot
+  const [dragOverride, setDragOverride] = useState(null); // { key, pos: {x,y} }
 
   const bars = useMemo(() => stock.bars_30d || [], [stock]);
   const triangle = useMemo(() => detectTriangle(bars), [bars]);
-
-  // ── helpers: barIdx ↔ LWC time ────────────────────────────────────────────
-  const idxToTime = useCallback(idx => timesRef.current[idx] ?? BASE_TIME + idx * 86400, []);
-
-  const timeToIdx = useCallback(t => {
-    const times = timesRef.current;
-    if (!times.length) return 0;
-    // Binary-search closest bar
-    let lo = 0, hi = times.length - 1;
-    while (lo < hi) {
-      const mid = (lo + hi) >> 1;
-      if (times[mid] < t) lo = mid + 1; else hi = mid;
-    }
-    if (lo > 0 && Math.abs(times[lo - 1] - t) < Math.abs(times[lo] - t)) lo--;
-    return lo;
-  }, []);
 
   // ── Fetch 6-month Yahoo Finance data on open ──────────────────────────────
   useEffect(() => {
@@ -203,7 +190,6 @@ function TriangleChartModal({ stock, onClose }) {
           })).filter(b => b.h != null && b.l != null && b.c != null && b.h > 0 && b.l > 0);
           if (full.length >= 10) { setChartBars(full); return; }
         }
-        // fallback to bars_30d with sequential timestamps
         setChartBars(bars.map((b, i) => ({
           t: BASE_TIME + i * 86400,
           o: i > 0 ? bars[i - 1].c : b.c, h: b.h, l: b.l, c: b.c, v: b.v ?? 0,
@@ -220,24 +206,23 @@ function TriangleChartModal({ stock, onClose }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stock.ticker]);
 
+  // ── Recompute handle pixel positions from { time, price } endpoints ───────
   const computeHandles = useCallback(() => {
-    // Skip while dragging — dragOverride provides real-time position
     if (!chartRef.current || !upperSerRef.current || !lowerSerRef.current || dragging.current) return;
     const uPts = upperPtsRef.current;
     const lPts = lowerPtsRef.current;
     if (!uPts || !lPts) return;
     const ts = chartRef.current.timeScale();
-    const px = (barIdx, price, ser) => {
-      const x = ts.timeToCoordinate(timesRef.current[barIdx] ?? BASE_TIME + barIdx * 86400);
-      const y = ser.priceToCoordinate(price);
+    const px = (pt, ser) => {
+      const x = ts.timeToCoordinate(pt.time);
+      const y = ser.priceToCoordinate(pt.price);
       return (x != null && y != null) ? { x, y } : null;
     };
-    const up0 = px(uPts[0].barIdx, uPts[0].price, upperSerRef.current);
-    const up1 = px(uPts[1].barIdx, uPts[1].price, upperSerRef.current);
-    const lo0 = px(lPts[0].barIdx, lPts[0].price, lowerSerRef.current);
-    const lo1 = px(lPts[1].barIdx, lPts[1].price, lowerSerRef.current);
+    const up0 = px(uPts[0], upperSerRef.current);
+    const up1 = px(uPts[1], upperSerRef.current);
+    const lo0 = px(lPts[0], lowerSerRef.current);
+    const lo1 = px(lPts[1], lowerSerRef.current);
     if (up0 && up1 && lo0 && lo1) {
-      // Bail out if all positions moved < 0.5px — avoids unnecessary re-renders
       setHandlePx(prev => {
         if (prev &&
           Math.abs(prev.upper[0].x - up0.x) < 0.5 && Math.abs(prev.upper[0].y - up0.y) < 0.5 &&
@@ -254,7 +239,6 @@ function TriangleChartModal({ stock, onClose }) {
   useEffect(() => {
     if (!chartBars || !containerRef.current) return;
 
-    // offset: where does bars_30d sit inside the full chartBars array
     const offset = Math.max(0, chartBars.length - bars.length);
     timesRef.current = chartBars.map(b => b.t);
     chartBarsLenRef.current = chartBars.length;
@@ -278,29 +262,25 @@ function TriangleChartModal({ stock, onClose }) {
       time: b.t, open: b.o, high: b.h, low: b.l, close: b.c,
     })));
 
-    // Load saved lines (endOffset relative to full chart) or build auto endpoints
-    const saved = loadSavedLines(stock.ticker, chartBars.length);
-    const auto = buildAutoEndpoints(bars, triangle);
-    // Map auto endpoints from 30-bar basis → full-chart basis
-    const mappedAuto = {
-      upper: auto.upper.map(p => ({ barIdx: p.barIdx + offset, price: p.price })),
-      lower: auto.lower.map(p => ({ barIdx: p.barIdx + offset, price: p.price })),
-    };
-    const initU = saved?.upper ?? mappedAuto.upper;
-    const initL = saved?.lower ?? mappedAuto.lower;
+    // Build auto endpoints mapping bars_30d indices → full-chart timestamps
+    const getT_auto = idx => timesRef.current[idx + offset] ?? BASE_TIME + (idx + offset) * 86400;
+    const lastBarTime = timesRef.current[chartBars.length - 1] ?? BASE_TIME + (chartBars.length - 1) * 86400;
+
+    const saved = loadSavedLines(stock.ticker, lastBarTime);
+    const auto  = buildAutoEndpoints(bars, triangle, getT_auto);
+    const initU = saved?.upper ?? auto.upper;
+    const initL = saved?.lower ?? auto.lower;
 
     setUpperPts(initU); upperPtsRef.current = initU;
     setLowerPts(initL); lowerPtsRef.current = initL;
-
-    const getT = idx => timesRef.current[idx] ?? BASE_TIME + idx * 86400;
 
     const uSer = chart.addSeries(LineSeries, {
       color: '#ef4444', lineWidth: 2,
       lastValueVisible: false, priceLineVisible: false, crosshairMarkerVisible: false,
     });
     uSer.setData([
-      { time: getT(initU[0].barIdx), value: initU[0].price },
-      { time: getT(initU[1].barIdx), value: initU[1].price },
+      { time: initU[0].time, value: initU[0].price },
+      { time: initU[1].time, value: initU[1].price },
     ]);
     upperSerRef.current = uSer;
 
@@ -309,12 +289,12 @@ function TriangleChartModal({ stock, onClose }) {
       lastValueVisible: false, priceLineVisible: false, crosshairMarkerVisible: false,
     });
     lSer.setData([
-      { time: getT(initL[0].barIdx), value: initL[0].price },
-      { time: getT(initL[1].barIdx), value: initL[1].price },
+      { time: initL[0].time, value: initL[0].price },
+      { time: initL[1].time, value: initL[1].price },
     ]);
     lowerSerRef.current = lSer;
 
-    // ── Volume histogram (pane 1) ────────────────────────────────────────────
+    // Volume histogram (pane 1)
     const hasVolume = chartBars.some(b => (b.v ?? 0) > 0);
     if (hasVolume) {
       const volSer = chart.addSeries(HistogramSeries, {
@@ -322,10 +302,8 @@ function TriangleChartModal({ stock, onClose }) {
         priceScaleId: 'vol',
         lastValueVisible: false,
         priceLineVisible: false,
-      }, 1); // second pane
-      volSer.priceScale().applyOptions({
-        scaleMargins: { top: 0.1, bottom: 0 },
-      });
+      }, 1);
+      volSer.priceScale().applyOptions({ scaleMargins: { top: 0.1, bottom: 0 } });
       volSer.setData(chartBars.map(b => ({
         time: b.t,
         value: b.v ?? 0,
@@ -335,9 +313,7 @@ function TriangleChartModal({ stock, onClose }) {
 
     chart.timeScale().fitContent();
 
-    // rAF loop: recomputes handle pixel positions every frame.
-    // Handles ALL zoom/pan/price-scale changes without needing separate subscriptions.
-    // Equality check inside computeHandles prevents unnecessary React re-renders.
+    // rAF loop — covers ALL zoom/pan/price-scale changes
     let rafId;
     const rafLoop = () => { computeHandles(); rafId = requestAnimationFrame(rafLoop); };
     rafId = requestAnimationFrame(rafLoop);
@@ -358,21 +334,19 @@ function TriangleChartModal({ stock, onClose }) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chartBars]);
 
-  // ── Sync series + handles when endpoints change ──────────────────────────
+  // ── Sync series data when endpoints change ───────────────────────────────
   useEffect(() => {
     if (!upperSerRef.current || !lowerSerRef.current || !upperPts || !lowerPts) return;
     upperPtsRef.current = upperPts;
     lowerPtsRef.current = lowerPts;
-    const getT = idx => timesRef.current[idx] ?? BASE_TIME + idx * 86400;
     upperSerRef.current.setData([
-      { time: getT(upperPts[0].barIdx), value: upperPts[0].price },
-      { time: getT(upperPts[1].barIdx), value: upperPts[1].price },
+      { time: upperPts[0].time, value: upperPts[0].price },
+      { time: upperPts[1].time, value: upperPts[1].price },
     ]);
     lowerSerRef.current.setData([
-      { time: getT(lowerPts[0].barIdx), value: lowerPts[0].price },
-      { time: getT(lowerPts[1].barIdx), value: lowerPts[1].price },
+      { time: lowerPts[0].time, value: lowerPts[0].price },
+      { time: lowerPts[1].time, value: lowerPts[1].price },
     ]);
-    // Skip recomputing handle pixels while dragging — dragOverride is used instead
     if (!dragging.current) computeHandles();
   }, [upperPts, lowerPts, computeHandles]);
 
@@ -383,10 +357,7 @@ function TriangleChartModal({ stock, onClose }) {
     dragging.current = { line, ptIdx };
     const key = `${line}-${ptIdx}`;
 
-    // Lock chart pan/zoom so it doesn't move while we drag a handle
-    if (chartRef.current) {
-      chartRef.current.applyOptions({ handleScroll: false, handleScale: false });
-    }
+    if (chartRef.current) chartRef.current.applyOptions({ handleScroll: false, handleScale: false });
 
     const onMove = (ev) => {
       if (!dragging.current || !containerRef.current || !chartRef.current) return;
@@ -394,32 +365,28 @@ function TriangleChartModal({ stock, onClose }) {
       const mouseX = ev.clientX - rect.left;
       const mouseY = ev.clientY - rect.top;
 
-      // 1. Move the visible handle dot exactly with the mouse (no snapping)
+      // Visual dot follows mouse exactly — no snapping of any kind
       setDragOverride({ key, pos: { x: mouseX, y: mouseY } });
 
-      // 2. Update the trendline in the chart (price + bar conversion happens here)
+      // Update the trendline using the raw continuous time at the mouse x position.
+      // coordinateToTime returns fractional time between bars — no bar-snap.
       const ser = dragging.current.line === 'upper' ? upperSerRef.current : lowerSerRef.current;
       if (!ser) return;
-      const price = ser.coordinateToPrice(mouseY);
-      if (price == null) return;
+      const price   = ser.coordinateToPrice(mouseY);
       const rawTime = chartRef.current.timeScale().coordinateToTime(mouseX);
-      const barIdx = rawTime != null ? timeToIdx(rawTime) : null;
+      if (price == null || rawTime == null) return;
 
       const setter = dragging.current.line === 'upper' ? setUpperPts : setLowerPts;
-      const serRef = dragging.current.line === 'upper' ? upperSerRef : lowerSerRef;
+      const serRef  = dragging.current.line === 'upper' ? upperSerRef : lowerSerRef;
       setter(prev => {
         if (!prev) return prev;
         const next = [...prev];
-        next[dragging.current.ptIdx] = {
-          barIdx: barIdx ?? next[dragging.current.ptIdx].barIdx,
-          price,
-        };
-        // Update chart series directly (bypasses React render cycle for smooth line)
+        next[dragging.current.ptIdx] = { time: rawTime, price };
+        // Direct series update bypasses React render cycle for smooth dragging
         if (serRef.current) {
-          const getT = idx => timesRef.current[idx] ?? BASE_TIME + idx * 86400;
           serRef.current.setData([
-            { time: getT(next[0].barIdx), value: next[0].price },
-            { time: getT(next[1].barIdx), value: next[1].price },
+            { time: next[0].time, value: next[0].price },
+            { time: next[1].time, value: next[1].price },
           ]);
         }
         return next;
@@ -428,13 +395,12 @@ function TriangleChartModal({ stock, onClose }) {
 
     const onUp = () => {
       dragging.current = null;
-      // Re-enable chart pan/zoom
-      if (chartRef.current) {
-        chartRef.current.applyOptions({ handleScroll: true, handleScale: true });
-      }
-      setDragOverride(null); // Remove mouse-position override; snap handle to final bar position
+      if (chartRef.current) chartRef.current.applyOptions({ handleScroll: true, handleScale: true });
+      setDragOverride(null);
       computeHandles();
-      saveLines(stock.ticker, chartBarsLenRef.current, upperPtsRef.current, lowerPtsRef.current);
+      const lastBarTime = timesRef.current[timesRef.current.length - 1]
+        ?? BASE_TIME + (timesRef.current.length - 1) * 86400;
+      saveLines(stock.ticker, lastBarTime, upperPtsRef.current, lowerPtsRef.current);
       setHasSaved(true);
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseup', onUp);
@@ -442,16 +408,17 @@ function TriangleChartModal({ stock, onClose }) {
 
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseup', onUp);
-  }, [timeToIdx, computeHandles, stock.ticker]);
+  }, [computeHandles, stock.ticker]);
 
-  // ── Reset handler ─────────────────────────────────────────────────────────
+  // ── Reset to auto-detected endpoints ─────────────────────────────────────
   const handleReset = useCallback(() => {
     clearSavedLines(stock.ticker);
     setHasSaved(false);
     const offset = Math.max(0, chartBarsLenRef.current - bars.length);
-    const auto = buildAutoEndpoints(bars, triangle);
-    setUpperPts(auto.upper.map(p => ({ barIdx: p.barIdx + offset, price: p.price })));
-    setLowerPts(auto.lower.map(p => ({ barIdx: p.barIdx + offset, price: p.price })));
+    const getT = idx => timesRef.current[idx + offset] ?? BASE_TIME + (idx + offset) * 86400;
+    const auto = buildAutoEndpoints(bars, triangle, getT);
+    setUpperPts(auto.upper);
+    setLowerPts(auto.lower);
   }, [stock.ticker, bars, triangle]);
 
   return (
@@ -499,7 +466,6 @@ function TriangleChartModal({ stock, onClose }) {
 
         {/* Chart area */}
         <div className="p-3">
-          {/* outerRef: position:relative already via className — used as portal target for handles */}
           <div ref={outerRef} className="relative rounded-lg overflow-hidden" style={{ minHeight: 440 }}>
             {/* Loading spinner */}
             {!chartBars && (
@@ -510,19 +476,18 @@ function TriangleChartModal({ stock, onClose }) {
                 </div>
               </div>
             )}
-            {/* containerRef: plain div, NO extra styles — LWC chart attaches here */}
+            {/* LWC chart container — no extra styles so chart coordinates are undisturbed */}
             <div ref={containerRef} className="w-full"/>
 
-            {/* Drag handles — portalled into outerRef (position:relative, same origin as containerRef)
-                LWC coordinates are relative to containerRef; containerRef sits at (0,0) of outerRef,
-                so the two coordinate spaces are identical. We never mutate containerRef styles. */}
+            {/* Drag handles — portalled into outerRef so coordinate spaces share the same origin.
+                dragOverride keeps the dot glued to the mouse in real time (no bar-snapping).
+                After mouse-up, handle snaps to the saved { time, price } position. */}
             {outerRef.current && handlePx && createPortal(
               <div style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 10 }}>
                 {(['upper', 'lower']).flatMap(line =>
                   (handlePx[line] || []).map((p, i) => {
                     if (!p) return null;
                     const key = `${line}-${i}`;
-                    // While dragging this handle, use raw mouse position (no bar-snapping)
                     const pos = (dragOverride?.key === key) ? dragOverride.pos : p;
                     return (
                       <div
