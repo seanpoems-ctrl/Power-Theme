@@ -2346,14 +2346,11 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
 
 def _classify_etf_signal(detail: dict, closes: list) -> tuple:
     """
-    BREAKOUT: Price broke above SMA20 (purple line in Finviz) which was acting
-              as resistance. Detected by: this week made a new 11-week high,
-              price is above SMA20 & SMA50 & SMA200, and is still within 12%
-              of the prior resistance level (not too extended).
+    BREAKOUT: Price is above the purple SMA20 line in Finviz (s20 > 0),
+              and also above SMA50 and SMA200 to confirm uptrend.
 
-    PULLBACK: Price pulled back to test SMA50 (blue line in Finviz) as support.
-              Very tight band: within ±2% of SMA50, with SMA200 still rising
-              (s200 > 0) to confirm the long-term uptrend is intact.
+    PULLBACK: Price is approaching or touching the blue SMA50 line in Finviz
+              (-3% ≤ s50 ≤ +2%), while still above SMA200 (uptrend intact).
 
     Returns (signal, level): signal in {'breakout', 'pullback', None}.
     """
@@ -2361,47 +2358,15 @@ def _classify_etf_signal(detail: dict, closes: list) -> tuple:
     s50  = detail.get("sma50_pct")
     s200 = detail.get("sma200_pct")
 
-    # ── BREAKOUT: broke above SMA20 (purple line) ────────────────────────────
-    # Conditions:
-    #   1. Price is above all three MAs (s20 > 0, s50 > 0, s200 > 0)
-    #   2. Broke the prior resistance within the last 3 weeks (fresh move)
-    #   3. Still within 12% of that resistance — not an old breakout that's
-    #      been running for months (e.g. CIBR breakout 7 weeks ago → excluded)
-    #
-    # Key: base_high excludes the last 3 weeks (closes[-55:-15]).
-    # An ETF that broke out >3 weeks ago will have current price >> base_high
-    # → dist_pct > 12% → filtered out as "too extended / stale".
-    if (closes and len(closes) >= 55
-            and s20 is not None and s50 is not None and s200 is not None
-            and s20 > 0 and s50 > 0 and s200 > 0):
+    if s20 is None or s50 is None or s200 is None:
+        return (None, None)
 
-        last        = closes[-1]
-        recent_high = max(closes[-15:])   # highest close in the last 3 weeks
-        base_closes = closes[-55:-15]
-        base_high   = max(base_closes)    # resistance from 3–11 weeks ago
-        base_low    = min(base_closes)
-        # A true base is a tight consolidation. Steady uptrends have wide range.
-        base_range_pct = (base_high - base_low) / base_low * 100 if base_low > 0 else 999
-        dist_pct    = (last - base_high) / base_high * 100 if base_high > 0 else 999
+    # ── BREAKOUT: price crossed above purple SMA20 line ──────────────────────
+    if s20 > 0 and s50 > 0 and s200 > 0:
+        return ("breakout", None)
 
-        if (recent_high > base_high * 1.01  # broke meaningfully above resistance
-                and base_range_pct <= 25    # base was a consolidation, not an uptrend
-                and dist_pct <= 12):        # still fresh — within 12% of that level
-            return ("breakout", None)
-
-    # ── PULLBACK: price broke below SMA20, now testing SMA50 as support ─────
-    # Conditions:
-    #   1. s20 < 0  — price has already pulled back THROUGH SMA20 (the line
-    #                 is now overhead resistance, not support). This excludes
-    #                 ETFs where SMA20 ≈ SMA50 are both clustered at the same
-    #                 level (e.g. XLE where s20≈+1.7% and s50≈+1.8%).
-    #   2. -2% ≤ s50 ≤ 2%  — price is right at SMA50 (the blue line).
-    #   3. s200 > 5%  — long-term uptrend firmly intact; price at least 5%
-    #                   above SMA200. Filters out ETFs barely clinging to
-    #                   SMA200 (e.g. XLC s200≈+0.2%).
-    if (s20 is not None and s20 < 0
-            and s50 is not None and -1.5 <= s50 <= 1.5
-            and s200 is not None and s200 > 5.0):
+    # ── PULLBACK: price approaching / touching blue SMA50 line ───────────────
+    if -3 <= s50 <= 2 and s200 > 0:
         return ("pullback", "SMA50")
 
     return (None, None)
