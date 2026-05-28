@@ -1,6 +1,6 @@
 {
-  "generated_at": "May 27, 2026 (18:54 EDT)",
-  "session": "Post-Market",
+  "generated_at": "May 28, 2026 (08:53 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,15 +16,15 @@
     },
     {
       "label": "VIX",
-      "price": 16.29,
-      "change": -0.72,
+      "price": 16.6,
+      "change": 0.31,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
       "price": 4.48,
-      "change": -0.01,
+      "change": 0.0,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 64996.09,
-      "change_pct": -0.25
+      "price": 64693.12,
+      "change_pct": -0.47
     },
     "dax": {
       "label": "DAX",
-      "price": 25184.89,
-      "change_pct": -0.8
+      "price": 25050.1,
+      "change_pct": -0.51
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10505.01,
-      "change_pct": 0.13
+      "price": 10407.1,
+      "change_pct": -0.93
     }
   },
   "macro_breadth": {
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Normal Volatility, Selective Momentum",
+  "mood": "Choppy with International Weakness",
   "analysis": {
-    "action_line": "VIX 16.29 Normal + S5FI 58.8% breadth + DAX -0.80% weakness → trade RS leaders selectively near support.",
-    "analysis_para1": "Global markets presented a mixed picture today, with the DAX notably weaker by -0.80% and the Nikkei down -0.25%, partially offset by a +0.13% rise in the FTSE 100. While the BAML HY Spread is unavailable, the stable 10-year yield at 4.48% suggests no immediate credit distress. US market breadth remains healthy, with 58.8% of S&P 500 stocks above their 50-day moving average and 64.9% above their 200-day, indicating underlying strength despite the day's flat equity performance.",
-    "analysis_para2": "The S&P 500 and Nasdaq 100 concluded a largely flat session, with the S&P 500 holding firm around the 7500 level and the Nasdaq 100 testing the 30000 mark. The mechanical plan involves identifying high relative strength leaders that are either consolidating or pulling back to established support zones. Given the strong performance of Semiconductor and Hardware names, entries should be sought on clean technical setups with defined risk. A decisive break below the 7450 level for the S&P 500 or 29800 for the Nasdaq 100 would indicate a shift, requiring a more defensive stance.",
-    "technical_signal": "No reversal pattern confirmed yet. The indices experienced a flat session, indicating consolidation rather than a decisive directional move.",
+    "action_line": "VIX 16.60 Normal + S5FI 58.8% breadth + DAX -0.51% weakness → focus on high RS leaders near support, but maintain caution.",
+    "analysis_para1": "Global markets are showing clear signs of weakness this morning, with the Nikkei down -0.47%, DAX lower by -0.51%, and the FTSE 100 declining -0.93%. Despite this international drag, US indices are relatively flat pre-market. Market breadth indicators remain constructive, with 58.8% of S&P 500 stocks above their 50-day moving average and 64.9% above their 200-day. The high-yield credit spread regime is currently unknown, making it difficult to gauge underlying risk appetite from this specific metric.",
+    "analysis_para2": "With US indices opening flat against global weakness, focus on confirming intraday price action. Watch for the S&P 500 to hold above its overnight low, ideally turning positive. Aggressive long positions should be reserved for high Relative Strength leaders, particularly within the Semiconductors and Hardware sectors, as they are exhibiting significant momentum. Monitor for any signs of distribution or failure at key support levels on a broader market reversal. A decisive move below yesterday's low on the S&P 500 would warrant a more defensive stance.",
+    "technical_signal": "No reversal pattern confirmed yet. US indices are trading flat pre-market, showing a lack of clear directional conviction after global weakness.",
     "ticker_intel": [
       {
         "ticker": "MXL",
-        "company": "MaxLinear Inc",
+        "company": "MaxLinear, Inc",
         "grade": "A+",
-        "reason": "This semiconductor leader earns an A+ for its exceptional RS 99 and staggering +95.7% 1-month return, making it a top momentum play in the current tech-driven environment."
+        "reason": "MaxLinear (MXL) earns an A+ for its leading RS 99 and spectacular 1-month gain of +95.7%, showing unparalleled momentum in the robust semiconductor theme."
       },
       {
         "ticker": "AXTI",
         "company": "AXT Inc",
         "grade": "A",
-        "reason": "An A-grade semiconductor play with RS 99 and a robust +75.0% 1-month gain, demonstrating strong sector leadership and sustained upward momentum."
+        "reason": "AXT Inc (AXTI) is rated A for its exceptional RS 99 and strong +75.0% 1-month performance, making it a high-conviction leader within the semiconductor sector."
       },
       {
         "ticker": "ACMR",
-        "company": "ACM Research Inc",
+        "company": "ACM Research, Inc.",
         "grade": "C",
-        "reason": "Despite its RS 98 and strong 1-month gain, ACMR receives a C grade due to its comparatively weaker +29.5% 3-month return, suggesting less sustained momentum than peers."
+        "reason": "ACM Research, Inc. (ACMR) receives a C grade for its lagging 3-month return of +29.5% despite its recent 1-month surge, indicating a potential lack of sustained relative strength compared to other semiconductor leaders."
       }
     ]
   }
