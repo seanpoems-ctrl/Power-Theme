@@ -1367,15 +1367,6 @@ const ThematicLeaders = ({ etfHoldings = {} }) => {
   const [minADR,    setMinADR]    = useState(5);
   const [minMktCap, setMinMktCap] = useState(20e9);
 
-  // Reverse map: ETF ticker → first matching theme label in THEME_ETF_MAP
-  const etfToTheme = useMemo(() => {
-    const map = {};
-    Object.entries(THEME_ETF_MAP).forEach(([theme, etf]) => {
-      if (!map[etf]) map[etf] = theme;
-    });
-    return map;
-  }, []);
-
   const fmtMktCap = v => {
     if (v == null) return '—';
     if (v >= 1e12) return `$${(v / 1e12).toFixed(1)}T`;
@@ -1383,31 +1374,30 @@ const ThematicLeaders = ({ etfHoldings = {} }) => {
     return `$${(v / 1e6).toFixed(0)}M`;
   };
 
-  const groups = useMemo(() => {
-    const result = [];
+  // Build flat deduplicated leader list — one row per ticker,
+  // collecting every qualifying ETF it appears in as badges.
+  const leaders = useMemo(() => {
+    const map = {};   // ticker → { stock data, etfs: Set }
     Object.entries(etfHoldings).forEach(([etfTicker, holdings]) => {
-      const leaders = (holdings || [])
-        .filter(h =>
+      (holdings || []).forEach(h => {
+        if (
           (h.rs           ?? 0) >= minRS &&
           (h.dollar_volume ?? 0) >= minDVol &&
           (h.adr_pct      ?? 0) >= minADR &&
           (h.mkt_cap      ?? 0) >= minMktCap
-        )
-        .sort((a, b) => (b.rs ?? 0) - (a.rs ?? 0));
-      if (leaders.length > 0) {
-        result.push({ etf: etfTicker, theme: etfToTheme[etfTicker] || etfTicker, leaders });
-      }
+        ) {
+          if (!map[h.ticker]) {
+            map[h.ticker] = { ...h, etfs: new Set() };
+          }
+          map[h.ticker].etfs.add(etfTicker);
+        }
+      });
     });
-    // Sort groups: most leaders first, then by top RS
-    result.sort((a, b) =>
-      b.leaders.length !== a.leaders.length
-        ? b.leaders.length - a.leaders.length
-        : (b.leaders[0]?.rs ?? 0) - (a.leaders[0]?.rs ?? 0)
-    );
-    return result;
-  }, [etfHoldings, minRS, minDVol, minADR, minMktCap, etfToTheme]);
-
-  const totalLeaders = groups.reduce((s, g) => s + g.leaders.length, 0);
+    // Convert to sorted array — RS desc, then alpha
+    return Object.values(map)
+      .map(s => ({ ...s, etfs: [...s.etfs].sort() }))
+      .sort((a, b) => (b.rs ?? 0) - (a.rs ?? 0) || a.ticker.localeCompare(b.ticker));
+  }, [etfHoldings, minRS, minDVol, minADR, minMktCap]);
 
   const PerfCell = ({ v, bold }) => (
     <td className={`px-3 py-2 text-right font-mono text-[12px] ${bold ? 'font-bold' : ''} ${(v ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
@@ -1426,7 +1416,7 @@ const ThematicLeaders = ({ etfHoldings = {} }) => {
         <div className="flex items-center gap-2 flex-wrap">
           <span className="text-sm font-semibold text-zinc-100">🏆 Institutional Thematic Leaders</span>
           <span className="text-[11px] text-zinc-400 bg-zinc-800 px-2 py-0.5 rounded">
-            {totalLeaders} leaders · {groups.length} themes
+            {leaders.length} leaders
           </span>
         </div>
         <div className="flex items-center gap-3">
@@ -1434,7 +1424,7 @@ const ThematicLeaders = ({ etfHoldings = {} }) => {
             <span className="bg-zinc-800 px-1.5 py-0.5 rounded">RS ≥ {minRS}</span>
             <span className="bg-zinc-800 px-1.5 py-0.5 rounded">$Vol ≥ $200M</span>
             <span className="bg-zinc-800 px-1.5 py-0.5 rounded">ADR ≥ {minADR}%</span>
-            <span className="bg-zinc-800 px-1.5 py-0.5 rounded">Mkt Cap ≥ $20B</span>
+            <span className="bg-zinc-800 px-1.5 py-0.5 rounded">Mkt Cap ≥ ${minMktCap/1e9}B</span>
           </div>
           <svg className={`w-4 h-4 text-zinc-500 transition-transform ${collapsed ? '' : 'rotate-180'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/></svg>
         </div>
@@ -1443,13 +1433,13 @@ const ThematicLeaders = ({ etfHoldings = {} }) => {
       {!collapsed && (
         <div className="p-3">
 
-          {/* ── Adjustable filter bar ── */}
+          {/* ── Filter bar ── */}
           <div className="flex flex-wrap items-center gap-2 mb-3 text-[11px]">
             {[
-              { label: 'RS ≥', value: minRS,     setter: setMinRS,     opts: [80, 85, 90, 95] },
-              { label: '$Vol ≥', value: minDVol/1e6, setter: v => setMinDVol(v*1e6), opts: [50, 100, 200, 500], fmt: v => `$${v}M` },
-              { label: 'ADR ≥', value: minADR,   setter: setMinADR,   opts: [3, 4, 5, 7], fmt: v => `${v}%` },
-              { label: 'Mkt Cap ≥', value: minMktCap/1e9, setter: v => setMinMktCap(v*1e9), opts: [1, 5, 10, 20, 50, 100], fmt: v => `$${v}B` },
+              { label: 'RS ≥',      value: minRS,          setter: setMinRS,                    opts: [80, 85, 90, 95] },
+              { label: '$Vol ≥',    value: minDVol/1e6,    setter: v => setMinDVol(v*1e6),      opts: [50, 100, 200, 500],       fmt: v => `$${v}M` },
+              { label: 'ADR ≥',    value: minADR,          setter: setMinADR,                   opts: [3, 4, 5, 7],              fmt: v => `${v}%` },
+              { label: 'Mkt Cap ≥', value: minMktCap/1e9,  setter: v => setMinMktCap(v*1e9),   opts: [1, 5, 10, 20, 50, 100],   fmt: v => `$${v}B` },
             ].map(({ label, value, setter, opts, fmt }) => (
               <div key={label} className="flex items-center gap-1">
                 <span className="text-zinc-500">{label}</span>
@@ -1465,79 +1455,78 @@ const ThematicLeaders = ({ etfHoldings = {} }) => {
             ))}
           </div>
 
-          {groups.length === 0 ? (
+          {leaders.length === 0 ? (
             <div className="text-zinc-500 text-sm text-center py-8">No leaders match current filters</div>
           ) : (
-            <div className="flex flex-col gap-3">
-              {groups.map(g => (
-                <div key={g.etf} className="border border-zinc-800 rounded-lg overflow-hidden">
-
-                  {/* Group header */}
-                  <div className="flex items-center gap-2 px-3 py-2 bg-zinc-800/50 border-b border-zinc-800">
-                    <a
-                      href={`https://finviz.com/quote.ashx?t=${g.etf}`}
-                      target="_blank" rel="noreferrer"
-                      onClick={e => e.stopPropagation()}
-                      className="text-[11px] font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded hover:bg-emerald-500/20 transition-colors"
-                    >{g.etf}</a>
-                    <span className="text-xs text-zinc-300 font-medium">{g.theme}</span>
-                    <span className="ml-auto text-[11px] text-zinc-500">{g.leaders.length} leader{g.leaders.length !== 1 ? 's' : ''}</span>
-                  </div>
-
-                  {/* Table */}
-                  <div className="overflow-x-auto">
-                    <table className="w-full border-collapse text-[12px]">
-                      <thead className="text-zinc-500 text-[11px] uppercase tracking-wider border-b border-zinc-800">
-                        <tr>
-                          <th className="px-3 py-1.5 text-left font-medium">Ticker</th>
-                          <th className="px-3 py-1.5 text-left font-medium">Company</th>
-                          <th className="px-3 py-1.5 text-right font-medium">Price</th>
-                          <th className="px-3 py-1.5 text-right font-medium">1D</th>
-                          <th className="px-3 py-1.5 text-right font-medium">1W</th>
-                          <th className="px-3 py-1.5 text-right font-medium">1M</th>
-                          <th className="px-3 py-1.5 text-right font-medium">$Vol</th>
-                          <th className="px-3 py-1.5 text-right font-medium">ADR%</th>
-                          <th className="px-3 py-1.5 text-right font-medium">RS</th>
-                          <th className="px-3 py-1.5 text-right font-medium">Mkt Cap</th>
-                        </tr>
-                      </thead>
-                      <tbody className="divide-y divide-zinc-800/40">
-                        {g.leaders.map((h, i) => (
-                          <tr key={i} className="hover:bg-zinc-800/30 transition-colors">
-                            <td className="px-3 py-2">
-                              <a href={`https://finviz.com/quote.ashx?t=${h.ticker}`} target="_blank" rel="noreferrer"
-                                 className="font-mono font-bold text-sky-400 hover:text-sky-300 transition-colors">
-                                {h.ticker}
-                              </a>
-                            </td>
-                            <td className="px-3 py-2 text-zinc-300 truncate max-w-[180px]">{h.name || '—'}</td>
-                            <td className="px-3 py-2 text-right font-mono text-zinc-200">
-                              {h.price != null ? `$${h.price.toFixed(2)}` : '—'}
-                            </td>
-                            <PerfCell v={h.perf_1d} bold />
-                            <PerfCell v={h.perf_1w} />
-                            <PerfCell v={h.perf_1m} />
-                            <td className="px-3 py-2 text-right font-mono text-zinc-400">
-                              {h.dollar_volume != null ? fmtVol(h.dollar_volume) : '—'}
-                            </td>
-                            <td className="px-3 py-2 text-right font-mono text-zinc-300">
-                              {h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : '—'}
-                            </td>
-                            <td className="px-3 py-2 text-right font-mono">
-                              <span className={`font-bold ${(h.rs ?? 0) >= 95 ? 'text-emerald-300' : (h.rs ?? 0) >= 90 ? 'text-emerald-400' : 'text-zinc-300'}`}>
-                                {h.rs ?? '—'}
-                              </span>
-                            </td>
-                            <td className="px-3 py-2 text-right font-mono text-zinc-400">
-                              {fmtMktCap(h.mkt_cap)}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              ))}
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse text-[12px]">
+                <thead className="text-zinc-500 text-[11px] uppercase tracking-wider border-b border-zinc-800 sticky top-0 bg-zinc-900 z-10">
+                  <tr>
+                    <th className="px-3 py-2 text-left font-medium">Ticker</th>
+                    <th className="px-3 py-2 text-left font-medium">Company</th>
+                    <th className="px-3 py-2 text-left font-medium">Themes</th>
+                    <th className="px-3 py-2 text-right font-medium">Price</th>
+                    <th className="px-3 py-2 text-right font-medium">1D</th>
+                    <th className="px-3 py-2 text-right font-medium">1W</th>
+                    <th className="px-3 py-2 text-right font-medium">1M</th>
+                    <th className="px-3 py-2 text-right font-medium">$Vol</th>
+                    <th className="px-3 py-2 text-right font-medium">ADR%</th>
+                    <th className="px-3 py-2 text-right font-medium">RS</th>
+                    <th className="px-3 py-2 text-right font-medium">Mkt Cap</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-zinc-800/40">
+                  {leaders.map((h, i) => (
+                    <tr key={i} className="hover:bg-zinc-800/30 transition-colors">
+                      {/* Ticker */}
+                      <td className="px-3 py-2.5">
+                        <a href={`https://finviz.com/quote.ashx?t=${h.ticker}`} target="_blank" rel="noreferrer"
+                           className="font-mono font-bold text-sky-400 hover:text-sky-300 transition-colors">
+                          {h.ticker}
+                        </a>
+                      </td>
+                      {/* Company */}
+                      <td className="px-3 py-2.5 text-zinc-300 whitespace-nowrap">{h.name || '—'}</td>
+                      {/* ETF theme badges */}
+                      <td className="px-3 py-2.5">
+                        <div className="flex flex-wrap gap-1">
+                          {h.etfs.map(etf => (
+                            <span key={etf}
+                              className="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded border text-emerald-400 bg-emerald-500/10 border-emerald-500/25 whitespace-nowrap">
+                              {etf}
+                            </span>
+                          ))}
+                        </div>
+                      </td>
+                      {/* Price */}
+                      <td className="px-3 py-2.5 text-right font-mono text-zinc-200">
+                        {h.price != null ? `$${h.price.toFixed(2)}` : '—'}
+                      </td>
+                      <PerfCell v={h.perf_1d} bold />
+                      <PerfCell v={h.perf_1w} />
+                      <PerfCell v={h.perf_1m} />
+                      {/* $Vol */}
+                      <td className="px-3 py-2.5 text-right font-mono text-zinc-400">
+                        {h.dollar_volume != null ? fmtVol(h.dollar_volume) : '—'}
+                      </td>
+                      {/* ADR% */}
+                      <td className="px-3 py-2.5 text-right font-mono text-zinc-300">
+                        {h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : '—'}
+                      </td>
+                      {/* RS */}
+                      <td className="px-3 py-2.5 text-right font-mono">
+                        <span className={`font-bold ${(h.rs ?? 0) >= 95 ? 'text-emerald-300' : 'text-emerald-400'}`}>
+                          {h.rs ?? '—'}
+                        </span>
+                      </td>
+                      {/* Mkt Cap */}
+                      <td className="px-3 py-2.5 text-right font-mono text-zinc-400">
+                        {fmtMktCap(h.mkt_cap)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
           )}
         </div>
