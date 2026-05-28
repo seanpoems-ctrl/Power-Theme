@@ -1366,6 +1366,19 @@ const ThematicLeaders = ({ etfHoldings = {} }) => {
   const [minDVol,   setMinDVol]   = useState(200e6);
   const [minADR,    setMinADR]    = useState(5);
   const [minMktCap, setMinMktCap] = useState(20e9);
+  const [sort, setSort] = useState({ col: 'rs', dir: 'desc' });
+
+  const handleSort = col =>
+    setSort(prev => prev.col === col ? { col, dir: prev.dir === 'desc' ? 'asc' : 'desc' } : { col, dir: 'desc' });
+
+  const SortTh = ({ col, label, align = 'right' }) => (
+    <th
+      className={`px-3 py-2 font-medium cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap text-${align} text-[11px] uppercase tracking-wider`}
+      onClick={() => handleSort(col)}
+    >
+      {label}{sort.col === col ? (sort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
+    </th>
+  );
 
   const fmtMktCap = v => {
     if (v == null) return '—';
@@ -1376,8 +1389,8 @@ const ThematicLeaders = ({ etfHoldings = {} }) => {
 
   // Build flat deduplicated leader list — one row per ticker,
   // collecting every qualifying ETF it appears in as badges.
-  const leaders = useMemo(() => {
-    const map = {};   // ticker → { stock data, etfs: Set }
+  const baseLeaders = useMemo(() => {
+    const map = {};
     Object.entries(etfHoldings).forEach(([etfTicker, holdings]) => {
       (holdings || []).forEach(h => {
         if (
@@ -1386,18 +1399,27 @@ const ThematicLeaders = ({ etfHoldings = {} }) => {
           (h.adr_pct      ?? 0) >= minADR &&
           (h.mkt_cap      ?? 0) >= minMktCap
         ) {
-          if (!map[h.ticker]) {
-            map[h.ticker] = { ...h, etfs: new Set() };
-          }
+          if (!map[h.ticker]) map[h.ticker] = { ...h, etfs: new Set() };
           map[h.ticker].etfs.add(etfTicker);
         }
       });
     });
-    // Convert to sorted array — RS desc, then alpha
-    return Object.values(map)
-      .map(s => ({ ...s, etfs: [...s.etfs].sort() }))
-      .sort((a, b) => (b.rs ?? 0) - (a.rs ?? 0) || a.ticker.localeCompare(b.ticker));
+    return Object.values(map).map(s => ({ ...s, etfs: [...s.etfs].sort() }));
   }, [etfHoldings, minRS, minDVol, minADR, minMktCap]);
+
+  const leaders = useMemo(() => {
+    const { col, dir } = sort;
+    return [...baseLeaders].sort((a, b) => {
+      let av = a[col], bv = b[col];
+      // Special cases
+      if (col === 'etfs') { av = a.etfs.length; bv = b.etfs.length; }
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      if (typeof av === 'string') return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
+      return dir === 'asc' ? av - bv : bv - av;
+    });
+  }, [baseLeaders, sort]);
 
   const PerfCell = ({ v, bold }) => (
     <td className={`px-3 py-2 text-right font-mono text-[12px] ${bold ? 'font-bold' : ''} ${(v ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
@@ -1460,19 +1482,19 @@ const ThematicLeaders = ({ etfHoldings = {} }) => {
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full border-collapse text-[12px]">
-                <thead className="text-zinc-500 text-[11px] uppercase tracking-wider border-b border-zinc-800 sticky top-0 bg-zinc-900 z-10">
+                <thead className="text-zinc-500 border-b border-zinc-800 sticky top-0 bg-zinc-900 z-10">
                   <tr>
-                    <th className="px-3 py-2 text-left font-medium">Ticker</th>
-                    <th className="px-3 py-2 text-left font-medium">Company</th>
-                    <th className="px-3 py-2 text-left font-medium">Themes</th>
-                    <th className="px-3 py-2 text-right font-medium">Price</th>
-                    <th className="px-3 py-2 text-right font-medium">1D</th>
-                    <th className="px-3 py-2 text-right font-medium">1W</th>
-                    <th className="px-3 py-2 text-right font-medium">1M</th>
-                    <th className="px-3 py-2 text-right font-medium">$Vol</th>
-                    <th className="px-3 py-2 text-right font-medium">ADR%</th>
-                    <th className="px-3 py-2 text-right font-medium">RS</th>
-                    <th className="px-3 py-2 text-right font-medium">Mkt Cap</th>
+                    <SortTh col="ticker"        label="Ticker"   align="left" />
+                    <SortTh col="name"          label="Company"  align="left" />
+                    <SortTh col="etfs"          label="Themes"   align="left" />
+                    <SortTh col="price"         label="Price"    />
+                    <SortTh col="perf_1d"       label="1D"       />
+                    <SortTh col="perf_1w"       label="1W"       />
+                    <SortTh col="perf_1m"       label="1M"       />
+                    <SortTh col="dollar_volume" label="$Vol"     />
+                    <SortTh col="adr_pct"       label="ADR%"     />
+                    <SortTh col="rs"            label="RS"       />
+                    <SortTh col="mkt_cap"       label="Mkt Cap"  />
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-zinc-800/40">
