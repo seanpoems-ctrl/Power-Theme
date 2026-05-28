@@ -2,60 +2,49 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 4,
+  "count": 3,
   "stocks": [
     {
-      "ticker": "SDOT",
-      "company": "Sadot Group Inc.",
-      "industry": "Restaurants",
-      "price": 2.87,
-      "change_pct": 1888.91,
-      "adr_pct": 11.6,
+      "ticker": "MASK",
+      "company": "3 E Network Technology Group Ltd",
+      "industry": "Information Technology Services",
+      "price": 4.13,
+      "change_pct": 199.28,
+      "adr_pct": 17.5,
       "market_cap_b": 0.002,
-      "rs_ibd": 6,
-      "atr_ext_val": 162.32
-    },
-    {
-      "ticker": "CUPR",
-      "company": "Cuprina Holdings (Cayman) Limited",
-      "industry": "Pharmaceuticals: Major",
-      "price": 2.21,
-      "change_pct": 803.34,
-      "adr_pct": 8.5,
-      "market_cap_b": 0.042,
-      "rs_ibd": 98,
-      "atr_ext_val": 93.99
+      "rs_ibd": 2,
+      "atr_ext_val": 11.37
     },
     {
       "ticker": "ASTC",
       "company": "Astrotech Corporation",
       "industry": "Aerospace & Defense",
-      "price": 13.81,
-      "change_pct": 459.11,
-      "adr_pct": 10.8,
-      "market_cap_b": 0.004,
-      "rs_ibd": 98,
-      "atr_ext_val": 42.69
+      "price": 29.43,
+      "change_pct": 113.11,
+      "adr_pct": 10.0,
+      "market_cap_b": 0.024,
+      "rs_ibd": 99,
+      "atr_ext_val": 11.28
     },
     {
-      "ticker": "QTTB",
-      "company": "Q32 Bio Inc.",
-      "industry": "Biotechnology",
-      "price": 12.85,
-      "change_pct": 81.24,
-      "adr_pct": 8.1,
-      "market_cap_b": 0.218,
-      "rs_ibd": 97,
-      "atr_ext_val": 10.01
+      "ticker": "SPRC",
+      "company": "SciSparc Ltd.",
+      "industry": "Pharmaceuticals: Major",
+      "price": 10.55,
+      "change_pct": 140.32,
+      "adr_pct": 12.9,
+      "market_cap_b": 0.003,
+      "rs_ibd": 27,
+      "atr_ext_val": 10.92
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.02,
-    "spx_1m": 5.34,
-    "spx_3m": 8.85,
-    "spx_34d": 10.19,
-    "spx_qtd": 14.37,
-    "spx_mtd": 4.01
+    "spx_1d": 0.58,
+    "spx_1m": 5.99,
+    "spx_3m": 9.95,
+    "spx_34d": 10.95,
+    "spx_qtd": 15.03,
+    "spx_mtd": 4.61
   },
-  "fetched_at_utc": "2026-05-27T21:53:50+00:00"
+  "fetched_at_utc": "2026-05-28T21:49:32+00:00"
 }
