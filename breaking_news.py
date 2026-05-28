@@ -215,19 +215,30 @@ GRADE 8 — Other sector-wide catalysts:
   - Ceasefire collapse / peace deal breakdown in an active war zone
   - Confirmed government ban or restriction on an entire technology sector
 
+GRADE 8 — Single company earnings pre-market surge (BULLISH exception):
+  - A headline reporting that a SPECIFIC company is up ≥10% pre-market / after-hours \
+BECAUSE OF its earnings results (e.g. "XYZ surges 12% premarket on earnings beat")
+  - This exception applies ONLY when: (1) the move is confirmed ≥10%, AND \
+(2) the cause is explicitly earnings / results / guidance
+
 AUTOMATICALLY GRADE 7 OR BELOW — DO NOT INCLUDE:
-  - Individual company earnings beats/misses, guidance, upgrades, downgrades, price targets
+  - Individual company earnings beats/misses with NO stated price move ≥10%
+  - Upgrades, downgrades, analyst price targets (any company)
   - Speculative headlines: "could", "may", "expected to", "concerns about", "fears of"
   - Nuclear threats or military posturing unless confirmed action is taken
   - Oil price moves unless caused by a confirmed declared supply disruption
   - Economic data releases (CPI, PPI, NFP) unless they trigger an emergency Fed response
-  - News about a SINGLE named company with no broader sector implication
+  - News about a single company with no broader sector implication AND no ≥10% price move
   - Routine geopolitical commentary with no direct supply chain or trade impact
   - Election results unless they immediately enact a major economic policy change
 
-CRITICAL RULE: If a headline mentions government action, law, spending, contract, mandate, \
+CRITICAL RULE 1: If a headline mentions government action, law, spending, contract, mandate, \
 or deregulation that affects ANY identifiable stock sector — even one that seems minor or \
 niche today — grade it 8 or higher. We want to be notified early, before the market reacts.
+
+CRITICAL RULE 2: If a headline confirms a single stock is surging ≥10% pre-market or \
+after-hours due to earnings, grade it 8. Ignore this rule if no percentage is stated \
+or the move is below 10%.
 
 Headlines:
 {headlines_text}
