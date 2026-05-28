@@ -32,60 +32,113 @@ function findSwings(bars, win = 2) {
   return { highs, lows };
 }
 
-function detectTriangle(bars) {
-  if (!bars || bars.length < 12) return null;
-
-  // Try win=3 first for cleaner pivots; fall back to win=2 for tight consolidations
-  let highs = [], lows = [];
-  for (const win of [3, 2]) {
-    const s = findSwings(bars, win);
-    if (s.highs.length >= 2 && s.lows.length >= 2) {
-      highs = s.highs; lows = s.lows; break;
-    }
+// A real triangle is built from a sequence of lower highs and higher lows.
+// Verify the chosen pivots actually trend that way (small tolerance lets
+// ascending/descending triangles with one flat side through).
+function isMonotonic(pts, dir) {
+  for (let i = 1; i < pts.length; i++) {
+    const prev = pts[i - 1].y, cur = pts[i].y;
+    if (dir < 0 && cur > prev * 1.03) return false; // expect non-rising highs
+    if (dir > 0 && cur < prev * 0.97) return false; // expect non-falling lows
   }
-  if (highs.length < 2 || lows.length < 2) return null;
+  return true;
+}
 
-  const last = bars.length - 1;
-  const avgPrice = (bars[last].h + bars[last].l + bars[last].c) / 3;
+// Validate a candidate triangle defined by chosen swing-high pivots (rh) and
+// swing-low pivots (rl) against the full bar series. Returns a scored result
+// or null. `bars` items are { h, l, c }; for a closes-only series pass h=l=c.
+function evalTriangle(bars, rh, rl) {
+  const touches = rh.length + rl.length;
+  const endIdx = bars.length - 1;
+  const startIdx = Math.min(rh[0].x, rl[0].x);
+  const span = endIdx - startIdx;
+  if (span < 10) return null;
 
-  // Use up to 4 recent pivots for a more robust regression
-  const rh = highs.slice(-4);
-  const rl = lows.slice(-4);
+  // Need enough confirmed swings to define real trendlines; a short, tight
+  // pennant is allowed with one fewer touch.
+  if (touches < 5 && !(touches >= 4 && span <= 22)) return null;
+  if (!isMonotonic(rh, -1) || !isMonotonic(rl, +1)) return null;
+
   const upper = linReg(rh);
   const lower = linReg(rl);
   if (!upper || !lower) return null;
 
-  const uLast = upper.at(last);
-  const lLast = lower.at(last);
-  if (uLast <= lLast) return null;
-  // Lines must be converging — no restriction on individual slope direction
+  const uStart = upper.at(startIdx), lStart = lower.at(startIdx);
+  const uEnd = upper.at(endIdx), lEnd = lower.at(endIdx);
+  if (uStart <= lStart || uEnd <= lEnd) return null;
+
+  // Lines must converge (resistance falling relative to support rising)
   if (upper.slope >= lower.slope) return null;
 
-  const startIdx = Math.min(rh[0].x, rl[0].x);
-  if (last - startIdx < 8) return null;
+  const rangeStart = uStart - lStart;
+  const rangeEnd = uEnd - lEnd;
+  const contraction = 1 - rangeEnd / rangeStart;
+  // Reject weak contraction and near-degenerate fits (lines collapsed to a point)
+  if (contraction < 0.30 || contraction > 0.90) return null;
 
-  const rangeAtStart = upper.at(startIdx) - lower.at(startIdx);
-  const rangeAtEnd = uLast - lLast;
-  if (rangeAtStart <= 0 || rangeAtEnd <= 0) return null;
+  let sumC = 0;
+  for (let i = startIdx; i <= endIdx; i++) sumC += bars[i].c;
+  const avgPrice = sumC / (span + 1);
+  if (avgPrice <= 0) return null;
 
-  // Require at least 20% contraction over the visible pattern (was 10%)
-  if (rangeAtEnd >= rangeAtStart * 0.80) return null;
+  // Need a real starting range (not flat drift) and a tight right edge
+  if (rangeStart / avgPrice < 0.06) return null;
+  if (rangeEnd / avgPrice > 0.30) return null;
 
-  // Current range must be meaningfully tight relative to price
-  if (rangeAtEnd / avgPrice > 0.25) return null;
+  // Containment: most closes should sit between the two lines (with a small
+  // band). This is what separates a real triangle from two arbitrary trendlines.
+  let inside = 0;
+  for (let i = startIdx; i <= endIdx; i++) {
+    const u = upper.at(i), l = lower.at(i);
+    const band = (u - l) * 0.12 + avgPrice * 0.008;
+    if (bars[i].c <= u + band && bars[i].c >= l - band) inside++;
+  }
+  const containment = inside / (span + 1);
+  if (containment < 0.80) return null;
 
+  // Apex must lie ahead (allow a fresh breakout up to ~8 bars past) and not be
+  // so far out that the lines are effectively parallel.
   const apexX = (lower.intercept - upper.intercept) / (upper.slope - lower.slope);
-  const barsToApex = apexX - last;
-  // Allow apex upcoming ≤80 bars, or just-passed ≥−5 bars (breakout candidate)
-  if (barsToApex < -5 || barsToApex > 80) return null;
+  const barsToApex = apexX - endIdx;
+  if (barsToApex < -8 || barsToApex > Math.max(120, span * 3)) return null;
 
-  // Price should be inside or just touching the boundaries
-  const close = bars[last].c;
-  const tol = rangeAtEnd * 0.20;
-  if (close > uLast + tol || close < lLast - tol) return null;
-  if (bars[last].h > uLast * 1.05) return null;
+  // Pattern must be current: price near the converging lines (inside or just
+  // breaking out either side)
+  const lastC = bars[endIdx].c;
+  if (lastC > uEnd * 1.07 || lastC < lEnd * 0.93) return null;
 
-  return { upper, lower, startIdx, barsToApex: Math.max(0, Math.round(barsToApex)) };
+  const score = contraction * 2 + containment + touches * 0.12 + Math.min(span, 60) / 120;
+
+  return {
+    upper, lower, startIdx, endIdx, score, contraction, containment,
+    barsToApex: Math.max(0, Math.round(barsToApex)),
+  };
+}
+
+// Scan a bar series for the best converging triangle / pennant. Works on real
+// OHLC bars and on a closes-only series (pass each close as { h:c, l:c, c }).
+function detectConvergence(bars) {
+  if (!bars || bars.length < 14) return null;
+  let best = null;
+  for (const win of [4, 3, 2]) {
+    const { highs, lows } = findSwings(bars, win);
+    if (highs.length < 2 || lows.length < 2) continue;
+    // A trader anchors the lines on the most recent swings; try the last 2–5
+    // pivots on each side and keep the highest-scoring valid configuration.
+    for (let kh = 2; kh <= Math.min(5, highs.length); kh++) {
+      for (let kl = 2; kl <= Math.min(5, lows.length); kl++) {
+        const r = evalTriangle(bars, highs.slice(-kh), lows.slice(-kl));
+        if (r && (!best || r.score > best.score)) best = r;
+      }
+    }
+  }
+  return best;
+}
+
+// Detect on a 6-month closes series (sparkline) for the candidate list.
+function detectFromSparkline(sparkline) {
+  if (!sparkline || sparkline.length < 14) return null;
+  return detectConvergence(sparkline.map(c => ({ h: c, l: c, c })));
 }
 
 // ─── localStorage persistence (time-based offsets so positions survive bar rolls) ──
@@ -122,36 +175,40 @@ function clearSavedLines(ticker) {
 
 const BASE_TIME = 1700000000;
 
-// Build auto trendline endpoints as { time, price } pairs.
-// getT(barIdx) converts a bars_30d index → full-chart Unix timestamp.
-function buildAutoEndpoints(bars, triangle, getT) {
-  const last = bars.length - 1;
-  if (triangle) {
-    const { upper, lower, startIdx } = triangle;
+// Build auto trendline endpoints as { time, price } pairs, detecting the
+// triangle directly on the chart's 6-month OHLC so the drawn lines match the
+// detected pattern. `chartBars` items are { t, o, h, l, c, v }.
+function buildAutoEndpoints(chartBars) {
+  const last = chartBars.length - 1;
+  const tri = detectConvergence(chartBars);
+  if (tri) {
     return {
+      tri,
       upper: [
-        { time: getT(startIdx), price: upper.at(startIdx) },
-        { time: getT(last),     price: upper.at(last) },
+        { time: chartBars[tri.startIdx].t, price: tri.upper.at(tri.startIdx) },
+        { time: chartBars[tri.endIdx].t,   price: tri.upper.at(tri.endIdx) },
       ],
       lower: [
-        { time: getT(startIdx), price: lower.at(startIdx) },
-        { time: getT(last),     price: lower.at(last) },
+        { time: chartBars[tri.startIdx].t, price: tri.lower.at(tri.startIdx) },
+        { time: chartBars[tri.endIdx].t,   price: tri.lower.at(tri.endIdx) },
       ],
     };
   }
+  // Fallback: rough wedge over the most recent ~20 bars
   const start = Math.max(0, last - 19);
-  const slice = bars.slice(start);
+  const slice = chartBars.slice(start);
   const topS = Math.max(...slice.slice(0, 5).map(b => b.h));
   const botS = Math.min(...slice.slice(0, 5).map(b => b.l));
-  const prRange = Math.max(...bars.map(b => b.h)) - Math.min(...bars.map(b => b.l));
+  const prRange = Math.max(...chartBars.map(b => b.h)) - Math.min(...chartBars.map(b => b.l));
   return {
+    tri: null,
     upper: [
-      { time: getT(start), price: topS },
-      { time: getT(last),  price: bars[last].c + prRange * 0.02 },
+      { time: chartBars[start].t, price: topS },
+      { time: chartBars[last].t,  price: chartBars[last].c + prRange * 0.02 },
     ],
     lower: [
-      { time: getT(start), price: botS },
-      { time: getT(last),  price: bars[last].c - prRange * 0.02 },
+      { time: chartBars[start].t, price: botS },
+      { time: chartBars[last].t,  price: chartBars[last].c - prRange * 0.02 },
     ],
   };
 }
@@ -165,7 +222,7 @@ function TriangleChartModal({ stock, onClose }) {
   const upperPtsRef = useRef(null);
   const lowerPtsRef = useRef(null);
   const timesRef = useRef([]);
-  const chartBarsLenRef = useRef(0);
+  const autoRef = useRef(null);
   const dragging = useRef(null);
 
   const [chartBars, setChartBars] = useState(null);
@@ -174,9 +231,9 @@ function TriangleChartModal({ stock, onClose }) {
   const [handlePx, setHandlePx] = useState(null);
   const [hasSaved, setHasSaved] = useState(() => !!localStorage.getItem(lsKey(stock.ticker)));
   const [dragOverride, setDragOverride] = useState(null);
+  const [detected, setDetected] = useState(null);
 
   const bars = useMemo(() => stock.bars_30d || [], [stock]);
-  const triangle = useMemo(() => detectTriangle(bars), [bars]);
 
   // ── Fetch 6-month Yahoo Finance data ─────────────────────────────────────
   useEffect(() => {
@@ -251,9 +308,7 @@ function TriangleChartModal({ stock, onClose }) {
   useEffect(() => {
     if (!chartBars || !containerRef.current) return;
 
-    const offset = Math.max(0, chartBars.length - bars.length);
     timesRef.current = chartBars.map(b => b.t);
-    chartBarsLenRef.current = chartBars.length;
 
     const chart = createChart(containerRef.current, {
       layout: { background: { type: ColorType.Solid, color: '#18181b' }, textColor: '#a1a1aa' },
@@ -274,11 +329,12 @@ function TriangleChartModal({ stock, onClose }) {
       time: b.t, open: b.o, high: b.h, low: b.l, close: b.c,
     })));
 
-    const getT = idx => timesRef.current[idx + offset] ?? BASE_TIME + (idx + offset) * 86400;
     const lastBarTime = timesRef.current[chartBars.length - 1] ?? BASE_TIME + (chartBars.length - 1) * 86400;
 
     const saved = loadSavedLines(stock.ticker, lastBarTime);
-    const auto = buildAutoEndpoints(bars, triangle, getT);
+    const auto = buildAutoEndpoints(chartBars);
+    autoRef.current = auto;
+    setDetected(auto.tri);
     const initU = saved?.upper ?? auto.upper;
     const initL = saved?.lower ?? auto.lower;
 
@@ -431,12 +487,11 @@ function TriangleChartModal({ stock, onClose }) {
   const handleReset = useCallback(() => {
     clearSavedLines(stock.ticker);
     setHasSaved(false);
-    const offset = Math.max(0, chartBarsLenRef.current - bars.length);
-    const getT = idx => timesRef.current[idx + offset] ?? BASE_TIME + (idx + offset) * 86400;
-    const auto = buildAutoEndpoints(bars, triangle, getT);
-    setUpperPts(auto.upper);
-    setLowerPts(auto.lower);
-  }, [stock.ticker, bars, triangle]);
+    if (autoRef.current) {
+      setUpperPts(autoRef.current.upper);
+      setLowerPts(autoRef.current.lower);
+    }
+  }, [stock.ticker]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75" onClick={onClose}>
@@ -449,9 +504,9 @@ function TriangleChartModal({ stock, onClose }) {
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-white font-bold text-[15px]">{stock.ticker}</span>
             <span className="text-zinc-400 text-sm truncate max-w-[180px]">{stock.company}</span>
-            {triangle && (
+            {detected && (
               <span className="px-2 py-0.5 rounded text-[11px] bg-amber-500/20 text-amber-400 border border-amber-500/30">
-                Triangle · apex ~{triangle.barsToApex}d
+                Triangle · apex ~{detected.barsToApex}d
               </span>
             )}
             {hasSaved && (
@@ -549,14 +604,14 @@ export default function FlaggingStocksBox({ data }) {
         for (const stock of (sub.stocks || [])) {
           if (seen.has(stock.ticker)) continue;
           seen.add(stock.ticker);
-          if ((stock.bars_30d?.length ?? 0) >= 12) {
-            const tri = detectTriangle(stock.bars_30d);
-            if (tri) results.push({ ...stock, _triangle: tri, _theme: theme.name, _sub: sub.name });
-          }
+          // Detect on the 6-month closes so multi-week pennants and multi-month
+          // triangles are both visible (bars_30d only spans ~6 weeks).
+          const tri = detectFromSparkline(stock.sparkline);
+          if (tri) results.push({ ...stock, _triangle: tri, _theme: theme.name, _sub: sub.name });
         }
       }
     }
-    return results.sort((a, b) => a._triangle.barsToApex - b._triangle.barsToApex);
+    return results.sort((a, b) => b._triangle.score - a._triangle.score);
   }, [data]);
 
   if (!data) return null;
