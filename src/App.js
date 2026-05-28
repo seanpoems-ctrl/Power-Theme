@@ -4651,6 +4651,37 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
   const [weekOffset, setWeekOffset]   = useState(0);
   const [analysisStock, setAnalysisStock] = useState(null); // stock object for AI drawer
 
+  // ── Historical calendar archive loading ────────────────────────────────────
+  // When weekOffset < 0, we try to load calendar_history/econ-YYYY-MM-DD.json
+  // and calendar_history/earnings-YYYY-MM-DD.json (named by Monday of that week).
+  const [histCache, setHistCache] = useState({});   // key: "YYYY-MM-DD" monday → { econ, earnings }
+  const [histLoading, setHistLoading] = useState(false);
+
+  // Get Monday of the week at weekOffset as "YYYY-MM-DD" string
+  const weekMonday = useMemo(() => {
+    const d = calGetWeekDays(weekOffset)[0]; // first element is Monday (Date object)
+    return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  }, [weekOffset]);
+
+  React.useEffect(() => {
+    if (weekOffset >= 0) return;                   // current/future: use live data
+    if (histCache[weekMonday] !== undefined) return; // already fetched
+    setHistLoading(true);
+    const v = Date.now();
+    Promise.all([
+      fetch(`calendar_history/econ-${weekMonday}.json?v=${v}`)
+        .then(r => r.ok ? r.json() : null).catch(() => null),
+      fetch(`calendar_history/earnings-${weekMonday}.json?v=${v}`)
+        .then(r => r.ok ? r.json() : null).catch(() => null),
+    ]).then(([econ, earns]) => {
+      setHistCache(prev => ({ ...prev, [weekMonday]: { econ, earnings: earns } }));
+    }).finally(() => setHistLoading(false));
+  }, [weekMonday, weekOffset]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Active data source: archived when navigating past, live otherwise
+  const activeEconData     = weekOffset < 0 ? (histCache[weekMonday]?.econ     ?? econData)     : econData;
+  const activeEarningsData = weekOffset < 0 ? (histCache[weekMonday]?.earnings ?? earningsData) : earningsData;
+
   const tickerThemeMap = useMemo(() => {
     const m = {};
     for (const theme of thematicData?.themes || [])
@@ -4677,22 +4708,22 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
   // Supports both {events:[]} (new schema from econ_calendar.py) and
   // legacy {today:[], upcoming:[]} fallback.
   const allEconEvents = useMemo(() => {
-    const raw = econData?.events
-      ?? [...(econData?.today || []), ...(econData?.upcoming || [])];
+    const raw = activeEconData?.events
+      ?? [...(activeEconData?.today || []), ...(activeEconData?.upcoming || [])];
     return raw.map(e => ({
       ...e,
       date:    e.date    ?? (e.datetime_et ? e.datetime_et.slice(0, 10) : null),
       time_et: e.time_et ?? (e.datetime_et ? e.datetime_et.slice(11, 16) : null),
       event:   e.event   ?? e.event_name ?? e.name ?? "",
     }));
-  }, [econData]);
+  }, [activeEconData]);
 
   // ── Normalise all earnings ─────────────────────────────────────────────────
   // Support both new flat schema {earnings:[]} and legacy {today:[], upcoming:[]}
   const allEarnings = useMemo(() =>
-    earningsData?.earnings
-      ?? [...(earningsData?.today || []), ...(earningsData?.upcoming || [])],
-  [earningsData]);
+    activeEarningsData?.earnings
+      ?? [...(activeEarningsData?.today || []), ...(activeEarningsData?.upcoming || [])],
+  [activeEarningsData]);
 
   // ── Count by day (for weekly strip badges) ────────────────────────────────
   const econCountByDay = useMemo(() => {
@@ -4822,6 +4853,9 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
             ›
           </button>
           <span className="text-[13px] font-semibold text-zinc-200 ml-1">{calFmtWeekRange(weekDays)}</span>
+          {histLoading && <RefreshCw size={11} className="text-zinc-500 animate-spin ml-1"/>}
+          {weekOffset < 0 && !histLoading && histCache[weekMonday] && !histCache[weekMonday].econ && !histCache[weekMonday].earnings &&
+            <span className="text-[10px] text-zinc-600 italic ml-1">No archive for this week</span>}
         </div>
 
         {/* 7-column day grid — responsive: all 7 on lg, Mon-Fri on md, 3 days on sm */}

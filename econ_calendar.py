@@ -35,11 +35,13 @@ import requests
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
-ET          = ZoneInfo("America/New_York")
-NOW_ET      = datetime.now(ET)
-TODAY_ET    = NOW_ET.date()
-WEEK_END    = TODAY_ET + timedelta(days=7)
-OUTPUT_PATH = Path("public/econ_calendar.json")
+ET           = ZoneInfo("America/New_York")
+NOW_ET       = datetime.now(ET)
+TODAY_ET     = NOW_ET.date()
+WEEK_START   = TODAY_ET - timedelta(days=28)   # 4 weeks of history
+WEEK_END     = TODAY_ET + timedelta(days=14)   # 2 weeks forward
+OUTPUT_PATH  = Path("public/econ_calendar.json")
+HISTORY_DIR  = Path("public/calendar_history")
 
 BROWSER_HEADERS = {
     "User-Agent": (
@@ -130,7 +132,7 @@ def _fetch_tradingview() -> list[dict]:
     """
     results: list[dict] = []
     try:
-        from_dt = datetime(TODAY_ET.year, TODAY_ET.month, TODAY_ET.day,
+        from_dt = datetime(WEEK_START.year, WEEK_START.month, WEEK_START.day,
                            tzinfo=timezone.utc)
         to_dt   = datetime(WEEK_END.year, WEEK_END.month, WEEK_END.day,
                            23, 59, 59, tzinfo=timezone.utc)
@@ -171,7 +173,7 @@ def _fetch_tradingview() -> list[dict]:
                 ev_date = date.fromisoformat(date_str)
             except ValueError:
                 continue
-            if not (TODAY_ET <= ev_date <= WEEK_END):
+            if not (WEEK_START <= ev_date <= WEEK_END):
                 continue
 
             # Currency filter
@@ -265,7 +267,7 @@ def _fetch_forexfactory() -> list[dict]:
                         current_date = candidate
                         current_time = None
 
-            if current_date is None or current_date > WEEK_END:
+            if current_date is None or not (WEEK_START <= current_date <= WEEK_END):
                 continue
 
             currency_cell = row.select_one("td.calendar__currency")
@@ -359,7 +361,7 @@ def _fetch_faireconomy() -> list[dict]:
             continue
         date_str, time_str = parsed
         try:
-            if not (TODAY_ET <= date.fromisoformat(date_str) <= WEEK_END):
+            if not (WEEK_START <= date.fromisoformat(date_str) <= WEEK_END):
                 continue
         except ValueError:
             continue
@@ -444,10 +446,20 @@ def main() -> None:
     OUTPUT_PATH.write_text(
         json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8"
     )
+    # ── Archive weekly snapshot (named by Monday of current week) ────────────
+    # Frontend loads calendar_history/econ-YYYY-MM-DD.json when navigating
+    # to past weeks, where YYYY-MM-DD is the Monday of that week.
+    HISTORY_DIR.mkdir(parents=True, exist_ok=True)
+    week_monday = TODAY_ET - timedelta(days=TODAY_ET.weekday())
+    archive_path = HISTORY_DIR / f"econ-{week_monday}.json"
+    archive_path.write_text(
+        json.dumps(result, separators=(",", ":"), ensure_ascii=False), encoding="utf-8"
+    )
     logger.info(
-        "Done — %d USD events → %s  (source: %s)",
+        "Done — %d USD events → %s + archive %s  (source: %s)",
         len(result["events"]),
         OUTPUT_PATH,
+        archive_path.name,
         result["data_source"],
     )
 

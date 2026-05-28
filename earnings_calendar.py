@@ -67,11 +67,12 @@ logger = logging.getLogger(__name__)
 # Finnhub API key — set FINNHUB_API_KEY in .env or environment
 FINNHUB_KEY = os.getenv("FINNHUB_API_KEY") or os.getenv("REACT_APP_FINNHUB_KEY") or ""
 
-ET           = ZoneInfo("America/New_York")
-TODAY_ET     = datetime.now(ET).date()
-WEEK_END     = TODAY_ET + timedelta(days=7)
-OUTPUT_PATH  = Path("public/earnings_calendar.json")
+ET            = ZoneInfo("America/New_York")
+TODAY_ET      = datetime.now(ET).date()
+WEEK_END      = TODAY_ET + timedelta(days=7)
+OUTPUT_PATH   = Path("public/earnings_calendar.json")
 THEMATIC_JSON = Path("public/thematic_data.json")
+HISTORY_DIR   = Path("public/calendar_history")
 
 # Quality filters for earnings calendar.
 # ADR% is intentionally NOT filtered — large stable caps (GS, JPM, AAPL) have low
@@ -731,10 +732,20 @@ def main() -> None:
     OUTPUT_PATH.write_text(
         json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8"
     )
+    # ── Archive weekly snapshot (named by Monday of current week) ────────────
+    # Frontend loads calendar_history/earnings-YYYY-MM-DD.json when navigating
+    # to past weeks, where YYYY-MM-DD is the Monday of that week.
+    HISTORY_DIR.mkdir(parents=True, exist_ok=True)
+    week_monday = TODAY_ET - timedelta(days=TODAY_ET.weekday())
+    archive_path = HISTORY_DIR / f"earnings-{week_monday}.json"
+    archive_path.write_text(
+        json.dumps(result, separators=(",", ":"), ensure_ascii=False), encoding="utf-8"
+    )
     logger.info(
-        "Done — %d earnings → %s  (source: %s)",
+        "Done — %d earnings → %s + archive %s  (source: %s)",
         len(result["earnings"]),
         OUTPUT_PATH,
+        archive_path.name,
         result["data_source"],
     )
 
