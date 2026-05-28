@@ -1,23 +1,23 @@
 {
-  "generated_at": "May 28, 2026 (12:55 EDT)",
-  "session": "Market Hours",
+  "generated_at": "May 28, 2026 (18:30 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7561.0,
-      "change": 40.64,
-      "change_pct": 0.54
+      "price": 7563.63,
+      "change": 43.27,
+      "change_pct": 0.58
     },
     {
       "label": "Nasdaq 100",
-      "price": 30228.53,
-      "change": 254.96,
-      "change_pct": 0.85
+      "price": 30223.89,
+      "change": 250.32,
+      "change_pct": 0.84
     },
     {
       "label": "VIX",
-      "price": 15.86,
-      "change": -0.43,
+      "price": 15.74,
+      "change": -0.55,
       "change_pct": null,
       "zone_label": "Normal"
     },
@@ -37,8 +37,8 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 25092.25,
-      "change_pct": -0.34
+      "price": 25177.8,
+      "change_pct": -0.03
     },
     "ftse": {
       "label": "FTSE 100",
@@ -50,8 +50,8 @@
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 58.9,
-    "mmth": 65.9,
+    "s5fi": 59.1,
+    "mmth": 64.5,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech-led Strength Amid Global Divergence",
+  "mood": "Growth-Oriented / US Strength / Sector Focus",
   "analysis": {
-    "action_line": "VIX 15.86 Normal + S5FI 58.9% breadth + mixed global tape (FTSE -0.75%) → focus on high RS leaders in tech, managing risk.",
-    "analysis_para1": "European markets (DAX -0.34%, FTSE 100 -0.75%) exhibited caution, contrasting with a slightly positive Nikkei (+0.01%), indicating global divergence. Domestically, US indices are pushing higher, led by technology. The 'Unknown regime' for the BAML HY Spread limits clear credit risk assessment. Yet, underlying market health appears constructive with S5FI at 58.9% and MMTH at 65.9%, suggesting solid but not overheated participation.",
-    "analysis_para2": "The market continues to decisively favor growth and innovation, particularly within the Semiconductors and Hardware themes. The S&P 500 at 7561.00 and Nasdaq 100 at 30228.53 are showing strong upward momentum, validating the current bullish trend. Traders should watch for continued follow-through above current levels as confirmation of strength. The mechanical plan involves maintaining a sharp focus on high Relative Strength names exhibiting significant price momentum, especially within the dominant tech sectors, using pullbacks to short-term support levels as potential entry points.",
-    "technical_signal": "No reversal pattern confirmed yet. US indices maintain upward momentum without significant distribution signals, suggesting continuity of the current trend.",
+    "action_line": "VIX 15.74 Normal + S5FI 59.1% breadth + mixed global tape → trade RS leaders selectively near support.",
+    "analysis_para1": "Global markets offered a mixed performance today, with the Nikkei 225 flat (+0.01%) and the DAX nearly unchanged (-0.03%), while the FTSE 100 lagged significantly (-0.75%). Despite this varied international backdrop, the stable 10-year yield at 4.45% suggests no immediate stress in the credit market, though the BAML HY Spread remains in an unknown regime. US market breadth remains constructive, with 59.1% of stocks above their 50-day moving average (S5FI) and 64.5% above their 200-day (MMTH), indicating healthy underlying participation.",
+    "analysis_para2": "The continued upward trajectory of the S&P 500 (7563.63) and Nasdaq 100 (30223.89) reinforces a 'buy the dip' mentality for leading names. Our thematic scanner highlights pronounced strength in Semiconductors and Hardware, making these sectors prime candidates for focused attention. The mechanical plan involves identifying pullbacks in high Relative Strength (RS) stocks, specifically those with RS≥98 and strong multi-month gains, towards their 10-day or 20-day exponential moving averages. Traders should seek strong volume confirmation on entries and employ strict risk management, placing stops below established support levels or the 50-day moving average. Maintain agility, as global headwinds could still influence intraday volatility.",
+    "technical_signal": "No reversal pattern confirmed yet. The market continues its upward trend with healthy breadth and normal volatility.",
     "ticker_intel": [
+      {
+        "ticker": "QTEX",
+        "company": "QTREX Quantum Ltd.",
+        "grade": "A+",
+        "reason": "QTEX displays exceptional momentum with RS=98 and a staggering +525.1% one-month return, making it a top leader in the robust Hardware theme."
+      },
       {
         "ticker": "MXL",
         "company": "MaxLinear, Inc",
-        "grade": "A+",
-        "reason": "Exhibiting exceptional relative strength (RS=99) and parabolic 3-month growth (+442.4%), making it a leading name in the current Semiconductors regime."
-      },
-      {
-        "ticker": "AMBQ",
-        "company": "Ambiq Micro, Inc.",
         "grade": "A",
-        "reason": "Boasts strong RS (98) and an impressive 1-month return (+131.4%), indicating robust demand within the high-performing Semiconductors sector."
+        "reason": "MXL demonstrates compelling strength with RS=98 and a +445.5% three-month return, indicating strong participation in the leading Semiconductor theme."
       },
       {
-        "ticker": "UCTT",
-        "company": "Ultra Clean Holdings, Inc.",
+        "ticker": "WDC",
+        "company": "Western Digital Corporation",
         "grade": "C",
-        "reason": "Despite a high RS (98), its 3-month return (+36.0%) significantly lags peers, suggesting relative underperformance within the robust Semiconductors theme."
+        "reason": "Despite meeting selection criteria, WDC shows comparatively weaker 1-month (+35.9%) and 3-month (+88.2%) returns within this cohort, suggesting potential underperformance against higher-momentum peers."
       }
     ]
   }
