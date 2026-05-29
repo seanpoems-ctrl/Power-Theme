@@ -19,7 +19,7 @@ import BreadthStockModal from "./BreadthStockModal";
 // ---------------------------------------------------------------------------
 
 const GEMINI_KEY      = process.env.REACT_APP_GEMINI_KEY || "";
-const GEMINI_CACHE_NS = "sbmm_gemini_v4";
+const GEMINI_CACHE_NS = "sbmm_gemini_v5";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -318,18 +318,18 @@ Each bullet: bold ALL-CAPS label + em-dash + 2 concise sentences with specific n
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
     generationConfig: { temperature: 0.35, maxOutputTokens: 1200 },
-    // Disable thinking budget — this is a formatting task, not deep reasoning.
-    // Without this, parts[0] is the thinking chain and parts[1] is the answer;
-    // reading only parts[0] gives truncated internal monologue, not the reply.
-    thinkingConfig: { thinkingBudget: 0 },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   const json = await res.json();
-  // Gemini 2.5-flash (thinking model) may return multiple parts:
-  //   parts[0] = thinking chain ({ thought: true })   ← skip this
-  //   parts[1] = actual text response
-  // Find the first non-thinking part so we always get the real answer.
-  const parts = json?.candidates?.[0]?.content?.parts ?? [];
+
+  // Surface API-level errors so they appear in the UI instead of silently showing "Awaiting data…"
+  if (json?.error) throw new Error(`Gemini API: ${json.error.message ?? JSON.stringify(json.error)}`);
+  if (!json?.candidates?.length) throw new Error(`Gemini returned no candidates. Response: ${JSON.stringify(json).slice(0, 200)}`);
+
+  // gemini-2.5-flash (thinking model) returns multiple parts:
+  //   { thought: true, text: "…chain-of-thought…" }   ← skip
+  //   { text: "**TODAY** — …" }                        ← this is the answer
+  const parts = json.candidates[0].content?.parts ?? [];
   const textPart = parts.find(p => !p.thought) ?? parts[0];
   return textPart?.text?.trim() ?? null;
 }
