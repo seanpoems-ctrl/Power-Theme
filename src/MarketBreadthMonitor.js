@@ -19,7 +19,7 @@ import BreadthStockModal from "./BreadthStockModal";
 // ---------------------------------------------------------------------------
 
 const GEMINI_KEY      = process.env.REACT_APP_GEMINI_KEY || "";
-const GEMINI_CACHE_NS = "sbmm_gemini_v7";
+const GEMINI_CACHE_NS = "sbmm_gemini_v8";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -314,7 +314,7 @@ Each bullet: bold ALL-CAPS label + em-dash + 2 concise sentences with specific n
 **MONTH** — (up50M froth level, % above 50dma zone, T2108 reading; what it means for swing traders)
 **REGIME** — (one-word regime label + what Stockbee would watch as the next leading signal)`;
 
-  const url  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_KEY}`;
+  const url  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`;
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
     generationConfig: { temperature: 0.35, maxOutputTokens: 2048 },

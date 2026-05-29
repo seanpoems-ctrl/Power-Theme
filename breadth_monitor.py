@@ -435,7 +435,7 @@ REGIME — (one-word regime label + what Stockbee would watch as the next leadin
         from google import genai  # type: ignore
         client = genai.Client(api_key=GEMINI_API_KEY)
         response = client.models.generate_content(
-            model="gemini-2.0-flash",   # non-thinking model — clean single-part response
+            model="gemini-2.5-flash",   # same model as gapper_service — proven to work
             contents=prompt,
         )
         text = (response.text or "").strip()
