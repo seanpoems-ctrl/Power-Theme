@@ -754,13 +754,27 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
 
 // ── Hero Zone — 3-column dashboard row above the heatmap ──────────────────
 const HeroZone = ({ data, themesCount, tickersCount, etfTrendlineData }) => {
+  const [flaggingHeight, setFlaggingHeight] = React.useState(null);
+  const flagRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const el = flagRef.current;
+    if (!el) return;
+    // Observe the Flagging content box (firstElementChild), not the grid-stretched wrapper
+    const inner = el.firstElementChild;
+    if (!inner) return;
+    const ro = new ResizeObserver(([entry]) => setFlaggingHeight(entry.contentRect.height));
+    ro.observe(inner);
+    return () => ro.disconnect();
+  }, []);
+
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', padding: '10px 0 0' }}>
       {/* ── Col 1: Flagging ── */}
-      <div><FlaggingStocksBox data={data}/></div>
+      <div ref={flagRef}><FlaggingStocksBox data={data}/></div>
 
-      {/* ── Col 2: ETF 趨勢線掃描 ── */}
-      <div><EtfTrendlinePanel etfData={etfTrendlineData}/></div>
+      {/* ── Col 2: ETF 趨勢線掃描 — height locked to Flagging content height ── */}
+      <div><EtfTrendlinePanel etfData={etfTrendlineData} matchHeight={flaggingHeight}/></div>
     </div>
   );
 };
@@ -8060,7 +8074,7 @@ const EtfTrendlineGroup = ({ icon, title, items, onTvClick }) => (
   </div>
 );
 
-const EtfTrendlinePanel = ({ etfData }) => {
+const EtfTrendlinePanel = ({ etfData, matchHeight }) => {
   const [tvPopup, setTvPopup] = useState(null);
 
   if (!etfData) return (
@@ -8077,16 +8091,16 @@ const EtfTrendlinePanel = ({ etfData }) => {
 
   return (
     <>
-    <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg" style={{ overflow: 'hidden' }}>
-      <div style={{ padding: '10px 14px 6px', fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+    <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg" style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', ...(matchHeight ? { height: matchHeight } : {}) }}>
+      <div style={{ padding: '10px 14px 6px', fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em', flexShrink: 0 }}>
         ETF 趨勢線掃描
       </div>
-      <div style={{ maxHeight: 420, overflowY: 'auto', scrollbarWidth: 'thin', scrollbarColor: '#52525b transparent' }}>
+      <div style={{ flex: 1, overflowY: 'auto', scrollbarWidth: 'thin', scrollbarColor: '#52525b transparent', minHeight: 0 }}>
         <EtfTrendlineGroup icon="🚀" title="已突破可追"       items={breakouts} onTvClick={setTvPopup}/>
         <EtfTrendlineGroup icon="👀" title="接近阻力可關注"   items={nearRes}   onTvClick={setTvPopup}/>
         <EtfTrendlineGroup icon="🎯" title="接近支撐可布局"   items={nearSup}   onTvClick={setTvPopup}/>
       </div>
-      <div style={{ padding: '5px 14px 8px', fontSize: 11, color: '#52525b', borderTop: '1px solid rgba(63,63,70,0.4)' }}>
+      <div style={{ padding: '5px 14px 8px', fontSize: 11, color: '#52525b', borderTop: '1px solid rgba(63,63,70,0.4)', flexShrink: 0 }}>
         掃描 {etfData.total_scanned} 支主題 ETF · {etfData.total_signals} 個訊號 · 更新 {etfData.last_updated}
       </div>
     </div>
