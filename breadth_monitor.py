@@ -240,14 +240,17 @@ def _compute_breadth_extras() -> dict[str, Any]:
 
         logger.info("TradingView screener returned %d rows for breadth extras", len(df))
 
-        # ── 10x ATR Extension ────────────────────────────────────────────────
-        df_atr = df.dropna(subset=["close", "ATR", "change"]).copy()
-        df_atr = df_atr[df_atr["close"] > 0]
+        # ── 10x ATR Extension (Jeff Sun) ─────────────────────────────────────
+        # A stock qualifies when its price is ≥10 ATR units above its 50-day MA:
+        #   (Close − SMA50) / ATR  ≥ 10
+        # Counts both extended-up (≥+10) and extended-down (≤−10).
+        df_atr = df.dropna(subset=["close", "ATR", "SMA50"]).copy()
+        df_atr = df_atr[(df_atr["close"] > 0) & (df_atr["ATR"] > 0)]
         if len(df_atr) > 0:
-            df_atr["atr_pct"] = df_atr["ATR"] / df_atr["close"] * 100
-            df_atr["is_ext"]  = df_atr["change"].abs() > 10 * df_atr["atr_pct"]
+            df_atr["atr_ext_val"] = (df_atr["close"] - df_atr["SMA50"]) / df_atr["ATR"]
+            df_atr["is_ext"]      = df_atr["atr_ext_val"].abs() >= 10
             extras["atr_10x_ext"] = int(df_atr["is_ext"].sum())
-            logger.info("10x ATR ext count: %d / %d", extras["atr_10x_ext"], len(df_atr))
+            logger.info("10x ATR ext count (Jeff Sun): %d / %d", extras["atr_10x_ext"], len(df_atr))
 
         # ── % above 50 DMA ───────────────────────────────────────────────────
         df_sma = df.dropna(subset=["close", "SMA50"]).copy()

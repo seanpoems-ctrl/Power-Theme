@@ -615,7 +615,7 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
     Use TradingView screener (~8 000+ US stocks) to:
       1. Build the IBD RS universe: fetch Perf.3M / Perf.6M / Perf.Y,
          compute the IBD composite, rank 1-99 → returns rs_lookup dict.
-      2. atr_ext    : stocks where |change%| > 10 × (ATR / close × 100)
+      2. atr_ext    : stocks where |(close − SMA50) / ATR| ≥ 10  (Jeff Sun)
       3. above50dma : stocks where close > SMA50
 
     Returns (rs_lookup, atr_ext_data, above50dma_data).
@@ -715,12 +715,14 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
             "rs_ibd":      rs_lookup.get(tkr),
         }
 
-    # ── ATR Ext scanner ──────────────────────────────────────────────────────
-    # Restrict to Mkt Cap ≥ $1B so only institutionally relevant moves surface.
-    df_atr = df.copy()
-    df_atr = df_atr[df_atr["market_cap_basic"].notna() & (df_atr["market_cap_basic"] >= 1_000_000_000)].copy()
-    df_atr["atr_ext_val"] = df_atr["change"].abs() / df_atr["atr_pct"]
-    df_atr = df_atr[df_atr["atr_ext_val"] > 10].copy()
+    # ── ATR Ext scanner (Jeff Sun) ───────────────────────────────────────────
+    # Qualifies when (Close − SMA50) / ATR  ≥ +10  (extended above 50MA)
+    #              or (Close − SMA50) / ATR  ≤ −10  (extended below 50MA)
+    # Restricted to Mkt Cap ≥ $1B for institutional relevance.
+    df_atr = df.dropna(subset=["close", "ATR", "SMA50"]).copy()
+    df_atr = df_atr[(df_atr["ATR"] > 0) & (df_atr["market_cap_basic"].notna()) & (df_atr["market_cap_basic"] >= 1_000_000_000)].copy()
+    df_atr["atr_ext_val"] = (df_atr["close"] - df_atr["SMA50"]) / df_atr["ATR"]
+    df_atr = df_atr[df_atr["atr_ext_val"].abs() >= 10].copy()
     df_atr = df_atr.sort_values("atr_ext_val", ascending=False)
 
     atr_stocks = []
@@ -729,7 +731,7 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
         s["atr_ext_val"] = round(float(row["atr_ext_val"]), 2)
         atr_stocks.append(s)
 
-    logger.info("ATR Ext scanner: %d stocks (|change%%| > 10×ATR%%, mkt cap ≥ $1B)", len(atr_stocks))
+    logger.info("ATR Ext scanner (Jeff Sun): %d stocks ((close−SMA50)/ATR ≥ 10, mkt cap ≥ $1B)", len(atr_stocks))
     atr_data = {
         "ok": True,
         "filter": "atr_ext",
