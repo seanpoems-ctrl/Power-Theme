@@ -4,8 +4,8 @@ etf_trendline_service.py — ETF 主題趨勢線突破／拉回偵測 (Part 1-3)
 Algorithm:
   1. yfinance 抓 6 個月日線 OHLC（完整形態）
   2. Swing point 偵測（視窗 W=5，尾端放寬）
-  3. 在所有 swing highs / lows 中枚舉 2~3 點組合，選 (touches_all, R²) 最高的線
-     → 自動挑「最整齊的那段」，不強制從最早的點開始
+  3. 外包絡線（convex hull）：阻力線必須壓在所有 close 上方，支撐線必須撐在所有 close 下方
+     → 以最高 swing high / 最低 swing low 為錨點，找時間跨度最大的合格兩點組合
   4. 延伸到最後一個交易日 → 判斷 breakout / near_resistance / near_support
   5. 診斷輸出 — 不寫 JSON，不動前端
 
@@ -15,7 +15,6 @@ Algorithm:
 import json
 import logging
 import sys
-from itertools import combinations as _comb
 from pathlib import Path
 from datetime import datetime, timedelta
 
@@ -31,13 +30,13 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # ─── 可調參數 ─────────────────────────────────────────────────────────────────
-SWING_WINDOW    = 5     # W — swing point 偵測左右各看幾根
-MIN_BARS        = 60    # 資料筆數下限（6 個月 ≈ 126 根）
-ATR_TOUCH_TOL   = 0.5   # ±N×ATR 容許誤差，算作「觸及」線
-MIN_TOUCH_COUNT = 2     # 至少幾個 swing 點觸及線才合格（含非定義點）
-ATR_PERIOD      = 14    # ATR 計算天數
-LOOKBACK_MONTHS = 6     # 回看月數（全形態）
-COMBO_MAX_K     = 3     # 枚舉組合最大點數（2~3）
+SWING_WINDOW      = 5     # W — swing point 偵測左右各看幾根
+MIN_BARS          = 60    # 資料筆數下限（6 個月 ≈ 126 根）
+ATR_TOUCH_TOL     = 0.5   # ±N×ATR 容許誤差，算作「觸及」線
+MIN_TOUCH_COUNT   = 2     # 至少幾個 swing 點觸及線才合格
+ATR_PERIOD        = 14    # ATR 計算天數
+LOOKBACK_MONTHS   = 6     # 回看月數（全形態）
+ENVELOPE_CLOSE_TOL = 0.3  # 外包絡線容差：close 不得突出線外超過 N×ATR
 
 # Signal 門檻（純趨勢線，禁用 SMA）
 BREAKOUT_MAX_DIST        = 0.04  # 0 < (close - resistance) / resistance ≤ 4%
@@ -151,67 +150,152 @@ def detect_swings(df: pd.DataFrame, W: int = SWING_WINDOW):
     return swing_high_idx, swing_low_idx
 
 
-# ─── 最佳趨勢線：枚舉 2~3 點組合，選 (touches_all, R²) 最高的 ──────────────
-def find_best_trendline(
-    all_idx:    list[int],
-    all_prices: list[float],
+# ─── 外包絡線：阻力線（線必須壓在所有 close 上方）──────────────────────────
+def find_upper_envelope(
+    sh_idx:     list[int],
+    sh_prices:  list[float],
+    all_closes: np.ndarray,
     atr:        float,
-    min_k:      int = 2,
-    max_k:      int = COMBO_MAX_K,
 ) -> "dict | None":
     """
-    在所有 swing points 中枚舉 min_k ~ max_k 個點的組合，
-    對每個組合做線性擬合，計算：
-      - r2        : 組合點的內部擬合品質（2 點時恆為 1.0）
-      - touches_all : 所有 swing points 中落在 ±ATR_TOUCH_TOL×ATR 的數量
-    排序準則：(touches_all DESC, r2 DESC)
-    只接受 touches_all ≥ MIN_TOUCH_COUNT 的組合。
-    回傳最佳組合的 dict，或 None（沒有合格組合）。
+    阻力外包絡線算法：
+    1. 找最高 swing high P1 作為錨點（必在線上）
+    2. 枚舉「P1 + 任意其他 swing high」的兩點組合
+    3. 驗證：所有 close 不得超出線上方 ENVELOPE_CLOSE_TOL×ATR
+    4. 選時間跨度最大的合格組合
+    5. 至少 MIN_TOUCH_COUNT 個 swing high 觸及線（±ATR_TOUCH_TOL×ATR）
     """
-    n = len(all_idx)
-    if n < min_k:
+    n = len(sh_idx)
+    if n < 2:
         return None
 
-    tol     = ATR_TOUCH_TOL * atr
-    all_x   = np.array(all_idx,    dtype=float)
-    all_y   = np.array(all_prices, dtype=float)
+    tol_env   = ENVELOPE_CLOSE_TOL * atr
+    tol_touch = ATR_TOUCH_TOL * atr
+    nc        = len(all_closes)
+    xs        = np.arange(nc, dtype=float)
 
-    best_score  = (-1, -1.0)
+    # 找最高 swing high 當錨點
+    p1_pos = int(np.argmax(sh_prices))
+    p1_x   = sh_idx[p1_pos]
+    p1_y   = sh_prices[p1_pos]
+
+    best_span   = -1
     best_result = None
 
-    for k in range(min_k, min(max_k + 1, n + 1)):
-        for combo in _comb(range(n), k):
-            xi = np.array([all_idx[i]    for i in combo], dtype=float)
-            yi = np.array([all_prices[i] for i in combo], dtype=float)
+    for i in range(n):
+        if i == p1_pos:
+            continue
+        p2_x = sh_idx[i]
+        p2_y = sh_prices[i]
+        if p2_x == p1_x:
+            continue
 
-            slope, intercept = np.polyfit(xi, yi, 1)
+        slope     = (p2_y - p1_y) / (p2_x - p1_x)
+        intercept = p1_y - slope * p1_x
 
-            # R² on defining points
-            yi_pred = slope * xi + intercept
-            ss_res  = float(np.sum((yi - yi_pred) ** 2))
-            ss_tot  = float(np.sum((yi - np.mean(yi)) ** 2))
-            r2      = 1.0 - ss_res / ss_tot if ss_tot > 1e-10 else 1.0
+        # 驗證：所有 close 必須在線下方（容差 ENVELOPE_CLOSE_TOL×ATR）
+        line_vals = slope * xs + intercept
+        if not np.all(all_closes <= line_vals + tol_env):
+            continue
 
-            # touches_all — validate against every swing point in the universe
-            all_pred    = slope * all_x + intercept
-            touches_all = int(np.sum(np.abs(all_y - all_pred) <= tol))
+        # 計算 swing high 觸及數
+        touches = sum(
+            1 for j in range(n)
+            if abs(sh_prices[j] - (slope * sh_idx[j] + intercept)) <= tol_touch
+        )
+        if touches < MIN_TOUCH_COUNT:
+            continue
 
-            if touches_all < MIN_TOUCH_COUNT:
-                continue
+        span = abs(p2_x - p1_x)
+        if span > best_span:
+            best_span   = span
+            x_start     = min(p1_x, p2_x)
+            x_end       = max(p1_x, p2_x)
+            best_result = {
+                "slope":      float(slope),
+                "intercept":  float(intercept),
+                "r2":         1.0,
+                "touches":    touches,
+                "combo_pos":  sorted([p1_pos, i]),
+                "combo_bars": [x_start, x_end],
+                "x_start":    x_start,
+                "x_end":      x_end,
+            }
 
-            score = (touches_all, r2)
-            if score > best_score:
-                best_score  = score
-                best_result = {
-                    "slope":      float(slope),
-                    "intercept":  float(intercept),
-                    "r2":         float(r2),
-                    "touches":    touches_all,
-                    "combo_pos":  list(combo),          # 在 all_idx 裡的位置
-                    "combo_bars": [int(all_idx[i]) for i in combo],
-                    "x_start":    int(xi[0]),
-                    "x_end":      int(xi[-1]),
-                }
+    return best_result
+
+
+# ─── 外包絡線：支撐線（線必須撐在所有 close 下方）──────────────────────────
+def find_lower_envelope(
+    sl_idx:     list[int],
+    sl_prices:  list[float],
+    all_closes: np.ndarray,
+    atr:        float,
+) -> "dict | None":
+    """
+    支撐外包絡線算法：
+    1. 找最低 swing low P1 作為錨點（必在線上）
+    2. 枚舉「P1 + 任意其他 swing low」的兩點組合
+    3. 驗證：所有 close 不得低於線下方 ENVELOPE_CLOSE_TOL×ATR
+    4. 選時間跨度最大的合格組合
+    5. 至少 MIN_TOUCH_COUNT 個 swing low 觸及線（±ATR_TOUCH_TOL×ATR）
+    """
+    n = len(sl_idx)
+    if n < 2:
+        return None
+
+    tol_env   = ENVELOPE_CLOSE_TOL * atr
+    tol_touch = ATR_TOUCH_TOL * atr
+    nc        = len(all_closes)
+    xs        = np.arange(nc, dtype=float)
+
+    # 找最低 swing low 當錨點
+    p1_pos = int(np.argmin(sl_prices))
+    p1_x   = sl_idx[p1_pos]
+    p1_y   = sl_prices[p1_pos]
+
+    best_span   = -1
+    best_result = None
+
+    for i in range(n):
+        if i == p1_pos:
+            continue
+        p2_x = sl_idx[i]
+        p2_y = sl_prices[i]
+        if p2_x == p1_x:
+            continue
+
+        slope     = (p2_y - p1_y) / (p2_x - p1_x)
+        intercept = p1_y - slope * p1_x
+
+        # 驗證：所有 close 必須在線上方（容差 ENVELOPE_CLOSE_TOL×ATR）
+        line_vals = slope * xs + intercept
+        if not np.all(all_closes >= line_vals - tol_env):
+            continue
+
+        # 計算 swing low 觸及數
+        touches = sum(
+            1 for j in range(n)
+            if abs(sl_prices[j] - (slope * sl_idx[j] + intercept)) <= tol_touch
+        )
+        if touches < MIN_TOUCH_COUNT:
+            continue
+
+        span = abs(p2_x - p1_x)
+        if span > best_span:
+            best_span   = span
+            x_start     = min(p1_x, p2_x)
+            x_end       = max(p1_x, p2_x)
+            best_result = {
+                "slope":      float(slope),
+                "intercept":  float(intercept),
+                "r2":         1.0,
+                "touches":    touches,
+                "combo_pos":  sorted([p1_pos, i]),
+                "combo_bars": [x_start, x_end],
+                "x_start":    x_start,
+                "x_end":      x_end,
+            }
 
     return best_result
 
@@ -278,14 +362,14 @@ def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
         for i in sl_idx:
             print(f"    bar[{i:3d}]  {dates[i].date()}  L = {lows[i]:.4f}")
 
-    # ── 3. 枚舉最佳趨勢線 ───────────────────────────────────────────────────
+    # ── 3. 外包絡線：阻力線壓上方，支撐線撐下方 ────────────────────────────
     sh_prices = [highs[i] for i in sh_idx]
     sl_prices = [lows[i]  for i in sl_idx]
 
-    res_fit = find_best_trendline(sh_idx, sh_prices, atr) if len(sh_idx) >= 2 else None
-    sup_fit = find_best_trendline(sl_idx, sl_prices, atr) if len(sl_idx) >= 2 else None
+    res_fit = find_upper_envelope(sh_idx, sh_prices, closes, atr) if len(sh_idx) >= 2 else None
+    sup_fit = find_lower_envelope(sl_idx, sl_prices, closes, atr) if len(sl_idx) >= 2 else None
 
-    # ── 4. 品質驗證：find_best_trendline 已確保 touches ≥ MIN_TOUCH_COUNT ──
+    # ── 4. 品質驗證：外包絡線函數已確保 touches ≥ MIN_TOUCH_COUNT ──────────
     res_ok = res_fit is not None
     sup_ok = sup_fit is not None
 
@@ -295,7 +379,7 @@ def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
             if len(idx_list) < 2:
                 reasons.append(f"{label}: swing 點不足 ({len(idx_list)} < 2)")
             else:
-                reasons.append(f"{label}: 無 {MIN_TOUCH_COUNT} 個以上觸及點的組合")
+                reasons.append(f"{label}: 外包絡線無合格兩點組合（touches<{MIN_TOUCH_COUNT} 或 close 突出）")
         return {**base, "rejected": " | ".join(reasons)}
 
     # ── 5. 延伸到最後一根（最後一個交易日）────────────────────────────────────
@@ -382,7 +466,7 @@ def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
 
     # ── Debug 詳細輸出 ───────────────────────────────────────────────────────
     if debug:
-        print(f"\n  趨勢線擬合結果（最佳組合）:")
+        print(f"\n  外包絡線結果（錨點+最大時間跨度，所有 close 在線外側）:")
         tol = ATR_TOUCH_TOL * atr
         for label, fit, ok, today_val, all_bar_idx, all_prices_list in [
             ("阻力線(Resistance)", res_fit, res_ok, resistance_today, sh_idx, sh_prices),
@@ -405,8 +489,8 @@ def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
             combo_prices = [highs[bi] if label.startswith("阻力") else lows[bi]
                             for bi in combo_bars]
 
-            print(f"    {label}  [勝出組合 {len(combo_bars)} 點, R²={fit['r2']:.4f}, touches={fit['touches']}]")
-            print(f"      勝出組合定義點（實際價格）:")
+            print(f"    {label}  [外包絡線 {len(combo_bars)} 點, touches={fit['touches']}, tol={ENVELOPE_CLOSE_TOL}×ATR={ENVELOPE_CLOSE_TOL*atr:.4f}]")
+            print(f"      錨點 + 配對點（實際價格）:")
             for bi, dp, pr in zip(combo_bars, combo_dates, combo_prices):
                 pred = line_y(fit, bi)
                 err  = pr - pred
@@ -496,8 +580,8 @@ def main():
 
     print(f"\n{'='*65}")
     print(f"  ETF 趨勢線掃描器  ({len(universe)} ETFs in universe)")
-    print(f"  W={SWING_WINDOW}  MIN_BARS={MIN_BARS}  ATR_TOL=±{ATR_TOUCH_TOL}×ATR"
-          f"  MIN_TOUCH={MIN_TOUCH_COUNT}  回看={LOOKBACK_MONTHS}個月  最佳{COMBO_MAX_K}點組合")
+    print(f"  W={SWING_WINDOW}  MIN_BARS={MIN_BARS}  ATR_TOUCH=±{ATR_TOUCH_TOL}×ATR"
+          f"  ENVELOPE_TOL={ENVELOPE_CLOSE_TOL}×ATR  MIN_TOUCH={MIN_TOUCH_COUNT}  回看={LOOKBACK_MONTHS}個月")
     print(f"  🟢 Breakout       : 0 ~ +{BREAKOUT_MAX_DIST*100:.0f}% 超阻力線")
     print(f"  🔵 Near_Resistance: -{NEAR_RESISTANCE_MAX_DIST*100:.0f}% ~ 0  距阻力線（快突破）")
     print(f"  🟡 Near_Support   : 0 ~ +{SUPPORT_MAX_DIST*100:.0f}% 超支撐線（逢低布局）")
@@ -511,7 +595,7 @@ def main():
     for entry in universe:
         ticker   = entry["ticker"]
         theme    = entry["theme"]
-        is_debug = (ticker == "DRNZ")
+        is_debug = ticker in {"DRNZ", "PPA", "XBI", "IBB"}
 
         try:
             result = analyze_etf(ticker, theme, debug=is_debug)
