@@ -71,6 +71,10 @@ def fetch_ohlc(ticker: str, months: int = LOOKBACK_MONTHS) -> "pd.DataFrame | No
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.get_level_values(0)
         df = df.dropna(subset=["Open", "High", "Low", "Close"])
+        # 確保 OHLC 是 1D Series（yfinance 偶發回傳 2D DataFrame column）
+        for col in ["Open", "High", "Low", "Close"]:
+            if isinstance(df[col], pd.DataFrame):
+                df[col] = df[col].iloc[:, 0]
         return df
     except Exception as e:
         logger.error(f"{ticker}: fetch_ohlc failed — {e}")
@@ -449,6 +453,22 @@ def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
         print(f"  形態: {pattern}  →  訊號: {sig_str}  dist={dist_str}{bo_str}")
         print(f"{'='*65}")
 
+    # ── 觸及點明細（供 TradingView 比對用）───────────────────────────────────
+    tol = ATR_TOUCH_TOL * atr
+
+    def touch_pts(fit, bar_idx_list, price_list, date_list):
+        """回傳所有觸及此線的 swing 點，格式 [(date_str, price), ...]"""
+        pts = []
+        for bi, pr in zip(bar_idx_list, price_list):
+            if abs(pr - line_y(fit, bi)) <= tol:
+                pts.append((str(date_list[bi].date()), round(float(pr), 4)))
+        return pts
+
+    res_touch_pts = (touch_pts(res_fit, sh_idx, sh_prices, dates)
+                     if res_fit is not None else [])
+    sup_touch_pts = (touch_pts(sup_fit, sl_idx, sl_prices, dates)
+                     if sup_fit is not None else [])
+
     return {
         "ticker":           ticker,
         "theme":            theme,
@@ -462,6 +482,8 @@ def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
         "breakout_date":    breakout_date,
         "res_fit":          res_fit,
         "sup_fit":          sup_fit,
+        "res_touch_pts":    res_touch_pts,
+        "sup_touch_pts":    sup_touch_pts,
         "last_date":        str(last_date.date()),
         "rejected":         None,
         "reference_only":   False,
@@ -534,6 +556,59 @@ def main():
                   f" {s['close']:8.3f} {res_s:>8s} {sup_s:>8s} {dist:+7.2f}%{bo}")
     else:
         print("  （無）")
+
+    # ── TradingView 比對段落 ─────────────────────────────────────────────────
+    if signals:
+        print(f"\n{'─'*65}")
+        print(f"  📐 TradingView 手動比對資料")
+        print(f"{'─'*65}")
+        for s in signals:
+            rf  = s.get("res_fit")
+            sf  = s.get("sup_fit")
+            r_t = s.get("res_touch_pts", [])
+            s_t = s.get("sup_touch_pts", [])
+
+            print(f"\n  ETF: {s['ticker']}  ({s['theme']})  close={s['close']:.2f}"
+                  f"  signal={s['signal']}  pattern={s['pattern']}")
+
+            if rf is not None:
+                d0 = rf["x_start"]   # bar index of first combo point
+                d1 = rf["x_end"]     # bar index of last combo point
+                # 用 combo_bars 拿日期（比 x_start/x_end 更明確）
+                cb = rf.get("combo_bars", [d0, d1])
+                # 找對應的日期和實際 high 價格
+                # 我們用線的端點值（回歸線上的值），不是實際 high
+                # 端點 A 和端點 B 是回歸線在 combo 起終點的預測值
+                # 實際 combo 定義點的日期
+                combo_bar_dates = [f"bar={b}" for b in cb]
+                r_y0 = line_y(rf, cb[0])
+                r_y1 = line_y(rf, cb[-1])
+                # 我們想要的是 yfinance 日期，但這裡在 main() 裡沒有 df
+                # 所以用 res_touch_pts 的第一個和最後一個點日期當端點
+                if r_t:
+                    r_start = f"{r_t[0][0]}  ${r_t[0][1]:.2f}"
+                    r_end   = f"{r_t[-1][0]}  ${r_t[-1][1]:.2f}"
+                else:
+                    r_start = "—"
+                    r_end   = "—"
+                print(f"  阻力線: 從 {r_start}")
+                print(f"          到 {r_end}")
+                print(f"          今日延伸值 ${s['resistance_today']:.2f}")
+                touch_str = ", ".join(f"({d}, ${p:.2f})" for d, p in r_t)
+                print(f"  阻力觸及點: [{touch_str}]")
+
+            if sf is not None:
+                if s_t:
+                    s_start = f"{s_t[0][0]}  ${s_t[0][1]:.2f}"
+                    s_end   = f"{s_t[-1][0]}  ${s_t[-1][1]:.2f}"
+                else:
+                    s_start = "—"
+                    s_end   = "—"
+                print(f"  支撐線: 從 {s_start}")
+                print(f"          到 {s_end}")
+                print(f"          今日延伸值 ${s['support_today']:.2f}")
+                touch_str = ", ".join(f"({d}, ${p:.2f})" for d, p in s_t)
+                print(f"  支撐觸及點: [{touch_str}]")
 
     # ── 輸出：線合格但無訊號 ────────────────────────────────────────────────
     print(f"\n{'─'*65}")
