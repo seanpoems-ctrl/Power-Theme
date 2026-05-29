@@ -223,7 +223,7 @@ def _compute_breadth_extras() -> dict[str, Any]:
         logger.info("Fetching TradingView screener for breadth extras …")
         _, df = (
             Query()
-            .select("name", "close", "change", "ATR", "SMA50")
+            .select("name", "close", "change", "ATR", "SMA50", "market_cap_basic")
             .where(
                 col("close") >= 2,
                 col("average_volume_10d_calc") >= 50_000,
@@ -244,20 +244,21 @@ def _compute_breadth_extras() -> dict[str, Any]:
         # A stock qualifies when its price is ≥10 ATR units above its 50-day MA:
         #   (Close − SMA50) / ATR  ≥ 10
         # Counts both extended-up (≥+10) and extended-down (≤−10).
-        df_atr = df.dropna(subset=["close", "ATR", "SMA50"]).copy()
-        df_atr = df_atr[(df_atr["close"] > 0) & (df_atr["ATR"] > 0)]
+        df_atr = df.dropna(subset=["close", "ATR", "SMA50", "market_cap_basic"]).copy()
+        df_atr = df_atr[(df_atr["close"] > 0) & (df_atr["ATR"] > 0) & (df_atr["market_cap_basic"] >= 1_000_000_000)]
         if len(df_atr) > 0:
             df_atr["atr_ext_val"] = (df_atr["close"] - df_atr["SMA50"]) / df_atr["ATR"]
             df_atr["is_ext"]      = df_atr["atr_ext_val"].abs() >= 10
             extras["atr_10x_ext"] = int(df_atr["is_ext"].sum())
             logger.info("10x ATR ext count (Jeff Sun): %d / %d", extras["atr_10x_ext"], len(df_atr))
 
-        # ── % above 50 DMA ───────────────────────────────────────────────────
-        df_sma = df.dropna(subset=["close", "SMA50"]).copy()
+        # ── % above 50 DMA (Mkt Cap ≥ $1B) ─────────────────────────────────
+        df_sma = df.dropna(subset=["close", "SMA50", "market_cap_basic"]).copy()
+        df_sma = df_sma[df_sma["market_cap_basic"] >= 1_000_000_000].copy()
         if len(df_sma) > 0:
             above = int((df_sma["close"] > df_sma["SMA50"]).sum())
             extras["above_50dma_pct"] = round(above / len(df_sma) * 100, 1)
-            logger.info(">50 DMA: %.1f%% (%d / %d)",
+            logger.info(">50 DMA: %.1f%% (%d / %d, mkt cap ≥ $1B)",
                         extras["above_50dma_pct"], above, len(df_sma))
 
     except Exception as exc:

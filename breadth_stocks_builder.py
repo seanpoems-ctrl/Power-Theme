@@ -742,9 +742,9 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
         "fetched_at_utc": now,
     }
 
-    # ── >50 DMA scanner — only stocks ≥50% above their 50DMA ────────────────
-    df_dma = df.dropna(subset=["SMA50"]).copy()
-    df_dma = df_dma[df_dma["SMA50"] > 0].copy()
+    # ── >50 DMA scanner — stocks ≥50% above their 50DMA, Mkt Cap ≥ $1B ─────
+    df_dma = df.dropna(subset=["SMA50", "market_cap_basic"]).copy()
+    df_dma = df_dma[(df_dma["SMA50"] > 0) & (df_dma["market_cap_basic"] >= 1_000_000_000)].copy()
     df_dma["above50dma_pct"] = ((df_dma["close"] - df_dma["SMA50"]) / df_dma["SMA50"] * 100)
     df_dma = df_dma[df_dma["above50dma_pct"] >= 50].copy()   # ≥50% above 50DMA
     df_dma = df_dma.sort_values("above50dma_pct", ascending=False)
@@ -755,7 +755,7 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
         s["above50dma_pct"] = round(float(row["above50dma_pct"]), 1)
         dma_stocks.append(s)
 
-    logger.info(">50 DMA scanner: %d stocks (≥50%% above SMA50)", len(dma_stocks))
+    logger.info(">50 DMA scanner: %d stocks (≥50%% above SMA50, mkt cap ≥ $1B)", len(dma_stocks))
     dma_data = {
         "ok": True,
         "filter": "above50dma",
