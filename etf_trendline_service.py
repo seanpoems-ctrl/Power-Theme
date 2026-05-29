@@ -150,20 +150,21 @@ def detect_swings(df: pd.DataFrame, W: int = SWING_WINDOW):
     return swing_high_idx, swing_low_idx
 
 
-# ─── 外包絡線：阻力線（線必須壓在所有 close 上方）──────────────────────────
+# ─── 阻力線：P1~P2 區間內 bar high 不得突出，P2 後允許突破 ─────────────────
 def find_upper_envelope(
-    sh_idx:     list[int],
-    sh_prices:  list[float],
-    all_closes: np.ndarray,
-    atr:        float,
+    sh_idx:    list[int],
+    sh_prices: list[float],
+    highs:     np.ndarray,
+    atr:       float,
 ) -> "dict | None":
     """
-    阻力外包絡線算法：
-    1. 找最高 swing high P1 作為錨點（必在線上）
-    2. 枚舉「P1 + 任意其他 swing high」的兩點組合
-    3. 驗證：所有 close 不得超出線上方 ENVELOPE_CLOSE_TOL×ATR
-    4. 選時間跨度最大的合格組合
-    5. 至少 MIN_TOUCH_COUNT 個 swing high 觸及線（±ATR_TOUCH_TOL×ATR）
+    阻力線算法：
+    1. 枚舉所有 (P1, P2) swing high 組合（P1 在前）
+    2. 驗證：P1~P2 區間內所有 bar high 不得超出線上方 ENVELOPE_CLOSE_TOL×ATR
+       P2 之後的 bar 不驗證（允許突破）
+    3. 品質分數 = touches×2 + span×0.05
+       touches = P1~P2 區間內 swing high 距線 ≤ ATR_TOUCH_TOL×ATR 的數量
+    4. 選分數最高的合格組合
     """
     n = len(sh_idx)
     if n < 2:
@@ -171,74 +172,68 @@ def find_upper_envelope(
 
     tol_env   = ENVELOPE_CLOSE_TOL * atr
     tol_touch = ATR_TOUCH_TOL * atr
-    nc        = len(all_closes)
-    xs        = np.arange(nc, dtype=float)
 
-    # 找最高 swing high 當錨點
-    p1_pos = int(np.argmax(sh_prices))
-    p1_x   = sh_idx[p1_pos]
-    p1_y   = sh_prices[p1_pos]
-
-    best_span   = -1
+    best_score  = -1.0
     best_result = None
 
     for i in range(n):
-        if i == p1_pos:
-            continue
-        p2_x = sh_idx[i]
-        p2_y = sh_prices[i]
-        if p2_x == p1_x:
-            continue
+        for j in range(i + 1, n):
+            p1_x, p1_y = sh_idx[i], sh_prices[i]
+            p2_x, p2_y = sh_idx[j], sh_prices[j]
 
-        slope     = (p2_y - p1_y) / (p2_x - p1_x)
-        intercept = p1_y - slope * p1_x
+            slope     = (p2_y - p1_y) / (p2_x - p1_x)
+            intercept = p1_y - slope * p1_x
 
-        # 驗證：所有 close 必須在線下方（容差 ENVELOPE_CLOSE_TOL×ATR）
-        line_vals = slope * xs + intercept
-        if not np.all(all_closes <= line_vals + tol_env):
-            continue
+            # 驗證 P1~P2 區間（含端點）所有 bar high ≤ 線 + tol_env
+            valid = True
+            for k in range(p1_x, p2_x + 1):
+                if highs[k] > slope * k + intercept + tol_env:
+                    valid = False
+                    break
+            if not valid:
+                continue
 
-        # 計算 swing high 觸及數
-        touches = sum(
-            1 for j in range(n)
-            if abs(sh_prices[j] - (slope * sh_idx[j] + intercept)) <= tol_touch
-        )
-        if touches < MIN_TOUCH_COUNT:
-            continue
+            # 計算 P1~P2 區間內 swing high 觸及數
+            touches = sum(
+                1 for idx, price in zip(sh_idx, sh_prices)
+                if p1_x <= idx <= p2_x
+                and abs(price - (slope * idx + intercept)) <= tol_touch
+            )
+            if touches < MIN_TOUCH_COUNT:
+                continue
 
-        span = abs(p2_x - p1_x)
-        if span > best_span:
-            best_span   = span
-            x_start     = min(p1_x, p2_x)
-            x_end       = max(p1_x, p2_x)
-            best_result = {
-                "slope":      float(slope),
-                "intercept":  float(intercept),
-                "r2":         1.0,
-                "touches":    touches,
-                "combo_pos":  sorted([p1_pos, i]),
-                "combo_bars": [x_start, x_end],
-                "x_start":    x_start,
-                "x_end":      x_end,
-            }
+            span  = p2_x - p1_x
+            score = touches * 2 + span * 0.05
+            if score > best_score:
+                best_score  = score
+                best_result = {
+                    "slope":      float(slope),
+                    "intercept":  float(intercept),
+                    "r2":         1.0,
+                    "touches":    touches,
+                    "combo_pos":  [i, j],
+                    "combo_bars": [p1_x, p2_x],
+                    "x_start":    p1_x,
+                    "x_end":      p2_x,
+                }
 
     return best_result
 
 
-# ─── 外包絡線：支撐線（線必須撐在所有 close 下方）──────────────────────────
+# ─── 支撐線：P1~P2 區間內 bar low 不得跌穿，P2 後允許跌破 ──────────────────
 def find_lower_envelope(
-    sl_idx:     list[int],
-    sl_prices:  list[float],
-    all_closes: np.ndarray,
-    atr:        float,
+    sl_idx:    list[int],
+    sl_prices: list[float],
+    lows:      np.ndarray,
+    atr:       float,
 ) -> "dict | None":
     """
-    支撐外包絡線算法：
-    1. 找最低 swing low P1 作為錨點（必在線上）
-    2. 枚舉「P1 + 任意其他 swing low」的兩點組合
-    3. 驗證：所有 close 不得低於線下方 ENVELOPE_CLOSE_TOL×ATR
-    4. 選時間跨度最大的合格組合
-    5. 至少 MIN_TOUCH_COUNT 個 swing low 觸及線（±ATR_TOUCH_TOL×ATR）
+    支撐線算法（與阻力線完全鏡像）：
+    1. 枚舉所有 (P1, P2) swing low 組合（P1 在前）
+    2. 驗證：P1~P2 區間內所有 bar low 不得低於線下方 ENVELOPE_CLOSE_TOL×ATR
+       P2 之後的 bar 不驗證（允許跌破）
+    3. 品質分數 = touches×2 + span×0.05
+    4. 選分數最高的合格組合
     """
     n = len(sl_idx)
     if n < 2:
@@ -246,56 +241,50 @@ def find_lower_envelope(
 
     tol_env   = ENVELOPE_CLOSE_TOL * atr
     tol_touch = ATR_TOUCH_TOL * atr
-    nc        = len(all_closes)
-    xs        = np.arange(nc, dtype=float)
 
-    # 找最低 swing low 當錨點
-    p1_pos = int(np.argmin(sl_prices))
-    p1_x   = sl_idx[p1_pos]
-    p1_y   = sl_prices[p1_pos]
-
-    best_span   = -1
+    best_score  = -1.0
     best_result = None
 
     for i in range(n):
-        if i == p1_pos:
-            continue
-        p2_x = sl_idx[i]
-        p2_y = sl_prices[i]
-        if p2_x == p1_x:
-            continue
+        for j in range(i + 1, n):
+            p1_x, p1_y = sl_idx[i], sl_prices[i]
+            p2_x, p2_y = sl_idx[j], sl_prices[j]
 
-        slope     = (p2_y - p1_y) / (p2_x - p1_x)
-        intercept = p1_y - slope * p1_x
+            slope     = (p2_y - p1_y) / (p2_x - p1_x)
+            intercept = p1_y - slope * p1_x
 
-        # 驗證：所有 close 必須在線上方（容差 ENVELOPE_CLOSE_TOL×ATR）
-        line_vals = slope * xs + intercept
-        if not np.all(all_closes >= line_vals - tol_env):
-            continue
+            # 驗證 P1~P2 區間（含端點）所有 bar low ≥ 線 - tol_env
+            valid = True
+            for k in range(p1_x, p2_x + 1):
+                if lows[k] < slope * k + intercept - tol_env:
+                    valid = False
+                    break
+            if not valid:
+                continue
 
-        # 計算 swing low 觸及數
-        touches = sum(
-            1 for j in range(n)
-            if abs(sl_prices[j] - (slope * sl_idx[j] + intercept)) <= tol_touch
-        )
-        if touches < MIN_TOUCH_COUNT:
-            continue
+            # 計算 P1~P2 區間內 swing low 觸及數
+            touches = sum(
+                1 for idx, price in zip(sl_idx, sl_prices)
+                if p1_x <= idx <= p2_x
+                and abs(price - (slope * idx + intercept)) <= tol_touch
+            )
+            if touches < MIN_TOUCH_COUNT:
+                continue
 
-        span = abs(p2_x - p1_x)
-        if span > best_span:
-            best_span   = span
-            x_start     = min(p1_x, p2_x)
-            x_end       = max(p1_x, p2_x)
-            best_result = {
-                "slope":      float(slope),
-                "intercept":  float(intercept),
-                "r2":         1.0,
-                "touches":    touches,
-                "combo_pos":  sorted([p1_pos, i]),
-                "combo_bars": [x_start, x_end],
-                "x_start":    x_start,
-                "x_end":      x_end,
-            }
+            span  = p2_x - p1_x
+            score = touches * 2 + span * 0.05
+            if score > best_score:
+                best_score  = score
+                best_result = {
+                    "slope":      float(slope),
+                    "intercept":  float(intercept),
+                    "r2":         1.0,
+                    "touches":    touches,
+                    "combo_pos":  [i, j],
+                    "combo_bars": [p1_x, p2_x],
+                    "x_start":    p1_x,
+                    "x_end":      p2_x,
+                }
 
     return best_result
 
@@ -366,8 +355,8 @@ def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
     sh_prices = [highs[i] for i in sh_idx]
     sl_prices = [lows[i]  for i in sl_idx]
 
-    res_fit = find_upper_envelope(sh_idx, sh_prices, closes, atr) if len(sh_idx) >= 2 else None
-    sup_fit = find_lower_envelope(sl_idx, sl_prices, closes, atr) if len(sl_idx) >= 2 else None
+    res_fit = find_upper_envelope(sh_idx, sh_prices, highs, atr) if len(sh_idx) >= 2 else None
+    sup_fit = find_lower_envelope(sl_idx, sl_prices, lows,  atr) if len(sl_idx) >= 2 else None
 
     # ── 4. 品質驗證：外包絡線函數已確保 touches ≥ MIN_TOUCH_COUNT ──────────
     res_ok = res_fit is not None
