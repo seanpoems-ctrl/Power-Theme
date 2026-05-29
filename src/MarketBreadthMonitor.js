@@ -343,12 +343,12 @@ function clsDn13(v) {
   if (v >= 200)  return "text-rose-300";
   return "";
 }
-// 10x ATR Ext: amber warning at ≥50 (market extended), deeper at ≥100
+// 10x ATR Ext: amber warning at ≥20 (extended), deep amber at ≥50 (extreme)
 function clsAtrExt(v, clickable) {
   const click = clickable ? "cursor-pointer underline decoration-dotted underline-offset-2" : "";
   if (v == null)  return `text-purple-300 ${click}`;
-  if (v >= 100)   return `bg-amber-800/60 text-amber-100 font-bold ${click}`;
-  if (v >= 50)    return `bg-amber-900/40 text-amber-300 font-semibold ${click}`;
+  if (v >= 50)    return `bg-amber-800/60 text-amber-100 font-bold ${click}`;
+  if (v >= 20)    return `bg-amber-900/40 text-amber-300 font-semibold ${click}`;
   return `text-purple-300 ${click}`;
 }
 // >50 DMA: red below 30% (existing), green above 80%
@@ -370,6 +370,29 @@ function clsT2108(v) {
 }
 
 // ---------------------------------------------------------------------------
+// ColTip — column header with hover tooltip showing color-coded thresholds
+// ---------------------------------------------------------------------------
+
+const ColTip = memo(function ColTip({ children, tiers, width = "w-60" }) {
+  return (
+    <div className="relative group/tip cursor-help">
+      {children}
+      {/* Tooltip card — appears below the header, above the data rows */}
+      <div className={`absolute hidden group-hover/tip:block z-[9999] top-full left-1/2 -translate-x-1/2
+                       mt-1 ${width} rounded-lg bg-zinc-950 border border-zinc-700 p-2.5 text-left
+                       shadow-2xl pointer-events-none`}>
+        {tiers.map((t, idx) => (
+          <div key={idx} className="flex items-start gap-1.5 mb-1 last:mb-0">
+            <span className={`mt-[3px] w-2.5 h-2.5 flex-shrink-0 rounded-sm border border-white/10 ${t.swatch}`} />
+            <span className="text-[10px] text-zinc-300 leading-tight whitespace-normal">{t.desc}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+});
+
+// ---------------------------------------------------------------------------
 // Main table
 // ---------------------------------------------------------------------------
 
@@ -381,84 +404,186 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
         <thead>
           {/* ── Row 1: group headers ────────────────────────────── */}
           <tr>
-            {/* Date — rowSpan=2 */}
             <th rowSpan={2}
                 className="sticky left-0 z-10 bg-amber-500 text-black text-xs font-bold px-2 py-1 text-center whitespace-nowrap border border-amber-600 align-middle">
               Date
             </th>
-            {/* Primary Breadth Indicators — 4 cols */}
-            <th colSpan={4}
-                className="bg-amber-400 text-black text-xs font-bold px-1 py-1 text-center border border-amber-500">
+            <th colSpan={4} className="bg-amber-400 text-black text-xs font-bold px-1 py-1 text-center border border-amber-500">
               Primary Breadth Indicators
             </th>
-            {/* Secondary Breadth Indicators — 8 cols */}
-            <th colSpan={8}
-                className="bg-emerald-500 text-black text-xs font-bold px-1 py-1 text-center border border-emerald-600">
+            <th colSpan={8} className="bg-emerald-500 text-black text-xs font-bold px-1 py-1 text-center border border-emerald-600">
               Secondary Breadth Indicators
             </th>
-            {/* 10x ATR Ext — rowSpan=2 */}
-            <th rowSpan={2}
-                className="bg-amber-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-pre-line border border-amber-500 align-middle leading-tight">
-              {"10x ATR\nExt."}
+            {/* 10x ATR Ext — rowSpan=2 with tooltip */}
+            <th rowSpan={2} className="bg-amber-400 text-black text-[10px] font-bold px-1 py-1 text-center border border-amber-500 align-middle">
+              <ColTip tiers={[
+                { swatch: "bg-amber-700",  desc: "≥ 50 — EXTREME. Many stocks far from 50-day MA. Sharp pullback likely. Reduce new longs." },
+                { swatch: "bg-amber-950",  desc: "≥ 20 — Extended. Market stretched; new entries risky." },
+                { swatch: "bg-zinc-700",   desc: "< 20 — Normal extension range." },
+              ]}>
+                <div className="leading-tight whitespace-pre-line">{"10x ATR\nExt."}</div>
+              </ColTip>
             </th>
-            {/* >50dma — rowSpan=2 */}
-            <th rowSpan={2}
-                className="bg-sky-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-nowrap border border-sky-500 align-middle">
-              {">50dma"}
+            {/* >50dma — rowSpan=2 with tooltip */}
+            <th rowSpan={2} className="bg-sky-400 text-black text-[10px] font-bold px-1 py-1 text-center border border-sky-500 align-middle">
+              <ColTip tiers={[
+                { swatch: "bg-emerald-600", desc: "≥ 90% — Extremely healthy bull. Broad participation across all stocks." },
+                { swatch: "bg-emerald-900", desc: "≥ 80% — Healthy bull market. Safe to be fully invested." },
+                { swatch: "bg-zinc-700",    desc: "30–80% — Neutral range." },
+                { swatch: "bg-rose-900",    desc: "< 30% — Bear territory. Most stocks below 50-day MA." },
+                { swatch: "bg-rose-700",    desc: "< 20% — Capitulation zone. Historically marks major market bottoms." },
+              ]}>
+                {">50dma"}
+              </ColTip>
             </th>
-            {/* Stock Universe $1B+ — rowSpan=2 */}
-            <th rowSpan={2}
-                className="bg-violet-400 text-black font-bold px-1 py-1 text-center border border-violet-500 align-middle">
+            {/* Stock Universe $1B+ — no tooltip (just a count) */}
+            <th rowSpan={2} className="bg-violet-400 text-black font-bold px-1 py-1 text-center border border-violet-500 align-middle">
               <div className="text-[10px]">Stock Universe</div>
               <div className="text-[8px] font-normal">Mkt Cap &gt; $1B</div>
             </th>
-            {/* Stock Universe (Worden) — rowSpan=2 */}
-            <th rowSpan={2}
-                className="bg-violet-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-pre-line border border-violet-500 align-middle leading-tight">
+            {/* Stock Universe (Worden) — no tooltip */}
+            <th rowSpan={2} className="bg-violet-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-pre-line border border-violet-500 align-middle leading-tight">
               {"Stock\nUniverse"}
             </th>
-            {/* T2108 — rowSpan=2 */}
-            <th rowSpan={2}
-                className="bg-amber-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-nowrap border border-amber-500 align-middle">
-              T2108
+            {/* T2108 — rowSpan=2 with tooltip */}
+            <th rowSpan={2} className="bg-amber-400 text-black text-[10px] font-bold px-1 py-1 text-center border border-amber-500 align-middle">
+              <ColTip tiers={[
+                { swatch: "bg-amber-900", desc: "≥ 80% — Overbought. Market extended; expect consolidation or pullback." },
+                { swatch: "bg-zinc-700",  desc: "30–80% — Neutral zone." },
+                { swatch: "bg-cyan-900",  desc: "≤ 20% — OVERSOLD (teal). Best buy signal. Historically marks major bottoms — highest risk/reward for new longs." },
+              ]}>
+                T2108
+              </ColTip>
             </th>
-            {/* S&P — rowSpan=2 */}
-            <th rowSpan={2}
-                className="bg-amber-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-nowrap border border-amber-500 align-middle">
+            <th rowSpan={2} className="bg-amber-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-nowrap border border-amber-500 align-middle">
               S&amp;P
             </th>
           </tr>
 
-          {/* ── Row 2: individual sub-headers ──────────────────── */}
+          {/* ── Row 2: sub-headers with ColTip on each ─────────── */}
           <tr className="border-b border-gray-700">
-            {/* Primary — 4 cols */}
-            {[
-              "Stocks Up\n4%+ Today",
-              "Stocks Down\n4%+ Today",
-              "5 Day\nRatio",
-              "10 Day\nRatio",
-            ].map((label) => (
-              <th key={label}
-                  className="bg-amber-300 text-black text-[10px] font-semibold px-1 py-1 text-center whitespace-pre-line border border-amber-400 leading-tight">
-                {label}
-              </th>
-            ))}
-            {/* Secondary — 8 cols */}
-            {[
-              "Up 25%+\nQuarter",
-              "Down 25%+\nQuarter",
-              "Up 25%+\nMonth",
-              "Down 25%+\nMonth",
-              "Up 50%+\nMonth",
-              "Down 50%+\nMonth",
-              "Up 13%+\n34 Days",
-              "Down 13%+\n34 Days",
-            ].map((label) => (
-              <th key={label}
-                  className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center whitespace-pre-line border border-emerald-400 leading-tight">
-                {label}
-              </th>
-            ))}
+            {/* Stocks Up 4%+ */}
+            <th className="bg-amber-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-amber-400">
+              <ColTip tiers={[
+                { swatch: "bg-emerald-500", desc: "≥ 600 — Breadth Thrust. Major buy signal. Institutional broad-buying across the market." },
+                { swatch: "bg-emerald-800", desc: "≥ 400 — Thrust day. Strong broad buying; safe to add longs." },
+                { swatch: "bg-zinc-700",    desc: "< 400 — Normal breadth." },
+              ]}>
+                <div className="leading-tight whitespace-pre-line">{"Stocks Up\n4%+ Today"}</div>
+              </ColTip>
+            </th>
+            {/* Stocks Down 4%+ */}
+            <th className="bg-amber-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-amber-400">
+              <ColTip tiers={[
+                { swatch: "bg-rose-700",  desc: "≥ 400 — Panic / capitulation. Fear is extreme; can paradoxically mark a short-term bottom." },
+                { swatch: "bg-rose-950",  desc: "≥ 200 — Elevated selling. Market under distribution." },
+                { swatch: "bg-zinc-700",  desc: "< 200 — Normal selling." },
+              ]}>
+                <div className="leading-tight whitespace-pre-line">{"Stocks Down\n4%+ Today"}</div>
+              </ColTip>
+            </th>
+            {/* 5 Day Ratio */}
+            <th className="bg-amber-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-amber-400">
+              <ColTip tiers={[
+                { swatch: "bg-emerald-500", desc: "≥ 2.0 — Strongly bullish. Stay fully long." },
+                { swatch: "bg-emerald-800", desc: "≥ 1.5 — Bullish momentum confirmed." },
+                { swatch: "bg-zinc-700",    desc: "0.5–1.5 — Neutral." },
+                { swatch: "bg-rose-600",    desc: "≤ 0.5 — Bearish. Reduce exposure." },
+                { swatch: "bg-rose-950",    desc: "≤ 0.3 — Strong bear momentum. Exit longs." },
+              ]}>
+                <div className="leading-tight whitespace-pre-line">{"5 Day\nRatio"}</div>
+              </ColTip>
+            </th>
+            {/* 10 Day Ratio */}
+            <th className="bg-amber-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-amber-400">
+              <ColTip tiers={[
+                { swatch: "bg-emerald-500", desc: "≥ 2.0 — Strongly bullish. Stay fully long." },
+                { swatch: "bg-emerald-800", desc: "≥ 1.5 — Bullish momentum confirmed." },
+                { swatch: "bg-zinc-700",    desc: "0.5–1.5 — Neutral." },
+                { swatch: "bg-rose-600",    desc: "≤ 0.5 — Bearish. Reduce exposure." },
+                { swatch: "bg-rose-950",    desc: "≤ 0.3 — Strong bear momentum. Exit longs." },
+              ]}>
+                <div className="leading-tight whitespace-pre-line">{"10 Day\nRatio"}</div>
+              </ColTip>
+            </th>
+            {/* Up 25%+ Quarter */}
+            <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
+              <ColTip tiers={[
+                { swatch: "bg-emerald-600", desc: "≥ 2000 — Very strong quarterly trend. Many stocks in powerful upswings." },
+                { swatch: "bg-emerald-900", desc: "≥ 1500 — Healthy quarterly breadth." },
+                { swatch: "bg-zinc-700",    desc: "< 1500 — Normal." },
+              ]}>
+                <div className="leading-tight whitespace-pre-line">{"Up 25%+\nQuarter"}</div>
+              </ColTip>
+            </th>
+            {/* Down 25%+ Quarter */}
+            <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
+              <ColTip tiers={[
+                { swatch: "bg-rose-600",   desc: "≥ 1000 — Many stocks in quarterly downtrend. Bearish market structure." },
+                { swatch: "bg-rose-400",   desc: "Dn > Up — Entire row turns rose; signals bear market regime." },
+                { swatch: "bg-zinc-700",   desc: "< 1000 — Normal." },
+              ]}>
+                <div className="leading-tight whitespace-pre-line">{"Down 25%+\nQuarter"}</div>
+              </ColTip>
+            </th>
+            {/* Up 25%+ Month */}
+            <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
+              <ColTip tiers={[
+                { swatch: "bg-emerald-600", desc: "≥ 2000 — Very strong monthly breadth. Bull run in full force." },
+                { swatch: "bg-emerald-900", desc: "≥ 1500 — Healthy monthly trend." },
+                { swatch: "bg-zinc-700",    desc: "< 1500 — Normal." },
+              ]}>
+                <div className="leading-tight whitespace-pre-line">{"Up 25%+\nMonth"}</div>
+              </ColTip>
+            </th>
+            {/* Down 25%+ Month */}
+            <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
+              <ColTip tiers={[
+                { swatch: "bg-rose-600", desc: "≥ 500 — Elevated monthly downtrend breadth. Many stocks breaking monthly lows." },
+                { swatch: "bg-zinc-700", desc: "< 500 — Normal." },
+              ]}>
+                <div className="leading-tight whitespace-pre-line">{"Down 25%+\nMonth"}</div>
+              </ColTip>
+            </th>
+            {/* Up 50%+ Month */}
+            <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
+              <ColTip tiers={[
+                { swatch: "bg-cyan-900",  desc: "≥ 100 — PARABOLIC / FROTHY (teal). Many stocks up 50%+ in one month = speculation running hot. CAUTION signal — not bullish." },
+                { swatch: "bg-cyan-700",  desc: "≥ 50 — Elevated speculative activity." },
+                { swatch: "bg-zinc-700",  desc: "< 50 — Normal." },
+              ]}>
+                <div className="leading-tight whitespace-pre-line">{"Up 50%+\nMonth"}</div>
+              </ColTip>
+            </th>
+            {/* Down 50%+ Month */}
+            <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
+              <ColTip tiers={[
+                { swatch: "bg-rose-900", desc: "≥ 50 — Many stocks in free-fall. Severe bear market or sector crash underway." },
+                { swatch: "bg-zinc-700", desc: "< 50 — Normal." },
+              ]}>
+                <div className="leading-tight whitespace-pre-line">{"Down 50%+\nMonth"}</div>
+              </ColTip>
+            </th>
+            {/* Up 13%+ 34 Days */}
+            <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
+              <ColTip tiers={[
+                { swatch: "bg-emerald-600", desc: "≥ 500 — Strong medium-term trend. Many stocks making 34-day breakouts." },
+                { swatch: "bg-emerald-900", desc: "≥ 300 — Moderate 34-day trend activity." },
+                { swatch: "bg-zinc-700",    desc: "< 300 — Normal." },
+              ]}>
+                <div className="leading-tight whitespace-pre-line">{"Up 13%+\n34 Days"}</div>
+              </ColTip>
+            </th>
+            {/* Down 13%+ 34 Days */}
+            <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
+              <ColTip tiers={[
+                { swatch: "bg-rose-900", desc: "≥ 300 — Many stocks breaking down over 34 days. Momentum deteriorating broadly." },
+                { swatch: "bg-rose-700", desc: "≥ 200 — Elevated 34-day downtrend." },
+                { swatch: "bg-zinc-700", desc: "< 200 — Normal." },
+              ]}>
+                <div className="leading-tight whitespace-pre-line">{"Down 13%+\n34 Days"}</div>
+              </ColTip>
+            </th>
           </tr>
         </thead>
         <tbody>
