@@ -295,17 +295,18 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                 className="bg-amber-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-pre-line border border-amber-500 align-middle leading-tight">
               {"10x ATR\nExt."}
             </th>
-            {/* $1B+ Universe — rowSpan=2 */}
-            <th rowSpan={2}
-                className="bg-violet-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-pre-line border border-violet-500 align-middle leading-tight">
-              {"$1B+\nUniverse"}
-            </th>
             {/* >50dma — rowSpan=2 */}
             <th rowSpan={2}
                 className="bg-sky-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-nowrap border border-sky-500 align-middle">
               {">50dma"}
             </th>
-            {/* Stock Universe — rowSpan=2 */}
+            {/* Stock Universe $1B+ — rowSpan=2 */}
+            <th rowSpan={2}
+                className="bg-violet-400 text-black font-bold px-1 py-1 text-center border border-violet-500 align-middle">
+              <div className="text-[10px]">Stock Universe</div>
+              <div className="text-[8px] font-normal">Mkt Cap &gt; $1B</div>
+            </th>
+            {/* Stock Universe (Worden) — rowSpan=2 */}
             <th rowSpan={2}
                 className="bg-violet-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-pre-line border border-violet-500 align-middle leading-tight">
               {"Stock\nUniverse"}
@@ -420,10 +421,6 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                 >
                   {r.atr_10x_ext != null ? fmtN(r.atr_10x_ext) : "—"}
                 </td>
-                {/* $1B+ Universe */}
-                <td className="px-1 py-1 text-right text-violet-300/80 whitespace-nowrap font-mono">
-                  {r.universe_1b != null ? fmtN(r.universe_1b) : "—"}
-                </td>
                 {/* >50 DMA — red cell fill when < 30%; clickable on all rows with data */}
                 <td
                   className={`px-1 py-1 text-right whitespace-nowrap font-mono
@@ -440,7 +437,11 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                 >
                   {r.above_50dma_pct != null ? `${r.above_50dma_pct.toFixed(1)}%` : "—"}
                 </td>
-                {/* Share Universe */}
+                {/* Stock Universe $1B+ */}
+                <td className="px-1 py-1 text-right text-violet-300/80 whitespace-nowrap font-mono">
+                  {r.universe_1b != null ? fmtN(r.universe_1b) : "—"}
+                </td>
+                {/* Stock Universe (Worden) */}
                 <td className="px-1 py-1 text-right text-amber-300/80 whitespace-nowrap">
                   {fmtN(r.worden_universe)}
                 </td>
