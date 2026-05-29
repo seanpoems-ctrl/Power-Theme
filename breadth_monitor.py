@@ -240,17 +240,24 @@ def _compute_breadth_extras() -> dict[str, Any]:
 
         logger.info("TradingView screener returned %d rows for breadth extras", len(df))
 
-        # ── 10x ATR Extension (Jeff Sun) ─────────────────────────────────────
-        # A stock qualifies when its price is ≥10 ATR units above its 50-day MA:
-        #   (Close − SMA50) / ATR  ≥ 10
-        # Counts both extended-up (≥+10) and extended-down (≤−10).
+        # ── 10x ATR Extension ────────────────────────────────────────────────
+        # Formula (3 steps):
+        #   1. ATR%             = ATR / Price
+        #   2. % Gain from 50MA = (Price − SMA50) / SMA50
+        #   3. ATR% Multiple    = % Gain / ATR%
+        # Qualifies when |ATR% Multiple| ≥ 10 (both extended-up and extended-down).
+        # Restricted to Mkt Cap ≥ $1B.
         df_atr = df.dropna(subset=["close", "ATR", "SMA50", "market_cap_basic"]).copy()
-        df_atr = df_atr[(df_atr["close"] > 0) & (df_atr["ATR"] > 0) & (df_atr["market_cap_basic"] >= 1_000_000_000)]
+        df_atr = df_atr[(df_atr["close"] > 0) & (df_atr["ATR"] > 0) & (df_atr["SMA50"] > 0)
+                        & (df_atr["market_cap_basic"] >= 1_000_000_000)]
         if len(df_atr) > 0:
-            df_atr["atr_ext_val"] = (df_atr["close"] - df_atr["SMA50"]) / df_atr["ATR"]
-            df_atr["is_ext"]      = df_atr["atr_ext_val"].abs() >= 10
-            extras["atr_10x_ext"] = int(df_atr["is_ext"].sum())
-            logger.info("10x ATR ext count (Jeff Sun): %d / %d", extras["atr_10x_ext"], len(df_atr))
+            df_atr = df_atr.copy()
+            df_atr["atr_pct"]       = df_atr["ATR"] / df_atr["close"]
+            df_atr["pct_gain_50ma"] = (df_atr["close"] - df_atr["SMA50"]) / df_atr["SMA50"]
+            df_atr["atr_ext_val"]   = df_atr["pct_gain_50ma"] / df_atr["atr_pct"]
+            df_atr["is_ext"]        = df_atr["atr_ext_val"].abs() >= 10
+            extras["atr_10x_ext"]   = int(df_atr["is_ext"].sum())
+            logger.info("10x ATR ext count: %d / %d", extras["atr_10x_ext"], len(df_atr))
 
         # ── % above 50 DMA (Mkt Cap ≥ $1B) ─────────────────────────────────
         df_sma = df.dropna(subset=["close", "SMA50", "market_cap_basic"]).copy()

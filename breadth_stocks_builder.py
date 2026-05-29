@@ -715,13 +715,19 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
             "rs_ibd":      rs_lookup.get(tkr),
         }
 
-    # ── ATR Ext scanner (Jeff Sun) ───────────────────────────────────────────
-    # Qualifies when (Close − SMA50) / ATR  ≥ +10  (extended above 50MA)
-    #              or (Close − SMA50) / ATR  ≤ −10  (extended below 50MA)
+    # ── ATR Ext scanner (correct formula) ───────────────────────────────────
+    # Formula (3 steps):
+    #   1. ATR%            = ATR / Price
+    #   2. % Gain from 50MA = (Price − SMA50) / SMA50
+    #   3. ATR% Multiple   = % Gain / ATR%
+    # Qualifies when |ATR% Multiple| ≥ 10.
     # Restricted to Mkt Cap ≥ $1B for institutional relevance.
     df_atr = df.dropna(subset=["close", "ATR", "SMA50"]).copy()
-    df_atr = df_atr[(df_atr["ATR"] > 0) & (df_atr["market_cap_basic"].notna()) & (df_atr["market_cap_basic"] >= 1_000_000_000)].copy()
-    df_atr["atr_ext_val"] = (df_atr["close"] - df_atr["SMA50"]) / df_atr["ATR"]
+    df_atr = df_atr[(df_atr["close"] > 0) & (df_atr["ATR"] > 0) & (df_atr["SMA50"] > 0)
+                    & (df_atr["market_cap_basic"].notna()) & (df_atr["market_cap_basic"] >= 1_000_000_000)].copy()
+    df_atr["atr_pct"]       = df_atr["ATR"] / df_atr["close"]
+    df_atr["pct_gain_50ma"] = (df_atr["close"] - df_atr["SMA50"]) / df_atr["SMA50"]
+    df_atr["atr_ext_val"]   = df_atr["pct_gain_50ma"] / df_atr["atr_pct"]
     df_atr = df_atr[df_atr["atr_ext_val"].abs() >= 10].copy()
     df_atr = df_atr.sort_values("atr_ext_val", ascending=False)
 
@@ -731,7 +737,7 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
         s["atr_ext_val"] = round(float(row["atr_ext_val"]), 2)
         atr_stocks.append(s)
 
-    logger.info("ATR Ext scanner (Jeff Sun): %d stocks ((close−SMA50)/ATR ≥ 10, mkt cap ≥ $1B)", len(atr_stocks))
+    logger.info("ATR Ext scanner: %d stocks (ATR%% Multiple ≥ 10, mkt cap ≥ $1B)", len(atr_stocks))
     atr_data = {
         "ok": True,
         "filter": "atr_ext",
