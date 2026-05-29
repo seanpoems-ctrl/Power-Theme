@@ -264,6 +264,112 @@ const CLICKABLE_COLS = {
 };
 
 // ---------------------------------------------------------------------------
+// Cell color helpers — mirrors Stockbee Market Monitor conditional formatting
+// ---------------------------------------------------------------------------
+
+// Up 4%+ Today: green thrust threshold, blog-confirmed ≥400 / ≥600
+function clsUp4(v) {
+  if (v == null) return "";
+  if (v >= 600)  return "bg-emerald-600/50 text-emerald-100 font-bold";
+  if (v >= 400)  return "bg-emerald-900/50 text-emerald-300 font-semibold";
+  return "";
+}
+// Down 4%+ Today: pink ≥200 (blog: "pink for negative <300"), red ≥400
+function clsDn4(v) {
+  if (v == null) return "";
+  if (v >= 400)  return "bg-rose-800/60 text-rose-100 font-bold";
+  if (v >= 200)  return "bg-rose-900/40 text-rose-300";
+  return "";
+}
+// 5-day / 10-day ratio: green bullish ≥1.5, red bearish ≤0.5
+function clsRatio(v) {
+  if (v == null) return "";
+  if (v >= 2.0)  return "text-emerald-300 font-semibold";
+  if (v >= 1.5)  return "text-emerald-400";
+  if (v <= 0.3)  return "bg-rose-900/40 text-rose-200";
+  if (v <= 0.5)  return "text-rose-400";
+  return "";
+}
+// Up 25% Quarterly: teal at ≥2000, green at ≥1500
+function clsUp25q(v) {
+  if (v == null)  return "";
+  if (v >= 2000)  return "bg-emerald-900/30 text-emerald-200";
+  if (v >= 1500)  return "text-emerald-300";
+  return "";
+}
+// Down 25% Quarterly: rose at ≥1000
+function clsDn25q(v) {
+  if (v == null)  return "";
+  if (v >= 1000)  return "text-rose-300";
+  return "";
+}
+// Up 25% Monthly: green at ≥1500
+function clsUp25m(v) {
+  if (v == null)  return "";
+  if (v >= 2000)  return "bg-emerald-900/30 text-emerald-200";
+  if (v >= 1500)  return "text-emerald-300";
+  return "";
+}
+// Down 25% Monthly: rose at ≥500
+function clsDn25m(v) {
+  if (v == null) return "";
+  if (v >= 500)  return "text-rose-300";
+  return "";
+}
+// Up 50% Monthly: TEAL bg at ≥100 — parabolic moves (visible in Stockbee screenshot)
+function clsUp50m(v) {
+  if (v == null) return "";
+  if (v >= 100)  return "bg-cyan-900/50 text-cyan-200 font-semibold";
+  if (v >= 50)   return "text-cyan-300";
+  return "";
+}
+// Down 50% Monthly: rose bg at ≥50 — many stocks in free-fall
+function clsDn50m(v) {
+  if (v == null) return "";
+  if (v >= 50)   return "bg-rose-900/40 text-rose-300";
+  return "";
+}
+// Up 13% 34-Day: green highlights
+function clsUp13(v) {
+  if (v == null) return "";
+  if (v >= 500)  return "text-emerald-300";
+  if (v >= 300)  return "text-emerald-400/80";
+  return "";
+}
+// Down 13% 34-Day: rose highlights
+function clsDn13(v) {
+  if (v == null) return "";
+  if (v >= 300)  return "bg-rose-900/30 text-rose-200";
+  if (v >= 200)  return "text-rose-300";
+  return "";
+}
+// 10x ATR Ext: amber warning at ≥50 (market extended), deeper at ≥100
+function clsAtrExt(v, clickable) {
+  const click = clickable ? "cursor-pointer underline decoration-dotted underline-offset-2" : "";
+  if (v == null)  return `text-purple-300 ${click}`;
+  if (v >= 100)   return `bg-amber-800/60 text-amber-100 font-bold ${click}`;
+  if (v >= 50)    return `bg-amber-900/40 text-amber-300 font-semibold ${click}`;
+  return `text-purple-300 ${click}`;
+}
+// >50 DMA: red below 30% (existing), green above 80%
+function clsAbove50dma(v, clickable) {
+  const click = clickable ? "cursor-pointer underline decoration-dotted underline-offset-2" : "";
+  if (v == null) return `text-sky-300 ${click}`;
+  if (v < 20)    return `bg-rose-800/70 text-rose-100 font-bold ${click}`;
+  if (v < 30)    return `bg-rose-900/70 text-rose-200 font-semibold ${click}`;
+  if (v >= 90)   return `bg-emerald-800/50 text-emerald-200 font-semibold ${click}`;
+  if (v >= 80)   return `bg-emerald-900/40 text-emerald-300 ${click}`;
+  return `text-sky-300 ${click}`;
+}
+// T2108: TEAL when ≤20 (oversold bottom signal per Stockbee), amber when ≥80 (overbought)
+function clsT2108(v) {
+  if (v == null) return "text-amber-300/80";
+  if (v <= 20)   return "bg-cyan-900/60 text-cyan-200 font-semibold";
+  if (v >= 80)   return "bg-amber-900/40 text-amber-300 font-semibold";
+  return "text-amber-300/80";
+}
+
+// ---------------------------------------------------------------------------
 // Main table
 // ---------------------------------------------------------------------------
 
@@ -358,19 +464,16 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
         <tbody>
           {rows.map((r, i) => {
             const isLatest = r.date === latestDate;
-            const bearish = r.up_25_q != null && r.down_25_q != null && r.up_25_q < r.down_25_q;
-            const up4hi = r.up_4_pct != null && r.up_4_pct > 600;
-            const t2108Low = r.t2108 != null && r.t2108 < 20;
+            const bearish  = r.up_25_q != null && r.down_25_q != null && r.up_25_q < r.down_25_q;
 
-            // All rows are clickable: latest row uses live breadth_stocks_*.json,
-            // historical rows use breadth_history/YYYY-MM-DD.json archive.
-            const cell = (field, content, extraCls = "") => {
+            // Clickable cell wrapper
+            const cell = (field, content, colorCls = "") => {
               const col = CLICKABLE_COLS[field];
               if (col) {
                 return (
                   <td
                     className={`px-1 py-1 text-right whitespace-nowrap cursor-pointer
-                      underline decoration-dotted underline-offset-2 hover:text-white ${extraCls}`}
+                      underline decoration-dotted underline-offset-2 hover:brightness-125 ${colorCls}`}
                     onClick={() => onOpenModal(col.filter, col.label, r.date, isLatest)}
                     title={`View ${col.label} stocks — ${r.date_display}`}
                   >
@@ -378,7 +481,7 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                   </td>
                 );
               }
-              return <td className={`px-1 py-1 text-right whitespace-nowrap ${extraCls}`}>{content}</td>;
+              return <td className={`px-1 py-1 text-right whitespace-nowrap ${colorCls}`}>{content}</td>;
             };
 
             return (
@@ -395,25 +498,30 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                     : r.date_display}
                 </td>
 
-                {cell("up_4_pct",    fmtN(r.up_4_pct),    up4hi ? "font-semibold text-emerald-300" : "")}
-                {cell("down_4_pct",  fmtN(r.down_4_pct))}
-                <td className="px-1 py-1 text-right whitespace-nowrap">{fmtN(r.ratio_5d)}</td>
-                <td className="px-1 py-1 text-right whitespace-nowrap">{fmtN(r.ratio_10d)}</td>
-                {cell("up_25_q",     fmtN(r.up_25_q))}
-                {cell("down_25_q",   fmtN(r.down_25_q),   bearish ? "text-rose-400" : "")}
-                {cell("up_25_m",     fmtN(r.up_25_m))}
-                {cell("down_25_m",   fmtN(r.down_25_m))}
-                {cell("up_50_m",     fmtN(r.up_50_m))}
-                {cell("down_50_m",   fmtN(r.down_50_m))}
-                {cell("up_13_34d",   fmtN(r.up_13_34d))}
-                {cell("down_13_34d", fmtN(r.down_13_34d))}
+                {/* Primary Breadth ── ── ── ── ── ── ── ── ── ── ── ── ── */}
+                {cell("up_4_pct",   fmtN(r.up_4_pct),   clsUp4(r.up_4_pct))}
+                {cell("down_4_pct", fmtN(r.down_4_pct), clsDn4(r.down_4_pct))}
+                <td className={`px-1 py-1 text-right whitespace-nowrap ${clsRatio(r.ratio_5d)}`}>
+                  {fmtN(r.ratio_5d)}
+                </td>
+                <td className={`px-1 py-1 text-right whitespace-nowrap ${clsRatio(r.ratio_10d)}`}>
+                  {fmtN(r.ratio_10d)}
+                </td>
 
-                {/* 10x ATR Ext — clickable on all rows with data */}
+                {/* Secondary Breadth ── ── ── ── ── ── ── ── ── ── ── ── */}
+                {cell("up_25_q",     fmtN(r.up_25_q),     clsUp25q(r.up_25_q))}
+                {cell("down_25_q",   fmtN(r.down_25_q),   clsDn25q(r.down_25_q) || (bearish ? "text-rose-400" : ""))}
+                {cell("up_25_m",     fmtN(r.up_25_m),     clsUp25m(r.up_25_m))}
+                {cell("down_25_m",   fmtN(r.down_25_m),   clsDn25m(r.down_25_m))}
+                {cell("up_50_m",     fmtN(r.up_50_m),     clsUp50m(r.up_50_m))}
+                {cell("down_50_m",   fmtN(r.down_50_m),   clsDn50m(r.down_50_m))}
+                {cell("up_13_34d",   fmtN(r.up_13_34d),   clsUp13(r.up_13_34d))}
+                {cell("down_13_34d", fmtN(r.down_13_34d), clsDn13(r.down_13_34d))}
+
+                {/* 10x ATR Ext — amber warning when many stocks extended */}
                 <td
                   className={`px-1 py-1 text-right whitespace-nowrap font-mono
-                    ${r.atr_10x_ext != null
-                      ? "cursor-pointer underline decoration-dotted underline-offset-2 hover:text-purple-100 text-purple-300"
-                      : "text-purple-300"}`}
+                    ${clsAtrExt(r.atr_10x_ext, r.atr_10x_ext != null)} hover:brightness-125`}
                   onClick={r.atr_10x_ext != null
                     ? () => onOpenModal("atr_ext", "10x ATR Extended", r.date, isLatest)
                     : undefined}
@@ -421,15 +529,11 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                 >
                   {r.atr_10x_ext != null ? fmtN(r.atr_10x_ext) : "—"}
                 </td>
-                {/* >50 DMA — red cell fill when < 30%; clickable on all rows with data */}
+
+                {/* >50 DMA — red below 30%, green above 80% */}
                 <td
                   className={`px-1 py-1 text-right whitespace-nowrap font-mono
-                    ${r.above_50dma_pct != null && r.above_50dma_pct < 30
-                      ? "bg-rose-900/70 text-rose-200 font-semibold"
-                      : "text-sky-300"}
-                    ${r.above_50dma_pct != null
-                      ? "cursor-pointer underline decoration-dotted underline-offset-2"
-                      : ""}`}
+                    ${clsAbove50dma(r.above_50dma_pct, r.above_50dma_pct != null)} hover:brightness-125`}
                   onClick={r.above_50dma_pct != null
                     ? () => onOpenModal("above50dma", ">50 DMA", r.date, isLatest)
                     : undefined}
@@ -437,18 +541,22 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                 >
                   {r.above_50dma_pct != null ? `${r.above_50dma_pct.toFixed(1)}%` : "—"}
                 </td>
+
                 {/* Stock Universe $1B+ */}
                 <td className="px-1 py-1 text-right text-violet-300/80 whitespace-nowrap font-mono">
                   {r.universe_1b != null ? fmtN(r.universe_1b) : "—"}
                 </td>
+
                 {/* Stock Universe (Worden) */}
                 <td className="px-1 py-1 text-right text-amber-300/80 whitespace-nowrap">
                   {fmtN(r.worden_universe)}
                 </td>
-                {/* T2108 */}
-                <td className={`px-1 py-1 text-right whitespace-nowrap ${t2108Low ? "font-semibold text-rose-400" : "text-amber-300/80"}`}>
+
+                {/* T2108 — TEAL when ≤20 (oversold buy signal), amber when ≥80 */}
+                <td className={`px-1 py-1 text-right whitespace-nowrap ${clsT2108(r.t2108)}`}>
                   {r.t2108 != null ? `${r.t2108.toFixed(1)}%` : "—"}
                 </td>
+
                 {/* S&P */}
                 <td className="px-1 py-1 text-right text-amber-300/80 whitespace-nowrap">
                   {fmtN(r.sp_index)}
