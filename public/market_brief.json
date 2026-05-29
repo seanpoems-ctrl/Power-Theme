@@ -1,6 +1,6 @@
 {
-  "generated_at": "May 28, 2026 (18:50 EDT)",
-  "session": "Post-Market",
+  "generated_at": "May 29, 2026 (08:53 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,15 +16,15 @@
     },
     {
       "label": "VIX",
-      "price": 15.74,
-      "change": -0.55,
+      "price": 15.8,
+      "change": 0.06,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
       "price": 4.45,
-      "change": -0.03,
+      "change": -0.01,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 64999.41,
-      "change_pct": 0.01
+      "price": 66329.5,
+      "change_pct": 2.53
     },
     "dax": {
       "label": "DAX",
-      "price": 25177.8,
-      "change_pct": -0.03
+      "price": 25109.01,
+      "change_pct": 0.07
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10425.96,
-      "change_pct": -0.75
+      "price": 10450.15,
+      "change_pct": 0.23
     }
   },
   "macro_breadth": {
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Risk-On, Tech Strength, Global Divergence",
+  "mood": "Tech-led bullish momentum",
   "analysis": {
-    "action_line": "VIX 15.74 Normal, S5FI 59.1% breadth, and mixed global tape suggest selective long exposure in RS leaders.",
-    "analysis_para1": "Global markets presented a mixed picture today with Europe lagging, as the FTSE 100 dropped 0.75% while the Nikkei 225 was flat at +0.01%. Despite international divergence, US markets showcased underlying strength, with the S&P 500 and Nasdaq 100 posting solid gains. The 10-year yield remained stable at 4.45%, preventing credit market jitters. US breadth indicators, S5FI at 59.1% and MMTH at 64.5%, reflect healthy participation across sectors.",
-    "analysis_para2": "The mechanical plan involves maintaining focus on the Nasdaq 100's resilience at 30223.89 and the S&P 500 holding 7563.63. Watch for any breaks below immediate daily support levels as a first warning sign, although current momentum favors the upside. Continued VIX stability and healthy breadth above 50% are key signals to maintain long exposure in high relative strength names. Consider establishing positions on constructive pullbacks or breakout retests in leading themes like Semiconductors and Hardware.",
-    "technical_signal": "No reversal pattern confirmed yet. US indices closed strong with healthy breadth, indicating continued upward momentum.",
+    "action_line": "VIX 15.80 Normal + S5FI 59.1% breadth + Nikkei +2.53% strong → trade RS leaders selectively near support.",
+    "analysis_para1": "Global markets are showing robust strength this morning, with the Nikkei 225 surging by +2.53%, supported by positive opens in the DAX (+0.07%) and FTSE 100 (+0.23%). This global enthusiasm is setting a constructive tone for US equities. While the BAML HY Spread is currently an unknown regime, US market breadth remains healthy with 59.1% of stocks above their 50-day moving average (S5FI) and 64.5% above their 200-day moving average (MMTH), indicating broad participation rather than a narrow rally.",
+    "analysis_para2": "The S&P 500 opens at 7563.63 and Nasdaq 100 at 30223.89, both indicating upward momentum. Our mechanical plan dictates monitoring these indices for sustained strength above current levels, specifically looking for the S&P 500 to hold above 7550 as initial support. A VIX at 15.80 suggests a normal volatility environment, supporting continuation trades in high-relative strength names. Key action will be to identify RS leaders consolidating constructively, entering on pullbacks to short-term moving averages rather than chasing extended moves.",
+    "technical_signal": "No reversal pattern confirmed yet. The market is showing strong positive momentum rather than signs of distribution or capitulation.",
     "ticker_intel": [
       {
         "ticker": "QTEX",
         "company": "QTREX Quantum Ltd.",
         "grade": "A+",
-        "reason": "With an RS of 98 and a staggering 1M return of +525.1%, QTEX is a top-tier Hardware leader demonstrating explosive momentum in the current tech-driven rally."
+        "reason": "With an RS of 98 and an astounding +525.1% 1-month return, QTEX exhibits extreme momentum, making it a top leader in the current hardware theme."
       },
       {
-        "ticker": "AXTI",
-        "company": "AXT Inc",
+        "ticker": "MXL",
+        "company": "MaxLinear, Inc",
         "grade": "A",
-        "reason": "Boasting an RS of 99 and a strong 1M return of +68.4%, AXTI is a leading Semiconductor play that aligns perfectly with the market's focus on high-growth tech sectors."
+        "reason": "Boasting an RS of 98 and a robust +445.5% 3-month return, MXL demonstrates sustained high-quality growth within the semiconductors theme."
       },
       {
         "ticker": "WDC",
         "company": "Western Digital Corporation",
         "grade": "C",
-        "reason": "While maintaining an RS of 98, WDC's 1M return of +35.9% is comparatively weaker than its high-flying Hardware peers, suggesting it may lag in the current aggressive momentum regime."
+        "reason": "Despite a high RS of 98, its +35.9% 1-month return and +88.2% 3-month return are comparatively weaker than other red-hot high-RS peers in the hardware theme, suggesting it's a relative laggard."
       }
     ]
   }
