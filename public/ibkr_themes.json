@@ -1,90 +1,7 @@
 {
-  "generated_at": "2026-05-28T21:47:12.735332+00:00",
+  "generated_at": "2026-05-29T11:05:59.484410+00:00",
   "data_source": "fallback",
   "power_themes": [
-    {
-      "name": "Semiconductors",
-      "theme_rs": 98.0,
-      "perf_1d": 2.35,
-      "leaders": [
-        {
-          "ticker": "AXTI",
-          "price": 115.7,
-          "rs_52w": 99,
-          "adr_pct": 13.02,
-          "vol_surge": 0.53,
-          "mkt_cap": 7569462189,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "VSH",
-          "price": 52.24,
-          "rs_52w": 98,
-          "adr_pct": 5.19,
-          "vol_surge": 2.25,
-          "mkt_cap": 7110168630,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "STM",
-          "price": 69.45,
-          "rs_52w": 98,
-          "adr_pct": 4.33,
-          "vol_surge": 0.94,
-          "mkt_cap": 61726749616,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Base"
-        },
-        {
-          "ticker": "SMTC",
-          "price": 166.33,
-          "rs_52w": 97,
-          "adr_pct": 6.54,
-          "vol_surge": 1.69,
-          "mkt_cap": 15487735121,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
     {
       "name": "Hardware",
       "theme_rs": 97.0,
@@ -95,7 +12,7 @@
           "price": 317.05,
           "rs_52w": 97,
           "adr_pct": 4.85,
-          "vol_surge": 2.49,
+          "vol_surge": 3.31,
           "mkt_cap": 205945617464,
           "gates_passed": 5,
           "gates_detail": {
@@ -112,17 +29,17 @@
       ]
     },
     {
-      "name": "Defense & Aerospace",
-      "theme_rs": 96.0,
-      "perf_1d": 32.61,
+      "name": "Semiconductors",
+      "theme_rs": 93.0,
+      "perf_1d": 1.85,
       "leaders": [
         {
-          "ticker": "RCAT",
-          "price": 14.15,
-          "rs_52w": 96,
-          "adr_pct": 7.99,
-          "vol_surge": 5.0,
-          "mkt_cap": 2126305684,
+          "ticker": "MU",
+          "price": 923.52,
+          "rs_52w": 98,
+          "adr_pct": 6.05,
+          "vol_surge": 1.04,
+          "mkt_cap": 1041484972805,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -131,69 +48,17 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Defense & Aerospace",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
-      "name": "Industrials",
-      "theme_rs": 96.0,
-      "perf_1d": 21.5,
-      "leaders": [
-        {
-          "ticker": "AMPX",
-          "price": 20.85,
-          "rs_52w": 96,
-          "adr_pct": 8.87,
-          "vol_surge": 2.68,
-          "mkt_cap": 2952926548,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Industrials",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
-      "name": "Telecommunications",
-      "theme_rs": 95.5,
-      "perf_1d": 9.04,
-      "leaders": [
-        {
-          "ticker": "LITE",
-          "price": 860.62,
-          "rs_52w": 97,
-          "adr_pct": 9.14,
-          "vol_surge": 0.93,
-          "mkt_cap": 66956235620,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Telecommunications",
+          "primary_theme": "Semiconductors",
           "secondary_themes": [],
           "setup_label": "Flag"
         },
         {
-          "ticker": "ONDS",
-          "price": 13.25,
-          "rs_52w": 94,
-          "adr_pct": 8.0,
-          "vol_surge": 3.31,
-          "mkt_cap": 6604981158,
+          "ticker": "QCOM",
+          "price": 243.29,
+          "rs_52w": 88,
+          "adr_pct": 6.74,
+          "vol_surge": 1.11,
+          "mkt_cap": 256427652923,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -202,52 +67,7 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Telecommunications",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
-      "name": "Cloud Computing",
-      "theme_rs": 91.5,
-      "perf_1d": 5.55,
-      "leaders": [
-        {
-          "ticker": "NBIS",
-          "price": 226.34,
-          "rs_52w": 96,
-          "adr_pct": 7.88,
-          "vol_surge": 1.48,
-          "mkt_cap": 57467316300,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Cloud Computing",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "CRWV",
-          "price": 106.86,
-          "rs_52w": 87,
-          "adr_pct": 7.44,
-          "vol_surge": 0.83,
-          "mkt_cap": 58299647506,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Cloud Computing",
+          "primary_theme": "Semiconductors",
           "secondary_themes": [],
           "setup_label": "Base"
         }
