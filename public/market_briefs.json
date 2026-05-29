@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-05-29 08:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Growth Push",
+    "spy_price": 754.6,
+    "spy_change_pct": 0.55,
+    "vix": 15.8,
+    "hy_oas": 2.71,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 59.1,
+    "mmth": 64.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp",
+          "reason": "Announced significant advancements in enterprise AI integration suite, promising increased productivity and cost savings for corporate clients."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "Received analyst upgrade to 'Outperform' based on strong Q2 guidance and robust consumer spending data, signaling continued strength in financial sector."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Pure flow/momentum play as AI enthusiasm continues to drive investor interest, despite no fresh specific catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-05-28 17:05 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Trading largely on broader market sentiment and technical patterns with no fresh fundamental catalysts driving significant upside today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-04-16 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Positive Sentiment, Broad Gains",
-    "spy_price": 701.66,
-    "spy_change_pct": 0.25,
-    "vix": 17.94,
-    "hy_oas": null,
-    "yield_curve": null,
-    "credit_status": "Unknown",
-    "s5fi": 59.3,
-    "mmth": 56.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "OKTA",
-          "company": "Okta, Inc.",
-          "reason": "Raymond James upgraded the cloud identity management firm, citing strong enterprise adoption and robust subscription growth."
-        },
-        {
-          "ticker": "AEHR",
-          "company": "Aehr Test Systems",
-          "reason": "The semiconductor test equipment provider reported a significant earnings beat and raised its full-year guidance, driven by increasing demand for silicon carbide testing."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Shares saw continued positive momentum driven by a general sector uplift and sustained investor interest in AI infrastructure, rather than a specific fresh catalyst."
         }
       ]
     }
