@@ -8740,7 +8740,7 @@ const filtered = useMemo(() => {
           </main>
 
           {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
-          <aside className="w-[340px] flex-shrink-0">
+          <aside className="w-[380px] flex-shrink-0">
             <EtfTrendlinePanel etfData={etfTrendlineData}/>
           </aside>
 
