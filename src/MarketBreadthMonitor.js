@@ -365,8 +365,19 @@ const LABEL_COLOR = {
   REGIME: "text-emerald-400",
 };
 
-const GeminiBreadthRead = memo(function GeminiBreadthRead({ rows }) {
-  const [text,    setText]    = useState(null);
+/**
+ * GeminiBreadthRead
+ *
+ * Priority order for the analysis text:
+ *   1. data.gemini_analysis — pre-computed by breadth_monitor.py at scrape time (preferred)
+ *   2. localStorage cache   — from a previous browser-side call
+ *   3. Live Gemini call     — fallback if both above are absent and GEMINI_KEY is set
+ *
+ * This means on most loads the text appears instantly from the JSON with no API call.
+ * The "↻ refresh" button forces a fresh live call regardless.
+ */
+const GeminiBreadthRead = memo(function GeminiBreadthRead({ rows, precomputedAnalysis }) {
+  const [text,    setText]    = useState(() => precomputedAnalysis || null);
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState(null);
   const latestDate = rows?.[0]?.date ?? "";
@@ -374,14 +385,17 @@ const GeminiBreadthRead = memo(function GeminiBreadthRead({ rows }) {
   const cacheKey = `${GEMINI_CACHE_NS}_${latestDate}`;
 
   const run = useCallback(async (force = false) => {
-    if (!rows?.length) return;
+    // 1. Use pre-computed analysis from the JSON (always preferred)
+    if (!force && precomputedAnalysis) { setText(precomputedAnalysis); return; }
+    // 2. Check localStorage cache
     if (!force) {
       try {
         const cached = JSON.parse(localStorage.getItem(cacheKey) ?? "null");
         if (cached?.text) { setText(cached.text); return; }
       } catch { /* ignore */ }
     }
-    if (!GEMINI_KEY) return;
+    // 3. Live Gemini call (fallback / forced refresh)
+    if (!GEMINI_KEY || !rows?.length) return;
     setLoading(true);
     setError(null);
     try {
@@ -395,11 +409,12 @@ const GeminiBreadthRead = memo(function GeminiBreadthRead({ rows }) {
     } finally {
       setLoading(false);
     }
-  }, [rows, cacheKey]);
+  }, [rows, cacheKey, precomputedAnalysis]);
 
   useEffect(() => { void run(false); }, [run]);
 
-  if (!GEMINI_KEY) return null;
+  // Show even without GEMINI_KEY if pre-computed text is available
+  if (!precomputedAnalysis && !GEMINI_KEY) return null;
 
   const bullets = parseBullets(text);
 
@@ -1070,7 +1085,12 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
       </div>
 
       {/* Gemini AI Breadth Read (Stockbee style) */}
-      {rows.length > 0 && <GeminiBreadthRead rows={rows} />}
+      {rows.length > 0 && (
+        <GeminiBreadthRead
+          rows={rows}
+          precomputedAnalysis={data.gemini_analysis ?? null}
+        />
+      )}
 
       {/* Quick-read rule-based badges */}
       {latest && (

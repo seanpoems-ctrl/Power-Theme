@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import re
 import sys
 from datetime import datetime, timezone
@@ -24,6 +25,9 @@ from typing import Any
 import httpx
 import pandas as pd
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
@@ -354,6 +358,96 @@ def fetch_breadth_monitor(*, timeout: float = 45.0) -> dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
+# Gemini Breadth Analysis — generated once at scrape time, stored in JSON
+# ---------------------------------------------------------------------------
+
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY", "")
+
+STOCKBEE_PROMPT_CONTEXT = """
+You are analysing market breadth data the way Pradeep Bonde (Stockbee) would read it.
+Stockbee's colour thresholds for notable readings:
+  - Up 4%+  ≥400 = healthy buying thrust; ≥600 = extreme thrust (very bullish)
+  - Down 4%+ ≥200 = distribution pressure; ≥400 = heavy selling (bearish)
+  - 5D / 10D Ratio: ≥2.0 = strong bull trend; ≥1.5 = bullish; ≤0.5 = bearish; ≤0.3 = very bearish
+  - Up 25% Quarterly: rising count = momentum universe expanding (bullish)
+  - Down 25% Quarterly: rising count = momentum breaking down
+  - Up 25% Monthly: broad participation; high = bull trend healthy
+  - Down 25% Monthly: rising = distribution broadening
+  - Up 50% Monthly ≥50 = hot market; ≥100 = frothy / extended (caution signal, not bullish)
+  - Down 50% Monthly ≥30 = panic / washout (watch for reversal)
+  - Up 13% 34-Day: medium-term momentum; acceleration = stage-2 breakouts firing
+  - Down 13% 34-Day: rising = intermediate downtrend widening
+  - 10x ATR Ext ≥20 = market getting extended (amber warning); ≥50 = extreme (fade risk)
+  - % above 50 DMA <30% = oversold/bearish; >80% = extended/overbought; 40-70% = healthy bull
+  - T2108 ≤20 = deeply oversold — historical buy signal; ≥80 = overbought warning
+""".strip()
+
+
+def generate_gemini_breadth_analysis(rows: list[dict]) -> str | None:
+    """
+    Call Gemini with the last 20 breadth rows and return a Stockbee-style
+    4-bullet analysis (TODAY / WEEK / MONTH / REGIME).
+    Returns None if GEMINI_API_KEY is missing or the call fails.
+    """
+    if not GEMINI_API_KEY:
+        logger.info("GEMINI_API_KEY not set — skipping breadth analysis")
+        return None
+
+    snapshot = [
+        {
+            "date":       r["date"],
+            "up4":        r.get("up_4_pct"),
+            "dn4":        r.get("down_4_pct"),
+            "r5d":        r.get("ratio_5d"),
+            "r10d":       r.get("ratio_10d"),
+            "up25q":      r.get("up_25_q"),
+            "dn25q":      r.get("down_25_q"),
+            "up25m":      r.get("up_25_m"),
+            "dn25m":      r.get("down_25_m"),
+            "up50m":      r.get("up_50_m"),
+            "dn50m":      r.get("down_50_m"),
+            "up13":       r.get("up_13_34d"),
+            "dn13":       r.get("down_13_34d"),
+            "atrExt":     r.get("atr_10x_ext"),
+            "above50dma": r.get("above_50dma_pct"),
+            "t2108":      r.get("t2108"),
+            "sp":         r.get("sp_index"),
+        }
+        for r in rows[:20]
+    ]
+
+    prompt = f"""{STOCKBEE_PROMPT_CONTEXT}
+
+Below is the last 20 trading sessions of Stockbee Market Monitor data (newest row first).
+Fields: date | up4 | dn4 | 5d-ratio | 10d-ratio | up25Q | dn25Q | up25M | dn25M | up50M | dn50M | up13_34d | dn13_34d | atrExt | %above50dma | T2108 | S&P
+
+{json.dumps(snapshot)}
+
+Reply with ONLY the 4 labelled bullets below — no intro, no outro, no markdown headers.
+Each bullet: label + em-dash + 2 concise sentences with specific numbers.
+
+TODAY — (today's up4/dn4 absolute counts and ratio; note any threshold crossing per the colour rules above)
+WEEK — (5-day trend in the ratio and up25M or up13_34d; is breadth improving, steady, or fading?)
+MONTH — (up50M froth level, % above 50dma zone, T2108 reading; what it means for swing traders)
+REGIME — (one-word regime label + what Stockbee would watch as the next leading signal)"""
+
+    try:
+        from google import genai  # type: ignore
+        client = genai.Client(api_key=GEMINI_API_KEY)
+        response = client.models.generate_content(
+            model="gemini-2.0-flash",   # non-thinking model — clean single-part response
+            contents=prompt,
+        )
+        text = (response.text or "").strip()
+        if text:
+            logger.info("Gemini breadth analysis generated (%d chars)", len(text))
+        return text or None
+    except Exception as exc:
+        logger.warning("Gemini breadth analysis failed: %s", exc)
+        return None
+
+
+# ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
 
@@ -395,6 +489,11 @@ def main() -> None:
                 row["above_50dma_pct"] = saved["above_50dma_pct"]
             if row.get("universe_1b") is None and "universe_1b" in saved:
                 row["universe_1b"] = saved["universe_1b"]
+
+    # Generate Gemini Stockbee-style analysis and embed in the payload
+    if data["ok"] and data["rows"]:
+        analysis = generate_gemini_breadth_analysis(data["rows"])
+        data["gemini_analysis"] = analysis  # None if key missing or call failed
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(data, indent=2), encoding="utf-8")
