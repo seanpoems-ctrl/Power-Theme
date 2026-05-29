@@ -5626,7 +5626,6 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
     <><div className="max-w-[1560px] mx-auto px-4 pt-4 pb-8 flex items-start gap-5">
       {/* ── Left main area ────────────────────────────────────────────────── */}
       <div className="flex-1 min-w-0">
-        <GeminiBreathAnalysis mc={mc} internalsData={internalsData} />
 
         {/* 8 metric chips — compact single row */}
         <div className="flex flex-wrap gap-2 mb-4">

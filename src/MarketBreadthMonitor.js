@@ -19,7 +19,7 @@ import BreadthStockModal from "./BreadthStockModal";
 // ---------------------------------------------------------------------------
 
 const GEMINI_KEY      = process.env.REACT_APP_GEMINI_KEY || "";
-const GEMINI_CACHE_NS = "sbmm_gemini_v1";
+const GEMINI_CACHE_NS = "sbmm_gemini_v3";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -306,20 +306,18 @@ Fields: date | up4 | dn4 | 5d-ratio | 10d-ratio | up25Q | dn25Q | up25M | dn25M 
 
 ${JSON.stringify(snapshot, null, 0)}
 
-Write exactly 4 bullet points. Each starts with a bold label in ALL-CAPS followed by an em-dash.
-Use Stockbee's language and refer to specific numbers. Cross-reference how TODAY compares to this WEEK and this MONTH where relevant.
-Keep each bullet to 2–3 sentences max. Do not add any intro or closing lines.
+Reply with ONLY the 4 bullet points below — no intro, no outro, no markdown headers.
+Each bullet: bold ALL-CAPS label + em-dash + 2 concise sentences with specific numbers.
 
-Bullets:
-**TODAY** — (what does today's up4/dn4/ratio say; flag any threshold crossings with the colour rule)
-**WEEK** — (5-day trend in ratio, up25M, or up13; is breadth accelerating or fading?)
-**MONTH** — (monthly momentum picture: up50M, %above50dma, up25M trajectory, T2108 zone)
-**REGIME** — (overall market regime call; what Stockbee would watch next as a leading signal)`;
+**TODAY** — (today's up4/dn4 absolute counts and ratio; note any threshold crossing per the colour rules above)
+**WEEK** — (5-day trend in the ratio and up25M or up13_34d; is breadth improving, steady, or fading?)
+**MONTH** — (up50M froth level, % above 50dma zone, T2108 reading; what it means for swing traders)
+**REGIME** — (one-word regime label + what Stockbee would watch as the next leading signal)`;
 
   const url  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`;
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.35, maxOutputTokens: 500 },
+    generationConfig: { temperature: 0.35, maxOutputTokens: 900 },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   const json = await res.json();
