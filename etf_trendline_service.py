@@ -37,6 +37,7 @@ MIN_TOUCH_COUNT   = 2     # 至少幾個 swing 點觸及線才合格
 ATR_PERIOD        = 14    # ATR 計算天數
 LOOKBACK_MONTHS   = 6     # 回看月數（全形態）
 ENVELOPE_CLOSE_TOL = 0.3  # 外包絡線容差：close 不得突出線外超過 N×ATR
+MAX_P2_AGE_BARS    = 30   # P2（線右端點）距今最多幾根 K 棒，超過視為過時的線
 
 # Signal 門檻（純趨勢線，禁用 SMA）
 BREAKOUT_MAX_DIST        = 0.04  # 0 < (close - resistance) / resistance ≤ 4%
@@ -172,6 +173,7 @@ def find_upper_envelope(
 
     tol_env   = ENVELOPE_CLOSE_TOL * atr
     tol_touch = ATR_TOUCH_TOL * atr
+    last_i    = len(highs) - 1
 
     best_score  = -1.0
     best_result = None
@@ -180,6 +182,10 @@ def find_upper_envelope(
         for j in range(i + 1, n):
             p1_x, p1_y = sh_idx[i], sh_prices[i]
             p2_x, p2_y = sh_idx[j], sh_prices[j]
+
+            # P2 時效性過濾：P2 距今超過 MAX_P2_AGE_BARS 根視為過時的線
+            if last_i - p2_x > MAX_P2_AGE_BARS:
+                continue
 
             slope     = (p2_y - p1_y) / (p2_x - p1_x)
             intercept = p1_y - slope * p1_x
@@ -232,8 +238,9 @@ def find_lower_envelope(
     1. 枚舉所有 (P1, P2) swing low 組合（P1 在前）
     2. 驗證：P1~P2 區間內所有 bar low 不得低於線下方 ENVELOPE_CLOSE_TOL×ATR
        P2 之後的 bar 不驗證（允許跌破）
-    3. 品質分數 = touches×2 + span×0.05
-    4. 選分數最高的合格組合
+    3. P2 距今不得超過 MAX_P2_AGE_BARS 根（過時的線不採用）
+    4. 品質分數 = touches×2 + span×0.05
+    5. 選分數最高的合格組合
     """
     n = len(sl_idx)
     if n < 2:
@@ -241,6 +248,7 @@ def find_lower_envelope(
 
     tol_env   = ENVELOPE_CLOSE_TOL * atr
     tol_touch = ATR_TOUCH_TOL * atr
+    last_i    = len(lows) - 1
 
     best_score  = -1.0
     best_result = None
@@ -249,6 +257,10 @@ def find_lower_envelope(
         for j in range(i + 1, n):
             p1_x, p1_y = sl_idx[i], sl_prices[i]
             p2_x, p2_y = sl_idx[j], sl_prices[j]
+
+            # P2 時效性過濾
+            if last_i - p2_x > MAX_P2_AGE_BARS:
+                continue
 
             slope     = (p2_y - p1_y) / (p2_x - p1_x)
             intercept = p1_y - slope * p1_x
