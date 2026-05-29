@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-29T11:05:59.484410+00:00",
+  "generated_at": "2026-05-29T11:38:25.857750+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
@@ -29,9 +29,61 @@
       ]
     },
     {
+      "name": "Cloud Computing",
+      "theme_rs": 97.0,
+      "perf_1d": -0.68,
+      "leaders": [
+        {
+          "ticker": "PENG",
+          "price": 54.07,
+          "rs_52w": 97,
+          "adr_pct": 6.66,
+          "vol_surge": 0.9,
+          "mkt_cap": 2841927672,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Cloud Computing",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    },
+    {
+      "name": "Industrials",
+      "theme_rs": 96.0,
+      "perf_1d": -4.3,
+      "leaders": [
+        {
+          "ticker": "OUST",
+          "price": 42.33,
+          "rs_52w": 96,
+          "adr_pct": 8.86,
+          "vol_surge": 1.46,
+          "mkt_cap": 2695276047,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Industrials",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    },
+    {
       "name": "Semiconductors",
-      "theme_rs": 93.0,
-      "perf_1d": 1.85,
+      "theme_rs": 94.3,
+      "perf_1d": 4.82,
       "leaders": [
         {
           "ticker": "MU",
@@ -40,6 +92,25 @@
           "adr_pct": 6.05,
           "vol_surge": 1.04,
           "mkt_cap": 1041484972805,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "ARM",
+          "price": 335.27,
+          "rs_52w": 97,
+          "adr_pct": 6.47,
+          "vol_surge": 1.55,
+          "mkt_cap": 356745312876,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
