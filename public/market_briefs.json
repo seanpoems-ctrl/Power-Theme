@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-05-29 17:05 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious Gains, Complacent Credit",
+    "spy_price": 756.48,
+    "spy_change_pct": 0.25,
+    "vix": 15.32,
+    "hy_oas": 2.72,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 57.0,
+    "mmth": 63.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "DELL",
+          "company": "Dell Technologies Inc.",
+          "reason": "Strong earnings 'Beat & Raise' provides fresh fundamental tailwinds, signaling robust business performance and an improved outlook."
+        },
+        {
+          "ticker": "QCOM",
+          "company": "Qualcomm Incorporated",
+          "reason": "Announcement of significant 'New Contracts' bolsters future revenue projections and market positioning, driving immediate investor confidence."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Movement driven by recycled sector momentum and general market flow rather than a specific fresh fundamental catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-05-29 08:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continues to see strong institutional accumulation driven by AI infrastructure demand, despite no fresh news catalysts today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-04-16 20:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautiously Upbeat / Data Void",
-    "spy_price": 701.66,
-    "spy_change_pct": 0.25,
-    "vix": 17.94,
-    "hy_oas": null,
-    "yield_curve": null,
-    "credit_status": "Unknown",
-    "s5fi": 59.6,
-    "mmth": 56.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AEHR",
-          "company": "Aehr Test Systems",
-          "reason": "Strong Q4 beat and raise guidance signals robust demand for its semiconductor test solutions amid expanding AI and EV markets."
-        },
-        {
-          "ticker": "OKTA",
-          "company": "Okta, Inc.",
-          "reason": "Raymond James upgrade reflects growing confidence in its identity management platform and expanding enterprise reach for security solutions."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Trading largely on broader market sentiment and technical patterns with no fresh fundamental catalysts driving significant upside today."
         }
       ]
     }
