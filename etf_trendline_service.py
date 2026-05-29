@@ -36,7 +36,7 @@ ATR_TOUCH_TOL     = 0.5   # ±N×ATR 容許誤差，算作「觸及」線
 MIN_TOUCH_COUNT   = 2     # 至少幾個 swing 點觸及線才合格
 ATR_PERIOD        = 14    # ATR 計算天數
 LOOKBACK_MONTHS   = 6     # 回看月數（全形態）
-ENVELOPE_CLOSE_TOL = 0.3  # 外包絡線容差：close 不得突出線外超過 N×ATR
+ENVELOPE_CLOSE_TOL = 0.5  # 外包絡線容差：bar high/low 突出線外 ≤ N×ATR 算可接受（與 ATR_TOUCH_TOL 統一）
 MAX_P2_AGE_BARS    = 30   # P2（線右端點）距今最多幾根 K 棒，超過視為過時的線
 
 # Signal 門檻（純趨勢線，禁用 SMA）
