@@ -716,7 +716,9 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
         }
 
     # ── ATR Ext scanner ──────────────────────────────────────────────────────
+    # Restrict to Mkt Cap ≥ $1B so only institutionally relevant moves surface.
     df_atr = df.copy()
+    df_atr = df_atr[df_atr["market_cap_basic"].notna() & (df_atr["market_cap_basic"] >= 1_000_000_000)].copy()
     df_atr["atr_ext_val"] = df_atr["change"].abs() / df_atr["atr_pct"]
     df_atr = df_atr[df_atr["atr_ext_val"] > 10].copy()
     df_atr = df_atr.sort_values("atr_ext_val", ascending=False)
@@ -727,7 +729,7 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
         s["atr_ext_val"] = round(float(row["atr_ext_val"]), 2)
         atr_stocks.append(s)
 
-    logger.info("ATR Ext scanner: %d stocks (|change%%| > 10×ATR%%)", len(atr_stocks))
+    logger.info("ATR Ext scanner: %d stocks (|change%%| > 10×ATR%%, mkt cap ≥ $1B)", len(atr_stocks))
     atr_data = {
         "ok": True,
         "filter": "atr_ext",
