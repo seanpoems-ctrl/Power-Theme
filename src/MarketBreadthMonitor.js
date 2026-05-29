@@ -19,7 +19,7 @@ import BreadthStockModal from "./BreadthStockModal";
 // ---------------------------------------------------------------------------
 
 const GEMINI_KEY      = process.env.REACT_APP_GEMINI_KEY || "";
-const GEMINI_CACHE_NS = "sbmm_gemini_v3";
+const GEMINI_CACHE_NS = "sbmm_gemini_v4";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -317,11 +317,21 @@ Each bullet: bold ALL-CAPS label + em-dash + 2 concise sentences with specific n
   const url  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`;
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.35, maxOutputTokens: 900 },
+    generationConfig: { temperature: 0.35, maxOutputTokens: 1200 },
+    // Disable thinking budget — this is a formatting task, not deep reasoning.
+    // Without this, parts[0] is the thinking chain and parts[1] is the answer;
+    // reading only parts[0] gives truncated internal monologue, not the reply.
+    thinkingConfig: { thinkingBudget: 0 },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   const json = await res.json();
-  return json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? null;
+  // Gemini 2.5-flash (thinking model) may return multiple parts:
+  //   parts[0] = thinking chain ({ thought: true })   ← skip this
+  //   parts[1] = actual text response
+  // Find the first non-thinking part so we always get the real answer.
+  const parts = json?.candidates?.[0]?.content?.parts ?? [];
+  const textPart = parts.find(p => !p.thought) ?? parts[0];
+  return textPart?.text?.trim() ?? null;
 }
 
 /** Parse the 4-bullet Gemini response into structured objects */
