@@ -40,9 +40,10 @@ LOOKBACK_MONTHS = 6     # 回看月數（全形態）
 COMBO_MAX_K     = 3     # 枚舉組合最大點數（2~3）
 
 # Signal 門檻（純趨勢線，禁用 SMA）
-BREAKOUT_MAX_DIST      = 0.04   # 0 < (close - resistance) / resistance ≤ 4%
-NEAR_RESISTANCE_MAX_DIST = 0.02 # -2% ≤ (close - resistance) / resistance < 0（接近阻力）
-SUPPORT_MAX_DIST       = 0.03   # 0 < (close - support)   / support    ≤ 3%
+BREAKOUT_MAX_DIST        = 0.04  # 0 < (close - resistance) / resistance ≤ 4%
+NEAR_RESISTANCE_MAX_DIST = 0.02  # -2% ≤ (close - resistance) / resistance < 0
+SUPPORT_MAX_DIST         = 0.03  # 0 < (close - support)   / support    ≤ 3%
+BREAKOUT_SCAN_BARS       = 5     # 往回掃幾根找突破日（0 或 1 天前才發訊號）
 
 
 # ─── 載入白名單 ───────────────────────────────────────────────────────────────
@@ -215,6 +216,26 @@ def line_y(fit: dict, x: int) -> float:
     return fit["slope"] * x + fit["intercept"]
 
 
+def find_breakout_day(
+    closes: np.ndarray,
+    last_i: int,
+    res_fit: dict,
+    scan_bars: int = BREAKOUT_SCAN_BARS,
+) -> "tuple[int, int] | tuple[None, None]":
+    """
+    往回最多掃 scan_bars 根 K 棒，找「第一根收盤 > 當天阻力線值」的 bar。
+
+    回傳 (breakout_bar_index, days_since)。
+    days_since = last_i - breakout_bar_index（0 = 今天, 1 = 昨天, …）。
+    若窗口內完全沒有收盤站上阻力線，回傳 (None, None)。
+    """
+    scan_start = max(0, last_i - scan_bars + 1)
+    for j in range(scan_start, last_i + 1):
+        if closes[j] > line_y(res_fit, j):
+            return j, last_i - j
+    return None, None
+
+
 # ─── 單一 ETF 分析 ────────────────────────────────────────────────────────────
 def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
     """
@@ -274,9 +295,9 @@ def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
         return {**base, "rejected": " | ".join(reasons)}
 
     # ── 5. 延伸到最後一根（最後一個交易日）────────────────────────────────────
-    last_i      = n - 1
-    last_date   = dates[last_i]
-    close_now   = float(closes[last_i])
+    last_i    = n - 1
+    last_date = dates[last_i]
+    close_now = float(closes[last_i])
 
     resistance_today = line_y(res_fit, last_i) if res_ok else None
     support_today    = line_y(sup_fit, last_i) if sup_ok else None
@@ -297,24 +318,58 @@ def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
     else:
         pattern = "support_only"
 
-    # ── 7. 突破 / 拉回判斷（純趨勢線，禁用 SMA）────────────────────────────
-    # 優先順序：breakout > near_resistance（阻力線相關）；near_support 獨立判斷
-    signal    = None
-    dist_pct  = None
-    line_ref  = None  # 用哪條線觸發
+    # ── [過濾 A] 單線參考：只有一條線，不發訊號 ─────────────────────────────
+    if not (res_ok and sup_ok):
+        res_s = f"{resistance_today:.3f}" if resistance_today else "—"
+        sup_s = f"{support_today:.3f}"    if support_today    else "—"
+        if debug:
+            print(f"\n  ⚠ 單線（{pattern}）：不發訊號，供參考。"
+                  f"  res={res_s}  sup={sup_s}")
+            print(f"{'='*65}")
+        return {
+            **base,
+            "pattern":          pattern,
+            "reference_only":   True,
+            "close":            close_now,
+            "resistance_today": resistance_today,
+            "support_today":    support_today,
+            "last_date":        str(last_date.date()),
+        }
 
-    if res_ok and resistance_today is not None and resistance_today > 0:
+    # ── [過濾 B] 通道顛倒：支撐線值 >= 阻力線值 ────────────────────────────
+    if support_today >= resistance_today:
+        reason = (f"通道顛倒 support({support_today:.2f}) >= "
+                  f"resistance({resistance_today:.2f})")
+        if debug:
+            print(f"\n  ✗ {reason}")
+            print(f"{'='*65}")
+        return {**base, "rejected": reason}
+
+    # ── 7. 突破 / 拉回判斷（純趨勢線，禁用 SMA）────────────────────────────
+    signal        = None
+    dist_pct      = None
+    line_ref      = None
+    breakout_date = None   # 只在 signal=="breakout" 時有值
+
+    # ── [Breakout] 突破後第 0~1 天才發訊號 ──────────────────────────────────
+    if resistance_today is not None and resistance_today > 0:
         dist_res = (close_now - resistance_today) / resistance_today
         if 0 < dist_res <= BREAKOUT_MAX_DIST:
-            signal   = "breakout"
+            # 找突破日
+            bo_bar, days_since = find_breakout_day(closes, last_i, res_fit)
+            if bo_bar is not None and days_since <= 1:
+                signal        = "breakout"
+                dist_pct      = dist_res * 100
+                line_ref      = "resistance"
+                breakout_date = str(dates[bo_bar].date())
+            # days_since >= 2 → 突破太久，不發訊號（近距離當作 near_resistance 處理）
+        if signal is None and -NEAR_RESISTANCE_MAX_DIST <= dist_res < 0:
+            signal   = "near_resistance"
             dist_pct = dist_res * 100
             line_ref = "resistance"
-        elif -NEAR_RESISTANCE_MAX_DIST <= dist_res < 0:
-            signal   = "near_resistance"
-            dist_pct = dist_res * 100   # 負值，代表還在線下方
-            line_ref = "resistance"
 
-    if signal is None and sup_ok and support_today is not None and support_today > 0:
+    # ── [Near Support] 接近支撐 ──────────────────────────────────────────────
+    if signal is None and support_today is not None and support_today > 0:
         dist_sup = (close_now - support_today) / support_today
         if 0 < dist_sup <= SUPPORT_MAX_DIST:
             signal   = "near_support"
@@ -370,17 +425,28 @@ def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
                 print(f"      → 延伸至最後一根 [{last_date.date()} bar {last_i}]: {today_val:.4f}")
 
         print(f"\n  收盤價 [{last_date.date()}]: {close_now:.4f}")
-        if resistance_today is not None and res_ok:
+        if resistance_today is not None:
             dist_r = (close_now - resistance_today) / resistance_today * 100
             direct = "在線上方 ↑" if dist_r > 0 else "在線下方 ↓"
             print(f"  距阻力線: {dist_r:+.2f}%  ({direct})")
-        if support_today is not None and sup_ok:
+            # 印出突破掃描
+            bo_bar, days_since = find_breakout_day(closes, last_i, res_fit)
+            if bo_bar is not None:
+                print(f"  突破掃描: 最近站上阻力線 = {dates[bo_bar].date()}"
+                      f"  ({days_since} 天前)  →  {'✓ 有效（≤1天）' if days_since <= 1 else '✗ 過舊（>1天）'}")
+            else:
+                print(f"  突破掃描: 近 {BREAKOUT_SCAN_BARS} 根內未站上阻力線")
+        if support_today is not None:
             dist_s = (close_now - support_today) / support_today * 100
             direct = "在線上方 ↑" if dist_s > 0 else "在線下方 ↓"
             print(f"  距支撐線: {dist_s:+.2f}%  ({direct})")
+        if resistance_today is not None and support_today is not None:
+            if support_today >= resistance_today:
+                print(f"  ✗ 通道顛倒：support({support_today:.2f}) >= resistance({resistance_today:.2f})")
         sig_str  = signal or "（無訊號）"
         dist_str = f"{dist_pct:+.2f}%" if dist_pct is not None else "—"
-        print(f"  形態: {pattern}  →  訊號: {sig_str}  dist={dist_str}")
+        bo_str   = f"  breakout_day={breakout_date}" if breakout_date else ""
+        print(f"  形態: {pattern}  →  訊號: {sig_str}  dist={dist_str}{bo_str}")
         print(f"{'='*65}")
 
     return {
@@ -393,10 +459,12 @@ def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
         "close":            close_now,
         "resistance_today": resistance_today,
         "support_today":    support_today,
-        "res_fit":          res_fit if res_ok else None,
-        "sup_fit":          sup_fit if sup_ok else None,
+        "breakout_date":    breakout_date,
+        "res_fit":          res_fit,
+        "sup_fit":          sup_fit,
         "last_date":        str(last_date.date()),
         "rejected":         None,
+        "reference_only":   False,
     }
 
 
@@ -413,24 +481,28 @@ def main():
     print(f"  🟡 Near_Support   : 0 ~ +{SUPPORT_MAX_DIST*100:.0f}% 超支撐線（逢低布局）")
     print(f"{'='*65}")
 
-    signals:  list[dict] = []
-    no_signal: list[dict] = []
-    rejected: list[tuple] = []
+    signals:    list[dict]  = []
+    no_signal:  list[dict]  = []
+    ref_only:   list[dict]  = []   # 單線，供參考
+    rejected:   list[tuple] = []
 
     for entry in universe:
-        ticker = entry["ticker"]
-        theme  = entry["theme"]
-        is_debug = (ticker == "DRNZ")  # 只有 DRNZ 印詳細 debug
+        ticker   = entry["ticker"]
+        theme    = entry["theme"]
+        is_debug = (ticker == "DRNZ")
 
         try:
             result = analyze_etf(ticker, theme, debug=is_debug)
         except Exception as e:
             logger.error(f"{ticker}: 意外錯誤 — {e}", exc_info=True)
-            result = {"ticker": ticker, "theme": theme, "rejected": f"意外錯誤: {e}", "signal": None}
+            result = {"ticker": ticker, "theme": theme,
+                      "rejected": f"意外錯誤: {e}", "signal": None}
 
-        if result["rejected"]:
+        if result.get("rejected"):
             rejected.append((ticker, theme, result["rejected"]))
-        elif result["signal"]:
+        elif result.get("reference_only"):
+            ref_only.append(result)
+        elif result.get("signal"):
             signals.append(result)
         else:
             no_signal.append(result)
@@ -447,24 +519,37 @@ def main():
         for s in signals:
             sig = s["signal"]
             if sig == "breakout":
-                tag = "🟢 BREAKOUT      "
+                bo   = f"  breakout={s['breakout_date']}" if s.get("breakout_date") else ""
+                tag  = "🟢 BREAKOUT      "
             elif sig == "near_resistance":
+                bo  = ""
                 tag = "🔵 NEAR_RESIST   "
             else:
+                bo  = ""
                 tag = "🟡 NEAR_SUPPORT  "
             res_s = f"{s['resistance_today']:.3f}" if s["resistance_today"] is not None else "      —"
             sup_s = f"{s['support_today']:.3f}"    if s["support_today"]    is not None else "      —"
-            dist  = s['dist_pct']
+            dist  = s["dist_pct"]
             print(f"  {tag} {s['ticker']:6s} {s['theme']:14s} {s['pattern']:22s}"
-                  f" {s['close']:8.3f} {res_s:>8s} {sup_s:>8s} {dist:+7.2f}%")
+                  f" {s['close']:8.3f} {res_s:>8s} {sup_s:>8s} {dist:+7.2f}%{bo}")
     else:
         print("  （無）")
 
     # ── 輸出：線合格但無訊號 ────────────────────────────────────────────────
     print(f"\n{'─'*65}")
-    print(f"  ⚪ 線合格、但目前無突破/拉回訊號（{len(no_signal)} 支）")
+    print(f"  ⚪ 雙線合格、無訊號（{len(no_signal)} 支）")
     print(f"{'─'*65}")
     for s in no_signal:
+        res_s = f"{s['resistance_today']:.3f}" if s.get("resistance_today") is not None else "—"
+        sup_s = f"{s['support_today']:.3f}"    if s.get("support_today")    is not None else "—"
+        print(f"  {s['ticker']:6s} ({s['theme']:14s}) {s['pattern']:24s}"
+              f"  close={s['close']:.3f}  res={res_s}  sup={sup_s}")
+
+    # ── 輸出：單線供參考 ────────────────────────────────────────────────────
+    print(f"\n{'─'*65}")
+    print(f"  📋 單線（不發訊號，供參考）（{len(ref_only)} 支）")
+    print(f"{'─'*65}")
+    for s in ref_only:
         res_s = f"{s['resistance_today']:.3f}" if s.get("resistance_today") is not None else "—"
         sup_s = f"{s['support_today']:.3f}"    if s.get("support_today")    is not None else "—"
         print(f"  {s['ticker']:6s} ({s['theme']:14s}) {s['pattern']:24s}"
@@ -478,7 +563,8 @@ def main():
         print(f"  {ticker:6s} ({theme:14s}) → {reason}")
 
     print(f"\n{'='*65}")
-    print(f"  完成。signals={len(signals)}  no_signal={len(no_signal)}  rejected={len(rejected)}")
+    print(f"  完成。signals={len(signals)}  no_signal={len(no_signal)}"
+          f"  ref_only={len(ref_only)}  rejected={len(rejected)}")
     print(f"{'='*65}\n")
 
 
