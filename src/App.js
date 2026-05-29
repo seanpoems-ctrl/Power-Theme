@@ -753,83 +753,15 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
 };
 
 // ── Hero Zone — 3-column dashboard row above the heatmap ──────────────────
-const HeroZone = ({ data, themesCount, tickersCount }) => {
-  const lang = useLang();
-  const [etfChart, setEtfChart] = useState(null);         // { ticker, rect }
-  const [etfHoldingsPopup, setEtfHoldingsPopup] = useState(null); // { etf }
-
-  // Column 2: ETFs flagged as breakout / support by the scraper
-  const etfSignals = useMemo(() => (
-    Array.isArray(data?.etf_signals) ? data.etf_signals : []
-  ), [data]);
-
+const HeroZone = ({ data, themesCount, tickersCount, etfTrendlineData }) => {
   return (
-    <>
     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', padding: '10px 0 0' }}>
       {/* ── Col 1: Flagging ── */}
       <div><FlaggingStocksBox data={data}/></div>
 
-      {/* ── Col 2: ETF Breakout / Pullback Leaderboard ── */}
-      <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg p-3 flex flex-col" style={{ gap: '6px' }}>
-        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-wider">ETF Breakout / Pullback</div>
-        {etfSignals.length === 0 ? (
-          <span className="text-[11px] text-zinc-600 italic">No breakout / pullback ETFs</span>
-        ) : (
-          <div className="overflow-y-auto overflow-x-auto" style={{ maxHeight: '210px' }}>
-            <table className="w-full text-left">
-              <thead style={{ position: 'sticky', top: 0, zIndex: 1, background: '#18181b' }}>
-                <tr className="border-b border-zinc-800/60">
-                  <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap">ETF</th>
-                  {LB_KEYS.map(k => (
-                    <th key={k.key} className="px-1 py-1.5 text-center text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">{k.label}</th>
-                  ))}
-                  <th className="px-1 py-1.5 text-center text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">Signal</th>
-                </tr>
-              </thead>
-              <tbody>
-                {etfSignals.map(s => {
-                  const isBreakout = s.signal === 'breakout';
-                  const isPullback = s.signal === 'pullback';
-                  return (
-                    <tr key={s.etf} className="border-b border-zinc-800/30 hover:bg-zinc-800/40 transition-colors">
-                      <td className="px-2 py-1.5 align-middle whitespace-nowrap">
-                        <div className="flex items-center gap-1.5">
-                          <button
-                            onClick={e => setEtfChart({ ticker: s.etf, rect: e.currentTarget.getBoundingClientRect() })}
-                            className="text-[12px] font-mono font-bold text-zinc-100 hover:text-blue-400 transition-colors"
-                          >{s.etf}</button>
-                          <button
-                            onClick={() => setEtfHoldingsPopup({ etf: s.etf })}
-                            title={`${s.etf} ${lang === 'zh' ? '成分股' : 'components'}`}
-                            className="text-emerald-400/70 hover:text-emerald-300 hover:bg-emerald-500/15 rounded p-0.5 transition-colors"
-                          ><Layers size={11}/></button>
-                          <span className="text-[10px] text-zinc-600 truncate" style={{ maxWidth: '88px' }}>{s.theme}</span>
-                        </div>
-                      </td>
-                      {LB_KEYS.map(k => <PerfCellLB key={k.key} val={s[k.key]}/>)}
-                      <td className="px-1 py-1.5 align-middle text-center">
-                        <span className={`text-[10px] font-semibold uppercase tracking-wide px-1.5 py-0.5 rounded border whitespace-nowrap ${
-                          isBreakout
-                            ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
-                            : isPullback
-                            ? 'bg-amber-500/15 text-amber-400 border-amber-500/30'
-                            : 'bg-sky-500/15 text-sky-400 border-sky-500/30'
-                        }`}>
-                          {isBreakout ? 'Breakout' : isPullback ? 'Pullback' : '—'}
-                        </span>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+      {/* ── Col 2: ETF 趨勢線掃描 ── */}
+      <div><EtfTrendlinePanel etfData={etfTrendlineData}/></div>
     </div>
-    {etfChart && <TVPopup ticker={etfChart.ticker} anchorRect={etfChart.rect} onClose={() => setEtfChart(null)}/>}
-    {etfHoldingsPopup && <EtfHoldingsPopup etfTicker={etfHoldingsPopup.etf} holdingsData={data?.etf_holdings || {}} onClose={() => setEtfHoldingsPopup(null)}/>}
-    </>
   );
 };
 
@@ -8722,7 +8654,7 @@ const filtered = useMemo(() => {
           {/* ── CENTER MAIN CONTENT ──────────────────────────────── */}
           <main className="flex-1 min-w-0 flex flex-col gap-3">
             <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}} openTheme={pendingTheme} onThemeOpened={() => setPendingTheme(null)}/>
-            <HeroZone data={data} themesCount={filtered.length} tickersCount={unique.length}/>
+            <HeroZone data={data} themesCount={filtered.length} tickersCount={unique.length} etfTrendlineData={etfTrendlineData}/>
             {data && <Leaderboard
               themeRankings={data.theme_rankings}
               industryRankings={data.industry_rankings}
@@ -8740,9 +8672,7 @@ const filtered = useMemo(() => {
           </main>
 
           {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
-          <aside className="w-[380px] flex-shrink-0">
-            <EtfTrendlinePanel etfData={etfTrendlineData}/>
-          </aside>
+          <aside className="w-[280px] flex-shrink-0"/>
 
         </div>
 
