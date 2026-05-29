@@ -253,6 +253,15 @@ GRADE 9 — Single company earnings pre-market surge ≥10% (BULLISH):
   - Headline confirms a specific stock is up ≥10% pre-market or after-hours due to earnings
   - ONLY if: (1) move is explicitly stated as ≥10%, AND (2) cause is earnings/results/guidance
 
+GRADE 9 — Single company catastrophic event (BEARISH):
+  - A specific company suffers a confirmed major operational disaster likely to crash its stock:
+    rocket/launch/spacecraft explosion, plant or factory explosion, major fire, fatal vehicle
+    or aircraft crash, refinery/pipeline disaster, mine collapse, large product recall, plane
+    grounding, major data breach, accounting fraud exposed, sudden bankruptcy filing,
+    plant shutdown from an accident
+  - ONLY if: (1) the event is a CONFIRMED real incident (not speculation, lawsuit, or rumor),
+    AND (2) it clearly maps to a specific named company or its stock
+
 AUTOMATICALLY GRADE 7 OR BELOW — DO NOT INCLUDE:
   - Any government policy, spending, investment, contract, or mandate (handled separately)
   - Individual company earnings with no stated ≥10% price move
