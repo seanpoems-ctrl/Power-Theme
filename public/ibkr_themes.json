@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-05-29T11:38:25.857750+00:00",
+  "generated_at": "2026-05-29T21:48:38.405881+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
-      "name": "Hardware",
-      "theme_rs": 97.0,
-      "perf_1d": 3.84,
+      "name": "Energy Renewable",
+      "theme_rs": 96.0,
+      "perf_1d": 6.19,
       "leaders": [
         {
-          "ticker": "DELL",
-          "price": 317.05,
+          "ticker": "ENPH",
+          "price": 68.36,
           "rs_52w": 97,
-          "adr_pct": 4.85,
-          "vol_surge": 3.31,
-          "mkt_cap": 205945617464,
+          "adr_pct": 6.86,
+          "vol_surge": 1.23,
+          "mkt_cap": 9009726399,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -22,24 +22,17 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Hardware",
+          "primary_theme": "Energy Renewable",
           "secondary_themes": [],
-          "setup_label": "Base"
-        }
-      ]
-    },
-    {
-      "name": "Cloud Computing",
-      "theme_rs": 97.0,
-      "perf_1d": -0.68,
-      "leaders": [
+          "setup_label": "Flag"
+        },
         {
-          "ticker": "PENG",
-          "price": 54.07,
-          "rs_52w": 97,
-          "adr_pct": 6.66,
-          "vol_surge": 0.9,
-          "mkt_cap": 2841927672,
+          "ticker": "NXT",
+          "price": 156.4,
+          "rs_52w": 95,
+          "adr_pct": 7.17,
+          "vol_surge": 2.1,
+          "mkt_cap": 23502926503,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -48,24 +41,50 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Cloud Computing",
+          "primary_theme": "Energy Renewable",
           "secondary_themes": [],
           "setup_label": "Flag"
         }
       ]
     },
     {
+      "name": "Telecommunications",
+      "theme_rs": 96.0,
+      "perf_1d": 12.64,
+      "leaders": [
+        {
+          "ticker": "HPE",
+          "price": 43.04,
+          "rs_52w": 96,
+          "adr_pct": 4.18,
+          "vol_surge": 4.84,
+          "mkt_cap": 57107801205,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Telecommunications",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    },
+    {
       "name": "Industrials",
       "theme_rs": 96.0,
-      "perf_1d": -4.3,
+      "perf_1d": 8.79,
       "leaders": [
         {
           "ticker": "OUST",
-          "price": 42.33,
+          "price": 46.05,
           "rs_52w": 96,
-          "adr_pct": 8.86,
-          "vol_surge": 1.46,
-          "mkt_cap": 2695276047,
+          "adr_pct": 8.34,
+          "vol_surge": 1.99,
+          "mkt_cap": 2932139252,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -81,17 +100,107 @@
       ]
     },
     {
+      "name": "Cloud Computing",
+      "theme_rs": 94.0,
+      "perf_1d": 12.82,
+      "leaders": [
+        {
+          "ticker": "PENG",
+          "price": 55.83,
+          "rs_52w": 97,
+          "adr_pct": 6.86,
+          "vol_surge": 2.18,
+          "mkt_cap": 2934433661,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Cloud Computing",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "NTAP",
+          "price": 174.29,
+          "rs_52w": 91,
+          "adr_pct": 4.72,
+          "vol_surge": 6.46,
+          "mkt_cap": 34519936723,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Cloud Computing",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    },
+    {
+      "name": "Hardware",
+      "theme_rs": 92.0,
+      "perf_1d": 22.18,
+      "leaders": [
+        {
+          "ticker": "DELL",
+          "price": 420.91,
+          "rs_52w": 98,
+          "adr_pct": 5.3,
+          "vol_surge": 5.18,
+          "mkt_cap": 273409790059,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Hardware",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "SMCI",
+          "price": 46.09,
+          "rs_52w": 86,
+          "adr_pct": 6.05,
+          "vol_surge": 2.36,
+          "mkt_cap": 27719377927,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Hardware",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    },
+    {
       "name": "Semiconductors",
-      "theme_rs": 94.3,
-      "perf_1d": 4.82,
+      "theme_rs": 92.0,
+      "perf_1d": 5.64,
       "leaders": [
         {
           "ticker": "MU",
-          "price": 923.52,
+          "price": 971.0,
           "rs_52w": 98,
-          "adr_pct": 6.05,
-          "vol_surge": 1.04,
-          "mkt_cap": 1041484972805,
+          "adr_pct": 5.76,
+          "vol_surge": 1.25,
+          "mkt_cap": 1095029763521,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -105,12 +214,12 @@
           "setup_label": "Flag"
         },
         {
-          "ticker": "ARM",
-          "price": 335.27,
-          "rs_52w": 97,
-          "adr_pct": 6.47,
-          "vol_surge": 1.55,
-          "mkt_cap": 356745312876,
+          "ticker": "CRDO",
+          "price": 236.03,
+          "rs_52w": 86,
+          "adr_pct": 7.17,
+          "vol_surge": 1.03,
+          "mkt_cap": 43535719113,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -121,15 +230,22 @@
           },
           "primary_theme": "Semiconductors",
           "secondary_themes": [],
-          "setup_label": "Flag"
-        },
+          "setup_label": "Base"
+        }
+      ]
+    },
+    {
+      "name": "Cybersecurity",
+      "theme_rs": 89.0,
+      "perf_1d": 30.14,
+      "leaders": [
         {
-          "ticker": "QCOM",
-          "price": 243.29,
-          "rs_52w": 88,
-          "adr_pct": 6.74,
-          "vol_surge": 1.11,
-          "mkt_cap": 256427652923,
+          "ticker": "OKTA",
+          "price": 123.27,
+          "rs_52w": 89,
+          "adr_pct": 4.96,
+          "vol_surge": 4.71,
+          "mkt_cap": 21614955193,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -138,8 +254,10 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
+          "primary_theme": "Cybersecurity",
+          "secondary_themes": [
+            "Cloud Computing"
+          ],
           "setup_label": "Base"
         }
       ]
