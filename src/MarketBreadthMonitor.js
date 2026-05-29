@@ -11,8 +11,15 @@
  */
 
 import { memo, useCallback, useEffect, useRef, useState } from "react";
-import { BarChart3, Check, Clipboard, Copy, Download, ExternalLink, RefreshCw, Trash2, X } from "lucide-react";
+import { BarChart3, Check, Clipboard, Copy, Download, ExternalLink, RefreshCw, Sparkles, Trash2, X } from "lucide-react";
 import BreadthStockModal from "./BreadthStockModal";
+
+// ---------------------------------------------------------------------------
+// Gemini config
+// ---------------------------------------------------------------------------
+
+const GEMINI_KEY      = process.env.REACT_APP_GEMINI_KEY || "";
+const GEMINI_CACHE_NS = "sbmm_gemini_v1";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -241,6 +248,191 @@ const AnalysisPanel = memo(function AnalysisPanel({ row }) {
           <span>T2108:</span>
           <Badge label={t.label} variant={t.label.startsWith("Over") ? (t.label.includes("sold") ? "Oversold" : "Overbought") : "Neutral"} />
         </div>
+      )}
+    </div>
+  );
+});
+
+// ---------------------------------------------------------------------------
+// Gemini Breadth Read — Stockbee-style AI analysis of the last 20 rows
+// ---------------------------------------------------------------------------
+
+const STOCKBEE_CONTEXT = `
+You are analysing market breadth data the way Pradeep Bonde (Stockbee) would read it.
+Stockbee's colour thresholds for notable readings:
+  - Up 4%+  ≥400 = healthy buying thrust; ≥600 = extreme thrust (very bullish)
+  - Down 4%+ ≥200 = distribution pressure; ≥400 = heavy selling (bearish)
+  - 5D / 10D Ratio: ≥2.0 = strong bull trend; ≥1.5 = bullish; ≤0.5 = bearish; ≤0.3 = very bearish
+  - Up 25% Quarterly: rising count = momentum universe expanding (bullish)
+  - Down 25% Quarterly: rising count = momentum breaking down
+  - Up 25% Monthly: broad participation; high = bull trend healthy
+  - Down 25% Monthly: rising = distribution broadening
+  - Up 50% Monthly ≥50 = hot market; ≥100 = frothy / extended (caution signal, not bullish)
+  - Down 50% Monthly ≥30 = panic / washout (watch for reversal)
+  - Up 13% 34-Day: medium-term momentum; acceleration = stage-2 breakouts firing
+  - Down 13% 34-Day: rising = intermediate downtrend widening
+  - 10x ATR Ext ≥20 = market getting extended (amber warning); ≥50 = extreme extension (deep amber — fade risk)
+  - % above 50 DMA < 30% = oversold / bearish; > 80% = extended / overbought; 40–70% = healthy bull
+  - T2108 ≤20 = deeply oversold — historical buy signal (cyan); ≥80 = overbought warning
+`.trim();
+
+async function callGemini(rows) {
+  if (!GEMINI_KEY) return null;
+  // Send last 20 rows, most-recent first, trimmed to essential fields
+  const snapshot = rows.slice(0, 20).map(r => ({
+    date:        r.date,
+    up4:         r.up_4_pct,
+    dn4:         r.down_4_pct,
+    r5d:         r.ratio_5d,
+    r10d:        r.ratio_10d,
+    up25q:       r.up_25_q,
+    dn25q:       r.down_25_q,
+    up25m:       r.up_25_m,
+    dn25m:       r.down_25_m,
+    up50m:       r.up_50_m,
+    dn50m:       r.down_50_m,
+    up13:        r.up_13_34d,
+    dn13:        r.down_13_34d,
+    atrExt:      r.atr_10x_ext,
+    above50dma:  r.above_50dma_pct,
+    t2108:       r.t2108,
+    sp:          r.sp_index,
+  }));
+
+  const prompt = `${STOCKBEE_CONTEXT}
+
+Below is the last 20 trading sessions of Stockbee Market Monitor data (newest row first).
+Fields: date | up4 | dn4 | 5d-ratio | 10d-ratio | up25Q | dn25Q | up25M | dn25M | up50M | dn50M | up13_34d | dn13_34d | atrExt | %above50dma | T2108 | S&P
+
+${JSON.stringify(snapshot, null, 0)}
+
+Write exactly 4 bullet points. Each starts with a bold label in ALL-CAPS followed by an em-dash.
+Use Stockbee's language and refer to specific numbers. Cross-reference how TODAY compares to this WEEK and this MONTH where relevant.
+Keep each bullet to 2–3 sentences max. Do not add any intro or closing lines.
+
+Bullets:
+**TODAY** — (what does today's up4/dn4/ratio say; flag any threshold crossings with the colour rule)
+**WEEK** — (5-day trend in ratio, up25M, or up13; is breadth accelerating or fading?)
+**MONTH** — (monthly momentum picture: up50M, %above50dma, up25M trajectory, T2108 zone)
+**REGIME** — (overall market regime call; what Stockbee would watch next as a leading signal)`;
+
+  const url  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`;
+  const body = {
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: { temperature: 0.35, maxOutputTokens: 500 },
+  };
+  const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  const json = await res.json();
+  return json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ?? null;
+}
+
+/** Parse the 4-bullet Gemini response into structured objects */
+function parseBullets(raw) {
+  if (!raw) return null;
+  // Match each **LABEL** — ... block
+  const matches = [...raw.matchAll(/\*\*([A-Z]+)\*\*\s*[—–-]\s*([\s\S]*?)(?=\n\*\*[A-Z]+\*\*|$)/g)];
+  if (matches.length < 2) return null; // fall back to raw text
+  return matches.map(m => ({ label: m[1], text: m[2].replace(/\n+/g, " ").trim() }));
+}
+
+const LABEL_COLOR = {
+  TODAY:  "text-sky-400",
+  WEEK:   "text-violet-400",
+  MONTH:  "text-amber-400",
+  REGIME: "text-emerald-400",
+};
+
+const GeminiBreadthRead = memo(function GeminiBreadthRead({ rows }) {
+  const [text,    setText]    = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error,   setError]   = useState(null);
+  const latestDate = rows?.[0]?.date ?? "";
+
+  const cacheKey = `${GEMINI_CACHE_NS}_${latestDate}`;
+
+  const run = useCallback(async (force = false) => {
+    if (!rows?.length) return;
+    if (!force) {
+      try {
+        const cached = JSON.parse(localStorage.getItem(cacheKey) ?? "null");
+        if (cached?.text) { setText(cached.text); return; }
+      } catch { /* ignore */ }
+    }
+    if (!GEMINI_KEY) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const result = await callGemini(rows);
+      if (result) {
+        setText(result);
+        try { localStorage.setItem(cacheKey, JSON.stringify({ text: result })); } catch { /* quota */ }
+      }
+    } catch (e) {
+      setError(e.message ?? "Gemini request failed");
+    } finally {
+      setLoading(false);
+    }
+  }, [rows, cacheKey]);
+
+  useEffect(() => { void run(false); }, [run]);
+
+  if (!GEMINI_KEY) return null;
+
+  const bullets = parseBullets(text);
+
+  return (
+    <div className="border-b border-gray-800 px-4 py-3">
+      {/* Header row */}
+      <div className="flex items-center gap-2 mb-2.5">
+        <Sparkles className="h-3.5 w-3.5 text-violet-400 flex-shrink-0" />
+        <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
+          Gemini · Stockbee Breadth Read
+        </span>
+        {loading && <RefreshCw size={10} className="text-zinc-500 animate-spin ml-1" />}
+        <button
+          onClick={() => run(true)}
+          disabled={loading}
+          title="Re-run analysis"
+          className="ml-auto text-[10px] text-zinc-600 hover:text-zinc-300 disabled:opacity-40 transition-colors"
+        >
+          {loading ? "thinking…" : "↻ refresh"}
+        </button>
+      </div>
+
+      {/* Body */}
+      {error && (
+        <p className="text-[11px] text-rose-400/80 italic">{error}</p>
+      )}
+
+      {!error && !text && !loading && (
+        <p className="text-[11px] text-zinc-600 italic">Awaiting data…</p>
+      )}
+
+      {!error && loading && !text && (
+        <div className="space-y-1.5">
+          {[80, 65, 72, 58].map((w, i) => (
+            <div key={i} className="h-3 rounded bg-zinc-800 animate-pulse" style={{ width: `${w}%` }} />
+          ))}
+        </div>
+      )}
+
+      {/* Structured bullets */}
+      {!error && text && bullets && (
+        <ol className="space-y-1.5">
+          {bullets.map(({ label, text: body }) => (
+            <li key={label} className="flex gap-2 text-[12px] leading-relaxed">
+              <span className={`flex-shrink-0 font-bold text-[11px] uppercase tracking-wide pt-[1px] w-14 ${LABEL_COLOR[label] ?? "text-zinc-400"}`}>
+                {label}
+              </span>
+              <span className="text-zinc-200">{body}</span>
+            </li>
+          ))}
+        </ol>
+      )}
+
+      {/* Fallback: raw text if parser couldn't split bullets */}
+      {!error && text && !bullets && (
+        <p className="text-[12px] text-zinc-200 leading-relaxed whitespace-pre-line">{text}</p>
       )}
     </div>
   );
@@ -854,7 +1046,10 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
         </div>
       </div>
 
-      {/* Analysis */}
+      {/* Gemini AI Breadth Read (Stockbee style) */}
+      {rows.length > 0 && <GeminiBreadthRead rows={rows} />}
+
+      {/* Quick-read rule-based badges */}
       {latest && (
         <div className="border-b border-gray-800 px-4 py-2">
           <AnalysisPanel row={latest} />
