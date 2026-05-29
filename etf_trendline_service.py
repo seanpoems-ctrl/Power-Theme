@@ -344,19 +344,43 @@ def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
 
     # ── [過濾 A] 單線參考 ────────────────────────────────────────────────────
     if not (res_ok and sup_ok):
+        spark_len2       = min(60, n)
+        spark_start_abs2 = n - spark_len2
+        sparkline2       = [round(float(c), 2) for c in closes[-spark_len2:]]
+
+        def fmt_line_ref(fit):
+            p1b   = fit["x_start"]
+            p1_s  = p1b - spark_start_abs2
+            cl    = max(0, p1_s)
+            sv    = fit["slope"] * (spark_start_abs2 + cl) + fit["intercept"]
+            return {
+                "p1":              [str(dates[p1b].date()), round(line_y(fit, p1b), 2)],
+                "p2":              [str(dates[fit["x_end"]].date()), round(line_y(fit, fit["x_end"]), 2)],
+                "today_value":     round(fit["today_value"], 2),
+                "p1_spark_bar":    cl,
+                "spark_start_val": round(float(sv), 2),
+                "touches":         fit["touches"],
+                "slope":           fit["slope"],
+                "intercept":       fit["intercept"],
+            }
+
         if debug:
             print(f"\n  ⚠ 單線（{pattern}）：不發訊號，供參考。")
             print(f"{'='*68}")
         return {
             **base,
-            "pattern":          pattern,
-            "reference_only":   True,
-            "close":            close_now,
-            "resistance_today": resistance_today,
-            "support_today":    support_today,
-            "res_fits":         res_fits,
-            "sup_fits":         sup_fits,
-            "last_date":        str(last_date.date()),
+            "pattern":           pattern,
+            "reference_only":    True,
+            "close":             close_now,
+            "atr":               round(float(atr), 4),
+            "sparkline":         sparkline2,
+            "resistance_today":  resistance_today,
+            "support_today":     support_today,
+            "resistance_lines":  [fmt_line_ref(rf) for rf in res_fits],
+            "support_lines":     [fmt_line_ref(sf) for sf in sup_fits],
+            "res_fits":          res_fits,
+            "sup_fits":          sup_fits,
+            "last_date":         str(last_date.date()),
         }
 
     # ── [過濾 B] 通道顛倒（只比主線，避免次線外插誤判）──────────────────────
@@ -480,16 +504,27 @@ def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
     res_touch_pts_all = [touch_pts(rf, sh_idx, sh_prices) for rf in res_fits]
     sup_touch_pts_all = [touch_pts(sf, sl_idx, sl_prices) for sf in sup_fits]
 
-    # ── JSON 格式線段資訊 ─────────────────────────────────────────────────────
+    # ── Sparkline（取最後 60 根收盤價）──────────────────────────────────────
+    spark_len       = min(60, n)
+    spark_start_abs = n - spark_len
+    sparkline       = [round(float(c), 2) for c in closes[-spark_len:]]
+
+    # ── JSON 格式線段資訊（含 sparkline 座標錨點）───────────────────────────
     def fmt_line(fit):
         p1b, p2b = fit["x_start"], fit["x_end"]
+        # P1 相對 sparkline 的位置（可能為負數，代表在圖表範圍外）
+        p1_spark = p1b - spark_start_abs
+        clamped  = max(0, p1_spark)
+        spark_sv = fit["slope"] * (spark_start_abs + clamped) + fit["intercept"]
         return {
-            "p1":          [str(dates[p1b].date()), round(line_y(fit, p1b), 2)],
-            "p2":          [str(dates[p2b].date()), round(line_y(fit, p2b), 2)],
-            "today_value": round(fit["today_value"], 2),
-            "touches":     fit["touches"],
-            "slope":       fit["slope"],
-            "intercept":   fit["intercept"],
+            "p1":             [str(dates[p1b].date()), round(line_y(fit, p1b), 2)],
+            "p2":             [str(dates[p2b].date()), round(line_y(fit, p2b), 2)],
+            "today_value":    round(fit["today_value"], 2),
+            "p1_spark_bar":   clamped,                # sparkline 中的起點 bar（0-based）
+            "spark_start_val": round(float(spark_sv), 2),  # 起點對應的價格
+            "touches":        fit["touches"],
+            "slope":          fit["slope"],
+            "intercept":      fit["intercept"],
         }
 
     resistance_lines = [fmt_line(rf) for rf in res_fits]
@@ -503,14 +538,16 @@ def analyze_etf(ticker: str, theme: str, debug: bool = False) -> dict:
         "dist_pct":          dist_pct,
         "line_ref":          line_ref,
         "close":             close_now,
-        "resistance_today":  resistance_today,   # 最低阻力線今日值
-        "support_today":     support_today,      # 最高支撐線今日值
+        "atr":               round(float(atr), 4),
+        "sparkline":         sparkline,
+        "resistance_today":  resistance_today,
+        "support_today":     support_today,
         "breakout_date":     breakout_date,
         "res_fits":          res_fits,
         "sup_fits":          sup_fits,
-        "res_touch_pts":     res_touch_pts_all,  # list of lists
+        "res_touch_pts":     res_touch_pts_all,
         "sup_touch_pts":     sup_touch_pts_all,
-        "resistance_lines":  resistance_lines,   # JSON-ready
+        "resistance_lines":  resistance_lines,
         "support_lines":     support_lines,
         "last_date":         str(last_date.date()),
         "rejected":          None,
@@ -651,6 +688,37 @@ def main():
     print(f"  完成。signals={len(signals)}  no_signal={len(no_signal)}"
           f"  ref_only={len(ref_only)}  rejected={len(rejected)}")
     print(f"{'='*68}\n")
+
+    # ── 寫出 public/etf_trendline.json ─────────────────────────────────────
+    def _etf_record(r):
+        return {
+            "ticker":           r["ticker"],
+            "theme":            r["theme"],
+            "pattern":          r.get("pattern"),
+            "signal":           r.get("signal"),
+            "dist_pct":         r.get("dist_pct"),
+            "close":            r.get("close"),
+            "atr":              r.get("atr"),
+            "sparkline":        r.get("sparkline", []),
+            "resistance_lines": r.get("resistance_lines", []),
+            "support_lines":    r.get("support_lines", []),
+            "last_date":        r.get("last_date"),
+        }
+
+    out_path = Path(__file__).parent / "public" / "etf_trendline.json"
+    out_data = {
+        "last_updated":  datetime.today().strftime("%Y-%m-%d"),
+        "total_scanned": len(universe),
+        "total_signals": len(signals),
+        "etfs": (
+            [_etf_record(s) for s in signals] +
+            [_etf_record(s) for s in no_signal] +
+            [_etf_record(s) for s in ref_only]
+        ),
+    }
+    with open(out_path, "w", encoding="utf-8") as f:
+        json.dump(out_data, f, ensure_ascii=False, separators=(",", ":"))
+    print(f"  → 已寫入 {out_path}\n")
 
 
 if __name__ == "__main__":

@@ -7972,6 +7972,197 @@ const MarketBriefPanel = ({ data }) => {
   );
 };
 
+// ── ETF Trendline Panel ───────────────────────────────────────────────────────
+const PATTERN_ZH = {
+  channel_up:        "上升通道",
+  channel_down:      "下降通道",
+  triangle_converging:  "三角收斂",
+  triangle_expanding:   "三角擴張",
+  resistance_only:   "單邊阻力",
+  support_only:      "單邊支撐",
+};
+
+const EtfMiniChart = ({ sparkline, resistanceLines, supportLines, atr }) => {
+  const closes = (sparkline || []).slice(-60);
+  const n = closes.length;
+  if (n < 3) return <div style={{ width: 140, height: 44 }}/>;
+
+  const avgMove = closes.reduce((s, c, i) => i === 0 ? 0 : s + Math.abs(c - closes[i-1]), 0) / (n - 1);
+  const wick = (atr || avgMove * 1.5) * 0.3;
+
+  // Collect all price points for Y range
+  const allPts = [];
+  closes.forEach((c, i) => {
+    const prev = i > 0 ? closes[i - 1] : c;
+    allPts.push(Math.max(c, prev) + wick, Math.min(c, prev) - wick);
+  });
+  [...(resistanceLines || []), ...(supportLines || [])].forEach(l => {
+    allPts.push(l.spark_start_val, l.today_value);
+  });
+  const minP = Math.min(...allPts);
+  const maxP = Math.max(...allPts);
+  const range = maxP - minP || 1;
+
+  const VW = 180, VH = 44, PAD = 2;
+  const barW = 2, barGap = 1;
+  const toY = p => PAD + (1 - (p - minP) / range) * (VH - 2 * PAD);
+  const toX = i => i * (barW + barGap);
+
+  const bars = closes.map((c, i) => {
+    const prev = i > 0 ? closes[i - 1] : c;
+    const isUp = c >= prev;
+    return {
+      x: toX(i),
+      wickTop:    toY(Math.max(c, prev) + wick),
+      wickBot:    toY(Math.min(c, prev) - wick),
+      bodyTop:    toY(Math.max(c, prev)),
+      bodyBot:    toY(Math.min(c, prev)),
+      bodyH:      Math.max(0.6, Math.abs(toY(prev) - toY(c))),
+      isUp,
+    };
+  });
+
+  const lines = [
+    ...(resistanceLines || []).slice(0, 2).map((l, i) => ({
+      x1: toX(l.p1_spark_bar), y1: toY(l.spark_start_val),
+      x2: toX(n - 1),          y2: toY(l.today_value),
+      stroke: i === 0 ? '#ef4444' : '#f97316',
+      dash: i === 0 ? '4,3' : '3,3',
+      sw: i === 0 ? 1.3 : 1.0,
+    })),
+    ...(supportLines || []).slice(0, 2).map((l, i) => ({
+      x1: toX(l.p1_spark_bar), y1: toY(l.spark_start_val),
+      x2: toX(n - 1),          y2: toY(l.today_value),
+      stroke: i === 0 ? '#4ade80' : '#60a5fa',
+      dash: i === 0 ? '4,3' : '3,3',
+      sw: i === 0 ? 1.3 : 1.0,
+    })),
+  ];
+
+  return (
+    <svg viewBox={`0 0 ${VW} ${VH}`} width="140" height="44" style={{ display: 'block', flexShrink: 0 }}>
+      {bars.map((b, i) => (
+        <g key={i}>
+          <line x1={b.x + 1} y1={b.wickTop} x2={b.x + 1} y2={b.wickBot} stroke="#666" strokeWidth="0.7"/>
+          <rect x={b.x} y={b.bodyTop} width={barW} height={b.bodyH} fill={b.isUp ? '#4ade80' : '#f87171'}/>
+        </g>
+      ))}
+      {lines.map((l, i) => (
+        <line key={i} x1={l.x1} y1={l.y1} x2={l.x2} y2={l.y2}
+          stroke={l.stroke} strokeWidth={l.sw} strokeDasharray={l.dash} strokeLinecap="round"/>
+      ))}
+    </svg>
+  );
+};
+
+const EtfTrendlineRow = ({ etf, onTvClick }) => {
+  const dotColor = { breakout: '#4ade80', near_resistance: '#fbbf24', near_support: '#60a5fa' }[etf.signal] || '#71717a';
+  const distColor = etf.signal === 'near_resistance' ? '#f87171' : '#4ade80';
+  const distStr   = etf.dist_pct != null
+    ? `${etf.dist_pct >= 0 ? '+' : ''}${etf.dist_pct.toFixed(2)}%`
+    : '—';
+  const patternZh = PATTERN_ZH[etf.pattern] || etf.pattern || '—';
+
+  return (
+    <div style={{
+      display: 'flex', alignItems: 'center', gap: 6,
+      padding: '10px 14px', borderRadius: 10,
+      background: 'transparent',
+      transition: 'background 0.15s',
+    }}
+      onMouseEnter={e => e.currentTarget.style.background = 'rgba(39,39,42,0.7)'}
+      onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+    >
+      {/* Signal dot */}
+      <div style={{ width: 8, height: 8, borderRadius: '50%', background: dotColor, flexShrink: 0 }}/>
+
+      {/* Ticker */}
+      <button
+        onClick={e => onTvClick({ ticker: etf.ticker, rect: e.currentTarget.getBoundingClientRect() })}
+        style={{ fontSize: 14, fontWeight: 600, color: '#60a5fa', background: 'none', border: 'none', cursor: 'pointer', padding: 0, flexShrink: 0, fontVariantNumeric: 'tabular-nums' }}
+      >{etf.ticker}</button>
+
+      {/* Theme tag */}
+      <span style={{
+        fontSize: 10, padding: '1px 5px', borderRadius: 4,
+        background: 'rgba(113,113,122,0.2)', color: '#a1a1aa',
+        flexShrink: 0, whiteSpace: 'nowrap',
+      }}>{etf.theme}</span>
+
+      {/* Pattern */}
+      <span style={{ flex: 1, fontSize: 12, color: '#71717a', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+        {patternZh}
+      </span>
+
+      {/* Mini chart */}
+      <EtfMiniChart
+        sparkline={etf.sparkline}
+        resistanceLines={etf.resistance_lines}
+        supportLines={etf.support_lines}
+        atr={etf.atr}
+      />
+
+      {/* Price */}
+      <span style={{ fontSize: 14, color: '#d4d4d8', textAlign: 'right', flexShrink: 0, minWidth: 44, fontVariantNumeric: 'tabular-nums' }}>
+        {etf.close != null ? etf.close.toFixed(2) : '—'}
+      </span>
+
+      {/* Dist % */}
+      <span style={{ fontSize: 13, color: distColor, textAlign: 'right', flexShrink: 0, minWidth: 46, fontVariantNumeric: 'tabular-nums' }}>
+        {distStr}
+      </span>
+    </div>
+  );
+};
+
+const EtfTrendlineGroup = ({ icon, title, items, onTvClick }) => (
+  <div style={{ marginBottom: 6 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 14px 4px', borderBottom: '1px solid rgba(63,63,70,0.5)' }}>
+      <span style={{ fontSize: 13 }}>{icon}</span>
+      <span style={{ fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{title}</span>
+    </div>
+    {items.length === 0
+      ? <div style={{ padding: '6px 14px', fontSize: 11, color: '#52525b', fontStyle: 'italic' }}>目前無訊號</div>
+      : items.map(e => <EtfTrendlineRow key={e.ticker} etf={e} onTvClick={onTvClick}/>)
+    }
+  </div>
+);
+
+const EtfTrendlinePanel = ({ etfData }) => {
+  const [tvPopup, setTvPopup] = useState(null);
+
+  if (!etfData) return (
+    <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg p-3">
+      <div style={{ fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>ETF 趨勢線掃描</div>
+      <div style={{ fontSize: 11, color: '#52525b', fontStyle: 'italic' }}>載入中…</div>
+    </div>
+  );
+
+  const etfs = etfData.etfs || [];
+  const breakouts = etfs.filter(e => e.signal === 'breakout');
+  const nearRes   = etfs.filter(e => e.signal === 'near_resistance');
+  const nearSup   = etfs.filter(e => e.signal === 'near_support');
+
+  return (
+    <>
+    <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg" style={{ overflow: 'hidden' }}>
+      <div style={{ padding: '10px 14px 6px', fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
+        ETF 趨勢線掃描
+      </div>
+      <div style={{ maxHeight: 420, overflowY: 'auto', scrollbarWidth: 'thin', scrollbarColor: '#52525b transparent' }}>
+        <EtfTrendlineGroup icon="🚀" title="已突破可追"       items={breakouts} onTvClick={setTvPopup}/>
+        <EtfTrendlineGroup icon="👀" title="接近阻力可關注"   items={nearRes}   onTvClick={setTvPopup}/>
+        <EtfTrendlineGroup icon="🎯" title="接近支撐可布局"   items={nearSup}   onTvClick={setTvPopup}/>
+      </div>
+      <div style={{ padding: '5px 14px 8px', fontSize: 11, color: '#52525b', borderTop: '1px solid rgba(63,63,70,0.4)' }}>
+        掃描 {etfData.total_scanned} 支主題 ETF · {etfData.total_signals} 個訊號 · 更新 {etfData.last_updated}
+      </div>
+    </div>
+    {tvPopup && <TVPopup ticker={tvPopup.ticker} anchorRect={tvPopup.rect} onClose={() => setTvPopup(null)}/>}
+    </>
+  );
+};
+
 export default function App() {
   const [lang, setLang] = useState(() => localStorage.getItem('ui_lang') || 'zh');
   const toggleLang = useCallback(() => setLang(l => { const next = l === 'zh' ? 'en' : 'zh'; localStorage.setItem('ui_lang', next); return next; }), []);
@@ -8003,6 +8194,7 @@ export default function App() {
   const lastGeneratedAt = useRef(null);
   const [macroHover, setMacroHover] = useState(null);
   const [ibkrData, setIbkrData] = useState(null);
+  const [etfTrendlineData, setEtfTrendlineData] = useState(null);
 
   // ── IBKR WebSocket live price stream ──────────────────────────────────────
   // livePricesRef: { TICKER: { price, change_pct } } — mutated directly, no re-render
@@ -8157,6 +8349,14 @@ export default function App() {
     fetchIbkr();
     const id = setInterval(fetchIbkr, 5 * 60 * 1000);
     return () => clearInterval(id);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ETF trendline — fetch once on mount (refreshed by nightly workflow)
+  useEffect(() => {
+    fetch(process.env.PUBLIC_URL + "/etf_trendline.json?v=" + Date.now())
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d) setEtfTrendlineData(d); })
+      .catch(() => {});
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── IBKR TWS WebSocket price stream (ibkr_ws_server.py on port 5003) ──────
@@ -8540,7 +8740,9 @@ const filtered = useMemo(() => {
           </main>
 
           {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
-          <aside className="w-[280px] flex-shrink-0"/>
+          <aside className="w-[340px] flex-shrink-0">
+            <EtfTrendlinePanel etfData={etfTrendlineData}/>
+          </aside>
 
         </div>
 
