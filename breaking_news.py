@@ -7,7 +7,7 @@ Runs every 5 min on weekdays via GitHub Actions.
 Sources: CNBC, Yahoo Finance, Finviz
 
 Logic:
-  1. Fetch headlines from the last 2 hours
+  1. Fetch headlines from the last 90 min
   2. Grade each 1-10 via Gemini for market impact
   3. Alert only if grade >= 8
   4. Rolling store: keep last 6 alerts, expire after 12 hours
@@ -35,7 +35,7 @@ TELEGRAM_TOKEN  = os.getenv("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT   = os.getenv("TELEGRAM_CHAT_ID", "")
 
 ALERT_THRESHOLD = 9    # Gemini grade >= 9 triggers alert
-HOURS_LOOKBACK  = 0.5  # Only consider headlines from last 30 min
+HOURS_LOOKBACK  = 1.5  # Only consider headlines from last 90 min (covers 30-60 min run gaps)
 MAX_ALERTS      = 6    # Keep at most N alerts in rolling store
 ALERT_TTL_HOURS = 12   # Expire alerts older than N hours
 
