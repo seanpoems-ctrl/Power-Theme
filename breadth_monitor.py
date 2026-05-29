@@ -216,7 +216,7 @@ def _compute_breadth_extras() -> dict[str, Any]:
     Universe: US stocks & DRs, price ≥ $2, avg 10-day vol ≥ 50K shares.
     Mirrors Stockbee's Worden-T universe (~6 000–7 000 names).
     """
-    extras: dict[str, Any] = {"atr_10x_ext": None, "above_50dma_pct": None}
+    extras: dict[str, Any] = {"atr_10x_ext": None, "above_50dma_pct": None, "universe_1b": None}
     try:
         from tradingview_screener import Query, col  # type: ignore
 
@@ -260,6 +260,11 @@ def _compute_breadth_extras() -> dict[str, Any]:
             extras["above_50dma_pct"] = round(above / len(df_sma) * 100, 1)
             logger.info(">50 DMA: %.1f%% (%d / %d, mkt cap ≥ $1B)",
                         extras["above_50dma_pct"], above, len(df_sma))
+
+        # ── Stock Universe $1B+ — total count of stocks with Mkt Cap ≥ $1B ──
+        df_1b = df[df["market_cap_basic"].notna() & (df["market_cap_basic"] >= 1_000_000_000)]
+        extras["universe_1b"] = len(df_1b)
+        logger.info("Stock universe $1B+: %d", extras["universe_1b"])
 
     except Exception as exc:
         logger.warning("breadth extras compute failed: %s", exc)
@@ -327,6 +332,8 @@ def fetch_breadth_monitor(*, timeout: float = 45.0) -> dict[str, Any]:
             rows[0]["atr_10x_ext"] = extras["atr_10x_ext"]
         if extras["above_50dma_pct"] is not None:
             rows[0]["above_50dma_pct"] = extras["above_50dma_pct"]
+        if extras["universe_1b"] is not None:
+            rows[0]["universe_1b"] = extras["universe_1b"]
 
     return {
         "ok": True,
@@ -357,6 +364,8 @@ def _load_persisted_extras() -> dict[str, dict]:
                 entry["atr_10x_ext"] = row["atr_10x_ext"]
             if row.get("above_50dma_pct") is not None:
                 entry["above_50dma_pct"] = row["above_50dma_pct"]
+            if row.get("universe_1b") is not None:
+                entry["universe_1b"] = row["universe_1b"]
             if entry:
                 result[date] = entry
         return result
@@ -377,6 +386,8 @@ def main() -> None:
                 row["atr_10x_ext"] = saved["atr_10x_ext"]
             if row.get("above_50dma_pct") is None and "above_50dma_pct" in saved:
                 row["above_50dma_pct"] = saved["above_50dma_pct"]
+            if row.get("universe_1b") is None and "universe_1b" in saved:
+                row["universe_1b"] = saved["universe_1b"]
 
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(json.dumps(data, indent=2), encoding="utf-8")

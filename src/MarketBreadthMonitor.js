@@ -295,6 +295,11 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                 className="bg-amber-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-pre-line border border-amber-500 align-middle leading-tight">
               {"10x ATR\nExt."}
             </th>
+            {/* $1B+ Universe — rowSpan=2 */}
+            <th rowSpan={2}
+                className="bg-violet-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-pre-line border border-violet-500 align-middle leading-tight">
+              {"$1B+\nUniverse"}
+            </th>
             {/* >50dma — rowSpan=2 */}
             <th rowSpan={2}
                 className="bg-sky-400 text-black text-[10px] font-bold px-1 py-1 text-center whitespace-nowrap border border-sky-500 align-middle">
@@ -414,6 +419,10 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                   title={r.atr_10x_ext != null ? `View 10x ATR Extended stocks — ${r.date_display}` : undefined}
                 >
                   {r.atr_10x_ext != null ? fmtN(r.atr_10x_ext) : "—"}
+                </td>
+                {/* $1B+ Universe */}
+                <td className="px-1 py-1 text-right text-violet-300/80 whitespace-nowrap font-mono">
+                  {r.universe_1b != null ? fmtN(r.universe_1b) : "—"}
                 </td>
                 {/* >50 DMA — red cell fill when < 30%; clickable on all rows with data */}
                 <td
