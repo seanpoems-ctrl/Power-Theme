@@ -19,7 +19,7 @@ import BreadthStockModal from "./BreadthStockModal";
 // ---------------------------------------------------------------------------
 
 const GEMINI_KEY      = process.env.REACT_APP_GEMINI_KEY || "";
-const GEMINI_CACHE_NS = "sbmm_gemini_v5";
+const GEMINI_CACHE_NS = "sbmm_gemini_v6";
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -317,7 +317,7 @@ Each bullet: bold ALL-CAPS label + em-dash + 2 concise sentences with specific n
   const url  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`;
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.35, maxOutputTokens: 1200 },
+    generationConfig: { temperature: 0.35, maxOutputTokens: 2048 },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   const json = await res.json();
@@ -334,13 +334,28 @@ Each bullet: bold ALL-CAPS label + em-dash + 2 concise sentences with specific n
   return textPart?.text?.trim() ?? null;
 }
 
-/** Parse the 4-bullet Gemini response into structured objects */
+/**
+ * Parse the 4-bullet Gemini response into structured objects.
+ * Line-by-line approach — tolerates any dash variant and trailing continuation lines.
+ * Matches: **LABEL** — text   or   **LABEL**: text   or   LABEL — text
+ */
 function parseBullets(raw) {
   if (!raw) return null;
-  // Match each **LABEL** — ... block
-  const matches = [...raw.matchAll(/\*\*([A-Z]+)\*\*\s*[—–-]\s*([\s\S]*?)(?=\n\*\*[A-Z]+\*\*|$)/g)];
-  if (matches.length < 2) return null; // fall back to raw text
-  return matches.map(m => ({ label: m[1], text: m[2].replace(/\n+/g, " ").trim() }));
+  const bullets = [];
+  let current = null;
+  for (const line of raw.split(/\r?\n/)) {
+    // Header line: **TODAY** — …  /  **WEEK**: …  /  TODAY — …
+    const m = line.match(/^\*{0,2}([A-Z]{3,8})\*{0,2}\s*[—–:\-]+\s*(.*)/);
+    if (m && ["TODAY","WEEK","MONTH","REGIME"].includes(m[1])) {
+      if (current) bullets.push(current);
+      current = { label: m[1], text: m[2].trim() };
+    } else if (current && line.trim()) {
+      // continuation sentence on the next line
+      current.text += " " + line.trim();
+    }
+  }
+  if (current) bullets.push(current);
+  return bullets.length >= 2 ? bullets : null;
 }
 
 const LABEL_COLOR = {
@@ -440,7 +455,7 @@ const GeminiBreadthRead = memo(function GeminiBreadthRead({ rows }) {
 
       {/* Fallback: raw text if parser couldn't split bullets */}
       {!error && text && !bullets && (
-        <p className="text-[12px] text-zinc-200 leading-relaxed whitespace-pre-line">{text}</p>
+        <p className="text-[12px] text-zinc-200 leading-relaxed whitespace-pre-wrap break-words">{text}</p>
       )}
     </div>
   );
