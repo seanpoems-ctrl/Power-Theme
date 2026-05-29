@@ -1,30 +1,30 @@
 {
-  "generated_at": "May 29, 2026 (08:53 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "May 29, 2026 (12:43 EDT)",
+  "session": "Market Hours",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7563.63,
-      "change": 43.27,
-      "change_pct": 0.58
+      "price": 7592.24,
+      "change": 28.61,
+      "change_pct": 0.38
     },
     {
       "label": "Nasdaq 100",
-      "price": 30223.89,
-      "change": 250.32,
-      "change_pct": 0.84
+      "price": 30364.05,
+      "change": 140.16,
+      "change_pct": 0.46
     },
     {
       "label": "VIX",
-      "price": 15.8,
-      "change": 0.06,
+      "price": 15.39,
+      "change": -0.35,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.45,
-      "change": -0.01,
+      "price": 4.44,
+      "change": -0.02,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 66329.5,
-      "change_pct": 2.53
+      "price": 64693.12,
+      "change_pct": -0.47
     },
     "dax": {
       "label": "DAX",
-      "price": 25109.01,
-      "change_pct": 0.07
+      "price": 25104.7,
+      "change_pct": 0.05
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10450.15,
-      "change_pct": 0.23
+      "price": 10409.28,
+      "change_pct": -0.16
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 59.1,
-    "mmth": 64.5,
+    "s5fi": 58.0,
+    "mmth": 63.4,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech-led bullish momentum",
+  "mood": "Healthy breadth, sector-specific strength.",
   "analysis": {
-    "action_line": "VIX 15.80 Normal + S5FI 59.1% breadth + Nikkei +2.53% strong → trade RS leaders selectively near support.",
-    "analysis_para1": "Global markets are showing robust strength this morning, with the Nikkei 225 surging by +2.53%, supported by positive opens in the DAX (+0.07%) and FTSE 100 (+0.23%). This global enthusiasm is setting a constructive tone for US equities. While the BAML HY Spread is currently an unknown regime, US market breadth remains healthy with 59.1% of stocks above their 50-day moving average (S5FI) and 64.5% above their 200-day moving average (MMTH), indicating broad participation rather than a narrow rally.",
-    "analysis_para2": "The S&P 500 opens at 7563.63 and Nasdaq 100 at 30223.89, both indicating upward momentum. Our mechanical plan dictates monitoring these indices for sustained strength above current levels, specifically looking for the S&P 500 to hold above 7550 as initial support. A VIX at 15.80 suggests a normal volatility environment, supporting continuation trades in high-relative strength names. Key action will be to identify RS leaders consolidating constructively, entering on pullbacks to short-term moving averages rather than chasing extended moves.",
-    "technical_signal": "No reversal pattern confirmed yet. The market is showing strong positive momentum rather than signs of distribution or capitulation.",
+    "action_line": "VIX 15.39 Normal + S5FI 58.0% breadth + mixed global tape led by Nikkei's decline → favor RS leaders on pullbacks.",
+    "analysis_para1": "Global markets presented a mixed picture, with the Nikkei 225 down 0.47% while the DAX gained 0.05% and the FTSE 100 dipped 0.16%. Despite the varied international performance, the US market demonstrates underlying stability. With the BAML HY Spread's regime unknown, the stable 10Y Yield at 4.44% and a 'Normal' VIX at 15.39 suggest a calm credit environment. US market breadth remains healthy, with 58.0% of stocks above their 50-day moving average (S5FI) and 63.4% above their 200-day (MMTH), indicating broad participation in the current advance.",
+    "analysis_para2": "The mechanical plan prioritizes maintaining exposure to high-relative strength leaders within robust themes like Hardware and Semiconductors. Given the healthy market breadth and stable VIX, buying strength on shallow pullbacks remains the dominant strategy. Focus on stocks displaying RS above 90 that are consolidating or retesting short-term moving averages after significant breakouts. Avoid chasing extended moves and use tight stop-losses to manage risk effectively in these fast-moving names.",
+    "technical_signal": "No reversal pattern confirmed yet; the market continues to exhibit a positive trend supported by healthy breadth.",
     "ticker_intel": [
       {
         "ticker": "QTEX",
         "company": "QTREX Quantum Ltd.",
         "grade": "A+",
-        "reason": "With an RS of 98 and an astounding +525.1% 1-month return, QTEX exhibits extreme momentum, making it a top leader in the current hardware theme."
+        "reason": "QTREX Quantum Ltd. (QTEX) earns an A+ grade with RS=98 and a staggering 1M=+525.1% return, demonstrating unparalleled leadership in the Hardware theme amidst strong sector rotation."
       },
       {
         "ticker": "MXL",
         "company": "MaxLinear, Inc",
         "grade": "A",
-        "reason": "Boasting an RS of 98 and a robust +445.5% 3-month return, MXL demonstrates sustained high-quality growth within the semiconductors theme."
+        "reason": "MaxLinear, Inc (MXL) receives an A grade due to its robust RS=98 and exceptional 3M=+445.5% performance, confirming its leading position in the Semiconductors theme."
       },
       {
-        "ticker": "WDC",
-        "company": "Western Digital Corporation",
+        "ticker": "AEHR",
+        "company": "Aehr Test Systems",
         "grade": "C",
-        "reason": "Despite a high RS of 98, its +35.9% 1-month return and +88.2% 3-month return are comparatively weaker than other red-hot high-RS peers in the hardware theme, suggesting it's a relative laggard."
+        "reason": "Aehr Test Systems (AEHR) is graded C as an avoid; despite its RS=98, its 1M=+21.3% gain is the weakest among high-RS peers, indicating comparatively muted short-term momentum within the Semiconductors sector."
       }
     ]
   }
