@@ -411,6 +411,16 @@ function fmtDollarVol(v) {
   return `$${n.toFixed(0)}`;
 }
 
+// Format market_cap_b (value already in billions) → "$5.3B" / "$342M"
+function fmtMktCap(v) {
+  if (v == null) return "—";
+  const n = parseFloat(v);
+  if (isNaN(n)) return "—";
+  if (n >= 1000) return `$${(n / 1000).toFixed(1)}T`;
+  if (n >= 1)    return `$${n.toFixed(1)}B`;
+  return `$${(n * 1000).toFixed(0)}M`;
+}
+
 // ---------------------------------------------------------------------------
 // Stock detail modal — Chart / Fundamentals / News
 // ---------------------------------------------------------------------------
@@ -630,14 +640,15 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
 // List view — matches screenshot exactly: #, Ticker, Company, $Vol, ADR%, Change%
 // ---------------------------------------------------------------------------
 
-// Static column definitions for the first four sortable columns.
-// The fifth (perf) column is built dynamically inside ListView using the filter prop.
+// Static column definitions — order: Ticker, Company, Mkt Cap, $Vol, ADR%, RS
+// The last (perf/change) column is appended dynamically inside ListView.
 const BASE_SORT_COLS = [
-  { key: "ticker",        label: "Ticker",  align: "left",  numeric: false },
-  { key: "company",       label: "Company", align: "left",  numeric: false },
-  { key: "rs",            label: "RS",      align: "right", numeric: true  },
-  { key: "adr_pct",       label: "ADR%",    align: "right", numeric: true  },
-  { key: "dollar_volume", label: "$ Vol",   align: "right", numeric: true  },
+  { key: "ticker",        label: "Ticker",   align: "left",  numeric: false },
+  { key: "company",       label: "Company",  align: "left",  numeric: false },
+  { key: "market_cap_b",  label: "Mkt Cap",  align: "right", numeric: true  },
+  { key: "dollar_volume", label: "$ Vol",    align: "right", numeric: true  },
+  { key: "adr_pct",       label: "ADR%",     align: "right", numeric: true  },
+  { key: "rs",            label: "RS",       align: "right", numeric: true  },
 ];
 
 const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData }) {
@@ -656,9 +667,10 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
     ? [
         { key: "ticker",        label: "Ticker",        align: "left",  numeric: false },
         { key: "company",       label: "Company",       align: "left",  numeric: false },
-        { key: "rs",            label: "RS",            align: "right", numeric: true  },
-        { key: "adr_pct",       label: "ADR%",          align: "right", numeric: true  },
+        { key: "market_cap_b",  label: "Mkt Cap",       align: "right", numeric: true  },
         { key: "dollar_volume", label: "$ Vol",         align: "right", numeric: true  },
+        { key: "adr_pct",       label: "ADR%",          align: "right", numeric: true  },
+        { key: "rs",            label: "RS",            align: "right", numeric: true  },
         { key: customCol.key,   label: customCol.label, align: "right", numeric: true  },
       ]
     : [
@@ -689,6 +701,9 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
       } else if (sortKey === perfField) {
         av = getPerfValue(a, perfField);
         bv = getPerfValue(b, perfField);
+      } else if (sortKey === "market_cap_b") {
+        av = a.market_cap_b;
+        bv = b.market_cap_b;
       } else {
         av = a[sortKey];
         bv = b[sortKey];
@@ -739,6 +754,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
               className="border-b border-zinc-800/50 hover:bg-zinc-800/30"
             >
               <td className="py-1.5 pr-2 text-right font-mono text-zinc-600">{i + 1}</td>
+              {/* Ticker */}
               <td className="px-2 py-1.5 font-mono font-semibold text-cyan-400">
                 <button
                   onClick={() => onStockClick(s)}
@@ -747,33 +763,35 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
                   {s.ticker}
                 </button>
               </td>
-              <td className="max-w-[220px] truncate px-2 py-1.5 text-zinc-300">
+              {/* Company */}
+              <td className="max-w-[180px] truncate px-2 py-1.5 text-zinc-300">
                 {s.company || "—"}
               </td>
-              <td className={`px-2 py-1.5 text-right font-mono font-semibold ${rsColor(getRS(s, spxReturn))}`}>
-                {fmtRS(getRS(s, spxReturn))}
+              {/* Mkt Cap */}
+              <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
+                {fmtMktCap(s.market_cap_b)}
               </td>
+              {/* $Vol */}
+              <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
+                {fmtDollarVol(s.dollar_volume)}
+              </td>
+              {/* ADR% */}
               <td className="px-2 py-1.5 text-right font-mono text-zinc-300">
                 {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
               </td>
+              {/* RS */}
+              <td className={`px-2 py-1.5 text-right font-mono font-semibold ${rsColor(getRS(s, spxReturn))}`}>
+                {fmtRS(getRS(s, spxReturn))}
+              </td>
+              {/* Last column: custom metric or perf Change% */}
               {customCol ? (
-                <>
-                  <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
-                    {fmtDollarVol(s.dollar_volume)}
-                  </td>
-                  <td className={`px-2 py-1.5 text-right font-mono font-semibold ${customCol.cls}`}>
-                    {customCol.fmt(s[customCol.key])}
-                  </td>
-                </>
+                <td className={`px-2 py-1.5 text-right font-mono font-semibold ${customCol.cls}`}>
+                  {customCol.fmt(s[customCol.key])}
+                </td>
               ) : (
-                <>
-                  <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
-                    {fmtDollarVol(s.dollar_volume)}
-                  </td>
-                  <td className={`px-2 py-1.5 text-right font-mono font-semibold ${changeCls(getPerfValue(s, perfField))}`}>
-                    {fmtPct(getPerfValue(s, perfField))}
-                  </td>
-                </>
+                <td className={`px-2 py-1.5 text-right font-mono font-semibold ${changeCls(getPerfValue(s, perfField))}`}>
+                  {fmtPct(getPerfValue(s, perfField))}
+                </td>
               )}
             </tr>
           ))}
@@ -784,7 +802,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
             <td colSpan={3} className="py-1.5 pr-2 text-right font-mono">
               {stocks.length} stocks
             </td>
-            <td colSpan={customCol ? 3 : 4} />
+            <td colSpan={customCol ? 5 : 5} />
           </tr>
         </tfoot>
       </table>
@@ -861,28 +879,36 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
                   key={s.ticker}
                   className="flex items-center gap-3 px-3 py-1 text-xs hover:bg-zinc-800/30"
                 >
+                  {/* Ticker */}
                   <button
                     onClick={() => onStockClick(s)}
                     className="w-14 font-mono font-semibold text-cyan-400 hover:underline hover:text-white transition-colors text-left"
                   >
                     {s.ticker}
                   </button>
+                  {/* Company */}
                   <span className="flex-1 truncate text-zinc-400">{s.company}</span>
-                  <span className={`w-12 text-right font-mono font-semibold ${rsColor(getRS(s, spxReturn))}`}>
-                    {fmtRS(getRS(s, spxReturn))}
+                  {/* Mkt Cap */}
+                  <span className="w-16 text-right font-mono text-zinc-400">
+                    {fmtMktCap(s.market_cap_b)}
                   </span>
+                  {/* $Vol */}
+                  <span className="w-20 text-right font-mono text-zinc-400">
+                    {fmtDollarVol(s.dollar_volume)}
+                  </span>
+                  {/* ADR% */}
                   <span className="w-12 text-right font-mono text-zinc-500">
                     {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
                   </span>
+                  {/* RS */}
+                  <span className={`w-12 text-right font-mono font-semibold ${rsColor(getRS(s, spxReturn))}`}>
+                    {fmtRS(getRS(s, spxReturn))}
+                  </span>
+                  {/* Last column: custom metric or Change% */}
                   {customCol ? (
-                    <>
-                      <span className="w-20 text-right font-mono text-zinc-400">
-                        {fmtDollarVol(s.dollar_volume)}
-                      </span>
-                      <span className={`w-20 text-right font-mono font-semibold ${customCol.cls}`}>
-                        {customCol.fmt(s[customCol.key])}
-                      </span>
-                    </>
+                    <span className={`w-20 text-right font-mono font-semibold ${customCol.cls}`}>
+                      {customCol.fmt(s[customCol.key])}
+                    </span>
                   ) : (
                     <span className={`w-20 text-right font-mono font-semibold ${changeCls(perfVal)}`}>
                       {fmtPct(perfVal)}
@@ -981,6 +1007,9 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
         } else if (sortKey === "dollar_volume") {
           av = parseDollarVolume(a.dollar_volume);
           bv = parseDollarVolume(b.dollar_volume);
+        } else if (sortKey === "market_cap_b") {
+          av = a.market_cap_b;
+          bv = b.market_cap_b;
         } else {
           av = a[sortKey];
           bv = b[sortKey];
@@ -999,21 +1028,25 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
   }
 
   // Column config for the stock-row header (mirrors the expanded row layout)
+  // Order: Ticker, Company, Mkt Cap, $Vol, ADR%, RS, Change%/custom (last unchanged)
   const GROUP_STOCK_COLS = customCol
     ? [
         { key: "ticker",        label: "Ticker",        align: "left",  cls: "w-14" },
         { key: "company",       label: "Company",       align: "left",  cls: "flex-1" },
-        { key: "rs",            label: "RS",            align: "right", cls: "w-12" },
-        { key: "adr_pct",       label: "ADR%",          align: "right", cls: "w-12" },
+        { key: "market_cap_b",  label: "Mkt Cap",       align: "right", cls: "w-16" },
         { key: "dollar_volume", label: "$ Vol",         align: "right", cls: "w-20" },
+        { key: "adr_pct",       label: "ADR%",          align: "right", cls: "w-12" },
+        { key: "rs",            label: "RS",            align: "right", cls: "w-12" },
         { key: customCol.key,   label: customCol.label, align: "right", cls: "w-20" },
       ]
     : [
-        { key: "ticker",   label: "Ticker",      align: "left",  cls: "w-14" },
-        { key: "company",  label: "Company",     align: "left",  cls: "flex-1" },
-        { key: "rs",       label: "RS",          align: "right", cls: "w-12" },
-        { key: "adr_pct",  label: "ADR%",        align: "right", cls: "w-12" },
-        { key: perfField,  label: changeColLabel, align: "right", cls: "w-20" },
+        { key: "ticker",        label: "Ticker",       align: "left",  cls: "w-14" },
+        { key: "company",       label: "Company",      align: "left",  cls: "flex-1" },
+        { key: "market_cap_b",  label: "Mkt Cap",      align: "right", cls: "w-16" },
+        { key: "dollar_volume", label: "$ Vol",        align: "right", cls: "w-20" },
+        { key: "adr_pct",       label: "ADR%",         align: "right", cls: "w-12" },
+        { key: "rs",            label: "RS",           align: "right", cls: "w-12" },
+        { key: perfField,       label: changeColLabel, align: "right", cls: "w-20" },
       ];
 
   return (
