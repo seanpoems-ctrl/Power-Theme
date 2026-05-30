@@ -8186,8 +8186,11 @@ const EtfTrendlinePanel = ({ etfData }) => {
 // ─────────────────────────────────────────────────────────────────────────────
 const DailyWatchlistTab = ({ data }) => {
   const [gapperData, setGapperData] = React.useState(null);
+  const [mode, setMode]             = React.useState("long");   // "long" | "short"
   const [sortCol, setSortCol]       = React.useState("rs_52w");
   const [sortDir, setSortDir]       = React.useState("desc");
+  const [shortSortCol, setShortSortCol] = React.useState("rs_52w");
+  const [shortSortDir, setShortSortDir] = React.useState("asc");
 
   React.useEffect(() => {
     fetch(process.env.PUBLIC_URL + "/gapper_data.json?v=" + Date.now())
@@ -8270,6 +8273,44 @@ const DailyWatchlistTab = ({ data }) => {
     return <span className="ml-0.5 text-amber-400">{sortDir === "asc" ? "↑" : "↓"}</span>;
   };
 
+  // ── Short Candidates ── below all 3 SMAs, RS≤40, ADR≥4%, down on 1M
+  const shortCandidates = React.useMemo(() => {
+    const filtered = allStocks.filter(s =>
+      (s.sma20_pct  ?? 1) < 0 &&
+      (s.sma50_pct  ?? 1) < 0 &&
+      (s.sma200_pct ?? 1) < 0 &&
+      (s.rs_52w  ?? 99) <= 40 &&
+      (s.adr_pct ?? 0) >= 4 &&
+      (s.perf_1m ?? 0) < -5
+    );
+    const getVal = s => {
+      if (shortSortCol === "ticker")        return s.ticker ?? "";
+      if (shortSortCol === "company")       return s.company ?? "";
+      if (shortSortCol === "theme")         return s.theme ?? "";
+      if (shortSortCol === "rs_52w")        return s.rs_52w ?? 99;
+      if (shortSortCol === "adr_pct")       return s.adr_pct ?? 0;
+      if (shortSortCol === "dist_52w_high") return s.dist_52w_high ?? -99;
+      if (shortSortCol === "dollar_volume") return parseDvol(s.dollar_volume);
+      if (shortSortCol === "perf_1m")       return s.perf_1m ?? 0;
+      return 0;
+    };
+    return [...filtered].sort((a, b) => {
+      const av = getVal(a), bv = getVal(b);
+      if (typeof av === "string") return shortSortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+      return shortSortDir === "asc" ? av - bv : bv - av;
+    }).slice(0, 25);
+  }, [allStocks, shortSortCol, shortSortDir]);
+
+  const handleShortSort = col => {
+    if (shortSortCol === col) setShortSortDir(d => d === "asc" ? "desc" : "asc");
+    else { setShortSortCol(col); setShortSortDir(col === "ticker" || col === "company" || col === "theme" ? "asc" : "asc"); }
+  };
+
+  const ShortSortIcon = ({ col }) => {
+    if (shortSortCol !== col) return <span className="ml-0.5 text-zinc-700">⇅</span>;
+    return <span className="ml-0.5 text-rose-400">{shortSortDir === "asc" ? "↑" : "↓"}</span>;
+  };
+
   // ── Market Leaders ── RS≥90 in top themes
   const leaders = React.useMemo(() =>
     allStocks
@@ -8314,9 +8355,20 @@ const DailyWatchlistTab = ({ data }) => {
   return (
     <div className="max-w-[1400px] mx-auto px-4 pt-4 pb-8 space-y-8">
 
-      {/* ── Market Pulse bar ───────────────────────────────── */}
+      {/* ── Market Pulse bar + Long/Short toggle ──────────── */}
       <div className="flex flex-wrap items-center gap-3">
         <span className={`px-3 py-1.5 rounded-lg border text-xs font-bold tracking-wide ${sigCls}`}>{sigLabel}</span>
+        {/* Long / Short mode toggle */}
+        <div className="flex rounded-lg border border-zinc-700 overflow-hidden text-xs font-semibold">
+          <button onClick={() => setMode("long")}
+            className={`px-3 py-1.5 transition-colors ${mode === "long" ? "bg-emerald-600/25 text-emerald-300 border-r border-zinc-700" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300 border-r border-zinc-700"}`}>
+            ▲ Long
+          </button>
+          <button onClick={() => setMode("short")}
+            className={`px-3 py-1.5 transition-colors ${mode === "short" ? "bg-rose-600/25 text-rose-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
+            ▼ Short
+          </button>
+        </div>
         {mc?.spy?.sma50_pct != null && (
           <span className="text-xs font-mono text-zinc-400">SPY vs SMA50: <span className={mc.spy.sma50_pct > 0 ? "text-emerald-400" : "text-rose-400"}>{fmtPct(mc.spy.sma50_pct)}</span></span>
         )}
@@ -8325,6 +8377,9 @@ const DailyWatchlistTab = ({ data }) => {
         )}
         {data?.last_updated && <span className="text-xs text-zinc-600 ml-auto">Data: {data.last_updated}</span>}
       </div>
+
+      {/* ── LONG MODE ─────────────────────────────────────── */}
+      {mode === "long" && <div className="space-y-8">
 
       {/* ── Row 1: Themes + Leaders ────────────────────────── */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -8500,6 +8555,101 @@ const DailyWatchlistTab = ({ data }) => {
           <p className="text-sm text-zinc-600 italic">No high-conviction gappers today (scan runs 8:05 AM ET on trading days).</p>
         </div>
       )}
+
+      </div>} {/* end LONG MODE */}
+
+      {/* ── SHORT MODE ────────────────────────────────────── */}
+      {mode === "short" && (
+        <div className="space-y-6">
+
+          {/* Short Candidates table */}
+          <div>
+            <Sec
+              title="Short Candidates — Sell Watch"
+              badge={shortCandidates.length}
+              sub="Below SMA20/50/200 · RS≤40 · ADR≥4% · down >5% on 1M"
+            />
+            {shortCandidates.length === 0 ? (
+              <p className="text-sm text-zinc-500 italic py-4">No stocks meeting short criteria — market may be in uptrend with broad participation.</p>
+            ) : (
+              <div className="overflow-x-auto rounded-lg border border-zinc-800">
+                <table className="w-full text-xs border-collapse">
+                  <thead>
+                    <tr className="bg-zinc-900 border-b border-zinc-800 text-zinc-500 text-[11px] uppercase tracking-wide select-none">
+                      {[
+                        { col: "ticker",        label: "Ticker",   align: "left",  cls: "" },
+                        { col: "company",       label: "Company",  align: "left",  cls: "hidden md:table-cell" },
+                        { col: "theme",         label: "Theme",    align: "left",  cls: "hidden lg:table-cell" },
+                        { col: "rs_52w",        label: "RS",       align: "right", cls: "" },
+                        { col: "adr_pct",       label: "ADR%",     align: "right", cls: "" },
+                        { col: "dist_52w_high", label: "52W Dist", align: "right", cls: "" },
+                        { col: "dollar_volume", label: "$Vol",     align: "right", cls: "hidden sm:table-cell" },
+                        { col: "perf_1m",       label: "1M%",      align: "right", cls: "hidden sm:table-cell" },
+                      ].map(({ col, label, align, cls }) => (
+                        <th key={col}
+                            onClick={() => handleShortSort(col)}
+                            className={`px-3 py-2 font-medium cursor-pointer hover:text-zinc-300 transition-colors ${align === "right" ? "text-right" : "text-left"} ${cls}`}>
+                          {label}<ShortSortIcon col={col}/>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {shortCandidates.map((s, i) => (
+                      <tr key={s.ticker} className={`border-b border-zinc-800/50 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/30"}`}>
+                        <td className="px-3 py-2">
+                          <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noopener noreferrer"
+                             className="font-mono font-bold text-rose-400 hover:underline">{s.ticker}</a>
+                        </td>
+                        <td className="px-3 py-2 hidden md:table-cell">
+                          <span className="text-zinc-400 max-w-[150px] truncate block">{s.company}</span>
+                        </td>
+                        <td className="px-3 py-2 hidden lg:table-cell">
+                          <span className="text-zinc-600 max-w-[140px] truncate block text-[11px]">{s.theme}</span>
+                        </td>
+                        <td className="px-3 py-2 text-right font-mono font-bold text-rose-400">{s.rs_52w ?? "—"}</td>
+                        <td className="px-3 py-2 text-right font-mono text-zinc-300">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
+                        <td className="px-3 py-2 text-right font-mono text-zinc-400">
+                          {s.dist_52w_high != null ? `${s.dist_52w_high.toFixed(1)}%` : "—"}
+                        </td>
+                        <td className="px-3 py-2 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtDvol(s.dollar_volume)}</td>
+                        <td className="px-3 py-2 text-right font-mono font-semibold text-rose-400 hidden sm:table-cell">
+                          {fmtPct(s.perf_1m)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+
+          {/* Weak Themes */}
+          <div>
+            <Sec title="Weak Themes — Avoid / Short Bias" sub="worst performing themes" />
+            <div className="space-y-1.5">
+              {[...(data?.themes ?? [])].reverse().slice(0, 5).map((theme, i) => {
+                const stocks = theme.subthemes?.flatMap(s => s.stocks || []) ?? [];
+                const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
+                const perf1m = stocks.slice(0, 5).reduce((s, st) => s + (st.perf_1m ?? 0), 0) / Math.min(stocks.length, 5);
+                return (
+                  <div key={theme.name} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40">
+                    <span className="text-zinc-600 font-mono text-[11px] w-4 shrink-0">{i + 1}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-xs font-medium text-zinc-200 truncate">{theme.name}</div>
+                      <div className="text-[10px] text-zinc-600">{stocks.length} stocks{avgRs ? ` · avg RS ${avgRs}` : ""}</div>
+                    </div>
+                    <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf1m >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                      {perf1m > 0 ? "+" : ""}{perf1m.toFixed(1)}%
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+        </div>
+      )} {/* end SHORT MODE */}
 
     </div>
   );
@@ -8979,14 +9129,14 @@ const filtered = useMemo(() => {
               <button onClick={() => setTab("breadth")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "breadth" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Market Breadth
               </button>
+              <button onClick={() => setTab("watchlist")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "watchlist" ? "border-amber-400 text-amber-300" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                ★ Watchlist
+              </button>
               <button onClick={() => setTab("leaders")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "leaders" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Thematic Leaders
               </button>
               <button onClick={() => setTab("news")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "news" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Calendar
-              </button>
-              <button onClick={() => setTab("watchlist")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "watchlist" ? "border-amber-400 text-amber-300" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                ★ Watchlist
               </button>
             </div>
             <div className="flex items-center gap-2">
