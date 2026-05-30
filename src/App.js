@@ -8311,10 +8311,13 @@ const DailyWatchlistTab = ({ data }) => {
     return <span className="ml-0.5 text-rose-400">{shortSortDir === "asc" ? "↑" : "↓"}</span>;
   };
 
-  // ── Market Leaders ── RS≥90 in top themes
+  // ── Market Leaders ── RS≥90, $Vol≥$100M (eliminates small/micro caps)
   const leaders = React.useMemo(() =>
     allStocks
-      .filter(s => (s.rs_52w ?? 0) >= 90)
+      .filter(s =>
+        (s.rs_52w ?? 0) >= 90 &&
+        parseDvol(s.dollar_volume) >= 100_000_000
+      )
       .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))
       .slice(0, 15),
     [allStocks]
@@ -8412,7 +8415,7 @@ const DailyWatchlistTab = ({ data }) => {
 
         {/* Market Leaders cards */}
         <div className="lg:col-span-2">
-          <Sec title="Market Leaders" badge={leaders.length} sub="RS≥90 · sorted by strength" />
+          <Sec title="Market Leaders" badge={leaders.length} sub="RS≥90 · $Vol≥$100M · sorted by strength" />
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2">
             {leaders.map(s => (
               <a key={s.ticker}
