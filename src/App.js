@@ -8142,13 +8142,8 @@ const EtfTrendlineGroup = ({ icon, title, items, onTvClick, lang = 'zh' }) => (
 
 const EtfTrendlinePanel = ({ etfData }) => {
   const [tvPopup, setTvPopup] = useState(null);
-  const [lang, setLang] = useState(() => localStorage.getItem('etf_panel_lang') || 'zh');
-  const toggleLang = () => setLang(l => {
-    const next = l === 'zh' ? 'en' : 'zh';
-    localStorage.setItem('etf_panel_lang', next);
-    return next;
-  });
-  const t = ETF_T[lang];
+  const lang = useLang();   // follows the global EN / 中文 toggle in the nav bar
+  const t    = ETF_T[lang] ?? ETF_T.zh;
 
   if (!etfData) return (
     <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg p-3">
@@ -8165,22 +8160,8 @@ const EtfTrendlinePanel = ({ etfData }) => {
   return (
     <>
     <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg" style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
-      {/* Header with lang toggle */}
-      <div style={{ padding: '10px 14px 6px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
-        <span style={{ fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{t.title}</span>
-        <button
-          onClick={toggleLang}
-          style={{
-            fontSize: 10, fontWeight: 600, padding: '1px 6px', borderRadius: 4, border: '1px solid rgba(113,113,122,0.4)',
-            background: 'rgba(39,39,42,0.6)', color: '#a1a1aa', cursor: 'pointer', lineHeight: '16px',
-            transition: 'color 0.15s, border-color 0.15s',
-          }}
-          onMouseEnter={e => { e.currentTarget.style.color = '#e4e4e7'; e.currentTarget.style.borderColor = 'rgba(161,161,170,0.6)'; }}
-          onMouseLeave={e => { e.currentTarget.style.color = '#a1a1aa'; e.currentTarget.style.borderColor = 'rgba(113,113,122,0.4)'; }}
-          title={lang === 'zh' ? 'Switch to English' : '切換中文'}
-        >
-          {lang === 'zh' ? 'EN' : '中文'}
-        </button>
+      <div style={{ padding: '10px 14px 6px', fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em', flexShrink: 0 }}>
+        {t.title}
       </div>
       <div style={{ flex: 1, overflowY: 'auto', scrollbarWidth: 'thin', scrollbarColor: '#52525b transparent', minHeight: 0 }}>
         <EtfTrendlineGroup icon="🚀" title={t.breakout} items={breakouts} onTvClick={setTvPopup} lang={lang}/>
