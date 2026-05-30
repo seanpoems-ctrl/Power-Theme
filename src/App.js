@@ -8212,8 +8212,10 @@ export default function App() {
 
   // ── IBKR WebSocket live price stream ──────────────────────────────────────
   // livePricesRef: { TICKER: { price, change_pct } } — mutated directly, no re-render
-  // wsStatus: drives the ⚡ LIVE badge only ("connecting" | "live" | "offline")
+  // wsStatus: WS connection state ("connecting" | "live" | "offline")
+  // ibkrConnected: true only when IB Gateway/TWS is actually connected to WS server
   const [wsStatus, setWsStatus] = useState("offline");
+  const [ibkrConnected, setIbkrConnected] = useState(false);
   const livePricesRef = useRef({});
   const wsRef = useRef(null);
 
@@ -8438,15 +8440,20 @@ export default function App() {
       ws.onopen = () => {
         if (!alive) { ws.close(); return; }
         setWsStatus("live");
-        // Apply any pre-existing cached prices from livePricesRef immediately
+        // ibkrConnected will be set when we receive snapshot.ibkr_connected or ibkr_status msg
       };
 
       ws.onmessage = (evt) => {
         try {
           const msg = JSON.parse(evt.data);
-          // Both "snapshot" and "prices" messages carry a "data" dict
           if ((msg.type === "snapshot" || msg.type === "prices") && msg.data) {
             applyPrices(msg.data);
+            // snapshot carries current ibkr_connected flag
+            if (msg.type === "snapshot" && typeof msg.ibkr_connected === "boolean") {
+              setIbkrConnected(msg.ibkr_connected);
+            }
+          } else if (msg.type === "ibkr_status") {
+            setIbkrConnected(!!msg.connected);
           }
         } catch { /* ignore malformed */ }
       };
@@ -8456,6 +8463,7 @@ export default function App() {
       ws.onclose = () => {
         if (!alive) return;
         setWsStatus("offline");
+        setIbkrConnected(false);
         reconnectTimer = setTimeout(connect, 5000); // retry every 5 s
       };
     };
@@ -8468,6 +8476,7 @@ export default function App() {
       if (ws) { try { ws.close(); } catch {} }
       wsRef.current = null;
       setWsStatus("offline");
+      setIbkrConnected(false);
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -8587,26 +8596,17 @@ const filtered = useMemo(() => {
             </div>
             {/* IBKR Live badge + Updated time */}
             <div className="flex items-center gap-2 flex-shrink-0">
-              {wsStatus === "live" && (
+              {wsStatus === "live" && ibkrConnected && (
                 <span className="px-2 py-0.5 text-[11px] font-bold rounded-full border font-mono bg-blue-500/15 text-blue-400 border-blue-500/40 whitespace-nowrap animate-pulse">⚡ LIVE</span>
+              )}
+              {wsStatus === "live" && !ibkrConnected && (
+                <span className="px-2 py-0.5 text-[11px] font-bold rounded-full border font-mono bg-yellow-500/10 text-yellow-500 border-yellow-500/30 whitespace-nowrap">◌ WS...</span>
               )}
               {wsStatus === "connecting" && (
                 <span className="px-2 py-0.5 text-[11px] font-bold rounded-full border font-mono bg-yellow-500/10 text-yellow-500 border-yellow-500/30 whitespace-nowrap">◌ WS...</span>
               )}
               {ibkrThemesData?.data_source === "ibkr" && (
                 <span className="px-2 py-0.5 text-[11px] font-bold rounded-full border font-mono bg-emerald-500/15 text-emerald-400 border-emerald-500/40 whitespace-nowrap">● IBKR Live</span>
-              )}
-              {data && (
-                <div className="text-right leading-tight">
-                  <div className="text-[11px] font-medium text-emerald-400 whitespace-nowrap">
-                    {data.generated_at || data.last_updated}
-                  </div>
-                  {countdown != null && (
-                    <div className="text-[11px] text-zinc-500">
-                      <span className="font-mono">{countdown >= 60 ? `${Math.floor(countdown/60)}m ${countdown%60}s` : `${countdown}s`}</span>
-                    </div>
-                  )}
-                </div>
               )}
             </div>
           </div>
@@ -8669,6 +8669,18 @@ const filtered = useMemo(() => {
               <button className="flex items-center gap-1 px-2.5 py-1 text-[12px] rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-300 transition-colors whitespace-nowrap">
                 Alerts
               </button>
+              {data && (
+                <div className="text-right leading-tight pl-1 border-l border-zinc-800 ml-1">
+                  <div className="text-[10px] text-zinc-500 whitespace-nowrap font-mono">
+                    {data.generated_at || data.last_updated}
+                  </div>
+                  {countdown != null && (
+                    <div className="text-[10px] text-zinc-600 font-mono">
+                      {countdown >= 60 ? `${Math.floor(countdown/60)}m ${countdown%60}s ago` : `${countdown}s ago`}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 

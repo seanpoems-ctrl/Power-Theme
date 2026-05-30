@@ -66,9 +66,10 @@ INTERNALS = [
 ]
 
 # ── Global state (single-threaded asyncio — no locks needed) ─────────────────
-price_cache: dict[str, dict] = {}   # key → { price, change_pct, source, ts }
-dirty:       set[str]        = set() # keys updated since last broadcast
-CLIENTS:     set             = set() # connected WebSocket objects
+price_cache:    dict[str, dict] = {}    # key → { price, change_pct, source, ts }
+dirty:          set[str]        = set() # keys updated since last broadcast
+CLIENTS:        set             = set() # connected WebSocket objects
+ibkr_connected: bool            = False # True only while IB Gateway session is live
 ib = IB()
 
 
@@ -256,6 +257,7 @@ async def subscribe_all(symbols_ranked: list[tuple[str, int]]) -> None:
 
 async def ibkr_connect(symbols_ranked: list[tuple[str, int]]) -> bool:
     """Try connecting to TWS. Returns True on success."""
+    global ibkr_connected
     ports_to_try = [TWS_PORT]
     # If default isn't 4002, also try gateway paper as fallback
     if TWS_PORT != 4002:
@@ -266,6 +268,8 @@ async def ibkr_connect(symbols_ranked: list[tuple[str, int]]) -> bool:
             log.info("Connecting to IBKR at %s:%d (clientId=%d)…", TWS_HOST, port, CLIENT_ID)
             await ib.connectAsync(TWS_HOST, port, clientId=CLIENT_ID, readonly=True, timeout=10)
             log.info("✅ Connected to IBKR TWS/Gateway")
+            ibkr_connected = True
+            await _broadcast_ibkr_status(True)
             await subscribe_all(symbols_ranked)
             return True
         except Exception as exc:
@@ -278,7 +282,10 @@ async def ibkr_connect(symbols_ranked: list[tuple[str, int]]) -> bool:
 def _setup_reconnect(symbols_ranked: list[tuple[str, int]]) -> None:
     """Register a disconnected callback that retries after 5 s."""
     async def _reconnect():
+        global ibkr_connected
         log.warning("IBKR disconnected — retrying in 5 s…")
+        ibkr_connected = False
+        await _broadcast_ibkr_status(False)
         await asyncio.sleep(5)
         await ibkr_connect(symbols_ranked)
 
@@ -289,6 +296,20 @@ def _setup_reconnect(symbols_ranked: list[tuple[str, int]]) -> None:
 # WebSocket server
 # ─────────────────────────────────────────────────────────────────────────────
 
+async def _broadcast_ibkr_status(connected: bool) -> None:
+    """Push ibkr_status message to all connected WebSocket clients."""
+    if not CLIENTS:
+        return
+    msg = json.dumps({"type": "ibkr_status", "connected": connected})
+    dead = set()
+    for ws in list(CLIENTS):
+        try:
+            await ws.send(msg)
+        except websockets.exceptions.ConnectionClosed:
+            dead.add(ws)
+    CLIENTS.difference_update(dead)
+
+
 async def _ws_handler(ws) -> None:
     """Handle one WebSocket client connection."""
     CLIENTS.add(ws)
@@ -296,9 +317,9 @@ async def _ws_handler(ws) -> None:
     try:
         # Send full snapshot immediately so client has prices before first broadcast
         if price_cache:
-            await ws.send(json.dumps({"type": "snapshot", "data": price_cache}))
+            await ws.send(json.dumps({"type": "snapshot", "data": price_cache, "ibkr_connected": ibkr_connected}))
         else:
-            await ws.send(json.dumps({"type": "snapshot", "data": {}, "status": "waiting_for_ibkr"}))
+            await ws.send(json.dumps({"type": "snapshot", "data": {}, "ibkr_connected": ibkr_connected, "status": "waiting_for_ibkr"}))
         # Keep connection alive; ignore any incoming messages
         async for _ in ws:
             pass
