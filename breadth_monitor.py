@@ -431,20 +431,45 @@ WEEK — (5-day trend in the ratio and up25M or up13_34d; is breadth improving, 
 MONTH — (up50M froth level, % above 50dma zone, T2108 reading; what it means for swing traders)
 REGIME — (one-word regime label + what Stockbee would watch as the next leading signal)"""
 
+    # Ordered fallback chain: try each model in sequence until one works.
+    # gemini-2.5-flash is the primary (thinking model, highest quality).
+    # gemini-2.0-flash-lite and gemini-1.5-flash-8b are lightweight fallbacks
+    # that are less likely to be deprecated simultaneously.
+    MODELS = [
+        "gemini-2.5-flash",
+        "gemini-2.0-flash-lite",
+        "gemini-1.5-flash-8b",
+    ]
+
     try:
         from google import genai  # type: ignore
-        client = genai.Client(api_key=GEMINI_API_KEY)
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",   # same model as gapper_service — proven to work
-            contents=prompt,
-        )
-        text = (response.text or "").strip()
-        if text:
-            logger.info("Gemini breadth analysis generated (%d chars)", len(text))
-        return text or None
-    except Exception as exc:
-        logger.warning("Gemini breadth analysis failed: %s", exc)
+    except ImportError as exc:
+        logger.warning("google-genai not installed: %s", exc)
         return None
+
+    last_exc: Exception | None = None
+    for model in MODELS:
+        try:
+            client = genai.Client(api_key=GEMINI_API_KEY)
+            response = client.models.generate_content(
+                model=model,
+                contents=prompt,
+            )
+            text = (response.text or "").strip()
+            if text:
+                logger.info("Gemini breadth analysis generated via %s (%d chars)", model, len(text))
+                return text
+            # Empty text from this model — try next
+            logger.warning("Gemini model %s returned empty text — trying next", model)
+        except Exception as exc:
+            last_exc = exc
+            msg = str(exc).lower()
+            # On hard model-not-found / deprecated errors, try the next model immediately.
+            # On network/timeout errors, also try next (don't retry same model — we have fallbacks).
+            logger.warning("Gemini model %s failed (%s) — trying next fallback", model, exc)
+
+    logger.warning("All Gemini models exhausted. Last error: %s", last_exc)
+    return None
 
 
 # ---------------------------------------------------------------------------

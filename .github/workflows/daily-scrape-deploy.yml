@@ -108,6 +108,11 @@ jobs:
           timeout 900 python breadth_stocks_builder.py  || echo "breadth_stocks_builder.py failed (non-fatal)"
           timeout 300 python etf_trendline_service.py   || echo "etf_trendline_service.py failed (non-fatal)"
 
+      - name: Validate breadth data quality
+        if: steps.trading_day.outputs.is_trading_day == 'true'
+        continue-on-error: true   # Yellow warning in Actions — deployment continues, but failure is visible
+        run: python validate_data.py
+
       - name: Commit thematic data to repo
         if: steps.trading_day.outputs.is_trading_day == 'true'
         run: |

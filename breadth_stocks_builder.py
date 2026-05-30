@@ -67,6 +67,42 @@ FILTER_LABELS: dict[str, str] = {
     "dn13_34": "Down 13%+ 34-Day",
 }
 
+# ---------------------------------------------------------------------------
+# TradingView fallback — used when Finviz is rate-limited / returns too few stocks
+# ---------------------------------------------------------------------------
+
+# Minimum stocks a Finviz filter must return before we switch to the TV fallback.
+FINVIZ_FALLBACK_THRESHOLD = 5
+
+# Maps filter_key → (tv_field, threshold, direction)
+# "up"   = tv_field >= threshold
+# "down" = tv_field <= threshold  (threshold is already the signed value, e.g. -4.0)
+TV_FALLBACK_MAP: dict[str, tuple[str, float, str]] = {
+    "up4":     ("change",  4.0,   "up"),
+    "dn4":     ("change",  -4.0,  "down"),
+    "up25q":   ("Perf.3M", 25.0,  "up"),
+    "dn25q":   ("Perf.3M", -25.0, "down"),
+    "up25m":   ("Perf.1M", 25.0,  "up"),
+    "dn25m":   ("Perf.1M", -25.0, "down"),
+    "up50m":   ("Perf.1M", 50.0,  "up"),
+    "dn50m":   ("Perf.1M", -50.0, "down"),
+    "up13_34": ("Perf.1M", 13.0,  "up"),   # 34-day perf not in TV; Perf.1M (~21 td) is best proxy
+    "dn13_34": ("Perf.1M", -13.0, "down"),
+}
+
+TV_FALLBACK_SORT: dict[str, tuple[str, bool]] = {
+    "up4":     ("change",  False),
+    "dn4":     ("change",  True),
+    "up25q":   ("Perf.3M", False),
+    "dn25q":   ("Perf.3M", True),
+    "up25m":   ("Perf.1M", False),
+    "dn25m":   ("Perf.1M", True),
+    "up50m":   ("Perf.1M", False),
+    "dn50m":   ("Perf.1M", True),
+    "up13_34": ("Perf.1M", False),
+    "dn13_34": ("Perf.1M", True),
+}
+
 FINVIZ_BASE = "https://finviz.com"
 MAX_PAGES = 25
 MIN_CAP_B = 1.0
@@ -610,15 +646,17 @@ def _build_rs_lookup(composites: dict[str, float]) -> dict[str, int]:
     return result
 
 
-def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
+def _build_tv_scanners_sync() -> tuple[dict, dict, dict, "pd.DataFrame | None"]:
     """
     Use TradingView screener (~8 000+ US stocks) to:
       1. Build the IBD RS universe: fetch Perf.3M / Perf.6M / Perf.Y,
          compute the IBD composite, rank 1-99 → returns rs_lookup dict.
       2. atr_ext    : stocks where |(close − SMA50) / ATR| ≥ 10  (Jeff Sun)
       3. above50dma : stocks where close > SMA50
+      4. Returns the full cleaned DataFrame as the 4th element — used by
+         _tv_fallback_filter() when Finviz is blocked.
 
-    Returns (rs_lookup, atr_ext_data, above50dma_data).
+    Returns (rs_lookup, atr_ext_data, above50dma_data, tv_df).
     Runs synchronously; call via asyncio.to_thread in async context.
     """
     now = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
@@ -636,7 +674,7 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
         from tradingview_screener import Query, col as tv_col  # type: ignore
     except ImportError as exc:
         logger.warning("tradingview_screener not installed: %s", exc)
-        return {}, empty_atr, empty_dma
+        return {}, empty_atr, empty_dma, None
 
     try:
         logger.info("Fetching TradingView screener for RS universe / ATR Ext / >50 DMA …")
@@ -645,7 +683,8 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
             .select(
                 "name", "description", "close", "change", "ATR", "SMA50",
                 "industry", "market_cap_basic", "average_volume_10d_calc", "sector",
-                "Perf.3M", "Perf.6M", "Perf.Y",   # IBD RS inputs
+                "Perf.1M",             # Monthly perf — used by TV fallback for up25m/dn25m/up50m/dn50m/up13_34/dn13_34
+                "Perf.3M", "Perf.6M", "Perf.Y",   # IBD RS inputs + quarterly fallback
             )
             .where(
                 tv_col("close") >= 2,
@@ -658,11 +697,11 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
         )
     except Exception as exc:
         logger.warning("TradingView screener fetch failed: %s", exc)
-        return {}, empty_atr, empty_dma
+        return {}, empty_atr, empty_dma, None
 
     if df is None or getattr(df, "empty", True):
         logger.warning("TradingView screener returned empty result")
-        return {}, empty_atr, empty_dma
+        return {}, empty_atr, empty_dma, None
 
     logger.info("TradingView screener: %d rows fetched", len(df))
 
@@ -772,7 +811,136 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict]:
         "fetched_at_utc": now,
     }
 
-    return rs_lookup, atr_data, dma_data
+    return rs_lookup, atr_data, dma_data, df
+
+
+# ---------------------------------------------------------------------------
+# TradingView fallback filter — replaces Finviz when rate-limited
+# ---------------------------------------------------------------------------
+
+def _tv_fallback_filter(
+    filter_key: str,
+    tv_df: "pd.DataFrame",
+    rs_lookup: dict[str, int],
+) -> dict[str, Any]:
+    """
+    Build a Finviz-equivalent filter result using the TradingView screener
+    DataFrame already fetched by _build_tv_scanners_sync().
+
+    Populates all fields that TV data provides:
+      price, change_pct, market_cap_b, industry — direct from TV
+      dollar_volume                              — close × avg_volume_10d
+      adr_pct                                    — ATR/close×100 (Wilder's RMA proxy)
+      perf_1m / perf_mtd                         — TV Perf.1M
+      perf_3m / perf_qtd                         — TV Perf.3M
+      perf_34d                                   — None (no exact TV field)
+      rs_ibd                                     — from rs_lookup
+
+    Called automatically when Finviz returns < FINVIZ_FALLBACK_THRESHOLD stocks.
+    The result dict contains "source": "tv_fallback" for transparency.
+    """
+    now   = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+    label = FILTER_LABELS[filter_key]
+
+    if filter_key not in TV_FALLBACK_MAP:
+        return {"ok": False, "filter": filter_key, "label": label,
+                "stocks": [], "count": 0, "fetched_at_utc": now, "source": "tv_fallback"}
+
+    tv_field, threshold, direction = TV_FALLBACK_MAP[filter_key]
+    sort_field, sort_asc = TV_FALLBACK_SORT[filter_key]
+
+    required = ["name", "close", "change", "ATR", tv_field]
+    missing  = [c for c in required if c not in tv_df.columns]
+    if missing:
+        logger.warning("[%s] TV fallback: missing columns %s — cannot build fallback", filter_key, missing)
+        return {"ok": False, "filter": filter_key, "label": label,
+                "stocks": [], "count": 0, "fetched_at_utc": now, "source": "tv_fallback"}
+
+    df = tv_df.dropna(subset=["name", "close", "change", "ATR", tv_field]).copy()
+
+    # Performance threshold
+    if direction == "up":
+        df = df[df[tv_field] >= threshold]
+    else:
+        df = df[df[tv_field] <= threshold]
+
+    # Price >= $5 and market cap >= $1B (mirrors Finviz base filter)
+    df = df[df["close"] >= 5.0]
+    if "market_cap_basic" in df.columns:
+        df = df[df["market_cap_basic"].notna() & (df["market_cap_basic"] >= MIN_CAP_B * 1e9)]
+
+    # Average daily dollar volume >= $50M
+    if "average_volume_10d_calc" in df.columns:
+        df = df[df["average_volume_10d_calc"].notna() & (df["average_volume_10d_calc"] > 0)]
+        df = df.copy()
+        df["_dv"] = df["close"] * df["average_volume_10d_calc"]
+        df = df[df["_dv"] >= MIN_DOLLAR_VOL]
+
+    # ADR% proxy: ATR / close * 100  (Wilder's 14-period RMA ~= average daily range %)
+    df = df.copy()
+    df["_adr"] = df["ATR"] / df["close"] * 100
+    df = df[df["_adr"] >= MIN_ADR_PCT]
+
+    # Sort
+    df = df.sort_values(sort_field, ascending=sort_asc, na_position="last")
+
+    def _safe_float(v) -> "float | None":
+        try:
+            f = float(v)
+            return None if pd.isna(f) else f
+        except (TypeError, ValueError):
+            return None
+
+    def _cap_b(row):
+        v = row.get("market_cap_basic")
+        try:
+            return round(float(v) / 1e9, 3) if v is not None and not pd.isna(v) else None
+        except Exception:
+            return None
+
+    stocks: list[dict] = []
+    for _, row in df.iterrows():
+        tkr   = str(row["name"])
+        price = float(row["close"])
+        avg_v = row.get("average_volume_10d_calc")
+        dv    = _fmt_dollar_vol(price, int(avg_v)) if avg_v and not pd.isna(avg_v) else "—"
+
+        p1m = _safe_float(row.get("Perf.1M"))
+        p3m = _safe_float(row.get("Perf.3M"))
+
+        stocks.append({
+            "ticker":        tkr,
+            "company":       str(row.get("description") or ""),
+            "industry":      str(row.get("industry") or row.get("sector") or "") or None,
+            "market_cap_b":  _cap_b(row),
+            "price":         round(price, 2),
+            "change_pct":    round(float(row["change"]), 2),
+            "dollar_volume": dv,
+            "adr_pct":       round(float(row["_adr"]), 1),
+            "perf_1m":       round(p1m, 2) if p1m is not None else None,
+            "perf_3m":       round(p3m, 2) if p3m is not None else None,
+            "perf_34d":      None,                                          # Not available from TV screener
+            "perf_qtd":      round(p3m, 2) if p3m is not None else None,   # Perf.3M as QTD proxy
+            "perf_mtd":      round(p1m, 2) if p1m is not None else None,   # Perf.1M as MTD proxy
+            "rs_ibd":        rs_lookup.get(tkr),
+        })
+
+    logger.info(
+        "[%s] TV fallback: %d stocks (field=%s, threshold=%.1f, sort=%s %s)",
+        filter_key, len(stocks), tv_field, threshold, sort_field, "asc" if sort_asc else "desc",
+    )
+
+    return {
+        "ok":             True,
+        "filter":         filter_key,
+        "label":          label,
+        "min_cap_b":      MIN_CAP_B,
+        "count":          len(stocks),
+        "stocks":         stocks,
+        "spx_benchmarks": _fetch_spx_benchmarks(),
+        "fetched_at_utc": now,
+        "source":         "tv_fallback",   # tells consumers this is not from Finviz
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -811,9 +979,27 @@ def _build_compact_history(all_data: dict[str, dict], date_et: str) -> None:
 
     history_dir = PUBLIC_DIR / "breadth_history"
     history_dir.mkdir(parents=True, exist_ok=True)
-    out = history_dir / f"{date_et}.json"
-    out.write_text(json.dumps(compact, separators=(",", ":")), encoding="utf-8")
+    out   = history_dir / f"{date_et}.json"
     total = sum(len(v) for v in compact["filters"].values())
+
+    # Guard: never overwrite an existing history file with substantially worse data.
+    # If the file already has >2× as many entries and the new run has < 50 total, it's
+    # almost certainly a Finviz block event — keep the richer existing snapshot.
+    if out.exists():
+        try:
+            existing      = json.loads(out.read_text(encoding="utf-8"))
+            existing_total = sum(len(v) for v in existing.get("filters", {}).values())
+            if existing_total > total * 2 and total < 50:
+                logger.warning(
+                    "History %s already has %d entries vs new %d — keeping existing "
+                    "(likely Finviz block; re-run with TV fallback enabled to update)",
+                    out.name, existing_total, total,
+                )
+                return
+        except Exception:
+            pass  # Corrupt or missing — safe to overwrite
+
+    out.write_text(json.dumps(compact, separators=(",", ":")), encoding="utf-8")
     logger.info("Wrote history archive: %s (%d total stock entries)", out.name, total)
 
 
@@ -833,8 +1019,9 @@ async def main() -> None:
     logger.info("=== Building TradingView RS universe / ATR Ext / >50 DMA ===")
     t0 = monotonic()
     rs_lookup: dict[str, int] = {}
+    tv_df_for_fallback: "pd.DataFrame | None" = None
     try:
-        rs_lookup, atr_data, dma_data = await asyncio.to_thread(_build_tv_scanners_sync)
+        rs_lookup, atr_data, dma_data, tv_df_for_fallback = await asyncio.to_thread(_build_tv_scanners_sync)
     except Exception as exc:
         logger.error("TradingView scanners failed: %s", exc)
         errors.extend(["atr_ext", "above50dma"])
@@ -842,7 +1029,9 @@ async def main() -> None:
                     "stocks": [], "count": 0, "fetched_at_utc": datetime.now(timezone.utc).isoformat()}
         dma_data = {"ok": False, "filter": "above50dma", "label": ">50 DMA",
                     "stocks": [], "count": 0, "fetched_at_utc": datetime.now(timezone.utc).isoformat()}
-    logger.info("TradingView done (%.1fs) — RS universe: %d tickers", monotonic() - t0, len(rs_lookup))
+    logger.info("TradingView done (%.1fs) — RS universe: %d tickers, fallback df: %s rows",
+                monotonic() - t0, len(rs_lookup),
+                len(tv_df_for_fallback) if tv_df_for_fallback is not None else "N/A")
 
     for filter_key in FILTER_MAP:
         logger.info("=== Processing filter: %s ===", filter_key)
@@ -859,11 +1048,24 @@ async def main() -> None:
                 "fetched_at_utc": datetime.now(timezone.utc).isoformat(),
             }
 
+        # ── Auto-fallback: if Finviz returned too few stocks, use TradingView ──
+        if data["count"] < FINVIZ_FALLBACK_THRESHOLD and tv_df_for_fallback is not None:
+            logger.warning(
+                "[%s] Finviz returned only %d stocks (threshold: %d) — activating TradingView fallback",
+                filter_key, data["count"], FINVIZ_FALLBACK_THRESHOLD,
+            )
+            try:
+                data = _tv_fallback_filter(filter_key, tv_df_for_fallback, rs_lookup)
+            except Exception as exc:
+                logger.error("[%s] TV fallback also failed: %s", filter_key, exc)
+                # Keep the (empty) Finviz result rather than crashing the whole run
+
         all_data[filter_key] = data
         out = PUBLIC_DIR / f"breadth_stocks_{filter_key}.json"
         out.write_text(json.dumps(data, indent=2), encoding="utf-8")
-        logger.info("[%s] wrote %s (%d stocks, %.1fs)",
-                    filter_key, out.name, data["count"], monotonic() - t0)
+        logger.info("[%s] wrote %s (%d stocks, source=%s, %.1fs)",
+                    filter_key, out.name, data["count"],
+                    data.get("source", "finviz"), monotonic() - t0)
 
         # polite delay between filters
         await asyncio.sleep(1.0)
