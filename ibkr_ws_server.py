@@ -47,7 +47,7 @@ CLIENT_ID  = int(os.getenv("TWS_CLIENT_ID", "20")) # must differ from other scri
 WS_PORT    = int(os.getenv("WS_PORT",   "5003"))
 DATA_PATH   = Path(os.getenv("THEMATIC_JSON", "public/thematic_data.json"))
 GAPPER_PATH = Path(os.getenv("GAPPER_JSON",   "public/gapper_data.json"))
-MAX_TICKERS = 85  # max stock ticker subscriptions (IBKR delayed limit ~100, keep buffer)
+MAX_TICKERS = 80  # max stock ticker subscriptions (IBKR limit=100; 80 stocks + 3 internals + buffer = ~95)
 BROADCAST_INTERVAL = 1.0  # seconds between price broadcasts
 
 logging.basicConfig(
@@ -258,10 +258,10 @@ async def subscribe_all(symbols_ranked: list[tuple[str, int]]) -> None:
 async def ibkr_connect(symbols_ranked: list[tuple[str, int]]) -> bool:
     """Try connecting to TWS. Returns True on success."""
     global ibkr_connected
-    ports_to_try = [TWS_PORT]
-    # If default isn't 4002, also try gateway paper as fallback
-    if TWS_PORT != 4002:
-        ports_to_try.append(4002)
+    # Try configured port first, then all common IBKR ports as fallback
+    # 7497=TWS paper, 7496=TWS live, 4002=Gateway paper, 4001=Gateway live
+    all_ports = [TWS_PORT, 7497, 7496, 4002, 4001]
+    ports_to_try = list(dict.fromkeys(all_ports))  # deduplicate, preserve order
 
     for port in ports_to_try:
         try:
