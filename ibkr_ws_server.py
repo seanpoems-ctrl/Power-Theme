@@ -280,14 +280,19 @@ async def ibkr_connect(symbols_ranked: list[tuple[str, int]]) -> bool:
 
 
 def _setup_reconnect(symbols_ranked: list[tuple[str, int]]) -> None:
-    """Register a disconnected callback that retries after 5 s."""
+    """Register a disconnected callback that keeps retrying until TWS is back."""
     async def _reconnect():
         global ibkr_connected
-        log.warning("IBKR disconnected — retrying in 5 s…")
+        log.warning("IBKR disconnected — will retry every 10 s until TWS is back…")
         ibkr_connected = False
         await _broadcast_ibkr_status(False)
-        await asyncio.sleep(5)
-        await ibkr_connect(symbols_ranked)
+        while True:
+            await asyncio.sleep(10)
+            log.info("Attempting reconnect to IBKR…")
+            connected = await ibkr_connect(symbols_ranked)
+            if connected:
+                return
+            log.info("Reconnect failed — retrying in 10 s…")
 
     ib.disconnectedEvent += lambda: asyncio.ensure_future(_reconnect())
 
