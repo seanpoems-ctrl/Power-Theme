@@ -7955,12 +7955,42 @@ const MarketBriefPanel = ({ data }) => {
 
 // ── ETF Trendline Panel ───────────────────────────────────────────────────────
 const PATTERN_ZH = {
-  channel_up:        "上升通道",
-  channel_down:      "下降通道",
+  channel_up:           "上升通道",
+  channel_down:         "下降通道",
   triangle_converging:  "三角收斂",
   triangle_expanding:   "三角擴張",
-  resistance_only:   "單邊阻力",
-  support_only:      "單邊支撐",
+  resistance_only:      "單邊阻力",
+  support_only:         "單邊支撐",
+};
+
+const PATTERN_EN = {
+  channel_up:           "Rising Channel",
+  channel_down:         "Descending Channel",
+  triangle_converging:  "Converging Triangle",
+  triangle_expanding:   "Expanding Triangle",
+  resistance_only:      "Resistance Only",
+  support_only:         "Support Only",
+};
+
+const ETF_T = {
+  zh: {
+    title:      "ETF 趨勢線掃描",
+    loading:    "載入中…",
+    breakout:   "已突破可追",
+    nearRes:    "接近阻力可關注",
+    nearSup:    "接近支撐可布局",
+    noSignal:   "目前無訊號",
+    footer:     (n, s, d) => `掃描 ${n} 支主題 ETF · ${s} 個訊號 · 更新 ${d}`,
+  },
+  en: {
+    title:      "ETF Trendline Scanner",
+    loading:    "Loading…",
+    breakout:   "Breakout — Follow",
+    nearRes:    "Near Resistance — Watch",
+    nearSup:    "Near Support — Accumulate",
+    noSignal:   "No signals",
+    footer:     (n, s, d) => `Scanned ${n} thematic ETFs · ${s} signals · Updated ${d}`,
+  },
 };
 
 const EtfMiniChart = ({ sparkline, resistanceLines, supportLines, atr }) => {
@@ -8036,13 +8066,14 @@ const EtfMiniChart = ({ sparkline, resistanceLines, supportLines, atr }) => {
   );
 };
 
-const EtfTrendlineRow = ({ etf, onTvClick }) => {
+const EtfTrendlineRow = ({ etf, onTvClick, lang = 'zh' }) => {
   const dotColor = { breakout: '#4ade80', near_resistance: '#fbbf24', near_support: '#60a5fa' }[etf.signal] || '#71717a';
   const distColor = etf.signal === 'near_resistance' ? '#f87171' : '#4ade80';
   const distStr   = etf.dist_pct != null
     ? `${etf.dist_pct >= 0 ? '+' : ''}${etf.dist_pct.toFixed(2)}%`
     : '—';
-  const patternZh = PATTERN_ZH[etf.pattern] || etf.pattern || '—';
+  const PMAP      = lang === 'en' ? PATTERN_EN : PATTERN_ZH;
+  const patternZh = PMAP[etf.pattern] || etf.pattern || '—';
 
   return (
     <div style={{
@@ -8096,26 +8127,33 @@ const EtfTrendlineRow = ({ etf, onTvClick }) => {
   );
 };
 
-const EtfTrendlineGroup = ({ icon, title, items, onTvClick }) => (
+const EtfTrendlineGroup = ({ icon, title, items, onTvClick, lang = 'zh' }) => (
   <div style={{ marginBottom: 6 }}>
     <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '6px 14px 4px', borderBottom: '1px solid rgba(63,63,70,0.5)' }}>
       <span style={{ fontSize: 13 }}>{icon}</span>
       <span style={{ fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{title}</span>
     </div>
     {items.length === 0
-      ? <div style={{ padding: '6px 14px', fontSize: 11, color: '#52525b', fontStyle: 'italic' }}>目前無訊號</div>
-      : items.map(e => <EtfTrendlineRow key={e.ticker} etf={e} onTvClick={onTvClick}/>)
+      ? <div style={{ padding: '6px 14px', fontSize: 11, color: '#52525b', fontStyle: 'italic' }}>{ETF_T[lang].noSignal}</div>
+      : items.map(e => <EtfTrendlineRow key={e.ticker} etf={e} onTvClick={onTvClick} lang={lang}/>)
     }
   </div>
 );
 
 const EtfTrendlinePanel = ({ etfData }) => {
   const [tvPopup, setTvPopup] = useState(null);
+  const [lang, setLang] = useState(() => localStorage.getItem('etf_panel_lang') || 'zh');
+  const toggleLang = () => setLang(l => {
+    const next = l === 'zh' ? 'en' : 'zh';
+    localStorage.setItem('etf_panel_lang', next);
+    return next;
+  });
+  const t = ETF_T[lang];
 
   if (!etfData) return (
     <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg p-3">
-      <div style={{ fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>ETF 趨勢線掃描</div>
-      <div style={{ fontSize: 11, color: '#52525b', fontStyle: 'italic' }}>載入中…</div>
+      <div style={{ fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 6 }}>{t.title}</div>
+      <div style={{ fontSize: 11, color: '#52525b', fontStyle: 'italic' }}>{t.loading}</div>
     </div>
   );
 
@@ -8127,16 +8165,30 @@ const EtfTrendlinePanel = ({ etfData }) => {
   return (
     <>
     <div className="bg-zinc-900/60 border border-zinc-700/40 rounded-lg" style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}>
-      <div style={{ padding: '10px 14px 6px', fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em', flexShrink: 0 }}>
-        ETF 趨勢線掃描
+      {/* Header with lang toggle */}
+      <div style={{ padding: '10px 14px 6px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+        <span style={{ fontSize: 11, fontWeight: 700, color: '#71717a', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{t.title}</span>
+        <button
+          onClick={toggleLang}
+          style={{
+            fontSize: 10, fontWeight: 600, padding: '1px 6px', borderRadius: 4, border: '1px solid rgba(113,113,122,0.4)',
+            background: 'rgba(39,39,42,0.6)', color: '#a1a1aa', cursor: 'pointer', lineHeight: '16px',
+            transition: 'color 0.15s, border-color 0.15s',
+          }}
+          onMouseEnter={e => { e.currentTarget.style.color = '#e4e4e7'; e.currentTarget.style.borderColor = 'rgba(161,161,170,0.6)'; }}
+          onMouseLeave={e => { e.currentTarget.style.color = '#a1a1aa'; e.currentTarget.style.borderColor = 'rgba(113,113,122,0.4)'; }}
+          title={lang === 'zh' ? 'Switch to English' : '切換中文'}
+        >
+          {lang === 'zh' ? 'EN' : '中文'}
+        </button>
       </div>
       <div style={{ flex: 1, overflowY: 'auto', scrollbarWidth: 'thin', scrollbarColor: '#52525b transparent', minHeight: 0 }}>
-        <EtfTrendlineGroup icon="🚀" title="已突破可追"       items={breakouts} onTvClick={setTvPopup}/>
-        <EtfTrendlineGroup icon="👀" title="接近阻力可關注"   items={nearRes}   onTvClick={setTvPopup}/>
-        <EtfTrendlineGroup icon="🎯" title="接近支撐可布局"   items={nearSup}   onTvClick={setTvPopup}/>
+        <EtfTrendlineGroup icon="🚀" title={t.breakout} items={breakouts} onTvClick={setTvPopup} lang={lang}/>
+        <EtfTrendlineGroup icon="👀" title={t.nearRes}  items={nearRes}   onTvClick={setTvPopup} lang={lang}/>
+        <EtfTrendlineGroup icon="🎯" title={t.nearSup}  items={nearSup}   onTvClick={setTvPopup} lang={lang}/>
       </div>
       <div style={{ padding: '5px 14px 8px', fontSize: 11, color: '#52525b', borderTop: '1px solid rgba(63,63,70,0.4)', flexShrink: 0 }}>
-        掃描 {etfData.total_scanned} 支主題 ETF · {etfData.total_signals} 個訊號 · 更新 {etfData.last_updated}
+        {t.footer(etfData.total_scanned, etfData.total_signals, etfData.last_updated)}
       </div>
     </div>
     {tvPopup && <TVPopup ticker={tvPopup.ticker} anchorRect={tvPopup.rect} onClose={() => setTvPopup(null)}/>}
