@@ -5399,6 +5399,26 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
   const s50 = mc.sma50_counts;
   const s200= mc.sma200_counts;
 
+  // ── Stockbee breadth_monitor.json — latest row for accurate stat cards ────────
+  // breadth_monitor.py generates this daily from the Stockbee spreadsheet.
+  // We read it here so the stat cards show exact Stockbee values (up4, dn4,
+  // up25Q, T2108) rather than falling back to advancing/new-high proxies.
+  const [bmLatest, setBmLatest] = useState(null);
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/breadth_monitor.json`)
+      .then(r => r.json())
+      .then(d => { if (d?.rows?.length > 0) setBmLatest(d.rows[0]); })
+      .catch(() => {});
+  }, []);
+
+  const _worden = bmLatest?.worden_universe || 0;
+  // Percentages relative to the Stockbee share universe (worden_universe)
+  const bm_up4_pct   = (_worden > 0 && bmLatest?.up_4_pct   != null) ? (bmLatest.up_4_pct   / _worden * 100) : null;
+  const bm_dn4_pct   = (_worden > 0 && bmLatest?.down_4_pct != null) ? (bmLatest.down_4_pct / _worden * 100) : null;
+  const bm_up25q_pct = (_worden > 0 && bmLatest?.up_25_q    != null) ? (bmLatest.up_25_q    / _worden * 100) : null;
+  // T2108: prefer today's Stockbee value; fall back to market_internals (which may be stale)
+  const bm_t2108 = bmLatest?.t2108 ?? internalsData?.t2108;
+
   // ── Leading Themes modal ──────────────────────────────────────────────────────
   const [selectedLeadingTheme, setSelectedLeadingTheme] = useState(null);
   const [ltSort, setLtSort] = useState({ col: null, dir: 'desc' });
@@ -5452,30 +5472,34 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
   const metrics = [
     {
       label: "UP 4%+",
-      value: mc.up4_pct  != null ? `${mc.up4_pct.toFixed(1)}%`  : adv ? `${adv.adv_pct.toFixed(1)}%` : "—",
-      sub:   mc.up4_count != null ? `${mc.up4_count} stocks` : adv ? `${adv.advancing} adv` : null,
-      color: (mc.up4_pct ?? adv?.adv_pct ?? 0) >= 50 ? "text-emerald-400" : "text-red-400",
+      // Stockbee up_4_pct is the absolute count; we show it as % of universe.
+      // Fall back to advancing % only when breadth_monitor.json hasn't loaded yet.
+      value: bm_up4_pct != null ? `${bm_up4_pct.toFixed(1)}%` : adv ? `${adv.adv_pct.toFixed(1)}%` : "—",
+      sub:   bmLatest?.up_4_pct != null ? `${bmLatest.up_4_pct} stocks` : adv ? `${adv.advancing} adv` : null,
+      color: (bm_up4_pct ?? adv?.adv_pct ?? 0) >= 4 ? "text-emerald-400" : "text-red-400",
     },
     {
       label: "DN 4%+",
-      value: mc.dn4_pct  != null ? `${mc.dn4_pct.toFixed(1)}%`  : adv ? `${adv.dec_pct.toFixed(1)}%` : "—",
-      sub:   mc.dn4_count != null ? `${mc.dn4_count} stocks` : adv ? `${adv.declining} dec` : null,
-      color: (mc.dn4_pct ?? adv?.dec_pct ?? 0) >= 25 ? "text-red-400" : "text-zinc-400",
+      value: bm_dn4_pct != null ? `${bm_dn4_pct.toFixed(1)}%` : adv ? `${adv.dec_pct.toFixed(1)}%` : "—",
+      sub:   bmLatest?.down_4_pct != null ? `${bmLatest.down_4_pct} stocks` : adv ? `${adv.declining} dec` : null,
+      color: (bm_dn4_pct ?? adv?.dec_pct ?? 0) >= 4 ? "text-red-400" : "text-zinc-400",
     },
     {
       label: "T2108",
-      value: internalsData?.t2108 != null ? `${internalsData.t2108.toFixed(1)}%` : "—",
-      sub:   internalsData?.t2108 != null
-               ? internalsData.t2108 >= 80 ? "Extreme Overbought"
-               : internalsData.t2108 >= 70 ? "Overbought"
-               : internalsData.t2108 <= 20 ? "Extreme Oversold"
-               : internalsData.t2108 <= 30 ? "Oversold"
+      // T2108 = % of stocks above 40-day MA (Worden Brothers / Stockbee).
+      // breadth_monitor.json has today's Stockbee value; market_internals may be stale.
+      value: bm_t2108 != null ? `${bm_t2108.toFixed(1)}%` : "—",
+      sub:   bm_t2108 != null
+               ? bm_t2108 >= 80 ? "Extreme Overbought"
+               : bm_t2108 >= 70 ? "Overbought"
+               : bm_t2108 <= 20 ? "Extreme Oversold"
+               : bm_t2108 <= 30 ? "Oversold"
                : "Neutral"
                : null,
-      color: internalsData?.t2108 >= 80 ? "text-red-400"
-           : internalsData?.t2108 >= 70 ? "text-amber-400"
-           : internalsData?.t2108 <= 20 ? "text-cyan-300"
-           : internalsData?.t2108 <= 30 ? "text-emerald-400"
+      color: bm_t2108 >= 80 ? "text-red-400"
+           : bm_t2108 >= 70 ? "text-amber-400"
+           : bm_t2108 <= 20 ? "text-cyan-300"
+           : bm_t2108 <= 30 ? "text-emerald-400"
            : "text-zinc-300",
     },
     {
@@ -5504,9 +5528,11 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
     },
     {
       label: "UP 25% (Qtrly)",
-      value: mc.up25_pct != null ? `${mc.up25_pct.toFixed(1)}%` : hl ? `${hl.nh_pct.toFixed(1)}%` : "—",
-      sub:   mc.up25_count != null ? `${mc.up25_count} stocks` : hl ? `${hl.new_high} new highs` : null,
-      color: (mc.up25_pct ?? hl?.nh_pct ?? 0) >= 20 ? "text-emerald-400" : "text-zinc-400",
+      // Stockbee up_25_q = count of stocks up ≥25% in the quarter.
+      // Never fall back to new-highs — that's a completely different metric.
+      value: bm_up25q_pct != null ? `${bm_up25q_pct.toFixed(1)}%` : "—",
+      sub:   bmLatest?.up_25_q != null ? `${bmLatest.up_25_q} stocks` : null,
+      color: (bm_up25q_pct ?? 0) >= 20 ? "text-emerald-400" : "text-zinc-400",
     },
     {
       label: "10Y Yield",
@@ -5521,7 +5547,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
   // ── Right sidebar verdicts ───────────────────────────────────────────────────
   const sma50Val  = s50?.above_pct ?? mc.breadth_50d ?? internalsData?.s5fi_50d;
   const sma200Val = s200?.above_pct ?? mc.breadth_200d ?? internalsData?.mmth_200d;
-  const t2108Val  = internalsData?.t2108;
+  const t2108Val  = bm_t2108;   // prefer Stockbee value from breadth_monitor.json
 
   const shortTermVerdict = (() => {
     if (mc.signal === "green" && (sma50Val ?? 0) >= 55) return { label: "Bullish", cls: "text-emerald-400", detail: "Breadth expanding, momentum leaders valid" };
