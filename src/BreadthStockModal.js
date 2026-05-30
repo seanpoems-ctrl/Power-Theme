@@ -650,7 +650,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
   const customCol = CUSTOM_COL[filter] ?? null;
 
   // Build full column list:
-  // — custom-column scanners (atr_ext, above50dma): Ticker, Company, RS, ADR%, <custom>
+  // — custom-column scanners (atr_ext, above50dma): Ticker, Company, RS, ADR%, $ Vol, <custom>
   // — standard scanners: Ticker, Company, RS, ADR%, $Vol, Change%
   const sortCols = customCol
     ? [
@@ -658,6 +658,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
         { key: "company",       label: "Company",       align: "left",  numeric: false },
         { key: "rs",            label: "RS",            align: "right", numeric: true  },
         { key: "adr_pct",       label: "ADR%",          align: "right", numeric: true  },
+        { key: "dollar_volume", label: "$ Vol",         align: "right", numeric: true  },
         { key: customCol.key,   label: customCol.label, align: "right", numeric: true  },
       ]
     : [
@@ -756,9 +757,14 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
                 {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
               </td>
               {customCol ? (
-                <td className={`px-2 py-1.5 text-right font-mono font-semibold ${customCol.cls}`}>
-                  {customCol.fmt(s[customCol.key])}
-                </td>
+                <>
+                  <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
+                    {fmtDollarVol(s.dollar_volume)}
+                  </td>
+                  <td className={`px-2 py-1.5 text-right font-mono font-semibold ${customCol.cls}`}>
+                    {customCol.fmt(s[customCol.key])}
+                  </td>
+                </>
               ) : (
                 <>
                   <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
@@ -778,7 +784,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
             <td colSpan={3} className="py-1.5 pr-2 text-right font-mono">
               {stocks.length} stocks
             </td>
-            <td colSpan={customCol ? 2 : 4} />
+            <td colSpan={customCol ? 3 : 4} />
           </tr>
         </tfoot>
       </table>
@@ -869,9 +875,14 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
                     {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
                   </span>
                   {customCol ? (
-                    <span className={`w-20 text-right font-mono font-semibold ${customCol.cls}`}>
-                      {customCol.fmt(s[customCol.key])}
-                    </span>
+                    <>
+                      <span className="w-20 text-right font-mono text-zinc-400">
+                        {fmtDollarVol(s.dollar_volume)}
+                      </span>
+                      <span className={`w-20 text-right font-mono font-semibold ${customCol.cls}`}>
+                        {customCol.fmt(s[customCol.key])}
+                      </span>
+                    </>
                   ) : (
                     <span className={`w-20 text-right font-mono font-semibold ${changeCls(perfVal)}`}>
                       {fmtPct(perfVal)}
@@ -967,6 +978,9 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
         } else if (sortKey === "adr_pct") {
           av = a.adr_pct;
           bv = b.adr_pct;
+        } else if (sortKey === "dollar_volume") {
+          av = parseDollarVolume(a.dollar_volume);
+          bv = parseDollarVolume(b.dollar_volume);
         } else {
           av = a[sortKey];
           bv = b[sortKey];
@@ -987,11 +1001,12 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
   // Column config for the stock-row header (mirrors the expanded row layout)
   const GROUP_STOCK_COLS = customCol
     ? [
-        { key: "ticker",       label: "Ticker",       align: "left",  cls: "w-14" },
-        { key: "company",      label: "Company",      align: "left",  cls: "flex-1" },
-        { key: "rs",           label: "RS",           align: "right", cls: "w-12" },
-        { key: "adr_pct",      label: "ADR%",         align: "right", cls: "w-12" },
-        { key: customCol.key,  label: customCol.label, align: "right", cls: "w-20" },
+        { key: "ticker",        label: "Ticker",        align: "left",  cls: "w-14" },
+        { key: "company",       label: "Company",       align: "left",  cls: "flex-1" },
+        { key: "rs",            label: "RS",            align: "right", cls: "w-12" },
+        { key: "adr_pct",       label: "ADR%",          align: "right", cls: "w-12" },
+        { key: "dollar_volume", label: "$ Vol",         align: "right", cls: "w-20" },
+        { key: customCol.key,   label: customCol.label, align: "right", cls: "w-20" },
       ]
     : [
         { key: "ticker",   label: "Ticker",      align: "left",  cls: "w-14" },

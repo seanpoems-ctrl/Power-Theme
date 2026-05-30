@@ -743,15 +743,22 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict, "pd.DataFrame | None"]:
     def _base(row):
         tkr      = str(row["name"])
         industry = str(row.get("industry") or row.get("sector") or "")
+        price    = round(float(row["close"]), 2)
+        avg_v    = row.get("average_volume_10d_calc")
+        dv       = _fmt_dollar_vol(price, int(avg_v)) if avg_v and not pd.isna(avg_v) else "—"
         return {
-            "ticker":      tkr,
-            "company":     str(row.get("description") or ""),
-            "industry":    industry,
-            "price":       round(float(row["close"]), 2),
-            "change_pct":  round(float(row["change"]), 2),
-            "adr_pct":     round(float(row["atr_pct"]), 1),
-            "market_cap_b": _cap_b(row),
-            "rs_ibd":      rs_lookup.get(tkr),
+            "ticker":        tkr,
+            "company":       str(row.get("description") or ""),
+            "industry":      industry,
+            "price":         price,
+            "change_pct":    round(float(row["change"]), 2),
+            # adr_pct reads from "atr_pct" which is set ONCE on the parent df as
+            # ATR/close*100.  The ATR Ext sub-dataframe must NOT overwrite this
+            # column — use "_atr_ratio" for its intermediate calculation instead.
+            "adr_pct":       round(float(row["atr_pct"]), 1),
+            "dollar_volume": dv,
+            "market_cap_b":  _cap_b(row),
+            "rs_ibd":        rs_lookup.get(tkr),
         }
 
     # ── ATR Ext scanner (correct formula) ───────────────────────────────────
@@ -761,12 +768,16 @@ def _build_tv_scanners_sync() -> tuple[dict, dict, dict, "pd.DataFrame | None"]:
     #   3. ATR% Multiple   = % Gain / ATR%
     # Qualifies when |ATR% Multiple| ≥ 10.
     # Restricted to Mkt Cap ≥ $1B for institutional relevance.
+    #
+    # IMPORTANT: use "_atr_ratio" (not "atr_pct") for the intermediate ratio so
+    # we don't overwrite the percentage already stored in df["atr_pct"] = ATR/close*100.
+    # Overwriting it caused _base() to read the raw ratio (≈0.001) and display 0.0%.
     df_atr = df.dropna(subset=["close", "ATR", "SMA50"]).copy()
     df_atr = df_atr[(df_atr["close"] > 0) & (df_atr["ATR"] > 0) & (df_atr["SMA50"] > 0)
                     & (df_atr["market_cap_basic"].notna()) & (df_atr["market_cap_basic"] >= 1_000_000_000)].copy()
-    df_atr["atr_pct"]       = df_atr["ATR"] / df_atr["close"]
+    df_atr["_atr_ratio"]    = df_atr["ATR"] / df_atr["close"]   # raw ratio — NOT atr_pct
     df_atr["pct_gain_50ma"] = (df_atr["close"] - df_atr["SMA50"]) / df_atr["SMA50"]
-    df_atr["atr_ext_val"]   = df_atr["pct_gain_50ma"] / df_atr["atr_pct"]
+    df_atr["atr_ext_val"]   = df_atr["pct_gain_50ma"] / df_atr["_atr_ratio"]
     df_atr = df_atr[df_atr["atr_ext_val"].abs() >= 10].copy()
     df_atr = df_atr.sort_values("atr_ext_val", ascending=False)
 
