@@ -5,9 +5,23 @@ No live socket management. Connects to IB Gateway, fetches data, writes JSON.
 All functions return None or [] on any error — caller decides how to handle.
 """
 
+import asyncio
 import logging
 import os
 from datetime import datetime, timedelta, timezone
+
+# ── asyncio event loop bootstrap ─────────────────────────────────────────────
+# Python 3.10+ no longer creates an implicit event loop in the main thread.
+# ib_insync's IB().connect() internally calls asyncio.get_event_loop(), which
+# raises RuntimeError on 3.10+/3.14 if no loop has been set yet.
+# Force-create one here — before any ib_insync import — so it's always ready.
+try:
+    _loop = asyncio.get_event_loop()
+    if _loop.is_closed():
+        asyncio.set_event_loop(asyncio.new_event_loop())
+except RuntimeError:
+    asyncio.set_event_loop(asyncio.new_event_loop())
+# ─────────────────────────────────────────────────────────────────────────────
 
 logger = logging.getLogger(__name__)
 
@@ -23,16 +37,6 @@ _PORT = int(os.environ.get("IBKR_PORT", "4002"))
 
 try:
     from ib_insync import IB, Stock, Index, ScannerSubscription, util
-    import asyncio
-
-    # Python 3.10+ removed the implicit event loop in the main thread.
-    # ib_insync needs an explicit loop before connecting.
-    try:
-        loop = asyncio.get_event_loop()
-        if loop.is_closed():
-            asyncio.set_event_loop(asyncio.new_event_loop())
-    except RuntimeError:
-        asyncio.set_event_loop(asyncio.new_event_loop())
 
     _ib = IB()
     _ib.connect(_HOST, _PORT, clientId=1, readonly=True, timeout=10)
