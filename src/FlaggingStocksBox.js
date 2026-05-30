@@ -627,7 +627,7 @@ export default function FlaggingStocksBox({ data }) {
           </span>
         </div>
 
-        <div className="px-2 pb-2 flex flex-col gap-0.5 max-h-[420px] overflow-y-auto custom-scrollbar">
+        <div className="px-2 pb-2 flex flex-col gap-0.5 max-h-[307px] overflow-y-auto custom-scrollbar">
           {flagging.length === 0 ? (
             <p className="text-[12px] text-zinc-600 px-2 py-3 text-center">No triangles detected</p>
           ) : (
