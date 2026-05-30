@@ -42,10 +42,11 @@ from ib_insync import IB, Stock, Index
 
 # ── Config ───────────────────────────────────────────────────────────────────
 TWS_HOST   = os.getenv("TWS_HOST",      "127.0.0.1")
-TWS_PORT   = int(os.getenv("TWS_PORT",  "7497"))   # 7497=TWS live | 7496=paper | 4001=GW live | 4002=GW paper
+TWS_PORT   = int(os.getenv("TWS_PORT",  "7497"))   # 7497=TWS paper | 7496=TWS live | 4001=GW live | 4002=GW paper
 CLIENT_ID  = int(os.getenv("TWS_CLIENT_ID", "20")) # must differ from other scripts (ibkr_client uses 1)
 WS_PORT    = int(os.getenv("WS_PORT",   "5003"))
-DATA_PATH  = Path(os.getenv("THEMATIC_JSON", "public/thematic_data.json"))
+DATA_PATH   = Path(os.getenv("THEMATIC_JSON", "public/thematic_data.json"))
+GAPPER_PATH = Path(os.getenv("GAPPER_JSON",   "public/gapper_data.json"))
 MAX_TICKERS = 85  # max stock ticker subscriptions (IBKR delayed limit ~100, keep buffer)
 BROADCAST_INTERVAL = 1.0  # seconds between price broadcasts
 
@@ -118,6 +119,73 @@ def load_tickers_from_json() -> list[tuple[str, int]]:
     ranked = sorted(seen.items(), key=lambda x: x[1], reverse=True)
     log.info("Loaded %d unique tickers from thematic_data.json", len(ranked))
     return ranked
+
+
+def load_gapper_tickers() -> list[tuple[str, int]]:
+    """
+    Return [(ticker, priority), ...] from today's gapper_data.json.
+
+    Gappers are pre-market movers — they MUST be subscribed for live prices
+    on the Pre-Market Gappers tab at 9 AM ET. They get the highest priority
+    (score 1000 + conviction) so they're always subscribed ahead of thematic stocks.
+    Returns [] silently if file missing or from a different day.
+    """
+    if not GAPPER_PATH.exists():
+        log.info("gapper_data.json not found — no gapper tickers added")
+        return []
+    try:
+        with GAPPER_PATH.open() as f:
+            data = json.load(f)
+        gappers = data.get("gappers", [])
+        result = []
+        for g in gappers:
+            tk = g.get("ticker", "").strip().upper()
+            conviction = int(g.get("conviction") or 50)
+            if tk:
+                result.append((tk, 1000 + conviction))  # score >999 guarantees first-slot priority
+        log.info("Loaded %d gapper tickers from gapper_data.json (scan: %s)",
+                 len(result), data.get("scan_time", "unknown"))
+        return result
+    except Exception as exc:
+        log.warning("Could not load gapper_data.json: %s", exc)
+        return []
+
+
+def merge_tickers(
+    gappers: list[tuple[str, int]],
+    thematic: list[tuple[str, int]],
+) -> list[tuple[str, int]]:
+    """
+    Merge gapper + thematic ticker lists with deduplication.
+
+    Gappers always come first (they have priority score >999).
+    Thematic stocks fill remaining slots up to MAX_TICKERS.
+    Returns the combined list, capped at MAX_TICKERS.
+    """
+    seen: set[str] = set()
+    merged: list[tuple[str, int]] = []
+
+    # 1. Gappers first — always included (small list, ~10–20 tickers)
+    for tk, score in gappers:
+        if tk not in seen:
+            seen.add(tk)
+            merged.append((tk, score))
+
+    # 2. Thematic stocks fill remaining capacity
+    remaining = MAX_TICKERS - len(merged)
+    for tk, score in thematic:
+        if remaining <= 0:
+            break
+        if tk not in seen:
+            seen.add(tk)
+            merged.append((tk, score))
+            remaining -= 1
+
+    gapper_n   = len(gappers)
+    thematic_n = len(merged) - gapper_n
+    log.info("Subscription list: %d gappers + %d thematic = %d total (cap=%d)",
+             gapper_n, thematic_n, len(merged), MAX_TICKERS)
+    return merged
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -269,7 +337,10 @@ async def _broadcast_loop() -> None:
 # ─────────────────────────────────────────────────────────────────────────────
 
 async def main() -> None:
-    symbols_ranked = load_tickers_from_json()
+    # Load both sources and merge — gappers always get first-slot priority
+    gapper_tickers   = load_gapper_tickers()
+    thematic_tickers = load_tickers_from_json()
+    symbols_ranked   = merge_tickers(gapper_tickers, thematic_tickers)
 
     # Start WebSocket server — use serve_forever() for compatibility with websockets 13/14+
     log.info("Starting WebSocket server on ws://localhost:%d …", WS_PORT)
