@@ -47,7 +47,7 @@ CLIENT_ID  = int(os.getenv("TWS_CLIENT_ID", "20")) # must differ from other scri
 WS_PORT    = int(os.getenv("WS_PORT",   "5003"))
 DATA_PATH   = Path(os.getenv("THEMATIC_JSON", "public/thematic_data.json"))
 GAPPER_PATH = Path(os.getenv("GAPPER_JSON",   "public/gapper_data.json"))
-MAX_TICKERS = 80  # max stock ticker subscriptions (IBKR limit=100; 80 stocks + 3 internals + buffer = ~95)
+MAX_TICKERS = 60  # max stock ticker subscriptions (IBKR limit=100; TWS uses ~20 lines itself; 60+3+20=83)
 BROADCAST_INTERVAL = 1.0  # seconds between price broadcasts
 
 logging.basicConfig(
