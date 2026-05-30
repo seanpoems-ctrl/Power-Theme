@@ -167,8 +167,8 @@ def _parse_vol(raw: str) -> int | None:
 
 def _fmt_dollar_vol(price: float, vol: int) -> str:
     dv = price * vol
-    if dv >= 1e9: return f"${dv/1e9:.1f}B"
-    if dv >= 1e6: return f"${dv/1e6:.0f}M"
+    if dv >= 1e9: return f"${dv/1e9:.2f}B"
+    if dv >= 1e6: return f"${dv/1e6:.1f}M"
     if dv >= 1e3: return f"${dv/1e3:.0f}K"
     return f"${dv:.0f}"
 

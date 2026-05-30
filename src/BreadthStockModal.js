@@ -390,7 +390,7 @@ function getPerfValue(s, field) {
   return s[field] ?? null;
 }
 
-// Parse dollar_volume which may arrive as a formatted string ("$1.2B") or number
+// Parse dollar_volume (string or number) → raw number
 function parseDollarVolume(v) {
   if (v == null) return null;
   if (typeof v === "number") return v;
@@ -399,6 +399,16 @@ function parseDollarVolume(v) {
   if (!m) return null;
   const mult = { K: 1e3, M: 1e6, B: 1e9, T: 1e12 }[m[2].toUpperCase()] ?? 1;
   return parseFloat(m[1]) * mult;
+}
+
+// Format dollar_volume → "$3.07B" / "$324.6M" / "$12.3K" — matches screenshot style
+function fmtDollarVol(v) {
+  const n = parseDollarVolume(v);
+  if (n == null || isNaN(n)) return "—";
+  if (n >= 1e9) return `$${(n / 1e9).toFixed(2)}B`;
+  if (n >= 1e6) return `$${(n / 1e6).toFixed(1)}M`;
+  if (n >= 1e3) return `$${(n / 1e3).toFixed(0)}K`;
+  return `$${n.toFixed(0)}`;
 }
 
 // ---------------------------------------------------------------------------
@@ -499,7 +509,7 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
     { label: "Price",        value: stock.price != null ? `$${stock.price.toFixed(2)}` : "—", cls: "text-zinc-200" },
     { label: "1D Chg",       value: fmtPct(stock.change_pct),  cls: changeCls(stock.change_pct)  },
     { label: "ADR%",         value: stock.adr_pct != null ? `${stock.adr_pct.toFixed(1)}%` : "—", cls: "text-zinc-200" },
-    { label: "$ Vol",        value: stock.dollar_volume || "—", cls: "text-zinc-200" },
+    { label: "$ Vol",        value: fmtDollarVol(stock.dollar_volume), cls: "text-zinc-200" },
     { label: "Mkt Cap",      value: stock.market_cap_b != null ? `$${stock.market_cap_b.toFixed(1)}B` : "—", cls: "text-zinc-200" },
     { label: changeColLabel, value: fmtPct(perfVal),            cls: changeCls(perfVal)            },
     { label: "1M",           value: fmtPct(stock.perf_1m),     cls: changeCls(stock.perf_1m)      },
@@ -752,7 +762,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
               ) : (
                 <>
                   <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
-                    {s.dollar_volume || "—"}
+                    {fmtDollarVol(s.dollar_volume)}
                   </td>
                   <td className={`px-2 py-1.5 text-right font-mono font-semibold ${changeCls(getPerfValue(s, perfField))}`}>
                     {fmtPct(getPerfValue(s, perfField))}
