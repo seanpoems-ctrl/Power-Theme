@@ -8186,6 +8186,8 @@ const EtfTrendlinePanel = ({ etfData }) => {
 // ─────────────────────────────────────────────────────────────────────────────
 const DailyWatchlistTab = ({ data }) => {
   const [gapperData, setGapperData] = React.useState(null);
+  const [sortCol, setSortCol]       = React.useState("rs_52w");
+  const [sortDir, setSortDir]       = React.useState("desc");
 
   React.useEffect(() => {
     fetch(process.env.PUBLIC_URL + "/gapper_data.json?v=" + Date.now())
@@ -8211,21 +8213,62 @@ const DailyWatchlistTab = ({ data }) => {
     return [...seen.values()];
   }, [data]);
 
-  // ── Clean Bases ── above SMA20/50/200, within 8% of 52W high, RS≥75, ADR≥4%
-  const cleanBases = React.useMemo(() =>
-    allStocks
-      .filter(s =>
-        (s.sma20_pct  ?? -1) > 0 &&
-        (s.sma50_pct  ?? -1) > 0 &&
-        (s.sma200_pct ?? -1) > 0 &&
-        (s.dist_52w_high ?? -99) > -8 &&
-        (s.rs_52w  ?? 0) >= 75 &&
-        (s.adr_pct ?? 0) >= 4
-      )
-      .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))
-      .slice(0, 25),
-    [allStocks]
-  );
+  // Helper: parse dollar_volume string or number → raw number
+  const parseDvol = v => {
+    if (!v || v === "—") return 0;
+    if (typeof v === "number") return v;
+    const s = String(v).replace(/[$,]/g, "");
+    const n = parseFloat(s);
+    if (s.includes("B")) return n * 1e9;
+    if (s.includes("M")) return n * 1e6;
+    if (s.includes("K")) return n * 1e3;
+    return n || 0;
+  };
+
+  // ── Clean Bases ── filtered, then sorted by active column
+  const cleanBases = React.useMemo(() => {
+    const filtered = allStocks.filter(s =>
+      (s.sma20_pct  ?? -1) > 0 &&
+      (s.sma50_pct  ?? -1) > 0 &&
+      (s.sma200_pct ?? -1) > 0 &&
+      (s.dist_52w_high ?? -99) > -8 &&
+      (s.rs_52w  ?? 0) >= 75 &&
+      (s.adr_pct ?? 0) >= 4
+    );
+    const getVal = s => {
+      if (sortCol === "ticker")         return s.ticker ?? "";
+      if (sortCol === "company")        return s.company ?? "";
+      if (sortCol === "theme")          return s.theme ?? "";
+      if (sortCol === "rs_52w")         return s.rs_52w ?? 0;
+      if (sortCol === "adr_pct")        return s.adr_pct ?? 0;
+      if (sortCol === "dist_52w_high")  return s.dist_52w_high ?? -99;
+      if (sortCol === "dollar_volume")  return parseDvol(s.dollar_volume);
+      if (sortCol === "perf_1m")        return s.perf_1m ?? -999;
+      if (sortCol === "setup") {
+        let score = 0;
+        if (s.vcp_stage1) score += 4;
+        if (s.tight)      score += 2;
+        if (s.vdu)        score += 1;
+        return score;
+      }
+      return 0;
+    };
+    return [...filtered].sort((a, b) => {
+      const av = getVal(a), bv = getVal(b);
+      if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+      return sortDir === "asc" ? av - bv : bv - av;
+    }).slice(0, 25);
+  }, [allStocks, sortCol, sortDir]);
+
+  const handleSort = col => {
+    if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
+    else { setSortCol(col); setSortDir(col === "ticker" || col === "company" || col === "theme" ? "asc" : "desc"); }
+  };
+
+  const SortIcon = ({ col }) => {
+    if (sortCol !== col) return <span className="ml-0.5 text-zinc-700">⇅</span>;
+    return <span className="ml-0.5 text-amber-400">{sortDir === "asc" ? "↑" : "↓"}</span>;
+  };
 
   // ── Market Leaders ── RS≥90 in top themes
   const leaders = React.useMemo(() =>
@@ -8247,8 +8290,7 @@ const DailyWatchlistTab = ({ data }) => {
   const distCol = v => { if (v == null) return "text-zinc-500"; const d = Math.abs(v); return d <= 3 ? "text-emerald-400" : d <= 8 ? "text-yellow-400" : "text-zinc-400"; };
   const fmtPct = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
   const fmtDvol = v => {
-    if (!v || v === "—") return "—";
-    const n = typeof v === "number" ? v : parseFloat(String(v).replace(/[$,]/g, "")) * (String(v).includes("B") ? 1e9 : String(v).includes("M") ? 1e6 : String(v).includes("K") ? 1e3 : 1);
+    const n = parseDvol(v);
     if (n >= 1e9) return `$${(n/1e9).toFixed(1)}B`;
     if (n >= 1e6) return `$${(n/1e6).toFixed(0)}M`;
     return "—";
@@ -8352,16 +8394,24 @@ const DailyWatchlistTab = ({ data }) => {
           <div className="overflow-x-auto rounded-lg border border-zinc-800">
             <table className="w-full text-xs border-collapse">
               <thead>
-                <tr className="bg-zinc-900 border-b border-zinc-800 text-zinc-500 text-[11px] uppercase tracking-wide">
-                  <th className="text-left px-3 py-2 font-medium">Ticker</th>
-                  <th className="text-left px-3 py-2 font-medium hidden md:table-cell">Company</th>
-                  <th className="text-left px-3 py-2 font-medium hidden lg:table-cell">Theme</th>
-                  <th className="text-right px-3 py-2 font-medium">RS</th>
-                  <th className="text-right px-3 py-2 font-medium">ADR%</th>
-                  <th className="text-right px-3 py-2 font-medium">52W Dist</th>
-                  <th className="text-right px-3 py-2 font-medium hidden sm:table-cell">$Vol</th>
-                  <th className="text-right px-3 py-2 font-medium hidden sm:table-cell">1M%</th>
-                  <th className="text-left px-3 py-2 font-medium">Setup</th>
+                <tr className="bg-zinc-900 border-b border-zinc-800 text-zinc-500 text-[11px] uppercase tracking-wide select-none">
+                  {[
+                    { col: "ticker",        label: "Ticker",   align: "left",  cls: "" },
+                    { col: "company",       label: "Company",  align: "left",  cls: "hidden md:table-cell" },
+                    { col: "theme",         label: "Theme",    align: "left",  cls: "hidden lg:table-cell" },
+                    { col: "rs_52w",        label: "RS",       align: "right", cls: "" },
+                    { col: "adr_pct",       label: "ADR%",     align: "right", cls: "" },
+                    { col: "dist_52w_high", label: "52W Dist", align: "right", cls: "" },
+                    { col: "dollar_volume", label: "$Vol",     align: "right", cls: "hidden sm:table-cell" },
+                    { col: "perf_1m",       label: "1M%",      align: "right", cls: "hidden sm:table-cell" },
+                    { col: "setup",         label: "Setup",    align: "left",  cls: "" },
+                  ].map(({ col, label, align, cls }) => (
+                    <th key={col}
+                        onClick={() => handleSort(col)}
+                        className={`px-3 py-2 font-medium cursor-pointer hover:text-zinc-300 transition-colors ${align === "right" ? "text-right" : "text-left"} ${cls}`}>
+                      {label}<SortIcon col={col}/>
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
@@ -8407,25 +8457,40 @@ const DailyWatchlistTab = ({ data }) => {
         <div>
           <Sec title="Gapper Watch" sub={`${gapperData?.scan_time ?? ""} · conviction ≥55`} />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {topGappers.map(g => (
-              <div key={g.ticker} className="px-3 py-2.5 rounded-lg bg-zinc-800/60 border border-zinc-700/40">
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono font-bold text-cyan-400 text-sm">{g.ticker}</span>
-                    <span className="text-emerald-400 font-mono font-bold text-sm">+{g.gap_pct != null ? g.gap_pct.toFixed(1) : "—"}%</span>
+            {topGappers.map(g => {
+              const topHeadline = (g.headlines ?? []).find(h => h && h.length > 10);
+              return (
+                <div key={g.ticker} className="px-3 py-2.5 rounded-lg bg-zinc-800/60 border border-zinc-700/40 flex flex-col gap-1.5">
+                  {/* Header row */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-bold text-cyan-400 text-sm">{g.ticker}</span>
+                      <span className="text-emerald-400 font-mono font-bold text-sm">+{g.gap_pct != null ? g.gap_pct.toFixed(1) : "—"}%</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      {g.category && (
+                        <span className="text-[10px] px-1.5 py-0.5 rounded border bg-amber-500/10 text-amber-300 border-amber-500/30 font-medium">{g.category}</span>
+                      )}
+                      <span className="text-[10px] font-mono text-zinc-500">Conv:{g.conviction}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    {g.category && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded border bg-amber-500/10 text-amber-300 border-amber-500/30 font-medium">{g.category}</span>
-                    )}
-                    <span className="text-[10px] font-mono text-zinc-500">Conv:{g.conviction}</span>
-                  </div>
+                  {/* Why it's gapping — Gemini reasoning */}
+                  {g.reasoning && (
+                    <p className="text-[11px] text-zinc-200 leading-snug line-clamp-3">{g.reasoning}</p>
+                  )}
+                  {/* Top news headline */}
+                  {topHeadline && (
+                    <p className="text-[10px] text-zinc-500 leading-snug line-clamp-2 border-t border-zinc-700/50 pt-1">
+                      📰 {topHeadline}
+                    </p>
+                  )}
+                  {/* Trade strategy */}
+                  {g.hypothesis && (
+                    <p className="text-[10px] text-amber-400/80 leading-snug line-clamp-1">▸ {g.hypothesis}</p>
+                  )}
                 </div>
-                {g.hypothesis && (
-                  <p className="text-[10px] text-zinc-400 leading-relaxed line-clamp-2">{g.hypothesis}</p>
-                )}
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
