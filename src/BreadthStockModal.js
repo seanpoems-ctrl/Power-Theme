@@ -1101,12 +1101,12 @@ function normalizeHistoricalStock(s) {
     change_pct:     s.c   ?? null,
     adr_pct:        s.adr ?? null,
     dollar_volume:  s.dv  ?? null,
+    market_cap_b:   s.mc  ?? null,   // stored as "mc" since 2026-05-30
     perf_qtd:       s.qtd ?? null,
     perf_mtd:       s.mtd ?? null,
     perf_34d:       s.d34 ?? null,
     rs_ibd:         s.rs  ?? null,
     industry:       s.ind ?? null,
-    market_cap_b:   null,
     perf_1m:        null,
     perf_3m:        null,
     atr_ext_val:    s.ae  ?? null,   // stored in compact archive as "ae"

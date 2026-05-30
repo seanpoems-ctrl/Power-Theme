@@ -977,6 +977,7 @@ def _build_compact_history(all_data: dict[str, dict], date_et: str) -> None:
                 "c":    s.get("change_pct"),
                 "adr":  s.get("adr_pct"),
                 "dv":   s.get("dollar_volume"),      # e.g. "$12.5M"
+                "mc":   s.get("market_cap_b"),       # Market cap in billions
                 "qtd":  s.get("perf_qtd"),
                 "mtd":  s.get("perf_mtd"),
                 "d34":  s.get("perf_34d"),
