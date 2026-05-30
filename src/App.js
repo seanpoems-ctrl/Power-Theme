@@ -8177,6 +8177,269 @@ const EtfTrendlinePanel = ({ etfData }) => {
   );
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Daily Watchlist Tab
+// Auto-computes three sections from thematic + gapper data:
+//   1. Clean Bases  — above all 3 SMAs, within 8% of 52W high, RS≥75, ADR≥4%
+//   2. Market Leaders — RS≥90 cards with theme context
+//   3. Gapper Watch — high conviction pre-market plays
+// ─────────────────────────────────────────────────────────────────────────────
+const DailyWatchlistTab = ({ data }) => {
+  const [gapperData, setGapperData] = React.useState(null);
+
+  React.useEffect(() => {
+    fetch(process.env.PUBLIC_URL + "/gapper_data.json?v=" + Date.now())
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d) setGapperData(d); })
+      .catch(() => {});
+  }, []);
+
+  // Flatten all stocks from all themes/subthemes — keep highest RS per ticker
+  const allStocks = React.useMemo(() => {
+    if (!data?.themes) return [];
+    const seen = new Map();
+    for (const theme of data.themes) {
+      for (const sub of theme.subthemes || []) {
+        for (const s of sub.stocks || []) {
+          const prev = seen.get(s.ticker);
+          if (!prev || (s.rs_52w ?? 0) > (prev.rs_52w ?? 0)) {
+            seen.set(s.ticker, { ...s, theme: theme.name, subtheme: sub.name });
+          }
+        }
+      }
+    }
+    return [...seen.values()];
+  }, [data]);
+
+  // ── Clean Bases ── above SMA20/50/200, within 8% of 52W high, RS≥75, ADR≥4%
+  const cleanBases = React.useMemo(() =>
+    allStocks
+      .filter(s =>
+        (s.sma20_pct  ?? -1) > 0 &&
+        (s.sma50_pct  ?? -1) > 0 &&
+        (s.sma200_pct ?? -1) > 0 &&
+        (s.dist_52w_high ?? -99) > -8 &&
+        (s.rs_52w  ?? 0) >= 75 &&
+        (s.adr_pct ?? 0) >= 4
+      )
+      .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))
+      .slice(0, 25),
+    [allStocks]
+  );
+
+  // ── Market Leaders ── RS≥90 in top themes
+  const leaders = React.useMemo(() =>
+    allStocks
+      .filter(s => (s.rs_52w ?? 0) >= 90)
+      .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))
+      .slice(0, 15),
+    [allStocks]
+  );
+
+  // ── Top Themes ── first 5 from thematic data (already ranked)
+  const topThemes = data?.themes?.slice(0, 5) ?? [];
+
+  // ── Gapper Watch ── conviction ≥ 55
+  const topGappers = (gapperData?.gappers ?? []).filter(g => (g.conviction ?? 0) >= 55).slice(0, 6);
+
+  // Helpers
+  const rsCol = v => !v ? "text-zinc-500" : v >= 90 ? "text-emerald-300 font-bold" : v >= 80 ? "text-emerald-400" : v >= 70 ? "text-green-400" : "text-zinc-400";
+  const distCol = v => { if (v == null) return "text-zinc-500"; const d = Math.abs(v); return d <= 3 ? "text-emerald-400" : d <= 8 ? "text-yellow-400" : "text-zinc-400"; };
+  const fmtPct = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
+  const fmtDvol = v => {
+    if (!v || v === "—") return "—";
+    const n = typeof v === "number" ? v : parseFloat(String(v).replace(/[$,]/g, "")) * (String(v).includes("B") ? 1e9 : String(v).includes("M") ? 1e6 : String(v).includes("K") ? 1e3 : 1);
+    if (n >= 1e9) return `$${(n/1e9).toFixed(1)}B`;
+    if (n >= 1e6) return `$${(n/1e6).toFixed(0)}M`;
+    return "—";
+  };
+
+  const mc = data?.market_condition;
+  const signal = mc?.signal ?? "yellow";
+  const sigCls = signal === "green" ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/30"
+    : signal === "red" ? "text-rose-400 bg-rose-500/10 border-rose-500/30"
+    : "text-yellow-400 bg-yellow-500/10 border-yellow-500/30";
+  const sigLabel = signal === "green" ? "🟢 Market: Uptrend" : signal === "red" ? "🔴 Market: Downtrend" : "🟡 Market: Caution";
+
+  const Sec = ({ title, badge, sub }) => (
+    <div className="flex items-baseline gap-2 mb-3">
+      <h3 className="text-sm font-semibold text-zinc-100">{title}</h3>
+      {badge != null && <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{badge}</span>}
+      {sub && <span className="text-xs text-zinc-600">{sub}</span>}
+    </div>
+  );
+
+  return (
+    <div className="max-w-[1400px] mx-auto px-4 pt-4 pb-8 space-y-8">
+
+      {/* ── Market Pulse bar ───────────────────────────────── */}
+      <div className="flex flex-wrap items-center gap-3">
+        <span className={`px-3 py-1.5 rounded-lg border text-xs font-bold tracking-wide ${sigCls}`}>{sigLabel}</span>
+        {mc?.spy?.sma50_pct != null && (
+          <span className="text-xs font-mono text-zinc-400">SPY vs SMA50: <span className={mc.spy.sma50_pct > 0 ? "text-emerald-400" : "text-rose-400"}>{fmtPct(mc.spy.sma50_pct)}</span></span>
+        )}
+        {mc?.qqq?.sma50_pct != null && (
+          <span className="text-xs font-mono text-zinc-400">QQQ vs SMA50: <span className={mc.qqq.sma50_pct > 0 ? "text-emerald-400" : "text-rose-400"}>{fmtPct(mc.qqq.sma50_pct)}</span></span>
+        )}
+        {data?.last_updated && <span className="text-xs text-zinc-600 ml-auto">Data: {data.last_updated}</span>}
+      </div>
+
+      {/* ── Row 1: Themes + Leaders ────────────────────────── */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+        {/* Leading Themes */}
+        <div>
+          <Sec title="Leading Themes" badge={topThemes.length} sub="ranked by momentum" />
+          <div className="space-y-1.5">
+            {topThemes.map((theme, i) => {
+              const stocks = theme.subthemes?.flatMap(s => s.stocks || []) ?? [];
+              const topS = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))[0];
+              const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
+              const perf1m = stocks.slice(0, 5).reduce((s, st) => s + (st.perf_1m ?? 0), 0) / Math.min(stocks.length, 5);
+              return (
+                <div key={theme.name} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40">
+                  <span className="text-zinc-600 font-mono text-[11px] w-4 shrink-0">{i + 1}</span>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs font-medium text-zinc-200 truncate">{theme.name}</div>
+                    <div className="text-[10px] text-zinc-600">{stocks.length} stocks{avgRs ? ` · avg RS ${avgRs}` : ""}</div>
+                  </div>
+                  {topS && <span className="text-[10px] font-mono text-cyan-400 shrink-0">{topS.ticker}</span>}
+                  <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf1m > 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                    {perf1m > 0 ? "+" : ""}{perf1m.toFixed(1)}%
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Market Leaders cards */}
+        <div className="lg:col-span-2">
+          <Sec title="Market Leaders" badge={leaders.length} sub="RS≥90 · sorted by strength" />
+          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2">
+            {leaders.map(s => (
+              <a key={s.ticker}
+                 href={`https://finviz.com/quote.ashx?t=${s.ticker}`}
+                 target="_blank" rel="noopener noreferrer"
+                 className="block px-2.5 py-2 rounded-lg bg-zinc-800/60 border border-zinc-700/40 hover:border-cyan-500/40 hover:bg-zinc-800 transition-all">
+                <div className="flex items-center justify-between mb-0.5">
+                  <span className="font-mono font-bold text-cyan-400 text-sm">{s.ticker}</span>
+                  <span className={`text-xs font-mono font-bold ${rsCol(s.rs_52w)}`}>{s.rs_52w}</span>
+                </div>
+                <div className="text-[9px] text-zinc-600 truncate mb-1">{s.theme}</div>
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono text-zinc-500">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : ""}</span>
+                  <span className={`text-[10px] font-mono font-semibold ${(s.perf_1m ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                    {fmtPct(s.perf_1m)}
+                  </span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Clean Bases ────────────────────────────────────── */}
+      <div>
+        <Sec
+          title="Clean Bases — Buy Watch"
+          badge={cleanBases.length}
+          sub="Above SMA20/50/200 · ≤8% from 52W high · RS≥75 · ADR≥4%"
+        />
+        {cleanBases.length === 0 ? (
+          <p className="text-sm text-zinc-500 italic py-4">No stocks meeting all criteria right now — market may be extended or in correction.</p>
+        ) : (
+          <div className="overflow-x-auto rounded-lg border border-zinc-800">
+            <table className="w-full text-xs border-collapse">
+              <thead>
+                <tr className="bg-zinc-900 border-b border-zinc-800 text-zinc-500 text-[11px] uppercase tracking-wide">
+                  <th className="text-left px-3 py-2 font-medium">Ticker</th>
+                  <th className="text-left px-3 py-2 font-medium hidden md:table-cell">Company</th>
+                  <th className="text-left px-3 py-2 font-medium hidden lg:table-cell">Theme</th>
+                  <th className="text-right px-3 py-2 font-medium">RS</th>
+                  <th className="text-right px-3 py-2 font-medium">ADR%</th>
+                  <th className="text-right px-3 py-2 font-medium">52W Dist</th>
+                  <th className="text-right px-3 py-2 font-medium hidden sm:table-cell">$Vol</th>
+                  <th className="text-right px-3 py-2 font-medium hidden sm:table-cell">1M%</th>
+                  <th className="text-left px-3 py-2 font-medium">Setup</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cleanBases.map((s, i) => (
+                  <tr key={s.ticker} className={`border-b border-zinc-800/50 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/30"}`}>
+                    <td className="px-3 py-2">
+                      <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noopener noreferrer"
+                         className="font-mono font-bold text-cyan-400 hover:underline">{s.ticker}</a>
+                    </td>
+                    <td className="px-3 py-2 hidden md:table-cell">
+                      <span className="text-zinc-400 max-w-[150px] truncate block">{s.company}</span>
+                    </td>
+                    <td className="px-3 py-2 hidden lg:table-cell">
+                      <span className="text-zinc-600 max-w-[140px] truncate block text-[11px]">{s.theme}</span>
+                    </td>
+                    <td className={`px-3 py-2 text-right font-mono font-bold ${rsCol(s.rs_52w)}`}>{s.rs_52w ?? "—"}</td>
+                    <td className="px-3 py-2 text-right font-mono text-zinc-300">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
+                    <td className={`px-3 py-2 text-right font-mono font-semibold ${distCol(s.dist_52w_high)}`}>
+                      {s.dist_52w_high != null ? `${s.dist_52w_high.toFixed(1)}%` : "—"}
+                    </td>
+                    <td className="px-3 py-2 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtDvol(s.dollar_volume)}</td>
+                    <td className={`px-3 py-2 text-right font-mono font-semibold hidden sm:table-cell ${(s.perf_1m ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                      {fmtPct(s.perf_1m)}
+                    </td>
+                    <td className="px-3 py-2">
+                      <div className="flex gap-1 flex-wrap">
+                        {s.vcp_stage1 && <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30">VCP</span>}
+                        {s.tight      && <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30">Tight</span>}
+                        {s.vdu        && <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30">VDU</span>}
+                        {!s.vcp_stage1 && !s.tight && !s.vdu && <span className="text-zinc-700 text-[9px]">—</span>}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      {/* ── Gapper Watch ─────────────────────────────────── */}
+      {topGappers.length > 0 && (
+        <div>
+          <Sec title="Gapper Watch" sub={`${gapperData?.scan_time ?? ""} · conviction ≥55`} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {topGappers.map(g => (
+              <div key={g.ticker} className="px-3 py-2.5 rounded-lg bg-zinc-800/60 border border-zinc-700/40">
+                <div className="flex items-center justify-between mb-1.5">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono font-bold text-cyan-400 text-sm">{g.ticker}</span>
+                    <span className="text-emerald-400 font-mono font-bold text-sm">+{g.gap_pct != null ? g.gap_pct.toFixed(1) : "—"}%</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    {g.category && (
+                      <span className="text-[10px] px-1.5 py-0.5 rounded border bg-amber-500/10 text-amber-300 border-amber-500/30 font-medium">{g.category}</span>
+                    )}
+                    <span className="text-[10px] font-mono text-zinc-500">Conv:{g.conviction}</span>
+                  </div>
+                </div>
+                {g.hypothesis && (
+                  <p className="text-[10px] text-zinc-400 leading-relaxed line-clamp-2">{g.hypothesis}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {topGappers.length === 0 && (
+        <div>
+          <Sec title="Gapper Watch" sub="pre-market scan" />
+          <p className="text-sm text-zinc-600 italic">No high-conviction gappers today (scan runs 8:05 AM ET on trading days).</p>
+        </div>
+      )}
+
+    </div>
+  );
+};
+
 export default function App() {
   const [lang, setLang] = useState(() => localStorage.getItem('ui_lang') || 'zh');
   const toggleLang = useCallback(() => setLang(l => { const next = l === 'zh' ? 'en' : 'zh'; localStorage.setItem('ui_lang', next); return next; }), []);
@@ -8657,6 +8920,9 @@ const filtered = useMemo(() => {
               <button onClick={() => setTab("news")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "news" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Calendar
               </button>
+              <button onClick={() => setTab("watchlist")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "watchlist" ? "border-amber-400 text-amber-300" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                ★ Watchlist
+              </button>
             </div>
             <div className="flex items-center gap-2">
               <button onClick={() => setTab("journal")} className={`px-2.5 py-1 text-[12px] font-medium rounded-md border transition-colors whitespace-nowrap ${tab === "journal" ? "bg-blue-500/15 border-blue-500/30 text-blue-400" : "bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-300"}`}>
@@ -8729,7 +8995,7 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "leaders" ? (
+      {tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "leaders" ? (
         <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-6">
           <ThematicLeaders etfHoldings={data?.etf_holdings || {}}/>
         </div>
