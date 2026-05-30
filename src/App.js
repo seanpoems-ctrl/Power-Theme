@@ -7940,7 +7940,7 @@ const PATTERN_ZH = {
 const EtfMiniChart = ({ sparkline, resistanceLines, supportLines, atr }) => {
   const closes = (sparkline || []).slice(-60);
   const n = closes.length;
-  if (n < 3) return <div style={{ width: 140, height: 44 }}/>;
+  if (n < 3) return <div style={{ width: 180, height: 60 }}/>;
 
   const avgMove = closes.reduce((s, c, i) => i === 0 ? 0 : s + Math.abs(c - closes[i-1]), 0) / (n - 1);
   const wick = (atr || avgMove * 1.5) * 0.3;
@@ -7958,7 +7958,7 @@ const EtfMiniChart = ({ sparkline, resistanceLines, supportLines, atr }) => {
   const maxP = Math.max(...allPts);
   const range = maxP - minP || 1;
 
-  const VW = 180, VH = 44, PAD = 2;
+  const VW = 180, VH = 60, PAD = 2;
   const barW = 2, barGap = 1;
   const toY = p => PAD + (1 - (p - minP) / range) * (VH - 2 * PAD);
   const toX = i => i * (barW + barGap);
@@ -7995,7 +7995,7 @@ const EtfMiniChart = ({ sparkline, resistanceLines, supportLines, atr }) => {
   ];
 
   return (
-    <svg viewBox={`0 0 ${VW} ${VH}`} width="140" height="44" style={{ display: 'block', flexShrink: 0 }}>
+    <svg viewBox={`0 0 ${VW} ${VH}`} width="180" height="60" style={{ display: 'block', flexShrink: 0 }}>
       {bars.map((b, i) => (
         <g key={i}>
           <line x1={b.x + 1} y1={b.wickTop} x2={b.x + 1} y2={b.wickBot} stroke="#666" strokeWidth="0.7"/>
