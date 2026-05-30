@@ -23,6 +23,16 @@ _PORT = int(os.environ.get("IBKR_PORT", "4002"))
 
 try:
     from ib_insync import IB, Stock, Index, ScannerSubscription, util
+    import asyncio
+
+    # Python 3.10+ removed the implicit event loop in the main thread.
+    # ib_insync needs an explicit loop before connecting.
+    try:
+        loop = asyncio.get_event_loop()
+        if loop.is_closed():
+            asyncio.set_event_loop(asyncio.new_event_loop())
+    except RuntimeError:
+        asyncio.set_event_loop(asyncio.new_event_loop())
 
     _ib = IB()
     _ib.connect(_HOST, _PORT, clientId=1, readonly=True, timeout=10)
