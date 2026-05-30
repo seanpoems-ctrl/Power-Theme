@@ -4,7 +4,7 @@ from __future__ import annotations
 Emergency News Monitor — High-Impact Breaking News Alerts
 
 Runs every 5 min on weekdays via GitHub Actions.
-Sources: CNBC, Yahoo Finance, Finviz
+Sources: CNBC, Finviz
 
 Logic:
   1. Fetch headlines from the last 90 min
@@ -42,7 +42,6 @@ ALERT_TTL_HOURS = 12   # Expire alerts older than N hours
 RSS_FEEDS = [
     ("CNBC",        "https://www.cnbc.com/id/100003114/device/rss/rss.html"),
     ("CNBC Markets","https://www.cnbc.com/id/10000664/device/rss/rss.html"),
-    ("Yahoo Finance","https://finance.yahoo.com/news/rssindex"),
 ]
 
 
@@ -217,7 +216,7 @@ def send_telegram_gov_policy(headline: dict) -> None:
 
 # ── Gemini Grading ──────────────────────────────────────────────────────────
 
-ALLOWED_SOURCES = {"CNBC", "CNBC Markets", "Yahoo Finance", "Finviz"}
+ALLOWED_SOURCES = {"CNBC", "CNBC Markets", "Finviz"}
 
 
 def grade_with_gemini(headlines: list[dict]) -> list[dict]:
