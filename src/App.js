@@ -3325,7 +3325,7 @@ const MarketInternalsV2 = ({ mc, internalsData, generatedAt }) => {
         </div>
       </div>
       <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 mt-2 pt-2 border-t border-zinc-800/60 text-[11px] font-mono">
-        <span className="text-zinc-500">TICK</span><span className={`text-right ${tick == null ? "text-zinc-600" : tick >= 0 ? "text-emerald-400" : "text-red-500"}`}>{tick == null ? "—" : (tick > 0 ? "+" : "") + tick}</span>
+        <span className="text-zinc-500">A/D Net</span><span className={`text-right ${tick == null ? "text-zinc-600" : tick > 500 ? "text-emerald-400" : tick < -500 ? "text-red-500" : "text-zinc-300"}`}>{tick == null ? "—" : (tick >= 0 ? "+" : "") + Math.round(tick)}</span>
         <span className="text-zinc-500">TRIN</span><span className="text-zinc-300 text-right">{trin == null ? "—" : `${trin.toFixed(2)} ${interpret("trin", trin)}`}</span>
         <span className="text-zinc-500">T2108</span><span className="text-zinc-300 text-right">{t2108 == null ? "—" : `${t2108.toFixed(2)} ${interpret("t2108", t2108)}`}</span>
       </div>
@@ -8593,10 +8593,8 @@ const filtered = useMemo(() => {
               {wsStatus === "connecting" && (
                 <span className="px-2 py-0.5 text-[11px] font-bold rounded-full border font-mono bg-yellow-500/10 text-yellow-500 border-yellow-500/30 whitespace-nowrap">◌ WS...</span>
               )}
-              {ibkrThemesData?.data_source === "ibkr" ? (
+              {ibkrThemesData?.data_source === "ibkr" && (
                 <span className="px-2 py-0.5 text-[11px] font-bold rounded-full border font-mono bg-emerald-500/15 text-emerald-400 border-emerald-500/40 whitespace-nowrap">● IBKR Live</span>
-              ) : (
-                <span className="px-2 py-0.5 text-[11px] font-bold rounded-full border font-mono bg-zinc-800/60 text-zinc-500 border-zinc-700/40 whitespace-nowrap">◐ IBKR Offline</span>
               )}
               {data && (
                 <div className="text-right leading-tight">
