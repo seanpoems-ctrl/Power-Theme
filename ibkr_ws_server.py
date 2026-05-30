@@ -134,7 +134,7 @@ def load_gapper_tickers() -> list[tuple[str, int]]:
         log.info("gapper_data.json not found — no gapper tickers added")
         return []
     try:
-        with GAPPER_PATH.open() as f:
+        with GAPPER_PATH.open(encoding="utf-8", errors="replace") as f:
             data = json.load(f)
         gappers = data.get("gappers", [])
         result = []
