@@ -3217,13 +3217,13 @@ const INTERNALS_NOTES = [
     ],
   },
   {
-    label: "TICK",
-    desc: "NYSE intraday upticks minus downticks",
+    label: "A/D Net",
+    desc: "Advancing minus Declining stocks (EOD breadth from TradingView screener)",
     lines: [
-      { text: ">+800 → institutional buying, very strong", active: v => v > 800, signal: "green" },
-      { text: "+200 to +800 → bullish", active: v => v >= 200 && v <= 800, signal: "green" },
-      { text: "-200 to +200 → neutral", active: v => v > -200 && v < 200, signal: "yellow" },
-      { text: "<-800 → panic selling", active: v => v < -800, signal: "red" },
+      { text: ">+500 → broad participation, bullish breadth", active: v => v > 500, signal: "green" },
+      { text: "+100 to +500 → mild breadth strength", active: v => v >= 100 && v <= 500, signal: "green" },
+      { text: "-500 to +100 → neutral / mixed internals", active: v => v > -500 && v < 100, signal: "yellow" },
+      { text: "<-500 → more stocks falling than rising", active: v => v < -500, signal: "red" },
     ],
   },
   {
@@ -3341,7 +3341,7 @@ const MarketInternalsV2 = ({ mc, internalsData, generatedAt }) => {
               "SMA200 ↑": { raw: sma200pct,                display: `${sma200pct.toFixed(0)}%` },
               "52W Hi":   { raw: hiLoRatio,                 display: `${newHigh} (Hi/Lo ${newLow > 0 ? `ratio ${hiLoRatio?.toFixed(1)}` : "—"})` },
               "52W Lo":   { raw: newLow,                   display: `${newLow}` },
-              "TICK":     { raw: tick,                     display: tick != null ? (tick > 0 ? `+${tick}` : `${tick}`) : null },
+              "A/D Net":  { raw: tick,                     display: tick != null ? (tick >= 0 ? `+${Math.round(tick)}` : `${Math.round(tick)}`) : null },
               "TRIN":     { raw: trin,                     display: trin != null ? trin.toFixed(2) : null },
               "T2108":    { raw: t2108,                    display: t2108 != null ? `${t2108.toFixed(1)}%` : null },
             };
@@ -5588,8 +5588,8 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
   // ── Internals block ──────────────────────────────────────────────────────────
   const internals = [
     { label: "VIX",    value: internalsData?.vix      != null ? internalsData.vix.toFixed(2)      : "—", color: internalsData?.vix >= 25 ? "text-red-400" : internalsData?.vix <= 15 ? "text-emerald-400" : "text-zinc-300" },
-    { label: "TICK",   value: internalsData?.tick     != null ? internalsData.tick.toFixed(0)     : "—", color: internalsData?.tick > 600 ? "text-emerald-400" : internalsData?.tick < -600 ? "text-red-400" : "text-zinc-300" },
-    { label: "TRIN",   value: internalsData?.trin     != null ? internalsData.trin.toFixed(2)     : "—", color: internalsData?.trin > 1.5 ? "text-red-400" : internalsData?.trin < 0.7 ? "text-emerald-400" : "text-zinc-300" },
+    { label: "A/D Net", value: internalsData?.tick != null ? (internalsData.tick >= 0 ? `+${Math.round(internalsData.tick)}` : `${Math.round(internalsData.tick)}`) : "—", color: internalsData?.tick > 500 ? "text-emerald-400" : internalsData?.tick < -500 ? "text-red-400" : "text-zinc-300" },
+    { label: "TRIN",   value: internalsData?.trin     != null ? internalsData.trin.toFixed(2)     : "—", color: internalsData?.trin > 1.3 ? "text-red-400" : internalsData?.trin < 0.7 ? "text-emerald-400" : "text-zinc-300" },
     { label: "S5FI",   value: internalsData?.s5fi_50d  != null ? `${internalsData.s5fi_50d.toFixed(1)}%`  : mc.breadth_50d  != null ? `${mc.breadth_50d.toFixed(1)}%`  : "—", color: "text-zinc-300" },
     { label: "MMTH",   value: internalsData?.mmth_200d != null ? `${internalsData.mmth_200d.toFixed(1)}%` : mc.breadth_200d != null ? `${mc.breadth_200d.toFixed(1)}%` : "—", color: "text-zinc-300" },
     { label: "10Y",    value: internalsData?.yield_10y != null ? `${internalsData.yield_10y.toFixed(2)}%` : "—", color: internalsData?.yield_10y >= 4.5 ? "text-red-400" : "text-zinc-300" },

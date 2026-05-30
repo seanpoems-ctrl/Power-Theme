@@ -70,43 +70,97 @@ def _fetch_vix() -> tuple[float | None, str]:
     return None, "null"
 
 
-# ─── TICK / TRIN (IBKR live session only) ────────────────────────────────────
+# ─── A/D Net (TICK proxy) & TRIN ─────────────────────────────────────────────
 
-def _fetch_ibkr_index(symbol: str, exchange: str = "NYSE") -> tuple[float | None, str]:
+def _fetch_tick_trin() -> tuple[float | None, float | None, str]:
     """
-    Request a market-internal index via IBKR reqMktData.
-    $TICK and $TRIN are NYSE-disseminated; only available during the regular session.
-    Returns (value, source_label).
+    Compute A/D Net (advancing − declining issues) and TRIN (Arms Index) from
+    TradingView screener end-of-day data.
+
+    The 'tick' field stores the A/D Net — a daily breadth measure that captures
+    the same signal as NYSE TICK (net breadth) but calculated at market close.
+
+    TRIN (Arms Index) = (adv_count / dec_count) / (adv_volume / dec_volume)
+      < 0.7 → bullish (volume concentrated in advancers)
+      0.7–1.3 → neutral
+      > 1.3 → bearish (volume concentrated in decliners)
+
+    Falls back to IBKR reqMktData $TICK/$TRIN if a live session is detected
+    (paper/live trading session running locally).
+
+    Returns (ad_net, trin, source_label).
     """
+    # Try IBKR first if live session is available
     try:
         import ibkr_client
-        if not ibkr_client.IS_LIVE or ibkr_client._ib is None:
-            return None, "null"
+        if ibkr_client.IS_LIVE and ibkr_client._ib is not None:
+            from ib_insync import Index
+            ib = ibkr_client._ib
 
-        from ib_insync import Index
-        ib = ibkr_client._ib
+            def _ibkr_val(sym: str) -> float | None:
+                c  = Index(sym, "NYSE")
+                tk = ib.reqMktData(c, "", False, False)
+                ib.sleep(2)
+                v  = tk.last
+                if v is None or (isinstance(v, float) and v != v):
+                    v = tk.close
+                ib.cancelMktData(c)
+                return _round2(v) if v is not None and not (isinstance(v, float) and v != v) else None
 
-        contract = Index(symbol, exchange)
-        ticker   = ib.reqMktData(contract, "", False, False)
-        ib.sleep(2)
+            tick_ibkr = _ibkr_val("$TICK")
+            trin_ibkr = _ibkr_val("$TRIN")
+            if tick_ibkr is not None or trin_ibkr is not None:
+                logger.info("TICK/TRIN from IBKR: tick=%s, trin=%s", tick_ibkr, trin_ibkr)
+                return tick_ibkr, trin_ibkr, "ibkr"
+    except Exception as exc:
+        logger.warning("IBKR TICK/TRIN failed (continuing to TV fallback): %s", exc)
 
-        # TICK/TRIN appear in .last or .close depending on session
-        val = ticker.last
-        if val is None or (isinstance(val, float) and val != val):
-            val = ticker.close
-        if val is None or (isinstance(val, float) and val != val):
-            ib.cancelMktData(contract)
-            logger.warning("%s: no market data returned (outside session?)", symbol)
-            return None, "null"
+    # TradingView screener — compute from EOD change and volume
+    try:
+        from tradingview_screener import Query, col as tv_col  # type: ignore
+        _, df = (
+            Query()
+            .select("name", "change", "volume")
+            .where(
+                tv_col("close") >= 1,
+                tv_col("average_volume_10d_calc") >= 50_000,
+                tv_col("type").isin(["stock", "dr"]),
+                tv_col("exchange").isin(["NYSE", "NASDAQ", "AMEX"]),
+            )
+            .limit(10_000)
+            .get_scanner_data()
+        )
+        if df is None or df.empty:
+            logger.warning("TICK/TRIN: TradingView returned empty DataFrame")
+            return None, None, "null"
 
-        ib.cancelMktData(contract)
-        result = _round2(val)
-        logger.info("%s from IBKR: %s", symbol, result)
-        return result, "ibkr"
+        df = df.dropna(subset=["change", "volume"])
+        df = df[df["volume"] > 0]
+
+        adv = df[df["change"] > 0]
+        dec = df[df["change"] < 0]
+
+        adv_n   = int(len(adv))
+        dec_n   = int(len(dec))
+        adv_vol = float(adv["volume"].sum())
+        dec_vol = float(dec["volume"].sum())
+
+        ad_net = adv_n - dec_n          # stored in the 'tick' JSON field
+
+        if dec_n > 0 and dec_vol > 0 and adv_vol > 0:
+            trin = round((adv_n / dec_n) / (adv_vol / dec_vol), 2)
+        else:
+            trin = None
+
+        logger.info(
+            "A/D Net: %+d (adv=%d, dec=%d)  |  TRIN: %s [tradingview]",
+            ad_net, adv_n, dec_n, trin,
+        )
+        return float(ad_net), trin, "tradingview"
 
     except Exception as exc:
-        logger.warning("IBKR %s failed: %s", symbol, exc)
-        return None, "null"
+        logger.warning("TICK/TRIN TradingView failed: %s", exc)
+        return None, None, "null"
 
 
 # ─── Breadth from scraper RS universe ────────────────────────────────────────
@@ -222,13 +276,16 @@ def build_internals(
     else:
         s5fi, mmth, breadth_src = _fetch_breadth()
 
-    vix,      vix_src   = _fetch_vix()
-    tick,     tick_src  = _fetch_ibkr_index("$TICK")
-    trin,     trin_src  = _fetch_ibkr_index("$TRIN")
-    t2108,    t2_src    = _fetch_t2108()
-    yield_10y, y10_src  = _fetch_yield_10y()
+    vix,        vix_src           = _fetch_vix()
+    tick, trin, tick_trin_src    = _fetch_tick_trin()
+    t2108,      t2_src           = _fetch_t2108()
+    yield_10y,  y10_src          = _fetch_yield_10y()
 
-    ibkr_client.disconnect()
+    try:
+        import ibkr_client
+        ibkr_client.disconnect()
+    except Exception:
+        pass
 
     return {
         "generated_at": datetime.now(tz=timezone.utc).isoformat(),
@@ -241,8 +298,8 @@ def build_internals(
         "yield_10y": yield_10y,
         "data_sources": {
             "vix":       vix_src,
-            "tick":      tick_src,
-            "trin":      trin_src,
+            "tick":      tick_trin_src,
+            "trin":      tick_trin_src,
             "s5fi_50d":  breadth_src,
             "mmth_200d": breadth_src,
             "t2108":     t2_src,
