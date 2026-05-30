@@ -8311,11 +8311,12 @@ const DailyWatchlistTab = ({ data }) => {
     return <span className="ml-0.5 text-rose-400">{shortSortDir === "asc" ? "↑" : "↓"}</span>;
   };
 
-  // ── Market Leaders ── RS≥90, $Vol≥$100M (eliminates small/micro caps)
+  // ── Market Leaders ── RS≥90, Mkt Cap≥$10B, $Vol≥$100M
   const leaders = React.useMemo(() =>
     allStocks
       .filter(s =>
         (s.rs_52w ?? 0) >= 90 &&
+        (s.mkt_cap_b != null ? s.mkt_cap_b >= 10 : parseDvol(s.dollar_volume) >= 100_000_000) &&
         parseDvol(s.dollar_volume) >= 100_000_000
       )
       .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))
@@ -8415,7 +8416,7 @@ const DailyWatchlistTab = ({ data }) => {
 
         {/* Market Leaders cards */}
         <div className="lg:col-span-2">
-          <Sec title="Market Leaders" badge={leaders.length} sub="RS≥90 · $Vol≥$100M · sorted by strength" />
+          <Sec title="Market Leaders" badge={leaders.length} sub="RS≥90 · Mkt Cap≥$10B · $Vol≥$100M · sorted by strength" />
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2">
             {leaders.map(s => (
               <a key={s.ticker}
@@ -8428,7 +8429,11 @@ const DailyWatchlistTab = ({ data }) => {
                 </div>
                 <div className="text-[9px] text-zinc-600 truncate mb-1">{s.theme}</div>
                 <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-mono text-zinc-500">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : ""}</span>
+                  <span className="text-[10px] font-mono text-zinc-500">
+                    {s.mkt_cap_b != null
+                      ? `$${s.mkt_cap_b >= 1000 ? (s.mkt_cap_b/1000).toFixed(1)+"T" : s.mkt_cap_b.toFixed(0)+"B"}`
+                      : s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : ""}
+                  </span>
                   <span className={`text-[10px] font-mono font-semibold ${(s.perf_1m ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
                     {fmtPct(s.perf_1m)}
                   </span>

@@ -83,6 +83,25 @@ def parse_pct(s: str) -> float | None:
         return None
 
 
+def parse_market_cap_b(s: str) -> float | None:
+    """Parse Finviz market cap string ('8.26B', '467.80M', '1.23T') → float in billions."""
+    if not s or s in ("-", ""):
+        return None
+    s = s.strip().upper()
+    try:
+        if s.endswith("T"):
+            return round(float(s[:-1]) * 1_000, 3)   # trillions → billions
+        if s.endswith("B"):
+            return round(float(s[:-1]), 3)
+        if s.endswith("M"):
+            return round(float(s[:-1]) / 1_000, 3)
+        if s.endswith("K"):
+            return round(float(s[:-1]) / 1_000_000, 3)
+        return round(float(s.replace(",", "")) / 1e9, 3)
+    except ValueError:
+        return None
+
+
 def parse_vol(s: str) -> int:
     s = s.strip().upper()
     try:
@@ -949,6 +968,7 @@ def fetch_stock_detail(ticker: str) -> dict | None:
             "volume": volume, "dollar_volume": round(price * volume),
             "avg_dollar_volume": round(price * avg_vol) if avg_vol > 0 else 0,
             "adr_pct": adr_pct,
+            "mkt_cap_b": parse_market_cap_b(snap.get("Market Cap", "")),
             "52w_high": round(h52, 2) if h52 > 0 else None,
             "52w_low": round(l52, 2) if l52 > 0 else None,
             "avg_volume": avg_vol,
