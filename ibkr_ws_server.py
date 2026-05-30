@@ -350,8 +350,18 @@ async def main() -> None:
     # Set up reconnect handler before first connect
     _setup_reconnect(symbols_ranked)
 
-    # Connect to IBKR (non-fatal if TWS is offline)
-    await ibkr_connect(symbols_ranked)
+    # Connect in background — keeps retrying every 10s until IB Gateway / TWS opens.
+    # This allows the script to auto-start at Windows login and connect the moment
+    # the user opens IB Gateway, with no manual intervention.
+    async def _connect_with_retry():
+        while True:
+            connected = await ibkr_connect(symbols_ranked)
+            if connected:
+                return
+            log.info("IB Gateway / TWS not open yet — retrying in 10 s…")
+            await asyncio.sleep(10)
+
+    asyncio.ensure_future(_connect_with_retry())
 
     # Broadcast loop runs forever; server stays alive until Ctrl+C
     try:
