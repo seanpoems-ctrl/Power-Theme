@@ -8250,7 +8250,7 @@ const EtfRsHistogram = ({ data = [] }) => {
   const minV = Math.min(...data);
   const maxV = Math.max(...data);
   const range = Math.max(maxV - minV, 0.001);
-  const lastIdx = data.length - 1;
+  const peakIdx = data.indexOf(maxV);
   return (
     <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="block">
       {data.map((v, i) => {
@@ -8258,8 +8258,8 @@ const EtfRsHistogram = ({ data = [] }) => {
         const norm = (v - minV) / range;
         const h = Math.max(2, 2 + norm * (H - 4));
         const y = H - h;
-        // Last bar = dark green (current day marker); others = bright or light green
-        const fill = i === lastIdx ? "#14532d" : v >= 1.0 ? "#22c55e" : "#86efac";
+        // Peak bar = dark green marker; others = bright or light green
+        const fill = i === peakIdx ? "#14532d" : v >= 1.0 ? "#22c55e" : "#86efac";
         return <rect key={i} x={x} y={y} width={barW} height={h} fill={fill} rx="0.3"/>;
       })}
     </svg>
