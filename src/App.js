@@ -8136,17 +8136,12 @@ const EtfRsHistogram = ({ data = [] }) => {
   );
 };
 
-const EtfHoldingsModal = ({ etf, theme, holdings, onClose }) => {
+// ── ETF Holdings Table — inline view, replaces ETF RS table when a ticker is clicked ──
+const EtfHoldingsTable = ({ etf, theme, holdings, onBack }) => {
   const [sortCol, setSortCol] = useState("perf_1d");
   const [sortDir, setSortDir] = useState("desc");
 
-  const fmtMktCap = v => {
-    if (v == null) return "—";
-    if (v >= 1e9) return `$${(v / 1e9).toFixed(2)}B`;
-    if (v >= 1e6) return `$${(v / 1e6).toFixed(1)}M`;
-    return `$${v.toFixed(0)}`;
-  };
-  const fmtVol = v => {
+  const fmt = (v, b = 1e9) => {
     if (v == null) return "—";
     if (v >= 1e9) return `$${(v / 1e9).toFixed(2)}B`;
     if (v >= 1e6) return `$${(v / 1e6).toFixed(1)}M`;
@@ -8154,24 +8149,25 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose }) => {
   };
 
   const sorted = useMemo(() => {
-    const arr = [...holdings];
-    arr.sort((a, b) => {
+    return [...holdings].sort((a, b) => {
       const av = a[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
       const bv = b[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
       if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
       return sortDir === "asc" ? av - bv : bv - av;
     });
-    return arr;
   }, [holdings, sortCol, sortDir]);
 
   const handleSort = col => {
     if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
-    else { setSortCol(col); setSortDir("desc"); }
+    else { setSortCol(col); setSortDir(col === "ticker" || col === "name" ? "asc" : "desc"); }
   };
 
-  const Th = ({ col, label, align = "right" }) => (
+  const Th = ({ col, label, align = "right", w }) => (
     <th onClick={() => handleSort(col)}
-        className={`px-3 py-2 font-semibold whitespace-nowrap cursor-pointer hover:text-zinc-200 select-none text-zinc-400 text-[11px] uppercase tracking-wide ${align === "left" ? "text-left" : "text-right"}`}>
+        style={w ? { width: w } : {}}
+        className={`px-3 py-2.5 font-semibold whitespace-nowrap cursor-pointer hover:text-zinc-100 select-none
+          text-zinc-400 text-[11px] uppercase tracking-wide border-r border-zinc-800 last:border-r-0
+          ${align === "left" ? "text-left" : "text-right"}`}>
       {label}
       {sortCol === col
         ? <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>
@@ -8179,78 +8175,74 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose }) => {
     </th>
   );
 
+  const p1dCell = v => {
+    if (v == null) return <span className="text-zinc-600">—</span>;
+    const cls = v >= 10 ? "text-emerald-300 font-bold"
+      : v >= 3  ? "text-emerald-400"
+      : v >= 0  ? "text-emerald-400/80"
+      : v >= -3 ? "text-rose-400/80"
+      : "text-rose-400";
+    return <span className={cls}>{v >= 0 ? "+" : ""}{v.toFixed(2)}%</span>;
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
-         onClick={onClose}>
-      <div className="bg-zinc-950 border border-zinc-800 rounded-xl shadow-2xl w-full max-w-4xl mx-4 max-h-[85vh] flex flex-col"
-           onClick={e => e.stopPropagation()}>
-        {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 flex-shrink-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-sm font-bold text-zinc-100">{theme}</span>
-            <span className="font-mono text-xs font-semibold text-sky-400 bg-sky-500/10 border border-sky-500/30 px-1.5 py-0.5 rounded">{etf}</span>
-            <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{sorted.length} stocks · holdings</span>
-          </div>
-          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 ml-2">
-            <X size={16} />
-          </button>
-        </div>
-        {/* Table */}
-        <div className="overflow-auto flex-1">
-          {sorted.length === 0 ? (
-            <div className="text-center py-12 text-zinc-600 text-sm">No holdings data available</div>
-          ) : (
-            <table className="w-full text-xs border-collapse">
-              <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800">
-                <tr>
-                  <th className="px-3 py-2 text-left text-zinc-500 font-semibold text-[11px] w-8">#</th>
-                  <Th col="ticker"        label="Ticker"    align="left" />
-                  <Th col="name"          label="Company"   align="left" />
-                  <Th col="mkt_cap"       label="Mkt Cap"               />
-                  <Th col="dollar_volume" label="$ Vol"                  />
-                  <Th col="adr_pct"       label="ADR%"                   />
-                  <Th col="rs"            label="RS"                     />
-                  <Th col="perf_1d"       label="1D Change%"             />
-                </tr>
-              </thead>
-              <tbody>
-                {sorted.map((h, i) => {
-                  const p1d = h.perf_1d;
-                  const p1dColor = p1d == null ? "text-zinc-600"
-                    : p1d >= 10 ? "text-emerald-300 font-bold"
-                    : p1d >= 3  ? "text-emerald-400"
-                    : p1d >= 0  ? "text-emerald-400/70"
-                    : p1d >= -3 ? "text-rose-400/70"
-                    : "text-rose-400";
-                  return (
-                    <tr key={`${h.ticker}-${i}`}
-                        className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 ${i % 2 === 0 ? "bg-zinc-900/20" : ""}`}>
-                      <td className="px-3 py-1.5 text-zinc-600 text-[11px]">{i + 1}</td>
-                      <td className="px-3 py-1.5">
-                        <a href={`https://finviz.com/quote.ashx?t=${h.ticker}`} target="_blank" rel="noreferrer"
-                           onClick={e => e.stopPropagation()}
-                           className="font-mono font-bold text-cyan-400 hover:underline text-[12px]">{h.ticker}</a>
-                      </td>
-                      <td className="px-3 py-1.5 text-zinc-300 max-w-[180px] truncate">{h.name || "—"}</td>
-                      <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{fmtMktCap(h.mkt_cap)}</td>
-                      <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{fmtVol(h.dollar_volume)}</td>
-                      <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : "—"}</td>
-                      <td className="px-3 py-1.5 text-right font-mono">
-                        {h.rs != null
-                          ? <span className={h.rs >= 80 ? "text-emerald-400 font-bold" : h.rs >= 60 ? "text-zinc-200" : "text-zinc-500"}>{h.rs}</span>
-                          : <span className="text-zinc-600">—</span>}
-                      </td>
-                      <td className={`px-3 py-1.5 text-right font-mono font-semibold ${p1dColor}`}>
-                        {p1d != null ? `${p1d >= 0 ? "+" : ""}${p1d.toFixed(2)}%` : "—"}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          )}
-        </div>
+    <div>
+      {/* Header row — matches screenshot 2 style */}
+      <div className="flex items-center gap-3 mb-3 flex-wrap">
+        <button onClick={onBack}
+                className="flex items-center gap-1 text-xs text-zinc-500 hover:text-zinc-200 transition-colors border border-zinc-700 rounded px-2 py-1">
+          ← Back
+        </button>
+        <span className="text-sm font-bold text-zinc-100">{theme}</span>
+        <span className="font-mono text-xs font-semibold text-sky-400 bg-sky-500/10 border border-sky-500/30 px-1.5 py-0.5 rounded">{etf}</span>
+        <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{sorted.length} stocks · historical snapshot</span>
+        <span className="text-xs text-zinc-600 ml-auto">click any column header to sort</span>
       </div>
+
+      {sorted.length === 0 ? (
+        <div className="rounded-lg border border-zinc-800 py-16 text-center text-zinc-600 text-sm">
+          No holdings data — run scraper to populate ETF holdings
+        </div>
+      ) : (
+        <div className="rounded-lg border border-zinc-800 overflow-x-auto">
+          <table className="w-full text-xs border-collapse">
+            <thead className="sticky top-0 bg-zinc-900/95 border-b border-zinc-700">
+              <tr>
+                <th className="px-3 py-2.5 text-left text-zinc-500 font-semibold text-[11px] w-8 border-r border-zinc-800">#</th>
+                <Th col="ticker"        label="Ticker"      align="left"  w="90px"  />
+                <Th col="name"          label="Company"     align="left"            />
+                <Th col="mkt_cap"       label="Mkt Cap"                   w="90px"  />
+                <Th col="dollar_volume" label="$ Vol"                     w="90px"  />
+                <Th col="adr_pct"       label="ADR%"                      w="70px"  />
+                <Th col="rs"            label="RS"                        w="55px"  />
+                <Th col="perf_1d"       label="1D Change%"                w="100px" />
+              </tr>
+            </thead>
+            <tbody>
+              {sorted.map((h, i) => (
+                <tr key={`${h.ticker}-${i}`}
+                    className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors ${i % 2 === 0 ? "" : "bg-zinc-900/30"}`}>
+                  <td className="px-3 py-2 text-zinc-600 text-[11px] border-r border-zinc-800">{i + 1}</td>
+                  <td className="px-3 py-2 border-r border-zinc-800">
+                    <a href={`https://finviz.com/quote.ashx?t=${h.ticker}`} target="_blank" rel="noreferrer"
+                       className="font-mono font-bold text-cyan-400 hover:underline">{h.ticker}</a>
+                  </td>
+                  <td className="px-3 py-2 text-zinc-300 border-r border-zinc-800 max-w-[200px] truncate">{h.name || "—"}</td>
+                  <td className="px-3 py-2 text-right font-mono text-zinc-400 border-r border-zinc-800">{fmt(h.mkt_cap)}</td>
+                  <td className="px-3 py-2 text-right font-mono text-zinc-400 border-r border-zinc-800">{fmt(h.dollar_volume)}</td>
+                  <td className="px-3 py-2 text-right font-mono text-zinc-400 border-r border-zinc-800">{h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : "—"}</td>
+                  <td className="px-3 py-2 text-right font-mono border-r border-zinc-800">
+                    {h.rs != null
+                      ? <span className={h.rs >= 80 ? "text-emerald-400 font-bold" : h.rs >= 60 ? "text-zinc-200" : "text-zinc-500"}>{h.rs}</span>
+                      : <span className="text-zinc-600">—</span>}
+                  </td>
+                  <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_1d)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
@@ -8313,6 +8305,18 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
   if (!etfRsData) return (
     <p className="text-sm text-zinc-600 italic py-8 text-center">Loading ETF RS data…</p>
   );
+
+  // ── If an ETF is selected, swap entire view to holdings table ───────────────
+  if (selectedEtf) {
+    return (
+      <EtfHoldingsTable
+        etf={selectedEtf.ticker}
+        theme={selectedEtf.theme}
+        holdings={selectedEtf.holdings}
+        onBack={() => setSelectedEtf(null)}
+      />
+    );
+  }
 
   return (
     <>
@@ -8408,14 +8412,6 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
         </table>
       </div>
     </div>
-    {selectedEtf && (
-      <EtfHoldingsModal
-        etf={selectedEtf.ticker}
-        theme={selectedEtf.theme}
-        holdings={selectedEtf.holdings}
-        onClose={() => setSelectedEtf(null)}
-      />
-    )}
     </>
   );
 };
