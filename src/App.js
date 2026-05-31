@@ -8381,16 +8381,6 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
                 </td>
                 {/* Theme name — plain text */}
                 <td className="px-2 py-1 text-zinc-300 text-[11px] border-r border-zinc-800 max-w-[180px] truncate">{e.theme}</td>
-                {/* RS % (1M) */}
-                <td className="px-2 py-1 text-right font-mono font-bold text-[12px] border-r border-zinc-800">
-                  <span className={`${(e.rs_1m_pct ?? 0) >= 90 ? "text-emerald-300" : (e.rs_1m_pct ?? 0) >= 75 ? "text-emerald-400" : (e.rs_1m_pct ?? 0) >= 50 ? "text-zinc-300" : "text-rose-400"}`}>
-                    {e.rs_1m_pct != null ? `${e.rs_1m_pct}%` : "—"}
-                  </span>
-                </td>
-                {/* 1-Month Sparkline */}
-                <td className="px-2 py-0.5 border-r border-zinc-800">
-                  <EtfSparkline data={e.sparkline ?? []} />
-                </td>
                 {/* Score */}
                 <td className="px-2 py-1 text-right font-mono font-bold text-[12px] border-r border-zinc-800">
                   <span className={(e.score ?? 0) >= 70 ? "text-emerald-300" : (e.score ?? 0) >= 50 ? "text-zinc-200" : "text-rose-400"}>
