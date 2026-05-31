@@ -8165,7 +8165,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose }) => {
   const Th = ({ col, label, align = "right" }) => (
     <th onClick={() => handleSort(col)}
         className={`px-3 py-2.5 font-semibold whitespace-nowrap cursor-pointer hover:text-zinc-100 select-none
-          text-zinc-400 text-[11px] uppercase tracking-wide border-r border-zinc-800 last:border-r-0
+          text-zinc-400 text-[11px] uppercase tracking-wide
           ${align === "left" ? "text-left" : "text-right"}`}>
       {label}
       {sortCol === col
@@ -8220,7 +8220,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose }) => {
             <table className="w-full text-xs border-collapse">
               <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-700">
                 <tr>
-                  <th className="px-3 py-2.5 text-left text-zinc-500 font-semibold text-[11px] w-8 border-r border-zinc-800">#</th>
+                  <th className="px-3 py-2.5 text-left text-zinc-500 font-semibold text-[11px] w-8">#</th>
                   <Th col="ticker"        label="Ticker"    align="left" />
                   <Th col="name"          label="Company"   align="left" />
                   <Th col="mkt_cap"       label="Mkt Cap"               />
@@ -8234,17 +8234,17 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose }) => {
                 {sorted.map((h, i) => (
                   <tr key={`${h.ticker}-${i}`}
                       className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors ${i % 2 === 0 ? "" : "bg-zinc-900/40"}`}>
-                    <td className="px-3 py-2 text-zinc-600 text-[11px] border-r border-zinc-800">{i + 1}</td>
-                    <td className="px-3 py-2 border-r border-zinc-800">
+                    <td className="px-3 py-2 text-zinc-600 text-[11px]">{i + 1}</td>
+                    <td className="px-3 py-2">
                       <a href={`https://finviz.com/quote.ashx?t=${h.ticker}`} target="_blank" rel="noreferrer"
                          onClick={e => e.stopPropagation()}
                          className="font-mono font-bold text-cyan-400 hover:underline">{h.ticker}</a>
                     </td>
-                    <td className="px-3 py-2 text-zinc-300 border-r border-zinc-800 max-w-[200px] truncate">{h.name || "—"}</td>
-                    <td className="px-3 py-2 text-right font-mono text-zinc-400 border-r border-zinc-800">{fmt(h.mkt_cap)}</td>
-                    <td className="px-3 py-2 text-right font-mono text-zinc-400 border-r border-zinc-800">{fmt(h.dollar_volume)}</td>
-                    <td className="px-3 py-2 text-right font-mono text-zinc-400 border-r border-zinc-800">{h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : "—"}</td>
-                    <td className="px-3 py-2 text-right font-mono border-r border-zinc-800">
+                    <td className="px-3 py-2 text-zinc-300 max-w-[200px] truncate">{h.name || "—"}</td>
+                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmt(h.mkt_cap)}</td>
+                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmt(h.dollar_volume)}</td>
+                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : "—"}</td>
+                    <td className="px-3 py-2 text-right font-mono">
                       {h.rs != null
                         ? <span className={h.rs >= 80 ? "text-emerald-400 font-bold" : h.rs >= 60 ? "text-zinc-200" : "text-zinc-500"}>{h.rs}</span>
                         : <span className="text-zinc-600">—</span>}
