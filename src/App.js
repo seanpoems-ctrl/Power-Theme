@@ -8260,7 +8260,8 @@ const EtfRsTable = ({ etfRsData }) => {
   };
 
   const sorted = useMemo(() => [...etfs].sort((a, b) => {
-    const key = sortCol === "rs_pct" ? "rs" : sortCol;
+    const keyMap = { "rs_1m_pct": "rs_1m", "rs_pct": "rs" };
+    const key = keyMap[sortCol] ?? sortCol;
     const av = a[key] ?? (sortDir === "asc" ? Infinity : -Infinity);
     const bv = b[key] ?? (sortDir === "asc" ? Infinity : -Infinity);
     if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
@@ -8287,7 +8288,8 @@ const EtfRsTable = ({ etfRsData }) => {
   const COLS = [
     { col: "ticker",        label: "Group",       align: "left"  },
     { col: "theme",         label: "Group",       align: "left"  },
-    { col: "rs_pct",        label: "RS %",        align: "right" },
+    { col: "rs_1m_pct",     label: "RS % (1M)",   align: "right" },
+    { col: "rs_pct",        label: "RS % (12M)",  align: "right" },
     { col: "_chart",        label: "1-Mth Chart", align: "left",  nosort: true },
     { col: "_rs_bar",       label: "1-Mth RS",    align: "left",  nosort: true },
     { col: "perf_intraday", label: "% Intraday",  align: "right" },
@@ -8337,11 +8339,15 @@ const EtfRsTable = ({ etfRsData }) => {
                 </td>
                 {/* Theme name */}
                 <td className="px-2 py-1 text-zinc-300 text-[11px] border-r border-zinc-800 max-w-[180px] truncate">{e.theme}</td>
-                {/* RS % */}
+                {/* RS % (1M) */}
                 <td className="px-2 py-1 text-right font-mono font-bold text-[12px] border-r border-zinc-800">
-                  <span className={`${(e.rs_pct ?? 0) >= 90 ? "text-emerald-300" : (e.rs_pct ?? 0) >= 75 ? "text-emerald-400" : (e.rs_pct ?? 0) >= 50 ? "text-zinc-300" : "text-rose-400"}`}>
-                    {e.rs_pct != null ? `${e.rs_pct}%` : "—"}
+                  <span className={`${(e.rs_1m_pct ?? 0) >= 90 ? "text-emerald-300" : (e.rs_1m_pct ?? 0) >= 75 ? "text-emerald-400" : (e.rs_1m_pct ?? 0) >= 50 ? "text-zinc-300" : "text-rose-400"}`}>
+                    {e.rs_1m_pct != null ? `${e.rs_1m_pct}%` : "—"}
                   </span>
+                </td>
+                {/* RS % (12M) */}
+                <td className="px-2 py-1 text-right font-mono text-[11px] text-zinc-500 border-r border-zinc-800">
+                  {e.rs_pct != null ? `${e.rs_pct}%` : "—"}
                 </td>
                 {/* 1-Month Sparkline */}
                 <td className="px-2 py-0.5 border-r border-zinc-800">

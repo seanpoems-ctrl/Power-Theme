@@ -249,8 +249,11 @@ def build_etf_rs() -> dict:
             "sparkline":      sparkline,
             "rs_histogram":   rs_histogram,
             "ibd_raw":        ibd_raw,
-            "rs":             None,   # filled after ranking
-            "rs_pct":         None,   # 0-100 display value
+            "rs_1m_raw":      p1m,     # 1-month return used for 1M RS ranking
+            "rs":             None,    # 12M composite rank (1-99)
+            "rs_pct":         None,    # 12M RS display %
+            "rs_1m":          None,    # 1M rank (1-99)
+            "rs_1m_pct":      None,    # 1M RS display %
         })
         logger.info("  ✓ %-6s  1D=%+5.1f%%  1M=%+6.1f%%  52WH=%+5.1f%%",
                     tkr,
@@ -259,16 +262,26 @@ def build_etf_rs() -> dict:
                     pct_off_52wh if pct_off_52wh is not None else float("nan"),
                     )
 
-    # ── Rank to 1-99 → display as RS% (rounded to nearest 5) ────────────────
-    scored = [r for r in rows if r["ibd_raw"] is not None]
-    scored.sort(key=lambda r: r["ibd_raw"])
-    n = len(scored)
-    for i, r in enumerate(scored):
+    # ── Rank 12M composite (IBD) ──────────────────────────────────────────────
+    scored_12m = [r for r in rows if r["ibd_raw"] is not None]
+    scored_12m.sort(key=lambda r: r["ibd_raw"])
+    n = len(scored_12m)
+    for i, r in enumerate(scored_12m):
         rs = max(1, min(99, round((i / max(n - 1, 1)) * 98 + 1)))
         r["rs"]     = rs
-        r["rs_pct"] = min(100, round(rs / 5) * 5)   # round to nearest 5 for display
+        r["rs_pct"] = min(100, round(rs / 5) * 5)
 
-    result_rows = sorted(rows, key=lambda r: -(r["rs"] or 0))
+    # ── Rank 1M (pure 1-month return) ────────────────────────────────────────
+    scored_1m = [r for r in rows if r["rs_1m_raw"] is not None]
+    scored_1m.sort(key=lambda r: r["rs_1m_raw"])
+    n1 = len(scored_1m)
+    for i, r in enumerate(scored_1m):
+        rs1 = max(1, min(99, round((i / max(n1 - 1, 1)) * 98 + 1)))
+        r["rs_1m"]     = rs1
+        r["rs_1m_pct"] = min(100, round(rs1 / 5) * 5)
+
+    # Sort by 1M RS descending (primary display order)
+    result_rows = sorted(rows, key=lambda r: -(r["rs_1m"] or 0))
 
     return {
         "generated_at": datetime.now(tz=timezone.utc).isoformat(),
