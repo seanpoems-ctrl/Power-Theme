@@ -1,0 +1,765 @@
+{
+  "generated_at": "2026-05-31T05:29:37.203485+00:00",
+  "etfs": [
+    {
+      "ticker": "HYDR",
+      "theme": "Hydrogen",
+      "perf_1m": 20.43,
+      "perf_3m": 81.38,
+      "perf_6m": 99.77,
+      "perf_12m": null,
+      "ibd_raw": 51.515,
+      "rs": 99
+    },
+    {
+      "ticker": "MEME",
+      "theme": "Meme Stocks",
+      "perf_1m": 35.88,
+      "perf_3m": 64.74,
+      "perf_6m": 77.57,
+      "perf_12m": null,
+      "ibd_raw": 43.99,
+      "rs": 98
+    },
+    {
+      "ticker": "WGMI",
+      "theme": "Crypto Mining",
+      "perf_1m": 41.35,
+      "perf_3m": 68.41,
+      "perf_6m": 47.64,
+      "perf_12m": null,
+      "ibd_raw": 42.6025,
+      "rs": 96
+    },
+    {
+      "ticker": "EWY",
+      "theme": "South Korea Equities",
+      "perf_1m": 28.04,
+      "perf_3m": 39.51,
+      "perf_6m": 129.88,
+      "perf_12m": null,
+      "ibd_raw": 42.5,
+      "rs": 95
+    },
+    {
+      "ticker": "XSD",
+      "theme": "Semiconductors Equal",
+      "perf_1m": 25.6,
+      "perf_3m": 72.32,
+      "perf_6m": 94.33,
+      "perf_12m": null,
+      "ibd_raw": 40.4475,
+      "rs": 94
+    },
+    {
+      "ticker": "SOXX",
+      "theme": "Semiconductors",
+      "perf_1m": 23.33,
+      "perf_3m": 61.75,
+      "perf_6m": 95.71,
+      "perf_12m": null,
+      "ibd_raw": 39.275,
+      "rs": 92
+    },
+    {
+      "ticker": "SMH",
+      "theme": "Semiconductors Giants",
+      "perf_1m": 18.2,
+      "perf_3m": 47.38,
+      "perf_6m": 72.79,
+      "perf_12m": null,
+      "ibd_raw": 31.4375,
+      "rs": 91
+    },
+    {
+      "ticker": "UFO",
+      "theme": "Space Tech",
+      "perf_1m": 26.45,
+      "perf_3m": 41.42,
+      "perf_6m": 99.49,
+      "perf_12m": null,
+      "ibd_raw": 28.9325,
+      "rs": 90
+    },
+    {
+      "ticker": "FIVG",
+      "theme": "5G Connectivity",
+      "perf_1m": 26.26,
+      "perf_3m": 49.28,
+      "perf_6m": 60.7,
+      "perf_12m": null,
+      "ibd_raw": 28.405,
+      "rs": 88
+    },
+    {
+      "ticker": "PBW",
+      "theme": "Clean Energy Alt",
+      "perf_1m": 18.57,
+      "perf_3m": 36.8,
+      "perf_6m": 47.09,
+      "perf_12m": null,
+      "ibd_raw": 24.0425,
+      "rs": 87
+    },
+    {
+      "ticker": "QTUM",
+      "theme": "Quantum Computing",
+      "perf_1m": 19.19,
+      "perf_3m": 37.24,
+      "perf_6m": 50.37,
+      "perf_12m": null,
+      "ibd_raw": 23.365,
+      "rs": 86
+    },
+    {
+      "ticker": "TAN",
+      "theme": "Solar Energy",
+      "perf_1m": 26.57,
+      "perf_3m": 31.17,
+      "perf_6m": 54.34,
+      "perf_12m": null,
+      "ibd_raw": 22.68,
+      "rs": 84
+    },
+    {
+      "ticker": "BAI",
+      "theme": "AI & Tech Active",
+      "perf_1m": 15.58,
+      "perf_3m": 41.17,
+      "perf_6m": 48.17,
+      "perf_12m": null,
+      "ibd_raw": 22.5325,
+      "rs": 83
+    },
+    {
+      "ticker": "LIT",
+      "theme": "Electric Vehicles",
+      "perf_1m": -1.24,
+      "perf_3m": 15.86,
+      "perf_6m": 39.13,
+      "perf_12m": null,
+      "ibd_raw": 20.8475,
+      "rs": 82
+    },
+    {
+      "ticker": "XTL",
+      "theme": "Telecom Services",
+      "perf_1m": 5.79,
+      "perf_3m": 24.44,
+      "perf_6m": 64.47,
+      "perf_12m": null,
+      "ibd_raw": 20.7025,
+      "rs": 80
+    },
+    {
+      "ticker": "ICLN",
+      "theme": "Energy Renewable",
+      "perf_1m": 13.48,
+      "perf_3m": 28.59,
+      "perf_6m": 41.39,
+      "perf_12m": null,
+      "ibd_raw": 19.9075,
+      "rs": 79
+    },
+    {
+      "ticker": "AIQ",
+      "theme": "Artificial Intelligence",
+      "perf_1m": 20.47,
+      "perf_3m": 34.48,
+      "perf_6m": 35.65,
+      "perf_12m": null,
+      "ibd_raw": 19.6025,
+      "rs": 78
+    },
+    {
+      "ticker": "DRIV",
+      "theme": "Autonomous Systems",
+      "perf_1m": 10.98,
+      "perf_3m": 27.75,
+      "perf_6m": 44.21,
+      "perf_12m": null,
+      "ibd_raw": 19.3975,
+      "rs": 76
+    },
+    {
+      "ticker": "COPX",
+      "theme": "Copper Miners",
+      "perf_1m": 10.71,
+      "perf_3m": -5.83,
+      "perf_6m": 44.89,
+      "perf_12m": null,
+      "ibd_raw": 17.385,
+      "rs": 75
+    },
+    {
+      "ticker": "CIBR",
+      "theme": "Cybersecurity",
+      "perf_1m": 32.01,
+      "perf_3m": 40.69,
+      "perf_6m": 22.59,
+      "perf_12m": null,
+      "ibd_raw": 16.855,
+      "rs": 73
+    },
+    {
+      "ticker": "SLX",
+      "theme": "Steel",
+      "perf_1m": 7.19,
+      "perf_3m": 10.26,
+      "perf_6m": 39.14,
+      "perf_12m": null,
+      "ibd_raw": 14.785,
+      "rs": 72
+    },
+    {
+      "ticker": "SNSR",
+      "theme": "Internet of Things",
+      "perf_1m": 14.92,
+      "perf_3m": 26.42,
+      "perf_6m": 41.57,
+      "perf_12m": null,
+      "ibd_raw": 14.44,
+      "rs": 71
+    },
+    {
+      "ticker": "PICK",
+      "theme": "Metals & Mining",
+      "perf_1m": 7.29,
+      "perf_3m": 2.69,
+      "perf_6m": 42.97,
+      "perf_12m": null,
+      "ibd_raw": 14.23,
+      "rs": 69
+    },
+    {
+      "ticker": "ARKG",
+      "theme": "ARK Genomic Revolution",
+      "perf_1m": 15.97,
+      "perf_3m": 15.81,
+      "perf_6m": 12.25,
+      "perf_12m": null,
+      "ibd_raw": 13.635,
+      "rs": 68
+    },
+    {
+      "ticker": "XBI",
+      "theme": "Healthcare & Biotech",
+      "perf_1m": 4.08,
+      "perf_3m": 8.01,
+      "perf_6m": 11.63,
+      "perf_12m": null,
+      "ibd_raw": 13.625,
+      "rs": 67
+    },
+    {
+      "ticker": "SILJ",
+      "theme": "Silver Miners",
+      "perf_1m": 5.42,
+      "perf_3m": -22.63,
+      "perf_6m": 28.28,
+      "perf_12m": null,
+      "ibd_raw": 13.5725,
+      "rs": 65
+    },
+    {
+      "ticker": "BUZZ",
+      "theme": "Social Media Alt",
+      "perf_1m": 20.08,
+      "perf_3m": 30.44,
+      "perf_6m": 23.64,
+      "perf_12m": null,
+      "ibd_raw": 13.365,
+      "rs": 64
+    },
+    {
+      "ticker": "SPMO",
+      "theme": "S&P 500 Momentum",
+      "perf_1m": 12.56,
+      "perf_3m": 25.73,
+      "perf_6m": 26.92,
+      "perf_12m": null,
+      "ibd_raw": 13.03,
+      "rs": 63
+    },
+    {
+      "ticker": "ARKQ",
+      "theme": "ARK Autonomous Tech & Robotics",
+      "perf_1m": 10.93,
+      "perf_3m": 15.31,
+      "perf_6m": 31.22,
+      "perf_12m": null,
+      "ibd_raw": 12.6825,
+      "rs": 61
+    },
+    {
+      "ticker": "ARKX",
+      "theme": "ARK Space Exploration",
+      "perf_1m": 13.27,
+      "perf_3m": 15.62,
+      "perf_6m": 37.83,
+      "perf_12m": null,
+      "ibd_raw": 12.5825,
+      "rs": 60
+    },
+    {
+      "ticker": "IYZ",
+      "theme": "Telecommunications Services",
+      "perf_1m": 5.66,
+      "perf_3m": 11.37,
+      "perf_6m": 38.85,
+      "perf_12m": null,
+      "ibd_raw": 12.25,
+      "rs": 59
+    },
+    {
+      "ticker": "ROBO",
+      "theme": "Industrial Automation",
+      "perf_1m": 8.56,
+      "perf_3m": 13.63,
+      "perf_6m": 32.22,
+      "perf_12m": null,
+      "ibd_raw": 11.81,
+      "rs": 57
+    },
+    {
+      "ticker": "REMX",
+      "theme": "Rare Earth & Strategic Metals",
+      "perf_1m": -5.5,
+      "perf_3m": -3.46,
+      "perf_6m": 37.97,
+      "perf_12m": null,
+      "ibd_raw": 11.785,
+      "rs": 56
+    },
+    {
+      "ticker": "FDRV",
+      "theme": "EV & Future Transport",
+      "perf_1m": 7.85,
+      "perf_3m": 21.34,
+      "perf_6m": 29.92,
+      "perf_12m": null,
+      "ibd_raw": 11.5675,
+      "rs": 55
+    },
+    {
+      "ticker": "XME",
+      "theme": "Metals & Mining Equal",
+      "perf_1m": 5.46,
+      "perf_3m": 2.64,
+      "perf_6m": 31.57,
+      "perf_12m": null,
+      "ibd_raw": 11.145,
+      "rs": 53
+    },
+    {
+      "ticker": "FAN",
+      "theme": "Wind Energy",
+      "perf_1m": -3.0,
+      "perf_3m": 6.93,
+      "perf_6m": 32.83,
+      "perf_12m": null,
+      "ibd_raw": 10.475,
+      "rs": 52
+    },
+    {
+      "ticker": "GNOM",
+      "theme": "Genomics",
+      "perf_1m": 9.58,
+      "perf_3m": 5.43,
+      "perf_6m": 8.69,
+      "perf_12m": null,
+      "ibd_raw": 9.8625,
+      "rs": 51
+    },
+    {
+      "ticker": "GRID",
+      "theme": "Smart Grid",
+      "perf_1m": 1.09,
+      "perf_3m": 9.41,
+      "perf_6m": 27.76,
+      "perf_12m": null,
+      "ibd_raw": 9.7975,
+      "rs": 49
+    },
+    {
+      "ticker": "XTN",
+      "theme": "Transportation & Logistics",
+      "perf_1m": 6.73,
+      "perf_3m": 9.39,
+      "perf_6m": 29.93,
+      "perf_12m": null,
+      "ibd_raw": 9.22,
+      "rs": 48
+    },
+    {
+      "ticker": "BLOK",
+      "theme": "Crypto & Blockchain",
+      "perf_1m": 14.28,
+      "perf_3m": 25.09,
+      "perf_6m": 11.92,
+      "perf_12m": null,
+      "ibd_raw": 9.0875,
+      "rs": 47
+    },
+    {
+      "ticker": "ARGT",
+      "theme": "Argentina Equities",
+      "perf_1m": 7.23,
+      "perf_3m": 8.86,
+      "perf_6m": 8.79,
+      "perf_12m": null,
+      "ibd_raw": 6.7725,
+      "rs": 45
+    },
+    {
+      "ticker": "XAR",
+      "theme": "Defense & Aerospace Equal",
+      "perf_1m": 11.14,
+      "perf_3m": -0.6,
+      "perf_6m": 25.71,
+      "perf_12m": null,
+      "ibd_raw": 6.46,
+      "rs": 44
+    },
+    {
+      "ticker": "GDX",
+      "theme": "Commodities Metals",
+      "perf_1m": 1.36,
+      "perf_3m": -22.41,
+      "perf_6m": 10.53,
+      "perf_12m": null,
+      "ibd_raw": 6.2775,
+      "rs": 43
+    },
+    {
+      "ticker": "XLE",
+      "theme": "Energy Traditional",
+      "perf_1m": -5.63,
+      "perf_3m": -0.67,
+      "perf_6m": 28.0,
+      "perf_12m": null,
+      "ibd_raw": 6.1025,
+      "rs": 41
+    },
+    {
+      "ticker": "BOTZ",
+      "theme": "Robotics",
+      "perf_1m": 4.42,
+      "perf_3m": 5.13,
+      "perf_6m": 15.64,
+      "perf_12m": null,
+      "ibd_raw": 6.0125,
+      "rs": 40
+    },
+    {
+      "ticker": "FDN",
+      "theme": "Internet Giants",
+      "perf_1m": 7.57,
+      "perf_3m": 16.87,
+      "perf_6m": 6.21,
+      "perf_12m": null,
+      "ibd_raw": 5.285,
+      "rs": 39
+    },
+    {
+      "ticker": "PAVE",
+      "theme": "Infrastructure",
+      "perf_1m": -0.85,
+      "perf_3m": 1.7,
+      "perf_6m": 17.37,
+      "perf_12m": null,
+      "ibd_raw": 5.1175,
+      "rs": 37
+    },
+    {
+      "ticker": "IGV",
+      "theme": "Software",
+      "perf_1m": 21.15,
+      "perf_3m": 22.82,
+      "perf_6m": -1.27,
+      "perf_12m": null,
+      "ibd_raw": 4.8625,
+      "rs": 36
+    },
+    {
+      "ticker": "JETS",
+      "theme": "Airlines & Travel",
+      "perf_1m": 15.34,
+      "perf_3m": 5.85,
+      "perf_6m": 12.57,
+      "perf_12m": null,
+      "ibd_raw": 4.6625,
+      "rs": 35
+    },
+    {
+      "ticker": "IYT",
+      "theme": "Transportation",
+      "perf_1m": 3.11,
+      "perf_3m": 2.63,
+      "perf_6m": 16.33,
+      "perf_12m": null,
+      "ibd_raw": 4.64,
+      "rs": 33
+    },
+    {
+      "ticker": "SVIX",
+      "theme": "Volatility",
+      "perf_1m": 15.51,
+      "perf_3m": 8.2,
+      "perf_6m": 13.18,
+      "perf_12m": null,
+      "ibd_raw": 4.5275,
+      "rs": 32
+    },
+    {
+      "ticker": "ARKK",
+      "theme": "Disruptive Innovation",
+      "perf_1m": 8.06,
+      "perf_3m": 10.41,
+      "perf_6m": 4.43,
+      "perf_12m": null,
+      "ibd_raw": 3.8375,
+      "rs": 31
+    },
+    {
+      "ticker": "URA",
+      "theme": "Uranium & Nuclear",
+      "perf_1m": -10.03,
+      "perf_3m": -10.08,
+      "perf_6m": 18.74,
+      "perf_12m": null,
+      "ibd_raw": 3.525,
+      "rs": 29
+    },
+    {
+      "ticker": "WCLD",
+      "theme": "Cloud Computing",
+      "perf_1m": 21.59,
+      "perf_3m": 18.78,
+      "perf_6m": -2.02,
+      "perf_12m": null,
+      "ibd_raw": 3.475,
+      "rs": 28
+    },
+    {
+      "ticker": "XSW",
+      "theme": "Software Equal Weight",
+      "perf_1m": 17.19,
+      "perf_3m": 16.5,
+      "perf_6m": -3.59,
+      "perf_12m": null,
+      "ibd_raw": 2.895,
+      "rs": 27
+    },
+    {
+      "ticker": "KRE",
+      "theme": "Regional Banks",
+      "perf_1m": -0.34,
+      "perf_3m": 3.33,
+      "perf_6m": 11.53,
+      "perf_12m": null,
+      "ibd_raw": 2.6,
+      "rs": 25
+    },
+    {
+      "ticker": "XLI",
+      "theme": "Industrials",
+      "perf_1m": -0.83,
+      "perf_3m": -2.95,
+      "perf_6m": 14.01,
+      "perf_12m": null,
+      "ibd_raw": 2.465,
+      "rs": 24
+    },
+    {
+      "ticker": "XLB",
+      "theme": "Materials & Mining",
+      "perf_1m": -0.62,
+      "perf_3m": -3.52,
+      "perf_6m": 16.19,
+      "perf_12m": null,
+      "ibd_raw": 2.3725,
+      "rs": 22
+    },
+    {
+      "ticker": "XLY",
+      "theme": "Consumer Discretionary",
+      "perf_1m": 2.13,
+      "perf_3m": 4.93,
+      "perf_6m": 3.28,
+      "perf_12m": null,
+      "ibd_raw": 2.3425,
+      "rs": 21
+    },
+    {
+      "ticker": "ITA",
+      "theme": "Defense & Aerospace",
+      "perf_1m": 7.72,
+      "perf_3m": -5.98,
+      "perf_6m": 15.66,
+      "perf_12m": null,
+      "ibd_raw": 2.2975,
+      "rs": 20
+    },
+    {
+      "ticker": "VNQ",
+      "theme": "Real Estate & REITs",
+      "perf_1m": -0.65,
+      "perf_3m": 0.83,
+      "perf_6m": 7.21,
+      "perf_12m": null,
+      "ibd_raw": 1.8675,
+      "rs": 18
+    },
+    {
+      "ticker": "DBA",
+      "theme": "Commodities Agriculture",
+      "perf_1m": -2.78,
+      "perf_3m": 4.85,
+      "perf_6m": 8.05,
+      "perf_12m": null,
+      "ibd_raw": 1.7,
+      "rs": 17
+    },
+    {
+      "ticker": "MOO",
+      "theme": "Agriculture & FoodTech",
+      "perf_1m": -5.24,
+      "perf_3m": -6.74,
+      "perf_6m": 11.84,
+      "perf_12m": null,
+      "ibd_raw": 0.9275,
+      "rs": 16
+    },
+    {
+      "ticker": "XLC",
+      "theme": "Telecommunications",
+      "perf_1m": -0.7,
+      "perf_3m": -1.54,
+      "perf_6m": 1.73,
+      "perf_12m": null,
+      "ibd_raw": 0.79,
+      "rs": 14
+    },
+    {
+      "ticker": "XLP",
+      "theme": "Consumer Staples",
+      "perf_1m": -1.66,
+      "perf_3m": -6.01,
+      "perf_6m": 6.51,
+      "perf_12m": null,
+      "ibd_raw": 0.2225,
+      "rs": 13
+    },
+    {
+      "ticker": "NLR",
+      "theme": "Nuclear Energy",
+      "perf_1m": -8.68,
+      "perf_3m": -13.35,
+      "perf_6m": 6.45,
+      "perf_12m": null,
+      "ibd_raw": -0.5075,
+      "rs": 12
+    },
+    {
+      "ticker": "XLF",
+      "theme": "Financials",
+      "perf_1m": -1.06,
+      "perf_3m": 1.06,
+      "perf_6m": -1.74,
+      "perf_12m": null,
+      "ibd_raw": -0.63,
+      "rs": 10
+    },
+    {
+      "ticker": "IBUY",
+      "theme": "E-Commerce",
+      "perf_1m": -0.77,
+      "perf_3m": 2.49,
+      "perf_6m": -8.0,
+      "perf_12m": null,
+      "ibd_raw": -1.4175,
+      "rs": 9
+    },
+    {
+      "ticker": "UNG",
+      "theme": "Natural Gas",
+      "perf_1m": 12.55,
+      "perf_3m": -0.58,
+      "perf_6m": -16.28,
+      "perf_12m": null,
+      "ibd_raw": -2.575,
+      "rs": 8
+    },
+    {
+      "ticker": "FINX",
+      "theme": "FinTech",
+      "perf_1m": 3.96,
+      "perf_3m": 5.94,
+      "perf_6m": -12.03,
+      "perf_12m": null,
+      "ibd_raw": -4.71,
+      "rs": 6
+    },
+    {
+      "ticker": "BETZ",
+      "theme": "Sports Betting & iGaming",
+      "perf_1m": -3.63,
+      "perf_3m": 2.25,
+      "perf_6m": -6.62,
+      "perf_12m": null,
+      "ibd_raw": -5.565,
+      "rs": 5
+    },
+    {
+      "ticker": "SOCL",
+      "theme": "Social Media",
+      "perf_1m": 1.41,
+      "perf_3m": -4.14,
+      "perf_6m": -15.31,
+      "perf_12m": null,
+      "ibd_raw": -5.745,
+      "rs": 4
+    },
+    {
+      "ticker": "ITB",
+      "theme": "Homebuilders",
+      "perf_1m": -3.42,
+      "perf_3m": -11.17,
+      "perf_6m": -10.1,
+      "perf_12m": null,
+      "ibd_raw": -6.4725,
+      "rs": 2
+    },
+    {
+      "ticker": "HERO",
+      "theme": "Digital Entertainment",
+      "perf_1m": -3.64,
+      "perf_3m": -5.32,
+      "perf_6m": -17.07,
+      "perf_12m": null,
+      "ibd_raw": -6.825,
+      "rs": 1
+    },
+    {
+      "ticker": "DRAM",
+      "theme": "Memory & Semiconductors",
+      "perf_1m": 60.69,
+      "perf_3m": null,
+      "perf_6m": null,
+      "perf_12m": null,
+      "ibd_raw": null,
+      "rs": null
+    },
+    {
+      "ticker": "NASA",
+      "theme": "Space Economy",
+      "perf_1m": 36.68,
+      "perf_3m": null,
+      "perf_6m": null,
+      "perf_12m": null,
+      "ibd_raw": null,
+      "rs": null
+    }
+  ]
+}

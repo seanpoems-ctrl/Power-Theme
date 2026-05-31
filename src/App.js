@@ -8201,6 +8201,96 @@ const EtfTrendlinePanel = ({ etfData }) => {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
+// ETF RS Table — sortable table of all ETFs ranked by IBD-style RS
+// ─────────────────────────────────────────────────────────────────────────────
+const EtfRsTable = ({ etfRsData }) => {
+  const [sortCol, setSortCol] = useState("rs");
+  const [sortDir, setSortDir] = useState("desc");
+
+  const etfs = etfRsData?.etfs ?? [];
+
+  const handleSort = col => {
+    if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
+    else { setSortCol(col); setSortDir(col === "ticker" || col === "theme" ? "asc" : "desc"); }
+  };
+
+  const SortIcon = ({ col }) => {
+    if (sortCol !== col) return <span className="ml-0.5 text-zinc-700">⇅</span>;
+    return <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>;
+  };
+
+  const sorted = useMemo(() => [...etfs].sort((a, b) => {
+    const av = a[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
+    const bv = b[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
+    if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+    return sortDir === "asc" ? av - bv : bv - av;
+  }), [etfs, sortCol, sortDir]);
+
+  const rsCol  = v => !v ? "text-zinc-500" : v >= 90 ? "text-emerald-300 font-bold" : v >= 75 ? "text-emerald-400" : v >= 50 ? "text-zinc-300" : v >= 25 ? "text-zinc-500" : "text-rose-400";
+  const pctCol = v => v == null ? "text-zinc-600" : v > 0 ? "text-emerald-400" : "text-rose-400";
+  const fmtP   = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
+
+  const COLS = [
+    { col: "ticker",   label: "ETF",   align: "left"  },
+    { col: "theme",    label: "Theme", align: "left"  },
+    { col: "rs",       label: "RS",    align: "right" },
+    { col: "perf_1m",  label: "1M%",   align: "right" },
+    { col: "perf_3m",  label: "3M%",   align: "right" },
+    { col: "perf_6m",  label: "6M%",   align: "right" },
+    { col: "perf_12m", label: "12M%",  align: "right" },
+  ];
+
+  if (!etfRsData) return (
+    <p className="text-sm text-zinc-600 italic py-8 text-center">Loading ETF RS data…</p>
+  );
+
+  return (
+    <div>
+      <div className="flex items-baseline gap-2 mb-3">
+        <h3 className="text-sm font-semibold text-zinc-100">ETF Relative Strength</h3>
+        <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{sorted.length}</span>
+        <span className="text-xs text-zinc-600">IBD-style RS · ranked 1–99 among all ETFs · click header to sort</span>
+        {etfRsData.generated_at && (
+          <span className="text-xs text-zinc-700 ml-auto font-mono">
+            {new Date(etfRsData.generated_at).toLocaleDateString()}
+          </span>
+        )}
+      </div>
+      <div className="overflow-x-auto rounded-lg border border-zinc-800">
+        <table className="w-full text-xs border-collapse">
+          <thead>
+            <tr className="bg-zinc-900 border-b border-zinc-800 text-zinc-500 text-[11px] uppercase tracking-wide select-none">
+              {COLS.map(({ col, label, align }) => (
+                <th key={col} onClick={() => handleSort(col)}
+                    className={`px-3 py-2.5 font-medium cursor-pointer hover:text-zinc-300 transition-colors whitespace-nowrap ${align === "right" ? "text-right" : "text-left"}`}>
+                  {label}<SortIcon col={col}/>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map((e, i) => (
+              <tr key={e.ticker} className={`border-b border-zinc-800/50 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/30"}`}>
+                <td className="px-3 py-1.5">
+                  <a href={`https://finviz.com/quote.ashx?t=${e.ticker}`} target="_blank" rel="noopener noreferrer"
+                     className="font-mono font-bold text-cyan-400 hover:underline">{e.ticker}</a>
+                </td>
+                <td className="px-3 py-1.5 text-zinc-400 max-w-[220px] truncate">{e.theme}</td>
+                <td className={`px-3 py-1.5 text-right font-mono font-bold text-sm ${rsCol(e.rs)}`}>{e.rs ?? "—"}</td>
+                <td className={`px-3 py-1.5 text-right font-mono ${pctCol(e.perf_1m)}`}>{fmtP(e.perf_1m)}</td>
+                <td className={`px-3 py-1.5 text-right font-mono ${pctCol(e.perf_3m)}`}>{fmtP(e.perf_3m)}</td>
+                <td className={`px-3 py-1.5 text-right font-mono ${pctCol(e.perf_6m)}`}>{fmtP(e.perf_6m)}</td>
+                <td className={`px-3 py-1.5 text-right font-mono ${pctCol(e.perf_12m)}`}>{fmtP(e.perf_12m)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
 // Daily Watchlist Tab
 // Auto-computes three sections from thematic + gapper data:
 //   1. Clean Bases  — above all 3 SMAs, within 8% of 52W high, RS≥75, ADR≥4%
@@ -8208,8 +8298,9 @@ const EtfTrendlinePanel = ({ etfData }) => {
 //   3. Gapper Watch — high conviction pre-market plays
 // ─────────────────────────────────────────────────────────────────────────────
 const DailyWatchlistTab = ({ data }) => {
-  const [gapperData, setGapperData] = React.useState(null);
-  const [mode, setMode]             = React.useState("long");   // "long" | "short"
+  const [gapperData, setGapperData]   = React.useState(null);
+  const [etfRsData,  setEtfRsData]    = React.useState(null);
+  const [mode, setMode]               = React.useState("long");   // "long" | "short" | "etf"
   const [sortCol, setSortCol]       = React.useState("rs_52w");
   const [sortDir, setSortDir]       = React.useState("desc");
   const [shortSortCol, setShortSortCol] = React.useState("rs_52w");
@@ -8219,6 +8310,10 @@ const DailyWatchlistTab = ({ data }) => {
     fetch(process.env.PUBLIC_URL + "/gapper_data.json?v=" + Date.now())
       .then(r => r.ok ? r.json() : null)
       .then(d => { if (d) setGapperData(d); })
+      .catch(() => {});
+    fetch(process.env.PUBLIC_URL + "/etf_rs.json?v=" + Date.now())
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d) setEtfRsData(d); })
       .catch(() => {});
   }, []);
 
@@ -8385,15 +8480,19 @@ const DailyWatchlistTab = ({ data }) => {
       {/* ── Market Pulse bar + Long/Short toggle ──────────── */}
       <div className="flex flex-wrap items-center gap-3">
         <span className={`px-3 py-1.5 rounded-lg border text-xs font-bold tracking-wide ${sigCls}`}>{sigLabel}</span>
-        {/* Long / Short mode toggle */}
+        {/* Mode toggle */}
         <div className="flex rounded-lg border border-zinc-700 overflow-hidden text-xs font-semibold">
           <button onClick={() => setMode("long")}
-            className={`px-3 py-1.5 transition-colors ${mode === "long" ? "bg-emerald-600/25 text-emerald-300 border-r border-zinc-700" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300 border-r border-zinc-700"}`}>
+            className={`px-3 py-1.5 transition-colors border-r border-zinc-700 ${mode === "long" ? "bg-emerald-600/25 text-emerald-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
             ▲ Long
           </button>
           <button onClick={() => setMode("short")}
-            className={`px-3 py-1.5 transition-colors ${mode === "short" ? "bg-rose-600/25 text-rose-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
+            className={`px-3 py-1.5 transition-colors border-r border-zinc-700 ${mode === "short" ? "bg-rose-600/25 text-rose-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
             ▼ Short
+          </button>
+          <button onClick={() => setMode("etf")}
+            className={`px-3 py-1.5 transition-colors ${mode === "etf" ? "bg-blue-600/25 text-blue-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
+            📊 ETF RS
           </button>
         </div>
         {mc?.spy?.sma50_pct != null && (
@@ -8588,6 +8687,9 @@ const DailyWatchlistTab = ({ data }) => {
       )}
 
       </div>} {/* end LONG MODE */}
+
+      {/* ── ETF RS TABLE ──────────────────────────────────── */}
+      {mode === "etf" && <EtfRsTable etfRsData={etfRsData} />}
 
       {/* ── SHORT MODE ────────────────────────────────────── */}
       {mode === "short" && (
