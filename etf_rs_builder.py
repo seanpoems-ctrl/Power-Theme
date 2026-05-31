@@ -195,6 +195,21 @@ def build_etf_rs() -> dict:
         rng = spark_max - spark_min or 1
         sparkline = [round((v - spark_min) / rng * 100, 1) for v in spark_raw]
 
+        # 25-day RS histogram vs SPY: daily ETF return ÷ daily SPY return
+        rs_histogram: list[float] = []
+        if "SPY" in closes.columns:
+            spy_s  = closes["SPY"].dropna()
+            etf_d  = s.pct_change().dropna()
+            spy_d  = spy_s.pct_change().dropna()
+            common = etf_d.index.intersection(spy_d.index)
+            etf_25 = etf_d.loc[common].tail(25)
+            spy_25 = spy_d.loc[common].tail(25)
+            for er, sr in zip(etf_25.tolist(), spy_25.tolist()):
+                if abs(sr) > 0.0001:
+                    rs_histogram.append(round(er / sr, 3))
+                else:
+                    rs_histogram.append(round(er * 100, 3))
+
         # IBD RS quarters
         D189 = D63 * 3
         q4 = p3m
@@ -214,6 +229,7 @@ def build_etf_rs() -> dict:
             "perf_12m":       p12m,
             "pct_off_52wh":   pct_off_52wh,
             "sparkline":      sparkline,
+            "rs_histogram":   rs_histogram,
             "ibd_raw":        ibd_raw,
             "rs":             None,   # filled after ranking
             "rs_pct":         None,   # 0-100 display value

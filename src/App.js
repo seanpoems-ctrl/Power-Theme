@@ -8220,15 +8220,25 @@ const EtfSparkline = ({ data = [] }) => {
   );
 };
 
-const EtfRsBar = ({ rs = 0 }) => {
-  const pct = Math.min(100, Math.max(0, rs));
-  const color = pct >= 90 ? "#34d399" : pct >= 75 ? "#86efac" : pct >= 50 ? "#6ee7b7" : pct >= 25 ? "#d1fae5" : "#fca5a5";
+// 25-bar RS histogram: each bar = ETF daily return ÷ SPY daily return
+// Positive (green) = outperformed SPY; Negative (red) = underperformed
+const EtfRsHistogram = ({ data = [] }) => {
+  if (!data.length) return <span className="text-zinc-700 text-[10px]">—</span>;
+  const W = 72, H = 28, midY = H / 2, barW = Math.max(1, W / data.length - 0.5);
+  const absMax = Math.max(...data.map(Math.abs), 0.01);
+  const scale = (midY - 1) / absMax;
   return (
-    <div className="flex items-center gap-1">
-      <div className="w-16 h-2.5 bg-zinc-800 rounded-sm overflow-hidden">
-        <div className="h-full rounded-sm transition-all" style={{ width: `${pct}%`, backgroundColor: color }}/>
-      </div>
-    </div>
+    <svg width={W} height={H} className="overflow-visible">
+      {/* Centre baseline */}
+      <line x1={0} y1={midY} x2={W} y2={midY} stroke="#3f3f46" strokeWidth="0.5"/>
+      {data.map((v, i) => {
+        const x    = i * (W / data.length);
+        const h    = Math.min(midY - 1, Math.abs(v) * scale);
+        const y    = v >= 0 ? midY - h : midY;
+        const fill = v >= 0 ? "#34d399" : "#f87171";
+        return <rect key={i} x={x} y={y} width={barW} height={h} fill={fill} opacity={0.85}/>;
+      })}
+    </svg>
   );
 };
 
@@ -8336,9 +8346,9 @@ const EtfRsTable = ({ etfRsData }) => {
                 <td className="px-2 py-0.5 border-r border-zinc-800">
                   <EtfSparkline data={e.sparkline ?? []} />
                 </td>
-                {/* 1-Month RS bar */}
-                <td className="px-2 py-1 border-r border-zinc-800">
-                  <EtfRsBar rs={e.rs_pct ?? 0} />
+                {/* 1-Month RS histogram */}
+                <td className="px-2 py-0.5 border-r border-zinc-800">
+                  <EtfRsHistogram data={e.rs_histogram ?? []} />
                 </td>
                 {/* % Intraday */}
                 <td className={`px-2 py-1 text-right font-mono border-r border-zinc-800 ${pctBg(e.perf_intraday)}`}>
