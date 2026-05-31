@@ -8225,7 +8225,7 @@ const EtfTrendlinePanel = ({ etfData }) => {
 // ─────────────────────────────────────────────────────────────────────────────
 const EtfSparkline = ({ data = [] }) => {
   if (!data.length) return <span className="text-zinc-700 text-[10px]">—</span>;
-  const W = 80, H = 22, pad = 2;
+  const W = 100, H = 28, pad = 2;
   const xs = data.map((_, i) => pad + (i / (data.length - 1 || 1)) * (W - pad * 2));
   const ys = data.map(v => H - pad - (v / 100) * (H - pad * 2));
   const pts = xs.map((x, i) => `${x.toFixed(1)},${ys[i].toFixed(1)}`).join(" ");
@@ -8233,7 +8233,7 @@ const EtfSparkline = ({ data = [] }) => {
   const first = data[0];
   const color = last >= first ? "#34d399" : "#f87171";
   return (
-    <svg width={W} height={H} className="overflow-visible">
+    <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="block">
       <polyline points={pts} fill="none" stroke={color} strokeWidth="1.5" strokeLinejoin="round"/>
     </svg>
   );
@@ -8241,27 +8241,25 @@ const EtfSparkline = ({ data = [] }) => {
 
 // 25-bar cumulative RS histogram vs SPY
 // Each bar = (ETF[i]/ETF[0]) / (SPY[i]/SPY[0]) — always positive, always green
-// Rising bars = ETF gaining ground vs SPY over the month
+// Last bar is darker green (marks most recent/current day — Jeff Sun style)
 const EtfRsHistogram = ({ data = [] }) => {
   if (!data.length) return <span className="text-zinc-700 text-[10px]">—</span>;
-  const W = 72, H = 26;
-  const gap = 0.5;
-  const barW = Math.max(1.2, W / data.length - gap);
-  // Normalise heights: min maps to small base bar, max maps to full height
+  const W = 100, H = 32;
+  const gap = 0.8;
+  const barW = Math.max(1.5, W / data.length - gap);
   const minV = Math.min(...data);
   const maxV = Math.max(...data);
   const range = Math.max(maxV - minV, 0.001);
+  const lastIdx = data.length - 1;
   return (
-    <svg width={W} height={H} className="overflow-visible">
-      <line x1={0} y1={H} x2={W} y2={H} stroke="#3f3f46" strokeWidth="0.5"/>
+    <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="block">
       {data.map((v, i) => {
         const x = i * (W / data.length);
-        // Scale: smallest value → 2px bar, largest → full H
         const norm = (v - minV) / range;
         const h = Math.max(2, 2 + norm * (H - 4));
         const y = H - h;
-        // Shade: brighter green when above starting point (cumRS > 1), lighter when below
-        const fill = v >= 1.0 ? "#22c55e" : "#86efac";
+        // Last bar = dark green (current day marker); others = bright or light green
+        const fill = i === lastIdx ? "#14532d" : v >= 1.0 ? "#22c55e" : "#86efac";
         return <rect key={i} x={x} y={y} width={barW} height={h} fill={fill} rx="0.3"/>;
       })}
     </svg>
