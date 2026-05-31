@@ -148,10 +148,21 @@ def compute_ibd_rs(perf_q4: float | None, perf_q3: float | None,
 def build_etf_rs() -> dict:
     logger.info("Fetching 12-month daily price history for %d ETFs…", len(ALL_TICKERS))
 
-    # Batch download — one call for all tickers + SPY benchmark
+    all_syms = ALL_TICKERS + ["SPY"]
+
+    # 12-month data for RS, sparklines, 52W high
     raw = yf.download(
-        ALL_TICKERS + ["SPY"],
+        all_syms,
         period="12mo",
+        interval="1d",
+        auto_adjust=True,
+        progress=False,
+    )
+
+    # 5-day data for accurate 1D / intraday change (most recent trading day vs prior)
+    raw5 = yf.download(
+        all_syms,
+        period="5d",
         interval="1d",
         auto_adjust=True,
         progress=False,
@@ -159,11 +170,14 @@ def build_etf_rs() -> dict:
 
     # Extract close prices
     if isinstance(raw.columns, pd.MultiIndex):
-        closes = raw["Close"]
-        highs  = raw["High"]  if "High"  in raw.columns.get_level_values(0) else None
+        closes  = raw["Close"]
     else:
-        closes = raw[["Close"]].rename(columns={"Close": ALL_TICKERS[0]})
-        highs  = None
+        closes  = raw[["Close"]].rename(columns={"Close": ALL_TICKERS[0]})
+
+    if isinstance(raw5.columns, pd.MultiIndex):
+        closes5 = raw5["Close"]
+    else:
+        closes5 = raw5[["Close"]].rename(columns={"Close": ALL_TICKERS[0]})
 
     D21, D63, D126, D252 = 21, 63, 126, 252
     rows: list[dict] = []
@@ -177,8 +191,12 @@ def build_etf_rs() -> dict:
             logger.warning("  ✗ %s: insufficient data (%d rows)", tkr, len(s))
             continue
 
-        # Performance
-        p1d  = _safe_pct(s, 1)
+        # 1-day change: compare last close (5/29) vs prior close (5/28)
+        # _safe_pct(s, N) = (iloc[-1] - iloc[-N]) / iloc[-N], so N=2 gives 1-day
+        s5 = closes5[tkr].dropna() if tkr in closes5.columns else pd.Series(dtype=float)
+        p1d = _safe_pct(s5, 2) if len(s5) >= 3 else _safe_pct(s, 2)
+
+        # Longer-term performance from 12-month data
         p1m  = _safe_pct(s, D21)
         p3m  = _safe_pct(s, D63)
         p6m  = _safe_pct(s, D126)
@@ -195,7 +213,7 @@ def build_etf_rs() -> dict:
         rng = spark_max - spark_min or 1
         sparkline = [round((v - spark_min) / rng * 100, 1) for v in spark_raw]
 
-        # 25-day RS histogram vs SPY: daily ETF return ÷ daily SPY return
+        # 25-day RS histogram vs SPY using 12-month data
         rs_histogram: list[float] = []
         if "SPY" in closes.columns:
             spy_s  = closes["SPY"].dropna()
@@ -221,8 +239,8 @@ def build_etf_rs() -> dict:
         rows.append({
             "ticker":         tkr,
             "theme":          TICKER_TO_THEME.get(tkr, tkr),
-            "perf_intraday":  p1d,
-            "perf_1d":        p1d,
+            "perf_intraday":  round(p1d, 2) if p1d is not None else None,
+            "perf_1d":        round(p1d, 2) if p1d is not None else None,
             "perf_1m":        p1m,
             "perf_3m":        p3m,
             "perf_6m":        p6m,
