@@ -22,8 +22,18 @@ logger = logging.getLogger(__name__)
 
 OUTPUT_PATH = Path("public/etf_rs.json")
 
-# ── Full ETF map (must mirror THEME_ETF_MAP in App.js) ────────────────────────
-THEME_ETF_MAP = {
+# ── ETF map — loaded from public/etf_map.json (single source of truth) ───────
+# To add a new ETF: edit public/etf_map.json only.
+def _load_etf_map() -> dict:
+    p = Path(__file__).parent / "public" / "etf_map.json"
+    try:
+        return json.loads(p.read_text(encoding="utf-8"))
+    except Exception as e:
+        logger.warning(f"Could not load etf_map.json ({e}) — falling back to hardcoded map")
+        return {}
+
+_loaded = _load_etf_map()
+THEME_ETF_MAP = _loaded if _loaded else {
     # Technology & Innovation
     "Artificial Intelligence":          "AIQ",
     "Semiconductors":                   "SOXX",

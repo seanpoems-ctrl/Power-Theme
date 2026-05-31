@@ -2123,10 +2123,19 @@ def fetch_all_tickers() -> list[dict]:
         return []
 
 
-# ETF → theme mapping (mirrors THEME_ETF_MAP in App.js)
-# Purpose: peer discovery & theme tracking only (not trading signals).
-# Covers all thematic ETFs regardless of volume.
-_THEME_ETF_MAP = {
+# ETF → theme mapping — loaded from public/etf_map.json (single source of truth).
+# To add a new ETF: edit public/etf_map.json only — scraper, etf_rs_builder, and App.js
+# all read from the same file automatically.
+def _load_etf_map() -> dict:
+    p = Path(__file__).parent / "public" / "etf_map.json"
+    try:
+        import json as _json
+        return _json.loads(p.read_text(encoding="utf-8"))
+    except Exception as _e:
+        logger.warning(f"Could not load etf_map.json ({_e}) — falling back to hardcoded map")
+        return {}
+
+_THEME_ETF_MAP = _load_etf_map() or {
     # ── Technology & Innovation ──────────────────────────────────────────────
     "Artificial Intelligence":           "AIQ",
     "Semiconductors":                    "SOXX",
