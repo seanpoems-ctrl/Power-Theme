@@ -309,16 +309,22 @@ def build_etf_rs() -> dict:
         r["rs"]     = round(rs_raw)
         r["rs_pct"] = min(100, round(rs_raw / 5) * 5)
 
-    # 1M rank (20-day return — Jeff Sun's baseline period)
-    scored_1m = [r for r in rows if r["rs_1m_raw"] is not None]
-    scored_1m.sort(key=lambda r: r["rs_1m_raw"])
-    n1 = len(scored_1m)
-    for i, r in enumerate(scored_1m):
-        rs1_raw = (i / max(n1 - 1, 1)) * 100        # peers beaten / (total-1) × 100
-        r["rs_1m"]     = round(rs1_raw)
-        r["rs_1m_pct"] = min(100, round(rs1_raw / 5) * 5)
+    # RS% = where today's (last) bar sits within its own 25-day min-max range vs SPY.
+    # 0% = today is the weakest RS day of the past 25 sessions relative to SPY.
+    # 100% = today is the strongest.
+    for r in rows:
+        hist = r.get("rs_histogram", [])
+        if len(hist) >= 2:
+            lo, hi = min(hist), max(hist)
+            rng = hi - lo
+            pct_raw = ((hist[-1] - lo) / rng * 100) if rng > 0 else 50.0
+            r["rs_1m"]     = round(pct_raw)
+            r["rs_1m_pct"] = min(100, round(pct_raw / 5) * 5)
+        else:
+            r["rs_1m"]     = None
+            r["rs_1m_pct"] = None
 
-    # Sort by 1M RS descending (primary display order)
+    # Sort by RS% descending (ETFs with today's RS near the top of their 25-day range first)
     result_rows = sorted(rows, key=lambda r: -(r["rs_1m"] or 0))
 
     return {
