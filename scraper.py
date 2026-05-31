@@ -2308,10 +2308,23 @@ def fetch_etf_holdings(etf_ticker: str) -> list:
         skipped = 0
         for sym, row in th.iterrows():
             ticker = str(sym).strip()
+            # Drop foreign-listed tickers
             if _FOREIGN_SUFFIX_RE.search(ticker):
                 skipped += 1
-                continue          # drop foreign-listed tickers
+                continue
+            # Drop money market funds, cash equivalents and non-equity instruments.
+            # These show up as holdings when an ETF parks cash (e.g. FGXXX, VMFXX,
+            # SGOV, BIL) — identified by ending in ≥2 X's, or known cash/mm names.
             name = str(row.get("Name", "")).strip()
+            name_lower = name.lower()
+            if (ticker.upper().endswith("XX") or ticker.upper().endswith("XXX")
+                    or any(kw in name_lower for kw in (
+                        "money market", "government oblig", "cash", "treasury",
+                        "liquidity fund", "prime fund", "reserve fund",
+                    ))):
+                skipped += 1
+                logger.debug(f"  Skipping cash/MM holding: {ticker} ({name})")
+                continue
             pct = float(row.get("Holding Percent", 0)) * 100
             rows.append({"ticker": ticker, "name": name, "weight": round(pct, 2)})
         rows.sort(key=lambda x: x["weight"], reverse=True)
