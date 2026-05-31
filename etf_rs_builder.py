@@ -222,10 +222,12 @@ def build_etf_rs() -> dict:
             logger.warning("  ✗ %s: insufficient data (%d rows)", tkr, len(s))
             continue
 
-        # 1-day change: compare last close (5/29) vs prior close (5/28)
-        # _safe_pct(s, N) = (iloc[-1] - iloc[-N]) / iloc[-N], so N=2 gives 1-day
+        # 1-day change: compare last close vs prior close
         s5 = closes5[tkr].dropna() if tkr in closes5.columns else pd.Series(dtype=float)
         p1d = _safe_pct(s5, 2) if len(s5) >= 3 else _safe_pct(s, 2)
+
+        # 1-week (5 trading days)
+        p1w = _safe_pct(s5, 6) if len(s5) >= 6 else _safe_pct(s, 6)
 
         # Longer-term performance from 12-month data
         p1m  = _safe_pct(s, D21)
@@ -274,8 +276,9 @@ def build_etf_rs() -> dict:
         rows.append({
             "ticker":         tkr,
             "theme":          TICKER_TO_THEME.get(tkr, tkr),
-            "perf_intraday":  round(p1d, 2) if p1d is not None else None,
-            "perf_1d":        round(p1d, 2) if p1d is not None else None,
+            "perf_intraday":  round(p1d,  2) if p1d  is not None else None,
+            "perf_1d":        round(p1d,  2) if p1d  is not None else None,
+            "perf_1w":        round(p1w,  2) if p1w  is not None else None,
             "perf_1m":        p1m,
             "perf_3m":        p3m,
             "perf_6m":        p6m,
@@ -284,11 +287,26 @@ def build_etf_rs() -> dict:
             "sparkline":      sparkline,
             "rs_histogram":   rs_histogram,
             "ibd_raw":        ibd_raw,
-            "rs_1m_raw":      p1m,     # 1-month return used for 1M RS ranking
-            "rs":             None,    # 12M composite rank (1-99)
-            "rs_pct":         None,    # 12M RS display %
-            "rs_1m":          None,    # 1M rank (1-99)
-            "rs_1m_pct":      None,    # 1M RS display %
+            # Raw returns stored for peer-ranking (removed after ranking)
+            "_raw_1d":        p1d,
+            "_raw_1w":        p1w,
+            "_raw_1m":        p1m,
+            "_raw_3m":        p3m,
+            "_raw_6m":        p6m,
+            "_raw_12m":       p12m,
+            # Peer RS ranks (1-99) — filled in after all rows collected
+            "rs_day":         None,
+            "rs_wk":          None,
+            "rs_mth":         None,
+            "rs_qtr":         None,
+            "rs_hy":          None,
+            "rs_yr":          None,
+            "score":          None,   # composite weighted score
+            # Legacy fields kept for backward compat
+            "rs":             None,
+            "rs_pct":         None,
+            "rs_1m":          None,
+            "rs_1m_pct":      None,
         })
         logger.info("  ✓ %-6s  1D=%+5.1f%%  1M=%+6.1f%%  52WH=%+5.1f%%",
                     tkr,
@@ -297,21 +315,45 @@ def build_etf_rs() -> dict:
                     pct_off_52wh if pct_off_52wh is not None else float("nan"),
                     )
 
-    # ── Jeff Sun percentile formula: RS% = (Peers Beaten / (Total-1)) × 100 ──
-    # Range: 0% (bottom) to 100% (top), displayed rounded to nearest 5%
+    # ── Multi-timeframe peer percentile RS ranks (1–99) ─────────────────────────
+    # Formula: rank = round((peers_beaten / (total-1)) * 98) + 1  → range 1-99
 
-    # 12M composite rank
+    def _peer_rank(rows: list[dict], raw_key: str, rank_key: str) -> None:
+        """Rank all rows by raw_key, write 1-99 integer into rank_key."""
+        scored = [(i, r) for i, r in enumerate(rows) if r.get(raw_key) is not None]
+        if not scored:
+            return
+        scored.sort(key=lambda x: x[1][raw_key])
+        n = len(scored)
+        for pos, (_, r) in enumerate(scored):
+            r[rank_key] = round((pos / max(n - 1, 1)) * 98) + 1
+
+    _peer_rank(rows, "_raw_1d",  "rs_day")
+    _peer_rank(rows, "_raw_1w",  "rs_wk")
+    _peer_rank(rows, "_raw_1m",  "rs_mth")
+    _peer_rank(rows, "_raw_3m",  "rs_qtr")
+    _peer_rank(rows, "_raw_6m",  "rs_hy")
+    _peer_rank(rows, "_raw_12m", "rs_yr")
+
+    # ── Composite Score = 0.20×Day + 0.20×Wk + 0.20×Mth + 0.20×Qtr + 0.10×HY + 0.10×Yr
+    WEIGHTS = [("rs_day",0.20),("rs_wk",0.20),("rs_mth",0.20),
+               ("rs_qtr",0.20),("rs_hy",0.10),("rs_yr",0.10)]
+    for r in rows:
+        parts = [(r.get(k), w) for k, w in WEIGHTS if r.get(k) is not None]
+        if parts:
+            total_w = sum(w for _, w in parts)
+            r["score"] = round(sum(v * w for v, w in parts) / total_w, 1)
+
+    # ── Legacy rs / rs_pct (12M IBD composite) ───────────────────────────────
     scored_12m = [r for r in rows if r["ibd_raw"] is not None]
     scored_12m.sort(key=lambda r: r["ibd_raw"])
     n = len(scored_12m)
     for i, r in enumerate(scored_12m):
-        rs_raw = (i / max(n - 1, 1)) * 100          # peers beaten / (total-1) × 100
+        rs_raw = (i / max(n - 1, 1)) * 100
         r["rs"]     = round(rs_raw)
         r["rs_pct"] = min(100, round(rs_raw / 5) * 5)
 
-    # RS% = where today's (last) bar sits within its own 25-day min-max range vs SPY.
-    # 0% = today is the weakest RS day of the past 25 sessions relative to SPY.
-    # 100% = today is the strongest.
+    # ── rs_1m / rs_1m_pct: position of last histogram bar in 25-day range ────
     for r in rows:
         hist = r.get("rs_histogram", [])
         if len(hist) >= 2:
@@ -321,11 +363,15 @@ def build_etf_rs() -> dict:
             r["rs_1m"]     = round(pct_raw)
             r["rs_1m_pct"] = min(100, round(pct_raw / 5) * 5)
         else:
-            r["rs_1m"]     = None
-            r["rs_1m_pct"] = None
+            r["rs_1m"] = r["rs_1m_pct"] = None
 
-    # Sort by RS% descending (ETFs with today's RS near the top of their 25-day range first)
-    result_rows = sorted(rows, key=lambda r: -(r["rs_1m"] or 0))
+    # Strip internal raw keys before output
+    for r in rows:
+        for k in ("_raw_1d","_raw_1w","_raw_1m","_raw_3m","_raw_6m","_raw_12m"):
+            r.pop(k, None)
+
+    # Sort by composite Score descending
+    result_rows = sorted(rows, key=lambda r: -(r["score"] or 0))
 
     return {
         "generated_at": datetime.now(tz=timezone.utc).isoformat(),
