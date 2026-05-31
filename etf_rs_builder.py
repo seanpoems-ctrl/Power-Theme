@@ -335,14 +335,28 @@ def build_etf_rs() -> dict:
     _peer_rank(rows, "_raw_6m",  "rs_hy")
     _peer_rank(rows, "_raw_12m", "rs_yr")
 
-    # ── Composite Score = 0.20×Day + 0.20×Wk + 0.20×Mth + 0.20×Qtr + 0.10×HY + 0.10×Yr
+    # ── Composite Score — 2-step, matches reference tool ─────────────────────
+    # Step 1: weighted average of the 6 RS ranks (raw composite)
+    # Step 2: percentile-rank that composite among all ETFs → Score (0.0–100.0)
     WEIGHTS = [("rs_day",0.20),("rs_wk",0.20),("rs_mth",0.20),
                ("rs_qtr",0.20),("rs_hy",0.10),("rs_yr",0.10)]
     for r in rows:
         parts = [(r.get(k), w) for k, w in WEIGHTS if r.get(k) is not None]
         if parts:
             total_w = sum(w for _, w in parts)
-            r["score"] = round(sum(v * w for v, w in parts) / total_w, 1)
+            r["_composite_raw"] = sum(v * w for v, w in parts) / total_w
+        else:
+            r["_composite_raw"] = None
+
+    # Rank the composite → percentile with 1 decimal (e.g. 94.9)
+    ranked = [r for r in rows if r["_composite_raw"] is not None]
+    ranked.sort(key=lambda r: r["_composite_raw"])
+    n_r = len(ranked)
+    for pos, r in enumerate(ranked):
+        r["score"] = round((pos / max(n_r - 1, 1)) * 100, 1)
+
+    for r in rows:
+        r.pop("_composite_raw", None)
 
     # ── Legacy rs / rs_pct (12M IBD composite) ───────────────────────────────
     scored_12m = [r for r in rows if r["ibd_raw"] is not None]
