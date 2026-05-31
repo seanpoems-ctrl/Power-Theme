@@ -1,0 +1,10 @@
+{
+  "_comment": "Manual holdings override for ETFs that use total return swaps or where yfinance data is incomplete. The scraper uses this instead of yfinance for listed ETFs. Keep weights as approximate % of fund. To add a new ETF override, add its ticker as a key.",
+
+  "DRAM": [
+    { "ticker": "MU",   "name": "Micron Technology Inc",         "weight": 21.0 },
+    { "ticker": "SNDK", "name": "SanDisk Corp Ordinary Shares",  "weight": 5.4  },
+    { "ticker": "STX",  "name": "Seagate Technology Holdings",   "weight": 5.3  },
+    { "ticker": "WDC",  "name": "Western Digital Corp",          "weight": 4.9  }
+  ]
+}

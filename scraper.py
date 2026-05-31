@@ -2595,12 +2595,26 @@ def main():
     output = build_data()
     sp500_prices = output.pop("_sp500_prices", {})
 
+    # Load manual holdings overrides (for ETFs using swaps/derivatives yfinance can't see)
+    _override_path = Path(__file__).parent / "config" / "etf_holdings_override.json"
+    try:
+        etf_holdings_override: dict = json.loads(_override_path.read_text(encoding="utf-8"))
+        etf_holdings_override.pop("_comment", None)   # strip doc key
+        logger.info(f"Loaded ETF holdings overrides for: {sorted(etf_holdings_override.keys())}")
+    except Exception as _e:
+        logger.warning(f"Could not load etf_holdings_override.json ({_e}) — no overrides applied")
+        etf_holdings_override = {}
+
     # Pre-fetch ETF holdings for all unique ETFs in the theme map
     unique_etfs = sorted(set(_THEME_ETF_MAP.values()))
     logger.info(f"Fetching ETF holdings for {len(unique_etfs)} ETFs...")
     etf_holdings = {}
     for etf in unique_etfs:
-        etf_holdings[etf] = fetch_etf_holdings(etf)
+        if etf in etf_holdings_override:
+            logger.info(f"  {etf}: using manual override ({len(etf_holdings_override[etf])} holdings)")
+            etf_holdings[etf] = etf_holdings_override[etf]
+        else:
+            etf_holdings[etf] = fetch_etf_holdings(etf)
     etf_holdings = enrich_etf_holdings(etf_holdings)   # add price/perf/RS
     output["etf_holdings"] = etf_holdings
 
