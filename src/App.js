@@ -6530,6 +6530,25 @@ const THEME_ETF_MAP = {
   "Metals & Mining Equal":             "XME",
   "Telecommunications Services":       "IYZ",
   "Transportation":                    "IYT",
+  // ── Jeff Sun's 53 Equal-Weight Industry Group ETFs (additional) ──
+  "Natural Gas Producers":             "FCG",
+  "Banking Equal Weight":              "KBE",
+  "Energy Equipment":                  "XES",
+  "Silver Miners":                     "SIL",
+  "Real Estate Schwab":                "SCHH",
+  "Capital Markets Equal":             "KCE",
+  "Leisure & Entertainment":           "PEJ",
+  "Pharma Equal Weight":               "XPH",
+  "Insurance Equal Weight":            "KIE",
+  "Esports & Gaming":                  "ESPO",
+  "IBD 50":                            "FFTY",
+  "Medical Devices":                   "IHI",
+  "MLP & Midstream":                   "AMLP",
+  "Oil & Gas Equal Weight":            "XOP",
+  "Gold":                              "GLD",
+  "Biotech Equal Weight":              "PBE",
+  "Healthcare Equipment Equal":        "XHE",
+  "Homebuilders Equal":                "XHB",
 };
 
 // ── Finnhub Catalyst Feed ──
