@@ -8351,19 +8351,16 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
           <tbody>
             {sorted.map((e, i) => (
               <tr key={e.ticker} className={`border-b border-zinc-800/60 hover:bg-zinc-800/40 ${i % 2 === 0 ? "bg-zinc-900/20" : ""}`}>
-                {/* Ticker — Finviz link */}
+                {/* Ticker — click opens holdings modal */}
                 <td className="px-2 py-1 border-r border-zinc-800">
-                  <a href={`https://finviz.com/quote.ashx?t=${e.ticker}`} target="_blank" rel="noopener noreferrer"
-                     className="font-mono font-bold text-cyan-400 hover:underline text-[12px]">{e.ticker}</a>
-                </td>
-                {/* Theme name — click opens holdings modal */}
-                <td className="px-2 py-1 border-r border-zinc-800 max-w-[180px]">
                   <button
                     onClick={() => setSelectedEtf({ ticker: e.ticker, theme: e.theme, holdings: etfHoldings[e.ticker] ?? [] })}
-                    className="text-zinc-300 hover:text-cyan-300 hover:underline text-[11px] text-left truncate w-full cursor-pointer transition-colors">
-                    {e.theme}
+                    className="font-mono font-bold text-cyan-400 hover:underline text-[12px] cursor-pointer text-left">
+                    {e.ticker}
                   </button>
                 </td>
+                {/* Theme name — plain text */}
+                <td className="px-2 py-1 text-zinc-300 text-[11px] border-r border-zinc-800 max-w-[180px] truncate">{e.theme}</td>
                 {/* RS % (1M) */}
                 <td className="px-2 py-1 text-right font-mono font-bold text-[12px] border-r border-zinc-800">
                   <span className={`${(e.rs_1m_pct ?? 0) >= 90 ? "text-emerald-300" : (e.rs_1m_pct ?? 0) >= 75 ? "text-emerald-400" : (e.rs_1m_pct ?? 0) >= 50 ? "text-zinc-300" : "text-rose-400"}`}>
