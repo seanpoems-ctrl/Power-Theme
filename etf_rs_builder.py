@@ -179,7 +179,7 @@ def build_etf_rs() -> dict:
     else:
         closes5 = raw5[["Close"]].rename(columns={"Close": ALL_TICKERS[0]})
 
-    D21, D63, D126, D252 = 21, 63, 126, 252
+    D21, D63, D126, D252 = 25, 63, 126, 252  # D21=25 matches Jeff Sun's 25-day rolling window
     rows: list[dict] = []
 
     for tkr in ALL_TICKERS:
