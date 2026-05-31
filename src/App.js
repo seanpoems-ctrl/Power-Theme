@@ -8392,9 +8392,23 @@ const EtfRsTable = ({ etfRsData }) => {
                 <td className={`px-2 py-1 text-right font-mono border-r border-zinc-800 ${pctBg(e.perf_1m)}`}>
                   {fmtP(e.perf_1m)}
                 </td>
-                {/* % Off 52W High */}
-                <td className={`px-2 py-1 text-right font-mono ${offBg(e.pct_off_52wh)}`}>
-                  {e.pct_off_52wh != null ? `${e.pct_off_52wh > 0 ? "+" : ""}${e.pct_off_52wh.toFixed(0)}%` : "—"}
+                {/* % Off 52W High — pink bar proportional to distance from high */}
+                <td className="px-2 py-1 font-mono min-w-[80px]">
+                  <div className="flex items-center gap-1.5">
+                    {/* Pink bar — wider = further from 52W high */}
+                    <div className="flex-1 h-3 flex items-center">
+                      {e.pct_off_52wh != null && e.pct_off_52wh < 0 && (
+                        <div
+                          className="h-full rounded-sm bg-rose-400/70"
+                          style={{ width: `${Math.min(100, Math.abs(e.pct_off_52wh) / 40 * 100)}%` }}
+                        />
+                      )}
+                    </div>
+                    {/* Value text */}
+                    <span className={`text-right shrink-0 ${e.pct_off_52wh == null ? "text-zinc-600" : e.pct_off_52wh >= -1 ? "text-zinc-400" : "text-rose-400"}`}>
+                      {e.pct_off_52wh != null ? `${e.pct_off_52wh > 0 ? "+" : ""}${e.pct_off_52wh.toFixed(0)}%` : "—"}
+                    </span>
+                  </div>
                 </td>
               </tr>
             ))}
