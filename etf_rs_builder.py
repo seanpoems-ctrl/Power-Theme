@@ -198,7 +198,9 @@ def build_etf_rs() -> dict:
     else:
         closes5 = raw5[["Close"]].rename(columns={"Close": ALL_TICKERS[0]})
 
-    D21, D63, D126, D252 = 25, 63, 126, 252  # D21=25 matches Jeff Sun's 25-day rolling window
+    D20  = 20   # Jeff Sun's 1-month RS baseline period (20 trading days)
+    D25  = 25   # Jeff Sun's histogram window (25 trading days for daily RS bars)
+    D21, D63, D126, D252 = D20, 63, 126, 252
     rows: list[dict] = []
 
     for tkr in ALL_TICKERS:
@@ -232,15 +234,15 @@ def build_etf_rs() -> dict:
         rng = spark_max - spark_min or 1
         sparkline = [round((v - spark_min) / rng * 100, 1) for v in spark_raw]
 
-        # 25-day RS histogram vs SPY using 12-month data
+        # 25-day RS histogram — histogram uses D25 per Jeff Sun's tutorial
         rs_histogram: list[float] = []
         if "SPY" in closes.columns:
             spy_s  = closes["SPY"].dropna()
             etf_d  = s.pct_change().dropna()
             spy_d  = spy_s.pct_change().dropna()
             common = etf_d.index.intersection(spy_d.index)
-            etf_25 = etf_d.loc[common].tail(25)
-            spy_25 = spy_d.loc[common].tail(25)
+            etf_25 = etf_d.loc[common].tail(D25)
+            spy_25 = spy_d.loc[common].tail(D25)
             for er, sr in zip(etf_25.tolist(), spy_25.tolist()):
                 if abs(sr) > 0.0001:
                     rs_histogram.append(round(er / sr, 3))
@@ -281,23 +283,26 @@ def build_etf_rs() -> dict:
                     pct_off_52wh if pct_off_52wh is not None else float("nan"),
                     )
 
-    # ── Rank 12M composite (IBD) ──────────────────────────────────────────────
+    # ── Jeff Sun percentile formula: RS% = (Peers Beaten / (Total-1)) × 100 ──
+    # Range: 0% (bottom) to 100% (top), displayed rounded to nearest 5%
+
+    # 12M composite rank
     scored_12m = [r for r in rows if r["ibd_raw"] is not None]
     scored_12m.sort(key=lambda r: r["ibd_raw"])
     n = len(scored_12m)
     for i, r in enumerate(scored_12m):
-        rs = max(1, min(99, round((i / max(n - 1, 1)) * 98 + 1)))
-        r["rs"]     = rs
-        r["rs_pct"] = min(100, round(rs / 5) * 5)
+        rs_raw = (i / max(n - 1, 1)) * 100          # peers beaten / (total-1) × 100
+        r["rs"]     = round(rs_raw)
+        r["rs_pct"] = min(100, round(rs_raw / 5) * 5)
 
-    # ── Rank 1M (pure 1-month return) ────────────────────────────────────────
+    # 1M rank (20-day return — Jeff Sun's baseline period)
     scored_1m = [r for r in rows if r["rs_1m_raw"] is not None]
     scored_1m.sort(key=lambda r: r["rs_1m_raw"])
     n1 = len(scored_1m)
     for i, r in enumerate(scored_1m):
-        rs1 = max(1, min(99, round((i / max(n1 - 1, 1)) * 98 + 1)))
-        r["rs_1m"]     = rs1
-        r["rs_1m_pct"] = min(100, round(rs1 / 5) * 5)
+        rs1_raw = (i / max(n1 - 1, 1)) * 100        # peers beaten / (total-1) × 100
+        r["rs_1m"]     = round(rs1_raw)
+        r["rs_1m_pct"] = min(100, round(rs1_raw / 5) * 5)
 
     # Sort by 1M RS descending (primary display order)
     result_rows = sorted(rows, key=lambda r: -(r["rs_1m"] or 0))
