@@ -8201,8 +8201,37 @@ const EtfTrendlinePanel = ({ etfData }) => {
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ETF RS Table — sortable table of all ETFs ranked by IBD-style RS
+// ETF RS Table — matches Stockbee-style layout exactly
+// Columns: Group | Group (name) | RS% | 1-Mth Chart | 1-Mth RS | % Intraday | % 1D | % 1-Mth | % Off 52W H
 // ─────────────────────────────────────────────────────────────────────────────
+const EtfSparkline = ({ data = [] }) => {
+  if (!data.length) return <span className="text-zinc-700 text-[10px]">—</span>;
+  const W = 80, H = 22, pad = 2;
+  const xs = data.map((_, i) => pad + (i / (data.length - 1 || 1)) * (W - pad * 2));
+  const ys = data.map(v => H - pad - (v / 100) * (H - pad * 2));
+  const pts = xs.map((x, i) => `${x.toFixed(1)},${ys[i].toFixed(1)}`).join(" ");
+  const last = data[data.length - 1];
+  const first = data[0];
+  const color = last >= first ? "#34d399" : "#f87171";
+  return (
+    <svg width={W} height={H} className="overflow-visible">
+      <polyline points={pts} fill="none" stroke={color} strokeWidth="1.5" strokeLinejoin="round"/>
+    </svg>
+  );
+};
+
+const EtfRsBar = ({ rs = 0 }) => {
+  const pct = Math.min(100, Math.max(0, rs));
+  const color = pct >= 90 ? "#34d399" : pct >= 75 ? "#86efac" : pct >= 50 ? "#6ee7b7" : pct >= 25 ? "#d1fae5" : "#fca5a5";
+  return (
+    <div className="flex items-center gap-1">
+      <div className="w-16 h-2.5 bg-zinc-800 rounded-sm overflow-hidden">
+        <div className="h-full rounded-sm transition-all" style={{ width: `${pct}%`, backgroundColor: color }}/>
+      </div>
+    </div>
+  );
+};
+
 const EtfRsTable = ({ etfRsData }) => {
   const [sortCol, setSortCol] = useState("rs");
   const [sortDir, setSortDir] = useState("desc");
@@ -8220,24 +8249,40 @@ const EtfRsTable = ({ etfRsData }) => {
   };
 
   const sorted = useMemo(() => [...etfs].sort((a, b) => {
-    const av = a[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
-    const bv = b[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
+    const key = sortCol === "rs_pct" ? "rs" : sortCol;
+    const av = a[key] ?? (sortDir === "asc" ? Infinity : -Infinity);
+    const bv = b[key] ?? (sortDir === "asc" ? Infinity : -Infinity);
     if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
     return sortDir === "asc" ? av - bv : bv - av;
   }), [etfs, sortCol, sortDir]);
 
-  const rsCol  = v => !v ? "text-zinc-500" : v >= 90 ? "text-emerald-300 font-bold" : v >= 75 ? "text-emerald-400" : v >= 50 ? "text-zinc-300" : v >= 25 ? "text-zinc-500" : "text-rose-400";
-  const pctCol = v => v == null ? "text-zinc-600" : v > 0 ? "text-emerald-400" : "text-rose-400";
-  const fmtP   = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
+  const pctBg = v => {
+    if (v == null) return "";
+    if (v > 20) return "bg-emerald-500/30 text-emerald-300";
+    if (v > 10) return "bg-emerald-500/20 text-emerald-400";
+    if (v > 0)  return "bg-emerald-500/10 text-emerald-400";
+    if (v > -5) return "bg-rose-500/10 text-rose-400";
+    return "bg-rose-500/20 text-rose-400";
+  };
+  const offBg = v => {
+    if (v == null) return "text-zinc-500";
+    if (v >= -1)  return "text-zinc-400";
+    if (v >= -5)  return "bg-rose-500/10 text-rose-400";
+    if (v >= -15) return "bg-rose-500/20 text-rose-400";
+    return "bg-rose-500/30 text-rose-300";
+  };
+  const fmtP = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
 
   const COLS = [
-    { col: "ticker",   label: "ETF",   align: "left"  },
-    { col: "theme",    label: "Theme", align: "left"  },
-    { col: "rs",       label: "RS",    align: "right" },
-    { col: "perf_1m",  label: "1M%",   align: "right" },
-    { col: "perf_3m",  label: "3M%",   align: "right" },
-    { col: "perf_6m",  label: "6M%",   align: "right" },
-    { col: "perf_12m", label: "12M%",  align: "right" },
+    { col: "ticker",        label: "Group",       align: "left"  },
+    { col: "theme",         label: "Group",       align: "left"  },
+    { col: "rs_pct",        label: "RS %",        align: "right" },
+    { col: "_chart",        label: "1-Mth Chart", align: "left",  nosort: true },
+    { col: "_rs_bar",       label: "1-Mth RS",    align: "left",  nosort: true },
+    { col: "perf_intraday", label: "% Intraday",  align: "right" },
+    { col: "perf_1d",       label: "% 1D",        align: "right" },
+    { col: "perf_1m",       label: "% 1-Mth",     align: "right" },
+    { col: "pct_off_52wh",  label: "% Off 52W H", align: "right" },
   ];
 
   if (!etfRsData) return (
@@ -8249,7 +8294,7 @@ const EtfRsTable = ({ etfRsData }) => {
       <div className="flex items-baseline gap-2 mb-3">
         <h3 className="text-sm font-semibold text-zinc-100">ETF Relative Strength</h3>
         <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{sorted.length}</span>
-        <span className="text-xs text-zinc-600">IBD-style RS · ranked 1–99 among all ETFs · click header to sort</span>
+        <span className="text-xs text-zinc-600">IBD-style RS · click any header to sort</span>
         {etfRsData.generated_at && (
           <span className="text-xs text-zinc-700 ml-auto font-mono">
             {new Date(etfRsData.generated_at).toLocaleDateString()}
@@ -8259,28 +8304,58 @@ const EtfRsTable = ({ etfRsData }) => {
       <div className="overflow-x-auto rounded-lg border border-zinc-800">
         <table className="w-full text-xs border-collapse">
           <thead>
-            <tr className="bg-zinc-900 border-b border-zinc-800 text-zinc-500 text-[11px] uppercase tracking-wide select-none">
-              {COLS.map(({ col, label, align }) => (
-                <th key={col} onClick={() => handleSort(col)}
-                    className={`px-3 py-2.5 font-medium cursor-pointer hover:text-zinc-300 transition-colors whitespace-nowrap ${align === "right" ? "text-right" : "text-left"}`}>
-                  {label}<SortIcon col={col}/>
+            <tr className="bg-zinc-900/80 border-b border-zinc-700 text-zinc-400 text-[11px] select-none">
+              {COLS.map(({ col, label, align, nosort }) => (
+                <th key={col}
+                    onClick={() => !nosort && handleSort(col)}
+                    className={`px-2 py-2 font-semibold whitespace-nowrap border-r border-zinc-800 last:border-r-0
+                      ${nosort ? "cursor-default" : "cursor-pointer hover:text-zinc-200 transition-colors"}
+                      ${align === "right" ? "text-right" : "text-left"}`}>
+                  {label}{!nosort && <SortIcon col={col}/>}
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
             {sorted.map((e, i) => (
-              <tr key={e.ticker} className={`border-b border-zinc-800/50 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/30"}`}>
-                <td className="px-3 py-1.5">
+              <tr key={e.ticker} className={`border-b border-zinc-800/60 hover:bg-zinc-800/40 ${i % 2 === 0 ? "bg-zinc-900/20" : ""}`}>
+                {/* Ticker */}
+                <td className="px-2 py-1 border-r border-zinc-800">
                   <a href={`https://finviz.com/quote.ashx?t=${e.ticker}`} target="_blank" rel="noopener noreferrer"
-                     className="font-mono font-bold text-cyan-400 hover:underline">{e.ticker}</a>
+                     className="font-mono font-bold text-cyan-400 hover:underline text-[12px]">{e.ticker}</a>
                 </td>
-                <td className="px-3 py-1.5 text-zinc-400 max-w-[220px] truncate">{e.theme}</td>
-                <td className={`px-3 py-1.5 text-right font-mono font-bold text-sm ${rsCol(e.rs)}`}>{e.rs ?? "—"}</td>
-                <td className={`px-3 py-1.5 text-right font-mono ${pctCol(e.perf_1m)}`}>{fmtP(e.perf_1m)}</td>
-                <td className={`px-3 py-1.5 text-right font-mono ${pctCol(e.perf_3m)}`}>{fmtP(e.perf_3m)}</td>
-                <td className={`px-3 py-1.5 text-right font-mono ${pctCol(e.perf_6m)}`}>{fmtP(e.perf_6m)}</td>
-                <td className={`px-3 py-1.5 text-right font-mono ${pctCol(e.perf_12m)}`}>{fmtP(e.perf_12m)}</td>
+                {/* Theme name */}
+                <td className="px-2 py-1 text-zinc-300 text-[11px] border-r border-zinc-800 max-w-[180px] truncate">{e.theme}</td>
+                {/* RS % */}
+                <td className="px-2 py-1 text-right font-mono font-bold text-[12px] border-r border-zinc-800">
+                  <span className={`${(e.rs_pct ?? 0) >= 90 ? "text-emerald-300" : (e.rs_pct ?? 0) >= 75 ? "text-emerald-400" : (e.rs_pct ?? 0) >= 50 ? "text-zinc-300" : "text-rose-400"}`}>
+                    {e.rs_pct != null ? `${e.rs_pct}%` : "—"}
+                  </span>
+                </td>
+                {/* 1-Month Sparkline */}
+                <td className="px-2 py-0.5 border-r border-zinc-800">
+                  <EtfSparkline data={e.sparkline ?? []} />
+                </td>
+                {/* 1-Month RS bar */}
+                <td className="px-2 py-1 border-r border-zinc-800">
+                  <EtfRsBar rs={e.rs_pct ?? 0} />
+                </td>
+                {/* % Intraday */}
+                <td className={`px-2 py-1 text-right font-mono border-r border-zinc-800 ${pctBg(e.perf_intraday)}`}>
+                  {fmtP(e.perf_intraday)}
+                </td>
+                {/* % 1D */}
+                <td className={`px-2 py-1 text-right font-mono border-r border-zinc-800 ${pctBg(e.perf_1d)}`}>
+                  {fmtP(e.perf_1d)}
+                </td>
+                {/* % 1-Mth */}
+                <td className={`px-2 py-1 text-right font-mono border-r border-zinc-800 ${pctBg(e.perf_1m)}`}>
+                  {fmtP(e.perf_1m)}
+                </td>
+                {/* % Off 52W High */}
+                <td className={`px-2 py-1 text-right font-mono ${offBg(e.pct_off_52wh)}`}>
+                  {e.pct_off_52wh != null ? `${e.pct_off_52wh > 0 ? "+" : ""}${e.pct_off_52wh.toFixed(0)}%` : "—"}
+                </td>
               </tr>
             ))}
           </tbody>

@@ -148,7 +148,7 @@ def compute_ibd_rs(perf_q4: float | None, perf_q3: float | None,
 def build_etf_rs() -> dict:
     logger.info("Fetching 12-month daily price history for %d ETFs…", len(ALL_TICKERS))
 
-    # Batch download — one call for all tickers
+    # Batch download — one call for all tickers + SPY benchmark
     raw = yf.download(
         ALL_TICKERS + ["SPY"],
         period="12mo",
@@ -157,15 +157,15 @@ def build_etf_rs() -> dict:
         progress=False,
     )
 
-    # Extract close prices (multi-ticker download returns a MultiIndex)
+    # Extract close prices
     if isinstance(raw.columns, pd.MultiIndex):
         closes = raw["Close"]
+        highs  = raw["High"]  if "High"  in raw.columns.get_level_values(0) else None
     else:
         closes = raw[["Close"]].rename(columns={"Close": ALL_TICKERS[0]})
+        highs  = None
 
-    # Approximate trading-day periods
     D21, D63, D126, D252 = 21, 63, 126, 252
-
     rows: list[dict] = []
 
     for tkr in ALL_TICKERS:
@@ -177,45 +177,63 @@ def build_etf_rs() -> dict:
             logger.warning("  ✗ %s: insufficient data (%d rows)", tkr, len(s))
             continue
 
+        # Performance
+        p1d  = _safe_pct(s, 1)
         p1m  = _safe_pct(s, D21)
         p3m  = _safe_pct(s, D63)
         p6m  = _safe_pct(s, D126)
         p12m = _safe_pct(s, D252)
 
-        # IBD RS quarters (Q4=most recent 3M, Q3=3-6M, Q2=6-9M, Q1=9-12M)
+        # % off 52-week high
+        h52 = float(s.tail(D252).max()) if len(s) >= 5 else None
+        cur = float(s.iloc[-1])
+        pct_off_52wh = round((cur / h52 - 1) * 100, 1) if h52 and h52 > 0 else None
+
+        # 1-month sparkline (last 21 closes, normalised to 0-100 for SVG)
+        spark_raw = s.tail(D21).round(4).tolist()
+        spark_min, spark_max = min(spark_raw), max(spark_raw)
+        rng = spark_max - spark_min or 1
+        sparkline = [round((v - spark_min) / rng * 100, 1) for v in spark_raw]
+
+        # IBD RS quarters
         D189 = D63 * 3
         q4 = p3m
         q3 = _safe_pct(s.iloc[:-D63],  D63) if len(s) > D63 * 2 else None
         q2 = _safe_pct(s.iloc[:-D126], D63) if len(s) > D126 + D63 else None
         q1 = _safe_pct(s.iloc[:-D189], D63) if len(s) > D63 * 4 else None
-
         ibd_raw = compute_ibd_rs(q4, q3, q2, q1)
 
         rows.append({
-            "ticker":    tkr,
-            "theme":     TICKER_TO_THEME.get(tkr, tkr),
-            "perf_1m":   p1m,
-            "perf_3m":   p3m,
-            "perf_6m":   p6m,
-            "perf_12m":  p12m,
-            "ibd_raw":   ibd_raw,
-            "rs":        None,   # filled after ranking
+            "ticker":         tkr,
+            "theme":          TICKER_TO_THEME.get(tkr, tkr),
+            "perf_intraday":  p1d,
+            "perf_1d":        p1d,
+            "perf_1m":        p1m,
+            "perf_3m":        p3m,
+            "perf_6m":        p6m,
+            "perf_12m":       p12m,
+            "pct_off_52wh":   pct_off_52wh,
+            "sparkline":      sparkline,
+            "ibd_raw":        ibd_raw,
+            "rs":             None,   # filled after ranking
+            "rs_pct":         None,   # 0-100 display value
         })
-        logger.info("  ✓ %-6s  1M=%+6.1f%%  3M=%+6.1f%%  6M=%+6.1f%%",
+        logger.info("  ✓ %-6s  1D=%+5.1f%%  1M=%+6.1f%%  52WH=%+5.1f%%",
                     tkr,
+                    p1d  if p1d  is not None else float("nan"),
                     p1m  if p1m  is not None else float("nan"),
-                    p3m  if p3m  is not None else float("nan"),
-                    p6m  if p6m  is not None else float("nan"),
+                    pct_off_52wh if pct_off_52wh is not None else float("nan"),
                     )
 
-    # ── Rank to 1-99 ──────────────────────────────────────────────────────────
+    # ── Rank to 1-99 → display as RS% (rounded to nearest 5) ────────────────
     scored = [r for r in rows if r["ibd_raw"] is not None]
     scored.sort(key=lambda r: r["ibd_raw"])
     n = len(scored)
     for i, r in enumerate(scored):
-        r["rs"] = max(1, min(99, round((i / max(n - 1, 1)) * 98 + 1)))
+        rs = max(1, min(99, round((i / max(n - 1, 1)) * 98 + 1)))
+        r["rs"]     = rs
+        r["rs_pct"] = min(100, round(rs / 5) * 5)   # round to nearest 5 for display
 
-    # Stocks with no raw score get rs=None
     result_rows = sorted(rows, key=lambda r: -(r["rs"] or 0))
 
     return {
