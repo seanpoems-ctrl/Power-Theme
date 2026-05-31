@@ -179,10 +179,10 @@ def build_etf_rs() -> dict:
 
     all_syms = ALL_TICKERS + ["SPY"]
 
-    # 12-month data for RS, sparklines, 52W high
+    # 15-month data — extra 3 months ensures D252 (1-year) calc always has enough rows
     raw = yf.download(
         all_syms,
-        period="12mo",
+        period="15mo",
         interval="1d",
         auto_adjust=True,
         progress=False,
