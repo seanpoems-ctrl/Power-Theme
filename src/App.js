@@ -6052,7 +6052,7 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
   );
 };
 
-const GapperScanner = ({ earningsData, ibkrThemesData }) => {
+const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
   const lang = useLang();
   const creditRegime = useMarketStore((s) => s.creditRegime);
   const [gapperData, setGapperData] = useState(null);
@@ -8136,9 +8136,129 @@ const EtfRsHistogram = ({ data = [] }) => {
   );
 };
 
-const EtfRsTable = ({ etfRsData }) => {
+const EtfHoldingsModal = ({ etf, theme, holdings, onClose }) => {
+  const [sortCol, setSortCol] = useState("perf_1d");
+  const [sortDir, setSortDir] = useState("desc");
+
+  const fmtMktCap = v => {
+    if (v == null) return "—";
+    if (v >= 1e9) return `$${(v / 1e9).toFixed(2)}B`;
+    if (v >= 1e6) return `$${(v / 1e6).toFixed(1)}M`;
+    return `$${v.toFixed(0)}`;
+  };
+  const fmtVol = v => {
+    if (v == null) return "—";
+    if (v >= 1e9) return `$${(v / 1e9).toFixed(2)}B`;
+    if (v >= 1e6) return `$${(v / 1e6).toFixed(1)}M`;
+    return `$${v.toFixed(0)}`;
+  };
+
+  const sorted = useMemo(() => {
+    const arr = [...holdings];
+    arr.sort((a, b) => {
+      const av = a[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
+      const bv = b[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
+      if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+      return sortDir === "asc" ? av - bv : bv - av;
+    });
+    return arr;
+  }, [holdings, sortCol, sortDir]);
+
+  const handleSort = col => {
+    if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
+    else { setSortCol(col); setSortDir("desc"); }
+  };
+
+  const Th = ({ col, label, align = "right" }) => (
+    <th onClick={() => handleSort(col)}
+        className={`px-3 py-2 font-semibold whitespace-nowrap cursor-pointer hover:text-zinc-200 select-none text-zinc-400 text-[11px] uppercase tracking-wide ${align === "left" ? "text-left" : "text-right"}`}>
+      {label}
+      {sortCol === col
+        ? <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>
+        : <span className="ml-0.5 text-zinc-700">⇅</span>}
+    </th>
+  );
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm"
+         onClick={onClose}>
+      <div className="bg-zinc-950 border border-zinc-800 rounded-xl shadow-2xl w-full max-w-4xl mx-4 max-h-[85vh] flex flex-col"
+           onClick={e => e.stopPropagation()}>
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 flex-shrink-0">
+          <div className="flex items-center gap-2 flex-wrap">
+            <span className="text-sm font-bold text-zinc-100">{theme}</span>
+            <span className="font-mono text-xs font-semibold text-sky-400 bg-sky-500/10 border border-sky-500/30 px-1.5 py-0.5 rounded">{etf}</span>
+            <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{sorted.length} stocks · holdings</span>
+          </div>
+          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 ml-2">
+            <X size={16} />
+          </button>
+        </div>
+        {/* Table */}
+        <div className="overflow-auto flex-1">
+          {sorted.length === 0 ? (
+            <div className="text-center py-12 text-zinc-600 text-sm">No holdings data available</div>
+          ) : (
+            <table className="w-full text-xs border-collapse">
+              <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-800">
+                <tr>
+                  <th className="px-3 py-2 text-left text-zinc-500 font-semibold text-[11px] w-8">#</th>
+                  <Th col="ticker"        label="Ticker"    align="left" />
+                  <Th col="name"          label="Company"   align="left" />
+                  <Th col="mkt_cap"       label="Mkt Cap"               />
+                  <Th col="dollar_volume" label="$ Vol"                  />
+                  <Th col="adr_pct"       label="ADR%"                   />
+                  <Th col="rs"            label="RS"                     />
+                  <Th col="perf_1d"       label="1D Change%"             />
+                </tr>
+              </thead>
+              <tbody>
+                {sorted.map((h, i) => {
+                  const p1d = h.perf_1d;
+                  const p1dColor = p1d == null ? "text-zinc-600"
+                    : p1d >= 10 ? "text-emerald-300 font-bold"
+                    : p1d >= 3  ? "text-emerald-400"
+                    : p1d >= 0  ? "text-emerald-400/70"
+                    : p1d >= -3 ? "text-rose-400/70"
+                    : "text-rose-400";
+                  return (
+                    <tr key={`${h.ticker}-${i}`}
+                        className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 ${i % 2 === 0 ? "bg-zinc-900/20" : ""}`}>
+                      <td className="px-3 py-1.5 text-zinc-600 text-[11px]">{i + 1}</td>
+                      <td className="px-3 py-1.5">
+                        <a href={`https://finviz.com/quote.ashx?t=${h.ticker}`} target="_blank" rel="noreferrer"
+                           onClick={e => e.stopPropagation()}
+                           className="font-mono font-bold text-cyan-400 hover:underline text-[12px]">{h.ticker}</a>
+                      </td>
+                      <td className="px-3 py-1.5 text-zinc-300 max-w-[180px] truncate">{h.name || "—"}</td>
+                      <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{fmtMktCap(h.mkt_cap)}</td>
+                      <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{fmtVol(h.dollar_volume)}</td>
+                      <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : "—"}</td>
+                      <td className="px-3 py-1.5 text-right font-mono">
+                        {h.rs != null
+                          ? <span className={h.rs >= 80 ? "text-emerald-400 font-bold" : h.rs >= 60 ? "text-zinc-200" : "text-zinc-500"}>{h.rs}</span>
+                          : <span className="text-zinc-600">—</span>}
+                      </td>
+                      <td className={`px-3 py-1.5 text-right font-mono font-semibold ${p1dColor}`}>
+                        {p1d != null ? `${p1d >= 0 ? "+" : ""}${p1d.toFixed(2)}%` : "—"}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
   const [sortCol, setSortCol] = useState("rs");
   const [sortDir, setSortDir] = useState("desc");
+  const [selectedEtf, setSelectedEtf] = useState(null); // { ticker, theme, holdings }
 
   const etfs = etfRsData?.etfs ?? [];
 
@@ -8195,6 +8315,7 @@ const EtfRsTable = ({ etfRsData }) => {
   );
 
   return (
+    <>
     <div>
       <div className="flex items-baseline gap-2 mb-3">
         <h3 className="text-sm font-semibold text-zinc-100">ETF Relative Strength</h3>
@@ -8224,10 +8345,16 @@ const EtfRsTable = ({ etfRsData }) => {
           <tbody>
             {sorted.map((e, i) => (
               <tr key={e.ticker} className={`border-b border-zinc-800/60 hover:bg-zinc-800/40 ${i % 2 === 0 ? "bg-zinc-900/20" : ""}`}>
-                {/* Ticker */}
+                {/* Ticker — click opens holdings modal */}
                 <td className="px-2 py-1 border-r border-zinc-800">
-                  <a href={`https://finviz.com/quote.ashx?t=${e.ticker}`} target="_blank" rel="noopener noreferrer"
-                     className="font-mono font-bold text-cyan-400 hover:underline text-[12px]">{e.ticker}</a>
+                  <button
+                    onClick={() => {
+                      const holdings = etfHoldings[e.ticker] ?? [];
+                      setSelectedEtf({ ticker: e.ticker, theme: e.theme, holdings });
+                    }}
+                    className="font-mono font-bold text-cyan-400 hover:underline text-[12px] cursor-pointer text-left">
+                    {e.ticker}
+                  </button>
                 </td>
                 {/* Theme name */}
                 <td className="px-2 py-1 text-zinc-300 text-[11px] border-r border-zinc-800 max-w-[180px] truncate">{e.theme}</td>
@@ -8281,6 +8408,15 @@ const EtfRsTable = ({ etfRsData }) => {
         </table>
       </div>
     </div>
+    {selectedEtf && (
+      <EtfHoldingsModal
+        etf={selectedEtf.ticker}
+        theme={selectedEtf.theme}
+        holdings={selectedEtf.holdings}
+        onClose={() => setSelectedEtf(null)}
+      />
+    )}
+    </>
   );
 };
 
@@ -8683,7 +8819,7 @@ const DailyWatchlistTab = ({ data }) => {
       </div>} {/* end LONG MODE */}
 
       {/* ── ETF RS TABLE ──────────────────────────────────── */}
-      {mode === "etf" && <EtfRsTable etfRsData={etfRsData} />}
+      {mode === "etf" && <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} />}
 
       {/* ── SHORT MODE ────────────────────────────────────── */}
       {mode === "short" && (
@@ -9341,7 +9477,7 @@ const filtered = useMemo(() => {
         <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-6">
           <ThematicLeaders etfHoldings={data?.etf_holdings || {}}/>
         </div>
-      ) : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData}/> : (
+      ) : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
