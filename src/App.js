@@ -8239,23 +8239,29 @@ const EtfSparkline = ({ data = [] }) => {
   );
 };
 
-// 25-bar RS histogram: each bar = ETF daily return ÷ SPY daily return
-// All bars grow upward from baseline — green = outperformed SPY, pink = underperformed
+// 25-bar cumulative RS histogram vs SPY
+// Each bar = (ETF[i]/ETF[0]) / (SPY[i]/SPY[0]) — always positive, always green
+// Rising bars = ETF gaining ground vs SPY over the month
 const EtfRsHistogram = ({ data = [] }) => {
   if (!data.length) return <span className="text-zinc-700 text-[10px]">—</span>;
   const W = 72, H = 26;
-  const absMax = Math.max(...data.map(v => Math.abs(v)), 0.5);
-  const gap = 0.6;
+  const gap = 0.5;
   const barW = Math.max(1.2, W / data.length - gap);
+  // Normalise heights: min maps to small base bar, max maps to full height
+  const minV = Math.min(...data);
+  const maxV = Math.max(...data);
+  const range = Math.max(maxV - minV, 0.001);
   return (
     <svg width={W} height={H} className="overflow-visible">
-      {/* Baseline */}
       <line x1={0} y1={H} x2={W} y2={H} stroke="#3f3f46" strokeWidth="0.5"/>
       {data.map((v, i) => {
         const x = i * (W / data.length);
-        const h = Math.max(1.5, Math.min(H - 1, (Math.abs(v) / absMax) * (H - 2)));
+        // Scale: smallest value → 2px bar, largest → full H
+        const norm = (v - minV) / range;
+        const h = Math.max(2, 2 + norm * (H - 4));
         const y = H - h;
-        const fill = v >= 0 ? "#22c55e" : "#fca5a5";
+        // Shade: brighter green when above starting point (cumRS > 1), lighter when below
+        const fill = v >= 1.0 ? "#22c55e" : "#86efac";
         return <rect key={i} x={x} y={y} width={barW} height={h} fill={fill} rx="0.3"/>;
       })}
     </svg>

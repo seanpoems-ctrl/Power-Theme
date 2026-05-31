@@ -234,20 +234,24 @@ def build_etf_rs() -> dict:
         rng = spark_max - spark_min or 1
         sparkline = [round((v - spark_min) / rng * 100, 1) for v in spark_raw]
 
-        # 25-day RS histogram — histogram uses D25 per Jeff Sun's tutorial
+        # 25-day cumulative RS histogram vs SPY
+        # Formula: cumRS[i] = (ETF[i]/ETF[0]) / (SPY[i]/SPY[0])
+        # Always positive → all bars green; rising = outperforming SPY over time
         rs_histogram: list[float] = []
         if "SPY" in closes.columns:
-            spy_s  = closes["SPY"].dropna()
-            etf_d  = s.pct_change().dropna()
-            spy_d  = spy_s.pct_change().dropna()
-            common = etf_d.index.intersection(spy_d.index)
-            etf_25 = etf_d.loc[common].tail(D25)
-            spy_25 = spy_d.loc[common].tail(D25)
-            for er, sr in zip(etf_25.tolist(), spy_25.tolist()):
-                if abs(sr) > 0.0001:
-                    rs_histogram.append(round(er / sr, 3))
-                else:
-                    rs_histogram.append(round(er * 100, 3))
+            spy_s   = closes["SPY"].dropna()
+            common  = s.index.intersection(spy_s.index)
+            etf_w   = s.loc[common].tail(D25 + 1)   # +1 for base day
+            spy_w   = spy_s.loc[common].tail(D25 + 1)
+            if len(etf_w) >= 2 and len(spy_w) >= 2:
+                etf_base = float(etf_w.iloc[0])
+                spy_base = float(spy_w.iloc[0])
+                for ep, sp in zip(etf_w.iloc[1:].tolist(), spy_w.iloc[1:].tolist()):
+                    if etf_base > 0 and spy_base > 0 and sp > 0:
+                        cum_rs = (ep / etf_base) / (sp / spy_base)
+                        rs_histogram.append(round(cum_rs, 4))
+                    else:
+                        rs_histogram.append(1.0)
 
         # IBD RS quarters
         D189 = D63 * 3
