@@ -2496,6 +2496,8 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             new_h["perf_1d"]       = s.get("perf_1d")
             new_h["perf_1w"]       = s.get("perf_1w")
             new_h["perf_1m"]       = s.get("perf_1m")
+            new_h["perf_3m"]       = s.get("perf_3m")
+            new_h["perf_6m"]       = s.get("perf_6m")
             new_h["adr_pct"]       = s.get("adr_pct")
             # $Vol: TradingView avg 10-day dollar volume (primary),
             # yfinance last-day price×volume as fallback.
