@@ -8987,12 +8987,35 @@ const SignalBadge = ({ signal }) => {
   );
 };
 
+// Mini sparkline for ETF trend (20-day Score)
+const TrendSparkline = ({ data = [] }) => {
+  if (data.length < 2) return <span className="text-zinc-700 text-[9px]">—</span>;
+  const W = 60, H = 18, pad = 1;
+  const min = Math.min(...data), max = Math.max(...data), rng = max - min || 1;
+  const pts = data.map((v, i) =>
+    `${pad + (i / (data.length - 1)) * (W - pad * 2)},${H - pad - ((v - min) / rng) * (H - pad * 2)}`
+  ).join(" ");
+  const rising = data[data.length - 1] >= data[0];
+  return (
+    <svg width={W} height={H} viewBox={`0 0 ${W} ${H}`}>
+      <polyline points={pts} fill="none" stroke={rising ? "#34d399" : "#f87171"} strokeWidth="1.5" strokeLinejoin="round"/>
+    </svg>
+  );
+};
+
 const UniverseTab = () => {
   const [uData, setUData]         = useState(null);
   const [loading, setLoading]     = useState(true);
   const [sigFilter, setSigFilter] = useState("All");
+  const [sectorFilter, setSectorFilter] = useState(null); // sector name or null
   const [sortCol, setSortCol]     = useState("rs");
   const [sortDir, setSortDir]     = useState("desc");
+  // Adjustable filters
+  const [minRS,   setMinRS]   = useState(0);
+  const [minVol,  setMinVol]  = useState(0);    // $M
+  const [minMC,   setMinMC]   = useState(0);    // $B
+  const [minADR,  setMinADR]  = useState(0);    // %
+  const [showNew, setShowNew] = useState(false); // only new ETF entrants
 
   useEffect(() => {
     fetch(process.env.PUBLIC_URL + "/universe.json?v=" + Date.now())
@@ -9005,44 +9028,54 @@ const UniverseTab = () => {
     if (sortCol !== col) return <span className="ml-0.5 text-zinc-700">⇅</span>;
     return <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>;
   };
-
   const handleSort = col => {
     if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
     else { setSortCol(col); setSortDir("desc"); }
   };
 
-  const fmtP = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
-  const fmtV = v => {
-    if (v == null) return "—";
-    if (v >= 1e9) return `$${(v / 1e9).toFixed(1)}B`;
-    if (v >= 1e6) return `$${(v / 1e6).toFixed(0)}M`;
-    return "—";
-  };
-  const fmtMC = v => {
-    if (v == null) return "—";
-    if (v >= 1e12) return `$${(v / 1e12).toFixed(1)}T`;
-    if (v >= 1e9)  return `$${(v / 1e9).toFixed(0)}B`;
-    if (v >= 1e6)  return `$${(v / 1e6).toFixed(0)}M`;
-    return "—";
-  };
+  const fmtP  = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
+  const fmtV  = v => { if (v == null) return "—"; if (v >= 1e9) return `$${(v/1e9).toFixed(1)}B`; if (v >= 1e6) return `$${(v/1e6).toFixed(0)}M`; return "—"; };
+  const fmtMC = v => { if (v == null) return "—"; if (v >= 1e12) return `$${(v/1e12).toFixed(1)}T`; if (v >= 1e9) return `$${(v/1e9).toFixed(0)}B`; if (v >= 1e6) return `$${(v/1e6).toFixed(0)}M`; return "—"; };
   const pctColor = v => v == null ? "text-zinc-600" : v > 0 ? "text-emerald-400" : "text-rose-400";
   const rsColor  = v => !v ? "text-zinc-600" : v >= 90 ? "text-emerald-300 font-bold" : v >= 70 ? "text-emerald-400" : v >= 50 ? "text-zinc-300" : "text-rose-400";
+  const rsCell   = v => { // heatmap cell color
+    if (v == null) return "bg-zinc-900 text-zinc-700";
+    if (v >= 80)   return "bg-emerald-700/50 text-emerald-200 font-bold";
+    if (v >= 60)   return "bg-emerald-700/25 text-emerald-300";
+    if (v >= 40)   return "text-zinc-400";
+    if (v >= 20)   return "bg-rose-900/30 text-rose-400";
+    return "bg-rose-900/50 text-rose-300 font-bold";
+  };
+
+  // Get ETFs belonging to a sector (for sector filter)
+  const sectorEtfs = useMemo(() => {
+    if (!sectorFilter || !uData?.sector_heatmap) return null;
+    const row = uData.sector_heatmap.find(r => r.sector === sectorFilter);
+    return row ? new Set(row.etfs) : null;
+  }, [sectorFilter, uData]);
 
   const filteredStocks = useMemo(() => {
     if (!uData?.stocks) return [];
-    const base = sigFilter === "All" ? uData.stocks : uData.stocks.filter(s => s.signal === sigFilter);
+    let base = uData.stocks;
+    if (sigFilter !== "All") base = base.filter(s => s.signal === sigFilter);
+    if (sectorEtfs)          base = base.filter(s => (s.etfs||[]).some(e => sectorEtfs.has(e)));
+    if (showNew)             base = base.filter(s => (s.new_etfs||[]).length > 0);
+    if (minRS  > 0) base = base.filter(s => (s.rs ?? 0) >= minRS);
+    if (minVol > 0) base = base.filter(s => (s.dollar_volume ?? 0) >= minVol * 1e6);
+    if (minMC  > 0) base = base.filter(s => (s.mkt_cap ?? 0) >= minMC * 1e9);
+    if (minADR > 0) base = base.filter(s => (s.adr_pct ?? 0) >= minADR);
     return [...base].sort((a, b) => {
       const av = a[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
       const bv = b[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
       if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
       return sortDir === "asc" ? av - bv : bv - av;
     });
-  }, [uData, sigFilter, sortCol, sortDir]);
+  }, [uData, sigFilter, sectorFilter, sectorEtfs, showNew, minRS, minVol, minMC, minADR, sortCol, sortDir]);
 
   if (loading) return <div className="text-center py-20 text-zinc-600 text-sm">Loading Universe…</div>;
-  if (!uData)  return <div className="text-center py-20 text-zinc-600 text-sm">No universe data — run universe_builder.py</div>;
+  if (!uData)  return <div className="text-center py-20 text-zinc-600 text-sm">No data — run universe_builder.py</div>;
 
-  const { etf_rotation, summary } = uData;
+  const { etf_rotation, sector_heatmap = [], summary } = uData;
   const rotIn  = etf_rotation?.rotating_in  || [];
   const rotOut = etf_rotation?.rotating_out || [];
 
@@ -9050,11 +9083,12 @@ const UniverseTab = () => {
     <div className={`flex items-center justify-between px-3 py-2 rounded-lg border ${dir === "in" ? "bg-emerald-900/20 border-emerald-700/30" : "bg-rose-900/20 border-rose-700/30"}`}>
       <div className="flex items-center gap-2 min-w-0">
         <span className="font-mono font-bold text-cyan-400 text-[12px] shrink-0">{e.ticker}</span>
-        <span className="text-zinc-400 text-[11px] truncate">{e.theme}</span>
+        <span className="text-zinc-400 text-[11px] truncate max-w-[120px]">{e.theme}</span>
       </div>
-      <div className="flex items-center gap-3 shrink-0 ml-2">
+      <div className="flex items-center gap-2 shrink-0 ml-2">
+        {(e.trend||[]).length >= 2 && <TrendSparkline data={e.trend}/>}
         <span className={`text-[10px] font-mono ${rsColor(e.day_rs)}`}>{e.day_rs ?? "—"}</span>
-        <span className="text-zinc-700 text-[10px]">→</span>
+        <span className="text-zinc-700 text-[9px]">→</span>
         <span className={`text-[10px] font-mono ${rsColor(e.mth_rs)}`}>{e.mth_rs ?? "—"}</span>
         <span className={`text-[11px] font-mono font-semibold ${pctColor(e.perf_1m)}`}>{fmtP(e.perf_1m)}</span>
       </div>
@@ -9064,15 +9098,13 @@ const UniverseTab = () => {
   const SIGNAL_TABS = ["All", "Strong", "Emerging", "Watch", "Weakening"];
 
   return (
-    <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-8 space-y-6">
+    <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-8 space-y-5">
 
       {/* ── Header ── */}
       <div className="flex items-center justify-between flex-wrap gap-2">
         <div>
           <h2 className="text-base font-bold text-zinc-100">Daily Stock Universe</h2>
-          <p className="text-xs text-zinc-500 mt-0.5">
-            {summary.total_stocks} stocks · {summary.rotating_in} ETFs rotating in · {summary.rotating_out} ETFs rotating out · {uData.date}
-          </p>
+          <p className="text-xs text-zinc-500 mt-0.5">{summary.total_stocks} stocks · {summary.rotating_in} ETFs rotating in · {summary.rotating_out} rotating out · {uData.date}</p>
         </div>
         <div className="flex items-center gap-2 flex-wrap">
           {Object.entries(SIG_META).filter(([k]) => k !== "Neutral").map(([k, m]) => (
@@ -9083,31 +9115,82 @@ const UniverseTab = () => {
         </div>
       </div>
 
-      {/* ── ETF Rotation Panel ── */}
+      {/* ── Sector Heatmap ── */}
+      <div>
+        <div className="flex items-center gap-2 mb-2">
+          <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">Sector Heatmap</span>
+          <span className="text-xs text-zinc-600">click a sector to filter stocks below</span>
+          {sectorFilter && (
+            <button onClick={() => setSectorFilter(null)}
+              className="ml-auto text-[10px] text-zinc-500 hover:text-zinc-300 border border-zinc-700 rounded px-1.5 py-0.5">
+              ✕ Clear filter
+            </button>
+          )}
+        </div>
+        <div className="rounded-lg border border-zinc-800 overflow-x-auto">
+          <table className="w-full text-xs border-collapse">
+            <thead className="bg-zinc-900 border-b border-zinc-700">
+              <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
+                <th className="px-3 py-2 text-left">Sector</th>
+                <th className="px-2 py-2 text-center w-12">ETFs</th>
+                {["Score","Day RS","Wk RS","Mth RS","Qtr RS","HY RS","Yr RS"].map(h => (
+                  <th key={h} className="px-2 py-2 text-center w-14">{h}</th>
+                ))}
+                <th className="px-2 py-2 text-right w-16">Mth %</th>
+                <th className="px-2 py-2 text-right w-16">Qtr %</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sector_heatmap.map(row => {
+                const active = sectorFilter === row.sector;
+                return (
+                  <tr key={row.sector}
+                      onClick={() => setSectorFilter(active ? null : row.sector)}
+                      className={`border-b border-zinc-800/50 cursor-pointer transition-colors
+                        ${active ? "bg-violet-900/30 border-violet-700/30" : "hover:bg-zinc-800/30"}`}>
+                    <td className="px-3 py-1.5 font-medium text-zinc-200 whitespace-nowrap">
+                      {active && <span className="mr-1 text-violet-400">▶</span>}
+                      {row.sector}
+                    </td>
+                    <td className="px-2 py-1.5 text-center text-zinc-600">{row.etf_count}</td>
+                    {[row.score, row.rs_day, row.rs_wk, row.rs_mth, row.rs_qtr, row.rs_hy, row.rs_yr].map((v, ci) => (
+                      <td key={ci} className={`px-2 py-1.5 text-center font-mono text-[11px] rounded-sm ${rsCell(v)}`}>
+                        {v != null ? (ci === 0 ? v.toFixed(1) : Math.round(v)) : "—"}
+                      </td>
+                    ))}
+                    <td className={`px-2 py-1.5 text-right font-mono ${pctColor(row.perf_1m)}`}>{fmtP(row.perf_1m)}</td>
+                    <td className={`px-2 py-1.5 text-right font-mono ${pctColor(row.perf_3m)}`}>{fmtP(row.perf_3m)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* ── ETF Rotation ── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {/* Rotating In */}
         <div>
           <div className="flex items-center gap-2 mb-2">
             <span className="text-[11px] font-bold text-emerald-400 uppercase tracking-wider">▲ Rotating In</span>
-            <span className="text-xs text-zinc-600">Day RS &gt; Mth RS — short-term accelerating</span>
+            <span className="text-xs text-zinc-600">Day RS &gt; Mth RS — accelerating</span>
             <span className="ml-auto text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{rotIn.length}</span>
           </div>
-          <div className="space-y-1 max-h-72 overflow-y-auto">
+          <div className="space-y-1 max-h-64 overflow-y-auto">
             {rotIn.length === 0
-              ? <p className="text-xs text-zinc-600 italic py-4 text-center">No ETFs rotating in today</p>
+              ? <p className="text-xs text-zinc-600 italic py-4 text-center">None today</p>
               : rotIn.map(e => <EtfRotCard key={e.ticker} e={e} dir="in" />)}
           </div>
         </div>
-        {/* Rotating Out */}
         <div>
           <div className="flex items-center gap-2 mb-2">
             <span className="text-[11px] font-bold text-rose-400 uppercase tracking-wider">▼ Rotating Out</span>
-            <span className="text-xs text-zinc-600">Day RS ≪ Mth RS — short-term decelerating</span>
+            <span className="text-xs text-zinc-600">Day RS ≪ Mth RS — decelerating</span>
             <span className="ml-auto text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{rotOut.length}</span>
           </div>
-          <div className="space-y-1 max-h-72 overflow-y-auto">
+          <div className="space-y-1 max-h-64 overflow-y-auto">
             {rotOut.length === 0
-              ? <p className="text-xs text-zinc-600 italic py-4 text-center">No ETFs rotating out today</p>
+              ? <p className="text-xs text-zinc-600 italic py-4 text-center">None today</p>
               : rotOut.map(e => <EtfRotCard key={e.ticker} e={e} dir="out" />)}
           </div>
         </div>
@@ -9115,10 +9198,10 @@ const UniverseTab = () => {
 
       {/* ── Stock Universe Table ── */}
       <div>
-        {/* Signal filter tabs */}
-        <div className="flex items-center gap-1 mb-3 flex-wrap">
+        {/* Signal + filter row */}
+        <div className="flex items-center gap-2 mb-3 flex-wrap">
           {SIGNAL_TABS.map(s => {
-            const m = SIG_META[s] || { bg: "bg-zinc-800", text: "text-zinc-300", border: "border-zinc-700" };
+            const m = SIG_META[s] || { bg:"bg-zinc-800", text:"text-zinc-300", border:"border-zinc-700" };
             const active = sigFilter === s;
             return (
               <button key={s} onClick={() => setSigFilter(s)}
@@ -9128,7 +9211,29 @@ const UniverseTab = () => {
               </button>
             );
           })}
-          <span className="ml-auto text-xs text-zinc-600">{filteredStocks.length} stocks</span>
+          <div className="flex items-center gap-1 ml-auto flex-wrap">
+            <label className="text-[10px] text-zinc-500">RS≥</label>
+            <input type="number" min="0" max="99" value={minRS} onChange={e => setMinRS(+e.target.value)}
+              className="w-12 px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-xs text-zinc-200 text-center"/>
+            <label className="text-[10px] text-zinc-500 ml-1">$Vol≥$</label>
+            <input type="number" min="0" value={minVol} onChange={e => setMinVol(+e.target.value)}
+              className="w-16 px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-xs text-zinc-200 text-center"/>
+            <span className="text-[10px] text-zinc-600">M</span>
+            <label className="text-[10px] text-zinc-500 ml-1">MC≥$</label>
+            <input type="number" min="0" value={minMC} onChange={e => setMinMC(+e.target.value)}
+              className="w-16 px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-xs text-zinc-200 text-center"/>
+            <span className="text-[10px] text-zinc-600">B</span>
+            <label className="text-[10px] text-zinc-500 ml-1">ADR≥</label>
+            <input type="number" min="0" step="0.5" value={minADR} onChange={e => setMinADR(+e.target.value)}
+              className="w-12 px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-xs text-zinc-200 text-center"/>
+            <span className="text-[10px] text-zinc-600">%</span>
+            <button onClick={() => setShowNew(n => !n)}
+              className={`ml-1 px-2 py-0.5 rounded text-[10px] font-bold border transition-colors
+                ${showNew ? "bg-amber-500/20 text-amber-300 border-amber-500/30" : "bg-zinc-800 text-zinc-500 border-zinc-700"}`}>
+              NEW only
+            </button>
+          </div>
+          <span className="text-xs text-zinc-600 w-full text-right">{filteredStocks.length} stocks</span>
         </div>
 
         <div className="rounded-lg border border-zinc-800 overflow-x-auto">
@@ -9137,59 +9242,75 @@ const UniverseTab = () => {
               <tr className="text-zinc-500 text-[11px] uppercase tracking-wide select-none">
                 <th className="px-3 py-2.5 text-left w-8">#</th>
                 {[
-                  { col: "ticker",        label: "Ticker",    align: "left"  },
-                  { col: "name",          label: "Company",   align: "left"  },
-                  { col: "signal",        label: "Signal",    align: "left"  },
-                  { col: "rs",            label: "RS",        align: "right" },
-                  { col: "etf_count",     label: "ETFs",      align: "right" },
-                  { col: "perf_1d",       label: "Day %",     align: "right" },
-                  { col: "perf_1w",       label: "Wk %",      align: "right" },
-                  { col: "perf_1m",       label: "Mth %",     align: "right" },
-                  { col: "perf_3m",       label: "Qtr %",     align: "right" },
-                  { col: "adr_pct",       label: "ADR%",      align: "right" },
-                  { col: "dollar_volume", label: "$ Vol",     align: "right" },
-                  { col: "mkt_cap",       label: "Mkt Cap",   align: "right" },
+                  { col:"ticker",        label:"Ticker",   align:"left"  },
+                  { col:"name",          label:"Company",  align:"left"  },
+                  { col:"signal",        label:"Signal",   align:"left"  },
+                  { col:"rs",            label:"RS",       align:"right" },
+                  { col:"rs_change",     label:"RS Δ",     align:"right" },
+                  { col:"etf_count",     label:"ETFs",     align:"right" },
+                  { col:"perf_1d",       label:"Day %",    align:"right" },
+                  { col:"perf_1w",       label:"Wk %",     align:"right" },
+                  { col:"perf_1m",       label:"Mth %",    align:"right" },
+                  { col:"perf_3m",       label:"Qtr %",    align:"right" },
+                  { col:"adr_pct",       label:"ADR%",     align:"right" },
+                  { col:"dollar_volume", label:"$ Vol",    align:"right" },
+                  { col:"mkt_cap",       label:"Mkt Cap",  align:"right" },
                 ].map(({ col, label, align }) => (
                   <th key={col} onClick={() => handleSort(col)}
-                      className={`px-3 py-2.5 font-semibold cursor-pointer hover:text-zinc-200 transition-colors whitespace-nowrap ${align === "left" ? "text-left" : "text-right"}`}>
+                      className={`px-3 py-2.5 font-semibold cursor-pointer hover:text-zinc-200 transition-colors whitespace-nowrap ${align==="left"?"text-left":"text-right"}`}>
                     {label}<SortIcon col={col}/>
                   </th>
                 ))}
-                <th className="px-3 py-2.5 text-left font-semibold">Themes / ETFs</th>
+                <th className="px-3 py-2.5 text-left font-semibold whitespace-nowrap">Themes / ETFs</th>
               </tr>
             </thead>
             <tbody>
-              {filteredStocks.map((s, i) => (
-                <tr key={s.ticker}
-                    className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors ${i % 2 === 0 ? "" : "bg-zinc-900/30"}`}>
-                  <td className="px-3 py-2 text-zinc-600 text-[11px]">{i + 1}</td>
-                  <td className="px-3 py-2">
-                    <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noreferrer"
-                       className="font-mono font-bold text-cyan-400 hover:underline">{s.ticker}</a>
-                  </td>
-                  <td className="px-3 py-2 text-zinc-300 max-w-[160px] truncate">{s.name || "—"}</td>
-                  <td className="px-3 py-2"><SignalBadge signal={s.signal}/></td>
-                  <td className={`px-3 py-2 text-right font-mono font-bold ${rsColor(s.rs)}`}>{s.rs ?? "—"}</td>
-                  <td className="px-3 py-2 text-right font-mono text-zinc-400">{s.etf_count || "—"}</td>
-                  <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_1d)}`}>{fmtP(s.perf_1d)}</td>
-                  <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_1w)}`}>{fmtP(s.perf_1w)}</td>
-                  <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_1m)}`}>{fmtP(s.perf_1m)}</td>
-                  <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_3m)}`}>{fmtP(s.perf_3m)}</td>
-                  <td className="px-3 py-2 text-right font-mono text-zinc-400">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
-                  <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmtV(s.dollar_volume)}</td>
-                  <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmtMC(s.mkt_cap)}</td>
-                  <td className="px-3 py-2 max-w-[200px]">
-                    <div className="flex flex-wrap gap-0.5">
-                      {(s.themes || []).slice(0, 2).map(t => (
-                        <span key={t} className="text-[9px] bg-blue-500/10 text-blue-400 px-1 rounded border border-blue-500/20">{t}</span>
-                      ))}
-                      {(s.etfs || []).slice(0, 3).map(e => (
-                        <span key={e} className="text-[9px] bg-zinc-800 text-zinc-500 px-1 rounded border border-zinc-700">{e}</span>
-                      ))}
+              {filteredStocks.map((s, i) => {
+                const rsChg = s.rs_change;
+                const isNew = (s.new_etfs || []).length > 0;
+                return (
+                  <tr key={s.ticker}
+                      className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors ${i%2===0?"":"bg-zinc-900/30"}`}>
+                    <td className="px-3 py-2 text-zinc-600 text-[11px]">{i+1}</td>
+                    <td className="px-3 py-2">
+                      <div className="flex items-center gap-1">
+                        <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noreferrer"
+                           className="font-mono font-bold text-cyan-400 hover:underline">{s.ticker}</a>
+                        {isNew && <span className="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-1 rounded font-bold">NEW</span>}
+                      </div>
+                    </td>
+                    <td className="px-3 py-2 text-zinc-300 max-w-[150px] truncate">{s.name||"—"}</td>
+                    <td className="px-3 py-2"><SignalBadge signal={s.signal}/></td>
+                    <td className={`px-3 py-2 text-right font-mono font-bold ${rsColor(s.rs)}`}>{s.rs??"—"}</td>
+                    <td className="px-3 py-2 text-right font-mono text-[11px]">
+                      {rsChg == null ? <span className="text-zinc-700">—</span>
+                        : rsChg > 0 ? <span className="text-emerald-400">+{rsChg}▲</span>
+                        : rsChg < 0 ? <span className="text-rose-400">{rsChg}▼</span>
+                        : <span className="text-zinc-600">0</span>}
+                    </td>
+                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{s.etf_count||"—"}</td>
+                    <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_1d)}`}>{fmtP(s.perf_1d)}</td>
+                    <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_1w)}`}>{fmtP(s.perf_1w)}</td>
+                    <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_1m)}`}>{fmtP(s.perf_1m)}</td>
+                    <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_3m)}`}>{fmtP(s.perf_3m)}</td>
+                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{s.adr_pct!=null?`${s.adr_pct.toFixed(1)}%`:"—"}</td>
+                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmtV(s.dollar_volume)}</td>
+                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmtMC(s.mkt_cap)}</td>
+                    <td className="px-3 py-2 max-w-[200px]">
+                      <div className="flex flex-wrap gap-0.5">
+                        {(s.themes||[]).slice(0,2).map(t=>(
+                          <span key={t} className="text-[9px] bg-blue-500/10 text-blue-400 px-1 rounded border border-blue-500/20">{t}</span>
+                        ))}
+                        {(s.new_etfs||[]).map(etk=>(
+                          <span key={etk} className="text-[9px] bg-amber-500/20 text-amber-300 px-1 rounded border border-amber-500/30 font-bold">{etk} +</span>
+                        ))}
+                        {(s.etfs||[]).filter(etk=>!(s.new_etfs||[]).includes(etk)).slice(0,3).map(etk=>(
+                          <span key={etk} className="text-[9px] bg-zinc-800 text-zinc-500 px-1 rounded border border-zinc-700">{etk}</span>
+                        ))}
                     </div>
                   </td>
                 </tr>
-              ))}
+              ); })}
             </tbody>
           </table>
         </div>

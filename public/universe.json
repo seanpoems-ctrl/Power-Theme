@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-01T00:55:22.130002+00:00",
+  "generated_at": "2026-06-01T01:15:49.847764+00:00",
   "date": "2026-06-01",
   "summary": {
     "total_stocks": 402,
@@ -13,287 +13,701 @@
       "Watch": 14
     }
   },
+  "sector_heatmap": [
+    {
+      "sector": "Cybersecurity",
+      "etfs": [
+        "CIBR",
+        "BUG",
+        "HACK"
+      ],
+      "etf_count": 3,
+      "score": 94.3,
+      "rs_day": 96.3,
+      "rs_wk": 82.3,
+      "rs_mth": 92.7,
+      "rs_qtr": 87.3,
+      "rs_hy": 57.0,
+      "rs_yr": 29.0,
+      "perf_1d": 6.6,
+      "perf_1m": 28.9,
+      "perf_3m": 39.0
+    },
+    {
+      "sector": "Semiconductors",
+      "etfs": [
+        "SOXX",
+        "SMH",
+        "XSD",
+        "DRAM"
+      ],
+      "etf_count": 4,
+      "score": 92.1,
+      "rs_day": 46.8,
+      "rs_wk": 78.8,
+      "rs_mth": 90.0,
+      "rs_qtr": 94.7,
+      "rs_hy": 94.0,
+      "rs_yr": 93.7,
+      "perf_1d": -0.5,
+      "perf_1m": 29.8,
+      "perf_3m": 60.5
+    },
+    {
+      "sector": "Tech & AI",
+      "etfs": [
+        "AIQ",
+        "BAI",
+        "IGV",
+        "XSW",
+        "QTUM",
+        "IDGT",
+        "FIVG"
+      ],
+      "etf_count": 7,
+      "score": 85.3,
+      "rs_day": 71.7,
+      "rs_wk": 76.3,
+      "rs_mth": 77.6,
+      "rs_qtr": 82.0,
+      "rs_hy": 64.3,
+      "rs_yr": 58.0,
+      "perf_1d": 2.0,
+      "perf_1m": 15.5,
+      "perf_3m": 33.2
+    },
+    {
+      "sector": "Cloud",
+      "etfs": [
+        "WCLD",
+        "CLOU",
+        "SKYY"
+      ],
+      "etf_count": 3,
+      "score": 84.4,
+      "rs_day": 96.7,
+      "rs_wk": 90.0,
+      "rs_mth": 78.3,
+      "rs_qtr": 75.3,
+      "rs_hy": 30.0,
+      "rs_yr": 21.0,
+      "perf_1d": 6.9,
+      "perf_1m": 15.3,
+      "perf_3m": 26.0
+    },
+    {
+      "sector": "ARK Funds",
+      "etfs": [
+        "ARKK",
+        "ARKW",
+        "ARKG",
+        "ARKF",
+        "ARKQ",
+        "ARKX"
+      ],
+      "etf_count": 6,
+      "score": 67.6,
+      "rs_day": 63.2,
+      "rs_wk": 73.5,
+      "rs_mth": 62.7,
+      "rs_qtr": 62.7,
+      "rs_hy": 39.3,
+      "rs_yr": 55.2,
+      "perf_1d": 0.8,
+      "perf_1m": 9.6,
+      "perf_3m": 14.2
+    },
+    {
+      "sector": "Crypto & Fintech",
+      "etfs": [
+        "BLOK",
+        "WGMI",
+        "DXYZ",
+        "FINX"
+      ],
+      "etf_count": 4,
+      "score": 66.9,
+      "rs_day": 45.8,
+      "rs_wk": 55.8,
+      "rs_mth": 76.8,
+      "rs_qtr": 79.8,
+      "rs_hy": 57.8,
+      "rs_yr": 47.0,
+      "perf_1d": -0.2,
+      "perf_1m": 27.0,
+      "perf_3m": 46.5
+    },
+    {
+      "sector": "Space & Defense",
+      "etfs": [
+        "ITA",
+        "XAR",
+        "SHLD",
+        "UFO",
+        "NASA",
+        "ARKX"
+      ],
+      "etf_count": 6,
+      "score": 58.7,
+      "rs_day": 25.0,
+      "rs_wk": 78.8,
+      "rs_mth": 70.5,
+      "rs_qtr": 40.4,
+      "rs_hy": 63.2,
+      "rs_yr": 61.2,
+      "perf_1d": -1.6,
+      "perf_1m": 16.5,
+      "perf_3m": 7.6
+    },
+    {
+      "sector": "Energy",
+      "etfs": [
+        "ICLN",
+        "TAN",
+        "PBW",
+        "XLE",
+        "UNG",
+        "HYDR",
+        "FCG",
+        "XOP"
+      ],
+      "etf_count": 8,
+      "score": 51.7,
+      "rs_day": 39.0,
+      "rs_wk": 47.1,
+      "rs_mth": 51.6,
+      "rs_qtr": 58.2,
+      "rs_hy": 67.0,
+      "rs_yr": 63.4,
+      "perf_1d": -0.5,
+      "perf_1m": 8.2,
+      "perf_3m": 22.5
+    },
+    {
+      "sector": "Industrials",
+      "etfs": [
+        "XLI",
+        "PAVE",
+        "BOTZ",
+        "ROBO",
+        "DRIV",
+        "FDRV",
+        "XTN",
+        "IYT",
+        "ARKQ"
+      ],
+      "etf_count": 9,
+      "score": 51.0,
+      "rs_day": 40.4,
+      "rs_wk": 50.8,
+      "rs_mth": 50.9,
+      "rs_qtr": 51.8,
+      "rs_hy": 62.8,
+      "rs_yr": 55.3,
+      "perf_1d": -0.4,
+      "perf_1m": 5.7,
+      "perf_3m": 10.4
+    },
+    {
+      "sector": "Commodities",
+      "etfs": [
+        "GDX",
+        "GLD",
+        "COPX",
+        "SIL",
+        "SILJ",
+        "XME",
+        "SLX",
+        "PICK",
+        "REMX"
+      ],
+      "etf_count": 9,
+      "score": 49.5,
+      "rs_day": 56.2,
+      "rs_wk": 55.0,
+      "rs_mth": 45.2,
+      "rs_qtr": 20.2,
+      "rs_hy": 65.3,
+      "rs_yr": 79.4,
+      "perf_1d": 0.6,
+      "perf_1m": 4.2,
+      "perf_3m": -8.2
+    },
+    {
+      "sector": "Comms & Media",
+      "etfs": [
+        "XLC",
+        "FCOM",
+        "XTL",
+        "IYZ",
+        "SOCL",
+        "BUZZ",
+        "FDN",
+        "SNSR"
+      ],
+      "etf_count": 8,
+      "score": 48.0,
+      "rs_day": 45.9,
+      "rs_wk": 45.1,
+      "rs_mth": 50.4,
+      "rs_qtr": 54.4,
+      "rs_hy": 46.9,
+      "rs_yr": 47.1,
+      "perf_1d": 0.0,
+      "perf_1m": 5.9,
+      "perf_3m": 13.3
+    },
+    {
+      "sector": "Healthcare",
+      "etfs": [
+        "XBI",
+        "ARKG",
+        "GNOM",
+        "IHI",
+        "PBE",
+        "XHE",
+        "IHF"
+      ],
+      "etf_count": 7,
+      "score": 38.7,
+      "rs_day": 48.6,
+      "rs_wk": 40.1,
+      "rs_mth": 44.3,
+      "rs_qtr": 39.9,
+      "rs_hy": 22.4,
+      "rs_yr": 40.1,
+      "perf_1d": -0.0,
+      "perf_1m": 4.6,
+      "perf_3m": 2.1
+    },
+    {
+      "sector": "Consumer",
+      "etfs": [
+        "XLY",
+        "XLP",
+        "IBUY",
+        "MEME",
+        "BETZ",
+        "HERO",
+        "METV",
+        "MOO"
+      ],
+      "etf_count": 8,
+      "score": 25.2,
+      "rs_day": 34.5,
+      "rs_wk": 33.5,
+      "rs_mth": 32.4,
+      "rs_qtr": 39.4,
+      "rs_hy": 27.5,
+      "rs_yr": 16.9,
+      "perf_1d": -0.9,
+      "perf_1m": 3.2,
+      "perf_3m": 9.0
+    },
+    {
+      "sector": "Financials",
+      "etfs": [
+        "XLF",
+        "KRE",
+        "KBE",
+        "KCE",
+        "KIE",
+        "AMLP"
+      ],
+      "etf_count": 6,
+      "score": 20.4,
+      "rs_day": 49.0,
+      "rs_wk": 14.5,
+      "rs_mth": 24.8,
+      "rs_qtr": 33.5,
+      "rs_hy": 27.5,
+      "rs_yr": 23.7,
+      "perf_1d": -0.2,
+      "perf_1m": -1.0,
+      "perf_3m": 1.0
+    }
+  ],
   "etf_rotation": {
     "rotating_in": [
       {
         "ticker": "CIBR",
         "theme": "Cybersecurity",
         "score": 96.4,
-        "day_rs": 96,
-        "wk_rs": 83,
-        "mth_rs": 94,
-        "qtr_rs": 88,
+        "rs_day": 96,
+        "rs_wk": 83,
+        "rs_mth": 94,
+        "rs_qtr": 88,
+        "rs_hy": 59,
+        "rs_yr": 38,
         "perf_1d": 6.41,
         "perf_1w": 8.39,
         "perf_1m": 29.49,
         "perf_3m": 40.69,
-        "pct_off_52wh": 0.0
+        "pct_off_52wh": 0.0,
+        "trend": [
+          96.4
+        ]
       },
       {
         "ticker": "BUG",
         "theme": "Cybersecurity Alt",
         "score": 95.5,
-        "day_rs": 98,
-        "wk_rs": 87,
-        "mth_rs": 95,
-        "qtr_rs": 91,
+        "rs_day": 98,
+        "rs_wk": 87,
+        "rs_mth": 95,
+        "rs_qtr": 91,
+        "rs_hy": 54,
+        "rs_yr": 16,
         "perf_1d": 7.61,
         "perf_1w": 8.54,
         "perf_1m": 34.31,
         "perf_3m": 43.31,
-        "pct_off_52wh": -2.8
+        "pct_off_52wh": -2.8,
+        "trend": [
+          95.5
+        ]
       },
       {
         "ticker": "SKYY",
         "theme": "Cloud Computing Alt2",
         "score": 93.7,
-        "day_rs": 97,
-        "wk_rs": 96,
-        "mth_rs": 80,
-        "qtr_rs": 80,
+        "rs_day": 97,
+        "rs_wk": 96,
+        "rs_mth": 80,
+        "rs_qtr": 80,
+        "rs_hy": 46,
+        "rs_yr": 39,
         "perf_1d": 7.08,
         "perf_1w": 11.4,
         "perf_1m": 16.22,
         "perf_3m": 30.93,
-        "pct_off_52wh": 0.0
+        "pct_off_52wh": 0.0,
+        "trend": [
+          93.7
+        ]
       },
       {
         "ticker": "HACK",
         "theme": "Cybersecurity Alt2",
         "score": 91.0,
-        "day_rs": 95,
-        "wk_rs": 77,
-        "mth_rs": 89,
-        "qtr_rs": 83,
+        "rs_day": 95,
+        "rs_wk": 77,
+        "rs_mth": 89,
+        "rs_qtr": 83,
+        "rs_hy": 58,
+        "rs_yr": 33,
         "perf_1d": 5.83,
         "perf_1w": 7.17,
         "perf_1m": 22.99,
         "perf_3m": 33.02,
-        "pct_off_52wh": 0.0
+        "pct_off_52wh": 0.0,
+        "trend": [
+          91.0
+        ]
       },
       {
         "ticker": "ARKG",
         "theme": "ARK Genomics",
         "score": 86.5,
-        "day_rs": 81,
-        "wk_rs": 97,
-        "mth_rs": 77,
-        "qtr_rs": 66,
+        "rs_day": 81,
+        "rs_wk": 97,
+        "rs_mth": 77,
+        "rs_qtr": 66,
+        "rs_hy": 43,
+        "rs_yr": 69,
         "perf_1d": 1.52,
         "perf_1w": 13.46,
         "perf_1m": 14.32,
         "perf_3m": 15.81,
-        "pct_off_52wh": 0.0
+        "pct_off_52wh": 0.0,
+        "trend": [
+          86.5
+        ]
       },
       {
         "ticker": "IDGT",
         "theme": "Digital Infrastructure & Data Centers",
         "score": 85.6,
-        "day_rs": 88,
-        "wk_rs": 71,
-        "mth_rs": 56,
-        "qtr_rs": 81,
+        "rs_day": 88,
+        "rs_wk": 71,
+        "rs_mth": 56,
+        "rs_qtr": 81,
+        "rs_hy": 86,
+        "rs_yr": 68,
         "perf_1d": 2.39,
         "perf_1w": 6.49,
         "perf_1m": 6.76,
         "perf_3m": 31.09,
-        "pct_off_52wh": 0.0
+        "pct_off_52wh": 0.0,
+        "trend": [
+          85.6
+        ]
       },
       {
         "ticker": "ICLN",
         "theme": "Clean Energy",
         "score": 84.7,
-        "day_rs": 74,
-        "wk_rs": 69,
-        "mth_rs": 71,
-        "qtr_rs": 78,
+        "rs_day": 74,
+        "rs_wk": 69,
+        "rs_mth": 71,
+        "rs_qtr": 78,
+        "rs_hy": 78,
+        "rs_yr": 80,
         "perf_1d": 0.73,
         "perf_1w": 6.27,
         "perf_1m": 12.51,
         "perf_3m": 28.59,
-        "pct_off_52wh": 0.0
+        "pct_off_52wh": 0.0,
+        "trend": [
+          84.7
+        ]
       },
       {
         "ticker": "CLOU",
         "theme": "Cloud Infrastructure & SaaS",
         "score": 81.1,
-        "day_rs": 94,
-        "wk_rs": 79,
-        "mth_rs": 79,
-        "qtr_rs": 77,
+        "rs_day": 94,
+        "rs_wk": 79,
+        "rs_mth": 79,
+        "rs_qtr": 77,
+        "rs_hy": 30,
+        "rs_yr": 18,
         "perf_1d": 5.52,
         "perf_1w": 7.87,
         "perf_1m": 15.3,
         "perf_3m": 28.28,
-        "pct_off_52wh": 0.0
+        "pct_off_52wh": 0.0,
+        "trend": [
+          81.1
+        ]
       },
       {
         "ticker": "IGV",
         "theme": "US Tech/Software",
         "score": 80.2,
-        "day_rs": 95,
-        "wk_rs": 91,
-        "mth_rs": 82,
-        "qtr_rs": 72,
+        "rs_day": 95,
+        "rs_wk": 91,
+        "rs_mth": 82,
+        "rs_qtr": 72,
+        "rs_hy": 15,
+        "rs_yr": 10,
         "perf_1d": 6.25,
         "perf_1w": 9.93,
         "perf_1m": 17.35,
         "perf_3m": 22.82,
-        "pct_off_52wh": -13.7
+        "pct_off_52wh": -13.7,
+        "trend": [
+          80.2
+        ]
       },
       {
         "ticker": "WCLD",
         "theme": "Cloud Tech",
         "score": 78.4,
-        "day_rs": 99,
-        "wk_rs": 95,
-        "mth_rs": 76,
-        "qtr_rs": 69,
+        "rs_day": 99,
+        "rs_wk": 95,
+        "rs_mth": 76,
+        "rs_qtr": 69,
+        "rs_hy": 14,
+        "rs_yr": 6,
         "perf_1d": 7.96,
         "perf_1w": 11.36,
         "perf_1m": 14.29,
         "perf_3m": 18.78,
-        "pct_off_52wh": -10.7
+        "pct_off_52wh": -10.7,
+        "trend": [
+          78.4
+        ]
       },
       {
         "ticker": "BLOK",
         "theme": "Blockchain",
         "score": 77.5,
-        "day_rs": 79,
-        "wk_rs": 65,
-        "mth_rs": 73,
-        "qtr_rs": 74,
+        "rs_day": 79,
+        "rs_wk": 65,
+        "rs_mth": 73,
+        "rs_qtr": 74,
+        "rs_hy": 42,
+        "rs_yr": 51,
         "perf_1d": 1.31,
         "perf_1w": 5.69,
         "perf_1m": 13.08,
         "perf_3m": 25.09,
-        "pct_off_52wh": -7.6
+        "pct_off_52wh": -7.6,
+        "trend": [
+          77.5
+        ]
       },
       {
         "ticker": "XSW",
         "theme": "Software (Equal)",
         "score": 75.7,
-        "day_rs": 93,
-        "wk_rs": 90,
-        "mth_rs": 72,
-        "qtr_rs": 68,
+        "rs_day": 93,
+        "rs_wk": 90,
+        "rs_mth": 72,
+        "rs_qtr": 68,
+        "rs_hy": 13,
+        "rs_yr": 9,
         "perf_1d": 4.57,
         "perf_1w": 9.53,
         "perf_1m": 13.04,
         "perf_3m": 16.5,
-        "pct_off_52wh": -13.6
+        "pct_off_52wh": -13.6,
+        "trend": [
+          75.7
+        ]
       },
       {
         "ticker": "ARKW",
         "theme": "ARK Internet & Next-Gen Tech",
         "score": 69.4,
-        "day_rs": 85,
-        "wk_rs": 59,
-        "mth_rs": 64,
-        "qtr_rs": 70,
+        "rs_day": 85,
+        "rs_wk": 59,
+        "rs_mth": 64,
+        "rs_qtr": 70,
+        "rs_hy": 21,
+        "rs_yr": 42,
         "perf_1d": 1.84,
         "perf_1w": 5.23,
         "perf_1m": 9.26,
         "perf_3m": 20.27,
-        "pct_off_52wh": -14.7
+        "pct_off_52wh": -14.7,
+        "trend": [
+          69.4
+        ]
       },
       {
         "ticker": "GNOM",
         "theme": "Genomics",
         "score": 67.6,
-        "day_rs": 66,
-        "wk_rs": 76,
-        "mth_rs": 65,
-        "qtr_rs": 48,
+        "rs_day": 66,
+        "rs_wk": 76,
+        "rs_mth": 65,
+        "rs_qtr": 48,
+        "rs_hy": 32,
+        "rs_yr": 66,
         "perf_1d": 0.34,
         "perf_1w": 7.16,
         "perf_1m": 9.39,
         "perf_3m": 5.43,
-        "pct_off_52wh": -1.8
+        "pct_off_52wh": -1.8,
+        "trend": [
+          67.6
+        ]
       },
       {
         "ticker": "ARKK",
         "theme": "ARK Innovation",
         "score": 66.7,
-        "day_rs": 77,
-        "wk_rs": 73,
-        "mth_rs": 55,
-        "qtr_rs": 59,
+        "rs_day": 77,
+        "rs_wk": 73,
+        "rs_mth": 55,
+        "rs_qtr": 59,
+        "rs_hy": 23,
+        "rs_yr": 57,
         "perf_1d": 1.16,
         "perf_1w": 6.96,
         "perf_1m": 6.54,
         "perf_3m": 10.41,
-        "pct_off_52wh": -11.4
+        "pct_off_52wh": -11.4,
+        "trend": [
+          66.7
+        ]
       },
       {
         "ticker": "XTN",
         "theme": "Trucking",
         "score": 65.8,
-        "day_rs": 60,
-        "wk_rs": 66,
-        "mth_rs": 58,
-        "qtr_rs": 56,
+        "rs_day": 60,
+        "rs_wk": 66,
+        "rs_mth": 58,
+        "rs_qtr": 56,
+        "rs_hy": 68,
+        "rs_yr": 59,
         "perf_1d": 0.07,
         "perf_1w": 5.86,
         "perf_1m": 7.25,
         "perf_3m": 9.39,
-        "pct_off_52wh": -5.1
+        "pct_off_52wh": -5.1,
+        "trend": [
+          65.8
+        ]
       },
       {
         "ticker": "ARGT",
         "theme": "Argentinian Equities",
         "score": 62.2,
-        "day_rs": 84,
-        "wk_rs": 67,
-        "mth_rs": 63,
-        "qtr_rs": 55,
+        "rs_day": 84,
+        "rs_wk": 67,
+        "rs_mth": 63,
+        "rs_qtr": 55,
+        "rs_hy": 33,
+        "rs_yr": 20,
         "perf_1d": 1.72,
         "perf_1w": 6.13,
         "perf_1m": 8.97,
         "perf_3m": 8.86,
-        "pct_off_52wh": -5.1
+        "pct_off_52wh": -5.1,
+        "trend": [
+          62.2
+        ]
       },
       {
         "ticker": "SIL",
         "theme": "Silver Miners",
         "score": 61.3,
-        "day_rs": 92,
-        "wk_rs": 56,
-        "mth_rs": 53,
-        "qtr_rs": 4,
+        "rs_day": 92,
+        "rs_wk": 56,
+        "rs_mth": 53,
+        "rs_qtr": 4,
+        "rs_hy": 67,
+        "rs_yr": 86,
         "perf_1d": 3.02,
         "perf_1w": 4.87,
         "perf_1m": 5.71,
         "perf_3m": -19.88,
-        "pct_off_52wh": -20.6
+        "pct_off_52wh": -20.6,
+        "trend": [
+          61.3
+        ]
       },
       {
         "ticker": "FDN",
         "theme": "US Internet Giants",
         "score": 60.4,
-        "day_rs": 83,
-        "wk_rs": 51,
-        "mth_rs": 54,
-        "qtr_rs": 68,
+        "rs_day": 83,
+        "rs_wk": 51,
+        "rs_mth": 54,
+        "rs_qtr": 68,
+        "rs_hy": 24,
+        "rs_yr": 25,
         "perf_1d": 1.61,
         "perf_1w": 4.31,
         "perf_1m": 6.49,
         "perf_3m": 16.87,
-        "pct_off_52wh": -1.4
+        "pct_off_52wh": -1.4,
+        "trend": [
+          60.4
+        ]
       },
       {
         "ticker": "SILJ",
         "theme": "Junior Silver Miners",
         "score": 59.5,
-        "day_rs": 86,
-        "wk_rs": 65,
-        "mth_rs": 49,
-        "qtr_rs": 1,
+        "rs_day": 86,
+        "rs_wk": 65,
+        "rs_mth": 49,
+        "rs_qtr": 1,
+        "rs_hy": 66,
+        "rs_yr": 91,
         "perf_1d": 2.08,
         "perf_1w": 5.86,
         "perf_1m": 4.99,
         "perf_3m": -22.63,
-        "pct_off_52wh": -23.3
+        "pct_off_52wh": -23.3,
+        "trend": [
+          59.5
+        ]
       }
     ],
     "rotating_out": [
@@ -301,393 +715,533 @@
         "ticker": "FCOM",
         "theme": "Telecom Broad",
         "score": 15.3,
-        "day_rs": 12,
-        "wk_rs": 22,
-        "mth_rs": 35,
-        "qtr_rs": 37,
+        "rs_day": 12,
+        "rs_wk": 22,
+        "rs_mth": 35,
+        "rs_qtr": 37,
+        "rs_hy": 22,
+        "rs_yr": 37,
         "perf_1d": -1.26,
         "perf_1w": 0.53,
         "perf_1m": 0.11,
         "perf_3m": 2.64,
-        "pct_off_52wh": -1.6
+        "pct_off_52wh": -1.6,
+        "trend": [
+          15.3
+        ]
       },
       {
         "ticker": "XLY",
         "theme": "Consumer Discretionary",
         "score": 20.7,
-        "day_rs": 20,
-        "wk_rs": 31,
-        "mth_rs": 38,
-        "qtr_rs": 46,
+        "rs_day": 20,
+        "rs_wk": 31,
+        "rs_mth": 38,
+        "rs_qtr": 46,
+        "rs_hy": 20,
+        "rs_yr": 24,
         "perf_1d": -0.97,
         "perf_1w": 1.83,
         "perf_1m": 1.89,
         "perf_3m": 4.93,
-        "pct_off_52wh": -2.7
+        "pct_off_52wh": -2.7,
+        "trend": [
+          20.7
+        ]
       },
       {
         "ticker": "IHF",
         "theme": "Aging Population & Longevity",
         "score": 27.0,
-        "day_rs": 27,
-        "wk_rs": 21,
-        "mth_rs": 45,
-        "qtr_rs": 58,
+        "rs_day": 27,
+        "rs_wk": 21,
+        "rs_mth": 45,
+        "rs_qtr": 58,
+        "rs_hy": 19,
+        "rs_yr": 19,
         "perf_1d": -0.71,
         "perf_1w": 0.1,
         "perf_1m": 4.17,
         "perf_3m": 9.59,
-        "pct_off_52wh": -2.9
+        "pct_off_52wh": -2.9,
+        "trend": [
+          27.0
+        ]
       },
       {
         "ticker": "DXYZ",
         "theme": "Pre-IPO & Private Unicorn Equity",
         "score": 53.2,
-        "day_rs": 5,
-        "wk_rs": 1,
-        "mth_rs": 98,
-        "qtr_rs": 99,
+        "rs_day": 5,
+        "rs_wk": 1,
+        "rs_mth": 98,
+        "rs_qtr": 99,
+        "rs_hy": 99,
+        "rs_yr": 35,
         "perf_1d": -2.98,
         "perf_1w": -14.86,
         "perf_1m": 51.25,
         "perf_3m": 86.7,
-        "pct_off_52wh": -26.3
+        "pct_off_52wh": -26.3,
+        "trend": [
+          53.2
+        ]
       },
       {
         "ticker": "XAR",
         "theme": "Aerospace & Defense (Equal)",
         "score": 54.1,
-        "day_rs": 34,
-        "wk_rs": 80,
-        "mth_rs": 70,
-        "qtr_rs": 26,
+        "rs_day": 34,
+        "rs_wk": 80,
+        "rs_mth": 70,
+        "rs_qtr": 26,
+        "rs_hy": 61,
+        "rs_yr": 62,
         "perf_1d": -0.54,
         "perf_1w": 8.12,
         "perf_1m": 12.31,
         "perf_3m": -0.6,
-        "pct_off_52wh": -1.6
+        "pct_off_52wh": -1.6,
+        "trend": [
+          54.1
+        ]
       },
       {
         "ticker": "XME",
         "theme": "Metals & Mining Equal",
         "score": 55.0,
-        "day_rs": 19,
-        "wk_rs": 86,
-        "mth_rs": 52,
-        "qtr_rs": 38,
+        "rs_day": 19,
+        "rs_wk": 86,
+        "rs_mth": 52,
+        "rs_qtr": 38,
+        "rs_hy": 70,
+        "rs_yr": 84,
         "perf_1d": -0.98,
         "perf_1w": 8.52,
         "perf_1m": 5.61,
         "perf_3m": 2.64,
-        "pct_off_52wh": -4.7
+        "pct_off_52wh": -4.7,
+        "trend": [
+          55.0
+        ]
       },
       {
         "ticker": "COPX",
         "theme": "Copper Miners",
         "score": 56.8,
-        "day_rs": 40,
-        "wk_rs": 68,
-        "mth_rs": 68,
-        "qtr_rs": 14,
+        "rs_day": 40,
+        "rs_wk": 68,
+        "rs_mth": 68,
+        "rs_qtr": 14,
+        "rs_hy": 83,
+        "rs_yr": 85,
         "perf_1d": -0.34,
         "perf_1w": 6.17,
         "perf_1m": 11.5,
         "perf_3m": -5.83,
-        "pct_off_52wh": -7.9
+        "pct_off_52wh": -7.9,
+        "trend": [
+          56.8
+        ]
       },
       {
         "ticker": "XTL",
         "theme": "Telecom",
         "score": 57.7,
-        "day_rs": 12,
-        "wk_rs": 53,
-        "mth_rs": 46,
-        "qtr_rs": 73,
+        "rs_day": 12,
+        "rs_wk": 53,
+        "rs_mth": 46,
+        "rs_qtr": 73,
+        "rs_hy": 91,
+        "rs_yr": 89,
         "perf_1d": -1.29,
         "perf_1w": 4.42,
         "perf_1m": 4.51,
         "perf_3m": 24.44,
-        "pct_off_52wh": -2.1
+        "pct_off_52wh": -2.1,
+        "trend": [
+          57.7
+        ]
       },
       {
         "ticker": "ROBO",
         "theme": "Robotics & Automation",
         "score": 58.6,
-        "day_rs": 42,
-        "wk_rs": 46,
-        "mth_rs": 60,
-        "qtr_rs": 62,
+        "rs_day": 42,
+        "rs_wk": 46,
+        "rs_mth": 60,
+        "rs_qtr": 62,
+        "rs_hy": 71,
+        "rs_yr": 65,
         "perf_1d": -0.31,
         "perf_1w": 3.99,
         "perf_1m": 8.18,
         "perf_3m": 13.63,
-        "pct_off_52wh": -1.5
+        "pct_off_52wh": -1.5,
+        "trend": [
+          58.6
+        ]
       },
       {
         "ticker": "DRIV",
         "theme": "EV & Autonomous Vehicles",
         "score": 64.0,
-        "day_rs": 16,
-        "wk_rs": 61,
-        "mth_rs": 65,
-        "qtr_rs": 77,
+        "rs_day": 16,
+        "rs_wk": 61,
+        "rs_mth": 65,
+        "rs_qtr": 77,
+        "rs_hy": 82,
+        "rs_yr": 78,
         "perf_1d": -1.13,
         "perf_1w": 5.36,
         "perf_1m": 9.93,
         "perf_3m": 27.75,
-        "pct_off_52wh": -1.1
+        "pct_off_52wh": -1.1,
+        "trend": [
+          64.0
+        ]
       },
       {
         "ticker": "ARKQ",
         "theme": "ARK Robotics",
         "score": 64.9,
-        "day_rs": 28,
-        "wk_rs": 75,
-        "mth_rs": 66,
-        "qtr_rs": 63,
+        "rs_day": 28,
+        "rs_wk": 75,
+        "rs_mth": 66,
+        "rs_qtr": 63,
+        "rs_hy": 69,
+        "rs_yr": 73,
         "perf_1d": -0.66,
         "perf_1w": 7.05,
         "perf_1m": 10.93,
         "perf_3m": 15.31,
-        "pct_off_52wh": -0.7
+        "pct_off_52wh": -0.7,
+        "trend": [
+          64.9
+        ]
       },
       {
         "ticker": "SNSR",
         "theme": "Internet of Things",
         "score": 68.5,
-        "day_rs": 31,
-        "wk_rs": 55,
-        "mth_rs": 78,
-        "qtr_rs": 76,
+        "rs_day": 31,
+        "rs_wk": 55,
+        "rs_mth": 78,
+        "rs_qtr": 76,
+        "rs_hy": 79,
+        "rs_yr": 58,
         "perf_1d": -0.58,
         "perf_1w": 4.57,
         "perf_1m": 14.39,
         "perf_3m": 26.42,
-        "pct_off_52wh": -2.0
+        "pct_off_52wh": -2.0,
+        "trend": [
+          68.5
+        ]
       },
       {
         "ticker": "FDRV",
         "theme": "EV & Future Transpo",
         "score": 70.3,
-        "day_rs": 45,
-        "wk_rs": 73,
-        "mth_rs": 61,
-        "qtr_rs": 71,
+        "rs_day": 45,
+        "rs_wk": 73,
+        "rs_mth": 61,
+        "rs_qtr": 71,
+        "rs_hy": 68,
+        "rs_yr": 60,
         "perf_1d": -0.26,
         "perf_1w": 6.94,
         "perf_1m": 8.22,
         "perf_3m": 21.34,
-        "pct_off_52wh": -0.3
+        "pct_off_52wh": -0.3,
+        "trend": [
+          70.3
+        ]
       },
       {
         "ticker": "NASA",
         "theme": "Space Economy",
         "score": 72.1,
-        "day_rs": 2,
-        "wk_rs": 92,
-        "mth_rs": 96,
-        "qtr_rs": null,
+        "rs_day": 2,
+        "rs_wk": 92,
+        "rs_mth": 96,
+        "rs_qtr": null,
+        "rs_hy": null,
+        "rs_yr": null,
         "perf_1d": -3.97,
         "perf_1w": 9.99,
         "perf_1m": 37.47,
         "perf_3m": null,
-        "pct_off_52wh": -4.1
+        "pct_off_52wh": -4.1,
+        "trend": [
+          72.1
+        ]
       },
       {
         "ticker": "ARKX",
         "theme": "ARK Space Exploration",
         "score": 73.0,
-        "day_rs": 21,
-        "wk_rs": 85,
-        "mth_rs": 74,
-        "qtr_rs": 65,
+        "rs_day": 21,
+        "rs_wk": 85,
+        "rs_mth": 74,
+        "rs_qtr": 65,
+        "rs_hy": 74,
+        "rs_yr": 74,
         "perf_1d": -0.95,
         "perf_1w": 8.47,
         "perf_1m": 14.03,
         "perf_3m": 15.62,
-        "pct_off_52wh": -1.0
+        "pct_off_52wh": -1.0,
+        "trend": [
+          73.0
+        ]
       },
       {
         "ticker": "HYDR",
         "theme": "Hydrogen Energy & Fuel Cells",
         "score": 74.8,
-        "day_rs": 1,
-        "wk_rs": 45,
-        "mth_rs": 87,
-        "qtr_rs": 98,
+        "rs_day": 1,
+        "rs_wk": 45,
+        "rs_mth": 87,
+        "rs_qtr": 98,
+        "rs_hy": 97,
+        "rs_yr": 98,
         "perf_1d": -4.05,
         "perf_1w": 3.97,
         "perf_1m": 19.25,
         "perf_3m": 81.38,
-        "pct_off_52wh": -4.0
+        "pct_off_52wh": -4.0,
+        "trend": [
+          74.8
+        ]
       },
       {
         "ticker": "BAI",
         "theme": "AI & Tech Active",
         "score": 76.6,
-        "day_rs": 29,
-        "wk_rs": 58,
-        "mth_rs": 75,
-        "qtr_rs": 89,
+        "rs_day": 29,
+        "rs_wk": 58,
+        "rs_mth": 75,
+        "rs_qtr": 89,
+        "rs_hy": 86,
+        "rs_yr": 82,
         "perf_1d": -0.6,
         "perf_1w": 4.97,
         "perf_1m": 14.28,
         "perf_3m": 41.17,
-        "pct_off_52wh": -0.6
+        "pct_off_52wh": -0.6,
+        "trend": [
+          76.6
+        ]
       },
       {
         "ticker": "XSD",
         "theme": "Semiconductors (Equal)",
         "score": 82.0,
-        "day_rs": 6,
-        "wk_rs": 70,
-        "mth_rs": 90,
-        "qtr_rs": 97,
+        "rs_day": 6,
+        "rs_wk": 70,
+        "rs_mth": 90,
+        "rs_qtr": 97,
+        "rs_hy": 95,
+        "rs_yr": 94,
         "perf_1d": -2.78,
         "perf_1w": 6.33,
         "perf_1m": 22.99,
         "perf_3m": 72.32,
-        "pct_off_52wh": -3.0
+        "pct_off_52wh": -3.0,
+        "trend": [
+          82.0
+        ]
       },
       {
         "ticker": "PBW",
         "theme": "Clean Energy Alt",
         "score": 82.9,
-        "day_rs": 14,
-        "wk_rs": 89,
-        "mth_rs": 81,
-        "qtr_rs": 86,
+        "rs_day": 14,
+        "rs_wk": 89,
+        "rs_mth": 81,
+        "rs_qtr": 86,
+        "rs_hy": 84,
+        "rs_yr": 93,
         "perf_1d": -1.2,
         "perf_1w": 9.07,
         "perf_1m": 17.13,
         "perf_3m": 36.8,
-        "pct_off_52wh": -1.2
+        "pct_off_52wh": -1.2,
+        "trend": [
+          82.9
+        ]
       },
       {
         "ticker": "MEME",
         "theme": "Meme",
         "score": 83.8,
-        "day_rs": 5,
-        "wk_rs": 88,
-        "mth_rs": 95,
-        "qtr_rs": 95,
+        "rs_day": 5,
+        "rs_wk": 88,
+        "rs_mth": 95,
+        "rs_qtr": 95,
+        "rs_hy": 93,
+        "rs_yr": null,
         "perf_1d": -3.39,
         "perf_1w": 8.78,
         "perf_1m": 30.73,
         "perf_3m": 64.74,
-        "pct_off_52wh": -3.4
+        "pct_off_52wh": -3.4,
+        "trend": [
+          83.8
+        ]
       },
       {
         "ticker": "UFO",
         "theme": "Space Industry",
         "score": 87.4,
-        "day_rs": 4,
-        "wk_rs": 95,
-        "mth_rs": 93,
-        "qtr_rs": 90,
+        "rs_day": 4,
+        "rs_wk": 95,
+        "rs_mth": 93,
+        "rs_qtr": 90,
+        "rs_hy": 96,
+        "rs_yr": 94,
         "perf_1d": -3.68,
         "perf_1w": 10.77,
         "perf_1m": 27.16,
         "perf_3m": 41.42,
-        "pct_off_52wh": -3.7
+        "pct_off_52wh": -3.7,
+        "trend": [
+          87.4
+        ]
       },
       {
         "ticker": "SMH",
         "theme": "Semiconductors Giants",
         "score": 88.3,
-        "day_rs": 50,
-        "wk_rs": 62,
-        "mth_rs": 83,
-        "qtr_rs": 92,
+        "rs_day": 50,
+        "rs_wk": 62,
+        "rs_mth": 83,
+        "rs_qtr": 92,
+        "rs_hy": 92,
+        "rs_yr": 92,
         "perf_1d": -0.15,
         "perf_1w": 5.47,
         "perf_1m": 17.48,
         "perf_3m": 47.38,
-        "pct_off_52wh": -0.5
+        "pct_off_52wh": -0.5,
+        "trend": [
+          88.3
+        ]
       },
       {
         "ticker": "WGMI",
         "theme": "Crypto Mining",
         "score": 90.1,
-        "day_rs": 9,
-        "wk_rs": 94,
-        "mth_rs": 97,
-        "qtr_rs": 96,
+        "rs_day": 9,
+        "rs_wk": 94,
+        "rs_mth": 97,
+        "rs_qtr": 96,
+        "rs_hy": 85,
+        "rs_yr": 99,
         "perf_1d": -1.69,
         "perf_1w": 10.55,
         "perf_1m": 41.29,
         "perf_3m": 68.41,
-        "pct_off_52wh": -1.7
+        "pct_off_52wh": -1.7,
+        "trend": [
+          90.1
+        ]
       },
       {
         "ticker": "FIVG",
         "theme": "5G Connectivity",
         "score": 91.9,
-        "day_rs": 49,
-        "wk_rs": 72,
-        "mth_rs": 88,
-        "qtr_rs": 94,
+        "rs_day": 49,
+        "rs_wk": 72,
+        "rs_mth": 88,
+        "rs_qtr": 94,
+        "rs_hy": 90,
+        "rs_yr": 87,
         "perf_1d": -0.18,
         "perf_1w": 6.86,
         "perf_1m": 20.71,
         "perf_3m": 49.28,
-        "pct_off_52wh": -0.2
+        "pct_off_52wh": -0.2,
+        "trend": [
+          91.9
+        ]
       },
       {
         "ticker": "QTUM",
         "theme": "Quantum/AI",
         "score": 92.8,
-        "day_rs": 68,
-        "wk_rs": 74,
-        "mth_rs": 84,
-        "qtr_rs": 86,
+        "rs_day": 68,
+        "rs_wk": 74,
+        "rs_mth": 84,
+        "rs_qtr": 86,
+        "rs_hy": 87,
+        "rs_yr": 79,
         "perf_1d": 0.43,
         "perf_1w": 6.98,
         "perf_1m": 18.18,
         "perf_3m": 37.24,
-        "pct_off_52wh": 0.0
+        "pct_off_52wh": 0.0,
+        "trend": [
+          92.8
+        ]
       },
       {
         "ticker": "EWY",
         "theme": "South Korea Equities",
         "score": 97.3,
-        "day_rs": 43,
-        "wk_rs": 93,
-        "mth_rs": 92,
-        "qtr_rs": 87,
+        "rs_day": 43,
+        "rs_wk": 93,
+        "rs_mth": 92,
+        "rs_qtr": 87,
+        "rs_hy": 98,
+        "rs_yr": 97,
         "perf_1d": -0.28,
         "perf_1w": 10.41,
         "perf_1m": 27.06,
         "perf_3m": 39.51,
-        "pct_off_52wh": -0.3
+        "pct_off_52wh": -0.3,
+        "trend": [
+          97.3
+        ]
       },
       {
         "ticker": "SOXX",
         "theme": "Broad Semiconductor",
         "score": 98.2,
-        "day_rs": 56,
-        "wk_rs": 84,
-        "mth_rs": 88,
-        "qtr_rs": 95,
+        "rs_day": 56,
+        "rs_wk": 84,
+        "rs_mth": 88,
+        "rs_qtr": 95,
+        "rs_hy": 95,
+        "rs_yr": 95,
         "perf_1d": -0.07,
         "perf_1w": 8.46,
         "perf_1m": 22.19,
         "perf_3m": 61.75,
-        "pct_off_52wh": -0.2
+        "pct_off_52wh": -0.2,
+        "trend": [
+          98.2
+        ]
       },
       {
         "ticker": "DRAM",
         "theme": "Memory",
         "score": 100.0,
-        "day_rs": 75,
-        "wk_rs": 99,
-        "mth_rs": 99,
-        "qtr_rs": null,
+        "rs_day": 75,
+        "rs_wk": 99,
+        "rs_mth": 99,
+        "rs_qtr": null,
+        "rs_hy": null,
+        "rs_yr": null,
         "perf_1d": 1.01,
         "perf_1w": 16.3,
         "perf_1m": 56.4,
         "perf_3m": null,
-        "pct_off_52wh": 0.0
+        "pct_off_52wh": 0.0,
+        "trend": [
+          100.0
+        ]
       }
     ]
   },
@@ -708,7 +1262,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "MU",
@@ -730,7 +1286,13 @@
         "SOXX"
       ],
       "etf_count": 3,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "AIQ",
+        "QTUM",
+        "SOXX"
+      ]
     },
     {
       "ticker": "HUT",
@@ -750,7 +1312,11 @@
         "BLOK"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "BLOK"
+      ]
     },
     {
       "ticker": "DOCN",
@@ -770,7 +1336,13 @@
         "WCLD"
       ],
       "etf_count": 3,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "CLOU",
+        "SKYY",
+        "WCLD"
+      ]
     },
     {
       "ticker": "SNDK",
@@ -790,7 +1362,11 @@
         "DRAM"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "DRAM"
+      ]
     },
     {
       "ticker": "STX",
@@ -810,7 +1386,11 @@
         "DRAM"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "DRAM"
+      ]
     },
     {
       "ticker": "WDC",
@@ -830,7 +1410,11 @@
         "DRAM"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "DRAM"
+      ]
     },
     {
       "ticker": "FCEL",
@@ -848,7 +1432,11 @@
         "HYDR"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "HYDR"
+      ]
     },
     {
       "ticker": "PL",
@@ -866,7 +1454,11 @@
         "UFO"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "UFO"
+      ]
     },
     {
       "ticker": "QTEX",
@@ -884,7 +1476,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "UMAC",
@@ -902,7 +1496,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "DELL",
@@ -920,7 +1516,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "VELO",
@@ -938,7 +1536,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "OSS",
@@ -956,7 +1556,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "AEHR",
@@ -974,7 +1576,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "ATOM",
@@ -992,7 +1596,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "TRT",
@@ -1010,7 +1616,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "ICHR",
@@ -1028,7 +1636,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "UCTT",
@@ -1046,7 +1656,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "MXL",
@@ -1064,7 +1676,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "MX",
@@ -1082,7 +1696,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "VSH",
@@ -1100,7 +1716,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "WOLF",
@@ -1118,7 +1736,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "AMBQ",
@@ -1136,7 +1756,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "NVTS",
@@ -1154,7 +1776,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "MRAM",
@@ -1172,7 +1796,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "ASTI",
@@ -1190,7 +1816,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "RKLB",
@@ -1211,7 +1839,14 @@
         "UFO"
       ],
       "etf_count": 4,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKQ",
+        "ARKX",
+        "ITA",
+        "UFO"
+      ]
     },
     {
       "ticker": "ENPH",
@@ -1232,7 +1867,12 @@
         "TAN"
       ],
       "etf_count": 2,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "ICLN",
+        "TAN"
+      ]
     },
     {
       "ticker": "NBIS",
@@ -1250,7 +1890,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "BRAI",
@@ -1268,7 +1910,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "ACMR",
@@ -1286,7 +1930,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "ASYS",
@@ -1304,7 +1950,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "COHU",
@@ -1322,7 +1970,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "GCTS",
@@ -1340,7 +1990,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "HIMX",
@@ -1358,7 +2010,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "TOYO",
@@ -1376,7 +2030,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "TYGO",
@@ -1394,7 +2050,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "ENLT",
@@ -1412,7 +2070,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "INTC",
@@ -1434,7 +2094,15 @@
         "SOXX"
       ],
       "etf_count": 5,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "AIQ",
+        "DRIV",
+        "FIVG",
+        "QTUM",
+        "SOXX"
+      ]
     },
     {
       "ticker": "HYMC",
@@ -1452,7 +2120,11 @@
         "SILJ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "SILJ"
+      ]
     },
     {
       "ticker": "SEDG",
@@ -1472,7 +2144,11 @@
         "TAN"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "TAN"
+      ]
     },
     {
       "ticker": "IRDM",
@@ -1490,7 +2166,11 @@
         "UFO"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "UFO"
+      ]
     },
     {
       "ticker": "APLD",
@@ -1508,7 +2188,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "KEEL",
@@ -1526,7 +2208,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "CRSR",
@@ -1544,7 +2228,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "VUZI",
@@ -1562,7 +2248,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "VECO",
@@ -1580,7 +2268,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "AMD",
@@ -1605,7 +2295,18 @@
         "SOXX"
       ],
       "etf_count": 8,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "AIQ",
+        "ARKF",
+        "ARKK",
+        "ARKQ",
+        "ARKW",
+        "ARKX",
+        "FIVG",
+        "SOXX"
+      ]
     },
     {
       "ticker": "WULF",
@@ -1625,7 +2326,11 @@
         "BLOK"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "BLOK"
+      ]
     },
     {
       "ticker": "BE",
@@ -1645,7 +2350,13 @@
         "ICLN"
       ],
       "etf_count": 3,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "DRIV",
+        "HYDR",
+        "ICLN"
+      ]
     },
     {
       "ticker": "STM",
@@ -1663,7 +2374,11 @@
         "QTUM"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "QTUM"
+      ]
     },
     {
       "ticker": "RIOT",
@@ -1681,7 +2396,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "DGXX",
@@ -1699,7 +2416,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "NXT",
@@ -1720,7 +2439,12 @@
         "TAN"
       ],
       "etf_count": 2,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "ICLN",
+        "TAN"
+      ]
     },
     {
       "ticker": "NOK",
@@ -1738,7 +2462,11 @@
         "QTUM"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "QTUM"
+      ]
     },
     {
       "ticker": "ON",
@@ -1756,7 +2484,11 @@
         "QTUM"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "QTUM"
+      ]
     },
     {
       "ticker": "MRVL",
@@ -1775,7 +2507,12 @@
         "SOXX"
       ],
       "etf_count": 2,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "QTUM",
+        "SOXX"
+      ]
     },
     {
       "ticker": "TER",
@@ -1795,7 +2532,13 @@
         "ROBO"
       ],
       "etf_count": 3,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKQ",
+        "ARKX",
+        "ROBO"
+      ]
     },
     {
       "ticker": "COHR",
@@ -1813,7 +2556,11 @@
         "QTUM"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "QTUM"
+      ]
     },
     {
       "ticker": "VSAT",
@@ -1831,7 +2578,11 @@
         "UFO"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "UFO"
+      ]
     },
     {
       "ticker": "TWST",
@@ -1850,7 +2601,12 @@
         "XBI"
       ],
       "etf_count": 2,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKG",
+        "XBI"
+      ]
     },
     {
       "ticker": "ABSI",
@@ -1868,7 +2624,11 @@
         "ARKG"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKG"
+      ]
     },
     {
       "ticker": "LSCC",
@@ -1886,7 +2646,11 @@
         "SNSR"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "SNSR"
+      ]
     },
     {
       "ticker": "APLS",
@@ -1904,7 +2668,11 @@
         "XBI"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XBI"
+      ]
     },
     {
       "ticker": "RVMD",
@@ -1922,7 +2690,11 @@
         "XBI"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XBI"
+      ]
     },
     {
       "ticker": "ARCB",
@@ -1940,7 +2712,11 @@
         "XTN"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XTN"
+      ]
     },
     {
       "ticker": "PLUG",
@@ -1959,7 +2735,12 @@
         "ICLN"
       ],
       "etf_count": 2,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "HYDR",
+        "ICLN"
+      ]
     },
     {
       "ticker": "TXN",
@@ -1977,7 +2758,11 @@
         "SOXX"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "SOXX"
+      ]
     },
     {
       "ticker": "RXO",
@@ -1995,7 +2780,11 @@
         "XTN"
       ],
       "etf_count": 1,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": [
+        "XTN"
+      ]
     },
     {
       "ticker": "WGMI",
@@ -2013,7 +2802,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "SHLS",
@@ -2031,7 +2822,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "NRGV",
@@ -2049,7 +2842,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Strong"
+      "signal": "Strong",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "AMPX",
@@ -2067,7 +2862,11 @@
         "DRIV"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "DRIV"
+      ]
     },
     {
       "ticker": "MRNA",
@@ -2085,7 +2884,11 @@
         "GNOM"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "GNOM"
+      ]
     },
     {
       "ticker": "PRAX",
@@ -2103,7 +2906,11 @@
         "GNOM"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "GNOM"
+      ]
     },
     {
       "ticker": "ONTO",
@@ -2121,7 +2928,11 @@
         "QTUM"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "QTUM"
+      ]
     },
     {
       "ticker": "IONQ",
@@ -2139,7 +2950,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "AMAT",
@@ -2157,7 +2970,11 @@
         "SOXX"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "SOXX"
+      ]
     },
     {
       "ticker": "SATS",
@@ -2176,7 +2993,12 @@
         "XLC"
       ],
       "etf_count": 2,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "UFO",
+        "XLC"
+      ]
     },
     {
       "ticker": "ATEN",
@@ -2195,7 +3017,12 @@
         "HACK"
       ],
       "etf_count": 2,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "BUG",
+        "HACK"
+      ]
     },
     {
       "ticker": "MPWR",
@@ -2213,7 +3040,11 @@
         "SOXX"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "SOXX"
+      ]
     },
     {
       "ticker": "MOD",
@@ -2231,7 +3062,11 @@
         "XHB"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XHB"
+      ]
     },
     {
       "ticker": "QMCO",
@@ -2249,7 +3084,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "CORZ",
@@ -2267,7 +3104,11 @@
         "BLOK"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "BLOK"
+      ]
     },
     {
       "ticker": "FTNT",
@@ -2287,7 +3128,13 @@
         "HACK"
       ],
       "etf_count": 3,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "BUG",
+        "CIBR",
+        "HACK"
+      ]
     },
     {
       "ticker": "NXPI",
@@ -2305,7 +3152,11 @@
         "SOXX"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "SOXX"
+      ]
     },
     {
       "ticker": "CIFR",
@@ -2325,7 +3176,11 @@
         "BLOK"
       ],
       "etf_count": 1,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "BLOK"
+      ]
     },
     {
       "ticker": "ARWR",
@@ -2344,7 +3199,12 @@
         "XBI"
       ],
       "etf_count": 2,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "GNOM",
+        "XBI"
+      ]
     },
     {
       "ticker": "GEV",
@@ -2363,7 +3223,12 @@
         "XLI"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "NUKZ",
+        "XLI"
+      ]
     },
     {
       "ticker": "SAIA",
@@ -2381,7 +3246,11 @@
         "XTN"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XTN"
+      ]
     },
     {
       "ticker": "WERN",
@@ -2399,7 +3268,11 @@
         "XTN"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XTN"
+      ]
     },
     {
       "ticker": "XIFR",
@@ -2417,7 +3290,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "NTLA",
@@ -2435,7 +3310,11 @@
         "ARKG"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKG"
+      ]
     },
     {
       "ticker": "AKAM",
@@ -2455,7 +3334,13 @@
         "CLOU"
       ],
       "etf_count": 3,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "BUG",
+        "CIBR",
+        "CLOU"
+      ]
     },
     {
       "ticker": "ADI",
@@ -2473,7 +3358,11 @@
         "FIVG"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "FIVG"
+      ]
     },
     {
       "ticker": "QBTS",
@@ -2491,7 +3380,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "BEP",
@@ -2509,7 +3400,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "CRCL",
@@ -2529,7 +3422,13 @@
         "ARKW"
       ],
       "etf_count": 3,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKF",
+        "ARKK",
+        "ARKW"
+      ]
     },
     {
       "ticker": "BVN",
@@ -2547,7 +3446,11 @@
         "SILJ"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "SILJ"
+      ]
     },
     {
       "ticker": "LSTR",
@@ -2565,7 +3468,11 @@
         "XTN"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XTN"
+      ]
     },
     {
       "ticker": "JBHT",
@@ -2583,7 +3490,11 @@
         "XTN"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XTN"
+      ]
     },
     {
       "ticker": "LPL",
@@ -2601,7 +3512,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "AXIL",
@@ -2619,7 +3532,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "FFIV",
@@ -2638,7 +3553,12 @@
         "HACK"
       ],
       "etf_count": 2,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "CIBR",
+        "HACK"
+      ]
     },
     {
       "ticker": "FCX",
@@ -2658,7 +3578,13 @@
         "XLB"
       ],
       "etf_count": 3,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "COPX",
+        "PICK",
+        "XLB"
+      ]
     },
     {
       "ticker": "NUE",
@@ -2678,7 +3604,13 @@
         "XLB"
       ],
       "etf_count": 3,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "PAVE",
+        "PICK",
+        "XLB"
+      ]
     },
     {
       "ticker": "CSCO",
@@ -2699,7 +3631,14 @@
         "HACK"
       ],
       "etf_count": 4,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "AIQ",
+        "CIBR",
+        "FIVG",
+        "HACK"
+      ]
     },
     {
       "ticker": "NVT",
@@ -2717,7 +3656,11 @@
         "GRID"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "GRID"
+      ]
     },
     {
       "ticker": "STLD",
@@ -2735,7 +3678,11 @@
         "PICK"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "PICK"
+      ]
     },
     {
       "ticker": "SNDR",
@@ -2753,7 +3700,11 @@
         "XTN"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XTN"
+      ]
     },
     {
       "ticker": "UEIC",
@@ -2771,7 +3722,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "WAVE",
@@ -2789,7 +3742,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "PWR",
@@ -2808,7 +3763,12 @@
         "PAVE"
       ],
       "etf_count": 2,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "GRID",
+        "PAVE"
+      ]
     },
     {
       "ticker": "RMBS",
@@ -2826,7 +3786,11 @@
         "SNSR"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "SNSR"
+      ]
     },
     {
       "ticker": "QCOM",
@@ -2846,7 +3810,13 @@
         "METV"
       ],
       "etf_count": 3,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "DRIV",
+        "FIVG",
+        "METV"
+      ]
     },
     {
       "ticker": "DDOG",
@@ -2864,7 +3834,11 @@
         "WCLD"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "WCLD"
+      ]
     },
     {
       "ticker": "SLB",
@@ -2882,7 +3856,11 @@
         "XLE"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XLE"
+      ]
     },
     {
       "ticker": "CAT",
@@ -2900,7 +3878,11 @@
         "XLI"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XLI"
+      ]
     },
     {
       "ticker": "CRWV",
@@ -2919,7 +3901,12 @@
         "SKYY"
       ],
       "etf_count": 2,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKW",
+        "SKYY"
+      ]
     },
     {
       "ticker": "SCCO",
@@ -2937,7 +3924,11 @@
         "COPX"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "COPX"
+      ]
     },
     {
       "ticker": "RIO",
@@ -2955,7 +3946,11 @@
         "LIT"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "LIT"
+      ]
     },
     {
       "ticker": "PANW",
@@ -2977,7 +3972,15 @@
         "WCLD"
       ],
       "etf_count": 5,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "BUG",
+        "CIBR",
+        "HACK",
+        "IGV",
+        "WCLD"
+      ]
     },
     {
       "ticker": "OKTA",
@@ -2995,7 +3998,11 @@
         "BUG"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "BUG"
+      ]
     },
     {
       "ticker": "CNC",
@@ -3013,7 +4020,11 @@
         "IHF"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "IHF"
+      ]
     },
     {
       "ticker": "TGT",
@@ -3031,7 +4042,11 @@
         "XLP"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XLP"
+      ]
     },
     {
       "ticker": "TSM",
@@ -3050,7 +4065,12 @@
         "ARKQ"
       ],
       "etf_count": 2,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "AIQ",
+        "ARKQ"
+      ]
     },
     {
       "ticker": "TXG",
@@ -3068,7 +4088,11 @@
         "ARKG"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKG"
+      ]
     },
     {
       "ticker": "TWLO",
@@ -3087,7 +4111,12 @@
         "WCLD"
       ],
       "etf_count": 2,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "CLOU",
+        "WCLD"
+      ]
     },
     {
       "ticker": "ULCC",
@@ -3105,7 +4134,11 @@
         "JETS"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "JETS"
+      ]
     },
     {
       "ticker": "CF",
@@ -3123,7 +4156,11 @@
         "MOO"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "MOO"
+      ]
     },
     {
       "ticker": "ALKS",
@@ -3141,7 +4178,11 @@
         "XBI"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XBI"
+      ]
     },
     {
       "ticker": "R",
@@ -3159,7 +4200,11 @@
         "XTN"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XTN"
+      ]
     },
     {
       "ticker": "ORA",
@@ -3177,7 +4222,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "FSLY",
@@ -3197,7 +4244,13 @@
         "WCLD"
       ],
       "etf_count": 3,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "CLOU",
+        "HACK",
+        "WCLD"
+      ]
     },
     {
       "ticker": "SIRI",
@@ -3215,7 +4268,11 @@
         "UFO"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "UFO"
+      ]
     },
     {
       "ticker": "EQIX",
@@ -3233,7 +4290,11 @@
         "VNQ"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "VNQ"
+      ]
     },
     {
       "ticker": "OPRA",
@@ -3251,7 +4312,11 @@
         "BLOK"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "BLOK"
+      ]
     },
     {
       "ticker": "CRWD",
@@ -3273,7 +4338,15 @@
         "WCLD"
       ],
       "etf_count": 5,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "BUG",
+        "CIBR",
+        "HACK",
+        "IGV",
+        "WCLD"
+      ]
     },
     {
       "ticker": "VLO",
@@ -3291,7 +4364,11 @@
         "XLE"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XLE"
+      ]
     },
     {
       "ticker": "RSI",
@@ -3309,7 +4386,11 @@
         "BETZ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "BETZ"
+      ]
     },
     {
       "ticker": "ALB",
@@ -3328,7 +4409,12 @@
         "REMX"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "LIT",
+        "REMX"
+      ]
     },
     {
       "ticker": "SQM",
@@ -3347,7 +4433,12 @@
         "REMX"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "LIT",
+        "REMX"
+      ]
     },
     {
       "ticker": "GSAT",
@@ -3365,7 +4456,11 @@
         "UFO"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "UFO"
+      ]
     },
     {
       "ticker": "ROKU",
@@ -3384,7 +4479,12 @@
         "ARKW"
       ],
       "etf_count": 2,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKK",
+        "ARKW"
+      ]
     },
     {
       "ticker": "ADM",
@@ -3403,7 +4503,12 @@
         "MOO"
       ],
       "etf_count": 2,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "GUNR",
+        "MOO"
+      ]
     },
     {
       "ticker": "FSLR",
@@ -3424,7 +4529,12 @@
         "TAN"
       ],
       "etf_count": 2,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "ICLN",
+        "TAN"
+      ]
     },
     {
       "ticker": "LUMN",
@@ -3442,7 +4552,11 @@
         "SKYY"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "SKYY"
+      ]
     },
     {
       "ticker": "BEAM",
@@ -3461,7 +4575,12 @@
         "XBI"
       ],
       "etf_count": 2,
-      "signal": "Emerging"
+      "signal": "Emerging",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKG",
+        "XBI"
+      ]
     },
     {
       "ticker": "DAL",
@@ -3479,7 +4598,11 @@
         "JETS"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "JETS"
+      ]
     },
     {
       "ticker": "COP",
@@ -3497,7 +4620,11 @@
         "XLE"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLE"
+      ]
     },
     {
       "ticker": "HTOO",
@@ -3515,7 +4642,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "EBAY",
@@ -3533,7 +4662,11 @@
         "IBUY"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "IBUY"
+      ]
     },
     {
       "ticker": "MPC",
@@ -3551,7 +4684,11 @@
         "XLE"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XLE"
+      ]
     },
     {
       "ticker": "PSX",
@@ -3569,7 +4706,11 @@
         "XLE"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XLE"
+      ]
     },
     {
       "ticker": "BPOP",
@@ -3587,7 +4728,11 @@
         "KRE"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "KRE"
+      ]
     },
     {
       "ticker": "CSX",
@@ -3605,7 +4750,11 @@
         "PAVE"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "PAVE"
+      ]
     },
     {
       "ticker": "TVTX",
@@ -3623,7 +4772,11 @@
         "XBI"
       ],
       "etf_count": 1,
-      "signal": "Watch"
+      "signal": "Watch",
+      "rs_change": null,
+      "new_etfs": [
+        "XBI"
+      ]
     },
     {
       "ticker": "CAR",
@@ -3641,7 +4794,11 @@
         "XTN"
       ],
       "etf_count": 1,
-      "signal": "Watch"
+      "signal": "Watch",
+      "rs_change": null,
+      "new_etfs": [
+        "XTN"
+      ]
     },
     {
       "ticker": "HUM",
@@ -3659,7 +4816,11 @@
         "IHF"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "IHF"
+      ]
     },
     {
       "ticker": "LYV",
@@ -3677,7 +4838,11 @@
         "XLC"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XLC"
+      ]
     },
     {
       "ticker": "BKR",
@@ -3695,7 +4860,11 @@
         "XLE"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLE"
+      ]
     },
     {
       "ticker": "XOM",
@@ -3714,7 +4883,12 @@
         "XLE"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "GUNR",
+        "XLE"
+      ]
     },
     {
       "ticker": "BG",
@@ -3732,7 +4906,11 @@
         "MOO"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "MOO"
+      ]
     },
     {
       "ticker": "EOG",
@@ -3750,7 +4928,11 @@
         "XLE"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLE"
+      ]
     },
     {
       "ticker": "GS",
@@ -3768,7 +4950,11 @@
         "XLF"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XLF"
+      ]
     },
     {
       "ticker": "NEM",
@@ -3789,7 +4975,14 @@
         "XLB"
       ],
       "etf_count": 4,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "GDX",
+        "GUNR",
+        "RING",
+        "XLB"
+      ]
     },
     {
       "ticker": "CDE",
@@ -3808,7 +5001,12 @@
         "SILJ"
       ],
       "etf_count": 2,
-      "signal": "Watch"
+      "signal": "Watch",
+      "rs_change": null,
+      "new_etfs": [
+        "RING",
+        "SILJ"
+      ]
     },
     {
       "ticker": "EXK",
@@ -3826,7 +5024,11 @@
         "SILJ"
       ],
       "etf_count": 1,
-      "signal": "Watch"
+      "signal": "Watch",
+      "rs_change": null,
+      "new_etfs": [
+        "SILJ"
+      ]
     },
     {
       "ticker": "ANET",
@@ -3846,7 +5048,13 @@
         "SKYY"
       ],
       "etf_count": 3,
-      "signal": "Watch"
+      "signal": "Watch",
+      "rs_change": null,
+      "new_etfs": [
+        "CIBR",
+        "FIVG",
+        "SKYY"
+      ]
     },
     {
       "ticker": "BA",
@@ -3865,7 +5073,12 @@
         "XLI"
       ],
       "etf_count": 2,
-      "signal": "Watch"
+      "signal": "Watch",
+      "rs_change": null,
+      "new_etfs": [
+        "ITA",
+        "XLI"
+      ]
     },
     {
       "ticker": "HWM",
@@ -3884,7 +5097,12 @@
         "PAVE"
       ],
       "etf_count": 2,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "ITA",
+        "PAVE"
+      ]
     },
     {
       "ticker": "MS",
@@ -3902,7 +5120,11 @@
         "XLF"
       ],
       "etf_count": 1,
-      "signal": "Watch"
+      "signal": "Watch",
+      "rs_change": null,
+      "new_etfs": [
+        "XLF"
+      ]
     },
     {
       "ticker": "MSM",
@@ -3920,7 +5142,11 @@
         "IBUY"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "IBUY"
+      ]
     },
     {
       "ticker": "ALGT",
@@ -3938,7 +5164,11 @@
         "JETS"
       ],
       "etf_count": 1,
-      "signal": "Watch"
+      "signal": "Watch",
+      "rs_change": null,
+      "new_etfs": [
+        "JETS"
+      ]
     },
     {
       "ticker": "FROG",
@@ -3956,7 +5186,11 @@
         "WCLD"
       ],
       "etf_count": 1,
-      "signal": "Watch"
+      "signal": "Watch",
+      "rs_change": null,
+      "new_etfs": [
+        "WCLD"
+      ]
     },
     {
       "ticker": "ILMN",
@@ -3975,7 +5209,12 @@
         "GNOM"
       ],
       "etf_count": 2,
-      "signal": "Watch"
+      "signal": "Watch",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKG",
+        "GNOM"
+      ]
     },
     {
       "ticker": "AAPL",
@@ -3997,7 +5236,13 @@
         "METV"
       ],
       "etf_count": 3,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "ESGU",
+        "FIVG",
+        "METV"
+      ]
     },
     {
       "ticker": "ETSY",
@@ -4015,7 +5260,11 @@
         "IBUY"
       ],
       "etf_count": 1,
-      "signal": "Watch"
+      "signal": "Watch",
+      "rs_change": null,
+      "new_etfs": [
+        "IBUY"
+      ]
     },
     {
       "ticker": "LUV",
@@ -4033,7 +5282,11 @@
         "JETS"
       ],
       "etf_count": 1,
-      "signal": "Watch"
+      "signal": "Watch",
+      "rs_change": null,
+      "new_etfs": [
+        "JETS"
+      ]
     },
     {
       "ticker": "HON",
@@ -4051,7 +5304,11 @@
         "XLI"
       ],
       "etf_count": 1,
-      "signal": "Watch"
+      "signal": "Watch",
+      "rs_change": null,
+      "new_etfs": [
+        "XLI"
+      ]
     },
     {
       "ticker": "FLNC",
@@ -4069,7 +5326,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "CVX",
@@ -4088,7 +5347,12 @@
         "XLE"
       ],
       "etf_count": 2,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "GUNR",
+        "XLE"
+      ]
     },
     {
       "ticker": "C",
@@ -4106,7 +5370,11 @@
         "XLF"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XLF"
+      ]
     },
     {
       "ticker": "KEX",
@@ -4124,7 +5392,11 @@
         "XTN"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XTN"
+      ]
     },
     {
       "ticker": "JBLU",
@@ -4142,7 +5414,11 @@
         "JETS"
       ],
       "etf_count": 1,
-      "signal": "Watch"
+      "signal": "Watch",
+      "rs_change": null,
+      "new_etfs": [
+        "JETS"
+      ]
     },
     {
       "ticker": "SWKS",
@@ -4160,7 +5436,11 @@
         "SNSR"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "SNSR"
+      ]
     },
     {
       "ticker": "HASI",
@@ -4178,7 +5458,11 @@
         "TAN"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "TAN"
+      ]
     },
     {
       "ticker": "MAR",
@@ -4196,7 +5480,11 @@
         "XLY"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XLY"
+      ]
     },
     {
       "ticker": "VLY",
@@ -4214,7 +5502,11 @@
         "KRE"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "KRE"
+      ]
     },
     {
       "ticker": "LIN",
@@ -4232,7 +5524,11 @@
         "XLB"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XLB"
+      ]
     },
     {
       "ticker": "MO",
@@ -4250,7 +5546,11 @@
         "XLP"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XLP"
+      ]
     },
     {
       "ticker": "NET",
@@ -4270,7 +5570,13 @@
         "WCLD"
       ],
       "etf_count": 3,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "CIBR",
+        "HACK",
+        "WCLD"
+      ]
     },
     {
       "ticker": "DLR",
@@ -4289,7 +5595,12 @@
         "VNQ"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "CLOU",
+        "VNQ"
+      ]
     },
     {
       "ticker": "GRMN",
@@ -4308,7 +5619,12 @@
         "UFO"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "SNSR",
+        "UFO"
+      ]
     },
     {
       "ticker": "VZ",
@@ -4326,7 +5642,11 @@
         "FCOM"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "FCOM"
+      ]
     },
     {
       "ticker": "ETN",
@@ -4346,7 +5666,13 @@
         "XLI"
       ],
       "etf_count": 3,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "GRID",
+        "PAVE",
+        "XLI"
+      ]
     },
     {
       "ticker": "FIGS",
@@ -4364,7 +5690,11 @@
         "IBUY"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "IBUY"
+      ]
     },
     {
       "ticker": "WMB",
@@ -4382,7 +5712,11 @@
         "XLE"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLE"
+      ]
     },
     {
       "ticker": "AU",
@@ -4401,7 +5735,12 @@
         "RING"
       ],
       "etf_count": 2,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "GDX",
+        "RING"
+      ]
     },
     {
       "ticker": "LQDT",
@@ -4419,7 +5758,11 @@
         "IBUY"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "IBUY"
+      ]
     },
     {
       "ticker": "DXCM",
@@ -4437,7 +5780,11 @@
         "SNSR"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "SNSR"
+      ]
     },
     {
       "ticker": "GH",
@@ -4455,7 +5802,11 @@
         "GNOM"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "GNOM"
+      ]
     },
     {
       "ticker": "CTVA",
@@ -4475,7 +5826,13 @@
         "XLB"
       ],
       "etf_count": 3,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "GUNR",
+        "MOO",
+        "XLB"
+      ]
     },
     {
       "ticker": "ZION",
@@ -4493,7 +5850,11 @@
         "KRE"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "KRE"
+      ]
     },
     {
       "ticker": "CARR",
@@ -4511,7 +5872,11 @@
         "XHB"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XHB"
+      ]
     },
     {
       "ticker": "XYZ",
@@ -4530,7 +5895,12 @@
         "FINX"
       ],
       "etf_count": 2,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKF",
+        "FINX"
+      ]
     },
     {
       "ticker": "NVDA",
@@ -4553,7 +5923,16 @@
         "SOXX"
       ],
       "etf_count": 6,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "BOTZ",
+        "DRIV",
+        "ESGU",
+        "FIVG",
+        "METV",
+        "SOXX"
+      ]
     },
     {
       "ticker": "LMT",
@@ -4571,7 +5950,11 @@
         "ITA"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "ITA"
+      ]
     },
     {
       "ticker": "SNPS",
@@ -4589,7 +5972,11 @@
         "IGV"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "IGV"
+      ]
     },
     {
       "ticker": "UNH",
@@ -4607,7 +5994,11 @@
         "IHF"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "IHF"
+      ]
     },
     {
       "ticker": "ELV",
@@ -4625,7 +6016,11 @@
         "IHF"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "IHF"
+      ]
     },
     {
       "ticker": "HL",
@@ -4643,7 +6038,11 @@
         "SILJ"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "SILJ"
+      ]
     },
     {
       "ticker": "AMZN",
@@ -4668,7 +6067,18 @@
         "XLY"
       ],
       "etf_count": 8,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "AIQ",
+        "ARKF",
+        "ARKQ",
+        "ARKW",
+        "ARKX",
+        "ESGU",
+        "SKYY",
+        "XLY"
+      ]
     },
     {
       "ticker": "CVS",
@@ -4686,7 +6096,11 @@
         "IHF"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "IHF"
+      ]
     },
     {
       "ticker": "UMBF",
@@ -4704,7 +6118,11 @@
         "KRE"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "KRE"
+      ]
     },
     {
       "ticker": "GOOGL",
@@ -4730,7 +6148,19 @@
         "XLC"
       ],
       "etf_count": 9,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "AIQ",
+        "BOTZ",
+        "DRIV",
+        "ESGU",
+        "FCOM",
+        "METV",
+        "SKYY",
+        "SOCL",
+        "XLC"
+      ]
     },
     {
       "ticker": "ZM",
@@ -4748,7 +6178,11 @@
         "CLOU"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "CLOU"
+      ]
     },
     {
       "ticker": "WBD",
@@ -4766,7 +6200,11 @@
         "FCOM"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "FCOM"
+      ]
     },
     {
       "ticker": "JCI",
@@ -4785,7 +6223,12 @@
         "XHB"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "GRID",
+        "XHB"
+      ]
     },
     {
       "ticker": "OC",
@@ -4803,7 +6246,11 @@
         "XHB"
       ],
       "etf_count": 1,
-      "signal": "Neutral"
+      "signal": "Neutral",
+      "rs_change": null,
+      "new_etfs": [
+        "XHB"
+      ]
     },
     {
       "ticker": "SBUX",
@@ -4821,7 +6268,11 @@
         "XLY"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLY"
+      ]
     },
     {
       "ticker": "AVGO",
@@ -4844,7 +6295,16 @@
         "SOXX"
       ],
       "etf_count": 6,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "AIQ",
+        "CIBR",
+        "ESGU",
+        "FIVG",
+        "HACK",
+        "SOXX"
+      ]
     },
     {
       "ticker": "GOOG",
@@ -4867,7 +6327,16 @@
         "XLC"
       ],
       "etf_count": 6,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKQ",
+        "ARKW",
+        "ARKX",
+        "ESGU",
+        "FCOM",
+        "XLC"
+      ]
     },
     {
       "ticker": "FLG",
@@ -4885,7 +6354,11 @@
         "KRE"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "KRE"
+      ]
     },
     {
       "ticker": "UNP",
@@ -4904,7 +6377,12 @@
         "XLI"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "PAVE",
+        "XLI"
+      ]
     },
     {
       "ticker": "GLXY",
@@ -4922,7 +6400,11 @@
         "BLOK"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "BLOK"
+      ]
     },
     {
       "ticker": "UAL",
@@ -4940,7 +6422,11 @@
         "JETS"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "JETS"
+      ]
     },
     {
       "ticker": "EWBC",
@@ -4958,7 +6444,11 @@
         "KRE"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "KRE"
+      ]
     },
     {
       "ticker": "ORCL",
@@ -4978,7 +6468,13 @@
         "SKYY"
       ],
       "etf_count": 3,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "FIVG",
+        "IGV",
+        "SKYY"
+      ]
     },
     {
       "ticker": "BIDU",
@@ -4996,7 +6492,11 @@
         "SOCL"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "SOCL"
+      ]
     },
     {
       "ticker": "TGTX",
@@ -5014,7 +6514,11 @@
         "XBI"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XBI"
+      ]
     },
     {
       "ticker": "PM",
@@ -5032,7 +6536,11 @@
         "XLP"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLP"
+      ]
     },
     {
       "ticker": "LHX",
@@ -5051,7 +6559,12 @@
         "ITA"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKX",
+        "ITA"
+      ]
     },
     {
       "ticker": "PLD",
@@ -5069,7 +6582,11 @@
         "VNQ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "VNQ"
+      ]
     },
     {
       "ticker": "CL",
@@ -5087,7 +6604,11 @@
         "XLP"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLP"
+      ]
     },
     {
       "ticker": "UEC",
@@ -5105,7 +6626,11 @@
         "URA"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "URA"
+      ]
     },
     {
       "ticker": "SPG",
@@ -5123,7 +6648,11 @@
         "VNQ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "VNQ"
+      ]
     },
     {
       "ticker": "PSA",
@@ -5141,7 +6670,11 @@
         "VNQ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "VNQ"
+      ]
     },
     {
       "ticker": "QUBT",
@@ -5159,7 +6692,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "ABNB",
@@ -5177,7 +6712,11 @@
         "IBUY"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "IBUY"
+      ]
     },
     {
       "ticker": "BWXT",
@@ -5195,7 +6734,11 @@
         "NLR"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "NLR"
+      ]
     },
     {
       "ticker": "D",
@@ -5213,7 +6756,11 @@
         "NUKZ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "NUKZ"
+      ]
     },
     {
       "ticker": "HUBB",
@@ -5231,7 +6778,11 @@
         "GRID"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "GRID"
+      ]
     },
     {
       "ticker": "ALK",
@@ -5249,7 +6800,11 @@
         "JETS"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "JETS"
+      ]
     },
     {
       "ticker": "O",
@@ -5267,7 +6822,11 @@
         "VNQ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "VNQ"
+      ]
     },
     {
       "ticker": "MAS",
@@ -5285,7 +6844,11 @@
         "XHB"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XHB"
+      ]
     },
     {
       "ticker": "GE",
@@ -5304,7 +6867,12 @@
         "XLI"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ITA",
+        "XLI"
+      ]
     },
     {
       "ticker": "MP",
@@ -5322,7 +6890,11 @@
         "REMX"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "REMX"
+      ]
     },
     {
       "ticker": "KO",
@@ -5340,7 +6912,11 @@
         "XLP"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLP"
+      ]
     },
     {
       "ticker": "MSN",
@@ -5358,7 +6934,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "DE",
@@ -5380,7 +6958,15 @@
         "XLI"
       ],
       "etf_count": 5,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKQ",
+        "ARKX",
+        "MOO",
+        "PAVE",
+        "XLI"
+      ]
     },
     {
       "ticker": "APP",
@@ -5398,7 +6984,11 @@
         "IGV"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "IGV"
+      ]
     },
     {
       "ticker": "MDLZ",
@@ -5416,7 +7006,11 @@
         "XLP"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLP"
+      ]
     },
     {
       "ticker": "AAL",
@@ -5434,7 +7028,11 @@
         "JETS"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "JETS"
+      ]
     },
     {
       "ticker": "MTCH",
@@ -5452,7 +7050,11 @@
         "SOCL"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "SOCL"
+      ]
     },
     {
       "ticker": "APD",
@@ -5470,7 +7072,11 @@
         "XLB"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLB"
+      ]
     },
     {
       "ticker": "WMT",
@@ -5488,7 +7094,11 @@
         "XLP"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLP"
+      ]
     },
     {
       "ticker": "BBBY",
@@ -5506,7 +7116,11 @@
         "BLOK"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "BLOK"
+      ]
     },
     {
       "ticker": "TSN",
@@ -5524,7 +7138,11 @@
         "MOO"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "MOO"
+      ]
     },
     {
       "ticker": "TT",
@@ -5543,7 +7161,12 @@
         "XHB"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "PAVE",
+        "XHB"
+      ]
     },
     {
       "ticker": "SGHC",
@@ -5561,7 +7184,11 @@
         "BETZ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "BETZ"
+      ]
     },
     {
       "ticker": "ASB",
@@ -5579,7 +7206,11 @@
         "KRE"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "KRE"
+      ]
     },
     {
       "ticker": "VRTPX",
@@ -5597,7 +7228,11 @@
         "VNQ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "VNQ"
+      ]
     },
     {
       "ticker": "COST",
@@ -5615,7 +7250,11 @@
         "XLP"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLP"
+      ]
     },
     {
       "ticker": "PNFP",
@@ -5633,7 +7272,11 @@
         "KRE"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "KRE"
+      ]
     },
     {
       "ticker": "TFC",
@@ -5651,7 +7294,11 @@
         "KRE"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "KRE"
+      ]
     },
     {
       "ticker": "NSC",
@@ -5669,7 +7316,11 @@
         "PAVE"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "PAVE"
+      ]
     },
     {
       "ticker": "CRSP",
@@ -5688,7 +7339,12 @@
         "ARKK"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKG",
+        "ARKK"
+      ]
     },
     {
       "ticker": "VRNS",
@@ -5706,7 +7362,11 @@
         "BUG"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "BUG"
+      ]
     },
     {
       "ticker": "RTX",
@@ -5725,7 +7385,12 @@
         "XLI"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ITA",
+        "XLI"
+      ]
     },
     {
       "ticker": "AMT",
@@ -5743,7 +7408,11 @@
         "VNQ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "VNQ"
+      ]
     },
     {
       "ticker": "TURB",
@@ -5761,7 +7430,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "VRTX",
@@ -5779,7 +7450,11 @@
         "GNOM"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "GNOM"
+      ]
     },
     {
       "ticker": "LII",
@@ -5798,7 +7473,12 @@
         "XHB"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ITB",
+        "XHB"
+      ]
     },
     {
       "ticker": "PCG",
@@ -5816,7 +7496,11 @@
         "NLR"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "NLR"
+      ]
     },
     {
       "ticker": "TSLA",
@@ -5839,7 +7523,16 @@
         "XLY"
       ],
       "etf_count": 6,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKK",
+        "ARKQ",
+        "ARKW",
+        "DRIV",
+        "ESGU",
+        "XLY"
+      ]
     },
     {
       "ticker": "GPN",
@@ -5857,7 +7550,11 @@
         "FINX"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "FINX"
+      ]
     },
     {
       "ticker": "GD",
@@ -5876,7 +7573,12 @@
         "ITA"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "HACK",
+        "ITA"
+      ]
     },
     {
       "ticker": "CVNA",
@@ -5894,7 +7596,11 @@
         "IBUY"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "IBUY"
+      ]
     },
     {
       "ticker": "RGTI",
@@ -5912,7 +7618,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "DGX",
@@ -5930,7 +7638,11 @@
         "IHF"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "IHF"
+      ]
     },
     {
       "ticker": "DUK",
@@ -5948,7 +7660,11 @@
         "NUKZ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "NUKZ"
+      ]
     },
     {
       "ticker": "TJX",
@@ -5966,7 +7682,11 @@
         "XLY"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLY"
+      ]
     },
     {
       "ticker": "S",
@@ -5984,7 +7704,11 @@
         "BUG"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "BUG"
+      ]
     },
     {
       "ticker": "TBLL",
@@ -6002,7 +7726,11 @@
         "DBA"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "DBA"
+      ]
     },
     {
       "ticker": "TLN",
@@ -6020,7 +7748,11 @@
         "NUKZ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "NUKZ"
+      ]
     },
     {
       "ticker": "OMC",
@@ -6038,7 +7770,11 @@
         "XLC"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLC"
+      ]
     },
     {
       "ticker": "PSNL",
@@ -6056,7 +7792,11 @@
         "ARKG"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKG"
+      ]
     },
     {
       "ticker": "CMCSA",
@@ -6074,7 +7814,11 @@
         "FCOM"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "FCOM"
+      ]
     },
     {
       "ticker": "BMRN",
@@ -6092,7 +7836,11 @@
         "GNOM"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "GNOM"
+      ]
     },
     {
       "ticker": "GFI",
@@ -6110,7 +7858,11 @@
         "GDX"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "GDX"
+      ]
     },
     {
       "ticker": "CI",
@@ -6128,7 +7880,11 @@
         "IHF"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "IHF"
+      ]
     },
     {
       "ticker": "WELL",
@@ -6146,7 +7902,11 @@
         "VNQ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "VNQ"
+      ]
     },
     {
       "ticker": "PEP",
@@ -6164,7 +7924,11 @@
         "XLP"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLP"
+      ]
     },
     {
       "ticker": "TBCH",
@@ -6182,7 +7946,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "EA",
@@ -6201,7 +7967,12 @@
         "XLC"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "HERO",
+        "XLC"
+      ]
     },
     {
       "ticker": "TOL",
@@ -6219,7 +7990,11 @@
         "ITB"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ITB"
+      ]
     },
     {
       "ticker": "AGPXX",
@@ -6237,7 +8012,11 @@
         "DBA"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "DBA"
+      ]
     },
     {
       "ticker": "FGXXX",
@@ -6255,7 +8034,11 @@
         "DRAM"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "DRAM"
+      ]
     },
     {
       "ticker": "META",
@@ -6277,7 +8060,15 @@
         "XLC"
       ],
       "etf_count": 5,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ESGU",
+        "FCOM",
+        "METV",
+        "SOCL",
+        "XLC"
+      ]
     },
     {
       "ticker": "JPM",
@@ -6296,7 +8087,12 @@
         "XLF"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ESGU",
+        "XLF"
+      ]
     },
     {
       "ticker": "NOC",
@@ -6314,7 +8110,11 @@
         "ITA"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ITA"
+      ]
     },
     {
       "ticker": "SMMT",
@@ -6332,7 +8132,11 @@
         "XBI"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XBI"
+      ]
     },
     {
       "ticker": "BAC",
@@ -6350,7 +8154,11 @@
         "XLF"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLF"
+      ]
     },
     {
       "ticker": "DIS",
@@ -6369,7 +8177,12 @@
         "XLC"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "FCOM",
+        "XLC"
+      ]
     },
     {
       "ticker": "WAL",
@@ -6387,7 +8200,11 @@
         "KRE"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "KRE"
+      ]
     },
     {
       "ticker": "PG",
@@ -6405,7 +8222,11 @@
         "XLP"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLP"
+      ]
     },
     {
       "ticker": "T",
@@ -6423,7 +8244,11 @@
         "FCOM"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "FCOM"
+      ]
     },
     {
       "ticker": "SRE",
@@ -6441,7 +8266,11 @@
         "PAVE"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "PAVE"
+      ]
     },
     {
       "ticker": "V",
@@ -6459,7 +8288,11 @@
         "XLF"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLF"
+      ]
     },
     {
       "ticker": "LH",
@@ -6477,7 +8310,11 @@
         "IHF"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "IHF"
+      ]
     },
     {
       "ticker": "PEG",
@@ -6495,7 +8332,11 @@
         "NLR"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "NLR"
+      ]
     },
     {
       "ticker": "VMC",
@@ -6513,7 +8354,11 @@
         "XLB"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLB"
+      ]
     },
     {
       "ticker": "PLTR",
@@ -6534,7 +8379,14 @@
         "IGV"
       ],
       "etf_count": 4,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKF",
+        "ARKK",
+        "ARKQ",
+        "IGV"
+      ]
     },
     {
       "ticker": "BNTX",
@@ -6552,7 +8404,11 @@
         "GNOM"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "GNOM"
+      ]
     },
     {
       "ticker": "DHI",
@@ -6571,7 +8427,12 @@
         "XHB"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ITB",
+        "XHB"
+      ]
     },
     {
       "ticker": "P",
@@ -6589,7 +8450,11 @@
         "SKYY"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "SKYY"
+      ]
     },
     {
       "ticker": "RUN",
@@ -6609,7 +8474,11 @@
         "TAN"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "TAN"
+      ]
     },
     {
       "ticker": "NTRA",
@@ -6628,7 +8497,12 @@
         "GNOM"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKG",
+        "GNOM"
+      ]
     },
     {
       "ticker": "MSFT",
@@ -6650,7 +8524,15 @@
         "SKYY"
       ],
       "etf_count": 5,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "DRIV",
+        "ESGU",
+        "IGV",
+        "METV",
+        "SKYY"
+      ]
     },
     {
       "ticker": "CART",
@@ -6668,7 +8550,11 @@
         "IBUY"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "IBUY"
+      ]
     },
     {
       "ticker": "PHM",
@@ -6686,7 +8572,11 @@
         "ITB"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ITB"
+      ]
     },
     {
       "ticker": "CRH",
@@ -6704,7 +8594,11 @@
         "XLB"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLB"
+      ]
     },
     {
       "ticker": "MLM",
@@ -6722,7 +8616,11 @@
         "XLB"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLB"
+      ]
     },
     {
       "ticker": "BLD",
@@ -6741,7 +8639,12 @@
         "XHB"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ITB",
+        "XHB"
+      ]
     },
     {
       "ticker": "VST",
@@ -6759,7 +8662,11 @@
         "NUKZ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "NUKZ"
+      ]
     },
     {
       "ticker": "IOT",
@@ -6777,7 +8684,11 @@
         "SNSR"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "SNSR"
+      ]
     },
     {
       "ticker": "FISV",
@@ -6795,7 +8706,11 @@
         "FINX"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "FINX"
+      ]
     },
     {
       "ticker": "TTWO",
@@ -6814,7 +8729,12 @@
         "XLC"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "HERO",
+        "XLC"
+      ]
     },
     {
       "ticker": "TDG",
@@ -6832,7 +8752,11 @@
         "ITA"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ITA"
+      ]
     },
     {
       "ticker": "BRK-B",
@@ -6850,7 +8774,11 @@
         "XLF"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLF"
+      ]
     },
     {
       "ticker": "ACHR",
@@ -6868,7 +8796,11 @@
         "ARKX"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKX"
+      ]
     },
     {
       "ticker": "TMUS",
@@ -6886,7 +8818,11 @@
         "FCOM"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "FCOM"
+      ]
     },
     {
       "ticker": "WFC",
@@ -6904,7 +8840,11 @@
         "XLF"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLF"
+      ]
     },
     {
       "ticker": "SONO",
@@ -6922,7 +8862,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "KOSS",
@@ -6940,7 +8882,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "LOW",
@@ -6959,7 +8903,12 @@
         "XLY"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ITB",
+        "XLY"
+      ]
     },
     {
       "ticker": "HD",
@@ -6978,7 +8927,12 @@
         "XLY"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ITB",
+        "XLY"
+      ]
     },
     {
       "ticker": "MA",
@@ -6996,7 +8950,11 @@
         "XLF"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLF"
+      ]
     },
     {
       "ticker": "MCD",
@@ -7014,7 +8972,11 @@
         "XLY"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLY"
+      ]
     },
     {
       "ticker": "DBX",
@@ -7032,7 +8994,11 @@
         "CLOU"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "CLOU"
+      ]
     },
     {
       "ticker": "BRZE",
@@ -7050,7 +9016,11 @@
         "WCLD"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "WCLD"
+      ]
     },
     {
       "ticker": "MTH",
@@ -7068,7 +9038,11 @@
         "XHB"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XHB"
+      ]
     },
     {
       "ticker": "BOX",
@@ -7086,7 +9060,11 @@
         "CLOU"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "CLOU"
+      ]
     },
     {
       "ticker": "NTES",
@@ -7105,7 +9083,12 @@
         "SOCL"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "HERO",
+        "SOCL"
+      ]
     },
     {
       "ticker": "SHW",
@@ -7124,7 +9107,12 @@
         "XLB"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ITB",
+        "XLB"
+      ]
     },
     {
       "ticker": "EXPE",
@@ -7142,7 +9130,11 @@
         "IBUY"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "IBUY"
+      ]
     },
     {
       "ticker": "NTNX",
@@ -7160,7 +9152,11 @@
         "SKYY"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "SKYY"
+      ]
     },
     {
       "ticker": "AXP",
@@ -7178,7 +9174,11 @@
         "XLF"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLF"
+      ]
     },
     {
       "ticker": "PAYC",
@@ -7196,7 +9196,11 @@
         "CLOU"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "CLOU"
+      ]
     },
     {
       "ticker": "SKYW",
@@ -7214,7 +9218,11 @@
         "JETS"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "JETS"
+      ]
     },
     {
       "ticker": "BKNG",
@@ -7232,7 +9240,11 @@
         "XLY"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLY"
+      ]
     },
     {
       "ticker": "ORLY",
@@ -7250,7 +9262,11 @@
         "XLY"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLY"
+      ]
     },
     {
       "ticker": "KTOS",
@@ -7269,7 +9285,12 @@
         "ARKX"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKQ",
+        "ARKX"
+      ]
     },
     {
       "ticker": "MDGL",
@@ -7287,7 +9308,11 @@
         "XBI"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XBI"
+      ]
     },
     {
       "ticker": "UBER",
@@ -7305,7 +9330,11 @@
         "XLI"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "XLI"
+      ]
     },
     {
       "ticker": "NFLX",
@@ -7324,7 +9353,12 @@
         "XLC"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "FCOM",
+        "XLC"
+      ]
     },
     {
       "ticker": "CRM",
@@ -7342,7 +9376,11 @@
         "IGV"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "IGV"
+      ]
     },
     {
       "ticker": "NVR",
@@ -7360,7 +9398,11 @@
         "ITB"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ITB"
+      ]
     },
     {
       "ticker": "CEG",
@@ -7379,7 +9421,12 @@
         "NUKZ"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "NLR",
+        "NUKZ"
+      ]
     },
     {
       "ticker": "HOOD",
@@ -7400,7 +9447,14 @@
         "FINX"
       ],
       "etf_count": 4,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKF",
+        "ARKK",
+        "ARKW",
+        "FINX"
+      ]
     },
     {
       "ticker": "CHDN",
@@ -7418,7 +9472,11 @@
         "BETZ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "BETZ"
+      ]
     },
     {
       "ticker": "ADBE",
@@ -7436,7 +9494,11 @@
         "IGV"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "IGV"
+      ]
     },
     {
       "ticker": "GPRO",
@@ -7454,7 +9516,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "RVLV",
@@ -7472,7 +9536,11 @@
         "IBUY"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "IBUY"
+      ]
     },
     {
       "ticker": "AMBA",
@@ -7490,7 +9558,11 @@
         "ROBO"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ROBO"
+      ]
     },
     {
       "ticker": "RDDT",
@@ -7508,7 +9580,11 @@
         "SOCL"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "SOCL"
+      ]
     },
     {
       "ticker": "TOST",
@@ -7526,7 +9602,11 @@
         "ARKF"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKF"
+      ]
     },
     {
       "ticker": "NU",
@@ -7544,7 +9624,11 @@
         "BLOK"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "BLOK"
+      ]
     },
     {
       "ticker": "TECH",
@@ -7562,7 +9646,11 @@
         "GNOM"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "GNOM"
+      ]
     },
     {
       "ticker": "OKLO",
@@ -7581,7 +9669,12 @@
         "URA"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "NLR",
+        "URA"
+      ]
     },
     {
       "ticker": "SHOP",
@@ -7602,7 +9695,14 @@
         "CLOU"
       ],
       "etf_count": 4,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKF",
+        "ARKK",
+        "ARKW",
+        "CLOU"
+      ]
     },
     {
       "ticker": "DKNG",
@@ -7620,7 +9720,11 @@
         "BETZ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "BETZ"
+      ]
     },
     {
       "ticker": "CBRE",
@@ -7638,7 +9742,11 @@
         "VNQ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "VNQ"
+      ]
     },
     {
       "ticker": "COIN",
@@ -7659,7 +9767,14 @@
         "FINX"
       ],
       "etf_count": 4,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKF",
+        "ARKK",
+        "BLOK",
+        "FINX"
+      ]
     },
     {
       "ticker": "AVAV",
@@ -7677,7 +9792,11 @@
         "ARKX"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKX"
+      ]
     },
     {
       "ticker": "ISRG",
@@ -7695,7 +9814,11 @@
         "BOTZ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "BOTZ"
+      ]
     },
     {
       "ticker": "HCA",
@@ -7713,7 +9836,11 @@
         "IHF"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "IHF"
+      ]
     },
     {
       "ticker": "SAFX",
@@ -7731,7 +9858,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "CHKP",
@@ -7749,7 +9878,11 @@
         "BUG"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "BUG"
+      ]
     },
     {
       "ticker": "PYPL",
@@ -7767,7 +9900,11 @@
         "FINX"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "FINX"
+      ]
     },
     {
       "ticker": "VEEV",
@@ -7785,7 +9922,11 @@
         "IHF"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "IHF"
+      ]
     },
     {
       "ticker": "FIS",
@@ -7803,7 +9944,11 @@
         "FINX"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "FINX"
+      ]
     },
     {
       "ticker": "U",
@@ -7822,7 +9967,12 @@
         "METV"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "HERO",
+        "METV"
+      ]
     },
     {
       "ticker": "LEN",
@@ -7840,7 +9990,11 @@
         "ITB"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ITB"
+      ]
     },
     {
       "ticker": "TRMB",
@@ -7858,7 +10012,11 @@
         "UFO"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "UFO"
+      ]
     },
     {
       "ticker": "TEM",
@@ -7877,7 +10035,12 @@
         "ARKK"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ARKG",
+        "ARKK"
+      ]
     },
     {
       "ticker": "SOFI",
@@ -7895,7 +10058,11 @@
         "FINX"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "FINX"
+      ]
     },
     {
       "ticker": "ZTS",
@@ -7913,7 +10080,11 @@
         "MOO"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "MOO"
+      ]
     },
     {
       "ticker": "FLUT",
@@ -7931,7 +10102,11 @@
         "BETZ"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "BETZ"
+      ]
     },
     {
       "ticker": "INTU",
@@ -7950,7 +10125,12 @@
         "IGV"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "FINX",
+        "IGV"
+      ]
     },
     {
       "ticker": "RBLX",
@@ -7968,7 +10148,11 @@
         "METV"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "METV"
+      ]
     },
     {
       "ticker": "KVYO",
@@ -7986,7 +10170,11 @@
         "WCLD"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "WCLD"
+      ]
     },
     {
       "ticker": "SUUN",
@@ -8004,7 +10192,9 @@
       ],
       "etfs": [],
       "etf_count": 0,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": []
     },
     {
       "ticker": "ZS",
@@ -8022,7 +10212,11 @@
         "CIBR"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "CIBR"
+      ]
     },
     {
       "ticker": "CELT",
@@ -8040,7 +10234,11 @@
         "ROBO"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "ROBO"
+      ]
     },
     {
       "ticker": "00916",
@@ -8058,7 +10256,11 @@
         "FAN"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "FAN"
+      ]
     },
     {
       "ticker": "02208",
@@ -8076,7 +10278,11 @@
         "FAN"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "FAN"
+      ]
     },
     {
       "ticker": "KAP",
@@ -8095,7 +10301,12 @@
         "URA"
       ],
       "etf_count": 2,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "NLR",
+        "URA"
+      ]
     },
     {
       "ticker": "01772",
@@ -8113,7 +10324,11 @@
         "REMX"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "REMX"
+      ]
     },
     {
       "ticker": "02899",
@@ -8131,7 +10346,11 @@
         "RING"
       ],
       "etf_count": 1,
-      "signal": "Weakening"
+      "signal": "Weakening",
+      "rs_change": null,
+      "new_etfs": [
+        "RING"
+      ]
     }
   ]
 }

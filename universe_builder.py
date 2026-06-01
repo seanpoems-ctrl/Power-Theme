@@ -1,35 +1,61 @@
 """
-universe_builder.py — Daily Stock Universe Builder
-===================================================
-Aggregates stocks from ETF holdings + thematic scanner data.
-Computes:
-  - ETF rotation signals  (Rotating In / Rotating Out)
-  - Stock signals         (Strong / Emerging / Watch / Weakening / Neutral)
-Outputs: public/universe.json
+universe_builder.py — Daily Stock Universe Builder  v2
+=======================================================
+Phases covered:
+  Phase 1  Daily snapshot + 30-day rolling history + day-over-day RS change
+  Phase 2  ETF rotation signals + sector heatmap + 20-day ETF score trend
+  Phase 3  Stock signals (Strong/Emerging/Watch/Weakening) + new-ETF-entrant detection
+
+Outputs:
+  public/universe.json              — main dashboard feed
+  public/universe_history/<date>.json — lightweight daily snapshot (30-day window)
+  public/etf_rs_trend.json          — 20-day rolling Score per ETF
 """
 
 import json
 import logging
-from datetime import datetime, timezone
+import shutil
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger(__name__)
 
-OUTPUT_PATH   = Path("public/universe.json")
-THEMATIC_PATH = Path("public/thematic_data.json")
-ETF_RS_PATH   = Path("public/etf_rs.json")
+OUTPUT_PATH    = Path("public/universe.json")
+THEMATIC_PATH  = Path("public/thematic_data.json")
+ETF_RS_PATH    = Path("public/etf_rs.json")
+HISTORY_DIR    = Path("public/universe_history")
+TREND_PATH     = Path("public/etf_rs_trend.json")
+HISTORY_DAYS   = 30   # keep last N daily snapshots
+TREND_DAYS     = 20   # rolling window for ETF score trend
 
 
-# ── Signal thresholds ─────────────────────────────────────────────────────────
+# ── Sector groupings for heatmap ──────────────────────────────────────────────
+SECTOR_GROUPS: dict[str, list[str]] = {
+    "Semiconductors":   ["SOXX", "SMH", "XSD", "DRAM"],
+    "Tech & AI":        ["AIQ", "BAI", "IGV", "XSW", "QTUM", "IDGT", "FIVG"],
+    "Cloud":            ["WCLD", "CLOU", "SKYY"],
+    "Cybersecurity":    ["CIBR", "BUG", "HACK"],
+    "Space & Defense":  ["ITA", "XAR", "SHLD", "UFO", "NASA", "ARKX"],
+    "Healthcare":       ["XBI", "ARKG", "GNOM", "IHI", "PBE", "XHE", "IHF"],
+    "Energy":           ["ICLN", "TAN", "PBW", "XLE", "UNG", "HYDR", "FCG", "XOP"],
+    "Crypto & Fintech": ["BLOK", "WGMI", "DXYZ", "FINX"],
+    "Industrials":      ["XLI", "PAVE", "BOTZ", "ROBO", "DRIV", "FDRV", "XTN", "IYT", "ARKQ"],
+    "Financials":       ["XLF", "KRE", "KBE", "KCE", "KIE", "AMLP"],
+    "Commodities":      ["GDX", "GLD", "COPX", "SIL", "SILJ", "XME", "SLX", "PICK", "REMX"],
+    "Consumer":         ["XLY", "XLP", "IBUY", "MEME", "BETZ", "HERO", "METV", "MOO"],
+    "ARK Funds":        ["ARKK", "ARKW", "ARKG", "ARKF", "ARKQ", "ARKX"],
+    "Comms & Media":    ["XLC", "FCOM", "XTL", "IYZ", "SOCL", "BUZZ", "FDN", "SNSR"],
+}
+
+
+# ── Signal classification ─────────────────────────────────────────────────────
 
 def stock_signal(rs, perf_1d, perf_1w, perf_1m, perf_3m, etf_count):
-    """Classify a stock into Strong / Emerging / Watch / Weakening / Neutral."""
-    rs      = rs      or 0
-    p1m     = perf_1m or 0
-    p3m     = perf_3m or 0
-    p1w     = perf_1w or 0
-
+    rs  = rs  or 0
+    p1m = perf_1m or 0
+    p3m = perf_3m or 0
+    p1w = perf_1w or 0
     if rs >= 90 and p1m >= 10:
         return "Strong"
     if 70 <= rs < 90 and p1m >= 8 and (p3m >= 15 or etf_count >= 2):
@@ -42,75 +68,157 @@ def stock_signal(rs, perf_1d, perf_1w, perf_1m, perf_3m, etf_count):
 
 
 def etf_rotation(e):
-    """Rotating In / Rotating Out / Neutral based on short vs long RS trend."""
-    day = e.get("rs_day")
-    mth = e.get("rs_mth")
-    qtr = e.get("rs_qtr")
-    score = e.get("score") or 0
-
+    day, mth, score = e.get("rs_day"), e.get("rs_mth"), e.get("score") or 0
     if day is None or mth is None:
         return "Neutral"
-
-    # Rotating In: short-term RS accelerating above medium-term
     if day > mth and score >= 55:
         return "Rotating In"
-
-    # Rotating Out: short-term RS sharply below medium-term
     if day < mth - 15:
         return "Rotating Out"
-
     return "Neutral"
 
 
-# ── Main builder ─────────────────────────────────────────────────────────────
+# ── History helpers ───────────────────────────────────────────────────────────
+
+def _today_str() -> str:
+    return datetime.now(tz=timezone.utc).date().isoformat()
+
+
+def load_yesterday() -> dict[str, dict]:
+    """Load yesterday's light snapshot → {ticker: {rs, etfs}}. Returns {} if missing."""
+    yesterday = (datetime.now(tz=timezone.utc).date() - timedelta(days=1)).isoformat()
+    p = HISTORY_DIR / f"{yesterday}.json"
+    # Also try up to 3 days back (weekends / holidays)
+    for delta in range(1, 5):
+        d = (datetime.now(tz=timezone.utc).date() - timedelta(days=delta)).isoformat()
+        p = HISTORY_DIR / f"{d}.json"
+        if p.exists():
+            try:
+                return json.loads(p.read_text(encoding="utf-8")).get("stocks", {})
+            except Exception:
+                pass
+    return {}
+
+
+def save_snapshot(today: str, stocks: list[dict]) -> None:
+    """Save a lightweight snapshot and prune files older than HISTORY_DAYS."""
+    HISTORY_DIR.mkdir(parents=True, exist_ok=True)
+    snap = {
+        "date": today,
+        "stocks": {s["ticker"]: {"rs": s.get("rs"), "etfs": s.get("etfs", [])} for s in stocks},
+    }
+    (HISTORY_DIR / f"{today}.json").write_text(
+        json.dumps(snap, separators=(",", ":")), encoding="utf-8"
+    )
+    # Prune old files
+    cutoff = (datetime.now(tz=timezone.utc).date() - timedelta(days=HISTORY_DAYS)).isoformat()
+    for f in HISTORY_DIR.glob("*.json"):
+        if f.stem < cutoff:
+            f.unlink(missing_ok=True)
+    logger.info("Snapshot saved → %s", HISTORY_DIR / f"{today}.json")
+
+
+def update_etf_trend(etf_rs_list: list[dict]) -> dict[str, list[float]]:
+    """Append today's ETF Score to a rolling TREND_DAYS window. Returns updated history."""
+    try:
+        existing = json.loads(TREND_PATH.read_text(encoding="utf-8")).get("history", {})
+    except Exception:
+        existing = {}
+
+    for e in etf_rs_list:
+        tkr   = e["ticker"]
+        score = e.get("score")
+        if score is None:
+            continue
+        prev = existing.get(tkr, [])
+        prev.append(round(score, 1))
+        existing[tkr] = prev[-TREND_DAYS:]   # keep last N days
+
+    TREND_PATH.write_text(
+        json.dumps({"updated_at": _today_str(), "history": existing}, separators=(",", ":")),
+        encoding="utf-8",
+    )
+    logger.info("ETF RS trend updated → %s ETFs in history", len(existing))
+    return existing
+
+
+# ── Sector heatmap ─────────────────────────────────────────────────────────────
+
+def build_sector_heatmap(etf_rs_list: list[dict]) -> list[dict]:
+    lookup = {e["ticker"]: e for e in etf_rs_list}
+    rows = []
+    for sector, tickers in SECTOR_GROUPS.items():
+        members = [lookup[t] for t in tickers if t in lookup]
+        if not members:
+            continue
+
+        def avg(field: str):
+            vals = [m[field] for m in members if m.get(field) is not None]
+            return round(sum(vals) / len(vals), 1) if vals else None
+
+        rows.append({
+            "sector":    sector,
+            "etfs":      [m["ticker"] for m in members],
+            "etf_count": len(members),
+            "score":     avg("score"),
+            "rs_day":    avg("rs_day"),
+            "rs_wk":     avg("rs_wk"),
+            "rs_mth":    avg("rs_mth"),
+            "rs_qtr":    avg("rs_qtr"),
+            "rs_hy":     avg("rs_hy"),
+            "rs_yr":     avg("rs_yr"),
+            "perf_1d":   avg("perf_1d"),
+            "perf_1m":   avg("perf_1m"),
+            "perf_3m":   avg("perf_3m"),
+        })
+    rows.sort(key=lambda x: -(x.get("score") or 0))
+    return rows
+
+
+# ── Main builder ──────────────────────────────────────────────────────────────
 
 def build_universe() -> dict:
-    # ── Load sources ──────────────────────────────────────────────────────────
+    today = _today_str()
+
+    # Load sources
     try:
         thematic = json.loads(THEMATIC_PATH.read_text(encoding="utf-8"))
     except Exception as e:
-        logger.error(f"Could not load thematic_data.json: {e}")
-        thematic = {}
+        logger.error("Could not load thematic_data.json: %s", e); thematic = {}
 
     try:
         etf_rs_data = json.loads(ETF_RS_PATH.read_text(encoding="utf-8"))
     except Exception as e:
-        logger.error(f"Could not load etf_rs.json: {e}")
-        etf_rs_data = {}
+        logger.error("Could not load etf_rs.json: %s", e); etf_rs_data = {}
 
     etf_holdings = thematic.get("etf_holdings", {})
     etf_rs_list  = etf_rs_data.get("etfs", [])
 
-    # ── ETF rotation ──────────────────────────────────────────────────────────
+    # ── Phase 1: load yesterday for diff ─────────────────────────────────────
+    yesterday_snap = load_yesterday()
+
+    # ── Phase 2: ETF rotation + sector heatmap + trend ───────────────────────
     rotating_in, rotating_out = [], []
+    etf_trend = update_etf_trend(etf_rs_list)
+
     for e in etf_rs_list:
         rot = etf_rotation(e)
-        rec = {
-            "ticker":  e["ticker"],
-            "theme":   e.get("theme", ""),
-            "score":   e.get("score"),
-            "day_rs":  e.get("rs_day"),
-            "wk_rs":   e.get("rs_wk"),
-            "mth_rs":  e.get("rs_mth"),
-            "qtr_rs":  e.get("rs_qtr"),
-            "perf_1d": e.get("perf_1d"),
-            "perf_1w": e.get("perf_1w"),
-            "perf_1m": e.get("perf_1m"),
-            "perf_3m": e.get("perf_3m"),
-            "pct_off_52wh": e.get("pct_off_52wh"),
-        }
-        if rot == "Rotating In":
-            rotating_in.append(rec)
-        elif rot == "Rotating Out":
-            rotating_out.append(rec)
+        rec = {k: e.get(k) for k in ("ticker","theme","score","rs_day","rs_wk",
+                                      "rs_mth","rs_qtr","rs_hy","rs_yr",
+                                      "perf_1d","perf_1w","perf_1m","perf_3m","pct_off_52wh")}
+        rec["trend"] = etf_trend.get(e["ticker"], [])
+        if rot == "Rotating In":   rotating_in.append(rec)
+        elif rot == "Rotating Out": rotating_out.append(rec)
 
     rotating_in.sort(key=lambda x: -(x.get("score") or 0))
     rotating_out.sort(key=lambda x: (x.get("score") or 0))
 
-    # ── Stock universe ─────────────────────────────────────────────────────────
+    sector_heatmap = build_sector_heatmap(etf_rs_list)
+
+    # ── Phase 3: stock universe ───────────────────────────────────────────────
     stock_map: dict[str, dict] = {}
 
-    # 1) ETF holdings (price/perf/RS already enriched by scraper)
+    # From ETF holdings
     for etf_tkr, holdings in etf_holdings.items():
         for h in holdings:
             tkr = h.get("ticker", "").strip().upper()
@@ -118,92 +226,88 @@ def build_universe() -> dict:
                 continue
             if tkr not in stock_map:
                 stock_map[tkr] = {
-                    "ticker":        tkr,
-                    "name":          h.get("name", ""),
-                    "rs":            h.get("rs"),
-                    "perf_1d":       h.get("perf_1d"),
-                    "perf_1w":       h.get("perf_1w"),
-                    "perf_1m":       h.get("perf_1m"),
-                    "perf_3m":       h.get("perf_3m"),
-                    "adr_pct":       h.get("adr_pct"),
-                    "dollar_volume": h.get("dollar_volume"),
-                    "mkt_cap":       h.get("mkt_cap"),
-                    "themes":        [],
-                    "etfs":          set(),
+                    "ticker": tkr, "name": h.get("name",""),
+                    "rs": h.get("rs"), "perf_1d": h.get("perf_1d"),
+                    "perf_1w": h.get("perf_1w"), "perf_1m": h.get("perf_1m"),
+                    "perf_3m": h.get("perf_3m"), "adr_pct": h.get("adr_pct"),
+                    "dollar_volume": h.get("dollar_volume"), "mkt_cap": h.get("mkt_cap"),
+                    "themes": [], "etfs": set(),
                 }
             stock_map[tkr]["etfs"].add(etf_tkr)
 
-    # 2) Thematic scanner stocks (may have RS + SMA data not in holdings)
+    # From thematic scanner stocks
     for theme in thematic.get("themes", []):
         for sub in theme.get("subthemes", []):
             for s in sub.get("stocks", []):
-                tkr = s.get("ticker", "").strip().upper()
-                if not tkr:
-                    continue
+                tkr = s.get("ticker","").strip().upper()
+                if not tkr: continue
                 if tkr not in stock_map:
                     stock_map[tkr] = {
-                        "ticker":        tkr,
-                        "name":          s.get("company", ""),
-                        "rs":            s.get("rs_52w"),
-                        "perf_1d":       s.get("perf_1d"),
-                        "perf_1w":       s.get("perf_1w"),
-                        "perf_1m":       s.get("perf_1m"),
-                        "perf_3m":       s.get("perf_3m"),
-                        "adr_pct":       s.get("adr_pct"),
-                        "dollar_volume": s.get("dollar_volume"),
-                        "mkt_cap":       None,
-                        "themes":        [],
-                        "etfs":          set(),
+                        "ticker": tkr, "name": s.get("company",""),
+                        "rs": s.get("rs_52w"), "perf_1d": s.get("perf_1d"),
+                        "perf_1w": s.get("perf_1w"), "perf_1m": s.get("perf_1m"),
+                        "perf_3m": s.get("perf_3m"), "adr_pct": s.get("adr_pct"),
+                        "dollar_volume": s.get("dollar_volume"), "mkt_cap": None,
+                        "themes": [], "etfs": set(),
                     }
                 else:
-                    # Prefer thematic RS (more granular) and fill missing fields
-                    if s.get("rs_52w") is not None:
-                        stock_map[tkr]["rs"] = s["rs_52w"]
+                    if s.get("rs_52w") is not None: stock_map[tkr]["rs"] = s["rs_52w"]
                     if not stock_map[tkr]["name"] and s.get("company"):
                         stock_map[tkr]["name"] = s["company"]
-                    for field in ("perf_1d", "perf_1w", "perf_1m", "perf_3m", "adr_pct", "dollar_volume"):
-                        if stock_map[tkr].get(field) is None and s.get(field) is not None:
-                            stock_map[tkr][field] = s[field]
-
+                    for f in ("perf_1d","perf_1w","perf_1m","perf_3m","adr_pct","dollar_volume"):
+                        if stock_map[tkr].get(f) is None and s.get(f) is not None:
+                            stock_map[tkr][f] = s[f]
                 if theme["name"] not in stock_map[tkr]["themes"]:
                     stock_map[tkr]["themes"].append(theme["name"])
 
-    # ── Classify signals + serialise sets ────────────────────────────────────
+    # Classify signals + compute RS change + detect new ETF entrants
     stocks_out = []
     signal_counts: dict[str, int] = {}
+
     for tkr, s in stock_map.items():
         s["etfs"]      = sorted(s["etfs"])
         s["etf_count"] = len(s["etfs"])
-        sig = stock_signal(
-            s.get("rs"), s.get("perf_1d"), s.get("perf_1w"),
-            s.get("perf_1m"), s.get("perf_3m"), s["etf_count"],
-        )
-        s["signal"] = sig
-        signal_counts[sig] = signal_counts.get(sig, 0) + 1
+        s["signal"]    = stock_signal(s.get("rs"), s.get("perf_1d"), s.get("perf_1w"),
+                                       s.get("perf_1m"), s.get("perf_3m"), s["etf_count"])
+        signal_counts[s["signal"]] = signal_counts.get(s["signal"], 0) + 1
+
+        # Phase 1: RS change vs yesterday
+        prev = yesterday_snap.get(tkr, {})
+        prev_rs = prev.get("rs")
+        cur_rs  = s.get("rs")
+        if cur_rs is not None and prev_rs is not None:
+            s["rs_change"] = cur_rs - prev_rs
+        else:
+            s["rs_change"] = None
+
+        # Phase 3: newly entered ETFs since yesterday
+        prev_etfs = set(prev.get("etfs", []))
+        new_etfs  = [e for e in s["etfs"] if e not in prev_etfs]
+        s["new_etfs"] = new_etfs
+
         stocks_out.append(s)
 
     stocks_out.sort(key=lambda x: -(x.get("rs") or 0))
 
-    logger.info(
-        "Universe built: %d stocks | Rotating In: %d | Rotating Out: %d",
-        len(stocks_out), len(rotating_in), len(rotating_out),
-    )
-    logger.info("Signal breakdown: %s", signal_counts)
+    # Save daily snapshot for tomorrow's diff
+    save_snapshot(today, stocks_out)
+
+    logger.info("Universe: %d stocks | Rotating In: %d | Rotating Out: %d | Sectors: %d",
+                len(stocks_out), len(rotating_in), len(rotating_out), len(sector_heatmap))
+    logger.info("Signals: %s", signal_counts)
 
     return {
         "generated_at": datetime.now(tz=timezone.utc).isoformat(),
-        "date":         datetime.now(tz=timezone.utc).date().isoformat(),
+        "date":   today,
         "summary": {
             "total_stocks":  len(stocks_out),
             "rotating_in":   len(rotating_in),
             "rotating_out":  len(rotating_out),
             "signal_counts": signal_counts,
         },
-        "etf_rotation": {
-            "rotating_in":  rotating_in,
-            "rotating_out": rotating_out,
-        },
-        "stocks": stocks_out,
+        "sector_heatmap": sector_heatmap,
+        "etf_rotation":   {"rotating_in": rotating_in, "rotating_out": rotating_out},
+        "stocks":         stocks_out,
     }
 
 
