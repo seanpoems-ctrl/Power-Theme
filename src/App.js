@@ -4043,6 +4043,308 @@ const InlineText = ({ value, onChange, placeholder, mono, cls }) => {
   );
 };
 
+// ── ChecklistTab ─────────────────────────────────────────────────────────────
+const CHECKLIST_SECTIONS = [
+  {
+    id: "pre",
+    label: "Pre-Market Routine",
+    time: "7:00 – 9:25 AM ET",
+    color: "blue",
+    steps: [
+      {
+        section: "Step 1 — Calendar Tab (5 min)",
+        items: [
+          "Check today's economic events (FOMC, CPI, NFP, etc.)",
+          "Flag any high-impact events that could whipsaw price action",
+          "Note earnings announcements for stocks on your watchlist",
+          "If major event today → reduce position size by 50%, widen stops",
+        ],
+      },
+      {
+        section: "Step 2 — Market Breadth Tab (5 min)",
+        items: [
+          "Read the Market Signal: 🟢 Green / 🟡 Yellow / 🔴 Red",
+          "Red signal → close open swing trades, take no new entries today",
+          "Check SPY & QQQ vs SMA50 / SMA200",
+          "Review A/D Line, %Above SMA50, New Highs vs New Lows",
+          "Note if breadth confirms or diverges from price (divergence = caution)",
+        ],
+      },
+      {
+        section: "Step 3 — Pre-Market Gappers Tab (10 min)",
+        items: [
+          "Scan gappers ≥5% with conviction ≥60",
+          "Focus: Earnings Gap & Go, New Contract, Thematic Narrative catalysts",
+          "Avoid: FDA (Volatility Trap), Upgrade (Fade Candidate) unless strong breadth",
+          "Open TradingView → chart the top 2–3 gappers on 5-min + daily timeframe",
+          "Identify: pre-market high, key resistance, yesterday's close",
+          "Plan entry: Gap & Go = 5-min ORB above PM high after 9:30 open",
+        ],
+      },
+      {
+        section: "Step 4 — Thematic Scanner Tab (10 min)",
+        items: [
+          "Check Leaderboard → which themes are leading over 1W / 1M?",
+          "Review Watchlist tab → any flagged stocks near pivot / 52W high?",
+          "Look for stocks: RS ≥ 80, above SMA20/50/200, dist to 52W high ≤ 5%",
+          "Open TradingView → chart top 2–3 watchlist candidates (daily + weekly)",
+          "Write down specific entry price, stop (below pivot low or SMA20), target",
+          "Check IBKR → verify buying power, open positions, overnight P&L",
+        ],
+      },
+      {
+        section: "Step 5 — Mental Prep (5 min)",
+        items: [
+          "Review your 3 Core Rules (see below)",
+          "Set max loss for today: 1% of portfolio → if hit, stop trading",
+          "Set position size: risk per trade = 0.3% of portfolio",
+          "Clear distractions — one screen for chart, one for scanner",
+        ],
+      },
+    ],
+  },
+  {
+    id: "during",
+    label: "During Market",
+    time: "9:30 AM – 4:00 PM ET",
+    color: "green",
+    steps: [
+      {
+        section: "9:30 – 10:00 AM — Opening Range",
+        items: [
+          "Do NOT trade the first 5 minutes unless Gap & Go setup confirmed",
+          "Gap & Go entry: wait for 5-min candle to close above PM high on volume ≥ 1.5× avg",
+          "Mark ORB high and low on TradingView for reference",
+          "If gapper fades below PM high in first 15 min → skip, move on",
+          "Confirm market is not reversing on the open (check SPY 5-min trend)",
+        ],
+      },
+      {
+        section: "10:00 AM – 2:00 PM — Core Trading Window",
+        items: [
+          "Swing entries: breakout above pivot on daily chart, confirmed on 15-min",
+          "Volume check: RVOL ≥ 1.5× on breakout candle",
+          "Entry rule: buy stop 1¢ above pivot high; if triggers, fill is your entry",
+          "Stop: below pivot low or SMA20, whichever is tighter (max 7% from entry)",
+          "Log every trade immediately in Trade Journal tab (ticker, entry, stop, size, reason)",
+          "Max 2 open swing positions at once — no overloading",
+          "Do not chase — if price runs 5%+ without you, skip it",
+        ],
+      },
+      {
+        section: "2:00 – 4:00 PM — Position Management",
+        items: [
+          "Check open positions: still above SMA20? Volume drying up (healthy) or collapsing?",
+          "Partial profit: if position up ≥ 20% from entry, sell 50%, move stop to breakeven",
+          "Tight trailing stop: on remaining 50%, trail stop to 10-EMA on daily",
+          "Earnings filter: if earnings within 3 days and position < 10% profit → exit before close",
+          "If market turns red (SPY breaks SMA50) → tighten all stops immediately",
+          "Do not add to losing positions",
+        ],
+      },
+      {
+        section: "Intraday Rules",
+        items: [
+          "If daily max loss hit (1% portfolio) → close everything, log it, walk away",
+          "No revenge trading after a losing trade — wait 30 min minimum before next entry",
+          "Avoid trading during first/last 15 minutes on uncertain days",
+          "TradingView alerts: set price alerts at pivot levels so you don't stare at screens",
+        ],
+      },
+    ],
+  },
+  {
+    id: "post",
+    label: "Post-Market Routine",
+    time: "4:00 – 5:00 PM ET",
+    color: "amber",
+    steps: [
+      {
+        section: "Step 1 — Trade Journal (10 min)",
+        items: [
+          "Log all trades: entry, exit, P&L, setup type, market condition at entry",
+          "Rate your execution: A (followed plan), B (minor deviation), C (broke rules)",
+          "Note what you did well and what you should have done differently",
+          "No log = no review = no improvement. Every trade gets logged.",
+        ],
+      },
+      {
+        section: "Step 2 — Thematic Scanner (10 min)",
+        items: [
+          "Wait for nightly data refresh (~4:30 PM ET)",
+          "Check updated Leaderboard: any theme rotation? New themes entering top 5?",
+          "Review Watchlist: update targets / stops based on today's close",
+          "Add new candidates: RS ≥ 80, above SMA20/50/200, tight base, RVOL spike on base days",
+          "Remove stocks that broke below SMA20 or showed distribution volume",
+        ],
+      },
+      {
+        section: "Step 3 — Market Breadth Review (5 min)",
+        items: [
+          "Did breadth improve or worsen today?",
+          "If signal changed (Green→Yellow / Yellow→Red): adjust tomorrow's plan",
+          "Check sector rotation: which sectors gained/lost the most?",
+          "Note correlation: if all top themes moved together, CorrelationGuard may flag warning",
+        ],
+      },
+      {
+        section: "Step 4 — Watchlist & TradingView (10 min)",
+        items: [
+          "Update TradingView watchlist with tomorrow's candidates",
+          "Set price alerts at pivot levels for swing setups",
+          "Chart each candidate: mark entry trigger, stop level, 1R target on chart",
+          "Check upcoming earnings for watchlist stocks (avoid entry within 14 days)",
+          "Save IBKR screenshot of portfolio P&L for weekly review",
+        ],
+      },
+      {
+        section: "Step 5 — Prep for Tomorrow (5 min)",
+        items: [
+          "Check tomorrow's Calendar tab: any high-impact macro events?",
+          "Adjust max position size if major event (CPI, FOMC, NFP) is scheduled",
+          "Write 1 sentence in journal: market summary + your read on tomorrow",
+          "Close all charts, set IBKR alerts, log off cleanly",
+        ],
+      },
+    ],
+  },
+];
+
+const CORE_RULES = [
+  { rule: "Never fight the Market Signal", detail: "Red means stop — no new entries, no exceptions. Close swings, protect capital." },
+  { rule: "Trade themes, not individual hunches", detail: "Sector rotation tells you where money is going. Confirm with Leaderboard + Breadth before every entry." },
+  { rule: "Every trade gets logged", detail: "No log = no review = no improvement. Journal is mandatory, not optional." },
+];
+
+const COLOR_MAP = {
+  blue:  { border: "border-blue-500/30",  bg: "bg-blue-500/8",   badge: "bg-blue-500/15 text-blue-400",  dot: "bg-blue-400",  text: "text-blue-400"  },
+  green: { border: "border-green-500/30", bg: "bg-green-500/8",  badge: "bg-green-500/15 text-green-400", dot: "bg-green-400", text: "text-green-400" },
+  amber: { border: "border-amber-500/30", bg: "bg-amber-500/8",  badge: "bg-amber-500/15 text-amber-400", dot: "bg-amber-400", text: "text-amber-400" },
+};
+
+const ChecklistTab = () => {
+  const today = new Date().toISOString().slice(0, 10);
+  const storageKey = `checklist_${today}`;
+  const [checked, setChecked] = useState(() => {
+    try { return JSON.parse(localStorage.getItem(storageKey) || "{}"); } catch { return {}; }
+  });
+  const [activeSection, setActiveSection] = useState("pre");
+
+  const toggle = (id) => {
+    setChecked(prev => {
+      const next = { ...prev, [id]: !prev[id] };
+      localStorage.setItem(storageKey, JSON.stringify(next));
+      return next;
+    });
+  };
+
+  const section = CHECKLIST_SECTIONS.find(s => s.id === activeSection);
+  const c = COLOR_MAP[section.color];
+
+  const allItemIds = (sec) =>
+    sec.steps.flatMap((step, si) => step.items.map((_, ii) => `${sec.id}_${si}_${ii}`));
+
+  const doneCount = (sec) => allItemIds(sec).filter(id => checked[id]).length;
+  const totalCount = (sec) => allItemIds(sec).length;
+
+  const resetSection = (sec) => {
+    setChecked(prev => {
+      const next = { ...prev };
+      allItemIds(sec).forEach(id => delete next[id]);
+      localStorage.setItem(storageKey, JSON.stringify(next));
+      return next;
+    });
+  };
+
+  return (
+    <div className="max-w-[1100px] mx-auto px-4 pt-4 pb-10 flex flex-col gap-5">
+      {/* Core Rules */}
+      <div className="bg-zinc-900/60 border border-zinc-700/50 rounded-xl p-4">
+        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-widest mb-3">The 3 Core Rules Before Anything Else</div>
+        <div className="flex flex-col gap-2">
+          {CORE_RULES.map((r, i) => (
+            <div key={i} className="flex items-start gap-3 bg-zinc-800/40 rounded-lg px-4 py-2.5">
+              <span className="text-[13px] font-bold text-white mt-0.5">{i + 1}.</span>
+              <div>
+                <div className="text-[13px] font-semibold text-white">{r.rule}</div>
+                <div className="text-[12px] text-zinc-400 mt-0.5">{r.detail}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Section tabs */}
+      <div className="flex items-center gap-2">
+        {CHECKLIST_SECTIONS.map(sec => {
+          const done = doneCount(sec);
+          const total = totalCount(sec);
+          const pct = Math.round((done / total) * 100);
+          const cc = COLOR_MAP[sec.color];
+          const active = sec.id === activeSection;
+          return (
+            <button
+              key={sec.id}
+              onClick={() => setActiveSection(sec.id)}
+              className={`flex-1 flex flex-col items-center gap-1 px-4 py-3 rounded-xl border transition-all ${active ? `${cc.bg} ${cc.border}` : "bg-zinc-800/40 border-zinc-700/40 hover:border-zinc-600/60"}`}
+            >
+              <div className={`text-[13px] font-bold ${active ? cc.text : "text-zinc-300"}`}>{sec.label}</div>
+              <div className={`text-[11px] ${active ? cc.text : "text-zinc-500"} opacity-70`}>{sec.time}</div>
+              <div className="w-full bg-zinc-700/50 rounded-full h-1 mt-1">
+                <div className={`h-1 rounded-full transition-all ${active ? (sec.color === "blue" ? "bg-blue-400" : sec.color === "green" ? "bg-green-400" : "bg-amber-400") : "bg-zinc-600"}`} style={{ width: `${pct}%` }}/>
+              </div>
+              <div className={`text-[10px] font-mono ${active ? cc.text : "text-zinc-500"}`}>{done}/{total}</div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Active section checklist */}
+      <div className={`bg-zinc-900/60 border ${c.border} rounded-xl overflow-hidden`}>
+        <div className={`flex items-center justify-between px-5 py-3 ${c.bg} border-b ${c.border}`}>
+          <div>
+            <div className={`text-[14px] font-bold ${c.text}`}>{section.label}</div>
+            <div className="text-[11px] text-zinc-400 mt-0.5">{section.time}</div>
+          </div>
+          <button
+            onClick={() => resetSection(section)}
+            className="text-[11px] text-zinc-500 hover:text-zinc-300 border border-zinc-700/50 rounded px-2.5 py-1 transition-colors"
+          >
+            Reset
+          </button>
+        </div>
+        <div className="flex flex-col gap-0 divide-y divide-zinc-800/50">
+          {section.steps.map((step, si) => (
+            <div key={si} className="px-5 py-4">
+              <div className="text-[12px] font-bold text-zinc-300 mb-3 uppercase tracking-wide">{step.section}</div>
+              <div className="flex flex-col gap-2">
+                {step.items.map((item, ii) => {
+                  const id = `${section.id}_${si}_${ii}`;
+                  const done = !!checked[id];
+                  return (
+                    <label key={ii} className={`flex items-start gap-3 cursor-pointer group rounded-lg px-3 py-2 transition-colors ${done ? "bg-zinc-800/20" : "hover:bg-zinc-800/30"}`}>
+                      <div className="mt-0.5 flex-shrink-0">
+                        <input type="checkbox" checked={done} onChange={() => toggle(id)} className="sr-only"/>
+                        <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${done ? (section.color === "blue" ? "bg-blue-500 border-blue-500" : section.color === "green" ? "bg-green-500 border-green-500" : "bg-amber-500 border-amber-500") : "border-zinc-600 group-hover:border-zinc-400"}`}>
+                          {done && <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
+                        </div>
+                      </div>
+                      <span className={`text-[13px] leading-snug transition-colors ${done ? "line-through text-zinc-600" : "text-zinc-300"}`}>{item}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Footer note */}
+      <div className="text-[11px] text-zinc-600 text-center">Checklist resets daily. Progress is saved in browser storage. Using TradingView + IBKR.</div>
+    </div>
+  );
+};
+
 const TradeJournalTab = ({ data }) => {
   const [trades, setTrades]         = useState(() => loadTrades());
   const [filter, setFilter]         = useState("all");
@@ -9667,6 +9969,9 @@ const filtered = useMemo(() => {
               <button onClick={() => setTab("news")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "news" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Calendar
               </button>
+              <button onClick={() => setTab("checklist")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "checklist" ? "border-emerald-400 text-emerald-300" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                ✓ Routine
+              </button>
             </div>
             <div className="flex items-center gap-2">
               <button onClick={() => setTab("journal")} className={`px-2.5 py-1 text-[12px] font-medium rounded-md border transition-colors whitespace-nowrap ${tab === "journal" ? "bg-blue-500/15 border-blue-500/30 text-blue-400" : "bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-300"}`}>
@@ -9739,7 +10044,7 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
+      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
