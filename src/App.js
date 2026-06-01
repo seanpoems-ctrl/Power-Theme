@@ -5405,10 +5405,41 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
     s200 && { label: "Above SMA200",          leftPct: s200.above_pct, rightPct: s200.below_pct, leftCount: s200.above, rightCount: s200.below },
   ].filter(Boolean);
 
+  // ── Market Signal derived from market_condition ────────────────────────────
+  const signal     = data?.market_condition?.signal || null;
+  const spySma50   = data?.market_condition?.spy?.sma50_pct;
+  const spySma200  = data?.market_condition?.spy?.sma200_pct;
+  const qqqSma50   = data?.market_condition?.qqq?.sma50_pct;
+  const qqqSma200  = data?.market_condition?.qqq?.sma200_pct;
+
+  const SIG_CONFIG = {
+    green:  { dot: "bg-emerald-400", badge: "bg-emerald-500/15 border-emerald-500/40 text-emerald-300", label: "Market: Uptrend",  guidance: "Full buying — favour breakouts and RS leaders" },
+    yellow: { dot: "bg-amber-400",   badge: "bg-amber-500/15  border-amber-500/40  text-amber-300",   label: "Market: Caution",  guidance: "Selective only — buy stocks above their own SMA20/50, avoid laggards" },
+    red:    { dot: "bg-rose-400",    badge: "bg-rose-500/15   border-rose-500/40   text-rose-300",    label: "Market: Downtrend", guidance: "No new longs — protect capital, wait for conditions to improve" },
+  };
+  const sig = signal ? SIG_CONFIG[signal] : null;
+  const fmtSma = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
+
   return (
     <><div className="max-w-[1560px] mx-auto px-4 pt-4 pb-8 flex items-start gap-5">
       {/* ── Left main area ────────────────────────────────────────────────── */}
       <div className="flex-1 min-w-0">
+
+        {/* ── Market Condition Signal ── */}
+        {sig && (
+          <div className={`flex items-center gap-3 px-4 py-3 rounded-xl border mb-4 ${sig.badge}`}>
+            <span className={`w-3 h-3 rounded-full shrink-0 ${sig.dot} shadow-lg`} style={{boxShadow:`0 0 8px 2px var(--tw-shadow-color)`}}/>
+            <span className="font-bold text-sm">{sig.label}</span>
+            <span className="text-xs opacity-80 hidden sm:block">{sig.guidance}</span>
+            <div className="ml-auto flex items-center gap-3 text-[11px] font-mono shrink-0">
+              <span>SPY SMA50: <span className={spySma50 >= 0 ? "text-emerald-400" : "text-rose-400"}>{fmtSma(spySma50)}</span></span>
+              <span>SMA200: <span className={spySma200 >= 0 ? "text-emerald-400" : "text-rose-400"}>{fmtSma(spySma200)}</span></span>
+              <span className="text-zinc-600">|</span>
+              <span>QQQ SMA50: <span className={qqqSma50 >= 0 ? "text-emerald-400" : "text-rose-400"}>{fmtSma(qqqSma50)}</span></span>
+              <span>SMA200: <span className={qqqSma200 >= 0 ? "text-emerald-400" : "text-rose-400"}>{fmtSma(qqqSma200)}</span></span>
+            </div>
+          </div>
+        )}
 
         {/* 8 metric chips — compact single row */}
         <div className="flex flex-wrap gap-2 mb-4">
