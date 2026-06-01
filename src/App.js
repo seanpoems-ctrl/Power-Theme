@@ -8663,8 +8663,12 @@ const DailyWatchlistTab = ({ data }) => {
             ▼ Short
           </button>
           <button onClick={() => setMode("etf")}
-            className={`px-3 py-1.5 transition-colors ${mode === "etf" ? "bg-blue-600/25 text-blue-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
+            className={`px-3 py-1.5 transition-colors border-r border-zinc-700 ${mode === "etf" ? "bg-blue-600/25 text-blue-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
             📊 ETF RS
+          </button>
+          <button onClick={() => setMode("universe")}
+            className={`px-3 py-1.5 transition-colors ${mode === "universe" ? "bg-violet-600/25 text-violet-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
+            🌐 Universe
           </button>
         </div>
         {mc?.spy?.sma50_pct != null && (
@@ -8862,6 +8866,9 @@ const DailyWatchlistTab = ({ data }) => {
 
       {/* ── ETF RS TABLE ──────────────────────────────────── */}
       {mode === "etf" && <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} />}
+
+      {/* ── UNIVERSE ──────────────────────────────────────── */}
+      {mode === "universe" && <UniverseTab />}
 
       {/* ── SHORT MODE ────────────────────────────────────── */}
       {mode === "short" && (
@@ -9671,9 +9678,6 @@ const filtered = useMemo(() => {
               <button onClick={() => setTab("leaders")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "leaders" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Thematic Leaders
               </button>
-              <button onClick={() => setTab("universe")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "universe" ? "border-violet-400 text-violet-300" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                Universe
-              </button>
               <button onClick={() => setTab("news")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "news" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Calendar
               </button>
@@ -9749,8 +9753,7 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "universe" ? <UniverseTab /> :
-       tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "leaders" ? (
+      {tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "leaders" ? (
         <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-6">
           <ThematicLeaders etfHoldings={data?.etf_holdings || {}}/>
         </div>
