@@ -9010,11 +9010,11 @@ const UniverseTab = () => {
   const [sectorFilter, setSectorFilter] = useState(null); // sector name or null
   const [sortCol, setSortCol]     = useState("rs");
   const [sortDir, setSortDir]     = useState("desc");
-  // Adjustable filters
-  const [minRS,   setMinRS]   = useState(0);
-  const [minVol,  setMinVol]  = useState(0);    // $M
-  const [minMC,   setMinMC]   = useState(0);    // $B
-  const [minADR,  setMinADR]  = useState(0);    // %
+  // Adjustable filters — defaults: RS≥85 · $Vol≥$50M · ADR≥4% · MktCap≥$1B
+  const [minRS,   setMinRS]   = useState(85);
+  const [minVol,  setMinVol]  = useState(50);   // $M
+  const [minMC,   setMinMC]   = useState(1);    // $B
+  const [minADR,  setMinADR]  = useState(4);    // %
   const [showNew, setShowNew] = useState(false); // only new ETF entrants
 
   useEffect(() => {
