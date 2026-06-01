@@ -2368,7 +2368,7 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
         logger.warning(f"ETF holdings enrichment download failed: {e}")
         return etf_holdings_dict
 
-    trading_days = {"perf_1d": 2, "perf_1w": 5, "perf_1m": 21}
+    trading_days = {"perf_1d": 2, "perf_1w": 5, "perf_1m": 21, "perf_3m": 63, "perf_6m": 126}
 
     # ── Per-ticker stats ────────────────────────────────────────────────────
     stats: dict[str, dict] = {}

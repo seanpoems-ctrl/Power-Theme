@@ -168,8 +168,11 @@ def build_sector_heatmap(etf_rs_list: list[dict]) -> list[dict]:
             "rs_hy":     avg("rs_hy"),
             "rs_yr":     avg("rs_yr"),
             "perf_1d":   avg("perf_1d"),
+            "perf_1w":   avg("perf_1w"),
             "perf_1m":   avg("perf_1m"),
             "perf_3m":   avg("perf_3m"),
+            "perf_6m":   avg("perf_6m"),
+            "perf_12m":  avg("perf_12m"),
         })
     rows.sort(key=lambda x: -(x.get("score") or 0))
     return rows
@@ -229,7 +232,8 @@ def build_universe() -> dict:
                     "ticker": tkr, "name": h.get("name",""),
                     "rs": h.get("rs"), "perf_1d": h.get("perf_1d"),
                     "perf_1w": h.get("perf_1w"), "perf_1m": h.get("perf_1m"),
-                    "perf_3m": h.get("perf_3m"), "adr_pct": h.get("adr_pct"),
+                    "perf_3m": h.get("perf_3m"), "perf_6m": h.get("perf_6m"),
+                    "adr_pct": h.get("adr_pct"),
                     "dollar_volume": h.get("dollar_volume"), "mkt_cap": h.get("mkt_cap"),
                     "themes": [], "etfs": set(),
                 }
@@ -246,7 +250,8 @@ def build_universe() -> dict:
                         "ticker": tkr, "name": s.get("company",""),
                         "rs": s.get("rs_52w"), "perf_1d": s.get("perf_1d"),
                         "perf_1w": s.get("perf_1w"), "perf_1m": s.get("perf_1m"),
-                        "perf_3m": s.get("perf_3m"), "adr_pct": s.get("adr_pct"),
+                        "perf_3m": s.get("perf_3m"), "perf_6m": s.get("perf_6m"),
+                        "adr_pct": s.get("adr_pct"),
                         "dollar_volume": s.get("dollar_volume"), "mkt_cap": None,
                         "themes": [], "etfs": set(),
                     }
@@ -254,7 +259,7 @@ def build_universe() -> dict:
                     if s.get("rs_52w") is not None: stock_map[tkr]["rs"] = s["rs_52w"]
                     if not stock_map[tkr]["name"] and s.get("company"):
                         stock_map[tkr]["name"] = s["company"]
-                    for f in ("perf_1d","perf_1w","perf_1m","perf_3m","adr_pct","dollar_volume"):
+                    for f in ("perf_1d","perf_1w","perf_1m","perf_3m","perf_6m","adr_pct","dollar_volume"):
                         if stock_map[tkr].get(f) is None and s.get(f) is not None:
                             stock_map[tkr][f] = s[f]
                 if theme["name"] not in stock_map[tkr]["themes"]:

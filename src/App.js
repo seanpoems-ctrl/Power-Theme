@@ -8808,9 +8808,10 @@ const UniverseTab = () => {
   const [uData, setUData]         = useState(null);
   const [loading, setLoading]     = useState(true);
   const [sigFilter, setSigFilter] = useState("All");
-  const [sectorFilter, setSectorFilter] = useState(null); // sector name or null
+  const [sectorFilter, setSectorFilter] = useState(null);
   const [sortCol, setSortCol]     = useState("rs");
   const [sortDir, setSortDir]     = useState("desc");
+  const [hmSort, setHmSort]       = useState({ col: "score", dir: "desc" }); // heatmap sort
   // Adjustable filters — defaults: RS≥85 · $Vol≥$50M · ADR≥4% · MktCap≥$1B
   const [minRS,   setMinRS]   = useState(85);
   const [minVol,  setMinVol]  = useState(50);   // $M
@@ -8854,6 +8855,15 @@ const UniverseTab = () => {
     const row = uData.sector_heatmap.find(r => r.sector === sectorFilter);
     return row ? new Set(row.etfs) : null;
   }, [sectorFilter, uData]);
+
+  const sortedHeatmap = useMemo(() => {
+    const rows = uData?.sector_heatmap || [];
+    return [...rows].sort((a, b) => {
+      const av = a[hmSort.col] ?? (hmSort.dir === "asc" ? Infinity : -Infinity);
+      const bv = b[hmSort.col] ?? (hmSort.dir === "asc" ? Infinity : -Infinity);
+      return hmSort.dir === "asc" ? av - bv : bv - av;
+    });
+  }, [uData, hmSort]);
 
   const filteredStocks = useMemo(() => {
     if (!uData?.stocks) return [];
@@ -8931,28 +8941,46 @@ const UniverseTab = () => {
               </button>
             )}
           </div>
-          <div className="rounded-lg border border-zinc-800 overflow-x-auto">
+                    <div className="rounded-lg border border-zinc-800 overflow-x-auto">
             <table className="w-full border-collapse">
               <thead className="bg-zinc-900 border-b border-zinc-700">
-                <tr className="text-zinc-500 text-[9px] uppercase tracking-wide">
+                <tr className="text-zinc-500 text-[9px] uppercase tracking-wide select-none">
                   <th className="px-2 py-1.5 text-left">Sector</th>
-                  {["Score","Day","Wk","Mth","Qtr","HY","Yr"].map(h => (
-                    <th key={h} className="px-1.5 py-1.5 text-center w-11">{h}</th>
-                  ))}
-                  <th className="px-1.5 py-1.5 text-right w-14">Mth %</th>
-                  <th className="px-1.5 py-1.5 text-right w-14">Qtr %</th>
+                  {[
+                    { col:"score",    label:"Score" },
+                    { col:"rs_day",   label:"Day"   },
+                    { col:"rs_wk",    label:"Wk"    },
+                    { col:"rs_mth",   label:"Mth"   },
+                    { col:"rs_qtr",   label:"Qtr"   },
+                    { col:"rs_hy",    label:"HY"    },
+                    { col:"rs_yr",    label:"Yr"    },
+                    { col:"perf_1d",  label:"Day %" },
+                    { col:"perf_1w",  label:"Wk %"  },
+                    { col:"perf_1m",  label:"Mth %" },
+                    { col:"perf_3m",  label:"Qtr %" },
+                    { col:"perf_6m",  label:"HY %"  },
+                    { col:"perf_12m", label:"YR %"  },
+                  ].map(({ col, label }) => {
+                    const isActive = hmSort.col === col;
+                    return (
+                      <th key={col}
+                          onClick={() => setHmSort(s => ({ col, dir: s.col===col && s.dir==="desc" ? "asc" : "desc" }))}
+                          className={`px-1.5 py-1.5 text-center w-11 cursor-pointer hover:text-zinc-200 transition-colors whitespace-nowrap ${isActive ? "text-blue-400" : ""}`}>
+                        {label}{isActive ? (hmSort.dir==="desc" ? "↓" : "↑") : ""}
+                      </th>
+                    );
+                  })}
                 </tr>
               </thead>
               <tbody>
-                {sector_heatmap.map(row => {
+                {sortedHeatmap.map(row => {
                   const active = sectorFilter === row.sector;
                   return (
                     <tr key={row.sector}
                         onClick={() => setSectorFilter(active ? null : row.sector)}
-                        className={`border-b border-zinc-800/40 cursor-pointer transition-colors
-                          ${active ? "bg-violet-900/30" : "hover:bg-zinc-800/30"}`}>
+                        className={`border-b border-zinc-800/40 cursor-pointer transition-colors ${active ? "bg-violet-900/30" : "hover:bg-zinc-800/30"}`}>
                       <td className="px-2 py-1 text-[11px] font-medium text-zinc-200 whitespace-nowrap">
-                        {active && <span className="mr-1 text-violet-400 text-[9px]">▶</span>}
+                        {active && <span className="mr-1 text-violet-400 text-[9px]">&#9658;</span>}
                         {row.sector}
                         <span className="ml-1 text-[9px] text-zinc-600">{row.etf_count}</span>
                       </td>
@@ -8961,8 +8989,9 @@ const UniverseTab = () => {
                           {v != null ? (ci === 0 ? v.toFixed(1) : Math.round(v)) : "—"}
                         </td>
                       ))}
-                      <td className={`px-1.5 py-1 text-right font-mono text-[10px] ${pctColor(row.perf_1m)}`}>{fmtP(row.perf_1m)}</td>
-                      <td className={`px-1.5 py-1 text-right font-mono text-[10px] ${pctColor(row.perf_3m)}`}>{fmtP(row.perf_3m)}</td>
+                      {[row.perf_1d, row.perf_1w, row.perf_1m, row.perf_3m, row.perf_6m, row.perf_12m].map((v, ci) => (
+                        <td key={"p"+ci} className={`px-1.5 py-1 text-right font-mono text-[10px] ${pctColor(v)}`}>{fmtP(v)}</td>
+                      ))}
                     </tr>
                   );
                 })}
@@ -9057,6 +9086,7 @@ const UniverseTab = () => {
                   { col:"perf_1w",       label:"Wk %",     align:"right" },
                   { col:"perf_1m",       label:"Mth %",    align:"right" },
                   { col:"perf_3m",       label:"Qtr %",    align:"right" },
+                  { col:"perf_6m",       label:"HY %",     align:"right" },
                   { col:"adr_pct",       label:"ADR%",     align:"right" },
                   { col:"dollar_volume", label:"$ Vol",    align:"right" },
                   { col:"mkt_cap",       label:"Mkt Cap",  align:"right" },
@@ -9098,6 +9128,7 @@ const UniverseTab = () => {
                     <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_1w)}`}>{fmtP(s.perf_1w)}</td>
                     <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_1m)}`}>{fmtP(s.perf_1m)}</td>
                     <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_3m)}`}>{fmtP(s.perf_3m)}</td>
+                    <td className={`px-3 py-2 text-right font-mono ${pctColor(s.perf_6m)}`}>{fmtP(s.perf_6m)}</td>
                     <td className="px-3 py-2 text-right font-mono text-zinc-400">{s.adr_pct!=null?`${s.adr_pct.toFixed(1)}%`:"—"}</td>
                     <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmtV(s.dollar_volume)}</td>
                     <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmtMC(s.mkt_cap)}</td>
