@@ -1313,205 +1313,6 @@ const EtfHoldingsPopup = ({ etfTicker, holdingsData = {}, onClose }) => {
   );
 };
 
-// ── Thematic Leaders ─────────────────────────────────────────────────────────
-// Scans all ETF holdings and surfaces institutional market leaders:
-// RS ≥ 90 · Avg $Vol ≥ $200M · ADR% ≥ 5% · Mkt Cap ≥ $100M
-const ThematicLeaders = ({ etfHoldings = {} }) => {
-  const [collapsed, setCollapsed] = useState(false);
-  const [minRS,     setMinRS]     = useState(90);
-  const [minDVol,   setMinDVol]   = useState(200e6);
-  const [minADR,    setMinADR]    = useState(5);
-  const [minMktCap, setMinMktCap] = useState(20e9);
-  const [sort, setSort] = useState({ col: 'rs', dir: 'desc' });
-
-  const handleSort = col =>
-    setSort(prev => prev.col === col ? { col, dir: prev.dir === 'desc' ? 'asc' : 'desc' } : { col, dir: 'desc' });
-
-  const SortTh = ({ col, label, align = 'right' }) => (
-    <th
-      className={`px-3 py-2 font-medium cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap text-${align} text-[11px] uppercase tracking-wider`}
-      onClick={() => handleSort(col)}
-    >
-      {label}{sort.col === col ? (sort.dir === 'desc' ? ' ▼' : ' ▲') : ' ⬍'}
-    </th>
-  );
-
-  const fmtMktCap = v => {
-    if (v == null) return '—';
-    if (v >= 1e12) return `$${(v / 1e12).toFixed(1)}T`;
-    if (v >= 1e9)  return `$${(v / 1e9).toFixed(1)}B`;
-    return `$${(v / 1e6).toFixed(0)}M`;
-  };
-
-  // Build flat deduplicated leader list — one row per ticker,
-  // collecting every qualifying ETF it appears in as badges.
-  const baseLeaders = useMemo(() => {
-    const map = {};
-    Object.entries(etfHoldings).forEach(([etfTicker, holdings]) => {
-      (holdings || []).forEach(h => {
-        if (
-          (h.rs           ?? 0) >= minRS &&
-          (h.dollar_volume ?? 0) >= minDVol &&
-          (h.adr_pct      ?? 0) >= minADR &&
-          (h.mkt_cap      ?? 0) >= minMktCap
-        ) {
-          if (!map[h.ticker]) map[h.ticker] = { ...h, etfs: new Set() };
-          map[h.ticker].etfs.add(etfTicker);
-        }
-      });
-    });
-    return Object.values(map).map(s => ({ ...s, etfs: [...s.etfs].sort() }));
-  }, [etfHoldings, minRS, minDVol, minADR, minMktCap]);
-
-  const leaders = useMemo(() => {
-    const { col, dir } = sort;
-    return [...baseLeaders].sort((a, b) => {
-      let av = a[col], bv = b[col];
-      // Special cases
-      if (col === 'etfs') { av = a.etfs.length; bv = b.etfs.length; }
-      if (av == null && bv == null) return 0;
-      if (av == null) return 1;
-      if (bv == null) return -1;
-      if (typeof av === 'string') return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
-      return dir === 'asc' ? av - bv : bv - av;
-    });
-  }, [baseLeaders, sort]);
-
-  const PerfCell = ({ v, bold }) => (
-    <td className={`px-3 py-2 text-right font-mono text-[12px] ${bold ? 'font-bold' : ''} ${(v ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-      {v != null ? `${v >= 0 ? '+' : ''}${v.toFixed(1)}%` : '—'}
-    </td>
-  );
-
-  return (
-    <div className="bg-zinc-900 border border-zinc-700 rounded-xl overflow-hidden">
-
-      {/* ── Header ── */}
-      <div
-        className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 cursor-pointer select-none hover:bg-zinc-800/30 transition-colors"
-        onClick={() => setCollapsed(c => !c)}
-      >
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="text-sm font-semibold text-zinc-100">🏆 Institutional Thematic Leaders</span>
-          <span className="text-[11px] text-zinc-400 bg-zinc-800 px-2 py-0.5 rounded">
-            {leaders.length} leaders
-          </span>
-        </div>
-        <div className="flex items-center gap-3">
-          <div className="hidden sm:flex items-center gap-1.5 text-[11px] text-zinc-500">
-            <span className="bg-zinc-800 px-1.5 py-0.5 rounded">RS ≥ {minRS}</span>
-            <span className="bg-zinc-800 px-1.5 py-0.5 rounded">$Vol ≥ $200M</span>
-            <span className="bg-zinc-800 px-1.5 py-0.5 rounded">ADR ≥ {minADR}%</span>
-            <span className="bg-zinc-800 px-1.5 py-0.5 rounded">Mkt Cap ≥ ${minMktCap/1e9}B</span>
-          </div>
-          <svg className={`w-4 h-4 text-zinc-500 transition-transform ${collapsed ? '' : 'rotate-180'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/></svg>
-        </div>
-      </div>
-
-      {!collapsed && (
-        <div className="p-3">
-
-          {/* ── Filter bar ── */}
-          <div className="flex flex-wrap items-center gap-2 mb-3 text-[11px]">
-            {[
-              { label: 'RS ≥',      value: minRS,          setter: setMinRS,                    opts: [80, 85, 90, 95] },
-              { label: '$Vol ≥',    value: minDVol/1e6,    setter: v => setMinDVol(v*1e6),      opts: [50, 100, 200, 500],       fmt: v => `$${v}M` },
-              { label: 'ADR ≥',    value: minADR,          setter: setMinADR,                   opts: [3, 4, 5, 7],              fmt: v => `${v}%` },
-              { label: 'Mkt Cap ≥', value: minMktCap/1e9,  setter: v => setMinMktCap(v*1e9),   opts: [1, 5, 10, 20, 50, 100],   fmt: v => `$${v}B` },
-            ].map(({ label, value, setter, opts, fmt }) => (
-              <div key={label} className="flex items-center gap-1">
-                <span className="text-zinc-500">{label}</span>
-                <select
-                  value={value}
-                  onChange={e => setter(Number(e.target.value))}
-                  onClick={e => e.stopPropagation()}
-                  className="bg-zinc-800 border border-zinc-700 text-zinc-300 rounded px-1.5 py-0.5 text-[11px] cursor-pointer"
-                >
-                  {opts.map(o => <option key={o} value={o}>{fmt ? fmt(o) : o}</option>)}
-                </select>
-              </div>
-            ))}
-          </div>
-
-          {leaders.length === 0 ? (
-            <div className="text-zinc-500 text-sm text-center py-8">No leaders match current filters</div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse text-[12px]">
-                <thead className="text-zinc-500 border-b border-zinc-800 sticky top-0 bg-zinc-900 z-10">
-                  <tr>
-                    <SortTh col="ticker"        label="Ticker"   align="left" />
-                    <SortTh col="name"          label="Company"  align="left" />
-                    <SortTh col="etfs"          label="Themes"   align="left" />
-                    <SortTh col="price"         label="Price"    />
-                    <SortTh col="perf_1d"       label="1D"       />
-                    <SortTh col="perf_1w"       label="1W"       />
-                    <SortTh col="perf_1m"       label="1M"       />
-                    <SortTh col="dollar_volume" label="$Vol"     />
-                    <SortTh col="adr_pct"       label="ADR%"     />
-                    <SortTh col="rs"            label="RS"       />
-                    <SortTh col="mkt_cap"       label="Mkt Cap"  />
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-zinc-800/40">
-                  {leaders.map((h, i) => (
-                    <tr key={i} className="hover:bg-zinc-800/30 transition-colors">
-                      {/* Ticker */}
-                      <td className="px-3 py-2.5">
-                        <a href={`https://finviz.com/quote.ashx?t=${h.ticker}`} target="_blank" rel="noreferrer"
-                           className="font-mono font-bold text-sky-400 hover:text-sky-300 transition-colors">
-                          {h.ticker}
-                        </a>
-                      </td>
-                      {/* Company */}
-                      <td className="px-3 py-2.5 text-zinc-300 whitespace-nowrap">{h.name || '—'}</td>
-                      {/* ETF theme badges */}
-                      <td className="px-3 py-2.5">
-                        <div className="flex flex-wrap gap-1">
-                          {h.etfs.map(etf => (
-                            <span key={etf}
-                              className="text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded border text-emerald-400 bg-emerald-500/10 border-emerald-500/25 whitespace-nowrap">
-                              {etf}
-                            </span>
-                          ))}
-                        </div>
-                      </td>
-                      {/* Price */}
-                      <td className="px-3 py-2.5 text-right font-mono text-zinc-200">
-                        {h.price != null ? `$${h.price.toFixed(2)}` : '—'}
-                      </td>
-                      <PerfCell v={h.perf_1d} bold />
-                      <PerfCell v={h.perf_1w} />
-                      <PerfCell v={h.perf_1m} />
-                      {/* $Vol */}
-                      <td className="px-3 py-2.5 text-right font-mono text-zinc-400">
-                        {h.dollar_volume != null ? fmtVol(h.dollar_volume) : '—'}
-                      </td>
-                      {/* ADR% */}
-                      <td className="px-3 py-2.5 text-right font-mono text-zinc-300">
-                        {h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : '—'}
-                      </td>
-                      {/* RS */}
-                      <td className="px-3 py-2.5 text-right font-mono">
-                        <span className={`font-bold ${(h.rs ?? 0) >= 95 ? 'text-emerald-300' : 'text-emerald-400'}`}>
-                          {h.rs ?? '—'}
-                        </span>
-                      </td>
-                      {/* Mkt Cap */}
-                      <td className="px-3 py-2.5 text-right font-mono text-zinc-400">
-                        {fmtMktCap(h.mkt_cap)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-};
 
 const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, generatedAt, onViewChange, onThemeSelect, etfHoldings = {} }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
@@ -9796,9 +9597,7 @@ const filtered = useMemo(() => {
               <button onClick={() => setTab("watchlist")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "watchlist" ? "border-amber-400 text-amber-300" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 ★ Watchlist
               </button>
-              <button onClick={() => setTab("leaders")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "leaders" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                Thematic Leaders
-              </button>
+
               <button onClick={() => setTab("news")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "news" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Calendar
               </button>
@@ -9874,11 +9673,7 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "leaders" ? (
-        <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-6">
-          <ThematicLeaders etfHoldings={data?.etf_holdings || {}}/>
-        </div>
-      ) : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
+      {tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
