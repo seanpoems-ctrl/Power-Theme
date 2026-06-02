@@ -8,9 +8,11 @@ Alerts on:
   2. Large beats (actual > expected + 15%)
   3. Large misses (actual < expected - 15%)
 
+Triggers detailed 7-section earnings report generation via earnings_report_generator.py
+
 Runs during market hours (9:30 AM - 5 PM ET) on trading days.
 Output: data/earnings_alerts/YYYY-MM-DD.json
-Telegram: Immediate alerts on trade-worthy earnings
+Telegram: Immediate alerts with link to dashboard (full report auto-loads)
 """
 
 import json
@@ -23,6 +25,15 @@ from zoneinfo import ZoneInfo
 import yfinance as yf
 import requests
 from dotenv import load_dotenv
+
+# Import earnings report generator
+try:
+    from earnings_report_generator import generate_earnings_report, send_telegram_report, save_report
+    HAS_REPORT_GENERATOR = True
+except ImportError:
+    HAS_REPORT_GENERATOR = False
+    logger = logging.getLogger(__name__)
+    logger.warning("earnings_report_generator not available - reports won't be generated")
 
 load_dotenv()
 
@@ -250,6 +261,26 @@ def main():
 
             analysis = analyze_earnings_with_gemini(ticker, earnings_data, perf_data)
             send_telegram_alert(ticker, earnings_data.get("company", ticker), analysis, perf_data)
+
+            # Generate detailed 7-section earnings report
+            if HAS_REPORT_GENERATOR:
+                try:
+                    logger.info(f"  Generating detailed earnings report for {ticker}...")
+                    detailed_report = generate_earnings_report(
+                        ticker,
+                        earnings_data,
+                        perf_data.get("intraday_move_pct", 0)
+                    )
+                    if detailed_report:
+                        # Save report to JSON
+                        report_path = save_report(detailed_report, ticker, today)
+                        logger.info(f"  Report saved → {report_path}")
+
+                        # Send short Telegram alert with dashboard link
+                        if send_telegram_report(detailed_report, ticker, perf_data.get("intraday_move_pct", 0)):
+                            logger.info(f"  Dashboard alert sent for {ticker}")
+                except Exception as e:
+                    logger.error(f"  Failed to generate detailed report for {ticker}: {e}")
 
             alerts.append(
                 {

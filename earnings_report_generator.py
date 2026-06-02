@@ -136,41 +136,29 @@ Be data-driven. Use actual metrics where available. Highlight what matters for t
         return {}
 
 
-def send_telegram_report(report: dict, ticker: str) -> bool:
-    """Send comprehensive earnings report to Telegram."""
+def send_telegram_report(report: dict, ticker: str, stock_move: float = 0) -> bool:
+    """Send short earnings alert to Telegram with link to dashboard."""
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT:
         return False
 
     try:
-        # Format the report as Telegram message
-        text = f"""🔍 *EARNINGS ANALYSIS* — {ticker.upper()}
+        # Short summary + link to dashboard
+        beat_miss = report.get('beat_miss', '?').upper()
+        rating = report.get('rating', '?')
+        reaction = report.get('stock_reaction', '?')
 
-*BEAT/MISS:* {report.get('beat_miss', '?').upper()} | {report.get('stock_reaction', '?')}
+        # Build the dashboard link
+        dashboard_url = "https://seanpoems.github.io/Power-Theme/"
 
-*1️⃣ ACTUALS vs ESTIMATES*
-{report.get('section_1_actuals', {}).get('revenue_beat', '—')}
-{report.get('section_1_actuals', {}).get('eps_beat', '—')}
+        text = f"""📊 *EARNINGS ALERT* — {ticker.upper()}
 
-*2️⃣ GUIDANCE vs CONSENSUS*
-{report.get('section_2_guidance', {}).get('revenue_guidance', '—')}
-{report.get('section_2_guidance', {}).get('forward_signal', '—')}
+*{beat_miss}* | Reaction: *{reaction}*
+Rating: *{rating}* | Target: {report.get('price_target', '?')}
 
-*3️⃣ GROWTH & MARGINS*
-{report.get('section_3_growth_margins', {}).get('revenue_growth', '—')}
-{report.get('section_3_growth_margins', {}).get('margin_trend', '—')}
+🔗 Full analysis in dashboard:
+{dashboard_url}
 
-*4️⃣ CALL HIGHLIGHTS*
-{report.get('section_4_call_highlights', {}).get('main_themes', '—')}
-Tone: {report.get('section_4_call_highlights', {}).get('mgmt_tone', '—')}
-
-*5️⃣ ONGOING CONCERNS*
-{report.get('section_5_concerns', {}).get('prior_issues', '—')}
-
-*6️⃣ RISKS & OPPORTUNITIES*
-Risk: {report.get('section_6_risks_opportunities', {}).get('new_risks', '—')}
-Opportunity: {report.get('section_6_risks_opportunities', {}).get('opportunities', '—')}
-
-*Rating: {report.get('rating', '?')} | Target: {report.get('price_target', '?')}*"""
+_Tap "📊 Earnings Report" tab for full 7-section breakdown_"""
 
         for chat_id in TELEGRAM_CHAT.split(","):
             requests.post(
@@ -185,8 +173,8 @@ Opportunity: {report.get('section_6_risks_opportunities', {}).get('opportunities
 
 
 def save_report(report: dict, ticker: str, date: str) -> Path:
-    """Save comprehensive report to JSON."""
-    out_dir = Path("data/earnings_reports")
+    """Save comprehensive report to JSON and update manifest in public/ for dashboard access."""
+    out_dir = Path("public/earnings_reports")
     out_dir.mkdir(parents=True, exist_ok=True)
 
     out_file = out_dir / f"{ticker}_{date}_report.json"
@@ -200,6 +188,32 @@ def save_report(report: dict, ticker: str, date: str) -> Path:
 
     with open(out_file, "w") as f:
         json.dump(report_with_metadata, f, indent=2)
+
+    # Update manifest.json to help dashboard load reports
+    manifest_file = out_dir / "manifest.json"
+    manifest = {}
+
+    # Load existing manifest
+    if manifest_file.exists():
+        try:
+            with open(manifest_file) as f:
+                manifest = json.load(f)
+        except:
+            manifest = {}
+
+    # Add today's report to manifest
+    if date not in manifest:
+        manifest[date] = []
+
+    report_filename = f"{ticker}_{date}_report.json"
+    if report_filename not in manifest[date]:
+        manifest[date].append(report_filename)
+
+    # Save updated manifest
+    with open(manifest_file, "w") as f:
+        json.dump(manifest, f, indent=2)
+
+    logger.info(f"Manifest updated with {report_filename}")
 
     return out_file
 

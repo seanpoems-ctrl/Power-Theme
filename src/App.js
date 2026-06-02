@@ -5031,6 +5031,339 @@ const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
   );
 };
 
+const EarningsReportTab = () => {
+  const [report, setReport] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Load today's earnings report on mount
+  useEffect(() => {
+    const loadReport = async () => {
+      try {
+        const today = new Date().toISOString().slice(0, 10);
+
+        // Fetch manifest file that lists today's reports
+        const manifestResponse = await fetch(`${process.env.PUBLIC_URL}/earnings_reports/manifest.json?v=${Date.now()}`);
+
+        if (!manifestResponse.ok) {
+          setError("No earnings reports available for today");
+          setLoading(false);
+          return;
+        }
+
+        const manifest = await manifestResponse.json();
+        const todayReports = manifest[today] || [];
+
+        if (todayReports.length === 0) {
+          setError("No earnings reports available for today");
+          setLoading(false);
+          return;
+        }
+
+        // Load the first/most recent report for today
+        const reportFile = todayReports[0];
+        const reportResponse = await fetch(`${process.env.PUBLIC_URL}/earnings_reports/${reportFile}?v=${Date.now()}`);
+
+        if (!reportResponse.ok) {
+          setError("Could not load earnings report");
+          setLoading(false);
+          return;
+        }
+
+        const data = await reportResponse.json();
+        setReport(data);
+        setError(null);
+      } catch (err) {
+        console.error("Error loading earnings report:", err);
+        setError("Failed to load earnings report");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadReport();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+        <div className="flex items-center gap-2 text-zinc-400">
+          <RefreshCw size={20} className="animate-spin" />
+          <span>Loading earnings report...</span>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+        <div className="text-center space-y-2">
+          <div className="text-zinc-500 text-[14px]">📊 Earnings Report</div>
+          <div className="text-zinc-600 text-[13px]">{error}</div>
+          <div className="text-zinc-700 text-[12px] mt-4">Reports are generated when earnings trigger >8% move or large beat/miss</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!report) {
+    return (
+      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+        <div className="text-center space-y-2">
+          <div className="text-zinc-500 text-[14px]">📊 Earnings Report</div>
+          <div className="text-zinc-600 text-[13px]">No report available</div>
+        </div>
+      </div>
+    );
+  }
+
+  const r = report.report || report;
+  const ticker = report.ticker || "Unknown";
+  const reportDate = report.report_date || report.date || "Unknown";
+
+  return (
+    <div className="max-w-[1200px] mx-auto px-4 py-4 space-y-4">
+      {/* Header */}
+      <div className="space-y-2">
+        <div className="flex items-baseline gap-3">
+          <h1 className="text-[28px] font-bold text-white">{ticker}</h1>
+          <span className="text-[12px] text-zinc-500 font-mono">{reportDate}</span>
+        </div>
+
+        {/* Key Metrics Row */}
+        <div className="flex items-center gap-4 flex-wrap">
+          <div className="flex items-center gap-2">
+            <span className="text-[12px] text-zinc-500 uppercase font-bold">Beat/Miss:</span>
+            <span className={`text-[14px] font-bold ${r.beat_miss === 'beat' ? 'text-emerald-400' : r.beat_miss === 'miss' ? 'text-red-400' : 'text-yellow-400'}`}>
+              {(r.beat_miss || "—").toUpperCase()}
+            </span>
+          </div>
+          <span className="text-zinc-700">|</span>
+          <div className="flex items-center gap-2">
+            <span className="text-[12px] text-zinc-500 uppercase font-bold">Stock Reaction:</span>
+            <span className={`text-[14px] font-bold font-mono ${parseFloat(r.stock_reaction) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+              {r.stock_reaction || "—"}
+            </span>
+          </div>
+          <span className="text-zinc-700">|</span>
+          <div className="flex items-center gap-2">
+            <span className="text-[12px] text-zinc-500 uppercase font-bold">Rating:</span>
+            <span className={`text-[14px] font-bold px-2 py-0.5 rounded ${
+              r.rating === 'BUY' ? 'bg-emerald-500/15 text-emerald-400' :
+              r.rating === 'SELL' ? 'bg-red-500/15 text-red-400' :
+              r.rating === 'REDUCE' ? 'bg-orange-500/15 text-orange-400' :
+              'bg-blue-500/15 text-blue-400'
+            }`}>
+              {r.rating || "—"}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* 7 Sections */}
+      <div className="space-y-3">
+        {/* Section 1: Actuals vs Estimates */}
+        {r.section_1_actuals && (
+          <div className="border border-zinc-800/50 bg-zinc-900/30 rounded-lg p-4 space-y-2">
+            <div className="text-[12px] font-bold text-zinc-400 uppercase tracking-wider">1️⃣ Actuals vs Estimates</div>
+            <div className="space-y-1.5 text-[13px] text-zinc-300">
+              {r.section_1_actuals.revenue_beat && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span>{r.section_1_actuals.revenue_beat}</span>
+                </div>
+              )}
+              {r.section_1_actuals.eps_beat && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span>{r.section_1_actuals.eps_beat}</span>
+                </div>
+              )}
+              {r.section_1_actuals.key_kpis && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span>{r.section_1_actuals.key_kpis}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Section 2: Guidance vs Consensus */}
+        {r.section_2_guidance && (
+          <div className="border border-zinc-800/50 bg-zinc-900/30 rounded-lg p-4 space-y-2">
+            <div className="text-[12px] font-bold text-zinc-400 uppercase tracking-wider">2️⃣ Guidance vs Consensus</div>
+            <div className="space-y-1.5 text-[13px] text-zinc-300">
+              {r.section_2_guidance.revenue_guidance && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span>{r.section_2_guidance.revenue_guidance}</span>
+                </div>
+              )}
+              {r.section_2_guidance.eps_guidance && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span>{r.section_2_guidance.eps_guidance}</span>
+                </div>
+              )}
+              {r.section_2_guidance.forward_signal && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span>{r.section_2_guidance.forward_signal}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Section 3: Growth & Margins */}
+        {r.section_3_growth_margins && (
+          <div className="border border-zinc-800/50 bg-zinc-900/30 rounded-lg p-4 space-y-2">
+            <div className="text-[12px] font-bold text-zinc-400 uppercase tracking-wider">3️⃣ Growth & Margins</div>
+            <div className="space-y-1.5 text-[13px] text-zinc-300">
+              {r.section_3_growth_margins.revenue_growth && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span>{r.section_3_growth_margins.revenue_growth}</span>
+                </div>
+              )}
+              {r.section_3_growth_margins.margin_trend && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span>{r.section_3_growth_margins.margin_trend}</span>
+                </div>
+              )}
+              {r.section_3_growth_margins.profitability && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span>{r.section_3_growth_margins.profitability}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Section 4: Call Highlights */}
+        {r.section_4_call_highlights && (
+          <div className="border border-zinc-800/50 bg-zinc-900/30 rounded-lg p-4 space-y-2">
+            <div className="text-[12px] font-bold text-zinc-400 uppercase tracking-wider">4️⃣ Call Highlights</div>
+            <div className="space-y-1.5 text-[13px] text-zinc-300">
+              {r.section_4_call_highlights.main_themes && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span>{r.section_4_call_highlights.main_themes}</span>
+                </div>
+              )}
+              {r.section_4_call_highlights.mgmt_tone && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span><strong>Tone:</strong> {r.section_4_call_highlights.mgmt_tone}</span>
+                </div>
+              )}
+              {r.section_4_call_highlights.analyst_questions && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span>{r.section_4_call_highlights.analyst_questions}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Section 5: Ongoing Concerns */}
+        {r.section_5_concerns && (
+          <div className="border border-zinc-800/50 bg-zinc-900/30 rounded-lg p-4 space-y-2">
+            <div className="text-[12px] font-bold text-zinc-400 uppercase tracking-wider">5️⃣ Ongoing Concerns</div>
+            <div className="space-y-1.5 text-[13px] text-zinc-300">
+              {r.section_5_concerns.prior_issues && (
+                <div className="flex gap-2">
+                  <span className="text-orange-600">⚠</span>
+                  <span>{r.section_5_concerns.prior_issues}</span>
+                </div>
+              )}
+              {r.section_5_concerns.new_headwinds && (
+                <div className="flex gap-2">
+                  <span className="text-orange-600">⚠</span>
+                  <span>{r.section_5_concerns.new_headwinds}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Section 6: Risks & Opportunities */}
+        {r.section_6_risks_opportunities && (
+          <div className="border border-zinc-800/50 bg-zinc-900/30 rounded-lg p-4 space-y-2">
+            <div className="text-[12px] font-bold text-zinc-400 uppercase tracking-wider">6️⃣ Risks & Opportunities</div>
+            <div className="space-y-1.5 text-[13px]">
+              {r.section_6_risks_opportunities.new_risks && (
+                <div className="flex gap-2">
+                  <span className="text-red-600">✗</span>
+                  <span className="text-zinc-300">{r.section_6_risks_opportunities.new_risks}</span>
+                </div>
+              )}
+              {r.section_6_risks_opportunities.opportunities && (
+                <div className="flex gap-2">
+                  <span className="text-emerald-600">✓</span>
+                  <span className="text-zinc-300">{r.section_6_risks_opportunities.opportunities}</span>
+                </div>
+              )}
+              {r.section_6_risks_opportunities.peer_context && (
+                <div className="flex gap-2">
+                  <span className="text-blue-600">→</span>
+                  <span className="text-zinc-300">{r.section_6_risks_opportunities.peer_context}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {/* Section 7: Special Notes */}
+        {r.section_7_special_notes && (
+          <div className="border border-zinc-800/50 bg-zinc-900/30 rounded-lg p-4 space-y-2">
+            <div className="text-[12px] font-bold text-zinc-400 uppercase tracking-wider">7️⃣ Special Notes</div>
+            <div className="space-y-1.5 text-[13px] text-zinc-300">
+              {r.section_7_special_notes.accounting_changes && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span><strong>Accounting:</strong> {r.section_7_special_notes.accounting_changes}</span>
+                </div>
+              )}
+              {r.section_7_special_notes.insider_activity && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span><strong>Insider:</strong> {r.section_7_special_notes.insider_activity}</span>
+                </div>
+              )}
+              {r.section_7_special_notes.analyst_reaction && (
+                <div className="flex gap-2">
+                  <span className="text-zinc-600">•</span>
+                  <span><strong>Street Consensus:</strong> {r.section_7_special_notes.analyst_reaction}</span>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Price Target Footer */}
+      {r.price_target && (
+        <div className="mt-6 border-t border-zinc-800 pt-4 flex items-center justify-between">
+          <div className="text-[13px] text-zinc-500">Price Target</div>
+          <div className="text-[18px] font-bold text-blue-400">{r.price_target}</div>
+        </div>
+      )}
+
+      {/* Footer */}
+      <div className="mt-8 border-t border-zinc-800/40 pt-3 text-[11px] text-zinc-600">
+        <div>Generated by hedge fund earnings analysis system · Powered by Gemini 1.5 Flash</div>
+        <div>Not financial advice — for educational purposes only</div>
+      </div>
+    </div>
+  );
+};
+
 const CalendarTab = ({ econData, earningsData, thematicData }) => {
   const _todayD = new Date();
   const todayStr = `${_todayD.getFullYear()}-${String(_todayD.getMonth()+1).padStart(2,"0")}-${String(_todayD.getDate()).padStart(2,"0")}`;
@@ -10064,6 +10397,9 @@ const filtered = useMemo(() => {
               <button onClick={() => setTab("news")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "news" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Calendar
               </button>
+              <button onClick={() => setTab("earnings")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "earnings" ? "border-green-400 text-green-300" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                📊 Earnings Report
+              </button>
               <button onClick={() => setTab("checklist")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "checklist" ? "border-emerald-400 text-emerald-300" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 ✓ Routine
               </button>
@@ -10139,7 +10475,7 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
+      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
