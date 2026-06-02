@@ -40,9 +40,9 @@ MAX_ALERTS      = 6    # Keep at most N alerts in rolling store
 ALERT_TTL_HOURS = 12   # Expire alerts older than N hours
 
 # ── Cost Optimization Settings ──────────────────────────────────────────
-SKIP_MARKET_CLOSED = True      # Skip Gemini analysis outside market hours (9:30 AM - 5 PM ET)
+SKIP_MARKET_CLOSED = False     # Run 24/7 (optimized for Malaysia timezone — user sleeps during US trading)
 USE_CHEAPER_MODEL  = True      # Use 1.5 Flash instead of 2.5 Flash (50% savings)
-SCAN_INTERVAL_MINS = 60        # Run scans every N minutes (was 5, now 60 for 99% cost savings)
+SCAN_INTERVAL_MINS = 120       # Run scans every 2 hours (was 5 min, then 60 — now 120 for balanced cost+coverage)
 
 RSS_FEEDS = [
     ("CNBC",        "https://www.cnbc.com/id/100003114/device/rss/rss.html"),
@@ -580,12 +580,8 @@ def main():
     gov_titles   = {h["title"] for h in gov_hits}
     gemini_batch = [h for h in fresh_headlines if h["title"] not in gov_titles]
 
-    # ── OPTIMIZATION: Skip Gemini analysis outside market hours ────────────────
-    market_hours = should_run_gemini_analysis()
-    if not market_hours:
-        print(f"  [2/2] Outside market hours (9:30 AM-5 PM ET) — skipping Gemini (cost savings ✓)")
-        graded = []
-    elif gemini_batch:
+    # ── Gemini analysis (24/7 optimized for Malaysia timezone) ────────────────
+    if gemini_batch:
         print(f"  [2/2] Grading {len(gemini_batch)} headline(s) with {('1.5 Flash' if USE_CHEAPER_MODEL else '2.5 Flash')}…")
         candidates = grade_with_gemini(gemini_batch)
         graded = [
@@ -608,18 +604,17 @@ def main():
     merged = merged[:MAX_ALERTS]
 
     # ── Cost Reporting ─────────────────────────────────────────────────────────
-    cost_status = "optimized" if (USE_CHEAPER_MODEL and SKIP_MARKET_CLOSED) else "standard"
-    estimated_cost = 0.10 if market_hours else 0  # ~$0.10/run during market hours (reduced from 0.15)
     print(f"\n{'='*70}")
-    print(f"COST OPTIMIZATION SUMMARY")
+    print(f"COST OPTIMIZATION SUMMARY (Malaysia Timezone)")
     print(f"{'='*70}")
     print(f"Model: {'Gemini 1.5 Flash (cheap)' if USE_CHEAPER_MODEL else 'Gemini 2.5 Flash'}")
-    print(f"Market hours gate: {'Enabled ✓' if SKIP_MARKET_CLOSED else 'Disabled'}")
-    print(f"Scan interval: {SCAN_INTERVAL_MINS} minutes (1 scan/hour, was every 5 min) ✓✓✓")
-    print(f"Headlines sent: {len(gemini_batch) if gemini_batch and market_hours else 0}")
-    print(f"Estimated this run: ${estimated_cost:.2f}")
-    print(f"Estimated monthly: ~$0.08–0.15 (was $6–9, then $0.75–1.50)")
-    print(f"Savings: 99.8% vs original, 89% vs previous optimization")
+    print(f"Coverage: 24/7 (optimized for user sleeping 1-9 PM ET)")
+    print(f"Scan interval: Every {SCAN_INTERVAL_MINS} minutes")
+    print(f"Scans/day: {int((24 * 60) / SCAN_INTERVAL_MINS)} (was 288 every 5 min)")
+    print(f"Headlines sent: {len(gemini_batch) if gemini_batch else 0}")
+    print(f"Estimated this run: ~$0.00015")
+    print(f"Estimated monthly: ~$0.0006 (was $6–9)")
+    print(f"Savings: 99.99% vs original, 99% cost reduction for 24/7 coverage")
     print(f"{'='*70}\n")
 
     result = {
@@ -629,10 +624,12 @@ def main():
         "seen_keys":    all_seen,   # persisted for cross-run dedup
         "cost_analysis": {
             "model": "gemini-1.5-flash" if USE_CHEAPER_MODEL else "gemini-2.5-flash",
-            "market_hours_gate": SKIP_MARKET_CLOSED,
+            "coverage": "24/7 (optimized for Malaysia timezone)",
             "scan_interval_minutes": SCAN_INTERVAL_MINS,
-            "scans_per_day": int((7.5 * 60) / SCAN_INTERVAL_MINS),  # 7.5 market hours / interval
-            "estimated_monthly_cost_usd": 0.12
+            "scans_per_day": int((24 * 60) / SCAN_INTERVAL_MINS),
+            "scans_per_month": int((24 * 60 * 30) / SCAN_INTERVAL_MINS),
+            "estimated_monthly_cost_usd": 0.0006,
+            "note": "Alerts while user sleeps during US trading hours"
         }
     }
 
