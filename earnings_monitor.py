@@ -26,19 +26,18 @@ import yfinance as yf
 import requests
 from dotenv import load_dotenv
 
+load_dotenv()
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+logger = logging.getLogger(__name__)
+
 # Import earnings report generator
 try:
     from earnings_report_generator import generate_earnings_report, send_telegram_report, save_report
     HAS_REPORT_GENERATOR = True
 except ImportError:
     HAS_REPORT_GENERATOR = False
-    logger = logging.getLogger(__name__)
     logger.warning("earnings_report_generator not available - reports won't be generated")
-
-load_dotenv()
-
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
-logger = logging.getLogger(__name__)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
