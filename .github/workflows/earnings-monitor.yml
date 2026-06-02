@@ -1,0 +1,46 @@
+name: Earnings Monitor
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # Every 15 minutes during market hours (9:30 AM - 4:00 PM ET)
+    # 13:30-20:00 UTC = 9:30 AM - 4:00 PM ET (market hours, EDT)
+    - cron: '0,15,30,45 13-19 * * 1-5'  # Every 15 min, 9:30 AM - 3:45 PM ET
+    - cron: '0 20 * * 1-5'               # 4:00 PM ET (market close)
+
+jobs:
+  earnings-monitor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-earnings-monitor-v1
+
+      - name: Install dependencies
+        run: pip install -q -r requirements.txt
+
+      - name: Monitor earnings
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python earnings_monitor.py
+
+      - name: Commit earnings alerts
+        run: |
+          git config user.name "seanpoems-ctrl"
+          git config user.email "seanpoems-ctrl@github.com"
+          git add -A data/earnings_alerts/ public/earnings_reports/
+          git commit -m "data: earnings monitoring $(date -u +'%Y-%m-%d %H:%M')" || true
+          git push origin main || true

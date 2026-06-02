@@ -1,0 +1,46 @@
+name: Daily Sector Report
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    # Post-market analysis: 4:30 PM ET daily (after market close at 4 PM)
+    # 20:30 UTC = 4:30 PM EDT | 21:30 UTC = 4:30 PM EST
+    - cron: '30 20 * * 1-5'  # 4:30 PM EDT (Mar–Nov)
+    - cron: '30 21 * * 1-5'  # 4:30 PM EST (Nov–Mar)
+
+jobs:
+  sector-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-sector-report-v1
+
+      - name: Install dependencies
+        run: pip install -q -r requirements.txt
+
+      - name: Generate daily sector report
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python daily_sector_report.py
+
+      - name: Commit sector report
+        run: |
+          git config user.name "seanpoems-ctrl"
+          git config user.email "seanpoems-ctrl@github.com"
+          git add -A data/daily_sector_report/
+          git commit -m "data: daily sector report $(date -u +'%Y-%m-%d')" || true
+          git push origin main || true

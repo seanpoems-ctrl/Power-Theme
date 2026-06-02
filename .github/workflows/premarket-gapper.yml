@@ -5,8 +5,9 @@ name: Pre-Market Gapper Scan
 
 on:
   workflow_dispatch: {}
-  # Schedule removed — triggered externally via cron-job.org for precise timing
-  # 12:05 UTC = 08:05 ET (EDT)
+  schedule:
+    # Pre-market scan: 8:45 AM ET (12:45 UTC in EDT, 1:45 UTC in EST)
+    - cron: '45 12 * * 1-5'  # Mon-Fri 8:45 AM ET
 
 concurrency:
   group: pages-deploy

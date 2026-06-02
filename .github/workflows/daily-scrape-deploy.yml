@@ -1,13 +1,13 @@
-# Thematic Scanner — runs at 4:35 PM ET Mon–Fri via GitHub cron
-# EDT: 20:35 UTC | EST: 21:35 UTC (both schedules active to cover DST)
+# Thematic Scanner — runs at 5:00 PM ET Mon–Fri (market close)
+# EDT: 21:00 UTC | EST: 22:00 UTC (both schedules active to cover DST)
 # workflow_dispatch bypasses ET-window check (manual trigger)
 name: Daily scrape & deploy
 
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "35 20 * * 1-5"   # 4:35 PM EDT (Mar–Nov)
-    - cron: "35 21 * * 1-5"   # 4:35 PM EST (Nov–Mar)
+    - cron: "0 21 * * 1-5"    # 5:00 PM EDT (Mar–Nov)
+    - cron: "0 22 * * 1-5"    # 5:00 PM EST (Nov–Mar)
 
 concurrency:
   group: pages-deploy

@@ -3,8 +3,8 @@ name: Market Brief (AM + PM)
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: '5 13 * * 1-5'   # 09:05 ET (EDT) — AM brief, after open
-    - cron: '30 21 * * 1-5'  # 17:30 ET (EDT) — PM brief, after close
+    - cron: '45 12 * * 1-5'  # 8:45 AM ET — Pre-market brief
+    - cron: '0 21 * * 1-5'   # 5:00 PM ET — Post-market brief (market close)
 
 jobs:
   market-brief:
