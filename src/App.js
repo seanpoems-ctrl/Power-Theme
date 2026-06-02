@@ -8504,6 +8504,7 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
     { col: "rs_qtr",        label: "Qtr RS",      align: "right" },
     { col: "rs_hy",         label: "HY RS",       align: "right" },
     { col: "rs_yr",         label: "Yr RS",       align: "right" },
+    { col: "rs_pct",        label: "RS%",         align: "right" },
     { col: "_chart",        label: "1-Mth Chart", align: "left",  nosort: true },
     { col: "_rs_bar",       label: "1-Mth RS",    align: "left",  nosort: true },
     { col: "perf_1d",       label: "Day %",       align: "right" },
@@ -8573,6 +8574,23 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
                 <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_qtr)}</td>
                 <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_hy)}</td>
                 <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_yr)}</td>
+                {/* RS% — position of today's RS bar within the 25-day min-max range */}
+                <td className="px-2 py-1 text-right font-mono border-r border-zinc-800">
+                  {(() => {
+                    const hist = e.rs_histogram;
+                    if (!hist || hist.length < 2) return <span className="text-zinc-600">—</span>;
+                    const last = hist[hist.length - 1];
+                    const mn = Math.min(...hist), mx = Math.max(...hist);
+                    const rng = mx - mn;
+                    if (rng === 0) return <span className="text-zinc-400">50%</span>;
+                    const pct = Math.round(((last - mn) / rng) * 100);
+                    const cls = pct >= 80 ? "text-emerald-300 font-bold"
+                              : pct >= 50 ? "text-emerald-400"
+                              : pct >= 20 ? "text-zinc-400"
+                              : "text-rose-400";
+                    return <span className={cls}>{pct}%</span>;
+                  })()}
+                </td>
                 {/* 1-Month Sparkline */}
                 <td className="px-2 py-0.5 border-r border-zinc-800">
                   <EtfSparkline data={e.sparkline ?? []} />
