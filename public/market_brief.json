@@ -1,30 +1,30 @@
 {
-  "generated_at": "June 02, 2026 (07:07 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "June 02, 2026 (13:48 EDT)",
+  "session": "Market Hours",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7599.96,
-      "change": 19.9,
-      "change_pct": 0.26
+      "price": 7608.77,
+      "change": 8.81,
+      "change_pct": 0.12
     },
     {
       "label": "Nasdaq 100",
-      "price": 30513.86,
-      "change": 180.68,
-      "change_pct": 0.6
+      "price": 30594.4,
+      "change": 80.54,
+      "change_pct": 0.26
     },
     {
       "label": "VIX",
-      "price": 16.13,
-      "change": 0.08,
+      "price": 16.03,
+      "change": -0.02,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.47,
-      "change": 0.02,
+      "price": 4.46,
+      "change": -0.02,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 66734.24,
-      "change_pct": -0.3
+      "price": 66934.33,
+      "change_pct": 0.91
     },
     "dax": {
       "label": "DAX",
-      "price": 25241.98,
-      "change_pct": 0.96
+      "price": 25124.17,
+      "change_pct": 0.48
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10374.33,
-      "change_pct": 0.34
+      "price": 10373.51,
+      "change_pct": 0.33
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 55.6,
-    "mmth": 61.8,
+    "s5fi": 55.0,
+    "mmth": 62.2,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Constructive / Tech Leadership",
+  "mood": "Tech-Led Growth / Semiconductor Surge",
   "analysis": {
-    "action_line": "VIX 16.13 Normal + S5FI 55.6% breadth + DAX +0.96% → trade RS leaders selectively near support.",
-    "analysis_para1": "The global tape presents a generally constructive picture this morning, with the DAX up +0.96% and FTSE 100 gaining +0.34%, contrasting with a slight dip in the Nikkei 225 at -0.30%. Domestically, while the BAML HY Spread regime remains unknown, market breadth shows signs of underlying health. The S5FI metric stands at 55.6%, indicating a majority of S&P 500 components are trading above their 50-day moving average, supported by a robust 61.8% of stocks above their 200-day moving average.",
-    "analysis_para2": "With the S&P 500 pushing higher to 7599.96 and the Nasdaq 100 leading with a 0.60% gain, watch for consolidation around the 7600 level on the S&P 500. A breach below immediate short-term support, such as the 5-day or 10-day EMA, could signal a pause in the current advance. Focus remains on relative strength leaders within strong themes like Semiconductors and Hardware. Traders should look for pullbacks to prior breakout levels or moving average support to initiate long positions, while maintaining tight stops.",
-    "technical_signal": "No reversal pattern confirmed yet. The market continues its constructive advance, led by strong technology sectors.",
+    "action_line": "VIX 16.03 Normal + S5FI 55% breadth + positive global tape across Nikkei/DAX → maintain long exposure to high RS leaders.",
+    "analysis_para1": "Global equity markets are showing a clear positive bias today, with the Nikkei 225 up +0.91%, the DAX rising +0.48%, and the FTSE 100 gaining +0.33%. This overseas strength is aligning with a stable US credit environment, as indicated by the 10Y Yield holding at 4.46% and no immediate red flags from the BAML HY Spread. Internally, US market breadth remains healthy with 55.0% of S&P 500 stocks above their 50-day moving average (S5FI) and 62.2% above their 200-day (MMTH), supporting a constructive market posture.",
+    "analysis_para2": "The current market action suggests maintaining exposure to leading growth names, particularly within the dominant Semiconductors and Hardware themes. Monitor the S&P 500's ability to hold above 7600 and the Nasdaq 100's push towards 30600. A mechanical plan involves buying pullbacks to short-term moving averages in high Relative Strength stocks, using a tight stop below prior day's lows. Any sustained close below the 7550 level on the S&P 500 would warrant a re-evaluation of aggressive long positions, but currently, the path of least resistance remains higher for quality growth.",
+    "technical_signal": "No reversal pattern confirmed yet. Major indices are showing modest gains with positive global inflows, indicating continued upside potential.",
     "ticker_intel": [
       {
         "ticker": "DELL",
         "company": "Dell Technologies Inc.",
         "grade": "A+",
-        "reason": "With an RS of 98 and a robust +123.0% 1-month return, Dell is a leading player in the Hardware theme, demonstrating strong momentum in a key market sector."
+        "reason": "Exhibiting robust RS=98 and a powerful 1M=+123.0% rally within the high-demand Hardware theme, confirming its leadership in the current market surge."
       },
       {
-        "ticker": "MU",
-        "company": "Micron Technology, Inc.",
+        "ticker": "ARM",
+        "company": "Arm Holdings plc",
         "grade": "A",
-        "reason": "Micron, boasting an RS of 98 and a massive +100.2% 1-month gain, stands out as a top semiconductor performer, aligning with the current tech-led market strength."
+        "reason": "A top-tier Semiconductor player with RS=98 and strong 1M=+94.4% growth, making it a pivotal long opportunity in a sector showing extreme relative strength."
       },
       {
-        "ticker": "WDC",
-        "company": "Western Digital Corporation",
+        "ticker": "QTEX",
+        "company": "QTREX Quantum Ltd.",
         "grade": "C",
-        "reason": "Despite its strong 1-month return of +25.7% and RS of 98, Western Digital is comparatively lagging its sector peers in the Hardware theme, suggesting less immediate upside conviction for new entries."
+        "reason": "While showing extreme 1M=+596.0% growth and RS=98, its parabolic ascent suggests it is excessively extended and highly vulnerable to a sharp pullback, making it an avoid for new entries."
       }
     ]
   }
