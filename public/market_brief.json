@@ -1,30 +1,30 @@
 {
-  "generated_at": "May 29, 2026 (18:50 EDT)",
-  "session": "Post-Market",
+  "generated_at": "June 02, 2026 (06:59 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7580.06,
-      "change": 16.43,
-      "change_pct": 0.22
+      "price": 7599.96,
+      "change": 19.9,
+      "change_pct": 0.26
     },
     {
       "label": "Nasdaq 100",
-      "price": 30333.18,
-      "change": 109.29,
-      "change_pct": 0.36
+      "price": 30513.86,
+      "change": 180.68,
+      "change_pct": 0.6
     },
     {
       "label": "VIX",
-      "price": 15.32,
-      "change": -0.42,
+      "price": 16.13,
+      "change": 0.08,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.45,
-      "change": -0.0,
+      "price": 4.47,
+      "change": 0.02,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 64693.12,
-      "change_pct": -0.47
+      "price": 66734.24,
+      "change_pct": -0.3
     },
     "dax": {
       "label": "DAX",
-      "price": 25092.25,
-      "change_pct": -0.34
+      "price": 25251.79,
+      "change_pct": 0.99
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10409.28,
-      "change_pct": -0.16
+      "price": 10378.48,
+      "change_pct": 0.38
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 57.0,
-    "mmth": 63.9,
+    "s5fi": 55.6,
+    "mmth": 61.8,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Cautious Strength / Sector Focus",
+  "mood": "Moderate Bullishness, Tech-Led Momentum",
   "analysis": {
-    "action_line": "VIX 15.32 Normal + S5FI 57.0% breadth + Nikkei -0.47% points to selective leadership; trade RS leaders near support.",
-    "analysis_para1": "International markets displayed a mild risk-off sentiment today, with the Nikkei 225 down -0.47%, DAX -0.34%, and FTSE 100 -0.16%. Despite this global softness, US indices showed resilience, with the S&P 500 gaining +0.22% and the Nasdaq 100 up +0.36%, suggesting a domestic decoupling or rotation into US assets. The 10Y Yield remains stable at 4.45%, not signaling immediate credit concerns, although the BAML HY Spread regime is currently unknown. US market breadth, indicated by S5FI at 57.0% and MMTH at 63.9%, remains healthy, supporting the domestic market's upward bias. This environment favors a focused strategy on domestically strong sectors and individual names.",
-    "analysis_para2": "The S&P 500's close at 7580.06 suggests continued momentum, with the 7550-7570 range acting as key immediate support should any minor consolidation occur. For the Nasdaq 100, holding above the psychological 30000 level is crucial to maintain bullish sentiment in technology and growth names. Investors should continue to concentrate capital in the clearly dominant 'Hardware' and 'Semiconductors' themes, which are showing exceptional relative strength. Look for optimal entry points on pullbacks to the 10-day or 21-day exponential moving averages for leading stocks within these themes. Maintain strict risk management, cutting losses quickly if support levels fail and riding winners aggressively.",
-    "technical_signal": "No reversal pattern confirmed yet. US indices closed higher, indicating continued upward momentum rather than a shift in trend.",
+    "action_line": "VIX 16.13 Normal + S5FI 55.6% breadth + DAX +0.99% → favor RS leaders on dips in a constructive tape.",
+    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 down -0.30%, while European indices show strength, as the DAX surges +0.99% and the FTSE 100 gains +0.38%. US credit regime remains undefined with BAML HY Spread data unavailable. Domestically, market breadth metrics are solid but not overheated, with 55.6% of S&P 500 stocks above their 50-day moving average (S5FI) and 61.8% above their 200-day moving average (MMTH), indicating healthy participation across the market.",
+    "analysis_para2": "The S&P 500 is trading at 7599.96, showing a moderate +0.26% gain pre-market, while the Nasdaq 100 leads with a +0.60% jump to 30513.86. Given the stable VIX at 16.13 and improving breadth, the mechanical plan is to monitor for sustained moves above recent highs on both indices. Focus should be on leading sectors like Semiconductors and Hardware, identified by the thematic scanner. Traders should seek entries on relative strength leaders during minor pullbacks to established support levels, confirming volume.",
+    "technical_signal": "No reversal pattern confirmed yet. The indices show early strength, suggesting continuation potential rather than an immediate reversal.",
     "ticker_intel": [
       {
         "ticker": "QTEX",
         "company": "QTREX Quantum Ltd.",
         "grade": "A+",
-        "reason": "Exhibiting extraordinary momentum with RS=98 and a staggering 1-month return of +587.6%, QTEX leads the dominant Hardware theme, making it a top conviction long in the current strong market."
+        "reason": "QTEX leads the market with exceptional relative strength (RS=98) and unparalleled short-term performance (+596% in 1M), making it a high-conviction long in the thriving Hardware theme."
       },
       {
         "ticker": "DELL",
         "company": "Dell Technologies Inc.",
         "grade": "A",
-        "reason": "With RS=98 and a robust 1-month return of +104.7%, DELL is a strong contender within the leading Hardware sector, demonstrating sustained institutional interest and growth potential."
+        "reason": "DELL demonstrates robust relative strength (RS=98) and strong momentum with a +123% 1M gain, positioning it as a top-tier Hardware leader within the current bullish environment."
       },
       {
-        "ticker": "UCTT",
-        "company": "Ultra Clean Holdings, Inc.",
+        "ticker": "WDC",
+        "company": "Western Digital Corporation",
         "grade": "C",
-        "reason": "Despite a high RS=98, its 1-month return of +18.8% and 3-month return of +41.0% are significantly weaker compared to other leaders in the Semiconductor theme, indicating relative underperformance."
+        "reason": "Despite strong RS (98), WDC's +25.7% 1M return is comparatively modest against other thematic leaders, suggesting less explosive short-term upside in this highly competitive Hardware sector."
       }
     ]
   }
