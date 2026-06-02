@@ -5087,23 +5087,23 @@ const NewsHubTab = ({ newsData }) => {
   }
 
   return (
-    <div className="max-w-[1400px] mx-auto px-4 py-4 space-y-4">
+    <div className="max-w-[1600px] mx-auto px-4 py-4 space-y-4">
       <div className="space-y-2 mb-6">
         <h1 className="text-[32px] font-bold text-white">📰 News Hub</h1>
-        <p className="text-[13px] text-zinc-500">Breaking news, pre-market gappers, and earnings alerts all in one place</p>
+        <p className="text-[13px] text-zinc-500">Breaking news, pre-market gappers, and earnings alerts all in one view</p>
       </div>
 
-      <div className="space-y-4">
+      <div className="grid grid-cols-3 gap-4 auto-rows-max">
         {/* BREAKING NEWS SECTION */}
         {breakingNews?.alerts && breakingNews.alerts.length > 0 && (
-          <div className="space-y-3">
+          <div className="space-y-3 border border-red-800/30 bg-red-950/10 rounded-lg p-4 min-h-[600px] flex flex-col">
             <div className="flex items-center gap-2">
               <span className="text-[14px] font-bold text-white uppercase tracking-wider">🔴 Breaking News</span>
               <span className="px-2 py-0.5 bg-red-500/20 text-red-400 text-[11px] font-bold rounded">
                 {breakingNews.alerts.length}
               </span>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 flex-1 overflow-y-auto pr-2">
               {breakingNews.alerts.slice(0, 10).map((alert, idx) => (
                 <div key={idx} className={`border rounded-lg p-3 ${
                   alert.direction === 'bearish' ? 'bg-red-950/20 border-red-800/30' : 'bg-emerald-950/20 border-emerald-800/30'
@@ -5135,14 +5135,14 @@ const NewsHubTab = ({ newsData }) => {
 
         {/* GAPPERS SECTION */}
         {gappers?.gappers && gappers.gappers.length > 0 && (
-          <div className="space-y-3">
+          <div className="space-y-3 border border-blue-800/30 bg-blue-950/10 rounded-lg p-4 min-h-[600px] flex flex-col">
             <div className="flex items-center gap-2">
               <span className="text-[14px] font-bold text-white uppercase tracking-wider">🚀 Pre-Market Gappers</span>
               <span className="px-2 py-0.5 bg-blue-500/20 text-blue-400 text-[11px] font-bold rounded">
                 {gappers.gappers.length}
               </span>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 flex-1 overflow-y-auto pr-2">
               {gappers.gappers.slice(0, 10).map((gapper, idx) => (
                 <div key={idx} className="border border-blue-800/30 bg-blue-950/20 rounded-lg p-3">
                   <div className="flex items-baseline gap-3 mb-2">
@@ -5184,12 +5184,12 @@ const NewsHubTab = ({ newsData }) => {
 
         {/* EARNINGS SECTION */}
         {earnings && (
-          <div className="space-y-3">
+          <div className="space-y-3 border border-green-800/30 bg-green-950/10 rounded-lg p-4 min-h-[600px] flex flex-col">
             <div className="flex items-center gap-2">
               <span className="text-[14px] font-bold text-white uppercase tracking-wider">📊 Today's Earnings</span>
               <span className="px-2 py-0.5 bg-green-500/20 text-green-400 text-[11px] font-bold rounded">1</span>
             </div>
-            <div className="border border-green-800/30 bg-green-950/20 rounded-lg p-4">
+            <div className="border border-green-800/30 bg-green-950/20 rounded-lg p-4 flex-1 overflow-y-auto">
               <div className="flex items-baseline gap-3 mb-3">
                 <span className="text-[18px] font-bold text-green-300">{earnings.ticker || 'Unknown'}</span>
                 <span className="text-[12px] text-zinc-500">{earnings.report_date || earnings.date}</span>
