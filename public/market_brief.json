@@ -1,29 +1,29 @@
 {
-  "generated_at": "June 02, 2026 (13:48 EDT)",
-  "session": "Market Hours",
+  "generated_at": "June 02, 2026 (19:14 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7608.77,
-      "change": 8.81,
-      "change_pct": 0.12
+      "price": 7609.78,
+      "change": 9.82,
+      "change_pct": 0.13
     },
     {
       "label": "Nasdaq 100",
-      "price": 30594.4,
-      "change": 80.54,
-      "change_pct": 0.26
+      "price": 30660.6,
+      "change": 146.74,
+      "change_pct": 0.48
     },
     {
       "label": "VIX",
-      "price": 16.03,
-      "change": -0.02,
+      "price": 15.77,
+      "change": -0.28,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.46,
+      "price": 4.45,
       "change": -0.02,
       "change_pct": null,
       "trend_label": "Stable"
@@ -37,21 +37,21 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 25124.17,
-      "change_pct": 0.48
+      "price": 25003.04,
+      "change_pct": -0.4
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10373.51,
-      "change_pct": 0.33
+      "price": 10339.0,
+      "change_pct": -0.68
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 55.0,
-    "mmth": 62.2,
+    "s5fi": 56.5,
+    "mmth": 61.5,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech-Led Growth / Semiconductor Surge",
+  "mood": "Tech-led gains, global divergence",
   "analysis": {
-    "action_line": "VIX 16.03 Normal + S5FI 55% breadth + positive global tape across Nikkei/DAX → maintain long exposure to high RS leaders.",
-    "analysis_para1": "Global equity markets are showing a clear positive bias today, with the Nikkei 225 up +0.91%, the DAX rising +0.48%, and the FTSE 100 gaining +0.33%. This overseas strength is aligning with a stable US credit environment, as indicated by the 10Y Yield holding at 4.46% and no immediate red flags from the BAML HY Spread. Internally, US market breadth remains healthy with 55.0% of S&P 500 stocks above their 50-day moving average (S5FI) and 62.2% above their 200-day (MMTH), supporting a constructive market posture.",
-    "analysis_para2": "The current market action suggests maintaining exposure to leading growth names, particularly within the dominant Semiconductors and Hardware themes. Monitor the S&P 500's ability to hold above 7600 and the Nasdaq 100's push towards 30600. A mechanical plan involves buying pullbacks to short-term moving averages in high Relative Strength stocks, using a tight stop below prior day's lows. Any sustained close below the 7550 level on the S&P 500 would warrant a re-evaluation of aggressive long positions, but currently, the path of least resistance remains higher for quality growth.",
-    "technical_signal": "No reversal pattern confirmed yet. Major indices are showing modest gains with positive global inflows, indicating continued upside potential.",
+    "action_line": "VIX 15.77 Normal + S5FI 56.5% breadth + mixed global tape → favor RS leaders in tech, monitor key support.",
+    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 gaining +0.91% while European indices like the DAX and FTSE 100 experienced declines of -0.40% and -0.68% respectively. US credit conditions appear stable with the 10Y Yield at 4.45%, though the BAML HY Spread regime remains unknown. US market breadth, measured by S5FI at 56.5% and MMTH at 61.5%, indicates a moderate number of stocks sustaining positive momentum above key moving averages. The S&P 500 saw a modest gain of +0.13%, with the Nasdaq 100 leading at +0.48%. This divergence suggests a selective market where internal strength isn't uniformly broad.",
+    "analysis_para2": "The mechanical plan remains centered on identifying clear follow-through in leading sectors, particularly Hardware and Semiconductors. Traders should monitor the S&P 500 at 7609 and Nasdaq 100 at 30660 for further upside conviction. Focus on individual stocks demonstrating superior relative strength (RS 98-99) and consolidating recent significant gains. Entries are best considered on constructive pullbacks to short-term moving averages or breakouts from tight bases. Maintain strict risk management with pre-defined stops to protect capital in this selective environment.",
+    "technical_signal": "No reversal pattern confirmed yet. Major indices saw modest gains, with tech outperforming, indicating continued momentum.",
     "ticker_intel": [
-      {
-        "ticker": "DELL",
-        "company": "Dell Technologies Inc.",
-        "grade": "A+",
-        "reason": "Exhibiting robust RS=98 and a powerful 1M=+123.0% rally within the high-demand Hardware theme, confirming its leadership in the current market surge."
-      },
-      {
-        "ticker": "ARM",
-        "company": "Arm Holdings plc",
-        "grade": "A",
-        "reason": "A top-tier Semiconductor player with RS=98 and strong 1M=+94.4% growth, making it a pivotal long opportunity in a sector showing extreme relative strength."
-      },
       {
         "ticker": "QTEX",
         "company": "QTREX Quantum Ltd.",
+        "grade": "A+",
+        "reason": "QTEX stands as a top momentum play with an RS of 98 and an astounding 1-month return of +596.0%, making it a leader in the Hardware theme during this tech-focused market."
+      },
+      {
+        "ticker": "MU",
+        "company": "Micron Technology, Inc.",
+        "grade": "A",
+        "reason": "MU exhibits strong leadership within the Semiconductors theme, boasting an RS of 98 and a robust +100.2% 1-month return, indicative of sustained institutional interest."
+      },
+      {
+        "ticker": "MXL",
+        "company": "MaxLinear, Inc",
         "grade": "C",
-        "reason": "While showing extreme 1M=+596.0% growth and RS=98, its parabolic ascent suggests it is excessively extended and highly vulnerable to a sharp pullback, making it an avoid for new entries."
+        "reason": "Despite a high RS of 98, MaxLinear's +21.9% 1-month return, while strong, is relatively lower than other accelerating leaders, posing a comparative risk if market momentum narrows."
       }
     ]
   }
