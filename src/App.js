@@ -8457,11 +8457,24 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
     return <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>;
   };
 
+  // Calculate RS% from histogram (for sorting)
+  const getRsPct = (hist) => {
+    if (!hist || hist.length < 2) return 50;
+    const last = hist[hist.length - 1];
+    const mn = Math.min(...hist), mx = Math.max(...hist);
+    const rng = mx - mn;
+    return rng === 0 ? 50 : Math.round(((last - mn) / rng) * 100);
+  };
+
   const sorted = useMemo(() => [...etfs].sort((a, b) => {
-    const keyMap = { "rs_1m_pct": "rs_1m", "rs_pct": "rs" };
-    const key = keyMap[sortCol] ?? sortCol;
-    const av = a[key] ?? (sortDir === "asc" ? Infinity : -Infinity);
-    const bv = b[key] ?? (sortDir === "asc" ? Infinity : -Infinity);
+    let av, bv;
+    if (sortCol === "rs_pct") {
+      av = getRsPct(a.rs_histogram);
+      bv = getRsPct(b.rs_histogram);
+    } else {
+      av = a[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
+      bv = b[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
+    }
     if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
     return sortDir === "asc" ? av - bv : bv - av;
   }), [etfs, sortCol, sortDir]);
@@ -8498,13 +8511,13 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
     { col: "ticker",        label: "Group",       align: "left"  },
     { col: "theme",         label: "Group",       align: "left"  },
     { col: "score",         label: "Score ↓",     align: "right" },
+    { col: "rs_pct",        label: "RS%",         align: "right", tooltip: "Use Score for theme selection, and RS% for tactical entry/exit timing" },
     { col: "rs_day",        label: "Day RS",      align: "right" },
     { col: "rs_wk",         label: "Wk RS",       align: "right" },
     { col: "rs_mth",        label: "Mth RS",      align: "right" },
     { col: "rs_qtr",        label: "Qtr RS",      align: "right" },
     { col: "rs_hy",         label: "HY RS",       align: "right" },
     { col: "rs_yr",         label: "Yr RS",       align: "right" },
-    { col: "rs_pct",        label: "RS%",         align: "right" },
     { col: "_chart",        label: "1-Mth Chart", align: "left",  nosort: true },
     { col: "_rs_bar",       label: "1-Mth RS",    align: "left",  nosort: true },
     { col: "perf_1d",       label: "Day %",       align: "right" },
@@ -8537,9 +8550,10 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
         <table className="w-full text-xs border-collapse">
           <thead>
             <tr className="bg-zinc-900/80 border-b border-zinc-700 text-zinc-400 text-[11px] select-none">
-              {COLS.map(({ col, label, align, nosort }) => (
+              {COLS.map(({ col, label, align, nosort, tooltip }) => (
                 <th key={col}
                     onClick={() => !nosort && handleSort(col)}
+                    title={tooltip}
                     className={`px-2 py-2 font-semibold whitespace-nowrap border-r border-zinc-800 last:border-r-0
                       ${nosort ? "cursor-default" : "cursor-pointer hover:text-zinc-200 transition-colors"}
                       ${align === "right" ? "text-right" : "text-left"}`}>
@@ -8567,13 +8581,6 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
                     {e.score != null ? e.score.toFixed(1) : "—"}
                   </span>
                 </td>
-                {/* Day / Wk / Mth / Qtr / HY / Yr RS ranks */}
-                <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_day)}</td>
-                <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_wk)}</td>
-                <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_mth)}</td>
-                <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_qtr)}</td>
-                <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_hy)}</td>
-                <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_yr)}</td>
                 {/* RS% — position of today's RS bar within the 25-day min-max range */}
                 <td className="px-2 py-1 text-right font-mono border-r border-zinc-800">
                   {(() => {
@@ -8591,6 +8598,13 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
                     return <span className={cls}>{pct}%</span>;
                   })()}
                 </td>
+                {/* Day / Wk / Mth / Qtr / HY / Yr RS ranks */}
+                <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_day)}</td>
+                <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_wk)}</td>
+                <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_mth)}</td>
+                <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_qtr)}</td>
+                <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_hy)}</td>
+                <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_yr)}</td>
                 {/* 1-Month Sparkline */}
                 <td className="px-2 py-0.5 border-r border-zinc-800">
                   <EtfSparkline data={e.sparkline ?? []} />
