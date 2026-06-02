@@ -1,5 +1,5 @@
 {
-  "generated_at": "June 02, 2026 (06:59 EDT)",
+  "generated_at": "June 02, 2026 (07:07 EDT)",
   "session": "Pre-Market",
   "global_snapshot": [
     {
@@ -37,13 +37,13 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 25251.79,
-      "change_pct": 0.99
+      "price": 25241.98,
+      "change_pct": 0.96
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10378.48,
-      "change_pct": 0.38
+      "price": 10374.33,
+      "change_pct": 0.34
     }
   },
   "macro_breadth": {
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Moderate Bullishness, Tech-Led Momentum",
+  "mood": "Constructive / Tech Leadership",
   "analysis": {
-    "action_line": "VIX 16.13 Normal + S5FI 55.6% breadth + DAX +0.99% → favor RS leaders on dips in a constructive tape.",
-    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 down -0.30%, while European indices show strength, as the DAX surges +0.99% and the FTSE 100 gains +0.38%. US credit regime remains undefined with BAML HY Spread data unavailable. Domestically, market breadth metrics are solid but not overheated, with 55.6% of S&P 500 stocks above their 50-day moving average (S5FI) and 61.8% above their 200-day moving average (MMTH), indicating healthy participation across the market.",
-    "analysis_para2": "The S&P 500 is trading at 7599.96, showing a moderate +0.26% gain pre-market, while the Nasdaq 100 leads with a +0.60% jump to 30513.86. Given the stable VIX at 16.13 and improving breadth, the mechanical plan is to monitor for sustained moves above recent highs on both indices. Focus should be on leading sectors like Semiconductors and Hardware, identified by the thematic scanner. Traders should seek entries on relative strength leaders during minor pullbacks to established support levels, confirming volume.",
-    "technical_signal": "No reversal pattern confirmed yet. The indices show early strength, suggesting continuation potential rather than an immediate reversal.",
+    "action_line": "VIX 16.13 Normal + S5FI 55.6% breadth + DAX +0.96% → trade RS leaders selectively near support.",
+    "analysis_para1": "The global tape presents a generally constructive picture this morning, with the DAX up +0.96% and FTSE 100 gaining +0.34%, contrasting with a slight dip in the Nikkei 225 at -0.30%. Domestically, while the BAML HY Spread regime remains unknown, market breadth shows signs of underlying health. The S5FI metric stands at 55.6%, indicating a majority of S&P 500 components are trading above their 50-day moving average, supported by a robust 61.8% of stocks above their 200-day moving average.",
+    "analysis_para2": "With the S&P 500 pushing higher to 7599.96 and the Nasdaq 100 leading with a 0.60% gain, watch for consolidation around the 7600 level on the S&P 500. A breach below immediate short-term support, such as the 5-day or 10-day EMA, could signal a pause in the current advance. Focus remains on relative strength leaders within strong themes like Semiconductors and Hardware. Traders should look for pullbacks to prior breakout levels or moving average support to initiate long positions, while maintaining tight stops.",
+    "technical_signal": "No reversal pattern confirmed yet. The market continues its constructive advance, led by strong technology sectors.",
     "ticker_intel": [
-      {
-        "ticker": "QTEX",
-        "company": "QTREX Quantum Ltd.",
-        "grade": "A+",
-        "reason": "QTEX leads the market with exceptional relative strength (RS=98) and unparalleled short-term performance (+596% in 1M), making it a high-conviction long in the thriving Hardware theme."
-      },
       {
         "ticker": "DELL",
         "company": "Dell Technologies Inc.",
+        "grade": "A+",
+        "reason": "With an RS of 98 and a robust +123.0% 1-month return, Dell is a leading player in the Hardware theme, demonstrating strong momentum in a key market sector."
+      },
+      {
+        "ticker": "MU",
+        "company": "Micron Technology, Inc.",
         "grade": "A",
-        "reason": "DELL demonstrates robust relative strength (RS=98) and strong momentum with a +123% 1M gain, positioning it as a top-tier Hardware leader within the current bullish environment."
+        "reason": "Micron, boasting an RS of 98 and a massive +100.2% 1-month gain, stands out as a top semiconductor performer, aligning with the current tech-led market strength."
       },
       {
         "ticker": "WDC",
         "company": "Western Digital Corporation",
         "grade": "C",
-        "reason": "Despite strong RS (98), WDC's +25.7% 1M return is comparatively modest against other thematic leaders, suggesting less explosive short-term upside in this highly competitive Hardware sector."
+        "reason": "Despite its strong 1-month return of +25.7% and RS of 98, Western Digital is comparatively lagging its sector peers in the Hardware theme, suggesting less immediate upside conviction for new entries."
       }
     ]
   }
