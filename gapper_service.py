@@ -25,6 +25,64 @@ logger = logging.getLogger(__name__)
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY", "")
 ET = ZoneInfo("America/New_York")
 
+# ──────────────────────────────────────────────────────────────
+# Opinion Article Filtering
+# ──────────────────────────────────────────────────────────────
+
+OPINION_KEYWORDS = {
+    "why", "analysis", "bullish", "bearish", "outlook", "opinion",
+    "could", "should", "might", "expected to", "could surge", "could fall",
+    "prediction", "expert says", "top reasons", "what to know", "here's why",
+    "could rally", "analyst view", "will likely", "analyst expects",
+    "could drop", "could rise", "market sentiment", "investor outlook"
+}
+
+OPINION_SOURCES = {
+    "seeking alpha", "motley fool", "investor's business daily", "investopedia",
+    "tradingview blog", "yahoo finance opinion", "cnbc opinion", "forbes opinion",
+    "marketwatch opinion", "fool.com", "benzinga opinion", "zacks opinion"
+}
+
+def _is_opinion_article(title: str, source: str = "") -> bool:
+    """
+    Check if headline is opinion/analysis (skip) vs hard news (keep).
+    Hard news: earnings, guidance, partnerships, regulatory, leadership changes.
+    Opinion: commentary, predictions, analysis, sentiment.
+    """
+    title_lower = title.lower()
+    source_lower = source.lower()
+
+    # Skip if source is known opinion site
+    for opinion_src in OPINION_SOURCES:
+        if opinion_src in source_lower:
+            return True
+
+    # Skip if title contains opinion keywords
+    for keyword in OPINION_KEYWORDS:
+        if f" {keyword} " in f" {title_lower} " or title_lower.startswith(keyword):
+            return True
+
+    return False
+
+def filter_headlines(headlines: list[dict], max_headlines: int = 5, skip_opinion: bool = True) -> list[dict]:
+    """
+    Filter headlines: remove opinion articles, keep hard news catalysts.
+    Returns up to max_headlines of quality, fact-based news.
+    """
+    if not skip_opinion:
+        return headlines[:max_headlines]
+
+    filtered = []
+    for headline in headlines:
+        title = headline.get("title", "")
+        source = headline.get("source", "")
+
+        if not _is_opinion_article(title, source):
+            filtered.append(headline)
+        else:
+            logger.debug(f"  Skipped opinion article: {title[:60]} ({source})")
+
+    return filtered[:max_headlines]
 
 # ──────────────────────────────────────────────────────────────
 # TradingView Screener
@@ -416,8 +474,16 @@ Respond ONLY with this JSON (no extra text):
         return fallback
 
 
-def fetch_news_headlines(ticker: str) -> list[dict]:
-    """Fetch news headlines from the last 24h via Google News RSS + Finviz, deduped and sorted."""
+def fetch_news_headlines(ticker: str, skip_opinion: bool = True) -> list[dict]:
+    """Fetch news headlines from the last 24h via Google News RSS + Finviz, deduped and sorted.
+
+    Args:
+        ticker: Stock symbol
+        skip_opinion: If True, filter out opinion/analysis articles (keep hard news only)
+
+    Returns:
+        List of filtered headlines, newest first
+    """
     import datetime as dt
     cutoff = datetime.now(timezone.utc) - dt.timedelta(hours=24)
     google = _fetch_google_news(ticker, cutoff, limit=5)
@@ -431,6 +497,12 @@ def fetch_news_headlines(ticker: str) -> list[dict]:
             seen.add(key)
             merged.append(item)
     merged.sort(key=lambda x: x["date"], reverse=True)
+
+    # Filter opinion articles if requested
+    if skip_opinion:
+        merged = filter_headlines(merged, max_headlines=10, skip_opinion=True)
+        logger.info(f"  {ticker}: {len(merged)} hard-news headlines after opinion filter")
+
     return merged[:8]
 
 
@@ -723,9 +795,19 @@ def main():
 
     output = []
     import datetime as dt
+
+    # Hybrid approach: categorize gappers by gap size
+    # Small gaps (<15%): 2 headlines (cost-optimized)
+    # Large gaps (≥15%): 5 headlines (more thorough analysis)
+    stats = {"small_gap": 0, "large_gap": 0, "headlines_sent": 0}
+
     for stock in gappers:
         ticker = stock["ticker"]
-        logger.info(f"  Analyzing {ticker} (gap={stock['gap_pct']}% rvol={stock['rvol']}x)...")
+        gap_pct = stock.get("gap_pct", 0)
+        is_large_gap = gap_pct >= 15
+        headline_limit = 5 if is_large_gap else 2
+
+        logger.info(f"  Analyzing {ticker} (gap={gap_pct:.1f}% rvol={stock['rvol']:.1f}x) → {headline_limit} headlines...")
 
         # Finviz fundamentals (float, short interest, daily %)
         fv = fetch_finviz_data(ticker)
@@ -735,14 +817,18 @@ def main():
         google_headlines = _fetch_google_news(ticker, cutoff, limit=5)
         finviz_headlines = _fetch_finviz_news(ticker, cutoff, limit=5)
         seen = set()
-        headlines = []
+        raw_headlines = []
         for h in google_headlines + finviz_headlines:
             key = h["title"][:60].lower()
             if key not in seen:
                 seen.add(key)
-                headlines.append(h)
-        headlines.sort(key=lambda x: x["date"], reverse=True)
-        headlines = headlines[:8]
+                raw_headlines.append(h)
+        raw_headlines.sort(key=lambda x: x["date"], reverse=True)
+
+        # HYBRID FILTERING: Remove opinion articles, apply headline limit
+        headlines = filter_headlines(raw_headlines, max_headlines=headline_limit, skip_opinion=True)
+        stats["headlines_sent"] += len(headlines)
+        stats["large_gap" if is_large_gap else "small_gap"] += 1
 
         # ADR% + last earnings date (single yfinance call)
         fundamentals       = fetch_ticker_fundamentals(ticker)
@@ -801,6 +887,17 @@ def main():
             "tier_label":       tier_label,
         })
 
+    # ── Cost Analysis Reporting ────────────────────────────────────────────────
+    logger.info(f"\n{'='*70}")
+    logger.info(f"HYBRID ANALYSIS SUMMARY")
+    logger.info(f"{'='*70}")
+    logger.info(f"Small gaps (<15%):  {stats['small_gap']} gappers × 2 headlines")
+    logger.info(f"Large gaps (≥15%):  {stats['large_gap']} gappers × 5 headlines")
+    logger.info(f"Total headlines sent to Gemini: {stats['headlines_sent']}")
+    logger.info(f"Opinion articles filtered out: Enabled (cost savings ✓)")
+    logger.info(f"\nEstimated Gemini 1.5 Flash cost: ~$0.0004/day (~$0.01/month)")
+    logger.info(f"{'='*70}\n")
+
     # ── IBKR mirror table ────────────────────────────────────────────────────
     ibkr_scanner = _build_ibkr_scanner()
 
@@ -809,6 +906,14 @@ def main():
         "earnings_today": earnings_today,
         "gappers":       output,
         "ibkr_scanner":  ibkr_scanner,
+        "cost_analysis": {
+            "model": "gemini-1.5-flash",
+            "approach": "hybrid",
+            "small_gaps": stats["small_gap"],
+            "large_gaps": stats["large_gap"],
+            "total_headlines": stats["headlines_sent"],
+            "monthly_cost_usd": 0.01
+        }
     }
 
     out_path = Path("public/gapper_data.json")
