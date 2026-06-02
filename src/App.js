@@ -5031,6 +5031,232 @@ const EarningsAnalysisDrawer = ({ stock, onClose, themeName }) => {
   );
 };
 
+const NewsHubTab = ({ newsData }) => {
+  const [breakingNews, setBreakingNews] = useState(null);
+  const [gappers, setGappers] = useState(null);
+  const [earnings, setEarnings] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadNews = async () => {
+      try {
+        // Load breaking news
+        if (newsData) setBreakingNews(newsData);
+
+        // Load gappers from public/gapper_data.json
+        const gapperResponse = await fetch(`${process.env.PUBLIC_URL}/gapper_data.json?v=${Date.now()}`);
+        if (gapperResponse.ok) {
+          const gapperData = await gapperResponse.json();
+          setGappers(gapperData);
+        }
+
+        // Load today's earnings from manifest
+        const today = new Date().toISOString().slice(0, 10);
+        const manifestResponse = await fetch(`${process.env.PUBLIC_URL}/earnings_reports/manifest.json?v=${Date.now()}`);
+        if (manifestResponse.ok) {
+          const manifest = await manifestResponse.json();
+          const todayReports = manifest[today] || [];
+          if (todayReports.length > 0) {
+            const reportFile = todayReports[0];
+            const reportResponse = await fetch(`${process.env.PUBLIC_URL}/earnings_reports/${reportFile}?v=${Date.now()}`);
+            if (reportResponse.ok) {
+              const data = await reportResponse.json();
+              setEarnings(data);
+            }
+          }
+        }
+      } catch (err) {
+        console.error("Error loading news hub data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadNews();
+  }, [newsData]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="flex items-center gap-2 text-zinc-400">
+          <RefreshCw size={20} className="animate-spin" />
+          <span>Loading news hub...</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-[1400px] mx-auto px-4 py-4 space-y-4">
+      <div className="space-y-2 mb-6">
+        <h1 className="text-[32px] font-bold text-white">📰 News Hub</h1>
+        <p className="text-[13px] text-zinc-500">Breaking news, pre-market gappers, and earnings alerts all in one place</p>
+      </div>
+
+      <div className="space-y-4">
+        {/* BREAKING NEWS SECTION */}
+        {breakingNews?.alerts && breakingNews.alerts.length > 0 && (
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="text-[14px] font-bold text-white uppercase tracking-wider">🔴 Breaking News</span>
+              <span className="px-2 py-0.5 bg-red-500/20 text-red-400 text-[11px] font-bold rounded">
+                {breakingNews.alerts.length}
+              </span>
+            </div>
+            <div className="space-y-2">
+              {breakingNews.alerts.slice(0, 10).map((alert, idx) => (
+                <div key={idx} className={`border rounded-lg p-3 ${
+                  alert.direction === 'bearish' ? 'bg-red-950/20 border-red-800/30' : 'bg-emerald-950/20 border-emerald-800/30'
+                }`}>
+                  <div className="flex items-start gap-2 mb-1">
+                    <span className={`text-[11px] font-bold px-2 py-0.5 rounded whitespace-nowrap ${
+                      alert.direction === 'bearish' ? 'bg-red-900/40 text-red-300' : 'bg-emerald-900/40 text-emerald-300'
+                    }`}>
+                      {alert.direction?.toUpperCase() || 'NEUTRAL'}
+                    </span>
+                    <span className={`text-[11px] font-bold px-2 py-0.5 rounded ${
+                      alert.grade === 'GOV' ? 'bg-blue-900/40 text-blue-300' : 'bg-zinc-800/40 text-zinc-400'
+                    }`}>
+                      Grade {alert.grade}
+                    </span>
+                    <span className="text-[11px] text-zinc-600 ml-auto">
+                      {new Date(alert.timestamp).toLocaleTimeString()}
+                    </span>
+                  </div>
+                  <p className="text-[13px] text-zinc-200 leading-relaxed">{alert.headline}</p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <span className="text-[11px] text-zinc-500">{alert.source}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* GAPPERS SECTION */}
+        {gappers?.gappers && gappers.gappers.length > 0 && (
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="text-[14px] font-bold text-white uppercase tracking-wider">🚀 Pre-Market Gappers</span>
+              <span className="px-2 py-0.5 bg-blue-500/20 text-blue-400 text-[11px] font-bold rounded">
+                {gappers.gappers.length}
+              </span>
+            </div>
+            <div className="space-y-2">
+              {gappers.gappers.slice(0, 10).map((gapper, idx) => (
+                <div key={idx} className="border border-blue-800/30 bg-blue-950/20 rounded-lg p-3">
+                  <div className="flex items-baseline gap-3 mb-2">
+                    <span className="text-[16px] font-bold text-blue-300">{gapper.ticker}</span>
+                    <span className={`text-[14px] font-bold ${gapper.gap_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                      {gapper.gap_pct >= 0 ? '+' : ''}{gapper.gap_pct.toFixed(1)}%
+                    </span>
+                    <span className="text-[11px] text-zinc-500">${gapper.price.toFixed(2)}</span>
+                    <span className={`ml-auto px-2 py-0.5 rounded text-[11px] font-bold ${
+                      gapper.grade === 'A+' ? 'bg-emerald-900/40 text-emerald-300' :
+                      gapper.grade === 'A' ? 'bg-blue-900/40 text-blue-300' :
+                      'bg-yellow-900/40 text-yellow-300'
+                    }`}>
+                      {gapper.grade}
+                    </span>
+                  </div>
+
+                  <div className="space-y-1 mb-2">
+                    <div className="text-[12px] text-zinc-400">
+                      <span className="font-semibold text-zinc-300">{gapper.category}</span> — {gapper.reasoning}
+                    </div>
+                    <div className="text-[12px] text-zinc-400">
+                      <span className="font-semibold text-zinc-300">Trade:</span> {gapper.hypothesis}
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-3 text-[11px] text-zinc-500">
+                    <span>Conviction: <strong className="text-zinc-300">{gapper.conviction}</strong></span>
+                    <span>•</span>
+                    <span>Volume: <strong className="text-zinc-300">{(gapper.pm_volume / 1e6).toFixed(1)}M</strong></span>
+                    <span>•</span>
+                    <span>RVOL: <strong className="text-zinc-300">{gapper.rvol.toFixed(2)}x</strong></span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* EARNINGS SECTION */}
+        {earnings && (
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="text-[14px] font-bold text-white uppercase tracking-wider">📊 Today's Earnings</span>
+              <span className="px-2 py-0.5 bg-green-500/20 text-green-400 text-[11px] font-bold rounded">1</span>
+            </div>
+            <div className="border border-green-800/30 bg-green-950/20 rounded-lg p-4">
+              <div className="flex items-baseline gap-3 mb-3">
+                <span className="text-[18px] font-bold text-green-300">{earnings.ticker || 'Unknown'}</span>
+                <span className="text-[12px] text-zinc-500">{earnings.report_date || earnings.date}</span>
+                <span className={`ml-auto px-2 py-1 rounded text-[12px] font-bold ${
+                  earnings.report?.beat_miss === 'beat' ? 'bg-emerald-900/40 text-emerald-300' :
+                  earnings.report?.beat_miss === 'miss' ? 'bg-red-900/40 text-red-300' :
+                  'bg-yellow-900/40 text-yellow-300'
+                }`}>
+                  {(earnings.report?.beat_miss || 'inline').toUpperCase()}
+                </span>
+              </div>
+              <div className="grid grid-cols-3 gap-3 mb-3">
+                <div>
+                  <div className="text-[11px] text-zinc-500 uppercase font-bold mb-1">Stock Reaction</div>
+                  <div className={`text-[16px] font-bold ${parseFloat(earnings.report?.stock_reaction) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                    {earnings.report?.stock_reaction || '—'}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-[11px] text-zinc-500 uppercase font-bold mb-1">Rating</div>
+                  <div className={`text-[14px] font-bold ${
+                    earnings.report?.rating === 'BUY' ? 'text-emerald-400' :
+                    earnings.report?.rating === 'SELL' ? 'text-red-400' : 'text-blue-400'
+                  }`}>
+                    {earnings.report?.rating || '—'}
+                  </div>
+                </div>
+                <div>
+                  <div className="text-[11px] text-zinc-500 uppercase font-bold mb-1">Target Price</div>
+                  <div className="text-[14px] font-bold text-blue-400">{earnings.report?.price_target || '—'}</div>
+                </div>
+              </div>
+              <div className="text-[12px] text-zinc-400 border-t border-zinc-800/40 pt-3">
+                <p><strong className="text-zinc-300">Key Actuals:</strong> {earnings.report?.section_1_actuals?.eps_beat || 'See dashboard for full report'}</p>
+                <p className="mt-1"><strong className="text-zinc-300">Guidance:</strong> {earnings.report?.section_2_guidance?.forward_signal || 'See dashboard for full report'}</p>
+                <a href="#" onClick={() => window.location.hash = 'earnings'} className="text-blue-400 hover:text-blue-300 mt-2 inline-block">
+                  → View full 7-section report
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* EMPTY STATE */}
+        {(!breakingNews?.alerts || breakingNews.alerts.length === 0) &&
+         (!gappers?.gappers || gappers.gappers.length === 0) &&
+         !earnings && (
+          <div className="text-center py-12">
+            <p className="text-zinc-500 text-[14px]">No active news or alerts at the moment</p>
+            <p className="text-zinc-700 text-[12px] mt-2">Breaking news, gappers, and earnings will appear here automatically</p>
+          </div>
+        )}
+      </div>
+
+      {/* Footer */}
+      <div className="border-t border-zinc-800/40 pt-4 mt-8 text-[11px] text-zinc-600">
+        <div>
+          Last updated: {new Date().toLocaleTimeString()}
+        </div>
+        <div className="mt-1">
+          🔄 Breaking News updates every 2 hours | 🚀 Gappers scan pre-market (6-9 AM ET) | 📊 Earnings analyzed live
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const EarningsReportTab = () => {
   const [report, setReport] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -10394,6 +10620,9 @@ const filtered = useMemo(() => {
                 ★ Watchlist
               </button>
 
+              <button onClick={() => setTab("hub")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "hub" ? "border-orange-400 text-orange-300" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
+                📰 News Hub
+              </button>
               <button onClick={() => setTab("news")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "news" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Calendar
               </button>
@@ -10475,7 +10704,7 @@ const filtered = useMemo(() => {
         </div>
       </div>
 
-      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
+      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "hub" ? <NewsHubTab newsData={newsData}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
