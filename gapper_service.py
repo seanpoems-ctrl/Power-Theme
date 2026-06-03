@@ -196,31 +196,32 @@ def get_peer_stocks(ticker: str) -> list:
     return PEER_MAPPING.get(ticker.upper(), [])
 
 
-def get_leverage_inverse_stocks(ticker: str) -> list:
+def get_leverage_inverse_stocks(ticker: str) -> dict:
     """
-    Return the single-stock (or sector) leverage/inverse ETF pair for a gapper.
+    Return leverage (long) and inverse (short) ETFs for a gapper as separate lists.
     Well-known liquid ETFs skip the live volume check (pre-verified).
-    Lesser-known ETFs are checked via yfinance ($20M+ threshold).
-    Returns up to 2 tickers: [LONG_ETF, SHORT_ETF]
+    Returns: {"long": [LONG_ETF], "short": [SHORT_ETF]}
     """
     t = ticker.upper()
     if t not in SINGLE_STOCK_LEVERAGE:
-        return []
+        return {"long": [], "short": []}
 
     long_etf, short_etf = SINGLE_STOCK_LEVERAGE[t]
-    result = []
-    for etf in [long_etf, short_etf]:
+
+    def _qualifies(etf):
+        if etf in ALWAYS_LIQUID_ETFS:
+            return True
         try:
-            if etf in ALWAYS_LIQUID_ETFS:
-                result.append(etf)   # skip live check — always qualifies
-            else:
-                vol = _fetch_dollar_volume(etf)
-                if vol and vol > 20_000_000:
-                    result.append(etf)
+            vol = _fetch_dollar_volume(etf)
+            return bool(vol and vol > 20_000_000)
         except Exception as e:
             logger.debug(f"  Vol check failed for {etf}: {e}")
+            return False
 
-    return result
+    return {
+        "long":  [long_etf]  if _qualifies(long_etf)  else [],
+        "short": [short_etf] if _qualifies(short_etf) else [],
+    }
 
 
 def _fetch_dollar_volume(ticker: str) -> float | None:
@@ -786,7 +787,8 @@ def analyze_with_gemini(
             "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
             "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
             "peer_tickers":    get_peer_stocks(ticker),
-            "leverage_etfs":   get_leverage_inverse_stocks(ticker),
+            "leverage_etfs":   [],
+            "inverse_etfs":    [],
         }
     try:
         from google import genai
@@ -906,8 +908,10 @@ Respond in this exact JSON format only (no extra text):
 
         # Curated peer stocks (sympathy plays)
         peer_tickers = get_peer_stocks(ticker)
-        # Single-stock leverage/inverse ETFs (volume-filtered)
-        leverage_etfs = get_leverage_inverse_stocks(ticker)
+        # Single-stock leverage/inverse ETFs — split into long vs short
+        _lev         = get_leverage_inverse_stocks(ticker)
+        leverage_etfs = _lev.get("long", [])
+        inverse_etfs  = _lev.get("short", [])
 
         hypothesis_label, strategy = HYPOTHESIS_RULES.get(category, HYPOTHESIS_RULES["Others"])
         base_conviction = {"High Conviction (Gap & Go)": 80, "Medium Conviction (RS Hold)": 60,
@@ -926,6 +930,7 @@ Respond in this exact JSON format only (no extra text):
             "analysis_details": analysis_details,
             "peer_tickers":    peer_tickers,
             "leverage_etfs":   leverage_etfs,
+            "inverse_etfs":    inverse_etfs,
         }
     except Exception as e:
         logger.warning(f"  Gemini failed for {ticker}: {e}")
@@ -979,8 +984,8 @@ def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
         f"• **{s2}**\n{detail_body}"
     )
 
-    peer_tickers  = get_peer_stocks(ticker)
-    leverage_etfs = get_leverage_inverse_stocks(ticker)
+    peer_tickers = get_peer_stocks(ticker)
+    _lev         = get_leverage_inverse_stocks(ticker)
 
     return {
         "category":        cat,
@@ -993,7 +998,8 @@ def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
         "analysis_detail": f"Catalyst: {rsn} | Impact: {detail_body}",
         "analysis_details": analysis_details,
         "peer_tickers":    peer_tickers,
-        "leverage_etfs":   leverage_etfs,
+        "leverage_etfs":   _lev.get("long", []),
+        "inverse_etfs":    _lev.get("short", []),
     }
 
 

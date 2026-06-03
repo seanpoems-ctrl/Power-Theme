@@ -6663,24 +6663,26 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
     clearTimeout(hoverTimer.current);
   };
 
+  // Grouped gapper entries for row-format display
+  const gapperGroups = useMemo(() => {
+    if (mode !== "gapper") return [];
+    const gappers = gapperData?.gappers || [];
+    return gappers
+      .filter(g => g.meets_all_gates)
+      .slice(0, 8)
+      .map(g => ({
+        ticker:   g.ticker,
+        price:    g.price ?? null,
+        gap_pct:  g.gap_pct ?? null,
+        rs:       g.rs_52w ?? null,
+        peers:    g.peer_tickers || [],
+        leverage: g.leverage_etfs || [],
+        inverse:  g.inverse_etfs  || [],
+      }));
+  }, [gapperData, mode]);
+
   const leaders = useMemo(() => {
-    if (mode === "gapper") {
-      const gappers = gapperData?.gappers || [];
-      const rows = [];
-      const seen = new Set();
-      for (const g of gappers) {
-        if (g.meets_all_gates) {
-          if (!seen.has(g.ticker)) { seen.add(g.ticker); rows.push({ ticker: g.ticker, rs: g.rs_52w ?? null, isPeer: false, isLeverage: false, price: g.price ?? null, gap_pct: g.gap_pct ?? null }); }
-          for (const p of (g.peer_tickers || [])) {
-            if (!seen.has(p)) { seen.add(p); rows.push({ ticker: p, rs: null, isPeer: true, isLeverage: false, price: null, gap_pct: null }); }
-          }
-          for (const etf of (g.leverage_etfs || [])) {
-            if (!seen.has(etf)) { seen.add(etf); rows.push({ ticker: etf, rs: null, isPeer: false, isLeverage: true, price: null, gap_pct: null }); }
-          }
-        }
-      }
-      return rows.slice(0, 12);
-    }
+    if (mode === "gapper") return []; // gapper mode uses gapperGroups instead
     // scanner mode: collect all leaders that pass all 5 gates
     const rows = [];
     const seen = new Set();
@@ -6713,44 +6715,100 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
       </div>
 
       {/* Leaders list */}
-      <div className="flex flex-col gap-0.5 mb-3">
-        {leaders.length > 0 && (
-          <div className="flex items-center justify-between text-[11px] text-zinc-600 pb-0.5 mb-0.5 border-b border-zinc-800/60">
-            <span>Ticker · Price · Chg</span>
-            <span>RS</span>
-          </div>
-        )}
-        {leaders.length === 0 ? (
-          <div className="text-[11px] text-zinc-600 py-2 text-center">No qualifying leaders</div>
-        ) : leaders.map(({ ticker, rs, isPeer, isLeverage, price, gap_pct }) => {
-          const rsCls = rs != null && rs >= 90 ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
-                      : rs != null && rs >= 85 ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
-                      : "bg-zinc-800/60 text-zinc-500 border-zinc-700/40";
-          return (
-            <div key={ticker}
-              className={`flex items-center justify-between px-1.5 py-1 rounded hover:bg-zinc-800/50 transition-colors ${isPeer ? "opacity-60" : ""} ${isLeverage ? "opacity-75" : ""}`}>
-              <div className="flex items-center gap-1.5 min-w-0 flex-wrap">
-                <span
-                  className={`text-[12px] font-mono font-semibold cursor-pointer transition-colors leading-none ${isLeverage ? "text-orange-400 hover:text-orange-300" : "text-blue-400 hover:text-blue-300"}`}
-                  onClick={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect }); }}
-                  onMouseEnter={e => startHover(ticker, e.currentTarget.getBoundingClientRect())}
-                  onMouseLeave={cancelHover}
-                >
-                  {ticker}
-                  {isPeer && <span className="text-[11px] text-zinc-600 ml-0.5">peer</span>}
-                  {isLeverage && <span className="text-[10px] text-orange-600/80 ml-0.5 font-normal">lev</span>}
-                </span>
-                {price != null && <span className="text-[11px] font-mono text-zinc-500">${price.toFixed(2)}</span>}
-                {gap_pct != null && <span className="text-[11px] font-mono font-bold text-emerald-400">+{gap_pct.toFixed(1)}%</span>}
+      <div className="flex flex-col gap-1 mb-3">
+        {mode === "gapper" ? (
+          gapperGroups.length === 0 ? (
+            <div className="text-[11px] text-zinc-600 py-2 text-center">No qualifying leaders</div>
+          ) : gapperGroups.map(({ ticker, price, gap_pct, rs, peers, leverage, inverse }) => {
+            const rsCls = rs != null && rs >= 90 ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                        : rs != null && rs >= 85 ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
+                        : "bg-zinc-800/60 text-zinc-500 border-zinc-700/40";
+            return (
+              <div key={ticker} className="flex flex-col gap-0.5 pb-1.5 border-b border-zinc-800/40 last:border-0">
+                {/* Main gapper row */}
+                <div className="flex items-center justify-between px-1 py-0.5">
+                  <div className="flex items-center gap-1.5">
+                    <span
+                      className="text-[12px] font-mono font-semibold text-blue-400 cursor-pointer hover:text-blue-300 transition-colors"
+                      onClick={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect }); }}
+                      onMouseEnter={e => startHover(ticker, e.currentTarget.getBoundingClientRect())}
+                      onMouseLeave={cancelHover}
+                    >{ticker}</span>
+                    {price != null && <span className="text-[11px] font-mono text-zinc-500">${price.toFixed(2)}</span>}
+                    {gap_pct != null && <span className="text-[11px] font-mono font-bold text-emerald-400">+{gap_pct.toFixed(1)}%</span>}
+                  </div>
+                  {rs != null && <span className={`text-[10px] font-bold font-mono px-1 py-0.5 rounded border leading-none ${rsCls}`}>{rs}</span>}
+                </div>
+                {/* Peers row */}
+                {peers.length > 0 && (
+                  <div className="flex items-center gap-1 px-1 flex-wrap">
+                    <span className="text-[9px] text-zinc-600 uppercase tracking-wide font-semibold w-10 flex-shrink-0">Peers</span>
+                    {peers.map(p => (
+                      <span key={p}
+                        className="text-[10px] font-mono font-semibold text-blue-400/80 cursor-pointer hover:text-blue-300 transition-colors"
+                        onClick={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === p ? null : { ticker: p, rect }); }}
+                        onMouseEnter={e => startHover(p, e.currentTarget.getBoundingClientRect())}
+                        onMouseLeave={cancelHover}
+                      >{p}</span>
+                    ))}
+                  </div>
+                )}
+                {/* Leverage row */}
+                {leverage.length > 0 && (
+                  <div className="flex items-center gap-1 px-1 flex-wrap">
+                    <span className="text-[9px] text-zinc-600 uppercase tracking-wide font-semibold w-10 flex-shrink-0">Lev</span>
+                    {leverage.map(e => (
+                      <span key={e}
+                        className="text-[10px] font-mono font-semibold text-orange-400 cursor-pointer hover:text-orange-300 transition-colors"
+                        onClick={e2 => { clearTimeout(hoverTimer.current); const rect = e2.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === e ? null : { ticker: e, rect }); }}
+                        onMouseEnter={e2 => startHover(e, e2.currentTarget.getBoundingClientRect())}
+                        onMouseLeave={cancelHover}
+                      >{e}</span>
+                    ))}
+                  </div>
+                )}
+                {/* Inverse row */}
+                {inverse.length > 0 && (
+                  <div className="flex items-center gap-1 px-1 flex-wrap">
+                    <span className="text-[9px] text-zinc-600 uppercase tracking-wide font-semibold w-10 flex-shrink-0">Inv</span>
+                    {inverse.map(e => (
+                      <span key={e}
+                        className="text-[10px] font-mono font-semibold text-red-400/80 cursor-pointer hover:text-red-300 transition-colors"
+                        onClick={e2 => { clearTimeout(hoverTimer.current); const rect = e2.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === e ? null : { ticker: e, rect }); }}
+                        onMouseEnter={e2 => startHover(e, e2.currentTarget.getBoundingClientRect())}
+                        onMouseLeave={cancelHover}
+                      >{e}</span>
+                    ))}
+                  </div>
+                )}
               </div>
-              {rs != null && (
-                <span className={`text-[11px] font-bold font-mono px-1 py-0.5 rounded border leading-none flex-shrink-0 ${rsCls}`}>
-                  {rs}
-                </span>
-              )}
+            );
+          })
+        ) : (
+          /* Scanner mode — flat list */
+          leaders.length === 0 ? (
+            <div className="text-[11px] text-zinc-600 py-2 text-center">No qualifying leaders</div>
+          ) : <>
+            <div className="flex items-center justify-between text-[11px] text-zinc-600 pb-0.5 mb-0.5 border-b border-zinc-800/60">
+              <span>Ticker · Price · Chg</span><span>RS</span>
             </div>
-          );
-        })}
+            {leaders.map(({ ticker, rs }) => {
+              const rsCls = rs != null && rs >= 90 ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
+                          : rs != null && rs >= 85 ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
+                          : "bg-zinc-800/60 text-zinc-500 border-zinc-700/40";
+              return (
+                <div key={ticker} className="flex items-center justify-between px-1.5 py-1 rounded hover:bg-zinc-800/50 transition-colors">
+                  <span className="text-[12px] font-mono font-semibold text-blue-400 cursor-pointer hover:text-blue-300"
+                    onClick={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect }); }}
+                    onMouseEnter={e => startHover(ticker, e.currentTarget.getBoundingClientRect())}
+                    onMouseLeave={cancelHover}
+                  >{ticker}</span>
+                  {rs != null && <span className={`text-[11px] font-bold font-mono px-1 py-0.5 rounded border leading-none ${rsCls}`}>{rs}</span>}
+                </div>
+              );
+            })}
+          </>
+        )}
       </div>
 
       {/* Separator */}
