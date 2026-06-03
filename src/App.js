@@ -7900,7 +7900,7 @@ const SearchBar = ({ data, search, setSearch }) => {
               </span>
             )}
             {fullResult.company && (
-              <div className="flex items-center gap-2 w-full flex-wrap">
+              <div className="flex flex-col gap-0.5 w-full">
                 <span className="text-[12px] text-zinc-500 truncate">{fullResult.company}</span>
                 {(() => {
                   const subtheme = fullResult.appearances?.[0]?.subtheme;
@@ -7911,7 +7911,7 @@ const SearchBar = ({ data, search, setSearch }) => {
                     .slice(0, 4);
                   if (peers.length === 0) return null;
                   return (
-                    <div className="flex items-center gap-1 flex-shrink-0">
+                    <div className="flex items-center gap-1.5">
                       <span className="text-[10px] text-zinc-600 uppercase tracking-wide font-semibold">Peers</span>
                       {peers.map(p => (
                         <button key={p}
