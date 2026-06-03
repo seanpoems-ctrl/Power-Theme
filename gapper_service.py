@@ -98,21 +98,91 @@ OPINION_SOURCES = {
 # ──────────────────────────────────────────────────────────────
 
 PEER_MAPPING = {
-    # Storage & Data Center
-    "HPE": ["SMCI", "NTAP", "STX"],       # HPE Arista, Netapp, Seagate
-    "SMCI": ["HPE", "NTAP", "WDC"],       # Super Micro Computers
-    "NTAP": ["HPE", "SMCI", "STX"],       # NetApp
-    "STX": ["WDC", "NTAP", "HPE"],        # Seagate
-    "WDC": ["STX", "SMCI", "NTAP"],       # Western Digital
+    # ── Storage & Data Center ──────────────────────────────────
+    "HPE":  ["SMCI", "NTAP", "STX"],
+    "SMCI": ["HPE",  "NTAP", "WDC"],
+    "NTAP": ["HPE",  "SMCI", "STX"],
+    "STX":  ["WDC",  "NTAP", "HPE"],
+    "WDC":  ["STX",  "SMCI", "NTAP"],
+    "HPO":  ["SMCI", "NTAP", "ANET"],
+    "SNDK": ["STX",  "WDC",  "SMCI"],
 
-    # Networking & Infrastructure
-    "ANET": ["HPE", "CSCO", "IBM"],       # Arista Networks
-    "CSCO": ["ANET", "IBM", "HPE"],       # Cisco
-    "IBM": ["CSCO", "ANET", "HPE"],       # IBM
+    # ── Networking & Infrastructure ───────────────────────────
+    "ANET": ["HPE",  "CSCO", "JNPR"],
+    "CSCO": ["ANET", "IBM",  "HPE"],
+    "IBM":  ["CSCO", "ANET", "HPE"],
+    "JNPR": ["ANET", "CSCO", "HPE"],
+    "GLW":  ["COHR", "LITE", "FNSR"],     # Corning — optical fiber
 
-    # Flash Storage & Tech
-    "HPO": ["SMCI", "NTAP", "ANET"],      # HPE (HPO variant)
-    "SNDK": ["STX", "WDC", "SMCI"],       # SanDisk
+    # ── AI / Large-Cap Semis ──────────────────────────────────
+    "NVDA": ["AMD",  "AVGO", "MRVL"],
+    "AMD":  ["NVDA", "AVGO", "QCOM"],
+    "AVGO": ["MRVL", "QCOM", "NVDA"],
+    "QCOM": ["AMD",  "AVGO", "MRVL"],
+    "MRVL": ["AVGO", "QCOM", "NVDA"],
+
+    # ── Analog / Embedded / Power Semis ──────────────────────
+    "STM":  ["ON",   "NXPI", "MCHP"],
+    "ON":   ["STM",  "NXPI", "MCHP"],
+    "NXPI": ["STM",  "ON",   "MCHP"],
+    "MCHP": ["STM",  "ON",   "NXPI"],
+    "NVTS": ["ON",   "STM",  "WOLF"],     # Navitas — power semis
+    "WOLF": ["NVTS", "STM",  "ON"],       # Wolfspeed — SiC
+
+    # ── Networking / Data-Center Semis ───────────────────────
+    "MXL":  ["MRVL", "COHR", "AVGO"],    # MaxLinear
+    "SMTC": ["MRVL", "AVGO", "MXL"],     # Semtech
+    "AXTI": ["COHR", "LITE", "MRVL"],    # AXT Inc — III-V substrates
+
+    # ── Photonics / Optical ───────────────────────────────────
+    "COHR": ["AXTI", "LITE", "GLW"],     # Coherent
+    "LITE": ["COHR", "AXTI", "GLW"],     # Lumentum
+    "LWLG": ["COHR", "AXTI", "LITE"],    # Lightwave Logic
+
+    # ── Semiconductor Test & Equipment ───────────────────────
+    "AEHR": ["COHU", "ONTO", "MKSI"],    # Aehr Test Systems
+    "COHU": ["AEHR", "ONTO", "MKSI"],
+    "ONTO": ["AEHR", "COHU", "MKSI"],    # Onto Innovation
+
+    # ── China Tech / ADR ─────────────────────────────────────
+    "BABA": ["JD",   "PDD",  "BIDU"],    # Alibaba
+    "JD":   ["BABA", "PDD",  "BIDU"],    # JD.com
+    "PDD":  ["BABA", "JD",   "BIDU"],    # Pinduoduo
+    "BIDU": ["BABA", "JD",   "PDD"],     # Baidu
+
+    # ── Chinese EV ────────────────────────────────────────────
+    "LI":   ["NIO",  "XPEV", "TSLA"],    # Li Auto
+    "NIO":  ["LI",   "XPEV", "TSLA"],
+    "XPEV": ["LI",   "NIO",  "TSLA"],    # XPeng
+    "HSAI": ["OUST", "AEYE", "LIDR"],    # Hesai — LiDAR
+
+    # ── Biotech / Oncology ────────────────────────────────────
+    "RLAY": ["RVMD", "KRYS", "RXDX"],    # Relay Therapeutics
+    "RVMD": ["RLAY", "KRYS", "RXDX"],    # Revolution Medicines
+    "KRYS": ["RLAY", "RVMD", "RXDX"],    # Krystal Biotech
+
+    # ── Uranium / Nuclear ─────────────────────────────────────
+    "URG":  ["UEC",  "DNN",  "NXE"],     # Ur-Energy
+    "UEC":  ["URG",  "DNN",  "NXE"],     # Uranium Energy
+    "DNN":  ["URG",  "UEC",  "NXE"],     # Denison Mines
+
+    # ── Lithium / Battery Metals ──────────────────────────────
+    "LAC":  ["ALB",  "SQM",  "LTHM"],    # Lithium Americas
+    "ALB":  ["LAC",  "SQM",  "LTHM"],    # Albemarle
+    "SQM":  ["LAC",  "ALB",  "LTHM"],    # SQM
+
+    # ── AI Edge / Small-Cap Tech ──────────────────────────────
+    "GRRR": ["SOUN", "BBAI", "CEVA"],    # Gorilla Technology
+    "SOUN": ["GRRR", "BBAI", "CEVA"],    # SoundHound
+    "BBAI": ["GRRR", "SOUN", "CEVA"],    # BigBear.ai
+    "PENG": ["SMCI", "NVDA", "ANET"],    # Penguin Solutions
+
+    # ── Drones / UAM ──────────────────────────────────────────
+    "UMAC": ["JOBY", "ACHR", "LILM"],    # Unusual Machines
+    "JOBY": ["UMAC", "ACHR", "LILM"],
+
+    # ── Industrials ───────────────────────────────────────────
+    "CNH":  ["DE",   "AGCO", "CNHI"],    # CNH Industrial
 }
 
 # Single-stock leverage/inverse ETF mapping
