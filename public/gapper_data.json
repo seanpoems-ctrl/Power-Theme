@@ -1,5 +1,5 @@
 {
-  "scan_time": "2026-06-02 23:55 ET",
+  "scan_time": "2026-06-02 23:58 ET",
   "earnings_today": [],
   "gappers": [
     {
@@ -35,7 +35,7 @@
       "technical_status": "Fail (Avg $Vol $76M < $100M)",
       "verification": {
         "status": "Verified",
-        "confidence_score": 100,
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
@@ -65,18 +65,18 @@
       "mkt_cap": 74502627500,
       "rvol": 5.9,
       "adr_pct": 5.29,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "HPE surged **19%** after reporting **blowout earnings** on Monday, closing its **best day ever**, indicating strong fundamental performance.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 91,
-      "grade": "A",
-      "finviz_theme": "AI Compute",
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "HPE's stock surged **19%** after reporting **blowout earnings** on Monday, marking its **best day ever** closing performance.",
-        "impact": "This strong positive reaction suggests significant investor confidence in HPE's financial performance and future growth trajectory, likely leading to continued positive momentum."
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nHPE experienced a significant stock surge of **19%** following its **blowout earnings** report on Monday. This immediate market reaction led to the stock closing its **best day ever**.\n\n• **The Growth (Momentum)**\nThe strong earnings performance and subsequent market enthusiasm indicate robust underlying business momentum. This suggests potential for sustained upward price momentum as investors factor in the company's improved fundamental outlook and potentially revised future guidance.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
       "peer_tickers": [
         "SMCI",
         "NTAP",
@@ -94,27 +94,21 @@
           "mult": "3x"
         }
       ],
-      "headlines": [
-        {
-          "title": "HPE surges 19% after Monday's blowout earnings, closing its best day ever - CNBC",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE5oWDdtcnBVVUF5WEhCbllLTDhHZ0VpMTAyOWYtbnFNbEV1eW1wSzF2NEV5NldUOUl2YUhLZUpvWDQxalhpSDdoM1pWTkpHcmpGakR5MFh2RGx6WnJ5dlFhd0pMUkwtb2tYb2tXRmtqdVJGQjRvVWJTTlNkZ1HSAYIBQVVfeXFMTmk5UXRJZVI5NmYwemVfWnNNWTdjc2Z5ZGpCbDg0VnJTYWctbnN4YjNyNURSYndIQlMtUWtvNUxpWHh1Zm5ucXBwMGFfTEtMX19Od1ZUTnJtSUJDZnlwQVhQSW1SblZoczg1d1pVbm9KcGF5UkxHeWE4cXBXMkQxaHBHZw?oc=5"
-        }
-      ],
+      "headlines": [],
       "float_shares": "1.32B",
       "short_float": "5.14%",
       "daily_pct": 19.47,
-      "industry": "AI Compute",
+      "industry": "—",
       "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 100,
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "HPE surged 19%",
-        "discrepancy_note": "Source A (Finviz) contains no information. Source B (Google News) article [1] confirms 'HPE surges 19%', but both sources are required for 'Verified'."
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "Source B (Google News) headlines [3] 'HPE stock hits record high on Nvidia Vera CPU server launch' and [5] 'Booming AI Demand Powers HP Enterprise's Sales to a New Record' explicitly identify immediate fundamental catalysts, directly contradicting the primary claim that none were found."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -125,8 +119,8 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     },
     {
       "ticker": "RLAY",
@@ -180,8 +174,8 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": "The primary claim states no immediate fundamental catalyst was found. However, Source B [2] explicitly mentions 'RLAY stock declines pre-market after $175M offering,' identifying a specific $175M offering as a fundamental catalyst for stock movement. This directly contradicts the initial claim."
+        "primary_claim": "A $175M offering by RLAY.",
+        "discrepancy_note": "The initial analysis claims 'No immediate fundamental catalyst found'. However, Source B [2] specifically mentions an '$175M offering' as a pre-market event affecting RLAY stock, which is a fundamental catalyst. This claim of a $175M offering is only present in Source B [2] and is not mentioned or confirmed by Source A (Finviz News)."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -237,13 +231,13 @@
       "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 100,
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
         "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": "The primary claim states 'No immediate fundamental catalyst found', but Google News sources B[1] and B[3] explicitly cite Nvidia CEO Jensen Huang's statement that Marvell could be the next trillion-dollar company as a clear fundamental catalyst for the stock's surge."
+        "discrepancy_note": "The initial summary claims no immediate fundamental catalyst, but Google News sources [1] and [4] explicitly cite Nvidia CEO Jensen Huang's statement about Marvell potentially becoming the 'next trillion-dollar company' as a key driver for the stock's surge, which constitutes a significant fundamental catalyst. Finviz did not provide news."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -268,17 +262,17 @@
       "rvol": 1.98,
       "adr_pct": 4.29,
       "category": "Thematic Narratives",
-      "theme": "Data-Center Growth Target Revision",
-      "reasoning": "STMicroelectronics shares rallied after the chip maker raised its data-center revenue target, signaling strong segmental growth.",
+      "theme": "Growth Segment Expansion",
+      "reasoning": "STMicroelectronics rallied after the chip maker **raised** its **data-center revenue target**, indicating improved outlook for a key growth segment.",
       "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
       "conviction": 59,
       "grade": "A",
       "finviz_theme": "Semiconductors - Compute",
       "analysis_detail": {
-        "catalyst": "STMicroelectronics shares **rallied** after the chip maker **raised its data-center revenue target** on **2026-06-02**, indicating an improved outlook for a key growth segment.",
-        "impact": "This revision signals **increased confidence** in their data-center strategy, potentially leading to **upside earnings revisions** and **sustained investor interest** in their high-growth semiconductor products."
+        "catalyst": "STMicroelectronics shares **rallied** after the company **raised** its **data-center revenue target**, signaling a stronger than anticipated performance and demand within this critical semiconductor segment.",
+        "impact": "This upward revision suggests **increased confidence** in future growth and potentially **higher revenue visibility**, which could drive **positive analyst revisions** and sustained momentum for the stock."
       },
-      "analysis_details": "• **The Narrative**\nSTMicroelectronics saw its shares **rally** following the announcement that the **chip maker raised its data-center revenue target**. This strategic update, delivered on **2026-06-02**, highlights the company's strong performance and optimistic outlook within the critical data-center segment. The positive adjustment to the target suggests robust demand and successful execution in this high-growth market.\n\n• **Explosiveness**\nThe upgrade in the data-center revenue target signifies a potent catalyst for **positive price momentum**. This revised outlook enhances the company's growth narrative, potentially attracting further institutional interest and driving continued re-rating of the stock. Strong relative volume (**2.0x**) indicates significant conviction behind the current price action.",
+      "analysis_details": "• **The Narrative**\nSTMicroelectronics saw its shares **rally** following the announcement that the chip maker **raised** its **data-center revenue target**. This indicates a positive shift in expectations for demand and profitability within this key growth segment of their business.\n\n• **Explosiveness**\nThe **raised data-center revenue target** provides a strong fundamental tailwind, suggesting an expanding market opportunity and enhanced competitive positioning for STM in this crucial area. This positive update can fuel continued price momentum as investors factor in improved future earnings potential.",
       "peer_tickers": [
         "ON",
         "NXPI",
@@ -309,14 +303,14 @@
       "industry": "Semiconductors - Compute",
       "technical_status": "Pass",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
+        "status": "Unconfirmed",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "STMicroelectronics doubled its data-center revenue target.",
-        "discrepancy_note": "The catalyst summary states STMicroelectronics 'raised its data-center revenue target' but does not provide a specific numerical value like 'doubled'. Source B[3] (Insider Monkey) mentions 'Firm Doubles Revenue Outlook' but does not explicitly link this doubling to the 'data-center' segment. Source B[1] (WSJ) confirms 'Raises Data-Center Revenue Target' but does not specify the amount or percentage of the raise. Source A (Finviz News) contains no information. Since the specific claim of 'doubled its data-center revenue target' is not explicitly confirmed by two sources with matching specifics, and elements are split across headlines, it is marked as a discrepancy."
+        "primary_claim": "STMicroelectronics raised its data-center revenue target to a specific dollar amount or by a specific percentage.",
+        "discrepancy_note": null
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -341,17 +335,17 @@
       "rvol": 3.71,
       "adr_pct": 7.45,
       "category": "New Contract/Partnership",
-      "theme": "New Contracts",
-      "reasoning": "GRRR announced an extended collaboration with SMCI and a **$2B India supply deal**, unlocking a **multi-billion-dollar revenue opportunity** in data center infrastructure.",
+      "theme": "New Contracts & Partnership",
+      "reasoning": "GRRR secured a **$2B India supply deal** with **SMCI**, extending their collaboration and unlocking **multi-billion-dollar revenue opportunities**, marking its **third data center infra deal** this month.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 85,
       "grade": "C",
       "finviz_theme": "Cloud Data Centers",
       "analysis_detail": {
-        "catalyst": "GRRR extended its collaboration with **SMCI** after securing a **$2B India Supply Deal**, which analysts expect to unlock a **multi-billion-dollar revenue opportunity**. This marks GRRR's **third data center infra deal in a month**, driving retail interest towards the **$100 stock mark**.",
-        "impact": "This significant contract signals **strong revenue visibility** and **market expansion** into the Indian data center market, potentially leading to **upside revisions** in future revenue guidance and stock price targets."
+        "catalyst": "GRRR and **SMCI** extended their collaboration after securing a significant **$2B India supply deal**, which is projected to unlock a **multi-billion-dollar revenue opportunity**. This represents the **third data center infrastructure deal** for GRRR within a single month, attracting retail interest towards the **$100 stock mark**.",
+        "impact": "This substantial **new contract** and **strategic partnership** with a key player like **SMCI** significantly enhances GRRR's revenue visibility and market positioning in the rapidly growing **data center infrastructure** sector, suggesting potential for **material upside revisions** to future guidance and sustained price momentum."
       },
-      "analysis_details": "• **Impact**\nGRRR's extended collaboration with **SMCI** includes a pivotal **$2B India Supply Deal**, which is projected to unlock a **multi-billion-dollar revenue opportunity**. This follows GRRR securing its **third data center infra deal in a month**, indicating robust growth in its infrastructure segment.\n\n• **Strategic Value**\nThis partnership strengthens GRRR's position in the critical **data center infrastructure market**, especially in the high-growth **Indian region**. The consistent deal flow suggests strong demand for GRRR's offerings and could attract significant institutional interest, potentially validating a push towards the **$100 stock mark**.",
+      "analysis_details": "• **Impact**\nGRRR has secured a substantial **$2B India supply deal** through an extended collaboration with **SMCI**, signaling a significant revenue driver. This deal is anticipated to unlock a **multi-billion-dollar revenue opportunity** for the company. Importantly, this marks GRRR's **third data center infrastructure deal** within a month, underscoring growing traction in the sector.\n\n• **Strategic Value**\nThe partnership with **SMCI** and the scale of the **$2B India supply deal** significantly bolsters GRRR's competitive position in the global data center market. The consistent flow of **data center infra deals** suggests strong execution and increasing market share, which can attract further institutional interest and validate a path towards the **$100 stock mark** as observed by retail investors.",
       "peer_tickers": [
         "SOUN",
         "BBAI",
@@ -388,13 +382,13 @@
       "technical_status": "Fail (Avg $Vol $42M < $100M)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 85,
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
         "primary_claim": "$2B India supply deal",
-        "discrepancy_note": "Source A (Finviz News) has no content to confirm the claim. Source B (Google News) provides multiple articles confirming the '$2B India supply deal' or similar '$2B' figures related to India."
+        "discrepancy_note": "Source A (Finviz) contains no information to confirm or deny the claim. Source B (Google News) contains multiple articles confirming a $2B India supply deal or revenue potential."
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -419,17 +413,17 @@
       "rvol": 1.69,
       "adr_pct": 5.3,
       "category": "Earnings",
-      "theme": "Earnings Report",
-      "reasoning": "Hesai (HSAI) surged **over 11%** following its Q4 2025 Earnings Call, amidst a collective rally in Chinese ADRs.",
+      "theme": "Earnings",
+      "reasoning": "HSAI reported quarterly results; earnings catalyst detected in headlines.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 79,
+      "conviction": 50,
       "grade": "C",
-      "finviz_theme": "Electric Vehicles",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "Hesai (HSAI) experienced a significant price movement, surging **over 11%**, following its **Q4 2025 Earnings Call**. This move occurred as part of a **collective rally among leading Chinese ADRs**.",
-        "impact": "The positive market reaction to earnings, amplified by broader sector tailwinds, signals potential investor confidence in the company's performance and future outlook."
+        "catalyst": "HSAI reported quarterly results; earnings catalyst detected in headlines.",
+        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nHesai (HSAI.US) experienced a notable price surge of **over 11%** on the heels of its **Q4 2025 Earnings Call Transcript** becoming available. This strong upward movement indicates a positive market reaction to the company's latest financial results or outlook.\n\n• **The Growth (Momentum)**\nThe stock's rally was not isolated, as it occurred within a broader context of **Leading Chinese ADRs Rally Collectively**. This collective momentum suggests either strong industry tailwinds or a generally positive sentiment flowing into Chinese equities, amplifying HSAI's post-earnings performance.",
+      "analysis_details": "• **The Results**\nHSAI reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
       "peer_tickers": [
         "OUST",
         "AEYE",
@@ -462,17 +456,17 @@
       "float_shares": "129.91M",
       "short_float": "4.14%",
       "daily_pct": 8.14,
-      "industry": "Electric Vehicles",
+      "industry": "—",
       "technical_status": "Fail (Avg $Vol $50M < $100M)",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 95,
+        "status": "Unconfirmed",
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Hesai (HSAI) surged over 11%",
-        "discrepancy_note": "Source A (Finviz News) explicitly states '(none)', providing no confirmation for the surge percentage. Source B (Google News) confirms 'Surges Over 11%' in articles [2] and [4]."
+        "primary_claim": "HSAI reported quarterly results; earnings catalyst detected in headlines.",
+        "discrepancy_note": ""
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -495,19 +489,19 @@
       "avg_dollar_vol": 110761292,
       "mkt_cap": 15249692409,
       "rvol": 1.17,
-      "adr_pct": 2.99,
-      "category": "Thematic Narratives",
-      "theme": "EV Price Wars",
-      "reasoning": "Li Auto stock **plummeted to record lows** due to intensifying **EV price wars**, signaling severe competitive pressure.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 57,
-      "grade": "C",
-      "finviz_theme": "Electric Vehicles",
+      "adr_pct": 3.0,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "LI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "**Li Auto Stock** **plummeted to record lows** as **EV price wars intensified**.",
-        "impact": "This indicates severe **competitive pressure** within the **EV market**, likely compressing **margins** and negatively affecting **growth prospects**."
+        "catalyst": "LI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
       },
-      "analysis_details": "• **The Narrative**\nThe market is reacting to intensifying **EV price wars**, which have caused **Li Auto Stock** to **plummet to record lows**. This indicates a heightened competitive environment within the electric vehicle sector, significantly impacting the company's valuation. The **record low** price reflects deep market concerns over future profitability and market share.\n\n• **Explosiveness**\nThe current price action is **negative**, driven by the **intensifying EV price wars**, signaling continued downward pressure. This thematic shift suggests that **Li Auto** faces significant headwinds, making it a high-risk proposition for upside momentum until competitive dynamics stabilize or improve.",
+      "analysis_details": "• **What Happened**\nLI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "NIO",
         "XPEV",
@@ -535,16 +529,16 @@
       "float_shares": "842.97M",
       "short_float": "2.72%",
       "daily_pct": 6.12,
-      "industry": "Electric Vehicles",
+      "industry": "—",
       "technical_status": "Fail (ADR 3.0% < 4%)",
       "verification": {
         "status": "Unconfirmed",
-        "confidence_score": 100,
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Li Auto stock plummeted to record lows (or 52-week lows)",
+        "primary_claim": "LI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
         "discrepancy_note": ""
       },
       "gates_passed": 4,
@@ -556,8 +550,8 @@
         "gate_adr": false
       },
       "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     },
     {
       "ticker": "MXL",
@@ -605,14 +599,14 @@
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 95,
+        "status": "Unconfirmed",
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": "Source B (Google News) explicitly mentions a potential fundamental catalyst: 'MaxLinear Targets Growing Edge Networking Opportunity With New Deal', which directly contradicts the claim that no immediate fundamental catalyst was found."
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -672,14 +666,14 @@
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
+        "status": "Unconfirmed",
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found for NVTS.",
-        "discrepancy_note": "The primary claim states 'No immediate fundamental catalyst found.' However, Google News Source [2] mentions 'investor-conference chatter and AI data-center narrative stay in focus' as reasons for Navitas Semiconductor's jump, suggesting fundamental drivers/catalysts are present and contributing to the price action."
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -739,14 +733,14 @@
       "industry": "—",
       "technical_status": "Fail (Avg $Vol $25M < $100M)",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
+        "status": "Unconfirmed",
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "URG stock is up 16% today.",
-        "discrepancy_note": "Source B reports $URG stock is up 16% today, but Source A does not provide any information to confirm this claim."
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
       },
       "gates_passed": 2,
       "gates_detail": {
@@ -771,17 +765,17 @@
       "rvol": 0.63,
       "adr_pct": 7.83,
       "category": "Earnings",
-      "theme": "Earnings Call Info",
-      "reasoning": "Semtech held its **Q1 earnings call**, with the headline focusing on **analyst questions** but disclosing no **specific financial results**.",
+      "theme": "Earnings",
+      "reasoning": "SMTC reported quarterly results; earnings catalyst detected in headlines.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 75,
-      "grade": "C",
-      "finviz_theme": "Semiconductors - Analog",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "Semtech announced its **Q1 Earnings Call** on **2026-06-02**, with the public headline emphasizing **'Our Top 5 Analyst Questions'**. Crucially, no **specific financial results**, **revenue figures**, or **forward guidance** were disclosed in this reporting.",
-        "impact": "Without concrete financial details, this event provides no immediate fundamental driver, making any price movement highly speculative and lacking a clear conviction signal."
+        "catalyst": "SMTC reported quarterly results; earnings catalyst detected in headlines.",
+        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nThe headline from **2026-06-02** concerning **Semtech's Q1 Earnings Call** does not provide any **financial results**, **beats**, or **misses** relative to analyst expectations. There is **no disclosed surprise factor** for the quarter in this report.\n\n• **The Growth (Momentum)**\nWith **no revenue**, **profit**, or **segment growth figures** published in the headline, there is **no data** to assess the company's Q1 momentum or future growth trajectory. This makes any fundamental momentum assessment impossible based on the provided information.\n\n• **The Guide**\nThe headline offers **no forward guidance** or **management commentary** on future performance. The focus on **\"Top 5 Analyst Questions\"** suggests discussion occurred, but the **substance of the guidance remains undisclosed**, providing no forward visibility.",
+      "analysis_details": "• **The Results**\nSMTC reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
       "peer_tickers": [
         "MRVL",
         "AVGO",
@@ -809,7 +803,7 @@
       "float_shares": "92.06M",
       "short_float": "5.91%",
       "daily_pct": 11.4,
-      "industry": "Semiconductors - Analog",
+      "industry": "—",
       "technical_status": "Pass",
       "verification": {
         "status": "Unconfirmed",
@@ -818,7 +812,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Semtech held its **Q1 earnings call**, with the headline focusing on **analyst questions** but disclosing no **specific financial results**.",
+        "primary_claim": "SMTC reported quarterly results; earnings catalyst detected in headlines.",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -830,8 +824,8 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     },
     {
       "ticker": "AVGO",
@@ -843,18 +837,18 @@
       "mkt_cap": 2280075031900,
       "rvol": 2.01,
       "adr_pct": 3.75,
-      "category": "Others",
-      "theme": "Financial Strategy / Investment",
-      "reasoning": "Broadcom's backing for a **$36 billion** Anthropic deal significantly lowers debt costs, highlighting its strategic financial influence.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 60,
+      "category": "New Contract/Partnership",
+      "theme": "Strategic Partnership / Financial Backing",
+      "reasoning": "Broadcom's backing for the **$36 billion Anthropic deal** significantly lowers debt costs, demonstrating strategic financial involvement.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 80,
       "grade": "B",
       "finviz_theme": "AI Compute",
       "analysis_detail": {
-        "catalyst": "Broadcom's backing has directly led to **lowered debt costs** for a substantial **$36 billion Anthropic deal**. This involvement demonstrates Broadcom's significant financial and strategic influence in key emerging technology sectors like AI.",
-        "impact": "This move solidifies Broadcom's strategic ties within the burgeoning AI ecosystem, potentially leading to deeper partnerships and revenue streams, while de-risking Anthropic's future financial needs."
+        "catalyst": "Broadcom's backing for the **$36 billion Anthropic deal** has successfully **lowered debt costs**. This significant financial commitment highlights Broadcom's strategic involvement in the high-growth AI sector.",
+        "impact": "This financial facilitation enhances the viability of a major AI player and underscores Broadcom's critical role and influence within the rapidly expanding AI ecosystem."
       },
-      "analysis_details": "• **What Happened**\nBroadcom provided crucial backing that resulted in **lowered debt costs** for the **$36 billion Anthropic deal**. This financial support underscores Broadcom's strategic importance and its ability to influence significant transactions in the technology landscape, particularly within the high-growth AI sector.\n\n• **Key Consideration**\nBroadcom's involvement in de-risking such a substantial AI deal positions it as a key facilitator and strategic partner in the AI ecosystem. This move could strengthen Broadcom's ties with leading AI players like Anthropic, potentially leading to future collaborations or increased demand for its underlying semiconductor and networking infrastructure that power AI compute.",
+      "analysis_details": "• **Strategic Financial Maneuver**\nBroadcom's crucial backing for the **$36 billion Anthropic deal** has resulted in **lowered debt costs**. This demonstrates Broadcom's direct financial and strategic involvement in enabling significant transactions within the burgeoning AI industry. The **$36 billion** figure highlights the scale and importance of this strategic support.\n\n• **Key Consideration**\nThis financial commitment signifies Broadcom's increasing influence and strategic positioning within the AI sector, extending beyond its core semiconductor offerings. It de-risks a major AI player and strengthens Broadcom's ecosystem presence, potentially leading to further collaborations and revenue opportunities related to AI infrastructure.",
       "peer_tickers": [
         "MRVL",
         "QCOM",
@@ -891,7 +885,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Broadcom's backing for a **$36 billion** Anthropic deal significantly lowers debt costs, highlighting its strategic financial influence.",
+        "primary_claim": "$36 billion Anthropic deal",
         "discrepancy_note": ""
       },
       "gates_passed": 4,
@@ -903,8 +897,8 @@
         "gate_adr": false
       },
       "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     },
     {
       "ticker": "AEHR",
@@ -917,17 +911,17 @@
       "rvol": 1.13,
       "adr_pct": 11.28,
       "category": "Thematic Narratives",
-      "theme": "AI/EV Test Deepening",
-      "reasoning": "AEHR stock **rebounds** as its **AI and EV test story deepens**, yet **whipsaws** due to volatility around its growth narrative.",
+      "theme": "Narrative Reaffirmation",
+      "reasoning": "AEHR stock **rebounded** as its existing **AI and EV test story deepened**, despite experiencing recent **whipsaw volatility**.",
       "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
       "conviction": 57,
-      "grade": "C",
+      "grade": "B",
       "finviz_theme": "Semiconductors - Compute",
       "analysis_detail": {
-        "catalyst": "AEHR stock **rebounded** as the **AI and EV Test Story Deepens**, suggesting increasing market attention to its role in these high-growth sectors. However, the stock also **whipsawed**, indicating significant **volatility** surrounding its **growth story**.",
-        "impact": "This points to speculative interest driving price action, requiring careful risk management, as momentum could be short-lived without new, specific fundamental updates."
+        "catalyst": "AEHR stock **rebounded** as its established **AI and EV test story deepened**, emphasizing its role in critical advanced testing. The stock recently experienced **whipsaw volatility**.",
+        "impact": "This reaffirms the long-term growth thesis, suggesting **continued investor interest** in the company's exposure to high-growth **AI and EV** markets, potentially mitigating short-term price swings."
       },
-      "analysis_details": "• **The Narrative**\nAEHR's stock has seen a **rebound** as the market's focus on its **AI and EV Test Story Deepens**. This highlights growing investor awareness and interest in the company's position within these crucial, high-growth technology sectors.\n\n• **Explosiveness**\nDespite the positive narrative, the stock's recent price action has been characterized by **whipsaws**, indicating significant **volatility** as its **growth story meets market scrutiny**. This suggests a speculative component to the momentum, with potential for rapid price swings.",
+      "analysis_details": "• **The Narrative**\nAEHR stock **rebounded** as its established **AI and EV test story deepened**, highlighting the company's crucial position in advanced testing for these high-growth sectors. This comes despite the stock recently experiencing **whipsaw volatility**, indicating ongoing market re-evaluation of its growth trajectory.\n\n• **Explosiveness**\nThe deepening of the **AI and EV test story** suggests an ongoing strengthening of the company's fundamental drivers, which could provide sustained momentum. While recent price action saw **whipsaw volatility**, the reaffirmed narrative implies potential for continued upside as conviction in these thematic tailwinds solidifies.",
       "peer_tickers": [
         "COHU",
         "ONTO",
@@ -969,7 +963,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "AEHR stock **rebounds** as its **AI and EV test story deepens**, yet **whipsaws** due to volatility around its growth narrative.",
+        "primary_claim": "AEHR stock **rebounded** as its existing **AI and EV test story deepened**, despite experiencing recent **whipsaw volatility**.",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -995,17 +989,17 @@
       "rvol": 1.43,
       "adr_pct": 4.4,
       "category": "Others",
-      "theme": "Others",
-      "reasoning": "MCHP gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "theme": "Conference Announcement",
+      "reasoning": "Microchip Technology announced its **CEO and CFO** will **speak** and **present** at the upcoming **Evercore 2026 tech conference**, signaling future investor engagement.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
+      "conviction": 58,
+      "grade": "C",
+      "finviz_theme": "Semiconductors - Compute",
       "analysis_detail": {
-        "catalyst": "MCHP gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "Microchip Technology announced its **CEO and CFO** are scheduled to **speak** at the **Evercore 2026 tech conference**, with **Microchip Technology** also slated to **present** at the **2026 Evercore Global TMT Conference**. These are scheduled future events, not outcomes.",
+        "impact": "The announcement signals upcoming investor engagement opportunities, where management may provide updates on strategy or market outlook, potentially influencing future sentiment rather than immediate price momentum."
       },
-      "analysis_details": "• **What Happened**\nMCHP gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **What Happened**\nMicrochip Technology has announced that its **CEO and CFO** are scheduled to **speak** at the **Evercore 2026 tech conference**. Additionally, **Microchip Technology** is set to **present** at the **2026 Evercore Global TMT Conference**. These announcements pertain to upcoming investor relations events.\n\n• **Key Consideration**\nWhile signaling future investor engagement, the mere announcement of conference participation is typically a low-impact catalyst for immediate stock momentum. Investors will monitor these future events for any substantive updates or forward guidance that could influence the company's valuation or growth trajectory.",
       "peer_tickers": [
         "STM",
         "ON",
@@ -1038,17 +1032,17 @@
       "float_shares": "531.24M",
       "short_float": "5.51%",
       "daily_pct": 5.94,
-      "industry": "—",
+      "industry": "Semiconductors - Compute",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "MCHP gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
+        "primary_claim": "Microchip Technology's CEO and CFO will speak and present at the Evercore 2026 tech conference.",
+        "discrepancy_note": "Source B (Google News [2]) explicitly states 'Microchip CEO and CFO to speak at Evercore 2026 tech conference'. Source A (Finviz [1]) confirms 'Microchip Technology to Present at the 2026 Evercore Global TMT Conference', but does not specify that the CEO and CFO will be the speakers."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -1072,18 +1066,18 @@
       "mkt_cap": 1959897600,
       "rvol": 1.76,
       "adr_pct": 12.21,
-      "category": "Others",
+      "category": "Thematic Narratives",
       "theme": "Sector Sympathy",
-      "reasoning": "LWLG surged **15%** in sympathy with **Nvidia optimism**, reflecting broader sector tailwinds rather than specific company news.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "reasoning": "Lightwave Logic (LWLG) soared 15% in sympathy with broader Nvidia Optimism, indicating a sector-wide tailwind.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
       "conviction": 59,
       "grade": "C",
       "finviz_theme": "AI Networking",
       "analysis_detail": {
-        "catalyst": "Lightwave Logic (**LWLG**) soared **15%** due to **Nvidia optimism**, indicating a sector-wide uplift without specific company fundamental news. Additionally, a director received **13,612 RSUs** as an equity award.",
-        "impact": "This move is primarily driven by macro sector sentiment, making its sustainability dependent on broader industry trends rather than internal catalysts for **LWLG**."
+        "catalyst": "Lightwave Logic (**LWLG**) stock **soared 15%** on **June 2, 2026**, explicitly attributed to **\"Nvidia Optimism\"**, indicating a move driven by broader sector sentiment.",
+        "impact": "This secondary impact from sector tailwinds suggests a correlation to the broader AI and data center industry trend rather than unique fundamental strength for LWLG, posing a higher risk."
       },
-      "analysis_details": "• **What Happened**\nLightwave Logic (**LWLG**) experienced a significant surge, closing **up 15%**, driven by what is described as **Nvidia Optimism**. This indicates the stock's performance is currently correlated with the broader sentiment surrounding leaders in the AI and high-performance computing sector.\n\n• **Key Consideration**\nThe primary driver for the **15%** stock increase is a **sympathy move** rather than a specific fundamental catalyst unique to **LWLG**. While a director received **13,612 RSUs** as an equity award, this is not a market-moving event, suggesting current momentum is highly exposed to sector-wide news flow.",
+      "analysis_details": "• **The Narrative**\nLightwave Logic (**LWLG**) saw its stock **soar 15%** on **June 2, 2026**, directly linked to prevailing **\"Nvidia Optimism\"**. This strong price movement reflects the market's enthusiasm for companies perceived to benefit from the ongoing AI technology boom led by industry giants like **Nvidia**.\n\n• **Explosiveness**\nThe **15%** surge is primarily a secondary effect of broad sector sentiment, not a result of company-specific news or a new strategic initiative. While demonstrating the market's current focus on the AI theme, the absence of proprietary catalysts for **LWLG** makes the move potentially speculative and susceptible to shifts in broader market sentiment.",
       "peer_tickers": [
         "COHR",
         "AXTI",
@@ -1120,13 +1114,13 @@
       "technical_status": "Fail (Avg $Vol $87M < $100M)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 90,
+        "confidence_score": 75,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "15%",
-        "discrepancy_note": "Source A (Finviz) has no information. Source B (Google News) shows articles reporting a '15% surge' (e.g., Yahoo Finance, Insider Monkey) but also includes an article mentioning a '1041.6% surge' (Investing.com India), creating a conflict in the reported percentage change for LWLG, and indicating that 'BOTH sources' do not confirm the specific '15%' claim."
+        "primary_claim": "LWLG soared 15%",
+        "discrepancy_note": "Source A (Finviz) contains no news items, and therefore does not confirm the claim. Source B (Google News) includes multiple articles (Yahoo Finance, Insider Monkey) that explicitly state 'Lightwave Logic (LWLG) Rides on Nvidia Optimism, Soars 15%', confirming the percentage from that source category."
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -1150,18 +1144,18 @@
       "mkt_cap": 1932489333,
       "rvol": 3.89,
       "adr_pct": 6.73,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "LAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
+      "category": "Thematic Narratives",
+      "theme": "Project Development & Funding",
+      "reasoning": "LAC stock firmed as **Thacker Pass** funding and timeline **came into focus**, with project spending **surging**.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 65,
       "grade": "C",
-      "finviz_theme": "—",
+      "finviz_theme": "Materials - Metals & Mining",
       "analysis_detail": {
-        "catalyst": "LAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "LAC's stock firmed as the **Thacker Pass** project's **funding and timeline came into focus**, with project **spending surging**. This news indicates concrete progress on a critical asset.",
+        "impact": "This clarity on funding and timeline de-risks the project's development, potentially leading to **increased investor confidence** and **upside revisions** to future production estimates."
       },
-      "analysis_details": "• **What Happened**\nLAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **The Narrative**\nLAC's shares **firmed** and **steadied** as new information regarding the **Thacker Pass** project emerged, with its **funding and timeline coming into focus**. The company also reported that **Thacker Pass spending surges**, underscoring significant investment and progress. This indicates a strong commitment to advancing this critical lithium asset.\n\n• **Explosiveness**\nThis development bolsters the long-term thematic narrative around LAC as a key player in the **lithium supply chain**. The clarified funding path and accelerated spending suggest a potentially faster ramp-up to production, which could drive **momentum trading interest** as the project's derisking becomes more apparent. Continued positive updates on **Thacker Pass** will be crucial for sustaining upward trajectory.",
       "peer_tickers": [
         "ALB",
         "SQM",
@@ -1189,17 +1183,17 @@
       "float_shares": "184.49M",
       "short_float": "15.49%",
       "daily_pct": 4.36,
-      "industry": "—",
+      "industry": "Materials - Metals & Mining",
       "technical_status": "Fail (Avg $Vol $83M < $100M)",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 95,
+        "status": "Unconfirmed",
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "LAC lacks a clear fundamental catalyst",
-        "discrepancy_note": "Google News (Source B) headlines (1-4) repeatedly identify 'Thacker Pass Funding', 'Thacker Pass Timeline', 'Thacker Pass Spending Surges', and 'Thacker Pass Progress' as clear fundamental catalysts for LAC's stock movement, directly contradicting the claim that LAC lacks a clear fundamental catalyst."
+        "primary_claim": "LAC stock firmed as **Thacker Pass** funding and timeline **came into focus**, with project spending **surging**.",
+        "discrepancy_note": ""
       },
       "gates_passed": 2,
       "gates_detail": {
@@ -1224,17 +1218,17 @@
       "rvol": 0.92,
       "adr_pct": 16.62,
       "category": "Thematic Narratives",
-      "theme": "AI Data Center Bet",
-      "reasoning": "Wolfspeed **zoomed 15%** on announced **expansion efforts** and a strategic **AI data center bet taking shape**, driving significant momentum.",
+      "theme": "AI Data Center Expansion",
+      "reasoning": "Wolfspeed rallied **15%** on news of its **expansion efforts** and as its **AI data center bet takes shape**, signaling strategic growth.",
       "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
       "conviction": 56,
-      "grade": "A",
-      "finviz_theme": "Semiconductors - Analog",
+      "grade": "B",
+      "finviz_theme": "AI Compute",
       "analysis_detail": {
-        "catalyst": "Wolfspeed (WOLF) **zoomed 15%** following news of its **expansion efforts** and that its **AI data center bet takes shape**. The company is making strategic moves to capitalize on the burgeoning AI infrastructure market.",
-        "impact": "This development signals a strategic pivot towards high-growth AI segments, potentially leading to **increased revenue visibility** and a **re-rating** of the stock given the strong thematic tailwinds."
+        "catalyst": "Wolfspeed (WOLF) saw its stock **zoom 15%** following news of its **expansion efforts**, with the market reacting positively as its **AI data center bet takes shape**.",
+        "impact": "This strategic focus suggests potential **increased revenue streams** from high-growth AI infrastructure and could lead to **re-rating** as a key enabler in the AI supply chain."
       },
-      "analysis_details": "• **The Narrative**\nWolfspeed (WOLF) **zoomed 15%** following news of its **expansion efforts** and that its **AI data center bet takes shape**. This indicates a strategic commitment to leverage its technology within the high-growth AI infrastructure market, moving beyond traditional applications.\n\n• **Explosiveness**\nThe significant **15% rally** suggests strong market enthusiasm for WOLF's strategic direction towards **AI data centers**. This thematic alignment could drive sustained momentum as the company continues to execute on these **expansion efforts** and deepen its presence in a critical, high-demand sector.",
+      "analysis_details": "• **The Narrative**\nWolfspeed (WOLF) experienced a significant rally, with its stock **zooming 15%** as the market reacted positively to its **expansion efforts**. This surge is directly linked to the company's strategic push as its **AI data center bet takes shape**, positioning WOLF within the high-growth artificial intelligence infrastructure theme.\n\n• **Explosiveness**\nThe clear articulation of a strategic focus on **AI data centers** and associated **expansion efforts** provides a strong narrative tailwind, indicating potential for sustained momentum. This development signals WOLF's intent to capture a share of the burgeoning AI market, potentially driving future revenue growth and justifying a re-evaluation of its market positioning.",
       "peer_tickers": [
         "NVTS",
         "STM",
@@ -1267,17 +1261,17 @@
       "float_shares": "28.73M",
       "short_float": "96.35%",
       "daily_pct": 15.32,
-      "industry": "Semiconductors - Analog",
+      "industry": "AI Compute",
       "technical_status": "Pass",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 60,
+        "status": "Unconfirmed",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Wolfspeed zoomed 15%",
-        "discrepancy_note": "Source A (Finviz) has no news items to confirm the claim. Source B (Google News) headline [1] mentions 'Zooms 15%', but this is not corroborated by a second independent source within the provided list, and Source A provides no confirmation."
+        "primary_claim": "Wolfspeed rallied 15%",
+        "discrepancy_note": ""
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -1303,16 +1297,16 @@
       "adr_pct": 6.42,
       "category": "Thematic Narratives",
       "theme": "Sector Sympathy",
-      "reasoning": "GLW is surging in sympathy with other **optical stocks** following **Jensen Huang's** call favoring **optics** over **copper**.",
+      "reasoning": "**Huang's copper-vs-optics call** spurred **optical stocks surging**, including **Coherent** and **Lumentum**, creating strong **sector tailwinds** for **GLW**.",
       "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
       "conviction": 59,
       "grade": "B",
       "finviz_theme": "AI Networking",
       "analysis_detail": {
-        "catalyst": "**Jensen Huang's copper-vs-optics call** has sent **optical stocks surging**, with **Coherent** and **Lumentum** also rising sharply. This broad industry sentiment shift occurred on **2026-06-02**.",
-        "impact": "This thematic shift suggests **increased demand** and **favorable sentiment** for optical communication components, potentially leading to **higher revenue forecasts** for GLW's optical division."
+        "catalyst": "**Optical stocks surged** following **Huang's copper-vs-optics call**, directly impacting companies like **Coherent** and **Lumentum** with **sharp rises**. This broad sector tailwind benefits **GLW** as a key player in optical solutions.",
+        "impact": "The market is re-rating the long-term prospects of **optical solutions** versus traditional **copper**, suggesting sustained positive momentum and potential for **increased demand** in the **fiber optic** market."
       },
-      "analysis_details": "• **The Narrative**\n**Jensen Huang's copper-vs-optics call** has catalyzed a significant rally across **optical stocks**, with **Coherent** and **Lumentum** notably rising sharply. This broad sector movement, reported on **2026-06-02 22:36 UTC**, suggests a fundamental shift in perception towards **optical solutions** over traditional **copper** interconnects.\n\n• **Explosiveness**\nThe strong sentiment shift driven by a prominent industry voice like **Huang** can create sustained momentum for companies deeply integrated into the optical supply chain, such as GLW. This move reflects an industry-wide re-evaluation of high-speed interconnect technologies, potentially driving future investment and adoption within **networking stocks**.",
+      "analysis_details": "• **The Narrative**\nThe catalyst is driven by **Huang's impactful call on copper-vs-optics**, which immediately led to **optical stocks surging**. This sentiment shift benefited sector peers like **Coherent** and **Lumentum**, which saw **sharp rises**, indicating a broader positive re-evaluation of the optical industry.\n\n• **Explosiveness**\nThis thematic shift suggests significant capital rotation into the optical sector, potentially driving sustained momentum for **GLW**. The endorsement from a major figure like **Huang** adds credibility and could lead to continued institutional interest and demand for **fiber optic** and related products, especially within **networking** infrastructure.",
       "peer_tickers": [
         "COHR",
         "LITE",
@@ -1349,13 +1343,13 @@
       "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 95,
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Corning (GLW) Stock Up 13.4%",
-        "discrepancy_note": "Source B [5] states 'Corning Inc (GLW) Stock Up 13.4%'. Source A [1] mentions 'GLW Stocks Surge' but does not provide a specific percentage or dollar amount for GLW's increase."
+        "primary_claim": "Corning (GLW) stock surged by 13.4%.",
+        "discrepancy_note": "Source B [5] states 'Corning Inc (GLW) Stock Up 13.4%', but Source A [1] mentions 'GLW Stocks Surge' without providing a specific percentage. No other source confirms the 13.4% figure."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -1380,17 +1374,17 @@
       "rvol": 1.28,
       "adr_pct": 12.06,
       "category": "Government Policy",
-      "theme": "Government Funding",
-      "reasoning": "UMAC hit an **All-Time High** on **government funding buzz**, despite director Rich Sanford selling **$724,542** in stock.",
+      "theme": "Government Funding Buzz",
+      "reasoning": "Unusual Machines (UMAC) reached an **All-Time High** on **government funding buzz**, despite an insider selling **$724,542** in stock.",
       "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
       "conviction": 57,
       "grade": "B",
-      "finviz_theme": "Others",
+      "finviz_theme": "AI Robotics",
       "analysis_detail": {
-        "catalyst": "Unusual Machines (**UMAC**) recorded an **All-Time High** following market chatter regarding **government funding buzz**, indicating strong speculative interest.",
-        "impact": "This suggests potential for future growth tied to public sector contracts, though the 'buzz' status means the funding is not yet confirmed, introducing uncertainty, compounded by director Rich Sanford's sale of **$724,542** in stock."
+        "catalyst": "Unusual Machines (UMAC) **notched an All-Time High** on **June 3, 2026**, driven by speculative **government funding buzz**. Concurrently, director **Rich Sanford** sold **$724,542** in stock just hours before this market reaction.",
+        "impact": "This suggests strong momentum from potential policy support but highlights significant risk due to the unconfirmed nature of the funding and bearish insider activity."
       },
-      "analysis_details": "• **The Policy**\nUnusual Machines (**UMAC**) saw its stock reach an **All-Time High** today, primarily driven by market excitement surrounding **government funding buzz**. This indicates investor anticipation of new contracts or significant financial backing from governmental sources, fueling strong upward momentum.\n\n• **Direct Impact**\nDespite the positive catalyst, **Unusual Machines** director **Rich Sanford** executed an insider sale totaling **$724,542** in stock. This sale introduces a cautionary note, as it suggests an insider potentially cashing out amidst the speculative rally, creating a mixed signal for momentum investors.",
+      "analysis_details": "• **The Policy**\nUnusual Machines (UMAC) **notched an All-Time High** on **June 3, 2026**, fueled by speculative **government funding buzz**. This indicates significant market anticipation for potential policy-driven financial support, aligning with broader strategic initiatives.\n\n• **Direct Impact**\nThe unconfirmed nature of the **government funding buzz** presents a binary risk profile for UMAC, with strong short-term price momentum countered by potential disappointment if funding fails to materialize. Director **Rich Sanford's** sale of **$724,542** in stock just prior to the surge adds a layer of concern regarding insider conviction.",
       "peer_tickers": [
         "JOBY",
         "ACHR",
@@ -1423,17 +1417,17 @@
       "float_shares": "43.21M",
       "short_float": "14.94%",
       "daily_pct": 15.72,
-      "industry": "Others",
+      "industry": "AI Robotics",
       "technical_status": "Pass",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
+        "status": "Unconfirmed",
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "director Rich Sanford selling $724,542 in stock",
-        "discrepancy_note": "Source B (Google News, Investing.com) confirms director Rich Sanford sold $724,542 in stock. Source A (Finviz) does not contain this specific factual claim."
+        "primary_claim": "Unusual Machines (UMAC) reached an **All-Time High** on **government funding buzz**, despite an insider selling **$724,542** in stock.",
+        "discrepancy_note": ""
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -1458,17 +1452,17 @@
       "rvol": 1.92,
       "adr_pct": 7.54,
       "category": "Thematic Narratives",
-      "theme": "Sector Sympathy",
-      "reasoning": "Coherent surged to a **record high**, moving in sympathy with **Marvell's** strong performance and **Huang's** positive outlook on **optical stocks**.",
+      "theme": "AI Optics Narrative",
+      "reasoning": "Coherent surged to a **record high** as **optical stocks** gained on \"Huang's copper-vs-optics call\" and a **Marvell**-led sector rally.",
       "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
       "conviction": 59,
       "grade": "B",
       "finviz_theme": "AI Networking",
       "analysis_detail": {
-        "catalyst": "Coherent (COHR) hit a **record high** following **Marvell's skyrocket ride** and **Huang's influential copper-vs-optics call**, which sent **optical stocks surging** broadly.",
-        "impact": "This sector-wide tailwind suggests sustained interest in optical components, potentially driving further momentum for COHR."
+        "catalyst": "Coherent (**COHR**) **hit a record high** as **optical stocks surged** following **Huang's call** favoring optics over copper and a broader rally driven by **Marvell**.",
+        "impact": "This sector-wide momentum suggests **increased investor interest** and potential for **sustained capital inflow** into optical component providers."
       },
-      "analysis_details": "• **The Narrative**\n**Huang's pivotal copper-vs-optics call** has catalyzed a significant surge across **optical stocks**, reflecting an industry pivot towards optical solutions. Concurrently, **Marvell's strong performance** is reinforcing positive sentiment in related hardware.\n\n• **Explosiveness**\nCoherent (COHR) directly benefited from this thematic shift, hitting a **record high** as investors rotate into the optical sector. This indicates strong momentum driven by broader industry trends and leader performance.",
+      "analysis_details": "• **The Narrative**\nCoherent (**COHR**) **hit a record high** due to a broader surge in **optical stocks**. This sector-wide rally was specifically triggered by **Huang's influential call** favoring **optics over copper** and was further amplified by a **Marvell**-led upward momentum across related equities.\n\n• **Explosiveness**\nThe significant move to a **record high** on the back of a powerful thematic narrative signals strong investor conviction in the long-term growth of **optical solutions**, particularly for high-bandwidth applications. This suggests potential for **continued momentum** as the market re-rates the entire optical sector.",
       "peer_tickers": [
         "AXTI",
         "LITE",
@@ -1505,13 +1499,13 @@
       "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 90,
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Coherent (COHR) surged to a record high",
-        "discrepancy_note": "Source B explicitly confirms Coherent (COHR) reached a 'Record High' or 'All-Time High' (B4, B5). Source A mentions COHR surging, rocketing, and rising sharply (A1, A2, A4) but does not specifically confirm it reached a 'record high'."
+        "primary_claim": "Coherent surged to a record high",
+        "discrepancy_note": "Finviz (Source A) headlines indicate Coherent stock surged, gained, and rose sharply, but none explicitly state it reached a 'record high' or 'all-time high'. Google News (Source B) headlines [4] and [5] explicitly confirm 'Coherent Stock Gets The All-Time High' and 'Coherent (COHR) Hits Record High'."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -1536,17 +1530,17 @@
       "rvol": 1.52,
       "adr_pct": 2.82,
       "category": "Thematic Narratives",
-      "theme": "AI Strategy & Global Partnership",
-      "reasoning": "Alibaba shares gained **4.8%** on renewed investor focus on new **AI Initiatives** and a fresh **UEFA Partnership**, indicating strategic growth and market traction.",
+      "theme": "Renewed Investor Focus",
+      "reasoning": "Alibaba shares rose **4.8%** on renewed investor focus on **new AI initiatives** and a **fresh UEFA partnership**, generating positive momentum.",
       "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
       "conviction": 58,
       "grade": "B",
-      "finviz_theme": "Consumer - E-Commerce",
+      "finviz_theme": "AI Applications",
       "analysis_detail": {
-        "catalyst": "Alibaba shares rose **4.8%** following investor refocus on the company's new **AI Initiatives** and a fresh **UEFA Partnership**. This positive sentiment signals renewed interest in Alibaba's strategic growth vectors.",
-        "impact": "The combination suggests potential for **enhanced revenue streams** through global marketing and **long-term growth** driven by its advancing AI capabilities, improving investor confidence."
+        "catalyst": "Alibaba shares climbed **4.8%** after investors refocused on the company's **new AI initiatives** and a **fresh UEFA partnership**. This positive sentiment also follows the disclosure of the CFO receiving **160,000 RSUs** vesting quarterly from **2026**.",
+        "impact": "The renewed focus on growth drivers like AI and strategic partnerships suggests potential for enhanced long-term revenue streams and improved market perception, bolstering momentum."
       },
-      "analysis_details": "• **The Narrative**\nAlibaba shares surged **4.8%** as investor focus shifted towards the company's new **AI Initiatives** and a significant fresh **UEFA Partnership**. This indicates a positive re-evaluation of Alibaba's future growth trajectory, driven by strategic advancements in technology and global market expansion efforts. The **CFO's 160,000 RSU grant**, vesting quarterly from **2026**, also signals strong internal confidence.\n\n• **Explosiveness**\nThe renewed emphasis on **AI Initiatives** positions Alibaba at the forefront of a high-growth sector, promising innovation across its core businesses and potential new revenue streams. Simultaneously, the **UEFA Partnership** offers a powerful platform for international brand building and user acquisition, tapping into a vast global audience and potentially enhancing the company's competitive standing in crucial overseas markets.",
+      "analysis_details": "• **The Narrative**\nAlibaba's stock surged **4.8%** as investors shifted focus towards the company's **new AI initiatives** and a recently announced **fresh UEFA partnership**. This combination highlights strategic moves aimed at invigorating growth and expanding its global footprint. Additionally, the company's CFO was granted **160,000 Restricted Stock Units (RSUs)**, vesting quarterly from **2026**.\n\n• **Explosiveness**\nThe market's positive reaction indicates strong investor sentiment regarding Alibaba's pivot towards high-growth areas like AI and strategic brand partnerships such as UEFA. This could lead to sustained momentum as the company executes on these initiatives, potentially driving further re-rating and attracting broader institutional interest.",
       "peer_tickers": [
         "JD",
         "PDD",
@@ -1574,17 +1568,17 @@
       "float_shares": "2.40B",
       "short_float": "1.66%",
       "daily_pct": 4.32,
-      "industry": "Consumer - E-Commerce",
+      "industry": "AI Applications",
       "technical_status": "Fail (ADR 2.8% < 4%)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Alibaba shares gained **4.8%** on renewed investor focus on new **AI Initiatives** and a fresh **UEFA Partnership**, indicating strategic growth and market traction.",
-        "discrepancy_note": ""
+        "primary_claim": "Alibaba shares rose 4.8%",
+        "discrepancy_note": "Source A (Finviz) does not mention BABA's share performance. Source B (Google News) reports conflicting percentages for BABA's rise: 4.8% (Moomoo), 4.3% (GuruFocus), and 4.1% (MarketBeat)."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -1609,17 +1603,17 @@
       "rvol": 1.04,
       "adr_pct": 14.41,
       "category": "Others",
-      "theme": "Affiliate Share Sales",
-      "reasoning": "An **AXT Inc. (AXTI) affiliate** listed **multiple proposed share sales** with **Needham**, signaling potential increased supply and selling pressure.",
+      "theme": "Share Sales / Flow Overhang",
+      "reasoning": "An **AXT Inc. affiliate** has listed **multiple proposed share sales** via **Needham**, creating potential share supply overhang.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 57,
       "grade": "C",
-      "finviz_theme": "Semiconductors - Compute",
+      "finviz_theme": "Others",
       "analysis_detail": {
-        "catalyst": "An **AXT Inc. (AXTI) affiliate** has listed **multiple proposed share sales** through **Needham** as the broker. This development implies an impending increase in the publicly available float.",
-        "impact": "This indicates potential **selling pressure** as a significant holder seeks to divest shares, which can negatively impact price momentum and create an overhang."
+        "catalyst": "An **AXT Inc. (AXTI) affiliate** has **listed multiple proposed share sales** with **Needham as broker**, indicating potential increased supply in the market.",
+        "impact": "This development suggests a potential **overhang** on the stock, possibly dampening positive momentum due to increased available shares for sale."
       },
-      "analysis_details": "• **The Buyer**\nAn **affiliate** of **AXT Inc. (AXTI)** has listed **multiple proposed share sales**, with **Needham** identified as the broker for these transactions. This constitutes a direct signal of an impending increase in the market supply of **AXTI** shares.\n\n• **Conviction Signal**\nThe intent of a major **affiliate** to sell shares typically reflects a reduced conviction in the immediate future prospects or a strategic exit by a significant holder. This event is likely to create an **overhang** on the stock, potentially dampening upward price momentum due to anticipated increased supply.",
+      "analysis_details": "• **What Happened**\nAn **AXT Inc. (AXTI) affiliate** has formally **listed multiple proposed share sales**, with **Needham** appointed as the facilitating **broker**. This action signals an intention by the affiliate to liquidate a portion of their holdings in the company.\n\n• **Key Consideration**\nThe proposed share sales introduce an element of supply overhang to the market, which can exert downward pressure on the stock price by increasing the float of tradable shares. Investors will be monitoring the execution and size of these sales, as they could impact short-term momentum and investor sentiment, overshadowing any potential positive news.",
       "peer_tickers": [
         "COHR",
         "LITE",
@@ -1652,7 +1646,7 @@
       "float_shares": "62.00M",
       "short_float": "13.33%",
       "daily_pct": 1.19,
-      "industry": "Semiconductors - Compute",
+      "industry": "Others",
       "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
@@ -1661,8 +1655,8 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "An AXT Inc. (AXTI) affiliate listed multiple proposed share sales with Needham.",
-        "discrepancy_note": "Source A (Finviz News) had no relevant headlines. Source B (Google News) contained one article ('AXT Inc. (AXTI) affiliate lists multiple proposed share sales with Needham as broker - Stock Titan') that directly confirmed the claim, but the claim was not confirmed by both provided primary sources."
+        "primary_claim": "An AXT Inc. affiliate has listed multiple proposed share sales via Needham.",
+        "discrepancy_note": "Only one out of two Google News sources ([1] Stock Titan) and no Finviz sources confirm the specific claim. The Stock Titan headline directly matches the claim, but Finviz is empty and another Google News article ([2] simplywall.st) does not mention it, failing the requirement for confirmation by BOTH sources or multiple sources if a primary source is empty."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -1688,16 +1682,16 @@
       "adr_pct": 3.26,
       "category": "Government Policy",
       "theme": "Government Policy Change",
-      "reasoning": "US government lowered **tariffs** on **farm** and **industrial equipment**, which should improve **CNH's margins** and demand, aligning with **trader focus** on fundamentals.",
+      "reasoning": "CNH rallied as the **US lowered tariffs** on **farm and industrial equipment**, helping to alleviate **soaring costs** and improve **margins**.",
       "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
       "conviction": 58,
       "grade": "B",
-      "finviz_theme": "Others",
+      "finviz_theme": "Infrastructure",
       "analysis_detail": {
-        "catalyst": "The **US government** lowered **tariffs** on **farm** and **industrial equipment**, directly impacting CNH's core product segments and aiming to mitigate **soaring costs**. The market is already showing signs of this positive sentiment, with **CNH stock grinding higher** as **traders focus on margins and debt**.",
-        "impact": "This tariff reduction can lead to **improved profitability** by lowering input costs or increase **sales volumes** by making CNH's products more competitively priced, potentially driving **upward revisions** to future guidance."
+        "catalyst": "The **US** has **lowered tariffs** on **farm and industrial equipment** due to **soaring costs**, providing a direct tailwind to CNH's operational profitability. The stock is **grinding higher** as traders focus on improving **margins** and managing **debt**.",
+        "impact": "This government policy change is expected to alleviate **cost pressures**, potentially leading to **improved margins** and de-risking financial performance, which could attract further institutional flow focusing on **debt** and **margin** improvement."
       },
-      "analysis_details": "• **The Policy**\nThe **US government** has implemented a policy to **lower tariffs** on both **farm** and **industrial equipment**. This decision directly addresses **soaring costs** within these crucial sectors, signaling a more favorable operating environment.\n\n• **Direct Impact**\nFor CNH, this policy could translate to **reduced operational costs** or enhanced **pricing flexibility**, potentially boosting **margins** and **demand** for its products. The market has reacted positively, with **CNH stock grinding higher** as **traders focus on margins and debt**, anticipating improved financial performance.",
+      "analysis_details": "• **The Policy**\nThe **US** has **lowered tariffs** on **farm** and **industrial equipment**, a policy decision explicitly made because **costs soared**. This government action directly addresses a key challenge of rising input expenses for companies operating in this sector, like CNH.\n\n• **Direct Impact**\nThe **lowering of tariffs** is expected to immediately benefit CNH's operational profitability, particularly by improving **margins**. The market is actively responding, with **traders focusing on margins and debt** as the CNH stock **grinds higher**, signaling positive sentiment regarding the alleviation of **cost pressures**.",
       "peer_tickers": [
         "DE",
         "AGCO",
@@ -1725,16 +1719,16 @@
       "float_shares": "869.47M",
       "short_float": "6.71%",
       "daily_pct": 11.17,
-      "industry": "Others",
+      "industry": "Infrastructure",
       "technical_status": "Fail (ADR 3.3% < 4%)",
       "verification": {
         "status": "Verified",
-        "confidence_score": 100,
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "US government lowered tariffs on farm and industrial equipment",
+        "primary_claim": "US lowered tariffs on farm and industrial equipment",
         "discrepancy_note": null
       },
       "gates_passed": 3,
@@ -1760,17 +1754,17 @@
       "rvol": 1.86,
       "adr_pct": 9.54,
       "category": "Thematic Narratives",
-      "theme": "AI Strategy Shift",
-      "reasoning": "PENG stock jumped following an **AI board hire** which **offset** a **CFO exit**, indicating market confidence in its strategic AI focus.",
+      "theme": "AI Strategy Shift / Corporate Governance",
+      "reasoning": "PENG stock **jumped** after an **AI board hire** was announced, successfully **offsetting** the market's concern over a **CFO exit**, highlighting a strategic focus.",
       "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
       "conviction": 59,
       "grade": "B",
       "finviz_theme": "AI Applications",
       "analysis_detail": {
-        "catalyst": "PENG stock saw a jump after announcing an **AI board hire**, a strategic move that appears to have **offset** the departure of the **CFO**.",
-        "impact": "This suggests the market is valuing the new AI expertise and potential strategic direction more highly than the instability of a CFO transition, signaling potential future growth drivers linked to AI."
+        "catalyst": "PENG stock **jumped** following news that an **AI board hire** occurred, effectively **offsetting** the simultaneous **CFO exit**. The market reacted positively to the strategic addition in the AI domain.",
+        "impact": "This development signals a strategic pivot towards **AI integration**, potentially attracting new investor interest focused on **AI-driven growth**, despite executive turnover concerns."
       },
-      "analysis_details": "• **The Narrative**\nPENG stock saw a significant jump after the announcement of an **AI board hire**. This strategic addition to the board was seen as effectively **offsetting** the simultaneous **CFO exit**, indicating the market's positive reception to the company's deepening focus on artificial intelligence.\n\n• **Explosiveness**\nThe market's reaction suggests strong positive sentiment towards the company's pivot or enhanced focus on **AI initiatives**. The ability of an **AI board hire** to **offset** a negative event like a **CFO exit** highlights the high premium investors are placing on AI-driven growth narratives and potential future strategic changes.",
+      "analysis_details": "• **The Narrative**\nPENG's stock **jumped** on news of an **AI board hire**, which the market perceived as **offsetting** the impact of a **CFO exit**. This suggests investors are prioritizing the company's **strategic move into the artificial intelligence sector** over executive turnover concerns, creating a new thematic narrative.\n\n• **Explosiveness**\nThe inclusion of an **AI board member** can ignite a **new growth narrative** for PENG, potentially attracting momentum funds and retail investors keen on **AI-themed plays**. The **positive market reaction**, despite a **CFO departure**, indicates strong **speculative interest** in this **strategic shift**, driving short-term price momentum.",
       "peer_tickers": [
         "SMCI",
         "NVDA",
@@ -1806,14 +1800,14 @@
       "industry": "AI Applications",
       "technical_status": "Pass",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 70,
+        "status": "Unconfirmed",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "PENG stock jumped following an AI board hire which offset a CFO exit.",
-        "discrepancy_note": "Source B (Google News headlines [3] and [5]) confirms PENG experienced an 'AI Board Hire' and 'CFO Exit/Shift' and links these to a stock jump. Source A (Finviz News) contains no information regarding PENG, an AI board hire, or a CFO exit, thus it does not confirm the claim."
+        "primary_claim": "PENG stock jumped after an AI board hire was announced, successfully offsetting the market's concern over a CFO exit.",
+        "discrepancy_note": null
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -1834,7 +1828,7 @@
     "approach": "hybrid",
     "small_gaps": 21,
     "large_gaps": 4,
-    "total_headlines": 33,
+    "total_headlines": 32,
     "monthly_cost_usd": 0.01
   }
 }

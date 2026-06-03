@@ -5,6 +5,9 @@ Categorizes catalysts and generates trade hypotheses via Gemini 2.5 Flash
 Outputs public/gapper_data.json
 """
 
+import sys
+sys.dont_write_bytecode = True  # Prevent stale .pyc cache issues
+
 import json
 import os
 import re
