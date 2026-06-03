@@ -7426,7 +7426,7 @@ const ResearchContent = ({ text }) => {
         tableLines.push(lines[i]);
         i++;
       }
-      elements.push(<SnapshotMdTable key={i} md={tableLines.join("\n")} />);
+      elements.push(<SnapshotMdTable key={i} md={tableLines.join("\n")} wrap={true} />);
       continue;
     }
     // H2/H3 heading
@@ -7492,6 +7492,7 @@ const SearchBar = ({ data, search, setSearch }) => {
   const [research, setResearch]             = useState(null);
   const [researchLoading, setResearchLoading] = useState(false);
   const [researchError, setResearchError]   = useState(false);
+  const researchCache = useRef({});
   const [selectedSubTheme, setSelectedSubTheme] = useState(null); // subtheme name to expand stock list
   const [searchHistory, setSearchHistory] = useState(() => {
     try { return JSON.parse(localStorage.getItem('searchHistory') || '[]'); } catch { return []; }
@@ -7659,12 +7660,13 @@ const SearchBar = ({ data, search, setSearch }) => {
   const cachedPrice = fullResult ? priceCache[fullResult.ticker] : null;
   const displayPrice = livePrice || (fullResult?.price != null ? { price: fullResult.price, change_pct: fullResult.change_pct } : null) || cachedPrice;
 
-  // Reset news + research state when ticker changes
+  // Reset news + research state when ticker changes (restore from cache if available)
   useEffect(() => {
     setActiveTab("info");
     setNews([]);
     setNewsError(false);
-    setResearch(null);
+    const cached = fullResult?.ticker ? researchCache.current[fullResult.ticker] : null;
+    setResearch(cached || null);
     setResearchError(false);
   }, [fullResult?.ticker]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -7818,6 +7820,7 @@ const SearchBar = ({ data, search, setSearch }) => {
       if (!res.ok) throw new Error(res.status);
       const json = await res.json();
       const text = json.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      researchCache.current[ticker] = text;
       setResearch(text);
     } catch {
       setResearchError(true);
@@ -7877,7 +7880,7 @@ const SearchBar = ({ data, search, setSearch }) => {
 
       {/* Detail panel for exact match */}
       {open && fullResult && (
-        <div id="search-result-panel" className={`absolute top-full right-0 mt-1.5 bg-zinc-900 border border-zinc-700/60 rounded-lg shadow-2xl z-50 p-3 space-y-2 transition-all duration-200 ${activeTab === "research" ? "w-[520px]" : "w-72"}`}>
+        <div id="search-result-panel" className={`absolute top-full right-0 mt-1.5 bg-zinc-900 border border-zinc-700/60 rounded-lg shadow-2xl z-50 p-3 space-y-2 transition-all duration-200 ${activeTab === "research" ? "w-[700px]" : "w-72"}`}>
           <div className="flex items-baseline gap-2 flex-wrap">
             <span
               className="text-sm font-bold text-zinc-100 cursor-pointer hover:text-blue-400 transition-colors"
@@ -8094,7 +8097,7 @@ const SearchBar = ({ data, search, setSearch }) => {
 
 // ── Snapshot Markdown Table ────────────────────────────────────────────────────
 
-const SnapshotMdTable = ({ md }) => {
+const SnapshotMdTable = ({ md, wrap = false }) => {
   if (!md) return null;
   const lines = md.split('\n').map(l => l.trim()).filter(Boolean);
   const tableLines = lines.filter(l => l.startsWith('|'));
@@ -8121,7 +8124,7 @@ const SnapshotMdTable = ({ md }) => {
           {bodyRows.map((row, ri) => (
             <tr key={ri} className="border-b border-zinc-800/30 hover:bg-zinc-800/20">
               {parseRow(row).map((cell, ci) => (
-                <td key={ci} className="py-0.5 px-2 font-mono text-zinc-300 whitespace-nowrap">{cell}</td>
+                <td key={ci} className={`py-0.5 px-2 font-mono text-zinc-300 ${wrap ? "whitespace-normal" : "whitespace-nowrap"}`}>{cell}</td>
               ))}
             </tr>
           ))}
