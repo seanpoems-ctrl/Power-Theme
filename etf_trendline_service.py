@@ -1,3 +1,4 @@
+import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows cp1252 fix
 """
 etf_trendline_service.py — ETF 主題趨勢線突破／拉回偵測
 

@@ -1,6 +1,6 @@
 {
-  "generated_at": "June 02, 2026 (19:14 EDT)",
-  "session": "Post-Market",
+  "generated_at": "June 03, 2026 (00:31 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 66934.33,
-      "change_pct": 0.91
+      "price": 68697.98,
+      "change_pct": 2.94
     },
     "dax": {
       "label": "DAX",
-      "price": 25003.04,
-      "change_pct": -0.4
+      "price": 25124.17,
+      "change_pct": 0.48
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10339.0,
-      "change_pct": -0.68
+      "price": 10373.5,
+      "change_pct": 0.33
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 56.5,
-    "mmth": 61.5,
+    "s5fi": 62.0,
+    "mmth": 59.5,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Tech-led gains, global divergence",
+  "mood": "Positive Bias / Tech-Led Strength",
   "analysis": {
-    "action_line": "VIX 15.77 Normal + S5FI 56.5% breadth + mixed global tape → favor RS leaders in tech, monitor key support.",
-    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 gaining +0.91% while European indices like the DAX and FTSE 100 experienced declines of -0.40% and -0.68% respectively. US credit conditions appear stable with the 10Y Yield at 4.45%, though the BAML HY Spread regime remains unknown. US market breadth, measured by S5FI at 56.5% and MMTH at 61.5%, indicates a moderate number of stocks sustaining positive momentum above key moving averages. The S&P 500 saw a modest gain of +0.13%, with the Nasdaq 100 leading at +0.48%. This divergence suggests a selective market where internal strength isn't uniformly broad.",
-    "analysis_para2": "The mechanical plan remains centered on identifying clear follow-through in leading sectors, particularly Hardware and Semiconductors. Traders should monitor the S&P 500 at 7609 and Nasdaq 100 at 30660 for further upside conviction. Focus on individual stocks demonstrating superior relative strength (RS 98-99) and consolidating recent significant gains. Entries are best considered on constructive pullbacks to short-term moving averages or breakouts from tight bases. Maintain strict risk management with pre-defined stops to protect capital in this selective environment.",
-    "technical_signal": "No reversal pattern confirmed yet. Major indices saw modest gains, with tech outperforming, indicating continued momentum.",
+    "action_line": "VIX 15.77 Normal + S5FI 62.0% breadth + Nikkei +2.94% strength → focus on leading themes with momentum.",
+    "analysis_para1": "The global markets are showing a strong positive start to the week, with the Nikkei 225 surging +2.94% and European indices like the DAX (+0.48%) and FTSE 100 (+0.33%) also posting gains. This broad international strength suggests a risk-on sentiment translating to US futures, where the S&P 500 is up +0.13% and the Nasdaq 100 leads with a +0.48% gain. US credit conditions, while not fully quantifiable with an unknown BAML HY Spread, appear stable with the 10-year yield at 4.45%. Market breadth remains healthy, with 62.0% of S&P 500 stocks above their 50-day moving average (S5FI) and 59.5% above their 200-day moving average (MMTH), indicating underlying participation.",
+    "analysis_para2": "With the S&P 500 at 7609.78 and Nasdaq 100 at 30660.60, the immediate focus should be on holding these levels into the open. Watch for confirmation of continued momentum in leading sectors like Semiconductors and Hardware, given their strong representation in the thematic scanner. Traders should look to initiate long positions in high RS names exhibiting strong relative strength and volume, specifically on pullbacks to key short-term moving averages or prior breakout levels. A potential trigger for caution would be a significant breakdown below yesterday's lows on increasing volume, or a sudden spike in the VIX from its current normal 15.77 level.",
+    "technical_signal": "No reversal pattern confirmed yet. The market's upward momentum continues, with no clear price action or volume signals suggesting an imminent reversal.",
     "ticker_intel": [
       {
-        "ticker": "QTEX",
-        "company": "QTREX Quantum Ltd.",
+        "ticker": "DELL",
+        "company": "Dell Technologies Inc.",
         "grade": "A+",
-        "reason": "QTEX stands as a top momentum play with an RS of 98 and an astounding 1-month return of +596.0%, making it a leader in the Hardware theme during this tech-focused market."
+        "reason": "Dell Technologies (DELL) merits an A+ with its RS=98 and a robust 1M=+123.0%, making it a prime beneficiary of the hardware and AI infrastructure boom in the current tech-driven market."
       },
       {
         "ticker": "MU",
         "company": "Micron Technology, Inc.",
         "grade": "A",
-        "reason": "MU exhibits strong leadership within the Semiconductors theme, boasting an RS of 98 and a robust +100.2% 1-month return, indicative of sustained institutional interest."
+        "reason": "Micron Technology (MU) is an A-grade long due to its RS=98 and impressive 1M=+100.2%, indicating strong leadership within the high-demand semiconductor sector."
       },
       {
         "ticker": "MXL",
         "company": "MaxLinear, Inc",
         "grade": "C",
-        "reason": "Despite a high RS of 98, MaxLinear's +21.9% 1-month return, while strong, is relatively lower than other accelerating leaders, posing a comparative risk if market momentum narrows."
+        "reason": "MaxLinear (MXL) receives a C grade as, despite its RS=98, its 1M=+21.9% gain is comparatively subdued against peers in this hyper-growth list, suggesting less immediate relative momentum."
       }
     ]
   }

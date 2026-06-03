@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
+import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows cp1252 fix
 """
 Market Brief Generator — Omni-Market Intelligence format
 
