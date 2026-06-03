@@ -7899,7 +7899,32 @@ const SearchBar = ({ data, search, setSearch }) => {
                 )}
               </span>
             )}
-            {fullResult.company && <span className="text-[12px] text-zinc-500 truncate w-full">{fullResult.company}</span>}
+            {fullResult.company && (
+              <div className="flex items-center gap-2 w-full flex-wrap">
+                <span className="text-[12px] text-zinc-500 truncate">{fullResult.company}</span>
+                {(() => {
+                  const subtheme = fullResult.appearances?.[0]?.subtheme;
+                  if (!subtheme) return null;
+                  const peers = (subThemeStocksMap[subtheme] || [])
+                    .map(s => s.ticker)
+                    .filter(t => t !== fullResult.ticker)
+                    .slice(0, 4);
+                  if (peers.length === 0) return null;
+                  return (
+                    <div className="flex items-center gap-1 flex-shrink-0">
+                      <span className="text-[10px] text-zinc-600 uppercase tracking-wide font-semibold">Peers</span>
+                      {peers.map(p => (
+                        <button key={p}
+                          onMouseDown={e => e.preventDefault()}
+                          onClick={() => { setSearch(p); }}
+                          className="text-[10px] font-mono font-semibold text-blue-400/80 hover:text-blue-300 transition-colors"
+                        >{p}</button>
+                      ))}
+                    </div>
+                  );
+                })()}
+              </div>
+            )}
           </div>
 
           {/* Tab bar */}
