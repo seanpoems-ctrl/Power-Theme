@@ -43,27 +43,33 @@ jobs:
       - name: Install Python deps
         run: pip install requests beautifulsoup4 yfinance lxml exchange_calendars pandas google-genai tradingview_screener python-dotenv ib_insync httpx
 
-      - name: Check ET window (9:00 AM – 6:00 PM) + trading day
+      - name: Check trading day (NYSE calendar)
         id: trading_day
         run: |
           python - <<'EOF'
           import os
-          from datetime import datetime
+          from datetime import datetime, date
           from zoneinfo import ZoneInfo
 
-          # workflow_dispatch (manual trigger) bypasses window check
           is_manual = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
 
           et_now = datetime.now(ZoneInfo("America/New_York"))
-          et_minutes = et_now.hour * 60 + et_now.minute
-          in_window = 540 <= et_minutes <= 1080  # 9:00 AM – 6:00 PM ET
+
+          # For scheduled runs: only skip on NYSE holidays (not time-based)
+          # Cron already defines the run time — no ET window check needed
+          should_run = True
+          try:
+              import exchange_calendars as xcals
+              nyse = xcals.get_calendar("XNYS")
+              should_run = nyse.is_session(date.today().isoformat())
+          except Exception as e:
+              print(f"Calendar check failed ({e}) — defaulting to run")
+              should_run = True
 
           if is_manual:
               should_run = True
-              print(f"Manual trigger — forcing run (ET: {et_now.strftime('%H:%M')})")
-          else:
-              should_run = in_window
-              print(f"ET: {et_now.strftime('%H:%M')} | in window: {in_window} | will run: {should_run}")
+
+          print(f"ET: {et_now.strftime('%H:%M')} | trading_day: {should_run} | trigger: {'manual' if is_manual else 'scheduled'}")
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write(f"is_trading_day={'true' if should_run else 'false'}\n")
           EOF
