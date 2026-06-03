@@ -335,13 +335,7 @@ Respond ONLY with valid JSON (no markdown fences):
   "analysis_details": "<formatted markdown string with • **Title** sections>"
 }}"""
 
-        from google.genai import types as _gtypes
-        resp = client.models.generate_content(
-            model="gemini-2.5-flash", contents=prompt,
-            config=_gtypes.GenerateContentConfig(
-                thinking_config=_gtypes.ThinkingConfig(thinking_budget=0)
-            ),
-        )
+        resp = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
         text = resp.text.strip()
         if text.startswith("```"):
             text = text.split("```")[1]

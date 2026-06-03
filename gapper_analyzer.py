@@ -415,13 +415,7 @@ Rules: "Earnings" = company reported results. "Upgrade" = analyst raised rating/
 Reply in valid JSON only (no markdown):
 {{"category": "<category>", "reasoning": "<1-2 sentence explanation of the catalyst>"}}"""
 
-        from google.genai import types as _gtypes
-        resp = client.models.generate_content(
-            model="gemini-2.5-flash", contents=prompt,
-            config=_gtypes.GenerateContentConfig(
-                thinking_config=_gtypes.ThinkingConfig(thinking_budget=0)
-            ),
-        )
+        resp = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
         raw  = resp.text.strip()
         if raw.startswith("```"):
             raw = raw.split("```")[1]
