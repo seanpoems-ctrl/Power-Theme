@@ -1,29 +1,29 @@
 {
-  "generated_at": "June 03, 2026 (13:35 EDT)",
-  "session": "Market Hours",
+  "generated_at": "June 03, 2026 (19:07 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7565.16,
-      "change": -44.62,
-      "change_pct": -0.59
+      "price": 7553.68,
+      "change": -56.1,
+      "change_pct": -0.74
     },
     {
       "label": "Nasdaq 100",
-      "price": 30539.16,
-      "change": -121.44,
-      "change_pct": -0.4
+      "price": 30571.24,
+      "change": -89.36,
+      "change_pct": -0.29
     },
     {
       "label": "VIX",
-      "price": 16.31,
-      "change": 0.54,
+      "price": 16.06,
+      "change": 0.29,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.5,
+      "price": 4.49,
       "change": 0.04,
       "change_pct": null,
       "trend_label": "Rising"
@@ -37,21 +37,21 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 24795.94,
-      "change_pct": -1.31
+      "price": 25124.17,
+      "change_pct": 0.48
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10332.3,
-      "change_pct": -0.4
+      "price": 10373.5,
+      "change_pct": 0.33
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 54.9,
-    "mmth": 62.8,
+    "s5fi": 53.7,
+    "mmth": 61.4,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Risk-Off / Global Weakness",
+  "mood": "Cautious / Rising Yields",
   "analysis": {
-    "action_line": "VIX 16.31 Normal + S5FI 54.9% breadth + DAX -1.31% weakness → trade RS leaders selectively near support.",
-    "analysis_para1": "Global markets are trading with a distinct risk-off sentiment today, notably in Europe where the DAX is down 1.31% and the FTSE 100 by 0.40%, while the Nikkei 225 also retreated 0.30%. This synchronized global weakness coincides with a rising 10-year yield at 4.50%, hinting at underlying inflation concerns or a tightening credit environment that could further pressure equities. US market breadth, as measured by S5FI at 54.9% and MMTH at 62.8%, remains uninspiring, suggesting that while the long-term trend isn't broken, the current selling pressure is not confined to a few sectors.",
-    "analysis_para2": "Given the current environment, the mechanical plan calls for vigilance around key support levels for the major indices; watch for the S&P 500 to potentially test its 21-day EMA, and the Nasdaq 100 to hold above its recent pivot highs. A rising 10-year yield at 4.50% suggests a higher discount rate for future earnings, favoring companies with robust current cash flows or strong pricing power. For individual high relative strength names, look for controlled pullbacks to their 10-day or 20-day exponential moving averages on lighter volume as potential entry points, avoiding any names that break decisively below these levels. Focus remains on names that continue to show institutional accumulation even amidst broader market weakness.",
-    "technical_signal": "No reversal pattern confirmed yet. The indices are showing broad weakness, but without specific candlestick formations or volume divergence to signal an immediate turnaround.",
+    "action_line": "VIX 16.06 Normal + S5FI 53.7% breadth + mixed global tape (Nikkei down) → maintain focus on relative strength leaders.",
+    "analysis_para1": "Global markets presented a mixed picture today, with Asian indices like the Nikkei 225 retreating by 0.30%, while European counterparts DAX and FTSE 100 posted modest gains of +0.48% and +0.33% respectively. In the US, the S&P 500 and Nasdaq 100 experienced declines, coinciding with a rising 10-year yield at 4.49%. Despite the overall market softness, US breadth indicators remain resilient, with 53.7% of stocks above their 50-day moving average (S5FI) and 61.4% above their 200-day (MMTH), suggesting underlying technical health.",
+    "analysis_para2": "The current market structure calls for vigilance around key index support levels, particularly as the 10-year yield continues its ascent to 4.49%. A sustained move higher in yields could challenge equity valuations, especially for growth sectors. Investors should monitor for any significant deterioration in breadth indicators, although S5FI at 53.7% and MMTH at 61.4% currently suggest underlying resilience. The focus remains on robust relative strength leaders that can weather a choppier tape, while avoiding overextended positions in weaker sectors. A confirmed break below short-term moving averages on major indices would warrant increased caution.",
+    "technical_signal": "No reversal pattern confirmed yet. While the S&P 500 showed weakness today, VIX remains normal and breadth indicators are still above 50%.",
     "ticker_intel": [
       {
         "ticker": "QTEX",
         "company": "QTREX Quantum Ltd.",
         "grade": "A+",
-        "reason": "With an RS of 98 and a staggering 1M return of +596.0%, QTEX demonstrates extreme demand within the Hardware theme, making it a top contender in this volatile tape."
+        "reason": "This innovative hardware play (RS=98, 1M=+596.0%) exhibits extreme momentum, making it a top conviction long in a market favoring high-growth leaders."
       },
       {
         "ticker": "DELL",
         "company": "Dell Technologies Inc.",
         "grade": "A",
-        "reason": "Sporting an RS of 98 and a robust 1M return of +123.0%, DELL shows strong, sustained momentum in the Hardware theme, suitable for continued leadership."
+        "reason": "A recognized hardware leader (RS=98, 1M=+123.0%) showing impressive strength, it represents a strong long option amidst continued tech sector focus and rising yields."
       },
       {
-        "ticker": "MXL",
-        "company": "MaxLinear, Inc",
+        "ticker": "WDC",
+        "company": "Western Digital Corporation",
         "grade": "C",
-        "reason": "Despite an RS of 98, MXL's 1M return of +21.9% is comparatively weaker than its high-RS peers in Semiconductors, suggesting potential relative underperformance amidst broader market weakness."
+        "reason": "While still strong (RS=98), its comparatively lower 1-month performance (+25.7%) within the Hardware theme suggests it may be a relative laggard, potentially underperforming true leaders in a selective market."
       }
     ]
   }
