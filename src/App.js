@@ -6753,32 +6753,46 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
                     ))}
                   </div>
                 )}
-                {/* Leverage row */}
+                {/* Leverage row — only for the main gapper stock, hidden if empty */}
                 {leverage.length > 0 && (
                   <div className="flex items-center gap-1 px-1 flex-wrap">
                     <span className="text-[9px] text-zinc-600 uppercase tracking-wide font-semibold w-10 flex-shrink-0">Lev</span>
-                    {leverage.map(e => (
-                      <span key={e}
-                        className="text-[10px] font-mono font-semibold text-orange-400 cursor-pointer hover:text-orange-300 transition-colors"
-                        onClick={e2 => { clearTimeout(hoverTimer.current); const rect = e2.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === e ? null : { ticker: e, rect }); }}
-                        onMouseEnter={e2 => startHover(e, e2.currentTarget.getBoundingClientRect())}
-                        onMouseLeave={cancelHover}
-                      >{e}</span>
-                    ))}
+                    {leverage.map(item => {
+                      const sym = item?.ticker ?? item;
+                      const mult = item?.mult ?? "";
+                      return (
+                        <span key={sym} className="flex items-center gap-0.5">
+                          <span
+                            className="text-[10px] font-mono font-semibold text-orange-400 cursor-pointer hover:text-orange-300 transition-colors"
+                            onClick={e2 => { clearTimeout(hoverTimer.current); const rect = e2.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === sym ? null : { ticker: sym, rect }); }}
+                            onMouseEnter={e2 => startHover(sym, e2.currentTarget.getBoundingClientRect())}
+                            onMouseLeave={cancelHover}
+                          >{sym}</span>
+                          {mult && <span className="text-[9px] text-orange-600/70 font-normal">{mult}</span>}
+                        </span>
+                      );
+                    })}
                   </div>
                 )}
-                {/* Inverse row */}
+                {/* Inverse row — only for the main gapper stock, hidden if empty */}
                 {inverse.length > 0 && (
                   <div className="flex items-center gap-1 px-1 flex-wrap">
                     <span className="text-[9px] text-zinc-600 uppercase tracking-wide font-semibold w-10 flex-shrink-0">Inv</span>
-                    {inverse.map(e => (
-                      <span key={e}
-                        className="text-[10px] font-mono font-semibold text-red-400/80 cursor-pointer hover:text-red-300 transition-colors"
-                        onClick={e2 => { clearTimeout(hoverTimer.current); const rect = e2.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === e ? null : { ticker: e, rect }); }}
-                        onMouseEnter={e2 => startHover(e, e2.currentTarget.getBoundingClientRect())}
-                        onMouseLeave={cancelHover}
-                      >{e}</span>
-                    ))}
+                    {inverse.map(item => {
+                      const sym = item?.ticker ?? item;
+                      const mult = item?.mult ?? "";
+                      return (
+                        <span key={sym} className="flex items-center gap-0.5">
+                          <span
+                            className="text-[10px] font-mono font-semibold text-red-400/80 cursor-pointer hover:text-red-300 transition-colors"
+                            onClick={e2 => { clearTimeout(hoverTimer.current); const rect = e2.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === sym ? null : { ticker: sym, rect }); }}
+                            onMouseEnter={e2 => startHover(sym, e2.currentTarget.getBoundingClientRect())}
+                            onMouseLeave={cancelHover}
+                          >{sym}</span>
+                          {mult && <span className="text-[9px] text-red-600/70 font-normal">{mult}</span>}
+                        </span>
+                      );
+                    })}
                   </div>
                 )}
               </div>

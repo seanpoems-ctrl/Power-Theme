@@ -186,66 +186,62 @@ PEER_MAPPING = {
 }
 
 # Single-stock leverage/inverse ETF mapping
-# Format: "STOCK": ("LONG_ETF", "SHORT_ETF")
+# Format: "STOCK": (LONG_ETF, LONG_MULT, SHORT_ETF, SHORT_MULT)
 SINGLE_STOCK_LEVERAGE = {
-    # Mega-cap Tech
-    "NVDA":  ("NVDL",  "NVDS"),    # NVIDIA 2x Long / 1x Short
-    "AAPL":  ("AAPU",  "AAPD"),    # Apple 1.5x Long / 1x Short
-    "TSLA":  ("TSLL",  "TSLS"),    # Tesla 2x Long / 1x Short
-    "AMZN":  ("AMZU",  "AMZD"),    # Amazon 2x Long / 1x Short
-    "MSFT":  ("MSFU",  "MSFD"),    # Microsoft 2x Long / 1x Short
-    "META":  ("METU",  "METD"),    # Meta 2x Long / 1x Short
-    "GOOGL": ("GGLL",  "GGLS"),    # Alphabet 2x Long / 1x Short
-    "GOOG":  ("GGLL",  "GGLS"),    # Alphabet 2x Long / 1x Short
-    "AVGO":  ("SOXL",  "SOXS"),    # Broadcom → Semis 3x (AVGOU/AVGOD delisted)
-    "AMD":   ("AMDS",  "AMDS"),    # AMD — use SOXL/SOXS fallback
+    # Mega-cap Tech (single-stock ETFs)
+    "NVDA":  ("NVDL",  "2x", "NVDS",  "1x"),
+    "AAPL":  ("AAPU",  "2x", "AAPD",  "1x"),
+    "TSLA":  ("TSLL",  "2x", "TSLS",  "1x"),
+    "AMZN":  ("AMZU",  "2x", "AMZD",  "1x"),
+    "MSFT":  ("MSFU",  "2x", "MSFD",  "1x"),
+    "META":  ("METU",  "2x", "METD",  "1x"),
+    "GOOGL": ("GGLL",  "2x", "GGLS",  "1x"),
+    "GOOG":  ("GGLL",  "2x", "GGLS",  "1x"),
 
-    # Semiconductors (use sector ETF as fallback)
-    "MRVL":  ("SOXL",  "SOXS"),    # Marvell → Semis 3x Long/Short
-    "SMCI":  ("SOXL",  "SOXS"),    # Super Micro → Semis 3x
-    "MXL":   ("SOXL",  "SOXS"),    # MaxLinear → Semis 3x
-    "MCHP":  ("SOXL",  "SOXS"),    # Microchip → Semis 3x
-    "NVTS":  ("SOXL",  "SOXS"),    # Navitas → Semis 3x
-    "STM":   ("SOXL",  "SOXS"),    # STMicroelectronics → Semis 3x
-    "SMTC":  ("SOXL",  "SOXS"),    # Semtech → Semis 3x
-    "AEHR":  ("SOXL",  "SOXS"),    # Aehr Test → Semis 3x
-    "AXTI":  ("SOXL",  "SOXS"),    # AXT Inc → Semis 3x
-    "COHR":  ("SOXL",  "SOXS"),    # Coherent → Semis 3x
-    "LWLG":  ("SOXL",  "SOXS"),    # Lightwave Logic → Semis 3x
+    # Semiconductors → sector ETF
+    "AVGO":  ("SOXL",  "3x", "SOXS",  "3x"),
+    "AMD":   ("SOXL",  "3x", "SOXS",  "3x"),
+    "MRVL":  ("SOXL",  "3x", "SOXS",  "3x"),
+    "SMCI":  ("SOXL",  "3x", "SOXS",  "3x"),
+    "MXL":   ("SOXL",  "3x", "SOXS",  "3x"),
+    "MCHP":  ("SOXL",  "3x", "SOXS",  "3x"),
+    "NVTS":  ("SOXL",  "3x", "SOXS",  "3x"),
+    "STM":   ("SOXL",  "3x", "SOXS",  "3x"),
+    "SMTC":  ("SOXL",  "3x", "SOXS",  "3x"),
+    "AEHR":  ("SOXL",  "3x", "SOXS",  "3x"),
+    "AXTI":  ("SOXL",  "3x", "SOXS",  "3x"),
+    "COHR":  ("SOXL",  "3x", "SOXS",  "3x"),
+    "LWLG":  ("SOXL",  "3x", "SOXS",  "3x"),
+    "STX":   ("SOXL",  "3x", "SOXS",  "3x"),
+    "WDC":   ("SOXL",  "3x", "SOXS",  "3x"),
+    "SNDK":  ("SOXL",  "3x", "SOXS",  "3x"),
+    "WOLF":  ("SOXL",  "3x", "SOXS",  "3x"),
+    "HSAI":  ("SOXL",  "3x", "SOXS",  "3x"),
 
-    # Cloud / Networking (use tech sector ETF)
-    "ANET":  ("TECL",  "TECS"),    # Arista Networks → Tech 3x
-    "HPE":   ("TECL",  "TECS"),    # HPE → Tech 3x
-    "CSCO":  ("TECL",  "TECS"),    # Cisco → Tech 3x
-    "IBM":   ("TECL",  "TECS"),    # IBM → Tech 3x
-    "GLW":   ("TECL",  "TECS"),    # Corning → Tech 3x
+    # Cloud / Networking → Tech sector ETF
+    "ANET":  ("TECL",  "3x", "TECS",  "3x"),
+    "HPE":   ("TECL",  "3x", "TECS",  "3x"),
+    "CSCO":  ("TECL",  "3x", "TECS",  "3x"),
+    "IBM":   ("TECL",  "3x", "TECS",  "3x"),
+    "GLW":   ("TECL",  "3x", "TECS",  "3x"),
+    "NTAP":  ("TECL",  "3x", "TECS",  "3x"),
+    "GRRR":  ("TECL",  "3x", "TECS",  "3x"),
+    "UMAC":  ("TECL",  "3x", "TECS",  "3x"),
+    "PENG":  ("TECL",  "3x", "TECS",  "3x"),
 
-    # Storage
-    "STX":   ("SOXL",  "SOXS"),    # Seagate → Semis 3x
-    "WDC":   ("SOXL",  "SOXS"),    # Western Digital → Semis 3x
-    "NTAP":  ("TECL",  "TECS"),    # NetApp → Tech 3x
-    "SNDK":  ("SOXL",  "SOXS"),    # SanDisk → Semis 3x
+    # China Tech
+    "BABA":  ("CWEB",  "2x", "YANG",  "3x"),
 
-    # China Tech / EV
-    "BABA":  ("CWEB",  "YANG"),    # Alibaba → China Tech 2x Long / 3x Short
-    "LI":    ("TSLL",  "TSLS"),    # Li Auto → Tesla 2x (EV sector proxy)
-    "HSAI":  ("SOXL",  "SOXS"),    # Hesai → Semis 3x (LiDAR chips)
+    # EV proxy
+    "LI":    ("TSLL",  "2x", "TSLS",  "1x"),
 
-    # Biotech / Pharma
-    "RLAY":  ("LABU",  "LABD"),    # Relay Therapeutics → Biotech 3x
+    # Biotech
+    "RLAY":  ("LABU",  "3x", "LABD",  "3x"),
 
     # Materials / Energy
-    "LAC":   ("REMX",  "SOXS"),    # Lithium Americas → Rare Earth/Materials ETF
-    "WOLF":  ("SOXL",  "SOXS"),    # Wolfspeed → Semis 3x
-
-    # Industrials / Other
-    "CNH":   ("DXJS",  "EFZ"),     # CNH Industrial → Int'l Small Cap / Short Int'l
-    "URG":   ("URA",   "URNM"),    # Ur-Energy → Uranium ETF
-
-    # IBKR Pre-Market common gappers
-    "GRRR":  ("TECL",  "TECS"),
-    "UMAC":  ("TECL",  "TECS"),
-    "PENG":  ("TECL",  "TECS"),
+    "LAC":   ("REMX",  "1x", "SOXS",  "3x"),
+    "URG":   ("URA",   "1x", "URNM",  "1x"),
+    "CNH":   ("DXJS",  "1x", "EFZ",   "1x"),
 }
 
 # These ETFs are always highly liquid (>$20M daily) — skip live volume check
@@ -268,15 +264,17 @@ def get_peer_stocks(ticker: str) -> list:
 
 def get_leverage_inverse_stocks(ticker: str) -> dict:
     """
-    Return leverage (long) and inverse (short) ETFs for a gapper as separate lists.
-    Well-known liquid ETFs skip the live volume check (pre-verified).
-    Returns: {"long": [LONG_ETF], "short": [SHORT_ETF]}
+    Return leverage (long) and inverse (short) ETFs with multiplier labels.
+    Returns: {
+      "long":  [{"ticker": ETF, "mult": "3x"}],
+      "short": [{"ticker": ETF, "mult": "3x"}]
+    }
     """
     t = ticker.upper()
     if t not in SINGLE_STOCK_LEVERAGE:
         return {"long": [], "short": []}
 
-    long_etf, short_etf = SINGLE_STOCK_LEVERAGE[t]
+    long_etf, long_mult, short_etf, short_mult = SINGLE_STOCK_LEVERAGE[t]
 
     def _qualifies(etf):
         if etf in ALWAYS_LIQUID_ETFS:
@@ -289,8 +287,8 @@ def get_leverage_inverse_stocks(ticker: str) -> dict:
             return False
 
     return {
-        "long":  [long_etf]  if _qualifies(long_etf)  else [],
-        "short": [short_etf] if _qualifies(short_etf) else [],
+        "long":  [{"ticker": long_etf,  "mult": long_mult}]  if _qualifies(long_etf)  else [],
+        "short": [{"ticker": short_etf, "mult": short_mult}] if _qualifies(short_etf) else [],
     }
 
 
