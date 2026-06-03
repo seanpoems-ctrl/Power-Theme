@@ -30,17 +30,39 @@ ET = ZoneInfo("America/New_York")
 # ──────────────────────────────────────────────────────────────
 
 OPINION_KEYWORDS = {
+    # Prediction / analysis words
     "why", "analysis", "bullish", "bearish", "outlook", "opinion",
     "could", "should", "might", "expected to", "could surge", "could fall",
     "prediction", "expert says", "top reasons", "what to know", "here's why",
     "could rally", "analyst view", "will likely", "analyst expects",
-    "could drop", "could rise", "market sentiment", "investor outlook"
+    "could drop", "could rise", "market sentiment", "investor outlook",
+    # Soft narrative / commentary phrases
+    "here's what we see", "what we see in our data", "stay in focus",
+    "chatter", "narrative stay", "like move", "like a", "reminds us",
+    "looks like", "is it", "is this", "watch out", "time to buy",
+    "time to sell", "worth watching", "keep an eye", "what investors",
+    "what you need", "everything you need", "3 reasons", "5 reasons",
+    "top picks", "best stocks", "worst stocks",
 }
 
 OPINION_SOURCES = {
+    # Financial media opinion / commentary sites
     "seeking alpha", "motley fool", "investor's business daily", "investopedia",
     "tradingview blog", "yahoo finance opinion", "cnbc opinion", "forbes opinion",
-    "marketwatch opinion", "fool.com", "benzinga opinion", "zacks opinion"
+    "marketwatch opinion", "fool.com", "benzinga opinion", "zacks opinion",
+    # Missing sources that caused the bug (Barron's, Quiver, etc.)
+    "barron", "barrons",                         # Barron's — mostly opinion
+    "quiver quantitative", "quiverquant",        # Quiver — data commentary
+    "thestreet", "the street",                   # TheStreet — analysis
+    "kiplinger",                                 # Kiplinger — opinion
+    "schaeffers", "schaeffer",                   # Schaeffer's — derivatives opinion
+    "barchart",                                  # Barchart — opinion screener
+    "tipranks",                                  # TipRanks — analyst opinion
+    "simply wall st", "simplywallst",            # Simply Wall St — analysis
+    "gurufocus",                                 # GuruFocus — value analysis
+    "stockanalysis",                             # Stock Analysis — commentary
+    "wsj opinion", "wall street journal opinion",
+    "bloomberg opinion",
 }
 
 # ──────────────────────────────────────────────────────────────
@@ -184,17 +206,27 @@ def _is_opinion_article(title: str, source: str = "") -> bool:
     Opinion: commentary, predictions, analysis, sentiment.
     """
     title_lower = title.lower()
+    # Combine source name + title into one string for partial-match source checks
     source_lower = source.lower()
+    combined = f"{source_lower} {title_lower}"
 
-    # Skip if source is known opinion site
+    # Skip if any known opinion source appears anywhere in source field or combined text
     for opinion_src in OPINION_SOURCES:
-        if opinion_src in source_lower:
+        if opinion_src in source_lower or opinion_src in combined:
             return True
 
-    # Skip if title contains opinion keywords
+    # Skip if title contains opinion keywords (word-boundary check)
     for keyword in OPINION_KEYWORDS:
         if f" {keyword} " in f" {title_lower} " or title_lower.startswith(keyword):
             return True
+
+    # Extra: reject titles that end with " - Source" where source is opinion
+    # e.g. "HPE Is Having a Dell-Like Move... - Barron's"
+    if " - " in title:
+        inline_source = title.split(" - ")[-1].lower().strip()
+        for opinion_src in OPINION_SOURCES:
+            if opinion_src in inline_source:
+                return True
 
     return False
 
@@ -781,8 +813,15 @@ Real Estate | REITs | Infrastructure | Others
 
 PEER TICKERS: Peer tickers are now pre-populated from a curated mapping (ignore if present in your response).
 
+CRITICAL — reasoning field rules:
+- Must be YOUR OWN sentence (10-20 words) describing what mechanically happened
+- DO NOT copy or paraphrase a headline title
+- DO NOT include a source name (Barron's, Yahoo Finance, etc.)
+- Example good: "Q1 EPS beat by 18%, revenue guidance raised 12% above consensus"
+- Example bad: "HPE Is Having a Dell-Like Move, But It's Not Dell"
+
 Respond in this exact JSON format only (no extra text):
-{{"category": "<category>", "theme": "<specific catalyst name, e.g. 'Beat & Raise', 'New Contracts', 'Sector Sympathy', 'Technical / Flow'>", "reasoning": "<1 sentence mechanical trigger>", "grade": "<A+|A|B|C>", "finviz_theme": "<industry>", "analysis_detail": "Catalyst: [news facts 2-3 sentences] | Impact: [quantify shift, e.g. adds X% to revenue, de-risks pipeline]", "analysis_details": "<detailed multi-section analysis>"}}"""
+{{"category": "<category>", "theme": "<specific catalyst name, e.g. 'Beat & Raise', 'New Contracts', 'Sector Sympathy', 'Technical / Flow'>", "reasoning": "<YOUR OWN 1-sentence mechanical trigger — never copy a headline>", "grade": "<A+|A|B|C>", "finviz_theme": "<industry>", "analysis_detail": "Catalyst: [news facts 2-3 sentences] | Impact: [quantify shift, e.g. adds X% to revenue, de-risks pipeline]", "analysis_details": "<detailed multi-section analysis>"}}"""
 
         response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
         text = response.text.strip()
@@ -836,20 +875,48 @@ def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
     """Rule-based fallback if Gemini unavailable."""
     titles = [h["title"] if isinstance(h, dict) else h for h in headlines]
     text = " ".join(titles).lower()
-    if any(w in text for w in ["earnings", "beat", "revenue", "eps"]):
+
+    if any(w in text for w in ["earnings", "beat", "revenue", "eps", "q1", "q2", "q3", "q4"]):
         cat = "Earnings"
-    elif any(w in text for w in ["fda", "clinical", "trial", "drug", "approval"]):
+        rsn = f"{ticker} reported quarterly results; earnings catalyst detected in headlines."
+        detail_body = "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+    elif any(w in text for w in ["fda", "clinical", "trial", "drug", "approval", "pdufa"]):
         cat = "FDA"
-    elif any(w in text for w in ["upgrade", "price target", "analyst"]):
+        rsn = f"{ticker} has an active FDA/clinical regulatory event based on recent headlines."
+        detail_body = "FDA or clinical trial event detected. Binary outcome — treat as high-volatility event."
+    elif any(w in text for w in ["upgrade", "price target", "raised", "initiated", "outperform", "overweight"]):
         cat = "Upgrade"
-    elif any(w in text for w in ["contract", "partnership", "deal", "agreement"]):
+        rsn = f"{ticker} received an analyst rating action or price target revision."
+        detail_body = "Analyst upgrade or price target change detected. Institutional conviction may be limited."
+    elif any(w in text for w in ["contract", "partnership", "deal", "agreement", "collaboration"]):
         cat = "New Contract/Partnership"
-    elif any(w in text for w in ["policy", "government", "regulation", "tariff"]):
+        rsn = f"{ticker} announced a new contract or strategic partnership."
+        detail_body = "Contract or partnership announcement detected. Evaluate deal size and strategic significance."
+    elif any(w in text for w in ["policy", "government", "regulation", "tariff", "executive order", "legislation"]):
         cat = "Government Policy"
+        rsn = f"{ticker} is affected by a recent government policy or regulatory development."
+        detail_body = "Policy or regulatory catalyst detected. Monitor for further legislative developments."
     else:
         cat = "Others"
+        rsn = f"{ticker} gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven."
+        detail_body = "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+
     label, strategy = HYPOTHESIS_RULES.get(cat, HYPOTHESIS_RULES["Others"])
-    rsn = titles[0] if titles else "No catalyst identified."
+
+    # Build analysis_details as structured sections (not raw headline)
+    section_titles = {
+        "Earnings":               ("The Results", "The Outlook"),
+        "FDA":                    ("The Event", "Risk Profile"),
+        "Upgrade":                ("The Analyst Action", "The Thesis"),
+        "New Contract/Partnership": ("The Announcement", "Strategic Value"),
+        "Government Policy":      ("The Policy", "Direct Impact"),
+        "Others":                 ("What Happened", "Key Consideration"),
+    }
+    s1, s2 = section_titles.get(cat, ("What Happened", "Key Consideration"))
+    analysis_details = (
+        f"• **{s1}**\n{rsn}\n\n"
+        f"• **{s2}**\n{detail_body}"
+    )
 
     peer_tickers  = get_peer_stocks(ticker)
     leverage_etfs = get_leverage_inverse_stocks(ticker)
@@ -862,8 +929,8 @@ def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
         "conviction":      50,
         "grade":           "B",
         "finviz_theme":    "—",
-        "analysis_detail": f"Catalyst: {rsn} | Impact: See analysis.",
-        "analysis_details": rsn,
+        "analysis_detail": f"Catalyst: {rsn} | Impact: {detail_body}",
+        "analysis_details": analysis_details,
         "peer_tickers":    peer_tickers,
         "leverage_etfs":   leverage_etfs,
     }
