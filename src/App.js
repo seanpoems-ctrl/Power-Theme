@@ -6707,7 +6707,7 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
         </div>
         <div className="text-[11px] text-zinc-600 leading-tight">
           {mode === "gapper"
-            ? "Gappers passing all 5 gates + peers"
+            ? "5-gate gappers · peers · lev ETFs"
             : "RS>85 · Price>$12 · Vol>$100M · Cap>$2B · ADR≥4%"}
         </div>
       </div>

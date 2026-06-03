@@ -30,13 +30,12 @@ ET = ZoneInfo("America/New_York")
 # ──────────────────────────────────────────────────────────────
 
 OPINION_KEYWORDS = {
-    # Prediction / analysis words
+    # Prediction / analysis / commentary words
     "why", "analysis", "bullish", "bearish", "outlook", "opinion",
     "could", "should", "might", "expected to", "could surge", "could fall",
     "prediction", "expert says", "top reasons", "what to know", "here's why",
     "could rally", "analyst view", "will likely", "analyst expects",
     "could drop", "could rise", "market sentiment", "investor outlook",
-    # Soft narrative / commentary phrases
     "here's what we see", "what we see in our data", "stay in focus",
     "chatter", "narrative stay", "like move", "like a", "reminds us",
     "looks like", "is it", "is this", "watch out", "time to buy",
@@ -45,24 +44,40 @@ OPINION_KEYWORDS = {
     "top picks", "best stocks", "worst stocks",
 }
 
+# Roundup/list articles — mention multiple stocks, not company-specific news
+ROUNDUP_KEYWORDS = {
+    "biggest moves", "biggest movers", "biggest gainers", "biggest losers",
+    "top movers", "midday movers", "premarket movers", "pre-market movers",
+    "after-hours movers", "afterhours movers", "making moves midday",
+    "stocks on the move", "stocks moving", "movers today", "stocks to watch",
+    "what's moving", "whats moving", "market movers", "hot stocks",
+    "notable movers", "unusual movers", "notable gainers", "notable losers",
+    "stocks making the biggest", "making the biggest moves",
+    " and more", "& more",   # roundup "HPE, MRVL, Coherent & more"
+}
+
 OPINION_SOURCES = {
     # Financial media opinion / commentary sites
     "seeking alpha", "motley fool", "investor's business daily", "investopedia",
     "tradingview blog", "yahoo finance opinion", "cnbc opinion", "forbes opinion",
     "marketwatch opinion", "fool.com", "benzinga opinion", "zacks opinion",
-    # Missing sources that caused the bug (Barron's, Quiver, etc.)
+    # Sources confirmed causing duplicate/opinion noise
     "barron", "barrons",                         # Barron's — mostly opinion
-    "quiver quantitative", "quiverquant",        # Quiver — data commentary
-    "thestreet", "the street",                   # TheStreet — analysis
+    "quiver quantitative", "quiverquant",        # Quiver — data commentary, not hard news
+    "thestreet", "the street",                   # TheStreet — analysis/commentary
     "kiplinger",                                 # Kiplinger — opinion
     "schaeffers", "schaeffer",                   # Schaeffer's — derivatives opinion
-    "barchart",                                  # Barchart — opinion screener
+    "barchart",                                  # Barchart — screener commentary
     "tipranks",                                  # TipRanks — analyst opinion
     "simply wall st", "simplywallst",            # Simply Wall St — analysis
     "gurufocus",                                 # GuruFocus — value analysis
     "stockanalysis",                             # Stock Analysis — commentary
     "wsj opinion", "wall street journal opinion",
     "bloomberg opinion",
+    "marketbeat",                                # MarketBeat — options volume alerts, not fundamental news
+    "stocktwits",                                # StockTwits — social/sentiment
+    "finbold",                                   # Finbold — crypto/stock commentary
+    "wallstreetmojo",                            # WSM — educational/analysis
 }
 
 # ──────────────────────────────────────────────────────────────
@@ -201,32 +216,39 @@ def _fetch_dollar_volume(ticker: str) -> float | None:
 
 def _is_opinion_article(title: str, source: str = "") -> bool:
     """
-    Check if headline is opinion/analysis (skip) vs hard news (keep).
-    Hard news: earnings, guidance, partnerships, regulatory, leadership changes.
-    Opinion: commentary, predictions, analysis, sentiment.
+    Filter out non-company-specific news. Keep only hard news directly about the
+    scanned ticker: earnings, guidance, contracts, regulatory, leadership changes.
+    Reject: opinion, predictions, roundup lists, multi-company articles, data commentary.
     """
     title_lower = title.lower()
-    # Combine source name + title into one string for partial-match source checks
     source_lower = source.lower()
-    combined = f"{source_lower} {title_lower}"
 
-    # Skip if any known opinion source appears anywhere in source field or combined text
+    # 1. Reject known opinion/commentary sources
     for opinion_src in OPINION_SOURCES:
-        if opinion_src in source_lower or opinion_src in combined:
+        if opinion_src in source_lower:
             return True
 
-    # Skip if title contains opinion keywords (word-boundary check)
-    for keyword in OPINION_KEYWORDS:
-        if f" {keyword} " in f" {title_lower} " or title_lower.startswith(keyword):
-            return True
-
-    # Extra: reject titles that end with " - Source" where source is opinion
-    # e.g. "HPE Is Having a Dell-Like Move... - Barron's"
+    # 2. Reject if source name appears inline at end of title (e.g. "... - Barron's")
     if " - " in title:
         inline_source = title.split(" - ")[-1].lower().strip()
         for opinion_src in OPINION_SOURCES:
             if opinion_src in inline_source:
                 return True
+
+    # 3. Reject roundup / multi-stock list articles
+    for kw in ROUNDUP_KEYWORDS:
+        if kw in title_lower:
+            return True
+
+    # 4. Reject if title lists 3+ company names (roundup pattern: "Coherent, Victoria's Secret, Marvell...")
+    #    Heuristic: count commas — 2+ commas usually means a list article
+    if title.count(",") >= 2:
+        return True
+
+    # 5. Reject opinion keyword phrases in title
+    for keyword in OPINION_KEYWORDS:
+        if f" {keyword} " in f" {title_lower} " or title_lower.startswith(keyword):
+            return True
 
     return False
 
@@ -747,7 +769,22 @@ def analyze_with_gemini(
         client = genai.Client(api_key=GEMINI_API_KEY)
 
         today_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        headlines_text = "\n".join(f"- [{h['date']}] {h['title']}" if isinstance(h, dict) else f"- {h}" for h in headlines)
+
+        def _clean_title(h):
+            """Strip trailing ' - Source Name' from headline to prevent Gemini echoing it."""
+            title = h['title'] if isinstance(h, dict) else h
+            if ' - ' in title:
+                # Remove everything after the last ' - ' if it looks like a source name
+                # (source names are short, < 40 chars, no numbers/dates)
+                parts = title.rsplit(' - ', 1)
+                if len(parts[1]) < 40 and not any(c.isdigit() for c in parts[1]):
+                    title = parts[0].strip()
+            return title
+
+        headlines_text = "\n".join(
+            f"- [{h['date']}] {_clean_title(h)}" if isinstance(h, dict) else f"- {h}"
+            for h in headlines
+        )
         earnings_note = ""
         if last_earnings_date:
             from datetime import date as _date, timedelta as _td
