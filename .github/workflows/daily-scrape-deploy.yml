@@ -1,13 +1,12 @@
-# Thematic Scanner — runs at 5:00 PM ET Mon–Fri (market close)
-# EDT: 21:00 UTC | EST: 22:00 UTC (both schedules active to cover DST)
+# Thematic Scanner — runs at 6:45 AM Malaysia Mon–Fri (user's wake time)
+# 22:45 UTC = 6:45 AM Malaysia
 # workflow_dispatch bypasses ET-window check (manual trigger)
 name: Daily scrape & deploy
 
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "0 21 * * 1-5"    # 5:00 PM EDT (Mar–Nov)
-    - cron: "0 22 * * 1-5"    # 5:00 PM EST (Nov–Mar)
+    - cron: "45 22 * * 1-5"   # 6:45 AM Malaysia (10:45 PM UTC)
 
 concurrency:
   group: pages-deploy

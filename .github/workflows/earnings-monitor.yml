@@ -3,10 +3,11 @@ name: Earnings Monitor
 on:
   workflow_dispatch: {}
   schedule:
-    # Every 15 minutes during market hours (9:30 AM - 4:00 PM ET)
-    # 13:30-20:00 UTC = 9:30 AM - 4:00 PM ET (market hours, EDT)
-    - cron: '0,15,30,45 13-19 * * 1-5'  # Every 15 min, 9:30 AM - 3:45 PM ET
-    - cron: '0 20 * * 1-5'               # 4:00 PM ET (market close)
+    # Every 15 minutes during user's waking hours (Malaysia timezone)
+    # User awake: 7 AM - 2 AM Malaysia = 23:00 UTC - 18:00 UTC next day
+    # SKIP sleep window: 2 AM - 7 AM Malaysia = 18:00-23:00 UTC
+    - cron: '0,15,30,45 23 * * *'      # 11 PM - 11:45 PM UTC (7 AM Malaysia start)
+    - cron: '0,15,30,45 0-17 * * *'    # Midnight - 5 PM UTC (night to next afternoon)
 
 jobs:
   earnings-monitor:

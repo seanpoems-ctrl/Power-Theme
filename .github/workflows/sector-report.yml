@@ -3,10 +3,9 @@ name: Daily Sector Report
 on:
   workflow_dispatch: {}
   schedule:
-    # Post-market analysis: 4:30 PM ET daily (after market close at 4 PM)
-    # 20:30 UTC = 4:30 PM EDT | 21:30 UTC = 4:30 PM EST
-    - cron: '30 20 * * 1-5'  # 4:30 PM EDT (Mar–Nov)
-    - cron: '30 21 * * 1-5'  # 4:30 PM EST (Nov–Mar)
+    # Wake-up data: 6:45 AM Malaysia daily (user's wake time)
+    # 22:45 UTC = 6:45 AM Malaysia next day
+    - cron: '45 22 * * *'  # 6:45 AM Malaysia (10:45 PM UTC)
 
 jobs:
   sector-report:
