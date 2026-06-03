@@ -3,10 +3,9 @@ name: Emergency News Monitor
 on:
   workflow_dispatch: {}
   schedule:
-    # Breaking news: Hourly during US market hours only (9:30 AM–4:30 PM ET)
-    # 13:00-20:00 UTC = 9 AM–4 PM ET (covers pre-open + market hours)
-    # News only matters during market hours — no point scanning at 2 AM Malaysia
-    - cron: '30 13-20 * * 1-5'   # Mon-Fri only, 7 runs/day (~14 min/day)
+    # Breaking news: Every 30 min during US market hours + pre/after-market
+    # 12:00-21:00 UTC = 8 AM–5 PM ET Mon-Fri (covers pre-market + full session + AH)
+    - cron: '0,30 12-21 * * 1-5'   # Mon-Fri, 20 runs/day
 
 concurrency:
   group: pages-deploy

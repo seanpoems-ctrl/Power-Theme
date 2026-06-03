@@ -3,10 +3,9 @@ name: Earnings Monitor
 on:
   workflow_dispatch: {}
   schedule:
-    # Earnings monitor: Every 30 min during US market hours only (9:30 AM–5:30 PM ET)
-    # 13:00-21:30 UTC = 9 AM–5:30 PM ET (covers pre-open + after-hours earnings)
-    # Earnings move stocks — only relevant when market is active
-    - cron: '0,30 13-21 * * 1-5'   # Mon-Fri, 18 runs/day (~36 min/day)
+    # Earnings monitor: Every 15 min during US market + extended hours (Mon-Fri)
+    # 12:00-22:00 UTC = 8 AM–6 PM ET — covers pre-market, session, and after-hours earnings
+    - cron: '0,15,30,45 12-22 * * 1-5'   # Mon-Fri, 44 runs/day
 
 jobs:
   earnings-monitor:
