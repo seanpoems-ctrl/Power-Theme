@@ -188,7 +188,7 @@ PEER_MAPPING = {
 # Single-stock leverage/inverse ETF mapping
 # Format: "STOCK": (LONG_ETF, LONG_MULT, SHORT_ETF, SHORT_MULT)
 # SHORT_ETF = None when no liquid single-stock inverse exists → Inv row left blank
-# All ETF volumes verified 2026-06-03 via yfinance. Threshold: >$20M daily.
+# All ETF volumes verified 2026-06-03 via yfinance. Threshold: >$2M daily.
 SINGLE_STOCK_LEVERAGE = {
     # ── Mega-cap Tech (single-stock ETFs, all liquid) ─────────────────────────
     "NVDA":  ("NVDL",  "2x", "NVDS",  "1x"),   # $1.4B / verified
@@ -206,7 +206,7 @@ SINGLE_STOCK_LEVERAGE = {
     "AMD":   ("AMDL",  "2x", "AMDD",  "1x"),   # $327M / $36.6M
     "AVGO":  ("AVGX",  "2x", "AVS",   "1x"),   # $165.8M / $144.6M
     "MRVL":  ("MRVU",  "2x", None,    None),   # $256.9M / no liquid inverse
-    "SMCI":  ("SMCX",  "2x", None,    None),   # $105.9M / SMCZ $16.4M (too low)
+    "SMCI":  ("SMCX",  "2x", "SMCZ",  "1x"),   # $105.9M / $16.4M
     "INTC":  ("INTW",  "2x", None,    None),   # $254.7M / no liquid inverse
     "MU":    ("MUU",   "2x", "MUD",   "1x"),   # MU single-stock ETFs
 
@@ -228,28 +228,46 @@ SINGLE_STOCK_LEVERAGE = {
 
     # ── Fintech / Trading Apps ────────────────────────────────────────────────
     "COIN":  ("CONL",  "2x", None,    None),   # $137M / no liquid inverse
-    "HOOD":  ("ROBN",  "2x", None,    None),   # $47.4M / HOOZ $1.3M (too low)
+    "HOOD":  ("ROBN",  "2x", "HOOZ",  "1x"),   # $47.4M / $1.3M
     "PLTR":  ("PLTU",  "2x", "PLTD",  "1x"),   # $195.7M / $220.7M
 
     # ── AI / Software ─────────────────────────────────────────────────────────
-    "NBIS":  ("NEBX",  "2x", None,    None),   # $94.5M / no inverse
+    "PLTR":  ("PLTU",  "2x", "PLTD",  "1x"),   # Palantir $195.7M / $220.7M
+    "APP":   ("APPX",  "2x", None,    None),   # AppLovin $18.6M
+    "RDDT":  ("RDTL",  "2x", None,    None),   # Reddit $12M
+    "NBIS":  ("NEBX",  "2x", None,    None),   # Nebius $94.5M
+    "UPST":  ("UPSX",  "2x", None,    None),   # Upstart $1.9M
+    "HIMS":  ("HIMZ",  "2x", None,    None),   # Hims $16.2M
+    "SOFI":  ("SOFX",  "2x", None,    None),   # SoFi $16M
+    "TEM":   ("TEMT",  "2x", None,    None),   # Tempus AI $8.7M
 
     # ── Crypto / Bitcoin ──────────────────────────────────────────────────────
     "MSTR":  ("MSTU",  "2x", "SMST",  "1x"),   # $274.6M / $23M
+    "MARA":  ("MRAL",  "2x", None,    None),   # $10.1M
+    "RIOT":  ("RIOX",  "2x", None,    None),   # $16.2M
 
     # ── Quantum Computing ─────────────────────────────────────────────────────
     "IONQ":  ("IONX",  "2x", "IONZ",  "1x"),   # $115.7M / $39.7M
     "RGTI":  ("RGTX",  "2x", "RGTZ",  "1x"),   # $95.1M / $63.2M
     "QBTS":  ("QBTX",  "2x", "QBTZ",  "1x"),   # $70.2M / $21.2M
+    "QUBT":  ("QUBX",  "2x", None,    None),   # $10.9M
 
     # ── Space / Aerospace ─────────────────────────────────────────────────────
     "RKLB":  ("RKLX",  "2x", "RKLZ",  "1x"),   # $227.7M / $35.4M
     "ASTS":  ("ASTX",  "2x", None,    None),   # $381.1M / no inverse
 
     # ── Nuclear / Clean Energy ────────────────────────────────────────────────
-    "OKLO":  ("OKLL",  "2x", None,    None),   # $224.5M / OKLS $16.4M (too low)
+    "OKLO":  ("OKLL",  "2x", "OKLS",  "1x"),   # $224.5M / $16.4M
     "SMR":   ("SMU",   "2x", None,    None),   # $40.7M / no inverse
     "IREN":  ("IREX",  "2x", None,    None),   # $39.3M / no inverse
+
+    # ── Healthcare / Pharma ───────────────────────────────────────────────────
+    "LLY":   ("LLYX",  "2x", None,    None),   # $10.4M / LLYZ delisted
+    "UNH":   ("UNHG",  "2x", None,    None),   # $14.6M
+
+    # ── AI Small-Cap ──────────────────────────────────────────────────────────
+    "BBAI":  ("BAIG",  "2x", None,    None),   # $3.3M
+    "SOUN":  ("SOUX",  "2x", None,    None),   # $4.1M
 
     # ── China Tech ────────────────────────────────────────────────────────────
     "BABA":  ("BABX",  "2x", None,    None),   # $21M / no liquid inverse
@@ -277,7 +295,7 @@ SINGLE_STOCK_LEVERAGE = {
     "CNH":   ("DXJS",  "1x", None,    None),
 }
 
-# ETFs always liquid (>$20M daily) — skip live yfinance volume check
+# ETFs always liquid (>$2M daily) — skip live yfinance volume check
 # All volumes verified 2026-06-03
 ALWAYS_LIQUID_ETFS = {
     # Sector 3x ETFs
@@ -312,6 +330,23 @@ ALWAYS_LIQUID_ETFS = {
     "NEBX",                            # Nebius $94.5M
     "BABX",                            # Alibaba $21M
     "ORCX",                            # Oracle $217M
+    # Previously below $20M but above $2M — now included
+    "SMCZ",                            # SMCI inverse $16.4M
+    "OKLS",                            # Oklo inverse $16.4M
+    "HOOZ",                            # Hood inverse $1.3M  ← borderline, include
+    "RDTL",                            # Reddit $12M
+    "APPX",                            # AppLovin $18.6M
+    "MRAL",                            # Marathon Digital $10.1M
+    "RIOX",                            # Riot $16.2M
+    "SOFX",                            # SoFi $16M
+    "HIMZ",                            # Hims $16.2M
+    "TEMT",                            # Tempus AI $8.7M
+    "UNHG",                            # UnitedHealth $14.6M
+    "UPSX",                            # Upstart $1.9M  ← borderline
+    "LLYX",                            # Eli Lilly $10.4M
+    "QUBX",                            # Quantum Computing $10.9M
+    "BAIG",                            # BigBear.ai $3.3M
+    "SOUX",                            # SoundHound $4.1M
 }
 
 
@@ -341,7 +376,7 @@ def get_leverage_inverse_stocks(ticker: str) -> dict:
             return True
         try:
             vol = _fetch_dollar_volume(etf)
-            return bool(vol and vol > 20_000_000)
+            return bool(vol and vol > 2_000_000)
         except Exception as e:
             logger.debug(f"  Vol check failed for {etf}: {e}")
             return False
