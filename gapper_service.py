@@ -228,8 +228,8 @@ SINGLE_STOCK_LEVERAGE = {
 
     # China Tech / EV
     "BABA":  ("BABAU", "BABAS"),   # Alibaba 2x Long / 1x Short (CWEB sector alt)
-    "LI":    ("EVLV",  "EVSZ"),    # Li Auto → EV sector
-    "HSAI":  ("EVLV",  "EVSZ"),    # Hesai → EV/LiDAR
+    "LI":    ("TSLL",  "TSLS"),    # Li Auto → Tesla 2x (EV sector proxy)
+    "HSAI":  ("SOXL",  "SOXS"),    # Hesai → Semis 3x (LiDAR chips)
 
     # Biotech / Pharma
     "RLAY":  ("LABU",  "LABD"),    # Relay Therapeutics → Biotech 3x
