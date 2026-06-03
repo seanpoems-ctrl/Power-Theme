@@ -811,13 +811,13 @@ ANALYSIS_FORMAT_INSTRUCTIONS = """
 Return analysis_details as 2-3 structured sections using EXACTLY this format:
 
 • **[Section Title]**
-[Body: 2-4 sentences. Bold important numbers and outcome words using **word** — e.g. **beat** EPS by **22%**, guidance **raised** to **$7.2B**, stock **declined** below support.]
+[Body: 2-4 sentences. Extract and bold specific facts from the headlines — numbers, percentages, product names, deal values, company names. Use **bold** for all key figures and outcomes. e.g. "HPE reported **solid Q2 earnings**, with a **record backlog** and **booming AI server business**, driving the stock **+29% premarket**." Never write generic filler — every sentence must contain a specific fact from the headlines.]
 
 • **[Section Title 2]**
-[Body text...]
+[Body: Forward implication — what does this catalyst mean for price momentum, competitive positioning, or sector rotation? Be specific, not vague.]
 
 Section titles to use by category:
-- Earnings: "The 'Beats' (Surprise Factor)" | "The Growth (Momentum)" | "The Guide"
+- Earnings: "The Beats (Surprise Factor)" | "The Growth (Momentum)" | "The Guide"
 - Upgrade: "The Firm & Rating" | "The Thesis"
 - FDA: "The Drug" | "The Significance" | "Risk Profile"
 - Thematic Narratives: "The Narrative" | "Explosiveness"
@@ -826,7 +826,7 @@ Section titles to use by category:
 - Institutional Buying / Insider Buying: "The Buyer" | "Conviction Signal"
 - Others: "What Happened" | "Key Consideration"
 
-Rules: No emojis. No markdown headers. Start every section with • **Title** on its own line then the body on the next line. Separate sections with a blank line.
+Rules: No emojis. No markdown headers (#, ##). Start every section with • **Title** on its own line. Separate sections with a blank line. Every claim must come from the provided headlines — never invent numbers.
 """
 
 
@@ -854,7 +854,7 @@ def analyze_with_gemini(
             "conviction":      25,
             "grade":           "C",
             "finviz_theme":    "—",
-            "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
+            "analysis_detail": {"catalyst": "No fundamental catalyst identified in the last 24 hours.", "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."},
             "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
             "peer_tickers":    get_peer_stocks(ticker),
             "leverage_etfs":   [],
@@ -946,34 +946,60 @@ Real Estate | REITs | Infrastructure | Others
 
 PEER TICKERS: Peer tickers are now pre-populated from a curated mapping (ignore if present in your response).
 
-CRITICAL — reasoning field rules:
-- Must be YOUR OWN sentence (10-20 words) describing what mechanically happened
-- DO NOT copy or paraphrase a headline title
-- DO NOT include a source name (Barron's, Yahoo Finance, etc.)
-- Example good: "Q1 EPS beat by 18%, revenue guidance raised 12% above consensus"
-- Example bad: "HPE Is Having a Dell-Like Move, But It's Not Dell"
+CRITICAL — field quality rules:
+reasoning (1 sentence, 15-25 words):
+  - Synthesise the core mechanical trigger from the headlines — include specific facts, numbers, product names
+  - Example GOOD: "HPE surged on strong Q2 earnings with record AI server backlog and booming data-center revenue"
+  - Example BAD: "HPE reported quarterly results; earnings catalyst detected in headlines" (too generic)
+  - DO NOT copy a headline title verbatim. DO NOT include source names.
 
-Respond in this exact JSON format only (no extra text):
-{{"category": "<category>", "theme": "<specific catalyst name, e.g. 'Beat & Raise', 'New Contracts', 'Sector Sympathy', 'Technical / Flow'>", "reasoning": "<YOUR OWN 1-sentence mechanical trigger — never copy a headline>", "grade": "<A+|A|B|C>", "finviz_theme": "<industry>", "analysis_detail": "Catalyst: [news facts 2-3 sentences] | Impact: [quantify shift, e.g. adds X% to revenue, de-risks pipeline]", "analysis_details": "<detailed multi-section analysis>"}}"""
+analysis_detail — "Catalyst: [2-3 sentence narrative with bold key facts] | Impact: [forward implication — what changes in price/fundamentals]":
+  - Catalyst must include specifics from the headlines: revenue figures, beat %, deal size, product names, stock move %
+  - Impact must state the investment implication: "suggests upside revision to guidance", "de-risks pipeline", "expands TAM"
+  - Example: "Catalyst: HPE reported **solid Q2 earnings** highlighting a **record backlog** and **booming AI server business**, driving the stock **+29% premarket**. | Impact: Strong forward commentary signals **increased revenue visibility** and potential **upside revisions** to guidance in the high-growth AI infrastructure segment."
 
-        response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+Respond in this exact JSON format only (no extra text, no markdown fences):
+{{"category": "<category>", "theme": "<specific catalyst name e.g. 'Beat & Raise', 'New Contracts', 'Sector Sympathy'>", "reasoning": "<specific 15-25 word synthesis from headlines>", "grade": "<A+|A|B|C>", "finviz_theme": "<industry>", "analysis_detail": "Catalyst: [2-3 sentences with **bold** key facts] | Impact: [forward implication]", "analysis_details": "<detailed multi-section analysis>"}}"""
+
+        for attempt in range(3):
+            try:
+                response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+                break
+            except Exception as api_err:
+                if attempt == 2:
+                    raise
+                logger.warning(f"  Gemini API attempt {attempt+1} failed for {ticker}: {api_err} — retrying...")
+                time.sleep(5)
+
         text = response.text.strip()
-        if text.startswith("```"):
-            text = text.split("```")[1]
-            if text.startswith("json"):
-                text = text[4:]
+        # Strip markdown code fences
+        text = re.sub(r"^```(?:json)?\s*", "", text, flags=re.MULTILINE)
+        text = re.sub(r"\s*```$", "", text, flags=re.MULTILINE)
         result = json.loads(text.strip())
 
         category = result.get("category", "Others")
         if category not in CATEGORIES:
             category = "Others"
-        theme            = result.get("theme", category)
-        reasoning        = result.get("reasoning", "")
-        grade            = result.get("grade", "B")
+        theme    = result.get("theme", category)
+        reasoning = result.get("reasoning", "")
+        grade    = result.get("grade", "B")
         if grade not in ("A+", "A", "B", "C"):
             grade = "B"
-        finviz_theme     = result.get("finviz_theme", "—")
-        analysis_detail  = result.get("analysis_detail", f"Catalyst: {reasoning} | Impact: See analysis.")
+        finviz_theme = result.get("finviz_theme", "—")
+
+        # analysis_detail: Gemini returns a string "Catalyst: ... | Impact: ..."
+        # Split into object so frontend can use .catalyst and .impact
+        raw_detail = result.get("analysis_detail", "")
+        if isinstance(raw_detail, dict):
+            analysis_detail = raw_detail
+        elif " | Impact: " in raw_detail:
+            parts = raw_detail.split(" | Impact: ", 1)
+            catalyst_text = parts[0].replace("Catalyst: ", "").strip()
+            impact_text   = parts[1].strip()
+            analysis_detail = {"catalyst": catalyst_text, "impact": impact_text}
+        else:
+            analysis_detail = {"catalyst": raw_detail, "impact": ""}
+
         analysis_details = result.get("analysis_details", reasoning)
 
         # Curated peer stocks (sympathy plays)
@@ -1065,7 +1091,7 @@ def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
         "conviction":      50,
         "grade":           "B",
         "finviz_theme":    "—",
-        "analysis_detail": f"Catalyst: {rsn} | Impact: {detail_body}",
+        "analysis_detail": {"catalyst": rsn, "impact": detail_body},
         "analysis_details": analysis_details,
         "peer_tickers":    peer_tickers,
         "leverage_etfs":   _lev.get("long", []),
