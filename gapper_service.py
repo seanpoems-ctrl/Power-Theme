@@ -43,6 +43,88 @@ OPINION_SOURCES = {
     "marketwatch opinion", "fool.com", "benzinga opinion", "zacks opinion"
 }
 
+# ──────────────────────────────────────────────────────────────
+# Curated Peer Stocks & Leverage/Inverse Mappings
+# ──────────────────────────────────────────────────────────────
+
+PEER_MAPPING = {
+    # Storage & Data Center
+    "HPE": ["SMCI", "NTAP", "STX"],       # HPE Arista, Netapp, Seagate
+    "SMCI": ["HPE", "NTAP", "WDC"],       # Super Micro Computers
+    "NTAP": ["HPE", "SMCI", "STX"],       # NetApp
+    "STX": ["WDC", "NTAP", "HPE"],        # Seagate
+    "WDC": ["STX", "SMCI", "NTAP"],       # Western Digital
+
+    # Networking & Infrastructure
+    "ANET": ["HPE", "CSCO", "IBM"],       # Arista Networks
+    "CSCO": ["ANET", "IBM", "HPE"],       # Cisco
+    "IBM": ["CSCO", "ANET", "HPE"],       # IBM
+
+    # Flash Storage & Tech
+    "HPO": ["SMCI", "NTAP", "ANET"],      # HPE (HPO variant)
+    "SNDK": ["STX", "WDC", "SMCI"],       # SanDisk
+}
+
+LEVERAGE_INVERSE_STOCKS = {
+    # 3x Leverage ETFs (if vol > $20M)
+    "TQQQ": "SQQQ",   # Nasdaq 3x leverage/inverse
+    "UPRO": "SPXU",   # S&P 500 3x leverage/inverse
+    "JNUG": "JDST",   # Gold 3x leverage/inverse
+    "NUGT": "DUST",   # Gold miners 3x leverage/inverse
+    "UGAZ": "DGAZ",   # Natural gas 3x leverage/inverse
+
+    # 2x Leverage ETFs
+    "QLD": "PSQ",     # Nasdaq 2x leverage/inverse
+    "SSO": "SDS",     # S&P 500 2x leverage/inverse
+}
+
+def get_peer_stocks(ticker: str) -> list:
+    """Get curated peer stocks for a given ticker."""
+    return PEER_MAPPING.get(ticker.upper(), [])
+
+
+def get_leverage_inverse_stocks(ticker: str) -> list:
+    """Fetch leverage/inverse ETF counterparts if volume > $20M."""
+    try:
+        if ticker.upper() not in LEVERAGE_INVERSE_STOCKS:
+            return []
+
+        inverse = LEVERAGE_INVERSE_STOCKS[ticker.upper()]
+        leverage_vol = _fetch_dollar_volume(ticker)
+        inverse_vol = _fetch_dollar_volume(inverse)
+
+        peers = []
+        if leverage_vol and leverage_vol > 20_000_000:  # $20M threshold
+            peers.append(ticker.upper())
+        if inverse_vol and inverse_vol > 20_000_000:    # $20M threshold
+            peers.append(inverse)
+
+        return peers
+    except Exception as e:
+        logger.debug(f"  Leverage/inverse fetch failed for {ticker}: {e}")
+        return []
+
+
+def _fetch_dollar_volume(ticker: str) -> float | None:
+    """Fetch latest dollar volume from TradingView."""
+    try:
+        url = f"https://scanner.tradingview.com/america/scan"
+        params = {
+            "columns": ["name", "close", "volume"],
+            "symbols": {"tickers": [ticker.upper()]},
+            "range": [0, 1]
+        }
+        resp = requests.post(url, json=params, timeout=5)
+        if resp.ok:
+            data = resp.json().get("data", [])
+            if data:
+                close = data[0].get("d", [None, None])[1]
+                vol = data[0].get("d", [None, None, None])[2]
+                return (close * vol) if close and vol else None
+    except Exception:
+        pass
+    return None
+
 def _is_opinion_article(title: str, source: str = "") -> bool:
     """
     Check if headline is opinion/analysis (skip) vs hard news (keep).
@@ -644,10 +726,10 @@ Consumer - E-Commerce | Consumer - Streaming | Consumer - Social Media | Consume
 Energy - Oil & Gas | Energy - LNG | Materials - Metals & Mining |
 Real Estate | REITs | Infrastructure | Others
 
-PEER TICKERS: After your analysis, add a JSON key "peer_tickers": a list of 2-3 ticker symbols in the same industry/theme that could see sympathy moves. These should be real tickers with RS > 80 that are NOT {ticker}.
+PEER TICKERS: Peer tickers are now pre-populated from a curated mapping (ignore if present in your response).
 
 Respond in this exact JSON format only (no extra text):
-{{"category": "<category>", "theme": "<specific catalyst name, e.g. 'Beat & Raise', 'New Contracts', 'Sector Sympathy', 'Technical / Flow'>", "reasoning": "<1 sentence mechanical trigger>", "grade": "<A+|A|B|C>", "finviz_theme": "<industry>", "analysis_detail": "Catalyst: [news facts 2-3 sentences] | Impact: [quantify shift, e.g. adds X% to revenue, de-risks pipeline]", "analysis_details": "<detailed multi-section analysis>", "peer_tickers": ["TICK1", "TICK2"]}}"""
+{{"category": "<category>", "theme": "<specific catalyst name, e.g. 'Beat & Raise', 'New Contracts', 'Sector Sympathy', 'Technical / Flow'>", "reasoning": "<1 sentence mechanical trigger>", "grade": "<A+|A|B|C>", "finviz_theme": "<industry>", "analysis_detail": "Catalyst: [news facts 2-3 sentences] | Impact: [quantify shift, e.g. adds X% to revenue, de-risks pipeline]", "analysis_details": "<detailed multi-section analysis>"}}"""
 
         response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
         text = response.text.strip()
@@ -668,8 +750,11 @@ Respond in this exact JSON format only (no extra text):
         finviz_theme     = result.get("finviz_theme", "—")
         analysis_detail  = result.get("analysis_detail", f"Catalyst: {reasoning} | Impact: See analysis.")
         analysis_details = result.get("analysis_details", reasoning)
-        raw_peers        = result.get("peer_tickers", [])
-        peer_tickers     = [str(p).upper().strip() for p in raw_peers if p and str(p).upper() != ticker][:3]
+
+        # Use curated peer stocks + leverage/inverse ETF counterparts
+        peer_tickers = get_peer_stocks(ticker)
+        leverage_peers = get_leverage_inverse_stocks(ticker)
+        peer_tickers = (peer_tickers + leverage_peers)[:3]  # Max 3 peers total
 
         hypothesis_label, strategy = HYPOTHESIS_RULES.get(category, HYPOTHESIS_RULES["Others"])
         base_conviction = {"High Conviction (Gap & Go)": 80, "Medium Conviction (RS Hold)": 60,
@@ -711,6 +796,12 @@ def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
         cat = "Others"
     label, strategy = HYPOTHESIS_RULES.get(cat, HYPOTHESIS_RULES["Others"])
     rsn = titles[0] if titles else "No catalyst identified."
+
+    # Use curated peer stocks + leverage/inverse ETF counterparts
+    peer_tickers = get_peer_stocks(ticker)
+    leverage_peers = get_leverage_inverse_stocks(ticker)
+    peer_tickers = (peer_tickers + leverage_peers)[:3]  # Max 3 peers total
+
     return {
         "category":        cat,
         "theme":           cat,
@@ -721,7 +812,7 @@ def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
         "finviz_theme":    "—",
         "analysis_detail": f"Catalyst: {rsn} | Impact: See analysis.",
         "analysis_details": rsn,
-        "peer_tickers":    [],
+        "peer_tickers":    peer_tickers,
     }
 
 
