@@ -4895,9 +4895,14 @@ verdict 必須是以下其中之一："beat"、"neutral"、"miss"`;
 
 // Renders [[word]] as highlighted colored text (amber), plain text otherwise
 function renderMarkdown(text) {
-  return text.split(/(\[\[[^\]]+\]\])/).map((seg, i) => {
+  if (!text) return null;
+  // Split on [[wikilinks]] and **bold** markers
+  return text.split(/(\[\[[^\]]+\]\]|\*\*[^*]+\*\*)/).map((seg, i) => {
     if (seg.startsWith("[[") && seg.endsWith("]]")) {
       return <span key={i} className="text-amber-300 font-semibold">{seg.slice(2, -2)}</span>;
+    }
+    if (seg.startsWith("**") && seg.endsWith("**")) {
+      return <strong key={i} className="text-zinc-100 font-semibold">{seg.slice(2, -2)}</strong>;
     }
     return <span key={i}>{seg}</span>;
   });
@@ -7132,7 +7137,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
                       : (typeof d === "string" ? d.split(" | Impact: ")[0].replace(/^Catalyst:\s*/i, "") : null);
                     return (
                       <div>
-                        <span className="line-clamp-1 text-[11px] text-zinc-300 block">{catalyst || "—"}</span>
+                        <span className="line-clamp-1 text-[11px] text-zinc-300 block">{catalyst ? renderMarkdown(catalyst) : "—"}</span>
                         <button
                           onClick={(e) => { e.stopPropagation(); setModalData(g); }}
                           className="text-[11px] text-blue-400 hover:text-blue-300 mt-0.5"
