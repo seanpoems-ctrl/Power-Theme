@@ -1,5 +1,5 @@
 {
-  "scan_time": "2026-06-02 22:55 ET",
+  "scan_time": "2026-06-02 23:17 ET",
   "earnings_today": [],
   "gappers": [
     {
@@ -11,7 +11,7 @@
       "avg_dollar_vol": 76363798,
       "mkt_cap": 2924645981,
       "rvol": 0.96,
-      "adr_pct": 12.89,
+      "adr_pct": 12.86,
       "category": "Others",
       "theme": "Technical / Flow",
       "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
@@ -34,14 +34,14 @@
       "industry": "—",
       "technical_status": "Fail (Avg $Vol $76M < $100M)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Verified",
+        "confidence_score": 100,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
+        "primary_claim": "No immediate fundamental catalyst found for SIVEF",
+        "discrepancy_note": null
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -65,18 +65,18 @@
       "mkt_cap": 74502627500,
       "rvol": 5.9,
       "adr_pct": 5.29,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "HPE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
+      "category": "Thematic Narratives",
+      "theme": "AI Narrative Shift",
+      "reasoning": "HPE stock **exploded** as the market has **finally seen** the company as a significant **AI play**, driving strong momentum.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 71,
+      "grade": "A",
+      "finviz_theme": "AI Compute",
       "analysis_detail": {
-        "catalyst": "HPE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "HPE stock **exploded** for **one simple reason**: it is **finally seen** as an **AI play** by the market. This perception shift drove significant momentum for the stock.",
+        "impact": "This fundamental re-rating suggests a potential for sustained upward momentum as investors re-evaluate HPE's long-term growth prospects within the high-growth AI infrastructure sector."
       },
-      "analysis_details": "• **What Happened**\nHPE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **The Narrative**\nHPE stock **exploded** because the market has **finally seen** the company as an **AI play**. This significant shift in perception attributes the stock's surge to a re-evaluation of its strategic position within the rapidly expanding artificial intelligence ecosystem.\n\n• **Explosiveness**\nThe re-categorization of HPE as an **AI play** could trigger a structural re-rating of its valuation multiples, potentially attracting substantial new institutional capital. This narrative shift signals a fundamental change in how investors assess HPE's future revenue streams and competitive positioning in the AI compute space.",
       "peer_tickers": [
         "SMCI",
         "NTAP",
@@ -104,17 +104,17 @@
       "float_shares": "1.32B",
       "short_float": "5.14%",
       "daily_pct": 19.47,
-      "industry": "—",
+      "industry": "AI Compute",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "HPE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
+        "primary_claim": "HPE stock hit a record high",
+        "discrepancy_note": "Source A (Finviz) provides no news to confirm this claim. Source B (Google News) headline [4] explicitly states 'HPE stock hits record high'."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -174,14 +174,14 @@
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 100,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "Source B (MSN) explicitly mentions a '$175M offering', which is a specific fundamental catalyst for RLAY, directly contradicting the initial analysis's claim of 'No immediate fundamental catalyst found'."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -241,14 +241,14 @@
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 100,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "Source B, headline [4] explicitly links Marvell's stock surge to 'Why Nvidia CEO Says It Will Hit $1 Trillion', identifying an immediate fundamental catalyst. Headline [5] also notes 'AI Momentum' as a factor for MRVL. Both contradict the claim of no immediate fundamental catalyst."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -272,18 +272,18 @@
       "mkt_cap": 61550807085,
       "rvol": 1.98,
       "adr_pct": 4.29,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "STM reported quarterly results; earnings catalyst detected in headlines.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
+      "category": "Thematic Narratives",
+      "theme": "AI Demand & Revenue Target Raise",
+      "reasoning": "STMicroelectronics shares rallied after the chip maker **raised its data-center revenue target** to **about $1B by 2026** due to **AI demand**.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 59,
+      "grade": "A",
+      "finviz_theme": "Semiconductors - Compute",
       "analysis_detail": {
-        "catalyst": "STM reported quarterly results; earnings catalyst detected in headlines.",
-        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+        "catalyst": "STMicroelectronics' shares rallied after the company **raised its data-center revenue target**, now expecting **about $1B in data center sales by 2026**. This optimistic revision is directly attributed to robust **AI demand**.",
+        "impact": "This signals a significant and accelerated growth trajectory for STM in the critical **AI data center segment**, suggesting potential **upside revisions to future revenue estimates** and a strengthened competitive position within the AI supply chain."
       },
-      "analysis_details": "• **The Results**\nSTM reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "analysis_details": "• **The Narrative**\nSTMicroelectronics has seen its shares **rally** following an announcement that the chip maker **raised its data-center revenue target**. This upward revision is specifically driven by increasing **AI demand**, pushing the company to anticipate achieving **about $1B in data center sales by 2026**.\n\n• **Explosiveness**\nThis updated outlook highlights STM's increasing leverage to the powerful **AI thematic trend**, specifically within the data center segment. The target increase suggests a faster-than-anticipated ramp in **AI-driven revenue**, positioning the company for potential further re-ratings as the market recognizes its growing exposure and execution in this high-growth area.",
       "peer_tickers": [
         "ON",
         "NXPI",
@@ -316,17 +316,17 @@
       "float_shares": "888.79M",
       "short_float": "1.55%",
       "daily_pct": 15.2,
-      "industry": "—",
+      "industry": "Semiconductors - Compute",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "STM reported quarterly results; earnings catalyst detected in headlines.",
-        "discrepancy_note": ""
+        "primary_claim": "data-center revenue target to about $1B by 2026",
+        "discrepancy_note": "Source A (Finviz News) provides no information to confirm the claim. Only one article within Source B (Google News - Stock Titan) mentions the specific data-center revenue target of about $1B by 2026."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -337,8 +337,8 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     },
     {
       "ticker": "GRRR",
@@ -350,18 +350,18 @@
       "mkt_cap": 602301027,
       "rvol": 3.71,
       "adr_pct": 7.45,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "GRRR reported quarterly results; earnings catalyst detected in headlines.",
+      "category": "New Contract/Partnership",
+      "theme": "New Contracts",
+      "reasoning": "GRRR secured a new $2B AI data center infrastructure deal in India, marking its third such deal in a month, anchoring significant Asia expansion.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
+      "conviction": 85,
       "grade": "C",
-      "finviz_theme": "—",
+      "finviz_theme": "Cloud Data Centers",
       "analysis_detail": {
-        "catalyst": "GRRR reported quarterly results; earnings catalyst detected in headlines.",
-        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+        "catalyst": "GRRR announced a **new deal** with **$2B revenue potential** for an **AI data center build in India**, which is its **third data center infrastructure deal in a month**. This strategic expansion into Asia is driving investor attention.",
+        "impact": "This substantial contract and repeated deal wins significantly **increase GRRR's revenue visibility** and **market positioning** in the high-growth AI infrastructure sector, potentially leading to **analyst upgrades** and **sustained momentum**."
       },
-      "analysis_details": "• **The Results**\nGRRR reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "analysis_details": "• **Impact**\nGRRR has secured a **new deal** promising a **$2B revenue potential**, specifically for an **AI data center build in India**. This marks the **third data center infrastructure deal in a month** for the company, indicating rapid expansion and strong demand for its services.\n\n• **Strategic Value**\nThe **$2B AI data center build in India** anchors GRRR's significant Asia expansion, positioning the company as a key player in a high-growth region. The consistent flow of **data center infrastructure deals** signals robust business momentum and could lead to a re-rating of the stock, with retail investors already eyeing the **$100 mark**.",
       "peer_tickers": [
         "SOUN",
         "BBAI",
@@ -394,17 +394,17 @@
       "float_shares": "24.98M",
       "short_float": "13.33%",
       "daily_pct": 3.03,
-      "industry": "—",
+      "industry": "Cloud Data Centers",
       "technical_status": "Fail (Avg $Vol $42M < $100M)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "GRRR reported quarterly results; earnings catalyst detected in headlines.",
-        "discrepancy_note": ""
+        "primary_claim": "$2B AI data center infrastructure deal",
+        "discrepancy_note": "Source A (Finviz) contains no news items, thus it does not confirm the claim. Source B (Google News) mentions the $2B deal/revenue potential multiple times."
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -428,18 +428,18 @@
       "mkt_cap": 3068658413,
       "rvol": 1.69,
       "adr_pct": 5.3,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "HSAI reported quarterly results; earnings catalyst detected in headlines.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
+      "category": "Others",
+      "theme": "Sector Sympathy",
+      "reasoning": "Moving in sympathy with leading Chinese ADRs collectively rallying, causing HSAI.US to surge over **11%**.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 59,
       "grade": "C",
-      "finviz_theme": "—",
+      "finviz_theme": "Electric Vehicles",
       "analysis_detail": {
-        "catalyst": "HSAI reported quarterly results; earnings catalyst detected in headlines.",
-        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+        "catalyst": "Hesai's stock **surged over 11%**, moving in direct sympathy with a collective rally among **leading Chinese ADRs**. While a **Q4 2025 Earnings Call Transcript** was made available, no specific positive earnings results were reported in the headlines as the direct cause for the stock's significant move.",
+        "impact": "This indicates a momentum-driven move primarily influenced by broader sector sentiment rather than company-specific fundamental news."
       },
-      "analysis_details": "• **The Results**\nHSAI reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "analysis_details": "• **What Happened**\nHesai (HSAI.US) experienced a significant **surge of over 11%** in its stock price, occurring as **leading Chinese ADRs rallied collectively**. Concurrently, the **Q4 2025 Earnings Call Transcript** became available, but no specific positive earnings *results* were reported in the headlines to directly justify the stock's pronounced upward movement.\n\n• **Key Consideration**\nThe sharp price increase for HSAI appears to be primarily driven by a broader positive sentiment across the Chinese ADR market. Without specific company-level fundamental news detailing a beat or raise from its Q4 2025 results, the momentum may be speculative, influenced by sector rotation or technical factors rather than intrinsic value changes.",
       "peer_tickers": [
         "OUST",
         "AEYE",
@@ -472,17 +472,17 @@
       "float_shares": "129.91M",
       "short_float": "4.14%",
       "daily_pct": 8.14,
-      "industry": "—",
+      "industry": "Electric Vehicles",
       "technical_status": "Fail (Avg $Vol $50M < $100M)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 85,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "HSAI reported quarterly results; earnings catalyst detected in headlines.",
-        "discrepancy_note": ""
+        "primary_claim": "HSAI.US to surge over 11%",
+        "discrepancy_note": "Google News (specifically articles from Moomoo and 富途牛牛) confirms 'Hesai (HSAI.US) Surges Over 11%', matching the primary claim. However, Finviz News contains no information regarding this claim, thus both sources do not confirm it."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -506,18 +506,18 @@
       "mkt_cap": 15249692409,
       "rvol": 1.17,
       "adr_pct": 2.99,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "LI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
+      "category": "Thematic Narratives",
+      "theme": "Competitive Pressure",
+      "reasoning": "Li Auto stock plummeted to **record lows** as **EV price wars intensified**, signaling severe competitive pressure within the electric vehicle market.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Electric Vehicles",
       "analysis_detail": {
-        "catalyst": "LI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "Li Auto's stock **plummeted to record lows** following news that **EV price wars intensified**, indicating significant competitive pressures impacting the company's market position and profitability.",
+        "impact": "The intensification of **EV price wars** suggests continued margin compression and increased competition, posing substantial downside risk to Li Auto's future revenue and earnings estimates."
       },
-      "analysis_details": "• **What Happened**\nLI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **The Narrative**\nLi Auto's stock experienced a significant drop, **plummeting to record lows**, directly attributed to the **intensification of EV price wars**. This headline underscores a challenging competitive environment within the electric vehicle sector, putting pressure on pricing and market share.\n\n• **Explosiveness**\nThe news signals a strong negative momentum shift, as **EV price wars intensify**, directly eroding profitability and market valuations across the sector, particularly for companies like Li Auto seeing **record low** stock prices. This trend suggests persistent headwinds for the company's valuation.",
       "peer_tickers": [
         "NIO",
         "XPEV",
@@ -540,17 +540,17 @@
       "float_shares": "842.97M",
       "short_float": "2.72%",
       "daily_pct": 6.12,
-      "industry": "—",
+      "industry": "Electric Vehicles",
       "technical_status": "Fail (ADR 3.0% < 4%)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "LI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
+        "primary_claim": "Li Auto stock plummeted to record lows.",
+        "discrepancy_note": "Source B[1] (Stocktwits) states 'LI Stocks Hit 52-Week Lows Today?', which is not necessarily an all-time 'record low'. Source B[3] (EBC Financial Group) repeats the claim 'Li Auto Stock Plummets to Record Lows', but this is not independently confirmed by a second source providing the same specific low."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -561,8 +561,8 @@
         "gate_adr": false
       },
       "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "tier": "Fail",
+      "tier_label": "Excluded"
     },
     {
       "ticker": "MXL",
@@ -574,18 +574,18 @@
       "mkt_cap": 7948102960,
       "rvol": 1.32,
       "adr_pct": 11.86,
-      "category": "New Contract/Partnership",
-      "theme": "New Contract/Partnership",
-      "reasoning": "MXL announced a new contract or strategic partnership.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
       "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "MXL announced a new contract or strategic partnership.",
-        "impact": "Contract or partnership announcement detected. Evaluate deal size and strategic significance."
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
       },
-      "analysis_details": "• **The Announcement**\nMXL announced a new contract or strategic partnership.\n\n• **Strategic Value**\nContract or partnership announcement detected. Evaluate deal size and strategic significance.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
       "peer_tickers": [
         "MRVL",
         "COHR",
@@ -603,27 +603,21 @@
           "mult": "3x"
         }
       ],
-      "headlines": [
-        {
-          "title": "MaxLinear Targets Growing Edge Networking Opportunity With New Deal - Yahoo Finance Singapore",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPUW5aZFpfRFNYMUxPMHY1dzhhaURCd0NNRG9sb1doYXZjREp4dWdCNHZwbEg3QmtEQUlwTGljRjd3cGs1cFRrZXlFVUFOU3k1ZndPRFNSMU1qdWRVZXRkVUQ3cHd4RGh2SmRBYkVGZGpHNHQwSF9yNlI1ZV9CQk5GZFdGOVU3bmhCS09JaFg3V3NtSVdk?oc=5"
-        }
-      ],
+      "headlines": [],
       "float_shares": "83.59M",
       "short_float": "3.58%",
       "daily_pct": 2.93,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "MXL announced a new contract or strategic partnership.",
-        "discrepancy_note": ""
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "The initial analysis claims 'No immediate fundamental catalyst found'. While Finviz shows no news, Source B (Google News) reports 'MaxLinear Targets Growing Edge Networking Opportunity With New Deal', which indicates a fundamental catalyst, contradicting the initial claim."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -634,8 +628,8 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     },
     {
       "ticker": "NVTS",
@@ -683,14 +677,14 @@
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "Source B [2] explicitly mentions 'investor-conference chatter and AI data-center narrative stay in focus' as reasons for Navitas Semiconductor's jump, suggesting a fundamental catalyst, which contradicts the claim of 'no immediate fundamental catalyst found'."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -750,14 +744,14 @@
       "industry": "—",
       "technical_status": "Fail (Avg $Vol $25M < $100M)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 100,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
+        "primary_claim": "$URG stock is up 16% today.",
+        "discrepancy_note": "Source B states URG is up 16% today; Source A has no mention of this claim."
       },
       "gates_passed": 2,
       "gates_detail": {
@@ -782,17 +776,17 @@
       "rvol": 0.63,
       "adr_pct": 7.83,
       "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "SMTC reported quarterly results; earnings catalyst detected in headlines.",
+      "theme": "Earnings Call (No Outcome)",
+      "reasoning": "Semtech's **Q1 Earnings Call** was held, prompting **analyst questions**, but headlines reported no specific financial results or updated guidance, indicating a low-impact event.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
+      "conviction": 75,
+      "grade": "C",
+      "finviz_theme": "Semiconductors - Analog",
       "analysis_detail": {
-        "catalyst": "SMTC reported quarterly results; earnings catalyst detected in headlines.",
-        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+        "catalyst": "Semtech held its **Q1 Earnings Call** on **2026-06-02**, attracting **analyst questions**. The headline indicates the call occurred but **does not specify** any earnings beat/miss, revenue figures, or updated guidance, making the actual financial outcome unknown.",
+        "impact": "Without specific financial results or forward-looking statements, the immediate impact on price momentum remains **unclear and speculative**, suggesting a neutral or minor technical reaction rather than a fundamental driver, thus requiring further detail."
       },
-      "analysis_details": "• **The Results**\nSMTC reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nThe headline only confirmed Semtech's **Q1 Earnings Call** occurred on **2026-06-02**, detailing that analysts asked **“Our Top 5 Analyst Questions.”** Crucially, no financial results were provided, meaning there is no information on whether the company beat or missed earnings estimates or provided any surprise factor.\n\n• **The Growth (Momentum)**\nGiven the absence of reported financial performance data, such as revenue growth, profit margins, or new orders, there is no immediate indication of fundamental growth drivers or catalysts from the earnings call. The headline focuses solely on the event itself and analyst engagement, without offering insights into business momentum.\n\n• **The Guide**\nThe headline does not contain any information regarding Semtech's updated guidance or future outlook. Without specific forward-looking statements from management, the earnings call's potential impact on future revenue or earnings per share projections cannot be assessed, leaving the growth trajectory unconfirmed.",
       "peer_tickers": [
         "MRVL",
         "AVGO",
@@ -820,17 +814,17 @@
       "float_shares": "92.06M",
       "short_float": "5.91%",
       "daily_pct": 11.4,
-      "industry": "—",
+      "industry": "Semiconductors - Analog",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 100,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "SMTC reported quarterly results; earnings catalyst detected in headlines.",
-        "discrepancy_note": ""
+        "primary_claim": "Semtech's Q1 Earnings Call was held",
+        "discrepancy_note": "Source B (Google News item [4]) explicitly confirms 'Semtech’s Q1 Earnings Call', but Source A (Finviz News) provides no information to confirm or deny this claim."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -841,8 +835,8 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     },
     {
       "ticker": "AVGO",
@@ -855,17 +849,17 @@
       "rvol": 2.01,
       "adr_pct": 3.75,
       "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
+      "theme": "Sector Sympathy",
+      "reasoning": "Broadcom surged 6% on Alphabet's $80B AI raise, indicating strong sector tailwinds for AI infrastructure providers.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 60,
+      "grade": "B",
+      "finviz_theme": "AI Compute",
       "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+        "catalyst": "Broadcom **jumped 6%** following news of **Alphabet's** substantial **$80B** AI capital raise, signaling a significant increase in AI infrastructure spending across the industry. This move is also supported by **Marvell's** **18%** jump, linked to **Jensen Huang's $1T endorsement**, highlighting strong sector momentum.",
+        "impact": "This indicates a strong **secondary tailwind** for Broadcom, suggesting **increased demand** for its semiconductor and networking products that enable large-scale AI deployment, potentially leading to **higher revenue visibility** in the AI segment."
       },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "analysis_details": "• **What Happened**\n**Broadcom** experienced a **6% jump** in its stock price, attributed to **Alphabet's** announcement of a massive **$80 billion** capital raise specifically for AI initiatives. This significant investment by a major tech giant signals robust spending in the AI ecosystem.\n\n• **Key Consideration**\nThe move is a clear **sector sympathy play**, leveraging the broader positive sentiment around AI infrastructure demand. This large capital injection by **Alphabet** suggests sustained growth for companies providing critical hardware and networking solutions to hyperscalers, implying potential for **increased order flow** and **revenue growth** for AVGO in the medium term.",
       "peer_tickers": [
         "MRVL",
         "QCOM",
@@ -883,21 +877,27 @@
           "mult": "3x"
         }
       ],
-      "headlines": [],
+      "headlines": [
+        {
+          "title": "Broadcom Jumps 6% on Alphabet $80B AI Raise, Marvell Soars 18% on Jensen Huang’s $1T Endorsement - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOUDhRUUZwcEtZaDZReG5HOGhLMVI4WUFyeVowQ1NkVmRSOVRNQUZkekcwLU9xRGlOYUFpRWhlYU5qQ1c0OGtQd1dQYUtvR2l5ZjJpNXNSdHlJWm10cDJZNHVNakpUWk9FOFZrVEdZQUM1ZEFXRFRkSDNtSlZpaU9vWWFsVVB2T0NZS0NzSWg2X1hPTlFGWUZYSWNn?oc=5"
+        }
+      ],
       "float_shares": "4.64B",
       "short_float": "1.15%",
       "daily_pct": 4.7,
-      "industry": "—",
+      "industry": "AI Compute",
       "technical_status": "Fail (ADR 3.8% < 4%)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
+        "primary_claim": "Broadcom surged 6% on Alphabet's $80B AI raise",
+        "discrepancy_note": "Finviz News (Source A) contained no information regarding the claim. Google News (Source B) article [5] from Yahoo Finance fully confirmed 'Broadcom Jumps 6% on Alphabet $80B AI Raise', but this constitutes only one of the two consulted sources."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -908,8 +908,8 @@
         "gate_adr": false
       },
       "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     },
     {
       "ticker": "AEHR",
@@ -921,18 +921,18 @@
       "mkt_cap": 3554222900,
       "rvol": 1.13,
       "adr_pct": 11.27,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "AEHR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
+      "category": "Thematic Narratives",
+      "theme": "AI/EV Growth Re-engagement",
+      "reasoning": "AEHR stock **rebounds** as the market deepens its engagement with the company's **AI and EV test story**, despite prior **volatility**.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Semiconductors - Compute",
       "analysis_detail": {
-        "catalyst": "AEHR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "The headlines indicate that **AEHR Stock Rebounds** as market participants re-engage with and deepen the existing **AI And EV Test Story**. This positive momentum follows a period where the **Stock Whipsaws As Growth Story Meets Volatility**.",
+        "impact": "The renewed focus on the company's **AI and EV testing narrative** suggests a potential re-rating or increased investor interest, though the **volatility** highlights inherent risks in this growth story."
       },
-      "analysis_details": "• **What Happened**\nAEHR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **The Narrative**\nAEHR stock **rebounds** as the market re-engages and **deepens** the company's existing **AI And EV Test Story**. This signals renewed investor interest in AEHR's position within these high-growth sectors, particularly concerning the testing of advanced semiconductors for AI and electric vehicles.\n\n• **Explosiveness**\nThe stock has recently experienced **whipsaws** as its **growth story meets volatility**, indicating a sensitive market reaction to the unfolding narrative. While the **deepening** of the AI and EV test story could provide upside momentum, the noted **volatility** suggests potential for sharp price swings without new, concrete fundamental catalysts.",
       "peer_tickers": [
         "COHU",
         "ONTO",
@@ -965,17 +965,17 @@
       "float_shares": "29.75M",
       "short_float": "16.09%",
       "daily_pct": 20.7,
-      "industry": "—",
+      "industry": "Semiconductors - Compute",
       "technical_status": "Pass",
       "verification": {
         "status": "Unconfirmed",
-        "confidence_score": 50,
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "AEHR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
+        "primary_claim": "AEHR stock rebounds",
+        "discrepancy_note": "Finviz News (Source A) contained no content to confirm the claim. While Google News articles [1], [2], and [3] support the idea of a rebound ('jumps,' 'rebounds,' 'surge'), the claim cannot be marked 'Verified' as it is not confirmed by BOTH sources due to the empty Finviz feed."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -1000,17 +1000,17 @@
       "rvol": 1.43,
       "adr_pct": 4.4,
       "category": "Others",
-      "theme": "Others",
-      "reasoning": "MCHP gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "theme": "Management Presentation",
+      "reasoning": "Microchip (MCHP) CEO and CFO are scheduled to speak at the Evercore 2026 tech conference, a routine management presentation event.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
+      "conviction": 58,
+      "grade": "C",
+      "finviz_theme": "Semiconductors - Analog",
       "analysis_detail": {
-        "catalyst": "MCHP gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "Microchip Technology's **CEO** and **CFO** are slated to speak at the **Evercore 2026 tech conference**. This is a routine corporate event where management typically provides updates on business strategy and outlook.",
+        "impact": "The announcement itself is a **low-impact headline** without specific agenda details, making its direct impact on momentum speculative and largely anticipatory of potential future disclosures."
       },
-      "analysis_details": "• **What Happened**\nMCHP gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **What Happened**\nMicrochip Technology's **CEO** and **CFO** are confirmed to speak at the upcoming **Evercore 2026 tech conference**. This scheduled event allows management to present the company's strategic initiatives, financial performance, and future outlook to investors and analysts.\n\n• **Key Consideration**\nWhile the announcement of a management presentation is standard, the lack of a specific agenda means immediate price movement is likely driven by market anticipation or technical factors rather than fundamental news. Investors will monitor the conference for any new disclosures regarding **product launches**, **financial guidance**, or **strategic partnerships** that could act as future catalysts.",
       "peer_tickers": [
         "STM",
         "ON",
@@ -1038,17 +1038,17 @@
       "float_shares": "531.24M",
       "short_float": "5.51%",
       "daily_pct": 5.94,
-      "industry": "—",
+      "industry": "Semiconductors - Analog",
       "technical_status": "Pass",
       "verification": {
         "status": "Unconfirmed",
-        "confidence_score": 50,
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "MCHP gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
+        "primary_claim": "Microchip (MCHP) CEO and CFO are scheduled to speak at the Evercore 2026 tech conference",
+        "discrepancy_note": "Source A (Finviz News) does not contain any information regarding the Evercore 2026 tech conference or MCHP's CEO/CFO speaking there. Only Source B (Google News, specifically Stock Titan) mentions this event."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -1072,18 +1072,18 @@
       "mkt_cap": 1959897600,
       "rvol": 1.76,
       "adr_pct": 12.21,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "LWLG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
+      "category": "Thematic Narratives",
+      "theme": "Sector Sympathy",
+      "reasoning": "LWLG soared **15%** on **Nvidia** optimism, indicating a sector sympathy move rather than company-specific news.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 59,
       "grade": "C",
-      "finviz_theme": "—",
+      "finviz_theme": "AI Networking",
       "analysis_detail": {
-        "catalyst": "LWLG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "Lightwave Logic (**LWLG**) soared **15%** primarily by **riding on Nvidia optimism**, indicating a strong correlation to the broader semiconductor and AI sector rather than company-specific news. Additionally, a director received **13,612 RSUs** as an equity award, which is a minor, non-driving event.",
+        "impact": "This move suggests a speculative, momentum-driven rally based on macro sector sentiment, with a higher risk profile due to the absence of direct company-specific fundamental news."
       },
-      "analysis_details": "• **What Happened**\nLWLG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **The Narrative**\nLightwave Logic (**LWLG**) experienced a significant surge, closing **15% higher**, driven by broader **Nvidia optimism**. This suggests investors are extending the positive sentiment from a sector leader to companies perceived to be in the same high-growth AI infrastructure space. A director also received **13,612 RSUs** as an equity award, which is a routine compensation event and not the primary market driver.\n\n• **Explosiveness**\nThe **15%** price increase demonstrates strong speculative momentum, likely from retail and algorithmic traders chasing the AI theme. However, lacking specific company news, this move could be volatile and subject to quick reversals if the broader sector sentiment shifts or if the market differentiates between actual AI beneficiaries and thematic plays. The absence of a fundamental catalyst implies higher risk for sustained momentum.",
       "peer_tickers": [
         "COHR",
         "AXTI",
@@ -1116,17 +1116,17 @@
       "float_shares": "152.27M",
       "short_float": "8.96%",
       "daily_pct": 15.43,
-      "industry": "—",
+      "industry": "AI Networking",
       "technical_status": "Fail (Avg $Vol $87M < $100M)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 65,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "LWLG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
+        "primary_claim": "LWLG soared 15%",
+        "discrepancy_note": "Source B (Google News [1]) confirms LWLG 'Soars 15%', but Source A (Finviz) provides no information to corroborate this claim."
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -1150,18 +1150,18 @@
       "mkt_cap": 1932489333,
       "rvol": 3.89,
       "adr_pct": 6.73,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "LAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
+      "category": "Thematic Narratives",
+      "theme": "Project Development / Funding Update",
+      "reasoning": "LAC firmed as **Thacker Pass funding** and **timeline** came into focus, with **spending surging**, indicating project advancement.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 65,
       "grade": "C",
-      "finviz_theme": "—",
+      "finviz_theme": "Materials - Metals & Mining",
       "analysis_detail": {
-        "catalyst": "LAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "LAC stock **firmed** and **steadied** following news that **Thacker Pass funding** and **timeline** are coming into focus, with **Thacker Pass spending surging**.",
+        "impact": "This clarity on a critical project's financial and developmental progress de-risks future cash flows and provides a clearer path to production, potentially attracting further investment."
       },
-      "analysis_details": "• **What Happened**\nLAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **The Narrative**\nLAC's stock **firmed** and **steadied** as the market reacted to updated information regarding its key **Thacker Pass** project. Headlines highlighted that **Thacker Pass funding** and its **timeline** are now coming into sharper focus, with project **spending surging**.\n\n• **Explosiveness**\nThe increased clarity on **Thacker Pass** development, particularly regarding its financing and operational timeline, can reduce uncertainty and attract renewed investor interest. This progressive news supports the long-term thematic narrative around lithium supply and electric vehicle demand, providing momentum as the project advances towards production.",
       "peer_tickers": [
         "ALB",
         "SQM",
@@ -1194,16 +1194,16 @@
       "float_shares": "184.49M",
       "short_float": "15.49%",
       "daily_pct": 4.36,
-      "industry": "—",
+      "industry": "Materials - Metals & Mining",
       "technical_status": "Fail (Avg $Vol $83M < $100M)",
       "verification": {
         "status": "Unconfirmed",
-        "confidence_score": 50,
+        "confidence_score": 100,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "LAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "primary_claim": "A specific dollar amount for Thacker Pass funding",
         "discrepancy_note": ""
       },
       "gates_passed": 2,
@@ -1228,18 +1228,18 @@
       "mkt_cap": 2951584224,
       "rvol": 0.92,
       "adr_pct": 16.61,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "WOLF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
+      "category": "Thematic Narratives",
+      "theme": "AI Data Center Bet / Strategic Expansion",
+      "reasoning": "Wolfspeed rallied **15%** on news highlighting its **expansion efforts** and **AI data center bet taking shape**, signaling a significant strategic play in the high-growth AI sector.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 56,
+      "grade": "A",
+      "finviz_theme": "AI Compute",
       "analysis_detail": {
-        "catalyst": "WOLF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "Wolfspeed (WOLF) **zoomed 15%** following reports of its significant **expansion efforts** and a strategic **AI data center bet taking shape**, directly linking the company to the booming AI infrastructure market.",
+        "impact": "This strategic pivot signals a potential re-rating of WOLF's growth prospects and competitive positioning within the critical **AI compute** value chain."
       },
-      "analysis_details": "• **What Happened**\nWOLF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **The Narrative**\nWolfspeed (WOLF) experienced a significant **15% surge** after news highlighted its active **expansion efforts** and the market's growing confidence in its strategic **AI data center bet taking shape**. These headlines connect WOLF directly to the high-growth **AI sector**.\n\n• **Explosiveness**\nThe market's strong positive reaction, evidenced by the **15% rally**, indicates investor excitement regarding WOLF's potential to capitalize on the increasing demand for efficient power solutions in **AI data centers**. This narrative suggests a momentum play driven by thematic tailwinds, supporting a re-evaluation of WOLF's strategic importance.",
       "peer_tickers": [
         "NVTS",
         "STM",
@@ -1272,16 +1272,16 @@
       "float_shares": "28.73M",
       "short_float": "96.35%",
       "daily_pct": 15.32,
-      "industry": "—",
+      "industry": "AI Compute",
       "technical_status": "Pass",
       "verification": {
         "status": "Unconfirmed",
-        "confidence_score": 50,
+        "confidence_score": 60,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "WOLF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "primary_claim": "Wolfspeed rallied 15%",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -1307,17 +1307,17 @@
       "rvol": 1.68,
       "adr_pct": 6.42,
       "category": "Others",
-      "theme": "Others",
-      "reasoning": "GLW gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
+      "conviction": 59,
+      "grade": "C",
+      "finviz_theme": "Materials - Metals & Mining",
       "analysis_detail": {
-        "catalyst": "GLW gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "Unknown",
+        "impact": "Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
       },
-      "analysis_details": "• **What Happened**\nGLW gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **What Happened**\nNo specific fundamental news appeared in the last 24 hours to explain any significant price action for **Corning (GLW)**. The only headline notes a **\"Valuation Check After Recent Share Price Pullback And Strong Multi Year Returns\"**, indicating market analysis rather than a direct catalyst.\n\n• **Key Consideration**\nThe absence of clear news, despite potential price movement indicated by the context, suggests the stock's activity is driven by **technical factors** or **institutional flow**. This lack of fundamental backing introduces **high risk**, potentially leading to a **\"Gap and Trap\"** scenario if a significant move occurs without substantive news.",
       "peer_tickers": [
         "COHR",
         "LITE",
@@ -1345,17 +1345,17 @@
       "float_shares": "787.84M",
       "short_float": "2.70%",
       "daily_pct": 13.41,
-      "industry": "—",
+      "industry": "Materials - Metals & Mining",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Verified",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "GLW gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": null
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -1379,18 +1379,18 @@
       "mkt_cap": 1597272873,
       "rvol": 1.28,
       "adr_pct": 12.06,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "UMAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
+      "category": "Government Policy",
+      "theme": "Government Funding Buzz",
+      "reasoning": "UMAC reached an **all-time high** on **government funding buzz**, though director **Rich Sanford** sold **$724,542** worth of shares.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
       "grade": "B",
-      "finviz_theme": "—",
+      "finviz_theme": "Defense & Aerospace",
       "analysis_detail": {
-        "catalyst": "UMAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "Unusual Machines (UMAC) **notched an all-time high** on **government funding buzz**, signaling strong market speculation regarding potential future government contracts or grants.",
+        "impact": "This **buzz** could drive further speculative momentum and a re-rating for UMAC based on anticipated government support, but the **director's sale of $724,542** in stock introduces a cautionary signal."
       },
-      "analysis_details": "• **What Happened**\nUMAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **The Policy**\nUnusual Machines (UMAC) achieved an **all-time high** following market speculation driven by **government funding buzz**. This indicates significant investor anticipation regarding potential future government contracts or grants for the company.\n\n• **Direct Impact**\nThe **government funding buzz** is a strong catalyst for upward price momentum, however, a director, **Rich Sanford**, sold **$724,542** in stock. This insider activity adds a cautious counterpoint, potentially signaling profit-taking or differing conviction.",
       "peer_tickers": [
         "JOBY",
         "ACHR",
@@ -1423,17 +1423,17 @@
       "float_shares": "43.06M",
       "short_float": "14.99%",
       "daily_pct": 15.72,
-      "industry": "—",
+      "industry": "Defense & Aerospace",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "UMAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
+        "primary_claim": "director Rich Sanford sold $724,542 worth of shares",
+        "discrepancy_note": "Source A (Finviz News) has no information ('none') regarding the director's stock sale. Source B (Google News) item [1] confirms the claim ('Unusual machines director Rich Sanford sells $724,542 in stock'). As only one source provides confirmation, it is marked as a Discrepancy."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -1458,17 +1458,17 @@
       "rvol": 1.92,
       "adr_pct": 7.54,
       "category": "Others",
-      "theme": "Others",
-      "reasoning": "COHR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "theme": "Sector Sympathy",
+      "reasoning": "Moving in sympathy with Marvell (MRVL) following its 'skyrocket ride' and pushing COHR to a record high.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
+      "conviction": 59,
       "grade": "B",
-      "finviz_theme": "—",
+      "finviz_theme": "Semiconductors - Compute",
       "analysis_detail": {
-        "catalyst": "COHR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "Coherent (**COHR**) hit a **record high**, driven primarily by the **\"skyrocket ride\"** of **Marvell (MRVL)**. This indicates strong positive sentiment and momentum within the broader **semiconductor** or **high-tech** sector.",
+        "impact": "This move is secondary to **Marvell's** performance, suggesting **COHR's** momentum is currently reliant on **broader sector tailwinds** rather than company-specific catalysts, which could lead to retracement if the leader falters."
       },
-      "analysis_details": "• **What Happened**\nCOHR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **What Happened**\n**Coherent (COHR)** achieved a **record high** today, primarily influenced by the significant **\"skyrocket ride\"** of **Marvell (MRVL)**. This indicates that COHR's strong performance is largely a **sympathy play**, benefiting from positive momentum in the broader **semiconductor** or **technology sector**.\n\n• **Key Consideration**\nThe current momentum for **COHR** is driven by **external factors** related to **Marvell's** performance rather than **company-specific news**. Investors should monitor **Marvell's** continued strength and the overall **sector sentiment**, as a reversal in the leader could swiftly impact **COHR's** trajectory, indicating a **secondary** and potentially **less sustainable** catalyst.",
       "peer_tickers": [
         "AXTI",
         "LITE",
@@ -1496,7 +1496,7 @@
       "float_shares": "187.07M",
       "short_float": "4.64%",
       "daily_pct": 17.63,
-      "industry": "—",
+      "industry": "Semiconductors - Compute",
       "technical_status": "Pass",
       "verification": {
         "status": "Unconfirmed",
@@ -1505,7 +1505,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "COHR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "primary_claim": "COHR being pushed to a record high",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -1531,17 +1531,17 @@
       "rvol": 1.52,
       "adr_pct": 2.82,
       "category": "New Contract/Partnership",
-      "theme": "New Contract/Partnership",
-      "reasoning": "BABA announced a new contract or strategic partnership.",
+      "theme": "New Contracts",
+      "reasoning": "Alibaba shares rose **4.8%** driven by a **fresh UEFA partnership** and renewed investor focus on new **AI initiatives**, signaling strategic growth.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
+      "conviction": 78,
       "grade": "B",
-      "finviz_theme": "—",
+      "finviz_theme": "AI Ads & Search",
       "analysis_detail": {
-        "catalyst": "BABA announced a new contract or strategic partnership.",
-        "impact": "Contract or partnership announcement detected. Evaluate deal size and strategic significance."
+        "catalyst": "Alibaba shares rose **4.8%** following news of a **fresh UEFA partnership** and investor refocus on the company's **new AI initiatives**.",
+        "impact": "This combination signals strategic moves in global branding, sports marketing, and high-growth technology, potentially driving **increased revenue visibility** and **market re-rating**."
       },
-      "analysis_details": "• **The Announcement**\nBABA announced a new contract or strategic partnership.\n\n• **Strategic Value**\nContract or partnership announcement detected. Evaluate deal size and strategic significance.",
+      "analysis_details": "• **Impact**\nAlibaba shares climbed **4.8%** yesterday, directly attributed to a **fresh UEFA partnership** that suggests significant brand exposure and potential technological integration. Concurrently, investor attention is refocusing on Alibaba’s **new AI initiatives**, indicating a strategic pivot towards high-growth, innovative segments.\n\n• **Strategic Value**\nThe **UEFA partnership** provides a global platform for Alibaba, likely boosting its brand presence and digital services reach across international markets. The renewed emphasis on **AI initiatives** positions Alibaba favorably within the rapidly expanding artificial intelligence ecosystem, potentially unlocking new revenue streams and enhancing existing business models.",
       "peer_tickers": [
         "JD",
         "PDD",
@@ -1569,17 +1569,17 @@
       "float_shares": "2.40B",
       "short_float": "1.66%",
       "daily_pct": 4.32,
-      "industry": "—",
+      "industry": "AI Ads & Search",
       "technical_status": "Fail (ADR 2.8% < 4%)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "BABA announced a new contract or strategic partnership.",
-        "discrepancy_note": ""
+        "primary_claim": "Alibaba shares rose 4.8%",
+        "discrepancy_note": "Source A (Finviz News) has no information. Source B (Google News) shows conflicting percentages for Alibaba's rise: GuruFocus states 4.3%, MarketBeat states 4.1%, and Moomoo states 4.8%. Exact agreement is not found across all relevant headlines."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -1604,17 +1604,17 @@
       "rvol": 1.04,
       "adr_pct": 14.4,
       "category": "Others",
-      "theme": "Others",
-      "reasoning": "AXTI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "theme": "Institutional / Insider Selling Flow",
+      "reasoning": "AXT Inc. (AXTI) affiliate listing **multiple proposed share sales** via **Needham** signals potential supply overhang and downward pressure.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Semiconductors - Analog",
       "analysis_detail": {
-        "catalyst": "AXTI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "**AXT Inc. (AXTI)** is facing a notable flow event as an **affiliate lists multiple proposed share sales** with **Needham as broker**. This news emerges after a period characterized by a **volatile run** and **conflicting fair value signals** for the company.",
+        "impact": "This development suggests a significant increase in potential supply of shares, likely creating an overhang and leading to downward pressure on the stock's price and dampening momentum."
       },
-      "analysis_details": "• **What Happened**\nAXTI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **What Happened**\n**AXT Inc. (AXTI)** is facing a negative catalyst as an **affiliate has listed multiple proposed share sales** with **Needham acting as the broker**. This development follows a period where the stock experienced a **volatile run** and was subject to **conflicting fair value signals**, as highlighted by recent analyst assessment.\n\n• **Key Consideration**\nThe proposed share sales from an affiliate introduce a significant supply overhang that could depress the stock price and challenge any upward momentum. Investors should consider the potential for increased selling pressure and its impact on the stock's short-to-medium term trajectory, especially given the existing volatility.",
       "peer_tickers": [
         "COHR",
         "LITE",
@@ -1647,17 +1647,17 @@
       "float_shares": "62.00M",
       "short_float": "13.33%",
       "daily_pct": 1.19,
-      "industry": "—",
+      "industry": "Semiconductors - Analog",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 85,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "AXTI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
+        "primary_claim": "AXT Inc. (AXTI) affiliate listing multiple proposed share sales via Needham",
+        "discrepancy_note": "Only Source B [1] (Stock Titan) mentions the proposed share sales via Needham; Finviz News has no relevant information to confirm this claim."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -1682,17 +1682,17 @@
       "rvol": 1.6,
       "adr_pct": 3.25,
       "category": "Others",
-      "theme": "Others",
-      "reasoning": "CNH gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow as traders focus on **margins and debt**.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
+      "conviction": 58,
+      "grade": "C",
+      "finviz_theme": "Others",
       "analysis_detail": {
-        "catalyst": "CNH gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "CNH stock is grinding higher as traders are reportedly focusing on the company's **margins and debt** levels. There is no explicit fundamental news release from CNH in the last 24 hours to explain this move.",
+        "impact": "This move is likely driven by **technical momentum** or **institutional flow** rather than a specific corporate announcement, increasing the risk of a reversal without clear fundamental support."
       },
-      "analysis_details": "• **What Happened**\nCNH gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **What Happened**\nCNH stock is observed to be **grinding higher**, with traders reportedly focusing on the company's **margins and debt**. No specific fundamental catalyst, such as an earnings report or new contract, has been announced by the company within the last **24 hours**. The move appears to be driven by market sentiment and technical factors related to perceived financial health.\n\n• **Key Consideration**\nWithout a clear fundamental trigger, the current upward momentum carries increased risk of a **technical pullback**. The focus on **margins and debt** suggests underlying valuation concerns or anticipation, but until confirmed by company news, the move is speculative and vulnerable to profit-taking.",
       "peer_tickers": [
         "DE",
         "AGCO",
@@ -1710,17 +1710,17 @@
       "float_shares": "869.47M",
       "short_float": "6.71%",
       "daily_pct": 11.17,
-      "industry": "—",
+      "industry": "Others",
       "technical_status": "Fail (ADR 3.2% < 4%)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "CNH gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
+        "primary_claim": "traders focus on margins and debt",
+        "discrepancy_note": "Source A (Finviz) contains no information. Source B [1] explicitly mentions 'Traders Focus On Margins And Debt', but since both sources do not confirm, it is a discrepancy."
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -1731,8 +1731,8 @@
         "gate_adr": false
       },
       "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "tier": "Fail",
+      "tier_label": "Excluded"
     },
     {
       "ticker": "PENG",
@@ -1744,18 +1744,18 @@
       "mkt_cap": 3585310875,
       "rvol": 1.86,
       "adr_pct": 9.54,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "PENG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
+      "category": "Thematic Narratives",
+      "theme": "AI Growth Story Reinforcement",
+      "reasoning": "PENG stock jumped as an **AI Board Hire** bolstered the company's **AI growth story**, offsetting investor concerns from a **CFO exit**.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 59,
       "grade": "B",
-      "finviz_theme": "—",
+      "finviz_theme": "AI Enterprise Software",
       "analysis_detail": {
-        "catalyst": "PENG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        "catalyst": "PENG's stock **jumped** following news of an **AI Board Hire**, which reportedly **offsets** the impact of a recent **CFO exit**. The **CFO shift** had initially **tested** the company's **AI growth story** and **investor expectations**.",
+        "impact": "The strategic **AI Board Hire** provides a clear signal to the market, potentially bolstering confidence in **Penguin Solutions' AI strategy** and future growth prospects, despite internal management changes. This could drive continued positive sentiment around its AI narrative."
       },
-      "analysis_details": "• **What Happened**\nPENG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **The Narrative**\nPenguin Solutions experienced a **stock jump** after an **AI Board Hire** was announced, which analysts noted **offsets** the impact of a recent **CFO exit**. Earlier news indicated the **CFO shift** had begun to **test** the company's **AI growth story** and **investor expectations**.\n\n• **Explosiveness**\nThe market's positive reaction to the **AI Board Hire**, despite concurrent executive churn, suggests a strong investor appetite for **AI-related growth narratives**. This strategic move reinforces PENG's commitment to its **AI strategy**, potentially sustaining momentum if further AI-centric developments are unveiled.",
       "peer_tickers": [
         "SMCI",
         "NVDA",
@@ -1788,17 +1788,17 @@
       "float_shares": "48.51M",
       "short_float": "19.57%",
       "daily_pct": 18.32,
-      "industry": "—",
+      "industry": "AI Enterprise Software",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "PENG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
+        "primary_claim": "PENG stock jumped as an AI Board Hire bolstered the company's AI growth story, offsetting investor concerns from a CFO exit.",
+        "discrepancy_note": "Source B [3] (StocksToTrade) directly confirms the specific claim of an AI Board Hire offsetting a CFO exit as the reason for the stock jump. However, Source B [5] (simplywall.st) only mentions a 'CFO Shift' testing the 'AI Growth Story and Investor Expectations,' without mentioning an AI Board Hire or its offsetting effect. Source A (Finviz) provides no information. Thus, only one specific article fully confirms the multifaceted claim."
       },
       "gates_passed": 5,
       "gates_detail": {

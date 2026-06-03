@@ -187,22 +187,30 @@ PEER_MAPPING = {
 
 # Single-stock leverage/inverse ETF mapping
 # Format: "STOCK": (LONG_ETF, LONG_MULT, SHORT_ETF, SHORT_MULT)
+# SHORT_ETF = None when no liquid single-stock inverse exists → Inv row left blank
+# All ETF volumes verified 2026-06-03 via yfinance. Threshold: >$20M daily.
 SINGLE_STOCK_LEVERAGE = {
-    # Mega-cap Tech (single-stock ETFs)
-    "NVDA":  ("NVDL",  "2x", "NVDS",  "1x"),
+    # ── Mega-cap Tech (single-stock ETFs, all liquid) ─────────────────────────
+    "NVDA":  ("NVDL",  "2x", "NVDS",  "1x"),   # $1.4B / verified
     "AAPL":  ("AAPU",  "2x", "AAPD",  "1x"),
-    "TSLA":  ("TSLL",  "2x", "TSLS",  "1x"),
+    "TSLA":  ("TSLL",  "2x", "TSLS",  "1x"),   # $904M
     "AMZN":  ("AMZU",  "2x", "AMZD",  "1x"),
     "MSFT":  ("MSFU",  "2x", "MSFD",  "1x"),
     "META":  ("METU",  "2x", "METD",  "1x"),
     "GOOGL": ("GGLL",  "2x", "GGLS",  "1x"),
     "GOOG":  ("GGLL",  "2x", "GGLS",  "1x"),
+    "NFLX":  ("NFXL",  "2x", None,    None),   # NFXL $22.7M / NFXS $0.6M (too low)
+    "ORCL":  ("ORCX",  "2x", None,    None),   # ORCX $217M / no liquid inverse
 
-    # Semiconductors → sector ETF
-    "AVGO":  ("SOXL",  "3x", "SOXS",  "3x"),
-    "AMD":   ("SOXL",  "3x", "SOXS",  "3x"),
-    "MRVL":  ("SOXL",  "3x", "SOXS",  "3x"),
-    "SMCI":  ("SOXL",  "3x", "SOXS",  "3x"),
+    # ── Semiconductors (single-stock, volume-verified) ────────────────────────
+    "AMD":   ("AMDL",  "2x", "AMDD",  "1x"),   # $327M / $36.6M
+    "AVGO":  ("AVGX",  "2x", "AVS",   "1x"),   # $165.8M / $144.6M
+    "MRVL":  ("MRVU",  "2x", None,    None),   # $256.9M / no liquid inverse
+    "SMCI":  ("SMCX",  "2x", None,    None),   # $105.9M / SMCZ $16.4M (too low)
+    "INTC":  ("INTW",  "2x", None,    None),   # $254.7M / no liquid inverse
+    "MU":    ("MUU",   "2x", "MUD",   "1x"),   # MU single-stock ETFs
+
+    # ── Semiconductors (sector ETF — no liquid single-stock ETF) ─────────────
     "MXL":   ("SOXL",  "3x", "SOXS",  "3x"),
     "MCHP":  ("SOXL",  "3x", "SOXS",  "3x"),
     "NVTS":  ("SOXL",  "3x", "SOXS",  "3x"),
@@ -218,42 +226,92 @@ SINGLE_STOCK_LEVERAGE = {
     "WOLF":  ("SOXL",  "3x", "SOXS",  "3x"),
     "HSAI":  ("SOXL",  "3x", "SOXS",  "3x"),
 
-    # Cloud / Networking → Tech sector ETF
+    # ── Fintech / Trading Apps ────────────────────────────────────────────────
+    "COIN":  ("CONL",  "2x", None,    None),   # $137M / no liquid inverse
+    "HOOD":  ("ROBN",  "2x", None,    None),   # $47.4M / HOOZ $1.3M (too low)
+    "PLTR":  ("PLTU",  "2x", "PLTD",  "1x"),   # $195.7M / $220.7M
+
+    # ── AI / Software ─────────────────────────────────────────────────────────
+    "NBIS":  ("NEBX",  "2x", None,    None),   # $94.5M / no inverse
+
+    # ── Crypto / Bitcoin ──────────────────────────────────────────────────────
+    "MSTR":  ("MSTU",  "2x", "SMST",  "1x"),   # $274.6M / $23M
+
+    # ── Quantum Computing ─────────────────────────────────────────────────────
+    "IONQ":  ("IONX",  "2x", "IONZ",  "1x"),   # $115.7M / $39.7M
+    "RGTI":  ("RGTX",  "2x", "RGTZ",  "1x"),   # $95.1M / $63.2M
+    "QBTS":  ("QBTX",  "2x", "QBTZ",  "1x"),   # $70.2M / $21.2M
+
+    # ── Space / Aerospace ─────────────────────────────────────────────────────
+    "RKLB":  ("RKLX",  "2x", "RKLZ",  "1x"),   # $227.7M / $35.4M
+    "ASTS":  ("ASTX",  "2x", None,    None),   # $381.1M / no inverse
+
+    # ── Nuclear / Clean Energy ────────────────────────────────────────────────
+    "OKLO":  ("OKLL",  "2x", None,    None),   # $224.5M / OKLS $16.4M (too low)
+    "SMR":   ("SMU",   "2x", None,    None),   # $40.7M / no inverse
+    "IREN":  ("IREX",  "2x", None,    None),   # $39.3M / no inverse
+
+    # ── China Tech ────────────────────────────────────────────────────────────
+    "BABA":  ("BABX",  "2x", None,    None),   # $21M / no liquid inverse
+
+    # ── EV / Auto ─────────────────────────────────────────────────────────────
+    "LI":    ("TSLL",  "2x", "TSLS",  "1x"),   # Tesla proxy (most liquid EV ETF)
+
+    # ── Cloud / Networking (sector ETF — no liquid single-stock) ─────────────
     "ANET":  ("TECL",  "3x", "TECS",  "3x"),
     "HPE":   ("TECL",  "3x", "TECS",  "3x"),
     "CSCO":  ("TECL",  "3x", "TECS",  "3x"),
     "IBM":   ("TECL",  "3x", "TECS",  "3x"),
     "GLW":   ("TECL",  "3x", "TECS",  "3x"),
     "NTAP":  ("TECL",  "3x", "TECS",  "3x"),
+    "PENG":  ("TECL",  "3x", "TECS",  "3x"),
     "GRRR":  ("TECL",  "3x", "TECS",  "3x"),
     "UMAC":  ("TECL",  "3x", "TECS",  "3x"),
-    "PENG":  ("TECL",  "3x", "TECS",  "3x"),
 
-    # China Tech
-    "BABA":  ("CWEB",  "2x", "YANG",  "3x"),
-
-    # EV proxy
-    "LI":    ("TSLL",  "2x", "TSLS",  "1x"),
-
-    # Biotech
+    # ── Biotech ───────────────────────────────────────────────────────────────
     "RLAY":  ("LABU",  "3x", "LABD",  "3x"),
 
-    # Materials / Energy
-    "LAC":   ("REMX",  "1x", "SOXS",  "3x"),
+    # ── Materials / Energy / Uranium ──────────────────────────────────────────
+    "LAC":   ("REMX",  "1x", None,    None),
     "URG":   ("URA",   "1x", "URNM",  "1x"),
-    "CNH":   ("DXJS",  "1x", "EFZ",   "1x"),
+    "CNH":   ("DXJS",  "1x", None,    None),
 }
 
-# These ETFs are always highly liquid (>$20M daily) — skip live volume check
-# Verified 2026-06-03: SOXL=$10.5B, NVDL=$1.4B, TSLL=$904M, TECL=$364M, TECS=$61M, SOXS=$2.3B
+# ETFs always liquid (>$20M daily) — skip live yfinance volume check
+# All volumes verified 2026-06-03
 ALWAYS_LIQUID_ETFS = {
-    "SOXL", "SOXS",   # Semis 3x
-    "TECL", "TECS",   # Tech 3x
-    "NVDL",           # NVIDIA 2x long (>$1B daily)
-    "TSLL",           # Tesla 2x long (>$900M daily)
-    "LABU", "LABD",   # Biotech 3x
-    "TQQQ", "SQQQ",   # Nasdaq 3x
-    "UPRO", "SPXU",   # S&P 3x
+    # Sector 3x ETFs
+    "SOXL", "SOXS", "TECL", "TECS", "LABU", "LABD",
+    "TQQQ", "SQQQ", "UPRO", "SPXU",
+    # Single-stock — verified liquid
+    "NVDL", "NVDS",                    # NVIDIA  $1.4B / verified
+    "TSLL", "TSLS",                    # Tesla   $904M
+    "METU", "METD",                    # Meta
+    "AAPU", "AAPD",                    # Apple
+    "AMZU", "AMZD",                    # Amazon
+    "MSFU", "MSFD",                    # Microsoft
+    "GGLL", "GGLS",                    # Alphabet
+    "AMDL", "AMDD",                    # AMD     $327M / $36.6M
+    "PLTU", "PLTD",                    # Palantir $195.7M / $220.7M
+    "CONL",                            # Coinbase $137M
+    "MSTU", "SMST",                    # MicroStrategy $274.6M / $23M
+    "NFXL",                            # Netflix $22.7M (inverse NFXS too low)
+    "AVGX", "AVS",                     # Broadcom $165.8M / $144.6M
+    "MRVU",                            # Marvell  $256.9M
+    "SMCX",                            # Super Micro $105.9M
+    "INTW",                            # Intel $254.7M
+    "IONX", "IONZ",                    # IonQ $115.7M / $39.7M
+    "RGTX", "RGTZ",                    # Rigetti $95.1M / $63.2M
+    "QBTX", "QBTZ",                    # D-Wave $70.2M / $21.2M
+    "RKLX", "RKLZ",                    # Rocket Lab $227.7M / $35.4M
+    "ASTX",                            # AST SpaceMobile $381.1M
+    "OKLL",                            # Oklo $224.5M
+    "SMU",                             # NuScale $40.7M
+    "IREX",                            # IREN $39.3M
+    "ROBN",                            # Robinhood $47.4M
+    "NEBX",                            # Nebius $94.5M
+    "BABX",                            # Alibaba $21M
+    "ORCX",                            # Oracle $217M
 }
 
 
@@ -277,6 +335,8 @@ def get_leverage_inverse_stocks(ticker: str) -> dict:
     long_etf, long_mult, short_etf, short_mult = SINGLE_STOCK_LEVERAGE[t]
 
     def _qualifies(etf):
+        if not etf:
+            return False
         if etf in ALWAYS_LIQUID_ETFS:
             return True
         try:
@@ -288,7 +348,7 @@ def get_leverage_inverse_stocks(ticker: str) -> dict:
 
     return {
         "long":  [{"ticker": long_etf,  "mult": long_mult}]  if _qualifies(long_etf)  else [],
-        "short": [{"ticker": short_etf, "mult": short_mult}] if _qualifies(short_etf) else [],
+        "short": [{"ticker": short_etf, "mult": short_mult}] if short_etf and _qualifies(short_etf) else [],
     }
 
 
