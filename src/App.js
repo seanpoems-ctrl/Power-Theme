@@ -7877,7 +7877,7 @@ const SearchBar = ({ data, search, setSearch }) => {
 
       {/* Detail panel for exact match */}
       {open && fullResult && (
-        <div id="search-result-panel" className="absolute top-full right-0 mt-1.5 w-72 bg-zinc-900 border border-zinc-700/60 rounded-lg shadow-2xl z-50 p-3 space-y-2">
+        <div id="search-result-panel" className={`absolute top-full right-0 mt-1.5 bg-zinc-900 border border-zinc-700/60 rounded-lg shadow-2xl z-50 p-3 space-y-2 transition-all duration-200 ${activeTab === "research" ? "w-[520px]" : "w-72"}`}>
           <div className="flex items-baseline gap-2 flex-wrap">
             <span
               className="text-sm font-bold text-zinc-100 cursor-pointer hover:text-blue-400 transition-colors"
