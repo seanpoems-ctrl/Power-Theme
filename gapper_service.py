@@ -42,6 +42,12 @@ OPINION_KEYWORDS = {
     "time to sell", "worth watching", "keep an eye", "what investors",
     "what you need", "everything you need", "3 reasons", "5 reasons",
     "top picks", "best stocks", "worst stocks",
+    # Question-style opinion titles
+    "room to run", "more room", "have more", "do shares",
+    "what's going on with", "what is going on with", "going on with",
+    "is this the", "is now the time", "time to own", "should you buy",
+    "should you sell", "worth buying", "worth owning",
+    "here's what", "here is what",
 }
 
 # Roundup/list articles — mention multiple stocks, not company-specific news
@@ -75,9 +81,12 @@ OPINION_SOURCES = {
     "wsj opinion", "wall street journal opinion",
     "bloomberg opinion",
     "marketbeat",                                # MarketBeat — options volume alerts, not fundamental news
+    "benzinga",                                  # Benzinga — mostly commentary/alerts
     "stocktwits",                                # StockTwits — social/sentiment
     "finbold",                                   # Finbold — crypto/stock commentary
     "wallstreetmojo",                            # WSM — educational/analysis
+    "qz.com", "quartz",                          # Quartz — business commentary
+    "thefly.com", "the fly",                     # The Fly — options/flow alerts
 }
 
 # ──────────────────────────────────────────────────────────────
@@ -195,24 +204,19 @@ def get_leverage_inverse_stocks(ticker: str) -> list:
 
 
 def _fetch_dollar_volume(ticker: str) -> float | None:
-    """Fetch latest dollar volume from TradingView."""
+    """Fetch latest dollar volume via yfinance (1-day, most recent close × volume)."""
     try:
-        url = f"https://scanner.tradingview.com/america/scan"
-        params = {
-            "columns": ["name", "close", "volume"],
-            "symbols": {"tickers": [ticker.upper()]},
-            "range": [0, 1]
-        }
-        resp = requests.post(url, json=params, timeout=5)
-        if resp.ok:
-            data = resp.json().get("data", [])
-            if data:
-                close = data[0].get("d", [None, None])[1]
-                vol = data[0].get("d", [None, None, None])[2]
-                return (close * vol) if close and vol else None
+        import yfinance as yf
+        t = yf.Ticker(ticker)
+        hist = t.history(period="2d", interval="1d")
+        if hist.empty:
+            return None
+        row = hist.iloc[-1]
+        close = float(row["Close"])
+        vol   = float(row["Volume"])
+        return close * vol if close > 0 and vol > 0 else None
     except Exception:
-        pass
-    return None
+        return None
 
 def _is_opinion_article(title: str, source: str = "") -> bool:
     """
