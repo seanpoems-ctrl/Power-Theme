@@ -1,5 +1,5 @@
 {
-  "scan_time": "2026-06-02 22:46 ET",
+  "scan_time": "2026-06-02 22:55 ET",
   "earnings_today": [],
   "gappers": [
     {
@@ -155,8 +155,18 @@
         "KRYS",
         "RXDX"
       ],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
+      "leverage_etfs": [
+        {
+          "ticker": "LABU",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "LABD",
+          "mult": "3x"
+        }
+      ],
       "headlines": [],
       "float_shares": "143.28M",
       "short_float": "20.12%",
@@ -212,8 +222,18 @@
         "QCOM",
         "NVDA"
       ],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
       "headlines": [],
       "float_shares": "868.29M",
       "short_float": "3.71%",
@@ -644,8 +664,18 @@
         "STM",
         "WOLF"
       ],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
       "headlines": [],
       "float_shares": "210.90M",
       "short_float": "18.23%",
@@ -701,8 +731,18 @@
         "DNN",
         "NXE"
       ],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
+      "leverage_etfs": [
+        {
+          "ticker": "URA",
+          "mult": "1x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "URNM",
+          "mult": "1x"
+        }
+      ],
       "headlines": [],
       "float_shares": "363.21M",
       "short_float": "8.78%",
@@ -831,8 +871,18 @@
         "QCOM",
         "NVDA"
       ],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
       "headlines": [],
       "float_shares": "4.64B",
       "short_float": "1.15%",
@@ -1441,11 +1491,6 @@
           "title": "Coherent (COHR) Hits Record High on Marvell Skyrocket Ride - Yahoo Finance",
           "source": "Google News",
           "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOZlM2SGNhcXE1OE91dHZmX0F3YTNVRl9HUzNVQTkxZl9WUDY4Q1hWUU5WRFBXczlrclhObFlXQTJMWUpoNXBDQlRrbk9JcE8tUEJrNzlYdmFsdmNUSWtwbWdYTTV6MW1aNWhnUGNPb0xHdjFCcTZyOFVtTm1GTlRyb2s1Y2dCc3NJd080dUZfY2tCNUctajBFelBJWQ?oc=5"
-        },
-        {
-          "title": "Has Coherent (COHR) Run Too Far After Its 9x Three Year Share Price Surge - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNWWZQejY1Y2dmWS1BOU1MeGt4aXpXT3hvQXFlVi1VcHEtZmNOMmVyU3laSUJjUEtJRHlNYURpRV9jNExBM3Y5dkRwbzAwdl9CVDZtRS1ONl9SblcwUzdHelNfX0ZRSzJCd0tUMzRGaWJfY0l0eGZFdDNpT1RvdXBvcjhUaUR1X255b1EzaXp3ODFZdlVR?oc=5"
         }
       ],
       "float_shares": "187.07M",
@@ -1774,7 +1819,7 @@
     "approach": "hybrid",
     "small_gaps": 21,
     "large_gaps": 4,
-    "total_headlines": 31,
+    "total_headlines": 30,
     "monthly_cost_usd": 0.01
   }
 }
