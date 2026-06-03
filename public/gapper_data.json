@@ -1,5 +1,5 @@
 {
-  "scan_time": "2026-06-02 22:15 ET",
+  "scan_time": "2026-06-02 22:46 ET",
   "earnings_today": [],
   "gappers": [
     {
@@ -65,28 +65,34 @@
       "mkt_cap": 74502627500,
       "rvol": 5.9,
       "adr_pct": 5.29,
-      "category": "Thematic Narratives",
-      "theme": "AI Re-rating / Thematic Shift",
-      "reasoning": "HPE stock **exploded** as the market is **finally seeing it as an AI play**, driving a significant re-rating into the high-growth sector.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 71,
-      "grade": "A",
-      "finviz_theme": "AI Compute",
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "HPE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "HPE stock **exploded** in the last 24 hours as the market's perception shifted, with the company **finally seen as an AI play**. This re-rating follows the growing demand for infrastructure supporting artificial intelligence initiatives.",
-        "impact": "This thematic re-rating could lead to sustained upward momentum as investors re-evaluate HPE's growth potential within the rapidly expanding AI sector, potentially expanding its Total Addressable Market (TAM) and future revenue multiples."
+        "catalyst": "HPE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
       },
-      "analysis_details": "• **The Narrative**\nHPE stock **exploded** as investors are **finally seeing it as an AI play**, indicating a significant re-evaluation of the company's core business model and future growth drivers within the technology sector. This perception shift is crucial for momentum.\n\n• **Explosiveness**\nThe market's re-classification of HPE as an **AI play** has driven an **explosive** move, evidenced by its stock performance. This thematic alignment with one of the most significant growth areas in tech suggests strong potential for continued upward price momentum as the market catches up.",
+      "analysis_details": "• **What Happened**\nHPE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "SMCI",
         "NTAP",
         "STX"
       ],
       "leverage_etfs": [
-        "TECL"
+        {
+          "ticker": "TECL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "TECS"
+        {
+          "ticker": "TECS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -98,17 +104,17 @@
       "float_shares": "1.32B",
       "short_float": "5.14%",
       "daily_pct": 19.47,
-      "industry": "AI Compute",
+      "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 70,
+        "status": "Unconfirmed",
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "HPE stock exploded as the market is finally seeing it as an AI play",
-        "discrepancy_note": "Source B (Google News headline [1] 'HPE stock explodes for one simple reason: It's finally seen as an AI play - Yahoo Finance') directly confirms the claim, while Source A (Finviz) provides no information to confirm or deny."
+        "primary_claim": "HPE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "discrepancy_note": ""
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -158,14 +164,14 @@
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 95,
+        "status": "Unconfirmed",
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": "The primary claim states 'No immediate fundamental catalyst found', implying price action is technical. However, Source B [2] directly contradicts this by mentioning a '$175M offering' and 'fresh bullish calls on Relay's zovegalisib', both of which are fundamental catalysts/events."
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -246,28 +252,34 @@
       "mkt_cap": 61550807085,
       "rvol": 1.98,
       "adr_pct": 4.29,
-      "category": "Thematic Narratives",
-      "theme": "AI Demand Uplift",
-      "reasoning": "STMicroelectronics rallied after raising its data-center revenue target to about **$1B by 2026**, driven by strong **AI demand**.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 59,
-      "grade": "A",
-      "finviz_theme": "Semiconductors - Compute",
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "STM reported quarterly results; earnings catalyst detected in headlines.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "STMicroelectronics shares rallied after the chip maker **raised its data-center revenue target**, expecting to reach about **$1B in data center sales by 2026**. This significant increase is directly attributed to robust **AI demand**.",
-        "impact": "This signals strong capture of the high-growth AI market, suggesting potential for **upside revisions** to future guidance and **multiple expansion** driven by a compelling thematic tailwind."
+        "catalyst": "STM reported quarterly results; earnings catalyst detected in headlines.",
+        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
       },
-      "analysis_details": "• **The Narrative**\nSTMicroelectronics announced a significant upward revision to its data-center revenue expectations, now targeting approximately **$1B in data center sales by 2026**. This optimistic outlook is directly fueled by surging **AI demand**, which is evidently translating into increased orders for the company's chip solutions.\n\n• **Explosiveness**\nThis revised target underscores STMicroelectronics' growing relevance in the critical AI infrastructure space and its ability to capitalize on the sector's robust expansion. Such a clear demonstration of AI-driven growth can act as a powerful catalyst, potentially leading to **analyst upgrades**, **price target increases**, and continued **momentum buying** as investors re-rate its long-term growth trajectory within the semiconductor industry.",
+      "analysis_details": "• **The Results**\nSTM reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
       "peer_tickers": [
         "ON",
         "NXPI",
         "MCHP"
       ],
       "leverage_etfs": [
-        "SOXL"
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "SOXS"
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -284,17 +296,17 @@
       "float_shares": "888.79M",
       "short_float": "1.55%",
       "daily_pct": 15.2,
-      "industry": "Semiconductors - Compute",
+      "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
+        "status": "Unconfirmed",
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "STMicroelectronics raising its data-center revenue target to about $1B by 2026",
-        "discrepancy_note": "Source A (Finviz News) explicitly states '(none)', providing no information to confirm the claim. While Source B (Google News) includes a headline from 'Stock Titan' ([4]) that confirms the '$1B by 2026' target, the claim is not confirmed by BOTH specified sources as required."
+        "primary_claim": "STM reported quarterly results; earnings catalyst detected in headlines.",
+        "discrepancy_note": ""
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -305,8 +317,8 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     },
     {
       "ticker": "GRRR",
@@ -318,28 +330,34 @@
       "mkt_cap": 602301027,
       "rvol": 3.71,
       "adr_pct": 7.45,
-      "category": "New Contract/Partnership",
-      "theme": "New Contracts / Expansion",
-      "reasoning": "GRRR secured a **$2B AI data center infrastructure deal** in India, its **third such deal** in a month, fueling retail price targets.",
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "GRRR reported quarterly results; earnings catalyst detected in headlines.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 85,
+      "conviction": 50,
       "grade": "C",
-      "finviz_theme": "Cloud Data Centers",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "GRRR secured a new **$2B AI data center build deal** in India, marking its **third data center infrastructure deal** within a month, boosting retail expectations for the stock to reach **$100**.",
-        "impact": "This major contract expands GRRR's strategic presence in Asia and significantly **increases its revenue potential**, indicating strong momentum in the high-growth AI infrastructure segment."
+        "catalyst": "GRRR reported quarterly results; earnings catalyst detected in headlines.",
+        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
       },
-      "analysis_details": "• **Impact**\nGRRR has secured a new deal with **$2B revenue potential** for an **AI data center build** in India. This marks the company's **third data center infrastructure deal** in a single month, signaling rapid expansion. This development has retail investors targeting the **$100 mark** for the stock.\n\n• **Strategic Value**\nThe **$2B AI data center build in India** anchors GRRR's significant expansion into the Asian market. Securing three substantial data center infrastructure deals in a month highlights GRRR's growing capabilities and market penetration in critical AI and data segments. This strengthens its long-term competitive positioning and revenue pipeline.",
+      "analysis_details": "• **The Results**\nGRRR reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
       "peer_tickers": [
         "SOUN",
         "BBAI",
         "CEVA"
       ],
       "leverage_etfs": [
-        "TECL"
+        {
+          "ticker": "TECL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "TECS"
+        {
+          "ticker": "TECS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -356,7 +374,7 @@
       "float_shares": "24.98M",
       "short_float": "13.33%",
       "daily_pct": 3.03,
-      "industry": "Cloud Data Centers",
+      "industry": "—",
       "technical_status": "Fail (Avg $Vol $42M < $100M)",
       "verification": {
         "status": "Unconfirmed",
@@ -365,7 +383,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "GRRR secured a **$2B AI data center infrastructure deal** in India, its **third such deal** in a month, fueling retail price targets.",
+        "primary_claim": "GRRR reported quarterly results; earnings catalyst detected in headlines.",
         "discrepancy_note": ""
       },
       "gates_passed": 3,
@@ -408,16 +426,22 @@
         "LIDR"
       ],
       "leverage_etfs": [
-        "SOXL"
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "SOXS"
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
           "title": "Hesai (HSAI) Q4 2025 Earnings Call Transcript - The Globe and Mail",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPZ2NUQnpMUFVwbmJ3TVNHRXdteTQ3Ri1sSXZScEFabE1YZDZsQ25PeDlScEVoOW5nUExsNVQwZm5Ub2RIOHpiRE5aaXM2dVpzblcxOUZlU2N0bXhqSHNzajQtbjlKVUlMbGhuaGw1bUF5aVZScElqaHZaam8wVF9rMjFMXzNlalJHaG1LVHNVMDZqRHE0R2p3TWlGekVqV0dTZVJmNDVPdVp2bFJBQ0hEMXhUWUE0TDJ5SkExZGMwa2ljaUtEQXU0?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxORXYwZERlazgyMDhsOVRqVWFGRUxCdUxGemdMc1FTeWNaX243bWk3UVVxRld1TWQxZXhVRm9hREwtSzRKZ0xlUmhRWVJaUEU4cG0xVTRCTkZrTmFrejlmeHVZeEljOUdYYjJ2YjFoc1pJaWdienJpOGhxc2ljdGlkNlBZY2VuR3pwNC13cE5LdXFGam5JZmQ0MjJ0dE9Na05SSVhLWHFQYnpHZU1LMV9SazFlb0UzWm9zTzl2ZUsxdFdlZHZD?oc=5"
         },
         {
           "title": "U.S. Stocks Move | Leading Chinese ADRs Rally Collectively, Hesai (HSAI.US) Surges Over 11% - Moomoo",
@@ -462,25 +486,28 @@
       "mkt_cap": 15249692409,
       "rvol": 1.17,
       "adr_pct": 2.99,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "LI reported quarterly results; earnings catalyst detected in headlines.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "LI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "LI reported quarterly results; earnings catalyst detected in headlines.",
-        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+        "catalyst": "LI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
       },
-      "analysis_details": "• **The Results**\nLI reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "analysis_details": "• **What Happened**\nLI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "NIO",
         "XPEV",
         "TSLA"
       ],
       "leverage_etfs": [
-        "TSLL"
+        {
+          "ticker": "TSLL",
+          "mult": "2x"
+        }
       ],
       "inverse_etfs": [],
       "headlines": [
@@ -488,11 +515,6 @@
           "title": "Li Auto Stock Plummets to Record Lows as EV Price Wars Intensify - EBC Financial Group",
           "source": "Google News",
           "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOTXRtQVZDbXVoZVFrM3hBY3BrRzktYmtwaXI0alZhb0J1UllXMzlia2xzcVVVUDBIUFNoV3RVbkZwaTJiR1lRNUlaSHhwNmJFYTJSeTkxNVhyYXFpVW5XUDVuV3p6SnZwSmFKbXBWSlR1bDRrRlQ5Rm5xZExSU29nY2xrcmpMX3BIV3FyRWJJd1YwSFJ1?oc=5"
-        },
-        {
-          "title": "CLSA Slashes LI AUTO-W (02015.HK) TP by Over Half to HKD68, Significantly Cuts Revenue and Profit Forecasts - AASTOCKS.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE5STno5Wmp3TnJBTkt3QjYwRDJmS1NBQlRWd3hPZXVhOFpzUHpGNnhLT2xIeWdZd3JRdU0zYnZlMUlXY2d2RzBmSHAwaWlpSHFUYVI0RGplZHVjNHNQWXFQSzRwNXE2clBVRzIxZ1pHcw?oc=5"
         }
       ],
       "float_shares": "842.97M",
@@ -507,7 +529,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "LI reported quarterly results; earnings catalyst detected in headlines.",
+        "primary_claim": "LI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
         "discrepancy_note": ""
       },
       "gates_passed": 4,
@@ -519,8 +541,8 @@
         "gate_adr": false
       },
       "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     },
     {
       "ticker": "MXL",
@@ -550,10 +572,16 @@
         "AVGO"
       ],
       "leverage_etfs": [
-        "SOXL"
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "SOXS"
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -731,10 +759,16 @@
         "MXL"
       ],
       "leverage_etfs": [
-        "SOXL"
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "SOXS"
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -855,10 +889,16 @@
         "MKSI"
       ],
       "leverage_etfs": [
-        "SOXL"
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "SOXS"
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -927,10 +967,16 @@
         "NXPI"
       ],
       "leverage_etfs": [
-        "SOXL"
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "SOXS"
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -994,10 +1040,16 @@
         "LITE"
       ],
       "leverage_etfs": [
-        "SOXL"
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "SOXS"
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -1066,10 +1118,16 @@
         "LTHM"
       ],
       "leverage_etfs": [
-        "REMX"
+        {
+          "ticker": "REMX",
+          "mult": "1x"
+        }
       ],
       "inverse_etfs": [
-        "SOXS"
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -1138,10 +1196,16 @@
         "ON"
       ],
       "leverage_etfs": [
-        "SOXL"
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "SOXS"
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -1210,10 +1274,16 @@
         "FNSR"
       ],
       "leverage_etfs": [
-        "TECL"
+        {
+          "ticker": "TECL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "TECS"
+        {
+          "ticker": "TECS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -1277,10 +1347,16 @@
         "LILM"
       ],
       "leverage_etfs": [
-        "TECL"
+        {
+          "ticker": "TECL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "TECS"
+        {
+          "ticker": "TECS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -1349,10 +1425,16 @@
         "GLW"
       ],
       "leverage_etfs": [
-        "SOXL"
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "SOXS"
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -1422,7 +1504,10 @@
       ],
       "leverage_etfs": [],
       "inverse_etfs": [
-        "YANG"
+        {
+          "ticker": "YANG",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -1491,10 +1576,16 @@
         "MRVL"
       ],
       "leverage_etfs": [
-        "SOXL"
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "SOXS"
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -1626,10 +1717,16 @@
         "ANET"
       ],
       "leverage_etfs": [
-        "TECL"
+        {
+          "ticker": "TECL",
+          "mult": "3x"
+        }
       ],
       "inverse_etfs": [
-        "TECS"
+        {
+          "ticker": "TECS",
+          "mult": "3x"
+        }
       ],
       "headlines": [
         {
@@ -1677,7 +1774,7 @@
     "approach": "hybrid",
     "small_gaps": 21,
     "large_gaps": 4,
-    "total_headlines": 32,
+    "total_headlines": 31,
     "monthly_cost_usd": 0.01
   }
 }

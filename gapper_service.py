@@ -855,8 +855,8 @@ def analyze_with_gemini(
             "analysis_detail": {"catalyst": "No fundamental catalyst identified in the last 24 hours.", "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."},
             "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
             "peer_tickers":    get_peer_stocks(ticker),
-            "leverage_etfs":   [],
-            "inverse_etfs":    [],
+            "leverage_etfs":   get_leverage_inverse_stocks(ticker).get("long", []),
+            "inverse_etfs":    get_leverage_inverse_stocks(ticker).get("short", []),
         }
     try:
         from google import genai
