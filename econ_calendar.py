@@ -1,3 +1,4 @@
+import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows encoding fix
 """
 econ_calendar.py — USD Economic Event Calendar
 

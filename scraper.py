@@ -1,3 +1,4 @@
+import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows encoding fix
 """
 scraper.py — 美股強勢主題篩選器數據爬蟲 v4
 Theme → Sub-theme → Stocks  hierarchical scan from Finviz Screener

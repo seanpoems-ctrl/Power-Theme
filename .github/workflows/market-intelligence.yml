@@ -2,8 +2,9 @@ name: Market Intelligence Engine
 
 on:
   workflow_dispatch: {}
-  # Schedule removed — triggered externally via cron-job.org
-  # 11:05 UTC = 07:05 ET (EDT) — AM brief | 20:00 UTC = 16:00 ET (EDT) — PM brief
+  schedule:
+    - cron: "5 11 * * 1-5"   # 7:05 AM ET — AM brief (Malaysia 7:05 PM)
+    - cron: "0 20 * * 1-5"   # 4:00 PM ET — PM brief (Malaysia midnight)
 
 jobs:
   market-intel:

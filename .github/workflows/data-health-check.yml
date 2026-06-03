@@ -1,0 +1,76 @@
+name: Data Health Check
+
+# Runs every morning Malaysia time — alerts via GitHub Issue if any data is stale
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 23 * * 1-5"   # 7:00 PM ET / 7:00 AM Malaysia (next day)
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check data freshness
+        id: check
+        run: |
+          python - <<'EOF'
+          import json, os, sys
+          from datetime import datetime, timezone, timedelta
+          from pathlib import Path
+
+          now = datetime.now(timezone.utc)
+          issues = []
+
+          checks = [
+              # (file, max_age_hours, description)
+              ("public/thematic_data.json",   30, "Thematic Scanner (daily scraper)"),
+              ("public/gapper_data.json",      26, "Pre-Market Gapper"),
+              ("public/breadth_monitor.json",  30, "Market Breadth (Stockbee)"),
+              ("public/market_brief.json",     30, "Market Brief"),
+              ("public/breaking_news.json",    2,  "Breaking News"),
+              ("public/market_internals.json", 30, "Market Internals"),
+              ("public/etf_rs.json",           30, "ETF RS Rankings"),
+              ("public/etf_trendline.json",    30, "ETF Trendlines"),
+          ]
+
+          for fpath, max_hours, label in checks:
+              p = Path(fpath)
+              if not p.exists():
+                  issues.append(f"MISSING: {label} ({fpath})")
+                  continue
+              mtime = datetime.fromtimestamp(p.stat().st_mtime, tz=timezone.utc)
+              age_h = (now - mtime).total_seconds() / 3600
+              if age_h > max_hours:
+                  issues.append(f"STALE {age_h:.0f}h: {label} (max={max_hours}h) — {fpath}")
+
+          if issues:
+              print("ISSUES FOUND:")
+              for i in issues: print(f"  - {i}")
+              with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+                  f.write("has_issues=true\n")
+                  f.write(f"issue_body={'%0A'.join(issues)}\n")
+          else:
+              print("All data files are fresh!")
+              with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+                  f.write("has_issues=false\n")
+          EOF
+
+      - name: Create GitHub Issue alert
+        if: steps.check.outputs.has_issues == 'true'
+        run: |
+          gh issue create \
+            --title "⚠️ Stale Dashboard Data — $(date -u +%Y-%m-%d)" \
+            --body "$(echo '${{ steps.check.outputs.issue_body }}' | tr '%0A' '\n')" \
+            --label "data-stale"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

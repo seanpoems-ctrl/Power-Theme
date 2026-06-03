@@ -1,3 +1,4 @@
+import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows encoding fix
 """
 universe_builder.py — Daily Stock Universe Builder  v2
 =======================================================

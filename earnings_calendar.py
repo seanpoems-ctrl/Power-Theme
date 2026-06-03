@@ -1,3 +1,4 @@
+import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows encoding fix
 """
 earnings_calendar.py — Earnings Calendar with Full Enrichment
 

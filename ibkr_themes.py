@@ -1,3 +1,4 @@
+import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows encoding fix
 """
 ibkr_themes.py — Pre-Market Power-Theme Identification
 

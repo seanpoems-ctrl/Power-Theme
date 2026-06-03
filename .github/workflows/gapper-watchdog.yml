@@ -4,8 +4,9 @@ name: Gapper Watchdog
 # Two triggers via cron-job.org: 10:30 AM ET (first check) + 12:30 PM ET (final check)
 on:
   workflow_dispatch: {}
-  # Schedule removed — triggered externally via cron-job.org
-  # 14:30 UTC = 10:30 AM ET (EDT) | 16:30 UTC = 12:30 PM ET (EDT)
+  schedule:
+    - cron: "30 14 * * 1-5"  # 10:30 AM ET — first check
+    - cron: "30 16 * * 1-5"  # 12:30 PM ET — final safety net
 
 jobs:
   watchdog:

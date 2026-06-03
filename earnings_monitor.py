@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows encoding fix
 """
 Earnings Monitor — Real-Time Earnings Alert System
 

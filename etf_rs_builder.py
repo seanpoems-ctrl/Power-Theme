@@ -1,3 +1,4 @@
+import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows encoding fix
 """
 etf_rs_builder.py — ETF Relative Strength (IBD-style) Builder
 ==============================================================

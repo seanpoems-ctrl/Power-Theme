@@ -1,3 +1,4 @@
+import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows encoding fix
 """
 gapper_service.py — Pre-Market Gapper Intelligence Scanner
 Scans for gap-up stocks 08:00–09:29 AM ET using TradingView Screener
