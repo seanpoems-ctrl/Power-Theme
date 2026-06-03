@@ -7249,7 +7249,19 @@ const THEME_INDUSTRY_MAP = {
 const THEME_ETF_MAP = ETF_MAP_JSON;
 
 // ── Finnhub Catalyst Feed ──
-const FINNHUB_KEY = process.env.REACT_APP_FINNHUB_KEY || "";
+const FINNHUB_KEY  = process.env.REACT_APP_FINNHUB_KEY || "";
+const GEMINI_KEY   = process.env.REACT_APP_GEMINI_KEY  || "";
+
+// Opinion sources — articles from these are filtered out of Catalysts
+const OPINION_SOURCES = new Set([
+  "seeking alpha", "motley fool", "the motley fool", "investor's business daily",
+  "investopedia", "fool.com", "benzinga", "zacks", "thestreet", "the street",
+  "barron", "barrons", "kiplinger", "schaeffers", "schaeffer",
+  "barchart", "tipranks", "simply wall st", "simplywallst", "gurufocus",
+  "stockanalysis", "marketbeat", "stocktwits", "finbold", "wallstreetmojo",
+  "thefly", "the fly", "trefis", "tradingview", "nasdaq.com editorial",
+  "quiver quantitative", "quiverquant",
+]);
 
 const CATALYST_CATEGORIES = [
   {
@@ -7399,6 +7411,64 @@ const CATALYST_SENTIMENT = {
   buyback: "good",
 };
 
+// ── Research Content Renderer ──
+const ResearchContent = ({ text }) => {
+  if (!text) return null;
+  const lines = text.split("\n");
+  const elements = [];
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    // Table block
+    if (line.trim().startsWith("|")) {
+      const tableLines = [];
+      while (i < lines.length && lines[i].trim().startsWith("|")) {
+        tableLines.push(lines[i]);
+        i++;
+      }
+      elements.push(<SnapshotMdTable key={i} md={tableLines.join("\n")} />);
+      continue;
+    }
+    // H2/H3 heading
+    if (/^#{1,3}\s/.test(line)) {
+      const txt = line.replace(/^#{1,3}\s/, "").replace(/\*\*/g, "");
+      elements.push(<p key={i} className="text-[12px] font-bold text-zinc-200 mt-3 mb-0.5">{txt}</p>);
+      i++; continue;
+    }
+    // Bullet
+    if (/^[-*•]\s/.test(line.trim())) {
+      const txt = line.trim().replace(/^[-*•]\s/, "");
+      elements.push(
+        <p key={i} className="text-[12px] text-zinc-400 leading-snug pl-3 relative before:content-['•'] before:absolute before:left-0 before:text-zinc-600">
+          {renderInline(txt)}
+        </p>
+      );
+      i++; continue;
+    }
+    // Numbered list
+    if (/^\d+[.)]\s/.test(line.trim())) {
+      const txt = line.trim().replace(/^\d+[.)]\s/, "");
+      elements.push(<p key={i} className="text-[12px] text-zinc-400 leading-snug">{renderInline(txt)}</p>);
+      i++; continue;
+    }
+    // Blank line
+    if (line.trim() === "") { i++; continue; }
+    // Normal paragraph
+    elements.push(<p key={i} className="text-[12px] text-zinc-400 leading-snug">{renderInline(line)}</p>);
+    i++;
+  }
+  return <div className="space-y-1">{elements}</div>;
+};
+
+function renderInline(text) {
+  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
+  return parts.map((part, i) => {
+    if (/^\*\*[^*]+\*\*$/.test(part)) return <strong key={i} className="text-zinc-200">{part.slice(2, -2)}</strong>;
+    if (/^\*[^*]+\*$/.test(part))   return <em key={i} className="text-zinc-300">{part.slice(1, -1)}</em>;
+    return part;
+  });
+}
+
 // ── Merged Search + Ticker Lookup ──
 const SearchBar = ({ data, search, setSearch }) => {
   const lang = useLang();
@@ -7417,8 +7487,11 @@ const SearchBar = ({ data, search, setSearch }) => {
   const [selectedTheme, setSelectedTheme] = useState(null); // theme name to expand stock list
   const [activeTab, setActiveTab]     = useState("info");
   const [news, setNews]               = useState([]);
-  const [newsLoading, setNewsLoading] = useState(false);
-  const [newsError, setNewsError]     = useState(false);
+  const [newsLoading, setNewsLoading]       = useState(false);
+  const [newsError, setNewsError]           = useState(false);
+  const [research, setResearch]             = useState(null);
+  const [researchLoading, setResearchLoading] = useState(false);
+  const [researchError, setResearchError]   = useState(false);
   const [selectedSubTheme, setSelectedSubTheme] = useState(null); // subtheme name to expand stock list
   const [searchHistory, setSearchHistory] = useState(() => {
     try { return JSON.parse(localStorage.getItem('searchHistory') || '[]'); } catch { return []; }
@@ -7586,11 +7659,13 @@ const SearchBar = ({ data, search, setSearch }) => {
   const cachedPrice = fullResult ? priceCache[fullResult.ticker] : null;
   const displayPrice = livePrice || (fullResult?.price != null ? { price: fullResult.price, change_pct: fullResult.change_pct } : null) || cachedPrice;
 
-  // Reset news state when ticker changes
+  // Reset news + research state when ticker changes
   useEffect(() => {
     setActiveTab("info");
     setNews([]);
     setNewsError(false);
+    setResearch(null);
+    setResearchError(false);
   }, [fullResult?.ticker]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchNews = async (ticker) => {
@@ -7652,9 +7727,14 @@ const SearchBar = ({ data, search, setSearch }) => {
         if (h.endsWith("?")) return true; // question headlines are almost always clickbait
         return CLICKBAIT_PHRASES.some(p => h.includes(p));
       };
+      const isOpinionSource = (a) => {
+        const src = (a.source || "").toLowerCase();
+        return [...OPINION_SOURCES].some(s => src.includes(s));
+      };
       const isRelevant = (a) => {
         if (isRoundup(a.headline)) return false;
         if (isClickbait(a.headline)) return false;
+        if (isOpinionSource(a)) return false;
         const text = ((a.headline || "") + " " + (a.summary || "")).toLowerCase();
         return companyKeywords.some(kw => text.includes(kw));
       };
@@ -7697,6 +7777,52 @@ const SearchBar = ({ data, search, setSearch }) => {
       setNewsError(true);
     } finally {
       setNewsLoading(false);
+    }
+  };
+
+  const fetchResearch = async (ticker) => {
+    if (!GEMINI_KEY) { setResearchError(true); return; }
+    setResearchLoading(true);
+    setResearchError(false);
+    setResearch(null);
+    try {
+      const prompt = `Please analyze ${ticker} and provide the following, concise and clearly organized:
+
+1. **Explain what the company does in like I'm 12 years old** – three short bullet points about what it does and any helpful relatable examples and analogies.
+
+2. **Professional summary (max 10 sentences)** – industry, main products/services, primary competitors (list tickers), notable metrics or achievements, competitive advantage/moat, why they are unique and if they are a biotech provide if they have a commercial product or in clinical stages.
+
+3. In a table, provide the following:
+- Any hot theme, narrative or story of the stock
+- Any catalysts (earnings, news, macro)
+- Any significant fundamentals (huge growth in earnings or revenues, moat, unique product or service, superior management, patents etc)
+
+4. **Show all the main news/events for the last 3 months:** – Use a bullet-point table for: Date (YYYY-MM-DD) | Event type (Earnings, Product Launch, Analyst Upgrade/Downgrade, etc.) | Short summary (max 1-2 sentences) | Direct source link – Mark any major price-moving events (surprise earnings, large guidance shift, top-tier analyst actions). Only include confirmed events, no opinion pieces or previews.
+
+5. **Mention any recent insider buys/sells or institutional filings if visible.**
+
+6. **Summarize how the stock is moving vs. main competitors and overall sector trend in past month (up/down).**
+
+7. **Flag upcoming catalysts (earnings, product launches, regulatory events) in the next 30 days.**
+
+8. **Note any changes in analyst price targets for this ticker during the period above.** – Format for easy review. If possible, use tables for events and peer moves. – Respond in clear, concise, easily readable style for use in trading decisions.`;
+
+      const res = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
+        }
+      );
+      if (!res.ok) throw new Error(res.status);
+      const json = await res.json();
+      const text = json.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      setResearch(text);
+    } catch {
+      setResearchError(true);
+    } finally {
+      setResearchLoading(false);
     }
   };
 
@@ -7775,13 +7901,14 @@ const SearchBar = ({ data, search, setSearch }) => {
 
           {/* Tab bar */}
           <div className="flex border-b border-zinc-800 -mx-3 px-3">
-            {[{ key: "info", label: "Info" }, { key: "news", label: "Catalysts" }].map(tab => (
+            {[{ key: "info", label: "Info" }, { key: "news", label: "Catalysts" }, { key: "research", label: "Research" }].map(tab => (
               <button
                 key={tab.key}
                 onMouseDown={e => e.preventDefault()}
                 onClick={() => {
                   setActiveTab(tab.key);
                   if (tab.key === "news" && news.length === 0 && !newsLoading) fetchNews(fullResult.ticker);
+                  if (tab.key === "research" && !research && !researchLoading) fetchResearch(fullResult.ticker);
                 }}
                 className={`text-[12px] px-3 py-1.5 border-b-2 transition-colors ${activeTab === tab.key ? "border-blue-500 text-blue-400" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}
               >
@@ -7931,6 +8058,24 @@ const SearchBar = ({ data, search, setSearch }) => {
                   );
                 })}
               </div>
+            </div>
+          )}
+
+          {/* Research tab */}
+          {activeTab === "research" && (
+            <div className="max-h-[520px] overflow-y-auto pr-1">
+              {researchLoading && (
+                <p className="text-[12px] text-zinc-600 animate-pulse py-4 text-center">Analyzing {fullResult.ticker} with Gemini…</p>
+              )}
+              {researchError && (
+                <p className="text-[12px] text-red-500/70 py-4 text-center">
+                  {GEMINI_KEY ? "Gemini request failed — try again" : "No Gemini API key configured"}
+                </p>
+              )}
+              {!researchLoading && !researchError && !research && (
+                <p className="text-[12px] text-zinc-600 py-4 text-center">Click Research to load analysis.</p>
+              )}
+              {research && <ResearchContent text={research} />}
             </div>
           )}
         </div>
