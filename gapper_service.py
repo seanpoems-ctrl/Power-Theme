@@ -227,7 +227,7 @@ SINGLE_STOCK_LEVERAGE = {
     "SNDK":  ("SOXL",  "SOXS"),    # SanDisk → Semis 3x
 
     # China Tech / EV
-    "BABA":  ("BABAU", "BABAS"),   # Alibaba 2x Long / 1x Short (CWEB sector alt)
+    "BABA":  ("CWEB",  "YANG"),    # Alibaba → China Tech 2x Long / 3x Short
     "LI":    ("TSLL",  "TSLS"),    # Li Auto → Tesla 2x (EV sector proxy)
     "HSAI":  ("SOXL",  "SOXS"),    # Hesai → Semis 3x (LiDAR chips)
 
@@ -235,11 +235,11 @@ SINGLE_STOCK_LEVERAGE = {
     "RLAY":  ("LABU",  "LABD"),    # Relay Therapeutics → Biotech 3x
 
     # Materials / Energy
-    "LAC":   ("LITU",  "LITD"),    # Lithium Americas → Lithium 2x
+    "LAC":   ("REMX",  "SOXS"),    # Lithium Americas → Rare Earth/Materials ETF
     "WOLF":  ("SOXL",  "SOXS"),    # Wolfspeed → Semis 3x
 
     # Industrials / Other
-    "CNH":   ("DXJS",  "DXJW"),    # CNH Industrial (no direct ETF)
+    "CNH":   ("DXJS",  "EFZ"),     # CNH Industrial → Int'l Small Cap / Short Int'l
     "URG":   ("URA",   "URNM"),    # Ur-Energy → Uranium ETF
 
     # IBKR Pre-Market common gappers

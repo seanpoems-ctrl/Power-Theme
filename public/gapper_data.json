@@ -1,5 +1,5 @@
 {
-  "scan_time": "2026-06-02 21:12 ET",
+  "scan_time": "2026-06-02 21:58 ET",
   "earnings_today": [],
   "gappers": [
     {
@@ -19,7 +19,10 @@
       "conviction": 50,
       "grade": "C",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: SIVEF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "SIVEF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nSIVEF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [],
       "leverage_etfs": [],
@@ -62,15 +65,18 @@
       "mkt_cap": 74502627500,
       "rvol": 5.9,
       "adr_pct": 5.29,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "HPE reported quarterly results; earnings catalyst detected in headlines.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "HPE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: HPE reported quarterly results; earnings catalyst detected in headlines. | Impact: Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
-      "analysis_details": "• **The Results**\nHPE reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "analysis_detail": {
+        "catalyst": "HPE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nHPE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "SMCI",
         "NTAP",
@@ -83,11 +89,6 @@
         "TECS"
       ],
       "headlines": [
-        {
-          "title": "Hewlett Packard Soars to All-Time High on Q2 Blowout, Dividends - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNTHRwNDN2R2JEbkVQblhfaUFoeFBJMUxLR3daSmdlcjMxckxoeWJrOGo5NnE4S2lnOHZtdlF3X3pjZnZzTlF2NVZVTkRCd3k2ZFRkVzUzQjVfVFRJei01Zm5mMXdIQ2lqbnpQVVBKa2dYbFdYNXhObFF6VkUwRTBDYTI4ME9iS0JwMWxkRnJwNExqZk5jdEdJZFJ2d1E?oc=5"
-        },
         {
           "title": "HPE stock explodes for one simple reason: It's finally seen as an AI play - Yahoo Finance",
           "source": "Google News",
@@ -106,7 +107,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "HPE reported quarterly results; earnings catalyst detected in headlines.",
+        "primary_claim": "HPE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -118,8 +119,8 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     },
     {
       "ticker": "RLAY",
@@ -138,7 +139,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: RLAY gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "RLAY gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nRLAY gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "RVMD",
@@ -196,7 +200,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: MRVL gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "MRVL gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nMRVL gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "AVGO",
@@ -254,7 +261,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: STM reported quarterly results; earnings catalyst detected in headlines. | Impact: Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "analysis_detail": {
+        "catalyst": "STM reported quarterly results; earnings catalyst detected in headlines.",
+        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+      },
       "analysis_details": "• **The Results**\nSTM reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
       "peer_tickers": [
         "ON",
@@ -323,7 +333,10 @@
       "conviction": 50,
       "grade": "C",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: GRRR reported quarterly results; earnings catalyst detected in headlines. | Impact: Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "analysis_detail": {
+        "catalyst": "GRRR reported quarterly results; earnings catalyst detected in headlines.",
+        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+      },
       "analysis_details": "• **The Results**\nGRRR reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
       "peer_tickers": [
         "SOUN",
@@ -392,20 +405,27 @@
       "conviction": 50,
       "grade": "C",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: HSAI reported quarterly results; earnings catalyst detected in headlines. | Impact: Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "analysis_detail": {
+        "catalyst": "HSAI reported quarterly results; earnings catalyst detected in headlines.",
+        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+      },
       "analysis_details": "• **The Results**\nHSAI reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
       "peer_tickers": [
         "OUST",
         "AEYE",
         "LIDR"
       ],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
+      "leverage_etfs": [
+        "SOXL"
+      ],
+      "inverse_etfs": [
+        "SOXS"
+      ],
       "headlines": [
         {
           "title": "Hesai (HSAI) Q4 2025 Earnings Call Transcript - The Globe and Mail",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxORXYwZERlazgyMDhsOVRqVWFGRUxCdUxGemdMc1FTeWNaX243bWk3UVVxRld1TWQxZXhVRm9hREwtSzRKZ0xlUmhRWVJaUEU4cG0xVTRCTkZrTmFrejlmeHVZeEljOUdYYjJ2YjFoc1pJaWdienJpOGhxc2ljdGlkNlBZY2VuR3pwNC13cE5LdXFGam5JZmQ0MjJ0dE9Na05SSVhLWHFQYnpHZU1LMV9SazFlb0UzWm9zTzl2ZUsxdFdlZHZD?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPZ2NUQnpMUFVwbmJ3TVNHRXdteTQ3Ri1sSXZScEFabE1YZDZsQ25PeDlScEVoOW5nUExsNVQwZm5Ub2RIOHpiRE5aaXM2dVpzblcxOUZlU2N0bXhqSHNzajQtbjlKVUlMbGhuaGw1bUF5aVZScElqaHZaam8wVF9rMjFMXzNlalJHaG1LVHNVMDZqRHE0R2p3TWlGekVqV0dTZVJmNDVPdVp2bFJBQ0hEMXhUWUE0TDJ5SkExZGMwa2ljaUtEQXU0?oc=5"
         },
         {
           "title": "U.S. Stocks Move | Leading Chinese ADRs Rally Collectively, Hesai (HSAI.US) Surges Over 11% - Moomoo",
@@ -457,14 +477,19 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: LI reported quarterly results; earnings catalyst detected in headlines. | Impact: Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "analysis_detail": {
+        "catalyst": "LI reported quarterly results; earnings catalyst detected in headlines.",
+        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+      },
       "analysis_details": "• **The Results**\nLI reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
       "peer_tickers": [
         "NIO",
         "XPEV",
         "TSLA"
       ],
-      "leverage_etfs": [],
+      "leverage_etfs": [
+        "TSLL"
+      ],
       "inverse_etfs": [],
       "headlines": [
         {
@@ -522,7 +547,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: MXL announced a new contract or strategic partnership. | Impact: Contract or partnership announcement detected. Evaluate deal size and strategic significance.",
+      "analysis_detail": {
+        "catalyst": "MXL announced a new contract or strategic partnership.",
+        "impact": "Contract or partnership announcement detected. Evaluate deal size and strategic significance."
+      },
       "analysis_details": "• **The Announcement**\nMXL announced a new contract or strategic partnership.\n\n• **Strategic Value**\nContract or partnership announcement detected. Evaluate deal size and strategic significance.",
       "peer_tickers": [
         "MRVL",
@@ -586,7 +614,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: NVTS gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "NVTS gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nNVTS gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "ON",
@@ -650,7 +681,10 @@
       "conviction": 50,
       "grade": "C",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: URG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "URG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nURG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "UEC",
@@ -708,7 +742,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: SMTC reported quarterly results; earnings catalyst detected in headlines. | Impact: Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "analysis_detail": {
+        "catalyst": "SMTC reported quarterly results; earnings catalyst detected in headlines.",
+        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+      },
       "analysis_details": "• **The Results**\nSMTC reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
       "peer_tickers": [
         "MRVL",
@@ -772,7 +809,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: AVGO gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "AVGO gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nAVGO gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "MRVL",
@@ -841,7 +881,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: AEHR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "AEHR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nAEHR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "COHU",
@@ -910,7 +953,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: MCHP gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "MCHP gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nMCHP gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "STM",
@@ -974,7 +1020,10 @@
       "conviction": 50,
       "grade": "C",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: LWLG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "LWLG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nLWLG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "COHR",
@@ -1043,7 +1092,10 @@
       "conviction": 50,
       "grade": "C",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: LAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "LAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nLAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "ALB",
@@ -1108,7 +1160,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: WOLF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "WOLF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nWOLF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "NVTS",
@@ -1177,7 +1232,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: GLW gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "GLW gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nGLW gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "COHR",
@@ -1241,7 +1299,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: UMAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "UMAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nUMAC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "JOBY",
@@ -1258,12 +1319,12 @@
         {
           "title": "Unusual Machines (UMAC) Notches All-Time High on Govt Funding Buzz - Insider Monkey",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPdnRyUEZVZXJadFZNNDFpOHhxVWpjMS1jcGlPYlJCRVNUbDZLWGhDNWstb1lsQnBlR3dDSnkwblhWREZqYm5BWXhiV0RrRmlMQ2Y2Q0V4eE1BSElMT09EVFM0WXZFZXZ3ckJrbFJxQ1pmNlR6TXRSejhwR0tTNklUbTR4SEZCek94R2dhWEtKN25IWVh4UWFVWmZlcmY4WWd0TzZXbFlnQXJYbHdw0gG0AUFVX3lxTFBaLVVVWWJva2J5b2hrdU5IWkJUOTA5YzNndk1nVS00aDJGeGR3UnRiSjJyNmg1TXE1VThDY1pGQldQLUs3T2JSVXJla3NtY2V5cDlEY190UUs1eFpGb19SMkF5b3dSNjhDeW0wSTVlV0RxMzhUb29hTklDUGRMdjdaYXQyeWhnWUJOMlAzUUJjam9HcEM2R0NmUWpCcHdGVUZ6Z29jWHJhS2RsbjkxSFhSSUFLcw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQWi1VVVlib2tieW9oa3VOSFpCVDkwOWMzZ3ZNZ1UtNGgyRnhkd1J0YkoycjZoNU1xNVU4Q2NaRkJXUC1LN09iUlVyZWtzbWNleXA5RGNfdFFLNXhaRm9fUjJBeW93UjY4Q3ltMEk1ZVdEcTM4VG9vYU5JQ1BkTHY3WmF0MnloZ1lCTjJQM1FCY2pvR3BDNkdDZlFqQnB3RlVGemdvY1hyYUtkbG45MUhYUklBS3PSAbQBQVVfeXFMUFotVVVZYm9rYnlvaGt1TkhaQlQ5MDljM2d2TWdVLTRoMkZ4ZHdSdGJKMnI2aDVNcTVVOENjWkZCV1AtSzdPYlJVcmVrc21jZXlwOURjX3RRSzV4WkZvX1IyQXlvd1I2OEN5bTBJNWVXRHEzOFRvb2FOSUNQZEx2N1phdDJ5aGdZQk4yUDNRQmNqb0dwQzZHQ2ZRakJwd0ZVRnpnb2NYcmFLZGxuOTFIWFJJQUtz?oc=5"
         },
         {
           "title": "Unusual machines director Rich Sanford sells $724,542 in stock - Investing.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQaGxVTFpQY3hxYVNIcVJqSmd5U0ZrNE5TeXZrRjZqeERJckxUUUZ2d0EwdFNVNkdtZ3JVOVByNk1JSTdrTS1iQ1d6SWNwM1liYVFqaWdNNURISzV3Z2dZOXpRb1A0QjF5OXpzdFNhOS1sVy1GbjZHZVF4WXlLaWQwTjBvM2xnb2lkRlQwY1FlTmRmbWVTQUd4M1VRWktfM2w2VzluUmJWV2pnZFRYd3l1ZnNQRGtkZGRQUGQyTTZFcmRDN3M?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxONVVDdEVLRXdMaHZvYW8zbkJXQlRIakhhSk9GRGhQVHkyWVg2R3J5VG4yTmlDVEZUa2tpWHRvMExHZ2I2ci00RTlVQ2ZLeEJOV0JIa1B0eTNfdmctS3JyQTVvdDhTWlNhTnJNOUZtWEp6aFEyaERUR0xRUkhOeDBMd28xZFlndk96Mnp0QUdYWm9tNWR4ZzNDOG1FRVNYdk1jNEdaY1NiTVBVSWd2TVBfN2s2Y0IwWDBOeC11LWpvZDhUZDJXWWxzOXotZ01MZw?oc=5"
         }
       ],
       "float_shares": "43.06M",
@@ -1310,7 +1371,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: COHR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "COHR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nCOHR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "AXTI",
@@ -1372,15 +1436,18 @@
       "mkt_cap": 300623785397,
       "rvol": 1.52,
       "adr_pct": 2.82,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "BABA gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "category": "New Contract/Partnership",
+      "theme": "New Contract/Partnership",
+      "reasoning": "BABA announced a new contract or strategic partnership.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: BABA gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
-      "analysis_details": "• **What Happened**\nBABA gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "BABA announced a new contract or strategic partnership.",
+        "impact": "Contract or partnership announcement detected. Evaluate deal size and strategic significance."
+      },
+      "analysis_details": "• **The Announcement**\nBABA announced a new contract or strategic partnership.\n\n• **Strategic Value**\nContract or partnership announcement detected. Evaluate deal size and strategic significance.",
       "peer_tickers": [
         "JD",
         "PDD",
@@ -1389,6 +1456,11 @@
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
+        {
+          "title": "Alibaba Shares Rise 4.8% as Investors Refocus on New AI Initiatives and a Fresh UEFA Partnership - Moomoo",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNTEFaQ3JDNnVBX3B2RGFrUFIzXy1ORWZkQldSeEJ4X2x0Zy1VeWdWcWZWVFRsb2g3T1l4bm9WZlRIdHpNUlVsVThhdWxiZXZQVTBJanJ5VXkxSm9LOTgzdXNXVHdSZFIyTjJkRUZRVFptTWJfX18weVoxMjAwLWJTMzduWEhNVjZkaDZaWGpKNGQ5V0F2WkxLdw?oc=5"
+        },
         {
           "title": "Alibaba (BABA) CFO receives 160,000 RSUs vesting quarterly from 2026 - Stock Titan",
           "source": "Google News",
@@ -1407,7 +1479,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "BABA gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "primary_claim": "BABA announced a new contract or strategic partnership.",
         "discrepancy_note": ""
       },
       "gates_passed": 4,
@@ -1419,8 +1491,8 @@
         "gate_adr": false
       },
       "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     },
     {
       "ticker": "AXTI",
@@ -1439,7 +1511,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: AXTI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "AXTI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nAXTI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "COHR",
@@ -1508,7 +1583,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: CNH gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "CNH gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nCNH gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "DE",
@@ -1568,7 +1646,10 @@
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
-      "analysis_detail": "Catalyst: PENG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven. | Impact: No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_detail": {
+        "catalyst": "PENG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
       "analysis_details": "• **What Happened**\nPENG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [
         "SMCI",
