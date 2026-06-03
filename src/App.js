@@ -5176,6 +5176,18 @@ const NewsHubTab = ({ newsData }) => {
                     <span>•</span>
                     <span>RVOL: <strong className="text-zinc-300">{gapper.rvol.toFixed(2)}x</strong></span>
                   </div>
+
+                  {/* Peers + Leverage ETFs inline badges */}
+                  {((gapper.peer_tickers?.length > 0) || (gapper.leverage_etfs?.length > 0)) && (
+                    <div className="flex flex-wrap gap-1 mt-2">
+                      {(gapper.peer_tickers || []).map(p => (
+                        <span key={p} className="text-[10px] font-mono font-semibold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-1.5 py-0.5 rounded">{p}</span>
+                      ))}
+                      {(gapper.leverage_etfs || []).map(etf => (
+                        <span key={etf} className="text-[10px] font-mono font-semibold text-orange-400 bg-orange-500/10 border border-orange-500/20 px-1.5 py-0.5 rounded">{etf} <span className="text-orange-600/70 font-normal">lev</span></span>
+                      ))}
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
@@ -6658,9 +6670,12 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
       const seen = new Set();
       for (const g of gappers) {
         if (g.meets_all_gates) {
-          if (!seen.has(g.ticker)) { seen.add(g.ticker); rows.push({ ticker: g.ticker, rs: g.rs_52w ?? null, isPeer: false, price: g.price ?? null, gap_pct: g.gap_pct ?? null }); }
+          if (!seen.has(g.ticker)) { seen.add(g.ticker); rows.push({ ticker: g.ticker, rs: g.rs_52w ?? null, isPeer: false, isLeverage: false, price: g.price ?? null, gap_pct: g.gap_pct ?? null }); }
           for (const p of (g.peer_tickers || [])) {
-            if (!seen.has(p)) { seen.add(p); rows.push({ ticker: p, rs: null, isPeer: true, price: null, gap_pct: null }); }
+            if (!seen.has(p)) { seen.add(p); rows.push({ ticker: p, rs: null, isPeer: true, isLeverage: false, price: null, gap_pct: null }); }
+          }
+          for (const etf of (g.leverage_etfs || [])) {
+            if (!seen.has(etf)) { seen.add(etf); rows.push({ ticker: etf, rs: null, isPeer: false, isLeverage: true, price: null, gap_pct: null }); }
           }
         }
       }
@@ -6707,22 +6722,23 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
         )}
         {leaders.length === 0 ? (
           <div className="text-[11px] text-zinc-600 py-2 text-center">No qualifying leaders</div>
-        ) : leaders.map(({ ticker, rs, isPeer, price, gap_pct }) => {
+        ) : leaders.map(({ ticker, rs, isPeer, isLeverage, price, gap_pct }) => {
           const rsCls = rs != null && rs >= 90 ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/30"
                       : rs != null && rs >= 85 ? "bg-yellow-500/20 text-yellow-400 border-yellow-500/30"
                       : "bg-zinc-800/60 text-zinc-500 border-zinc-700/40";
           return (
             <div key={ticker}
-              className={`flex items-center justify-between px-1.5 py-1 rounded hover:bg-zinc-800/50 transition-colors ${isPeer ? "opacity-60" : ""}`}>
+              className={`flex items-center justify-between px-1.5 py-1 rounded hover:bg-zinc-800/50 transition-colors ${isPeer ? "opacity-60" : ""} ${isLeverage ? "opacity-75" : ""}`}>
               <div className="flex items-center gap-1.5 min-w-0 flex-wrap">
                 <span
-                  className="text-[12px] font-mono font-semibold text-blue-400 cursor-pointer hover:text-blue-300 transition-colors leading-none"
+                  className={`text-[12px] font-mono font-semibold cursor-pointer transition-colors leading-none ${isLeverage ? "text-orange-400 hover:text-orange-300" : "text-blue-400 hover:text-blue-300"}`}
                   onClick={e => { clearTimeout(hoverTimer.current); const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect }); }}
                   onMouseEnter={e => startHover(ticker, e.currentTarget.getBoundingClientRect())}
                   onMouseLeave={cancelHover}
                 >
                   {ticker}
                   {isPeer && <span className="text-[11px] text-zinc-600 ml-0.5">peer</span>}
+                  {isLeverage && <span className="text-[10px] text-orange-600/80 ml-0.5 font-normal">lev</span>}
                 </span>
                 {price != null && <span className="text-[11px] font-mono text-zinc-500">${price.toFixed(2)}</span>}
                 {gap_pct != null && <span className="text-[11px] font-mono font-bold text-emerald-400">+{gap_pct.toFixed(1)}%</span>}
@@ -8447,6 +8463,32 @@ const MomentumCockpit = () => {
                 <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
                   <div className="text-[11px] text-blue-400 uppercase tracking-wide mb-1">Trade Hypothesis</div>
                   <div className="text-[12px] text-blue-300 leading-relaxed">{analysis.hypothesis}</div>
+                </div>
+              )}
+
+              {/* Peer Stocks + Leverage/Inverse ETFs */}
+              {((analysis.peer_tickers?.length > 0) || (analysis.leverage_etfs?.length > 0)) && (
+                <div className="flex gap-3">
+                  {analysis.peer_tickers?.length > 0 && (
+                    <div className="flex-1 bg-zinc-900 rounded p-2">
+                      <div className="text-[11px] text-zinc-500 uppercase tracking-wide mb-1.5">Sympathy Plays</div>
+                      <div className="flex flex-wrap gap-1">
+                        {analysis.peer_tickers.map(p => (
+                          <span key={p} className="text-[11px] font-mono font-semibold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-1.5 py-0.5 rounded">{p}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {analysis.leverage_etfs?.length > 0 && (
+                    <div className="flex-1 bg-zinc-900 rounded p-2">
+                      <div className="text-[11px] text-zinc-500 uppercase tracking-wide mb-1.5">Leverage / Inverse ETFs</div>
+                      <div className="flex flex-wrap gap-1">
+                        {analysis.leverage_etfs.map(etf => (
+                          <span key={etf} className="text-[11px] font-mono font-semibold text-orange-400 bg-orange-500/10 border border-orange-500/20 px-1.5 py-0.5 rounded">{etf}</span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
 

@@ -65,18 +65,69 @@ PEER_MAPPING = {
     "SNDK": ["STX", "WDC", "SMCI"],       # SanDisk
 }
 
-LEVERAGE_INVERSE_STOCKS = {
-    # 3x Leverage ETFs (if vol > $20M)
-    "TQQQ": "SQQQ",   # Nasdaq 3x leverage/inverse
-    "UPRO": "SPXU",   # S&P 500 3x leverage/inverse
-    "JNUG": "JDST",   # Gold 3x leverage/inverse
-    "NUGT": "DUST",   # Gold miners 3x leverage/inverse
-    "UGAZ": "DGAZ",   # Natural gas 3x leverage/inverse
+# Single-stock leverage/inverse ETF mapping
+# Format: "STOCK": ("LONG_ETF", "SHORT_ETF")
+SINGLE_STOCK_LEVERAGE = {
+    # Mega-cap Tech
+    "NVDA":  ("NVDL",  "NVDS"),    # NVIDIA 2x Long / 1x Short
+    "AAPL":  ("AAPU",  "AAPD"),    # Apple 1.5x Long / 1x Short
+    "TSLA":  ("TSLL",  "TSLS"),    # Tesla 2x Long / 1x Short
+    "AMZN":  ("AMZU",  "AMZD"),    # Amazon 2x Long / 1x Short
+    "MSFT":  ("MSFU",  "MSFD"),    # Microsoft 2x Long / 1x Short
+    "META":  ("METU",  "METD"),    # Meta 2x Long / 1x Short
+    "GOOGL": ("GGLL",  "GGLS"),    # Alphabet 2x Long / 1x Short
+    "GOOG":  ("GGLL",  "GGLS"),    # Alphabet 2x Long / 1x Short
+    "AVGO":  ("AVGOU", "AVGOD"),   # Broadcom 2x Long / 1x Short
+    "AMD":   ("AMDS",  "AMDS"),    # AMD — use SOXL/SOXS fallback
 
-    # 2x Leverage ETFs
-    "QLD": "PSQ",     # Nasdaq 2x leverage/inverse
-    "SSO": "SDS",     # S&P 500 2x leverage/inverse
+    # Semiconductors (use sector ETF as fallback)
+    "MRVL":  ("SOXL",  "SOXS"),    # Marvell → Semis 3x Long/Short
+    "SMCI":  ("SOXL",  "SOXS"),    # Super Micro → Semis 3x
+    "MXL":   ("SOXL",  "SOXS"),    # MaxLinear → Semis 3x
+    "MCHP":  ("SOXL",  "SOXS"),    # Microchip → Semis 3x
+    "NVTS":  ("SOXL",  "SOXS"),    # Navitas → Semis 3x
+    "STM":   ("SOXL",  "SOXS"),    # STMicroelectronics → Semis 3x
+    "SMTC":  ("SOXL",  "SOXS"),    # Semtech → Semis 3x
+    "AEHR":  ("SOXL",  "SOXS"),    # Aehr Test → Semis 3x
+    "AXTI":  ("SOXL",  "SOXS"),    # AXT Inc → Semis 3x
+    "COHR":  ("SOXL",  "SOXS"),    # Coherent → Semis 3x
+    "LWLG":  ("SOXL",  "SOXS"),    # Lightwave Logic → Semis 3x
+
+    # Cloud / Networking (use tech sector ETF)
+    "ANET":  ("TECL",  "TECS"),    # Arista Networks → Tech 3x
+    "HPE":   ("TECL",  "TECS"),    # HPE → Tech 3x
+    "CSCO":  ("TECL",  "TECS"),    # Cisco → Tech 3x
+    "IBM":   ("TECL",  "TECS"),    # IBM → Tech 3x
+    "GLW":   ("TECL",  "TECS"),    # Corning → Tech 3x
+
+    # Storage
+    "STX":   ("SOXL",  "SOXS"),    # Seagate → Semis 3x
+    "WDC":   ("SOXL",  "SOXS"),    # Western Digital → Semis 3x
+    "NTAP":  ("TECL",  "TECS"),    # NetApp → Tech 3x
+    "SNDK":  ("SOXL",  "SOXS"),    # SanDisk → Semis 3x
+
+    # China Tech / EV
+    "BABA":  ("BABAU", "BABAS"),   # Alibaba 2x Long / 1x Short (CWEB sector alt)
+    "LI":    ("EVLV",  "EVSZ"),    # Li Auto → EV sector
+    "HSAI":  ("EVLV",  "EVSZ"),    # Hesai → EV/LiDAR
+
+    # Biotech / Pharma
+    "RLAY":  ("LABU",  "LABD"),    # Relay Therapeutics → Biotech 3x
+
+    # Materials / Energy
+    "LAC":   ("LITU",  "LITD"),    # Lithium Americas → Lithium 2x
+    "WOLF":  ("SOXL",  "SOXS"),    # Wolfspeed → Semis 3x
+
+    # Industrials / Other
+    "CNH":   ("DXJS",  "DXJW"),    # CNH Industrial (no direct ETF)
+    "URG":   ("URA",   "URNM"),    # Ur-Energy → Uranium ETF
+
+    # IBKR Pre-Market common gappers
+    "GRRR":  ("TECL",  "TECS"),
+    "UMAC":  ("TECL",  "TECS"),
+    "PENG":  ("TECL",  "TECS"),
 }
+
 
 def get_peer_stocks(ticker: str) -> list:
     """Get curated peer stocks for a given ticker."""
@@ -84,25 +135,26 @@ def get_peer_stocks(ticker: str) -> list:
 
 
 def get_leverage_inverse_stocks(ticker: str) -> list:
-    """Fetch leverage/inverse ETF counterparts if volume > $20M."""
-    try:
-        if ticker.upper() not in LEVERAGE_INVERSE_STOCKS:
-            return []
-
-        inverse = LEVERAGE_INVERSE_STOCKS[ticker.upper()]
-        leverage_vol = _fetch_dollar_volume(ticker)
-        inverse_vol = _fetch_dollar_volume(inverse)
-
-        peers = []
-        if leverage_vol and leverage_vol > 20_000_000:  # $20M threshold
-            peers.append(ticker.upper())
-        if inverse_vol and inverse_vol > 20_000_000:    # $20M threshold
-            peers.append(inverse)
-
-        return peers
-    except Exception as e:
-        logger.debug(f"  Leverage/inverse fetch failed for {ticker}: {e}")
+    """
+    Return the single-stock (or sector) leverage/inverse ETF pair for a gapper,
+    filtered by $20M+ daily dollar volume.
+    Returns up to 2 tickers: [LONG_ETF, SHORT_ETF]
+    """
+    t = ticker.upper()
+    if t not in SINGLE_STOCK_LEVERAGE:
         return []
+
+    long_etf, short_etf = SINGLE_STOCK_LEVERAGE[t]
+    result = []
+    for etf in [long_etf, short_etf]:
+        try:
+            vol = _fetch_dollar_volume(etf)
+            if vol and vol > 20_000_000:
+                result.append(etf)
+        except Exception as e:
+            logger.debug(f"  Vol check failed for {etf}: {e}")
+
+    return result
 
 
 def _fetch_dollar_volume(ticker: str) -> float | None:
@@ -655,7 +707,8 @@ def analyze_with_gemini(
             "finviz_theme":    "—",
             "analysis_detail": "Catalyst: Unknown | Impact: Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing.",
             "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-            "peer_tickers":    [],
+            "peer_tickers":    get_peer_stocks(ticker),
+            "leverage_etfs":   get_leverage_inverse_stocks(ticker),
         }
     try:
         from google import genai
@@ -751,10 +804,10 @@ Respond in this exact JSON format only (no extra text):
         analysis_detail  = result.get("analysis_detail", f"Catalyst: {reasoning} | Impact: See analysis.")
         analysis_details = result.get("analysis_details", reasoning)
 
-        # Use curated peer stocks + leverage/inverse ETF counterparts
+        # Curated peer stocks (sympathy plays)
         peer_tickers = get_peer_stocks(ticker)
-        leverage_peers = get_leverage_inverse_stocks(ticker)
-        peer_tickers = (peer_tickers + leverage_peers)[:3]  # Max 3 peers total
+        # Single-stock leverage/inverse ETFs (volume-filtered)
+        leverage_etfs = get_leverage_inverse_stocks(ticker)
 
         hypothesis_label, strategy = HYPOTHESIS_RULES.get(category, HYPOTHESIS_RULES["Others"])
         base_conviction = {"High Conviction (Gap & Go)": 80, "Medium Conviction (RS Hold)": 60,
@@ -772,6 +825,7 @@ Respond in this exact JSON format only (no extra text):
             "analysis_detail": analysis_detail,
             "analysis_details": analysis_details,
             "peer_tickers":    peer_tickers,
+            "leverage_etfs":   leverage_etfs,
         }
     except Exception as e:
         logger.warning(f"  Gemini failed for {ticker}: {e}")
@@ -797,10 +851,8 @@ def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
     label, strategy = HYPOTHESIS_RULES.get(cat, HYPOTHESIS_RULES["Others"])
     rsn = titles[0] if titles else "No catalyst identified."
 
-    # Use curated peer stocks + leverage/inverse ETF counterparts
-    peer_tickers = get_peer_stocks(ticker)
-    leverage_peers = get_leverage_inverse_stocks(ticker)
-    peer_tickers = (peer_tickers + leverage_peers)[:3]  # Max 3 peers total
+    peer_tickers  = get_peer_stocks(ticker)
+    leverage_etfs = get_leverage_inverse_stocks(ticker)
 
     return {
         "category":        cat,
@@ -813,6 +865,7 @@ def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
         "analysis_detail": f"Catalyst: {rsn} | Impact: See analysis.",
         "analysis_details": rsn,
         "peer_tickers":    peer_tickers,
+        "leverage_etfs":   leverage_etfs,
     }
 
 
