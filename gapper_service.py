@@ -964,10 +964,19 @@ Respond in this exact JSON format only (no extra text, no markdown fences):
                 response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
                 break
             except Exception as api_err:
-                if attempt == 2:
+                err_str = str(api_err)
+                if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
+                    # Extract retry delay from error if available, else use 60s
+                    import re as _re
+                    delay_match = _re.search(r"retry[^\d]+(\d+)", err_str)
+                    wait = int(delay_match.group(1)) + 2 if delay_match else 60
+                    logger.warning(f"  Gemini 429 rate limit for {ticker} — waiting {wait}s before retry {attempt+1}/3...")
+                    time.sleep(wait)
+                elif attempt == 2:
                     raise
-                logger.warning(f"  Gemini API attempt {attempt+1} failed for {ticker}: {api_err} — retrying...")
-                time.sleep(5)
+                else:
+                    logger.warning(f"  Gemini API attempt {attempt+1} failed for {ticker}: {api_err} — retrying in 5s...")
+                    time.sleep(5)
 
         text = response.text.strip()
         # Strip markdown code fences
