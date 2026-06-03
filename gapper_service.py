@@ -87,6 +87,10 @@ OPINION_SOURCES = {
     "wallstreetmojo",                            # WSM — educational/analysis
     "qz.com", "quartz",                          # Quartz — business commentary
     "thefly.com", "the fly",                     # The Fly — options/flow alerts
+    "trefis",                                    # Trefis — valuation commentary
+    "tradingview",                               # TradingView articles — analysis/opinion
+    "nasdaq.com",                                # Nasdaq.com editorial — mostly commentary
+    "fool.com",                                  # Motley Fool
 }
 
 # ──────────────────────────────────────────────────────────────
@@ -123,7 +127,7 @@ SINGLE_STOCK_LEVERAGE = {
     "META":  ("METU",  "METD"),    # Meta 2x Long / 1x Short
     "GOOGL": ("GGLL",  "GGLS"),    # Alphabet 2x Long / 1x Short
     "GOOG":  ("GGLL",  "GGLS"),    # Alphabet 2x Long / 1x Short
-    "AVGO":  ("AVGOU", "AVGOD"),   # Broadcom 2x Long / 1x Short
+    "AVGO":  ("SOXL",  "SOXS"),    # Broadcom → Semis 3x (AVGOU/AVGOD delisted)
     "AMD":   ("AMDS",  "AMDS"),    # AMD — use SOXL/SOXS fallback
 
     # Semiconductors (use sector ETF as fallback)
@@ -174,6 +178,18 @@ SINGLE_STOCK_LEVERAGE = {
     "PENG":  ("TECL",  "TECS"),
 }
 
+# These ETFs are always highly liquid (>$20M daily) — skip live volume check
+# Verified 2026-06-03: SOXL=$10.5B, NVDL=$1.4B, TSLL=$904M, TECL=$364M, TECS=$61M, SOXS=$2.3B
+ALWAYS_LIQUID_ETFS = {
+    "SOXL", "SOXS",   # Semis 3x
+    "TECL", "TECS",   # Tech 3x
+    "NVDL",           # NVIDIA 2x long (>$1B daily)
+    "TSLL",           # Tesla 2x long (>$900M daily)
+    "LABU", "LABD",   # Biotech 3x
+    "TQQQ", "SQQQ",   # Nasdaq 3x
+    "UPRO", "SPXU",   # S&P 3x
+}
+
 
 def get_peer_stocks(ticker: str) -> list:
     """Get curated peer stocks for a given ticker."""
@@ -182,8 +198,9 @@ def get_peer_stocks(ticker: str) -> list:
 
 def get_leverage_inverse_stocks(ticker: str) -> list:
     """
-    Return the single-stock (or sector) leverage/inverse ETF pair for a gapper,
-    filtered by $20M+ daily dollar volume.
+    Return the single-stock (or sector) leverage/inverse ETF pair for a gapper.
+    Well-known liquid ETFs skip the live volume check (pre-verified).
+    Lesser-known ETFs are checked via yfinance ($20M+ threshold).
     Returns up to 2 tickers: [LONG_ETF, SHORT_ETF]
     """
     t = ticker.upper()
@@ -194,9 +211,12 @@ def get_leverage_inverse_stocks(ticker: str) -> list:
     result = []
     for etf in [long_etf, short_etf]:
         try:
-            vol = _fetch_dollar_volume(etf)
-            if vol and vol > 20_000_000:
-                result.append(etf)
+            if etf in ALWAYS_LIQUID_ETFS:
+                result.append(etf)   # skip live check — always qualifies
+            else:
+                vol = _fetch_dollar_volume(etf)
+                if vol and vol > 20_000_000:
+                    result.append(etf)
         except Exception as e:
             logger.debug(f"  Vol check failed for {etf}: {e}")
 
