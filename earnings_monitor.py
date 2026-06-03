@@ -143,7 +143,7 @@ JSON format only:
         from google import genai
 
         client = genai.Client(api_key=GEMINI_API_KEY)
-        model = "gemini-1.5-flash" if USE_CHEAPER_MODEL else "gemini-1.5-pro"
+        model = "gemini-1.5-flash" if USE_CHEAPER_MODEL else "gemini-2.5-flash"
 
         response = client.models.generate_content(model=model, contents=prompt)
         raw = response.text.strip().replace("```json", "").replace("```", "").strip()

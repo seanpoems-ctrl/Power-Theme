@@ -1269,7 +1269,7 @@ def main():
     logger.info(f"Large gaps (≥15%):  {stats['large_gap']} gappers × 5 headlines")
     logger.info(f"Total headlines sent to Gemini: {stats['headlines_sent']}")
     logger.info(f"Opinion articles filtered out: Enabled (cost savings ✓)")
-    logger.info(f"\nEstimated Gemini 1.5 Flash cost: ~$0.0004/day (~$0.01/month)")
+    logger.info(f"\nEstimated Gemini 2.5 Flash cost: ~$0.02/day (~$0.40/month)")
     logger.info(f"{'='*70}\n")
 
     # ── IBKR mirror table ────────────────────────────────────────────────────
