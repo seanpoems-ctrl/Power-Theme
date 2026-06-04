@@ -1,30 +1,30 @@
 {
-  "generated_at": "June 04, 2026 (12:13 EDT)",
-  "session": "Market Hours",
+  "generated_at": "June 04, 2026 (18:23 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7577.91,
-      "change": 24.23,
-      "change_pct": 0.32
+      "price": 7584.31,
+      "change": 30.63,
+      "change_pct": 0.41
     },
     {
       "label": "Nasdaq 100",
-      "price": 30390.93,
-      "change": -180.31,
-      "change_pct": -0.59
+      "price": 30407.81,
+      "change": -163.43,
+      "change_pct": -0.53
     },
     {
       "label": "VIX",
-      "price": 15.61,
-      "change": -0.45,
+      "price": 15.4,
+      "change": -0.66,
       "change_pct": null,
       "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.46,
-      "change": -0.03,
+      "price": 4.48,
+      "change": -0.01,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -37,8 +37,8 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 24944.95,
-      "change_pct": 0.6
+      "price": 24795.94,
+      "change_pct": -1.31
     },
     "ftse": {
       "label": "FTSE 100",
@@ -50,8 +50,8 @@
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 57.9,
-    "mmth": 63.1,
+    "s5fi": 59.3,
+    "mmth": 64.0,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Leading sectors strong, broader market mixed",
+  "mood": "Sector Rotation / Thematic Leadership",
   "analysis": {
-    "action_line": "VIX 15.61 Normal + S5FI 57.9% breadth + Nikkei +2.50% strength → selectively trade high RS leaders within core themes.",
-    "analysis_para1": "Global markets are showing robust positive momentum today, with the Nikkei 225 surging +2.50%, complemented by positive gains in the DAX (+0.60%) and FTSE 100 (+0.27%), indicating a generally risk-on sentiment internationally. Domestically, the S&P 500 maintains modest gains of +0.32%, but a notable divergence is seen as the Nasdaq 100 lags with a -0.59% decline, suggesting a rotation or profit-taking within large-cap tech. Despite this, market breadth remains healthy, with S5FI at 57.9% and MMTH at 63.1%, indicating participation beyond the largest tech names. The 10Y Yield is stable at 4.46% and VIX at 15.61 points to normal, low volatility conditions, with no immediate credit concerns. The overall picture suggests a market that is consolidating internally while global sentiment remains buoyant.",
-    "analysis_para2": "The mechanical plan for today involves vigilant monitoring of key index levels for intraday support and resistance. For the S&P 500, holding above the 7550 level is critical to maintain bullish conviction, while the Nasdaq 100 needs to reclaim 30500 to signal a potential reversal from today's weakness. Traders should prioritize identifying and executing on breakout opportunities in high-relative-strength names within the Hardware and Semiconductor themes, given their consistent outperformance. Tight risk management with stop-losses is advised due to the intraday sector rotation. A decisive close for the S&P above its open, alongside a positive shift in the Nasdaq, would signal broad market strength and potentially broader participation tomorrow.",
-    "technical_signal": "No reversal pattern confirmed yet, as the market is exhibiting divergent performance between indices rather than a clear directional shift.",
+    "action_line": "VIX 15.40 Normal + S5FI 59.3% breadth + Nikkei +2.50% → focus on high RS thematic leaders.",
+    "analysis_para1": "Global markets presented a divergent picture today, with the Nikkei 225 surging by +2.50%, contrasting sharply with a -1.31% decline in the DAX, while the FTSE 100 posted a modest +0.27% gain. Domestically, the S&P 500 managed a +0.41% increase despite the Nasdaq 100's -0.53% dip, suggesting underlying sector rotation. With the 10-year yield holding stable at 4.48% and the BAML HY Spread signaling an unknown credit regime, market participants are navigating with moderate breadth, as S5FI stands at 59.3% and MMTH at 64.0%.",
+    "analysis_para2": "Monitor for continued outperformance from high Relative Strength themes, particularly within Hardware and Semiconductors, which continue to show exceptional momentum. Key support levels for the S&P 500 should be watched, while any further divergence with the Nasdaq 100 could indicate a broadening of the market rally beyond mega-cap tech. A sustained VIX reading below 16, combined with improving breadth above 60% for S5FI, would reinforce a constructive environment for selective long entries. Conversely, a breakdown in thematic leadership or a spike in the VIX would signal a need for caution.",
+    "technical_signal": "No reversal pattern confirmed yet. The market's mixed performance today, with the S&P 500 rising while the Nasdaq 100 dipped, suggests ongoing sector rotation rather than a definitive reversal.",
     "ticker_intel": [
+      {
+        "ticker": "DELL",
+        "company": "Dell Technologies Inc.",
+        "grade": "A+",
+        "reason": "With RS 98 and a staggering 1-month return of +99.0%, Dell Technologies leads the robust Hardware theme, demonstrating undeniable market leadership."
+      },
       {
         "ticker": "VSH",
         "company": "Vishay Intertechnology, Inc.",
-        "grade": "A+",
-        "reason": "Exhibiting exceptional relative strength (RS=98) with a phenomenal 1-month return of +109.3%, making it a top momentum play in the strong Semiconductor theme."
-      },
-      {
-        "ticker": "UMAC",
-        "company": "Unusual Machines, Inc.",
         "grade": "A",
-        "reason": "A leading Hardware theme player with outstanding relative strength (RS=98) and a remarkable +109.0% 1-month return, indicative of strong speculative interest and growth."
+        "reason": "Vishay Intertechnology boasts RS 98 and an explosive 1-month gain of +109.3%, signaling strong leadership within the high-momentum Semiconductors sector."
       },
       {
         "ticker": "UCTT",
         "company": "Ultra Clean Holdings, Inc.",
         "grade": "C",
-        "reason": "Despite a strong RS of 98, its 3-month return of +56.9% is significantly lower than its peers in the Semiconductors theme, suggesting relative underperformance and weaker conviction."
+        "reason": "Despite its RS 98, Ultra Clean Holdings' +56.9% 3-month return significantly lags its Semiconductor peers, indicating relative underperformance within the leading theme."
       }
     ]
   }
