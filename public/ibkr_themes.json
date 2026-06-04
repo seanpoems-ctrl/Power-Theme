@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-06-02T02:29:46.150217+00:00",
+  "generated_at": "2026-06-04T00:38:27.067566+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
-      "name": "Semiconductors",
-      "theme_rs": 97.7,
-      "perf_1d": 8.52,
+      "name": "Electric Vehicles",
+      "theme_rs": 98.0,
+      "perf_1d": 19.26,
       "leaders": [
         {
-          "ticker": "ARM",
-          "price": 408.85,
+          "ticker": "NVTS",
+          "price": 30.84,
           "rs_52w": 98,
-          "adr_pct": 6.11,
-          "vol_surge": 2.2,
-          "mkt_cap": 435038411210,
+          "adr_pct": 10.47,
+          "vol_surge": 3.69,
+          "mkt_cap": 7308790263,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -22,128 +22,26 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "MU",
-          "price": 1035.5,
-          "rs_52w": 98,
-          "adr_pct": 5.54,
-          "vol_surge": 0.96,
-          "mkt_cap": 1167768609810,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "UMC",
-          "price": 22.89,
-          "rs_52w": 97,
-          "adr_pct": 4.46,
-          "vol_surge": 0.93,
-          "mkt_cap": 57437572725,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Base"
-        }
-      ]
-    },
-    {
-      "name": "Energy Traditional",
-      "theme_rs": 96.0,
-      "perf_1d": 5.32,
-      "leaders": [
-        {
-          "ticker": "VG",
-          "price": 12.68,
-          "rs_52w": 96,
-          "adr_pct": 7.18,
-          "vol_surge": 0.54,
-          "mkt_cap": 31501660578,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Energy Traditional",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
-      "name": "Cloud Computing",
-      "theme_rs": 94.7,
-      "perf_1d": 13.94,
-      "leaders": [
-        {
-          "ticker": "NBIS",
-          "price": 264.51,
-          "rs_52w": 97,
-          "adr_pct": 7.57,
-          "vol_surge": 1.37,
-          "mkt_cap": 67158613774,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Cloud Computing",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "OKTA",
-          "price": 139.79,
-          "rs_52w": 94,
-          "adr_pct": 5.03,
-          "vol_surge": 2.48,
-          "mkt_cap": 24296530386,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Cloud Computing",
+          "primary_theme": "Electric Vehicles",
           "secondary_themes": [
-            "Cybersecurity"
+            "Semiconductors"
           ],
           "setup_label": "Flag"
-        },
+        }
+      ]
+    },
+    {
+      "name": "Semiconductors",
+      "theme_rs": 97.3,
+      "perf_1d": 3.05,
+      "leaders": [
         {
-          "ticker": "CRWV",
-          "price": 124.82,
-          "rs_52w": 93,
-          "adr_pct": 6.96,
-          "vol_surge": 2.01,
-          "mkt_cap": 68098090421,
+          "ticker": "MRVL",
+          "price": 301.65,
+          "rs_52w": 98,
+          "adr_pct": 6.24,
+          "vol_surge": 3.87,
+          "mkt_cap": 263883414660,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -152,9 +50,92 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Cloud Computing",
+          "primary_theme": "Semiconductors",
           "secondary_themes": [],
           "setup_label": "Flag"
+        },
+        {
+          "ticker": "WOLF",
+          "price": 61.67,
+          "rs_52w": 97,
+          "adr_pct": 14.56,
+          "vol_surge": 1.38,
+          "mkt_cap": 2981071036,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "INTC",
+          "price": 112.71,
+          "rs_52w": 97,
+          "adr_pct": 7.32,
+          "vol_surge": 0.97,
+          "mkt_cap": 566480455398,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    },
+    {
+      "name": "Fintech",
+      "theme_rs": 90.0,
+      "perf_1d": -1.46,
+      "leaders": [
+        {
+          "ticker": "WULF",
+          "price": 26.16,
+          "rs_52w": 94,
+          "adr_pct": 6.69,
+          "vol_surge": 0.8,
+          "mkt_cap": 12963133917,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Fintech",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "IREN",
+          "price": 65.48,
+          "rs_52w": 86,
+          "adr_pct": 7.85,
+          "vol_surge": 1.4,
+          "mkt_cap": 23401156773,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Fintech",
+          "secondary_themes": [],
+          "setup_label": "Base"
         }
       ]
     }
