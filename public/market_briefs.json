@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-04 17:22 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Resilient Sentiment, Global Strength",
+    "spy_price": 757.09,
+    "spy_change_pct": 0.38,
+    "vix": 15.4,
+    "hy_oas": 2.75,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 59.3,
+    "mmth": 64.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "OSCR",
+          "company": "Oscar Health, Inc.",
+          "reason": "An analyst upgrade to 'Buy' with an increased price target signals strong confidence in its growth trajectory and profitability outlook."
+        },
+        {
+          "ticker": "CRM",
+          "company": "Salesforce, Inc.",
+          "reason": "Positive market sentiment around new AI integration features and a significant enterprise client win are driving fresh investor interest today."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Continued pressure from the significant -3.24% fall in crude oil prices is likely to impact energy sector performance, making it a defensive or short-term bearish play."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-04 10:09 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "The company continues to benefit from persistent demand for its AI GPU chips, though today's move is likely a technical bounce without fresh specific news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-04-20 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Credit Concern",
-    "spy_price": 708.72,
-    "spy_change_pct": -0.2,
-    "vix": 18.87,
-    "hy_oas": null,
-    "yield_curve": null,
-    "credit_status": "Unknown",
-    "s5fi": 66.6,
-    "mmth": 62.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "USAR",
-          "company": "United States Aerospace Inc.",
-          "reason": "Shares surged following news of a major acquisition that is expected to significantly expand market share and future revenue streams."
-        },
-        {
-          "ticker": "MRVL",
-          "company": "Marvell Technology, Inc.",
-          "reason": "The semiconductor giant secured new, high-value contracts with leading data center providers, signaling robust demand for its networking solutions."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "BA",
-          "company": "Boeing Co.",
-          "reason": "Continued operational concerns and supply chain commentary kept the stock under pressure, reflecting persistent challenges rather than fresh catalysts."
         }
       ]
     }
