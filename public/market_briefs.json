@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-04 10:09 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off Sentiment / Global Divergence",
+    "spy_price": 752.63,
+    "spy_change_pct": -0.21,
+    "vix": 16.02,
+    "hy_oas": 2.71,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 59.8,
+    "mmth": 64.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Anticipation building around Microsoft's rumored advancements in generative AI and a significant enterprise cloud computing contract win."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "Positive analyst upgrade citing accelerating demand for data center GPUs and robust AI inference chip sales outlook."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corp.",
+          "reason": "Under pressure following the steep 3.92% decline in crude oil prices, technically testing key support levels as demand concerns weigh."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-03 18:22 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "BA",
           "company": "Boeing Co.",
           "reason": "Continued operational concerns and supply chain commentary kept the stock under pressure, reflecting persistent challenges rather than fresh catalysts."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-04-20 08:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Volatile Gains, Underlying Tension",
-    "spy_price": 710.14,
-    "spy_change_pct": 1.21,
-    "vix": 19.4,
-    "hy_oas": null,
-    "yield_curve": null,
-    "credit_status": "Unknown",
-    "s5fi": 64.8,
-    "mmth": 64.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Fresh analyst upgrades and strong pre-market volume suggest continued momentum driven by AI sector leadership and anticipated strong quarterly results."
-        },
-        {
-          "ticker": "BA",
-          "company": "The Boeing Company",
-          "reason": "Positive news regarding new aircraft orders from a major international carrier provides a strong catalyst for renewed investor confidence and short-covering."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMC",
-          "company": "AMC Entertainment Holdings, Inc.",
-          "reason": "Purely technical strength and retail flow continue to drive price action; no new fundamental catalyst to support sustained upside."
         }
       ]
     }
