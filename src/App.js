@@ -6118,7 +6118,7 @@ const GeminiBreathAnalysis = ({ mc, internalsData }) => {
 };
 
 // ── Hot-Money Stock Screener (independent universe) ──────────────────────────
-const BreadthStockScreener = ({ data }) => {
+const BreadthStockScreener = ({ data, compact = false }) => {
   const [sortCol, setSortCol] = useState("adr_dvol");
   const [sortDir, setSortDir] = useState("desc");
   const [search,  setSearch]  = useState("");
@@ -6187,16 +6187,16 @@ const BreadthStockScreener = ({ data }) => {
     { col: "perf_1d",       label: "1D %",               align: "right" },
   ];
 
-  if (!data?.themes?.length) return null;
+  if (!rawStocks.length) return null;
 
   return (
-    <div className="max-w-[1560px] mx-auto px-4 pb-8">
+    <div className={compact ? "pb-4" : "max-w-[1560px] mx-auto px-4 pb-8"}>
       {/* Header */}
-      <div className="flex items-center gap-3 mb-3">
+      <div className="flex items-center gap-3 mb-2">
         <h3 className="text-[12px] font-bold text-zinc-300 uppercase tracking-widest">
           📊 Stock Screener · {sorted.length} stocks
         </h3>
-        <span className="text-[11px] text-zinc-600">ADR% × Avg $Vol ↓ by default · click headers to sort</span>
+        <span className="text-[11px] text-zinc-600">ADR% × Avg $Vol ↓ · click headers to sort</span>
         <div className="ml-auto relative">
           <input
             value={search}
@@ -6208,7 +6208,7 @@ const BreadthStockScreener = ({ data }) => {
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-zinc-800 max-h-[480px] overflow-y-auto">
+      <div className={`overflow-x-auto rounded-lg border border-zinc-800 overflow-y-auto ${compact ? "max-h-[320px]" : "max-h-[480px]"}`}>
         <table className="w-full text-[11px] border-collapse">
           <thead className="sticky top-0 bg-zinc-900 z-10">
             <tr className="border-b border-zinc-700 text-zinc-500 uppercase tracking-wide text-[10px] select-none">
@@ -6240,7 +6240,7 @@ const BreadthStockScreener = ({ data }) => {
               return (
                 <tr key={s.ticker}
                     className={`border-b border-zinc-800/40 hover:bg-zinc-800/30 ${i % 2 === 0 ? "bg-zinc-900/10" : ""}`}>
-                  <td className="px-2 py-1.5 text-zinc-700 font-mono text-[10px]">{i + 1}</td>
+                  <td className={`px-2 ${compact ? "py-1" : "py-1.5"} text-zinc-700 font-mono text-[10px]`}>{i + 1}</td>
                   <td className="px-2 py-1.5">
                     <div className="flex items-center gap-1 flex-wrap">
                       <span className="font-mono font-bold text-sky-400">{s.ticker}</span>
@@ -11508,7 +11508,7 @@ const filtered = useMemo(() => {
           {/* ── CENTER MAIN CONTENT ──────────────────────────────── */}
           <main className="flex-1 min-w-0 flex flex-col gap-3">
             <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}} openTheme={pendingTheme} onThemeOpened={() => setPendingTheme(null)}/>
-            <HeroZone data={data} themesCount={filtered.length} tickersCount={unique.length} etfTrendlineData={etfTrendlineData}/>
+            <BreadthStockScreener data={data} compact />
             {data && <Leaderboard
               themeRankings={data.theme_rankings}
               industryRankings={data.industry_rankings}
@@ -11523,6 +11523,7 @@ const filtered = useMemo(() => {
             />}
             {data && <MarketWarnings themes={data.themes}/>}
             <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData}/>
+            <HeroZone data={data} themesCount={filtered.length} tickersCount={unique.length} etfTrendlineData={etfTrendlineData}/>
           </main>
 
           {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
