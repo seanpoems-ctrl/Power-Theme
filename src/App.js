@@ -6222,7 +6222,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                 <th key={col}
                     onClick={() => handleSort(col)}
                     title={tooltip}
-                    className={`px-1.5 py-1 font-semibold cursor-pointer hover:text-zinc-200 transition-colors border-r border-zinc-800 last:border-r-0 leading-tight ${align === "right" ? "text-right" : "text-left"} ${w ?? ""}`}>
+                    className={`px-1.5 py-1 font-semibold cursor-pointer hover:text-zinc-200 transition-colors border-r border-zinc-800 last:border-r-0 leading-tight text-center ${w ?? ""}`}>
                   <div className={sortCol === col ? "text-blue-400" : ""}>
                     <div>{label}<SortIcon col={col}/></div>
                     {label2 && <div className="text-zinc-600 font-normal normal-case tracking-normal">{label2}</div>}
