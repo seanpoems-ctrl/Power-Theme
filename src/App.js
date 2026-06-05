@@ -10172,6 +10172,7 @@ const DailyWatchlistTab = ({ data }) => {
   );
 
   return (
+    <>
     <div className="max-w-[1400px] mx-auto px-4 pt-4 pb-8 space-y-8">
 
       {/* ── Market Pulse bar + Long/Short toggle ──────────── */}
@@ -10518,6 +10519,7 @@ const DailyWatchlistTab = ({ data }) => {
         onClose={() => setSelectedThemeModal(null)}
       />
     )}
+    </>
   );
 };
 
