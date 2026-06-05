@@ -6178,13 +6178,18 @@ const BreadthStockScreener = ({ data, compact = false }) => {
   };
 
   const COLS = [
-    { col: "ticker",        label: "Sym",                align: "left"  },
-    { col: "industry",      label: "Industry / Theme",   align: "left"  },
-    { col: "adr_dvol",      label: "ADR × Avg $Vol",     align: "right", tooltip: "ADR % × Avg Daily $ Volume (e.g. ASTS: 10.4 × $3.22B = $33.5B). Higher = more institutional hot money." },
-    { col: "pct_52w_range", label: "% of 52W Range",     align: "right", tooltip: "Where current price sits in its 52W range. 100% = at 52W High. 0% = at 52W Low." },
-    { col: "adr_pct",       label: "ADR%",               align: "right" },
-    { col: "rs_52w",        label: "RS",                 align: "right" },
-    { col: "perf_1d",       label: "1D %",               align: "right" },
+    { col: "ticker",        label: "Sym",         align: "left",  w: "w-[90px]" },
+    { col: "industry",      label: "Industry",    label2: "Theme", align: "left",  w: "w-[120px]" },
+    { col: "adr_dvol",      label: "ADR×",        label2: "Avg$Vol", align: "right", w: "w-[80px]", tooltip: "ADR % × Avg Daily $ Volume. Higher = more institutional hot money." },
+    { col: "pct_52w_range", label: "52W",         label2: "Range", align: "right", w: "w-[52px]",  tooltip: "Where price sits in its 52W range. 100%=high, 0%=low." },
+    { col: "adr_pct",       label: "ADR",         label2: "%",    align: "right", w: "w-[48px]" },
+    { col: "rs_52w",        label: "RS",          align: "right", w: "w-[40px]" },
+    { col: "perf_1d",       label: "1D",          label2: "%",    align: "right", w: "w-[54px]" },
+    { col: "perf_1w",       label: "1W",          label2: "%",    align: "right", w: "w-[54px]" },
+    { col: "perf_1m",       label: "1M",          label2: "%",    align: "right", w: "w-[54px]" },
+    { col: "perf_3m",       label: "3M",          label2: "%",    align: "right", w: "w-[54px]" },
+    { col: "perf_6m",       label: "6M",          label2: "%",    align: "right", w: "w-[54px]" },
+    { col: "perf_1y",       label: "1YR",         label2: "%",    align: "right", w: "w-[58px]" },
   ];
 
   if (!rawStocks.length) return null;
@@ -6209,28 +6214,36 @@ const BreadthStockScreener = ({ data, compact = false }) => {
       </div>
 
       <div className={`overflow-x-auto rounded-lg border border-zinc-800 overflow-y-auto ${compact ? "max-h-[320px]" : "max-h-[480px]"}`}>
-        <table className="w-full text-[11px] border-collapse">
+        <table className="text-[11px] border-collapse" style={{ tableLayout: "fixed", width: "100%", minWidth: "860px" }}>
           <thead className="sticky top-0 bg-zinc-900 z-10">
-            <tr className="border-b border-zinc-700 text-zinc-500 uppercase tracking-wide text-[10px] select-none">
-              <th className="px-2 py-2 text-left text-zinc-700 font-mono w-8">#</th>
-              {COLS.map(({ col, label, align, tooltip }) => (
+            <tr className="border-b border-zinc-700 text-zinc-500 uppercase text-[10px] select-none">
+              <th className="px-2 py-1.5 text-left text-zinc-700 font-mono" style={{ width: 28 }}>#</th>
+              {COLS.map(({ col, label, label2, align, tooltip, w }) => (
                 <th key={col}
                     onClick={() => handleSort(col)}
                     title={tooltip}
-                    className={`px-2 py-2 font-semibold whitespace-nowrap cursor-pointer hover:text-zinc-200 transition-colors border-r border-zinc-800 last:border-r-0 ${align === "right" ? "text-right" : "text-left"}`}>
-                  {label}<SortIcon col={col}/>
+                    className={`px-1.5 py-1 font-semibold cursor-pointer hover:text-zinc-200 transition-colors border-r border-zinc-800 last:border-r-0 leading-tight ${align === "right" ? "text-right" : "text-left"} ${w ?? ""}`}>
+                  <div className={sortCol === col ? "text-blue-400" : ""}>
+                    <div>{label}<SortIcon col={col}/></div>
+                    {label2 && <div className="text-zinc-600 font-normal normal-case tracking-normal">{label2}</div>}
+                  </div>
                 </th>
               ))}
             </tr>
           </thead>
           <tbody>
             {sorted.map((s, i) => {
+              const py = compact ? "py-1" : "py-1.5";
               const p1d = s.perf_1d ?? s.change_pct;
-              const p1dColor = p1d == null ? "text-zinc-600"
-                : p1d >= 5  ? "text-emerald-300 font-bold"
-                : p1d >= 0  ? "text-emerald-400"
-                : p1d >= -3 ? "text-rose-400"
-                : "text-rose-300 font-bold";
+              const perfCol = v => {
+                if (v == null) return "text-zinc-600";
+                if (v >= 10) return "text-emerald-300 font-bold";
+                if (v >= 3)  return "text-emerald-400";
+                if (v >= 0)  return "text-emerald-400/80";
+                if (v >= -5) return "text-rose-400";
+                return "text-rose-300 font-bold";
+              };
+              const fmtPerf = v => v != null ? `${v >= 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
               const rs = s.rs_52w;
               const rsColor = rs == null ? "text-zinc-700"
                 : rs >= 90 ? "bg-emerald-700/60 text-emerald-200 font-bold"
@@ -6240,17 +6253,16 @@ const BreadthStockScreener = ({ data, compact = false }) => {
               return (
                 <tr key={s.ticker}
                     className={`border-b border-zinc-800/40 hover:bg-zinc-800/30 ${i % 2 === 0 ? "bg-zinc-900/10" : ""}`}>
-                  <td className={`px-2 ${compact ? "py-1" : "py-1.5"} text-zinc-700 font-mono text-[10px]`}>{i + 1}</td>
-                  <td className="px-2 py-1.5">
+                  <td className={`px-2 ${py} text-zinc-700 font-mono text-[10px]`}>{i + 1}</td>
+                  {/* Sym + SS-ETF badges */}
+                  <td className={`px-1.5 ${py}`}>
                     <div className="flex items-center gap-1 flex-wrap">
                       <span className="font-mono font-bold text-sky-400">{s.ticker}</span>
                       {(s.ss_etfs || []).map(etf => {
                         const name = etf.ticker || etf;
-                        // Heuristic: tickers ending in L/U = leveraged bull; S/D/Q = inverse/bear
                         const isBull = /[LU]$/.test(name);
                         return (
-                          <span key={name}
-                            title={`${isBull ? "2× Leveraged" : "Inverse/Bear"} SS-ETF`}
+                          <span key={name} title={`${isBull ? "2× Leveraged" : "Inverse/Bear"} SS-ETF`}
                             className={`text-[9px] font-mono font-semibold px-1 py-0.5 rounded ${isBull ? "bg-emerald-900/60 text-emerald-300" : "bg-rose-900/60 text-rose-300"}`}>
                             {name}
                           </span>
@@ -6258,27 +6270,35 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                       })}
                     </div>
                   </td>
-                  <td className="px-2 py-1.5 max-w-[200px]">
-                    <div className="text-zinc-300 truncate">{s.industry || "—"}</div>
-                    <div className="text-zinc-600 text-[9px] truncate">{s.theme}</div>
+                  {/* Industry — two lines */}
+                  <td className={`px-1.5 ${py}`}>
+                    <div className="text-zinc-300 truncate text-[10px] leading-tight">{s.industry || "—"}</div>
+                    {s.theme && <div className="text-zinc-600 text-[9px] truncate leading-tight">{s.theme}</div>}
                   </td>
-                  <td className="px-2 py-1.5 text-right font-mono font-semibold text-zinc-200">
+                  {/* ADR × Avg$Vol */}
+                  <td className={`px-1.5 ${py} text-right font-mono font-semibold text-zinc-200`}>
                     {fmtDvol(s.adr_dvol)}
                   </td>
-                  <td className="px-2 py-1.5">
+                  {/* 52W Range */}
+                  <td className={`px-1.5 ${py} text-right`}>
                     <RangeBar pct={s.pct_52w_range} />
                   </td>
-                  <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
+                  {/* ADR% */}
+                  <td className={`px-1.5 ${py} text-right font-mono text-zinc-400`}>
                     {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
                   </td>
-                  <td className="px-2 py-1.5 text-right">
+                  {/* RS */}
+                  <td className={`px-1.5 ${py} text-right`}>
                     {rs != null
                       ? <span className={`inline-block px-1 rounded text-[10px] font-mono ${rsColor}`}>{rs}</span>
                       : <span className="text-zinc-700">—</span>}
                   </td>
-                  <td className={`px-2 py-1.5 text-right font-mono ${p1dColor}`}>
-                    {p1d != null ? `${p1d >= 0 ? "+" : ""}${p1d.toFixed(2)}%` : "—"}
-                  </td>
+                  {/* 1D 1W 1M 3M 6M 1YR */}
+                  {[p1d, s.perf_1w, s.perf_1m, s.perf_3m, s.perf_6m, s.perf_1y ?? s.perf_12m].map((v, pi) => (
+                    <td key={pi} className={`px-1.5 ${py} text-right font-mono ${perfCol(v)}`}>
+                      {fmtPerf(v)}
+                    </td>
+                  ))}
                 </tr>
               );
             })}
