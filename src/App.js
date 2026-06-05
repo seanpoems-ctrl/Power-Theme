@@ -6124,11 +6124,16 @@ const BreadthStockScreener = ({ data }) => {
   const [search,  setSearch]  = useState("");
   const [rawStocks, setRawStocks] = useState([]);
 
-  // Load screener_stocks.json — independent TradingView universe (top 500 by avg$vol)
+  const [ssEtfs, setSsEtfs] = useState([]);
+
+  // Load screener_stocks.json — independent TradingView universe
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/screener_stocks.json?v=${Date.now()}`)
       .then(r => r.ok ? r.json() : null)
-      .then(d => { if (d?.stocks) setRawStocks(d.stocks); })
+      .then(d => {
+        if (d?.stocks)  setRawStocks(d.stocks);
+        if (d?.ss_etfs) setSsEtfs(d.ss_etfs);
+      })
       .catch(() => {});
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -6278,6 +6283,75 @@ const BreadthStockScreener = ({ data }) => {
           </tbody>
         </table>
       </div>
+
+      {/* Single-Stock ETFs Section */}
+      {ssEtfs.length > 0 && (
+        <div className="mt-6">
+          <div className="flex items-center gap-3 mb-3">
+            <h3 className="text-[12px] font-bold text-zinc-300 uppercase tracking-widest">
+              ⚡ Single-Stock ETFs · {ssEtfs.length} liquid
+            </h3>
+            <span className="text-[11px] text-zinc-600">Leveraged ETFs for stocks in the screener above · 2× bull / −1× bear</span>
+          </div>
+          <div className="overflow-x-auto rounded-lg border border-zinc-800 max-h-[340px] overflow-y-auto">
+            <table className="w-full text-[11px] border-collapse">
+              <thead className="sticky top-0 bg-zinc-900 z-10">
+                <tr className="border-b border-zinc-700 text-zinc-500 uppercase tracking-wide text-[10px] select-none">
+                  <th className="px-2 py-2 text-left text-zinc-700 font-mono w-8">#</th>
+                  <th className="px-2 py-2 text-left">ETF</th>
+                  <th className="px-2 py-2 text-left">Underlying</th>
+                  <th className="px-2 py-2 text-right">ADR × Avg $Vol</th>
+                  <th className="px-2 py-2 text-right">ADR%</th>
+                  <th className="px-2 py-2 text-right">Price</th>
+                  <th className="px-2 py-2 text-right">1D %</th>
+                  <th className="px-2 py-2 text-right">RVOL</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ssEtfs.map((s, i) => {
+                  const p1d = s.change_pct;
+                  const p1dColor = p1d == null ? "text-zinc-600"
+                    : p1d >= 5  ? "text-emerald-300 font-bold"
+                    : p1d >= 0  ? "text-emerald-400"
+                    : p1d >= -3 ? "text-rose-400"
+                    : "text-rose-300 font-bold";
+                  const dvol = s.adr_dvol;
+                  const dvolFmt = dvol == null ? "—"
+                    : dvol >= 1e9 ? `${(dvol / 1e9).toFixed(2)}B`
+                    : dvol >= 1e6 ? `${(dvol / 1e6).toFixed(1)}M`
+                    : `${(dvol / 1e3).toFixed(0)}K`;
+                  return (
+                    <tr key={s.ticker}
+                        className={`border-b border-zinc-800/40 hover:bg-zinc-800/30 ${i % 2 === 0 ? "bg-zinc-900/10" : ""}`}>
+                      <td className="px-2 py-1.5 text-zinc-700 font-mono text-[10px]">{i + 1}</td>
+                      <td className="px-2 py-1.5">
+                        <span className="font-mono font-bold text-amber-400">{s.ticker}</span>
+                        <div className="text-zinc-600 text-[9px] truncate max-w-[120px]">{s.company}</div>
+                      </td>
+                      <td className="px-2 py-1.5 font-mono text-sky-400 font-bold text-[10px]">
+                        {s.parent_ticker || "—"}
+                      </td>
+                      <td className="px-2 py-1.5 text-right font-mono font-semibold text-zinc-200">{dvolFmt}</td>
+                      <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
+                        {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
+                      </td>
+                      <td className="px-2 py-1.5 text-right font-mono text-zinc-300">
+                        {s.price != null ? `$${s.price.toFixed(2)}` : "—"}
+                      </td>
+                      <td className={`px-2 py-1.5 text-right font-mono ${p1dColor}`}>
+                        {p1d != null ? `${p1d >= 0 ? "+" : ""}${p1d.toFixed(2)}%` : "—"}
+                      </td>
+                      <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
+                        {s.rvol != null ? s.rvol.toFixed(2) : "—"}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

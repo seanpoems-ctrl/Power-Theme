@@ -49,6 +49,54 @@ MIN_PRICE    = 5.0     # $5 minimum price
 MIN_ADR      = 4.0     # 4% minimum ADR
 TOP_N        = 500     # fetch top 500 by avg dollar volume
 
+# ── Single-Stock ETF mapping  ─────────────────────────────────────────────────
+# Maps underlying ticker → list of single-stock ETFs (2x bull / -1x bear)
+# Only highly liquid ones included. Source: GraniteShares, Direxion, Rex Shares.
+SINGLE_STOCK_ETFS: dict[str, list[str]] = {
+    "AAPL":  ["AAPU", "AAPD"],
+    "AMAT":  ["AMAU"],
+    "AMD":   ["AMDU", "AMDS"],
+    "AMZN":  ["AMZU", "AMZD"],
+    "ASTS":  ["ASTL"],
+    "AVGO":  ["AVGX"],
+    "BABA":  ["BABX"],
+    "BAC":   ["BACU"],
+    "COIN":  ["CONL", "COND"],
+    "DELL":  ["DELX"],
+    "GME":   ["GMEX"],
+    "GOOG":  ["GGLL", "GGLS"],
+    "GOOGL": ["GGLL", "GGLS"],
+    "GS":    ["GSAL"],
+    "HOOD":  ["HODU"],
+    "INTC":  ["INTU"],
+    "IONQ":  ["IONX"],
+    "JPM":   ["JPMO"],
+    "MARA":  ["MRAL", "MRAD"],
+    "META":  ["METU", "METD"],
+    "MRVL":  ["MRVX"],
+    "MSTR":  ["MSTU", "MSTZ"],
+    "MU":    ["MUU"],
+    "NFLX":  ["NFLX"],
+    "NVDA":  ["NVDL", "NVDS", "NVDU"],
+    "ORCL":  ["ORCL"],
+    "PANW":  ["PANX"],
+    "PLTR":  ["PLTU", "PLTD"],
+    "PYPL":  ["PYPU"],
+    "RKLB":  ["RKLX"],
+    "RXRX":  ["RXRX"],
+    "SMCI":  ["SMCU", "SMCD"],
+    "SNOW":  ["SNWX"],
+    "SOFI":  ["SOFL"],
+    "SQ":    ["SQU"],
+    "TSLA":  ["TSLL", "TSLS", "TSLQ"],
+    "TSM":   ["TSML"],
+    "UBER":  ["UBEX"],
+    "UPST":  ["UPSX"],
+    "XOM":   ["XOMU"],
+}
+# Flat set of all SS-ETF tickers for quick lookup
+ALL_SS_ETF_TICKERS: set[str] = {t for v in SINGLE_STOCK_ETFS.values() for t in v}
+
 
 def build_screener() -> list[dict]:
     try:
@@ -121,6 +169,9 @@ def build_screener() -> list[dict]:
         # Relative volume
         rvol = row.get("Relative.Volume")
 
+        # Attach list of SS-ETFs for this ticker (populated later)
+        ss_etfs = SINGLE_STOCK_ETFS.get(ticker, [])
+
         stocks.append({
             "ticker":              ticker,
             "company":             str(row.get("description", "")),
@@ -141,6 +192,7 @@ def build_screener() -> list[dict]:
             "perf_3m":             round(float(row["Perf.3M"]), 2) if row.get("Perf.3M") is not None else None,
             "perf_6m":             round(float(row["Perf.6M"]), 2) if row.get("Perf.6M") is not None else None,
             "rvol":                round(float(rvol), 2) if rvol is not None else None,
+            "ss_etfs":             ss_etfs,   # single-stock ETF tickers (enriched below)
         })
 
     # Sort by ADR × AvgDolVol descending — hottest money at the top
@@ -150,20 +202,130 @@ def build_screener() -> list[dict]:
     return stocks
 
 
+def fetch_ss_etf_data() -> dict[str, dict]:
+    """
+    Fetch live data for all known single-stock ETFs from TradingView.
+    Returns dict keyed by ticker with price, change_pct, avg_volume, avg_dollar_volume.
+    Only returns ETFs that pass a minimum liquidity check (avg vol > 100K shares).
+    """
+    try:
+        from tradingview_screener import Query, col
+    except ImportError:
+        return {}
+
+    tickers = sorted(ALL_SS_ETF_TICKERS)
+    logger.info("Fetching SS-ETF data for %d tickers…", len(tickers))
+
+    try:
+        _, df = (
+            Query()
+            .set_markets("america")
+            .select("name", "description", "close", "change",
+                    "average_volume_10d_calc", "ATR",
+                    "price_52_week_high", "price_52_week_low", "Relative.Volume")
+            .where(col("name").isin(tickers))
+            .limit(len(tickers) + 10)
+            .get_scanner_data()
+        )
+    except Exception as e:
+        logger.warning("SS-ETF fetch failed: %s", e)
+        return {}
+
+    result = {}
+    for _, row in df.iterrows():
+        ticker  = str(row.get("name", "")).strip()
+        price   = row.get("close")
+        avg_vol = row.get("average_volume_10d_calc")
+        atr     = row.get("ATR")
+        if not ticker or price is None or avg_vol is None:
+            continue
+        if float(avg_vol) < 100_000:   # minimum liquidity for SS-ETFs
+            continue
+        avg_dv  = float(price) * float(avg_vol)
+        adr_pct = round(float(atr) / float(price) * 100, 2) if atr and price else None
+        hi52    = row.get("price_52_week_high")
+        lo52    = row.get("price_52_week_low")
+        pct_52w = None
+        if hi52 and lo52 and price:
+            rng = float(hi52) - float(lo52)
+            if rng > 0:
+                pct_52w = round(min(100, max(0, (float(price) - float(lo52)) / rng * 100)), 1)
+        rvol = row.get("Relative.Volume")
+        result[ticker] = {
+            "ticker":            ticker,
+            "company":           str(row.get("description", "")),
+            "price":             round(float(price), 2),
+            "change_pct":        round(float(row["change"]), 2) if row.get("change") is not None else None,
+            "avg_volume":        int(avg_vol),
+            "avg_dollar_volume": round(avg_dv),
+            "adr_pct":           adr_pct,
+            "adr_dvol":          round(adr_pct * avg_dv) if adr_pct else None,
+            "week52_high":       round(float(hi52), 2) if hi52 else None,
+            "week52_low":        round(float(lo52), 2) if lo52 else None,
+            "pct_52w_range":     pct_52w,
+            "rvol":              round(float(rvol), 2) if rvol is not None else None,
+            "is_ss_etf":         True,
+        }
+    logger.info("SS-ETF data: %d liquid ETFs found", len(result))
+    return result
+
+
 def main():
     stocks = build_screener()
     if not stocks:
         logger.error("No stocks — aborting write")
         return
 
+    # Fetch single-stock ETF live data and attach to each stock
+    ss_etf_data = fetch_ss_etf_data()
+
+    # Build reverse map: ss_etf_ticker → parent ticker
+    ss_etf_parent: dict[str, str] = {}
+    for parent, etfs in SINGLE_STOCK_ETFS.items():
+        for e in etfs:
+            ss_etf_parent[e] = parent
+
+    # Enrich each stock: replace ss_etfs list with full data objects (liquid only)
+    screener_tickers = {s["ticker"] for s in stocks}
+    for s in stocks:
+        raw_etfs = SINGLE_STOCK_ETFS.get(s["ticker"], [])
+        enriched = []
+        for etf_ticker in raw_etfs:
+            data = ss_etf_data.get(etf_ticker)
+            if data:  # only include if liquid & found
+                enriched.append(data)
+        s["ss_etfs"] = enriched
+
+    # Also add SS-ETFs as standalone rows when their parent is in the screener
+    # This lets users sort/filter the ETFs alongside their parent stocks
+    ss_etf_rows = []
+    added_ss = set()
+    for etf_ticker, etf_data in ss_etf_data.items():
+        parent = ss_etf_parent.get(etf_ticker)
+        if parent and parent in screener_tickers and etf_ticker not in added_ss:
+            row = {
+                **etf_data,
+                "industry":    f"SS-ETF → {parent}",
+                "sector":      "Single-Stock ETF",
+                "ss_etfs":     [],
+                "parent_ticker": parent,
+            }
+            ss_etf_rows.append(row)
+            added_ss.add(etf_ticker)
+
+    ss_etf_rows.sort(key=lambda s: -(s["adr_dvol"] or 0))
+    logger.info("Added %d liquid SS-ETF rows", len(ss_etf_rows))
+
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     payload = {
         "generated_at": datetime.now(ET).strftime("%Y-%m-%d %H:%M ET"),
         "count":         len(stocks),
+        "ss_etf_count":  len(ss_etf_rows),
         "stocks":        stocks,
+        "ss_etfs":       ss_etf_rows,
     }
     OUTPUT_PATH.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
-    logger.info("Written → %s  (%d stocks)", OUTPUT_PATH, len(stocks))
+    logger.info("Written → %s  (%d stocks + %d SS-ETFs)", OUTPUT_PATH, len(stocks), len(ss_etf_rows))
 
     # Print top 20 for verification
     print(f"\n{'#':>3}  {'Ticker':<8}  {'ADR×DolVol':>14}  {'ADR%':>6}  {'52WR%':>6}  {'Industry'}")
