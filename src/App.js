@@ -6117,6 +6117,187 @@ const GeminiBreathAnalysis = ({ mc, internalsData }) => {
   );
 };
 
+// ── TC2000-Style Breadth Stock Screener ──────────────────────────────────────
+const BreadthStockScreener = ({ data }) => {
+  const [sortCol, setSortCol] = useState("adr_dvol");
+  const [sortDir, setSortDir] = useState("desc");
+  const [search,  setSearch]  = useState("");
+
+  // Flatten all stocks from all themes → deduplicate by ticker (keep highest RS)
+  const stocks = useMemo(() => {
+    const map = {};
+    for (const theme of data?.themes || []) {
+      for (const sub of theme.subthemes || []) {
+        for (const s of sub.stocks || []) {
+          const existing = map[s.ticker];
+          if (!existing || (s.rs_52w ?? 0) > (existing.rs_52w ?? 0)) {
+            map[s.ticker] = { ...s, theme: theme.name };
+          }
+        }
+      }
+    }
+    return Object.values(map)
+      .filter(s => s.price > 0 && s["52w_high"] > 0 && s["52w_low"] >= 0)
+      .map(s => {
+        const dvol   = s.avg_dollar_volume ?? s.dollar_volume ?? 0;
+        const adr    = s.adr_pct ?? 0;
+        const adrDvol = (adr / 100) * dvol;   // expected daily $ move
+        const range   = s["52w_high"] - s["52w_low"];
+        const pct52w  = range > 0
+          ? Math.min(100, Math.max(0, ((s.price - s["52w_low"]) / range) * 100))
+          : null;
+        return { ...s, adr_dvol: adrDvol, pct_52w_range: pct52w };
+      });
+  }, [data]);
+
+  const filtered = useMemo(() => {
+    const q = search.toLowerCase();
+    return stocks.filter(s =>
+      !q || s.ticker.toLowerCase().includes(q) ||
+      (s.industry || "").toLowerCase().includes(q) ||
+      (s.theme || "").toLowerCase().includes(q)
+    );
+  }, [stocks, search]);
+
+  const sorted = useMemo(() => [...filtered].sort((a, b) => {
+    const av = a[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
+    const bv = b[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
+    if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+    return sortDir === "asc" ? av - bv : bv - av;
+  }), [filtered, sortCol, sortDir]);
+
+  const handleSort = col => {
+    if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
+    else { setSortCol(col); setSortDir(col === "ticker" || col === "industry" || col === "theme" ? "asc" : "desc"); }
+  };
+
+  const SortIcon = ({ col }) => sortCol !== col
+    ? <span className="ml-0.5 text-zinc-700 text-[9px]">⇅</span>
+    : <span className="ml-0.5 text-blue-400 text-[9px]">{sortDir === "asc" ? "↑" : "↓"}</span>;
+
+  const fmtDvol = v => {
+    if (v == null) return "—";
+    if (v >= 1e9) return `${(v / 1e9).toFixed(2)}B`;
+    if (v >= 1e6) return `${(v / 1e6).toFixed(1)}M`;
+    return `${(v / 1e3).toFixed(0)}K`;
+  };
+
+  // % of 52W Range bar — color from red (0%) → yellow (50%) → green (100%)
+  const RangeBar = ({ pct }) => {
+    if (pct == null) return <span className="text-zinc-700">—</span>;
+    const color = pct >= 80 ? "#34d399"
+      : pct >= 60 ? "#86efac"
+      : pct >= 40 ? "#fbbf24"
+      : pct >= 20 ? "#f97316"
+      : "#f87171";
+    return (
+      <div className="flex items-center gap-1.5">
+        <div className="w-16 h-2 bg-zinc-800 rounded-full overflow-hidden flex-shrink-0">
+          <div className="h-full rounded-full" style={{ width: `${pct}%`, backgroundColor: color }} />
+        </div>
+        <span className="font-mono text-[10px]" style={{ color }}>{pct.toFixed(0)}%</span>
+      </div>
+    );
+  };
+
+  const COLS = [
+    { col: "ticker",        label: "Sym",                align: "left"  },
+    { col: "industry",      label: "Industry / Theme",   align: "left"  },
+    { col: "adr_dvol",      label: "ADR% × Avg $Vol",    align: "right", tooltip: "Expected daily dollar move = (ADR% / 100) × Avg Daily $ Volume. Higher = more institutional activity." },
+    { col: "pct_52w_range", label: "% of 52W Range",     align: "right", tooltip: "Where current price sits in its 52W range. 100% = at 52W High. 0% = at 52W Low." },
+    { col: "adr_pct",       label: "ADR%",               align: "right" },
+    { col: "rs_52w",        label: "RS",                 align: "right" },
+    { col: "perf_1d",       label: "1D %",               align: "right" },
+  ];
+
+  if (!data?.themes?.length) return null;
+
+  return (
+    <div className="max-w-[1560px] mx-auto px-4 pb-8">
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-3">
+        <h3 className="text-[12px] font-bold text-zinc-300 uppercase tracking-widest">
+          📊 Stock Screener · {sorted.length} stocks
+        </h3>
+        <span className="text-[11px] text-zinc-600">ADR% × Avg $Vol ↓ by default · click headers to sort</span>
+        <div className="ml-auto relative">
+          <input
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="Filter ticker / industry…"
+            className="pl-6 pr-3 py-1 text-[11px] bg-zinc-800/60 border border-zinc-700/50 rounded text-zinc-300 placeholder-zinc-600 focus:outline-none focus:border-blue-500/50 w-44"
+          />
+          <span className="absolute left-2 top-1/2 -translate-y-1/2 text-zinc-600 text-[10px]">⌕</span>
+        </div>
+      </div>
+
+      <div className="overflow-x-auto rounded-lg border border-zinc-800 max-h-[480px] overflow-y-auto">
+        <table className="w-full text-[11px] border-collapse">
+          <thead className="sticky top-0 bg-zinc-900 z-10">
+            <tr className="border-b border-zinc-700 text-zinc-500 uppercase tracking-wide text-[10px] select-none">
+              <th className="px-2 py-2 text-left text-zinc-700 font-mono w-8">#</th>
+              {COLS.map(({ col, label, align, tooltip }) => (
+                <th key={col}
+                    onClick={() => handleSort(col)}
+                    title={tooltip}
+                    className={`px-2 py-2 font-semibold whitespace-nowrap cursor-pointer hover:text-zinc-200 transition-colors border-r border-zinc-800 last:border-r-0 ${align === "right" ? "text-right" : "text-left"}`}>
+                  {label}<SortIcon col={col}/>
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {sorted.map((s, i) => {
+              const p1d = s.perf_1d ?? s.change_pct;
+              const p1dColor = p1d == null ? "text-zinc-600"
+                : p1d >= 5  ? "text-emerald-300 font-bold"
+                : p1d >= 0  ? "text-emerald-400"
+                : p1d >= -3 ? "text-rose-400"
+                : "text-rose-300 font-bold";
+              const rs = s.rs_52w;
+              const rsColor = rs == null ? "text-zinc-700"
+                : rs >= 90 ? "bg-emerald-700/60 text-emerald-200 font-bold"
+                : rs >= 70 ? "bg-emerald-700/30 text-emerald-300 font-semibold"
+                : rs >= 50 ? "text-zinc-300"
+                : "text-rose-400/70";
+              return (
+                <tr key={s.ticker}
+                    className={`border-b border-zinc-800/40 hover:bg-zinc-800/30 ${i % 2 === 0 ? "bg-zinc-900/10" : ""}`}>
+                  <td className="px-2 py-1.5 text-zinc-700 font-mono text-[10px]">{i + 1}</td>
+                  <td className="px-2 py-1.5">
+                    <span className="font-mono font-bold text-sky-400">{s.ticker}</span>
+                  </td>
+                  <td className="px-2 py-1.5 max-w-[200px]">
+                    <div className="text-zinc-300 truncate">{s.industry || "—"}</div>
+                    <div className="text-zinc-600 text-[9px] truncate">{s.theme}</div>
+                  </td>
+                  <td className="px-2 py-1.5 text-right font-mono font-semibold text-zinc-200">
+                    {fmtDvol(s.adr_dvol)}
+                  </td>
+                  <td className="px-2 py-1.5">
+                    <RangeBar pct={s.pct_52w_range} />
+                  </td>
+                  <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
+                    {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
+                  </td>
+                  <td className="px-2 py-1.5 text-right">
+                    {rs != null
+                      ? <span className={`inline-block px-1 rounded text-[10px] font-mono ${rsColor}`}>{rs}</span>
+                      : <span className="text-zinc-700">—</span>}
+                  </td>
+                  <td className={`px-2 py-1.5 text-right font-mono ${p1dColor}`}>
+                    {p1d != null ? `${p1d >= 0 ? "+" : ""}${p1d.toFixed(2)}%` : "—"}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
 const MarketBreadthTab = ({ data, internalsData, econData }) => {
   const mc  = data?.market_condition || {};
   const adv = mc.adv_dec;
@@ -6528,6 +6709,9 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
 
       </div>
     </div>
+
+    {/* ── TC2000-Style Stock Screener ──────────────────────────────────────── */}
+    <BreadthStockScreener data={data} />
 
     {/* ── Leading Theme modal ────────────────────────────────────────────── */}
     {selectedLeadingTheme && (
