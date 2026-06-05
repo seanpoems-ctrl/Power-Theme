@@ -46,7 +46,6 @@ FIELDS = [
 MIN_MKTCAP   = 1e9     # $1B minimum market cap
 MIN_AVG_VOL  = 500_000 # 500K avg daily shares
 MIN_PRICE    = 5.0     # $5 minimum price
-MIN_ADR      = 4.0     # 4% minimum ADR
 TOP_N        = 500     # fetch top 500 by avg dollar volume
 
 # ── Single-Stock ETF mapping  ─────────────────────────────────────────────────
@@ -152,12 +151,7 @@ def build_screener() -> list[dict]:
 
         # ADR × AvgDolVol  (ADR as the raw number e.g. 10.4, NOT as decimal 0.104)
         # Formula: ADR % × Avg$Vol  e.g. ASTS: 10.4 × $3.22B = $33.5B
-        # Skip stocks below minimum ADR threshold
-        if adr_pct is None or adr_pct < MIN_ADR:
-            continue
-
-        # ADR × AvgDolVol  (ADR as the raw number e.g. 10.4, NOT as decimal 0.104)
-        adr_dvol = round(adr_pct * avg_dv)
+        adr_dvol = round(adr_pct * avg_dv) if adr_pct is not None else 0
 
         # % of 52W Range
         pct_52w = None
