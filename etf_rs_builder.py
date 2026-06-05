@@ -149,6 +149,18 @@ for theme, tkr in THEME_ETF_MAP.items():
 
 ALL_TICKERS = sorted(set(THEME_ETF_MAP.values()))
 
+# ── ETF metadata — loaded from public/etf_metadata.json ──────────────────────
+def _load_etf_metadata() -> dict:
+    p = Path(__file__).parent / "public" / "etf_metadata.json"
+    try:
+        raw = json.loads(p.read_text(encoding="utf-8"))
+        return {e["ticker"]: e for e in raw}
+    except Exception as e:
+        logger.warning(f"Could not load etf_metadata.json ({e}) — metadata fields will be absent")
+        return {}
+
+ETF_METADATA: dict[str, dict] = _load_etf_metadata()
+
 
 def _safe_pct(series: pd.Series, periods: int) -> float | None:
     """Return % change over `periods` trading days from the end of series."""
@@ -274,9 +286,14 @@ def build_etf_rs() -> dict:
         q1 = _safe_pct(s.iloc[:-D189], D63) if len(s) > D63 * 4 else None
         ibd_raw = compute_ibd_rs(q4, q3, q2, q1)
 
+        meta = ETF_METADATA.get(tkr, {})
         rows.append({
             "ticker":         tkr,
             "theme":          TICKER_TO_THEME.get(tkr, tkr),
+            "category":       meta.get("category"),
+            "label":          meta.get("label"),
+            "etf_type":       meta.get("type"),        # "pure_sector" | "beta_booster"
+            "liquid":         meta.get("liquid"),      # True = Liquid Basket, False = Illiquid Vector
             "perf_intraday":  round(p1d,  2) if p1d  is not None else None,
             "perf_1d":        round(p1d,  2) if p1d  is not None else None,
             "perf_1w":        round(p1w,  2) if p1w  is not None else None,
