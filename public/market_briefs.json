@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-05 09:55 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off / Heightened Volatility",
+    "spy_price": 749.91,
+    "spy_change_pct": -0.95,
+    "vix": 16.13,
+    "hy_oas": 2.75,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 58.1,
+    "mmth": 63.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Google announces a breakthrough in AI-driven quantum computing, potentially revolutionizing data processing and cloud infrastructure."
+        },
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla receives regulatory approval for full autonomous driving in a major European market, significantly expanding its addressable market."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "UVXY",
+          "company": "ProShares Ultra VIX Short-Term Futures ETF",
+          "reason": "Anticipated continued volatility leads to sustained interest in hedging instruments, making UVXY a tactical play on market fear."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-04 17:22 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AMC",
           "company": "AMC Entertainment Holdings, Inc.",
           "reason": "Retail interest continues to drive speculative flows based on technical setups rather than fresh fundamental news, fitting a recycled narrative."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-04-21 08:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Optimism, Futures Lag",
-    "spy_price": 708.72,
-    "spy_change_pct": -0.2,
-    "vix": 18.8,
-    "hy_oas": 2.83,
-    "yield_curve": 0.54,
-    "credit_status": "Complacent",
-    "s5fi": 66.9,
-    "mmth": 62.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "New AI integration features announced for its Azure cloud services are expected to drive enterprise adoption and expand market share."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Positive Phase 3 clinical trial data for its next-generation obesity treatment has been released, bolstering future revenue projections and market leadership."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "The company continues to benefit from persistent demand for its AI GPU chips, though today's move is likely a technical bounce without fresh specific news."
         }
       ]
     }
