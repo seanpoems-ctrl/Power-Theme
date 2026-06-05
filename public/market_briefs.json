@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-05 17:15 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Sharp Risk-Off, Volatility Surges",
+    "spy_price": 737.55,
+    "spy_change_pct": -2.58,
+    "vix": 21.51,
+    "hy_oas": 2.74,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 54.2,
+    "mmth": 63.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a groundbreaking new enterprise AI suite, boosting investor confidence in its continued growth trajectory despite the broader market downturn."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA secured a massive multi-year contract for its next-generation data center GPUs, solidifying its market leadership in accelerated computing."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "UVXY",
+          "company": "ProShares Ultra VIX Short-Term Futures ETF",
+          "reason": "Surged purely on today's massive spike in the VIX and broad market volatility, driven by mechanical hedging and speculative flows."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-05 09:55 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA is experiencing technical flow driven by options expiry and rebalancing, with no new fundamental catalyst reported today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-04-21 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious / Risk-Off Bias",
-    "spy_price": 704.08,
-    "spy_change_pct": -0.65,
-    "vix": 19.5,
-    "hy_oas": 2.87,
-    "yield_curve": 0.52,
-    "credit_status": "Complacent",
-    "s5fi": 62.9,
-    "mmth": 60.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "APLD",
-          "company": "Applied Digital Corporation",
-          "reason": "The company's 'Beat & Raise' catalyst signals strong financial performance and a positive outlook for future growth."
-        },
-        {
-          "ticker": "LWLG",
-          "company": "Lightwave Logic, Inc.",
-          "reason": "News of 'AI Commercialization & GDSFactory Integration' indicates significant progress in leveraging a high-growth technology sector."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMC",
-          "company": "AMC Entertainment Holdings, Inc.",
-          "reason": "Retail interest continues to drive speculative flows based on technical setups rather than fresh fundamental news, fitting a recycled narrative."
         }
       ]
     }
