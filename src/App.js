@@ -9288,8 +9288,9 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose }) => {
 };
 
 // ── ETF Flip Scanner ─────────────────────────────────────────────────────────
-const EtfFlipScanner = ({ etfRsData }) => {
+const EtfFlipScanner = ({ etfRsData, etfHoldings = {} }) => {
   const etfs = etfRsData?.etfs ?? [];
+  const [holdingsModal, setHoldingsModal] = useState(null); // { ticker, theme, holdings }
 
   // All beta boosters with anchor data
   const boosters = etfs.filter(e => e.etf_type === "beta_booster" && e.anchor_ticker && e.rs_vs_anchor_1m != null);
@@ -9354,9 +9355,10 @@ const EtfFlipScanner = ({ etfRsData }) => {
                 </thead>
                 <tbody>
                   {flips.map((e, i) => (
-                    <tr key={e.ticker} className={`border-b border-zinc-800/50 ${i % 2 === 0 ? "bg-zinc-900/20" : ""} hover:bg-zinc-800/30`}>
+                    <tr key={e.ticker} className={`border-b border-zinc-800/50 ${i % 2 === 0 ? "bg-zinc-900/20" : ""} hover:bg-zinc-800/30 cursor-pointer`}
+                        onClick={() => setHoldingsModal({ ticker: e.ticker, theme: `${e.category} - ${e.label}`, holdings: etfHoldings[e.ticker] ?? [] })}>
                       <td className="px-2 py-1.5">
-                        <span className="font-mono font-bold text-amber-300">{e.ticker}</span>
+                        <span className="font-mono font-bold text-amber-300 hover:text-amber-200 underline decoration-dotted">{e.ticker}</span>
                         <span className="text-zinc-600 ml-1.5 text-[10px]">{e.label}</span>
                       </td>
                       <td className="px-2 py-1.5 text-zinc-500 text-[10px] max-w-[140px] truncate">{e.category}</td>
@@ -9417,7 +9419,9 @@ const EtfFlipScanner = ({ etfRsData }) => {
         <div className="space-y-2">
           <p className="text-[11px] text-zinc-500 uppercase tracking-wide font-semibold mb-1">Top 3 High-Beta Momentum</p>
           {top3.map((e, i) => (
-            <div key={e.ticker} className="p-3 rounded-lg border border-zinc-700/50 bg-zinc-900/40 hover:bg-zinc-800/40 transition-colors">
+            <div key={e.ticker}
+                 className="p-3 rounded-lg border border-zinc-700/50 bg-zinc-900/40 hover:bg-zinc-800/40 transition-colors cursor-pointer"
+                 onClick={() => setHoldingsModal({ ticker: e.ticker, theme: `${e.category} - ${e.label}`, holdings: etfHoldings[e.ticker] ?? [] })}>
               <div className="flex items-center gap-2 mb-1">
                 <span className="text-[13px] font-mono font-bold text-zinc-200">
                   <span className="text-zinc-600 mr-1">#{i + 1}</span>{e.ticker}
@@ -9444,6 +9448,16 @@ const EtfFlipScanner = ({ etfRsData }) => {
           </div>
         </div>
       </div>
+
+      {/* Holdings modal */}
+      {holdingsModal && (
+        <EtfHoldingsModal
+          etf={holdingsModal.ticker}
+          theme={holdingsModal.theme}
+          holdings={holdingsModal.holdings}
+          onClose={() => setHoldingsModal(null)}
+        />
+      )}
     </div>
   );
 };
@@ -10081,7 +10095,7 @@ const DailyWatchlistTab = ({ data }) => {
       {/* ── ETF RS TABLE ──────────────────────────────────── */}
       {mode === "etf" && (
         <div className="space-y-6">
-          <EtfFlipScanner etfRsData={etfRsData} />
+          <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} />
           <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} />
         </div>
       )}
