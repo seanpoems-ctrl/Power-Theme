@@ -9884,6 +9884,7 @@ const DailyWatchlistTab = ({ data }) => {
   const [gapperData, setGapperData]   = React.useState(null);
   const [etfRsData,  setEtfRsData]    = React.useState(null);
   const [mode, setMode]               = React.useState("long");   // "long" | "short" | "etf"
+  const [perfMode, setPerfMode]       = React.useState("1m");      // "1d" | "1m" | "3m"
   const [sortCol, setSortCol]       = React.useState("rs_52w");
   const [sortDir, setSortDir]       = React.useState("desc");
   const [shortSortCol, setShortSortCol] = React.useState("rs_52w");
@@ -10099,13 +10100,27 @@ const DailyWatchlistTab = ({ data }) => {
 
         {/* Leading Themes */}
         <div>
-          <Sec title="Leading Themes" badge={topThemes.length} sub="ranked by momentum" />
+          <div className="flex items-center justify-between mb-2">
+            <Sec title="Leading Themes" badge={topThemes.length} sub="ranked by momentum" />
+            <div className="flex bg-zinc-800/60 rounded-md p-0.5 border border-zinc-700/40">
+              {[{k:"1d",l:"1D"},{k:"1m",l:"1M"},{k:"3m",l:"3M"}].map(({k,l}) => (
+                <button key={k} onClick={() => setPerfMode(k)}
+                  className={`px-2 py-0.5 text-[10px] font-medium rounded transition-all ${perfMode === k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300"}`}>
+                  {l}
+                </button>
+              ))}
+            </div>
+          </div>
           <div className="space-y-1.5">
             {topThemes.map((theme, i) => {
               const stocks = theme.subthemes?.flatMap(s => s.stocks || []) ?? [];
               const topS = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))[0];
               const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
-              const perf1m = stocks.slice(0, 5).reduce((s, st) => s + (st.perf_1m ?? 0), 0) / Math.min(stocks.length, 5);
+              const perfKey = perfMode === "1d" ? "perf_1d" : perfMode === "1m" ? "perf_1m" : "perf_3m";
+              const topStocks = stocks.slice(0, 5);
+              const perf = topStocks.length
+                ? topStocks.reduce((acc, st) => acc + (st[perfKey] ?? 0), 0) / topStocks.length
+                : 0;
               return (
                 <div key={theme.name} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40">
                   <span className="text-zinc-600 font-mono text-[11px] w-4 shrink-0">{i + 1}</span>
@@ -10114,8 +10129,8 @@ const DailyWatchlistTab = ({ data }) => {
                     <div className="text-[10px] text-zinc-600">{stocks.length} stocks{avgRs ? ` · avg RS ${avgRs}` : ""}</div>
                   </div>
                   {topS && <span className="text-[10px] font-mono text-cyan-400 shrink-0">{topS.ticker}</span>}
-                  <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf1m > 0 ? "text-emerald-400" : "text-rose-400"}`}>
-                    {perf1m > 0 ? "+" : ""}{perf1m.toFixed(1)}%
+                  <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf > 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                    {perf > 0 ? "+" : ""}{perf.toFixed(1)}%
                   </span>
                 </div>
               );
