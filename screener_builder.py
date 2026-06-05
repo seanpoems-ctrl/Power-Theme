@@ -40,6 +40,7 @@ FIELDS = [
     "Perf.1M",                  # 1M performance %
     "Perf.3M",                  # 3M performance %
     "Perf.6M",                  # 6M performance %
+    "Perf.Y",                   # 1Y performance %
     "Relative.Volume",          # relative volume vs avg
 ]
 
@@ -181,10 +182,12 @@ def build_screener() -> list[dict]:
             "week52_high":         round(float(hi52), 2) if hi52 else None,
             "week52_low":          round(float(lo52), 2) if lo52 else None,
             "pct_52w_range":       pct_52w,
+            "perf_1d":             round(float(row["change"]), 2) if row.get("change") is not None else None,
             "perf_1w":             round(float(row["Perf.W"]), 2) if row.get("Perf.W") is not None else None,
             "perf_1m":             round(float(row["Perf.1M"]), 2) if row.get("Perf.1M") is not None else None,
             "perf_3m":             round(float(row["Perf.3M"]), 2) if row.get("Perf.3M") is not None else None,
             "perf_6m":             round(float(row["Perf.6M"]), 2) if row.get("Perf.6M") is not None else None,
+            "perf_1y":             round(float(row["Perf.Y"]), 2) if row.get("Perf.Y") is not None else None,
             "rvol":                round(float(rvol), 2) if rvol is not None else None,
             "ss_etfs":             ss_etfs,   # single-stock ETF tickers (enriched below)
         })

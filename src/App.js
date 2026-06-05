@@ -6183,13 +6183,13 @@ const BreadthStockScreener = ({ data, compact = false }) => {
     { col: "adr_dvol",      label: "ADR×",        label2: "Avg$Vol", align: "right", w: "w-[80px]", tooltip: "ADR % × Avg Daily $ Volume. Higher = more institutional hot money." },
     { col: "pct_52w_range", label: "52W%",        align: "right", w: "w-[52px]",  tooltip: "Where price sits in its 52W range. 100%=high, 0%=low." },
     { col: "adr_pct",       label: "ADR%",        align: "right", w: "w-[48px]" },
-    { col: "rs_52w",        label: "RS",          align: "right", w: "w-[40px]" },
     { col: "perf_1d",       label: "1D%",         align: "right", w: "w-[54px]" },
     { col: "perf_1w",       label: "1W%",         align: "right", w: "w-[54px]" },
     { col: "perf_1m",       label: "1M%",         align: "right", w: "w-[54px]" },
     { col: "perf_3m",       label: "3M%",         align: "right", w: "w-[54px]" },
     { col: "perf_6m",       label: "6M%",         align: "right", w: "w-[54px]" },
     { col: "perf_1y",       label: "1YR%",        align: "right", w: "w-[58px]" },
+    { col: "rs_52w",        label: "RS",          align: "right", w: "w-[40px]" },
   ];
 
   if (!rawStocks.length) return null;
@@ -6222,7 +6222,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                 <th key={col}
                     onClick={() => handleSort(col)}
                     title={tooltip}
-                    className={`px-1.5 py-1 font-semibold cursor-pointer hover:text-zinc-200 transition-colors border-r border-zinc-800 last:border-r-0 leading-tight text-center ${w ?? ""}`}>
+                    className={`px-1.5 py-1 font-semibold cursor-pointer hover:text-zinc-200 transition-colors leading-tight text-center ${w ?? ""}`}>
                   <div className={sortCol === col ? "text-blue-400" : ""}>
                     <div>{label}<SortIcon col={col}/></div>
                     {label2 && <div className="text-zinc-600 font-normal normal-case tracking-normal">{label2}</div>}
@@ -6287,18 +6287,18 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                   <td className={`px-1.5 ${py} text-right font-mono text-zinc-400`}>
                     {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
                   </td>
-                  {/* RS */}
-                  <td className={`px-1.5 ${py} text-right`}>
-                    {rs != null
-                      ? <span className={`inline-block px-1 rounded text-[10px] font-mono ${rsColor}`}>{rs}</span>
-                      : <span className="text-zinc-700">—</span>}
-                  </td>
                   {/* 1D 1W 1M 3M 6M 1YR */}
                   {[p1d, s.perf_1w, s.perf_1m, s.perf_3m, s.perf_6m, s.perf_1y ?? s.perf_12m].map((v, pi) => (
                     <td key={pi} className={`px-1.5 ${py} text-right font-mono ${perfCol(v)}`}>
                       {fmtPerf(v)}
                     </td>
                   ))}
+                  {/* RS — last column */}
+                  <td className={`px-1.5 ${py} text-right`}>
+                    {rs != null
+                      ? <span className={`inline-block px-1 rounded text-[10px] font-mono ${rsColor}`}>{rs}</span>
+                      : <span className="text-zinc-700">—</span>}
+                  </td>
                 </tr>
               );
             })}
