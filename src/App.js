@@ -9287,6 +9287,167 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose }) => {
   );
 };
 
+// ── ETF Flip Scanner ─────────────────────────────────────────────────────────
+const EtfFlipScanner = ({ etfRsData }) => {
+  const etfs = etfRsData?.etfs ?? [];
+
+  // All beta boosters with anchor data
+  const boosters = etfs.filter(e => e.etf_type === "beta_booster" && e.anchor_ticker && e.rs_vs_anchor_1m != null);
+
+  // Active flip signals sorted by strength
+  const flips = boosters
+    .filter(e => e.rs_flip_signal)
+    .sort((a, b) => (b.rs_flip_strength || 0) - (a.rs_flip_strength || 0));
+
+  // Top 3 momentum: highest 1W excess return among all beta boosters
+  const top3 = [...boosters]
+    .sort((a, b) => (b.rs_vs_anchor_1w ?? -999) - (a.rs_vs_anchor_1w ?? -999))
+    .slice(0, 3);
+
+  // Group all boosters by category for the checklist table
+  const byCategory = {};
+  for (const e of boosters) {
+    const cat = e.category || "Other";
+    if (!byCategory[cat]) byCategory[cat] = [];
+    byCategory[cat].push(e);
+  }
+
+  const fmtExc = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
+  const excColor = v => v == null ? "text-zinc-600"
+    : v > 3  ? "text-emerald-300 font-bold"
+    : v > 0  ? "text-emerald-400"
+    : v > -2 ? "text-zinc-400"
+    : "text-rose-400";
+
+  return (
+    <div className="space-y-5 mb-6">
+      {/* Header */}
+      <div className="flex items-center gap-3">
+        <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide">⚡ RS Flip Scanner</h3>
+        <span className="text-[11px] text-zinc-500">Beta Booster vs Pure Sector Anchor · When RS turns up sharply → run stock screens on that basket</span>
+        {flips.length > 0 && (
+          <span className="ml-auto px-2 py-0.5 rounded text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
+            {flips.length} FLIP{flips.length > 1 ? "S" : ""} ACTIVE
+          </span>
+        )}
+      </div>
+
+      <div className="grid grid-cols-3 gap-4">
+        {/* ── Left: Active Flip Signals ── */}
+        <div className="col-span-2 space-y-2">
+          <p className="text-[11px] text-zinc-500 uppercase tracking-wide font-semibold mb-1">Active Flip Signals — RS Accelerating vs Anchor</p>
+          {flips.length === 0 ? (
+            <p className="text-[12px] text-zinc-600 italic py-3">No active flip signals — market rotating evenly</p>
+          ) : (
+            <div className="overflow-x-auto rounded-lg border border-zinc-800">
+              <table className="w-full text-[11px] border-collapse">
+                <thead>
+                  <tr className="bg-zinc-900/80 border-b border-zinc-700 text-zinc-500 text-[10px] uppercase tracking-wide">
+                    <th className="px-2 py-1.5 text-left">Beta Booster</th>
+                    <th className="px-2 py-1.5 text-left">Category</th>
+                    <th className="px-2 py-1.5 text-left">Anchor</th>
+                    <th className="px-2 py-1.5 text-right">1M Excess</th>
+                    <th className="px-2 py-1.5 text-right">1W Excess</th>
+                    <th className="px-2 py-1.5 text-right">Strength</th>
+                    <th className="px-2 py-1.5 text-left">Signal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {flips.map((e, i) => (
+                    <tr key={e.ticker} className={`border-b border-zinc-800/50 ${i % 2 === 0 ? "bg-zinc-900/20" : ""} hover:bg-zinc-800/30`}>
+                      <td className="px-2 py-1.5">
+                        <span className="font-mono font-bold text-amber-300">{e.ticker}</span>
+                        <span className="text-zinc-600 ml-1.5 text-[10px]">{e.label}</span>
+                      </td>
+                      <td className="px-2 py-1.5 text-zinc-500 text-[10px] max-w-[140px] truncate">{e.category}</td>
+                      <td className="px-2 py-1.5 font-mono text-zinc-400">{e.anchor_ticker}</td>
+                      <td className={`px-2 py-1.5 text-right font-mono ${excColor(e.rs_vs_anchor_1m)}`}>{fmtExc(e.rs_vs_anchor_1m)}</td>
+                      <td className={`px-2 py-1.5 text-right font-mono ${excColor(e.rs_vs_anchor_1w)}`}>{fmtExc(e.rs_vs_anchor_1w)}</td>
+                      <td className="px-2 py-1.5 text-right">
+                        <span className="font-mono text-amber-400">{e.rs_flip_strength?.toFixed(1)}×</span>
+                      </td>
+                      <td className="px-2 py-1.5">
+                        <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 whitespace-nowrap">
+                          ↑ RS FLIP
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Weekly Scanning Checklist */}
+          <div className="mt-3 p-3 rounded-lg border border-zinc-700/50 bg-zinc-900/30">
+            <p className="text-[11px] font-bold text-zinc-300 uppercase tracking-wide mb-2">📋 Weekly Scanning Checklist</p>
+            <div className="space-y-1">
+              {Object.entries(byCategory)
+                .sort(([, a], [, b]) => {
+                  const aMax = Math.max(...a.map(e => e.rs_vs_anchor_1w ?? -999));
+                  const bMax = Math.max(...b.map(e => e.rs_vs_anchor_1w ?? -999));
+                  return bMax - aMax;
+                })
+                .map(([cat, catEtfs]) => {
+                  const best = [...catEtfs].sort((a, b) => (b.rs_vs_anchor_1w ?? -999) - (a.rs_vs_anchor_1w ?? -999))[0];
+                  const hasFlip = catEtfs.some(e => e.rs_flip_signal);
+                  const anchor = catEtfs[0]?.anchor_ticker;
+                  return (
+                    <div key={cat} className={`flex items-center gap-2 py-0.5 px-2 rounded ${hasFlip ? "bg-amber-500/5 border border-amber-500/20" : ""}`}>
+                      <span className={`text-[9px] w-3 flex-shrink-0 ${hasFlip ? "text-amber-400" : "text-zinc-700"}`}>
+                        {hasFlip ? "▶" : "○"}
+                      </span>
+                      <span className="text-[10px] text-zinc-500 w-40 flex-shrink-0 truncate">{cat}</span>
+                      <span className="text-[10px] text-zinc-600">{anchor} →</span>
+                      <span className={`text-[10px] font-mono font-bold ${hasFlip ? "text-amber-300" : "text-zinc-500"}`}>
+                        {best?.ticker}
+                      </span>
+                      <span className={`text-[10px] font-mono ml-auto ${excColor(best?.rs_vs_anchor_1w)}`}>
+                        {fmtExc(best?.rs_vs_anchor_1w)} this wk
+                      </span>
+                      {hasFlip && <span className="text-[9px] px-1 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold">SCREEN NOW</span>}
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Right: Top 3 Momentum Tickers ── */}
+        <div className="space-y-2">
+          <p className="text-[11px] text-zinc-500 uppercase tracking-wide font-semibold mb-1">Top 3 High-Beta Momentum</p>
+          {top3.map((e, i) => (
+            <div key={e.ticker} className="p-3 rounded-lg border border-zinc-700/50 bg-zinc-900/40 hover:bg-zinc-800/40 transition-colors">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-[13px] font-mono font-bold text-zinc-200">
+                  <span className="text-zinc-600 mr-1">#{i + 1}</span>{e.ticker}
+                </span>
+                <span className={`text-[11px] font-mono ml-auto ${excColor(e.rs_vs_anchor_1w)}`}>
+                  {fmtExc(e.rs_vs_anchor_1w)} vs {e.anchor_ticker}
+                </span>
+              </div>
+              <p className="text-[10px] text-zinc-500 truncate">{e.category}</p>
+              <p className="text-[10px] text-zinc-600 mt-0.5">{e.label}</p>
+              <div className="flex gap-3 mt-1.5 text-[10px] font-mono">
+                <span className={excColor(e.rs_vs_anchor_1m)}>1M {fmtExc(e.rs_vs_anchor_1m)}</span>
+                <span className={excColor(e.rs_vs_anchor_1w)}>1W {fmtExc(e.rs_vs_anchor_1w)}</span>
+                {e.rs_flip_signal && (
+                  <span className="ml-auto text-amber-300 font-bold">↑ FLIP</span>
+                )}
+              </div>
+            </div>
+          ))}
+          <div className="mt-2 p-2 rounded bg-zinc-800/30 border border-zinc-700/30">
+            <p className="text-[10px] text-zinc-500 leading-snug">
+              <span className="text-zinc-300 font-semibold">How to use:</span> When a beta booster's RS line vs its anchor turns sharply up, money is rotating into high-volatility names in that basket. Run your Finviz screen on that sector immediately.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
   const [sortCol, setSortCol] = useState("score");
   const [sortDir, setSortDir] = useState("desc");
@@ -9918,7 +10079,12 @@ const DailyWatchlistTab = ({ data }) => {
       </div>} {/* end LONG MODE */}
 
       {/* ── ETF RS TABLE ──────────────────────────────────── */}
-      {mode === "etf" && <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} />}
+      {mode === "etf" && (
+        <div className="space-y-6">
+          <EtfFlipScanner etfRsData={etfRsData} />
+          <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} />
+        </div>
+      )}
 
       {/* ── UNIVERSE ──────────────────────────────────────── */}
       {mode === "universe" && <UniverseTab etfHoldings={data?.etf_holdings || {}} />}

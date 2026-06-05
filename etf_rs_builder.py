@@ -161,6 +161,22 @@ def _load_etf_metadata() -> dict:
 
 ETF_METADATA: dict[str, dict] = _load_etf_metadata()
 
+# ── Category anchors — primary liquid pure-sector ETF per category ────────────
+# Used to compute RS-vs-anchor for each beta booster
+CATEGORY_ANCHORS: dict[str, str] = {
+    "Technology & Digital Disruption":             "XLK",
+    "Energy, Metals & Commodities":                "XLE",
+    "Healthcare & Biotech":                        "XLV",
+    "Consumer, Gaming & E-Commerce":               "XLP",
+    "Industrials, Transportation & Infrastructure":"XLI",
+    "Finance & Capital Markets":                   "XLF",
+    "Real Estate & Utilities":                     "XLRE",
+    "Telecom & Communication":                     "XLC",
+    "Geographic / Country Specific":               "EWZ",   # no single anchor; use largest
+    "Crypto & Digital Assets":                     "GBTC",
+    "Quantitative Factors & Volatility":           "SPMO",
+    "Space Exploration":                           None,    # no anchor
+}
 
 def _safe_pct(series: pd.Series, periods: int) -> float | None:
     """Return % change over `periods` trading days from the end of series."""
@@ -396,6 +412,55 @@ def build_etf_rs() -> dict:
             r["rs_1m_pct"] = min(100, round(pct_raw / 5) * 5)
         else:
             r["rs_1m"] = r["rs_1m_pct"] = None
+
+    # ── RS-vs-Anchor: compare each beta booster to its category's pure-sector anchor ──
+    # For each beta booster: excess_1m = booster_perf_1m - anchor_perf_1m
+    #                        excess_1w = booster_perf_1w - anchor_perf_1w
+    # Flip signal: RS accelerating — 1W excess >> 1M average weekly pace
+    ticker_to_row = {r["ticker"]: r for r in rows}
+    for r in rows:
+        if r.get("etf_type") != "beta_booster":
+            r["anchor_ticker"]    = None
+            r["rs_vs_anchor_1m"]  = None
+            r["rs_vs_anchor_1w"]  = None
+            r["rs_flip_signal"]   = False
+            r["rs_flip_strength"] = None
+            continue
+        cat    = r.get("category", "")
+        anchor = CATEGORY_ANCHORS.get(cat)
+        a_row  = ticker_to_row.get(anchor) if anchor else None
+        if not a_row:
+            r["anchor_ticker"]    = anchor
+            r["rs_vs_anchor_1m"]  = None
+            r["rs_vs_anchor_1w"]  = None
+            r["rs_flip_signal"]   = False
+            r["rs_flip_strength"] = None
+            continue
+
+        p1m_b = r.get("perf_1m");   p1m_a = a_row.get("perf_1m")
+        p1w_b = r.get("perf_1w");   p1w_a = a_row.get("perf_1w")
+        p1d_b = r.get("perf_1d");   p1d_a = a_row.get("perf_1d")
+
+        exc_1m = round(p1m_b - p1m_a, 2) if (p1m_b is not None and p1m_a is not None) else None
+        exc_1w = round(p1w_b - p1w_a, 2) if (p1w_b is not None and p1w_a is not None) else None
+        exc_1d = round(p1d_b - p1d_a, 2) if (p1d_b is not None and p1d_a is not None) else None
+
+        # Flip signal: 1W excess >= 60% of 1M excess / 4 (i.e., recent week is
+        # outpacing the average weekly rate over the month — RS accelerating)
+        flip = False
+        flip_strength = None
+        if exc_1m is not None and exc_1w is not None and exc_1m > 0:
+            weekly_pace = exc_1m / 4.0
+            if exc_1w >= weekly_pace * 1.5:  # recent week 1.5× faster than monthly avg
+                flip = True
+                flip_strength = round(exc_1w / max(abs(weekly_pace), 0.01), 1)
+
+        r["anchor_ticker"]    = anchor
+        r["rs_vs_anchor_1m"]  = exc_1m
+        r["rs_vs_anchor_1w"]  = exc_1w
+        r["rs_vs_anchor_1d"]  = exc_1d
+        r["rs_flip_signal"]   = flip
+        r["rs_flip_strength"] = flip_strength   # how many × faster than monthly pace
 
     # Strip internal raw keys before output
     for r in rows:
