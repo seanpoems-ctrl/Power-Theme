@@ -9394,14 +9394,21 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {} }) => {
                   const best = [...catEtfs].sort((a, b) => (b.rs_vs_anchor_1w ?? -999) - (a.rs_vs_anchor_1w ?? -999))[0];
                   const hasFlip = catEtfs.some(e => e.rs_flip_signal);
                   const anchor = catEtfs[0]?.anchor_ticker;
+                  const anchorEtf = etfs.find(e => e.ticker === anchor);
                   return (
-                    <div key={cat} className={`flex items-center gap-2 py-0.5 px-2 rounded ${hasFlip ? "bg-amber-500/5 border border-amber-500/20" : ""}`}>
+                    <div key={cat} className={`flex items-center gap-2 py-0.5 px-2 rounded cursor-pointer hover:bg-zinc-800/40 transition-colors ${hasFlip ? "bg-amber-500/5 border border-amber-500/20" : ""}`}
+                         onClick={() => best && setHoldingsModal({ ticker: best.ticker, theme: `${best.category} - ${best.label}`, holdings: etfHoldings[best.ticker] ?? [] })}>
                       <span className={`text-[9px] w-3 flex-shrink-0 ${hasFlip ? "text-amber-400" : "text-zinc-700"}`}>
                         {hasFlip ? "▶" : "○"}
                       </span>
                       <span className="text-[10px] text-zinc-500 w-40 flex-shrink-0 truncate">{cat}</span>
-                      <span className="text-[10px] text-zinc-600">{anchor} →</span>
-                      <span className={`text-[10px] font-mono font-bold ${hasFlip ? "text-amber-300" : "text-zinc-500"}`}>
+                      <span
+                        className="text-[10px] text-zinc-600 hover:text-zinc-300 transition-colors"
+                        onClick={e => { e.stopPropagation(); anchor && setHoldingsModal({ ticker: anchor, theme: anchorEtf?.theme || anchor, holdings: etfHoldings[anchor] ?? [] }); }}>
+                        {anchor}
+                      </span>
+                      <span className="text-[10px] text-zinc-600">→</span>
+                      <span className={`text-[10px] font-mono font-bold underline decoration-dotted ${hasFlip ? "text-amber-300" : "text-zinc-500"}`}>
                         {best?.ticker}
                       </span>
                       <span className={`text-[10px] font-mono ml-auto ${excColor(best?.rs_vs_anchor_1w)}`}>
