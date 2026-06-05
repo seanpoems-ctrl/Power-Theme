@@ -9880,11 +9880,124 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
 //   2. Market Leaders — RS≥90 cards with theme context
 //   3. Gapper Watch — high conviction pre-market plays
 // ─────────────────────────────────────────────────────────────────────────────
+const ThemeStocksModal = ({ name, stocks, onClose }) => {
+  const [sortCol, setSortCol] = useState("rs_52w");
+  const [sortDir, setSortDir] = useState("desc");
+
+  React.useEffect(() => {
+    const handler = e => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose]);
+
+  const sorted = useMemo(() => [...stocks].sort((a, b) => {
+    const av = a[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
+    const bv = b[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
+    if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+    return sortDir === "asc" ? av - bv : bv - av;
+  }), [stocks, sortCol, sortDir]);
+
+  const handleSort = col => {
+    if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
+    else { setSortCol(col); setSortDir(col === "ticker" || col === "company" ? "asc" : "desc"); }
+  };
+
+  const Th = ({ col, label, align = "right" }) => (
+    <th onClick={() => handleSort(col)}
+        className={`px-3 py-2.5 font-semibold whitespace-nowrap cursor-pointer hover:text-zinc-100 select-none text-zinc-400 text-[11px] uppercase tracking-wide ${align === "left" ? "text-left" : "text-right"}`}>
+      {label}
+      {sortCol === col
+        ? <span className="ml-1 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>
+        : <span className="ml-1 text-zinc-700">⇅</span>}
+    </th>
+  );
+
+  const fmt = v => {
+    if (v == null) return "—";
+    if (v >= 1e9) return `$${(v / 1e9).toFixed(2)}B`;
+    if (v >= 1e6) return `$${(v / 1e6).toFixed(1)}M`;
+    return `$${v.toFixed(0)}`;
+  };
+
+  const p1dCell = v => {
+    if (v == null) return <span className="text-zinc-600">—</span>;
+    const cls = v >= 10 ? "text-emerald-300 font-bold" : v >= 3 ? "text-emerald-400" : v >= 0 ? "text-emerald-400/80" : v >= -3 ? "text-rose-400/80" : "text-rose-400";
+    return <span className={cls}>{v >= 0 ? "+" : ""}{v.toFixed(2)}%</span>;
+  };
+
+  const rsCell = v => {
+    if (v == null) return <span className="text-zinc-600">—</span>;
+    const cls = v >= 90 ? "text-emerald-300 font-bold" : v >= 70 ? "text-emerald-400" : v >= 50 ? "text-zinc-300" : v >= 30 ? "text-rose-400/70" : "text-rose-300 font-semibold";
+    return <span className={`font-mono ${cls}`}>{v}</span>;
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 px-4 pb-8"
+         style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }}
+         onClick={onClose}>
+      <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-4xl flex flex-col max-h-[80vh]"
+           onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 flex-shrink-0">
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-bold text-zinc-100">{name}</span>
+            <span className="text-xs text-zinc-500">{stocks.length} stocks</span>
+          </div>
+          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded">
+            <X size={15} />
+          </button>
+        </div>
+        <div className="overflow-auto flex-1">
+          <table className="w-full text-xs border-collapse">
+            <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-700">
+              <tr>
+                <th className="px-3 py-2.5 text-left text-zinc-500 font-semibold text-[11px] w-8">#</th>
+                <Th col="ticker"            label="Ticker"    align="left" />
+                <Th col="company"           label="Company"   align="left" />
+                <Th col="market_cap_b"      label="Mkt Cap"               />
+                <Th col="avg_dollar_volume" label="$ Vol"                  />
+                <Th col="adr_pct"           label="ADR%"                   />
+                <Th col="rs_52w"            label="RS"                     />
+                <Th col="perf_1d"           label="1D Change%"             />
+              </tr>
+            </thead>
+            <tbody>
+              {sorted.map((s, i) => {
+                const dvol = s.avg_dollar_volume ?? s.dollar_volume;
+                const mktCap = s.market_cap_b != null
+                  ? `$${s.market_cap_b >= 1000 ? (s.market_cap_b / 1000).toFixed(1) + "T" : s.market_cap_b.toFixed(2) + "B"}`
+                  : "—";
+                const p1d = s.perf_1d ?? s.change_pct;
+                return (
+                  <tr key={s.ticker} className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors ${i % 2 === 0 ? "" : "bg-zinc-900/40"}`}>
+                    <td className="px-3 py-2 text-zinc-600 text-[11px]">{i + 1}</td>
+                    <td className="px-3 py-2">
+                      <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noreferrer"
+                         onClick={e => e.stopPropagation()}
+                         className="font-mono font-bold text-cyan-400 hover:underline">{s.ticker}</a>
+                    </td>
+                    <td className="px-3 py-2 text-zinc-300 max-w-[200px] truncate">{s.company || "—"}</td>
+                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{mktCap}</td>
+                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmt(typeof dvol === "number" ? dvol : null)}</td>
+                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
+                    <td className="px-3 py-2 text-right">{rsCell(s.rs_52w)}</td>
+                    <td className="px-3 py-2 text-right font-mono">{p1dCell(p1d)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const DailyWatchlistTab = ({ data }) => {
   const [gapperData, setGapperData]   = React.useState(null);
   const [etfRsData,  setEtfRsData]    = React.useState(null);
   const [mode, setMode]               = React.useState("long");   // "long" | "short" | "etf"
   const [perfMode, setPerfMode]       = React.useState("1m");      // "1d" | "1m" | "3m"
+  const [selectedThemeModal, setSelectedThemeModal] = React.useState(null); // { name, stocks }
   const [sortCol, setSortCol]       = React.useState("rs_52w");
   const [sortDir, setSortDir]       = React.useState("desc");
   const [shortSortCol, setShortSortCol] = React.useState("rs_52w");
@@ -10122,7 +10235,9 @@ const DailyWatchlistTab = ({ data }) => {
                 ? topStocks.reduce((acc, st) => acc + (st[perfKey] ?? 0), 0) / topStocks.length
                 : 0;
               return (
-                <div key={theme.name} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40">
+                <div key={theme.name}
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40 cursor-pointer hover:bg-zinc-700/50 hover:border-zinc-600/60 transition-colors"
+                  onClick={() => setSelectedThemeModal({ name: theme.name, stocks: [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0)) })}>
                   <span className="text-zinc-600 font-mono text-[11px] w-4 shrink-0">{i + 1}</span>
                   <div className="flex-1 min-w-0">
                     <div className="text-xs font-medium text-zinc-200 truncate">{theme.name}</div>
@@ -10395,6 +10510,14 @@ const DailyWatchlistTab = ({ data }) => {
       )} {/* end SHORT MODE */}
 
     </div>
+
+    {selectedThemeModal && (
+      <ThemeStocksModal
+        name={selectedThemeModal.name}
+        stocks={selectedThemeModal.stocks}
+        onClose={() => setSelectedThemeModal(null)}
+      />
+    )}
   );
 };
 
