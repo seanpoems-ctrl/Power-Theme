@@ -114,6 +114,7 @@ jobs:
           timeout 300 python etf_trendline_service.py   || echo "etf_trendline_service.py failed (non-fatal)"
           timeout 120 python etf_rs_builder.py          || echo "etf_rs_builder.py failed (non-fatal)"
           timeout 120 python universe_builder.py        || echo "universe_builder.py failed (non-fatal)"
+          timeout 120 python screener_builder.py       || echo "screener_builder.py failed (non-fatal)"
 
       - name: Validate breadth data quality
         if: steps.trading_day.outputs.is_trading_day == 'true'
