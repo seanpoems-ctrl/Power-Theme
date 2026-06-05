@@ -6181,15 +6181,15 @@ const BreadthStockScreener = ({ data, compact = false }) => {
     { col: "ticker",        label: "Sym",         align: "left",  w: "w-[90px]" },
     { col: "industry",      label: "Industry",    label2: "Theme", align: "left",  w: "w-[120px]" },
     { col: "adr_dvol",      label: "ADR×",        label2: "Avg$Vol", align: "right", w: "w-[80px]", tooltip: "ADR % × Avg Daily $ Volume. Higher = more institutional hot money." },
-    { col: "pct_52w_range", label: "52W",         label2: "Range", align: "right", w: "w-[52px]",  tooltip: "Where price sits in its 52W range. 100%=high, 0%=low." },
-    { col: "adr_pct",       label: "ADR",         label2: "%",    align: "right", w: "w-[48px]" },
+    { col: "pct_52w_range", label: "52W%",        align: "right", w: "w-[52px]",  tooltip: "Where price sits in its 52W range. 100%=high, 0%=low." },
+    { col: "adr_pct",       label: "ADR%",        align: "right", w: "w-[48px]" },
     { col: "rs_52w",        label: "RS",          align: "right", w: "w-[40px]" },
-    { col: "perf_1d",       label: "1D",          label2: "%",    align: "right", w: "w-[54px]" },
-    { col: "perf_1w",       label: "1W",          label2: "%",    align: "right", w: "w-[54px]" },
-    { col: "perf_1m",       label: "1M",          label2: "%",    align: "right", w: "w-[54px]" },
-    { col: "perf_3m",       label: "3M",          label2: "%",    align: "right", w: "w-[54px]" },
-    { col: "perf_6m",       label: "6M",          label2: "%",    align: "right", w: "w-[54px]" },
-    { col: "perf_1y",       label: "1YR",         label2: "%",    align: "right", w: "w-[58px]" },
+    { col: "perf_1d",       label: "1D%",         align: "right", w: "w-[54px]" },
+    { col: "perf_1w",       label: "1W%",         align: "right", w: "w-[54px]" },
+    { col: "perf_1m",       label: "1M%",         align: "right", w: "w-[54px]" },
+    { col: "perf_3m",       label: "3M%",         align: "right", w: "w-[54px]" },
+    { col: "perf_6m",       label: "6M%",         align: "right", w: "w-[54px]" },
+    { col: "perf_1y",       label: "1YR%",        align: "right", w: "w-[58px]" },
   ];
 
   if (!rawStocks.length) return null;
