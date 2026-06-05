@@ -1,3 +1,4 @@
+from __future__ import annotations
 import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows encoding fix
 """
 breadth_monitor.py — Stockbee Market Monitor data fetcher for Power Theme.
@@ -11,8 +12,6 @@ Run:
 Output:
     public/breadth_monitor.json
 """
-
-from __future__ import annotations
 
 import json
 import logging
