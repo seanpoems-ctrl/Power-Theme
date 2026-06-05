@@ -6174,14 +6174,7 @@ const BreadthStockScreener = ({ data }) => {
       : pct >= 40 ? "#fbbf24"
       : pct >= 20 ? "#f97316"
       : "#f87171";
-    return (
-      <div className="flex items-center gap-1.5">
-        <div className="w-16 h-2 bg-zinc-800 rounded-full overflow-hidden flex-shrink-0">
-          <div className="h-full rounded-full" style={{ width: `${pct}%`, backgroundColor: color }} />
-        </div>
-        <span className="font-mono text-[10px]" style={{ color }}>{pct.toFixed(0)}%</span>
-      </div>
-    );
+    return <span className="font-mono text-[10px]" style={{ color }}>{pct.toFixed(0)}%</span>;
   };
 
   const COLS = [
