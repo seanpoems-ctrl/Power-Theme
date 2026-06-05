@@ -1,25 +1,25 @@
 {
-  "generated_at": "June 05, 2026 (11:40 EDT)",
-  "session": "Market Hours",
+  "generated_at": "June 05, 2026 (18:17 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7480.4,
-      "change": -103.91,
-      "change_pct": -1.37
+      "price": 7383.74,
+      "change": -200.57,
+      "change_pct": -2.64
     },
     {
       "label": "Nasdaq 100",
-      "price": 29592.29,
-      "change": -815.52,
-      "change_pct": -2.68
+      "price": 28957.6,
+      "change": -1450.21,
+      "change_pct": -4.77
     },
     {
       "label": "VIX",
-      "price": 16.63,
-      "change": 1.23,
+      "price": 21.51,
+      "change": 6.11,
       "change_pct": null,
-      "zone_label": "Normal"
+      "zone_label": "Elevated"
     },
     {
       "label": "10Y Yield",
@@ -37,21 +37,21 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 24783.07,
-      "change_pct": -0.65
+      "price": 24944.95,
+      "change_pct": 0.6
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10377.75,
-      "change_pct": 0.17
+      "price": 10368.05,
+      "change_pct": 0.07
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 58.8,
-    "mmth": 64.0,
+    "s5fi": 54.2,
+    "mmth": 63.5,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Risk-Off / Growth Sell-Off",
+  "mood": "Sharp Distribution / Tech Capitulation",
   "analysis": {
-    "action_line": "VIX 16.63 Normal + S5FI 58.8% breadth + Nikkei -1.36% → trade RS leaders selectively with tight stops.",
-    "analysis_para1": "Global markets present a mixed picture today, with Nikkei 225 falling 1.36% and the DAX down 0.65%, while the FTSE 100 managed a slight gain of +0.17%. US markets are sharply lower, led by technology, against a backdrop of rising 10-year yields at 4.54%. The lack of BAML HY Spread data creates an unknown regime for credit risk, adding to uncertainty. Despite broad market weakness, breadth metrics like S5FI at 58.8% and MMTH at 64.0% still suggest underlying resilience but are worth watching closely for deterioration.",
-    "analysis_para2": "The immediate mechanical plan involves monitoring the S&P 500 for a bounce off potential support levels, while Nasdaq 100’s sharp 2.68% decline warrants extreme caution. Traders should identify relative strength leaders and consider entry points only on confirmed bounces or tests of moving averages. Given the rising yields, cyclicals or value might offer more stability, but the current weakness across major indices suggests a defensive posture. Risk management is paramount, with tight stop-losses for any new positions, especially in high-beta tech names.",
-    "technical_signal": "No reversal pattern confirmed yet. The market is experiencing a significant intraday downturn, particularly in tech, without clear signs of a bottom forming.",
+    "action_line": "VIX 21.51 Elevated + S5FI 54.2% breadth + Nikkei -1.36% → remain highly defensive, focus on capital preservation and strong RS on pullbacks.",
+    "analysis_para1": "The global tape presented a mixed picture today, with the Nikkei 225 retreating by -1.36% while European markets like the DAX (+0.60%) and FTSE 100 (+0.07%) showed resilience. However, this global divergence offered little solace for US markets, which experienced a sharp sell-off. The rising 10-Year yield at 4.54% added pressure, particularly on growth-oriented sectors. US market breadth softened, with S5FI at 54.2% and MMTH at 63.5%, indicating a broadening but not yet critical erosion of underlying strength amidst today's distribution.",
+    "analysis_para2": "The immediate mechanical plan involves extreme caution following today's sharp sell-off. Traders should closely monitor for signs of stabilization around key psychological support levels on the S&P 500 and Nasdaq 100, though no major reversal patterns were confirmed today. A retest of today's lows or further breakdown would confirm continued distribution, while any bounce should be treated as suspect until VIX cools significantly below 20. Preserve capital by tightening stops on existing positions and avoid adding new exposure into this volatility, unless extreme relative strength names hold up at established support.",
+    "technical_signal": "No reversal pattern confirmed yet. Today's severe market decline and elevated VIX suggest ongoing distribution, not a bottoming process.",
     "ticker_intel": [
       {
-        "ticker": "DELL",
-        "company": "Dell Technologies Inc.",
+        "ticker": "UMAC",
+        "company": "Unusual Machines, Inc.",
         "grade": "A+",
-        "reason": "Dell's exceptional 1-month return of +95.1% and RS of 98 positions it as a premier Hardware leader, demonstrating strong momentum even in a cautious market."
+        "reason": "UMAC demonstrates exceptional leadership with RS 98 and a phenomenal 1-month return of +137.7%, indicating robust buying interest even amidst a broad market sell-off."
       },
       {
-        "ticker": "NVTS",
-        "company": "Navitas Semiconductor Corporation",
+        "ticker": "HIMX",
+        "company": "Himax Technologies, Inc.",
         "grade": "A",
-        "reason": "Navitas Semiconductor shows robust relative strength of 98 and a staggering +74.8% 1-month return, highlighting its leadership within the high-growth semiconductor theme."
+        "reason": "Himax maintains strong relative strength (RS 98) and a substantial 1-month gain of +96.5%, positioning it as a top performer within the resilient Semiconductors theme."
       },
       {
         "ticker": "UCTT",
         "company": "Ultra Clean Holdings, Inc.",
         "grade": "C",
-        "reason": "Despite high RS of 98, Ultra Clean Holdings' more modest 1-month return of +12.7% compared to peers makes it a less compelling leader, suggesting potential for greater relative underperformance in a risk-off environment."
+        "reason": "Despite an RS of 98, UCTT's comparatively modest 1-month return of +12.7% and 3-month return of +67.9% suggest it has less relative momentum and could be more vulnerable in a distributive market phase."
       }
     ]
   }
