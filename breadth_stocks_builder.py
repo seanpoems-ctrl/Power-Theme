@@ -264,6 +264,7 @@ def _compute_yf_metrics(tickers: list[str]) -> dict[str, dict]:
     empty = {
         "adr_pct":  None, "perf_1m":  None, "perf_3m": None,
         "perf_34d": None, "perf_qtd": None, "perf_mtd": None,
+        "week52_high": None, "week52_low": None, "avg_dollar_volume": None,
     }
     result: dict[str, dict] = {t: dict(empty) for t in tickers}
     if not tickers:
@@ -272,7 +273,7 @@ def _compute_yf_metrics(tickers: list[str]) -> dict[str, dict]:
     chunks = [tickers[i:i+YFINANCE_BATCH] for i in range(0, len(tickers), YFINANCE_BATCH)]
     for chunk in chunks:
         try:
-            df = yf.download(chunk, period="4mo", interval="1d",
+            df = yf.download(chunk, period="1y", interval="1d",
                              auto_adjust=True, progress=False)
         except Exception as exc:
             logger.warning("yfinance download failed: %s", exc)
@@ -331,6 +332,22 @@ def _compute_yf_metrics(tickers: list[str]) -> dict[str, dict]:
                 # perf_34d — 34 trading days
                 if nc >= 34:
                     result[tkr]["perf_34d"] = round((latest / float(close.iloc[-34]) - 1) * 100, 2)
+
+                # 52W high / low — up to 252 trading days
+                n52 = min(nc, 252)
+                result[tkr]["week52_high"] = round(float(high.iloc[-n52:].max()), 2)
+                result[tkr]["week52_low"]  = round(float(low.iloc[-n52:].min()),  2)
+
+                # avg_dollar_volume — 20-day average dollar volume
+                try:
+                    vol_col = df["Volume"] if not is_multi else (df["Volume"][tkr] if metric_first else df[tkr]["Volume"])
+                    vol_series = vol_col.dropna()
+                    n20 = min(len(vol_series), 20)
+                    if n20 >= 5:
+                        avg_vol = float(vol_series.iloc[-n20:].mean())
+                        result[tkr]["avg_dollar_volume"] = round(latest * avg_vol)
+                except Exception:
+                    pass
 
                 # perf_qtd — quarter-to-date (matches Finviz quarterly definition)
                 # Use the last close ON OR BEFORE the quarter start date as the base.
@@ -527,12 +544,15 @@ async def _fetch_filter(filter_key: str, rs_lookup: dict[str, int] | None = None
         metrics = await asyncio.to_thread(_compute_yf_metrics, tickers)
         for s in qualifying:
             m = metrics.get(s["ticker"], {})
-            s["adr_pct"]  = m.get("adr_pct")
-            s["perf_1m"]  = m.get("perf_1m")
-            s["perf_3m"]  = m.get("perf_3m")
-            s["perf_34d"] = m.get("perf_34d")
-            s["perf_qtd"] = m.get("perf_qtd")
-            s["perf_mtd"] = m.get("perf_mtd")
+            s["adr_pct"]    = m.get("adr_pct")
+            s["perf_1m"]    = m.get("perf_1m")
+            s["perf_3m"]    = m.get("perf_3m")
+            s["perf_34d"]   = m.get("perf_34d")
+            s["perf_qtd"]   = m.get("perf_qtd")
+            s["perf_mtd"]   = m.get("perf_mtd")
+            s["week52_high"]       = m.get("week52_high")
+            s["week52_low"]        = m.get("week52_low")
+            s["avg_dollar_volume"] = m.get("avg_dollar_volume")
 
     # Liquidity filter: $50M avg daily dollar volume AND ADR >= 3%
     def _parse_dv(v: str) -> float:

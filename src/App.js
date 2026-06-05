@@ -6118,37 +6118,93 @@ const GeminiBreathAnalysis = ({ mc, internalsData }) => {
 };
 
 // ── TC2000-Style Breadth Stock Screener ──────────────────────────────────────
+const BREADTH_SCREENER_FILES = [
+  "breadth_stocks_up4",
+  "breadth_stocks_dn4",
+  "breadth_stocks_up25q",
+  "breadth_stocks_dn25q",
+  "breadth_stocks_up25m",
+  "breadth_stocks_dn25m",
+  "breadth_stocks_up50m",
+  "breadth_stocks_dn50m",
+  "breadth_stocks_up13_34",
+  "breadth_stocks_dn13_34",
+  "breadth_stocks_above50dma",
+];
+
 const BreadthStockScreener = ({ data }) => {
   const [sortCol, setSortCol] = useState("adr_dvol");
   const [sortDir, setSortDir] = useState("desc");
   const [search,  setSearch]  = useState("");
+  const [rawStocks, setRawStocks] = useState([]);
 
-  // Flatten all stocks from all themes → deduplicate by ticker (keep highest RS)
-  const stocks = useMemo(() => {
+  // Load all breadth stock files on mount
+  useEffect(() => {
     const map = {};
+    const loads = BREADTH_SCREENER_FILES.map(fname =>
+      fetch(`${process.env.PUBLIC_URL}/${fname}.json`)
+        .then(r => r.ok ? r.json() : null)
+        .then(d => {
+          for (const s of d?.stocks ?? []) {
+            if (!map[s.ticker] || (s.rs_ibd ?? 0) > (map[s.ticker].rs_ibd ?? 0)) {
+              map[s.ticker] = s;
+            }
+          }
+        })
+        .catch(() => {})
+    );
+    Promise.all(loads).then(() => setRawStocks(Object.values(map)));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Also merge thematic stocks (they have 52w_high/low already)
+  const thematicMap = useMemo(() => {
+    const m = {};
     for (const theme of data?.themes || []) {
       for (const sub of theme.subthemes || []) {
         for (const s of sub.stocks || []) {
-          const existing = map[s.ticker];
-          if (!existing || (s.rs_52w ?? 0) > (existing.rs_52w ?? 0)) {
-            map[s.ticker] = { ...s, theme: theme.name };
-          }
+          m[s.ticker] = { ...s, rs_ibd: s.rs_52w };
         }
       }
     }
-    return Object.values(map)
-      .filter(s => s.price > 0 && s["52w_high"] > 0 && s["52w_low"] >= 0)
-      .map(s => {
-        const dvol   = s.avg_dollar_volume ?? s.dollar_volume ?? 0;
-        const adr    = s.adr_pct ?? 0;
-        const adrDvol = (adr / 100) * dvol;   // expected daily $ move
-        const range   = s["52w_high"] - s["52w_low"];
-        const pct52w  = range > 0
-          ? Math.min(100, Math.max(0, ((s.price - s["52w_low"]) / range) * 100))
-          : null;
-        return { ...s, adr_dvol: adrDvol, pct_52w_range: pct52w };
-      });
+    return m;
   }, [data]);
+
+  const stocks = useMemo(() => {
+    const map = {};
+    // Start with breadth stocks
+    for (const s of rawStocks) {
+      map[s.ticker] = s;
+    }
+    // Overlay thematic data (has 52w_high/low/avg_dollar_volume)
+    for (const [tkr, ts] of Object.entries(thematicMap)) {
+      if (map[tkr]) {
+        map[tkr] = {
+          ...map[tkr],
+          "52w_high": ts["52w_high"] ?? map[tkr].week52_high,
+          "52w_low":  ts["52w_low"]  ?? map[tkr].week52_low,
+          avg_dollar_volume: ts.avg_dollar_volume ?? map[tkr].avg_dollar_volume,
+          industry: map[tkr].industry ?? ts.industry,
+        };
+      } else {
+        map[tkr] = { ...ts, rs_ibd: ts.rs_52w };
+      }
+    }
+    return Object.values(map)
+      .filter(s => s.price > 0)
+      .map(s => {
+        const hi52   = s["52w_high"] ?? s.week52_high;
+        const lo52   = s["52w_low"]  ?? s.week52_low;
+        const dvol   = s.avg_dollar_volume ?? (typeof s.dollar_volume === "number" ? s.dollar_volume : 0);
+        const adr    = s.adr_pct ?? 0;
+        const adrDvol = (adr / 100) * dvol;
+        const range   = (hi52 != null && lo52 != null) ? (hi52 - lo52) : 0;
+        const pct52w  = range > 0
+          ? Math.min(100, Math.max(0, ((s.price - lo52) / range) * 100))
+          : null;
+        return { ...s, hi52, lo52, adr_dvol: adrDvol, pct_52w_range: pct52w,
+                 rs_52w: s.rs_52w ?? s.rs_ibd };
+      });
+  }, [rawStocks, thematicMap]);
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
