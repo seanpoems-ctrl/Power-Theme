@@ -6187,7 +6187,7 @@ const BreadthStockScreener = ({ data }) => {
   const COLS = [
     { col: "ticker",        label: "Sym",                align: "left"  },
     { col: "industry",      label: "Industry / Theme",   align: "left"  },
-    { col: "adr_dvol",      label: "ADR% × Avg $Vol",    align: "right", tooltip: "Expected daily dollar move = (ADR% / 100) × Avg Daily $ Volume. Higher = more institutional activity." },
+    { col: "adr_dvol",      label: "ADR × Avg $Vol",     align: "right", tooltip: "ADR % × Avg Daily $ Volume (e.g. ASTS: 10.4 × $3.22B = $33.5B). Higher = more institutional hot money." },
     { col: "pct_52w_range", label: "% of 52W Range",     align: "right", tooltip: "Where current price sits in its 52W range. 100% = at 52W High. 0% = at 52W Low." },
     { col: "adr_pct",       label: "ADR%",               align: "right" },
     { col: "rs_52w",        label: "RS",                 align: "right" },

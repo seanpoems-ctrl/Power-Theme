@@ -101,8 +101,9 @@ def build_screener() -> list[dict]:
         # Avg dollar volume
         avg_dv = float(price) * float(avg_vol)
 
-        # ADR × AvgDolVol = expected daily $ move → HOT MONEY score
-        adr_dvol = round((adr_pct / 100) * avg_dv) if adr_pct else None
+        # ADR × AvgDolVol  (ADR as the raw number e.g. 10.4, NOT as decimal 0.104)
+        # Formula: ADR % × Avg$Vol  e.g. ASTS: 10.4 × $3.22B = $33.5B
+        adr_dvol = round(adr_pct * avg_dv) if adr_pct else None
 
         # % of 52W Range
         pct_52w = None
