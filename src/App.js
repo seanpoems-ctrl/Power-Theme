@@ -6195,9 +6195,9 @@ const BreadthStockScreener = ({ data, compact = false }) => {
   if (!rawStocks.length) return null;
 
   return (
-    <div className={compact ? "pb-4" : "max-w-[1560px] mx-auto px-4 pb-8"}>
+    <div className={`p-4 bg-zinc-900/60 rounded-xl border border-zinc-800/60 w-full min-w-0 ${compact ? "mb-4" : "max-w-[1560px] mx-auto mb-8"}`}>
       {/* Header */}
-      <div className="flex items-center gap-3 mb-2">
+      <div className="flex items-center gap-3 mb-3">
         <h3 className="text-[12px] font-bold text-zinc-300 uppercase tracking-widest">
           📊 Stock Screener · {sorted.length} stocks
         </h3>
@@ -6213,9 +6213,9 @@ const BreadthStockScreener = ({ data, compact = false }) => {
         </div>
       </div>
 
-      <div className={`overflow-x-auto rounded-lg border border-zinc-800 overflow-y-auto ${compact ? "max-h-[320px]" : "max-h-[480px]"}`}>
+      <div className={`overflow-x-auto rounded-lg overflow-y-auto ${compact ? "max-h-[320px]" : "max-h-[480px]"}`}>
         <table className="text-[11px] border-collapse" style={{ tableLayout: "fixed", width: "100%", minWidth: "860px" }}>
-          <thead className="sticky top-0 bg-zinc-900 z-10">
+          <thead className="sticky top-0 z-10" style={{ background: '#18181b' }}>
             <tr className="border-b border-zinc-700 text-zinc-500 uppercase text-[10px] select-none">
               <th className="px-2 py-1.5 text-left text-zinc-700 font-mono" style={{ width: 28 }}>#</th>
               {COLS.map(({ col, label, label2, align, tooltip, w }) => (
