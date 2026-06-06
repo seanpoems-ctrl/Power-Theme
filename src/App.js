@@ -6213,19 +6213,19 @@ const BreadthStockScreener = ({ data, compact = false }) => {
         </div>
       </div>
 
-      <div className={`overflow-x-auto rounded-lg overflow-y-auto ${compact ? "max-h-[320px]" : "max-h-[480px]"}`}>
-        <table className="text-[11px] border-collapse" style={{ tableLayout: "fixed", width: "100%", minWidth: "860px" }}>
+      <div className={`overflow-x-auto overflow-y-auto ${compact ? "max-h-[320px]" : "max-h-[480px]"}`}>
+        <table className="text-left" style={{ tableLayout: "fixed", width: "100%", minWidth: "900px" }}>
           <thead className="sticky top-0 z-10" style={{ background: '#18181b' }}>
-            <tr className="border-b border-zinc-700 text-zinc-500 uppercase text-[10px] select-none">
-              <th className="px-2 py-1.5 text-left text-zinc-700 font-mono" style={{ width: 28 }}>#</th>
+            <tr className="border-b border-zinc-800/60 select-none">
+              <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider" style={{ width: 28 }}>#</th>
               {COLS.map(({ col, label, label2, align, tooltip, w }) => (
                 <th key={col}
                     onClick={() => handleSort(col)}
                     title={tooltip}
-                    className={`px-1.5 py-1 font-semibold cursor-pointer hover:text-zinc-200 transition-colors leading-tight text-center ${w ?? ""}`}>
-                  <div className={sortCol === col ? "text-blue-400" : ""}>
-                    <div>{label}<SortIcon col={col}/></div>
-                    {label2 && <div className="text-zinc-600 font-normal normal-case tracking-normal">{label2}</div>}
+                    className={`px-2 py-1.5 text-[11px] font-semibold uppercase tracking-wider cursor-pointer transition-colors leading-tight text-center ${w ?? ""} ${sortCol === col ? "text-blue-400" : "text-zinc-500 hover:text-zinc-300"}`}>
+                  <div>
+                    <span>{label}<SortIcon col={col}/></span>
+                    {label2 && <div className="text-zinc-600 font-normal normal-case tracking-normal text-[10px]">{label2}</div>}
                   </div>
                 </th>
               ))}
@@ -6233,7 +6233,6 @@ const BreadthStockScreener = ({ data, compact = false }) => {
           </thead>
           <tbody>
             {sorted.map((s, i) => {
-              const py = compact ? "py-1" : "py-1.5";
               const p1d = s.perf_1d ?? s.change_pct;
               const perfCol = v => {
                 if (v == null) return "text-zinc-600";
@@ -6245,19 +6244,18 @@ const BreadthStockScreener = ({ data, compact = false }) => {
               };
               const fmtPerf = v => v != null ? `${v >= 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
               const rs = s.rs_52w;
-              const rsColor = rs == null ? "text-zinc-700"
-                : rs >= 90 ? "bg-emerald-700/60 text-emerald-200 font-bold"
-                : rs >= 70 ? "bg-emerald-700/30 text-emerald-300 font-semibold"
+              const rsCls = rs == null ? "text-zinc-600"
+                : rs >= 90 ? "text-emerald-400 font-bold"
+                : rs >= 70 ? "text-emerald-400"
                 : rs >= 50 ? "text-zinc-300"
-                : "text-rose-400/70";
+                : "text-rose-400";
               return (
-                <tr key={s.ticker}
-                    className={`border-b border-zinc-800/40 hover:bg-zinc-800/30 ${i % 2 === 0 ? "bg-zinc-900/10" : ""}`}>
-                  <td className={`px-2 ${py} text-zinc-700 font-mono text-[10px]`}>{i + 1}</td>
+                <tr key={s.ticker} className="border-b border-zinc-800/20 hover:bg-zinc-800/30 transition-colors">
+                  <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-600">{i + 1}</td>
                   {/* Sym + SS-ETF badges */}
-                  <td className={`px-1.5 ${py}`}>
+                  <td className="px-2 py-1.5">
                     <div className="flex items-center gap-1 flex-wrap">
-                      <span className="font-mono font-bold text-sky-400">{s.ticker}</span>
+                      <span className="text-[12px] font-mono font-semibold text-blue-400">{s.ticker}</span>
                       {(s.ss_etfs || []).map(etf => {
                         const name = etf.ticker || etf;
                         const isBull = /[LU]$/.test(name);
@@ -6271,33 +6269,31 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                     </div>
                   </td>
                   {/* Industry — two lines */}
-                  <td className={`px-1.5 ${py}`}>
-                    <div className="text-zinc-300 truncate text-[10px] leading-tight">{s.industry || "—"}</div>
-                    {s.theme && <div className="text-zinc-600 text-[9px] truncate leading-tight">{s.theme}</div>}
+                  <td className="px-2 py-1.5">
+                    <div className="text-[12px] font-mono text-zinc-300 truncate leading-tight">{s.industry || "—"}</div>
+                    {s.theme && <div className="text-zinc-600 text-[10px] truncate leading-tight">{s.theme}</div>}
                   </td>
                   {/* ADR × Avg$Vol */}
-                  <td className={`px-1.5 ${py} text-right font-mono font-semibold text-zinc-200`}>
+                  <td className="px-2 py-1.5 text-right text-[12px] font-mono font-semibold text-zinc-300">
                     {fmtDvol(s.adr_dvol)}
                   </td>
                   {/* 52W Range */}
-                  <td className={`px-1.5 ${py} text-right`}>
+                  <td className="px-2 py-1.5 text-right">
                     <RangeBar pct={s.pct_52w_range} />
                   </td>
                   {/* ADR% */}
-                  <td className={`px-1.5 ${py} text-right font-mono text-zinc-400`}>
+                  <td className="px-2 py-1.5 text-right text-[12px] font-mono text-zinc-300">
                     {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
                   </td>
                   {/* 1D 1W 1M 3M 6M 1YR */}
                   {[p1d, s.perf_1w, s.perf_1m, s.perf_3m, s.perf_6m, s.perf_1y ?? s.perf_12m].map((v, pi) => (
-                    <td key={pi} className={`px-1.5 ${py} text-right font-mono ${perfCol(v)}`}>
+                    <td key={pi} className={`px-2 py-1.5 text-right text-[12px] font-mono ${perfCol(v)}`}>
                       {fmtPerf(v)}
                     </td>
                   ))}
                   {/* RS — last column */}
-                  <td className={`px-1.5 ${py} text-right`}>
-                    {rs != null
-                      ? <span className={`inline-block px-1 rounded text-[10px] font-mono ${rsColor}`}>{rs}</span>
-                      : <span className="text-zinc-700">—</span>}
+                  <td className={`px-2 py-1.5 text-right text-[12px] font-mono font-bold ${rsCls}`}>
+                    {rs ?? "—"}
                   </td>
                 </tr>
               );
