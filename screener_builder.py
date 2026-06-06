@@ -192,6 +192,22 @@ def build_screener() -> list[dict]:
             "ss_etfs":             ss_etfs,   # single-stock ETF tickers (enriched below)
         })
 
+    # ── RS Score — IBD-style percentile rank (1–99) within this universe ──────
+    # Composite: 20% 1W + 30% 1M + 30% 3M + 20% 6M  (same as thematic scraper)
+    def _composite(s):
+        w1w, w1m, w3m, w6m = 0.20, 0.30, 0.30, 0.20
+        v1w  = s.get("perf_1w")  or 0
+        v1m  = s.get("perf_1m")  or 0
+        v3m  = s.get("perf_3m")  or 0
+        v6m  = s.get("perf_6m")  or 0
+        return w1w * v1w + w1m * v1m + w3m * v3m + w6m * v6m
+
+    scores = [(i, _composite(s)) for i, s in enumerate(stocks)]
+    scores.sort(key=lambda x: x[1])
+    n = len(scores)
+    for rank, (i, _) in enumerate(scores):
+        stocks[i]["rs_score"] = max(1, min(99, round((rank / max(n - 1, 1)) * 98 + 1)))
+
     # Sort by ADR × AvgDolVol descending — hottest money at the top
     stocks.sort(key=lambda s: -(s["adr_dvol"] or 0))
 

@@ -6249,7 +6249,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                 return "text-rose-300 font-bold";
               };
               const fmtPerf = v => v != null ? `${v >= 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
-              const rs = s.rs_52w;
+              const rs = s.rs_score ?? s.rs_52w;
               const rsCls = rs == null ? "text-zinc-600"
                 : rs >= 90 ? "text-emerald-400 font-bold"
                 : rs >= 70 ? "text-emerald-400"
