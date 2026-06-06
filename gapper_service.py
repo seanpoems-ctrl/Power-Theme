@@ -479,7 +479,7 @@ def fetch_gappers() -> list[dict]:
                 "market_cap_basic", "average_volume_10d_calc", "relative_volume_intraday|5"
             )
             .where(
-                col("premarket_change") >= 3,
+                col("premarket_change") >= 5,
                 col("premarket_volume") >= 50000,
                 col("market_cap_basic") >= 5e8,
                 col("average_volume_10d_calc") >= 100000,
