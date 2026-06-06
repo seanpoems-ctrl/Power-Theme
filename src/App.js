@@ -6250,10 +6250,24 @@ const BreadthStockScreener = ({ data, compact = false }) => {
               };
               const fmtPerf = v => v != null ? `${v >= 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
               const rs = s.rs_score ?? s.rs_52w;
+              // RS% — position of today's score in 25-day min/max range (same as ETF RS table)
+              const rsHist = s.rs_histogram;
+              const rsPct = (() => {
+                if (!rsHist || rsHist.length < 2) return null;
+                const last = rsHist[rsHist.length - 1];
+                const mn = Math.min(...rsHist), mx = Math.max(...rsHist);
+                const rng = mx - mn;
+                return rng === 0 ? 50 : Math.round(((last - mn) / rng) * 100);
+              })();
               const rsCls = rs == null ? "text-zinc-600"
                 : rs >= 90 ? "text-emerald-400 font-bold"
                 : rs >= 70 ? "text-emerald-400"
                 : rs >= 50 ? "text-zinc-300"
+                : "text-rose-400";
+              const rsPctCls = rsPct == null ? "text-zinc-600"
+                : rsPct >= 80 ? "text-emerald-300 font-bold"
+                : rsPct >= 50 ? "text-emerald-400"
+                : rsPct >= 20 ? "text-zinc-400"
                 : "text-rose-400";
               return (
                 <tr key={s.ticker} className="border-b border-zinc-800/20 hover:bg-zinc-800/30 transition-colors">
@@ -6297,9 +6311,12 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                       {fmtPerf(v)}
                     </td>
                   ))}
-                  {/* RS — last column */}
-                  <td className={`px-2 py-1.5 text-center text-[12px] font-mono font-bold ${rsCls}`}>
-                    {rs ?? "—"}
+                  {/* RS — last column: score + RS% below */}
+                  <td className="px-2 py-1.5 text-center">
+                    <div className={`text-[12px] font-mono font-bold ${rsCls}`}>{rs ?? "—"}</div>
+                    {rsPct != null && (
+                      <div className={`text-[10px] font-mono ${rsPctCls}`}>{rsPct}%</div>
+                    )}
                   </td>
                 </tr>
               );

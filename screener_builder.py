@@ -208,6 +208,34 @@ def build_screener() -> list[dict]:
     for rank, (i, _) in enumerate(scores):
         stocks[i]["rs_score"] = max(1, min(99, round((rank / max(n - 1, 1)) * 98 + 1)))
 
+    # ── Rolling 25-day RS history ─────────────────────────────────────────────
+    # Load existing history, append today's score, trim to 25 days, save back.
+    # Each stock gets an rs_histogram list (oldest → newest) for RS% calculation.
+    HISTORY_PATH = OUTPUT_PATH.parent / "screener_rs_history.json"
+    today_str = datetime.now(ET).strftime("%Y-%m-%d")
+    try:
+        history: dict = json.loads(HISTORY_PATH.read_text(encoding="utf-8")) if HISTORY_PATH.exists() else {}
+    except Exception:
+        history = {}
+
+    for s in stocks:
+        ticker = s["ticker"]
+        today_score = s["rs_score"]
+        days: list = history.get(ticker, [])
+        # Only append once per day (idempotent re-runs)
+        if not days or days[-1]["date"] != today_str:
+            days.append({"date": today_str, "rs": today_score})
+        days = days[-25:]          # keep last 25 trading days
+        history[ticker] = days
+        s["rs_histogram"] = [d["rs"] for d in days]
+
+    # Persist updated history
+    try:
+        HISTORY_PATH.write_text(json.dumps(history, ensure_ascii=False), encoding="utf-8")
+        logger.info("RS history saved → %s  (%d tickers)", HISTORY_PATH, len(history))
+    except Exception as e:
+        logger.warning("Could not save RS history: %s", e)
+
     # Sort by ADR × AvgDolVol descending — hottest money at the top
     stocks.sort(key=lambda s: -(s["adr_dvol"] or 0))
 
