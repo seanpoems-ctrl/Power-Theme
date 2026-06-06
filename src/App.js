@@ -7238,22 +7238,22 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
         )}
       </div>
 
-      <div className="overflow-x-auto rounded-lg border border-zinc-700/40">
-        <table className="w-full table-fixed min-w-[1300px]">
+      <div className="rounded-lg border border-zinc-700/40">
+        <table className="w-full table-fixed" style={{tableLayout:"fixed"}}>
           <colgroup>
-            <col style={{width:"80px"}}/>
-            <col style={{width:"80px"}}/>
-            <col style={{width:"70px"}}/>
-            <col style={{width:"55px"}}/>
-            <col style={{width:"60px"}}/>
-            <col style={{width:"55px"}}/>
-            <col style={{width:"65px"}}/>
-            <col style={{width:"90px"}}/>
-            <col style={{width:"110px"}}/>
-            <col style={{width:"90px"}}/>
-            <col style={{width:"45px"}}/>
-            <col style={{width:"150px"}}/>
-            <col style={{width:"170px"}}/>
+            <col style={{width:"7%"}}/>
+            <col style={{width:"7%"}}/>
+            <col style={{width:"6%"}}/>
+            <col style={{width:"5%"}}/>
+            <col style={{width:"5%"}}/>
+            <col style={{width:"5%"}}/>
+            <col style={{width:"5%"}}/>
+            <col style={{width:"7%"}}/>
+            <col style={{width:"9%"}}/>
+            <col style={{width:"7%"}}/>
+            <col style={{width:"4%"}}/>
+            <col style={{width:"12%"}}/>
+            <col style={{width:"13%"}}/>
           </colgroup>
           <thead>
             <tr className="text-[11px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40 align-middle">
