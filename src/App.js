@@ -5157,16 +5157,16 @@ const NewsHubTab = ({ newsData }) => {
         )}
 
         {/* GAPPERS SECTION */}
-        {gappers?.gappers && gappers.gappers.length > 0 && (
+        {gappers?.gappers && gappers.gappers.filter(g => (g.gap_pct ?? 0) >= 5).length > 0 && (
           <div className="space-y-3 border border-blue-800/30 bg-blue-950/10 rounded-lg p-4 min-h-[600px] flex flex-col">
             <div className="flex items-center gap-2">
               <span className="text-[14px] font-bold text-white uppercase tracking-wider">🚀 Pre-Market Gappers</span>
               <span className="px-2 py-0.5 bg-blue-500/20 text-blue-400 text-[11px] font-bold rounded">
-                {gappers.gappers.length}
+                {gappers.gappers.filter(g => (g.gap_pct ?? 0) >= 5).length}
               </span>
             </div>
             <div className="space-y-2 flex-1 overflow-y-auto pr-2">
-              {gappers.gappers.slice(0, 10).map((gapper, idx) => (
+              {gappers.gappers.filter(g => (g.gap_pct ?? 0) >= 5).slice(0, 10).map((gapper, idx) => (
                 <div key={idx} className="border border-blue-800/30 bg-blue-950/20 rounded-lg p-3">
                   <div className="flex items-baseline gap-3 mb-2">
                     <span className="text-[16px] font-bold text-blue-300">{gapper.ticker}</span>
@@ -5282,7 +5282,7 @@ const NewsHubTab = ({ newsData }) => {
 
         {/* EMPTY STATE */}
         {(!breakingNews?.alerts || breakingNews.alerts.length === 0) &&
-         (!gappers?.gappers || gappers.gappers.length === 0) &&
+         (!gappers?.gappers || gappers.gappers.filter(g => (g.gap_pct ?? 0) >= 5).length === 0) &&
          !earnings && (
           <div className="text-center py-12">
             <p className="text-zinc-500 text-[14px]">No active news or alerts at the moment</p>
@@ -7133,7 +7133,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
   const [tickerDb, setTickerDb] = useState({});
 
   // Filter state — human-friendly units: PMVol/AvgVol in K, MktCap in $B, DolVol in $M
-  const [fMinGap,    setFMinGap]    = useState(0);
+  const [fMinGap,    setFMinGap]    = useState(5);
   const [fMinPMVol,  setFMinPMVol]  = useState(0);    // K
   const [fMinPrice,  setFMinPrice]  = useState(0);
   const [fMinAvgVol, setFMinAvgVol] = useState(0);    // K
