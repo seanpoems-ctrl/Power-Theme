@@ -1356,9 +1356,15 @@ def _fetch_finviz_market_breadth() -> tuple[dict | None, dict | None, dict | Non
     import re as _re
     import time as _time
 
+    # Match Finviz's breadth widget universe: NYSE + NASDAQ common stocks only
+    # (excludes AMEX, OTC, ETFs — reduces universe from ~11k to ~5.5k, matching
+    #  the Advancing/Declining numbers shown on Finviz's market overview page)
+    BASE = "exch_nasd,exch_nyse"
+
     def _get_count(filt: str) -> int | None:
         try:
-            url = f"https://finviz.com/screener.ashx?v=111&f={filt}" if filt else "https://finviz.com/screener.ashx?v=111"
+            combined = f"{BASE},{filt}" if filt else BASE
+            url = f"https://finviz.com/screener.ashx?v=111&f={combined}"
             r = requests.get(url, headers=HEADERS, timeout=15)
             m = _re.search(r"(\d[\d,]+)\s+Total", r.text)
             return int(m.group(1).replace(",", "")) if m else None
