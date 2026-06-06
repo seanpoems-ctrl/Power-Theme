@@ -6215,7 +6215,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
         </div>
       </div>
 
-      <div className={`overflow-x-auto overflow-y-auto ${compact ? "max-h-[320px]" : "max-h-[480px]"}`}>
+      <div className={`overflow-y-auto ${compact ? "max-h-[320px]" : "max-h-[480px]"}`}>
         <table className="text-left" style={{ tableLayout: "fixed", width: "100%" }}>
           <colgroup>
             <col style={{ width: "3%" }} />
