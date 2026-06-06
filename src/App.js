@@ -6744,9 +6744,6 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
       </div>
     </div>
 
-    {/* ── TC2000-Style Stock Screener ──────────────────────────────────────── */}
-    <BreadthStockScreener data={data} />
-
     {/* ── Leading Theme modal ────────────────────────────────────────────── */}
     {selectedLeadingTheme && (
       <div
