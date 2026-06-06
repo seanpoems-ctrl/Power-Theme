@@ -6144,8 +6144,11 @@ const BreadthStockScreener = ({ data, compact = false }) => {
   }, [stocks, search]);
 
   const sorted = useMemo(() => [...filtered].sort((a, b) => {
-    const av = a[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
-    const bv = b[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
+    // rs_52w col → use rs_score ?? rs_52w so screener stocks sort correctly
+    const getVal = (s) => sortCol === "rs_52w"
+      ? (s.rs_score ?? s.rs_52w ?? (sortDir === "asc" ? Infinity : -Infinity))
+      : (s[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity));
+    const av = getVal(a), bv = getVal(b);
     if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
     return sortDir === "asc" ? av - bv : bv - av;
   }), [filtered, sortCol, sortDir]);
@@ -6191,7 +6194,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
     { col: "perf_3m",       label: "3M%"                                                                     },
     { col: "perf_6m",       label: "6M%"                                                                     },
     { col: "perf_1y",       label: "1YR%"                                                                    },
-    { col: "rs_52w",        label: "RS"                                                                      },
+    { col: "rs_52w",        label: "RS%",        label2: "25-day"                                           },
   ];
 
   if (!rawStocks.length) return null;
