@@ -5183,13 +5183,17 @@ const NewsHubTab = ({ newsData }) => {
 
                   <div className="space-y-1 mb-2">
                     {gapper.reasoning && (
-                      <div className="text-[12px] text-zinc-400">
-                        <span className="font-semibold text-zinc-300">{gapper.category}</span> — {gapper.reasoning}
-                      </div>
+                      <div className="text-[12px] text-zinc-400 leading-relaxed"
+                           dangerouslySetInnerHTML={{ __html:
+                             gapper.reasoning.replace(/\*\*(.+?)\*\*/g, '<strong class="text-zinc-200">$1</strong>')
+                           }} />
                     )}
                     {gapper.hypothesis && (
                       <div className="text-[12px] text-zinc-400">
-                        <span className="font-semibold text-zinc-300">Trade:</span> {gapper.hypothesis}
+                        <span className="font-semibold text-zinc-300">Trade:</span>{' '}
+                        <span dangerouslySetInnerHTML={{ __html:
+                          gapper.hypothesis.replace(/\*\*(.+?)\*\*/g, '<strong class="text-zinc-200">$1</strong>')
+                        }} />
                       </div>
                     )}
                   </div>
