@@ -6177,19 +6177,21 @@ const BreadthStockScreener = ({ data, compact = false }) => {
     return <span className="font-mono text-[10px]" style={{ color }}>{pct.toFixed(0)}%</span>;
   };
 
+  // Column widths as % — must sum to 100 (# col is separate at 3%)
+  const COL_WIDTHS = ["9%","13%","9%","7%","7%","7%","7%","7%","7%","7%","7%","5%"];
   const COLS = [
-    { col: "ticker",        label: "Sym",            w: "w-[100px]" },
-    { col: "industry",      label: "Industry",       label2: "Theme", w: "w-[160px]", leftAlign: true },
-    { col: "adr_dvol",      label: "ADR×",           label2: "Avg$Vol", w: "w-[90px]", tooltip: "ADR % × Avg Daily $ Volume. Higher = more institutional hot money." },
-    { col: "pct_52w_range", label: "52W%",           w: "w-[70px]",  tooltip: "Where price sits in its 52W range. 100%=high, 0%=low." },
-    { col: "adr_pct",       label: "ADR%",           w: "w-[70px]" },
-    { col: "perf_1d",       label: "1D%",            w: "w-[72px]" },
-    { col: "perf_1w",       label: "1W%",            w: "w-[72px]" },
-    { col: "perf_1m",       label: "1M%",            w: "w-[72px]" },
-    { col: "perf_3m",       label: "3M%",            w: "w-[72px]" },
-    { col: "perf_6m",       label: "6M%",            w: "w-[72px]" },
-    { col: "perf_1y",       label: "1YR%",           w: "w-[72px]" },
-    { col: "rs_52w",        label: "RS",             w: "w-[60px]" },
+    { col: "ticker",        label: "Sym"                                                                     },
+    { col: "industry",      label: "Industry",  label2: "Theme",    leftAlign: true                         },
+    { col: "adr_dvol",      label: "ADR×",      label2: "Avg$Vol",  tooltip: "ADR% × Avg Daily $Vol"        },
+    { col: "pct_52w_range", label: "52W%",                          tooltip: "Price position in 52W range"  },
+    { col: "adr_pct",       label: "ADR%"                                                                    },
+    { col: "perf_1d",       label: "1D%"                                                                     },
+    { col: "perf_1w",       label: "1W%"                                                                     },
+    { col: "perf_1m",       label: "1M%"                                                                     },
+    { col: "perf_3m",       label: "3M%"                                                                     },
+    { col: "perf_6m",       label: "6M%"                                                                     },
+    { col: "perf_1y",       label: "1YR%"                                                                    },
+    { col: "rs_52w",        label: "RS"                                                                      },
   ];
 
   if (!rawStocks.length) return null;
@@ -6215,14 +6217,18 @@ const BreadthStockScreener = ({ data, compact = false }) => {
 
       <div className={`overflow-x-auto overflow-y-auto ${compact ? "max-h-[320px]" : "max-h-[480px]"}`}>
         <table className="text-left" style={{ tableLayout: "fixed", width: "100%" }}>
+          <colgroup>
+            <col style={{ width: "3%" }} />
+            {COL_WIDTHS.map((w, i) => <col key={i} style={{ width: w }} />)}
+          </colgroup>
           <thead className="sticky top-0 z-10" style={{ background: '#18181b' }}>
             <tr className="border-b border-zinc-800/60 select-none">
-              <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center" style={{ width: 28 }}>#</th>
-              {COLS.map(({ col, label, label2, tooltip, w, leftAlign }) => (
+              <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-center">#</th>
+              {COLS.map(({ col, label, label2, tooltip, leftAlign }) => (
                 <th key={col}
                     onClick={() => handleSort(col)}
                     title={tooltip}
-                    className={`px-2 py-1.5 text-[11px] font-semibold uppercase tracking-wider cursor-pointer transition-colors leading-tight ${leftAlign ? "text-left" : "text-center"} ${w ?? ""} ${sortCol === col ? "text-blue-400" : "text-zinc-500 hover:text-zinc-300"}`}>
+                    className={`px-2 py-1.5 text-[11px] font-semibold uppercase tracking-wider cursor-pointer transition-colors leading-tight ${leftAlign ? "text-left" : "text-center"} ${sortCol === col ? "text-blue-400" : "text-zinc-500 hover:text-zinc-300"}`}>
                   <div>
                     <span>{label}<SortIcon col={col}/></span>
                     {label2 && <div className="text-zinc-600 font-normal normal-case tracking-normal text-[10px]">{label2}</div>}
