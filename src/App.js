@@ -5152,34 +5152,36 @@ const NewsHubTab = ({ newsData }) => {
                 <div key={idx} className="border border-blue-800/30 bg-blue-950/20 rounded-lg p-3">
                   <div className="flex items-baseline gap-3 mb-2">
                     <span className="text-[16px] font-bold text-blue-300">{gapper.ticker}</span>
-                    <span className={`text-[14px] font-bold ${gapper.gap_pct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                      {gapper.gap_pct >= 0 ? '+' : ''}{gapper.gap_pct.toFixed(1)}%
+                    <span className={`text-[14px] font-bold ${(gapper.gap_pct ?? 0) >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                      {(gapper.gap_pct ?? 0) >= 0 ? '+' : ''}{(gapper.gap_pct ?? 0).toFixed(1)}%
                     </span>
-                    <span className="text-[11px] text-zinc-500">${gapper.price.toFixed(2)}</span>
-                    <span className={`ml-auto px-2 py-0.5 rounded text-[11px] font-bold ${
-                      gapper.grade === 'A+' ? 'bg-emerald-900/40 text-emerald-300' :
-                      gapper.grade === 'A' ? 'bg-blue-900/40 text-blue-300' :
-                      'bg-yellow-900/40 text-yellow-300'
-                    }`}>
-                      {gapper.grade}
-                    </span>
+                    <span className="text-[11px] text-zinc-500">{gapper.price != null ? `$${gapper.price.toFixed(2)}` : '—'}</span>
+                    {gapper.category && (
+                      <span className="ml-auto px-2 py-0.5 rounded text-[11px] font-bold bg-blue-900/40 text-blue-300">
+                        {gapper.category}
+                      </span>
+                    )}
                   </div>
 
                   <div className="space-y-1 mb-2">
-                    <div className="text-[12px] text-zinc-400">
-                      <span className="font-semibold text-zinc-300">{gapper.category}</span> — {gapper.reasoning}
-                    </div>
-                    <div className="text-[12px] text-zinc-400">
-                      <span className="font-semibold text-zinc-300">Trade:</span> {gapper.hypothesis}
-                    </div>
+                    {gapper.reasoning && (
+                      <div className="text-[12px] text-zinc-400">
+                        <span className="font-semibold text-zinc-300">{gapper.category}</span> — {gapper.reasoning}
+                      </div>
+                    )}
+                    {gapper.hypothesis && (
+                      <div className="text-[12px] text-zinc-400">
+                        <span className="font-semibold text-zinc-300">Trade:</span> {gapper.hypothesis}
+                      </div>
+                    )}
                   </div>
 
                   <div className="flex items-center gap-3 text-[11px] text-zinc-500">
-                    <span>Conviction: <strong className="text-zinc-300">{gapper.conviction}</strong></span>
+                    <span>Conviction: <strong className="text-zinc-300">{gapper.conviction ?? '—'}</strong></span>
                     <span>•</span>
-                    <span>Volume: <strong className="text-zinc-300">{(gapper.pm_volume / 1e6).toFixed(1)}M</strong></span>
+                    <span>Volume: <strong className="text-zinc-300">{gapper.pm_volume != null ? `${(gapper.pm_volume / 1e6).toFixed(1)}M` : '—'}</strong></span>
                     <span>•</span>
-                    <span>RVOL: <strong className="text-zinc-300">{gapper.rvol.toFixed(2)}x</strong></span>
+                    <span>RVOL: <strong className="text-zinc-300">{gapper.rvol != null ? `${gapper.rvol.toFixed(2)}x` : '—'}</strong></span>
                   </div>
 
                   {/* Peers + Leverage ETFs inline badges */}
