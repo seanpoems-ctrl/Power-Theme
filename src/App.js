@@ -5208,9 +5208,15 @@ const NewsHubTab = ({ newsData }) => {
                       {(gapper.peer_tickers || []).map(p => (
                         <span key={p} className="text-[10px] font-mono font-semibold text-blue-400 bg-blue-500/10 border border-blue-500/20 px-1.5 py-0.5 rounded">{p}</span>
                       ))}
-                      {(gapper.leverage_etfs || []).map(etf => (
-                        <span key={etf} className="text-[10px] font-mono font-semibold text-orange-400 bg-orange-500/10 border border-orange-500/20 px-1.5 py-0.5 rounded">{etf} <span className="text-orange-600/70 font-normal">lev</span></span>
-                      ))}
+                      {(gapper.leverage_etfs || []).map((etf, ei) => {
+                        const name = etf?.ticker ?? etf;
+                        const mult = etf?.mult ?? "";
+                        return (
+                          <span key={ei} className="text-[10px] font-mono font-semibold text-orange-400 bg-orange-500/10 border border-orange-500/20 px-1.5 py-0.5 rounded">
+                            {name}{mult ? ` ${mult}` : ""} <span className="text-orange-600/70 font-normal">lev</span>
+                          </span>
+                        );
+                      })}
                     </div>
                   )}
                 </div>
