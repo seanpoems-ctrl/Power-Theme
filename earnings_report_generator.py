@@ -121,10 +121,14 @@ Be data-driven. Use actual metrics where available. Highlight what matters for t
     try:
         from google import genai
 
+        from google.genai import types as _gt
         client = genai.Client(api_key=GEMINI_API_KEY)
         response = client.models.generate_content(
             model="gemini-2.5-flash",
-            contents=prompt
+            contents=prompt,
+            config=_gt.GenerateContentConfig(
+                thinking_config=_gt.ThinkingConfig(thinking_budget=4096)
+            )
         )
 
         raw = response.text.strip().replace("```json", "").replace("```", "").strip()

@@ -833,8 +833,12 @@ Respond ONLY with this JSON (no extra text):
 
     try:
         from google import genai
+        from google.genai import types as _gt
         client = genai.Client(api_key=GEMINI_API_KEY)
-        response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+        _thinking_cfg = _gt.GenerateContentConfig(
+            thinking_config=_gt.ThinkingConfig(thinking_budget=1024)
+        )
+        response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt, config=_thinking_cfg)
         text = response.text.strip()
         if text.startswith("```"):
             text = re.sub(r"^```(?:json)?", "", text).rstrip("`").strip()
@@ -1060,7 +1064,7 @@ Respond in this exact JSON format only (no extra text, no markdown fences):
 
         for attempt in range(3):
             try:
-                response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+                response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt, config=_gt.GenerateContentConfig(thinking_config=_gt.ThinkingConfig(thinking_budget=1024)))
                 break
             except Exception as api_err:
                 err_str = str(api_err)

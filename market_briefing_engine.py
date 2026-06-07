@@ -689,8 +689,27 @@ Return ONLY a single valid JSON object — no markdown wrapping, no code blocks:
 
     try:
         from google import genai
-        client   = genai.Client(api_key=GEMINI_API_KEY)
-        response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
+        from google.genai import types as _gt
+        client = genai.Client(api_key=GEMINI_API_KEY)
+
+        # Enable thinking mode on high-volatility days (VIX > 20) for deeper analysis
+        vix_val = None
+        try:
+            import yfinance as _yf
+            _vix = _yf.Ticker("^VIX").history(period="1d")
+            if not _vix.empty:
+                vix_val = float(_vix["Close"].iloc[-1])
+        except Exception:
+            pass
+
+        cfg = None
+        if vix_val and vix_val > 20:
+            log.info(f"VIX={vix_val:.1f} > 20 — enabling thinking mode for market brief")
+            cfg = _gt.GenerateContentConfig(
+                thinking_config=_gt.ThinkingConfig(thinking_budget=2048)
+            )
+
+        response = client.models.generate_content(model="gemini-2.5-flash", contents=prompt, config=cfg)
         raw = response.text.strip()
         if raw.startswith("```"):
             raw = re.sub(r"^```(?:json)?", "", raw).rstrip("`").strip()

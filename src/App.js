@@ -7737,7 +7737,21 @@ const SearchBar = ({ data, search, setSearch }) => {
   const [research, setResearch]             = useState(null);
   const [researchLoading, setResearchLoading] = useState(false);
   const [researchError, setResearchError]   = useState(false);
-  const researchCache = useRef({});
+  const researchCache = useRef({});   // in-session cache
+  const RESEARCH_CACHE_KEY = "researchCache_v1";
+  const RESEARCH_TTL_MS    = 24 * 60 * 60 * 1000; // 24 hours
+
+  // Load localStorage cache into memory on mount
+  useRef((() => {
+    try {
+      const stored = JSON.parse(localStorage.getItem(RESEARCH_CACHE_KEY) || "{}");
+      const now = Date.now();
+      // Prune expired entries
+      for (const [k, v] of Object.entries(stored)) {
+        if (now - (v.ts || 0) < RESEARCH_TTL_MS) researchCache.current[k] = v.text;
+      }
+    } catch {}
+  })());
   const [selectedSubTheme, setSelectedSubTheme] = useState(null); // subtheme name to expand stock list
   const [searchHistory, setSearchHistory] = useState(() => {
     try { return JSON.parse(localStorage.getItem('searchHistory') || '[]'); } catch { return []; }
@@ -8029,6 +8043,13 @@ const SearchBar = ({ data, search, setSearch }) => {
 
   const fetchResearch = async (ticker) => {
     if (!GEMINI_KEY) { setResearchError(true); return; }
+
+    // Check in-session cache first (free)
+    if (researchCache.current[ticker]) {
+      setResearch(researchCache.current[ticker]);
+      return;
+    }
+
     setResearchLoading(true);
     setResearchError(false);
     setResearch(null);
@@ -8059,13 +8080,36 @@ const SearchBar = ({ data, search, setSearch }) => {
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] }),
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: {
+              thinkingConfig: { thinkingBudget: 1024 }
+            }
+          }),
         }
       );
       if (!res.ok) throw new Error(res.status);
       const json = await res.json();
-      const text = json.candidates?.[0]?.content?.parts?.[0]?.text || "";
+      // Extract text — skip thinking parts (role="model", thought=true)
+      const parts = json.candidates?.[0]?.content?.parts || [];
+      const text = parts.filter(p => !p.thought).map(p => p.text || "").join("") || "";
+
+      // Save to in-session cache
       researchCache.current[ticker] = text;
+
+      // Persist to localStorage with timestamp (24h TTL)
+      try {
+        const stored = JSON.parse(localStorage.getItem(RESEARCH_CACHE_KEY) || "{}");
+        stored[ticker] = { text, ts: Date.now() };
+        // Keep only last 50 tickers to limit storage
+        const keys = Object.keys(stored);
+        if (keys.length > 50) {
+          const oldest = keys.sort((a, b) => (stored[a].ts || 0) - (stored[b].ts || 0)).slice(0, keys.length - 50);
+          oldest.forEach(k => delete stored[k]);
+        }
+        localStorage.setItem(RESEARCH_CACHE_KEY, JSON.stringify(stored));
+      } catch {}
+
       setResearch(text);
     } catch {
       setResearchError(true);
