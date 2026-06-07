@@ -5988,7 +5988,7 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
 // ── Market Breadth Tab ────────────────────────────────────────────────────────
 
 const MARKET_SITUATION_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
-const MARKET_SITUATION_CACHE_KEY  = "gemini_market_situation_v1";
+const MARKET_SITUATION_CACHE_KEY  = "gemini_market_situation_v2";
 
 async function fetchMarketSituation(payload) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_SITUATION_GEMINI_KEY}`;
@@ -6000,7 +6000,7 @@ async function fetchMarketSituation(payload) {
     `Be direct, cite specific numbers, avoid generic phrases. Write for a professional swing trader making real trading decisions.\n\nMarket data:\n${JSON.stringify(payload, null, 2)}`;
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.3, maxOutputTokens: 800, thinkingConfig: { thinkingBudget: 2048 } },
+    generationConfig: { temperature: 0.3, maxOutputTokens: 2000, thinkingConfig: { thinkingBudget: 2048 } },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   const json = await res.json();
