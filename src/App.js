@@ -2798,7 +2798,7 @@ async function fetchGeminiMarketPulse(payload) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_PULSE_GEMINI_KEY}`;
   const { vix, vix_zone, s5fi_breadth_pct, adv_dec_pct, sma50_above_pct, sma200_above_pct, new_52w_highs, new_52w_lows } = payload;
   const prompt =
-    `Market data: VIX=${vix} (${vix_zone}), S5FI=${s5fi_breadth_pct ?? "N/A"}%, ADV/DEC=${adv_dec_pct ?? "N/A"}%, ` +
+    `Market data: VIX=${vix} (${vix_zone}), S&P 500 stocks above SMA50=${s5fi_breadth_pct ?? "N/A"}%, ADV/DEC=${adv_dec_pct ?? "N/A"}%, ` +
     `SMA50 above=${sma50_above_pct ?? "N/A"}%, SMA200 above=${sma200_above_pct ?? "N/A"}%, ` +
     `52W Hi=${new_52w_highs ?? "N/A"}, 52W Lo=${new_52w_lows ?? "N/A"}.\n\n` +
     `Write exactly 2 sentences for a breakout swing trader:\n` +
@@ -3029,7 +3029,7 @@ const INTERNALS_NOTES = [
     ],
   },
   {
-    label: "TRIN",
+    label: "Trading Index",
     desc: "Arms Index — volume-weighted adv/dec ratio",
     lines: [
       { text: "<0.7 → volume in advancing stocks → Buy", active: v => v < 0.7, signal: "green" },
@@ -3128,7 +3128,7 @@ const MarketInternalsV2 = ({ mc, internalsData, generatedAt }) => {
       </div>
       <div className="grid grid-cols-2 gap-x-2 gap-y-0.5 mt-2 pt-2 border-t border-zinc-800/60 text-[11px] font-mono">
         <span className="text-zinc-500">A/D Net</span><span className={`text-right ${tick == null ? "text-zinc-600" : tick > 500 ? "text-emerald-400" : tick < -500 ? "text-red-500" : "text-zinc-300"}`}>{tick == null ? "—" : (tick >= 0 ? "+" : "") + Math.round(tick)}</span>
-        <span className="text-zinc-500">TRIN</span><span className="text-zinc-300 text-right">{trin == null ? "—" : `${trin.toFixed(2)} ${interpret("trin", trin)}`}</span>
+        <span className="text-zinc-500">Trading Index</span><span className="text-zinc-300 text-right">{trin == null ? "—" : `${trin.toFixed(2)} ${interpret("trin", trin)}`}</span>
         <span className="text-zinc-500">T2108</span><span className="text-zinc-300 text-right">{t2108 == null ? "—" : `${t2108.toFixed(2)} ${interpret("t2108", t2108)}`}</span>
       </div>
       {showNotes && (
@@ -3144,7 +3144,7 @@ const MarketInternalsV2 = ({ mc, internalsData, generatedAt }) => {
               "52W Hi":   { raw: hiLoRatio,                 display: `${newHigh} (Hi/Lo ${newLow > 0 ? `ratio ${hiLoRatio?.toFixed(1)}` : "—"})` },
               "52W Lo":   { raw: newLow,                   display: `${newLow}` },
               "A/D Net":  { raw: tick,                     display: tick != null ? (tick >= 0 ? `+${Math.round(tick)}` : `${Math.round(tick)}`) : null },
-              "TRIN":     { raw: trin,                     display: trin != null ? trin.toFixed(2) : null },
+              "Trading Index":     { raw: trin,                     display: trin != null ? trin.toFixed(2) : null },
               "T2108":    { raw: t2108,                    display: t2108 != null ? `${t2108.toFixed(1)}%` : null },
             };
             return INTERNALS_NOTES.map(n => {
@@ -3642,9 +3642,9 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
             {macro_breadth.s5fi != null && (
               <div className="text-[11px] text-zinc-400">
                 <span className="text-zinc-500">• Market Breadth: </span>
-                <span className="font-mono text-zinc-200">S5FI {macro_breadth.s5fi.toFixed(1)}%</span>
+                <span className="font-mono text-zinc-200">S&P above 50D {macro_breadth.s5fi.toFixed(1)}%</span>
                 {macro_breadth.mmth != null && (
-                  <> <span className="text-zinc-600">·</span> <span className="font-mono text-zinc-200">MMTH {macro_breadth.mmth.toFixed(1)}%</span></>
+                  <> <span className="text-zinc-600">·</span> <span className="font-mono text-zinc-200">S&P stocks above SMA200 {macro_breadth.mmth.toFixed(1)}%</span></>
                 )}
               </div>
             )}
@@ -6559,9 +6559,9 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
   const internals = [
     { label: "VIX",    value: internalsData?.vix      != null ? internalsData.vix.toFixed(2)      : "—", color: internalsData?.vix >= 25 ? "text-red-400" : internalsData?.vix <= 15 ? "text-emerald-400" : "text-zinc-300" },
     { label: "A/D Net", value: internalsData?.tick != null ? (internalsData.tick >= 0 ? `+${Math.round(internalsData.tick)}` : `${Math.round(internalsData.tick)}`) : "—", color: internalsData?.tick > 500 ? "text-emerald-400" : internalsData?.tick < -500 ? "text-red-400" : "text-zinc-300" },
-    { label: "TRIN",   value: internalsData?.trin     != null ? internalsData.trin.toFixed(2)     : "—", color: internalsData?.trin > 1.3 ? "text-red-400" : internalsData?.trin < 0.7 ? "text-emerald-400" : "text-zinc-300" },
-    { label: "S5FI",   value: internalsData?.s5fi_50d  != null ? `${internalsData.s5fi_50d.toFixed(1)}%`  : mc.breadth_50d  != null ? `${mc.breadth_50d.toFixed(1)}%`  : "—", color: "text-zinc-300" },
-    { label: "MMTH",   value: internalsData?.mmth_200d != null ? `${internalsData.mmth_200d.toFixed(1)}%` : mc.breadth_200d != null ? `${mc.breadth_200d.toFixed(1)}%` : "—", color: "text-zinc-300" },
+    { label: "Trading Index",   value: internalsData?.trin     != null ? internalsData.trin.toFixed(2)     : "—", color: internalsData?.trin > 1.3 ? "text-red-400" : internalsData?.trin < 0.7 ? "text-emerald-400" : "text-zinc-300" },
+    { label: "S&P >50D", value: internalsData?.s5fi_50d  != null ? `${internalsData.s5fi_50d.toFixed(1)}%`  : mc.breadth_50d  != null ? `${mc.breadth_50d.toFixed(1)}%`  : "—", color: "text-zinc-300" },
+    { label: "S&P stocks above SMA200",   value: internalsData?.mmth_200d != null ? `${internalsData.mmth_200d.toFixed(1)}%` : mc.breadth_200d != null ? `${mc.breadth_200d.toFixed(1)}%` : "—", color: "text-zinc-300" },
     { label: "10Y",    value: internalsData?.yield_10y != null ? `${internalsData.yield_10y.toFixed(2)}%` : "—", color: internalsData?.yield_10y >= 4.5 ? "text-red-400" : "text-zinc-300" },
   ];
 
@@ -8578,8 +8578,8 @@ const MacroRiskCard = () => {
           {breadth.s5fi != null ? (
             <div className="space-y-2.5">
               {[
-                { label: "S5FI  >50DMA",  val: breadth.s5fi },
-                { label: "MMTH >200DMA",  val: breadth.mmth },
+                { label: "S&P stocks above 50 Day Average",  val: breadth.s5fi },
+                { label: "S&P stocks above SMA200",  val: breadth.mmth },
               ].map(({ label, val }) => val != null && (
                 <div key={label}>
                   <div className="flex items-center justify-between mb-1">
@@ -11448,11 +11448,11 @@ const filtered = useMemo(() => {
                         {fmtChg(spy.change_pct)}
                       </span></>}
                     {breadth_50d != null && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_50d', e)}>
-                        <span className="text-zinc-600">S5FI</span>
+                        <span className="text-zinc-600">S&P stocks above 50 Day Average</span>
                         <span className={breadthColor(breadth_50d)}>{breadth_50d.toFixed(1)}%</span>
                       </span></>}
                     {breadth_200d != null && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_200d', e)}>
-                        <span className="text-zinc-600">MMTH 200D</span>
+                        <span className="text-zinc-600">S&P stocks above SMA200</span>
                         <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span>
                       </span></>}
                     {credit_spread != null && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('credit_spread', e)}>
