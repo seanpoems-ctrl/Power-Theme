@@ -6048,11 +6048,11 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
   }, [mc, internalsData, bmLatest, todayKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (!mc) return;
+    if (!mc?.signal) return;  // wait until market_condition has loaded real data
     const cached = (() => { try { const r = JSON.parse(localStorage.getItem(MARKET_SITUATION_CACHE_KEY)); return r?.date === todayKey ? r.text : null; } catch { return null; } })();
     if (cached) { setText(cached); return; }
     if (MARKET_SITUATION_GEMINI_KEY) doFetch();
-  }, [mc]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [mc?.signal]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!mc) return null;
 
