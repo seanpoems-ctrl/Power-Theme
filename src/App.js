@@ -5988,7 +5988,7 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
 // ── Market Breadth Tab ────────────────────────────────────────────────────────
 
 const MARKET_SITUATION_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
-const MARKET_SITUATION_CACHE_KEY  = "gemini_market_situation_v2";
+const MARKET_SITUATION_CACHE_KEY  = "gemini_market_situation_v3";
 
 async function fetchMarketSituation(payload) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_SITUATION_GEMINI_KEY}`;
@@ -6005,7 +6005,9 @@ async function fetchMarketSituation(payload) {
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   const json = await res.json();
   const parts = json?.candidates?.[0]?.content?.parts || [];
-  return parts.filter(p => !p.thought).map(p => p.text || "").join("").trim() || null;
+  const raw = parts.filter(p => !p.thought).map(p => p.text || "").join("").trim();
+  // Strip markdown bold/italic markers Gemini occasionally emits
+  return raw ? raw.replace(/\*\*(.+?)\*\*/g, "$1").replace(/\*(.+?)\*/g, "$1") : null;
 }
 
 const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
