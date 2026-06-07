@@ -2791,39 +2791,10 @@ const VIX_ZONES_NOTE = [
   },
 ];
 
-const MARKET_PULSE_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
-const MARKET_PULSE_CACHE_KEY  = "gemini_market_pulse_v5";
-
-async function fetchGeminiMarketPulse(payload) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_PULSE_GEMINI_KEY}`;
-  const { vix, vix_zone, s5fi_breadth_pct, adv_dec_pct, sma50_above_pct, sma200_above_pct, new_52w_highs, new_52w_lows } = payload;
-  const prompt =
-    `Market data: VIX=${vix} (${vix_zone}), S&P 500 stocks above SMA50=${s5fi_breadth_pct ?? "N/A"}%, ADV/DEC=${adv_dec_pct ?? "N/A"}%, ` +
-    `SMA50 above=${sma50_above_pct ?? "N/A"}%, SMA200 above=${sma200_above_pct ?? "N/A"}%, ` +
-    `52W Hi=${new_52w_highs ?? "N/A"}, 52W Lo=${new_52w_lows ?? "N/A"}.\n\n` +
-    `Write exactly 2 sentences for a breakout swing trader:\n` +
-    `1. Market regime: summarize breadth conditions using the numbers above.\n` +
-    `2. Breakout trade action: state whether to be aggressive / selective / avoid new breakouts, and the key condition to watch.\n` +
-    `No preamble. Under 70 words total.`;
-  const body = {
-    contents: [{ parts: [{ text: prompt }] }],
-    // thinkingBudget:0 disables Gemini 2.5 Flash internal reasoning so maxOutputTokens
-    // goes entirely to the visible response (otherwise thinking tokens eat the budget).
-    generationConfig: { temperature: 0.3, maxOutputTokens: 300, thinkingConfig: { thinkingBudget: 0 } },
-  };
-  const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-  const json = await res.json();
-  const parts = json?.candidates?.[0]?.content?.parts ?? [];
-  const text = parts.map(p => p.text ?? "").join("").trim();
-  return text || null;
-}
 
 const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
   const lang = useLang();
   const [showVixNote, setShowVixNote] = React.useState(false);
-  const [aiText, setAiText] = React.useState(null);
-  const [aiLoading, setAiLoading] = React.useState(false);
-  const todayKey = new Date().toISOString().slice(0, 10);
   const vixNoteRef = React.useRef(null);
   React.useEffect(() => {
     if (!showVixNote) return;
@@ -2835,31 +2806,6 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
   }, [showVixNote]);
-  React.useEffect(() => {
-    const cached = (() => { try { const r = JSON.parse(localStorage.getItem(MARKET_PULSE_CACHE_KEY)); return r?.date === todayKey ? r.text : null; } catch { return null; } })();
-    if (cached) { setAiText(cached); return; }
-    if (!MARKET_PULSE_GEMINI_KEY) return;
-    const v = vix ?? 0;
-    const s5fi = briefData?.macro_breadth?.s5fi;
-    const adv_pct = mc?.adv_dec?.adv_pct;
-    if (!v && s5fi == null && adv_pct == null) return;
-    setAiLoading(true);
-    fetchGeminiMarketPulse({
-      vix: v,
-      vix_zone: v >= 30 ? "EXTREME FEAR" : v >= 24 ? "ELEVATED CONCERN" : v >= 18 ? "CAUTION" : v >= 14 ? "NORMAL" : "COMPLACENT",
-      s5fi_breadth_pct: s5fi,
-      adv_dec_pct: adv_pct,
-      sma50_above_pct: mc?.sma50_counts?.above_pct,
-      sma200_above_pct: mc?.sma200_counts?.above_pct,
-      new_52w_highs: mc?.new_hl?.new_high,
-      new_52w_lows: mc?.new_hl?.new_low,
-    })
-      .then(t => {
-        if (t) { setAiText(t); try { localStorage.setItem(MARKET_PULSE_CACHE_KEY, JSON.stringify({ date: todayKey, text: t })); } catch { /* quota */ } }
-      })
-      .catch(() => {})
-      .finally(() => setAiLoading(false));
-  }, [vix, mc, briefData, todayKey]);
   const v = vix ?? 0;
   const vixCfg =
     v >= 30 ? { label: "EXTREME FEAR", cls: "text-red-400" } :
@@ -2868,12 +2814,6 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
     v >= 14 ? { label: "NORMAL", cls: "text-emerald-400" } :
               { label: "COMPLACENT", cls: "text-blue-400" };
   const expectedMove = v ? (v / 16).toFixed(2) : "—";
-  const vixFallback =
-    v >= 30 ? "VIX > 30 = panic regime. Cash heavy, only A+ setups, half size."
-    : v >= 24 ? "VIX > 24 = institutional hedging active. Reduce size, tighten stops. Avoid chasing."
-    : v >= 18 ? "VIX in caution zone. Trade selectively — favor RS leaders only."
-    : "Low VIX = trend friendly. Standard entries on RS leaders OK.";
-
   const signal = mc?.signal;
   const signalCfg = {
     green:  { dot: 'bg-emerald-400', label: 'Market Uptrend',    borderCls: 'border-emerald-500/40' },
@@ -2885,8 +2825,6 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
   const breadthLine = advDec
     ? `${advDec.adv_pct?.toFixed(0) ?? '—'}% advancing · ${advDec.advancing ?? '—'} adv / ${advDec.declining ?? '—'} dec`
     : null;
-
-  const actionLine = briefData?.analysis?.action_line || null;
 
   return (
     <div ref={vixNoteRef} className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-3">
@@ -2939,37 +2877,6 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
         </div>
       )}
 
-      {/* AI section */}
-      <div className="mt-2 pt-2 border-t border-zinc-800/60">
-        <div className="flex items-center gap-1.5 mb-1">
-          <span className="text-[11px] text-blue-400">✦</span>
-          <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.15em]">Gemini</div>
-          {aiLoading && <RefreshCw size={10} className="text-zinc-500 animate-spin"/>}
-        </div>
-        <div className="text-[11px] leading-snug text-zinc-300">
-          {aiText || actionLine || vixFallback}
-        </div>
-        {(() => {
-          const displayText = aiText || actionLine || "";
-          const t = displayText.toLowerCase();
-          const tag = t.includes("avoid") ? "avoid"
-            : t.includes("aggressive") ? "aggressive"
-            : t.includes("selective") || t.includes("select") ? "selective"
-            : null;
-          const strategyMap = {
-            aggressive: { text: lang === 'zh' ? "策略：積極佈局突破單，RS 強 + 量能放大即可進場" : "Strategy: Aggressively enter breakouts — strong RS + volume surge = entry", cls: "text-emerald-400 border-emerald-500/30 bg-emerald-500/8" },
-            selective:  { text: lang === 'zh' ? "策略：只做 RS 最強、setup 最乾淨的突破單，不要每個都追" : "Strategy: Only cleanest RS setups — don't chase every breakout", cls: "text-amber-400 border-amber-500/30 bg-amber-500/8" },
-            avoid:      { text: lang === 'zh' ? "策略：暫停新突破單，現金觀望等待市場穩定" : "Strategy: Pause all new breakouts — hold cash, wait for stabilization", cls: "text-red-400 border-red-500/30 bg-red-500/8" },
-          };
-          const s = tag ? strategyMap[tag] : null;
-          if (!s) return null;
-          return (
-            <div className={`mt-2 px-2 py-1.5 rounded-lg border text-[11px] font-medium leading-snug ${s.cls}`}>
-              {s.text}
-            </div>
-          );
-        })()}
-      </div>
     </div>
   );
 };
@@ -6080,69 +5987,113 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
 
 // ── Market Breadth Tab ────────────────────────────────────────────────────────
 
-const BREADTH_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
-const BREADTH_CACHE_KEY  = "gemini_breadth_v1";
+const MARKET_SITUATION_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
+const MARKET_SITUATION_CACHE_KEY  = "gemini_market_situation_v1";
 
-async function fetchGeminiBreadthAnalysis(payload) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${BREADTH_GEMINI_KEY}`;
+async function fetchMarketSituation(payload) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_SITUATION_GEMINI_KEY}`;
+  const prompt =
+    `You are a senior market analyst providing a pre-trading situational awareness brief for a swing trader. Analyse all the data below and write exactly 3 paragraphs with NO headers or labels:\n\n` +
+    `Paragraph 1 (Tape & Internals): Describe today's market tape using the A/D data, up4%/dn4% counts, Trading Index (TRIN), and new 52W highs vs lows. Be specific with the numbers.\n` +
+    `Paragraph 2 (Breadth Structure): Interpret the SMA50%, SMA200%, T2108, and up25Q% readings. What do they tell us about the health and phase of the current market structure?\n` +
+    `Paragraph 3 (Tactical Stance): Synthesize VIX, SPY/QQQ vs their SMAs, and the breadth picture into a single clear trading stance. State whether to be aggressive, selective, or defensive, and name the exact condition(s) to watch for a regime change.\n\n` +
+    `Be direct, cite specific numbers, avoid generic phrases. Write for a professional swing trader making real trading decisions.\n\nMarket data:\n${JSON.stringify(payload, null, 2)}`;
   const body = {
-    contents: [{
-      parts: [{
-        text: `You are a concise stock market analyst. Given these market breadth numbers, write exactly 3 sentences: (1) current breadth regime, (2) key risk or opportunity, (3) tactical stance for swing traders. Be direct and specific.\n\nData: ${JSON.stringify(payload)}`,
-      }],
-    }],
-    generationConfig: { temperature: 0.4, maxOutputTokens: 180 },
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: { temperature: 0.3, maxOutputTokens: 800, thinkingConfig: { thinkingBudget: 2048 } },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   const json = await res.json();
-  return json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || null;
+  const parts = json?.candidates?.[0]?.content?.parts || [];
+  return parts.filter(p => !p.thought).map(p => p.text || "").join("").trim() || null;
 }
 
-const GeminiBreathAnalysis = ({ mc, internalsData }) => {
-  const [text, setText] = useState(null);
+const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
+  const [text, setText]     = useState(null);
   const [loading, setLoading] = useState(false);
   const todayKey = new Date().toISOString().slice(0, 10);
 
-  useEffect(() => {
-    const cached = (() => { try { const r = JSON.parse(localStorage.getItem(BREADTH_CACHE_KEY)); return r?.date === todayKey ? r.text : null; } catch { return null; } })();
-    if (cached) { setText(cached); return; }
-    if (!BREADTH_GEMINI_KEY || !mc) return;
+  const doFetch = useCallback(() => {
+    if (!MARKET_SITUATION_GEMINI_KEY || !mc) return;
     setLoading(true);
+    const _worden = bmLatest?.worden_universe || 0;
     const payload = {
-      signal:        mc.signal,
-      adv_pct:       mc.adv_dec?.adv_pct,
-      dec_pct:       mc.adv_dec?.dec_pct,
-      new_high:      mc.new_hl?.new_high,
-      new_low:       mc.new_hl?.new_low,
-      above_sma50:   mc.sma50_counts?.above_pct,
-      above_sma200:  mc.sma200_counts?.above_pct,
-      breadth_50d:   mc.breadth_50d,
-      breadth_200d:  mc.breadth_200d,
-      vix:           internalsData?.vix,
-      t2108:         internalsData?.t2108,
-      yield_10y:     internalsData?.yield_10y,
+      market_signal:    mc.signal,
+      vix:              internalsData?.vix,
+      trin:             internalsData?.trin,
+      t2108:            bmLatest?.t2108 ?? internalsData?.t2108,
+      yield_10y:        internalsData?.yield_10y,
+      adv_pct:          mc.adv_dec?.adv_pct,
+      dec_pct:          mc.adv_dec?.dec_pct,
+      advancing:        mc.adv_dec?.advancing,
+      declining:        mc.adv_dec?.declining,
+      new_52w_high:     mc.new_hl?.new_high,
+      new_52w_low:      mc.new_hl?.new_low,
+      sma50_above_pct:  mc.sma50_counts?.above_pct,
+      sma200_above_pct: mc.sma200_counts?.above_pct,
+      up4_pct:          _worden > 0 && bmLatest?.up_4_pct   != null ? +(bmLatest.up_4_pct   / _worden * 100).toFixed(1) : null,
+      dn4_pct:          _worden > 0 && bmLatest?.down_4_pct != null ? +(bmLatest.down_4_pct / _worden * 100).toFixed(1) : null,
+      up25q_pct:        _worden > 0 && bmLatest?.up_25_q    != null ? +(bmLatest.up_25_q    / _worden * 100).toFixed(1) : null,
+      spy_vs_sma50:     mc.spy?.sma50_pct,
+      spy_vs_sma200:    mc.spy?.sma200_pct,
+      qqq_vs_sma50:     mc.qqq?.sma50_pct,
+      qqq_vs_sma200:    mc.qqq?.sma200_pct,
     };
-    fetchGeminiBreadthAnalysis(payload)
+    fetchMarketSituation(payload)
       .then(t => {
-        if (t) { setText(t); try { localStorage.setItem(BREADTH_CACHE_KEY, JSON.stringify({ date: todayKey, text: t })); } catch { /* quota */ } }
+        if (t) { setText(t); try { localStorage.setItem(MARKET_SITUATION_CACHE_KEY, JSON.stringify({ date: todayKey, text: t })); } catch { /* quota */ } }
       })
       .catch(() => {})
       .finally(() => setLoading(false));
-  }, [mc, internalsData, todayKey]);
+  }, [mc, internalsData, bmLatest, todayKey]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    const cached = (() => { try { const r = JSON.parse(localStorage.getItem(MARKET_SITUATION_CACHE_KEY)); return r?.date === todayKey ? r.text : null; } catch { return null; } })();
+    if (cached) { setText(cached); return; }
+    if (MARKET_SITUATION_GEMINI_KEY && mc) doFetch();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!mc) return null;
 
+  const paragraphs = text ? text.split(/\n\n+/).filter(p => p.trim()) : [];
+
   return (
-    <div className="mb-4 border border-zinc-700/40 bg-zinc-800/20 rounded-xl p-4">
-      <div className="flex items-center gap-2 mb-2">
-        <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">✦ GEMINI BREADTH READ</span>
-        {loading && <RefreshCw size={10} className="text-zinc-500 animate-spin"/>}
-        {!BREADTH_GEMINI_KEY && <span className="text-[11px] text-zinc-600">Set REACT_APP_GEMINI_KEY to enable</span>}
+    <div className="mb-5 border border-zinc-700/40 bg-zinc-900/40 rounded-xl p-4">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <span className="text-blue-400 text-[14px]">⬡</span>
+          <span className="text-[12px] font-bold text-zinc-300 uppercase tracking-wider">Market Situation</span>
+          <span className="text-[10px] text-zinc-600 font-mono">Gemini 2.5 Flash · thinking</span>
+        </div>
+        <button
+          onClick={doFetch}
+          disabled={loading || !MARKET_SITUATION_GEMINI_KEY}
+          className="flex items-center gap-1 text-[11px] text-zinc-500 hover:text-zinc-300 disabled:opacity-30 transition-colors"
+        >
+          <RefreshCw size={10} className={loading ? "animate-spin" : ""}/>
+          {loading ? "Thinking…" : "refresh"}
+        </button>
       </div>
-      {text
-        ? <p className="text-[13px] text-zinc-200 leading-relaxed">{text}</p>
-        : !loading && <p className="text-[12px] text-zinc-600 italic">{BREADTH_GEMINI_KEY ? "Awaiting data…" : "API key not configured"}</p>
-      }
+      {!MARKET_SITUATION_GEMINI_KEY && (
+        <p className="text-[12px] text-zinc-600 italic">Set REACT_APP_GEMINI_KEY to enable</p>
+      )}
+      {loading && !text && (
+        <div className="space-y-2 py-1">
+          {[75, 90, 65].map(w => (
+            <div key={w} className="h-2.5 bg-zinc-800 rounded animate-pulse" style={{ width: `${w}%` }}/>
+          ))}
+        </div>
+      )}
+      {paragraphs.length > 0 && (
+        <div className="space-y-3">
+          {paragraphs.map((para, i) => (
+            <p key={i} className="text-[13px] text-zinc-200 leading-relaxed">{para}</p>
+          ))}
+        </div>
+      )}
+      {!loading && !text && MARKET_SITUATION_GEMINI_KEY && (
+        <p className="text-[12px] text-zinc-600 italic">Awaiting data…</p>
+      )}
     </div>
   );
 };
@@ -6608,6 +6559,9 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
             </div>
           </div>
         )}
+
+        {/* ── Market Situation — Gemini thinking narrative ──────────────── */}
+        <MarketSituationBlock mc={mc} internalsData={internalsData} bmLatest={bmLatest} />
 
         {/* 8 metric chips — compact single row */}
         <div className="flex flex-wrap gap-2 mb-4">
