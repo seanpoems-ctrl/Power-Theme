@@ -1727,7 +1727,7 @@ def build_data() -> dict:
 
     # Build market internals now — reuse the breadth values already computed above
     # so market_internals.py doesn't re-download the entire S&P 500 universe.
-    logger.info("  Building market internals (VIX, TICK, TRIN, T2108, 10Y yield)...")
+    logger.info("  Building market internals (VIX, TICK, Trading Index, T2108, 10Y yield)...")
     try:
         from market_internals import build_internals
         market_internals_data = build_internals(s5fi=sp500_breadth, mmth=sp500_breadth_200)

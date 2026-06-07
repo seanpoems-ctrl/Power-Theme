@@ -5,7 +5,7 @@ market_briefing_engine.py — Market Intelligence Briefing Engine
 
 Dual-phase (PRE/POST) automated pipeline:
   • Aggregates FRED (BAMLH0A0HYM2 + T10Y2Y), yfinance (SPY/QQQ/VIX/CL=F/^N225/^GDAXI),
-    and TradingView breadth (S5FI/MMTH) via asyncio — target < 10 seconds
+    and TradingView breadth (S&P 500 stocks above SMA50/S&P stocks above SMA200) via asyncio — target < 10 seconds
   • Tags market state: credit regime, yield curve, reversal signals
     (Hammer / Bullish Engulfing / Undercut & Reclaim vs. 20-day low)
   • Generates structured brief via Gemini with Content Architecture
@@ -307,7 +307,7 @@ def _fetch_prices_sync() -> dict:
 
 def _fetch_breadth_sync() -> dict:
     """
-    Approximate S5FI (% stocks > 50DMA) and MMTH (% stocks > 200DMA)
+    Approximate S&P 500 stocks above SMA50 (% stocks > 50DMA) and S&P stocks above SMA200 (% stocks > 200DMA)
     via TradingView Screener — large-cap US stocks proxy (~600 stocks).
     """
     try:
@@ -336,7 +336,7 @@ def _fetch_breadth_sync() -> dict:
         n    = len(df)
         s5fi = round(float((df["close"] > df[sma50]).sum())  / n * 100, 1)
         mmth = round(float((df["close"] > df[sma200]).sum()) / n * 100, 1)
-        log.info(f"Breadth: {n} stocks  S5FI={s5fi}%  MMTH={mmth}%")
+        log.info(f"Breadth: {n} stocks  S&P500>SMA50={s5fi}%  S&P>SMA200={mmth}%")
         return {"s5fi": s5fi, "mmth": mmth}
     except Exception as e:
         log.warning(f"fetch_breadth: {e}")
@@ -394,14 +394,14 @@ def _tag_yield_curve(t10y2y: float | None) -> str:
 
 def _detect_reversal(assets: dict, s5fi: float | None) -> dict:
     """
-    Detect reversal candle patterns — only active when S5FI < 15.
+    Detect reversal candle patterns — only active when S&P 500 stocks above SMA50 < 15.
 
     Patterns checked on SPY and QQQ:
       Hammer:             lower_wick > 2×body  AND  upper_wick < 0.2×body
       Bullish Engulfing:  close > open  AND  open ≤ prev_close  AND  close ≥ prev_open
       Undercut & Reclaim: low < min(last_20d_lows[:-1])  AND  close > that min  [SPY only]
 
-    S5FI < 10 → GENERATIONAL BUY ZONE label added regardless of candle patterns.
+    S&P 500 stocks above SMA50 < 10 → GENERATIONAL BUY ZONE label added regardless of candle patterns.
     """
     result = {
         "signal_detected":    False,
@@ -413,7 +413,7 @@ def _detect_reversal(assets: dict, s5fi: float | None) -> dict:
 
     found: list[str] = []
     if s5fi < 10:
-        found.append(f"GENERATIONAL BUY ZONE (S5FI={s5fi:.1f}%)")
+        found.append(f"GENERATIONAL BUY ZONE (S&P500>SMA50={s5fi:.1f}%)")
 
     for key in ("SPY", "QQQ"):
         d = assets.get(key)
@@ -624,8 +624,8 @@ def _generate_brief_sync(
 FRED Macro Data:
   BAMLH0A0HYM2 (HY Credit Spread): {f"{hy_oas:.2f}%{'  ⚠ CACHED — live FRED fetch failed, value is from previous run' if fred.get('hy_oas_stale') else ''}" if hy_oas is not None else "N/A — live FRED fetch failed and no cache available"} → {regime["credit_status"]}
   T10Y2Y (10Y-2Y Yield Curve):      {f"{yield_curve:+.3f}{'  ⚠ CACHED — live FRED fetch failed, value is from previous run' if fred.get('yield_curve_stale') else ''}" if yield_curve is not None else "N/A — live FRED fetch failed and no cache available"} → {regime["yc_status"]}
-  S5FI  (% stocks > 50DMA):         {f"{s5fi:.1f}%" if s5fi is not None else "N/A"}
-  MMTH  (% stocks > 200DMA):        {f"{mmth:.1f}%" if mmth is not None else "N/A"}
+  S&P 500 stocks above SMA50 (% stocks > 50DMA):  {f"{s5fi:.1f}%" if s5fi is not None else "N/A"}
+  S&P stocks above SMA200 (% stocks > 200DMA):    {f"{mmth:.1f}%" if mmth is not None else "N/A"}
 {recycled_note}{gapper_note}
 
 ═══ CONTENT ARCHITECTURE — follow exactly ═══
@@ -817,9 +817,9 @@ def build_telegram_messages(analysis: dict, pulse: dict, regime: dict, phase: st
 
     if s5fi is not None:
         b_icon = "🔥" if s5fi < 10 else "⚠️" if s5fi < 20 else "📊"
-        parts  = [f"S5FI `{s5fi:.1f}%`"]
+        parts  = [f"S&P 500 stocks above SMA50 `{s5fi:.1f}%`"]
         if mmth is not None:
-            parts.append(f"MMTH `{mmth:.1f}%`")
+            parts.append(f"S&P stocks above SMA200 `{mmth:.1f}%`")
         p1.append(f"{b_icon} *Breadth:* " + " \\| ".join(parts))
 
     p1.append("")

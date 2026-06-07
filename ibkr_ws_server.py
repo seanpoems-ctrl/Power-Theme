@@ -58,7 +58,7 @@ logging.basicConfig(
 log = logging.getLogger(__name__)
 
 # ── Market internals to always subscribe ─────────────────────────────────────
-# Note: $TICK and $TRIN require a separate IBKR market data subscription — removed for now
+# Note: $TICK and $TRIN (Trading Index) require a separate IBKR market data subscription — removed for now
 INTERNALS = [
     {"key": "SPY",  "symbol": "SPY", "secType": "STK", "exchange": "ARCA",  "currency": "USD"},
     {"key": "QQQ",  "symbol": "QQQ", "secType": "STK", "exchange": "NASDAQ","currency": "USD"},

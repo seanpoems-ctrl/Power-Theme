@@ -6,7 +6,7 @@ Omni-Market Intelligence & Reversal Engine
 Data sources:
   - SPY / QQQ / VIX OHLC + 200-day SMA: yfinance
   - BAMLH0A0HYM2 (ICE BofA HY spread):   FRED free CSV endpoint
-  - S5FI / MMTH approximation:            TradingView Screener (SMA50/SMA200 count)
+  - S&P 500 stocks above SMA50 / S&P stocks above SMA200 approximation: TradingView Screener (SMA50/SMA200 count)
   - Nikkei 225 / DAX / FTSE 100:          yfinance
 
 Outputs:
@@ -18,11 +18,11 @@ Credit regimes:
   3.5–4.5 → Yellow Flag
   > 4.5%  → Stress
 
-Reversal detection (only when S5FI < 15):
+Reversal detection (only when S&P 500 stocks above SMA50 < 15):
   - Hammer candle
   - Bullish Engulfing
   - Undercut & Reclaim (SPY vs 200DMA)
-  S5FI < 10 → GENERATIONAL BUY ZONE
+  S&P 500 stocks above SMA50 < 10 → GENERATIONAL BUY ZONE
 """
 
 import json
@@ -135,7 +135,7 @@ def fetch_credit_spread() -> dict | None:
 
 
 def fetch_breadth() -> dict:
-    """Approximate S5FI + MMTH via TradingView Screener for large-cap US stocks."""
+    """Approximate S&P 500 stocks above SMA50 + S&P stocks above SMA200 via TradingView Screener for large-cap US stocks."""
     try:
         from tradingview_screener import Query, col
         _, df = (
@@ -166,7 +166,7 @@ def fetch_breadth() -> dict:
         n = len(df)
         s5fi = round((df["close"] > df[sma50]).sum()  / n * 100, 1)
         mmth = round((df["close"] > df[sma200]).sum() / n * 100, 1)
-        print(f"  fetch_breadth: {n} stocks — S5FI={s5fi}% MMTH={mmth}%")
+        print(f"  fetch_breadth: {n} stocks — S&P500>SMA50={s5fi}% S&P>SMA200={mmth}%")
         return {"s5fi": s5fi, "mmth": mmth}
     except Exception as e:
         print(f"  fetch_breadth: {e}")
@@ -259,11 +259,11 @@ def compute_reversal_signals(indices: dict, breadth: dict,
             descriptions.append(f"{key.upper()} {' + '.join(name_map[p] for p in detected)}")
 
     if breadth.get("generational_buy_zone"):
-        descriptions.insert(0, f"GENERATIONAL BUY ZONE (S5FI={s5fi:.1f}%)")
+        descriptions.insert(0, f"GENERATIONAL BUY ZONE (S&P500>SMA50={s5fi:.1f}%)")
 
     if descriptions:
         signals["signal_detected"] = True
-        signals["signal_description"] = " | ".join(descriptions) + f"  [S5FI={s5fi:.1f}%]"
+        signals["signal_description"] = " | ".join(descriptions) + f"  [S&P500>SMA50={s5fi:.1f}%]"
 
     return signals
 
@@ -312,12 +312,12 @@ Current market data:
   QQQ:  {_fi("qqq")}
   VIX:  {_fi("vix")}
   BAML HY Spread (BAMLH0A0HYM2): {f"{spread:.2f}%" if spread else "N/A"} → {credit.get("regime", "Unknown")} regime
-  S5FI (% stocks > 50DMA):  {f"{s5fi:.1f}%" if s5fi is not None else "N/A"}
-  MMTH (% stocks > 200DMA): {f"{mmth:.1f}%" if mmth is not None else "N/A"}
+  S&P 500 stocks above SMA50 (% stocks > 50DMA):  {f"{s5fi:.1f}%" if s5fi is not None else "N/A"}
+  S&P stocks above SMA200 (% stocks > 200DMA): {f"{mmth:.1f}%" if mmth is not None else "N/A"}
   Nikkei 225: {_gl("nikkei")} | DAX: {_gl("dax")} | FTSE 100: {_gl("ftse")}{reversal_note}
 
 Generate the brief with these fields:
-  snapshot_md      – Markdown table (Index | Price | Change) for SPY/QQQ/VIX/HY Spread/S5FI/MMTH/Nikkei/DAX/FTSE
+  snapshot_md      – Markdown table (Index | Price | Change) for SPY/QQQ/VIX/HY Spread/S&P500>SMA50/S&P>SMA200/Nikkei/DAX/FTSE
   macro_section    – 2-3 sentences on the credit regime and what BAMLH0A0HYM2 implies for risk appetite
   analysis_para1   – 1 paragraph connecting global tape (Nikkei/DAX/FTSE) to US credit spreads
   analysis_para2   – 1 paragraph identifying the single most important "Mechanical Catalyst" for today's session
@@ -409,9 +409,9 @@ def build_telegram_message(result: dict) -> str:
     mmth = breadth.get("mmth")
     if s5fi is not None:
         icon = "🔥" if s5fi < 10 else "⚠️" if s5fi < 20 else "📊"
-        breadth_parts = [f"S5FI `{s5fi:.1f}%`"]
+        breadth_parts = [f"S&P 500 stocks above SMA50 `{s5fi:.1f}%`"]
         if mmth is not None:
-            breadth_parts.append(f"MMTH `{mmth:.1f}%`")
+            breadth_parts.append(f"S&P stocks above SMA200 `{mmth:.1f}%`")
         lines.append(f"{icon} *Breadth:* " + " \\| ".join(breadth_parts))
 
     global_parts: list[str] = []

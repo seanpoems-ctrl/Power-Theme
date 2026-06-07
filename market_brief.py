@@ -9,7 +9,7 @@ Runs at 07:30 ET (Pre-Market) and 16:30 ET (Post-Market).
 Data:
   - S&P 500 (^GSPC), Nasdaq 100 (^NDX), VIX (^VIX), 10Y Yield (^TNX): yfinance
   - BAMLH0A0HYM2 HY credit spread: FRED free CSV
-  - S5FI / MMTH approximation: TradingView Screener
+  - S&P 500 stocks above SMA50 / S&P stocks above SMA200 approximation: TradingView Screener
   - Nikkei 225, DAX, FTSE 100: yfinance
   - SPY 200-day SMA (for Undercut & Reclaim): yfinance
 
@@ -104,7 +104,7 @@ def fetch_credit_spread() -> dict | None:
 
 
 def fetch_breadth() -> dict:
-    """S5FI + MMTH approximation via TradingView Screener (large-cap US proxy)."""
+    """S&P 500 stocks above SMA50 + S&P stocks above SMA200 approximation via TradingView Screener (large-cap US proxy)."""
     try:
         from tradingview_screener import Query, col
         _, df = (
@@ -131,7 +131,7 @@ def fetch_breadth() -> dict:
         n = len(df)
         s5fi = float(round(float((df["close"] > df[sma50]).sum())  / n * 100, 1))
         mmth = float(round(float((df["close"] > df[sma200]).sum()) / n * 100, 1))
-        print(f"  breadth: {n} stocks  S5FI={s5fi}%  MMTH={mmth}%")
+        print(f"  breadth: {n} stocks  S&P500>SMA50={s5fi}%  S&P>SMA200={mmth}%")
         return {"s5fi": s5fi, "mmth": mmth}
     except Exception as e:
         print(f"  fetch_breadth: {e}")
@@ -202,7 +202,7 @@ def breadth_status_label(s5fi: float | None) -> str:
 
 
 def detect_reversal(indices: dict, s5fi: float | None, spy_ma200: float | None) -> dict:
-    """Candle pattern detection — only when S5FI < 15."""
+    """Candle pattern detection — only when S&P 500 stocks above SMA50 < 15."""
     signals = {"signal_detected": False, "description": ""}
     if s5fi is None or s5fi >= 15:
         return signals
@@ -219,11 +219,11 @@ def detect_reversal(indices: dict, s5fi: float | None, spy_ma200: float | None) 
         low_proxy = close * 0.995  # approximate — no intraday low in index data
         if low_proxy < spy_ma200 < close:
             signals["signal_detected"] = True
-            signals["description"] = f"Undercut & Reclaim of SPY 200DMA ({spy_ma200:.2f}) [S5FI={s5fi:.1f}%]"
+            signals["description"] = f"Undercut & Reclaim of SPY 200DMA ({spy_ma200:.2f}) [S&P500>SMA50={s5fi:.1f}%]"
 
     if s5fi < 10 and not signals["signal_detected"]:
         signals["signal_detected"] = True
-        signals["description"] = f"GENERATIONAL BUY ZONE (S5FI={s5fi:.1f}%)"
+        signals["description"] = f"GENERATIONAL BUY ZONE (S&P500>SMA50={s5fi:.1f}%)"
 
     return signals
 
@@ -314,8 +314,8 @@ Market data:
   VIX:         {_p(vix)} — {vix_zone(vix['price']) if vix.get('price') else 'N/A'}
   10Y Yield:   {_p(y10)}% ({yield_trend(y10.get('change', 0))})
   BAML HY Spread: {f"{spread:.2f}%" if spread else "N/A"} → {regime} regime
-  S5FI (% stocks > 50DMA):  {f"{s5fi:.1f}%" if s5fi is not None else "N/A"}
-  MMTH (% stocks > 200DMA): {f"{mmth:.1f}%" if mmth is not None else "N/A"}
+  S&P 500 stocks above SMA50 (% stocks > 50DMA):  {f"{s5fi:.1f}%" if s5fi is not None else "N/A"}
+  S&P stocks above SMA200 (% stocks > 200DMA): {f"{mmth:.1f}%" if mmth is not None else "N/A"}
   Nikkei 225: {_gl_str("nikkei")} | DAX: {_gl_str("dax")} | FTSE 100: {_gl_str("ftse")}{rev_note}
 """
 
@@ -333,7 +333,7 @@ Market data:
 Output ONLY valid JSON (no markdown wrapping):
 {{
   "mood": "2-6 word market mood — e.g. 'Risk-Off / Global Weakness' or 'Capitulation / Distribution'",
-  "action_line": "1 sentence (max 120 chars) synthesizing VIX level + breadth (S5FI/MMTH) + global tape into a single actionable verdict. Example: 'VIX 18 Normal + S5FI 50% breadth + mixed global tape → trade RS leaders selectively near support.'",
+  "action_line": "1 sentence (max 120 chars) synthesizing VIX level + breadth (S&P 500 stocks above SMA50/S&P stocks above SMA200) + global tape into a single actionable verdict. Example: 'VIX 18 Normal + 50% S&P above SMA50 breadth + mixed global tape → trade RS leaders selectively near support.'",
   "analysis_para1": "1 paragraph connecting global tape (Nikkei/DAX/FTSE) to US credit and breadth",
   "analysis_para2": "1 paragraph: the 'Mechanical Plan' — specific price levels, signals, and action to watch",
   "technical_signal": "{tech_instruction}",
@@ -346,7 +346,7 @@ Output ONLY valid JSON (no markdown wrapping):
 
 Rules:
   mood: captures today's market character in a phrase
-  action_line: exactly 1 sentence, cite VIX number + S5FI% + at least one global index, end with a clear trade stance
+  action_line: exactly 1 sentence, cite VIX number + S&P 500 stocks above SMA50% + at least one global index, end with a clear trade stance
   analysis_para1: 3-5 sentences, connect global → credit → US breadth, cite specific numbers
   analysis_para2: 3-5 sentences, the actionable mechanical plan with key price levels
   technical_signal: {tech_instruction}
@@ -425,9 +425,9 @@ def build_telegram_message(result: dict) -> str:
 
     if s5fi is not None:
         bicon = "🔥" if s5fi < 10 else "⚠️" if s5fi < 20 else "📊"
-        parts = [f"S5FI `{s5fi:.1f}%`"]
+        parts = [f"S&P 500 stocks above SMA50 `{s5fi:.1f}%`"]
         if mmth is not None:
-            parts.append(f"MMTH `{mmth:.1f}%`")
+            parts.append(f"S&P stocks above SMA200 `{mmth:.1f}%`")
         lines.append(f"{bicon} *Breadth:* " + " \\| ".join(parts))
 
     if status:

@@ -212,8 +212,8 @@ def generate_mock_brief() -> str:
         "",
         # '(' and ')' in section header must be escaped
         "🧭 *Market Breadth \\(S&P 500\\)*",
-        f"  • S5FI \\(% above 50MA\\):  {code(f'{s5fi}%')}  {breadth_icon}",
-        f"  • MMTH \\(% above 200MA\\): {code(f'{mmth}%')}",
+        f"  • S&P 500 stocks above SMA50 \\(% above 50MA\\):  {code(f'{s5fi}%')}  {breadth_icon}",
+        f"  • S&P stocks above SMA200 \\(% above 200MA\\): {code(f'{mmth}%')}",
         f"  • VIX: {vix_code}",
         # '±' is NOT special; '/' is NOT special
         f"    ↳ Rule of 16: daily 1σ move ≈ {daily_code}",

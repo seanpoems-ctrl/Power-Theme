@@ -5,9 +5,9 @@ market_internals.py — Market Breadth & Internals Snapshot
 Fetches:
   VIX       — ibkr_client.get_vix()  (fallback: yfinance ^VIX)
   TICK      — IBKR reqMktData $TICK  (live session only; skipped on failure)
-  TRIN      — IBKR reqMktData $TRIN  (live session only; skipped on failure)
-  S5FI      — % S&P 500 above 50D MA  (scraper._build_sp500_rs_universe breadth_50)
-  MMTH      — % S&P 500 above 200D MA (scraper._build_sp500_rs_universe breadth_200)
+  Trading Index — IBKR reqMktData $TRIN  (live session only; skipped on failure)
+  S&P 500 stocks above SMA50 — % S&P 500 above 50D MA  (scraper._build_sp500_rs_universe breadth_50)
+  S&P stocks above SMA200 — % S&P 500 above 200D MA (scraper._build_sp500_rs_universe breadth_200)
   T2108     — yfinance ^T2108
   10Y Yield — yfinance ^TNX
 
@@ -71,17 +71,17 @@ def _fetch_vix() -> tuple[float | None, str]:
     return None, "null"
 
 
-# ─── A/D Net (TICK proxy) & TRIN ─────────────────────────────────────────────
+# ─── A/D Net (TICK proxy) & Trading Index ────────────────────────────────────
 
 def _fetch_tick_trin() -> tuple[float | None, float | None, str]:
     """
-    Compute A/D Net (advancing − declining issues) and TRIN (Arms Index) from
+    Compute A/D Net (advancing − declining issues) and Trading Index (Arms Index) from
     TradingView screener end-of-day data.
 
     The 'tick' field stores the A/D Net — a daily breadth measure that captures
     the same signal as NYSE TICK (net breadth) but calculated at market close.
 
-    TRIN (Arms Index) = (adv_count / dec_count) / (adv_volume / dec_volume)
+    Trading Index (Arms Index) = (adv_count / dec_count) / (adv_volume / dec_volume)
       < 0.7 → bullish (volume concentrated in advancers)
       0.7–1.3 → neutral
       > 1.3 → bearish (volume concentrated in decliners)
@@ -111,10 +111,10 @@ def _fetch_tick_trin() -> tuple[float | None, float | None, str]:
             tick_ibkr = _ibkr_val("$TICK")
             trin_ibkr = _ibkr_val("$TRIN")
             if tick_ibkr is not None or trin_ibkr is not None:
-                logger.info("TICK/TRIN from IBKR: tick=%s, trin=%s", tick_ibkr, trin_ibkr)
+                logger.info("TICK/Trading Index from IBKR: tick=%s, trin=%s", tick_ibkr, trin_ibkr)
                 return tick_ibkr, trin_ibkr, "ibkr"
     except Exception as exc:
-        logger.warning("IBKR TICK/TRIN failed (continuing to TV fallback): %s", exc)
+        logger.warning("IBKR TICK/Trading Index failed (continuing to TV fallback): %s", exc)
 
     # TradingView screener — compute from EOD change and volume
     try:
@@ -132,7 +132,7 @@ def _fetch_tick_trin() -> tuple[float | None, float | None, str]:
             .get_scanner_data()
         )
         if df is None or df.empty:
-            logger.warning("TICK/TRIN: TradingView returned empty DataFrame")
+            logger.warning("TICK/Trading Index: TradingView returned empty DataFrame")
             return None, None, "null"
 
         df = df.dropna(subset=["change", "volume"])
@@ -154,13 +154,13 @@ def _fetch_tick_trin() -> tuple[float | None, float | None, str]:
             trin = None
 
         logger.info(
-            "A/D Net: %+d (adv=%d, dec=%d)  |  TRIN: %s [tradingview]",
+            "A/D Net: %+d (adv=%d, dec=%d)  |  Trading Index: %s [tradingview]",
             ad_net, adv_n, dec_n, trin,
         )
         return float(ad_net), trin, "tradingview"
 
     except Exception as exc:
-        logger.warning("TICK/TRIN TradingView failed: %s", exc)
+        logger.warning("TICK/Trading Index TradingView failed: %s", exc)
         return None, None, "null"
 
 
@@ -169,8 +169,8 @@ def _fetch_tick_trin() -> tuple[float | None, float | None, str]:
 def _fetch_breadth() -> tuple[float | None, float | None, str]:
     """
     Call scraper._build_sp500_rs_universe() and extract:
-      breadth_50  → S5FI  (% above 50D MA)
-      breadth_200 → MMTH  (% above 200D MA)
+      breadth_50  → S&P 500 stocks above SMA50  (% above 50D MA)
+      breadth_200 → S&P stocks above SMA200  (% above 200D MA)
 
     Returns (s5fi, mmth, source_label).
     The universe download is slow (~30–60s); this is the canonical computation
@@ -183,7 +183,7 @@ def _fetch_breadth() -> tuple[float | None, float | None, str]:
         # Signature: (rs_dict, breadth_50, breadth_200, price_data, ...)
         breadth_50  = _round2(result[1])
         breadth_200 = _round2(result[2])
-        logger.info("S5FI (above 50D): %s%%  |  MMTH (above 200D): %s%%", breadth_50, breadth_200)
+        logger.info("S&P 500 stocks above SMA50 (above 50D): %s%%  |  S&P stocks above SMA200 (above 200D): %s%%", breadth_50, breadth_200)
         return breadth_50, breadth_200, "scraper"
     except Exception as exc:
         logger.error("Breadth computation failed: %s", exc)
@@ -321,7 +321,7 @@ def main() -> None:
         json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8"
     )
     logger.info(
-        "Done — VIX=%.2s  10Y=%.2s  S5FI=%.2s%%  MMTH=%.2s%%  → %s",
+        "Done — VIX=%.2s  10Y=%.2s  S&P500>SMA50=%.2s%%  S&P>SMA200=%.2s%%  → %s",
         result["vix"],
         result["yield_10y"],
         result["s5fi_50d"],
