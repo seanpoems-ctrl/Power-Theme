@@ -1,12 +1,14 @@
-# Thematic Scanner — runs at 6:45 AM Malaysia Mon–Fri (user's wake time)
-# 22:45 UTC = 6:45 AM Malaysia
-# workflow_dispatch bypasses ET-window check (manual trigger)
+# Thematic Scanner — runs at 6:45 AM Malaysia every day (user's wake time)
+# 22:45 UTC = 6:45 AM Malaysia (UTC+8)
+# On weekdays: full scrape using live session data
+# On weekends: scrape runs using last Friday close data from TradingView
+# workflow_dispatch bypasses trading-day check (manual trigger)
 name: Daily scrape & deploy
 
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "45 22 * * 1-5"   # 6:45 AM Malaysia (10:45 PM UTC)
+    - cron: "45 22 * * *"   # 6:45 AM Malaysia (10:45 PM UTC) — every day incl. weekends
 
 concurrency:
   group: pages-deploy
@@ -52,24 +54,30 @@ jobs:
           from zoneinfo import ZoneInfo
 
           is_manual = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
-
           et_now = datetime.now(ZoneInfo("America/New_York"))
+          today = date.today()
+          day_of_week = today.weekday()  # 0=Mon … 6=Sun
 
-          # For scheduled runs: only skip on NYSE holidays (not time-based)
-          # Cron already defines the run time — no ET window check needed
-          should_run = True
-          try:
-              import exchange_calendars as xcals
-              nyse = xcals.get_calendar("XNYS")
-              should_run = nyse.is_session(date.today().isoformat())
-          except Exception as e:
-              print(f"Calendar check failed ({e}) — defaulting to run")
+          # Weekends: always run — TradingView/Finviz data reflects last Friday close
+          # Weekdays: skip only on NYSE public holidays (not weekends — cron handles that)
+          if day_of_week >= 5:          # Saturday=5, Sunday=6
               should_run = True
+              reason = "weekend — using last close data"
+          else:
+              should_run = True
+              try:
+                  import exchange_calendars as xcals
+                  nyse = xcals.get_calendar("XNYS")
+                  should_run = nyse.is_session(today.isoformat())
+                  reason = "NYSE session" if should_run else "NYSE holiday — skipping"
+              except Exception as e:
+                  reason = f"calendar check failed ({e}) — defaulting to run"
 
           if is_manual:
               should_run = True
+              reason = "manual trigger"
 
-          print(f"ET: {et_now.strftime('%H:%M')} | trading_day: {should_run} | trigger: {'manual' if is_manual else 'scheduled'}")
+          print(f"ET: {et_now.strftime('%H:%M')} | should_run: {should_run} | reason: {reason}")
           with open(os.environ["GITHUB_OUTPUT"], "a") as f:
               f.write(f"is_trading_day={'true' if should_run else 'false'}\n")
           EOF

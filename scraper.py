@@ -2636,6 +2636,20 @@ def main():
 
     out_path = Path("public/thematic_data.json")
     out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Sanitise NaN/Inf before writing — json.dumps(allow_nan=False) raises ValueError
+    # if any float slips through from yfinance or division-by-zero. Replace with None.
+    import math as _math
+    def _sanitise(obj):
+        if isinstance(obj, float):
+            return None if (_math.isnan(obj) or _math.isinf(obj)) else obj
+        if isinstance(obj, dict):
+            return {k: _sanitise(v) for k, v in obj.items()}
+        if isinstance(obj, list):
+            return [_sanitise(v) for v in obj]
+        return obj
+
+    output = _sanitise(output)
     out_path.write_text(json.dumps(output, indent=2, ensure_ascii=False, allow_nan=False), encoding="utf-8")
 
     # Write public/ibkr_themes.json — non-fatal if IBKR is unavailable
