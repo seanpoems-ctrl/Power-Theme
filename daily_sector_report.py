@@ -107,8 +107,8 @@ No markdown, no explanation. JSON only."""
 
         client = genai.Client(api_key=GEMINI_API_KEY)
 
-        # OPTIMIZATION: Use 1.5 Flash (cheapest model, ~$0.075/1M input)
-        model = "gemini-1.5-flash" if USE_CHEAPER_MODEL else "gemini-2.5-flash"
+        # Use 2.0 Flash Lite (cheapest current model) or 2.5 Flash for deeper analysis
+        model = "gemini-2.0-flash-lite" if USE_CHEAPER_MODEL else "gemini-2.5-flash"
 
         response = client.models.generate_content(model=model, contents=prompt)
         raw = response.text.strip().replace("```json", "").replace("```", "").strip()
@@ -269,7 +269,7 @@ def main():
         "tsm": stock_signals.get("TSM", {}),
         "nvda": stock_signals.get("NVDA", {}),
         "buy_signal": buy_signal,
-        "cost_analysis": {"model": "gemini-1.5-flash", "estimated_monthly_cost_usd": 0.02},
+        "cost_analysis": {"model": "gemini-2.0-flash-lite", "estimated_monthly_cost_usd": 0.01},
     }
 
     # Save report
