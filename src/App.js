@@ -6048,10 +6048,11 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
   }, [mc, internalsData, bmLatest, todayKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
+    if (!mc) return;
     const cached = (() => { try { const r = JSON.parse(localStorage.getItem(MARKET_SITUATION_CACHE_KEY)); return r?.date === todayKey ? r.text : null; } catch { return null; } })();
     if (cached) { setText(cached); return; }
-    if (MARKET_SITUATION_GEMINI_KEY && mc) doFetch();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    if (MARKET_SITUATION_GEMINI_KEY) doFetch();
+  }, [mc]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!mc) return null;
 
@@ -6569,7 +6570,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
             <div key={m.label} className="flex-1 min-w-[100px] bg-zinc-900/60 border border-zinc-800/60 rounded-lg px-2.5 py-1.5">
               <div className="text-[11px] text-zinc-500 uppercase tracking-wider">{m.label}</div>
               <div className={`text-[15px] font-bold font-mono leading-tight ${m.color}`}>{m.value}</div>
-              {m.sub && <div className="text-[11px] text-zinc-600 truncate">{m.sub}</div>}
+              {m.sub && <div className="text-[11px] text-zinc-600 leading-tight">{m.sub}</div>}
             </div>
           ))}
         </div>
