@@ -3644,7 +3644,7 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
                 <span className="text-zinc-500">• Market Breadth: </span>
                 <span className="font-mono text-zinc-200">S&P above 50D {macro_breadth.s5fi.toFixed(1)}%</span>
                 {macro_breadth.mmth != null && (
-                  <> <span className="text-zinc-600">·</span> <span className="font-mono text-zinc-200">S&P stocks above SMA200 {macro_breadth.mmth.toFixed(1)}%</span></>
+                  <> <span className="text-zinc-600">·</span> <span className="font-mono text-zinc-200">% of Stocks Above 200D Avg {macro_breadth.mmth.toFixed(1)}%</span></>
                 )}
               </div>
             )}
@@ -6479,7 +6479,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
       color: mc.signal === "green" ? "text-emerald-400" : mc.signal === "yellow" ? "text-amber-400" : mc.signal === "red" ? "text-red-400" : "text-zinc-400",
     },
     {
-      label: "SMA50 Above",
+      label: "S&P stocks above 50 Day Average",
       value: s50?.above_pct != null ? `${s50.above_pct.toFixed(1)}%`
            : mc.breadth_50d  != null ? `${mc.breadth_50d.toFixed(1)}%`
            : internalsData?.s5fi_50d != null ? `${internalsData.s5fi_50d.toFixed(1)}%` : "—",
@@ -6488,7 +6488,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
            : (s50?.above_pct ?? mc.breadth_50d ?? internalsData?.s5fi_50d ?? 0) >= 40 ? "text-yellow-400" : "text-red-400",
     },
     {
-      label: "SMA200 Above",
+      label: "% of Stocks Above 200D Avg",
       value: s200?.above_pct != null ? `${s200.above_pct.toFixed(1)}%`
            : mc.breadth_200d  != null ? `${mc.breadth_200d.toFixed(1)}%`
            : internalsData?.mmth_200d != null ? `${internalsData.mmth_200d.toFixed(1)}%` : "—",
@@ -6560,8 +6560,8 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
     { label: "VIX",    value: internalsData?.vix      != null ? internalsData.vix.toFixed(2)      : "—", color: internalsData?.vix >= 25 ? "text-red-400" : internalsData?.vix <= 15 ? "text-emerald-400" : "text-zinc-300" },
     { label: "A/D Net", value: internalsData?.tick != null ? (internalsData.tick >= 0 ? `+${Math.round(internalsData.tick)}` : `${Math.round(internalsData.tick)}`) : "—", color: internalsData?.tick > 500 ? "text-emerald-400" : internalsData?.tick < -500 ? "text-red-400" : "text-zinc-300" },
     { label: "Trading Index",   value: internalsData?.trin     != null ? internalsData.trin.toFixed(2)     : "—", color: internalsData?.trin > 1.3 ? "text-red-400" : internalsData?.trin < 0.7 ? "text-emerald-400" : "text-zinc-300" },
-    { label: "S&P >50D", value: internalsData?.s5fi_50d  != null ? `${internalsData.s5fi_50d.toFixed(1)}%`  : mc.breadth_50d  != null ? `${mc.breadth_50d.toFixed(1)}%`  : "—", color: "text-zinc-300" },
-    { label: "S&P stocks above SMA200",   value: internalsData?.mmth_200d != null ? `${internalsData.mmth_200d.toFixed(1)}%` : mc.breadth_200d != null ? `${mc.breadth_200d.toFixed(1)}%` : "—", color: "text-zinc-300" },
+    { label: "S&P stocks above 50 Day Average", value: internalsData?.s5fi_50d  != null ? `${internalsData.s5fi_50d.toFixed(1)}%`  : mc.breadth_50d  != null ? `${mc.breadth_50d.toFixed(1)}%`  : "—", color: "text-zinc-300" },
+    { label: "% of Stocks Above 200D Avg",      value: internalsData?.mmth_200d != null ? `${internalsData.mmth_200d.toFixed(1)}%` : mc.breadth_200d != null ? `${mc.breadth_200d.toFixed(1)}%` : "—", color: "text-zinc-300" },
     { label: "10Y",    value: internalsData?.yield_10y != null ? `${internalsData.yield_10y.toFixed(2)}%` : "—", color: internalsData?.yield_10y >= 4.5 ? "text-red-400" : "text-zinc-300" },
   ];
 
@@ -11452,7 +11452,7 @@ const filtered = useMemo(() => {
                         <span className={breadthColor(breadth_50d)}>{breadth_50d.toFixed(1)}%</span>
                       </span></>}
                     {breadth_200d != null && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_200d', e)}>
-                        <span className="text-zinc-600">S&P stocks above SMA200</span>
+                        <span className="text-zinc-600">% of Stocks Above 200D Avg</span>
                         <span className={breadthColor(breadth_200d)}>{breadth_200d.toFixed(1)}%</span>
                       </span></>}
                     {credit_spread != null && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('credit_spread', e)}>
