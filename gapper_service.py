@@ -1387,7 +1387,7 @@ def main():
         "gappers":       output,
         "ibkr_scanner":  ibkr_scanner,
         "cost_analysis": {
-            "model": "gemini-1.5-flash",
+            "model": "gemini-2.0-flash-lite",
             "approach": "hybrid",
             "small_gaps": stats["small_gap"],
             "large_gaps": stats["large_gap"],

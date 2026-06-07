@@ -144,7 +144,7 @@ JSON format only:
         from google import genai
 
         client = genai.Client(api_key=GEMINI_API_KEY)
-        model = "gemini-1.5-flash" if USE_CHEAPER_MODEL else "gemini-2.5-flash"
+        model = "gemini-2.0-flash-lite" if USE_CHEAPER_MODEL else "gemini-2.5-flash"
 
         response = client.models.generate_content(model=model, contents=prompt)
         raw = response.text.strip().replace("```json", "").replace("```", "").strip()
@@ -302,7 +302,7 @@ def main():
         "date": today,
         "timestamp": now_et.isoformat(),
         "alerts": alerts,
-        "cost_analysis": {"model": "gemini-1.5-flash", "estimated_monthly_cost_usd": 0.001},
+        "cost_analysis": {"model": "gemini-2.0-flash-lite", "estimated_monthly_cost_usd": 0.001},
     }
 
     with open(out_file, "w") as f:

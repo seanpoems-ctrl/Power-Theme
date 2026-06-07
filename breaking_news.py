@@ -371,7 +371,7 @@ Output ONLY the JSON array. No markdown, no explanation."""
         client = genai.Client(api_key=GEMINI_API_KEY)
 
         # OPTIMIZATION: Use 1.5 Flash (same quality, half the tokens)
-        model = "gemini-1.5-flash" if USE_CHEAPER_MODEL else "gemini-2.5-flash"
+        model = "gemini-2.0-flash-lite" if USE_CHEAPER_MODEL else "gemini-2.5-flash"
 
         response = client.models.generate_content(
             model=model, contents=prompt
@@ -624,7 +624,7 @@ def main():
         "alerts":       merged,
         "seen_keys":    all_seen,   # persisted for cross-run dedup
         "cost_analysis": {
-            "model": "gemini-1.5-flash" if USE_CHEAPER_MODEL else "gemini-2.5-flash",
+            "model": "gemini-2.0-flash-lite" if USE_CHEAPER_MODEL else "gemini-2.5-flash",
             "coverage": "24/7 (optimized for Malaysia timezone)",
             "scan_interval_minutes": SCAN_INTERVAL_MINS,
             "scans_per_day": int((24 * 60) / SCAN_INTERVAL_MINS),

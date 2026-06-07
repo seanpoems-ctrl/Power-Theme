@@ -433,12 +433,12 @@ REGIME — (one-word regime label + what Stockbee would watch as the next leadin
 
     # Ordered fallback chain: try each model in sequence until one works.
     # gemini-2.5-flash is the primary (thinking model, highest quality).
-    # gemini-2.0-flash-lite and gemini-1.5-flash-8b are lightweight fallbacks
+    # gemini-2.0-flash-lite and gemini-2.0-flash-lite are lightweight fallbacks
     # that are less likely to be deprecated simultaneously.
     MODELS = [
         "gemini-2.5-flash",
         "gemini-2.0-flash-lite",
-        "gemini-1.5-flash-8b",
+        "gemini-2.0-flash-lite",
     ]
 
     try:
