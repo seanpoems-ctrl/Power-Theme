@@ -1,57 +1,57 @@
 {
-  "generated_at": "June 05, 2026 (18:17 EDT)",
-  "session": "Post-Market",
+  "generated_at": "June 08, 2026 (12:40 EDT)",
+  "session": "Market Hours",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7383.74,
-      "change": -200.57,
-      "change_pct": -2.64
+      "price": 7430.65,
+      "change": 46.91,
+      "change_pct": 0.64
     },
     {
       "label": "Nasdaq 100",
-      "price": 28957.6,
-      "change": -1450.21,
-      "change_pct": -4.77
+      "price": 29516.13,
+      "change": 558.53,
+      "change_pct": 1.93
     },
     {
       "label": "VIX",
-      "price": 21.51,
-      "change": 6.11,
+      "price": 18.4,
+      "change": -3.11,
       "change_pct": null,
-      "zone_label": "Elevated"
+      "zone_label": "Normal"
     },
     {
       "label": "10Y Yield",
-      "price": 4.54,
-      "change": 0.06,
+      "price": 4.56,
+      "change": 0.02,
       "change_pct": null,
-      "trend_label": "Rising"
+      "trend_label": "Stable"
     }
   ],
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 67470.69,
-      "change_pct": -1.36
+      "price": 66588.12,
+      "change_pct": -1.31
     },
     "dax": {
       "label": "DAX",
-      "price": 24944.95,
-      "change_pct": 0.6
+      "price": 24616.22,
+      "change_pct": -0.58
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10368.05,
-      "change_pct": 0.07
+      "price": 10373.2,
+      "change_pct": 0.05
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 54.2,
-    "mmth": 63.5,
+    "s5fi": 54.0,
+    "mmth": 61.1,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Sharp Distribution / Tech Capitulation",
+  "mood": "US Tech Surges / Global Mixed",
   "analysis": {
-    "action_line": "VIX 21.51 Elevated + S5FI 54.2% breadth + Nikkei -1.36% → remain highly defensive, focus on capital preservation and strong RS on pullbacks.",
-    "analysis_para1": "The global tape presented a mixed picture today, with the Nikkei 225 retreating by -1.36% while European markets like the DAX (+0.60%) and FTSE 100 (+0.07%) showed resilience. However, this global divergence offered little solace for US markets, which experienced a sharp sell-off. The rising 10-Year yield at 4.54% added pressure, particularly on growth-oriented sectors. US market breadth softened, with S5FI at 54.2% and MMTH at 63.5%, indicating a broadening but not yet critical erosion of underlying strength amidst today's distribution.",
-    "analysis_para2": "The immediate mechanical plan involves extreme caution following today's sharp sell-off. Traders should closely monitor for signs of stabilization around key psychological support levels on the S&P 500 and Nasdaq 100, though no major reversal patterns were confirmed today. A retest of today's lows or further breakdown would confirm continued distribution, while any bounce should be treated as suspect until VIX cools significantly below 20. Preserve capital by tightening stops on existing positions and avoid adding new exposure into this volatility, unless extreme relative strength names hold up at established support.",
-    "technical_signal": "No reversal pattern confirmed yet. Today's severe market decline and elevated VIX suggest ongoing distribution, not a bottoming process.",
+    "action_line": "VIX 18.40 Normal + 54.0% S&P above SMA50 breadth + mixed global tape (Nikkei weak) → trade RS leaders selectively near support.",
+    "analysis_para1": "Global markets present a mixed picture today, with Asian and European indices showing weakness as the Nikkei 225 fell -1.31% and the DAX declined -0.58%, while the FTSE 100 managed a slight gain of +0.05%. Despite this international softness, the US market is showing resilience, particularly in growth sectors. The 10Y Yield remains stable at 4.56%, however, the BAML HY Spread regime is currently unknown, limiting credit market insights. US market breadth is moderate, with 54.0% of S&P 500 stocks above their 50-day moving average and 61.1% above their 200-day moving average, indicating underlying health but not extreme overbought conditions.",
+    "analysis_para2": "Given the Nasdaq 100's strong performance, up +1.93% today, and the S&P 500's positive gains at 7430.65, the 'Mechanical Plan' focuses on continued strength in growth and tech. The VIX at 18.40 suggests a normal volatility environment, generally supportive of long positions in leading stocks. Traders should monitor the S&P 500 for sustained upward momentum, using current levels as a benchmark for market health. Focus on high-RS leaders from the Semiconductors and Hardware themes, looking for constructive pullbacks to established moving averages as entry points. Maintain disciplined risk management with tight stops.",
+    "technical_signal": "No reversal pattern confirmed yet. The market continues its upward trajectory led by tech and growth sectors, with moderate breadth and normal volatility.",
     "ticker_intel": [
+      {
+        "ticker": "VSH",
+        "company": "Vishay Intertechnology, Inc.",
+        "grade": "A+",
+        "reason": "Vishay Intertechnology is an A+ pick, demonstrating exceptional strength in the Semiconductors theme with RS 98 and a 1-month gain of +70.4%, indicating strong institutional buying in this growth-led regime."
+      },
       {
         "ticker": "UMAC",
         "company": "Unusual Machines, Inc.",
-        "grade": "A+",
-        "reason": "UMAC demonstrates exceptional leadership with RS 98 and a phenomenal 1-month return of +137.7%, indicating robust buying interest even amidst a broad market sell-off."
-      },
-      {
-        "ticker": "HIMX",
-        "company": "Himax Technologies, Inc.",
         "grade": "A",
-        "reason": "Himax maintains strong relative strength (RS 98) and a substantial 1-month gain of +96.5%, positioning it as a top performer within the resilient Semiconductors theme."
+        "reason": "Unusual Machines, Inc. is an A-grade candidate, leading the Hardware theme with RS 98 and a staggering +87.2% 1-month return, showcasing significant short-term momentum in the current environment."
       },
       {
-        "ticker": "UCTT",
-        "company": "Ultra Clean Holdings, Inc.",
+        "ticker": "KEEL",
+        "company": "Keel Infrastructure Corp.",
         "grade": "C",
-        "reason": "Despite an RS of 98, UCTT's comparatively modest 1-month return of +12.7% and 3-month return of +67.9% suggest it has less relative momentum and could be more vulnerable in a distributive market phase."
+        "reason": "Keel Infrastructure Corp. (KEEL) is a C-grade avoid as its RS of 94 and 1-month return of +24.5% are relatively weaker compared to other high-momentum candidates in this robust market, suggesting better opportunities elsewhere."
       }
     ]
   }
