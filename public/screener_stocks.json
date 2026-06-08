@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-06 10:35 ET",
+  "generated_at": "2026-06-07 20:08 ET",
   "count": 500,
-  "ss_etf_count": 31,
+  "ss_etf_count": 5,
   "stocks": [
     {
       "ticker": "MU",
@@ -25,25 +25,10 @@
       "perf_6m": 277.39,
       "perf_1y": 712.8,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "MUU",
-          "company": "Direxion Daily MU Bull 2X ETF",
-          "price": 661.33,
-          "change_pct": -26.65,
-          "avg_volume": 3605032,
-          "avg_dollar_volume": 2384115813,
-          "adr_pct": 15.8,
-          "adr_dvol": 37669029838,
-          "week52_high": 1081.71,
-          "week52_low": 16.73,
-          "pct_52w_range": 60.5,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 97,
       "rs_histogram": [
+        97,
         97
       ]
     },
@@ -69,55 +54,10 @@
       "perf_6m": 11.53,
       "perf_1y": 44.26,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "NVDL",
-          "company": "GraniteShares 2x Long NVDA Daily ETF",
-          "price": 95.91,
-          "change_pct": -12.37,
-          "avg_volume": 9976519,
-          "avg_dollar_volume": 956847947,
-          "adr_pct": 8.8,
-          "adr_dvol": 8420261933,
-          "week52_high": 129.82,
-          "week52_low": 56.52,
-          "pct_52w_range": 53.7,
-          "rvol": null,
-          "is_ss_etf": true
-        },
-        {
-          "ticker": "NVDS",
-          "company": "Tradr 1.5X Short NVDA Daily ETF",
-          "price": 22.19,
-          "change_pct": 9.53,
-          "avg_volume": 554785,
-          "avg_dollar_volume": 12310686,
-          "adr_pct": 5.58,
-          "adr_dvol": 68693627,
-          "week52_high": 51.57,
-          "week52_low": 18.29,
-          "pct_52w_range": 11.7,
-          "rvol": null,
-          "is_ss_etf": true
-        },
-        {
-          "ticker": "NVDU",
-          "company": "Direxion Daily NVDA Bull 2X ETF",
-          "price": 128.57,
-          "change_pct": -11.94,
-          "avg_volume": 669332,
-          "avg_dollar_volume": 86053992,
-          "adr_pct": 8.72,
-          "adr_dvol": 750390808,
-          "week52_high": 172.89,
-          "week52_low": 79.94,
-          "pct_52w_range": 52.3,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 62,
       "rs_histogram": [
+        62,
         62
       ]
     },
@@ -146,6 +86,7 @@
       "ss_etfs": [],
       "rs_score": 98,
       "rs_histogram": [
+        98,
         98
       ]
     },
@@ -174,6 +115,7 @@
       "ss_etfs": [],
       "rs_score": 99,
       "rs_histogram": [
+        99,
         99
       ]
     },
@@ -218,6 +160,7 @@
       ],
       "rs_score": 93,
       "rs_histogram": [
+        93,
         93
       ]
     },
@@ -246,6 +189,7 @@
       "ss_etfs": [],
       "rs_score": 95,
       "rs_histogram": [
+        95,
         95
       ]
     },
@@ -271,25 +215,10 @@
       "perf_6m": -0.11,
       "perf_1y": 46.69,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "AVGX",
-          "company": "Defiance Daily Target 2X Long AVGO ETF",
-          "price": 50.0,
-          "change_pct": -15.71,
-          "avg_volume": 2429147,
-          "avg_dollar_volume": 121457350,
-          "adr_pct": 13.7,
-          "adr_dvol": 1663965695,
-          "week52_high": 84.8,
-          "week52_low": 27.63,
-          "pct_52w_range": 39.1,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 43,
       "rs_histogram": [
+        43,
         43
       ]
     },
@@ -315,55 +244,10 @@
       "perf_6m": -13.69,
       "perf_1y": 21.24,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "TSLL",
-          "company": "Direxion Daily TSLA Bull 2X ETF",
-          "price": 12.72,
-          "change_pct": -13.11,
-          "avg_volume": 67990966,
-          "avg_dollar_volume": 864845093,
-          "adr_pct": 8.98,
-          "adr_dvol": 7766308932,
-          "week52_high": 23.74,
-          "week52_low": 9.56,
-          "pct_52w_range": 22.3,
-          "rvol": null,
-          "is_ss_etf": true
-        },
-        {
-          "ticker": "TSLS",
-          "company": "Direxion Daily TSLA Bear 1X ETF",
-          "price": 56.15,
-          "change_pct": 6.73,
-          "avg_volume": 260045,
-          "avg_dollar_volume": 14601566,
-          "adr_pct": 3.65,
-          "adr_dvol": 53295716,
-          "week52_high": 89.85,
-          "week52_low": 46.2,
-          "pct_52w_range": 22.8,
-          "rvol": null,
-          "is_ss_etf": true
-        },
-        {
-          "ticker": "TSLQ",
-          "company": "Tradr 2X Short TSLA Daily ETF",
-          "price": 20.27,
-          "change_pct": 13.18,
-          "avg_volume": 8055661,
-          "avg_dollar_volume": 163288253,
-          "adr_pct": 7.2,
-          "adr_dvol": 1175675418,
-          "week52_high": 72.54,
-          "week52_low": 14.78,
-          "pct_52w_range": 9.5,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 32,
       "rs_histogram": [
+        32,
         32
       ]
     },
@@ -392,6 +276,7 @@
       "ss_etfs": [],
       "rs_score": 89,
       "rs_histogram": [
+        89,
         89
       ]
     },
@@ -420,6 +305,7 @@
       "ss_etfs": [],
       "rs_score": 38,
       "rs_histogram": [
+        38,
         38
       ]
     },
@@ -448,6 +334,7 @@
       "ss_etfs": [],
       "rs_score": 98,
       "rs_histogram": [
+        98,
         98
       ]
     },
@@ -476,6 +363,7 @@
       "ss_etfs": [],
       "rs_score": 84,
       "rs_histogram": [
+        84,
         84
       ]
     },
@@ -501,40 +389,10 @@
       "perf_6m": -10.69,
       "perf_1y": -14.26,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "METU",
-          "company": "Direxion Daily META Bull 2X ETF",
-          "price": 22.93,
-          "change_pct": -11.09,
-          "avg_volume": 8444270,
-          "avg_dollar_volume": 193627118,
-          "adr_pct": 6.95,
-          "adr_dvol": 1345708470,
-          "week52_high": 51.2,
-          "week52_low": 18.62,
-          "pct_52w_range": 13.2,
-          "rvol": null,
-          "is_ss_etf": true
-        },
-        {
-          "ticker": "METD",
-          "company": "Direxion Daily META Bear 1X ETF",
-          "price": 16.83,
-          "change_pct": 5.72,
-          "avg_volume": 357451,
-          "avg_dollar_volume": 6015910,
-          "adr_pct": 2.88,
-          "adr_dvol": 17325822,
-          "week52_high": 19.54,
-          "week52_low": 13.45,
-          "pct_52w_range": 55.5,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 28,
       "rs_histogram": [
+        28,
         28
       ]
     },
@@ -563,6 +421,7 @@
       "ss_etfs": [],
       "rs_score": 95,
       "rs_histogram": [
+        95,
         95
       ]
     },
@@ -575,7 +434,7 @@
       "change_pct": -0.98,
       "avg_volume": 35609471,
       "avg_dollar_volume": 13123158421,
-      "market_cap_b": 4446.61,
+      "market_cap_b": 4450.04,
       "adr_pct": 2.72,
       "adr_dvol": 35694990906,
       "week52_high": 408.61,
@@ -588,40 +447,10 @@
       "perf_6m": 15.35,
       "perf_1y": 116.35,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "GGLL",
-          "company": "Direxion Daily GOOGL Bull 2X ETF",
-          "price": 123.33,
-          "change_pct": -2.08,
-          "avg_volume": 1863230,
-          "avg_dollar_volume": 229792156,
-          "adr_pct": 5.61,
-          "adr_dvol": 1289133995,
-          "week52_high": 153.0,
-          "week52_low": 29.75,
-          "pct_52w_range": 75.9,
-          "rvol": null,
-          "is_ss_etf": true
-        },
-        {
-          "ticker": "GGLS",
-          "company": "Direxion Daily GOOGL Bear 1X ETF",
-          "price": 5.61,
-          "change_pct": 1.26,
-          "avg_volume": 13216684,
-          "avg_dollar_volume": 74145599,
-          "adr_pct": 2.72,
-          "adr_dvol": 201676031,
-          "week52_high": 13.62,
-          "week52_low": 5.07,
-          "pct_52w_range": 6.4,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 65,
       "rs_histogram": [
+        65,
         65
       ]
     },
@@ -666,6 +495,7 @@
       ],
       "rs_score": 77,
       "rs_histogram": [
+        77,
         77
       ]
     },
@@ -691,40 +521,10 @@
       "perf_6m": -23.96,
       "perf_1y": 4.84,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "PLTU",
-          "company": "Direxion Daily PLTR Bull 2X ETF",
-          "price": 35.26,
-          "change_pct": -8.7,
-          "avg_volume": 4075774,
-          "avg_dollar_volume": 143711812,
-          "adr_pct": 11.43,
-          "adr_dvol": 1642626016,
-          "week52_high": 128.03,
-          "week52_low": 30.71,
-          "pct_52w_range": 4.7,
-          "rvol": null,
-          "is_ss_etf": true
-        },
-        {
-          "ticker": "PLTD",
-          "company": "Direxion Daily PLTR Bear 1X ETF",
-          "price": 7.75,
-          "change_pct": 4.36,
-          "avg_volume": 37172304,
-          "avg_dollar_volume": 288085361,
-          "adr_pct": 4.85,
-          "adr_dvol": 1397214003,
-          "week52_high": 10.39,
-          "week52_low": 5.87,
-          "pct_52w_range": 41.6,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 22,
       "rs_histogram": [
+        22,
         22
       ]
     },
@@ -769,6 +569,7 @@
       ],
       "rs_score": 78,
       "rs_histogram": [
+        78,
         78
       ]
     },
@@ -794,40 +595,10 @@
       "perf_6m": 6.82,
       "perf_1y": 17.41,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "AMZU",
-          "company": "Direxion Daily AMZN Bull 2X ETF",
-          "price": 36.25,
-          "change_pct": -6.19,
-          "avg_volume": 2949102,
-          "avg_dollar_volume": 106904969,
-          "adr_pct": 6.21,
-          "adr_dvol": 663879859,
-          "week52_high": 47.14,
-          "week52_low": 24.54,
-          "pct_52w_range": 51.8,
-          "rvol": null,
-          "is_ss_etf": true
-        },
-        {
-          "ticker": "AMZD",
-          "company": "Direxion Daily AMZN Bear 1X ETF",
-          "price": 9.26,
-          "change_pct": 3.18,
-          "avg_volume": 12167812,
-          "avg_dollar_volume": 112673943,
-          "adr_pct": 2.62,
-          "adr_dvol": 295205730,
-          "week52_high": 11.77,
-          "week52_low": 8.2,
-          "pct_52w_range": 29.8,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 46,
       "rs_histogram": [
+        46,
         46
       ]
     },
@@ -853,40 +624,10 @@
       "perf_6m": 9.55,
       "perf_1y": 51.03,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "AAPU",
-          "company": "Direxion Daily AAPL Bull 2X ETF",
-          "price": 40.23,
-          "change_pct": -2.57,
-          "avg_volume": 1553914,
-          "avg_dollar_volume": 62513960,
-          "adr_pct": 3.81,
-          "adr_dvol": 238178188,
-          "week52_high": 42.85,
-          "week52_low": 20.0,
-          "pct_52w_range": 88.5,
-          "rvol": null,
-          "is_ss_etf": true
-        },
-        {
-          "ticker": "AAPD",
-          "company": "Direxion Daily AAPL Bear 1X ETF",
-          "price": 11.53,
-          "change_pct": 1.32,
-          "avg_volume": 8395182,
-          "avg_dollar_volume": 96796454,
-          "adr_pct": 2.08,
-          "adr_dvol": 201336625,
-          "week52_high": 18.53,
-          "week52_low": 11.19,
-          "pct_52w_range": 4.7,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 69,
       "rs_histogram": [
+        69,
         69
       ]
     },
@@ -915,6 +656,7 @@
       "ss_etfs": [],
       "rs_score": 98,
       "rs_histogram": [
+        98,
         98
       ]
     },
@@ -940,25 +682,10 @@
       "perf_6m": 125.23,
       "perf_1y": 309.52,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "RKLX",
-          "company": "Defiance Daily Target 2X Long RKLB ETF",
-          "price": 57.86,
-          "change_pct": -16.39,
-          "avg_volume": 3479076,
-          "avg_dollar_volume": 201299343,
-          "adr_pct": 23.79,
-          "adr_dvol": 4788911373,
-          "week52_high": 114.83,
-          "week52_low": 9.96,
-          "pct_52w_range": 45.7,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 92,
       "rs_histogram": [
+        92,
         92
       ]
     },
@@ -987,6 +714,7 @@
       "ss_etfs": [],
       "rs_score": 37,
       "rs_histogram": [
+        37,
         37
       ]
     },
@@ -1015,6 +743,7 @@
       "ss_etfs": [],
       "rs_score": 72,
       "rs_histogram": [
+        72,
         72
       ]
     },
@@ -1043,6 +772,7 @@
       "ss_etfs": [],
       "rs_score": 61,
       "rs_histogram": [
+        61,
         61
       ]
     },
@@ -1055,7 +785,7 @@
       "change_pct": -0.95,
       "avg_volume": 27314465,
       "avg_dollar_volume": 9990538938,
-      "market_cap_b": 4454.26,
+      "market_cap_b": 4450.04,
       "adr_pct": 2.7,
       "adr_dvol": 26974455132,
       "week52_high": 404.47,
@@ -1068,40 +798,10 @@
       "perf_6m": 14.3,
       "perf_1y": 113.12,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "GGLL",
-          "company": "Direxion Daily GOOGL Bull 2X ETF",
-          "price": 123.33,
-          "change_pct": -2.08,
-          "avg_volume": 1863230,
-          "avg_dollar_volume": 229792156,
-          "adr_pct": 5.61,
-          "adr_dvol": 1289133995,
-          "week52_high": 153.0,
-          "week52_low": 29.75,
-          "pct_52w_range": 75.9,
-          "rvol": null,
-          "is_ss_etf": true
-        },
-        {
-          "ticker": "GGLS",
-          "company": "Direxion Daily GOOGL Bear 1X ETF",
-          "price": 5.61,
-          "change_pct": 1.26,
-          "avg_volume": 13216684,
-          "avg_dollar_volume": 74145599,
-          "adr_pct": 2.72,
-          "adr_dvol": 201676031,
-          "week52_high": 13.62,
-          "week52_low": 5.07,
-          "pct_52w_range": 6.4,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 64,
       "rs_histogram": [
+        64,
         64
       ]
     },
@@ -1130,6 +830,7 @@
       "ss_etfs": [],
       "rs_score": 91,
       "rs_histogram": [
+        91,
         91
       ]
     },
@@ -1158,6 +859,7 @@
       "ss_etfs": [],
       "rs_score": 87,
       "rs_histogram": [
+        87,
         87
       ]
     },
@@ -1186,6 +888,7 @@
       "ss_etfs": [],
       "rs_score": 68,
       "rs_histogram": [
+        68,
         68
       ]
     },
@@ -1211,40 +914,10 @@
       "perf_6m": -34.31,
       "perf_1y": -68.62,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "MSTU",
-          "company": "T-Rex 2X Long MSTR Daily Target ETF",
-          "price": 3.41,
-          "change_pct": -13.67,
-          "avg_volume": 44306491,
-          "avg_dollar_volume": 151085137,
-          "adr_pct": 24.45,
-          "adr_dvol": 3694031601,
-          "week52_high": 107.6,
-          "week52_low": 3.03,
-          "pct_52w_range": 0.4,
-          "rvol": null,
-          "is_ss_etf": true
-        },
-        {
-          "ticker": "MSTZ",
-          "company": "T-Rex 2X Inverse MSTR Daily Target ETF",
-          "price": 9.87,
-          "change_pct": 13.06,
-          "avg_volume": 25877823,
-          "avg_dollar_volume": 255414119,
-          "adr_pct": 9.6,
-          "adr_dvol": 2451975542,
-          "week52_high": 28.71,
-          "week52_low": 3.09,
-          "pct_52w_range": 26.5,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 4,
       "rs_histogram": [
+        4,
         4
       ]
     },
@@ -1273,6 +946,7 @@
       "ss_etfs": [],
       "rs_score": 95,
       "rs_histogram": [
+        95,
         95
       ]
     },
@@ -1301,6 +975,7 @@
       "ss_etfs": [],
       "rs_score": 45,
       "rs_histogram": [
+        45,
         45
       ]
     },
@@ -1329,6 +1004,7 @@
       "ss_etfs": [],
       "rs_score": 85,
       "rs_histogram": [
+        85,
         85
       ]
     },
@@ -1357,6 +1033,7 @@
       "ss_etfs": [],
       "rs_score": 1,
       "rs_histogram": [
+        1,
         1
       ]
     },
@@ -1385,6 +1062,7 @@
       "ss_etfs": [],
       "rs_score": 90,
       "rs_histogram": [
+        90,
         90
       ]
     },
@@ -1413,6 +1091,7 @@
       "ss_etfs": [],
       "rs_score": 96,
       "rs_histogram": [
+        96,
         96
       ]
     },
@@ -1438,25 +1117,10 @@
       "perf_6m": -38.94,
       "perf_1y": 12.13,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "HODU",
-          "company": "Direxion Daily HOOD Bull 2X ETF",
-          "price": 8.72,
-          "change_pct": -13.21,
-          "avg_volume": 358537,
-          "avg_dollar_volume": 3125512,
-          "adr_pct": 13.52,
-          "adr_dvol": 42256925,
-          "week52_high": 35.58,
-          "week52_low": 5.98,
-          "pct_52w_range": 9.2,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 32,
       "rs_histogram": [
+        32,
         32
       ]
     },
@@ -1482,25 +1146,10 @@
       "perf_6m": 5.15,
       "perf_1y": 45.22,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "IONX",
-          "company": "Defiance Daily Target 2X Long IONQ ETF",
-          "price": 62.24,
-          "change_pct": -26.97,
-          "avg_volume": 1623557,
-          "avg_dollar_volume": 101050237,
-          "adr_pct": 21.45,
-          "adr_dvol": 2167527594,
-          "week52_high": 311.87,
-          "week52_low": 16.81,
-          "pct_52w_range": 15.4,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 82,
       "rs_histogram": [
+        82,
         82
       ]
     },
@@ -1529,6 +1178,7 @@
       "ss_etfs": [],
       "rs_score": 50,
       "rs_histogram": [
+        50,
         50
       ]
     },
@@ -1557,6 +1207,7 @@
       "ss_etfs": [],
       "rs_score": 27,
       "rs_histogram": [
+        27,
         27
       ]
     },
@@ -1585,6 +1236,7 @@
       "ss_etfs": [],
       "rs_score": 97,
       "rs_histogram": [
+        97,
         97
       ]
     },
@@ -1610,25 +1262,10 @@
       "perf_6m": 67.91,
       "perf_1y": 177.55,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "AMAU",
-          "company": "Leverage Shares 2X Long AMAT Daily ETF",
-          "price": 15.12,
-          "change_pct": -19.45,
-          "avg_volume": 117883,
-          "avg_dollar_volume": 1782399,
-          "adr_pct": 10.11,
-          "adr_dvol": 18020049,
-          "week52_high": 19.44,
-          "week52_low": 11.96,
-          "pct_52w_range": 42.2,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 85,
       "rs_histogram": [
+        85,
         85
       ]
     },
@@ -1657,6 +1294,7 @@
       "ss_etfs": [],
       "rs_score": 2,
       "rs_histogram": [
+        2,
         2
       ]
     },
@@ -1685,6 +1323,7 @@
       "ss_etfs": [],
       "rs_score": 86,
       "rs_histogram": [
+        86,
         86
       ]
     },
@@ -1713,6 +1352,7 @@
       "ss_etfs": [],
       "rs_score": 83,
       "rs_histogram": [
+        83,
         83
       ]
     },
@@ -1741,6 +1381,7 @@
       "ss_etfs": [],
       "rs_score": 96,
       "rs_histogram": [
+        96,
         96
       ]
     },
@@ -1769,6 +1410,7 @@
       "ss_etfs": [],
       "rs_score": 87,
       "rs_histogram": [
+        87,
         87
       ]
     },
@@ -1781,7 +1423,7 @@
       "change_pct": -6.68,
       "avg_volume": 4205205,
       "avg_dollar_volume": 2821776659,
-      "market_cap_b": 170.8,
+      "market_cap_b": 170.82,
       "adr_pct": 5.23,
       "adr_dvol": 14757891927,
       "week52_high": 785.66,
@@ -1797,6 +1439,7 @@
       "ss_etfs": [],
       "rs_score": 88,
       "rs_histogram": [
+        88,
         88
       ]
     },
@@ -1825,6 +1468,7 @@
       "ss_etfs": [],
       "rs_score": 97,
       "rs_histogram": [
+        97,
         97
       ]
     },
@@ -1837,7 +1481,7 @@
       "change_pct": -13.71,
       "avg_volume": 53464072,
       "avg_dollar_volume": 1275118134,
-      "market_cap_b": 8.82,
+      "market_cap_b": 8.84,
       "adr_pct": 11.13,
       "adr_dvol": 14192064830,
       "week52_high": 46.75,
@@ -1853,6 +1497,7 @@
       "ss_etfs": [],
       "rs_score": 58,
       "rs_histogram": [
+        58,
         58
       ]
     },
@@ -1865,7 +1510,7 @@
       "change_pct": -2.58,
       "avg_volume": 10962720,
       "avg_dollar_volume": 2982408221,
-      "market_cap_b": 221.99,
+      "market_cap_b": 221.72,
       "adr_pct": 4.72,
       "adr_dvol": 14076966802,
       "week52_high": 302.95,
@@ -1881,6 +1526,7 @@
       "ss_etfs": [],
       "rs_score": 91,
       "rs_histogram": [
+        91,
         91
       ]
     },
@@ -1909,6 +1555,7 @@
       "ss_etfs": [],
       "rs_score": 5,
       "rs_histogram": [
+        5,
         5
       ]
     },
@@ -1937,6 +1584,7 @@
       "ss_etfs": [],
       "rs_score": 99,
       "rs_histogram": [
+        99,
         99
       ]
     },
@@ -1965,6 +1613,7 @@
       "ss_etfs": [],
       "rs_score": 11,
       "rs_histogram": [
+        11,
         11
       ]
     },
@@ -1977,7 +1626,7 @@
       "change_pct": -12.87,
       "avg_volume": 102885689,
       "avg_dollar_volume": 1073097736,
-      "market_cap_b": 5.17,
+      "market_cap_b": 5.29,
       "adr_pct": 11.75,
       "adr_dvol": 12608898401,
       "week52_high": 15.28,
@@ -1993,6 +1642,7 @@
       "ss_etfs": [],
       "rs_score": 55,
       "rs_histogram": [
+        55,
         55
       ]
     },
@@ -2021,6 +1671,7 @@
       "ss_etfs": [],
       "rs_score": 88,
       "rs_histogram": [
+        88,
         88
       ]
     },
@@ -2046,25 +1697,10 @@
       "perf_6m": -43.64,
       "perf_1y": -41.62,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "CONL",
-          "company": "GraniteShares 2x Long COIN Daily ETF",
-          "price": 4.8,
-          "change_pct": -14.44,
-          "avg_volume": 22243911,
-          "avg_dollar_volume": 106770776,
-          "adr_pct": 19.92,
-          "adr_dvol": 2126873861,
-          "week52_high": 72.35,
-          "week52_low": 4.48,
-          "pct_52w_range": 0.5,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 4,
       "rs_histogram": [
+        4,
         4
       ]
     },
@@ -2093,6 +1729,7 @@
       "ss_etfs": [],
       "rs_score": 84,
       "rs_histogram": [
+        84,
         84
       ]
     },
@@ -2121,6 +1758,7 @@
       "ss_etfs": [],
       "rs_score": 8,
       "rs_histogram": [
+        8,
         8
       ]
     },
@@ -2149,6 +1787,7 @@
       "ss_etfs": [],
       "rs_score": 76,
       "rs_histogram": [
+        76,
         76
       ]
     },
@@ -2177,6 +1816,7 @@
       "ss_etfs": [],
       "rs_score": 80,
       "rs_histogram": [
+        80,
         80
       ]
     },
@@ -2205,6 +1845,7 @@
       "ss_etfs": [],
       "rs_score": 92,
       "rs_histogram": [
+        92,
         92
       ]
     },
@@ -2233,6 +1874,7 @@
       "ss_etfs": [],
       "rs_score": 94,
       "rs_histogram": [
+        94,
         94
       ]
     },
@@ -2261,6 +1903,7 @@
       "ss_etfs": [],
       "rs_score": 97,
       "rs_histogram": [
+        97,
         97
       ]
     },
@@ -2289,6 +1932,7 @@
       "ss_etfs": [],
       "rs_score": 76,
       "rs_histogram": [
+        76,
         76
       ]
     },
@@ -2317,6 +1961,7 @@
       "ss_etfs": [],
       "rs_score": 37,
       "rs_histogram": [
+        37,
         37
       ]
     },
@@ -2345,6 +1990,7 @@
       "ss_etfs": [],
       "rs_score": 93,
       "rs_histogram": [
+        93,
         93
       ]
     },
@@ -2373,6 +2019,7 @@
       "ss_etfs": [],
       "rs_score": 66,
       "rs_histogram": [
+        66,
         66
       ]
     },
@@ -2401,6 +2048,7 @@
       "ss_etfs": [],
       "rs_score": 91,
       "rs_histogram": [
+        91,
         91
       ]
     },
@@ -2429,6 +2077,7 @@
       "ss_etfs": [],
       "rs_score": 86,
       "rs_histogram": [
+        86,
         86
       ]
     },
@@ -2457,6 +2106,7 @@
       "ss_etfs": [],
       "rs_score": 75,
       "rs_histogram": [
+        75,
         75
       ]
     },
@@ -2485,6 +2135,7 @@
       "ss_etfs": [],
       "rs_score": 14,
       "rs_histogram": [
+        14,
         14
       ]
     },
@@ -2529,6 +2180,7 @@
       ],
       "rs_score": 19,
       "rs_histogram": [
+        19,
         19
       ]
     },
@@ -2557,6 +2209,7 @@
       "ss_etfs": [],
       "rs_score": 82,
       "rs_histogram": [
+        82,
         82
       ]
     },
@@ -2585,6 +2238,7 @@
       "ss_etfs": [],
       "rs_score": 44,
       "rs_histogram": [
+        44,
         44
       ]
     },
@@ -2613,6 +2267,7 @@
       "ss_etfs": [],
       "rs_score": 51,
       "rs_histogram": [
+        51,
         51
       ]
     },
@@ -2641,6 +2296,7 @@
       "ss_etfs": [],
       "rs_score": 78,
       "rs_histogram": [
+        78,
         78
       ]
     },
@@ -2669,6 +2325,7 @@
       "ss_etfs": [],
       "rs_score": 71,
       "rs_histogram": [
+        71,
         71
       ]
     },
@@ -2697,6 +2354,7 @@
       "ss_etfs": [],
       "rs_score": 45,
       "rs_histogram": [
+        45,
         45
       ]
     },
@@ -2725,6 +2383,7 @@
       "ss_etfs": [],
       "rs_score": 89,
       "rs_histogram": [
+        89,
         89
       ]
     },
@@ -2753,6 +2412,7 @@
       "ss_etfs": [],
       "rs_score": 75,
       "rs_histogram": [
+        75,
         75
       ]
     },
@@ -2781,6 +2441,7 @@
       "ss_etfs": [],
       "rs_score": 92,
       "rs_histogram": [
+        92,
         92
       ]
     },
@@ -2809,6 +2470,7 @@
       "ss_etfs": [],
       "rs_score": 71,
       "rs_histogram": [
+        71,
         71
       ]
     },
@@ -2837,6 +2499,7 @@
       "ss_etfs": [],
       "rs_score": 60,
       "rs_histogram": [
+        60,
         60
       ]
     },
@@ -2865,6 +2528,7 @@
       "ss_etfs": [],
       "rs_score": 99,
       "rs_histogram": [
+        99,
         99
       ]
     },
@@ -2893,6 +2557,7 @@
       "ss_etfs": [],
       "rs_score": 92,
       "rs_histogram": [
+        92,
         92
       ]
     },
@@ -2921,6 +2586,7 @@
       "ss_etfs": [],
       "rs_score": 54,
       "rs_histogram": [
+        54,
         54
       ]
     },
@@ -2949,6 +2615,7 @@
       "ss_etfs": [],
       "rs_score": 80,
       "rs_histogram": [
+        80,
         80
       ]
     },
@@ -2977,6 +2644,7 @@
       "ss_etfs": [],
       "rs_score": 6,
       "rs_histogram": [
+        6,
         6
       ]
     },
@@ -3005,6 +2673,7 @@
       "ss_etfs": [],
       "rs_score": 17,
       "rs_histogram": [
+        17,
         17
       ]
     },
@@ -3033,6 +2702,7 @@
       "ss_etfs": [],
       "rs_score": 26,
       "rs_histogram": [
+        26,
         26
       ]
     },
@@ -3061,6 +2731,7 @@
       "ss_etfs": [],
       "rs_score": 72,
       "rs_histogram": [
+        72,
         72
       ]
     },
@@ -3089,6 +2760,7 @@
       "ss_etfs": [],
       "rs_score": 80,
       "rs_histogram": [
+        80,
         80
       ]
     },
@@ -3117,6 +2789,7 @@
       "ss_etfs": [],
       "rs_score": 5,
       "rs_histogram": [
+        5,
         5
       ]
     },
@@ -3145,6 +2818,7 @@
       "ss_etfs": [],
       "rs_score": 23,
       "rs_histogram": [
+        23,
         23
       ]
     },
@@ -3173,6 +2847,7 @@
       "ss_etfs": [],
       "rs_score": 90,
       "rs_histogram": [
+        90,
         90
       ]
     },
@@ -3201,6 +2876,7 @@
       "ss_etfs": [],
       "rs_score": 85,
       "rs_histogram": [
+        85,
         85
       ]
     },
@@ -3229,6 +2905,7 @@
       "ss_etfs": [],
       "rs_score": 38,
       "rs_histogram": [
+        38,
         38
       ]
     },
@@ -3257,6 +2934,7 @@
       "ss_etfs": [],
       "rs_score": 41,
       "rs_histogram": [
+        41,
         41
       ]
     },
@@ -3285,6 +2963,7 @@
       "ss_etfs": [],
       "rs_score": 2,
       "rs_histogram": [
+        2,
         2
       ]
     },
@@ -3313,6 +2992,7 @@
       "ss_etfs": [],
       "rs_score": 90,
       "rs_histogram": [
+        90,
         90
       ]
     },
@@ -3341,6 +3021,7 @@
       "ss_etfs": [],
       "rs_score": 6,
       "rs_histogram": [
+        6,
         6
       ]
     },
@@ -3369,6 +3050,7 @@
       "ss_etfs": [],
       "rs_score": 55,
       "rs_histogram": [
+        55,
         55
       ]
     },
@@ -3397,6 +3079,7 @@
       "ss_etfs": [],
       "rs_score": 56,
       "rs_histogram": [
+        56,
         56
       ]
     },
@@ -3425,6 +3108,7 @@
       "ss_etfs": [],
       "rs_score": 49,
       "rs_histogram": [
+        49,
         49
       ]
     },
@@ -3453,6 +3137,7 @@
       "ss_etfs": [],
       "rs_score": 61,
       "rs_histogram": [
+        61,
         61
       ]
     },
@@ -3481,6 +3166,7 @@
       "ss_etfs": [],
       "rs_score": 89,
       "rs_histogram": [
+        89,
         89
       ]
     },
@@ -3493,7 +3179,7 @@
       "change_pct": -10.83,
       "avg_volume": 8911920,
       "avg_dollar_volume": 673117363,
-      "market_cap_b": 42.03,
+      "market_cap_b": 41.42,
       "adr_pct": 7.18,
       "adr_dvol": 4832982666,
       "week52_high": 92.55,
@@ -3509,6 +3195,7 @@
       "ss_etfs": [],
       "rs_score": 88,
       "rs_histogram": [
+        88,
         88
       ]
     },
@@ -3537,6 +3224,7 @@
       "ss_etfs": [],
       "rs_score": 77,
       "rs_histogram": [
+        77,
         77
       ]
     },
@@ -3565,6 +3253,7 @@
       "ss_etfs": [],
       "rs_score": 96,
       "rs_histogram": [
+        96,
         96
       ]
     },
@@ -3593,6 +3282,7 @@
       "ss_etfs": [],
       "rs_score": 90,
       "rs_histogram": [
+        90,
         90
       ]
     },
@@ -3621,6 +3311,7 @@
       "ss_etfs": [],
       "rs_score": 35,
       "rs_histogram": [
+        35,
         35
       ]
     },
@@ -3649,6 +3340,7 @@
       "ss_etfs": [],
       "rs_score": 55,
       "rs_histogram": [
+        55,
         55
       ]
     },
@@ -3677,6 +3369,7 @@
       "ss_etfs": [],
       "rs_score": 26,
       "rs_histogram": [
+        26,
         26
       ]
     },
@@ -3705,6 +3398,7 @@
       "ss_etfs": [],
       "rs_score": 23,
       "rs_histogram": [
+        23,
         23
       ]
     },
@@ -3733,6 +3427,7 @@
       "ss_etfs": [],
       "rs_score": 96,
       "rs_histogram": [
+        96,
         96
       ]
     },
@@ -3761,6 +3456,7 @@
       "ss_etfs": [],
       "rs_score": 18,
       "rs_histogram": [
+        18,
         18
       ]
     },
@@ -3789,6 +3485,7 @@
       "ss_etfs": [],
       "rs_score": 95,
       "rs_histogram": [
+        95,
         95
       ]
     },
@@ -3817,6 +3514,7 @@
       "ss_etfs": [],
       "rs_score": 98,
       "rs_histogram": [
+        98,
         98
       ]
     },
@@ -3845,6 +3543,7 @@
       "ss_etfs": [],
       "rs_score": 32,
       "rs_histogram": [
+        32,
         32
       ]
     },
@@ -3873,6 +3572,7 @@
       "ss_etfs": [],
       "rs_score": 25,
       "rs_histogram": [
+        25,
         25
       ]
     },
@@ -3898,25 +3598,10 @@
       "perf_6m": 0.98,
       "perf_1y": -21.78,
       "rvol": null,
-      "ss_etfs": [
-        {
-          "ticker": "MRAL",
-          "company": "GraniteShares 2x Long MARA Daily ETF",
-          "price": 57.99,
-          "change_pct": -22.57,
-          "avg_volume": 123964,
-          "avg_dollar_volume": 7188672,
-          "adr_pct": 17.49,
-          "adr_dvol": 125729880,
-          "week52_high": 366.3,
-          "week52_low": 22.14,
-          "pct_52w_range": 10.4,
-          "rvol": null,
-          "is_ss_etf": true
-        }
-      ],
+      "ss_etfs": [],
       "rs_score": 71,
       "rs_histogram": [
+        71,
         71
       ]
     },
@@ -3929,7 +3614,7 @@
       "change_pct": 1.98,
       "avg_volume": 5613370,
       "avg_dollar_volume": 2740054493,
-      "market_cap_b": 1053.16,
+      "market_cap_b": 1053.51,
       "adr_pct": 1.46,
       "adr_dvol": 4000479560,
       "week52_high": 516.85,
@@ -3945,6 +3630,7 @@
       "ss_etfs": [],
       "rs_score": 46,
       "rs_histogram": [
+        46,
         46
       ]
     },
@@ -3973,6 +3659,7 @@
       "ss_etfs": [],
       "rs_score": 94,
       "rs_histogram": [
+        94,
         94
       ]
     },
@@ -4001,6 +3688,7 @@
       "ss_etfs": [],
       "rs_score": 75,
       "rs_histogram": [
+        75,
         75
       ]
     },
@@ -4029,6 +3717,7 @@
       "ss_etfs": [],
       "rs_score": 8,
       "rs_histogram": [
+        8,
         8
       ]
     },
@@ -4057,6 +3746,7 @@
       "ss_etfs": [],
       "rs_score": 70,
       "rs_histogram": [
+        70,
         70
       ]
     },
@@ -4085,6 +3775,7 @@
       "ss_etfs": [],
       "rs_score": 56,
       "rs_histogram": [
+        56,
         56
       ]
     },
@@ -4113,6 +3804,7 @@
       "ss_etfs": [],
       "rs_score": 93,
       "rs_histogram": [
+        93,
         93
       ]
     },
@@ -4141,6 +3833,7 @@
       "ss_etfs": [],
       "rs_score": 74,
       "rs_histogram": [
+        74,
         74
       ]
     },
@@ -4169,6 +3862,7 @@
       "ss_etfs": [],
       "rs_score": 64,
       "rs_histogram": [
+        64,
         64
       ]
     },
@@ -4197,6 +3891,7 @@
       "ss_etfs": [],
       "rs_score": 27,
       "rs_histogram": [
+        27,
         27
       ]
     },
@@ -4225,6 +3920,7 @@
       "ss_etfs": [],
       "rs_score": 18,
       "rs_histogram": [
+        18,
         18
       ]
     },
@@ -4253,6 +3949,7 @@
       "ss_etfs": [],
       "rs_score": 73,
       "rs_histogram": [
+        73,
         73
       ]
     },
@@ -4281,6 +3978,7 @@
       "ss_etfs": [],
       "rs_score": 39,
       "rs_histogram": [
+        39,
         39
       ]
     },
@@ -4309,6 +4007,7 @@
       "ss_etfs": [],
       "rs_score": 14,
       "rs_histogram": [
+        14,
         14
       ]
     },
@@ -4337,6 +4036,7 @@
       "ss_etfs": [],
       "rs_score": 82,
       "rs_histogram": [
+        82,
         82
       ]
     },
@@ -4365,6 +4065,7 @@
       "ss_etfs": [],
       "rs_score": 80,
       "rs_histogram": [
+        80,
         80
       ]
     },
@@ -4393,6 +4094,7 @@
       "ss_etfs": [],
       "rs_score": 61,
       "rs_histogram": [
+        61,
         61
       ]
     },
@@ -4421,6 +4123,7 @@
       "ss_etfs": [],
       "rs_score": 53,
       "rs_histogram": [
+        53,
         53
       ]
     },
@@ -4449,6 +4152,7 @@
       "ss_etfs": [],
       "rs_score": 49,
       "rs_histogram": [
+        49,
         49
       ]
     },
@@ -4477,6 +4181,7 @@
       "ss_etfs": [],
       "rs_score": 21,
       "rs_histogram": [
+        21,
         21
       ]
     },
@@ -4505,6 +4210,7 @@
       "ss_etfs": [],
       "rs_score": 10,
       "rs_histogram": [
+        10,
         10
       ]
     },
@@ -4533,6 +4239,7 @@
       "ss_etfs": [],
       "rs_score": 89,
       "rs_histogram": [
+        89,
         89
       ]
     },
@@ -4561,6 +4268,7 @@
       "ss_etfs": [],
       "rs_score": 46,
       "rs_histogram": [
+        46,
         46
       ]
     },
@@ -4589,6 +4297,7 @@
       "ss_etfs": [],
       "rs_score": 53,
       "rs_histogram": [
+        53,
         53
       ]
     },
@@ -4617,6 +4326,7 @@
       "ss_etfs": [],
       "rs_score": 20,
       "rs_histogram": [
+        20,
         20
       ]
     },
@@ -4645,6 +4355,7 @@
       "ss_etfs": [],
       "rs_score": 42,
       "rs_histogram": [
+        42,
         42
       ]
     },
@@ -4673,6 +4384,7 @@
       "ss_etfs": [],
       "rs_score": 79,
       "rs_histogram": [
+        79,
         79
       ]
     },
@@ -4701,6 +4413,7 @@
       "ss_etfs": [],
       "rs_score": 3,
       "rs_histogram": [
+        3,
         3
       ]
     },
@@ -4729,6 +4442,7 @@
       "ss_etfs": [],
       "rs_score": 27,
       "rs_histogram": [
+        27,
         27
       ]
     },
@@ -4757,6 +4471,7 @@
       "ss_etfs": [],
       "rs_score": 12,
       "rs_histogram": [
+        12,
         12
       ]
     },
@@ -4785,6 +4500,7 @@
       "ss_etfs": [],
       "rs_score": 15,
       "rs_histogram": [
+        15,
         15
       ]
     },
@@ -4813,6 +4529,7 @@
       "ss_etfs": [],
       "rs_score": 13,
       "rs_histogram": [
+        13,
         13
       ]
     },
@@ -4841,6 +4558,7 @@
       "ss_etfs": [],
       "rs_score": 15,
       "rs_histogram": [
+        15,
         15
       ]
     },
@@ -4869,6 +4587,7 @@
       "ss_etfs": [],
       "rs_score": 87,
       "rs_histogram": [
+        87,
         87
       ]
     },
@@ -4897,6 +4616,7 @@
       "ss_etfs": [],
       "rs_score": 36,
       "rs_histogram": [
+        36,
         36
       ]
     },
@@ -4925,6 +4645,7 @@
       "ss_etfs": [],
       "rs_score": 35,
       "rs_histogram": [
+        35,
         35
       ]
     },
@@ -4937,7 +4658,7 @@
       "change_pct": -8.56,
       "avg_volume": 5238884,
       "avg_dollar_volume": 598437742,
-      "market_cap_b": 13.66,
+      "market_cap_b": 13.56,
       "adr_pct": 4.85,
       "adr_dvol": 2902423050,
       "week52_high": 266.95,
@@ -4953,6 +4674,7 @@
       "ss_etfs": [],
       "rs_score": 5,
       "rs_histogram": [
+        5,
         5
       ]
     },
@@ -4981,6 +4703,7 @@
       "ss_etfs": [],
       "rs_score": 33,
       "rs_histogram": [
+        33,
         33
       ]
     },
@@ -5009,6 +4732,7 @@
       "ss_etfs": [],
       "rs_score": 59,
       "rs_histogram": [
+        59,
         59
       ]
     },
@@ -5037,6 +4761,7 @@
       "ss_etfs": [],
       "rs_score": 91,
       "rs_histogram": [
+        91,
         91
       ]
     },
@@ -5065,6 +4790,7 @@
       "ss_etfs": [],
       "rs_score": 34,
       "rs_histogram": [
+        34,
         34
       ]
     },
@@ -5093,6 +4819,7 @@
       "ss_etfs": [],
       "rs_score": 28,
       "rs_histogram": [
+        28,
         28
       ]
     },
@@ -5121,6 +4848,7 @@
       "ss_etfs": [],
       "rs_score": 72,
       "rs_histogram": [
+        72,
         72
       ]
     },
@@ -5149,6 +4877,7 @@
       "ss_etfs": [],
       "rs_score": 95,
       "rs_histogram": [
+        95,
         95
       ]
     },
@@ -5177,6 +4906,7 @@
       "ss_etfs": [],
       "rs_score": 16,
       "rs_histogram": [
+        16,
         16
       ]
     },
@@ -5205,6 +4935,7 @@
       "ss_etfs": [],
       "rs_score": 11,
       "rs_histogram": [
+        11,
         11
       ]
     },
@@ -5233,6 +4964,7 @@
       "ss_etfs": [],
       "rs_score": 23,
       "rs_histogram": [
+        23,
         23
       ]
     },
@@ -5261,6 +4993,7 @@
       "ss_etfs": [],
       "rs_score": 4,
       "rs_histogram": [
+        4,
         4
       ]
     },
@@ -5289,6 +5022,7 @@
       "ss_etfs": [],
       "rs_score": 68,
       "rs_histogram": [
+        68,
         68
       ]
     },
@@ -5317,6 +5051,7 @@
       "ss_etfs": [],
       "rs_score": 47,
       "rs_histogram": [
+        47,
         47
       ]
     },
@@ -5345,6 +5080,7 @@
       "ss_etfs": [],
       "rs_score": 18,
       "rs_histogram": [
+        18,
         18
       ]
     },
@@ -5373,6 +5109,7 @@
       "ss_etfs": [],
       "rs_score": 94,
       "rs_histogram": [
+        94,
         94
       ]
     },
@@ -5401,6 +5138,7 @@
       "ss_etfs": [],
       "rs_score": 55,
       "rs_histogram": [
+        55,
         55
       ]
     },
@@ -5429,6 +5167,7 @@
       "ss_etfs": [],
       "rs_score": 29,
       "rs_histogram": [
+        29,
         29
       ]
     },
@@ -5457,6 +5196,7 @@
       "ss_etfs": [],
       "rs_score": 24,
       "rs_histogram": [
+        24,
         24
       ]
     },
@@ -5485,6 +5225,7 @@
       "ss_etfs": [],
       "rs_score": 25,
       "rs_histogram": [
+        25,
         25
       ]
     },
@@ -5513,6 +5254,7 @@
       "ss_etfs": [],
       "rs_score": 36,
       "rs_histogram": [
+        36,
         36
       ]
     },
@@ -5541,6 +5283,7 @@
       "ss_etfs": [],
       "rs_score": 56,
       "rs_histogram": [
+        56,
         56
       ]
     },
@@ -5569,6 +5312,7 @@
       "ss_etfs": [],
       "rs_score": 74,
       "rs_histogram": [
+        74,
         74
       ]
     },
@@ -5597,6 +5341,7 @@
       "ss_etfs": [],
       "rs_score": 50,
       "rs_histogram": [
+        50,
         50
       ]
     },
@@ -5625,6 +5370,7 @@
       "ss_etfs": [],
       "rs_score": 41,
       "rs_histogram": [
+        41,
         41
       ]
     },
@@ -5653,6 +5399,7 @@
       "ss_etfs": [],
       "rs_score": 87,
       "rs_histogram": [
+        87,
         87
       ]
     },
@@ -5681,6 +5428,7 @@
       "ss_etfs": [],
       "rs_score": 77,
       "rs_histogram": [
+        77,
         77
       ]
     },
@@ -5709,6 +5457,7 @@
       "ss_etfs": [],
       "rs_score": 92,
       "rs_histogram": [
+        92,
         92
       ]
     },
@@ -5737,6 +5486,7 @@
       "ss_etfs": [],
       "rs_score": 12,
       "rs_histogram": [
+        12,
         12
       ]
     },
@@ -5765,6 +5515,7 @@
       "ss_etfs": [],
       "rs_score": 42,
       "rs_histogram": [
+        42,
         42
       ]
     },
@@ -5793,6 +5544,7 @@
       "ss_etfs": [],
       "rs_score": 17,
       "rs_histogram": [
+        17,
         17
       ]
     },
@@ -5821,6 +5573,7 @@
       "ss_etfs": [],
       "rs_score": 29,
       "rs_histogram": [
+        29,
         29
       ]
     },
@@ -5849,6 +5602,7 @@
       "ss_etfs": [],
       "rs_score": 72,
       "rs_histogram": [
+        72,
         72
       ]
     },
@@ -5877,6 +5631,7 @@
       "ss_etfs": [],
       "rs_score": 60,
       "rs_histogram": [
+        60,
         60
       ]
     },
@@ -5905,6 +5660,7 @@
       "ss_etfs": [],
       "rs_score": 3,
       "rs_histogram": [
+        3,
         3
       ]
     },
@@ -5933,6 +5689,7 @@
       "ss_etfs": [],
       "rs_score": 33,
       "rs_histogram": [
+        33,
         33
       ]
     },
@@ -5961,6 +5718,7 @@
       "ss_etfs": [],
       "rs_score": 40,
       "rs_histogram": [
+        40,
         40
       ]
     },
@@ -5989,6 +5747,7 @@
       "ss_etfs": [],
       "rs_score": 43,
       "rs_histogram": [
+        43,
         43
       ]
     },
@@ -6001,7 +5760,7 @@
       "change_pct": -10.12,
       "avg_volume": 24375854,
       "avg_dollar_volume": 207926042,
-      "market_cap_b": 1.15,
+      "market_cap_b": 1.23,
       "adr_pct": 10.77,
       "adr_dvol": 2239363476,
       "week52_high": 11.62,
@@ -6017,6 +5776,7 @@
       "ss_etfs": [],
       "rs_score": 94,
       "rs_histogram": [
+        94,
         94
       ]
     },
@@ -6045,6 +5805,7 @@
       "ss_etfs": [],
       "rs_score": 28,
       "rs_histogram": [
+        28,
         28
       ]
     },
@@ -6073,6 +5834,7 @@
       "ss_etfs": [],
       "rs_score": 94,
       "rs_histogram": [
+        94,
         94
       ]
     },
@@ -6101,6 +5863,7 @@
       "ss_etfs": [],
       "rs_score": 91,
       "rs_histogram": [
+        91,
         91
       ]
     },
@@ -6129,6 +5892,7 @@
       "ss_etfs": [],
       "rs_score": 2,
       "rs_histogram": [
+        2,
         2
       ]
     },
@@ -6157,6 +5921,7 @@
       "ss_etfs": [],
       "rs_score": 21,
       "rs_histogram": [
+        21,
         21
       ]
     },
@@ -6185,6 +5950,7 @@
       "ss_etfs": [],
       "rs_score": 12,
       "rs_histogram": [
+        12,
         12
       ]
     },
@@ -6213,6 +5979,7 @@
       "ss_etfs": [],
       "rs_score": 19,
       "rs_histogram": [
+        19,
         19
       ]
     },
@@ -6241,6 +6008,7 @@
       "ss_etfs": [],
       "rs_score": 52,
       "rs_histogram": [
+        52,
         52
       ]
     },
@@ -6269,6 +6037,7 @@
       "ss_etfs": [],
       "rs_score": 74,
       "rs_histogram": [
+        74,
         74
       ]
     },
@@ -6297,6 +6066,7 @@
       "ss_etfs": [],
       "rs_score": 58,
       "rs_histogram": [
+        58,
         58
       ]
     },
@@ -6325,6 +6095,7 @@
       "ss_etfs": [],
       "rs_score": 81,
       "rs_histogram": [
+        81,
         81
       ]
     },
@@ -6353,6 +6124,7 @@
       "ss_etfs": [],
       "rs_score": 63,
       "rs_histogram": [
+        63,
         63
       ]
     },
@@ -6381,6 +6153,7 @@
       "ss_etfs": [],
       "rs_score": 48,
       "rs_histogram": [
+        48,
         48
       ]
     },
@@ -6409,6 +6182,7 @@
       "ss_etfs": [],
       "rs_score": 13,
       "rs_histogram": [
+        13,
         13
       ]
     },
@@ -6437,6 +6211,7 @@
       "ss_etfs": [],
       "rs_score": 47,
       "rs_histogram": [
+        47,
         47
       ]
     },
@@ -6465,6 +6240,7 @@
       "ss_etfs": [],
       "rs_score": 65,
       "rs_histogram": [
+        65,
         65
       ]
     },
@@ -6493,6 +6269,7 @@
       "ss_etfs": [],
       "rs_score": 45,
       "rs_histogram": [
+        45,
         45
       ]
     },
@@ -6521,6 +6298,7 @@
       "ss_etfs": [],
       "rs_score": 3,
       "rs_histogram": [
+        3,
         3
       ]
     },
@@ -6549,6 +6327,7 @@
       "ss_etfs": [],
       "rs_score": 67,
       "rs_histogram": [
+        67,
         67
       ]
     },
@@ -6577,6 +6356,7 @@
       "ss_etfs": [],
       "rs_score": 24,
       "rs_histogram": [
+        24,
         24
       ]
     },
@@ -6605,6 +6385,7 @@
       "ss_etfs": [],
       "rs_score": 6,
       "rs_histogram": [
+        6,
         6
       ]
     },
@@ -6633,6 +6414,7 @@
       "ss_etfs": [],
       "rs_score": 65,
       "rs_histogram": [
+        65,
         65
       ]
     },
@@ -6661,6 +6443,7 @@
       "ss_etfs": [],
       "rs_score": 42,
       "rs_histogram": [
+        42,
         42
       ]
     },
@@ -6689,6 +6472,7 @@
       "ss_etfs": [],
       "rs_score": 46,
       "rs_histogram": [
+        46,
         46
       ]
     },
@@ -6717,6 +6501,7 @@
       "ss_etfs": [],
       "rs_score": 66,
       "rs_histogram": [
+        66,
         66
       ]
     },
@@ -6745,6 +6530,7 @@
       "ss_etfs": [],
       "rs_score": 34,
       "rs_histogram": [
+        34,
         34
       ]
     },
@@ -6773,6 +6559,7 @@
       "ss_etfs": [],
       "rs_score": 35,
       "rs_histogram": [
+        35,
         35
       ]
     },
@@ -6801,6 +6588,7 @@
       "ss_etfs": [],
       "rs_score": 31,
       "rs_histogram": [
+        31,
         31
       ]
     },
@@ -6829,6 +6617,7 @@
       "ss_etfs": [],
       "rs_score": 58,
       "rs_histogram": [
+        58,
         58
       ]
     },
@@ -6857,6 +6646,7 @@
       "ss_etfs": [],
       "rs_score": 60,
       "rs_histogram": [
+        60,
         60
       ]
     },
@@ -6885,6 +6675,7 @@
       "ss_etfs": [],
       "rs_score": 77,
       "rs_histogram": [
+        77,
         77
       ]
     },
@@ -6913,6 +6704,7 @@
       "ss_etfs": [],
       "rs_score": 4,
       "rs_histogram": [
+        4,
         4
       ]
     },
@@ -6941,6 +6733,7 @@
       "ss_etfs": [],
       "rs_score": 83,
       "rs_histogram": [
+        83,
         83
       ]
     },
@@ -6969,6 +6762,7 @@
       "ss_etfs": [],
       "rs_score": 70,
       "rs_histogram": [
+        70,
         70
       ]
     },
@@ -6997,6 +6791,7 @@
       "ss_etfs": [],
       "rs_score": 77,
       "rs_histogram": [
+        77,
         77
       ]
     },
@@ -7025,6 +6820,7 @@
       "ss_etfs": [],
       "rs_score": 44,
       "rs_histogram": [
+        44,
         44
       ]
     },
@@ -7053,6 +6849,7 @@
       "ss_etfs": [],
       "rs_score": 24,
       "rs_histogram": [
+        24,
         24
       ]
     },
@@ -7081,6 +6878,7 @@
       "ss_etfs": [],
       "rs_score": 79,
       "rs_histogram": [
+        79,
         79
       ]
     },
@@ -7109,6 +6907,7 @@
       "ss_etfs": [],
       "rs_score": 9,
       "rs_histogram": [
+        9,
         9
       ]
     },
@@ -7137,6 +6936,7 @@
       "ss_etfs": [],
       "rs_score": 20,
       "rs_histogram": [
+        20,
         20
       ]
     },
@@ -7165,6 +6965,7 @@
       "ss_etfs": [],
       "rs_score": 68,
       "rs_histogram": [
+        68,
         68
       ]
     },
@@ -7193,6 +6994,7 @@
       "ss_etfs": [],
       "rs_score": 38,
       "rs_histogram": [
+        38,
         38
       ]
     },
@@ -7221,6 +7023,7 @@
       "ss_etfs": [],
       "rs_score": 76,
       "rs_histogram": [
+        76,
         76
       ]
     },
@@ -7249,6 +7052,7 @@
       "ss_etfs": [],
       "rs_score": 79,
       "rs_histogram": [
+        79,
         79
       ]
     },
@@ -7277,6 +7081,7 @@
       "ss_etfs": [],
       "rs_score": 54,
       "rs_histogram": [
+        54,
         54
       ]
     },
@@ -7289,7 +7094,7 @@
       "change_pct": 0.91,
       "avg_volume": 9170447,
       "avg_dollar_volume": 285384311,
-      "market_cap_b": 5.25,
+      "market_cap_b": 5.26,
       "adr_pct": 5.8,
       "adr_dvol": 1655229002,
       "week52_high": 52.38,
@@ -7305,6 +7110,7 @@
       "ss_etfs": [],
       "rs_score": 75,
       "rs_histogram": [
+        75,
         75
       ]
     },
@@ -7333,6 +7139,7 @@
       "ss_etfs": [],
       "rs_score": 74,
       "rs_histogram": [
+        74,
         74
       ]
     },
@@ -7361,6 +7168,7 @@
       "ss_etfs": [],
       "rs_score": 66,
       "rs_histogram": [
+        66,
         66
       ]
     },
@@ -7389,6 +7197,7 @@
       "ss_etfs": [],
       "rs_score": 23,
       "rs_histogram": [
+        23,
         23
       ]
     },
@@ -7417,6 +7226,7 @@
       "ss_etfs": [],
       "rs_score": 72,
       "rs_histogram": [
+        72,
         72
       ]
     },
@@ -7445,6 +7255,7 @@
       "ss_etfs": [],
       "rs_score": 57,
       "rs_histogram": [
+        57,
         57
       ]
     },
@@ -7473,6 +7284,7 @@
       "ss_etfs": [],
       "rs_score": 7,
       "rs_histogram": [
+        7,
         7
       ]
     },
@@ -7501,6 +7313,7 @@
       "ss_etfs": [],
       "rs_score": 41,
       "rs_histogram": [
+        41,
         41
       ]
     },
@@ -7529,6 +7342,7 @@
       "ss_etfs": [],
       "rs_score": 21,
       "rs_histogram": [
+        21,
         21
       ]
     },
@@ -7557,6 +7371,7 @@
       "ss_etfs": [],
       "rs_score": 81,
       "rs_histogram": [
+        81,
         81
       ]
     },
@@ -7585,6 +7400,7 @@
       "ss_etfs": [],
       "rs_score": 33,
       "rs_histogram": [
+        33,
         33
       ]
     },
@@ -7613,6 +7429,7 @@
       "ss_etfs": [],
       "rs_score": 49,
       "rs_histogram": [
+        49,
         49
       ]
     },
@@ -7641,6 +7458,7 @@
       "ss_etfs": [],
       "rs_score": 70,
       "rs_histogram": [
+        70,
         70
       ]
     },
@@ -7669,6 +7487,7 @@
       "ss_etfs": [],
       "rs_score": 6,
       "rs_histogram": [
+        6,
         6
       ]
     },
@@ -7697,6 +7516,7 @@
       "ss_etfs": [],
       "rs_score": 84,
       "rs_histogram": [
+        84,
         84
       ]
     },
@@ -7725,6 +7545,7 @@
       "ss_etfs": [],
       "rs_score": 53,
       "rs_histogram": [
+        53,
         53
       ]
     },
@@ -7753,6 +7574,7 @@
       "ss_etfs": [],
       "rs_score": 71,
       "rs_histogram": [
+        71,
         71
       ]
     },
@@ -7781,6 +7603,7 @@
       "ss_etfs": [],
       "rs_score": 13,
       "rs_histogram": [
+        13,
         13
       ]
     },
@@ -7809,6 +7632,7 @@
       "ss_etfs": [],
       "rs_score": 11,
       "rs_histogram": [
+        11,
         11
       ]
     },
@@ -7837,6 +7661,7 @@
       "ss_etfs": [],
       "rs_score": 27,
       "rs_histogram": [
+        27,
         27
       ]
     },
@@ -7865,6 +7690,7 @@
       "ss_etfs": [],
       "rs_score": 83,
       "rs_histogram": [
+        83,
         83
       ]
     },
@@ -7893,6 +7719,7 @@
       "ss_etfs": [],
       "rs_score": 3,
       "rs_histogram": [
+        3,
         3
       ]
     },
@@ -7921,6 +7748,7 @@
       "ss_etfs": [],
       "rs_score": 32,
       "rs_histogram": [
+        32,
         32
       ]
     },
@@ -7949,6 +7777,7 @@
       "ss_etfs": [],
       "rs_score": 33,
       "rs_histogram": [
+        33,
         33
       ]
     },
@@ -7977,6 +7806,7 @@
       "ss_etfs": [],
       "rs_score": 6,
       "rs_histogram": [
+        6,
         6
       ]
     },
@@ -8005,6 +7835,7 @@
       "ss_etfs": [],
       "rs_score": 18,
       "rs_histogram": [
+        18,
         18
       ]
     },
@@ -8033,6 +7864,7 @@
       "ss_etfs": [],
       "rs_score": 73,
       "rs_histogram": [
+        73,
         73
       ]
     },
@@ -8061,6 +7893,7 @@
       "ss_etfs": [],
       "rs_score": 39,
       "rs_histogram": [
+        39,
         39
       ]
     },
@@ -8089,6 +7922,7 @@
       "ss_etfs": [],
       "rs_score": 62,
       "rs_histogram": [
+        62,
         62
       ]
     },
@@ -8117,6 +7951,7 @@
       "ss_etfs": [],
       "rs_score": 87,
       "rs_histogram": [
+        87,
         87
       ]
     },
@@ -8145,6 +7980,7 @@
       "ss_etfs": [],
       "rs_score": 63,
       "rs_histogram": [
+        63,
         63
       ]
     },
@@ -8173,6 +8009,7 @@
       "ss_etfs": [],
       "rs_score": 32,
       "rs_histogram": [
+        32,
         32
       ]
     },
@@ -8201,6 +8038,7 @@
       "ss_etfs": [],
       "rs_score": 52,
       "rs_histogram": [
+        52,
         52
       ]
     },
@@ -8229,6 +8067,7 @@
       "ss_etfs": [],
       "rs_score": 65,
       "rs_histogram": [
+        65,
         65
       ]
     },
@@ -8257,6 +8096,7 @@
       "ss_etfs": [],
       "rs_score": 48,
       "rs_histogram": [
+        48,
         48
       ]
     },
@@ -8285,6 +8125,7 @@
       "ss_etfs": [],
       "rs_score": 19,
       "rs_histogram": [
+        19,
         19
       ]
     },
@@ -8313,6 +8154,7 @@
       "ss_etfs": [],
       "rs_score": 76,
       "rs_histogram": [
+        76,
         76
       ]
     },
@@ -8341,6 +8183,7 @@
       "ss_etfs": [],
       "rs_score": 17,
       "rs_histogram": [
+        17,
         17
       ]
     },
@@ -8369,6 +8212,7 @@
       "ss_etfs": [],
       "rs_score": 21,
       "rs_histogram": [
+        21,
         21
       ]
     },
@@ -8397,6 +8241,7 @@
       "ss_etfs": [],
       "rs_score": 26,
       "rs_histogram": [
+        26,
         26
       ]
     },
@@ -8425,6 +8270,7 @@
       "ss_etfs": [],
       "rs_score": 19,
       "rs_histogram": [
+        19,
         19
       ]
     },
@@ -8453,6 +8299,7 @@
       "ss_etfs": [],
       "rs_score": 74,
       "rs_histogram": [
+        74,
         74
       ]
     },
@@ -8481,6 +8328,7 @@
       "ss_etfs": [],
       "rs_score": 44,
       "rs_histogram": [
+        44,
         44
       ]
     },
@@ -8509,6 +8357,7 @@
       "ss_etfs": [],
       "rs_score": 93,
       "rs_histogram": [
+        93,
         93
       ]
     },
@@ -8537,6 +8386,7 @@
       "ss_etfs": [],
       "rs_score": 96,
       "rs_histogram": [
+        96,
         96
       ]
     },
@@ -8565,6 +8415,7 @@
       "ss_etfs": [],
       "rs_score": 76,
       "rs_histogram": [
+        76,
         76
       ]
     },
@@ -8593,6 +8444,7 @@
       "ss_etfs": [],
       "rs_score": 79,
       "rs_histogram": [
+        79,
         79
       ]
     },
@@ -8621,6 +8473,7 @@
       "ss_etfs": [],
       "rs_score": 97,
       "rs_histogram": [
+        97,
         97
       ]
     },
@@ -8649,6 +8502,7 @@
       "ss_etfs": [],
       "rs_score": 70,
       "rs_histogram": [
+        70,
         70
       ]
     },
@@ -8677,6 +8531,7 @@
       "ss_etfs": [],
       "rs_score": 44,
       "rs_histogram": [
+        44,
         44
       ]
     },
@@ -8705,6 +8560,7 @@
       "ss_etfs": [],
       "rs_score": 8,
       "rs_histogram": [
+        8,
         8
       ]
     },
@@ -8733,6 +8589,7 @@
       "ss_etfs": [],
       "rs_score": 10,
       "rs_histogram": [
+        10,
         10
       ]
     },
@@ -8761,6 +8618,7 @@
       "ss_etfs": [],
       "rs_score": 14,
       "rs_histogram": [
+        14,
         14
       ]
     },
@@ -8789,6 +8647,7 @@
       "ss_etfs": [],
       "rs_score": 57,
       "rs_histogram": [
+        57,
         57
       ]
     },
@@ -8817,6 +8676,7 @@
       "ss_etfs": [],
       "rs_score": 20,
       "rs_histogram": [
+        20,
         20
       ]
     },
@@ -8845,6 +8705,7 @@
       "ss_etfs": [],
       "rs_score": 66,
       "rs_histogram": [
+        66,
         66
       ]
     },
@@ -8873,6 +8734,7 @@
       "ss_etfs": [],
       "rs_score": 40,
       "rs_histogram": [
+        40,
         40
       ]
     },
@@ -8901,6 +8763,7 @@
       "ss_etfs": [],
       "rs_score": 86,
       "rs_histogram": [
+        86,
         86
       ]
     },
@@ -8929,6 +8792,7 @@
       "ss_etfs": [],
       "rs_score": 59,
       "rs_histogram": [
+        59,
         59
       ]
     },
@@ -8957,6 +8821,7 @@
       "ss_etfs": [],
       "rs_score": 90,
       "rs_histogram": [
+        90,
         90
       ]
     },
@@ -8985,6 +8850,7 @@
       "ss_etfs": [],
       "rs_score": 31,
       "rs_histogram": [
+        31,
         31
       ]
     },
@@ -9013,6 +8879,7 @@
       "ss_etfs": [],
       "rs_score": 82,
       "rs_histogram": [
+        82,
         82
       ]
     },
@@ -9041,6 +8908,7 @@
       "ss_etfs": [],
       "rs_score": 49,
       "rs_histogram": [
+        49,
         49
       ]
     },
@@ -9069,6 +8937,7 @@
       "ss_etfs": [],
       "rs_score": 56,
       "rs_histogram": [
+        56,
         56
       ]
     },
@@ -9081,7 +8950,7 @@
       "change_pct": -2.39,
       "avg_volume": 5434336,
       "avg_dollar_volume": 190527827,
-      "market_cap_b": 8.03,
+      "market_cap_b": 8.04,
       "adr_pct": 5.05,
       "adr_dvol": 962165527,
       "week52_high": 93.88,
@@ -9097,6 +8966,7 @@
       "ss_etfs": [],
       "rs_score": 4,
       "rs_histogram": [
+        4,
         4
       ]
     },
@@ -9125,6 +8995,7 @@
       "ss_etfs": [],
       "rs_score": 58,
       "rs_histogram": [
+        58,
         58
       ]
     },
@@ -9153,6 +9024,7 @@
       "ss_etfs": [],
       "rs_score": 57,
       "rs_histogram": [
+        57,
         57
       ]
     },
@@ -9181,6 +9053,7 @@
       "ss_etfs": [],
       "rs_score": 64,
       "rs_histogram": [
+        64,
         64
       ]
     },
@@ -9193,7 +9066,7 @@
       "change_pct": -21.13,
       "avg_volume": 5335336,
       "avg_dollar_volume": 87019343,
-      "market_cap_b": 4.57,
+      "market_cap_b": 4.63,
       "adr_pct": 10.81,
       "adr_dvol": 940679100,
       "week52_high": 24.41,
@@ -9209,6 +9082,7 @@
       "ss_etfs": [],
       "rs_score": 69,
       "rs_histogram": [
+        69,
         69
       ]
     },
@@ -9237,6 +9111,7 @@
       "ss_etfs": [],
       "rs_score": 60,
       "rs_histogram": [
+        60,
         60
       ]
     },
@@ -9265,6 +9140,7 @@
       "ss_etfs": [],
       "rs_score": 48,
       "rs_histogram": [
+        48,
         48
       ]
     },
@@ -9293,6 +9169,7 @@
       "ss_etfs": [],
       "rs_score": 31,
       "rs_histogram": [
+        31,
         31
       ]
     },
@@ -9321,6 +9198,7 @@
       "ss_etfs": [],
       "rs_score": 17,
       "rs_histogram": [
+        17,
         17
       ]
     },
@@ -9349,6 +9227,7 @@
       "ss_etfs": [],
       "rs_score": 55,
       "rs_histogram": [
+        55,
         55
       ]
     },
@@ -9377,6 +9256,7 @@
       "ss_etfs": [],
       "rs_score": 17,
       "rs_histogram": [
+        17,
         17
       ]
     },
@@ -9405,6 +9285,7 @@
       "ss_etfs": [],
       "rs_score": 41,
       "rs_histogram": [
+        41,
         41
       ]
     },
@@ -9433,6 +9314,7 @@
       "ss_etfs": [],
       "rs_score": 17,
       "rs_histogram": [
+        17,
         17
       ]
     },
@@ -9461,6 +9343,7 @@
       "ss_etfs": [],
       "rs_score": 86,
       "rs_histogram": [
+        86,
         86
       ]
     },
@@ -9489,6 +9372,7 @@
       "ss_etfs": [],
       "rs_score": 45,
       "rs_histogram": [
+        45,
         45
       ]
     },
@@ -9517,6 +9401,7 @@
       "ss_etfs": [],
       "rs_score": 39,
       "rs_histogram": [
+        39,
         39
       ]
     },
@@ -9545,6 +9430,7 @@
       "ss_etfs": [],
       "rs_score": 47,
       "rs_histogram": [
+        47,
         47
       ]
     },
@@ -9573,6 +9459,7 @@
       "ss_etfs": [],
       "rs_score": 60,
       "rs_histogram": [
+        60,
         60
       ]
     },
@@ -9601,6 +9488,7 @@
       "ss_etfs": [],
       "rs_score": 57,
       "rs_histogram": [
+        57,
         57
       ]
     },
@@ -9629,6 +9517,7 @@
       "ss_etfs": [],
       "rs_score": 22,
       "rs_histogram": [
+        22,
         22
       ]
     },
@@ -9657,6 +9546,7 @@
       "ss_etfs": [],
       "rs_score": 24,
       "rs_histogram": [
+        24,
         24
       ]
     },
@@ -9685,6 +9575,7 @@
       "ss_etfs": [],
       "rs_score": 40,
       "rs_histogram": [
+        40,
         40
       ]
     },
@@ -9713,6 +9604,7 @@
       "ss_etfs": [],
       "rs_score": 53,
       "rs_histogram": [
+        53,
         53
       ]
     },
@@ -9741,6 +9633,7 @@
       "ss_etfs": [],
       "rs_score": 28,
       "rs_histogram": [
+        28,
         28
       ]
     },
@@ -9769,6 +9662,7 @@
       "ss_etfs": [],
       "rs_score": 23,
       "rs_histogram": [
+        23,
         23
       ]
     },
@@ -9797,6 +9691,7 @@
       "ss_etfs": [],
       "rs_score": 7,
       "rs_histogram": [
+        7,
         7
       ]
     },
@@ -9825,6 +9720,7 @@
       "ss_etfs": [],
       "rs_score": 14,
       "rs_histogram": [
+        14,
         14
       ]
     },
@@ -9853,6 +9749,7 @@
       "ss_etfs": [],
       "rs_score": 62,
       "rs_histogram": [
+        62,
         62
       ]
     },
@@ -9881,6 +9778,7 @@
       "ss_etfs": [],
       "rs_score": 37,
       "rs_histogram": [
+        37,
         37
       ]
     },
@@ -9909,6 +9807,7 @@
       "ss_etfs": [],
       "rs_score": 7,
       "rs_histogram": [
+        7,
         7
       ]
     },
@@ -9937,6 +9836,7 @@
       "ss_etfs": [],
       "rs_score": 34,
       "rs_histogram": [
+        34,
         34
       ]
     },
@@ -9965,6 +9865,7 @@
       "ss_etfs": [],
       "rs_score": 98,
       "rs_histogram": [
+        98,
         98
       ]
     },
@@ -9977,7 +9878,7 @@
       "change_pct": -3.78,
       "avg_volume": 8414388,
       "avg_dollar_volume": 186462843,
-      "market_cap_b": 5.84,
+      "market_cap_b": 5.83,
       "adr_pct": 4.28,
       "adr_dvol": 798060966,
       "week52_high": 24.41,
@@ -9993,6 +9894,7 @@
       "ss_etfs": [],
       "rs_score": 67,
       "rs_histogram": [
+        67,
         67
       ]
     },
@@ -10021,6 +9923,7 @@
       "ss_etfs": [],
       "rs_score": 81,
       "rs_histogram": [
+        81,
         81
       ]
     },
@@ -10049,6 +9952,7 @@
       "ss_etfs": [],
       "rs_score": 86,
       "rs_histogram": [
+        86,
         86
       ]
     },
@@ -10061,7 +9965,7 @@
       "change_pct": -5.27,
       "avg_volume": 7529615,
       "avg_dollar_volume": 212485735,
-      "market_cap_b": 53.15,
+      "market_cap_b": 52.72,
       "adr_pct": 3.68,
       "adr_dvol": 781947506,
       "week52_high": 32.07,
@@ -10077,6 +9981,7 @@
       "ss_etfs": [],
       "rs_score": 78,
       "rs_histogram": [
+        78,
         78
       ]
     },
@@ -10105,6 +10010,7 @@
       "ss_etfs": [],
       "rs_score": 52,
       "rs_histogram": [
+        52,
         52
       ]
     },
@@ -10133,6 +10039,7 @@
       "ss_etfs": [],
       "rs_score": 50,
       "rs_histogram": [
+        50,
         50
       ]
     },
@@ -10161,6 +10068,7 @@
       "ss_etfs": [],
       "rs_score": 25,
       "rs_histogram": [
+        25,
         25
       ]
     },
@@ -10189,6 +10097,7 @@
       "ss_etfs": [],
       "rs_score": 7,
       "rs_histogram": [
+        7,
         7
       ]
     },
@@ -10217,6 +10126,7 @@
       "ss_etfs": [],
       "rs_score": 36,
       "rs_histogram": [
+        36,
         36
       ]
     },
@@ -10245,6 +10155,7 @@
       "ss_etfs": [],
       "rs_score": 64,
       "rs_histogram": [
+        64,
         64
       ]
     },
@@ -10273,6 +10184,7 @@
       "ss_etfs": [],
       "rs_score": 30,
       "rs_histogram": [
+        30,
         30
       ]
     },
@@ -10301,6 +10213,7 @@
       "ss_etfs": [],
       "rs_score": 16,
       "rs_histogram": [
+        16,
         16
       ]
     },
@@ -10329,6 +10242,7 @@
       "ss_etfs": [],
       "rs_score": 35,
       "rs_histogram": [
+        35,
         35
       ]
     },
@@ -10357,6 +10271,7 @@
       "ss_etfs": [],
       "rs_score": 78,
       "rs_histogram": [
+        78,
         78
       ]
     },
@@ -10385,6 +10300,7 @@
       "ss_etfs": [],
       "rs_score": 38,
       "rs_histogram": [
+        38,
         38
       ]
     },
@@ -10413,6 +10329,7 @@
       "ss_etfs": [],
       "rs_score": 79,
       "rs_histogram": [
+        79,
         79
       ]
     },
@@ -10441,6 +10358,7 @@
       "ss_etfs": [],
       "rs_score": 39,
       "rs_histogram": [
+        39,
         39
       ]
     },
@@ -10469,6 +10387,7 @@
       "ss_etfs": [],
       "rs_score": 56,
       "rs_histogram": [
+        56,
         56
       ]
     },
@@ -10497,6 +10416,7 @@
       "ss_etfs": [],
       "rs_score": 57,
       "rs_histogram": [
+        57,
         57
       ]
     },
@@ -10525,6 +10445,7 @@
       "ss_etfs": [],
       "rs_score": 22,
       "rs_histogram": [
+        22,
         22
       ]
     },
@@ -10553,6 +10474,7 @@
       "ss_etfs": [],
       "rs_score": 48,
       "rs_histogram": [
+        48,
         48
       ]
     },
@@ -10581,6 +10503,7 @@
       "ss_etfs": [],
       "rs_score": 93,
       "rs_histogram": [
+        93,
         93
       ]
     },
@@ -10609,6 +10532,7 @@
       "ss_etfs": [],
       "rs_score": 27,
       "rs_histogram": [
+        27,
         27
       ]
     },
@@ -10637,6 +10561,7 @@
       "ss_etfs": [],
       "rs_score": 67,
       "rs_histogram": [
+        67,
         67
       ]
     },
@@ -10665,6 +10590,7 @@
       "ss_etfs": [],
       "rs_score": 63,
       "rs_histogram": [
+        63,
         63
       ]
     },
@@ -10693,6 +10619,7 @@
       "ss_etfs": [],
       "rs_score": 63,
       "rs_histogram": [
+        63,
         63
       ]
     },
@@ -10705,7 +10632,7 @@
       "change_pct": -3.13,
       "avg_volume": 7240122,
       "avg_dollar_volume": 111932294,
-      "market_cap_b": 1.74,
+      "market_cap_b": 1.75,
       "adr_pct": 5.96,
       "adr_dvol": 667116471,
       "week52_high": 25.22,
@@ -10721,6 +10648,7 @@
       "ss_etfs": [],
       "rs_score": 34,
       "rs_histogram": [
+        34,
         34
       ]
     },
@@ -10733,7 +10661,7 @@
       "change_pct": -3.94,
       "avg_volume": 7639805,
       "avg_dollar_volume": 73609525,
-      "market_cap_b": 3.92,
+      "market_cap_b": 3.89,
       "adr_pct": 9.05,
       "adr_dvol": 666166202,
       "week52_high": 27.99,
@@ -10749,6 +10677,7 @@
       "ss_etfs": [],
       "rs_score": 6,
       "rs_histogram": [
+        6,
         6
       ]
     },
@@ -10777,6 +10706,7 @@
       "ss_etfs": [],
       "rs_score": 47,
       "rs_histogram": [
+        47,
         47
       ]
     },
@@ -10805,6 +10735,7 @@
       "ss_etfs": [],
       "rs_score": 1,
       "rs_histogram": [
+        1,
         1
       ]
     },
@@ -10833,6 +10764,7 @@
       "ss_etfs": [],
       "rs_score": 38,
       "rs_histogram": [
+        38,
         38
       ]
     },
@@ -10861,6 +10793,7 @@
       "ss_etfs": [],
       "rs_score": 12,
       "rs_histogram": [
+        12,
         12
       ]
     },
@@ -10889,6 +10822,7 @@
       "ss_etfs": [],
       "rs_score": 22,
       "rs_histogram": [
+        22,
         22
       ]
     },
@@ -10917,6 +10851,7 @@
       "ss_etfs": [],
       "rs_score": 75,
       "rs_histogram": [
+        75,
         75
       ]
     },
@@ -10945,6 +10880,7 @@
       "ss_etfs": [],
       "rs_score": 40,
       "rs_histogram": [
+        40,
         40
       ]
     },
@@ -10973,6 +10909,7 @@
       "ss_etfs": [],
       "rs_score": 82,
       "rs_histogram": [
+        82,
         82
       ]
     },
@@ -11001,6 +10938,7 @@
       "ss_etfs": [],
       "rs_score": 81,
       "rs_histogram": [
+        81,
         81
       ]
     },
@@ -11045,6 +10983,7 @@
       ],
       "rs_score": 28,
       "rs_histogram": [
+        28,
         28
       ]
     },
@@ -11073,6 +11012,7 @@
       "ss_etfs": [],
       "rs_score": 12,
       "rs_histogram": [
+        12,
         12
       ]
     },
@@ -11101,6 +11041,7 @@
       "ss_etfs": [],
       "rs_score": 51,
       "rs_histogram": [
+        51,
         51
       ]
     },
@@ -11129,6 +11070,7 @@
       "ss_etfs": [],
       "rs_score": 73,
       "rs_histogram": [
+        73,
         73
       ]
     },
@@ -11157,6 +11099,7 @@
       "ss_etfs": [],
       "rs_score": 41,
       "rs_histogram": [
+        41,
         41
       ]
     },
@@ -11185,6 +11128,7 @@
       "ss_etfs": [],
       "rs_score": 9,
       "rs_histogram": [
+        9,
         9
       ]
     },
@@ -11213,6 +11157,7 @@
       "ss_etfs": [],
       "rs_score": 46,
       "rs_histogram": [
+        46,
         46
       ]
     },
@@ -11241,6 +11186,7 @@
       "ss_etfs": [],
       "rs_score": 58,
       "rs_histogram": [
+        58,
         58
       ]
     },
@@ -11269,6 +11215,7 @@
       "ss_etfs": [],
       "rs_score": 70,
       "rs_histogram": [
+        70,
         70
       ]
     },
@@ -11297,6 +11244,7 @@
       "ss_etfs": [],
       "rs_score": 36,
       "rs_histogram": [
+        36,
         36
       ]
     },
@@ -11325,6 +11273,7 @@
       "ss_etfs": [],
       "rs_score": 26,
       "rs_histogram": [
+        26,
         26
       ]
     },
@@ -11353,6 +11302,7 @@
       "ss_etfs": [],
       "rs_score": 85,
       "rs_histogram": [
+        85,
         85
       ]
     },
@@ -11381,6 +11331,7 @@
       "ss_etfs": [],
       "rs_score": 9,
       "rs_histogram": [
+        9,
         9
       ]
     },
@@ -11409,6 +11360,7 @@
       "ss_etfs": [],
       "rs_score": 63,
       "rs_histogram": [
+        63,
         63
       ]
     },
@@ -11437,6 +11389,7 @@
       "ss_etfs": [],
       "rs_score": 51,
       "rs_histogram": [
+        51,
         51
       ]
     },
@@ -11449,7 +11402,7 @@
       "change_pct": 1.33,
       "avg_volume": 3980169,
       "avg_dollar_volume": 188023188,
-      "market_cap_b": 12.69,
+      "market_cap_b": 12.7,
       "adr_pct": 2.98,
       "adr_dvol": 560309101,
       "week52_high": 78.16,
@@ -11465,6 +11418,7 @@
       "ss_etfs": [],
       "rs_score": 14,
       "rs_histogram": [
+        14,
         14
       ]
     },
@@ -11493,6 +11447,7 @@
       "ss_etfs": [],
       "rs_score": 21,
       "rs_histogram": [
+        21,
         21
       ]
     },
@@ -11521,6 +11476,7 @@
       "ss_etfs": [],
       "rs_score": 31,
       "rs_histogram": [
+        31,
         31
       ]
     },
@@ -11549,6 +11505,7 @@
       "ss_etfs": [],
       "rs_score": 68,
       "rs_histogram": [
+        68,
         68
       ]
     },
@@ -11577,6 +11534,7 @@
       "ss_etfs": [],
       "rs_score": 15,
       "rs_histogram": [
+        15,
         15
       ]
     },
@@ -11605,6 +11563,7 @@
       "ss_etfs": [],
       "rs_score": 61,
       "rs_histogram": [
+        61,
         61
       ]
     },
@@ -11633,6 +11592,7 @@
       "ss_etfs": [],
       "rs_score": 30,
       "rs_histogram": [
+        30,
         30
       ]
     },
@@ -11661,6 +11621,7 @@
       "ss_etfs": [],
       "rs_score": 83,
       "rs_histogram": [
+        83,
         83
       ]
     },
@@ -11689,6 +11650,7 @@
       "ss_etfs": [],
       "rs_score": 84,
       "rs_histogram": [
+        84,
         84
       ]
     },
@@ -11717,6 +11679,7 @@
       "ss_etfs": [],
       "rs_score": 59,
       "rs_histogram": [
+        59,
         59
       ]
     },
@@ -11745,6 +11708,7 @@
       "ss_etfs": [],
       "rs_score": 34,
       "rs_histogram": [
+        34,
         34
       ]
     },
@@ -11773,6 +11737,7 @@
       "ss_etfs": [],
       "rs_score": 89,
       "rs_histogram": [
+        89,
         89
       ]
     },
@@ -11801,6 +11766,7 @@
       "ss_etfs": [],
       "rs_score": 81,
       "rs_histogram": [
+        81,
         81
       ]
     },
@@ -11829,6 +11795,7 @@
       "ss_etfs": [],
       "rs_score": 43,
       "rs_histogram": [
+        43,
         43
       ]
     },
@@ -11857,6 +11824,7 @@
       "ss_etfs": [],
       "rs_score": 43,
       "rs_histogram": [
+        43,
         43
       ]
     },
@@ -11885,6 +11853,7 @@
       "ss_etfs": [],
       "rs_score": 16,
       "rs_histogram": [
+        16,
         16
       ]
     },
@@ -11913,6 +11882,7 @@
       "ss_etfs": [],
       "rs_score": 50,
       "rs_histogram": [
+        50,
         50
       ]
     },
@@ -11941,6 +11911,7 @@
       "ss_etfs": [],
       "rs_score": 48,
       "rs_histogram": [
+        48,
         48
       ]
     },
@@ -11969,6 +11940,7 @@
       "ss_etfs": [],
       "rs_score": 68,
       "rs_histogram": [
+        68,
         68
       ]
     },
@@ -11997,6 +11969,7 @@
       "ss_etfs": [],
       "rs_score": 9,
       "rs_histogram": [
+        9,
         9
       ]
     },
@@ -12025,6 +11998,7 @@
       "ss_etfs": [],
       "rs_score": 42,
       "rs_histogram": [
+        42,
         42
       ]
     },
@@ -12053,6 +12027,7 @@
       "ss_etfs": [],
       "rs_score": 29,
       "rs_histogram": [
+        29,
         29
       ]
     },
@@ -12065,7 +12040,7 @@
       "change_pct": -2.12,
       "avg_volume": 3832434,
       "avg_dollar_volume": 357949336,
-      "market_cap_b": 44.35,
+      "market_cap_b": 42.21,
       "adr_pct": 1.28,
       "adr_dvol": 458175150,
       "week52_high": 100.42,
@@ -12081,6 +12056,7 @@
       "ss_etfs": [],
       "rs_score": 29,
       "rs_histogram": [
+        29,
         29
       ]
     },
@@ -12109,6 +12085,7 @@
       "ss_etfs": [],
       "rs_score": 64,
       "rs_histogram": [
+        64,
         64
       ]
     },
@@ -12137,6 +12114,7 @@
       "ss_etfs": [],
       "rs_score": 40,
       "rs_histogram": [
+        40,
         40
       ]
     },
@@ -12165,6 +12143,7 @@
       "ss_etfs": [],
       "rs_score": 59,
       "rs_histogram": [
+        59,
         59
       ]
     },
@@ -12193,6 +12172,7 @@
       "ss_etfs": [],
       "rs_score": 20,
       "rs_histogram": [
+        20,
         20
       ]
     },
@@ -12221,6 +12201,7 @@
       "ss_etfs": [],
       "rs_score": 88,
       "rs_histogram": [
+        88,
         88
       ]
     },
@@ -12249,6 +12230,7 @@
       "ss_etfs": [],
       "rs_score": 37,
       "rs_histogram": [
+        37,
         37
       ]
     },
@@ -12277,6 +12259,7 @@
       "ss_etfs": [],
       "rs_score": 15,
       "rs_histogram": [
+        15,
         15
       ]
     },
@@ -12305,6 +12288,7 @@
       "ss_etfs": [],
       "rs_score": 26,
       "rs_histogram": [
+        26,
         26
       ]
     },
@@ -12333,6 +12317,7 @@
       "ss_etfs": [],
       "rs_score": 69,
       "rs_histogram": [
+        69,
         69
       ]
     },
@@ -12361,6 +12346,7 @@
       "ss_etfs": [],
       "rs_score": 83,
       "rs_histogram": [
+        83,
         83
       ]
     },
@@ -12389,6 +12375,7 @@
       "ss_etfs": [],
       "rs_score": 29,
       "rs_histogram": [
+        29,
         29
       ]
     },
@@ -12417,6 +12404,7 @@
       "ss_etfs": [],
       "rs_score": 51,
       "rs_histogram": [
+        51,
         51
       ]
     },
@@ -12445,6 +12433,7 @@
       "ss_etfs": [],
       "rs_score": 10,
       "rs_histogram": [
+        10,
         10
       ]
     },
@@ -12473,6 +12462,7 @@
       "ss_etfs": [],
       "rs_score": 61,
       "rs_histogram": [
+        61,
         61
       ]
     },
@@ -12501,6 +12491,7 @@
       "ss_etfs": [],
       "rs_score": 73,
       "rs_histogram": [
+        73,
         73
       ]
     },
@@ -12529,6 +12520,7 @@
       "ss_etfs": [],
       "rs_score": 94,
       "rs_histogram": [
+        94,
         94
       ]
     },
@@ -12557,6 +12549,7 @@
       "ss_etfs": [],
       "rs_score": 54,
       "rs_histogram": [
+        54,
         54
       ]
     },
@@ -12585,6 +12578,7 @@
       "ss_etfs": [],
       "rs_score": 8,
       "rs_histogram": [
+        8,
         8
       ]
     },
@@ -12613,6 +12607,7 @@
       "ss_etfs": [],
       "rs_score": 67,
       "rs_histogram": [
+        67,
         67
       ]
     },
@@ -12641,6 +12636,7 @@
       "ss_etfs": [],
       "rs_score": 47,
       "rs_histogram": [
+        47,
         47
       ]
     },
@@ -12669,6 +12665,7 @@
       "ss_etfs": [],
       "rs_score": 20,
       "rs_histogram": [
+        20,
         20
       ]
     },
@@ -12697,6 +12694,7 @@
       "ss_etfs": [],
       "rs_score": 10,
       "rs_histogram": [
+        10,
         10
       ]
     },
@@ -12725,6 +12723,7 @@
       "ss_etfs": [],
       "rs_score": 9,
       "rs_histogram": [
+        9,
         9
       ]
     },
@@ -12753,6 +12752,7 @@
       "ss_etfs": [],
       "rs_score": 24,
       "rs_histogram": [
+        24,
         24
       ]
     },
@@ -12781,6 +12781,7 @@
       "ss_etfs": [],
       "rs_score": 73,
       "rs_histogram": [
+        73,
         73
       ]
     },
@@ -12809,6 +12810,7 @@
       "ss_etfs": [],
       "rs_score": 69,
       "rs_histogram": [
+        69,
         69
       ]
     },
@@ -12837,6 +12839,7 @@
       "ss_etfs": [],
       "rs_score": 2,
       "rs_histogram": [
+        2,
         2
       ]
     },
@@ -12865,6 +12868,7 @@
       "ss_etfs": [],
       "rs_score": 52,
       "rs_histogram": [
+        52,
         52
       ]
     },
@@ -12893,6 +12897,7 @@
       "ss_etfs": [],
       "rs_score": 72,
       "rs_histogram": [
+        72,
         72
       ]
     },
@@ -12921,6 +12926,7 @@
       "ss_etfs": [],
       "rs_score": 19,
       "rs_histogram": [
+        19,
         19
       ]
     },
@@ -12949,6 +12955,7 @@
       "ss_etfs": [],
       "rs_score": 80,
       "rs_histogram": [
+        80,
         80
       ]
     },
@@ -12977,6 +12984,7 @@
       "ss_etfs": [],
       "rs_score": 1,
       "rs_histogram": [
+        1,
         1
       ]
     },
@@ -13005,6 +13013,7 @@
       "ss_etfs": [],
       "rs_score": 7,
       "rs_histogram": [
+        7,
         7
       ]
     },
@@ -13033,6 +13042,7 @@
       "ss_etfs": [],
       "rs_score": 13,
       "rs_histogram": [
+        13,
         13
       ]
     },
@@ -13061,6 +13071,7 @@
       "ss_etfs": [],
       "rs_score": 49,
       "rs_histogram": [
+        49,
         49
       ]
     },
@@ -13089,6 +13100,7 @@
       "ss_etfs": [],
       "rs_score": 13,
       "rs_histogram": [
+        13,
         13
       ]
     },
@@ -13117,6 +13129,7 @@
       "ss_etfs": [],
       "rs_score": 30,
       "rs_histogram": [
+        30,
         30
       ]
     },
@@ -13145,6 +13158,7 @@
       "ss_etfs": [],
       "rs_score": 53,
       "rs_histogram": [
+        53,
         53
       ]
     },
@@ -13173,6 +13187,7 @@
       "ss_etfs": [],
       "rs_score": 16,
       "rs_histogram": [
+        16,
         16
       ]
     },
@@ -13201,6 +13216,7 @@
       "ss_etfs": [],
       "rs_score": 39,
       "rs_histogram": [
+        39,
         39
       ]
     },
@@ -13229,6 +13245,7 @@
       "ss_etfs": [],
       "rs_score": 39,
       "rs_histogram": [
+        39,
         39
       ]
     },
@@ -13257,6 +13274,7 @@
       "ss_etfs": [],
       "rs_score": 65,
       "rs_histogram": [
+        65,
         65
       ]
     },
@@ -13285,6 +13303,7 @@
       "ss_etfs": [],
       "rs_score": 10,
       "rs_histogram": [
+        10,
         10
       ]
     },
@@ -13313,6 +13332,7 @@
       "ss_etfs": [],
       "rs_score": 66,
       "rs_histogram": [
+        66,
         66
       ]
     },
@@ -13325,7 +13345,7 @@
       "change_pct": -5.26,
       "avg_volume": 4247065,
       "avg_dollar_volume": 38266061,
-      "market_cap_b": 1.47,
+      "market_cap_b": 1.46,
       "adr_pct": 7.41,
       "adr_dvol": 283551512,
       "week52_high": 16.45,
@@ -13341,6 +13361,7 @@
       "ss_etfs": [],
       "rs_score": 5,
       "rs_histogram": [
+        5,
         5
       ]
     },
@@ -13369,6 +13390,7 @@
       "ss_etfs": [],
       "rs_score": 78,
       "rs_histogram": [
+        78,
         78
       ]
     },
@@ -13397,6 +13419,7 @@
       "ss_etfs": [],
       "rs_score": 25,
       "rs_histogram": [
+        25,
         25
       ]
     },
@@ -13425,6 +13448,7 @@
       "ss_etfs": [],
       "rs_score": 11,
       "rs_histogram": [
+        11,
         11
       ]
     },
@@ -13453,6 +13477,7 @@
       "ss_etfs": [],
       "rs_score": 3,
       "rs_histogram": [
+        3,
         3
       ]
     },
@@ -13481,6 +13506,7 @@
       "ss_etfs": [],
       "rs_score": 69,
       "rs_histogram": [
+        69,
         69
       ]
     },
@@ -13509,6 +13535,7 @@
       "ss_etfs": [],
       "rs_score": 18,
       "rs_histogram": [
+        18,
         18
       ]
     },
@@ -13537,6 +13564,7 @@
       "ss_etfs": [],
       "rs_score": 33,
       "rs_histogram": [
+        33,
         33
       ]
     },
@@ -13565,6 +13593,7 @@
       "ss_etfs": [],
       "rs_score": 51,
       "rs_histogram": [
+        51,
         51
       ]
     },
@@ -13593,6 +13622,7 @@
       "ss_etfs": [],
       "rs_score": 84,
       "rs_histogram": [
+        84,
         84
       ]
     },
@@ -13621,6 +13651,7 @@
       "ss_etfs": [],
       "rs_score": 8,
       "rs_histogram": [
+        8,
         8
       ]
     },
@@ -13649,6 +13680,7 @@
       "ss_etfs": [],
       "rs_score": 54,
       "rs_histogram": [
+        54,
         54
       ]
     },
@@ -13677,6 +13709,7 @@
       "ss_etfs": [],
       "rs_score": 15,
       "rs_histogram": [
+        15,
         15
       ]
     },
@@ -13705,6 +13738,7 @@
       "ss_etfs": [],
       "rs_score": 11,
       "rs_histogram": [
+        11,
         11
       ]
     },
@@ -13733,6 +13767,7 @@
       "ss_etfs": [],
       "rs_score": 85,
       "rs_histogram": [
+        85,
         85
       ]
     },
@@ -13761,6 +13796,7 @@
       "ss_etfs": [],
       "rs_score": 42,
       "rs_histogram": [
+        42,
         42
       ]
     },
@@ -13789,6 +13825,7 @@
       "ss_etfs": [],
       "rs_score": 44,
       "rs_histogram": [
+        44,
         44
       ]
     },
@@ -13817,6 +13854,7 @@
       "ss_etfs": [],
       "rs_score": 50,
       "rs_histogram": [
+        50,
         50
       ]
     },
@@ -13845,6 +13883,7 @@
       "ss_etfs": [],
       "rs_score": 54,
       "rs_histogram": [
+        54,
         54
       ]
     },
@@ -13873,6 +13912,7 @@
       "ss_etfs": [],
       "rs_score": 31,
       "rs_histogram": [
+        31,
         31
       ]
     },
@@ -13901,6 +13941,7 @@
       "ss_etfs": [],
       "rs_score": 71,
       "rs_histogram": [
+        71,
         71
       ]
     },
@@ -13929,6 +13970,7 @@
       "ss_etfs": [],
       "rs_score": 30,
       "rs_histogram": [
+        30,
         30
       ]
     },
@@ -13957,6 +13999,7 @@
       "ss_etfs": [],
       "rs_score": 5,
       "rs_histogram": [
+        5,
         5
       ]
     },
@@ -13985,6 +14028,7 @@
       "ss_etfs": [],
       "rs_score": 52,
       "rs_histogram": [
+        52,
         52
       ]
     },
@@ -14013,6 +14057,7 @@
       "ss_etfs": [],
       "rs_score": 16,
       "rs_histogram": [
+        16,
         16
       ]
     },
@@ -14041,6 +14086,7 @@
       "ss_etfs": [],
       "rs_score": 62,
       "rs_histogram": [
+        62,
         62
       ]
     },
@@ -14069,6 +14115,7 @@
       "ss_etfs": [],
       "rs_score": 67,
       "rs_histogram": [
+        67,
         67
       ]
     },
@@ -14097,6 +14144,7 @@
       "ss_etfs": [],
       "rs_score": 88,
       "rs_histogram": [
+        88,
         88
       ]
     },
@@ -14125,6 +14173,7 @@
       "ss_etfs": [],
       "rs_score": 36,
       "rs_histogram": [
+        36,
         36
       ]
     },
@@ -14153,6 +14202,7 @@
       "ss_etfs": [],
       "rs_score": 2,
       "rs_histogram": [
+        2,
         2
       ]
     },
@@ -14181,6 +14231,7 @@
       "ss_etfs": [],
       "rs_score": 43,
       "rs_histogram": [
+        43,
         43
       ]
     },
@@ -14209,6 +14260,7 @@
       "ss_etfs": [],
       "rs_score": 61,
       "rs_histogram": [
+        61,
         61
       ]
     },
@@ -14237,6 +14289,7 @@
       "ss_etfs": [],
       "rs_score": 35,
       "rs_histogram": [
+        35,
         35
       ]
     },
@@ -14265,6 +14318,7 @@
       "ss_etfs": [],
       "rs_score": 59,
       "rs_histogram": [
+        59,
         59
       ]
     },
@@ -14277,7 +14331,7 @@
       "change_pct": 0.24,
       "avg_volume": 5183693,
       "avg_dollar_volume": 63811271,
-      "market_cap_b": 19.22,
+      "market_cap_b": 19.38,
       "adr_pct": 1.88,
       "adr_dvol": 119965189,
       "week52_high": 16.73,
@@ -14293,6 +14347,7 @@
       "ss_etfs": [],
       "rs_score": 30,
       "rs_histogram": [
+        30,
         30
       ]
     },
@@ -14321,6 +14376,7 @@
       "ss_etfs": [],
       "rs_score": 45,
       "rs_histogram": [
+        45,
         45
       ]
     },
@@ -14349,6 +14405,7 @@
       "ss_etfs": [],
       "rs_score": 22,
       "rs_histogram": [
+        22,
         22
       ]
     },
@@ -14377,6 +14434,7 @@
       "ss_etfs": [],
       "rs_score": 25,
       "rs_histogram": [
+        25,
         25
       ]
     },
@@ -14405,6 +14463,7 @@
       "ss_etfs": [],
       "rs_score": 62,
       "rs_histogram": [
+        62,
         62
       ]
     },
@@ -14417,7 +14476,7 @@
       "change_pct": 1.18,
       "avg_volume": 5798368,
       "avg_dollar_volume": 34848194,
-      "market_cap_b": 4.62,
+      "market_cap_b": 4.63,
       "adr_pct": 2.07,
       "adr_dvol": 72135762,
       "week52_high": 7.11,
@@ -14433,6 +14492,7 @@
       "ss_etfs": [],
       "rs_score": 37,
       "rs_histogram": [
+        37,
         37
       ]
     },
@@ -14461,6 +14521,7 @@
       "ss_etfs": [],
       "rs_score": 28,
       "rs_histogram": [
+        28,
         28
       ]
     },
@@ -14489,6 +14550,7 @@
       "ss_etfs": [],
       "rs_score": 50,
       "rs_histogram": [
+        50,
         50
       ]
     },
@@ -14517,30 +14579,12 @@
       "ss_etfs": [],
       "rs_score": 83,
       "rs_histogram": [
+        83,
         83
       ]
     }
   ],
   "ss_etfs": [
-    {
-      "ticker": "MUU",
-      "company": "Direxion Daily MU Bull 2X ETF",
-      "price": 661.33,
-      "change_pct": -26.65,
-      "avg_volume": 3605032,
-      "avg_dollar_volume": 2384115813,
-      "adr_pct": 15.8,
-      "adr_dvol": 37669029838,
-      "week52_high": 1081.71,
-      "week52_low": 16.73,
-      "pct_52w_range": 60.5,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → MU",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "MU"
-    },
     {
       "ticker": "ORCL",
       "company": "Oracle Corporation",
@@ -14580,44 +14624,6 @@
       "parent_ticker": "INTC"
     },
     {
-      "ticker": "NVDL",
-      "company": "GraniteShares 2x Long NVDA Daily ETF",
-      "price": 95.91,
-      "change_pct": -12.37,
-      "avg_volume": 9976519,
-      "avg_dollar_volume": 956847947,
-      "adr_pct": 8.8,
-      "adr_dvol": 8420261933,
-      "week52_high": 129.82,
-      "week52_low": 56.52,
-      "pct_52w_range": 53.7,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → NVDA",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "NVDA"
-    },
-    {
-      "ticker": "TSLL",
-      "company": "Direxion Daily TSLA Bull 2X ETF",
-      "price": 12.72,
-      "change_pct": -13.11,
-      "avg_volume": 67990966,
-      "avg_dollar_volume": 864845093,
-      "adr_pct": 8.98,
-      "adr_dvol": 7766308932,
-      "week52_high": 23.74,
-      "week52_low": 9.56,
-      "pct_52w_range": 22.3,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → TSLA",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "TSLA"
-    },
-    {
       "ticker": "NFLX",
       "company": "Netflix, Inc.",
       "price": 82.18,
@@ -14635,253 +14641,6 @@
       "sector": "Single-Stock ETF",
       "ss_etfs": [],
       "parent_ticker": "NFLX"
-    },
-    {
-      "ticker": "RKLX",
-      "company": "Defiance Daily Target 2X Long RKLB ETF",
-      "price": 57.86,
-      "change_pct": -16.39,
-      "avg_volume": 3479076,
-      "avg_dollar_volume": 201299343,
-      "adr_pct": 23.79,
-      "adr_dvol": 4788911373,
-      "week52_high": 114.83,
-      "week52_low": 9.96,
-      "pct_52w_range": 45.7,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → RKLB",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "RKLB"
-    },
-    {
-      "ticker": "MSTU",
-      "company": "T-Rex 2X Long MSTR Daily Target ETF",
-      "price": 3.41,
-      "change_pct": -13.67,
-      "avg_volume": 44306491,
-      "avg_dollar_volume": 151085137,
-      "adr_pct": 24.45,
-      "adr_dvol": 3694031601,
-      "week52_high": 107.6,
-      "week52_low": 3.03,
-      "pct_52w_range": 0.4,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → MSTR",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "MSTR"
-    },
-    {
-      "ticker": "MSTZ",
-      "company": "T-Rex 2X Inverse MSTR Daily Target ETF",
-      "price": 9.87,
-      "change_pct": 13.06,
-      "avg_volume": 25877823,
-      "avg_dollar_volume": 255414119,
-      "adr_pct": 9.6,
-      "adr_dvol": 2451975542,
-      "week52_high": 28.71,
-      "week52_low": 3.09,
-      "pct_52w_range": 26.5,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → MSTR",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "MSTR"
-    },
-    {
-      "ticker": "IONX",
-      "company": "Defiance Daily Target 2X Long IONQ ETF",
-      "price": 62.24,
-      "change_pct": -26.97,
-      "avg_volume": 1623557,
-      "avg_dollar_volume": 101050237,
-      "adr_pct": 21.45,
-      "adr_dvol": 2167527594,
-      "week52_high": 311.87,
-      "week52_low": 16.81,
-      "pct_52w_range": 15.4,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → IONQ",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "IONQ"
-    },
-    {
-      "ticker": "CONL",
-      "company": "GraniteShares 2x Long COIN Daily ETF",
-      "price": 4.8,
-      "change_pct": -14.44,
-      "avg_volume": 22243911,
-      "avg_dollar_volume": 106770776,
-      "adr_pct": 19.92,
-      "adr_dvol": 2126873861,
-      "week52_high": 72.35,
-      "week52_low": 4.48,
-      "pct_52w_range": 0.5,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → COIN",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "COIN"
-    },
-    {
-      "ticker": "AVGX",
-      "company": "Defiance Daily Target 2X Long AVGO ETF",
-      "price": 50.0,
-      "change_pct": -15.71,
-      "avg_volume": 2429147,
-      "avg_dollar_volume": 121457350,
-      "adr_pct": 13.7,
-      "adr_dvol": 1663965695,
-      "week52_high": 84.8,
-      "week52_low": 27.63,
-      "pct_52w_range": 39.1,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → AVGO",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "AVGO"
-    },
-    {
-      "ticker": "PLTU",
-      "company": "Direxion Daily PLTR Bull 2X ETF",
-      "price": 35.26,
-      "change_pct": -8.7,
-      "avg_volume": 4075774,
-      "avg_dollar_volume": 143711812,
-      "adr_pct": 11.43,
-      "adr_dvol": 1642626016,
-      "week52_high": 128.03,
-      "week52_low": 30.71,
-      "pct_52w_range": 4.7,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → PLTR",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "PLTR"
-    },
-    {
-      "ticker": "PLTD",
-      "company": "Direxion Daily PLTR Bear 1X ETF",
-      "price": 7.75,
-      "change_pct": 4.36,
-      "avg_volume": 37172304,
-      "avg_dollar_volume": 288085361,
-      "adr_pct": 4.85,
-      "adr_dvol": 1397214003,
-      "week52_high": 10.39,
-      "week52_low": 5.87,
-      "pct_52w_range": 41.6,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → PLTR",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "PLTR"
-    },
-    {
-      "ticker": "METU",
-      "company": "Direxion Daily META Bull 2X ETF",
-      "price": 22.93,
-      "change_pct": -11.09,
-      "avg_volume": 8444270,
-      "avg_dollar_volume": 193627118,
-      "adr_pct": 6.95,
-      "adr_dvol": 1345708470,
-      "week52_high": 51.2,
-      "week52_low": 18.62,
-      "pct_52w_range": 13.2,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → META",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "META"
-    },
-    {
-      "ticker": "GGLL",
-      "company": "Direxion Daily GOOGL Bull 2X ETF",
-      "price": 123.33,
-      "change_pct": -2.08,
-      "avg_volume": 1863230,
-      "avg_dollar_volume": 229792156,
-      "adr_pct": 5.61,
-      "adr_dvol": 1289133995,
-      "week52_high": 153.0,
-      "week52_low": 29.75,
-      "pct_52w_range": 75.9,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → GOOGL",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "GOOGL"
-    },
-    {
-      "ticker": "TSLQ",
-      "company": "Tradr 2X Short TSLA Daily ETF",
-      "price": 20.27,
-      "change_pct": 13.18,
-      "avg_volume": 8055661,
-      "avg_dollar_volume": 163288253,
-      "adr_pct": 7.2,
-      "adr_dvol": 1175675418,
-      "week52_high": 72.54,
-      "week52_low": 14.78,
-      "pct_52w_range": 9.5,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → TSLA",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "TSLA"
-    },
-    {
-      "ticker": "NVDU",
-      "company": "Direxion Daily NVDA Bull 2X ETF",
-      "price": 128.57,
-      "change_pct": -11.94,
-      "avg_volume": 669332,
-      "avg_dollar_volume": 86053992,
-      "adr_pct": 8.72,
-      "adr_dvol": 750390808,
-      "week52_high": 172.89,
-      "week52_low": 79.94,
-      "pct_52w_range": 52.3,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → NVDA",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "NVDA"
-    },
-    {
-      "ticker": "AMZU",
-      "company": "Direxion Daily AMZN Bull 2X ETF",
-      "price": 36.25,
-      "change_pct": -6.19,
-      "avg_volume": 2949102,
-      "avg_dollar_volume": 106904969,
-      "adr_pct": 6.21,
-      "adr_dvol": 663879859,
-      "week52_high": 47.14,
-      "week52_low": 24.54,
-      "pct_52w_range": 51.8,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → AMZN",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "AMZN"
     },
     {
       "ticker": "GMEX",
@@ -14903,139 +14662,6 @@
       "parent_ticker": "GME"
     },
     {
-      "ticker": "AMZD",
-      "company": "Direxion Daily AMZN Bear 1X ETF",
-      "price": 9.26,
-      "change_pct": 3.18,
-      "avg_volume": 12167812,
-      "avg_dollar_volume": 112673943,
-      "adr_pct": 2.62,
-      "adr_dvol": 295205730,
-      "week52_high": 11.77,
-      "week52_low": 8.2,
-      "pct_52w_range": 29.8,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → AMZN",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "AMZN"
-    },
-    {
-      "ticker": "AAPU",
-      "company": "Direxion Daily AAPL Bull 2X ETF",
-      "price": 40.23,
-      "change_pct": -2.57,
-      "avg_volume": 1553914,
-      "avg_dollar_volume": 62513960,
-      "adr_pct": 3.81,
-      "adr_dvol": 238178188,
-      "week52_high": 42.85,
-      "week52_low": 20.0,
-      "pct_52w_range": 88.5,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → AAPL",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "AAPL"
-    },
-    {
-      "ticker": "GGLS",
-      "company": "Direxion Daily GOOGL Bear 1X ETF",
-      "price": 5.61,
-      "change_pct": 1.26,
-      "avg_volume": 13216684,
-      "avg_dollar_volume": 74145599,
-      "adr_pct": 2.72,
-      "adr_dvol": 201676031,
-      "week52_high": 13.62,
-      "week52_low": 5.07,
-      "pct_52w_range": 6.4,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → GOOGL",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "GOOGL"
-    },
-    {
-      "ticker": "AAPD",
-      "company": "Direxion Daily AAPL Bear 1X ETF",
-      "price": 11.53,
-      "change_pct": 1.32,
-      "avg_volume": 8395182,
-      "avg_dollar_volume": 96796454,
-      "adr_pct": 2.08,
-      "adr_dvol": 201336625,
-      "week52_high": 18.53,
-      "week52_low": 11.19,
-      "pct_52w_range": 4.7,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → AAPL",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "AAPL"
-    },
-    {
-      "ticker": "MRAL",
-      "company": "GraniteShares 2x Long MARA Daily ETF",
-      "price": 57.99,
-      "change_pct": -22.57,
-      "avg_volume": 123964,
-      "avg_dollar_volume": 7188672,
-      "adr_pct": 17.49,
-      "adr_dvol": 125729880,
-      "week52_high": 366.3,
-      "week52_low": 22.14,
-      "pct_52w_range": 10.4,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → MARA",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "MARA"
-    },
-    {
-      "ticker": "NVDS",
-      "company": "Tradr 1.5X Short NVDA Daily ETF",
-      "price": 22.19,
-      "change_pct": 9.53,
-      "avg_volume": 554785,
-      "avg_dollar_volume": 12310686,
-      "adr_pct": 5.58,
-      "adr_dvol": 68693627,
-      "week52_high": 51.57,
-      "week52_low": 18.29,
-      "pct_52w_range": 11.7,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → NVDA",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "NVDA"
-    },
-    {
-      "ticker": "TSLS",
-      "company": "Direxion Daily TSLA Bear 1X ETF",
-      "price": 56.15,
-      "change_pct": 6.73,
-      "avg_volume": 260045,
-      "avg_dollar_volume": 14601566,
-      "adr_pct": 3.65,
-      "adr_dvol": 53295716,
-      "week52_high": 89.85,
-      "week52_low": 46.2,
-      "pct_52w_range": 22.8,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → TSLA",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "TSLA"
-    },
-    {
       "ticker": "ASTL",
       "company": "Algoma Steel Group Inc.",
       "price": 4.96,
@@ -15053,63 +14679,6 @@
       "sector": "Single-Stock ETF",
       "ss_etfs": [],
       "parent_ticker": "ASTS"
-    },
-    {
-      "ticker": "HODU",
-      "company": "Direxion Daily HOOD Bull 2X ETF",
-      "price": 8.72,
-      "change_pct": -13.21,
-      "avg_volume": 358537,
-      "avg_dollar_volume": 3125512,
-      "adr_pct": 13.52,
-      "adr_dvol": 42256925,
-      "week52_high": 35.58,
-      "week52_low": 5.98,
-      "pct_52w_range": 9.2,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → HOOD",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "HOOD"
-    },
-    {
-      "ticker": "AMAU",
-      "company": "Leverage Shares 2X Long AMAT Daily ETF",
-      "price": 15.12,
-      "change_pct": -19.45,
-      "avg_volume": 117883,
-      "avg_dollar_volume": 1782399,
-      "adr_pct": 10.11,
-      "adr_dvol": 18020049,
-      "week52_high": 19.44,
-      "week52_low": 11.96,
-      "pct_52w_range": 42.2,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → AMAT",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "AMAT"
-    },
-    {
-      "ticker": "METD",
-      "company": "Direxion Daily META Bear 1X ETF",
-      "price": 16.83,
-      "change_pct": 5.72,
-      "avg_volume": 357451,
-      "avg_dollar_volume": 6015910,
-      "adr_pct": 2.88,
-      "adr_dvol": 17325822,
-      "week52_high": 19.54,
-      "week52_low": 13.45,
-      "pct_52w_range": 55.5,
-      "rvol": null,
-      "is_ss_etf": true,
-      "industry": "SS-ETF → META",
-      "sector": "Single-Stock ETF",
-      "ss_etfs": [],
-      "parent_ticker": "META"
     }
   ]
 }
