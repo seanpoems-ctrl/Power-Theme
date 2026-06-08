@@ -1,201 +1,63 @@
 {
-  "scan_time": "2026-06-05 11:40 ET",
+  "scan_time": "2026-06-08 13:33 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "BBCP",
-      "price": 11.53,
-      "gap_pct": 43.86,
-      "pm_volume": 233811,
-      "avg_vol_10d": 519798,
-      "avg_dollar_vol": 5993271,
-      "mkt_cap": 582507401,
-      "rvol": 79.2,
-      "adr_pct": 5.11,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "Concrete Pumping (BBCP) surged **23.7%** after surprising with **strong Q1 CY2026** and raising **2026 targets** due to data-center builds.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 99,
-      "grade": "C",
-      "finviz_theme": "Infrastructure",
-      "analysis_detail": {
-        "catalyst": "Concrete Pumping Holdings (BBCP) surprised with **strong Q1 CY2026** results, reported on **June 4, 2026**, leading the stock to jump **23.7%**. The company also reported **strong Second Quarter Fiscal Year 2026 Results** and plans to **raise 2026 targets** due to **growing data-center builds**.",
-        "impact": "This signals significant **upside revision potential** to consensus estimates and demonstrates strong demand driven by **infrastructure spending**, particularly in data centers, which supports continued momentum."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nConcrete Pumping (NASDAQ:BBCP) surprised with **strong Q1 CY2026** results, causing the stock to jump **23.7%** following the announcement on **June 4, 2026**. The company additionally reported **strong Second Quarter Fiscal Year 2026 Results**.\n\n• **The Guide**\nThe company is set to **raise 2026 targets**, primarily driven by the ongoing trend of **growing data-center builds**. This upward revision indicates strong future revenue visibility and confidence in their market position.\n\n• **The Growth (Momentum)**\nThe **23.7%** stock jump on significant news, coupled with the upward revision of **2026 targets**, suggests robust growth momentum fueled by demand for their services, particularly from the booming data center construction market.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "$Concrete Pumping Holdings (BBCP.US)$ 🍀🤞🏻😎 - Moomoo",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNMlltdXJkZ1dORjRBLUNRdm9OVDFud2NYM29VLURUWEZ3TFlhbXgxb0dmeXVLOXpOMklzVW1yNGxmVXVjZ2VsWGpCZndZcTVOOEtuX0RkVFI5cnZEVEpnc3lEcHFsWW9XdWg1aXo1RWZLZ1E1cmw2VGozbndWRllSQ1hqNEw5aU1FU2g4dURJOWc?oc=5"
-        },
-        {
-          "title": "Concrete Pumping (NASDAQ:BBCP) Surprises With Strong Q1 CY2026, Stock Jumps 23.7% - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQQlJ4LWV5WDd2SWRkcTJOQzVfUVE4YUdCODJZdVF3ajJEalZnQ2swVmlIdWllUXJtUGZyOUM3U1gtbnpQdVVjUEtkRWpHTE5ld0hYTEd2TnNuUVN2TE5WM09idllERlROZ0FwTU5vMW5UREFYQ0xIT1BCRDN2Q3M5QWY0bGxLNGFJd2F0MFZ0Z3psOXpGb2Q2ckkxZHF2NzNwOGdPMHpB?oc=5"
-        },
-        {
-          "title": "Growing data-center builds push Concrete Pumping to raise 2026 targets - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNQ1QzOXBjVTZmU20wYmtrMW9NVHFubjFPY2JOY1ZRV0FMYUZXZlA1Njh2YUMzUXlGa19ramlRa1BEZEdmaldoaUZPSDRMOHJQT2E2LW9PZ1VsNXNacTdfaGV1cDNsQmstZ0UwRHhxVE9zTml6TGFIV3VCc1hSaktPMDNYZGE5anJ6U2tGM0VGRzY5cUdXSWttSFJ5dGRnWndBUkE0cldwUW9oZzN5U3hKZU0taU9NY1V0R3hnYjMtWQ?oc=5"
-        },
-        {
-          "title": "Concrete Pumping: Fiscal Q2 Earnings Snapshot",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/concrete-pumping-fiscal-q2-earnings-202512018.html"
-        },
-        {
-          "title": "Concrete Pumping Holdings Reports Strong Second Quarter Fiscal Year 2026 Results",
-          "source": "Finviz",
-          "url": "/news/359767/concrete-pumping-holdings-reports-strong-second-quarter-fiscal-year-2026-results"
-        }
-      ],
-      "float_shares": "20.33M",
-      "short_float": "4.35%",
-      "daily_pct": 44.24,
-      "industry": "Infrastructure",
-      "technical_status": "Fail (Avg $Vol $6M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 100,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "strong Q1 CY2026",
-        "discrepancy_note": "Source A (Finviz) reports 'Fiscal Q2' / 'Second Quarter Fiscal Year 2026' earnings. Source B (Google News) contains conflicting information, with one article (Yahoo Finance) mentioning 'Strong Q1 CY2026' and another (Quiver Quantitative) mentioning 'Q2 2026 Earnings'. The claimed 'Q1 CY2026' is not consistently supported and is directly contradicted by multiple sources."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "MRLN",
-      "price": 8.88,
-      "gap_pct": 27.86,
-      "pm_volume": 5443303,
-      "avg_vol_10d": 4273370,
-      "avg_dollar_vol": 37947526,
-      "mkt_cap": 857133592,
-      "rvol": 11.57,
-      "adr_pct": 12.45,
-      "category": "New Contract/Partnership",
-      "theme": "Program Milestone / Autonomy Program Progress",
-      "reasoning": "Merlin successfully completed the **Critical Design Review** for its **C-130J autonomy program** with **USSOCOM**, de-risking a key defense initiative.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 99,
-      "grade": "C",
-      "finviz_theme": "Defense & Aerospace",
-      "analysis_detail": {
-        "catalyst": "Merlin announced the successful completion of the **Critical Design Review (CDR)** for its **C-130J autonomy program** with **USSOCOM**. This key milestone signifies that the design is mature and ready for the next phase of development and potential deployment.",
-        "impact": "This progress de-risks the **C-130J autonomy program**, enhancing Merlin's credibility as a defense technology provider and potentially securing future phases of the program, suggesting sustained revenue visibility in this high-growth sector."
-      },
-      "analysis_details": "• **Impact**\nMerlin announced the successful completion of the **Critical Design Review (CDR)** for its **C-130J autonomy program**, a pivotal milestone achieved with **USSOCOM**. This review confirms the technical viability and maturity of the design, moving the program closer to advanced development and eventual operational deployment.\n\n• **Strategic Value**\nThe completion of this **Critical Design Review** significantly de-risks Merlin's involvement in the **C-130J autonomy program** and validates its cutting-edge technology for defense applications. This strengthens Merlin's competitive position in military aviation autonomy, potentially leading to further contracts or expansions within the **USSOCOM** ecosystem and broader defense market.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Merlin completes design review for C-130J autonomy program - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOUjhjLXV3YkxHY0stUHpyOTMtLW5MT0ktZmhYZDVhd2xrSkRYWnBSR0xUTjY3YlFZNzVMQ1JGcF9BM3dnZmlwNnEwZ0VGVGplVXhJVUwtN3Z0Z0VEcXBsYjJINzZNbU40NHFRWEgyNlJwRy1uc25lS2FtYzdlN3hscXVnQ0FuNkVUWmZ0bnBGZC1HYS1BY2pEUGMtZXV0QVBOUWdYWXVCNlU4WTZjZlk4MGl3ZmE?oc=5"
-        },
-        {
-          "title": "Merlin Successfully Completes Critical Design Review for C-130J Autonomy Program with USSOCOM",
-          "source": "Finviz",
-          "url": "/news/359775/merlin-successfully-completes-critical-design-review-for-c-130j-autonomy-program-with-ussocom"
-        }
-      ],
-      "float_shares": "10.18M",
-      "short_float": "25.09%",
-      "daily_pct": 23.58,
-      "industry": "Defense & Aerospace",
-      "technical_status": "Fail (Avg $Vol $38M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Merlin successfully completed the Critical Design Review for its C-130J autonomy program with USSOCOM.",
-        "discrepancy_note": "Source A (Finviz) explicitly confirms 'with USSOCOM'. Source B (Google News headlines), while confirming the completion of a critical/key design review for C-130J autonomy/autonomous software, does not explicitly mention 'USSOCOM' in any of its provided headlines."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "TTAN",
-      "price": 78.61,
-      "gap_pct": 11.8,
-      "pm_volume": 97267,
-      "avg_vol_10d": 1844770,
-      "avg_dollar_vol": 145017370,
-      "mkt_cap": 7498446139,
-      "rvol": 6.85,
-      "adr_pct": 5.8,
-      "category": "Others",
-      "theme": "Platform Invoices Disclosure",
-      "reasoning": "ServiceTitan disclosed its platform invoices reached **$21.7B** in **Q1 2027**, providing a significant operational update for investors.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 74,
+      "ticker": "TNGX",
+      "price": 30.3,
+      "gap_pct": 48.42,
+      "pm_volume": 2441599,
+      "avg_vol_10d": 3871167,
+      "avg_dollar_vol": 117296360,
+      "mkt_cap": 4382110397,
+      "rvol": 11.88,
+      "adr_pct": 8.42,
+      "category": "FDA",
+      "theme": "FDA",
+      "reasoning": "TNGX has an active FDA/clinical regulatory event based on recent headlines.",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 50,
       "grade": "B",
-      "finviz_theme": "Cloud SaaS",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "ServiceTitan (TTAN) announced its platform processed **$21.7B** in invoices during **Q1 2027**. This significant operational update follows a recent stock rebound, attracting renewed focus on the company's valuation.",
-        "impact": "The disclosure of robust platform activity provides investors with concrete performance data, potentially driving further re-evaluation of its fair value and offering clarity on its growth trajectory."
+        "catalyst": "TNGX has an active FDA/clinical regulatory event based on recent headlines.",
+        "impact": "FDA or clinical trial event detected. Binary outcome — treat as high-volatility event."
       },
-      "analysis_details": "• **What Happened**\nServiceTitan (TTAN) announced a substantial operational milestone, revealing its platform processed **$21.7B** in invoices during **Q1 2027**. This specific performance metric follows a recent rebound in the company's shares, drawing attention to its valuation, which reportedly remains below popular fair value estimates.\n\n• **Key Consideration**\nThe disclosure of **$21.7B** in quarterly platform invoices provides a tangible measure of ServiceTitan's business scale and growth trajectory for **Q1 2027**. This key operational data could serve as a foundational element for analysts to re-assess the company's intrinsic value, potentially validating the current stock rebound and informing future price momentum.",
+      "analysis_details": "• **The Event**\nTNGX has an active FDA/clinical regulatory event based on recent headlines.\n\n• **Risk Profile**\nFDA or clinical trial event detected. Binary outcome — treat as high-volatility event.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "ServiceTitan (TTAN) Valuation In Focus As Shares Rebound Yet Remain Below Popular Fair Value Estimates - simplywall.st",
+          "title": "Tango Therapeutics (TNGX) Stock Soars 45% Following Breakthrough Pancreatic Cancer Data - Blockonomi",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPTl81d2tnMXlPSWNYcUMwWDdFc25JT2R6Vk1yc1Qyc2l6SWx4UGcxQ2VLTDJhNnVKWXhfQkJfUzNHcC1NYUExVVpoMlV3N1FMbzdUdmpCeFBQa0xpWWhmdzZKQ0piOGc1T1lvTUFoc1J3TlFrU2tJTmFtNGRlNEdlWE40NzdSbEQ1SVZub1dPZGU4M083RHNfZGpUaGhmSnVmbDlVQWJMV3dXVFdfODc2amw0YkR3YnU5YldPMEY4SUswX1dzVkFXMkZzMNIB0AFBVV95cUxPVld5UGNtMVJaQkZFZGgxb1NkZHdEdlViNE5adUdfak1WdDVnZzVlSmd6bmIxU191TGNUSWNGdDR1VHNOZUc3RnFIb1NSY09Nb2dFVTZQMEFKanlPeTJIUS1Qa3k2SGJzS0FrRWI0bTd6dnI4b1lsUnQ1UmYwX1lGUFRuVTNOUzhHbTllQW1zRUctUm1jQXN0MjczS0VmVU90eXhOT0lNcnlTclBydEE3Y2R4dGttWjZBcTdEZFJTb0JJYmd5XzQ2YnZFR3FCT1da?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPTGJIb3V0NjFoUWJ4ZUNlQmV4bENCaFVqWHMzRFcyLUhIVldpeXJ2ajdScmUxYUpjZm00RWhUeW45QUIxZzRTOFZkNTV2TndROU40c09MN0pxbk9qeE1nWW9EVkxncF9YcG8tTXB6OGwwcndndzlTaC1mcUplallGOEw1NHNVSWgtY1Q4RlR5QVBhTzMwZ0tGUmlBQnU3RjhtTHpmUUxpNmZYQy14?oc=5"
         },
         {
-          "title": "ServiceTitan trades platform invoices $21.7B in Q1 2027 - Stock Titan",
+          "title": "Tango Therapeutics stock surges 45% on pancreatic cancer data By Investing.com - Investing.com UK",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQX3ltOWZITFh6VkRzVWQ3Uk93VWJhQV9oWTk5aVJUS2pYZWZsR3VPSC1rcDBoQU1ORXdjdXpNX1hwRkRyMzZycU83UlBTUmw0Wm50azhEMzlqQUtqTEJpSmxzYWlzbkFmV0ZfcUlwSE1qMFJHczJOenNlbXJCTjBzWGtPbGVrbUlWX2FrRC1zbEIyM0k0cmRrb0NiUGNOUTc5UGRBTkdCV0I4TFJsd1E?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNVmZmZnFPS01WVWN1aGhlY1kyREprNW1ZOV9UM1JlRGpZLXQyekQzUk1RNXRJZnBONHpROU1RMFVqNkgzMlh3Ujh5VVRITlRGOTRtM0VrZDlrWENrYkVRSFlQcURSQjFRUmRKX1IycUNoWTFvR0ktVXhZSFRUY0laMktiSkp0M2tDYV82S0ZpUnVpRXY0TVEzblNqY09pSmxHR01uTFJGUXRPN1I5TlVwUjM5T1pOQm41Sl9sdnB3?oc=5"
+        },
+        {
+          "title": "Experimental drug combo triggers tumor response in 92% of pancreatic patients - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOLTM4c0FfWFZVZndXNWtyTFJNYy1IejZTLXRlMVU1aXJCTlN5QnlSd08tTTFMM3NUQUc1VVJ0MHpUcFppSkR5d0g2d3FTcFdQcVBiYUV6Mmh3cDAtN3prdnRjZ3k4XzVQUmZ1bmtnc0czY29SWTZ2OGVtWkhJeXVUekp6eGZXbzZvSEhxdDlaR2FzRk5zSjFLY2RTNDFKSGpKbFpDVFhQZllSRVlabHlxa1dEYUJjQQ?oc=5"
         }
       ],
-      "float_shares": "55.72M",
-      "short_float": "12.23%",
-      "daily_pct": 5.77,
-      "industry": "Cloud SaaS",
+      "float_shares": "106.03M",
+      "short_float": "30.00%",
+      "daily_pct": 49.99,
+      "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 85,
+        "status": "Unconfirmed",
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "ServiceTitan disclosed its platform invoices reached $21.7B in Q1 2027",
-        "discrepancy_note": "Source B [3] (Stock Titan) confirms 'ServiceTitan trades platform invoices $21.7B in Q1 2027', but Source A (Finviz) does not contain this specific detail regarding the dollar amount or quarter for platform invoices. Finviz mentions Q1 results and strong performance generally, but lacks the specific numbers."
+        "primary_claim": "TNGX has an active FDA/clinical regulatory event based on recent headlines.",
+        "discrepancy_note": ""
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -210,42 +72,57 @@
       "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "DNUT",
-      "price": 3.48,
-      "gap_pct": 9.02,
-      "pm_volume": 218700,
-      "avg_vol_10d": 2124723,
-      "avg_dollar_vol": 7394036,
-      "mkt_cap": 600072655,
-      "rvol": 3.59,
-      "adr_pct": 4.71,
-      "category": "Insider Buying",
-      "theme": "Insider Buying",
-      "reasoning": "DNUT director-linked LLC acquired **630K shares** in the open market, signaling insider confidence and potential undervaluation.",
-      "hypothesis": "Medium Conviction (RS Hold) — Insider conviction signal; look for base breakout.",
-      "conviction": 64,
+      "ticker": "ABAT",
+      "price": 4.08,
+      "gap_pct": 28.3,
+      "pm_volume": 20481996,
+      "avg_vol_10d": 12128761,
+      "avg_dollar_vol": 49485345,
+      "mkt_cap": 556611713,
+      "rvol": 7.59,
+      "adr_pct": 9.63,
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "ABAT reported quarterly results; earnings catalyst detected in headlines.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 50,
       "grade": "C",
-      "finviz_theme": "Others",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "Krispy Kreme (**DNUT**) saw a **director-linked LLC acquire 630K shares** in the open market, signaling potential internal confidence in the company's outlook.",
-        "impact": "This significant insider activity often suggests a **positive fundamental outlook** or belief that the stock is **undervalued**, potentially attracting further institutional interest."
+        "catalyst": "ABAT reported quarterly results; earnings catalyst detected in headlines.",
+        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
       },
-      "analysis_details": "• **The Buyer**\nKrispy Kreme (**DNUT**) reported that a **director-linked LLC**, linked to a company director, made a substantial acquisition, purchasing **630,000 shares** in the open market. This transaction occurred on **2026-06-05**, highlighting direct and recent insider involvement.\n\n• **Conviction Signal**\nSuch significant open market buying by an entity tied to a director typically signals strong internal confidence in the company's future prospects or a belief that the current market valuation is attractive. This move can act as a positive signal to other investors, potentially de-risking the stock perception and attracting follow-on interest.",
+      "analysis_details": "• **The Results**\nABAT reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Krispy Kreme (DNUT) director-linked LLC acquires 630K shares in open market - Stock Titan",
+          "title": "ABAT Stock Pops As Q3 Beat Confirms Recycling Momentum - StocksToTrade",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOa2pSdC1NTDRscnJYdGdZOFB6R0lyakNNeFphTElPS1lSTmF0WlRldEJnZHBTN241SmpsN2dCc0JYUTZmQVlHbWxZQVg3a2xtUk41UTMxMEdOTFZjeGppRUpDOVI2ZmttbFhYeWd2M3Z1dGFMM2UwNHRwRzJtY1VaVXkyVnJyMUpUUmp2Qk5kOWZ0Vk0wQVgtbXRyOC14NThlMmVqeEkwRmJuT2NCSlBF?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNcTVrVWFycVVDbGRrajBwSF9ONDlUSmZTbmJ0U2o0eUtpb3ZHbXFsbVFMR0RTV0dNQ1VESUhSVDlBVWZGNkh3NnpmOG9Lc3JaVGZtdU52WVloZy16TllBaFdEWTR4bTNkaV9aNVIyWWx4Q3E3bzJWbEJ5c3NBbExzM2F3Ny1GdThEckZYLUE4R05pdw?oc=5"
+        },
+        {
+          "title": "ABAT Stock Pops As Q3 Revenue Soars And Margins Turn Positive - timothysykes.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQYmQ2LUh6SE13NDc1SkJjdUlXam0wcUswOHhVeVZ6ZU5rOTNfc2pUSXNrWEhqdWk2VjBvZk8tZmxaTElWY2VaT0NkWEtibTJwR3JiaE9fbEppRDl2QjJJX2RKU0E1VS1XbmpaUVFzOXJaU3BHM0UtWFVMNWRzWUpxdFFXT1FySjVDTE94TDNBYVRDRENmeEE?oc=5"
+        },
+        {
+          "title": "ABAT Stock On Track For Biggest One-Day Percentage Gains In 8 Months — DOE Reverses Course On Lithium Project Funding - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOVUljX2g4c0VHQnlTMkNLbVdUNHRfdEc5R25EQ0Z5RkJDS2FSZFBmN3RaU3RFZGZpMERESlJhdTUtVHRfSkR3Qm0xbzRsbHFRb25rX1NRRFlJXzY5M2NyZi1QMGV1UlFuSjB1eXZEalRkVFlJTkNEWjhwZUtOWlprWG1rYUlOUmc5SUVTN2ltQ2xhQXprRkFCRg?oc=5"
+        },
+        {
+          "title": "$115M lithium refinery project reinstated after DOE reverses termination - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQd19aN09hS25pOXVWeVNPOGVSbGtYVm91R3QyejhJLXJrMlpuRklLYUZPWGNYSDdJcEF6eW04OTlfb0FOUGswZ3A0aUpKVlAza2xDN3QxN1FPQkNXVXZNLTBvcWU3TWVLQlRnbXRDOVdELUR4RTltOW13eWtaQWF5SXhVcUZhSkdyY0dSRWVYdzFGSUFqeklRVjlEMDRCVnhqdFNWZUxQWF9maHJwSzFLMU5pdw?oc=5"
         }
       ],
-      "float_shares": "93.68M",
-      "short_float": "18.68%",
-      "daily_pct": 6.73,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $7M < $100M)",
+      "float_shares": "131.42M",
+      "short_float": "16.96%",
+      "daily_pct": 30.39,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $49M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 90,
@@ -253,8 +130,8 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "DNUT director-linked LLC acquired 630K shares",
-        "discrepancy_note": "Only one Google News article (Stock Titan via Google News [2]) explicitly mentions '630K shares' acquired by a 'director-linked LLC'. Finviz (Source A) provides no information. Other Google News articles ([3] and [5]) mention different share amounts (150,000 and 235,875) purchased by a director, suggesting multiple transactions or conflicting information regarding the specific '630K shares' claim by the LLC."
+        "primary_claim": "ABAT reported positive quarterly results (Q3 beat, revenue soared, margins turned positive).",
+        "discrepancy_note": "Source A (Finviz News) contains no headlines to confirm the earnings claim. Source B (Google News) headlines [3] and [5] directly support the claim of positive quarterly results ('Q3 Beat', 'Q3 Revenue Soars And Margins Turn Positive'). However, verification requires confirmation from *both* sources."
       },
       "gates_passed": 2,
       "gates_detail": {
@@ -269,119 +146,376 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "COO",
-      "price": 67.03,
-      "gap_pct": 5.61,
-      "pm_volume": 62296,
-      "avg_vol_10d": 3323177,
-      "avg_dollar_vol": 222752554,
-      "mkt_cap": 13077542430,
-      "rvol": 4.17,
-      "adr_pct": 2.52,
+      "ticker": "NRIX",
+      "price": 15.79,
+      "gap_pct": 14.07,
+      "pm_volume": 2922577,
+      "avg_vol_10d": 2693717,
+      "avg_dollar_vol": 42533791,
+      "mkt_cap": 1633294888,
+      "rvol": 31.73,
+      "adr_pct": 5.74,
       "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found for COO; likely technical breakout or institutional flow driven without specific news.",
+      "theme": "Others",
+      "reasoning": "NRIX gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 66,
+      "conviction": 50,
       "grade": "C",
-      "finviz_theme": "Others",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "Unknown",
-        "impact": "Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+        "catalyst": "NRIX gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
       },
-      "analysis_details": "• **What Happened**\nNo company-specific fundamental news for the ticker **COO** was reported in the last **24 hours**. The headlines refer to a **Burke & Herbert (BHRB) COO** receiving a new restricted stock unit grant and **Rush Street Interactive COO Mattias Stetz** selling **$4.28 million** in stock, neither of which directly impacts **COO**.\n\n• **Key Consideration**\nAny significant price movement in **COO** without a clear fundamental catalyst suggests it is driven by technical factors, such as **short squeezes**, **stop-running**, or **institutional order flow**. The absence of news indicates a high potential for volatility and increased risk, as the move may be unsustainable without underlying fundamental support.",
+      "analysis_details": "• **What Happened**\nNRIX gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Burke & Herbert (BHRB) COO receives new restricted stock unit grant - Stock Titan",
+          "title": "NRIX Stock Chops Lower As Insider Form 4 Hits Tape - StocksToTrade",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQNkxjRWxyby1ES2dVdVVHNXN5Vms2dFk5eGd1VU1aSUF3TUZpMnBNaUN3dmhfc1RVb19jQnQ4SUZNanc4R2lOaEY5a3BiWDRQeDZ2UV9Pdk96MHh1QUZ0emVLZzRmWkRHV0dvRzRmTUJHZ0pKNHlxV25XRXFrVThESTFweEM5TzBCX1ljcDI5SlM5MVRvd1pHNjBUWVdQaFd4RjZGWVkyVG9NQnc5QVF0Uk05V1lSUWk4WUpoZk5NYS1JTEw1Y2l2MXBQVQ?oc=5"
-        },
-        {
-          "title": "Rush Street Interactive COO Mattias Stetz sells $4.28m in stock - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxOa0N0cGdzcTA2cFJUTFdKU0Y5NkI3ZWdLOUhKajFLdnAwREZQYVUzUEgwb3JhcVBMMUp6QmwyRkJaQjFGaXowYURkLUxQdjB4Y0h6dHluRWdnQzBaVkV2UnBPZEFSZXB6Tk5wWEl4SWNEYlVZM1FlbmJ5N2NVQW1hQk9lV3hQWHFlc0haUjhTMFhUT2NQeldSMTZPUTlRTkR2Rlh4WUxiYmtpUXRLVmN4ZkZJTUhFUzd4a2hRa1JvOG5CSW9Y?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNamtrMzVSeXZQdktIUGNWLVc4dV9FVUl6T3FTOUN3aVpkR1Q4ZGNfWXp4VFhCZGk4ZWxIbm5COW9sNzNraTZYMXdYN0s3TzQwdllyQnM1OE1BTFF6eW9vQmhvTG4zV3hFVnN1eW1EYjMxQWN4SG5FVVd4YW9tRjFHeQ?oc=5"
         }
       ],
-      "float_shares": "193.82M",
-      "short_float": "2.64%",
-      "daily_pct": 8.17,
-      "industry": "Others",
-      "technical_status": "Fail (ADR 2.5% < 4%)",
+      "float_shares": "97.92M",
+      "short_float": "19.03%",
+      "daily_pct": 7.58,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $43M < $100M)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 95,
+        "confidence_score": 100,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found for COO",
-        "discrepancy_note": "The primary claim states 'No immediate fundamental catalyst found for COO'. However, Source A [1] 'CooperCompanies Announces Second Quarter 2026 Results' and Source B [2] 'CooperCompanies stock rises on Q2 beat' both identify an immediate fundamental catalyst (Q2 results/beat) for COO, directly contradicting the claim."
+        "primary_claim": "NRIX gap lacks a clear fundamental catalyst",
+        "discrepancy_note": "The primary catalyst claim states a lack of a clear fundamental catalyst. However, multiple Google News sources ([1], [3], [5]) explicitly identify a 'Roche Partnership' or 'Roche Collaboration' as the reason for NRIX's stock movement, which constitutes a clear fundamental catalyst, directly contradicting the initial claim."
       },
-      "gates_passed": 4,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
       },
       "meets_all_gates": false,
       "tier": "Fail",
       "tier_label": "Excluded"
     },
     {
-      "ticker": "IOT",
-      "price": 35.7,
-      "gap_pct": 3.64,
-      "pm_volume": 106267,
-      "avg_vol_10d": 7435792,
-      "avg_dollar_vol": 265457774,
-      "mkt_cap": 20805661904,
-      "rvol": 5.58,
-      "adr_pct": 5.87,
-      "category": "Earnings",
-      "theme": "Earnings Report",
-      "reasoning": "Samsara (IOT) reported its **First Quarter Fiscal Year 2027 Financial Results**, serving as a key fundamental catalyst for potential price momentum.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 90,
-      "grade": "B",
-      "finviz_theme": "AI Edge & IoT",
+      "ticker": "INTC",
+      "price": 110.22,
+      "gap_pct": 11.93,
+      "pm_volume": 10936210,
+      "avg_vol_10d": 116537828,
+      "avg_dollar_vol": 12844799402,
+      "mkt_cap": 553965709771,
+      "rvol": 1.32,
+      "adr_pct": 6.82,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "Samsara (IOT) officially released its **First Quarter Fiscal Year 2027 Financial Results** on **2026-06-04 at 20:10 UTC**, providing an update on its business performance and financial outlook.",
-        "impact": "This significant fundamental update will drive investor sentiment and price action, potentially leading to **revisions in analyst estimates** and **short-term volatility** based on the reported figures."
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\n**Samsara** released its **First Quarter Fiscal Year 2027 Financial Results** on **2026-06-04 at 20:10 UTC**. This report provides the market with key insights into the company's recent operational performance and financial standing, setting the stage for investor reaction.\n\n• **The Growth (Momentum)**\nThe disclosure of **fiscal year 2027 first-quarter financials** will be crucial for assessing **Samsara's growth trajectory** within the connected operations market. Investors will analyze these results for signals regarding **customer acquisition, revenue expansion**, and **market penetration** in the IoT sector.\n\n• **The Guide**\nManagement commentary accompanying the **financial results** will offer forward-looking perspectives on **Samsara's strategic initiatives** and **future outlook**. This guidance is essential for analysts to update their models and for investors to gauge the company's **potential for sustained momentum** in the coming quarters.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
       "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
+      "leverage_etfs": [
         {
-          "title": "1 Cash-Producing Stock with Exciting Potential and 2 We Avoid - StockStory",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOazlSVklYd0ZxcFdpSTkzZVAzR0c0NDFiWERnVXUtLTlyNWNaYlJnUzFkYjJmUnoycko1amhybHhSZl9uTnBUU3d0aEtQSHRFLXVSbkxkV3R0WElJTElRWUlZSkViSEE0cmtxOWQzS2ZEWEMxMEdBM1o2aHp1NU9CRDJXN1MzMEhNVnh4ZVJqYXdjb3NCcm9haW5jdFhDSFo0dkRJMU8xRnpxNFlXcUZMbG83Z0hXNlNRTjE4eA?oc=5"
-        },
-        {
-          "title": "Samsara Reports First Quarter Fiscal Year 2027 Financial Results - Business Wire",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNMllrUUprc2dianRMTGtHaFNSeG4xaEdwVFo5Y2trZkdMTGpCalhDOERNeFY0MjJCX0xuM0ZKT2N5dS00Sm1LZzFhNXp2ZjRkUUtWQkkycXhJMm8wV0QycUlKQnRXcjY1bC1iRXllRTNRQ1YxTG1wWFJzM2FrOXNGcDVSdHNHVnIxNFMxdFZiU25DUEs0ZTZlT3J0TUFBbHRNOG0xZlhxQnZKcG56T0FrdXV5Zk05WUJNSWFFTHVn?oc=5"
+          "ticker": "INTW",
+          "mult": "2x"
         }
       ],
-      "float_shares": "359.41M",
-      "short_float": "10.99%",
-      "daily_pct": 1.3,
-      "industry": "AI Edge & IoT",
+      "inverse_etfs": [],
+      "headlines": [],
+      "float_shares": "4.25B",
+      "short_float": "3.32%",
+      "daily_pct": 10.81,
+      "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Verified",
-        "confidence_score": 100,
+        "status": "Unconfirmed",
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "First Quarter Fiscal Year 2027 Financial Results",
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "NNE",
+      "price": 26.09,
+      "gap_pct": 11.21,
+      "pm_volume": 370851,
+      "avg_vol_10d": 3578126,
+      "avg_dollar_vol": 93353307,
+      "mkt_cap": 1358853107,
+      "rvol": 1.24,
+      "adr_pct": 9.36,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "float_shares": "42.30M",
+      "short_float": "21.29%",
+      "daily_pct": 10.48,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $93M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found for NNE's price action.",
+        "discrepancy_note": null
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "MRVL",
+      "price": 299.11,
+      "gap_pct": 9.59,
+      "pm_volume": 3517612,
+      "avg_vol_10d": 68183249,
+      "avg_dollar_vol": 20394291608,
+      "mkt_cap": 261657051561,
+      "rvol": 1.45,
+      "adr_pct": 8.58,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "MRVL gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "MRVL gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nMRVL gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [
+        "AVGO",
+        "QCOM",
+        "NVDA"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "MRVU",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Marvell stock surges on S&P 500 inclusion - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOdTVqWkdJQXVURVo3UU1BN2RGSmhRVnZna2lMSHJlaUpETFJlU25pTU0zZ2dGLUQ2ZVQ2UVdKYjVxY2VqRFJnWDk1UUFUUExmOXBWbXpTMng2cTRZLTVVV2xXQk9oak9YdktoM08xTHFVVS1Uejd0bnV5c2kyclVmQnZPOFZULTNVLVFTcWFqeVZDN2h5YTBGLXdERjMwMzZhQl84UUx4bw?oc=5"
+        },
+        {
+          "title": "Forget Marvell: 1 Unstoppable Semiconductor Stock to Buy Hand Over Fist After the Market Pullback - 24/7 Wall St.",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQcEh5UUdMaWctMW8tUHNQLW1tTm5IVVd3UThZWTR1MTJzVXBFWVMzV2RNY3ViM2M4SFNETVFrNWVoeHh0R1pSbDh0ZTFHaEFsVGVmdmwzS193elZaQkdSR2hOeXlCOXhYc3BIcU5pMXZ2Qzc0T3NYNHJoenctRzAyLTVSVXdxOXFBbVgwTnRYZnNsRFpzSWY1TjJSaG5scThEU2FGUmZZbm0tenVjbXh1emdZWHU5YUdSU2JOX2RRTzd0TmlHQ2pSSnFyZFFpNkZZaXR3cnZ4aw?oc=5"
+        }
+      ],
+      "float_shares": "868.07M",
+      "short_float": "3.71%",
+      "daily_pct": 13.02,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "MRVL gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "WOLF",
+      "price": 56.41,
+      "gap_pct": 8.77,
+      "pm_volume": 552290,
+      "avg_vol_10d": 9099990,
+      "avg_dollar_vol": 513330436,
+      "mkt_cap": 2726807616,
+      "rvol": 0.65,
+      "adr_pct": 16.45,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "WOLF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "WOLF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nWOLF gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [
+        "NVTS",
+        "STM",
+        "ON"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "GE and Wolfspeed race to bring high-voltage silicon carbide to AI and defense - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPdVVoa3FEeTh6N0lFcU5FZTZObnBSbVJSNmdOZGpaYzZWeWlQTlVqUTJTa3pPT2tYZ0JZRlZkTW1fUHFVVmY0ZDNST2gzLVQwd040YThlODZzdnBYU1poTndKT0c4czdLMVdyS0VfeFMtNEE1LVppRmxCcW1BeTlqcGpjMTZhTUt0STVqRVo1QURxRzJEaWVaMmozcmxoN0NwS0hlTTRCMDZnNWpJZFJQMm1xVjlYZUVEeGl0YQ?oc=5"
+        }
+      ],
+      "float_shares": "28.73M",
+      "short_float": "96.35%",
+      "daily_pct": 2.18,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "WOLF gap lacks a clear fundamental catalyst",
+        "discrepancy_note": "The primary claim states a lack of a clear fundamental catalyst. Source A (Finviz) has no news. However, Source B (Google News via Stock Titan) provides a potential fundamental catalyst: 'GE and Wolfspeed race to bring high-voltage silicon carbide to AI and defense'. This news contradicts the claim that a clear fundamental catalyst is lacking."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "MU",
+      "price": 947.65,
+      "gap_pct": 8.61,
+      "pm_volume": 3474365,
+      "avg_vol_10d": 56232404,
+      "avg_dollar_vol": 53288637651,
+      "mkt_cap": 1068697145508,
+      "rvol": 1.02,
+      "adr_pct": 6.56,
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "MU reported quarterly results; earnings catalyst detected in headlines.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "MU reported quarterly results; earnings catalyst detected in headlines.",
+        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+      },
+      "analysis_details": "• **The Results**\nMU reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "MUU",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "MUD",
+          "mult": "1x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "Q1 Earnings Roundup: Micron (NASDAQ:MU) And The Rest Of The Semiconductors Segment - The Globe and Mail",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxQamxrdktRX3NBMGsyQWo2YklFelZ4cjVwWGpTWW56MzR6QmdCaTcwVy1JQWpxSTlDNkJnVXlTVWV2cVkwRkxQY2JaREl4OHl4LTFFR1lhcFlScDJlUVI3dDJKMDM3ZFprZnZHc1RncVBIRldpamMweFJlNVNkOUwwc0RZcDVtUjdTRzdCRVJ0YVFtSkJRSHdsbHRXWUV1VlJxbi1GT09DZEd2Z21YWHlLWDludW9jNFpaWlo3UmFIUXo2c3dCQnRDbVJucmlIeVdQTlJ0b25HSlNsa1lISDN5NU0tcnZXeVBhc01tWDFRQmgxVWs?oc=5"
+        }
+      ],
+      "float_shares": "1.12B",
+      "short_float": "3.14%",
+      "daily_pct": 9.39,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "MU reported quarterly results; earnings catalyst detected in headlines.",
         "discrepancy_note": ""
       },
       "gates_passed": 5,
@@ -397,61 +531,468 @@
       "tier_label": "Strong Catalyst"
     },
     {
-      "ticker": "APP",
-      "price": 563.48,
-      "gap_pct": 3.6,
-      "pm_volume": 90280,
-      "avg_vol_10d": 4802877,
-      "avg_dollar_vol": 2706325132,
-      "mkt_cap": 189295466519,
-      "rvol": 0.98,
-      "adr_pct": 6.48,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found for AppLovin (APP) in the headlines; move likely technical or related to institutional flow.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "AI Ads & Search",
+      "ticker": "GLW",
+      "price": 187.55,
+      "gap_pct": 8.56,
+      "pm_volume": 599708,
+      "avg_vol_10d": 12323224,
+      "avg_dollar_vol": 2311220661,
+      "mkt_cap": 161412624314,
+      "rvol": 1.09,
+      "adr_pct": 6.32,
+      "category": "New Contract/Partnership",
+      "theme": "New Contract/Partnership",
+      "reasoning": "GLW announced a new contract or strategic partnership.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "Unknown. No specific fundamental news directly impacting AppLovin (APP) was identified in the provided headlines over the last 24 hours.",
-        "impact": "Speculative. Any significant price movement lacking a clear fundamental trigger carries high risk of a \"Gap and Trap\" scenario without solid backing."
+        "catalyst": "GLW announced a new contract or strategic partnership.",
+        "impact": "Contract or partnership announcement detected. Evaluate deal size and strategic significance."
       },
-      "analysis_details": "• **What Happened**\nNo specific fundamental news for AppLovin (APP) has been reported in the last **24 hours** that would explain a significant price movement. The headlines include a generic **AppLovin Corp SEC Filing** and a separate report about a **New app** involving **AI** and **GRAV tokens**, which is not clearly linked to APP. Without specific content from the **SEC Filing**, it cannot be identified as a market-moving catalyst.\n\n• **Key Consideration**\nGiven the absence of a discernible fundamental trigger, any market movement for APP would likely be attributed to **technical factors** or **institutional trading flows**. Such moves are inherently speculative and may indicate a **low float squeeze** or **stop-running**, posing a significant risk of reversal for momentum traders seeking a sustainable narrative.",
-      "peer_tickers": [],
+      "analysis_details": "• **The Announcement**\nGLW announced a new contract or strategic partnership.\n\n• **Strategic Value**\nContract or partnership announcement detected. Evaluate deal size and strategic significance.",
+      "peer_tickers": [
+        "COHR",
+        "LITE",
+        "FNSR"
+      ],
       "leverage_etfs": [
         {
-          "ticker": "APPX",
-          "mult": "2x"
+          "ticker": "TECL",
+          "mult": "3x"
         }
       ],
+      "inverse_etfs": [
+        {
+          "ticker": "TECS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "Corning stock surges 10% on multibillion-dollar Amazon deal - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNWjRxbThPdE00Q05oMVV1VlhGYzY2TmM3eGtmYzNDbzI2X2c2TXV0azRlbGpOT1FsLXlXTWh2M3hfQm0ybmd1eWlIVndHRG95Vm1MQkJTSjgzUV9VaXhZTDVUb3N2TWpERHJKUWFRWDAwTEcyUjdOVEkxalhLaE5wMW0zUzc4ZS1lSXRUSm9KUHpGVlJWUkFWSV9XT2hYb2xJQ094Q1pWVU5OTWRSUWZKemJQYms?oc=5"
+        }
+      ],
+      "float_shares": "787.93M",
+      "short_float": "2.70%",
+      "daily_pct": 5.32,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "GLW announced a new contract or strategic partnership.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "ASST",
+      "price": 15.27,
+      "gap_pct": 7.97,
+      "pm_volume": 149601,
+      "avg_vol_10d": 5496194,
+      "avg_dollar_vol": 83926882,
+      "mkt_cap": 1115629631,
+      "rvol": 0.72,
+      "adr_pct": 8.14,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "ASST gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "ASST gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nASST gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "[144] AppLovin Corp SEC Filing - Stock Titan",
+          "title": "Strive (NASDAQ: ASST) boosts bitcoin holdings and adds Class A shares - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPeGVqWjUyVXVCdl9GdmEteUZxUXQ2d3pxSEFqUjM5YlEtRmMtMXVjQjdOZDF3eWdLX0F0ZGpHXzNZc2NBMjdGMmxWQXR4STZ1a01TdkVwcTRMaTRLYVRZLS1CZ2ZmUFBEVDc1SFZidnlKdzFyVl9VSHMzYUZvTnJ3ajFtSVJxb0lXMU9YVktnRUFFNHo3?oc=5"
-        },
-        {
-          "title": "New app pits forecasts against AI, with points toward possible GRAV tokens - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPTWpES2dxTlRUOTUxMlVhUUU4cjROckRsT3NhMnRldGxBTWg1U2NfRXBrX0NCNHM3RzJBSzlDUUFIX2poU0VkV29FZU92anZzdEJuTEluTXhqUnh4TU5vTzFTaHNEWEVxa0wyNzdNTVIxYkUzakJfb1dVRnZicmhwYjREN1JIbE1ldXJMblJDRDZ6WXJqX2dHZGd4d2RGVnJzNHNGeVhheHB4SUNlXzRBMmlDNjE3VkN2VFl5Z2NidllVQQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPckpvYU9sSGdyY2kyQWw0V3dUd3RCbWQwbUtfbnRCazI5OEJCdjh5UF9YRWNkWWFmR3VkcXFnM2Y3WjA5RjdhZGhKM1FPU0NPNnM3YXJrRHVSejZoaUxYek9YbFZlUFhDSVJ5dHo0Y25Nd2Y2N1VvbzdzcHdvVkdOSEwxS1hoTnR5OG5IZEdyTWoxNFY4OTZGZ3o2VVRrWW13?oc=5"
         }
       ],
-      "float_shares": "256.78M",
-      "short_float": "4.66%",
-      "daily_pct": 0.69,
-      "industry": "AI Ads & Search",
-      "technical_status": "Pass",
+      "float_shares": "61.89M",
+      "short_float": "20.53%",
+      "daily_pct": 9.45,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $84M < $100M)",
       "verification": {
-        "status": "Verified",
+        "status": "Discrepancy",
         "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found for AppLovin (APP) in the headlines.",
+        "primary_claim": "ASST gap lacks a clear fundamental catalyst",
+        "discrepancy_note": "The primary claim states a lack of a clear fundamental catalyst. Source B (Google News) explicitly mentions fundamental catalysts: 'Strive (NASDAQ: ASST) boosts bitcoin holdings and adds Class A shares', directly contradicting the claim."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "NAK",
+      "price": 2.02,
+      "gap_pct": 7.85,
+      "pm_volume": 176491,
+      "avg_vol_10d": 7468563,
+      "avg_dollar_vol": 15086497,
+      "mkt_cap": 1133978159,
+      "rvol": 0.75,
+      "adr_pct": 7.47,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "float_shares": "549.79M",
+      "short_float": "4.66%",
+      "daily_pct": 6.28,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $15M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
         "discrepancy_note": null
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "BTGO",
+      "price": 5.55,
+      "gap_pct": 7.43,
+      "pm_volume": 137650,
+      "avg_vol_10d": 2780133,
+      "avg_dollar_vol": 15429738,
+      "mkt_cap": 643574724,
+      "rvol": 0.86,
+      "adr_pct": 10.44,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "BTGO gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "BTGO gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nBTGO gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Crypto firm BitGo rolls out $250M-insured electronic trading in Dubai - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOLXlIaV9NTmt0ZEhyNmhoYXhqb0lsMTREb0ZOX09rZFh3NnVjXzA5cGtpME9OcW5hdVcyZmRmNGdrcy1Ja3ZWUGVoOExuQjZNTWdjWFJYRmFOX0N3cWtfX04xdTRTdV9pNkJGQWNQY3lyczR0UlgtcDBudGNJUHpGWUQ4X3dNeFNxZG1MTGJkOVJxQ0hpcmEyeGFKa05oS2lqYVN1eldjSHZJM0FZVzN4RVZqWEVHYnRIdi1nRA?oc=5"
+        }
+      ],
+      "float_shares": "64.52M",
+      "short_float": "4.50%",
+      "daily_pct": 17.94,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $15M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "BTGO gap lacks a clear fundamental catalyst",
+        "discrepancy_note": "Source B (Google News) [2] mentions a specific fundamental catalyst: 'Crypto firm BitGo rolls out $250M-insured electronic trading in Dubai', directly contradicting the claim that there is no clear fundamental catalyst. Source A provides no information."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "EH",
+      "price": 8.8,
+      "gap_pct": 7.41,
+      "pm_volume": 51666,
+      "avg_vol_10d": 1309733,
+      "avg_dollar_vol": 11525650,
+      "mkt_cap": 592686230,
+      "rvol": 1.46,
+      "adr_pct": 5.72,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "EH gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "EH gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nEH gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Chinese air-mobility firm EHang plans $30M share buyback - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOUDhPOWtna0kxNjJ4T0Ffc1pobGF0enlSTFFFNTBlcjdNSWJVUzBxaXRQNDl3ZS1jS19hQjZPUGVXZXphNXJ4UlV1OWM4YXhtdkV5TlhXWDlMWlhGSHZlOExwVEZ2N1BXaGl1Q050cnpGdjl1Y1ZLQXVCT3o4WXp1aVhRZHd0TVd0bkY4RjhyOUpZMk51Ni1XWGtvVktoRWNQcnc?oc=5"
+        }
+      ],
+      "float_shares": "54.70M",
+      "short_float": "11.27%",
+      "daily_pct": 11.4,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $12M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "EH gap lacks a clear fundamental catalyst",
+        "discrepancy_note": "The primary catalyst claim states a lack of a clear fundamental catalyst. However, Google News sources [3], [4], and [5] explicitly report a fundamental catalyst: EHang's announcement of a '$30M share buyback program'. This directly contradicts the initial claim."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "SFTBY",
+      "price": 22.45,
+      "gap_pct": 7.34,
+      "pm_volume": 199731,
+      "avg_vol_10d": 2828042,
+      "avg_dollar_vol": 63489543,
+      "mkt_cap": 264310089906,
+      "rvol": 0.66,
+      "adr_pct": 5.45,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $63M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "LWLG",
+      "price": 10.19,
+      "gap_pct": 7.0,
+      "pm_volume": 86850,
+      "avg_vol_10d": 6334278,
+      "avg_dollar_vol": 64546293,
+      "mkt_cap": 1569300986,
+      "rvol": 0.67,
+      "adr_pct": 12.03,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [
+        "COHR",
+        "AXTI",
+        "LITE"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [],
+      "float_shares": "152.20M",
+      "short_float": "8.97%",
+      "daily_pct": 0.25,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $65M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "ENPH",
+      "price": 58.19,
+      "gap_pct": 6.99,
+      "pm_volume": 151711,
+      "avg_vol_10d": 7844837,
+      "avg_dollar_vol": 456491065,
+      "mkt_cap": 7669338250,
+      "rvol": 0.54,
+      "adr_pct": 10.41,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "float_shares": "127.77M",
+      "short_float": "23.50%",
+      "daily_pct": 3.53,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -466,56 +1007,123 @@
       "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "PTEN",
-      "price": 11.78,
-      "gap_pct": 3.1,
-      "pm_volume": 86166,
-      "avg_vol_10d": 8049178,
-      "avg_dollar_vol": 94819317,
-      "mkt_cap": 4471858066,
-      "rvol": 1.87,
-      "adr_pct": 4.38,
+      "ticker": "PENG",
+      "price": 65.35,
+      "gap_pct": 6.82,
+      "pm_volume": 75557,
+      "avg_vol_10d": 3327390,
+      "avg_dollar_vol": 217444936,
+      "mkt_cap": 3316349747,
+      "rvol": 1.17,
+      "adr_pct": 10.07,
       "category": "Others",
-      "theme": "Capital Structure Management",
-      "reasoning": "PTEN announced expanding its **equity plan** and refinancing with new **2036 senior notes**, optimizing its capital structure and extending debt maturity.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 59,
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
       "grade": "C",
-      "finviz_theme": "Energy - Oil & Gas",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "Patterson-UTI Energy (PTEN) announced it is **expanding its equity plan** and simultaneously **refinancing existing debt** with **2036 senior notes**. This indicates active management of its capital structure.",
-        "impact": "The refinancing likely **extends debt maturities**, reducing short-to-medium term refinancing risk and potentially optimizing interest costs, while the expanded equity plan provides **capital flexibility**."
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
       },
-      "analysis_details": "• **What Happened**\nPatterson-UTI Energy (PTEN) announced proactive steps in its capital management by **expanding its equity plan**. Concurrently, the company is **refinancing existing obligations** with **senior notes due in 2036**, indicating a move to extend debt maturities and potentially improve its debt profile.\n\n• **Key Consideration**\nThe refinancing into **2036 senior notes** likely enhances balance sheet stability by pushing out debt maturities, reducing near-term financial obligations. The expanded equity plan provides future capital optionality, although it could imply potential dilution if new shares are issued. These actions suggest a focus on financial flexibility and long-term sustainability.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [
+        "SMCI",
+        "NVDA",
+        "ANET"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "TECL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "TECS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [],
+      "float_shares": "48.53M",
+      "short_float": "19.56%",
+      "daily_pct": 8.69,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found for PENG.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "ALM",
+      "price": 16.64,
+      "gap_pct": 6.62,
+      "pm_volume": 195535,
+      "avg_vol_10d": 5287954,
+      "avg_dollar_vol": 87991555,
+      "mkt_cap": 4721464572,
+      "rvol": 0.75,
+      "adr_pct": 7.7,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "ALM gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "ALM gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nALM gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Patterson-UTI Energy (PTEN) expands equity plan and refinances with 2036 senior notes - Stock Titan",
+          "title": "Almonty Industries: Short-Term Shock, Long-Term Opportunity - news.financial",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOb2JFb1lqMnRXQUY2ekJyWTZzU0Rab3RTZW1QWEpvekJqY1J1R29sU2hIZXBHNi0ybDNkS2dNay01NnZlVmpBalpVQlBLaHZnMkJaYW8xXzgzZkJibllxeEZseVlDOVdJU0hDUmlPc0RyU3N4ZVdMQlhBZkRnV0NhbExLeXlOcFVoMUdrbThkMTUtS1lPYnZKcUJlMzJMalRCejY2bHlXS1Jnb3FzQlFPNUl0UQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOXzNaaExXb0lKd1pyX3dIUEU0R3RqUF9HcVp2MnRGQmxuSFVGbTd3dk80WmxmanJyY2kzTGg3dzVTUXBIV0xnMFBsMVRXbng5cEZqMU40VFQtVFlWSEl4azdCVEJKbGxiWnUxTy1xMUE2RUpCcTNZSFRWcFhBdDduMzVoQk83QUxWVTJWUUJjby0weVk?oc=5"
         }
       ],
-      "float_shares": "364.33M",
-      "short_float": "3.97%",
-      "daily_pct": -3.83,
-      "industry": "Energy - Oil & Gas",
-      "technical_status": "Fail (Avg $Vol $95M < $100M)",
+      "float_shares": "187.34M",
+      "short_float": "2.53%",
+      "daily_pct": 2.02,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $88M < $100M)",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 95,
+        "status": "Unconfirmed",
+        "confidence_score": 60,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "2036 senior notes",
-        "discrepancy_note": "Finviz News (Source A) does not mention the '2036 senior notes'. Only Google News [1] (Source B) confirms this specific detail."
+        "primary_claim": "ALM's gap lacks a clear fundamental catalyst.",
+        "discrepancy_note": "Neither source provides enough detail to confirm or deny the absence of a clear fundamental catalyst. Finviz has no news. The Google News headline mentions 'Short-Term Shock, Long-Term Opportunity,' which hints at fundamental discussion but doesn't explicitly state a specific catalyst (positive or negative) to verify the summary's claim of 'lacks a clear fundamental catalyst' or to provide specific figures/dates as requested by the prompt for verification."
       },
-      "gates_passed": 3,
+      "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": false,
+        "gate_price": true,
         "gate_dollar_vol": false,
         "gate_mkt_cap": true,
         "gate_adr": true
@@ -525,42 +1133,36 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "CMG",
-      "price": 29.45,
-      "gap_pct": 3.09,
-      "pm_volume": 416023,
-      "avg_vol_10d": 22207606,
-      "avg_dollar_vol": 654013997,
-      "mkt_cap": 37770103297,
-      "rvol": 2.6,
-      "adr_pct": 3.3,
-      "category": "Upgrade",
-      "theme": "Analyst Upgrade",
-      "reasoning": "JPMorgan initiated an upgrade on Chipotle stock to Overweight, setting a new $35 price target, indicating increased institutional confidence.",
-      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
-      "conviction": 36,
-      "grade": "B",
-      "finviz_theme": "Others",
+      "ticker": "VELO",
+      "price": 16.81,
+      "gap_pct": 6.25,
+      "pm_volume": 89568,
+      "avg_vol_10d": 2623041,
+      "avg_dollar_vol": 44093319,
+      "mkt_cap": 500954864,
+      "rvol": 0.55,
+      "adr_pct": 13.89,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "JPMorgan **Upgraded Chipotle Stock** to **Overweight** with a **Target of $35**. This significant re-rating from a major investment bank signals a shift in institutional perception.",
-        "impact": "This upgrade suggests a potential for **positive momentum** and **price appreciation** as institutional funds adjust their positions in response to the improved rating and price target."
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
       },
-      "analysis_details": "• **The Firm & Rating**\nJPMorgan has **Upgraded Chipotle Stock** to **Overweight**, a significant revision reflecting increased confidence from a major financial institution. This upgrade is accompanied by a **Target of $35**, indicating potential upside identified by the firm.\n\n• **The Thesis**\nThe re-rating to **Overweight** by JPMorgan suggests a bullish outlook on Chipotle's fundamental trajectory or market positioning. This thesis could drive further institutional flow and positive sentiment, potentially leading to sustained upward momentum for the stock.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "JPMorgan Upgrades Chipotle Stock to Overweight With Target of $35 - TIKR.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQUXF3R2ViZTltUWp0RWVOWnJ5M3hCVHpTMy1FYURrYS0ycFlGRVQ5cWk2aTUxd1RmVFhhWW9ORlkzS2xfNzI3ejVzSEJ5c29vcE1OaUdTRlFlbmdBWTIxWmRNdnpPaGUwNVJsWXNqMDBscld3cWl3eGZYYkI0cE5YaU1MLS14d2tUWnRXN3luNXRLS2Q3bnVKaWJqMjg1ZUpu?oc=5"
-        }
-      ],
-      "float_shares": "1.27B",
-      "short_float": "3.34%",
-      "daily_pct": 4.49,
-      "industry": "Others",
-      "technical_status": "Fail (ADR 3.3% < 4%)",
+      "headlines": [],
+      "float_shares": "13.70M",
+      "short_float": "23.48%",
+      "daily_pct": 5.99,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $44M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 95,
@@ -568,75 +1170,363 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "JPMorgan set a new $35 price target for Chipotle stock.",
-        "discrepancy_note": "Source B (specifically article [1]) confirms the $35 price target, but Source A (Finviz News) contains no information to corroborate this claim."
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "Source A (Finviz) reports no news, supporting the claim of no immediate fundamental catalyst. However, Source B (Google News/Yahoo Finance) presents a headline that suggests a fundamental catalyst ('Hot Tech Stocks to Buy According to Analysts'), which contradicts the claim that no immediate fundamental catalyst was found."
       },
-      "gates_passed": 4,
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "HUT",
+      "price": 117.95,
+      "gap_pct": 6.22,
+      "pm_volume": 72161,
+      "avg_vol_10d": 4125028,
+      "avg_dollar_vol": 486547053,
+      "mkt_cap": 13279968181,
+      "rvol": 1.0,
+      "adr_pct": 8.11,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "HUT gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "HUT gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nHUT gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Craig-Hallum Remains a Buy on Hut 8 (HUT) - The Globe and Mail",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNSzc0LWZ0V0tfYTEyZjRpdnNXeUljbUdaeUczeEZOREVKNWtXV2s5ZTlFbkJDTHRmeDJWTmx1cmplckVZTWFzMFJZcF9MUW14Q0d1YVN6QU9yeDI0RHY3OW5TOFZIaUhnTExSVVo0QVlSTTVHMjhyU0JmakFtQ2hzSk1kQWpjMl9GZTFSTDJLUXFWbnRXVG5nLUJ5SktWLVpLUE9nejRGd0JQNkNJcTFud2gwaXc4OFJkVTg1Yg?oc=5"
+        }
+      ],
+      "float_shares": "101.95M",
+      "short_float": "15.34%",
+      "daily_pct": 4.84,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "HUT gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "discrepancy_note": "The primary claim refers to a 'HUT gap,' typically implying an upward move, and questions its fundamental catalyst. However, Google News [3] explicitly states 'Why is HUT stock sliding over 2% premarket today?', which contradicts the premise of an upward 'gap' and suggests a downward move instead. The lack of a clear fundamental catalyst *for a gap up* cannot be confirmed when the stock appears to be moving down."
+      },
+      "gates_passed": 5,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
         "gate_dollar_vol": true,
         "gate_mkt_cap": true,
-        "gate_adr": false
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "PURR",
+      "price": 8.89,
+      "gap_pct": 6.1,
+      "pm_volume": 590233,
+      "avg_vol_10d": 23315737,
+      "avg_dollar_vol": 207276902,
+      "mkt_cap": 1284861101,
+      "rvol": 0.8,
+      "adr_pct": 9.71,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "float_shares": "120.54M",
+      "short_float": "7.66%",
+      "daily_pct": 4.81,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "The primary claim states 'No immediate fundamental catalyst found', implying price action is technical. However, Google News headline [3] suggests a fundamental reason for the stock's gain: 'The Crypto Token That's Now Bigger Than Dogecoin Is Sending This Stock Soaring'. This indicates a potential fundamental driver related to a linked crypto asset, directly contradicting the 'no immediate fundamental catalyst' claim."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "MRAM",
+      "price": 24.11,
+      "gap_pct": 6.04,
+      "pm_volume": 84124,
+      "avg_vol_10d": 3943839,
+      "avg_dollar_vol": 95085958,
+      "mkt_cap": 565438304,
+      "rvol": 0.29,
+      "adr_pct": 16.28,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "float_shares": "18.89M",
+      "short_float": "14.96%",
+      "daily_pct": 1.69,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $95M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 40,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "SRAD",
+      "price": 15.22,
+      "gap_pct": 5.97,
+      "pm_volume": 103039,
+      "avg_vol_10d": 2530073,
+      "avg_dollar_vol": 38507711,
+      "mkt_cap": 4746505666,
+      "rvol": 2.5,
+      "adr_pct": 4.32,
+      "category": "Upgrade",
+      "theme": "Upgrade",
+      "reasoning": "SRAD received an analyst rating action or price target revision.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "SRAD received an analyst rating action or price target revision.",
+        "impact": "Analyst upgrade or price target change detected. Institutional conviction may be limited."
+      },
+      "analysis_details": "• **The Analyst Action**\nSRAD received an analyst rating action or price target revision.\n\n• **The Thesis**\nAnalyst upgrade or price target change detected. Institutional conviction may be limited.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Needham raises Sportradar stock price target on Kalshi deal - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOYWJRdnRLNThnWDN0WXhpZUVMM29md3MxZ2R6TmpDZWFwdjlxdkFteG1sNGtsaFhQVnJVUDFSOHZ5MzJpSUlQdmtRTnZjSTZnZEhVWS1PRWN5NWdhTjdnUnkzVUJlNzRBaXI1S3lkSWRQQzZLVU5ESWJ1cDNvYWQ2amMwcVE3MV9mOWJBTzJfVzZidHZpUWxGME9HbGF0eXU5QjNRUi1yM0lOWUxBOXlHcm1OaFhVcm1aaEF3?oc=5"
+        }
+      ],
+      "float_shares": "184.29M",
+      "short_float": "4.07%",
+      "daily_pct": 9.86,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $39M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "SRAD received an analyst rating action or price target revision.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "TE",
+      "price": 9.18,
+      "gap_pct": 5.94,
+      "pm_volume": 1994456,
+      "avg_vol_10d": 44349370,
+      "avg_dollar_vol": 407127217,
+      "mkt_cap": 2562314832,
+      "rvol": 0.62,
+      "adr_pct": 13.66,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "TE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "TE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nTE gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "T1 Energy (NYSE: TE) plans $32M KORE Power acquisition with stock earn-outs - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQU0hCemMwbVM3QXdlNXlRNzE2cnNTbFhmR0NjSlFRZlE5WXVfLTdFcEdKaGlwblYyWUpjR2J2WExjaEZBdDVyX2J2WXNDMXJaakZLUll1QU02VW52dXBQUEpKakx0emdGd0h0Q2ptU19ZdXJwMDJVSnpHcEd5cGxmRzNzVTFGTGlZRGVBWkw4S2xDanBKVGZhYVp1Ny0wZjVyOEE?oc=5"
+        }
+      ],
+      "float_shares": "226.99M",
+      "short_float": "21.63%",
+      "daily_pct": -3.45,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "TE gap lacks a clear fundamental catalyst",
+        "discrepancy_note": "The primary catalyst claim states TE lacks a clear fundamental catalyst. However, Google News [1] reports 'T1 Energy (NYSE: TE) plans $32M KORE Power acquisition with stock earn-outs', which is a clear fundamental catalyst. Finviz reported no news."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
       },
       "meets_all_gates": false,
       "tier": "T3",
       "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "AXTA",
-      "price": 32.83,
-      "gap_pct": 3.08,
-      "pm_volume": 349797,
-      "avg_vol_10d": 4048275,
-      "avg_dollar_vol": 132904868,
-      "mkt_cap": 7026236264,
-      "rvol": 1.08,
-      "adr_pct": 3.1,
+      "ticker": "MRLN",
+      "price": 8.14,
+      "gap_pct": 5.93,
+      "pm_volume": 409644,
+      "avg_vol_10d": 5564440,
+      "avg_dollar_vol": 45294542,
+      "mkt_cap": 785464536,
+      "rvol": 1.83,
+      "adr_pct": 12.95,
       "category": "Others",
-      "theme": "Corporate Governance",
-      "reasoning": "Axalta's **2026 AGM** saw shareholders **back the board slate** and approve **PwC audit** and **2025 pay**, a routine corporate governance event.",
+      "theme": "Others",
+      "reasoning": "MRLN gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 57,
+      "conviction": 50,
       "grade": "C",
-      "finviz_theme": "Others",
+      "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "Axalta (AXTA) announced that its **2026 Annual General Meeting** resulted in shareholders backing the **proposed board slate**, approving the appointment of **PwC** as independent auditors, and endorsing **2025 executive remuneration**.",
-        "impact": "This is a routine corporate governance announcement with minimal to no impact on the company's operational performance or stock price momentum, suggesting it is noise."
+        "catalyst": "MRLN gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
       },
-      "analysis_details": "• **What Happened**\nAxalta (AXTA) held its **2026 Annual General Meeting**, where shareholders voted to **back the nominated board slate**, ensuring continuity in leadership. The meeting also saw approvals for the appointment of **PwC** as the company's independent registered public accounting firm and the endorsement of **2025 executive remuneration**.\n\n• **Key Consideration**\nThis type of news reflects standard corporate governance and typically does not provide new material information to fundamentally alter a stock's momentum. Investors generally expect these routine approvals, so the event offers no catalyst for significant price movement or re-rating of the company's prospects.",
+      "analysis_details": "• **What Happened**\nMRLN gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Axalta (AXTA) 2026 AGM backs board slate, PwC audit and 2025 pay - Stock Titan",
+          "title": "MRLN stock soars 25% on acing key design review for autonomous planes - MSN",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQaGpaYUNaaHZsVzhxZFF6aEhhTW05OXRsQVZpVmZsT1oyQndtYTZTc0tTUG1ZZUJnYTZlRUVpUV9ubkJhTUFZT1E4bmJhdkdfTnNpeml4WVhYeVZXS25xcUdOSGtpTmdaMzJTdGxFcTZIamVOWURBaFhwWVcwRkZzWEV5SWN4aTRFNldZUUZoMEtUQ29rUGJraFctTHNOQ0JPeGV3N0w0ajVYTlpiVUN2elFSMzY1Zw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNU3FrYVlKbzJMVFgzRlFHaldVb05pNkR5ckpqdy1VU1NHUjRkTWs0elJVaXlDa1FMUkVQeUpqNWJuQ3lWcW92Wk1kR0g1ZXdRajh5QS10RnF0dk80cHJrSnJqQWFfekJmelk2cmZpa21GVFFMXzMtMkZGRERDS1V5dXg5SjE1NDl5TEJlLVJ1U09nYXdJdGVvVzZZSC1YX2FoblY3bWpLY1BMRFJ1NjBkWDNPMXBPYWFranc?oc=5"
+        },
+        {
+          "title": "A Look At Merlin (MRLN) Valuation After C-130J Autonomy Design Review Milestone - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPdGtQeXdadXZVQS1FdmZpQ0d5cjViZmY5a2NxN1ZoN2lXNE1UVUE4SVRmdW02VXp6U0xTUjJFaEh1OENaVlhvR1hleGRjSlV5dFZmQTd4WUpCYTFPV1M0TEtuQlRNRHJ6eVZwZERscmcyamNDZTdjSEY2SVFJZEFRNlROTnZ0MHVQdTItX2xPNDkwUmYyamNabA?oc=5"
         }
       ],
-      "float_shares": "212.99M",
-      "short_float": "4.20%",
-      "daily_pct": 3.51,
-      "industry": "Others",
-      "technical_status": "Fail (ADR 3.1% < 4%)",
+      "float_shares": "10.18M",
+      "short_float": "25.09%",
+      "daily_pct": -5.93,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $45M < $100M)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 80,
+        "status": "Discrepancy",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "2026 AGM",
-        "discrepancy_note": "Finviz (Source A) provides no news to confirm the claim. While one Google News article ([1]) mentions '2026 AGM', another relevant Google News article ([4]) confirms the events (reelecting board, approving governance items) but does not specify '2026 AGM'. Since 'BOTH sources' (Finviz and Google News collectively) do not confirm the specific year '2026' for the AGM, the claim remains unconfirmed."
+        "primary_claim": "MRLN gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "discrepancy_note": "The initial analysis claims MRLN lacks a clear fundamental catalyst. However, Source B[1] and B[2] both explicitly cite a fundamental catalyst: 'C-130J Autonomy Design Review Milestone' and 'acing key design review for autonomous planes', which contradicts the 'lacks a clear fundamental catalyst' assertion."
       },
-      "gates_passed": 4,
+      "gates_passed": 2,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
       },
       "meets_all_gates": false,
       "tier": "Fail",
@@ -645,11 +1535,11 @@
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
-    "model": "gemini-1.5-flash",
+    "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 8,
+    "small_gaps": 23,
     "large_gaps": 2,
-    "total_headlines": 19,
+    "total_headlines": 22,
     "monthly_cost_usd": 0.01
   }
 }
