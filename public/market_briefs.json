@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-08 10:51 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-On / US Tech Surge",
+    "spy_price": 743.69,
+    "spy_change_pct": 0.83,
+    "vix": 18.42,
+    "hy_oas": 2.76,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 56.2,
+    "mmth": 62.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "Reports pre-market Q2 earnings beat with robust guidance, citing unprecedented data center GPU demand."
+        },
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Announces revolutionary AI integration for iOS 18 ahead of WWDC, driving significant analyst upgrades and anticipation."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Continues to see volatile trading amidst ongoing analyst debates over EV demand and production targets, primarily driven by flow."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-05 17:15 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Sustained bullish momentum driven by ongoing AI hardware demand expectations and positive technical breakouts, rather than a fresh fundamental catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-04-22 08:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off Tone / Divergent Global",
-    "spy_price": 704.08,
-    "spy_change_pct": -0.65,
-    "vix": 19.13,
-    "hy_oas": 2.87,
-    "yield_curve": 0.52,
-    "credit_status": "Complacent",
-    "s5fi": 63.1,
-    "mmth": 60.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft announced a groundbreaking strategic partnership in AI, expected to significantly accelerate cloud revenue growth and market penetration."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly reported overwhelmingly positive Phase 3 trial results for its novel obesity treatment, signaling substantial upside to future revenue projections."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is experiencing technical flow driven by options expiry and rebalancing, with no new fundamental catalyst reported today."
         }
       ]
     }
