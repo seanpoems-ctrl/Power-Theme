@@ -7998,7 +7998,7 @@ const SearchBar = ({ data, search, setSearch }) => {
     }
   };
 
-  const fetchResearch = async (ticker) => {
+  const fetchResearch = async (ticker, company) => {
     if (!GEMINI_KEY) { setResearchError(true); return; }
 
     // Check in-session cache first (free)
@@ -8011,7 +8011,7 @@ const SearchBar = ({ data, search, setSearch }) => {
     setResearchError(false);
     setResearch(null);
     try {
-      const prompt = `Please analyze ${ticker} and provide the following, concise and clearly organized:
+      const prompt = `Please analyze the stock ticker ${ticker}${company ? ` (${company})` : ""} and provide the following, concise and clearly organized:
 
 1. **Explain what the company does in like I'm 12 years old** – three short bullet points about what it does and any helpful relatable examples and analogies.
 
@@ -8182,7 +8182,7 @@ const SearchBar = ({ data, search, setSearch }) => {
                 onClick={() => {
                   setActiveTab(tab.key);
                   if (tab.key === "news" && news.length === 0 && !newsLoading) fetchNews(fullResult.ticker);
-                  if (tab.key === "research" && !research && !researchLoading) fetchResearch(fullResult.ticker);
+                  if (tab.key === "research" && !research && !researchLoading) fetchResearch(fullResult.ticker, fullResult.company);
                 }}
                 className={`text-[12px] px-3 py-1.5 border-b-2 transition-colors ${activeTab === tab.key ? "border-blue-500 text-blue-400" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}
               >
