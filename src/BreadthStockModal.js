@@ -231,6 +231,8 @@ function detectNewsCatalyst(title) {
   return { key: "others", label: "Others", color: "text-zinc-400 bg-zinc-700/40 border-zinc-600/40" };
 }
 
+const FINNHUB_KEY = process.env.REACT_APP_FINNHUB_KEY || "";
+
 // Sources that publish primarily opinion / editorial content — filtered out of the news feed
 const OPINION_SOURCES = new Set([
   "seeking alpha", "seekingalpha", "the motley fool", "motley fool",
@@ -469,41 +471,65 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
   const { ticker, company } = stock;
   const perfVal = getPerfValue(stock, perfField);
 
-  // Fetch news EAGERLY on mount — Google News RSS (same source as gapper_service.py).
-  // Company-specific: searches ticker + "stock" to filter market-relevant articles.
+  // Fetch news EAGERLY on mount — Finnhub primary, Google News RSS fallback.
   useEffect(() => {
     setNewsLoading(true);
     setNewsError(null);
     setNews([]);
-    const rss   = `https://news.google.com/rss/search?q=${encodeURIComponent(ticker + " stock")}&hl=en-US&gl=US&ceid=US:en`;
-    const proxy = `https://corsproxy.io/?url=${encodeURIComponent(rss)}`;
-    const ctrl  = new AbortController();
-    fetch(proxy, { signal: ctrl.signal })
-      .then((r) => r.text())
-      .then((xml) => {
-        const doc   = new DOMParser().parseFromString(xml, "text/xml");
-        const items = Array.from(doc.querySelectorAll("item"))
-          .map((el) => {
-            const source = el.querySelector("source")?.textContent ?? "";
-            const title  = el.querySelector("title")?.textContent ?? "";
-            return {
-              title,
-              link:     el.querySelector("link")?.textContent ?? "",
-              date:     el.querySelector("pubDate")?.textContent ?? "",
-              source,
-              catalyst: detectNewsCatalyst(title),
-            };
-          })
-          .filter((item) => !isOpinionPost(item.title, item.source))
-          .slice(0, 20);
-        setNews(items);
-        setNewsLoading(false);
-      })
-      .catch((e) => {
+    const ctrl = new AbortController();
+
+    const tryFinnhub = async () => {
+      if (!FINNHUB_KEY) return null;
+      const to   = new Date();
+      const from = new Date(to.getTime() - 90 * 24 * 60 * 60 * 1000);
+      const fmt  = d => d.toISOString().split("T")[0];
+      const r = await fetch(
+        `https://finnhub.io/api/v1/company-news?symbol=${ticker}&from=${fmt(from)}&to=${fmt(to)}&token=${FINNHUB_KEY}`,
+        { signal: ctrl.signal }
+      );
+      if (!r.ok) return null;
+      const articles = await r.json();
+      if (!Array.isArray(articles) || articles.length === 0) return null;
+      return articles
+        .filter(a => a.headline && !isOpinionPost(a.headline, a.source || ""))
+        .slice(0, 20)
+        .map(a => ({
+          title:    a.headline,
+          link:     a.url || "",
+          date:     a.datetime ? new Date(a.datetime * 1000).toISOString() : "",
+          source:   a.source || "",
+          catalyst: detectNewsCatalyst(a.headline),
+        }));
+    };
+
+    const tryGoogleRss = async () => {
+      const rss   = `https://news.google.com/rss/search?q=${encodeURIComponent(ticker + " stock")}&hl=en-US&gl=US&ceid=US:en`;
+      const proxy = `https://corsproxy.io/?url=${encodeURIComponent(rss)}`;
+      const r = await fetch(proxy, { signal: ctrl.signal });
+      const xml = await r.text();
+      const doc = new DOMParser().parseFromString(xml, "text/xml");
+      return Array.from(doc.querySelectorAll("item"))
+        .map((el) => {
+          const source = el.querySelector("source")?.textContent ?? "";
+          const title  = el.querySelector("title")?.textContent ?? "";
+          return { title, link: el.querySelector("link")?.textContent ?? "", date: el.querySelector("pubDate")?.textContent ?? "", source, catalyst: detectNewsCatalyst(title) };
+        })
+        .filter(item => !isOpinionPost(item.title, item.source))
+        .slice(0, 20);
+    };
+
+    (async () => {
+      try {
+        const items = await tryFinnhub() ?? await tryGoogleRss();
+        setNews(items || []);
+      } catch (e) {
         if (e.name === "AbortError") return;
         setNewsError("Failed to load news.");
+      } finally {
         setNewsLoading(false);
-      });
+      }
+    })();
+
     return () => ctrl.abort();
   }, [ticker]);
 
