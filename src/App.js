@@ -3370,25 +3370,26 @@ const BreakingNewsAlert = ({ newsData }) => {
 /** Returns the next Gapper scan time as a display string. */
 function getNextGapperScanTime(scanTime) {
   const now = new Date();
-  // Gapper window: 8:00 AM – 12:00 PM ET, triggers every 5 min via cron
-  const utcDay = now.getUTCDay();
-  const isWeekday = utcDay >= 1 && utcDay <= 5;
-  // Check ET time: before 8:00 AM ET means scan hasn't started yet
-  const etHour = parseInt(now.toLocaleString("en-US", { timeZone: "America/New_York", hour: "numeric", hour12: false }));
-  const beforeWindow = etHour < 8;
-  // Check if already scanned today (scan_time format: "2026-03-20 10:33 ET")
-  const etTodayParts = now.toLocaleDateString("en-US", { timeZone: "America/New_York" }).split("/");
-  const etTodayISO = `${etTodayParts[2]}-${etTodayParts[0].padStart(2,"0")}-${etTodayParts[1].padStart(2,"0")}`;
+  // All checks use ET to avoid UTC day mismatch (e.g. 8 PM ET = next UTC day)
+  const etDateStr   = now.toLocaleDateString("en-US", { timeZone: "America/New_York" }); // M/D/YYYY
+  const etParts     = etDateStr.split("/");
+  const etTodayISO  = `${etParts[2]}-${etParts[0].padStart(2,"0")}-${etParts[1].padStart(2,"0")}`;
+  const etNow       = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
+  const etDayOfWeek = etNow.getDay(); // 0=Sun … 6=Sat in ET
+  const isWeekday   = etDayOfWeek >= 1 && etDayOfWeek <= 5;
+  const etHour      = etNow.getHours();
+  const beforeWindow        = etHour < 8;
   const alreadyScannedToday = scanTime && scanTime.slice(0, 10) === etTodayISO;
-  if (isWeekday && beforeWindow && !alreadyScannedToday) return "Today ~8:00 AM ET";
-  const next = new Date(now);
+  if (isWeekday && beforeWindow && !alreadyScannedToday) return "Today ~8:55 AM ET";
+  // Find next weekday in ET
+  const next = new Date(etNow);
   for (let i = 1; i <= 7; i++) {
-    next.setUTCDate(next.getUTCDate() + 1);
-    if (next.getUTCDay() >= 1 && next.getUTCDay() <= 5) {
-      return next.toLocaleDateString("en-US", { timeZone: "America/New_York", weekday: "short", month: "short", day: "numeric" }) + " ~8:00 AM ET";
+    next.setDate(next.getDate() + 1);
+    if (next.getDay() >= 1 && next.getDay() <= 5) {
+      return next.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) + " ~8:55 AM ET";
     }
   }
-  return "Next weekday ~8:00 AM ET";
+  return "Next weekday ~8:55 AM ET";
 }
 
 /** Returns the next Market Brief update time as a display string (ET). */
