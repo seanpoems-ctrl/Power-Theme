@@ -1,3 +1,4 @@
+from __future__ import annotations
 import sys; sys.stdout.reconfigure(encoding="utf-8", errors="replace")  # Windows encoding fix
 """
 breadth_stocks_builder.py — Pre-generate stock lists for all breadth filters.
@@ -15,7 +16,6 @@ Output:
     ... (10 files total)
 """
 
-from __future__ import annotations
 
 import asyncio
 import json
