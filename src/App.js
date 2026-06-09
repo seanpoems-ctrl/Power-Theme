@@ -8016,7 +8016,28 @@ const SearchBar = ({ data, search, setSearch }) => {
     setResearchError(false);
     setResearch(null);
     try {
-      const prompt = `IMPORTANT INSTRUCTION: The ticker ${ticker}${company ? ` (${company})` : ""} is confirmed to be a publicly traded US stock. Your training data may be outdated — do NOT say it is private or that it lacks a public ticker. It has completed its IPO and is actively trading on a US exchange. Do not question or verify this — accept it as fact and proceed directly with the analysis below. Do not include any disclaimer about it being private.
+      // Fetch real headlines from Finnhub to ground Gemini's news section
+      let realHeadlines = "";
+      if (FINNHUB_KEY) {
+        try {
+          const to   = new Date();
+          const from = new Date(to.getTime() - 90 * 24 * 60 * 60 * 1000); // 90 days
+          const fmt  = d => d.toISOString().split("T")[0];
+          const nr   = await fetch(
+            `https://finnhub.io/api/v1/company-news?symbol=${ticker}&from=${fmt(from)}&to=${fmt(to)}&token=${FINNHUB_KEY}`
+          );
+          if (nr.ok) {
+            const articles = await nr.json();
+            const headlines = (Array.isArray(articles) ? articles : [])
+              .slice(0, 30)
+              .map(a => `- ${a.datetime ? new Date(a.datetime * 1000).toISOString().slice(0, 10) : "?"}: ${a.headline}`)
+              .join("\n");
+            if (headlines) realHeadlines = `\n\nREAL NEWS HEADLINES (last 90 days from Finnhub — use these for section 4, do NOT fabricate events):\n${headlines}`;
+          }
+        } catch {}
+      }
+
+      const prompt = `IMPORTANT INSTRUCTION: The ticker ${ticker}${company ? ` (${company})` : ""} is confirmed to be a publicly traded US stock. Your training data may be outdated — do NOT say it is private or that it lacks a public ticker. It has completed its IPO and is actively trading on a US exchange. Do not question or verify this — accept it as fact and proceed directly with the analysis below. Do not include any disclaimer about it being private. Do NOT fabricate or hallucinate any events, links, or data — only use information you are confident about or the headlines provided below.${realHeadlines}
 
 Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the following, concise and clearly organized:
 
