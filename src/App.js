@@ -8029,15 +8029,15 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
 - Any catalysts (earnings, news, macro)
 - Any significant fundamentals (huge growth in earnings or revenues, moat, unique product or service, superior management, patents etc)
 
-4. **Show all the main news/events for the last 3 months:** – Use a bullet-point table for: Date (YYYY-MM-DD) | Event type (Earnings, Product Launch, Analyst Upgrade/Downgrade, etc.) | Short summary (max 1-2 sentences) | Direct source link – Mark any major price-moving events (surprise earnings, large guidance shift, top-tier analyst actions). Only include confirmed events, no opinion pieces or previews.
+4. **Show all the main news/events for the last 3 months:** – Use a table for: Date (YYYY-MM-DD) | Event type (Earnings, Product Launch, Partnership, Analyst Action, etc.) | Short summary (max 1-2 sentences) | Direct source link. Include all confirmed company events regardless of whether the company is public or private. Do not skip this section.
 
-5. **Mention any recent insider buys/sells or institutional filings if visible.**
+5. **Recent insider buys/sells, institutional filings, or major shareholder activity** – include anything publicly reported. If nothing is available say "No public filings found."
 
-6. **Summarize how the stock is moving vs. main competitors and overall sector trend in past month (up/down).**
+6. **How is this company performing vs. main competitors and overall sector trend in the past month?** – Compare based on any available data (revenue, product launches, market share, analyst commentary). Do not skip this section even if stock price data is unavailable.
 
-7. **Flag upcoming catalysts (earnings, product launches, regulatory events) in the next 30 days.**
+7. **Upcoming catalysts in the next 30 days** – earnings dates, product launches, regulatory events, conferences, or any known scheduled events.
 
-8. **Note any changes in analyst price targets for this ticker during the period above.** – Format for easy review. If possible, use tables for events and peer moves. – Respond in clear, concise, easily readable style for use in trading decisions.`;
+8. **Analyst price targets or valuation commentary** – include any analyst reports, price targets, or buy/sell ratings. If none exist say "No analyst coverage found." – Format for easy review. Use tables where possible. Respond in clear, concise style for use in trading decisions.`;
 
       const res = await fetch(
         `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`,
@@ -8393,7 +8393,7 @@ const SnapshotMdTable = ({ md, wrap = false }) => {
           <tr>
             {headers.map((h, i) => (
               <th key={i} className="text-left py-1 px-2 text-zinc-500 font-semibold border-b border-zinc-700/50 uppercase tracking-wide whitespace-nowrap">
-                {h}
+                {renderInline(h)}
               </th>
             ))}
           </tr>
@@ -8402,7 +8402,7 @@ const SnapshotMdTable = ({ md, wrap = false }) => {
           {bodyRows.map((row, ri) => (
             <tr key={ri} className="border-b border-zinc-800/30 hover:bg-zinc-800/20">
               {parseRow(row).map((cell, ci) => (
-                <td key={ci} className={`py-0.5 px-2 font-mono text-zinc-300 ${wrap ? "whitespace-normal" : "whitespace-nowrap"}`}>{cell}</td>
+                <td key={ci} className={`py-0.5 px-2 text-zinc-300 ${wrap ? "whitespace-normal" : "whitespace-nowrap"}`}>{renderInline(cell)}</td>
               ))}
             </tr>
           ))}
