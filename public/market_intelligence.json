@@ -1,90 +1,90 @@
 {
-  "generated_at": "2026-06-09 09:47 ET",
-  "phase": "PRE",
-  "session": "Pre-Market",
+  "generated_at": "2026-06-09 17:28 ET",
+  "phase": "POST",
+  "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 745.95,
+      "price": 737.05,
       "open": 743.63,
-      "high": 746.04,
-      "low": 743.28,
-      "close": 745.95,
+      "high": 746.9,
+      "low": 722.59,
+      "close": 737.05,
       "prev_open": 743.36,
       "prev_close": 739.22,
-      "volume": 3739839,
-      "change_pct": 0.91
+      "volume": 86844734,
+      "change_pct": -0.29
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 724.64,
+      "price": 707.83,
       "open": 722.97,
-      "high": 724.74,
-      "low": 720.5,
-      "close": 724.64,
+      "high": 725.66,
+      "low": 686.37,
+      "close": 707.83,
       "prev_open": 717.81,
       "prev_close": 716.07,
-      "volume": 4880080,
-      "change_pct": 1.2
+      "volume": 87562233,
+      "change_pct": -1.15
     },
     "^VIX": {
       "label": "VIX",
-      "price": 17.78,
+      "price": 19.87,
       "open": 18.19,
-      "high": 18.35,
-      "low": 17.78,
-      "close": 17.78,
+      "high": 23.34,
+      "low": 17.52,
+      "close": 19.87,
       "prev_open": 20.29,
       "prev_close": 18.92,
       "volume": 0,
-      "change_pct": -6.03
+      "change_pct": 5.02
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 88.51,
+      "price": 88.7,
       "open": 91.28,
       "high": 91.55,
-      "low": 88.43,
-      "close": 88.51,
+      "low": 85.95,
+      "close": 88.7,
       "prev_open": 93.0,
       "prev_close": 91.3,
-      "volume": 77775,
-      "change_pct": -3.06
+      "volume": 272408,
+      "change_pct": -2.85
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 65416.63,
-      "open": 64625.26,
-      "high": 65485.16,
-      "low": 63918.96,
-      "close": 65416.63,
-      "prev_open": 65947.56,
-      "prev_close": 64024.6,
-      "volume": 0,
-      "change_pct": 2.17
+      "price": 64024.6,
+      "open": 65947.56,
+      "high": 66115.18,
+      "low": 63406.66,
+      "close": 64024.6,
+      "prev_open": 67115.0,
+      "prev_close": 66588.12,
+      "volume": 179500000,
+      "change_pct": -3.85
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24770.59,
+      "price": 24433.06,
       "open": 24589.29,
       "high": 24820.95,
-      "low": 24539.0,
-      "close": 24770.59,
+      "low": 24398.87,
+      "close": 24433.06,
       "prev_open": 24447.32,
       "prev_close": 24616.22,
       "volume": 0,
-      "change_pct": 0.63
+      "change_pct": -0.74
     }
   },
   "fred": {
-    "hy_oas": 2.76,
+    "hy_oas": 2.75,
     "yield_curve": 0.46,
     "hy_oas_stale": false,
     "yield_curve_stale": true
   },
   "breadth": {
-    "s5fi": 55.6,
-    "mmth": 62.1
+    "s5fi": 57.2,
+    "mmth": 63.3
   },
   "regime": {
     "credit_status": "Complacent",
@@ -98,6 +98,36 @@
     }
   },
   "analysis": {
-    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "title": "Post-Market Brief: June 09, 2026",
+    "mood_emoji": "📉",
+    "mood": "Risk-Off Sentiment Deepens",
+    "narrative": "Global markets faced significant selling pressure today, led by a sharp decline in Asian equities and a broad retreat across U.S. technology shares. This risk-off environment saw the VIX climb, reflecting increased investor caution.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 737.05 | -0.29% | ➡️ |\n| Nasdaq 100 ETF | 707.83 | -1.15% | 📉 |\n| VIX | 19.87 | +5.02% | 📈 |\n| Crude Oil | 88.70 | -2.85% | 📉 |\n| Nikkei 225 | 64024.60 | -3.85% | 📉 |\n| DAX | 24433.06 | -0.74% | 📉 |",
+    "macro_section": "The High-Yield Credit Spread (BAMLH0A0HYM2) remains at a complacent 2.75%, suggesting no immediate credit stress. However, the 10-Year minus 2-Year Yield Curve, at a cached value of +0.460, indicates a normal to steepening environment, which generally supports institutional risk appetite despite today's market action. It is important to note the yield curve value is from a previous run and not live.",
+    "analysis_para1": "Today's global tape presented a clear risk-off signal, with the Nikkei 225 plummeting by a substantial 3.85% and the DAX also retreating by 0.74%. This international downturn was mirrored in commodities, as Crude Oil dropped 2.85% to 88.70, suggesting concerns about global demand. Despite this broad-based selling, US High-Yield Credit Spreads (BAMLH0A0HYM2) remain at a complacent 2.75%, indicating that this global stress has not yet translated into domestic credit market fear. However, the synchronized global weakness certainly implies a reduced institutional appetite for risk, signaling potential for further caution across US equities.",
+    "analysis_para2": "The dominant 'why' behind today's broad risk-off flow appears to be a recalibration of global growth prospects, likely influenced by fresh data or geopolitical developments impacting manufacturing and demand. This triggered a de-risking impulse, particularly visible in the sharp decline of the Nikkei 225 by 3.85%, which then spilled over into Western markets. Investors began unwinding risk exposure, pulling capital from growth-sensitive assets like technology and commodities, directly fueling the rise in volatility as seen by the VIX's 5.02% surge. This mechanical unwinding of long positions created downward momentum, particularly in highly-leveraged or growth-dependent sectors.",
+    "analysis_para3": "Given today's risk-off tone, traders should prioritize capital preservation and consider defensive positioning. Watch the S&P 500 ETF (SPY) for potential support around the 730.00 level; a decisive break below this could signal further downside to 725.00. For aggressive short entries, look for rejections at 738.00, targeting initial moves towards 735.00. A critical risk-off threshold for the broader market would be a sustained close below SPY 730.00, indicating a potential shift in trend. Today, traders should consider reducing long exposure, tightening stop-losses on existing positions, and potentially initiating small tactical shorts on weakness or failed rallies.",
+    "technical_signal": "No reversal pattern confirmed yet. While 57.2% of S&P 500 stocks remain above their 50-day Simple Moving Average and 63.3% above their 200-day Simple Moving Average, indicating underlying health, today's broad selling pressure suggests a weakening trend. Traders should monitor for a definitive bullish reversal candlestick pattern on increased volume to signal a potential shift in momentum.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan unveiled a groundbreaking AI-driven personalized wealth management platform, positioning the bank ahead in fintech innovation and potentially attracting a new wave of high-net-worth clients."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon Web Services (AWS) announced a significant leap in quantum computing services with a new high-performance algorithm, signaling accelerated progress in a frontier technology with vast enterprise potential."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "NVIDIA experienced broad profit-taking today, contributing to the wider tech sector's decline, as investors rotated out of high-beta growth names following its recent strong performance."
+        }
+      ]
+    }
   }
 }

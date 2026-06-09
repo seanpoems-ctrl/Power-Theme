@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-09 17:28 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off Sentiment Deepens",
+    "spy_price": 737.05,
+    "spy_change_pct": -0.29,
+    "vix": 19.87,
+    "hy_oas": 2.75,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 57.2,
+    "mmth": 63.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan unveiled a groundbreaking AI-driven personalized wealth management platform, positioning the bank ahead in fintech innovation and potentially attracting a new wave of high-net-worth clients."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon Web Services (AWS) announced a significant leap in quantum computing services with a new high-performance algorithm, signaling accelerated progress in a frontier technology with vast enterprise potential."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "NVIDIA experienced broad profit-taking today, contributing to the wider tech sector's decline, as investors rotated out of high-beta growth names following its recent strong performance."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-09 09:47 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2217,44 +2255,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla continues to exhibit high volatility, primarily driven by technical trading flows and ongoing sentiment regarding EV demand, with no fresh material news catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-04-23 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious Unease, Commodity-Driven",
-    "spy_price": 708.45,
-    "spy_change_pct": -0.39,
-    "vix": 19.31,
-    "hy_oas": 2.84,
-    "yield_curve": 0.51,
-    "credit_status": "Complacent",
-    "s5fi": 60.6,
-    "mmth": 58.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "QS",
-          "company": "QuantumScape Corporation",
-          "reason": "Reported narrower than expected losses and strong underlying demand growth for its solid-state battery technology, signaling improved operational performance."
-        },
-        {
-          "ticker": "SMR",
-          "company": "NuScale Power Corporation",
-          "reason": "Benefited from strong government loan support for small modular reactor development, enhancing its project funding and long-term commercial viability."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continues to see significant institutional flow driven by persistent AI demand and robust technical momentum, without a fresh fundamental catalyst today."
         }
       ]
     }
