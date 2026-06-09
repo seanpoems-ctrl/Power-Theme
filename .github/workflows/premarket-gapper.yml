@@ -56,7 +56,7 @@ jobs:
           # Check ET window: 8:00 AM – 12:00 PM (wide to absorb any delays)
           et_now = datetime.now(ZoneInfo("America/New_York"))
           et_minutes = et_now.hour * 60 + et_now.minute
-          in_window = 480 <= et_minutes <= 720  # 8:00 AM–12:00 PM
+          in_window = 465 <= et_minutes <= 720  # 7:45 AM–12:00 PM (covers both EDT 8:55 and EST 7:55)
 
           # Check if already scanned today (avoid duplicate runs)
           already_scanned = False
