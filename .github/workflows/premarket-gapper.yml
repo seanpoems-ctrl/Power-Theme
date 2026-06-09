@@ -1,4 +1,4 @@
-# Pre-market scan — triggered externally via cron-job.org at 8:05 AM ET (12:05 UTC)
+# Pre-market scan — triggered externally via cron-job.org at 8:55 AM ET (12:55 UTC)
 # workflow_dispatch bypasses ET-window + already-scanned checks (manual or external trigger)
 # One scan per day: subsequent runs are skipped if already scanned today
 name: Pre-Market Gapper Scan
@@ -6,8 +6,8 @@ name: Pre-Market Gapper Scan
 on:
   workflow_dispatch: {}
   schedule:
-    # Pre-market scan: 8:45 AM ET (12:45 UTC in EDT, 1:45 UTC in EST)
-    - cron: '45 12 * * 1-5'  # Mon-Fri 8:45 AM ET
+    # Pre-market scan: 8:55 AM ET (12:55 UTC in EDT, 13:55 UTC in EST)
+    - cron: '55 12 * * 1-5'  # Mon-Fri 8:55 AM ET
 
 concurrency:
   group: pages-deploy
