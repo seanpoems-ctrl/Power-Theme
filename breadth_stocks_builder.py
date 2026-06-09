@@ -43,16 +43,16 @@ PUBLIC_DIR = Path(__file__).parent / "public"
 _BASE = "sh_avgvol_o100,sh_price_o5,cap_midover"
 
 FILTER_MAP: dict[str, tuple[str, bool]] = {
-    "up4":     (f"/screener.ashx?v=111&f={_BASE},ta_change_u4&o=-change",    False),
-    "dn4":     (f"/screener.ashx?v=111&f={_BASE},ta_change_d-4&o=change",    True),
-    "up25q":   (f"/screener.ashx?v=111&f={_BASE},ta_perf_q25o&o=-perf13w",  False),
-    "dn25q":   (f"/screener.ashx?v=111&f={_BASE},ta_perf_q-25u&o=perf13w",  True),
-    "up25m":   (f"/screener.ashx?v=111&f={_BASE},ta_perf_m25o&o=-perf4w",   False),
-    "dn25m":   (f"/screener.ashx?v=111&f={_BASE},ta_perf_m-25u&o=perf4w",   True),
-    "up50m":   (f"/screener.ashx?v=111&f={_BASE},ta_perf_m50o&o=-perf4w",   False),
-    "dn50m":   (f"/screener.ashx?v=111&f={_BASE},ta_perf_m-50u&o=perf4w",   True),
-    "up13_34": (f"/screener.ashx?v=111&f={_BASE},ta_perf34d_13o&o=-perf",   False),
-    "dn13_34": (f"/screener.ashx?v=111&f={_BASE},ta_perf34d_-13u&o=perf",   True),
+    "up4":     (f"/screener.ashx?v=110&f={_BASE},ta_change_u4&o=-change",    False),
+    "dn4":     (f"/screener.ashx?v=110&f={_BASE},ta_change_d-4&o=change",    True),
+    "up25q":   (f"/screener.ashx?v=110&f={_BASE},ta_perf_q25o&o=-perf13w",  False),
+    "dn25q":   (f"/screener.ashx?v=110&f={_BASE},ta_perf_q-25u&o=perf13w",  True),
+    "up25m":   (f"/screener.ashx?v=110&f={_BASE},ta_perf_m25o&o=-perf4w",   False),
+    "dn25m":   (f"/screener.ashx?v=110&f={_BASE},ta_perf_m-25u&o=perf4w",   True),
+    "up50m":   (f"/screener.ashx?v=110&f={_BASE},ta_perf_m50o&o=-perf4w",   False),
+    "dn50m":   (f"/screener.ashx?v=110&f={_BASE},ta_perf_m-50u&o=perf4w",   True),
+    "up13_34": (f"/screener.ashx?v=110&f={_BASE},ta_perf34d_13o&o=-perf",   False),
+    "dn13_34": (f"/screener.ashx?v=110&f={_BASE},ta_perf34d_-13u&o=perf",   True),
 }
 
 FILTER_LABELS: dict[str, str] = {
