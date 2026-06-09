@@ -1476,11 +1476,14 @@ def _composite(stocks):
 
 
 def _stock_score(s):
-    v = 0
+    """Composite momentum score. Normalises weight to available periods so
+    recent IPOs (missing perf_3m / perf_6m) still compete on equal footing."""
+    v, w_total = 0.0, 0.0
     for k, w in [("perf_1w", 0.2), ("perf_1m", 0.3), ("perf_3m", 0.3), ("perf_6m", 0.2)]:
         if s.get(k) is not None:
             v += s[k] * w
-    return v
+            w_total += w
+    return v / w_total if w_total > 0 else 0.0
 
 
 def _composite_ind(ind: dict) -> float:
