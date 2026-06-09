@@ -663,6 +663,11 @@ FRED Macro Data:
   - 1× C-Grade: Recycled headline OR pure technical/flow — no new fundamental catalyst.
     If recycled tickers are available, prefer those.{f" Recycled list: {', '.join(sorted(recycled_tickers))}" if recycled_tickers else ""}
 
+═══ TERMINOLOGY (MANDATORY — never use abbreviations in output) ═══
+  "S&P 500 stocks above SMA50" — never "S5FI"
+  "S&P stocks above SMA200"    — never "MMTH"
+  "Trading Index"              — never "TRIN"
+
 ═══ OUTPUT FORMAT ═══
 Return ONLY a single valid JSON object — no markdown wrapping, no code blocks:
 {{

@@ -5994,7 +5994,7 @@ async function fetchMarketSituation(payload) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_SITUATION_GEMINI_KEY}`;
   const prompt =
     `You are a senior market analyst providing a pre-trading situational awareness brief for a swing trader. Analyse all the data below and write exactly 3 paragraphs with NO headers or labels:\n\n` +
-    `Paragraph 1 (Tape & Internals): Describe today's market tape using the A/D data, up4%/dn4% counts, Trading Index (TRIN), and new 52W highs vs lows. Be specific with the numbers.\n` +
+    `Paragraph 1 (Tape & Internals): Describe today's market tape using the A/D data, up4%/dn4% counts, Trading Index, and new 52W highs vs lows. Be specific with the numbers.\n` +
     `Paragraph 2 (Breadth Structure): Interpret the SMA50%, SMA200%, T2108, and up25Q% readings. What do they tell us about the health and phase of the current market structure?\n` +
     `Paragraph 3 (Tactical Stance): Synthesize VIX, SPY/QQQ vs their SMAs, and the breadth picture into a single clear trading stance. State whether to be aggressive, selective, or defensive, and name the exact condition(s) to watch for a regime change.\n\n` +
     `Be direct, cite specific numbers, avoid generic phrases. Write for a professional swing trader making real trading decisions.\n\nMarket data:\n${JSON.stringify(payload, null, 2)}`;

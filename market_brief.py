@@ -344,6 +344,11 @@ Output ONLY valid JSON (no markdown wrapping):
   ]
 }}
 
+Terminology (MANDATORY — never use abbreviations in output):
+  Use "S&P 500 stocks above SMA50" — never "S5FI"
+  Use "S&P stocks above SMA200"    — never "MMTH"
+  Use "Trading Index"              — never "TRIN"
+
 Rules:
   mood: captures today's market character in a phrase
   action_line: exactly 1 sentence, cite VIX number + S&P 500 stocks above SMA50% + at least one global index, end with a clear trade stance

@@ -423,6 +423,8 @@ Fields: date | up4 | dn4 | 5d-ratio | 10d-ratio | up25Q | dn25Q | up25M | dn25M 
 
 {json.dumps(snapshot)}
 
+Terminology (MANDATORY): write "S&P 500 stocks above SMA50" not "S5FI", "S&P stocks above SMA200" not "MMTH", "Trading Index" not "TRIN", "% above 50 DMA" not "S5FI".
+
 Reply with ONLY the 4 labelled bullets below — no intro, no outro, no markdown headers.
 Each bullet: label + em-dash + 2 concise sentences with specific numbers.
 
