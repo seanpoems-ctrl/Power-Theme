@@ -8016,7 +8016,9 @@ const SearchBar = ({ data, search, setSearch }) => {
     setResearchError(false);
     setResearch(null);
     try {
-      const prompt = `Please analyze the stock ticker ${ticker}${company ? ` (${company})` : ""}. Note: this is a publicly traded US stock ticker — even if your training data shows it as private, it has since had its IPO and is now listed on a US exchange. Please treat it as a publicly traded company and provide the following, concise and clearly organized:
+      const prompt = `IMPORTANT INSTRUCTION: The ticker ${ticker}${company ? ` (${company})` : ""} is confirmed to be a publicly traded US stock. Your training data may be outdated — do NOT say it is private or that it lacks a public ticker. It has completed its IPO and is actively trading on a US exchange. Do not question or verify this — accept it as fact and proceed directly with the analysis below. Do not include any disclaimer about it being private.
+
+Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the following, concise and clearly organized:
 
 1. **Explain what the company does in like I'm 12 years old** – three short bullet points about what it does and any helpful relatable examples and analogies.
 
