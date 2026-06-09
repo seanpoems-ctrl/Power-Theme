@@ -7665,10 +7665,13 @@ const ResearchContent = ({ text }) => {
 function renderInline(text) {
   // Strip <br> / <br/> / <br /> tags and replace with a space
   const cleaned = text.replace(/<br\s*\/?>/gi, " ");
-  const parts = cleaned.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
+  // Split on bold, italic, and markdown links [text](url)
+  const parts = cleaned.split(/(\*\*[^*]+\*\*|\*[^*]+\*|\[[^\]]+\]\(https?:\/\/[^)]+\))/g);
   return parts.map((part, i) => {
     if (/^\*\*[^*]+\*\*$/.test(part)) return <strong key={i} className="text-zinc-200">{part.slice(2, -2)}</strong>;
     if (/^\*[^*]+\*$/.test(part))   return <em key={i} className="text-zinc-300">{part.slice(1, -1)}</em>;
+    const linkMatch = part.match(/^\[([^\]]+)\]\((https?:\/\/[^)]+)\)$/);
+    if (linkMatch) return <a key={i} href={linkMatch[2]} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 underline underline-offset-2 break-all">{linkMatch[1]}</a>;
     return part;
   });
 }
@@ -8013,7 +8016,7 @@ const SearchBar = ({ data, search, setSearch }) => {
     setResearchError(false);
     setResearch(null);
     try {
-      const prompt = `Please analyze the stock ticker ${ticker}${company ? ` (${company})` : ""} and provide the following, concise and clearly organized:
+      const prompt = `Please analyze the stock ticker ${ticker}${company ? ` (${company})` : ""}. Note: this is a publicly traded US stock ticker — even if your training data shows it as private, it has since had its IPO and is now listed on a US exchange. Please treat it as a publicly traded company and provide the following, concise and clearly organized:
 
 1. **Explain what the company does in like I'm 12 years old** – three short bullet points about what it does and any helpful relatable examples and analogies.
 
