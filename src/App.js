@@ -7663,7 +7663,9 @@ const ResearchContent = ({ text }) => {
 };
 
 function renderInline(text) {
-  const parts = text.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
+  // Strip <br> / <br/> / <br /> tags and replace with a space
+  const cleaned = text.replace(/<br\s*\/?>/gi, " ");
+  const parts = cleaned.split(/(\*\*[^*]+\*\*|\*[^*]+\*)/g);
   return parts.map((part, i) => {
     if (/^\*\*[^*]+\*\*$/.test(part)) return <strong key={i} className="text-zinc-200">{part.slice(2, -2)}</strong>;
     if (/^\*[^*]+\*$/.test(part))   return <em key={i} className="text-zinc-300">{part.slice(1, -1)}</em>;
@@ -8376,7 +8378,7 @@ const SnapshotMdTable = ({ md, wrap = false }) => {
   const isSep = l => /^\|[\s\|\-\:]+\|$/.test(l);
   const dataLines = tableLines.filter(l => !isSep(l));
   if (dataLines.length < 2) return null;
-  const parseRow = l => l.split('|').slice(1, -1).map(c => c.trim());
+  const parseRow = l => l.split('|').slice(1, -1).map(c => c.trim().replace(/<br\s*\/?>/gi, " "));
   const [headerRow, ...bodyRows] = dataLines;
   const headers = parseRow(headerRow);
   return (
