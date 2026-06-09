@@ -941,6 +941,10 @@ const GroupRow = memo(function GroupRow({ industry, items, perfField, onStockCli
                   <span className="w-16 text-right font-mono text-zinc-400">
                     {fmtMktCap(s.market_cap_b)}
                   </span>
+                  {/* ADR×$Vol */}
+                  <span className="w-16 text-right font-mono text-amber-300 font-semibold">
+                    {fmtAdrVol(adrVolScore(s))}
+                  </span>
                   {/* $Vol */}
                   <span className="w-20 text-right font-mono text-zinc-400">
                     {fmtDollarVol(s.dollar_volume)}
@@ -1059,6 +1063,9 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
         } else if (sortKey === "market_cap_b") {
           av = a.market_cap_b;
           bv = b.market_cap_b;
+        } else if (sortKey === "adr_vol_score") {
+          av = adrVolScore(a);
+          bv = adrVolScore(b);
         } else {
           av = a[sortKey];
           bv = b[sortKey];
@@ -1077,12 +1084,13 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
   }
 
   // Column config for the stock-row header (mirrors the expanded row layout)
-  // Order: Ticker, Company, Mkt Cap, $Vol, ADR%, RS, Change%/custom (last unchanged)
+  // Order: Ticker, Company, Mkt Cap, ADR×$Vol, $Vol, ADR%, RS, Change%/custom (last unchanged)
   const GROUP_STOCK_COLS = customCol
     ? [
         { key: "ticker",        label: "Ticker",        align: "left",  cls: "w-14" },
         { key: "company",       label: "Company",       align: "left",  cls: "flex-1" },
         { key: "market_cap_b",  label: "Mkt Cap",       align: "right", cls: "w-16" },
+        { key: "adr_vol_score", label: "ADR×$Vol",      align: "right", cls: "w-16" },
         { key: "dollar_volume", label: "$ Vol",         align: "right", cls: "w-20" },
         { key: "adr_pct",       label: "ADR%",          align: "right", cls: "w-12" },
         { key: "rs",            label: "RS",            align: "right", cls: "w-12" },
@@ -1092,6 +1100,7 @@ const GroupView = memo(function GroupView({ stocks, filter, onStockClick, spxDat
         { key: "ticker",        label: "Ticker",       align: "left",  cls: "w-14" },
         { key: "company",       label: "Company",      align: "left",  cls: "flex-1" },
         { key: "market_cap_b",  label: "Mkt Cap",      align: "right", cls: "w-16" },
+        { key: "adr_vol_score", label: "ADR×$Vol",     align: "right", cls: "w-16" },
         { key: "dollar_volume", label: "$ Vol",        align: "right", cls: "w-20" },
         { key: "adr_pct",       label: "ADR%",         align: "right", cls: "w-12" },
         { key: "rs",            label: "RS",           align: "right", cls: "w-12" },
