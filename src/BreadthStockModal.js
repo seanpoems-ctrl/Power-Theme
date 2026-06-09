@@ -666,15 +666,30 @@ const StockDetailModal = memo(function StockDetailModal({ stock, filter, onClose
 // List view — matches screenshot exactly: #, Ticker, Company, $Vol, ADR%, Change%
 // ---------------------------------------------------------------------------
 
-// Static column definitions — order: Ticker, Company, Mkt Cap, $Vol, ADR%, RS
+// ADR% × $Vol composite score (volatility × liquidity)
+function adrVolScore(s) {
+  const dv = parseDollarVolume(s.dollar_volume);
+  if (s.adr_pct == null || dv == null) return null;
+  return (s.adr_pct / 100) * dv;
+}
+
+function fmtAdrVol(v) {
+  if (v == null) return "—";
+  if (v >= 1e9)  return `${(v / 1e9).toFixed(1)}B`;
+  if (v >= 1e6)  return `${(v / 1e6).toFixed(0)}M`;
+  return `${(v / 1e3).toFixed(0)}K`;
+}
+
+// Static column definitions — order: Ticker, Company, Mkt Cap, ADR×$Vol, $Vol, ADR%, RS
 // The last (perf/change) column is appended dynamically inside ListView.
 const BASE_SORT_COLS = [
-  { key: "ticker",        label: "Ticker",   align: "left",  numeric: false },
-  { key: "company",       label: "Company",  align: "left",  numeric: false },
-  { key: "market_cap_b",  label: "Mkt Cap",  align: "right", numeric: true  },
-  { key: "dollar_volume", label: "$ Vol",    align: "right", numeric: true  },
-  { key: "adr_pct",       label: "ADR%",     align: "right", numeric: true  },
-  { key: "rs",            label: "RS",       align: "right", numeric: true  },
+  { key: "ticker",        label: "Ticker",        align: "left",  numeric: false },
+  { key: "company",       label: "Company",       align: "left",  numeric: false },
+  { key: "market_cap_b",  label: "Mkt Cap",       align: "right", numeric: true  },
+  { key: "adr_vol_score", label: "ADR×$Vol",      align: "right", numeric: true  },
+  { key: "dollar_volume", label: "$ Vol",         align: "right", numeric: true  },
+  { key: "adr_pct",       label: "ADR%",          align: "right", numeric: true  },
+  { key: "rs",            label: "RS",            align: "right", numeric: true  },
 ];
 
 const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData }) {
@@ -694,6 +709,7 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
         { key: "ticker",        label: "Ticker",        align: "left",  numeric: false },
         { key: "company",       label: "Company",       align: "left",  numeric: false },
         { key: "market_cap_b",  label: "Mkt Cap",       align: "right", numeric: true  },
+        { key: "adr_vol_score", label: "ADR×$Vol",      align: "right", numeric: true  },
         { key: "dollar_volume", label: "$ Vol",         align: "right", numeric: true  },
         { key: "adr_pct",       label: "ADR%",          align: "right", numeric: true  },
         { key: "rs",            label: "RS",            align: "right", numeric: true  },
@@ -730,6 +746,9 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
       } else if (sortKey === "market_cap_b") {
         av = a.market_cap_b;
         bv = b.market_cap_b;
+      } else if (sortKey === "adr_vol_score") {
+        av = adrVolScore(a);
+        bv = adrVolScore(b);
       } else {
         av = a[sortKey];
         bv = b[sortKey];
@@ -796,6 +815,10 @@ const ListView = memo(function ListView({ stocks, filter, onStockClick, spxData 
               {/* Mkt Cap */}
               <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
                 {fmtMktCap(s.market_cap_b)}
+              </td>
+              {/* ADR×$Vol */}
+              <td className="px-2 py-1.5 text-right font-mono text-amber-300 font-semibold">
+                {fmtAdrVol(adrVolScore(s))}
               </td>
               {/* $Vol */}
               <td className="px-2 py-1.5 text-right font-mono text-zinc-400">
