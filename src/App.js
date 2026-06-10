@@ -10185,9 +10185,19 @@ const DailyWatchlistTab = ({ data }) => {
     return n || 0;
   };
 
+  // Enrich allStocks with TradingView rolling perf for Clean Bases / Short Candidates
+  const enrichedAllStocks = React.useMemo(() => {
+    if (!screenerMap || Object.keys(screenerMap).length === 0) return allStocks;
+    return allStocks.map(s => {
+      const sc = screenerMap[s.ticker];
+      if (!sc) return s;
+      return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
+    });
+  }, [allStocks, screenerMap]);
+
   // ── Clean Bases ── filtered, then sorted by active column
   const cleanBases = React.useMemo(() => {
-    const filtered = allStocks.filter(s =>
+    const filtered = enrichedAllStocks.filter(s =>
       (s.sma20_pct  ?? -1) > 0 &&
       (s.sma50_pct  ?? -1) > 0 &&
       (s.sma200_pct ?? -1) > 0 &&
@@ -10218,7 +10228,7 @@ const DailyWatchlistTab = ({ data }) => {
       if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
       return sortDir === "asc" ? av - bv : bv - av;
     }).slice(0, 25);
-  }, [allStocks, sortCol, sortDir]);
+  }, [enrichedAllStocks, sortCol, sortDir]);
 
   const handleSort = col => {
     if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
@@ -10232,7 +10242,7 @@ const DailyWatchlistTab = ({ data }) => {
 
   // ── Short Candidates ── below all 3 SMAs, RS≤40, ADR≥4%, down on 1M
   const shortCandidates = React.useMemo(() => {
-    const filtered = allStocks.filter(s =>
+    const filtered = enrichedAllStocks.filter(s =>
       (s.sma20_pct  ?? 1) < 0 &&
       (s.sma50_pct  ?? 1) < 0 &&
       (s.sma200_pct ?? 1) < 0 &&
@@ -10256,7 +10266,7 @@ const DailyWatchlistTab = ({ data }) => {
       if (typeof av === "string") return shortSortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
       return shortSortDir === "asc" ? av - bv : bv - av;
     }).slice(0, 25);
-  }, [allStocks, shortSortCol, shortSortDir]);
+  }, [enrichedAllStocks, shortSortCol, shortSortDir]);
 
   const handleShortSort = col => {
     if (shortSortCol === col) setShortSortDir(d => d === "asc" ? "desc" : "asc");
@@ -10382,7 +10392,7 @@ const DailyWatchlistTab = ({ data }) => {
               const stocks = rawStocks.map(s => {
                 const sc = screenerMap[s.ticker];
                 if (!sc) return s;
-                return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m };
+                return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
               });
               const topS = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))[0];
               const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
@@ -10589,7 +10599,7 @@ const DailyWatchlistTab = ({ data }) => {
       )}
 
       {/* ── UNIVERSE ──────────────────────────────────────── */}
-      {mode === "universe" && <UniverseTab etfHoldings={data?.etf_holdings || {}} />}
+      {mode === "universe" && <UniverseTab etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />}
 
       {/* ── SHORT MODE ────────────────────────────────────── */}
       {mode === "short" && (
@@ -10741,7 +10751,7 @@ const TrendSparkline = ({ data = [] }) => {
   );
 };
 
-const UniverseTab = ({ etfHoldings = {} }) => {
+const UniverseTab = ({ etfHoldings = {}, screenerMap = {} }) => {
   const [uData, setUData]         = useState(null);
   const [loading, setLoading]     = useState(true);
   const [sigFilter, setSigFilter] = useState("All");
@@ -10805,7 +10815,12 @@ const UniverseTab = ({ etfHoldings = {} }) => {
 
   const filteredStocks = useMemo(() => {
     if (!uData?.stocks) return [];
-    let base = uData.stocks;
+    // Enrich universe stocks with TradingView rolling perf (overrides Finviz calendar-month)
+    let base = uData.stocks.map(s => {
+      const sc = screenerMap[s.ticker];
+      if (!sc) return s;
+      return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
+    });
     if (sigFilter !== "All") base = base.filter(s => s.signal === sigFilter);
     if (sectorEtfs)          base = base.filter(s => (s.etfs||[]).some(e => sectorEtfs.has(e)));
     if (showNew)             base = base.filter(s => (s.new_etfs||[]).length > 0);
@@ -10819,7 +10834,7 @@ const UniverseTab = ({ etfHoldings = {} }) => {
       if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
       return sortDir === "asc" ? av - bv : bv - av;
     });
-  }, [uData, sigFilter, sectorFilter, sectorEtfs, showNew, minRS, minVol, minMC, minADR, sortCol, sortDir]);
+  }, [uData, screenerMap, sigFilter, sectorFilter, sectorEtfs, showNew, minRS, minVol, minMC, minADR, sortCol, sortDir]);
 
   if (loading) return <div className="text-center py-20 text-zinc-600 text-sm">Loading Universe…</div>;
   if (!uData)  return <div className="text-center py-20 text-zinc-600 text-sm">No data — run universe_builder.py</div>;
@@ -11428,7 +11443,7 @@ const appScreenerMap = useMemo(() => {
         let st = sub.stocks.map(s => {
           const sc = appScreenerMap[s.ticker];
           if (!sc) return s;
-          return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m };
+          return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
         });
         if (search) {
           const q = search.toLowerCase();
