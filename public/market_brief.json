@@ -1,5 +1,5 @@
 {
-  "generated_at": "June 09, 2026 (18:26 EDT)",
+  "generated_at": "June 09, 2026 (20:37 EDT)",
   "session": "Post-Market",
   "global_snapshot": [
     {
@@ -32,8 +32,8 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 64024.6,
-      "change_pct": -3.85
+      "price": 64786.66,
+      "change_pct": 1.19
     },
     "dax": {
       "label": "DAX",
@@ -42,8 +42,8 @@
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10227.33,
-      "change_pct": -1.41
+      "price": 10373.2,
+      "change_pct": 0.05
     }
   },
   "macro_breadth": {
@@ -60,13 +60,31 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "",
+  "mood": "Tech Weakness, Relative Strength Opportunities",
   "analysis": {
-    "action_line": "",
-    "analysis_para1": "",
-    "analysis_para2": "",
-    "technical_signal": "",
-    "ticker_intel": []
-  },
-  "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "action_line": "VIX 19.87 Normal + 57.2% S&P 500 stocks above SMA50 breadth + Nikkei +1.19% → trade relative strength leaders selectively near support.",
+    "analysis_para1": "Global markets presented a mixed picture today, with Japan's Nikkei 225 showing robust strength with a +1.19% gain, contrasting with Germany's DAX declining by -0.58%. The FTSE 100 remained relatively flat, up a marginal +0.05%. While the BAML High Yield Spread data is currently unavailable, suggesting an unknown credit regime, US market breadth remains resilient. A healthy 57.2% of S&P 500 stocks are trading above their SMA50, complemented by 63.3% of S&P stocks above their SMA200, indicating underlying market stability despite today's modest S&P 500 dip. The stability in the 10-Year Yield at 4.53% further supports a measured outlook.",
+    "analysis_para2": "With the S&P 500 closing at 7386.65, traders should observe key support levels around the 7350-7360 range. A close below this could signal further short-term weakness. The VIX remaining at 19.87, within normal bounds, suggests no immediate panic, allowing for tactical entries. Focus on high relative strength (RS) names, particularly those in the Semiconductors and Hardware themes, that pull back constructively towards their 10-day or 21-day exponential moving averages. A rebound in the Nasdaq 100 from its -1.12% decline, ideally confirming with increasing volume, would provide a stronger signal for re-engaging growth-oriented positions.",
+    "technical_signal": "No reversal pattern confirmed yet; today's modest S&P 500 decline and larger Nasdaq 100 drop are pullbacks within the broader trend.",
+    "ticker_intel": [
+      {
+        "ticker": "MRVL",
+        "company": "Marvell Technology, Inc.",
+        "grade": "A+",
+        "reason": "This Semiconductor leader demonstrates exceptional relative strength of 98 with a strong 1-month return of +80.5%, making it a prime long candidate in the current market environment."
+      },
+      {
+        "ticker": "VSH",
+        "company": "Vishay Intertechnology, Inc.",
+        "grade": "A",
+        "reason": "As a Semiconductors standout, its relative strength of 98 and remarkable 3-month return of +240.8% underscore its robust momentum and sustained leadership."
+      },
+      {
+        "ticker": "UMAC",
+        "company": "Unusual Machines, Inc.",
+        "grade": "C",
+        "reason": "Despite a high 1-month return of +91.5%, its relatively lower 3-month return of +49.6% compared to peers, coupled with a high ADR of 14.2%, suggests potential overextension and elevated volatility, warranting an avoid rating."
+      }
+    ]
+  }
 }
