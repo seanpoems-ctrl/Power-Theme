@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-10 16:45 ET",
+  "generated_at": "2026-06-10 18:30 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -18,7 +18,7 @@
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 693.69,
-      "open": 701.66,
+      "open": 701.49,
       "high": 711.26,
       "low": 692.93,
       "close": 693.69,
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 91.1,
-      "open": 89.4,
-      "high": 91.84,
-      "low": 87.39,
-      "close": 91.1,
+      "price": 92.13,
+      "open": 92.25,
+      "high": 92.45,
+      "low": 91.9,
+      "close": 92.13,
       "prev_open": 91.28,
       "prev_close": 88.2,
-      "volume": 250697,
-      "change_pct": 3.29
+      "volume": 2357,
+      "change_pct": 4.46
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24195.31,
-      "open": 24507.4,
-      "high": 24517.48,
-      "low": 24043.52,
-      "close": 24195.31,
-      "prev_open": 24589.29,
-      "prev_close": 24433.06,
-      "volume": 0,
-      "change_pct": -0.97
+      "price": 24433.06,
+      "open": 24589.29,
+      "high": 24820.95,
+      "low": 24398.87,
+      "close": 24433.06,
+      "prev_open": 24447.32,
+      "prev_close": 24616.22,
+      "volume": 56771800,
+      "change_pct": -0.74
     }
   },
   "fred": {
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: June 10, 2026",
-    "mood_emoji": "⚠️",
-    "mood": "Risk-Off / Volatility Spike",
-    "narrative": "US equities plunged across the board today, with major indices experiencing significant losses and a sharp surge in volatility. This broad-based sell-off indicates a pronounced shift to a risk-off posture, despite credit markets remaining relatively composed.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 725.43 | -1.58% | 📉 |\n| Nasdaq 100 ETF | 693.69 | -2.00% | 📉 |\n| VIX | 22.22 | +11.83% | 📈 |\n| Crude Oil | 91.10 | +3.29% | 📈 |\n| Nikkei 225 | 65416.63 | +2.17% | 📈 |\n| DAX | 24195.31 | -0.97% | 📉 |",
-    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) remains at a 'Complacent' 2.78%, suggesting that systemic credit risk is not yet a primary concern for institutional investors. Concurrently, the 10Y-2Y Yield Curve (T10Y2Y) stands at a 'Normal / Steepening' +0.460, further indicating that recessionary fears are not immediately priced into bond markets. This implies that today's equity risk-off move is likely more tactical or flow-driven rather than a direct response to deteriorating fundamental credit conditions.",
-    "analysis_para1": "Today's global tape presented a divergent picture, with US and European equities facing headwinds while Asian markets and commodities showed strength. The Nikkei 225 surged by +2.17% and Crude Oil jumped +3.29% to $91.10, indicating either regional optimism or inflationary pressures. Conversely, the DAX dipped by -0.97%, mirroring the significant -1.58% drop in the S&P 500 ETF and -2.00% fall in the Nasdaq 100 ETF. This divergence, coupled with the 'Complacent' 2.78% High Yield Credit Spread, suggests that while US and European risk appetite soured, it has not yet translated into broader global credit stress, potentially indicating a localized re-pricing or rotation rather than a systemic downturn.",
-    "analysis_para2": "The dominant 'Why' behind today's primary flow appears to be a mechanical re-pricing of interest rate expectations, likely triggered by hawkish central bank commentary or stronger-than-expected inflation data not yet reflected in the snapshot. This mechanical catalyst drove a significant sell-off in rate-sensitive growth stocks, pushing the Nasdaq 100 ETF down 2.00% and the S&P 500 ETF down 1.58%. The accompanying surge in the VIX by +11.83% to 22.22 confirms that market participants are actively hedging against increased uncertainty and volatility, indicating a swift adjustment to perceived future policy tightening or economic outlook.",
-    "analysis_para3": "For today's close, traders should prioritize capital preservation and prepare for continued volatility into tomorrow's session. Watch for the S&P 500 ETF to test the 720-722 price level as crucial immediate support, with a break below potentially signaling further downside towards 715. Key triggers for long entries would require a noticeable decrease in the VIX from its current 22.22 level and a bullish reversal pattern on higher volume. Conversely, a sustained break below 720 on the S&P 500 ETF, especially if accompanied by the VIX climbing above 23.50, should be considered a significant risk-off threshold, warranting defensive positioning or short bias.",
-    "technical_signal": "No reversal pattern confirmed yet. The sharp sell-off pushes the market closer to critical support zones, with S&P 500 stocks above SMA50 at 50.8% and above SMA200 at 60.1% still holding, but vulnerable. Watch for an uptick in buying volume on any retest of lows or a bullish candlestick pattern to signal a potential near-term bounce.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "INTC",
-          "company": "Intel Corporation",
-          "reason": "Intel announced a breakthrough in quantum computing chip design today, indicating a potential long-term strategic advantage in a high-growth sector."
-        },
-        {
-          "ticker": "BA",
-          "company": "The Boeing Company",
-          "reason": "Boeing secured a major multi-billion dollar aircraft order from a key airline, boosting its commercial backlog and indicating strong demand recovery."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft saw a general market-driven decline today, reflecting broader tech sector weakness with no new specific company catalyst."
-        }
-      ]
-    }
+    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
   }
 }
