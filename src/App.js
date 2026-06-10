@@ -10119,6 +10119,7 @@ const DailyWatchlistTab = ({ data }) => {
   const [etfRsData,  setEtfRsData]    = React.useState(null);
   const [mode, setMode]               = React.useState("long");   // "long" | "short" | "etf"
   const [perfMode, setPerfMode]       = React.useState("1m");      // "1d" | "1m" | "3m"
+  const [leaderPerfMode, setLeaderPerfMode] = React.useState("perf_1m");
   const [selectedThemeModal, setSelectedThemeModal] = React.useState(null); // { name, stocks }
   const [sortCol, setSortCol]       = React.useState("rs_52w");
   const [sortDir, setSortDir]       = React.useState("desc");
@@ -10379,9 +10380,26 @@ const DailyWatchlistTab = ({ data }) => {
 
         {/* Market Leaders cards */}
         <div className="lg:col-span-2">
-          <Sec title="Market Leaders" badge={leaders.length} sub="RS≥90 · Mkt Cap≥$10B · $Vol≥$100M · sorted by strength" />
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-baseline gap-2">
+              <h3 className="text-sm font-semibold text-zinc-100">Market Leaders</h3>
+              <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{leaders.length}</span>
+              <span className="text-xs text-zinc-600">RS≥90 · Mkt Cap≥$10B · $Vol≥$100M · sorted by strength</span>
+            </div>
+            <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 shrink-0">
+              {[{k:"perf_1d",l:"1D"},{k:"perf_1w",l:"1W"},{k:"perf_1m",l:"1M"},{k:"perf_3m",l:"3M"}].map(o => (
+                <button key={o.k} onClick={() => setLeaderPerfMode(o.k)}
+                  className={`px-2 py-0.5 text-[11px] font-medium rounded-md transition-all ${leaderPerfMode === o.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
+                  {o.l}
+                </button>
+              ))}
+            </div>
+          </div>
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2">
-            {leaders.map(s => (
+            {leaders.map(s => {
+              const perfVal = s[leaderPerfMode] ?? null;
+              const perfLabel = {perf_1d:"1D",perf_1w:"1W",perf_1m:"1M",perf_3m:"3M"}[leaderPerfMode];
+              return (
               <a key={s.ticker}
                  href={`https://finviz.com/quote.ashx?t=${s.ticker}`}
                  target="_blank" rel="noopener noreferrer"
@@ -10397,12 +10415,13 @@ const DailyWatchlistTab = ({ data }) => {
                       ? `$${s.mkt_cap_b >= 1000 ? (s.mkt_cap_b/1000).toFixed(1)+"T" : s.mkt_cap_b.toFixed(0)+"B"}`
                       : s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : ""}
                   </span>
-                  <span className={`text-[10px] font-mono font-semibold ${(s.perf_1m ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
-                    {fmtPct(s.perf_1m)}
+                  <span className={`text-[10px] font-mono font-semibold ${(perfVal ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                    <span className="text-zinc-600 mr-0.5">{perfLabel}</span>{fmtPct(perfVal)}
                   </span>
                 </div>
               </a>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
