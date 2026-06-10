@@ -6007,7 +6007,7 @@ async function fetchMarketSituation(payload) {
     `Be direct, cite specific numbers, avoid generic phrases. Write for a professional swing trader making real trading decisions.\n\nMarket data:\n${JSON.stringify(payload, null, 2)}`;
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.3, maxOutputTokens: 2000, thinkingConfig: { thinkingBudget: 2048 } },
+    generationConfig: { temperature: 0.3, maxOutputTokens: 8192, thinkingConfig: { thinkingBudget: 2048 } },
   };
   const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   const json = await res.json();
