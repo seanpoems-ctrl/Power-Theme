@@ -10069,7 +10069,8 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
                 <th className="px-3 py-2.5 text-left text-zinc-500 font-semibold text-[11px] w-8">#</th>
                 <Th col="ticker"            label="Ticker"    align="left" />
                 <Th col="company"           label="Company"   align="left" />
-                <Th col="market_cap_b"      label="Mkt Cap"               />
+                <Th col="mkt_cap_b"         label="Mkt Cap"               />
+                <Th col="adr_x_vol"         label="ADR×$Vol"               />
                 <Th col="avg_dollar_volume" label="$ Vol"                  />
                 <Th col="adr_pct"           label="ADR%"                   />
                 <Th col="rs_52w"            label="RS"                     />
@@ -10079,8 +10080,9 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
             <tbody>
               {sorted.map((s, i) => {
                 const dvol = s.avg_dollar_volume ?? s.dollar_volume;
-                const mktCap = s.market_cap_b != null
-                  ? `$${s.market_cap_b >= 1000 ? (s.market_cap_b / 1000).toFixed(1) + "T" : s.market_cap_b.toFixed(2) + "B"}`
+                const adrXVol = (s.adr_pct != null && dvol != null) ? (s.adr_pct / 100) * dvol : null;
+                const mktCap = s.mkt_cap_b != null
+                  ? `$${s.mkt_cap_b >= 1000 ? (s.mkt_cap_b / 1000).toFixed(1) + "T" : s.mkt_cap_b.toFixed(2) + "B"}`
                   : "—";
                 const p1d = s.perf_1d ?? s.change_pct;
                 return (
@@ -10093,6 +10095,7 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
                     </td>
                     <td className="px-3 py-2 text-zinc-300 max-w-[200px] truncate">{s.company || "—"}</td>
                     <td className="px-3 py-2 text-right font-mono text-zinc-400">{mktCap}</td>
+                    <td className="px-3 py-2 text-right font-mono text-amber-400">{adrXVol != null ? fmt(adrXVol) : "—"}</td>
                     <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmt(typeof dvol === "number" ? dvol : null)}</td>
                     <td className="px-3 py-2 text-right font-mono text-zinc-400">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
                     <td className="px-3 py-2 text-right">{rsCell(s.rs_52w)}</td>
