@@ -6330,7 +6330,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
   // up25Q, T2108) rather than falling back to advancing/new-high proxies.
   const [bmLatest, setBmLatest] = useState(null);
   useEffect(() => {
-    fetch(`${process.env.PUBLIC_URL}/breadth_monitor.json`)
+    fetch(`${process.env.PUBLIC_URL}/breadth_monitor.json?v=${Date.now()}`)
       .then(r => r.json())
       .then(d => { if (d?.rows?.length > 0) setBmLatest(d.rows[0]); })
       .catch(() => {});
@@ -7101,8 +7101,8 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
   const [chartAnchorRect, setChartAnchorRect] = useState(null);
 
   useEffect(() => {
-    fetch(`${process.env.PUBLIC_URL}/stock_db.json`)
-      .catch(() => fetch(`${process.env.PUBLIC_URL}/all_tickers.json`))
+    fetch(`${process.env.PUBLIC_URL}/stock_db.json?v=${Date.now()}`)
+      .catch(() => fetch(`${process.env.PUBLIC_URL}/all_tickers.json?v=${Date.now()}`))
       .then(r => r.json())
       .then(arr => {
         const map = {};
@@ -7686,7 +7686,7 @@ const SearchBar = ({ data, search, setSearch }) => {
   const [livePriceLoading, setLivePriceLoading] = useState(false);
   const [priceCache, setPriceCache] = useState({});
   useEffect(() => {
-    fetch(`${process.env.PUBLIC_URL}/prices.json`)
+    fetch(`${process.env.PUBLIC_URL}/prices.json?v=${Date.now()}`)
       .then(r => r.json())
       .then(setPriceCache)
       .catch(() => {});
@@ -7728,12 +7728,12 @@ const SearchBar = ({ data, search, setSearch }) => {
   };
 
   useEffect(() => {
-    fetch(`${process.env.PUBLIC_URL}/stock_db.json`)
+    fetch(`${process.env.PUBLIC_URL}/stock_db.json?v=${Date.now()}`)
       .then(r => r.json())
       .then(setAllTickers)
       .catch(() => {
         // fallback to all_tickers.json
-        fetch(`${process.env.PUBLIC_URL}/all_tickers.json`)
+        fetch(`${process.env.PUBLIC_URL}/all_tickers.json?v=${Date.now()}`)
           .then(r => r.json())
           .then(setAllTickers)
           .catch(() => {});
