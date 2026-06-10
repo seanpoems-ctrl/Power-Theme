@@ -1010,6 +1010,23 @@ def fetch_sparkline(ticker: str) -> dict:
         return {"sparkline": [], "bars_30d": []}
 
 
+def _rolling_perf_from_closes(closes: list) -> dict:
+    """Compute rolling-period returns from a list of daily closes (yfinance).
+    Trading-day windows: 1d=1, 1w=5, 1m=21, 3m=63, 6m=126.
+    Returns only the periods for which enough history exists."""
+    result = {}
+    if not closes or len(closes) < 2:
+        return result
+    last = closes[-1]
+    windows = {"perf_1d": 1, "perf_1w": 5, "perf_1m": 21, "perf_3m": 63, "perf_6m": 126}
+    for key, days in windows.items():
+        if len(closes) > days:
+            base = closes[-(days + 1)]
+            if base and base > 0:
+                result[key] = round((last / base - 1) * 100, 2)
+    return result
+
+
 # ──────────────────────────────────────────────────────────────
 # Market Condition (SPY + QQQ indicators)
 # ──────────────────────────────────────────────────────────────
@@ -1957,6 +1974,9 @@ def _fetch_details(picks: list[dict], cache: dict) -> list[dict]:
                 detail["sparkline"] = price_data.get("sparkline", [])
                 detail["bars_30d"] = price_data.get("bars_30d", [])
                 detail["earnings"] = fetch_earnings_yf(t)
+                # Override Finviz calendar-month perf with yfinance rolling returns
+                rolling = _rolling_perf_from_closes(detail["sparkline"])
+                detail.update(rolling)
             cache[t] = detail
             _sleep()
         d = cache.get(t)
