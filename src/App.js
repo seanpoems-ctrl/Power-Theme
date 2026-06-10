@@ -1126,6 +1126,8 @@ const SubThemeStocksModal = ({ subthemeName, stocks, onClose }) => {
                 <th className="w-8 py-2 pr-2 text-right font-medium">#</th>
                 <th className="px-2 py-2 font-medium">Ticker</th>
                 <th className="px-2 py-2 font-medium">Company</th>
+                <th className="px-2 py-2 font-medium text-right">Mkt Cap</th>
+                <th className="px-2 py-2 font-medium text-right">ADR×$Vol</th>
                 <th className="px-2 py-2 font-medium text-right">RS</th>
                 <th className="px-2 py-2 font-medium text-right">ADR%</th>
                 <th className="px-2 py-2 font-medium text-right">$ Vol</th>
@@ -1138,6 +1140,8 @@ const SubThemeStocksModal = ({ subthemeName, stocks, onClose }) => {
                 const chgCls = (s.change_pct ?? 0) > 0 ? "text-emerald-400" : (s.change_pct ?? 0) < 0 ? "text-red-400" : "text-zinc-400";
                 const fmtVol = (v) => { if (v == null) return "—"; if (v >= 1e9) return `$${(v/1e9).toFixed(1)}B`; if (v >= 1e6) return `$${(v/1e6).toFixed(0)}M`; return `$${(v/1e3).toFixed(0)}K`; };
                 const fmtPct = (v) => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(2)}%`;
+                const fmtMktCap = (v) => { if (v == null) return "—"; if (v >= 1000) return `$${(v/1000).toFixed(1)}T`; if (v >= 1) return `$${v.toFixed(1)}B`; return `$${(v*1000).toFixed(0)}M`; };
+                const adrDolVol = (s.adr_pct != null && s.dollar_volume != null) ? (s.adr_pct / 100) * s.dollar_volume : null;
                 return (
                   <tr key={s.ticker} className="border-b border-zinc-800/50 hover:bg-zinc-800/30 cursor-pointer"
                     onClick={e => {
@@ -1146,7 +1150,9 @@ const SubThemeStocksModal = ({ subthemeName, stocks, onClose }) => {
                     }}>
                     <td className="py-1.5 pr-2 text-right font-mono text-zinc-600">{i + 1}</td>
                     <td className="px-2 py-1.5 font-mono font-semibold text-blue-400">{s.ticker}</td>
-                    <td className="px-2 py-1.5 text-zinc-300 max-w-[180px] truncate">{s.company || "—"}</td>
+                    <td className="px-2 py-1.5 text-zinc-300 max-w-[160px] truncate">{s.company || "—"}</td>
+                    <td className="px-2 py-1.5 text-right font-mono text-zinc-300">{fmtMktCap(s.mkt_cap_b)}</td>
+                    <td className="px-2 py-1.5 text-right font-mono text-amber-400">{adrDolVol != null ? fmtVol(adrDolVol) : "—"}</td>
                     <td className={`px-2 py-1.5 text-right font-mono font-bold ${rsCls}`}>{s.rs_52w ?? "—"}</td>
                     <td className="px-2 py-1.5 text-right font-mono text-zinc-300">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
                     <td className="px-2 py-1.5 text-right font-mono text-zinc-400">{fmtVol(s.dollar_volume)}</td>
@@ -1157,7 +1163,7 @@ const SubThemeStocksModal = ({ subthemeName, stocks, onClose }) => {
             </tbody>
             <tfoot>
               <tr className="border-t border-zinc-700 text-zinc-600 text-xs">
-                <td colSpan={7} className="py-1.5 pr-2 text-right font-mono">{sorted.length} stocks</td>
+                <td colSpan={9} className="py-1.5 pr-2 text-right font-mono">{sorted.length} stocks</td>
               </tr>
             </tfoot>
           </table>
