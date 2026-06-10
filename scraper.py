@@ -1673,6 +1673,17 @@ def build_data() -> dict:
         "Aging Population & Longevity":["Biotechnology", "Medical Devices"],
         "Healthy Food & Nutrition":    ["Packaged Foods", "Farm Products"],
         "Agriculture & FoodTech":      ["Agricultural Inputs", "Farm Products"],
+        # Previously missing — no theme_rankings entry
+        "Autonomous Systems":          ["Auto Manufacturers", "Electronic Components"],
+        "Big Data":                    ["Software - Infrastructure", "Information Technology Services"],
+        "Commodities Agriculture":     ["Agricultural Inputs", "Farm Products"],
+        "Commodities Energy":          ["Oil & Gas E&P", "Oil & Gas Midstream"],
+        "Internet of Things":          ["Electronic Components", "Scientific & Technical Instruments"],
+        "Robotics":                    ["Farm & Heavy Construction Machinery", "Scientific & Technical Instruments"],
+        "Space Tech":                  ["Aerospace & Defense"],
+        # Fallback for themes that ARE in theme_rankings but occasionally skip
+        "E-Commerce":                  ["Internet Retail"],
+        "Fintech":                     ["Financial Data & Stock Exchanges", "Software - Application"],
     }
 
     # Build theme_name → industries lookup from theme_rankings
