@@ -641,11 +641,10 @@ const IbkrSourceBadge = ({ source }) => {
 const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData }) => {
   const [hovered, setHovered] = useState(null);
   const fmtMktCap = (v) => {
-    if (!v) return '—';
-    if (v >= 1e12) return `$${(v/1e12).toFixed(1)}T`;
-    if (v >= 1e9)  return `$${(v/1e9).toFixed(1)}B`;
-    if (v >= 1e6)  return `$${(v/1e6).toFixed(0)}M`;
-    return `$${v}`;
+    if (v == null) return '—';
+    if (v >= 1000) return `$${(v/1000).toFixed(1)}T`;
+    if (v >= 1)    return `$${v.toFixed(1)}B`;
+    return `$${(v*1000).toFixed(0)}M`;
   };
   const setupCls = (label) => {
     if (label === 'Flag') return 'text-amber-400 bg-amber-500/10 border-amber-500/30';
@@ -706,13 +705,15 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
 
       {stocks.length > 0 ? (
         <div className="overflow-x-auto overflow-y-auto" style={{ maxHeight: '240px' }}>
-          <table className="text-left" style={{ width: '100%', minWidth: '480px', tableLayout: 'fixed' }}>
+          <table className="text-left" style={{ width: '100%', minWidth: '600px', tableLayout: 'fixed' }}>
             <colgroup>
-              {Array(7).fill(0).map((_, i) => <col key={i} style={{ width: '14.28%' }} />)}
+              {Array(9).fill(0).map((_, i) => <col key={i} style={{ width: '11.11%' }} />)}
             </colgroup>
             <thead className="sticky top-0 z-10" style={{ background: '#18181b' }}>
               <tr className="border-b border-zinc-800/60">
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">Ticker</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Mkt Cap</th>
+                <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">ADR×$Vol</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">Price</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">ADR%</th>
                 <th className="px-2 py-1.5 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider text-right">RS</th>
@@ -724,9 +725,13 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
             <tbody>
               {stocks.map(s => {
                 const rsCls = (s.rs_52w || 0) >= 85 ? 'text-emerald-400' : (s.rs_52w || 0) >= 70 ? 'text-yellow-400' : 'text-red-400';
+                const fmtVol = (v) => { if (v == null) return '—'; if (v >= 1e9) return `$${(v/1e9).toFixed(1)}B`; if (v >= 1e6) return `$${(v/1e6).toFixed(0)}M`; return `$${(v/1e3).toFixed(0)}K`; };
+                const adrDolVol = (s.adr_pct != null && s.dollar_volume != null) ? (s.adr_pct / 100) * s.dollar_volume : null;
                 return (
                   <tr key={s.ticker} className="border-b border-zinc-800/20 hover:bg-zinc-800/30 transition-colors">
                     <td className="px-2 py-1.5"><span className="text-[12px] font-mono font-semibold text-blue-400 hover:text-blue-300 cursor-pointer transition-colors" onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === s.ticker ? null : { ticker: s.ticker, rect }); }}>{s.ticker}</span></td>
+                    <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{fmtMktCap(s.mkt_cap_b)}</td>
+                    <td className="px-2 py-1.5 text-[12px] font-mono text-amber-400 text-right">{adrDolVol != null ? fmtVol(adrDolVol) : '—'}</td>
                     <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{s.price ? `$${Number(s.price).toFixed(2)}` : '—'}</td>
                     <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-300 text-right">{s.adr_pct ? `${Number(s.adr_pct).toFixed(1)}%` : '—'}</td>
                     <td className={`px-2 py-1.5 text-[12px] font-mono font-bold text-right ${rsCls}`}>{s.rs_52w ?? '—'}</td>
