@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-09 20:50 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious Retreat & Volatility Uptick",
+    "spy_price": 737.05,
+    "spy_change_pct": -0.29,
+    "vix": 19.87,
+    "hy_oas": 2.75,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 57.2,
+    "mmth": 63.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA announced a groundbreaking new AI superchip partnership with a major cloud provider, signaling continued dominance in the AI hardware space."
+        },
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla confirmed higher than expected Q2 delivery forecasts and announced a significant expansion of its European charging network, boosting investor confidence."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple saw continued attention today amidst ongoing discussions about its upcoming developer conference and rumored mixed-reality headset updates."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-09 20:41 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2217,44 +2255,6 @@
           "ticker": "AMC",
           "company": "AMC Entertainment Holdings Inc.",
           "reason": "Continued meme stock momentum as retail traders eye short squeeze potential without fresh fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-04-24 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Tech Momentum Surge",
-    "spy_price": 713.94,
-    "spy_change_pct": 0.77,
-    "vix": 18.71,
-    "hy_oas": 2.86,
-    "yield_curve": 0.51,
-    "credit_status": "Complacent",
-    "s5fi": 58.9,
-    "mmth": 59.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "INTC",
-          "company": "Intel Corporation",
-          "reason": "Intel, a major semiconductor player, demonstrated strong operational execution with its 'Beat & Raise' report, reinforcing its competitive position in a crucial sector."
-        },
-        {
-          "ticker": "OKLO",
-          "company": "Oklo Inc.",
-          "reason": "Oklo Inc., a small nuclear reactor company, surged on news of a strategic partnership with Nvidia, aligning it with the high-growth AI infrastructure theme."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "Nvidia Corporation",
-          "reason": "Nvidia Corporation continues to be a central topic for AI-driven investment flows, but today's interest is largely a continuation of existing narratives rather than fresh, specific news."
         }
       ]
     }
