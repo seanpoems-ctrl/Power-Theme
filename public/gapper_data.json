@@ -1,122 +1,63 @@
 {
-  "scan_time": "2026-06-09 09:27 ET",
+  "scan_time": "2026-06-09 20:25 ET",
   "earnings_today": [],
   "gappers": [
     {
       "ticker": "NUVL",
-      "price": 88.49,
-      "gap_pct": 38.81,
-      "pm_volume": 12211610,
-      "avg_vol_10d": 1197337,
-      "avg_dollar_vol": 105952351,
-      "mkt_cap": 6990525935,
-      "rvol": 0.9,
-      "adr_pct": 4.57,
-      "category": "New Contract/Partnership",
-      "theme": "New Contract/Partnership",
-      "reasoning": "NUVL announced a new contract or strategic partnership.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_detail": {
-        "catalyst": "NUVL announced a new contract or strategic partnership.",
-        "impact": "Contract or partnership announcement detected. Evaluate deal size and strategic significance."
-      },
-      "analysis_details": "• **The Announcement**\nNUVL announced a new contract or strategic partnership.\n\n• **Strategic Value**\nContract or partnership announcement detected. Evaluate deal size and strategic significance.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "GSK plc (NUVL) plans cash tender offer for Nuvalent under merger agreement - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQZHk1UENYNi1DaVN3djJoVTl6VDVRdlVwYURGRGg2ZTdqbEh5ZXRGaU1EdzA2VUFfUWw4T2oxT091cV9jOUx3bHJVT0szMU1nSHFEWDA0bEowQTFIUXVuNWlLYS1SUmliY0N2OVZnSFJYZEJqNFJRZ1BRSTNyNkhYMG5IVHlPNGwtdkRWcFpvZWhQS0tqS3RqcnlSV2kxSW40YmZfSkpYZkNybGRGZlE?oc=5"
-        },
-        {
-          "title": "AASTOCKS Financial News - Nuvalent, Inc. (NUVL) - AASTOCKS.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBWSUt1TkNZdU5Rd0x1REkyRWxTRkMzQkFBbmtadGRXU1o4UHVMVGk4eUc1aDl0RzN6MGdEQ0E3bE5iWV9OZUtzdl9RSzRxWmdoYnpSQUtDSHV3RDhIRVUxaHNnbGNOcTdmbDdMVFBMT29FZw?oc=5"
-        }
-      ],
-      "float_shares": "52.21M",
-      "short_float": "9.39%",
-      "daily_pct": -2.7,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "NUVL is being acquired by GlaxoSmithKline for $124 per share.",
-        "discrepancy_note": "Source A (Finviz) has no information regarding an acquisition or tender offer for NUVL. Source B (Google News) articles [1], [2], and [4] confirm a merger/acquisition/tender offer by GSK for NUVL, with article [4] specifically stating a '$124-Per-Share Tender Offer'. Since only one set of sources provides the specific financial claim, it is marked as a discrepancy."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "APLD",
-      "price": 40.95,
-      "gap_pct": 12.59,
-      "pm_volume": 1451853,
-      "avg_vol_10d": 19367431,
-      "avg_dollar_vol": 793096299,
-      "mkt_cap": 11700833370,
-      "rvol": 0.7,
-      "adr_pct": 9.06,
+      "price": 123.25,
+      "gap_pct": 38.8,
+      "pm_volume": 14224318,
+      "avg_vol_10d": 6324728,
+      "avg_dollar_vol": 779522726,
+      "mkt_cap": 9736493631,
+      "rvol": 41.36,
+      "adr_pct": 4.34,
       "category": "Others",
       "theme": "Others",
-      "reasoning": "APLD gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "reasoning": "NUVL gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "APLD gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "catalyst": "NUVL gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
         "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
       },
-      "analysis_details": "• **What Happened**\nAPLD gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "analysis_details": "• **What Happened**\nNUVL gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "What's behind Applied Digital's $1.59B AI data center financing plan - Stock Titan",
+          "title": "NUVL (NASDAQ: NUVL) files Rule 144 notice to sell 48,500 shares - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQc05taC1XM1ZadFhEdGdHS2syQUpfQ2g2ZzN3V3JmbV95NTVXbDVaVnRyM1QzeWlZWkNMVENnVkJjMzI5a1p2UjV0Y3ZTNmp0bTJFZGNsNnB4T3NKTUh5c0hITWVKTFZ0M3pmeVdRTXFXc3ptLUZQY3k3RUhHeFM5bnFLS0diemN1cFc4eU1wTGY3S0hGZjVXRXQwN21NUXNEZXd3M2xwXzdvd29aSW1uZXYtMWF4OThD?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPSEJVdkx3UW5iZDJWQkNVemlndDlXc1QyaTNaVU1UVzVySTBHbFFQV3J2ZGZ4OXpIVDk3SmlobkJucTNzSF9JRnhKb0NLWXFldW1DUTFBQVIyQ1R2TTdaekJPSTRJYW53dmo4S01JVmZ6LVM0MW0yeno2QWdTSjZwQ29adzZNcGdOa05VbkRnV2RjYlk?oc=5"
         },
         {
-          "title": "Applied Digital Signs 210 MW Lease at Delta Forge 2, Expanding Its AI Factory Franchise Model to a Fifth Campus - Applied Digital Corporation (APLD)",
+          "title": "Nuvalent Stock Jumps As GSK Buyout Talks Heat Up - StocksToTrade",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQQW84Nl9zYTJWc0RXd3NHeVRGaFZrU0pOaTZDVjdKS1ozOXF3WDdPN2NsVFQ3V0U4OVdKb0NvblZZUURSLWxfTXNXVG9iMllISWlScGg3ams5bUhZT0wwejhLZi0wTFZTYkRUbEtaT2U5YnBwMnRXeU5uNTRKclFRNWFhY2NuMFN6dU1pbGd6YjZQa2Z4aVlhNFk2bGZhUGt2Z0NTOWtDNWNSMkt0SnlGV1pOZ3JVa2RHTEFB?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9NVmplajlEdmNhdnB6Sm9iRDdydXZpZkxiRTBzU05sb3Rzd0pGdXU5MmtPRDJJclE2ZlJDbHBrTDBvanJla1g5LTREOWFKanFkVEo4ekFLNUY3RVR3bndiSjVNWmhXMHNHRGt0cjVvMm5zSkNacXc?oc=5"
+        },
+        {
+          "title": "NUVL Stock Alert: Halper Sadeh LLC is Investigating Whether Nuvalent, Inc. is Obtaining a Fair Price for its Shareholders - The Joplin Globe",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinwJBVV95cUxPRXJqZWlid25DU1BIT25qa1IyVjVaV1lpQlM5cGNJZ09TWVdrMkpqZDc1bFhVV1NqM29hZVd6RHdlYW5GeVRmZ3h3MVRwdnNKS2NWSDJsazJndk1XTlJfZWtudUZPczdWcjVhXzZUMGUzMC1KZnk5NWdsVXZ6aXRqdGwwVVczUzF1WnJVSEpXOVFqaW9MUjd2OTFRcWR0WUlNLXA1NEItU0ZtQ09XdWI0aTlDdjJFWkhIbllqY3V6NGdPSS1ya2xYY0ZER0lTS0hfRGcxcUtXcldfZ2hyN3M0MEZLT1Y1NEtMNGxFR0VjSmVSR3c0WmR0RUgzeTB0dklOSjJlQjR5a2xyTWNKcmJfZkJSVjRMVWpGSkVLVTVOOA?oc=5"
         }
       ],
-      "float_shares": "258.69M",
-      "short_float": "30.43%",
-      "daily_pct": 3.34,
+      "float_shares": "52.21M",
+      "short_float": "10.04%",
+      "daily_pct": 39.28,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "APLD gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
+        "primary_claim": "NUVL gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "discrepancy_note": "The primary claim states a lack of a clear fundamental catalyst. However, Google News sources [2], [4], and [5] strongly suggest a specific fundamental catalyst: potential GSK buyout talks. This directly contradicts the 'lacks a clear fundamental catalyst' assertion."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -132,14 +73,14 @@
     },
     {
       "ticker": "FCEL",
-      "price": 15.5,
-      "gap_pct": 12.26,
-      "pm_volume": 537892,
-      "avg_vol_10d": 9912640,
-      "avg_dollar_vol": 153645920,
-      "mkt_cap": 821156940,
-      "rvol": 1.97,
-      "adr_pct": 16.91,
+      "price": 17.49,
+      "gap_pct": 16.45,
+      "pm_volume": 810035,
+      "avg_vol_10d": 10889864,
+      "avg_dollar_vol": 190463721,
+      "mkt_cap": 926582895,
+      "rvol": 2.25,
+      "adr_pct": 16.6,
       "category": "Earnings",
       "theme": "Earnings",
       "reasoning": "FCEL reported quarterly results; earnings catalyst detected in headlines.",
@@ -157,30 +98,25 @@
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "FuelCell Energy, Inc. Q2 2026 Earnings Call Summary",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/d59e45c1-ff99-3064-aa93-72ecd0e685cb/fuelcell-energy%2C-inc.-q2-2026.html"
-        },
-        {
-          "title": "FuelCell Posts Wider Losses. How the AI Boom Is Throwing the Stock a Lifeline.",
-          "source": "Finviz",
-          "url": "https://www.barrons.com/articles/fuelcell-energy-earnings-stock-price-535f5ee2?mod=bar_FV"
+          "title": "FCEL Stock Whipsaws As AI-Fueled Revenue Beat Clashes With Deeper Loss - StocksToTrade",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1wTERrYkN0TnJBektwTE1iYjlLeTJoajlEM2xad08xU2ZVVmNJbEJhWm5peHJYWXR1ZUhhMU9VQjVRLUEzdXFOeFp4TUhTUXZKWHNyMjRiVnhYbEc5c0VrYXRBN2JubGlwMThBSkR3T2ttNmE3ZUlzR0tXcXc?oc=5"
         }
       ],
       "float_shares": "52.81M",
-      "short_float": "10.36%",
-      "daily_pct": -10.56,
+      "short_float": "10.23%",
+      "daily_pct": 12.84,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Verified",
-        "confidence_score": 100,
+        "status": "Discrepancy",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "FCEL reported its Second Fiscal Quarter 2026 earnings results.",
-        "discrepancy_note": null
+        "primary_claim": "FCEL reported quarterly results (an AI-Fueled Revenue Beat clashing with a Deeper Loss)",
+        "discrepancy_note": "Source A (Finviz) has no news listed. Source B (Google News), specifically headline [5], directly refers to 'AI-Fueled Revenue Beat Clashes With Deeper Loss', confirming that quarterly results were reported. However, due to the lack of confirmation from Source A, it is marked as Discrepancy."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -195,15 +131,384 @@
       "tier_label": "Strong Catalyst"
     },
     {
+      "ticker": "APLD",
+      "price": 41.91,
+      "gap_pct": 11.78,
+      "pm_volume": 1673018,
+      "avg_vol_10d": 21526125,
+      "avg_dollar_vol": 902159899,
+      "mkt_cap": 11976600965,
+      "rvol": 2.31,
+      "adr_pct": 9.21,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "APLD gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "APLD gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nAPLD gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Applied Digital (APLD) Is Down 12.4% After Signing 15-Year 210 MW Hyperscaler Lease - What's Changed - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPd0dfLThGbF9ZeHg3bmFwNTdQZnBaWHBQeWQ5NU5LU042N3hHZFdKVWR0ZTExV01ubU9fQ2dqU0ozRVJSS3pPTmZiYk9BbmozRVJaU0R3NXJoak4wNzZMdnVUWTNBWEJQZXJucmZPM1hwUW5vUS1Jc2E2WWJTV2IwQ09kajBDZFlUN0I3OFhPQXV5RUVGR1BodnpyTy1RWE94QTUtZXZodllFOGgtMUJkNW5wRUU3Tmx4dTdITlphS0ZNSjl0c0U4MkcxV2NxUWPSAdQBQVVfeXFMTjF6anNmdmhhVGhDWFpKcTRadzRSVG1OZXpqVHpmTUNaVk8wMVg2bkNiTURvX1ZybUZ2RVRDWG1VU1lNMnhtT25YTDYya3N1d1gyaFlLc0hQOWNrd0ZRUzI1dDdDZ0s3NWhiM1I3TmV5ejlhTWNRazBkaEwxX3NwdlE0MHVobVVVVWg5aUR4VzZoZms1eVd4clZKeVJ0Z3ZjNk1VMG1HeEtCV2w4QkxJUUgtaC1JSFZYN0RIZk0wTW5RdGVWbS1LVnZ5WEU1Vk84ZlVwa0U?oc=5"
+        },
+        {
+          "title": "B. Riley pins APLD stock price at $66 after new lease signing - Blockspace Media",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1LMGU0b2dpZTI5azRZcERMaGx4bXJRTEFrZ3hOMF8zX3lNTFp1aXpIOG1wNjBCWkpjTnozeGRCeDl5ZEdWbDNjRkFfVHBBUkRFTXUtV3BRM1VJTFF1NXFBQ0pGLUdMb0Y1eHNQaXlqR01NdXhkLURKTE13?oc=5"
+        }
+      ],
+      "float_shares": "258.69M",
+      "short_float": "29.83%",
+      "daily_pct": 2.36,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "APLD gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "discrepancy_note": "The primary claim states APLD lacks a clear fundamental catalyst for a gap. Source B ([2] and [5]) clearly indicates fundamental catalysts, specifically a new lease signing and analyst price target reiterations ($66) from B. Riley and Needham, which are typically strong catalysts. However, Source B ([3]) also states APLD is 'Down 12.4% After Signing 15-Year 210 MW Hyperscaler Lease', suggesting a *negative* fundamental reaction to what might otherwise be perceived as positive news, or that the 'gap' being referred to was a *downward* gap for which there *was* a catalyst. Finviz has no information. The presence of specific fundamental news with price targets ($66) directly contradicts the claim of a *lack* of a clear fundamental catalyst, even if the market reaction was negative."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "ADUR",
+      "price": 16.88,
+      "gap_pct": 10.76,
+      "pm_volume": 90005,
+      "avg_vol_10d": 672322,
+      "avg_dollar_vol": 11348795,
+      "mkt_cap": 571124458,
+      "rvol": 2.95,
+      "adr_pct": 8.58,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "ADUR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "ADUR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nADUR gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Which stocks are gapping on Tuesday? - ChartMill",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNckhRcXRNbmJZaHFNWHdGcUxyMzdleUt0MTRWcFExejQ2WjFadVVPYkQ2WW9qY2N5TkF6MFVpeUlVdmpUN201Qi1UY2hMNVBUY0kzZUs0MUFSNHRUa2J1NUdjekhhX3pUUWtlSkVKd1dsRnhRd1NaZTNyOEZRLWlSWEJ0ZXB6SUJPdkpfOU1BcFc?oc=5"
+        },
+        {
+          "title": "Aduro Clean Technologies stock surges on pilot plant results - Investing.com UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNamVOck5YSzA2d21VS1JqOFQwSFpqSUhrLThEZHRIZGVIcFNab1pwTkJ5emxTbkJXdHlhX3dVMjZEdzZHSERtQW5na3NxQ2QxQ25mNkNWUUVXb09QZjBiaVdBaXJpYnlBYk5pSzBYWHFkLXlidUFkSVBxX0EwYlNpLU85dkZreWlKNzFQV1h6T2YxdUE3MWVzajNKYjRzc1RRN0xfMWNzR2VkZ21EdzctejI3cUxFcWJMZkJIN2JKU3hzNnk4ZDhtMTRfUWFZQQ?oc=5"
+        }
+      ],
+      "float_shares": "22.39M",
+      "short_float": "9.87%",
+      "daily_pct": 17.22,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $11M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Aduro's pilot plant achieved an 86% liquid hydrocarbon yield from waste plastic.",
+        "discrepancy_note": "Source A (Finviz News) has no relevant news to confirm the claim. Source B (Google News) reports in multiple articles (e.g., [1] Stock Titan, [5] markets.businessinsider.com) that Aduro's pilot plant achieved an 86% C20-and-below hydrocarbon yield or 86% Liquid Hydrocarbon Yield."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "SGML",
+      "price": 14.15,
+      "gap_pct": 8.68,
+      "pm_volume": 85487,
+      "avg_vol_10d": 2539403,
+      "avg_dollar_vol": 35932552,
+      "mkt_cap": 1576352117,
+      "rvol": 1.48,
+      "adr_pct": 7.51,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "SGML gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "SGML gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nSGML gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Sigma Lithium (NASDAQ: SGML) overturns Minas Gerais US$10m collateral risk - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPMmFsdFQtWEZicC1fUEh5QmpVNktscTE4eWVIM0RZSjJBTFhJdk9sV0ZSR21Gc1dZc1BFT2M0NEVqUTZHdVUxdndORVp2VFl1OElFWTUybGw3MklLUnlQaWZaMFhOVzFYYllMdUdRalFYWDZZVjFvQ3ktZ2d5bDYtVVVZQVE0TjhMd01adUFtbTZ6OTBSM0lMLXg1b21fSF9xZDQ1YTBTekRoZ2ZWRFBWODFzcXI?oc=5"
+        },
+        {
+          "title": "Brazil court orders independent checks on Sigma Lithium mine impact - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQbkYxOW95VHR0SXQ2T2NGdlZCc1ZvbXdhSVRPZS02MnYwc1AzbUhGLU1MQTdwandoaVpuUUZtblFlREZUamtxeDBxWjd3M0tScW44ZEstUVlNVGxUUmcwQ2tzelRoNm1NWjZRdVphTXZSUVhZX204QUxBSHI3MENCdVh3UXBSM1FBbUJNdHF4RXkyZUhFWF9GRDlXN0F6OUstOTVwdkpib2E2SDlrYTVpWXFxSndPWUE?oc=5"
+        }
+      ],
+      "float_shares": "106.78M",
+      "short_float": "2.58%",
+      "daily_pct": 6.79,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $36M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "SGML gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
       "ticker": "VSH",
-      "price": 57.22,
-      "gap_pct": 8.88,
-      "pm_volume": 258135,
-      "avg_vol_10d": 9594967,
-      "avg_dollar_vol": 549024012,
-      "mkt_cap": 7787990708,
-      "rvol": 0.96,
-      "adr_pct": 8.25,
+      "price": 58.58,
+      "gap_pct": 8.18,
+      "pm_volume": 288112,
+      "avg_vol_10d": 10494932,
+      "avg_dollar_vol": 614793117,
+      "mkt_cap": 7973094996,
+      "rvol": 2.21,
+      "adr_pct": 9.18,
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "VSH reported quarterly results; earnings catalyst detected in headlines.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "VSH reported quarterly results; earnings catalyst detected in headlines.",
+        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+      },
+      "analysis_details": "• **The Results**\nVSH reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "VSH Stock Jumps As Earnings Beat And EV Momentum Align - StocksToTrade",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNSHFBa1l2VXRkUzY5UDBGNFJuOWhscnBYaVdnTmNFSVdJdDIzQlRiV3ZiaUViNm1IejEwS3VacmlpTnpVVWhCdXZBVUY2ckh4elNKdDFYa0JabjV2OUFtemdEcktqNmt1TVFnS3dMVXRKem1QZUdPT0haVVpLS3owSnBoWlY?oc=5"
+        }
+      ],
+      "float_shares": "122.77M",
+      "short_float": "9.83%",
+      "daily_pct": 2.38,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "VSH reported an earnings beat or strong quarterly metrics",
+        "discrepancy_note": "Source A (Finviz News) has no information regarding VSH earnings. Only Source B (Google News) mentions 'Earnings Beat' and 'strong Q1 metrics'."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "VELO",
+      "price": 19.43,
+      "gap_pct": 7.89,
+      "pm_volume": 83678,
+      "avg_vol_10d": 3167568,
+      "avg_dollar_vol": 61545846,
+      "mkt_cap": 579033462,
+      "rvol": 3.78,
+      "adr_pct": 14.58,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "VELO gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "VELO gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nVELO gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "3D-printed turbine parts: Velo3D and Aurelia push faster, simpler designs - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPQlRJQmFnZTVQSXVNLV9FbXFvRHlaN3l1aldqVDhMTjRQd3BtN0NBaTZXLTVBcndiQ3pEcjFLaVlNRlFzenJqX0JJckpEVm8tbHlVMVVQT2hMMTlOSzVLQ0V4dlNwY3hYNXFLczJ4Um9DdWZuQWJEelNnZWFiZ2ppV2ZQbnFFT3M4S3pRVEpRTkFkYnk5ZGx5bUEwM1MzY2FBeVV4SEJPczhVdnhZX18xR0M1VXZWVUgyX1Jrag?oc=5"
+        }
+      ],
+      "float_shares": "13.70M",
+      "short_float": "20.42%",
+      "daily_pct": 19.72,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $62M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "VELO gap lacks a clear fundamental catalyst",
+        "discrepancy_note": "The primary claim states a lack of a clear fundamental catalyst. However, Google News (Source B) clearly reports a fundamental catalyst: a partnership between Velo3D and Aurelia targeting next-gen gas turbine manufacturing. Finviz (Source A) has no news, which aligns with the 'lacks' aspect from its perspective, but Source B contradicts the overall claim. As the claim is about the *absence* of a catalyst, and Source B provides one, the claim is not confirmed by both sources, and in fact, is contradicted by one. There are no specific factual claims like a dollar amount, percentage, or date mentioned in the primary catalyst summary to verify."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "VNET",
+      "price": 9.28,
+      "gap_pct": 7.1,
+      "pm_volume": 588171,
+      "avg_vol_10d": 8618014,
+      "avg_dollar_vol": 79975170,
+      "mkt_cap": 2525214841,
+      "rvol": 1.69,
+      "adr_pct": 7.29,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "VNET gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "VNET gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nVNET gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Asia ADRs Pulled Back After Early Gains In US Trading - Finimize",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPdVd4dF9Dbmg5R0RMc2NGNDQtMS1SQ2VoQUxrTjg4UUpUT1ppN0Qzam5PbWE1UUJCdmxrRWM0Ukx2Sjh5Z25BQ08yMGJJN05tc2V2WUNZT2hIZG5lTlEyaGxhZzNleUYybWIyelQ5ZkhSNlNySzNodjNEZUlmWXJYVWpQbVgyMFJwcHc?oc=5"
+        }
+      ],
+      "float_shares": "269.16M",
+      "short_float": "15.04%",
+      "daily_pct": 4.62,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $80M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "VNET gap lacks a clear fundamental catalyst",
+        "discrepancy_note": "Google News sources [4] and [5] provide a clear fundamental catalyst: Goldman Sachs recommends VNET Group, Inc. (VNET.US) as part of the 'Cloud and Data Center Subsector Still Most Favored for 2H'. This directly contradicts the claim that the VNET gap lacks a clear fundamental catalyst."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "KC",
+      "price": 11.43,
+      "gap_pct": 6.86,
+      "pm_volume": 101814,
+      "avg_vol_10d": 1637186,
+      "avg_dollar_vol": 18713036,
+      "mkt_cap": 3422201170,
+      "rvol": 1.05,
+      "adr_pct": 4.86,
       "category": "Others",
       "theme": "Technical / Flow",
       "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
@@ -220,79 +525,20 @@
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [],
-      "float_shares": "122.77M",
-      "short_float": "9.15%",
-      "daily_pct": 0.03,
+      "float_shares": "295.64M",
+      "short_float": "2.29%",
+      "daily_pct": 0.53,
       "industry": "—",
-      "technical_status": "Pass",
+      "technical_status": "Fail (Avg $Vol $19M < $100M)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "VNET",
-      "price": 8.87,
-      "gap_pct": 8.57,
-      "pm_volume": 562126,
-      "avg_vol_10d": 8815919,
-      "avg_dollar_vol": 78197202,
-      "mkt_cap": 2525214841,
-      "rvol": 0.45,
-      "adr_pct": 6.99,
-      "category": "Earnings",
-      "theme": "Earnings",
-      "reasoning": "VNET reported quarterly results; earnings catalyst detected in headlines.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_detail": {
-        "catalyst": "VNET reported quarterly results; earnings catalyst detected in headlines.",
-        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
-      },
-      "analysis_details": "• **The Results**\nVNET reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Earnings Flash (VNET.L) Vianet Group Reports FY26 Revenue GBP15.2M - Moomoo",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPT0c4eDFiNDAtandGdzJTLW5kb2p2bk1MSktta2FocS1fckVKQzlyS0RiSDNsQmROVWFESElOOW5fU0JKNm9fSkZnMUtSZFlZSGt0UVJHSXFRTjRPU05aX3dISlNvUDc1SEMwanhCZ0QwWnU5MnB5Q0FoY2hoR2VmNkROQ2VybTFDMTkzQ0NIRk0xYTZEbDdrR1FVbVI0bGFSUG5XRHpRNUI?oc=5"
-        }
-      ],
-      "float_shares": "269.16M",
-      "short_float": "14.23%",
-      "daily_pct": 0.34,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $78M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "VNET reported quarterly results.",
-        "discrepancy_note": "Neither source confirms that VNET (VNET Group, Inc.) reported quarterly results. Google News [3] mentions an earnings report, but it is for 'VNET.L' (Vianet Group) with FY26 revenue GBP15.2M, which is a different entity than VNET (VNET Group, Inc.) based on the ticker."
+        "primary_claim": "No immediate fundamental catalyst found for KC",
+        "discrepancy_note": "Source B ([1] G Sachs recommendation for KC) identifies a positive fundamental catalyst, directly contradicting the claim of 'no immediate fundamental catalyst found'."
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -308,14 +554,14 @@
     },
     {
       "ticker": "GDS",
-      "price": 34.69,
-      "gap_pct": 6.6,
-      "pm_volume": 208549,
-      "avg_vol_10d": 3236032,
-      "avg_dollar_vol": 112257950,
+      "price": 36.11,
+      "gap_pct": 6.66,
+      "pm_volume": 219712,
+      "avg_vol_10d": 3410467,
+      "avg_dollar_vol": 123151963,
       "mkt_cap": 6445039909,
-      "rvol": 0.58,
-      "adr_pct": 5.27,
+      "rvol": 1.46,
+      "adr_pct": 5.51,
       "category": "Others",
       "theme": "Others",
       "reasoning": "GDS gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
@@ -338,25 +584,142 @@
           "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQdC1rQWtTbWI5X056MnlCbGR2ZDc0SHYtV3JkR0w5Y2pXNkJIZ3FJQUtZMGpLWjdick12ckozR2ZIcnBSR3JJMTd2cW90dDJXZ0Z5UUtsQmNYdTJ3MEJIZ1k1TElXTlRVdHdYejFQVnlmTmVwang2SWRyRURpTmZPa1EtY05BX1hKREd4ZEhhVmVpeXlRU0lxVHU5TVhZQnRBaE1uaVMwVmdXUmViT1JsVTZuSHhoQWs?oc=5"
         },
         {
-          "title": "Did GDS’s RMB 50 Billion AI Data Center Bet Just Shift GDS Holdings' (GDS) Investment Narrative? - simplywall.st",
+          "title": "GDS, Vnet shares jump on China data center funding plan By Investing.com - Investing.com Nigeria",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQaWxvZ3huRXZEZmhTNVF0Y0M0Qms2LTlELVZZTnljOHAzR2d6MWdVMWRUdmJaVG5zX0ppall1SmRRWERrdDZsemZPN0dvMmhneTduTUx1UGVZN3poZ1NLYXRvZ2pZb29Kb2ZkZFNlVzRpRGRyazRGWTc5Rk8xSHotM3hEUHJ6SFIzR0RMem52TWphdzlfZ2ktSTN6dFdNcnVUNWNoNVBiQjFEN01mUG5FeHlSdWUxS1ZZenJGamtKUW5wYVVra3FWQ2ZB0gHPAUFVX3lxTE1zd1g3T2F6a1l5bkdZZ2pmOEJ3QnF0WHB3TTdROHpqNG1Ea25ldHZNWnhWZjlTZ25CVTZMRnhoVUZhSmhBZm5lcHpDTlV5b056ODdiT3piM1NhdHQ2TG01M01zYUVmS1EzQlhMeThSNzJkMDN5VkFldl9jWVdDLU9lU0gwSHlxMl8wM3ZEeUk4aHRaQXRKbFloY2pmTnU3TWhUcHZzMGZ1andWcmRRcHZDYXNzZkhRZi1FWmItVEplanlibzZyc0plV2FnVDVFNA?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNeFg4MzJ3V09XOHRsWS11d0lvWmZGUjF0T0dWc0d2TEowbXBsT3RlVmVxbkY3Qi02dmhDdFlGenJBd2VDWjhzZmNaRW12bGxhRmh0ZWRTbEc0c210TEYtcktEcWhxM3hOb1F5SGJtcXNaVFhqTkRJdHJIM29GWHJSREUzeE5Ja1N6bWc1cV9YRkZRaXUycTVzcVFNOHlNcG53YUNBSUxCbk9GbTFvU01BWlV4NS1vdw?oc=5"
         }
       ],
       "float_shares": "194.93M",
-      "short_float": "4.66%",
-      "daily_pct": 2.03,
+      "short_float": "5.14%",
+      "daily_pct": 4.09,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "GDS gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
+        "primary_claim": "GDS gap lacks a clear fundamental catalyst",
+        "discrepancy_note": "Google News sources [2], [4], and [5] explicitly state that GDS shares surged due to 'China's Data Center Investment Plans' or 'China data center funding plan,' indicating a clear fundamental catalyst, which contradicts the claim of lacking one."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "NUVB",
+      "price": 4.93,
+      "gap_pct": 5.83,
+      "pm_volume": 66885,
+      "avg_vol_10d": 4502864,
+      "avg_dollar_vol": 22199120,
+      "mkt_cap": 1721565757,
+      "rvol": 2.82,
+      "adr_pct": 6.96,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "float_shares": "247.11M",
+      "short_float": "21.72%",
+      "daily_pct": 2.71,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $22M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found for NUVB",
+        "discrepancy_note": null
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "NBIS",
+      "price": 220.12,
+      "gap_pct": 5.41,
+      "pm_volume": 382471,
+      "avg_vol_10d": 18345159,
+      "avg_dollar_vol": 4038136399,
+      "mkt_cap": 55393294209,
+      "rvol": 1.52,
+      "adr_pct": 9.71,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "NBIS gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "NBIS gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nNBIS gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "NEBX",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Inside the UK lab giving robotics startups NVIDIA-grade AI power - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQdXpQUFZoYU1oamZXZDBMUDN6Q09iamN4WFZXLVNteTlNWWltNHV2Vko2T3hjb1pOYnRfVHV6OEU1TnlUd0x1V080bTI0a2V6ZHA0ZUI2MGM1NmpiM2swenFQbUtZb2ZPR0cxb05ocmNBeEwzTzVPbFhfZlZ0SzVLckJDU2QwWmw4d05ObVRiRW9vM2Q1b3psOGl5bFJqUlBONzZGMzl0bXZaLWg5b0N2eXFIZ1J5b1E5X1BwVldTVQ?oc=5"
+        }
+      ],
+      "float_shares": "202.17M",
+      "short_float": "21.91%",
+      "daily_pct": 0.97,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "NBIS gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "discrepancy_note": "Source A provides no information. Source B (Google News) presents conflicting information regarding fundamental catalysts. Headline [2] explicitly states 'Top BofA Analyst Raises Nebius (NBIS) Stock Price Target, Cites ‘Strengthening Compute Demand’,' which indicates a clear positive fundamental catalyst. Headline [1] mentions a 'Rating Downgrade,' a negative fundamental catalyst, and headline [3] 'Nebius Falls: Hyperscalers Are Hyperscaling' also suggests a fundamental reason for a decline. While headline [4] 'Why Is NBIS Stock Soaring Over 10% In Overnight Trading?' asks for reasons, the existence of multiple explicit fundamental catalysts mentioned in other headlines directly contradicts the claim that the gap 'lacks a clear fundamental catalyst'."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -372,14 +735,14 @@
     },
     {
       "ticker": "ASTS",
-      "price": 92.06,
-      "gap_pct": 6.44,
-      "pm_volume": 806995,
-      "avg_vol_10d": 28238382,
-      "avg_dollar_vol": 2599625447,
-      "mkt_cap": 35730745807,
-      "rvol": 0.44,
-      "adr_pct": 10.01,
+      "price": 88.71,
+      "gap_pct": 5.37,
+      "pm_volume": 953319,
+      "avg_vol_10d": 26104937,
+      "avg_dollar_vol": 2315768961,
+      "mkt_cap": 34430528574,
+      "rvol": 0.95,
+      "adr_pct": 10.33,
       "category": "Others",
       "theme": "Others",
       "reasoning": "ASTS gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
@@ -402,14 +765,19 @@
       "inverse_etfs": [],
       "headlines": [
         {
+          "title": "AST SpaceMobile’s stock experiences rocky trading as SpaceX plans to launch its satellites into orbit - MarketWatch",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxOdE1qUzk0c1BFRmppMUpXZDVBYTZ0U0tvZVpLSlE3MVdDVDlUb0JEOS1LWXd6VldrU3NlLWxNcklwSVNBTE9oLTBjLUVOTklhUTFVSDhnS0VNTjZNaXZPaUhHMG16NjE4U2dTeExkZUhtalhIY2o2eFdjVmhDZHZrQU1obkpodVFGQVNDRVhNWW5jZVVpQXNPb1hLVk5xMkhIdS14QU02NG4tU0gtYWlmVElPSHlSa3BsdWpTYy1WRmdJa0d1b0s0RndKc0wzaDdoRXdwelJVeEM1V3M?oc=5"
+        },
+        {
           "title": "ASTS Stock Logs Worst Stretch Of 2026 As SpaceX IPO Looms — But One Analyst Sees A 2-Year Edge Over Starlink - Yahoo Finance",
           "source": "Google News",
           "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOWllVTGZUN1BXNjd1ZGZGX05HWnEyMjZqOWlnM0xMV1RNZE1JTWVTUGZXR19FbDNwUGdIekFKWFlIWU1ma0RXeHFrVmpPd1Vscld3bldFeW5scG5VVFo0M19iaURrSzFwckRWR21FUDJLeHdHemgxZjhGX2dhTmdkU290dmtrNjhOWS1lLUNpZ1FSTDdLWXl4RXJ3?oc=5"
         }
       ],
       "float_shares": "179.18M",
-      "short_float": "29.24%",
-      "daily_pct": -1.65,
+      "short_float": "30.56%",
+      "daily_pct": -3.64,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
@@ -435,15 +803,74 @@
       "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "KC",
-      "price": 11.37,
-      "gap_pct": 6.42,
-      "pm_volume": 97403,
-      "avg_vol_10d": 1710527,
-      "avg_dollar_vol": 19448692,
-      "mkt_cap": 3422201170,
-      "rvol": 0.74,
-      "adr_pct": 4.61,
+      "ticker": "FLY",
+      "price": 33.45,
+      "gap_pct": 5.25,
+      "pm_volume": 111803,
+      "avg_vol_10d": 10337817,
+      "avg_dollar_vol": 345799979,
+      "mkt_cap": 5492846786,
+      "rvol": 0.62,
+      "adr_pct": 11.63,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "FLY gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "FLY gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nFLY gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "IndiGo Shares Set to Fly: Motilal Oswal Sees 28% Upside — Check Target Price - NDTV Profit",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOdjgxN21tZ1ZtUU5LaDZlNGJXMlNLakxGUzJkODFYOUdfS2tuVXBtWmdENWlIVUgxWTlwS3I3YVBUWTdqZDRYM0hfMy1rWkNIQV9TeXEyNTN0Zm9QeUd0TXdxRDhwVmtIRzBVZmhka2xzcDFqM1VYRVlpMW1tRU42cmotbkNRSFJVbjZVc2RtOWRsTUVTbWcydXZvZWdpNVFtVUJibUZsN2UxWktCcU1HamNxdlJSNWM?oc=5"
+        }
+      ],
+      "float_shares": "83.25M",
+      "short_float": "13.71%",
+      "daily_pct": -7.56,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 85,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "FLY gap lacks a clear fundamental catalyst",
+        "discrepancy_note": "The primary claim states a lack of a clear fundamental catalyst. Source B, however, provides a potential fundamental catalyst for 'IndiGo Shares' (often associated with FLY/InterGlobe Aviation), specifically 'Motilal Oswal Sees 28% Upside'. This contradicts the initial claim of no clear catalyst."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "NB",
+      "price": 4.99,
+      "gap_pct": 5.21,
+      "pm_volume": 116051,
+      "avg_vol_10d": 3721234,
+      "avg_dollar_vol": 18568958,
+      "mkt_cap": 726479352,
+      "rvol": 1.27,
+      "adr_pct": 7.12,
       "category": "Others",
       "theme": "Technical / Flow",
       "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
@@ -460,73 +887,20 @@
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [],
-      "float_shares": "295.64M",
-      "short_float": "2.30%",
-      "daily_pct": -2.74,
+      "float_shares": "142.24M",
+      "short_float": "5.61%",
+      "daily_pct": 0.0,
       "industry": "—",
       "technical_status": "Fail (Avg $Vol $19M < $100M)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 95,
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
         "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": "The initial analysis claims no immediate fundamental catalyst, however, Source B [1] (Google News) explicitly states a fundamental catalyst: Goldman Sachs recommending Kingsoft Cloud Holdings Limited (KC.US) as a most favored stock for 2H."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "NUVB",
-      "price": 4.8,
-      "gap_pct": 6.04,
-      "pm_volume": 57145,
-      "avg_vol_10d": 3803373,
-      "avg_dollar_vol": 18256190,
-      "mkt_cap": 1676169500,
-      "rvol": 0.75,
-      "adr_pct": 6.04,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "float_shares": "247.11M",
-      "short_float": "20.84%",
-      "daily_pct": -0.41,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $18M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
+        "discrepancy_note": "The primary claim states 'No immediate fundamental catalyst found', implying an absence. Source A has no information. Source B's headline 'Why NioCorp Developments Stock Popped Today' suggests that a reason/catalyst for the stock's movement *does exist* and is the subject of the article, directly conflicting with the claim that none were found."
       },
       "gates_passed": 2,
       "gates_detail": {
@@ -541,56 +915,65 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "RDDT",
-      "price": 171.13,
-      "gap_pct": 5.33,
-      "pm_volume": 88324,
-      "avg_vol_10d": 5607803,
-      "avg_dollar_vol": 959663327,
-      "mkt_cap": 32944072135,
-      "rvol": 0.46,
-      "adr_pct": 6.14,
+      "ticker": "AXTI",
+      "price": 78.36,
+      "gap_pct": 5.16,
+      "pm_volume": 236163,
+      "avg_vol_10d": 8630440,
+      "avg_dollar_vol": 676281278,
+      "mkt_cap": 5126561039,
+      "rvol": 1.35,
+      "adr_pct": 14.68,
       "category": "Others",
       "theme": "Others",
-      "reasoning": "RDDT gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "reasoning": "AXTI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "RDDT gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "catalyst": "AXTI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
         "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
       },
-      "analysis_details": "• **What Happened**\nRDDT gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
-      "peer_tickers": [],
+      "analysis_details": "• **What Happened**\nAXTI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [
+        "COHR",
+        "LITE",
+        "MRVL"
+      ],
       "leverage_etfs": [
         {
-          "ticker": "RDTL",
-          "mult": "2x"
+          "ticker": "SOXL",
+          "mult": "3x"
         }
       ],
-      "inverse_etfs": [],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
       "headlines": [
         {
-          "title": "Is Reddit, Inc. (RDDT) A Good Stock To Buy Now? - Yahoo Finance",
+          "title": "AXT (NASDAQ: AXTI) holders OK 120M share authorization and elect directors - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQU2gyckNGVldOck1oY1ZVT2RTVUJQeVNIelM1RDVpVm9CM2JQbE0waW84YXBQQ19HdDRzUndhZmtOMEJsSHlOSkhTZU9DYnlWNkZzd1p4RDljM1ZuQW9wZnl3MkxGd1dOYXV5VGd1ODZMWkwteFcySWJETjVYTHk3NG43QnFweGxVLW5CVzNSbGJfbjQ1WGc?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPV2g2OHlucUszcnF4WTV6R1g2T1lncDNOOWFkaFJUcUwyUzljczQ0aGpZc0ZDVXZvX0M2b2pua2hRMUc3MXowbEJZd0hpZ1h1UkZoWEVFSHBzVUVBd1IwY0NMUElnTWJsSVpnSEpBdDRvck1VSV9hYlhyREc0aWlGUTlkbm9XRG9WaTk4bnV3eF9jMHNaRHQxdDlQdjU?oc=5"
         }
       ],
-      "float_shares": "137.07M",
-      "short_float": "9.71%",
-      "daily_pct": -1.34,
+      "float_shares": "62.14M",
+      "short_float": "11.74%",
+      "daily_pct": -13.68,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 90,
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "RDDT gap lacks a clear fundamental catalyst.",
-        "discrepancy_note": "The primary catalyst claim states RDDT lacks a clear fundamental catalyst. However, Google News [4] explicitly reports a specific fundamental corporate action: 'All director nominees, auditor ratification, and executive pay were approved without contest.' This constitutes a clear fundamental event that could act as a catalyst, directly contradicting the 'lack of a clear fundamental catalyst' claim."
+        "primary_claim": "AXTI gap lacks a clear fundamental catalyst",
+        "discrepancy_note": "The primary catalyst claim states a lack of a clear fundamental catalyst. However, Source B clearly reports a specific fundamental catalyst: 'AXT (NASDAQ: AXTI) holders OK 120M share authorization and elect directors'."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -603,15 +986,74 @@
       "meets_all_gates": true,
       "tier": "T3",
       "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "SJM",
+      "price": 112.39,
+      "gap_pct": 5.15,
+      "pm_volume": 145128,
+      "avg_vol_10d": 1936443,
+      "avg_dollar_vol": 217636829,
+      "mkt_cap": 11986204633,
+      "rvol": 4.86,
+      "adr_pct": 2.76,
+      "category": "Earnings",
+      "theme": "Earnings",
+      "reasoning": "SJM reported quarterly results; earnings catalyst detected in headlines.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "SJM reported quarterly results; earnings catalyst detected in headlines.",
+        "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+      },
+      "analysis_details": "• **The Results**\nSJM reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "SJM Stock Climbs As Wall Street Warms Ahead Of Earnings - StocksToTrade",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOZ0Z3OUVSSnF5RmpybUdJNGZIODdQakN1T3Zqb0o3TWxOVDdPQURjOE02RWZCMk4wSFMxQ0tPVHVTSHBBNUZFdlVhZmF4SnJpeERqcHRvb19nbnZ5aWJLU1psdXREM2NaX29xem9VQU9OR2pWcU1US3p2enpqQmE3MUFn?oc=5"
+        }
+      ],
+      "float_shares": "104.24M",
+      "short_float": "4.85%",
+      "daily_pct": 10.44,
+      "industry": "—",
+      "technical_status": "Fail (ADR 2.8% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "SJM reported quarterly results; earnings catalyst detected in headlines.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 9,
-    "large_gaps": 1,
-    "total_headlines": 11,
+    "small_gaps": 15,
+    "large_gaps": 2,
+    "total_headlines": 21,
     "monthly_cost_usd": 0.01
   }
 }
