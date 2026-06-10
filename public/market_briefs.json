@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-09 20:41 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Caution Prevails",
+    "spy_price": 737.05,
+    "spy_change_pct": -0.29,
+    "vix": 19.87,
+    "hy_oas": 2.75,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 57.2,
+    "mmth": 63.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "LLY shares surged after announcing positive Phase 3 trial results for its new metabolic drug, exceeding expectations and boosting future revenue projections."
+        },
+        {
+          "ticker": "ORCL",
+          "company": "Oracle Corporation",
+          "reason": "Oracle secured a massive multi-year cloud services contract with a major government agency, solidifying its position in the public sector cloud market."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Profit-taking continues in high-beta tech names like NVIDIA following recent strong gains, with institutional selling pressure noted on technical charts."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-09 17:28 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2217,44 +2255,6 @@
           "ticker": "NVDA",
           "company": "Nvidia Corporation",
           "reason": "Nvidia Corporation continues to be a central topic for AI-driven investment flows, but today's interest is largely a continuation of existing narratives rather than fresh, specific news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-04-24 08:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Pullback / Complacent Credit",
-    "spy_price": 708.45,
-    "spy_change_pct": -0.39,
-    "vix": 18.79,
-    "hy_oas": 2.84,
-    "yield_curve": 0.51,
-    "credit_status": "Complacent",
-    "s5fi": 60.9,
-    "mmth": 59.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "JNJ",
-          "company": "Johnson & Johnson",
-          "reason": "Johnson & Johnson announced surprisingly robust Q1 earnings and raised full-year guidance, driven by strong pharmaceutical sales and an optimistic outlook for its medical device segment."
-        },
-        {
-          "ticker": "AVGO",
-          "company": "Broadcom Inc.",
-          "reason": "Broadcom secured a multi-year, multi-billion dollar AI infrastructure supply deal with a major hyperscaler, significantly boosting its backlog and revenue projections."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla continues to exhibit high volatility, primarily driven by technical trading flows and ongoing sentiment regarding EV demand, with no fresh material news catalyst today."
         }
       ]
     }

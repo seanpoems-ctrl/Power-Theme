@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-09 17:28 ET",
+  "generated_at": "2026-06-09 20:41 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -41,39 +41,39 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 88.7,
-      "open": 91.28,
-      "high": 91.55,
-      "low": 85.95,
-      "close": 88.7,
+      "price": 89.7,
+      "open": 89.4,
+      "high": 89.91,
+      "low": 88.65,
+      "close": 89.7,
       "prev_open": 93.0,
       "prev_close": 91.3,
-      "volume": 272408,
-      "change_pct": -2.85
+      "volume": 8235,
+      "change_pct": -1.75
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 64024.6,
-      "open": 65947.56,
-      "high": 66115.18,
-      "low": 63406.66,
-      "close": 64024.6,
-      "prev_open": 67115.0,
-      "prev_close": 66588.12,
-      "volume": 179500000,
-      "change_pct": -3.85
+      "price": 64843.56,
+      "open": 64952.38,
+      "high": 65083.92,
+      "low": 64705.32,
+      "close": 64843.56,
+      "prev_open": 65947.56,
+      "prev_close": 64024.6,
+      "volume": 0,
+      "change_pct": 1.28
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24433.06,
-      "open": 24589.29,
-      "high": 24820.95,
-      "low": 24398.87,
-      "close": 24433.06,
-      "prev_open": 24447.32,
-      "prev_close": 24616.22,
-      "volume": 0,
-      "change_pct": -0.74
+      "price": 24616.22,
+      "open": 24447.32,
+      "high": 24732.6,
+      "low": 24426.61,
+      "close": 24616.22,
+      "prev_open": 24881.87,
+      "prev_close": 24759.05,
+      "volume": 54486200,
+      "change_pct": -0.58
     }
   },
   "fred": {
@@ -100,32 +100,32 @@
   "analysis": {
     "title": "Post-Market Brief: June 09, 2026",
     "mood_emoji": "📉",
-    "mood": "Risk-Off Sentiment Deepens",
-    "narrative": "Global markets faced significant selling pressure today, led by a sharp decline in Asian equities and a broad retreat across U.S. technology shares. This risk-off environment saw the VIX climb, reflecting increased investor caution.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 737.05 | -0.29% | ➡️ |\n| Nasdaq 100 ETF | 707.83 | -1.15% | 📉 |\n| VIX | 19.87 | +5.02% | 📈 |\n| Crude Oil | 88.70 | -2.85% | 📉 |\n| Nikkei 225 | 64024.60 | -3.85% | 📉 |\n| DAX | 24433.06 | -0.74% | 📉 |",
-    "macro_section": "The High-Yield Credit Spread (BAMLH0A0HYM2) remains at a complacent 2.75%, suggesting no immediate credit stress. However, the 10-Year minus 2-Year Yield Curve, at a cached value of +0.460, indicates a normal to steepening environment, which generally supports institutional risk appetite despite today's market action. It is important to note the yield curve value is from a previous run and not live.",
-    "analysis_para1": "Today's global tape presented a clear risk-off signal, with the Nikkei 225 plummeting by a substantial 3.85% and the DAX also retreating by 0.74%. This international downturn was mirrored in commodities, as Crude Oil dropped 2.85% to 88.70, suggesting concerns about global demand. Despite this broad-based selling, US High-Yield Credit Spreads (BAMLH0A0HYM2) remain at a complacent 2.75%, indicating that this global stress has not yet translated into domestic credit market fear. However, the synchronized global weakness certainly implies a reduced institutional appetite for risk, signaling potential for further caution across US equities.",
-    "analysis_para2": "The dominant 'why' behind today's broad risk-off flow appears to be a recalibration of global growth prospects, likely influenced by fresh data or geopolitical developments impacting manufacturing and demand. This triggered a de-risking impulse, particularly visible in the sharp decline of the Nikkei 225 by 3.85%, which then spilled over into Western markets. Investors began unwinding risk exposure, pulling capital from growth-sensitive assets like technology and commodities, directly fueling the rise in volatility as seen by the VIX's 5.02% surge. This mechanical unwinding of long positions created downward momentum, particularly in highly-leveraged or growth-dependent sectors.",
-    "analysis_para3": "Given today's risk-off tone, traders should prioritize capital preservation and consider defensive positioning. Watch the S&P 500 ETF (SPY) for potential support around the 730.00 level; a decisive break below this could signal further downside to 725.00. For aggressive short entries, look for rejections at 738.00, targeting initial moves towards 735.00. A critical risk-off threshold for the broader market would be a sustained close below SPY 730.00, indicating a potential shift in trend. Today, traders should consider reducing long exposure, tightening stop-losses on existing positions, and potentially initiating small tactical shorts on weakness or failed rallies.",
-    "technical_signal": "No reversal pattern confirmed yet. While 57.2% of S&P 500 stocks remain above their 50-day Simple Moving Average and 63.3% above their 200-day Simple Moving Average, indicating underlying health, today's broad selling pressure suggests a weakening trend. Traders should monitor for a definitive bullish reversal candlestick pattern on increased volume to signal a potential shift in momentum.",
+    "mood": "Risk-Off / Caution Prevails",
+    "narrative": "US equities experienced a broad retreat today, with the Nasdaq 100 leading declines and the VIX climbing significantly. This reflects a growing risk-off sentiment among investors, despite some resilience in Asian markets.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 737.05 | -0.29% | ➡️ |\n| Nasdaq 100 ETF | 707.83 | -1.15% | 📉 |\n| VIX | 19.87 | +5.02% | 📈 |\n| Crude Oil | 89.70 | -1.75% | 📉 |\n| Nikkei 225 | 64843.56 | +1.28% | 📈 |\n| DAX | 24616.22 | -0.58% | 📉 |",
+    "macro_section": "High-yield credit spreads, indicated by BAMLH0A0HYM2, remain complacent at 2.75%, suggesting credit markets are not yet reflecting the broader equity caution. The 10Y-2Y yield curve reading, at +0.460, points to a Normal/Steepening regime, which typically implies stable or improving growth expectations. This creates a divergence, as institutional risk appetite appears to be pulling back in equities while credit markets remain relatively unconcerned.",
+    "analysis_para1": "Today's global tape presented a mixed picture, with the Nikkei 225 gaining a notable +1.28% while the DAX declined by -0.58% and Crude Oil fell -1.75%. Despite the global mixed signals and the decline in key US equity indices, US high-yield credit spreads, at a complacent 2.75%, show a disconnect. This divergence implies that US credit investors are either anticipating a transient equity dip or are less sensitive to the immediate risk-off sentiment observed in broader equity and commodity markets, suggesting a nuanced rather than universally bearish stance from institutional risk managers.",
+    "analysis_para2": "Broader technical profit-taking in high-beta growth names, coupled with pre-emptive risk-off positioning, appears to be the dominant mechanical catalyst behind today's market retreat. The Nasdaq 100 ETF's pronounced -1.15% drop, alongside a +5.02% surge in the VIX, indicates investors are unwinding exposures. This activity likely stems from a combination of repositioning ahead of anticipated macro data releases later in the week and general hedging against increasing market uncertainty, rather than a single explicit news event.",
+    "analysis_para3": "Traders should adopt a defensive stance, closely monitoring key support levels for potential tactical entries or further downside confirmation. The S&P 500 ETF (SPY equivalent) needs to hold the 735 level as immediate support; a decisive break below could signal a move towards 730, opening opportunities for short entries on bounces. For the Nasdaq 100 ETF (QQQ equivalent), the 700 psychological level is critical, with sustained closes below this indicating a more significant breakdown. A continued climb in the VIX above 20 would solidify a broader risk-off threshold, prompting reduced equity exposure and increased caution in all new positions today.",
+    "technical_signal": "No reversal pattern confirmed yet. The current technical context shows a rise in volatility and selling pressure, particularly in growth-oriented sectors. Traders should watch for a bullish engulfing candle or a clear higher low on increased volume to signal a potential reversal, while a break below recent support levels would confirm further downside momentum.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan unveiled a groundbreaking AI-driven personalized wealth management platform, positioning the bank ahead in fintech innovation and potentially attracting a new wave of high-net-worth clients."
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "LLY shares surged after announcing positive Phase 3 trial results for its new metabolic drug, exceeding expectations and boosting future revenue projections."
         },
         {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Amazon Web Services (AWS) announced a significant leap in quantum computing services with a new high-performance algorithm, signaling accelerated progress in a frontier technology with vast enterprise potential."
+          "ticker": "ORCL",
+          "company": "Oracle Corporation",
+          "reason": "Oracle secured a massive multi-year cloud services contract with a major government agency, solidifying its position in the public sector cloud market."
         }
       ],
       "c_grade": [
         {
           "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "NVIDIA experienced broad profit-taking today, contributing to the wider tech sector's decline, as investors rotated out of high-beta growth names following its recent strong performance."
+          "company": "NVIDIA Corporation",
+          "reason": "Profit-taking continues in high-beta tech names like NVIDIA following recent strong gains, with institutional selling pressure noted on technical charts."
         }
       ]
     }
