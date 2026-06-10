@@ -1,30 +1,30 @@
 {
-  "generated_at": "June 10, 2026 (12:27 EDT)",
-  "session": "Market Hours",
+  "generated_at": "June 10, 2026 (17:01 EDT)",
+  "session": "Post-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7319.83,
-      "change": -66.82,
-      "change_pct": -0.9
+      "price": 7266.99,
+      "change": -119.66,
+      "change_pct": -1.62
     },
     {
       "label": "Nasdaq 100",
-      "price": 28716.37,
-      "change": -368.13,
-      "change_pct": -1.27
+      "price": 28508.03,
+      "change": -576.47,
+      "change_pct": -1.98
     },
     {
       "label": "VIX",
-      "price": 22.16,
-      "change": 2.29,
+      "price": 22.22,
+      "change": 2.35,
       "change_pct": null,
       "zone_label": "Elevated"
     },
     {
       "label": "10Y Yield",
-      "price": 4.53,
-      "change": 0.0,
+      "price": 4.54,
+      "change": 0.01,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -50,8 +50,8 @@
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 54.5,
-    "mmth": 62.3,
+    "s5fi": 50.8,
+    "mmth": 60.1,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Volatility / Selective Distribution",
+  "mood": "Risk-Off / US Weakness, Elevated Volatility",
   "analysis": {
-    "action_line": "VIX 22.16 Elevated + 54.5% S&P 500 stocks above SMA50 + mixed global tape → favor relative strength leaders cautiously.",
-    "analysis_para1": "Global markets present a divergent picture, with the Nikkei 225 surging +2.17% while the DAX registered a -0.97% decline, and the FTSE 100 posted a modest +0.27% gain. In the US, the elevated VIX at 22.16 underscores current market anxiety amid broad index declines. With the BAML HY Spread indicating an unknown regime, credit market signals are unclear. However, underlying market breadth remains relatively stable, with 54.5% of S&P 500 stocks above SMA50 and 62.3% of S&P stocks above SMA200, suggesting pockets of resilience.",
-    "analysis_para2": "The broad market pullback, marked by the S&P 500's 0.90% drop and the Nasdaq 100's 1.27% decline, warrants a defensive stance. Traders should watch for a decisive break below today's intraday lows on increased volume, which could confirm further distribution. Conversely, any bounces failing to recover prior resistance levels or yesterday's close would signal continued weakness. Maintain a focus on cash preservation and deploy capital selectively into established relative strength leaders demonstrating clear base breakouts, avoiding candidates showing signs of breaking down.",
-    "technical_signal": "No reversal pattern confirmed yet. The elevated VIX and broad market declines suggest ongoing distribution rather than a clear bottoming signal.",
+    "action_line": "VIX 22.22 Elevated + 50.8% S&P 500 stocks above SMA50 + mixed global tape → trade RS leaders selectively near support.",
+    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 surging 2.17% while the DAX dipped 0.97% and the FTSE 100 saw a modest 0.27% gain. The unknown BAML HY Spread regime, coupled with a stable 10Y Yield at 4.54%, indicates underlying credit uncertainty despite a lack of clear distress signals. Domestically, US indices faced a significant sell-off, yet market breadth shows a degree of resilience with 50.8% of S&P 500 stocks above SMA50 and 60.1% above S&P stocks above SMA200, suggesting the weakness is not universally distributed across all equities.",
+    "analysis_para2": "The immediate mechanical plan requires vigilance for potential support levels following today's sharp decline, particularly for the S&P 500. A continued elevated VIX at 22.22 necessitates caution, with a move above 25 signaling increased risk or a drop below 20 indicating calming sentiment. Given the breadth, with 50.8% of S&P 500 stocks above SMA50, the strategy remains focused on identifying high Relative Strength leaders. These strong candidates should be monitored for constructive price action near their 10-day or 20-day moving averages, or for decisive breakouts on high volume, confirming continued demand.",
+    "technical_signal": "No reversal pattern confirmed yet. The sharp sell-off today occurred on elevated volatility, requiring further price action to confirm any bottoming attempt.",
     "ticker_intel": [
       {
         "ticker": "VSH",
         "company": "Vishay Intertechnology, Inc.",
         "grade": "A+",
-        "reason": "Vishay shows exceptional relative strength with an RS of 99 and a robust +71.0% one-month return, making it a top leader in a selective market."
+        "reason": "This semiconductor leader shows exceptional Relative Strength of 99, with a remarkable 71.0% gain over one month and 238.4% over three months, making it a top performer in the current environment."
       },
       {
         "ticker": "ALAB",
         "company": "Astera Labs, Inc.",
-        "grade": "A+",
-        "reason": "Astera Labs demonstrates elite relative strength (RS 99) and impressive short-term momentum (+71.0% in one month), suitable for strong growth plays amidst volatility."
+        "grade": "A",
+        "reason": "With a Relative Strength of 99 and 71.0% one-month and 193.4% three-month returns, Astera Labs is a strong semiconductor play that continues to exhibit significant momentum."
       },
       {
-        "ticker": "UMAC",
-        "company": "Unusual Machines, Inc.",
+        "ticker": "LRCX",
+        "company": "Lam Research Corporation",
         "grade": "C",
-        "reason": "Despite a strong one-month return, Unusual Machines' relatively lower three-month gain (+29.2%) compared to peers and high ADR (15.7%) suggest it may be extended and prone to profit-taking in a weakening market."
+        "reason": "Despite being in the strong Semiconductors theme, its 11.3% one-month and 52.0% three-month returns significantly lag its peers, indicating relative underperformance and potential for further weakness in a risk-off environment."
       }
     ]
   }
