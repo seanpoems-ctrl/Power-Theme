@@ -9458,9 +9458,19 @@ const EtfRsHistogram = ({ data = [] }) => {
 };
 
 // ── ETF Holdings Modal — blurred overlay, triggered by clicking the theme name ──
-const EtfHoldingsModal = ({ etf, theme, holdings, onClose }) => {
+const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {} }) => {
   const [sortCol, setSortCol] = useState("perf_1d");
   const [sortDir, setSortDir] = useState("desc");
+
+  // Enrich holdings with TradingView rolling perf (overrides stale Finviz data)
+  const enrichedHoldings = React.useMemo(() => {
+    if (!screenerMap || Object.keys(screenerMap).length === 0) return holdings;
+    return holdings.map(h => {
+      const sc = screenerMap[h.ticker];
+      if (!sc) return h;
+      return { ...h, perf_1d: sc.perf_1d ?? h.perf_1d, perf_1w: sc.perf_1w ?? h.perf_1w, perf_1m: sc.perf_1m ?? h.perf_1m, perf_3m: sc.perf_3m ?? h.perf_3m, perf_6m: sc.perf_6m ?? h.perf_6m };
+    });
+  }, [holdings, screenerMap]);
 
   const fmt = v => {
     if (v == null) return "—";
@@ -9470,13 +9480,13 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose }) => {
   };
 
   const sorted = useMemo(() => {
-    return [...holdings].sort((a, b) => {
+    return [...enrichedHoldings].sort((a, b) => {
       const av = a[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
       const bv = b[sortCol] ?? (sortDir === "asc" ? Infinity : -Infinity);
       if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
       return sortDir === "asc" ? av - bv : bv - av;
     });
-  }, [holdings, sortCol, sortDir]);
+  }, [enrichedHoldings, sortCol, sortDir]);
 
   const handleSort = col => {
     if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
@@ -9583,7 +9593,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose }) => {
 };
 
 // ── ETF Flip Scanner ─────────────────────────────────────────────────────────
-const EtfFlipScanner = ({ etfRsData, etfHoldings = {} }) => {
+const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
   const etfs = etfRsData?.etfs ?? [];
   const [holdingsModal, setHoldingsModal] = useState(null); // { ticker, theme, holdings }
 
@@ -9757,6 +9767,7 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {} }) => {
           etf={holdingsModal.ticker}
           theme={holdingsModal.theme}
           holdings={holdingsModal.holdings}
+          screenerMap={screenerMap}
           onClose={() => setHoldingsModal(null)}
         />
       )}
@@ -9764,7 +9775,7 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {} }) => {
   );
 };
 
-const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
+const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
   const [sortCol, setSortCol] = useState("score");
   const [sortDir, setSortDir] = useState("desc");
   const [selectedEtf, setSelectedEtf] = useState(null); // { ticker, theme, holdings }
@@ -9985,6 +9996,7 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {} }) => {
         etf={selectedEtf.ticker}
         theme={selectedEtf.theme}
         holdings={selectedEtf.holdings}
+        screenerMap={screenerMap}
         onClose={() => setSelectedEtf(null)}
       />
     )}
@@ -10593,8 +10605,8 @@ const DailyWatchlistTab = ({ data }) => {
       {/* ── ETF RS TABLE ──────────────────────────────────── */}
       {mode === "etf" && (
         <div className="space-y-6">
-          <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} />
-          <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} />
+          <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
+          <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
         </div>
       )}
 
@@ -11115,6 +11127,7 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {} }) => {
         etf={holdingsModal.ticker}
         theme={holdingsModal.theme}
         holdings={holdingsModal.holdings}
+        screenerMap={screenerMap}
         onClose={() => setHoldingsModal(null)}
       />
     )}
