@@ -366,9 +366,10 @@ const MarketCondition = ({ mc }) => {
   if (!mc) return null;
   const { signal } = mc;
   const cfg = {
-    green:  { dot: "bg-emerald-400", ring: "border-emerald-500/40 bg-emerald-500/8",  label: "🟢 Market Uptrend",    sub: lang === 'zh' ? "SPY & QQQ 站上 SMA50 & SMA200，200SMA 向上，正常執行突破單" : "SPY & QQQ above SMA50 & SMA200, 200SMA rising — run normal breakout entries" },
-    yellow: { dot: "bg-amber-400",   ring: "border-amber-500/40 bg-amber-500/8",   label: "🟡 Market Correction", sub: lang === 'zh' ? "SPY 或 QQQ 跌破 SMA50，暫停常規突破，只做 RS 最強的少數股票" : "SPY or QQQ below SMA50 — pause breakouts, only trade highest RS stocks" },
-    red:    { dot: "bg-red-400",     ring: "border-red-500/40 bg-red-500/8",       label: "🔴 Market Downtrend",  sub: lang === 'zh' ? "停止所有新倉突破單" : "Stop all new breakout entries" },
+    green:  { dot: "bg-emerald-400", ring: "border-emerald-500/40 bg-emerald-500/8",  label: "🟢 Uptrend",         sub: lang === 'zh' ? "價格站上 9 & 21 EMA — 強勢短期多頭，正常執行突破單" : "Price above 9 & 21 EMA — strong short-term bullish trend, run normal breakout entries" },
+    yellow: { dot: "bg-amber-400",   ring: "border-amber-500/40 bg-amber-500/8",      label: "🟡 Pullback",        sub: lang === 'zh' ? "價格跌破 9 & 21 EMA — 短期賣壓，只做 RS 最強的少數股票" : "Price below 9 & 21 EMA — short-term selling pressure, only trade highest RS stocks" },
+    orange: { dot: "bg-orange-400",  ring: "border-orange-500/40 bg-orange-500/8",    label: "🟠 Correction",      sub: lang === 'zh' ? "價格跌破 9、21 & 50 EMA — 中期下行修正，暫停常規突破" : "Price below 9, 21 & 50 EMA — medium-term correction, pause breakout entries" },
+    red:    { dot: "bg-red-400",     ring: "border-red-500/40 bg-red-500/8",          label: "🔴 Bear Market",     sub: lang === 'zh' ? "價格跌破所有 EMA — 停止所有新倉突破單" : "Price below all EMAs (9/21/50/200) — stop all new breakout entries" },
   }[signal] || {};
 
   const fmtChg = (v) => {
@@ -2833,9 +2834,10 @@ const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
   const expectedMove = v ? (v / 16).toFixed(2) : "—";
   const signal = mc?.signal;
   const signalCfg = {
-    green:  { dot: 'bg-emerald-400', label: 'Market Uptrend',    borderCls: 'border-emerald-500/40' },
-    yellow: { dot: 'bg-amber-400',   label: 'Market Correction', borderCls: 'border-amber-500/40' },
-    red:    { dot: 'bg-red-400',     label: 'Market Downtrend',  borderCls: 'border-red-500/40' },
+    green:  { dot: 'bg-emerald-400', label: 'Market: Uptrend',    borderCls: 'border-emerald-500/40' },
+    yellow: { dot: 'bg-amber-400',   label: 'Market: Pullback',   borderCls: 'border-amber-500/40' },
+    orange: { dot: 'bg-orange-400',  label: 'Market: Correction', borderCls: 'border-orange-500/40' },
+    red:    { dot: 'bg-red-400',     label: 'Market: Bear',       borderCls: 'border-red-500/40' },
   }[signal] || { dot: 'bg-zinc-500', label: '—', borderCls: 'border-zinc-700/40' };
 
   const advDec = mc?.adv_dec;
@@ -6448,7 +6450,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
       label: "S&P 500 Signal",
       value: mc.signal ? mc.signal.charAt(0).toUpperCase() + mc.signal.slice(1) : "—",
       sub:   mc.spy?.sma200_pct != null ? `SMA200: ${mc.spy.sma200_pct > 0 ? "+" : ""}${mc.spy.sma200_pct.toFixed(1)}%` : null,
-      color: mc.signal === "green" ? "text-emerald-400" : mc.signal === "yellow" ? "text-amber-400" : mc.signal === "red" ? "text-red-400" : "text-zinc-400",
+      color: mc.signal === "green" ? "text-emerald-400" : mc.signal === "yellow" ? "text-amber-400" : mc.signal === "orange" ? "text-orange-400" : mc.signal === "red" ? "text-red-400" : "text-zinc-400",
     },
     {
       label: "S&P stocks above 50 Day Average",
@@ -6553,9 +6555,10 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
   const qqqSma200  = data?.market_condition?.qqq?.sma200_pct;
 
   const SIG_CONFIG = {
-    green:  { dot: "bg-emerald-400", badge: "bg-emerald-500/15 border-emerald-500/40 text-emerald-300", label: "Market: Uptrend",  guidance: "Full buying — favour breakouts and RS leaders" },
-    yellow: { dot: "bg-amber-400",   badge: "bg-amber-500/15  border-amber-500/40  text-amber-300",   label: "Market: Caution",  guidance: "Selective only — buy stocks above their own SMA20/50, avoid laggards" },
-    red:    { dot: "bg-rose-400",    badge: "bg-rose-500/15   border-rose-500/40   text-rose-300",    label: "Market: Downtrend", guidance: "No new longs — protect capital, wait for conditions to improve" },
+    green:  { dot: "bg-emerald-400", badge: "bg-emerald-500/15 border-emerald-500/40 text-emerald-300", label: "Market: Uptrend",    guidance: "Full buying — favour breakouts and RS leaders" },
+    yellow: { dot: "bg-amber-400",   badge: "bg-amber-500/15  border-amber-500/40  text-amber-300",    label: "Market: Pullback",   guidance: "Selective only — buy highest RS stocks above their own 9/21 EMA" },
+    orange: { dot: "bg-orange-400",  badge: "bg-orange-500/15 border-orange-500/40 text-orange-300",   label: "Market: Correction", guidance: "Pause breakouts — wait for price to reclaim 50 EMA before new entries" },
+    red:    { dot: "bg-rose-400",    badge: "bg-rose-500/15   border-rose-500/40   text-rose-300",     label: "Market: Bear",       guidance: "No new longs — protect capital, wait for conditions to improve" },
   };
   const sig = signal ? SIG_CONFIG[signal] : null;
   const fmtSma = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
@@ -10277,10 +10280,11 @@ const DailyWatchlistTab = ({ data }) => {
 
   const mc = data?.market_condition;
   const signal = mc?.signal ?? "yellow";
-  const sigCls = signal === "green" ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/30"
-    : signal === "red" ? "text-rose-400 bg-rose-500/10 border-rose-500/30"
-    : "text-yellow-400 bg-yellow-500/10 border-yellow-500/30";
-  const sigLabel = signal === "green" ? "🟢 Market: Uptrend" : signal === "red" ? "🔴 Market: Downtrend" : "🟡 Market: Caution";
+  const sigCls = signal === "green"  ? "text-emerald-400 bg-emerald-500/10 border-emerald-500/30"
+    : signal === "orange" ? "text-orange-400 bg-orange-500/10 border-orange-500/30"
+    : signal === "red"    ? "text-rose-400 bg-rose-500/10 border-rose-500/30"
+    : "text-amber-400 bg-amber-500/10 border-amber-500/30";
+  const sigLabel = signal === "green" ? "🟢 Market: Uptrend" : signal === "orange" ? "🟠 Market: Correction" : signal === "red" ? "🔴 Market: Bear" : "🟡 Market: Pullback";
 
   const Sec = ({ title, badge, sub }) => (
     <div className="flex items-baseline gap-2 mb-3">

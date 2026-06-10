@@ -1095,8 +1095,10 @@ def _fetch_tradingview_index_snapshot(tv_symbol: str, scan_url: str = _TV_SCAN_U
                     "SMA20",
                     "SMA50",
                     "SMA200",
-                    "EMA10",
-                    "EMA20",
+                    "EMA9",
+                    "EMA21",
+                    "EMA50",
+                    "EMA200",
                 ],
             },
             headers={"Content-Type": "application/json"},
@@ -1107,7 +1109,7 @@ def _fetch_tradingview_index_snapshot(tv_symbol: str, scan_url: str = _TV_SCAN_U
         if not rows or not rows[0].get("d"):
             return None
         d = rows[0]["d"]
-        if len(d) < 9:
+        if len(d) < 11:
             return None
         keys = (
             "price",
@@ -1117,8 +1119,10 @@ def _fetch_tradingview_index_snapshot(tv_symbol: str, scan_url: str = _TV_SCAN_U
             "sma20",
             "sma50",
             "sma200",
-            "ema10",
-            "ema20",
+            "ema9",
+            "ema21",
+            "ema50",
+            "ema200",
         )
         out: dict[str, float] = {}
         for k, v in zip(keys, d):
@@ -1146,10 +1150,10 @@ def _fetch_market_indicators_yfinance(ticker: str, breadth: float | None = None)
         sma50 = sum(closes[-50:]) / 50 if len(closes) >= 50 else None
         sma200 = sum(closes[-200:]) / 200 if len(closes) >= 200 else None
         sma200_20d = sum(closes[-220:-20]) / 200 if len(closes) >= 220 else None
-        ema10 = _ema(closes, 10)
-        ema20 = _ema(closes, 20)
-        ema10_prev = _ema(closes[:-1], 10)
-        ema20_prev = _ema(closes[:-1], 20)
+        ema9  = _ema(closes, 9)
+        ema21 = _ema(closes, 21)
+        ema50 = _ema(closes, 50)
+        ema200 = _ema(closes, 200)
         rsi14 = _rsi(closes, 14)
         change_pct = round((closes[-1] / closes[-2] - 1) * 100, 2) if len(closes) >= 2 else None
         sma50_pct = round((price / sma50 - 1) * 100, 2) if sma50 else None
@@ -1167,10 +1171,14 @@ def _fetch_market_indicators_yfinance(ticker: str, breadth: float | None = None)
             "sma50_pct": sma50_pct,
             "sma200_pct": sma200_pct,
             "sma200_slope_up": slope_up,
-            "ema10_above_ema20": bool(ema10 > ema20) if ema10 and ema20 else None,
-            "ema10_ema20_both_down": bool(ema10 < ema10_prev and ema20 < ema20_prev)
-            if all([ema10, ema10_prev, ema20, ema20_prev])
-            else None,
+            "ema9": round(ema9, 2) if ema9 else None,
+            "ema21": round(ema21, 2) if ema21 else None,
+            "ema50": round(ema50, 2) if ema50 else None,
+            "ema200": round(ema200, 2) if ema200 else None,
+            "price_above_ema9": bool(price > ema9) if price and ema9 else None,
+            "price_above_ema21": bool(price > ema21) if price and ema21 else None,
+            "price_above_ema50": bool(price > ema50) if price and ema50 else None,
+            "price_above_ema200": bool(price > ema200) if price and ema200 else None,
         }
     except Exception as e:
         logger.warning(f"  Market indicators (yfinance) for {ticker} failed: {e}")
@@ -1188,7 +1196,7 @@ def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
             price = raw["price"]
             sma10, sma20, sma50, sma200 = raw["sma10"], raw["sma20"], raw["sma50"], raw["sma200"]
             rsi14 = raw["rsi14"]
-            ema10, ema20 = raw["ema10"], raw["ema20"]
+            ema9, ema21, ema50, ema200 = raw["ema9"], raw["ema21"], raw["ema50"], raw["ema200"]
             sma50_pct = round((price / sma50 - 1) * 100, 2) if sma50 else None
             sma200_pct = round((price / sma200 - 1) * 100, 2) if sma200 else None
             index_status = _elite_status(price, sma10, sma20, sma50, sma200, rsi14, breadth)
@@ -1205,8 +1213,14 @@ def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
                 "sma50_pct": sma50_pct,
                 "sma200_pct": sma200_pct,
                 "sma200_slope_up": None,
-                "ema10_above_ema20": bool(ema10 > ema20) if ema10 and ema20 else None,
-                "ema10_ema20_both_down": None,
+                "ema9": round(ema9, 2) if ema9 else None,
+                "ema21": round(ema21, 2) if ema21 else None,
+                "ema50": round(ema50, 2) if ema50 else None,
+                "ema200": round(ema200, 2) if ema200 else None,
+                "price_above_ema9": bool(price > ema9) if price and ema9 else None,
+                "price_above_ema21": bool(price > ema21) if price and ema21 else None,
+                "price_above_ema50": bool(price > ema50) if price and ema50 else None,
+                "price_above_ema200": bool(price > ema200) if price and ema200 else None,
             }
     return _fetch_market_indicators_yfinance(ticker, breadth)
 
@@ -1255,23 +1269,51 @@ def fetch_macro_assets() -> dict:
 
 
 def _market_signal(spy: dict, qqq: dict) -> str:
-    def is_red(d):
-        broke_200 = (d.get("sma200_pct") or 0) < 0
-        ema_cross_down = (d.get("ema10_above_ema20") is False
-                          and d.get("ema10_ema20_both_down") is True)
-        return broke_200 or ema_cross_down
+    """4-state EMA regime signal based on SPY & QQQ vs 9/21/50/200 EMA.
 
-    if is_red(spy) or is_red(qqq):
-        return "red"
+    green  – both SPY & QQQ price > EMA9 and > EMA21
+    yellow – price < EMA9 & EMA21 (short-term pullback; above EMA50)
+    orange – price < EMA9, EMA21, and EMA50 (medium-term correction)
+    red    – price < EMA9, EMA21, EMA50, and EMA200 (macro bear)
 
-    spy_above_50 = (spy.get("sma50_pct") or 0) > 0
-    qqq_above_50 = (qqq.get("sma50_pct") or 0) > 0
-    spy_200_up   = spy.get("sma200_slope_up") is not False
-    qqq_200_up   = qqq.get("sma200_slope_up") is not False
+    Uses the stronger of SPY/QQQ for the green check; worst of the two
+    for the red/orange check (risk-off: take the more bearish signal).
+    """
+    def ema_state(d: dict) -> str:
+        """Return regime for a single index based on price vs EMAs."""
+        above9   = d.get("price_above_ema9")
+        above21  = d.get("price_above_ema21")
+        above50  = d.get("price_above_ema50")
+        above200 = d.get("price_above_ema200")
 
-    if spy_above_50 and qqq_above_50 and spy_200_up and qqq_200_up:
-        return "green"
-    return "yellow"
+        # Fallback: if EMA data missing, derive from SMA percentages
+        if above9 is None and above21 is None:
+            pct50  = d.get("sma50_pct")  or 0
+            pct200 = d.get("sma200_pct") or 0
+            if pct200 < 0:
+                return "red"
+            if pct50 < 0:
+                return "orange"
+            return "green"
+
+        if above9 is False and above21 is False and above50 is False and above200 is False:
+            return "red"
+        if above9 is False and above21 is False and above50 is False:
+            return "orange"
+        if above9 is False and above21 is False:
+            return "yellow"
+        if above9 is True and above21 is True:
+            return "green"
+        # mixed (above one but not both) → yellow
+        return "yellow"
+
+    spy_state = ema_state(spy)
+    qqq_state = ema_state(qqq)
+
+    # Rank: green > yellow > orange > red
+    rank = {"green": 3, "yellow": 2, "orange": 1, "red": 0}
+    # Take the WORSE of the two indices (more conservative)
+    return spy_state if rank[spy_state] <= rank[qqq_state] else qqq_state
 
 
 # ──────────────────────────────────────────────────────────────
