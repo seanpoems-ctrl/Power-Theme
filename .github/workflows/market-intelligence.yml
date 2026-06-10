@@ -4,7 +4,7 @@ on:
   workflow_dispatch: {}
   schedule:
     - cron: "5 11 * * 1-5"   # 7:05 AM ET — AM brief (Malaysia 7:05 PM)
-    - cron: "0 20 * * 1-5"   # 4:00 PM ET — PM brief (Malaysia midnight)
+    - cron: "45 20 * * 1-5"  # 4:45 PM ET — PM brief (Malaysia 4:45 AM next day)
 
 jobs:
   market-intel:
