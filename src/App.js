@@ -10125,6 +10125,7 @@ const DailyWatchlistTab = ({ data }) => {
   const [sortDir, setSortDir]       = React.useState("desc");
   const [shortSortCol, setShortSortCol] = React.useState("rs_52w");
   const [shortSortDir, setShortSortDir] = React.useState("asc");
+  const [screenerStocks, setScreenerStocks] = React.useState([]);
 
   React.useEffect(() => {
     fetch(process.env.PUBLIC_URL + "/gapper_data.json?v=" + Date.now())
@@ -10134,6 +10135,10 @@ const DailyWatchlistTab = ({ data }) => {
     fetch(process.env.PUBLIC_URL + "/etf_rs.json?v=" + Date.now())
       .then(r => r.ok ? r.json() : null)
       .then(d => { if (d) setEtfRsData(d); })
+      .catch(() => {});
+    fetch(process.env.PUBLIC_URL + "/screener_stocks.json?v=" + Date.now())
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d?.stocks) setScreenerStocks(d.stocks); })
       .catch(() => {});
   }, []);
 
@@ -10153,6 +10158,20 @@ const DailyWatchlistTab = ({ data }) => {
     }
     return [...seen.values()];
   }, [data]);
+
+  // ticker → theme name from thematic_data (for enriching screener stocks)
+  const tickerThemeMap = React.useMemo(() => {
+    const m = {};
+    for (const s of allStocks) if (s.ticker) m[s.ticker] = s.theme;
+    return m;
+  }, [allStocks]);
+
+  // screener stocks keyed by ticker for O(1) lookup
+  const screenerMap = React.useMemo(() => {
+    const m = {};
+    for (const s of screenerStocks) m[s.ticker] = s;
+    return m;
+  }, [screenerStocks]);
 
   // Helper: parse dollar_volume string or number → raw number
   const parseDvol = v => {
@@ -10249,18 +10268,25 @@ const DailyWatchlistTab = ({ data }) => {
     return <span className="ml-0.5 text-rose-400">{shortSortDir === "asc" ? "↑" : "↓"}</span>;
   };
 
-  // ── Market Leaders ── RS≥90, Mkt Cap≥$10B, $Vol≥$100M
-  const leaders = React.useMemo(() =>
-    allStocks
+  // ── Market Leaders ── built from screener_stocks.json (TradingView rolling 30-day perf)
+  // Falls back to thematic allStocks if screener not loaded yet.
+  const leaders = React.useMemo(() => {
+    const source = screenerStocks.length > 0 ? screenerStocks : allStocks;
+    return source
       .filter(s =>
-        (s.rs_52w ?? 0) >= 90 &&
-        (s.mkt_cap_b != null ? s.mkt_cap_b >= 10 : parseDvol(s.dollar_volume) >= 100_000_000) &&
-        parseDvol(s.dollar_volume) >= 100_000_000
+        (s.rs_score ?? s.rs_52w ?? 0) >= 90 &&
+        (s.market_cap_b ?? s.mkt_cap_b ?? 0) >= 10 &&
+        (s.avg_dollar_volume ?? parseDvol(s.dollar_volume) ?? 0) >= 100_000_000
       )
+      .map(s => ({
+        ...s,
+        rs_52w: s.rs_score ?? s.rs_52w,
+        mkt_cap_b: s.market_cap_b ?? s.mkt_cap_b,
+        theme: tickerThemeMap[s.ticker] ?? s.theme ?? s.industry ?? "—",
+      }))
       .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))
-      .slice(0, 15),
-    [allStocks]
-  );
+      .slice(0, 15);
+  }, [screenerStocks, allStocks, tickerThemeMap]);
 
   // ── Top Themes ── first 5 from thematic data (already ranked)
   const topThemes = data?.themes?.slice(0, 5) ?? [];
@@ -10351,7 +10377,13 @@ const DailyWatchlistTab = ({ data }) => {
           </div>
           <div className="space-y-1.5">
             {topThemes.map((theme, i) => {
-              const stocks = theme.subthemes?.flatMap(s => s.stocks || []) ?? [];
+              const rawStocks = theme.subthemes?.flatMap(s => s.stocks || []) ?? [];
+              // Enrich with screener rolling-30d perf (override Finviz calendar-month)
+              const stocks = rawStocks.map(s => {
+                const sc = screenerMap[s.ticker];
+                if (!sc) return s;
+                return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m };
+              });
               const topS = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))[0];
               const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
               const perfKey = perfMode === "1d" ? "perf_1d" : perfMode === "1m" ? "perf_1m" : "perf_3m";
@@ -11081,6 +11113,7 @@ export default function App() {
   const [tab, setTab] = useState("scanner");
   const [pendingTheme, setPendingTheme] = useState(null); // theme to auto-open in ThemeHeatmap
   const [data, setData] = useState(null);
+  const [appScreenerStocks, setAppScreenerStocks] = useState([]);
   const [briefData, setBriefData] = useState(null);
   const [newsData, setNewsData]   = useState(null);
   const [ibkrThemesData, setIbkrThemesData] = useState(null);
@@ -11218,11 +11251,13 @@ export default function App() {
       safeFetch(`earnings_calendar.json?v=${v}`),
       safeFetch(`econ_calendar.json?v=${v}`),
       safeFetch(`market_internals.json?v=${v}`),
-    ]).then(([ibkrThemes, earnings, econ, internals]) => {
+      safeFetch(`screener_stocks.json?v=${v}`),
+    ]).then(([ibkrThemes, earnings, econ, internals, screener]) => {
       setIbkrThemesData(ibkrThemes);
       setEarningsData(earnings);
       setEconData(econ);
       setInternalsData(internals);
+      if (screener?.stocks) setAppScreenerStocks(screener.stocks);
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -11378,12 +11413,23 @@ export default function App() {
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-const filtered = useMemo(() => {
+const appScreenerMap = useMemo(() => {
+    const m = {};
+    for (const s of appScreenerStocks) m[s.ticker] = s;
+    return m;
+  }, [appScreenerStocks]);
+
+  const filtered = useMemo(() => {
     if (!data) return [];
     return data.themes.map(t => {
       const norm = normalizeTheme(t);
       const filteredSubs = norm.subthemes.map(sub => {
-        let st = sub.stocks;
+        // Enrich stocks with TradingView rolling-30d perf (overrides Finviz calendar-month)
+        let st = sub.stocks.map(s => {
+          const sc = appScreenerMap[s.ticker];
+          if (!sc) return s;
+          return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m };
+        });
         if (search) {
           const q = search.toLowerCase();
           st = st.filter(s => s.ticker.toLowerCase().includes(q) || (s.company || "").toLowerCase().includes(q));
