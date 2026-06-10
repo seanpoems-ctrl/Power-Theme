@@ -1314,7 +1314,7 @@ const EtfHoldingsPopup = ({ etfTicker, holdingsData = {}, onClose }) => {
 };
 
 
-const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, generatedAt, onViewChange, onThemeSelect, etfHoldings = {} }) => {
+const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], heatmapThemes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, generatedAt, onViewChange, onThemeSelect, etfHoldings = {} }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
   const [expanded, setExpanded] = useState(null);
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
@@ -1355,10 +1355,15 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     const map = {};
     const mode = RS_MODES.find(m => m.key === rsMode) ?? RS_MODES[RS_MODES.length - 1];
 
-    // Step 1 — raw score per theme
+    // Step 1 — raw score per theme (merge top-5 themes + all heatmap themes)
+    const allThemeSources = [...(themes || []), ...(heatmapThemes || [])];
+    const seenTheme = new Set();
     const rawScores = {}; // name.toLowerCase() → number | null
-    for (const theme of (themes || [])) {
+    for (const theme of allThemeSources) {
       const norm = normalizeTheme(theme);
+      const key = norm.name.toLowerCase();
+      if (seenTheme.has(key)) continue; // top-5 themes take priority
+      seenTheme.add(key);
       const stocks = norm.subthemes.flatMap(s => s.stocks);
       if (rsMode === '52w') {
         const vals = stocks.map(s => s.rs_52w).filter(v => v != null);
@@ -1610,7 +1615,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
       </div>
     </div>
     {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => { setThemeHover(null); setThemeStats(null); }}/>}
-    {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => { setThemeStats(null); setThemeHover(null); }}/>}
+    {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} heatmapThemes={heatmapThemes} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => { setThemeStats(null); setThemeHover(null); }}/>}
     {subThemeModal && <SubThemeStocksModal subthemeName={subThemeModal.subthemeName} stocks={subThemeModal.stocks} onClose={() => setSubThemeModal(null)}/>}
     {etfPopup && <EtfHoldingsPopup etfTicker={etfPopup.etf} holdingsData={etfHoldings} onClose={() => setEtfPopup(null)}/>}
     </>
@@ -1710,10 +1715,11 @@ const TVPopup = ({ ticker, anchorRect, chartUrl, onClose }) => {
   );
 };
 
-const ThemeStatsPopup = ({ themeName, themes, anchorRect, chartAnchor, onClose }) => {
+const ThemeStatsPopup = ({ themeName, themes, heatmapThemes, anchorRect, chartAnchor, onClose }) => {
   const stocks = useMemo(() => {
-    if (!themeName || !themes) return [];
-    const theme = themes.find(t => normalizeTheme(t).name.toLowerCase() === themeName.toLowerCase());
+    if (!themeName) return [];
+    const all = [...(themes || []), ...(heatmapThemes || [])];
+    const theme = all.find(t => normalizeTheme(t).name.toLowerCase() === themeName.toLowerCase());
     if (!theme) return [];
     const norm = normalizeTheme(theme);
     const all = norm.subthemes.flatMap(s => s.stocks);
@@ -11613,6 +11619,7 @@ const filtered = useMemo(() => {
               industryRankings={data.industry_rankings}
               finvizThemeRankings={data.finviz_theme_rankings}
               themes={data.themes}
+              heatmapThemes={data.heatmap_themes || []}
               spyBenchmarks={data.spy_benchmarks}
               ibkrThemesData={ibkrThemesData}
               generatedAt={data.generated_at}
