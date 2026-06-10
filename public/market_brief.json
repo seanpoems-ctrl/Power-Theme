@@ -1,30 +1,30 @@
 {
-  "generated_at": "June 09, 2026 (20:39 EDT)",
-  "session": "Post-Market",
+  "generated_at": "June 10, 2026 (08:45 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7386.65,
-      "change": -19.08,
-      "change_pct": -0.26
+      "price": 7405.73,
+      "change": 21.99,
+      "change_pct": 0.3
     },
     {
       "label": "Nasdaq 100",
-      "price": 29084.5,
-      "change": -329.76,
-      "change_pct": -1.12
+      "price": 29414.26,
+      "change": 456.66,
+      "change_pct": 1.58
     },
     {
       "label": "VIX",
-      "price": 19.87,
-      "change": 0.95,
+      "price": 21.13,
+      "change": 2.21,
       "change_pct": null,
-      "zone_label": "Normal"
+      "zone_label": "Elevated"
     },
     {
       "label": "10Y Yield",
       "price": 4.53,
-      "change": -0.02,
+      "change": -0.03,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 64825.96,
-      "change_pct": 1.25
+      "price": 64179.27,
+      "change_pct": 0.24
     },
     "dax": {
       "label": "DAX",
-      "price": 24616.22,
-      "change_pct": -0.58
+      "price": 24281.7,
+      "change_pct": -1.36
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10373.2,
-      "change_pct": 0.05
+      "price": 10206.24,
+      "change_pct": -1.61
     }
   },
   "macro_breadth": {
@@ -60,31 +60,13 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Moderate Pullback, Tech Weakness",
+  "mood": "",
   "analysis": {
-    "action_line": "VIX 19.87 Normal + 57.2% S&P 500 stocks above SMA50 + mixed global tape → focus on high relative strength leaders near support.",
-    "analysis_para1": "The global market presented a mixed picture today, with the Nikkei 225 gaining a significant +1.25% while the DAX declined by -0.58% and the FTSE 100 posted a modest +0.05% gain. The status of the BAML HY Spread remains unknown, preventing a current assessment of US credit conditions. Despite this international divergence and unknown credit regime, US market breadth showed underlying resilience, with 57.2% of S&P 500 stocks above SMA50 and 63.3% of S&P stocks above SMA200. This suggests that while US indices pulled back today, particularly the Nasdaq 100, internal market health retains some strength above key moving averages.",
-    "analysis_para2": "The mechanical plan for navigating current conditions involves observing the S&P 500's response to its recent trading range and key support levels following today's -0.26% decline. Given the Nasdaq 100's sharper -1.12% drop, particular attention should be paid to technology sector leaders and their ability to hold 20-day or 50-day moving averages. Traders should look for confirmation of buying interest on increased volume if the market bounces, otherwise prepare for further consolidation around the S&P 500's current 7386.65 level. Focus remains on robust relative strength names that show resilience during pullbacks, utilizing tight stops to manage risk.",
-    "technical_signal": "No reversal pattern confirmed yet. The market experienced a modest pullback, primarily led by technology stocks, without showing definitive signs of a reversal in either direction.",
-    "ticker_intel": [
-      {
-        "ticker": "VSH",
-        "company": "Vishay Intertechnology, Inc.",
-        "grade": "A+",
-        "reason": "Vishay Intertechnology, Inc. demonstrates superior relative strength at 98 and strong one-month growth of +75.6%, indicating robust performance in the dynamic Semiconductors sector."
-      },
-      {
-        "ticker": "MRVL",
-        "company": "Marvell Technology, Inc.",
-        "grade": "A",
-        "reason": "Marvell Technology, Inc. exhibits excellent relative strength at 98 and remarkable one-month growth of +80.5%, positioning it as a leading contender within the thriving Semiconductors theme."
-      },
-      {
-        "ticker": "UMAC",
-        "company": "Unusual Machines, Inc.",
-        "grade": "C",
-        "reason": "Despite a high one-month gain of +91.5% and relative strength of 97, Unusual Machines, Inc.'s relatively low three-month growth of +49.6% compared to peers suggests recent volatility and potentially less sustained momentum."
-      }
-    ]
-  }
+    "action_line": "",
+    "analysis_para1": "",
+    "analysis_para2": "",
+    "technical_signal": "",
+    "ticker_intel": []
+  },
+  "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
 }
