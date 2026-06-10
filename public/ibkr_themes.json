@@ -1,6 +1,59 @@
 {
-  "generated_at": "2026-06-10T06:31:21.717496+00:00",
+  "generated_at": "2026-06-10T23:07:33.034609+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Telecommunications",
+      "theme_rs": 98.0,
+      "perf_1d": 7.52,
+      "leaders": [
+        {
+          "ticker": "AAOI",
+          "price": 175.13,
+          "rs_52w": 98,
+          "adr_pct": 14.74,
+          "vol_surge": 1.33,
+          "mkt_cap": 14052916176,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Telecommunications",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    },
+    {
+      "name": "Healthcare Services",
+      "theme_rs": 96.0,
+      "perf_1d": 2.31,
+      "leaders": [
+        {
+          "ticker": "OSCR",
+          "price": 27.85,
+          "rs_52w": 96,
+          "adr_pct": 5.85,
+          "vol_surge": 1.14,
+          "mkt_cap": 8396580165,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Healthcare Services",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }
