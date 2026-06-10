@@ -1718,8 +1718,8 @@ const TVPopup = ({ ticker, anchorRect, chartUrl, onClose }) => {
 const ThemeStatsPopup = ({ themeName, themes, heatmapThemes, anchorRect, chartAnchor, onClose }) => {
   const stocks = useMemo(() => {
     if (!themeName) return [];
-    const all = [...(themes || []), ...(heatmapThemes || [])];
-    const theme = all.find(t => normalizeTheme(t).name.toLowerCase() === themeName.toLowerCase());
+    const allSources = [...(themes || []), ...(heatmapThemes || [])];
+    const theme = allSources.find(t => normalizeTheme(t).name.toLowerCase() === themeName.toLowerCase());
     if (!theme) return [];
     const norm = normalizeTheme(theme);
     const all = norm.subthemes.flatMap(s => s.stocks);
