@@ -9458,19 +9458,18 @@ const EtfRsHistogram = ({ data = [] }) => {
 };
 
 // ── ETF Holdings Modal — blurred overlay, triggered by clicking the theme name ──
-const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {} }) => {
+const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etfRsMap = {} }) => {
   const [sortCol, setSortCol] = useState("perf_1d");
   const [sortDir, setSortDir] = useState("desc");
 
-  // Enrich holdings with TradingView rolling perf (overrides stale Finviz data)
+  // Enrich holdings with TradingView rolling perf — stocks from screenerMap, ETFs from etfRsMap
   const enrichedHoldings = React.useMemo(() => {
-    if (!screenerMap || Object.keys(screenerMap).length === 0) return holdings;
     return holdings.map(h => {
-      const sc = screenerMap[h.ticker];
+      const sc = screenerMap[h.ticker] || etfRsMap[h.ticker];
       if (!sc) return h;
       return { ...h, perf_1d: sc.perf_1d ?? h.perf_1d, perf_1w: sc.perf_1w ?? h.perf_1w, perf_1m: sc.perf_1m ?? h.perf_1m, perf_3m: sc.perf_3m ?? h.perf_3m, perf_6m: sc.perf_6m ?? h.perf_6m };
     });
-  }, [holdings, screenerMap]);
+  }, [holdings, screenerMap, etfRsMap]);
 
   const fmt = v => {
     if (v == null) return "—";
@@ -9596,6 +9595,12 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {} }) =
 const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
   const etfs = etfRsData?.etfs ?? [];
   const [holdingsModal, setHoldingsModal] = useState(null); // { ticker, theme, holdings }
+
+  const etfRsMap = React.useMemo(() => {
+    const m = {};
+    for (const e of etfs) m[e.ticker] = e;
+    return m;
+  }, [etfs]);
 
   // All beta boosters with anchor data
   const boosters = etfs.filter(e => e.etf_type === "beta_booster" && e.anchor_ticker && e.rs_vs_anchor_1m != null);
@@ -9781,6 +9786,7 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
           theme={holdingsModal.theme}
           holdings={holdingsModal.holdings}
           screenerMap={screenerMap}
+          etfRsMap={etfRsMap}
           onClose={() => setHoldingsModal(null)}
         />
       )}
@@ -9794,6 +9800,12 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
   const [selectedEtf, setSelectedEtf] = useState(null); // { ticker, theme, holdings }
 
   const etfs = etfRsData?.etfs ?? [];
+
+  const etfRsMap = React.useMemo(() => {
+    const m = {};
+    for (const e of etfs) m[e.ticker] = e;
+    return m;
+  }, [etfs]);
 
   const handleSort = col => {
     if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
@@ -10010,6 +10022,7 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
         theme={selectedEtf.theme}
         holdings={selectedEtf.holdings}
         screenerMap={screenerMap}
+        etfRsMap={etfRsMap}
         onClose={() => setSelectedEtf(null)}
       />
     )}
@@ -10624,7 +10637,7 @@ const DailyWatchlistTab = ({ data }) => {
       )}
 
       {/* ── UNIVERSE ──────────────────────────────────────── */}
-      {mode === "universe" && <UniverseTab etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />}
+      {mode === "universe" && <UniverseTab etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} etfRsData={etfRsData} />}
 
       {/* ── SHORT MODE ────────────────────────────────────── */}
       {mode === "short" && (
@@ -10776,7 +10789,7 @@ const TrendSparkline = ({ data = [] }) => {
   );
 };
 
-const UniverseTab = ({ etfHoldings = {}, screenerMap = {} }) => {
+const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null }) => {
   const [uData, setUData]         = useState(null);
   const [loading, setLoading]     = useState(true);
   const [sigFilter, setSigFilter] = useState("All");
@@ -10785,6 +10798,13 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {} }) => {
   const [sortDir, setSortDir]     = useState("desc");
   const [hmSort, setHmSort]       = useState({ col: "score", dir: "desc" }); // heatmap sort
   const [holdingsModal, setHoldingsModal] = useState(null); // { ticker, theme, holdings }
+
+  const etfRsMap = useMemo(() => {
+    const m = {};
+    for (const e of etfRsData?.etfs ?? []) m[e.ticker] = e;
+    return m;
+  }, [etfRsData]);
+
   // Adjustable filters — defaults: RS≥85 · $Vol≥$50M · ADR≥4% · MktCap≥$1B
   const [minRS,   setMinRS]   = useState(85);
   const [minVol,  setMinVol]  = useState(50);   // $M
@@ -11141,6 +11161,7 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {} }) => {
         theme={holdingsModal.theme}
         holdings={holdingsModal.holdings}
         screenerMap={screenerMap}
+        etfRsMap={etfRsMap}
         onClose={() => setHoldingsModal(null)}
       />
     )}
