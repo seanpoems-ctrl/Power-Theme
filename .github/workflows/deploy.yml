@@ -4,7 +4,7 @@ on:
     branches: [ main ]
 concurrency:
   group: pages-deploy
-  cancel-in-progress: false
+  cancel-in-progress: true
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-      - run: npm install
+      - run: npm ci --legacy-peer-deps
       - run: npm run build
         env:
           CI: false
