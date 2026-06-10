@@ -1,5 +1,5 @@
 {
-  "generated_at": "June 10, 2026 (17:01 EDT)",
+  "generated_at": "June 10, 2026 (18:53 EDT)",
   "session": "Post-Market",
   "global_snapshot": [
     {
@@ -37,8 +37,8 @@
     },
     "dax": {
       "label": "DAX",
-      "price": 24195.31,
-      "change_pct": -0.97
+      "price": 24433.06,
+      "change_pct": -0.74
     },
     "ftse": {
       "label": "FTSE 100",
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Risk-Off / US Weakness, Elevated Volatility",
+  "mood": "US Sell-Off / Elevated Volatility",
   "analysis": {
-    "action_line": "VIX 22.22 Elevated + 50.8% S&P 500 stocks above SMA50 + mixed global tape → trade RS leaders selectively near support.",
-    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 surging 2.17% while the DAX dipped 0.97% and the FTSE 100 saw a modest 0.27% gain. The unknown BAML HY Spread regime, coupled with a stable 10Y Yield at 4.54%, indicates underlying credit uncertainty despite a lack of clear distress signals. Domestically, US indices faced a significant sell-off, yet market breadth shows a degree of resilience with 50.8% of S&P 500 stocks above SMA50 and 60.1% above S&P stocks above SMA200, suggesting the weakness is not universally distributed across all equities.",
-    "analysis_para2": "The immediate mechanical plan requires vigilance for potential support levels following today's sharp decline, particularly for the S&P 500. A continued elevated VIX at 22.22 necessitates caution, with a move above 25 signaling increased risk or a drop below 20 indicating calming sentiment. Given the breadth, with 50.8% of S&P 500 stocks above SMA50, the strategy remains focused on identifying high Relative Strength leaders. These strong candidates should be monitored for constructive price action near their 10-day or 20-day moving averages, or for decisive breakouts on high volume, confirming continued demand.",
-    "technical_signal": "No reversal pattern confirmed yet. The sharp sell-off today occurred on elevated volatility, requiring further price action to confirm any bottoming attempt.",
+    "action_line": "VIX 22.22 Elevated + 50.8% S&P 500 stocks above SMA50 breadth + mixed global tape → trade RS leaders selectively near support.",
+    "analysis_para1": "Despite a strong Nikkei 225 (+2.17%) and positive FTSE 100 (+0.27%), US markets experienced a notable sell-off today, contrasting with a weaker DAX (-0.74%). The S&P 500's decline to 7266.99 occurs with S&P 500 stocks above SMA50 at 50.8% and S&P stocks above SMA200 at 60.1%, indicating moderate underlying health but a lack of widespread participation in today's downturn. The BAML High Yield Spread's unknown regime adds a layer of uncertainty regarding broader credit conditions, making it difficult to assess systemic risk beyond the equity markets.",
+    "analysis_para2": "The current elevated VIX at 22.22 signals increased volatility, warranting a defensive posture. For the S&P 500, a potential support level to monitor is around the 7200 mark, with resistance at today's open around 7390. Given the moderate breadth, a sustained rebound would require a clear break above resistance on increasing volume and improving S&P 500 stocks above SMA50. A retest of the VIX below 20 would also signal a reduction in immediate market anxiety. Traders should focus on managing risk and waiting for confirmation before aggressive new long positions.",
+    "technical_signal": "No reversal pattern confirmed yet. The significant daily declines in the S&P 500 and Nasdaq 100, coupled with an elevated VIX, suggest continued downside potential or consolidation before a clear bullish reversal signal emerges.",
     "ticker_intel": [
       {
         "ticker": "VSH",
         "company": "Vishay Intertechnology, Inc.",
         "grade": "A+",
-        "reason": "This semiconductor leader shows exceptional Relative Strength of 99, with a remarkable 71.0% gain over one month and 238.4% over three months, making it a top performer in the current environment."
+        "reason": "Vishay Intertechnology, Inc. demonstrates exceptional leadership with RS=99 and remarkable 1-month return of +71.0%, making it a prime candidate for relative strength outperformance in the current semiconductor-led market environment."
       },
       {
-        "ticker": "ALAB",
-        "company": "Astera Labs, Inc.",
+        "ticker": "ARM",
+        "company": "Arm Holdings plc",
         "grade": "A",
-        "reason": "With a Relative Strength of 99 and 71.0% one-month and 193.4% three-month returns, Astera Labs is a strong semiconductor play that continues to exhibit significant momentum."
+        "reason": "Arm Holdings plc exhibits strong relative strength with RS=99 and robust 1-month gain of +52.3%, positioning it as a key beneficiary of sustained innovation within the high-demand semiconductor sector."
       },
       {
-        "ticker": "LRCX",
-        "company": "Lam Research Corporation",
+        "ticker": "CIFR",
+        "company": "Cipher Digital Inc.",
         "grade": "C",
-        "reason": "Despite being in the strong Semiconductors theme, its 11.3% one-month and 52.0% three-month returns significantly lag its peers, indicating relative underperformance and potential for further weakness in a risk-off environment."
+        "reason": "Cipher Digital Inc., despite its high RS=99, shows comparatively weaker 1-month (+12.1%) and 3-month (+65.0%) performance versus its Neocloud peers, suggesting it may be a relative laggard susceptible to deeper pullbacks in a risk-off market."
       }
     ]
   }
