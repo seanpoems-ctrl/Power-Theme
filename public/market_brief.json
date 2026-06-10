@@ -1,30 +1,30 @@
 {
-  "generated_at": "June 10, 2026 (08:45 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "June 10, 2026 (12:27 EDT)",
+  "session": "Market Hours",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7405.73,
-      "change": 21.99,
-      "change_pct": 0.3
+      "price": 7319.83,
+      "change": -66.82,
+      "change_pct": -0.9
     },
     {
       "label": "Nasdaq 100",
-      "price": 29414.26,
-      "change": 456.66,
-      "change_pct": 1.58
+      "price": 28716.37,
+      "change": -368.13,
+      "change_pct": -1.27
     },
     {
       "label": "VIX",
-      "price": 21.13,
-      "change": 2.21,
+      "price": 22.16,
+      "change": 2.29,
       "change_pct": null,
       "zone_label": "Elevated"
     },
     {
       "label": "10Y Yield",
       "price": 4.53,
-      "change": -0.03,
+      "change": 0.0,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 64179.27,
-      "change_pct": 0.24
+      "price": 65416.63,
+      "change_pct": 2.17
     },
     "dax": {
       "label": "DAX",
-      "price": 24281.7,
-      "change_pct": -1.36
+      "price": 24195.31,
+      "change_pct": -0.97
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10206.24,
-      "change_pct": -1.61
+      "price": 10254.81,
+      "change_pct": 0.27
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 57.2,
-    "mmth": 63.3,
+    "s5fi": 54.5,
+    "mmth": 62.3,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,13 +60,31 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "",
+  "mood": "Volatility / Selective Distribution",
   "analysis": {
-    "action_line": "",
-    "analysis_para1": "",
-    "analysis_para2": "",
-    "technical_signal": "",
-    "ticker_intel": []
-  },
-  "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "action_line": "VIX 22.16 Elevated + 54.5% S&P 500 stocks above SMA50 + mixed global tape → favor relative strength leaders cautiously.",
+    "analysis_para1": "Global markets present a divergent picture, with the Nikkei 225 surging +2.17% while the DAX registered a -0.97% decline, and the FTSE 100 posted a modest +0.27% gain. In the US, the elevated VIX at 22.16 underscores current market anxiety amid broad index declines. With the BAML HY Spread indicating an unknown regime, credit market signals are unclear. However, underlying market breadth remains relatively stable, with 54.5% of S&P 500 stocks above SMA50 and 62.3% of S&P stocks above SMA200, suggesting pockets of resilience.",
+    "analysis_para2": "The broad market pullback, marked by the S&P 500's 0.90% drop and the Nasdaq 100's 1.27% decline, warrants a defensive stance. Traders should watch for a decisive break below today's intraday lows on increased volume, which could confirm further distribution. Conversely, any bounces failing to recover prior resistance levels or yesterday's close would signal continued weakness. Maintain a focus on cash preservation and deploy capital selectively into established relative strength leaders demonstrating clear base breakouts, avoiding candidates showing signs of breaking down.",
+    "technical_signal": "No reversal pattern confirmed yet. The elevated VIX and broad market declines suggest ongoing distribution rather than a clear bottoming signal.",
+    "ticker_intel": [
+      {
+        "ticker": "VSH",
+        "company": "Vishay Intertechnology, Inc.",
+        "grade": "A+",
+        "reason": "Vishay shows exceptional relative strength with an RS of 99 and a robust +71.0% one-month return, making it a top leader in a selective market."
+      },
+      {
+        "ticker": "ALAB",
+        "company": "Astera Labs, Inc.",
+        "grade": "A+",
+        "reason": "Astera Labs demonstrates elite relative strength (RS 99) and impressive short-term momentum (+71.0% in one month), suitable for strong growth plays amidst volatility."
+      },
+      {
+        "ticker": "UMAC",
+        "company": "Unusual Machines, Inc.",
+        "grade": "C",
+        "reason": "Despite a strong one-month return, Unusual Machines' relatively lower three-month gain (+29.2%) compared to peers and high ADR (15.7%) suggest it may be extended and prone to profit-taking in a weakening market."
+      }
+    ]
+  }
 }
