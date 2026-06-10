@@ -9688,7 +9688,7 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
           {/* Weekly Scanning Checklist */}
           <div className="mt-3 p-3 rounded-lg border border-zinc-700/50 bg-zinc-900/30">
             <p className="text-[11px] font-bold text-zinc-300 uppercase tracking-wide mb-2">📋 Weekly Scanning Checklist</p>
-            <div className="space-y-1">
+            <div className="space-y-0.5">
               {Object.entries(byCategory)
                 .sort(([, a], [, b]) => {
                   const aMax = Math.max(...a.map(e => e.rs_vs_anchor_1w ?? -999));
@@ -9701,25 +9701,38 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
                   const anchor = catEtfs[0]?.anchor_ticker;
                   const anchorEtf = etfs.find(e => e.ticker === anchor);
                   return (
-                    <div key={cat} className={`flex items-center gap-2 py-0.5 px-2 rounded cursor-pointer hover:bg-zinc-800/40 transition-colors ${hasFlip ? "bg-amber-500/5 border border-amber-500/20" : ""}`}
+                    <div key={cat}
+                         className={`grid items-center gap-x-2 py-1 px-2 rounded cursor-pointer hover:bg-zinc-800/40 transition-colors ${hasFlip ? "bg-amber-500/5 border border-amber-500/20" : ""}`}
+                         style={{ gridTemplateColumns: "12px 1fr 40px 16px 52px 90px 90px" }}
                          onClick={() => best && setHoldingsModal({ ticker: best.ticker, theme: `${best.category} - ${best.label}`, holdings: etfHoldings[best.ticker] ?? [] })}>
-                      <span className={`text-[9px] w-3 flex-shrink-0 ${hasFlip ? "text-amber-400" : "text-zinc-700"}`}>
+                      {/* col 1: flip indicator */}
+                      <span className={`text-[9px] ${hasFlip ? "text-amber-400" : "text-zinc-700"}`}>
                         {hasFlip ? "▶" : "○"}
                       </span>
-                      <span className="text-[10px] text-zinc-500 w-40 flex-shrink-0 truncate">{cat}</span>
+                      {/* col 2: category name */}
+                      <span className="text-[10px] text-zinc-400 truncate">{cat}</span>
+                      {/* col 3: anchor ticker */}
                       <span
-                        className="text-[10px] text-zinc-600 hover:text-zinc-300 transition-colors"
+                        className="text-[10px] font-mono text-zinc-500 hover:text-zinc-300 transition-colors text-right"
                         onClick={e => { e.stopPropagation(); anchor && setHoldingsModal({ ticker: anchor, theme: anchorEtf?.theme || anchor, holdings: etfHoldings[anchor] ?? [] }); }}>
                         {anchor}
                       </span>
-                      <span className="text-[10px] text-zinc-600">→</span>
+                      {/* col 4: arrow */}
+                      <span className="text-[10px] text-zinc-700 text-center">→</span>
+                      {/* col 5: best booster ticker */}
                       <span className={`text-[10px] font-mono font-bold underline decoration-dotted ${hasFlip ? "text-amber-300" : "text-zinc-500"}`}>
                         {best?.ticker}
                       </span>
-                      <span className={`text-[10px] font-mono ml-auto ${excColor(best?.rs_vs_anchor_1w)}`}>
+                      {/* col 6: perf */}
+                      <span className={`text-[10px] font-mono text-right ${excColor(best?.rs_vs_anchor_1w)}`}>
                         {fmtExc(best?.rs_vs_anchor_1w)} this wk
                       </span>
-                      {hasFlip && <span className="text-[9px] px-1 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold">SCREEN NOW</span>}
+                      {/* col 7: badge (always rendered, invisible when no flip) */}
+                      <span className="text-right">
+                        {hasFlip
+                          ? <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold border border-amber-500/30 whitespace-nowrap">SCREEN NOW</span>
+                          : null}
+                      </span>
                     </div>
                   );
                 })}
