@@ -1,79 +1,79 @@
 {
-  "generated_at": "2026-06-09 20:50 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-06-10 07:05 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 737.05,
-      "open": 743.63,
-      "high": 746.9,
-      "low": 722.59,
-      "close": 737.05,
-      "prev_open": 743.36,
-      "prev_close": 739.22,
-      "volume": 86844734,
-      "change_pct": -0.29
+      "price": 739.22,
+      "open": 743.36,
+      "high": 745.34,
+      "low": 738.19,
+      "close": 739.22,
+      "prev_open": 752.31,
+      "prev_close": 737.55,
+      "volume": 49319100,
+      "change_pct": 0.23
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 707.83,
-      "open": 722.97,
-      "high": 725.66,
-      "low": 686.37,
-      "close": 707.83,
-      "prev_open": 717.81,
-      "prev_close": 716.07,
-      "volume": 87562233,
-      "change_pct": -1.15
+      "price": 716.07,
+      "open": 717.81,
+      "high": 723.03,
+      "low": 713.07,
+      "close": 716.07,
+      "prev_open": 730.06,
+      "prev_close": 705.06,
+      "volume": 47401500,
+      "change_pct": 1.56
     },
     "^VIX": {
       "label": "VIX",
-      "price": 19.87,
-      "open": 18.19,
-      "high": 23.34,
-      "low": 17.52,
-      "close": 19.87,
+      "price": 20.97,
+      "open": 20.1,
+      "high": 21.46,
+      "low": 20.06,
+      "close": 20.97,
       "prev_open": 20.29,
       "prev_close": 18.92,
       "volume": 0,
-      "change_pct": 5.02
+      "change_pct": 10.84
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 89.73,
+      "price": 87.98,
       "open": 89.4,
       "high": 90.0,
-      "low": 88.65,
-      "close": 89.73,
-      "prev_open": 93.0,
-      "prev_close": 91.3,
-      "volume": 8934,
-      "change_pct": -1.72
+      "low": 87.39,
+      "close": 87.98,
+      "prev_open": 91.28,
+      "prev_close": 88.2,
+      "volume": 45846,
+      "change_pct": -0.25
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 64858.2,
+      "price": 64179.27,
       "open": 64952.38,
       "high": 65098.86,
-      "low": 64705.32,
-      "close": 64858.2,
+      "low": 63733.04,
+      "close": 64179.27,
       "prev_open": 65947.56,
       "prev_close": 64024.6,
       "volume": 0,
-      "change_pct": 1.3
+      "change_pct": 0.24
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24616.22,
-      "open": 24447.32,
-      "high": 24732.6,
-      "low": 24426.61,
-      "close": 24616.22,
-      "prev_open": 24881.87,
-      "prev_close": 24759.05,
-      "volume": 54486200,
-      "change_pct": -0.58
+      "price": 24257.56,
+      "open": 24507.4,
+      "high": 24517.48,
+      "low": 24218.1,
+      "close": 24257.56,
+      "prev_open": 24447.32,
+      "prev_close": 24616.22,
+      "volume": 0,
+      "change_pct": -1.46
     }
   },
   "fred": {
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: June 09, 2026",
-    "mood_emoji": "⚠️",
-    "mood": "Cautious Retreat & Volatility Uptick",
-    "narrative": "US equities experienced a notable pullback today, with the Nasdaq 100 leading declines and volatility gauges rising. Global markets presented a mixed picture, highlighting divergent regional sentiment amidst stable credit conditions.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 737.05 | -0.29% | ➡️ |\n| Nasdaq 100 ETF | 707.83 | -1.15% | 📉 |\n| VIX | 19.87 | +5.02% | 📈 |\n| Crude Oil | 89.73 | -1.72% | 📉 |\n| Nikkei 225 | 64858.20 | +1.30% | 📈 |\n| DAX | 24616.22 | -0.58% | 📉 |",
-    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) remains at a 'Complacent' 2.75%, suggesting limited stress in corporate credit markets. Meanwhile, the 10Y-2Y Yield Curve (T10Y2Y) stands at a 'Normal / Steepening' +0.460, despite a cached value from a previous run due to a live FRED fetch failure. This combination implies that while broader economic risk signals are not flashing red, institutional risk appetite for equities may be moderating as seen in today's tape.",
-    "analysis_para1": "The global tape presented a fragmented picture today, with the Nikkei 225 advancing by a notable +1.30% while the DAX slipped -0.58%. Crude Oil's -1.72% decline suggests concerns about global demand or potential oversupply, contrasting with the relatively 'Complacent' US High Yield Credit Spread (BAMLH0A0HYM2) at 2.75%. This divergence indicates that while US credit markets appear robust, international weakness and commodity price drops could eventually pressure US risk appetite, especially with the VIX seeing a +5.02% uptick today.",
-    "analysis_para2": "Today's primary flow appears to be driven by broad-based profit-taking and defensive positioning, a mechanical catalyst stemming from a re-evaluation of the near-term macro outlook. The tech-heavy Nasdaq 100 ETF's significant -1.15% drop, coupled with the S&P 500 ETF's -0.29% decline and the VIX's +5.02% surge to 19.87, indicates a clear shift away from growth assets. This rotation suggests investors are reducing exposure ahead of potential future policy shifts or economic data, rather than reacting to an immediate, singular event.",
-    "analysis_para3": "Traders should prioritize managing risk in the current environment by monitoring key support levels; for instance, a breach of SPY 735 could signal further downside momentum. Key triggers for long entries would require a reclaim of SPY 740 coupled with declining VIX, while short entries become attractive on sustained breaks below immediate support. A clear risk-off threshold for the broader market would be the VIX closing above 20.00 consistently, implying increased hedging activity. Today, traders should consider trimming overextended positions and observing whether the percentage of S&P 500 stocks above SMA50 (57.2%) begins to decline meaningfully.",
-    "technical_signal": "No reversal pattern confirmed yet. While the market saw a pullback, the percentage of S&P 500 stocks above SMA50 (57.2%) and S&P stocks above SMA200 (63.3%) still indicate underlying breadth. Traders should watch for a significant downtick in these breadth metrics, or a sustained break of the VIX above 20, as signals for deeper technical concerns.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA announced a groundbreaking new AI superchip partnership with a major cloud provider, signaling continued dominance in the AI hardware space."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla confirmed higher than expected Q2 delivery forecasts and announced a significant expansion of its European charging network, boosting investor confidence."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple saw continued attention today amidst ongoing discussions about its upcoming developer conference and rumored mixed-reality headset updates."
-        }
-      ]
-    }
+    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
   }
 }
