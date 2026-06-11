@@ -503,61 +503,53 @@ const CLICKABLE_COLS = {
 // ---------------------------------------------------------------------------
 
 // ---------------------------------------------------------------------------
-// Dual-Variable Matrix — palette from net delta (up_4pct vs down_4pct),
-// intensity from each cell's absolute value within that palette.
+// Color palette — verified against Google Sheet CSS class extraction:
+//   s7  (rgb 244,204,204) light pink  → text-rose-400          (down-day, sub-threshold)
+//   s8  (rgb 0,255,0)     bright green → bg-green-600 text-white (bullish)
+//   s9  (rgb 224,102,102) coral red   → bg-red-600 text-white   (bearish)
+//   s10 (rgb 51,153,102)  medium green → bg-green-800 text-white (strong thrust, UP day ≥300)
+//   s6  white/neutral     → ""                                   (no highlight)
+//
+// Primary pair (Up4/Down4): 3-tier 2D matrix — direction AND value at threshold 300
+// Secondary pairs (quarterly/monthly 25%/34-day): pure binary, direction only
+// Monthly 50%: standalone contrarian — Up50m ≥20 = red froth; Dn50m ≥20 = green oversold
+// Ratios: standalone — ≥2.0 green, ≤0.50 red
 // ---------------------------------------------------------------------------
-function _g(v, t1, t2, t3) {  // green palette tiers
-  if (v >= t1) return "bg-green-600 text-white font-bold";
-  if (v >= t2) return "bg-green-800 text-green-100 font-semibold";
-  if (t3 != null && v >= t3) return "text-green-400";
-  return "";
-}
-function _r(v, t1, t2, t3) {  // red palette tiers
-  if (v >= t1) return "bg-red-700 text-white font-bold";
-  if (v >= t2) return "bg-red-900 text-red-100 font-semibold";
-  if (t3 != null && v >= t3) return "text-red-400";
-  return "";
-}
-function dvm(v, netPos, t1, t2, t3) {
+const S7  = "text-rose-400";
+const S8  = "bg-green-600 text-white font-semibold";
+const S9  = "bg-red-600 text-white font-semibold";
+const S10 = "bg-green-800 text-white font-semibold";
+
+// Up 4%+: UP day → s8 (<300) or s10 (≥300); DOWN day → always s7
+function clsUp4(v, netPos) {
   if (v == null) return "";
-  return netPos ? _g(v, t1, t2, t3) : _r(v, t1, t2, t3);
+  return netPos ? (v >= 300 ? S10 : S8) : S7;
 }
-
-// Primary daily pair — actual range up:78–885 / dn:38–972
-// t2=310 captures 5/8 (319 up, off-green per reference); t1=450 for strong thrust days
-function clsUp4(v, netPos)    { return dvm(v, netPos,  450,  310, null); }
-function clsDn4(v, netPos)    { return dvm(v, netPos,  500,  350, null); }
-
-// Quarterly pair — actual range up:777–1659 / dn:839–1657
-// t1 calibrated to top ~10% of values
-function clsUp25q(v, netPosQ) { return dvm(v, netPosQ, 1580, 1490, null); }
-function clsDn25q(v, netPosQ) { return dvm(v, netPosQ, 1450, 1200, null); }
-
-// Monthly 25% pair — actual range up:67–451 / dn:46–361
-function clsUp25m(v, netPosM) { return dvm(v, netPosM,  280,  190, null); }
-function clsDn25m(v, netPosM) { return dvm(v, netPosM,  220,  150, null); }
-
-// Up 50% Monthly — standalone YELLOW (s5): parabolic froth warning, not directional
-// actual range: 12–118
-function clsUp50m(v) {
+// Down 4%+: UP day → always s8; DOWN day → s7 (<300) or s9 (≥300)
+function clsDn4(v, netPos) {
   if (v == null) return "";
-  if (v >= 85) return "bg-yellow-500 text-black font-bold";
-  if (v >= 60) return "text-yellow-400 font-semibold";
+  return netPos ? S8 : (v >= 300 ? S9 : S7);
+}
+// Ratios: standalone — green ≥2.0, red ≤0.50, neutral otherwise
+function clsRatio(v) {
+  if (v == null) return "";
+  if (v >= 2.0)  return S8;
+  if (v <= 0.50) return S9;
   return "";
 }
-// Down 50% Monthly — standalone RED: crash/panic signal, no green version
-// actual range: 14–49
-function clsDn50m(v) {
-  if (v == null) return "";
-  if (v >= 35) return "bg-red-700 text-white font-bold";
-  if (v >= 25) return "bg-red-900 text-red-100 font-semibold";
-  return "";
-}
-
-// 34-Day pair — actual range up:819–2631 / dn:854–2516
-// t1 calibrated to top ~10% (~2100+); t2 to top ~25% (~1800+)
-function clsUp13(v, netPos34) { return dvm(v, netPos34, 2100, 1800, null); }
-function clsDn13(v, netPos34) { return dvm(v, netPos34, 2100, 1700, null); }
+// Quarterly pair: pure binary — both columns reflect which side dominates
+function clsUp25q(v, pairPos) { return v == null ? "" : (pairPos ? S8 : S9); }
+function clsDn25q(v, pairPos) { return v == null ? "" : (pairPos ? S8 : S9); }
+// Monthly 25% pair: pure binary
+function clsUp25m(v, pairPos) { return v == null ? "" : (pairPos ? S8 : S9); }
+function clsDn25m(v, pairPos) { return v == null ? "" : (pairPos ? S8 : S9); }
+// Up 50% Monthly: standalone red warning (parabolic froth) when ≥20
+function clsUp50m(v) { return (v == null || v < 20) ? "" : S9; }
+// Down 50% Monthly: standalone green (oversold contrarian) when ≥20
+function clsDn50m(v) { return (v == null || v < 20) ? "" : S8; }
+// 34-Day pair: pure binary
+function clsUp13(v, pairPos) { return v == null ? "" : (pairPos ? S8 : S9); }
+function clsDn13(v, pairPos) { return v == null ? "" : (pairPos ? S8 : S9); }
 // 10x ATR Ext: s5=yellow warning at ≥20, deeper yellow at ≥50
 function clsAtrExt(v, clickable) {
   const click = clickable ? "cursor-pointer underline decoration-dotted underline-offset-2" : "";
@@ -680,9 +672,9 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             {/* Stocks Up 4%+ */}
             <th className="bg-amber-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-amber-400">
               <ColTip tiers={[
-                { swatch: "bg-emerald-500", desc: "≥ 600 — Breadth Thrust. Major buy signal. Institutional broad-buying across the market." },
-                { swatch: "bg-emerald-800", desc: "≥ 400 — Thrust day. Strong broad buying; safe to add longs." },
-                { swatch: "bg-zinc-700",    desc: "< 400 — Normal breadth." },
+                { swatch: "bg-green-800",  desc: "UP day + ≥ 300 — Strong breadth thrust. Broad institutional buying across the market." },
+                { swatch: "bg-green-600",  desc: "UP day + < 300 — Positive breadth. Bulls in control; safe to hold longs." },
+                { swatch: "text-rose-400 border border-rose-400", desc: "DOWN day — Bears winning the 4% tape regardless of count." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"Stocks Up\n4%+ Today"}</div>
               </ColTip>
@@ -690,9 +682,9 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             {/* Stocks Down 4%+ */}
             <th className="bg-amber-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-amber-400">
               <ColTip tiers={[
-                { swatch: "bg-rose-700",  desc: "≥ 400 — Panic / capitulation. Fear is extreme; can paradoxically mark a short-term bottom." },
-                { swatch: "bg-rose-950",  desc: "≥ 200 — Elevated selling. Market under distribution." },
-                { swatch: "bg-zinc-700",  desc: "< 200 — Normal selling." },
+                { swatch: "bg-red-600",   desc: "DOWN day + ≥ 300 — Panic / capitulation. Extreme fear; can mark a short-term bottom." },
+                { swatch: "text-rose-400 border border-rose-400", desc: "DOWN day + < 300 — Elevated selling, but not extreme." },
+                { swatch: "bg-green-600", desc: "UP day — Down count is low; bulls dominate." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"Stocks Down\n4%+ Today"}</div>
               </ColTip>
@@ -700,11 +692,9 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             {/* 5 Day Ratio */}
             <th className="bg-amber-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-amber-400">
               <ColTip tiers={[
-                { swatch: "bg-emerald-500", desc: "≥ 2.0 — Strongly bullish. Stay fully long." },
-                { swatch: "bg-emerald-800", desc: "≥ 1.5 — Bullish momentum confirmed." },
-                { swatch: "bg-zinc-700",    desc: "0.5–1.5 — Neutral." },
-                { swatch: "bg-rose-600",    desc: "≤ 0.5 — Bearish. Reduce exposure." },
-                { swatch: "bg-rose-950",    desc: "≤ 0.3 — Strong bear momentum. Exit longs." },
+                { swatch: "bg-green-600", desc: "≥ 2.0 — Strongly bullish 5-day tape. Stay fully long." },
+                { swatch: "bg-zinc-700",  desc: "0.5–2.0 — Neutral range." },
+                { swatch: "bg-red-600",   desc: "≤ 0.50 — Bearish 5-day tape. Reduce exposure." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"5 Day\nRatio"}</div>
               </ColTip>
@@ -712,11 +702,9 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             {/* 10 Day Ratio */}
             <th className="bg-amber-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-amber-400">
               <ColTip tiers={[
-                { swatch: "bg-emerald-500", desc: "≥ 2.0 — Strongly bullish. Stay fully long." },
-                { swatch: "bg-emerald-800", desc: "≥ 1.5 — Bullish momentum confirmed." },
-                { swatch: "bg-zinc-700",    desc: "0.5–1.5 — Neutral." },
-                { swatch: "bg-rose-600",    desc: "≤ 0.5 — Bearish. Reduce exposure." },
-                { swatch: "bg-rose-950",    desc: "≤ 0.3 — Strong bear momentum. Exit longs." },
+                { swatch: "bg-green-600", desc: "≥ 2.0 — Strongly bullish 10-day tape. Stay fully long." },
+                { swatch: "bg-zinc-700",  desc: "0.5–2.0 — Neutral range." },
+                { swatch: "bg-red-600",   desc: "≤ 0.50 — Bearish 10-day tape. Reduce exposure." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"10 Day\nRatio"}</div>
               </ColTip>
@@ -724,9 +712,8 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             {/* Up 25%+ Quarter */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-emerald-600", desc: "≥ 2000 — Very strong quarterly trend. Many stocks in powerful upswings." },
-                { swatch: "bg-emerald-900", desc: "≥ 1500 — Healthy quarterly breadth." },
-                { swatch: "bg-zinc-700",    desc: "< 1500 — Normal." },
+                { swatch: "bg-green-600", desc: "Up25q > Down25q — Quarterly breadth positive. Pair turns GREEN; bull market structural." },
+                { swatch: "bg-red-600",   desc: "Down25q > Up25q — Quarterly breadth negative. Pair turns RED; bear market structural." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"Stocks Up\n25%+ in a\nQuarter"}</div>
               </ColTip>
@@ -734,9 +721,8 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             {/* Down 25%+ Quarter */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-rose-600",   desc: "≥ 1100 — Many stocks in quarterly downtrend. Bearish market structure." },
-                { swatch: "bg-rose-400",   desc: "Dn > Up — Entire row turns rose; signals bear market regime." },
-                { swatch: "bg-zinc-700",   desc: "< 950 — Normal." },
+                { swatch: "bg-green-600", desc: "Up25q > Down25q — Both quarterly columns show green (pair is bullish)." },
+                { swatch: "bg-red-600",   desc: "Down25q > Up25q — Both quarterly columns show red (pair is bearish)." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"Stocks Down\n25%+ in a\nQuarter"}</div>
               </ColTip>
@@ -744,9 +730,8 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             {/* Up 25%+ Month */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-emerald-600", desc: "≥ 280 — Strong monthly breadth. Bull run in full force." },
-                { swatch: "bg-emerald-900", desc: "≥ 200 — Healthy monthly trend." },
-                { swatch: "bg-zinc-700",    desc: "< 200 — Normal." },
+                { swatch: "bg-green-600", desc: "Up25m > Down25m — Monthly breadth positive. Pair turns GREEN." },
+                { swatch: "bg-red-600",   desc: "Down25m > Up25m — Monthly breadth negative. Pair turns RED." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"Stocks Up\n25%+ in a\nMonth"}</div>
               </ColTip>
@@ -754,9 +739,8 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             {/* Down 25%+ Month */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-rose-600", desc: "≥ 160 — Elevated monthly downtrend breadth. Many stocks breaking monthly lows." },
-                { swatch: "bg-rose-400", desc: "≥ 120 — Distribution broadening." },
-                { swatch: "bg-zinc-700", desc: "< 120 — Normal." },
+                { swatch: "bg-green-600", desc: "Up25m > Down25m — Both monthly columns show green (pair is bullish)." },
+                { swatch: "bg-red-600",   desc: "Down25m > Up25m — Both monthly columns show red (pair is bearish)." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"Stocks Down\n25%+ in a\nMonth"}</div>
               </ColTip>
@@ -764,9 +748,8 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             {/* Up 50%+ Month */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-amber-700", desc: "≥ 80 — PARABOLIC / FROTHY. Many stocks up 50%+ in one month = speculation running hot. CAUTION signal." },
-                { swatch: "bg-amber-900", desc: "≥ 60 — Elevated speculative activity." },
-                { swatch: "bg-zinc-700",  desc: "< 60 — Normal." },
+                { swatch: "bg-red-600",  desc: "≥ 20 — PARABOLIC FROTH WARNING. Many stocks up 50%+ in a month = speculation extreme. Reduce risk." },
+                { swatch: "bg-zinc-700", desc: "< 20 — Normal. No parabolic froth." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"Stocks Up\n50%+ in a\nMonth"}</div>
               </ColTip>
@@ -774,9 +757,8 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             {/* Down 50%+ Month */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-rose-900", desc: "≥ 35 — Many stocks in free-fall. Severe bear market or sector crash underway." },
-                { swatch: "bg-rose-700", desc: "≥ 25 — Elevated selling pressure." },
-                { swatch: "bg-zinc-700", desc: "< 25 — Normal." },
+                { swatch: "bg-green-600", desc: "≥ 20 — OVERSOLD CONTRARIAN SIGNAL. Many stocks down 50%+ = extreme washout. Look for bottom." },
+                { swatch: "bg-zinc-700",  desc: "< 20 — Normal." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"Stocks Down\n50%+ in a\nMonth"}</div>
               </ColTip>
@@ -784,9 +766,8 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             {/* Up 13%+ 34 Days */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-emerald-600", desc: "≥ 1850 — Strong medium-term trend. Many stocks making 34-day breakouts." },
-                { swatch: "bg-emerald-900", desc: "≥ 1700 — Healthy 34-day momentum." },
-                { swatch: "bg-zinc-700",    desc: "≥ 1550 — Moderate 34-day trend activity." },
+                { swatch: "bg-green-600", desc: "Up13 > Down13 — 34-day breadth positive. Pair turns GREEN; medium-term momentum bullish." },
+                { swatch: "bg-red-600",   desc: "Down13 > Up13 — 34-day breadth negative. Pair turns RED; medium-term momentum bearish." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"Stocks Up\n13%+ in\n34 Days"}</div>
               </ColTip>
@@ -794,9 +775,8 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             {/* Down 13%+ 34 Days */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-rose-900", desc: "≥ 1750 — Many stocks breaking down over 34 days. Momentum deteriorating broadly." },
-                { swatch: "bg-rose-700", desc: "≥ 1400 — Elevated 34-day downtrend." },
-                { swatch: "bg-zinc-700", desc: "≥ 1300 — Moderate downside momentum." },
+                { swatch: "bg-green-600", desc: "Up13 > Down13 — Both 34-day columns show green (pair is bullish)." },
+                { swatch: "bg-red-600",   desc: "Down13 > Up13 — Both 34-day columns show red (pair is bearish)." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"Stocks Down\n13%+ in\n34 Days"}</div>
               </ColTip>
@@ -808,9 +788,9 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             const isLatest = r.date === latestDate;
             // Each column pair uses its own net-delta to determine green/red palette
             const netPos    = r.up_4_pct   != null && r.down_4_pct   != null ? r.up_4_pct   > r.down_4_pct   : true;
-            const netPosQ   = r.up_25_q    != null && r.down_25_q    != null ? r.up_25_q    > r.down_25_q    : netPos;
-            const netPosM   = r.up_25_m    != null && r.down_25_m    != null ? r.up_25_m    > r.down_25_m    : netPos;
-            const netPos34  = r.up_13_34d  != null && r.down_13_34d  != null ? r.up_13_34d  > r.down_13_34d  : netPos;
+            const pairPosQ  = r.up_25_q    != null && r.down_25_q    != null ? r.up_25_q    > r.down_25_q    : netPos;
+            const pairPosM  = r.up_25_m    != null && r.down_25_m    != null ? r.up_25_m    > r.down_25_m    : netPos;
+            const pairPos34 = r.up_13_34d  != null && r.down_13_34d  != null ? r.up_13_34d  > r.down_13_34d  : netPos;
             const bearish   = !netPos;
 
             // Clickable cell wrapper
@@ -856,14 +836,14 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                 </td>
 
                 {/* Secondary Breadth ── ── ── ── ── ── ── ── ── ── ── ── */}
-                {cell("up_25_q",     fmtN(r.up_25_q),     clsUp25q(r.up_25_q,    netPosQ))}
-                {cell("down_25_q",   fmtN(r.down_25_q),   clsDn25q(r.down_25_q,  netPosQ))}
-                {cell("up_25_m",     fmtN(r.up_25_m),     clsUp25m(r.up_25_m,    netPosM))}
-                {cell("down_25_m",   fmtN(r.down_25_m),   clsDn25m(r.down_25_m,  netPosM))}
+                {cell("up_25_q",     fmtN(r.up_25_q),     clsUp25q(r.up_25_q,    pairPosQ))}
+                {cell("down_25_q",   fmtN(r.down_25_q),   clsDn25q(r.down_25_q,  pairPosQ))}
+                {cell("up_25_m",     fmtN(r.up_25_m),     clsUp25m(r.up_25_m,    pairPosM))}
+                {cell("down_25_m",   fmtN(r.down_25_m),   clsDn25m(r.down_25_m,  pairPosM))}
                 {cell("up_50_m",     fmtN(r.up_50_m),     clsUp50m(r.up_50_m))}
                 {cell("down_50_m",   fmtN(r.down_50_m),   clsDn50m(r.down_50_m))}
-                {cell("up_13_34d",   fmtN(r.up_13_34d),   clsUp13(r.up_13_34d,   netPos34))}
-                {cell("down_13_34d", fmtN(r.down_13_34d), clsDn13(r.down_13_34d, netPos34))}
+                {cell("up_13_34d",   fmtN(r.up_13_34d),   clsUp13(r.up_13_34d,   pairPos34))}
+                {cell("down_13_34d", fmtN(r.down_13_34d), clsDn13(r.down_13_34d, pairPos34))}
 
                 {/* 10x ATR Ext — amber warning when many stocks extended */}
                 <td
