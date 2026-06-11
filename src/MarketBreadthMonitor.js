@@ -267,20 +267,17 @@ const AnalysisPanel = memo(function AnalysisPanel({ row }) {
 const STOCKBEE_CONTEXT = `
 You are analysing market breadth data the way Pradeep Bonde (Stockbee) would read it.
 Stockbee's colour thresholds for notable readings:
-  - Up 4%+  ≥400 = healthy buying thrust; ≥600 = extreme thrust (very bullish)
-  - Down 4%+ ≥200 = distribution pressure; ≥400 = heavy selling (bearish)
-  - 5D / 10D Ratio: ≥2.0 = strong bull trend; ≥1.5 = bullish; ≤0.5 = bearish; ≤0.3 = very bearish
-  - Up 25% Quarterly: rising count = momentum universe expanding (bullish)
-  - Down 25% Quarterly: rising count = momentum breaking down
-  - Up 25% Monthly: broad participation; high = bull trend healthy
-  - Down 25% Monthly: rising = distribution broadening
-  - Up 50% Monthly ≥50 = hot market; ≥100 = frothy / extended (caution signal, not bullish)
-  - Down 50% Monthly ≥30 = panic / washout (watch for reversal)
-  - Up 13% 34-Day: medium-term momentum; acceleration = stage-2 breakouts firing
-  - Down 13% 34-Day: rising = intermediate downtrend widening
-  - 10x ATR Ext ≥20 = market getting extended (amber warning); ≥50 = extreme extension (deep amber — fade risk)
+  - Up 4%+  ≥300 = healthy buying thrust (highlighted green); UP day with up4 > dn4 is bullish
+  - Down 4%+ ≥300 = heavy selling / capitulation (highlighted red); DOWN day with dn4 > up4 is bearish
+  - 5D / 10D Ratio: ≥2.0 = strong bull trend; ≤0.5 = bearish
+  - Up 25% Quarterly vs Down 25% Quarterly: compare the pair — up > dn = bullish regime; dn > up = bearish regime
+  - Up 25% Monthly vs Down 25% Monthly: compare the pair — up > dn = bullish; dn > up = bearish
+  - Up 50% Monthly ≥20 = parabolic froth warning (too many stocks extended — caution signal, not bullish)
+  - Down 50% Monthly ≥20 = extreme washout / oversold contrarian signal (watch for reversal)
+  - Up 13% 34-Day vs Down 13% 34-Day: compare the pair — up > dn = medium-term bullish; dn > up = bearish
+  - 10x ATR Ext ≥20 = market getting extended (amber warning); ≥50 = extreme extension (fade risk)
   - % above 50 DMA < 30% = oversold / bearish; > 80% = extended / overbought; 40–70% = healthy bull
-  - T2108 ≤20 = deeply oversold — historical buy signal (cyan); ≥80 = overbought warning
+  - T2108 ≤20 = deeply oversold — historical buy signal; ≥80 = overbought warning
 `.trim();
 
 async function callGemini(rows) {
