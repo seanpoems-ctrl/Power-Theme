@@ -1,6 +1,6 @@
 {
-  "generated_at": "June 10, 2026 (18:53 EDT)",
-  "session": "Post-Market",
+  "generated_at": "June 11, 2026 (08:45 EDT)",
+  "session": "Pre-Market",
   "global_snapshot": [
     {
       "label": "S&P 500",
@@ -16,15 +16,15 @@
     },
     {
       "label": "VIX",
-      "price": 22.22,
-      "change": 2.35,
+      "price": 21.54,
+      "change": -0.68,
       "change_pct": null,
       "zone_label": "Elevated"
     },
     {
       "label": "10Y Yield",
       "price": 4.54,
-      "change": 0.01,
+      "change": -0.01,
       "change_pct": null,
       "trend_label": "Stable"
     }
@@ -32,18 +32,18 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 65416.63,
-      "change_pct": 2.17
+      "price": 64217.27,
+      "change_pct": 0.06
     },
     "dax": {
       "label": "DAX",
-      "price": 24433.06,
-      "change_pct": -0.74
+      "price": 24132.62,
+      "change_pct": -0.26
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10254.81,
-      "change_pct": 0.27
+      "price": 10317.35,
+      "change_pct": 0.61
     }
   },
   "macro_breadth": {
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "US Sell-Off / Elevated Volatility",
+  "mood": "Risk-Off / Broad US Weakness",
   "analysis": {
-    "action_line": "VIX 22.22 Elevated + 50.8% S&P 500 stocks above SMA50 breadth + mixed global tape → trade RS leaders selectively near support.",
-    "analysis_para1": "Despite a strong Nikkei 225 (+2.17%) and positive FTSE 100 (+0.27%), US markets experienced a notable sell-off today, contrasting with a weaker DAX (-0.74%). The S&P 500's decline to 7266.99 occurs with S&P 500 stocks above SMA50 at 50.8% and S&P stocks above SMA200 at 60.1%, indicating moderate underlying health but a lack of widespread participation in today's downturn. The BAML High Yield Spread's unknown regime adds a layer of uncertainty regarding broader credit conditions, making it difficult to assess systemic risk beyond the equity markets.",
-    "analysis_para2": "The current elevated VIX at 22.22 signals increased volatility, warranting a defensive posture. For the S&P 500, a potential support level to monitor is around the 7200 mark, with resistance at today's open around 7390. Given the moderate breadth, a sustained rebound would require a clear break above resistance on increasing volume and improving S&P 500 stocks above SMA50. A retest of the VIX below 20 would also signal a reduction in immediate market anxiety. Traders should focus on managing risk and waiting for confirmation before aggressive new long positions.",
-    "technical_signal": "No reversal pattern confirmed yet. The significant daily declines in the S&P 500 and Nasdaq 100, coupled with an elevated VIX, suggest continued downside potential or consolidation before a clear bullish reversal signal emerges.",
+    "action_line": "VIX 21.54 Elevated + 50.8% S&P 500 stocks above SMA50 breadth + mixed global tape → trade RS leaders selectively near support.",
+    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 showing a slight gain of +0.06% and the FTSE 100 up a healthy +0.61%, while the DAX registers a modest -0.26% decline. In the US, the 10-year yield remains stable at 4.54%, providing a consistent backdrop amidst equity turbulence. However, the BAML High Yield Spread data is unavailable, preventing a clear assessment of the credit regime. US market breadth, though not strong, shows 50.8% of S&P 500 stocks above SMA50 and 60.1% of S&P stocks above SMA200, suggesting some underlying resilience despite today's broad market sell-off.",
+    "analysis_para2": "With both the S&P 500 and Nasdaq 100 experiencing significant pre-market declines of -1.62% and -1.98% respectively, a cautious approach is warranted. Traders should monitor initial market opens for signs of capitulation or stabilization around key psychological support levels, particularly the prior day's close for potential bounces. The elevated VIX at 21.54 signals increased volatility, implying that deep corrections could be swift but also present opportunities for counter-trend reversals. Focus should remain on identifying relative strength leaders from resilient themes, watching for entries on pullbacks to short-term moving averages or established support zones within their uptrends. Avoid chasing weakness in indices; instead, prioritize selective long entries on confirmed strength within strong individual names.",
+    "technical_signal": "No reversal pattern confirmed yet. The sharp pre-market declines across major indices indicate strong selling pressure without immediate signs of an intraday reversal signal.",
     "ticker_intel": [
       {
         "ticker": "VSH",
         "company": "Vishay Intertechnology, Inc.",
         "grade": "A+",
-        "reason": "Vishay Intertechnology, Inc. demonstrates exceptional leadership with RS=99 and remarkable 1-month return of +71.0%, making it a prime candidate for relative strength outperformance in the current semiconductor-led market environment."
+        "reason": "Vishay Intertechnology, Inc. demonstrates exceptional relative strength at 98 and a robust +56.9% one-month return, making it a prime candidate in the resilient Semiconductors theme within a cautious market."
       },
       {
-        "ticker": "ARM",
-        "company": "Arm Holdings plc",
+        "ticker": "DELL",
+        "company": "Dell Technologies Inc.",
         "grade": "A",
-        "reason": "Arm Holdings plc exhibits strong relative strength with RS=99 and robust 1-month gain of +52.3%, positioning it as a key beneficiary of sustained innovation within the high-demand semiconductor sector."
+        "reason": "Dell Technologies Inc. exhibits strong relative strength at 97 and a substantial +49.7% one-month gain, aligning with the robust Hardware theme favored in the current selective trading environment."
       },
       {
-        "ticker": "CIFR",
-        "company": "Cipher Digital Inc.",
+        "ticker": "TIGO",
+        "company": "Millicom International Cellular S.A.",
         "grade": "C",
-        "reason": "Cipher Digital Inc., despite its high RS=99, shows comparatively weaker 1-month (+12.1%) and 3-month (+65.0%) performance versus its Neocloud peers, suggesting it may be a relative laggard susceptible to deeper pullbacks in a risk-off market."
+        "reason": "Millicom International Cellular S.A., despite a decent +13.7% one-month return, exhibits the lowest relative strength at 95 and a comparatively weaker +28.7% three-month performance among leaders, making it less compelling during broad market weakness."
       }
     ]
   }
