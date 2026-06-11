@@ -543,12 +543,11 @@ function clsDn25q(v) {
   if (v >= 950)   return "text-rose-400";
   return "";
 }
-// Up 25% Monthly — data range ~126–451 (thresholds calibrated to actual values)
+// Up 25% Monthly — data range ~126–451; green bg at ≥280 (strong), ≥200 (moderate)
 function clsUp25m(v) {
   if (v == null)  return "";
-  if (v >= 350)   return "bg-emerald-900/40 text-emerald-200 font-semibold";
-  if (v >= 250)   return "text-emerald-300";
-  if (v >= 180)   return "text-emerald-400/80";
+  if (v >= 280)   return "bg-emerald-900/50 text-emerald-200 font-semibold";
+  if (v >= 200)   return "bg-emerald-900/30 text-emerald-300";
   return "";
 }
 // Down 25% Monthly — data range ~46–198
@@ -558,11 +557,11 @@ function clsDn25m(v) {
   if (v >= 120)  return "text-rose-400";
   return "";
 }
-// Up 50% Monthly — data range ~28–118; amber at ≥80 (parabolic signal)
+// Up 50% Monthly — data range ~28–118; amber bg at ≥80 (parabolic), text at ≥60
 function clsUp50m(v) {
   if (v == null) return "";
   if (v >= 80)   return "bg-amber-800/50 text-amber-100 font-bold";
-  if (v >= 50)   return "text-amber-300 font-semibold";
+  if (v >= 60)   return "text-amber-300 font-semibold";
   return "";
 }
 // Down 50% Monthly — data range ~16–40; rose when ≥30
@@ -572,19 +571,19 @@ function clsDn50m(v) {
   if (v >= 25)   return "text-rose-400";
   return "";
 }
-// Up 13%+ 34-Day — data range ~1419–2631
+// Up 13%+ 34-Day — data range ~1419–2631; green bg at ≥1850, text at ≥1700, dim at ≥1550
 function clsUp13(v) {
   if (v == null) return "";
-  if (v >= 2200) return "bg-emerald-900/40 text-emerald-200 font-semibold";
-  if (v >= 1800) return "text-emerald-300";
-  if (v >= 1600) return "text-emerald-400/80";
+  if (v >= 1850) return "bg-emerald-900/40 text-emerald-200 font-semibold";
+  if (v >= 1700) return "text-emerald-300";
+  if (v >= 1550) return "text-emerald-400/80";
   return "";
 }
-// Down 13%+ 34-Day — data range ~854–1898
+// Down 13%+ 34-Day — data range ~854–1898; rose bg at ≥1750, text at ≥1400, dim at ≥1300
 function clsDn13(v) {
   if (v == null) return "";
   if (v >= 1750) return "bg-rose-900/50 text-rose-200 font-semibold";
-  if (v >= 1500) return "text-rose-300";
+  if (v >= 1400) return "text-rose-300";
   if (v >= 1300) return "text-rose-400/80";
   return "";
 }
@@ -774,9 +773,9 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             {/* Up 25%+ Month */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-emerald-600", desc: "≥ 350 — Very strong monthly breadth. Bull run in full force." },
-                { swatch: "bg-emerald-900", desc: "≥ 250 — Healthy monthly trend." },
-                { swatch: "bg-zinc-700",    desc: "< 180 — Normal." },
+                { swatch: "bg-emerald-600", desc: "≥ 280 — Strong monthly breadth. Bull run in full force." },
+                { swatch: "bg-emerald-900", desc: "≥ 200 — Healthy monthly trend." },
+                { swatch: "bg-zinc-700",    desc: "< 200 — Normal." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"Stocks Up\n25%+ in a\nMonth"}</div>
               </ColTip>
@@ -795,8 +794,8 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
                 { swatch: "bg-amber-700", desc: "≥ 80 — PARABOLIC / FROTHY. Many stocks up 50%+ in one month = speculation running hot. CAUTION signal." },
-                { swatch: "bg-amber-900", desc: "≥ 50 — Elevated speculative activity." },
-                { swatch: "bg-zinc-700",  desc: "< 50 — Normal." },
+                { swatch: "bg-amber-900", desc: "≥ 60 — Elevated speculative activity." },
+                { swatch: "bg-zinc-700",  desc: "< 60 — Normal." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"Stocks Up\n50%+ in a\nMonth"}</div>
               </ColTip>
@@ -814,9 +813,9 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             {/* Up 13%+ 34 Days */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-emerald-600", desc: "≥ 2200 — Strong medium-term trend. Many stocks making 34-day breakouts." },
-                { swatch: "bg-emerald-900", desc: "≥ 1800 — Healthy 34-day momentum." },
-                { swatch: "bg-zinc-700",    desc: "< 1600 — Normal." },
+                { swatch: "bg-emerald-600", desc: "≥ 1850 — Strong medium-term trend. Many stocks making 34-day breakouts." },
+                { swatch: "bg-emerald-900", desc: "≥ 1700 — Healthy 34-day momentum." },
+                { swatch: "bg-zinc-700",    desc: "≥ 1550 — Moderate 34-day trend activity." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"Stocks Up\n13%+ in\n34 Days"}</div>
               </ColTip>
@@ -825,8 +824,8 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
                 { swatch: "bg-rose-900", desc: "≥ 1750 — Many stocks breaking down over 34 days. Momentum deteriorating broadly." },
-                { swatch: "bg-rose-700", desc: "≥ 1500 — Elevated 34-day downtrend." },
-                { swatch: "bg-zinc-700", desc: "< 1300 — Normal." },
+                { swatch: "bg-rose-700", desc: "≥ 1400 — Elevated 34-day downtrend." },
+                { swatch: "bg-zinc-700", desc: "≥ 1300 — Moderate downside momentum." },
               ]}>
                 <div className="leading-tight whitespace-pre-line">{"Stocks Down\n13%+ in\n34 Days"}</div>
               </ColTip>
