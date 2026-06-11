@@ -3585,20 +3585,10 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
           </div>
         </div>
       )}
-      {/* 3. Analysis & Lessons */}
-      {(analysis.analysis_para1 || analysis.analysis_para2) && (
-        <div>
-          <div className="text-[11px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">3. Analysis &amp; Lessons</div>
-          <div className="space-y-2">
-            {analysis.analysis_para1 && <p className="text-[11px] text-zinc-300 leading-relaxed">{analysis.analysis_para1}</p>}
-            {analysis.analysis_para2 && <p className="text-[11px] text-zinc-400 leading-relaxed">{analysis.analysis_para2}</p>}
-          </div>
-        </div>
-      )}
-      {/* 4. Ticker Intelligence */}
+      {/* 3. Ticker Intelligence */}
       {analysis.ticker_intel?.length > 0 && (
         <div>
-          <div className="text-[11px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">4. Ticker Intel</div>
+          <div className="text-[11px] text-zinc-600 uppercase tracking-widest mb-1.5 font-semibold">3. Ticker Intel</div>
           <div className="space-y-1.5">
             {analysis.ticker_intel.map((t, i) => (
               <div key={i} className="flex gap-1.5 items-start">
