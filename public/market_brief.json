@@ -1,29 +1,29 @@
 {
-  "generated_at": "June 11, 2026 (08:45 EDT)",
-  "session": "Pre-Market",
+  "generated_at": "June 11, 2026 (12:41 EDT)",
+  "session": "Market Hours",
   "global_snapshot": [
     {
       "label": "S&P 500",
-      "price": 7266.99,
-      "change": -119.66,
-      "change_pct": -1.62
+      "price": 7299.19,
+      "change": 32.2,
+      "change_pct": 0.44
     },
     {
       "label": "Nasdaq 100",
-      "price": 28508.03,
-      "change": -576.47,
-      "change_pct": -1.98
+      "price": 28854.9,
+      "change": 346.87,
+      "change_pct": 1.22
     },
     {
       "label": "VIX",
-      "price": 21.54,
-      "change": -0.68,
+      "price": 21.49,
+      "change": -0.73,
       "change_pct": null,
       "zone_label": "Elevated"
     },
     {
       "label": "10Y Yield",
-      "price": 4.54,
+      "price": 4.53,
       "change": -0.01,
       "change_pct": null,
       "trend_label": "Stable"
@@ -32,26 +32,26 @@
   "global_indices": {
     "nikkei": {
       "label": "Nikkei 225",
-      "price": 64217.27,
-      "change_pct": 0.06
+      "price": 64179.27,
+      "change_pct": -1.89
     },
     "dax": {
       "label": "DAX",
-      "price": 24132.62,
-      "change_pct": -0.26
+      "price": 24209.71,
+      "change_pct": 0.06
     },
     "ftse": {
       "label": "FTSE 100",
-      "price": 10317.35,
-      "change_pct": 0.61
+      "price": 10303.88,
+      "change_pct": 0.48
     }
   },
   "macro_breadth": {
     "credit_spread": null,
     "credit_date": null,
     "credit_regime": null,
-    "s5fi": 50.8,
-    "mmth": 60.1,
+    "s5fi": 53.9,
+    "mmth": 62.0,
     "breadth_flush": false,
     "generational": false,
     "breadth_status": ""
@@ -60,30 +60,30 @@
     "signal_detected": false,
     "description": ""
   },
-  "mood": "Risk-Off / Broad US Weakness",
+  "mood": "Selective Growth, Elevated Caution",
   "analysis": {
-    "action_line": "VIX 21.54 Elevated + 50.8% S&P 500 stocks above SMA50 breadth + mixed global tape → trade RS leaders selectively near support.",
-    "analysis_para1": "Global markets present a mixed picture this morning, with the Nikkei 225 showing a slight gain of +0.06% and the FTSE 100 up a healthy +0.61%, while the DAX registers a modest -0.26% decline. In the US, the 10-year yield remains stable at 4.54%, providing a consistent backdrop amidst equity turbulence. However, the BAML High Yield Spread data is unavailable, preventing a clear assessment of the credit regime. US market breadth, though not strong, shows 50.8% of S&P 500 stocks above SMA50 and 60.1% of S&P stocks above SMA200, suggesting some underlying resilience despite today's broad market sell-off.",
-    "analysis_para2": "With both the S&P 500 and Nasdaq 100 experiencing significant pre-market declines of -1.62% and -1.98% respectively, a cautious approach is warranted. Traders should monitor initial market opens for signs of capitulation or stabilization around key psychological support levels, particularly the prior day's close for potential bounces. The elevated VIX at 21.54 signals increased volatility, implying that deep corrections could be swift but also present opportunities for counter-trend reversals. Focus should remain on identifying relative strength leaders from resilient themes, watching for entries on pullbacks to short-term moving averages or established support zones within their uptrends. Avoid chasing weakness in indices; instead, prioritize selective long entries on confirmed strength within strong individual names.",
-    "technical_signal": "No reversal pattern confirmed yet. The sharp pre-market declines across major indices indicate strong selling pressure without immediate signs of an intraday reversal signal.",
+    "action_line": "VIX 21.49 Elevated + 53.9% S&P 500 stocks above SMA50 + Nikkei weakness → favor strong themes near support, manage risk.",
+    "analysis_para1": "The global tape presents a mixed picture, with the Nikkei 225 down 1.89% contrasting with marginal gains in the DAX (+0.06%) and FTSE 100 (+0.48%). Despite this divergence, US market breadth remains healthy, with 53.9% of S&P 500 stocks above their SMA50 and 62.0% above their SMA200. The BAML HY Spread regime remains unknown, limiting a definitive credit assessment. However, the S&P 500's modest gain of 0.44% today, alongside the Nasdaq 100's stronger 1.22% advance, suggests underlying strength particularly in growth-oriented sectors.",
+    "analysis_para2": "For a mechanical plan, monitor the S&P 500's current level of 7299.19 for continued consolidation above short-term moving averages. The elevated VIX at 21.49 signals persistent volatility, warranting cautious entry points. With strong relative strength leaders emerging from the Semiconductors and Hardware themes, look to initiate positions on minor pullbacks towards established support zones. A decisive break above today's highs for the S&P 500 could signal further upside, while a retreat below 7250 would suggest a need for reassessment and tighter stops.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 is trading higher, suggesting continuation rather than an immediate reversal.",
     "ticker_intel": [
+      {
+        "ticker": "ALAB",
+        "company": "Astera Labs, Inc.",
+        "grade": "A+",
+        "reason": "With RS=96 and a robust 1-month return of +59.6%, this Semiconductor leader demonstrates explosive growth, aligning with current market preference for high-momentum technology."
+      },
       {
         "ticker": "VSH",
         "company": "Vishay Intertechnology, Inc.",
-        "grade": "A+",
-        "reason": "Vishay Intertechnology, Inc. demonstrates exceptional relative strength at 98 and a robust +56.9% one-month return, making it a prime candidate in the resilient Semiconductors theme within a cautious market."
-      },
-      {
-        "ticker": "DELL",
-        "company": "Dell Technologies Inc.",
         "grade": "A",
-        "reason": "Dell Technologies Inc. exhibits strong relative strength at 97 and a substantial +49.7% one-month gain, aligning with the robust Hardware theme favored in the current selective trading environment."
+        "reason": "Sporting an RS=98 and a 1-month return of +56.9%, its impressive 3-month performance of +214.1% underscores its consistent leadership within the strong Semiconductor theme."
       },
       {
         "ticker": "TIGO",
         "company": "Millicom International Cellular S.A.",
         "grade": "C",
-        "reason": "Millicom International Cellular S.A., despite a decent +13.7% one-month return, exhibits the lowest relative strength at 95 and a comparatively weaker +28.7% three-month performance among leaders, making it less compelling during broad market weakness."
+        "reason": "With RS=95 and a comparatively modest 1-month return of +13.7%, TIGO significantly underperforms its peers in the current high-growth thematic environment, making it a less attractive option."
       }
     ]
   }
