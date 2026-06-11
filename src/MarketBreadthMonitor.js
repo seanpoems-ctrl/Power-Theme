@@ -523,26 +523,36 @@ function dvm(v, netPos, t1, t2, t3) {
   return netPos ? _g(v, t1, t2, t3) : _r(v, t1, t2, t3);
 }
 
-// Up 4%+ Today — data range ~81–631
-function clsUp4(v, netPos)   { return dvm(v, netPos, 450, 350, 250); }
-// Down 4%+ Today — data range ~98–972
-function clsDn4(v, netPos)   { return dvm(v, netPos, 700, 500, 300); }
-// Up 25% Quarterly — data range ~1253–1649
-function clsUp25q(v, netPos) { return dvm(v, netPos, 1580, 1500, 1420); }
-// Down 25% Quarterly — data range ~839–1190
-function clsDn25q(v, netPos) { return dvm(v, netPos, 1100, 980,  900); }
-// Up 25% Monthly — data range ~126–451
-function clsUp25m(v, netPos) { return dvm(v, netPos, 280,  200,  null); }
-// Down 25% Monthly — data range ~46–198
-function clsDn25m(v, netPos) { return dvm(v, netPos, 160,  120,  null); }
-// Up 50% Monthly — data range ~28–118
-function clsUp50m(v, netPos) { return dvm(v, netPos, 85,   60,   null); }
-// Down 50% Monthly — data range ~16–40
-function clsDn50m(v, netPos) { return dvm(v, netPos, 35,   25,   null); }
-// Up 13%+ 34-Day — data range ~1419–2631
-function clsUp13(v, netPos)  { return dvm(v, netPos, 1850, 1700, 1550); }
-// Down 13%+ 34-Day — data range ~854–1898
-function clsDn13(v, netPos)  { return dvm(v, netPos, 1750, 1500, 1300); }
+// Primary daily pair — netPos derived from up4 vs dn4
+function clsUp4(v, netPos)    { return dvm(v, netPos, 450, 350, 250); }
+function clsDn4(v, netPos)    { return dvm(v, netPos, 700, 500, 300); }
+
+// Quarterly pair — netPos derived from up_25_q vs dn_25_q (own pair delta)
+function clsUp25q(v, netPosQ) { return dvm(v, netPosQ, 1580, 1500, 1420); }
+function clsDn25q(v, netPosQ) { return dvm(v, netPosQ, 1100, 980,  900); }
+
+// Monthly 25% pair — netPos derived from up_25_m vs dn_25_m (own pair delta)
+function clsUp25m(v, netPosM) { return dvm(v, netPosM, 280, 200, null); }
+function clsDn25m(v, netPosM) { return dvm(v, netPosM, 160, 120, null); }
+
+// Up 50% Monthly — standalone YELLOW (s5): parabolic froth warning, not directional
+function clsUp50m(v) {
+  if (v == null) return "";
+  if (v >= 85) return "bg-yellow-500 text-black font-bold";
+  if (v >= 60) return "text-yellow-400 font-semibold";
+  return "";
+}
+// Down 50% Monthly — standalone RED (s9): crash/panic signal, no green version
+function clsDn50m(v) {
+  if (v == null) return "";
+  if (v >= 35) return "bg-red-700 text-white font-bold";
+  if (v >= 25) return "bg-red-900 text-red-100 font-semibold";
+  return "";
+}
+
+// 34-Day pair — netPos derived from up_13_34d vs dn_13_34d (own pair delta)
+function clsUp13(v, netPos34) { return dvm(v, netPos34, 1850, 1700, 1550); }
+function clsDn13(v, netPos34) { return dvm(v, netPos34, 1750, 1500, 1300); }
 // 10x ATR Ext: s5=yellow warning at ≥20, deeper yellow at ≥50
 function clsAtrExt(v, clickable) {
   const click = clickable ? "cursor-pointer underline decoration-dotted underline-offset-2" : "";
@@ -791,11 +801,12 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
         <tbody>
           {rows.map((r, i) => {
             const isLatest = r.date === latestDate;
-            // Net-delta check: up_4pct vs down_4pct determines green/red palette for entire row
-            const netPos   = r.up_4_pct != null && r.down_4_pct != null
-              ? r.up_4_pct > r.down_4_pct
-              : (r.up_25_q != null && r.down_25_q != null ? r.up_25_q >= r.down_25_q : true);
-            const bearish  = !netPos;
+            // Each column pair uses its own net-delta to determine green/red palette
+            const netPos    = r.up_4_pct   != null && r.down_4_pct   != null ? r.up_4_pct   > r.down_4_pct   : true;
+            const netPosQ   = r.up_25_q    != null && r.down_25_q    != null ? r.up_25_q    > r.down_25_q    : netPos;
+            const netPosM   = r.up_25_m    != null && r.down_25_m    != null ? r.up_25_m    > r.down_25_m    : netPos;
+            const netPos34  = r.up_13_34d  != null && r.down_13_34d  != null ? r.up_13_34d  > r.down_13_34d  : netPos;
+            const bearish   = !netPos;
 
             // Clickable cell wrapper
             const cell = (field, content, colorCls = "") => {
@@ -840,14 +851,14 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                 </td>
 
                 {/* Secondary Breadth ── ── ── ── ── ── ── ── ── ── ── ── */}
-                {cell("up_25_q",     fmtN(r.up_25_q),     clsUp25q(r.up_25_q,     netPos))}
-                {cell("down_25_q",   fmtN(r.down_25_q),   clsDn25q(r.down_25_q,   netPos))}
-                {cell("up_25_m",     fmtN(r.up_25_m),     clsUp25m(r.up_25_m,     netPos))}
-                {cell("down_25_m",   fmtN(r.down_25_m),   clsDn25m(r.down_25_m,   netPos))}
-                {cell("up_50_m",     fmtN(r.up_50_m),     clsUp50m(r.up_50_m,     netPos))}
-                {cell("down_50_m",   fmtN(r.down_50_m),   clsDn50m(r.down_50_m,   netPos))}
-                {cell("up_13_34d",   fmtN(r.up_13_34d),   clsUp13(r.up_13_34d,    netPos))}
-                {cell("down_13_34d", fmtN(r.down_13_34d), clsDn13(r.down_13_34d,  netPos))}
+                {cell("up_25_q",     fmtN(r.up_25_q),     clsUp25q(r.up_25_q,    netPosQ))}
+                {cell("down_25_q",   fmtN(r.down_25_q),   clsDn25q(r.down_25_q,  netPosQ))}
+                {cell("up_25_m",     fmtN(r.up_25_m),     clsUp25m(r.up_25_m,    netPosM))}
+                {cell("down_25_m",   fmtN(r.down_25_m),   clsDn25m(r.down_25_m,  netPosM))}
+                {cell("up_50_m",     fmtN(r.up_50_m),     clsUp50m(r.up_50_m))}
+                {cell("down_50_m",   fmtN(r.down_50_m),   clsDn50m(r.down_50_m))}
+                {cell("up_13_34d",   fmtN(r.up_13_34d),   clsUp13(r.up_13_34d,   netPos34))}
+                {cell("down_13_34d", fmtN(r.down_13_34d), clsDn13(r.down_13_34d, netPos34))}
 
                 {/* 10x ATR Ext — amber warning when many stocks extended */}
                 <td
