@@ -523,26 +523,30 @@ function dvm(v, netPos, t1, t2, t3) {
   return netPos ? _g(v, t1, t2, t3) : _r(v, t1, t2, t3);
 }
 
-// Primary daily pair — netPos derived from up4 vs dn4
-function clsUp4(v, netPos)    { return dvm(v, netPos, 450, 350, 250); }
-function clsDn4(v, netPos)    { return dvm(v, netPos, 700, 500, 300); }
+// Primary daily pair — actual range up:78–885 / dn:38–972
+// t2=310 captures 5/8 (319 up, off-green per reference); t1=450 for strong thrust days
+function clsUp4(v, netPos)    { return dvm(v, netPos,  450,  310, null); }
+function clsDn4(v, netPos)    { return dvm(v, netPos,  500,  350, null); }
 
-// Quarterly pair — netPos derived from up_25_q vs dn_25_q (own pair delta)
-function clsUp25q(v, netPosQ) { return dvm(v, netPosQ, 1580, 1500, 1420); }
-function clsDn25q(v, netPosQ) { return dvm(v, netPosQ, 1100, 980,  900); }
+// Quarterly pair — actual range up:777–1659 / dn:839–1657
+// t1 calibrated to top ~10% of values
+function clsUp25q(v, netPosQ) { return dvm(v, netPosQ, 1580, 1490, null); }
+function clsDn25q(v, netPosQ) { return dvm(v, netPosQ, 1450, 1200, null); }
 
-// Monthly 25% pair — netPos derived from up_25_m vs dn_25_m (own pair delta)
-function clsUp25m(v, netPosM) { return dvm(v, netPosM, 280, 200, null); }
-function clsDn25m(v, netPosM) { return dvm(v, netPosM, 160, 120, null); }
+// Monthly 25% pair — actual range up:67–451 / dn:46–361
+function clsUp25m(v, netPosM) { return dvm(v, netPosM,  280,  190, null); }
+function clsDn25m(v, netPosM) { return dvm(v, netPosM,  220,  150, null); }
 
 // Up 50% Monthly — standalone YELLOW (s5): parabolic froth warning, not directional
+// actual range: 12–118
 function clsUp50m(v) {
   if (v == null) return "";
   if (v >= 85) return "bg-yellow-500 text-black font-bold";
   if (v >= 60) return "text-yellow-400 font-semibold";
   return "";
 }
-// Down 50% Monthly — standalone RED (s9): crash/panic signal, no green version
+// Down 50% Monthly — standalone RED: crash/panic signal, no green version
+// actual range: 14–49
 function clsDn50m(v) {
   if (v == null) return "";
   if (v >= 35) return "bg-red-700 text-white font-bold";
@@ -550,9 +554,10 @@ function clsDn50m(v) {
   return "";
 }
 
-// 34-Day pair — netPos derived from up_13_34d vs dn_13_34d (own pair delta)
-function clsUp13(v, netPos34) { return dvm(v, netPos34, 1850, 1700, 1550); }
-function clsDn13(v, netPos34) { return dvm(v, netPos34, 1750, 1500, 1300); }
+// 34-Day pair — actual range up:819–2631 / dn:854–2516
+// t1 calibrated to top ~10% (~2100+); t2 to top ~25% (~1800+)
+function clsUp13(v, netPos34) { return dvm(v, netPos34, 2100, 1800, null); }
+function clsDn13(v, netPos34) { return dvm(v, netPos34, 2100, 1700, null); }
 // 10x ATR Ext: s5=yellow warning at ≥20, deeper yellow at ≥50
 function clsAtrExt(v, clickable) {
   const click = clickable ? "cursor-pointer underline decoration-dotted underline-offset-2" : "";
