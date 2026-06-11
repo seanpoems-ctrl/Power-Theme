@@ -11778,7 +11778,9 @@ const appScreenerMap = useMemo(() => {
           </main>
 
           {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
-          <aside className="w-[280px] flex-shrink-0"/>
+          <aside className="w-[280px] flex-shrink-0">
+            <ScannerBriefFeed briefData={briefData} newsData={newsData}/>
+          </aside>
 
         </div>
 
