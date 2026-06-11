@@ -1,36 +1,17 @@
 {
-  "last_checked": "June 10, 2026 (19:09 EDT)",
-  "has_alert": false,
-  "alerts": [],
+  "last_checked": "June 11, 2026 (12:02 EDT)",
+  "has_alert": true,
+  "alerts": [
+    {
+      "headline": "Elections advertising spend for 2026 expected to reach record high, outpacing presidential years",
+      "source": "CNBC",
+      "grade": "GOV",
+      "direction": "bullish",
+      "timestamp": "2026-06-11T12:02:05.572716-04:00",
+      "pub_time": "2026-06-11T12:00:01-04:00"
+    }
+  ],
   "seen_keys": [
-    {
-      "k": "micron marvell and broadcom sink leading chip stocks lower",
-      "ts": "2026-06-04T14:59:58.494310+00:00"
-    },
-    {
-      "k": "blackstone restricts flagship fund withdrawals as private asset fears reemerge",
-      "ts": "2026-06-04T14:59:58.494310+00:00"
-    },
-    {
-      "k": "investors can buy spacex early with coinbase perpetual futures on preipos",
-      "ts": "2026-06-04T14:59:58.494310+00:00"
-    },
-    {
-      "k": "former trump advisor john bolton agrees to plead guilty to retaining classified information ms now",
-      "ts": "2026-06-04T14:59:58.494310+00:00"
-    },
-    {
-      "k": "soaring stocks created 2 million new millionaires around the world last year",
-      "ts": "2026-06-04T14:59:58.494310+00:00"
-    },
-    {
-      "k": "oil prices fall 3 on report trump reluctant to restart iran war",
-      "ts": "2026-06-04T14:59:58.494310+00:00"
-    },
-    {
-      "k": "flesheating screwworm is confirmed in the us officials say",
-      "ts": "2026-06-04T14:59:58.494310+00:00"
-    },
     {
       "k": "longterm unemployment is surging in the us there are hidden costs for workers and the economy",
       "ts": "2026-06-04T17:49:41.951497+00:00"
@@ -494,10 +475,46 @@
     {
       "k": "citigroup shares outperform down market after trump endorsement",
       "ts": "2026-06-10T23:09:29.245314+00:00"
+    },
+    {
+      "k": "trump threatens to seize kharg island and other iran oil infrastructure",
+      "ts": "2026-06-11T16:02:06.287075+00:00"
+    },
+    {
+      "k": "iran threatens elon musks companies in middle east iranian state media",
+      "ts": "2026-06-11T16:02:06.287075+00:00"
+    },
+    {
+      "k": "oracle shares tumble 11 on increased capital raise cash concerns",
+      "ts": "2026-06-11T16:02:06.287075+00:00"
+    },
+    {
+      "k": "gold slumps to 6month low even as inflation fears rise heres why bullion is out of favor",
+      "ts": "2026-06-11T16:02:06.287075+00:00"
+    },
+    {
+      "k": "as trump sticks with pulte foreign surveillance program hurtles toward expiration",
+      "ts": "2026-06-11T16:02:06.287075+00:00"
+    },
+    {
+      "k": "elections advertising spend for 2026 expected to reach record high outpacing presidential years",
+      "ts": "2026-06-11T16:02:06.287075+00:00"
+    },
+    {
+      "k": "baldwin khanna propose new direct foreign investment review board to probe trumps deals",
+      "ts": "2026-06-11T16:02:06.287075+00:00"
+    },
+    {
+      "k": "spacex ipo won’t ‘break’ the bull market but investors are worried about what comes next",
+      "ts": "2026-06-11T16:02:06.287075+00:00"
+    },
+    {
+      "k": "melania trump announces a new savings account for youth in foster care",
+      "ts": "2026-06-11T16:02:06.287075+00:00"
     }
   ],
   "cost_analysis": {
-    "model": "gemini-2.0-flash-lite",
+    "model": "gemini-2.0-flash",
     "coverage": "24/7 (optimized for Malaysia timezone)",
     "scan_interval_minutes": 120,
     "scans_per_day": 12,
