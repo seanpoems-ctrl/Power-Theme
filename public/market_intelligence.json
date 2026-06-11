@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-06-11 07:05 ET",
+  "generated_at": "2026-06-11 10:49 ET",
   "phase": "PRE",
   "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 725.43,
-      "open": 733.39,
-      "high": 738.38,
-      "low": 725.33,
-      "close": 725.43,
-      "prev_open": 743.63,
-      "prev_close": 737.05,
-      "volume": 59800600,
-      "change_pct": -1.58
+      "price": 728.62,
+      "open": 728.76,
+      "high": 731.58,
+      "low": 726.36,
+      "close": 728.62,
+      "prev_open": 733.39,
+      "prev_close": 725.43,
+      "volume": 15201834,
+      "change_pct": 0.44
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 693.69,
-      "open": 701.66,
-      "high": 711.28,
-      "low": 692.93,
-      "close": 693.69,
-      "prev_open": 722.98,
-      "prev_close": 707.83,
-      "volume": 64507400,
-      "change_pct": -2.0
+      "price": 700.82,
+      "open": 699.29,
+      "high": 706.41,
+      "low": 696.82,
+      "close": 700.82,
+      "prev_open": 701.66,
+      "prev_close": 693.69,
+      "volume": 16713013,
+      "change_pct": 1.03
     },
     "^VIX": {
       "label": "VIX",
-      "price": 20.78,
+      "price": 21.55,
       "open": 21.25,
-      "high": 21.25,
+      "high": 21.85,
       "low": 20.53,
-      "close": 20.78,
+      "close": 21.55,
       "prev_open": 20.1,
       "prev_close": 22.22,
       "volume": 0,
-      "change_pct": -6.48
+      "change_pct": -3.02
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 89.15,
+      "price": 90.26,
       "open": 92.25,
       "high": 93.64,
-      "low": 88.75,
-      "close": 89.15,
+      "low": 88.63,
+      "close": 90.26,
       "prev_open": 89.4,
       "prev_close": 90.03,
-      "volume": 63667,
-      "change_pct": -0.98
+      "volume": 136147,
+      "change_pct": 0.26
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,26 +65,26 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24274.7,
+      "price": 24239.12,
       "open": 24205.16,
-      "high": 24280.98,
-      "low": 24155.9,
-      "close": 24274.7,
+      "high": 24327.69,
+      "low": 24080.64,
+      "close": 24239.12,
       "prev_open": 24507.4,
       "prev_close": 24195.31,
       "volume": 0,
-      "change_pct": 0.33
+      "change_pct": 0.18
     }
   },
   "fred": {
-    "hy_oas": 2.78,
+    "hy_oas": 2.8,
     "yield_curve": 0.46,
     "hy_oas_stale": false,
     "yield_curve_stale": true
   },
   "breadth": {
-    "s5fi": 50.8,
-    "mmth": 60.1
+    "s5fi": 54.7,
+    "mmth": 61.8
   },
   "regime": {
     "credit_status": "Complacent",
@@ -98,6 +98,36 @@
     }
   },
   "analysis": {
-    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "title": "Pre-Market Brief: June 11, 2026",
+    "mood_emoji": "📈",
+    "mood": "Tech-Led Optimism / Risk-On",
+    "narrative": "US equities are showing strength, led by technology names, with declining volatility and complacent credit spreads supporting continued risk appetite. Global markets are largely stable, reinforcing a constructive tone for the session.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 728.62 | +0.44% | ➡️ |\n| Nasdaq 100 ETF | 700.82 | +1.03% | 📈 |\n| VIX | 21.55 | -3.02% | 📉 |\n| Crude Oil | 90.26 | +0.26% | ➡️ |\n| Nikkei 225 | 64217.27 | +0.06% | ➡️ |\n| DAX | 24239.12 | +0.18% | ➡️ |",
+    "macro_section": "The High-Yield Credit Spread (BAMLH0A0HYM2) currently sits at 2.80%, indicating a Complacent regime, while the 10Y-2Y Yield Curve (T10Y2Y) is at +0.460 (cached), signifying a Normal / Steepening environment. These readings collectively suggest that institutional risk appetite remains robust, with no immediate signs of credit stress or recessionary concerns weighing on sentiment.",
+    "analysis_para1": "The global tape reflects a generally stable outlook, with the Nikkei 225 up marginally by +0.06% to 64217.27 and the DAX showing a modest gain of +0.18% to 24239.12. Crude Oil prices also ticked higher by +0.26% to $90.26 per barrel, indicating steady global demand. This broad-based calm, coupled with the Complacent 2.80% High-Yield Credit Spread in the US, implies a healthy appetite for risk among US investors, as external factors are not presently signaling significant headwinds.",
+    "analysis_para2": "Today's primary flow appears to be driven by a mechanical catalyst of continued positioning towards risk-on assets, particularly in the technology sector. The notable 3.02% decline in the VIX index, alongside the Nasdaq 100 ETF's robust +1.03% surge, suggests an unwinding of defensive hedges and a reallocation into growth-oriented names. This shift is likely fueled by sustained momentum from recent sessions and a lack of immediate negative macro catalysts, encouraging traders to increase exposure to higher-beta segments of the market.",
+    "analysis_para3": "For today's session, traders should monitor the Nasdaq 100 ETF around the 700.00 level as a psychological support, with the S&P 500 ETF's previous session high of 728.62 serving as a critical short-term resistance. A sustained break above 730.00 for the S&P 500 ETF could trigger further long entries, while a move below 725.00 might signal profit-taking. Risk-off thresholds include a VIX spike above 22.00 or a failure of tech leadership to hold gains; under such conditions, traders should consider reducing long exposure.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 stand at 54.7%, with S&P stocks above SMA200 at 61.8%, indicating a moderately healthy market breadth but not extended. Watch for a decisive move above yesterday's high or a breakdown below key intraday support levels to gauge directional conviction.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Google is expected to unveil significant AI advancements in its cloud platform, potentially expanding its enterprise market share."
+        },
+        {
+          "ticker": "CRM",
+          "company": "Salesforce Inc.",
+          "reason": "Salesforce announced a strategic partnership with a major global retailer to overhaul its customer experience platform, driving new growth."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Amazon continues to see steady e-commerce and AWS cloud growth, but recent headlines are a reiteration of existing trends rather than new catalysts."
+        }
+      ]
+    }
   }
 }
