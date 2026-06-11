@@ -515,7 +515,7 @@ const CLICKABLE_COLS = {
 // Monthly 50%: standalone contrarian — Up50m ≥20 = red froth; Dn50m ≥20 = green oversold
 // Ratios: standalone — ≥2.0 green, ≤0.50 red
 // ---------------------------------------------------------------------------
-const S7  = "text-rose-400";
+const S7  = "bg-rose-400 text-white font-semibold";
 const S8  = "bg-green-600 text-white font-semibold";
 const S9  = "bg-red-600 text-white font-semibold";
 const S10 = "bg-green-800 text-white font-semibold";
