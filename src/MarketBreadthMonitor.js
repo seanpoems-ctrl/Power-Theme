@@ -27,6 +27,13 @@ const GEMINI_CACHE_NS = "sbmm_gemini_v9";
 
 const BULLISH_FILTERS = new Set(["up4", "up25q", "up25m", "up50m", "up13_34", "above50dma"]);
 
+// NYSE early close days (1pm ET) — markets close early; date column highlighted yellow
+const EARLY_CLOSE_DATES = new Set([
+  "2024-07-03", "2024-11-29", "2024-12-24",
+  "2025-07-03", "2025-11-28", "2025-12-24",
+  "2026-07-02", "2026-11-27", "2026-12-24",
+]);
+
 // ---------------------------------------------------------------------------
 // WatchlistClipboard panel
 // ---------------------------------------------------------------------------
@@ -785,7 +792,8 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
         </thead>
         <tbody>
           {rows.map((r, i) => {
-            const isLatest = r.date === latestDate;
+            const isLatest     = r.date === latestDate;
+            const isEarlyClose = EARLY_CLOSE_DATES.has(r.date);
             // Each column pair uses its own net-delta to determine green/red palette
             const netPos    = r.up_4_pct   != null && r.down_4_pct   != null ? r.up_4_pct   > r.down_4_pct   : true;
             const pairPosQ  = r.up_25_q    != null && r.down_25_q    != null ? r.up_25_q    > r.down_25_q    : netPos;
@@ -818,9 +826,9 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                   isLatest ? "bg-gray-800/30" : ""
                 } ${bearish ? "text-rose-200/70" : "text-slate-300"}`}
               >
-                {/* DATE — sticky */}
-                <td className="sticky left-0 z-10 bg-gray-900 py-1 pr-3 font-mono text-xs whitespace-nowrap">
-                  {isLatest
+                {/* DATE — sticky; yellow bg on NYSE early-close days */}
+                <td className={`sticky left-0 z-10 py-1 pr-3 font-mono text-xs whitespace-nowrap ${isEarlyClose ? "bg-yellow-500 text-black font-semibold" : "bg-gray-900"}`}>
+                  {isLatest && !isEarlyClose
                     ? <span className="font-semibold text-emerald-400">{r.date_display}</span>
                     : r.date_display}
                 </td>
