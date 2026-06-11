@@ -107,8 +107,8 @@ No markdown, no explanation. JSON only."""
 
         client = genai.Client(api_key=GEMINI_API_KEY)
 
-        # Use 2.0 Flash Lite (cheapest current model) or 2.5 Flash for deeper analysis
-        model = "gemini-2.0-flash-lite" if USE_CHEAPER_MODEL else "gemini-2.5-flash"
+        # Use 2.0 Flash (cheapest current model) or 2.5 Flash for deeper analysis
+        model = "gemini-2.0-flash" if USE_CHEAPER_MODEL else "gemini-2.5-flash"
 
         response = client.models.generate_content(model=model, contents=prompt)
         raw = response.text.strip().replace("```json", "").replace("```", "").strip()
@@ -140,9 +140,9 @@ def check_tsm_nvda_gains() -> dict:
                 pct_gain = ((close_today - open_today) / open_today) * 100
 
                 signals[ticker] = {
-                    "price": round(close_today, 2),
-                    "gain_pct": round(pct_gain, 2),
-                    "signal": pct_gain > 2.0,
+                    "price": round(float(close_today), 2),
+                    "gain_pct": round(float(pct_gain), 2),
+                    "signal": bool(pct_gain > 2.0),
                 }
             else:
                 signals[ticker] = {"price": None, "gain_pct": None, "signal": False}
@@ -269,7 +269,7 @@ def main():
         "tsm": stock_signals.get("TSM", {}),
         "nvda": stock_signals.get("NVDA", {}),
         "buy_signal": buy_signal,
-        "cost_analysis": {"model": "gemini-2.0-flash-lite", "estimated_monthly_cost_usd": 0.01},
+        "cost_analysis": {"model": "gemini-2.0-flash", "estimated_monthly_cost_usd": 0.02},
     }
 
     # Save report

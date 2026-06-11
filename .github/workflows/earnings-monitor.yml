@@ -40,6 +40,6 @@ jobs:
         run: |
           git config user.name "seanpoems-ctrl"
           git config user.email "seanpoems-ctrl@github.com"
-          git add -A data/earnings_alerts/ public/earnings_reports/
+          git add data/earnings_alerts/ public/earnings_reports/ 2>/dev/null || true
           git commit -m "data: earnings monitoring $(date -u +'%Y-%m-%d %H:%M')" || true
           git push origin main || true
