@@ -758,75 +758,77 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                 { swatch: "bg-emerald-900", desc: "≥ 1500 — Healthy quarterly breadth." },
                 { swatch: "bg-zinc-700",    desc: "< 1500 — Normal." },
               ]}>
-                <div className="leading-tight whitespace-pre-line">{"Up 25%+\nQuarter"}</div>
+                <div className="leading-tight whitespace-pre-line">{"Stocks Up\n25%+ in a\nQuarter"}</div>
               </ColTip>
             </th>
             {/* Down 25%+ Quarter */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-rose-600",   desc: "≥ 1000 — Many stocks in quarterly downtrend. Bearish market structure." },
+                { swatch: "bg-rose-600",   desc: "≥ 1100 — Many stocks in quarterly downtrend. Bearish market structure." },
                 { swatch: "bg-rose-400",   desc: "Dn > Up — Entire row turns rose; signals bear market regime." },
-                { swatch: "bg-zinc-700",   desc: "< 1000 — Normal." },
+                { swatch: "bg-zinc-700",   desc: "< 950 — Normal." },
               ]}>
-                <div className="leading-tight whitespace-pre-line">{"Down 25%+\nQuarter"}</div>
+                <div className="leading-tight whitespace-pre-line">{"Stocks Down\n25%+ in a\nQuarter"}</div>
               </ColTip>
             </th>
             {/* Up 25%+ Month */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-emerald-600", desc: "≥ 2000 — Very strong monthly breadth. Bull run in full force." },
-                { swatch: "bg-emerald-900", desc: "≥ 1500 — Healthy monthly trend." },
-                { swatch: "bg-zinc-700",    desc: "< 1500 — Normal." },
+                { swatch: "bg-emerald-600", desc: "≥ 350 — Very strong monthly breadth. Bull run in full force." },
+                { swatch: "bg-emerald-900", desc: "≥ 250 — Healthy monthly trend." },
+                { swatch: "bg-zinc-700",    desc: "< 180 — Normal." },
               ]}>
-                <div className="leading-tight whitespace-pre-line">{"Up 25%+\nMonth"}</div>
+                <div className="leading-tight whitespace-pre-line">{"Stocks Up\n25%+ in a\nMonth"}</div>
               </ColTip>
             </th>
             {/* Down 25%+ Month */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-rose-600", desc: "≥ 500 — Elevated monthly downtrend breadth. Many stocks breaking monthly lows." },
-                { swatch: "bg-zinc-700", desc: "< 500 — Normal." },
+                { swatch: "bg-rose-600", desc: "≥ 160 — Elevated monthly downtrend breadth. Many stocks breaking monthly lows." },
+                { swatch: "bg-rose-400", desc: "≥ 120 — Distribution broadening." },
+                { swatch: "bg-zinc-700", desc: "< 120 — Normal." },
               ]}>
-                <div className="leading-tight whitespace-pre-line">{"Down 25%+\nMonth"}</div>
+                <div className="leading-tight whitespace-pre-line">{"Stocks Down\n25%+ in a\nMonth"}</div>
               </ColTip>
             </th>
             {/* Up 50%+ Month */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-cyan-900",  desc: "≥ 100 — PARABOLIC / FROTHY (teal). Many stocks up 50%+ in one month = speculation running hot. CAUTION signal — not bullish." },
-                { swatch: "bg-cyan-700",  desc: "≥ 50 — Elevated speculative activity." },
+                { swatch: "bg-amber-700", desc: "≥ 80 — PARABOLIC / FROTHY. Many stocks up 50%+ in one month = speculation running hot. CAUTION signal." },
+                { swatch: "bg-amber-900", desc: "≥ 50 — Elevated speculative activity." },
                 { swatch: "bg-zinc-700",  desc: "< 50 — Normal." },
               ]}>
-                <div className="leading-tight whitespace-pre-line">{"Up 50%+\nMonth"}</div>
+                <div className="leading-tight whitespace-pre-line">{"Stocks Up\n50%+ in a\nMonth"}</div>
               </ColTip>
             </th>
             {/* Down 50%+ Month */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-rose-900", desc: "≥ 50 — Many stocks in free-fall. Severe bear market or sector crash underway." },
-                { swatch: "bg-zinc-700", desc: "< 50 — Normal." },
+                { swatch: "bg-rose-900", desc: "≥ 35 — Many stocks in free-fall. Severe bear market or sector crash underway." },
+                { swatch: "bg-rose-700", desc: "≥ 25 — Elevated selling pressure." },
+                { swatch: "bg-zinc-700", desc: "< 25 — Normal." },
               ]}>
-                <div className="leading-tight whitespace-pre-line">{"Down 50%+\nMonth"}</div>
+                <div className="leading-tight whitespace-pre-line">{"Stocks Down\n50%+ in a\nMonth"}</div>
               </ColTip>
             </th>
             {/* Up 13%+ 34 Days */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-emerald-600", desc: "≥ 500 — Strong medium-term trend. Many stocks making 34-day breakouts." },
-                { swatch: "bg-emerald-900", desc: "≥ 300 — Moderate 34-day trend activity." },
-                { swatch: "bg-zinc-700",    desc: "< 300 — Normal." },
+                { swatch: "bg-emerald-600", desc: "≥ 2200 — Strong medium-term trend. Many stocks making 34-day breakouts." },
+                { swatch: "bg-emerald-900", desc: "≥ 1800 — Healthy 34-day momentum." },
+                { swatch: "bg-zinc-700",    desc: "< 1600 — Normal." },
               ]}>
-                <div className="leading-tight whitespace-pre-line">{"Up 13%+\n34 Days"}</div>
+                <div className="leading-tight whitespace-pre-line">{"Stocks Up\n13%+ in\n34 Days"}</div>
               </ColTip>
             </th>
             {/* Down 13%+ 34 Days */}
             <th className="bg-emerald-300 text-black text-[10px] font-semibold px-1 py-1 text-center border border-emerald-400">
               <ColTip tiers={[
-                { swatch: "bg-rose-900", desc: "≥ 300 — Many stocks breaking down over 34 days. Momentum deteriorating broadly." },
-                { swatch: "bg-rose-700", desc: "≥ 200 — Elevated 34-day downtrend." },
-                { swatch: "bg-zinc-700", desc: "< 200 — Normal." },
+                { swatch: "bg-rose-900", desc: "≥ 1750 — Many stocks breaking down over 34 days. Momentum deteriorating broadly." },
+                { swatch: "bg-rose-700", desc: "≥ 1500 — Elevated 34-day downtrend." },
+                { swatch: "bg-zinc-700", desc: "< 1300 — Normal." },
               ]}>
-                <div className="leading-tight whitespace-pre-line">{"Down 13%+\n34 Days"}</div>
+                <div className="leading-tight whitespace-pre-line">{"Stocks Down\n13%+ in\n34 Days"}</div>
               </ColTip>
             </th>
           </tr>
