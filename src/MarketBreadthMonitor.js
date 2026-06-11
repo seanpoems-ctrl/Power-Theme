@@ -502,90 +502,47 @@ const CLICKABLE_COLS = {
 // Cell color helpers — mirrors Stockbee Market Monitor conditional formatting
 // ---------------------------------------------------------------------------
 
-// Up 4%+ Today — data range ~81–631; s8=green thrust, s10=medium green moderate
-function clsUp4(v) {
+// ---------------------------------------------------------------------------
+// Dual-Variable Matrix — palette from net delta (up_4pct vs down_4pct),
+// intensity from each cell's absolute value within that palette.
+// ---------------------------------------------------------------------------
+function _g(v, t1, t2, t3) {  // green palette tiers
+  if (v >= t1) return "bg-green-600 text-white font-bold";
+  if (v >= t2) return "bg-green-800 text-green-100 font-semibold";
+  if (t3 != null && v >= t3) return "text-green-400";
+  return "";
+}
+function _r(v, t1, t2, t3) {  // red palette tiers
+  if (v >= t1) return "bg-red-700 text-white font-bold";
+  if (v >= t2) return "bg-red-900 text-red-100 font-semibold";
+  if (t3 != null && v >= t3) return "text-red-400";
+  return "";
+}
+function dvm(v, netPos, t1, t2, t3) {
   if (v == null) return "";
-  if (v >= 500)  return "bg-green-600 text-white font-bold";
-  if (v >= 400)  return "bg-green-800 text-green-100 font-semibold";
-  if (v >= 300)  return "text-green-400";
-  return "";
+  return netPos ? _g(v, t1, t2, t3) : _r(v, t1, t2, t3);
 }
-// Down 4%+ Today — data range ~98–972; s9=salmon red
-function clsDn4(v) {
-  if (v == null) return "";
-  if (v >= 500)  return "bg-red-700 text-white font-bold";
-  if (v >= 300)  return "bg-red-900 text-red-100 font-semibold";
-  if (v >= 150)  return "text-red-400";
-  return "";
-}
-// 5-day / 10-day ratio — data range ~0.6–3.0; s8=green high, s9=red low
-function clsRatio(v) {
-  if (v == null) return "";
-  if (v >= 2.5)  return "bg-green-600 text-white font-bold";
-  if (v >= 2.0)  return "bg-green-800 text-green-100 font-semibold";
-  if (v >= 1.5)  return "text-green-400";
-  if (v <= 0.65) return "bg-red-900 text-red-100 font-semibold";
-  if (v <= 0.8)  return "text-red-400";
-  return "";
-}
-// Up 25% Quarterly — data range ~1253–1649; s8=green
-function clsUp25q(v) {
-  if (v == null)  return "";
-  if (v >= 1600)  return "bg-green-700 text-white font-semibold";
-  if (v >= 1500)  return "text-green-400";
-  return "";
-}
-// Down 25% Quarterly — data range ~839–1190; s9=red
-function clsDn25q(v) {
-  if (v == null)  return "";
-  if (v >= 1100)  return "bg-red-800 text-white font-semibold";
-  if (v >= 950)   return "text-red-400";
-  return "";
-}
-// Up 25% Monthly — data range ~126–451; s8=green ≥280, s10=medium green ≥200
-function clsUp25m(v) {
-  if (v == null)  return "";
-  if (v >= 280)   return "bg-green-700 text-white font-semibold";
-  if (v >= 200)   return "bg-green-900 text-green-100";
-  return "";
-}
-// Down 25% Monthly — data range ~46–198; s9=red
-function clsDn25m(v) {
-  if (v == null) return "";
-  if (v >= 160)  return "bg-red-800 text-white font-semibold";
-  if (v >= 120)  return "text-red-400";
-  return "";
-}
-// Up 50% Monthly — data range ~28–118; s5=yellow parabolic signal
-function clsUp50m(v) {
-  if (v == null) return "";
-  if (v >= 80)   return "bg-yellow-500 text-black font-bold";
-  if (v >= 60)   return "text-yellow-400 font-semibold";
-  return "";
-}
-// Down 50% Monthly — data range ~16–40; s9=red
-function clsDn50m(v) {
-  if (v == null) return "";
-  if (v >= 35)   return "bg-red-800 text-white font-semibold";
-  if (v >= 25)   return "text-red-400";
-  return "";
-}
-// Up 13%+ 34-Day — data range ~1419–2631; s8=green
-function clsUp13(v) {
-  if (v == null) return "";
-  if (v >= 1850) return "bg-green-700 text-white font-semibold";
-  if (v >= 1700) return "text-green-400";
-  if (v >= 1550) return "text-green-600";
-  return "";
-}
-// Down 13%+ 34-Day — data range ~854–1898; s9=red
-function clsDn13(v) {
-  if (v == null) return "";
-  if (v >= 1750) return "bg-red-800 text-white font-semibold";
-  if (v >= 1400) return "text-red-400";
-  if (v >= 1300) return "text-red-600";
-  return "";
-}
+
+// Up 4%+ Today — data range ~81–631
+function clsUp4(v, netPos)   { return dvm(v, netPos, 450, 350, 250); }
+// Down 4%+ Today — data range ~98–972
+function clsDn4(v, netPos)   { return dvm(v, netPos, 700, 500, 300); }
+// Up 25% Quarterly — data range ~1253–1649
+function clsUp25q(v, netPos) { return dvm(v, netPos, 1580, 1500, 1420); }
+// Down 25% Quarterly — data range ~839–1190
+function clsDn25q(v, netPos) { return dvm(v, netPos, 1100, 980,  900); }
+// Up 25% Monthly — data range ~126–451
+function clsUp25m(v, netPos) { return dvm(v, netPos, 280,  200,  null); }
+// Down 25% Monthly — data range ~46–198
+function clsDn25m(v, netPos) { return dvm(v, netPos, 160,  120,  null); }
+// Up 50% Monthly — data range ~28–118
+function clsUp50m(v, netPos) { return dvm(v, netPos, 85,   60,   null); }
+// Down 50% Monthly — data range ~16–40
+function clsDn50m(v, netPos) { return dvm(v, netPos, 35,   25,   null); }
+// Up 13%+ 34-Day — data range ~1419–2631
+function clsUp13(v, netPos)  { return dvm(v, netPos, 1850, 1700, 1550); }
+// Down 13%+ 34-Day — data range ~854–1898
+function clsDn13(v, netPos)  { return dvm(v, netPos, 1750, 1500, 1300); }
 // 10x ATR Ext: s5=yellow warning at ≥20, deeper yellow at ≥50
 function clsAtrExt(v, clickable) {
   const click = clickable ? "cursor-pointer underline decoration-dotted underline-offset-2" : "";
@@ -834,7 +791,11 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
         <tbody>
           {rows.map((r, i) => {
             const isLatest = r.date === latestDate;
-            const bearish  = r.up_25_q != null && r.down_25_q != null && r.up_25_q < r.down_25_q;
+            // Net-delta check: up_4pct vs down_4pct determines green/red palette for entire row
+            const netPos   = r.up_4_pct != null && r.down_4_pct != null
+              ? r.up_4_pct > r.down_4_pct
+              : (r.up_25_q != null && r.down_25_q != null ? r.up_25_q >= r.down_25_q : true);
+            const bearish  = !netPos;
 
             // Clickable cell wrapper
             const cell = (field, content, colorCls = "") => {
@@ -869,8 +830,8 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                 </td>
 
                 {/* Primary Breadth ── ── ── ── ── ── ── ── ── ── ── ── ── */}
-                {cell("up_4_pct",   fmtN(r.up_4_pct),   clsUp4(r.up_4_pct))}
-                {cell("down_4_pct", fmtN(r.down_4_pct), clsDn4(r.down_4_pct))}
+                {cell("up_4_pct",   fmtN(r.up_4_pct),   clsUp4(r.up_4_pct,   netPos))}
+                {cell("down_4_pct", fmtN(r.down_4_pct), clsDn4(r.down_4_pct, netPos))}
                 <td className={`px-1 py-1 text-right whitespace-nowrap ${clsRatio(r.ratio_5d)}`}>
                   {fmtN(r.ratio_5d)}
                 </td>
@@ -879,14 +840,14 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
                 </td>
 
                 {/* Secondary Breadth ── ── ── ── ── ── ── ── ── ── ── ── */}
-                {cell("up_25_q",     fmtN(r.up_25_q),     clsUp25q(r.up_25_q))}
-                {cell("down_25_q",   fmtN(r.down_25_q),   clsDn25q(r.down_25_q) || (bearish ? "text-rose-400" : ""))}
-                {cell("up_25_m",     fmtN(r.up_25_m),     clsUp25m(r.up_25_m))}
-                {cell("down_25_m",   fmtN(r.down_25_m),   clsDn25m(r.down_25_m))}
-                {cell("up_50_m",     fmtN(r.up_50_m),     clsUp50m(r.up_50_m))}
-                {cell("down_50_m",   fmtN(r.down_50_m),   clsDn50m(r.down_50_m))}
-                {cell("up_13_34d",   fmtN(r.up_13_34d),   clsUp13(r.up_13_34d))}
-                {cell("down_13_34d", fmtN(r.down_13_34d), clsDn13(r.down_13_34d))}
+                {cell("up_25_q",     fmtN(r.up_25_q),     clsUp25q(r.up_25_q,     netPos))}
+                {cell("down_25_q",   fmtN(r.down_25_q),   clsDn25q(r.down_25_q,   netPos))}
+                {cell("up_25_m",     fmtN(r.up_25_m),     clsUp25m(r.up_25_m,     netPos))}
+                {cell("down_25_m",   fmtN(r.down_25_m),   clsDn25m(r.down_25_m,   netPos))}
+                {cell("up_50_m",     fmtN(r.up_50_m),     clsUp50m(r.up_50_m,     netPos))}
+                {cell("down_50_m",   fmtN(r.down_50_m),   clsDn50m(r.down_50_m,   netPos))}
+                {cell("up_13_34d",   fmtN(r.up_13_34d),   clsUp13(r.up_13_34d,    netPos))}
+                {cell("down_13_34d", fmtN(r.down_13_34d), clsDn13(r.down_13_34d,  netPos))}
 
                 {/* 10x ATR Ext — amber warning when many stocks extended */}
                 <td
