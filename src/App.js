@@ -3706,7 +3706,7 @@ const ScannerBriefFeed = ({ briefData, newsData }) => {
           </div>
         </div>
 
-        {briefContent("237px")}
+        {briefContent("600px")}
       </div>
     </>
   );
