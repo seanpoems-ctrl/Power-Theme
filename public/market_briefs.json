@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-11 18:27 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Domestic Strength / Risk-On",
+    "spy_price": 737.76,
+    "spy_change_pct": 1.7,
+    "vix": 19.44,
+    "hy_oas": 2.8,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 56.9,
+    "mmth": 63.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft unveiled a groundbreaking partnership to expand its AI offerings, signaling significant revenue growth and market innovation."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA announced a new generation of data center GPUs with unprecedented processing power, further solidifying its market dominance in AI hardware."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla experienced a strong short-covering rally today, extending gains from recent positive analyst commentary and flow-driven momentum."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-11 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2137,44 +2175,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corp.",
           "reason": "Continuing its bullish trend on sustained enterprise cloud demand and AI integration, a recycled narrative of consistent growth."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-04-30 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On Accumulation",
-    "spy_price": 718.66,
-    "spy_change_pct": 0.99,
-    "vix": 16.89,
-    "hy_oas": 2.82,
-    "yield_curve": 0.52,
-    "credit_status": "Complacent",
-    "s5fi": 63.3,
-    "mmth": 63.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "SNDK",
-          "company": "Western Digital Corporation (via SNDK)",
-          "reason": "Inclusion in the Nasdaq-100 index sparked significant institutional buying and rebalancing activity."
-        },
-        {
-          "ticker": "VIAV",
-          "company": "Viavi Solutions Inc.",
-          "reason": "Robust quarterly earnings beat and upward revision of future guidance drove strong demand."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Continued accumulation on AI momentum, with no fresh fundamental catalyst today but strong technical buying."
         }
       ]
     }

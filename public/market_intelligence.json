@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-11 16:45 ET",
+  "generated_at": "2026-06-11 18:27 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 86.32,
-      "open": 92.25,
-      "high": 93.64,
-      "low": 85.74,
-      "close": 86.32,
+      "price": 85.75,
+      "open": 86.64,
+      "high": 86.64,
+      "low": 85.13,
+      "close": 85.75,
       "prev_open": 89.4,
       "prev_close": 90.03,
-      "volume": 287124,
-      "change_pct": -4.12
+      "volume": 2997,
+      "change_pct": -4.75
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24209.71,
-      "open": 24205.16,
-      "high": 24327.69,
-      "low": 24080.64,
-      "close": 24209.71,
-      "prev_open": 24507.4,
-      "prev_close": 24195.31,
-      "volume": 0,
-      "change_pct": 0.06
+      "price": 24195.31,
+      "open": 24507.4,
+      "high": 24517.48,
+      "low": 24043.52,
+      "close": 24195.31,
+      "prev_open": 24589.29,
+      "prev_close": 24433.06,
+      "volume": 60079100,
+      "change_pct": -0.97
     }
   },
   "fred": {
@@ -98,6 +98,36 @@
     }
   },
   "analysis": {
-    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "title": "Post-Market Brief: June 11, 2026",
+    "mood_emoji": "⬆️",
+    "mood": "Domestic Strength / Risk-On",
+    "narrative": "US equity markets surged today, led by technology, as volatility plummeted. This domestic optimism diverged from weakening global indices and commodities.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 737.76 | +1.70% | 📈 |\n| Nasdaq 100 ETF | 717.12 | +3.38% | 📈 |\n| VIX | 19.44 | -12.51% | 📉 |\n| Crude Oil | 85.75 | -4.75% | 📉 |\n| Nikkei 225 | 64179.27 | -1.89% | 📉 |\n| DAX | 24195.31 | -0.97% | 📉 |",
+    "macro_section": "High Yield Credit Spreads currently stand at a complacent 2.80%, signaling strong institutional risk appetite. Concurrently, the 10-year minus 2-year yield curve measures +0.460, indicating a normal to steepening environment that generally supports risk-taking.",
+    "analysis_para1": "Despite a notable 1.89% decline in the Nikkei 225 and a 0.97% drop for the DAX, along with a significant 4.75% fall in Crude Oil prices, US High Yield Credit Spreads remain remarkably tight at 2.80%. This apparent divergence suggests a resilient, even complacent, US domestic risk appetite largely isolated from global headwinds. The performance of international markets and commodities hints at broader economic concerns abroad, yet US investors appear to be shrugging off these signals for now.",
+    "analysis_para2": "The primary driver behind today's robust upside in US equities appears to be a significant positioning squeeze, particularly in high-beta and technology sectors. As the VIX plummeted by 12.51%, triggering systematic buy programs, bearish positioning was rapidly unwound. This forced liquidation of short bets amplified the upward momentum, driving the Nasdaq 100 ETF up by an impressive 3.38% and the S&P 500 ETF by 1.70% as risk sentiment rapidly improved.",
+    "analysis_para3": "Traders should monitor the S&P 500 ETF with a critical eye, with initial support now forming near the 730 level. A sustained break above today's highs could trigger further upside towards 745, signaling continued risk appetite. Conversely, a sharp reversal below 730, particularly on rising volatility, would indicate a fading of the current momentum and provide a clear risk-off threshold. For today, maintain long exposure in momentum names but be quick to protect profits given the rapid ascent.",
+    "technical_signal": "No reversal pattern confirmed yet. The current technical context shows improving breadth with 56.9% of S&P 500 stocks above their 50-day moving average and 63.5% of S&P stocks above their 200-day moving average, supporting the recent rally. Watch for a potential bearish divergence on momentum indicators or a break of immediate support levels to signal a shift.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft unveiled a groundbreaking partnership to expand its AI offerings, signaling significant revenue growth and market innovation."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA announced a new generation of data center GPUs with unprecedented processing power, further solidifying its market dominance in AI hardware."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla experienced a strong short-covering rally today, extending gains from recent positive analyst commentary and flow-driven momentum."
+        }
+      ]
+    }
   }
 }
