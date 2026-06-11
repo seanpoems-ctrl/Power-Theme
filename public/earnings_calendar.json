@@ -1,24 +1,7 @@
 {
-  "generated_at": "2026-06-11T00:23:25.937385+00:00",
-  "data_source": "tradingview+yfinance",
+  "generated_at": "2026-06-11T12:57:59.494205+00:00",
+  "data_source": "tradingview",
   "earnings": [
-    {
-      "date": "2026-06-10",
-      "ticker": "ATEX",
-      "company": "Anterix Inc.",
-      "time_of_day": "",
-      "mkt_cap": 1213516527.0,
-      "eps_estimate": null,
-      "eps_act": -0.41,
-      "eps_surp_pct": -129.34,
-      "rev_est": 1565500.0,
-      "rev_act": null,
-      "rev_surp_pct": null,
-      "price": 64.78,
-      "avg_volume": 328767,
-      "adr_pct": 6.6,
-      "dollar_volume": 21297526.0
-    },
     {
       "date": "2026-06-11",
       "ticker": "ADBE",
@@ -32,9 +15,9 @@
       "rev_act": null,
       "rev_surp_pct": null,
       "price": 233.38,
-      "avg_volume": 5580864,
+      "avg_volume": 5589787,
       "adr_pct": 3.6,
-      "dollar_volume": 1302462040.0
+      "dollar_volume": 1304544490.0
     },
     {
       "date": "2026-06-11",
@@ -49,9 +32,9 @@
       "rev_act": null,
       "rev_surp_pct": null,
       "price": 13.54,
-      "avg_volume": 1809303,
+      "avg_volume": 1803581,
       "adr_pct": 4.1,
-      "dollar_volume": 24497963.0
+      "dollar_volume": 24420487.0
     },
     {
       "date": "2026-06-11",
@@ -66,9 +49,9 @@
       "rev_act": null,
       "rev_surp_pct": null,
       "price": 89.85,
-      "avg_volume": 2961743,
+      "avg_volume": 2964973,
       "adr_pct": 2.8,
-      "dollar_volume": 266112609.0
+      "dollar_volume": 266402824.0
     },
     {
       "date": "2026-06-11",
@@ -83,9 +66,9 @@
       "rev_act": null,
       "rev_surp_pct": null,
       "price": 148.69,
-      "avg_volume": 1197746,
+      "avg_volume": 1182093,
       "adr_pct": 5.6,
-      "dollar_volume": 178092853.0
+      "dollar_volume": 175765408.0
     },
     {
       "date": "2026-06-17",
@@ -100,9 +83,9 @@
       "rev_act": null,
       "rev_surp_pct": null,
       "price": 352.36,
-      "avg_volume": 1213909,
+      "avg_volume": 1211682,
       "adr_pct": 4.2,
-      "dollar_volume": 427732975.0
+      "dollar_volume": 426948270.0
     },
     {
       "date": "2026-06-17",
@@ -117,9 +100,43 @@
       "rev_act": null,
       "rev_surp_pct": null,
       "price": 48.5,
-      "avg_volume": 3267859,
+      "avg_volume": 3262312,
       "adr_pct": 4.8,
-      "dollar_volume": 158491162.0
+      "dollar_volume": 158222132.0
+    },
+    {
+      "date": "2026-06-18",
+      "ticker": "ACN",
+      "company": "Accenture plc",
+      "time_of_day": "BMO",
+      "mkt_cap": 104931694610.0,
+      "eps_estimate": 3.71,
+      "eps_act": 2.93,
+      "eps_surp_pct": 2.13,
+      "rev_est": 18742340000.0,
+      "rev_act": null,
+      "rev_surp_pct": null,
+      "price": 170.5,
+      "avg_volume": 6138676,
+      "adr_pct": 3.7,
+      "dollar_volume": 1046644258.0
+    },
+    {
+      "date": "2026-06-18",
+      "ticker": "KR",
+      "company": "The Kroger Co.",
+      "time_of_day": "BMO",
+      "mkt_cap": 39743500675.0,
+      "eps_estimate": 1.58,
+      "eps_act": 1.28,
+      "eps_surp_pct": 3.52,
+      "rev_est": 45382630490.0,
+      "rev_act": null,
+      "rev_surp_pct": null,
+      "price": 64.46,
+      "avg_volume": 6078550,
+      "adr_pct": 2.5,
+      "dollar_volume": 391823333.0
     }
   ]
 }

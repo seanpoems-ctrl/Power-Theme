@@ -1,58 +1,420 @@
 {
-  "scan_time": "2026-06-10 08:55 ET",
+  "scan_time": "2026-06-11 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "CBRL",
-      "price": 36.3,
-      "gap_pct": 13.44,
-      "pm_volume": 72426,
-      "avg_vol_10d": 1044755,
-      "avg_dollar_vol": 37924606,
-      "mkt_cap": 811342108,
-      "rvol": 2.95,
-      "adr_pct": 5.02,
+      "ticker": "NAVN",
+      "price": 20.87,
+      "gap_pct": 22.09,
+      "pm_volume": 266236,
+      "avg_vol_10d": 3657089,
+      "avg_dollar_vol": 76323447,
+      "mkt_cap": 5270772452,
+      "rvol": 1.42,
+      "adr_pct": 6.32,
       "category": "Earnings",
       "theme": "Earnings",
-      "reasoning": "CBRL reported quarterly results; earnings catalyst detected in headlines.",
+      "reasoning": "NAVN reported quarterly results; earnings catalyst detected in headlines.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 50,
       "grade": "C",
       "finviz_theme": "—",
       "analysis_detail": {
-        "catalyst": "CBRL reported quarterly results; earnings catalyst detected in headlines.",
+        "catalyst": "NAVN reported quarterly results; earnings catalyst detected in headlines.",
         "impact": "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
       },
-      "analysis_details": "• **The Results**\nCBRL reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
+      "analysis_details": "• **The Results**\nNAVN reported quarterly results; earnings catalyst detected in headlines.\n\n• **The Outlook**\nEarnings report detected in recent news. Review actual EPS/revenue figures for confirmation.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Cracker Barrel Old Country Store, Inc. Q3 2026 Earnings Call Summary",
+          "title": "Navan: Fiscal Q1 Earnings Snapshot",
           "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/4550e1ee-4453-346e-ab2b-08c8c634bd82/cracker-barrel-old-country.html"
+          "url": "https://finance.yahoo.com/markets/stocks/articles/navan-fiscal-q1-earnings-snapshot-201339631.html"
         },
         {
-          "title": "Cracker Barrel: Fiscal Q3 Earnings Snapshot",
+          "title": "Navan Announces First Quarter Fiscal Year 2027 Results",
           "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/cracker-barrel-fiscal-q3-earnings-201519974.html"
+          "url": "https://www.businesswire.com/news/home/20260608567065/en"
+        },
+        {
+          "title": "Oracle headlines Wednesday's earnings",
+          "source": "Finviz",
+          "url": "https://www.marketwatch.com/livecoverage/stock-market-today-dow-jones-s-p-500-nasdaq-us-strikes-iran-cpi-oracle-results/card/oracle-headlines-wednesday-s-earnings-XtLy3NTOYgkJdEfvuYeN?mod=mw_FV"
         }
       ],
-      "float_shares": "21.93M",
-      "short_float": "27.73%",
-      "daily_pct": 6.11,
+      "float_shares": "143.14M",
+      "short_float": "3.26%",
+      "daily_pct": 0.92,
       "industry": "—",
-      "technical_status": "Fail (Avg $Vol $38M < $100M)",
+      "technical_status": "Fail (Avg $Vol $76M < $100M)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Verified",
+        "confidence_score": 100,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "CBRL reported quarterly results; earnings catalyst detected in headlines.",
+        "primary_claim": "NAVN stock surged 19% after-hours following earnings.",
         "discrepancy_note": ""
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "ELVN",
+      "price": 37.0,
+      "gap_pct": 21.49,
+      "pm_volume": 76275,
+      "avg_vol_10d": 1039688,
+      "avg_dollar_vol": 38468456,
+      "mkt_cap": 2253482978,
+      "rvol": 1.39,
+      "adr_pct": 5.45,
+      "category": "FDA",
+      "theme": "FDA",
+      "reasoning": "ELVN has an active FDA/clinical regulatory event based on recent headlines.",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "ELVN has an active FDA/clinical regulatory event based on recent headlines.",
+        "impact": "FDA or clinical trial event detected. Binary outcome — treat as high-volatility event."
+      },
+      "analysis_details": "• **The Event**\nELVN has an active FDA/clinical regulatory event based on recent headlines.\n\n• **Risk Profile**\nFDA or clinical trial event detected. Binary outcome — treat as high-volatility event.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Enliven Therapeutics stock surges on positive trial data By Investing.com - Investing.com Nigeria",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPZEU4WFVDT25GaEVGeHE5WkstWU1VM0RzcldqQ0trUUpJUWNLTG16Tkhmc0xOb0ZGOUk5b0NqTFo0Q1FLVVJoeUVCbFhKYzVHdzVCZm5qa1JibGFEZWIyYU04SXg3bk5EWllBTTJtZGNwdEZ1VExENWczaGNTUkVKQW9Mb3I1T29TZm1hSmtHREtGQ3A2WnF1ckcxUHBUNEZHX21oYWRaUG1acVZUZkZPM2ZiMVBrN3Fs?oc=5"
+        },
+        {
+          "title": "CML drug ELVN-001 hits 61% major molecular response as FDA agrees on Phase 3 - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPTE51OVBsUmJXNE95cFU4SVYyQlBMcWVUNkhrbE5WZ1JGQ200V2Z5ZGlQNGxyM3p5eHJ1cVJxd3h2Y0htTTlLSkh5Rl9WN1I2ZGFucjhnSlNsQU95bENPTFpiVmRXNjMxVlBYNmtSUWtJRmNmSWQ5aXVaalNkSzlrd3hUMlptNXNDUmlDMDFWZVVTUUJwcTg4SGRlM1lFNU5HVnI5TWFMSWk1MEF3REJ0QkNrUVFhTVg3QURB?oc=5"
+        }
+      ],
+      "float_shares": "46.95M",
+      "short_float": "11.10%",
+      "daily_pct": 2.46,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $38M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 80,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "FDA agrees on Phase 3 for ELVN-001 after hitting 61% major molecular response",
+        "discrepancy_note": "Source A (Finviz News) has no relevant headlines to confirm the claim. Source B (Google News) headline [1] explicitly states 'FDA agrees on Phase 3' and '61% major molecular response', but the lack of confirmation from Source A prevents verification."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "DXC",
+      "price": 8.82,
+      "gap_pct": 9.52,
+      "pm_volume": 257816,
+      "avg_vol_10d": 4378269,
+      "avg_dollar_vol": 38616333,
+      "mkt_cap": 1429547855,
+      "rvol": 1.29,
+      "adr_pct": 5.93,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "DXC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "DXC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nDXC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "DXC Technology (DXC) schedules Investor Day event with webcast access - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNazEtYmpCUU5NLVl6bTdXZnNBVXNyc0VOXzhqWGp5cFdXYlhsaEQ3cFFpUmVUVS1XcE5KZEpLWGFlNzZNZG44TGxKUUl4SkYyMkd1cTFTN0NwSkhDRlJnUFFKaHZaN0hTRW45ZXRpVFZyYXVNZHB5bDhTMDU1N1lNbjU1Sk5ib3N2SEpYZWJyeTEwX2RkYlV4M2dlcHNwU3lkdm1naHZNb2s?oc=5"
+        },
+        {
+          "title": "DXC and Anthropic Announce Multi-Year Global Alliance to Bring AI into Mission-Critical Enterprise Systems - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxPY3NSVjY0aFdMSWJTYXFBUkdvR2VkTWVHMG5xWHg2TURPN0ZnTjFRaUNxR2gtTXVkTFZiWmdDZWlSRDhJXy1XZUhSNURYVnA4WkwtR3MtMjFqbzlSWDZncWdjei1OQ3NSUHFtQVB1d0hrWVJWZVZjMUswdDRqMlNRWjdFaGpRemFvYktDak5HQ2I3WFdSVmktMnNvbmJNZENEUnd3dmp4d2Q4NXZYRmdKUGkyYnNHZklHWWNiYVFTTzduWVlvMEp5T2R3WjFHTFAtZ0I1TWlpaUdQclltdjBaeXNuRm80Ulo1?oc=5"
+        }
+      ],
+      "float_shares": "158.83M",
+      "short_float": "17.19%",
+      "daily_pct": -0.34,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $39M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "DXC gap lacks a clear fundamental catalyst",
+        "discrepancy_note": "Source B (Google News) explicitly reports multiple clear fundamental catalysts for DXC's movement, specifically the 'DXC and Anthropic Announce Multi-Year Global Alliance' (Source B[5]) and related news about 'DXC bets on Claude: 10x faster software, 95% of code by AI' (Source B[1]), directly contradicting the claim that a clear fundamental catalyst is lacking."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "KDK",
+      "price": 5.79,
+      "gap_pct": 7.43,
+      "pm_volume": 59922,
+      "avg_vol_10d": 899976,
+      "avg_dollar_vol": 5210861,
+      "mkt_cap": 1154529755,
+      "rvol": 4.0,
+      "adr_pct": 6.0,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "float_shares": "121.84M",
+      "short_float": "6.21%",
+      "daily_pct": -5.7,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $5M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": null
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "CPNG",
+      "price": 15.12,
+      "gap_pct": 6.68,
+      "pm_volume": 508159,
+      "avg_vol_10d": 25007700,
+      "avg_dollar_vol": 378116424,
+      "mkt_cap": 27141370808,
+      "rvol": 1.55,
+      "adr_pct": 4.6,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "CPNG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "CPNG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nCPNG gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Coupang (NYSE: CPNG) hit with $410M Korean data privacy penalties - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPZk55bWhvWVBUT0R1MVhaSlg4bkpsamNIMVMwRTZzeDNkcE9xLW5CUHBZUWNJUVNidEprWDlQYzlPU1B2R2pOUGFuczd1R29wUm45N3REOU9RcVJSWHNMUC1xWXNBdmd4Ql82S1pyTlNXUU5pS2tvOGJlX3pjbmFIanNxeEZ4N0lzUkhMT1JfbzlKNV9DNVhqZUcxWmVMVDRtY3c?oc=5"
+        },
+        {
+          "title": "South Korea privacy regulator to fine Coupang $409 mln over data breach - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPcEtqWXlrejBNT0hkSjltdXZYZUR6TjdWR1pPTllnTEgwQ08zaDh5dXBvaXJFQk5LdDVwUGdobGJ1VTg0eE5acmlYYTJMQ1Q5YkdpaWtYQ2pFV3pnaThhRExVQlNyU3NMS2xhczYyaEU1cFp2Q0liMlY3NUgtaVNKa1Bjd3l6TDZ6UXpDMWhmS0NwMEx3RUZrZmstaXgtX21iQWM5azNOQjhtV2pxWGlBY3oydUdmZjZsMUpDREFFUHY?oc=5"
+        }
+      ],
+      "float_shares": "1.27B",
+      "short_float": "5.58%",
+      "daily_pct": -4.97,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "The specific dollar amount of the fine imposed on Coupang for a data breach.",
+        "discrepancy_note": "Finviz News [2] states the fine is '$409 million'. Google News [1] and [4] state the fine is '$410M' or '$409 mln'."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "UMC",
+      "price": 18.9,
+      "gap_pct": 5.5,
+      "pm_volume": 180389,
+      "avg_vol_10d": 18419507,
+      "avg_dollar_vol": 348128682,
+      "mkt_cap": 47054048910,
+      "rvol": 1.11,
+      "adr_pct": 4.85,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "float_shares": "2.52B",
+      "short_float": "1.04%",
+      "daily_pct": -4.93,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "VELO",
+      "price": 22.68,
+      "gap_pct": 5.16,
+      "pm_volume": 174568,
+      "avg_vol_10d": 3866430,
+      "avg_dollar_vol": 87690632,
+      "mkt_cap": 675886746,
+      "rvol": 3.16,
+      "adr_pct": 15.09,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "VELO gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_detail": {
+        "catalyst": "VELO gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
+        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+      },
+      "analysis_details": "• **What Happened**\nVELO gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Is Velo3D (VELO) Using the RedChip Stage to Recast Management Credibility with Investors? - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPZU52QnhBSnBJUDVWTGdiVWtJaExvelBkcERFY2RqNkZmajRRVWptYlVBbzBtRGhod2dIWmVmLUQyZ2tTMzBaNnJyWW0xVERWcHZVbU4wbXZ1VmVJcS1KUFh1R2ViNFBsdUdsYmZ6RXM5ZWE0Zm41aW9oeGFrbFV5VVJaU0QyaVoxSXpGY0RWZlFDLW9kNklWck51SGpTeTJLY1h5cTVhS1ZvaWo2aXB3MjA5bXBlNWh2Y0VhaUFUTmgwcWZSNHBKdNIBzgFBVV95cUxQNlYybFBhSndBSXpDZl9BWHZPVEMxMjhlQnVKdWJnVU81Y2VPbkRIYW8ySWdFNmhYZGwyY0hpR2RhRXM3TGRlRHBhU3dQYWxBSjNBS1ZDZlRiQ1hVV1hMaDBuWjdBdV95UjBuMENuTFh2a19EMW1rQ2VNbkY3LVRCbDF3SEpqeE5YbmxoeUdEOXNmLU9jR2ljUUJLWDdORVpiSGxGdjNJdkxKVTlVWWJIdzRrdi1CUnBPYlozd3JiS1Z0cDRNbXljTElMTWh5Zw?oc=5"
+        }
+      ],
+      "float_shares": "13.70M",
+      "short_float": "20.42%",
+      "daily_pct": 16.73,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $88M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 60,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "VELO gap lacks a clear fundamental catalyst",
+        "discrepancy_note": "Neither source explicitly states that the VELO gap 'lacks a clear fundamental catalyst'. While the tone of the Google News articles (questioning what's going on, discussing management credibility, or stating 'easy money is gone') *suggests* a lack of obvious positive catalysts, none directly confirm the specific claim that a 'gap lacks a clear fundamental catalyst' or that it's 'likely technical breakout or flow-driven'. Finviz has no news."
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -65,207 +427,15 @@
       "meets_all_gates": false,
       "tier": "Fail",
       "tier_label": "Excluded"
-    },
-    {
-      "ticker": "CLOV",
-      "price": 4.29,
-      "gap_pct": 10.72,
-      "pm_volume": 570906,
-      "avg_vol_10d": 8650473,
-      "avg_dollar_vol": 37110529,
-      "mkt_cap": 2259479820,
-      "rvol": 1.99,
-      "adr_pct": 6.17,
-      "category": "Upgrade",
-      "theme": "Upgrade",
-      "reasoning": "CLOV received an analyst rating action or price target revision.",
-      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
-      "conviction": 50,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_detail": {
-        "catalyst": "CLOV received an analyst rating action or price target revision.",
-        "impact": "Analyst upgrade or price target change detected. Institutional conviction may be limited."
-      },
-      "analysis_details": "• **The Analyst Action**\nCLOV received an analyst rating action or price target revision.\n\n• **The Thesis**\nAnalyst upgrade or price target change detected. Institutional conviction may be limited.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Clover Health stock jumps after Medicare rating upgrade By Investing.com - Investing.com Australia",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNS3hYazdWXzNjS0xMSktpZWczTFJZTG8zalE1X3FOT1BXVWVhYnA2WlNld3RXWTVpOUs0Z096WmU1Q3V5UVdOVzNmX21tVDdIZGRCTGMtZXlnY1dDVU1FVVpqY0JmZUZjV1VmTkQzSFdvZ3VnLXVTYVY1LWFCbVV0X2pnZlNSZWFhekhnaXR4YWtUOGpaUnc1aVdSNmV4WkhJQXpIN3V5a09EV255Q0NuQU16cktYTHM?oc=5"
-        },
-        {
-          "title": "Clover Health stock hits 52-week high at 4.24 USD - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPOGcwTXdTRElOSjNoNGZrNWEzZkY3ZXlBVmlmcGFNTjMyTEthR2FiUTZVSmpONEpxTFRDbWkwWVN2M29ROS03czBBZmRraXB4U204NFEwdkpKNXYyQms0RnFMczQxc0JkV1JydGpyTWRyU3p4LW42T3Z2YV9CZ1pjdWxvaGF1d2lsbk9CWjFHdlh2cEhkQWhRNkdud0l3ZTFfWm1vbnFaQQ?oc=5"
-        }
-      ],
-      "float_shares": "404.93M",
-      "short_float": "7.06%",
-      "daily_pct": 9.44,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $37M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "CLOV received an analyst rating action or price target revision (specifically an 'upgrade').",
-        "discrepancy_note": "Source A provides no information. Source B[1] mentions an 'upgrade', but specifies it as a 'Medicare rating upgrade', which is distinct from an 'analyst rating action' or 'price target revision' as described in the primary catalyst claim. Source B[2] is about stock price, not ratings."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "AAOI",
-      "price": 162.88,
-      "gap_pct": 5.59,
-      "pm_volume": 514377,
-      "avg_vol_10d": 14714788,
-      "avg_dollar_vol": 2396744669,
-      "mkt_cap": 13069942335,
-      "rvol": 2.19,
-      "adr_pct": 13.13,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "AAOI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_detail": {
-        "catalyst": "AAOI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
-      },
-      "analysis_details": "• **What Happened**\nAAOI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Spectrum Deploys AOI’s Intelligent Network Management Software Across Its Connected 1.8GHz Amplifier Footprint - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQWWJxcVZ4Z3BoVDF4elREcDFnc3l5cWJZU1hEMEh5UnIxUGJqTExsZy0zUktiaVktTW1BMzFURVRUVWUyUDVxbTVwRzlIY2F4ZzFfVWRlVEZzeTZOcG52S1VReTZ5RVRGeXdiTnNvXzlyVzRmOGZXbVVtTW04ai03aXZpMzlRcWd4LXk3UTY3TjFzMmFCVTNHMU5SRkJwYmlxWG5CNWQ0VEJMc2h3WnRZU1BMXzZOakxJ?oc=5"
-        },
-        {
-          "title": "Trending Industry Today: Applied Optoelectronics Leads Losses In Optical Communication Stocks - Moomoo",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPaTZhdGRaUVhSUkJkNV9XVVhUUVZjZElaNWNZRmQydGFwUW9pVmRidzhYRnE5VjRhWVNNWFpZY2MtanFUb0tKb3hUYzhkZHM1QUhRa2lCQThaUzg4TFRsSjFaNUUwT3lMb2lIM3RQTmdpdlBzc25DTHhfa3BlZkpidXhxQnVmczBWQ0VjUHAzc1VUclJycnROS1NiZEhjSlBmVzdFYklxZU9wbS1tbmkxVFdZUkd3OFFQaXhod2tvM01uOGg3NkE?oc=5"
-        }
-      ],
-      "float_shares": "75.43M",
-      "short_float": "13.31%",
-      "daily_pct": -17.17,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "AAOI gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "FLNC",
-      "price": 23.46,
-      "gap_pct": 5.12,
-      "pm_volume": 458979,
-      "avg_vol_10d": 16198308,
-      "avg_dollar_vol": 380012306,
-      "mkt_cap": 4323928212,
-      "rvol": 1.36,
-      "adr_pct": 12.32,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "FLNC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_detail": {
-        "catalyst": "FLNC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.",
-        "impact": "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
-      },
-      "analysis_details": "• **What Happened**\nFLNC gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven.\n\n• **Key Consideration**\nNo specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Fluence Scores Independent Validation of Industry-Leading Battery Storage Reliability",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/sectors/energy/articles/fluence-scores-independent-validation-industry-221148794.html"
-        },
-        {
-          "title": "Solidion Strengthens Battery Moat with 7 New Patents",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/sectors/technology/articles/solidion-strengthens-battery-moat-7-142833032.html"
-        }
-      ],
-      "float_shares": "100.25M",
-      "short_float": "23.96%",
-      "daily_pct": -2.53,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "DNV validated Fluence's 99% fleet performance availability for large energy storage projects.",
-        "discrepancy_note": null
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 4,
-    "large_gaps": 0,
-    "total_headlines": 8,
+    "small_gaps": 5,
+    "large_gaps": 2,
+    "total_headlines": 10,
     "monthly_cost_usd": 0.01
   }
 }
