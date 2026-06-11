@@ -505,112 +505,111 @@ const CLICKABLE_COLS = {
 // Up 4%+ Today — data range ~81–631; green bg at ≥400 (thrust day)
 function clsUp4(v) {
   if (v == null) return "";
-  if (v >= 500)  return "bg-emerald-600/55 text-emerald-100 font-bold";
-  if (v >= 400)  return "bg-emerald-800/50 text-emerald-200 font-semibold";
+  if (v >= 500)  return "bg-emerald-600 text-white font-bold";
+  if (v >= 400)  return "bg-emerald-800 text-emerald-100 font-semibold";
   if (v >= 300)  return "text-emerald-400";
   return "";
 }
 // Down 4%+ Today — data range ~98–972; rose bg ramps up from ≥300
 function clsDn4(v) {
   if (v == null) return "";
-  if (v >= 500)  return "bg-rose-700/70 text-rose-100 font-bold";
-  if (v >= 300)  return "bg-rose-900/55 text-rose-200 font-semibold";
+  if (v >= 500)  return "bg-rose-700 text-white font-bold";
+  if (v >= 300)  return "bg-rose-900 text-rose-100 font-semibold";
   if (v >= 150)  return "text-rose-400";
   return "";
 }
 // 5-day / 10-day ratio — data range ~0.6–3.0
-// ≥2.5 dark green bg, ≥2.0 green bg, ≥1.5 green text, ≤0.8 red text, ≤0.65 red bg
 function clsRatio(v) {
   if (v == null) return "";
-  if (v >= 2.5)  return "bg-emerald-700/50 text-emerald-100 font-bold";
-  if (v >= 2.0)  return "bg-emerald-900/50 text-emerald-200 font-semibold";
+  if (v >= 2.5)  return "bg-emerald-700 text-white font-bold";
+  if (v >= 2.0)  return "bg-emerald-900 text-emerald-100 font-semibold";
   if (v >= 1.5)  return "text-emerald-400";
-  if (v <= 0.65) return "bg-rose-900/50 text-rose-200 font-semibold";
+  if (v <= 0.65) return "bg-rose-900 text-rose-100 font-semibold";
   if (v <= 0.8)  return "text-rose-400";
   return "";
 }
 // Up 25% Quarterly — data range ~1253–1649
 function clsUp25q(v) {
   if (v == null)  return "";
-  if (v >= 1600)  return "bg-emerald-900/40 text-emerald-200 font-semibold";
+  if (v >= 1600)  return "bg-emerald-800 text-white font-semibold";
   if (v >= 1500)  return "text-emerald-300";
   return "";
 }
 // Down 25% Quarterly — data range ~839–1190; rose at ≥1100
 function clsDn25q(v) {
   if (v == null)  return "";
-  if (v >= 1100)  return "bg-rose-900/40 text-rose-200 font-semibold";
+  if (v >= 1100)  return "bg-rose-900 text-rose-100 font-semibold";
   if (v >= 950)   return "text-rose-400";
   return "";
 }
 // Up 25% Monthly — data range ~126–451; green bg at ≥280 (strong), ≥200 (moderate)
 function clsUp25m(v) {
   if (v == null)  return "";
-  if (v >= 280)   return "bg-emerald-900/50 text-emerald-200 font-semibold";
-  if (v >= 200)   return "bg-emerald-900/30 text-emerald-300";
+  if (v >= 280)   return "bg-emerald-800 text-white font-semibold";
+  if (v >= 200)   return "bg-emerald-900 text-emerald-100";
   return "";
 }
 // Down 25% Monthly — data range ~46–198
 function clsDn25m(v) {
   if (v == null) return "";
-  if (v >= 160)  return "bg-rose-900/50 text-rose-200 font-semibold";
+  if (v >= 160)  return "bg-rose-900 text-rose-100 font-semibold";
   if (v >= 120)  return "text-rose-400";
   return "";
 }
 // Up 50% Monthly — data range ~28–118; amber bg at ≥80 (parabolic), text at ≥60
 function clsUp50m(v) {
   if (v == null) return "";
-  if (v >= 80)   return "bg-amber-800/50 text-amber-100 font-bold";
+  if (v >= 80)   return "bg-amber-700 text-white font-bold";
   if (v >= 60)   return "text-amber-300 font-semibold";
   return "";
 }
-// Down 50% Monthly — data range ~16–40; rose when ≥30
+// Down 50% Monthly — data range ~16–40; rose when ≥35
 function clsDn50m(v) {
   if (v == null) return "";
-  if (v >= 35)   return "bg-rose-900/40 text-rose-300 font-semibold";
+  if (v >= 35)   return "bg-rose-900 text-rose-100 font-semibold";
   if (v >= 25)   return "text-rose-400";
   return "";
 }
 // Up 13%+ 34-Day — data range ~1419–2631; green bg at ≥1850, text at ≥1700, dim at ≥1550
 function clsUp13(v) {
   if (v == null) return "";
-  if (v >= 1850) return "bg-emerald-900/40 text-emerald-200 font-semibold";
+  if (v >= 1850) return "bg-emerald-800 text-white font-semibold";
   if (v >= 1700) return "text-emerald-300";
-  if (v >= 1550) return "text-emerald-400/80";
+  if (v >= 1550) return "text-emerald-500";
   return "";
 }
 // Down 13%+ 34-Day — data range ~854–1898; rose bg at ≥1750, text at ≥1400, dim at ≥1300
 function clsDn13(v) {
   if (v == null) return "";
-  if (v >= 1750) return "bg-rose-900/50 text-rose-200 font-semibold";
+  if (v >= 1750) return "bg-rose-900 text-rose-100 font-semibold";
   if (v >= 1400) return "text-rose-300";
-  if (v >= 1300) return "text-rose-400/80";
+  if (v >= 1300) return "text-rose-500";
   return "";
 }
 // 10x ATR Ext: amber warning at ≥20 (extended), deep amber at ≥50 (extreme)
 function clsAtrExt(v, clickable) {
   const click = clickable ? "cursor-pointer underline decoration-dotted underline-offset-2" : "";
   if (v == null)  return `text-purple-300 ${click}`;
-  if (v >= 50)    return `bg-amber-800/60 text-amber-100 font-bold ${click}`;
-  if (v >= 20)    return `bg-amber-900/40 text-amber-300 font-semibold ${click}`;
+  if (v >= 50)    return `bg-amber-700 text-white font-bold ${click}`;
+  if (v >= 20)    return `bg-amber-900 text-amber-200 font-semibold ${click}`;
   return `text-purple-300 ${click}`;
 }
 // >50 DMA: red below 30% (existing), green above 80%
 function clsAbove50dma(v, clickable) {
   const click = clickable ? "cursor-pointer underline decoration-dotted underline-offset-2" : "";
   if (v == null) return `text-sky-300 ${click}`;
-  if (v < 20)    return `bg-rose-800/70 text-rose-100 font-bold ${click}`;
-  if (v < 30)    return `bg-rose-900/70 text-rose-200 font-semibold ${click}`;
-  if (v >= 90)   return `bg-emerald-800/50 text-emerald-200 font-semibold ${click}`;
-  if (v >= 80)   return `bg-emerald-900/40 text-emerald-300 ${click}`;
+  if (v < 20)    return `bg-rose-700 text-white font-bold ${click}`;
+  if (v < 30)    return `bg-rose-900 text-rose-100 font-semibold ${click}`;
+  if (v >= 90)   return `bg-emerald-700 text-white font-semibold ${click}`;
+  if (v >= 80)   return `bg-emerald-900 text-emerald-100 ${click}`;
   return `text-sky-300 ${click}`;
 }
 // T2108: TEAL when ≤20 (oversold bottom signal per Stockbee), amber when ≥80 (overbought)
 function clsT2108(v) {
-  if (v == null) return "text-amber-300/80";
-  if (v <= 20)   return "bg-cyan-900/60 text-cyan-200 font-semibold";
-  if (v >= 80)   return "bg-amber-900/40 text-amber-300 font-semibold";
-  return "text-amber-300/80";
+  if (v == null) return "text-amber-300";
+  if (v <= 20)   return "bg-cyan-900 text-cyan-100 font-semibold";
+  if (v >= 80)   return "bg-amber-900 text-amber-200 font-semibold";
+  return "text-amber-300";
 }
 
 // ---------------------------------------------------------------------------
