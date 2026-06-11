@@ -530,12 +530,12 @@ function clsDn4(v, netPos) {
   if (v == null) return "";
   return netPos ? S8 : (v >= 300 ? S9 : S7);
 }
-// Ratios: standalone — green ≥2.0, red ≤0.50, neutral otherwise
+// Ratios: standalone — green ≥2.0, red ≤0.50, always neutral text otherwise (never inherits row direction)
 function clsRatio(v) {
-  if (v == null) return "";
+  if (v == null) return "text-slate-400";
   if (v >= 2.0)  return S8;
   if (v <= 0.50) return S9;
-  return "";
+  return "text-slate-400";
 }
 // Quarterly pair: pure binary — both columns reflect which side dominates
 function clsUp25q(v, pairPos) { return v == null ? "" : (pairPos ? S8 : S9); }
