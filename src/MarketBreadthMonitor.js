@@ -502,80 +502,90 @@ const CLICKABLE_COLS = {
 // Cell color helpers — mirrors Stockbee Market Monitor conditional formatting
 // ---------------------------------------------------------------------------
 
-// Up 4%+ Today: green thrust threshold, blog-confirmed ≥400 / ≥600
+// Up 4%+ Today — data range ~81–631; green bg at ≥400 (thrust day)
 function clsUp4(v) {
   if (v == null) return "";
-  if (v >= 600)  return "bg-emerald-600/50 text-emerald-100 font-bold";
-  if (v >= 400)  return "bg-emerald-900/50 text-emerald-300 font-semibold";
+  if (v >= 500)  return "bg-emerald-600/55 text-emerald-100 font-bold";
+  if (v >= 400)  return "bg-emerald-800/50 text-emerald-200 font-semibold";
+  if (v >= 300)  return "text-emerald-400";
   return "";
 }
-// Down 4%+ Today: pink ≥200 (blog: "pink for negative <300"), red ≥400
+// Down 4%+ Today — data range ~98–972; rose bg ramps up from ≥300
 function clsDn4(v) {
   if (v == null) return "";
-  if (v >= 400)  return "bg-rose-800/60 text-rose-100 font-bold";
-  if (v >= 200)  return "bg-rose-900/40 text-rose-300";
+  if (v >= 500)  return "bg-rose-700/70 text-rose-100 font-bold";
+  if (v >= 300)  return "bg-rose-900/55 text-rose-200 font-semibold";
+  if (v >= 150)  return "text-rose-400";
   return "";
 }
-// 5-day / 10-day ratio: green bullish ≥1.5, red bearish ≤0.5
+// 5-day / 10-day ratio — data range ~0.6–3.0
+// ≥2.5 dark green bg, ≥2.0 green bg, ≥1.5 green text, ≤0.8 red text, ≤0.65 red bg
 function clsRatio(v) {
   if (v == null) return "";
-  if (v >= 2.0)  return "text-emerald-300 font-semibold";
+  if (v >= 2.5)  return "bg-emerald-700/50 text-emerald-100 font-bold";
+  if (v >= 2.0)  return "bg-emerald-900/50 text-emerald-200 font-semibold";
   if (v >= 1.5)  return "text-emerald-400";
-  if (v <= 0.3)  return "bg-rose-900/40 text-rose-200";
-  if (v <= 0.5)  return "text-rose-400";
+  if (v <= 0.65) return "bg-rose-900/50 text-rose-200 font-semibold";
+  if (v <= 0.8)  return "text-rose-400";
   return "";
 }
-// Up 25% Quarterly: teal at ≥2000, green at ≥1500
+// Up 25% Quarterly — data range ~1253–1649
 function clsUp25q(v) {
   if (v == null)  return "";
-  if (v >= 2000)  return "bg-emerald-900/30 text-emerald-200";
+  if (v >= 1600)  return "bg-emerald-900/40 text-emerald-200 font-semibold";
   if (v >= 1500)  return "text-emerald-300";
   return "";
 }
-// Down 25% Quarterly: rose at ≥1000
+// Down 25% Quarterly — data range ~839–1190; rose at ≥1100
 function clsDn25q(v) {
   if (v == null)  return "";
-  if (v >= 1000)  return "text-rose-300";
+  if (v >= 1100)  return "bg-rose-900/40 text-rose-200 font-semibold";
+  if (v >= 950)   return "text-rose-400";
   return "";
 }
-// Up 25% Monthly: green at ≥1500
+// Up 25% Monthly — data range ~126–451 (thresholds calibrated to actual values)
 function clsUp25m(v) {
   if (v == null)  return "";
-  if (v >= 2000)  return "bg-emerald-900/30 text-emerald-200";
-  if (v >= 1500)  return "text-emerald-300";
+  if (v >= 350)   return "bg-emerald-900/40 text-emerald-200 font-semibold";
+  if (v >= 250)   return "text-emerald-300";
+  if (v >= 180)   return "text-emerald-400/80";
   return "";
 }
-// Down 25% Monthly: rose at ≥500
+// Down 25% Monthly — data range ~46–198
 function clsDn25m(v) {
   if (v == null) return "";
-  if (v >= 500)  return "text-rose-300";
+  if (v >= 160)  return "bg-rose-900/50 text-rose-200 font-semibold";
+  if (v >= 120)  return "text-rose-400";
   return "";
 }
-// Up 50% Monthly: TEAL bg at ≥100 — parabolic moves (visible in Stockbee screenshot)
+// Up 50% Monthly — data range ~28–118; amber at ≥80 (parabolic signal)
 function clsUp50m(v) {
   if (v == null) return "";
-  if (v >= 100)  return "bg-cyan-900/50 text-cyan-200 font-semibold";
-  if (v >= 50)   return "text-cyan-300";
+  if (v >= 80)   return "bg-amber-800/50 text-amber-100 font-bold";
+  if (v >= 50)   return "text-amber-300 font-semibold";
   return "";
 }
-// Down 50% Monthly: rose bg at ≥50 — many stocks in free-fall
+// Down 50% Monthly — data range ~16–40; rose when ≥30
 function clsDn50m(v) {
   if (v == null) return "";
-  if (v >= 50)   return "bg-rose-900/40 text-rose-300";
+  if (v >= 35)   return "bg-rose-900/40 text-rose-300 font-semibold";
+  if (v >= 25)   return "text-rose-400";
   return "";
 }
-// Up 13% 34-Day: green highlights
+// Up 13%+ 34-Day — data range ~1419–2631
 function clsUp13(v) {
   if (v == null) return "";
-  if (v >= 500)  return "text-emerald-300";
-  if (v >= 300)  return "text-emerald-400/80";
+  if (v >= 2200) return "bg-emerald-900/40 text-emerald-200 font-semibold";
+  if (v >= 1800) return "text-emerald-300";
+  if (v >= 1600) return "text-emerald-400/80";
   return "";
 }
-// Down 13% 34-Day: rose highlights
+// Down 13%+ 34-Day — data range ~854–1898
 function clsDn13(v) {
   if (v == null) return "";
-  if (v >= 300)  return "bg-rose-900/30 text-rose-200";
-  if (v >= 200)  return "text-rose-300";
+  if (v >= 1750) return "bg-rose-900/50 text-rose-200 font-semibold";
+  if (v >= 1500) return "text-rose-300";
+  if (v >= 1300) return "text-rose-400/80";
   return "";
 }
 // 10x ATR Ext: amber warning at ≥20 (extended), deep amber at ≥50 (extreme)
