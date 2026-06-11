@@ -3,7 +3,10 @@ on:
   push:
     branches: [ main ]
     paths-ignore:
-      - 'public/**'
+      - 'public/thematic_data.json'
+      - 'public/gapper_data.json'
+      - 'public/breadth_monitor.json'
+      - 'public/calendar_history/**'
 concurrency:
   group: pages-deploy
   cancel-in-progress: true
