@@ -657,7 +657,7 @@ const IbkrSourceBadge = ({ source }) => {
   );
 };
 
-const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData }) => {
+const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, stockFilter = null }) => {
   const [hovered, setHovered] = useState(null);
   const fmtMktCap = (v) => {
     if (v == null) return '—';
@@ -692,11 +692,12 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData })
     const theme = (data?.themes || []).find(t => t.name === name);
     if (!theme) return { themeName: name, stocks: [], themeRS: null, analysis: null };
     const allStocks = (theme.subthemes || []).flatMap(s => s.stocks || []);
-    const sorted = [...allStocks].sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0)).slice(0, 10);
+    const pool = stockFilter ? allStocks.filter(stockFilter) : allStocks;
+    const sorted = [...pool].sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0)).slice(0, 10);
     const avgRS = sorted.length ? Math.round(sorted.reduce((s, x) => s + (x.rs_52w || 0), 0) / sorted.length) : null;
     const topAnalysis = sorted[0]?.analysis_details || sorted[0]?.reasoning || null;
     return { themeName: name, stocks: sorted, themeRS: avgRS, analysis: topAnalysis };
-  }, [spotlightThemeName, lbView, data, ibkrThemesData]);
+  }, [spotlightThemeName, lbView, data, ibkrThemesData, stockFilter]);
 
   if (!themeName) return null;
 
@@ -813,7 +814,7 @@ const HeroZone = ({ data, themesCount, tickersCount, etfTrendlineData }) => {
   );
 };
 
-const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt, etfHoldings = {}, openTheme = null, onThemeOpened = null }) => {
+const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt, etfHoldings = {}, openTheme = null, onThemeOpened = null, stockFilter = null }) => {
   const lang = useLang();
   const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks, inTop5, fromEtf }
   const [tblSort, setTblSort] = useState({ col: null, dir: 'desc' });
@@ -836,9 +837,14 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
 
   const sortedStocks = React.useMemo(() => {
     if (!selectedTheme?.stocks?.length) return [];
+    // ETF holdings rows have a different shape (rs / no rs_52w) — only scanner
+    // stocks go through the global Filters predicate.
+    const base = (stockFilter && !selectedTheme.fromEtf)
+      ? selectedTheme.stocks.filter(stockFilter)
+      : selectedTheme.stocks;
     const { col, dir } = tblSort;
-    if (!col) return selectedTheme.stocks;
-    return [...selectedTheme.stocks].sort((a, b) => {
+    if (!col) return base;
+    return [...base].sort((a, b) => {
       const av = a[col], bv = b[col];
       if (av == null && bv == null) return 0;
       if (av == null) return 1;
@@ -846,7 +852,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
       if (typeof av === 'string') return dir === 'asc' ? av.localeCompare(bv) : bv.localeCompare(av);
       return dir === 'asc' ? av - bv : bv - av;
     });
-  }, [selectedTheme, tblSort]);
+  }, [selectedTheme, tblSort, stockFilter]);
 
   // Sortable <th> helper — defined as a closure so it captures tblSort/handleColSort
   const SortTh = ({ col, label, align = 'right', className = '' }) => {
@@ -963,8 +969,16 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-sm font-semibold text-zinc-100">{selectedTheme.name}</span>
                 <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">
-                  {selectedTheme.stocks.length} {lang === 'zh' ? '檔股票' : 'stocks'}
+                  {sortedStocks.length !== selectedTheme.stocks.length
+                    ? `${sortedStocks.length} / ${selectedTheme.stocks.length}`
+                    : selectedTheme.stocks.length} {lang === 'zh' ? '檔股票' : 'stocks'}
                 </span>
+                {stockFilter && !selectedTheme.fromEtf && sortedStocks.length !== selectedTheme.stocks.length && (
+                  <span title="Rows below your ADR / $Vol / RS / 52W-dist thresholds are hidden — toggle Filters off to show all"
+                    className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-blue-500/15 border border-blue-500/30 text-blue-400">
+                    FILTERED
+                  </span>
+                )}
                 {selectedTheme.fromEtf && (
                   <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-500/15 border border-sky-500/30 text-sky-400">
                     {selectedTheme.fromEtf} ETF
@@ -981,9 +995,18 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
 
             {/* Stock list */}
             <div className="overflow-y-auto flex-1">
-              {selectedTheme.stocks.length === 0 ? (
+              {sortedStocks.length === 0 ? (
                 <div className="flex flex-col items-center justify-center py-12 gap-2 text-center px-6">
-                  {selectedTheme.inTop5 === false ? (
+                  {selectedTheme.stocks.length > 0 ? (
+                    <>
+                      <div className="text-zinc-400 text-sm font-medium">
+                        {lang === 'zh' ? `全部 ${selectedTheme.stocks.length} 檔股票皆未達篩選條件` : `All ${selectedTheme.stocks.length} stocks are below your filter thresholds`}
+                      </div>
+                      <div className="text-zinc-600 text-xs leading-relaxed">
+                        {lang === 'zh' ? '關閉 Filters 即可顯示完整列表。' : 'Toggle Filters off to see the full list.'}
+                      </div>
+                    </>
+                  ) : selectedTheme.inTop5 === false ? (
                     <>
                       <div className="text-zinc-400 text-sm font-medium">
                         {lang === 'zh' ? '此主題未進入今日前5名，且無 ETF 持股資料' : 'Not in today\'s top 5 and no ETF holdings available'}
@@ -10941,6 +10964,21 @@ const appScreenerMap = useMemo(() => {
     return m;
   }, [appScreenerStocks]);
 
+  // Global stock filter predicate (null when Filters are off). Shared by the
+  // heatmap theme panel, Thematic Spotlight, and the filtered theme list.
+  const stockFilter = useMemo(() => {
+    if (!filtersOn) return null;
+    const minDv  = (parseFloat(filterDolVol) || 0) * 1e6;
+    const minAdr = parseFloat(filterADR) || 0;
+    const minRs  = parseFloat(filterRS) || 0;
+    const maxDist = parseFloat(filterDist52w) || 0;
+    return s =>
+      (s.avg_dollar_volume ?? s.dollar_volume ?? 0) >= minDv &&
+      (s.adr_pct ?? 0) >= minAdr &&
+      (s.rs_52w ?? 0) >= minRs &&
+      (s.dist_52w_high == null || s.dist_52w_high >= -maxDist);
+  }, [filtersOn, filterDolVol, filterADR, filterRS, filterDist52w]);
+
   const filtered = useMemo(() => {
     if (!data) return [];
     return data.themes.map(t => {
@@ -10956,13 +10994,8 @@ const appScreenerMap = useMemo(() => {
           const q = search.toLowerCase();
           st = st.filter(s => s.ticker.toLowerCase().includes(q) || (s.company || "").toLowerCase().includes(q));
         }
-        if (filtersOn) {
-          st = st.filter(s =>
-            s.avg_dollar_volume >= (parseFloat(filterDolVol) || 0) * 1e6 &&
-            s.adr_pct >= (parseFloat(filterADR) || 0) &&
-            s.rs_52w >= (parseFloat(filterRS) || 0) &&
-            (s.dist_52w_high == null || s.dist_52w_high >= -(parseFloat(filterDist52w) || 0))
-          );
+        if (stockFilter) {
+          st = st.filter(stockFilter);
         }
         // In Stress regime: only show A/A+ grade stocks to reduce noise
         if (creditRegime === "Stress") {
@@ -10988,7 +11021,7 @@ const appScreenerMap = useMemo(() => {
       };
       return getRankingRS(b) - getRankingRS(a);
     });
-  }, [data, search, filtersOn, filterDolVol, filterADR, filterRS, filterDist52w, creditRegime]);
+  }, [data, search, stockFilter, creditRegime]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const unique = [...new Set(filtered.flatMap(t => t.subthemes.flatMap(s => s.stocks.map(st => st.ticker))))];
   const totalSubs = filtered.reduce((n, t) => n + t.subthemes.length, 0);
@@ -11214,7 +11247,7 @@ const appScreenerMap = useMemo(() => {
 
           {/* ── CENTER MAIN CONTENT ──────────────────────────────── */}
           <main className="flex-1 min-w-0 flex flex-col gap-3">
-            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}} openTheme={pendingTheme} onThemeOpened={() => setPendingTheme(null)}/>
+            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}} openTheme={pendingTheme} onThemeOpened={() => setPendingTheme(null)} stockFilter={stockFilter}/>
             <BreadthStockScreener data={data} compact />
             {data && <Leaderboard
               themeRankings={data.theme_rankings}
@@ -11230,7 +11263,7 @@ const appScreenerMap = useMemo(() => {
               onThemeSelect={name => setSpotlightThemeName(name)}
             />}
             {data && <MarketWarnings themes={data.themes}/>}
-            <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData}/>
+            <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData} stockFilter={stockFilter}/>
             <HeroZone data={data} themesCount={filtered.length} tickersCount={unique.length} etfTrendlineData={etfTrendlineData}/>
             <NewsHubFold newsData={newsData}/>
           </main>
