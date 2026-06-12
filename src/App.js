@@ -4546,7 +4546,7 @@ class NewsHubErrorBoundary extends React.Component {
   }
 }
 
-const NewsHubTab = ({ newsData }) => {
+const NewsHubTab = ({ newsData, embedded = false }) => {
   const [breakingNews, setBreakingNews] = useState(null);
   const [gappers, setGappers] = useState(null);
   const [earnings, setEarnings] = useState(null);
@@ -4592,7 +4592,7 @@ const NewsHubTab = ({ newsData }) => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className={`flex items-center justify-center ${embedded ? "py-10" : "min-h-screen"}`}>
         <div className="flex items-center gap-2 text-zinc-400">
           <RefreshCw size={20} className="animate-spin" />
           <span>Loading news hub...</span>
@@ -4602,11 +4602,13 @@ const NewsHubTab = ({ newsData }) => {
   }
 
   return (
-    <div className="max-w-[1600px] mx-auto px-4 py-4 space-y-4">
-      <div className="space-y-2 mb-6">
-        <h1 className="text-[32px] font-bold text-white">📰 News Hub</h1>
-        <p className="text-[13px] text-zinc-500">Breaking news, pre-market gappers, and earnings alerts all in one view</p>
-      </div>
+    <div className={embedded ? "px-4 pb-4 space-y-4" : "max-w-[1600px] mx-auto px-4 py-4 space-y-4"}>
+      {!embedded && (
+        <div className="space-y-2 mb-6">
+          <h1 className="text-[32px] font-bold text-white">📰 News Hub</h1>
+          <p className="text-[13px] text-zinc-500">Breaking news, pre-market gappers, and earnings alerts all in one view</p>
+        </div>
+      )}
 
       <div className="grid grid-cols-3 gap-4 auto-rows-max">
         {/* BREAKING NEWS SECTION */}
@@ -4792,6 +4794,35 @@ const NewsHubTab = ({ newsData }) => {
           🔄 Breaking News updates every 2 hours | 🚀 Gappers scan pre-market (6-9 AM ET) | 📊 Earnings analyzed live
         </div>
       </div>
+    </div>
+  );
+};
+
+// Collapsed-by-default News Hub fold for the Scanner tab. Content (and its
+// fetches) only mounts when expanded; open state persists in localStorage.
+const NewsHubFold = ({ newsData }) => {
+  const [open, setOpen] = useState(() => {
+    try { return localStorage.getItem("news_hub_open") === "1"; } catch { return false; }
+  });
+  const toggle = () => setOpen(o => {
+    const v = !o;
+    try { localStorage.setItem("news_hub_open", v ? "1" : "0"); } catch { /* quota */ }
+    return v;
+  });
+  const alertCount = newsData?.alerts?.length ?? 0;
+  return (
+    <div className="bg-zinc-900/60 rounded-xl border border-zinc-800/60 w-full min-w-0">
+      <button onClick={toggle} className="w-full flex items-center gap-2 px-4 py-2.5 text-left group">
+        {open ? <ChevronDown size={14} className="text-zinc-500 flex-shrink-0"/> : <ChevronRight size={14} className="text-zinc-500 flex-shrink-0"/>}
+        <span className="text-[13px] font-semibold text-zinc-300">📰 News Hub</span>
+        <span className="text-[11px] text-zinc-600">Breaking news · gappers · earnings</span>
+        {alertCount > 0 && (
+          <span className="px-1.5 py-0.5 bg-red-500/20 text-red-400 text-[11px] font-bold rounded">{alertCount}</span>
+        )}
+        <span className="flex-1"/>
+        <span className="text-[11px] text-zinc-600 group-hover:text-zinc-400 transition-colors">{open ? "Hide" : "Show"}</span>
+      </button>
+      {open && <NewsHubErrorBoundary><NewsHubTab newsData={newsData} embedded/></NewsHubErrorBoundary>}
     </div>
   );
 };
@@ -11089,9 +11120,6 @@ const appScreenerMap = useMemo(() => {
                 ★ Watchlist
               </button>
 
-              <button onClick={() => setTab("hub")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "hub" ? "border-orange-400 text-orange-300" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
-                📰 News Hub
-              </button>
               <button onClick={() => setTab("news")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "news" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Calendar
               </button>
@@ -11173,7 +11201,7 @@ const appScreenerMap = useMemo(() => {
         </div>
       </div>
 
-      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "hub" ? <NewsHubErrorBoundary><NewsHubTab newsData={newsData}/></NewsHubErrorBoundary> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
+      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
@@ -11203,6 +11231,7 @@ const appScreenerMap = useMemo(() => {
             {data && <MarketWarnings themes={data.themes}/>}
             <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData}/>
             <HeroZone data={data} themesCount={filtered.length} tickersCount={unique.length} etfTrendlineData={etfTrendlineData}/>
+            <NewsHubFold newsData={newsData}/>
           </main>
 
           {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}

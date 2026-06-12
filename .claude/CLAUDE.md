@@ -225,6 +225,8 @@ Surfaced in the frontend Leaderboard as the sortable **ROT** column (⚡ badge =
 
 ## Removed Features (2026-06-12 audit)
 
+- **News Hub tab** — folded into a collapsed-by-default `NewsHubFold` section at the bottom of the Scanner tab (open state in localStorage `news_hub_open`; content fetches only mount when expanded).
+
 - **`daily_sector_report.py` + `sector-report.yml`** — asked Gemini for a top-5 sector ranking; superseded by the scanner's own theme rankings + rotation rank. Output JSON had no UI readers.
 - **`market_brief.py` + `market-brief.yml` + `public/market_brief.json`** — duplicate Gemini brief pipeline alongside `market_briefing_engine.py`. After the ScannerBriefFeed removal it only fed a VIX number (now from `thematic_data.json` `vix`) and a status-bar dot. The dead `MarketBriefPanel` component was also removed from App.js.
 
