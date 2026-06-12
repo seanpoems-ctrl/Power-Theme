@@ -225,9 +225,9 @@ def run() -> dict:
     # ── 2. Build RS universe (once) ──────────────────────────────────────────
     logger.info("Building S&P 500 RS universe...")
     try:
-        from scraper import _build_sp500_rs_universe
+        from scraper import _build_sp500_rs_universe, _extend_rs_universe_midsmall
         rs_result  = _build_sp500_rs_universe()
-        rs_universe: dict[str, float] = rs_result[0]
+        rs_universe: dict[str, float] = _extend_rs_universe_midsmall(rs_result[0])
         logger.info("RS universe: %d stocks", len(rs_universe))
     except Exception as exc:
         logger.error("RS universe build failed: %s", exc)

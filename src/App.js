@@ -617,6 +617,24 @@ const PerfCellLB = ({ val }) => {
 
 const LB_PERF_COLS = new Set(['perf_1d','perf_1w','perf_1m','perf_3m','perf_6m']);
 
+// Rotation/acceleration cell — rank delta between the 1W and 3M leaderboards.
+// Positive = theme's short-term rank jumped ahead of its long-term rank
+// (early rotation in); ⚡ marks a jump ≥25% of the universe with positive 1W.
+const RotCellLB = ({ row }) => {
+  const d = row?.rotation_delta;
+  if (d == null) return <td className="px-1 py-1.5 align-middle text-center text-[11px] text-zinc-600">—</td>;
+  const color = d > 0 ? 'text-emerald-400' : d < 0 ? 'text-red-400' : 'text-zinc-500';
+  return (
+    <td className="px-1 py-1.5 align-middle text-center"
+      title={`1W rank #${row.rank_1w} vs 3M rank #${row.rank_3m} — ${d > 0 ? 'climbing' : d < 0 ? 'fading' : 'steady'}`}>
+      <span className={`inline-flex items-center gap-0.5 rounded-md px-1 py-0.5 text-[11px] font-mono font-medium ${color} ${row.accelerating ? 'bg-emerald-500/10' : ''}`}>
+        {row.accelerating && <span className="text-[10px]">⚡</span>}
+        {d > 0 ? '+' : ''}{d}
+      </span>
+    </td>
+  );
+};
+
 
 const IbkrGatesBadge = ({ passed }) => {
   const total = 5;
@@ -1513,6 +1531,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                 className="px-2 py-2 w-6 text-[11px] text-zinc-600 select-none whitespace-nowrap cursor-pointer hover:text-zinc-400 transition-colors">#</th>
               <LBSortHeader k="name" label="Theme" w="min-w-[120px]" align="left" />
               {LB_KEYS.map(k => <LBSortHeader key={k.key} k={k.key} label={k.label} />)}
+              <LBSortHeader k="rotation_delta" label="ROT" />
               <th onClick={e => handleLBSort('rs_score', e.shiftKey)}
                 className={`px-1 py-2 text-center cursor-pointer select-none w-14 ${sortPriority[0]?.key === 'rs_score' ? 'text-blue-400' : 'text-zinc-500 hover:text-zinc-300'}`}>
                 <div className="flex flex-col items-center gap-0.5">
@@ -1597,6 +1616,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                     </div>
                   </td>
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
+                  <RotCellLB row={t}/>
                   {(() => {
                     const rsVal = themeAvgRS[t.name?.toLowerCase()];
                     // All modes now return a 1–99 IBD-style percentile rank
@@ -1617,6 +1637,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                       <span className="text-[11px] text-zinc-400">{ind.name}</span>
                     </td>
                     {LB_KEYS.map(k => <PerfCellLB key={k.key} val={ind[k.key]}/>)}
+                    <RotCellLB row={ind}/>
                     <td className="px-2 py-1.5"></td>
                   </tr>
                 ))}

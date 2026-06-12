@@ -1412,6 +1412,62 @@ def _build_sp500_rs_universe() -> tuple[dict[str, float], float | None, float | 
         return {}, None, None, {}
 
 
+def _extend_rs_universe_midsmall(rs_universe: dict[str, float]) -> dict[str, float]:
+    """Broaden the RS rank universe with S&P 400 (mid) + S&P 600 (small) 6M returns.
+
+    The thematic scan is dominated by high-ADR mid-caps; ranking them against
+    the S&P 500 alone compresses everything into the 95–99 band. Returns a
+    merged {ticker: perf_6m} dict (S&P 500 values win on overlap). Falls back
+    to the input unchanged on any failure.
+    """
+    try:
+        import yfinance as yf
+        tickers: list[str] = []
+        for url in (
+            "https://en.wikipedia.org/wiki/List_of_S%26P_400_companies",
+            "https://en.wikipedia.org/wiki/List_of_S%26P_600_companies",
+        ):
+            try:
+                resp = requests.get(url, headers=HEADERS, timeout=15)
+                resp.raise_for_status()
+                # Parse with BeautifulSoup (pd.read_html would need lxml)
+                soup = BeautifulSoup(resp.text, "html.parser")
+                for table in soup.find_all("table"):
+                    rows = table.find_all("tr")
+                    if len(rows) < 50:
+                        continue
+                    header = [c.get_text(strip=True).lower() for c in rows[0].find_all(["th", "td"])]
+                    if "symbol" not in header:
+                        continue
+                    sym_idx = header.index("symbol")
+                    for row in rows[1:]:
+                        cells = row.find_all(["td", "th"])
+                        if len(cells) > sym_idx:
+                            sym = cells[sym_idx].get_text(strip=True).replace(".", "-")
+                            if sym:
+                                tickers.append(sym)
+                    break
+            except Exception as e:
+                logger.warning(f"  S&P mid/small list fetch failed ({url}): {e}")
+        new_tickers = sorted({t for t in tickers if t and t.lower() != "nan"} - set(rs_universe))
+        if not new_tickers:
+            return rs_universe
+        logger.info(f"  Downloading {len(new_tickers)} S&P 400/600 stocks (7mo) to broaden RS universe...")
+        data = yf.download(new_tickers, period="7mo", interval="1d", auto_adjust=True, progress=False)
+        closes = data["Close"]
+        valid = closes.dropna(thresh=int(len(closes) * 0.5), axis=1)
+        if valid.empty:
+            return rs_universe
+        base = valid.iloc[max(0, len(valid) - 127)]
+        perf = ((valid.iloc[-1] - base) / base * 100).dropna()
+        merged = {**perf.to_dict(), **rs_universe}
+        logger.info(f"  RS universe broadened: {len(rs_universe)} S&P 500 + {len(merged) - len(rs_universe)} mid/small = {len(merged)}")
+        return merged
+    except Exception as e:
+        logger.warning(f"  S&P mid/small RS extension failed: {e}")
+        return rs_universe
+
+
 def _fetch_finviz_market_breadth() -> tuple[dict | None, dict | None, dict | None, dict | None]:
     """Fetch full-market Adv/Dec, NH/NL, SMA50, SMA200 counts from Finviz screener.
 
@@ -1569,6 +1625,31 @@ def _composite_ind(ind: dict) -> float:
             + (ind.get("perf_3m") or 0) * 0.30 + (ind.get("perf_6m") or 0) * 0.20)
 
 
+def _add_rotation_ranks(rankings: list[dict]) -> None:
+    """Annotate theme/industry ranking dicts in-place with rotation signals.
+
+    rank_1w / rank_3m — position when ranked by that window's perf (1 = best)
+    rotation_delta    — rank_3m − rank_1w; positive = short-term rank has
+                        jumped ahead of long-term rank (early rotation in)
+    accelerating      — True when the jump spans ≥25% of the universe
+                        (min 3 places) AND 1W perf is positive
+    """
+    n = len(rankings)
+    if n < 2:
+        return
+    by_1w = sorted(rankings, key=lambda t: t.get("perf_1w") or 0, reverse=True)
+    by_3m = sorted(rankings, key=lambda t: t.get("perf_3m") or 0, reverse=True)
+    rank_1w = {id(t): i + 1 for i, t in enumerate(by_1w)}
+    rank_3m = {id(t): i + 1 for i, t in enumerate(by_3m)}
+    threshold = max(3, round(n * 0.25))
+    for t in rankings:
+        t["rank_1w"] = rank_1w[id(t)]
+        t["rank_3m"] = rank_3m[id(t)]
+        t["rotation_delta"] = t["rank_3m"] - t["rank_1w"]
+        t["accelerating"] = (t["rotation_delta"] >= threshold
+                             and (t.get("perf_1w") or 0) > 0)
+
+
 # ──────────────────────────────────────────────────────────────
 # TradingView enrichment for thematic stocks
 # ──────────────────────────────────────────────────────────────
@@ -1656,6 +1737,7 @@ def build_data() -> dict:
     # ── Step 0: Fetch Finviz themes map (40 parent themes, 5 timeframes) ──
     logger.info("Step 0: Fetching Finviz themes map performance...")
     finviz_theme_rankings = fetch_themes_map_performance()
+    _add_rotation_ranks(finviz_theme_rankings)
     for t in finviz_theme_rankings[:10]:
         badge = " ★ Stage2" if t["stage2_momentum"] else ""
         logger.info(f"  {t['name']:35} RS={t['rs_score']:+7.2f}  1D={t['perf_1d']:+.2f}%  1W={t['perf_1w']:+.2f}%  1M={t['perf_1m']:+.2f}%  3M={t['perf_3m']:+.2f}%  6M={t['perf_6m']:+.2f}%{badge}")
@@ -1687,6 +1769,10 @@ def build_data() -> dict:
         if entry:
             theme_rankings.append(entry)
     theme_rankings.sort(key=lambda t: t["rs_score"], reverse=True)
+    _add_rotation_ranks(theme_rankings)
+    for t in theme_rankings:
+        if t.get("accelerating"):
+            logger.info(f"  ⚡ Rotation: {t['name']} 1W rank #{t['rank_1w']} vs 3M rank #{t['rank_3m']} (+{t['rotation_delta']})")
 
     # ── Step 3: For top themes, drill into industries → stocks ──
     top_themes = theme_rankings[:TOP_THEMES]
@@ -1850,8 +1936,19 @@ def build_data() -> dict:
         for sub in th.get("subthemes", []):
             all_stocks_flat.extend(sub["stocks"])
 
+    if rs_universe:
+        rs_universe = _extend_rs_universe_midsmall(rs_universe)
+
     if rs_universe and all_stocks_flat:
-        sorted_perfs = sorted(rs_universe.values())
+        # Include the scanned stocks themselves so high-ADR thematic names are
+        # ranked against their own cohort, not just index constituents.
+        rank_universe = dict(rs_universe)
+        for stock in all_stocks_flat:
+            tkr = stock.get("ticker")
+            perf = stock.get("perf_6m") or stock.get("perf_3m")
+            if tkr and perf is not None and tkr not in rank_universe:
+                rank_universe[tkr] = perf
+        sorted_perfs = sorted(rank_universe.values())
         n = len(sorted_perfs)
         for stock in all_stocks_flat:
             perf = stock.get("perf_6m") or stock.get("perf_3m") or 0
@@ -1865,9 +1962,18 @@ def build_data() -> dict:
         for rank, (idx, _) in enumerate(perfs):
             all_stocks_flat[idx]["rs_52w"] = max(1, min(99, int((rank / max(n - 1, 1)) * 98) + 1))
 
+    # Re-sort with RS now available — but keep tradeable-first (ADR ≥5% +
+    # $300M $Vol) as the primary key so the step-3 ordering isn't clobbered.
     for th in output_themes + heatmap_themes:
         for sub in th.get("subthemes", []):
-            sub["stocks"].sort(key=lambda s: s.get("rs_52w", 0), reverse=True)
+            sub["stocks"].sort(
+                key=lambda s: (
+                    (s.get("adr_pct") or 0) >= PREF_MIN_ADR_PCT
+                    and (s.get("avg_dollar_volume") or s.get("dollar_volume") or 0) >= PREF_MIN_AVG_DOLLAR_VOL,
+                    s.get("rs_52w", 0),
+                ),
+                reverse=True,
+            )
 
     # ── Step 5b: Enrich thematic stocks with TradingView company names + $Vol ──
     logger.info("\nStep 5b: Enriching thematic stocks from TradingView (company names + $Vol)...")
@@ -1938,6 +2044,7 @@ def build_data() -> dict:
         for ind in industries
         if ind.get("parent_theme") != "Other"
     ]
+    _add_rotation_ranks(industry_rankings)
 
     logger.info("Fetching macro news...")
     macro_news = fetch_macro_news()

@@ -204,10 +204,22 @@ A stock is `pure_play: true` if it appears in **only one** sub-theme across the 
 
 ## Relative Strength (RS) Scoring
 
-- Universe: All S&P 500 stocks (list scraped from Wikipedia)
+- Universe: S&P 1500 (S&P 500 + MidCap 400 + SmallCap 600, lists scraped from Wikipedia) **plus the scanned thematic stocks themselves** — broadened so high-ADR mid-caps aren't percentile-ranked against mega-caps only
 - Metric: 6-month total return
 - Output: Percentile rank 1–99 (99 = top performer)
-- Fallback: Internal ranking within dataset if S&P 500 fetch fails
+- Fallbacks: S&P 500-only if the mid/small extension fails (`_extend_rs_universe_midsmall`); internal ranking within dataset if everything fails
+
+---
+
+## Theme Rotation / Acceleration Rank
+
+`_add_rotation_ranks()` annotates `theme_rankings`, `finviz_theme_rankings`, and `industry_rankings` with:
+
+- `rank_1w` / `rank_3m` — position when ranked by that window's perf (1 = best)
+- `rotation_delta` — `rank_3m − rank_1w`; positive = short-term rank jumped ahead of long-term rank (early rotation in)
+- `accelerating` — `true` when delta ≥ 25% of universe size (min 3) and 1W perf > 0
+
+Surfaced in the frontend Leaderboard as the sortable **ROT** column (⚡ badge = accelerating).
 
 ---
 
