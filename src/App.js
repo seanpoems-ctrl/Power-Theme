@@ -10762,11 +10762,22 @@ export default function App() {
   const [spotlightThemeName, setSpotlightThemeName] = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [filtersOn, setFiltersOn] = useState(false);
-  const [filterDolVol, setFilterDolVol] = useState("100");
-  const [filterADR, setFilterADR] = useState("4");
-  const [filterRS, setFilterRS] = useState("85");
-  const [filterDist52w, setFilterDist52w] = useState("20");
+  // Swing criteria defaults (ADR ≥5%, $Vol ≥$300M) — persisted across sessions
+  const _fp = (k, d) => { try { return localStorage.getItem("fp_" + k) ?? d; } catch { return d; } };
+  const [filtersOn, setFiltersOn] = useState(() => _fp("on", "1") === "1");
+  const [filterDolVol, setFilterDolVol] = useState(() => _fp("dolvol", "300"));
+  const [filterADR, setFilterADR] = useState(() => _fp("adr", "5"));
+  const [filterRS, setFilterRS] = useState(() => _fp("rs", "85"));
+  const [filterDist52w, setFilterDist52w] = useState(() => _fp("dist52w", "20"));
+  useEffect(() => {
+    try {
+      localStorage.setItem("fp_on", filtersOn ? "1" : "0");
+      localStorage.setItem("fp_dolvol", filterDolVol);
+      localStorage.setItem("fp_adr", filterADR);
+      localStorage.setItem("fp_rs", filterRS);
+      localStorage.setItem("fp_dist52w", filterDist52w);
+    } catch {}
+  }, [filtersOn, filterDolVol, filterADR, filterRS, filterDist52w]);
   const [showFP, setShowFP] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [lbPerfKey, setLbPerfKey] = useState("perf_1m");

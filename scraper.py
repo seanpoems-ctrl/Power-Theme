@@ -41,6 +41,12 @@ TOP_THEMES = 5
 TOP_SUBTHEMES_PER_THEME = 5
 TOP_STOCKS_PER_SUBTHEME = 10
 
+# Tradeable-universe preference (swing criteria): stocks meeting these are
+# picked first within each sub-theme; remaining slots backfill from the rest
+# so sub-themes never come back empty.
+PREF_MIN_AVG_DOLLAR_VOL = 300_000_000   # price × avg_volume ≥ $300M
+PREF_MIN_ADR_PCT        = 5.0           # ADR ≥ 5% (applied post detail-fetch)
+
 def _load_config_json(filename: str) -> dict:
     p = Path(__file__).parent / "config" / filename
     with open(p, encoding="utf-8") as f:
@@ -1545,6 +1551,18 @@ def _stock_score(s):
     return v / w_total if w_total > 0 else 0.0
 
 
+def _pick_tradeable_first(stocks: list[dict], n: int) -> list[dict]:
+    """Pick top-n by momentum score, preferring stocks with avg dollar volume
+    ≥ PREF_MIN_AVG_DOLLAR_VOL. Backfills from illiquid names only when fewer
+    than n liquid candidates exist, so sub-themes never come back empty."""
+    def _liquid(s):
+        price, avg_vol = s.get("price") or 0, s.get("avg_volume") or 0
+        return price * avg_vol >= PREF_MIN_AVG_DOLLAR_VOL
+    liquid   = sorted([s for s in stocks if _liquid(s)],     key=_stock_score, reverse=True)
+    illiquid = sorted([s for s in stocks if not _liquid(s)], key=_stock_score, reverse=True)
+    return (liquid + illiquid)[:n]
+
+
 def _composite_ind(ind: dict) -> float:
     """Composite score for a single industry dict (from groups page)."""
     return ((ind.get("perf_1w") or 0) * 0.20 + (ind.get("perf_1m") or 0) * 0.30
@@ -1709,10 +1727,18 @@ def build_data() -> dict:
             stocks = fetch_screener_stocks("ind", ind_code)
             if not stocks:
                 continue
-            stocks.sort(key=_stock_score, reverse=True)
-            picks = stocks[:TOP_STOCKS_PER_SUBTHEME]
+            picks = _pick_tradeable_first(stocks, TOP_STOCKS_PER_SUBTHEME)
             sub_stocks = _fetch_details(picks, all_detail_cache)
             if sub_stocks:
+                # Tradeable-first ordering: ADR ≥5% + $300M names float to the top
+                sub_stocks.sort(
+                    key=lambda s: (
+                        (s.get("adr_pct") or 0) >= PREF_MIN_ADR_PCT
+                        and (s.get("avg_dollar_volume") or s.get("dollar_volume") or 0) >= PREF_MIN_AVG_DOLLAR_VOL,
+                        _stock_score(s),
+                    ),
+                    reverse=True,
+                )
                 theme_subthemes.append({"name": ind_name, "stocks": sub_stocks})
 
         if theme_subthemes:
@@ -1772,10 +1798,18 @@ def build_data() -> dict:
             stocks = fetch_screener_stocks("ind", ind_code, max_pages=3)
             if not stocks:
                 continue
-            stocks.sort(key=_stock_score, reverse=True)
-            picks = stocks[:TOP_STOCKS_PER_SUBTHEME]
+            picks = _pick_tradeable_first(stocks, TOP_STOCKS_PER_SUBTHEME)
             sub_stocks = _fetch_details(picks, all_detail_cache)
             if sub_stocks:
+                # Tradeable-first ordering: ADR ≥5% + $300M names float to the top
+                sub_stocks.sort(
+                    key=lambda s: (
+                        (s.get("adr_pct") or 0) >= PREF_MIN_ADR_PCT
+                        and (s.get("avg_dollar_volume") or s.get("dollar_volume") or 0) >= PREF_MIN_AVG_DOLLAR_VOL,
+                        _stock_score(s),
+                    ),
+                    reverse=True,
+                )
                 theme_subthemes.append({"name": ind_name, "stocks": sub_stocks})
             _sleep()
 
