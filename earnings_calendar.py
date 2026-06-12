@@ -86,6 +86,27 @@ MIN_AVG_VOL    = 100_000       # shares
 MIN_PRICE      = 5.0           # dollars
 MIN_DOLLAR_VOL = 20_000_000    # $20M (lower than breadth scanner — coverage > liquidity)
 
+# High-priority tickers always checked via yfinance regardless of TradingView/Finviz coverage.
+# Add any large-cap or sector-leader you want guaranteed tracking on earnings week.
+PRIORITY_WATCHLIST: list[str] = [
+    # Mega-cap tech
+    "AAPL", "MSFT", "NVDA", "AMZN", "GOOGL", "META", "TSLA",
+    # Enterprise software / cloud
+    "ORCL", "SAP", "CRM", "NOW", "ADBE", "INTU", "WDAY",
+    # Semiconductors
+    "AMD", "AVGO", "QCOM", "AMAT", "LRCX", "KLAC", "MU", "ARM", "TSM",
+    # Financials
+    "JPM", "GS", "MS", "BAC", "BLK",
+    # Healthcare / biotech
+    "LLY", "UNH", "JNJ", "ABBV", "MRK",
+    # Industrials / macro bellwethers
+    "CAT", "DE", "UPS", "FDX",
+    # Consumer / retail
+    "COST", "WMT", "HD", "TGT", "AMZN",
+    # Energy
+    "XOM", "CVX",
+]
+
 FINVIZ_HEADERS = {
     "User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -135,24 +156,25 @@ def _parse_date(raw) -> date | None:
 
 
 def _top20_tickers() -> list[str]:
-    if not THEMATIC_JSON.exists():
-        return []
-    try:
-        data = json.loads(THEMATIC_JSON.read_text(encoding="utf-8"))
-        seen: set[str] = set()
-        unique: list[dict] = []
-        for th in data.get("themes", []):
-            for sub in th.get("subthemes", []):
-                for s in sub.get("stocks", []):
-                    t = s.get("ticker", "")
-                    if t and t not in seen:
-                        seen.add(t)
-                        unique.append(s)
-        unique.sort(key=lambda x: x.get("rs_52w", 0), reverse=True)
-        return [s["ticker"] for s in unique[:20]]
-    except Exception as exc:
-        logger.error("Failed to read thematic_data.json: %s", exc)
-        return []
+    """Return top-20 RS tickers from thematic data + the full priority watchlist."""
+    result: list[str] = list(PRIORITY_WATCHLIST)
+    seen: set[str] = set(result)
+    if THEMATIC_JSON.exists():
+        try:
+            data = json.loads(THEMATIC_JSON.read_text(encoding="utf-8"))
+            unique: list[dict] = []
+            for th in data.get("themes", []):
+                for sub in th.get("subthemes", []):
+                    for s in sub.get("stocks", []):
+                        t = s.get("ticker", "")
+                        if t and t not in seen:
+                            seen.add(t)
+                            unique.append(s)
+            unique.sort(key=lambda x: x.get("rs_52w", 0), reverse=True)
+            result += [s["ticker"] for s in unique[:20]]
+        except Exception as exc:
+            logger.error("Failed to read thematic_data.json: %s", exc)
+    return result
 
 
 # ─── Source 0: TradingView Screener (broad, 7-day reliable) ──────────────────
