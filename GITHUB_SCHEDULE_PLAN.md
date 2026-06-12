@@ -86,10 +86,7 @@ All data sources now run on **GitHub's native scheduler** (no external dependenc
    - Runs: `breaking_news.py`
    - Status: ✅ Native scheduler
 
-3. **market-brief.yml**
-   - Cron: `45 12 * * 1-5` + `0 21 * * 1-5` (8:45 AM + 5:00 PM ET)
-   - Runs: `market_brief.py`
-   - Status: ✅ Native scheduler (DST-aware)
+3. **market-brief.yml** — ❌ REMOVED 2026-06-12 (redundant with market-intelligence.yml; UI no longer reads market_brief.json)
 
 4. **daily-scrape-deploy.yml**
    - Cron: `0 21 * * 1-5` (5:00 PM ET)
@@ -102,10 +99,7 @@ All data sources now run on **GitHub's native scheduler** (no external dependenc
    - Runs: `earnings_monitor.py`
    - Status: ✅ Created
 
-6. **sector-report.yml** (NEW)
-   - Cron: `30 20 * * 1-5` (4:30 PM ET, post-market)
-   - Runs: `daily_sector_report.py`
-   - Status: ✅ Created
+6. **sector-report.yml** — ❌ REMOVED 2026-06-12 (LLM sector ranking superseded by the scanner's own theme rankings + rotation rank; output JSON had no readers)
 
 ---
 

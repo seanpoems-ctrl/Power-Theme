@@ -223,34 +223,10 @@ Surfaced in the frontend Leaderboard as the sortable **ROT** column (⚡ badge =
 
 ---
 
-## Planned Feature: 每日選股日結報告 (Daily Sector Report)
+## Removed Features (2026-06-12 audit)
 
-*(Cursor plan: `每日選股日結報告_b4c7e267.plan.md`)*
-
-A standalone script (`daily_sector_report.py`) to add after-market buy signal detection:
-
-**Goal:** Use Gemini to identify today's top 5 sub-industries → check if Semiconductors/Technology is in the list → use yfinance to check TSM & NVDA today's gain → print "符合買入訊號" or "觀望中".
-
-**Key design decisions:**
-- Model: `gemini-1.5-flash`
-- Prompt must request **pure JSON only** (no markdown wrapping), array of `{sector_name, percentage_gain}`
-- Strip markdown code blocks before `json.loads()`
-- Sector matching: case-insensitive keyword check for `"semiconductors"` or `"technology"`
-- Buy signal condition: **both** TSM and NVDA today's gain **> 2%**
-- Use `os.getenv("GEMINI_API_KEY")` with `.env` fallback
-- Today's gain formula: `(close - open) / open * 100`
-
-**Error handling:**
-- Gemini failure → print message, return empty list
-- `json.JSONDecodeError` → print "JSON 解析失敗", don't crash
-- yfinance failure → print error, treat as 觀望中
-
-**Note:** Gemini's sector ranking may not be real-time; actual signal is based on yfinance TSM/NVDA prices.
-
-**Future extensions (not yet built):**
-- Telegram notification on buy signal
-- Save JSON to `data/daily_sector_report/YYYY-MM-DD.json`
-- Integrate into existing GitHub Actions schedule
+- **`daily_sector_report.py` + `sector-report.yml`** — asked Gemini for a top-5 sector ranking; superseded by the scanner's own theme rankings + rotation rank. Output JSON had no UI readers.
+- **`market_brief.py` + `market-brief.yml` + `public/market_brief.json`** — duplicate Gemini brief pipeline alongside `market_briefing_engine.py`. After the ScannerBriefFeed removal it only fed a VIX number (now from `thematic_data.json` `vix`) and a status-bar dot. The dead `MarketBriefPanel` component was also removed from App.js.
 
 ---
 

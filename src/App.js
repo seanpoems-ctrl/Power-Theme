@@ -2831,7 +2831,7 @@ const VIX_ZONES_NOTE = [
 ];
 
 
-const MarketPulseCard = ({ vix, generatedAt, mc, briefData }) => {
+const MarketPulseCard = ({ vix, generatedAt, mc }) => {
   const lang = useLang();
   const [showVixNote, setShowVixNote] = React.useState(false);
   const vixNoteRef = React.useRef(null);
@@ -3136,7 +3136,7 @@ const MarketInternalsV2 = ({ mc, internalsData, generatedAt }) => {
 
 
 
-const BottomStatusBar = ({ ibkrData, briefData }) => {
+const BottomStatusBar = ({ ibkrData }) => {
   const ibkrLive = ibkrData?.connected;
   return (
     <div className="border-t border-zinc-800/60 bg-zinc-950/80 px-4 py-1.5 mt-3 flex items-center justify-between text-[11px] font-mono text-zinc-500 flex-wrap gap-2">
@@ -3144,10 +3144,6 @@ const BottomStatusBar = ({ ibkrData, briefData }) => {
         <span className="flex items-center gap-1">
           <span className={`w-1.5 h-1.5 rounded-full ${ibkrLive ? "bg-emerald-400" : "bg-zinc-600"}`}/>
           {ibkrLive ? "IBKR Connected · TWS 10.19" : "IBKR Offline"}
-        </span>
-        <span className="flex items-center gap-1">
-          <span className={`w-1.5 h-1.5 rounded-full ${briefData ? "bg-emerald-400" : "bg-zinc-600"}`}/>
-          Gemini API {briefData ? "Active" : "—"}
         </span>
         <span className="flex items-center gap-1">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"/>
@@ -3280,34 +3276,6 @@ function getNextGapperScanTime(scanTime) {
     }
   }
   return "Next weekday ~8:55 AM ET";
-}
-
-/** Returns the next Market Brief update time as a display string (ET). */
-function getNextBriefTime() {
-  const now = new Date();
-  const todayUTC = new Date(now);
-  todayUTC.setUTCHours(0, 0, 0, 0);
-  // Brief runs at 12:17 UTC and 21:03 UTC, Mon–Fri
-  const am = new Date(todayUTC.getTime() + (12 * 60 + 17) * 60000);
-  const pm = new Date(todayUTC.getTime() + (21 * 60 + 3) * 60000);
-  const nextBusinessDay = (base) => {
-    const d = new Date(base);
-    do { d.setUTCDate(d.getUTCDate() + 1); } while (d.getUTCDay() === 0 || d.getUTCDay() === 6);
-    return d;
-  };
-  const isWeekend = now.getUTCDay() === 0 || now.getUTCDay() === 6;
-  let next;
-  if (!isWeekend && now < am) {
-    next = am;
-  } else if (!isWeekend && now < pm) {
-    next = pm;
-  } else {
-    const nextDay = nextBusinessDay(todayUTC);
-    next = new Date(nextDay.getTime() + (12 * 60 + 30) * 60000);
-  }
-  const etTime = next.toLocaleTimeString("en-US", { timeZone: "America/New_York", hour: "numeric", minute: "2-digit", hour12: true });
-  const sameDay = next.toDateString() === now.toDateString();
-  return `${etTime} ET${sameDay ? "" : " (tomorrow)"}`;
 }
 
 const IBKRScannerTable = ({ ibkrScanner, onTickerClick }) => {
@@ -8649,140 +8617,6 @@ const MomentumCockpit = () => {
   );
 };
 
-// ── Market Brief Panel (RSS 全文 + Gemini：可信度、交叉驗證、突破單建議) ──
-const MarketBriefPanel = ({ data }) => {
-  const lang = useLang();
-  if (!data) {
-    return (
-      <div className="max-w-[1400px] mx-auto px-4 py-16 text-center">
-        <Landmark size={28} className="mx-auto mb-3 text-zinc-600"/>
-        <p className="text-sm text-zinc-500">Brief not yet generated</p>
-        <p className="text-[13px] text-zinc-600 mt-1">Runs at 8:00 AM and 4:00 PM ET on trading days</p>
-      </div>
-    );
-  }
-
-  const { generated_at, session, brief, article_count, fulltext_articles, fulltext_success_count } = data;
-  const b = brief || {};
-
-  const renderBold = (text) => {
-    if (!text) return null;
-    const parts = text.split(/\*\*(.+?)\*\*/g);
-    return parts.map((part, i) =>
-      i % 2 === 1 ? <strong key={i} className="text-white font-semibold">{part}</strong> : part
-    );
-  };
-
-  const credStyle = (c) => {
-    const x = (c || "").toLowerCase();
-    if (x === "high") return "bg-emerald-500/15 text-emerald-300 border-emerald-500/35";
-    if (x === "low") return "bg-red-500/15 text-red-300 border-red-500/35";
-    return "bg-amber-500/15 text-amber-200 border-amber-500/35";
-  };
-
-  const isPendingSetup = b.pending_setup === true;
-  const isLegacyBrief = !b.error && !isPendingSetup && !b.top_market_views && (b.macro_news?.length > 0 || b.sentiment);
-
-  return (
-    <div className="max-w-[1400px] mx-auto px-4 py-6">
-      <div className="flex flex-wrap items-center gap-3 mb-5">
-        <span className="text-[12px] text-zinc-500">
-          {generated_at}
-          {article_count != null && ` · RSS ${article_count} ${lang === 'zh' ? '則' : 'articles'}`}
-          {fulltext_articles != null && fulltext_success_count != null
-            && ` · ${lang === 'zh' ? '全文' : 'full text'} ${fulltext_success_count}/${fulltext_articles}`}
-        </span>
-      </div>
-
-      {isPendingSetup && (
-        <div className="text-sm text-zinc-300 bg-zinc-800/50 border border-zinc-600/50 rounded-lg p-4 mb-5 leading-relaxed">
-          {b.pending_message || (lang === 'zh' ? "尚未產生簡報。請設定 GEMINI_API_KEY 並執行 python market_brief.py。" : "Brief not yet generated. Set GEMINI_API_KEY and run python market_brief.py.")}
-        </div>
-      )}
-      {b.error && !isPendingSetup && (
-        <div className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg p-4 mb-5">
-          {lang === 'zh' ? '分析錯誤：' : 'Analysis error: '}{b.error}
-        </div>
-      )}
-
-      {isLegacyBrief && (
-        <p className="text-[13px] text-amber-400/90 bg-amber-500/10 border border-amber-500/25 rounded-lg px-3 py-2 mb-5">
-          {lang === 'zh' ? <>此檔為舊版格式。請重新執行 <code className="text-amber-200">python market_brief.py</code> 以產生新聞全文分析與突破單建議。</> : <>Legacy format detected. Re-run <code className="text-amber-200">python market_brief.py</code> to generate full-text analysis and breakout advice.</>}
-        </p>
-      )}
-
-      {/* 交叉驗證 */}
-      {b.cross_check_note && (
-        <div className="mb-5 bg-zinc-900/80 border border-zinc-700/50 rounded-xl p-4">
-          <h3 className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-2">{lang === 'zh' ? '交叉驗證' : 'Cross-Check'}</h3>
-          <p className="text-sm text-zinc-300 leading-relaxed">{b.cross_check_note}</p>
-        </div>
-      )}
-
-      {/* 三大市場觀點 */}
-      {b.top_market_views?.length > 0 && (
-        <div className="mb-5">
-          <h3 className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-3">{lang === 'zh' ? '波動主因（精簡）' : 'Key Market Drivers'}</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {b.top_market_views.map((line, i) => (
-              <div key={i} className="bg-zinc-900 border border-zinc-800/60 rounded-lg p-4">
-                <div className="text-[11px] font-mono text-zinc-600 mb-1">#{i + 1}</div>
-                <p className="text-sm text-zinc-200 leading-snug">{line}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* 突破單建議 */}
-      {b.breakout_trading_advice && (
-        <div className="mb-5 rounded-xl border border-amber-500/30 bg-amber-500/5 p-4">
-          <h3 className="text-[11px] font-semibold text-amber-400/90 uppercase tracking-wider mb-2">{lang === 'zh' ? '突破單建議' : 'Breakout Trade Advice'}</h3>
-          <p className="text-sm text-zinc-200 leading-relaxed whitespace-pre-wrap">{renderBold(b.breakout_trading_advice)}</p>
-        </div>
-      )}
-
-      {/* 各則可信度 */}
-      {b.articles_reviewed?.length > 0 && (
-        <div className="mb-5">
-          <h3 className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider mb-3">{lang === 'zh' ? '新聞可信度（逐則）' : 'Article Credibility'}</h3>
-          <div className="space-y-2">
-            {b.articles_reviewed.map((row, i) => (
-              <div key={i} className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg px-3 py-2.5 flex flex-wrap gap-2 items-start">
-                <span className={`text-[11px] font-bold uppercase px-2 py-0.5 rounded border shrink-0 ${credStyle(row.credibility)}`}>
-                  {row.credibility || "—"}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <div className="text-[11px] text-zinc-500 mb-0.5">{row.source}</div>
-                  <div className="text-[13px] font-medium text-zinc-200 leading-snug">{row.title}</div>
-                  {row.credibility_note && (
-                    <p className="text-[12px] text-zinc-500 mt-1 leading-relaxed">{row.credibility_note}</p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* 舊版 fallback 顯示 */}
-      {isLegacyBrief && b.macro_news?.length > 0 && (
-        <div className="mb-5">
-          <h3 className="text-[13px] font-semibold text-zinc-500 uppercase tracking-wider mb-3">Macro（舊版）</h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {b.macro_news.map((item, i) => (
-              <div key={i} className="bg-zinc-900 border border-zinc-800/60 rounded-lg p-4">
-                <div className="text-[13px] font-semibold text-amber-400 mb-2">{item.title}</div>
-                <p className="text-[13px] text-zinc-300 leading-relaxed">{renderBold(item.summary)}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
 // ── ETF Trendline Panel ───────────────────────────────────────────────────────
 const PATTERN_ZH = {
   channel_up:           "上升通道",
@@ -10773,7 +10607,6 @@ export default function App() {
   const [pendingTheme, setPendingTheme] = useState(null); // theme to auto-open in ThemeHeatmap
   const [data, setData] = useState(null);
   const [appScreenerStocks, setAppScreenerStocks] = useState([]);
-  const [briefData, setBriefData] = useState(null);
   const [newsData, setNewsData]   = useState(null);
   const [ibkrThemesData, setIbkrThemesData] = useState(null);
   const [earningsData, setEarningsData]     = useState(null);
@@ -10929,19 +10762,6 @@ export default function App() {
       setInternalsData(internals);
       if (screener?.stocks) setAppScreenerStocks(screener.stocks);
     });
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // Market brief — poll every 5 min
-  useEffect(() => {
-    const fetchBrief = () => {
-      fetch(process.env.PUBLIC_URL + "/market_brief.json?v=" + Date.now())
-        .then(r => r.ok ? r.json() : null)
-        .then(d => { if (d) setBriefData(d); })
-        .catch(() => {});
-    };
-    fetchBrief();
-    const id = setInterval(fetchBrief, 5 * 60 * 1000);
-    return () => clearInterval(id);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Breaking news — poll every 5 min
@@ -11358,9 +11178,9 @@ const appScreenerMap = useMemo(() => {
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
           {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
           <aside className="w-[260px] flex-shrink-0 flex flex-col gap-3">
-            <MarketPulseCard vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix} generatedAt={data?.generated_at} mc={data?.market_condition} briefData={briefData}/>
+            <MarketPulseCard vix={data?.vix} generatedAt={data?.generated_at} mc={data?.market_condition}/>
             <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData} generatedAt={data?.generated_at}/>
-            <PositionCalc ibkrThemesData={ibkrData} thematicData={data} vix={briefData?.global_snapshot?.find(r => r.label === "VIX")?.price ?? data?.vix}/>
+            <PositionCalc ibkrThemesData={ibkrData} thematicData={data} vix={data?.vix}/>
           </aside>
 
           {/* ── CENTER MAIN CONTENT ──────────────────────────────── */}
@@ -11390,7 +11210,7 @@ const appScreenerMap = useMemo(() => {
         </div>
 
 
-        <BottomStatusBar ibkrData={ibkrData} briefData={briefData}/>
+        <BottomStatusBar ibkrData={ibkrData}/>
         </>
       )}
       {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect} chartUrl={macroHover.chartUrl} onClose={() => setMacroHover(null)}/>}
