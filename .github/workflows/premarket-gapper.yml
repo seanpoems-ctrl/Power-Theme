@@ -123,9 +123,20 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase --autostash
           git add public/gapper_data.json public/earnings_calendar.json
           git diff --staged --quiet || git commit -m "data: gapper_data $(date -u +%Y-%m-%dT%H:%M) [skip ci]"
-          for i in 1 2 3; do git pull --rebase --autostash && git push && break || sleep 5; done
+          pushed=false
+          for i in 1 2 3 4 5; do
+            if git push; then pushed=true; break; fi
+            echo "Push attempt $i failed — pulling and retrying in 15s..."
+            sleep 15
+            git pull --rebase --autostash
+          done
+          if [ "$pushed" = "false" ]; then
+            echo "ERROR: failed to push gapper data after 5 attempts"
+            exit 1
+          fi
 
       - uses: actions/setup-node@v4
         if: steps.trading_day.outputs.is_trading_day == 'true'
