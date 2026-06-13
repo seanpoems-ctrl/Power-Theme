@@ -5899,10 +5899,11 @@ const BreadthStockScreener = ({ data, compact = false }) => {
               return (
                 <tr key={s.ticker} className="border-b border-zinc-800/20 hover:bg-zinc-800/30 transition-colors">
                   <td className="px-2 py-1.5 text-[12px] font-mono text-zinc-600 text-center">{i + 1}</td>
-                  {/* Sym + SS-ETF badges */}
+                  {/* Sym + price + SS-ETF badges */}
                   <td className="px-2 py-1.5">
                     <div className="flex items-center gap-1 flex-wrap">
                       <span className="text-[12px] font-mono font-semibold text-blue-400">{s.ticker}</span>
+                      {s.price != null && <span className="text-[10px] font-mono text-zinc-500">${s.price.toFixed(2)}</span>}
                       {(s.ss_etfs || []).map(etf => {
                         const name = etf.ticker || etf;
                         const isBull = /[LU]$/.test(name);
