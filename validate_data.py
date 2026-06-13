@@ -26,7 +26,7 @@ MIN_COUNTS: dict[str, int] = {
     "up25m":       3,
     "dn25m":       3,
     "up50m":       1,
-    "dn50m":       1,
+    "dn50m":       0,   # 0 is valid in bull markets — stocks down 50%+ monthly are genuinely rare
     "up13_34":     5,
     "dn13_34":     5,
     "atr_ext":    10,
