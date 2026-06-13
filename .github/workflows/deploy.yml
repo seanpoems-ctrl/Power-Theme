@@ -9,7 +9,7 @@ on:
       - 'public/calendar_history/**'
 concurrency:
   group: pages-deploy
-  cancel-in-progress: true
+  cancel-in-progress: false  # Never cancel a running scrape — queue behind it instead
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
