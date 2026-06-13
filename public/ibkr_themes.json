@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-06-12T00:30:50.302871+00:00",
+  "generated_at": "2026-06-13T07:56:26.129906+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
-      "name": "Semiconductors",
-      "theme_rs": 97.5,
-      "perf_1d": 8.66,
+      "name": "Cloud Computing",
+      "theme_rs": 98.0,
+      "perf_1d": 4.55,
       "leaders": [
         {
-          "ticker": "AXTI",
-          "price": 88.34,
+          "ticker": "NBIS",
+          "price": 232.36,
           "rs_52w": 98,
-          "adr_pct": 16.46,
-          "vol_surge": 0.77,
-          "mkt_cap": 5779483834,
+          "adr_pct": 9.9,
+          "vol_surge": 0.93,
+          "mkt_cap": 58995784512,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -22,17 +22,24 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Semiconductors",
+          "primary_theme": "Cloud Computing",
           "secondary_themes": [],
           "setup_label": "Flag"
-        },
+        }
+      ]
+    },
+    {
+      "name": "Telecommunications",
+      "theme_rs": 95.0,
+      "perf_1d": -3.49,
+      "leaders": [
         {
-          "ticker": "INTC",
-          "price": 116.96,
-          "rs_52w": 98,
-          "adr_pct": 7.93,
-          "vol_surge": 1.47,
-          "mkt_cap": 587840955398,
+          "ticker": "VSAT",
+          "price": 70.17,
+          "rs_52w": 95,
+          "adr_pct": 8.74,
+          "vol_surge": 1.75,
+          "mkt_cap": 9583043181,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -41,45 +48,7 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "TSEM",
-          "price": 258.34,
-          "rs_52w": 97,
-          "adr_pct": 8.37,
-          "vol_surge": 0.81,
-          "mkt_cap": 30636851723,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "AMAT",
-          "price": 552.64,
-          "rs_52w": 97,
-          "adr_pct": 5.43,
-          "vol_surge": 1.73,
-          "mkt_cap": 438773751025,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
+          "primary_theme": "Telecommunications",
           "secondary_themes": [],
           "setup_label": "Flag"
         }
