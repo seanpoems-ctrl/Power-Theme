@@ -116,7 +116,7 @@ def build_screener() -> list[dict]:
                 col("market_cap_basic") > MIN_MKTCAP,
                 col("average_volume_10d_calc") > MIN_AVG_VOL,
                 col("close") > MIN_PRICE,
-                col("type") == "stock",
+                col("type").isin(["stock", "dr"]),   # "dr" = depositary receipt (ARM, ASML, TSM, SAP, etc.)
                 col("exchange").isin(["NASDAQ", "NYSE"]),
             )
             .order_by("average_volume_10d_calc", ascending=False)
