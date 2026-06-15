@@ -6171,25 +6171,32 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
     return () => clearInterval(id);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Live pre-market prices — Yahoo Finance bulk quote, refreshed every 30s
+  // Live pre-market prices — Yahoo Finance v8 chart meta, refreshed every 30s
+  // (v7 bulk quote requires auth cookies; v8 chart meta works without them)
   const [livePrices, setLivePrices] = useState({});
   useEffect(() => {
     if (!gapperData?.gappers?.length) return;
-    const syms = gapperData.gappers.map(g => g.ticker).join(',');
+    const tickers = gapperData.gappers.map(g => g.ticker);
     const fetchLive = async () => {
-      try {
-        const url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${syms}&fields=preMarketPrice,preMarketChangePercent,regularMarketPrice,regularMarketChangePercent`;
-        const r = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
-        if (!r.ok) return;
-        const json = await r.json();
-        const updates = {};
-        for (const q of (json?.quoteResponse?.result || [])) {
-          const price  = q.preMarketPrice  ?? q.regularMarketPrice;
-          const chgPct = q.preMarketChangePercent ?? q.regularMarketChangePercent;
-          if (price != null) updates[q.symbol] = { price, change_pct: chgPct ?? 0 };
-        }
-        if (Object.keys(updates).length) setLivePrices(updates);
-      } catch {}
+      const results = await Promise.all(
+        tickers.map(async (sym) => {
+          try {
+            const url = `https://query1.finance.yahoo.com/v8/finance/chart/${sym}?range=1d&interval=1m`;
+            const r = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
+            if (!r.ok) return null;
+            const json = await r.json();
+            const meta = json?.chart?.result?.[0]?.meta;
+            if (!meta) return null;
+            const price = meta.preMarketPrice ?? meta.regularMarketPrice;
+            if (price == null) return null;
+            const prevClose = meta.previousClose ?? meta.regularMarketPreviousClose ?? meta.chartPreviousClose;
+            const chgPct = prevClose ? ((price - prevClose) / prevClose * 100) : 0;
+            return [sym, { price, change_pct: chgPct }];
+          } catch { return null; }
+        })
+      );
+      const updates = Object.fromEntries(results.filter(Boolean));
+      if (Object.keys(updates).length) setLivePrices(updates);
     };
     fetchLive();
     const id = setInterval(fetchLive, 30_000);
