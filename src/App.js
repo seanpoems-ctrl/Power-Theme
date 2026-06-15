@@ -1899,16 +1899,16 @@ const vixToRiskPct = (v) => {
   return '0.3';                   // COMPLACENT
 };
 
-const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose }) => {
+const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => {
   const lang = useLang();
-  const [equity, setEquity] = React.useState('');
+  const [equity, setEquity] = React.useState('100000');
   const [entry, setEntry] = React.useState('');
   const [atr, setAtr] = React.useState('');
   const [riskPct, setRiskPct] = React.useState('');
-  const [posSizePct, setPosSizePct] = React.useState('');
+  const [posSizePct, setPosSizePct] = React.useState('10');
   const [lastEdited, setLastEdited] = React.useState('risk');
   const [stopStrategy, setStopStrategy] = React.useState('3');
-  const [stopMode, setStopMode] = React.useState('lod');
+  const [stopMode, setStopMode] = React.useState('manual');
   const [manualStop, setManualStop] = React.useState('');
   const [lodTicker, setLodTicker] = React.useState('');
   const [lod, setLod] = React.useState(null);
@@ -2101,141 +2101,188 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose }) => {
   );
 
 
+  // Size tokens — compact (sidebar) vs large (modal)
+  const z = large ? {
+    card:       "bg-zinc-900/60 rounded-xl border border-zinc-800/60 p-6",
+    title:      "text-[13px]",
+    label:      "text-[13px] text-zinc-500",
+    sublabel:   "text-[12px] text-zinc-600 uppercase tracking-wider",
+    subval:     "text-[13px]",
+    bigVal:     "text-[26px]",
+    stopCard:   "bg-zinc-800/40 rounded-lg px-4 py-3",
+    stopLabel:  "text-[12px] text-zinc-500 uppercase",
+    stopSh:     "text-[13px] font-mono text-zinc-400",
+    stopPrice:  "text-[18px]",
+    stopLoss:   "text-[13px]",
+    inp:        "bg-zinc-800/60 border border-zinc-700/50 rounded-lg px-3 py-2.5 text-[15px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600 w-full",
+    tickerW:    "w-32",
+    tickerPx:   "text-[15px]",
+    priceSz:    "text-[15px]",
+    lodSz:      "text-[13px]",
+    gap:        "gap-3",
+    mb:         "mb-5",
+    mbSm:       "mb-3",
+    togP:       "p-1",
+    togGap:     "gap-1",
+    closeSize:  "text-[20px]",
+  } : {
+    card:       "bg-zinc-900/60 rounded-xl border border-zinc-800/60 p-3",
+    title:      "text-[11px]",
+    label:      "text-[11px] text-zinc-500",
+    sublabel:   "text-[11px] text-zinc-600 uppercase tracking-wider",
+    subval:     "text-[11px]",
+    bigVal:     "text-[14px]",
+    stopCard:   "bg-zinc-800/40 rounded px-2 py-1.5",
+    stopLabel:  "text-[11px] text-zinc-500 uppercase",
+    stopSh:     "text-[11px] font-mono text-zinc-400",
+    stopPrice:  "text-[12px]",
+    stopLoss:   "text-[11px]",
+    inp:        "bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600 w-full",
+    tickerW:    "w-16",
+    tickerPx:   "text-[11px]",
+    priceSz:    "text-[11px]",
+    lodSz:      "text-[10px]",
+    gap:        "gap-1.5",
+    mb:         "mb-2",
+    mbSm:       "mb-1",
+    togP:       "p-0.5",
+    togGap:     "gap-0.5",
+    closeSize:  "text-[15px]",
+  };
+
   return (
-    <div className="bg-zinc-900/60 rounded-xl border border-zinc-800/60 p-3">
-      <div className="flex items-center justify-between mb-2">
-        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.18em]">Position Calc</div>
-        {onClose && <button onClick={onClose} className="text-zinc-600 hover:text-zinc-200 transition-colors text-[15px] leading-none -mr-0.5" title="Close">✕</button>}
+    <div className={z.card}>
+      <div className={`flex items-center justify-between ${z.mb}`}>
+        <div className={`${z.title} font-bold text-zinc-500 uppercase tracking-[0.18em]`}>Position Calc</div>
+        {onClose && <button onClick={onClose} className={`text-zinc-600 hover:text-zinc-200 transition-colors ${z.closeSize} leading-none`} title="Close">✕</button>}
       </div>
 
       {/* Equity row */}
-      <div className="mb-2">
+      <div className={z.mb}>
         {accountEquity != null ? (
           <div className="flex items-center justify-between">
-            <span className="text-[11px] text-zinc-500">Account Equity</span>
-            <span className="text-[12px] font-mono font-bold text-zinc-200">
+            <span className={z.label}>Account Equity</span>
+            <span className={`${z.subval} font-mono font-bold text-zinc-200`}>
               {accountEquity.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 })}
             </span>
           </div>
         ) : (
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] text-zinc-500 flex-shrink-0">Equity $</span>
-            <FormattedNumInput value={equity} onChange={setEquity} placeholder="e.g. 25,000"
-              className="flex-1 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"/>
+          <div className={`flex items-center ${z.gap}`}>
+            <span className={`${z.label} flex-shrink-0`}>Equity $</span>
+            <FormattedNumInput value={equity} onChange={setEquity} placeholder="e.g. 100,000" className={z.inp}/>
           </div>
         )}
       </div>
 
-      {/* Ticker input — above Entry; auto-fetches LOD + price from Finnhub/Yahoo */}
-      <div className="flex items-center gap-1.5 mb-2">
-        <span className="text-[11px] text-zinc-500 flex-shrink-0">Ticker</span>
+      {/* Ticker input */}
+      <div className={`flex items-center ${z.gap} ${z.mb}`}>
+        <span className={`${z.label} flex-shrink-0`}>Ticker</span>
         <input
           type="text" value={lodTicker}
           onChange={ev => { setLodTicker(ev.target.value.toUpperCase()); setLod(null); setCurrentPrice(null); setLodError(false); }}
           onBlur={ev => fetchTickerData(ev.target.value)}
           onKeyDown={ev => ev.key === 'Enter' && fetchTickerData(ev.target.value)}
           placeholder="AAPL"
-          className="w-16 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600 uppercase"/>
+          className={`${z.tickerW} bg-zinc-800/60 border border-zinc-700/50 rounded ${large ? 'px-3 py-2.5 rounded-lg' : 'px-2 py-1'} ${z.tickerPx} font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600 uppercase`}/>
         <div className="flex-1 flex flex-col items-end overflow-hidden">
           {lodLoading
-            ? <span className="text-[11px] font-mono text-zinc-500">...</span>
+            ? <span className={`${z.priceSz} font-mono text-zinc-500`}>...</span>
             : lodError
-            ? <span className="text-[11px] font-mono text-red-400">ERR</span>
+            ? <span className={`${z.priceSz} font-mono text-red-400`}>ERR</span>
             : currentPrice != null
-            ? <span className="text-[11px] font-mono font-bold text-zinc-100">${currentPrice.toFixed(2)}</span>
+            ? <span className={`${z.priceSz} font-mono font-bold text-zinc-100`}>${currentPrice.toFixed(2)}</span>
             : null}
           {!lodLoading && !lodError && lod != null && (
-            <span className="text-[10px] font-mono text-amber-400/70">L {lod.toFixed(2)}</span>
+            <span className={`${z.lodSz} font-mono text-amber-400/70`}>L {lod.toFixed(2)}</span>
           )}
         </div>
       </div>
 
-      {/* Entry / Pos Size % / Risk Per Trade % */}
-      <div className="grid grid-cols-3 gap-1.5 mb-2 items-start">
+      {/* Entry / Pos Size % / Risk/Trade % */}
+      <div className={`grid grid-cols-3 ${z.gap} ${z.mb} items-start`}>
         <div>
-          <div className="text-[11px] text-zinc-600 mb-0.5">Entry</div>
-          <FormattedNumInput value={entry} onChange={setEntry} placeholder="0.00" />
-          <div className="mt-0.5 leading-tight">
-            <div className="text-[11px] text-zinc-600 uppercase tracking-wider">Position</div>
-            <div className="text-[11px] font-mono font-bold text-zinc-300">{positionValue != null ? fmtDollar(positionValue) : <span className="text-zinc-700">—</span>}</div>
+          <div className={`${z.subval} text-zinc-600 mb-0.5`}>Entry</div>
+          <FormattedNumInput value={entry} onChange={setEntry} placeholder="0.00" className={z.inp}/>
+          <div className="mt-1 leading-tight">
+            <div className={z.sublabel}>Position</div>
+            <div className={`${z.subval} font-mono font-bold text-zinc-300`}>{positionValue != null ? fmtDollar(positionValue) : <span className="text-zinc-700">—</span>}</div>
           </div>
         </div>
         <div>
-          <div className="text-[11px] text-zinc-600 mb-0.5">Pos Size %</div>
-          <FormattedNumInput value={posSizePct} onChange={onPosSizePctChange} placeholder="10" />
+          <div className={`${z.subval} text-zinc-600 mb-0.5`}>Pos Size %</div>
+          <FormattedNumInput value={posSizePct} onChange={onPosSizePctChange} placeholder="10" className={z.inp}/>
         </div>
         <div>
-          <div className="text-[11px] text-zinc-600 mb-0.5">Risk/Trade %</div>
-          <FormattedNumInput value={riskPct} onChange={onRiskPctChange} placeholder="0.5" />
-          <div className="mt-0.5 leading-tight">
-            <div className="text-[11px] text-zinc-600 uppercase tracking-wider">Max Loss</div>
-            <div className="text-[11px] font-mono font-bold text-red-400/90">{maxLossBudget != null ? `−${fmtDollar(maxLossBudget)}` : <span className="text-zinc-700">—</span>}</div>
+          <div className={`${z.subval} text-zinc-600 mb-0.5`}>Risk/Trade %</div>
+          <FormattedNumInput value={riskPct} onChange={onRiskPctChange} placeholder="0.5" className={z.inp}/>
+          <div className="mt-1 leading-tight">
+            <div className={z.sublabel}>Max Loss</div>
+            <div className={`${z.subval} font-mono font-bold text-red-400/90`}>{maxLossBudget != null ? `−${fmtDollar(maxLossBudget)}` : <span className="text-zinc-700">—</span>}</div>
           </div>
         </div>
       </div>
 
-      {/* Stop Mode toggle: LOD | Manual */}
-      <div className="flex gap-0.5 bg-zinc-800/40 rounded p-0.5 mb-1">
+      {/* Stop Mode: LOD | Manual */}
+      <div className={`flex ${z.togGap} bg-zinc-800/40 rounded ${z.togP} ${z.mbSm}`}>
         <Tog active={stopMode === 'lod'} onClick={() => setStopMode('lod')}>LOD</Tog>
         <Tog active={stopMode === 'manual'} onClick={() => setStopMode('manual')}>Manual</Tog>
       </div>
 
-      {/* 2-Stop / 3-Stop sub-row */}
-      <div className="flex gap-0.5 bg-zinc-800/30 rounded p-0.5 mb-2">
+      {/* 2-Stop / 3-Stop */}
+      <div className={`flex ${z.togGap} bg-zinc-800/30 rounded ${z.togP} ${z.mb}`}>
         <Tog active={stopStrategy === '2'} onClick={() => setStopStrategy('2')}>2-Stop</Tog>
         <Tog active={stopStrategy === '3'} onClick={() => setStopStrategy('3')}>3-Stop</Tog>
       </div>
 
-      {/* Manual stop price input */}
+      {/* Manual stop price */}
       {stopMode === 'manual' && (
-        <div className="flex items-center gap-2 mb-2">
-          <span className="text-[11px] text-zinc-500 flex-shrink-0">Stop $</span>
-          <FormattedNumInput value={manualStop} onChange={setManualStop} placeholder="0.00"
-            className="flex-1 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"/>
+        <div className={`flex items-center ${z.gap} ${z.mb}`}>
+          <span className={`${z.label} flex-shrink-0`}>Stop $</span>
+          <FormattedNumInput value={manualStop} onChange={setManualStop} placeholder="0.00" className={z.inp}/>
         </div>
       )}
 
       {/* Results */}
-      <div className="pt-2 border-t border-zinc-800/60 space-y-2">
-        <div className="grid grid-cols-2 gap-x-3">
+      <div className={`pt-${large ? '4' : '2'} border-t border-zinc-800/60 space-y-${large ? '4' : '2'}`}>
+        <div className="grid grid-cols-2 gap-x-4">
           <div>
-            <div className="text-[11px] text-zinc-600 mb-0.5">Shares</div>
-            <div className="text-[14px] font-mono font-bold text-zinc-100">{shares ?? '—'}</div>
+            <div className={`${z.subval} text-zinc-600 mb-0.5`}>Shares</div>
+            <div className={`${z.bigVal} font-mono font-bold text-zinc-100`}>{shares ?? '—'}</div>
           </div>
           <div>
-            <div className="text-[11px] text-zinc-600 mb-0.5">$ at Risk</div>
-            <div className="text-[14px] font-mono font-bold text-red-400">{fmtDollar(dollarRisk)}</div>
+            <div className={`${z.subval} text-zinc-600 mb-0.5`}>$ at Risk</div>
+            <div className={`${z.bigVal} font-mono font-bold text-red-400`}>{fmtDollar(dollarRisk)}</div>
           </div>
         </div>
         <div>
-          <div className="text-[11px] text-zinc-600 mb-1 uppercase tracking-wider">
+          <div className={`${z.subval} text-zinc-600 mb-${large ? '2' : '1'} uppercase tracking-wider`}>
             {stopMode === 'lod' ? 'LOD Stop' : 'Manual Stop'}
           </div>
           {stops.length > 0 ? (
-            <div className={`grid gap-2 ${stops.length === 3 ? 'grid-cols-3' : stops.length === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
-              {stops.map((s, i) => {
-                const lossPct = e > 0 && s > 0 && e > s ? (e - s) / e * 100 : 0;
+            <div className={`grid gap-${large ? '3' : '2'} ${stops.length === 3 ? 'grid-cols-3' : stops.length === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
+              {stops.map((sv, i) => {
+                const lossPct = e > 0 && sv > 0 && e > sv ? (e - sv) / e * 100 : 0;
                 const n = stops.length;
                 const base = shares != null ? Math.floor(shares / n) : null;
                 const rem = shares != null ? shares % n : 0;
                 const sharesHere = base != null ? base + (i >= n - rem ? 1 : 0) : null;
                 return (
-                  <div key={i} className="bg-zinc-800/40 rounded px-2 py-1.5">
-                    <div className="text-[11px] text-zinc-500 uppercase">
+                  <div key={i} className={z.stopCard}>
+                    <div className={z.stopLabel}>
                       {stopMode === 'lod'
                         ? (i === stops.length - 1 ? 'LOD −0.08%' : `${Math.round((i + 1) / stops.length * 100)}% LOD`)
                         : `Stop ${i + 1}`}
                     </div>
-                    {sharesHere != null && <div className="text-[11px] font-mono text-zinc-400">{sharesHere} sh</div>}
-                    <div className="text-[12px] font-mono font-bold text-zinc-200">{fmtPrice(s)}</div>
-                    {lossPct > 0 && <div className="text-[11px] font-mono text-red-400/80">−{lossPct.toFixed(2)}%</div>}
+                    {sharesHere != null && <div className={z.stopSh}>{sharesHere} sh</div>}
+                    <div className={`${z.stopPrice} font-mono font-bold text-zinc-200`}>{fmtPrice(sv)}</div>
+                    {lossPct > 0 && <div className={`${z.stopLoss} font-mono text-red-400/80`}>−{lossPct.toFixed(2)}%</div>}
                   </div>
                 );
               })}
             </div>
           ) : (
-            <div className="bg-zinc-800/40 rounded px-2 py-1.5">
-              <div className="text-[12px] font-mono font-bold text-zinc-600">—</div>
+            <div className={z.stopCard}>
+              <div className={`${z.stopPrice} font-mono font-bold text-zinc-600`}>—</div>
             </div>
           )}
         </div>
@@ -10003,10 +10050,10 @@ const CalcModal = ({ onClose, ibkrThemesData, thematicData, vix }) => {
     <div className="fixed inset-0 z-50 flex items-center justify-center" onClick={onClose}>
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
       <div
-        className="relative w-[520px] max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl"
+        className="relative w-[780px] max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl"
         onClick={e => e.stopPropagation()}
       >
-        <PositionCalc ibkrThemesData={ibkrThemesData} thematicData={thematicData} vix={vix} onClose={onClose} />
+        <PositionCalc ibkrThemesData={ibkrThemesData} thematicData={thematicData} vix={vix} onClose={onClose} large />
       </div>
     </div>
   );
