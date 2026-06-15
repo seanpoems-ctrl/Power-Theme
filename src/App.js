@@ -2094,11 +2094,17 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
   };
 
   const Tog = ({ active, onClick, children }) => (
-    <button onClick={onClick}
+    <button onClick={onClick} tabIndex={-1}
       className={`flex-1 text-[11px] font-bold py-1 rounded transition-colors ${active ? 'bg-zinc-700 text-white' : 'text-zinc-500 hover:text-zinc-300'}`}>
       {children}
     </button>
   );
+
+  const handleClear = () => {
+    setEntry(''); setRiskPct(''); setPosSizePct(''); setLastEdited('risk');
+    setManualStop(''); setAtr(''); setLod(null); setCurrentPrice(null);
+    setLodTicker(''); setLodError(false);
+  };
 
 
   // Size tokens — compact (sidebar) vs large (modal)
@@ -2154,7 +2160,10 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
     <div className={z.card}>
       <div className={`flex items-center justify-between ${z.mb}`}>
         <div className={`${z.title} font-bold text-zinc-500 uppercase tracking-[0.18em]`}>Position Calc</div>
-        {onClose && <button onClick={onClose} className={`text-zinc-600 hover:text-zinc-200 transition-colors ${z.closeSize} leading-none`} title="Close">✕</button>}
+        <div className="flex items-center gap-2">
+          <button onClick={handleClear} tabIndex={-1} className={`${large ? 'text-[12px] px-3 py-1' : 'text-[10px] px-2 py-0.5'} rounded border border-zinc-700/50 text-zinc-500 hover:text-zinc-200 hover:border-zinc-500 transition-colors font-medium`}>Clear</button>
+          {onClose && <button onClick={onClose} className={`text-zinc-600 hover:text-zinc-200 transition-colors ${z.closeSize} leading-none`} title="Close">✕</button>}
+        </div>
       </div>
 
       {/* Equity row */}
