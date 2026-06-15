@@ -10589,8 +10589,8 @@ const appScreenerMap = useMemo(() => {
           {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
           <aside className="w-[260px] flex-shrink-0 flex flex-col gap-3">
             <MarketPulseCard vix={data?.vix} generatedAt={data?.generated_at} mc={data?.market_condition}/>
-            <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData} generatedAt={data?.generated_at}/>
             <PositionCalc ibkrThemesData={ibkrData} thematicData={data} vix={data?.vix}/>
+            <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData} generatedAt={data?.generated_at}/>
           </aside>
         </div>
 
