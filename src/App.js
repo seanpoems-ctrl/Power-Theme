@@ -10563,14 +10563,7 @@ const appScreenerMap = useMemo(() => {
       {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex items-start gap-3">
-          {/* ── LEFT SIDEBAR ─────────────────────────────────────── */}
-          <aside className="w-[260px] flex-shrink-0 flex flex-col gap-3">
-            <MarketPulseCard vix={data?.vix} generatedAt={data?.generated_at} mc={data?.market_condition}/>
-            <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData} generatedAt={data?.generated_at}/>
-            <PositionCalc ibkrThemesData={ibkrData} thematicData={data} vix={data?.vix}/>
-          </aside>
-
-          {/* ── CENTER MAIN CONTENT ──────────────────────────────── */}
+          {/* ── MAIN CONTENT ─────────────────────────────────────── */}
           <main className="flex-1 min-w-0 flex flex-col gap-3">
             <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}} openTheme={pendingTheme} onThemeOpened={() => setPendingTheme(null)} stockFilter={stockFilter}/>
             <BreadthStockScreener data={data} compact />
@@ -10594,7 +10587,11 @@ const appScreenerMap = useMemo(() => {
           </main>
 
           {/* ── RIGHT SIDEBAR ────────────────────────────────────── */}
-
+          <aside className="w-[260px] flex-shrink-0 flex flex-col gap-3">
+            <MarketPulseCard vix={data?.vix} generatedAt={data?.generated_at} mc={data?.market_condition}/>
+            <MarketInternalsV2 mc={data?.market_condition} internalsData={internalsData} generatedAt={data?.generated_at}/>
+            <PositionCalc ibkrThemesData={ibkrData} thematicData={data} vix={data?.vix}/>
+          </aside>
         </div>
 
 
