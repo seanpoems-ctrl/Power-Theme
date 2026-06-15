@@ -1925,7 +1925,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
   const posSizeRef  = React.useRef(null);
   const riskRef     = React.useRef(null);
   const onEnter = (nextRef) => (e) => {
-    if (e.key === 'Enter') { e.preventDefault(); (nextRef.current ?? posSizeRef.current)?.focus(); }
+    if (e.key === 'Enter' || (e.key === 'Tab' && !e.shiftKey)) { e.preventDefault(); (nextRef.current ?? posSizeRef.current)?.focus(); }
   };
 
   const accountEquity = ibkrThemesData?.account_equity ?? null;
