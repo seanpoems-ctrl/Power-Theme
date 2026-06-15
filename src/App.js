@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect, useMemo, useCallback, useRef } from "react";
 import ETF_MAP_JSON from "./etf_map.json";
-import { ChevronDown, ChevronRight, Star, Activity, BarChart3, RefreshCw, Search, SlidersHorizontal, X, Layers, Zap, TrendingUp, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink, FlaskConical } from "lucide-react";
+import { ChevronDown, ChevronRight, Activity, BarChart3, RefreshCw, Search, SlidersHorizontal, X, Zap, TrendingUp, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink } from "lucide-react";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
 import useMarketStore from "./useMarketStore";
 import GlobalAlertBanner from "./GlobalAlertBanner";
@@ -149,14 +149,6 @@ const Dist52wCell = ({ value }) => {
   return <td className={`text-center py-3 px-2 text-[13px] font-mono ${txt}`}>{v.toFixed(1)}%</td>;
 };
 
-/* ──────────────────────────────────────────────────────── HOOKS ── */
-function useHoverDelay(delay = 2000) {
-  const [active, setActive] = useState(false);
-  const timerRef = useRef(null);
-  const onEnter = () => { timerRef.current = setTimeout(() => setActive(true), delay); };
-  const onLeave = () => { clearTimeout(timerRef.current); setActive(false); };
-  return { active, onEnter, onLeave };
-}
 
 const RVolCell = ({ value }) => {
   if (value == null) return <td className="text-center py-3 px-2 text-[13px] text-zinc-600">—</td>;
@@ -278,13 +270,6 @@ function isInsideDay(s) {
   return today.h <= prev.h && today.l >= prev.l;
 }
 
-function isVCPStage1(s) {
-  if (s.dist_52w_high == null || s.dist_52w_high < -5) return false;
-  const bars = s.bars_30d;
-  if (!bars || bars.length < 10) return false;
-  const avgRange = arr => arr.reduce((sum, b) => sum + (b.h - b.l) / b.l, 0) / arr.length;
-  return avgRange(bars.slice(-5)) < avgRange(bars.slice(-10, -5)) * 0.8 && isVDU(s);
-}
 
 function isVCPTightening(s) {
   return isTight(s) && isVDU(s);
@@ -304,14 +289,6 @@ function getEliteGrade(s) {
   return null;
 }
 
-function getEliteBadges(s, { isTopTheme, isTopADR }) {
-  const badges = [];
-  if (isTopTheme && s.adr_pct > 5 && s.pure_play) badges.push("triple_crown");
-  if (isTopADR) badges.push("volatility_king");
-  if ((s.avg_dollar_volume || s.dollar_volume || 0) >= 500e6) badges.push("liquidity_monster");
-  if (isVCPTightening(s)) badges.push("vcp_tightening");
-  return badges;
-}
 
 // ── Helpers ──
 function pearson(a, b) {
@@ -342,22 +319,6 @@ function getThemeDailyReturns(theme) {
 }
 
 
-// ── RS vs SPY Badge ──
-const RS_SPY_KEYS = [
-  { key: "perf_1w", label: "1W" },
-  { key: "perf_1m", label: "1M" },
-  { key: "perf_3m", label: "3M" },
-  { key: "perf_6m", label: "6M" },
-];
-
-const RSvsSPYBadge = ({ stockPerf, spyPerf }) => {
-  if (stockPerf == null || spyPerf == null)
-    return <span className="text-[11px] text-zinc-700">—</span>;
-  const diff = stockPerf - spyPerf;
-  if (diff > 5) return <span className="px-1 py-0.5 text-[11px] font-bold rounded bg-emerald-500/15 text-emerald-400 border border-emerald-500/20">Leader</span>;
-  if (diff < -5) return <span className="px-1 py-0.5 text-[11px] font-bold rounded bg-orange-500/15 text-orange-400 border border-orange-500/20">Lagging</span>;
-  return <span className="px-1 py-0.5 text-[11px] font-bold rounded bg-zinc-700/40 text-zinc-500 border border-zinc-600/30">In-Line</span>;
-};
 
 // ── Market Condition ──
 // eslint-disable-next-line no-unused-vars
@@ -457,91 +418,7 @@ const MarketCondition = ({ mc }) => {
   );
 };
 
-// ── Earnings helpers ──
-function earningsDaysAway(s) {
-  if (!s || s === "-") return null;
-  const m = s.match(/([A-Za-z]+ \d+)/);
-  if (!m) return null;
-  const year = new Date().getFullYear();
-  const d = new Date(`${m[1]} ${year}`);
-  if (isNaN(d.getTime())) return null;
-  const today = new Date(); today.setHours(0, 0, 0, 0);
-  const diff = Math.round((d - today) / 86400000);
-  return diff < 0 ? null : diff;
-}
 
-const EarningsCell = ({ value }) => {
-  const days = earningsDaysAway(value);
-  const label = value ? value.replace(/\s+(AMC|BMO|--)/i, "") : null;
-  if (!label || days == null) return <td className="text-center py-3 px-2 text-[13px] text-zinc-700">—</td>;
-  if (days <= 7)
-    return <td className="text-center py-3 px-2"><span className="text-[11px] font-bold text-red-400 bg-red-500/15 border border-red-500/30 px-1 py-0.5 rounded">⚠ {label}</span></td>;
-  if (days <= 14)
-    return <td className="text-center py-3 px-2"><span className="text-[11px] font-medium text-amber-400">{label}</span></td>;
-  return <td className="text-center py-3 px-2 text-[11px] text-zinc-600 font-mono">{label}</td>;
-};
-
-// ── Counter-Trend Warning ──
-const CounterTrendWarning = ({ themes }) => {
-  const warnings = useMemo(() => {
-    const themeAvg = (t, key) => {
-      const norm = normalizeThemeRaw(t);
-      const vals = norm.subthemes.flatMap(s => s.stocks).map(s => s[key]).filter(v => v != null);
-      return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
-    };
-    const ranked1d = [...themes]
-      .map(t => ({ name: normalizeThemeRaw(t).name, avg1d: themeAvg(t, "perf_1d"), avg6m: themeAvg(t, "perf_6m") }))
-      .filter(t => t.avg1d != null && t.avg6m != null)
-      .sort((a, b) => b.avg1d - a.avg1d);
-    return ranked1d.filter((t, i) => i === 0 && t.avg6m <= -15);
-  }, [themes]);
-
-  if (!warnings.length) return null;
-  return (
-    <div className="mb-4 px-4 py-3 bg-rose-500/10 border border-rose-500/30 rounded-lg flex items-start gap-2">
-      <AlertTriangle size={13} className="text-rose-400 flex-shrink-0 mt-0.5"/>
-      <div>
-        <span className="text-[13px] font-semibold text-rose-400">⚠ Counter-Trend Alert</span>
-        {warnings.map(t => (
-          <p key={t.name} className="text-[12px] text-rose-400/70 mt-0.5">
-            <span className="font-medium text-rose-400">{t.name}</span> is{" "}
-            <span className="font-medium">#1 Flash Momentum today (+{t.avg1d?.toFixed(1)}%)</span> but in a{" "}
-            <span className="font-medium">Structural Downtrend ({t.avg6m?.toFixed(1)}% over 6M)</span> — likely a dead-cat bounce, not a real breakout.
-          </p>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// ── Correlation Guard ──
-const CorrelationGuard = ({ themes }) => {
-  const warning = useMemo(() => {
-    const top5 = themes.slice(0, 5);
-    const tr = top5.map(t => ({ name: (t.subthemes ? t : { ...t, subthemes: [{ name: t.name, stocks: t.stocks || [] }] }).name, returns: getThemeDailyReturns(t) })).filter(t => t.returns.length >= 3);
-    for (let i = 0; i < tr.length; i++)
-      for (let j = i + 1; j < tr.length; j++)
-        for (let k = j + 1; k < tr.length; k++) {
-          const len = Math.min(tr[i].returns.length, tr[j].returns.length, tr[k].returns.length);
-          if (pearson(tr[i].returns.slice(-len), tr[j].returns.slice(-len)) > 0.80 &&
-              pearson(tr[i].returns.slice(-len), tr[k].returns.slice(-len)) > 0.80 &&
-              pearson(tr[j].returns.slice(-len), tr[k].returns.slice(-len)) > 0.80)
-            return [tr[i].name, tr[j].name, tr[k].name];
-        }
-    return null;
-  }, [themes]);
-
-  if (!warning) return null;
-  return (
-    <div className="mb-4 px-4 py-3 bg-orange-500/10 border border-orange-500/30 rounded-lg flex items-start gap-2">
-      <AlertTriangle size={13} className="text-orange-400 flex-shrink-0 mt-0.5"/>
-      <div>
-        <span className="text-[13px] font-semibold text-orange-400">Concentration Warning</span>
-        <p className="text-[12px] text-orange-400/70 mt-0.5">High correlation detected. Risk concentrated in: <span className="font-medium text-orange-400">{warning.join(', ')}</span></p>
-      </div>
-    </div>
-  );
-};
 
 const MarketWarnings = ({ themes }) => {
   const counterTrend = useMemo(() => {
@@ -593,16 +470,6 @@ const MarketWarnings = ({ themes }) => {
   );
 };
 
-function normalizeThemeRaw(t) {
-  if (t.subthemes) return t;
-  return { ...t, subthemes: [{ name: t.name, stocks: t.stocks || [] }] };
-}
-
-function formatSubthemeName(name) {
-  const idx = name.indexOf(' - ');
-  if (idx === -1) return name;
-  return '- ' + name.slice(idx + 3);
-}
 
 const PerfCellLB = ({ val }) => {
   if (val == null) return <td className="px-1 py-1.5 align-middle text-center text-[11px] text-zinc-600">—</td>;
@@ -636,26 +503,6 @@ const RotCellLB = ({ row }) => {
 };
 
 
-const IbkrGatesBadge = ({ passed }) => {
-  const total = 5;
-  const cls = passed === 5 ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30'
-            : passed === 4 ? 'bg-yellow-500/15 text-yellow-400 border-yellow-500/30'
-            :                'bg-red-500/15 text-red-400 border-red-500/30';
-  return (
-    <span className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[11px] font-bold rounded border font-mono ${cls}`}>
-      ✓ {passed}/{total}
-    </span>
-  );
-};
-
-const IbkrSourceBadge = ({ source }) => {
-  const isIbkr = source === 'ibkr';
-  return (
-    <span className={`px-1.5 py-0.5 text-[11px] font-bold rounded border font-mono ${isIbkr ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' : 'bg-zinc-700/40 text-zinc-500 border-zinc-600/40'}`}>
-      {isIbkr ? 'IBKR' : 'Finviz'}
-    </span>
-  );
-};
 
 const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, stockFilter = null }) => {
   const [hovered, setHovered] = useState(null);
@@ -1142,84 +989,6 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
   );
 };
 
-const SubThemeStocksModal = ({ subthemeName, stocks, onClose }) => {
-  const sorted = useMemo(() => [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0)), [stocks]);
-  const [hovered, setHovered] = useState(null); // { ticker, rect }
-
-  useEffect(() => {
-    const handler = (e) => { if (e.key === "Escape") onClose(); };
-    document.addEventListener("keydown", handler);
-    return () => document.removeEventListener("keydown", handler);
-  }, [onClose]);
-
-  return (
-    <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/60 backdrop-blur-sm" onClick={onClose}>
-      <div className="relative w-full max-w-2xl max-h-[80vh] bg-zinc-900 border border-zinc-700 rounded-xl shadow-2xl flex flex-col overflow-hidden" onClick={e => e.stopPropagation()}>
-        {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 shrink-0">
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-semibold text-zinc-100">{subthemeName}</span>
-            <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{sorted.length} stocks · sorted by RS</span>
-          </div>
-          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-300 transition-colors p-1 rounded hover:bg-zinc-800">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>
-          </button>
-        </div>
-        {/* Table */}
-        <div className="overflow-y-auto flex-1 px-2 py-1">
-          <table className="w-full border-collapse text-left text-xs">
-            <thead className="sticky top-0 bg-zinc-900 z-10">
-              <tr className="border-b border-zinc-800 text-zinc-500">
-                <th className="w-8 py-2 pr-2 text-right font-medium">#</th>
-                <th className="px-2 py-2 font-medium">Ticker</th>
-                <th className="px-2 py-2 font-medium">Company</th>
-                <th className="px-2 py-2 font-medium text-right">Mkt Cap</th>
-                <th className="px-2 py-2 font-medium text-right">ADR×$Vol</th>
-                <th className="px-2 py-2 font-medium text-right">RS</th>
-                <th className="px-2 py-2 font-medium text-right">ADR%</th>
-                <th className="px-2 py-2 font-medium text-right">$ Vol</th>
-                <th className="px-2 py-2 font-medium text-right">1D Change%</th>
-              </tr>
-            </thead>
-            <tbody>
-              {sorted.map((s, i) => {
-                const rsCls = s.rs_52w >= 90 ? "text-emerald-300" : s.rs_52w >= 70 ? "text-emerald-400" : s.rs_52w >= 50 ? "text-zinc-300" : "text-red-400";
-                const chgCls = (s.change_pct ?? 0) > 0 ? "text-emerald-400" : (s.change_pct ?? 0) < 0 ? "text-red-400" : "text-zinc-400";
-                const fmtVol = (v) => { if (v == null) return "—"; if (v >= 1e9) return `$${(v/1e9).toFixed(1)}B`; if (v >= 1e6) return `$${(v/1e6).toFixed(0)}M`; return `$${(v/1e3).toFixed(0)}K`; };
-                const fmtPct = (v) => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(2)}%`;
-                const fmtMktCap = (v) => { if (v == null) return "—"; if (v >= 1000) return `$${(v/1000).toFixed(1)}T`; if (v >= 1) return `$${v.toFixed(1)}B`; return `$${(v*1000).toFixed(0)}M`; };
-                const adrDolVol = (s.adr_pct != null && s.dollar_volume != null) ? (s.adr_pct / 100) * s.dollar_volume : null;
-                return (
-                  <tr key={s.ticker} className="border-b border-zinc-800/50 hover:bg-zinc-800/30 cursor-pointer"
-                    onClick={e => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      setHovered(h => h?.ticker === s.ticker ? null : { ticker: s.ticker, rect });
-                    }}>
-                    <td className="py-1.5 pr-2 text-right font-mono text-zinc-600">{i + 1}</td>
-                    <td className="px-2 py-1.5 font-mono font-semibold text-blue-400">{s.ticker}</td>
-                    <td className="px-2 py-1.5 text-zinc-300 max-w-[160px] truncate">{s.company || "—"}</td>
-                    <td className="px-2 py-1.5 text-right font-mono text-zinc-300">{fmtMktCap(s.mkt_cap_b)}</td>
-                    <td className="px-2 py-1.5 text-right font-mono text-amber-400">{adrDolVol != null ? fmtVol(adrDolVol) : "—"}</td>
-                    <td className={`px-2 py-1.5 text-right font-mono font-bold ${rsCls}`}>{s.rs_52w ?? "—"}</td>
-                    <td className="px-2 py-1.5 text-right font-mono text-zinc-300">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
-                    <td className="px-2 py-1.5 text-right font-mono text-zinc-400">{fmtVol(s.dollar_volume)}</td>
-                    <td className={`px-2 py-1.5 text-right font-mono font-semibold ${chgCls}`}>{fmtPct(s.change_pct)}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-            <tfoot>
-              <tr className="border-t border-zinc-700 text-zinc-600 text-xs">
-                <td colSpan={9} className="py-1.5 pr-2 text-right font-mono">{sorted.length} stocks</td>
-              </tr>
-            </tfoot>
-          </table>
-        </div>
-      </div>
-      {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
-    </div>
-  );
-};
 
 const RS_MODES = [
   { key: '1d',  label: '1D',  perfKey: 'perf_1d',  spyKey: null       },
@@ -1373,7 +1142,6 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
   const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
   const [themeHover, setThemeHover] = useState(null); // { ticker, rect }
   const [themeStats, setThemeStats] = useState(null); // { themeName, anchorRect }
-  const [subThemeModal, setSubThemeModal] = useState(null); // { subthemeName, stocks }
   const [rsMode, setRsMode] = useState('52w');
   const [etfPopup, setEtfPopup] = useState(null); // { etf, anchorRect }
 
@@ -1672,7 +1440,6 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
     </div>
     {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => { setThemeHover(null); setThemeStats(null); }}/>}
     {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} heatmapThemes={heatmapThemes} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => { setThemeStats(null); setThemeHover(null); }}/>}
-    {subThemeModal && <SubThemeStocksModal subthemeName={subThemeModal.subthemeName} stocks={subThemeModal.stocks} onClose={() => setSubThemeModal(null)}/>}
     {etfPopup && <EtfHoldingsPopup etfTicker={etfPopup.etf} holdingsData={etfHoldings} onClose={() => setEtfPopup(null)}/>}
     </>
   );
@@ -1954,300 +1721,14 @@ const ThemeStatsPopup = ({ themeName, themes, heatmapThemes, anchorRect, chartAn
   );
 };
 
-// ── MagicSort constants ──
-const SORT_PERF_COLS = new Set(['perf_1d','perf_1w','perf_1m','perf_3m','perf_6m']);
-const SORT_TECH_COLS = new Set(['rs_52w','rvol','avg_dollar_volume','adr_pct','dist_52w_high','volume','price','52w_high','ticker']);
 
-function getAlphaGrade(s, spyPerf1d = 0) {
-  const rs = s.rs_52w || 0;
-  if (rs > 97 && (s.perf_1m||0) > 0 && (s.perf_1d||0) > 0) return 'A+';
-  if (rs > 95 && (s.perf_1m||0) > 0) return 'A';
-  if (rs > 90 || (s.perf_1d||0) > spyPerf1d) return 'B';
-  return null;
-}
-
-// Returns true if stock "fits" a given sort key (used for dynamic badge)
-function fitsSortKey(stock, key) {
-  if (SORT_PERF_COLS.has(key)) return (stock[key] || 0) > 0;
-  if (key === 'rs_52w') return (stock.rs_52w || 0) > 95;
-  return true;
-}
-
-const AlphaLeaderBadge = ({ stock, sortPriority = [], spyPerf1d = 0 }) => {
-  const grade = getAlphaGrade(stock, spyPerf1d);
-  if (!grade || grade === 'B') return null;
-  if ((stock.perf_1d||0) <= 0) return null;
-  // Dynamic: must fit the current top-2 sort priorities
-  const fits = sortPriority.slice(0, 2).every(p => fitsSortKey(stock, p.key));
-  if (!fits) return null;
-  const style = grade === 'A+'
-    ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40'
-    : 'bg-blue-500/20 text-blue-300 border-blue-500/40';
-  return <span className={`inline-flex items-center gap-0.5 px-1 py-0.5 text-[11px] font-bold rounded border ${style}`}>🔥 {grade}</span>;
-};
-
-const StockTable = ({ stocks, spyPerf, rsSPYKey, isTopTheme, topADRTickers, themeName, subthemeName }) => {
-  const [hovered, setHovered] = useState(null);
-  const [sortPriority, setSortPriority] = useState([{ key: 'rs_52w', direction: 'desc' }]);
-
-  const handleSort = (key, isShift) => {
-    if (isShift) {
-      const primary = sortPriority[0];
-      if (primary && SORT_PERF_COLS.has(primary.key) && SORT_PERF_COLS.has(key)) return;
-      setSortPriority(prev => {
-        const existing = prev.findIndex((p, i) => i > 0 && p.key === key);
-        if (existing > 0) {
-          return prev.map((p, i) => i === existing ? { ...p, direction: p.direction === 'desc' ? 'asc' : 'desc' } : p);
-        }
-        return [prev[0], { key, direction: 'desc' }];
-      });
-    } else {
-      setSortPriority(prev => {
-        const cur = prev.find(p => p.key === key);
-        if (cur && prev[0].key === key) {
-          return [{ key, direction: cur.direction === 'desc' ? 'asc' : 'desc' }, ...prev.slice(1)];
-        }
-        return [{ key, direction: 'desc' }];
-      });
-    }
-  };
-
-  const sorted = useMemo(() => {
-    const withVsSpy = stocks.map(s => ({
-      ...s,
-      vs_spy: spyPerf != null ? (s[rsSPYKey] ?? 0) - spyPerf : null,
-    }));
-    return [...withVsSpy].sort((a, b) => {
-      for (let i = 0; i < sortPriority.length; i++) {
-        const { key, direction } = sortPriority[i];
-        let va = key === 'ticker' ? (a.ticker||'') : (a[key]||0);
-        let vb = key === 'ticker' ? (b.ticker||'') : (b[key]||0);
-        // Bucketing: round to 1 decimal for performance cols when primary sort
-        if (i === 0 && SORT_PERF_COLS.has(key)) {
-          va = Math.round(va * 10) / 10;
-          vb = Math.round(vb * 10) / 10;
-        }
-        if (va === vb) continue;
-        const cmp = key === 'ticker' ? va.localeCompare(vb) : (va > vb ? 1 : -1);
-        return direction === 'desc' ? -cmp : cmp;
-      }
-      return 0;
-    });
-  }, [stocks, sortPriority]);
-
-  const primaryKey = sortPriority[0]?.key;
-  const secondaryKey = sortPriority[1]?.key;
-
-  const SH = ({ k, label, align = "center", w }) => {
-    const priIdx = sortPriority.findIndex(p => p.key === k);
-    const isActive = priIdx >= 0;
-    const dir = isActive ? sortPriority[priIdx].direction : null;
-    const isPrimary = priIdx === 0;
-    const isSecondary = priIdx === 1;
-    const isBlocked = SORT_PERF_COLS.has(k) && SORT_PERF_COLS.has(primaryKey) && !isPrimary;
-    return (
-      <th onClick={e => handleSort(k, e.shiftKey)}
-        className={`py-3 px-2 font-medium cursor-pointer select-none hover:text-zinc-300 transition-colors text-${align} ${w || ''} ${isActive ? (isPrimary ? 'text-blue-400' : 'text-violet-400') : isBlocked ? 'text-zinc-700' : 'text-zinc-500'}`}>
-        <span className="inline-flex items-center gap-0.5">
-          {label}
-          {isPrimary && <span className="text-[11px] text-blue-400/70 ml-0.5">①{dir === 'desc' ? '▼' : '▲'}</span>}
-          {isSecondary && <span className="text-[11px] text-violet-400/70 ml-0.5">②{dir === 'desc' ? '▼' : '▲'}</span>}
-        </span>
-      </th>
-    );
-  };
-
-  return (
-    <>
-    {secondaryKey && (
-      <div className="flex items-center gap-2 mb-1">
-        <span className="text-[11px] text-zinc-500">
-          <span className="text-blue-400">①{primaryKey}</span>
-          {' → '}<span className="text-violet-400">②{secondaryKey}</span>
-        </span>
-        <button onClick={() => setSortPriority([{ key: 'rs_52w', direction: 'desc' }])} className="text-[11px] text-zinc-600 hover:text-zinc-400 px-1.5 py-0.5 border border-zinc-700/50 rounded transition-colors">✕ Reset</button>
-      </div>
-    )}
-    <div className="overflow-x-auto overflow-y-auto rounded-lg border border-zinc-700/40" style={{maxHeight:'520px'}}>
-      <table className="w-full text-sm table-fixed min-w-[1280px]">
-        <thead className="sticky top-0 z-10">
-          <tr className="text-[12px] uppercase tracking-wider bg-zinc-900">
-            <th className="text-left py-3 px-4 font-medium w-[160px] text-zinc-500">Ticker</th>
-            <SH k="price" label="Price" w="w-[80px]"/>
-            {PERF_KEYS.map(p => <SH key={p.key} k={p.key} label={p.label} w="w-[64px]"/>)}
-            <th className="text-center py-3 px-2 font-medium w-[84px] text-zinc-500">Earnings</th>
-            <th className="text-center py-3 px-2 font-medium w-[84px] text-zinc-500">6M</th>
-            <SH k="52w_high" label="52W Hi" w="w-[80px]"/>
-            <SH k="52w_low" label="52W Lo" w="w-[80px]"/>
-            <SH k="dist_52w_high" label="Dist" w="w-[64px]"/>
-            <SH k="volume" label="Vol" w="w-[68px]"/>
-            <SH k="rvol" label="RVol" w="w-[64px]"/>
-            <SH k="avg_dollar_volume" label="Avg $V" w="w-[72px]"/>
-            <SH k="adr_pct" label="ADR" w="w-[56px]"/>
-            <SH k="rs_52w" label="RS" align="center" w="w-[60px]"/>
-            <SH k="vs_spy" label="vs SPY" w="w-[84px]"/>
-          </tr>
-        </thead>
-        <tbody>
-          {sorted.map((s, i) => (
-            <tr key={s.ticker+i} className="border-t border-zinc-800/50 hover:bg-zinc-800/30 transition-colors">
-              <td className="py-3 px-4">
-                <div className="flex items-center gap-2">
-                  {s.pure_play
-                    ? <Tip text="Pure Play — appears in only one sub-theme" color="amber"><Star size={11} className="text-amber-400 fill-amber-400 flex-shrink-0 cursor-pointer"/></Tip>
-                    : <Tip text="Legacy Leader — appears across multiple sub-themes" color="zinc"><TrendingUp size={11} className="text-zinc-600 flex-shrink-0 cursor-pointer"/></Tip>}
-                  <div>
-                    <div className="flex items-center gap-1.5 flex-wrap">
-                      <span
-                        className="font-semibold text-zinc-100 text-[13px] cursor-pointer hover:text-blue-400 transition-colors"
-                        onClick={e => { const rect = e.currentTarget.getBoundingClientRect(); setHovered(prev => prev?.ticker === s.ticker ? null : { ticker: s.ticker, rect }); }}
-                      >{s.ticker}</span>
-                      <GradeBadge grade={getEliteGrade(s)}/>
-                      <AlphaLeaderBadge stock={s} sortPriority={sortPriority} spyPerf1d={spyPerf || 0}/>
-                      {isVCPStage1(s) && <Tip text="Narrowing consolidation + VDU + near 52W high" color="violet"><span className="text-[11px] font-bold text-violet-400 bg-violet-500/15 border border-violet-500/30 px-1 py-0.5 rounded cursor-pointer">🎯 VCP S1</span></Tip>}
-                      {!isVCPStage1(s) && isVDU(s) && <Tip text="Volume below 50% of 10-day avg — selling pressure exhausted" color="blue"><span className="text-[11px] font-bold text-blue-400 bg-blue-500/15 border border-blue-500/30 px-1 py-0.5 rounded cursor-pointer">VDU</span></Tip>}
-                      {isTight(s) && <Tip text="Last 3 days range < 1.5% — extremely tight" color="fuchsia"><span className="text-[11px] font-bold text-fuchsia-400 bg-fuchsia-500/15 border border-fuchsia-500/30 px-1 py-0.5 rounded cursor-pointer">Tight</span></Tip>}
-                      {isInsideDay(s) && <Tip text="Today's range inside yesterday's range" color="slate"><span className="text-[11px] font-bold text-slate-400 bg-slate-500/15 border border-slate-500/30 px-1 py-0.5 rounded cursor-pointer">ID</span></Tip>}
-                      <span className="hidden sm:flex items-center gap-0.5">
-                        {getEliteBadges(s, { isTopTheme, isTopADR: topADRTickers?.has(s.ticker) }).map(b => <EliteBadge key={b} type={b}/>)}
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-zinc-500 leading-tight truncate max-w-[160px]">{s.company}</p>
-                  </div>
-                </div>
-              </td>
-              <td className="text-center py-3 px-2 font-mono text-zinc-200 text-[13px]" data-price-cell={s.ticker}>${s.price.toFixed(2)}</td>
-              {PERF_KEYS.map(p => <PerfCell key={p.key} value={s[p.key]} ticker={p.key === 'perf_1d' ? s.ticker : undefined}/>)}
-              <EarningsCell value={s.earnings}/>
-              <td className="text-center py-3 px-2"><div className="flex justify-center"><Sparkline data={sparklineSeries(s)}/></div></td>
-              <td className="text-center py-3 px-2 font-mono text-zinc-400 text-[13px]">{s["52w_high"] ? `$${s["52w_high"].toFixed(2)}` : "—"}</td>
-              <td className="text-center py-3 px-2 font-mono text-zinc-500 text-[13px]">{s["52w_low"] ? `$${s["52w_low"].toFixed(2)}` : "—"}</td>
-              <Dist52wCell value={s.dist_52w_high}/>
-              <td className="text-center py-3 px-2 text-zinc-500 text-[13px] font-mono">{fmtNum(s.volume)}</td>
-              <RVolCell value={s.rvol}/>
-              <td className="text-center py-3 px-2 text-zinc-500 text-[13px] font-mono">{fmtVol(s.avg_dollar_volume || s.dollar_volume)}</td>
-              <td className="text-center py-3 px-2 text-zinc-400 text-[13px] font-mono">{s.adr_pct.toFixed(1)}%</td>
-              <td className="text-center py-3 px-2"><RSBadge value={s.rs_52w} trend={getRSTrend(s)}/></td>
-              <td className="text-center py-3 px-2"><RSvsSPYBadge stockPerf={s[rsSPYKey]} spyPerf={spyPerf}/></td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-    {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
-    </>
-  );
-};
 
 function normalizeTheme(t) {
   if (t.subthemes) return t;
   return { ...t, subthemes: [{ name: t.name, stocks: t.stocks || [] }] };
 }
 
-const SubThemeSection = ({ subtheme, parentAvg, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers, themeName }) => {
-  const [open, setOpen] = useState(false);
-  const avg = (k) => subtheme.stocks.length
-    ? subtheme.stocks.reduce((s, x) => s + (x[k] || 0), 0) / subtheme.stocks.length
-    : 0;
-  const subAvg = avg(lbPerfKey);
-  const hasDivergence = parentAvg != null && subAvg > parentAvg + 3;
 
-  return (
-    <div className="ml-4 mb-2">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-3 py-2 bg-zinc-800/40 hover:bg-zinc-800/60 rounded-md border border-zinc-700/30 transition-colors">
-        <div className="flex items-center gap-2">
-          {open ? <ChevronDown size={12} className="text-zinc-500"/> : <ChevronRight size={12} className="text-zinc-500"/>}
-          <span className="text-[13px] font-medium text-zinc-300">{formatSubthemeName(subtheme.name)}</span>
-          <span className="text-[11px] text-zinc-600 bg-zinc-700/30 px-1.5 py-0.5 rounded">{subtheme.stocks.length}</span>
-          {hasDivergence && (
-            <span className="flex items-center gap-0.5 px-1.5 py-0.5 bg-yellow-500/15 border border-yellow-500/30 rounded text-[11px] text-yellow-400 font-medium">
-              <Zap size={9} className="fill-yellow-400"/> +{(subAvg - parentAvg).toFixed(1)}%
-            </span>
-          )}
-        </div>
-        <div className="flex items-center gap-2.5 text-[11px]">
-          {PERF_KEYS.map(p => {
-            const v = avg(p.key);
-            return (
-              <span key={p.key} className="hidden lg:flex items-center gap-1">
-                <span className="text-zinc-600">{p.label}</span>
-                <span className={`font-mono font-medium ${v >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>{v >= 0 ? '+' : ''}{v.toFixed(1)}%</span>
-              </span>
-            );
-          })}
-        </div>
-      </button>
-      {open && (
-        <div className="mt-1">
-          <StockTable stocks={subtheme.stocks} spyPerf={spyPerf} rsSPYKey={rsSPYKey} isTopTheme={isTopTheme} topADRTickers={topADRTickers} themeName={themeName} subthemeName={subtheme.name}/>
-        </div>
-      )}
-    </div>
-  );
-};
-
-const ThemeSection = ({ theme, lbPerfKey, spyPerf, rsSPYKey, isTopTheme, topADRTickers, themeRankings, finvizThemeRankings }) => {
-  const [open, setOpen] = useState(false);
-  const norm = normalizeTheme(theme);
-  const allStocks = norm.subthemes.flatMap(s => s.stocks);
-
-  const avg = (k) => allStocks.length
-    ? allStocks.reduce((s, x) => s + (x[k] || 0), 0) / allStocks.length
-    : 0;
-
-  // Look up ranking data for this theme (use finviz first, fallback to theme_rankings)
-  const rankingEntry = useMemo(() => {
-    const name = norm.name.toLowerCase();
-    const search = (arr) => arr?.find(r => r.name?.toLowerCase() === name);
-    return search(finvizThemeRankings) || search(themeRankings) || null;
-  }, [norm.name, finvizThemeRankings, themeRankings]);
-
-  const perfVal = (key) => rankingEntry ? (rankingEntry[key] ?? null) : avg(key);
-  const rsVal = avg("rs_52w");
-  const parentAvg = rankingEntry ? (rankingEntry[lbPerfKey] ?? avg(lbPerfKey)) : avg(lbPerfKey);
-
-  return (
-    <div className="mb-4">
-      <button onClick={() => setOpen(!open)} className="w-full flex items-center justify-between px-4 py-2.5 bg-zinc-800/60 hover:bg-zinc-800/80 rounded-lg border border-zinc-700/50 transition-colors">
-        <div className="flex items-center gap-3">
-          {open ? <ChevronDown size={14} className="text-zinc-400"/> : <ChevronRight size={14} className="text-zinc-400"/>}
-          <Layers size={13} className="text-blue-400"/>
-          <span className="font-semibold text-sm text-zinc-100">{norm.name}</span>
-          <span className="text-[12px] text-zinc-500 bg-zinc-700/40 px-1.5 py-0.5 rounded">
-            {norm.subthemes.length} sub · {allStocks.length} stocks
-          </span>
-          {allStocks.length > 0 && (
-            <span
-              title="Open Finviz MultiChart"
-              onClick={e => { e.stopPropagation(); const tickers = [...new Set(allStocks.map(s => s.ticker))]; window.open(`https://finviz.com/screener.ashx?v=340&t=${tickers.join(',')}`, '_blank'); }}
-              className="px-2 py-0.5 text-[11px] font-semibold bg-zinc-700/50 text-zinc-400 hover:bg-blue-500/20 hover:text-blue-400 border border-zinc-600/30 hover:border-blue-500/30 rounded cursor-pointer transition-all"
-            >MultiChart</span>
-          )}
-        </div>
-        <div className="flex items-center gap-3 text-[12px]">
-          {PERF_KEYS.map(p => {
-            const v = perfVal(p.key);
-            if (v == null) return null;
-            return (
-              <span key={p.key} className="hidden lg:flex items-center gap-1">
-                <span className="text-zinc-600">{p.label}</span>
-                <span className={`font-mono font-medium ${v >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>{v >= 0 ? '+' : ''}{v.toFixed(1)}%</span>
-              </span>
-            );
-          })}
-          <span className="text-zinc-500">RS <span className="text-zinc-300 font-medium">{rsVal.toFixed(0)}</span></span>
-        </div>
-      </button>
-      {open && (
-        <div className="mt-1.5 space-y-1.5">
-          {norm.subthemes.map((sub, i) => (
-            <SubThemeSection key={sub.name + i} subtheme={sub} parentAvg={parentAvg} lbPerfKey={lbPerfKey} spyPerf={spyPerf} rsSPYKey={rsSPYKey} isTopTheme={isTopTheme} topADRTickers={topADRTickers} themeName={norm.name}/>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
 
 // ── Gapper Filter Input ──
 const FInput = ({ label, value, onChange, hint }) => {
@@ -2275,53 +1756,6 @@ const FInput = ({ label, value, onChange, hint }) => {
 // ── Gapper Scanner UI ──
 const fmtCap = n => n >= 1e12 ? `$${(n/1e12).toFixed(1)}T` : n >= 1e9 ? `$${(n/1e9).toFixed(1)}B` : `$${(n/1e6).toFixed(0)}M`;
 
-const POS_WORDS = new Set(["beat","beats","beating","surpassed","exceeded","surpassing","exceeding","raised","raise","above","approved","approval","strong","won","outperformed","record"]);
-const NEG_WORDS = new Set(["miss","missed","missing","below","decline","declined","declining","cut","weak","rejected","rejection","loss","fell","failed","disappointing","missed"]);
-
-const renderStyledText = (text) => {
-  if (!text) return null;
-  return text.split(/(\*\*[^*]+\*\*)/g).map((part, i) => {
-    if (part.startsWith("**") && part.endsWith("**")) {
-      const inner = part.slice(2, -2);
-      const lower = inner.toLowerCase().trim();
-      const isPos = POS_WORDS.has(lower) || [...POS_WORDS].some(w => lower.includes(w));
-      const isNeg = NEG_WORDS.has(lower) || [...NEG_WORDS].some(w => lower.includes(w));
-      const cls = isPos ? "text-emerald-400 font-semibold" : isNeg ? "text-red-400 font-semibold" : "text-zinc-200 font-semibold";
-      return <strong key={i} className={cls}>{inner}</strong>;
-    }
-    return <span key={i}>{part}</span>;
-  });
-};
-
-const AnalysisCell = ({ text }) => {
-  const [expanded, setExpanded] = useState(false);
-  if (!text) return <span className="text-zinc-600 text-[12px]">—</span>;
-  const sections = text.split(/\n\n(?=•)/).map(s => s.trim()).filter(Boolean);
-  const visible = expanded ? sections : sections.slice(0, 1);
-  return (
-    <div className="text-[12px] leading-relaxed min-w-0 max-w-full">
-      {visible.map((sec, i) => {
-        const nl = sec.indexOf("\n");
-        const header = nl > -1 ? sec.slice(0, nl) : sec;
-        const body   = nl > -1 ? sec.slice(nl + 1) : "";
-        return (
-          <div key={i} className={i > 0 ? "mt-2 pt-2 border-t border-zinc-800/60" : ""}>
-            <div className="text-zinc-200 font-medium mb-0.5">{renderStyledText(header)}</div>
-            {body && <div className="text-zinc-400">{renderStyledText(body)}</div>}
-          </div>
-        );
-      })}
-      {sections.length > 1 && (
-        <button
-          onClick={e => { e.stopPropagation(); setExpanded(x => !x); }}
-          className="mt-2 flex items-center justify-center w-5 h-5 rounded-full border border-zinc-600/60 text-zinc-500 hover:border-zinc-400 hover:text-zinc-300 transition-colors text-[11px] font-bold"
-        >
-          {expanded ? "−" : "+"}
-        </button>
-      )}
-    </div>
-  );
-};
 
 const CATEGORY_STYLE = {
   "Earnings":                 "bg-emerald-500/15 text-emerald-400 border-emerald-500/25",
@@ -2431,14 +1865,6 @@ const DailyChg = ({ val }) => {
   return <span className={`text-[13px] font-mono font-bold ${pos ? "text-emerald-400" : "text-red-400"}`}>{pos ? "+" : ""}{val.toFixed(2)}%</span>;
 };
 
-/* ─────────────────────────────────────────────────────────── VIX GAUGE ── */
-const VIX_ZONES = [
-  { name: "Extreme Complacency", range: "VIX < 12",  color: "#00e676", vMin: 0,  vMax: 12, aStart: 180, aEnd: 126, label: ["EXTREME","COMPLACENCY"], impact: 'Markets are dangerously calm. High performance and steady grind higher — watch for sharp "rug pull" corrections as complacency peaks.' },
-  { name: "Healthy / Normal",    range: "VIX 12–20", color: "#ffee58", vMin: 12, vMax: 20, aStart: 126, aEnd: 90,  label: ["HEALTHY","NORMAL"],       impact: "Markets thrive in stable macro environments. SPX sees consistent, sustainable growth with minimal headline risk." },
-  { name: "Elevated Concern",    range: "VIX 20–30", color: "#ff9100", vMin: 20, vMax: 30, aStart: 90,  aEnd: 45,  label: ["ELEVATED","CONCERN"],      impact: "Choppy, headline-driven trading. SPX often struggles to hold gains. Reduce position size and tighten stops." },
-  { name: "Extreme Panic",       range: "VIX 30+",   color: "#ff1744", vMin: 30, vMax: 40, aStart: 45,  aEnd: 0,   label: ["EXTREME","PANIC"],         impact: "Maximum fear. While painful initially, extreme VIX spikes are historically the best entry points for massive SPX rallies." },
-];
-
 
 /* ──────────────────────────────────────────────── POSITION CALCULATOR ── */
 const vixToRiskPct = (v) => {
@@ -2457,10 +1883,12 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
   const [atr, setAtr] = React.useState('');
   const [riskPct, setRiskPct] = React.useState('0.5');
   const [riskAutoSet, setRiskAutoSet] = React.useState(false);
+  const [posSizePct, setPosSizePct] = React.useState('');
+  const [lastEdited, setLastEdited] = React.useState('risk');
 
   React.useEffect(() => {
     const suggested = vixToRiskPct(vix);
-    if (suggested) { setRiskPct(suggested); setRiskAutoSet(true); }
+    if (suggested) { setRiskPct(suggested); setRiskAutoSet(true); setLastEdited('risk'); }
     else setRiskAutoSet(false);
   }, [vix]);
   const [stopStrategy, setStopStrategy] = React.useState('3');
@@ -2479,7 +1907,8 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
 
   const e = parseFloat(entry) || 0;
   const a = parseFloat(atr) || 0;
-  const r = parseFloat(riskPct) || 1;
+  const r = parseFloat(riskPct) || 0;
+  const p = parseFloat(posSizePct) || 0;
 
   const fetchTickerData = React.useCallback(async (sym) => {
     const s = sym.trim().toUpperCase();
@@ -2595,9 +2024,14 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
   const emaRisk = emaStop != null && e > emaStop ? e - emaStop : 0;
   const riskUnit = stopMode === 'lod' ? lodRisk : stopMode === 'manual' ? manualRisk : stopMode === 'ema' ? emaRisk : 0;
 
-  const shares = (effectiveEquity > 0 && riskUnit > 0)
-    ? Math.floor((effectiveEquity * r / 100) / riskUnit)
-    : null;
+  const shares = (() => {
+    if (effectiveEquity <= 0) return null;
+    if (lastEdited === 'possize' && p > 0 && e > 0)
+      return Math.floor((effectiveEquity * p / 100) / e);
+    if (r > 0 && riskUnit > 0)
+      return Math.floor((effectiveEquity * r / 100) / riskUnit);
+    return null;
+  })();
 
   let stops = [];
   if (e > 0) {
@@ -2626,6 +2060,46 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
 
   const fmtPrice = v => v != null ? `$${v.toFixed(2)}` : '—';
   const fmtDollar = v => v != null ? `$${v.toLocaleString('en-US', { maximumFractionDigits: 0 })}` : '—';
+
+  // Sync the non-edited field when entry/stop/equity change (e.g. LOD loads after ticker entry)
+  React.useEffect(() => {
+    if (effectiveEquity <= 0 || e <= 0 || riskUnit <= 0) return;
+    if (lastEdited === 'risk') {
+      const rv = parseFloat(riskPct) || 0;
+      if (rv > 0) {
+        const sh = Math.floor((effectiveEquity * rv / 100) / riskUnit);
+        setPosSizePct((sh * e / effectiveEquity * 100).toFixed(1));
+      }
+    } else {
+      const pv = parseFloat(posSizePct) || 0;
+      if (pv > 0) {
+        const sh = Math.floor((effectiveEquity * pv / 100) / e);
+        setRiskPct((sh * riskUnit / effectiveEquity * 100).toFixed(2));
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [riskUnit, e, effectiveEquity]);
+
+  const onRiskPctChange = (v) => {
+    setRiskPct(v);
+    setRiskAutoSet(false);
+    setLastEdited('risk');
+    const rv = parseFloat(v) || 0;
+    if (rv > 0 && riskUnit > 0 && e > 0 && effectiveEquity > 0) {
+      const sh = Math.floor((effectiveEquity * rv / 100) / riskUnit);
+      setPosSizePct((sh * e / effectiveEquity * 100).toFixed(1));
+    }
+  };
+
+  const onPosSizePctChange = (v) => {
+    setPosSizePct(v);
+    setLastEdited('possize');
+    const pv = parseFloat(v) || 0;
+    if (pv > 0 && e > 0 && effectiveEquity > 0 && riskUnit > 0) {
+      const sh = Math.floor((effectiveEquity * pv / 100) / e);
+      setRiskPct((sh * riskUnit / effectiveEquity * 100).toFixed(2));
+    }
+  };
 
   const Tog = ({ active, onClick, children }) => (
     <button onClick={onClick}
@@ -2685,7 +2159,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
         </div>
       </div>
 
-      {/* Entry / ATR / Risk % */}
+      {/* Entry / Pos Size % / Risk Per Trade % */}
       <div className="grid grid-cols-3 gap-1.5 mb-2">
         <div>
           <div className="text-[11px] text-zinc-600 mb-0.5">Entry</div>
@@ -2696,17 +2170,17 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
           </div>
         </div>
         <div>
-          <div className="text-[11px] text-zinc-600 mb-0.5">ADR %</div>
-          <div className="bg-zinc-800/60 border border-zinc-700/50 rounded px-1.5 py-1 text-[11px] font-mono font-bold text-zinc-200">
-            {a > 0 ? `${a.toFixed(2)}%` : <span className="text-zinc-700">—</span>}
-          </div>
+          <div className="text-[11px] text-zinc-600 mb-0.5">Pos Size %</div>
+          <input type="number" value={posSizePct} onChange={ev => onPosSizePctChange(ev.target.value)}
+            placeholder="e.g. 10"
+            className="w-full bg-zinc-800/60 border border-zinc-700/50 rounded px-1.5 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"/>
         </div>
         <div>
           <div className="flex items-center gap-1 mb-0.5">
-            <div className="text-[11px] text-zinc-600">Risk %</div>
+            <div className="text-[11px] text-zinc-600 leading-tight">Risk Per Trade %</div>
             {riskAutoSet && <span className="text-[9px] px-1 py-px rounded bg-blue-500/15 text-blue-400 border border-blue-500/20 leading-none">VIX</span>}
           </div>
-          {numInput(riskPct, v => { setRiskPct(v); setRiskAutoSet(false); }, '0.5')}
+          {numInput(riskPct, onRiskPctChange, '0.5')}
           <div className="mt-0.5 leading-tight">
             <div className="text-[11px] text-zinc-600 uppercase tracking-wider">Max Loss</div>
             <div className="text-[11px] font-mono font-bold text-red-400/90">{maxLossBudget != null ? `−${fmtDollar(maxLossBudget)}` : <span className="text-zinc-700">—</span>}</div>
@@ -2759,7 +2233,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
 
       {/* Results */}
       <div className="pt-2 border-t border-zinc-800/60 space-y-2">
-        <div className="grid grid-cols-3 gap-x-3">
+        <div className="grid grid-cols-2 gap-x-3">
           <div>
             <div className="text-[11px] text-zinc-600 mb-0.5">Shares</div>
             <div className="text-[14px] font-mono font-bold text-zinc-100">{shares ?? '—'}</div>
@@ -2767,10 +2241,6 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
           <div>
             <div className="text-[11px] text-zinc-600 mb-0.5">$ at Risk</div>
             <div className="text-[14px] font-mono font-bold text-red-400">{fmtDollar(dollarRisk)}</div>
-          </div>
-          <div>
-            <div className="text-[11px] text-zinc-600 mb-0.5">Pos Size</div>
-            <div className="text-[14px] font-mono font-bold text-zinc-100">{positionValue != null && effectiveEquity > 0 ? `${(positionValue / effectiveEquity * 100).toFixed(1)}%` : '—'}</div>
           </div>
         </div>
         <div>
@@ -2810,12 +2280,6 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
 // Compact widgets for the new Thematic Scanner v2 layout (matches screenshot)
 // ─────────────────────────────────────────────────────────────────────────────
 
-const PanelLabel = ({ children, badge, badgeClass = "bg-emerald-500/10 text-emerald-400 border-emerald-500/30" }) => (
-  <div className="flex items-center justify-between mb-2">
-    <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.15em]">{children}</div>
-    {badge && <span className={`px-1.5 py-0.5 text-[11px] font-bold rounded border ${badgeClass}`}>{badge}</span>}
-  </div>
-);
 
 // 從各種格式的時間字串擷取 HH:MM TZ，顯示在 panel 角落
 const UpdatedAt = ({ ts }) => {
@@ -3180,102 +2644,6 @@ const BottomStatusBar = ({ ibkrData }) => {
   );
 };
 
-// Color-coded keyword categories for breaking news highlighting
-const _KW_CATEGORIES = [
-  // Geopolitical / conflict — orange
-  { cls: "text-orange-400", words: [
-    "war", "wars", "invasion", "invade", "military", "airstrike", "missile", "nuclear",
-    "troops", "bomb", "conflict", "coup", "assassination", "hostage", "ceasefire",
-    "sanctions", "sanction", "iran", "russia", "ukraine", "north korea",
-    "israel", "hamas", "hezbollah", "taiwan", "china", "venezuela", "nato",
-    "strike", "strikes", "attack", "attacked", "invades", "invaded", "troops deployed",
-    "military operation", "escalation", "escalate", "retaliation", "retaliates",
-    "bombing", "blockade", "occupied", "occupation", "proxy war", "regime change",
-  ]},
-  // Trade / tariff / policy — amber
-  { cls: "text-amber-400", words: [
-    "tariff", "tariffs", "trade war", "trade deal", "import duty", "export ban",
-    "ban", "embargo", "executive order", "veto", "legislation", "bill", "stimulus",
-    "subsidy", "subsides", "restriction", "restrictions", "retaliatory", "retaliation",
-    "trump", "biden", "white house", "congress", "senate", "executive", "decree",
-    "25%", "50%", "100%", "tariff rate", "import tax", "trade bloc", "wto",
-    "decouple", "decoupling", "supply chain",
-  ]},
-  // Fed / monetary policy — sky blue
-  { cls: "text-sky-400", words: [
-    "fed", "federal reserve", "fomc", "powell", "rate cut", "rate hike",
-    "interest rate", "basis points", "quantitative easing", "quantitative tightening",
-    "taper", "tapering", "yield curve", "cpi", "ppi", "inflation", "deflation",
-    "monetary policy", "balance sheet",
-    "rate decision", "basis point", "bps", "dot plot", "pivot", "hold", "pause",
-    "emergency cut", "emergency hike", "jerome powell", "chair powell",
-    "ecb", "boj", "pboc", "bank of japan", "european central bank",
-    "treasury yield", "10-year", "2-year", "inverted", "inversion", "spread",
-  ]},
-  // Market risk / crisis — rose
-  { cls: "text-rose-400", words: [
-    "crash", "collapse", "circuit breaker", "trading halt", "halt", "emergency",
-    "recession", "depression", "bear market", "selloff", "sell-off", "plunge",
-    "panic", "contagion", "systemic risk", "liquidity crisis", "margin call",
-    "downgrade", "credit watch", "default", "bankruptcy", "bankrupt", "chapter 11",
-    "insolvency", "shutdown", "debt ceiling",
-    "halted", "suspended trading", "black swan", "flash crash",
-    "mass layoffs", "bank run", "bank failure", "fdic", "seized", "nationalized",
-    "sovereign default", "imf bailout", "credit downgrade", "junk", "speculative grade",
-  ]},
-  // Corporate / earnings events — yellow
-  { cls: "text-yellow-300", words: [
-    "merger", "acquisition", "acquire", "takeover", "buyout", "spinoff", "spin-off",
-    "ipo", "earnings", "beat", "miss", "guidance", "outlook", "forecast",
-    "layoff", "layoffs", "restructuring", "job cuts", "headcount",
-    "record", "all-time high",
-    "surprise", "shock", "miss by", "beat by", "raised guidance", "cut guidance",
-    "profit warning", "revenue warning", "Chapter 7", "Chapter 11", "delisted",
-  ]},
-  // Positive / approval — emerald
-  { cls: "text-emerald-400", words: [
-    "approval", "approved", "fda approval", "fda", "breakthrough",
-    "upgrade", "deal signed", "partnership", "contract", "ceasefire deal",
-    "peace deal", "rate cut", "stimulus package",
-    "ceasefire", "peace", "de-escalation", "rate cut announced", "stimulus approved",
-    "trade deal signed", "sanctions lifted", "recovery", "rebound", "relief rally",
-  ]},
-];
-
-// Build a single map: lowercase word → css class (longer phrases first to match greedily)
-const _kwMap = new Map();
-_KW_CATEGORIES.forEach(({ cls, words }) => {
-  words.slice().sort((a, b) => b.length - a.length).forEach(w => {
-    if (!_kwMap.has(w.toLowerCase())) _kwMap.set(w.toLowerCase(), cls);
-  });
-});
-const _sortedKws = [..._kwMap.keys()].sort((a, b) => b.length - a.length);
-const _kwRe = new RegExp(
-  `\\b(${_sortedKws.map(k => k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})\\b`,
-  "gi"
-);
-
-function highlightText(text) {
-  if (!text) return text;
-  return text.split(_kwRe).map((part, i) => {
-    const cls = _kwMap.get(part.toLowerCase());
-    return cls ? <span key={i} className={cls}>{part}</span> : part;
-  });
-}
-
-function formatAlertTime(ts) {
-  if (!ts) return null;
-  try {
-    const d = new Date(ts);
-    const time = d.toLocaleTimeString("en-US", {
-      timeZone: "America/New_York", hour: "numeric", minute: "2-digit", hour12: true,
-    });
-    const date = d.toLocaleDateString("en-US", {
-      timeZone: "America/New_York", month: "short", day: "numeric",
-    });
-    return `${date} ${time} ET`;
-  } catch { return null; }
-}
 /** Returns the next Gapper scan time as a display string. */
 function getNextGapperScanTime(scanTime) {
   const now = new Date();
@@ -10691,7 +10059,6 @@ export default function App() {
   const [showFP, setShowFP] = useState(false);
   // eslint-disable-next-line no-unused-vars
   const [lbPerfKey, setLbPerfKey] = useState("perf_1m");
-  const [rsSPYKey, setRsSPYKey] = useState("perf_1m");
   const [fetchedAt, setFetchedAt] = useState(null);
   const [countdown, setCountdown] = useState(null);
   const nextFetchAt = useRef(null);
@@ -11025,14 +10392,6 @@ const appScreenerMap = useMemo(() => {
   }, [data, search, stockFilter, creditRegime]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const unique = [...new Set(filtered.flatMap(t => t.subthemes.flatMap(s => s.stocks.map(st => st.ticker))))];
-  const totalSubs = filtered.reduce((n, t) => n + t.subthemes.length, 0);
-
-  const topADRTickers = useMemo(() => {
-    if (!data) return new Set();
-    const all = data.themes.flatMap(t => normalizeTheme(t).subthemes.flatMap(s => s.stocks));
-    const sorted = [...all].sort((a, b) => (b.adr_pct || 0) - (a.adr_pct || 0));
-    return new Set(sorted.slice(0, Math.ceil(sorted.length * 0.1)).map(s => s.ticker));
-  }, [data]);
 
 
 
