@@ -6171,6 +6171,31 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
     return () => clearInterval(id);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Live pre-market prices — Yahoo Finance bulk quote, refreshed every 30s
+  const [livePrices, setLivePrices] = useState({});
+  useEffect(() => {
+    if (!gapperData?.gappers?.length) return;
+    const syms = gapperData.gappers.map(g => g.ticker).join(',');
+    const fetchLive = async () => {
+      try {
+        const url = `https://query1.finance.yahoo.com/v7/finance/quote?symbols=${syms}&fields=preMarketPrice,preMarketChangePercent,regularMarketPrice,regularMarketChangePercent`;
+        const r = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
+        if (!r.ok) return;
+        const json = await r.json();
+        const updates = {};
+        for (const q of (json?.quoteResponse?.result || [])) {
+          const price  = q.preMarketPrice  ?? q.regularMarketPrice;
+          const chgPct = q.preMarketChangePercent ?? q.regularMarketChangePercent;
+          if (price != null) updates[q.symbol] = { price, change_pct: chgPct ?? 0 };
+        }
+        if (Object.keys(updates).length) setLivePrices(updates);
+      } catch {}
+    };
+    fetchLive();
+    const id = setInterval(fetchLive, 30_000);
+    return () => clearInterval(id);
+  }, [gapperData]);
+
   const gapperTickerSet = useMemo(
     () => new Set((gapperData?.gappers || []).map(g => g.ticker)),
     [gapperData]
@@ -6285,6 +6310,10 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
                 "border-zinc-800/40 hover:bg-zinc-800/20",
                 flowTheme ? "border-dashed border-amber-800/40" : "",
               ].join(" ");
+              const lp = livePrices[g.ticker];
+              const livePrice  = lp?.price ?? g.price;
+              const liveChgPct = lp?.change_pct ?? g.gap_pct;
+              const isLive     = !!lp;
               return (
               <tr key={g.ticker + i} className={rowCls}>
                 {/* Ticker */}
@@ -6298,12 +6327,17 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
                   <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer" className="ml-1">
                     <ExternalLink size={8} className="inline text-zinc-600 hover:text-blue-400"/>
                   </a>
-                  <div className="text-[11px] font-mono text-zinc-500">${g.price.toFixed(2)}</div>
+                  <div className="text-[11px] font-mono text-zinc-500">${livePrice.toFixed(2)}</div>
                 </td>
                 {/* Premkt % */}
                 <td className="py-1 px-2 align-middle text-center">
-                  <div className="text-[12px] font-mono text-zinc-300">${g.price.toFixed(2)}</div>
-                  <span className="text-[13px] font-bold font-mono text-emerald-400">+{g.gap_pct.toFixed(1)}%</span>
+                  <div className="text-[12px] font-mono text-zinc-300">
+                    ${livePrice.toFixed(2)}
+                    {isLive && <span className="ml-1 text-[9px] text-emerald-500/60">●</span>}
+                  </div>
+                  <span className={`text-[13px] font-bold font-mono ${liveChgPct >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                    {liveChgPct >= 0 ? '+' : ''}{liveChgPct.toFixed(1)}%
+                  </span>
                 </td>
                 {/* Premkt Vol */}
                 <td className="py-1 px-2 align-middle text-center text-[12px] font-mono text-zinc-400">{fmtNum(g.pm_volume)}</td>
