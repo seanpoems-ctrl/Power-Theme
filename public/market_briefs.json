@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-15 18:37 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Broad Market Risk-On Rally",
+    "spy_price": 754.83,
+    "spy_change_pct": 1.76,
+    "vix": 16.2,
+    "hy_oas": 2.71,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 63.3,
+    "mmth": 66.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA announced a groundbreaking strategic partnership with a leading global automotive manufacturer for advanced AI-driven autonomous vehicle platforms, signaling massive new revenue streams."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft unveiled its new enterprise-focused generative AI suite, integrating advanced large language models into its core productivity and cloud services, garnering immediate positive analyst reception."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple rallied today on broad market strength and systematic flow, without any specific company-related news driving the price action."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-15 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2117,44 +2155,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continues to benefit from ongoing AI infrastructure buildout and strong speculative flow, sustaining elevated valuation narratives."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-06 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Strong Equity Upside",
-    "spy_price": 733.83,
-    "spy_change_pct": 1.39,
-    "vix": 17.39,
-    "hy_oas": 2.77,
-    "yield_curve": 0.5,
-    "credit_status": "Complacent",
-    "s5fi": 62.1,
-    "mmth": 61.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMD",
-          "company": "Advanced Micro Devices",
-          "reason": "Advanced Micro Devices reported strong quarterly results, beating expectations and raising guidance, signaling robust demand for its chips."
-        },
-        {
-          "ticker": "SMCI",
-          "company": "Super Micro Computer",
-          "reason": "Super Micro Computer posted a significant earnings beat and raised outlook, indicating strong momentum in the AI server market."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp",
-          "reason": "Microsoft continues to exhibit strong technical momentum, benefiting from the broader AI narrative and consistent institutional flow."
         }
       ]
     }
