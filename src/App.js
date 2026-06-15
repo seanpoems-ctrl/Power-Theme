@@ -1905,7 +1905,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
   const [entry, setEntry] = React.useState('');
   const [atr, setAtr] = React.useState('');
   const [riskPct, setRiskPct] = React.useState('');
-  const [posSizePct, setPosSizePct] = React.useState('10');
+  const [posSizePct, setPosSizePct] = React.useState('');
   const [lastEdited, setLastEdited] = React.useState('risk');
   const [stopStrategy, setStopStrategy] = React.useState('3');
   const [stopMode, setStopMode] = React.useState('manual');
@@ -2111,7 +2111,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
     bigVal:     "text-[26px]",
     stopCard:   "bg-zinc-800/40 rounded-lg px-4 py-3",
     stopLabel:  "text-[12px] text-zinc-500 uppercase",
-    stopSh:     "text-[13px] font-mono text-zinc-400",
+    stopSh:     "text-[13px] font-mono text-red-400",
     stopPrice:  "text-[18px]",
     stopLoss:   "text-[13px]",
     inp:        "bg-zinc-800/60 border border-zinc-700/50 rounded-lg px-3 py-2.5 text-[15px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600 w-full",
@@ -2134,7 +2134,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
     bigVal:     "text-[14px]",
     stopCard:   "bg-zinc-800/40 rounded px-2 py-1.5",
     stopLabel:  "text-[11px] text-zinc-500 uppercase",
-    stopSh:     "text-[11px] font-mono text-zinc-400",
+    stopSh:     "text-[11px] font-mono text-red-400",
     stopPrice:  "text-[12px]",
     stopLoss:   "text-[11px]",
     inp:        "bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600 w-full",
