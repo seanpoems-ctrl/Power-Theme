@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-15 12:20 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Broad Market Risk-On Surge",
+    "spy_price": 756.25,
+    "spy_change_pct": 1.95,
+    "vix": 16.3,
+    "hy_oas": 2.71,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 66.7,
+    "mmth": 68.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Analysts lauded Apple's unveiling of a new generative AI suite for iOS, driving investor optimism about future revenue streams."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft announced a multi-billion dollar strategic partnership with a leading automotive manufacturer for cloud-based autonomous driving platforms."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA experienced continued technical buying today, extending its rally from last week's positive sentiment without new specific catalysts."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-15 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2117,44 +2155,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corp.",
           "reason": "Microsoft benefits from persistent institutional inflows on continued enterprise cloud and AI adoption momentum."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-05 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On / Growth Optimism",
-    "spy_price": 723.77,
-    "spy_change_pct": 0.8,
-    "vix": 17.38,
-    "hy_oas": 2.78,
-    "yield_curve": 0.5,
-    "credit_status": "Complacent",
-    "s5fi": 59.5,
-    "mmth": 57.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "DOCN",
-          "company": "DigitalOcean Holdings Inc.",
-          "reason": "Reported a strong Beat & Raise quarter, further bolstered by news of a strategic capital raise, signaling robust growth and investor confidence."
-        },
-        {
-          "ticker": "GFS",
-          "company": "GlobalFoundries Inc.",
-          "reason": "Exceeded earnings expectations and raised guidance, indicating strong demand in the semiconductor sector and operational efficiency."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Continued to benefit from broader tech sector strength and persistent optimism around its AI initiatives, without a specific fresh news catalyst today."
         }
       ]
     }
