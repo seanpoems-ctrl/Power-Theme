@@ -10731,10 +10731,10 @@ const appScreenerMap = useMemo(() => {
         </div>
 
 
-        {showCalcModal && <CalcModal onClose={() => setShowCalcModal(false)} ibkrThemesData={ibkrData} thematicData={data} vix={data?.vix} />}
         <BottomStatusBar ibkrData={ibkrData}/>
         </>
       )}
+      {showCalcModal && <CalcModal onClose={() => setShowCalcModal(false)} ibkrThemesData={ibkrData} thematicData={data} vix={data?.vix} />}
       {macroHover && <TVPopup ticker={macroHover.ticker} anchorRect={macroHover.rect} chartUrl={macroHover.chartUrl} onClose={() => setMacroHover(null)}/>}
     </div>
     </LangCtx.Provider>
