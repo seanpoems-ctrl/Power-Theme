@@ -2113,13 +2113,13 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
     title:      "text-[13px]",
     label:      "text-[13px] text-zinc-500",
     sublabel:   "text-[12px] text-zinc-600 uppercase tracking-wider",
-    subval:     "text-[13px]",
-    bigVal:     "text-[26px]",
-    stopCard:   "bg-zinc-800/40 rounded-lg px-4 py-3",
-    stopLabel:  "text-[12px] text-zinc-500 uppercase",
-    stopSh:     "text-[13px] font-mono text-red-400",
-    stopPrice:  "text-[18px]",
-    stopLoss:   "text-[13px]",
+    subval:     "text-[15px]",
+    bigVal:     "text-[28px]",
+    stopCard:   "bg-zinc-800/40 rounded-lg px-4 py-3 flex items-start justify-between",
+    stopLabel:  "text-[13px] text-zinc-500 uppercase pt-0.5",
+    stopSh:     "text-[15px] font-mono text-red-400",
+    stopPrice:  "text-[24px]",
+    stopLoss:   "text-[14px]",
     inp:        "bg-zinc-800/60 border border-zinc-700/50 rounded-lg px-3 py-2.5 text-[15px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600 w-full",
     tickerW:    "w-32",
     tickerPx:   "text-[15px]",
@@ -2212,7 +2212,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
         <div>
           <div className={`${z.subval} text-zinc-600 mb-0.5`}>Entry</div>
           <FormattedNumInput value={entry} onChange={setEntry} placeholder="0.00" className={z.inp}/>
-          <div className="mt-1 leading-tight">
+          <div className="mt-1 flex items-baseline justify-between gap-2">
             <div className={z.sublabel}>Position</div>
             <div className={`${z.subval} font-mono font-bold text-zinc-300`}>{positionValue != null ? fmtDollar(positionValue) : <span className="text-zinc-700">—</span>}</div>
           </div>
@@ -2224,7 +2224,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
         <div>
           <div className={`${z.subval} text-zinc-600 mb-0.5`}>Risk/Trade %</div>
           <FormattedNumInput value={riskPct} onChange={onRiskPctChange} placeholder="0.5" className={z.inp}/>
-          <div className="mt-1 leading-tight">
+          <div className="mt-1 flex items-baseline justify-between gap-2">
             <div className={z.sublabel}>Max Loss</div>
             <div className={`${z.subval} font-mono font-bold text-red-400/90`}>{maxLossBudget != null ? `−${fmtDollar(maxLossBudget)}` : <span className="text-zinc-700">—</span>}</div>
           </div>
@@ -2282,16 +2282,18 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
                         ? (i === stops.length - 1 ? 'LOD −0.08%' : `${Math.round((i + 1) / stops.length * 100)}% LOD`)
                         : `Stop ${i + 1}`}
                     </div>
-                    {sharesHere != null && <div className={z.stopSh}>{sharesHere} sh</div>}
-                    <div className={`${z.stopPrice} font-mono font-bold text-zinc-200`}>{fmtPrice(sv)}</div>
-                    {lossPct > 0 && <div className={`${z.stopLoss} font-mono text-red-400/80`}>−{lossPct.toFixed(2)}%</div>}
+                    <div className="text-right">
+                      {sharesHere != null && <div className={z.stopSh}>{sharesHere} sh</div>}
+                      <div className={`${z.stopPrice} font-mono font-bold text-zinc-200`}>{fmtPrice(sv)}</div>
+                      {lossPct > 0 && <div className={`${z.stopLoss} font-mono text-red-400/80`}>−{lossPct.toFixed(2)}%</div>}
+                    </div>
                   </div>
                 );
               })}
             </div>
           ) : (
             <div className={z.stopCard}>
-              <div className={`${z.stopPrice} font-mono font-bold text-zinc-600`}>—</div>
+              <div className={`${z.stopPrice} font-mono font-bold text-zinc-600 w-full text-center`}>—</div>
             </div>
           )}
         </div>
