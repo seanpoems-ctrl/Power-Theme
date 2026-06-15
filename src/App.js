@@ -1867,6 +1867,29 @@ const DailyChg = ({ val }) => {
 
 
 /* ──────────────────────────────────────────────── POSITION CALCULATOR ── */
+
+// Numeric input that formats with thousand separators when not focused
+const FormattedNumInput = ({ value, onChange, placeholder, className }) => {
+  const [focused, setFocused] = React.useState(false);
+  const raw = String(value ?? '');
+  const parsed = parseFloat(raw.replace(/,/g, ''));
+  const display = !focused && raw !== '' && !isNaN(parsed)
+    ? parsed.toLocaleString('en-US', { maximumFractionDigits: 10 })
+    : raw;
+  return (
+    <input
+      type="text"
+      inputMode="decimal"
+      value={display}
+      onChange={ev => onChange(ev.target.value.replace(/[^0-9.]/g, ''))}
+      onFocus={() => setFocused(true)}
+      onBlur={() => setFocused(false)}
+      placeholder={placeholder}
+      className={className ?? "w-full bg-zinc-800/60 border border-zinc-700/50 rounded px-1.5 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"}
+    />
+  );
+};
+
 const vixToRiskPct = (v) => {
   if (!v) return null;
   if (v >= 30) return null;       // EXTREME FEAR — no new trades
@@ -1901,12 +1924,13 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
   const [lodError, setLodError] = React.useState(false);
 
   const accountEquity = ibkrThemesData?.account_equity ?? null;
-  const effectiveEquity = accountEquity != null ? accountEquity : (parseFloat(equity) || 0);
+  const stripCommas = v => parseFloat(String(v ?? '').replace(/,/g, '')) || 0;
+  const effectiveEquity = accountEquity != null ? accountEquity : stripCommas(equity);
 
-  const e = parseFloat(entry) || 0;
+  const e = stripCommas(entry);
   const a = parseFloat(atr) || 0;
-  const r = parseFloat(riskPct) || 0;
-  const p = parseFloat(posSizePct) || 0;
+  const r = stripCommas(riskPct);
+  const p = stripCommas(posSizePct);
 
   const fetchTickerData = React.useCallback(async (sym) => {
     const s = sym.trim().toUpperCase();
@@ -1998,7 +2022,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
   // LOD stop is placed 0.08% below the actual LOD to avoid being stopped by brief wicks
   const effectiveLod = lod != null && lod > 0 ? parseFloat((lod * (1 - 0.0008)).toFixed(2)) : null;
   const lodRisk = effectiveLod != null && e > effectiveLod ? e - effectiveLod : 0;
-  const ms = parseFloat(manualStop);
+  const ms = stripCommas(manualStop);
   const manualRisk = stopMode === 'manual' && ms > 0 && e > ms ? e - ms : 0;
   const riskUnit = stopMode === 'lod' ? lodRisk : stopMode === 'manual' ? manualRisk : 0;
 
@@ -2084,10 +2108,6 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
     </button>
   );
 
-  const numInput = (val, onChange, placeholder) => (
-    <input type="number" value={val} onChange={ev => onChange(ev.target.value)} placeholder={placeholder}
-      className="w-full bg-zinc-800/60 border border-zinc-700/50 rounded px-1.5 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"/>
-  );
 
   return (
     <div className="bg-zinc-900/60 rounded-xl border border-zinc-800/60 p-3">
@@ -2105,7 +2125,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
         ) : (
           <div className="flex items-center gap-2">
             <span className="text-[11px] text-zinc-500 flex-shrink-0">Equity $</span>
-            <input type="number" value={equity} onChange={ev => setEquity(ev.target.value)} placeholder="e.g. 25000"
+            <FormattedNumInput value={equity} onChange={setEquity} placeholder="e.g. 25,000"
               className="flex-1 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"/>
           </div>
         )}
@@ -2136,10 +2156,10 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
       </div>
 
       {/* Entry / Pos Size % / Risk Per Trade % */}
-      <div className="grid grid-cols-3 gap-1.5 mb-2">
+      <div className="grid grid-cols-3 gap-1.5 mb-2 items-start">
         <div>
           <div className="text-[11px] text-zinc-600 mb-0.5">Entry</div>
-          {numInput(entry, setEntry, '0.00')}
+          <FormattedNumInput value={entry} onChange={setEntry} placeholder="0.00" />
           <div className="mt-0.5 leading-tight">
             <div className="text-[11px] text-zinc-600 uppercase tracking-wider">Position</div>
             <div className="text-[11px] font-mono font-bold text-zinc-300">{positionValue != null ? fmtDollar(positionValue) : <span className="text-zinc-700">—</span>}</div>
@@ -2147,16 +2167,11 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
         </div>
         <div>
           <div className="text-[11px] text-zinc-600 mb-0.5">Pos Size %</div>
-          <input type="number" value={posSizePct} onChange={ev => onPosSizePctChange(ev.target.value)}
-            placeholder="e.g. 10"
-            className="w-full bg-zinc-800/60 border border-zinc-700/50 rounded px-1.5 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"/>
+          <FormattedNumInput value={posSizePct} onChange={onPosSizePctChange} placeholder="10" />
         </div>
         <div>
-          <div className="flex items-center gap-1 mb-0.5">
-            <div className="text-[11px] text-zinc-600 leading-tight">Risk Per Trade %</div>
-            {riskAutoSet && <span className="text-[9px] px-1 py-px rounded bg-blue-500/15 text-blue-400 border border-blue-500/20 leading-none">VIX</span>}
-          </div>
-          {numInput(riskPct, onRiskPctChange, '0.5')}
+          <div className="text-[11px] text-zinc-600 mb-0.5">Risk Per Trade %</div>
+          <FormattedNumInput value={riskPct} onChange={onRiskPctChange} placeholder="0.5" />
           <div className="mt-0.5 leading-tight">
             <div className="text-[11px] text-zinc-600 uppercase tracking-wider">Max Loss</div>
             <div className="text-[11px] font-mono font-bold text-red-400/90">{maxLossBudget != null ? `−${fmtDollar(maxLossBudget)}` : <span className="text-zinc-700">—</span>}</div>
@@ -2180,7 +2195,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
       {stopMode === 'manual' && (
         <div className="flex items-center gap-2 mb-2">
           <span className="text-[11px] text-zinc-500 flex-shrink-0">Stop $</span>
-          <input type="number" value={manualStop} onChange={ev => setManualStop(ev.target.value)} placeholder="0.00"
+          <FormattedNumInput value={manualStop} onChange={setManualStop} placeholder="0.00"
             className="flex-1 bg-zinc-800/60 border border-zinc-700/50 rounded px-2 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"/>
         </div>
       )}
