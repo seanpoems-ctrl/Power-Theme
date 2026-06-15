@@ -1869,7 +1869,7 @@ const DailyChg = ({ val }) => {
 /* ──────────────────────────────────────────────── POSITION CALCULATOR ── */
 
 // Numeric input that formats with thousand separators when not focused
-const FormattedNumInput = ({ value, onChange, placeholder, className, tabIndex }) => {
+const FormattedNumInput = ({ value, onChange, placeholder, className, tabIndex, autoFocus }) => {
   const [focused, setFocused] = React.useState(false);
   const raw = String(value ?? '');
   const parsed = parseFloat(raw.replace(/,/g, ''));
@@ -1886,6 +1886,7 @@ const FormattedNumInput = ({ value, onChange, placeholder, className, tabIndex }
       onBlur={() => setFocused(false)}
       placeholder={placeholder}
       tabIndex={tabIndex}
+      autoFocus={autoFocus}
       className={className ?? "w-full bg-zinc-800/60 border border-zinc-700/50 rounded px-1.5 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"}
     />
   );
@@ -2210,7 +2211,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
       <div className={`grid grid-cols-3 ${z.gap} ${z.mb} items-start`}>
         <div>
           <div className={`${z.subval} text-zinc-600 mb-0.5`}>Entry</div>
-          <FormattedNumInput value={entry} onChange={setEntry} placeholder="0.00" className={z.inp} tabIndex={12}/>
+          <FormattedNumInput value={entry} onChange={setEntry} placeholder="0.00" className={z.inp} tabIndex={12} autoFocus={!!large}/>
           <div className="mt-1 flex items-baseline justify-between gap-2">
             <div className={z.sublabel}>Position</div>
             <div className={`${z.subval} font-mono font-bold text-zinc-300`}>{positionValue != null ? fmtDollar(positionValue) : <span className="text-zinc-700">—</span>}</div>
