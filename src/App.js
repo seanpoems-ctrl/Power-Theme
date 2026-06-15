@@ -1869,7 +1869,7 @@ const DailyChg = ({ val }) => {
 /* ──────────────────────────────────────────────── POSITION CALCULATOR ── */
 
 // Numeric input that formats with thousand separators when not focused
-const FormattedNumInput = ({ value, onChange, placeholder, className, tabIndex, autoFocus }) => {
+const FormattedNumInput = React.forwardRef(({ value, onChange, placeholder, className, tabIndex, autoFocus, onKeyDown }, ref) => {
   const [focused, setFocused] = React.useState(false);
   const raw = String(value ?? '');
   const parsed = parseFloat(raw.replace(/,/g, ''));
@@ -1878,19 +1878,21 @@ const FormattedNumInput = ({ value, onChange, placeholder, className, tabIndex, 
     : raw;
   return (
     <input
+      ref={ref}
       type="text"
       inputMode="decimal"
       value={display}
       onChange={ev => onChange(ev.target.value.replace(/[^0-9.]/g, ''))}
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
+      onKeyDown={onKeyDown}
       placeholder={placeholder}
       tabIndex={tabIndex}
       autoFocus={autoFocus}
       className={className ?? "w-full bg-zinc-800/60 border border-zinc-700/50 rounded px-1.5 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"}
     />
   );
-};
+});
 
 const vixToRiskPct = (v) => {
   if (!v) return null;
@@ -1917,6 +1919,14 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
   const [currentPrice, setCurrentPrice] = React.useState(null);
   const [lodLoading, setLodLoading] = React.useState(false);
   const [lodError, setLodError] = React.useState(false);
+
+  const entryRef    = React.useRef(null);
+  const stopRef     = React.useRef(null);
+  const posSizeRef  = React.useRef(null);
+  const riskRef     = React.useRef(null);
+  const onEnter = (nextRef) => (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); (nextRef.current ?? posSizeRef.current)?.focus(); }
+  };
 
   const accountEquity = ibkrThemesData?.account_equity ?? null;
   const stripCommas = v => parseFloat(String(v ?? '').replace(/,/g, '')) || 0;
@@ -2211,7 +2221,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
       <div className={`grid grid-cols-3 ${z.gap} ${z.mb} items-start`}>
         <div>
           <div className={`${z.subval} text-zinc-600 mb-0.5`}>Entry</div>
-          <FormattedNumInput value={entry} onChange={setEntry} placeholder="0.00" className={z.inp} tabIndex={12} autoFocus={!!large}/>
+          <FormattedNumInput ref={entryRef} value={entry} onChange={setEntry} placeholder="0.00" className={z.inp} tabIndex={12} autoFocus={!!large} onKeyDown={onEnter(stopRef)}/>
           <div className="mt-1 flex items-baseline justify-between gap-2">
             <div className={z.sublabel}>Position</div>
             <div className={`${z.subval} font-mono font-bold text-zinc-300`}>{positionValue != null ? fmtDollar(positionValue) : <span className="text-zinc-700">—</span>}</div>
@@ -2219,11 +2229,11 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
         </div>
         <div>
           <div className={`${z.subval} text-zinc-600 mb-0.5`}>Pos Size %</div>
-          <FormattedNumInput value={posSizePct} onChange={onPosSizePctChange} placeholder="10" className={z.inp} tabIndex={14}/>
+          <FormattedNumInput ref={posSizeRef} value={posSizePct} onChange={onPosSizePctChange} placeholder="10" className={z.inp} tabIndex={14} onKeyDown={onEnter(riskRef)}/>
         </div>
         <div>
           <div className={`${z.subval} text-zinc-600 mb-0.5`}>Risk/Trade %</div>
-          <FormattedNumInput value={riskPct} onChange={onRiskPctChange} placeholder="0.5" className={z.inp} tabIndex={15}/>
+          <FormattedNumInput ref={riskRef} value={riskPct} onChange={onRiskPctChange} placeholder="0.5" className={z.inp} tabIndex={15}/>
           <div className="mt-1 flex items-baseline justify-between gap-2">
             <div className={z.sublabel}>Max Loss</div>
             <div className={`${z.subval} font-mono font-bold text-red-400/90`}>{maxLossBudget != null ? `−${fmtDollar(maxLossBudget)}` : <span className="text-zinc-700">—</span>}</div>
@@ -2247,7 +2257,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
       {stopMode === 'manual' && (
         <div className={`flex items-center ${z.gap} ${z.mb}`}>
           <span className={`${z.label} flex-shrink-0`}>Stop $</span>
-          <FormattedNumInput value={manualStop} onChange={setManualStop} placeholder="0.00" className={z.inp} tabIndex={13}/>
+          <FormattedNumInput ref={stopRef} value={manualStop} onChange={setManualStop} placeholder="0.00" className={z.inp} tabIndex={13} onKeyDown={onEnter(posSizeRef)}/>
         </div>
       )}
 
