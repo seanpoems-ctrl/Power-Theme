@@ -1869,7 +1869,7 @@ const DailyChg = ({ val }) => {
 /* ──────────────────────────────────────────────── POSITION CALCULATOR ── */
 
 // Numeric input that formats with thousand separators when not focused
-const FormattedNumInput = ({ value, onChange, placeholder, className }) => {
+const FormattedNumInput = ({ value, onChange, placeholder, className, tabIndex }) => {
   const [focused, setFocused] = React.useState(false);
   const raw = String(value ?? '');
   const parsed = parseFloat(raw.replace(/,/g, ''));
@@ -1885,6 +1885,7 @@ const FormattedNumInput = ({ value, onChange, placeholder, className }) => {
       onFocus={() => setFocused(true)}
       onBlur={() => setFocused(false)}
       placeholder={placeholder}
+      tabIndex={tabIndex}
       className={className ?? "w-full bg-zinc-800/60 border border-zinc-700/50 rounded px-1.5 py-1 text-[11px] font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600"}
     />
   );
@@ -2160,10 +2161,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
     <div className={z.card}>
       <div className={`flex items-center justify-between ${z.mb}`}>
         <div className={`${z.title} font-bold text-zinc-500 uppercase tracking-[0.18em]`}>Position Calc</div>
-        <div className="flex items-center gap-2">
-          <button onClick={handleClear} tabIndex={-1} className={`${large ? 'text-[12px] px-3 py-1' : 'text-[10px] px-2 py-0.5'} rounded border border-zinc-700/50 text-zinc-500 hover:text-zinc-200 hover:border-zinc-500 transition-colors font-medium`}>Clear</button>
-          {onClose && <button onClick={onClose} className={`text-zinc-600 hover:text-zinc-200 transition-colors ${z.closeSize} leading-none`} title="Close">✕</button>}
-        </div>
+        {onClose && <button onClick={onClose} className={`text-zinc-600 hover:text-zinc-200 transition-colors ${z.closeSize} leading-none`} title="Close">✕</button>}
       </div>
 
       {/* Equity row */}
@@ -2178,21 +2176,22 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
         ) : (
           <div className={`flex items-center ${z.gap}`}>
             <span className={`${z.label} flex-shrink-0`}>Equity $</span>
-            <FormattedNumInput value={equity} onChange={setEquity} placeholder="e.g. 100,000" className={z.inp}/>
+            <FormattedNumInput value={equity} onChange={setEquity} placeholder="e.g. 100,000" className={z.inp} tabIndex={10}/>
           </div>
         )}
       </div>
 
-      {/* Ticker input */}
+      {/* Ticker + Clear button row */}
       <div className={`flex items-center ${z.gap} ${z.mb}`}>
         <span className={`${z.label} flex-shrink-0`}>Ticker</span>
         <input
-          type="text" value={lodTicker}
+          type="text" value={lodTicker} tabIndex={11}
           onChange={ev => { setLodTicker(ev.target.value.toUpperCase()); setLod(null); setCurrentPrice(null); setLodError(false); }}
           onBlur={ev => fetchTickerData(ev.target.value)}
           onKeyDown={ev => ev.key === 'Enter' && fetchTickerData(ev.target.value)}
           placeholder="AAPL"
           className={`${z.tickerW} bg-zinc-800/60 border border-zinc-700/50 rounded ${large ? 'px-3 py-2.5 rounded-lg' : 'px-2 py-1'} ${z.tickerPx} font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600 uppercase`}/>
+        <button onClick={handleClear} tabIndex={-1} className={`${large ? 'text-[12px] px-3 py-2' : 'text-[10px] px-2 py-0.5'} flex-shrink-0 rounded border border-zinc-700/50 text-zinc-500 hover:text-zinc-200 hover:border-zinc-500 transition-colors font-medium`}>Clear</button>
         <div className="flex-1 flex flex-col items-end overflow-hidden">
           {lodLoading
             ? <span className={`${z.priceSz} font-mono text-zinc-500`}>...</span>
@@ -2211,7 +2210,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
       <div className={`grid grid-cols-3 ${z.gap} ${z.mb} items-start`}>
         <div>
           <div className={`${z.subval} text-zinc-600 mb-0.5`}>Entry</div>
-          <FormattedNumInput value={entry} onChange={setEntry} placeholder="0.00" className={z.inp}/>
+          <FormattedNumInput value={entry} onChange={setEntry} placeholder="0.00" className={z.inp} tabIndex={12}/>
           <div className="mt-1 flex items-baseline justify-between gap-2">
             <div className={z.sublabel}>Position</div>
             <div className={`${z.subval} font-mono font-bold text-zinc-300`}>{positionValue != null ? fmtDollar(positionValue) : <span className="text-zinc-700">—</span>}</div>
@@ -2219,11 +2218,11 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
         </div>
         <div>
           <div className={`${z.subval} text-zinc-600 mb-0.5`}>Pos Size %</div>
-          <FormattedNumInput value={posSizePct} onChange={onPosSizePctChange} placeholder="10" className={z.inp}/>
+          <FormattedNumInput value={posSizePct} onChange={onPosSizePctChange} placeholder="10" className={z.inp} tabIndex={14}/>
         </div>
         <div>
           <div className={`${z.subval} text-zinc-600 mb-0.5`}>Risk/Trade %</div>
-          <FormattedNumInput value={riskPct} onChange={onRiskPctChange} placeholder="0.5" className={z.inp}/>
+          <FormattedNumInput value={riskPct} onChange={onRiskPctChange} placeholder="0.5" className={z.inp} tabIndex={15}/>
           <div className="mt-1 flex items-baseline justify-between gap-2">
             <div className={z.sublabel}>Max Loss</div>
             <div className={`${z.subval} font-mono font-bold text-red-400/90`}>{maxLossBudget != null ? `−${fmtDollar(maxLossBudget)}` : <span className="text-zinc-700">—</span>}</div>
@@ -2247,7 +2246,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
       {stopMode === 'manual' && (
         <div className={`flex items-center ${z.gap} ${z.mb}`}>
           <span className={`${z.label} flex-shrink-0`}>Stop $</span>
-          <FormattedNumInput value={manualStop} onChange={setManualStop} placeholder="0.00" className={z.inp}/>
+          <FormattedNumInput value={manualStop} onChange={setManualStop} placeholder="0.00" className={z.inp} tabIndex={13}/>
         </div>
       )}
 
