@@ -1904,16 +1904,9 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
   const [equity, setEquity] = React.useState('');
   const [entry, setEntry] = React.useState('');
   const [atr, setAtr] = React.useState('');
-  const [riskPct, setRiskPct] = React.useState('0.5');
-  const [riskAutoSet, setRiskAutoSet] = React.useState(false);
+  const [riskPct, setRiskPct] = React.useState('');
   const [posSizePct, setPosSizePct] = React.useState('');
   const [lastEdited, setLastEdited] = React.useState('risk');
-
-  React.useEffect(() => {
-    const suggested = vixToRiskPct(vix);
-    if (suggested) { setRiskPct(suggested); setRiskAutoSet(true); setLastEdited('risk'); }
-    else setRiskAutoSet(false);
-  }, [vix]);
   const [stopStrategy, setStopStrategy] = React.useState('3');
   const [stopMode, setStopMode] = React.useState('lod');
   const [manualStop, setManualStop] = React.useState('');
@@ -2082,7 +2075,6 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
 
   const onRiskPctChange = (v) => {
     setRiskPct(v);
-    setRiskAutoSet(false);
     setLastEdited('risk');
     const rv = parseFloat(v) || 0;
     if (rv > 0 && riskUnit > 0 && e > 0 && effectiveEquity > 0) {
@@ -2170,7 +2162,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
           <FormattedNumInput value={posSizePct} onChange={onPosSizePctChange} placeholder="10" />
         </div>
         <div>
-          <div className="text-[11px] text-zinc-600 mb-0.5">Risk Per Trade %</div>
+          <div className="text-[11px] text-zinc-600 mb-0.5">Risk/Trade %</div>
           <FormattedNumInput value={riskPct} onChange={onRiskPctChange} placeholder="0.5" />
           <div className="mt-0.5 leading-tight">
             <div className="text-[11px] text-zinc-600 uppercase tracking-wider">Max Loss</div>
@@ -2220,6 +2212,10 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
             <div className={`grid gap-2 ${stops.length === 3 ? 'grid-cols-3' : stops.length === 2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
               {stops.map((s, i) => {
                 const lossPct = e > 0 && s > 0 && e > s ? (e - s) / e * 100 : 0;
+                const n = stops.length;
+                const base = shares != null ? Math.floor(shares / n) : null;
+                const rem = shares != null ? shares % n : 0;
+                const sharesHere = base != null ? base + (i >= n - rem ? 1 : 0) : null;
                 return (
                   <div key={i} className="bg-zinc-800/40 rounded px-2 py-1.5">
                     <div className="text-[11px] text-zinc-500 uppercase">
@@ -2227,6 +2223,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
                         ? (i === stops.length - 1 ? 'LOD −0.08%' : `${Math.round((i + 1) / stops.length * 100)}% LOD`)
                         : `Stop ${i + 1}`}
                     </div>
+                    {sharesHere != null && <div className="text-[11px] font-mono text-zinc-400">{sharesHere} sh</div>}
                     <div className="text-[12px] font-mono font-bold text-zinc-200">{fmtPrice(s)}</div>
                     {lossPct > 0 && <div className="text-[11px] font-mono text-red-400/80">−{lossPct.toFixed(2)}%</div>}
                   </div>
