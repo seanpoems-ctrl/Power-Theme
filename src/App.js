@@ -1899,7 +1899,7 @@ const vixToRiskPct = (v) => {
   return '0.3';                   // COMPLACENT
 };
 
-const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
+const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose }) => {
   const lang = useLang();
   const [equity, setEquity] = React.useState('');
   const [entry, setEntry] = React.useState('');
@@ -2103,7 +2103,10 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix }) => {
 
   return (
     <div className="bg-zinc-900/60 rounded-xl border border-zinc-800/60 p-3">
-      <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.18em] mb-2">Position Calc</div>
+      <div className="flex items-center justify-between mb-2">
+        <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.18em]">Position Calc</div>
+        {onClose && <button onClick={onClose} className="text-zinc-600 hover:text-zinc-200 transition-colors text-[15px] leading-none -mr-0.5" title="Close">✕</button>}
+      </div>
 
       {/* Equity row */}
       <div className="mb-2">
@@ -9989,6 +9992,26 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null }) =
   );
 };
 
+/* ── Position Calc Modal ───────────────────────────────────────────────────── */
+const CalcModal = ({ onClose, ibkrThemesData, thematicData, vix }) => {
+  React.useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div
+        className="relative w-[520px] max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl"
+        onClick={e => e.stopPropagation()}
+      >
+        <PositionCalc ibkrThemesData={ibkrThemesData} thematicData={thematicData} vix={vix} onClose={onClose} />
+      </div>
+    </div>
+  );
+};
+
 export default function App() {
   const [lang, setLang] = useState(() => localStorage.getItem('ui_lang') || 'zh');
   const toggleLang = useCallback(() => setLang(l => { const next = l === 'zh' ? 'en' : 'zh'; localStorage.setItem('ui_lang', next); return next; }), []);
@@ -10031,6 +10054,7 @@ export default function App() {
   const [macroHover, setMacroHover] = useState(null);
   const [ibkrData, setIbkrData] = useState(null);
   const [etfTrendlineData, setEtfTrendlineData] = useState(null);
+  const [showCalcModal, setShowCalcModal] = useState(false);
 
   // ── IBKR WebSocket live price stream ──────────────────────────────────────
   // livePricesRef: { TICKER: { price, change_pct } } — mutated directly, no re-render
@@ -10497,6 +10521,9 @@ const appScreenerMap = useMemo(() => {
               <button onClick={toggleLang} title="Toggle language" className="px-2.5 py-1 text-[12px] font-bold rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-200 transition-colors whitespace-nowrap">
                 {lang === 'zh' ? '中' : 'EN'}
               </button>
+              <button onClick={() => setShowCalcModal(true)} className="px-2.5 py-1 text-[12px] font-medium rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-emerald-300 hover:border-emerald-700/50 transition-colors whitespace-nowrap">
+                ⊞ Calc
+              </button>
               <button className="flex items-center gap-1 px-2.5 py-1 text-[12px] rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-300 transition-colors whitespace-nowrap">
                 Alerts
               </button>
@@ -10595,6 +10622,7 @@ const appScreenerMap = useMemo(() => {
         </div>
 
 
+        {showCalcModal && <CalcModal onClose={() => setShowCalcModal(false)} ibkrThemesData={ibkrData} thematicData={data} vix={data?.vix} />}
         <BottomStatusBar ibkrData={ibkrData}/>
         </>
       )}
