@@ -1,18 +1,18 @@
 {
-  "generated_at": "2026-06-12 18:13 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-06-15 07:05 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
       "price": 741.75,
       "open": 740.71,
       "high": 744.44,
-      "low": 735.05,
+      "low": 735.03,
       "close": 741.75,
       "prev_open": 728.76,
       "prev_close": 737.76,
-      "volume": 54782564,
+      "volume": 56939800,
       "change_pct": 0.54
     },
     "QQQ": {
@@ -24,56 +24,56 @@
       "close": 721.34,
       "prev_open": 699.29,
       "prev_close": 717.12,
-      "volume": 49803808,
+      "volume": 51168400,
       "change_pct": 0.59
     },
     "^VIX": {
       "label": "VIX",
-      "price": 17.68,
-      "open": 19.51,
-      "high": 19.85,
-      "low": 17.59,
-      "close": 17.68,
-      "prev_open": 21.25,
-      "prev_close": 19.44,
+      "price": 16.79,
+      "open": 16.78,
+      "high": 16.85,
+      "low": 16.64,
+      "close": 16.79,
+      "prev_open": 19.51,
+      "prev_close": 17.68,
       "volume": 0,
-      "change_pct": -9.05
+      "change_pct": -5.03
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 84.29,
-      "open": 86.64,
-      "high": 87.23,
-      "low": 83.2,
-      "close": 84.29,
-      "prev_open": 92.25,
-      "prev_close": 87.71,
-      "volume": 207640,
-      "change_pct": -3.9
+      "price": 80.54,
+      "open": 81.4,
+      "high": 82.42,
+      "low": 79.7,
+      "close": 80.54,
+      "prev_open": 86.64,
+      "prev_close": 84.88,
+      "volume": 71779,
+      "change_pct": -5.11
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 64217.27,
-      "open": 63329.17,
-      "high": 64395.5,
-      "low": 62335.75,
-      "close": 64217.27,
-      "prev_open": 64952.38,
-      "prev_close": 64179.27,
-      "volume": 171100000,
-      "change_pct": 0.06
+      "price": 69317.5,
+      "open": 66783.22,
+      "high": 69682.23,
+      "low": 66783.22,
+      "close": 69317.5,
+      "prev_open": 65176.23,
+      "prev_close": 66020.04,
+      "volume": 0,
+      "change_pct": 4.99
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24209.71,
-      "open": 24205.16,
-      "high": 24327.69,
-      "low": 24080.64,
-      "close": 24209.71,
-      "prev_open": 24507.4,
-      "prev_close": 24195.31,
-      "volume": 59171400,
-      "change_pct": 0.06
+      "price": 24924.41,
+      "open": 25068.37,
+      "high": 25085.8,
+      "low": 24899.58,
+      "close": 24924.41,
+      "prev_open": 24549.25,
+      "prev_close": 24635.3,
+      "volume": 0,
+      "change_pct": 1.17
     }
   },
   "fred": {
@@ -98,34 +98,34 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: June 12, 2026",
+    "title": "Pre-Market Brief: June 15, 2026",
     "mood_emoji": "🚀",
-    "mood": "Growth-Driven Risk-On",
-    "narrative": "US equities advanced broadly, driven by strong growth sentiment as the VIX retreated. Global markets held steady, signaling continued investor appetite for risk assets.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 741.75 | +0.54% | 📈 |\n| Nasdaq 100 ETF | 721.34 | +0.59% | 📈 |\n| VIX | 17.68 | -9.05% | 📉 |\n| Crude Oil | 84.29 | -3.90% | 📉 |\n| Nikkei 225 | 64217.27 | +0.06% | ➡️ |\n| DAX | 24209.71 | +0.06% | ➡️ |",
-    "macro_section": "The BAMLH0A0HYM2 high-yield credit spread is currently at 2.78%, indicative of a complacent credit environment. Concurrently, the 10-year minus 2-year yield curve stands at +0.460, reflecting a normal to steepening curve structure. These readings collectively suggest that institutional risk appetite remains robust, with bond markets signaling stability rather than impending stress.",
-    "analysis_para1": "Despite a muted performance from major international indices, with the Nikkei 225 and DAX both inching up only +0.06%, US risk appetite appears notably resilient. Crude Oil experienced a significant decline of -3.90% to $84.29, potentially easing inflation concerns and bolstering growth narratives. This divergence, coupled with the BAMLH0A0HYM2 high-yield credit spread holding tight at a complacent 2.78%, suggests that while global cues are mixed, domestic US factors or specific sector rotations are driving current risk-taking.",
-    "analysis_para2": "Today's primary market flow, characterized by broad equity gains and a sharp 9.05% drop in the VIX to 17.68, appears mechanically driven by a 'risk-on rotation into growth assets'. The notable decline in Crude Oil prices, which fell by 3.90%, likely served as a catalyst by dampening inflation fears and suggesting greater flexibility for monetary policy. This shift in perception encouraged investors to allocate capital towards higher-beta growth stocks, leading to a de-risking in volatility instruments and a general uplift across US indices.",
-    "analysis_para3": "Traders should closely monitor the S&P 500 ETF, which closed at 741.75, with previous resistance around the 740 level now acting as immediate support. A sustained hold above 740 would confirm continued bullish momentum, offering long entry triggers on minor pullbacks. Conversely, a decisive break below 738, perhaps coupled with an uptick in the VIX, would signal increasing risk aversion and warrant a defensive stance. Today, traders should defend existing long positions and scout for constructive consolidation near current levels, with a stop below the intraday low if momentum falters.",
-    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 at 61.1% and S&P stocks above SMA200 at 65.7% indicate healthy breadth, supporting the current uptrend. Watch for these breadth metrics to decline significantly, as well as a potential divergence between new highs and market advances, as early warnings of a shift in trend.",
+    "mood": "Risk-On / Global Optimism Prevails",
+    "narrative": "Global equity markets are rallying strongly this morning, fueled by robust sentiment and a decline in risk indicators. Complacent credit spreads and a steepening yield curve signal robust institutional risk appetite ahead of the US open.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 741.75 | +0.54% | 📈 |\n| Nasdaq 100 ETF | 721.34 | +0.59% | 📈 |\n| VIX | 16.79 | -5.03% | 📉 |\n| Crude Oil | 80.54 | -5.11% | 📉 |\n| Nikkei 225 | 69317.50 | +4.99% | 📈 |\n| DAX | 24924.41 | +1.17% | 📈 |",
+    "macro_section": "The BAMLH0A0HYM2 high-yield credit spread sits at 2.78%, identifying a 'Complacent' credit regime, suggesting low perceived default risk. Concurrently, the 10Y-2Y yield curve at +0.460 remains 'Normal / Steepening', further reinforcing a healthy economic outlook. This combination implies a strong institutional risk appetite, with market participants comfortable extending credit and taking on riskier assets.",
+    "analysis_para1": "Global equity markets are showing significant strength, with the Nikkei 225 surging by +4.99% and the DAX up +1.17%, indicating a broad-based wave of optimism spreading across international bourses. This global buoyancy is complemented by a substantial -5.11% drop in Crude Oil prices, which often signals reduced inflationary pressures and improved consumer outlook. The confluence of these factors is directly contributing to the 'Complacent' state of the US high-yield credit spread at 2.78%, signaling that the global tape is strongly implying robust and increasing risk appetite among US institutions.",
+    "analysis_para2": "The single dominant catalyst behind today's primary flow appears to be a global positive macro data surprise, possibly related to inflation or economic growth, which has spurred a significant re-rating of risk across asset classes. This mechanical catalyst is driving the sharp decline in the VIX by -5.03% and Crude Oil by -5.11%, indicating a reduction in market fear and a belief that inflationary pressures are easing. The subsequent surge in global equities, particularly the Nikkei's near 5% rally, reflects an immediate market reaction to better-than-expected conditions, funneling capital into risk assets and pushing credit spreads tighter.",
+    "analysis_para3": "Given the strong risk-on momentum, today's mechanical plan is to favor long positions on minor pullbacks, targeting continuation of the upward trend in major indices. Traders should monitor the S&P 500 ETF, looking for support around the 738-740 range as a potential entry point for long trades. A sustained break below the previous day's low or a significant reversal in VIX, perhaps above 17, would serve as a risk-off threshold, signaling potential profit-taking or a shift in sentiment. For now, the actionable plan is to buy the dip, focusing on high-beta names that benefit from reduced market fear and global optimism.",
+    "technical_signal": "No reversal pattern confirmed yet. Both S&P 500 stocks above SMA50 at 61.1% and S&P stocks above SMA200 at 65.7% demonstrate healthy market breadth, supporting the current uptrend. Traders should watch for any significant deterioration in these breadth metrics or a failure to hold intraday gains as potential early warning signs.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
-          "reason": "NVIDIA announced a new partnership with a major cloud provider to deploy its next-gen AI accelerators, signaling robust demand for its core offerings."
+          "reason": "NVIDIA announced a significant breakthrough in its next-gen AI data center architecture, sparking fresh upgrades and substantial order inquiries for its new GPU accelerators."
         },
         {
-          "ticker": "GOOGL",
+          "ticker": "GOOG",
           "company": "Alphabet Inc.",
-          "reason": "Alphabet's Google Cloud division secured a multi-year deal with a global financial institution, emphasizing its growing enterprise AI capabilities and market share expansion."
+          "reason": "Alphabet unveiled deep generative AI integrations across its Workspace suite, promising major enterprise productivity enhancements and expanding its competitive moat against rivals."
         }
       ],
       "c_grade": [
         {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla saw short-covering rally after a technical breakout above its 50-day moving average, with no new fundamental news driving the move."
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Despite the sharp decline in Crude Oil prices, Exxon Mobil is seeing flow-driven short covering and technical support, with no fresh fundamental catalyst driving today's price action."
         }
       ]
     }
