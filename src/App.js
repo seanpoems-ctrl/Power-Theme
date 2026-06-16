@@ -6802,7 +6802,6 @@ function renderInline(text) {
 
 // ── SEC EDGAR filing helpers ──
 // CIKs never change after SEC assignment — safe to hardcode for common tickers.
-// For anything not in this map, fetchFilings falls back to efts.sec.gov entity search.
 const EDGAR_CIKS = {
   "AAPL": "320193",    "MSFT": "789019",    "NVDA": "1045810",   "AMZN": "1018724",
   "GOOGL":"1652044",   "GOOG": "1652044",   "META": "1326801",   "TSLA": "1318605",
@@ -6819,6 +6818,32 @@ const EDGAR_CIKS = {
   "DDOG": "1561894",   "SNOW": "1640147",   "ZS":   "1713683",   "NET":  "1477333",
   "UBER": "1543151",   "ABNB": "1559720",   "SNAP": "1564408",   "RBLX": "1315098",
 };
+
+// Fetches SEC's full ticker→CIK map once per browser session and caches in sessionStorage.
+// www.sec.gov/files has no CORS header so we go through corsproxy.io with allorigins fallback.
+let _cikMapPromise = null;
+const _loadCikMap = () => {
+  if (_cikMapPromise) return _cikMapPromise;
+  try {
+    const stored = sessionStorage.getItem("edgar_cik_map_v1");
+    if (stored) { _cikMapPromise = Promise.resolve(JSON.parse(stored)); return _cikMapPromise; }
+  } catch {}
+  const src = "https://www.sec.gov/files/company_tickers.json";
+  _cikMapPromise = fetch(`https://corsproxy.io/?${encodeURIComponent(src)}`)
+    .catch(() => fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(src)}`))
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(data => {
+      const map = {};
+      Object.values(data).forEach(({ cik_str, ticker }) => {
+        if (ticker) map[ticker.toUpperCase()] = String(cik_str);
+      });
+      try { sessionStorage.setItem("edgar_cik_map_v1", JSON.stringify(map)); } catch {}
+      return map;
+    })
+    .catch(() => ({}));
+  return _cikMapPromise;
+};
+
 const FILING_STYLE = {
   "8-K":    "text-amber-400 bg-amber-500/10 border-amber-500/30",
   "8-K/A":  "text-amber-400 bg-amber-500/10 border-amber-500/30",
@@ -7276,11 +7301,18 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
 
 
   const fetchFilings = async (ticker) => {
-    const cik = EDGAR_CIKS[ticker.toUpperCase()];
-    if (!cik) return; // unknown ticker — tab shows direct links only
     setFilingsLoading(true);
     setFilings(null);
     try {
+      // Primary: hardcoded map (instant, no network). Fallback: full SEC tickers JSON
+      // cached in sessionStorage after first fetch (~1-2s, then free for rest of session).
+      let cik = EDGAR_CIKS[ticker.toUpperCase()];
+      if (!cik) {
+        const map = await _loadCikMap();
+        cik = map[ticker.toUpperCase()];
+      }
+      if (!cik) return; // truly unknown — tab shows direct EDGAR links
+
       const resp = await fetch(`https://data.sec.gov/submissions/CIK${String(cik).padStart(10, "0")}.json`);
       if (!resp.ok) throw new Error(resp.status);
       const sub = await resp.json();
