@@ -14,9 +14,10 @@ import os
 import re
 import logging
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 import requests
 from dotenv import load_dotenv
@@ -406,6 +407,212 @@ def _fetch_dollar_volume(ticker: str) -> float | None:
     except Exception:
         return None
 
+# ──────────────────────────────────────────────────────────────
+# RC1: SEC EDGAR 8-K Detection — free public API, no key required
+# ──────────────────────────────────────────────────────────────
+
+_CIK_MAP: dict = {}   # ticker → zero-padded CIK string, loaded once per run
+
+_EDGAR_HEADERS = {"User-Agent": "PowerTheme/1.0 sean.poems@gmail.com"}
+
+# 8-K item numbers → catalyst category (priority order: Earnings > Contract > Others)
+_8K_ITEM_TO_CATEGORY = {
+    "2.02": "Earnings",                  # Results of Operations
+    "8.02": "Earnings",                  # Results of Operations (older)
+    "1.01": "New Contract/Partnership",  # Entry into Material Agreement
+    "5.02": "Others",                    # Director/Officer Change
+    "8.01": "Others",                    # Other Events
+    "1.05": "Others",                    # Cybersecurity Incident
+    "2.05": "Others",                    # Exit Activities / Restructuring
+    "2.06": "Others",                    # Material Impairment
+}
+_8K_ITEM_LABELS = {
+    "2.02": "Earnings/Financial Results",
+    "8.02": "Earnings/Financial Results",
+    "1.01": "Material Contract or Agreement",
+    "5.02": "Leadership Change (Director/Officer)",
+    "8.01": "Other Material Event",
+    "1.05": "Cybersecurity Incident",
+    "2.05": "Restructuring / Exit Activity",
+    "2.06": "Material Impairment",
+}
+
+
+def _load_cik_map() -> None:
+    """Download SEC ticker→CIK mapping once per process. No API key required."""
+    global _CIK_MAP
+    if _CIK_MAP:
+        return
+    try:
+        resp = requests.get(
+            "https://www.sec.gov/files/company_tickers.json",
+            headers=_EDGAR_HEADERS, timeout=15,
+        )
+        resp.raise_for_status()
+        for item in resp.json().values():
+            t   = (item.get("ticker") or "").upper()
+            cik = str(item.get("cik_str", "")).zfill(10)
+            if t and cik:
+                _CIK_MAP[t] = cik
+        logger.info(f"  EDGAR CIK map loaded: {len(_CIK_MAP)} tickers")
+    except Exception as e:
+        logger.warning(f"  EDGAR CIK map load failed: {e}")
+
+
+def fetch_edgar_8k(ticker: str, days: int = 2) -> dict | None:
+    """
+    Check SEC EDGAR for 8-K filings within the last `days` days.
+    Returns filing metadata + inferred catalyst category, or None.
+    No API key required — EDGAR is a free government public API.
+    """
+    try:
+        cik = _CIK_MAP.get(ticker.upper())
+        if not cik:
+            return None
+        resp = requests.get(
+            f"https://data.sec.gov/submissions/CIK{cik}.json",
+            headers=_EDGAR_HEADERS, timeout=10,
+        )
+        resp.raise_for_status()
+        data   = resp.json()
+        recent = data.get("filings", {}).get("recent", {})
+        forms       = recent.get("form", [])
+        dates       = recent.get("filingDate", [])
+        accessions  = recent.get("accessionNumber", [])
+        items_field = recent.get("items", [])
+        primary_doc = recent.get("primaryDocument", [])
+
+        cutoff = (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+
+        for i, (form, date) in enumerate(zip(forms, dates)):
+            if form in ("8-K", "8-K/A") and date >= cutoff:
+                acc_clean = accessions[i].replace("-", "") if i < len(accessions) else ""
+                cik_int   = int(cik)
+                doc       = primary_doc[i] if i < len(primary_doc) else ""
+                url       = f"https://www.sec.gov/Archives/edgar/data/{cik_int}/{acc_clean}/{doc}"
+
+                # Parse comma-separated item numbers (e.g. "2.02, 9.01")
+                raw_items = items_field[i] if i < len(items_field) else ""
+                item_nums = [x.strip() for x in str(raw_items).split(",") if x.strip()]
+
+                # Highest-priority category from item numbers
+                category, label = "Others", "8-K Material Event"
+                for item in item_nums:
+                    cat = _8K_ITEM_TO_CATEGORY.get(item)
+                    lbl = _8K_ITEM_LABELS.get(item, f"Item {item}")
+                    if cat == "Earnings":
+                        category, label = cat, lbl
+                        break
+                    if cat == "New Contract/Partnership" and category != "Earnings":
+                        category, label = cat, lbl
+                    elif not category or category == "Others":
+                        category, label = (cat or "Others"), lbl
+
+                logger.info(f"  EDGAR 8-K: {ticker} filed {form} on {date} — {label} (items: {item_nums})")
+                return {
+                    "filing_date": date,
+                    "form":        form,
+                    "items":       item_nums,
+                    "category":    category,
+                    "label":       label,
+                    "url":         url,
+                }
+        return None
+    except Exception as e:
+        logger.debug(f"  EDGAR 8-K check failed for {ticker}: {e}")
+        return None
+
+
+# ──────────────────────────────────────────────────────────────
+# RC2: Article Body Snippet Scraping
+# ──────────────────────────────────────────────────────────────
+
+def fetch_article_snippet(url: str, max_chars: int = 450) -> str | None:
+    """
+    Scrape the first ~450 chars of article body text for Gemini context.
+    Skips Google News redirect URLs (too many hops); works best on direct links.
+    Returns None on paywall, error, or insufficient content.
+    """
+    if not url or "news.google.com" in url:
+        return None
+    try:
+        from bs4 import BeautifulSoup
+        resp = requests.get(url, timeout=6, allow_redirects=True, headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+            "Accept": "text/html,application/xhtml+xml",
+        })
+        if not resp.ok or "text/html" not in resp.headers.get("Content-Type", ""):
+            return None
+        soup = BeautifulSoup(resp.text, "html.parser")
+        for tag in soup(["script", "style", "nav", "header", "footer",
+                         "aside", "form", "iframe", "noscript", "button"]):
+            tag.decompose()
+        # Try semantic selectors first, then fall back to raw <p> tags
+        for selector in [
+            "article", "[class*='article-body']", "[class*='story-body']",
+            "[class*='post-content']", "[class*='entry-content']", "main",
+        ]:
+            els = soup.select(selector)
+            if els:
+                text = " ".join(e.get_text(" ", strip=True) for e in els[:4])
+                text = " ".join(text.split())
+                if len(text) >= 120:
+                    return text[:max_chars]
+        # Raw paragraph fallback
+        paras = [p.get_text(" ", strip=True) for p in soup.find_all("p")
+                 if len(p.get_text(strip=True)) > 50]
+        if paras:
+            text = " ".join(text.split())  # collapse whitespace
+            text = " ".join(paras[:3])
+            if len(text) >= 120:
+                return text[:max_chars]
+        return None
+    except Exception:
+        return None
+
+
+def _fetch_snippets_parallel(headlines: list[dict]) -> None:
+    """In-place: add 'snippet' key to top 3 headlines that have scrapable URLs."""
+    targets = [(i, h) for i, h in enumerate(headlines[:3]) if h.get("url")]
+    if not targets:
+        return
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        future_to_idx = {pool.submit(fetch_article_snippet, h["url"]): i
+                         for i, h in targets}
+        try:
+            for future in as_completed(future_to_idx, timeout=15):
+                idx = future_to_idx[future]
+                try:
+                    snippet = future.result()
+                    if snippet:
+                        headlines[idx]["snippet"] = snippet
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
+
+# ──────────────────────────────────────────────────────────────
+# RC3: Ticker Mention Filter
+# ──────────────────────────────────────────────────────────────
+
+def _mentions_ticker(title: str, ticker: str) -> bool:
+    """
+    Returns True if the headline title directly names this stock
+    (ticker symbol or NASDAQ:/NYSE: prefix pattern).
+    Used to deprioritise articles that mention the stock only tangentially.
+    """
+    title_upper = title.upper()
+    t = ticker.upper()
+    # Direct symbol match (word-boundary style)
+    if re.search(rf'\b{re.escape(t)}\b', title_upper):
+        return True
+    # "NASDAQ: NBIS" or "(NBIS)" style
+    if f":{t}" in title_upper or f"({t})" in title_upper:
+        return True
+    return False
+
+
 def _is_opinion_article(title: str, source: str = "") -> bool:
     """
     Filter out non-company-specific news. Keep only hard news directly about the
@@ -447,9 +654,11 @@ def _is_opinion_article(title: str, source: str = "") -> bool:
 
     return False
 
-def filter_headlines(headlines: list[dict], max_headlines: int = 5, skip_opinion: bool = True) -> list[dict]:
+def filter_headlines(headlines: list[dict], ticker: str = "",
+                     max_headlines: int = 5, skip_opinion: bool = True) -> list[dict]:
     """
-    Filter headlines: remove opinion articles, keep hard news catalysts.
+    Filter headlines: remove opinion/roundup articles, keep hard news catalysts.
+    Headlines that directly name the ticker are sorted to the top.
     Returns up to max_headlines of quality, fact-based news.
     """
     if not skip_opinion:
@@ -457,13 +666,16 @@ def filter_headlines(headlines: list[dict], max_headlines: int = 5, skip_opinion
 
     filtered = []
     for headline in headlines:
-        title = headline.get("title", "")
+        title  = headline.get("title", "")
         source = headline.get("source", "")
-
         if not _is_opinion_article(title, source):
             filtered.append(headline)
         else:
-            logger.debug(f"  Skipped opinion article: {title[:60]} ({source})")
+            logger.debug(f"  Skipped opinion: {title[:60]} ({source})")
+
+    # RC3: Sort so headlines that name the ticker come first — better Gemini signal
+    if ticker:
+        filtered.sort(key=lambda h: 0 if _mentions_ticker(h.get("title", ""), ticker) else 1)
 
     return filtered[:max_headlines]
 
@@ -941,6 +1153,7 @@ def analyze_with_gemini(
     last_earnings_date: str | None = None,
     avg_dollar_vol: float = 0,
     adr_pct: float | None = None,
+    edgar_event: dict | None = None,
 ) -> dict:
     """Use Gemini 2.5 Flash — Momentum Catalyst Intelligence with Hard Technical Floor."""
     if not GEMINI_API_KEY:
@@ -949,7 +1162,7 @@ def analyze_with_gemini(
     dvol_m = (avg_dollar_vol or 0) / 1_000_000
     adr    = adr_pct or 0.0
 
-    if not headlines:
+    if not headlines and not edgar_event:
         return {
             "category":        "Others",
             "theme":           "Technical / Flow",
@@ -958,6 +1171,7 @@ def analyze_with_gemini(
             "conviction":      25,
             "grade":           "C",
             "finviz_theme":    "—",
+            "analysis_source": "no_news",
             "analysis_detail": {"catalyst": "No fundamental catalyst identified in the last 24 hours.", "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."},
             "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
             "peer_tickers":    get_peer_stocks(ticker),
@@ -981,21 +1195,49 @@ def analyze_with_gemini(
                     title = parts[0].strip()
             return title
 
-        headlines_text = "\n".join(
-            f"- [{h['date']}] {_clean_title(h)}" if isinstance(h, dict) else f"- {h}"
-            for h in headlines
-        )
+        # RC2: Format headlines with article snippets when available
+        def _fmt_headline(h):
+            if not isinstance(h, dict):
+                return f"- {h}"
+            title   = _clean_title(h)
+            date    = h.get("date", "")
+            source  = h.get("source", "SEC EDGAR" if "sec.gov" in h.get("url","") else h.get("source",""))
+            snippet = h.get("snippet", "")
+            line    = f"- [{date}] ({source}) {title}"
+            if snippet:
+                line += f"\n  Article excerpt: \"{snippet}\""
+            return line
+
+        headlines_text = "\n".join(_fmt_headline(h) for h in headlines)
+
+        # RC5: SEC EDGAR verified event block (highest-priority context)
+        edgar_block = ""
+        edgar_category_override = ""
+        if edgar_event:
+            edgar_block = f"""
+═══ VERIFIED SEC FILING — HIGHEST PRIORITY SOURCE ═══
+{ticker} filed a {edgar_event['form']} with the SEC on {edgar_event['filing_date']}.
+Event type: {edgar_event['label']}
+Item numbers: {', '.join(edgar_event['items'])}
+SEC URL: {edgar_event['url']}
+
+This is an official government disclosure — it overrides any ambiguity in news headlines.
+Use this to set the category. For Item 2.02 (Earnings), extract actual figures from headlines.
+"""
+            edgar_category_override = edgar_event["category"]
+
         earnings_note = ""
         if last_earnings_date:
-            from datetime import date as _date, timedelta as _td
-            last_dt = _date.fromisoformat(last_earnings_date)
+            from datetime import date as _date
+            last_dt  = _date.fromisoformat(last_earnings_date)
             days_ago = (_date.today() - last_dt).days
             if days_ago > 5:
                 earnings_note = f"\nIMPORTANT: {ticker}'s last earnings report was on {last_earnings_date} ({days_ago} days ago). Do NOT classify as Earnings — that is too old to be today's catalyst."
             else:
                 earnings_note = f"\nNote: {ticker}'s last earnings report was on {last_earnings_date} ({days_ago} days ago) — recent enough to be a valid Earnings catalyst."
-        prompt = f"""You are a Senior Momentum Equity Analyst. Today is {today_str}.{earnings_note}
 
+        prompt = f"""You are a Senior Momentum Equity Analyst. Today is {today_str}.{earnings_note}
+{edgar_block}
 Technical context for {ticker}:
   Avg $ Vol (20d): ${dvol_m:.0f}M  |  ADR% (20d): {adr:.1f}%  |  RVOL: {rvol:.1f}x
 
@@ -1008,11 +1250,11 @@ Before grading, verify a specific catalyst occurred in the last 24h.
 UNKNOWN CATALYST RULE — If no specific fundamental news found:
   category: "Others"  |  theme: "Technical / Flow"  |  grade: "C"
   reasoning: "No immediate fundamental catalyst found; likely technical breakout or institutional flow."
-  analysis_detail: "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+  analysis_detail: "Catalyst: Unknown | Impact: Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
 
 SYMPATHY MOVE RULE — If ticker moves because a sector leader (e.g. NVDA) reported news:
   theme: "Sector Sympathy"  |  grade: "B" or "C"
-  reasoning: "Moving in sympathy with [Leader] following [Event]."
+  reasoning: "Moving in sympathy with [Leader] following [specific event]."
   analysis_detail: "Catalyst: Sector Tailwinds | Impact: Secondary. No company-specific news; move correlated to broader [Industry] trend."
 
 DO NOT invent a story. DO NOT use "Market Volatility" as reasoning.
@@ -1023,12 +1265,10 @@ Choose exactly one:
 {earnings_note}
 
 ═══ STEP 3: GRADE RUBRIC — STRICT HIERARCHY ═══
-Apply BOTH technical and news quality. The Hard Technical Floor is informational here — Python will enforce caps.
-
-- A+ (Institutional Apex): News = structural change ($1B+ contract, Tier-1 partnership like NVDA/Meta, FDA Approval for $5B+ TAM, massive Beat+Raise)
-- A  (High Conviction):    News = Earnings Beat+Raise, significant product launch, major analyst re-rating
-- B  (Exploitable):        News is incremental (Price Target hike, minor contract, unclear policy impact)
-- C  (Avoid / Noise):      Sympathy move, vague rumor, low-impact headline, Technical/Flow, unknown catalyst
+- A+ (Institutional Apex): Structural change ($1B+ contract, Tier-1 partnership, FDA Approval for $5B+ TAM, massive Beat+Raise)
+- A  (High Conviction):    Earnings Beat+Raise, significant product launch, major re-rating with new PT
+- B  (Exploitable):        Incremental news (PT hike, minor contract, index inclusion, unclear policy)
+- C  (Avoid / Noise):      Sympathy move, vague rumor, Technical/Flow, unknown catalyst
 
 ═══ STEP 4: OUTPUT FORMAT ═══
 {ANALYSIS_FORMAT_INSTRUCTIONS}
@@ -1048,22 +1288,26 @@ Consumer - E-Commerce | Consumer - Streaming | Consumer - Social Media | Consume
 Energy - Oil & Gas | Energy - LNG | Materials - Metals & Mining |
 Real Estate | REITs | Infrastructure | Others
 
-PEER TICKERS: Peer tickers are now pre-populated from a curated mapping (ignore if present in your response).
+PEER TICKERS: Pre-populated from curated mapping — ignore in your response.
 
-CRITICAL — field quality rules:
+CRITICAL — specificity rules (violations make the output useless for trading decisions):
 reasoning (1 sentence, 15-25 words):
-  - Synthesise the core mechanical trigger from the headlines — include specific facts, numbers, product names
-  - Example GOOD: "HPE surged on strong Q2 earnings with record AI server backlog and booming data-center revenue"
-  - Example BAD: "HPE reported quarterly results; earnings catalyst detected in headlines" (too generic)
+  - ALWAYS name the specific trigger: firm name for upgrades, policy name for govt, deal partner for contracts
+  - GOOD: "Micron surged after Citi raised PT to $130 on DRAM demand recovery driven by AI server buildout"
+  - BAD:  "MU received an analyst rating action or price target revision" ← NEVER write this
+  - GOOD: "NBIS added to Nasdaq-100 effective Monday, triggering index-fund buying and momentum flows"
+  - BAD:  "NBIS is affected by a recent government policy" ← NEVER write this
   - DO NOT copy a headline title verbatim. DO NOT include source names.
 
-analysis_detail — "Catalyst: [2-3 sentence narrative with bold key facts] | Impact: [forward implication — what changes in price/fundamentals]":
-  - Catalyst must include specifics from the headlines: revenue figures, beat %, deal size, product names, stock move %
-  - Impact must state the investment implication: "suggests upside revision to guidance", "de-risks pipeline", "expands TAM"
-  - Example: "Catalyst: HPE reported **solid Q2 earnings** highlighting a **record backlog** and **booming AI server business**, driving the stock **+29% premarket**. | Impact: Strong forward commentary signals **increased revenue visibility** and potential **upside revisions** to guidance in the high-growth AI infrastructure segment."
+analysis_detail — "Catalyst: [...] | Impact: [...]":
+  - Government Policy: name the SPECIFIC policy, bill, or executive order — not just "a policy"
+  - Upgrade: name the SPECIFIC firm, old rating → new rating, and new price target
+  - Earnings: include the SPECIFIC EPS beat/miss and revenue figure
+  - Contract: name the SPECIFIC partner and deal scope/value
+  - Impact: state the investment implication (guidance revision, TAM expansion, risk removal, etc.)
 
-Respond in this exact JSON format only (no extra text, no markdown fences):
-{{"category": "<category>", "theme": "<specific catalyst name e.g. 'Beat & Raise', 'New Contracts', 'Sector Sympathy'>", "reasoning": "<specific 15-25 word synthesis from headlines>", "grade": "<A+|A|B|C>", "finviz_theme": "<industry>", "analysis_detail": "Catalyst: [2-3 sentences with **bold** key facts] | Impact: [forward implication]", "analysis_details": "<detailed multi-section analysis>"}}"""
+Respond ONLY with this JSON (no extra text, no markdown fences):
+{{"category": "<category>", "theme": "<specific catalyst e.g. 'Beat & Raise', 'Nasdaq-100 Addition', 'Citi Upgrade to Buy'>", "reasoning": "<specific 15-25 word synthesis>", "grade": "<A+|A|B|C>", "finviz_theme": "<industry>", "analysis_detail": "Catalyst: [2-3 sentences **bolding** key facts] | Impact: [forward implication]", "analysis_details": "<detailed multi-section analysis>"}}"""
 
         for attempt in range(3):
             try:
@@ -1135,6 +1379,7 @@ Respond in this exact JSON format only (no extra text, no markdown fences):
             "conviction":      conviction,
             "grade":           grade,
             "finviz_theme":    finviz_theme,
+            "analysis_source": "gemini+edgar" if edgar_event else "gemini",
             "analysis_detail": analysis_detail,
             "analysis_details": analysis_details,
             "peer_tickers":    peer_tickers,
@@ -1262,6 +1507,7 @@ def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
         "conviction":      50,
         "grade":           "B",
         "finviz_theme":    "—",
+        "analysis_source": "fallback",
         "analysis_detail": {"catalyst": catalyst_text, "impact": impact_text},
         "analysis_details": analysis_details,
         "peer_tickers":    peer_tickers,
@@ -1334,6 +1580,10 @@ def main():
     earnings_today = _load_earnings_today()
     logger.info(f"  Earnings today: {len(earnings_today)} events")
 
+    # RC1: Load SEC EDGAR CIK map once (no API key needed — free public API)
+    logger.info("Loading SEC EDGAR CIK map...")
+    _load_cik_map()
+
     logger.info("Fetching gappers from TradingView...")
     gappers = fetch_gappers()[:25]
     logger.info(f"  Found {len(gappers)} gappers")
@@ -1368,10 +1618,13 @@ def main():
                 raw_headlines.append(h)
         raw_headlines.sort(key=lambda x: x["date"], reverse=True)
 
-        # HYBRID FILTERING: Remove opinion articles, apply headline limit
-        headlines = filter_headlines(raw_headlines, max_headlines=headline_limit, skip_opinion=True)
+        # RC3: Filter opinion articles, sort ticker-mentioning headlines to top
+        headlines = filter_headlines(raw_headlines, ticker=ticker, max_headlines=headline_limit, skip_opinion=True)
         stats["headlines_sent"] += len(headlines)
         stats["large_gap" if is_large_gap else "small_gap"] += 1
+
+        # RC2: Scrape article body snippets in parallel (top 3 headlines, 15s budget)
+        _fetch_snippets_parallel(headlines)
 
         # ADR% + last earnings date (single yfinance call)
         fundamentals       = fetch_ticker_fundamentals(ticker)
@@ -1382,11 +1635,17 @@ def main():
         # Hard gates (adr_pct now available)
         gates_passed, gates_detail, meets_all_gates = _compute_gates(stock)
 
+        # RC1: Check SEC EDGAR for recent 8-K filings (free public API)
+        edgar_event = fetch_edgar_8k(ticker, days=2)
+        if edgar_event:
+            logger.info(f"  EDGAR 8-K found for {ticker}: {edgar_event['label']} on {edgar_event['filing_date']}")
+
         # AI analysis — Momentum Catalyst Intelligence
         analysis = analyze_with_gemini(
             ticker, headlines, stock["rvol"], last_earnings_date,
             avg_dollar_vol=stock.get("avg_dollar_vol", 0),
             adr_pct=adr_pct,
+            edgar_event=edgar_event,
         )
 
         # Hard Technical Floor — enforce grade cap + compute technical_status
@@ -1417,6 +1676,7 @@ def main():
             **stock,
             **analysis,
             "headlines":        [{"title": h["title"], "source": h.get("source",""), "url": h.get("url","")} for h in headlines[:5]],
+            "edgar_filing":     edgar_event,
             "float_shares":     fv.get("float_shares"),
             "short_float":      fv.get("short_float"),
             "daily_pct":        fv.get("daily_pct"),

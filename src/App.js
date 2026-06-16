@@ -6407,6 +6407,21 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
                         <span className="text-[11px] text-amber-500 font-semibold">🔍 Flow</span>
                       </Tip>
                     )}
+                    {g.analysis_source === "gemini+edgar" && (
+                      <Tip text="Analysis cross-referenced with a verified SEC 8-K filing — highest-confidence source">
+                        <span className="text-[10px] font-semibold px-1 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-amber-400">⚡ SEC 8-K</span>
+                      </Tip>
+                    )}
+                    {g.analysis_source === "fallback" && (
+                      <Tip text="Gemini unavailable — rule-based keyword analysis only. Lower accuracy.">
+                        <span className="text-[10px] font-semibold px-1 py-0.5 rounded bg-zinc-700/50 border border-zinc-600/40 text-zinc-400">⚠ rule-based</span>
+                      </Tip>
+                    )}
+                    {g.analysis_source === "no_news" && (
+                      <Tip text="No news headlines found in the last 24h. Analysis is speculative.">
+                        <span className="text-[10px] font-semibold px-1 py-0.5 rounded bg-zinc-700/50 border border-zinc-600/40 text-zinc-500">○ no news</span>
+                      </Tip>
+                    )}
                   </div>
                 </td>
                 {/* Reasoning */}
