@@ -6336,7 +6336,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
                   <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer" className="ml-1">
                     <ExternalLink size={8} className="inline text-zinc-600 hover:text-blue-400"/>
                   </a>
-                  <div className="text-[11px] font-mono text-zinc-500">prev ${prevClose.toFixed(2)}</div>
+                  <div className="text-[11px] font-mono text-zinc-500">close ${prevClose.toFixed(2)}</div>
                 </td>
                 {/* Premkt % */}
                 <td className="py-1 px-2 align-middle text-center">
