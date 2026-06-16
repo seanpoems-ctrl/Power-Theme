@@ -7274,75 +7274,6 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
     }
   };
 
-  const fetchFilings = async (ticker, company) => {
-    setFilingsLoading(true);
-    setFilingsError(false);
-    setFilings(null);
-    try {
-      // Step 1: Resolve CIK.
-      // Primary: hardcoded map covers ~50 common large-caps (no API call, no CORS risk).
-      // Fallback: EFTS entity search (filer-name, not document-text) via proxy.
-      let topCik = EDGAR_CIKS[ticker.toUpperCase()] || null;
-
-      if (!topCik) {
-        const entityTerm = (company || ticker)
-          .replace(/,?\s*(Inc\.?|Corp\.?|Ltd\.?|LLC\.?|L\.P\.?|PLC\.?|N\.V\.?|plc)$/i, "")
-          .trim();
-        // Use `entity` param (searches FILER NAME, not document text) — avoids
-        // competitor filings that merely mention the company name in their own 10-Ks.
-        const eftsUrl = `https://efts.sec.gov/LATEST/search-index?entity=${encodeURIComponent(entityTerm)}&forms=10-K%2C20-F&dateRange=custom&startdt=2020-01-01`;
-        let hits = [];
-        try {
-          const r = await fetch(eftsUrl);
-          if (r.ok) hits = (await r.json()).hits?.hits || [];
-        } catch {}
-        if (hits.length === 0) {
-          // efts.sec.gov CORS-blocked on this origin — proxy it
-          const r = await fetch(`https://corsproxy.io/?${encodeURIComponent(eftsUrl)}`);
-          if (r.ok) hits = (await r.json()).hits?.hits || [];
-        }
-        // All hits should now be from the target filer; pick the most common entity_id
-        const counts = {};
-        hits.forEach(h => { const id = h._source?.entity_id; if (id) counts[id] = (counts[id] || 0) + 1; });
-        topCik = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0] || null;
-      }
-
-      if (!topCik) { setFilingsError(true); return; }
-
-      // Step 2: Fetch the full filing list from data.sec.gov (CORS-enabled).
-      const cikPadded = String(topCik).padStart(10, "0");
-      const subResp = await fetch(`https://data.sec.gov/submissions/CIK${cikPadded}.json`);
-      if (!subResp.ok) throw new Error(subResp.status);
-      const sub = await subResp.json();
-
-      const recent = sub.filings?.recent || {};
-      const forms   = recent.form            || [];
-      const dates   = recent.filingDate      || [];
-      const accs    = recent.accessionNumber || [];
-      const docs    = recent.primaryDocument || [];
-
-      const SHOW = new Set(["8-K","8-K/A","10-K","10-K/A","10-Q","10-Q/A","20-F","20-F/A","6-K"]);
-      const cikInt = parseInt(topCik, 10);
-      const list = [];
-      for (let i = 0; i < forms.length && list.length < 30; i++) {
-        if (!SHOW.has(forms[i])) continue;
-        const accClean = (accs[i] || "").replace(/-/g, "");
-        const doc      = docs[i] || "";
-        list.push({
-          form: forms[i],
-          date: dates[i] || "",
-          url: doc
-            ? `https://www.sec.gov/Archives/edgar/data/${cikInt}/${accClean}/${doc}`
-            : `https://www.sec.gov/Archives/edgar/data/${cikInt}/${accClean}/`,
-        });
-      }
-      setFilings({ cik: cikInt, list });
-    } catch {
-      setFilingsError(true);
-    } finally {
-      setFilingsLoading(false);
-    }
-  };
 
   const showSuggestions = open && q.length >= 1 && !fullResult && suggestions.length > 0;
   const noMatch = open && q.length >= 2 && !fullResult && suggestions.length === 0;
@@ -7452,7 +7383,6 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
                   setActiveTab(tab.key);
                   if (tab.key === "news" && news.length === 0 && !newsLoading) fetchNews(fullResult.ticker);
                   if (tab.key === "research" && !research && !researchLoading) fetchResearch(fullResult.ticker, fullResult.company);
-                  if (tab.key === "filings" && !filings && !filingsLoading) fetchFilings(fullResult.ticker, fullResult.company);
                 }}
                 className={`text-[12px] px-3 py-1.5 border-b-2 transition-colors ${activeTab === tab.key ? "border-blue-500 text-blue-400" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}
               >
@@ -7623,59 +7553,36 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
             </div>
           )}
 
-          {/* Filings tab — SEC EDGAR */}
+          {/* Filings tab — direct SEC EDGAR links (ticker-based, no API calls) */}
           {activeTab === "filings" && (
-            <div className="max-h-[480px] overflow-y-auto pr-1">
-              {filingsLoading && (
-                <p className="text-[12px] text-zinc-600 animate-pulse py-4 text-center">Loading SEC EDGAR filings…</p>
-              )}
-              {filingsError && (
-                <p className="text-[12px] text-red-500/70 py-4 text-center">
-                  Not found on EDGAR — ticker may be unlisted or delisted
-                </p>
-              )}
-              {!filingsLoading && !filingsError && !filings && (
-                <p className="text-[12px] text-zinc-600 py-4 text-center">Click Filings to load SEC EDGAR data.</p>
-              )}
-              {filings && (
-                <div>
-                  <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-zinc-800">
-                    <span className="text-[11px] text-zinc-600">{filings.list.length} filings shown</span>
-                    <a
-                      href={`https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${filings.cik}&type=&dateb=&owner=include&count=40`}
-                      target="_blank" rel="noopener noreferrer"
-                      onMouseDown={e => e.preventDefault()}
-                      className="text-[11px] text-blue-400 hover:text-blue-300"
-                    >All filings on EDGAR ↗</a>
+            <div className="p-3 space-y-1.5">
+              <p className="text-[11px] text-zinc-500 mb-3">Opens SEC EDGAR in a new tab.</p>
+              {[
+                { form: "8-K",  label: "Current Reports",  desc: "Material events & earnings" },
+                { form: "10-K", label: "Annual Reports",   desc: "Full-year 10-K" },
+                { form: "10-Q", label: "Quarterly Reports",desc: "Q1–Q3 10-Q" },
+                { form: "",     label: "All Filings",      desc: "Complete filing history" },
+              ].map(({ form, label, desc }) => (
+                <a
+                  key={form || "all"}
+                  href={`https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${encodeURIComponent(fullResult.ticker)}&type=${encodeURIComponent(form)}&dateb=&owner=include&count=40`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onMouseDown={e => e.preventDefault()}
+                  className="flex items-center justify-between w-full px-3 py-2 rounded-lg border border-zinc-700/60 hover:border-zinc-600 hover:bg-zinc-800/50 transition-colors group"
+                >
+                  <div className="flex items-center gap-2">
+                    {form && (
+                      <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded border flex-shrink-0 ${FILING_STYLE[form] || "text-zinc-400 bg-zinc-700/30 border-zinc-600/40"}`}>
+                        {form}
+                      </span>
+                    )}
+                    <span className="text-[12px] text-zinc-300 group-hover:text-blue-400 transition-colors">{label}</span>
+                    <span className="text-[11px] text-zinc-600">{desc}</span>
                   </div>
-                  {filings.list.length === 0 && (
-                    <p className="text-[12px] text-zinc-600 py-3 text-center">No filings found.</p>
-                  )}
-                  <div className="space-y-0.5">
-                    {filings.list.map((f, i) => (
-                      <a
-                        key={i}
-                        href={f.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onMouseDown={e => e.preventDefault()}
-                        className="flex items-start gap-2 py-1.5 px-1.5 rounded hover:bg-zinc-800/60 group transition-colors"
-                      >
-                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border flex-shrink-0 mt-0.5 w-[52px] text-center ${FILING_STYLE[f.form] || "text-zinc-400 bg-zinc-700/30 border-zinc-600/40"}`}>
-                          {f.form}
-                        </span>
-                        <div className="flex-1 min-w-0">
-                          <span className="text-[12px] text-zinc-300 group-hover:text-blue-400 transition-colors font-medium block leading-snug">
-                            {FILING_LABEL[f.form] || f.form}
-                            {f.items && <span className="ml-1.5 text-[11px] text-zinc-600 font-normal">{f.items}</span>}
-                          </span>
-                          <span className="text-[11px] text-zinc-600">{f.date}</span>
-                        </div>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              )}
+                  <ExternalLink size={11} className="text-zinc-600 group-hover:text-blue-400 transition-colors flex-shrink-0" />
+                </a>
+              ))}
             </div>
           )}
         </div>
