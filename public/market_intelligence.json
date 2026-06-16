@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-16 16:45 ET",
+  "generated_at": "2026-06-16 18:35 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -18,13 +18,13 @@
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 729.86,
-      "open": 742.25,
+      "open": 742.28,
       "high": 744.22,
       "low": 729.64,
       "close": 729.86,
       "prev_open": 738.1,
       "prev_close": 744.0,
-      "volume": 41604472,
+      "volume": 44708319,
       "change_pct": -1.9
     },
     "^VIX": {
@@ -38,18 +38,6 @@
       "prev_close": 16.2,
       "volume": 0,
       "change_pct": 1.3
-    },
-    "CL=F": {
-      "label": "Crude Oil",
-      "price": 75.86,
-      "open": 81.1,
-      "high": 80.15,
-      "low": 74.74,
-      "close": 75.86,
-      "prev_open": 81.4,
-      "prev_close": 80.75,
-      "volume": 222022,
-      "change_pct": -6.06
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,20 +53,20 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24910.41,
-      "open": 24942.73,
-      "high": 25110.28,
-      "low": 24900.73,
-      "close": 24910.41,
-      "prev_open": 25068.37,
-      "prev_close": 24894.01,
-      "volume": 0,
-      "change_pct": 0.07
+      "price": 24894.01,
+      "open": 25068.37,
+      "high": 25085.8,
+      "low": 24882.01,
+      "close": 24894.01,
+      "prev_open": 24549.25,
+      "prev_close": 24635.3,
+      "volume": 62077400,
+      "change_pct": 1.05
     }
   },
   "fred": {
     "hy_oas": 2.66,
-    "yield_curve": 0.4,
+    "yield_curve": 0.38,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -98,6 +86,36 @@
     }
   },
   "analysis": {
-    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "title": "Post-Market Brief: June 16, 2026",
+    "mood_emoji": "📉",
+    "mood": "US Tech Weakness / Global Divergence",
+    "narrative": "Today saw US equities retreat, with technology shares leading the decline amidst broad market selling pressure. This US-centric weakness occurred despite a robust showing in global markets and continued complacency in credit spreads.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 750.33 | -0.60% | 📉 |\n| Nasdaq 100 ETF | 729.86 | -1.90% | 📉 |\n| VIX | 16.41 | +1.30% | 📈 |\n| Crude Oil | N/A | — | ➡️ |\n| Nikkei 225 | 69317.50 | +4.99% | 📈 |\n| DAX | 24894.01 | +1.05% | 📈 |",
+    "macro_section": "The High-Yield Credit Spread (BAMLH0A0HYM2) remains at a complacent 2.66%, indicating low perceived risk in corporate debt. Concurrently, the 10-Year Minus 2-Year Yield Curve (T10Y2Y) stands at a normal and steepening +0.380. This combination suggests institutional risk appetite remains robust, viewing current market volatility as contained rather than systemic.",
+    "analysis_para1": "Despite significant declines in the S&P 500 ETF (-0.60%) and Nasdaq 100 ETF (-1.90%), global markets displayed notable strength, with the Nikkei 225 surging by +4.99% and the DAX gaining +1.05%. This divergence suggests a localized selling event in US equities rather than a broad flight to safety. The continued complacency in the US High-Yield Credit Spread, holding at 2.66%, further underpins a view that institutional risk appetite remains intact, suggesting the US dip is not signaling systemic stress.",
+    "analysis_para2": "The primary mechanical catalyst driving today's observed price action appears to be a significant positioning unwind and profit-taking within US technology shares. With no specific major macroeconomic data releases or policy decisions overtly influencing the market, the outsized -1.90% decline in the Nasdaq 100 ETF compared to the S&P 500 ETF's -0.60% suggests a rotation out of previously high-flying tech names. This flow is indicative of investors rebalancing portfolios and taking profits after recent gains, rather than reacting to a fresh fundamental shock.",
+    "analysis_para3": "Traders should prioritize managing risk by observing key support levels for potential bounces or further declines. Watch for the S&P 500 ETF to hold around the 745 level, as a sustained breach below this could trigger additional selling toward 740. For short-term long entries, look for consolidation and a reclaim of 753 on the S&P 500 ETF, but a VIX move above 17.00 should be considered a clear risk-off threshold. Traders should remain nimble and avoid aggressive long positions without clear technical confirmation of stabilization today.",
+    "technical_signal": "No reversal pattern confirmed yet. Despite today's downdraft, a healthy 65.7% of S&P 500 stocks remain above their 50-day moving average, with 67.9% above their 200-day moving average. This suggests underlying market breadth is not critically damaged, but sustained selling could quickly erode these metrics. Watch for a bounce off short-term support or a continued deterioration in these breadth figures.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "BMY",
+          "company": "Bristol-Myers Squibb Company",
+          "reason": "Bristol-Myers Squibb surged today after receiving expedited FDA approval for its new oncology drug, significantly expanding its market share in a critical therapeutic area."
+        },
+        {
+          "ticker": "DE",
+          "company": "Deere & Company",
+          "reason": "Deere & Company experienced strong upward momentum following an analyst upgrade citing robust global demand for agricultural agricultural machinery and positive outlooks from recent investor presentations."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation faced broad selling pressure today as investors engaged in profit-taking across the technology sector, without a specific new fundamental catalyst."
+        }
+      ]
+    }
   }
 }

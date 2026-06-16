@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-16 18:35 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "US Tech Weakness / Global Divergence",
+    "spy_price": 750.33,
+    "spy_change_pct": -0.6,
+    "vix": 16.41,
+    "hy_oas": 2.66,
+    "yield_curve": 0.38,
+    "credit_status": "Complacent",
+    "s5fi": 65.7,
+    "mmth": 67.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "BMY",
+          "company": "Bristol-Myers Squibb Company",
+          "reason": "Bristol-Myers Squibb surged today after receiving expedited FDA approval for its new oncology drug, significantly expanding its market share in a critical therapeutic area."
+        },
+        {
+          "ticker": "DE",
+          "company": "Deere & Company",
+          "reason": "Deere & Company experienced strong upward momentum following an analyst upgrade citing robust global demand for agricultural agricultural machinery and positive outlooks from recent investor presentations."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation faced broad selling pressure today as investors engaged in profit-taking across the technology sector, without a specific new fundamental catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-16 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2077,44 +2115,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Continues to see volatile trading on ongoing speculation about robotaxi development and minor analyst rating adjustments, lacking fresh fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-08 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Tech-Driven Risk Appetite",
-    "spy_price": 737.62,
-    "spy_change_pct": 0.83,
-    "vix": 17.19,
-    "hy_oas": 2.79,
-    "yield_curve": 0.49,
-    "credit_status": "Complacent",
-    "s5fi": 57.0,
-    "mmth": 61.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "QCOM",
-          "company": "Qualcomm Inc.",
-          "reason": "Fueled by a significant analyst upgrade, Qualcomm demonstrated robust strength as investors gained renewed conviction in its outlook and valuation."
-        },
-        {
-          "ticker": "FLNC",
-          "company": "Fluence Energy Inc.",
-          "reason": "Fluence Energy rallied strongly after reporting an earnings beat and raising its forward outlook, signaling robust growth prospects in the energy storage sector."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp",
-          "reason": "NVIDIA saw continued interest, benefiting from broader tech sector momentum and ongoing AI narrative, without new specific fundamental news today."
         }
       ]
     }
