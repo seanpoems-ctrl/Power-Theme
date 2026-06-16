@@ -7270,11 +7270,19 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
         .trim();
       const termUpper = entityTerm.toUpperCase();
 
+      // efts.sec.gov may not have CORS on all origins — try direct, proxy as fallback
       const eftsUrl = `https://efts.sec.gov/LATEST/search-index?q=${encodeURIComponent(`"${entityTerm}"`)}&forms=10-K%2C20-F&dateRange=custom&startdt=2015-01-01`;
-      const eftsResp = await fetch(eftsUrl);
-      if (!eftsResp.ok) throw new Error(eftsResp.status);
-      const eftsJson = await eftsResp.json();
-      const hits = eftsJson.hits?.hits || [];
+      let hits = [];
+      try {
+        const r = await fetch(eftsUrl);
+        if (r.ok) hits = (await r.json()).hits?.hits || [];
+      } catch {}
+      if (hits.length === 0) {
+        // CORS blocked — route through corsproxy.io (already used for Yahoo Finance)
+        const r = await fetch(`https://corsproxy.io/?${encodeURIComponent(eftsUrl)}`);
+        if (!r.ok) throw new Error(r.status);
+        hits = (await r.json()).hits?.hits || [];
+      }
 
       // Only count entity_ids where the filer's name actually matches (avoids picking
       // up competitors that merely MENTION the company name in their own filings).
