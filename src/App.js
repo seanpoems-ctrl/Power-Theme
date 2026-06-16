@@ -6800,6 +6800,59 @@ function renderInline(text) {
   });
 }
 
+// ── SEC EDGAR CIK map — fetched once per browser session ──
+let _edgarCikMapPromise = null;
+const _getEdgarCikMap = () => {
+  if (!_edgarCikMapPromise) {
+    _edgarCikMapPromise = fetch("https://www.sec.gov/files/company_tickers.json")
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(data => {
+        const map = {};
+        Object.values(data).forEach(item => {
+          if (item.ticker) map[item.ticker.toUpperCase()] = String(item.cik_str).padStart(10, "0");
+        });
+        return map;
+      });
+  }
+  return _edgarCikMapPromise;
+};
+const FILING_STYLE = {
+  "8-K":     "text-amber-400 bg-amber-500/10 border-amber-500/30",
+  "8-K/A":   "text-amber-400 bg-amber-500/10 border-amber-500/30",
+  "10-K":    "text-blue-400 bg-blue-500/10 border-blue-500/30",
+  "10-K/A":  "text-blue-400 bg-blue-500/10 border-blue-500/30",
+  "10-Q":    "text-violet-400 bg-violet-500/10 border-violet-500/30",
+  "10-Q/A":  "text-violet-400 bg-violet-500/10 border-violet-500/30",
+  "4":       "text-emerald-400 bg-emerald-500/10 border-emerald-500/30",
+  "SC 13G":  "text-pink-400 bg-pink-500/10 border-pink-500/30",
+  "SC 13D":  "text-pink-400 bg-pink-500/10 border-pink-500/30",
+  "SC 13G/A":"text-pink-400 bg-pink-500/10 border-pink-500/30",
+  "SC 13D/A":"text-pink-400 bg-pink-500/10 border-pink-500/30",
+  "DEF 14A": "text-zinc-400 bg-zinc-700/30 border-zinc-600/40",
+  "S-1":     "text-orange-400 bg-orange-500/10 border-orange-500/30",
+  "S-1/A":   "text-orange-400 bg-orange-500/10 border-orange-500/30",
+  "424B4":   "text-orange-400 bg-orange-500/10 border-orange-500/30",
+  "20-F":    "text-blue-400 bg-blue-500/10 border-blue-500/30",
+};
+const FILING_LABEL = {
+  "8-K":     "Material Event",
+  "8-K/A":   "Material Event (Amended)",
+  "10-K":    "Annual Report",
+  "10-K/A":  "Annual Report (Amended)",
+  "10-Q":    "Quarterly Report",
+  "10-Q/A":  "Quarterly Report (Amended)",
+  "4":       "Insider Transaction",
+  "SC 13G":  "Institutional Ownership ≥5%",
+  "SC 13D":  "Activist Ownership ≥5%",
+  "SC 13G/A":"Institutional Ownership (Amended)",
+  "SC 13D/A":"Activist Ownership (Amended)",
+  "DEF 14A": "Proxy Statement",
+  "S-1":     "IPO Registration",
+  "S-1/A":   "IPO Registration (Amended)",
+  "424B4":   "Prospectus",
+  "20-F":    "Annual Report (Foreign)",
+};
+
 // ── Merged Search + Ticker Lookup ──
 const SearchBar = ({ data, search, setSearch }) => {
   const lang = useLang();
@@ -6823,6 +6876,9 @@ const SearchBar = ({ data, search, setSearch }) => {
   const [research, setResearch]             = useState(null);
   const [researchLoading, setResearchLoading] = useState(false);
   const [researchError, setResearchError]   = useState(false);
+  const [filings, setFilings]               = useState(null);
+  const [filingsLoading, setFilingsLoading] = useState(false);
+  const [filingsError, setFilingsError]     = useState(false);
   const researchCache = useRef({});   // in-session cache
   const RESEARCH_CACHE_KEY = "researchCache_v1";
   const RESEARCH_TTL_MS    = 24 * 60 * 60 * 1000; // 24 hours
@@ -7005,7 +7061,7 @@ const SearchBar = ({ data, search, setSearch }) => {
   const cachedPrice = fullResult ? priceCache[fullResult.ticker] : null;
   const displayPrice = livePrice || (fullResult?.price != null ? { price: fullResult.price, change_pct: fullResult.change_pct } : null) || cachedPrice;
 
-  // Reset news + research state when ticker changes (restore from cache if available)
+  // Reset news + research + filings state when ticker changes
   useEffect(() => {
     setActiveTab("info");
     setNews([]);
@@ -7013,6 +7069,8 @@ const SearchBar = ({ data, search, setSearch }) => {
     const cached = fullResult?.ticker ? researchCache.current[fullResult.ticker] : null;
     setResearch(cached || null);
     setResearchError(false);
+    setFilings(null);
+    setFilingsError(false);
   }, [fullResult?.ticker]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchNews = async (ticker) => {
@@ -7227,6 +7285,49 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
     }
   };
 
+  const fetchFilings = async (ticker) => {
+    setFilingsLoading(true);
+    setFilingsError(false);
+    setFilings(null);
+    try {
+      const cikMap = await _getEdgarCikMap();
+      const cik = cikMap[ticker.toUpperCase()];
+      if (!cik) { setFilingsError(true); setFilingsLoading(false); return; }
+      const cikInt = parseInt(cik, 10);
+      const resp = await fetch(`https://data.sec.gov/submissions/CIK${cik}.json`);
+      if (!resp.ok) throw new Error(resp.status);
+      const json = await resp.json();
+      const recent = json.filings?.recent || {};
+      const forms       = recent.form           || [];
+      const dates       = recent.filingDate     || [];
+      const accessions  = recent.accessionNumber|| [];
+      const primaryDocs = recent.primaryDocument|| [];
+      const items       = recent.items          || [];
+
+      const SHOW_FORMS = new Set([
+        "8-K","8-K/A","10-K","10-K/A","10-Q","10-Q/A",
+        "S-1","S-1/A","DEF 14A","4","SC 13G","SC 13D",
+        "SC 13G/A","SC 13D/A","424B4","20-F",
+      ]);
+      const list = [];
+      for (let i = 0; i < forms.length && list.length < 40; i++) {
+        if (!SHOW_FORMS.has(forms[i])) continue;
+        const acc      = accessions[i] || "";
+        const accClean = acc.replace(/-/g, "");
+        const doc      = primaryDocs[i] || "";
+        const url = doc
+          ? `https://www.sec.gov/Archives/edgar/data/${cikInt}/${accClean}/${doc}`
+          : `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${cik}&type=&dateb=&owner=include&count=40`;
+        list.push({ form: forms[i], date: dates[i] || "", items: items[i] || "", url });
+      }
+      setFilings({ cik: cikInt, list });
+    } catch {
+      setFilingsError(true);
+    } finally {
+      setFilingsLoading(false);
+    }
+  };
+
   const showSuggestions = open && q.length >= 1 && !fullResult && suggestions.length > 0;
   const noMatch = open && q.length >= 2 && !fullResult && suggestions.length === 0;
 
@@ -7327,7 +7428,7 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
 
           {/* Tab bar */}
           <div className="flex border-b border-zinc-800 -mx-3 px-3">
-            {[{ key: "info", label: "Info" }, { key: "news", label: "Catalysts" }, { key: "research", label: "Research" }].map(tab => (
+            {[{ key: "info", label: "Info" }, { key: "news", label: "Catalysts" }, { key: "research", label: "Research" }, { key: "filings", label: "Filings" }].map(tab => (
               <button
                 key={tab.key}
                 onMouseDown={e => e.preventDefault()}
@@ -7335,6 +7436,7 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
                   setActiveTab(tab.key);
                   if (tab.key === "news" && news.length === 0 && !newsLoading) fetchNews(fullResult.ticker);
                   if (tab.key === "research" && !research && !researchLoading) fetchResearch(fullResult.ticker, fullResult.company);
+                  if (tab.key === "filings" && !filings && !filingsLoading) fetchFilings(fullResult.ticker);
                 }}
                 className={`text-[12px] px-3 py-1.5 border-b-2 transition-colors ${activeTab === tab.key ? "border-blue-500 text-blue-400" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}
               >
@@ -7502,6 +7604,62 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
                 <p className="text-[12px] text-zinc-600 py-4 text-center">Click Research to load analysis.</p>
               )}
               {research && <ResearchContent text={research} />}
+            </div>
+          )}
+
+          {/* Filings tab — SEC EDGAR */}
+          {activeTab === "filings" && (
+            <div className="max-h-[480px] overflow-y-auto pr-1">
+              {filingsLoading && (
+                <p className="text-[12px] text-zinc-600 animate-pulse py-4 text-center">Loading SEC EDGAR filings…</p>
+              )}
+              {filingsError && (
+                <p className="text-[12px] text-red-500/70 py-4 text-center">
+                  Not found on EDGAR — ticker may be unlisted or delisted
+                </p>
+              )}
+              {!filingsLoading && !filingsError && !filings && (
+                <p className="text-[12px] text-zinc-600 py-4 text-center">Click Filings to load SEC EDGAR data.</p>
+              )}
+              {filings && (
+                <div>
+                  <div className="flex items-center justify-between mb-2 pb-1.5 border-b border-zinc-800">
+                    <span className="text-[11px] text-zinc-600">{filings.list.length} filings shown</span>
+                    <a
+                      href={`https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${filings.cik}&type=&dateb=&owner=include&count=40`}
+                      target="_blank" rel="noopener noreferrer"
+                      onMouseDown={e => e.preventDefault()}
+                      className="text-[11px] text-blue-400 hover:text-blue-300"
+                    >All filings on EDGAR ↗</a>
+                  </div>
+                  {filings.list.length === 0 && (
+                    <p className="text-[12px] text-zinc-600 py-3 text-center">No filings found.</p>
+                  )}
+                  <div className="space-y-0.5">
+                    {filings.list.map((f, i) => (
+                      <a
+                        key={i}
+                        href={f.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onMouseDown={e => e.preventDefault()}
+                        className="flex items-start gap-2 py-1.5 px-1.5 rounded hover:bg-zinc-800/60 group transition-colors"
+                      >
+                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border flex-shrink-0 mt-0.5 w-[52px] text-center ${FILING_STYLE[f.form] || "text-zinc-400 bg-zinc-700/30 border-zinc-600/40"}`}>
+                          {f.form}
+                        </span>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-[12px] text-zinc-300 group-hover:text-blue-400 transition-colors font-medium block leading-snug">
+                            {FILING_LABEL[f.form] || f.form}
+                            {f.items && <span className="ml-1.5 text-[11px] text-zinc-600 font-normal">{f.items}</span>}
+                          </span>
+                          <span className="text-[11px] text-zinc-600">{f.date}</span>
+                        </div>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
