@@ -6803,20 +6803,26 @@ function renderInline(text) {
 // ── SEC EDGAR filing helpers ──
 // efts.sec.gov (EDGAR full-text search) is CORS-enabled; www.sec.gov static files are not.
 const FILING_STYLE = {
-  "8-K":   "text-amber-400 bg-amber-500/10 border-amber-500/30",
-  "8-K/A": "text-amber-400 bg-amber-500/10 border-amber-500/30",
-  "10-K":  "text-blue-400 bg-blue-500/10 border-blue-500/30",
-  "10-K/A":"text-blue-400 bg-blue-500/10 border-blue-500/30",
-  "10-Q":  "text-violet-400 bg-violet-500/10 border-violet-500/30",
-  "10-Q/A":"text-violet-400 bg-violet-500/10 border-violet-500/30",
+  "8-K":    "text-amber-400 bg-amber-500/10 border-amber-500/30",
+  "8-K/A":  "text-amber-400 bg-amber-500/10 border-amber-500/30",
+  "6-K":    "text-amber-400 bg-amber-500/10 border-amber-500/30",
+  "10-K":   "text-blue-400 bg-blue-500/10 border-blue-500/30",
+  "10-K/A": "text-blue-400 bg-blue-500/10 border-blue-500/30",
+  "20-F":   "text-blue-400 bg-blue-500/10 border-blue-500/30",
+  "20-F/A": "text-blue-400 bg-blue-500/10 border-blue-500/30",
+  "10-Q":   "text-violet-400 bg-violet-500/10 border-violet-500/30",
+  "10-Q/A": "text-violet-400 bg-violet-500/10 border-violet-500/30",
 };
 const FILING_LABEL = {
-  "8-K":   "Current Report (Material Event)",
-  "8-K/A": "Current Report (Amended)",
-  "10-K":  "Annual Report",
-  "10-K/A":"Annual Report (Amended)",
-  "10-Q":  "Quarterly Report",
-  "10-Q/A":"Quarterly Report (Amended)",
+  "8-K":    "Current Report (Material Event)",
+  "8-K/A":  "Current Report (Amended)",
+  "6-K":    "Current Report (Foreign Issuer)",
+  "10-K":   "Annual Report",
+  "10-K/A": "Annual Report (Amended)",
+  "20-F":   "Annual Report (Foreign Issuer)",
+  "20-F/A": "Annual Report (Foreign, Amended)",
+  "10-Q":   "Quarterly Report",
+  "10-Q/A": "Quarterly Report (Amended)",
 };
 
 // ── Merged Search + Ticker Lookup ──
@@ -7256,52 +7262,65 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
     setFilingsError(false);
     setFilings(null);
     try {
-      // efts.sec.gov supports CORS — search by company name for precision.
-      // Strip legal suffixes so "Micron Technology, Inc." → "Micron Technology"
+      // Step 1: Resolve CIK via EFTS full-text search (CORS-enabled on efts.sec.gov).
+      // Search annual reports — 10-K (domestic) + 20-F (foreign issuers like ARM, ASML).
+      // Then filter hits where the FILER's entity_name matches our company.
       const entityTerm = (company || ticker)
-        .replace(/,?\s*(Inc\.?|Corp\.?|Ltd\.?|LLC\.?|L\.P\.?|PLC\.?|N\.V\.?)$/i, "")
+        .replace(/,?\s*(Inc\.?|Corp\.?|Ltd\.?|LLC\.?|L\.P\.?|PLC\.?|N\.V\.?|plc)$/i, "")
         .trim();
+      const termUpper = entityTerm.toUpperCase();
 
-      const query = encodeURIComponent(`"${entityTerm}"`);
-      const url   = `https://efts.sec.gov/LATEST/search-index?q=${query}&forms=8-K%2C10-K%2C10-Q&dateRange=custom&startdt=2018-01-01`;
-      const resp  = await fetch(url);
-      if (!resp.ok) throw new Error(resp.status);
-      const json  = await resp.json();
-      let hits    = json.hits?.hits || [];
+      const eftsUrl = `https://efts.sec.gov/LATEST/search-index?q=${encodeURIComponent(`"${entityTerm}"`)}&forms=10-K%2C20-F&dateRange=custom&startdt=2015-01-01`;
+      const eftsResp = await fetch(eftsUrl);
+      if (!eftsResp.ok) throw new Error(eftsResp.status);
+      const eftsJson = await eftsResp.json();
+      const hits = eftsJson.hits?.hits || [];
 
-      // If no hits with company name, retry with raw ticker symbol
-      if (hits.length === 0 && company) {
-        const r2 = await fetch(
-          `https://efts.sec.gov/LATEST/search-index?q=%22${encodeURIComponent(ticker)}%22&forms=10-K&dateRange=custom&startdt=2018-01-01`
-        );
-        if (r2.ok) hits = (await r2.json()).hits?.hits || [];
-      }
-      if (hits.length === 0) { setFilingsError(true); return; }
-
-      // Cluster by entity_id — top cluster is the right company
+      // Only count entity_ids where the filer's name actually matches (avoids picking
+      // up competitors that merely MENTION the company name in their own filings).
       const counts = {};
-      hits.forEach(h => { const id = h._source?.entity_id; if (id) counts[id] = (counts[id] || 0) + 1; });
-      const topCik = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0];
+      hits.forEach(h => {
+        const id   = h._source?.entity_id;
+        const name = (h._source?.entity_name || "").toUpperCase();
+        if (id && name.includes(termUpper)) counts[id] = (counts[id] || 0) + 1;
+      });
+
+      // Fallback: if entity_name filter left nothing, try raw clustering
+      let topCik = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0];
+      if (!topCik) {
+        const allCounts = {};
+        hits.forEach(h => { const id = h._source?.entity_id; if (id) allCounts[id] = (allCounts[id] || 0) + 1; });
+        topCik = Object.keys(allCounts).sort((a, b) => allCounts[b] - allCounts[a])[0];
+      }
       if (!topCik) { setFilingsError(true); return; }
 
-      const cikInt = parseInt(topCik, 10);
-      const list = hits
-        .filter(h => h._source?.entity_id === topCik)
-        .sort((a, b) => (b._source?.file_date || "").localeCompare(a._source?.file_date || ""))
-        .slice(0, 30)
-        .map(h => {
-          const src      = h._source || {};
-          const accClean = (src.accession_no || "").replace(/-/g, "");
-          return {
-            form:   src.form_type    || "—",
-            date:   src.file_date    || "",
-            period: src.period_of_report || "",
-            url: accClean
-              ? `https://www.sec.gov/Archives/edgar/data/${cikInt}/${accClean}/`
-              : `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${cikInt}&type=&dateb=&owner=include&count=40`,
-          };
-        });
+      // Step 2: Fetch the full filing list from data.sec.gov (CORS-enabled).
+      const cikPadded = topCik.padStart(10, "0");
+      const subResp = await fetch(`https://data.sec.gov/submissions/CIK${cikPadded}.json`);
+      if (!subResp.ok) throw new Error(subResp.status);
+      const sub = await subResp.json();
 
+      const recent = sub.filings?.recent || {};
+      const forms   = recent.form            || [];
+      const dates   = recent.filingDate      || [];
+      const accs    = recent.accessionNumber || [];
+      const docs    = recent.primaryDocument || [];
+
+      const SHOW = new Set(["8-K","8-K/A","10-K","10-K/A","10-Q","10-Q/A","20-F","20-F/A","6-K"]);
+      const cikInt = parseInt(topCik, 10);
+      const list = [];
+      for (let i = 0; i < forms.length && list.length < 30; i++) {
+        if (!SHOW.has(forms[i])) continue;
+        const accClean = (accs[i] || "").replace(/-/g, "");
+        const doc      = docs[i] || "";
+        list.push({
+          form: forms[i],
+          date: dates[i] || "",
+          url: doc
+            ? `https://www.sec.gov/Archives/edgar/data/${cikInt}/${accClean}/${doc}`
+            : `https://www.sec.gov/Archives/edgar/data/${cikInt}/${accClean}/`,
+        });
+      }
       setFilings({ cik: cikInt, list });
     } catch {
       setFilingsError(true);
