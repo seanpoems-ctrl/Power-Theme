@@ -6496,6 +6496,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
             }
             catalyst = catalyst || modalData.category;
             const hypothesis = [modalData.hypothesis, modalData.hypothesis_detail].filter(Boolean).join("\n\n") || null;
+            const headlines = modalData.headlines || [];
             const sections = [
               { label: "CATALYST",   value: catalyst },
               { label: "IMPACT",     value: impact },
@@ -6510,6 +6511,24 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
                     <p className="text-[13px] text-zinc-200 leading-relaxed whitespace-pre-line">{renderMarkdown(value)}</p>
                   </div>
                 ) : null)}
+                {headlines.length > 0 && (
+                  <div>
+                    <div className="text-[11px] uppercase text-zinc-500 mb-2 font-semibold tracking-wider">SOURCE HEADLINES</div>
+                    <ul className="space-y-1.5">
+                      {headlines.map((h, i) => (
+                        <li key={i} className="flex items-start gap-2">
+                          <span className="text-zinc-600 text-[11px] mt-0.5 flex-shrink-0">{i + 1}.</span>
+                          {h.url ? (
+                            <a href={h.url} target="_blank" rel="noreferrer"
+                              className="text-[12px] text-blue-400 hover:text-blue-300 leading-snug">{h.title}</a>
+                          ) : (
+                            <span className="text-[12px] text-zinc-300 leading-snug">{h.title}</span>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             );
           })()}

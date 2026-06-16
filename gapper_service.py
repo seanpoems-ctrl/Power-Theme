@@ -432,9 +432,12 @@ def _is_opinion_article(title: str, source: str = "") -> bool:
         if kw in title_lower:
             return True
 
-    # 4. Reject if title lists 3+ company names (roundup pattern: "Coherent, Victoria's Secret, Marvell...")
-    #    Heuristic: count commas — 2+ commas usually means a list article
-    if title.count(",") >= 2:
+    # 4. Reject roundup/list articles — commas OR semicolons separating multiple companies
+    #    e.g. "5 big analyst moves: Intel upgrade; SpaceX Buy; AMD target raised"
+    if title.count(",") >= 2 or title.count(";") >= 1:
+        return True
+    # Also reject titles starting with a number + "big/top/best/worst/key" (numbered lists)
+    if re.match(r"^\d+\s+(big|top|best|worst|key|major|notable|important)", title_lower):
         return True
 
     # 5. Reject opinion keyword phrases in title
