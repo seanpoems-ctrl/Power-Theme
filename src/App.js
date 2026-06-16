@@ -6800,57 +6800,23 @@ function renderInline(text) {
   });
 }
 
-// ── SEC EDGAR CIK map — fetched once per browser session ──
-let _edgarCikMapPromise = null;
-const _getEdgarCikMap = () => {
-  if (!_edgarCikMapPromise) {
-    _edgarCikMapPromise = fetch("https://www.sec.gov/files/company_tickers.json")
-      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-      .then(data => {
-        const map = {};
-        Object.values(data).forEach(item => {
-          if (item.ticker) map[item.ticker.toUpperCase()] = String(item.cik_str).padStart(10, "0");
-        });
-        return map;
-      });
-  }
-  return _edgarCikMapPromise;
-};
+// ── SEC EDGAR filing helpers ──
+// efts.sec.gov (EDGAR full-text search) is CORS-enabled; www.sec.gov static files are not.
 const FILING_STYLE = {
-  "8-K":     "text-amber-400 bg-amber-500/10 border-amber-500/30",
-  "8-K/A":   "text-amber-400 bg-amber-500/10 border-amber-500/30",
-  "10-K":    "text-blue-400 bg-blue-500/10 border-blue-500/30",
-  "10-K/A":  "text-blue-400 bg-blue-500/10 border-blue-500/30",
-  "10-Q":    "text-violet-400 bg-violet-500/10 border-violet-500/30",
-  "10-Q/A":  "text-violet-400 bg-violet-500/10 border-violet-500/30",
-  "4":       "text-emerald-400 bg-emerald-500/10 border-emerald-500/30",
-  "SC 13G":  "text-pink-400 bg-pink-500/10 border-pink-500/30",
-  "SC 13D":  "text-pink-400 bg-pink-500/10 border-pink-500/30",
-  "SC 13G/A":"text-pink-400 bg-pink-500/10 border-pink-500/30",
-  "SC 13D/A":"text-pink-400 bg-pink-500/10 border-pink-500/30",
-  "DEF 14A": "text-zinc-400 bg-zinc-700/30 border-zinc-600/40",
-  "S-1":     "text-orange-400 bg-orange-500/10 border-orange-500/30",
-  "S-1/A":   "text-orange-400 bg-orange-500/10 border-orange-500/30",
-  "424B4":   "text-orange-400 bg-orange-500/10 border-orange-500/30",
-  "20-F":    "text-blue-400 bg-blue-500/10 border-blue-500/30",
+  "8-K":   "text-amber-400 bg-amber-500/10 border-amber-500/30",
+  "8-K/A": "text-amber-400 bg-amber-500/10 border-amber-500/30",
+  "10-K":  "text-blue-400 bg-blue-500/10 border-blue-500/30",
+  "10-K/A":"text-blue-400 bg-blue-500/10 border-blue-500/30",
+  "10-Q":  "text-violet-400 bg-violet-500/10 border-violet-500/30",
+  "10-Q/A":"text-violet-400 bg-violet-500/10 border-violet-500/30",
 };
 const FILING_LABEL = {
-  "8-K":     "Material Event",
-  "8-K/A":   "Material Event (Amended)",
-  "10-K":    "Annual Report",
-  "10-K/A":  "Annual Report (Amended)",
-  "10-Q":    "Quarterly Report",
-  "10-Q/A":  "Quarterly Report (Amended)",
-  "4":       "Insider Transaction",
-  "SC 13G":  "Institutional Ownership ≥5%",
-  "SC 13D":  "Activist Ownership ≥5%",
-  "SC 13G/A":"Institutional Ownership (Amended)",
-  "SC 13D/A":"Activist Ownership (Amended)",
-  "DEF 14A": "Proxy Statement",
-  "S-1":     "IPO Registration",
-  "S-1/A":   "IPO Registration (Amended)",
-  "424B4":   "Prospectus",
-  "20-F":    "Annual Report (Foreign)",
+  "8-K":   "Current Report (Material Event)",
+  "8-K/A": "Current Report (Amended)",
+  "10-K":  "Annual Report",
+  "10-K/A":"Annual Report (Amended)",
+  "10-Q":  "Quarterly Report",
+  "10-Q/A":"Quarterly Report (Amended)",
 };
 
 // ── Merged Search + Ticker Lookup ──
@@ -7285,41 +7251,57 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
     }
   };
 
-  const fetchFilings = async (ticker) => {
+  const fetchFilings = async (ticker, company) => {
     setFilingsLoading(true);
     setFilingsError(false);
     setFilings(null);
     try {
-      const cikMap = await _getEdgarCikMap();
-      const cik = cikMap[ticker.toUpperCase()];
-      if (!cik) { setFilingsError(true); setFilingsLoading(false); return; }
-      const cikInt = parseInt(cik, 10);
-      const resp = await fetch(`https://data.sec.gov/submissions/CIK${cik}.json`);
-      if (!resp.ok) throw new Error(resp.status);
-      const json = await resp.json();
-      const recent = json.filings?.recent || {};
-      const forms       = recent.form           || [];
-      const dates       = recent.filingDate     || [];
-      const accessions  = recent.accessionNumber|| [];
-      const primaryDocs = recent.primaryDocument|| [];
-      const items       = recent.items          || [];
+      // efts.sec.gov supports CORS — search by company name for precision.
+      // Strip legal suffixes so "Micron Technology, Inc." → "Micron Technology"
+      const entityTerm = (company || ticker)
+        .replace(/,?\s*(Inc\.?|Corp\.?|Ltd\.?|LLC\.?|L\.P\.?|PLC\.?|N\.V\.?)$/i, "")
+        .trim();
 
-      const SHOW_FORMS = new Set([
-        "8-K","8-K/A","10-K","10-K/A","10-Q","10-Q/A",
-        "S-1","S-1/A","DEF 14A","4","SC 13G","SC 13D",
-        "SC 13G/A","SC 13D/A","424B4","20-F",
-      ]);
-      const list = [];
-      for (let i = 0; i < forms.length && list.length < 40; i++) {
-        if (!SHOW_FORMS.has(forms[i])) continue;
-        const acc      = accessions[i] || "";
-        const accClean = acc.replace(/-/g, "");
-        const doc      = primaryDocs[i] || "";
-        const url = doc
-          ? `https://www.sec.gov/Archives/edgar/data/${cikInt}/${accClean}/${doc}`
-          : `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${cik}&type=&dateb=&owner=include&count=40`;
-        list.push({ form: forms[i], date: dates[i] || "", items: items[i] || "", url });
+      const query = encodeURIComponent(`"${entityTerm}"`);
+      const url   = `https://efts.sec.gov/LATEST/search-index?q=${query}&forms=8-K%2C10-K%2C10-Q&dateRange=custom&startdt=2018-01-01`;
+      const resp  = await fetch(url);
+      if (!resp.ok) throw new Error(resp.status);
+      const json  = await resp.json();
+      let hits    = json.hits?.hits || [];
+
+      // If no hits with company name, retry with raw ticker symbol
+      if (hits.length === 0 && company) {
+        const r2 = await fetch(
+          `https://efts.sec.gov/LATEST/search-index?q=%22${encodeURIComponent(ticker)}%22&forms=10-K&dateRange=custom&startdt=2018-01-01`
+        );
+        if (r2.ok) hits = (await r2.json()).hits?.hits || [];
       }
+      if (hits.length === 0) { setFilingsError(true); return; }
+
+      // Cluster by entity_id — top cluster is the right company
+      const counts = {};
+      hits.forEach(h => { const id = h._source?.entity_id; if (id) counts[id] = (counts[id] || 0) + 1; });
+      const topCik = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0];
+      if (!topCik) { setFilingsError(true); return; }
+
+      const cikInt = parseInt(topCik, 10);
+      const list = hits
+        .filter(h => h._source?.entity_id === topCik)
+        .sort((a, b) => (b._source?.file_date || "").localeCompare(a._source?.file_date || ""))
+        .slice(0, 30)
+        .map(h => {
+          const src      = h._source || {};
+          const accClean = (src.accession_no || "").replace(/-/g, "");
+          return {
+            form:   src.form_type    || "—",
+            date:   src.file_date    || "",
+            period: src.period_of_report || "",
+            url: accClean
+              ? `https://www.sec.gov/Archives/edgar/data/${cikInt}/${accClean}/`
+              : `https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${cikInt}&type=&dateb=&owner=include&count=40`,
+          };
+        });
+
       setFilings({ cik: cikInt, list });
     } catch {
       setFilingsError(true);
@@ -7436,7 +7418,7 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
                   setActiveTab(tab.key);
                   if (tab.key === "news" && news.length === 0 && !newsLoading) fetchNews(fullResult.ticker);
                   if (tab.key === "research" && !research && !researchLoading) fetchResearch(fullResult.ticker, fullResult.company);
-                  if (tab.key === "filings" && !filings && !filingsLoading) fetchFilings(fullResult.ticker);
+                  if (tab.key === "filings" && !filings && !filingsLoading) fetchFilings(fullResult.ticker, fullResult.company);
                 }}
                 className={`text-[12px] px-3 py-1.5 border-b-2 transition-colors ${activeTab === tab.key ? "border-blue-500 text-blue-400" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}
               >
