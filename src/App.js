@@ -6191,7 +6191,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
             if (price == null) return null;
             const prevClose = meta.previousClose ?? meta.regularMarketPreviousClose ?? meta.chartPreviousClose;
             const chgPct = prevClose ? ((price - prevClose) / prevClose * 100) : 0;
-            return [sym, { price, change_pct: chgPct }];
+            return [sym, { price, change_pct: chgPct, prevClose }];
           } catch { return null; }
         })
       );
@@ -6321,6 +6321,8 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
               const livePrice  = lp?.price ?? g.price;
               const liveChgPct = lp?.change_pct ?? g.gap_pct;
               const isLive     = !!lp;
+              // prevClose: from live fetch, or derived from scan-time price ÷ (1 + gap%)
+              const prevClose  = lp?.prevClose ?? (g.price / (1 + g.gap_pct / 100));
               return (
               <tr key={g.ticker + i} className={rowCls}>
                 {/* Ticker */}
@@ -6334,7 +6336,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
                   <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer" className="ml-1">
                     <ExternalLink size={8} className="inline text-zinc-600 hover:text-blue-400"/>
                   </a>
-                  <div className="text-[11px] font-mono text-zinc-500">${livePrice.toFixed(2)}</div>
+                  <div className="text-[11px] font-mono text-zinc-500">prev ${prevClose.toFixed(2)}</div>
                 </td>
                 {/* Premkt % */}
                 <td className="py-1 px-2 align-middle text-center">
