@@ -6801,7 +6801,24 @@ function renderInline(text) {
 }
 
 // ── SEC EDGAR filing helpers ──
-// efts.sec.gov (EDGAR full-text search) is CORS-enabled; www.sec.gov static files are not.
+// CIKs never change after SEC assignment — safe to hardcode for common tickers.
+// For anything not in this map, fetchFilings falls back to efts.sec.gov entity search.
+const EDGAR_CIKS = {
+  "AAPL": "320193",    "MSFT": "789019",    "NVDA": "1045810",   "AMZN": "1018724",
+  "GOOGL":"1652044",   "GOOG": "1652044",   "META": "1326801",   "TSLA": "1318605",
+  "AMD":  "2488",      "MU":   "723125",    "ARM":  "1666134",   "INTC": "50863",
+  "QCOM": "804328",    "AVGO": "1730168",   "ASML": "937556",    "NFLX": "1065280",
+  "JPM":  "19617",     "BAC":  "70858",     "GS":   "886982",    "WFC":  "72971",
+  "MS":   "895421",    "C":    "831001",    "V":    "1403161",   "MA":   "1141391",
+  "JNJ":  "200406",    "PFE":  "78003",     "LLY":  "59478",     "MRK":  "310158",
+  "ABBV": "1551152",   "UNH":  "731766",    "WMT":  "107263",    "COST": "909832",
+  "HD":   "354950",    "NKE":  "793952",    "DIS":  "1001039",   "SBUX": "829224",
+  "XOM":  "34088",     "CVX":  "93410",     "BA":   "12927",     "GE":   "40987",
+  "GM":   "1467858",   "F":    "37996",     "PYPL": "1633917",   "SHOP": "1594805",
+  "COIN": "1679788",   "PLTR": "1321655",   "CRWD": "1517396",   "PANW": "1327567",
+  "DDOG": "1561894",   "SNOW": "1640147",   "ZS":   "1713683",   "NET":  "1477333",
+  "UBER": "1543151",   "ABNB": "1559720",   "SNAP": "1564408",   "RBLX": "1315098",
+};
 const FILING_STYLE = {
   "8-K":    "text-amber-400 bg-amber-500/10 border-amber-500/30",
   "8-K/A":  "text-amber-400 bg-amber-500/10 border-amber-500/30",
@@ -7262,48 +7279,38 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
     setFilingsError(false);
     setFilings(null);
     try {
-      // Step 1: Resolve CIK via EFTS full-text search (CORS-enabled on efts.sec.gov).
-      // Search annual reports — 10-K (domestic) + 20-F (foreign issuers like ARM, ASML).
-      // Then filter hits where the FILER's entity_name matches our company.
-      const entityTerm = (company || ticker)
-        .replace(/,?\s*(Inc\.?|Corp\.?|Ltd\.?|LLC\.?|L\.P\.?|PLC\.?|N\.V\.?|plc)$/i, "")
-        .trim();
-      const termUpper = entityTerm.toUpperCase();
+      // Step 1: Resolve CIK.
+      // Primary: hardcoded map covers ~50 common large-caps (no API call, no CORS risk).
+      // Fallback: EFTS entity search (filer-name, not document-text) via proxy.
+      let topCik = EDGAR_CIKS[ticker.toUpperCase()] || null;
 
-      // efts.sec.gov may not have CORS on all origins — try direct, proxy as fallback
-      const eftsUrl = `https://efts.sec.gov/LATEST/search-index?q=${encodeURIComponent(`"${entityTerm}"`)}&forms=10-K%2C20-F&dateRange=custom&startdt=2015-01-01`;
-      let hits = [];
-      try {
-        const r = await fetch(eftsUrl);
-        if (r.ok) hits = (await r.json()).hits?.hits || [];
-      } catch {}
-      if (hits.length === 0) {
-        // CORS blocked — route through corsproxy.io (already used for Yahoo Finance)
-        const r = await fetch(`https://corsproxy.io/?${encodeURIComponent(eftsUrl)}`);
-        if (!r.ok) throw new Error(r.status);
-        hits = (await r.json()).hits?.hits || [];
-      }
-
-      // Only count entity_ids where the filer's name actually matches (avoids picking
-      // up competitors that merely MENTION the company name in their own filings).
-      const counts = {};
-      hits.forEach(h => {
-        const id   = h._source?.entity_id;
-        const name = (h._source?.entity_name || "").toUpperCase();
-        if (id && name.includes(termUpper)) counts[id] = (counts[id] || 0) + 1;
-      });
-
-      // Fallback: if entity_name filter left nothing, try raw clustering
-      let topCik = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0];
       if (!topCik) {
-        const allCounts = {};
-        hits.forEach(h => { const id = h._source?.entity_id; if (id) allCounts[id] = (allCounts[id] || 0) + 1; });
-        topCik = Object.keys(allCounts).sort((a, b) => allCounts[b] - allCounts[a])[0];
+        const entityTerm = (company || ticker)
+          .replace(/,?\s*(Inc\.?|Corp\.?|Ltd\.?|LLC\.?|L\.P\.?|PLC\.?|N\.V\.?|plc)$/i, "")
+          .trim();
+        // Use `entity` param (searches FILER NAME, not document text) — avoids
+        // competitor filings that merely mention the company name in their own 10-Ks.
+        const eftsUrl = `https://efts.sec.gov/LATEST/search-index?entity=${encodeURIComponent(entityTerm)}&forms=10-K%2C20-F&dateRange=custom&startdt=2020-01-01`;
+        let hits = [];
+        try {
+          const r = await fetch(eftsUrl);
+          if (r.ok) hits = (await r.json()).hits?.hits || [];
+        } catch {}
+        if (hits.length === 0) {
+          // efts.sec.gov CORS-blocked on this origin — proxy it
+          const r = await fetch(`https://corsproxy.io/?${encodeURIComponent(eftsUrl)}`);
+          if (r.ok) hits = (await r.json()).hits?.hits || [];
+        }
+        // All hits should now be from the target filer; pick the most common entity_id
+        const counts = {};
+        hits.forEach(h => { const id = h._source?.entity_id; if (id) counts[id] = (counts[id] || 0) + 1; });
+        topCik = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0] || null;
       }
+
       if (!topCik) { setFilingsError(true); return; }
 
       // Step 2: Fetch the full filing list from data.sec.gov (CORS-enabled).
-      const cikPadded = topCik.padStart(10, "0");
+      const cikPadded = String(topCik).padStart(10, "0");
       const subResp = await fetch(`https://data.sec.gov/submissions/CIK${cikPadded}.json`);
       if (!subResp.ok) throw new Error(subResp.status);
       const sub = await subResp.json();
