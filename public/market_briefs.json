@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-16 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Aggressive Risk-On",
+    "spy_price": 741.75,
+    "spy_change_pct": 0.54,
+    "vix": 16.18,
+    "hy_oas": 2.71,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 63.3,
+    "mmth": 66.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Anticipation builds as NVIDIA reportedly secures a massive data center AI chip contract, fueling projections of accelerated revenue growth."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft's new enterprise AI suite is gaining significant traction, with analysts upgrading price targets on strong adoption metrics."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla continues to benefit from overall EV sector enthusiasm, with price action driven primarily by technical momentum and retail flow."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-15 18:37 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2117,44 +2155,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continued speculative interest drives price action following recent AI-related gains, with no fresh fundamental catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-07 08:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-On Momentum",
-    "spy_price": 733.83,
-    "spy_change_pct": 1.39,
-    "vix": 17.45,
-    "hy_oas": 2.77,
-    "yield_curve": 0.49,
-    "credit_status": "Complacent",
-    "s5fi": 62.1,
-    "mmth": 61.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Announces breakthrough AI partnership with major automotive manufacturer, signaling significant revenue expansion opportunities."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Reports significant Q1 earnings beat with strong cloud growth guidance, reaffirming AWS's market dominance and profitability."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continues to benefit from ongoing AI infrastructure buildout and strong speculative flow, sustaining elevated valuation narratives."
         }
       ]
     }
