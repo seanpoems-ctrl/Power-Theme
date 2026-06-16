@@ -6415,16 +6415,17 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
                     {g.reasoning || "—"}
                   </span>
                 </td>
-                {/* Analysis Details */}
+                {/* Analysis Details — shows impact (trade implication), not catalyst which duplicates Reasoning */}
                 <td className="py-1 px-2 align-middle">
                   {(() => {
                     const d = g.analysis_detail;
-                    const catalyst = typeof d === "object"
-                      ? d?.catalyst
-                      : (typeof d === "string" ? d.split(" | Impact: ")[0].replace(/^Catalyst:\s*/i, "") : null);
+                    // impact = forward trade implication, always distinct from reasoning/catalyst
+                    const impact = typeof d === "object"
+                      ? d?.impact
+                      : (typeof d === "string" ? (d.split(" | Impact: ")[1] || d) : null);
                     return (
                       <div>
-                        <span className="line-clamp-1 text-[11px] text-zinc-300 block">{catalyst ? renderMarkdown(catalyst) : "—"}</span>
+                        <span className="line-clamp-2 text-[11px] text-zinc-300 block">{impact ? renderMarkdown(impact) : "—"}</span>
                         <button
                           onClick={(e) => { e.stopPropagation(); setModalData(g); }}
                           className="text-[11px] text-blue-400 hover:text-blue-300 mt-0.5"

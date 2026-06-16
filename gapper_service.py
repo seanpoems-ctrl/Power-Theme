@@ -1144,50 +1144,108 @@ Respond in this exact JSON format only (no extra text, no markdown fences):
 
 
 def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
-    """Rule-based fallback if Gemini unavailable."""
+    """Rule-based fallback if Gemini unavailable. Uses actual headline text when available."""
     titles = [h["title"] if isinstance(h, dict) else h for h in headlines]
     text = " ".join(titles).lower()
 
+    # First non-trivial headline for specificity
+    first_headline = next((t for t in titles if len(t) > 25), None)
+    # All headlines joined for the catalyst block
+    headlines_block = " | ".join(titles[:3]) if titles else ""
+
     if any(w in text for w in ["earnings", "beat", "revenue", "eps", "q1", "q2", "q3", "q4"]):
         cat = "Earnings"
-        rsn = f"{ticker} reported quarterly results; earnings catalyst detected in headlines."
-        detail_body = "Earnings report detected in recent news. Review actual EPS/revenue figures for confirmation."
+        rsn = (
+            f"{ticker} gapping on earnings: {first_headline[:90]}"
+            if first_headline else
+            f"{ticker} reported quarterly results; earnings catalyst detected."
+        )
+        catalyst_text = (
+            f"Headlines: {headlines_block}"
+            if headlines_block else
+            "Earnings report detected. Review actual EPS/revenue figures for confirmation."
+        )
+        impact_text = "Strong earnings prints with guidance raises typically sustain the gap through the open. Watch for volume confirmation above pre-market high."
     elif any(w in text for w in ["fda", "clinical", "trial", "drug", "approval", "pdufa"]):
         cat = "FDA"
-        rsn = f"{ticker} has an active FDA/clinical regulatory event based on recent headlines."
-        detail_body = "FDA or clinical trial event detected. Binary outcome — treat as high-volatility event."
+        rsn = (
+            f"{ticker} FDA/regulatory event: {first_headline[:90]}"
+            if first_headline else
+            f"{ticker} has an active FDA/clinical regulatory event."
+        )
+        catalyst_text = (
+            f"Headlines: {headlines_block}"
+            if headlines_block else
+            "FDA or clinical trial event detected. Binary outcome."
+        )
+        impact_text = "Binary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form."
     elif any(w in text for w in ["upgrade", "price target", "raised", "initiated", "outperform", "overweight"]):
         cat = "Upgrade"
-        rsn = f"{ticker} received an analyst rating action or price target revision."
-        detail_body = "Analyst upgrade or price target change detected. Institutional conviction may be limited."
+        rsn = (
+            f"{ticker} analyst action: {first_headline[:90]}"
+            if first_headline else
+            f"{ticker} received an analyst rating action or price target revision."
+        )
+        catalyst_text = (
+            f"Headlines: {headlines_block}"
+            if headlines_block else
+            "Analyst upgrade or price target change detected."
+        )
+        impact_text = "Analyst upgrades carry limited institutional conviction and often gap-fill by midday. Fade into strength or wait for a dip entry near VWAP."
     elif any(w in text for w in ["contract", "partnership", "deal", "agreement", "collaboration"]):
         cat = "New Contract/Partnership"
-        rsn = f"{ticker} announced a new contract or strategic partnership."
-        detail_body = "Contract or partnership announcement detected. Evaluate deal size and strategic significance."
+        rsn = (
+            f"{ticker} deal announcement: {first_headline[:90]}"
+            if first_headline else
+            f"{ticker} announced a new contract or strategic partnership."
+        )
+        catalyst_text = (
+            f"Headlines: {headlines_block}"
+            if headlines_block else
+            "Contract or partnership announcement detected. Evaluate deal size and strategic significance."
+        )
+        impact_text = "Contract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open."
     elif any(w in text for w in ["policy", "government", "regulation", "tariff", "executive order", "legislation"]):
         cat = "Government Policy"
-        rsn = f"{ticker} is affected by a recent government policy or regulatory development."
-        detail_body = "Policy or regulatory catalyst detected. Monitor for further legislative developments."
+        rsn = (
+            f"{ticker} government policy catalyst: {first_headline[:90]}"
+            if first_headline else
+            f"{ticker} is affected by a recent government policy or regulatory development."
+        )
+        catalyst_text = (
+            f"Headlines: {headlines_block}"
+            if headlines_block else
+            "Policy or regulatory catalyst detected. Monitor for further legislative developments."
+        )
+        impact_text = "Policy tailwinds can create sustained multi-day moves in direct beneficiaries. Watch for sector-wide sympathy moves and dip-buy at 9-EMA/VWAP."
     else:
         cat = "Others"
-        rsn = f"{ticker} gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven."
-        detail_body = "No specific fundamental catalyst identified. High risk of Gap and Trap — wait for 15-min base."
+        rsn = (
+            f"{ticker}: {first_headline[:90]}"
+            if first_headline else
+            f"{ticker} gap lacks a clear fundamental catalyst; likely technical breakout or flow-driven."
+        )
+        catalyst_text = (
+            f"Headlines: {headlines_block}"
+            if headlines_block else
+            "No specific fundamental catalyst identified. High risk of Gap and Trap."
+        )
+        impact_text = "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
 
     label, strategy = HYPOTHESIS_RULES.get(cat, HYPOTHESIS_RULES["Others"])
 
-    # Build analysis_details as structured sections (not raw headline)
     section_titles = {
-        "Earnings":               ("The Results", "The Outlook"),
+        "Earnings":               ("The Results", "Trade Implication"),
         "FDA":                    ("The Event", "Risk Profile"),
-        "Upgrade":                ("The Analyst Action", "The Thesis"),
-        "New Contract/Partnership": ("The Announcement", "Strategic Value"),
-        "Government Policy":      ("The Policy", "Direct Impact"),
+        "Upgrade":                ("The Analyst Action", "Trade Implication"),
+        "New Contract/Partnership": ("The Announcement", "Trade Implication"),
+        "Government Policy":      ("The Policy", "Trade Implication"),
         "Others":                 ("What Happened", "Key Consideration"),
     }
     s1, s2 = section_titles.get(cat, ("What Happened", "Key Consideration"))
     analysis_details = (
-        f"• **{s1}**\n{rsn}\n\n"
-        f"• **{s2}**\n{detail_body}"
+        f"• **{s1}**\n{catalyst_text}\n\n"
+        f"• **{s2}**\n{impact_text}"
     )
 
     peer_tickers = get_peer_stocks(ticker)
@@ -1201,7 +1259,7 @@ def _fallback_analysis(ticker: str, headlines: list, rvol: float) -> dict:
         "conviction":      50,
         "grade":           "B",
         "finviz_theme":    "—",
-        "analysis_detail": {"catalyst": rsn, "impact": detail_body},
+        "analysis_detail": {"catalyst": catalyst_text, "impact": impact_text},
         "analysis_details": analysis_details,
         "peer_tickers":    peer_tickers,
         "leverage_etfs":   _lev.get("long", []),
@@ -1280,16 +1338,14 @@ def main():
     output = []
     import datetime as dt
 
-    # Hybrid approach: categorize gappers by gap size
-    # Small gaps (<15%): 2 headlines (cost-optimized)
-    # Large gaps (≥15%): 5 headlines (more thorough analysis)
+    # Uniform 5 headlines per ticker — quality analysis requires context
     stats = {"small_gap": 0, "large_gap": 0, "headlines_sent": 0}
 
     for stock in gappers:
         ticker = stock["ticker"]
         gap_pct = stock.get("gap_pct", 0)
         is_large_gap = gap_pct >= 15
-        headline_limit = 5 if is_large_gap else 2
+        headline_limit = 5
 
         logger.info(f"  Analyzing {ticker} (gap={gap_pct:.1f}% rvol={stock['rvol']:.1f}x) → {headline_limit} headlines...")
 
