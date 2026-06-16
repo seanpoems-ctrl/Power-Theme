@@ -7275,6 +7275,39 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
   };
 
 
+  const fetchFilings = async (ticker) => {
+    const cik = EDGAR_CIKS[ticker.toUpperCase()];
+    if (!cik) return; // unknown ticker — tab shows direct links only
+    setFilingsLoading(true);
+    setFilings(null);
+    try {
+      const resp = await fetch(`https://data.sec.gov/submissions/CIK${String(cik).padStart(10, "0")}.json`);
+      if (!resp.ok) throw new Error(resp.status);
+      const sub = await resp.json();
+      const r = sub.filings?.recent || {};
+      const forms = r.form || [], dates = r.filingDate || [], accs = r.accessionNumber || [], docs = r.primaryDocument || [];
+      const SHOW = new Set(["8-K","8-K/A","10-K","10-K/A","10-Q","10-Q/A","20-F","20-F/A","6-K"]);
+      const cikInt = parseInt(cik, 10);
+      const list = [];
+      for (let i = 0; i < forms.length && list.length < 40; i++) {
+        if (!SHOW.has(forms[i])) continue;
+        const acc = (accs[i] || "").replace(/-/g, "");
+        list.push({
+          form: forms[i],
+          date: dates[i] || "",
+          url: docs[i]
+            ? `https://www.sec.gov/Archives/edgar/data/${cikInt}/${acc}/${docs[i]}`
+            : `https://www.sec.gov/Archives/edgar/data/${cikInt}/${acc}/`,
+        });
+      }
+      setFilings({ cik: cikInt, list });
+    } catch {
+      // fetch failed — tab falls back to direct links
+    } finally {
+      setFilingsLoading(false);
+    }
+  };
+
   const showSuggestions = open && q.length >= 1 && !fullResult && suggestions.length > 0;
   const noMatch = open && q.length >= 2 && !fullResult && suggestions.length === 0;
 
@@ -7383,6 +7416,7 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
                   setActiveTab(tab.key);
                   if (tab.key === "news" && news.length === 0 && !newsLoading) fetchNews(fullResult.ticker);
                   if (tab.key === "research" && !research && !researchLoading) fetchResearch(fullResult.ticker, fullResult.company);
+                  if (tab.key === "filings" && !filings && !filingsLoading) fetchFilings(fullResult.ticker);
                 }}
                 className={`text-[12px] px-3 py-1.5 border-b-2 transition-colors ${activeTab === tab.key ? "border-blue-500 text-blue-400" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}
               >
@@ -7553,36 +7587,71 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
             </div>
           )}
 
-          {/* Filings tab — direct SEC EDGAR links (ticker-based, no API calls) */}
+          {/* Filings tab — inline list for known tickers, direct links fallback */}
           {activeTab === "filings" && (
-            <div className="p-3 space-y-1.5">
-              <p className="text-[11px] text-zinc-500 mb-3">Opens SEC EDGAR in a new tab.</p>
-              {[
-                { form: "8-K",  label: "Current Reports",  desc: "Material events & earnings" },
-                { form: "10-K", label: "Annual Reports",   desc: "Full-year 10-K" },
-                { form: "10-Q", label: "Quarterly Reports",desc: "Q1–Q3 10-Q" },
-                { form: "",     label: "All Filings",      desc: "Complete filing history" },
-              ].map(({ form, label, desc }) => (
-                <a
-                  key={form || "all"}
-                  href={`https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${encodeURIComponent(fullResult.ticker)}&type=${encodeURIComponent(form)}&dateb=&owner=include&count=40`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onMouseDown={e => e.preventDefault()}
-                  className="flex items-center justify-between w-full px-3 py-2 rounded-lg border border-zinc-700/60 hover:border-zinc-600 hover:bg-zinc-800/50 transition-colors group"
-                >
-                  <div className="flex items-center gap-2">
-                    {form && (
-                      <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded border flex-shrink-0 ${FILING_STYLE[form] || "text-zinc-400 bg-zinc-700/30 border-zinc-600/40"}`}>
-                        {form}
-                      </span>
-                    )}
-                    <span className="text-[12px] text-zinc-300 group-hover:text-blue-400 transition-colors">{label}</span>
-                    <span className="text-[11px] text-zinc-600">{desc}</span>
+            <div className="max-h-[480px] overflow-y-auto">
+              {filingsLoading && (
+                <p className="text-[12px] text-zinc-600 animate-pulse py-4 text-center">Loading SEC EDGAR filings…</p>
+              )}
+              {!filingsLoading && filings && filings.list.length > 0 && (
+                <div>
+                  <div className="flex items-center justify-between px-2 py-1.5 border-b border-zinc-800">
+                    <span className="text-[11px] text-zinc-600">{filings.list.length} recent filings</span>
+                    <a
+                      href={`https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${filings.cik}&type=&dateb=&owner=include&count=40`}
+                      target="_blank" rel="noopener noreferrer"
+                      onMouseDown={e => e.preventDefault()}
+                      className="text-[11px] text-blue-400 hover:text-blue-300"
+                    >All on EDGAR ↗</a>
                   </div>
-                  <ExternalLink size={11} className="text-zinc-600 group-hover:text-blue-400 transition-colors flex-shrink-0" />
-                </a>
-              ))}
+                  <div className="space-y-0">
+                    {filings.list.map((f, i) => (
+                      <a
+                        key={i}
+                        href={f.url}
+                        target="_blank" rel="noopener noreferrer"
+                        onMouseDown={e => e.preventDefault()}
+                        className="flex items-center gap-2 py-1.5 px-2 hover:bg-zinc-800/60 group transition-colors"
+                      >
+                        <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border flex-shrink-0 w-[52px] text-center ${FILING_STYLE[f.form] || "text-zinc-400 bg-zinc-700/30 border-zinc-600/40"}`}>
+                          {f.form}
+                        </span>
+                        <span className="text-[12px] text-zinc-300 group-hover:text-blue-400 transition-colors flex-1">
+                          {FILING_LABEL[f.form] || f.form}
+                        </span>
+                        <span className="text-[11px] text-zinc-500 flex-shrink-0 tabular-nums">{f.date}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {/* Fallback: unknown ticker or fetch failed — show type-filtered EDGAR links */}
+              {!filingsLoading && !filings && (
+                <div className="p-3 space-y-1.5">
+                  <p className="text-[11px] text-zinc-500 mb-3">Opens SEC EDGAR in a new tab.</p>
+                  {[
+                    { form: "8-K",  label: "Current Reports",   desc: "Material events & earnings" },
+                    { form: "10-K", label: "Annual Reports",    desc: "Full-year 10-K" },
+                    { form: "10-Q", label: "Quarterly Reports", desc: "Q1–Q3 10-Q" },
+                    { form: "",     label: "All Filings",       desc: "Complete filing history" },
+                  ].map(({ form, label, desc }) => (
+                    <a
+                      key={form || "all"}
+                      href={`https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=${encodeURIComponent(fullResult.ticker)}&type=${encodeURIComponent(form)}&dateb=&owner=include&count=40`}
+                      target="_blank" rel="noopener noreferrer"
+                      onMouseDown={e => e.preventDefault()}
+                      className="flex items-center justify-between w-full px-3 py-2 rounded-lg border border-zinc-700/60 hover:border-zinc-600 hover:bg-zinc-800/50 transition-colors group"
+                    >
+                      <div className="flex items-center gap-2">
+                        {form && <span className={`text-[10px] font-mono font-bold px-1.5 py-0.5 rounded border flex-shrink-0 ${FILING_STYLE[form] || "text-zinc-400 bg-zinc-700/30 border-zinc-600/40"}`}>{form}</span>}
+                        <span className="text-[12px] text-zinc-300 group-hover:text-blue-400 transition-colors">{label}</span>
+                        <span className="text-[11px] text-zinc-600">{desc}</span>
+                      </div>
+                      <ExternalLink size={11} className="text-zinc-600 group-hover:text-blue-400 transition-colors flex-shrink-0" />
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           )}
         </div>
