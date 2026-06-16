@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-15T23:11:45.355292+00:00",
+  "generated_at": "2026-06-16T00:38:34.375309+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
@@ -13,7 +13,7 @@
           "rs_52w": 98,
           "adr_pct": 5.64,
           "vol_surge": 1.44,
-          "mkt_cap": 228444494312,
+          "mkt_cap": 230505653018,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -68,28 +68,9 @@
     },
     {
       "name": "Semiconductors",
-      "theme_rs": 97.6,
+      "theme_rs": 97.5,
       "perf_1d": 7.38,
       "leaders": [
-        {
-          "ticker": "WOLF",
-          "price": 49.09,
-          "rs_52w": 98,
-          "adr_pct": 17.97,
-          "vol_surge": 1.31,
-          "mkt_cap": 2551310446,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
         {
           "ticker": "AXTI",
           "price": 110.74,
@@ -193,7 +174,7 @@
           "rs_52w": 98,
           "adr_pct": 8.63,
           "vol_surge": 1.57,
-          "mkt_cap": 270440868351,
+          "mkt_cap": 270208228271,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -213,6 +194,25 @@
           "adr_pct": 8.21,
           "vol_surge": 1.42,
           "mkt_cap": 8672663462,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "WOLF",
+          "price": 49.09,
+          "rs_52w": 97,
+          "adr_pct": 17.97,
+          "vol_surge": 1.31,
+          "mkt_cap": 2551310446,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
