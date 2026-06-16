@@ -1,90 +1,90 @@
 {
-  "generated_at": "2026-06-16 07:05 ET",
-  "phase": "PRE",
-  "session": "Pre-Market",
+  "generated_at": "2026-06-16 12:02 ET",
+  "phase": "POST",
+  "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 741.75,
-      "open": 740.71,
-      "high": 744.44,
-      "low": 735.03,
-      "close": 741.75,
-      "prev_open": 728.76,
-      "prev_close": 737.76,
-      "volume": 57079500,
-      "change_pct": 0.54
+      "price": 753.51,
+      "open": 754.55,
+      "high": 755.44,
+      "low": 751.71,
+      "close": 753.51,
+      "prev_open": 740.71,
+      "prev_close": 741.75,
+      "volume": 17599083,
+      "change_pct": 1.59
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 744.0,
-      "open": 738.1,
-      "high": 744.76,
-      "low": 737.38,
-      "close": 744.0,
-      "prev_open": 717.61,
-      "prev_close": 721.34,
-      "volume": 46525500,
-      "change_pct": 3.14
+      "price": 735.54,
+      "open": 742.28,
+      "high": 744.22,
+      "low": 732.51,
+      "close": 735.54,
+      "prev_open": 738.1,
+      "prev_close": 744.0,
+      "volume": 19559810,
+      "change_pct": -1.14
     },
     "^VIX": {
       "label": "VIX",
-      "price": 16.18,
+      "price": 16.11,
       "open": 16.2,
       "high": 16.21,
-      "low": 16.05,
-      "close": 16.18,
+      "low": 15.77,
+      "close": 16.11,
       "prev_open": 19.51,
       "prev_close": 17.68,
       "volume": 0,
-      "change_pct": -8.48
+      "change_pct": -8.88
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 77.4,
+      "price": 75.38,
       "open": 81.1,
       "high": 80.15,
-      "low": 77.14,
-      "close": 77.4,
+      "low": 75.3,
+      "close": 75.38,
       "prev_open": 81.4,
       "prev_close": 80.75,
-      "volume": 43602,
-      "change_pct": -4.15
+      "volume": 143666,
+      "change_pct": -6.65
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 69404.5,
-      "open": 69288.91,
-      "high": 70020.68,
-      "low": 69095.67,
-      "close": 69404.5,
-      "prev_open": 65176.23,
-      "prev_close": 66020.04,
-      "volume": 0,
-      "change_pct": 5.13
+      "price": 66020.04,
+      "open": 65176.23,
+      "high": 67065.94,
+      "low": 64998.11,
+      "close": 66020.04,
+      "prev_open": 63329.17,
+      "prev_close": 64217.27,
+      "volume": 190600000,
+      "change_pct": 2.81
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25047.95,
+      "price": 24910.41,
       "open": 24942.73,
       "high": 25110.28,
       "low": 24900.73,
-      "close": 25047.95,
+      "close": 24910.41,
       "prev_open": 24549.25,
       "prev_close": 24635.3,
       "volume": 0,
-      "change_pct": 1.68
+      "change_pct": 1.12
     }
   },
   "fred": {
-    "hy_oas": 2.71,
+    "hy_oas": 2.66,
     "yield_curve": 0.46,
     "hy_oas_stale": false,
     "yield_curve_stale": true
   },
   "breadth": {
-    "s5fi": 63.3,
-    "mmth": 66.9
+    "s5fi": 66.4,
+    "mmth": 68.2
   },
   "regime": {
     "credit_status": "Complacent",
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Pre-Market Brief: June 16, 2026",
-    "mood_emoji": "🚀",
-    "mood": "Aggressive Risk-On",
-    "narrative": "Global equities are surging in pre-market trading, led by a substantial rally in technology names. This widespread risk appetite is reflected in falling volatility and robust credit market sentiment.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 741.75 | +0.54% | 📈 |\n| Nasdaq 100 ETF | 744.00 | +3.14% | 📈 |\n| VIX | 16.18 | -8.48% | 📉 |\n| Crude Oil | 77.40 | -4.15% | 📉 |\n| Nikkei 225 | 69404.50 | +5.13% | 📈 |\n| DAX | 25047.95 | +1.68% | 📈 |",
-    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) currently sits at 2.71%, indicating a complacent regime for credit markets. Concurrently, the 10Y-2Y Yield Curve (T10Y2Y) is at +0.460, signaling a normal to steepening environment, despite the cached status. This combination implies institutional investors are comfortable extending risk and show a healthy appetite for higher-yielding assets.",
-    "analysis_para1": "Overnight, global markets exhibited strong bullish momentum, with the Nikkei 225 surging by +5.13% and the DAX gaining +1.68%. While Crude Oil dipped by -4.15% to $77.40, this appears to be a commodity-specific move rather than a broader risk-off signal. The substantial rallies in major Asian and European indices, coupled with a complacent US High Yield Credit Spread at 2.71%, collectively underscore robust global risk appetite and suggest US institutions will likely follow suit in today's session.",
-    "analysis_para2": "Today's primary flow appears driven by a powerful positioning squeeze in growth and technology stocks. The Nasdaq 100 ETF's notable +3.14% pre-market jump, significantly outperforming the S&P 500 ETF's +0.54%, suggests investors are aggressively rotating into high-beta names. This surge, combined with an 8.48% drop in the VIX to 16.18, implies a substantial unwinding of bearish bets and a broad-based shift towards risk-on exposure, likely fueled by short covering and new money chasing performance.",
-    "analysis_para3": "Traders should prepare for continued momentum but remain vigilant for potential profit-taking after the strong open. Key support for the S&P 500 ETF is around 740, with a stronger floor at 738. For the Nasdaq 100 ETF, watch 740 as initial support. Long entries are favored on minor pullbacks towards these levels, or on a break above pre-market highs for momentum continuation. A significant reversal below the session's opening range would serve as a risk-off threshold, signaling a need to reduce long exposure.",
-    "technical_signal": "No reversal pattern confirmed yet. Market breadth remains healthy, with 63.3% of S&P 500 stocks above their 50-day moving average and 66.9% above their 200-day moving average. Traders should monitor the VIX for any signs of an uptick and watch for sustained selling pressure below key intraday supports as potential early warnings for a shift in sentiment.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Anticipation builds as NVIDIA reportedly secures a massive data center AI chip contract, fueling projections of accelerated revenue growth."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft's new enterprise AI suite is gaining significant traction, with analysts upgrading price targets on strong adoption metrics."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla continues to benefit from overall EV sector enthusiasm, with price action driven primarily by technical momentum and retail flow."
-        }
-      ]
-    }
+    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
   }
 }
