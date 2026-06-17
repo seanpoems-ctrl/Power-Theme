@@ -1,81 +1,70 @@
 {
-  "scan_time": "2026-06-16 08:55 ET",
+  "scan_time": "2026-06-17 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "RXT",
-      "price": 5.92,
-      "gap_pct": 22.23,
-      "pm_volume": 12770900,
-      "avg_vol_10d": 15599200,
-      "avg_dollar_vol": 92347264,
-      "mkt_cap": 1474151100,
-      "rvol": 0.85,
-      "adr_pct": 16.17,
-      "category": "New Contract/Partnership",
-      "theme": "New Contract/Partnership",
-      "reasoning": "RXT deal announcement: Rackspace Shares Jump 30% After Securing AMD-Powered AI Infrastructure Agreement (RXT) - Y",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "ticker": "QURE",
+      "price": 26.99,
+      "gap_pct": 80.26,
+      "pm_volume": 2024261,
+      "avg_vol_10d": 1449293,
+      "avg_dollar_vol": 39116418,
+      "mkt_cap": 1687668694,
+      "rvol": 0.39,
+      "adr_pct": 6.23,
+      "category": "FDA",
+      "theme": "FDA",
+      "reasoning": "QURE FDA/regulatory event: FDA says 3-year trial data can support Huntington’s treatment filing - Stock Titan",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
       "conviction": 50,
       "grade": "C",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: Rackspace Shares Jump 30% After Securing AMD-Powered AI Infrastructure Agreement (RXT) - Yahoo Finance | Rackspace Technology stock surges 30% on AMD AI compute deal By Investing.com - Investing.com Nigeria | AMD and Rackspace plan 30 MW AI cloud for regulated industries and healthcare - Stock Titan",
-        "impact": "Contract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open."
+        "catalyst": "Headlines: FDA says 3-year trial data can support Huntington’s treatment filing - Stock Titan",
+        "impact": "Binary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form."
       },
-      "analysis_details": "• **The Announcement**\nHeadlines: Rackspace Shares Jump 30% After Securing AMD-Powered AI Infrastructure Agreement (RXT) - Yahoo Finance | Rackspace Technology stock surges 30% on AMD AI compute deal By Investing.com - Investing.com Nigeria | AMD and Rackspace plan 30 MW AI cloud for regulated industries and healthcare - Stock Titan\n\n• **Trade Implication**\nContract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open.",
+      "analysis_details": "• **The Event**\nHeadlines: FDA says 3-year trial data can support Huntington’s treatment filing - Stock Titan\n\n• **Risk Profile**\nBinary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Rackspace Shares Jump 30% After Securing AMD-Powered AI Infrastructure Agreement (RXT) - Yahoo Finance",
+          "title": "FDA says 3-year trial data can support Huntington’s treatment filing - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxORy1BcTU5UlhEZ05SY1NwSHZCV2k5Slg4X3BfMW9xdDZqSGV2cWp1bEE4enlUX2xTa0U3RzFXS3VxeVYyVlQ0YnNSRmRkakNJcFRyXzl3M0JjV1dXWGdOaU83eGZ1d0dhN2d1YlVyZU5ESHcxSzBZTTJtTzZHVmpqNUE3TmlFbkpPbDNYUTczd2xUVTZWRUpoa251dEFfdw?oc=5"
-        },
-        {
-          "title": "Rackspace Technology stock surges 30% on AMD AI compute deal By Investing.com - Investing.com Nigeria",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPNFV4ZHdhUk1Qb0IxaXlOSWlBby12cVVvZExQaHlHcFNCdVQzUjZOYTY5clNQanA5alVXVTNRMTNOTm9aYUR3R0RoZjlxbEQzV3JzeVpaZmkwcWlKYjNVNzAxVlRfNUpPal8yRUxjVUI4QVhXZVhGUl9rT1pjcmI3OTV0YUNzUlc5alpBcjNaeFZlaFlHNTN2OVFzLTdiVjNXRTFHRlBITzdERW50bnJ4d1NlbkdsUQ?oc=5"
-        },
-        {
-          "title": "AMD and Rackspace plan 30 MW AI cloud for regulated industries and healthcare - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPZE92ZEQ2MDJyNFRpRW03RnUyRWpSUU1uVUdZN1JBcDlreUFmRWEtaWtPcXdNV3hCWE5tWk1GT1lITzVjcjRlQjN0ZmlGZE1sem1pTUZ4TndSWkVLRUVzUHBrNUVySzgwb3lqSUZmWUdFdVJELTlORDlPV2cxRkhqc0llZXJINV9ndnBnVnFYQmlRdENPNGN2QlY0dGlkdTBudjRqb0ZmdkQ4aDR4ckZpN3IzUVh4RDVOY0lj?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOdW13X2Rvc3dNdGpxYl9hajJ6UmxXbldndy1vZEZLNFNRV0RSM2pSaThzenc5MXlZYXl1NF9oaDBuR2VRenU2cHR0UHNES09fLXV1N01hTDF3UUlmNi1xVE9rYUk3Qi1Hc1Y2bnl3blQ5MWEwbjBPYVNrRVpiWE02MmZLZjB6eC0wTUxxRlZGdnRkYmJ5MFJmSmVkVjZuREpDR3cyTVVNNWZRbUk5Y0lnZjlLclVrRHNOUmd2OUFhYmM?oc=5"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-06-16",
+        "filing_date": "2026-06-17",
         "form": "8-K",
         "items": [
-          "7.01",
           "8.01",
           "9.01"
         ],
         "category": "Others",
         "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/1810019/000181001926000059/rxt-20260616.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1590560/000110465926074853/tm2618105d1_8k.htm"
       },
-      "float_shares": "96.35M",
-      "short_float": "15.93%",
-      "daily_pct": 8.73,
+      "float_shares": "56.57M",
+      "short_float": "19.62%",
+      "daily_pct": -3.16,
       "industry": "—",
-      "technical_status": "Fail (Avg $Vol $92M < $100M)",
+      "technical_status": "Fail (Avg $Vol $39M < $100M)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 75,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "RXT deal announcement: Rackspace Shares Jump 30% After Securing AMD-Powered AI Infrastructure Agreement (RXT) - Y",
-        "discrepancy_note": ""
+        "primary_claim": "FDA says 3-year trial data can support Huntington’s treatment filing",
+        "discrepancy_note": "Source A (Finviz) contains no news items related to QURE. Source B (Google News) [1] directly confirms the claim, but this is only one of the two main sources."
       },
-      "gates_passed": 2,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": false,
+        "gate_price": true,
         "gate_dollar_vol": false,
         "gate_mkt_cap": false,
         "gate_adr": true
@@ -85,148 +74,32 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "PURR",
-      "price": 9.34,
-      "gap_pct": 13.28,
-      "pm_volume": 776376,
-      "avg_vol_10d": 19206699,
-      "avg_dollar_vol": 179390569,
-      "mkt_cap": 1349140333,
-      "rvol": 0.66,
-      "adr_pct": 9.89,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "122.43M",
-      "short_float": "6.51%",
-      "daily_pct": 7.36,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "CYTK",
-      "price": 71.38,
-      "gap_pct": 8.59,
-      "pm_volume": 100092,
-      "avg_vol_10d": 1603862,
-      "avg_dollar_vol": 114483670,
-      "mkt_cap": 8881996061,
-      "rvol": 0.45,
-      "adr_pct": 3.79,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "CYTK: Cytokinetics (CYTK) CEO Robert Blum sells 7,500 shares in open market trade - Stock Titan",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "ticker": "AEHR",
+      "price": 104.83,
+      "gap_pct": 8.84,
+      "pm_volume": 68572,
+      "avg_vol_10d": 1896598,
+      "avg_dollar_vol": 198820368,
+      "mkt_cap": 3297244748,
+      "rvol": 0.61,
+      "adr_pct": 11.77,
+      "category": "New Contract/Partnership",
+      "theme": "New Contract/Partnership",
+      "reasoning": "AEHR deal announcement: Aehr Test Systems stock jumps 11% on silicon photonics order - Investing.com",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: Cytokinetics (CYTK) CEO Robert Blum sells 7,500 shares in open market trade - Stock Titan",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+        "catalyst": "Headlines: Aehr Test Systems stock jumps 11% on silicon photonics order - Investing.com | Aehr wins new silicon photonics test deal tied to AI data centers - Stock Titan | Aehr Test Systems (AEHR) Is Up 11.2% After Record AI Burn-In Orders Amid Margin Pressure - simplywall.st",
+        "impact": "Contract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open."
       },
-      "analysis_details": "• **What Happened**\nHeadlines: Cytokinetics (CYTK) CEO Robert Blum sells 7,500 shares in open market trade - Stock Titan\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Cytokinetics (CYTK) CEO Robert Blum sells 7,500 shares in open market trade - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNbXpkSUVNRjhWTHVRU2VXRGZ1MXJBTUY5ekVIb1MxQ2VfU3IxRG54RE4tQWZIano2VzJNaUtWb1NLcE5LbnI5R3hweHBwTW1YdUFMV0p2MlZFUFBTUEg2R3RCXzBQa1RndU9TYWR3WlhtNmpCaEJkd2FBaWthaC1wRzQwYzlIdngtclh1Y08wazZjUEhZR3VNcndnVkxwX09LX3gxQ3RvT0RJTHdkdnA0?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "119.20M",
-      "short_float": "13.00%",
-      "daily_pct": 1.75,
-      "industry": "—",
-      "technical_status": "Fail (ADR 3.8% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 60,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "CEO Robert Blum sells 7,500 shares",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "WDC",
-      "price": 653.53,
-      "gap_pct": 6.77,
-      "pm_volume": 502307,
-      "avg_vol_10d": 7000321,
-      "avg_dollar_vol": 4574919783,
-      "mkt_cap": 225260121801,
-      "rvol": 1.57,
-      "adr_pct": 6.11,
-      "category": "Upgrade",
-      "theme": "Upgrade",
-      "reasoning": "WDC analyst action: Hard Disk Drive Market Growth Bodes Well for Western Digital (WDC) - Yahoo Finance",
-      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Hard Disk Drive Market Growth Bodes Well for Western Digital (WDC) - Yahoo Finance | Western Digital (WDC) Hits All-Time High on Morgan Stanley 33% PT Upgrade - Yahoo Finance | S&P 500 breadth stays positive as stocks rise Monday",
-        "impact": "Analyst upgrades carry limited institutional conviction and often gap-fill by midday. Fade into strength or wait for a dip entry near VWAP."
-      },
-      "analysis_details": "• **The Analyst Action**\nHeadlines: Hard Disk Drive Market Growth Bodes Well for Western Digital (WDC) - Yahoo Finance | Western Digital (WDC) Hits All-Time High on Morgan Stanley 33% PT Upgrade - Yahoo Finance | S&P 500 breadth stays positive as stocks rise Monday\n\n• **Trade Implication**\nAnalyst upgrades carry limited institutional conviction and often gap-fill by midday. Fade into strength or wait for a dip entry near VWAP.",
+      "analysis_details": "• **The Announcement**\nHeadlines: Aehr Test Systems stock jumps 11% on silicon photonics order - Investing.com | Aehr wins new silicon photonics test deal tied to AI data centers - Stock Titan | Aehr Test Systems (AEHR) Is Up 11.2% After Record AI Burn-In Orders Amid Margin Pressure - simplywall.st\n\n• **Trade Implication**\nContract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open.",
       "peer_tickers": [
-        "STX",
-        "SMCI",
-        "NTAP"
+        "COHU",
+        "ONTO",
+        "MKSI"
       ],
       "leverage_etfs": [
         {
@@ -242,46 +115,253 @@
       ],
       "headlines": [
         {
-          "title": "Hard Disk Drive Market Growth Bodes Well for Western Digital (WDC) - Yahoo Finance",
+          "title": "Aehr Test Systems stock jumps 11% on silicon photonics order - Investing.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPTDVYbXMzY01HMnhwd1pzbkIzU29vWXBNcHVMQkpzbU1DUjV6VjdadjRnbFZ4c2pKZmlEMFg0MWdoQl92dFY5b3B5VXVXTnpVOVBGSjBoWDNHUUdOVzVOX0dsWk5Kakt3WHh2OGd3bkhBRDNtMlN5d2VyZFlxaWQ0NmNzNkNxWkstLWFyaXlsTnhpV29CRV9tQ2Zn?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNT25QRGFjVXNUN2NGc01GMHZkYXFLdjB2LW9GMnVialpmbUZaWW5YVk1WLVBReTNyS1dyODJOcTBGcWlmdGdfRVFjOHNnTDBvc0pTdjZrMElyb0cxMjJyQm5TRFRwOC05OW1FUGFrSVl4RTN1OFhDZ1Q2dnk2SHZOQWViVUVVOWU3WmgxSnh3eDNDYjJiVXJNU0Nlb0hRUzkwa3dBTndEck9xdFRTcXFJckVYN3R2MHZRRGFaazZR?oc=5"
         },
         {
-          "title": "Western Digital (WDC) Hits All-Time High on Morgan Stanley 33% PT Upgrade - Yahoo Finance",
+          "title": "Aehr wins new silicon photonics test deal tied to AI data centers - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOT3ktWVZpNGh4T0N2dUM5ejh1aHdsXzBxbE9OWkZJeUZoV2I0SENMUjFudTBNbHFRSE1RSXRvTFBiM0pxdE9PS0xjNEluS2w5NURpUGg2VFBJNG1nODB2bzRURm9jR1laRF9CTEZ5eThLQ0hleElZcEF6bkdiSVJNLTE5dHBhdXhOM0dVRm1xT0Z2VndCSzNjNUtn?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOU05PTTJxaWk4aVRPaTNEcWlzYXNrYURfTEZUb2U4aDZOUlg0NmdYUnptRl9DRUV0aElneTluTE1JOW5lOU13ek5XQlZwZ0RxQnlzYXpOQmtUMTZNNlR3MEN1bjhaZV95czFzQ2EtYm5KNTJqR0xxS3N5Y0ZsazJmQ1BqcVdBdDZlakx0MW8wODFyMktEcVl3cmpvaEMzUTNyaUhubE1DWUx0V01rcE1UMTFUemtDbEstOW9hZnA1aw?oc=5"
         },
         {
-          "title": "S&P 500 breadth stays positive as stocks rise Monday",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/livecoverage/stock-market-today-dow-jones-s-p-500-nasdaq-oil-prices-us-iran-peace-deal-strait-of-hormuz/card/s-p-500-breadth-stays-positive-as-stocks-rise-monday-oflD6OdOW1Oolca2pEvt?mod=mw_FV"
-        },
-        {
-          "title": "Quantum Stocks Jump as Growth Trade Revives",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/quantum-stocks-jump-growth-trade-180020171.html"
-        },
-        {
-          "title": "The chip-stock rally is back in full force - thanks to two big geopolitical developments",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/story/the-chip-stock-rally-is-back-in-full-force-thanks-to-two-big-geopolitical-developments-4e3ec21d?mod=mw_FV"
+          "title": "Aehr Test Systems (AEHR) Is Up 11.2% After Record AI Burn-In Orders Amid Margin Pressure - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNbHpmbXpZSFBudGhNTUdYVFlNc25McDhMT1NLTW5wRUt2VVZDNHBEUHFIMGdWdTJFazVxNHVfQ0VZVm5talNqejZBbHZWV1hUb1RMY0xKQ1JfMEs1WTF6ZTFKRlpiT2hnV0J4cERhbXUyMndUOERYMjRVb0VnRWgxRWk2eDVwbko2N2xvSXhQY1ZIckZnWnotc05LYzhERmtZY3pwazFoMHFWZ3NzRklxWlRjRWxRTjJkd1ZmZjRmaW9wdVpwbW9ZVmMxeEpsU0NfdkNZZlBOeGVXd9IB3wFBVV95cUxQV194RWMwcy1vcmZ3c0xkTDBfODQzYnByMU5vSy1UeUhSWnNzWkZkNFpfQklRSGNQQlM5QzhkRWhUYnpsUmFMSWE0aFdsb0JaTHpPakVsV2NaOER1Y2VwbmlBVEJIYzJFR2tKNGpTUzhuTnlJMXE5NlphZGZZM3BleFM5WWFRUnNPTjVlWDRqZEd5bm8zdWJUZFpmSGgxYmxKWWdORVlYU2Rjd1JtYk5GY3lfRFdXYVZXY0hIU3ljdTJMX3Q1ZWxJSXFubWs4RGljdDNQaUhOX3BESHdJa25F?oc=5"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "341.42M",
-      "short_float": "9.33%",
-      "daily_pct": 16.1,
+      "float_shares": "29.75M",
+      "short_float": "13.79%",
+      "daily_pct": -9.54,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 80,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "WDC analyst action: Hard Disk Drive Market Growth Bodes Well for Western Digital (WDC) - Yahoo Finance",
-        "discrepancy_note": ""
+        "primary_claim": "stock jumps 11%",
+        "discrepancy_note": "Source A (Finviz News) does not mention the stock jump percentage. Source B (Google News) contains articles with conflicting percentages: Investing.com reports '11%' while simplywall.st reports '11.2%'. Since both sources are required to confirm with exact matching specifics, and Finviz has no data, and Google News has conflicting numbers, it is a discrepancy."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "REPL",
+      "price": 8.78,
+      "gap_pct": 7.69,
+      "pm_volume": 65747,
+      "avg_vol_10d": 3740746,
+      "avg_dollar_vol": 32843750,
+      "mkt_cap": 724987551,
+      "rvol": 0.33,
+      "adr_pct": 9.9,
+      "category": "FDA",
+      "theme": "FDA",
+      "reasoning": "REPL FDA/regulatory event: REPL stock shot up 80% today – what’s the deal with FDA? - MSN",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: REPL stock shot up 80% today – what’s the deal with FDA? - MSN",
+        "impact": "Binary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form."
+      },
+      "analysis_details": "• **The Event**\nHeadlines: REPL stock shot up 80% today – what’s the deal with FDA? - MSN\n\n• **Risk Profile**\nBinary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "REPL stock shot up 80% today – what’s the deal with FDA? - MSN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwJBVV95cUxQSm44X1V4ZG92TkctQWxQZkkzSXhONWVidUNpbUJEaS1zbG13Sk5TOEFLbGZNUUNES3BIRHIzQlB5OGh1LXNFN1NISF9iWFVQZXQxbTBLUG9TY3dIT3lsYmEtWi1rbWNYaHVGX3RFWDRaSG1ZcGFhQ3NsMEVlTEJtN2l1NlNBcGhhSHd3c0ppdFRKOGlWQzlOckp1RVVia3R3TUM4TDI3WGFYQ0FQRlk5Ul8ydGdqMS1Yai1LRTUxelNWWVN4eW45R3c5N3NZRHRHdkNEUlBiT0MtbUFwaFlpVXVfRnd5SEtPbExIWUdNRlBlMzd4UG9TVXdWTmlNSTJVbHFKQWJFLU5qWHF4ODhGYWdPQlZZQU56emNWSFNYQ3NWLUoxbFVpa0NiaDNxYl9hVk1XU1g5ODdXY0Z2b1Vv?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "76.24M",
+      "short_float": "34.04%",
+      "daily_pct": -2.01,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $33M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "REPL stock shot up 80% today",
+        "discrepancy_note": "Source A (Finviz News) has no information, while Source B (Google News/MSN) mentions 'REPL stock shot up 80% today'."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "WOLF",
+      "price": 45.0,
+      "gap_pct": 5.51,
+      "pm_volume": 93531,
+      "avg_vol_10d": 7350182,
+      "avg_dollar_vol": 330758190,
+      "mkt_cap": 2175258636,
+      "rvol": 0.78,
+      "adr_pct": 15.92,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "WOLF: Adobe Stock Meets Alphabet And Wolfspeed In This AI Trifecta - simplywall.st",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: Adobe Stock Meets Alphabet And Wolfspeed In This AI Trifecta - simplywall.st",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: Adobe Stock Meets Alphabet And Wolfspeed In This AI Trifecta - simplywall.st\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [
+        "NVTS",
+        "STM",
+        "ON"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "Adobe Stock Meets Alphabet And Wolfspeed In This AI Trifecta - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOWmhqYlhlWHlldW9yQTZvNmE4WWRHcHlmNkZuSm9iaHhuTElBVEhwV2ZZeVM3QTQ5Z2VFQ0RscjRuSmRzR3I0Yl9jbEMxSVJTb3A1RXI4LU9yODNvb25EWmlvZ21MM0ctcW5RSUgxYmtMM2dhcEk2b0tIRHRWODlVNG9DNHJObVNfSjQzcDNMQ0F3aE1nNmtoZ0pqZWRUaGZKRnJMcGJ3SWMySzdqNDNGUEhpRWt4X0NaWnNBTWNqUnhSUdIBxwFBVV95cUxOT3RUUWM0NUhXbnFNY1hLWjVkcmJKd2s5N215Ymsxc1ZiYTJPNGhRQ0RqUWxBeVZhdGsyMGF6Nk4xcklRTEpkMEQ0Rk85STJwT3VfT3dlU0xQNms4cGtwZlBwbXp5SE5JZFVFTFAzR29ybzFQdFo3dE9kQS1iaG45eWc5N1c5bHU3Y2tCNHNjTkdENnNqcDJzQ3U0WHdHaUtJd2czalpKcDlCVVAtM2RrZHhjZjFENmY5MFhfR3JlUlZUSkNEQjIw?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "30.05M",
+      "short_float": "87.75%",
+      "daily_pct": -8.33,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "The existence of an article titled 'Adobe Stock Meets Alphabet And Wolfspeed In This AI Trifecta' published by simplywall.st, linking WOLF, Adobe, and Alphabet in an AI context.",
+        "discrepancy_note": "Source B (Google News) directly confirms the article title and source as stated in the catalyst claim. Source A (Finviz News) provides no information to confirm or deny this claim."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "ASTS",
+      "price": 82.25,
+      "gap_pct": 5.17,
+      "pm_volume": 855473,
+      "avg_vol_10d": 23969518,
+      "avg_dollar_vol": 1971492856,
+      "mkt_cap": 31923244847,
+      "rvol": 0.77,
+      "adr_pct": 10.39,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "ASTS: ASTS Stock Jumps Overnight: BlueBird Trio Cleared For SpaceX Launch As Countdown Begins - ",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "B",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: ASTS Stock Jumps Overnight: BlueBird Trio Cleared For SpaceX Launch As Countdown Begins - Yahoo Finance | AST SpaceMobile satellites target nearly 200 Mbps to standard smartphones - Stock Titan",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: ASTS Stock Jumps Overnight: BlueBird Trio Cleared For SpaceX Launch As Countdown Begins - Yahoo Finance | AST SpaceMobile satellites target nearly 200 Mbps to standard smartphones - Stock Titan\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "ASTX",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "ASTS Stock Jumps Overnight: BlueBird Trio Cleared For SpaceX Launch As Countdown Begins - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPS05xYnVDUnNFMjFmbTJoY1d2eXVHQWpUNFY0b0llazZpazlOSFZLT3pQbDhCal9ubTBMaFd1Z3FDdTYtRkZaQUszT2hpOW9iOURydUtVck13bm1IYzFSSm1tcHcwVkxzVVpoSFFtVzRZc3BQTUk1NUpGQ09HRVhSZ2VKQTJHMFhlZVFReTNBMklqQWhWUWFlWVotcGZPUEtGRGc?oc=5"
+        },
+        {
+          "title": "AST SpaceMobile satellites target nearly 200 Mbps to standard smartphones - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPNkU0YTdOVU9UekVZS3M3c0hjRDVma2FaZ1htNUlFOElRTUVkMGVqbzhQV2JTdnF1ZHdBYl9wSTBESFlGS29RMUFLUTZGZXVLb2xsREM1dlVPV0NMUk52dWJ3QU12SDVOeEFNcThVcmxYMkE1UUVlMUU0LWVHMWxoam1Dd3NIWndqaXEzc0FLMVRzTUVyRWFvVXJyU0RGV1E3MHZLUWloeGpWd2ZHSU4tUU0wUlNQYmJPRTlzc29QbVQ?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-06-15",
+        "form": "8-K",
+        "items": [
+          "5.07",
+          "9.01"
+        ],
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/1780312/000149315226028544/form8-k.htm"
+      },
+      "float_shares": "181.66M",
+      "short_float": "30.14%",
+      "daily_pct": -6.08,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "BlueBird Trio Cleared For SpaceX Launch",
+        "discrepancy_note": "While Finviz [1] and Google News [2] confirm 'BlueBird Trio Cleared For SpaceX Launch', Google News [4] mentions 'Successful BlueBird Launch, 6/17/2026'. The phrase 'Successful BlueBird Launch' implies the launch has already occurred, directly contradicting 'Cleared For SpaceX Launch As Countdown Begins' which signifies an imminent event. Furthermore, the date '6/17/2026' in Google News [4] suggests a future event or a reporting date unrelated to an imminent launch, creating ambiguity regarding the timing and status of the 'BlueBird Trio' launch."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -297,62 +377,57 @@
     },
     {
       "ticker": "EOSE",
-      "price": 6.38,
-      "gap_pct": 6.58,
-      "pm_volume": 306822,
-      "avg_vol_10d": 20119131,
-      "avg_dollar_vol": 128360056,
-      "mkt_cap": 2166099601,
-      "rvol": 0.6,
-      "adr_pct": 9.42,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "EOSE: Eos Energy (EOSE) CEO exercises 200,000 options and retains stock stake - Stock Titan",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "price": 6.81,
+      "gap_pct": 5.14,
+      "pm_volume": 762754,
+      "avg_vol_10d": 21392647,
+      "avg_dollar_vol": 145683926,
+      "mkt_cap": 2312090580,
+      "rvol": 1.9,
+      "adr_pct": 9.51,
+      "category": "New Contract/Partnership",
+      "theme": "New Contract/Partnership",
+      "reasoning": "EOSE deal announcement: EOSE Stock Draws Buy Rating As Z3 Battery Deals Ramp - StocksToTrade",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 50,
       "grade": "B",
       "finviz_theme": "—",
       "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Headlines: Eos Energy (EOSE) CEO exercises 200,000 options and retains stock stake - Stock Titan | Eos Energy Enterprises Launches Commercial Production at Second Manufacturing Facility - marketscreener.com | New Eos battery factory built to supply Texas and Scottish projects - Stock Titan",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+        "catalyst": "Headlines: EOSE Stock Draws Buy Rating As Z3 Battery Deals Ramp - StocksToTrade | Eos Energy signs exclusive DACH storage pact, with projects now in construction - Stock Titan",
+        "impact": "Contract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open."
       },
-      "analysis_details": "• **What Happened**\nHeadlines: Eos Energy (EOSE) CEO exercises 200,000 options and retains stock stake - Stock Titan | Eos Energy Enterprises Launches Commercial Production at Second Manufacturing Facility - marketscreener.com | New Eos battery factory built to supply Texas and Scottish projects - Stock Titan\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "analysis_details": "• **The Announcement**\nHeadlines: EOSE Stock Draws Buy Rating As Z3 Battery Deals Ramp - StocksToTrade | Eos Energy signs exclusive DACH storage pact, with projects now in construction - Stock Titan\n\n• **Trade Implication**\nContract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Eos Energy (EOSE) CEO exercises 200,000 options and retains stock stake - Stock Titan",
+          "title": "EOSE Stock Draws Buy Rating As Z3 Battery Deals Ramp - StocksToTrade",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPblR2UURhSjJSZVJjY2VkODBYQURGdnFRb05nZkFRUUNhejI5cm5UR3VUMU5IVVZGR19GZFNxVXRSYzY0b3U4d3AyQ3pWMTlLMVY2eENIN1k3LWZQS2U0ZW1pNlhuYXlFeWRHeC1tRkd3T0FkX3RHRF9qQmQ4SHpteTVuOWhHZEMyLS1zMGludU9LMGYwdzVPd0FCWHJicmZocHp1bWZoWjdCZWdCZ2xfZjJmRV9IeS1WUTRrVA?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOWXN5c1BYelRvemx3UzlBdm50OVJqeUV2TEJJVElwYndkYVVhNU5LV3kzZ0lMTUV6STJhRnpiakJGaUVrcDBwc2piVEJtMGxaRXgzZ3hUVE1abnU3bndPaWRJam82eldIeG1VVDVUd3Iyd3VlX09XVHBqRTlpYTl3QWEyUmlUUQ?oc=5"
         },
         {
-          "title": "Eos Energy Enterprises Launches Commercial Production at Second Manufacturing Facility - marketscreener.com",
+          "title": "Eos Energy signs exclusive DACH storage pact, with projects now in construction - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPS0RaWXhsa19pVTgzM1JpajY4cHFzREFuWm82a2c3OU1KR04wenZKVjc5QWNIQndValhBVDB3b3BUQ25jN3R1aUFaejJCaE1GWlBjaldZdEZxamR4SkpVU2JxdE8yQ2pBMVRtZVNWS3BvWUswZko0eGN3Ykd3V004WTNiQ1dfa2pZRGRoTDhDYmF0dUc3b3lfTFRvM3JkUm5CTGxjMWMtVFpGbVlpZFdRX3phOW44SlFxdy0yQ05Oek0xdGVPNG9hRG5YV1JwUlVTeG51SF9B?oc=5"
-        },
-        {
-          "title": "New Eos battery factory built to supply Texas and Scottish projects - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNOS1JamR1ZmpsLTZjX1VLUkgxNGlqVklHal9KdlNwMkY5aThJcTEzVXIzNUZ5QkxOVENZT29QLUNYRng1ODdYbkxObmttWVNoZmp0QnQ1MjBkOF85ZGZMUksxcHA1Q1Fud1c0d0RINE9QN2d4S2t1Q2czNUdtZnhsMmJUSmd4SEZwRTMyWklPUzRtdnVFVUJESmZiNHZWZ2E5bVV4NnJPOGV1b2dkcE1DemxWeWRlMU1iMFE?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNeTJlVEIwbnZEdVVXSDFZcDdhRTIzZkZJNE5sdmNqYzhEVjJwbUlOVTZmNnJpcnQyRzRwejFzN2pvNjloZDhpYmk5aUZ6UV9TX2xyTnZGUkhBOVc5b2dHMDVpSGZFVy0wYnVHcDhVbVUzdFU5Yi1yZjN5Zk5faFhuWEhWalNvclJKN1g1UE84aF9UbHQ1YWNZbVNVclZnYVRJZmNoZ0RxT3drNTVRWHYwZkJJNW9qcHZTNlE?oc=5"
         }
       ],
       "edgar_filing": null,
       "float_shares": "333.24M",
       "short_float": "31.06%",
-      "daily_pct": 5.28,
+      "daily_pct": 6.74,
       "industry": "—",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
+        "status": "Discrepancy",
+        "confidence_score": 75,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "EOSE: Eos Energy (EOSE) CEO exercises 200,000 options and retains stock stake - Stock Titan",
-        "discrepancy_note": ""
+        "primary_claim": "New deals for Z3 batteries are ramping up, leading to a 'Buy Rating'.",
+        "discrepancy_note": "The primary claim mentions 'Z3 Battery Deals'. Source B [4] from 'StocksToTrade' is the only source that explicitly mentions 'Z3 Battery Deals Ramp' and 'Draws Buy Rating', which is the origin of the catalyst summary itself. Source B [1] mentions a 'DACH storage pact' which is a new deal/partnership, but does not specify it involves 'Z3 batteries'. Other sources refer to stock movement or general performance without detailing specific battery models or deals. Since only one source (the origin of the claim) fully corroborates the specific 'Z3 Battery' detail, and other deals mentioned don't specify Z3, it's a discrepancy in terms of independent confirmation of the *specific* Z3 detail."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -363,168 +438,17 @@
         "gate_adr": true
       },
       "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "STX",
-      "price": 1018.8,
-      "gap_pct": 5.71,
-      "pm_volume": 135472,
-      "avg_vol_10d": 3240918,
-      "avg_dollar_vol": 3301847258,
-      "mkt_cap": 228444490897,
-      "rvol": 1.9,
-      "adr_pct": 6.25,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "STX: Seagate (NASDAQ: STX) EVP converts 678 RSUs into 678 ordinary shares - Stock Titan",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Seagate (NASDAQ: STX) EVP converts 678 RSUs into 678 ordinary shares - Stock Titan | Seagate (STX) Stock After 224% YTD Surge Is The AI Storage Hype Justified - simplywall.st | Quantum Stocks Jump as Growth Trade Revives",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: Seagate (NASDAQ: STX) EVP converts 678 RSUs into 678 ordinary shares - Stock Titan | Seagate (STX) Stock After 224% YTD Surge Is The AI Storage Hype Justified - simplywall.st | Quantum Stocks Jump as Growth Trade Revives\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [
-        "WDC",
-        "NTAP",
-        "HPE"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "Seagate (NASDAQ: STX) EVP converts 678 RSUs into 678 ordinary shares - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOZFBiRFEycVlSOVBfdlp5cjk2YjJwem5XbUpEb2xlMEs5cS1CLV84cVh5V3VBNE9FS2pBeWdISmxVQWdWZkRYZ2xQRDdtVzIyZEotRmFSbnJTb3l6VXhBN2pBZVM4N3kzcG1Ja0hDVGlQZGYxTWNoUURJd3U5RWtFaFk2aHBaREVwa24xUkNXUjBaMkhwZWhzN3hibWpmRWZ3bGNsN1hqYmVxNEJweHdDOTFwX1FYMUJOeTUzelNfRm5PUQ?oc=5"
-        },
-        {
-          "title": "Seagate (STX) Stock After 224% YTD Surge Is The AI Storage Hype Justified - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxOVHpfeEgwWDJMR25FM3R2MjdDRklyRkprRkEwSEpCellBRnJsc0l4Rm82U1BHWUtURHN0RTlaR2VVRlJ5YmdWbmtYenpQRHF6ZUdiajNyTGsxc1RJa1BkMWVON3FnNkZQRW15T09nc3ZhTGNWdXBtSmZ0SDNuN3NtM2ktVEJ3elVKVzVYaEtpejAtMk1maGhsYW52S1lqVklOSDlsRjI5cnBMNHVDYXlTa1o1Z2RUQmc4VUJ0OE5YaTF3bW5oVjVJeUx2VDBvWVR1U3h5NkROdjXSAd4BQVVfeXFMTUNSVUZQcy15dVZ5NEZiMDNRZk0wWUF4bWNHbFE1d1JtcnhoSDh5WW1HQVZzMTdrLVFjM1R1Um1PbngyUU9Xc0l5RzVTRXBHYkhKR0dHbktYeG5Cdks3WWt2aF9IZWpUaG1ZTHpVUE5PUlJudmJ5Tm1vVDdhS0c0QUZGSk1pX2hRRzhQOXNSTDhUZXNmR0xLVnptUHRDZ3pFeGhDZ0did3RCYmllRXp0cXFjM3dzdVBtYkNLbkwyaTBVa3k3b3ZmNU02Y0dZMUFYbXF5UTBXUWx4R3NSRjhB?oc=5"
-        },
-        {
-          "title": "Quantum Stocks Jump as Growth Trade Revives",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/quantum-stocks-jump-growth-trade-180020171.html"
-        },
-        {
-          "title": "The chip-stock rally is back in full force - thanks to two big geopolitical developments",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/story/the-chip-stock-rally-is-back-in-full-force-thanks-to-two-big-geopolitical-developments-4e3ec21d?mod=mw_FV"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "223.63M",
-      "short_float": "4.05%",
-      "daily_pct": 9.43,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "STX EVP converts 678 RSUs into 678 ordinary shares",
-        "discrepancy_note": "Source B [4] from Stock Titan explicitly states 'EVP converts 678 RSUs into 678 ordinary shares'. However, none of the headlines in Source A (Finviz News) mention this specific RSU conversion or the number 678. Source B [3] mentions a different transaction: 'EVP & CTO of $STX Sells 466 Shares', which is not the same as the catalyst claim."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "MBLY",
-      "price": 9.53,
-      "gap_pct": 5.04,
-      "pm_volume": 122906,
-      "avg_vol_10d": 4970098,
-      "avg_dollar_vol": 47365034,
-      "mkt_cap": 8026033654,
-      "rvol": 0.71,
-      "adr_pct": 5.42,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "MBLY: Mobileye stock rises on plans for robotaxi business By Investing.com - Investing.com India",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Mobileye stock rises on plans for robotaxi business By Investing.com - Investing.com India",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: Mobileye stock rises on plans for robotaxi business By Investing.com - Investing.com India\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Mobileye stock rises on plans for robotaxi business By Investing.com - Investing.com India",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQZlAwMk1vVHpIcU5sQnNmMjFQVEgwc2xWczgxYWVhMXp2OGZZQnlMenA5YVlYOTRIOW9NT1dDWmlZc1hfUm1Ncy1JRDVtMjEzYmJDN3dGaVhsWUNkUktZRVp3ZUo3bFBfd3lINGlvY1NxVHdyNTVzVmhzUXRtZGVjOHNieGtKdkdndlA1TXhRZmJLV3JOUlNOOVVhbmJNOTRMekJJY3NLS05TczhNTGhGLU1BV25td2ZIUnRRX2hNbW1wUQ?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "169.74M",
-      "short_float": "16.50%",
-      "daily_pct": 2.03,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $47M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 60,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "MBLY: Mobileye stock rises on plans for robotaxi business",
-        "discrepancy_note": "Source A (Finviz News) provides no information to confirm or deny the claim. Source B (Google News) articles [1] and [3] confirm the claim, but since Source A has no content, the condition that 'BOTH sources confirm' cannot be met."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 6,
+    "small_gaps": 5,
     "large_gaps": 1,
-    "total_headlines": 17,
+    "total_headlines": 10,
     "monthly_cost_usd": 0.01
   }
 }
