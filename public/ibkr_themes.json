@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-06-17T00:29:45.303532+00:00",
+  "generated_at": "2026-06-17T23:14:06.272557+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
-      "name": "Hardware",
-      "theme_rs": 98.0,
-      "perf_1d": 4.22,
+      "name": "Semiconductors",
+      "theme_rs": 96.5,
+      "perf_1d": 4.74,
       "leaders": [
         {
-          "ticker": "WDC",
-          "price": 681.08,
+          "ticker": "AEHR",
+          "price": 112.62,
           "rs_52w": 98,
-          "adr_pct": 6.19,
-          "vol_surge": 2.02,
-          "mkt_cap": 234756111672,
+          "adr_pct": 11.84,
+          "vol_surge": 0.68,
+          "mkt_cap": 3542265551,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -22,7 +22,128 @@
             "mkt_cap > 2B": true,
             "adr_pct >= 4.0": true
           },
-          "primary_theme": "Hardware",
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "MRVL",
+          "price": 289.54,
+          "rs_52w": 98,
+          "adr_pct": 9.54,
+          "vol_surge": 1.4,
+          "mkt_cap": 253289599475,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "ACMR",
+          "price": 96.19,
+          "rs_52w": 97,
+          "adr_pct": 8.69,
+          "vol_surge": 1.41,
+          "mkt_cap": 6647641723,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "WOLF",
+          "price": 48.69,
+          "rs_52w": 97,
+          "adr_pct": 17.68,
+          "vol_surge": 1.23,
+          "mkt_cap": 2530521526,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "AMKR",
+          "price": 86.43,
+          "rs_52w": 96,
+          "adr_pct": 7.56,
+          "vol_surge": 1.73,
+          "mkt_cap": 21423621806,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "ASML",
+          "price": 1867.83,
+          "rs_52w": 93,
+          "adr_pct": 4.6,
+          "vol_surge": 1.27,
+          "mkt_cap": 719894660279,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    },
+    {
+      "name": "Industrials",
+      "theme_rs": 92.0,
+      "perf_1d": -0.14,
+      "leaders": [
+        {
+          "ticker": "JBL",
+          "price": 374.98,
+          "rs_52w": 92,
+          "adr_pct": 5.17,
+          "vol_surge": 2.43,
+          "mkt_cap": 39561374356,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Industrials",
           "secondary_themes": [],
           "setup_label": "Flag"
         }
