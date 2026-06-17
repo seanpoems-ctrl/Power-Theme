@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-17 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious Re-evaluation",
+    "spy_price": 750.33,
+    "spy_change_pct": -0.6,
+    "vix": 16.37,
+    "hy_oas": 2.66,
+    "yield_curve": 0.38,
+    "credit_status": "Complacent",
+    "s5fi": 65.7,
+    "mmth": 67.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly announced positive Phase 3 trial results for its new diabetes and weight-loss drug, signaling significant future revenue potential."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase issued an upgraded full-year earnings guidance, citing robust consumer lending and strong investment banking performance in its preliminary Q2 report."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continues to experience significant technical-driven trading and options flow, with no fresh fundamental catalyst but ongoing volatility from previous AI enthusiasm."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-16 18:35 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2077,44 +2115,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continued momentum driven by ongoing AI infrastructure demand and positive sector sentiment, lacking a fresh idiosyncratic catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-11 08:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Volatility-fueled Ascent",
-    "spy_price": 737.62,
-    "spy_change_pct": 0.83,
-    "vix": 18.14,
-    "hy_oas": 2.79,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 57.0,
-    "mmth": 61.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Announces a groundbreaking new AI data center platform, setting new industry benchmarks for performance and efficiency, poised to drive significant Q3 revenue acceleration."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "AWS secures a multi-billion dollar strategic partnership with a global enterprise client, solidifying its market leadership in cloud infrastructure services."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Continues to see volatile trading on ongoing speculation about robotaxi development and minor analyst rating adjustments, lacking fresh fundamental news."
         }
       ]
     }
