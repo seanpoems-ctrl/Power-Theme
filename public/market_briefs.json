@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-17 18:25 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Volatility Surges",
+    "spy_price": 740.96,
+    "spy_change_pct": -1.25,
+    "vix": 18.44,
+    "hy_oas": 2.71,
+    "yield_curve": 0.29,
+    "credit_status": "Complacent",
+    "s5fi": 54.6,
+    "mmth": 64.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Google announces a breakthrough in quantum computing integration for its AI cloud services, setting a new benchmark for competitive advantage in the enterprise AI market."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly receives accelerated FDA approval for its new Alzheimer's treatment, significantly expanding its market potential in a high-demand therapeutic area."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA experiences sector-wide profit-taking after recent highs, showing some technical consolidation and flow-driven weakness."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-17 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2057,44 +2095,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corp.",
           "reason": "NVIDIA continues to see strong speculative interest driven by persistent AI theme momentum, despite no fresh news, as investors search for continued upside in high-growth tech."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-12 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Sector Rotation / Cautious Tech",
-    "spy_price": 738.18,
-    "spy_change_pct": -0.15,
-    "vix": 17.99,
-    "hy_oas": 2.79,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 56.3,
-    "mmth": 61.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "QUBT",
-          "company": "QuantumBits Technologies",
-          "reason": "QuantumBits Technologies (QUBT) showcased robust financial health with a significant revenue beat and optimistic forward guidance, signaling strong operational momentum."
-        },
-        {
-          "ticker": "VG",
-          "company": "VeloGen Systems",
-          "reason": "VeloGen Systems (VG) impressed with a strong earnings beat, an upward revision to guidance, and significant new contract wins that solidify its growth trajectory."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft Corp. (MSFT) saw consolidating price action today, largely influenced by broader tech sector weakness and lacking any fresh company-specific fundamental catalysts."
         }
       ]
     }

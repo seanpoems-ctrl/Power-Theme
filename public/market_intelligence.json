@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-17 16:45 ET",
+  "generated_at": "2026-06-17 18:25 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -12,13 +12,13 @@
       "close": 740.96,
       "prev_open": 754.55,
       "prev_close": 750.33,
-      "volume": 69644764,
+      "volume": 85051072,
       "change_pct": -1.25
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 722.51,
-      "open": 735.19,
+      "open": 735.22,
       "high": 735.68,
       "low": 720.85,
       "close": 722.51,
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 75.09,
-      "open": 75.72,
-      "high": 79.18,
-      "low": 74.09,
-      "close": 75.09,
+      "price": 75.66,
+      "open": 74.88,
+      "high": 75.66,
+      "low": 74.88,
+      "close": 75.66,
       "prev_open": 81.1,
       "prev_close": 76.05,
-      "volume": 219660,
-      "change_pct": -1.26
+      "volume": 1053,
+      "change_pct": -0.51
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,20 +65,20 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24934.67,
-      "open": 24816.96,
-      "high": 24956.48,
-      "low": 24763.53,
-      "close": 24934.67,
-      "prev_open": 24942.73,
-      "prev_close": 24910.41,
-      "volume": 0,
-      "change_pct": 0.1
+      "price": 24910.41,
+      "open": 24942.73,
+      "high": 25110.28,
+      "low": 24900.73,
+      "close": 24910.41,
+      "prev_open": 25068.37,
+      "prev_close": 24894.01,
+      "volume": 50319200,
+      "change_pct": 0.07
     }
   },
   "fred": {
     "hy_oas": 2.71,
-    "yield_curve": 0.38,
+    "yield_curve": 0.29,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -88,7 +88,7 @@
   },
   "regime": {
     "credit_status": "Complacent",
-    "yc_status": "Normal / Steepening",
+    "yc_status": "Flat",
     "breadth_flush": false,
     "generational_buy_zone": false,
     "reversal": {
@@ -98,6 +98,36 @@
     }
   },
   "analysis": {
-    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "title": "Post-Market Brief: June 17, 2026",
+    "mood_emoji": "📉",
+    "mood": "Risk-Off / Volatility Surges",
+    "narrative": "US equity markets closed lower today, with a significant spike in volatility indicating a broad risk-off sentiment. Despite this, global indices remained relatively stable, suggesting a localized rather than systemic shift in sentiment.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 740.96 | -1.25% | 📉 |\n| Nasdaq 100 ETF | 722.51 | -1.01% | 📉 |\n| VIX | 18.44 | +12.37% | 📈 |\n| Crude Oil | 75.66 | -0.51% | 📉 |\n| Nikkei 225 | 69404.50 | +0.13% | ➡️ |\n| DAX | 24910.41 | +0.07% | ➡️ |",
+    "macro_section": "High Yield Credit Spreads (BAMLH0A0HYM2) remain Complacent at 2.71%, suggesting ongoing comfort with corporate credit risk despite today's equity declines. The 10Y-2Y Yield Curve (T10Y2Y), meanwhile, stands at a Flat +0.290, which can signal uncertainty regarding future economic growth and potentially temper institutional risk appetite.",
+    "analysis_para1": "While US equities experienced a notable decline, global markets showed resilience with the Nikkei 225 up +0.13% and the DAX up +0.07%, indicating a nuanced global sentiment. Crude Oil also saw a modest decline of -0.51%, further suggesting a lack of widespread panic in commodity markets. This divergence, coupled with the Complacent High Yield Credit Spread at 2.71%, implies that US risk-off sentiment might be localized or technically driven, rather than a broad systemic flight to safety, suggesting institutional capital is discerning rather than broadly retreating.",
+    "analysis_para2": "The dominant 'why' behind today's primary flow appears to be a positioning squeeze combined with technical unwinding. The significant +12.37% surge in the VIX index, despite relatively minor moves in global indices and complacent credit spreads, points towards a sudden increase in demand for portfolio hedges or the unwinding of short volatility positions. This sharp jump in implied volatility acted as a mechanical catalyst, forcing traders to de-risk and exacerbating downward pressure on the S&P 500 ETF and Nasdaq 100 ETF through stop-loss cascades.",
+    "analysis_para3": "Traders should monitor the S&P 500 ETF for potential support around the 735.00 level. A confirmed breach below 730.00 would act as a critical risk-off threshold, signaling further downside potential. Conversely, a strong rebound and close above 745.00 could indicate short-covering. Today, focus on maintaining tighter stops and reducing overall position size, prioritizing capital preservation given the elevated volatility and uncertain immediate directional bias.",
+    "technical_signal": "No reversal pattern confirmed yet. The market exhibits clear bearish momentum with major indices closing lower and volatility surging. Traders should watch for a stabilization in the VIX and a potential higher low on the S&P 500 ETF to signal any nascent reversal attempt or short-term exhaustion.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Google announces a breakthrough in quantum computing integration for its AI cloud services, setting a new benchmark for competitive advantage in the enterprise AI market."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly receives accelerated FDA approval for its new Alzheimer's treatment, significantly expanding its market potential in a high-demand therapeutic area."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA experiences sector-wide profit-taking after recent highs, showing some technical consolidation and flow-driven weakness."
+        }
+      ]
+    }
   }
 }
