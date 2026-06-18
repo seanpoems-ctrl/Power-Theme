@@ -28,6 +28,26 @@ logger = logging.getLogger(__name__)
 OUTPUT_PATH = Path("public/screener_stocks.json")
 ET = ZoneInfo("America/New_York")
 
+
+def _f(v, ndigits=2):
+    """Return round(float(v), ndigits) or None — safe against None, NaN, Inf."""
+    if v is None:
+        return None
+    try:
+        f = float(v)
+        return round(f, ndigits) if math.isfinite(f) else None
+    except (TypeError, ValueError):
+        return None
+
+
+def _i(v, fallback=0):
+    """Return int(float(v)) or fallback — safe against None, NaN, Inf."""
+    try:
+        f = float(v)
+        return int(f) if math.isfinite(f) else fallback
+    except (TypeError, ValueError):
+        return fallback
+
 FIELDS = [
     "name",                     # ticker symbol
     "description",              # company name
@@ -188,23 +208,23 @@ def build_screener() -> list[dict]:
             "company":             str(row.get("description", "")),
             "sector":              str(row.get("sector", "")) or None,
             "industry":            str(row.get("industry", "")) or None,
-            "price":               round(float(price), 2),
-            "change_pct":          round(float(row["change"]), 2) if row.get("change") is not None else None,
-            "avg_volume":          int(avg_vol),
-            "avg_dollar_volume":   round(avg_dv),
-            "market_cap_b":        round(float(row["market_cap_basic"]) / 1e9, 2) if row.get("market_cap_basic") else None,
+            "price":               _f(price),
+            "change_pct":          _f(row.get("change")),
+            "avg_volume":          _i(avg_vol),
+            "avg_dollar_volume":   _i(avg_dv),
+            "market_cap_b":        _f(row.get("market_cap_basic") / 1e9 if row.get("market_cap_basic") else None),
             "adr_pct":             adr_pct,
             "adr_dvol":            adr_dvol,
-            "week52_high":         round(float(hi52), 2) if hi52 else None,
-            "week52_low":          round(float(lo52), 2) if lo52 else None,
+            "week52_high":         _f(hi52),
+            "week52_low":          _f(lo52),
             "pct_52w_range":       pct_52w,
-            "perf_1d":             round(float(row["change"]), 2) if row.get("change") is not None else None,
-            "perf_1w":             round(float(row["Perf.W"]), 2) if row.get("Perf.W") is not None else None,
-            "perf_1m":             round(float(row["Perf.1M"]), 2) if row.get("Perf.1M") is not None else None,
-            "perf_3m":             round(float(row["Perf.3M"]), 2) if row.get("Perf.3M") is not None else None,
-            "perf_6m":             round(float(row["Perf.6M"]), 2) if row.get("Perf.6M") is not None else None,
-            "perf_1y":             round(float(row["Perf.Y"]), 2) if row.get("Perf.Y") is not None else None,
-            "rvol":                round(float(rvol), 2) if rvol is not None else None,
+            "perf_1d":             _f(row.get("change")),
+            "perf_1w":             _f(row.get("Perf.W")),
+            "perf_1m":             _f(row.get("Perf.1M")),
+            "perf_3m":             _f(row.get("Perf.3M")),
+            "perf_6m":             _f(row.get("Perf.6M")),
+            "perf_1y":             _f(row.get("Perf.Y")),
+            "rvol":                _f(rvol),
             "ss_etfs":             ss_etfs,   # single-stock ETF tickers (enriched below)
         })
 
@@ -327,16 +347,16 @@ def fetch_ss_etf_data() -> dict[str, dict]:
         result[ticker] = {
             "ticker":            ticker,
             "company":           str(row.get("description", "")),
-            "price":             round(float(price), 2),
-            "change_pct":        round(float(row["change"]), 2) if row.get("change") is not None else None,
-            "avg_volume":        int(avg_vol_f),
-            "avg_dollar_volume": round(avg_dv),
+            "price":             _f(price),
+            "change_pct":        _f(row.get("change")),
+            "avg_volume":        _i(avg_vol_f),
+            "avg_dollar_volume": _i(avg_dv),
             "adr_pct":           adr_pct,
             "adr_dvol":          adr_dvol,
-            "week52_high":       round(float(hi52), 2) if hi52 else None,
-            "week52_low":        round(float(lo52), 2) if lo52 else None,
+            "week52_high":       _f(hi52),
+            "week52_low":        _f(lo52),
             "pct_52w_range":     pct_52w,
-            "rvol":              round(float(rvol), 2) if rvol is not None else None,
+            "rvol":              _f(rvol),
             "is_ss_etf":         True,
         }
     logger.info("SS-ETF data: %d liquid ETFs found", len(result))
