@@ -1657,18 +1657,16 @@ def _add_rotation_ranks(rankings: list[dict]) -> None:
 def _tv_enrich_thematic_stocks(stocks: list[dict]) -> None:
     """
     Enrich thematic stock dicts in-place using TradingView screener as the
-    primary source for two fields:
+    authoritative source for:
 
       company        — TradingView 'description' (full legal name).
-                       Overrides the abbreviated name scraped from Finviz HTML.
-                       Foreign tickers (contain '.') keep the Finviz name.
-
       dollar_volume  — TradingView average_volume_10d_calc × close.
-                       More stable than the partial-day volume Finviz returns
-                       during market hours.  Finviz value kept as fallback.
+      perf_1d/1w/1m/3m/6m — TradingView rolling Perf.* fields, identical to
+                       what screener_builder.py uses.  Overrides the yfinance
+                       trading-day-window values set by _rolling_perf_from_closes().
 
-    All tickers are resolved in a single batched screener call (≤1 500 per
-    batch) — no extra per-ticker requests.
+    Foreign tickers (contain '.') are skipped — Finviz/yfinance values kept.
+    All tickers resolved in a single batched screener call (≤1 500 per batch).
     """
     us_tickers = list({s["ticker"] for s in stocks if "." not in s.get("ticker", "")})
     if not us_tickers:
@@ -1680,8 +1678,9 @@ def _tv_enrich_thematic_stocks(stocks: list[dict]) -> None:
         logger.warning("tradingview_screener not available; skipping TV enrichment for thematic stocks")
         return
 
-    company_map: dict[str, str] = {}
-    dvol_map:    dict[str, int] = {}
+    company_map:  dict[str, str]  = {}
+    dvol_map:     dict[str, int]  = {}
+    tv_perf_map:  dict[str, dict] = {}
 
     batch_size = 1500
     for i in range(0, len(us_tickers), batch_size):
@@ -1689,7 +1688,15 @@ def _tv_enrich_thematic_stocks(stocks: list[dict]) -> None:
         try:
             _, df = (
                 Query()
-                .select("name", "description", "close", "average_volume_10d_calc")
+                .select(
+                    "name", "description", "close", "average_volume_10d_calc",
+                    "change",     # 1D rolling %
+                    "Perf.W",     # 1W rolling %
+                    "Perf.1M",    # 1M rolling %
+                    "Perf.3M",    # 3M rolling %
+                    "Perf.6M",    # 6M rolling %
+                    "Perf.Y",     # 1Y rolling %
+                )
                 .where(tv_col("name").isin(chunk))
                 .limit(len(chunk) + 50)
                 .get_scanner_data()
@@ -1706,12 +1713,29 @@ def _tv_enrich_thematic_stocks(stocks: list[dict]) -> None:
                         dvol_map[tkr] = round(tv_close * tv_avg_vol)
                 except (TypeError, ValueError, KeyError):
                     pass
+                perf = {}
+                for tv_field, out_key in [
+                    ("change",  "perf_1d"),
+                    ("Perf.W",  "perf_1w"),
+                    ("Perf.1M", "perf_1m"),
+                    ("Perf.3M", "perf_3m"),
+                    ("Perf.6M", "perf_6m"),
+                    ("Perf.Y",  "perf_1y"),
+                ]:
+                    try:
+                        v = row.get(tv_field)
+                        if v is not None:
+                            perf[out_key] = round(float(v), 2)
+                    except (TypeError, ValueError):
+                        pass
+                if perf:
+                    tv_perf_map[tkr] = perf
         except Exception as exc:
             logger.warning(f"TV thematic enrichment batch {i} failed: {exc}")
 
     logger.info(
         f"  TV thematic enrichment: {len(company_map)} names, "
-        f"{len(dvol_map)} $Vol resolved / {len(us_tickers)} unique US tickers"
+        f"{len(dvol_map)} $Vol, {len(tv_perf_map)} perf sets / {len(us_tickers)} unique US tickers"
     )
 
     for s in stocks:
@@ -1721,6 +1745,8 @@ def _tv_enrich_thematic_stocks(stocks: list[dict]) -> None:
         if tkr in dvol_map:
             s["dollar_volume"]     = dvol_map[tkr]
             s["avg_dollar_volume"] = dvol_map[tkr]
+        if tkr in tv_perf_map:
+            s.update(tv_perf_map[tkr])
 
 
 # ──────────────────────────────────────────────────────────────
@@ -1975,8 +2001,8 @@ def build_data() -> dict:
                 reverse=True,
             )
 
-    # ── Step 5b: Enrich thematic stocks with TradingView company names + $Vol ──
-    logger.info("\nStep 5b: Enriching thematic stocks from TradingView (company names + $Vol)...")
+    # ── Step 5b: Enrich thematic stocks with TradingView company names + $Vol + rolling perfs ──
+    logger.info("\nStep 5b: Enriching thematic stocks from TradingView (company names + $Vol + rolling perfs)...")
     _tv_enrich_thematic_stocks(all_stocks_flat)
 
     # ── Step 6: Fetch SPY benchmark + market condition ──

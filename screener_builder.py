@@ -13,6 +13,7 @@ Output: public/screener_stocks.json
 """
 import json
 import logging
+import math
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -145,14 +146,25 @@ def build_screener() -> list[dict]:
             continue
 
         # ADR% from ATR: (ATR / close) * 100
-        adr_pct = round(float(atr) / float(price) * 100, 2) if atr and price else None
+        try:
+            adr_pct = round(float(atr) / float(price) * 100, 2) if atr and price and math.isfinite(float(atr)) else None
+        except (TypeError, ValueError):
+            adr_pct = None
 
         # Avg dollar volume
-        avg_dv = float(price) * float(avg_vol)
+        try:
+            avg_dv = float(price) * float(avg_vol)
+            if not math.isfinite(avg_dv):
+                avg_dv = 0.0
+        except (TypeError, ValueError):
+            avg_dv = 0.0
 
         # ADR × AvgDolVol  (ADR as the raw number e.g. 10.4, NOT as decimal 0.104)
         # Formula: ADR % × Avg$Vol  e.g. ASTS: 10.4 × $3.22B = $33.5B
-        adr_dvol = round(adr_pct * avg_dv) if adr_pct is not None else 0
+        try:
+            adr_dvol = round(adr_pct * avg_dv) if adr_pct is not None else 0
+        except (TypeError, ValueError):
+            adr_dvol = 0
 
         # % of 52W Range
         pct_52w = None
@@ -280,10 +292,22 @@ def fetch_ss_etf_data() -> dict[str, dict]:
         atr     = row.get("ATR")
         if not ticker or price is None or avg_vol is None:
             continue
-        if float(avg_vol) < 100_000:   # minimum liquidity for SS-ETFs
+        try:
+            avg_vol_f = float(avg_vol)
+        except (TypeError, ValueError):
             continue
-        avg_dv  = float(price) * float(avg_vol)
-        adr_pct = round(float(atr) / float(price) * 100, 2) if atr and price else None
+        if not math.isfinite(avg_vol_f) or avg_vol_f < 100_000:   # minimum liquidity for SS-ETFs
+            continue
+        try:
+            avg_dv = float(price) * avg_vol_f
+            if not math.isfinite(avg_dv):
+                avg_dv = 0.0
+        except (TypeError, ValueError):
+            avg_dv = 0.0
+        try:
+            adr_pct = round(float(atr) / float(price) * 100, 2) if atr and price and math.isfinite(float(atr)) else None
+        except (TypeError, ValueError):
+            adr_pct = None
         hi52    = row.get("price_52_week_high")
         lo52    = row.get("price_52_week_low")
         pct_52w = None
@@ -292,15 +316,19 @@ def fetch_ss_etf_data() -> dict[str, dict]:
             if rng > 0:
                 pct_52w = round(min(100, max(0, (float(price) - float(lo52)) / rng * 100)), 1)
         rvol = row.get("Relative.Volume")
+        try:
+            adr_dvol = round(adr_pct * avg_dv) if adr_pct else None
+        except (TypeError, ValueError):
+            adr_dvol = None
         result[ticker] = {
             "ticker":            ticker,
             "company":           str(row.get("description", "")),
             "price":             round(float(price), 2),
             "change_pct":        round(float(row["change"]), 2) if row.get("change") is not None else None,
-            "avg_volume":        int(avg_vol),
+            "avg_volume":        int(avg_vol_f),
             "avg_dollar_volume": round(avg_dv),
             "adr_pct":           adr_pct,
-            "adr_dvol":          round(adr_pct * avg_dv) if adr_pct else None,
+            "adr_dvol":          adr_dvol,
             "week52_high":       round(float(hi52), 2) if hi52 else None,
             "week52_low":        round(float(lo52), 2) if lo52 else None,
             "pct_52w_range":     pct_52w,
