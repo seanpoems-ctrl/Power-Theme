@@ -1126,10 +1126,10 @@ HYPOTHESIS_RULES = {
 ANALYSIS_FORMAT_INSTRUCTIONS = """
 Return analysis_details as 2-3 structured sections using EXACTLY this format:
 
-• **[Section Title]**
-[Body: 2-4 sentences. Extract and bold specific facts from the headlines — numbers, percentages, product names, deal values, company names. Use **bold** for all key figures and outcomes. e.g. "HPE reported **solid Q2 earnings**, with a **record backlog** and **booming AI server business**, driving the stock **+29% premarket**." Never write generic filler — every sentence must contain a specific fact from the headlines.]
+• [Section Title]
+[Body: 2-4 sentences. Extract specific facts from the headlines — numbers, percentages, product names, deal values, company names. Every sentence must contain a specific fact from the headlines. Never write generic filler.]
 
-• **[Section Title 2]**
+• [Section Title 2]
 [Body: Forward implication — what does this catalyst mean for price momentum, competitive positioning, or sector rotation? Be specific, not vague.]
 
 Section titles to use by category:
@@ -1142,7 +1142,7 @@ Section titles to use by category:
 - Institutional Buying / Insider Buying: "The Buyer" | "Conviction Signal"
 - Others: "What Happened" | "Key Consideration"
 
-Rules: No emojis. No markdown headers (#, ##). Start every section with • **Title** on its own line. Separate sections with a blank line. Every claim must come from the provided headlines — never invent numbers.
+Rules: No emojis. No markdown headers (#, ##). No asterisks or bold markers. Start every section with • Title on its own line. Separate sections with a blank line. Every claim must come from the provided headlines — never invent numbers.
 """
 
 
@@ -1307,8 +1307,8 @@ analysis_detail — "Catalyst: [...] | Impact: [...]":
   - Contract: name the SPECIFIC partner and deal scope/value
   - Impact: state the investment implication (guidance revision, TAM expansion, risk removal, etc.)
 
-Respond ONLY with this JSON (no extra text, no markdown fences):
-{{"category": "<category>", "theme": "<specific catalyst e.g. 'Beat & Raise', 'Nasdaq-100 Addition', 'Citi Upgrade to Buy'>", "reasoning": "<specific 15-25 word synthesis>", "grade": "<A+|A|B|C>", "finviz_theme": "<industry>", "analysis_detail": "Catalyst: [2-3 sentences **bolding** key facts] | Impact: [forward implication]", "analysis_details": "<detailed multi-section analysis>"}}"""
+Respond ONLY with this JSON (no extra text, no markdown fences, no asterisks):
+{{"category": "<category>", "theme": "<specific catalyst e.g. 'Beat & Raise', 'Nasdaq-100 Addition', 'Citi Upgrade to Buy'>", "reasoning": "<specific 15-25 word synthesis>", "grade": "<A+|A|B|C>", "finviz_theme": "<industry>", "analysis_detail": "Catalyst: [2-3 sentences with key facts] | Impact: [forward implication]", "analysis_details": "<detailed multi-section analysis>"}}"""
 
         for attempt in range(3):
             try:
@@ -1335,11 +1335,18 @@ Respond ONLY with this JSON (no extra text, no markdown fences):
         text = re.sub(r"\s*```$", "", text, flags=re.MULTILINE)
         result = json.loads(text.strip())
 
+        def _strip_md(text: str) -> str:
+            """Remove markdown bold markers (**) from Gemini output."""
+            if not text:
+                return text
+            import re as _re
+            return _re.sub(r"\*\*", "", text)
+
         category = result.get("category", "Others")
         if category not in CATEGORIES:
             category = "Others"
         theme    = result.get("theme", category)
-        reasoning = result.get("reasoning", "")
+        reasoning = _strip_md(result.get("reasoning", ""))
         grade    = result.get("grade", "B")
         if grade not in ("A+", "A", "B", "C"):
             grade = "B"
@@ -1347,9 +1354,9 @@ Respond ONLY with this JSON (no extra text, no markdown fences):
 
         # analysis_detail: Gemini returns a string "Catalyst: ... | Impact: ..."
         # Split into object so frontend can use .catalyst and .impact
-        raw_detail = result.get("analysis_detail", "")
-        if isinstance(raw_detail, dict):
-            analysis_detail = raw_detail
+        raw_detail = _strip_md(result.get("analysis_detail", "") if isinstance(result.get("analysis_detail"), str) else "")
+        if isinstance(result.get("analysis_detail"), dict):
+            analysis_detail = {k: _strip_md(v) for k, v in result["analysis_detail"].items()}
         elif " | Impact: " in raw_detail:
             parts = raw_detail.split(" | Impact: ", 1)
             catalyst_text = parts[0].replace("Catalyst: ", "").strip()
@@ -1358,7 +1365,7 @@ Respond ONLY with this JSON (no extra text, no markdown fences):
         else:
             analysis_detail = {"catalyst": raw_detail, "impact": ""}
 
-        analysis_details = result.get("analysis_details", reasoning)
+        analysis_details = _strip_md(result.get("analysis_details", reasoning))
 
         # Curated peer stocks (sympathy plays)
         peer_tickers = get_peer_stocks(ticker)
