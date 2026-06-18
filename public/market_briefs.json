@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-18 18:33 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Tech-Led Risk-On Rally",
+    "spy_price": 746.74,
+    "spy_change_pct": 0.78,
+    "vix": 16.4,
+    "hy_oas": 2.63,
+    "yield_curve": 0.27,
+    "credit_status": "Complacent",
+    "s5fi": 55.9,
+    "mmth": 63.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "INTC",
+          "company": "Intel Corporation",
+          "reason": "The announced partnership with Apple provided a significant, fresh catalyst for the semiconductor giant, driving strong investor interest."
+        },
+        {
+          "ticker": "MRVL",
+          "company": "Marvell Technology, Inc.",
+          "reason": "News of Nvidia's investment alongside its S&P 500 inclusion delivered a dual catalyst, boosting its valuation and market profile."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "While its ecosystem partners saw fresh news, NVIDIA's movement today was largely flow-driven, extending its recent momentum without a new fundamental catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-18 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2057,44 +2095,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corp.",
           "reason": "NVIDIA is seeing continued momentum from last week's analyst comments regarding datacenter demand, driving sustained institutional accumulation despite no new catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-14 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Broad Rally, Risk-On",
-    "spy_price": 748.17,
-    "spy_change_pct": 0.79,
-    "vix": 17.26,
-    "hy_oas": 2.82,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 54.1,
-    "mmth": 61.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "POET",
-          "company": "POET Technologies Inc.",
-          "reason": "New contract wins are expected to significantly boost future revenue and market share in its specialized sector."
-        },
-        {
-          "ticker": "MRVL",
-          "company": "Marvell Technology, Inc.",
-          "reason": "AMD's strategic stake validates Marvell's technology and partnership potential, signaling strong growth prospects."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Recent iPhone sales data continues to show mixed signals, leading to ongoing range-bound trading based on technical levels rather than fresh catalysts."
         }
       ]
     }

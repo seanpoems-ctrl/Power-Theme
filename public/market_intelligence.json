@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-18 16:45 ET",
+  "generated_at": "2026-06-18 18:33 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -18,13 +18,13 @@
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 740.62,
-      "open": 737.2,
+      "open": 737.1,
       "high": 741.79,
       "low": 732.53,
       "close": 740.62,
       "prev_open": 735.19,
       "prev_close": 722.51,
-      "volume": 45394183,
+      "volume": 49291407,
       "change_pct": 2.51
     },
     "^VIX": {
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 75.42,
-      "open": 74.88,
-      "high": 76.06,
-      "low": 72.83,
-      "close": 75.42,
+      "price": 75.68,
+      "open": 75.4,
+      "high": 75.73,
+      "low": 75.34,
+      "close": 75.68,
       "prev_open": 76.59,
       "prev_close": 76.79,
-      "volume": 254021,
-      "change_pct": -1.78
+      "volume": 536,
+      "change_pct": -1.45
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,20 +65,20 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25026.8,
-      "open": 24996.54,
-      "high": 25059.37,
-      "low": 24840.27,
-      "close": 25026.8,
-      "prev_open": 24816.96,
-      "prev_close": 24934.67,
-      "volume": 0,
-      "change_pct": 0.37
+      "price": 24934.67,
+      "open": 24816.96,
+      "high": 24956.48,
+      "low": 24763.53,
+      "close": 24934.67,
+      "prev_open": 24942.73,
+      "prev_close": 24910.41,
+      "volume": 74720700,
+      "change_pct": 0.1
     }
   },
   "fred": {
     "hy_oas": 2.63,
-    "yield_curve": 0.29,
+    "yield_curve": 0.27,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -100,32 +100,32 @@
   "analysis": {
     "title": "Post-Market Brief: June 18, 2026",
     "mood_emoji": "🚀",
-    "mood": "Tech-Led Risk-On Optimism",
-    "narrative": "Equity markets surged today, led by a strong rally in technology stocks, as the VIX experienced a significant decline. Investor confidence appears to be robust, signaling a continued appetite for growth-oriented assets.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 746.74 | +0.78% | 📈 |\n| Nasdaq 100 ETF | 740.62 | +2.51% | 📈 |\n| VIX | 16.40 | -11.06% | 📉 |\n| Crude Oil | 75.42 | -1.78% | 📉 |\n| Nikkei 225 | 69902.25 | +0.72% | 📈 |\n| DAX | 25026.80 | +0.37% | ➡️ |",
-    "macro_section": "Today's FRED data reveals a complacent high-yield credit spread at 2.63%, indicating that institutional investors are comfortable with risk. The 10-year minus 2-year yield curve remains flat at +0.290, suggesting a stable, though not rapidly accelerating, economic outlook. This combination supports continued risk appetite and a search for growth opportunities.",
-    "analysis_para1": "Global equity markets mirrored the positive sentiment seen in the U.S. today, with the Nikkei 225 climbing +0.72% and the DAX advancing +0.37%. This synchronized global strength, alongside a significant -1.78% drop in Crude Oil prices to $75.42, suggests an environment where growth concerns are abating and inflation worries are somewhat contained. The continued complacency in U.S. high-yield credit spreads, holding at 2.63%, further confirms that global risk appetite remains robust, providing a supportive backdrop for U.S. equities and indicating comfort with current leverage levels.",
-    "analysis_para2": "The dominant 'Why' behind today's powerful rally, particularly in technology, appears to be a confluence of high-conviction corporate catalysts. Key announcements such as Intel's Apple partnership and Marvell Technology's Nvidia investment coupled with its S&P 500 inclusion ignited significant buying pressure. These specific company developments signal renewed confidence and potential for outperformance within the semiconductor and broader tech sectors, creating a positive feedback loop that propelled the Nasdaq 100 ETF up by a substantial +2.51%.",
-    "analysis_para3": "Given today's robust tech-led rally and collapsing volatility, traders should maintain a bias towards long positions in high-quality growth names, particularly within the semiconductor space. The S&P 500 ETF closing at 746.74 establishes a new near-term support level around 740; a breach below this could signal consolidation. Entry triggers for fresh longs can be found on shallow pullbacks or continuation breakouts in names demonstrating strong relative strength on the back of news. A decisive move in the VIX above 18.00 would be a critical risk-off threshold, prompting a review of exposure and a potential shift to defensive positioning.",
-    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 currently stand at 55.9%, with 63.9% above SMA200, indicating healthy but not overheated market breadth. Traders should monitor for potential divergences in momentum indicators or a failure to hold critical support levels as early signs of a shift in trend.",
+    "mood": "Tech-Led Risk-On Rally",
+    "narrative": "Equity markets surged today, spearheaded by a strong technology rally and declining volatility. Investor sentiment appears increasingly bullish, driven by key sector-specific catalysts and broader risk appetite.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 746.74 | +0.78% | 📈 |\n| Nasdaq 100 ETF | 740.62 | +2.51% | 📈 |\n| VIX | 16.40 | -11.06% | 📉 |\n| Crude Oil | 75.68 | -1.45% | 📉 |\n| Nikkei 225 | 69902.25 | +0.72% | 📈 |\n| DAX | 24934.67 | +0.10% | ➡️ |",
+    "macro_section": "High Yield Credit Spreads (BAMLH0A0HYM2) currently stand at 2.63%, indicating a Complacent regime in credit markets. Concurrently, the 10-Year Minus 2-Year Yield Curve (T10Y2Y) is observed at a Flat +0.270 basis points. This combination suggests that institutional risk appetite remains robust, as credit conditions are perceived as stable and the yield curve does not signal immediate economic distress.",
+    "analysis_para1": "Global equity markets largely reflected a positive tone today, with the Nikkei 225 advancing by +0.72% and the DAX showing a modest gain of +0.10%. Concurrently, Crude Oil prices experienced a notable decline of -1.45% to $75.68, potentially easing inflationary pressures. This global buoyancy, coupled with lower energy costs, appears to reinforce the Complacent state of US High Yield Credit Spreads, which are currently at 2.63%. The overall global tape implies a sustained risk-on appetite for US assets, as international markets provide a supportive backdrop.",
+    "analysis_para2": "The primary driver behind today's significant market moves, particularly the Nasdaq 100 ETF's +2.51% surge, was a confluence of strong company-specific news within the technology sector. Key announcements like Intel's Apple partnership and Marvell Technology's Nvidia investment coupled with S&P 500 inclusion generated substantial positive momentum. This influx of high-conviction gappers points to a renewed focus on specific growth catalysts within semiconductors and related tech, leading to broad-based sector outperformance and driving the overall market higher.",
+    "analysis_para3": "Given today's robust tech-led rally, traders should anticipate potential follow-through but also remain vigilant for profit-taking in the near term. For the S&P 500 ETF, watch the 740 level as potential support on any pullbacks, with yesterday's close acting as a key short-term entry trigger for long positions. A sustained break below the 735 level would serve as a risk-off threshold, signaling a potential shift in momentum. Today's action suggests maintaining a bullish bias, using any dips as opportunities rather than initiating aggressive short positions.",
+    "technical_signal": "No reversal pattern confirmed yet. While today saw strong momentum, evidenced by S&P 500 stocks above SMA50 at 55.9% and S&P stocks above SMA200 at 63.9%, these levels indicate health rather than extreme overbought conditions. Traders should watch for any signs of volume divergence or exhaustion gaps in upcoming sessions that could signal a potential short-term top.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "INTC",
           "company": "Intel Corporation",
-          "reason": "Intel's announced partnership with Apple provides a significant growth catalyst, enhancing its competitive position in a key market segment."
+          "reason": "The announced partnership with Apple provided a significant, fresh catalyst for the semiconductor giant, driving strong investor interest."
         },
         {
           "ticker": "MRVL",
           "company": "Marvell Technology, Inc.",
-          "reason": "Marvell Technology is benefiting from both a strategic investment by Nvidia and its highly anticipated inclusion into the S&P 500 index, driving significant institutional flow."
+          "reason": "News of Nvidia's investment alongside its S&P 500 inclusion delivered a dual catalyst, boosting its valuation and market profile."
         }
       ],
       "c_grade": [
         {
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
-          "reason": "NVIDIA continues to benefit from its dominant position in the AI computing space and broader sector momentum, even without a specific new catalyst today."
+          "reason": "While its ecosystem partners saw fresh news, NVIDIA's movement today was largely flow-driven, extending its recent momentum without a new fundamental catalyst."
         }
       ]
     }
