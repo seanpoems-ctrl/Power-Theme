@@ -9,6 +9,10 @@ ADR% × Avg$Vol (daily dollar volatility = institutional hot-money signal).
 Universe: all NYSE/NASDAQ stocks, mkt cap ≥ $1B, avg daily vol ≥ 500K shares,
           price ≥ $5, not ETF/fund.
 
+Performance fields (perf_1d/1w/1m/3m/6m/1y) come directly from TradingView
+rolling fields: change / Perf.W / Perf.1M / Perf.3M / Perf.6M / Perf.Y.
+NaN guards applied throughout to handle thinly-traded tickers gracefully.
+
 Output: public/screener_stocks.json
 """
 import json
