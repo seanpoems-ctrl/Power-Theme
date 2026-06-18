@@ -1180,6 +1180,7 @@ def analyze_with_gemini(
         }
     try:
         from google import genai
+        from google.genai import types as _gt
         client = genai.Client(api_key=GEMINI_API_KEY)
 
         today_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
