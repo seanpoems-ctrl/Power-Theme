@@ -3813,13 +3813,15 @@ verdict 必須是以下其中之一："beat"、"neutral"、"miss"`;
   catch { throw new Error("Invalid JSON from Gemini — please retry"); }
 }
 
-// Renders [[word]] as highlighted colored text (amber), strips **bold** markers
+// Renders [[word]] as amber highlight, **word** as bold, plain text otherwise
 function renderMarkdown(text) {
   if (!text) return null;
-  const cleaned = text.replace(/\*\*/g, "");
-  return cleaned.split(/(\[\[[^\]]+\]\])/).map((seg, i) => {
+  return text.split(/(\[\[[^\]]+\]\]|\*\*[^*]+\*\*)/).map((seg, i) => {
     if (seg.startsWith("[[") && seg.endsWith("]]")) {
       return <span key={i} className="text-amber-300 font-semibold">{seg.slice(2, -2)}</span>;
+    }
+    if (seg.startsWith("**") && seg.endsWith("**")) {
+      return <strong key={i} className="text-zinc-100 font-semibold">{seg.slice(2, -2)}</strong>;
     }
     return <span key={i}>{seg}</span>;
   });
@@ -4102,14 +4104,17 @@ const NewsHubTab = ({ newsData, embedded = false }) => {
 
                   <div className="space-y-1 mb-2">
                     {gapper.reasoning && (
-                      <div className="text-[12px] text-zinc-400 leading-relaxed">
-                        {gapper.reasoning.replace(/\*\*/g, "")}
-                      </div>
+                      <div className="text-[12px] text-zinc-400 leading-relaxed"
+                           dangerouslySetInnerHTML={{ __html:
+                             gapper.reasoning.replace(/\*\*(.+?)\*\*/g, '<strong class="text-zinc-200">$1</strong>')
+                           }} />
                     )}
                     {gapper.hypothesis && (
                       <div className="text-[12px] text-zinc-400">
                         <span className="font-semibold text-zinc-300">Trade:</span>{' '}
-                        {gapper.hypothesis.replace(/\*\*/g, "")}
+                        <span dangerouslySetInnerHTML={{ __html:
+                          gapper.hypothesis.replace(/\*\*(.+?)\*\*/g, '<strong class="text-zinc-200">$1</strong>')
+                        }} />
                       </div>
                     )}
                   </div>
@@ -6420,9 +6425,10 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
                 </td>
                 {/* Reasoning */}
                 <td className="py-1 px-2 align-middle">
-                  <span className="line-clamp-2 text-[11px] text-zinc-400 block">
-                    {g.reasoning ? g.reasoning.replace(/\*\*/g, "") : "—"}
-                  </span>
+                  <span className="line-clamp-2 text-[11px] text-zinc-400 block"
+                    dangerouslySetInnerHTML={{ __html: g.reasoning
+                      ? g.reasoning.replace(/\*\*(.+?)\*\*/g, '<strong class="text-zinc-200">$1</strong>')
+                      : "—" }} />
                 </td>
                 {/* Analysis Details — shows impact (trade implication), not catalyst which duplicates Reasoning */}
                 <td className="py-1 px-2 align-middle">
@@ -8258,9 +8264,8 @@ const MomentumCockpit = () => {
                   <div className="text-[11px] text-zinc-500 uppercase tracking-wide mb-1">Catalyst Breakdown</div>
                   <div className="bg-zinc-900 rounded p-3 space-y-2">
                     {analysis.analysis_detail.catalyst && (
-                      <div className="text-[12px] text-zinc-300 leading-relaxed">
-                        {analysis.analysis_detail.catalyst.replace(/\*\*/g, "")}
-                      </div>
+                      <div className="text-[12px] text-zinc-300 leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: analysis.analysis_detail.catalyst.replace(/\*\*(.*?)\*\*/g, '<strong class="text-zinc-100">$1</strong>') }}/>
                     )}
                     {analysis.analysis_detail.impact && (
                       <div className="text-[12px] text-zinc-500 italic border-t border-zinc-800 pt-2 leading-relaxed">{analysis.analysis_detail.impact}</div>
@@ -8273,9 +8278,9 @@ const MomentumCockpit = () => {
               {analysis.analysis_details && (
                 <div>
                   <div className="text-[11px] text-zinc-500 uppercase tracking-wide mb-1">Full Analysis</div>
-                  <div className="text-[12px] text-zinc-400 bg-zinc-900 rounded p-3 leading-relaxed whitespace-pre-line">
-                    {analysis.analysis_details.replace(/\*\*/g, "")}
-                  </div>
+                  <div className="text-[12px] text-zinc-400 bg-zinc-900 rounded p-3 leading-relaxed whitespace-pre-line"
+                    dangerouslySetInnerHTML={{ __html: analysis.analysis_details
+                      .replace(/\*\*(.*?)\*\*/g, '<strong class="text-zinc-200">$1</strong>') }}/>
                 </div>
               )}
 
