@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-19 17:49 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Tech Leads, Volatility Edges Up",
+    "spy_price": 746.74,
+    "spy_change_pct": 1.04,
+    "vix": 16.78,
+    "hy_oas": 2.63,
+    "yield_curve": 0.27,
+    "credit_status": "Complacent",
+    "s5fi": 55.9,
+    "mmth": 63.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MU",
+          "company": "Micron Technology",
+          "reason": "Micron, a leader in memory solutions, is poised to benefit significantly from the escalating demand for high-performance memory crucial for artificial intelligence applications."
+        },
+        {
+          "ticker": "QS",
+          "company": "QuantumScape",
+          "reason": "QuantumScape, a pioneer in solid-state battery technology, announced a new multi-year partnership, bolstering its market position and accelerating commercialization efforts in the electric vehicle sector."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Purely driven by broader market optimism and sector rotation into large-cap technology, lacking a fresh catalyst for today's move."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-19 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2057,44 +2095,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "TSLA remains a C-grade candidate today, driven primarily by ongoing speculative trading volume and continued chatter surrounding competitive pressures in the EV market, without a fresh fundamental catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-18 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Drifting Sideways / Mixed Cues",
-    "spy_price": 738.65,
-    "spy_change_pct": -0.07,
-    "vix": 17.82,
-    "hy_oas": 2.8,
-    "yield_curve": 0.54,
-    "credit_status": "Complacent",
-    "s5fi": 53.9,
-    "mmth": 59.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "RDW",
-          "company": "Redwire Corporation",
-          "reason": "Secured a substantial new government contract for advanced space infrastructure, significantly boosting future revenue projections and market position."
-        },
-        {
-          "ticker": "POET",
-          "company": "POET Technologies Inc.",
-          "reason": "Announced a new strategic supply agreement for its integrated optoelectronics platform, opening up significant market expansion opportunities."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "Continues to see speculative interest based on ongoing AI sector strength and anticipation of future product announcements, lacking fresh fundamental catalysts today."
         }
       ]
     }
