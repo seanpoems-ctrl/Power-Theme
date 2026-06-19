@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-19 10:18 ET",
-  "phase": "PRE",
-  "session": "Pre-Market",
+  "generated_at": "2026-06-19 16:45 ET",
+  "phase": "POST",
+  "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
@@ -12,7 +12,7 @@
       "close": 746.74,
       "prev_open": 749.36,
       "prev_close": 739.06,
-      "volume": 80761200,
+      "volume": 80875700,
       "change_pct": 1.04
     },
     "QQQ": {
@@ -24,56 +24,56 @@
       "close": 740.62,
       "prev_open": 735.19,
       "prev_close": 722.51,
-      "volume": 49914100,
+      "volume": 50154600,
       "change_pct": 2.51
     },
     "^VIX": {
       "label": "VIX",
-      "price": 16.91,
+      "price": 16.78,
       "open": 17.04,
       "high": 17.27,
-      "low": 16.81,
-      "close": 16.91,
+      "low": 16.72,
+      "close": 16.78,
       "prev_open": 17.23,
       "prev_close": 16.4,
       "volume": 0,
-      "change_pct": 3.11
+      "change_pct": 2.32
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 75.94,
+      "price": 76.54,
       "open": 75.4,
       "high": 76.78,
       "low": 74.98,
-      "close": 75.94,
+      "close": 76.54,
       "prev_open": 75.53,
       "prev_close": 76.6,
-      "volume": 71121,
-      "change_pct": -0.86
+      "volume": 86466,
+      "change_pct": -0.08
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 71250.06,
-      "open": 71551.03,
-      "high": 71952.99,
-      "low": 70517.98,
-      "close": 71250.06,
-      "prev_open": 70163.71,
-      "prev_close": 71053.49,
-      "volume": 0,
-      "change_pct": 0.28
+      "price": 71053.49,
+      "open": 70163.71,
+      "high": 71398.58,
+      "low": 70092.94,
+      "close": 71053.49,
+      "prev_open": 69005.88,
+      "prev_close": 69902.25,
+      "volume": 156700000,
+      "change_pct": 1.65
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25039.46,
+      "price": 24985.82,
       "open": 25075.33,
       "high": 25173.02,
       "low": 24951.54,
-      "close": 25039.46,
+      "close": 24985.82,
       "prev_open": 24996.54,
       "prev_close": 25026.8,
       "volume": 0,
-      "change_pct": 0.05
+      "change_pct": -0.16
     }
   },
   "fred": {
@@ -98,34 +98,34 @@
     }
   },
   "analysis": {
-    "title": "Pre-Market Brief: June 19, 2026",
-    "mood_emoji": "🚀",
-    "mood": "Risk-On / Volatile Tech Rally",
-    "narrative": "US equities are poised for a significant open, propelled by a strong tech-led rally pre-market. However, an accompanying rise in volatility suggests an anxious accumulation or short-covering dynamic is at play.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 746.74 | +1.04% | 📈 |\n| Nasdaq 100 ETF | 740.62 | +2.51% | 📈 |\n| VIX | 16.91 | +3.11% | 📈 |\n| Crude Oil | 75.94 | -0.86% | 📉 |\n| Nikkei 225 | 71250.06 | +0.28% | ➡️ |\n| DAX | 25039.46 | +0.05% | ➡️ |",
-    "macro_section": "High-yield credit spreads remain complacent at 2.63%, indicating continued investor comfort with risk-taking. The 10-year minus 2-year yield curve sits flat at +0.270, signaling a neutral stance from the bond market and supporting institutional risk appetite for equities.",
-    "analysis_para1": "The Nikkei 225 saw a modest gain of +0.28% and the DAX edged up +0.05%, reflecting a relatively subdued and uninspired overnight session in major overseas markets. Crude Oil also experienced a slight decline of -0.86% to $75.94, suggesting some tempering of global growth expectations or balanced supply. Despite this tepid global performance and slight commodity weakness, US high-yield credit spreads remain remarkably complacent at 2.63%. This divergence implies that the current strong US equity momentum, especially in technology, is largely localized and not yet translating into broader global risk appetite or credit market stress, maintaining robust US risk sentiment for now.",
-    "analysis_para2": "The dominant 'Why' behind today's primary flow is a robust short-covering event, particularly within the technology sector, amplified by fresh positive catalysts. The substantial +2.51% pre-market surge in the Nasdaq 100 ETF, coupled with a notable +3.11% rise in the VIX, strongly indicates that market participants are aggressively unwinding short positions or hedging long exposure in a rapidly appreciating market. This positioning squeeze, potentially triggered by significant news for AI-adjacent companies, is forcing capital into growth names and simultaneously increasing options-related hedging activity, thereby driving both prices and implied volatility higher.",
-    "analysis_para3": "Traders should monitor the S&P 500 ETF for sustained breaks above its immediate pre-market high of 746.74, with initial resistance potentially forming around the 750-752 range. A key trigger for long entries would be a consolidation followed by a definitive push above 752, confirming sustained bullish momentum in core technology names. Conversely, a failure to maintain these early gains and a drop below yesterday's closing levels would signal significant profit-taking, prompting caution. Risk-off thresholds include any sharp reversal in the Nasdaq 100 ETF or a further disproportionate spike in the VIX without corresponding equity gains. Today, focus on identifying high-conviction technology names with clear catalysts and managing risk tightly around potential whipsaws at the open.",
-    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 is at 55.9% and S&P stocks above SMA200 at 63.9%, indicating moderately healthy underlying breadth, though not yet signaling overbought extremes that typically precede sharp reversals. Traders should watch for any significant drop below yesterday's closing levels on both major indices, coupled with an accelerated VIX spike, as early signs of potential exhaustion.",
+    "title": "Post-Market Brief: June 19, 2026",
+    "mood_emoji": "🎢",
+    "mood": "Growth Momentum, Underlying Caution",
+    "narrative": "US equities rallied today, led by strong performance in technology, yet rising volatility suggests underlying market caution persists despite headline gains. The market absorbed a mixed global tape, focusing heavily on domestic AI-driven catalysts.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 746.74 | +1.04% | 📈 |\n| Nasdaq 100 ETF | 740.62 | +2.51% | 📈 |\n| VIX | 16.78 | +2.32% | 📈 |\n| Crude Oil | 76.54 | -0.08% | ➡️ |\n| Nikkei 225 | 71053.49 | +1.65% | 📈 |\n| DAX | 24985.82 | -0.16% | ➡️ |",
+    "macro_section": "High Yield credit spreads remain at a complacent 2.63%, indicating low perceived risk in corporate debt. Concurrently, the 10-year minus 2-year yield curve is flat at +0.270, signaling a neutral stance from institutional investors regarding long-term economic growth and inflation expectations, which may encourage continued risk-taking.",
+    "analysis_para1": "Globally, the Nikkei 225 saw a strong rally of +1.65%, while the DAX remained largely flat with a -0.16% dip, and Crude Oil traded sideways at -0.08%. This mixed international performance suggests divergent regional sentiment, with Asian markets showing strength contrasting with European stagnation. Despite this, US High Yield credit spreads remain firmly complacent at 2.63%, implying that US institutional risk appetite largely shrugs off lukewarm global cues, focusing instead on domestic drivers and maintaining a 'buy-the-dip' mentality in credit.",
+    "analysis_para2": "Today's primary market flow was dominated by a strong mechanical catalyst: an AI super-cycle driven positioning squeeze. Significant pre-market gappers like BFLY, HIVE, and MU, all citing AI integration or demand, fueled aggressive buying in technology and growth stocks. This momentum caused a broad repricing across the Nasdaq 100, which surged +2.51%, as investors chased performance and likely covered short positions in high-growth, AI-leveraged names, pushing the S&P 500 ETF up by +1.04% in sympathy.",
+    "analysis_para3": "Given the robust tech-led rally, traders should monitor the S&P 500 ETF's 740 level as critical support; a break below could signal profit-taking. For long entries, watch for consolidation around 745 on the S&P 500 ETF, with a bullish trigger above 748 targeting higher resistance. The rising VIX at 16.78 suggests underlying caution, making 735 on the S&P 500 ETF a key risk-off threshold. Today, traders should prioritize scaling into high-conviction AI names on pullbacks, while maintaining tight stop-losses given the increased volatility.",
+    "technical_signal": "No reversal pattern confirmed yet. While S&P 500 stocks above their 50-day moving average are at 55.9% and 63.9% above their 200-day moving average, indicating reasonable breadth, the concurrent rise in the VIX suggests latent fear. Watch for a divergence where the Nasdaq 100 ETF loses momentum while the VIX continues to climb, signaling potential fatigue.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "MU",
           "company": "Micron Technology",
-          "reason": "Strong pre-market gains driven by increasing market conviction around AI Super-Cycle Driven Memory Demand."
+          "reason": "Micron Technology (MU) is positioned for increased demand, driven by the expanding AI super-cycle requiring advanced memory solutions."
         },
         {
           "ticker": "HIVE",
           "company": "Hive Digital Technologies",
-          "reason": "Benefiting from a fresh AI Infrastructure Contract & Acquisition, aligning with the ongoing tech-led rally."
+          "reason": "Hive Digital Technologies (HIVE) secured a significant AI infrastructure contract and announced an acquisition, bolstering its AI compute capabilities."
         }
       ],
       "c_grade": [
         {
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
-          "reason": "Continuing to see flow based on recycled AI-driven momentum, rather than a fresh specific catalyst today."
+          "reason": "NVIDIA (NVDA) continued its upward trajectory today on persistent speculative flow, as investors maintain conviction in its long-term AI hardware dominance."
         }
       ]
     }

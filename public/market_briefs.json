@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-19 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Growth Momentum, Underlying Caution",
+    "spy_price": 746.74,
+    "spy_change_pct": 1.04,
+    "vix": 16.78,
+    "hy_oas": 2.63,
+    "yield_curve": 0.27,
+    "credit_status": "Complacent",
+    "s5fi": 55.9,
+    "mmth": 63.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MU",
+          "company": "Micron Technology",
+          "reason": "Micron Technology (MU) is positioned for increased demand, driven by the expanding AI super-cycle requiring advanced memory solutions."
+        },
+        {
+          "ticker": "HIVE",
+          "company": "Hive Digital Technologies",
+          "reason": "Hive Digital Technologies (HIVE) secured a significant AI infrastructure contract and announced an acquisition, bolstering its AI compute capabilities."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA (NVDA) continued its upward trajectory today on persistent speculative flow, as investors maintain conviction in its long-term AI hardware dominance."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-19 10:18 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2057,44 +2095,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corp.",
           "reason": "Continues to see speculative interest based on ongoing AI sector strength and anticipation of future product announcements, lacking fresh fundamental catalysts today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-18 08:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Caution Prevails",
-    "spy_price": 739.17,
-    "spy_change_pct": -1.2,
-    "vix": 18.73,
-    "hy_oas": 2.76,
-    "yield_curve": 0.5,
-    "credit_status": "Complacent",
-    "s5fi": 49.7,
-    "mmth": 58.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "NVIDIA is expected to move on fresh news of a breakthrough in next-gen AI chip architecture, reigniting investor excitement in the AI sector."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla could see significant volatility after announcing an aggressive new pricing strategy for its Model 3 in the highly competitive Chinese market."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMC",
-          "company": "AMC Entertainment Holdings, Inc.",
-          "reason": "AMC is likely to remain driven by retail sentiment and short-squeeze narratives, with no fresh fundamental catalyst but continued speculative interest."
         }
       ]
     }
