@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-18 18:33 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-06-19 07:05 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
@@ -10,70 +10,70 @@
       "high": 748.23,
       "low": 743.86,
       "close": 746.74,
-      "prev_open": 751.29,
-      "prev_close": 740.96,
-      "volume": 67865619,
-      "change_pct": 0.78
+      "prev_open": 749.36,
+      "prev_close": 739.06,
+      "volume": 80761200,
+      "change_pct": 1.04
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 740.62,
-      "open": 737.1,
-      "high": 741.79,
-      "low": 732.53,
+      "open": 737.2,
+      "high": 741.82,
+      "low": 732.51,
       "close": 740.62,
       "prev_open": 735.19,
       "prev_close": 722.51,
-      "volume": 49291407,
+      "volume": 49914100,
       "change_pct": 2.51
     },
     "^VIX": {
       "label": "VIX",
-      "price": 16.4,
-      "open": 17.23,
-      "high": 17.6,
-      "low": 16.35,
-      "close": 16.4,
-      "prev_open": 16.08,
-      "prev_close": 18.44,
+      "price": 17.18,
+      "open": 17.04,
+      "high": 17.27,
+      "low": 16.82,
+      "close": 17.18,
+      "prev_open": 17.23,
+      "prev_close": 16.4,
       "volume": 0,
-      "change_pct": -11.06
+      "change_pct": 4.76
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 75.68,
+      "price": 75.79,
       "open": 75.4,
-      "high": 75.73,
-      "low": 75.34,
-      "close": 75.68,
-      "prev_open": 76.59,
-      "prev_close": 76.79,
-      "volume": 536,
-      "change_pct": -1.45
+      "high": 76.78,
+      "low": 74.98,
+      "close": 75.79,
+      "prev_open": 75.53,
+      "prev_close": 76.6,
+      "volume": 42909,
+      "change_pct": -1.06
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 69902.25,
-      "open": 69005.88,
-      "high": 70125.75,
-      "low": 68985.63,
-      "close": 69902.25,
-      "prev_open": 69288.91,
-      "prev_close": 69404.5,
-      "volume": 144300000,
-      "change_pct": 0.72
+      "price": 71250.06,
+      "open": 71551.03,
+      "high": 71952.99,
+      "low": 70517.98,
+      "close": 71250.06,
+      "prev_open": 70163.71,
+      "prev_close": 71053.49,
+      "volume": 0,
+      "change_pct": 0.28
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24934.67,
-      "open": 24816.96,
-      "high": 24956.48,
-      "low": 24763.53,
-      "close": 24934.67,
-      "prev_open": 24942.73,
-      "prev_close": 24910.41,
-      "volume": 74720700,
-      "change_pct": 0.1
+      "price": 25044.94,
+      "open": 25075.33,
+      "high": 25173.02,
+      "low": 25017.24,
+      "close": 25044.94,
+      "prev_open": 24996.54,
+      "prev_close": 25026.8,
+      "volume": 0,
+      "change_pct": 0.07
     }
   },
   "fred": {
@@ -98,34 +98,34 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: June 18, 2026",
-    "mood_emoji": "🚀",
-    "mood": "Tech-Led Risk-On Rally",
-    "narrative": "Equity markets surged today, spearheaded by a strong technology rally and declining volatility. Investor sentiment appears increasingly bullish, driven by key sector-specific catalysts and broader risk appetite.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 746.74 | +0.78% | 📈 |\n| Nasdaq 100 ETF | 740.62 | +2.51% | 📈 |\n| VIX | 16.40 | -11.06% | 📉 |\n| Crude Oil | 75.68 | -1.45% | 📉 |\n| Nikkei 225 | 69902.25 | +0.72% | 📈 |\n| DAX | 24934.67 | +0.10% | ➡️ |",
-    "macro_section": "High Yield Credit Spreads (BAMLH0A0HYM2) currently stand at 2.63%, indicating a Complacent regime in credit markets. Concurrently, the 10-Year Minus 2-Year Yield Curve (T10Y2Y) is observed at a Flat +0.270 basis points. This combination suggests that institutional risk appetite remains robust, as credit conditions are perceived as stable and the yield curve does not signal immediate economic distress.",
-    "analysis_para1": "Global equity markets largely reflected a positive tone today, with the Nikkei 225 advancing by +0.72% and the DAX showing a modest gain of +0.10%. Concurrently, Crude Oil prices experienced a notable decline of -1.45% to $75.68, potentially easing inflationary pressures. This global buoyancy, coupled with lower energy costs, appears to reinforce the Complacent state of US High Yield Credit Spreads, which are currently at 2.63%. The overall global tape implies a sustained risk-on appetite for US assets, as international markets provide a supportive backdrop.",
-    "analysis_para2": "The primary driver behind today's significant market moves, particularly the Nasdaq 100 ETF's +2.51% surge, was a confluence of strong company-specific news within the technology sector. Key announcements like Intel's Apple partnership and Marvell Technology's Nvidia investment coupled with S&P 500 inclusion generated substantial positive momentum. This influx of high-conviction gappers points to a renewed focus on specific growth catalysts within semiconductors and related tech, leading to broad-based sector outperformance and driving the overall market higher.",
-    "analysis_para3": "Given today's robust tech-led rally, traders should anticipate potential follow-through but also remain vigilant for profit-taking in the near term. For the S&P 500 ETF, watch the 740 level as potential support on any pullbacks, with yesterday's close acting as a key short-term entry trigger for long positions. A sustained break below the 735 level would serve as a risk-off threshold, signaling a potential shift in momentum. Today's action suggests maintaining a bullish bias, using any dips as opportunities rather than initiating aggressive short positions.",
-    "technical_signal": "No reversal pattern confirmed yet. While today saw strong momentum, evidenced by S&P 500 stocks above SMA50 at 55.9% and S&P stocks above SMA200 at 63.9%, these levels indicate health rather than extreme overbought conditions. Traders should watch for any signs of volume divergence or exhaustion gaps in upcoming sessions that could signal a potential short-term top.",
+    "title": "Pre-Market Brief: June 19, 2026",
+    "mood_emoji": "⚡",
+    "mood": "Tech-Led Rally / Volatility Creep",
+    "narrative": "US equities are set for a strong open, driven by a significant rally in technology stocks. However, rising volatility suggests an underlying tension despite the headline gains.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 746.74 | +1.04% | 📈 |\n| Nasdaq 100 ETF | 740.62 | +2.51% | 📈 |\n| VIX | 17.18 | +4.76% | 📈 |\n| Crude Oil | 75.79 | -1.06% | 📉 |\n| Nikkei 225 | 71250.06 | +0.28% | ➡️ |\n| DAX | 25044.94 | +0.07% | ➡️ |",
+    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) remains at a 'Complacent' 2.63%, indicating continued institutional comfort with risk-taking. Concurrently, the 10Y-2Y Yield Curve (T10Y2Y) sits at a 'Flat' +0.270, which often signals a wait-and-see approach or potential future economic slowdown concerns, contrasting with the immediate risk appetite.",
+    "analysis_para1": "Global equity markets offer a mixed signal for US risk appetite, with the Nikkei 225 barely up +0.28% and the DAX showing a marginal gain of +0.07%. This muted performance in major overseas indices, coupled with Crude Oil declining by -1.06% to $75.79, suggests a lack of broad global conviction or demand. Despite these external indicators, US High Yield Credit Spreads (BAMLH0A0HYM2) remain 'Complacent' at 2.63%, implying that US institutional investors are selectively embracing risk, possibly in specific growth pockets, rather than reflecting a widespread global risk-on environment.",
+    "analysis_para2": "Today's primary flow is largely driven by a significant positioning squeeze within the technology sector, particularly evident in the Nasdaq 100 ETF's +2.51% surge. This concentrated rally, occurring simultaneously with a +4.76% increase in the VIX, suggests aggressive buying or short covering in high-beta growth stocks. The price action points towards a mechanical catalyst where technical thresholds or options expiries in heavily-weighted technology names are forcing momentum-driven flows, overshadowing broader market sentiment and pushing volatility higher.",
+    "analysis_para3": "Traders should prioritize managing exposure in leading growth names given the tech-led rally and elevated VIX. Watch for the S&P 500 ETF (746.74) as potential intraday support, with a break below suggesting profit-taking. Key triggers for long entries would be sustained momentum above current levels in major tech, while a dip below yesterday's closing price for the Nasdaq 100 ETF (around 722.50) could signal a short entry opportunity. A sustained VIX move above 18.00 should serve as a risk-off threshold, prompting reduced leverage and defensive positioning TODAY.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 is at 55.9% and S&P stocks above SMA200 is at 63.9%, indicating decent but not stretched breadth. Watch for any significant divergence between index performance and broader market participation as a potential early warning.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "INTC",
-          "company": "Intel Corporation",
-          "reason": "The announced partnership with Apple provided a significant, fresh catalyst for the semiconductor giant, driving strong investor interest."
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon announced a significant expansion of its AI-powered logistics network, projecting substantial efficiency gains and cost reductions."
         },
         {
-          "ticker": "MRVL",
-          "company": "Marvell Technology, Inc.",
-          "reason": "News of Nvidia's investment alongside its S&P 500 inclusion delivered a dual catalyst, boosting its valuation and market profile."
+          "ticker": "UNH",
+          "company": "UnitedHealth Group Incorporated",
+          "reason": "UnitedHealth Group received key regulatory approval for its new digital health platform, positioning it for expanded market reach and service offerings."
         }
       ],
       "c_grade": [
         {
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
-          "reason": "While its ecosystem partners saw fresh news, NVIDIA's movement today was largely flow-driven, extending its recent momentum without a new fundamental catalyst."
+          "reason": "NVIDIA continues its strong upward momentum as investors double down on its perceived leadership in AI chip development and associated technologies."
         }
       ]
     }
