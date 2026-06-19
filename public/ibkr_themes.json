@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-18T23:10:26.670418+00:00",
+  "generated_at": "2026-06-19T23:09:44.822665+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
@@ -49,7 +49,7 @@
     },
     {
       "name": "Semiconductors",
-      "theme_rs": 97.3,
+      "theme_rs": 97.2,
       "perf_1d": 7.46,
       "leaders": [
         {
@@ -59,25 +59,6 @@
           "adr_pct": 7.36,
           "vol_surge": 1.78,
           "mkt_cap": 673433767608,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Semiconductors",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "UMC",
-          "price": 24.08,
-          "rs_52w": 98,
-          "adr_pct": 5.52,
-          "vol_surge": 1.88,
-          "mkt_cap": 60423625326,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -175,6 +156,25 @@
           "adr_pct": 8.0,
           "vol_surge": 3.1,
           "mkt_cap": 467609083084,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Semiconductors",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "UMC",
+          "price": 24.08,
+          "rs_52w": 97,
+          "adr_pct": 5.52,
+          "vol_surge": 1.88,
+          "mkt_cap": 60423625326,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
