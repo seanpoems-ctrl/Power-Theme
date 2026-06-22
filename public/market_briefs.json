@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-22 11:58 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Mixed Sentiment, Elevated Volatility",
+    "spy_price": 744.63,
+    "spy_change_pct": -0.28,
+    "vix": 17.26,
+    "hy_oas": 2.63,
+    "yield_curve": 0.27,
+    "credit_status": "Complacent",
+    "s5fi": 56.0,
+    "mmth": 65.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "KEEL",
+          "company": "KEEL Corp.",
+          "reason": "KEEL is poised for upward momentum on news of a potential AWS partnership and its inclusion watch for the Russell index, attracting institutional interest."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet (GOOGL) is set for a positive open following reports of a significant quantum computing breakthrough, boosting its long-term innovation narrative."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA is expected to see continued interest based on ongoing AI infrastructure build-out, though without fresh catalysts today, it's primarily a flow-driven trade."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-22 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2057,44 +2095,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continues to see heightened volatility as traders adjust positions around previous momentum narratives, with key technical levels in focus after recent market weakness."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-19 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off Sentiment / Volatility Up",
-    "spy_price": 733.73,
-    "spy_change_pct": -0.67,
-    "vix": 18.06,
-    "hy_oas": 2.83,
-    "yield_curve": 0.54,
-    "credit_status": "Complacent",
-    "s5fi": 49.9,
-    "mmth": 57.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NOW",
-          "company": "ServiceNow",
-          "reason": "ServiceNow surged on news of strategic partnerships expanding its AI-powered platform into new enterprise verticals, driving strong pre-market interest."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft showed resilience on news of a significant AI integration deal with a major financial institution, further solidifying its leadership in enterprise AI adoption."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Tesla experienced volatile trading, recycling headlines around production targets and CEO Elon Musk's social media activity, lacking fresh fundamental drivers."
         }
       ]
     }
