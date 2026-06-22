@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-06-22 11:58 ET",
-  "phase": "PRE",
-  "session": "Pre-Market",
+  "generated_at": "2026-06-22 16:45 ET",
+  "phase": "POST",
+  "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 744.63,
+      "price": 744.39,
       "open": 747.7,
       "high": 750.18,
-      "low": 743.15,
-      "close": 744.63,
+      "low": 743.13,
+      "close": 744.39,
       "prev_open": 747.76,
       "prev_close": 746.74,
-      "volume": 15399704,
-      "change_pct": -0.28
+      "volume": 42455858,
+      "change_pct": -0.31
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 735.77,
+      "price": 737.95,
       "open": 742.02,
       "high": 745.43,
-      "low": 735.35,
-      "close": 735.77,
+      "low": 734.39,
+      "close": 737.95,
       "prev_open": 737.2,
       "prev_close": 740.62,
-      "volume": 17972638,
-      "change_pct": -0.65
+      "volume": 41264194,
+      "change_pct": -0.36
     },
     "^VIX": {
       "label": "VIX",
-      "price": 17.26,
+      "price": 17.28,
       "open": 17.48,
       "high": 17.92,
       "low": 16.49,
-      "close": 17.26,
+      "close": 17.28,
       "prev_open": 17.23,
       "prev_close": 16.4,
       "volume": 0,
-      "change_pct": 5.24
+      "change_pct": 5.37
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 73.55,
+      "price": 74.08,
       "open": 78.0,
       "high": 78.14,
       "low": 73.24,
-      "close": 73.55,
+      "close": 74.08,
       "prev_open": 75.53,
       "prev_close": 76.6,
-      "volume": 229933,
-      "change_pct": -3.98
+      "volume": 294691,
+      "change_pct": -3.29
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -77,14 +77,14 @@
     }
   },
   "fred": {
-    "hy_oas": 2.63,
+    "hy_oas": 2.66,
     "yield_curve": 0.27,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 56.0,
-    "mmth": 65.0
+    "s5fi": 55.1,
+    "mmth": 63.6
   },
   "regime": {
     "credit_status": "Complacent",
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Pre-Market Brief: June 22, 2026",
-    "mood_emoji": "🤔",
-    "mood": "Mixed Sentiment, Elevated Volatility",
-    "narrative": "US equities are showing a cautious dip this morning, marked by a rise in volatility, while global markets largely display resilience. Investors are balancing domestic weakness against international strength and a flat yield curve.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 744.63 | -0.28% | ➡️ |\n| Nasdaq 100 ETF | 735.77 | -0.65% | 📉 |\n| VIX | 17.26 | +5.24% | 📈 |\n| Crude Oil | 73.55 | -3.98% | 📉 |\n| Nikkei 225 | 71250.06 | +0.28% | ➡️ |\n| DAX | 25139.69 | +0.62% | 📈 |",
-    "macro_section": "High Yield Credit Spreads remain at a complacent 2.63%, indicating low perceived risk in the corporate bond market. Concurrently, the 10-Year Minus 2-Year Yield Curve sits flat at +0.270, suggesting a neutral stance on future economic growth. This combination implies that institutional risk appetite, while not aggressively bullish, is not yet signaling significant alarm.",
-    "analysis_para1": "The global tape presents a mixed picture this morning, with the Nikkei 225 showing a modest gain of +0.28% and the DAX advancing +0.62%. This positive sentiment in major European and Asian markets contrasts sharply with a significant -3.98% drop in Crude Oil prices, which often signals concerns about global demand. Despite these disparate movements, US High Yield Credit Spreads remain complacent at 2.63%, indicating that underlying credit risk perception has not yet tightened. The resilience in major global indices, even with falling oil, suggests that institutional risk appetite abroad is holding, but the crude dip hints at a potential undercurrent of caution that US markets might eventually reflect.",
-    "analysis_para2": "Today's primary flow appears driven by a mechanical catalyst of pre-weekend risk reduction and positioning adjustments. The notable +5.24% surge in the VIX, despite relatively modest drops in the S&P 500 and Nasdaq 100 ETFs, points to an increase in hedging activity and demand for downside protection. This suggests traders are de-risking ahead of the weekend, rather than reacting to a specific macroeconomic shock. The divergence between global market strength and US market caution underscores a localized defensive posture, likely stemming from a combination of recent gains and uncertainty over upcoming catalysts.",
-    "analysis_para3": "Traders should closely monitor key support levels for the S&P 500 ETF, particularly around the 740-742 zone, as a sustained breach below this could signal further downside. Given the +5.24% jump in the VIX, initiating new long positions requires clear confirmation of stabilization and reversal, perhaps indicated by a reclaiming of yesterday's open for major indices. For risk management, a break below the 735 level on the S&P 500 ETF should be considered a clear risk-off threshold, prompting reduced exposure or increased hedging. Today, the actionable plan is to remain agile, protect capital, and prioritize high-conviction setups only.",
-    "technical_signal": "No reversal pattern confirmed yet. While S&P 500 stocks above SMA50 stands at a healthy 56.0% and S&P stocks above SMA200 at 65.0%, indicating underlying strength, the current price action shows a slight retracement. Traders should watch for the S&P 500 to either hold its current range or demonstrate a clear breakout or breakdown from established short-term consolidation areas for directional conviction.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "KEEL",
-          "company": "KEEL Corp.",
-          "reason": "KEEL is poised for upward momentum on news of a potential AWS partnership and its inclusion watch for the Russell index, attracting institutional interest."
-        },
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet (GOOGL) is set for a positive open following reports of a significant quantum computing breakthrough, boosting its long-term innovation narrative."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is expected to see continued interest based on ongoing AI infrastructure build-out, though without fresh catalysts today, it's primarily a flow-driven trade."
-        }
-      ]
-    }
+    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
   }
 }
