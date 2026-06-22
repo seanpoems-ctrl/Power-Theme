@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-22 18:25 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Volatility Surges / Growth Concerns",
+    "spy_price": 744.39,
+    "spy_change_pct": -0.31,
+    "vix": 17.28,
+    "hy_oas": 2.66,
+    "yield_curve": 0.27,
+    "credit_status": "Complacent",
+    "s5fi": 55.1,
+    "mmth": 63.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "KEEL",
+          "company": "Keel Financial Services",
+          "reason": "Strong upside momentum driven by potential AWS partnership rumors and an upcoming Russell index inclusion watch."
+        },
+        {
+          "ticker": "CRM",
+          "company": "Salesforce, Inc.",
+          "reason": "Reported stronger-than-expected earnings with robust forward guidance, affirming resilient enterprise software demand."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continues to attract significant institutional flow, but lacks a fresh, market-moving catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-22 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2037,44 +2075,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continues to benefit from an ongoing tailwind of robust AI chip demand, a theme that has been consistent for months without a fresh specific catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-20 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Broad Risk-On Rally",
-    "spy_price": 741.25,
-    "spy_change_pct": 1.02,
-    "vix": 17.44,
-    "hy_oas": 2.86,
-    "yield_curve": 0.54,
-    "credit_status": "Complacent",
-    "s5fi": 56.3,
-    "mmth": 60.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CAVA",
-          "company": "CAVA Group",
-          "reason": "CAVA Group rallied strongly post-earnings, delivering a beat & raise that signals robust underlying business momentum and growth."
-        },
-        {
-          "ticker": "INTC",
-          "company": "Intel Corporation",
-          "reason": "Intel Corporation surged following its strategic re-positioning in the AI sector, confirming its commitment to competitive innovation and market share."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corporation continued its upward trend, primarily driven by persistent institutional flow chasing AI infrastructure demand rather than a fresh news catalyst today."
         }
       ]
     }
