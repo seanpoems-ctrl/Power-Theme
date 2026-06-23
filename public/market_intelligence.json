@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-06-23 07:05 ET",
+  "generated_at": "2026-06-23 09:45 ET",
   "phase": "PRE",
   "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 744.39,
-      "open": 747.7,
-      "high": 750.18,
-      "low": 743.13,
-      "close": 744.39,
-      "prev_open": 747.76,
-      "prev_close": 746.74,
-      "volume": 46204600,
-      "change_pct": -0.31
+      "price": 735.2,
+      "open": 733.81,
+      "high": 735.39,
+      "low": 732.3,
+      "close": 735.2,
+      "prev_open": 747.7,
+      "prev_close": 744.39,
+      "volume": 6316254,
+      "change_pct": -1.23
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 737.95,
-      "open": 742.02,
-      "high": 745.45,
-      "low": 734.39,
-      "close": 737.95,
-      "prev_open": 736.39,
-      "prev_close": 739.81,
-      "volume": 43202700,
-      "change_pct": -0.25
+      "price": 716.94,
+      "open": 715.74,
+      "high": 717.8,
+      "low": 713.28,
+      "close": 716.94,
+      "prev_open": 742.02,
+      "prev_close": 737.95,
+      "volume": 7335619,
+      "change_pct": -2.85
     },
     "^VIX": {
       "label": "VIX",
-      "price": 19.95,
+      "price": 20.21,
       "open": 19.67,
       "high": 20.54,
-      "low": 19.58,
-      "close": 19.95,
+      "low": 19.49,
+      "close": 20.21,
       "prev_open": 17.48,
       "prev_close": 17.28,
       "volume": 0,
-      "change_pct": 15.45
+      "change_pct": 16.96
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 73.82,
+      "price": 73.08,
       "open": 74.14,
       "high": 74.45,
       "low": 72.48,
-      "close": 73.82,
+      "close": 73.08,
       "prev_open": 78.93,
       "prev_close": 74.82,
-      "volume": 43674,
-      "change_pct": -1.34
+      "volume": 69045,
+      "change_pct": -2.33
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,11 +65,11 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24858.36,
+      "price": 24857.12,
       "open": 24835.56,
-      "high": 24913.9,
+      "high": 24926.52,
       "low": 24728.57,
-      "close": 24858.36,
+      "close": 24857.12,
       "prev_open": 25035.93,
       "prev_close": 25139.69,
       "volume": 0,
@@ -98,6 +98,36 @@
     }
   },
   "analysis": {
-    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "title": "Pre-Market Brief: June 23, 2026",
+    "mood_emoji": "🐻",
+    "mood": "Risk-Off / Heightened Volatility",
+    "narrative": "Global markets are signaling a significant risk-off shift this morning, with broad-based declines across major indices and commodities. Volatility is surging as investors re-evaluate risk exposures ahead of the trading session.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 735.20 | -1.23% | 📉 |\n| Nasdaq 100 ETF | 716.94 | -2.85% | 📉 |\n| VIX | 20.21 | +16.96% | 📈 |\n| Crude Oil | 73.08 | -2.33% | 📉 |\n| Nikkei 225 | 69788.38 | -3.55% | 📉 |\n| DAX | 24857.12 | -1.12% | 📉 |",
+    "macro_section": "High Yield Credit Spreads (BAMLH0A0HYM2) currently stand at 2.66%, indicating a Complacent credit regime, while the 10-Year minus 2-Year Yield Curve (T10Y2Y) is Flat at +0.270. Despite the macro indicators suggesting institutional risk appetite should be stable, today's sharp market declines and surging VIX point to a brewing divergence or a sudden shift in perception not yet reflected in these lagging credit metrics.",
+    "analysis_para1": "The global tape is decidedly negative this morning, with the Nikkei 225 down a significant -3.55% and the DAX declining -1.12%. Crude Oil also saw a sharp drop of -2.33%, reflecting weakening global demand outlooks or increased risk aversion. While US High Yield Credit Spreads remain at a seemingly complacent 2.66%, this widespread global selling pressure implies a rapidly deteriorating risk appetite that has yet to fully translate into broader credit market stress. US investors should anticipate a similar risk-off sentiment to dominate domestic trading, likely putting upward pressure on credit spreads soon.",
+    "analysis_para2": "The single dominant 'Why' behind today's primary flow appears to be a broad-based de-risking event driven by mounting, albeit unspecified, macroeconomic concerns. The substantial +16.96% spike in the VIX, coupled with the sharp declines across major equity and commodity benchmarks globally, indicates a mechanical deleveraging or 'risk-off' positioning squeeze. Investors are aggressively reducing exposure to risk assets, potentially in anticipation of forthcoming negative macro data or policy shifts, leading to widespread selling pressure that transcends individual sector performance.",
+    "analysis_para3": "Today's mechanical plan should prioritize capital preservation and cautious engagement. Watch for the S&P 500 ETF to test key psychological support levels around 730.00; a break below could trigger further downside towards 725.00. Key triggers for short entries could be failed rallies into resistance or confirmed breakdowns below support, while long positions should be avoided until market stability is evident. Risk-off thresholds include a continued rise in the VIX above 22.00 or sustained trading below the 730.00 level in the S&P 500 ETF, indicating that traders should remain nimble and prepared for elevated volatility.",
+    "technical_signal": "No reversal pattern confirmed yet. While S&P 500 stocks above SMA50 are at 55.1% and S&P stocks above SMA200 are at 63.6%, today's sharp decline threatens to erode these levels. We need to watch for potential capitulation or a significant intraday bounce accompanied by volume to signal any near-term bottoming attempt.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "ZETA",
+          "company": "Zeta Global Holdings Corp.",
+          "reason": "ZETA is poised for upside after announcing a strategic partnership with Palantir Technologies to enhance AI-driven marketing analytics capabilities."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft could see increased buying interest following reports of a significant new cloud computing contract with a major European financial institution, solidifying its enterprise AI lead."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA remains a recycled C-Grade candidate, trading primarily on broad tech sector flows and ongoing AI hype, without a fresh, specific catalyst today."
+        }
+      ]
+    }
   }
 }
