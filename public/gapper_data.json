@@ -1,829 +1,56 @@
 {
-  "scan_time": "2026-06-22 08:55 ET",
+  "scan_time": "2026-06-23 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "DFTX",
-      "price": 24.48,
-      "gap_pct": 55.64,
-      "pm_volume": 1335623,
-      "avg_vol_10d": 2323362,
-      "avg_dollar_vol": 56875902,
-      "mkt_cap": 2669954727,
-      "rvol": 0.64,
-      "adr_pct": 6.01,
-      "category": "FDA",
-      "theme": "Positive Phase 3 Trial Results",
-      "reasoning": "Definium Therapeutics stock surged after its depression pill posted a Phase 3 trial win, de-risking future FDA approval.",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 20,
-      "grade": "C",
-      "finviz_theme": "Pharma - Large Cap",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Definium Therapeutics' depression pill achieved a **Phase 3 win**, demonstrating an **8.1-point gap** in trial results. The company had set a webcast to discuss these **Phase 3 depression study results** for **June 22**.",
-        "impact": "Successful Phase 3 trials significantly de-risk the path to regulatory approval and commercialization, paving the way for potential market entry for this depression treatment."
-      },
-      "analysis_details": "• **The Drug**\nDefinium Therapeutics' **depression pill** posted a **Phase 3 win**, leading to a surge in the company's stock. The trial results specifically indicated an **8.1-point gap**, suggesting strong efficacy for the treatment.\n\n• **The Significance**\nThis positive outcome from a **Phase 3 trial** is a critical milestone, substantially de-risking the development pathway for the depression pill. It signifies a major step towards potential **FDA approval** and commercialization, enhancing Definium's market position in mental health therapeutics and opening up a significant total addressable market.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Definium Therapeutics stock surges on Phase 3 trial results By Investing.com - Investing.com Canada",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNYjdIckluY3FvVXhaSFNOWFF0eVpPekV0bTIwSTFDMmRvVTR0TWVULVNIYnljbGdDdnhNTnFYVTFYelUtM0hQUy1wbGh4NkVDT1dlaWphUDNHcGg1X1FYX0xGUGRpTGZqcThEVUpaUV9PanllYTdZdG5YRGt0M2htRWF4VWpCTkJoc0U4SWY2MkFCTmdLMVNwVjh4eS1VMHJ3NUtFMWtXcTNHQmxMYVNDaHdDaXhldzhCMmxuVQ?oc=5"
-        },
-        {
-          "title": "Definium's depression pill posts Phase 3 win, with 8.1-point gap - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxONU41dWZBYnpBVUMxWm1PRi0zTERGSGlEX0ZzTllENGpuMGQxbVRUbm9kUm1iWXdQSlhaRnFlbkN1a2UwWHZqemEwaGtsYnh5eDVhVzh4QVIyelZ3WFlwVXdWN1ZHSzY4VkJoa0t6ZFRpMFdxQmI1VENZWUhGbEF1VGRGeHc0QkxTM3hRaWFpZ0xBWlFBOGxuRGVxWlZOcTFVc2p5c1B4NUI5NDBDYTctUWttaGVOTTdJY1FRZGdyWQ?oc=5"
-        },
-        {
-          "title": "Definium sets webcast on Phase 3 depression study results for June 22 - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQX3doMktpbktIaUxiVm1helUxUXdHbUQwTFZTOFpkUkpUYWVyV3RYNlJDWDFoeThCUXVqbklBanEtTVZyTWFrYjMweHhDT0wtaDN3QmJBZnJZNkJUVXJVNUdJNG9INjB6VkpkbHlCOVFCTnhEZFRwWnFHdUxvZWNpdjdaQy1wZ2wyQ2k2N1pxOUFjQjhZUDlXQ0dEeGFTckp2UEljejdyRG5NcFZNQzFSRGtlUVMxdTAtUlFscHhoNHE?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-06-22",
-        "form": "8-K",
-        "items": [
-          "7.01",
-          "8.01",
-          "9.01"
-        ],
-        "category": "Others",
-        "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/1813814/000110465926076091/tm2618434d1_8k.htm"
-      },
-      "float_shares": "104.84M",
-      "short_float": "8.99%",
-      "daily_pct": 0.2,
-      "industry": "Pharma - Large Cap",
-      "technical_status": "Fail (Avg $Vol $57M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Definium Therapeutics stock surged after its depression pill posted a Phase 3 trial win",
-        "discrepancy_note": "Finviz (Source A) provides no information regarding DFTX's Phase 3 trial or its results. Google News (Source B) consistently reports a Phase 3 trial win, with one article (Stock Titan [1]) specifically mentioning an '8.1-point gap', but this is not mentioned in the catalyst summary itself. Since Source A is entirely absent, the core claim of a 'Phase 3 trial win' cannot be confirmed by BOTH sources."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "APGE",
-      "price": 90.38,
-      "gap_pct": 46.95,
-      "pm_volume": 2389142,
-      "avg_vol_10d": 1110178,
-      "avg_dollar_vol": 100337888,
-      "mkt_cap": 6813691492,
-      "rvol": 1.19,
-      "adr_pct": 6.13,
-      "category": "New Contract/Partnership",
-      "theme": "License and Discovery Deal",
-      "reasoning": "Apogee Therapeutics entered into new IL-31R discovery and license deals, signaling potential future revenue and pipeline expansion.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
-      "grade": "B",
-      "finviz_theme": "Biotech - Immunology",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Apogee Therapeutics (**APGE**) announced it has **inked IL-31R discovery and license deals**, indicating expansion of its therapeutic pipeline. A separate headline mentioned **AbbVie-Apogee acquisition** as a 'solid fit,' according to JPMorgan, though the 8-K confirmed a contract, not an acquisition.",
-        "impact": "The deal likely broadens APGE's drug discovery capabilities and potential for future revenue streams, but the lack of immediate financial terms or a tier-1 partner suggests a moderate impact."
-      },
-      "analysis_details": "• **Impact**\nApogee Therapeutics (**APGE**) has **inked IL-31R discovery and license deals**, as confirmed by a Google News headline and the 8-K filing indicating a Material Contract or Agreement. These agreements suggest a focus on **IL-31R** pathways, which are critical in immunology. The **8-K filing** specifically points to **Item 1.01 Material Contract**, reinforcing the contract's official nature.\n\n• **Strategic Value**\nThese **IL-31R discovery and license deals** could enhance Apogee's pipeline and market position in immunology. While specific financial terms or partner names are not detailed in the headlines, expanding discovery and licensing efforts typically signifies a company's commitment to long-term growth and innovation. The positive sentiment from JPMorgan regarding an **AbbVie-Apogee acquisition** as a 'solid fit' further highlights potential future strategic interest in APGE's assets or capabilities, though this is separate from the reported contract.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Apogee Therapeutics (NASDAQ: APGE) inks IL-31R discovery and license deals - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQbG5nelhweWZuclUzWXFJc01scWNvNk4tWllFc3RsTXBZQUcyUjB1aHlseVh1UHlETUJNdXk2SzlPUmNDcFpnSEFfNXhISjl0NlBQNm04eHQybDhwQW5XenJqV1lkbUk1ZDNJVGxzWnZBbGdSME5aekJoa1FIWGVCWUFtd3MyMllReEJlUm9qTHZMMmZzSVk1eTc0ek14MzhrV0NGYWpfRFNXUU9YUG5KNTVB?oc=5"
-        },
-        {
-          "title": "AbbVie-Apogee acquisition a ‘solid fit,’ JPMorgan says - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOTHhlLTU0WlRhN29OODA5ODh1MEh6Ym9UWDVqc3JaVGlDOWNkSnJhQVdXcjNpeVR4dVZzYVBCVFpFNkI1Y3Jma0JvbHVIWnNnd0YxSDk1MnE5dGVLOGpxbFduODd6MDMyZzdIRzk1U0s1VmhZRU1Eallxd0JXbGtQdmV0TjcxTXMySW0zTkNaR2tkR2dJWlVMOU1SMWZSRUZ2N0xNVDBuSjh2cUU?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-06-22",
-        "form": "8-K",
-        "items": [
-          "1.01",
-          "5.07",
-          "7.01",
-          "8.01",
-          "9.01"
-        ],
-        "category": "New Contract/Partnership",
-        "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/1974640/000114036126025844/ef20076505_8k.htm"
-      },
-      "float_shares": "56.97M",
-      "short_float": "18.48%",
-      "daily_pct": 2.21,
-      "industry": "Biotech - Immunology",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Apogee Therapeutics entered into new IL-31R discovery and license deals, signaling potential future revenue and pipeline expansion.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "UMC",
-      "price": 24.08,
-      "gap_pct": 14.04,
-      "pm_volume": 760664,
-      "avg_vol_10d": 20281703,
-      "avg_dollar_vol": 488383408,
-      "mkt_cap": 57683727042,
-      "rvol": 1.06,
+      "ticker": "EPC",
+      "price": 22.72,
+      "gap_pct": 9.99,
+      "pm_volume": 235728,
+      "avg_vol_10d": 1054298,
+      "avg_dollar_vol": 23953651,
+      "mkt_cap": 1046967684,
+      "rvol": 2.54,
       "adr_pct": 4.87,
       "category": "Others",
-      "theme": "Others",
-      "reasoning": "UMC: United Microelectronics Corp Stock (UMC) Moved Up by 10.66% on Jun 21: Drivers Behind the ",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: United Microelectronics Corp Stock (UMC) Moved Up by 10.66% on Jun 21: Drivers Behind the Movement - TradingKey",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: United Microelectronics Corp Stock (UMC) Moved Up by 10.66% on Jun 21: Drivers Behind the Movement - TradingKey\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "United Microelectronics Corp Stock (UMC) Moved Up by 10.66% on Jun 21: Drivers Behind the Movement - TradingKey",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPNk9hT0hSZHdONENwNkFTMUNBZERiQ2IyQ1FBT2JzZ0RYaFBnQ0pKUGRsMXh5akJfcmpTcWdPX1VDXzEzZTNaR3FLUXkwLVdzamV2VWpxY2ZYTVZQVlZZcWswb3UxRlQ3a0k5TWxRZ0tEbHlfbzAxdVlMSkRIRlpaNlpMUE94RGd5S2c?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "2.52B",
-      "short_float": "1.04%",
-      "daily_pct": 10.66,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 65,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "UMC stock moved up by 10.66% on Jun 21",
-        "discrepancy_note": "Source B (Google News / TradingKey) confirms the claim 'United Microelectronics Corp Stock (UMC) Moved Up by 10.66% on Jun 21', but Source A (Finviz News) provides no information to confirm or deny this claim."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "PENG",
-      "price": 67.15,
-      "gap_pct": 13.09,
-      "pm_volume": 136763,
-      "avg_vol_10d": 2831487,
-      "avg_dollar_vol": 190134352,
-      "mkt_cap": 3407695307,
-      "rvol": 1.36,
-      "adr_pct": 10.43,
-      "category": "Thematic Narratives",
-      "theme": "AI Data Center Narrative / Industry Focus",
-      "reasoning": "Penguin Solutions is being highlighted in a comparative analysis against Oracle, positioning it as a potential buy in the AI Data Center sector.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 58,
-      "grade": "B",
-      "finviz_theme": "Cloud Data Centers",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "The **Google News** headline on **2026-06-22** at **12:03 UTC** features **Penguin Solutions** in a direct comparison with **Oracle**, asking 'Which **AI Data Center Stock** Is a Buy?'. This article is spotlighting **PENG** within the critical **AI data center** industry.",
-        "impact": "This narrative inclusion could increase visibility and investor interest in **PENG** as a key player in the booming **AI Data Center** market, potentially attracting new capital flows."
-      },
-      "analysis_details": "• **The Narrative**\nA **Google News** headline from **2026-06-22** at **12:03 UTC** specifically features **Penguin Solutions** in a direct comparative analysis against **Oracle**. The article's title, \"Which **AI Data Center Stock** Is a Buy?\", positions **PENG** as a noteworthy contender within the rapidly expanding **AI data center** sector.\n\n• **Explosiveness**\nThis narrative explicitly highlights **PENG** as a potential investment opportunity within the high-growth **AI Data Center** theme. The increased visibility and positive framing in a comparative article could draw attention from both retail and institutional investors, potentially driving momentum as the market digests its strategic positioning in the **AI** infrastructure build-out.",
-      "peer_tickers": [
-        "SMCI",
-        "NVDA",
-        "ANET"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "TECL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "TECS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "Oracle vs. Penguin Solutions: Which AI Data Center Stock Is a Buy? - Zacks Investment Research",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPeUppRl9ISUUzT0lGbFVfOU5KOG5BQTRSeFkxUEFad21PMUxfVWp3dUd0T1o1RDFCdHFmbzhlb3RlanVqZDFRRnVkQTJ2Z0NUSUdBWFB2eENEVmpKd09FU2JvLWJlOWJYNUlaLVlaM1p6MHVNYm54Q0IzMWdFd2s3Ym5MMk56Z3NjdWhlZ0dUOEhjbHFtYWthUElMcG4zaFJPUnZuUm45QQ?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "48.53M",
-      "short_float": "20.46%",
-      "daily_pct": 12.52,
-      "industry": "Cloud Data Centers",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Penguin Solutions is being positioned as a potential buy in a comparative analysis against Oracle.",
-        "discrepancy_note": "Source B (Google News) contains conflicting information. One headline asks 'Which AI Data Center Stock Is a Buy?' in a comparison between Oracle and Penguin Solutions, implying it's being considered as a potential buy. However, another headline from the same source explicitly states 'Penguin Solutions (PENG) Stock Could Be 75% Overvalued', which contradicts the idea of it being a potential buy. Source A (Finviz) has no relevant information."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "FRVO",
-      "price": 35.09,
-      "gap_pct": 11.14,
-      "pm_volume": 92524,
-      "avg_vol_10d": 1829258,
-      "avg_dollar_vol": 64188663,
-      "mkt_cap": 9950202221,
-      "rvol": 0.97,
-      "adr_pct": 8.25,
-      "category": "New Contract/Partnership",
-      "theme": "Capital Raise & Strategic Partnership",
-      "reasoning": "Fervo Energy raised **$2.2B** for **geothermal buildout** through a strategic partnership with **Google**, signaling significant institutional support.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "C",
-      "finviz_theme": "Clean Energy - Geothermal",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Fervo Energy announced raising **$2.2 billion** in capital to further its **geothermal buildout** initiatives, significantly backed by **Google**. This capital infusion is a major event for the company's expansion plans, reinforcing its market position.",
-        "impact": "This substantial capital raise and partnership provides significant funding for Fervo's long-term growth and validates its technology through a Tier-1 strategic partner, setting a strong positive momentum for its competitive positioning in the clean energy sector."
-      },
-      "analysis_details": "• **Impact**\nFervo Energy has secured a massive **$2.2 billion** in new funding, specifically earmarked to accelerate its **geothermal buildout**. This capital raise is a transformative event, providing ample resources for the company's expansion goals and significantly bolstering its financial capacity.\n\n• **Strategic Value**\nThe capital raise is notably tied to a strategic partnership with **Google**, which is instrumental in pushing the **geothermal buildout**. This collaboration with a major technology player like **Google** provides substantial validation for Fervo's technology and market strategy, potentially opening doors for further large-scale projects and enhancing its competitive edge in the clean energy sector.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Earnings Flash (FRVO) Fervo Energy Posts Q1 Net Loss $3.72 a Share - marketscreener.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPb1h3cTVLWFJzc0V1WnVNYWJsMld2b3BiVFVkSDhwZERBNWhxS0haWGcwUk9wZEdQZ2VvUjNxVkhJZFB1aDZBV3FwWnd3Si05RWQ4OFU4SEtvcjM0SXRJUWtWTmdlQi16M1dYYXRlTTNqRnQtbTJDa1pQOV96MXJXV3JJYzRnWm1YT0NFWFlfUTkxenJVZ192X2hycFhjekJOS3JEZTE2TjgxM3VrajkzVl9PVmEtcDA?oc=5"
-        },
-        {
-          "title": "FRVO.NB (FRVO) Dividends & Stock Splits: Historical Payouts and Event Timeline - TradingKey",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTFBrNHVwZVllMTluQ0FiT1ZRaDk2Um9XZ2gyLXBTNVlvR2U2aExDQmRSZzdMeUhCbHdxTFI0Y05GR2gxdERCOXBxd0FkUjZ2ck5BTXozT2JlaVVQcjFQSUlvS0EyWnNlTkN1YVpyYlZLLXp3S0wxbVhKSw?oc=5"
-        },
-        {
-          "title": "Fervo Energy raises $2.2B, pushes geothermal buildout with Google - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPRW1MN3RtYlZPN3ZHOXhTT2k4ZXA2SnU2c1FGOE9wOGZnNWMyQVVWaFdGdmRFZU5sYzVXNVZsVURjMDFablBjRVBNYkdITDBrYXNJYVZ5NExCak81NE96NjctUTgtem5CelJLTjVTU3hta2s2elRGbjFQZGIyZWNyc09XaXNURFVLWjFHSDNrZWtZelZ0dkpBVUdn?oc=5"
-        },
-        {
-          "title": "Fervo, NVIDIA and PNNL back AI twin for geothermal wells - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQNzY5ZGxjZXExN3hzQWYydTB5X2MyUzFDSjhSb3U5UFlkZmt5djJMUHFXSHc1T1pfYVZrWVdDV0tzaEFMRlJrTDRYNGZyU0wxdTVySFM1bzhhZ0lab1ktang5U0t0UnFNdHpXSFFJbkR2Z3RrLWJfSlJQZUgtQk1ZTXZpdG51ZjREaXg1bzNmOVYyV2NDeWZzZVA5VHhYQ0pZTFdwUDV2MVZfVjNKNjJ2RENyTkQ1YmtDRUItOHB3?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-06-22",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "7.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1853868/000162828026044474/frvo-20260622.htm"
-      },
-      "float_shares": "176.88M",
-      "short_float": "2.58%",
-      "daily_pct": -3.84,
-      "industry": "Clean Energy - Geothermal",
-      "technical_status": "Fail (Avg $Vol $64M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Fervo Energy raised $2.2B for geothermal buildout through a strategic partnership with Google",
-        "discrepancy_note": "SOURCE A (Finviz News) contains no information to confirm the claim. SOURCE B (Google News) contains one headline ('Fervo Energy raises $2.2B, pushes geothermal buildout with Google - Stock Titan') that confirms the claim, but it is not corroborated by a second independent source (Finviz News) as required for 'Verified'."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "KEEL",
-      "price": 6.29,
-      "gap_pct": 11.12,
-      "pm_volume": 3096481,
-      "avg_vol_10d": 69523336,
-      "avg_dollar_vol": 437301783,
-      "mkt_cap": 3798081955,
-      "rvol": 0.81,
-      "adr_pct": 10.2,
-      "category": "New Contract/Partnership",
-      "theme": "AWS Partnership (Likely) & Russell Inclusion Watch",
-      "reasoning": "KEEL surged pre-market on news of a likely AWS partnership for AI data centers and being on Russell index watch.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "A",
-      "finviz_theme": "Cloud Data Centers",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "KEEL popped **5% before market** on news of a **likely AWS Partnership** soon to be announced, positioning it as a **cheap AI Data Center Stock**. Additionally, the stock is on **Russell Watch**, signaling potential index inclusion flows.",
-        "impact": "The potential partnership with **AWS**, a Tier-1 cloud provider, could significantly expand KEEL's footprint in the **AI data center market**, while **Russell Watch** indicates impending passive institutional buying, enhancing valuation and liquidity."
-      },
-      "analysis_details": "• **Impact**\nKEEL saw a **5% pre-market pop** driven by reports of a **likely AWS partnership** soon to be announced, specifically targeting the **AI data center** segment. This development positions KEEL as a potentially **cheap AI data center stock**, alongside its inclusion on the **Russell Watch** list.\n\n• **Strategic Value**\nThe potential **AWS partnership** represents a significant strategic win, linking KEEL to a dominant cloud provider and the booming **AI infrastructure demand**. This, combined with the **Russell Watch**, suggests strong near-term catalysts for both fundamental business expansion and increased institutional investment flows.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "NASDAQ: KEEL Pops 5% Before Market on Russell Watch and Leasing Angle - TechStock²",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPVTJqZWJ2RXNmZmxIY0pQaTRlZ2ZGU0pLVWM3cWc5MXZhTlF3ZFE0aVpQLWVvb1h4bE0tbGYwZktzTUQ4ODBWZkRMT3F1bTJMSnJidllveG1Ucml2VWxhZVNrOGVDMTVha1lBM2xNT1plYkR6RkFXRm51ODMxYUhqdnNhbEFDM0o1YzNIU1VTX2RJZw?oc=5"
-        },
-        {
-          "title": "KEEL Stock - AWS Partnership Soon To Be Announced (likely) $KEEL Cheap AI Data Center Stock - UPSIDE Winter Storm (yq4hfLmHuH) - Mshale",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE9ybGprMGVBMHA1ekNTTk9tbUc2RFBNUmJyV1dpUTBabTJLS3J5dk8wTG1VLUV2NXk3VnczRmwxWlpjSGljSWtTbnhhV0pWajkxb3FycDdvdU9xUXc?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "601.03M",
-      "short_float": "12.19%",
-      "daily_pct": 5.36,
-      "industry": "Cloud Data Centers",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "KEEL surged pre-market on news of a likely AWS partnership for AI data centers and being on Russell index watch.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "AXTI",
-      "price": 84.57,
-      "gap_pct": 8.43,
-      "pm_volume": 525552,
-      "avg_vol_10d": 9758225,
-      "avg_dollar_vol": 825253088,
-      "mkt_cap": 5532838926,
-      "rvol": 1.46,
-      "adr_pct": 14.65,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [
-        "COHR",
-        "LITE",
-        "MRVL"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "62.70M",
-      "short_float": "11.64%",
-      "daily_pct": -8.19,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 100,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": "Google News [2] explicitly mentions 'AXT's deal with Casela is 'significant,' limits export risk: Wedbush', which identifies a specific fundamental catalyst (the Casela deal), contradicting the primary claim that no immediate fundamental catalyst was found."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "VSH",
-      "price": 64.9,
-      "gap_pct": 7.7,
-      "pm_volume": 201712,
-      "avg_vol_10d": 9344950,
-      "avg_dollar_vol": 606487255,
-      "mkt_cap": 8833285530,
-      "rvol": 1.22,
-      "adr_pct": 9.89,
-      "category": "Thematic Narratives",
-      "theme": "New Components & Rising Estimates",
-      "reasoning": "Vishay appears to be strengthening its power electronics edge with **new high voltage components** and seeing **earnings estimates move higher**.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 57,
-      "grade": "B",
-      "finviz_theme": "Semiconductors - Analog",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Vishay (VSH) is reportedly **quietly rewiring its power electronics edge** with **new high voltage components**, suggesting product innovation and market positioning. Concurrently, **earnings estimates are moving higher** for VSH, indicating improving analyst sentiment.",
-        "impact": "The combination of technological advancement in **high voltage components** and increasing analyst confidence could drive sustained momentum for Vishay, suggesting a potential re-rating based on stronger fundamental outlook."
-      },
-      "analysis_details": "• **The Narrative**\nVishay (VSH) is noted for **quietly rewiring its power electronics edge** through the introduction of **new high voltage components**. This suggests a strategic focus on product innovation within a critical segment. Simultaneously, the company is experiencing a trend of **earnings estimates moving higher**, reflecting growing confidence among analysts regarding its financial performance and future prospects.\n\n• **Explosiveness**\nThese developments point to a potentially improving fundamental outlook for VSH, with the **new high voltage components** possibly expanding its addressable market or competitive advantage. The upward revision in **earnings estimates** indicates a positive shift in market perception, which could translate into sustained buying interest as investors re-evaluate Vishay's growth trajectory and profitability.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Is Vishay (VSH) Quietly Rewiring Its Power Electronics Edge With New High Voltage Components? - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPanVjYV9SWUFaTDFpaF94S2tpNFg0MGVadVpLU2t2MUxHNnVmUk13YVY4TXlYWnpuUlRydzFQZjVqSE1FR1ZhODh4YThwZlFlQ0c1RVU4ejNnd1dKLXdZRUN0enlxMDZXVzZBamJwdUJtM0t1ZnltUGk4WmRtX2hJQXk3ZDdCM2JoZHNOaDJaampCOWtHWkVPa0RWclp1SEVDVE4yX1hFWnBRdTlWbHNUNkVxNzhRLWNrelp6VGtiV3l1SWppVDlLdG9WQWNLdGvSAdQBQVVfeXFMUHNmcWw1OG5nbUlCXzdRQ2lLRFdQV3U4TkdaYmZUVjJLVE1MV1ItVjhReTFlREpyajdDMUoyc01Wc3NGekVXWXJaYW1HQkVmSmhTSDRsaGVBVmtWMTN2a2pabHdPMTNZVk93Z0NCSTJQSnBvSXNiYVlxZXlOUVJNbTdwU3dyd1M1Y0xDdjVRT0hldzl3LUhJemdIMGdwa2Z6UG55STdyNmFqRGNTeGF2YnAxSVEzZmF4VXJmMzhLRm5kM0hnWUlMLUthTFptT0tfbFZqNV8?oc=5"
-        },
-        {
-          "title": "Earnings estimates moving higher for Vishay (VSH): Time to buy? - MSN",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi6wJBVV95cUxNdHVocFozNnFvXzF2TGs5X0pjZVZ5ZjM1VndBX0JSdW5VUzNjajdnT3dSMXp2SEVwZDE1N3dWU3hwQ0EzYUlRQmFMaEd4eW5qRDAyNXhZM3NkSTRjZE9nWE5pR2tXN2o0OEVVNXRlYkZ0UEN5NTVYY2lidFRpTWZHblFQMWZzS1FYc09tMWhMT19LWlFPMmtaNjJKUnY2QVRsTkRza05IM2FYMExXSE9CV3BoaE5teFkwZFB5MlkzMWpLWFdETXN2X2xIMHhQWWZVTFhmRlUyczlJMVpMRFB6SUNWS1QyVGwwelVwNjhXekFtYkRyNHRUa1VWaVB1S2lDNUJ3WDNmY1g5ZXhXRDYzYzFSRy16S3dSQTRkVFJOSF9OdE11SW9WT29OdkppMzJCWkZycGJla0UtMWFYWUh5MDJCMVNhUmxDTXRWZHVJaWRJb2JOTWlUOFJtZ2g5RkMwX2RqUkYxeHNrTWc?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "122.77M",
-      "short_float": "9.83%",
-      "daily_pct": 7.58,
-      "industry": "Semiconductors - Analog",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 60,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Earnings estimates moving higher for VSH",
-        "discrepancy_note": "Neither source provides specific numerical details (e.g., old vs. new estimates, percentage increase) to confirm the claim with matching specifics. Source B[2] is a headline confirming the narrative but not specific numerical facts. Source A provides no information."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "ASX",
-      "price": 40.56,
-      "gap_pct": 6.78,
-      "pm_volume": 193958,
-      "avg_vol_10d": 13714766,
-      "avg_dollar_vol": 556270909,
-      "mkt_cap": 84787177421,
-      "rvol": 0.82,
-      "adr_pct": 4.97,
-      "category": "Others",
-      "theme": "Valuation Opportunity / Technical Rebound",
-      "reasoning": "Catapult Sports is attracting fresh investor attention following a recent stock pullback, signaling potential technical rebound or value buying.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Digital Health",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Catapult Sports (ASX:CAT) has experienced a **stock pullback**, which is now sparking **fresh investor attention**.",
-        "impact": "This suggests a potential valuation play or a technical rebound rather than a fundamental change in the company's operations or outlook, indicating a speculative momentum driver."
-      },
-      "analysis_details": "• **What Happened**\nA recent **pullback** in **Catapult Sports (ASX:CAT)** stock has reportedly drawn **fresh investor attention**. This market observation highlights a sentiment shift towards potential buying interest at current levels, as indicated by the **2026-06-22 07:18 UTC** Google News headline.\n\n• **Key Consideration**\nThe momentum is driven by a perceived valuation opportunity rather than a new fundamental catalyst like earnings, a contract, or an analyst upgrade. This makes the move potentially speculative, relying on increased investor flow following a decline, which could be prone to volatility and a lack of sustained upward pressure without further specific positive news.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "ASX Winners And Losers Of Today – 22-06-26 - FNArena.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQeFhxQVVldWJ0REk0QkdFbXA5MTd1empDd3BSd3VMUlJsek9jaXlvbGVfc0ZxbmJmX250N1NHZWhvTVl2Q2ZCeDN2UUE5MUpzVHRfb2kxVjlYRk45Mkhhd0hKTjNlVEZNX3R6TFBieG1GamNiMm85R1d2djBpVU45bGdzN3FMNkgzRFE?oc=5"
-        },
-        {
-          "title": "Catapult Sports (ASX:CAT): Sports Tech Stock Pullback Sparks Fresh Investor Attention - Kalkine",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOa2pJVDFBVjV1QXo5dXpYZjg5V1NjM052MDlMSzMtV1A2eW9yS3lCRWs2THlnbWpfQS1nUnBxNjd4T1p1Uk4yNWd0VExCU0dYTDlhZWwybk5HbmZvc0hpWWJ4MUx0RUVOUnZVYUhDbmVLdDZEY2g0NURGVDhweXI5TWRyaHltRW5OVWxXU0hmeXh5V1RMdHdJSHpHa3h2ZGJJaTloT1NLRDNUSGJJelNlbUZlLTFQZ1B4X3E2Sw?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "2.19B",
-      "short_float": "0.42%",
-      "daily_pct": 8.33,
-      "industry": "Digital Health",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Catapult Sports is attracting fresh investor attention following a recent stock pullback.",
-        "discrepancy_note": "Source A (Finviz News) provides no information. Source B (Google News) headline [2] directly supports the claim ('Catapult Sports (ASX:CAT): Sports Tech Stock Pullback Sparks Fresh Investor Attention'), but since 'BOTH sources' are required for verification, the claim remains Unconfirmed."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "CRVS",
-      "price": 11.91,
-      "gap_pct": 6.72,
-      "pm_volume": 50381,
-      "avg_vol_10d": 1243056,
-      "avg_dollar_vol": 14804797,
-      "mkt_cap": 1001516931,
-      "rvol": 0.87,
-      "adr_pct": 5.92,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "63.15M",
-      "short_float": "27.43%",
-      "daily_pct": -0.75,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $15M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "WYFI",
-      "price": 38.49,
-      "gap_pct": 6.52,
-      "pm_volume": 162079,
-      "avg_vol_10d": 2016499,
-      "avg_dollar_vol": 77615047,
-      "mkt_cap": 1486261232,
-      "rvol": 2.35,
-      "adr_pct": 11.88,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found for WhiteFiber, Inc. (WYFI); likely a technical breakout or institutional flow.",
+      "theme": "Takeover Bid Rejection",
+      "reasoning": "Edgewell stock surged after management **rejected** a **$30-per-share** takeover offer from **Yellow Wood Partners**, signaling potential undervaluation.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
       "conviction": 61,
       "grade": "C",
-      "finviz_theme": "Infrastructure",
+      "finviz_theme": "Consumer - E-Commerce",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "No specific news headline identifies a direct fundamental catalyst for **WhiteFiber, Inc. (WYFI)**'s recent activity.",
-        "impact": "Speculative. A significant move without clear news often suggests a **Low Float squeeze** or **institutional flow**, carrying a **high risk of a Gap and Trap** scenario."
+        "catalyst": "Edgewell **rejected** a takeover offer of **$30-per-share** from **Yellow Wood Partners**, leading to a surge in its stock.",
+        "impact": "The rejection signals management's belief in a higher intrinsic value for the company, potentially opening the door for future bids or a re-rating of the stock."
       },
-      "analysis_details": "• **What Happened**\nThe only headline available is a generic query: \"**Is WhiteFiber, Inc. (WYFI) A Good Stock To Buy Now?**\" published on **2026-06-22 12:33 UTC** by **Google News**. This indicates public interest or reaction to price movement rather than a specific fundamental trigger.\n\n• **Key Consideration**\nWithout a clear fundamental driver, the recent price action is likely due to **technical factors** or **order flow dynamics**. This scenario often presents a **high risk** for momentum traders, as it could be driven by short-term speculation rather than sustainable business developments, potentially leading to rapid reversals.",
+      "analysis_details": "• **What Happened**\nEdgewell Personal Care (EPC) saw its stock **surge** following news that it **rejected** a **$30-per-share** takeover offer from **Yellow Wood Partners**. This development indicates that management views the company as undervalued at the proposed price.\n\n• **Key Consideration**\nThe rejection of a concrete **$30-per-share** bid suggests that the company’s leadership believes EPC's standalone value or future potential is significantly higher. This could attract further interest from Yellow Wood Partners or other suitors, or it may imply an expectation of strong operational performance to justify the rejection.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Is WhiteFiber, Inc. (WYFI) A Good Stock To Buy Now? - Insider Monkey",
+          "title": "Edgewell Rejects $30-Per-Share Takeover Offer From Yellow Wood Partners - marketscreener.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxPNDUzaXd4YVhyVVFtV2hTTm5IbmhKRU5BOHNKQUhMUzJvaFJKajdEMGtVQkExZk1JT1ZaMlNYVEp2eTVyVWxMX3lhZVRhT0VnTmtYamtiS1Bma01mX2toMHF0Nms5aXROa1l0R1BVZW1oZXlOUjFvWU9qVkdISVRVaWxwOEN6eV9FV0wxNWtLbGN2cFp20gGcAUFVX3lxTFBreUJOS2p1NldJUm5jVXRoU3JxY0MwNzRtMHpYR2Q1OTZ0V3B4Z3FLRy1nd0t0T3Z2SGw0U3JxY2R4dlVzTmNMbGxWb2hVbVBBeHNsallvVXlEOUl1NnAyVjhJVDhsaFctRFM5R3gwUW12bFZFUHlhRmZCMXFRZ2gySHZqdkxoR2pXV3g5T3FqTXFreFdmUk9PbG8tQQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQeFUwZnN6dXA5VWU1UVVMdVg1NDk5ZnU1Sk5RVUtLRnBfRE8xaFYycGdhUDQ2UDlVLTkwQmd2R1U2ZWcxWXJ6elVJTXluVU44RzdmWlM5ZmhoeDlfSmhDc01uc2l1QXM2eXJncUIzNnlleHFZdGZqZ2VwbGE4azNiY08xeEYteDJfZVBhVkdkaF9WTjBfOVlBaVo2al93eXRPT2FlMnEyUUZicXk1YWxkYzJDWmdfcjVGU3hrQy1uS3c?oc=5"
+        },
+        {
+          "title": "Edgewell stock surges on report of rejected takeover bid - Investing.com UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNT3hzZTBPQV9EenZNclBNMzh3aWlHNWVZT2xwc0l5UWpKR0lYUTVhMmV1Zzc3Snh5OE51MmcwaFVBbjlXYkpOV0pxVUgxZ181X0hYdjVET1hjemEyTFM0cDN6bFQ4RDVlamYyUlB0clhYUzkxVjA4TUl4WkRjbTBobUFIZEhqel9JbWY4REduak9Sd2VZend4X1lUMjl3aFlFRG5RSzl1QTVMMkNPYnFqVUNlVllaa3Bkd2l4LURVRy1fMGx6RG04Qg?oc=5"
+        },
+        {
+          "title": "3 Consumer Stocks Walking a Fine Line - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPQzVjSVJOb2VIdEtYS1FPSmNSZ0lmTW1uVHgwWVF6NXlqc3JSWUZqYXRpV3UzU2sxRVhyT3IzUFlfZE1ub3haNk9OV3VDNndOTTAtZENnZDZaZER1WWdiSHNfMkx5cEttWEVJNnlGVEI4d19qVV81eVJkQ3JqRVh3WG9ZeUliTnRsYXc1WVQ5Nm9hb2UzVkYxWFdXTQ?oc=5"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "9.54M",
-      "short_float": "35.41%",
-      "daily_pct": 14.83,
-      "industry": "Infrastructure",
-      "technical_status": "Fail (Avg $Vol $78M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found for WhiteFiber, Inc. (WYFI)",
-        "discrepancy_note": null
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "MLTX",
-      "price": 19.21,
-      "gap_pct": 6.3,
-      "pm_volume": 103421,
-      "avg_vol_10d": 791631,
-      "avg_dollar_vol": 15207232,
-      "mkt_cap": 1414151809,
-      "rvol": 1.01,
-      "adr_pct": 4.93,
-      "category": "FDA",
-      "theme": "Positive Phase 3 Clinical Trial Results",
-      "reasoning": "MoonLake's Sonelokimab achieved 67% HiSCR75 at Week 52 in its Phase 3 VELA program for Hidradenitis Suppurativa, significantly advancing its clinical pipeline.",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 22,
-      "grade": "C",
-      "finviz_theme": "Biotech - Immunology",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "MoonLake announced positive **Week 52 results** for **Sonelokimab** from its **Phase 3 VELA Program** in **Hidradenitis Suppurativa**, demonstrating a **67% HiSCR75** response rate. This significant clinical milestone was disclosed alongside confirmation of an Investor Day on **June 22, 2026**.",
-        "impact": "The strong Phase 3 data for Sonelokimab substantially de-risks the drug's path to potential regulatory approval and market entry for Hidradenitis Suppurativa, signaling significant future revenue potential and strengthening its competitive position."
-      },
-      "analysis_details": "• **The Drug**\nMoonLake's drug, **Sonelokimab**, successfully completed its **Phase 3 VELA Program** for **Hidradenitis Suppurativa**. The company announced that the drug achieved **67% HiSCR75 at Week 52**, indicating a robust clinical response in patients with the condition. These positive results were disclosed on **June 21, 2026**.\n\n• **The Significance**\nAchieving **67% HiSCR75** at **Week 52** in a **Phase 3 trial** is a highly favorable outcome, significantly bolstering the commercial prospects for **Sonelokimab**. This data is a critical step towards potential regulatory filings and subsequent market approval, positioning MoonLake strongly in the **Hidradenitis Suppurativa** therapeutic area. The company has also confirmed an Investor Day on **June 22, 2026**, likely to discuss these results and future plans.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "MoonLake’s HS drug posts 67% HiSCR75 at Week 52 - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPREUzM1BEanNUMjZsdU1RTDl6elA0N1Rsc3dkdnlZU2t2TktxdzlkNXdIMUhzUXdiSGFuTk9iWHlKWHRXX1BUVlF6dXJxQ2FKZGczS29mMi1hbHhFZ3lsWHRiREVZdDU3YVVkTnJlTHI5NUFobkZ3SDZDTTdBOV9FaVJSWTVyWVZjaU9HWURSMWhyU3RiZnBNalRITEZtRXpTYmpCTFo4QmExVG51em5ndDZWb3R4MTlyTmNDX29KTQ?oc=5"
-        },
-        {
-          "title": "MoonLake Announces Week 52 Results of Sonelokimab from its Phase 3 VELA Program in Hidradenitis Suppurativa and Confirms Investor Day on June 22, 2026",
-          "source": "Finviz",
-          "url": "/news/362887/moonlake-announces-week-52-results-of-sonelokimab-from-its-phase-3-vela-program-in-hidradenitis-suppurativa-and-confirms-investor-day-on-june-22-2026"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-06-22",
-        "form": "8-K",
-        "items": [
-          "7.01",
-          "8.01",
-          "9.01"
-        ],
-        "category": "Others",
-        "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/1821586/000121390026070362/ea0295399-8k_moonlake.htm"
-      },
-      "float_shares": "63.30M",
-      "short_float": "8.80%",
-      "daily_pct": 0.1,
-      "industry": "Biotech - Immunology",
-      "technical_status": "Fail (Avg $Vol $15M < $100M)",
+      "float_shares": "45.43M",
+      "short_float": "11.11%",
+      "daily_pct": -1.69,
+      "industry": "Consumer - E-Commerce",
+      "technical_status": "Fail (Avg $Vol $24M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 90,
@@ -831,8 +58,8 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "67% HiSCR75 at Week 52",
-        "discrepancy_note": "Source A (Finviz) headline [2] mentions 'Week 52 Results of Sonelokimab from its Phase 3 VELA Program' but does not specify the '67% HiSCR75' percentage. Source B (Google News) headline [2] from Stock Titan explicitly confirms 'MoonLake’s HS drug posts 67% HiSCR75 at Week 52'."
+        "primary_claim": "rejected a $30-per-share takeover offer from Yellow Wood Partners",
+        "discrepancy_note": "Source A (Finviz News) has no information regarding the claim. Source B (Google News, specifically item 5) explicitly confirms the claim, mentioning 'Edgewell Rejects $30-Per-Share Takeover Offer From Yellow Wood Partners'."
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -847,228 +74,68 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "ALOY",
-      "price": 17.78,
-      "gap_pct": 5.96,
-      "pm_volume": 98789,
-      "avg_vol_10d": 3229004,
-      "avg_dollar_vol": 57411691,
-      "mkt_cap": 1088376022,
-      "rvol": 0.75,
-      "adr_pct": 13.41,
+      "ticker": "ZETA",
+      "price": 18.47,
+      "gap_pct": 8.28,
+      "pm_volume": 1109800,
+      "avg_vol_10d": 8319343,
+      "avg_dollar_vol": 153658265,
+      "mkt_cap": 4603787930,
+      "rvol": 0.99,
+      "adr_pct": 6.62,
       "category": "New Contract/Partnership",
-      "theme": "New Contract/Partnership",
-      "reasoning": "ALOY deal announcement: ALOY Stock Jumps As REalloys Locks Major Rare Earth Supply Deals - timothysykes.com",
+      "theme": "Palantir Partnership",
+      "reasoning": "Zeta Global shares surged after announcing a new partnership with Palantir to tie marketing data to Foundry.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 50,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
+      "conviction": 76,
+      "grade": "A",
+      "finviz_theme": "AI Enterprise Software",
+      "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "Headlines: ALOY Stock Jumps As REalloys Locks Major Rare Earth Supply Deals - timothysykes.com | 3 US Rare Earth Stocks With Supply Chain Upside And Funding Risk - simplywall.st",
-        "impact": "Contract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open."
+        "catalyst": "Zeta Global announced a **new partnership** with **Palantir**, aiming to **tie marketing data to Foundry**. This news drove **Zeta shares higher** upon the announcement.",
+        "impact": "This collaboration expands Zeta's data capabilities and integration with a leading enterprise AI platform, potentially enhancing its market positioning and revenue opportunities in data-driven marketing."
       },
-      "analysis_details": "• **The Announcement**\nHeadlines: ALOY Stock Jumps As REalloys Locks Major Rare Earth Supply Deals - timothysykes.com | 3 US Rare Earth Stocks With Supply Chain Upside And Funding Risk - simplywall.st\n\n• **Trade Implication**\nContract wins with named clients and dollar values expand revenue visibility. Gap & Go above pre-market high if volume confirms at open.",
+      "analysis_details": "• **Impact**\nZeta Global's shares experienced a rise following the announcement of a **new partnership** with **Palantir**. This collaboration focuses on **tying marketing data to Palantir's Foundry** platform, integrating Zeta's capabilities with Palantir's robust data operating system.\n\n• **Strategic Value**\nThis partnership positions Zeta to leverage Palantir's advanced analytics and AI capabilities, potentially enhancing its competitive edge in the marketing technology sector. The integration with **Foundry** suggests a deeper value proposition for enterprise clients seeking more sophisticated data activation and insights, driving potential growth for Zeta Global.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "ALOY Stock Jumps As REalloys Locks Major Rare Earth Supply Deals - timothysykes.com",
+          "title": "Zeta Shares Rise on Palantir Partnership - marketscreener.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE0tck0zazk1Zlo0QTJBS3FtcVJDbWtLOEZqdXF4V1pfSXRVYmhveW9uck5yQ0xFSTVHQmthb1VaZ3dmai1MbW1rdVFnenZJWVlrN3VtcWg4NmdJT1V5YWQ5Wjk5dXU1VEpJa05ENkdvQl9pNXJheVE?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQX1RRcG1NZThuc3VUUVM1WE9KZFdzNnhJY2JYQWdMd0hSbnNKNjk0eXlRQ09xZ3F3LUhLSm5iRml3ZDZmYjZGWTdMeml1OTJCNGhBRndZS0wyc1FoRUNLYnZJVEFBNmk4QkJsdWhuYWNDTHFSelRrbHc2UlFmcVRRekl5a1BtM3pPZ0FGeVc5UzFtUTNGS3lQOA?oc=5"
         },
         {
-          "title": "3 US Rare Earth Stocks With Supply Chain Upside And Funding Risk - simplywall.st",
+          "title": "$Zeta Global (ZETA.US)$ - Moomoo",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQZHJiOE5qNVYza0xDZk4zdE1CNjkwM2NCOE1Qdm5hcnpUeXZiNWZjSlVsMktMN2VDZHcwcjJBZ2VFRTJIaFdSYTc3eXVFVXhBalNaZkNvak5MRTgwY2tuOHlWU2xsbDY1enU5SW1RYjFOd3hPWVphMkp5Z0lKdDZPbHllVE9hZTlOSENBZ1RwMU9mVWNJaGNMdURjR0tfaXh5Tlh4OGxmenpJN0RLMDBRSjh4eHBjRnQxV1FLMUpPY2NSOTMy0gHKAUFVX3lxTE5kSHFRcm84WmxyTWthS3ZJemdGRmZiN0hCcUlOQTIwRVR4eEVBbTlCRmdnMUVyVVliVm5paWt2bVdqOXMxOTl0SW1Ec3ZJSHZVWTRGWGZSZEJBVWVraFpkamdQZVdWZm5Xc1BkT0ZXT0x3NWxDZ0ctaG9zTzFIMkFMWmEyLTduWEs2ZTVJcTVVdWppcVdraW5vV0Z2RUQ0LWxSMzRNQ2l3OW8wbE4xbkU1YWtibW9INWpBVGRmWHppMklZeWZIVE5vRUE?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFB5bUl0TVVJZlVQSmswMUgwZjluQmcxUzFiWVNmQjRnczNrMXF0WnktVWlqRmM1WG04NWtnOEEzT2E2ajE5Snk3cU1RNXIyVkVmQmNMbFBNUmYzX3FpMFRHN0RMaHRVQ1QxWlFQN3BDWmt4QnZVS0lzaXRHa3l3dw?oc=5"
+        },
+        {
+          "title": "Zeta Global stock rises on Palantir partnership announcement - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNZVlnV1paUHVYeE9IMFN5d2diVkNRdkVRb0FOblNldUZKNGlITjE1YVh2MWkxNllUc2VNNjRNVlFxZGZRc21WcHpWYTh1VGdIU1FZbnIyUm9RS3E0RE1NM3dSS1BfME9vVnMzbmVGd3htekQ2akdZVVNPU0hORktSLWkxN3VCQmlVTzYzc0hwUkVHLS1IZ251V2hYaU4tYW9GRGg3ZTNUTmQ2RXVVX2taUkwzMlFuc1BUMUc1TXdSSQ?oc=5"
+        },
+        {
+          "title": "Palantir and Zeta Global tie marketing data to Foundry - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPR2MtcHpqenIzUFpiMEg1MjNicXRfNUl0Q3U0cFc1N1J3SFF1NnhVWUozVjdjdUZpUTlvN0g2OE1PRHRXX21hY3A1MDFJMDBQNEFYYnVWdmlvM1V1LW1kVzd3S2pWbk50VklUN2hBVVJicnRuNmZrYVdIM250R2x5azc2a2kxcEp2UWxmeGNLdC1RcG5wa1hOdW5EeGhJX3lJTnBFc0xkb0o0V1hoSWRuTjlpeUR1VEZSeW0yOG5n?oc=5"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "56.27M",
-      "short_float": "5.16%",
-      "daily_pct": 7.04,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $57M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "ALOY deal announcement: ALOY Stock Jumps As REalloys Locks Major Rare Earth Supply Deals - timothysykes.com",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "WOLF",
-      "price": 57.41,
-      "gap_pct": 5.52,
-      "pm_volume": 269792,
-      "avg_vol_10d": 7542703,
-      "avg_dollar_vol": 433026579,
-      "mkt_cap": 2775146622,
-      "rvol": 1.07,
-      "adr_pct": 16.07,
-      "category": "Thematic Narratives",
-      "theme": "AI Electricity / Power Infrastructure",
-      "reasoning": "WOLF's significant **+17.91%** move is highlighted in a Finviz article connecting its relevance to the crucial role of electricity in the booming AI arms race.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 57,
-      "grade": "B",
-      "finviz_theme": "AI Energy",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "The Finviz article **\"The AI Arms Race Isnt About Technology – It’s About Electricity\"** specifically highlighted **WOLFSPEED, INC.** with a **+17.91%** price increase, associating the company with the critical demand for electricity driven by the AI sector. The article further underscored the rapid growth of the AI market, noting **NVIDIA**'s valuation at **over $4 trillion**.",
-        "impact": "This strong thematic narrative suggests WOLF could benefit from the foundational infrastructure buildout required to power the AI revolution, implying sustained investor interest in companies linked to AI's energy demands."
-      },
-      "analysis_details": "• **The Narrative**\nThe article **\"The AI Arms Race Isnt About Technology – It’s About Electricity\"** explicitly mentions **WOLF +17.91%** alongside other AI-related companies, linking its significant move to the increasing importance of electricity in powering the AI revolution. This narrative positions **WOLFSPEED, INC.** as a key player in the essential infrastructure supporting the sector, following **NVIDIA**'s rise to become the **most valuable company in history at over $4 trillion**.\n\n• **Explosiveness**\nThe **+17.91%** move suggests strong investor conviction in WOLF's role within the AI power narrative, potentially indicating a re-rating as the market recognizes the criticality of electricity for AI infrastructure. This thematic alignment with a high-growth sector could drive further momentum, attracting capital flows from investors seeking exposure to the fundamental enablers of AI's expansion beyond just compute.",
-      "peer_tickers": [
-        "NVTS",
-        "STM",
-        "ON"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "[EFFECT] WOLFSPEED, INC. SEC Filing - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQbHUwS2N2Wld5MzlIRWxpNFpLWmdnbko1a0xXLTVfbm80NElNUC1KQ3dScjhwdkRmeXR5SWRhNThueDhWZHJxeXJNU1lBZzFJSDFDSnlpS0tMZnZFaTJrYUhQU0VwVmxaMWdUZXkxNmlGcFMyczh5c1JvVU42QTJiNHlGTnM0aGlHVms2NzBtNDZvSUpkQTVjbg?oc=5"
-        },
-        {
-          "title": "The AI Arms Race Isnt About Technology  Its About Electricity",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/ai-arms-race-isn-t-000000017.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "30.05M",
-      "short_float": "87.75%",
-      "daily_pct": 17.91,
-      "industry": "AI Energy",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "WOLF's significant +17.91% move",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "WDC",
-      "price": 746.23,
-      "gap_pct": 5.27,
-      "pm_volume": 290344,
-      "avg_vol_10d": 9675279,
-      "avg_dollar_vol": 7219983448,
-      "mkt_cap": 257212138322,
-      "rvol": 1.74,
-      "adr_pct": 6.39,
-      "category": "Thematic Narratives",
-      "theme": "Storage Shortage Play",
-      "reasoning": "WDC rises as a **storage shortage plays out**, reinforced by **JPMorgan** lifting its price target and **Fox Advisors** initiating with a Hold rating.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 59,
-      "grade": "B",
-      "finviz_theme": "Semiconductors - Memory",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Western Digital is rising as a **storage shortage plays out**, with the stock moving **up by 4.79% on Jun 21**. This narrative is supported by analyst actions today, including **JPMorgan lifting its price target** and **Fox Advisors initiating coverage with a Hold rating**.",
-        "impact": "The playing out of a storage shortage indicates a favorable supply/demand dynamic for WDC, potentially leading to sustained price momentum. Analyst actions confirm investor attention and a re-evaluation of the stock's valuation."
-      },
-      "analysis_details": "• **The Narrative**\nWestern Digital (WDC) is seeing upward movement, with its stock rising as a **storage shortage plays out** according to TechStock². This thematic catalyst contributed to the stock moving **up by 4.79% on Jun 21**, indicating strong positive sentiment driven by market dynamics.\n\n• **Explosiveness**\nThis storage shortage narrative, alongside **JPMorgan lifting its Price Target** and **Fox Advisors initiating with a Hold rating**, suggests increasing analyst and market attention. The convergence of favorable market conditions and positive analyst re-evaluation provides a foundational tailwind for continued momentum in the near term.",
-      "peer_tickers": [
-        "STX",
-        "SMCI",
-        "NTAP"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "Fox Advisors Initiates Western Digital(WDC.US) With Hold Rating - Moomoo",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNTGJFZGpPSGRnOTdGT3FjdS1jenN4M0dCcldDcEtDS3VocGZPa2xENURDYkdaVmRwQWI3QzVQVGNtNlZJSnM1ZHM5c3BLT3ZWY2oxRmlCYnR4Vzh0bWZfcjNCZ3ltT0pHYUlNNlI2bTcyNW1mQTUxNGtsX2tWMk9LUV84UE0wWHhKbXZTejdmYWlBczIwYm9FS0ZhV3dyc0t4b09zWHd3?oc=5"
-        },
-        {
-          "title": "JPMorgan Lifts PT on Western Digital Corporation (WDC) - Insider Monkey",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNX25BdXB4VGJISUpVc1QycXpNWTVlMmllZTVZSlBuQzFMWFZ2c1hLbW5JUHdEamtJd01pdlpfQTlvUk1CeXpsWHdjMWgtbjJkMmhJekIzSFFTUEx4cVdRdmNTMXJrX3RfWjBTdVUzUEFtVHkzN3VUTDRqRjRodzJGT1BUczB2cW1wWjZoLWZmNnFRcDNZeko5RU9VTWjSAaQBQVVfeXFMTjM2UGx1ekcwRDc0d0FvWjE4ck1QRkdFazhTUm4wbVQ2YmR4a1V5blZUQThrMXdOX1I4TmhMeDdaXzZFdWZYTkhybkVqWlF2NGdERzhPbmFNYWlHRkl2R0xyS3E0RkZCRlN0bDZQY1YwenNUbldacVhmVFRmTXJVMG5xQVR2cXAzZHFxS3ZSUHJORHdWXzFpRW9TQ1Q2dkprRlp4MzU?oc=5"
-        },
-        {
-          "title": "Western Digital (NASDAQ: WDC) rises as storage shortage plays out - TechStock²",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNZE5WTC1lSXFTeFF2MzEzTzJlTHpfWnNjaDhFRWVlcUVWWjAtc2dhMUVid2RmVmJhcDJXQTh5RjFKRUpKRV81enNQRWF3ZmhRSlIxb0pZZHhqVFdyTHhIYTg2dVVWSlhhUWdaMFlJY1J4bDlxOFpTM1Y0aWZGNmVmZUVXRkE1SzJ6RTBN?oc=5"
-        },
-        {
-          "title": "Western Digital Corp Stock (WDC) Moved Up by 4.79% on Jun 21: Drivers Behind the Movement - TradingKey",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxNdWF3T1Bzb0xxX3RrN0RrSzlBWmhTZ1ZxQjZkS2xPYW5abFZ2TXRCbWQ0Z3pxbUt6c3A4TUdiNm9hMGc5ZlBuaURXRVRsM3NHemZRbWVIaUJ6UkJESnI4UVZXQVd5aFk5bmpuN2hBVDNUbUlscnhmSzRCdnlCRms1MjhzT05pTElrRmc?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "341.34M",
-      "short_float": "9.34%",
-      "daily_pct": 4.79,
-      "industry": "Semiconductors - Memory",
+      "float_shares": "221.39M",
+      "short_float": "13.81%",
+      "daily_pct": -2.28,
+      "industry": "AI Enterprise Software",
       "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 80,
+        "confidence_score": 85,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Fox Advisors initiating with a Hold rating",
-        "discrepancy_note": "Source A (Finviz) contains no news items and therefore does not mention the claim. Source B (Google News) confirms the claim directly through one of its articles: 'Fox Advisors Initiates Western Digital(WDC.US) With Hold Rating' (Moomoo). Since only one source confirms the claim, it is marked as a Discrepancy."
+        "primary_claim": "Deal Could Drive $100 Million in Annual Revenue",
+        "discrepancy_note": "Source A (Finviz News) provides no information to confirm or deny the claim. Source B (Google News, specifically Benzinga) mentions the claim 'Deal Could Drive $100 Million in Annual Revenue' in one headline, but the claim is not confirmed by both sources as required for 'Verified'."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -1079,133 +146,17 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "CRDO",
-      "price": 271.83,
-      "gap_pct": 5.21,
-      "pm_volume": 74793,
-      "avg_vol_10d": 10869866,
-      "avg_dollar_vol": 2954755675,
-      "mkt_cap": 50690282338,
-      "rvol": 0.7,
-      "adr_pct": 10.55,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "167.32M",
-      "short_float": "6.14%",
-      "daily_pct": 9.02,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": "The primary claim states 'No immediate fundamental catalyst found'. While Finviz had no relevant news, Google News source [1] explicitly mentions an analyst beginning coverage on a bullish note for CRDO, which is an immediate fundamental catalyst, contradicting the primary claim."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "ALT",
-      "price": 2.7,
-      "gap_pct": 5.17,
-      "pm_volume": 122118,
-      "avg_vol_10d": 3895066,
-      "avg_dollar_vol": 10516678,
-      "mkt_cap": 525080219,
-      "rvol": 1.75,
-      "adr_pct": 4.09,
-      "category": "FDA",
-      "theme": "FDA",
-      "reasoning": "ALT FDA/regulatory event: Leerink initiates Altimmune stock coverage citing liver drug data By Investing.com - Inves",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 50,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: Leerink initiates Altimmune stock coverage citing liver drug data By Investing.com - Investing.com Canada",
-        "impact": "Binary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form."
-      },
-      "analysis_details": "• **The Event**\nHeadlines: Leerink initiates Altimmune stock coverage citing liver drug data By Investing.com - Investing.com Canada\n\n• **Risk Profile**\nBinary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Leerink initiates Altimmune stock coverage citing liver drug data By Investing.com - Investing.com Canada",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPSUtLaGV4Q3pIRTc1NVJqNkNzNm1sR3M3czU0UjdIZFpnR1l0MElMRWF1V1J2aXdKNmQtcDJRRHRjamcwZlZmcW1KWjl6OW5qS3I4YmpWQXhBczZEQWNYd21MNVEyc2d6ejB0azZadG1aNmJ4eG56ajNQUnJZT0RWSy1LbDlueGxJR2pYNTRpaV83aWpCZDN3SVpzSHpUSTBud2dRVm1qNjlQMHE5bjJUZ3Nucl8xeXV0TXJxdkZuNVg3OVZF?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "183.67M",
-      "short_float": "21.30%",
-      "daily_pct": 2.27,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $11M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "ALT FDA/regulatory event: Leerink initiates Altimmune stock coverage citing liver drug data By Investing.com - Inves",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 15,
-    "large_gaps": 2,
-    "total_headlines": 29,
+    "small_gaps": 2,
+    "large_gaps": 0,
+    "total_headlines": 7,
     "monthly_cost_usd": 0.01
   }
 }
