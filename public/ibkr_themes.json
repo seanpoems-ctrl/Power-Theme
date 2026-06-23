@@ -1,7 +1,33 @@
 {
-  "generated_at": "2026-06-22T23:17:00.776546+00:00",
+  "generated_at": "2026-06-23T00:19:35.878520+00:00",
   "data_source": "fallback",
   "power_themes": [
+    {
+      "name": "Hardware",
+      "theme_rs": 99.0,
+      "perf_1d": 4.07,
+      "leaders": [
+        {
+          "ticker": "SNDK",
+          "price": 2273.73,
+          "rs_52w": 99,
+          "adr_pct": 6.74,
+          "vol_surge": 0.67,
+          "mkt_cap": 336716122564,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Hardware",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    },
     {
       "name": "Cloud Computing",
       "theme_rs": 98.0,
@@ -23,32 +49,6 @@
             "adr_pct >= 4.0": true
           },
           "primary_theme": "Cloud Computing",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    },
-    {
-      "name": "Hardware",
-      "theme_rs": 98.0,
-      "perf_1d": 4.07,
-      "leaders": [
-        {
-          "ticker": "SNDK",
-          "price": 2273.73,
-          "rs_52w": 98,
-          "adr_pct": 6.74,
-          "vol_surge": 0.67,
-          "mkt_cap": 336716122564,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Hardware",
           "secondary_themes": [],
           "setup_label": "Flag"
         }
