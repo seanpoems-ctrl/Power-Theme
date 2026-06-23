@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-22 18:25 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-06-23 07:05 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
@@ -12,68 +12,68 @@
       "close": 744.39,
       "prev_open": 747.76,
       "prev_close": 746.74,
-      "volume": 45157614,
+      "volume": 46204600,
       "change_pct": -0.31
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 737.95,
       "open": 742.02,
-      "high": 745.43,
+      "high": 745.45,
       "low": 734.39,
       "close": 737.95,
-      "prev_open": 737.2,
-      "prev_close": 740.62,
-      "volume": 41264194,
-      "change_pct": -0.36
+      "prev_open": 736.39,
+      "prev_close": 739.81,
+      "volume": 43202700,
+      "change_pct": -0.25
     },
     "^VIX": {
       "label": "VIX",
-      "price": 17.28,
-      "open": 17.48,
-      "high": 17.92,
-      "low": 16.49,
-      "close": 17.28,
-      "prev_open": 17.23,
-      "prev_close": 16.4,
+      "price": 19.95,
+      "open": 19.67,
+      "high": 20.54,
+      "low": 19.58,
+      "close": 19.95,
+      "prev_open": 17.48,
+      "prev_close": 17.28,
       "volume": 0,
-      "change_pct": 5.37
+      "change_pct": 15.45
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 74.11,
+      "price": 73.82,
       "open": 74.14,
-      "high": 74.25,
-      "low": 74.04,
-      "close": 74.11,
-      "prev_open": 75.53,
-      "prev_close": 76.6,
-      "volume": 417,
-      "change_pct": -3.25
+      "high": 74.45,
+      "low": 72.48,
+      "close": 73.82,
+      "prev_open": 78.93,
+      "prev_close": 74.82,
+      "volume": 43674,
+      "change_pct": -1.34
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 71250.06,
-      "open": 71551.03,
-      "high": 71952.99,
-      "low": 70517.98,
-      "close": 71250.06,
-      "prev_open": 70163.71,
-      "prev_close": 71053.49,
-      "volume": 214400000,
-      "change_pct": 0.28
+      "price": 69788.38,
+      "open": 72404.37,
+      "high": 72618.44,
+      "low": 69788.38,
+      "close": 69788.38,
+      "prev_open": 71067.15,
+      "prev_close": 72353.96,
+      "volume": 0,
+      "change_pct": -3.55
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24985.82,
-      "open": 25075.33,
-      "high": 25173.02,
-      "low": 24951.54,
-      "close": 24985.82,
-      "prev_open": 24996.54,
-      "prev_close": 25026.8,
-      "volume": 168134800,
-      "change_pct": -0.16
+      "price": 24858.36,
+      "open": 24835.56,
+      "high": 24913.9,
+      "low": 24728.57,
+      "close": 24858.36,
+      "prev_open": 25035.93,
+      "prev_close": 25139.69,
+      "volume": 0,
+      "change_pct": -1.12
     }
   },
   "fred": {
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: June 22, 2026",
-    "mood_emoji": "⚠️",
-    "mood": "Volatility Surges / Growth Concerns",
-    "narrative": "US equities pulled back slightly today, driven by a sharp rise in the VIX and a significant drop in crude oil, hinting at emerging growth concerns. Global markets showed mixed performance, but underlying credit remains complacent, suggesting a nuanced risk assessment.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 744.39 | -0.31% | ➡️ |\n| Nasdaq 100 ETF | 737.95 | -0.36% | ➡️ |\n| VIX | 17.28 | +5.37% | 📈 |\n| Crude Oil | 74.11 | -3.25% | 📉 |\n| Nikkei 225 | 71250.06 | +0.28% | ➡️ |\n| DAX | 24985.82 | -0.16% | ➡️ |",
-    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) remains at a complacent 2.66%, indicating limited immediate stress in the credit markets. However, the 10-Year Minus 2-Year Yield Curve (T10Y2Y) sits flat at +0.270, often signaling concerns about future economic growth or tighter monetary conditions, which could temper institutional risk appetite despite current credit calm.",
-    "analysis_para1": "The global tape presented a mixed picture today, with the Nikkei 225 gaining +0.28% while the DAX saw a modest dip of -0.16%. A more significant signal came from Crude Oil, which plummeted -3.25% to $74.11, often a leading indicator of global growth slowdowns. Despite this mixed international performance and commodity weakness, the US High Yield Credit Spread (BAMLH0A0HYM2) remains 'Complacent' at 2.66%, suggesting that while some global sectors show caution, US institutional risk appetite in credit markets has not yet fundamentally shifted towards broad de-risking.",
-    "analysis_para2": "The primary driver of today's market flow was a mechanical reaction to a shifting growth outlook, underscored by the significant +5.37% surge in the VIX. This volatility spike, coupled with the sharp -3.25% sell-off in Crude Oil, suggests market participants are re-evaluating global demand prospects. This emerging risk aversion led to broad, albeit modest, pullbacks in major US equity indices as investors priced in increased uncertainty.",
-    "analysis_para3": "Traders should prioritize monitoring the S&P 500 ETF for critical support around the 740 level, a break of which could signal further downside. A key long trigger would be a sustained bounce from this support accompanied by a retraction in the VIX back below 17.00. Conversely, a risk-off threshold is a close below 735 on the S&P 500 ETF, warranting defensive positioning. Today, maintain a cautious stance and observe how volume reacts to potential bounces or further declines.",
-    "technical_signal": "No reversal pattern confirmed yet. The underlying market health, with 55.1% of S&P 500 stocks above SMA50 and 63.6% of S&P stocks above SMA200, suggests resilience. However, the VIX surge indicates a rise in short-term uncertainty, so watch for a clear close above or below the S&P 500 ETF's 20-day moving average for directional conviction.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "KEEL",
-          "company": "Keel Financial Services",
-          "reason": "Strong upside momentum driven by potential AWS partnership rumors and an upcoming Russell index inclusion watch."
-        },
-        {
-          "ticker": "CRM",
-          "company": "Salesforce, Inc.",
-          "reason": "Reported stronger-than-expected earnings with robust forward guidance, affirming resilient enterprise software demand."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continues to attract significant institutional flow, but lacks a fresh, market-moving catalyst today."
-        }
-      ]
-    }
+    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
   }
 }
