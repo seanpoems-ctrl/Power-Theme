@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-23 16:45 ET",
+  "generated_at": "2026-06-23 18:03 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -12,7 +12,7 @@
       "close": 733.58,
       "prev_open": 747.7,
       "prev_close": 744.39,
-      "volume": 55454401,
+      "volume": 65210826,
       "change_pct": -1.45
     },
     "QQQ": {
@@ -24,7 +24,7 @@
       "close": 713.65,
       "prev_open": 742.02,
       "prev_close": 737.95,
-      "volume": 50924915,
+      "volume": 52003693,
       "change_pct": -3.29
     },
     "^VIX": {
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 73.32,
+      "price": 73.05,
       "open": 74.14,
       "high": 74.45,
       "low": 72.48,
-      "close": 73.32,
+      "close": 73.05,
       "prev_open": 78.93,
       "prev_close": 74.82,
-      "volume": 169053,
-      "change_pct": -2.0
+      "volume": 170777,
+      "change_pct": -2.37
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,20 +65,20 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24893.58,
-      "open": 24835.56,
-      "high": 24988.71,
-      "low": 24728.57,
-      "close": 24893.58,
-      "prev_open": 25035.93,
-      "prev_close": 25139.69,
-      "volume": 0,
-      "change_pct": -0.98
+      "price": 25139.69,
+      "open": 25035.93,
+      "high": 25176.21,
+      "low": 24896.19,
+      "close": 25139.69,
+      "prev_open": 25075.33,
+      "prev_close": 24985.82,
+      "volume": 64174400,
+      "change_pct": 0.62
     }
   },
   "fred": {
     "hy_oas": 2.65,
-    "yield_curve": 0.27,
+    "yield_curve": 0.34,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -88,7 +88,7 @@
   },
   "regime": {
     "credit_status": "Complacent",
-    "yc_status": "Flat",
+    "yc_status": "Normal / Steepening",
     "breadth_flush": false,
     "generational_buy_zone": false,
     "reversal": {
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Post-Market Brief: June 23, 2026",
-    "mood_emoji": "📉",
-    "mood": "Risk-Off / Volatility Spike",
-    "narrative": "US equities declined sharply today, led by technology, as increased volatility signaled a broad shift to risk aversion. Global markets showed mixed performance, with European indices following the downturn while Asian markets saw strength.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 733.58 | -1.45% | 📉 |\n| Nasdaq 100 ETF | 713.65 | -3.29% | 📉 |\n| VIX | 19.49 | +12.79% | 📈 |\n| Crude Oil | 73.32 | -2.00% | 📉 |\n| Nikkei 225 | 72353.96 | +1.55% | 📈 |\n| DAX | 24893.58 | -0.98% | 📉 |",
-    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) remains at a complacent 2.65%, suggesting that credit markets are not yet pricing in significant stress. Meanwhile, the 10-Year minus 2-Year Yield Curve (T10Y2Y) is flat at +0.270, often signaling a cautious or uncertain economic outlook. This combination implies that institutional risk appetite, while seemingly stable in credit, faces headwinds from a decelerating growth signal in the bond market.",
-    "analysis_para1": "Despite a notable rally in the Nikkei 225, which rose by +1.55%, the broader global tape indicated a contraction in risk appetite, particularly reflected in commodity and European equity markets. Crude Oil fell by -2.00% to 73.32, while the DAX declined by -0.98%. This divergence, with a strong Asian performance contrasting with weakness in the West and in commodities, raises questions about the sustainability of the current complacent US High Yield Credit Spread at 2.65%. While credit spreads hold steady, the global signals suggest that US risk appetite is likely to contract further as investors digest the conflicting narratives and potential for broader economic slowdown.",
-    "analysis_para2": "Today's primary market flow was dominated by a sharp repricing of risk, evident in the significant spike in the VIX by +12.79% and the deep losses across US equity indices, especially the Nasdaq 100 ETF's -3.29% drop. This mechanical catalyst appears to be a broad positioning unwind driven by renewed uncertainty, rather than a single explicit macro data point or policy decision. The sudden surge in volatility suggests that market participants are aggressively adjusting their exposures, possibly anticipating future macroeconomic headwinds or a shift in central bank rhetoric, leading to a de-risking cascade across momentum-driven assets.",
-    "analysis_para3": "Given today's sharp sell-off and volatility spike, traders should prioritize risk management and look for clear signs of stabilization. The S&P 500 ETF should be watched closely for a potential hold above the 730 level as a first support, with a break below suggesting further downside toward 720. Key triggers for long entries would require sustained consolidation above 735 alongside a material retreat in the VIX below 18. Conversely, a continuation of the VIX surge above 20 and a failure to reclaim 733.58 on the S&P 500 ETF would signal a high-conviction risk-off threshold, warranting further reduction in exposure and potentially initiating short positions.",
-    "technical_signal": "No reversal pattern confirmed yet. The current technical context remains bearish, characterized by declining US equity indices and an elevated VIX, indicating strong downward momentum. Traders should watch for the formation of a higher low on daily charts or a decisive close above the 5-day exponential moving average to signal potential short-term exhaustion of the selling pressure. Until such a pattern emerges, the path of least resistance for US equities is likely to remain to the downside.",
+    "mood_emoji": "⚠️",
+    "mood": "US Risk-Off, Volatility Spike",
+    "narrative": "US equities experienced a significant pullback today, led by tech, as volatility surged. This contrasts with more resilient performance seen in major global indices.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 733.58 | -1.45% | 📉 |\n| Nasdaq 100 ETF | 713.65 | -3.29% | 📉 |\n| VIX | 19.49 | +12.79% | 📈 |\n| Crude Oil | 73.05 | -2.37% | 📉 |\n| Nikkei 225 | 72353.96 | +1.55% | 📈 |\n| DAX | 25139.69 | +0.62% | 📈 |",
+    "macro_section": "High Yield Credit Spreads remain complacent at 2.65%, indicating a current lack of stress in credit markets despite today's equity downturn. The 10-Year Minus 2-Year Yield Curve is normalizing/steepening at +0.340, typically signaling a healthy economic outlook, yet institutional risk appetite for US equities appears to have contracted sharply today, creating a divergence.",
+    "analysis_para1": "While US indices plunged, global counterparts showed resilience, with the Nikkei 225 gaining +1.55% and the DAX rising +0.62%. This global strength somewhat cushions the overall market sentiment, potentially preventing a broader panic. However, Crude Oil's -2.37% decline to 73.05 suggests underlying concerns about global demand, hinting at potential global growth headwinds. Despite this mixed picture, US High Yield Credit Spreads remain at a 'Complacent' 2.65%, suggesting that the market views today's US equity sell-off as more contained rather than a systemic credit event, for now.",
+    "analysis_para2": "Today's primary flow was dominated by a broad-based de-risking and positioning unwind, particularly evident in the technology sector. The sharp -3.29% drop in the Nasdaq 100 ETF and the +12.79% spike in the VIX index to 19.49 points to a mechanical unwinding of leveraged positions or a surge in hedging activity. This suggests that rather than a single major news event, cumulative concerns or end-of-quarter rebalancing triggered a significant shift away from risk assets.",
+    "analysis_para3": "Traders should exercise caution and monitor the VIX closely for signs of stabilization or further escalation, with a break above 20 signaling increased risk. Key support for the S&P 500 ETF stands near today's close of 733.58; a decisive break below this level would trigger further risk-off selling. For long entries, look for a strong hourly close above today's intraday lows coupled with a softening VIX. Conversely, a retest and failure at today's lows, or continued VIX strength, provides a short entry trigger, emphasizing reduced exposure and tight stop-losses for the remainder of the trading day.",
+    "technical_signal": "No reversal pattern confirmed yet. While S&P 500 stocks above SMA50 stands at 58.3% and S&P stocks above SMA200 at 65.5%, indicating decent underlying breadth, today's sharp downturn needs confirmation of capitulation or stabilization. Traders should watch for a bullish engulfing candle or a significant bounce from support on higher volume to signal a potential reversal.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "ZETA",
-          "company": "Zeta Global",
-          "reason": "The company rallied significantly following news of a strategic partnership with Palantir, enhancing its data analytics capabilities."
+          "company": "Zeta Corporation",
+          "reason": "Zeta Corporation's strategic partnership with Palantir announced today is driving high conviction interest and significant pre-market upside."
         },
         {
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
-          "reason": "Microsoft showed resilience after announcing a major new AI-powered cloud service partnership, reinforcing its leadership in enterprise solutions."
+          "reason": "Microsoft announced a new cloud security acquisition today, boosting investor confidence in its expanding enterprise offerings and strategic positioning."
         }
       ],
       "c_grade": [
         {
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
-          "reason": "NVIDIA traded on continued momentum from prior week's semiconductor sector strength and broader enthusiasm for AI, without fresh specific news today."
+          "reason": "NVIDIA continues to trade primarily on generalized enthusiasm for the artificial intelligence sector rather than specific fresh catalysts, marking it as a recycled thesis."
         }
       ]
     }
