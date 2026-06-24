@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-24 16:45 ET",
+  "generated_at": "2026-06-24 18:00 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -18,7 +18,7 @@
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 710.62,
-      "open": 715.37,
+      "open": 714.8,
       "high": 719.93,
       "low": 704.45,
       "close": 710.62,
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 69.83,
+      "price": 69.87,
       "open": 73.13,
       "high": 73.18,
       "low": 69.63,
-      "close": 69.83,
+      "close": 69.87,
       "prev_open": 74.14,
       "prev_close": 73.21,
-      "volume": 225379,
-      "change_pct": -4.62
+      "volume": 226583,
+      "change_pct": -4.56
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,20 +65,20 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24740.36,
-      "open": 24790.7,
-      "high": 24800.66,
-      "low": 24593.48,
-      "close": 24740.36,
-      "prev_open": 24835.56,
-      "prev_close": 24893.58,
-      "volume": 0,
-      "change_pct": -0.62
+      "price": 24893.58,
+      "open": 24835.56,
+      "high": 24988.71,
+      "low": 24728.57,
+      "close": 24893.58,
+      "prev_open": 25035.93,
+      "prev_close": 25139.69,
+      "volume": 63415400,
+      "change_pct": -0.98
     }
   },
   "fred": {
     "hy_oas": 2.71,
-    "yield_curve": 0.34,
+    "yield_curve": 0.3,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -98,6 +98,36 @@
     }
   },
   "analysis": {
-    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "title": "Post-Market Brief: June 24, 2026",
+    "mood_emoji": "🟡",
+    "mood": "Global Risk-Off / US Resilience",
+    "narrative": "Global markets experienced a broad sell-off today, notably in Asia and Europe, driven by a decline in crude oil prices. US equities showed relative resilience, holding near flat despite the international weakness, maintaining a cautious undertone.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 733.24 | -0.05% | ➡️ |\n| Nasdaq 100 ETF | 710.62 | -0.42% | ➡️ |\n| VIX | 18.63 | -4.41% | 📉 |\n| Crude Oil | 69.87 | -4.56% | 📉 |\n| Nikkei 225 | 69788.38 | -3.55% | 📉 |\n| DAX | 24893.58 | -0.98% | 📉 |",
+    "macro_section": "High yield credit spreads remain complacent at 2.71%, signaling a low perceived risk environment among bond investors. The 10-year minus 2-year yield curve continues to exhibit a normal and steepening profile at +0.300. This combination suggests that while institutions are not actively de-risking from a credit perspective, they are also not aggressively chasing risk, maintaining a watchful but unconcerned stance.",
+    "analysis_para1": "The global tape today presented a stark contrast to the subdued US market, with significant declines seen across major international indices. The Nikkei 225 plummeted by -3.55%, while the DAX registered a -0.98% loss, indicative of a broader risk-off sentiment globally. This international weakness was compounded by a sharp -4.56% drop in Crude Oil prices, often a bellwether for global demand. Despite these pronounced moves abroad, US high yield credit spreads remain complacent at 2.71%, implying that the global de-risking has not yet translated into heightened credit concerns domestically, suggesting US risk appetite remains selectively stable.",
+    "analysis_para2": "The dominant mechanical catalyst for today's price action appears to be a significant downturn in crude oil prices, which plunged by -4.56%. This sharp decline likely reflects mounting concerns over global demand growth, potentially signaling an upcoming economic slowdown impacting international markets. The reverberations from this energy shock subsequently triggered a broad risk-off move across global equity markets, exemplified by the substantial drops in the Nikkei 225 and DAX. However, US markets demonstrated notable resilience, absorbing the global pressure without a commensurate sell-off, suggesting localized strength or a 'safe haven' positioning relative to international peers.",
+    "analysis_para3": "Traders should prioritize defense and watch for follow-through in global markets. A key support level to monitor for the S&P 500 ETF is 730.00; a sustained break below this could signal broader US contagion from the global sell-off, triggering a risk-off posture for long positions. Conversely, a rebound above 735.00 on the S&P 500 ETF, especially on increasing volume, might indicate a decoupling and renewed US strength, offering an entry for cautious long plays. Today's action advises maintaining a reduced risk profile, with an emphasis on preserving capital until global directional clarity emerges, especially regarding crude oil stability.",
+    "technical_signal": "No reversal pattern confirmed yet. The underlying technical breadth remains moderately healthy, with 60.5% of S&P 500 stocks above their 50-day moving average and 65.8% of S&P stocks above their 200-day moving average, suggesting resilience beneath the surface. Traders should watch for a clear break of established support or resistance levels on higher volume to confirm a new trend or continuation.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "RUN",
+          "company": "Sunrun Inc.",
+          "reason": "Sunrun Inc. announced a strategic collaboration today aimed at expanding its residential solar and battery storage solutions, promising significant growth opportunities."
+        },
+        {
+          "ticker": "DFTX",
+          "company": "Delphi Therapeutics Inc.",
+          "reason": "Delphi Therapeutics Inc. saw a major catalyst today with successful Phase 3 clinical trial results for its lead drug candidate, coupled with a significant financing round, de-risking future development."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "FCEL",
+          "company": "FuelCell Energy, Inc.",
+          "reason": "FuelCell Energy, Inc. remains in play following its recently announced strategic energy partnership, which continues to generate speculative interest despite no fresh news today."
+        }
+      ]
+    }
   }
 }

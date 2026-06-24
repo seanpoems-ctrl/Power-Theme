@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-24 18:00 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Global Risk-Off / US Resilience",
+    "spy_price": 733.24,
+    "spy_change_pct": -0.05,
+    "vix": 18.63,
+    "hy_oas": 2.71,
+    "yield_curve": 0.3,
+    "credit_status": "Complacent",
+    "s5fi": 60.5,
+    "mmth": 65.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "RUN",
+          "company": "Sunrun Inc.",
+          "reason": "Sunrun Inc. announced a strategic collaboration today aimed at expanding its residential solar and battery storage solutions, promising significant growth opportunities."
+        },
+        {
+          "ticker": "DFTX",
+          "company": "Delphi Therapeutics Inc.",
+          "reason": "Delphi Therapeutics Inc. saw a major catalyst today with successful Phase 3 clinical trial results for its lead drug candidate, coupled with a significant financing round, de-risking future development."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "FCEL",
+          "company": "FuelCell Energy, Inc.",
+          "reason": "FuelCell Energy, Inc. remains in play following its recently announced strategic energy partnership, which continues to generate speculative interest despite no fresh news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-24 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -1977,44 +2015,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Tesla (TSLA) continues to be influenced by recycled headlines regarding EV competitive dynamics and production targets, offering tactical trading based purely on flow."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-27 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Calm Indecision",
-    "spy_price": 750.46,
-    "spy_change_pct": -0.02,
-    "vix": 16.29,
-    "hy_oas": 2.72,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 58.8,
-    "mmth": 64.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MU",
-          "company": "Micron Technology",
-          "reason": "Micron is poised for continued upside momentum as analyst upgrades and the ongoing AI memory rally fuel strong investor interest in semiconductor plays."
-        },
-        {
-          "ticker": "SMTC",
-          "company": "Semtech Corp",
-          "reason": "Semtech demonstrated strong operational performance with its earnings beat and raised outlook, signaling robust demand for its connectivity solutions."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc",
-          "reason": "Amazon is experiencing typical large-cap flow-driven action today, without fresh fundamental news to provide a specific catalyst for conviction."
         }
       ]
     }
