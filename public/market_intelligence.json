@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-24 07:05 ET",
+  "generated_at": "2026-06-24 09:26 ET",
   "phase": "PRE",
   "session": "Pre-Market",
   "assets": {
@@ -29,27 +29,27 @@
     },
     "^VIX": {
       "label": "VIX",
-      "price": 19.15,
+      "price": 19.21,
       "open": 19.13,
       "high": 19.41,
-      "low": 19.02,
-      "close": 19.15,
+      "low": 18.74,
+      "close": 19.21,
       "prev_open": 19.67,
       "prev_close": 19.49,
       "volume": 0,
-      "change_pct": -1.74
+      "change_pct": -1.44
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 71.81,
+      "price": 70.41,
       "open": 73.13,
       "high": 73.18,
-      "low": 71.55,
-      "close": 71.81,
+      "low": 70.36,
+      "close": 70.41,
       "prev_open": 74.14,
       "prev_close": 73.21,
-      "volume": 45746,
-      "change_pct": -1.91
+      "volume": 84902,
+      "change_pct": -3.82
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24654.57,
+      "price": 24629.4,
       "open": 24790.7,
       "high": 24800.66,
-      "low": 24619.85,
-      "close": 24654.57,
+      "low": 24606.33,
+      "close": 24629.4,
       "prev_open": 24835.56,
       "prev_close": 24893.58,
       "volume": 0,
-      "change_pct": -0.96
+      "change_pct": -1.06
     }
   },
   "fred": {
@@ -98,6 +98,36 @@
     }
   },
   "analysis": {
-    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "title": "Pre-Market Brief: June 24, 2026",
+    "mood_emoji": "📉",
+    "mood": "Global Risk-Off",
+    "narrative": "Major indices across the globe are flashing red this morning, led by significant declines in technology and commodities. This broad-based sell-off signals a pronounced shift towards risk aversion as investors de-risk portfolios ahead of the open.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 733.58 | -1.45% | 📉 |\n| Nasdaq 100 ETF | 713.65 | -3.29% | 📉 |\n| VIX | 19.21 | -1.44% | 📉 |\n| Crude Oil | 70.41 | -3.82% | 📉 |\n| Nikkei 225 | 69174.97 | -0.88% | 📉 |\n| DAX | 24629.40 | -1.06% | 📉 |",
+    "macro_section": "Despite the broad market sell-off, high-yield credit spreads (BAMLH0A0HYM2) remain at a complacent 2.65%, suggesting that underlying credit market stress is not yet widespread. The 10-Year minus 2-Year Treasury yield curve (T10Y2Y) stands at a normal and steepening +0.340, which typically indicates a healthy economic outlook. This combination implies that while equities are experiencing a risk-off event, institutional risk appetite for credit remains relatively stable, preventing a full flight to safety.",
+    "analysis_para1": "Global markets are under significant pressure this morning, with the Nikkei 225 down 0.88% and the DAX losing 1.06%, while Crude Oil plunged a notable 3.82%. These declines reflect a broad-based shift away from risk assets globally, impacting both developed market equities and commodities. However, US high-yield credit spreads (BAMLH0A0HYM2) remain remarkably complacent at 2.65%, showing a disconnect from the broader market pessimism. This suggests that while US equities are likely to open lower in sympathy with global peers, the underlying credit foundations for US institutions are not signaling immediate panic, but rather a targeted de-risking event.",
+    "analysis_para2": "Today's pervasive global sell-off appears to be driven primarily by a broad positioning squeeze and risk re-evaluation rather than a specific, isolated macro event. Investors are de-risking across asset classes, with substantial declines in the Nasdaq 100 ETF (-3.29%) and Crude Oil (-3.82%) indicative of profit-taking in previously strong sectors and commodities. This mechanical unwinding of risk positions, potentially ahead of upcoming central bank commentary or end-of-quarter rebalancing, is forcing systematic selling across developed markets, pushing indices like the S&P 500 ETF down 1.45%. The slight dip in the VIX despite broad equity declines suggests that this is more of a controlled liquidation than a fear-driven panic, indicating systematic flows are dominating rather than sudden shock events.",
+    "analysis_para3": "Given the strong sell-off, traders should anticipate a volatile open and prioritize risk management above all else. For the S&P 500 ETF, watch for initial support around the 730 level; a sustained break below this could accelerate selling towards 725. Conversely, a rebound and reclaim of 735 could signal short-term exhaustion of selling pressure, offering cautious long entries for a bounce. Maintain tight stop-losses, and consider scaling into positions rather than full commitment, as the broader market sentiment remains decidedly risk-off. Today's focus should be on capital preservation and observing how the initial selling pressure resolves, rather than aggressively fighting the tape.",
+    "technical_signal": "No reversal pattern confirmed yet. The sharp declines across major indices indicate strong bearish momentum, pushing many assets towards key support levels. Traders should watch for intraday candlestick formations or volume spikes at potential support zones that could signal a temporary exhaustion of sellers. However, until such a pattern emerges, the path of least resistance remains to the downside, necessitating a cautious and reactive approach.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "RUN",
+          "company": "Sunrun Inc.",
+          "reason": "RUN is showing strength pre-market following news of a strategic collaboration, defying the broader market sell-off."
+        },
+        {
+          "ticker": "FCEL",
+          "company": "FuelCell Energy Inc.",
+          "reason": "FCEL is benefiting from a strategic energy partnership announcement, attracting bullish interest amidst a risk-off environment."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVDA is likely experiencing recycled profit-taking and weakness in sympathy with the broader tech sector's significant decline."
+        }
+      ]
+    }
   }
 }

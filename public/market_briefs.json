@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-24 09:26 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Risk-Off",
+    "spy_price": 733.58,
+    "spy_change_pct": -1.45,
+    "vix": 19.21,
+    "hy_oas": 2.65,
+    "yield_curve": 0.34,
+    "credit_status": "Complacent",
+    "s5fi": 58.5,
+    "mmth": 65.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "RUN",
+          "company": "Sunrun Inc.",
+          "reason": "RUN is showing strength pre-market following news of a strategic collaboration, defying the broader market sell-off."
+        },
+        {
+          "ticker": "FCEL",
+          "company": "FuelCell Energy Inc.",
+          "reason": "FCEL is benefiting from a strategic energy partnership announcement, attracting bullish interest amidst a risk-off environment."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVDA is likely experiencing recycled profit-taking and weakness in sympathy with the broader tech sector's significant decline."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-24 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -1997,44 +2035,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Tesla saw increased buying interest today driven by short-covering activity and technical breakout attempts, without any new fundamental developments."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-25 17:05 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Global Risk-On Accumulation",
-    "spy_price": 745.64,
-    "spy_change_pct": 0.39,
-    "vix": 16.59,
-    "hy_oas": 2.78,
-    "yield_curve": 0.43,
-    "credit_status": "Complacent",
-    "s5fi": 61.4,
-    "mmth": 63.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GFS",
-          "company": "GlobalFoundries Inc.",
-          "reason": "Shares surged on news of a new US-backed quantum manufacturing initiative, highlighting significant governmental support for advanced semiconductor production."
-        },
-        {
-          "ticker": "NOK",
-          "company": "Nokia Corporation",
-          "reason": "Stock benefited from reports detailing its aggressive pivot into AI infrastructure solutions, positioning the company for growth in a critical technology segment."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp",
-          "reason": "While no new specific catalyst emerged today, NVDA continues to attract momentum flows driven by its dominant position in AI hardware and ongoing technical strength."
         }
       ]
     }
