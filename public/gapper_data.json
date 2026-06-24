@@ -1,70 +1,81 @@
 {
-  "scan_time": "2026-06-23 08:55 ET",
+  "scan_time": "2026-06-24 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "EPC",
-      "price": 22.72,
-      "gap_pct": 9.99,
-      "pm_volume": 235728,
-      "avg_vol_10d": 1054298,
-      "avg_dollar_vol": 23953651,
-      "mkt_cap": 1046967684,
-      "rvol": 2.54,
-      "adr_pct": 4.87,
+      "ticker": "WEN",
+      "price": 6.25,
+      "gap_pct": 23.98,
+      "pm_volume": 17947594,
+      "avg_vol_10d": 8034566,
+      "avg_dollar_vol": 50216038,
+      "mkt_cap": 1191456404,
+      "rvol": 1.04,
+      "adr_pct": 4.77,
       "category": "Others",
-      "theme": "Takeover Bid Rejection",
-      "reasoning": "Edgewell stock surged after management **rejected** a **$30-per-share** takeover offer from **Yellow Wood Partners**, signaling potential undervaluation.",
+      "theme": "Executive Appointment",
+      "reasoning": "Wendy's stock surged over **20%** following an 8-K disclosure detailing the appointment of a new executive team, described as a 'dynamic duo' from Potbelly.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 61,
+      "conviction": 57,
       "grade": "C",
       "finviz_theme": "Consumer - E-Commerce",
-      "analysis_source": "gemini",
+      "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Edgewell **rejected** a takeover offer of **$30-per-share** from **Yellow Wood Partners**, leading to a surge in its stock.",
-        "impact": "The rejection signals management's belief in a higher intrinsic value for the company, potentially opening the door for future bids or a re-rating of the stock."
+        "catalyst": "Wendy's (WEN) filed an 8-K on **2026-06-23**, disclosing an Item **5.02** event, which typically relates to executive changes. News headlines confirmed this, stating WEN shares surged as the fast-food chain 'reunites Potbelly's **dynamic duo**'. The stock saw a **20%** surge overnight.",
+        "impact": "The market views this new leadership as a potential catalyst for a turnaround, attracting significant retail interest and leading to a potential short squeeze."
       },
-      "analysis_details": "• **What Happened**\nEdgewell Personal Care (EPC) saw its stock **surge** following news that it **rejected** a **$30-per-share** takeover offer from **Yellow Wood Partners**. This development indicates that management views the company as undervalued at the proposed price.\n\n• **Key Consideration**\nThe rejection of a concrete **$30-per-share** bid suggests that the company’s leadership believes EPC's standalone value or future potential is significantly higher. This could attract further interest from Yellow Wood Partners or other suitors, or it may imply an expectation of strong operational performance to justify the rejection.",
+      "analysis_details": "• **What Happened**\nWEN filed an **8-K** on **2026-06-23**, indicating significant executive changes under Item **5.02**. This corporate disclosure coincided with news that Wendy's is 'reunit[ing] **Potbelly's dynamic duo**,' suggesting the appointment of a new leadership team. Following this news, WEN shares surged **20% overnight**.\n\n• **Key Consideration**\nThe market is interpreting the new executive appointments as a strong catalyst for a potential 'turnaround play,' attracting retail traders and leading to speculation of a 'short squeeze.' The reunion of a 'dynamic duo' from another chain implies a strategic intent to rejuvenate the company's performance and market position.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Edgewell Rejects $30-Per-Share Takeover Offer From Yellow Wood Partners - marketscreener.com",
+          "title": "Wendy’s stock price today: WEN shares surge as the fast food burger chain reunites Potbelly's dynamic duo - Fast Company",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQeFUwZnN6dXA5VWU1UVVMdVg1NDk5ZnU1Sk5RVUtLRnBfRE8xaFYycGdhUDQ2UDlVLTkwQmd2R1U2ZWcxWXJ6elVJTXluVU44RzdmWlM5ZmhoeDlfSmhDc01uc2l1QXM2eXJncUIzNnlleHFZdGZqZ2VwbGE4azNiY08xeEYteDJfZVBhVkdkaF9WTjBfOVlBaVo2al93eXRPT2FlMnEyUUZicXk1YWxkYzJDWmdfcjVGU3hrQy1uS3c?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOYnB3TGZwQUppRGNabHhMOHVvclNQeEhFNFJwTXZfY0FBN200OHVHYkpyVmJmWWM4RnVCb2k0VjlkN0FDRnVpdjNlQ1ZqMHloV0xqTWJYMXpLMS1oaWlZanMwM1oxNHpJazJVZzdWS0pIREZUQWdUMGFmMnFqMU1nSENVTXJMVmpVOERnN3NFN3MzUHZPTGUzc1J4QS1mMjRJN1RZUA?oc=5"
         },
         {
-          "title": "Edgewell stock surges on report of rejected takeover bid - Investing.com UK",
+          "title": "Wendy's stock soars as meme traders target another turnaround play - CNBC",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNT3hzZTBPQV9EenZNclBNMzh3aWlHNWVZT2xwc0l5UWpKR0lYUTVhMmV1Zzc3Snh5OE51MmcwaFVBbjlXYkpOV0pxVUgxZ181X0hYdjVET1hjemEyTFM0cDN6bFQ4RDVlamYyUlB0clhYUzkxVjA4TUl4WkRjbTBobUFIZEhqel9JbWY4REduak9Sd2VZend4X1lUMjl3aFlFRG5RSzl1QTVMMkNPYnFqVUNlVllaa3Bkd2l4LURVRy1fMGx6RG04Qg?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQUmZ4MGxkWGdpYkpzdGMyMldIRDdVaGFVdU5sYWVSSTJRRWlnZV9haklTLTJjaGtha244QzVVVTlzdF91N3pfY00xUzNwWlNRWjczMzY1amplSGRucExoUHNSVS1pYlFDR1RJNG4zb1dKdFZmLVZZaVZ3Mko1enBadWFCaVZhN3pjUXJwbjRWdVlFUTFRdjlIb1ZhbGVFMV9VcDdva9IBqgFBVV95cUxOUjdzUnZMVmZ1THAyeUlnRk9mZUt2RmI0NURRN2I0MlB4akNMdGNHSjAtbGR2cGlNdmQ1c2F3Q1pmQUZJYUF1WVVrTThndGhCM0RsN0d0Q0ZPcy1Tc3pSQlo5M19iVWVTaUxGZm5NTWs2NG51OEZTVVhTUWZkaUxLcXF2UC1fUV84OVFUS21lb29PU0tZUzI4QkVtN3l1b1d4RUlWNjVzSk9Xdw?oc=5"
         },
         {
-          "title": "3 Consumer Stocks Walking a Fine Line - Yahoo Finance",
+          "title": "Wendy’s Stock Is Soaring 20% Overnight — Retail Traders Are Begging for A Short Squeeze - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPQzVjSVJOb2VIdEtYS1FPSmNSZ0lmTW1uVHgwWVF6NXlqc3JSWUZqYXRpV3UzU2sxRVhyT3IzUFlfZE1ub3haNk9OV3VDNndOTTAtZENnZDZaZER1WWdiSHNfMkx5cEttWEVJNnlGVEI4d19qVV81eVJkQ3JqRVh3WG9ZeUliTnRsYXc1WVQ5Nm9hb2UzVkYxWFdXTQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQWEw5VDJFYlpRQlZuSURXd3U3dUNsNGxDZEpfbUpMTE41cC1PQldST1VmTkZhcjRtV3l5R1cxSkZWaUdGTHpYcTR4VnozSktkS3Y5bUN6YmpoY3YzenlTVjgwTG9zd0FHemxyRmZXTzQtVjBYVHdhZ3ctTHJtZkQ5V0d2eG1qcHpMcjI3anh2TGxPcUVMRU1obUxZMnE0QQ?oc=5"
         }
       ],
-      "edgar_filing": null,
-      "float_shares": "45.43M",
-      "short_float": "11.11%",
-      "daily_pct": -1.69,
+      "edgar_filing": {
+        "filing_date": "2026-06-23",
+        "form": "8-K",
+        "items": [
+          "5.02",
+          "7.01",
+          "9.01"
+        ],
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/30697/000119312526278576/d158135d8k.htm"
+      },
+      "float_shares": "169.44M",
+      "short_float": "29.67%",
+      "daily_pct": 1.38,
       "industry": "Consumer - E-Commerce",
-      "technical_status": "Fail (Avg $Vol $24M < $100M)",
+      "technical_status": "Fail (Avg $Vol $50M < $100M)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 90,
+        "confidence_score": 85,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "rejected a $30-per-share takeover offer from Yellow Wood Partners",
-        "discrepancy_note": "Source A (Finviz News) has no information regarding the claim. Source B (Google News, specifically item 5) explicitly confirms the claim, mentioning 'Edgewell Rejects $30-Per-Share Takeover Offer From Yellow Wood Partners'."
+        "primary_claim": "Wendy's stock surged over 20%",
+        "discrepancy_note": "Source A (Finviz) has no information. Source B (Google News) mentions '20%' in article [2] and '22%' in article [5], which, while both 'over 20%', are not exact matching specifics for '20%'."
       },
-      "gates_passed": 3,
+      "gates_passed": 2,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": true,
+        "gate_price": false,
         "gate_dollar_vol": false,
         "gate_mkt_cap": false,
         "gate_adr": true
@@ -74,68 +85,148 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "ZETA",
-      "price": 18.47,
-      "gap_pct": 8.28,
-      "pm_volume": 1109800,
-      "avg_vol_10d": 8319343,
-      "avg_dollar_vol": 153658265,
-      "mkt_cap": 4603787930,
-      "rvol": 0.99,
-      "adr_pct": 6.62,
-      "category": "New Contract/Partnership",
-      "theme": "Palantir Partnership",
-      "reasoning": "Zeta Global shares surged after announcing a new partnership with Palantir to tie marketing data to Foundry.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "A",
-      "finviz_theme": "AI Enterprise Software",
-      "analysis_source": "gemini",
+      "ticker": "ABSI",
+      "price": 7.41,
+      "gap_pct": 21.07,
+      "pm_volume": 3056789,
+      "avg_vol_10d": 5805361,
+      "avg_dollar_vol": 43017725,
+      "mkt_cap": 1155256469,
+      "rvol": 1.12,
+      "adr_pct": 11.15,
+      "category": "FDA",
+      "theme": "FDA",
+      "reasoning": "ABSI FDA/regulatory event: Absci stock surges 24% on positive Phase 1 hair loss drug data - Investing.com",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
       "analysis_detail": {
-        "catalyst": "Zeta Global announced a **new partnership** with **Palantir**, aiming to **tie marketing data to Foundry**. This news drove **Zeta shares higher** upon the announcement.",
-        "impact": "This collaboration expands Zeta's data capabilities and integration with a leading enterprise AI platform, potentially enhancing its market positioning and revenue opportunities in data-driven marketing."
+        "catalyst": "Headlines: Absci stock surges 24% on positive Phase 1 hair loss drug data - Investing.com | Absci raises $100M as Lilly joins investors backing AI drug program - Stock Titan | Absci Announces Pricing of $100 Million Underwritten Offering with Leading Strategic and Financial Investors - GlobeNewswire",
+        "impact": "Binary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form."
       },
-      "analysis_details": "• **Impact**\nZeta Global's shares experienced a rise following the announcement of a **new partnership** with **Palantir**. This collaboration focuses on **tying marketing data to Palantir's Foundry** platform, integrating Zeta's capabilities with Palantir's robust data operating system.\n\n• **Strategic Value**\nThis partnership positions Zeta to leverage Palantir's advanced analytics and AI capabilities, potentially enhancing its competitive edge in the marketing technology sector. The integration with **Foundry** suggests a deeper value proposition for enterprise clients seeking more sophisticated data activation and insights, driving potential growth for Zeta Global.",
+      "analysis_details": "• **The Event**\nHeadlines: Absci stock surges 24% on positive Phase 1 hair loss drug data - Investing.com | Absci raises $100M as Lilly joins investors backing AI drug program - Stock Titan | Absci Announces Pricing of $100 Million Underwritten Offering with Leading Strategic and Financial Investors - GlobeNewswire\n\n• **Risk Profile**\nBinary event — expect extreme volatility. Mean reversion risk is high; avoid chasing the open. Wait for a 15-min base to form.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Zeta Shares Rise on Palantir Partnership - marketscreener.com",
+          "title": "Absci stock surges 24% on positive Phase 1 hair loss drug data - Investing.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQX1RRcG1NZThuc3VUUVM1WE9KZFdzNnhJY2JYQWdMd0hSbnNKNjk0eXlRQ09xZ3F3LUhLSm5iRml3ZDZmYjZGWTdMeml1OTJCNGhBRndZS0wyc1FoRUNLYnZJVEFBNmk4QkJsdWhuYWNDTHFSelRrbHc2UlFmcVRRekl5a1BtM3pPZ0FGeVc5UzFtUTNGS3lQOA?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNRGRodFJGTW1HQ1dzWnFWQ3ZlRldlQUhIUXZObmNHcDJQeGFyTUVIdWtNaDIxVWFvVnluU0VwR1VBMWlnY3UtWFBRVklRUzdMOXZSbVB6cWZvNVZMYm5BSnZ2UXNwMElWbzV3cmhkcnlJQVBZallLby0yR0pCZWlyc1pRM3doN3FzYlZiYUZ1VVg1SVk0U3FIMERIWkkxTENBREc1S0ZXUzFOMzNoXzZVWnBRRkpabjY3RnJnemhnek0?oc=5"
         },
         {
-          "title": "$Zeta Global (ZETA.US)$ - Moomoo",
+          "title": "Absci raises $100M as Lilly joins investors backing AI drug program - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFB5bUl0TVVJZlVQSmswMUgwZjluQmcxUzFiWVNmQjRnczNrMXF0WnktVWlqRmM1WG04NWtnOEEzT2E2ajE5Snk3cU1RNXIyVkVmQmNMbFBNUmYzX3FpMFRHN0RMaHRVQ1QxWlFQN3BDWmt4QnZVS0lzaXRHa3l3dw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOZmhkb2tPNFpfS0x1QU1wUnl1eWNhMUhBcHpQV2lSVDNvb0RqZkVCTjBzZ3k5Wnc0MG45ZG0zTmFwbHBFS2ZtblFUblBvMkxiSmE3SWQ3Wjdha1YtWXhGMGY1V1h5amdnNGZiRzd3TlJLRHJ0bHJ2SWxfa3hKUlBYRGkwU1lZWkhBTXI3b0FkZkg4bDRIelRzMmNCRC1lV1BMRGdld0pPVXlSMHNUYlBCRjBIYnRiMFpLNEJwVw?oc=5"
         },
         {
-          "title": "Zeta Global stock rises on Palantir partnership announcement - Investing.com",
+          "title": "Absci Announces Pricing of $100 Million Underwritten Offering with Leading Strategic and Financial Investors - GlobeNewswire",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNZVlnV1paUHVYeE9IMFN5d2diVkNRdkVRb0FOblNldUZKNGlITjE1YVh2MWkxNllUc2VNNjRNVlFxZGZRc21WcHpWYTh1VGdIU1FZbnIyUm9RS3E0RE1NM3dSS1BfME9vVnMzbmVGd3htekQ2akdZVVNPU0hORktSLWkxN3VCQmlVTzYzc0hwUkVHLS1IZ251V2hYaU4tYW9GRGg3ZTNUTmQ2RXVVX2taUkwzMlFuc1BUMUc1TXdSSQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxNR3QtMVBRMmpUT0VKNmhRTDl6Y2t2Qmdrdjc5cWU4WVpGVmlIQmJ3eXhTSnpDbHR0N3FMNlczV0dudjBoYnZwaHlxZzJNX3VMZDBxZHNhWnNzLTl5WG1lVXA2dE5yTm1fekd1SnRfVjNxMzFrSlItNGctQ1VoTExPMnRmZDJUTi1KZlI3S2tHR2NtQjJHOE1IM0hhZ0hxNEdfSHc2SjdYSG53TWNYNGowTURfVmJFNVJaWHJ4Y0h4VmRNY3c3T1hqVzdBbjVSMEkwcVlvV0xYbHo0RzF2dGFNOXJYVHpyOEdqeEhDRmtuVWU1UTNabWlReHdTTFBQOHdIZjViYkM3VG9lMWM?oc=5"
         },
         {
-          "title": "Palantir and Zeta Global tie marketing data to Foundry - Stock Titan",
+          "title": "Absci’s ABS-201 shows 65-day half-life in alopecia trial - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPR2MtcHpqenIzUFpiMEg1MjNicXRfNUl0Q3U0cFc1N1J3SFF1NnhVWUozVjdjdUZpUTlvN0g2OE1PRHRXX21hY3A1MDFJMDBQNEFYYnVWdmlvM1V1LW1kVzd3S2pWbk50VklUN2hBVVJicnRuNmZrYVdIM250R2x5azc2a2kxcEp2UWxmeGNLdC1RcG5wa1hOdW5EeGhJX3lJTnBFc0xkb0o0V1hoSWRuTjlpeUR1VEZSeW0yOG5n?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNbkNRRWtkN3Y5Y3BWZGh5NGZjZzA2eFJlSHMwR09JLUhiLS1ZcEtzLTZ0U1JURG9YQ0dzcWFTa1E5M3VOc1V6V2l1N3BMY3R4YkMwOUpvcHgyVGttY3NrRkxhUUJYTkdvTHBYWlJ4TmVSQjBjOUVGSF84MG1LQVRtbFJUYTJST3JSSm5SZjJjVDNvd25aQUVqX05paVRYVjRuTzkwNFVPVUpyZDlVR3dIc0IwZ2R1MGI0azN3Rg?oc=5"
         }
       ],
-      "edgar_filing": null,
-      "float_shares": "221.39M",
-      "short_float": "13.81%",
-      "daily_pct": -2.28,
-      "industry": "AI Enterprise Software",
-      "technical_status": "Pass",
+      "edgar_filing": {
+        "filing_date": "2026-06-24",
+        "form": "8-K",
+        "items": [
+          "8.01"
+        ],
+        "category": "Others",
+        "label": "Other Material Event",
+        "url": "https://www.sec.gov/Archives/edgar/data/1672688/000167268826000118/absc-20260624.htm"
+      },
+      "float_shares": "133.28M",
+      "short_float": "24.07%",
+      "daily_pct": -11.79,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $43M < $100M)",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 85,
+        "status": "Unconfirmed",
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Deal Could Drive $100 Million in Annual Revenue",
-        "discrepancy_note": "Source A (Finviz News) provides no information to confirm or deny the claim. Source B (Google News, specifically Benzinga) mentions the claim 'Deal Could Drive $100 Million in Annual Revenue' in one headline, but the claim is not confirmed by both sources as required for 'Verified'."
+        "primary_claim": "ABSI FDA/regulatory event: Absci stock surges 24% on positive Phase 1 hair loss drug data - Investing.com",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "RUN",
+      "price": 12.81,
+      "gap_pct": 19.28,
+      "pm_volume": 3248499,
+      "avg_vol_10d": 8110520,
+      "avg_dollar_vol": 103895761,
+      "mkt_cap": 3055816452,
+      "rvol": 0.81,
+      "adr_pct": 6.25,
+      "category": "New Contract/Partnership",
+      "theme": "Strategic Collaboration",
+      "reasoning": "Sunrun, Tesla, and Renew Home announced a collaboration to tap millions of homes for a substantial 16GW of clean energy capacity.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "A",
+      "finviz_theme": "Clean Energy - Solar",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Sunrun, in partnership with **Tesla** and **Renew Home**, announced plans to tap **millions of homes** to deliver a total of **16GW** of clean energy. This collaboration signifies a massive scaling initiative.",
+        "impact": "This strategic partnership expands Sunrun's market reach and potential deployment capacity significantly, leveraging key industry players to accelerate growth and potentially improve competitive positioning."
+      },
+      "analysis_details": "• **Impact**\nSunrun, in collaboration with **Tesla** and **Renew Home**, has announced an initiative to tap **millions of homes** for a substantial **16GW** of clean energy capacity. This news highlights a significant expansion of deployment strategy, involving key players in the home energy and EV sectors.\n\n• **Strategic Value**\nThis partnership provides substantial strategic value by combining Sunrun's residential solar expertise with Tesla's energy storage and potentially EV integration, and Renew Home's market access. The **16GW** target indicates a massive, high-conviction drive for market share, potentially accelerating growth and enhancing Sunrun's long-term competitive position in the clean energy sector.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Investors may be hitting pause on the AI run-up - Axios",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE1hdTcwNnRfNlBIbDg5eHRXejdHMlItczB1OEpmWmdld2dsSHpTdXlZM2xvZ3V1Um5YVU1QcmZfUlJPb2FicWhXRW93dDZlM01wamFUQzBFSjJ4QWZjQTVYV2l0YXZVQ1k?oc=5"
+        },
+        {
+          "title": "Lumentum (LITE) Stock After Strong Multi‑Year Run Is There Still Upside Potential - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPUjMteVdRVVFaeFNvNWt1dThCcjNNVDhnUFg0MzNDcGNBLVFYeU9HNFBPcGUzbHhFcklPNklDMl91ZjRqeHpzWUY1RFk2MFFuZjdueW15ZHhDLUpTNmU4MW5FSnNBaWtEZHVCeVNjbHA4d1pOMDNud2MwZE5Hc2FwMldpUUNRbDdJSjRCSUNnMHdKcUVqWGNxdmQtN0xHZw?oc=5"
+        },
+        {
+          "title": "Sunrun, Tesla and Renew Home tap millions of homes for 16GW - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPM2tzMWQ1MXVWZllwNmptdGZwMmU5WUdaZFM2UVNtRUs5NTZXcWkteEN0eE5CeHBpMWQ2djlyUFppZXNsWnRfMy14TW1iOEVXRGphOEtIamNpZmpYeC1fbnV2QS1ZVFVDQmctY0Y4VGFWSjFkZEpCclpxOTg4Vmh4WDI5ZF9RZHhFdG1FclVxc1Z5bm5DN3ZwUjNFTDNtV0tjRnotWlRnaWk1YVBWWnhiWkU4cw?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "229.86M",
+      "short_float": "25.98%",
+      "daily_pct": -5.95,
+      "industry": "Clean Energy - Solar",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Sunrun, Tesla, and Renew Home announced a collaboration to tap millions of homes for a substantial 16GW of clean energy capacity.",
+        "discrepancy_note": ""
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -148,6 +239,233 @@
       "meets_all_gates": true,
       "tier": "T1",
       "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "FCEL",
+      "price": 21.82,
+      "gap_pct": 16.98,
+      "pm_volume": 1562564,
+      "avg_vol_10d": 11211715,
+      "avg_dollar_vol": 244639621,
+      "mkt_cap": 1475210239,
+      "rvol": 0.64,
+      "adr_pct": 15.13,
+      "category": "New Contract/Partnership",
+      "theme": "Strategic Energy Partnership",
+      "reasoning": "FuelCell Energy secured a strategic agreement with Fit Energy to supply up to **380 MW** of clean power for data centers.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 75,
+      "grade": "A+",
+      "finviz_theme": "Clean Energy - Hydrogen",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "FuelCell Energy entered a **strategic agreement** with **Fit Energy** to provide up to **380 MW** of **clean power** specifically for **data centers**, as detailed in their **8-K filing** on **2026-06-24**.",
+        "impact": "This partnership could significantly expand FCEL's market reach into the high-growth data center sector and provide a substantial revenue pipeline, potentially leading to a re-rating of the stock."
+      },
+      "analysis_details": "• **Impact**\nFuelCell Energy announced a **strategic agreement** with **Fit Energy** to provide up to **380 MW** of **clean power** for **data centers**. This significant contract, disclosed via an **8-K filing** on **2026-06-24**, marks a major expansion in FCEL's project pipeline.\n\n• **Strategic Value**\nThis partnership positions FuelCell Energy to capitalize on the rapidly growing demand for sustainable power solutions in the data center industry, providing a substantial, long-term revenue opportunity. The deal with **Fit Energy** could lead to a material re-rating of FCEL's growth trajectory and market valuation.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "FuelCell Energy and Fit Energy Announce Strategic Agreement for up to 380 MW of Clean Power for Data Centers - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxON2VWdlBmUTRGUzdhSUtXcFVhdmFtTDVjYzRNdEh2Q1BXS0tKcUVkeEc5QjFRVFFuV1ZQR0VDRVB5dms2NmNFZk4zc3dCMDhISE5aR0RxRmJ1SG42TV9weWRuMlk1eGFiUmFuOVFZR0xEXzFTV2c1OWlKM1ljd1A4Z2phY3VodkU4akc3Q0ZEd2pPYkJWUU9XUFNQaE5tQWtDMTNyQVo3X1h4bGtlcUlTazB1NGZJU3FwNEJMQ1o5OA?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-06-24",
+        "form": "8-K",
+        "items": [
+          "1.01",
+          "3.02",
+          "7.01",
+          "8.01",
+          "9.01"
+        ],
+        "category": "New Contract/Partnership",
+        "label": "Material Contract or Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/886128/000110465926077042/fcel-20260622x8k.htm"
+      },
+      "float_shares": "67.39M",
+      "short_float": "8.01%",
+      "daily_pct": -10.54,
+      "industry": "Clean Energy - Hydrogen",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "FuelCell Energy secured a strategic agreement with Fit Energy to supply up to **380 MW** of clean power for data centers.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "DFTX",
+      "price": 36.18,
+      "gap_pct": 5.8,
+      "pm_volume": 186979,
+      "avg_vol_10d": 4119023,
+      "avg_dollar_vol": 149026252,
+      "mkt_cap": 3946036137,
+      "rvol": 1.58,
+      "adr_pct": 6.49,
+      "category": "FDA",
+      "theme": "Phase 3 Clinical Trial Success & Financing",
+      "reasoning": "Definium Therapeutics announced a successful **Phase 3 win** for **DT120** and priced an **upsized $700 million public offering**.",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 23,
+      "grade": "A",
+      "finviz_theme": "Biotech - Oncology",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Definium Therapeutics (DFTX) announced a significant **Phase 3 win** for its drug candidate **DT120**, a critical milestone in drug development. Concurrently, the company priced an **upsized public offering** that successfully **raised $700 million** through a stock sale.",
+        "impact": "The positive Phase 3 data de-risks the clinical profile of **DT120**, positioning it for potential regulatory submission and commercialization. The substantial capital raise provides funding for ongoing development, potential commercialization efforts, and strengthens the company's balance sheet, mitigating immediate dilution concerns for existing shareholders post-news."
+      },
+      "analysis_details": "• **The Drug**\nDefinium Therapeutics (DFTX) announced a successful **Phase 3 win** for its drug candidate, **DT120**. This clinical trial success is a pivotal milestone, validating the efficacy and safety profile of **DT120** and moving it closer to potential regulatory approval.\n\n• **The Significance**\nThis **Phase 3 win** for **DT120** is coupled with a substantial financing event, as Definium Therapeutics **raised $700 million** through an **upsized public offering** or stock sale. This dual news item suggests a strong market reception to the clinical data and provides significant capital to support the drug's future development and commercialization.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Definium Therapeutics (DFTX) Lands Phase 3 Win And Raises $700 Million For DT120 - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNQjZJRUFKMTcwTTA5QmZpa3lQQ1JYeGFVYTdXclUwUWdPVW9wU2Q5dmhYbDBlWUdFNExrNXp1Z01ORmhtc2NLbmZPdGVaOEF6cl9pTE1CS216T1RUOHgxblNMei01SkZpRGNwTHdLVUhFQVRtMkFBaUZXdjdFbzNqVW14OUExWFUxOUloNGFqN3VtbFMxcFVEanFObmMySXVzdnRnLXEwUF96blFUc3dlN2lMa21QTWV6ZnA3eHlxeXloeXF6NHhoSUpMbFVhVEVhbXVDMF9oOTlNaThxMVZZTU5aUXZ6ejZTdnfSAe8BQVVfeXFMT2ViVy12NGdObmYwLXUwYk9zdHdMbVJvRVUtRTFMcVVGS2lacU5va1ZFbDRRTGJrN3ZlUHhGaER1WDAzaDJla2RuaFl1eGtIVTZGdURYbDBNUm03NnNSaWs3RXpRX3RHdkpNNFdBVGZwMzdvdk9TLWtyR3IxQi0xcGRHeDNnYW1IT2kwYlRvVlM3QXVKcWdHVmV3NFR6TXV1TFlYSURwTGs5aUxSS3E3WlFOMHk3dzFLWkNpS1RSdmR2VVZIQTdfVnRsblpJQzY0OUU3S0JrT0k2aExvWmdIdWltaktmdmNkZG1HN1FxOEE?oc=5"
+        },
+        {
+          "title": "Definium Therapeutics (DFTX) Posts Phase 3 Win And Plans Public Offering - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPZVJTX1JXeHYyb0FHZFJPdjRIVnJ2d0djdHVXOU5KZm1hc2lrRnl5aU5RUXVCLUpqZU05NzJnV2RnMnlCdU8yNjFIQWhReW5JUl9sUEZVeHFmN3h5allyMXNrbEFhaXNGNXJ5MzI0SWFhVU5DR3FXaHpaMm44SF9hTHlvbzh6U1Q5cnI4aS1CbE9qY3ByZHBacS0wVkJaei1B?oc=5"
+        },
+        {
+          "title": "Definium Therapeutics raises $700M in stock sale, with more shares possible - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNaHRac041N0hLUXJwRzhMWmx3YmdvNWtBNmJWempwY3VFZUpBOGloTGhzZy1DOHNiTUFmWXFicFRaNVJEYmExelFqOHg2S3NEYkk3VXM1VjllSExYbjhuaXNldUVXcGI3TC1BVlNnRjJfc1JvRE5NN1NIWWxqZ3ZFcjNiYldGdTZqQmxNX2tpZHZ2T2ltbWZyeEgtZDh3QUZlMVNHTEpEZ2NTMkQ4Qm45d2hFZ0haR3dRQXB5ZHlB?oc=5"
+        },
+        {
+          "title": "Definium Therapeutics, Inc. Announces Pricing of $700 Million Upsized Public Offering",
+          "source": "Finviz",
+          "url": "https://www.businesswire.com/news/home/20260623369229/en/"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-06-22",
+        "form": "8-K",
+        "items": [
+          "7.01",
+          "8.01",
+          "9.01"
+        ],
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/1813814/000110465926076091/tm2618434d1_8k.htm"
+      },
+      "float_shares": "104.84M",
+      "short_float": "8.99%",
+      "daily_pct": -1.34,
+      "industry": "Biotech - Oncology",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Definium Therapeutics announced a successful **Phase 3 win** for **DT120** and priced an **upsized $700 million public offering**.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "KEEL",
+      "price": 6.6,
+      "gap_pct": 5.76,
+      "pm_volume": 1002408,
+      "avg_vol_10d": 67936771,
+      "avg_dollar_vol": 448382689,
+      "mkt_cap": 3985268790,
+      "rvol": 0.9,
+      "adr_pct": 10.38,
+      "category": "Upgrade",
+      "theme": "Citizens Initiation",
+      "reasoning": "Citizens initiated Keel Infrastructure (KEEL) stock at outperform, citing strength in its AI pipeline and recent government contract wins.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 31,
+      "grade": "B",
+      "finviz_theme": "Infrastructure",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Catalyst: Citizens initiated **Keel Infrastructure (KEEL)** stock with an **outperform** rating, highlighting the company's **AI pipeline**. This positive sentiment is further supported by recent **government contract wins**.\nImpact: The analyst initiation suggests a potential re-rating of the stock, driven by confidence in its future growth related to AI and public sector business, which could attract new institutional interest.",
+        "impact": ""
+      },
+      "analysis_details": "• **The Firm & Rating**\nCitizens has initiated coverage on **Keel Infrastructure (KEEL)**, assigning an **outperform** rating to the stock. This action provides a new institutional endorsement for the company.\n\n• **The Thesis**\nThe analyst's positive outlook is primarily based on Keel Infrastructure's promising **AI pipeline** and recent success in securing **government contract wins**. These factors are seen as potential drivers for the company's future valuation, addressing questions around whether KEEL is currently **undervalued**.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Is Keel Infrastructure (KEEL) Undervalued As Government Contract Wins Lift AI Hopes? - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPV1Fyd1VrRzZVUmVWa3RWVzFTYVFCeFRxbTl3NXdTTGZxZkplMlNMeFY2Y05ZQ0U0OHRveXhxeFlGQk1xSjJqVjV1ZFc0SmY4ajNKNVhMTG5pZ1FJYkRxN1BaTUkwX0JvZzRaVzhQZ3d3YVZPUlM0ZmRwX0M2NXVJeFFIaEdDU1A1a1NYX3lHVGdIWlNVeHFPbC1xNHBFNVliSmtYUTJlR3oyUWlLa200WVBuTktUWG1wSS1XRkgyOWtneXJqU2Q0ZUJiVUZkSThfOE5DdtIB2gFBVV95cUxNUUFwcThrR3lVZ1JrcUs2b28wTXhNa2VvRmwwcXpUZ0czd3I5RFcxN1M2dEYzQWxfQWc1S2FwZnR1TnJuMlNyQXZ5NEpuTFhSZnByN3Jubk1YLVVNeGZaMG1UTDVWMWMxdVFNTEdfaF9Hc3YtczFGTDc1MUktTEo5VHZCcXlvanNEa2EwQ1puNS1EQjRmVnR0dHVzZnZqYjdFOTFGLWVVMHFnTXp3eUpxazF2blFSR2xLeDVLbzltOEZyOXlFQV9ZNVdmc0NjVnBRRFVyZGpoc0NPQQ?oc=5"
+        },
+        {
+          "title": "Citizens initiates Keel Infrastructure stock at outperform on AI pipeline - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQRVNRZ1JGdGpRN3V5MkNkVXY4UW9XU1FPZmdndVltSmY0YnJGN2JITWRFSjJiSFc2bnVrSHItb3hTbm1sMF9HQnRWVFRnUDRtd0xWS1o5QkFRM3laU1QzNHNTWXVYdUFZX0VmeE9GLWJqc00weTh0MVZzeTJFalRhbFJYZnVqU09CQ0plakpQdk9yYkR6bHd2MEswa1o3LWN4bXFxTXhRRkdOQ1lzcERQTEp5RTc0c0d5TUczM18zZGowSzFKU283TFA3T19oZw?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "601.03M",
+      "short_float": "12.19%",
+      "daily_pct": -0.9,
+      "industry": "Infrastructure",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Citizens initiated Keel Infrastructure (KEEL) stock at outperform, citing strength in its AI pipeline and recent government contract wins.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": [],
@@ -155,8 +473,8 @@
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
     "small_gaps": 2,
-    "large_gaps": 0,
-    "total_headlines": 7,
+    "large_gaps": 4,
+    "total_headlines": 17,
     "monthly_cost_usd": 0.01
   }
 }
