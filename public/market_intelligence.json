@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-06-23 18:03 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-06-24 07:05 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
@@ -12,7 +12,7 @@
       "close": 733.58,
       "prev_open": 747.7,
       "prev_close": 744.39,
-      "volume": 65210826,
+      "volume": 66642100,
       "change_pct": -1.45
     },
     "QQQ": {
@@ -24,56 +24,56 @@
       "close": 713.65,
       "prev_open": 742.02,
       "prev_close": 737.95,
-      "volume": 52003693,
+      "volume": 52901800,
       "change_pct": -3.29
     },
     "^VIX": {
       "label": "VIX",
-      "price": 19.49,
-      "open": 19.67,
-      "high": 20.54,
-      "low": 18.61,
-      "close": 19.49,
-      "prev_open": 17.48,
-      "prev_close": 17.28,
+      "price": 19.15,
+      "open": 19.13,
+      "high": 19.41,
+      "low": 19.02,
+      "close": 19.15,
+      "prev_open": 19.67,
+      "prev_close": 19.49,
       "volume": 0,
-      "change_pct": 12.79
+      "change_pct": -1.74
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 73.05,
-      "open": 74.14,
-      "high": 74.45,
-      "low": 72.48,
-      "close": 73.05,
-      "prev_open": 78.93,
-      "prev_close": 74.82,
-      "volume": 170777,
-      "change_pct": -2.37
+      "price": 71.81,
+      "open": 73.13,
+      "high": 73.18,
+      "low": 71.55,
+      "close": 71.81,
+      "prev_open": 74.14,
+      "prev_close": 73.21,
+      "volume": 45746,
+      "change_pct": -1.91
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 72353.96,
-      "open": 71067.15,
-      "high": 72831.73,
-      "low": 71009.52,
-      "close": 72353.96,
-      "prev_open": 71551.03,
-      "prev_close": 71250.06,
-      "volume": 133200000,
-      "change_pct": 1.55
+      "price": 69174.97,
+      "open": 69615.08,
+      "high": 70218.71,
+      "low": 68461.1,
+      "close": 69174.97,
+      "prev_open": 72404.37,
+      "prev_close": 69788.38,
+      "volume": 0,
+      "change_pct": -0.88
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25139.69,
-      "open": 25035.93,
-      "high": 25176.21,
-      "low": 24896.19,
-      "close": 25139.69,
-      "prev_open": 25075.33,
-      "prev_close": 24985.82,
-      "volume": 64174400,
-      "change_pct": 0.62
+      "price": 24654.57,
+      "open": 24790.7,
+      "high": 24800.66,
+      "low": 24619.85,
+      "close": 24654.57,
+      "prev_open": 24835.56,
+      "prev_close": 24893.58,
+      "volume": 0,
+      "change_pct": -0.96
     }
   },
   "fred": {
@@ -83,7 +83,7 @@
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 58.3,
+    "s5fi": 58.5,
     "mmth": 65.5
   },
   "regime": {
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: June 23, 2026",
-    "mood_emoji": "⚠️",
-    "mood": "US Risk-Off, Volatility Spike",
-    "narrative": "US equities experienced a significant pullback today, led by tech, as volatility surged. This contrasts with more resilient performance seen in major global indices.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 733.58 | -1.45% | 📉 |\n| Nasdaq 100 ETF | 713.65 | -3.29% | 📉 |\n| VIX | 19.49 | +12.79% | 📈 |\n| Crude Oil | 73.05 | -2.37% | 📉 |\n| Nikkei 225 | 72353.96 | +1.55% | 📈 |\n| DAX | 25139.69 | +0.62% | 📈 |",
-    "macro_section": "High Yield Credit Spreads remain complacent at 2.65%, indicating a current lack of stress in credit markets despite today's equity downturn. The 10-Year Minus 2-Year Yield Curve is normalizing/steepening at +0.340, typically signaling a healthy economic outlook, yet institutional risk appetite for US equities appears to have contracted sharply today, creating a divergence.",
-    "analysis_para1": "While US indices plunged, global counterparts showed resilience, with the Nikkei 225 gaining +1.55% and the DAX rising +0.62%. This global strength somewhat cushions the overall market sentiment, potentially preventing a broader panic. However, Crude Oil's -2.37% decline to 73.05 suggests underlying concerns about global demand, hinting at potential global growth headwinds. Despite this mixed picture, US High Yield Credit Spreads remain at a 'Complacent' 2.65%, suggesting that the market views today's US equity sell-off as more contained rather than a systemic credit event, for now.",
-    "analysis_para2": "Today's primary flow was dominated by a broad-based de-risking and positioning unwind, particularly evident in the technology sector. The sharp -3.29% drop in the Nasdaq 100 ETF and the +12.79% spike in the VIX index to 19.49 points to a mechanical unwinding of leveraged positions or a surge in hedging activity. This suggests that rather than a single major news event, cumulative concerns or end-of-quarter rebalancing triggered a significant shift away from risk assets.",
-    "analysis_para3": "Traders should exercise caution and monitor the VIX closely for signs of stabilization or further escalation, with a break above 20 signaling increased risk. Key support for the S&P 500 ETF stands near today's close of 733.58; a decisive break below this level would trigger further risk-off selling. For long entries, look for a strong hourly close above today's intraday lows coupled with a softening VIX. Conversely, a retest and failure at today's lows, or continued VIX strength, provides a short entry trigger, emphasizing reduced exposure and tight stop-losses for the remainder of the trading day.",
-    "technical_signal": "No reversal pattern confirmed yet. While S&P 500 stocks above SMA50 stands at 58.3% and S&P stocks above SMA200 at 65.5%, indicating decent underlying breadth, today's sharp downturn needs confirmation of capitulation or stabilization. Traders should watch for a bullish engulfing candle or a significant bounce from support on higher volume to signal a potential reversal.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "ZETA",
-          "company": "Zeta Corporation",
-          "reason": "Zeta Corporation's strategic partnership with Palantir announced today is driving high conviction interest and significant pre-market upside."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a new cloud security acquisition today, boosting investor confidence in its expanding enterprise offerings and strategic positioning."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA continues to trade primarily on generalized enthusiasm for the artificial intelligence sector rather than specific fresh catalysts, marking it as a recycled thesis."
-        }
-      ]
-    }
+    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
   }
 }
