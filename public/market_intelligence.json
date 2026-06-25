@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25 16:45 ET",
+  "generated_at": "2026-06-25 18:10 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -18,7 +18,7 @@
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 716.38,
-      "open": 725.9,
+      "open": 725.91,
       "high": 726.83,
       "low": 705.3,
       "close": 716.38,
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 71.65,
-      "open": 69.95,
-      "high": 72.5,
-      "low": 68.9,
-      "close": 71.65,
+      "price": 71.44,
+      "open": 71.44,
+      "high": 71.49,
+      "low": 71.43,
+      "close": 71.44,
       "prev_open": 73.13,
       "prev_close": 70.34,
-      "volume": 204844,
-      "change_pct": 1.86
+      "volume": 12,
+      "change_pct": 1.56
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,20 +65,20 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24994.83,
-      "open": 24810.0,
-      "high": 25088.28,
-      "low": 24761.72,
-      "close": 24994.83,
-      "prev_open": 24790.7,
-      "prev_close": 24740.36,
-      "volume": 0,
-      "change_pct": 1.03
+      "price": 24740.36,
+      "open": 24790.7,
+      "high": 24800.66,
+      "low": 24593.48,
+      "close": 24740.36,
+      "prev_open": 24835.56,
+      "prev_close": 24893.58,
+      "volume": 61210500,
+      "change_pct": -0.62
     }
   },
   "fred": {
     "hy_oas": 2.76,
-    "yield_curve": 0.3,
+    "yield_curve": 0.31,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Post-Market Brief: June 25, 2026",
-    "mood_emoji": "⬆️",
-    "mood": "Sectoral Risk-On / Divergent Flows",
-    "narrative": "US markets saw a mixed close with strong tech performance offsetting broader consolidation, as global equities presented a divergent picture. Rising volatility suggests underlying caution despite the risk-on appetite in key sectors.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 734.30 | +0.14% | ➡️ |\n| Nasdaq 100 ETF | 716.38 | +0.81% | 📈 |\n| VIX | 18.89 | +1.40% | 📈 |\n| Crude Oil | 71.65 | +1.86% | 📈 |\n| Nikkei 225 | 69174.97 | -0.88% | 📉 |\n| DAX | 24994.83 | +1.03% | 📈 |",
-    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) remains at a complacent 2.76%, indicating robust investor confidence in riskier assets. Coupled with a normal and steepening 10Y-2Y Yield Curve (T10Y2Y) at +0.300, institutional risk appetite appears healthy, suggesting no immediate concerns about credit market liquidity or economic slowdown.",
-    "analysis_para1": "Global markets presented a mixed picture today, with Asia's Nikkei 225 declining by -0.88%, hinting at regional profit-taking or specific economic headwinds. Conversely, the DAX surged by +1.03% and Crude Oil prices rose by +1.86% to 71.65, demonstrating strength in European equities and commodity demand. Despite these divergent global movements, US High Yield Credit Spreads (BAMLH0A0HYM2) remain notably complacent at 2.76%. This suggests that US investors are largely insulated from or unconcerned by external volatility, maintaining a strong appetite for risk-on assets within the domestic market.",
-    "analysis_para2": "Today's primary market flow was predominantly driven by a wave of strong earnings reports and strategic corporate announcements, acting as the dominant mechanical catalyst. Semiconductor and AI-related infrastructure plays saw significant gains following positive news from key players like Micron Technology's (MU) 'Beat & Raise' and Qualcomm's (QCOM) Data Center Expansion and robust Revenue Projection. This concentrated flow into specific growth sectors underscored investor confidence in the technology and artificial intelligence narrative, creating targeted momentum that pulled the Nasdaq 100 ETF higher.",
-    "analysis_para3": "For the remainder of the trading day and into tomorrow, traders should focus on maintaining exposure to high-growth technology and AI infrastructure plays that demonstrated strong catalysts today. Watch for the Nasdaq 100 ETF to test and potentially consolidate above today's highs, with a break below 710.00 serving as an initial short-term risk-off threshold. The S&P 500 ETF, currently at 734.30, may find support around 730.00, but sustained strength requires broader market participation beyond tech. Today, consider initiating or adding to long positions in names with clear, positive fundamental news, while closely monitoring the VIX for any aggressive spikes above 20.00 as a broader market risk warning.",
-    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 is 61.3% and S&P stocks above SMA200 is 65.2%, indicating healthy underlying breadth despite the S&P 500 ETF's modest gain. However, the rising VIX, now at 18.89, suggests that while the rally is holding, an increase in market uncertainty warrants close observation for any potential shifts in momentum.",
+    "mood_emoji": "📈",
+    "mood": "Tech Outperformance, Underlying Volatility",
+    "narrative": "Nasdaq 100 led US indices higher, driven by growth sectors, while the broader S&P 500 remained largely flat. Global markets, however, saw declines, and volatility edged higher, indicating underlying caution.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 734.30 | +0.14% | ➡️ |\n| Nasdaq 100 ETF | 716.38 | +0.81% | 📈 |\n| VIX | 18.89 | +1.40% | 📈 |\n| Crude Oil | 71.44 | +1.56% | 📈 |\n| Nikkei 225 | 69174.97 | -0.88% | 📉 |\n| DAX | 24740.36 | -0.62% | 📉 |",
+    "macro_section": "High Yield Credit Spreads remain 'Complacent' at 2.76%, suggesting a healthy appetite for risk among institutional investors. Concurrently, the 10Y-2Y Yield Curve is at a 'Normal / Steepening' +0.310, reinforcing a stable economic outlook and generally supportive conditions for credit extension.",
+    "analysis_para1": "Despite the Nikkei 225 declining by 0.88% to 69174.97 and the DAX falling 0.62% to 24740.36, indicating weakness across major international markets, US High Yield Credit Spreads remain unperturbed. Trading at a 'Complacent' 2.76%, these spreads suggest that domestic credit markets are largely insulated from global softness. Crude Oil's 1.56% rise to 71.44 adds a layer of commodity inflation concern, but overall, US risk appetite appears to be confidently shrugging off international headwinds.",
+    "analysis_para2": "The dominant 'Why' behind today's primary flow was a strong wave of catalyst-driven buying in key technology and semiconductor names. This mechanical catalyst manifested as robust earnings beats and forward-looking strategic announcements from several high-conviction gappers in the AI data center space. The positive news flow fueled significant capital allocation into growth sectors, propelling the Nasdaq 100's outperformance as investors sought exposure to companies demonstrating clear expansion and revenue projection growth.",
+    "analysis_para3": "Traders should prioritize long positions in high-conviction technology and AI-centric equities, using intraday dips as tactical entry points. Monitor the S&P 500 ETF (SPY equivalent), with 730 serving as a critical near-term support level; a sustained break below this would signal a potential broader market correction. A surge in the Volatility Index (VIX) beyond 20.00 is a key risk-off threshold, mandating a reduction in overall long exposure and a shift towards defensive plays to protect capital.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 maintaining above its 50-day moving average, with 61.3% of its constituents above this level, suggests underlying strength despite limited daily gains. Watch for an accelerated break below the 730 S&P 500 ETF support to signal a potential shift in momentum.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "MU",
           "company": "Micron Technology",
-          "reason": "Strong 'Beat & Raise' earnings report today fuels bullish sentiment and upgrades within the semiconductor sector."
+          "reason": "Micron Technology's strong earnings beat and raise guidance signal robust demand in the memory sector, particularly benefiting from AI growth."
         },
         {
           "ticker": "QCOM",
-          "company": "Qualcomm",
-          "reason": "News of significant data center expansion and optimistic revenue projections drive robust investor confidence in its growth trajectory."
+          "company": "Qualcomm Inc.",
+          "reason": "Qualcomm's announcement of data center expansion and optimistic revenue projections highlights its growing influence in enterprise AI infrastructure."
         }
       ],
       "c_grade": [
         {
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
-          "reason": "Continued momentum from its dominant position in AI and data center hardware, without a fresh catalyst today, suggests sustained technical buying."
+          "reason": "NVIDIA continues to see flow-driven momentum as the dominant AI infrastructure play, though without fresh catalysts today, it remains a C-grade technical trade."
         }
       ]
     }
