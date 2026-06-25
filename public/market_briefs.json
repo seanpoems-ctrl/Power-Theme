@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-25 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Strength, US Tech Lags",
+    "spy_price": 733.24,
+    "spy_change_pct": -0.05,
+    "vix": 17.92,
+    "hy_oas": 2.71,
+    "yield_curve": 0.3,
+    "credit_status": "Complacent",
+    "s5fi": 60.5,
+    "mmth": 65.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft announced a massive new enterprise cloud computing contract, projecting significant revenue upside for the fiscal year."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "NVIDIA unveiled a breakthrough in quantum computing accelerators, solidifying its leadership in next-gen processing."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "FCEL",
+          "company": "FuelCell Energy Inc.",
+          "reason": "Experiencing a technical bounce after several days of heavy selling, likely due to short-covering or speculative retail interest without fresh fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-24 18:00 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -1977,44 +2015,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Continued to exhibit volatility on technical flow and short-term positioning, lacking a fresh fundamental catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-28 08:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Caution / Global Weakness",
-    "spy_price": 750.46,
-    "spy_change_pct": -0.02,
-    "vix": 16.77,
-    "hy_oas": 2.72,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 58.8,
-    "mmth": 64.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon (AMZN) secures exclusive streaming rights for a major global sporting event through AWS integration, boosting Prime subscriptions."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) unveils a new generation of AI accelerators with significant performance leaps, solidifying its market dominance in data centers."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Tesla (TSLA) continues to be influenced by recycled headlines regarding EV competitive dynamics and production targets, offering tactical trading based purely on flow."
         }
       ]
     }
