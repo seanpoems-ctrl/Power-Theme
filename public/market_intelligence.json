@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-25 07:05 ET",
+  "generated_at": "2026-06-25 09:23 ET",
   "phase": "PRE",
   "session": "Pre-Market",
   "assets": {
@@ -29,27 +29,27 @@
     },
     "^VIX": {
       "label": "VIX",
-      "price": 17.92,
+      "price": 17.89,
       "open": 18.11,
-      "high": 18.16,
-      "low": 17.87,
-      "close": 17.92,
+      "high": 18.17,
+      "low": 17.72,
+      "close": 17.89,
       "prev_open": 19.13,
       "prev_close": 18.63,
       "volume": 0,
-      "change_pct": -3.81
+      "change_pct": -3.97
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 69.59,
+      "price": 69.97,
       "open": 69.95,
       "high": 70.21,
       "low": 68.9,
-      "close": 69.59,
+      "close": 69.97,
       "prev_open": 73.13,
       "prev_close": 70.34,
-      "volume": 47175,
-      "change_pct": -1.07
+      "volume": 72706,
+      "change_pct": -0.53
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24927.73,
+      "price": 24987.0,
       "open": 24810.0,
-      "high": 24927.73,
+      "high": 24996.1,
       "low": 24761.72,
-      "close": 24927.73,
+      "close": 24987.0,
       "prev_open": 24790.7,
       "prev_close": 24740.36,
       "volume": 0,
-      "change_pct": 0.76
+      "change_pct": 1.0
     }
   },
   "fred": {
@@ -83,8 +83,8 @@
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 60.5,
-    "mmth": 65.8
+    "s5fi": 60.4,
+    "mmth": 65.6
   },
   "regime": {
     "credit_status": "Complacent",
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Pre-Market Brief: June 25, 2026",
-    "mood_emoji": "⚖️",
-    "mood": "Global Strength, US Tech Lags",
-    "narrative": "Global markets are showing significant strength, particularly in Asia and Europe, while US equity ETFs register minor declines. This divergence suggests a cautious rotation of capital, with international optimism contrasting with slight domestic profit-taking in growth sectors.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 733.24 | -0.05% | ➡️ |\n| Nasdaq 100 ETF | 710.62 | -0.42% | ➡️ |\n| VIX | 17.92 | -3.81% | 📉 |\n| Crude Oil | 69.59 | -1.07% | 📉 |\n| Nikkei 225 | 72366.34 | +4.61% | 📈 |\n| DAX | 24927.73 | +0.76% | 📈 |",
-    "macro_section": "The High Yield Credit Spread, BAMLH0A0HYM2, stands at 2.71%, indicating a Complacent credit environment. Concurrently, the 10-Year Minus 2-Year Yield Curve measures +0.300, signalling a Normal / Steepening regime. This combination suggests institutional investors retain a healthy risk appetite, willing to deploy capital in credit markets.",
-    "analysis_para1": "The robust performance across global equity markets, with the Nikkei 225 surging +4.61% and the DAX gaining +0.76%, suggests a broad-based improvement in international sentiment. Despite a decline in Crude Oil of -1.07%, this global buoyancy contrasts with the slight negative movement in US equity ETFs. This divergence, coupled with the Complacent High Yield Credit Spread at 2.71%, implies that while international risk appetite is strong, US investors may be exercising slightly more caution, particularly in growth sectors.",
-    "analysis_para2": "Today's primary flow appears driven by a significant global re-rating event, particularly evident in Asian markets. The Nikkei's impressive +4.61% surge suggests a powerful mechanical catalyst, likely related to shifting monetary policy expectations or stronger-than-anticipated economic data from key developed economies. This international optimism is prompting a rotation of capital, with global indices benefiting from renewed confidence, while US equity ETFs experience minor pressure as investors perhaps rebalance portfolios or take profits from recent domestic outperformers.",
-    "analysis_para3": "Traders should prioritize watching for convergence between global strength and US equity performance today. Key support for the S&P 500 ETF can be eyed around the 730 level, while Nasdaq 100 ETF might find support near 708. A sustained break below these thresholds, particularly if accompanied by an uptick in the VIX, would signal increased risk-off sentiment. Conversely, a reversal in US ETFs to positive territory, aligning with global gains, could trigger long entries, especially if market breadth indicators like S&P 500 stocks above SMA50 begin to accelerate. Today's focus should be on opportunistic long entries on domestic dips, provided global momentum remains intact.",
-    "technical_signal": "No reversal pattern confirmed yet. While US equity ETFs show slight negative momentum, the overall market breadth remains healthy, with 60.5% of S&P 500 stocks above SMA50 and 65.8% above SMA200. This suggests underlying resilience, and traders should monitor for a potential bullish hammer or engulfing pattern on lower timeframes as US markets open, signaling a continuation of the broader uptrend.",
+    "mood_emoji": "🤔",
+    "mood": "Mixed US, Global Optimism",
+    "narrative": "US futures are flat to slightly down in pre-market trading, yet global markets have shown significant strength overnight. Sector-specific catalysts, particularly in AI and data centers, are driving a nuanced start to the trading day.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 733.24 | -0.05% | ➡️ |\n| Nasdaq 100 ETF | 710.62 | -0.42% | ➡️ |\n| VIX | 17.89 | -3.97% | 📉 |\n| Crude Oil | 69.97 | -0.53% | 📉 |\n| Nikkei 225 | 72366.34 | +4.61% | 📈 |\n| DAX | 24987.00 | +1.00% | 📈 |",
+    "macro_section": "High Yield credit spreads (BAMLH0A0HYM2) remain complacent at 2.71%, indicating a lack of immediate credit stress in the market. Concurrently, the 10-Year minus 2-Year Yield Curve (T10Y2Y) stands at a normal and steepening +0.300%, collectively signaling institutional risk appetite remains robust, unhindered by systemic concerns.",
+    "analysis_para1": "The substantial +4.61% rally in the Nikkei 225 and a solid +1.00% gain in the DAX signal a strong risk-on appetite across major global markets. Despite a slight dip in Crude Oil prices by -0.53%, this overseas optimism suggests a continued hunt for yield and growth, which typically translates into a positive backdrop for US equities. The sustained \"Complacent\" 2.71% High Yield Credit Spread, even with US indices flat pre-market, further supports the view that global capital flows perceive minimal systemic risk, likely spilling over into US markets throughout the day.",
+    "analysis_para2": "The primary driver behind today's pre-market flow appears to be an acceleration of AI-driven earnings and growth narratives, particularly those tied to data center infrastructure. Strong beats and raised guidance from key semiconductor and connectivity players like MU and QCOM, coupled with strategic deals such as GLW's Amazon Data Center agreement, are fueling conviction in continued technological expenditure. This mechanical catalyst is propelling sector-specific strength, suggesting capital rotation towards companies poised to benefit directly from the ongoing AI infrastructure build-out, overshadowing broader market inertia.",
+    "analysis_para3": "Today, traders should focus on discerning sector strength from broad market neutrality. Watch the S&P 500 ETF (SPY equivalent) for a clear break above 734 as a potential trigger for long entries, targeting tech leadership names. A sustained move below 730 on the S&P 500 ETF would signal a return to caution, activating a risk-off threshold, particularly if accompanied by increased volume on downside pressure. The actionable plan involves rotating into high-conviction AI-related names exhibiting strong pre-market momentum while maintaining tight stop-losses on broader index plays, awaiting confirmation of overall US market direction.",
+    "technical_signal": "No reversal pattern confirmed yet. US indices are consolidating pre-market after recent gains, with S&P 500 stocks above SMA50 at 60.4% and S&P stocks above SMA200 at 65.6% indicating underlying health. Traders should monitor daily closes for a clear breakout or breakdown from current ranges, watching particularly for sustained volume trends that confirm directional bias rather than noise.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft announced a massive new enterprise cloud computing contract, projecting significant revenue upside for the fiscal year."
+          "ticker": "MU",
+          "company": "Micron Technology, Inc.",
+          "reason": "Strong earnings beat and raised guidance for the current quarter signals robust demand in memory and storage, driven by AI server growth."
         },
         {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "NVIDIA unveiled a breakthrough in quantum computing accelerators, solidifying its leadership in next-gen processing."
+          "ticker": "QCOM",
+          "company": "Qualcomm Incorporated",
+          "reason": "Significant data center expansion plans and optimistic revenue projections highlight diversified growth beyond mobile into high-performance computing."
         }
       ],
       "c_grade": [
         {
-          "ticker": "FCEL",
-          "company": "FuelCell Energy Inc.",
-          "reason": "Experiencing a technical bounce after several days of heavy selling, likely due to short-covering or speculative retail interest without fresh fundamental news."
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Ongoing momentum in AI semiconductor demand continues to drive flow-based trading, absent fresh fundamental news today."
         }
       ]
     }
