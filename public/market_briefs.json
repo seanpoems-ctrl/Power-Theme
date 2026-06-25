@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-25 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Sectoral Risk-On / Divergent Flows",
+    "spy_price": 734.3,
+    "spy_change_pct": 0.14,
+    "vix": 18.89,
+    "hy_oas": 2.76,
+    "yield_curve": 0.3,
+    "credit_status": "Complacent",
+    "s5fi": 61.3,
+    "mmth": 65.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MU",
+          "company": "Micron Technology",
+          "reason": "Strong 'Beat & Raise' earnings report today fuels bullish sentiment and upgrades within the semiconductor sector."
+        },
+        {
+          "ticker": "QCOM",
+          "company": "Qualcomm",
+          "reason": "News of significant data center expansion and optimistic revenue projections drive robust investor confidence in its growth trajectory."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continued momentum from its dominant position in AI and data center hardware, without a fresh catalyst today, suggests sustained technical buying."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-25 09:23 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -1977,44 +2015,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Movement driven by recycled sector momentum and general market flow rather than a specific fresh fundamental catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-05-29 08:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Growth Push",
-    "spy_price": 754.6,
-    "spy_change_pct": 0.55,
-    "vix": 15.8,
-    "hy_oas": 2.71,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 59.1,
-    "mmth": 64.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp",
-          "reason": "Announced significant advancements in enterprise AI integration suite, promising increased productivity and cost savings for corporate clients."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "Received analyst upgrade to 'Outperform' based on strong Q2 guidance and robust consumer spending data, signaling continued strength in financial sector."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Pure flow/momentum play as AI enthusiasm continues to drive investor interest, despite no fresh specific catalyst today."
         }
       ]
     }
