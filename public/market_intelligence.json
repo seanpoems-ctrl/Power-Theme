@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-26 07:05 ET",
+  "generated_at": "2026-06-26 09:18 ET",
   "phase": "PRE",
   "session": "Pre-Market",
   "assets": {
@@ -29,27 +29,27 @@
     },
     "^VIX": {
       "label": "VIX",
-      "price": 20.2,
+      "price": 20.18,
       "open": 19.7,
       "high": 20.38,
       "low": 19.52,
-      "close": 20.2,
+      "close": 20.18,
       "prev_open": 18.11,
       "prev_close": 18.89,
       "volume": 0,
-      "change_pct": 6.93
+      "change_pct": 6.83
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 69.43,
+      "price": 69.65,
       "open": 71.44,
       "high": 71.86,
       "low": 68.96,
-      "close": 69.43,
+      "close": 69.65,
       "prev_open": 69.95,
       "prev_close": 71.92,
-      "volume": 48819,
-      "change_pct": -3.46
+      "volume": 72850,
+      "change_pct": -3.16
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24684.58,
+      "price": 24621.61,
       "open": 24848.51,
       "high": 24869.63,
-      "low": 24668.25,
-      "close": 24684.58,
+      "low": 24611.26,
+      "close": 24621.61,
       "prev_open": 24810.0,
       "prev_close": 24994.83,
       "volume": 0,
-      "change_pct": -1.24
+      "change_pct": -1.49
     }
   },
   "fred": {
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Pre-Market Brief: June 26, 2026",
-    "mood_emoji": "😬",
-    "mood": "Cautious Divergence",
-    "narrative": "US indices, particularly the Nasdaq, show resilience amidst broad global market weakness and a surging VIX. This divergence suggests underlying caution despite complacent domestic credit conditions.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 734.30 | +0.14% | ➡️ |\n| Nasdaq 100 ETF | 716.38 | +0.81% | 📈 |\n| VIX | 20.20 | +6.93% | 📈 |\n| Crude Oil | 69.43 | -3.46% | 📉 |\n| Nikkei 225 | 69360.88 | -4.15% | 📉 |\n| DAX | 24684.58 | -1.24% | 📉 |",
-    "macro_section": "The High Yield Credit Spread, BAMLH0A0HYM2, remains complacent at 2.76%, while the 10Y-2Y Yield Curve, T10Y2Y, is in a normal/steepening regime at +0.310. While these macro indicators typically signal a healthy institutional risk appetite, the broader market movements suggest institutions are navigating conflicting signals and exercising underlying caution.",
-    "analysis_para1": "Significant declines across global markets, with the Nikkei 225 down -4.15%, the DAX falling -1.24%, and Crude Oil dropping -3.46%, indicate a pronounced risk-off sentiment internationally. This stands in stark contrast to the complacent US High Yield Credit Spread, BAMLH0A0HYM2, which holds at a low 2.76%. The divergence implies that while US credit markets are not yet signaling distress, the global tape points to a potential for contagion or at least a cautious stance being adopted by US investors, prioritizing domestic stability over international risk.",
-    "analysis_para2": "Today's primary flow appears driven by a **global risk-off positioning squeeze**, likely initiated by an unexpected overnight geopolitical development or disappointing international macro data. The sharp declines in the Nikkei 225 and Crude Oil underscore this de-risking, compelling investors to unwind risk exposure globally. Domestically, this translates into a defensive rotation towards perceived safe-haven large-cap tech, explaining the Nasdaq's resilience and the simultaneous surge in the VIX by +6.93% as institutional players hedge their portfolios against increased uncertainty.",
-    "analysis_para3": "Traders should prioritize managing risk amid the divergence between US equity resilience and global weakness. Watch the S&P 500 ETF (SPY) for a break below 732.00 as a key risk-off threshold, signaling a broader market downturn. For long entries, look for sustained upside momentum in the Nasdaq 100 ETF (QQQ) above 718.00, confirming the tech-led defensive rotation. Conversely, any failure of QQQ to hold 715.00 could signal that even US tech is succumbing to global pressures, warranting a highly cautious stance today.",
-    "technical_signal": "No reversal pattern confirmed yet. While S&P 500 stocks above SMA50 and SMA200 remain at decent levels (61.3% and 65.2% respectively), the surging VIX and global weakness suggest underlying instability. Traders should watch for a clear break of established support or resistance levels on higher volume to confirm any directional shift.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a significant new AI partnership with a major cloud provider in Europe, potentially boosting its Azure segment in a crucial market."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is expected to unveil new advancements in its data center GPU roadmap at a surprise analyst event this morning, likely driving further investor interest in AI infrastructure."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "QCOM",
-          "company": "Qualcomm Incorporated",
-          "reason": "Qualcomm continues to benefit from ongoing semiconductor supply chain reconfigurations and 5G deployment cycles, a recycled theme driving incremental interest."
-        }
-      ]
-    }
+    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
   }
 }
