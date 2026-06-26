@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-26 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off Sentiment, Growth Concerns",
+    "spy_price": 728.99,
+    "spy_change_pct": -0.72,
+    "vix": 18.41,
+    "hy_oas": 2.78,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 61.9,
+    "mmth": 66.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple Inc. announced a groundbreaking AI integration into its next-gen smartphone lineup, sparking renewed analyst upgrades and strong pre-orders today."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon.com, Inc. secured a massive cloud services contract with a major government agency, reinforcing its lead in enterprise AI solutions and boosting AWS revenue forecasts."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft Corporation experienced continued profit-taking from recent highs today, reflecting broader market risk aversion despite no specific new catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-26 09:18 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -1957,44 +1995,6 @@
           "ticker": "XOM",
           "company": "Exxon Mobil Corporation",
           "reason": "Continued pressure from the significant -3.24% fall in crude oil prices is likely to impact energy sector performance, making it a defensive or short-term bearish play."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-04 10:09 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off Sentiment / Global Divergence",
-    "spy_price": 752.63,
-    "spy_change_pct": -0.21,
-    "vix": 16.02,
-    "hy_oas": 2.71,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 59.8,
-    "mmth": 64.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Anticipation building around Microsoft's rumored advancements in generative AI and a significant enterprise cloud computing contract win."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "Positive analyst upgrade citing accelerating demand for data center GPUs and robust AI inference chip sales outlook."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corp.",
-          "reason": "Under pressure following the steep 3.92% decline in crude oil prices, technically testing key support levels as demand concerns weigh."
         }
       ]
     }

@@ -1,90 +1,90 @@
 {
-  "generated_at": "2026-06-26 09:18 ET",
-  "phase": "PRE",
-  "session": "Pre-Market",
+  "generated_at": "2026-06-26 16:45 ET",
+  "phase": "POST",
+  "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 734.3,
-      "open": 738.91,
-      "high": 739.37,
-      "low": 729.6,
-      "close": 734.3,
-      "prev_open": 735.17,
-      "prev_close": 733.24,
-      "volume": 53934400,
-      "change_pct": 0.14
+      "price": 728.99,
+      "open": 728.95,
+      "high": 736.53,
+      "low": 726.86,
+      "close": 728.99,
+      "prev_open": 738.91,
+      "prev_close": 734.3,
+      "volume": 50465740,
+      "change_pct": -0.72
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 716.38,
-      "open": 725.9,
-      "high": 726.83,
-      "low": 705.3,
-      "close": 716.38,
-      "prev_open": 715.37,
-      "prev_close": 710.62,
-      "volume": 49668000,
-      "change_pct": 0.81
+      "price": 706.52,
+      "open": 707.13,
+      "high": 715.55,
+      "low": 702.81,
+      "close": 706.52,
+      "prev_open": 725.9,
+      "prev_close": 716.38,
+      "volume": 44705529,
+      "change_pct": -1.38
     },
     "^VIX": {
       "label": "VIX",
-      "price": 20.18,
+      "price": 18.41,
       "open": 19.7,
-      "high": 20.38,
-      "low": 19.52,
-      "close": 20.18,
+      "high": 20.72,
+      "low": 18.2,
+      "close": 18.41,
       "prev_open": 18.11,
       "prev_close": 18.89,
       "volume": 0,
-      "change_pct": 6.83
+      "change_pct": -2.54
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 69.65,
+      "price": 70.04,
       "open": 71.44,
       "high": 71.86,
-      "low": 68.96,
-      "close": 69.65,
+      "low": 68.56,
+      "close": 70.04,
       "prev_open": 69.95,
       "prev_close": 71.92,
-      "volume": 72850,
-      "change_pct": -3.16
+      "volume": 217740,
+      "change_pct": -2.61
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 69360.88,
-      "open": 71587.71,
-      "high": 71786.28,
-      "low": 68639.84,
-      "close": 69360.88,
-      "prev_open": 70114.09,
-      "prev_close": 72366.34,
-      "volume": 0,
-      "change_pct": -4.15
+      "price": 72366.34,
+      "open": 70114.09,
+      "high": 72594.22,
+      "low": 69982.67,
+      "close": 72366.34,
+      "prev_open": 69615.08,
+      "prev_close": 69174.97,
+      "volume": 151000000,
+      "change_pct": 4.61
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24621.61,
+      "price": 24671.22,
       "open": 24848.51,
       "high": 24869.63,
-      "low": 24611.26,
-      "close": 24621.61,
+      "low": 24547.7,
+      "close": 24671.22,
       "prev_open": 24810.0,
       "prev_close": 24994.83,
       "volume": 0,
-      "change_pct": -1.49
+      "change_pct": -1.29
     }
   },
   "fred": {
-    "hy_oas": 2.76,
+    "hy_oas": 2.78,
     "yield_curve": 0.31,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 61.3,
-    "mmth": 65.2
+    "s5fi": 61.9,
+    "mmth": 66.0
   },
   "regime": {
     "credit_status": "Complacent",
@@ -98,6 +98,36 @@
     }
   },
   "analysis": {
-    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "title": "Post-Market Brief: June 26, 2026",
+    "mood_emoji": "📉",
+    "mood": "Risk-Off Sentiment, Growth Concerns",
+    "narrative": "US and European equities experienced broad declines today, accompanied by a significant drop in Crude Oil, signaling underlying growth concerns. This risk-off sentiment diverged sharply from a strong rally in the Nikkei 225, highlighting a fragmented global market landscape.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 728.99 | -0.72% | 📉 |\n| Nasdaq 100 ETF | 706.52 | -1.38% | 📉 |\n| VIX | 18.41 | -2.54% | 📉 |\n| Crude Oil | 70.04 | -2.61% | 📉 |\n| Nikkei 225 | 72366.34 | +4.61% | 📈 |\n| DAX | 24671.22 | -1.29% | 📉 |",
+    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) remains at a complacent 2.78%, suggesting that institutional credit risk appetite is currently unfazed. Concurrently, the 10Y-2Y Yield Curve stands at +0.310, indicating a normal and steepening regime. This combination implies that despite today's equity declines, the bond market is not yet signaling distress or a shift in the prevailing institutional comfort with risk.",
+    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 surging +4.61% while the DAX fell -1.29%, contrasting sharply with the US equity decline. Crude Oil's significant drop of -2.61% to $70.04 per barrel broadly signals escalating global demand concerns, which typically precede widening credit spreads. However, despite these international and commodity market signals, US High Yield credit spreads held firm at a complacent 2.78%, implying that US institutional risk appetite may be lagging or dismissing the broader global economic headwinds.",
+    "analysis_para2": "The dominant 'why' behind today's primary flow appears to be a combination of end-of-quarter positioning adjustments and increasing fears of softening global demand, rather than a single fresh catalyst. The broad-based declines across US and European equities, coupled with the sharp drop in Crude Oil, point to de-risking. Crucially, the VIX also fell -2.54%, suggesting that the selling was orderly and driven by tactical profit-taking and rebalancing rather than panic or a sudden, severe shock.",
+    "analysis_para3": "Traders should prioritize defense and capital preservation given the prevailing risk-off sentiment. Monitor the S&P 500 ETF for stabilization around the 725.00 support level; a bounce off this price with conviction could signal a short-term bottom. Conversely, a decisive break below 725.00 would trigger further downside, with the next risk-off threshold at 720.00. Today, traders should consider hedging existing long positions or initiating tactical shorts on any failed rallies, protecting against further declines.",
+    "technical_signal": "No reversal pattern confirmed yet. Breadth metrics remain constructive, with 61.9% of S&P 500 stocks above their 50-day moving average and 66.0% above their 200-day moving average, suggesting this decline may be a healthy pullback. Traders should watch for a bullish engulfing pattern or a higher low to confirm any near-term reversal.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple Inc. announced a groundbreaking AI integration into its next-gen smartphone lineup, sparking renewed analyst upgrades and strong pre-orders today."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon.com, Inc. secured a massive cloud services contract with a major government agency, reinforcing its lead in enterprise AI solutions and boosting AWS revenue forecasts."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft Corporation experienced continued profit-taking from recent highs today, reflecting broader market risk aversion despite no specific new catalyst."
+        }
+      ]
+    }
   }
 }
