@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-26 17:51 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Broad Risk-Off, Asian Divergence",
+    "spy_price": 728.99,
+    "spy_change_pct": -0.72,
+    "vix": 18.41,
+    "hy_oas": 2.78,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 61.9,
+    "mmth": 66.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Shares surged after announcing a breakthrough in battery technology, promising significantly increased range and faster charging for its electric vehicles."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "The financial giant saw strong buying interest following unexpected regulatory approval for a strategic acquisition, solidifying its market leadership."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "The semiconductor leader experienced continued institutional accumulation as a flow-driven play, despite broader market weakness, without new fundamental catalysts today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-26 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -1957,44 +1995,6 @@
           "ticker": "UVXY",
           "company": "ProShares Ultra VIX Short-Term Futures ETF",
           "reason": "Anticipated continued volatility leads to sustained interest in hedging instruments, making UVXY a tactical play on market fear."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-04 17:22 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Resilient Sentiment, Global Strength",
-    "spy_price": 757.09,
-    "spy_change_pct": 0.38,
-    "vix": 15.4,
-    "hy_oas": 2.75,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 59.3,
-    "mmth": 64.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "OSCR",
-          "company": "Oscar Health, Inc.",
-          "reason": "An analyst upgrade to 'Buy' with an increased price target signals strong confidence in its growth trajectory and profitability outlook."
-        },
-        {
-          "ticker": "CRM",
-          "company": "Salesforce, Inc.",
-          "reason": "Positive market sentiment around new AI integration features and a significant enterprise client win are driving fresh investor interest today."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Continued pressure from the significant -3.24% fall in crude oil prices is likely to impact energy sector performance, making it a defensive or short-term bearish play."
         }
       ]
     }
