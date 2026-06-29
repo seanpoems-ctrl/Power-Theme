@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-29 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Equity Retreat, Cautious Tone",
+    "spy_price": 728.99,
+    "spy_change_pct": -0.72,
+    "vix": 18.4,
+    "hy_oas": 2.78,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 61.9,
+    "mmth": 66.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Announces groundbreaking new AI chip architecture with 2x performance increase, solidifying market leadership."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Reports better-than-expected cloud growth figures for Q2, raising full-year guidance and calming investor concerns."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "RIVN",
+          "company": "Rivian Automotive, Inc.",
+          "reason": "Continues to trade on general EV sector sentiment and macroeconomic headwinds, with no new company-specific catalysts."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-26 17:51 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -1957,44 +1995,6 @@
           "ticker": "UVXY",
           "company": "ProShares Ultra VIX Short-Term Futures ETF",
           "reason": "Surged purely on today's massive spike in the VIX and broad market volatility, driven by mechanical hedging and speculative flows."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-05 09:55 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Heightened Volatility",
-    "spy_price": 749.91,
-    "spy_change_pct": -0.95,
-    "vix": 16.13,
-    "hy_oas": 2.75,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 58.1,
-    "mmth": 63.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Google announces a breakthrough in AI-driven quantum computing, potentially revolutionizing data processing and cloud infrastructure."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Tesla receives regulatory approval for full autonomous driving in a major European market, significantly expanding its addressable market."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "UVXY",
-          "company": "ProShares Ultra VIX Short-Term Futures ETF",
-          "reason": "Anticipated continued volatility leads to sustained interest in hedging instruments, making UVXY a tactical play on market fear."
         }
       ]
     }
