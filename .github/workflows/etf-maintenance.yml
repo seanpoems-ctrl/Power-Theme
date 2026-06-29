@@ -1,0 +1,56 @@
+# ETF Master Maintenance — weekly auto-prune of stale ETFs + discovery of new ones.
+# Auto-prunes tickers that have failed to price for 3 consecutive runs (review-safe:
+# anchors are never pruned). Discovers new liquid thematic ETFs, classifies them with
+# Gemini, and writes etf_candidates.json for manual review (never auto-added to master).
+name: ETF Maintenance
+
+on:
+  workflow_dispatch: {}
+  schedule:
+    - cron: "0 13 * * 6"   # Saturday 13:00 UTC (9:00 PM Malaysia) — candidates ready for the week
+
+concurrency:
+  group: pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  etf-maintenance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python deps
+        run: pip install yfinance pandas google-genai tradingview_screener python-dotenv
+
+      - name: Run ETF maintenance (auto-prune + discover)
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python etf_maintenance.py --apply
+
+      - name: Refresh ETF RS rankings
+        continue-on-error: true
+        run: timeout 180 python etf_rs_builder.py || echo "etf_rs_builder.py failed (non-fatal)"
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase --autostash
+          git add etf_master.json etf_health.json etf_candidates.json \
+                  public/etf_metadata.json public/etf_map.json public/etf_rs.json src/etf_map.json
+          git diff --staged --quiet || git commit -m "chore: ETF maintenance $(date -u +%Y-%m-%d) (prune stale + refresh candidates)"
+          pushed=false
+          for i in 1 2 3 4 5; do
+            if git push; then pushed=true; break; fi
+            echo "Push attempt $i failed — pulling and retrying in 15s..."
+            sleep 15
+            git pull --rebase --autostash
+          done
+          [ "$pushed" = "true" ] || { echo "ERROR: push failed after 5 attempts"; exit 1; }

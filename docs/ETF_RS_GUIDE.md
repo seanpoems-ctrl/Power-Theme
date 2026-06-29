@@ -120,15 +120,14 @@ Other columns: Day/Wk/Mth/Qtr/HY/Yr **%** (rolling performance), matching **RS r
 
 ## Maintaining the ETF list (single source of truth)
 
-**Everything flows from one file: [`build_etf_metadata.py`](../build_etf_metadata.py).**
+**The master list lives in one JSON file: [`etf_master.json`](../etf_master.json).**
 
-To **add / remove / re-categorise** an ETF, edit the `ETF_META` dict only:
-
-```python
-"TICKER": ("Category", "Unique Label", "pure_sector"|"beta_booster", liquid_bool),
+Entry shape:
+```json
+"TICKER": {"category": "...", "label": "Unique Label", "type": "pure_sector"|"beta_booster", "liquid": true|false}
 ```
 
-Then run:
+To **add / remove / re-categorise** by hand, edit `etf_master.json`, then run:
 
 ```bash
 python build_etf_metadata.py     # regenerates all 3 map/metadata files (validates uniqueness)
@@ -144,9 +143,51 @@ It **fails fast** if two ETFs share a label or a category has no pure-sector anc
 
 ### Notes / gotchas
 - **Labels must be unique** — they are the display name *and* the map key.
-- **Brand-new ETFs** (launched < ~1 month ago, e.g. FOTO/HUMN/SLIM) may not rank until
-  they accrue ~10+ trading days of history. They'll appear automatically once they do.
+- **Brand-new ETFs** (launched < ~1 month ago) may not rank until they accrue ~10+ trading
+  days of history. They'll appear automatically once they do.
 - New **categories** must also get an anchor in `etf_rs_builder.py` → `CATEGORY_ANCHORS`.
 - `etf_universe.json` is a **separate, intentional** small list for the trendline scanner
-  (`etf_trendline_service.py`) — *not* generated here. Leave it alone unless you're
-  specifically changing the trendline feature.
+  (`etf_trendline_service.py`) — *not* generated here.
+
+---
+
+## Automated maintenance (`etf_maintenance.py`)
+
+Runs **weekly** via the `ETF Maintenance` GitHub Action (Sat 13:00 UTC). It keeps the
+master list fresh so you rarely touch it by hand. Two jobs:
+
+### 1. Auto-prune stale ETFs
+- Each run checks every ticker for a recent price bar (within **10 days**).
+- A miss increments a fail streak tracked in [`etf_health.json`](../etf_health.json);
+  a hit resets it.
+- After **3 consecutive** stale runs the ticker is **removed automatically** from
+  `etf_master.json` (downstream files regenerate in the same run).
+- **Category anchors are never auto-pruned** — they only log a loud warning, so RS
+  anchoring can't silently break.
+- *Why 3 runs:* guards against a one-off yfinance outage deleting a good ETF. An ETF that
+  truly can't be priced for 3 weeks is useless in the RS engine anyway and can be
+  re-added later from the candidates file.
+
+### 2. Review-add new ETFs (never auto-added)
+- Discovers liquid US ETFs (avg $vol > $25M) **not** already in the master via the
+  TradingView screener, pre-filtered to thematic/niche names (broad-market, bond,
+  leveraged, and option-income funds excluded).
+- **Gemini** classifies each into one of the 12 categories (+ label, type, liquid),
+  rejecting anything non-thematic.
+- Writes them to [`etf_candidates.json`](../etf_candidates.json) for you to review.
+  **Nothing is added to the master automatically** — you decide what's worth keeping.
+
+### Your part: reviewing candidates
+1. Open `etf_candidates.json` (refreshed weekly).
+2. For any ETF you want, copy its `ticker` + `category`/`label`/`type`/`liquid` into
+   `etf_master.json`.
+3. Run `python build_etf_metadata.py && python etf_rs_builder.py` (or just let the next
+   scheduled run pick it up).
+
+### Running it manually
+```bash
+python etf_maintenance.py                 # dry run — report only, writes nothing
+python etf_maintenance.py --apply         # prune stale + refresh candidates
+python etf_maintenance.py --apply --no-discover   # prune only
+python etf_maintenance.py --no-prune              # discover candidates only (dry)
+```
