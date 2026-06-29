@@ -1,5 +1,23 @@
 [
   {
+    "generated_at": "2026-06-29 10:51 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "",
+    "spy_price": 737.29,
+    "spy_change_pct": 1.14,
+    "vix": 18.43,
+    "hy_oas": 2.83,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 62.6,
+    "mmth": 65.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {}
+  },
+  {
     "generated_at": "2026-06-29 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -1957,44 +1975,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Continues to see volatile trading amidst ongoing analyst debates over EV demand and production targets, primarily driven by flow."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-05 17:15 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Sharp Risk-Off, Volatility Surges",
-    "spy_price": 737.55,
-    "spy_change_pct": -2.58,
-    "vix": 21.51,
-    "hy_oas": 2.74,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 54.2,
-    "mmth": 63.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a groundbreaking new enterprise AI suite, boosting investor confidence in its continued growth trajectory despite the broader market downturn."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA secured a massive multi-year contract for its next-generation data center GPUs, solidifying its market leadership in accelerated computing."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "UVXY",
-          "company": "ProShares Ultra VIX Short-Term Futures ETF",
-          "reason": "Surged purely on today's massive spike in the VIX and broad market volatility, driven by mechanical hedging and speculative flows."
         }
       ]
     }
