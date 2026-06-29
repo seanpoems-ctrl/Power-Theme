@@ -5030,17 +5030,99 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
 
 // ── Market Breadth Tab ────────────────────────────────────────────────────────
 
-const MARKET_SITUATION_GEMINI_KEY = process.env.REACT_APP_GEMINI_KEY || "";
-const MARKET_SITUATION_CACHE_KEY  = "gemini_market_situation_v3";
+const MARKET_SITUATION_GEMINI_KEY  = process.env.REACT_APP_GEMINI_KEY    || "";
+const MARKET_SITUATION_FINNHUB_KEY = process.env.REACT_APP_FINNHUB_KEY   || "";
+const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v4";
 
-async function fetchMarketSituation(payload) {
+// Tier 1+2+3 macro keywords — all three tiers, no daily noise
+const MAJOR_NEWS_RE = new RegExp(
+  // Tier 1: Fed / monetary policy
+  "FOMC|Federal Reserve|Fed\\s+(Chair|rate|cut|hike|pivot|pause|holds|raises|signals|minutes)|" +
+  "rate cut|rate hike|interest rate|monetary policy|Jerome Powell|Janet Yellen|" +
+  // Tier 1: Major economic data
+  "\\bCPI\\b|core CPI|\\bPCE\\b|core PCE|nonfarm payroll|jobs report|\\bNFP\\b|unemployment rate|" +
+  "\\bGDP\\b|gross domestic product|credit downgrade|credit rating|bank failure|bank run|" +
+  "systemic risk|debt ceiling|government shutdown|" +
+  // Tier 2: Secondary economic data (include when they print hot/cold)
+  "initial jobless claims|ISM manufacturing|ISM services|services PMI|manufacturing PMI|" +
+  "producer price|\\bPPI\\b|retail sales|\\bJOLTS\\b|job openings|" +
+  "consumer confidence|Michigan sentiment|consumer sentiment|" +
+  // Tier 3: Geopolitical / trade shocks
+  "tariff|trade war|trade deal|trade agreement|export controls|semiconductor ban|" +
+  "Taiwan Strait|China.{0,15}Taiwan|\\bOPEC\\b|oil production|oil shock|" +
+  "sanctions|recession|geopolitical|nuclear|war escalation",
+  "i"
+);
+
+async function fetchMajorMarketNews() {
+  if (!MARKET_SITUATION_FINNHUB_KEY) return [];
+  try {
+    const res = await fetch(`https://finnhub.io/api/v1/news?category=general&token=${MARKET_SITUATION_FINNHUB_KEY}`);
+    if (!res.ok) return [];
+    const articles = await res.json();
+    if (!Array.isArray(articles)) return [];
+    const cutoff = Date.now() / 1000 - 48 * 3600; // last 48 hours
+    return articles
+      .filter(a => a.datetime > cutoff && MAJOR_NEWS_RE.test(a.headline || ""))
+      .slice(0, 6)
+      .map(a => a.headline);
+  } catch { return []; }
+}
+
+// marketMove: null | { direction: 'drop' | 'surge', spy_pct: number, qqq_pct: number }
+async function fetchMarketSituation(payload, newsItems = [], marketMove = null) {
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_SITUATION_GEMINI_KEY}`;
+  const hasNews = newsItems.length > 0;
+  const hasMove = marketMove !== null;
+  const needsExtra = hasNews || hasMove;
+
+  let para4Instruction = "";
+  if (hasMove && hasNews) {
+    const dir  = marketMove.direction === 'drop' ? 'fell' : 'surged';
+    const spy  = `SPY ${marketMove.spy_pct >= 0 ? "+" : ""}${marketMove.spy_pct.toFixed(1)}%`;
+    const qqq  = `QQQ ${marketMove.qqq_pct >= 0 ? "+" : ""}${marketMove.qqq_pct.toFixed(1)}%`;
+    para4Instruction =
+      `Paragraph 4 (Market Event): The indices ${dir} sharply today (${spy}, ${qqq}). ` +
+      `Using the major headlines below, explain what drove this move, which sectors were most impacted, ` +
+      `and whether the tactical stance from paragraph 3 should change. Be concrete and cite the specific headlines.\n`;
+  } else if (hasMove && marketMove.direction === 'drop') {
+    const spy  = `SPY ${marketMove.spy_pct.toFixed(1)}%`;
+    const qqq  = `QQQ ${marketMove.qqq_pct.toFixed(1)}%`;
+    para4Instruction =
+      `Paragraph 4 (Selloff Analysis): The market sold off today (${spy}, ${qqq}). ` +
+      `What is most likely driving this decline based on the internals and tape? ` +
+      `Which sectors are under the most pressure? Is this a one-day shakeout or the start of a deeper move? ` +
+      `State the exact risk-management stance for a swing trader right now.\n`;
+  } else if (hasMove && marketMove.direction === 'surge') {
+    const spy  = `SPY +${marketMove.spy_pct.toFixed(1)}%`;
+    const qqq  = `QQQ +${marketMove.qqq_pct.toFixed(1)}%`;
+    para4Instruction =
+      `Paragraph 4 (Surge Analysis): The market made a strong advance today (${spy}, ${qqq}). ` +
+      `Is this a genuine breakout, a news-driven relief rally, or a potential blow-off extension? ` +
+      `Which sectors are leading and which are lagging? ` +
+      `Should a swing trader chase entries here or wait for a pullback/confirmation day?\n`;
+  } else if (hasNews) {
+    para4Instruction =
+      `Paragraph 4 (News Impact): Using the major market headlines listed below, explain specifically ` +
+      `how each event affects the current market direction and whether it reinforces or modifies the ` +
+      `trading stance from paragraph 3. Tie each headline to price action, sector rotation, or risk appetite — be concrete.\n`;
+  }
+
+  const newsSection = hasNews
+    ? `\nMajor market headlines (last 48 h):\n${newsItems.map((h, i) => `${i + 1}. ${h}`).join("\n")}`
+    : "";
+
   const prompt =
-    `You are a senior market analyst providing a pre-trading situational awareness brief for a swing trader. Analyse all the data below and write exactly 3 paragraphs with NO headers or labels:\n\n` +
+    `You are a senior market analyst providing a pre-trading situational awareness brief for a swing trader. ` +
+    `Analyse all the data below and write exactly ${needsExtra ? 4 : 3} paragraphs with NO headers or labels:\n\n` +
     `Paragraph 1 (Tape & Internals): Describe today's market tape using the A/D data, up4%/dn4% counts, Trading Index, and new 52W highs vs lows. Be specific with the numbers.\n` +
     `Paragraph 2 (Breadth Structure): Interpret the SMA50%, SMA200%, T2108, and up25Q% readings. What do they tell us about the health and phase of the current market structure?\n` +
-    `Paragraph 3 (Tactical Stance): Synthesize VIX, SPY/QQQ vs their SMAs, and the breadth picture into a single clear trading stance. State whether to be aggressive, selective, or defensive, and name the exact condition(s) to watch for a regime change.\n\n` +
-    `Be direct, cite specific numbers, avoid generic phrases. Write for a professional swing trader making real trading decisions.\n\nMarket data:\n${JSON.stringify(payload, null, 2)}`;
+    `Paragraph 3 (Tactical Stance): Synthesize VIX, SPY/QQQ vs their SMAs, and the breadth picture into a single clear trading stance. State whether to be aggressive, selective, or defensive, and name the exact condition(s) to watch for a regime change.\n` +
+    para4Instruction +
+    `\nBe direct, cite specific numbers, avoid generic phrases. Write for a professional swing trader making real trading decisions.\n\n` +
+    `Market data:\n${JSON.stringify(payload, null, 2)}` +
+    newsSection;
+
   const body = {
     contents: [{ parts: [{ text: prompt }] }],
     generationConfig: { temperature: 0.3, maxOutputTokens: 8192, thinkingConfig: { thinkingBudget: 2048 } },
@@ -5049,21 +5131,38 @@ async function fetchMarketSituation(payload) {
   const json = await res.json();
   const parts = json?.candidates?.[0]?.content?.parts || [];
   const raw = parts.filter(p => !p.thought).map(p => p.text || "").join("").trim();
-  // Strip markdown bold/italic markers Gemini occasionally emits
   return raw ? raw.replace(/\*\*(.+?)\*\*/g, "$1").replace(/\*(.+?)\*/g, "$1") : null;
 }
 
 const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
-  const [text, setText]     = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [text, setText]           = useState(null);
+  const [loading, setLoading]     = useState(false);
+  const [newsCount, setNewsCount] = useState(0);
+  const [marketMove, setMarketMove] = useState(null); // { direction, spy_pct, qqq_pct } | null
   const todayKey = new Date().toISOString().slice(0, 10);
 
-  const doFetch = useCallback(() => {
+  const doFetch = useCallback(async () => {
     if (!MARKET_SITUATION_GEMINI_KEY || !mc) return;
     setLoading(true);
+
+    // Parallel: fetch news + compute market move trigger from today's SPY/QQQ change
+    const newsItems = await fetchMajorMarketNews();
+    setNewsCount(newsItems.length);
+
+    const spyPct = mc.spy?.change_pct ?? 0;
+    const qqqPct = mc.qqq?.change_pct ?? 0;
+    const isDrop  = spyPct <= -1  || qqqPct <= -1;
+    const isSurge = spyPct >= 1.5 || qqqPct >= 1.5;
+    const move = isDrop  ? { direction: 'drop',  spy_pct: spyPct, qqq_pct: qqqPct }
+               : isSurge ? { direction: 'surge', spy_pct: spyPct, qqq_pct: qqqPct }
+               : null;
+    setMarketMove(move);
+
     const _worden = bmLatest?.worden_universe || 0;
     const payload = {
       market_signal:    mc.signal,
+      spy_change_1d:    spyPct,
+      qqq_change_1d:    qqqPct,
       vix:              internalsData?.vix,
       trin:             internalsData?.trin,
       t2108:            bmLatest?.t2108 ?? internalsData?.t2108,
@@ -5084,17 +5183,34 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
       qqq_vs_sma50:     mc.qqq?.sma50_pct,
       qqq_vs_sma200:    mc.qqq?.sma200_pct,
     };
-    fetchMarketSituation(payload)
+    fetchMarketSituation(payload, newsItems, move)
       .then(t => {
-        if (t) { setText(t); try { localStorage.setItem(MARKET_SITUATION_CACHE_KEY, JSON.stringify({ date: todayKey, text: t })); } catch { /* quota */ } }
+        if (t) {
+          setText(t);
+          try {
+            localStorage.setItem(MARKET_SITUATION_CACHE_KEY, JSON.stringify({
+              date: todayKey, text: t, newsCount: newsItems.length, marketMove: move,
+            }));
+          } catch { /* quota */ }
+        }
       })
       .catch(() => {})
       .finally(() => setLoading(false));
   }, [mc, internalsData, bmLatest, todayKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (!mc?.signal) return;  // wait until market_condition has loaded real data
-    const cached = (() => { try { const r = JSON.parse(localStorage.getItem(MARKET_SITUATION_CACHE_KEY)); return r?.date === todayKey ? r.text : null; } catch { return null; } })();
+    if (!mc?.signal) return;
+    const cached = (() => {
+      try {
+        const r = JSON.parse(localStorage.getItem(MARKET_SITUATION_CACHE_KEY));
+        if (r?.date === todayKey) {
+          if (r.newsCount)   setNewsCount(r.newsCount);
+          if (r.marketMove)  setMarketMove(r.marketMove);
+          return r.text;
+        }
+        return null;
+      } catch { return null; }
+    })();
     if (cached) { setText(cached); return; }
     if (MARKET_SITUATION_GEMINI_KEY) doFetch();
   }, [mc?.signal]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -5102,14 +5218,32 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
   if (!mc) return null;
 
   const paragraphs = text ? text.split(/\n\n+/).filter(p => p.trim()) : [];
+  const fmtMove = (pct) => `${pct >= 0 ? "+" : ""}${pct.toFixed(1)}%`;
 
   return (
     <div className="mb-5 border border-zinc-700/40 bg-zinc-900/40 rounded-xl p-4">
       <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <span className="text-blue-400 text-[14px]">⬡</span>
           <span className="text-[12px] font-bold text-zinc-300 uppercase tracking-wider">Market Situation</span>
           <span className="text-[10px] text-zinc-600 font-mono">Gemini 2.5 Flash · thinking</span>
+          {/* News badge */}
+          {newsCount > 0 && (
+            <span className="text-[10px] text-amber-400/80 font-mono border border-amber-500/30 rounded px-1.5 py-0.5 leading-tight">
+              {newsCount} major event{newsCount > 1 ? "s" : ""}
+            </span>
+          )}
+          {/* Market move badge */}
+          {marketMove?.direction === 'drop' && (
+            <span className="text-[10px] text-red-400/90 font-mono border border-red-500/30 rounded px-1.5 py-0.5 leading-tight">
+              SPY {fmtMove(marketMove.spy_pct)} · QQQ {fmtMove(marketMove.qqq_pct)}
+            </span>
+          )}
+          {marketMove?.direction === 'surge' && (
+            <span className="text-[10px] text-emerald-400/90 font-mono border border-emerald-500/30 rounded px-1.5 py-0.5 leading-tight">
+              SPY {fmtMove(marketMove.spy_pct)} · QQQ {fmtMove(marketMove.qqq_pct)}
+            </span>
+          )}
         </div>
         <button
           onClick={doFetch}
@@ -8742,6 +8876,179 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
   );
 };
 
+// ── ETF Category Benchmark Leaderboard ───────────────────────────────────────
+// Rolls up the per-ETF RS data one level up: ranks the 12 theme-CATEGORIES so you
+// can see top-down which area of the market money is rotating into, before drilling
+// into individual baskets (Flip Scanner) or tickers (RS table).
+const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
+  const [sortKey, setSortKey] = useState("score");      // "score" | "perf_1w" | "perf_1m"
+  const [holdingsModal, setHoldingsModal] = useState(null);
+
+  const etfs = etfRsData?.etfs ?? [];
+
+  const etfRsMap = React.useMemo(() => {
+    const m = {};
+    for (const e of etfs) m[e.ticker] = e;
+    return m;
+  }, [etfs]);
+
+  const median = (arr) => {
+    const a = arr.filter(v => v != null).sort((x, y) => x - y);
+    if (!a.length) return null;
+    const mid = Math.floor(a.length / 2);
+    return a.length % 2 ? a[mid] : (a[mid - 1] + a[mid]) / 2;
+  };
+
+  const categories = React.useMemo(() => {
+    const byCat = {};
+    for (const e of etfs) {
+      const c = e.category || "Other";
+      (byCat[c] ||= []).push(e);
+    }
+    const rows = Object.entries(byCat).map(([cat, members]) => {
+      const score   = median(members.map(m => m.score));
+      const perf_1w = median(members.map(m => m.perf_1w));
+      const perf_1m = median(members.map(m => m.perf_1m));
+      const perf_3m = median(members.map(m => m.perf_3m));
+      // Leader = highest-scoring member
+      const leader = [...members].filter(m => m.score != null)
+        .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))[0] || null;
+      // Anchor (pure-sector benchmark) for this category — boosters share it
+      const anchorTicker = members.find(m => m.anchor_ticker)?.anchor_ticker || null;
+      const anchorRow = anchorTicker ? etfRsMap[anchorTicker] : null;
+      // Active flips in this category
+      const flips = members.filter(m => m.rs_flip_signal);
+      return {
+        cat, members, score, perf_1w, perf_1m, perf_3m, leader,
+        anchorTicker, anchorPerf1m: anchorRow?.perf_1m ?? null,
+        flips: flips.length,
+        count: members.length,
+      };
+    });
+    rows.sort((a, b) => (b[sortKey] ?? -Infinity) - (a[sortKey] ?? -Infinity));
+    return rows;
+  }, [etfs, etfRsMap, sortKey]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (!etfRsData) return null;
+
+  const pctColor = v => v == null ? "text-zinc-600"
+    : v > 5  ? "text-emerald-300 font-bold"
+    : v > 0  ? "text-emerald-400"
+    : v > -3 ? "text-zinc-400"
+    : "text-rose-400";
+  const fmtP = v => v == null ? "—" : `${v > 0 ? "+" : ""}${v.toFixed(1)}%`;
+  const scoreColor = v => v == null ? "bg-zinc-700"
+    : v >= 70 ? "bg-emerald-500/70"
+    : v >= 50 ? "bg-emerald-500/40"
+    : v >= 30 ? "bg-amber-500/40"
+    : "bg-rose-500/40";
+
+  const maxScore = Math.max(...categories.map(c => c.score ?? 0), 1);
+  const SortBtn = ({ k, label }) => (
+    <button onClick={() => setSortKey(k)}
+      className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-colors ${sortKey === k ? "bg-blue-500/30 text-blue-200 border border-blue-500/40" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
+      {label}
+    </button>
+  );
+
+  return (
+    <div className="mb-2">
+      <div className="flex items-center gap-3 mb-3 flex-wrap">
+        <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide">🏆 Category Leaderboard</h3>
+        <span className="text-[11px] text-zinc-500">Theme-category RS rollup · top-down rotation view</span>
+        <div className="ml-auto flex items-center gap-1">
+          <span className="text-[10px] text-zinc-600 mr-1">rank by</span>
+          <SortBtn k="score"   label="Score" />
+          <SortBtn k="perf_1w" label="1W" />
+          <SortBtn k="perf_1m" label="1M" />
+        </div>
+      </div>
+
+      <div className="overflow-x-auto rounded-lg border border-zinc-800">
+        <table className="w-full text-xs border-collapse">
+          <thead>
+            <tr className="bg-zinc-900/80 border-b border-zinc-700 text-zinc-500 text-[10px] uppercase tracking-wide">
+              <th className="px-2 py-1.5 text-left w-7">#</th>
+              <th className="px-2 py-1.5 text-left">Category</th>
+              <th className="px-2 py-1.5 text-left w-[28%]">Category Score (median)</th>
+              <th className="px-2 py-1.5 text-right">1W</th>
+              <th className="px-2 py-1.5 text-right">1M</th>
+              <th className="px-2 py-1.5 text-right">3M</th>
+              <th className="px-2 py-1.5 text-left">Leader</th>
+              <th className="px-2 py-1.5 text-left">Anchor</th>
+              <th className="px-2 py-1.5 text-center">Flips</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categories.map((c, i) => (
+              <tr key={c.cat} className={`border-b border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "bg-zinc-900/20" : ""}`}>
+                <td className="px-2 py-1.5 text-zinc-600 font-mono">{i + 1}</td>
+                <td className="px-2 py-1.5 text-zinc-200 font-medium max-w-[230px]">
+                  {c.cat}
+                  <span className="text-zinc-600 ml-1.5 text-[10px] font-mono">{c.count}</span>
+                </td>
+                {/* Score bar */}
+                <td className="px-2 py-1.5">
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 h-2.5 bg-zinc-800 rounded overflow-hidden">
+                      <div className={`h-full rounded ${scoreColor(c.score)}`}
+                           style={{ width: `${((c.score ?? 0) / maxScore) * 100}%` }} />
+                    </div>
+                    <span className="font-mono text-[11px] text-zinc-300 w-9 text-right">
+                      {c.score != null ? c.score.toFixed(0) : "—"}
+                    </span>
+                  </div>
+                </td>
+                <td className={`px-2 py-1.5 text-right font-mono ${pctColor(c.perf_1w)}`}>{fmtP(c.perf_1w)}</td>
+                <td className={`px-2 py-1.5 text-right font-mono ${pctColor(c.perf_1m)}`}>{fmtP(c.perf_1m)}</td>
+                <td className={`px-2 py-1.5 text-right font-mono ${pctColor(c.perf_3m)}`}>{fmtP(c.perf_3m)}</td>
+                {/* Leader — clickable to holdings */}
+                <td className="px-2 py-1.5">
+                  {c.leader ? (
+                    <button
+                      onClick={() => setHoldingsModal({ ticker: c.leader.ticker, theme: `${c.cat} - ${c.leader.label || c.leader.theme}`, holdings: etfHoldings[c.leader.ticker] ?? [] })}
+                      className="font-mono font-bold text-cyan-400 hover:underline text-[11px]">
+                      {c.leader.ticker}
+                      <span className="text-zinc-600 ml-1 font-sans font-normal">{c.leader.score?.toFixed(0)}</span>
+                    </button>
+                  ) : <span className="text-zinc-700">—</span>}
+                </td>
+                {/* Anchor benchmark */}
+                <td className="px-2 py-1.5 font-mono text-zinc-500 text-[11px]">
+                  {c.anchorTicker || "—"}
+                  {c.anchorPerf1m != null && (
+                    <span className={`ml-1 ${pctColor(c.anchorPerf1m)}`}>{fmtP(c.anchorPerf1m)}</span>
+                  )}
+                </td>
+                {/* Flips */}
+                <td className="px-2 py-1.5 text-center">
+                  {c.flips > 0
+                    ? <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">⚡{c.flips}</span>
+                    : <span className="text-zinc-700">·</span>}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="text-[10px] text-zinc-600 mt-1.5">
+        Category Score = median RS Score of all baskets in the category (0–100, percentile vs every ETF). Leader = highest-scoring basket. Anchor = the pure-sector benchmark its boosters are measured against. ⚡ = active RS flips.
+      </p>
+
+      {holdingsModal && (
+        <EtfHoldingsModal
+          etf={holdingsModal.ticker}
+          theme={holdingsModal.theme}
+          holdings={holdingsModal.holdings}
+          screenerMap={screenerMap}
+          etfRsMap={etfRsMap}
+          onClose={() => setHoldingsModal(null)}
+        />
+      )}
+    </div>
+  );
+};
+
 // ── ETF Flip Scanner ─────────────────────────────────────────────────────────
 const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
   const etfs = etfRsData?.etfs ?? [];
@@ -9782,6 +10089,7 @@ const DailyWatchlistTab = ({ data }) => {
       {/* ── ETF RS TABLE ──────────────────────────────────── */}
       {mode === "etf" && (
         <div className="space-y-6">
+          <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
         </div>
