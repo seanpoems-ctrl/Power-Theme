@@ -1,79 +1,79 @@
 {
-  "generated_at": "2026-06-29 10:51 ET",
-  "phase": "PRE",
-  "session": "Pre-Market",
+  "generated_at": "2026-06-29 16:45 ET",
+  "phase": "POST",
+  "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 737.29,
+      "price": 741.0,
       "open": 736.53,
-      "high": 739.89,
+      "high": 741.56,
       "low": 732.11,
-      "close": 737.29,
+      "close": 741.0,
       "prev_open": 728.95,
       "prev_close": 728.99,
-      "volume": 15027565,
-      "change_pct": 1.14
+      "volume": 52910882,
+      "change_pct": 1.65
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 713.67,
+      "price": 724.08,
       "open": 713.99,
-      "high": 718.66,
+      "high": 724.58,
       "low": 705.17,
-      "close": 713.67,
+      "close": 724.08,
       "prev_open": 707.13,
       "prev_close": 706.52,
-      "volume": 15327227,
-      "change_pct": 1.01
+      "volume": 41838941,
+      "change_pct": 2.49
     },
     "^VIX": {
       "label": "VIX",
-      "price": 18.43,
+      "price": 17.65,
       "open": 18.6,
       "high": 19.45,
-      "low": 17.98,
-      "close": 18.43,
+      "low": 17.49,
+      "close": 17.65,
       "prev_open": 19.7,
       "prev_close": 18.41,
       "volume": 0,
-      "change_pct": 0.11
+      "change_pct": -4.13
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 70.36,
+      "price": 70.55,
       "open": 70.5,
-      "high": 70.97,
+      "high": 71.15,
       "low": 69.32,
-      "close": 70.36,
+      "close": 70.55,
       "prev_open": 71.44,
       "prev_close": 69.23,
-      "volume": 89007,
-      "change_pct": 1.63
+      "volume": 151160,
+      "change_pct": 1.91
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 69468.11,
-      "open": 69609.88,
-      "high": 69609.88,
-      "low": 67997.57,
-      "close": 69468.11,
-      "prev_open": 71587.71,
-      "prev_close": 69360.88,
-      "volume": 0,
-      "change_pct": 0.15
+      "price": 69360.88,
+      "open": 71587.71,
+      "high": 71786.28,
+      "low": 68639.84,
+      "close": 69360.88,
+      "prev_open": 70114.09,
+      "prev_close": 72366.34,
+      "volume": 156900000,
+      "change_pct": -4.15
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24652.84,
+      "price": 24626.89,
       "open": 24724.34,
       "high": 24762.24,
-      "low": 24574.64,
-      "close": 24652.84,
+      "low": 24556.78,
+      "close": 24626.89,
       "prev_open": 24848.51,
       "prev_close": 24671.22,
       "volume": 0,
-      "change_pct": -0.07
+      "change_pct": -0.18
     }
   },
   "fred": {
@@ -84,7 +84,7 @@
   },
   "breadth": {
     "s5fi": 62.6,
-    "mmth": 65.6
+    "mmth": 65.0
   },
   "regime": {
     "credit_status": "Complacent",
@@ -98,6 +98,36 @@
     }
   },
   "analysis": {
-    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "title": "Post-Market Brief: June 29, 2026",
+    "mood_emoji": "🚀",
+    "mood": "Risk-On / Growth Optimism",
+    "narrative": "US equities surged today, with the S&P 500 and Nasdaq 100 posting strong gains as volatility retreated. Despite mixed global market signals, domestic risk appetite remained robust, fueled by a complacent credit environment.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 741.00 | +1.65% | 📈 |\n| Nasdaq 100 ETF | 724.08 | +2.49% | 📈 |\n| VIX | 17.65 | -4.13% | 📉 |\n| Crude Oil | 70.55 | +1.91% | 📈 |\n| Nikkei 225 | 69360.88 | -4.15% | 📉 |\n| DAX | 24626.89 | -0.18% | ➡️ |",
+    "macro_section": "High-Yield Credit Spreads (BAMLH0A0HYM2) currently stand at 2.83%, indicating a 'Complacent' regime among credit investors. Concurrently, the 10Y-2Y Yield Curve (T10Y2Y) measures a positive +0.310, signaling a 'Normal / Steepening' environment. This combination suggests a healthy institutional appetite for risk, underpinning the day's bullish sentiment in equities.",
+    "analysis_para1": "While the Nikkei 225 registered a significant -4.15% decline and the DAX saw a modest -0.18% dip, global tape signals were somewhat divergent. Crude Oil's +1.91% rally offered a counterpoint, suggesting some underlying demand strength. Crucially, the US high-yield credit spread remaining at a 'Complacent' 2.83% indicates that US risk appetite largely decoupled from the broader international caution, with domestic institutions comfortable taking on risk.",
+    "analysis_para2": "Today's primary flow was dominated by broad-based short covering and a renewed growth momentum, serving as the core mechanical catalyst. With credit spreads signaling complacency and a healthy yield curve, market participants unwound bearish bets, particularly in growth-oriented sectors. This positioning squeeze, combined with a lack of significant negative news flow, created a vacuum that allowed for aggressive price action and a significant drop in the VIX.",
+    "analysis_para3": "Traders should prioritize managing long exposure and identifying key support levels in this strong uptrend. Watch for the S&P 500 ETF to hold the 740-738 range as immediate support; sustained trading above this suggests further upside. Long entries can be considered on dips towards 735, with a tighter risk-off threshold established if the S&P 500 ETF breaks below 730 on heavy volume. Today, traders should ensure their portfolio is appropriately positioned for continued risk-on sentiment.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 at 62.6% and S&P stocks above SMA200 at 65.0% illustrate strong underlying breadth, supporting the current bullish momentum. Monitor for any significant decline in these breadth indicators as a potential early warning for a shift in market character.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "IRDM",
+          "company": "Iridium Communications Inc.",
+          "reason": "News of its acquisition by Rocket Lab provided a strong, specific catalyst driving significant pre-market and post-market price action."
+        },
+        {
+          "ticker": "MSTR",
+          "company": "MicroStrategy Incorporated",
+          "reason": "The announcement of a new capital framework and buyback program offers a fresh, fundamental catalyst for potential upside."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "No fresh fundamental catalyst today, with any movement primarily attributable to recycled headlines or broader market flow."
+        }
+      ]
+    }
   }
 }
