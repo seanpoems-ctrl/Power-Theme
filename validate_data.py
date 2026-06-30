@@ -72,6 +72,30 @@ def main() -> None:
                     "Finviz may be rate-limiting this runner"
                 )
 
+    # ── Thematic data completeness ───────────────────────────────────────────
+    # The scraper builds theme_rankings (light) separately from the hierarchical
+    # `themes` (per-stock detail). A broken Finviz quote-page parse silently
+    # empties `themes` while theme_rankings stays populated — which blanks Leading
+    # Themes, Clean Bases and Short Candidates. Guard against shipping empty themes.
+    tpath = PUBLIC_DIR / "thematic_data.json"
+    if tpath.exists():
+        try:
+            td = json.loads(tpath.read_text(encoding="utf-8"))
+            n_themes = len(td.get("themes", []))
+            n_stocks = sum(len(s.get("stocks", []))
+                           for t in td.get("themes", [])
+                           for s in t.get("subthemes", []))
+            if n_themes == 0:
+                failures.append("THEMATIC: themes[] is EMPTY — per-stock theme drill failed "
+                                "(check fetch_stock_detail / Finviz layout)")
+            elif n_stocks < 20:
+                failures.append(f"THEMATIC: only {n_stocks} stocks across {n_themes} themes "
+                                "(per-stock detail mostly failed)")
+            else:
+                print(f"  OK  {'thematic':12s}: {n_themes} themes, {n_stocks} stocks")
+        except json.JSONDecodeError as exc:
+            failures.append(f"CORRUPT JSON: thematic_data.json: {exc}")
+
     if warnings:
         print("\nWARNINGS (non-fatal):")
         for w in warnings:
