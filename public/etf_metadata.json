@@ -161,6 +161,20 @@
     "liquid": false
   },
   {
+    "ticker": "ETHA",
+    "category": "Crypto & Digital Assets",
+    "label": "Spot Ethereum",
+    "type": "beta_booster",
+    "liquid": true
+  },
+  {
+    "ticker": "IBIT",
+    "category": "Crypto & Digital Assets",
+    "label": "Spot Bitcoin",
+    "type": "beta_booster",
+    "liquid": true
+  },
+  {
     "ticker": "BITW",
     "category": "Crypto & Digital Assets",
     "label": "Multi Asset",
@@ -551,6 +565,13 @@
     "label": "Insurance Equal",
     "type": "beta_booster",
     "liquid": false
+  },
+  {
+    "ticker": "EEM",
+    "category": "Geographic / Country Specific",
+    "label": "Emerging Markets",
+    "type": "beta_booster",
+    "liquid": true
   },
   {
     "ticker": "EWY",
@@ -1071,6 +1092,13 @@
     "liquid": true
   },
   {
+    "ticker": "AIPO",
+    "category": "Technology & Digital Disruption",
+    "label": "AI & Power Infrastructure",
+    "type": "beta_booster",
+    "liquid": false
+  },
+  {
     "ticker": "AIQ",
     "category": "Technology & Digital Disruption",
     "label": "AI & Data Processing",
@@ -1123,6 +1151,13 @@
     "ticker": "DTCR",
     "category": "Technology & Digital Disruption",
     "label": "Data Center Infrastructure",
+    "type": "beta_booster",
+    "liquid": false
+  },
+  {
+    "ticker": "EUV",
+    "category": "Technology & Digital Disruption",
+    "label": "Lithography & Photonics",
     "type": "beta_booster",
     "liquid": false
   },
