@@ -5032,7 +5032,7 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
 
 const MARKET_SITUATION_GEMINI_KEY  = process.env.REACT_APP_GEMINI_KEY    || "";
 const MARKET_SITUATION_FINNHUB_KEY = process.env.REACT_APP_FINNHUB_KEY   || "";
-const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v4";
+const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v5";
 
 // Tier 1+2+3 macro keywords — all three tiers, no daily noise
 const MAJOR_NEWS_RE = new RegExp(
@@ -5212,8 +5212,11 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
       } catch { return null; }
     })();
     if (cached) { setText(cached); return; }
+    // Wait for breadth data (breadth_monitor.json) before generating, otherwise
+    // up4/dn4/up25Q come through as null and Gemini reports them "unavailable".
+    if (!bmLatest?.worden_universe) return;
     if (MARKET_SITUATION_GEMINI_KEY) doFetch();
-  }, [mc?.signal]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [mc?.signal, bmLatest]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!mc) return null;
 
