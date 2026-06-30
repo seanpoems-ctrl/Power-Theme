@@ -1014,7 +1014,14 @@ def fetch_sparkline(ticker: str) -> dict:
             for _, r in hist.tail(30).iterrows()
             if not (math.isnan(r["High"]) or math.isnan(r["Low"]) or math.isnan(r["Close"]))
         ]
-        return {"sparkline": closes, "bars_30d": bars_30d}
+        # SMA10 % — Finviz exposes SMA20/50/200 but not SMA10; compute it from
+        # the daily closes (latest close vs 10-day mean) for the Buy/Sell Watch filters.
+        sma10_pct = None
+        if len(closes) >= 10:
+            sma10 = sum(closes[-10:]) / 10
+            if sma10 > 0:
+                sma10_pct = round((closes[-1] / sma10 - 1) * 100, 2)
+        return {"sparkline": closes, "bars_30d": bars_30d, "sma10_pct": sma10_pct}
     except Exception:
         return {"sparkline": [], "bars_30d": []}
 
@@ -2146,6 +2153,7 @@ def _fetch_details(picks: list[dict], cache: dict) -> list[dict]:
                 price_data = fetch_sparkline(t)
                 detail["sparkline"] = price_data.get("sparkline", [])
                 detail["bars_30d"] = price_data.get("bars_30d", [])
+                detail["sma10_pct"] = price_data.get("sma10_pct")
                 detail["earnings"] = fetch_earnings_yf(t)
                 # Override Finviz calendar-month perf with yfinance rolling returns
                 rolling = _rolling_perf_from_closes(detail["sparkline"])

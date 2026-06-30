@@ -9932,9 +9932,9 @@ const DailyWatchlistTab = ({ data }) => {
   // ── Clean Bases ── filtered, then sorted by active column
   const cleanBases = React.useMemo(() => {
     const filtered = enrichedAllStocks.filter(s =>
+      (s.sma10_pct == null || s.sma10_pct > 0) &&   // SMA10 tolerated until scraper adds it
       (s.sma20_pct  ?? -1) > 0 &&
       (s.sma50_pct  ?? -1) > 0 &&
-      (s.sma200_pct ?? -1) > 0 &&
       (s.dist_52w_high ?? -99) > -8 &&
       (s.rs_52w  ?? 0) >= 75 &&
       (s.adr_pct ?? 0) >= 4
@@ -9977,12 +9977,11 @@ const DailyWatchlistTab = ({ data }) => {
   // ── Short Candidates ── below all 3 SMAs, RS≤40, ADR≥4%, down on 1M
   const shortCandidates = React.useMemo(() => {
     const filtered = enrichedAllStocks.filter(s =>
+      (s.sma10_pct == null || s.sma10_pct < 0) &&   // SMA10 tolerated until scraper adds it
       (s.sma20_pct  ?? 1) < 0 &&
       (s.sma50_pct  ?? 1) < 0 &&
-      (s.sma200_pct ?? 1) < 0 &&
-      (s.rs_52w  ?? 99) <= 40 &&
-      (s.adr_pct ?? 0) >= 4 &&
-      (s.perf_1m ?? 0) < -5
+      (s.rs_52w  ?? 99) <= 50 &&
+      (s.adr_pct ?? 0) >= 4
     );
     const getVal = s => {
       if (shortSortCol === "ticker")        return s.ticker ?? "";
@@ -10032,6 +10031,25 @@ const DailyWatchlistTab = ({ data }) => {
       .slice(0, 15);
   }, [screenerStocks, allStocks, tickerThemeMap]);
 
+  // ── Market Laggards ── mirror of leaders for the Short tab: RS≤50, weakest first
+  const laggards = React.useMemo(() => {
+    const source = screenerStocks.length > 0 ? screenerStocks : allStocks;
+    return source
+      .filter(s =>
+        (s.rs_score ?? s.rs_52w ?? 99) <= 50 &&
+        (s.market_cap_b ?? s.mkt_cap_b ?? 0) >= 10 &&
+        (s.avg_dollar_volume ?? parseDvol(s.dollar_volume) ?? 0) >= 100_000_000
+      )
+      .map(s => ({
+        ...s,
+        rs_52w: s.rs_score ?? s.rs_52w,
+        mkt_cap_b: s.market_cap_b ?? s.mkt_cap_b,
+        theme: tickerThemeMap[s.ticker] ?? s.theme ?? s.industry ?? "—",
+      }))
+      .sort((a, b) => (a.rs_52w ?? 99) - (b.rs_52w ?? 99))
+      .slice(0, 15);
+  }, [screenerStocks, allStocks, tickerThemeMap]);
+
   // ── Top Themes ── prefer the rich hierarchical data.themes; fall back to the
   // lighter theme_rankings when that array is empty (scraper sometimes ships
   // theme_rankings without the per-stock theme detail) so Leading/Weak Themes
@@ -10057,6 +10075,7 @@ const DailyWatchlistTab = ({ data }) => {
       }));
   }, [data, screenerMap]);
   const topThemes = displayThemes.slice(0, 5);
+  const laggardThemes = [...displayThemes].reverse().slice(0, 5);  // worst-first, for the Short tab
 
   // ── Gapper Watch ── conviction ≥ 55
   const topGappers = (gapperData?.gappers ?? []).filter(g => (g.conviction ?? 0) >= 55).slice(0, 6);
@@ -10096,7 +10115,7 @@ const DailyWatchlistTab = ({ data }) => {
       <Sec
         title="Clean Bases — Buy Watch"
         badge={cleanBases.length}
-        sub="Above SMA20/50/200 · ≤8% from 52W high · RS≥75 · ADR≥4%"
+        sub="Above SMA10/20/50 · ≤8% from 52W high · RS≥75 · ADR≥4%"
       />
       {cleanBases.length === 0 ? (
         <p className="text-sm text-zinc-500 italic py-4">
@@ -10373,20 +10392,122 @@ const DailyWatchlistTab = ({ data }) => {
 
       {/* ── SHORT MODE ────────────────────────────────────── */}
       {mode === "short" && (
-        <div className="space-y-6">
+        <div className="space-y-8">
 
-          {/* Short Candidates table */}
+          {/* ── Row 1: Laggard Themes + Market Laggards ──────────── */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            {/* Laggard Themes */}
+            <div>
+              <div className="flex items-center justify-between mb-2">
+                <Sec title="Laggard Themes — Avoid / Short Bias" badge={laggardThemes.length} sub="worst by momentum" />
+                <div className="flex bg-zinc-800/60 rounded-md p-0.5 border border-zinc-700/40">
+                  {[{k:"1d",l:"1D"},{k:"1m",l:"1M"},{k:"3m",l:"3M"}].map(({k,l}) => (
+                    <button key={k} onClick={() => setPerfMode(k)}
+                      className={`px-2 py-0.5 text-[10px] font-medium rounded transition-all ${perfMode === k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300"}`}>
+                      {l}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-1.5">
+                {laggardThemes.map((theme, i) => {
+                  const rawStocks = theme.subthemes?.flatMap(s => s.stocks || []) ?? [];
+                  const stocks = rawStocks.map(s => {
+                    const sc = screenerMap[s.ticker];
+                    if (!sc) return s;
+                    return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
+                  });
+                  const topS = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))[0];
+                  const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
+                  const perfKey = perfMode === "1d" ? "perf_1d" : perfMode === "1m" ? "perf_1m" : "perf_3m";
+                  const topStocks = stocks.slice(0, 5);
+                  const perf = theme._ranking
+                    ? (theme[perfKey] ?? 0)
+                    : (topStocks.length
+                        ? topStocks.reduce((acc, st) => acc + (st[perfKey] ?? 0), 0) / topStocks.length
+                        : 0);
+                  return (
+                    <div key={theme.name}
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40 cursor-pointer hover:bg-zinc-700/50 hover:border-zinc-600/60 transition-colors"
+                      onClick={() => setSelectedThemeModal({ name: theme.name, stocks: [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0)) })}>
+                      <span className="text-zinc-600 font-mono text-[11px] w-4 shrink-0">{i + 1}</span>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs font-medium text-zinc-200 truncate">{theme.name}</div>
+                        <div className="text-[10px] text-zinc-600">{stocks.length} stocks{avgRs ? ` · avg RS ${avgRs}` : ""}</div>
+                      </div>
+                      {topS && <span className="text-[10px] font-mono text-cyan-400 shrink-0">{topS.ticker}</span>}
+                      <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf > 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                        {perf > 0 ? "+" : ""}{perf.toFixed(1)}%
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Market Laggards cards */}
+            <div className="lg:col-span-2">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-baseline gap-2">
+                  <h3 className="text-sm font-semibold text-zinc-100">Market Laggards</h3>
+                  <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{laggards.length}</span>
+                  <span className="text-xs text-zinc-600">RS≤50 · Mkt Cap≥$10B · $Vol≥$100M · weakest first</span>
+                </div>
+                <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 shrink-0">
+                  {[{k:"perf_1d",l:"1D"},{k:"perf_1w",l:"1W"},{k:"perf_1m",l:"1M"},{k:"perf_3m",l:"3M"}].map(o => (
+                    <button key={o.k} onClick={() => setLeaderPerfMode(o.k)}
+                      className={`px-2 py-0.5 text-[11px] font-medium rounded-md transition-all ${leaderPerfMode === o.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
+                      {o.l}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2">
+                {laggards.length === 0 ? (
+                  <p className="text-sm text-zinc-600 italic col-span-full py-2">No large-cap laggards (RS≤50, $10B+) right now.</p>
+                ) : laggards.map(s => {
+                  const perfVal = s[leaderPerfMode] ?? null;
+                  const perfLabel = {perf_1d:"1D",perf_1w:"1W",perf_1m:"1M",perf_3m:"3M"}[leaderPerfMode];
+                  return (
+                  <a key={s.ticker}
+                     href={`https://finviz.com/quote.ashx?t=${s.ticker}`}
+                     target="_blank" rel="noopener noreferrer"
+                     className="block px-2.5 py-2 rounded-lg bg-zinc-800/60 border border-zinc-700/40 hover:border-rose-500/40 hover:bg-zinc-800 transition-all">
+                    <div className="flex items-center justify-between mb-0.5">
+                      <span className="font-mono font-bold text-rose-400 text-sm">{s.ticker}</span>
+                      <span className={`text-xs font-mono font-bold ${rsCol(s.rs_52w)}`}>{s.rs_52w}</span>
+                    </div>
+                    <div className="text-[9px] text-zinc-600 truncate mb-1">{s.theme}</div>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-mono text-zinc-500">
+                        {s.mkt_cap_b != null
+                          ? `$${s.mkt_cap_b >= 1000 ? (s.mkt_cap_b/1000).toFixed(1)+"T" : s.mkt_cap_b.toFixed(0)+"B"}`
+                          : s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : ""}
+                      </span>
+                      <span className={`text-[10px] font-mono font-semibold ${(perfVal ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                        <span className="text-zinc-600 mr-0.5">{perfLabel}</span>{fmtPct(perfVal)}
+                      </span>
+                    </div>
+                  </a>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+
+          {/* ── Clean Bases — Sell Watch ──────────────────────────── */}
           <div>
             <Sec
-              title="Short Candidates — Sell Watch"
+              title="Clean Bases — Sell Watch"
               badge={shortCandidates.length}
-              sub="Below SMA20/50/200 · RS≤40 · ADR≥4% · down >5% on 1M"
+              sub="Below SMA10/20/50 · RS≤50 · ADR≥4%"
             />
             {shortCandidates.length === 0 ? (
               <p className="text-sm text-zinc-500 italic py-4">
                 {!data?.themes?.length
-                  ? "Theme stock detail unavailable in the latest scrape — Short Candidates needs per-stock SMA data (pending a thematic scraper refresh)."
-                  : "No stocks meeting short criteria — market may be in uptrend with broad participation."}
+                  ? "Theme stock detail unavailable in the latest scrape — Sell Watch needs per-stock SMA data (pending a thematic scraper refresh)."
+                  : "No stocks meeting sell-watch criteria — market may be in a broad uptrend."}
               </p>
             ) : (
               <div className="overflow-x-auto rounded-lg border border-zinc-800">
@@ -10440,36 +10561,6 @@ const DailyWatchlistTab = ({ data }) => {
               </div>
             )}
           </div>
-
-          {/* Weak Themes */}
-          <div>
-            <Sec title="Weak Themes — Avoid / Short Bias" sub="worst performing themes" />
-            <div className="space-y-1.5">
-              {[...displayThemes].reverse().slice(0, 5).map((theme, i) => {
-                const stocks = theme.subthemes?.flatMap(s => s.stocks || []) ?? [];
-                const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
-                const perf1m = theme._ranking
-                  ? (theme.perf_1m ?? 0)
-                  : stocks.slice(0, 5).reduce((s, st) => s + (st.perf_1m ?? 0), 0) / Math.min(stocks.length, 5);
-                return (
-                  <div key={theme.name} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40">
-                    <span className="text-zinc-600 font-mono text-[11px] w-4 shrink-0">{i + 1}</span>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-xs font-medium text-zinc-200 truncate">{theme.name}</div>
-                      <div className="text-[10px] text-zinc-600">{stocks.length} stocks{avgRs ? ` · avg RS ${avgRs}` : ""}</div>
-                    </div>
-                    <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf1m >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
-                      {perf1m > 0 ? "+" : ""}{perf1m.toFixed(1)}%
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {cleanBasesSection}
-
-          {gapperWatchSection}
 
         </div>
       )} {/* end SHORT MODE */}
