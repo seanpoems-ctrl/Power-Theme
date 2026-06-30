@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-30 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-On Momentum Surge",
+    "spy_price": 741.0,
+    "spy_change_pct": 1.65,
+    "vix": 17.53,
+    "hy_oas": 2.83,
+    "yield_curve": 0.28,
+    "credit_status": "Complacent",
+    "s5fi": 62.6,
+    "mmth": 65.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Received accelerated FDA approval for its new Alzheimer's drug, opening a significant new market opportunity."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Announced a groundbreaking advancement in its generative AI model, potentially redefining industry standards and market share."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp",
+          "reason": "The stock continues to exhibit strong technical momentum, extending its recent upward trend on broad tech sector strength."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-29 17:59 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -1960,23 +1998,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-06-09 09:47 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "",
-    "spy_price": 745.95,
-    "spy_change_pct": 0.91,
-    "vix": 17.78,
-    "hy_oas": 2.76,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 55.6,
-    "mmth": 62.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
