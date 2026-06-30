@@ -1,6 +1,33 @@
 {
-  "generated_at": "2026-06-30T00:03:37.036618+00:00",
+  "generated_at": "2026-06-30T23:12:23.796161+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Other",
+      "theme_rs": 93.0,
+      "perf_1d": 5.56,
+      "leaders": [
+        {
+          "ticker": "SEDG",
+          "price": 58.44,
+          "rs_52w": 93,
+          "adr_pct": 9.53,
+          "vol_surge": 1.11,
+          "mkt_cap": 3554215641,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }
