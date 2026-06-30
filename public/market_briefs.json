@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-30 09:11 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Strong Risk Appetite",
+    "spy_price": 741.0,
+    "spy_change_pct": 1.65,
+    "vix": 17.62,
+    "hy_oas": 2.83,
+    "yield_curve": 0.28,
+    "credit_status": "Complacent",
+    "s5fi": 62.6,
+    "mmth": 65.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "ABVX",
+          "company": "ABVX Biopharma Inc.",
+          "reason": "The company announced positive Phase 3 Clinical Data, which is a significant catalyst for biotech valuations and investor interest."
+        },
+        {
+          "ticker": "SHAZ",
+          "company": "SHAZ Global Corp.",
+          "reason": "A US$1.6 Billion Strategic Financing coupled with a 10% Stake Disclosure indicates strong institutional backing and potential for future growth."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "NVIDIA continues to capture attention driven by ongoing demand for AI infrastructure and broader technology sector optimism, a recurring theme."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-30 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -1957,44 +1995,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Profit-taking continues in high-beta tech names like NVIDIA following recent strong gains, with institutional selling pressure noted on technical charts."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-09 17:28 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off Sentiment Deepens",
-    "spy_price": 737.05,
-    "spy_change_pct": -0.29,
-    "vix": 19.87,
-    "hy_oas": 2.75,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 57.2,
-    "mmth": 63.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan unveiled a groundbreaking AI-driven personalized wealth management platform, positioning the bank ahead in fintech innovation and potentially attracting a new wave of high-net-worth clients."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Amazon Web Services (AWS) announced a significant leap in quantum computing services with a new high-performance algorithm, signaling accelerated progress in a frontier technology with vast enterprise potential."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "NVIDIA experienced broad profit-taking today, contributing to the wider tech sector's decline, as investors rotated out of high-beta growth names following its recent strong performance."
         }
       ]
     }
