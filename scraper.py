@@ -916,15 +916,18 @@ def fetch_stock_detail(ticker: str) -> dict | None:
         return None
 
     soup = BeautifulSoup(resp.text, "html.parser")
-    table = soup.find("table", class_="snapshot-table2")
-    if not table:
+    # Finviz (2026 layout) renders the quote snapshot as a flat sequence of
+    # <td class="snapshot-td2"> cells alternating label,value,label,value…  The old
+    # single `snapshot-table2` row layout was split, so per-row pairing no longer
+    # captures Price/SMA/Perf. Collect all snapshot cells in document order and pair
+    # them sequentially.
+    cells = soup.find_all("td", class_="snapshot-td2")
+    if not cells:
         return None
 
     snap = {}
-    for row in table.find_all("tr"):
-        cells = row.find_all("td")
-        for i in range(0, len(cells) - 1, 2):
-            snap[cells[i].get_text(strip=True)] = cells[i + 1].get_text(strip=True)
+    for i in range(0, len(cells) - 1, 2):
+        snap[cells[i].get_text(strip=True)] = cells[i + 1].get_text(strip=True)
 
     # Sector and Industry are in tab-link anchors with hrefs like f=sec_* and f=ind_*
     sector = ""
