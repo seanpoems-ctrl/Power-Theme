@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-30 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On Momentum Continues",
+    "spy_price": 746.77,
+    "spy_change_pct": 0.78,
+    "vix": 16.45,
+    "hy_oas": 2.8,
+    "yield_curve": 0.28,
+    "credit_status": "Complacent",
+    "s5fi": 60.3,
+    "mmth": 64.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AVAV",
+          "company": "AeroVironment Inc.",
+          "reason": "Strong 'Beat & Raise' earnings report today signals robust financial performance and positive forward guidance, attracting significant investor interest."
+        },
+        {
+          "ticker": "SHAZ",
+          "company": "Shazam Entertainment Limited",
+          "reason": "Disclosure of US$1.6 Billion Strategic Financing and a 10% Stake provides a substantial capital injection and validates its market position."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Trading primarily on established technical levels and general sector flows, lacking a fresh, specific fundamental catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-30 09:11 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -1957,44 +1995,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Apple saw continued attention today amidst ongoing discussions about its upcoming developer conference and rumored mixed-reality headset updates."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-09 20:41 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Caution Prevails",
-    "spy_price": 737.05,
-    "spy_change_pct": -0.29,
-    "vix": 19.87,
-    "hy_oas": 2.75,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 57.2,
-    "mmth": 63.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "LLY shares surged after announcing positive Phase 3 trial results for its new metabolic drug, exceeding expectations and boosting future revenue projections."
-        },
-        {
-          "ticker": "ORCL",
-          "company": "Oracle Corporation",
-          "reason": "Oracle secured a massive multi-year cloud services contract with a major government agency, solidifying its position in the public sector cloud market."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Profit-taking continues in high-beta tech names like NVIDIA following recent strong gains, with institutional selling pressure noted on technical charts."
         }
       ]
     }
