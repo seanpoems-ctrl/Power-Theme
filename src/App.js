@@ -10032,8 +10032,31 @@ const DailyWatchlistTab = ({ data }) => {
       .slice(0, 15);
   }, [screenerStocks, allStocks, tickerThemeMap]);
 
-  // ── Top Themes ── first 5 from thematic data (already ranked)
-  const topThemes = data?.themes?.slice(0, 5) ?? [];
+  // ── Top Themes ── prefer the rich hierarchical data.themes; fall back to the
+  // lighter theme_rankings when that array is empty (scraper sometimes ships
+  // theme_rankings without the per-stock theme detail) so Leading/Weak Themes
+  // still render. Synthesized themes carry theme-level perf + tickers enriched
+  // from screenerMap.
+  const displayThemes = React.useMemo(() => {
+    if (data?.themes?.length) return data.themes;
+    const rk = data?.theme_rankings ?? [];
+    return [...rk]
+      .sort((a, b) => (b.rs_score ?? 0) - (a.rs_score ?? 0))
+      .map(r => ({
+        name: r.name,
+        _ranking: true,
+        perf_1d: r.perf_1d, perf_1m: r.perf_1m, perf_3m: r.perf_3m,
+        rs_score: r.rs_score,
+        subthemes: [{
+          name: r.name,
+          stocks: (r._tickers ?? []).map(tk => {
+            const sc = screenerMap[tk] || {};
+            return { ticker: tk, ...sc, rs_52w: sc.rs_52w ?? sc.rs_score };
+          }),
+        }],
+      }));
+  }, [data, screenerMap]);
+  const topThemes = displayThemes.slice(0, 5);
 
   // ── Gapper Watch ── conviction ≥ 55
   const topGappers = (gapperData?.gappers ?? []).filter(g => (g.conviction ?? 0) >= 55).slice(0, 6);
@@ -10132,9 +10155,11 @@ const DailyWatchlistTab = ({ data }) => {
               const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
               const perfKey = perfMode === "1d" ? "perf_1d" : perfMode === "1m" ? "perf_1m" : "perf_3m";
               const topStocks = stocks.slice(0, 5);
-              const perf = topStocks.length
-                ? topStocks.reduce((acc, st) => acc + (st[perfKey] ?? 0), 0) / topStocks.length
-                : 0;
+              const perf = theme._ranking
+                ? (theme[perfKey] ?? 0)
+                : (topStocks.length
+                    ? topStocks.reduce((acc, st) => acc + (st[perfKey] ?? 0), 0) / topStocks.length
+                    : 0);
               return (
                 <div key={theme.name}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40 cursor-pointer hover:bg-zinc-700/50 hover:border-zinc-600/60 transition-colors"
@@ -10210,7 +10235,11 @@ const DailyWatchlistTab = ({ data }) => {
           sub="Above SMA20/50/200 · ≤8% from 52W high · RS≥75 · ADR≥4%"
         />
         {cleanBases.length === 0 ? (
-          <p className="text-sm text-zinc-500 italic py-4">No stocks meeting all criteria right now — market may be extended or in correction.</p>
+          <p className="text-sm text-zinc-500 italic py-4">
+            {!data?.themes?.length
+              ? "Theme stock detail unavailable in the latest scrape — Clean Bases needs per-stock SMA data (pending a thematic scraper refresh)."
+              : "No stocks meeting all criteria right now — market may be extended or in correction."}
+          </p>
         ) : (
           <div className="overflow-x-auto rounded-lg border border-zinc-800">
             <table className="w-full text-xs border-collapse">
@@ -10350,7 +10379,11 @@ const DailyWatchlistTab = ({ data }) => {
               sub="Below SMA20/50/200 · RS≤40 · ADR≥4% · down >5% on 1M"
             />
             {shortCandidates.length === 0 ? (
-              <p className="text-sm text-zinc-500 italic py-4">No stocks meeting short criteria — market may be in uptrend with broad participation.</p>
+              <p className="text-sm text-zinc-500 italic py-4">
+                {!data?.themes?.length
+                  ? "Theme stock detail unavailable in the latest scrape — Short Candidates needs per-stock SMA data (pending a thematic scraper refresh)."
+                  : "No stocks meeting short criteria — market may be in uptrend with broad participation."}
+              </p>
             ) : (
               <div className="overflow-x-auto rounded-lg border border-zinc-800">
                 <table className="w-full text-xs border-collapse">
@@ -10408,10 +10441,12 @@ const DailyWatchlistTab = ({ data }) => {
           <div>
             <Sec title="Weak Themes — Avoid / Short Bias" sub="worst performing themes" />
             <div className="space-y-1.5">
-              {[...(data?.themes ?? [])].reverse().slice(0, 5).map((theme, i) => {
+              {[...displayThemes].reverse().slice(0, 5).map((theme, i) => {
                 const stocks = theme.subthemes?.flatMap(s => s.stocks || []) ?? [];
                 const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
-                const perf1m = stocks.slice(0, 5).reduce((s, st) => s + (st.perf_1m ?? 0), 0) / Math.min(stocks.length, 5);
+                const perf1m = theme._ranking
+                  ? (theme.perf_1m ?? 0)
+                  : stocks.slice(0, 5).reduce((s, st) => s + (st.perf_1m ?? 0), 0) / Math.min(stocks.length, 5);
                 return (
                   <div key={theme.name} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40">
                     <span className="text-zinc-600 font-mono text-[11px] w-4 shrink-0">{i + 1}</span>
