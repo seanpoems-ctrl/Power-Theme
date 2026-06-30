@@ -43,7 +43,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase --autostash
-          git add etf_master.json etf_health.json etf_candidates.json \
+          git add etf_master.json etf_health.json public/etf_candidates.json \
                   public/etf_metadata.json public/etf_map.json public/etf_rs.json src/etf_map.json
           git diff --staged --quiet || git commit -m "chore: ETF maintenance $(date -u +%Y-%m-%d) (prune stale + refresh candidates)"
           pushed=false

@@ -49,7 +49,7 @@ except Exception:
 ROOT = Path(__file__).parent
 MASTER_PATH     = ROOT / "etf_master.json"
 HEALTH_PATH     = ROOT / "etf_health.json"
-CANDIDATES_PATH = ROOT / "etf_candidates.json"
+CANDIDATES_PATH = ROOT / "public" / "etf_candidates.json"  # served to the dashboard
 
 STALE_DAYS       = 10   # no price bar within this many days → stale this run
 PRUNE_THRESHOLD  = 3    # consecutive stale runs before auto-removal

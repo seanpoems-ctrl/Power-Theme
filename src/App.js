@@ -8880,6 +8880,109 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
 // Rolls up the per-ETF RS data one level up: ranks the 12 theme-CATEGORIES so you
 // can see top-down which area of the market money is rotating into, before drilling
 // into individual baskets (Flip Scanner) or tickers (RS table).
+// ── Pending ETF Candidates — review inbox surfaced in-dashboard ───────────────
+// Reads public/etf_candidates.json (produced weekly by etf_maintenance.py). The site
+// is static so it can't write etf_master.json; instead you select the ones you want
+// and copy ready-to-paste JSON entries (or just send the tickers to add).
+const EtfCandidatesPanel = () => {
+  const [data, setData]     = useState(null);
+  const [inMaster, setInMaster] = useState(new Set()); // tickers already promoted
+  const [open, setOpen]     = useState(() => { try { return localStorage.getItem("etf_candidates_open") === "1"; } catch { return false; } });
+  const [selected, setSelected] = useState({});
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/etf_candidates.json?v=${Date.now()}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d?.candidates) setData(d); })
+      .catch(() => {});
+    // Self-correct: hide candidates already added to the master
+    fetch(`${process.env.PUBLIC_URL}/etf_metadata.json?v=${Date.now()}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (Array.isArray(d)) setInMaster(new Set(d.map(e => e.ticker))); })
+      .catch(() => {});
+  }, []);
+
+  if (!data || !data.candidates?.length) return null;
+  const cands = data.candidates.filter(c => !inMaster.has(c.ticker));
+  if (!cands.length) return null;
+
+  const toggleOpen = () => setOpen(o => { const n = !o; try { localStorage.setItem("etf_candidates_open", n ? "1" : "0"); } catch { /* quota */ } return n; });
+  const toggleSel = t => setSelected(s => ({ ...s, [t]: !s[t] }));
+  const selCount = Object.values(selected).filter(Boolean).length;
+
+  const byCat = {};
+  for (const c of cands) (byCat[c.category] ||= []).push(c);
+
+  const copyEntries = () => {
+    const chosen = cands.filter(c => selected[c.ticker]);
+    const list = chosen.length ? chosen : cands;
+    const obj = {};
+    for (const c of list) obj[c.ticker] = { category: c.category, label: c.label, type: c.type, liquid: c.liquid };
+    const json = JSON.stringify(obj, null, 2);
+    const inner = json.slice(json.indexOf("\n") + 1, json.lastIndexOf("\n")); // strip outer { }
+    try { navigator.clipboard.writeText(inner); setCopied(true); setTimeout(() => setCopied(false), 2000); } catch { /* no clipboard */ }
+  };
+
+  const gen = data.generated_at ? new Date(data.generated_at).toLocaleDateString() : null;
+
+  return (
+    <div className="mb-5 border border-zinc-700/40 bg-zinc-900/40 rounded-xl">
+      <button onClick={toggleOpen} className="w-full flex items-center gap-2 px-4 py-3 text-left hover:bg-zinc-800/30 transition-colors rounded-xl">
+        <span className="text-amber-400 text-[13px]">⏳</span>
+        <span className="text-[12px] font-bold text-zinc-300 uppercase tracking-wider">Pending ETF Candidates</span>
+        <span className="text-[11px] font-mono text-amber-300 bg-amber-500/15 border border-amber-500/30 rounded px-1.5 py-0.5">{cands.length}</span>
+        {gen && <span className="text-[10px] text-zinc-600 font-mono">scanned {gen}</span>}
+        <span className="ml-auto text-zinc-500 text-[11px]">{open ? "▲ hide" : "▼ review"}</span>
+      </button>
+
+      {open && (
+        <div className="px-4 pb-4">
+          <p className="text-[11px] text-zinc-500 mb-3 leading-snug">
+            Auto-discovered weekly and classified by Gemini — <span className="text-zinc-400">not yet added</span>. Tick the ones you want, hit copy,
+            and paste into <span className="font-mono text-zinc-400">etf_master.json</span> (or just send the tickers to Claude).
+          </p>
+
+          <div className="flex items-center gap-2 mb-3">
+            <button onClick={copyEntries}
+              className="text-[11px] font-semibold px-2.5 py-1 rounded bg-blue-600/25 text-blue-300 border border-blue-500/40 hover:bg-blue-600/40 transition-colors">
+              📋 Copy {selCount ? `${selCount} selected` : "all"} for etf_master.json
+            </button>
+            {selCount > 0 && (
+              <button onClick={() => setSelected({})} className="text-[10px] text-zinc-500 hover:text-zinc-300">clear</button>
+            )}
+            {copied && <span className="text-[11px] text-emerald-400">✓ copied</span>}
+          </div>
+
+          <div className="space-y-3">
+            {Object.entries(byCat).sort(([a], [b]) => a.localeCompare(b)).map(([cat, list]) => (
+              <div key={cat}>
+                <div className="text-[10px] uppercase tracking-wide text-zinc-600 font-semibold mb-1">{cat}</div>
+                <div className="space-y-0.5">
+                  {[...list].sort((a, b) => b.avg_dollar_vol - a.avg_dollar_vol).map(c => (
+                    <label key={c.ticker}
+                      className={`flex items-center gap-2 px-2 py-1 rounded cursor-pointer text-[11px] transition-colors ${selected[c.ticker] ? "bg-blue-500/10 border border-blue-500/20" : "hover:bg-zinc-800/40 border border-transparent"}`}>
+                      <input type="checkbox" checked={!!selected[c.ticker]} onChange={() => toggleSel(c.ticker)}
+                        className="accent-blue-500 w-3 h-3" />
+                      <span className="font-mono font-bold text-cyan-400 w-12">{c.ticker}</span>
+                      <span className="text-zinc-300 w-44 truncate">{c.label}</span>
+                      <span className={`text-[9px] px-1 rounded ${c.liquid ? "bg-emerald-500/15 text-emerald-400" : "bg-zinc-700/40 text-zinc-500"}`}>
+                        {c.liquid ? "LIQUID" : "niche"}
+                      </span>
+                      <span className="font-mono text-zinc-500 w-16 text-right">${(c.avg_dollar_vol / 1e6).toFixed(0)}M</span>
+                      <span className="text-zinc-600 truncate flex-1">{c.name}</span>
+                    </label>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
   const [sortKey, setSortKey] = useState("score");      // "score" | "perf_1w" | "perf_1m"
   const [holdingsModal, setHoldingsModal] = useState(null);
@@ -10092,6 +10195,7 @@ const DailyWatchlistTab = ({ data }) => {
           <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
+          <EtfCandidatesPanel />
         </div>
       )}
 
