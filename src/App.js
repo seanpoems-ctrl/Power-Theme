@@ -5069,9 +5069,34 @@ async function fetchMajorMarketNews() {
   } catch { return []; }
 }
 
+// Shared Gemini text generator — retries with backoff on transient failures
+// (429 rate-limit, 5xx, network blips, or empty responses) so the AI panels don't
+// silently fail on a single hiccup. Returns cleaned text, or null after all retries.
+async function geminiGenerateText(prompt, { retries = 2 } = {}) {
+  if (!MARKET_SITUATION_GEMINI_KEY) return null;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_SITUATION_GEMINI_KEY}`;
+  const body = {
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: { temperature: 0.3, maxOutputTokens: 8192, thinkingConfig: { thinkingBudget: 2048 } },
+  };
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const res = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+      if (res.ok) {
+        const json = await res.json();
+        const parts = json?.candidates?.[0]?.content?.parts || [];
+        const raw = parts.filter(p => !p.thought).map(p => p.text || "").join("").trim();
+        if (raw) return raw.replace(/\*\*(.+?)\*\*/g, "$1").replace(/\*(.+?)\*/g, "$1");
+      }
+      // non-OK (429/5xx) or empty body → fall through to backoff + retry
+    } catch { /* network error → retry */ }
+    if (attempt < retries) await new Promise(r => setTimeout(r, 900 * (attempt + 1)));
+  }
+  return null;
+}
+
 // marketMove: null | { direction: 'drop' | 'surge', spy_pct: number, qqq_pct: number }
 async function fetchMarketSituation(payload, newsItems = [], marketMove = null) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_SITUATION_GEMINI_KEY}`;
   const hasNews = newsItems.length > 0;
   const hasMove = marketMove !== null;
   const needsExtra = hasNews || hasMove;
@@ -5123,27 +5148,20 @@ async function fetchMarketSituation(payload, newsItems = [], marketMove = null) 
     `Market data:\n${JSON.stringify(payload, null, 2)}` +
     newsSection;
 
-  const body = {
-    contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.3, maxOutputTokens: 8192, thinkingConfig: { thinkingBudget: 2048 } },
-  };
-  const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-  const json = await res.json();
-  const parts = json?.candidates?.[0]?.content?.parts || [];
-  const raw = parts.filter(p => !p.thought).map(p => p.text || "").join("").trim();
-  return raw ? raw.replace(/\*\*(.+?)\*\*/g, "$1").replace(/\*(.+?)\*/g, "$1") : null;
+  return geminiGenerateText(prompt);
 }
 
 const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
   const [text, setText]           = useState(null);
   const [loading, setLoading]     = useState(false);
+  const [failed, setFailed]       = useState(false);
   const [newsCount, setNewsCount] = useState(0);
   const [marketMove, setMarketMove] = useState(null); // { direction, spy_pct, qqq_pct } | null
   const todayKey = new Date().toISOString().slice(0, 10);
 
   const doFetch = useCallback(async () => {
     if (!MARKET_SITUATION_GEMINI_KEY || !mc) return;
-    setLoading(true);
+    setLoading(true); setFailed(false);
 
     // Parallel: fetch news + compute market move trigger from today's SPY/QQQ change
     const newsItems = await fetchMajorMarketNews();
@@ -5186,15 +5204,15 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
     fetchMarketSituation(payload, newsItems, move)
       .then(t => {
         if (t) {
-          setText(t);
+          setText(t); setFailed(false);
           try {
             localStorage.setItem(MARKET_SITUATION_CACHE_KEY, JSON.stringify({
               date: todayKey, text: t, newsCount: newsItems.length, marketMove: move,
             }));
           } catch { /* quota */ }
-        }
+        } else setFailed(true);
       })
-      .catch(() => {})
+      .catch(() => setFailed(true))
       .finally(() => setLoading(false));
   }, [mc, internalsData, bmLatest, todayKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -5274,7 +5292,12 @@ const MarketSituationBlock = ({ mc, internalsData, bmLatest }) => {
           ))}
         </div>
       )}
-      {!loading && !text && MARKET_SITUATION_GEMINI_KEY && (
+      {!loading && !text && failed && MARKET_SITUATION_GEMINI_KEY && (
+        <button onClick={doFetch} className="text-[12px] text-amber-400/90 hover:text-amber-300 italic">
+          ⚠ Couldn't generate (Gemini busy) — tap to retry
+        </button>
+      )}
+      {!loading && !text && !failed && MARKET_SITUATION_GEMINI_KEY && (
         <p className="text-[12px] text-zinc-600 italic">Awaiting data…</p>
       )}
     </div>
@@ -8887,7 +8910,6 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
 const ETF_BRIEF_CACHE_KEY = "gemini_etf_brief_v1";
 
 async function fetchEtfBrief(payload) {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_SITUATION_GEMINI_KEY}`;
   const prompt =
     `You are a senior market analyst writing a concise morning ETF-rotation brief for a swing trader. ` +
     `The data is a relative-strength rollup of ~180 US ETFs grouped into 12 theme-categories (Category Score = median RS percentile 0–100 of the baskets in it; perf medians for 1W/1M/3M; the top "leader" basket; the pure-sector "anchor"; and count of active RS "flips" = baskets whose RS is sharply accelerating vs their anchor). ` +
@@ -8896,20 +8918,13 @@ async function fetchEtfBrief(payload) {
     `Paragraph 2 (The tell): Flag any category strong long-term (high 3M) but rolling over short-term (negative 1W/1M) — the early warning. Say where the active flips are and whether they fire INSIDE strong categories (trust them) or weak ones (counter-trend — fade/caution).\n` +
     `Paragraph 3 (Action): Name the safest category setups (top on BOTH Score and momentum) with 2–3 specific leader ETF tickers to drill into, and what to avoid (bottom categories). Be specific with tickers and numbers, tight and tactical.\n\n` +
     `Data:\n${JSON.stringify(payload, null, 2)}`;
-  const body = {
-    contents: [{ parts: [{ text: prompt }] }],
-    generationConfig: { temperature: 0.3, maxOutputTokens: 8192, thinkingConfig: { thinkingBudget: 2048 } },
-  };
-  const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
-  const json = await res.json();
-  const parts = json?.candidates?.[0]?.content?.parts || [];
-  const raw = parts.filter(p => !p.thought).map(p => p.text || "").join("").trim();
-  return raw ? raw.replace(/\*\*(.+?)\*\*/g, "$1").replace(/\*(.+?)\*/g, "$1") : null;
+  return geminiGenerateText(prompt);
 }
 
 const EtfRotationBrief = ({ etfRsData }) => {
   const [text, setText]       = useState(null);
   const [loading, setLoading] = useState(false);
+  const [failed, setFailed]   = useState(false);
   const todayKey = new Date().toISOString().slice(0, 10);
 
   const median = (arr) => {
@@ -8949,10 +8964,13 @@ const EtfRotationBrief = ({ etfRsData }) => {
   const doFetch = useCallback(() => {
     const payload = buildPayload();
     if (!MARKET_SITUATION_GEMINI_KEY || !payload) return;
-    setLoading(true);
+    setLoading(true); setFailed(false);
     fetchEtfBrief(payload)
-      .then(t => { if (t) { setText(t); try { localStorage.setItem(ETF_BRIEF_CACHE_KEY, JSON.stringify({ date: todayKey, text: t })); } catch { /* quota */ } } })
-      .catch(() => {})
+      .then(t => {
+        if (t) { setText(t); try { localStorage.setItem(ETF_BRIEF_CACHE_KEY, JSON.stringify({ date: todayKey, text: t })); } catch { /* quota */ } }
+        else setFailed(true);
+      })
+      .catch(() => setFailed(true))
       .finally(() => setLoading(false));
   }, [buildPayload, todayKey]);
 
@@ -8987,7 +9005,12 @@ const EtfRotationBrief = ({ etfRsData }) => {
       {paragraphs.length > 0 && (
         <div className="space-y-3">{paragraphs.map((p, i) => <p key={i} className="text-[13px] text-zinc-200 leading-relaxed">{p}</p>)}</div>
       )}
-      {!loading && !text && MARKET_SITUATION_GEMINI_KEY && <p className="text-[12px] text-zinc-600 italic">Awaiting ETF data…</p>}
+      {!loading && !text && failed && MARKET_SITUATION_GEMINI_KEY && (
+        <button onClick={doFetch} className="text-[12px] text-amber-400/90 hover:text-amber-300 italic">
+          ⚠ Couldn't generate the brief (Gemini busy) — tap to retry
+        </button>
+      )}
+      {!loading && !text && !failed && MARKET_SITUATION_GEMINI_KEY && <p className="text-[12px] text-zinc-600 italic">Awaiting ETF data…</p>}
     </div>
   );
 };
