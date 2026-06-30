@@ -10088,6 +10088,130 @@ const DailyWatchlistTab = ({ data }) => {
     </div>
   );
 
+  // Shared setup panels — rendered at the bottom of BOTH the Long and Short tabs.
+  // On the Short tab, Clean Bases shows "what's strong (don't short these)" context
+  // and Gapper Watch surfaces news movers (fade/gap candidates).
+  const cleanBasesSection = (
+    <div>
+      <Sec
+        title="Clean Bases — Buy Watch"
+        badge={cleanBases.length}
+        sub="Above SMA20/50/200 · ≤8% from 52W high · RS≥75 · ADR≥4%"
+      />
+      {cleanBases.length === 0 ? (
+        <p className="text-sm text-zinc-500 italic py-4">
+          {!data?.themes?.length
+            ? "Theme stock detail unavailable in the latest scrape — Clean Bases needs per-stock SMA data (pending a thematic scraper refresh)."
+            : "No stocks meeting all criteria right now — market may be extended or in correction."}
+        </p>
+      ) : (
+        <div className="overflow-x-auto rounded-lg border border-zinc-800">
+          <table className="w-full text-xs border-collapse">
+            <thead>
+              <tr className="bg-zinc-900 border-b border-zinc-800 text-zinc-500 text-[11px] uppercase tracking-wide select-none">
+                {[
+                  { col: "ticker",        label: "Ticker",   align: "left",  cls: "" },
+                  { col: "company",       label: "Company",  align: "left",  cls: "hidden md:table-cell" },
+                  { col: "theme",         label: "Theme",    align: "left",  cls: "hidden lg:table-cell" },
+                  { col: "rs_52w",        label: "RS",       align: "right", cls: "" },
+                  { col: "adr_pct",       label: "ADR%",     align: "right", cls: "" },
+                  { col: "dist_52w_high", label: "52W Dist", align: "right", cls: "" },
+                  { col: "dollar_volume", label: "$Vol",     align: "right", cls: "hidden sm:table-cell" },
+                  { col: "perf_1m",       label: "1M%",      align: "right", cls: "hidden sm:table-cell" },
+                  { col: "setup",         label: "Setup",    align: "left",  cls: "" },
+                ].map(({ col, label, align, cls }) => (
+                  <th key={col}
+                      onClick={() => handleSort(col)}
+                      className={`px-3 py-2 font-medium cursor-pointer hover:text-zinc-300 transition-colors ${align === "right" ? "text-right" : "text-left"} ${cls}`}>
+                    {label}<SortIcon col={col}/>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {cleanBases.map((s, i) => (
+                <tr key={s.ticker} className={`border-b border-zinc-800/50 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/30"}`}>
+                  <td className="px-3 py-2">
+                    <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noopener noreferrer"
+                       className="font-mono font-bold text-cyan-400 hover:underline">{s.ticker}</a>
+                  </td>
+                  <td className="px-3 py-2 hidden md:table-cell">
+                    <span className="text-zinc-400 max-w-[150px] truncate block">{s.company}</span>
+                  </td>
+                  <td className="px-3 py-2 hidden lg:table-cell">
+                    <span className="text-zinc-600 max-w-[140px] truncate block text-[11px]">{s.theme}</span>
+                  </td>
+                  <td className={`px-3 py-2 text-right font-mono font-bold ${rsCol(s.rs_52w)}`}>{s.rs_52w ?? "—"}</td>
+                  <td className="px-3 py-2 text-right font-mono text-zinc-300">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
+                  <td className={`px-3 py-2 text-right font-mono font-semibold ${distCol(s.dist_52w_high)}`}>
+                    {s.dist_52w_high != null ? `${s.dist_52w_high.toFixed(1)}%` : "—"}
+                  </td>
+                  <td className="px-3 py-2 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtDvol(s.dollar_volume)}</td>
+                  <td className={`px-3 py-2 text-right font-mono font-semibold hidden sm:table-cell ${(s.perf_1m ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                    {fmtPct(s.perf_1m)}
+                  </td>
+                  <td className="px-3 py-2">
+                    <div className="flex gap-1 flex-wrap">
+                      {s.vcp_stage1 && <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30">VCP</span>}
+                      {s.tight      && <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30">Tight</span>}
+                      {s.vdu        && <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30">VDU</span>}
+                      {!s.vcp_stage1 && !s.tight && !s.vdu && <span className="text-zinc-700 text-[9px]">—</span>}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+
+  const gapperWatchSection = (
+    topGappers.length > 0 ? (
+      <div>
+        <Sec title="Gapper Watch" sub={`${gapperData?.scan_time ?? ""} · conviction ≥55`} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          {topGappers.map(g => {
+            const topHeadline = (g.headlines ?? []).find(h => h && h.length > 10);
+            return (
+              <div key={g.ticker} className="px-3 py-2.5 rounded-lg bg-zinc-800/60 border border-zinc-700/40 flex flex-col gap-1.5">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="font-mono font-bold text-cyan-400 text-sm">{g.ticker}</span>
+                    <span className="text-emerald-400 font-mono font-bold text-sm">+{g.gap_pct != null ? g.gap_pct.toFixed(1) : "—"}%</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    {g.category && (
+                      <span className="text-[10px] px-1.5 py-0.5 rounded border bg-amber-500/10 text-amber-300 border-amber-500/30 font-medium">{g.category}</span>
+                    )}
+                    <span className="text-[10px] font-mono text-zinc-500">Conv:{g.conviction}</span>
+                  </div>
+                </div>
+                {g.reasoning && (
+                  <p className="text-[11px] text-zinc-200 leading-snug line-clamp-3">{g.reasoning}</p>
+                )}
+                {topHeadline && (
+                  <p className="text-[10px] text-zinc-500 leading-snug line-clamp-2 border-t border-zinc-700/50 pt-1">
+                    📰 {topHeadline}
+                  </p>
+                )}
+                {g.hypothesis && (
+                  <p className="text-[10px] text-amber-400/80 leading-snug line-clamp-1">▸ {g.hypothesis}</p>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    ) : (
+      <div>
+        <Sec title="Gapper Watch" sub="pre-market scan" />
+        <p className="text-sm text-zinc-600 italic">No high-conviction gappers today (scan runs 8:05 AM ET on trading days).</p>
+      </div>
+    )
+  );
+
   return (
     <>
     <div className="max-w-[1400px] mx-auto px-4 pt-4 pb-8 space-y-8">
@@ -10227,129 +10351,9 @@ const DailyWatchlistTab = ({ data }) => {
         </div>
       </div>
 
-      {/* ── Clean Bases ────────────────────────────────────── */}
-      <div>
-        <Sec
-          title="Clean Bases — Buy Watch"
-          badge={cleanBases.length}
-          sub="Above SMA20/50/200 · ≤8% from 52W high · RS≥75 · ADR≥4%"
-        />
-        {cleanBases.length === 0 ? (
-          <p className="text-sm text-zinc-500 italic py-4">
-            {!data?.themes?.length
-              ? "Theme stock detail unavailable in the latest scrape — Clean Bases needs per-stock SMA data (pending a thematic scraper refresh)."
-              : "No stocks meeting all criteria right now — market may be extended or in correction."}
-          </p>
-        ) : (
-          <div className="overflow-x-auto rounded-lg border border-zinc-800">
-            <table className="w-full text-xs border-collapse">
-              <thead>
-                <tr className="bg-zinc-900 border-b border-zinc-800 text-zinc-500 text-[11px] uppercase tracking-wide select-none">
-                  {[
-                    { col: "ticker",        label: "Ticker",   align: "left",  cls: "" },
-                    { col: "company",       label: "Company",  align: "left",  cls: "hidden md:table-cell" },
-                    { col: "theme",         label: "Theme",    align: "left",  cls: "hidden lg:table-cell" },
-                    { col: "rs_52w",        label: "RS",       align: "right", cls: "" },
-                    { col: "adr_pct",       label: "ADR%",     align: "right", cls: "" },
-                    { col: "dist_52w_high", label: "52W Dist", align: "right", cls: "" },
-                    { col: "dollar_volume", label: "$Vol",     align: "right", cls: "hidden sm:table-cell" },
-                    { col: "perf_1m",       label: "1M%",      align: "right", cls: "hidden sm:table-cell" },
-                    { col: "setup",         label: "Setup",    align: "left",  cls: "" },
-                  ].map(({ col, label, align, cls }) => (
-                    <th key={col}
-                        onClick={() => handleSort(col)}
-                        className={`px-3 py-2 font-medium cursor-pointer hover:text-zinc-300 transition-colors ${align === "right" ? "text-right" : "text-left"} ${cls}`}>
-                      {label}<SortIcon col={col}/>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {cleanBases.map((s, i) => (
-                  <tr key={s.ticker} className={`border-b border-zinc-800/50 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/30"}`}>
-                    <td className="px-3 py-2">
-                      <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noopener noreferrer"
-                         className="font-mono font-bold text-cyan-400 hover:underline">{s.ticker}</a>
-                    </td>
-                    <td className="px-3 py-2 hidden md:table-cell">
-                      <span className="text-zinc-400 max-w-[150px] truncate block">{s.company}</span>
-                    </td>
-                    <td className="px-3 py-2 hidden lg:table-cell">
-                      <span className="text-zinc-600 max-w-[140px] truncate block text-[11px]">{s.theme}</span>
-                    </td>
-                    <td className={`px-3 py-2 text-right font-mono font-bold ${rsCol(s.rs_52w)}`}>{s.rs_52w ?? "—"}</td>
-                    <td className="px-3 py-2 text-right font-mono text-zinc-300">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
-                    <td className={`px-3 py-2 text-right font-mono font-semibold ${distCol(s.dist_52w_high)}`}>
-                      {s.dist_52w_high != null ? `${s.dist_52w_high.toFixed(1)}%` : "—"}
-                    </td>
-                    <td className="px-3 py-2 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtDvol(s.dollar_volume)}</td>
-                    <td className={`px-3 py-2 text-right font-mono font-semibold hidden sm:table-cell ${(s.perf_1m ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
-                      {fmtPct(s.perf_1m)}
-                    </td>
-                    <td className="px-3 py-2">
-                      <div className="flex gap-1 flex-wrap">
-                        {s.vcp_stage1 && <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30">VCP</span>}
-                        {s.tight      && <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30">Tight</span>}
-                        {s.vdu        && <span className="px-1.5 py-0.5 rounded text-[9px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/30">VDU</span>}
-                        {!s.vcp_stage1 && !s.tight && !s.vdu && <span className="text-zinc-700 text-[9px]">—</span>}
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+      {cleanBasesSection}
 
-      {/* ── Gapper Watch ─────────────────────────────────── */}
-      {topGappers.length > 0 && (
-        <div>
-          <Sec title="Gapper Watch" sub={`${gapperData?.scan_time ?? ""} · conviction ≥55`} />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {topGappers.map(g => {
-              const topHeadline = (g.headlines ?? []).find(h => h && h.length > 10);
-              return (
-                <div key={g.ticker} className="px-3 py-2.5 rounded-lg bg-zinc-800/60 border border-zinc-700/40 flex flex-col gap-1.5">
-                  {/* Header row */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono font-bold text-cyan-400 text-sm">{g.ticker}</span>
-                      <span className="text-emerald-400 font-mono font-bold text-sm">+{g.gap_pct != null ? g.gap_pct.toFixed(1) : "—"}%</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      {g.category && (
-                        <span className="text-[10px] px-1.5 py-0.5 rounded border bg-amber-500/10 text-amber-300 border-amber-500/30 font-medium">{g.category}</span>
-                      )}
-                      <span className="text-[10px] font-mono text-zinc-500">Conv:{g.conviction}</span>
-                    </div>
-                  </div>
-                  {/* Why it's gapping — Gemini reasoning */}
-                  {g.reasoning && (
-                    <p className="text-[11px] text-zinc-200 leading-snug line-clamp-3">{g.reasoning}</p>
-                  )}
-                  {/* Top news headline */}
-                  {topHeadline && (
-                    <p className="text-[10px] text-zinc-500 leading-snug line-clamp-2 border-t border-zinc-700/50 pt-1">
-                      📰 {topHeadline}
-                    </p>
-                  )}
-                  {/* Trade strategy */}
-                  {g.hypothesis && (
-                    <p className="text-[10px] text-amber-400/80 leading-snug line-clamp-1">▸ {g.hypothesis}</p>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
-      {topGappers.length === 0 && (
-        <div>
-          <Sec title="Gapper Watch" sub="pre-market scan" />
-          <p className="text-sm text-zinc-600 italic">No high-conviction gappers today (scan runs 8:05 AM ET on trading days).</p>
-        </div>
-      )}
+      {gapperWatchSection}
 
       </div>} {/* end LONG MODE */}
 
@@ -10462,6 +10466,10 @@ const DailyWatchlistTab = ({ data }) => {
               })}
             </div>
           </div>
+
+          {cleanBasesSection}
+
+          {gapperWatchSection}
 
         </div>
       )} {/* end SHORT MODE */}
