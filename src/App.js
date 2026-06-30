@@ -8880,6 +8880,115 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
 // Rolls up the per-ETF RS data one level up: ranks the 12 theme-CATEGORIES so you
 // can see top-down which area of the market money is rotating into, before drilling
 // into individual baskets (Flip Scanner) or tickers (RS table).
+// ── ETF Rotation Brief — Gemini morning read of the category leaderboard ──────
+const ETF_BRIEF_CACHE_KEY = "gemini_etf_brief_v1";
+
+async function fetchEtfBrief(payload) {
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${MARKET_SITUATION_GEMINI_KEY}`;
+  const prompt =
+    `You are a senior market analyst writing a concise morning ETF-rotation brief for a swing trader. ` +
+    `The data is a relative-strength rollup of ~180 US ETFs grouped into 12 theme-categories (Category Score = median RS percentile 0–100 of the baskets in it; perf medians for 1W/1M/3M; the top "leader" basket; the pure-sector "anchor"; and count of active RS "flips" = baskets whose RS is sharply accelerating vs their anchor). ` +
+    `Write exactly 3 short paragraphs, NO headers or labels:\n\n` +
+    `Paragraph 1 (Rotation call): Name today's rotation in a phrase (e.g. "defensive rotation", "risk-on growth leadership", "broad risk-off"). State which categories money is rotating INTO (high Score + positive 1W/1M) and OUT of (weak/negative). Cite specific category scores and 1W/1M numbers.\n` +
+    `Paragraph 2 (The tell): Flag any category strong long-term (high 3M) but rolling over short-term (negative 1W/1M) — the early warning. Say where the active flips are and whether they fire INSIDE strong categories (trust them) or weak ones (counter-trend — fade/caution).\n` +
+    `Paragraph 3 (Action): Name the safest category setups (top on BOTH Score and momentum) with 2–3 specific leader ETF tickers to drill into, and what to avoid (bottom categories). Be specific with tickers and numbers, tight and tactical.\n\n` +
+    `Data:\n${JSON.stringify(payload, null, 2)}`;
+  const body = {
+    contents: [{ parts: [{ text: prompt }] }],
+    generationConfig: { temperature: 0.3, maxOutputTokens: 8192, thinkingConfig: { thinkingBudget: 2048 } },
+  };
+  const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  const json = await res.json();
+  const parts = json?.candidates?.[0]?.content?.parts || [];
+  const raw = parts.filter(p => !p.thought).map(p => p.text || "").join("").trim();
+  return raw ? raw.replace(/\*\*(.+?)\*\*/g, "$1").replace(/\*(.+?)\*/g, "$1") : null;
+}
+
+const EtfRotationBrief = ({ etfRsData }) => {
+  const [text, setText]       = useState(null);
+  const [loading, setLoading] = useState(false);
+  const todayKey = new Date().toISOString().slice(0, 10);
+
+  const median = (arr) => {
+    const a = arr.filter(v => v != null).sort((x, y) => x - y);
+    if (!a.length) return null;
+    const m = Math.floor(a.length / 2);
+    return a.length % 2 ? a[m] : +(((a[m - 1] + a[m]) / 2).toFixed(1));
+  };
+
+  const buildPayload = useCallback(() => {
+    const etfs = etfRsData?.etfs ?? [];
+    if (!etfs.length) return null;
+    const byCat = {};
+    for (const e of etfs) (byCat[e.category || "Other"] ||= []).push(e);
+    const rsMap = {}; for (const e of etfs) rsMap[e.ticker] = e;
+    const categories = Object.entries(byCat).map(([cat, members]) => {
+      const leader = [...members].filter(m => m.score != null).sort((a, b) => (b.score ?? 0) - (a.score ?? 0))[0];
+      const anchorTicker = members.find(m => m.anchor_ticker)?.anchor_ticker || null;
+      return {
+        category: cat,
+        score:   median(members.map(m => m.score)),
+        perf_1w: median(members.map(m => m.perf_1w)),
+        perf_1m: median(members.map(m => m.perf_1m)),
+        perf_3m: median(members.map(m => m.perf_3m)),
+        leader:  leader ? { ticker: leader.ticker, score: Math.round(leader.score) } : null,
+        anchor:  anchorTicker ? { ticker: anchorTicker, perf_1m: rsMap[anchorTicker]?.perf_1m ?? null } : null,
+        flips:   members.filter(m => m.rs_flip_signal).length,
+      };
+    }).sort((a, b) => (b.score ?? -1) - (a.score ?? -1));
+    const topFlips = etfs.filter(e => e.rs_flip_signal)
+      .sort((a, b) => (b.rs_flip_strength ?? 0) - (a.rs_flip_strength ?? 0))
+      .slice(0, 6)
+      .map(e => ({ ticker: e.ticker, category: e.category, strength_x: e.rs_flip_strength, excess_1w: e.rs_vs_anchor_1w, anchor: e.anchor_ticker }));
+    return { as_of: etfRsData.generated_at, categories, top_flips: topFlips };
+  }, [etfRsData]);
+
+  const doFetch = useCallback(() => {
+    const payload = buildPayload();
+    if (!MARKET_SITUATION_GEMINI_KEY || !payload) return;
+    setLoading(true);
+    fetchEtfBrief(payload)
+      .then(t => { if (t) { setText(t); try { localStorage.setItem(ETF_BRIEF_CACHE_KEY, JSON.stringify({ date: todayKey, text: t })); } catch { /* quota */ } } })
+      .catch(() => {})
+      .finally(() => setLoading(false));
+  }, [buildPayload, todayKey]);
+
+  useEffect(() => {
+    if (!etfRsData?.etfs?.length) return;
+    const cached = (() => { try { const r = JSON.parse(localStorage.getItem(ETF_BRIEF_CACHE_KEY)); return r?.date === todayKey ? r.text : null; } catch { return null; } })();
+    if (cached) { setText(cached); return; }
+    if (MARKET_SITUATION_GEMINI_KEY) doFetch();
+  }, [etfRsData?.etfs?.length]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (!etfRsData) return null;
+  const paragraphs = text ? text.split(/\n\n+/).filter(p => p.trim()) : [];
+
+  return (
+    <div className="mb-5 border border-blue-700/30 bg-blue-950/10 rounded-xl p-4">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <span className="text-blue-400 text-[14px]">☀️</span>
+          <span className="text-[12px] font-bold text-zinc-200 uppercase tracking-wider">Morning ETF Rotation Brief</span>
+          <span className="text-[10px] text-zinc-600 font-mono">Gemini 2.5 Flash · daily</span>
+        </div>
+        <button onClick={doFetch} disabled={loading || !MARKET_SITUATION_GEMINI_KEY}
+          className="flex items-center gap-1 text-[11px] text-zinc-500 hover:text-zinc-300 disabled:opacity-30 transition-colors">
+          <RefreshCw size={10} className={loading ? "animate-spin" : ""}/>
+          {loading ? "Thinking…" : "refresh"}
+        </button>
+      </div>
+      {!MARKET_SITUATION_GEMINI_KEY && <p className="text-[12px] text-zinc-600 italic">Set REACT_APP_GEMINI_KEY to enable</p>}
+      {loading && !text && (
+        <div className="space-y-2 py-1">{[80, 92, 70].map(w => <div key={w} className="h-2.5 bg-zinc-800 rounded animate-pulse" style={{ width: `${w}%` }}/>)}</div>
+      )}
+      {paragraphs.length > 0 && (
+        <div className="space-y-3">{paragraphs.map((p, i) => <p key={i} className="text-[13px] text-zinc-200 leading-relaxed">{p}</p>)}</div>
+      )}
+      {!loading && !text && MARKET_SITUATION_GEMINI_KEY && <p className="text-[12px] text-zinc-600 italic">Awaiting ETF data…</p>}
+    </div>
+  );
+};
+
 // ── Pending ETF Candidates — review inbox surfaced in-dashboard ───────────────
 // Reads public/etf_candidates.json (produced weekly by etf_maintenance.py). The site
 // is static so it can't write etf_master.json; instead you select the ones you want
@@ -10192,6 +10301,7 @@ const DailyWatchlistTab = ({ data }) => {
       {/* ── ETF RS TABLE ──────────────────────────────────── */}
       {mode === "etf" && (
         <div className="space-y-6">
+          <EtfRotationBrief etfRsData={etfRsData} />
           <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
