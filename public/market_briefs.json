@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-06-30 18:03 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Broad Risk-On Rally",
+    "spy_price": 746.77,
+    "spy_change_pct": 0.78,
+    "vix": 16.45,
+    "hy_oas": 2.8,
+    "yield_curve": 0.3,
+    "credit_status": "Complacent",
+    "s5fi": 60.3,
+    "mmth": 64.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "ABVX",
+          "company": "Abivax Corporation",
+          "reason": "Positive Phase 3 Clinical Data for a key therapeutic candidate drove significant investor interest and re-rated the company's future revenue potential."
+        },
+        {
+          "ticker": "SHAZ",
+          "company": "Shazam Technologies Inc.",
+          "reason": "The announcement of US$1.6 Billion in strategic financing and a 10% stake disclosure signaled strong institutional backing and growth prospects."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continued to see strong flow and momentum buying, driven by its prominent position in the broader technology sector's risk-on rally, without fresh specific news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-30 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -1960,43 +1998,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-06-09 20:50 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious Retreat & Volatility Uptick",
-    "spy_price": 737.05,
-    "spy_change_pct": -0.29,
-    "vix": 19.87,
-    "hy_oas": 2.75,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 57.2,
-    "mmth": 63.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA announced a groundbreaking new AI superchip partnership with a major cloud provider, signaling continued dominance in the AI hardware space."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla confirmed higher than expected Q2 delivery forecasts and announced a significant expansion of its European charging network, boosting investor confidence."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple saw continued attention today amidst ongoing discussions about its upcoming developer conference and rumored mixed-reality headset updates."
-        }
-      ]
-    }
   }
 ]
