@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-01 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Tech-Led Optimism",
+    "spy_price": 746.77,
+    "spy_change_pct": 0.78,
+    "vix": 16.73,
+    "hy_oas": 2.8,
+    "yield_curve": 0.3,
+    "credit_status": "Complacent",
+    "s5fi": 60.3,
+    "mmth": 64.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Amazon.com Inc. is poised for strong performance following reports of a significant new partnership with a major enterprise client for its AWS cloud computing division, alongside promising early sales data for its new AI-integrated smart home devices."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly and Company is seeing pre-market enthusiasm after announcing robust positive clinical trial data for its novel obesity treatment, which demonstrated superior efficacy and safety profiles in late-stage studies compared to existing therapies."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation continues to see elevated trading volume driven by persistent enthusiasm for artificial intelligence infrastructure, maintaining its technical uptrend without new specific company catalysts."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-06-30 18:03 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -1980,23 +2018,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-06-10 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "",
-    "spy_price": 739.22,
-    "spy_change_pct": 0.23,
-    "vix": 20.97,
-    "hy_oas": 2.75,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 57.2,
-    "mmth": 63.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
