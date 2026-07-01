@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-01 09:38 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off / Cautionary Opening",
+    "spy_price": 742.97,
+    "spy_change_pct": -0.51,
+    "vix": 16.79,
+    "hy_oas": 2.8,
+    "yield_curve": 0.3,
+    "credit_status": "Complacent",
+    "s5fi": 60.3,
+    "mmth": 64.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CRM",
+          "company": "Salesforce.com, Inc.",
+          "reason": "Announces strategic partnership with a major AI cloud provider, enhancing its generative AI capabilities and market position."
+        },
+        {
+          "ticker": "UNH",
+          "company": "UnitedHealth Group Incorporated",
+          "reason": "Receives favorable regulatory approval for new healthcare product line, projecting strong revenue growth in the upcoming quarters."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Continues to see sector rotation, with investors awaiting clarity on Q2 e-commerce trends after mixed recent reports."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-01 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -1977,44 +2015,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Microsoft saw a general market-driven decline today, reflecting broader tech sector weakness with no new specific company catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-10 10:27 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious divergence",
-    "spy_price": 737.84,
-    "spy_change_pct": 0.11,
-    "vix": 20.18,
-    "hy_oas": 2.75,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 58.4,
-    "mmth": 63.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CRM",
-          "company": "Salesforce Inc.",
-          "reason": "Reports suggest Salesforce is nearing a major strategic acquisition in the cloud integration space, potentially expanding its enterprise software dominance."
-        },
-        {
-          "ticker": "MRK",
-          "company": "Merck & Co., Inc.",
-          "reason": "Merck shares are seeing pre-market strength following positive phase 3 trial data for a new oncology drug, hinting at significant market potential."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft is trading higher on continued optimism for its AI initiatives, a recurring theme, rather than a fresh catalyst today."
         }
       ]
     }
