@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-01 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Tech Weakness / Sector Rotation",
+    "spy_price": 745.76,
+    "spy_change_pct": -0.14,
+    "vix": 16.59,
+    "hy_oas": 2.75,
+    "yield_curve": 0.3,
+    "credit_status": "Complacent",
+    "s5fi": 60.2,
+    "mmth": 64.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla rallied today after announcing better-than-expected Q2 delivery numbers, significantly exceeding analyst consensus due to robust production and strong demand in new markets."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft showed resilience after securing a major multi-billion dollar government contract for its Azure cloud and AI services, reinforcing its dominant position in enterprise solutions."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continues to experience high trading volume with short-term technical support being tested following today's broader tech sector weakness and potential profit-taking."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-01 09:38 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -1980,43 +2018,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-06-10 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Volatility Spike",
-    "spy_price": 725.43,
-    "spy_change_pct": -1.58,
-    "vix": 22.22,
-    "hy_oas": 2.78,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 50.8,
-    "mmth": 60.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "INTC",
-          "company": "Intel Corporation",
-          "reason": "Intel announced a breakthrough in quantum computing chip design today, indicating a potential long-term strategic advantage in a high-growth sector."
-        },
-        {
-          "ticker": "BA",
-          "company": "The Boeing Company",
-          "reason": "Boeing secured a major multi-billion dollar aircraft order from a key airline, boosting its commercial backlog and indicating strong demand recovery."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft saw a general market-driven decline today, reflecting broader tech sector weakness with no new specific company catalyst."
-        }
-      ]
-    }
   }
 ]
