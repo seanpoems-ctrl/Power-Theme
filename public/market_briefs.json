@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-02 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Turbulent Open, Tech Leads Decline",
+    "spy_price": 745.76,
+    "spy_change_pct": -0.14,
+    "vix": 16.69,
+    "hy_oas": 2.75,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 60.2,
+    "mmth": 64.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "UNH",
+          "company": "UnitedHealth Group",
+          "reason": "UnitedHealth Group (UNH) announced a new strategic partnership with a leading AI diagnostics firm, aiming to integrate advanced machine learning into its patient care pathways, potentially boosting efficiency and outcomes."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft (MSFT) unveiled a surprise acquisition of a prominent cybersecurity startup, signaling an aggressive expansion of its cloud security offerings and reinforcing its enterprise defense capabilities."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA (NVDA) remains a focus for algorithmic trading flows following yesterday's tech-led downturn, presenting a pure technical setup for intraday range trading."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-01 18:07 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2000,23 +2038,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-06-11 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "",
-    "spy_price": 725.43,
-    "spy_change_pct": -1.58,
-    "vix": 20.78,
-    "hy_oas": 2.78,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 50.8,
-    "mmth": 60.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
