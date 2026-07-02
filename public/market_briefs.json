@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-02 17:48 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Global Divergence / Tech Weakness",
+    "spy_price": 744.78,
+    "spy_change_pct": -0.13,
+    "vix": 16.15,
+    "hy_oas": 2.74,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 62.6,
+    "mmth": 67.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "RIVN",
+          "company": "Rivian Automotive, Inc.",
+          "reason": "Optimism surrounding Rivian R2 deliveries and new strategic partnerships drove significant pre-market gapping today."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a new strategic AI partnership to integrate advanced large language models across its enterprise suite, signaling accelerated growth in its cloud services."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA saw renewed interest on technical short-term momentum, but lacked a fresh fundamental catalyst today, making it susceptible to broader tech weakness."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-02 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2020,43 +2058,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-06-11 18:27 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Domestic Strength / Risk-On",
-    "spy_price": 737.76,
-    "spy_change_pct": 1.7,
-    "vix": 19.44,
-    "hy_oas": 2.8,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 56.9,
-    "mmth": 63.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft unveiled a groundbreaking partnership to expand its AI offerings, signaling significant revenue growth and market innovation."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA announced a new generation of data center GPUs with unprecedented processing power, further solidifying its market dominance in AI hardware."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla experienced a strong short-covering rally today, extending gains from recent positive analyst commentary and flow-driven momentum."
-        }
-      ]
-    }
   }
 ]
