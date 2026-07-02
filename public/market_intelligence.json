@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-02 07:05 ET",
+  "generated_at": "2026-07-02 09:03 ET",
   "phase": "PRE",
   "session": "Pre-Market",
   "assets": {
@@ -29,27 +29,27 @@
     },
     "^VIX": {
       "label": "VIX",
-      "price": 16.69,
+      "price": 16.0,
       "open": 17.05,
       "high": 17.05,
-      "low": 16.64,
-      "close": 16.69,
+      "low": 15.98,
+      "close": 16.0,
       "prev_open": 17.11,
       "prev_close": 16.59,
       "volume": 0,
-      "change_pct": 0.6
+      "change_pct": -3.56
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 67.58,
+      "price": 67.61,
       "open": 68.03,
       "high": 68.24,
-      "low": 67.31,
-      "close": 67.58,
+      "low": 67.04,
+      "close": 67.61,
       "prev_open": 69.98,
       "prev_close": 68.58,
-      "volume": 40224,
-      "change_pct": -1.46
+      "volume": 60374,
+      "change_pct": -1.41
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25262.37,
+      "price": 25450.17,
       "open": 25025.13,
-      "high": 25273.06,
+      "high": 25469.36,
       "low": 24994.64,
-      "close": 25262.37,
+      "close": 25450.17,
       "prev_open": 25028.93,
       "prev_close": 25040.28,
       "volume": 0,
-      "change_pct": 0.89
+      "change_pct": 1.64
     }
   },
   "fred": {
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Pre-Market Brief: July 02, 2026",
-    "mood_emoji": "🌪️",
-    "mood": "Turbulent Open, Tech Leads Decline",
-    "narrative": "Global markets are showing a mixed picture with significant tech weakness dragging down major indices, while credit spreads remain complacent. Investors are navigating a turbulent pre-market as risk assets face selling pressure, particularly in Asia and US tech.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 745.76 | -0.14% | ➡️ |\n| Nasdaq 100 ETF | 725.17 | -1.52% | 📉 |\n| VIX | 16.69 | +0.60% | 📈 |\n| Crude Oil | 67.58 | -1.46% | 📉 |\n| Nikkei 225 | 68733.15 | -2.47% | 📉 |\n| DAX | 25262.37 | +0.89% | 📈 |",
-    "macro_section": "The High Yield Credit Spread remains at a complacent 2.75%, suggesting no immediate credit distress despite broader market volatility. Concurrently, the 10Y-2Y Yield Curve is observed at a normal / steepening +0.310, which typically indicates a healthy, albeit sometimes inflationary, economic outlook. This combination implies that institutional risk appetite, while potentially cautious in specific sectors, is not broadly challenged by credit conditions or a deteriorating macro backdrop.",
-    "analysis_para1": "The global tape presents a bifurcated view, with the Nikkei 225 sharply down by -2.47% and Crude Oil falling -1.46% to $67.58, suggesting a broad risk-off tone emanating from Asian markets. Conversely, the DAX posted a positive gain of +0.89%, indicating some regional resilience in Europe. Despite these divergent international moves, the High Yield Credit Spread remains at a complacent 2.75%, implying that while specific sectors or geographies might be under pressure, the overall US credit market is not signaling systemic risk. This mixed global performance suggests a selective rather than universal shift in US risk appetite, with a potential for continued caution.",
-    "analysis_para2": "The dominant 'Why' behind today's primary flow appears to be a sector-specific positioning squeeze, particularly evident in technology and growth stocks. The Nasdaq 100 ETF's notable -1.52% decline, alongside the broader S&P 500 ETF's marginal -0.14% dip, points to unwinding of crowded long positions or profit-taking in high-beta names. This mechanical catalyst is driving observed price action as institutional investors rebalance portfolios, contributing to heightened volatility and selling pressure in previously strong segments, rather than a broad-based macro event.",
-    "analysis_para3": "Today's mechanical plan centers on observing key support levels for the S&P 500 ETF at 740 and the Nasdaq 100 ETF at 720, which could act as initial buy-the-dip zones if selling pressure subsides. Traders should look for a stabilization or bounce above these levels for potential long entries, particularly in value or defensive sectors if a rotation materializes. A breach and sustained trading below S&P 500 ETF 738 would signal a risk-off threshold, warranting a defensive posture or short entries targeting further downside. The priority TODAY is to remain agile, monitor intraday volatility, and await confirmation of either a bounce or a breakdown before committing to significant positions.",
-    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 is at 60.2% and S&P stocks above SMA200 is at 64.7%, indicating underlying breadth remains relatively healthy despite the recent pullback. Watch for sustained closes above today's open on major indices as a first sign of stabilization, or increasing VIX alongside deeper price cuts for further bearish confirmation.",
+    "mood_emoji": "😬",
+    "mood": "Tech Under Pressure, Global Divergence",
+    "narrative": "Global markets present a mixed picture today, with significant declines in Asian and US tech indices contrasted by European resilience. Despite broad market softness, credit spreads remain complacent, and volatility measures are declining.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 745.76 | -0.14% | ➡️ |\n| Nasdaq 100 ETF | 725.17 | -1.52% | 📉 |\n| VIX | 16.00 | -3.56% | 📉 |\n| Crude Oil | 67.61 | -1.41% | 📉 |\n| Nikkei 225 | 68733.15 | -2.47% | 📉 |\n| DAX | 25450.17 | +1.64% | 📈 |",
+    "macro_section": "The High Yield Credit Spread, BAMLH0A0HYM2, stands at 2.75%, signaling a complacent regime for credit markets. Concurrently, the 10-Year Minus 2-Year Yield Curve is at +0.310, indicating a normal and steepening environment. This combination suggests that while some segments of the market may be experiencing pressure, overall institutional risk appetite appears stable, not yet reflecting broad systemic stress.",
+    "analysis_para1": "The global tape presents a divergent picture this morning, with the Nikkei 225 down significantly by -2.47% and Crude Oil declining by -1.41% to $67.61, suggesting a cautious stance on global growth. In stark contrast, the DAX is showing notable strength, climbing +1.64%, indicating localized European optimism. Despite these varied international performances, the US High Yield Credit Spread (BAMLH0A0HYM2) remains complacent at 2.75%, implying that observed overseas weakness, particularly in Asia, has not yet translated into broader systemic risk concerns for US credit, thus maintaining a cautiously stable institutional risk appetite.",
+    "analysis_para2": "Today's primary flow appears driven by a sectoral rotation and profit-taking in technology stocks, evidenced by the Nasdaq 100 ETF's notable -1.52% decline, starkly contrasting with the S&P 500 ETF's minor -0.14% dip. This action suggests investors are recalibrating exposures to high-growth, high-multiple names, potentially due to subtle shifts in growth outlooks or a preemptive move ahead of future macroeconomic data. The absence of a specific negative macro catalyst points to internal market dynamics, such as unwinding crowded positions, driving this selective drawdown, rather than a broad market repricing.",
+    "analysis_para3": "Traders should closely monitor the S&P 500 ETF (currently at 745.76) for potential re-tests of yesterday's lows, with a break below 745.00 acting as a short-term risk-off threshold, potentially signaling deeper profit-taking. For the Nasdaq 100 ETF (725.17), immediate support should be watched around the 720.00 level; a failure here could trigger further downside towards 715.00. Long entries today are best sought on bounces from established support levels, particularly in defensive sectors or select European names showing resilience, while short opportunities are more prevalent in extended technology stocks. Maintain tight stop-losses and reduce overall gross exposure in high-beta names until broader market conviction returns.",
+    "technical_signal": "No reversal pattern confirmed yet. While overall market breadth remains healthy with S&P 500 stocks above their 50-day Simple Moving Average at 60.2% and above their 200-day Simple Moving Average at 64.7%, the recent dip in the Nasdaq indicates a potential re-evaluation of momentum. Watch for sustained closes below key moving averages in major indices, or a significant uptick in the VIX, as signals for a broader technical shift.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "UNH",
-          "company": "UnitedHealth Group",
-          "reason": "UnitedHealth Group (UNH) announced a new strategic partnership with a leading AI diagnostics firm, aiming to integrate advanced machine learning into its patient care pathways, potentially boosting efficiency and outcomes."
+          "ticker": "RIVN",
+          "company": "Rivian Automotive, Inc.",
+          "reason": "Positive sentiment follows news of R2 deliveries commencing earlier than expected and strategic OEM partnerships expanding market reach."
         },
         {
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
-          "reason": "Microsoft (MSFT) unveiled a surprise acquisition of a prominent cybersecurity startup, signaling an aggressive expansion of its cloud security offerings and reinforcing its enterprise defense capabilities."
+          "reason": "Analyst upgrades and strong cloud growth outlook following recent AI-powered enterprise solution announcements drive pre-market accumulation."
         }
       ],
       "c_grade": [
         {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) remains a focus for algorithmic trading flows following yesterday's tech-led downturn, presenting a pure technical setup for intraday range trading."
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Ongoing re-evaluation of e-commerce and cloud margins leads to continued technical consolidation following recent broad market volatility."
         }
       ]
     }

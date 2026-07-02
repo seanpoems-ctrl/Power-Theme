@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-02 09:03 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Tech Under Pressure, Global Divergence",
+    "spy_price": 745.76,
+    "spy_change_pct": -0.14,
+    "vix": 16.0,
+    "hy_oas": 2.75,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 60.2,
+    "mmth": 64.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "RIVN",
+          "company": "Rivian Automotive, Inc.",
+          "reason": "Positive sentiment follows news of R2 deliveries commencing earlier than expected and strategic OEM partnerships expanding market reach."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Analyst upgrades and strong cloud growth outlook following recent AI-powered enterprise solution announcements drive pre-market accumulation."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Ongoing re-evaluation of e-commerce and cloud margins leads to continued technical consolidation following recent broad market volatility."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-02 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2000,43 +2038,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-06-11 10:49 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Tech-Led Optimism / Risk-On",
-    "spy_price": 728.62,
-    "spy_change_pct": 0.44,
-    "vix": 21.55,
-    "hy_oas": 2.8,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 54.7,
-    "mmth": 61.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Google is expected to unveil significant AI advancements in its cloud platform, potentially expanding its enterprise market share."
-        },
-        {
-          "ticker": "CRM",
-          "company": "Salesforce Inc.",
-          "reason": "Salesforce announced a strategic partnership with a major global retailer to overhaul its customer experience platform, driving new growth."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon continues to see steady e-commerce and AWS cloud growth, but recent headlines are a reiteration of existing trends rather than new catalysts."
-        }
-      ]
-    }
   }
 ]
