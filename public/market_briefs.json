@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-02 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Divergent Global Optimism, US Tech Drag",
+    "spy_price": 744.78,
+    "spy_change_pct": -0.13,
+    "vix": 16.15,
+    "hy_oas": 2.74,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 62.6,
+    "mmth": 67.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "RIVN",
+          "company": "Rivian Automotive",
+          "reason": "Rivian Automotive confirmed robust demand for its upcoming R2 model alongside new strategic partnerships, fueling investor optimism for future growth."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly announced positive Phase 3 trial results for its latest Alzheimer's treatment, significantly boosting its clinical pipeline and market potential."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft experienced profit-taking following its recent strong performance, driven by broader tech sector rotation and lack of fresh bullish catalysts today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-02 09:03 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2020,23 +2058,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-06-11 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "",
-    "spy_price": 737.76,
-    "spy_change_pct": 1.7,
-    "vix": 19.44,
-    "hy_oas": 2.8,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 56.9,
-    "mmth": 63.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
