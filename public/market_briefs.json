@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-03 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Tech Growth Under Pressure",
+    "spy_price": 744.78,
+    "spy_change_pct": -0.13,
+    "vix": 15.81,
+    "hy_oas": 2.75,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 62.6,
+    "mmth": 67.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple unveils a new AR headset with breakthrough battery life and developer SDK, targeting a Q4 launch and boosting future revenue projections."
+        },
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla announces record Q2 vehicle deliveries, surpassing analyst estimates by 15%, fueled by rapid ramp-ups at its Berlin and Texas gigafactories."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA experienced significant algorithmic selling pressure today, aligning with broader tech sector de-risking ahead of the holiday weekend with no new fundamental catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-03 09:01 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2037,44 +2075,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla saw short-covering rally after a technical breakout above its 50-day moving average, with no new fundamental news driving the move."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-12 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Confident Rally / Growth Reassurance",
-    "spy_price": 741.75,
-    "spy_change_pct": 0.54,
-    "vix": 17.68,
-    "hy_oas": 2.78,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 61.1,
-    "mmth": 65.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet announced a strategic partnership with a leading automotive manufacturer to integrate its advanced AI models into next-generation autonomous driving systems, signaling significant new revenue streams."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft secured a multi-billion dollar cloud computing contract with a major government agency, reinforcing its dominance in enterprise solutions and cloud infrastructure."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA continued to benefit from general market enthusiasm for artificial intelligence, building on last week's industry conference momentum without a specific fresh news catalyst today."
         }
       ]
     }
