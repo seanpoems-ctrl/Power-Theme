@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-06 10:32 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Tech-Led Optimism Sustained",
+    "spy_price": 750.02,
+    "spy_change_pct": 0.7,
+    "vix": 16.15,
+    "hy_oas": 2.75,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 62.3,
+    "mmth": 66.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "KLAC",
+          "company": "KLA Corporation",
+          "reason": "KLA Corporation is experiencing pre-market strength following price target hikes from both Morgan Stanley and Cantor Fitzgerald, signaling renewed analyst conviction in its semiconductor equipment outlook."
+        },
+        {
+          "ticker": "AMAT",
+          "company": "Applied Materials, Inc.",
+          "reason": "Applied Materials, Inc. is gaining traction after Goldman Sachs adjusted its price target, reflecting continued positive sentiment for semiconductor manufacturing equipment demand."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation (NVDA) is a recycled candidate showing pre-market flow, indicating continued speculative interest or technical strength despite no fresh catalyst reported today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-06 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2037,44 +2075,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA Corporation extended its upward trend, driven by ongoing analyst upgrades and sustained demand for its AI hardware, rather than a specific new development today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-15 12:20 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Broad Market Risk-On Surge",
-    "spy_price": 756.25,
-    "spy_change_pct": 1.95,
-    "vix": 16.3,
-    "hy_oas": 2.71,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 66.7,
-    "mmth": 68.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Analysts lauded Apple's unveiling of a new generative AI suite for iOS, driving investor optimism about future revenue streams."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft announced a multi-billion dollar strategic partnership with a leading automotive manufacturer for cloud-based autonomous driving platforms."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA experienced continued technical buying today, extending its rally from last week's positive sentiment without new specific catalysts."
         }
       ]
     }
