@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-06 18:02 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Broad Risk-On Optimism",
+    "spy_price": 751.28,
+    "spy_change_pct": 0.87,
+    "vix": 15.57,
+    "hy_oas": 2.74,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 63.8,
+    "mmth": 67.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "KLAC",
+          "company": "KLA Corporation",
+          "reason": "Multiple prominent analyst firms, including Morgan Stanley and Cantor Fitzgerald, raised price targets, signaling strong conviction in future growth."
+        },
+        {
+          "ticker": "IREN",
+          "company": "Iris Energy",
+          "reason": "Announced a significant partnership with Nvidia for AI infrastructure, positioning it strategically in a high-growth sector."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Continues to be influenced by broader market sentiment and ongoing AI development narratives, without a distinct new fundamental catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-06 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2037,44 +2075,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla continues to benefit from overall EV sector enthusiasm, with price action driven primarily by technical momentum and retail flow."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-15 18:37 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Broad Market Risk-On Rally",
-    "spy_price": 754.83,
-    "spy_change_pct": 1.76,
-    "vix": 16.2,
-    "hy_oas": 2.71,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 63.3,
-    "mmth": 66.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA announced a groundbreaking strategic partnership with a leading global automotive manufacturer for advanced AI-driven autonomous vehicle platforms, signaling massive new revenue streams."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft unveiled its new enterprise-focused generative AI suite, integrating advanced large language models into its core productivity and cloud services, garnering immediate positive analyst reception."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple rallied today on broad market strength and systematic flow, without any specific company-related news driving the price action."
         }
       ]
     }
