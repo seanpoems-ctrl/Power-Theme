@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-06T00:08:49.952150+00:00",
+  "generated_at": "2026-07-06T23:08:57.685457+00:00",
   "data_source": "tradingview",
   "events": [
     {
@@ -3007,8 +3007,8 @@
       "time_et": "09:45",
       "event": "S&P Global Services PMI Final",
       "impact": "Low",
-      "actual": null,
-      "forecast": "51.3",
+      "actual": "51.2",
+      "forecast": "51.4",
       "previous": "50.7",
       "currency": "USD"
     },
@@ -3017,7 +3017,7 @@
       "time_et": "09:45",
       "event": "S&P Global Composite PMI Final",
       "impact": "Low",
-      "actual": null,
+      "actual": "51.9",
       "forecast": "52.2",
       "previous": "51.5",
       "currency": "USD"
@@ -3027,7 +3027,7 @@
       "time_et": "10:00",
       "event": "ISM Services Employment",
       "impact": "Low",
-      "actual": null,
+      "actual": "51.2",
       "forecast": null,
       "previous": "47.9",
       "currency": "USD"
@@ -3037,7 +3037,7 @@
       "time_et": "10:00",
       "event": "ISM Services New Orders",
       "impact": "Low",
-      "actual": null,
+      "actual": "55.1",
       "forecast": null,
       "previous": "57.3",
       "currency": "USD"
@@ -3047,7 +3047,7 @@
       "time_et": "10:00",
       "event": "ISM Services Business Activity",
       "impact": "Low",
-      "actual": null,
+      "actual": "55.4",
       "forecast": null,
       "previous": "57.7",
       "currency": "USD"
@@ -3057,8 +3057,8 @@
       "time_et": "10:00",
       "event": "ISM Services PMI",
       "impact": "Low",
-      "actual": null,
-      "forecast": "54.2",
+      "actual": "54",
+      "forecast": "54",
       "previous": "54.5",
       "currency": "USD"
     },
@@ -3067,7 +3067,7 @@
       "time_et": "10:00",
       "event": "ISM Services Prices",
       "impact": "Low",
-      "actual": null,
+      "actual": "67.7",
       "forecast": null,
       "previous": "71.3",
       "currency": "USD"
@@ -3087,7 +3087,7 @@
       "time_et": "11:30",
       "event": "3-Month Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "3.735",
       "forecast": null,
       "previous": "3.74",
       "currency": "USD"
@@ -3097,7 +3097,7 @@
       "time_et": "11:30",
       "event": "6-Month Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "3.83",
       "forecast": null,
       "previous": "3.84",
       "currency": "USD"
@@ -3128,7 +3128,7 @@
       "event": "Balance of Trade",
       "impact": "Low",
       "actual": null,
-      "forecast": "-78.8",
+      "forecast": "-78",
       "previous": "-55.9",
       "currency": "USD"
     },
@@ -3438,7 +3438,7 @@
       "event": "Consumer Credit Change",
       "impact": "Low",
       "actual": null,
-      "forecast": "17.5",
+      "forecast": "17",
       "previous": "20.73",
       "currency": "USD"
     },
@@ -3448,7 +3448,7 @@
       "event": "Initial Jobless Claims",
       "impact": "Low",
       "actual": null,
-      "forecast": "219",
+      "forecast": "220",
       "previous": "215",
       "currency": "USD"
     },
@@ -3468,7 +3468,7 @@
       "event": "Continuing Jobless Claims",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "1810",
       "previous": "1814",
       "currency": "USD"
     },
@@ -4516,6 +4516,36 @@
       "date": "2026-07-17",
       "time_et": "13:00",
       "event": "Baker Hughes Oil Rig Count",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-07-20",
+      "time_et": "10:00",
+      "event": "CB Leading Index MoM",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "0.1",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-07-20",
+      "time_et": "11:30",
+      "event": "6-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-07-20",
+      "time_et": "11:30",
+      "event": "3-Month Bill Auction",
       "impact": "Low",
       "actual": null,
       "forecast": null,
