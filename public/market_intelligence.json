@@ -1,90 +1,90 @@
 {
-  "generated_at": "2026-07-06 10:32 ET",
-  "phase": "PRE",
-  "session": "Pre-Market",
+  "generated_at": "2026-07-06 16:45 ET",
+  "phase": "POST",
+  "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 750.02,
+      "price": 751.28,
       "open": 748.74,
-      "high": 750.1,
+      "high": 752.4,
       "low": 747.41,
-      "close": 750.02,
+      "close": 751.28,
       "prev_open": 747.4,
       "prev_close": 744.78,
-      "volume": 9694610,
-      "change_pct": 0.7
+      "volume": 42581021,
+      "change_pct": 0.87
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 724.73,
-      "open": 719.7,
-      "high": 724.84,
+      "price": 722.82,
+      "open": 719.93,
+      "high": 726.08,
       "low": 718.47,
-      "close": 724.73,
+      "close": 722.82,
       "prev_open": 725.58,
       "prev_close": 712.6,
-      "volume": 9319007,
-      "change_pct": 1.7
+      "volume": 29416923,
+      "change_pct": 1.43
     },
     "^VIX": {
       "label": "VIX",
-      "price": 16.15,
+      "price": 15.57,
       "open": 16.4,
       "high": 16.5,
-      "low": 16.09,
-      "close": 16.15,
+      "low": 15.56,
+      "close": 15.57,
       "prev_open": 17.05,
       "prev_close": 16.15,
       "volume": 0,
-      "change_pct": 0.0
+      "change_pct": -3.59
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 68.69,
+      "price": 68.74,
       "open": 68.68,
       "high": 69.26,
       "low": 67.82,
-      "close": 68.69,
+      "close": 68.74,
       "prev_open": 68.03,
       "prev_close": 68.69,
-      "volume": 133422,
-      "change_pct": 0.0
+      "volume": 201669,
+      "change_pct": 0.07
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 69737.69,
-      "open": 69973.34,
-      "high": 70384.59,
-      "low": 68904.41,
-      "close": 69737.69,
-      "prev_open": 68676.06,
-      "prev_close": 69744.07,
-      "volume": 0,
-      "change_pct": -0.01
+      "price": 69744.07,
+      "open": 68676.06,
+      "high": 69788.03,
+      "low": 67609.49,
+      "close": 69744.07,
+      "prev_open": 70039.89,
+      "prev_close": 68733.15,
+      "volume": 159300000,
+      "change_pct": 1.47
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25783.7,
+      "price": 25817.89,
       "open": 25811.9,
       "high": 25900.1,
       "low": 25698.56,
-      "close": 25783.7,
+      "close": 25817.89,
       "prev_open": 25763.97,
       "prev_close": 25779.31,
       "volume": 0,
-      "change_pct": 0.02
+      "change_pct": 0.15
     }
   },
   "fred": {
-    "hy_oas": 2.75,
+    "hy_oas": 2.74,
     "yield_curve": 0.35,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 62.3,
-    "mmth": 66.4
+    "s5fi": 63.8,
+    "mmth": 67.7
   },
   "regime": {
     "credit_status": "Complacent",
@@ -98,34 +98,34 @@
     }
   },
   "analysis": {
-    "title": "Pre-Market Brief: July 06, 2026",
-    "mood_emoji": "✨",
-    "mood": "Tech-Led Optimism Sustained",
-    "narrative": "US equity markets open with significant gains, primarily driven by strong performance in the technology sector. Underlying macro indicators suggest a supportive environment for institutional risk appetite, fostering a bullish start to the trading day.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 750.02 | +0.70% | 📈 |\n| Nasdaq 100 ETF | 724.73 | +1.70% | 📈 |\n| VIX | 16.15 | +0.00% | ➡️ |\n| Crude Oil | 68.69 | +0.00% | ➡️ |\n| Nikkei 225 | 69737.69 | -0.01% | ➡️ |\n| DAX | 25783.70 | +0.02% | ➡️ |",
-    "macro_section": "The High-Yield Credit Spread currently sits at a complacent 2.75%, while the 10-Year minus 2-Year Yield Curve remains in a normal, steepening regime at +0.350. These readings collectively signal a healthy and risk-tolerant financial environment, encouraging institutional investors to maintain or increase their exposure to risk assets.",
-    "analysis_para1": "Global equity markets, as indicated by the Nikkei 225 at 69737.69 and the DAX at 25783.70, show minimal movement overnight, registering -0.01% and +0.02% respectively. Similarly, Crude Oil prices remain unchanged at $68.69. This broad stability in international markets, coupled with the complacent US High-Yield Credit Spread of 2.75%, implies an absence of significant external headwinds or tailwinds. Institutional risk appetite in the US appears to be driven by domestic factors, undeterred by the quiescent global tape.",
-    "analysis_para2": "The primary driver behind today's significant pre-market gains in US equities, particularly the Nasdaq 100 ETF's robust +1.70%, is the ongoing strength and positive sentiment surrounding Artificial Intelligence infrastructure growth and the semiconductor sector. News such as an Nvidia partnership for AI infrastructure (IREN) and multiple price target hikes for semiconductor equipment manufacturers (KLAC, AMAT) underscore investor conviction in this thematic tailwind. This sector-specific fundamental catalyst is generating substantial positive flow and momentum across technology-related stocks.",
-    "analysis_para3": "Traders should focus on confirming the initial bullish bias post-open, looking for sustained strength in leadership sectors like technology and semiconductors. Key support levels to watch are the S&P 500 ETF holding above the 745 region, and the Nasdaq 100 ETF maintaining levels above 720. Long positions can be considered on healthy pullbacks towards these identified supports, particularly in high-conviction names with fresh catalysts. A decisive break below prior day's close for the major indices would serve as a crucial risk-off threshold, signaling potential exhaustion of the current move.",
-    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 stand at a healthy 62.3%, complemented by 66.4% of S&P stocks above SMA200, indicating broad market participation and underlying strength. Despite the strong pre-market activity, traders should monitor for any signs of quick reversals post-open, but current technical breadth suggests continued upward momentum is the path of least resistance.",
+    "title": "Post-Market Brief: July 06, 2026",
+    "mood_emoji": "📈",
+    "mood": "Robust Growth / Risk-On",
+    "narrative": "US equities gained significant momentum today with technology stocks leading the advance, complemented by strong performance in global markets. Falling volatility and sustained tight credit spreads indicate a healthy appetite for risk assets.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 751.28 | +0.87% | 📈 |\n| Nasdaq 100 ETF | 722.82 | +1.43% | 📈 |\n| VIX | 15.57 | -3.59% | 📉 |\n| Crude Oil | 68.74 | +0.07% | ➡️ |\n| Nikkei 225 | 69744.07 | +1.47% | 📈 |\n| DAX | 25817.89 | +0.15% | ➡️ |",
+    "macro_section": "The High-Yield Credit Spread (BAMLH0A0HYM2) remains at a complacent 2.74%, signaling little concern for default risk among bond investors. Concurrently, the 10-Year Minus 2-Year Treasury Yield Curve (T10Y2Y) is observed in a normal, steepening state at +0.350, suggesting confidence in future economic growth. This combination implies robust institutional risk appetite, favoring equity and growth-oriented assets.",
+    "analysis_para1": "Global markets displayed a constructive tone today, with the Nikkei 225 surging by +1.47% and the DAX showing a modest gain of +0.15%. Crude Oil also registered a slight increase of +0.07%, indicative of stable demand. This broad international strength, combined with the US High-Yield Credit Spread (BAMLH0A0HYM2) holding steady at a complacent 2.74%, reinforces a strong appetite for risk among US investors. The synchronized global uplift suggests a confident outlook, mitigating fears of contagion and supporting further capital allocation into growth assets.",
+    "analysis_para2": "Today's primary market flow was mechanically driven by a confluence of positive company-specific catalysts, particularly within the technology and semiconductor sectors. Multiple firms announced favorable news, including significant partnerships, robust sales beats, and upward price target revisions from major investment banks. This micro-level optimism cascaded into broader market sentiment, fueling a concentrated buying spree in high-growth names. The positive feedback loop from these individual company reports created a collective lift, emphasizing a narrative of robust fundamental strength and future growth prospects.",
+    "analysis_para3": "Traders should maintain a long bias, focusing on continuation plays in leading growth sectors. Key support for the S&P 500 ETF can be observed near 748, with a break below 745 serving as a short-term risk-off threshold signaling potential profit-taking. For entries, monitor for pullbacks to intraday support levels or strong closes above daily highs for momentum continuation. The decreasing Volatility Index (VIX) further supports risk-on strategies, but a sudden spike above 17 would be a critical trigger to reassess positioning. TODAY, focus on managing existing long positions and identifying strong setups on minor dips.",
+    "technical_signal": "No reversal pattern confirmed yet. The market currently exhibits strong bullish momentum, with both the S&P 500 ETF and Nasdaq 100 ETF closing significantly higher. Watch for a potential bearish divergence on momentum oscillators or a significant increase in the Volatility Index (VIX) as initial signs of a shift in market character.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "KLAC",
-          "company": "KLA Corporation",
-          "reason": "KLA Corporation is experiencing pre-market strength following price target hikes from both Morgan Stanley and Cantor Fitzgerald, signaling renewed analyst conviction in its semiconductor equipment outlook."
+          "ticker": "IREN",
+          "company": "Iris Energy",
+          "reason": "The company announced a significant partnership with Nvidia, bolstering its position in AI infrastructure development."
         },
         {
-          "ticker": "AMAT",
-          "company": "Applied Materials, Inc.",
-          "reason": "Applied Materials, Inc. is gaining traction after Goldman Sachs adjusted its price target, reflecting continued positive sentiment for semiconductor manufacturing equipment demand."
+          "ticker": "KLAC",
+          "company": "KLA Corporation",
+          "reason": "Shares gained conviction following price target hikes from Morgan Stanley and Cantor Fitzgerald, underscoring strong outlook for semiconductor equipment."
         }
       ],
       "c_grade": [
         {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corporation (NVDA) is a recycled candidate showing pre-market flow, indicating continued speculative interest or technical strength despite no fresh catalyst reported today."
+          "ticker": "BA",
+          "company": "Boeing Company",
+          "reason": "Featured as a recycled ticker, today's movement is likely driven by carry-over sentiment or technical flow rather than fresh fundamental news."
         }
       ]
     }
