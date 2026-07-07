@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-07 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Divergent Rally, Tech Leads",
+    "spy_price": 751.28,
+    "spy_change_pct": 0.87,
+    "vix": 15.97,
+    "hy_oas": 2.74,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 63.8,
+    "mmth": 67.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a significant new enterprise AI cloud contract, signaling accelerating demand for its Azure AI services and boosting investor confidence in its growth trajectory."
+        },
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple received a substantial analyst upgrade following reports of robust early pre-order data for its upcoming mixed-reality headset, indicating strong consumer interest."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA is seeing continued strong momentum flow driven by sector rotation into high-beta technology, without a fresh fundamental catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-06 18:02 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2040,43 +2078,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-06-16 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Aggressive Risk-On",
-    "spy_price": 741.75,
-    "spy_change_pct": 0.54,
-    "vix": 16.18,
-    "hy_oas": 2.71,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 63.3,
-    "mmth": 66.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Anticipation builds as NVIDIA reportedly secures a massive data center AI chip contract, fueling projections of accelerated revenue growth."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft's new enterprise AI suite is gaining significant traction, with analysts upgrading price targets on strong adoption metrics."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla continues to benefit from overall EV sector enthusiasm, with price action driven primarily by technical momentum and retail flow."
-        }
-      ]
-    }
   }
 ]
