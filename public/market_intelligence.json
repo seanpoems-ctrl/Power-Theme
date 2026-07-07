@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07 16:45 ET",
+  "generated_at": "2026-07-07 17:59 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -12,19 +12,19 @@
       "close": 747.71,
       "prev_open": 748.74,
       "prev_close": 751.28,
-      "volume": 40095496,
+      "volume": 42575783,
       "change_pct": -0.48
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 709.43,
-      "open": 714.17,
+      "open": 714.14,
       "high": 716.34,
       "low": 704.9,
       "close": 709.43,
       "prev_open": 719.93,
       "prev_close": 722.82,
-      "volume": 39999571,
+      "volume": 41897122,
       "change_pct": -1.85
     },
     "^VIX": {
@@ -48,7 +48,7 @@
       "close": 72.2,
       "prev_open": 68.68,
       "prev_close": 68.55,
-      "volume": 227626,
+      "volume": 229384,
       "change_pct": 5.32
     },
     "^N225": {
@@ -78,7 +78,7 @@
   },
   "fred": {
     "hy_oas": 2.72,
-    "yield_curve": 0.35,
+    "yield_curve": 0.36,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: July 07, 2026",
-    "mood_emoji": "📉",
-    "mood": "Risk-Off / Volatility Spike",
-    "narrative": "US equities closed notably lower, led by technology and growth sectors, as global markets displayed signs of increased risk aversion. Rising volatility and a significant jump in crude oil prices contributed to a cautious tone across asset classes.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 747.71 | -0.48% | ➡️ |\n| Nasdaq 100 ETF | 709.43 | -1.85% | 📉 |\n| VIX | 16.13 | +3.60% | 📈 |\n| Crude Oil | 72.20 | +5.32% | 📈 |\n| Nikkei 225 | 69737.69 | -0.01% | ➡️ |\n| DAX | 25465.25 | -1.37% | 📉 |",
-    "macro_section": "The High Yield Credit Spread, BAMLH0A0HYM2, remains at a complacent 2.72%, suggesting that credit markets are not yet signaling broad systemic stress. Meanwhile, the 10-Year minus 2-Year Yield Curve is at a normal and steepening +0.350, indicating a potentially healthy economic outlook despite today's equity declines. Institutional risk appetite, while tempered by daily market moves, is not yet fundamentally challenged by these core macro credit and rates indicators.",
-    "analysis_para1": "Globally, markets displayed a mixed to negative picture today, with the Nikkei 225 showing only a slight decline of 0.01% while the DAX registered a more significant drop of 1.37%. Crude Oil, however, surged notably by 5.32% to $72.20, often an indicator of demand or supply concerns that can ripple through credit markets. Despite these movements, US High Yield Credit Spreads (BAMLH0A0HYM2) remain at a complacent 2.72%, suggesting that while some international indices are pulling back, the core US credit market is not yet pricing in heightened systemic risk. This implies that while the global tape hints at localized risk aversion, it has not yet translated into a broad, fundamental shift in US institutional risk appetite.",
-    "analysis_para2": "Today's primary market flow was largely driven by a significant surge in crude oil prices, which jumped 5.32% to $72.20. This mechanical catalyst directly fueled renewed inflation concerns, especially against a backdrop of already elevated price pressures. The increase in energy costs put downward pressure on equity indices, particularly the growth-oriented Nasdaq 100 ETF, which fell 1.85%, as investors priced in potential impacts on corporate margins and consumer spending. This concern translated into broad risk aversion, leading to a notable uptick in the VIX and a general retreat from risk assets across the board.",
-    "analysis_para3": "Traders should closely monitor the S&P 500 ETF (SPY) for a potential rebound off the 745.00 level, which could serve as immediate support. A break below this point, particularly if accompanied by increased volume, would signal a significant risk-off threshold, warranting further de-risking of long positions. Conversely, a sustained reclaim of 750.00 would indicate waning selling pressure and a potential for short-term accumulation. For the Nasdaq 100 ETF (QQQ), the 700.00 psychological level is critical; a failure to hold this could trigger a cascade of further selling. Today, the actionable plan is to remain defensively positioned, favoring short-term trades and using tight stop-losses, while watching for confirmation of support or further breakdown.",
-    "technical_signal": "No reversal pattern confirmed yet. The market's internal breadth, with 63.8% of S&P 500 stocks above SMA50 and 68.8% above SMA200, suggests underlying resilience, but today's declines haven't triggered a significant reversal signal. Traders should watch for bullish engulfing patterns or strong bounces off key support levels on daily charts to signal a potential shift in sentiment.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a new AI-driven enterprise software suite, promising enhanced productivity tools and significant market share gains in cloud solutions."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon Web Services secured a multi-year deal with a major financial institution, signaling robust demand for its cloud infrastructure despite broader market weakness."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA saw continued profit-taking and technical consolidation following recent gains, with no fresh catalysts impacting today's price action."
-        }
-      ]
-    }
+    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
   }
 }
