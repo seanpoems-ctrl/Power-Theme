@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-07 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Volatility Spike",
+    "spy_price": 747.71,
+    "spy_change_pct": -0.48,
+    "vix": 16.13,
+    "hy_oas": 2.72,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 63.8,
+    "mmth": 68.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a new AI-driven enterprise software suite, promising enhanced productivity tools and significant market share gains in cloud solutions."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Amazon Web Services secured a multi-year deal with a major financial institution, signaling robust demand for its cloud infrastructure despite broader market weakness."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA saw continued profit-taking and technical consolidation following recent gains, with no fresh catalysts impacting today's price action."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-07 09:24 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2080,23 +2118,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-06-16 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "",
-    "spy_price": 750.33,
-    "spy_change_pct": -0.6,
-    "vix": 16.41,
-    "hy_oas": 2.66,
-    "yield_curve": 0.4,
-    "credit_status": "Complacent",
-    "s5fi": 65.7,
-    "mmth": 67.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
