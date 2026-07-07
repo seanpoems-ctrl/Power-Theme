@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-07-07T00:12:59.426173+00:00",
+  "generated_at": "2026-07-07T23:12:08.825735+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
       "name": "Other",
-      "theme_rs": 95.8,
-      "perf_1d": 7.26,
+      "theme_rs": 94.0,
+      "perf_1d": 51.53,
       "leaders": [
         {
-          "ticker": "WDC",
-          "price": 577.46,
+          "ticker": "DOCN",
+          "price": 137.04,
           "rs_52w": 98,
-          "adr_pct": 9.89,
-          "vol_surge": 0.9,
-          "mkt_cap": 199040150940,
+          "adr_pct": 9.96,
+          "vol_surge": 1.32,
+          "mkt_cap": 14302066663,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -27,69 +27,12 @@
           "setup_label": "Flag"
         },
         {
-          "ticker": "UMC",
-          "price": 25.83,
-          "rs_52w": 98,
-          "adr_pct": 6.74,
-          "vol_surge": 0.8,
-          "mkt_cap": 64814877180,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "AXTI",
-          "price": 63.52,
-          "rs_52w": 97,
-          "adr_pct": 19.24,
-          "vol_surge": 1.08,
-          "mkt_cap": 4155680677,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "WULF",
-          "price": 22.21,
-          "rs_52w": 93,
-          "adr_pct": 10.58,
-          "vol_surge": 2.44,
-          "mkt_cap": 11005779591,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "HUT",
-          "price": 103.78,
-          "rs_52w": 93,
-          "adr_pct": 10.92,
-          "vol_surge": 0.86,
-          "mkt_cap": 11685016805,
+          "ticker": "CRNX",
+          "price": 83.53,
+          "rs_52w": 90,
+          "adr_pct": 5.67,
+          "vol_surge": 62.25,
+          "mkt_cap": 8807420445,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
