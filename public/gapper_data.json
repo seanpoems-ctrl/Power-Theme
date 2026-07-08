@@ -1,88 +1,62 @@
 {
-  "scan_time": "2026-07-07 08:55 ET",
+  "scan_time": "2026-07-08 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "CRNX",
-      "price": 42.03,
-      "gap_pct": 98.91,
-      "pm_volume": 16319929,
-      "avg_vol_10d": 2057416,
-      "avg_dollar_vol": 86473194,
-      "mkt_cap": 4431651831,
-      "rvol": 1.12,
-      "adr_pct": 4.84,
+      "ticker": "BZH",
+      "price": 27.42,
+      "gap_pct": 13.79,
+      "pm_volume": 58912,
+      "avg_vol_10d": 346065,
+      "avg_dollar_vol": 9489102,
+      "mkt_cap": 749493460,
+      "rvol": 0.72,
+      "adr_pct": 4.06,
       "category": "New Contract/Partnership",
-      "theme": "Acquisition",
-      "reasoning": "Crinetics shares surged after Vertex Pharmaceuticals announced an acquisition for **$10 billion**, or **$85.00 per share** in cash.",
+      "theme": "Takeover Offer",
+      "reasoning": "Beazer Homes received a **lifted takeover offer** of **$32 cash a share** from **Dream Finders**, signaling a significant re-rating event.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
+      "conviction": 76,
       "grade": "C",
-      "finviz_theme": "Pharma - Large Cap",
-      "analysis_source": "gemini+edgar",
+      "finviz_theme": "Real Estate",
+      "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "Vertex Pharmaceuticals Incorporated announced it will acquire Crinetics Pharmaceuticals, Inc. for **$85.00 per share** in cash, representing a total equity value of approximately **$10.0 billion**, or approximately **$8.8 billion** net of estimated cash acquired. Crinetics shares surged over **100%** following the news.",
-        "impact": "The acquisition price sets a clear ceiling for the stock, with shares likely to trade towards the deal value as the company transitions towards delisting, removing its independent momentum profile."
+        "catalyst": "**Dream Finders** lifted its **takeover offer** for **Beazer Homes** to **$32 cash a share**. This represents a definitive acquisition proposal, increasing the potential valuation of BZH.",
+        "impact": "This event implies a significant re-valuation for BZH towards the offer price, subject to deal completion and any competing bids."
       },
-      "analysis_details": "• **Impact**\nVertex Pharmaceuticals will acquire Crinetics Pharmaceuticals for **$85.00 per share** in cash, totaling approximately **$10.0 billion** in equity value, or **$8.8 billion** net of estimated cash acquired. Crinetics shares **surged over 100%** on the announcement, with the deal overriding prior momentum trends and setting a clear valuation ceiling.\n\n• **Strategic Value**\nThe acquisition integrates Crinetics' **endocrine drug portfolio** into Vertex's pipeline, broadening the acquirer's therapeutic reach. For Crinetics shareholders, this represents a definitive and immediate cash exit, providing a substantial premium and eliminating future operational risks.",
+      "analysis_details": "• **Impact**\n**Dream Finders** has increased its **takeover offer** for **Beazer Homes** to **$32 cash a share**. This is a concrete and explicit offer price, indicating a potential acquisition that would fundamentally change BZH's corporate structure and ownership.\n\n• **Strategic Value**\nThis lifted offer from **Dream Finders** signals a strong strategic interest in **Beazer Homes**, likely for market consolidation or expansion. The **cash** component of the **$32 per share** offer provides immediate and clear value to BZH shareholders, simplifying the transaction's perceived benefit.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Vertex Pharmaceuticals to Acquire Crinetics Pharmaceuticals for $10 Billion",
-          "source": "Finviz",
-          "url": "https://www.wsj.com/business/deals/vertex-pharmaceuticals-to-acquire-crinetics-pharmaceuticals-for-10-billion-e739ed1c?mod=wsj_FV"
-        },
-        {
-          "title": "Crinetics soars on $10B acquisition by Vertex",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/healthcare/articles/crinetics-soars-10b-acquisition-vertex-204218477.html"
-        },
-        {
-          "title": "Vertex to Acquire Crinetics Pharmaceuticals",
-          "source": "Finviz",
-          "url": "https://www.businesswire.com/news/home/20260706876183/en"
-        },
-        {
-          "title": "Vertex strikes $10B deal for Crinetics and its endocrine drug portfolio - Stock Titan",
+          "title": "Dream Finders lifts Beazer takeover offer to $32 cash a share - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQRjlNUFgzdzNLZXg2dlllYnVNa0RsSjMweWFVUFZzWkxnblpzdmZuX3h5TWIyWTRLLUdlQ0lFQl9JM21FNkFsLVp5RHJianJUTVlyUkZKSmZVSVNaTjFJbTVHWHZFZ0ZRSG1WRm5vUlFDeGt5U1MtTVNfMzdYakp4S21aOFdHbEVva2c?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPLUd3bXE2VkVfYVdCaGxaM3dUdzI3UEpDUTBiUEhUanhzTXg4TFd2dEYySUdvbGxxOXh6aHllVXE2ck9Bc01XZDBOSGtsd1RPaG1QRm9sNnhZY2YwT19vbUpYZl81d1BvRVpOd3NpUEp3N0lJRHI5SmdSeDBVRDQwSlN4M19nUWRQejdic3pGTExfc3ZGZzl5c3hfQmhDenFBREROcERlUmtTeDRlLWdGSVMwcXZvWUg3ZlNuX1lB?oc=5"
         }
       ],
-      "edgar_filing": {
-        "filing_date": "2026-07-06",
-        "form": "8-K",
-        "items": [
-          "1.01",
-          "8.01",
-          "9.01"
-        ],
-        "category": "New Contract/Partnership",
-        "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/1658247/000114036126027642/ef20077399_form8k.htm"
-      },
+      "edgar_filing": null,
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Pharma - Large Cap",
-      "technical_status": "Fail (Avg $Vol $86M < $100M)",
+      "industry": "Real Estate",
+      "technical_status": "Fail (Avg $Vol $9M < $100M)",
       "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
+        "status": "Discrepancy",
+        "confidence_score": 75,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "acquisition for $10 billion",
-        "discrepancy_note": ""
+        "primary_claim": "$32 cash a share",
+        "discrepancy_note": "Source A (Finviz News) contains no information to confirm or deny the claim. Source B (Google News) includes article [3] which confirms the '$32 cash a share' offer. Since 'BOTH sources' are required to confirm for a 'Verified' status, and Source A provides no information, the claim is marked as Discrepancy."
       },
-      "gates_passed": 4,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
         "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
+        "gate_mkt_cap": false,
         "gate_adr": true
       },
       "meets_all_gates": false,
@@ -90,15 +64,15 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "EOSE",
-      "price": 5.06,
-      "gap_pct": 6.92,
-      "pm_volume": 901343,
-      "avg_vol_10d": 20839254,
-      "avg_dollar_vol": 105446625,
-      "mkt_cap": 1787180151,
-      "rvol": 1.27,
-      "adr_pct": 10.07,
+      "ticker": "KC",
+      "price": 9.44,
+      "gap_pct": 10.1,
+      "pm_volume": 139212,
+      "avg_vol_10d": 1250206,
+      "avg_dollar_vol": 11801945,
+      "mkt_cap": 2825011464,
+      "rvol": 1.71,
+      "adr_pct": 3.75,
       "category": "Others",
       "theme": "Technical / Flow",
       "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
@@ -121,22 +95,97 @@
       "short_float": null,
       "daily_pct": null,
       "industry": "—",
-      "technical_status": "Pass",
+      "technical_status": "Fail (Avg $Vol $12M < $100M, ADR 3.8% < 4%)",
       "verification": {
-        "status": "Verified",
+        "status": "Discrepancy",
         "confidence_score": 100,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
         "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
+        "discrepancy_note": "The primary claim states no immediate fundamental catalyst was found. However, Google News (Source B) explicitly reports immediate fundamental catalysts, specifically an 'Overweight Rating from Morgan Stanley' and the company emerging as a 'pure AI cloud play' due to an 'AI Pivot', which directly contradict the claim of no fundamental catalysts."
       },
-      "gates_passed": 3,
+      "gates_passed": 2,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": false,
-        "gate_dollar_vol": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "PRME",
+      "price": 3.99,
+      "gap_pct": 9.44,
+      "pm_volume": 246313,
+      "avg_vol_10d": 4323799,
+      "avg_dollar_vol": 17251958,
+      "mkt_cap": 720663615,
+      "rvol": 1.06,
+      "adr_pct": 8.47,
+      "category": "Others",
+      "theme": "Legal Dispute Resolution",
+      "reasoning": "Prime Medicine resolved its arbitration with Beam Therapeutics, being cleared of breach and retaining rights to its key asset, **PM647** for **AATD**.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Biotech - Gene Therapy",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Prime Medicine (NASDAQ: PRME) was **cleared of breach** in an **arbitration ruling** with **Beam Therapeutics**, allowing it to **keep PM647** for **Alpha-1 Antitrypsin Deficiency (AATD)**.",
+        "impact": "This outcome removes a significant legal and intellectual property risk, securing a key therapeutic asset for the company's development pipeline and potentially enhancing its long-term valuation and strategic position."
+      },
+      "analysis_details": "• **What Happened**\nPrime Medicine (NASDAQ: PRME) has been **cleared of breach** in an **arbitration ruling** with **Beam Therapeutics**. This favorable decision means Prime Medicine **retains PM647** for its **Alpha-1 Antitrypsin Deficiency (AATD)** program, resolving a key dispute.\n\n• **Key Consideration**\nThe resolution of this dispute removes a significant legal and intellectual property overhang, confirming Prime Medicine's rights to **PM647** for the **AATD** indication. This clarity could significantly de-risk the program's development and enhance the company's perceived value and strategic flexibility within the gene therapy space.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Prime Medicine (NASDAQ: PRME) cleared of breach in Beam arbitration ruling - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNVkwwVlM0c0tGRDlYRGFiMUZSWFRwUUFSblNPei1PYmJxLXZqRzBFYkFzSGVNYWIyRXZmM3RDS1QzLW1SQkZMVzBwc2NOZmlmYTUyaFpDVXFMR3M3MGJBUE5iS2Z3VE5JSGdZUVJiVkh0bTlsN0ZtcmFhcXF4NktHNnM0a1g5MmtJZWhvUVYtWF9qR3VaTUtfcUFQc1lfOVo3ek4zRkRodml2NkU?oc=5"
+        },
+        {
+          "title": "Prime Medicine clears Beam dispute, keeps PM647 for AATD - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNby1YM2huTmRXYlRtUEx6YnEtTENOZVJIekVVMTRvcWdWZGFrMzRCeDdaRXVZOHctWW80MElsUFlpR3p4dDFHdUJlX0NVdWZjV1RFdXVyWEN0b0JNUFAyRDg3NWR1LWd1bUIyRUZkbE0tVHloUGVtS3Q0VG9YLWZFQjFleGp6NlRJOHQxMjF5d3ZES3V1dmt0a3FaX3BqZ3BNQUhBdHZueGlOeHNPalpGcGVyU3lqSFpRcmZj?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-07-08",
+        "form": "8-K",
+        "items": [
+          "8.01"
+        ],
+        "category": "Others",
+        "label": "Other Material Event",
+        "url": "https://www.sec.gov/Archives/edgar/data/1894562/000162828026047590/prme-20260706.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Biotech - Gene Therapy",
+      "technical_status": "Fail (Avg $Vol $17M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 60,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Prime Medicine resolved its arbitration with Beam Therapeutics, being cleared of breach and retaining rights to its key asset, PM647 for AATD.",
+        "discrepancy_note": "Finviz News provided no information to confirm or deny the claim."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
         "gate_mkt_cap": false,
         "gate_adr": true
       },
@@ -145,68 +194,148 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "FIG",
-      "price": 21.08,
-      "gap_pct": 5.12,
-      "pm_volume": 461993,
-      "avg_vol_10d": 19906209,
-      "avg_dollar_vol": 419622886,
-      "mkt_cap": 11138178407,
-      "rvol": 0.65,
-      "adr_pct": 6.78,
-      "category": "Others",
-      "theme": "Insider Selling",
-      "reasoning": "Figma saw routine **insider share withholdings** for RSU taxes and a pre-scheduled **director 10b5-1 sale**, indicating no new fundamental catalyst.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 55,
-      "grade": "C",
-      "finviz_theme": "Cloud SaaS",
+      "ticker": "BABA",
+      "price": 98.14,
+      "gap_pct": 8.3,
+      "pm_volume": 1963483,
+      "avg_vol_10d": 14092551,
+      "avg_dollar_vol": 1383042955,
+      "mkt_cap": 234558712208,
+      "rvol": 0.73,
+      "adr_pct": 2.6,
+      "category": "New Contract/Partnership",
+      "theme": "Alibaba Investment in AI Startup",
+      "reasoning": "Alibaba co-led a **$6.5 million** seed round for **AIsa**, an AI agent payment network, strategically expanding its footprint in AI infrastructure.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "B",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "Routine **insider transactions** occurred, including shares withheld for RSU tax obligations from Figma's **CAO**, **CRO** (specifically **8,079 shares**), and **CTO**. Additionally, a **director** executed a **10b5-1 sale** of **87,510 shares**.",
-        "impact": "These are scheduled or statutory transactions, typically having minimal impact on fundamental valuation or future growth prospects."
+        "catalyst": "Alibaba (NYSE: $BABA) co-led a seed funding round for **AIsa**, an AI agent payment network, which successfully raised **$6.5 million** in total funding. The investment targets building transaction infrastructure for AI agents.",
+        "impact": "This strategic investment enhances Alibaba's presence in the emerging AI infrastructure and payment solutions space, potentially expanding future revenue streams and technological capabilities."
       },
-      "analysis_details": "• **What Happened**\nFigma (FIG) reported several routine insider transactions. The company's **CAO**, **CRO**, and **CTO** all had shares **withheld** to cover RSU tax obligations, with the **CRO**'s specific withholding amounting to **8,079 shares**. Separately, a **director** at Figma executed a **10b5-1 sale**, disposing of **87,510 shares** of stock.\n\n• **Key Consideration**\nThese events are largely administrative or pre-scheduled and do not signal a shift in the company's operational performance or future outlook. Such insider activities are common and typically do not serve as strong momentum catalysts, thus they are considered noise for immediate price action.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
+      "analysis_details": "• **Strategic Value**\nAlibaba (NYSE: $BABA) has co-led a seed funding round for **AIsa**, an AI agent payment network, which successfully raised **$6.5 million**. This investment underscores Alibaba's commitment to advancing the transaction infrastructure for AI agents and expanding its technological reach in the AI domain.\n\n• **Impact**\nThis move positions Alibaba to potentially benefit from the growth of AI agent transactions. While the direct financial impact of a **$6.5 million** seed round is limited, it signals a strategic push into future AI-driven payment mechanisms, enhancing Alibaba's competitive positioning in the rapidly evolving AI landscape.",
+      "peer_tickers": [
+        "JD",
+        "PDD",
+        "BIDU"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "BABX",
+          "mult": "2x"
+        }
+      ],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Figma (NYSE: FIG) CAO has shares withheld to cover RSU taxes - Stock Titan",
+          "title": "Is Alibaba Group Holding (BABA) Undervalued Following Its Buyback And AI Push? - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNSE9BTmt6NDY1My1HMU1tem5DTENUY1daQU1qYVB4dVlmSGNibDlyUE9Db3VmcGF1NGhITVN3ZE5CRnRUR3Mzb01LbzhvNURUS0E0OFlabElEZ2N2cml1SFYwX2YxZi1mbFJmYW00dUxDeVdoNGgtdHdzc1RrdmVkSTBkbkd3dUtEOFA0XzM4UlREOXBvbzh6bndNRXZxYkJGa3JqWQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxQT0ZfZ2dmNUExWUxpTHUyVWFqeGNUcjJHTzMwLUlJMV93Y3J0aGJpNG1CYk5fWkRDSU5HQlc3RTh5ZWdQR1hvanlzTjJEVW5hYVVnWUxxSzFxejVqRXZJQWZGSUFoTmx1bXUySnZHX2EzMFl2bHllQlBJR3p0RkUzbnZCUzFWNnMxalRPWVRkSjB4NGZMbXU3YUZjQ3d3bmJyZV9ickRB?oc=5"
         },
         {
-          "title": "Figma (FIG) CRO has 8,079 shares withheld for RSU tax settlement - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOYmFoUHR3ZGV1SWMwU1RtMlBHTU5BWnlWbXJnQU03SzJsX012Wm9ubEREM2Zpd2swRVNtS29hOUYtR3pQUFVTanNpekNKWnJFWk9RU0tQRlI2Qng5Z3N0U084bFlMdE8tWkh3Qy1WZkhsNVdScXFHMzJyakp2aVRqX3RVaVZ4alpjbTVJNWV4VlhINkw4TVNTZlluMEFMUEJyME4zZQ?oc=5"
+          "title": "AIsa Raises $6.5M as Alibaba and Tribe Capital Back AI Agent Payment Network",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/m/8d2e4cc0-9296-3dad-ab62-6451202fd66a/aisa-raises-%246.5m-as-alibaba.html"
         },
         {
-          "title": "Figma (FIG) CTO has shares withheld to cover RSU tax obligations - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxONF9JSVhoTVpyRWhqRzFucWx6N1ZGdEw5NmtvY2wzY21qdUZZLWNmeWRBYzZIcTJtRW1VMmIzYVVRMkZkd1ZOaHQ3UktkWnVsc0QtWVl2b09zWG9TRFduc09jZFdXNU1zZE5jOXBxTkd3bmtNLUpxU2pOYjQ5b3hUd0tMeDlRcWhqbDlXUXBIbmlQNUxTbm5XbW5uWC1YZTFFWXhLUw?oc=5"
+          "title": "Nvidia and AMD Face China Chip Pressure",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-amd-face-china-chip-191636641.html"
         },
         {
-          "title": "FIG (NYSE: FIG) 10b5-1 sale: director sold 87,510 shares - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNaU9yUnBJb0doTUdvMDNrNVpQcTlxU1h1NXZzQV9IUWw1Vi1WRTlJdkhsOURUNFlQczBsdGhUWGlqTWlnZEhYUXpvaVoydjY0VmFnVUVYQWt4eFpBa1J6UEZxS0lVTUZVUXFWVVFXdG15bXk3OXFKc0x3U0Q2cEltOGczdDU2Qk1fQTdMblZn?oc=5"
+          "title": "Nvidia Faces China Shift as Domestic AI Chip Budgets Jump to 46%",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-faces-china-shift-domestic-191603710.html"
+        },
+        {
+          "title": "Youth lacrosse costs families up to $25,000. This former pro player wants to change that.",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/article/youth-lacrosse-costs-families-up-to-25000-this-former-pro-player-wants-to-change-that-180558542.html"
         }
       ],
       "edgar_filing": null,
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Cloud SaaS",
-      "technical_status": "Pass",
+      "industry": "Fintech - Blockchain/Crypto",
+      "technical_status": "Fail (ADR 2.6% < 4%)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 75,
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "A director sold 87,510 shares in a 10b5-1 sale.",
-        "discrepancy_note": "Source B [4] confirms the specific director 10b5-1 sale of 87,510 shares. However, Source A (Finviz News) contains '(none)' and therefore does not confirm this claim."
+        "primary_claim": "$6.5 million seed round for AIsa involving Alibaba",
+        "discrepancy_note": "Source A (Finviz) confirms 'AIsa Raises $6.5M as Alibaba and Tribe Capital Back AI Agent Payment Network'. Source B (Google News) does not contain any information about AIsa, a $6.5 million seed round, or Alibaba's involvement in such a deal."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "RUN",
+      "price": 12.2,
+      "gap_pct": 7.54,
+      "pm_volume": 526003,
+      "avg_vol_10d": 15367557,
+      "avg_dollar_vol": 187484195,
+      "mkt_cap": 2910301242,
+      "rvol": 1.08,
+      "adr_pct": 7.7,
+      "category": "Thematic Narratives",
+      "theme": "AI Compute Pilot Program",
+      "reasoning": "Sunrun launched an **AI compute pilot** leveraging **1.1 million customer homes**, signaling a significant strategic pivot into artificial intelligence.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "A",
+      "finviz_theme": "AI Compute",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Sunrun announced it is turning **1.1 million homes** into an **AI compute pilot**, indicating a strategic expansion into the burgeoning artificial intelligence sector.",
+        "impact": "This initiative could open up a massive new revenue stream and redefine Sunrun's business model, significantly expanding its total addressable market beyond traditional solar energy."
+      },
+      "analysis_details": "• **The Narrative**\nSunrun is integrating its extensive network of **1.1 million customer homes** into an innovative **AI compute pilot**. This move positions the company at the intersection of renewable energy and artificial intelligence, leveraging existing infrastructure for new high-growth opportunities.\n\n• **Explosiveness**\nThis strategic pivot into **AI compute** could be highly transformative, potentially leading to a significant re-rating of Sunrun's valuation. The scale of **1.1 million homes** provides substantial capacity for AI processing, which could attract partnerships and unlock significant long-term growth by tapping into the immense demand for AI infrastructure.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "NetApp (NTAP) Stock Trades Near Fair Value Following Its 131% Run - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQVkk4aDQ2YlREWnJTcHlISnJTV0dyOWp1S052MjhvODd6dk5IeHlxNUJfWExxeTJ5MXV4R29OeXFPQllmTnItTE02VXU4cVFqaHV4ZlUzdktlSXhzYjBkU3FVNUZWLTJmejJiX0N3OWJ1NGRtWVp6VnhQMVl6TjY3OGE5czhMQWJZZ21WVWtLMjlZd2c2dzZyVHZR?oc=5"
+        },
+        {
+          "title": "Sunrun turns 1.1 million homes into an AI compute pilot - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPVzVaVy1mbnc5Zmg4QVB2WnhDTnpzWVFfV0VLeEM0WTFOYlVzYndJUTdtTmw3S2FiVDJXcThMb3hSaTJsWTBlaVE2YUc4Wjd5V19LT0FZQXM2YS1GZUpLaHJCNHFmNWNyY3NvbDdJTUpUS2NjYTdIY3JYQ1laeTR3bmVXS2d4ZFA0c29URTFxOTJUOUYtb2VvYTlxOGtfOVlfUVdqaUEyaTRKZ1F1am5yYjBTR3FaNHNtdHpveVR3?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "AI Compute",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Sunrun launched an AI compute pilot leveraging 1.1 million customer homes",
+        "discrepancy_note": "Source A (Finviz) contains no information regarding Sunrun's AI compute pilot or 1.1 million homes. Source B (Google News, specifically Stock Titan) mentions 'Sunrun turns 1.1 million homes into an AI compute pilot', confirming the claim from only one source."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -219,15 +348,76 @@
       "meets_all_gates": true,
       "tier": "T3",
       "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "AVAV",
+      "price": 162.53,
+      "gap_pct": 6.43,
+      "pm_volume": 61491,
+      "avg_vol_10d": 3249530,
+      "avg_dollar_vol": 528146111,
+      "mkt_cap": 8225323416,
+      "rvol": 0.91,
+      "adr_pct": 6.76,
+      "category": "New Contract/Partnership",
+      "theme": "New Contract Award",
+      "reasoning": "AVAV secured a $30 million contract from Germany, signaling continued demand for its Puma Systems Stack and strengthening its defense market position.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "B",
+      "finviz_theme": "Defense & Aerospace",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Catalyst: **AV** was **awarded** a **$30 million contract** to provide **Puma Systems Stack** for **Germany's LARUS Program**. This deal was announced on **2026-07-07**.\nImpact: This contract provides an incremental revenue stream and reinforces the company's position as a key supplier of unmanned systems to international defense clients.",
+        "impact": ""
+      },
+      "analysis_details": "• **Impact**\n**AV** has been **awarded** a **$30 million contract** to supply its **Puma Systems Stack** for **Germany's LARUS Program**. This award, announced on **2026-07-07**, demonstrates continued international demand for the company's specialized defense technologies.\n\n• **Strategic Value**\nThis contract solidifies AVAV's footprint in the European defense market and contributes to its existing backlog, providing near-term revenue visibility. It highlights the company's role as a critical provider of advanced unmanned systems for allied nations.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "AV Awarded $30 Million Contract to Provide Puma Systems Stack for Germany's LARUS Program",
+          "source": "Finviz",
+          "url": "https://www.businesswire.com/news/home/20260707515500/en"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Defense & Aerospace",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "AVAV secured a $30 million contract from Germany",
+        "discrepancy_note": "Source A (Finviz News [2]) explicitly states 'AV Awarded $30 Million Contract to Provide Puma Systems Stack for Germany'. Source B (Google News [1]) mentions 'AeroVironment’s Recent Government Award', but does not specify the $30 million amount or Germany for this particular contract."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 2,
-    "large_gaps": 1,
-    "total_headlines": 8,
+    "small_gaps": 6,
+    "large_gaps": 0,
+    "total_headlines": 11,
     "monthly_cost_usd": 0.01
   }
 }
