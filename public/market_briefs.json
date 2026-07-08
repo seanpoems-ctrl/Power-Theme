@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-08 17:47 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Global Unease / Commodity Spike",
+    "spy_price": 745.4,
+    "spy_change_pct": -0.31,
+    "vix": 16.9,
+    "hy_oas": 2.67,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 61.3,
+    "mmth": 67.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "RUN",
+          "company": "Sunrun Inc.",
+          "reason": "Announced an innovative AI Compute Pilot Program, signaling expansion into high-growth AI infrastructure and potentially opening new revenue streams."
+        },
+        {
+          "ticker": "PLTR",
+          "company": "Palantir Technologies Inc.",
+          "reason": "Secured a new multi-year defense contract, reinforcing its strategic position in government AI and data solutions, promising stable long-term revenue."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continues to see elevated trading volume and technical strength, largely on recycled bullish sentiment regarding AI demand, lacking fresh specific catalysts today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-08 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2077,44 +2115,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA (NVDA) remains active on follow-through from recent technical breakouts and sustained institutional buying interest, without a new specific catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-17 18:25 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Volatility Surges",
-    "spy_price": 740.96,
-    "spy_change_pct": -1.25,
-    "vix": 18.44,
-    "hy_oas": 2.71,
-    "yield_curve": 0.29,
-    "credit_status": "Complacent",
-    "s5fi": 54.6,
-    "mmth": 64.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Google announces a breakthrough in quantum computing integration for its AI cloud services, setting a new benchmark for competitive advantage in the enterprise AI market."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly receives accelerated FDA approval for its new Alzheimer's treatment, significantly expanding its market potential in a high-demand therapeutic area."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA experiences sector-wide profit-taking after recent highs, showing some technical consolidation and flow-driven weakness."
         }
       ]
     }
