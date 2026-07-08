@@ -1,52 +1,6 @@
 {
-  "generated_at": "2026-07-07T23:12:08.825735+00:00",
+  "generated_at": "2026-07-08T00:01:35.491266+00:00",
   "data_source": "fallback",
-  "power_themes": [
-    {
-      "name": "Other",
-      "theme_rs": 94.0,
-      "perf_1d": 51.53,
-      "leaders": [
-        {
-          "ticker": "DOCN",
-          "price": 137.04,
-          "rs_52w": 98,
-          "adr_pct": 9.96,
-          "vol_surge": 1.32,
-          "mkt_cap": 14302066663,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "CRNX",
-          "price": 83.53,
-          "rs_52w": 90,
-          "adr_pct": 5.67,
-          "vol_surge": 62.25,
-          "mkt_cap": 8807420445,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    }
-  ],
+  "power_themes": [],
   "account_equity": null
 }
