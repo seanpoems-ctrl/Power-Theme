@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-08 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off, Volatility Spike",
+    "spy_price": 747.71,
+    "spy_change_pct": -0.48,
+    "vix": 18.09,
+    "hy_oas": 2.72,
+    "yield_curve": 0.36,
+    "credit_status": "Complacent",
+    "s5fi": 63.8,
+    "mmth": 68.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a significant new cloud computing partnership with a major government agency, boosting its position in the public sector AI market."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Amazon received a bullish analyst upgrade following speculation of robust Prime Day sales forecasts and expansion into new logistics technologies."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA is experiencing renewed selling pressure today as traders rotate out of high-beta tech, with no fresh catalyst beyond yesterday's broad market weakness."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-07 17:59 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2057,44 +2095,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Maintaining bullish sentiment following yesterday's analyst upgrades, with today's action primarily driven by sustained retail interest and momentum trading."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-17 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Re-evaluation",
-    "spy_price": 750.33,
-    "spy_change_pct": -0.6,
-    "vix": 16.37,
-    "hy_oas": 2.66,
-    "yield_curve": 0.38,
-    "credit_status": "Complacent",
-    "s5fi": 65.7,
-    "mmth": 67.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly announced positive Phase 3 trial results for its new diabetes and weight-loss drug, signaling significant future revenue potential."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase issued an upgraded full-year earnings guidance, citing robust consumer lending and strong investment banking performance in its preliminary Q2 report."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA continues to experience significant technical-driven trading and options flow, with no fresh fundamental catalyst but ongoing volatility from previous AI enthusiasm."
         }
       ]
     }
