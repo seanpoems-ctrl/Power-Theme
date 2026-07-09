@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-09 18:07 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "US-Led Rally, Global Weakness",
+    "spy_price": 751.71,
+    "spy_change_pct": 0.85,
+    "vix": 15.84,
+    "hy_oas": 2.7,
+    "yield_curve": 0.38,
+    "credit_status": "Complacent",
+    "s5fi": 62.5,
+    "mmth": 67.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "KLAC",
+          "company": "KLA Corporation",
+          "reason": "Company raised its full-year guidance, signaling robust demand in the semiconductor equipment sector and bolstering investor confidence."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Strong guidance from a peer in the semiconductor industry fueled optimism for NVIDIA's growth trajectory and AI-driven demand outlook."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Remains a core holding for many institutional portfolios, experiencing typical daily flow without a distinct new fundamental catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-09 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2077,44 +2115,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA continues its strong upward momentum as investors double down on its perceived leadership in AI chip development and associated technologies."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-18 18:33 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Tech-Led Risk-On Rally",
-    "spy_price": 746.74,
-    "spy_change_pct": 0.78,
-    "vix": 16.4,
-    "hy_oas": 2.63,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 55.9,
-    "mmth": 63.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "INTC",
-          "company": "Intel Corporation",
-          "reason": "The announced partnership with Apple provided a significant, fresh catalyst for the semiconductor giant, driving strong investor interest."
-        },
-        {
-          "ticker": "MRVL",
-          "company": "Marvell Technology, Inc.",
-          "reason": "News of Nvidia's investment alongside its S&P 500 inclusion delivered a dual catalyst, boosting its valuation and market profile."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "While its ecosystem partners saw fresh news, NVIDIA's movement today was largely flow-driven, extending its recent momentum without a new fundamental catalyst."
         }
       ]
     }
