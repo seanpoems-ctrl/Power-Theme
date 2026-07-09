@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-09 07:10 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Selective Risk-On, Cautious Tone",
+    "spy_price": 745.4,
+    "spy_change_pct": -0.31,
+    "vix": 17.23,
+    "hy_oas": 2.67,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 61.3,
+    "mmth": 67.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase & Co. (JPM) is poised for a positive session following an announced expansion of its share repurchase program and a dividend increase, signaling robust capital returns."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly and Company (LLY) is expected to see strong upward momentum after securing accelerated FDA approval for a promising new Alzheimer's treatment, significantly boosting its pipeline."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA",
+          "reason": "NVIDIA (NVDA) continues to ride the wave of sustained investor enthusiasm for artificial intelligence infrastructure, experiencing further gains driven purely by technical flow and momentum."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-08 17:47 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2077,44 +2115,6 @@
           "ticker": "NVDA",
           "company": "Nvidia Corporation",
           "reason": "Recycled AI/chip sector enthusiasm and flow-driven momentum continue to influence Nvidia, absent a fresh specific catalyst today but benefiting from related sector news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-18 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "US Risk-Off, Global Divergence",
-    "spy_price": 740.96,
-    "spy_change_pct": -1.25,
-    "vix": 17.17,
-    "hy_oas": 2.71,
-    "yield_curve": 0.29,
-    "credit_status": "Complacent",
-    "s5fi": 54.6,
-    "mmth": 64.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft surged pre-market on news of a multi-year, multi-billion dollar AI cloud services contract with a leading global automotive firm, solidifying its enterprise AI dominance."
-        },
-        {
-          "ticker": "PFE",
-          "company": "Pfizer Inc.",
-          "reason": "Pfizer shares gained after the FDA granted accelerated approval for its novel gene therapy for rare pediatric disorders, significantly expanding its addressable market."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) remains active on follow-through from recent technical breakouts and sustained institutional buying interest, without a new specific catalyst today."
         }
       ]
     }
