@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-10 17:40 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On with Calm Accumulation",
+    "spy_price": 754.95,
+    "spy_change_pct": 0.43,
+    "vix": 15.03,
+    "hy_oas": 2.7,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 64.3,
+    "mmth": 68.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CRCL",
+          "company": "Circle",
+          "reason": "Received regulatory clearance for its Digital Currency Trust Bank, signaling a significant catalyst for the digital asset space."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Reported a new strategic partnership in enterprise AI solutions, reinforcing its leadership and expanding its cloud services market."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Continued to experience recycled speculative interest ahead of anticipated next-week delivery reports, with no fresh fundamental catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-10 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2077,44 +2115,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla continues to see significant institutional flow and options-related buying interest following recent expiry, lacking fresh fundamental catalysts but benefiting from broader market momentum and short covering."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-19 17:49 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Tech Leads, Volatility Edges Up",
-    "spy_price": 746.74,
-    "spy_change_pct": 1.04,
-    "vix": 16.78,
-    "hy_oas": 2.63,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 55.9,
-    "mmth": 63.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MU",
-          "company": "Micron Technology",
-          "reason": "Micron, a leader in memory solutions, is poised to benefit significantly from the escalating demand for high-performance memory crucial for artificial intelligence applications."
-        },
-        {
-          "ticker": "QS",
-          "company": "QuantumScape",
-          "reason": "QuantumScape, a pioneer in solid-state battery technology, announced a new multi-year partnership, bolstering its market position and accelerating commercialization efforts in the electric vehicle sector."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Purely driven by broader market optimism and sector rotation into large-cap technology, lacking a fresh catalyst for today's move."
         }
       ]
     }
