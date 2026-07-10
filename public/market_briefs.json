@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-10 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-On / Equities Extend Gains",
+    "spy_price": 751.71,
+    "spy_change_pct": 0.85,
+    "vix": 15.89,
+    "hy_oas": 2.7,
+    "yield_curve": 0.38,
+    "credit_status": "Complacent",
+    "s5fi": 62.5,
+    "mmth": 67.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet's Waymo unit announced a new strategic partnership with a major automotive manufacturer for autonomous trucking development, significantly expanding its commercial footprint."
+        },
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla revealed a breakthrough battery technology exceeding current energy density by 15%, promising extended range and faster charging for future models, sparking renewed investor interest."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA (NVDA) continues to benefit from strong underlying sector momentum and sustained investor flow into AI-related plays, absent a fresh catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-09 18:07 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2077,44 +2115,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continuing to see flow based on recycled AI-driven momentum, rather than a fresh specific catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-19 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Tech-Led Rally / Volatility Creep",
-    "spy_price": 746.74,
-    "spy_change_pct": 1.04,
-    "vix": 17.18,
-    "hy_oas": 2.63,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 55.9,
-    "mmth": 63.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Amazon announced a significant expansion of its AI-powered logistics network, projecting substantial efficiency gains and cost reductions."
-        },
-        {
-          "ticker": "UNH",
-          "company": "UnitedHealth Group Incorporated",
-          "reason": "UnitedHealth Group received key regulatory approval for its new digital health platform, positioning it for expanded market reach and service offerings."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA continues its strong upward momentum as investors double down on its perceived leadership in AI chip development and associated technologies."
         }
       ]
     }
