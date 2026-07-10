@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-10 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On Momentum",
+    "spy_price": 754.95,
+    "spy_change_pct": 0.43,
+    "vix": 15.03,
+    "hy_oas": 2.7,
+    "yield_curve": 0.38,
+    "credit_status": "Complacent",
+    "s5fi": 64.3,
+    "mmth": 68.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CRCL",
+          "company": "Circle Financial Corporation",
+          "reason": "Regulatory clearance for its Digital Currency Trust Bank provides a strong fundamental tailwind, validating its business model in the burgeoning digital asset space."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Announced a new multi-billion dollar strategic cloud computing partnership with a major global industrial conglomerate, reinforcing its dominance in enterprise AI and cloud services."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Continued to see speculative interest and short covering driven by technical patterns rather than fresh fundamental news, sustaining its recent volatility."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-10 09:17 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2077,44 +2115,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Purely driven by broader market optimism and sector rotation into large-cap technology, lacking a fresh catalyst for today's move."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-19 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Growth Momentum, Underlying Caution",
-    "spy_price": 746.74,
-    "spy_change_pct": 1.04,
-    "vix": 16.78,
-    "hy_oas": 2.63,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 55.9,
-    "mmth": 63.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MU",
-          "company": "Micron Technology",
-          "reason": "Micron Technology (MU) is positioned for increased demand, driven by the expanding AI super-cycle requiring advanced memory solutions."
-        },
-        {
-          "ticker": "HIVE",
-          "company": "Hive Digital Technologies",
-          "reason": "Hive Digital Technologies (HIVE) secured a significant AI infrastructure contract and announced an acquisition, bolstering its AI compute capabilities."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) continued its upward trajectory today on persistent speculative flow, as investors maintain conviction in its long-term AI hardware dominance."
         }
       ]
     }
