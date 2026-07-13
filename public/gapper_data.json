@@ -1,416 +1,76 @@
 {
-  "scan_time": "2026-07-10 08:55 ET",
+  "scan_time": "2026-07-13 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "CRCL",
-      "price": 63.01,
-      "gap_pct": 14.33,
-      "pm_volume": 3626737,
-      "avg_vol_10d": 15445696,
-      "avg_dollar_vol": 973233305,
-      "mkt_cap": 15662775507,
-      "rvol": 0.61,
-      "adr_pct": 7.19,
-      "category": "Government Policy",
-      "theme": "Regulatory Clearance for Digital Currency Trust Bank",
-      "reasoning": "Circle received U.S. regulatory clearance to launch a federally overseen digital currency trust bank, marking a significant operational expansion.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 55,
-      "grade": "A+",
-      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "ticker": "WTI",
+      "price": 3.37,
+      "gap_pct": 5.64,
+      "pm_volume": 64777,
+      "avg_vol_10d": 4044061,
+      "avg_dollar_vol": 13628486,
+      "mkt_cap": 501380866,
+      "rvol": 0.86,
+      "adr_pct": 5.6,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "WTI (USOIL) is up 4.00% today without any specific supply or demand news, suggesting a technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Energy - Oil & Gas",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "A **U.S. regulator cleared Circle** to launch a **federally overseen digital currency trust bank**, a significant regulatory approval allowing the firm to expand its operations. This development comes as **PayPal boosts its PYUSD stablecoin** and **Sony sets up a U.S. Stablecoin Trust Bank**, indicating increasing industry activity.",
-        "impact": "This regulatory approval legitimizes Circle's stablecoin operations within traditional finance, potentially unlocking substantial institutional adoption and reducing regulatory overhang, driving price momentum."
+        "catalyst": "**WTI (USOIL)** saw a significant price increase of **4.00%** on **Jul 13** without any immediate fundamental news explicitly detailing changes in supply or demand.",
+        "impact": "This move suggests a speculative, potentially technically driven breakout or institutional flow rather than a fundamentally supported shift in market dynamics."
       },
-      "analysis_details": "• **The Policy**\nCircle received **U.S. regulator clearance** to launch a **federally overseen digital currency trust bank**. This regulatory approval is a crucial step for the company, aligning its operations with traditional financial infrastructure and expanding its market reach into regulated banking services.\n\n• **Direct Impact**\nThis clearance allows Circle to establish a new, regulated entity within the digital currency ecosystem, potentially increasing the adoption and stability of its **USDC stablecoin**. Furthermore, **Cathie Wood's ARK** is observed **buying CRCL stock's slump**, suggesting institutional conviction in the wake of this positive regulatory development, which could bolster momentum and competitive positioning against other players like **PayPal** and **Sony** entering the stablecoin trust bank space.",
+      "analysis_details": "• **What Happened**\nWTI (USOIL) experienced a notable upward movement, increasing by **4.00%** on **July 13**. The news headline from Google News highlighted this gain but did not provide specific details regarding a change in supply or demand fundamentals to explain the move.\n\n• **Key Consideration**\nThe absence of concrete fundamental news underpinning the **4.00%** price increase implies that the rally is likely driven by technical factors or institutional order flow. This scenario poses a higher risk of being a \"Gap and Trap\" or a short-term squeeze, lacking a durable catalyst for sustained momentum.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Cathie Wood's ARK Is Buying CRCL Stock's Slump While Selling HOOD's Gains - Yahoo Finance",
+          "title": "WTI (USOIL) Is up 4.00% on Jul 13: What Changed in Supply and Demand? - TradingKey",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxObk1OMl92QUhDV25iUXJmYnRfRzVkSjg5bjJLOEVrQUczVnJLR3ZVN1JDRHJXWHIyb3RGSmdJU0xqb3BHdHlLUHlIWEZ5czd1U3FqSTVnTnRZbGVWUHhRbE10YXlLRlZKbTRPTndwY0tQOWMwelNnVFhQLW1UNGtCMEdENEY1R0pSSHhGYzhaUWJsTWxfUHgxSg?oc=5"
-        },
-        {
-          "title": "U.S. regulator clears Circle to launch federally overseen digital currency trust bank - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPNzVMazlpY05aOEp5Mk9oeS1EM1JvUUUwOUxhb2xDVTRJS3pXUjRXeWNzQmM0VWgyMnJaendLbi03d0g2X2xENW0zSjlaWmVhZ1lweW5vb1BhbEZzbTFDVTNXV1l6UnBNdTd4LWQ4cXE2VE5iWXUtaklibXVaWUFHNllEZGVmamZmVE5sSGxEV3hwNDNLMUw0azA3eXVfYXp1VEVCM25vTnZQZWdYb0lZOTJnRWRjajlZ?oc=5"
-        },
-        {
-          "title": "PayPal boosts its stablecoin as banks prepare to launch a shared one",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/6dfdcd48-013f-3279-ac64-eefb10492bbf/paypal-boosts-its-stablecoin.html"
-        },
-        {
-          "title": "SEC pivots on crypto: Eased rules let startups win big on token launches",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/video/sec-pivots-crypto-eased-rules-162703705.html"
-        },
-        {
-          "title": "Sony To Set Up U.S. Stablecoin Trust Bank",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/bddcde8e-a2c4-3e51-8892-391fe8f2ca09/sony-to-set-up-u.s..html"
+          "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQeUJoOThfcXZES3NQNFBFOUhxZHBuaFhsTGFsQzRqVXc4UmZVc2FnS0l6OUV4a0JiaHVPSGh3NVhrUkVlR0tOMTE3b3paYlZJMjA5V1c4QlUzck5pUVpOZnZSNlNzUmVwcFl2SnRvUDBmbXR4cDJybUNNMGFrUlF5SkUxOXBQX2RoUEFuRQ?oc=5"
         }
       ],
       "edgar_filing": null,
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Fintech - Blockchain/Crypto",
-      "technical_status": "Pass",
+      "industry": "Energy - Oil & Gas",
+      "technical_status": "Fail (Avg $Vol $14M < $100M)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 75,
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Circle received U.S. regulatory clearance to launch a federally overseen digital currency trust bank.",
-        "discrepancy_note": "Source A (Finviz) does not contain any articles confirming Circle received U.S. regulatory clearance to launch a federally overseen digital currency trust bank. While it mentions Circle in other contexts and discusses other stablecoin banks, it fails to corroborate the primary claim for CRCL. Source B (Google News) confirms this claim across multiple articles, specifically mentioning 'U.S. regulator clears Circle to launch federally overseen digital currency trust bank' and 'Circle Internet wins OCC approval for national trust bank'."
+        "primary_claim": "WTI (USOIL) is up 4.00% today",
+        "discrepancy_note": "Google News [3] states 'WTI (USOIL) Is up 4.00% on Jul 13', which matches the percentage. However, Finviz News [1] and Google News [1] only mention WTI climbing without specifying a percentage. Google News [2] mentions WTI up 3.62% on Jul 12, a different percentage and date. Therefore, not both primary sources confirm the specific '4.00%' claim."
       },
-      "gates_passed": 5,
+      "gates_passed": 2,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "VOD",
-      "price": 13.08,
-      "gap_pct": 12.31,
-      "pm_volume": 351689,
-      "avg_vol_10d": 3666934,
-      "avg_dollar_vol": 47963497,
-      "mkt_cap": 30170232441,
-      "rvol": 0.52,
-      "adr_pct": 1.57,
-      "category": "Institutional Buying",
-      "theme": "Xavier Niel Stake Acquisition",
-      "reasoning": "Vodafone shares surged after French billionaire Xavier Niel acquired a massive $5.95 billion stake, signaling strong institutional conviction.",
-      "hypothesis": "Medium Conviction (RS Hold) — Large fund accumulation; watch for continuation.",
-      "conviction": 55,
-      "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Vodafone (VOD) stock **soared 12%** after **Xavier Niel**, a **French billionaire**, acquired a massive **$5.95 billion** (or **£4.4bn**) stake in the company. This significant purchase was reported to have driven shares up by **10-12%**.",
-        "impact": "The substantial institutional investment by a prominent billionaire could signal an imminent strategic shift, potential activist involvement, or a vote of confidence in Vodafone's long-term value, potentially driving further momentum."
-      },
-      "analysis_details": "• **The Buyer**\nFrench billionaire **Xavier Niel** acquired a substantial stake in Vodafone, valued at **$5.95 billion** (or **£4.4bn**). This acquisition caused Vodafone shares to **jump 10%** and **soar 12%** according to recent reports.\n\n• **Conviction Signal**\nA multi-billion dollar stake by a well-known billionaire investor serves as a strong signal of conviction, potentially indicating a belief in undervalued assets or anticipated strategic changes within Vodafone. This could attract further institutional interest and drive sustained upward momentum.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Vodafone (VOD) Stock Soars 12% as Xavier Niel Acquires Massive $5.95B Stake - Blockonomi",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQdFFFWW9YSVM3WjBkSUw2TW9qNXdDdHBLZXpGQ3BmNWp3Wk1yN1h0a3IyTGtfNHdWUDFxWDBmZ3hvNGhQdU9wYXVKekdsVy1VUm9pbG5uMmVVRldDRndDclRPMlhYS3hTNm1acUFFdVhiQkVnd0FsZk8wdHFpZ3lrd2lFeGg1N0FQRFVrbGE2S1R3b3F0SURXUjU2aw?oc=5"
-        },
-        {
-          "title": "Vodafone shares jump 10% as French billionaire takes £4.4bn stake - UPDATE - Proactive Investors",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi2wFBVV95cUxNZS1XSGttQ2RncU9UaThHVVhQR2JCcnpRR0FkeU1wZU84YkJOM250X3MzNDdYZGJnckM1ZmVYTkY0UV9YMHB6Y1dJcElwZXdlOXdUTWxrQXJLWjFWZmRKQWNUWDdfckRuVDFoVUtNV19yamNJakQyZUdqM2tVZTFvS0gzYWtJNllGY3pOcGl5ZVMtSVlBeG1OT3F5ckhCRFdKQVpCVnVJZ3JGTXpIb1RWZnQydHQ2QVVZOG13Zi02UmFDS292V2M5dTV6QVZoN0xrSlJxQ0FLbjN6QWs?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $48M < $100M, ADR 1.6% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Xavier Niel acquired a $5.95 billion stake",
-        "discrepancy_note": "Finviz News provides no information. Google News article [4] confirms a '$5.95B Stake', but article [2] states '$5.9 Billi', which is not an exact match ($5.90B vs $5.95B)."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
+        "gate_price": false,
         "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "EQPT",
-      "price": 16.0,
-      "gap_pct": 9.38,
-      "pm_volume": 171059,
-      "avg_vol_10d": 3001869,
-      "avg_dollar_vol": 48029904,
-      "mkt_cap": 4044898438,
-      "rvol": 0.99,
-      "adr_pct": 7.64,
-      "category": "Earnings",
-      "theme": "Earnings Report",
-      "reasoning": "EQPT filed an 8-K detailing its Earnings/Financial Results, but specific figures indicating a beat or miss are not disclosed in the provided headlines.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "EQPT filed an 8-K on **2026-07-10** confirming an **Earnings/Financial Results** event, as indicated by **Item numbers 2.02, 7.01, 9.01**. The filing serves as the official government disclosure of their financial performance.",
-        "impact": "Without specific financial figures such as EPS or revenue from the provided headlines, the immediate investment implications regarding surprise factor or guidance revision cannot be assessed. The lack of detailed metrics prevents determining whether this earnings report is a positive or negative catalyst for price momentum."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nWhile EQPT officially filed an 8-K on **2026-07-10** for its **Earnings/Financial Results**, no actual figures for earnings per share, revenue, or guidance were provided within the news headlines. Therefore, it is impossible to determine if the company delivered a beat, met expectations, or missed estimates, limiting the assessment of any surprise factor.\n\n• **The Growth (Momentum)**\nGiven the absence of specific financial data from the filing details provided, any analysis of growth drivers, key performance indicators, or forward momentum stemming from the earnings report is speculative. The headline, \"**3 Insider-Owned Growth Companies To Watch Now**,\" published on **2026-07-09**, is general and not directly tied to EQPT's specific earnings performance.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "3 Insider-Owned Growth Companies To Watch Now - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNejE0QndvNE5RcFYzc1NkT3BCRUxJTThOWHpjVGtwbWtJOE5vak9ENHlzMFlEQS1OaHlJeE8ySjUxcDJUS1B3MVByMkFUUHFHRFFNVGxuVm96OTM0eU1tZHM3RmlJWFhvVU5RYTFDM2lmSW8zR3dDa0JMWE9OXzVzZ0l4VXRJbHZ0QjhucHZJa210QldxVl8zN3MtaTJSNU5vUjJBeDFVS1ZfRDkzMEcwaXhqN1d5YkVHQUxMVXBqMkR6ZEYwckJV0gHMAUFVX3lxTE5oV09BS0RXM0w4aHRXc0lMZG5Ld04tV3VfZVJhWGcxVFRQVG1XZ01jd3FYVXc1Mm5fSDQ4YmxyV3dmNFFRaWo2YjVQb3lNdkFaX3dmSjVlVlJ6ODRsLWZnYVUzay13X0F5V3dnYjhzTW1PVFpCWjJXR1l4YTJsSWFONkIyV3M3OHlqUUpiZ0swZmcydTZBcS15QzU2SFZ3b3VRYjlMaGhBWHBWdUU5TWxIRDVfWnNZdWI1aTg0YzNsRUE3bzk2VFcwQmdqTg?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-07-10",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "7.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1693736/000169373626000013/eqpt-20260709.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $48M < $100M)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "EquipmentShare authorized a $500 Million Share Repurchase Program",
-        "discrepancy_note": null
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
+        "gate_mkt_cap": false,
         "gate_adr": true
       },
       "meets_all_gates": false,
       "tier": "Fail",
       "tier_label": "Excluded"
-    },
-    {
-      "ticker": "COIN",
-      "price": 158.44,
-      "gap_pct": 5.84,
-      "pm_volume": 169162,
-      "avg_vol_10d": 7674011,
-      "avg_dollar_vol": 1215870303,
-      "mkt_cap": 41742760840,
-      "rvol": 0.51,
-      "adr_pct": 5.89,
-      "category": "Others",
-      "theme": "Chief Legal Officer Resignation",
-      "reasoning": "Coinbase's Chief Legal Officer Paul Grewal resigned, moving to an advisory role following major crypto regulatory wins, signaling a strategic transition.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 55,
-      "grade": "B",
-      "finviz_theme": "Fintech - Blockchain/Crypto",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Coinbase (COIN) announced the **resignation** of its **Chief Legal Officer, Paul Grewal**, effective 2026-07-09. This follows **major crypto regulatory wins** for the company. Grewal has signed an **advisory deal** with Coinbase, maintaining a relationship with the firm.",
-        "impact": "This executive transition could signal a new phase for Coinbase's legal and regulatory strategy after achieving significant milestones, potentially shifting focus from defense to proactive expansion, though it introduces some uncertainty during the changeover."
-      },
-      "analysis_details": "• **What Happened**\nCoinbase (COIN) disclosed on **2026-07-09** that its **Chief Legal Officer, Paul Grewal**, is stepping down from his role. News reports highlighted that Grewal's resignation comes after he **led crypto's Washington fight** and secured **major crypto wins** for the company. He will transition into an **advisory deal** with Coinbase, maintaining a connection despite exiting the chief legal officer position.\n\n• **Key Consideration**\nThe departure of a key legal executive, especially one instrumental in **regulatory victories**, marks a significant transition for Coinbase. While the **advisory deal** softens the immediate impact, the change in leadership could influence the company's future approach to navigating complex regulatory landscapes and its strategic positioning within the **cryptocurrency industry** after securing crucial legal precedents.",
-      "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "CONL",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Paul Grewal to exit Coinbase (COIN) legal chief role, advisory deal signed - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNSjg3d3h3X0ZucHNuYmZ2UlEzQl9HcmhYUjFXVkRsUldGWlpybnczOEhfakVDaERTa3RWRlRnek95ZzRiTDdtYVhKcENWX3ZnZlZiMkxuRFJ6bE5rXzdCd0k1S3Z1Njk1ZWNreWRzZVBzYmtkUEx5NzRMeDB1ZGoxTnVMV1VfTnpvMUk0djBLUE9WM015YkU0M3BHNUw5VzNHeGU4UnJFWGlaQ3Qz?oc=5"
-        },
-        {
-          "title": "CRCL Stock Rebounds From 3-Month Low After OCC National Trust Bank Approval - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPSzFTOEVPdHVlTTJVTU9SUDhZRFNVT2tVMDk4N2F2TDlEUE9hMWZPTGc4dUZjN2xvZlhzWHYtSHBjb2RhX3FOTHk5RjVJMWhsS056ZHdZb0x5eDk5ZWoyb2JqcktlVHVDYXZLaExYZlhabUpBbU1JU0I0ekUwZ0F6UUJITDU0bExKd2NaSnUtWURVZEw4ZWhn?oc=5"
-        },
-        {
-          "title": "Coinbase and Grayscale Executives Step Down After Major Crypto Wins",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/aea24561-b12e-3b4d-85e0-764234d579b8/coinbase-and-grayscale.html"
-        },
-        {
-          "title": "Coinbase legal chief Paul Grewal resigns after regulatory wins",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/crypto/articles/coinbase-legal-chief-paul-grewal-211458463.html"
-        },
-        {
-          "title": "Coinbase's top attorney who has led crypto's Washington fight to step down",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/crypto/articles/coinbases-top-attorney-led-cryptos-202938261.html"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-07-09",
-        "form": "8-K",
-        "items": [
-          "5.02",
-          "9.01"
-        ],
-        "category": "Others",
-        "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/1679788/000119312526299667/d74758d8k.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Fintech - Blockchain/Crypto",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Coinbase's Chief Legal Officer Paul Grewal resigned, moving to an advisory role.",
-        "discrepancy_note": "Both Finviz (Source A [2,3]) and Google News (Source B [4]) confirm Paul Grewal's resignation/exit from the legal chief role. However, only Google News (Source B [4]) explicitly mentions his transition to an 'advisory deal' or 'advisory role'; Finviz snippets do not contain this specific detail."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "MSTR",
-      "price": 93.89,
-      "gap_pct": 5.39,
-      "pm_volume": 642634,
-      "avg_vol_10d": 31846302,
-      "avg_dollar_vol": 2990049295,
-      "mkt_cap": 32903526563,
-      "rvol": 0.39,
-      "adr_pct": 7.85,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "MSTR: MSTR Isn’t Bitcoin’s Biggest Risk, JPMorgan Says — Even CLARITY Act May Not Fix The Real P",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: MSTR Isn’t Bitcoin’s Biggest Risk, JPMorgan Says — Even CLARITY Act May Not Fix The Real Problem - Yahoo Finance | MSTR Isnt Bitcoins Biggest Risk, JPMorgan Says  Even CLARITY Act May Not Fix The Real Problem | JPMorgan Chase Says Bitcoin's Main Risk Isn't Strategy",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: MSTR Isn’t Bitcoin’s Biggest Risk, JPMorgan Says — Even CLARITY Act May Not Fix The Real Problem - Yahoo Finance | MSTR Isnt Bitcoins Biggest Risk, JPMorgan Says  Even CLARITY Act May Not Fix The Real Problem | JPMorgan Chase Says Bitcoin's Main Risk Isn't Strategy\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "MSTU",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SMST",
-          "mult": "1x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "MSTR Isn’t Bitcoin’s Biggest Risk, JPMorgan Says — Even CLARITY Act May Not Fix The Real Problem - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPODczSVVXMjVJOVhpYnVyY3R2dFVDajd3WVMwVnNhMjdzcDd2YmpVZl84RTR3QWgwSm5Pc2hOVE1hbGRGR2VFbnFIMkhuZ3JNQzJzdmJPUFZHNGpQWTllT0NCckViMDcxM25zSWxzYXBONzQtbmdObFc1RTZQV1N0VUdlTWhFb0l6Y2FzSmEzRFdiVkNsU1E?oc=5"
-        },
-        {
-          "title": "MSTR Isnt Bitcoins Biggest Risk, JPMorgan Says  Even CLARITY Act May Not Fix The Real Problem",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/06e5ded4-d0c5-3444-9ad4-6b3cad16637a/mstr-isn%E2%80%99t-bitcoin%E2%80%99s-biggest.html"
-        },
-        {
-          "title": "JPMorgan Chase Says Bitcoin's Main Risk Isn't Strategy",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/30ca188b-0dd6-3738-982b-7ecef55cca11/jpmorgan-chase-says-bitcoin%27s.html"
-        },
-        {
-          "title": "High Yields and Huge Risk From a Bitcoin Giant's Preferred Shares",
-          "source": "Finviz",
-          "url": "https://www.barrons.com/articles/microstrategy-bitcoin-preferred-stock-risk-yield-47fbb285?mod=bar_FV"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "MSTR Isn’t Bitcoin’s Biggest Risk, JPMorgan Says — Even CLARITY Act May Not Fix The Real Problem",
-        "discrepancy_note": null
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 5,
+    "small_gaps": 1,
     "large_gaps": 0,
-    "total_headlines": 17,
+    "total_headlines": 1,
     "monthly_cost_usd": 0.01
   }
 }
