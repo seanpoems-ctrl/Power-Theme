@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-13 17:33 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Volatility Surges / Inflationary Risk",
+    "spy_price": 749.17,
+    "spy_change_pct": -0.77,
+    "vix": 17.16,
+    "hy_oas": 2.69,
+    "yield_curve": 0.36,
+    "credit_status": "Complacent",
+    "s5fi": 62.1,
+    "mmth": 68.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Announces major AI breakthrough in large language models, setting new industry benchmarks and promising significant revenue opportunities."
+        },
+        {
+          "ticker": "MRK",
+          "company": "Merck & Co. Inc.",
+          "reason": "Receives expedited FDA approval for its groundbreaking new oncology drug, providing a strong catalyst for future earnings growth."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "Experienced speculative short-term volatility following broader market weakness, driven by retail flow rather than specific corporate news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-13 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2100,43 +2138,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-06-22 18:25 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Volatility Surges / Growth Concerns",
-    "spy_price": 744.39,
-    "spy_change_pct": -0.31,
-    "vix": 17.28,
-    "hy_oas": 2.66,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 55.1,
-    "mmth": 63.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "KEEL",
-          "company": "Keel Financial Services",
-          "reason": "Strong upside momentum driven by potential AWS partnership rumors and an upcoming Russell index inclusion watch."
-        },
-        {
-          "ticker": "CRM",
-          "company": "Salesforce, Inc.",
-          "reason": "Reported stronger-than-expected earnings with robust forward guidance, affirming resilient enterprise software demand."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continues to attract significant institutional flow, but lacks a fresh, market-moving catalyst today."
-        }
-      ]
-    }
   }
 ]
