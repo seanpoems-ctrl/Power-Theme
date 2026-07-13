@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-13 09:28 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Equity Resilience, Volatility Brewing",
+    "spy_price": 754.95,
+    "spy_change_pct": 0.43,
+    "vix": 16.36,
+    "hy_oas": 2.7,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 64.3,
+    "mmth": 68.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple announces breakthrough AI integration in its upcoming iOS 19, generating significant developer excitement and pre-orders, setting a positive tone for its ecosystem."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase reports stronger-than-expected Q2 earnings, with robust performance in its investment banking division and optimistic forward guidance on interest income."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "GameStop continues to attract retail investor attention, experiencing renewed social media-driven momentum and short-squeeze speculation, without any fresh fundamental news catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-13 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2080,43 +2118,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-06-22 11:58 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Mixed Sentiment, Elevated Volatility",
-    "spy_price": 744.63,
-    "spy_change_pct": -0.28,
-    "vix": 17.26,
-    "hy_oas": 2.63,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 56.0,
-    "mmth": 65.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "KEEL",
-          "company": "KEEL Corp.",
-          "reason": "KEEL is poised for upward momentum on news of a potential AWS partnership and its inclusion watch for the Russell index, attracting institutional interest."
-        },
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet (GOOGL) is set for a positive open following reports of a significant quantum computing breakthrough, boosting its long-term innovation narrative."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is expected to see continued interest based on ongoing AI infrastructure build-out, though without fresh catalysts today, it's primarily a flow-driven trade."
-        }
-      ]
-    }
   }
 ]
