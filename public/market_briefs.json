@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-13 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Volatility Surge",
+    "spy_price": 749.17,
+    "spy_change_pct": -0.77,
+    "vix": 17.16,
+    "hy_oas": 2.69,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 62.1,
+    "mmth": 68.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Rallied strongly today following the significant surge in crude oil prices, coupled with an analyst upgrade citing robust free cash flow projections and a positive outlook for energy demand."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Surged on news of a breakthrough FDA fast-track designation for its promising Alzheimer's treatment candidate, significantly de-risking its pipeline and boosting future revenue expectations."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continued to drift lower as investors took profits in high-growth technology names amid broader market volatility and a rotation towards perceived safer assets, despite no specific negative company news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-13 09:28 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2100,23 +2138,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-06-22 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "",
-    "spy_price": 744.39,
-    "spy_change_pct": -0.31,
-    "vix": 17.28,
-    "hy_oas": 2.66,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 55.1,
-    "mmth": 63.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
