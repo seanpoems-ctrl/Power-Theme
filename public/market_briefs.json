@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-14 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Divergent Risk-Off / Commodity Strength",
+    "spy_price": 749.17,
+    "spy_change_pct": -0.77,
+    "vix": 17.3,
+    "hy_oas": 2.69,
+    "yield_curve": 0.36,
+    "credit_status": "Complacent",
+    "s5fi": 62.1,
+    "mmth": 68.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly and Company (LLY) is expected to open higher after announcing positive Phase 3 trial results for a new obesity drug, significantly exceeding analyst expectations."
+        },
+        {
+          "ticker": "MRK",
+          "company": "Merck & Co., Inc.",
+          "reason": "Merck & Co., Inc. (MRK) is showing strength following FDA fast-track designation for its novel oncology therapy, accelerating its path to market."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "GameStop Corp. (GME) continues to attract speculative attention driven by renewed social media engagement and short-covering activity, lacking any new fundamental company-specific catalysts."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-13 17:33 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2120,23 +2158,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-06-23 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "",
-    "spy_price": 744.39,
-    "spy_change_pct": -0.31,
-    "vix": 19.95,
-    "hy_oas": 2.66,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 55.1,
-    "mmth": 63.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
