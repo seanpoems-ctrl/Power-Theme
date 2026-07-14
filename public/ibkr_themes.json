@@ -1,6 +1,413 @@
 {
-  "generated_at": "2026-07-14T00:08:20.912543+00:00",
+  "generated_at": "2026-07-14T23:19:07.898565+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Other",
+      "theme_rs": 95.3,
+      "perf_1d": 4.9,
+      "leaders": [
+        {
+          "ticker": "SNDK",
+          "price": 1757.82,
+          "rs_52w": 98,
+          "adr_pct": 11.55,
+          "vol_surge": 0.72,
+          "mkt_cap": 260315130453,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "AAOI",
+          "price": 125.45,
+          "rs_52w": 98,
+          "adr_pct": 13.69,
+          "vol_surge": 0.83,
+          "mkt_cap": 10066454875,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "MRVL",
+          "price": 222.44,
+          "rs_52w": 98,
+          "adr_pct": 10.43,
+          "vol_surge": 0.49,
+          "mkt_cap": 199649783643,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "AMD",
+          "price": 548.13,
+          "rs_52w": 98,
+          "adr_pct": 6.59,
+          "vol_surge": 0.58,
+          "mkt_cap": 893781136216,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "WDC",
+          "price": 563.32,
+          "rs_52w": 98,
+          "adr_pct": 9.23,
+          "vol_surge": 0.63,
+          "mkt_cap": 194166340559,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "MU",
+          "price": 983.12,
+          "rs_52w": 98,
+          "adr_pct": 8.57,
+          "vol_surge": 0.6,
+          "mkt_cap": 1110328989096,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "STX",
+          "price": 878.31,
+          "rs_52w": 98,
+          "adr_pct": 8.43,
+          "vol_surge": 0.86,
+          "mkt_cap": 196942565416,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "AXTI",
+          "price": 57.57,
+          "rs_52w": 97,
+          "adr_pct": 18.71,
+          "vol_surge": 0.98,
+          "mkt_cap": 3766412682,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "SHAZ",
+          "price": 71.26,
+          "rs_52w": 97,
+          "adr_pct": 13.85,
+          "vol_surge": 1.91,
+          "mkt_cap": 2217160190,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "LITE",
+          "price": 814.8,
+          "rs_52w": 97,
+          "adr_pct": 8.56,
+          "vol_surge": 0.66,
+          "mkt_cap": 63391439050,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "TSEM",
+          "price": 255.49,
+          "rs_52w": 96,
+          "adr_pct": 8.82,
+          "vol_surge": 2.14,
+          "mkt_cap": 28878352128,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "ALAB",
+          "price": 361.78,
+          "rs_52w": 96,
+          "adr_pct": 11.39,
+          "vol_surge": 0.53,
+          "mkt_cap": 62011963962,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "GLW",
+          "price": 187.64,
+          "rs_52w": 96,
+          "adr_pct": 9.18,
+          "vol_surge": 0.48,
+          "mkt_cap": 161490080957,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "SMTC",
+          "price": 141.36,
+          "rs_52w": 95,
+          "adr_pct": 8.89,
+          "vol_surge": 0.87,
+          "mkt_cap": 13167849165,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "AMAT",
+          "price": 595.7,
+          "rs_52w": 95,
+          "adr_pct": 7.56,
+          "vol_surge": 0.7,
+          "mkt_cap": 472961642142,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "ALM",
+          "price": 15.79,
+          "rs_52w": 94,
+          "adr_pct": 8.87,
+          "vol_surge": 0.93,
+          "mkt_cap": 4480283784,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "BE",
+          "price": 243.4,
+          "rs_52w": 94,
+          "adr_pct": 12.4,
+          "vol_surge": 0.72,
+          "mkt_cap": 69233635735,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "LRCX",
+          "price": 346.1,
+          "rs_52w": 91,
+          "adr_pct": 7.82,
+          "vol_surge": 0.96,
+          "mkt_cap": 432811555532,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "CRDO",
+          "price": 236.18,
+          "rs_52w": 91,
+          "adr_pct": 10.86,
+          "vol_surge": 0.48,
+          "mkt_cap": 44042348583,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "KLAC",
+          "price": 230.37,
+          "rs_52w": 89,
+          "adr_pct": 8.11,
+          "vol_surge": 0.73,
+          "mkt_cap": 300926613749,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        },
+        {
+          "ticker": "AMKR",
+          "price": 70.2,
+          "rs_52w": 87,
+          "adr_pct": 9.0,
+          "vol_surge": 0.97,
+          "mkt_cap": 17400650007,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }
