@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-14 16:45 ET",
+  "generated_at": "2026-07-14 17:35 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -18,7 +18,7 @@
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 719.69,
-      "open": 720.22,
+      "open": 720.14,
       "high": 722.28,
       "low": 714.34,
       "close": 719.69,
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 80.28,
+      "price": 79.83,
       "open": 78.04,
       "high": 81.27,
       "low": 77.84,
-      "close": 80.28,
+      "close": 79.83,
       "prev_open": 73.69,
       "prev_close": 78.14,
-      "volume": 376643,
-      "change_pct": 2.74
+      "volume": 377833,
+      "change_pct": 2.16
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -78,7 +78,7 @@
   },
   "fred": {
     "hy_oas": 2.69,
-    "yield_curve": 0.36,
+    "yield_curve": 0.4,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Post-Market Brief: July 14, 2026",
-    "mood_emoji": "📈",
-    "mood": "Growth-Led Risk-On",
-    "narrative": "US indices showed resilience, led by growth and technology sectors, as global markets presented a mixed picture. Falling volatility and rising oil prices suggest improving sentiment despite some international weakness.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 751.83 | +0.36% | ➡️ |\n| Nasdaq 100 ETF | 719.69 | +1.12% | 📈 |\n| VIX | 16.50 | -3.85% | 📉 |\n| Crude Oil | 80.28 | +2.74% | 📈 |\n| Nikkei 225 | 67242.73 | -1.92% | 📉 |\n| DAX | 25147.03 | +0.13% | ➡️ |",
-    "macro_section": "High Yield Credit Spreads remain at a complacent 2.69%, signaling continued institutional comfort with risk-taking. Concurrently, the 10-year minus 2-year yield curve is normal and steepening at +0.360, further affirming a generally risk-on environment and healthy credit flow.",
-    "analysis_para1": "Despite a significant -1.92% decline in the Nikkei 225, suggesting regional headwinds, the broader global tape presented a somewhat divergent picture. The DAX posted a modest +0.13% gain, while Crude Oil surged +2.74% to $80.28, reflecting robust demand expectations. This mixed international performance, juxtaposed with complacent US High Yield Credit Spreads at 2.69%, implies that while pockets of weakness exist globally, US institutional risk appetite remains robust and largely insulated from immediate external pressures.",
-    "analysis_para2": "The robust performance of the Nasdaq 100 ETF (+1.12%) today was largely driven by a mechanical catalyst rooted in sector-specific growth optimism. News regarding a Japan Chip Expansion Grant for companies like TSEM and aggressive Indium Phosphide expansion plans from AXTI signaled strong future demand and government support for the semiconductor industry. This narrative propelled growth-oriented sectors, leading to a re-rating of future earnings potential and attracting significant capital flow into technology and related industries.",
-    "analysis_para3": "Given the Nasdaq's strong performance, maintaining long exposure to growth and technology appears favorable, with the S&P 500 ETF (SPY equivalent) at 750 acting as immediate support. A break below 748, combined with an uptick in the VIX above 17, should trigger a reduction in long exposure. For proactive entries, traders should look for consolidation in leading tech names, targeting dips as accumulation points. Today, traders should prioritize risk management by trailing stops on existing long positions and monitoring for any reversal in the current growth narrative.",
-    "technical_signal": "No reversal pattern confirmed yet. The current uptrend in US indices, particularly in growth sectors, remains intact with healthy breadth metrics (62.4% S&P 500 stocks above SMA50, 67.2% S&P stocks above SMA200). Watch for sustained breakdowns below key moving averages or a significant increase in selling volume as potential early warnings.",
+    "mood_emoji": "🚀",
+    "mood": "Tech-Led Optimism, Broad Risk-On",
+    "narrative": "US equities, particularly technology, posted solid gains today, driven by a generally complacent credit environment and strong risk appetite. Global markets showed mixed performance, but underlying US strength prevailed alongside a dip in volatility.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 751.83 | +0.36% | ➡️ |\n| Nasdaq 100 ETF | 719.69 | +1.12% | 📈 |\n| VIX | 16.50 | -3.85% | 📉 |\n| Crude Oil | 79.83 | +2.16% | 📈 |\n| Nikkei 225 | 67242.73 | -1.92% | 📉 |\n| DAX | 25147.03 | +0.13% | ➡️ |",
+    "macro_section": "The High Yield Credit Spread, BAMLH0A0HYM2, registered a complacent 2.69%, signaling low perceived credit risk among investors. Concurrently, the 10-Year Minus 2-Year Yield Curve spread, T10Y2Y, held at a normal and steepening +0.400. This combination fosters a supportive environment for institutional risk appetite, encouraging capital deployment into growth-oriented assets.",
+    "analysis_para1": "Despite the Nikkei 225's notable decline of 1.92% and the DAX's largely flat performance, up only 0.13%, US high-yield credit spreads remain remarkably complacent at 2.69%. This suggests that while there are pockets of regional weakness, US institutional risk appetite is largely insulated from broader global concerns. The strong performance of Crude Oil, up 2.16% to $79.83, further underscores a willingness to engage in riskier commodity plays, implying a selective but robust risk-on sentiment within the US market.",
+    "analysis_para2": "The dominant 'Why' behind today's primary flow was a powerful resurgence in sector-specific optimism within the technology and semiconductor industries, fueled by strategic expansion announcements and supportive policy. This mechanical catalyst drove significant capital allocation into high-growth technology names, evident in the Nasdaq 100 ETF's robust 1.12% gain. Key drivers included TSEM's substantial Japan Chip Expansion Grant and AXTI's aggressive Indium Phosphide Expansion Plan, signaling strong conviction in future demand and innovation within the chip sector.",
+    "analysis_para3": "Traders should maintain long exposure in high-growth and technology sectors, utilizing minor pullbacks towards key support levels as potential re-entry opportunities. For the S&P 500 ETF, watch 748 as a primary support, with a break above today's high of 753.15 serving as a confirmation of continued upside momentum. A critical risk-off threshold would be a sustained break below the S&P 500 stocks above SMA50 metric of 60%, or a sharp reversal in the VIX above 18.00, prompting a reduction in overall market exposure today.",
+    "technical_signal": "No reversal pattern confirmed yet. The market is showing healthy internal strength with 62.4% of S&P 500 stocks above SMA50 and 67.2% above SMA200, alongside a declining VIX. Traders should monitor for any sudden spike in volatility or a high-volume rejection from significant resistance to signal a potential shift in trend.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "TSEM",
           "company": "Tower Semiconductor Ltd.",
-          "reason": "Company secured a significant Japan Chip Expansion Grant, signaling strong governmental support and future growth in semiconductor manufacturing."
+          "reason": "Receiving a significant grant from Japan's government for chip expansion positions Tower Semiconductor for accelerated growth and market share."
         },
         {
           "ticker": "AXTI",
-          "company": "AXT, Inc.",
-          "reason": "Aggressive Indium Phosphide expansion plans indicate rising demand and strategic positioning in advanced compound semiconductors."
+          "company": "AXT Inc.",
+          "reason": "AXT's aggressive expansion into Indium Phosphide production directly addresses surging demand in advanced photonics and 5G/AI applications."
         }
       ],
       "c_grade": [
         {
           "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continues to benefit from underlying secular trends in artificial intelligence and data center demand, with no specific fresh catalyst today."
+          "company": "Nvidia Corporation",
+          "reason": "Nvidia continues to see strong technical momentum and consistent institutional flow, reflecting sustained AI-driven demand without a fresh catalyst today."
         }
       ]
     }
