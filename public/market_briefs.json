@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-14 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Growth-Led Risk-On",
+    "spy_price": 751.83,
+    "spy_change_pct": 0.36,
+    "vix": 16.5,
+    "hy_oas": 2.69,
+    "yield_curve": 0.36,
+    "credit_status": "Complacent",
+    "s5fi": 62.4,
+    "mmth": 67.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "TSEM",
+          "company": "Tower Semiconductor Ltd.",
+          "reason": "Company secured a significant Japan Chip Expansion Grant, signaling strong governmental support and future growth in semiconductor manufacturing."
+        },
+        {
+          "ticker": "AXTI",
+          "company": "AXT, Inc.",
+          "reason": "Aggressive Indium Phosphide expansion plans indicate rising demand and strategic positioning in advanced compound semiconductors."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continues to benefit from underlying secular trends in artificial intelligence and data center demand, with no specific fresh catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-14 08:19 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2117,44 +2155,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA continues to trade primarily on generalized enthusiasm for the artificial intelligence sector rather than specific fresh catalysts, marking it as a recycled thesis."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-23 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Volatility Spike",
-    "spy_price": 733.58,
-    "spy_change_pct": -1.45,
-    "vix": 19.49,
-    "hy_oas": 2.65,
-    "yield_curve": 0.27,
-    "credit_status": "Complacent",
-    "s5fi": 58.3,
-    "mmth": 65.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "ZETA",
-          "company": "Zeta Global",
-          "reason": "The company rallied significantly following news of a strategic partnership with Palantir, enhancing its data analytics capabilities."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft showed resilience after announcing a major new AI-powered cloud service partnership, reinforcing its leadership in enterprise solutions."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA traded on continued momentum from prior week's semiconductor sector strength and broader enthusiasm for AI, without fresh specific news today."
         }
       ]
     }
