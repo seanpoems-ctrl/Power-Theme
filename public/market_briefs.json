@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-15 08:20 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious Retreat / Yields Normal",
+    "spy_price": 749.17,
+    "spy_change_pct": -0.77,
+    "vix": 16.42,
+    "hy_oas": 2.69,
+    "yield_curve": 0.4,
+    "credit_status": "Complacent",
+    "s5fi": 62.4,
+    "mmth": 67.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly (LLY) is seeing pre-market strength after announcing positive Phase 3 trial results for its groundbreaking Alzheimer's treatment, boosting revenue outlook."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet (GOOGL) is attracting buying interest following reports of stronger-than-expected advertising spending across its platforms for Q2, beating analyst estimates."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA (NVDA) remains under pressure from broader tech sector profit-taking, continuing yesterday's negative flow as investors rebalance portfolios without fresh fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-15 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2140,43 +2178,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-06-24 09:26 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Risk-Off",
-    "spy_price": 733.58,
-    "spy_change_pct": -1.45,
-    "vix": 19.21,
-    "hy_oas": 2.65,
-    "yield_curve": 0.34,
-    "credit_status": "Complacent",
-    "s5fi": 58.5,
-    "mmth": 65.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "RUN",
-          "company": "Sunrun Inc.",
-          "reason": "RUN is showing strength pre-market following news of a strategic collaboration, defying the broader market sell-off."
-        },
-        {
-          "ticker": "FCEL",
-          "company": "FuelCell Energy Inc.",
-          "reason": "FCEL is benefiting from a strategic energy partnership announcement, attracting bullish interest amidst a risk-off environment."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVDA is likely experiencing recycled profit-taking and weakness in sympathy with the broader tech sector's significant decline."
-        }
-      ]
-    }
   }
 ]
