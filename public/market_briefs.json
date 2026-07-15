@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-15 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off / Global Divergence",
+    "spy_price": 749.17,
+    "spy_change_pct": -0.77,
+    "vix": 16.36,
+    "hy_oas": 2.69,
+    "yield_curve": 0.4,
+    "credit_status": "Complacent",
+    "s5fi": 62.4,
+    "mmth": 67.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "Announced a significant share buyback program exceeding analyst expectations, signaling strong capital returns and bolstering investor confidence."
+        },
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Reported successful advanced exploration results in a major offshore project, significantly boosting future production estimates and aligning with rising crude oil prices."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continuing to experience profit-taking pressures following its recent strong run, with key technical support levels being tested amidst broader tech sector weakness."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-14 17:35 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2140,23 +2178,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-06-24 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "",
-    "spy_price": 733.58,
-    "spy_change_pct": -1.45,
-    "vix": 19.15,
-    "hy_oas": 2.65,
-    "yield_curve": 0.34,
-    "credit_status": "Complacent",
-    "s5fi": 58.5,
-    "mmth": 65.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
