@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-07-14T23:19:07.898565+00:00",
+  "generated_at": "2026-07-15T00:07:16.555426+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
       "name": "Other",
-      "theme_rs": 95.3,
+      "theme_rs": 95.4,
       "perf_1d": 4.9,
       "leaders": [
         {
@@ -31,8 +31,27 @@
           "price": 125.45,
           "rs_52w": 98,
           "adr_pct": 13.69,
-          "vol_surge": 0.83,
+          "vol_surge": 0.84,
           "mkt_cap": 10066454875,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "LITE",
+          "price": 814.8,
+          "rs_52w": 98,
+          "adr_pct": 8.56,
+          "vol_surge": 0.66,
+          "mkt_cap": 63391439050,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -88,7 +107,7 @@
           "price": 563.32,
           "rs_52w": 98,
           "adr_pct": 9.23,
-          "vol_surge": 0.63,
+          "vol_surge": 0.64,
           "mkt_cap": 194166340559,
           "gates_passed": 5,
           "gates_detail": {
@@ -164,27 +183,8 @@
           "price": 71.26,
           "rs_52w": 97,
           "adr_pct": 13.85,
-          "vol_surge": 1.91,
+          "vol_surge": 1.92,
           "mkt_cap": 2217160190,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "LITE",
-          "price": 814.8,
-          "rs_52w": 97,
-          "adr_pct": 8.56,
-          "vol_surge": 0.66,
-          "mkt_cap": 63391439050,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -295,7 +295,7 @@
         {
           "ticker": "ALM",
           "price": 15.79,
-          "rs_52w": 94,
+          "rs_52w": 95,
           "adr_pct": 8.87,
           "vol_surge": 0.93,
           "mkt_cap": 4480283784,
@@ -392,7 +392,7 @@
           "price": 70.2,
           "rs_52w": 87,
           "adr_pct": 9.0,
-          "vol_surge": 0.97,
+          "vol_surge": 0.98,
           "mkt_cap": 17400650007,
           "gates_passed": 5,
           "gates_detail": {
