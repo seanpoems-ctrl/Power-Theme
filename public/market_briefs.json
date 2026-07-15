@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-15 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Stable Risk Appetite",
+    "spy_price": 754.81,
+    "spy_change_pct": 0.4,
+    "vix": 15.67,
+    "hy_oas": 2.72,
+    "yield_curve": 0.4,
+    "credit_status": "Complacent",
+    "s5fi": 61.0,
+    "mmth": 67.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AEHR",
+          "company": "AEHR Test Systems",
+          "reason": "The company reported a strong 'beat and raise' quarter, exceeding analyst expectations and providing an optimistic outlook for future growth."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA received a significant analyst upgrade today citing accelerated AI infrastructure demand and robust data center segment growth."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "GameStop saw speculative interest driven by renewed social media chatter and short-term technical indicators without new fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-15 08:20 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2160,23 +2198,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-06-24 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "",
-    "spy_price": 733.24,
-    "spy_change_pct": -0.05,
-    "vix": 18.63,
-    "hy_oas": 2.71,
-    "yield_curve": 0.34,
-    "credit_status": "Complacent",
-    "s5fi": 60.5,
-    "mmth": 65.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
