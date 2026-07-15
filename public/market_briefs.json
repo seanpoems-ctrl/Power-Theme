@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-15 17:37 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Measured Gains, Stable Risk",
+    "spy_price": 754.81,
+    "spy_change_pct": 0.4,
+    "vix": 15.67,
+    "hy_oas": 2.72,
+    "yield_curve": 0.42,
+    "credit_status": "Complacent",
+    "s5fi": 61.0,
+    "mmth": 67.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AEHR",
+          "company": "Aemulus Corporation",
+          "reason": "Strong earnings beat and raise guidance signal robust demand in its semiconductor test equipment segment, confirming positive sector tailwinds."
+        },
+        {
+          "ticker": "MRK",
+          "company": "Merck & Co., Inc.",
+          "reason": "Positive clinical trial data for a key oncology drug spurred investor interest, reinforcing its pipeline strength and revenue growth potential."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "Continued retail investor interest and social media chatter persist, driving volatile price action without new fundamental catalysts."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-15 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "FCEL",
           "company": "FuelCell Energy Inc.",
           "reason": "Experiencing a technical bounce after several days of heavy selling, likely due to short-covering or speculative retail interest without fresh fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-24 18:00 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Global Risk-Off / US Resilience",
-    "spy_price": 733.24,
-    "spy_change_pct": -0.05,
-    "vix": 18.63,
-    "hy_oas": 2.71,
-    "yield_curve": 0.3,
-    "credit_status": "Complacent",
-    "s5fi": 60.5,
-    "mmth": 65.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "RUN",
-          "company": "Sunrun Inc.",
-          "reason": "Sunrun Inc. announced a strategic collaboration today aimed at expanding its residential solar and battery storage solutions, promising significant growth opportunities."
-        },
-        {
-          "ticker": "DFTX",
-          "company": "Delphi Therapeutics Inc.",
-          "reason": "Delphi Therapeutics Inc. saw a major catalyst today with successful Phase 3 clinical trial results for its lead drug candidate, coupled with a significant financing round, de-risking future development."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "FCEL",
-          "company": "FuelCell Energy, Inc.",
-          "reason": "FuelCell Energy, Inc. remains in play following its recently announced strategic energy partnership, which continues to generate speculative interest despite no fresh news today."
         }
       ]
     }
