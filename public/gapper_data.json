@@ -1,60 +1,99 @@
 {
-  "scan_time": "2026-07-14 08:55 ET",
+  "scan_time": "2026-07-15 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "CLSK",
-      "price": 12.36,
-      "gap_pct": 20.15,
-      "pm_volume": 4132474,
-      "avg_vol_10d": 15752144,
-      "avg_dollar_vol": 194696500,
-      "mkt_cap": 3171682357,
-      "rvol": 0.7,
-      "adr_pct": 8.2,
-      "category": "Others",
-      "theme": "Operational Update",
-      "reasoning": "CleanSpark filed an 8-K disclosing a press release regarding its June 2026 operational update, without specific figures provided.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "ticker": "AEHR",
+      "price": 72.01,
+      "gap_pct": 32.48,
+      "pm_volume": 257225,
+      "avg_vol_10d": 2255549,
+      "avg_dollar_vol": 162422083,
+      "mkt_cap": 2264948938,
+      "rvol": 1.3,
+      "adr_pct": 9.96,
+      "category": "Earnings",
+      "theme": "Beat & Raise",
+      "reasoning": "Aehr Test Systems reported strong Q4 2026 earnings with a beat and upbeat FY27 guidance, leading to a significant after-hours rally.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "A",
+      "finviz_theme": "Semiconductors - Packaging",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "CleanSpark Inc. (CLSK) announced an **operational update for June 2026** via a press release on **July 10, 2026**, which was filed as an 8-K on **July 14, 2026**.",
-        "impact": "The limited details available from the 8-K filing suggest this is a routine disclosure, and without specific operational metrics, its impact on price momentum is speculative."
+        "catalyst": "Aehr Test Systems filed an 8-K for Fiscal 2026 Fourth Quarter and Full Year Financial Results on **2026-07-14**. Headlines indicate an **Earnings Beat** with **upbeat FY27 guidance**, driving the stock to **pop 40% after-hours**. The company also reported **Record Quarterly Bookings** and a **$100 Million Effective Backlog**.",
+        "impact": "The strong financial performance, combined with robust guidance and significant order intake, signals strong momentum and potential for continued growth, particularly in the silicon carbide market."
       },
-      "analysis_details": "• **What Happened**\nCleanSpark Inc. (CLSK) filed an 8-K with the SEC on **July 14, 2026**, referencing Item 7.01 (Regulation FD Disclosure) and Item 8.01 (Other Events). The filing states the Company issued a press release on **July 10, 2026**, announcing its **operational update for June 2026**. This press release was attached as Exhibit 99.1 to the 8-K.\n\n• **Key Consideration**\nWithout the specific details or figures from the **June 2026 operational update** itself, the market impact remains unclear. This disclosure indicates routine business operations, and any price movement would depend on whether the undisclosed operational metrics exceeded or fell short of investor expectations.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
+      "analysis_details": "• **The Beats (Surprise Factor)**\nAehr Test Systems announced an **earnings beat** for its fiscal 2026 fourth quarter results, which drove the stock **40% after-hours**. The company also reported **record quarterly bookings** and achieved a **$100 million effective backlog**, highlighting robust demand and operational strength.\n\n• **The Growth (Momentum)**\nBeyond the earnings beat, Aehr received **more than $8 million in new silicon carbide wafer-level burn-in orders**, signaling accelerated demand driven by **global electric vehicle programs**. The company has successfully transitioned its business to focus significantly on **electric vehicle silicon carbide**, positioning itself within a high-growth market.\n\n• **The Guide**\nAdding to the positive sentiment, retail bulls are pointing to **upbeat FY27 guidance** provided by Aehr Test Systems. This forward-looking optimism suggests sustained business momentum and strong growth prospects in the silicon carbide test and burn-in market, particularly as electric vehicle adoption continues to expand.",
+      "peer_tickers": [
+        "COHU",
+        "ONTO",
+        "MKSI"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "PayPal jumps on reported takeover bid, Aehr Test soars By Investing.com - Investing.com UK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQdGRwS2NFVU9QcXNRbjU4SDNGSzFxSjNNdjJiLUlRaHZYaWxHeTRreC1qRWNYaDN0T0F5N1lMT3JsMXkxbW9LY0ptRndWLXBrd2s2a2xpT0dSUHhzeG51UWxuS0txcnMweW03X0hpaEhaWngxYUtDMVlTNFhpaGMxZGF6b2xkWmN2c2lSSFB5U0xOV2tIZzF0TmtRbWc5ZjB0M0JIQTE4OFhkZWZxT0E?oc=5"
+        },
+        {
+          "title": "Aehr Test Systems Reports Fiscal 2026 Fourth Quarter and Full Year Financial Results with Record Quarterly Bookings and $100 Million Effective Backlog - Aehr Test Systems",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxPRG5KcGh1dzV6ME1PSlg5dnJVZms3dktzUlloMVJDd1V5WGttcm5BeEFSVUtPeHJMcGtuLUh5WnA3QnRHeEowV3lqQ3AwYWlZR0JuMFdvdVlIMXFBMkpvOXBMaklUY29lcWk0TnhDd0xkMzJJcXRVSjM2cTNqb05NbElta0dVVmszQVhHcU52dWlSQlY3U1lZVmZoNnFOVWNtbUx4Zmg2WUN3RHlqN3RFRU9fVkJCLUtuaFN1YVV5VXdCQTVSejFTYl9Ucl9iY2R3V0t0Sk83ODNnd1FyQ1o2bHJUODNnajBZdUpTQmczdWo5eUVPZzYyOGdrZU92aVpxN1pRVEtWZzFWaEU?oc=5"
+        },
+        {
+          "title": "Aehr Test Systems Q4 2026 Earnings Call Summary",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/m/3c226f69-3a70-3a79-953e-974d4f07f0fc/aehr-test-systems-q4-2026.html"
+        },
+        {
+          "title": "AEHR Stock Pops 40% After-Hours On Earnings Beat  Retail Bulls Point To Upbeat FY27 Guidance",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/m/0da908b2-ff09-32bd-8dc5-b9ad2f99d0d1/aehr-stock-pops-40%25.html"
+        },
+        {
+          "title": "Aehr Receives More Than $8 Million in New Silicon Carbide Wafer-Level Burn-In Orders as Global Electric Vehicle Programs Accelerate",
+          "source": "Finviz",
+          "url": "/news/368070/aehr-receives-more-than-8-million-in-new-silicon-carbide-wafer-level-burn-in-orders-as-global-electric-vehicle-programs-accelerate"
+        }
+      ],
       "edgar_filing": {
         "filing_date": "2026-07-14",
         "form": "8-K",
         "items": [
-          "7.01",
-          "8.01",
+          "2.02",
           "9.01"
         ],
-        "category": "Others",
-        "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/827876/000119312526302448/clsk-20260710.htm"
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1040470/000165495426006655/aehr_8k.htm"
       },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Fintech - Blockchain/Crypto",
+      "industry": "Semiconductors - Packaging",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
+        "status": "Discrepancy",
         "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "CleanSpark filed an 8-K disclosing a press release regarding its June 2026 operational update, without specific figures provided.",
-        "discrepancy_note": ""
+        "primary_claim": "AEHR stock experienced a significant after-hours rally",
+        "discrepancy_note": "Finviz Source A [2] states 'Pops 40% After-Hours', while Google News Source B [4] states 'Rocketing Nearly 30% Premarket'."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -65,48 +104,134 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
     },
     {
-      "ticker": "TSEM",
-      "price": 229.68,
-      "gap_pct": 19.63,
-      "pm_volume": 93091,
-      "avg_vol_10d": 1620586,
-      "avg_dollar_vol": 372216192,
-      "mkt_cap": 25668260195,
-      "rvol": 1.46,
-      "adr_pct": 6.83,
-      "category": "Government Policy",
-      "theme": "Japan Chip Expansion Grant",
-      "reasoning": "Tower Semiconductor secured a **$1B grant from Japan** to fund its **chip expansion**, signaling significant government support for its manufacturing capabilities.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 58,
-      "grade": "A+",
-      "finviz_theme": "Semiconductors - Foundries",
+      "ticker": "PYPL",
+      "price": 47.37,
+      "gap_pct": 19.29,
+      "pm_volume": 10454066,
+      "avg_vol_10d": 13277067,
+      "avg_dollar_vol": 628934664,
+      "mkt_cap": 41785338003,
+      "rvol": 0.76,
+      "adr_pct": 3.12,
+      "category": "New Contract/Partnership",
+      "theme": "Takeover Offer",
+      "reasoning": "PayPal surged on reports of a **$53 billion takeover offer** from **Stripe and Advent**, with investors anticipating a higher bid.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "B",
+      "finviz_theme": "Fintech - Payments",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "**Japan** announced it will provide **$1B in grants** specifically for **Tower’s chip expansion**. This direct government funding supports the company's strategic manufacturing growth.",
-        "impact": "This grant provides a substantial capital infusion, enabling accelerated expansion of **Tower's chip manufacturing capabilities** and potentially increasing future capacity and market share."
+        "catalyst": "Reports emerged of a **$53 billion takeover offer** for PayPal from **Stripe** and **Advent**, causing PayPal shares to **surge premarket** and trade **up 18%**. 'The Big Short' investor **Michael Burry** commented that the **$53 billion offer** is 'simply too low', expecting a higher bid.",
+        "impact": "This potential acquisition could fundamentally re-rate PayPal, signaling significant institutional interest and unlocking shareholder value, with speculative upside for a higher bid."
       },
-      "analysis_details": "• **The Policy**\nThe **Japanese government** has committed to providing **$1B in grants** to **Tower Semiconductor (TSEM)**. This substantial financial backing is specifically earmarked for **Tower’s chip expansion** initiatives.\n\n• **Direct Impact**\nThis **$1B grant** directly enhances **Tower Semiconductor's financial capacity** to significantly scale its **chip manufacturing operations**. The funding reduces the need for external capital, potentially improving margins on new capacity and positioning **TSEM** for increased market share in the foundry sector.",
+      "analysis_details": "• **Impact**\nPayPal shares **surged 18%** on reports of a **$53 billion takeover offer** from **Stripe** and **Advent**. Renowned investor **Michael Burry** publicly stated the **$53 billion offer** is 'simply too low', suggesting he expects a higher bid for the company.\n\n• **Strategic Value**\nThis reported takeover offer implies a significant re-evaluation of PayPal's underlying value by major institutional players. The market is now pricing in potential strategic consolidation or a bidding war, which could significantly boost PYPL's valuation and momentum trajectory in the near term.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Japan to provide $1B in grants for Tower’s chip expansion - Stock Titan",
+          "title": "Michael Burry Says $53B Offer For PayPal Is 'Simply Too Low' – ‘The Big Short’ Investor Expects Higher Bid - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQM1VqMlZjcGtBN1paTUF5RXdtMjM3ZkFoRmpPQnRaWWd2akNybzFrdUxHTjQ0Vkl0WUJBRndzeGw1MGpycW5IZXdLQzNJRHpjUW9oVm5uWGdIazJuUko1Q1ViZWh2cU5mMTRyUlhIU3N0TlUycWRIcU5sS3Vqc1dpXzZpTTUyVnhfY1VoWklobUFqWUZFRTEwaU13SmZ6c3l5MFFyX1gwTnhVd1V4a3ZjcnE1b0JHSHFwaTVFUFJB?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQM1NQbUlhcmR2OE9hdGZVTDBfUjNIQUk2VXU3T1BIclVfekxIQmRzZjhJOW5tcmcweTdlQVozWmlWR1NiQmhMRTdSazhQQ3NFem1UUEVWYjU0c0JCWkJsTnB1SzRqaTJONGc5M1B2RXVzWjd0Z0pMaXkxQkw2eUFSYzVaTldCdTJiU0tzSmJ5aG96amdBenF2Ng?oc=5"
+        },
+        {
+          "title": "PayPal Shares Surge Premarket on Reports of $53 Billion Takeover Offer - WSJ",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNUlpLc054a0hZQURhcjVGUHhuUTlnUHlMa2x1Ri1XWnZHT3AtSDBwUGNNV1N3MzJXZnMyQWdhVDRVeFQzZWNmSkV3cmc1VW1JTmZXakNONFhwV24tazNLTXU3Q1MycnlKRVdNVVZDVV93R1dSSHZrdEc1UFI4TTBFOURQQ0RNX2FvTlVWYkN0eWJfbDQwVXJDbjNwckhzVFNGaWdBMjQta3Q2WFJqZ000XzlJOGtGMUE?oc=5"
+        },
+        {
+          "title": "PayPal stock surges 18% on report of a $53 billion takeover offer from Stripe and Advent - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxORzJDcTYtaWU2WGVLaUhjTWU5TmpuWC1rUUVSV21uY19CRU5QcjRiU1YzTmNHV1FBdmVhZlpUWG5nOFhtaE10a0pZanNIRzZXSHFPaWJ6bzVPUmRwNW8zcnkzYlpHVUdvRTJlUS1UUm5fei1JNUhCZUtpZUxfZ2llVk5IMW5PaEN1SlM0ekJpLUpzbDNSVlltUkdn?oc=5"
+        },
+        {
+          "title": "New buy now, pay later rules confirmed  will they protect you?",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/m/91c649eb-3e7d-346e-b56a-c0c015866381/new-buy-now%2C-pay-later-rules.html"
         }
       ],
       "edgar_filing": null,
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Semiconductors - Foundries",
-      "technical_status": "Pass",
+      "industry": "Fintech - Payments",
+      "technical_status": "Fail (ADR 3.1% < 4%)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "$53 billion takeover offer",
+        "discrepancy_note": null
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "LION",
+      "price": 13.29,
+      "gap_pct": 9.18,
+      "pm_volume": 57423,
+      "avg_vol_10d": 2348108,
+      "avg_dollar_vol": 31206355,
+      "mkt_cap": 3862521018,
+      "rvol": 1.1,
+      "adr_pct": 4.45,
+      "category": "Others",
+      "theme": "Others",
+      "reasoning": "LION: News | Virginia is gaining lion's share of DC-area multifamily development - CoStar",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 50,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "fallback",
+      "analysis_detail": {
+        "catalyst": "Headlines: News | Virginia is gaining lion's share of DC-area multifamily development - CoStar | LGHL Stock Spikes As Lion Group Bets On AI And Web3 - StocksToTrade | Power Metallic intercepts 6m at 12.38% copper equivalent near surface - Stock Titan",
+        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
+      },
+      "analysis_details": "• **What Happened**\nHeadlines: News | Virginia is gaining lion's share of DC-area multifamily development - CoStar | LGHL Stock Spikes As Lion Group Bets On AI And Web3 - StocksToTrade | Power Metallic intercepts 6m at 12.38% copper equivalent near surface - Stock Titan\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "News | Virginia is gaining lion's share of DC-area multifamily development - CoStar",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOV1dXQ1U5djIwc1hrN0FoNklESzgteVhQaDU4Sk5MWFloZXM2OEZNN0FZSFkzWkhhNnNWMFBEcFNDa3U1ZllVeGFFcFdrT0djcUZQblFqa3FjZEZ2ajVpNVVocjFhQUkyT1huNWw2QjN4aExXWGpEZ1ZTZDEwMG95Y1N4NGhNWVZxVHVLa1pQZEMzUGpQeEp3dmN2dnlFR25paU1GZnJGOUdyWVU?oc=5"
+        },
+        {
+          "title": "LGHL Stock Spikes As Lion Group Bets On AI And Web3 - StocksToTrade",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNVC1BV3RKTEdtcjA2VU1wT3d4WjhmczNMektSYXh1ZHdMZUNEalFGMVVhQmliWk4xdzd4a1ZkN0gzNGQtdmxqZFBpZlFzU0ZKQ3dwR0V2SHVybXIxV21sN19sMWNhejh4cTJ3RE5CZ3ZiSF9NMWFyc2h4ZXRtbjFacw?oc=5"
+        },
+        {
+          "title": "Power Metallic intercepts 6m at 12.38% copper equivalent near surface - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNTTVsQmYxbk40azh2dWQyOThnNlhDdzhyamlfQ1Z0WEJMSVlwcFpUZzNVLWRwWldpd2ptdlRSaFptc1ZNZThEdDNxbkdCSWYtSlI2aDk1NXdoLWY5czcxVF93UnZhMGhaVnRIc2NLN2ktbWlQS2R2ZElPNXZWbVVsVEU3d3R0ZW1kb05uaS0xVUJYenQ2Q0JYY3N4VlluWGhlMFZ2WGk3Qm5qNGhkaC02NmJoV0Q3bHA1TV9SQlhBdV8?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $31M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 85,
@@ -114,365 +239,85 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Tower Semiconductor secured a $1B grant from Japan",
-        "discrepancy_note": "Source A (Finviz) has no information. Source B (Google News, specifically 'Japan to provide $1B in grants for Tower’s chip expansion - Stock Titan') confirms the $1B grant from Japan, but the claim is not confirmed by both sources as required for 'Verified'."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "SMTC",
-      "price": 132.15,
-      "gap_pct": 11.99,
-      "pm_volume": 92723,
-      "avg_vol_10d": 3073253,
-      "avg_dollar_vol": 406130384,
-      "mkt_cap": 12309926391,
-      "rvol": 0.48,
-      "adr_pct": 6.73,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [
-        "MRVL",
-        "AVGO",
-        "MXL"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": "Finviz reported no news, supporting the claim. However, Google News reported specific fundamental news items including 'Shares Sold by Emerald Advisers LLC' and 'Maintains Buy Rating with $200 Target Amid Strong Demand'. While these may not be major new catalysts, they are specific fundamental events contradicting the claim that 'no immediate fundamental catalyst was found'."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "FCEL",
-      "price": 19.08,
-      "gap_pct": 9.17,
-      "pm_volume": 308075,
-      "avg_vol_10d": 15847878,
-      "avg_dollar_vol": 302377512,
-      "mkt_cap": 1494392607,
-      "rvol": 0.58,
-      "adr_pct": 16.37,
-      "category": "New Contract/Partnership",
-      "theme": "Fit Energy Deal",
-      "reasoning": "FCEL stock saw a fair value lift following its new deal with Fit Energy, indicating positive market reception.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 75,
-      "grade": "B",
-      "finviz_theme": "Clean Energy - Hydrogen",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "FuelCell Energy (FCEL) announced a deal with **Fit Energy**, which subsequently led to the stock seeing a **fair value lift**. This partnership represents a specific new business opportunity for the company.",
-        "impact": "The new deal suggests potential revenue growth and improved financial outlook, which could drive positive momentum following the previous day's share offering dilution."
-      },
-      "analysis_details": "• **Impact**\nFuelCell Energy (FCEL) experienced a **fair value lift** after announcing a new deal with **Fit Energy**. This development directly impacts FCEL's valuation positively, offsetting recent negative pressures from a **$225M share offering** that caused the stock to slide.\n\n• **Strategic Value**\nThis new partnership signals a strategic expansion or validation for FCEL's offerings, potentially enhancing its market position within the clean energy sector. Despite the previous day's **-9.27%** slide mentioned in the context of Bloom Energy's AI narrative, this **Fit Energy deal** could provide a fresh positive catalyst for the stock.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "FuelCell Energy (FCEL) Stock Sees Fair Value Lift After Fit Energy Deal - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQMGV1dW9iSFR5QlgxMVVqcnhELWk3d1Z3SkJHendaUllQM09XWDdEWnZIMVlaSHBVZkgxMmxQck5pMGYwelN1akhnSFVNbTF2M0ZtaEVLbUJOMjl3NE13RzZaRGtVaEMydEVnaEk0SFR0eXcyOXFaV0pmVmFMX0JzYmlNLWR4ZWU4VGVVSW9ENkUwWDhkcGFNYV8yTkI?oc=5"
-        },
-        {
-          "title": "FCEL Stock Slides As $225M Share Offering Hits Traders - StocksToTrade",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBWTUxkWDBjTjdVVWQ2NEVSd083MHN5WXdHTGRYYUFHWXRJVnA4Y09IQkVHQTI3RGRqYnB0V3RZWTBndmdSNnVSNDM4N3RnWnBuMDFxenFVV1pjOFNlVERPN25WcXg4bVJLcThxQXRUTW8tSlVON090MFpwOG8?oc=5"
-        },
-        {
-          "title": "How Bloom Energy Became AIs Emergency Power Button",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/127e6f19-3c82-349d-a671-2e89c33aec10/how-bloom-energy-became-ai%E2%80%99s.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Clean Energy - Hydrogen",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "FCEL's new deal with Fit Energy",
-        "discrepancy_note": "Source A (Finviz) does not mention a deal between FCEL and Fit Energy. While Source B [1] (Google News via Yahoo Finance) mentions the 'Fit Energy Deal' for FCEL, it is not confirmed by both sources as required."
+        "primary_claim": "Virginia is gaining lion's share of DC-area multifamily development",
+        "discrepancy_note": "Only Google News [4] mentions this claim. Finviz News [1] does not mention this development and refers to 'Lionsgate' and 'European Bidders', which is a different context for a potentially different company with a similar ticker or an unrelated news item."
       },
       "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
         "gate_adr": true
       },
       "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
+      "tier": "Fail",
+      "tier_label": "Excluded"
     },
     {
-      "ticker": "AXTI",
-      "price": 50.46,
-      "gap_pct": 8.8,
-      "pm_volume": 369515,
-      "avg_vol_10d": 8387773,
-      "avg_dollar_vol": 423247026,
-      "mkt_cap": 3301253969,
-      "rvol": 1.63,
-      "adr_pct": 13.28,
-      "category": "Thematic Narratives",
-      "theme": "Aggressive Indium Phosphide Expansion Plan",
-      "reasoning": "AXT plunged 20.6% after announcing an Aggressive Indium Phosphide Expansion Plan, causing investors to question its bull case.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 58,
-      "grade": "A",
-      "finviz_theme": "Semiconductors - Compute",
+      "ticker": "LPTH",
+      "price": 11.52,
+      "gap_pct": 8.94,
+      "pm_volume": 83245,
+      "avg_vol_10d": 2777406,
+      "avg_dollar_vol": 31995717,
+      "mkt_cap": 764476466,
+      "rvol": 0.59,
+      "adr_pct": 9.01,
+      "category": "New Contract/Partnership",
+      "theme": "New Customer Order",
+      "reasoning": "LightPath Technologies secured a new **$11M camera order**, driving significant positive stock reaction and investor interest today.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 75,
+      "grade": "C",
+      "finviz_theme": "Others",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "AXT (AXTI) announced an **Aggressive Indium Phosphide Expansion Plan**, leading to a **20.6%** drop in its stock price.",
-        "impact": "This strategic decision has prompted investors to question the company's long-term **bull case**, suggesting a re-evaluation of its growth trajectory and capital allocation strategy."
+        "catalyst": "LightPath Technologies announced a **new $11M camera order**, explicitly linked to the stock's jump. Additionally, LightPath anticipates a customer transition from **Germanium to BlackDiamond materials**, indicating potential product evolution.",
+        "impact": "The new contract provides a clear revenue boost and validates market demand for LightPath's offerings, potentially strengthening its competitive position."
       },
-      "analysis_details": "• **The Narrative**\nAXT (AXTI) experienced a significant **20.6%** drop in its stock price following the announcement of an **Aggressive Indium Phosphide Expansion Plan**. This market reaction indicates investor concern over the strategic direction and potential implications of this substantial investment.\n\n• **Explosiveness**\nThe market's strong negative reaction, evidenced by the **-20.6%** move, suggests a fundamental shift in how investors perceive AXTI's future prospects and risk profile. The headline specifically questions whether the **bull case** has changed, indicating a potential re-rating of the stock based on this strategic decision.",
-      "peer_tickers": [
-        "COHR",
-        "LITE",
-        "MRVL"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "AXT (AXTI) Is Down 20.6% After Aggressive Indium Phosphide Expansion Plan - Has The Bull Case Changed? - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNdERlWjZBRXU2SWV3NzU5SmpKYmk3OW9SWUt0akFWSWYwcEZVSjNSOTR0aTA4WVZRNS11RGJTcFU4MWY4UGpfd1EzRUV2Z2dzcGFTQnZNQkt4UjhtVjhHYjNIRE5wUWxIWWdYZXdhdWhHT1V5b2l5Q000bjUtV3ZFaEFhc0VSWV9IUkRoRzBGVFY1SzFMVTBNQzBEc2djc0p5alJCTVF6QmxTbmxwWU5YMGpicDBZdHZQS2lQYWloRmVjNHB6V3JV0gHMAUFVX3lxTFB1ZkVXdExyU1ZUeHVoc0lCOHMzeUlLcTdEZi1NaVEzbHV0aXItY3A1S0lUSWxsdWxQcThEZThfa2pWdll2X29vWDJKU3BzY29UeWpWY2pRWFFJQVN1TXgzLVR6OUI2RWQ4N3FqYzdvY1EzSVo2Mkw5bC0ybEl0MmdfVGdLbG5EOGl5czdlUkp5MVhFaG1LQ3lzNkhlaURRR19NVE9zb2JVQXdlVzNaSTc2T0ZLNm1QU3lrTGNLMFAzdnQxRFhieE4zUDBfVQ?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Compute",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "AXT plunged 20.6%",
-        "discrepancy_note": "Source B (Google News, link [3] simplywall.st) confirms the 20.6% drop, but Source A (Finviz News) has no mention of this claim."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "AAOI",
-      "price": 111.88,
-      "gap_pct": 6.84,
-      "pm_volume": 333672,
-      "avg_vol_10d": 8655376,
-      "avg_dollar_vol": 968363467,
-      "mkt_cap": 8977560589,
-      "rvol": 0.68,
-      "adr_pct": 10.52,
-      "category": "Thematic Narratives",
-      "theme": "AI Infrastructure Expansion",
-      "reasoning": "Applied Optoelectronics is expanding its Texas capacity to meet growing demand for AI data links, signaling strategic alignment with the AI theme.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 56,
-      "grade": "B",
-      "finviz_theme": "AI Networking",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Applied Optoelectronics is building new **Texas capacity** specifically for **AI data links**, indicating a strategic focus on the booming AI infrastructure market.",
-        "impact": "This expansion positions AAOI to capitalize on increasing demand for high-speed connectivity solutions required by AI data centers, potentially driving future revenue growth."
-      },
-      "analysis_details": "• **The Narrative**\nApplied Optoelectronics is actively **building Texas capacity** specifically for **AI data links**. This strategic move directly addresses the surging demand for high-speed optical components crucial for **AI data center connectivity**.\n\n• **Explosiveness**\nThe expansion for **AI data links** suggests AAOI is directly investing in the most rapidly growing segment of the networking market. This could lead to an accelerated revenue ramp as **AI data center buildouts** continue to demand higher bandwidth and lower latency solutions.",
+      "analysis_details": "• **Impact**\nLightPath Technologies' stock **jumps** following the announcement of a new **$11M camera order**, providing a tangible revenue catalyst for the company. This significant order signals robust demand for LightPath's products and services, directly impacting its financial outlook positively.\n\n• **Strategic Value**\nThe company also expects a customer to transition from using **Germanium to BlackDiamond materials**, indicating a strategic shift or preference for LightPath's advanced material offerings. This could enhance competitive positioning and product differentiation, attracting further customer engagement for LightPath's proprietary technologies.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Applied Optoelectronics Builds Texas Capacity for AI Data Links - Stock Titan",
+          "title": "LPTH Q2 2026 Earnings: Significant EPS Miss Despite Positive Stock Reaction - EPS Consistency Score - dars.gov.et",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQVHozLXpXaHF0Ymxfc3ZKa1N0RC1ndmxUUTVfVWNNNWJkQ2R3ZDNrU29MWS1VYktFOE5iVzh3Z0ZDYjdGTE5TMzRIdE9PdkxjdXNrekhWeEozQWFjYWh5M0t3SlB1VmZWUHNCN25zdXRZYTZqcnpwRGZrVnNYenhuTjZURGJJTXB3dzhndllQdmV6WU41MGlTVWRFUnZQSEQ3SHo2Q0l2YUVEanRkdDVhNzFtTzJ2VjhUMEhTTF9Fcw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQVTBRX08xNU40Xzh0aGR4dHRXekpFNmlpMXEzNGp5dWV3SUhRbzVzWFdSd0ptRkZYQlljWDBCeUlqcTlVc1QyaVRMYzZ1aTBaLTY2aVhRb0k4a2RDUmVNUFVWQmVjWUlJWGtLVUVDRHpDREk5V0piSFdxaTJBZHNuS1htMFhJbmlTdGRSbk16S2Vqa1lvT3ZRSlBlOTJGWmxyTkdibmxTSkZRcm9JS0RqSGdOQ0lqcU0?oc=5"
+        },
+        {
+          "title": "LightPath Technologies stock jumps on $11M camera order By Investing.com - Investing.com Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNVGp5QTZLQU5yODhVUXBBSUJtc3J1WVhBTnFjQjRkN2ROeXlIb3pxelB6bEFGVW1zNnpXZ1BQblMtQjMtVVdreW5pSDgzdEdpd25oOEhBQW5VSklRd1dPdU9INm9EcjRMQmExdmo5U2V3SXEzdHZpTjVXc0N0eUNIb2NUSlJrWHotdGxmLW5kdXg0eV92MnZEZnYyQkdZU3Y5MTRNT29lSWoyNkRiUmROeUJ2YzdCQQ?oc=5"
+        },
+        {
+          "title": "LightPath expects customer to switch from Germanium to BlackDiamond materials - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQTjJhZExkeFhKNVJPUTgwMmMyQ3FrRGlRSzk3OEZONlV0MC0yUUx3eDJCOXB6X0ZTM0c4Q3FiRFdScEFNVFppc3FWa29aUGVtRU15cS1NWFczTzMtMzlrUXpXQTFxbXg0TmFXTXFBYnZnTGtwd0J5V1B5eUZ1RzBHcXFFOVQzYk41ZE40WW83TEt3U3ZVTW5kZHhSWTJ3aFdMaGc3YTJ3dFNld2d0MlgxeFc2Xy1tRFVSY0E?oc=5"
         }
       ],
       "edgar_filing": null,
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "AI Networking",
-      "technical_status": "Pass",
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $32M < $100M)",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 60,
+        "status": "Unconfirmed",
+        "confidence_score": 50,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Applied Optoelectronics is expanding its Texas capacity to meet growing demand for AI data links",
-        "discrepancy_note": "Finviz News (Source A) provided no information. Google News (Source B) had one article (Stock Titan [1]) that specifically confirmed the claim ('Applied Optoelectronics Builds Texas Capacity for AI Data Links'). Another Google News article (GuruFocus [3]) mentioned 'Expands Manufacturing Capacity' but the visible headline did not specify 'Texas' or 'AI Data Links'. Since 'BOTH sources' (Finviz and Google News) do not confirm with matching specifics (Finviz is empty), it's a discrepancy."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "WOLF",
-      "price": 33.65,
-      "gap_pct": 6.57,
-      "pm_volume": 198548,
-      "avg_vol_10d": 4169803,
-      "avg_dollar_vol": 140313871,
-      "mkt_cap": 1748861348,
-      "rvol": 0.61,
-      "adr_pct": 12.45,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found for WOLF; likely technical breakout or institutional flow driving market action.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 55,
-      "grade": "C",
-      "finviz_theme": "Semiconductors - Analog",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "**No specific fundamental news** released in the last **24 hours** for WOLF. The single headline found was for **Silver Wolf Exploration Ltd (SWLFF)**, a different entity.",
-        "impact": "The significant price movement is **speculative**, suggesting a potential **technical breakout** or **institutional flow** rather than a company-specific event."
-      },
-      "analysis_details": "• **What Happened**\nThere were **no immediate fundamental catalysts** or company-specific news published for WOLF in the last **24 hours** to explain any potential price movement. The only relevant headline concerned **Silver Wolf Exploration Ltd (SWLFF)**, a distinct company from WOLF, and was a generic investment performance review.\n\n• **Key Consideration**\nAbsent of any specific news, significant price action for WOLF would likely be attributed to **technical factors** such as a **chart breakout**, **institutional order flow**, or a potential **low-float squeeze**. Such moves carry a **high risk** of being a **gap and trap** scenario, lacking fundamental support for sustained momentum.",
-      "peer_tickers": [
-        "NVTS",
-        "STM",
-        "ON"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "If You Invested $1,000 in Silver Wolf Exploration Ltd (SWLFF) - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE1YTjVhMlNheUhseVBDWVRDTDRtRXU2cFRpTVZJZkZaaW9OOG1za1FGSS1DUnh1cVM5TlZWZ2tSNkdwRXBxeVBDQjhTZnJMdXh4V2dzR0NjRTh3ZHJqeFA0RzZfanFndnM1MWVKUGZydw?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Analog",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found for WOLF",
+        "primary_claim": "LightPath Technologies secured a new **$11M camera order**, driving significant positive stock reaction and investor interest today.",
         "discrepancy_note": ""
       },
-      "gates_passed": 4,
+      "gates_passed": 2,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
         "gate_mkt_cap": false,
         "gate_adr": true
       },
@@ -481,497 +326,59 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "SNDK",
-      "price": 1673.97,
-      "gap_pct": 6.33,
-      "pm_volume": 420486,
-      "avg_vol_10d": 12513279,
-      "avg_dollar_vol": 20946853648,
-      "mkt_cap": 247897823690,
-      "rvol": 1.08,
-      "adr_pct": 8.61,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "SNDK: SanDisk Stock's Run Hides Its Real Portfolio Job",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "B",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: SanDisk Stock's Run Hides Its Real Portfolio Job | Best Momentum Stocks to Buy for July 13th - Yahoo Finance",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: SanDisk Stock's Run Hides Its Real Portfolio Job | Best Momentum Stocks to Buy for July 13th - Yahoo Finance\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [
-        "STX",
-        "WDC",
-        "SMCI"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "SanDisk Stock's Run Hides Its Real Portfolio Job",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/8b3857fe-8da9-392f-af3f-38ad8245d345/sandisk-stock%27s-run-hides-its.html"
-        },
-        {
-          "title": "Best Momentum Stocks to Buy for July 13th - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPUEJHb3I0djdsTWRDVWdXTWFmeFJCUlQyaEJVZjY5Q3M5aXlnQlR1SmxXdmJxaHZoaEMtM0V0NllNYWNVbjVBQVNrTVN4M2FaWkU2eWk4Um1ad1pXZGF4WFdBUVMwVnhsbzZfRFhEWGY5NzJ6ZnUzaEdRUXJtYTN4QXlDUHFrdUlwVnBMQ3R1ZDJSUEJVUzZ6bmhR?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 100,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "SanDisk Stock's Run Hides Its Real Portfolio Job",
-        "discrepancy_note": "The primary catalyst claim is a qualitative assessment about the stock's role rather than a specific factual claim (dollar amount, percentage, date, etc.). While Source A [4] mentions the exact phrase, neither source provides a quantifiable, verifiable fact to confirm or deny this interpretive statement about the 'real portfolio job'."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "KLAC",
-      "price": 222.25,
-      "gap_pct": 6.19,
-      "pm_volume": 102644,
-      "avg_vol_10d": 15573614,
-      "avg_dollar_vol": 3461235712,
-      "mkt_cap": 290319678436,
-      "rvol": 0.55,
-      "adr_pct": 6.8,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No specific fundamental catalyst for KLAC found in recent news, indicating potential technical breakout or institutional flow.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 55,
-      "grade": "C",
-      "finviz_theme": "Semiconductors - Lithography",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Unknown",
-        "impact": "Speculative. Significant move on no news suggests **low float squeeze** or **institutional accumulation**. High risk of **Gap and Trap** without underlying fundamental support."
-      },
-      "analysis_details": "• **What Happened**\nNo specific fundamental news catalysts were reported for KLAC in the last **24 hours**, suggesting the recent price movement is driven by factors other than announced earnings, upgrades, or contracts. The only related headline is a general article titled \"**1 Profitable Stock to Own for Decades and 2 That Underwhelm**\", which does not specifically mention or provide actionable information for KLAC.\n\n• **Key Consideration**\nWithout a clear fundamental driver, any significant price action is speculative, potentially driven by **technical breakouts** or **institutional order flow**. The absence of specific news increases the risk of a **gap and trap** scenario, where initial gains are not sustained, particularly given the stock's relatively low **RVOL of 0.6x**, indicating lower-than-average recent trading interest relative to its 20-day average.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "1 Profitable Stock to Own for Decades and 2 That Underwhelm - StockStory",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPc3lnamFjZGV0eHl4WGJaS1Q4Q3RSUUlZNGxJV1A1dzF5SmRsZ0R1R0JtWS1NcWdTZ25LY0p0QVRzX0w5N3N4N0tIOEZ0X0hDYXpWZWNlZ0szdEZPRjZVQktxaktmUDBmQkxsUGhDRGJHd1FDYWRkZ0tMRmZjVW1VZVNsRzF1dWZNWXhuTlRieER1R19tdHExaDJYQVZWbE1EcjFwc1VYUXpQSGdVdXVENmM4NkdRd3pUR25QYm5n?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Lithography",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No specific fundamental catalyst for KLAC found in recent news, indicating potential technical breakout or institutional flow.",
-        "discrepancy_note": null
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "AMAT",
-      "price": 575.39,
-      "gap_pct": 6.16,
-      "pm_volume": 106359,
-      "avg_vol_10d": 11878159,
-      "avg_dollar_vol": 6834573907,
-      "mkt_cap": 456836317483,
-      "rvol": 0.49,
-      "adr_pct": 6.09,
-      "category": "Others",
-      "theme": "Positive Qualitative Assessment",
-      "reasoning": "Applied Materials receives positive sentiment as a top-tier quality stock, with its valuation assessed as fair value.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 55,
-      "grade": "C",
-      "finviz_theme": "Semiconductors - Foundries",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Applied Materials (NASDAQ:AMAT) is highlighted for shining as a **Top-Tier Quality Stock** according to Google News. Concurrently, its stock is noted to look **About Fair Value Today**, indicating a balanced valuation perspective.",
-        "impact": "While suggesting fundamental strength and market recognition of quality, the lack of specific event drivers like an earnings beat, analyst upgrade with PT, or new contract implies any positive price action is likely driven by general sentiment or technical factors rather than a definitive catalyst."
-      },
-      "analysis_details": "• **What Happened**\nApplied Materials (NASDAQ:AMAT) has garnered attention for its strong fundamental standing, being recognized as a **Top-Tier Quality Stock**. This qualitative assessment highlights its perceived strength in the market. Simultaneously, the stock is noted to be trading at **About Fair Value Today**, suggesting its current price reflects its intrinsic worth without significant undervaluation or overvaluation.\n\n• **Key Consideration**\nThe positive qualitative narrative around AMAT as a **Top-Tier Quality Stock** could provide underlying support, however, the absence of a specific, quantifiable catalyst such as an earnings surprise, a formal analyst upgrade with a price target revision, or a significant new contract means any upward momentum may be speculative or technically driven. Investors should monitor for more concrete news to justify sustained price movement beyond its **fair value** assessment.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Applied Materials (NASDAQ:AMAT) Shines as a Top-Tier Quality Stock - ChartMill",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPUlNkb3lUUnBweWZ0NFVQcGlvcDhpU2xQVmxVdHEzeUYzYXZIZUtYMlF6Y2xIOGhOU2lHZXNMQTMzYXNMNkl3ekc4a3phU1BuWEE3dVlkN2x5U0EyLUg2NGRDY181cHNKNVg2VmZLUS00VHI2eGZXLVJDcFlZMHJoUlgzckwxV0JzNlVKN1JrM3JMNWlIVzdQcDlvZjgxVG14OXlEWFh0TnU0S3VzTzg5Sm9FdHBLQQ?oc=5"
-        },
-        {
-          "title": "Applied Materials (AMAT) Stock Looks About Fair Value Today - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQdWRtQUNvWmVBMGtsSzc4dWlZZ1hVZVZsZXJKN0dwRHNmNk9pamJIV0g5TUxsQ3VENEdhN0tzcGoyN1p6cTM2ejExdWtuenRhRktldjh1SGlqVjJkWklqcG56S0NybHE1Y1dvUTM0a01xaXNwdUNCSmFaN0J0ZWhQZDRSVFdqUVhSRy1YQmFQTjBkMGp2V1I1cHRpaFhpQ3ZUZzJyWjlBRlctcnBJaVd4dG96NnZ0Z3VILWM0YnQ1SFJCcVFJam5pSlBMekNMaEs1VlFBSDRR0gHbAUFVX3lxTE40cklJMmxlaXU1bDVRRkRpcjBhWF9Ka1ZPZnBXZmxFd1VlaFJKS3ZVNHJ5cmlkUzc3M0VGcm9UR1c2bzhBalJVQ2M3djhoUFl5eHN1R25kc2RYSV9vTnlfbEJ1eEVFRjRhcTRoNURwTWZsOTVGUUpTV1g5cWJ2d2gwQmlCRUxiNWE3VmRaZUFXOEZMX1gwMWphYXJUTlVoV3pTMXV2V3JXTTZTYUR2aWM2Qk4tSUk2MlJUM1J6N213Zk9tLVhFUUstcjM1ekZvUDMtNW9vODVjTVBWbw?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Foundries",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Applied Materials' valuation is assessed as fair value.",
-        "discrepancy_note": "Source B [2] (simplywall.st) states AMAT stock 'Looks About Fair Value Today'. However, Source B [5] (GuruFocus) reports a 'GF Value $220.80 vs Price $575.39', which suggests the stock is significantly overvalued according to GuruFocus's metrics, directly conflicting with the 'fair value' assessment."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "CRDO",
-      "price": 236.88,
-      "gap_pct": 5.73,
-      "pm_volume": 74385,
-      "avg_vol_10d": 7392392,
-      "avg_dollar_vol": 1751109817,
-      "mkt_cap": 44172883497,
-      "rvol": 0.86,
-      "adr_pct": 9.29,
-      "category": "Others",
-      "theme": "Geopolitical Tensions",
-      "reasoning": "Credo Technology (CRDO) lost **8%** following renewed geopolitical tensions between the US and Iran.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Semiconductors - Analog",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Renewed **US-Iran Tensions** led to Credo Technology (CRDO) losing **8%** in value. Despite this, the stock was simultaneously noted as a **high-growth CAN SLIM Leader** with **strong price momentum**, and discussed in the context of **AI connectivity optimism**.",
-        "impact": "The geopolitical event introduces immediate downside risk, potentially overshadowing positive momentum signals and **AI connectivity optimism** in the short term, creating volatility."
-      },
-      "analysis_details": "• **What Happened**\nCredo Technology (CRDO) experienced an **8% loss** on **2026-07-14** due to **renewed US-Iran Tensions**. Concurrently, the company was highlighted as a **high-growth CAN SLIM Leader** exhibiting **strong price momentum** and discussed in relation to **AI connectivity optimism**, while also facing an **overvalued narrative**.\n\n• **Key Consideration**\nThe immediate impact of **geopolitical tensions** is a negative price action, conflicting with the underlying narrative of **strong price momentum** and **AI connectivity optimism**. This mixed signal suggests a period of elevated volatility, where macro factors are temporarily overriding fundamental or technical positives.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Credo Technology Group (CRDO) Screens as a High-Growth CAN SLIM Leader with Strong Price Momentum - ChartMill",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNdWdaSWdQelJOTXZCNVE0XzkyYWwzQ0EyelN2Zm5ONnZRSnl1Rl9talFGUHZRbXpuMEFYMWhhQWVVZjdfSFNYQXdid0RObURiTnZUMUk3M3RZc1VLOURPSWtWTDREaDFkN1NWWmo2NUUzWVVOYkRBZG9temVjV0R5dE9mNVFGYmZyTTcxcG9TTzJ1TWlIZWdzVnNkTU1Vcm15cW1tcXROQXVHRjlPN2NYd21kNENZSElrdXJGcXBZMGNVOUx1d2FxTERPVjJ5WkNwTGdCR1BmbzV3MGt2dXpHRw?oc=5"
-        },
-        {
-          "title": "Credo Technology Group Holding (CRDO) On AI Connectivity Optimism And The Overvalued Narrative - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQcU1vWFdSaFlCMmFYQUlfNE02NjVLanluV25FdWJ2UFk2RlNMYlpPd3U1c0ZTZ0kwMXdUX0xWTGo5OHhSdEtkMlF3UUFqbnN5MlpCODVXcWF0SG5PNGpvVnBnMThEUWdlVm16ZVhwNjZ6RHNJVVk1VDBSa3Q5YmZBQ3F0MUNmbTR2LTBlcklSTFFFb0tBU1pTSU5uZlZfeGtHOExNZFhlcUR0V2pZdVVYTXp3d3JZMlFSR21RU0JQazdhM2VjN3NGV3ZMYkhWRmx1RVowZ001ZEMzWXEtTXAyUkhxdWFTb0R3aXJZ0gHwAUFVX3lxTFAzMlB1b01QWTRWTVFtb2F5WXF3NGxhUVg1TmRuSWkzaDNnUlB0MGNYQTJtQlVocUluc0hsdTNXRUF5V1ZnSWJBM0xHX1VESXE3VFVVdEMtRUliMkdXVV90czBjRmlsS2gwUzB2RU5Mei1jMzdhRmhLT3QxRjhFVzlLVVU1UjZoekJtTkpvTnROMjJYZXpYY1h2Q2xJRHVXcHJFckhVczV2bGlWY3hESGtfTTAyMHotajJNeXdBWmZ3aFB4Qk0yWWJqazhnVXVYREdLUnFZeDdhMjIzZlh4Qks2bUFWa0phdWdhWGx4cUl4dA?oc=5"
-        },
-        {
-          "title": "Credo Technology (CRDO) Loses 8% Over Renewed US-Iran Tensions - Yahoo! Finance Canada",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNZTRHOXlwMXlLNC13MlZPbVhWdDVNbDk1TVBWLWVabXZDTGVxYnhScndRd2RDb25LMDVfSFRQVWtnbEdPakJEMTlGUjduNnFyMHhnOHdEdEpVeUhYd1lhaENVZ29HN3dOV0UyMFNvbmNoWG5SMl9zbjgzVi1feEx0dFA2QVI?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Analog",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Credo Technology (CRDO) lost 8% following renewed geopolitical tensions between the US and Iran.",
-        "discrepancy_note": "Source B (specifically, Yahoo! Finance Canada) confirms the claim that CRDO lost 8% due to US-Iran tensions. Source A (Finviz) has no news entries to confirm or deny this claim."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "LRCX",
-      "price": 329.92,
-      "gap_pct": 5.7,
-      "pm_volume": 122565,
-      "avg_vol_10d": 13453028,
-      "avg_dollar_vol": 4438422998,
-      "mkt_cap": 412588415933,
-      "rvol": 0.62,
-      "adr_pct": 5.77,
-      "category": "Thematic Narratives",
-      "theme": "AI Memory/Chip Demand Slowdown",
-      "reasoning": "Lam Research stock slides due to AI memory boom losing steam and slowing AI chip demand, directly impacting its market outlook.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 55,
-      "grade": "B",
-      "finviz_theme": "Semiconductors - Packaging",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Headlines indicate Lam Research stock is **sliding** and **falling** as the **AI memory boom loses steam** and **AI chip demand slows**, with **memory cracks showing**. Additionally, a holder plans a **Rule 144 sale of LRCX shares worth $6.1M**.",
-        "impact": "The demand slowdown directly threatens LRCX's future revenue streams from equipment sales, signaling potential market contraction in a key growth segment."
-      },
-      "analysis_details": "• **The Narrative**\nNews reports Lam Research stock is **sliding** and **falling** due to the **AI memory boom losing steam** and **AI chip demand slowing**. This market observation points to **memory cracks showing** in the broader AI chip sector, which directly impacts equipment suppliers like LRCX.\n\n• **Explosiveness**\nThis negative shift in the AI memory and chip demand narrative suggests significant downward pressure on LRCX's stock price. The underlying deceleration in a crucial growth sector, coupled with a notable **$6.1M Rule 144 share sale**, signals a material shift in investor sentiment and potential for sustained negative momentum.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Lam Research (LRCX) Stock Slides As AI Memory Boom Loses Steam - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQcjdDZHR1TEpKZFM3U3ZfaFgzRFNRcVh1czA5cVRqcUo0WmppdjFRU3FLOGhXdTVxbHp6UkJxeDBrcTZlc2IyWXYyQ3FVZ3hyUVMtdkFQeXhhQ25FQXVmYXlpMk5HZDd0VWZDVTIxS0FVbUcwQXFjb1BsZXI5U3dQMTlOVmZJZkFjZ1RSdGF2clowWEV2TENQLWNXcw?oc=5"
-        },
-        {
-          "title": "Lam Research (LRCX) Stock Falls As AI Chip Demand Slows And Memory Cracks Show - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPanpqbV9lYjlsQkl4dE1pdTBKdG45TFRnNDJPd1hTUXdaX2xSdDhXU2xzSXZyUmRobVpkbWhfQXdXejhqeGNDanN0LVdZemV6d0t2cDlxNS1ySU1fN0xuaGRsczRuOUtKaXBkTVJxaVk0aU1DX0FsWk5rRjRsLTQtd3RPeXI0U0tGVUoxdlJxTVlveGNaS2YtX2xYUzZUSmRmRHQ5VHMzdGotRG5LTDIxR1VwRkVKanM2aklKWnZ1Wk9Nb1pGdFJ1T0pWMEUxbnVhSFo40gHYAUFVX3lxTE04MWdhdUxvaTBoM09sYk9ic1dWZTBPMFljQ2tjYXRoaklpY3gtWWQ1WG9CcHRwLXJna3pSUDhaTFZNSEVFeml2YS1KRnN5MEpicXNMVjFyYXNjWmNtVGREdzJNMk82bng4RjFVOENweUdKcm5uZVRXXzgzc2ZlT0NydEo0OGI0OTZJOFYzM2daMmpRQ1JlZjZqWl9VZG0tQjhGb1lESFgwOEMzU0N6RE94UTV0OWZTelpkcWFaQjRYS1FLaS16a3I4Z0pObmM2cUZGU2I4WndDaA?oc=5"
-        },
-        {
-          "title": "Holder plans Rule 144 sale of LRCX (LRCX) shares worth $6.1M - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNbGFBNzdzLUg0VGdNR0k1YVBYOUM2eXNUYzZlRzNldmNFZUNvZlFYckdscXYzMlRYTmRrSzJUV0Y4MW1tSzNQS0dmVmdkNVlWaFF0bnhnTmw3WVh3bEZVMGNSRG0tcU9QcmpVZkhSV0lhOEtLUzZqc0w5WVdmNmhIR29sNDQ1Tk01cUpQM1BRTjl2U1JtTXBVV1hn?oc=5"
-        },
-        {
-          "title": "Lam Research Corp. stock underperforms Monday when compared to competitors",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/data-news/lam-research-corp-stock-underperforms-monday-when-compared-to-competitors-7e1bb3e0-996af8d0948e?mod=mw_FV"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Packaging",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Lam Research stock slides due to AI memory boom losing steam and slowing AI chip demand",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "MRVL",
-      "price": 217.53,
-      "gap_pct": 5.59,
-      "pm_volume": 670770,
-      "avg_vol_10d": 29104705,
-      "avg_dollar_vol": 6331146479,
-      "mkt_cap": 190505467938,
-      "rvol": 0.88,
-      "adr_pct": 7.51,
-      "category": "Others",
-      "theme": "Sector Sympathy",
-      "reasoning": "Marvell Technology **tumbled** along with other **chip stocks** due to a broader **sector sell-off**, not company-specific news.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Semiconductors - Compute",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Marvell Technology (**MRVL**) **tumbled** as **chip stocks sold off**, with MRVL down **-7.75%**. This move occurred in conjunction with declines in other major chip players like **AMD (-4.21%)**, **Intel (-6.12%)**, **Nvidia (-3.52%)**, and **Broadcom (-3.98%)**.",
-        "impact": "The decline appears to be a secondary effect of broader market or sector weakness, rather than a reflection of company-specific fundamentals for Marvell."
-      },
-      "analysis_details": "• **What Happened**\nMarvell Technology (**MRVL**) experienced a significant decline, falling **-7.75%**, as part of a broader **sell-off** across the **chip stock** sector. Headlines specifically noted that **Arm and Marvell Tumble As Chip Stocks Sell Off**, with other key players like **AMD**, **Intel**, **Nvidia**, and **Broadcom** also seeing substantial losses.\n\n• **Key Consideration**\nThis movement indicates a **sympathy move** within the **semiconductor industry**, rather than a specific fundamental catalyst tied to Marvell's operations or outlook. The lack of company-specific news suggests that the stock's performance is currently correlated with broader industry sentiment, making it a high-risk scenario for momentum-driven trades due to lack of an internal positive trigger.",
-      "peer_tickers": [
-        "AVGO",
-        "QCOM",
-        "NVDA"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "MRVU",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "$Marvell Technology (MRVL.US)$ - Moomoo",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOMG5KT0FQRE1KVmNoN05UU2F3ajBjU0tfUHBYS0N6b2o2Q1VnRFdGYnBBeHhIUmVLTkpiTkg0UHhoUFJJeHZMZmh6SldsRkU0UW9yWUo0SlZZblBFSkx1cnhtSGtZa3JzNW9nUmpkTVplb0lMclMtc3NHZGwyRWZFS3NvZmtsWDQ?oc=5"
-        },
-        {
-          "title": "Arm And Marvell Tumble As Chip Stocks Sell Off",
-          "source": "Finviz",
-          "url": "https://www.investors.com/news/technology/chip-stocks-sox-arm-marvell-sell-off?mod=IBD_FV"
-        },
-        {
-          "title": "AMD Stock: Collect 14% While Setting A 50%-Off Buy Price",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/6b0d95da-dbb5-3942-aa31-95d9245b485f/amd-stock%3A-collect-14%25-while.html"
-        },
-        {
-          "title": "Nasdaq falls, Dow slips as oil prices rebound on fresh US-Iran fighting",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/14ed870a-4fdb-3fec-bd9f-99724e7fc4c5/nasdaq-falls%2C-dow-slips-as.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Compute",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Marvell Technology tumbled",
-        "discrepancy_note": "While both Finviz [1] and Google News [1, 3, 4] confirm Marvell Technology declined, there is no single matching percentage. Google News [1] states 'Marvell Stock Drops 6%', while Google News [4] states 'Marvell Technology (NASDAQ:MRVL) Shares Down 7.8%'. Finviz [1] confirms 'tumble' but gives no specific percentage."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "LITE",
-      "price": 768.15,
-      "gap_pct": 5.22,
-      "pm_volume": 94850,
-      "avg_vol_10d": 4231540,
-      "avg_dollar_vol": 3250457451,
-      "mkt_cap": 59762074244,
+      "ticker": "PCT",
+      "price": 6.76,
+      "gap_pct": 6.95,
+      "pm_volume": 77445,
+      "avg_vol_10d": 4173093,
+      "avg_dollar_vol": 28210109,
+      "mkt_cap": 1341412171,
       "rvol": 0.79,
-      "adr_pct": 7.35,
-      "category": "Thematic Narratives",
-      "theme": "Optical Connectivity Narrative",
-      "reasoning": "Lumentum (LITE) gains attention after Jensen Huang endorses optical connectivity, suggesting strong thematic tailwinds for its core business.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 56,
-      "grade": "B",
-      "finviz_theme": "Semiconductors - Wireless",
+      "adr_pct": 6.73,
+      "category": "New Contract/Partnership",
+      "theme": "Recycled Film Partnership & Pilot Completion",
+      "reasoning": "PureCycle partnered with RM TOHCELLO on recycled BOPP film and completed pilot runs for recycled resin in Japanese food film.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "C",
+      "finviz_theme": "Materials - Chemicals",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "The stock of **Lumentum (LITE)** is drawing **'fresh attention'** following news that **Jensen Huang** has **'backed optical connectivity'**. This signals a significant endorsement from a key industry leader for a technology central to LITE's offerings.",
-        "impact": "This narrative can drive increased investor interest and potential demand for Lumentum's products, positioning the company favorably within the broader optical communications sector."
+        "catalyst": "PureCycle **partnered** with **RM TOHCELLO** on **recycled BOPP film** and **completed pilot runs** for its **recycled resin** in **Japanese food film**.",
+        "impact": "The partnership expands PureCycle's market reach and validates its recycled resin technology, potentially accelerating commercialization in the Asian food packaging sector."
       },
-      "analysis_details": "• **The Narrative**\nThe stock of **Lumentum (LITE)** is experiencing **'fresh attention'** as **Jensen Huang**, a prominent figure in the technology sector, has **'backed optical connectivity'**. This endorsement highlights the growing importance of **optical connectivity** solutions in the market, directly benefiting companies like Lumentum.\n\n• **Explosiveness**\nThe backing of **optical connectivity** by an industry leader like **Jensen Huang** suggests a strengthening thematic tailwind for **Lumentum**. This could lead to sustained momentum as investors rotate into companies poised to benefit from increasing adoption of advanced optical technologies, potentially expanding LITE's addressable market and demand profile.",
-      "peer_tickers": [
-        "COHR",
-        "AXTI",
-        "GLW"
-      ],
+      "analysis_details": "• **Impact**\nPureCycle announced a new **partnership** with **RM TOHCELLO** to develop **recycled BOPP film**, signaling progress in commercializing its sustainable materials. Additionally, the company **completed pilot runs** for its **recycled resin** specifically for use in **Japanese food film**, showcasing operational milestones and product validation.\n\n• **Strategic Value**\nThis dual news stream suggests strategic expansion into the **Japanese food packaging market** and an acceleration of its **recycled resin** technology integration. The partnership with **RM TOHCELLO** on **BOPP film** broadens the application scope for PureCycle's materials, potentially enhancing future revenue streams and competitive positioning in the circular plastics economy.",
+      "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Lumentum (LITE) Stock Gets Fresh Attention As Jensen Huang Backs Optical Connectivity - simplywall.st",
+          "title": "(2nd LD) Seoul shares end over 6 pct higher on tech rally despite Middle East tensions - Yonhap News Agency",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNQmNadG5sdXJSRlBqSk1qTnhDYXFvU2VDQ3lrT2Z5STNxb1dSU3dtTWxXMGY1emRVY3JObTVEZGZFcmVMRUw4Ym1vQUZjb2lHWDRUa1pkamxqY3NKc1ljdGRjSEJ3eF9RdUlTZkkzdEp0Q25zbVdMUTlyNDk0VXI2bVNIRWpZSUZsMzZ2Tm1ZV2FKaXBjUXNoTG4wOUZIbGRyQ1Jqd01JbWV1TzZJYUstRXAtaURkRlhqMzQyeHo1M01lQk04N214d2xkVm3SAdIBQVVfeXFMUFVrMjZYbmp6NWcwZFZzejVLZ1JhWDNJRFZXeWp1SUJQNzd4V2MxWVE2T1hqSnBPM2ZpdEt6clhNV2FhNVJWU2J1Z1ZVNnJrQ2JMMTgwd3VwdnFHaFhEaVFncWJzX1NLSjN1WjlQSlg4dnoyWVdOQ01yVUZUUk9KQTlvcDFSdHR0ckptd1p0eVdYTG9yVjRvMTgxNlM4bUlFaDdweElmSjBHRFEwMkYtUjNNNlhTcm9nMU54NVdORUZnVjlWcFJhRzhweXVKM1M1MXRB?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE04SzNVMEgzcGlNZ1ByTllIS2hwTFh1eU5IY2xIYUhEaUhGaDJBT01nY3VwWjd0emQ3ZlZHUjhHMjJsRWpJV3VwLVFweDdSWlpzdmpKNk1ReDdzdw?oc=5"
         },
         {
-          "title": "Lumentum (LITE) Stock Forecast & Analyst Ratings - Moomoo",
+          "title": "Seoul shares end over 6 pct higher on tech rally despite Middle East tensions - Yonhap News Agency",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwJBVV95cUxNb2RZNjhZTWxvQjFQYXpoUTBReHNMUlBVSTdMZXhfbjRkbHJ2UGx1VTVBODdnVU9jNk5nMkdoRURBeDhJTHZzS2pFVmF0Nm4yYlBMb0hvWlZ1andDeGhOZ2JBZ0ZRUFpQRnRPcHU4WS1rOUgtbHIxV3ZxQWg1NkY1NmhUMXR0UFdncWVhM3FYWHNCelhWWF9Vb3lpYjdSUnNDd25OdmhONFI0VHZLZzRfS1UyVWhnQzBIR3NoS0JTWk8wN25lSjlJbGo4anVQQUg2Tk9MZmJXVk5Id3Jsejc2OHN0WHQzWmVJby1ZZTVGazZaOXJhdWxqYW9wejV4aDdaU0Q4eDdhM1g1R1g5OGF2TExMVlp3RlZ1ei1XQjJQV2FlcktPRHpWbm5BaTZwdHBXYlhsSXFCaVd0S2c?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE42cXVjZmhod1BjYkNpcDZCUzJsc3ZTWld2YmlLZHJiUGhnTFh5R2g0QXJIQ0ZSdEszd0dmTHhOR210OUJRZm5DRWZzajc4QnRCR3g3U3FULTY1UQ?oc=5"
         },
         {
-          "title": "What's going on in today's pre-market session: S&P500 movers - ChartMill",
+          "title": "PureCycle partners with RM TOHCELLO on recycled BOPP film By Investing.com - Investing.com Canada",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQd3hPaWx2WHZmSE82OHZNUHF4TWJONXdieVJ0Vkt4cWt3VENyTE9rQXRpZzVlOUJXakxCRXJ3U3J0cEhMam5velFzZ3oyY3ZoVVJyS01iOW1yRC1zVXhUZG9YaXJqcld0NE1DX3BqWWVibEdpNHB6QUM1QkxGMFJyaFJZQmU0amFhRGxrTWVpdkUtcE5LbXgzYVZ6VEZ5U1NNbHViTWFyRmJDZUl4?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQLTVSQ3dYeW5Fd1JwSHhOQzFOTjN3dk55aWpiRDh3cmswTDVFNy0wb1Jpd1FZYXdxSnlkRlJFNU5scTd2cXV3N01NUWZKS2Nya2Q0OGVoRFlXeVN3dTNJMlRkWXVGWng4a25DUHVlV3Y1TUlJc0hpWDdVMl9JTTh2SS1tb3RQVXFfanhzM0NhcjQ5RjNkOHVTQ3RCQ2RLa0pQMzdUY3FsTGRCZGZqbkd4TkxOWEZBMmNmSVE?oc=5"
+        },
+        {
+          "title": "PureCycle Completes Pilot Runs for Recycled Resin in Japanese Food Film - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQMVJ0SlEzTnU1R3QxZWY4d1psZnF1NHlfMGhHY0poMzhGdTF0YndfcGV6WFlJbUpWbE9MQUUweHVSZG5sdlBTQXI2MDd6dVEzNmhmbllqeEowYVJkTnVyZ0xnUmh4dlYza3pBeEZuanJCR0R0R29FTEtKSF9sSWdnUnlhd3luTU13d2tTQ296ZTJFUngyeG5fTWRDVFVuVl9xYXRlQlhpS1ZCbjRtUU9nQkpOQXRnN0ZVX0JVTGxQMA?oc=5"
         }
       ],
       "edgar_filing": null,
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Semiconductors - Wireless",
-      "technical_status": "Pass",
+      "industry": "Materials - Chemicals",
+      "technical_status": "Fail (Avg $Vol $28M < $100M)",
       "verification": {
         "status": "Unconfirmed",
         "confidence_score": 90,
@@ -979,62 +386,7 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Lumentum (LITE) gains attention after Jensen Huang endorses optical connectivity.",
-        "discrepancy_note": "Source A (Finviz) has no information. Source B (Google News) [1] mentions the claim, but since confirmation from both sources is required, it remains unconfirmed."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "USAS",
-      "price": 4.04,
-      "gap_pct": 5.22,
-      "pm_volume": 74996,
-      "avg_vol_10d": 3307751,
-      "avg_dollar_vol": 13363314,
-      "mkt_cap": 1320811604,
-      "rvol": 1.06,
-      "adr_pct": 6.51,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $13M < $100M)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
+        "primary_claim": "PureCycle partnered with RM TOHCELLO on recycled BOPP film and completed pilot runs for recycled resin in Japanese food film.",
         "discrepancy_note": null
       },
       "gates_passed": 2,
@@ -1050,72 +402,53 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "GLW",
-      "price": 183.11,
-      "gap_pct": 5.13,
-      "pm_volume": 173802,
-      "avg_vol_10d": 14730515,
-      "avg_dollar_vol": 2697304602,
-      "mkt_cap": 157591391266,
-      "rvol": 0.44,
-      "adr_pct": 7.56,
+      "ticker": "UMC",
+      "price": 23.84,
+      "gap_pct": 6.29,
+      "pm_volume": 283889,
+      "avg_vol_10d": 16372227,
+      "avg_dollar_vol": 390313892,
+      "mkt_cap": 59070377408,
+      "rvol": 0.95,
+      "adr_pct": 4.85,
       "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No specific fundamental catalyst found for Corning (GLW); the move is likely due to technical factors or institutional flow.",
+      "theme": "Sector Sympathy",
+      "reasoning": "UMC moves in sympathy with TSMC after a Wedbush report suggests TSMC may raise mature-node manufacturing prices.",
       "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 55,
-      "grade": "C",
-      "finviz_theme": "Others",
+      "conviction": 56,
+      "grade": "B",
+      "finviz_theme": "Semiconductors - Foundries",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "Unknown",
-        "impact": "Speculative. No immediate fundamental news linked to Corning (GLW) in the last **24 hours** suggests the stock's movement is driven by technical trading or potential institutional rebalancing rather than specific company developments. The headline regarding **'Analyst Ratings, Stock Forecast and Price Target'** for Corning does not specify an actual rating change or its impact, while the **'AI Infrastructure Stocks'** headline does not explicitly name GLW."
+        "catalyst": "A **Wedbush report** indicated **Taiwan Semiconductor Manufacturing (TSM)** may **raise prices for mature-node manufacturing processes beginning in early 2027**. UMC reacted positively, moving **+1.62%** on this news.",
+        "impact": "This event suggests potential positive pricing trends for other mature-node foundries like UMC, as higher prices from the sector leader could allow competitors to also increase their pricing power or gain market share."
       },
-      "analysis_details": "• **What Happened**\nNo specific fundamental news directly impacting Corning (GLW) has been reported in the last **24 hours**. A general headline mentioned **'Corning (GLW) Analyst Ratings, Stock Forecast and Price Target'**, but it did not detail any specific upgrade, downgrade, or price target revision, nor the firm responsible. Additionally, a broader market headline discussed **'3 AI Infrastructure Stocks With Big European Operations'**, yet it did not identify Corning as one of these specific companies.\n\n• **Key Consideration**\nWith no explicit catalyst, the stock's price action is likely attributable to technical trading patterns, general market sentiment, or possibly unidentified institutional flow. Given the **RVOL of 0.4x**, current trading volume is significantly **below** its **20-day average**, indicating a lack of strong conviction behind any move. This makes any significant price change potentially unsustainable and vulnerable to reversals, increasing the risk for momentum traders.",
-      "peer_tickers": [
-        "COHR",
-        "LITE",
-        "FNSR"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "TECL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "TECS",
-          "mult": "3x"
-        }
-      ],
+      "analysis_details": "• **What Happened**\nA **Wedbush report** on **July 14, 2026**, indicated that **Taiwan Semiconductor Manufacturing (TSM)** is considering raising **prices for mature-node manufacturing processes** beginning in **early 2027**. This news led to a **+1.62%** move for **UMC**, signaling a sympathetic reaction to the potential industry-wide pricing shift.\n\n• **Key Consideration**\nThis development suggests a potential tailwind for mature-node foundries like UMC, as a price increase by the sector leader, **TSMC**, could alleviate pricing pressure across the industry. This may lead to improved margins or increased demand for **UMC's** mature-node offerings, although the direct impact on **UMC's** specific pricing or future contracts remains speculative.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Corning (GLW) Analyst Ratings, Stock Forecast and Price Target - Moomoo",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiowJBVV95cUxPY0cwaGpDSW94bDlHeFdQUmVYSEoxSWtxWHlrZEhPZHZ6ME9XSnZCc0t0LXJkMk0xZVNCanA1ZWszQTA1UWc0MmplcURZeGVuR1hSTjZPWXNITkpQZTRVbVJCaktLeHI0NkNsM2RTRmM1SjBtSFFNRVJieERhcl9xZFY2aUhSUk8yR09rdHZRcGppNDJrNk1UeXpBQ3hFUlRURTB4VDA1bEpaZmtnTXNqU3lwNTM2U1FQMTdwdm40cnpLcDY3VVJHT0Z6RnJLZWFVUGR2b2QyT3FfVzdvY1VHUVI0Z1RfLTJUWVVRZnB4NHZqa3NwdkRXX1I1M0gtWHR0UlJGOW52TjF0MGQwcWpNRmY5XzdjUV91YzZWa1hwWEtqaW8?oc=5"
-        },
-        {
-          "title": "3 AI Infrastructure Stocks With Big European Operations On Investors’ Radar - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQTjBsYi1PdHFFemIxN3RISjYwenVqbUgtbldYMmJ4WUphX19iZUI0STJ1UUVEb0R0Y2FsM1lyUHR5cUxtcjdCZUhVQXlQNnVMYlNZcWpCUVJFeFVxQWNDS3NBUkRVV2J0UnBtSm84YzhlSkRkSVhtYUoxc1h2SkliRWp5YV9fSEVWOXhjeV9kSWRndkdDT0xDQ2ljNUQ1ZG5yZi0tSHZxN0NseHpDWnp3dGZnTGg3VTRVWktR0gHAAUFVX3lxTE1JSnBTM3pxelV3YWhRNmtHQXFDZzJiejRrTDg4MDJuLWt4RFZ1cHlkakcxTzZpV3FMSWxRWUtFemdqUWstVUZveWV3UmJDZkR6WURsd1hJQk5UYWhndERDT1Qwdjg3ZFoxUHhMaUVjeDd1NUc2UVpUb3JMbHBidW5ndlRYMXdBVmtxWWdGbjRyVGtYU0lidzhDMmdFV3hzWF9kWGFVZjI1S3g5YWtnQ05FUXJLSTF6a1dwdnJlZVduYQ?oc=5"
+          "title": "Wedbush Delivers an Urgent Message for TSMC Stock Investors",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/articles/wedbush-delivers-urgent-message-tsmc-184001343.html"
         }
       ],
       "edgar_filing": null,
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Others",
+      "industry": "Semiconductors - Foundries",
       "technical_status": "Pass",
       "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
+        "status": "Unconfirmed",
+        "confidence_score": 40,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No specific fundamental catalyst found for Corning (GLW)",
-        "discrepancy_note": ""
+        "primary_claim": "TSMC may raise mature-node manufacturing prices",
+        "discrepancy_note": null
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -1130,103 +463,86 @@
       "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "WDC",
-      "price": 555.55,
-      "gap_pct": 5.12,
-      "pm_volume": 128661,
-      "avg_vol_10d": 7636408,
-      "avg_dollar_vol": 4242406464,
-      "mkt_cap": 191488152506,
-      "rvol": 0.52,
-      "adr_pct": 7.51,
-      "category": "Others",
-      "theme": "Sector Sympathy",
-      "reasoning": "Western Digital shares moved lower in sympathy with a broader selloff in U.S. and Asian chip stocks.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 55,
-      "grade": "C",
-      "finviz_theme": "Semiconductors - Memory",
-      "analysis_source": "gemini",
+      "ticker": "EOSE",
+      "price": 4.29,
+      "gap_pct": 5.35,
+      "pm_volume": 1536585,
+      "avg_vol_10d": 27247816,
+      "avg_dollar_vol": 116893131,
+      "mkt_cap": 1515217958,
+      "rvol": 0.71,
+      "adr_pct": 9.74,
+      "category": "Earnings",
+      "theme": "Preliminary Q2 Revenue Disclosure",
+      "reasoning": "EOSE disclosed preliminary Q2 revenue of $68-69 million via an 8-K filing, providing an early look at its financial performance.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "B",
+      "finviz_theme": "Clean Energy - Grid",
+      "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Broader semiconductor sector weakness, exemplified by **SK Hynix's Seoul shares posting a record drop** and **U.S. chip stocks falling**. Western Digital was noted to have declined by **-4.64%** alongside other memory chip makers like **SanDisk (-12.63%)**, **Seagate (-5.46%)**, and **Micron (-4.32%)**.",
-        "impact": "This suggests WDC's price action is not driven by company-specific news but rather a contagion effect from broader industry sentiment. The upcoming **August 5 call on full-year 2026 earnings** will be the next major company-specific catalyst, but current price action is secondary to sector trends."
+        "catalyst": "Eos Energy filed an **8-K with the SEC on 2026-07-15** announcing its **preliminary Q2 earnings/financial results**. The company reported **preliminary Q2 revenue of $68-69 million**. This official government disclosure provides the latest financial update for the company.",
+        "impact": "This preliminary revenue figure offers investors an early glimpse into the company's Q2 performance, potentially setting expectations or driving early momentum ahead of the full earnings release. The market will evaluate whether this range signals strong growth or potential deceleration."
       },
-      "analysis_details": "• **What Happened**\nWestern Digital experienced a significant selloff, with its stock declining by **-4.64%** yesterday. This move occurred in conjunction with a broader downturn in the semiconductor sector, as evidenced by **SK Hynix's Seoul shares posting a record drop** and a general fall in **U.S. chip stocks**. The decline was not isolated to WDC, with other memory chip makers like **SanDisk (SNDK -12.63%)** and **Micron (MU -4.32%)** also seeing substantial drops.\n\n• **Key Consideration**\nWith a relatively low RVOL of **0.5x**, the stock's movement is likely part of a broader sector rotation or de-risking rather than a high-conviction company-specific event. Wall Street also shows a **$240 split** on AI storage, indicating underlying uncertainty in the valuation and future prospects for WDC's AI storage business. Momentum traders should be wary of chasing weakness driven purely by sector sympathy without new company-specific catalysts.",
-      "peer_tickers": [
-        "STX",
-        "SMCI",
-        "NTAP"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
+      "analysis_details": "• **The Beats (Surprise Factor)**\nEos Energy (EOSE) filed an **8-K with the SEC on 2026-07-15**, reporting its preliminary financial results. The company announced **preliminary Q2 revenue** in the range of **$68-69 million**, marking an official disclosure of its recent performance.\n\n• **The Growth (Momentum)**\nThis preliminary revenue release offers initial insight into EOSE's operational progress and growth trajectory for the second quarter. Investors will be closely watching if this **revenue figure** translates into positive momentum, indicating sustained demand for its energy storage solutions in the **Clean Energy - Grid** sector.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Western Digital Stock Selloff Exposes a $240 Wall Street Split on AI Storage - TechStock²",
+          "title": "Eos Energy reports preliminary Q2 revenue of $68-69 million By Investing.com - Investing.com Canada",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPSFllWmNBcEZpUFBrcENrOFhRZjVrUWxrR0dETDRjUVhvR1gtTm40UW1xTzVicTBvUTFrcWNvcEVhaW1jOUlsaHpCMXAzVXhRbXpyejBrRHA2WjhjUGp5WllUQWNIcWwyNWxadlVPQ3l0SGRSY0lDdXEzaUI0SEEtSXhaMWtGOVNWWUlKZ3F2bVo4NFdadXc1ZEdxc3A?oc=5"
-        },
-        {
-          "title": "Western Digital lines up Aug. 5 call on full-year 2026 earnings - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNMENhV0xyU0gwZXpQTHFGX3M5ZFpSMWNfSVc2czNHYXZGTHoxWHpUUnpTWE10TFVzMnlSeXh5UjVDOWo3OUpVcVlqLXJFMHNYVDJFVUVVYkg2dVUyZFBCWFh1VWlqaWZjazdxa2lGZTgxS2ZrQ2tnQW5GbjlVemlKSkp4eHE4cFlRUGNaTmF2YTM4cHdUSUU1R3lxN1o0LU12ZDZDc2dMWjFhcXQzSXNVSmtfZkRTTG1neENMa3RWTQ?oc=5"
-        },
-        {
-          "title": "SanDisk Stock's Run Hides Its Real Portfolio Job",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/8b3857fe-8da9-392f-af3f-38ad8245d345/sandisk-stock%27s-run-hides-its.html"
-        },
-        {
-          "title": "SK Hynix's Seoul shares post record drop as U.S. chip stocks fall",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/livecoverage/stock-market-today-dow-jones-s-p-500-nasdaq-oil-prices-us-iran-exchange-strikes/card/sk-hynix-s-seoul-shares-post-record-drop-as-u-s-chip-stocks-fall-PB9COywXhSkFOugCVuGx?mod=mw_FV"
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOYy11WEpaLWdzci1oaXJwNUdRQWNFMUtfZzJQVXNrSEpXT19Nd3dpNVJMWFFmeDdQdnVUa1J1LWF0ekFzYWE4Q2EwMnU4SnBnS1BoazUxZ2Vrelg3OTg4MGc4cEVoUEVfcGpKVDFyZHc5R2kwVExQUUVsMjBaNmlPRTdhbjVZZV9ES2NvNFFPa0xURHB2NEZZQ013RERYb092UFlhT3Z4R1BUdl9xdlp0TnY3SkotRG9Hemc?oc=5"
         }
       ],
-      "edgar_filing": null,
+      "edgar_filing": {
+        "filing_date": "2026-07-15",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "7.01",
+          "8.01",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1805077/000162828026048253/eose-20260715.htm"
+      },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Semiconductors - Memory",
+      "industry": "Clean Energy - Grid",
       "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
+        "status": "Discrepancy",
         "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "The catalyst summary does not contain a specific factual claim (e.g., dollar amount, percentage, date, approval decision) to verify.",
-        "discrepancy_note": "The primary catalyst claim is qualitative ('shares moved lower in sympathy with a broader selloff') rather than quantitative or highly specific. While both sources generally indicate a decline in WDC and chip stocks, there is no specific numerical claim from the catalyst summary to confirm with exact number agreement from the sources."
+        "primary_claim": "preliminary Q2 revenue of $68-69 million",
+        "discrepancy_note": "Source A (Finviz News) provides no information. Source B (Google News) [4] confirms the preliminary Q2 revenue of $68-69 million, but since Finviz does not confirm it, the claim is not verified by BOTH sources as required."
       },
-      "gates_passed": 5,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": true,
+        "gate_price": false,
         "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
+        "gate_mkt_cap": false,
         "gate_adr": true
       },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 15,
+    "small_gaps": 5,
     "large_gaps": 2,
-    "total_headlines": 32,
+    "total_headlines": 21,
     "monthly_cost_usd": 0.01
   }
 }
