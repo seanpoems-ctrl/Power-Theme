@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-16 17:43 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Volatility Spike",
+    "spy_price": 750.72,
+    "spy_change_pct": -0.54,
+    "vix": 16.73,
+    "hy_oas": 2.71,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 64.8,
+    "mmth": 70.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly and Company announced positive Phase 3 trial data for their novel Alzheimer's treatment, significantly surpassing efficacy benchmarks and boosting future revenue outlook."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Amazon.com Inc. unveiled an aggressive expansion of its global fulfillment network and hinted at strong AWS growth projections at a key investor event, driving optimism."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "GameStop Corp. experienced a surge in trading volume and options activity, reflecting a resurgence in retail-driven speculative interest without new company-specific catalysts."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-16 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "QCOM",
           "company": "Qualcomm Incorporated",
           "reason": "Qualcomm continues to benefit from ongoing semiconductor supply chain reconfigurations and 5G deployment cycles, a recycled theme driving incremental interest."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-25 18:10 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Tech Outperformance, Underlying Volatility",
-    "spy_price": 734.3,
-    "spy_change_pct": 0.14,
-    "vix": 18.89,
-    "hy_oas": 2.76,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 61.3,
-    "mmth": 65.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MU",
-          "company": "Micron Technology",
-          "reason": "Micron Technology's strong earnings beat and raise guidance signal robust demand in the memory sector, particularly benefiting from AI growth."
-        },
-        {
-          "ticker": "QCOM",
-          "company": "Qualcomm Inc.",
-          "reason": "Qualcomm's announcement of data center expansion and optimistic revenue projections highlights its growing influence in enterprise AI infrastructure."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA continues to see flow-driven momentum as the dominant AI infrastructure play, though without fresh catalysts today, it remains a C-grade technical trade."
         }
       ]
     }
