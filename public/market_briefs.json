@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-16 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Volatility Spike",
+    "spy_price": 750.72,
+    "spy_change_pct": -0.54,
+    "vix": 16.73,
+    "hy_oas": 2.71,
+    "yield_curve": 0.42,
+    "credit_status": "Complacent",
+    "s5fi": 64.8,
+    "mmth": 70.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple (AAPL) rallied on news of a strategic partnership with a major European telecom provider, expanding its services ecosystem and device penetration in key international markets."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet (GOOGL) advanced following an optimistic analyst report highlighting accelerated revenue growth in its cloud division, fueled by new enterprise AI integrations."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "GameStop (GME) experienced a short-covering surge as retail traders capitalized on technical momentum, disregarding any fresh fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-16 08:25 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA continues to see flow-driven momentum as the dominant AI infrastructure play, though without fresh catalysts today, it remains a C-grade technical trade."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-25 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Sectoral Risk-On / Divergent Flows",
-    "spy_price": 734.3,
-    "spy_change_pct": 0.14,
-    "vix": 18.89,
-    "hy_oas": 2.76,
-    "yield_curve": 0.3,
-    "credit_status": "Complacent",
-    "s5fi": 61.3,
-    "mmth": 65.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MU",
-          "company": "Micron Technology",
-          "reason": "Strong 'Beat & Raise' earnings report today fuels bullish sentiment and upgrades within the semiconductor sector."
-        },
-        {
-          "ticker": "QCOM",
-          "company": "Qualcomm",
-          "reason": "News of significant data center expansion and optimistic revenue projections drive robust investor confidence in its growth trajectory."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continued momentum from its dominant position in AI and data center hardware, without a fresh catalyst today, suggests sustained technical buying."
         }
       ]
     }
