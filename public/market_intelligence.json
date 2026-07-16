@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-16 07:05 ET",
+  "generated_at": "2026-07-16 08:25 ET",
   "phase": "PRE",
   "session": "Pre-Market",
   "assets": {
@@ -29,27 +29,27 @@
     },
     "^VIX": {
       "label": "VIX",
-      "price": 16.03,
+      "price": 16.35,
       "open": 15.82,
-      "high": 16.12,
+      "high": 16.36,
       "low": 15.77,
-      "close": 16.03,
+      "close": 16.35,
       "prev_open": 16.2,
       "prev_close": 15.67,
       "volume": 0,
-      "change_pct": 2.3
+      "change_pct": 4.34
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 79.6,
+      "price": 80.15,
       "open": 80.0,
       "high": 80.59,
       "low": 78.91,
-      "close": 79.6,
+      "close": 80.15,
       "prev_open": 79.74,
       "prev_close": 79.6,
-      "volume": 37272,
-      "change_pct": 0.0
+      "volume": 52044,
+      "change_pct": 0.69
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24843.94,
+      "price": 24760.09,
       "open": 25018.95,
       "high": 25021.51,
-      "low": 24815.67,
-      "close": 24843.94,
+      "low": 24696.17,
+      "close": 24760.09,
       "prev_open": 24970.05,
       "prev_close": 24999.53,
       "volume": 0,
-      "change_pct": -0.62
+      "change_pct": -0.96
     }
   },
   "fred": {
@@ -100,32 +100,32 @@
   "analysis": {
     "title": "Pre-Market Brief: July 16, 2026",
     "mood_emoji": "🤨",
-    "mood": "Mixed US, Global Caution",
-    "narrative": "US equities show divergence with S&P 500 advancing while Nasdaq retreats, contrasting with significant declines across Asian and European markets. This broader global weakness coincides with a notable rise in the VIX, suggesting underlying caution despite selective US strength.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 754.81 | +0.40% | ➡️ |\n| Nasdaq 100 ETF | 717.74 | -0.27% | ➡️ |\n| VIX | 16.03 | +2.30% | 📈 |\n| Crude Oil | 79.60 | +0.00% | ➡️ |\n| Nikkei 225 | 66835.54 | -2.79% | 📉 |\n| DAX | 24843.94 | -0.62% | 📉 |",
-    "macro_section": "High Yield Credit Spreads (BAMLH0A0HYM2) remain at a complacent 2.72%, signaling institutional comfort with risk exposure. Concurrently, the 10Y-2Y Yield Curve (T10Y2Y) stands at a normal and steepening +0.420, a configuration typically supportive of ongoing risk appetite and growth expectations.",
-    "analysis_para1": "The global tape presents a mixed picture, with the Nikkei 225 seeing a substantial -2.79% decline and the DAX retreating by -0.62%. This notable weakness across Asian and European equities, alongside flat Crude Oil prices, stands in stark contrast to the complacent US High Yield Credit Spread, which sits at 2.72%. While international markets signal growing caution, US credit instruments are not yet pricing in widespread systemic risk. This divergence suggests that while global sentiment is deteriorating, US institutional risk appetite remains relatively insulated for now.",
-    "analysis_para2": "Today's primary flow appears to be driven by a mechanical reallocation of risk, spurred by mounting global uncertainty. Significant declines in the Nikkei 225 and DAX, coupled with a notable rise in the VIX, indicate a broad-based shift away from international and higher-beta assets. This is manifesting as selective strength in the S&P 500, likely due to defensive rotation and flight to quality within US large-caps, while the more growth-oriented Nasdaq 100 sees outflows. Investors are likely reducing exposure to perceived higher-risk segments and hedging against potential volatility.",
-    "analysis_para3": "Traders should prioritize risk management and look for confirmation of directional moves. The S&P 500 ETF at 754.81 needs to hold 750 as a key intraday support; a break below could signal broader selling pressure. Conversely, a sustained break above 755 could invite further selective accumulation. On the Nasdaq 100 ETF, watch 715 as critical support; failure here would accelerate downside. A continued rise in the VIX above 16.50 should be considered a strong risk-off threshold, prompting a reduction in long exposure across all risk assets today.",
-    "technical_signal": "No reversal pattern confirmed yet. The market is showing signs of internal divergence with S&P 500 strength against Nasdaq weakness, while global indices are under pressure. Monitor for sustained breaks of key intraday support levels on US indices to confirm a shift in sentiment.",
+    "mood": "Global Unease, US Resilience Tested",
+    "narrative": "The S&P 500 ETF shows tentative resilience despite significant global equity weakness and a rising VIX, indicating a selective flow within US markets. Investors are navigating a mixed macroeconomic picture with divergent performance across regions, prompting a cautious reassessment of risk.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 754.81 | +0.40% | ➡️ |\n| Nasdaq 100 ETF | 717.74 | -0.27% | ➡️ |\n| VIX | 16.35 | +4.34% | 📈 |\n| Crude Oil | 80.15 | +0.69% | 📈 |\n| Nikkei 225 | 66835.54 | -2.79% | 📉 |\n| DAX | 24760.09 | -0.96% | 📉 |",
+    "macro_section": "High-yield credit spreads remain complacent at 2.72%, signaling a generally relaxed credit environment despite global pressures. Concurrently, the 10-Year minus 2-Year yield curve is normal and steepening at +0.420, which historically supports risk-taking, yet the broad global equity declines imply institutional risk appetite is being tested.",
+    "analysis_para1": "Global markets opened with significant pressure, as the Nikkei 225 plummeted -2.79% and the DAX declined -0.96%, reflecting a broad risk-off sentiment across international equities. Crude oil, however, pushed higher by +0.69% to $80.15, possibly indicating persistent inflation concerns even amidst equity weakness. This stark global downturn stands in contrast to the current complacency in US high-yield credit spreads at 2.72%, suggesting US risk appetite is exhibiting resilience but faces strong headwinds from overseas. The market will be watching closely to see if US credit begins to price in this global caution.",
+    "analysis_para2": "Today's primary flow appears driven by a **risk-averse flow rotation** within US equities, spurred by significant weakness in global markets. The notable decline in the Nikkei 225 and DAX, coupled with a rising VIX, is prompting investors to de-risk from more speculative or growth-oriented assets, evidenced by the Nasdaq 100 ETF's decline. Concurrently, there is a selective flight to quality within the S&P 500, suggesting a reallocation towards perceived defensive sectors or large-cap stability rather than broad market enthusiasm. This mechanical catalyst implies a defensive posture is being adopted as global uncertainties mount.",
+    "analysis_para3": "Traders should closely monitor the S&P 500 ETF's resilience around the 754.00 level, as a sustained move below this point amidst rising VIX (16.35) would signal increasing capitulation to global selling pressure. A break of the Nasdaq 100 ETF below 715.00 would confirm further weakness in growth segments, triggering potential short entries. For long positions, key support for the S&P 500 ETF at 750.00 should be the immediate risk-off threshold. Today, prioritize capital preservation and consider defensive positions or hedges against broader market declines, awaiting clearer directional cues from overseas markets.",
+    "technical_signal": "No reversal pattern confirmed yet. While S&P 500 stocks above SMA50 at 61.0% and S&P stocks above SMA200 at 67.0% suggest underlying breadth strength, the rising VIX indicates increasing uncertainty. Traders should watch for a decisive shift in index momentum or a reversal in the VIX's upward trend to confirm any change in market character.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase & Co. is attracting flows following an analyst upgrade highlighting its resilient balance sheet and robust Q2 earnings outlook, making it a defensive play amid broader caution."
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Reports suggest unprecedented pre-orders for its Vision Pro 2 headset, indicating robust consumer demand and strong Q3 guidance."
         },
         {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly and Company is expected to see strong interest after reporting positive Phase 3 trial results for its new obesity drug, signaling significant revenue growth potential in a defensive sector."
+          "ticker": "COST",
+          "company": "Costco Wholesale Corporation",
+          "reason": "Received a significant analyst upgrade following revised estimates for strong Q3 comparable sales growth, driven by resilient consumer spending."
         }
       ],
       "c_grade": [
         {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corporation remains a focal point for traders based on yesterday's positioning squeeze, but without fresh catalysts today, its price action will likely be purely technical and sensitive to broader tech sector outflows."
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "Observing increased social media chatter and volatile trading volumes, indicative of pure technical flow rather than fresh fundamental news."
         }
       ]
     }
