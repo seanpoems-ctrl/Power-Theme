@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-16 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Mixed US, Global Caution",
+    "spy_price": 754.81,
+    "spy_change_pct": 0.4,
+    "vix": 16.03,
+    "hy_oas": 2.72,
+    "yield_curve": 0.42,
+    "credit_status": "Complacent",
+    "s5fi": 61.0,
+    "mmth": 67.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase & Co. is attracting flows following an analyst upgrade highlighting its resilient balance sheet and robust Q2 earnings outlook, making it a defensive play amid broader caution."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly and Company is expected to see strong interest after reporting positive Phase 3 trial results for its new obesity drug, signaling significant revenue growth potential in a defensive sector."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation remains a focal point for traders based on yesterday's positioning squeeze, but without fresh catalysts today, its price action will likely be purely technical and sensitive to broader tech sector outflows."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-15 17:37 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Ongoing momentum in AI semiconductor demand continues to drive flow-based trading, absent fresh fundamental news today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-25 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Strength, US Tech Lags",
-    "spy_price": 733.24,
-    "spy_change_pct": -0.05,
-    "vix": 17.92,
-    "hy_oas": 2.71,
-    "yield_curve": 0.3,
-    "credit_status": "Complacent",
-    "s5fi": 60.5,
-    "mmth": 65.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft announced a massive new enterprise cloud computing contract, projecting significant revenue upside for the fiscal year."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "NVIDIA unveiled a breakthrough in quantum computing accelerators, solidifying its leadership in next-gen processing."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "FCEL",
-          "company": "FuelCell Energy Inc.",
-          "reason": "Experiencing a technical bounce after several days of heavy selling, likely due to short-covering or speculative retail interest without fresh fundamental news."
         }
       ]
     }
