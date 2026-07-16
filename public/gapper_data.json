@@ -1,76 +1,276 @@
 {
-  "scan_time": "2026-07-15 08:55 ET",
+  "scan_time": "2026-07-16 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "AEHR",
-      "price": 72.01,
-      "gap_pct": 32.48,
-      "pm_volume": 257225,
-      "avg_vol_10d": 2255549,
-      "avg_dollar_vol": 162422083,
-      "mkt_cap": 2264948938,
-      "rvol": 1.3,
-      "adr_pct": 9.96,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "Aehr Test Systems reported strong Q4 2026 earnings with a beat and upbeat FY27 guidance, leading to a significant after-hours rally.",
+      "ticker": "ATAI",
+      "price": 5.36,
+      "gap_pct": 34.14,
+      "pm_volume": 18041558,
+      "avg_vol_10d": 9507293,
+      "avg_dollar_vol": 50959090,
+      "mkt_cap": 1973373491,
+      "rvol": 0.67,
+      "adr_pct": 8.53,
+      "category": "New Contract/Partnership",
+      "theme": "Acquisition by Eli Lilly",
+      "reasoning": "ATAI is being acquired by Eli Lilly for $2.8 billion, advancing therapies for treatment-resistant depression.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
-      "grade": "A",
-      "finviz_theme": "Semiconductors - Packaging",
+      "conviction": 76,
+      "grade": "C",
+      "finviz_theme": "Biotech - Oncology",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Aehr Test Systems filed an 8-K for Fiscal 2026 Fourth Quarter and Full Year Financial Results on **2026-07-14**. Headlines indicate an **Earnings Beat** with **upbeat FY27 guidance**, driving the stock to **pop 40% after-hours**. The company also reported **Record Quarterly Bookings** and a **$100 Million Effective Backlog**.",
-        "impact": "The strong financial performance, combined with robust guidance and significant order intake, signals strong momentum and potential for continued growth, particularly in the silicon carbide market."
+        "catalyst": "Catalyst: Eli Lilly announced its intent to **buy psychedelics maker AtaiBeckley** for **$2.8 billion**, aiming to advance therapies for **treatment-resistant depression and other mental health conditions**. This material contract was disclosed in an **8-K filing on 2026-07-16**.\nImpact: This acquisition represents a significant strategic move, validating ATAI's experimental treatments and providing substantial capital and infrastructure from a major pharmaceutical company, potentially accelerating development and market access for its pipeline. This transaction provides a clear exit and valuation for ATAI shareholders.",
+        "impact": ""
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nAehr Test Systems announced an **earnings beat** for its fiscal 2026 fourth quarter results, which drove the stock **40% after-hours**. The company also reported **record quarterly bookings** and achieved a **$100 million effective backlog**, highlighting robust demand and operational strength.\n\n• **The Growth (Momentum)**\nBeyond the earnings beat, Aehr received **more than $8 million in new silicon carbide wafer-level burn-in orders**, signaling accelerated demand driven by **global electric vehicle programs**. The company has successfully transitioned its business to focus significantly on **electric vehicle silicon carbide**, positioning itself within a high-growth market.\n\n• **The Guide**\nAdding to the positive sentiment, retail bulls are pointing to **upbeat FY27 guidance** provided by Aehr Test Systems. This forward-looking optimism suggests sustained business momentum and strong growth prospects in the silicon carbide test and burn-in market, particularly as electric vehicle adoption continues to expand.",
-      "peer_tickers": [
-        "COHU",
-        "ONTO",
-        "MKSI"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
+      "analysis_details": "• **Impact**\nEli Lilly has initiated an acquisition to **buy psychedelics maker AtaiBeckley** for **$2.8 billion**, as indicated by news headlines and a **material contract agreement (8-K filing)**. This strategic move aims to **advance therapies for treatment-resistant depression and other mental health conditions**, highlighting a significant interest in ATAI's experimental treatments.\n\n• **Strategic Value**\nThis acquisition by Eli Lilly validates ATAI's pipeline and positions its experimental treatments to benefit from Eli Lilly's extensive resources and development expertise. The deal underscores the growing traction of psychedelic-based therapies in addressing unmet needs in mental health, potentially accelerating clinical trials and eventual market availability.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
       "headlines": [
         {
-          "title": "PayPal jumps on reported takeover bid, Aehr Test soars By Investing.com - Investing.com UK",
+          "title": "Eli Lilly to buy psychedelics maker AtaiBeckley for $2.8 billion as experimental treatments gain traction - CNBC",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQdGRwS2NFVU9QcXNRbjU4SDNGSzFxSjNNdjJiLUlRaHZYaWxHeTRreC1qRWNYaDN0T0F5N1lMT3JsMXkxbW9LY0ptRndWLXBrd2s2a2xpT0dSUHhzeG51UWxuS0txcnMweW03X0hpaEhaWngxYUtDMVlTNFhpaGMxZGF6b2xkWmN2c2lSSFB5U0xOV2tIZzF0TmtRbWc5ZjB0M0JIQTE4OFhkZWZxT0E?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPYmtnNzNheEZDZEFwLXY5UFBDc0FHeGc4OXZJUGgzeFNRVjE3RGtsOVhSMGFWRTRMNmpQdGRFZDNTWVhMcWR4MUNaOHB6X2g3LUloUE03NVZhZkxkeXFzeEV4ZnRYRWNaenBFZnAyT1BtNXNmU2NxS0VVcDU3SlZFLXFmYkRmOEZyRUdoQXltMkQyTmtLZ2tFejM1bHkxcDRmM1HSAacBQVVfeXFMUDYzb21fTEcxTXZjNWpnZ3IwT3VWclhOcXd3UkczSjdwTVozNDZ3RlpIZmxDVE5fYllfYURKT3dzLW1fWVNUdkc2M1dzUURiSHNKaEEzREljamltVDEwUVVNSG1WaUlnYVIxQzAybGF2LVJseE9nWnFYWkJnU0stZDM1Q3NiWXBhRTQtdWVLTElDaTNud09kQ2Nfa2wwaHF4UjE5SnkzNUk?oc=5"
         },
         {
-          "title": "Aehr Test Systems Reports Fiscal 2026 Fourth Quarter and Full Year Financial Results with Record Quarterly Bookings and $100 Million Effective Backlog - Aehr Test Systems",
+          "title": "Lilly to acquire AtaiBeckley to advance therapies for treatment-resistant depression and other mental health conditions - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxPRG5KcGh1dzV6ME1PSlg5dnJVZms3dktzUlloMVJDd1V5WGttcm5BeEFSVUtPeHJMcGtuLUh5WnA3QnRHeEowV3lqQ3AwYWlZR0JuMFdvdVlIMXFBMkpvOXBMaklUY29lcWk0TnhDd0xkMzJJcXRVSjM2cTNqb05NbElta0dVVmszQVhHcU52dWlSQlY3U1lZVmZoNnFOVWNtbUx4Zmg2WUN3RHlqN3RFRU9fVkJCLUtuaFN1YVV5VXdCQTVSejFTYl9Ucl9iY2R3V0t0Sk83ODNnd1FyQ1o2bHJUODNnajBZdUpTQmczdWo5eUVPZzYyOGdrZU92aVpxN1pRVEtWZzFWaEU?oc=5"
-        },
-        {
-          "title": "Aehr Test Systems Q4 2026 Earnings Call Summary",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/3c226f69-3a70-3a79-953e-974d4f07f0fc/aehr-test-systems-q4-2026.html"
-        },
-        {
-          "title": "AEHR Stock Pops 40% After-Hours On Earnings Beat  Retail Bulls Point To Upbeat FY27 Guidance",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/0da908b2-ff09-32bd-8dc5-b9ad2f99d0d1/aehr-stock-pops-40%25.html"
-        },
-        {
-          "title": "Aehr Receives More Than $8 Million in New Silicon Carbide Wafer-Level Burn-In Orders as Global Electric Vehicle Programs Accelerate",
-          "source": "Finviz",
-          "url": "/news/368070/aehr-receives-more-than-8-million-in-new-silicon-carbide-wafer-level-burn-in-orders-as-global-electric-vehicle-programs-accelerate"
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPMVVaSFBKSzNacW5hVzFpWUJjMFhxclhEZFQyUlh1RVJxM3NiM0M0ZnBMSTZRWGJZdDZlVkhwYjRLNGQ3R25nU1N0enpiSjlNZlNBQmhwa0hJbERiblJzWGNpMmdyakhya1A2c1Y1TnRjVGF6dWhmSlE0c29ubUVOR0VVdmF2Vm9sWEIzS0FpSC1KNERfc2lhT1NRRFdKVUhHR0N1VVhnTQ?oc=5"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-07-14",
+        "filing_date": "2026-07-16",
+        "form": "8-K",
+        "items": [
+          "1.01",
+          "7.01",
+          "9.01"
+        ],
+        "category": "New Contract/Partnership",
+        "label": "Material Contract or Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/2081043/000114036126028604/ef20078103_8k.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Biotech - Oncology",
+      "technical_status": "Fail (Avg $Vol $51M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 80,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "$2.8 billion acquisition price",
+        "discrepancy_note": "Finviz News (Source A) has no mention of the acquisition or the price. Google News (Source B) contains multiple headlines ([1], [5]) confirming the $2.8 billion acquisition by Eli Lilly."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "CDNA",
+      "price": 29.75,
+      "gap_pct": 17.68,
+      "pm_volume": 110265,
+      "avg_vol_10d": 806332,
+      "avg_dollar_vol": 23988377,
+      "mkt_cap": 1536869561,
+      "rvol": 0.89,
+      "adr_pct": 4.87,
+      "category": "Government Policy",
+      "theme": "Medicare Coverage Policy",
+      "reasoning": "CareDx stock surged **20%** on news of a favorable **Medicare coverage policy**, significantly expanding market access and revenue potential.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 56,
+      "grade": "C",
+      "finviz_theme": "Digital Health",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "CareDx stock **surged 20%** today following news of a favorable **Medicare coverage policy**. This policy directly impacts the company's ability to get its services/products reimbursed.",
+        "impact": "This development fundamentally improves CareDx's market access and revenue streams by ensuring reimbursement for its offerings, potentially leading to sustained upward momentum."
+      },
+      "analysis_details": "\n• **The Policy**\nCareDx stock **surged 20%** today on news of a **Medicare coverage policy**. This specific policy, announced on **July 16, 2026**, enables reimbursement for the company's services or products, indicating a significant positive regulatory development.\n\n• **Direct Impact**\nThe implementation of the **Medicare coverage policy** directly expands the addressable market and revenue potential for CareDx by securing reimbursement for its offerings. This removes a significant barrier to adoption and can drive sustained demand and revenue growth, signaling a potential for continued price momentum.\n",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "CareDx stock surges 20% on Medicare coverage policy - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPaENSZ2lWaUlrMWwzTGc0N1ZhMHA3VUpwYk8yWFJBTlk3OXJBbGM0Y2lhNF9OeHZySDBPbWQycUljSFNGekw1bS1WTmpiMmd3V0lzbVFCR0cxNmc0Qkp4QUZ3dzAxSGZWVUFHR2ZMU1cyeFRSb3BVMC1JRmxrd1dqUzNBZ2FaR21rZWIyU1ZZZnZaWkZUUWpOMDNHWnI1cmNrMENyTnFrcjZuajJDcm9CODFR?oc=5"
+        },
+        {
+          "title": "CareDx to Report Second Quarter 2026 Financial Results on July 30, 2026 - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOc0N2OFpnODdBQnl1aENlcFhiYThXVjkyd1pkTkhiMHhrUUdNTGNkMzNDcjRzV0JxdC1QYTNMMENiTllXT01vOWxCZnJReDVLZ1lCYWVyNW5pOWNJSUhRNWJIQU5IVEs4b3JPQTFJRTJHZTNKQTQ4X0FXczk4NU9sekRtYmJodGV0dHVBV1RZVGJ5dUJ0MTR5YU1OTWVDNWJ0SWZYZHV3V0Rxb214dG1HMmFBanJzUkpBdTREQTRaME4?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Digital Health",
+      "technical_status": "Fail (Avg $Vol $24M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "CareDx stock surged 20%",
+        "discrepancy_note": "Source A (Finviz) provides no information regarding the stock surge. Source B (Google News, specifically the Investing.com article) confirms 'CareDx stock surges 20% on Medicare coverage policy'. Since only one of the two primary sources (Finviz and Google News) mentions this specific claim, it is marked as Discrepancy."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "CMPS",
+      "price": 13.31,
+      "gap_pct": 8.94,
+      "pm_volume": 326917,
+      "avg_vol_10d": 5021702,
+      "avg_dollar_vol": 66838854,
+      "mkt_cap": 1795829113,
+      "rvol": 0.55,
+      "adr_pct": 7.37,
+      "category": "Thematic Narratives",
+      "theme": "Psychedelic Drug Sector Opportunity",
+      "reasoning": "Jefferies highlighted CMPS as a beneficiary of the growing psychedelic drug opportunity following robust Johnson & Johnson's Spravato sales.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 55,
+      "grade": "C",
+      "finviz_theme": "Pharma - Large Cap",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Jefferies identified a significant **psychedelic drug opportunity** following strong **Johnson & Johnson's Spravato sales growth**, explicitly naming **Compass Pathways (CMPS)** as a potential beneficiary.",
+        "impact": "This provides sector-wide tailwinds for CMPS, reinforcing the market's confidence in the therapeutic area and attracting investor interest."
+      },
+      "analysis_details": "• **The Narrative**\nJefferies analysts pointed to **Johnson & Johnson’s Spravato sales growth** as strong evidence supporting the broader **psychedelic drug opportunity**. This endorsement specifically mentioned **Compass Pathways (NASDAQ:CMPS)**, alongside other developers like **AtaiBeckley Inc. (NASDAQ:ATAI)** and **Cybin Inc. (NYSE-A:CYBN)**, as companies positioned to benefit from this expanding market.\n\n• **Explosiveness**\nThis analyst commentary ties CMPS to a burgeoning sector with validated commercial success from a major pharmaceutical player, **Johnson & Johnson**. Such a narrative can generate significant investor interest and capital flow into the psychedelic drug space, potentially driving momentum for CMPS as a key player.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Compass Pathways PTSD Study Found 78% of Sessions Were Silent - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOT3llbDZITmg0UE5zT2s1b3NWNUtzLVNpX1ZfNEszbDE2M2htNHJxMVZ0Z0JZQUJRdngyLWp1NmlOeE1Fdi1UNUtHT3lreWlxZF93S04xOVNSUTJJNFVZMnRnajdhdEtQc2R1a1Z2aFNHbDI4aVlBM0Y5bk02Rl8ybGZENHo4RUdWRm1ULWRNMmM0MlV6SHJiMThVWUdEMDNyVWt6d3k3UGw2RUFwZW1yZlpjeWI?oc=5"
+        },
+        {
+          "title": "Johnson & Johnsons Spravato sales growth supports psychedelic drug opportunity: Jefferies",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/m/b46303ae-6f2d-3169-bd32-7f48f6cdbef5/johnson-%26-johnson%E2%80%99s-spravato.html"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Pharma - Large Cap",
+      "technical_status": "Fail (Avg $Vol $67M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 60,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Jefferies highlighted CMPS as a beneficiary of the growing psychedelic drug opportunity following robust Johnson & Johnson's Spravato sales.",
+        "discrepancy_note": "Finviz confirms Jefferies linking Spravato sales growth to the psychedelic drug opportunity but does not specifically mention CMPS as *the* beneficiary. Google News headlines do not confirm Jefferies' specific statement about CMPS or Spravato sales, instead attributing CMPS's rise to other factors or making general statements about psychedelic stocks."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "UNH",
+      "price": 418.52,
+      "gap_pct": 6.69,
+      "pm_volume": 371464,
+      "avg_vol_10d": 5008516,
+      "avg_dollar_vol": 2096164116,
+      "mkt_cap": 380076562608,
+      "rvol": 1.47,
+      "adr_pct": 2.26,
+      "category": "Earnings",
+      "theme": "Analyst Target Raises",
+      "reasoning": "UnitedHealth Group filed 8-K for earnings, leading analysts to raise price targets and provide a modest fair value lift.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 78,
+      "grade": "B",
+      "finviz_theme": "Pharma - Large Cap",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "UnitedHealth Group (UNH) filed an **8-K** on **2026-07-16** for **Earnings/Financial Results** (Item 2.02). Following this disclosure, analysts raised targets, resulting in a **modest fair value lift** for UNH stock.",
+        "impact": "This suggests a positive reception to UNH's financial results, potentially indicating solid performance or improved outlook that warrants re-evaluation from analysts."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nWhile specific **EPS** or **revenue beat figures** are not disclosed in the headlines, the market reaction indicates a positive surprise. UnitedHealth Group (UNH) stock experienced a **modest fair value lift** as analysts revised and **raised their price targets** after the company's **2026-07-16** earnings report.\n\n• **The Guide**\nThe upward revision of **analyst targets** suggests a perceived strengthening of UNH's business outlook, likely influenced by the earnings report and potentially future guidance. This positive sentiment is in contrast to the broader insurance sector, where **Elevance Health (ELV) results** highlighted **margin pressures**, causing other insurance stocks to slide, but UNH appears to be a notable exception.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "UNHG",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "UnitedHealth Group (UNH) Stock Sees Modest Fair Value Lift As Analysts Raise Targets - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQN1c2bnRDQS1OUUNmRTg2U1VkRExKRnFpNUlhY0N6NHVTWm1fYk41b3FPX2VMM3FoTklyRTVGdjhib2JrdFl5VmlWcjBrT1dyR2VJal95YTRKcnlINEZXWWVyTWpkZG1SRzRCb3Y0Tmg1RU1rZ0hYRVpkV3FkUk5ncjNOeGJkWXdWNG5QSGp3ck8tcTBiQk5vUzV3?oc=5"
+        },
+        {
+          "title": "Will UnitedHealth (UNH) Beat Estimates Again in Its Next Earnings Report? - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQNEJ0ak9oT2kzeTRaZkllczNrdDA1OHpiSUFtYUJWZWFSU095bG1FQVNFV1RMY2NYUi1iRjBEUGFTV3VoRUx6STdDNFM3dU1WaFhrZ0MwbzhJelNZdXVBOW1jVUZaZVctaTVPTkszaUt5ZkdOSmVZT2I2NU1HVlVEXzBKem1EcVM3OFVXRmVfWnRiUzJpQVBhMjlBdGpNWHdtVFhGUQ?oc=5"
+        },
+        {
+          "title": "UnitedHealth's Stock Run Is Strong. Earnings Will Gauge Medicare Advantage Recovery.",
+          "source": "Finviz",
+          "url": "https://www.barrons.com/articles/unitedhealth-stock-earnings-ai-b825645a?mod=bar_FV"
+        },
+        {
+          "title": "Health insurance stocks slide after Elevance highlights margin pressures (ELV)",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/m/7d15cee1-4862-35f9-934f-076eec1f6d2a/health-insurance-stocks-slide.html"
+        },
+        {
+          "title": "Insurance stocks fall after Elevance Health results show margin pressure",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/healthcare/articles/insurance-stocks-fall-elevance-health-112121271.html"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-07-16",
         "form": "8-K",
         "items": [
           "2.02",
@@ -78,98 +278,22 @@
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1040470/000165495426006655/aehr_8k.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000191/unh-20260716.htm"
       },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Semiconductors - Packaging",
-      "technical_status": "Pass",
+      "industry": "Pharma - Large Cap",
+      "technical_status": "Fail (ADR 2.3% < 4%)",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 95,
+        "status": "Unconfirmed",
+        "confidence_score": 80,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "AEHR stock experienced a significant after-hours rally",
-        "discrepancy_note": "Finviz Source A [2] states 'Pops 40% After-Hours', while Google News Source B [4] states 'Rocketing Nearly 30% Premarket'."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "PYPL",
-      "price": 47.37,
-      "gap_pct": 19.29,
-      "pm_volume": 10454066,
-      "avg_vol_10d": 13277067,
-      "avg_dollar_vol": 628934664,
-      "mkt_cap": 41785338003,
-      "rvol": 0.76,
-      "adr_pct": 3.12,
-      "category": "New Contract/Partnership",
-      "theme": "Takeover Offer",
-      "reasoning": "PayPal surged on reports of a **$53 billion takeover offer** from **Stripe and Advent**, with investors anticipating a higher bid.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "B",
-      "finviz_theme": "Fintech - Payments",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Reports emerged of a **$53 billion takeover offer** for PayPal from **Stripe** and **Advent**, causing PayPal shares to **surge premarket** and trade **up 18%**. 'The Big Short' investor **Michael Burry** commented that the **$53 billion offer** is 'simply too low', expecting a higher bid.",
-        "impact": "This potential acquisition could fundamentally re-rate PayPal, signaling significant institutional interest and unlocking shareholder value, with speculative upside for a higher bid."
-      },
-      "analysis_details": "• **Impact**\nPayPal shares **surged 18%** on reports of a **$53 billion takeover offer** from **Stripe** and **Advent**. Renowned investor **Michael Burry** publicly stated the **$53 billion offer** is 'simply too low', suggesting he expects a higher bid for the company.\n\n• **Strategic Value**\nThis reported takeover offer implies a significant re-evaluation of PayPal's underlying value by major institutional players. The market is now pricing in potential strategic consolidation or a bidding war, which could significantly boost PYPL's valuation and momentum trajectory in the near term.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Michael Burry Says $53B Offer For PayPal Is 'Simply Too Low' – ‘The Big Short’ Investor Expects Higher Bid - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQM1NQbUlhcmR2OE9hdGZVTDBfUjNIQUk2VXU3T1BIclVfekxIQmRzZjhJOW5tcmcweTdlQVozWmlWR1NiQmhMRTdSazhQQ3NFem1UUEVWYjU0c0JCWkJsTnB1SzRqaTJONGc5M1B2RXVzWjd0Z0pMaXkxQkw2eUFSYzVaTldCdTJiU0tzSmJ5aG96amdBenF2Ng?oc=5"
-        },
-        {
-          "title": "PayPal Shares Surge Premarket on Reports of $53 Billion Takeover Offer - WSJ",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNUlpLc054a0hZQURhcjVGUHhuUTlnUHlMa2x1Ri1XWnZHT3AtSDBwUGNNV1N3MzJXZnMyQWdhVDRVeFQzZWNmSkV3cmc1VW1JTmZXakNONFhwV24tazNLTXU3Q1MycnlKRVdNVVZDVV93R1dSSHZrdEc1UFI4TTBFOURQQ0RNX2FvTlVWYkN0eWJfbDQwVXJDbjNwckhzVFNGaWdBMjQta3Q2WFJqZ000XzlJOGtGMUE?oc=5"
-        },
-        {
-          "title": "PayPal stock surges 18% on report of a $53 billion takeover offer from Stripe and Advent - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxORzJDcTYtaWU2WGVLaUhjTWU5TmpuWC1rUUVSV21uY19CRU5QcjRiU1YzTmNHV1FBdmVhZlpUWG5nOFhtaE10a0pZanNIRzZXSHFPaWJ6bzVPUmRwNW8zcnkzYlpHVUdvRTJlUS1UUm5fei1JNUhCZUtpZUxfZ2llVk5IMW5PaEN1SlM0ekJpLUpzbDNSVlltUkdn?oc=5"
-        },
-        {
-          "title": "New buy now, pay later rules confirmed  will they protect you?",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/91c649eb-3e7d-346e-b56a-c0c015866381/new-buy-now%2C-pay-later-rules.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Fintech - Payments",
-      "technical_status": "Fail (ADR 3.1% < 4%)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "$53 billion takeover offer",
-        "discrepancy_note": null
+        "primary_claim": "analysts to raise price targets and provide a modest fair value lift for UnitedHealth Group due to earnings",
+        "discrepancy_note": ""
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -184,315 +308,41 @@
       "tier_label": "Strong Catalyst"
     },
     {
-      "ticker": "LION",
-      "price": 13.29,
-      "gap_pct": 9.18,
-      "pm_volume": 57423,
-      "avg_vol_10d": 2348108,
-      "avg_dollar_vol": 31206355,
-      "mkt_cap": 3862521018,
-      "rvol": 1.1,
-      "adr_pct": 4.45,
-      "category": "Others",
-      "theme": "Others",
-      "reasoning": "LION: News | Virginia is gaining lion's share of DC-area multifamily development - CoStar",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 50,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "fallback",
-      "analysis_detail": {
-        "catalyst": "Headlines: News | Virginia is gaining lion's share of DC-area multifamily development - CoStar | LGHL Stock Spikes As Lion Group Bets On AI And Web3 - StocksToTrade | Power Metallic intercepts 6m at 12.38% copper equivalent near surface - Stock Titan",
-        "impact": "No clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry."
-      },
-      "analysis_details": "• **What Happened**\nHeadlines: News | Virginia is gaining lion's share of DC-area multifamily development - CoStar | LGHL Stock Spikes As Lion Group Bets On AI And Web3 - StocksToTrade | Power Metallic intercepts 6m at 12.38% copper equivalent near surface - Stock Titan\n\n• **Key Consideration**\nNo clear catalyst — high risk of Gap and Trap. Wait for a 15-min base above pre-market high before considering entry.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "News | Virginia is gaining lion's share of DC-area multifamily development - CoStar",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOV1dXQ1U5djIwc1hrN0FoNklESzgteVhQaDU4Sk5MWFloZXM2OEZNN0FZSFkzWkhhNnNWMFBEcFNDa3U1ZllVeGFFcFdrT0djcUZQblFqa3FjZEZ2ajVpNVVocjFhQUkyT1huNWw2QjN4aExXWGpEZ1ZTZDEwMG95Y1N4NGhNWVZxVHVLa1pQZEMzUGpQeEp3dmN2dnlFR25paU1GZnJGOUdyWVU?oc=5"
-        },
-        {
-          "title": "LGHL Stock Spikes As Lion Group Bets On AI And Web3 - StocksToTrade",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxNVC1BV3RKTEdtcjA2VU1wT3d4WjhmczNMektSYXh1ZHdMZUNEalFGMVVhQmliWk4xdzd4a1ZkN0gzNGQtdmxqZFBpZlFzU0ZKQ3dwR0V2SHVybXIxV21sN19sMWNhejh4cTJ3RE5CZ3ZiSF9NMWFyc2h4ZXRtbjFacw?oc=5"
-        },
-        {
-          "title": "Power Metallic intercepts 6m at 12.38% copper equivalent near surface - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNTTVsQmYxbk40azh2dWQyOThnNlhDdzhyamlfQ1Z0WEJMSVlwcFpUZzNVLWRwWldpd2ptdlRSaFptc1ZNZThEdDNxbkdCSWYtSlI2aDk1NXdoLWY5czcxVF93UnZhMGhaVnRIc2NLN2ktbWlQS2R2ZElPNXZWbVVsVEU3d3R0ZW1kb05uaS0xVUJYenQ2Q0JYY3N4VlluWGhlMFZ2WGk3Qm5qNGhkaC02NmJoV0Q3bHA1TV9SQlhBdV8?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $31M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 85,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Virginia is gaining lion's share of DC-area multifamily development",
-        "discrepancy_note": "Only Google News [4] mentions this claim. Finviz News [1] does not mention this development and refers to 'Lionsgate' and 'European Bidders', which is a different context for a potentially different company with a similar ticker or an unrelated news item."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "LPTH",
-      "price": 11.52,
-      "gap_pct": 8.94,
-      "pm_volume": 83245,
-      "avg_vol_10d": 2777406,
-      "avg_dollar_vol": 31995717,
-      "mkt_cap": 764476466,
-      "rvol": 0.59,
-      "adr_pct": 9.01,
-      "category": "New Contract/Partnership",
-      "theme": "New Customer Order",
-      "reasoning": "LightPath Technologies secured a new **$11M camera order**, driving significant positive stock reaction and investor interest today.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 75,
-      "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "LightPath Technologies announced a **new $11M camera order**, explicitly linked to the stock's jump. Additionally, LightPath anticipates a customer transition from **Germanium to BlackDiamond materials**, indicating potential product evolution.",
-        "impact": "The new contract provides a clear revenue boost and validates market demand for LightPath's offerings, potentially strengthening its competitive position."
-      },
-      "analysis_details": "• **Impact**\nLightPath Technologies' stock **jumps** following the announcement of a new **$11M camera order**, providing a tangible revenue catalyst for the company. This significant order signals robust demand for LightPath's products and services, directly impacting its financial outlook positively.\n\n• **Strategic Value**\nThe company also expects a customer to transition from using **Germanium to BlackDiamond materials**, indicating a strategic shift or preference for LightPath's advanced material offerings. This could enhance competitive positioning and product differentiation, attracting further customer engagement for LightPath's proprietary technologies.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "LPTH Q2 2026 Earnings: Significant EPS Miss Despite Positive Stock Reaction - EPS Consistency Score - dars.gov.et",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQVTBRX08xNU40Xzh0aGR4dHRXekpFNmlpMXEzNGp5dWV3SUhRbzVzWFdSd0ptRkZYQlljWDBCeUlqcTlVc1QyaVRMYzZ1aTBaLTY2aVhRb0k4a2RDUmVNUFVWQmVjWUlJWGtLVUVDRHpDREk5V0piSFdxaTJBZHNuS1htMFhJbmlTdGRSbk16S2Vqa1lvT3ZRSlBlOTJGWmxyTkdibmxTSkZRcm9JS0RqSGdOQ0lqcU0?oc=5"
-        },
-        {
-          "title": "LightPath Technologies stock jumps on $11M camera order By Investing.com - Investing.com Canada",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxNVGp5QTZLQU5yODhVUXBBSUJtc3J1WVhBTnFjQjRkN2ROeXlIb3pxelB6bEFGVW1zNnpXZ1BQblMtQjMtVVdreW5pSDgzdEdpd25oOEhBQW5VSklRd1dPdU9INm9EcjRMQmExdmo5U2V3SXEzdHZpTjVXc0N0eUNIb2NUSlJrWHotdGxmLW5kdXg0eV92MnZEZnYyQkdZU3Y5MTRNT29lSWoyNkRiUmROeUJ2YzdCQQ?oc=5"
-        },
-        {
-          "title": "LightPath expects customer to switch from Germanium to BlackDiamond materials - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQTjJhZExkeFhKNVJPUTgwMmMyQ3FrRGlRSzk3OEZONlV0MC0yUUx3eDJCOXB6X0ZTM0c4Q3FiRFdScEFNVFppc3FWa29aUGVtRU15cS1NWFczTzMtMzlrUXpXQTFxbXg0TmFXTXFBYnZnTGtwd0J5V1B5eUZ1RzBHcXFFOVQzYk41ZE40WW83TEt3U3ZVTW5kZHhSWTJ3aFdMaGc3YTJ3dFNld2d0MlgxeFc2Xy1tRFVSY0E?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $32M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "LightPath Technologies secured a new **$11M camera order**, driving significant positive stock reaction and investor interest today.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "PCT",
-      "price": 6.76,
-      "gap_pct": 6.95,
-      "pm_volume": 77445,
-      "avg_vol_10d": 4173093,
-      "avg_dollar_vol": 28210109,
-      "mkt_cap": 1341412171,
-      "rvol": 0.79,
-      "adr_pct": 6.73,
-      "category": "New Contract/Partnership",
-      "theme": "Recycled Film Partnership & Pilot Completion",
-      "reasoning": "PureCycle partnered with RM TOHCELLO on recycled BOPP film and completed pilot runs for recycled resin in Japanese food film.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "C",
-      "finviz_theme": "Materials - Chemicals",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "PureCycle **partnered** with **RM TOHCELLO** on **recycled BOPP film** and **completed pilot runs** for its **recycled resin** in **Japanese food film**.",
-        "impact": "The partnership expands PureCycle's market reach and validates its recycled resin technology, potentially accelerating commercialization in the Asian food packaging sector."
-      },
-      "analysis_details": "• **Impact**\nPureCycle announced a new **partnership** with **RM TOHCELLO** to develop **recycled BOPP film**, signaling progress in commercializing its sustainable materials. Additionally, the company **completed pilot runs** for its **recycled resin** specifically for use in **Japanese food film**, showcasing operational milestones and product validation.\n\n• **Strategic Value**\nThis dual news stream suggests strategic expansion into the **Japanese food packaging market** and an acceleration of its **recycled resin** technology integration. The partnership with **RM TOHCELLO** on **BOPP film** broadens the application scope for PureCycle's materials, potentially enhancing future revenue streams and competitive positioning in the circular plastics economy.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "(2nd LD) Seoul shares end over 6 pct higher on tech rally despite Middle East tensions - Yonhap News Agency",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE04SzNVMEgzcGlNZ1ByTllIS2hwTFh1eU5IY2xIYUhEaUhGaDJBT01nY3VwWjd0emQ3ZlZHUjhHMjJsRWpJV3VwLVFweDdSWlpzdmpKNk1ReDdzdw?oc=5"
-        },
-        {
-          "title": "Seoul shares end over 6 pct higher on tech rally despite Middle East tensions - Yonhap News Agency",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE42cXVjZmhod1BjYkNpcDZCUzJsc3ZTWld2YmlLZHJiUGhnTFh5R2g0QXJIQ0ZSdEszd0dmTHhOR210OUJRZm5DRWZzajc4QnRCR3g3U3FULTY1UQ?oc=5"
-        },
-        {
-          "title": "PureCycle partners with RM TOHCELLO on recycled BOPP film By Investing.com - Investing.com Canada",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQLTVSQ3dYeW5Fd1JwSHhOQzFOTjN3dk55aWpiRDh3cmswTDVFNy0wb1Jpd1FZYXdxSnlkRlJFNU5scTd2cXV3N01NUWZKS2Nya2Q0OGVoRFlXeVN3dTNJMlRkWXVGWng4a25DUHVlV3Y1TUlJc0hpWDdVMl9JTTh2SS1tb3RQVXFfanhzM0NhcjQ5RjNkOHVTQ3RCQ2RLa0pQMzdUY3FsTGRCZGZqbkd4TkxOWEZBMmNmSVE?oc=5"
-        },
-        {
-          "title": "PureCycle Completes Pilot Runs for Recycled Resin in Japanese Food Film - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQMVJ0SlEzTnU1R3QxZWY4d1psZnF1NHlfMGhHY0poMzhGdTF0YndfcGV6WFlJbUpWbE9MQUUweHVSZG5sdlBTQXI2MDd6dVEzNmhmbllqeEowYVJkTnVyZ0xnUmh4dlYza3pBeEZuanJCR0R0R29FTEtKSF9sSWdnUnlhd3luTU13d2tTQ296ZTJFUngyeG5fTWRDVFVuVl9xYXRlQlhpS1ZCbjRtUU9nQkpOQXRnN0ZVX0JVTGxQMA?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Materials - Chemicals",
-      "technical_status": "Fail (Avg $Vol $28M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "PureCycle partnered with RM TOHCELLO on recycled BOPP film and completed pilot runs for recycled resin in Japanese food film.",
-        "discrepancy_note": null
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "UMC",
-      "price": 23.84,
-      "gap_pct": 6.29,
-      "pm_volume": 283889,
-      "avg_vol_10d": 16372227,
-      "avg_dollar_vol": 390313892,
-      "mkt_cap": 59070377408,
-      "rvol": 0.95,
-      "adr_pct": 4.85,
-      "category": "Others",
-      "theme": "Sector Sympathy",
-      "reasoning": "UMC moves in sympathy with TSMC after a Wedbush report suggests TSMC may raise mature-node manufacturing prices.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "B",
-      "finviz_theme": "Semiconductors - Foundries",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "A **Wedbush report** indicated **Taiwan Semiconductor Manufacturing (TSM)** may **raise prices for mature-node manufacturing processes beginning in early 2027**. UMC reacted positively, moving **+1.62%** on this news.",
-        "impact": "This event suggests potential positive pricing trends for other mature-node foundries like UMC, as higher prices from the sector leader could allow competitors to also increase their pricing power or gain market share."
-      },
-      "analysis_details": "• **What Happened**\nA **Wedbush report** on **July 14, 2026**, indicated that **Taiwan Semiconductor Manufacturing (TSM)** is considering raising **prices for mature-node manufacturing processes** beginning in **early 2027**. This news led to a **+1.62%** move for **UMC**, signaling a sympathetic reaction to the potential industry-wide pricing shift.\n\n• **Key Consideration**\nThis development suggests a potential tailwind for mature-node foundries like UMC, as a price increase by the sector leader, **TSMC**, could alleviate pricing pressure across the industry. This may lead to improved margins or increased demand for **UMC's** mature-node offerings, although the direct impact on **UMC's** specific pricing or future contracts remains speculative.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Wedbush Delivers an Urgent Message for TSMC Stock Investors",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/articles/wedbush-delivers-urgent-message-tsmc-184001343.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Foundries",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 40,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "TSMC may raise mature-node manufacturing prices",
-        "discrepancy_note": null
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
       "ticker": "EOSE",
-      "price": 4.29,
-      "gap_pct": 5.35,
-      "pm_volume": 1536585,
-      "avg_vol_10d": 27247816,
-      "avg_dollar_vol": 116893131,
-      "mkt_cap": 1515217958,
-      "rvol": 0.71,
-      "adr_pct": 9.74,
-      "category": "Earnings",
-      "theme": "Preliminary Q2 Revenue Disclosure",
-      "reasoning": "EOSE disclosed preliminary Q2 revenue of $68-69 million via an 8-K filing, providing an early look at its financial performance.",
+      "price": 4.37,
+      "gap_pct": 5.26,
+      "pm_volume": 1404167,
+      "avg_vol_10d": 27323786,
+      "avg_dollar_vol": 119404945,
+      "mkt_cap": 1543473743,
+      "rvol": 0.97,
+      "adr_pct": 9.97,
+      "category": "New Contract/Partnership",
+      "theme": "Defense Contract Win",
+      "reasoning": "Eos Energy Enterprises secured a new contract, providing energy storage for the **Golden Dome Defense** project in America.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 76,
       "grade": "B",
       "finviz_theme": "Clean Energy - Grid",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Eos Energy filed an **8-K with the SEC on 2026-07-15** announcing its **preliminary Q2 earnings/financial results**. The company reported **preliminary Q2 revenue of $68-69 million**. This official government disclosure provides the latest financial update for the company.",
-        "impact": "This preliminary revenue figure offers investors an early glimpse into the company's Q2 performance, potentially setting expectations or driving early momentum ahead of the full earnings release. The market will evaluate whether this range signals strong growth or potential deceleration."
+        "catalyst": "Eos Energy Enterprises (**EOSE**) was **selected to deliver mission-ready power for Golden Dome for America**, involving its **Pittsburgh-made energy storage** solution.",
+        "impact": "This contract represents a significant win in the defense sector, potentially opening doors for further government and military applications, enhancing the company's market positioning and revenue stream."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nEos Energy (EOSE) filed an **8-K with the SEC on 2026-07-15**, reporting its preliminary financial results. The company announced **preliminary Q2 revenue** in the range of **$68-69 million**, marking an official disclosure of its recent performance.\n\n• **The Growth (Momentum)**\nThis preliminary revenue release offers initial insight into EOSE's operational progress and growth trajectory for the second quarter. Investors will be closely watching if this **revenue figure** translates into positive momentum, indicating sustained demand for its energy storage solutions in the **Clean Energy - Grid** sector.",
+      "analysis_details": "• **Impact**\nEos Energy Enterprises (**EOSE**) has been **selected to deliver mission-ready power** for the **Golden Dome for America** initiative. This involves the deployment of their **Pittsburgh-made energy storage solution**, indicating a strategic win within the defense sector. The headlines specifically mention the selection of their energy storage technology for a critical application.\n\n• **Strategic Value**\nThis contract positions EOSE as a key player in providing robust and reliable energy solutions for defense applications. Securing a project like **Golden Dome for America** can serve as a strong validation of their technology, potentially attracting further government and military contracts and enhancing the company's long-term growth prospects and competitive standing in the energy storage market.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Eos Energy reports preliminary Q2 revenue of $68-69 million By Investing.com - Investing.com Canada",
+          "title": "Pittsburgh-Made Energy Storage Selected for Golden Dome Defense - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOYy11WEpaLWdzci1oaXJwNUdRQWNFMUtfZzJQVXNrSEpXT19Nd3dpNVJMWFFmeDdQdnVUa1J1LWF0ekFzYWE4Q2EwMnU4SnBnS1BoazUxZ2Vrelg3OTg4MGc4cEVoUEVfcGpKVDFyZHc5R2kwVExQUUVsMjBaNmlPRTdhbjVZZV9ES2NvNFFPa0xURHB2NEZZQ013RERYb092UFlhT3Z4R1BUdl9xdlp0TnY3SkotRG9Hemc?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOc0p3bzYyTWFVSUV1OGdfTHQ5RWMwd2tDOWNCeHJMYldMbXpXcktVcnRCSV9DdjZTMVRyLXBSWHhtQ3hObTBOSS1wRXE3X2J1dWdheG9HaWVXcXNoaU0wLTNXSDRpdVhOYXJ3bGhUR1Q0V1BPR1R1X3hTU1NoblNMbHBldjFhaUFPOGx5dkpqU0lNLU5lQ1JnYUNDTzlEM2lOdnUtYmQtV3lzSFlUdU9zaklOdTJRSXF3ODdlNXpB?oc=5"
+        },
+        {
+          "title": "Eos Energy Enterprises Selected to Deliver Mission-Ready Power for Golden Dome for America",
+          "source": "Finviz",
+          "url": "/news/368819/eos-energy-enterprises-selected-to-deliver-mission-ready-power-for-golden-dome-for-america"
         }
       ],
       "edgar_filing": {
@@ -514,14 +364,14 @@
       "industry": "Clean Energy - Grid",
       "technical_status": "Pass",
       "verification": {
-        "status": "Discrepancy",
+        "status": "Verified",
         "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "preliminary Q2 revenue of $68-69 million",
-        "discrepancy_note": "Source A (Finviz News) provides no information. Source B (Google News) [4] confirms the preliminary Q2 revenue of $68-69 million, but since Finviz does not confirm it, the claim is not verified by BOTH sources as required."
+        "primary_claim": "Eos Energy Enterprises secured a new contract, providing energy storage for the Golden Dome Defense project.",
+        "discrepancy_note": null
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -540,9 +390,9 @@
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 5,
+    "small_gaps": 3,
     "large_gaps": 2,
-    "total_headlines": 21,
+    "total_headlines": 13,
     "monthly_cost_usd": 0.01
   }
 }
