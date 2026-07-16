@@ -1,6 +1,52 @@
 {
-  "generated_at": "2026-07-15T23:10:13.638547+00:00",
+  "generated_at": "2026-07-15T23:59:17.978405+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Other",
+      "theme_rs": 98.0,
+      "perf_1d": 13.22,
+      "leaders": [
+        {
+          "ticker": "AEHR",
+          "price": 87.79,
+          "rs_52w": 98,
+          "adr_pct": 13.87,
+          "vol_surge": 5.14,
+          "mkt_cap": 2761281197,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "UMC",
+          "price": 24.92,
+          "rs_52w": 98,
+          "adr_pct": 6.42,
+          "vol_surge": 0.91,
+          "mkt_cap": 62531426599,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }

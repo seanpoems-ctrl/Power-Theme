@@ -3,7 +3,7 @@
   "filter": "up13_34",
   "label": "Up 13%+ 34-Day",
   "min_cap_b": 1.0,
-  "count": 152,
+  "count": 153,
   "stocks": [
     {
       "ticker": "CRNX",
@@ -28,7 +28,7 @@
       "market_cap_b": 6.061,
       "price": 45.66,
       "change_pct": -0.7,
-      "dollar_volume": "$104.7M",
+      "dollar_volume": "$104.8M",
       "adr_pct": 6.6,
       "perf_1m": 84.34,
       "perf_3m": 104.66,
@@ -324,6 +324,22 @@
       "perf_qtd": 162.42,
       "perf_mtd": 36.93,
       "rs_ibd": 91
+    },
+    {
+      "ticker": "ATAI",
+      "company": "AtaiBeckley Inc.",
+      "industry": "Pharmaceuticals: Major",
+      "market_cap_b": 1.973,
+      "price": 5.36,
+      "change_pct": -5.47,
+      "dollar_volume": "$50.7M",
+      "adr_pct": 7.7,
+      "perf_1m": 34.67,
+      "perf_3m": 34.0,
+      "perf_34d": null,
+      "perf_qtd": 34.0,
+      "perf_mtd": 34.67,
+      "rs_ibd": 85
     },
     {
       "ticker": "DK",
@@ -1228,7 +1244,7 @@
       "market_cap_b": 86.9,
       "price": 292.66,
       "change_pct": -2.91,
-      "dollar_volume": "$816.6M",
+      "dollar_volume": "$816.7M",
       "adr_pct": 3.6,
       "perf_1m": 19.6,
       "perf_3m": 24.54,
@@ -1404,7 +1420,7 @@
       "market_cap_b": 27.365,
       "price": 81.71,
       "change_pct": -3.24,
-      "dollar_volume": "$303.9M",
+      "dollar_volume": "$304.0M",
       "adr_pct": 5.0,
       "perf_1m": 18.42,
       "perf_3m": 35.19,
@@ -1484,7 +1500,7 @@
       "market_cap_b": 10.281,
       "price": 82.62,
       "change_pct": 0.84,
-      "dollar_volume": "$158.6M",
+      "dollar_volume": "$158.7M",
       "adr_pct": 3.7,
       "perf_1m": 17.78,
       "perf_3m": 25.95,
@@ -1539,7 +1555,7 @@
       "perf_34d": null,
       "perf_qtd": 10.33,
       "perf_mtd": 17.61,
-      "rs_ibd": 60
+      "rs_ibd": 61
     },
     {
       "ticker": "PRAX",
@@ -1596,7 +1612,7 @@
       "market_cap_b": 7.474,
       "price": 78.35,
       "change_pct": -2.17,
-      "dollar_volume": "$102.5M",
+      "dollar_volume": "$102.6M",
       "adr_pct": 5.7,
       "perf_1m": 17.34,
       "perf_3m": 24.06,
@@ -1907,7 +1923,7 @@
       "perf_34d": null,
       "perf_qtd": 51.49,
       "perf_mtd": 15.59,
-      "rs_ibd": 56
+      "rs_ibd": 57
     },
     {
       "ticker": "CART",
@@ -2092,7 +2108,7 @@
       "market_cap_b": 10.28,
       "price": 57.25,
       "change_pct": -2.42,
-      "dollar_volume": "$275.7M",
+      "dollar_volume": "$275.8M",
       "adr_pct": 7.0,
       "perf_1m": 14.52,
       "perf_3m": -1.23,
@@ -2446,6 +2462,6 @@
     "spx_qtd": 1.19,
     "spx_mtd": 1.19
   },
-  "fetched_at_utc": "2026-07-15T23:10:27+00:00",
+  "fetched_at_utc": "2026-07-16T00:04:38+00:00",
   "source": "tv_fallback"
 }
