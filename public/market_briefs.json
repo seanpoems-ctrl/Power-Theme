@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-17 08:17 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off / Global Retreat",
+    "spy_price": 750.72,
+    "spy_change_pct": -0.54,
+    "vix": 18.15,
+    "hy_oas": 2.71,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 64.8,
+    "mmth": 70.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Google announces a breakthrough in quantum AI computing, unveiling a new processor that significantly reduces processing time for complex algorithms, positioning it years ahead of competitors."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase reports Q2 earnings significantly above analyst expectations, driven by strong net interest income and a reduction in loan loss provisions, prompting an upgrade in full-year guidance."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "GameStop is experiencing renewed short squeeze interest from retail investors following a series of bullish options contracts, despite no new fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-17 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2160,23 +2198,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-06-26 09:18 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "",
-    "spy_price": 734.3,
-    "spy_change_pct": 0.14,
-    "vix": 20.18,
-    "hy_oas": 2.76,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 61.3,
-    "mmth": 65.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
