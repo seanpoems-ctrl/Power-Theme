@@ -1,398 +1,70 @@
 {
-  "scan_time": "2026-07-16 08:55 ET",
+  "scan_time": "2026-07-17 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "ATAI",
-      "price": 5.36,
-      "gap_pct": 34.14,
-      "pm_volume": 18041558,
-      "avg_vol_10d": 9507293,
-      "avg_dollar_vol": 50959090,
-      "mkt_cap": 1973373491,
-      "rvol": 0.67,
-      "adr_pct": 8.53,
-      "category": "New Contract/Partnership",
-      "theme": "Acquisition by Eli Lilly",
-      "reasoning": "ATAI is being acquired by Eli Lilly for $2.8 billion, advancing therapies for treatment-resistant depression.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
+      "ticker": "TRVI",
+      "price": 17.36,
+      "gap_pct": 5.24,
+      "pm_volume": 85735,
+      "avg_vol_10d": 2702864,
+      "avg_dollar_vol": 46921719,
+      "mkt_cap": 2464767779,
+      "rvol": 1.12,
+      "adr_pct": 6.05,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
       "grade": "C",
-      "finviz_theme": "Biotech - Oncology",
-      "analysis_source": "gemini+edgar",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
       "analysis_detail": {
-        "catalyst": "Catalyst: Eli Lilly announced its intent to **buy psychedelics maker AtaiBeckley** for **$2.8 billion**, aiming to advance therapies for **treatment-resistant depression and other mental health conditions**. This material contract was disclosed in an **8-K filing on 2026-07-16**.\nImpact: This acquisition represents a significant strategic move, validating ATAI's experimental treatments and providing substantial capital and infrastructure from a major pharmaceutical company, potentially accelerating development and market access for its pipeline. This transaction provides a clear exit and valuation for ATAI shareholders.",
-        "impact": ""
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
       },
-      "analysis_details": "• **Impact**\nEli Lilly has initiated an acquisition to **buy psychedelics maker AtaiBeckley** for **$2.8 billion**, as indicated by news headlines and a **material contract agreement (8-K filing)**. This strategic move aims to **advance therapies for treatment-resistant depression and other mental health conditions**, highlighting a significant interest in ATAI's experimental treatments.\n\n• **Strategic Value**\nThis acquisition by Eli Lilly validates ATAI's pipeline and positions its experimental treatments to benefit from Eli Lilly's extensive resources and development expertise. The deal underscores the growing traction of psychedelic-based therapies in addressing unmet needs in mental health, potentially accelerating clinical trials and eventual market availability.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Eli Lilly to buy psychedelics maker AtaiBeckley for $2.8 billion as experimental treatments gain traction - CNBC",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPYmtnNzNheEZDZEFwLXY5UFBDc0FHeGc4OXZJUGgzeFNRVjE3RGtsOVhSMGFWRTRMNmpQdGRFZDNTWVhMcWR4MUNaOHB6X2g3LUloUE03NVZhZkxkeXFzeEV4ZnRYRWNaenBFZnAyT1BtNXNmU2NxS0VVcDU3SlZFLXFmYkRmOEZyRUdoQXltMkQyTmtLZ2tFejM1bHkxcDRmM1HSAacBQVVfeXFMUDYzb21fTEcxTXZjNWpnZ3IwT3VWclhOcXd3UkczSjdwTVozNDZ3RlpIZmxDVE5fYllfYURKT3dzLW1fWVNUdkc2M1dzUURiSHNKaEEzREljamltVDEwUVVNSG1WaUlnYVIxQzAybGF2LVJseE9nWnFYWkJnU0stZDM1Q3NiWXBhRTQtdWVLTElDaTNud09kQ2Nfa2wwaHF4UjE5SnkzNUk?oc=5"
-        },
-        {
-          "title": "Lilly to acquire AtaiBeckley to advance therapies for treatment-resistant depression and other mental health conditions - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPMVVaSFBKSzNacW5hVzFpWUJjMFhxclhEZFQyUlh1RVJxM3NiM0M0ZnBMSTZRWGJZdDZlVkhwYjRLNGQ3R25nU1N0enpiSjlNZlNBQmhwa0hJbERiblJzWGNpMmdyakhya1A2c1Y1TnRjVGF6dWhmSlE0c29ubUVOR0VVdmF2Vm9sWEIzS0FpSC1KNERfc2lhT1NRRFdKVUhHR0N1VVhnTQ?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-07-16",
-        "form": "8-K",
-        "items": [
-          "1.01",
-          "7.01",
-          "9.01"
-        ],
-        "category": "New Contract/Partnership",
-        "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/2081043/000114036126028604/ef20078103_8k.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Biotech - Oncology",
-      "technical_status": "Fail (Avg $Vol $51M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 80,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "$2.8 billion acquisition price",
-        "discrepancy_note": "Finviz News (Source A) has no mention of the acquisition or the price. Google News (Source B) contains multiple headlines ([1], [5]) confirming the $2.8 billion acquisition by Eli Lilly."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "CDNA",
-      "price": 29.75,
-      "gap_pct": 17.68,
-      "pm_volume": 110265,
-      "avg_vol_10d": 806332,
-      "avg_dollar_vol": 23988377,
-      "mkt_cap": 1536869561,
-      "rvol": 0.89,
-      "adr_pct": 4.87,
-      "category": "Government Policy",
-      "theme": "Medicare Coverage Policy",
-      "reasoning": "CareDx stock surged **20%** on news of a favorable **Medicare coverage policy**, significantly expanding market access and revenue potential.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Digital Health",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "CareDx stock **surged 20%** today following news of a favorable **Medicare coverage policy**. This policy directly impacts the company's ability to get its services/products reimbursed.",
-        "impact": "This development fundamentally improves CareDx's market access and revenue streams by ensuring reimbursement for its offerings, potentially leading to sustained upward momentum."
-      },
-      "analysis_details": "\n• **The Policy**\nCareDx stock **surged 20%** today on news of a **Medicare coverage policy**. This specific policy, announced on **July 16, 2026**, enables reimbursement for the company's services or products, indicating a significant positive regulatory development.\n\n• **Direct Impact**\nThe implementation of the **Medicare coverage policy** directly expands the addressable market and revenue potential for CareDx by securing reimbursement for its offerings. This removes a significant barrier to adoption and can drive sustained demand and revenue growth, signaling a potential for continued price momentum.\n",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "CareDx stock surges 20% on Medicare coverage policy - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPaENSZ2lWaUlrMWwzTGc0N1ZhMHA3VUpwYk8yWFJBTlk3OXJBbGM0Y2lhNF9OeHZySDBPbWQycUljSFNGekw1bS1WTmpiMmd3V0lzbVFCR0cxNmc0Qkp4QUZ3dzAxSGZWVUFHR2ZMU1cyeFRSb3BVMC1JRmxrd1dqUzNBZ2FaR21rZWIyU1ZZZnZaWkZUUWpOMDNHWnI1cmNrMENyTnFrcjZuajJDcm9CODFR?oc=5"
-        },
-        {
-          "title": "CareDx to Report Second Quarter 2026 Financial Results on July 30, 2026 - marketscreener.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOc0N2OFpnODdBQnl1aENlcFhiYThXVjkyd1pkTkhiMHhrUUdNTGNkMzNDcjRzV0JxdC1QYTNMMENiTllXT01vOWxCZnJReDVLZ1lCYWVyNW5pOWNJSUhRNWJIQU5IVEs4b3JPQTFJRTJHZTNKQTQ4X0FXczk4NU9sekRtYmJodGV0dHVBV1RZVGJ5dUJ0MTR5YU1OTWVDNWJ0SWZYZHV3V0Rxb214dG1HMmFBanJzUkpBdTREQTRaME4?oc=5"
-        }
-      ],
+      "headlines": [],
       "edgar_filing": null,
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Digital Health",
-      "technical_status": "Fail (Avg $Vol $24M < $100M)",
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $47M < $100M)",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
+        "status": "Verified",
+        "confidence_score": 100,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "CareDx stock surged 20%",
-        "discrepancy_note": "Source A (Finviz) provides no information regarding the stock surge. Source B (Google News, specifically the Investing.com article) confirms 'CareDx stock surges 20% on Medicare coverage policy'. Since only one of the two primary sources (Finviz and Google News) mentions this specific claim, it is marked as Discrepancy."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "CMPS",
-      "price": 13.31,
-      "gap_pct": 8.94,
-      "pm_volume": 326917,
-      "avg_vol_10d": 5021702,
-      "avg_dollar_vol": 66838854,
-      "mkt_cap": 1795829113,
-      "rvol": 0.55,
-      "adr_pct": 7.37,
-      "category": "Thematic Narratives",
-      "theme": "Psychedelic Drug Sector Opportunity",
-      "reasoning": "Jefferies highlighted CMPS as a beneficiary of the growing psychedelic drug opportunity following robust Johnson & Johnson's Spravato sales.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 55,
-      "grade": "C",
-      "finviz_theme": "Pharma - Large Cap",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Jefferies identified a significant **psychedelic drug opportunity** following strong **Johnson & Johnson's Spravato sales growth**, explicitly naming **Compass Pathways (CMPS)** as a potential beneficiary.",
-        "impact": "This provides sector-wide tailwinds for CMPS, reinforcing the market's confidence in the therapeutic area and attracting investor interest."
-      },
-      "analysis_details": "• **The Narrative**\nJefferies analysts pointed to **Johnson & Johnson’s Spravato sales growth** as strong evidence supporting the broader **psychedelic drug opportunity**. This endorsement specifically mentioned **Compass Pathways (NASDAQ:CMPS)**, alongside other developers like **AtaiBeckley Inc. (NASDAQ:ATAI)** and **Cybin Inc. (NYSE-A:CYBN)**, as companies positioned to benefit from this expanding market.\n\n• **Explosiveness**\nThis analyst commentary ties CMPS to a burgeoning sector with validated commercial success from a major pharmaceutical player, **Johnson & Johnson**. Such a narrative can generate significant investor interest and capital flow into the psychedelic drug space, potentially driving momentum for CMPS as a key player.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Compass Pathways PTSD Study Found 78% of Sessions Were Silent - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOT3llbDZITmg0UE5zT2s1b3NWNUtzLVNpX1ZfNEszbDE2M2htNHJxMVZ0Z0JZQUJRdngyLWp1NmlOeE1Fdi1UNUtHT3lreWlxZF93S04xOVNSUTJJNFVZMnRnajdhdEtQc2R1a1Z2aFNHbDI4aVlBM0Y5bk02Rl8ybGZENHo4RUdWRm1ULWRNMmM0MlV6SHJiMThVWUdEMDNyVWt6d3k3UGw2RUFwZW1yZlpjeWI?oc=5"
-        },
-        {
-          "title": "Johnson & Johnsons Spravato sales growth supports psychedelic drug opportunity: Jefferies",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/b46303ae-6f2d-3169-bd32-7f48f6cdbef5/johnson-%26-johnson%E2%80%99s-spravato.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Pharma - Large Cap",
-      "technical_status": "Fail (Avg $Vol $67M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 60,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Jefferies highlighted CMPS as a beneficiary of the growing psychedelic drug opportunity following robust Johnson & Johnson's Spravato sales.",
-        "discrepancy_note": "Finviz confirms Jefferies linking Spravato sales growth to the psychedelic drug opportunity but does not specifically mention CMPS as *the* beneficiary. Google News headlines do not confirm Jefferies' specific statement about CMPS or Spravato sales, instead attributing CMPS's rise to other factors or making general statements about psychedelic stocks."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "UNH",
-      "price": 418.52,
-      "gap_pct": 6.69,
-      "pm_volume": 371464,
-      "avg_vol_10d": 5008516,
-      "avg_dollar_vol": 2096164116,
-      "mkt_cap": 380076562608,
-      "rvol": 1.47,
-      "adr_pct": 2.26,
-      "category": "Earnings",
-      "theme": "Analyst Target Raises",
-      "reasoning": "UnitedHealth Group filed 8-K for earnings, leading analysts to raise price targets and provide a modest fair value lift.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 78,
-      "grade": "B",
-      "finviz_theme": "Pharma - Large Cap",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "UnitedHealth Group (UNH) filed an **8-K** on **2026-07-16** for **Earnings/Financial Results** (Item 2.02). Following this disclosure, analysts raised targets, resulting in a **modest fair value lift** for UNH stock.",
-        "impact": "This suggests a positive reception to UNH's financial results, potentially indicating solid performance or improved outlook that warrants re-evaluation from analysts."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nWhile specific **EPS** or **revenue beat figures** are not disclosed in the headlines, the market reaction indicates a positive surprise. UnitedHealth Group (UNH) stock experienced a **modest fair value lift** as analysts revised and **raised their price targets** after the company's **2026-07-16** earnings report.\n\n• **The Guide**\nThe upward revision of **analyst targets** suggests a perceived strengthening of UNH's business outlook, likely influenced by the earnings report and potentially future guidance. This positive sentiment is in contrast to the broader insurance sector, where **Elevance Health (ELV) results** highlighted **margin pressures**, causing other insurance stocks to slide, but UNH appears to be a notable exception.",
-      "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "UNHG",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "UnitedHealth Group (UNH) Stock Sees Modest Fair Value Lift As Analysts Raise Targets - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQN1c2bnRDQS1OUUNmRTg2U1VkRExKRnFpNUlhY0N6NHVTWm1fYk41b3FPX2VMM3FoTklyRTVGdjhib2JrdFl5VmlWcjBrT1dyR2VJal95YTRKcnlINEZXWWVyTWpkZG1SRzRCb3Y0Tmg1RU1rZ0hYRVpkV3FkUk5ncjNOeGJkWXdWNG5QSGp3ck8tcTBiQk5vUzV3?oc=5"
-        },
-        {
-          "title": "Will UnitedHealth (UNH) Beat Estimates Again in Its Next Earnings Report? - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQNEJ0ak9oT2kzeTRaZkllczNrdDA1OHpiSUFtYUJWZWFSU095bG1FQVNFV1RMY2NYUi1iRjBEUGFTV3VoRUx6STdDNFM3dU1WaFhrZ0MwbzhJelNZdXVBOW1jVUZaZVctaTVPTkszaUt5ZkdOSmVZT2I2NU1HVlVEXzBKem1EcVM3OFVXRmVfWnRiUzJpQVBhMjlBdGpNWHdtVFhGUQ?oc=5"
-        },
-        {
-          "title": "UnitedHealth's Stock Run Is Strong. Earnings Will Gauge Medicare Advantage Recovery.",
-          "source": "Finviz",
-          "url": "https://www.barrons.com/articles/unitedhealth-stock-earnings-ai-b825645a?mod=bar_FV"
-        },
-        {
-          "title": "Health insurance stocks slide after Elevance highlights margin pressures (ELV)",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/7d15cee1-4862-35f9-934f-076eec1f6d2a/health-insurance-stocks-slide.html"
-        },
-        {
-          "title": "Insurance stocks fall after Elevance Health results show margin pressure",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/healthcare/articles/insurance-stocks-fall-elevance-health-112121271.html"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-07-16",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/731766/000073176626000191/unh-20260716.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Pharma - Large Cap",
-      "technical_status": "Fail (ADR 2.3% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 80,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "analysts to raise price targets and provide a modest fair value lift for UnitedHealth Group due to earnings",
-        "discrepancy_note": ""
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": null
       },
       "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": true,
+        "gate_dollar_vol": false,
         "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "EOSE",
-      "price": 4.37,
-      "gap_pct": 5.26,
-      "pm_volume": 1404167,
-      "avg_vol_10d": 27323786,
-      "avg_dollar_vol": 119404945,
-      "mkt_cap": 1543473743,
-      "rvol": 0.97,
-      "adr_pct": 9.97,
-      "category": "New Contract/Partnership",
-      "theme": "Defense Contract Win",
-      "reasoning": "Eos Energy Enterprises secured a new contract, providing energy storage for the **Golden Dome Defense** project in America.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "B",
-      "finviz_theme": "Clean Energy - Grid",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Eos Energy Enterprises (**EOSE**) was **selected to deliver mission-ready power for Golden Dome for America**, involving its **Pittsburgh-made energy storage** solution.",
-        "impact": "This contract represents a significant win in the defense sector, potentially opening doors for further government and military applications, enhancing the company's market positioning and revenue stream."
-      },
-      "analysis_details": "• **Impact**\nEos Energy Enterprises (**EOSE**) has been **selected to deliver mission-ready power** for the **Golden Dome for America** initiative. This involves the deployment of their **Pittsburgh-made energy storage solution**, indicating a strategic win within the defense sector. The headlines specifically mention the selection of their energy storage technology for a critical application.\n\n• **Strategic Value**\nThis contract positions EOSE as a key player in providing robust and reliable energy solutions for defense applications. Securing a project like **Golden Dome for America** can serve as a strong validation of their technology, potentially attracting further government and military contracts and enhancing the company's long-term growth prospects and competitive standing in the energy storage market.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Pittsburgh-Made Energy Storage Selected for Golden Dome Defense - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOc0p3bzYyTWFVSUV1OGdfTHQ5RWMwd2tDOWNCeHJMYldMbXpXcktVcnRCSV9DdjZTMVRyLXBSWHhtQ3hObTBOSS1wRXE3X2J1dWdheG9HaWVXcXNoaU0wLTNXSDRpdVhOYXJ3bGhUR1Q0V1BPR1R1X3hTU1NoblNMbHBldjFhaUFPOGx5dkpqU0lNLU5lQ1JnYUNDTzlEM2lOdnUtYmQtV3lzSFlUdU9zaklOdTJRSXF3ODdlNXpB?oc=5"
-        },
-        {
-          "title": "Eos Energy Enterprises Selected to Deliver Mission-Ready Power for Golden Dome for America",
-          "source": "Finviz",
-          "url": "/news/368819/eos-energy-enterprises-selected-to-deliver-mission-ready-power-for-golden-dome-for-america"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-07-15",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "7.01",
-          "8.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1805077/000162828026048253/eose-20260715.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Clean Energy - Grid",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Eos Energy Enterprises secured a new contract, providing energy storage for the Golden Dome Defense project.",
-        "discrepancy_note": null
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": false,
         "gate_adr": true
       },
       "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
+      "tier": "Fail",
+      "tier_label": "Excluded"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 3,
-    "large_gaps": 2,
-    "total_headlines": 13,
+    "small_gaps": 1,
+    "large_gaps": 0,
+    "total_headlines": 0,
     "monthly_cost_usd": 0.01
   }
 }
