@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17 16:45 ET",
+  "generated_at": "2026-07-17 17:30 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -18,13 +18,13 @@
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 695.33,
-      "open": 691.65,
+      "open": 691.63,
       "high": 702.3,
       "low": 686.76,
       "close": 695.33,
       "prev_open": 712.01,
       "prev_close": 705.94,
-      "volume": 50108199,
+      "volume": 53690868,
       "change_pct": -1.5
     },
     "^VIX": {
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 81.69,
+      "price": 81.77,
       "open": 78.86,
       "high": 82.07,
       "low": 77.93,
-      "close": 81.69,
+      "close": 81.77,
       "prev_open": 80.0,
       "prev_close": 78.95,
-      "volume": 232352,
-      "change_pct": 3.47
+      "volume": 235014,
+      "change_pct": 3.57
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -78,7 +78,7 @@
   },
   "fred": {
     "hy_oas": 2.71,
-    "yield_curve": 0.41,
+    "yield_curve": 0.37,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -98,6 +98,36 @@
     }
   },
   "analysis": {
-    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "title": "Post-Market Brief: July 17, 2026",
+    "mood_emoji": "📉",
+    "mood": "Risk-Off / Volatility Spike",
+    "narrative": "Global equities broadly retreated today, with US indices down and volatility surging. Mounting macro uncertainty appears to be driving a flight from risk assets.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 743.29 | -0.99% | 📉 |\n| Nasdaq 100 ETF | 695.33 | -1.50% | 📉 |\n| VIX | 18.77 | +12.19% | 📈 |\n| Crude Oil | 81.77 | +3.57% | 📈 |\n| Nikkei 225 | 66835.54 | -2.79% | 📉 |\n| DAX | 24830.98 | -0.34% | ➡️ |",
+    "macro_section": "BAMLH0A0HYM2 (High Yield Credit Spread) stands at 2.71%, indicating a Complacent regime in high-yield credit, suggesting investors are currently comfortable with risk. The 10Y-2Y Yield Curve is at +0.370, signaling a Normal / Steepening environment. Despite the complacent credit spreads, today's market action implies a growing underlying apprehension among institutional investors, potentially challenging this complacency soon.",
+    "analysis_para1": "The global tape exhibited clear signs of caution, with the Nikkei 225 down significantly by -2.79% and the DAX showing a modest retreat of -0.34%. Concurrently, Crude Oil surged by +3.57% to $81.77, often signaling robust demand or supply-side concerns that could fuel inflation. This broad international weakness, paired with rising commodity prices, contrasts with the current US high-yield credit spread of 2.71%, which remains in a \"Complacent\" regime. This divergence suggests that while global sentiment is turning cautious, US credit markets have yet to fully price in the increased international risk, implying a potential lag in institutional risk appetite shift for domestic assets.",
+    "analysis_para2": "Today's dominant flow was primarily driven by a broad-based **risk-off rotation** fueled by escalating macro uncertainty. The S&P 500 ETF fell by -0.99% and the Nasdaq 100 ETF by -1.50%, directly correlated with a sharp +12.19% spike in the VIX to 18.77. This surge in volatility indicates increased demand for hedging and a flight from equity exposure, likely in response to renewed inflation concerns (potentiated by rising Crude Oil) and the potential for subsequent tighter monetary policy. The collective concern over future financial conditions appears to have triggered widespread de-risking across portfolios.",
+    "analysis_para3": "Given the prevailing risk-off sentiment, traders should prioritize capital preservation and monitor key support levels. The S&P 500 ETF closed at 743.29; watch for support at the 740 level, with the Nasdaq 100 ETF looking to hold 690. A definitive break below these price points, coupled with the VIX pushing convincingly above 20, would serve as a critical risk-off threshold, signaling further downside potential. Traders should consider trimming existing long exposure, raising cash allocations, or initiating tactical hedges on current positions to mitigate further losses today.",
+    "technical_signal": "No reversal pattern confirmed yet. Equities ended the session decidedly lower, and the VIX saw a significant spike, reflecting increased market fear. While 63.2% of S&P 500 stocks are still above their SMA50 and 68.7% above their SMA200, this underlying breadth could quickly erode if selling persists. Traders should watch for a clear higher low on major indices and a sustained decline in the VIX to signal any potential stabilization or reversal.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Google unveiled a groundbreaking new AI language model today, generating strong investor excitement about its future growth trajectory and competitive positioning."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Amazon announced a substantial multi-year cloud services contract with a major government agency, reinforcing its market dominance in the enterprise sector."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "Shares saw renewed interest based purely on social media chatter and technical short-squeeze potential, rather than any new fundamental business development."
+        }
+      ]
+    }
   }
 }
