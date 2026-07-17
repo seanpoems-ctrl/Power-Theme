@@ -1,5 +1,23 @@
 [
   {
+    "generated_at": "2026-07-17 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "",
+    "spy_price": 750.72,
+    "spy_change_pct": -0.54,
+    "vix": 18.07,
+    "hy_oas": 2.71,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 64.8,
+    "mmth": 70.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {}
+  },
+  {
     "generated_at": "2026-07-16 17:43 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2160,43 +2178,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-06-26 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Divergence",
-    "spy_price": 734.3,
-    "spy_change_pct": 0.14,
-    "vix": 20.2,
-    "hy_oas": 2.76,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 61.3,
-    "mmth": 65.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a significant new AI partnership with a major cloud provider in Europe, potentially boosting its Azure segment in a crucial market."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is expected to unveil new advancements in its data center GPU roadmap at a surprise analyst event this morning, likely driving further investor interest in AI infrastructure."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "QCOM",
-          "company": "Qualcomm Incorporated",
-          "reason": "Qualcomm continues to benefit from ongoing semiconductor supply chain reconfigurations and 5G deployment cycles, a recycled theme driving incremental interest."
-        }
-      ]
-    }
   }
 ]
