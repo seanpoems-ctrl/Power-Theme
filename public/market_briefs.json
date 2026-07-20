@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-20 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Controlled Risk-Off / Global Unwind",
+    "spy_price": 743.29,
+    "spy_change_pct": -0.99,
+    "vix": 18.35,
+    "hy_oas": 2.71,
+    "yield_curve": 0.37,
+    "credit_status": "Complacent",
+    "s5fi": 63.1,
+    "mmth": 68.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet (GOOGL) shares are gaining traction pre-market as analysts upgrade price targets following an impressive AI model demonstration expected to significantly boost cloud and search revenues."
+        },
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla (TSLA) is poised for activity on reports of a major battery innovation breakthrough, promising enhanced range and faster charging, potentially accelerating its market dominance."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "BA",
+          "company": "The Boeing Company",
+          "reason": "Boeing (BA) is seeing early trading volume on recycled news concerning ongoing supply chain challenges, with no fresh fundamental catalysts driving today's interest."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-17 17:30 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2140,43 +2178,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-06-29 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Equity Retreat, Cautious Tone",
-    "spy_price": 728.99,
-    "spy_change_pct": -0.72,
-    "vix": 18.4,
-    "hy_oas": 2.78,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 61.9,
-    "mmth": 66.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Announces groundbreaking new AI chip architecture with 2x performance increase, solidifying market leadership."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Reports better-than-expected cloud growth figures for Q2, raising full-year guidance and calming investor concerns."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "RIVN",
-          "company": "Rivian Automotive, Inc.",
-          "reason": "Continues to trade on general EV sector sentiment and macroeconomic headwinds, with no new company-specific catalysts."
-        }
-      ]
-    }
   }
 ]
