@@ -7,6 +7,7 @@ Theme → Sub-theme → Stocks  hierarchical scan from Finviz Screener
 
 import json
 import os
+import re
 import time
 import random
 import logging
@@ -855,15 +856,25 @@ def _parse_screener_table(soup) -> list[dict]:
             continue
         stocks = []
         for row in rows[1:]:
-            cells = [td.get_text(strip=True) for td in row.find_all("td")]
+            tds = row.find_all("td")
+            cells = [td.get_text(strip=True) for td in tds]
             if len(cells) < 18:
                 continue
             # Finviz v=141 columns (18 total):
             # 0:No 1:Ticker 2:PerfW 3:PerfM 4:PerfQ 5:PerfHY 6:PerfYTD
             # 7:PerfY 8:Perf3Y 9:Perf5Y 10:Perf10Y 11:VolW 12:VolM
             # 13:AvgVol 14:RelVol 15:Price 16:Change 17:Volume
+            # Ticker: Finviz's 2026 screener prepends a logo-initial letter to the
+            # cell (e.g. "A"+"AAPL" → "AAAPL" via get_text). Pull the real symbol
+            # from the quote link href instead.
+            ticker = cells[1]
+            _link = tds[1].find("a", href=True)
+            if _link:
+                _m = re.search(r"[?&]t=([A-Za-z.\-]+)", _link["href"])
+                if _m:
+                    ticker = _m.group(1).upper()
             stocks.append({
-                "ticker": cells[1],
+                "ticker": ticker,
                 "perf_1w": parse_pct(cells[2]),
                 "perf_1m": parse_pct(cells[3]),
                 "perf_3m": parse_pct(cells[4]),
