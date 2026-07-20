@@ -1,17 +1,174 @@
 {
-  "scan_time": "2026-07-17 08:55 ET",
+  "scan_time": "2026-07-20 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "TRVI",
-      "price": 17.36,
-      "gap_pct": 5.24,
-      "pm_volume": 85735,
-      "avg_vol_10d": 2702864,
-      "avg_dollar_vol": 46921719,
-      "mkt_cap": 2464767779,
-      "rvol": 1.12,
-      "adr_pct": 6.05,
+      "ticker": "HUT",
+      "price": 91.45,
+      "gap_pct": 15.92,
+      "pm_volume": 329080,
+      "avg_vol_10d": 3592561,
+      "avg_dollar_vol": 328539703,
+      "mkt_cap": 10296730886,
+      "rvol": 1.22,
+      "adr_pct": 9.73,
+      "category": "New Contract/Partnership",
+      "theme": "AI Data Center Lease Contracts",
+      "reasoning": "Hut 8 secured massive **AI data center lease contracts** totaling **$19.6 billion** for its Texas campus, signifying a major pivot and revenue stream.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "A+",
+      "finviz_theme": "AI Cloud",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Hut 8 signed a **$9.8 billion AI data center lease** in Texas, and its entire **AI campus is fully leased under $19.6 billion contracts**.",
+        "impact": "This massive contract significantly expands Hut 8's revenue visibility and strategic position in the rapidly growing **AI infrastructure market**, signaling a major business transformation and long-term growth."
+      },
+      "analysis_details": "• **Impact**\nHut 8 has secured a substantial **$9.8 billion AI data center lease** in Texas, with its entire **AI campus** now **fully leased under $19.6 billion contracts**. This development indicates a significant shift and expansion into the high-demand artificial intelligence infrastructure market.\n\n• **Strategic Value**\nThese long-term, high-value contracts provide Hut 8 with strong revenue visibility and establish it as a key player in providing specialized computing infrastructure for AI. The move positions the company to capitalize on the accelerating demand for **AI compute** resources, enhancing its competitive standing and potential for sustained growth.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Hut 8 signs $9.8 billion AI data center lease in Texas - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNbGRpN0xlYzl2TnlPcDhIV19JUzEtdGxPRkZnVk5WczBYb1lZNXlBZG9sRFBSYlI5MGFPd2N4MEQ1RVFMOTJZVWFsNDNWWnA4c1NyT0htcnNxRkhidU5SMjZESXVXclFITkZTMzZhRi1YZnk4Ml9hQ2l3eUdrcjhFQjlRRm9Idw?oc=5"
+        },
+        {
+          "title": "Hut 8’s Texas AI campus is fully leased under $19.6B contracts - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxORUJLVU5jTC0wVERDaWx4MEVwWGJEU3E3X1JOT3NveHpQeWE1OEozeTJXdXl5Q19sbF9yNkcwVHo2aERVZGhuQVRreXE3T2xrakduQ0ZfeG5Ea1YwR19QY3U2QzRkNUhEdXNqdEVnT1dwVGZxUTgyQTNOd0dkV3pxM2lpWXAwQVlYZExWMlptY056Q2xtMG9TNFpmYXBvWnV2SkcxRVZ1dlNVTDRNS1l2cmQtZG9jY2ItVFRueg?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-07-20",
+        "form": "8-K",
+        "items": [
+          "8.01",
+          "9.01"
+        ],
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/1964789/000110465926084862/tm2620835d1_8k.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "AI Cloud",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 75,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "AI data center lease contracts totaling $19.6 billion",
+        "discrepancy_note": "Finviz (Source A) provides no information. Google News (Source B) shows conflicting specifics: Yahoo Finance [2] reports a single lease for '$9.8 billion', while Stock Titan [5] reports '$19.6B contracts' for the fully leased campus, matching the claim. Since Finviz provides no confirmation, and specific dollar amounts differ or are partial across Google News articles, the claim is not uniformly confirmed by BOTH sources with matching specifics."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "IREN",
+      "price": 33.62,
+      "gap_pct": 9.79,
+      "pm_volume": 2636052,
+      "avg_vol_10d": 39629359,
+      "avg_dollar_vol": 1332339050,
+      "mkt_cap": 11997548262,
+      "rvol": 1.07,
+      "adr_pct": 8.62,
+      "category": "Earnings",
+      "theme": "AI Demand & Capacity",
+      "reasoning": "IREN filed an 8-K for earnings, revealing significant demand for its AI capacity amidst broader investor interest in new AI-focused companies.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "A",
+      "finviz_theme": "AI Compute",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "IREN's 8-K filing confirmed strong operational dynamics, with **AI demand exceeding both available and planned capacity**. This qualitative disclosure highlights a robust market for the company's services.",
+        "impact": "The strong demand for AI capacity, despite no explicit numbers in the headlines, indicates potential for significant future revenue growth and a strong competitive position for IREN, aligning with the narrative of 'new AI Darlings'."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nWhile specific financial figures were not detailed in the headlines, IREN's 8-K filing for earnings included the significant qualitative disclosure that **AI demand exceeds the company’s available and planned capacity**. This indicates an unexpected and robust level of market interest, which can be interpreted as a strong operational 'beat' on demand.\n\n• **The Growth (Momentum)**\nThis strong demand for AI capacity positions IREN favorably within the burgeoning AI sector. The broader market sentiment also reflects this, as **everyday investors are over the Mag Seven and into new AI darlings**, suggesting a shift in capital towards companies like IREN. This trend provides a significant tailwind for IREN’s stock momentum, implying strong future growth potential as it strives to meet unmet demand.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "IREX",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "AI demand exceeds IREN’s available and planned capacity - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNTHI3b3Y1bFhSdWM5ZG53enBDMXZaVFZuT3J6cjR5N01aNnkwekdHZ0twLXpqZFJRMUFWMGZFa2c2bWhXZHo3dTMyMHhxeE9uM2gzbTdUVWpjaXFsV0I5YzBUOW0zN1pBLVZNaVZIQUNoUGpWckoxbERteGVaQzBiR2RFdUNqbktQQVl0emplQWM2eThHenNJOE1TNjZ2OF9GQ2F5NFFoUEhpVkdTVURUUFhMTQ?oc=5"
+        },
+        {
+          "title": "Everyday Investors Are Over the Mag Seven and Into New AI Darlings",
+          "source": "Finviz",
+          "url": "https://www.wsj.com/finance/stocks/everyday-investors-are-over-the-mag-seven-and-into-new-ai-darlings-a112ea2b?mod=wsj_FV"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-07-20",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1878848/000114036126028871/ef20078253_8k.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "AI Compute",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 75,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "IREN signed $2.8B contracts for AI capacity",
+        "discrepancy_note": "Source B [1] (Seeking Alpha) explicitly states 'signing $2.8B contracts'. However, no other source, including Finviz, provides this specific dollar amount for contracts. While other sources mention 'AI Deals' or 'AI demand exceeds capacity', they do not confirm the '$2.8B' figure."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "CIFR",
+      "price": 17.56,
+      "gap_pct": 6.38,
+      "pm_volume": 265815,
+      "avg_vol_10d": 22229902,
+      "avg_dollar_vol": 390357079,
+      "mkt_cap": 7182903634,
+      "rvol": 0.96,
+      "adr_pct": 10.1,
       "category": "Others",
       "theme": "Technical / Flow",
       "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
@@ -34,7 +191,138 @@
       "short_float": null,
       "daily_pct": null,
       "industry": "—",
-      "technical_status": "Fail (Avg $Vol $47M < $100M)",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "The primary catalyst claim states 'No immediate fundamental catalyst found'. However, Source B (Google News) explicitly mentions a 'Cipher Mining Inc. (CIFR) Q3 2025 Earnings Report - Results, Call & Slides', which is a significant fundamental catalyst, directly contradicting the claim."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "DPZ",
+      "price": 322.18,
+      "gap_pct": 6.35,
+      "pm_volume": 90987,
+      "avg_vol_10d": 928709,
+      "avg_dollar_vol": 299211466,
+      "mkt_cap": 10717339473,
+      "rvol": 2.07,
+      "adr_pct": 3.54,
+      "category": "Earnings",
+      "theme": "Revenue Beat",
+      "reasoning": "Domino's (DPZ) stock soared as Q2 CY2026 earnings beat revenue expectations, bolstered by strong global retail sales growth and net store additions.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 80,
+      "grade": "B",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Domino’s (NASDAQ:DPZ) reported its **Q2 CY2026 earnings** on **2026-07-20**, confirming the company **beats on revenue**. The filing indicates a significant financial event.",
+        "impact": "The positive revenue surprise and strong underlying metrics suggest robust operational performance, driving significant positive price momentum for the stock."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nDomino’s (NASDAQ:DPZ) reported its **Q2 CY2026 earnings** today, **2026-07-20**, and **beats on revenue**, leading to the stock soaring. This indicates a positive surprise relative to market expectations.\n\n• **The Growth (Momentum)**\nThe company's performance was further bolstered by the addition of **209 Net Stores** and a **3.0% rise in Global Retail Sales**. These figures highlight continued expansion and healthy sales growth, contributing to the stock's positive reaction.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Domino’s (NASDAQ:DPZ) Q2 CY2026: Beats On Revenue, Stock Soars - StockStory",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPOERjaGtkeEtZS1BrQ2RidEhjQ2pRck9ZTFlHRGhPNy1sWmNTVlJXUVNiOTdteS02WjdxSVA5VUZmZGxwQkljMzVuT3JuZGZ5WUs2bUdNOTdfeXNiRDloRFMyaWUwc2w1V3pCMTJVNGYzTXM5RThHMGlsajVJUnktMjU0VlRqOHFYUGVwaGdPMU4yU0xwTHRDOWJQVlZKbEF2NmRYWEhLV0Q3MzkwMmdjTldXdlI?oc=5"
+        },
+        {
+          "title": "Domino's Added 209 Net Stores as Global Retail Sales Rose 3.0% - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxOdF9meHJBbERjeHpvOExHMGxLSmgyd2xLV0ZQekZmU3RVNFdrYThYZVg5LWdBbFl6UEhBeG1SbUVwcVJwakNLeDQwQS1vUHJoWnp1YUVpS3NmbXJ5dHNNT0FCcDFEdmpJSnJwdkpCdVB1X1djcmxSMGlKUkNlQUlyX2JBZHJzVC1VTzRuZ3cwdHRUVXFTQXlWWjVwQUItMzZvYlJIQW11SDVNcU4z?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-07-20",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1286681/000128668126000034/dpz-20260720.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Others",
+      "technical_status": "Fail (ADR 3.5% < 4%)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Domino's added 209 net stores in Q2 CY2026.",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "WYFI",
+      "price": 25.15,
+      "gap_pct": 5.49,
+      "pm_volume": 73193,
+      "avg_vol_10d": 3515251,
+      "avg_dollar_vol": 88408563,
+      "mkt_cap": 971147514,
+      "rvol": 0.63,
+      "adr_pct": 15.76,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $88M < $100M)",
       "verification": {
         "status": "Verified",
         "confidence_score": 100,
@@ -45,26 +333,216 @@
         "primary_claim": "No immediate fundamental catalyst found",
         "discrepancy_note": null
       },
-      "gates_passed": 4,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
         "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
+        "gate_mkt_cap": false,
         "gate_adr": true
       },
       "meets_all_gates": false,
       "tier": "Fail",
       "tier_label": "Excluded"
+    },
+    {
+      "ticker": "APLD",
+      "price": 25.79,
+      "gap_pct": 5.35,
+      "pm_volume": 301199,
+      "avg_vol_10d": 17125846,
+      "avg_dollar_vol": 441675568,
+      "mkt_cap": 7369996473,
+      "rvol": 1.51,
+      "adr_pct": 8.29,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 85,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found.",
+        "discrepancy_note": null
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "FCEL",
+      "price": 18.5,
+      "gap_pct": 5.32,
+      "pm_volume": 182224,
+      "avg_vol_10d": 13581937,
+      "avg_dollar_vol": 251265834,
+      "mkt_cap": 1478298084,
+      "rvol": 0.99,
+      "adr_pct": 16.61,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "The primary claim states 'No immediate fundamental catalyst found,' but Google News lists two potential fundamental catalysts: 'Insider Purchase: Director at $FCEL Buys 26,343 Shares' and 'Fuelcell Energy (FCEL) Q2 2023 Earnings Report,' directly contradicting the initial assessment."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "AEHR",
+      "price": 81.05,
+      "gap_pct": 5.29,
+      "pm_volume": 65232,
+      "avg_vol_10d": 3897731,
+      "avg_dollar_vol": 315911098,
+      "mkt_cap": 2632504062,
+      "rvol": 1.67,
+      "adr_pct": 10.69,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; the stock is an **Active Nasdaq Composite Mover**, suggesting technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 59,
+      "grade": "C",
+      "finviz_theme": "Semiconductors - Packaging",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
+      },
+      "analysis_details": "• **What Happened**\nAehr Test Systems (**NASDAQ:AEHR**) has joined the **Active Nasdaq Composite Movers** today, indicating significant price and volume action. Despite this, there is no specific fundamental news detailing the cause of this increased activity, beyond a generic mention of \"New Strong Buy Stocks for July 20th.\"\n\n• **Key Consideration**\nThe absence of a clear catalyst, coupled with its status as an **Active Nasdaq Composite Mover**, suggests the current price movement is likely driven by technical factors or institutional flow. This scenario presents a high risk of being a potential 'gap and trap' if no fundamental news materializes to support the move.",
+      "peer_tickers": [
+        "COHU",
+        "ONTO",
+        "MKSI"
+      ],
+      "leverage_etfs": [
+        {
+          "ticker": "SOXL",
+          "mult": "3x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SOXS",
+          "mult": "3x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "Aehr Test Systems (NASDAQ:AEHR) Joins Active Nasdaq Composite Movers - Kalkine Media",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQcGtramtqQnZER09VdzBqUjN0NWxOWHl6V1RIcjJ1b0dLNXJvZnVNVHNzWkNpclNkTGdMNW9ka1dwMUZSbUZJUXhQUkE2UVI0b1libEtjRUd6d0liM05LeUp3Wm5MaVRYQVdZXzVaWWx6XzdoWi1jN2E0VHoxUE1aRzFrSktZY3lFNVpQX252Mi10TTB4VFQxcHZ3dTJQUVZDdDhVempvX09Denlvd3c?oc=5"
+        },
+        {
+          "title": "New Strong Buy Stocks for July 20th - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNRHNnRUxROVJVdWZnZGxOQk5OSV9vNm16cXdjU1FQYWJ4cDY5cDRqV3RrZkx0RnA3VlFmazNaRXFlZjdLa3FtZDByRTdWV1NMVDhIWDAwajItNlN5UDRtQkh2VFNaUXRRLWw3SDk3eUpnNDViMzdTcHBRNkVhN2tCYUM4MXBnTC1RRDIzb3RKQThNM0thU2dB?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Semiconductors - Packaging",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 75,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "AEHR is an Active Nasdaq Composite Mover",
+        "discrepancy_note": "Source B [2] (Kalkine Media via Google News) explicitly states 'Aehr Test Systems (NASDAQ:AEHR) Joins Active Nasdaq Composite Movers'. However, Source A (Finviz News) is empty and does not confirm this claim."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 1,
-    "large_gaps": 0,
-    "total_headlines": 0,
+    "small_gaps": 7,
+    "large_gaps": 1,
+    "total_headlines": 8,
     "monthly_cost_usd": 0.01
   }
 }
