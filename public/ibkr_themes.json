@@ -1,52 +1,6 @@
 {
-  "generated_at": "2026-07-20T23:08:40.341786+00:00",
+  "generated_at": "2026-07-20T23:57:48.627833+00:00",
   "data_source": "fallback",
-  "power_themes": [
-    {
-      "name": "Other",
-      "theme_rs": 95.5,
-      "perf_1d": 6.56,
-      "leaders": [
-        {
-          "ticker": "NBIS",
-          "price": 182.62,
-          "rs_52w": 96,
-          "adr_pct": 13.15,
-          "vol_surge": 0.95,
-          "mkt_cap": 46366886948,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "HUT",
-          "price": 100.93,
-          "rs_52w": 95,
-          "adr_pct": 10.89,
-          "vol_surge": 1.6,
-          "mkt_cap": 11364123758,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    }
-  ],
+  "power_themes": [],
   "account_equity": null
 }
