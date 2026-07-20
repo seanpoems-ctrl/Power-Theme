@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-20 09:11 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Risk-Off Deepens",
+    "spy_price": 743.29,
+    "spy_change_pct": -0.99,
+    "vix": 18.22,
+    "hy_oas": 2.71,
+    "yield_curve": 0.37,
+    "credit_status": "Complacent",
+    "s5fi": 63.1,
+    "mmth": 68.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple Inc. (AAPL) is expected to see strong trading activity following reports of robust pre-orders for its new Vision Pro 2 headset, indicating strong consumer demand."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft Corp. (MSFT) is poised for volatility after securing a multi-billion dollar government cloud computing contract, boosting its Azure segment outlook."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla Inc. (TSLA) continues to attract attention purely on technical consolidation after a recent volatility surge, with traders watching for a break from its narrow range."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-20 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2160,23 +2198,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-06-29 10:51 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "",
-    "spy_price": 737.29,
-    "spy_change_pct": 1.14,
-    "vix": 18.43,
-    "hy_oas": 2.83,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 62.6,
-    "mmth": 65.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
