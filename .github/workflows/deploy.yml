@@ -8,8 +8,13 @@ on:
       - 'public/breadth_monitor.json'
       - 'public/calendar_history/**'
 concurrency:
-  group: pages-deploy
-  cancel-in-progress: false  # Never cancel a running scrape/gapper — queue behind it instead
+  # Own group (NOT the scrape's pages-deploy) so a new code push cancels an older
+  # queued/running *code* deploy — collapsing stacked pushes to the newest instead
+  # of jamming the queue. The github-pages environment still serialises the actual
+  # deployment vs. the daily scrape, and the scrape keeps its protected pages-deploy
+  # queue, so this never cancels a running scrape/gapper.
+  group: deploy-code
+  cancel-in-progress: true
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
