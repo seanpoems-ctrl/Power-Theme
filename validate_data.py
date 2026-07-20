@@ -87,10 +87,10 @@ def main() -> None:
                            for s in t.get("subthemes", []))
             if n_themes == 0:
                 failures.append("THEMATIC: themes[] is EMPTY — per-stock theme drill failed "
-                                "(check fetch_stock_detail / Finviz layout)")
-            elif n_stocks < 20:
+                                "(check _tv_batch_detail / TradingView)")
+            elif n_stocks < 100:
                 failures.append(f"THEMATIC: only {n_stocks} stocks across {n_themes} themes "
-                                "(per-stock detail mostly failed)")
+                                "(need ≥100 — per-stock detail step degraded)")
             else:
                 print(f"  OK  {'thematic':12s}: {n_themes} themes, {n_stocks} stocks")
         except json.JSONDecodeError as exc:

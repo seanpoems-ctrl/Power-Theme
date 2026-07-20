@@ -2142,24 +2142,125 @@ def fetch_earnings_yf(ticker: str) -> str | None:
         return None
 
 
+def _tv_batch_detail(tickers: list[str]) -> dict[str, dict]:
+    """Batch per-stock detail from the TradingView screener — the CI-safe
+    replacement for per-stock Finviz quote scraping. Finviz rate-limits the
+    GitHub Actions runner IP, which silently dropped most stocks and left the
+    themes severely under-populated. TradingView (already used for the breadth
+    screener) returns everything we need in one batched query and isn't blocked.
+
+    Returns {ticker: detail}. Foreign tickers (contain '.') are skipped so the
+    Finviz fallback in _fetch_details can handle them.
+    """
+    import math
+    us = list({t for t in tickers if t and "." not in t})
+    if not us:
+        return {}
+    try:
+        from tradingview_screener import Query, col as tv_col  # type: ignore
+    except ImportError:
+        logger.warning("tradingview_screener unavailable — using Finviz per-stock fallback")
+        return {}
+
+    def _f(v, nd=2):
+        try:
+            f = float(v)
+            return round(f, nd) if math.isfinite(f) else None
+        except (TypeError, ValueError):
+            return None
+
+    def _pct(close, sma):
+        s = _f(sma)
+        return round((close / s - 1) * 100, 2) if s and s > 0 else None
+
+    FIELDS = ["name", "description", "close", "change",
+              "Perf.W", "Perf.1M", "Perf.3M", "Perf.6M", "Perf.Y",
+              "average_volume_10d_calc", "volume", "market_cap_basic",
+              "price_52_week_high", "price_52_week_low", "ATR", "Relative.Volume",
+              "SMA10", "SMA20", "SMA50", "SMA200", "sector", "industry"]
+    out: dict[str, dict] = {}
+    for i in range(0, len(us), 1000):
+        chunk = us[i:i + 1000]
+        try:
+            _, df = (Query().select(*FIELDS)
+                     .where(tv_col("name").isin(chunk))
+                     .limit(len(chunk) + 50).get_scanner_data())
+        except Exception as exc:
+            logger.warning(f"TV detail batch {i} failed: {exc}")
+            continue
+        for _, row in df.iterrows():
+            try:
+                tkr = str(row["name"])
+                close = float(row["close"])
+            except (TypeError, ValueError, KeyError):
+                continue
+            if not (close > 0):
+                continue
+            avg_vol = _f(row.get("average_volume_10d_calc"), 0) or 0
+            atr  = _f(row.get("ATR"))
+            hi52 = _f(row.get("price_52_week_high"))
+            mktcap = _f(row.get("market_cap_basic"), 0)
+            out[tkr] = {
+                "ticker": tkr,
+                "company": str(row.get("description", "") or "").strip(),
+                "price": round(close, 2),
+                "change_pct": _f(row.get("change")) or 0,
+                "volume": int(_f(row.get("volume"), 0) or 0),
+                "avg_volume": int(avg_vol),
+                "dollar_volume":     round(close * avg_vol) if avg_vol else 0,
+                "avg_dollar_volume": round(close * avg_vol) if avg_vol else 0,
+                "adr_pct": round(atr / close * 100, 2) if atr else None,
+                "mkt_cap_b": round(mktcap / 1e9, 2) if mktcap else None,
+                "52w_high": hi52,
+                "52w_low": _f(row.get("price_52_week_low")),
+                "dist_52w_high": round((close / hi52 - 1) * 100, 2) if hi52 else None,
+                "rvol": _f(row.get("Relative.Volume")),
+                "sector": str(row.get("sector", "") or ""),
+                "industry": str(row.get("industry", "") or ""),
+                "perf_1d": _f(row.get("change")),
+                "perf_1w": _f(row.get("Perf.W")),
+                "perf_1m": _f(row.get("Perf.1M")),
+                "perf_3m": _f(row.get("Perf.3M")),
+                "perf_6m": _f(row.get("Perf.6M")),
+                "perf_1y": _f(row.get("Perf.Y")),
+                "sma10_pct":  _pct(close, row.get("SMA10")),
+                "sma20_pct":  _pct(close, row.get("SMA20")),
+                "sma50_pct":  _pct(close, row.get("SMA50")),
+                "sma200_pct": _pct(close, row.get("SMA200")),
+            }
+    logger.info(f"  TV detail: resolved {len(out)}/{len(us)} US tickers")
+    return out
+
+
 def _fetch_details(picks: list[dict], cache: dict) -> list[dict]:
     result = []
+    # Batch-fetch full detail from TradingView (CI-safe) for all uncached picks;
+    # Finviz per-stock scraping is only a fallback for tickers TV can't resolve.
+    need = [s["ticker"] for s in picks if s["ticker"] not in cache]
+    tv_map = _tv_batch_detail(need) if need else {}
     for s in picks:
         t = s["ticker"]
         if t not in cache:
-            logger.info(f"      {t}...")
-            detail = fetch_stock_detail(t)
+            detail = tv_map.get(t)
+            from_finviz = False
+            if not detail:
+                logger.info(f"      {t} (finviz fallback)...")
+                detail = fetch_stock_detail(t)
+                from_finviz = True
             if detail:
                 price_data = fetch_sparkline(t)
                 detail["sparkline"] = price_data.get("sparkline", [])
                 detail["bars_30d"] = price_data.get("bars_30d", [])
-                detail["sma10_pct"] = price_data.get("sma10_pct")
+                if detail.get("sma10_pct") is None:
+                    detail["sma10_pct"] = price_data.get("sma10_pct")
                 detail["earnings"] = fetch_earnings_yf(t)
-                # Override Finviz calendar-month perf with yfinance rolling returns
-                rolling = _rolling_perf_from_closes(detail["sparkline"])
-                detail.update(rolling)
+                # Finviz gives calendar-month perf → override with yfinance rolling.
+                # TV already returns rolling perf, so only do this for the fallback.
+                if from_finviz:
+                    detail.update(_rolling_perf_from_closes(detail["sparkline"]))
             cache[t] = detail
-            _sleep()
+            if from_finviz:
+                _sleep()   # pace Finviz only; TV is batched
         d = cache.get(t)
         if d is None:
             continue

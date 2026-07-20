@@ -122,6 +122,23 @@ def main():
             if age_h > max_h:
                 issues.append(f"STALE {age_h:.0f}h: {fn} — internal date {raw} (max {max_h}h)")
 
+    # ── Thematic stock-count floor ───────────────────────────────────────────
+    # themes[] can be non-empty yet under-populated (per-stock detail step
+    # degraded), which silently blanks Leading/Laggard Themes + Clean Bases.
+    # A healthy scrape has ~250 theme stocks; alert below 100.
+    tp = PUBLIC / "thematic_data.json"
+    if tp.exists():
+        try:
+            td = json.loads(tp.read_text(encoding="utf-8"))
+            n_stocks = sum(len(s.get("stocks", []))
+                           for t in td.get("themes", [])
+                           for s in t.get("subthemes", []))
+            if td.get("themes") and n_stocks < 100:
+                issues.append(f"UNDER-POPULATED: thematic_data.json has only {n_stocks} theme "
+                              "stocks (need ≥100) — per-stock detail step degraded")
+        except Exception:
+            pass
+
     print(f"Data health check @ {NOW:%Y-%m-%d %H:%M} UTC  (weekend={weekend})\n" + "-" * 60)
     if warnings:
         print("WARNINGS:")
