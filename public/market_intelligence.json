@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-20 16:45 ET",
+  "generated_at": "2026-07-20 17:47 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -12,13 +12,13 @@
       "close": 742.09,
       "prev_open": 742.08,
       "prev_close": 743.29,
-      "volume": 41004709,
+      "volume": 49855561,
       "change_pct": -0.16
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 696.06,
-      "open": 702.16,
+      "open": 702.26,
       "high": 705.8,
       "low": 695.51,
       "close": 696.06,
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 82.48,
+      "price": 82.42,
       "open": 82.91,
       "high": 84.6,
       "low": 79.58,
-      "close": 82.48,
+      "close": 82.42,
       "prev_open": 79.57,
       "prev_close": 82.49,
-      "volume": 323128,
-      "change_pct": -0.01
+      "volume": 324589,
+      "change_pct": -0.08
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -78,7 +78,7 @@
   },
   "fred": {
     "hy_oas": 2.73,
-    "yield_curve": 0.37,
+    "yield_curve": 0.39,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -100,32 +100,32 @@
   "analysis": {
     "title": "Post-Market Brief: July 20, 2026",
     "mood_emoji": "⚖️",
-    "mood": "Stable US, Global Caution",
-    "narrative": "US equities navigated a largely range-bound session today, exhibiting resilience despite a significant downturn in Asian markets. Domestic credit spreads remained complacent, suggesting robust institutional risk appetite prevails despite isolated global pressures.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 742.09 | -0.16% | ➡️ |\n| Nasdaq 100 ETF | 696.06 | +0.10% | ➡️ |\n| VIX | 18.65 | -0.64% | 📉 |\n| Crude Oil | 82.48 | -0.01% | ➡️ |\n| Nikkei 225 | 64141.12 | -4.03% | 📉 |\n| DAX | 24846.69 | +0.06% | ➡️ |",
-    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) settled at a complacent 2.73%, indicating a robust institutional risk appetite. Concurrently, the 10-Year Minus 2-Year Yield Curve (T10Y2Y) stands at a normal and steepening +0.370, further supporting a continued willingness for institutions to take on risk.",
-    "analysis_para1": "Despite a significant -4.03% decline in the Nikkei 225, European markets like the DAX remained largely flat, edging up +0.06%, while Crude Oil saw a negligible -0.01% dip. This mixed global performance, particularly the sharp Asian sell-off, appears to have had minimal impact on US high-yield credit spreads, which are holding firm at a complacent 2.73%. This suggests that for now, US institutional risk appetite remains domestically focused and largely insulated from acute regional pressures abroad.",
-    "analysis_para2": "Today's primary market flow for US equities was largely characterized by a mechanical catalyst of internal digestion and thematic persistence, rather than a single external shock. With no major US economic data or policy decisions impacting trading, the market found itself consolidating prior gains and absorbing global crosscurrents. Investor conviction in long-term structural trends, particularly within artificial intelligence, continued to provide a baseline bid, preventing significant downside even as other regions faced notable selling pressure.",
-    "analysis_para3": "Traders should closely monitor the S&P 500 ETF (SPY) at 740.00, which has emerged as a near-term pivot; a sustained break below 738.00 would serve as a clear risk-off threshold. For the Nasdaq 100 ETF (QQQ), maintaining above 695.00 supports continued strength in growth names, with 698.00 as a potential breakout trigger. Today, the prudent mechanical plan involves defending existing core long positions around these support levels and preparing for tactical short opportunities only if they decisively fail.",
-    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 at 59.7% and S&P stocks above SMA200 at 66.7% indicate healthy but not overheated breadth. Watch for a definitive close outside today's tight range on the S&P 500 ETF as a potential signal for the next directional move.",
+    "mood": "Mixed US, Global Weakness",
+    "narrative": "US equities closed with a mixed performance today, characterized by slight gains in technology offsetting minor broader market declines. Significant global divergence emerged, highlighted by a sharp pullback in Asian markets while European indices held steady.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 742.09 | -0.16% | ➡️ |\n| Nasdaq 100 ETF | 696.06 | +0.10% | ➡️ |\n| VIX | 18.65 | -0.64% | 📉 |\n| Crude Oil | 82.42 | -0.08% | ➡️ |\n| Nikkei 225 | 64141.12 | -4.03% | 📉 |\n| DAX | 24846.69 | +0.06% | ➡️ |",
+    "macro_section": "The High-Yield Credit Spread (BAMLH0A0HYM2) currently sits at 2.73%, indicating a Complacent regime in credit markets. Concurrently, the 10Y-2Y Yield Curve (T10Y2Y) is at +0.390, signaling a Normal / Steepening environment. This combination suggests institutional investors maintain a relatively healthy appetite for risk, with no immediate signs of credit stress despite wider market volatility.",
+    "analysis_para1": "The global tape presented a divergent picture today, with the Nikkei 225 plunging by a significant -4.03%, while the DAX barely budged with a +0.06% gain and Crude Oil edged down by only -0.08%. Despite this pronounced weakness in Asian markets, US high-yield credit spreads (BAMLH0A0HYM2) remain at a complacent 2.73%. This suggests that US credit markets are currently discounting or insulated from overseas shocks, implying that US risk appetite remains robust, at least for now, largely ignoring the substantial drawdown seen in Japan.",
+    "analysis_para2": "Today's primary market flow appears to be driven by a persistent mechanical catalyst: the sustained demand and capacity narrative surrounding Artificial Intelligence. While the broader market was mixed, the continued strength and specific contract announcements in the AI data center space, as evidenced by today's gappers, channeled capital into targeted technology plays. This ongoing sector-specific momentum acts as a key underlying 'why,' maintaining a bid in particular segments despite an otherwise consolidating or globally divergent trading session.",
+    "analysis_para3": "For today's close, traders should observe critical levels on the S&P 500 ETF at 740 as immediate support and 745 as resistance, using them as triggers for long or short entries respectively. A decisive break below 740, especially if accompanied by a VIX spike above 19, would signal a significant risk-off threshold, warranting a reduction in long exposure. Conversely, sustained trading above 745 suggests continued resilience. Today's action indicates a need to remain agile, focusing on sector-specific strength within AI while hedging against potential global contagion from the Nikkei's sharp decline.",
+    "technical_signal": "No reversal pattern confirmed yet. The market is currently consolidating, with the S&P 500 ETF and Nasdaq 100 ETF exhibiting minor moves on low volatility. Key technical context shows S&P 500 stocks above SMA50 at 59.7% and S&P stocks above SMA200 at 66.7%, indicating underlying breadth. Watch for a confirmed break of established intraday ranges or a significant shift in VIX to signal directional conviction.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "HUT",
-          "company": "Hut 8 Corp.",
-          "reason": "Hut 8 Corp. secured new significant AI data center lease contracts, signaling robust demand for specialized computing infrastructure."
+          "company": "Hut 8 Corp",
+          "reason": "Secured fresh AI data center lease contracts today, signaling direct demand fulfillment for high-growth compute infrastructure."
         },
         {
           "ticker": "IREN",
-          "company": "Iris Energy Limited",
-          "reason": "Iris Energy Limited reported strong operational metrics and increased capacity to meet surging artificial intelligence demand."
+          "company": "Iris Energy Ltd",
+          "reason": "Benefiting from strong tailwinds in AI demand and expanding data center capacity, reinforcing its position in critical infrastructure."
         }
       ],
       "c_grade": [
         {
           "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft Corp. continues to trade based on sector flows and general market sentiment, with no new fundamental catalysts reported today."
+          "company": "Microsoft Corporation",
+          "reason": "Continues to be a key player in the AI narrative, driving flow based on recycled themes of cloud and enterprise AI integration rather than fresh specific news."
         }
       ]
     }
