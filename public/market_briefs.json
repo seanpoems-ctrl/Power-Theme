@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-20 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Stable US, Global Caution",
+    "spy_price": 742.09,
+    "spy_change_pct": -0.16,
+    "vix": 18.65,
+    "hy_oas": 2.73,
+    "yield_curve": 0.37,
+    "credit_status": "Complacent",
+    "s5fi": 59.7,
+    "mmth": 66.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "HUT",
+          "company": "Hut 8 Corp.",
+          "reason": "Hut 8 Corp. secured new significant AI data center lease contracts, signaling robust demand for specialized computing infrastructure."
+        },
+        {
+          "ticker": "IREN",
+          "company": "Iris Energy Limited",
+          "reason": "Iris Energy Limited reported strong operational metrics and increased capacity to meet surging artificial intelligence demand."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft Corp. continues to trade based on sector flows and general market sentiment, with no new fundamental catalysts reported today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-20 09:11 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "RIVN",
           "company": "Rivian Automotive, Inc.",
           "reason": "Rivian Automotive, Inc. remains a C-grade candidate due to its continued sensitivity to broader EV sector sentiment and technical trading patterns, lacking fresh fundamental catalysts today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-29 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On / Growth Optimism",
-    "spy_price": 741.0,
-    "spy_change_pct": 1.65,
-    "vix": 17.65,
-    "hy_oas": 2.83,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 62.6,
-    "mmth": 65.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "IRDM",
-          "company": "Iridium Communications Inc.",
-          "reason": "News of its acquisition by Rocket Lab provided a strong, specific catalyst driving significant pre-market and post-market price action."
-        },
-        {
-          "ticker": "MSTR",
-          "company": "MicroStrategy Incorporated",
-          "reason": "The announcement of a new capital framework and buyback program offers a fresh, fundamental catalyst for potential upside."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "No fresh fundamental catalyst today, with any movement primarily attributable to recycled headlines or broader market flow."
         }
       ]
     }
