@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-21 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious Accumulation",
+    "spy_price": 748.28,
+    "spy_change_pct": 0.83,
+    "vix": 17.05,
+    "hy_oas": 2.69,
+    "yield_curve": 0.39,
+    "credit_status": "Complacent",
+    "s5fi": 57.7,
+    "mmth": 65.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NBIS",
+          "company": "Nebula Biosciences",
+          "reason": "Nvidia's strategic stake in Nebula Biosciences validates its innovative AI platform, driving immediate investor enthusiasm and strong price action."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a significant expansion of its Azure AI capabilities, signaling robust cloud growth and a continued leadership position in enterprise AI."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla continued to trade within its recent consolidation range, lacking fresh fundamental catalysts and primarily driven by technical flows."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-21 08:41 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continued to see strong flow and momentum buying, driven by its prominent position in the broader technology sector's risk-on rally, without fresh specific news today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-30 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On Momentum Continues",
-    "spy_price": 746.77,
-    "spy_change_pct": 0.78,
-    "vix": 16.45,
-    "hy_oas": 2.8,
-    "yield_curve": 0.28,
-    "credit_status": "Complacent",
-    "s5fi": 60.3,
-    "mmth": 64.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AVAV",
-          "company": "AeroVironment Inc.",
-          "reason": "Strong 'Beat & Raise' earnings report today signals robust financial performance and positive forward guidance, attracting significant investor interest."
-        },
-        {
-          "ticker": "SHAZ",
-          "company": "Shazam Entertainment Limited",
-          "reason": "Disclosure of US$1.6 Billion Strategic Financing and a 10% Stake provides a substantial capital injection and validates its market position."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Trading primarily on established technical levels and general sector flows, lacking a fresh, specific fundamental catalyst today."
         }
       ]
     }
