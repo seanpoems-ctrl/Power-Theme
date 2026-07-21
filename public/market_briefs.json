@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-21 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Risk-On Momentum",
+    "spy_price": 742.09,
+    "spy_change_pct": -0.16,
+    "vix": 17.6,
+    "hy_oas": 2.73,
+    "yield_curve": 0.39,
+    "credit_status": "Complacent",
+    "s5fi": 59.7,
+    "mmth": 66.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation announced a groundbreaking partnership with QuantumCloud for next-generation data center AI infrastructure."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly and Company reported positive Phase 3 trial results for its new obesity treatment, demonstrating superior efficacy and safety profiles."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft Corporation continues to see sustained institutional flow driven by ongoing strength in its Azure cloud computing division and AI initiatives."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-20 17:47 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corp.",
           "reason": "NVIDIA continues to capture attention driven by ongoing demand for AI infrastructure and broader technology sector optimism, a recurring theme."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-30 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-On Momentum Surge",
-    "spy_price": 741.0,
-    "spy_change_pct": 1.65,
-    "vix": 17.53,
-    "hy_oas": 2.83,
-    "yield_curve": 0.28,
-    "credit_status": "Complacent",
-    "s5fi": 62.6,
-    "mmth": 65.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Received accelerated FDA approval for its new Alzheimer's drug, opening a significant new market opportunity."
-        },
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Announced a groundbreaking advancement in its generative AI model, potentially redefining industry standards and market share."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp",
-          "reason": "The stock continues to exhibit strong technical momentum, extending its recent upward trend on broad tech sector strength."
         }
       ]
     }
