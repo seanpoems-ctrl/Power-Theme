@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21 16:45 ET",
+  "generated_at": "2026-07-21 17:44 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -18,13 +18,13 @@
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 708.97,
-      "open": 706.57,
+      "open": 706.68,
       "high": 710.05,
       "low": 702.81,
       "close": 708.97,
       "prev_open": 702.16,
       "prev_close": 696.06,
-      "volume": 29987617,
+      "volume": 33075485,
       "change_pct": 1.85
     },
     "^VIX": {
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 84.43,
+      "price": 84.54,
       "open": 82.42,
       "high": 85.03,
       "low": 81.39,
-      "close": 84.43,
+      "close": 84.54,
       "prev_open": 83.76,
       "prev_close": 83.23,
-      "volume": 272580,
-      "change_pct": 1.44
+      "volume": 274425,
+      "change_pct": 1.57
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -78,13 +78,13 @@
   },
   "fred": {
     "hy_oas": 2.69,
-    "yield_curve": 0.39,
+    "yield_curve": 0.37,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 57.7,
-    "mmth": 65.5
+    "s5fi": 57.5,
+    "mmth": 65.4
   },
   "regime": {
     "credit_status": "Complacent",
@@ -100,32 +100,32 @@
   "analysis": {
     "title": "Post-Market Brief: July 21, 2026",
     "mood_emoji": "📈",
-    "mood": "Cautious Accumulation",
-    "narrative": "US and European equities advanced today, led by strong technology performance and declining volatility, suggesting a broad risk-on sentiment for major markets. However, a significant decline in the Nikkei 225 warrants a degree of global caution despite complacent US credit spreads.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 748.28 | +0.83% | 📈 |\n| Nasdaq 100 ETF | 708.97 | +1.85% | 📈 |\n| VIX | 17.05 | -8.58% | 📉 |\n| Crude Oil | 84.43 | +1.44% | 📈 |\n| Nikkei 225 | 64141.12 | -4.03% | 📉 |\n| DAX | 25011.35 | +0.66% | 📈 |",
-    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) currently sits at a complacent 2.69%, indicating low perceived risk in the corporate debt market. Concurrently, the 10Y-2Y Yield Curve (T10Y2Y) is at a healthy +0.390, signaling a normal to steepening environment, which generally implies institutional investors are comfortable with economic growth and prepared to take on risk.",
-    "analysis_para1": "Despite the sharp -4.03% decline in the Nikkei 225, which reflects specific regional concerns, the DAX advanced by +0.66% and Crude Oil climbed +1.44%, indicating segmented global strength. This divergence suggests that while some international markets face headwinds, US risk appetite remains insulated, as evidenced by the persistently complacent High Yield Credit Spread at 2.69%. The global tape implies that US institutions are willing to selectively accumulate risk, viewing any regional weakness as contained rather than systemic.",
-    "analysis_para2": "Today's dominant 'Why' behind the primary flow was a strong positioning squeeze and sector rotation into growth and technology names, likely amplified by specific strategic news. The significant -8.58% drop in the VIX, coupled with the Nasdaq 100 ETF's +1.85% gain, points to a clear 'risk-on' move. This mechanical catalyst suggests that investors are actively unwinding bearish bets or reallocating capital towards higher-growth segments of the market, potentially driven by perceived earnings stability or strategic investments within the tech ecosystem.",
-    "analysis_para3": "For today's close, the mechanical plan involves maintaining a long bias in leading sectors but with disciplined risk management. Traders should monitor the S&P 500 ETF around the 740 level as primary support, with a break below potentially signaling a shift in sentiment. Key triggers for long entries remain sustained breaks of intraday highs or constructive price action on shallow pullbacks, especially in tech-heavy indices. A risk-off threshold would be a VIX re-entering above 18.00 or a failure of the S&P 500 ETF to hold 740, prompting a reduction in long exposure.",
-    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 are at 57.7% and S&P stocks above SMA200 are at 65.5%, indicating decent but not stretched market breadth. Traders should watch for any significant divergence between price action and these breadth metrics, or a sharp, sudden spike in the VIX as potential early warning signs.",
+    "mood": "Bullish Sentiment, Growth Leads",
+    "narrative": "US equities rallied strongly today, with technology and growth stocks leading the charge as risk appetite remained robust. The VIX retreated significantly, signaling decreasing market apprehension despite some global divergence.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 748.28 | +0.83% | 📈 |\n| Nasdaq 100 ETF | 708.97 | +1.85% | 📈 |\n| VIX | 17.05 | -8.58% | 📉 |\n| Crude Oil | 84.54 | +1.57% | 📈 |\n| Nikkei 225 | 64141.12 | -4.03% | 📉 |\n| DAX | 25011.35 | +0.66% | 📈 |",
+    "macro_section": "The High Yield Credit Spread, currently at a complacent 2.69%, reflects strong institutional risk appetite in the market. Coupled with a Normal / Steepening 10Y-2Y Yield Curve at +0.370, this macro backdrop indicates a healthy appetite for risk assets, encouraging further allocation into equities.",
+    "analysis_para1": "Global markets presented a mixed picture today, with the Nikkei 225 experiencing a notable decline of -4.03% while the DAX advanced by +0.66% and Crude Oil climbed +1.57%. Despite this varied international performance, particularly the sharp drop in Japanese equities, US high yield credit spreads remain steadfastly complacent at 2.69%. This resilience in the US credit market suggests that domestic investors are largely insulating from overseas weakness, maintaining a robust appetite for risk even amidst international headwinds.",
+    "analysis_para2": "The primary mechanical catalyst driving today's US equity strength, particularly in the technology-heavy Nasdaq 100 ETF which surged +1.85%, appears to be a thematic rotation into growth names fueled by specific corporate action. The pre-market excitement surrounding Nvidia's strategic stake in NBIS likely ignited broader bullish sentiment across the technology sector, drawing significant institutional flow. This positive news created a momentum spillover, encouraging a buying spree in other high-growth and innovation-driven companies, as evidenced by the Nasdaq's outperformance and the VIX's sharp 8.58% decline.",
+    "analysis_para3": "Traders should continue to favor long positions in growth-oriented sectors, using any minor dips as potential entry points. The S&P 500 ETF, currently at 748.28, establishes initial support around the 745.00 level. A sustained break above today's highs could target 750.00, while a risk-off threshold for reassessment would be a decisive close below 740.00, especially if accompanied by an uptick in the VIX. Maintain tight stop-losses and prioritize high-conviction names with clear catalysts to capitalize on the prevailing bullish momentum today.",
+    "technical_signal": "No reversal pattern confirmed yet. The broader market continues to show underlying strength with 57.5% of S&P 500 stocks above their SMA50 and 65.4% above their SMA200, indicating healthy breadth. Traders should monitor for any significant deterioration in these breadth metrics or a sharp reversal in price action on increased volume as potential early warnings.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "NBIS",
-          "company": "Nebula Biosciences",
-          "reason": "Nvidia's strategic stake in Nebula Biosciences validates its innovative AI platform, driving immediate investor enthusiasm and strong price action."
+          "company": "NBIS Corporation",
+          "reason": "Secured a significant strategic stake from Nvidia, signaling strong confidence and potential future collaboration which ignited strong bullish sentiment."
         },
         {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a significant expansion of its Azure AI capabilities, signaling robust cloud growth and a continued leadership position in enterprise AI."
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Market sentiment buoyed by its strategic investment announcement, reinforcing its growth trajectory and expanding ecosystem, leading to broad tech sector optimism."
         }
       ],
       "c_grade": [
         {
           "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Tesla continued to trade within its recent consolidation range, lacking fresh fundamental catalysts and primarily driven by technical flows."
+          "company": "Tesla, Inc.",
+          "reason": "Continues to be a focus for retail and institutional flow despite no specific fresh news catalyst, often reacting to technical levels and broader market sentiment."
         }
       ]
     }

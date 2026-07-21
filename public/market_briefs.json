@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-21 17:44 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Bullish Sentiment, Growth Leads",
+    "spy_price": 748.28,
+    "spy_change_pct": 0.83,
+    "vix": 17.05,
+    "hy_oas": 2.69,
+    "yield_curve": 0.37,
+    "credit_status": "Complacent",
+    "s5fi": 57.5,
+    "mmth": 65.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NBIS",
+          "company": "NBIS Corporation",
+          "reason": "Secured a significant strategic stake from Nvidia, signaling strong confidence and potential future collaboration which ignited strong bullish sentiment."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Market sentiment buoyed by its strategic investment announcement, reinforcing its growth trajectory and expanding ecosystem, leading to broad tech sector optimism."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Continues to be a focus for retail and institutional flow despite no specific fresh news catalyst, often reacting to technical levels and broader market sentiment."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-21 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA Corporation continues to see elevated trading volume driven by persistent enthusiasm for artificial intelligence infrastructure, maintaining its technical uptrend without new specific company catalysts."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-06-30 18:03 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Broad Risk-On Rally",
-    "spy_price": 746.77,
-    "spy_change_pct": 0.78,
-    "vix": 16.45,
-    "hy_oas": 2.8,
-    "yield_curve": 0.3,
-    "credit_status": "Complacent",
-    "s5fi": 60.3,
-    "mmth": 64.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "ABVX",
-          "company": "Abivax Corporation",
-          "reason": "Positive Phase 3 Clinical Data for a key therapeutic candidate drove significant investor interest and re-rated the company's future revenue potential."
-        },
-        {
-          "ticker": "SHAZ",
-          "company": "Shazam Technologies Inc.",
-          "reason": "The announcement of US$1.6 Billion in strategic financing and a 10% stake disclosure signaled strong institutional backing and growth prospects."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continued to see strong flow and momentum buying, driven by its prominent position in the broader technology sector's risk-on rally, without fresh specific news today."
         }
       ]
     }
