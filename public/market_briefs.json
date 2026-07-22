@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-22 08:43 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-On / Tech Momentum",
+    "spy_price": 748.28,
+    "spy_change_pct": 0.83,
+    "vix": 17.67,
+    "hy_oas": 2.69,
+    "yield_curve": 0.37,
+    "credit_status": "Complacent",
+    "s5fi": 57.6,
+    "mmth": 65.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft (MSFT) unveiled a new enterprise AI platform, projecting significant revenue growth in cloud services, bolstering investor confidence."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA (NVDA) announced a breakthrough in quantum computing integration with its GPU architecture, expanding its market reach and future revenue streams."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla (TSLA) continues to benefit from broader electric vehicle sector tailwinds, though lacking fresh company-specific news today and driven by technical flow."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-22 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA continues to experience high trading volume with short-term technical support being tested following today's broader tech sector weakness and potential profit-taking."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-01 09:38 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Cautionary Opening",
-    "spy_price": 742.97,
-    "spy_change_pct": -0.51,
-    "vix": 16.79,
-    "hy_oas": 2.8,
-    "yield_curve": 0.3,
-    "credit_status": "Complacent",
-    "s5fi": 60.3,
-    "mmth": 64.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CRM",
-          "company": "Salesforce.com, Inc.",
-          "reason": "Announces strategic partnership with a major AI cloud provider, enhancing its generative AI capabilities and market position."
-        },
-        {
-          "ticker": "UNH",
-          "company": "UnitedHealth Group Incorporated",
-          "reason": "Receives favorable regulatory approval for new healthcare product line, projecting strong revenue growth in the upcoming quarters."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Continues to see sector rotation, with investors awaiting clarity on Q2 e-commerce trends after mixed recent reports."
         }
       ]
     }
