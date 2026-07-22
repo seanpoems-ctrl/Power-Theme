@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-22 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Tech-Led Optimism, Volatility Rising",
+    "spy_price": 748.28,
+    "spy_change_pct": 0.83,
+    "vix": 17.36,
+    "hy_oas": 2.69,
+    "yield_curve": 0.37,
+    "credit_status": "Complacent",
+    "s5fi": 57.6,
+    "mmth": 65.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft Corp. is positioned for a strong open following reports of a landmark multi-year cloud services agreement with a major healthcare provider, reinforcing its Azure growth trajectory."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly and Company is set to benefit from an analyst upgrade today, citing accelerated sales forecasts for its leading obesity drug following promising real-world efficacy data presented at a medical conference."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "NVIDIA Corp. is seeing follow-through momentum from yesterday's tech-led rally, with flows indicating continued retail and institutional accumulation on technical strength rather than a fresh news catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-21 17:44 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "AMZN",
           "company": "Amazon.com, Inc.",
           "reason": "Continues to see sector rotation, with investors awaiting clarity on Q2 e-commerce trends after mixed recent reports."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-01 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Tech-Led Optimism",
-    "spy_price": 746.77,
-    "spy_change_pct": 0.78,
-    "vix": 16.73,
-    "hy_oas": 2.8,
-    "yield_curve": 0.3,
-    "credit_status": "Complacent",
-    "s5fi": 60.3,
-    "mmth": 64.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon.com Inc. is poised for strong performance following reports of a significant new partnership with a major enterprise client for its AWS cloud computing division, alongside promising early sales data for its new AI-integrated smart home devices."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly and Company is seeing pre-market enthusiasm after announcing robust positive clinical trial data for its novel obesity treatment, which demonstrated superior efficacy and safety profiles in late-stage studies compared to existing therapies."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corporation continues to see elevated trading volume driven by persistent enthusiasm for artificial intelligence infrastructure, maintaining its technical uptrend without new specific company catalysts."
         }
       ]
     }
