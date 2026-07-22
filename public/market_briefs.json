@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-22 17:42 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Consolidating US, Global Strength",
+    "spy_price": 747.41,
+    "spy_change_pct": -0.12,
+    "vix": 16.64,
+    "hy_oas": 2.69,
+    "yield_curve": 0.36,
+    "credit_status": "Complacent",
+    "s5fi": 59.1,
+    "mmth": 65.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "ARWR",
+          "company": "Arrowhead Pharmaceuticals",
+          "reason": "The company announced positive Phase 3 trial results for its key therapeutic candidate, driving significant investor interest."
+        },
+        {
+          "ticker": "SMCI",
+          "company": "Super Micro Computer Inc.",
+          "reason": "Super Micro Computer reported a robust earnings beat and raised its full-year guidance, signaling strong demand and operational performance."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "Shares saw flow-driven movements today amid broader sector sentiment without any fresh, specific fundamental catalysts for the bank."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-22 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2180,23 +2218,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-07-01 18:07 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "",
-    "spy_price": 745.76,
-    "spy_change_pct": -0.14,
-    "vix": 16.59,
-    "hy_oas": 2.75,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 60.2,
-    "mmth": 64.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
