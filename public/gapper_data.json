@@ -1,132 +1,52 @@
 {
-  "scan_time": "2026-07-22 08:55 ET",
+  "scan_time": "2026-07-23 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "ARWR",
-      "price": 74.52,
-      "gap_pct": 16.75,
-      "pm_volume": 211865,
-      "avg_vol_10d": 2240958,
-      "avg_dollar_vol": 166996190,
-      "mkt_cap": 10496663904,
-      "rvol": 0.69,
-      "adr_pct": 4.98,
-      "category": "FDA",
-      "theme": "Positive Phase 3 Trial Results",
-      "reasoning": "Arrowhead Pharmaceuticals stock surged following positive Phase 3 trial results, de-risking a key drug candidate and potentially accelerating regulatory timelines.",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 21,
-      "grade": "A",
-      "finviz_theme": "Biotech",
-      "analysis_source": "gemini",
+      "ticker": "CLF",
+      "price": 9.45,
+      "gap_pct": 13.92,
+      "pm_volume": 1277510,
+      "avg_vol_10d": 18633551,
+      "avg_dollar_vol": 176087057,
+      "mkt_cap": 5390418550,
+      "rvol": 1.09,
+      "adr_pct": 4.71,
+      "category": "Earnings",
+      "theme": "Q2 Revenue Beat with Loss",
+      "reasoning": "Cleveland-Cliffs reported a **Q2 loss** while also **topping revenue estimates**, signaling a mixed financial performance.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "B",
+      "finviz_theme": "Materials - Metals & Mining",
+      "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Arrowhead Pharmaceuticals announced positive **Phase 3 trial results**, which led to a **jump in its stock**. This signifies a crucial clinical milestone for a potential drug.",
-        "impact": "The positive Phase 3 results significantly de-risk the drug candidate, bolstering its chances for regulatory approval and future market entry, setting the stage for potential re-ratings."
+        "catalyst": "Cleveland-Cliffs (**CLF**) reported its **Q2 financial results** today, showing a **Q2 loss** but simultaneously **topping revenue estimates**.",
+        "impact": "The mixed earnings report, with a positive revenue surprise balancing out a reported loss, could lead to short-term volatility and a re-evaluation of valuation multiples, potentially attracting opportunistic buyers."
       },
-      "analysis_details": "• **The Drug**\nArrowhead Pharmaceuticals saw its **stock jump** after releasing **Phase 3 trial results**. The positive outcome of these late-stage trials indicates a significant step forward for the drug candidate, moving it closer to potential regulatory filings and commercialization.\n\n• **The Significance**\nAchieving positive **Phase 3 trial results** is a pivotal moment for a pharmaceutical company, as it typically represents the final efficacy and safety data required for regulatory submission. This successful outcome substantially enhances the drug's probability of gaining market approval, opening up a potential new revenue stream for the company.\n\n• **Risk Profile**\nWhile positive, the news isn't an FDA approval, meaning regulatory risks still exist, albeit diminished. However, with **Phase 3 trial results** now out, the primary clinical risk has been largely mitigated, shifting focus to regulatory review and commercial execution.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nCleveland-Cliffs (**CLF**) successfully **topped revenue estimates** for its second quarter. This indicates stronger-than-anticipated sales performance, which is a positive signal for top-line growth and market share.\n\n• **The Growth (Momentum)**\nDespite the revenue outperformance, CLF also **reported a Q2 loss**. This suggests that while sales volume or pricing might be robust, profitability metrics were challenged during the quarter, potentially impacting future earnings momentum.\n\n• **The Guide**\nNo specific guidance figures or revisions were provided in the headlines, preventing a clear assessment of forward expectations. However, a prior headline mentioned the stock **\"May Be A Bargain On Cash Flow Recovery,\"** hinting at underlying potential despite the current loss.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Arrowhead Pharmaceuticals stock jumps on Phase 3 trial results - Investing.com",
+          "title": "Cleveland-Cliffs (CLF) Reports Q2 Loss, Tops Revenue Estimates - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOcDVocmdBMnF5QWhfOFRibS1xWWh4dExSc0ZRdWNNZ0xXb3JHVTJwVmRES0hMQVl5M2c3X1dpU21wY3ljLW1tRlBYQTkxOHg5R1dUamhyS09vOGZDTHhVYUdjZE95b09nTmxULXV2eXRaclI5LWY0VzVySlpiV2tqZEh0WV9kVHFyYnVUQjJFSmNCZG45ZXc4OUVtQ0dmbVV0Sm41dndQbnVVUlY2cHlzRjhmd2lXMTI4SWd4RUdoV0VfUQ?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Biotech",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 45,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "positive Phase 3 trial results",
-        "discrepancy_note": null
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "SMCI",
-      "price": 25.5,
-      "gap_pct": 13.88,
-      "pm_volume": 5606513,
-      "avg_vol_10d": 31102382,
-      "avg_dollar_vol": 793110741,
-      "mkt_cap": 16495261138,
-      "rvol": 0.89,
-      "adr_pct": 5.97,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "SMCI surged after reporting a record **$60 billion backlog** and unexpectedly **doubling gross margins**, signaling strong AI infrastructure demand.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "A+",
-      "finviz_theme": "AI Compute",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "SMCI filed an 8-K for Earnings/Financial Results on 2026-07-21. News headlines reported SMCI stock \"jumped **15% in premar**\" and \"soared as its margins unexpectedly **double**\". The company also announced a \"record **$60 billion backlog**\" and a \"gross margin raise\".",
-        "impact": "The substantial backlog and significant margin expansion signal robust demand for AI infrastructure, indicating strong future revenue visibility and profitability, which should fuel continued price momentum."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nSuper Micro Computer (SMCI) stock \"jumped **15% in premar**\" and continued to rise, with headlines reporting a \"**+7.01%**\" increase overnight. This surge was attributed to the company's margins unexpectedly \"**double**\" and a reported \"gross margin raise\", signaling a significant beat on profitability expectations.\n\n• **The Growth (Momentum)**\nSMCI disclosed a \"record **$60 billion backlog**\" for its AI infrastructure offerings, confirming robust demand. This substantial backlog surge has charged retail bulls, who now view Nokia, a related sector play, as a \"Pillar Of Infrastructure\" ahead of its own earnings.",
-      "peer_tickers": [
-        "HPE",
-        "NTAP",
-        "WDC"
-      ],
-      "leverage_etfs": [
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOc0dKWjV3Y1BCejR6WlQ2VS1WalFuNDZ6aXZlWndieU9EbHl5UW5takVsdHF0RUpXQUVQUnhSNk1RdXNHWVFnVzBKOVJLRXF4cEIzelljWTJNT1h2SmE0Q0E1czZnRzZ2RUZhU2lsdFliZ0hySlFIeTl2b3EwQUJjTDJySjllTGZOWkRYTGNEdlhRbDBMM2tqTjEyMzg?oc=5"
+        },
         {
-          "ticker": "SMCX",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SMCZ",
-          "mult": "1x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "Supermicro (SMCI) Stock Still Looks Undervalued Despite Legal Risks - Yahoo Finance",
+          "title": "Cleveland-Cliffs Inc. (CLF) Stock Price Today - mexc.co",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQblFlLUVucUdQQUk3TEhabXEyQlROOXJ3eWh1d2F1QVpqVlc0eDhpUXNrdHJ2cVZjRHBpbDVJOXFrMXRCY0FwRmYyZE1MVU1hOTh2M19TYllWdHZoU296SXF3V25fNF9MTnZCRjFpOENpZTRKejduOVNsc2lEVXpyR0lBSjExWHJrbTZlVTM4blVrSkw3S2x1WFBZX0p2LXM?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiREFVX3lxTE1TbXgtVjgxd3g5SW9zT0R1ZXpRUm9sTjZWRnppUjJkVmhLWmdmMTJPRThGMU80WlkwSVp6WVh2c3JhVkoz?oc=5"
         },
         {
-          "title": "NOK Stock Rises Overnight: Retail Bulls Charged After SMCI's Backlog Surge, Call Nokia 'Pillar Of Infrastructure' Ahead Of Earnings",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/7e67887d-c8a0-389f-bbd2-7110619cd208/nok-stock-rises-overnight%3A.html"
-        },
-        {
-          "title": "Supermicro stock jumps on gross margin raise amid record $60 billion backlog",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/article/supermicro-stock-jumps-on-gross-margin-raise-amid-record-60-billion-backlog-223037795.html"
-        },
-        {
-          "title": "Super Micro's stock soars as its margins unexpectedly double",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/story/super-micros-stock-soars-as-its-margins-unexpectedly-double-8aa83784?mod=mw_FV"
+          "title": "Cleveland-Cliffs (CLF) Stock May Be A Bargain On Cash Flow Recovery - webull.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1ZNlZ3MHlueHZXR1NiVjliN1FMWnJEUjY0clZqbVh0TkRsOEJ1bzZOQk53SEhqckY2bFdIeVhtLUFWb1BYOW5SVXN6SEhjZVIyVElSd2p4S00?oc=5"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-07-21",
+        "filing_date": "2026-07-23",
         "form": "8-K",
         "items": [
           "2.02",
@@ -134,138 +54,98 @@
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1375365/000137536526000019/smci-20260721.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/764065/000076406526000097/clf-20260723.htm"
       },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "AI Compute",
+      "industry": "Materials - Metals & Mining",
       "technical_status": "Pass",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
+        "status": "Unconfirmed",
+        "confidence_score": 60,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "record $60 billion backlog",
-        "discrepancy_note": "Source A (Finviz [4]) explicitly mentions a 'record $60 billion backlog'. Source B (Google News) headlines generally discuss SMCI's surge but do not provide specific financial figures like a $60 billion backlog. Therefore, only one source mentions this specific claim."
+        "primary_claim": "Cleveland-Cliffs reported a Q2 loss while also topping revenue estimates.",
+        "discrepancy_note": "Source A (Finviz) contains no information. Source B (Google News) headline [1] confirms the claim ('Reports Q2 Loss, Tops Revenue Estimates'), but headline [3] mentions 'Q2 2026 EBITDA' which is a future date and discusses growth, not a loss. Since 'BOTH sources' (Finviz and Google News) do not confirm the claim with matching specifics, and Finviz has no data, the claim remains unconfirmed by both required sources."
       },
-      "gates_passed": 5,
+      "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": true,
+        "gate_price": false,
         "gate_dollar_vol": true,
         "gate_mkt_cap": true,
         "gate_adr": true
       },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     },
     {
-      "ticker": "FTAI",
-      "price": 210.25,
-      "gap_pct": 9.87,
-      "pm_volume": 137936,
-      "avg_vol_10d": 1339818,
-      "avg_dollar_vol": 281696734,
-      "mkt_cap": 21568069372,
-      "rvol": 1.21,
-      "adr_pct": 6.41,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 57,
+      "ticker": "HYLN",
+      "price": 3.93,
+      "gap_pct": 11.98,
+      "pm_volume": 367664,
+      "avg_vol_10d": 2520247,
+      "avg_dollar_vol": 9904571,
+      "mkt_cap": 700826065,
+      "rvol": 1.05,
+      "adr_pct": 10.78,
+      "category": "New Contract/Partnership",
+      "theme": "U.S. Navy Contract",
+      "reasoning": "Hyliion secured a **$41.7 million U.S. Navy contract** to build megawatt-scale KARNO power generation systems.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
       "grade": "C",
-      "finviz_theme": "Infrastructure",
+      "finviz_theme": "Clean Energy - Grid",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "Unknown",
-        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
+        "catalyst": "Hyliion was **awarded a $41.7 million U.S. Navy contract** for its **megawatt-scale KARNO Power Generation Systems**. The company will **build 2- and 3-megawatt power systems** for the Navy.",
+        "impact": "This contract represents a significant new revenue stream and validation for Hyliion's KARNO power generation technology, potentially expanding its market beyond commercial vehicles into defense and stationary power."
       },
-      "analysis_details": "• **What Happened**\nNo specific fundamental news directly related to FTAI was reported in the last **24 hours**. The available headline mentions a **Cloud provider** receiving **mobile gas turbine sets through Nov. 2027**, but does not specify FTAI's involvement in this transaction.\n\n• **Key Consideration**\nGiven the absence of direct company-specific news, any significant price movement in FTAI is likely driven by technical factors, market sentiment, or institutional order flow. This scenario carries a higher risk of being a short-lived technical breakout or a **gap and trap** type move, lacking a solid fundamental underpinning for sustained momentum.",
+      "analysis_details": "• **Impact**\nHyliion has been **awarded a $41.7 million U.S. Navy contract** to develop and build **megawatt-scale KARNO Power Generation Systems**. The company will be responsible for creating **2- and 3-megawatt power systems** specifically for naval applications.\n\n• **Strategic Value**\nThis contract marks a significant diversification for Hyliion, moving beyond its traditional heavy-duty vehicle focus into defense and stationary power generation with the **U.S. Navy**. It provides a substantial new revenue stream and validates the applicability and scalability of its **KARNO power generation technology** for critical infrastructure.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Cloud provider will receive mobile gas turbine sets through Nov. 2027 - Stock Titan",
+          "title": "3 Penny Stocks With Strong Balance Sheets Worth A Closer Look - simplywall.st",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxORE5GektIeVB2N0pmQ0VFTzBxUG1ONUVQU25yWnJlTFk1ams2bFp0SHFDYXJTZE9kS1JBdDRpU3dTdmJ6UEg1bnhDV1YtWEg0QXJRV2hFZnozeEpWMHd1MlFwQlJJaE9TRlZUTFJQaUJsVFRuVW9TdEx3NTQ3cXB6LUdGRmVCaURxQkZCLXRneUljVmI4OVhDZlVfbXJwM2U2alFJU3RfLXZiQVZ3bVUxY0VyREwtLUlVdm9pNzQxN1c?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNMXNpdDFrYW13MEJQY2JXMGllbWg4R1I2ZmtLV3I3b2pkNGxIUnVjcllhcHRRX3ItaVY3MzVDNXo4QTJ4UnRRUWFKUFdOQjZ2Tk1ISmp3RjN0WmZqT0JFYzlxTWphdVNwR25OSlYyTmNhWmRrWTVoM0tfcS14V1BEUkpoZ0Z0cGUzdnVpMW9MNDhEV3Nadll1UzhyWlF1MktOcnoyd3ItQ2NkY1JHZ3kwV2Q2SEpPTFRKR0JodWlkbV9KSXhaVThV0gHMAUFVX3lxTE5MOWMxdGFJOHhYQzhaRTRpSU1ZZTNRY0o0eUotREZrWUctNFBQS3o0OVFwNFlWQ0tZeXZkYzdXU0pCVmlWVE5YamxUWTVuSU1OeXNfNFJWcm92QnhsMnpBM3R6cGI5aU80RXdaQmZrUzlwOFlfMjQzM2tqS0cteTNqeWpVUnpNR1JCTWZSSlZlZUFMR1FzWFpYUkhHMk5mcENaUG1fdzc0M1dnZTdxc0FtdlFndXBvcEo1WTQtQXJyajlnX3hmTXBPZGZHRw?oc=5"
+        },
+        {
+          "title": "Clover Health Stock And 2 Penny Stocks With Stronger Balance Sheets - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQRmdmSy1YT2N3Yjc1dm1aR012dXdBWHZuSW5HaEZZOTM2WVU3eFNnVkFteFRKTEx4c0NvMklId1NZay1zcUE3Zi1kRVY5SWxEYV9WemQ1LWljSy1ZZGNCSEdLRVVUX2dBS1ZId2kzdDVWc3NiSVR2ZGdVOE1DaFRrNndnTm1ZZXZfRTkxMTJRNW54elFiX0pyUnNlZWE0ZFF0TTZ0WXhGRUJlR2NoUFRTc0dGaVJFMlAwOFFKdUtGbUF0bXVkRHFjREpoVGZGT0UxN3JRdE9jVkHSAdgBQVVfeXFMUEZnZkstWE9jd2I3NXZtWkdNdnV3QVh2bkluR2hGWTkzNllVN3hTZ1ZBbXhUSkxMeHNDbzJJSHdTWWstc3FBN2YtZEVWOUlsRGFfVnpkNS1pY0stWWRjQkhHS0VVVF9nQUtWSHdpM3Q1VnNzYklUdmRnVThNQ2hUazZ3Z05tWWV2X0U5MTEyUTVueHpRYl9KclJzZWVhNGRRdE02dFl4RkVCZUdjaFBUU3NHRmlSRTJQMDhRSnVLRm1BdG11ZERxY0RKaFRmRk9FMTdyUXRPY1ZB?oc=5"
+        },
+        {
+          "title": "Hyliion to Build 2- and 3-Megawatt Power Systems for Navy - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQZVlhNVVIOW9SejVaZlZwVnM1YnJrMXhVWXFOWFVXRjZ5NEpRLTYyMWJqbG8yTHJLLVlfdmE5QUdyNHVxNWdOSjRDVnVuX1ZjcDZkYkxOWjZ2RF9BQ0s4dE9PM05yYnQ2LUdZbVo2SnlSWXQ0VEg4OXd4WnFFX0JqWnJuRWR4Y3J0T2J1b1FoX1ZGX1BBV2hpM19WN1FiT3JnUlJQZmNUV3ZQTnlrUjFKb2F4R1g2UERTTjUteA?oc=5"
+        },
+        {
+          "title": "Hyliion Awarded $41.7 Million U.S. Navy Contract for Megawatt-Scale KARNO Power Generation Systems",
+          "source": "Finviz",
+          "url": "/news/371300/hyliion-awarded-417-million-us-navy-contract-for-megawatt-scale-karno-power-generation-systems"
         }
       ],
       "edgar_filing": null,
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Infrastructure",
-      "technical_status": "Pass",
+      "industry": "Clean Energy - Grid",
+      "technical_status": "Fail (Avg $Vol $10M < $100M)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 80,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": "The primary claim states 'No immediate fundamental catalyst found'. However, Source B [1] mentions 'Cloud provider will receive mobile gas turbine sets through Nov. 2027', which is a forward-looking operational update related to the company's business segments (FTAI's Infrastructure business often involves power generation assets like gas turbines). While the 'Nov. 2027' date means it's not an immediate impact, it is a fundamental business development. Source B [2] also indicates 'Bank of New York Mellon Corp Grows Stock Position', which represents 'institutional flow' as suggested in the summary, but if considered a catalyst, it contradicts 'No immediate fundamental catalyst found' by being a specific reason for increased interest/activity."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "NRGV",
-      "price": 3.48,
-      "gap_pct": 6.61,
-      "pm_volume": 207119,
-      "avg_vol_10d": 4391855,
-      "avg_dollar_vol": 15283655,
-      "mkt_cap": 630712674,
-      "rvol": 1.13,
-      "adr_pct": 8.68,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $15M < $100M)",
-      "verification": {
-        "status": "Verified",
         "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
+        "primary_claim": "$41.7 million U.S. Navy contract",
+        "discrepancy_note": "Source A (Finviz) explicitly confirms a '$41.7 Million U.S. Navy Contract'. Source B (Google News, specifically the Stock Titan article) mentions Hyliion building 2- and 3-megawatt power systems for the Navy but does not specify or confirm the '$41.7 million' dollar amount."
       },
       "gates_passed": 2,
       "gates_detail": {
@@ -281,46 +161,52 @@
     },
     {
       "ticker": "SKM",
-      "price": 31.95,
-      "gap_pct": 5.82,
-      "pm_volume": 72445,
-      "avg_vol_10d": 2379682,
-      "avg_dollar_vol": 76030840,
-      "mkt_cap": 12053029469,
-      "rvol": 0.47,
-      "adr_pct": 3.51,
+      "price": 33.94,
+      "gap_pct": 9.02,
+      "pm_volume": 175059,
+      "avg_vol_10d": 2398596,
+      "avg_dollar_vol": 81408348,
+      "mkt_cap": 13367457925,
+      "rvol": 1.09,
+      "adr_pct": 3.46,
       "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
+      "theme": "Dividend Record Date",
+      "reasoning": "SK Telecom announced the **August 31 record date** for its **Q2 dividend**, representing a routine corporate action with minimal momentum impact.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
       "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+        "catalyst": "SK Telecom (NYSE: SKM) has set **August 31** as the record date for its **Q2 dividend**. This is a standard corporate procedural announcement, confirming the timeline for shareholders to be eligible for the upcoming quarterly payout.",
+        "impact": "This news is unlikely to generate significant momentum or price action for SKM, as dividend record dates are typically priced in or anticipated by the market. It confirms a routine return of capital but does not signal a change in fundamental outlook."
       },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "analysis_details": "• **What Happened**\nSK Telecom (NYSE: SKM) announced the **August 31** record date for its **Q2 dividend**. This is a procedural announcement that sets the cutoff for shareholders to be eligible for the upcoming quarterly payment.\n\n• **Key Consideration**\nThis type of news is generally a routine corporate event and is unlikely to be a significant catalyst for momentum trading. While it confirms a return of capital, it doesn't signal new growth, strategic shifts, or unexpected financial performance that would drive price action.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [],
+      "headlines": [
+        {
+          "title": "SK Telecom (NYSE: SKM) sets August 31 record date for Q2 dividend - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOSTdPaGV4OEIzY1o1Sl9RQnVnYTVaSlQxZ01GbXZiRXBmS20tcHJIalpLcDdpUEZCTFZocjNOMjRXNnBoU3BGUUt6MURlaUptRDAySTkzMjEyX3p2LVc2VzZVSE1VS25LLUhRNHp2RjVzRTlDaU9YRmVhTWYzUXlYSV9LZmFFUWZwb1Z1Nk1nUHNqdXo1R1VrR0drZDNsdGU5TEhTSHYxVzJ1QmRFMVdEM3Fn?oc=5"
+        }
+      ],
       "edgar_filing": null,
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $76M < $100M, ADR 3.5% < 4%)",
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $81M < $100M, ADR 3.5% < 4%)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 40,
+        "status": "Discrepancy",
+        "confidence_score": 70,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-        "discrepancy_note": "The primary claim is an assessment about the *absence* of a fundamental catalyst and the *likelihood* of specific drivers (technical breakout or institutional flow). While Google News [1] and [2] do show institutional holdings, confirming the *presence* of institutional investors, they do not directly 'verify' the subjective claim that price action is *likely driven* by this or the 'absence' of a fundamental catalyst. Google News [3] mentions an 'AI deal' but states it's 'not saving the stock,' which is related but doesn't directly confirm the *absence* of *any* immediate fundamental catalyst, nor does it quantify 'technical breakout' or 'institutional flow' as the *likely* drivers."
+        "primary_claim": "August 31 record date for Q2 dividend",
+        "discrepancy_note": "Source A (Finviz News) has no information regarding an August 31 record date or Q2 dividend. Source B [1] (Google News via Stock Titan) confirms 'August 31 record date for Q2 dividend'."
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -333,15 +219,187 @@
       "meets_all_gates": false,
       "tier": "Fail",
       "tier_label": "Excluded"
+    },
+    {
+      "ticker": "DGX",
+      "price": 209.83,
+      "gap_pct": 7.63,
+      "pm_volume": 100821,
+      "avg_vol_10d": 916010,
+      "avg_dollar_vol": 192206378,
+      "mkt_cap": 23227431352,
+      "rvol": 2.75,
+      "adr_pct": 2.39,
+      "category": "Earnings",
+      "theme": "Beat & Raise",
+      "reasoning": "Quest Diagnostics (DGX) surged after reporting Q2 CY2026 earnings beat on both revenue and adjusted EPS, while raising its full-year 2026 outlook.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 82,
+      "grade": "B",
+      "finviz_theme": "Digital Health",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Quest Diagnostics (DGX) filed an 8-K disclosing its **Q2 CY2026 earnings results**, which **beat analyst expectations**. The company reported **adjusted EPS of $3.12 per share**, significantly **surpassing the FactSet estimate of $2.82**. Additionally, DGX's **revenue also beat estimates**, leading to its **stock soaring**.",
+        "impact": "This strong earnings performance and raised guidance indicate robust operational strength and positive momentum, likely attracting further investor interest and potential upgrades."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nQuest Diagnostics (DGX) reported a **significant beat** for its **Q2 CY2026 adjusted EPS**, coming in at **$3.12 per share** against a **FactSet estimate of $2.82**. The company also **beat on revenue**, which contributed to the stock being **up** and **soaring**.\n\n• **The Guide**\nManagement **raised its 2026 view**, signaling increased confidence in future performance and sustained growth. This **upward revision** suggests that the positive momentum from **Q2** is expected to continue through the remainder of the year.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "DGX Stock Up on Q2 Earnings & Revenue Beat, '26 View Raised - Zacks Investment Research",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQQWx5aWxXZWtZLVZRbnUtRzhYTjJlaHN5R1R1VHBMRXphTGVUZjBPb3JhNm5vNl9JS3JvNUthUE1zbDZ3YldqWjEwcUozMGtTNDRDbnU5bEZsVkhjVE5xTm1xMDFaS2JHNmRyRi1PaEhXX1NCMXExRjNwSU5hOF9mRjJxUTB0M2FMSDdONlBtUDJvRzVKT0F3UFVRaHo?oc=5"
+        },
+        {
+          "title": "Quest’s (NYSE:DGX) Q2 CY2026: Beats On Revenue, Stock Soars - FinancialContent",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPT1pZYUo1ZE9TbTBNMFhpU0tTUEctQ1VBVlVjTi1qUlhUY19tTUpFb1RWVlNLSlZOY0YzVjVSRUZnUW9Mbnl2TnlNNDlNSGFHZXhObHRyaXVEQWQ0NDRfbmhLNUVBdU8tWGExd2J3eFY4dkRFUDJ3NkZUamNEV3doSnRocDhKUnNMNDExWFRab0Y1aUhqUnFiYUxsbEhuUlVwYzVBLWE3NV9QeVVfWW04b2JDR1hraE10WU5sSFgydVlXZlV6?oc=5"
+        },
+        {
+          "title": "Earnings Flash (DGX) Quest Diagnostics Incorporated Posts Q2 Adjusted EPS $3.12 per Share, vs. FactSet Est of $2.82 - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQZjllYS1qYWZUNWRHZE1FR0l2MERHbHphUUNtM3BnQjVSbWs1RnhmOUVPXzM4cG1ES2hSZnNSX3RZNEd4THVodjNfbW16bUhOalMtUXlpbHpvOG0xdklZVllvaVhDRGo2MWh6NlhjQ0I3Z0JZOG9GSE9pVkRxNklQTXpJSVB0ZlBnQ2dXZ3hqQW56Y0dnM1BVV0NXSDRFc3NjczBwVGVkNTBlU0pXTlQ0VEFNOXB3RFBxdHRiSWIzWjhfd3dtb2VOTldBaXBpMm5ha1ZpVUJiOVh1dnJwZjZ2MmpB?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-07-23",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1022079/000102207926000067/dgx-20260723.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Digital Health",
+      "technical_status": "Fail (ADR 2.4% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Q2 Adjusted EPS $3.12 per Share, vs. FactSet Est of $2.82",
+        "discrepancy_note": "Source A (Finviz) contains no information to confirm the specific adjusted EPS figures or the beat. Only Source B provides these details."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "RTX",
+      "price": 194.88,
+      "gap_pct": 5.96,
+      "pm_volume": 125604,
+      "avg_vol_10d": 3936576,
+      "avg_dollar_vol": 767159931,
+      "mkt_cap": 262441657747,
+      "rvol": 1.55,
+      "adr_pct": 2.11,
+      "category": "Earnings",
+      "theme": "Earnings Beat",
+      "reasoning": "RTX reported upbeat Q2 CY2026 earnings results, leading to a strong positive market reaction and significant stock price increase.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 78,
+      "grade": "B",
+      "finviz_theme": "Defense & Aerospace",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "RTX officially reported its **Q2 CY2026 earnings** via an **8-K filing** on **2026-07-23**. The company reported **upbeat Q2 results**, which caused its **stock to soar**.",
+        "impact": "The positive earnings report and subsequent stock surge indicate strong investor confidence and could drive continued upward momentum for RTX shares."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nRTX officially reported its **Q2 CY2026 earnings** via an **8-K filing** on **2026-07-23**. News indicated the company reported **upbeat Q2 CY2026 results**, which caused its **stock to soar**. This suggests a positive surprise against market expectations.\n\n• **The Growth (Momentum)**\nThe positive market reaction, with the stock **soaring** after the upbeat Q2 report, indicates strong investor conviction in RTX's current performance and future prospects. This momentum is supported by recent operational highlights, including **Pratt & Whitney GTF engines** surpassing **800 orders and commitments** in **2026 year-to-date** and advancements in **hybrid-electric aviation**.\n\n• **The Guide**\nWhile specific forward guidance figures were not detailed in the provided headlines, the **upbeat Q2 CY2026 results** and the stock's significant positive reaction imply that the company's outlook, or at least current trajectory, is perceived favorably by the market. This suggests a continued positive operational environment for RTX.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "RTX (NYSE:RTX) Reports Upbeat Q2 CY2026, Stock Soars - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQR3d5dWpISVNYVzJmYjNJY05xZll6VGRlSFE1Ymk0cS00R0dpcmtfUGh0ZGFqaHpmcm4zSnNXM3phSDhxeGJRVUpIZnNHSVV0UjJlV3ZENm5pdUdheC1OS3VzcEcwSkpNVkRBTDZkR1BEWGRQY0ZGVzlLZGs3ZlBUVzZPVXd1dXhRQkhHQ1Y0Ti16U2lyUVBn?oc=5"
+        },
+        {
+          "title": "How Will RTX Stock React To Its Upcoming Earnings?",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/m/60f366e3-917e-3b70-a92d-cfefe4144388/how-will-rtx-stock-react-to.html"
+        },
+        {
+          "title": "RTX advances hybrid-electric aviation at The Grid",
+          "source": "Finviz",
+          "url": "/news/370829/rtx-advances-hybrid-electric-aviation-at-the-grid"
+        },
+        {
+          "title": "RTX's Pratt & Whitney GTF engines surpass 800 orders and commitments in 2026, year to date",
+          "source": "Finviz",
+          "url": "/news/370827/rtxs-pratt-whitney-gtf-engines-surpass-800-orders-and-commitments-in-2026-year-to-date"
+        },
+        {
+          "title": "Reading Between The Lines Of GE's Latest Call",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/m/b1b3c0a5-ee0e-338a-8d33-190125f22506/reading-between-the-lines-of.html"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-07-23",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/101829/000010182926000025/rtx-20260723.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Defense & Aerospace",
+      "technical_status": "Fail (ADR 2.1% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Q2 CY2026 earnings results",
+        "discrepancy_note": "Source A (Finviz [3]) mentions 'RTX Stock React To Its Upcoming Earnings?', implying future earnings. Source B (Google News [3]) explicitly states 'RTX (NYSE:RTX) Reports Upbeat Q2 CY2026', indicating reported earnings."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 4,
-    "large_gaps": 1,
-    "total_headlines": 6,
+    "small_gaps": 5,
+    "large_gaps": 0,
+    "total_headlines": 16,
     "monthly_cost_usd": 0.01
   }
 }
