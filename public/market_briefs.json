@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-23 17:40 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Inflationary Jitters",
+    "spy_price": 738.18,
+    "spy_change_pct": -1.23,
+    "vix": 18.7,
+    "hy_oas": 2.68,
+    "yield_curve": 0.34,
+    "credit_status": "Complacent",
+    "s5fi": 57.3,
+    "mmth": 65.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "Nvidia Corporation",
+          "reason": "Unveiled a revolutionary new generation of AI processors today, setting new industry benchmarks for performance and energy efficiency amidst surging demand for artificial intelligence infrastructure."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Announced overwhelmingly positive Phase 3 trial results for its novel metabolic disorder treatment, significantly expanding its addressable market and strengthening its long-term growth outlook."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Experienced renewed selling pressure today after failing to hold critical technical support levels around $270, attracting further short-term bearish flow amidst ongoing production concerns."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-23 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA is seeing continued profit-taking after recent highs, exacerbated by the general weakness in the technology sector."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-02 17:48 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Global Divergence / Tech Weakness",
-    "spy_price": 744.78,
-    "spy_change_pct": -0.13,
-    "vix": 16.15,
-    "hy_oas": 2.74,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 62.6,
-    "mmth": 67.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "RIVN",
-          "company": "Rivian Automotive, Inc.",
-          "reason": "Optimism surrounding Rivian R2 deliveries and new strategic partnerships drove significant pre-market gapping today."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a new strategic AI partnership to integrate advanced large language models across its enterprise suite, signaling accelerated growth in its cloud services."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA saw renewed interest on technical short-term momentum, but lacked a fresh fundamental catalyst today, making it susceptible to broader tech weakness."
         }
       ]
     }
