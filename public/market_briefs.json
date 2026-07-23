@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-23 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Inflationary Jitters",
+    "spy_price": 738.18,
+    "spy_change_pct": -1.23,
+    "vix": 18.7,
+    "hy_oas": 2.68,
+    "yield_curve": 0.36,
+    "credit_status": "Complacent",
+    "s5fi": 57.3,
+    "mmth": 65.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly announced positive Phase 3 trial results for its new Alzheimer's drug, providing a strong fundamental catalyst despite the broad market weakness."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft secured a landmark multi-billion dollar AI infrastructure contract with a major government agency, reinforcing its leadership in cloud and AI services."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil saw strong flow due to the significant +5.90% jump in Crude Oil prices, benefiting from broader energy sector strength rather than company-specific news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-23 08:45 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA saw renewed interest on technical short-term momentum, but lacked a fresh fundamental catalyst today, making it susceptible to broader tech weakness."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-02 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Divergent Global Optimism, US Tech Drag",
-    "spy_price": 744.78,
-    "spy_change_pct": -0.13,
-    "vix": 16.15,
-    "hy_oas": 2.74,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 62.6,
-    "mmth": 67.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "RIVN",
-          "company": "Rivian Automotive",
-          "reason": "Rivian Automotive confirmed robust demand for its upcoming R2 model alongside new strategic partnerships, fueling investor optimism for future growth."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly announced positive Phase 3 trial results for its latest Alzheimer's treatment, significantly boosting its clinical pipeline and market potential."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft experienced profit-taking following its recent strong performance, driven by broader tech sector rotation and lack of fresh bullish catalysts today."
         }
       ]
     }
