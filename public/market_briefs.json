@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-23 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious / Defensive Tilt",
+    "spy_price": 747.41,
+    "spy_change_pct": -0.12,
+    "vix": 17.57,
+    "hy_oas": 2.69,
+    "yield_curve": 0.36,
+    "credit_status": "Complacent",
+    "s5fi": 59.1,
+    "mmth": 65.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Announced a breakthrough in quantum computing, positioning it for leadership in a rapidly evolving tech frontier."
+        },
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Disclosed a major oil discovery in the Gulf of Mexico, significantly enhancing production capacity amid elevated crude prices."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continues to be a focus for AI sector sentiment and technical trading following recent volatility."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-22 17:42 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "AMZN",
           "company": "Amazon.com, Inc.",
           "reason": "Ongoing re-evaluation of e-commerce and cloud margins leads to continued technical consolidation following recent broad market volatility."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-02 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Turbulent Open, Tech Leads Decline",
-    "spy_price": 745.76,
-    "spy_change_pct": -0.14,
-    "vix": 16.69,
-    "hy_oas": 2.75,
-    "yield_curve": 0.31,
-    "credit_status": "Complacent",
-    "s5fi": 60.2,
-    "mmth": 64.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "UNH",
-          "company": "UnitedHealth Group",
-          "reason": "UnitedHealth Group (UNH) announced a new strategic partnership with a leading AI diagnostics firm, aiming to integrate advanced machine learning into its patient care pathways, potentially boosting efficiency and outcomes."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft (MSFT) unveiled a surprise acquisition of a prominent cybersecurity startup, signaling an aggressive expansion of its cloud security offerings and reinforcing its enterprise defense capabilities."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) remains a focus for algorithmic trading flows following yesterday's tech-led downturn, presenting a pure technical setup for intraday range trading."
         }
       ]
     }
