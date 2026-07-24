@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-24 17:44 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Sentiment / Sector Rotation",
+    "spy_price": 738.93,
+    "spy_change_pct": 0.1,
+    "vix": 18.58,
+    "hy_oas": 2.77,
+    "yield_curve": 0.36,
+    "credit_status": "Complacent",
+    "s5fi": 61.7,
+    "mmth": 66.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AMKR",
+          "company": "Amkor Technology, Inc.",
+          "reason": "Secured a strategic partnership with NVIDIA and received prepayment, signaling strong demand and competitive advantage in advanced packaging."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA's active involvement in the strategic partnership with Amkor, including prepayment, underscores its continued aggressive expansion and leadership in AI infrastructure."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Continues to be driven by retail sentiment and technical levels, lacking fresh fundamental catalysts to break recent consolidation patterns."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-24 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "BA",
           "company": "Boeing Company",
           "reason": "Continued delivery delays and supply chain concerns keep shares under pressure, offering short opportunities on technical resistance."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-03 17:43 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Tech Pressure, Global Divergence",
-    "spy_price": 744.78,
-    "spy_change_pct": -0.13,
-    "vix": 15.81,
-    "hy_oas": 2.75,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 62.6,
-    "mmth": 67.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "UNH",
-          "company": "UnitedHealth Group",
-          "reason": "UnitedHealth Group announced a major expansion of its Optum health services division through the acquisition of a leading AI-driven diagnostics firm, signaling aggressive growth in value-based care."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase",
-          "reason": "JPMorgan Chase today reported better-than-expected preliminary Q2 earnings, citing robust consumer lending growth and strong investment banking activity, leading to an upgraded outlook for the year."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA shares saw continued interest as investors rotated back into AI plays following recent sector consolidation, driven by sustained long-term demand outlook rather than fresh news."
         }
       ]
     }

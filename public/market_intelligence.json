@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24 16:45 ET",
+  "generated_at": "2026-07-24 17:44 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -18,7 +18,7 @@
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 684.23,
-      "open": 690.41,
+      "open": 690.25,
       "high": 692.63,
       "low": 682.48,
       "close": 684.23,
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 90.37,
+      "price": 90.47,
       "open": 92.55,
       "high": 92.83,
       "low": 87.68,
-      "close": 90.37,
+      "close": 90.47,
       "prev_open": 87.72,
       "prev_close": 92.19,
-      "volume": 333752,
-      "change_pct": -1.97
+      "volume": 336373,
+      "change_pct": -1.87
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -78,7 +78,7 @@
   },
   "fred": {
     "hy_oas": 2.77,
-    "yield_curve": 0.34,
+    "yield_curve": 0.36,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -100,32 +100,32 @@
   "analysis": {
     "title": "Post-Market Brief: July 24, 2026",
     "mood_emoji": "⚖️",
-    "mood": "Mixed Flows, Tech Consolidation",
-    "narrative": "Today saw a mixed performance across global markets, with European and Asian equities posting gains while US technology stocks lagged significantly. Despite the tech sector's weakness, underlying credit conditions remain complacent, suggesting broader market resilience.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 738.93 | +0.10% | ➡️ |\n| Nasdaq 100 ETF | 684.23 | -1.12% | 📉 |\n| VIX | 18.58 | -0.64% | 📉 |\n| Crude Oil | 90.37 | -1.97% | 📉 |\n| Nikkei 225 | 66422.60 | +0.46% | ➡️ |\n| DAX | 25099.00 | +1.36% | 📈 |",
-    "macro_section": "The HY Credit Spread (BAMLH0A0HYM2) remains 'Complacent' at 2.77%, indicating low perceived credit risk. Simultaneously, the 10Y-2Y Yield Curve (T10Y2Y) is 'Normal / Steepening' at +0.340, which typically signals an environment supportive of economic growth. This combination implies a generally robust backdrop for institutional risk appetite, despite sector-specific rotations.",
-    "analysis_para1": "Global equity markets displayed divergent trends today, with the Nikkei 225 rising +0.46% and the DAX showing strong performance with a +1.36% gain, reflecting optimism outside of US tech. Crude Oil's significant -1.97% decline, while potentially signaling demand concerns in some sectors, did not translate into broader credit stress. The continued 'Complacent' reading of 2.77% on the HY Credit Spread, alongside these global equity gains, implies that underlying systemic risk remains contained, suggesting resilient international risk appetite that provides a floor for US markets.",
-    "analysis_para2": "The primary flow today was driven by a mechanical catalyst of sector rotation and profit-taking within US equities, specifically impacting the technology sector. With no major policy decisions or adverse macro data released, the significant -1.12% decline in the Nasdaq 100 ETF, juxtaposed against a nearly flat S&P 500 ETF (+0.10%) and a falling VIX, points to an unwinding of crowded tech positions. This indicates investors are rebalancing portfolios, rotating out of recent high-growth leaders into other segments or cash, rather than a broad-based flight to safety.",
-    "analysis_para3": "Traders should prioritize monitoring for sustained conviction in sector rotation; if the S&P 500 ETF can maintain support around its current 738.93 level, it suggests resilience outside of technology. A key trigger for potential long entries might emerge if the Nasdaq 100 ETF can hold above its recent low and show signs of stabilization. Conversely, a risk-off threshold for the broader market would be a decisive break below the S&P 500 ETF 730 level, signaling a wider correction. Today, traders should remain selective, potentially hedging tech exposure while exploring opportunities in more resilient or rotating sectors.",
-    "technical_signal": "No reversal pattern confirmed yet. S&P 500 stocks above SMA50 at 61.7% and S&P stocks above SMA200 at 66.3% indicate generally healthy underlying market breadth, suggesting today's tech weakness is not yet a systemic breakdown. Traders should watch for the Nasdaq 100 ETF to hold above its 50-day moving average as a key indicator of whether this consolidation remains constructive.",
+    "mood": "Mixed Sentiment / Sector Rotation",
+    "narrative": "Today's market saw a clear divergence with technology underperforming, while broader indices remained resilient and global markets advanced. This suggests a rotation within equities rather than a broad-based risk aversion, despite specific growth stock weakness.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 738.93 | +0.10% | ➡️ |\n| Nasdaq 100 ETF | 684.23 | -1.12% | 📉 |\n| VIX | 18.58 | -0.64% | 📉 |\n| Crude Oil | 90.47 | -1.87% | 📉 |\n| Nikkei 225 | 66422.60 | +0.46% | ➡️ |\n| DAX | 25099.00 | +1.36% | 📈 |",
+    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) settled at a complacent 2.77%, indicating a healthy risk appetite among credit investors. Concurrently, the 10-Year minus 2-Year Yield Curve (T10Y2Y) stands at a normal and steepening +0.360, reinforcing a supportive backdrop for economic growth. This combination implies that institutional investors maintain a robust appetite for risk, with no immediate signs of systemic stress despite sector-specific movements.",
+    "analysis_para1": "Global equities showcased resilience today, with the Nikkei 225 gaining +0.46% and the DAX rallying +1.36%, signaling underlying strength in international markets. Crude Oil, however, saw a notable decline of -1.87% to $90.47, which could indicate some concerns about future demand or simply reflect supply-side dynamics. Despite the drop in crude, the sustained strength across major global indices, paired with the low 2.77% high-yield credit spread, suggests that broader institutional risk appetite remains firm, offering a supportive backdrop for US markets even as specific sectors face headwinds.",
+    "analysis_para2": "The primary flow today was driven by a significant sector rotation within equities, particularly out of broader technology and growth names, and into more targeted plays or other market segments. This mechanical catalyst is evidenced by the Nasdaq 100 ETF's -1.12% decline contrasting with the S&P 500 ETF's flat performance and a falling VIX. Specific news, such as AMKR's strategic partnership with NVIDIA and prepayment, likely catalyzed this re-allocation of capital within the semiconductor and AI ecosystem, causing broader tech valuations to be re-evaluated as investors sought more conviction-driven opportunities.",
+    "analysis_para3": "For traders today, the immediate plan is to acknowledge the ongoing sector rotation and manage exposure accordingly. Watch the S&P 500 ETF for strong support around 735; a sustained break below this level would signal broader market weakness. For the Nasdaq 100 ETF, monitor the 680 level as potential tactical support, considering fresh long entries with tight stops if a bounce materializes. A critical risk-off threshold would be a close below S&P 500 ETF 730, indicating a potential breakdown of underlying market strength, necessitating increased defensive positioning.",
+    "technical_signal": "No reversal pattern confirmed yet. The market's internal breadth remains relatively healthy, with 61.7% of S&P 500 stocks above SMA50 and 66.3% above SMA200, alongside a declining VIX. Traders should watch for any significant deterioration in these breadth metrics or a sharp spike in the VIX as potential early indicators of a market reversal.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "AMKR",
-          "company": "Amkor Technology Inc.",
-          "reason": "The company announced a strategic partnership and prepayment from NVIDIA, signaling robust future demand and a strengthened financial position in the semiconductor packaging sector."
+          "company": "Amkor Technology, Inc.",
+          "reason": "Secured a strategic partnership with NVIDIA and received prepayment, signaling strong demand and competitive advantage in advanced packaging."
         },
         {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft secured a significant multi-billion dollar AI cloud services contract today with a major enterprise client, reinforcing its leadership in generative AI and cloud adoption."
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA's active involvement in the strategic partnership with Amkor, including prepayment, underscores its continued aggressive expansion and leadership in AI infrastructure."
         }
       ],
       "c_grade": [
         {
           "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Tesla continues to be influenced by ongoing discussions around demand trends, production targets, and CEO commentary, with no new fundamental catalysts today, purely technical/flow-driven."
+          "company": "Tesla, Inc.",
+          "reason": "Continues to be driven by retail sentiment and technical levels, lacking fresh fundamental catalysts to break recent consolidation patterns."
         }
       ]
     }
