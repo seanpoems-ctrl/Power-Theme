@@ -1,151 +1,227 @@
 {
-  "scan_time": "2026-07-23 08:55 ET",
+  "scan_time": "2026-07-24 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "CLF",
-      "price": 9.45,
-      "gap_pct": 13.92,
-      "pm_volume": 1277510,
-      "avg_vol_10d": 18633551,
-      "avg_dollar_vol": 176087057,
-      "mkt_cap": 5390418550,
-      "rvol": 1.09,
-      "adr_pct": 4.71,
-      "category": "Earnings",
-      "theme": "Q2 Revenue Beat with Loss",
-      "reasoning": "Cleveland-Cliffs reported a **Q2 loss** while also **topping revenue estimates**, signaling a mixed financial performance.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
-      "grade": "B",
-      "finviz_theme": "Materials - Metals & Mining",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Cleveland-Cliffs (**CLF**) reported its **Q2 financial results** today, showing a **Q2 loss** but simultaneously **topping revenue estimates**.",
-        "impact": "The mixed earnings report, with a positive revenue surprise balancing out a reported loss, could lead to short-term volatility and a re-evaluation of valuation multiples, potentially attracting opportunistic buyers."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nCleveland-Cliffs (**CLF**) successfully **topped revenue estimates** for its second quarter. This indicates stronger-than-anticipated sales performance, which is a positive signal for top-line growth and market share.\n\n• **The Growth (Momentum)**\nDespite the revenue outperformance, CLF also **reported a Q2 loss**. This suggests that while sales volume or pricing might be robust, profitability metrics were challenged during the quarter, potentially impacting future earnings momentum.\n\n• **The Guide**\nNo specific guidance figures or revisions were provided in the headlines, preventing a clear assessment of forward expectations. However, a prior headline mentioned the stock **\"May Be A Bargain On Cash Flow Recovery,\"** hinting at underlying potential despite the current loss.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Cleveland-Cliffs (CLF) Reports Q2 Loss, Tops Revenue Estimates - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOc0dKWjV3Y1BCejR6WlQ2VS1WalFuNDZ6aXZlWndieU9EbHl5UW5takVsdHF0RUpXQUVQUnhSNk1RdXNHWVFnVzBKOVJLRXF4cEIzelljWTJNT1h2SmE0Q0E1czZnRzZ2RUZhU2lsdFliZ0hySlFIeTl2b3EwQUJjTDJySjllTGZOWkRYTGNEdlhRbDBMM2tqTjEyMzg?oc=5"
-        },
-        {
-          "title": "Cleveland-Cliffs Inc. (CLF) Stock Price Today - mexc.co",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiREFVX3lxTE1TbXgtVjgxd3g5SW9zT0R1ZXpRUm9sTjZWRnppUjJkVmhLWmdmMTJPRThGMU80WlkwSVp6WVh2c3JhVkoz?oc=5"
-        },
-        {
-          "title": "Cleveland-Cliffs (CLF) Stock May Be A Bargain On Cash Flow Recovery - webull.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1ZNlZ3MHlueHZXR1NiVjliN1FMWnJEUjY0clZqbVh0TkRsOEJ1bzZOQk53SEhqckY2bFdIeVhtLUFWb1BYOW5SVXN6SEhjZVIyVElSd2p4S00?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-07-23",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/764065/000076406526000097/clf-20260723.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Materials - Metals & Mining",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 60,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Cleveland-Cliffs reported a Q2 loss while also topping revenue estimates.",
-        "discrepancy_note": "Source A (Finviz) contains no information. Source B (Google News) headline [1] confirms the claim ('Reports Q2 Loss, Tops Revenue Estimates'), but headline [3] mentions 'Q2 2026 EBITDA' which is a future date and discusses growth, not a loss. Since 'BOTH sources' (Finviz and Google News) do not confirm the claim with matching specifics, and Finviz has no data, the claim remains unconfirmed by both required sources."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "HYLN",
-      "price": 3.93,
-      "gap_pct": 11.98,
-      "pm_volume": 367664,
-      "avg_vol_10d": 2520247,
-      "avg_dollar_vol": 9904571,
-      "mkt_cap": 700826065,
-      "rvol": 1.05,
-      "adr_pct": 10.78,
+      "ticker": "AMKR",
+      "price": 65.33,
+      "gap_pct": 13.19,
+      "pm_volume": 156780,
+      "avg_vol_10d": 3615585,
+      "avg_dollar_vol": 236206168,
+      "mkt_cap": 16193511716,
+      "rvol": 0.64,
+      "adr_pct": 6.8,
       "category": "New Contract/Partnership",
-      "theme": "U.S. Navy Contract",
-      "reasoning": "Hyliion secured a **$41.7 million U.S. Navy contract** to build megawatt-scale KARNO power generation systems.",
+      "theme": "NVIDIA Strategic Partnership & Prepayment",
+      "reasoning": "Amkor Technology secured a pivotal $1.5 billion strategic partnership and prepayment from NVIDIA to expand advanced semiconductor packaging capacity.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
-      "grade": "C",
-      "finviz_theme": "Clean Energy - Grid",
+      "conviction": 75,
+      "grade": "A+",
+      "finviz_theme": "Semiconductors - Packaging",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "Hyliion was **awarded a $41.7 million U.S. Navy contract** for its **megawatt-scale KARNO Power Generation Systems**. The company will **build 2- and 3-megawatt power systems** for the Navy.",
-        "impact": "This contract represents a significant new revenue stream and validation for Hyliion's KARNO power generation technology, potentially expanding its market beyond commercial vehicles into defense and stationary power."
+        "catalyst": "Amkor Technology stock **soared 12% to 16% after-hours** following news of a **$1.5 billion deal** with **NVIDIA** to boost **semiconductor packaging**. NVIDIA will provide a **$1.5-billion prepayment** to support **multi-year advanced packaging capacity** and **technological development** across facilities in **Arizona and Asia**.",
+        "impact": "This massive prepayment and partnership secures Amkor's role in next-gen AI packaging, providing substantial capital for expansion and strengthening its position in a critical growth area for the semiconductor industry."
       },
-      "analysis_details": "• **Impact**\nHyliion has been **awarded a $41.7 million U.S. Navy contract** to develop and build **megawatt-scale KARNO Power Generation Systems**. The company will be responsible for creating **2- and 3-megawatt power systems** specifically for naval applications.\n\n• **Strategic Value**\nThis contract marks a significant diversification for Hyliion, moving beyond its traditional heavy-duty vehicle focus into defense and stationary power generation with the **U.S. Navy**. It provides a substantial new revenue stream and validates the applicability and scalability of its **KARNO power generation technology** for critical infrastructure.",
+      "analysis_details": "• **Impact**\nAmkor Technology (AMKR) saw its stock **soar 12% to 16% after-hours** on news of a **$1.5 billion partnership** with **NVIDIA**. The deal involves **NVIDIA** providing a **$1.5-billion prepayment** to **Amkor** to significantly boost **multi-year advanced packaging capacity**.\n\n• **Strategic Value**\nThis landmark partnership is focused on **next-gen AI packaging**, with plans spanning facilities in **Arizona and Asia**. The **$1.5 billion prepayment** directly addresses capital expenditure needs for **Amkor**, securing its involvement in a high-growth segment and deepening its strategic ties with a Tier-1 leader like **NVIDIA** in the rapidly expanding AI semiconductor market.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "3 Penny Stocks With Strong Balance Sheets Worth A Closer Look - simplywall.st",
+          "title": "Amkor Technology (AMKR) Declines More Than Market: Some Information for Investors - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNMXNpdDFrYW13MEJQY2JXMGllbWg4R1I2ZmtLV3I3b2pkNGxIUnVjcllhcHRRX3ItaVY3MzVDNXo4QTJ4UnRRUWFKUFdOQjZ2Tk1ISmp3RjN0WmZqT0JFYzlxTWphdVNwR25OSlYyTmNhWmRrWTVoM0tfcS14V1BEUkpoZ0Z0cGUzdnVpMW9MNDhEV3Nadll1UzhyWlF1MktOcnoyd3ItQ2NkY1JHZ3kwV2Q2SEpPTFRKR0JodWlkbV9KSXhaVThV0gHMAUFVX3lxTE5MOWMxdGFJOHhYQzhaRTRpSU1ZZTNRY0o0eUotREZrWUctNFBQS3o0OVFwNFlWQ0tZeXZkYzdXU0pCVmlWVE5YamxUWTVuSU1OeXNfNFJWcm92QnhsMnpBM3R6cGI5aU80RXdaQmZrUzlwOFlfMjQzM2tqS0cteTNqeWpVUnpNR1JCTWZSSlZlZUFMR1FzWFpYUkhHMk5mcENaUG1fdzc0M1dnZTdxc0FtdlFndXBvcEo1WTQtQXJyajlnX3hmTXBPZGZHRw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPQVZtQTA3Qlc1Qk8yRUV3LW5RNzRSWTQ4MTJyWGN1TzdTVzA0VHpadXpxRFJqWDh1V1kteDl6ZnJ3RU5HWEhBZEl6ZEg1ampFVmdMNWFHQ2RGMmIxZGM5ZFZ2LW5UMkZnNDhmcjBMLTYwRXAta2RkSUlPZGxjenE5Y2FoWTJEaFI1Ul9lZG5Hd18xaWFtTmR3dE5QSzRJd0VsMFE?oc=5"
         },
         {
-          "title": "Clover Health Stock And 2 Penny Stocks With Stronger Balance Sheets - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQRmdmSy1YT2N3Yjc1dm1aR012dXdBWHZuSW5HaEZZOTM2WVU3eFNnVkFteFRKTEx4c0NvMklId1NZay1zcUE3Zi1kRVY5SWxEYV9WemQ1LWljSy1ZZGNCSEdLRVVUX2dBS1ZId2kzdDVWc3NiSVR2ZGdVOE1DaFRrNndnTm1ZZXZfRTkxMTJRNW54elFiX0pyUnNlZWE0ZFF0TTZ0WXhGRUJlR2NoUFRTc0dGaVJFMlAwOFFKdUtGbUF0bXVkRHFjREpoVGZGT0UxN3JRdE9jVkHSAdgBQVVfeXFMUEZnZkstWE9jd2I3NXZtWkdNdnV3QVh2bkluR2hGWTkzNllVN3hTZ1ZBbXhUSkxMeHNDbzJJSHdTWWstc3FBN2YtZEVWOUlsRGFfVnpkNS1pY0stWWRjQkhHS0VVVF9nQUtWSHdpM3Q1VnNzYklUdmRnVThNQ2hUazZ3Z05tWWV2X0U5MTEyUTVueHpRYl9KclJzZWVhNGRRdE02dFl4RkVCZUdjaFBUU3NHRmlSRTJQMDhRSnVLRm1BdG11ZERxY0RKaFRmRk9FMTdyUXRPY1ZB?oc=5"
-        },
-        {
-          "title": "Hyliion to Build 2- and 3-Megawatt Power Systems for Navy - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQZVlhNVVIOW9SejVaZlZwVnM1YnJrMXhVWXFOWFVXRjZ5NEpRLTYyMWJqbG8yTHJLLVlfdmE5QUdyNHVxNWdOSjRDVnVuX1ZjcDZkYkxOWjZ2RF9BQ0s4dE9PM05yYnQ2LUdZbVo2SnlSWXQ0VEg4OXd4WnFFX0JqWnJuRWR4Y3J0T2J1b1FoX1ZGX1BBV2hpM19WN1FiT3JnUlJQZmNUV3ZQTnlrUjFKb2F4R1g2UERTTjUteA?oc=5"
-        },
-        {
-          "title": "Hyliion Awarded $41.7 Million U.S. Navy Contract for Megawatt-Scale KARNO Power Generation Systems",
+          "title": "AMKR Stock Soars 12% After-Hours  NVIDIA And Amkor Partner In $1.5B Deal To Boost Semiconductor Packaging",
           "source": "Finviz",
-          "url": "/news/371300/hyliion-awarded-417-million-us-navy-contract-for-megawatt-scale-karno-power-generation-systems"
+          "url": "https://finance.yahoo.com/m/9b07265c-a593-348a-9990-56b899beb746/amkr-stock-soars-12%25.html"
+        },
+        {
+          "title": "NVIDIA-Amkor Plan Spans Arizona and Asia for Next-Gen AI Packaging - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQYUJhamM0WWwzc1hFSWVBMUNKdDAyRHpNNkJLcFBxbVR5ZWF3NmcwMC1uczlEbXdyaFozbEtSTHo3Smc3dVdoSkplQkhZa0NuVXVoUEg5WjhoaXcxb1gwenlSa1BqT3U0dlZwbHdtN0czZ1JYWEhoU0labVdaTE5GZkwwM1NXTlBnNHptTnFXQ0Q5Slc3YXRZQVl3SWQtc3Npd0wteElsVVgwMDNQWnNEY1FzWmw4bkpZcXc?oc=5"
+        },
+        {
+          "title": "Amkor Technology surges 16% on $1.5B Nvidia deal",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/amkor-technology-surges-16-1-215534452.html"
+        },
+        {
+          "title": "Nvidia, Amkor strike $1.5 billion chip packaging deal",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-amkor-strike-1-5-214417511.html"
         }
       ],
       "edgar_filing": null,
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Clean Energy - Grid",
-      "technical_status": "Fail (Avg $Vol $10M < $100M)",
+      "industry": "Semiconductors - Packaging",
+      "technical_status": "Pass",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
+        "status": "Verified",
+        "confidence_score": 100,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "$41.7 million U.S. Navy contract",
-        "discrepancy_note": "Source A (Finviz) explicitly confirms a '$41.7 Million U.S. Navy Contract'. Source B (Google News, specifically the Stock Titan article) mentions Hyliion building 2- and 3-megawatt power systems for the Navy but does not specify or confirm the '$41.7 million' dollar amount."
+        "primary_claim": "$1.5 billion",
+        "discrepancy_note": null
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "SAP",
+      "price": 146.38,
+      "gap_pct": 6.02,
+      "pm_volume": 170551,
+      "avg_vol_10d": 3230744,
+      "avg_dollar_vol": 472916307,
+      "mkt_cap": 170430575029,
+      "rvol": 1.5,
+      "adr_pct": 2.76,
+      "category": "Earnings",
+      "theme": "Strong Q2 Earnings",
+      "reasoning": "SAP shares jumped significantly after reporting a strong Q2, which reassured investors regarding its cloud business resilience.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 78,
+      "grade": "B",
+      "finviz_theme": "AI Enterprise Software",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "SAP released its **Q2 2026 Quarterly Statement**, which was characterized as a **Strong Quarter** and a **Big Earnings Report**. This performance **reassured investors** of the **Cloud Business Resilience** and helped the company **shake off software worries**.",
+        "impact": "The positive earnings report and validation of cloud performance are likely to sustain upward price momentum, as investor confidence in SAP's core growth drivers is strengthened."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nSAP's **Q2 2026 Quarterly Statement** was a **Big Earnings Report** that led to **SAP Shares Jump** and the **Stock Rises**. The strong performance **reassured investors of Cloud Business Resilience** and helped the company **shake off software worries**.\n\n• **The Growth (Momentum)**\nThe positive investor reaction indicates strong underlying business momentum, particularly in the cloud segment, which is a key growth driver. The focus on cloud resilience suggests that SAP is successfully executing its strategic shift, which could attract further momentum buying.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Oppenheimer reiterates Perform rating on SAP stock after Q2 results - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNbzM5Q3RWeDZwNDhCR1N0U05ENmtFblN0LXJxV2VrRmhpazk5RlZrVWtJdldaR2VJQWFsVzQzZkI0ZFpoZkFLTHpreWRCOEpQTkIxOGdZZDVka2VMUW1qVFpqVWZ0UVZYMUZjbUQxcVNaOUY0S25RUjByWTdzZHhYa2IxVFpGLS0xblZValpEN2JkSTBMTzIzdlgtMGQ0R1gxWlJfOGR3OTN2alE2YW50SDI0OXljTzdRSkM0amprTGZnck5fVGc?oc=5"
+        },
+        {
+          "title": "SAP Shares Jump After Strong Quarter Reassures Investors of Cloud Business Resilience - WSJ",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPenZ5WXRDRHlZbS1IcnJWZGJOc3IxYnZXRG5tb2dhZGJ3MzByZl9JWlFJN1RoOUhEcTdwYWoyTzZsLWhCYTgxX3k5NjIybFVMeTd4WFJRZnJid0EtY1V4aEVuQkFZRkFNVlQxSERITEpScUIzdzZ6aWY0WDFGLXNYRUNBUFlSOXlQRVNlUFBuSUUyRFZzd1JrV2d5WG9oQzVjR3VRTktqZjZJajVwbDdLYnFpbllTTDN4bjB3bkMxdEFMMlNpdkY2SVE0RTE?oc=5"
+        },
+        {
+          "title": "SAP Quarterly Statement Q2 2026 - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQbGdtejA0cEtER1RYVGlwS1FQTk5na0NGSjdDUHNheGdqM2ZOY194a3V4dkJVZFFPN2VCTXV5TlBHYVhLdktCd0lFRU1zdGtsaGlxa1VOQ2VEMGhSbHFTZW1UREhwZUV4Uk5LWHBBVmVmUTFFckdmaWx3cTVJaHFPblBYM2k4Nk9iTFZ6Z25acEN6VlgyM2dPMWQwVnc?oc=5"
+        },
+        {
+          "title": "SAP CFO says AI must move beyond chatbot 'low-hanging fruit' before seeing returns",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/sap-cfo-says-ai-must-215249892.html"
+        },
+        {
+          "title": "SAP Shakes Off Software Worries With Big Earnings Report. The Stock Rises.",
+          "source": "Finviz",
+          "url": "https://www.barrons.com/articles/sap-earnings-stock-price-2f599ee2?mod=bar_FV"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "AI Enterprise Software",
+      "technical_status": "Fail (ADR 2.8% < 4%)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "SAP shares jumped significantly after reporting a strong Q2",
+        "discrepancy_note": null
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "MNKD",
+      "price": 3.89,
+      "gap_pct": 5.4,
+      "pm_volume": 552869,
+      "avg_vol_10d": 4127681,
+      "avg_dollar_vol": 16056679,
+      "mkt_cap": 1201816173,
+      "rvol": 0.75,
+      "adr_pct": 5.68,
+      "category": "FDA",
+      "theme": "FDA Approval & Financing",
+      "reasoning": "MannKind secured **FDA approval** for an **at-home autoinjector** delivering **IV-equivalent therapy**, complemented by a **$50 million private placement**.",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 21,
+      "grade": "C",
+      "finviz_theme": "Pharma - Large Cap",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "MannKind stock **jumped 6%** following an **FDA approval** for its product. The company also announced a **$50 million private placement**, further bolstering its financial position.",
+        "impact": "The FDA approval removes a significant regulatory hurdle and validates the therapeutic approach, while the financing provides capital for commercialization, driving positive momentum and potentially expanding market reach."
+      },
+      "analysis_details": "• **The Drug**\nMannKind received **FDA approval** for an **at-home autoinjector** designed to deliver **IV-equivalent therapy** in **under 10 seconds**. This novel delivery method offers a significant convenience advantage for patients requiring such treatment.\n\n• **The Significance**\nThis **FDA approval** is a major de-risking event for MannKind, opening a new market opportunity for an efficient, patient-friendly therapy delivery system. The concurrent announcement of a **$50 million private placement** suggests strong institutional confidence and provides capital to support the commercial launch and scale-up, positioning the company for potential significant revenue growth and market share capture.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "MannKind stock jumps 6% on FDA approval, $50M financing - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNZ0NCZVJYM2MtTTQtbkVVX1pFcDRra0RvNU1iTFNjc2VGdTBmZWVhSE90NFVFWG82LWhZT2pQWWFlQ0FhMmcyVk5sUDZBUWtXUzN6UlA1bjV0LVJfSjFaTUtxN2R5bVBRWUtrUWV2NzBSSGdGSUZ4b1d4ZmtLSS1VbWplTElPYTU5Z21wVmNuWmxubkxLSm4tLUVUSXlkY0lSNHFvRTd0UFJMaDNMeWFaMllaT3o?oc=5"
+        },
+        {
+          "title": "MannKind Announces $50 Million Private Placement - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQck1DbktZSzlUNGhQeHhpMG9DWjNWMlMyemk5VFdwMFg5Xzk3cEZhaGdBcDFTUXZLODU4cFp3Wk9GVTRPTldLamtaZDdLZ2xzODEtNmN1SjZpSjAwWm9fdl9hVEVZLTJTS3FFOEowVU9Cb1VoTFZvc2h1MkNOMmt0UzVPY01LMFRMNExLSXJWNWhObjVacUVSNEpLMktqdXVBSnc?oc=5"
+        },
+        {
+          "title": "At-home autoinjector delivers IV-equivalent therapy in under 10 seconds - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPYm5fNnVPS2IyOVJfVnQ4RGlaUlUwWmdiQ3BWWDNOdUJTa1UybEwtdWc0UFBMMmtxTUxwYVRaRjNpUmZNUVNoeVEySlcwWXJBYmRGRU54d0ZidDR2MHdLakwxcFFpQnE2dUp3cTRJZk45U2VtYzkxZmE4dS1tcWZkTmNVdHpSZzgwV2lITUtwdlNKZXZWOG9xS0ZzclZwVnF2V0dLc3d0T3FCRW1YUUZYTG5fV1MzWHZodDdxVmtldE4?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Pharma - Large Cap",
+      "technical_status": "Fail (Avg $Vol $16M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "$50 million private placement",
+        "discrepancy_note": "Source A (Finviz) contains no news items and thus does not confirm the claim. Source B (Google News) confirms the '$50 Million Private Placement' via multiple articles ([3] Investing.com: '$50M financing', [4] marketscreener.com: '$50 Million Private Placement'). Since only one of the two primary sources provides confirmation, it is marked as a Discrepancy based on the rule 'If only ONE source mentions the claim... mark as Discrepancy'."
       },
       "gates_passed": 2,
       "gates_detail": {
@@ -158,248 +234,15 @@
       "meets_all_gates": false,
       "tier": "Fail",
       "tier_label": "Excluded"
-    },
-    {
-      "ticker": "SKM",
-      "price": 33.94,
-      "gap_pct": 9.02,
-      "pm_volume": 175059,
-      "avg_vol_10d": 2398596,
-      "avg_dollar_vol": 81408348,
-      "mkt_cap": 13367457925,
-      "rvol": 1.09,
-      "adr_pct": 3.46,
-      "category": "Others",
-      "theme": "Dividend Record Date",
-      "reasoning": "SK Telecom announced the **August 31 record date** for its **Q2 dividend**, representing a routine corporate action with minimal momentum impact.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 57,
-      "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "SK Telecom (NYSE: SKM) has set **August 31** as the record date for its **Q2 dividend**. This is a standard corporate procedural announcement, confirming the timeline for shareholders to be eligible for the upcoming quarterly payout.",
-        "impact": "This news is unlikely to generate significant momentum or price action for SKM, as dividend record dates are typically priced in or anticipated by the market. It confirms a routine return of capital but does not signal a change in fundamental outlook."
-      },
-      "analysis_details": "• **What Happened**\nSK Telecom (NYSE: SKM) announced the **August 31** record date for its **Q2 dividend**. This is a procedural announcement that sets the cutoff for shareholders to be eligible for the upcoming quarterly payment.\n\n• **Key Consideration**\nThis type of news is generally a routine corporate event and is unlikely to be a significant catalyst for momentum trading. While it confirms a return of capital, it doesn't signal new growth, strategic shifts, or unexpected financial performance that would drive price action.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "SK Telecom (NYSE: SKM) sets August 31 record date for Q2 dividend - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOSTdPaGV4OEIzY1o1Sl9RQnVnYTVaSlQxZ01GbXZiRXBmS20tcHJIalpLcDdpUEZCTFZocjNOMjRXNnBoU3BGUUt6MURlaUptRDAySTkzMjEyX3p2LVc2VzZVSE1VS25LLUhRNHp2RjVzRTlDaU9YRmVhTWYzUXlYSV9LZmFFUWZwb1Z1Nk1nUHNqdXo1R1VrR0drZDNsdGU5TEhTSHYxVzJ1QmRFMVdEM3Fn?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $81M < $100M, ADR 3.5% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "August 31 record date for Q2 dividend",
-        "discrepancy_note": "Source A (Finviz News) has no information regarding an August 31 record date or Q2 dividend. Source B [1] (Google News via Stock Titan) confirms 'August 31 record date for Q2 dividend'."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "DGX",
-      "price": 209.83,
-      "gap_pct": 7.63,
-      "pm_volume": 100821,
-      "avg_vol_10d": 916010,
-      "avg_dollar_vol": 192206378,
-      "mkt_cap": 23227431352,
-      "rvol": 2.75,
-      "adr_pct": 2.39,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "Quest Diagnostics (DGX) surged after reporting Q2 CY2026 earnings beat on both revenue and adjusted EPS, while raising its full-year 2026 outlook.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 82,
-      "grade": "B",
-      "finviz_theme": "Digital Health",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Quest Diagnostics (DGX) filed an 8-K disclosing its **Q2 CY2026 earnings results**, which **beat analyst expectations**. The company reported **adjusted EPS of $3.12 per share**, significantly **surpassing the FactSet estimate of $2.82**. Additionally, DGX's **revenue also beat estimates**, leading to its **stock soaring**.",
-        "impact": "This strong earnings performance and raised guidance indicate robust operational strength and positive momentum, likely attracting further investor interest and potential upgrades."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nQuest Diagnostics (DGX) reported a **significant beat** for its **Q2 CY2026 adjusted EPS**, coming in at **$3.12 per share** against a **FactSet estimate of $2.82**. The company also **beat on revenue**, which contributed to the stock being **up** and **soaring**.\n\n• **The Guide**\nManagement **raised its 2026 view**, signaling increased confidence in future performance and sustained growth. This **upward revision** suggests that the positive momentum from **Q2** is expected to continue through the remainder of the year.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "DGX Stock Up on Q2 Earnings & Revenue Beat, '26 View Raised - Zacks Investment Research",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQQWx5aWxXZWtZLVZRbnUtRzhYTjJlaHN5R1R1VHBMRXphTGVUZjBPb3JhNm5vNl9JS3JvNUthUE1zbDZ3YldqWjEwcUozMGtTNDRDbnU5bEZsVkhjVE5xTm1xMDFaS2JHNmRyRi1PaEhXX1NCMXExRjNwSU5hOF9mRjJxUTB0M2FMSDdONlBtUDJvRzVKT0F3UFVRaHo?oc=5"
-        },
-        {
-          "title": "Quest’s (NYSE:DGX) Q2 CY2026: Beats On Revenue, Stock Soars - FinancialContent",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxPT1pZYUo1ZE9TbTBNMFhpU0tTUEctQ1VBVlVjTi1qUlhUY19tTUpFb1RWVlNLSlZOY0YzVjVSRUZnUW9Mbnl2TnlNNDlNSGFHZXhObHRyaXVEQWQ0NDRfbmhLNUVBdU8tWGExd2J3eFY4dkRFUDJ3NkZUamNEV3doSnRocDhKUnNMNDExWFRab0Y1aUhqUnFiYUxsbEhuUlVwYzVBLWE3NV9QeVVfWW04b2JDR1hraE10WU5sSFgydVlXZlV6?oc=5"
-        },
-        {
-          "title": "Earnings Flash (DGX) Quest Diagnostics Incorporated Posts Q2 Adjusted EPS $3.12 per Share, vs. FactSet Est of $2.82 - marketscreener.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQZjllYS1qYWZUNWRHZE1FR0l2MERHbHphUUNtM3BnQjVSbWs1RnhmOUVPXzM4cG1ES2hSZnNSX3RZNEd4THVodjNfbW16bUhOalMtUXlpbHpvOG0xdklZVllvaVhDRGo2MWh6NlhjQ0I3Z0JZOG9GSE9pVkRxNklQTXpJSVB0ZlBnQ2dXZ3hqQW56Y0dnM1BVV0NXSDRFc3NjczBwVGVkNTBlU0pXTlQ0VEFNOXB3RFBxdHRiSWIzWjhfd3dtb2VOTldBaXBpMm5ha1ZpVUJiOVh1dnJwZjZ2MmpB?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-07-23",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1022079/000102207926000067/dgx-20260723.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Digital Health",
-      "technical_status": "Fail (ADR 2.4% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Q2 Adjusted EPS $3.12 per Share, vs. FactSet Est of $2.82",
-        "discrepancy_note": "Source A (Finviz) contains no information to confirm the specific adjusted EPS figures or the beat. Only Source B provides these details."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "RTX",
-      "price": 194.88,
-      "gap_pct": 5.96,
-      "pm_volume": 125604,
-      "avg_vol_10d": 3936576,
-      "avg_dollar_vol": 767159931,
-      "mkt_cap": 262441657747,
-      "rvol": 1.55,
-      "adr_pct": 2.11,
-      "category": "Earnings",
-      "theme": "Earnings Beat",
-      "reasoning": "RTX reported upbeat Q2 CY2026 earnings results, leading to a strong positive market reaction and significant stock price increase.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 78,
-      "grade": "B",
-      "finviz_theme": "Defense & Aerospace",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "RTX officially reported its **Q2 CY2026 earnings** via an **8-K filing** on **2026-07-23**. The company reported **upbeat Q2 results**, which caused its **stock to soar**.",
-        "impact": "The positive earnings report and subsequent stock surge indicate strong investor confidence and could drive continued upward momentum for RTX shares."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nRTX officially reported its **Q2 CY2026 earnings** via an **8-K filing** on **2026-07-23**. News indicated the company reported **upbeat Q2 CY2026 results**, which caused its **stock to soar**. This suggests a positive surprise against market expectations.\n\n• **The Growth (Momentum)**\nThe positive market reaction, with the stock **soaring** after the upbeat Q2 report, indicates strong investor conviction in RTX's current performance and future prospects. This momentum is supported by recent operational highlights, including **Pratt & Whitney GTF engines** surpassing **800 orders and commitments** in **2026 year-to-date** and advancements in **hybrid-electric aviation**.\n\n• **The Guide**\nWhile specific forward guidance figures were not detailed in the provided headlines, the **upbeat Q2 CY2026 results** and the stock's significant positive reaction imply that the company's outlook, or at least current trajectory, is perceived favorably by the market. This suggests a continued positive operational environment for RTX.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "RTX (NYSE:RTX) Reports Upbeat Q2 CY2026, Stock Soars - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQR3d5dWpISVNYVzJmYjNJY05xZll6VGRlSFE1Ymk0cS00R0dpcmtfUGh0ZGFqaHpmcm4zSnNXM3phSDhxeGJRVUpIZnNHSVV0UjJlV3ZENm5pdUdheC1OS3VzcEcwSkpNVkRBTDZkR1BEWGRQY0ZGVzlLZGs3ZlBUVzZPVXd1dXhRQkhHQ1Y0Ti16U2lyUVBn?oc=5"
-        },
-        {
-          "title": "How Will RTX Stock React To Its Upcoming Earnings?",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/60f366e3-917e-3b70-a92d-cfefe4144388/how-will-rtx-stock-react-to.html"
-        },
-        {
-          "title": "RTX advances hybrid-electric aviation at The Grid",
-          "source": "Finviz",
-          "url": "/news/370829/rtx-advances-hybrid-electric-aviation-at-the-grid"
-        },
-        {
-          "title": "RTX's Pratt & Whitney GTF engines surpass 800 orders and commitments in 2026, year to date",
-          "source": "Finviz",
-          "url": "/news/370827/rtxs-pratt-whitney-gtf-engines-surpass-800-orders-and-commitments-in-2026-year-to-date"
-        },
-        {
-          "title": "Reading Between The Lines Of GE's Latest Call",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/b1b3c0a5-ee0e-338a-8d33-190125f22506/reading-between-the-lines-of.html"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-07-23",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/101829/000010182926000025/rtx-20260723.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Defense & Aerospace",
-      "technical_status": "Fail (ADR 2.1% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Q2 CY2026 earnings results",
-        "discrepancy_note": "Source A (Finviz [3]) mentions 'RTX Stock React To Its Upcoming Earnings?', implying future earnings. Source B (Google News [3]) explicitly states 'RTX (NYSE:RTX) Reports Upbeat Q2 CY2026', indicating reported earnings."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 5,
+    "small_gaps": 3,
     "large_gaps": 0,
-    "total_headlines": 16,
+    "total_headlines": 13,
     "monthly_cost_usd": 0.01
   }
 }
