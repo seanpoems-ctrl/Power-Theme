@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-24 08:24 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Sell-Off / Caution",
+    "spy_price": 738.18,
+    "spy_change_pct": -1.23,
+    "vix": 18.68,
+    "hy_oas": 2.68,
+    "yield_curve": 0.34,
+    "credit_status": "Complacent",
+    "s5fi": 57.3,
+    "mmth": 65.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple Inc. (AAPL) is seeing pre-market strength following rumors of a breakthrough in its Vision Pro technology and strong pre-order data for its next iPhone lineup, signaling robust consumer demand."
+        },
+        {
+          "ticker": "PFE",
+          "company": "Pfizer Inc.",
+          "reason": "Pfizer Inc. (PFE) shares are surging after the company announced positive Phase 3 trial results for its new oncology drug, significantly broadening its pipeline and market opportunity."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation (NVDA) is trading lower on continued profit-taking and technical weakness after reaching all-time highs earlier this week, with no fresh fundamental catalyst driving today's move."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-24 07:06 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA experienced significant algorithmic selling pressure today, aligning with broader tech sector de-risking ahead of the holiday weekend with no new fundamental catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-03 09:01 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Tech Weakness, Global Resilience",
-    "spy_price": 744.78,
-    "spy_change_pct": -0.13,
-    "vix": 15.95,
-    "hy_oas": 2.74,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 62.6,
-    "mmth": 67.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "PFE",
-          "company": "Pfizer Inc.",
-          "reason": "Pfizer announces breakthrough Phase 3 trial results for its new gene therapy, significantly exceeding efficacy expectations for a rare neurological disorder."
-        },
-        {
-          "ticker": "HD",
-          "company": "The Home Depot, Inc.",
-          "reason": "Home Depot reports stronger-than-expected same-store sales growth for Q2, driven by robust consumer spending on home improvement projects and successful online integration."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "RIVN",
-          "company": "Rivian Automotive, Inc.",
-          "reason": "Continues to face production challenges despite recent price target upgrades from analysts, remaining a speculative play on Electric Vehicle growth rather than a fresh fundamental catalyst."
         }
       ]
     }

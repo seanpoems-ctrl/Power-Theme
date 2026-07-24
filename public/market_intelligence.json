@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24 07:06 ET",
+  "generated_at": "2026-07-24 08:24 ET",
   "phase": "PRE",
   "session": "Pre-Market",
   "assets": {
@@ -29,27 +29,27 @@
     },
     "^VIX": {
       "label": "VIX",
-      "price": 18.85,
+      "price": 18.68,
       "open": 18.96,
       "high": 19.05,
-      "low": 18.6,
-      "close": 18.85,
+      "low": 18.58,
+      "close": 18.68,
       "prev_open": 17.67,
       "prev_close": 18.7,
       "volume": 0,
-      "change_pct": 0.8
+      "change_pct": -0.11
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 90.04,
+      "price": 89.8,
       "open": 92.55,
       "high": 92.83,
       "low": 88.74,
-      "close": 90.04,
+      "close": 89.8,
       "prev_open": 87.72,
       "prev_close": 92.19,
-      "volume": 99091,
-      "change_pct": -2.33
+      "volume": 115072,
+      "change_pct": -2.59
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,22 +65,22 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 24974.42,
+      "price": 24960.73,
       "open": 24830.41,
       "high": 25006.07,
       "low": 24821.67,
-      "close": 24974.42,
+      "close": 24960.73,
       "prev_open": 24994.05,
       "prev_close": 24763.12,
       "volume": 0,
-      "change_pct": 0.85
+      "change_pct": 0.8
     }
   },
   "fred": {
     "hy_oas": 2.68,
     "yield_curve": 0.34,
-    "hy_oas_stale": true,
-    "yield_curve_stale": true
+    "hy_oas_stale": false,
+    "yield_curve_stale": false
   },
   "breadth": {
     "s5fi": 57.3,
@@ -100,32 +100,32 @@
   "analysis": {
     "title": "Pre-Market Brief: July 24, 2026",
     "mood_emoji": "📉",
-    "mood": "Global Risk-Off / Divergent Europe",
-    "narrative": "US and Asian markets show significant weakness, driven by risk aversion, while European equities display resilience, creating a mixed global picture. This suggests a cautious approach is warranted for today's trading session.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 738.18 | -1.23% | 📉 |\n| Nasdaq 100 ETF | 691.96 | -1.90% | 📉 |\n| VIX | 18.85 | +0.80% | 📈 |\n| Crude Oil | 90.04 | -2.33% | 📉 |\n| Nikkei 225 | 64611.15 | -2.73% | 📉 |\n| DAX | 24974.42 | +0.85% | 📈 |",
-    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) remains at a Complacent 2.68%, suggesting no immediate broad credit stress, though this value is cached. Concurrently, the 10-Year Minus 2-Year Yield Curve (T10Y2Y) stands at a Normal / Steepening +0.340 basis points, which typically indicates a healthy, growing economy. The cached nature of these FRED values means institutions may be operating on outdated credit assessments, potentially leading to a delayed or sudden repricing of risk if live data were to shift and indicating a cautious stance for institutional risk appetite.",
-    "analysis_para1": "Global equity markets are showing significant divergence, with the Nikkei 225 sharply down by 2.73% and Crude Oil plunging 2.33% to $90.04, signaling a broad risk-off sentiment across Asia and commodities. In stark contrast, the DAX posted a modest gain of 0.85%, indicating pockets of resilience or potentially localized positive sentiment in Europe. This global backdrop of falling risk assets outside of Europe, juxtaposed with a Complacent High Yield Credit Spread at 2.68%, implies that US risk appetite is likely to be tempered today, with investors scrutinizing credit markets for signs of contagion from broader macroeconomic slowdown concerns.",
-    "analysis_para2": "The primary driver behind today's prevalent risk-off flow appears to be heightened global growth concerns, likely exacerbated by recent overnight macro data releases or dovish policy commentary from a major central bank. This sentiment is mechanically translating into a flight from cyclical assets, as evidenced by Crude Oil's significant 2.33% decline, and a broad sell-off in growth-sensitive equities like the Nasdaq 100 ETF, down 1.90%. The concurrent rise in the VIX by 0.80% confirms an uptick in market fear and a defensive positioning shift, indicating investors are actively de-risking portfolios in anticipation of slower economic activity.",
-    "analysis_para3": "Given the pre-market weakness, traders should prepare for continued downside pressure and monitor key support levels for the S&P 500 ETF (SPY) around 735.00, with a breach potentially opening a path to 730.00. For long entries, a confirmed rebound above 740.00 would be required, ideally accompanied by falling volatility, though caution is advised in this environment. Conversely, a sustained break below 735.00 on increasing volume could trigger further short positions targeting the next support. The primary risk-off threshold is maintaining exposure above yesterday's low; failing to do so suggests a deeper correction is underway, demanding a reduction in risk assets today.",
-    "technical_signal": "No reversal pattern confirmed yet. The sharp daily decline suggests sellers remain in control, and price action will be crucial at key support levels to determine if buying interest emerges. Traders should watch for bullish engulfing candles or hammer formations on intraday charts, particularly around significant moving averages or prior lows, as initial signs of potential stabilization or a short-term bounce.",
+    "mood": "Global Sell-Off / Caution",
+    "narrative": "Major global indices, including the Nikkei 225 and US equity benchmarks, are experiencing a significant decline, signaling a broad risk-off sentiment across markets. While credit spreads remain surprisingly complacent, the widespread selling suggests a mechanical catalyst is driving current flows rather than immediate credit distress.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 738.18 | -1.23% | 📉 |\n| Nasdaq 100 ETF | 691.96 | -1.90% | 📉 |\n| VIX | 18.68 | -0.11% | ➡️ |\n| Crude Oil | 89.80 | -2.59% | 📉 |\n| Nikkei 225 | 64611.15 | -2.73% | 📉 |\n| DAX | 24960.73 | +0.80% | 📈 |",
+    "macro_section": "The BAMLH0A0HYM2 (HY Credit Spread) stands at 2.68%, indicating a Complacent credit regime despite today's market weakness. The 10Y-2Y Yield Curve is at +0.340, maintaining a Normal / Steepening posture, signaling no immediate recessionary fears. This combination suggests that while immediate systemic credit stress is absent, institutions may be taking risk off the table proactively amidst other market drivers.",
+    "analysis_para1": "Global markets are signaling a distinct risk-off tone, with the Nikkei 225 sharply lower by -2.73% and Crude Oil declining -2.59%. This broad weakness extends to US equities, evidenced by the S&P 500 ETF falling -1.23% and the Nasdaq 100 ETF losing -1.90%. Despite this widespread decline, the BAMLH0A0HYM2 (HY Credit Spread) remains at a complacent 2.68%. The divergence implies that while global growth concerns are prevalent, they have not yet translated into direct credit market stress, but institutional risk appetite is clearly waning.",
+    "analysis_para2": "Today's pervasive global sell-off appears to be primarily driven by a significant positioning squeeze and rebalancing event rather than a specific piece of macro data or a policy decision. With several major indices falling sharply without a corresponding spike in the VIX or widening credit spreads, it suggests large institutional players are actively de-risking and unwinding crowded trades. This mechanical flow is likely causing forced selling across various asset classes, as portfolio managers adjust allocations in response to broader market uncertainties or a shift in underlying sentiment that isn't yet reflected in traditional fear gauges.",
+    "analysis_para3": "Given the mechanical selling, traders should monitor key technical levels for potential support or further breakdown. For the S&P 500 ETF, the 730-735 range serves as the immediate support zone; a decisive break below 730 could accelerate declines. Conversely, resistance is seen around 745. For the Nasdaq 100 ETF, watch 685 as critical support, with resistance at 700. Traders should prioritize short positions on rallies that fail to clear resistance or on breaks of established support, while maintaining tight stop-losses due to potential volatility from rebalancing flows. A clear risk-off threshold would be a break of yesterday's lows on major indices, indicating continuation of the current selling pressure.",
+    "technical_signal": "No reversal pattern confirmed yet. The current price action indicates strong selling momentum, with both the S&P 500 ETF and Nasdaq 100 ETF seeing significant downside. Traders should watch for a potential higher low forming on intraday charts or a positive divergence in momentum indicators to signal any impending shift, but presently, the path of least resistance remains lower.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly announced FDA approval for its new Alzheimer's drug, donanemab, with a broad label, significantly expanding its market potential."
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple Inc. (AAPL) is seeing pre-market strength following rumors of a breakthrough in its Vision Pro technology and strong pre-order data for its next iPhone lineup, signaling robust consumer demand."
         },
         {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft secured a multi-billion dollar AI infrastructure contract with a major government agency, bolstering its cloud and AI dominance."
+          "ticker": "PFE",
+          "company": "Pfizer Inc.",
+          "reason": "Pfizer Inc. (PFE) shares are surging after the company announced positive Phase 3 trial results for its new oncology drug, significantly broadening its pipeline and market opportunity."
         }
       ],
       "c_grade": [
         {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet (GOOGL) is exhibiting a bearish engulfing pattern on daily charts, suggesting further downside pressure following general market weakness."
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation (NVDA) is trading lower on continued profit-taking and technical weakness after reaching all-time highs earlier this week, with no fresh fundamental catalyst driving today's move."
         }
       ]
     }
