@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-24 07:06 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Risk-Off / Divergent Europe",
+    "spy_price": 738.18,
+    "spy_change_pct": -1.23,
+    "vix": 18.85,
+    "hy_oas": 2.68,
+    "yield_curve": 0.34,
+    "credit_status": "Complacent",
+    "s5fi": 57.3,
+    "mmth": 65.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly announced FDA approval for its new Alzheimer's drug, donanemab, with a broad label, significantly expanding its market potential."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft secured a multi-billion dollar AI infrastructure contract with a major government agency, bolstering its cloud and AI dominance."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet (GOOGL) is exhibiting a bearish engulfing pattern on daily charts, suggesting further downside pressure following general market weakness."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-23 17:40 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "RIVN",
           "company": "Rivian Automotive, Inc.",
           "reason": "Continues to face production challenges despite recent price target upgrades from analysts, remaining a speculative play on Electric Vehicle growth rather than a fresh fundamental catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-03 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Tech Pullback, Global Resilience",
-    "spy_price": 744.78,
-    "spy_change_pct": -0.13,
-    "vix": 15.92,
-    "hy_oas": 2.74,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 62.6,
-    "mmth": 67.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet announced a significant upgrade to its Gemini AI model, sparking optimism for accelerated enterprise adoption and cloud growth."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase received a major analyst upgrade following strong industry data, projecting robust Q3 earnings amid a favorable interest rate outlook."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is seeing continued profit-taking after recent highs, exacerbated by the general weakness in the technology sector."
         }
       ]
     }
