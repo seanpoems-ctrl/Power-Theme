@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-24 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Flows, Tech Consolidation",
+    "spy_price": 738.93,
+    "spy_change_pct": 0.1,
+    "vix": 18.58,
+    "hy_oas": 2.77,
+    "yield_curve": 0.34,
+    "credit_status": "Complacent",
+    "s5fi": 61.7,
+    "mmth": 66.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AMKR",
+          "company": "Amkor Technology Inc.",
+          "reason": "The company announced a strategic partnership and prepayment from NVIDIA, signaling robust future demand and a strengthened financial position in the semiconductor packaging sector."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft secured a significant multi-billion dollar AI cloud services contract today with a major enterprise client, reinforcing its leadership in generative AI and cloud adoption."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla continues to be influenced by ongoing discussions around demand trends, production targets, and CEO commentary, with no new fundamental catalysts today, purely technical/flow-driven."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-24 08:24 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA shares saw continued interest as investors rotated back into AI plays following recent sector consolidation, driven by sustained long-term demand outlook rather than fresh news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-03 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Tech Growth Under Pressure",
-    "spy_price": 744.78,
-    "spy_change_pct": -0.13,
-    "vix": 15.81,
-    "hy_oas": 2.75,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 62.6,
-    "mmth": 67.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple unveils a new AR headset with breakthrough battery life and developer SDK, targeting a Q4 launch and boosting future revenue projections."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla announces record Q2 vehicle deliveries, surpassing analyst estimates by 15%, fueled by rapid ramp-ups at its Berlin and Texas gigafactories."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA experienced significant algorithmic selling pressure today, aligning with broader tech sector de-risking ahead of the holiday weekend with no new fundamental catalyst."
         }
       ]
     }
