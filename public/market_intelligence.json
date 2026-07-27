@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-24 17:44 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-07-27 07:05 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
@@ -12,68 +12,68 @@
       "close": 738.93,
       "prev_open": 739.37,
       "prev_close": 738.18,
-      "volume": 41480799,
+      "volume": 44725600,
       "change_pct": 0.1
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 684.23,
-      "open": 690.25,
+      "open": 690.41,
       "high": 692.63,
       "low": 682.48,
       "close": 684.23,
       "prev_open": 694.67,
       "prev_close": 691.96,
-      "volume": 39636030,
+      "volume": 42783600,
       "change_pct": -1.12
     },
     "^VIX": {
       "label": "VIX",
-      "price": 18.58,
-      "open": 18.96,
-      "high": 19.05,
-      "low": 17.41,
-      "close": 18.58,
-      "prev_open": 17.67,
-      "prev_close": 18.7,
+      "price": 17.58,
+      "open": 17.62,
+      "high": 17.84,
+      "low": 17.53,
+      "close": 17.58,
+      "prev_open": 18.96,
+      "prev_close": 18.58,
       "volume": 0,
-      "change_pct": -0.64
+      "change_pct": -5.38
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 90.47,
-      "open": 92.55,
-      "high": 92.83,
-      "low": 87.68,
-      "close": 90.47,
-      "prev_open": 87.72,
-      "prev_close": 92.19,
-      "volume": 336373,
-      "change_pct": -1.87
+      "price": 83.0,
+      "open": 86.12,
+      "high": 86.2,
+      "low": 82.12,
+      "close": 83.0,
+      "prev_open": 92.55,
+      "prev_close": 89.31,
+      "volume": 125704,
+      "change_pct": -7.07
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 66422.6,
-      "open": 66421.01,
-      "high": 67022.37,
-      "low": 66208.66,
-      "close": 66422.6,
-      "prev_open": 66449.27,
-      "prev_close": 66115.6,
-      "volume": 135300000,
-      "change_pct": 0.46
+      "price": 64931.19,
+      "open": 65164.98,
+      "high": 65220.69,
+      "low": 64123.4,
+      "close": 64931.19,
+      "prev_open": 65584.25,
+      "prev_close": 64611.15,
+      "volume": 0,
+      "change_pct": 0.5
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25099.0,
-      "open": 24830.41,
-      "high": 25099.68,
-      "low": 24821.67,
-      "close": 25099.0,
-      "prev_open": 24994.05,
-      "prev_close": 24763.12,
+      "price": 25518.07,
+      "open": 25459.32,
+      "high": 25524.95,
+      "low": 25365.52,
+      "close": 25518.07,
+      "prev_open": 24830.41,
+      "prev_close": 25099.0,
       "volume": 0,
-      "change_pct": 1.36
+      "change_pct": 1.67
     }
   },
   "fred": {
@@ -98,34 +98,34 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: July 24, 2026",
-    "mood_emoji": "⚖️",
-    "mood": "Mixed Sentiment / Sector Rotation",
-    "narrative": "Today's market saw a clear divergence with technology underperforming, while broader indices remained resilient and global markets advanced. This suggests a rotation within equities rather than a broad-based risk aversion, despite specific growth stock weakness.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 738.93 | +0.10% | ➡️ |\n| Nasdaq 100 ETF | 684.23 | -1.12% | 📉 |\n| VIX | 18.58 | -0.64% | 📉 |\n| Crude Oil | 90.47 | -1.87% | 📉 |\n| Nikkei 225 | 66422.60 | +0.46% | ➡️ |\n| DAX | 25099.00 | +1.36% | 📈 |",
-    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) settled at a complacent 2.77%, indicating a healthy risk appetite among credit investors. Concurrently, the 10-Year minus 2-Year Yield Curve (T10Y2Y) stands at a normal and steepening +0.360, reinforcing a supportive backdrop for economic growth. This combination implies that institutional investors maintain a robust appetite for risk, with no immediate signs of systemic stress despite sector-specific movements.",
-    "analysis_para1": "Global equities showcased resilience today, with the Nikkei 225 gaining +0.46% and the DAX rallying +1.36%, signaling underlying strength in international markets. Crude Oil, however, saw a notable decline of -1.87% to $90.47, which could indicate some concerns about future demand or simply reflect supply-side dynamics. Despite the drop in crude, the sustained strength across major global indices, paired with the low 2.77% high-yield credit spread, suggests that broader institutional risk appetite remains firm, offering a supportive backdrop for US markets even as specific sectors face headwinds.",
-    "analysis_para2": "The primary flow today was driven by a significant sector rotation within equities, particularly out of broader technology and growth names, and into more targeted plays or other market segments. This mechanical catalyst is evidenced by the Nasdaq 100 ETF's -1.12% decline contrasting with the S&P 500 ETF's flat performance and a falling VIX. Specific news, such as AMKR's strategic partnership with NVIDIA and prepayment, likely catalyzed this re-allocation of capital within the semiconductor and AI ecosystem, causing broader tech valuations to be re-evaluated as investors sought more conviction-driven opportunities.",
-    "analysis_para3": "For traders today, the immediate plan is to acknowledge the ongoing sector rotation and manage exposure accordingly. Watch the S&P 500 ETF for strong support around 735; a sustained break below this level would signal broader market weakness. For the Nasdaq 100 ETF, monitor the 680 level as potential tactical support, considering fresh long entries with tight stops if a bounce materializes. A critical risk-off threshold would be a close below S&P 500 ETF 730, indicating a potential breakdown of underlying market strength, necessitating increased defensive positioning.",
-    "technical_signal": "No reversal pattern confirmed yet. The market's internal breadth remains relatively healthy, with 61.7% of S&P 500 stocks above SMA50 and 66.3% above SMA200, alongside a declining VIX. Traders should watch for any significant deterioration in these breadth metrics or a sharp spike in the VIX as potential early indicators of a market reversal.",
+    "title": "Pre-Market Brief: July 27, 2026",
+    "mood_emoji": "⚠️",
+    "mood": "Mixed Signals, Underlying Caution",
+    "narrative": "Global markets present a mixed picture with strength in European and Asian equities, yet US tech sees profit-taking amidst a sharp decline in crude oil prices. Credit spreads remain complacent, suggesting underlying institutional resilience despite the sector-specific volatility.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 738.93 | +0.10% | ➡️ |\n| Nasdaq 100 ETF | 684.23 | -1.12% | 📉 |\n| VIX | 17.58 | -5.38% | 📉 |\n| Crude Oil | 83.00 | -7.07% | 📉 |\n| Nikkei 225 | 64931.19 | +0.50% | 📈 |\n| DAX | 25518.07 | +1.67% | 📈 |",
+    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) registers at 2.77%, indicating a Complacent regime where bond investors perceive low risk. Simultaneously, the 10-Year Minus 2-Year Yield Curve (T10Y2Y) stands at +0.360, signaling a Normal / Steepening curve that typically implies a healthy economic outlook. These factors generally suggest a robust institutional risk appetite, with market participants comfortable deploying capital.",
+    "analysis_para1": "Global equity markets show resilience, with the Nikkei 225 up +0.50% and the DAX surging +1.67%, signaling strong international sentiment. However, Crude Oil has experienced a significant downturn, dropping -7.07% to $83.00, potentially reflecting concerns over global demand or increased supply. Despite this commodity weakness, the US High Yield Credit Spread remains complacent at 2.77%, suggesting that US bond investors are not yet pricing in broader economic distress. This divergence implies a somewhat mixed US risk appetite, with some sectors benefiting from perceived disinflationary pressures while others face headwinds.",
+    "analysis_para2": "The single dominant 'Why' behind today's primary flow is the sharp -7.07% decline in Crude Oil prices, which acts as a multifaceted mechanical catalyst. This substantial drop has likely triggered profit-taking in high-beta US technology stocks, leading to the Nasdaq 100 ETF's -1.12% decline, as lower energy costs can reduce immediate inflationary fears but also signal potential demand weakness. Concurrently, the same oil decline might be interpreted by broader markets as a positive disinflationary impulse, reducing the likelihood of aggressive Federal Reserve tightening and contributing to the slight positive move in the S&P 500 ETF and the strength observed in global equity benchmarks.",
+    "analysis_para3": "Traders should prioritize monitoring inter-market divergence, particularly between US tech and broader global equities, as well as the energy complex. For the S&P 500 ETF, watch 735 as a key support level and 740 as immediate resistance for confirmation of trend. A sustained break below Nasdaq 100 ETF's 680 could signal further rotation out of growth names, while a stabilization above 685 might indicate a short-term bottom. Today, traders should remain agile, avoid chasing momentum in overextended sectors, and be prepared to scale into positions cautiously once clear support or resistance levels are decisively breached, especially given the volatility in crude oil.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 at 61.7% and S&P stocks above SMA200 at 66.3% indicate healthy underlying breadth, but the divergence between S&P 500 and Nasdaq performance suggests internal market rotation. Watch for any deterioration in these breadth metrics as a potential early warning sign.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "AMKR",
-          "company": "Amkor Technology, Inc.",
-          "reason": "Secured a strategic partnership with NVIDIA and received prepayment, signaling strong demand and competitive advantage in advanced packaging."
+          "ticker": "XOM",
+          "company": "ExxonMobil Corporation",
+          "reason": "Analysts downgrade price targets for major oil producers following today's sharp crude oil sell-off, citing demand concerns and potential margin compression."
         },
         {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA's active involvement in the strategic partnership with Amkor, including prepayment, underscores its continued aggressive expansion and leadership in AI infrastructure."
+          "ticker": "BA",
+          "company": "The Boeing Company",
+          "reason": "Boeing receives a substantial new order from a major international airline, signaling robust travel demand despite global economic concerns."
         }
       ],
       "c_grade": [
         {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Continues to be driven by retail sentiment and technical levels, lacking fresh fundamental catalysts to break recent consolidation patterns."
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Technical consolidation continues for Apple following recent strong earnings, with traders monitoring the 50-day moving average for trend confirmation."
         }
       ]
     }

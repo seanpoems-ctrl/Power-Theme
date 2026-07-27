@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-27 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Mixed Signals, Underlying Caution",
+    "spy_price": 738.93,
+    "spy_change_pct": 0.1,
+    "vix": 17.58,
+    "hy_oas": 2.77,
+    "yield_curve": 0.36,
+    "credit_status": "Complacent",
+    "s5fi": 61.7,
+    "mmth": 66.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "XOM",
+          "company": "ExxonMobil Corporation",
+          "reason": "Analysts downgrade price targets for major oil producers following today's sharp crude oil sell-off, citing demand concerns and potential margin compression."
+        },
+        {
+          "ticker": "BA",
+          "company": "The Boeing Company",
+          "reason": "Boeing receives a substantial new order from a major international airline, signaling robust travel demand despite global economic concerns."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Technical consolidation continues for Apple following recent strong earnings, with traders monitoring the 50-day moving average for trend confirmation."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-24 17:44 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA Corporation (NVDA) is a recycled candidate showing pre-market flow, indicating continued speculative interest or technical strength despite no fresh catalyst reported today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-06 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Tech-Led Pullback / Caution",
-    "spy_price": 744.78,
-    "spy_change_pct": -0.13,
-    "vix": 16.35,
-    "hy_oas": 2.75,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 62.6,
-    "mmth": 67.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Announced next-generation AI accelerator chip with significant performance gains, driving immediate upside potential."
-        },
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Receives an upgrade from a major investment bank citing strong cloud growth and accelerating advertising revenue."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "BA",
-          "company": "Boeing Company",
-          "reason": "Continued delivery delays and supply chain concerns keep shares under pressure, offering short opportunities on technical resistance."
         }
       ]
     }
