@@ -1,227 +1,197 @@
 {
-  "scan_time": "2026-07-24 08:55 ET",
+  "scan_time": "2026-07-27 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "AMKR",
-      "price": 65.33,
-      "gap_pct": 13.19,
-      "pm_volume": 156780,
-      "avg_vol_10d": 3615585,
-      "avg_dollar_vol": 236206168,
-      "mkt_cap": 16193511716,
-      "rvol": 0.64,
-      "adr_pct": 6.8,
+      "ticker": "FBRX",
+      "price": 54.78,
+      "gap_pct": 39.56,
+      "pm_volume": 2349354,
+      "avg_vol_10d": 682391,
+      "avg_dollar_vol": 37381379,
+      "mkt_cap": 1121829569,
+      "rvol": 0.61,
+      "adr_pct": 12.79,
       "category": "New Contract/Partnership",
-      "theme": "NVIDIA Strategic Partnership & Prepayment",
-      "reasoning": "Amkor Technology secured a pivotal $1.5 billion strategic partnership and prepayment from NVIDIA to expand advanced semiconductor packaging capacity.",
+      "theme": "Acquisition Agreement",
+      "reasoning": "Forte Biosciences surged after argenx announced an all-cash $2.2 billion acquisition agreement, creating significant upside for shareholders.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
       "conviction": 75,
-      "grade": "A+",
-      "finviz_theme": "Semiconductors - Packaging",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Amkor Technology stock **soared 12% to 16% after-hours** following news of a **$1.5 billion deal** with **NVIDIA** to boost **semiconductor packaging**. NVIDIA will provide a **$1.5-billion prepayment** to support **multi-year advanced packaging capacity** and **technological development** across facilities in **Arizona and Asia**.",
-        "impact": "This massive prepayment and partnership secures Amkor's role in next-gen AI packaging, providing substantial capital for expansion and strengthening its position in a critical growth area for the semiconductor industry."
-      },
-      "analysis_details": "• **Impact**\nAmkor Technology (AMKR) saw its stock **soar 12% to 16% after-hours** on news of a **$1.5 billion partnership** with **NVIDIA**. The deal involves **NVIDIA** providing a **$1.5-billion prepayment** to **Amkor** to significantly boost **multi-year advanced packaging capacity**.\n\n• **Strategic Value**\nThis landmark partnership is focused on **next-gen AI packaging**, with plans spanning facilities in **Arizona and Asia**. The **$1.5 billion prepayment** directly addresses capital expenditure needs for **Amkor**, securing its involvement in a high-growth segment and deepening its strategic ties with a Tier-1 leader like **NVIDIA** in the rapidly expanding AI semiconductor market.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Amkor Technology (AMKR) Declines More Than Market: Some Information for Investors - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPQVZtQTA3Qlc1Qk8yRUV3LW5RNzRSWTQ4MTJyWGN1TzdTVzA0VHpadXpxRFJqWDh1V1kteDl6ZnJ3RU5HWEhBZEl6ZEg1ampFVmdMNWFHQ2RGMmIxZGM5ZFZ2LW5UMkZnNDhmcjBMLTYwRXAta2RkSUlPZGxjenE5Y2FoWTJEaFI1Ul9lZG5Hd18xaWFtTmR3dE5QSzRJd0VsMFE?oc=5"
-        },
-        {
-          "title": "AMKR Stock Soars 12% After-Hours  NVIDIA And Amkor Partner In $1.5B Deal To Boost Semiconductor Packaging",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/9b07265c-a593-348a-9990-56b899beb746/amkr-stock-soars-12%25.html"
-        },
-        {
-          "title": "NVIDIA-Amkor Plan Spans Arizona and Asia for Next-Gen AI Packaging - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQYUJhamM0WWwzc1hFSWVBMUNKdDAyRHpNNkJLcFBxbVR5ZWF3NmcwMC1uczlEbXdyaFozbEtSTHo3Smc3dVdoSkplQkhZa0NuVXVoUEg5WjhoaXcxb1gwenlSa1BqT3U0dlZwbHdtN0czZ1JYWEhoU0labVdaTE5GZkwwM1NXTlBnNHptTnFXQ0Q5Slc3YXRZQVl3SWQtc3Npd0wteElsVVgwMDNQWnNEY1FzWmw4bkpZcXc?oc=5"
-        },
-        {
-          "title": "Amkor Technology surges 16% on $1.5B Nvidia deal",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/amkor-technology-surges-16-1-215534452.html"
-        },
-        {
-          "title": "Nvidia, Amkor strike $1.5 billion chip packaging deal",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/nvidia-amkor-strike-1-5-214417511.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Packaging",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 100,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "$1.5 billion",
-        "discrepancy_note": null
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "SAP",
-      "price": 146.38,
-      "gap_pct": 6.02,
-      "pm_volume": 170551,
-      "avg_vol_10d": 3230744,
-      "avg_dollar_vol": 472916307,
-      "mkt_cap": 170430575029,
-      "rvol": 1.5,
-      "adr_pct": 2.76,
-      "category": "Earnings",
-      "theme": "Strong Q2 Earnings",
-      "reasoning": "SAP shares jumped significantly after reporting a strong Q2, which reassured investors regarding its cloud business resilience.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 78,
-      "grade": "B",
-      "finviz_theme": "AI Enterprise Software",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "SAP released its **Q2 2026 Quarterly Statement**, which was characterized as a **Strong Quarter** and a **Big Earnings Report**. This performance **reassured investors** of the **Cloud Business Resilience** and helped the company **shake off software worries**.",
-        "impact": "The positive earnings report and validation of cloud performance are likely to sustain upward price momentum, as investor confidence in SAP's core growth drivers is strengthened."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nSAP's **Q2 2026 Quarterly Statement** was a **Big Earnings Report** that led to **SAP Shares Jump** and the **Stock Rises**. The strong performance **reassured investors of Cloud Business Resilience** and helped the company **shake off software worries**.\n\n• **The Growth (Momentum)**\nThe positive investor reaction indicates strong underlying business momentum, particularly in the cloud segment, which is a key growth driver. The focus on cloud resilience suggests that SAP is successfully executing its strategic shift, which could attract further momentum buying.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Oppenheimer reiterates Perform rating on SAP stock after Q2 results - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNbzM5Q3RWeDZwNDhCR1N0U05ENmtFblN0LXJxV2VrRmhpazk5RlZrVWtJdldaR2VJQWFsVzQzZkI0ZFpoZkFLTHpreWRCOEpQTkIxOGdZZDVka2VMUW1qVFpqVWZ0UVZYMUZjbUQxcVNaOUY0S25RUjByWTdzZHhYa2IxVFpGLS0xblZValpEN2JkSTBMTzIzdlgtMGQ0R1gxWlJfOGR3OTN2alE2YW50SDI0OXljTzdRSkM0amprTGZnck5fVGc?oc=5"
-        },
-        {
-          "title": "SAP Shares Jump After Strong Quarter Reassures Investors of Cloud Business Resilience - WSJ",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPenZ5WXRDRHlZbS1IcnJWZGJOc3IxYnZXRG5tb2dhZGJ3MzByZl9JWlFJN1RoOUhEcTdwYWoyTzZsLWhCYTgxX3k5NjIybFVMeTd4WFJRZnJid0EtY1V4aEVuQkFZRkFNVlQxSERITEpScUIzdzZ6aWY0WDFGLXNYRUNBUFlSOXlQRVNlUFBuSUUyRFZzd1JrV2d5WG9oQzVjR3VRTktqZjZJajVwbDdLYnFpbllTTDN4bjB3bkMxdEFMMlNpdkY2SVE0RTE?oc=5"
-        },
-        {
-          "title": "SAP Quarterly Statement Q2 2026 - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQbGdtejA0cEtER1RYVGlwS1FQTk5na0NGSjdDUHNheGdqM2ZOY194a3V4dkJVZFFPN2VCTXV5TlBHYVhLdktCd0lFRU1zdGtsaGlxa1VOQ2VEMGhSbHFTZW1UREhwZUV4Uk5LWHBBVmVmUTFFckdmaWx3cTVJaHFPblBYM2k4Nk9iTFZ6Z25acEN6VlgyM2dPMWQwVnc?oc=5"
-        },
-        {
-          "title": "SAP CFO says AI must move beyond chatbot 'low-hanging fruit' before seeing returns",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/sap-cfo-says-ai-must-215249892.html"
-        },
-        {
-          "title": "SAP Shakes Off Software Worries With Big Earnings Report. The Stock Rises.",
-          "source": "Finviz",
-          "url": "https://www.barrons.com/articles/sap-earnings-stock-price-2f599ee2?mod=bar_FV"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "AI Enterprise Software",
-      "technical_status": "Fail (ADR 2.8% < 4%)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "SAP shares jumped significantly after reporting a strong Q2",
-        "discrepancy_note": null
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "MNKD",
-      "price": 3.89,
-      "gap_pct": 5.4,
-      "pm_volume": 552869,
-      "avg_vol_10d": 4127681,
-      "avg_dollar_vol": 16056679,
-      "mkt_cap": 1201816173,
-      "rvol": 0.75,
-      "adr_pct": 5.68,
-      "category": "FDA",
-      "theme": "FDA Approval & Financing",
-      "reasoning": "MannKind secured **FDA approval** for an **at-home autoinjector** delivering **IV-equivalent therapy**, complemented by a **$50 million private placement**.",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 21,
       "grade": "C",
-      "finviz_theme": "Pharma - Large Cap",
-      "analysis_source": "gemini",
+      "finviz_theme": "Biotech - Immunology",
+      "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "MannKind stock **jumped 6%** following an **FDA approval** for its product. The company also announced a **$50 million private placement**, further bolstering its financial position.",
-        "impact": "The FDA approval removes a significant regulatory hurdle and validates the therapeutic approach, while the financing provides capital for commercialization, driving positive momentum and potentially expanding market reach."
+        "catalyst": "**Forte Biosciences (FBRX)** announced it will be acquired by **argenx** in an **all-cash deal** valued at **$2.2 billion**. The news caused **Forte Biosciences stock** to surge **39%**.",
+        "impact": "This acquisition represents a definitive liquidity event for FBRX shareholders, eliminating prior investment risks and providing a significant premium."
       },
-      "analysis_details": "• **The Drug**\nMannKind received **FDA approval** for an **at-home autoinjector** designed to deliver **IV-equivalent therapy** in **under 10 seconds**. This novel delivery method offers a significant convenience advantage for patients requiring such treatment.\n\n• **The Significance**\nThis **FDA approval** is a major de-risking event for MannKind, opening a new market opportunity for an efficient, patient-friendly therapy delivery system. The concurrent announcement of a **$50 million private placement** suggests strong institutional confidence and provides capital to support the commercial launch and scale-up, positioning the company for potential significant revenue growth and market share capture.",
+      "analysis_details": "• **Impact**\n**Forte Biosciences (Nasdaq: FBRX)** stock surged **39%** following the announcement of a definitive takeover agreement. This surge was catalyzed by **argenx's** offer to acquire the company in a substantial **$2.2 billion all-cash deal**. The acquisition agreement provides a clear valuation and exit for FBRX shareholders.\n\n• **Strategic Value**\nThis **$2.2 billion all-cash acquisition** by **argenx** fundamentally changes **Forte Biosciences'** corporate trajectory, shifting from an independent entity to being integrated into a larger pharmaceutical structure. The deal removes operational risks associated with a standalone biotech and offers a significant premium, driving a notable momentum move.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "MannKind stock jumps 6% on FDA approval, $50M financing - Investing.com",
+          "title": "argenx to acquire Forte Biosciences (Nasdaq: FBRX) in $2.2B all-cash deal - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNZ0NCZVJYM2MtTTQtbkVVX1pFcDRra0RvNU1iTFNjc2VGdTBmZWVhSE90NFVFWG82LWhZT2pQWWFlQ0FhMmcyVk5sUDZBUWtXUzN6UlA1bjV0LVJfSjFaTUtxN2R5bVBRWUtrUWV2NzBSSGdGSUZ4b1d4ZmtLSS1VbWplTElPYTU5Z21wVmNuWmxubkxLSm4tLUVUSXlkY0lSNHFvRTd0UFJMaDNMeWFaMllaT3o?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPZndDNUdEbUFpaUsyLThsc0xKTU54WmtFLWp4N0M5UkltbE03ci1vb3Nhb19mR1ZLcU9lSTcxd0ZaN25PUGVYMjYzR2tzZkpNY0E0cTJqZEYzZDNQQ2FHTGRqWHF5N1h5ek1CZGNNQXFlSllpU0ctaHpLLURKcDdWLWdkYWhwb2xOS1pvRVZ6SjlnRGRrU3dhODZ6emRuV0Y5VlVPWlczTkRnY0I4QWNZ?oc=5"
         },
         {
-          "title": "MannKind Announces $50 Million Private Placement - marketscreener.com",
+          "title": "Forte Biosciences stock surges 39% on argenx acquisition deal - Investing.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQck1DbktZSzlUNGhQeHhpMG9DWjNWMlMyemk5VFdwMFg5Xzk3cEZhaGdBcDFTUXZLODU4cFp3Wk9GVTRPTldLamtaZDdLZ2xzODEtNmN1SjZpSjAwWm9fdl9hVEVZLTJTS3FFOEowVU9Cb1VoTFZvc2h1MkNOMmt0UzVPY01LMFRMNExLSXJWNWhObjVacUVSNEpLMktqdXVBSnc?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNVG9TbXRoYk51ZXRpVS15enVZbE43TkVReGRuSm5oWGR1TEQ3clhEcEdOZGJGQlliVnVpRG5wbFhnLTlHYV8xQ0s5WXZIZHlmSGtiWnFZcHNCRGZ3aHpBRjR2a19pb0pNR2dfX0dxNkkydmNFUi1ncVp0U3BnVFplYlVuZ3FTRVptQWoyaUtub1U5U3VqR0ktcm41X0RiZFkzdDJOclZPTjZJa0xoNWVpZzJFQ2VvTUNaempYWGJaRQ?oc=5"
         },
         {
-          "title": "At-home autoinjector delivers IV-equivalent therapy in under 10 seconds - Stock Titan",
+          "title": "Forte Biosciences shares jump after $2.2 billion takeover agreement with argenx - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPYm5fNnVPS2IyOVJfVnQ4RGlaUlUwWmdiQ3BWWDNOdUJTa1UybEwtdWc0UFBMMmtxTUxwYVRaRjNpUmZNUVNoeVEySlcwWXJBYmRGRU54d0ZidDR2MHdLakwxcFFpQnE2dUp3cTRJZk45U2VtYzkxZmE4dS1tcWZkTmNVdHpSZzgwV2lITUtwdlNKZXZWOG9xS0ZzclZwVnF2V0dLc3d0T3FCRW1YUUZYTG5fV1MzWHZodDdxVmtldE4?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOaFJBMm1LRWNCVFQ0VEFhRUVXbjBaTUh1amVwVHRmZnRKb29oc1ROdHdwVGR4QW5jbGdXRC13MndLTGZpYXgtck10RFM5Z2RwZEhlcmJvQ3ZERWJWQkIzRmlHVmRYYXFvbU1fODJBQW5CSnp0REs2eXdDbUdoQkV4cWtZc2NoVUN0U3dtbUZESUl2SVY0UFZr?oc=5"
         }
       ],
-      "edgar_filing": null,
+      "edgar_filing": {
+        "filing_date": "2026-07-27",
+        "form": "8-K",
+        "items": [
+          "1.01",
+          "7.01",
+          "9.01"
+        ],
+        "category": "New Contract/Partnership",
+        "label": "Material Contract or Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/1419041/000119312526316766/d31466d8k.htm"
+      },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Pharma - Large Cap",
-      "technical_status": "Fail (Avg $Vol $16M < $100M)",
+      "industry": "Biotech - Immunology",
+      "technical_status": "Fail (Avg $Vol $37M < $100M)",
       "verification": {
         "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "$2.2 billion acquisition agreement",
+        "discrepancy_note": "Finviz News had no articles related to FBRX, while Google News multiple articles (Yahoo Finance, Stock Titan) confirmed a $2.2 billion acquisition by argenx."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "TRAX",
+      "price": 35.52,
+      "gap_pct": 33.73,
+      "pm_volume": 214306,
+      "avg_vol_10d": 714139,
+      "avg_dollar_vol": 25366217,
+      "mkt_cap": 1239377481,
+      "rvol": 0.59,
+      "adr_pct": 11.86,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found for today's pre-market activity; likely technical breakout or institutional flow driving momentum.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 55,
+      "grade": "C",
+      "finviz_theme": "Biotech - Immunology",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "No specific fundamental catalyst was reported in the last **24 hours** for First Tracks Biotherapeutics Ord Shs. The only specific news mentioned a **-2.12%** change yesterday, closing at **$35.520**.",
+        "impact": "Without a clear fundamental driver, any significant pre-market activity is speculative, potentially driven by technical factors or short-term institutional flow, carrying high risk."
+      },
+      "analysis_details": "• **What Happened**\nNo specific fundamental news for First Tracks Biotherapeutics Ord Shs (TRAX) was reported in the last **24 hours** that would explain a significant momentum move today. The only specific news indicates the stock closed down **-2.12%** yesterday at a price of **$35.520**, while pre-market activity is noted by a generic headline.\n\n• **Key Consideration**\nGiven the absence of a specific catalyst, any pre-market activity for TRAX is likely driven by technical factors or low-float dynamics. This situation often leads to speculative trading, with a high risk of 'gap and trap' scenarios where early gains quickly reverse without underlying fundamental support. Investors should exercise extreme caution.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "These stocks that are showing activity before the opening bell on Monday. - ChartMill",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQWTJYUk0zS2dRQjZMTm12bVRTWjJZTGFETkdmMDFsMVlWa3pLcnpiN3N0cVFVSHNROWxNX3N4dm80YWFuZU9xd282NUtCSV9qeG0wMlBYVUdVeHNpMXd3dEs1U0FGOVNhNEhRQXlEM0RDWXpibGN2YXRJY29aMjRkYWhRYzRXblJBYUdCSHFVVE9nRDZXTjkyei1yeDV2YmRFa1NzdDU0TUVNU1hwbm81WUItTUFHdmRWUmpzNEJTU0dvdw?oc=5"
+        },
+        {
+          "title": "First Tracks Biotherapeutics Ord Shs|Price:35.520|Chg%:-2.120 - TradingKey",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE16eDZTLWduNGtJX04zLVRmaXdOMGVpZ3FyOWhyN25ySlJwYWtEWTdwUmxBMjQxdzcxTy1FSnh5YjJyWF9MT0ZUNlRvU0dTeDVXYlZVdWQwRjVYV3MyUWVrbGlNNWZLMkdjdmR0cGJn?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Biotech - Immunology",
+      "technical_status": "Fail (Avg $Vol $25M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
         "confidence_score": 70,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "$50 million private placement",
-        "discrepancy_note": "Source A (Finviz) contains no news items and thus does not confirm the claim. Source B (Google News) confirms the '$50 Million Private Placement' via multiple articles ([3] Investing.com: '$50M financing', [4] marketscreener.com: '$50 Million Private Placement'). Since only one of the two primary sources provides confirmation, it is marked as a Discrepancy based on the rule 'If only ONE source mentions the claim... mark as Discrepancy'."
+        "primary_claim": "No immediate fundamental catalyst found for today's pre-market activity; likely technical breakout or institutional flow driving momentum.",
+        "discrepancy_note": "The primary catalyst claim is an interpretive statement about the *absence* of a specific factual catalyst and a *speculation* on the cause. It does not contain a quantifiable factual claim (e.g., dollar amount, percentage, date) that can be directly verified. Neither source explicitly confirms or refutes the *absence* of a fundamental catalyst. Source B[1] mentions specific pre-market activity for one stock, and B[2] refers generally to stocks showing activity, but they do not address the underlying *reason* (or lack thereof) for the overall pre-market momentum as described in the primary claim."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "OMER",
+      "price": 9.79,
+      "gap_pct": 13.89,
+      "pm_volume": 62117,
+      "avg_vol_10d": 1277876,
+      "avg_dollar_vol": 12510406,
+      "mkt_cap": 708554682,
+      "rvol": 0.48,
+      "adr_pct": 6.95,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $13M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 0,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": null
       },
       "gates_passed": 2,
       "gates_detail": {
@@ -234,15 +204,213 @@
       "meets_all_gates": false,
       "tier": "Fail",
       "tier_label": "Excluded"
+    },
+    {
+      "ticker": "SAP",
+      "price": 160.0,
+      "gap_pct": 6.21,
+      "pm_volume": 215605,
+      "avg_vol_10d": 3677859,
+      "avg_dollar_vol": 588457440,
+      "mkt_cap": 186035688221,
+      "rvol": 2.13,
+      "adr_pct": 2.86,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "Software stocks are extending a rebound, with SAP leading the move, suggesting broader sector tailwinds or technical momentum.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 60,
+      "grade": "C",
+      "finviz_theme": "Cloud SaaS",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. Significant move on no explicit company-specific or broader sector fundamental news points towards technical breakout or institutional flow. High risk of Gap and Trap if not sustained by fundamentals."
+      },
+      "analysis_details": "• **What Happened**\nSAP SE (**SAP**) is leading a broader **rebound** among **Software Stocks**, as indicated by news on **2026-07-27**. The sector-wide move suggests potential underlying momentum or technical factors driving the group higher. However, no specific fundamental company-specific news for SAP was provided to justify this lead.\n\n• **Key Consideration**\nGiven the absence of specific news regarding **SAP's** performance, new contracts, upgrades, or significant sector catalysts, the move appears to be technically driven or flow-related. While leading the rebound, the lack of a clear fundamental trigger presents a speculative opportunity, with potential for volatility without a strong underpinning for sustained momentum.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "SAP SE (SAP) Stock Forecasts - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPSGZINENOOHBpaXdHQVZDOTBzUmRrblF2M0NSV0VYNDBQQ0xiTVFVcHd5NkJEV2p0NTFQaXBMdXczUnptVEE3cXhYbGsyWEoydWx6cjdnenA3NF9NU2JDUV82N1RNNjZnVXIyaXhnRjR0U1l3YkR2RGRCUy11bkFpcndGb19Lb0FrMHlyaUZjV2R3UzFzNWIxcE5kMENRTFpQZjQ4Z2c3V25Nd1NabkM0bEUxM2RPcUdpS3FpVUVYSGpkSk93eDNaclkwVmplY2tOdHc?oc=5"
+        },
+        {
+          "title": "Software Stocks Extend Rebound, Led by SAP - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQa1B3QkllRHRYeWI1NUg1bUdlWHpZcHR4VG1KQVBSNDhYc2xnVmkxUFM3NmdReDhlUW81RGp0LW9SVUh1NHlsQWtJUVNTOWExemo2and1YXNveG9DRVdaSEJka2hNZVFqTjdHTTdHcmZud1VDVHliMzdyZ0FaYml6Vk40cXNvVGxiNzNTZW1TcmhPQkFoTExBNFlB?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Cloud SaaS",
+      "technical_status": "Fail (ADR 2.9% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 50,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "SAP leading the move in software stocks extending a rebound",
+        "discrepancy_note": "Finviz News provides no information. Google News item [5] confirms 'Software Stocks Extend Rebound, Led by SAP', but this is only one source. For 'Verified' status, both sources must confirm."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "BE",
+      "price": 184.89,
+      "gap_pct": 5.25,
+      "pm_volume": 157450,
+      "avg_vol_10d": 13042015,
+      "avg_dollar_vol": 2411338153,
+      "mkt_cap": 52590828462,
+      "rvol": 1.25,
+      "adr_pct": 11.28,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow for BE.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
+      },
+      "analysis_details": "• **What Happened**\nNo specific fundamental news for **BE** was identified in the last **24 hours**. The only related headline referred to a discussion forum for **iShsInc-MSCI Gl.Agric.Prod.ETFR (0I8C.BE)**, which is a different ticker. Therefore, the observed market movement for **BE** is likely driven by non-fundamental factors such as technical trading or order flow.\n\n• **Key Consideration**\nThe absence of a clear catalyst suggests the current price action for **BE** is speculative and could be prone to rapid reversals. Momentum traders should be aware of potential **low float squeezes** or other technical drivers, which carry a higher risk of a **gap and trap** scenario without underlying news to support sustained momentum.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "iShsInc-MSCI Gl.Agric.Prod.ETFR (0I8C.BE) Stock Forum & Discussion - Yahoo! Finance Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBEc04zbUwyQmZrQWpac3hQX0ZzRzVsaV9jYjVVaHJPY2g2WER3UUg5SU1DaU90NV82MDR2V1hTRGtVMmgwZ01KN05xZkg3QnR3QVVkWEw4alMxbkVydlk4VUxzYw?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Others",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found for BE",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "NBIS",
+      "price": 187.77,
+      "gap_pct": 5.2,
+      "pm_volume": 353979,
+      "avg_vol_10d": 19979733,
+      "avg_dollar_vol": 3751594465,
+      "mkt_cap": 47252403645,
+      "rvol": 1.43,
+      "adr_pct": 10.28,
+      "category": "New Contract/Partnership",
+      "theme": "Nvidia Strategic Investment",
+      "reasoning": "Nebius Group secured a **$2 billion strategic stake** from **Nvidia**, transforming it into a **major AI infrastructure contender**.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 78,
+      "grade": "A+",
+      "finviz_theme": "AI Cloud",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "**Nvidia** has taken a **$2 billion stake** in **Nebius Group (NASDAQ: NBIS)**, positioning the company as a **major AI infrastructure contender**. This significant investment implies a strategic partnership.",
+        "impact": "This investment signals strong validation and financial backing from a dominant player in the AI sector, likely accelerating **NBIS's** competitive position and market penetration in AI infrastructure."
+      },
+      "analysis_details": "• **Impact**\n**Nvidia's $2 billion stake** in **Nebius Group (NASDAQ: NBIS)** fundamentally transforms the company's market position, establishing it as a **major AI infrastructure contender**. This substantial capital injection and strategic alignment with a leading AI firm provides significant validation and resources.\n\n• **Strategic Value**\nThe partnership with **Nvidia** is poised to drive **NBIS's** momentum in the rapidly expanding AI sector. This backing from a Tier-1 industry leader suggests potential for accelerated growth, enhanced competitive advantage, and increased investor confidence in **NBIS's** long-term prospects within AI infrastructure.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "NEBX",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Nvidia's $2 Billion Stake Transforms Nebius Group (NASDAQ: NBIS) Into a Major AI Infrastructure Contender - foreignpolicyjournal.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxNdFYyRGRPUGhockZaTXdTLXFId1NzaTVWbjduY1N2MTZWUzctdlZxWkpfcU9lV1lqU294VkRIb3dta1VWYm9xWElPLTN6bjU0Q0QxVm1ZY3Nta0JmY2pzYTBNQV9QN19wbmUwVmpET2ZJb2FsOGhUUUJyYWViZXdscTNuR3NRNF9LeGF4TFZZU0w2aldJYUhRaTZXWjROTlpkLWFKbkNyNmlFemdpUnluSUxReTAzbVpIM1N6MEhIZ2p2UEM5SmlxZ1lwUXNJWkNfNGhnX2k2Ylhrc1FlWWNCb1FZWQ?oc=5"
+        },
+        {
+          "title": "Nebius Just Revealed the Biggest Problem Facing Neocloud Stocks - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOUkh3MmVmbjRCTWYzWFF2WGNFU0Q5VGtsYlpyNzFsVkpFbXFEYW1hUjJyYUhaRDRDaEpONjhaUGVLbkhCdnNKS293VnJGY1ZxVEV5bHU1SW9fTzJ1SmdVeEdjRmZ3bGdKaG1NXzNoZkY3QXFfRzJBYVhjdDd1MWp1T0VqZWNWWTdmSjBwdEN3Y05uU00xLTJReWtlcEhlNktsV2Q0?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "AI Cloud",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "$2 billion strategic stake from Nvidia",
+        "discrepancy_note": "Source A (Finviz News) has no mention of a $2 billion strategic stake from Nvidia. Source B (Google News, specifically foreignpolicyjournal.com) confirms 'Nvidia's $2 Billion Stake'."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 3,
-    "large_gaps": 0,
-    "total_headlines": 13,
+    "small_gaps": 4,
+    "large_gaps": 2,
+    "total_headlines": 10,
     "monthly_cost_usd": 0.01
   }
 }
