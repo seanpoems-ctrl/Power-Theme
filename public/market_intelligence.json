@@ -1,55 +1,55 @@
 {
-  "generated_at": "2026-07-27 07:05 ET",
+  "generated_at": "2026-07-27 09:42 ET",
   "phase": "PRE",
   "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 738.93,
+      "price": 744.19,
       "open": 738.51,
-      "high": 743.72,
-      "low": 737.29,
-      "close": 738.93,
-      "prev_open": 739.37,
-      "prev_close": 738.18,
-      "volume": 44725600,
-      "change_pct": 0.1
+      "high": 745.53,
+      "low": 743.94,
+      "close": 744.19,
+      "prev_open": 738.51,
+      "prev_close": 738.93,
+      "volume": 2808481,
+      "change_pct": 0.71
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 684.23,
-      "open": 690.41,
-      "high": 692.63,
-      "low": 682.48,
-      "close": 684.23,
-      "prev_open": 694.67,
-      "prev_close": 691.96,
-      "volume": 42783600,
-      "change_pct": -1.12
+      "price": 688.78,
+      "open": 691.72,
+      "high": 692.28,
+      "low": 688.78,
+      "close": 688.78,
+      "prev_open": 690.41,
+      "prev_close": 684.23,
+      "volume": 3356838,
+      "change_pct": 0.66
     },
     "^VIX": {
       "label": "VIX",
-      "price": 17.58,
+      "price": 17.76,
       "open": 17.62,
-      "high": 17.84,
+      "high": 17.9,
       "low": 17.53,
-      "close": 17.58,
+      "close": 17.76,
       "prev_open": 18.96,
       "prev_close": 18.58,
       "volume": 0,
-      "change_pct": -5.38
+      "change_pct": -4.41
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 83.0,
+      "price": 84.12,
       "open": 86.12,
       "high": 86.2,
       "low": 82.12,
-      "close": 83.0,
+      "close": 84.12,
       "prev_open": 92.55,
       "prev_close": 89.31,
-      "volume": 125704,
-      "change_pct": -7.07
+      "volume": 173220,
+      "change_pct": -5.81
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25518.07,
+      "price": 25514.09,
       "open": 25459.32,
-      "high": 25524.95,
+      "high": 25536.57,
       "low": 25365.52,
-      "close": 25518.07,
+      "close": 25514.09,
       "prev_open": 24830.41,
       "prev_close": 25099.0,
       "volume": 0,
-      "change_pct": 1.67
+      "change_pct": 1.65
     }
   },
   "fred": {
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Pre-Market Brief: July 27, 2026",
-    "mood_emoji": "⚠️",
-    "mood": "Mixed Signals, Underlying Caution",
-    "narrative": "Global markets present a mixed picture with strength in European and Asian equities, yet US tech sees profit-taking amidst a sharp decline in crude oil prices. Credit spreads remain complacent, suggesting underlying institutional resilience despite the sector-specific volatility.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 738.93 | +0.10% | ➡️ |\n| Nasdaq 100 ETF | 684.23 | -1.12% | 📉 |\n| VIX | 17.58 | -5.38% | 📉 |\n| Crude Oil | 83.00 | -7.07% | 📉 |\n| Nikkei 225 | 64931.19 | +0.50% | 📈 |\n| DAX | 25518.07 | +1.67% | 📈 |",
-    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) registers at 2.77%, indicating a Complacent regime where bond investors perceive low risk. Simultaneously, the 10-Year Minus 2-Year Yield Curve (T10Y2Y) stands at +0.360, signaling a Normal / Steepening curve that typically implies a healthy economic outlook. These factors generally suggest a robust institutional risk appetite, with market participants comfortable deploying capital.",
-    "analysis_para1": "Global equity markets show resilience, with the Nikkei 225 up +0.50% and the DAX surging +1.67%, signaling strong international sentiment. However, Crude Oil has experienced a significant downturn, dropping -7.07% to $83.00, potentially reflecting concerns over global demand or increased supply. Despite this commodity weakness, the US High Yield Credit Spread remains complacent at 2.77%, suggesting that US bond investors are not yet pricing in broader economic distress. This divergence implies a somewhat mixed US risk appetite, with some sectors benefiting from perceived disinflationary pressures while others face headwinds.",
-    "analysis_para2": "The single dominant 'Why' behind today's primary flow is the sharp -7.07% decline in Crude Oil prices, which acts as a multifaceted mechanical catalyst. This substantial drop has likely triggered profit-taking in high-beta US technology stocks, leading to the Nasdaq 100 ETF's -1.12% decline, as lower energy costs can reduce immediate inflationary fears but also signal potential demand weakness. Concurrently, the same oil decline might be interpreted by broader markets as a positive disinflationary impulse, reducing the likelihood of aggressive Federal Reserve tightening and contributing to the slight positive move in the S&P 500 ETF and the strength observed in global equity benchmarks.",
-    "analysis_para3": "Traders should prioritize monitoring inter-market divergence, particularly between US tech and broader global equities, as well as the energy complex. For the S&P 500 ETF, watch 735 as a key support level and 740 as immediate resistance for confirmation of trend. A sustained break below Nasdaq 100 ETF's 680 could signal further rotation out of growth names, while a stabilization above 685 might indicate a short-term bottom. Today, traders should remain agile, avoid chasing momentum in overextended sectors, and be prepared to scale into positions cautiously once clear support or resistance levels are decisively breached, especially given the volatility in crude oil.",
-    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 at 61.7% and S&P stocks above SMA200 at 66.3% indicate healthy underlying breadth, but the divergence between S&P 500 and Nasdaq performance suggests internal market rotation. Watch for any deterioration in these breadth metrics as a potential early warning sign.",
+    "mood_emoji": "🚀",
+    "mood": "Risk-On Momentum Prevails",
+    "narrative": "Equity markets are broadly higher globally, supported by decreasing volatility and complacent credit conditions. This points towards continued institutional appetite for risk assets as the week begins.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 744.19 | +0.71% | 📈 |\n| Nasdaq 100 ETF | 688.78 | +0.66% | 📈 |\n| VIX | 17.76 | -4.41% | 📉 |\n| Crude Oil | 84.12 | -5.81% | 📉 |\n| Nikkei 225 | 64931.19 | +0.50% | 📈 |\n| DAX | 25514.09 | +1.65% | 📈 |",
+    "macro_section": "High Yield Credit Spreads (BAMLH0A0HYM2) remain at a complacent 2.77%, indicating robust risk appetite. The 10Y-2Y Yield Curve (T10Y2Y) stands at a normal and steepening +0.360, further supporting a healthy credit environment. These macro indicators suggest institutions are comfortable deploying capital into riskier assets.",
+    "analysis_para1": "Global equity markets are showing strong positive momentum, with the Nikkei 225 up +0.50% and the DAX surging +1.65% in pre-market, signaling broad international strength. This robust performance, coupled with a significant -5.81% drop in Crude Oil to $84.12, suggests a favorable backdrop for risk assets. The declining VIX, down -4.41% to 17.76, further reinforces this sentiment. This global risk-on tone aligns perfectly with complacent US High Yield Credit Spreads at 2.77%, implying robust US risk appetite as the session opens.",
+    "analysis_para2": "The dominant mechanical catalyst driving today's pre-market strength appears to be a broad-based risk-on rotation and an unwind of any lingering defensive positioning. With bond yields showing a normal steepening and credit spreads remaining complacent, institutional capital is flowing back into equities. This dynamic is amplifying upward momentum across global indices and driving down volatility, as investors chase performance and re-allocate capital towards growth-oriented sectors.",
+    "analysis_para3": "Traders should prioritize long opportunities today, targeting initial resistance around the S&P 500 ETF's 750 level. Key support for long entries can be found near the 740 mark, with a break below this suggesting a pause in momentum. A decisive drop below 735 would be a clear risk-off threshold, signaling a potential reversal and warranting a re-evaluation of long positions. Today's strategy is to 'buy the dip' on intraday pullbacks within the established upward trend, maintaining tight stops.",
+    "technical_signal": "No reversal pattern confirmed yet. Equities are showing strong follow-through from Friday's session, with both S&P 500 stocks above SMA50 (61.7%) and S&P stocks above SMA200 (66.3%) indicating robust breadth. Traders should watch for any intraday divergence or failed breakout above resistance as the first signs of a potential shift.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "XOM",
-          "company": "ExxonMobil Corporation",
-          "reason": "Analysts downgrade price targets for major oil producers following today's sharp crude oil sell-off, citing demand concerns and potential margin compression."
+          "ticker": "NBIS",
+          "company": "Nvidia Business Innovation Solutions",
+          "reason": "NBIS is a high-conviction gapper today after announcing a multi-billion dollar strategic investment into Nvidia's next-generation AI chip development."
         },
         {
-          "ticker": "BA",
-          "company": "The Boeing Company",
-          "reason": "Boeing receives a substantial new order from a major international airline, signaling robust travel demand despite global economic concerns."
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft is showing strong pre-market momentum following a new partnership with a leading automotive manufacturer to integrate its AI services into future vehicle platforms."
         }
       ],
       "c_grade": [
         {
           "ticker": "AAPL",
           "company": "Apple Inc.",
-          "reason": "Technical consolidation continues for Apple following recent strong earnings, with traders monitoring the 50-day moving average for trend confirmation."
+          "reason": "Apple is seeing continued buying interest today as investors extend their positions based on recent analyst upgrades, without any fresh catalyst."
         }
       ]
     }
