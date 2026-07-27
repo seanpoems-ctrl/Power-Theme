@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-27 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Performance, Tech & Oil Weakness",
+    "spy_price": 739.09,
+    "spy_change_pct": 0.12,
+    "vix": 18.67,
+    "hy_oas": 2.79,
+    "yield_curve": 0.36,
+    "credit_status": "Complacent",
+    "s5fi": 65.1,
+    "mmth": 69.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NBIS",
+          "company": "Nvidia Strategic Investment (Proxy for Company Receiving Investment)",
+          "reason": "Strategic investment from Nvidia provides significant capital and market validation, driving strong pre-market conviction due to implied future growth."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp",
+          "reason": "Analyst upgrade to 'Strong Buy' citing robust cloud growth prospects and successful AI integration, offering a counter-narrative to broader tech weakness."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Continued pressure from lingering concerns over global smartphone demand and uncertainty surrounding the upcoming product cycle, largely driven by technical flows."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-27 09:42 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "GOOGL",
           "company": "Alphabet Inc.",
           "reason": "Continues to be influenced by broader market sentiment and ongoing AI development narratives, without a distinct new fundamental catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-06 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Robust Growth / Risk-On",
-    "spy_price": 751.28,
-    "spy_change_pct": 0.87,
-    "vix": 15.57,
-    "hy_oas": 2.74,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 63.8,
-    "mmth": 67.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "IREN",
-          "company": "Iris Energy",
-          "reason": "The company announced a significant partnership with Nvidia, bolstering its position in AI infrastructure development."
-        },
-        {
-          "ticker": "KLAC",
-          "company": "KLA Corporation",
-          "reason": "Shares gained conviction following price target hikes from Morgan Stanley and Cantor Fitzgerald, underscoring strong outlook for semiconductor equipment."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "BA",
-          "company": "Boeing Company",
-          "reason": "Featured as a recycled ticker, today's movement is likely driven by carry-over sentiment or technical flow rather than fresh fundamental news."
         }
       ]
     }
