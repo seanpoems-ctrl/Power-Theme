@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-28 08:58 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Headwinds, Local Resilience",
+    "spy_price": 739.09,
+    "spy_change_pct": 0.02,
+    "vix": 18.66,
+    "hy_oas": 2.79,
+    "yield_curve": 0.34,
+    "credit_status": "Complacent",
+    "s5fi": 65.1,
+    "mmth": 69.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA unveiled new AI infrastructure solutions today, sparking analyst upgrades and renewed investor interest in its pivotal role in the ongoing technology revolution."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase announced better-than-expected Q2 earnings this morning, driven by strong trading revenue and robust consumer banking growth, signaling resilience in the financial sector."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple continues to see accumulation ahead of anticipated product announcements later in the quarter, with current price action driven by technical flows rather than fresh fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-28 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA saw continued profit-taking and technical consolidation following recent gains, with no fresh catalysts impacting today's price action."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-07 09:24 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "US Strength, Global Divergence",
-    "spy_price": 751.28,
-    "spy_change_pct": 0.87,
-    "vix": 15.9,
-    "hy_oas": 2.74,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 63.8,
-    "mmth": 67.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Announces expanded generative AI capabilities across Azure cloud services, poised to drive significant enterprise adoption."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Secures multi-year cloud services contract with a major government agency, boosting AWS revenue outlook."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "Continues to see strong investor interest and analyst upgrades following recent AI chip announcements."
         }
       ]
     }
