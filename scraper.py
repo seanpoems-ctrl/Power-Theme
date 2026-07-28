@@ -2083,10 +2083,12 @@ def build_data() -> dict:
     except Exception as e:
         logger.warning(f"  VIX TradingView fetch failed: {e}")
 
-    # Always use the last trading session date — never today's calendar date.
-    # The scraper runs at 22:45 UTC and may finish after midnight UTC, which would
-    # mislabel Thursday's close data as Friday.
-    updated = last_trading_date()
+    # Data date = the ET trading session this scrape represents. Basing it on the
+    # America/New_York date (not UTC) is immune to the run finishing after midnight
+    # UTC — the reason the old code used last_trading_date(), which overcorrected and
+    # stamped the data one session behind (e.g. Monday's close labelled Friday).
+    et_today = datetime.now(ZoneInfo("America/New_York")).date()
+    updated = et_today if is_trading_day(et_today) else last_trading_date(et_today)
 
     # Build industry_rankings (raw per-industry data with parent_theme tag)
     industry_rankings = [

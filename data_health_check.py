@@ -36,7 +36,7 @@ NOW = datetime.now(timezone.utc)
 #               produced after a US trading day); skipped right after weekends.
 CHECKS = [
     # file,                         date_paths,                         max_h, content,                     weekday_only
-    ("thematic_data.json",          ["last_updated"],                    30,   [("themes", 1)],             True),
+    ("thematic_data.json",          ["generated_at", "last_updated"],    30,   [("themes", 1)],             True),
     ("screener_stocks.json",        ["last_updated", "generated_at"],    30,   [("stocks", 100)],           True),
     ("gapper_data.json",            ["scan_time"],                       30,   [],                          True),
     ("breadth_monitor.json",        ["rows.0.date"],                     60,   [("rows", 1)],               True),
