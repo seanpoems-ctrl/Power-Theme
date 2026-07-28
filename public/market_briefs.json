@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-28 17:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Flows, Broad Resilience",
+    "spy_price": 740.86,
+    "spy_change_pct": 0.24,
+    "vix": 18.21,
+    "hy_oas": 2.81,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 67.2,
+    "mmth": 71.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CORZ",
+          "company": "Core Scientific, Inc.",
+          "reason": "Secured a significant AMD AI Data Center Pact today, positioning the company to expand its high-performance computing capabilities."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Announced the expansion of its Azure AI supercomputer offerings, securing new enterprise cloud computing contracts to capitalize on growing AI infrastructure demand."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "Experienced technical selling pressure following broader Nasdaq weakness, lacking a fresh fundamental catalyst today but attracting chart-driven flow."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-28 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2200,23 +2238,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-07-07 17:59 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "",
-    "spy_price": 747.71,
-    "spy_change_pct": -0.48,
-    "vix": 16.13,
-    "hy_oas": 2.72,
-    "yield_curve": 0.36,
-    "credit_status": "Complacent",
-    "s5fi": 63.8,
-    "mmth": 68.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
