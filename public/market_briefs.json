@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-28 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk Aversion Builds",
+    "spy_price": 739.09,
+    "spy_change_pct": 0.02,
+    "vix": 19.03,
+    "hy_oas": 2.79,
+    "yield_curve": 0.34,
+    "credit_status": "Complacent",
+    "s5fi": 65.1,
+    "mmth": 69.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet announces significant AI breakthrough in enterprise software, expected to drive substantial cloud revenue growth."
+        },
+        {
+          "ticker": "UNH",
+          "company": "UnitedHealth Group Incorporated",
+          "reason": "UnitedHealth Group receives key regulatory approval for a major acquisition, solidifying its market leadership in healthcare services."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple shares continue to consolidate after recent product launch hype, with flow-based trading dominating ahead of next earnings cycle."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-27 17:46 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corp.",
           "reason": "Continues to see strong investor interest and analyst upgrades following recent AI chip announcements."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-07 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Divergent Rally, Tech Leads",
-    "spy_price": 751.28,
-    "spy_change_pct": 0.87,
-    "vix": 15.97,
-    "hy_oas": 2.74,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 63.8,
-    "mmth": 67.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a significant new enterprise AI cloud contract, signaling accelerating demand for its Azure AI services and boosting investor confidence in its growth trajectory."
-        },
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple received a substantial analyst upgrade following reports of robust early pre-order data for its upcoming mixed-reality headset, indicating strong consumer interest."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is seeing continued strong momentum flow driven by sector rotation into high-beta technology, without a fresh fundamental catalyst today."
         }
       ]
     }
