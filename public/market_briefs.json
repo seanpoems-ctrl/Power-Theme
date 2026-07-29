@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-29 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Energy-Driven Caution",
+    "spy_price": 740.86,
+    "spy_change_pct": 0.24,
+    "vix": 18.3,
+    "hy_oas": 2.81,
+    "yield_curve": 0.35,
+    "credit_status": "Complacent",
+    "s5fi": 67.2,
+    "mmth": 71.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil announced a new strategic partnership to accelerate deepwater exploration in the Gulf of Mexico, with analysts projecting significant production increases by late 2027, capitalizing on rising crude prices."
+        },
+        {
+          "ticker": "UNH",
+          "company": "UnitedHealth Group Incorporated",
+          "reason": "UnitedHealth Group secured a landmark contract with the Department of Defense to manage healthcare services for over 5 million military personnel and their families, significantly expanding its government segment."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA shows continued rotational selling pressure following yesterday's broad tech weakness, without any fresh company-specific news, relying purely on market flow."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-28 17:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Apple faces continued headwinds from persistent, albeit recycled, rumors concerning potential delays in its next-generation iPhone production schedule, impacting sentiment."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-08 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off, Volatility Spike",
-    "spy_price": 747.71,
-    "spy_change_pct": -0.48,
-    "vix": 18.09,
-    "hy_oas": 2.72,
-    "yield_curve": 0.36,
-    "credit_status": "Complacent",
-    "s5fi": 63.8,
-    "mmth": 68.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a significant new cloud computing partnership with a major government agency, boosting its position in the public sector AI market."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon received a bullish analyst upgrade following speculation of robust Prime Day sales forecasts and expansion into new logistics technologies."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is experiencing renewed selling pressure today as traders rotate out of high-beta tech, with no fresh catalyst beyond yesterday's broad market weakness."
         }
       ]
     }
