@@ -1,6 +1,33 @@
 {
-  "generated_at": "2026-07-29T00:00:38.495727+00:00",
+  "generated_at": "2026-07-29T23:02:10.837127+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Other",
+      "theme_rs": 97.0,
+      "perf_1d": 2.29,
+      "leaders": [
+        {
+          "ticker": "STX",
+          "price": 764.43,
+          "rs_52w": 97,
+          "adr_pct": 10.17,
+          "vol_surge": 1.95,
+          "mkt_cap": 172953903376,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }
