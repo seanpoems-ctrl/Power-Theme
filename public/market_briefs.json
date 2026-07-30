@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-30 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Strong Risk-On Rally",
+    "spy_price": 741.69,
+    "spy_change_pct": 1.68,
+    "vix": 17.09,
+    "hy_oas": 2.87,
+    "yield_curve": 0.45,
+    "credit_status": "Complacent",
+    "s5fi": 60.9,
+    "mmth": 69.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LRCX",
+          "company": "Lam Research Corporation",
+          "reason": "Semiconductor equipment giant reported strong earnings and raised guidance, indicating robust sector demand."
+        },
+        {
+          "ticker": "FTNT",
+          "company": "Fortinet, Inc.",
+          "reason": "Cybersecurity leader posted an earnings beat and provided an optimistic outlook, driving investor confidence."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Pure technical momentum amidst broader tech strength, without fresh specific news today, making it a flow-driven candidate."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-30 08:50 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Remains a core holding for many institutional portfolios, experiencing typical daily flow without a distinct new fundamental catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-09 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On Momentum, Complacent Credit",
-    "spy_price": 751.71,
-    "spy_change_pct": 0.85,
-    "vix": 15.84,
-    "hy_oas": 2.7,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 62.5,
-    "mmth": 67.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "KLAC",
-          "company": "KLA Corporation",
-          "reason": "KLA Corporation saw strong momentum after raising its guidance, signaling robust demand in the semiconductor equipment sector."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corporation surged on renewed optimism surrounding AI infrastructure demand, with analysts citing strong pipeline visibility."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "RUN",
-          "company": "Sunrun Inc.",
-          "reason": "Sunrun Inc. traded on technical flows and general renewable energy sentiment, lacking a fresh catalyst for today's price action."
         }
       ]
     }

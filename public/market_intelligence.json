@@ -1,90 +1,90 @@
 {
-  "generated_at": "2026-07-30 08:50 ET",
-  "phase": "PRE",
-  "session": "Pre-Market",
+  "generated_at": "2026-07-30 16:45 ET",
+  "phase": "POST",
+  "session": "Post-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
-      "price": 729.46,
-      "open": 739.97,
-      "high": 742.68,
-      "low": 729.1,
-      "close": 729.46,
-      "prev_open": 739.19,
-      "prev_close": 740.86,
-      "volume": 70473800,
-      "change_pct": -1.54
+      "price": 741.69,
+      "open": 736.05,
+      "high": 742.45,
+      "low": 734.59,
+      "close": 741.69,
+      "prev_open": 739.97,
+      "prev_close": 729.46,
+      "volume": 53992777,
+      "change_pct": 1.68
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
-      "price": 661.73,
-      "open": 675.51,
-      "high": 680.05,
-      "low": 661.14,
-      "close": 661.73,
-      "prev_open": 676.23,
-      "prev_close": 675.49,
-      "volume": 56713400,
-      "change_pct": -2.04
+      "price": 683.55,
+      "open": 674.76,
+      "high": 685.12,
+      "low": 673.3,
+      "close": 683.55,
+      "prev_open": 675.51,
+      "prev_close": 661.73,
+      "volume": 61926018,
+      "change_pct": 3.3
     },
     "^VIX": {
       "label": "VIX",
-      "price": 19.09,
+      "price": 17.09,
       "open": 19.56,
       "high": 20.08,
-      "low": 18.92,
-      "close": 19.09,
+      "low": 17.0,
+      "close": 17.09,
       "prev_open": 18.27,
       "prev_close": 20.66,
       "volume": 0,
-      "change_pct": -7.6
+      "change_pct": -17.28
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 83.86,
+      "price": 84.12,
       "open": 84.65,
       "high": 85.94,
-      "low": 83.21,
-      "close": 83.86,
+      "low": 82.97,
+      "close": 84.12,
       "prev_open": 80.04,
       "prev_close": 84.46,
-      "volume": 105468,
-      "change_pct": -0.71
+      "volume": 213330,
+      "change_pct": -0.4
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 61867.43,
-      "open": 61258.34,
-      "high": 62924.84,
-      "low": 61049.7,
-      "close": 61867.43,
-      "prev_open": 62734.68,
-      "prev_close": 61434.19,
-      "volume": 0,
-      "change_pct": 0.71
+      "price": 61434.19,
+      "open": 62734.68,
+      "high": 63138.04,
+      "low": 60448.9,
+      "close": 61434.19,
+      "prev_open": 64539.92,
+      "prev_close": 62364.92,
+      "volume": 264100000,
+      "change_pct": -1.49
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25502.51,
+      "price": 25612.03,
       "open": 25487.45,
-      "high": 25552.14,
+      "high": 25651.16,
       "low": 25303.11,
-      "close": 25502.51,
+      "close": 25612.03,
       "prev_open": 25551.97,
       "prev_close": 25460.48,
       "volume": 0,
-      "change_pct": 0.17
+      "change_pct": 0.6
     }
   },
   "fred": {
-    "hy_oas": 2.84,
+    "hy_oas": 2.87,
     "yield_curve": 0.45,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
   "breadth": {
-    "s5fi": 63.0,
-    "mmth": 68.8
+    "s5fi": 60.9,
+    "mmth": 69.7
   },
   "regime": {
     "credit_status": "Complacent",
@@ -98,6 +98,36 @@
     }
   },
   "analysis": {
-    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "title": "Post-Market Brief: July 30, 2026",
+    "mood_emoji": "🚀",
+    "mood": "Strong Risk-On Rally",
+    "narrative": "US equities surged today, driven by strong corporate performance and a significant drop in market volatility. This ignited a broad risk-on appetite, with credit spreads remaining complacent.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 741.69 | +1.68% | 📈 |\n| Nasdaq 100 ETF | 683.55 | +3.30% | 📈 |\n| VIX | 17.09 | -17.28% | 📉 |\n| Crude Oil | 84.12 | -0.40% | ➡️ |\n| Nikkei 225 | 61434.19 | -1.49% | 📉 |\n| DAX | 25612.03 | +0.60% | 📈 |",
+    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) remains complacent at 2.87%, signaling a healthy corporate credit environment. Concurrently, the 10Y-2Y Yield Curve (T10Y2Y) is in a Normal / Steepening regime at +0.450, further bolstering confidence. These macro indicators collectively suggest robust institutional risk appetite and a positive outlook on economic growth.",
+    "analysis_para1": "While the Nikkei 225 registered a decline of -1.49% and Crude Oil edged down by -0.40%, the DAX managed a modest gain of +0.60%. Despite this mixed global picture, US High Yield credit spreads (BAMLH0A0HYM2) remained complacent at 2.87%. This indicates a decoupling of US domestic risk appetite, suggesting strong internal confidence or specific US-centric catalysts are outweighing some international headwinds. The complacency in credit suggests bond investors are not factoring in significant corporate default risk.",
+    "analysis_para2": "Today's primary market flow was dominated by strong corporate earnings and positive forward guidance, serving as the mechanical catalyst. The significant 'Beat & Raise' reports from companies like LRCX and FTNT fueled a broad surge in equities, particularly in technology. This positive earnings momentum drove the S&P 500 ETF up +1.68% and the Nasdaq 100 ETF up +3.30%, while simultaneously crushing volatility with the VIX plummeting by -17.28%.",
+    "analysis_para3": "Traders should maintain a bullish bias, looking for continuation of the uptrend. Any shallow pullbacks towards the S&P 500 ETF's 735 level or today's prior resistance turned support could be actionable long entry points. Key triggers for long entries include sustained momentum above intraday highs and a stable or declining VIX. A risk-off threshold would be a break below today's opening price or a swift VIX spike, signaling a potential sentiment shift, prompting profit-taking or reducing exposure TODAY.",
+    "technical_signal": "No reversal pattern confirmed yet. The market exhibits strong bullish momentum, with S&P 500 stocks above SMA50 at 60.9% and S&P stocks above SMA200 at 69.7%, indicating broad participation. Traders should watch for sustained follow-through on volume or potential signs of exhaustion if the VIX starts to creep higher on declining prices.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LRCX",
+          "company": "Lam Research Corporation",
+          "reason": "Semiconductor equipment giant reported strong earnings and raised guidance, indicating robust sector demand."
+        },
+        {
+          "ticker": "FTNT",
+          "company": "Fortinet, Inc.",
+          "reason": "Cybersecurity leader posted an earnings beat and provided an optimistic outlook, driving investor confidence."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Pure technical momentum amidst broader tech strength, without fresh specific news today, making it a flow-driven candidate."
+        }
+      ]
+    }
   }
 }
