@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-30 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off / Broad Market Decline",
+    "spy_price": 729.46,
+    "spy_change_pct": -1.54,
+    "vix": 19.38,
+    "hy_oas": 2.84,
+    "yield_curve": 0.45,
+    "credit_status": "Complacent",
+    "s5fi": 63.0,
+    "mmth": 68.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AVGO",
+          "company": "Broadcom Inc.",
+          "reason": "Broadcom announced a significant multi-year contract with a major cloud provider for next-generation AI accelerators, signaling robust demand in a key growth segment."
+        },
+        {
+          "ticker": "PG",
+          "company": "Procter & Gamble",
+          "reason": "Procter & Gamble reported stronger-than-expected quarterly earnings and raised full-year guidance, citing resilient consumer demand and effective cost management."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft is experiencing increased selling pressure following the broader tech market downturn, approaching key technical support levels without specific fresh company news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-29 17:33 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "The stock is experiencing momentum-driven flow following broader semiconductor strength, without specific fresh news today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-09 07:10 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Selective Risk-On, Cautious Tone",
-    "spy_price": 745.4,
-    "spy_change_pct": -0.31,
-    "vix": 17.23,
-    "hy_oas": 2.67,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 61.3,
-    "mmth": 67.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase & Co. (JPM) is poised for a positive session following an announced expansion of its share repurchase program and a dividend increase, signaling robust capital returns."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly and Company (LLY) is expected to see strong upward momentum after securing accelerated FDA approval for a promising new Alzheimer's treatment, significantly boosting its pipeline."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA",
-          "reason": "NVIDIA (NVDA) continues to ride the wave of sustained investor enthusiasm for artificial intelligence infrastructure, experiencing further gains driven purely by technical flow and momentum."
         }
       ]
     }
