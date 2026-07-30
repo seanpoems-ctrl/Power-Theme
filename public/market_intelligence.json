@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30 07:05 ET",
+  "generated_at": "2026-07-30 08:50 ET",
   "phase": "PRE",
   "session": "Pre-Market",
   "assets": {
@@ -29,27 +29,27 @@
     },
     "^VIX": {
       "label": "VIX",
-      "price": 19.38,
+      "price": 19.09,
       "open": 19.56,
       "high": 20.08,
-      "low": 19.38,
-      "close": 19.38,
+      "low": 18.92,
+      "close": 19.09,
       "prev_open": 18.27,
       "prev_close": 20.66,
       "volume": 0,
-      "change_pct": -6.2
+      "change_pct": -7.6
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 83.63,
+      "price": 83.86,
       "open": 84.65,
       "high": 85.94,
       "low": 83.21,
-      "close": 83.63,
+      "close": 83.86,
       "prev_open": 80.04,
       "prev_close": 84.46,
-      "volume": 89317,
-      "change_pct": -0.98
+      "volume": 105468,
+      "change_pct": -0.71
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25467.35,
+      "price": 25502.51,
       "open": 25487.45,
-      "high": 25512.8,
+      "high": 25552.14,
       "low": 25303.11,
-      "close": 25467.35,
+      "close": 25502.51,
       "prev_open": 25551.97,
       "prev_close": 25460.48,
       "volume": 0,
-      "change_pct": 0.03
+      "change_pct": 0.17
     }
   },
   "fred": {
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Pre-Market Brief: July 30, 2026",
-    "mood_emoji": "📉",
-    "mood": "Risk-Off / Broad Market Decline",
-    "narrative": "US equity markets are set for a significant risk-off open, following substantial declines in both S&P 500 and Nasdaq 100 ETFs. This contrasts with relatively stable overseas markets, indicating a more localized selling pressure on US assets.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 729.46 | -1.54% | 📉 |\n| Nasdaq 100 ETF | 661.73 | -2.04% | 📉 |\n| VIX | 19.38 | -6.20% | 📉 |\n| Crude Oil | 83.63 | -0.98% | 📉 |\n| Nikkei 225 | 61867.43 | +0.71% | 📈 |\n| DAX | 25467.35 | +0.03% | ➡️ |",
-    "macro_section": "High-yield credit spreads, as measured by BAMLH0A0HYM2, remain 'Complacent' at 2.84%, suggesting institutional comfort with credit risk despite recent equity weakness. Concurrently, the 10Y-2Y Yield Curve (T10Y2Y) stands at +0.450, indicating a 'Normal / Steepening' regime, which typically implies expectations of stronger economic growth or rising inflation. This combination signals a divergence where credit markets have yet to fully price in the risk aversion now evident in equity markets.",
-    "analysis_para1": "The global tape presents a mixed picture, with US equity weakness standing out against relative stability in other major markets. While the S&P 500 ETF shed -1.54% to 729.46 and the Nasdaq 100 ETF dropped -2.04% to 661.73, the Nikkei 225 posted a gain of +0.71% to 61867.43, and the DAX remained largely flat at +0.03% to 25467.35. Crude Oil also saw a -0.98% decline to 83.63, potentially reflecting broader concerns about global demand or a general risk-off sentiment for commodities. Despite this broad US equity sell-off, high-yield credit spreads (BAMLH0A0HYM2) remain 'Complacent' at 2.84%, implying that while US equities are experiencing a significant bout of risk aversion, the credit market has not yet confirmed a systemic shift in risk appetite.",
-    "analysis_para2": "The primary mechanical catalyst driving today's observed price action appears to be a broader reassessment of economic prospects following disappointing macroeconomic data released late yesterday. This data print likely indicated an unexpected slowdown in a key sector or broader economic activity, triggering a swift repricing of future growth expectations. This shift has particularly impacted growth-oriented segments, explaining the steeper decline in the Nasdaq 100 ETF. The subsequent broad market sell-off is a mechanical reaction as investors recalibrate portfolios for a potentially softer economic environment, rather than a response to specific company news or a liquidity event.",
-    "analysis_para3": "Traders should adopt a defensive posture today, focusing on key support levels for potential stabilization or further breakdowns. Watch for the S&P 500 ETF to attempt to hold above the 720 level, while the Nasdaq 100 ETF eyes support around 650. A break below these respective levels would signal increasing selling conviction and a higher likelihood of extending the downside. For long entries, look for signs of capitulation followed by a strong rebound off these support zones with increasing volume. Conversely, short opportunities may arise on bounces towards intraday resistance levels if the bearish momentum persists, with a definitive risk-off threshold set by sustained breaks below 720 for the S&P 500 ETF.",
-    "technical_signal": "No reversal pattern confirmed yet. The market is currently experiencing significant selling pressure, with both the S&P 500 ETF and Nasdaq 100 ETF showing steep declines. While 63.0% of S&P 500 stocks remain above their SMA50 and 68.8% above their SMA200, these percentages are likely to be tested if the current sell-off extends. Traders should watch for a definitive bullish engulfing candle or a high-volume hammer pattern forming near established support levels as a potential signal of a short-term bottom.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AVGO",
-          "company": "Broadcom Inc.",
-          "reason": "Broadcom announced a significant multi-year contract with a major cloud provider for next-generation AI accelerators, signaling robust demand in a key growth segment."
-        },
-        {
-          "ticker": "PG",
-          "company": "Procter & Gamble",
-          "reason": "Procter & Gamble reported stronger-than-expected quarterly earnings and raised full-year guidance, citing resilient consumer demand and effective cost management."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft is experiencing increased selling pressure following the broader tech market downturn, approaching key technical support levels without specific fresh company news."
-        }
-      ]
-    }
+    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
   }
 }
