@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-31 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Strong Risk Appetite / Growth Optimism",
+    "spy_price": 741.69,
+    "spy_change_pct": 1.68,
+    "vix": 16.83,
+    "hy_oas": 2.87,
+    "yield_curve": 0.45,
+    "credit_status": "Complacent",
+    "s5fi": 60.9,
+    "mmth": 69.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Fresh reports indicate Apple is poised to unveil a revolutionary AI-powered operating system update that could significantly boost its services revenue."
+        },
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla announced Q2 vehicle deliveries significantly exceeded analyst expectations, pointing to robust demand and efficient production scaling."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continued strong technical momentum driven by sector rotation into semiconductors, following an analyst upgrade citing sustained AI infrastructure spending."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-30 17:47 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Continued price consolidation and investor uncertainty regarding competitive pressures in the EV market, without any fresh fundamental news catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-10 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-On / Equities Extend Gains",
-    "spy_price": 751.71,
-    "spy_change_pct": 0.85,
-    "vix": 15.89,
-    "hy_oas": 2.7,
-    "yield_curve": 0.38,
-    "credit_status": "Complacent",
-    "s5fi": 62.5,
-    "mmth": 67.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet's Waymo unit announced a new strategic partnership with a major automotive manufacturer for autonomous trucking development, significantly expanding its commercial footprint."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Tesla revealed a breakthrough battery technology exceeding current energy density by 15%, promising extended range and faster charging for future models, sparking renewed investor interest."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) continues to benefit from strong underlying sector momentum and sustained investor flow into AI-related plays, absent a fresh catalyst."
         }
       ]
     }
