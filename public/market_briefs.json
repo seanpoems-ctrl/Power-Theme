@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-31 16:46 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On / Broad Market Gains",
+    "spy_price": 747.03,
+    "spy_change_pct": 0.72,
+    "vix": 15.99,
+    "hy_oas": 2.84,
+    "yield_curve": 0.45,
+    "credit_status": "Complacent",
+    "s5fi": 61.0,
+    "mmth": 68.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "ARM",
+          "company": "ARM Holdings",
+          "reason": "The company reported a strong 'Beat & Raise' quarter, fueling optimism around AI chip demand and licensing growth."
+        },
+        {
+          "ticker": "SKHY",
+          "company": "Skyworks Solutions, Inc.",
+          "reason": "SKHY delivered a 'Beat & Raise' earnings report, pointing to robust demand for its analog and mixed-signal semiconductors."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft continues to exhibit strong institutional flow and technical momentum, benefiting from the broader market's risk-on sentiment without specific fresh news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-31 09:02 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Continued to experience recycled speculative interest ahead of anticipated next-week delivery reports, with no fresh fundamental catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-10 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On Momentum",
-    "spy_price": 754.95,
-    "spy_change_pct": 0.43,
-    "vix": 15.03,
-    "hy_oas": 2.7,
-    "yield_curve": 0.38,
-    "credit_status": "Complacent",
-    "s5fi": 64.3,
-    "mmth": 68.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CRCL",
-          "company": "Circle Financial Corporation",
-          "reason": "Regulatory clearance for its Digital Currency Trust Bank provides a strong fundamental tailwind, validating its business model in the burgeoning digital asset space."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Announced a new multi-billion dollar strategic cloud computing partnership with a major global industrial conglomerate, reinforcing its dominance in enterprise AI and cloud services."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Continued to see speculative interest and short covering driven by technical patterns rather than fresh fundamental news, sustaining its recent volatility."
         }
       ]
     }
