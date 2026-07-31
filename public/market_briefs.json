@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-07-31 17:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On / Growth Focus",
+    "spy_price": 747.03,
+    "spy_change_pct": 0.72,
+    "vix": 15.99,
+    "hy_oas": 2.84,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 61.0,
+    "mmth": 68.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "ARM",
+          "company": "ARM Holdings Plc",
+          "reason": "The company's latest 'Beat & Raise' earnings report, coupled with strong guidance, signals robust demand for its chip designs in AI and cloud computing."
+        },
+        {
+          "ticker": "SKHY",
+          "company": "SK Hynix Inc.",
+          "reason": "SK Hynix delivered a significant 'Beat & Raise' quarter, driven by strong demand for high-bandwidth memory crucial for AI accelerators, boosting semiconductor sector sentiment."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla shows renewed interest from retail flow and technical buying after recent consolidation, despite no new fundamental catalysts today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-31 16:46 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "GME",
           "company": "GameStop Corp.",
           "reason": "Retail traders attempting to spark another short squeeze; no fresh fundamental catalyst or company-specific news to justify today's move."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-10 17:40 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On with Calm Accumulation",
-    "spy_price": 754.95,
-    "spy_change_pct": 0.43,
-    "vix": 15.03,
-    "hy_oas": 2.7,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 64.3,
-    "mmth": 68.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CRCL",
-          "company": "Circle",
-          "reason": "Received regulatory clearance for its Digital Currency Trust Bank, signaling a significant catalyst for the digital asset space."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Reported a new strategic partnership in enterprise AI solutions, reinforcing its leadership and expanding its cloud services market."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Continued to experience recycled speculative interest ahead of anticipated next-week delivery reports, with no fresh fundamental catalyst today."
         }
       ]
     }
