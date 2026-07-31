@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31 07:05 ET",
+  "generated_at": "2026-07-31 09:02 ET",
   "phase": "PRE",
   "session": "Pre-Market",
   "assets": {
@@ -29,27 +29,27 @@
     },
     "^VIX": {
       "label": "VIX",
-      "price": 16.83,
+      "price": 17.25,
       "open": 16.82,
-      "high": 16.92,
+      "high": 17.29,
       "low": 16.65,
-      "close": 16.83,
+      "close": 17.25,
       "prev_open": 19.56,
       "prev_close": 17.09,
       "volume": 0,
-      "change_pct": -1.52
+      "change_pct": 0.94
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 84.28,
+      "price": 85.46,
       "open": 83.92,
-      "high": 84.39,
+      "high": 85.65,
       "low": 81.06,
-      "close": 84.28,
+      "close": 85.46,
       "prev_open": 84.65,
       "prev_close": 83.59,
-      "volume": 60012,
-      "change_pct": 0.83
+      "volume": 89980,
+      "change_pct": 2.24
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25818.33,
+      "price": 25656.78,
       "open": 25709.37,
       "high": 25891.51,
-      "low": 25699.51,
-      "close": 25818.33,
+      "low": 25632.43,
+      "close": 25656.78,
       "prev_open": 25487.45,
       "prev_close": 25612.03,
       "volume": 0,
-      "change_pct": 0.81
+      "change_pct": 0.17
     }
   },
   "fred": {
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Pre-Market Brief: July 31, 2026",
-    "mood_emoji": "🚀",
-    "mood": "Strong Risk Appetite / Growth Optimism",
-    "narrative": "Equity markets are surging globally, led by a strong rebound in tech and semiconductors, as risk appetite firmly takes hold. Declining volatility and complacent credit spreads underpin a robust pre-market sentiment.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 741.69 | +1.68% | 📈 |\n| Nasdaq 100 ETF | 683.55 | +3.30% | 📈 |\n| VIX | 16.83 | -1.52% | 📉 |\n| Crude Oil | 84.28 | +0.83% | 📈 |\n| Nikkei 225 | 64362.02 | +4.03% | 📈 |\n| DAX | 25818.33 | +0.81% | 📈 |",
-    "macro_section": "The high yield credit spread (BAMLH0A0HYM2) stands at a complacent 2.87%, reflecting low perceived corporate default risk. Concurrently, the 10-year minus 2-year yield curve (T10Y2Y) measures a normal and steepening +0.450, signaling confidence in future economic growth. These combined factors indicate a clear institutional willingness to embrace risk and deploy capital into higher-yielding assets.",
-    "analysis_para1": "Global equity markets are flashing green, with the Nikkei 225 leaping +4.03% and the DAX rising +0.81%, while Crude Oil is up +0.83% to $84.28. This broad-based international strength, particularly in growth-sensitive assets like oil and major export-oriented indices, aligns perfectly with US high yield credit spreads remaining at a complacent 2.87%. The implication for US risk appetite is profoundly positive, suggesting investors are comfortable extending credit and taking on equity risk, viewing current global conditions as conducive to growth.",
-    "analysis_para2": "Today's dominant market flow is driven by persistent growth optimism, likely fueled by a series of better-than-expected corporate earnings reports and an unwinding of previous bearish positioning. This mechanical catalyst is prompting a broad-based rally, particularly evident in the Nasdaq 100 ETF's +3.30% surge. As short positions are covered and conviction in a sustained economic expansion grows, capital is aggressively flowing back into risk assets, pushing both equities and commodities higher and simultaneously compressing volatility.",
-    "analysis_para3": "Traders should approach today with a long bias, focusing on maintaining existing positions in leading growth sectors. Watch the S&P 500 ETF, with immediate support at the 740 level; a sustained hold above this indicates continued upward momentum. Key triggers for further long entries include a break above yesterday's high or consolidation at current levels followed by renewed buying volume. A risk-off threshold for the session would be a definitive break and close below 735, signaling a potential shift in sentiment and warranting profit-taking or reduction of long exposure.",
-    "technical_signal": "No reversal pattern confirmed yet. The market currently exhibits strong underlying momentum, with 60.9% of S&P 500 stocks above their SMA50 and 69.7% above their SMA200, indicating robust breadth. Traders should monitor for any signs of divergence between price action and momentum indicators or significant increases in intraday volatility as potential early warnings.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Fresh reports indicate Apple is poised to unveil a revolutionary AI-powered operating system update that could significantly boost its services revenue."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla announced Q2 vehicle deliveries significantly exceeded analyst expectations, pointing to robust demand and efficient production scaling."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continued strong technical momentum driven by sector rotation into semiconductors, following an analyst upgrade citing sustained AI infrastructure spending."
-        }
-      ]
-    }
+    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
   }
 }
