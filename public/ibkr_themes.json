@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T23:59:09.648299+00:00",
+  "generated_at": "2026-08-02T23:57:31.938097+00:00",
   "data_source": "fallback",
   "power_themes": [
     {
@@ -122,25 +122,6 @@
           "setup_label": "Flag"
         },
         {
-          "ticker": "NBIS",
-          "price": 190.41,
-          "rs_52w": 98,
-          "adr_pct": 13.57,
-          "vol_surge": 1.32,
-          "mkt_cap": 48344756049,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
           "ticker": "AAOI",
           "price": 94.32,
           "rs_52w": 97,
@@ -198,6 +179,25 @@
           "setup_label": "Flag"
         },
         {
+          "ticker": "NBIS",
+          "price": 190.41,
+          "rs_52w": 97,
+          "adr_pct": 13.57,
+          "vol_surge": 1.32,
+          "mkt_cap": 48344756049,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
           "ticker": "OUST",
           "price": 39.01,
           "rs_52w": 97,
@@ -222,7 +222,7 @@
           "rs_52w": 97,
           "adr_pct": 9.59,
           "vol_surge": 1.3,
-          "mkt_cap": 194341511108,
+          "mkt_cap": 193701225175,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
@@ -350,6 +350,25 @@
           "setup_label": "Flag"
         },
         {
+          "ticker": "CRDO",
+          "price": 206.99,
+          "rs_52w": 96,
+          "adr_pct": 10.92,
+          "vol_surge": 0.79,
+          "mkt_cap": 38599061131,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
           "ticker": "LITE",
           "price": 713.94,
           "rs_52w": 95,
@@ -375,25 +394,6 @@
           "adr_pct": 11.95,
           "vol_surge": 0.61,
           "mkt_cap": 5248592062,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "CRDO",
-          "price": 206.99,
-          "rs_52w": 95,
-          "adr_pct": 10.92,
-          "vol_surge": 0.79,
-          "mkt_cap": 38599061131,
           "gates_passed": 5,
           "gates_detail": {
             "rs_52w > 85": true,
