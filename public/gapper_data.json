@@ -1,314 +1,36 @@
 {
-  "scan_time": "2026-07-31 08:55 ET",
+  "scan_time": "2026-08-03 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "AXTI",
-      "price": 46.94,
-      "gap_pct": 39.45,
-      "pm_volume": 1117728,
-      "avg_vol_10d": 8019584,
-      "avg_dollar_vol": 376439273,
-      "mkt_cap": 3070964320,
-      "rvol": 2.26,
-      "adr_pct": 13.29,
-      "category": "Earnings",
-      "theme": "Beat & Turnaround",
-      "reasoning": "AXT Inc. reported Q2 2026 net income of **$11.1 million** (EPS **$0.17**), a significant turnaround from a loss a year ago, sparking a **+26.97%** surge.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 80,
-      "grade": "A",
-      "finviz_theme": "Semiconductors - Compute",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Catalyst: AXT Inc. reported second-quarter **net income of $11.1 million**, with adjusted earnings of **19 cents per share**, marking a strong turnaround from a loss in the same period a year earlier. This positive financial performance drove the stock up **+26.97%**.\nImpact: This signifies a significant business inflection point for AXTI, suggesting a potential re-rating as the company moves back to profitability and sets new record quarterly performance, validating strong momentum.",
-        "impact": ""
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nAXT Inc. announced robust second-quarter 2026 financial results, reporting **net income of $11.1 million**. On a per-share basis, the company achieved net income of **17 cents**, with adjusted earnings coming in at **19 cents per share**. This marks a substantial improvement from a loss in the prior year's period, leading to a significant market reaction of **+26.97%** for AXTI shares.\n\n• **The Growth (Momentum)**\nManagement highlighted a **significant business inflection point**, noting the achievement of **record quarterly** performance. This strong operational execution and return to profitability provide a clear momentum signal, suggesting a validated growth trajectory that could attract further investor interest and potentially sustain upward price momentum in the near term.",
-      "peer_tickers": [
-        "COHR",
-        "LITE",
-        "MRVL"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "AXT, Inc. Q2 2026 Earnings Call Summary",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/1998af69-4b7c-3053-a0e3-1cfeac006e9e/axt%2C-inc.-q2-2026-earnings.html"
-        },
-        {
-          "title": "AXT: Q2 Earnings Snapshot",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/axt-q2-earnings-snapshot-205946110.html"
-        },
-        {
-          "title": "AXT, Inc. Announces Second Quarter 2026 Financial Results",
-          "source": "Finviz",
-          "url": "https://www.businesswire.com/news/home/20260730124233/en/"
-        },
-        {
-          "title": "AXT, Inc. Announces Second Quarter 2026 Financial Results - Business Wire",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxObUNzblJ5M1pkV3VWYzVfbUJzaUhLMG5kU0VnVXY3UHNoUGxSRmc4cnRSc0t4TU1tODRreWhCbG9JUGx3SUpTeG4yZ1F3TUhJcjc4OVBxa1Z2NVhKVjRVRXprMktHUGU0Qy1vWWV5TXR6UlF3OXlmQS1zdzJ0amIzWEpCLWhFYVptNEhER2YtZkdSU05saElKd2QycEgxaUVBMmlmN0IzVWlrQVRFOWZ2enJzMA?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-07-30",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1051627/000143774926025061/axti20260609_8k.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Compute",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 20,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "AXT Inc. reported Q2 2026 net income of $11.1 million (EPS $0.17), a significant turnaround from a loss a year ago, sparking a +26.97% surge.",
-        "discrepancy_note": null
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "NWL",
-      "price": 5.14,
-      "gap_pct": 19.81,
-      "pm_volume": 254371,
-      "avg_vol_10d": 7208042,
-      "avg_dollar_vol": 37049336,
-      "mkt_cap": 2183985912,
-      "rvol": 0.99,
-      "adr_pct": 5.61,
-      "category": "Earnings",
-      "theme": "Sales Growth & Guidance Raise",
-      "reasoning": "Newell Brands (NWL) reported earnings with a return to sales growth and raised its 2026 full-year guidance, signaling strong operational momentum.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
+      "ticker": "ATKR",
+      "price": 72.96,
+      "gap_pct": 28.02,
+      "pm_volume": 692180,
+      "avg_vol_10d": 440839,
+      "avg_dollar_vol": 32163613,
+      "mkt_cap": 2463659647,
+      "rvol": 1.18,
+      "adr_pct": 3.77,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No specific fundamental catalyst information available despite 8-K filing; likely technical movement or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
       "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Newell Brands (NWL) filed an **8-K** on **2026-07-31** detailing its latest earnings, reporting a **return to sales growth** and subsequently **raising its 2026 guidance**.",
-        "impact": "This positive financial update suggests improving business fundamentals and could drive sustained investor interest, potentially leading to upward revisions in price targets and analyst ratings."
-      },
-      "analysis_details": "• **The Growth (Momentum)**\nNewell Brands (NASDAQ: NWL) announced it has achieved a **return to sales growth** as reported on **2026-07-31**. This signals a positive shift in the company's operational performance and revenue trajectory.\n\n• **The Guide**\nIn conjunction with its earnings report, Newell Brands (NASDAQ: NWL) **raised its 2026 guidance**. This upward revision indicates management's increased confidence in future financial performance and business outlook.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Newell Brands (NASDAQ: NWL) returns to sales growth, raises 2026 guidance - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQT21yRjZPSmVpU2NybVhiUlhJbm5PUVJBX0hMYW82RFVRVWtoTWJjdUlKdEVHS1RoaXE4V3pJZDY5QjkyR2JpeU1rc2VIVVE2dTI1OEdDLXlCRjZYdFEwUVRzRllwTWUzUlNLTU92LXlDVDZBWjJIcnBkVzJXb2RHZXpBU2h2MlQ1MHJSRmo5QlBFRUcxYVRVdWVmTUNjYUExMlFyLWFtMTA?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-07-31",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/814453/000081445326000024/nwl-20260731.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $37M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Newell Brands (NWL) raised its 2026 full-year guidance",
-        "discrepancy_note": "Source B (Stock Titan) states 'raises 2026 guidance', but Source A (Finviz News) has no information, and Source B (MarketBeat) mentions 'Issues Q3 2026 Earnings Guidance', which is not 'full-year guidance'. Only one source fully confirms the specific claim, preventing a 'Verified' status."
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "AMZN",
-      "price": 235.5,
-      "gap_pct": 10.21,
-      "pm_volume": 2409640,
-      "avg_vol_10d": 44662094,
-      "avg_dollar_vol": 10517923137,
-      "mkt_cap": 2533299257812,
-      "rvol": 2.2,
-      "adr_pct": 2.47,
-      "category": "Earnings",
-      "theme": "Earnings Beat & Capex Raise",
-      "reasoning": "Amazon reported strong Q2 earnings, with profits soaring to **$62.6 billion** and net sales increasing **20%**, alongside a **$220 billion** capex raise.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 80,
-      "grade": "B",
-      "finviz_theme": "Cloud Hyperscalers",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Amazon reported Q2 results exceeding expectations, with net sales climbing **20%** to **$200.6 billion** and profits soaring to **$62.6 billion**. The company also lifted its 2026 capital expenditure guidance to **US$220 billion**, citing increased memory prices and demand.",
-        "impact": "The significant earnings beat, strong segment growth in AWS and advertising, combined with an elevated capex outlook, signals robust future demand and strengthens Amazon's market position, especially in cloud and AI infrastructure."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nAmazon's second-quarter results surpassed Wall Street expectations, with net sales increasing **20%** to **$200.6 billion** from **$167.7 billion** in the prior year. Profits soared to **$62.6 billion**, driven by outsized gains in its AWS computing division and advertising business. Amazon Advertising revenue was up **26%** in Q2.\n\n• **The Growth (Momentum)**\nThe company is accelerating its cloud sales and spending, with CEO Andy Jassy stating Amazon will spend **$220 billion** this year but still won't have enough capacity to meet demand. This substantial increase in 2026 capital expenditure, pinned on memory prices, underscores strong underlying demand for Amazon's services, particularly in its high-growth cloud segment.\n\n• **The Guide**\nAmazon's decision to lift its 2026 capital expenditure to **US$220 billion** directly implies a bullish outlook on future demand, especially for its AWS infrastructure. This significant investment for capacity suggests management foresees sustained, accelerated growth and is proactively scaling to capitalize on this opportunity, particularly as memory prices drive expansion.",
-      "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "AMZU",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "AMZD",
-          "mult": "1x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "Amazon: What We Think of the Stock After Earnings - Morningstar",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPTXhIdDMwZ1JWb3Y3V0Z4QllGRUN1N1RjRFUyeFRNYm44OExQc2JXcjR0T2JwSWxvRWR6U2VscF9kT19pc2liWksybUtkd0lmVTg5YUZ0eFF2LUoxckZybjlJbnRqSldfUVp4NVA3RWVEQ01NMWQ0SlotTE0zenhaYWthYkM0cVgwZDFhb3Z3?oc=5"
-        },
-        {
-          "title": "Amazon lifts 2026 capex to US$220 billion, pins the increase on memory prices",
-          "source": "Finviz",
-          "url": "https://www.digitimes.com/news/a20260731VL205/amazon-2026-capex-cost-component.html"
-        },
-        {
-          "title": "Amazon Advertising Up 26% In Q2, Profits Soar To $62.6B",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/2c5dc2b5-13b5-3fcb-8e04-028af44ee7a1/amazon-advertising-up-26%25-in.html"
-        },
-        {
-          "title": "Andy Jassy said Amazon will spend $220 billion this yearand still wont have enough capacity to meet demand",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/andy-jassy-said-amazon-spend-003247672.html"
-        },
-        {
-          "title": "Amazon Shares Jump as Cloud Sales—and Spending—Accelerate - wsj.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBDRDVENVllMTNvS05QVHdsMUdKbDB2NjRFRGxTWmNjUkFaYTFfeVBvTDQyN3NSR2lpR0xHejZSX1VtR0wxeTN2S1RKYWlZclI0SkRoY1VBNW1vdXd0dkxxei1RRnlnMkNjMzJZYm01SjBxSURRWmNzTVBEWQ?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-07-30",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000024/amzn-20260730.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Cloud Hyperscalers",
-      "technical_status": "Fail (ADR 2.5% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Amazon reported profits soaring to $62.6 billion",
-        "discrepancy_note": "Source A (Finviz) confirms profits of $62.6 billion (Finviz [2]). Source B (Google News) does not provide this specific dollar amount in any of the headlines provided."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "NVT",
-      "price": 144.8,
-      "gap_pct": 9.12,
-      "pm_volume": 111110,
-      "avg_vol_10d": 2213154,
-      "avg_dollar_vol": 320464699,
-      "mkt_cap": 23417122953,
-      "rvol": 2.2,
-      "adr_pct": 4.61,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "nVent Electric stock surged after reporting **strong Q2 earnings**, **beating estimates** and **raising guidance**, confirming positive momentum for the company.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 80,
-      "grade": "A",
       "finviz_theme": "Infrastructure",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "nVent Electric filed an 8-K for its earnings, reporting a **strong Q2 beat** and **raised guidance**. The news catalyzed a **10% surge** in the stock price.",
-        "impact": "This positive earnings surprise and improved outlook suggest sustained operational strength and could drive further positive price momentum."
+        "catalyst": "Unknown",
+        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nnVent Electric stock surged **10%** following its Q2 earnings report. The company delivered a **strong Q2 beat** on financial expectations, indicating better-than-anticipated performance during the quarter.\n\n• **The Guide**\nAdding to the positive sentiment, nVent Electric also **raised its guidance**. This upward revision suggests management's increased confidence in future performance and sets a higher bar for upcoming periods, bolstering investor outlook.\n\n• **The Growth (Momentum)**\nThe immediate market reaction, with the stock moving up **10%**, reflects significant investor approval of the **strong Q2 beat** and **raised guidance**. This indicates robust investor confidence and could signal continued positive momentum for nVent Electric.",
+      "analysis_details": "• **What Happened**\nNo immediate fundamental catalyst with specific financial details or news headlines was provided for ATKR, despite an **8-K filing on 2026-08-03** indicating an **Earnings/Financial Results event** (Item 2.02). Without specific figures like EPS beat/miss or revenue, the actual financial outcome remains undisclosed from the provided information.\n\n• **Key Consideration**\nGiven the lack of specific news, any market movement is likely attributable to technical factors or institutional flow. Such moves without a clear catalyst carry a high risk, making them potentially susceptible to a 'Gap and Trap' scenario, especially if driven by low float dynamics or short-term speculation.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "nVent Electric stock surges 10% on strong Q2 beat, raised guidance - Investing.com Nigeria",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPdW8wME9BSzI1eG51MXVGUFBiYnNzVHphN0dYTTYxbWdRdWt6SjAxM2p1OVRpVDNvQ2lBVlNRbDIxMFNCUkdIaHRtNk45MjBObTFuSjdWTzVkaWtaaTE4c1JpMkJSNG1YbWotWFE2akNmbHdOdmxmZGdhSkdUQXB1U2doV1FEUHJRb3JheXN4LTJNUnFwOFktU2ZuOVlFSWdkUnh6WnlzX0hockpJb295aHJTR250X1pXaXNXUkVTdkVLQlU?oc=5"
-        }
-      ],
+      "headlines": [],
       "edgar_filing": {
-        "filing_date": "2026-07-31",
+        "filing_date": "2026-08-03",
         "form": "8-K",
         "items": [
           "2.02",
@@ -316,993 +38,155 @@
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1720635/000162828026051203/nvt-20260731.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1666138/000162828026051510/atkr-20260803.htm"
       },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
       "industry": "Infrastructure",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "nVent Electric stock surged after reporting strong Q2 earnings, beating estimates and raising guidance.",
-        "discrepancy_note": "Finviz News (Source A) provides no information related to NVT's Q2 earnings, beating estimates, or raised guidance. Google News (Source B) [4] confirms 'strong Q2 beat, raised guidance', and [1] confirms 'Q2 sales rise 53 percent to record $1.5 billion', directly supporting the catalyst claims. However, due to the complete lack of information from Source A, the claim cannot be 'Verified' by both sources."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "FLNC",
-      "price": 13.47,
-      "gap_pct": 8.83,
-      "pm_volume": 335386,
-      "avg_vol_10d": 6711036,
-      "avg_dollar_vol": 90397655,
-      "mkt_cap": 2482664810,
-      "rvol": 0.7,
-      "adr_pct": 8.26,
-      "category": "Others",
-      "theme": "Analyst Profit Concerns",
-      "reasoning": "Fluence Energy (FLNC) fell **6.6%** after analysts flagged **profit concerns** despite the company reporting **rising revenue**.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Clean Energy - Grid",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Fluence Energy (FLNC) saw its stock decline **6.6%** after analysts raised **profit concerns**. This market reaction occurred despite the company's reported **rising revenue**, indicating a shift in focus to bottom-line performance.",
-        "impact": "This event signals potential re-rating pressure on FLNC as investors weigh future profitability outlooks against top-line growth, potentially leading to continued volatility."
-      },
-      "analysis_details": "• **What Happened**\nFluence Energy (FLNC) shares dropped **6.6%** following reports that analysts flagged **profit concerns**. This negative sentiment emerged even as the company demonstrated **rising revenue**, indicating a market focus on the sustainability and quality of earnings rather than just sales growth.\n\n• **Key Consideration**\nThe market's reaction highlights a growing concern over FLNC's profitability metrics, even amidst a backdrop of **rising revenue**. This could lead to increased scrutiny on operational efficiency and margin improvement, potentially capping upside momentum until a clearer path to enhanced profitability is articulated by management.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Fluence Energy (FLNC) Is Down 6.6% After Analysts Flag Profit Concerns Despite Rising Revenue - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPWmpOQWota3NrQU40NkJRd2xieGNGS0ZvR1JlWEw0aXBoZmdBQTRWN1JMeUE0SGw5UFk2U3FMckpzT21vVVB3akNxMm1OWnZ1eGJnZEo1UDU4STFJcW9CTU1tb2tyRThCcTRfUWJUelZIbVk3MGpRVWhkTXJ0TWJXdXkzaEo3cVdDSV81eU9KZUlfUXJDbVNpbnpGQlJ6R0lBQzhBcVcxbEdKQjE2Z25wREFMRmlUeUdiUUJiOGpJYjdzQ0lELXljQVlraVBWLTFRQUNQM2F6YThUUdIB2gFBVV95cUxPWmpOQWota3NrQU40NkJRd2xieGNGS0ZvR1JlWEw0aXBoZmdBQTRWN1JMeUE0SGw5UFk2U3FMckpzT21vVVB3akNxMm1OWnZ1eGJnZEo1UDU4STFJcW9CTU1tb2tyRThCcTRfUWJUelZIbVk3MGpRVWhkTXJ0TWJXdXkzaEo3cVdDSV81eU9KZUlfUXJDbVNpbnpGQlJ6R0lBQzhBcVcxbEdKQjE2Z25wREFMRmlUeUdiUUJiOGpJYjdzQ0lELXljQVlraVBWLTFRQUNQM2F6YThUUQ?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Clean Energy - Grid",
-      "technical_status": "Fail (Avg $Vol $90M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "FLNC fell 6.6%",
-        "discrepancy_note": "Source A (Finviz News) contains no information to confirm the claim. Source B (Google News link [1]) confirms the 6.6% drop and the reason (profit concerns despite rising revenue), but it is the only source that does."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "ALAB",
-      "price": 299.69,
-      "gap_pct": 6.98,
-      "pm_volume": 65472,
-      "avg_vol_10d": 4485786,
-      "avg_dollar_vol": 1344345206,
-      "mkt_cap": 51369247073,
-      "rvol": 1.4,
-      "adr_pct": 9.24,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; the stock's rebound is attributed to traders focusing on premium valuation, suggesting technical factors.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 58,
-      "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Unknown",
-        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
-      },
-      "analysis_details": "• **What Happened**\nALAB stock **rebounded** as **traders focused** on its **premium valuation**. This indicates a price movement driven by market sentiment and technical considerations, rather than a specific fundamental news event.\n\n• **Key Consideration**\nThe absence of a clear fundamental catalyst implies this rebound is speculative, potentially driven by short-term trading dynamics or shifts in perceived valuation. Such moves carry a higher risk of volatility and may not be sustained without tangible company-specific news.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "ALAB Stock Rebounds As Traders Focus On Premium Valuation - StocksToTrade",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9ieGp4eHlzUF9xWXJlQTY0bldmUzRMOGhwY0lfckRvSnNYNlZuVGVXTkVnaEk0eURPY01qaE00SGdEbkFYaHI3VndSV1dHZnFzYy0wXzVPRTNXVHRzTVAtWXNnOEZNTWxPRWdMbnlKdzhzbWYtSFNF?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Others",
-      "technical_status": "Pass",
+      "technical_status": "Fail (Avg $Vol $32M < $100M, ADR 3.8% < 4%)",
       "verification": {
         "status": "Unconfirmed",
-        "confidence_score": 60,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found; the stock's rebound is attributed to traders focusing on premium valuation, suggesting technical factors.",
-        "discrepancy_note": "The primary claim, while descriptive, does not contain a single specific factual metric (dollar amount, percentage, date, approval decision) that can be definitively 'Verified' or 'Discrepancy' against numerical data. Source B headline [1] corroborates the 'traders focusing on premium valuation' aspect of the claim, but neither source explicitly confirms the 'no immediate fundamental catalyst found' part with a specific factual detail, nor do they offer a specific numerical or date-based confirmation of the 'premium valuation' itself."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "NBIS",
-      "price": 188.43,
-      "gap_pct": 6.69,
-      "pm_volume": 879187,
-      "avg_vol_10d": 25292025,
-      "avg_dollar_vol": 4765776271,
-      "mkt_cap": 47418490015,
-      "rvol": 1.87,
-      "adr_pct": 11.04,
-      "category": "New Contract/Partnership",
-      "theme": "$1B AI Compute Deal",
-      "reasoning": "Nebius surged after landing a **$1B AI compute deal**, indicating strong demand and solidifying its position in the AI infrastructure market.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 79,
-      "grade": "A+",
-      "finviz_theme": "AI Compute",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Nebius (NBIS) **landed a $1B AI compute deal**, causing its stock to **jump**. The news also confirmed **\"Fresh AI Partnership News\"**.",
-        "impact": "This substantial contract demonstrates robust demand for Nebius's AI compute offerings, potentially driving significant revenue growth and competitive advantage."
-      },
-      "analysis_details": "• **Impact**\nNebius (NBIS) stock **jumped** after the company **landed a $1B AI compute deal**. This significant contract highlights the strong demand for AI compute resources. News also suggested **\"Fresh AI Partnership News\"** which contributed to the positive sentiment around the stock.\n\n• **Strategic Value**\nThis **$1B deal** provides a substantial revenue stream and reinforces Nebius's standing in the rapidly expanding AI sector. The partnership signals a strong competitive position and potential for further growth amidst an industry-wide **\"AI Spending Spree\"** reported by major players like **Amazon.com Inc.** and **Microsoft Corp.**",
-      "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "NEBX",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Nebius (NBIS) Stock Still Looks Reasonable Despite Fresh AI Partnership News - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOV1lPbHd3ekJiWlNndkx2RWVLcThFV0hianZFeFlMT0g1QXJJMHNiZURqWHFpTmM1b1RDZUpEZUhxd1pHSFZmZmZUQ3pnNVhWeUJtLU9aR3VYYnplWVM1RkJCRjctMHM3MUllRDZoVEdPZk12bkxlc2hYaHJOUjMwcGFQbFZFc3lQajliRFVfeXdmTUoxQVpFaTBB?oc=5"
-        },
-        {
-          "title": "NBIS Stock Jumps As Nebius Lands $1B AI Compute Deal - StocksToTrade",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTFBPQk03alJFRzhPelU1OG43MDZsTHRzanZlRmRaazBFM1o0RmJaVE9jeEM5T0QtNkFBTFlnZk45UzJhWnVST2pjYWVHQTZMamxoMkdyQS10RVdKV1RDSW1oWk5BclpvSDJCOTBlRVlZMTlTWDk1X3d3dzd3?oc=5"
-        },
-        {
-          "title": "Amazon, Microsoft Results Show AI Spending Spree Remains Solid",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/amazon-microsoft-results-show-ai-002937632.html"
-        },
-        {
-          "title": "Nebius publishes 2025 Sustainability Report, outlining blueprint for scaling responsibly",
-          "source": "Finviz",
-          "url": "/news/374852/nebius-publishes-2025-sustainability-report-outlining-blueprint-for-scaling-responsibly"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "AI Compute",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 85,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "$1B AI compute deal",
-        "discrepancy_note": "Source B (Google News, headline 5) explicitly mentions 'Nebius Lands $1B AI Compute Deal', while Source A (Finviz) does not contain any information about a $1B AI compute deal for NBIS. Therefore, only one of the consulted sources confirms the specific dollar amount and deal."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "AAOI",
-      "price": 90.11,
-      "gap_pct": 6.6,
-      "pm_volume": 274293,
-      "avg_vol_10d": 8720507,
-      "avg_dollar_vol": 785804886,
-      "mkt_cap": 7230675813,
-      "rvol": 1.23,
-      "adr_pct": 10.88,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; options activity and stock chart link suggest technical interest or market observation.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 57,
-      "grade": "C",
-      "finviz_theme": "Cloud Data Centers",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Unknown",
-        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
-      },
-      "analysis_details": "• **What Happened**\nA Google News headline noted the **AAOI Aug 2026 175.000 put (AAOI260828P00175000)** and an **Interactive Stock Chart**. This indicates market attention on options activity for **AAOI** with a specific **strike price of $175.000** and an **August 2026 expiration**, alongside general interest in the stock's chart.\n\n• **Key Consideration**\nWithout explicit fundamental news, the mention of options activity and a stock chart link suggests potential technical trading interest or institutional flow rather than a company-specific event. Momentum traders should be cautious, as the absence of a clear catalyst raises the risk of a gap and trap scenario.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "AAOI Aug 2026 175.000 put (AAOI260828P00175000) Interactive Stock Chart - Yahoo! Finance Canada",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTE52OU5USVBUT2ZTRzhUazBpUHN5dEtKb3BDc3VONUN3eDgwVDFaTlJMbTQ2ZzN5eDZJNUhrWDRFYy1LdXo4N0tTelpZdTRqRHJhNVpEOE5wbENyYjNEeHpKbldpZ0ZzTjYwRzNUMWxn?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Cloud Data Centers",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "options activity for AAOI",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "COHR",
-      "price": 249.06,
-      "gap_pct": 6.39,
-      "pm_volume": 85288,
-      "avg_vol_10d": 4976013,
-      "avg_dollar_vol": 1239325798,
-      "mkt_cap": 48725930554,
-      "rvol": 1.12,
-      "adr_pct": 7.63,
-      "category": "Earnings",
-      "theme": "Q4 Preview & AI Optics Discussion",
-      "reasoning": "Coherent's Q4 preview revealed its expanding role in AI optics, suggesting potential future growth tied to the artificial intelligence thematic.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
-      "grade": "B",
-      "finviz_theme": "Semiconductors - Analog",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Coherent (COHR) provided a **Q4 Preview**, specifically highlighting its **Role In AI Optics**. This preliminary insight is focused on the company's strategic positioning within a high-growth sector.",
-        "impact": "This pre-earnings commentary could set expectations for the upcoming Q4 earnings report and potentially re-rate the stock based on its perceived contribution to the AI supply chain."
-      },
-      "analysis_details": "• **The Guide**\nCoherent (COHR) released a **Q4 Preview**, providing insights into the upcoming quarter's performance and strategic direction. The core of this preview centered on the company's increasing **Role In AI Optics**, indicating its critical involvement in the rapidly expanding artificial intelligence sector.\n\n• **The Growth (Momentum)**\nThis focus on **AI Optics** within the Q4 preview suggests a strong potential tailwind for Coherent. The market's enthusiasm for AI-related plays means that positive indicators or increased involvement in this area can significantly impact investor sentiment and drive momentum, especially as earnings season progresses.",
-      "peer_tickers": [
-        "AXTI",
-        "LITE",
-        "GLW"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "What Does Coherent’s (COHR) Q4 Preview Reveal About Its Role In AI Optics? - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPQmpOeXJGNlFSbkF3WFpFbktETjBDMnNmUVNHamNtdkpocDVkMkgwSHZoYVJRYzJZNDVYMW80VW54UnJkUXhPcGFEUnNyUVloYjN5aFhIUDR6UnpFc1RLdUxuaXdLMGtRcWI5aVVPU293elF2c1Z2VFFqdlA0eGpLRm16RkdvT2EzYnI3UHNkUFQ5Wk9XNHRBZUFwQ3htZzdVTjJ0UzVIa0tSRFB3STN3LUdmRXBrbXBDcWMzZkxB0gHDAUFVX3lxTFBIZ1o5czN6RlN5aXdQandmbEZrMWpNWmZpMXZfVmk2cWNVa2tOZWlJTFZONTNQWWItTWZxWlNSWkZBc3Y2U0lWTmhjOGRIbV9BTk1CN1Q5QjlyNXNqU1h3SWNzQkhzdFc3QlVxYi1URllqRDdoSkQtTHBvYUVDVlNIbHRRekM2SmNiZndoNjdVTWg4d200Mnd4U0xBQ1ZPdnd6ejl3TTJVbnhIRVFSUmpVNlZPam9NVExLX2piTjZOSTNYWQ?oc=5"
-        },
-        {
-          "title": "4 Business Services Firms Poised to Top Estimates This Earnings Season - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOcm1uMWxpZkRLbDg5ZmtjMFdIX19ZQTdOVHFZRUxWWllDeUxGSFVveUJield3SmNsTHVBcEVYNEpXXzJWY2R4UVNpTmtIeWJSWGdXVzh1eXpXRWJiZVFWVzFHVTZKbldKbVpHWnB5VGhKZC1WS3M4bXFfOG5uczYzVXBzNFh1ZUxYOGxVOU9RVmo0TllHMEhMXzM4MlBNQQ?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Analog",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Coherent's Q4 preview revealed its expanding role in AI optics.",
-        "discrepancy_note": "Finviz (Source A) provides no information regarding Coherent's Q4 preview or its role in AI optics. Google News [1] (simplywall.st) directly references 'Coherent’s (COHR) Q4 Preview Reveal About Its Role In AI Optics', but this is only one source, and Finviz offers no corroboration."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "DSCSY",
-      "price": 35.25,
-      "gap_pct": 5.6,
-      "pm_volume": 362000,
-      "avg_vol_10d": 389898,
-      "avg_dollar_vol": 13743904,
-      "mkt_cap": 35231629055,
-      "rvol": 0.39,
-      "adr_pct": 4.61,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $14M < $100M)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 100,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "MRVL",
-      "price": 183.3,
-      "gap_pct": 5.42,
-      "pm_volume": 581497,
-      "avg_vol_10d": 23636226,
-      "avg_dollar_vol": 4332520226,
-      "mkt_cap": 160527987176,
-      "rvol": 1.08,
-      "adr_pct": 6.95,
-      "category": "Thematic Narratives",
-      "theme": "Operating Margin Improvement",
-      "reasoning": "Marvell Technology surged **+12.18%** after an article highlighted its climbing operating margin and controlled cost growth.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 57,
-      "grade": "B",
-      "finviz_theme": "Semiconductors - Compute",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "An article highlighted Marvell Technology's (MRVL) **reported operating margin has risen in each of the last two years**, with management planning to **grow costs far more slowly than revenue**.",
-        "impact": "This suggests fundamental operational improvements are driving valuation, reinforcing a positive longer-term narrative for the stock."
-      },
-      "analysis_details": "• **The Narrative**\nMarvell Technology (MRVL) saw a significant jump of **+12.18%** today, driven by a narrative highlighting strong operational performance. An article noted that the company's **reported operating margin has risen in each of the last two years**, signaling sustained fundamental improvement. Management's strategic plan to **grow costs far more slowly than revenue** further underpins this positive outlook, suggesting future margin expansion.\n\n• **Explosiveness**\nThe positive financial narrative, particularly around improving operating margins and cost control, provides a strong basis for momentum. This fundamental strength, combined with the stock sitting **far below its high** despite doubling over the past year, suggests potential for continued upward movement as investors recognize the sustained operational efficiency. This re-rating is fueled by a clear demonstration of profitability enhancement.",
-      "peer_tickers": [
-        "AVGO",
-        "QCOM",
-        "NVDA"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "MRVU",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Marvell (MRVL) Stock Looks Stretched After A 206% Five Year Run - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxPQjdnUm5ySXo0UzMtemRTdlNKN0dqcGZpcFpHcXJockZFS1JoMTJMc2FTMjRQMVhzaTJLMjFHQlN1dG1BaHdTZzcxZE1fLUZWdzRad0pOSHZPQTBGZ3FhVmlRVkRzZUYtb21uVmNnTEZmb29BN1ptbmhxQUMxUXlJU1JDaTNZbWNoclJvNG5VWWJ2SEFvLXJ5MXNVU3UtQmNG?oc=5"
-        },
-        {
-          "title": "The Growth That Has To Land For Advanced Micro Devices Stock to Make Sense",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/9f37b241-646e-3512-a836-8956727f81e4/the-growth-that-has-to-land.html"
-        },
-        {
-          "title": "Marvell Stock Sits Far Below Its High, But Its Operating Margin Has Kept Climbing",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/a17d4c9e-1125-3a5b-9e77-90f91368868d/marvell-stock-sits-far-below.html"
-        },
-        {
-          "title": "Micron, Sandisk and other chip stocks get major boosts in the wake of Microsoft's earnings",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/story/micron-sandisk-and-other-chip-stocks-get-major-boosts-in-the-wake-of-microsofts-earnings-25460e61?mod=mw_FV"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Compute",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 85,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Marvell Technology surged +12.18%",
-        "discrepancy_note": "Source A (Finviz) does not contain a specific percentage surge for MRVL. Source B (Google News) headline [3] states 'Marvell Technology (NASDAQ:MRVL) Stock Price Up 12.2% - Here's What Happened', which is a very close, but not exact, match to +12.18%."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "CCJ",
-      "price": 88.23,
-      "gap_pct": 5.41,
-      "pm_volume": 127744,
-      "avg_vol_10d": 4009025,
-      "avg_dollar_vol": 353716276,
-      "mkt_cap": 38427072212,
-      "rvol": 0.97,
-      "adr_pct": 3.54,
-      "category": "Others",
-      "theme": "Sector Sympathy",
-      "reasoning": "CCJ likely moved in sympathy with news of **Westinghouse's proposed IPO**, signaling positive sentiment for the broader nuclear energy sector.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "B",
-      "finviz_theme": "Clean Energy - Nuclear",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "News broke that **Westinghouse's Proposed IPO** has **no price or share count set yet**. This development concerns a major player in the nuclear energy sector.",
-        "impact": "Secondary. No company-specific news for CCJ; its movement is correlated to broader positive sentiment within the Nuclear Energy trend, driven by the IPO news."
-      },
-      "analysis_details": "• **What Happened**\nNews surfaced regarding **Westinghouse's Proposed IPO**, indicating that **no price or share count** has been established yet. This development relates to a significant entity within the nuclear energy industry.\n\n• **Key Consideration**\nThis news provides a sector-level tailwind for nuclear energy stocks, including CCJ as a uranium producer. While not a direct catalyst for CCJ, an IPO from a major nuclear firm like Westinghouse could increase investor interest and capital flows into the broader nuclear value chain.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Westinghouse's Proposed IPO Has No Price or Share Count Set Yet - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQUGdLaFZRejIwYUJURkJpa20zWkhpd3NsS0xEb2t0d1VGUm5ZU3Zpa3Z0U3cyQlFmc1c4MmtMcWZKS2QyU0Y3VWN3aUVMRm13SjZnSVRfZzlIeFBYZXJKMkpXS0cxNzVLdkZTRVd2dmpPLXZYTVRvOVJKa041X0lKaG5nOWNYREpmY3l1REFxbThWemxWTExDVHRPc2txaVN3NHU0WDdCNW81bzFEc200bmtoN0ROWXV6X3c?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Clean Energy - Nuclear",
-      "technical_status": "Fail (ADR 3.5% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Westinghouse's proposed IPO",
-        "discrepancy_note": "Source A (Finviz News) explicitly states 'none', providing no confirmation for Westinghouse's proposed IPO. Source B (Google News) headline [1] confirms 'Westinghouse's Proposed IPO'."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "LITE",
-      "price": 693.24,
-      "gap_pct": 5.4,
-      "pm_volume": 61557,
-      "avg_vol_10d": 4688307,
-      "avg_dollar_vol": 3250121945,
-      "mkt_cap": 53934073356,
-      "rvol": 1.23,
-      "adr_pct": 8.06,
-      "category": "Others",
-      "theme": "Leadership Change",
-      "reasoning": "Lumentum Holdings (LITE) announced its EVP's retirement and subsequent two-year consulting role, indicating a managed leadership transition.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 57,
-      "grade": "C",
-      "finviz_theme": "Semiconductors - Analog",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Lumentum Holdings (NASDAQ: LITE)'s **EVP is retiring** and will enter a **two-year consulting role** as per the **8-K filing on 2026-07-30**.",
-        "impact": "This leadership transition, with the executive staying on as a consultant, suggests a **managed transition** rather than an abrupt departure, likely having **limited immediate impact** on operational momentum."
-      },
-      "analysis_details": "• **What Happened**\nLumentum Holdings (NASDAQ: LITE) filed an **8-K on 2026-07-30** indicating a leadership change. The company's **EVP is set to retire** but will transition into a **two-year consulting role** with LITE. This move was also reported in news headlines on **2026-07-30**.\n\n• **Key Consideration**\nThe transition of a senior executive from an EVP role to a **two-year consulting role** suggests a deliberate and phased handover of responsibilities. This continuity measure could mitigate potential disruptions from the retirement, implying a relatively neutral to minor impact on the company's short-term operations or strategic direction.",
-      "peer_tickers": [
-        "COHR",
-        "AXTI",
-        "GLW"
-      ],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Lumentum Holdings (NASDAQ: LITE) EVP to retire and enter two-year consulting role - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNSDRZQ2J2R2hLQmwyMVJGb19iQmJVb010S2ZmOGc3SW54VnFpZkZSSVFWcjJVbGQ4Z3ZIbEZnTklMODROd3Z2SXktLW04Ui1RX05yN2V4NTVCYy11WjFIUDZzZ1lCdGtubE4xSzFxT0ZFd0ZWUXpndTRqX2QzWUllNGtUeWJHcUMxTUNFWllCRk1pQ1BWZmxpc2g0TTFXSzRqVjZKeTlCUXdLbTVjUjk4?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-07-30",
-        "form": "8-K",
-        "items": [
-          "5.02"
-        ],
-        "category": "Others",
-        "label": "Leadership Change (Director/Officer)",
-        "url": "https://www.sec.gov/Archives/edgar/data/1633978/000162828026051078/lite-20260727.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Analog",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "EVP to enter two-year consulting role",
-        "discrepancy_note": "Finviz News (Source A) provides no information regarding the EVP's retirement or consulting role. Google News (Source B), specifically article [3] from Stock Titan, confirms the EVP will 'retire and enter two-year consulting role'. Since only one of the two primary sources mentions the claim, it is marked as a Discrepancy according to the rule: 'If only ONE source mentions the claim... mark as Discrepancy'."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "SKHY",
-      "price": 149.0,
-      "gap_pct": 5.37,
-      "pm_volume": 1750070,
-      "avg_vol_10d": 46082793,
-      "avg_dollar_vol": 6866336157,
-      "mkt_cap": 673528553655,
-      "rvol": 1.05,
-      "adr_pct": 9.48,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "SK Hynix stock surged **+17.52%** following its earnings report, enabling a trader to turn a significant loss into profit.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
-      "grade": "A",
-      "finviz_theme": "Semiconductors - Memory",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "SK Hynix's stock experienced an **'Earnings Spike'** on **July 30, 2026**, leading to a **+17.52%** increase. This surge allowed a specific whale trader to convert a **$2.26 million loss** into a **$6.44 million profit**.",
-        "impact": "The positive earnings report initially drove significant upward momentum for SKHY, indicating strong market reception to its financial performance despite earlier concerns about 'AI infrastructure' appetite."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nSK Hynix (SKHY) saw its stock spike by a significant **+17.52%** on **July 30, 2026**, directly attributed to an **'Earnings Spike'**. This sharp increase in share price was substantial enough for an on-chain tracked whale trader to pivot from a **$2.26 million loss** to a **$6.44 million profit**.\n\n• **The Growth (Momentum)**\nFollowing the earnings report, the **KOSPI** index, which includes SKHY, **snapped back 15%** as Asia's **AI Chip Rally** returned, suggesting broader positive sentiment for the sector. However, on **July 31, 2026**, SKHY's stock began to slide as a **'Massive Nvidia AI Deal'** reshaped the trade, potentially signaling a new competitive landscape or shift in market focus away from SKHY's specific AI-related offerings.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "SKHY Stock Slides As Massive Nvidia AI Deal Reshapes The Trade - StocksToTrade",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE4wWWdEdjZRa3lKRnBkQUhxWDRCVG52RC1MNTdRNkhvbkJGdTRsc0lUNG5xTjRiWURjSERnNDdIOG50U1RfWWQxZWdiNW9ROEIxOVlXVmt2MkI3ZTdDSktoMmhCWFZqS0NjUHdXNi00V3o5M28?oc=5"
-        },
-        {
-          "title": "SK Hynix Trader Turns $2.26M Loss Into $6.44M Profit on Earnings Spike",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/ac5d8858-887d-3966-896e-9644b862b317/sk-hynix-trader-turns-%242.26m.html"
-        },
-        {
-          "title": "Wild Tech Stock Swings Spur Retail Traders to Cut Margin Loans",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/wild-tech-stock-swings-spur-021841856.html"
-        },
-        {
-          "title": "Even the DRAM Bears Are Committed to the Ride",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/6303599e-7f4d-3e8f-a749-df8d12bf9cfc/even-the-dram-bears-are.html"
-        },
-        {
-          "title": "KOSPI Snaps Back 15% as Asias AI Chip Rally Returns",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/a8579482-8705-322d-8446-2a92432ff7f3/kospi-snaps-back-15%25-as.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Memory",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "SK Hynix stock surged +17.52%",
-        "discrepancy_note": "Neither source provides the specific +17.52% surge for SK Hynix stock. Source A mentions the KOSPI index surging (15%, nearly 18%), and a trader turning a loss into profit on an earnings spike for SK Hynix, but not the specific stock percentage. Source B mentions SKHY stock jumping/surging generally, but without a specific percentage. One headline in Source B even states 'SKHY Stock Slides'."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "ARM",
-      "price": 241.54,
-      "gap_pct": 5.18,
-      "pm_volume": 120246,
-      "avg_vol_10d": 6096212,
-      "avg_dollar_vol": 1472479046,
-      "mkt_cap": 256998552856,
-      "rvol": 2.49,
-      "adr_pct": 7.72,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "Arm's stock gained after forecasting revenue and earnings above expectations, highlighting strong financial performance and an optimistic outlook.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 81,
-      "grade": "A",
-      "finviz_theme": "Semiconductors - Compute",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Arm Holdings saw its stock rise **approximately 4%** after forecasting **revenue and earnings above expectations**. This positive forecast followed an initial **nearly 7% drop** in shares.",
-        "impact": "This indicates a strong rebound in investor confidence due to an improved financial outlook, potentially signaling a sustained uptrend as AI royalties and margins strengthen."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nArm Holdings' stock experienced a significant rebound, rising **approximately 4%** in Thursday's trading session. This surge was directly attributable to the company forecasting both **revenue and earnings above expectations**. The stock had previously seen an initial decline of **nearly 7%**, making the positive forecast a strong reversal catalyst.\n\n• **The Growth (Momentum)**\nThe positive forecast underscores Arm's position as a **key AI infrastructure beneficiary**, according to Citi, despite a softer handset outlook. This outlook, coupled with strengthening **AI royalties and margins**, suggests a compelling growth trajectory and reinforces the momentum in its valuation amidst AI demand.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Arm (ARM) Stock Looks Pricey On Book Value Yet Strong On AI Growth - sg.finance.yahoo.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPeWh5MDR5OE41MFdQQUd5c2JrR0xSbkhNV3h1OFZtaXh0dnptRzFMTnMwQmxjUTNicjNWWFVKbERmQ2NseHRGVXAxVUg5eldjSVNzLTMtRmx5OU8xTzQwT1JBLUVwdVpvUmhQU3lfOFQ2SEJocjZFVDlobjItSTIycg?oc=5"
-        },
-        {
-          "title": "Arm Holdings (ARM) Stock Rebounds As AI Royalties And Margins Strengthen - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxNV1RickVpajhBY3VHOFAySmhvM3prREppaFV1VFlUYms5RkNTczhreEplYjRBTmlXZmdzenNqZHJOYlVfb3pXc1VWb3p4cUdkSHRsTHlWOTE5V1FrQ2VQcGk3WXIybEpCZXBUM2QxaW9ud0p4dVJ0eFBfa252ZFlvSEFYbG50T3hEOEVvdmRhQ0VuQXRDbWYwTDJ5Tkp1YmJKR3lPaEtiYTJySWtjMUEyT01McFZpcjZ6cjJHQ193Z0tIenR5cWZIb0tvWEdXdFlx0gHWAUFVX3lxTE5yMHYwOXo3cmNNWFVkdnEwcmlXZDBNZEJyUjNKdjJOblo2OGNrY29wd2kwODFORHR2WElEM0hlTkV4azY0dHRhTHNGTUs4VUFGQUtqYXRxXzh1anIySHhfLXEybXhYVWhkY0NhdUYxTkhmVVdLR2NyZklYRXd5WXhXVXFxcEl2N0hvUTlYWUotc2FJM212b0NYdWpfZU1xeEdQSDQ4cXlfYXk5b1pJMTZqRlFzZVRiVlBLZDFkZXFFanN1WC1qMS1jdmZqUlZFNUdFMG5oZUE?oc=5"
-        },
-        {
-          "title": "Arm Stock Rises 4% After Revenue and Profit Forecast Beats",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/arm-stock-rises-4-revenue-195844073.html"
-        },
-        {
-          "title": "Arm remains key AI infrastructure beneficiary despite softer handset outlook, Citi says",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/71ed020f-bd82-36ae-9062-e8fca0de100f/arm-remains-key-ai.html"
-        },
-        {
-          "title": "Wall Street Just Sent Mixed Signals on Arm Stock",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/wall-street-just-sent-mixed-192014288.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Compute",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Arm forecasted revenue and earnings above expectations (or reported results that beat estimates).",
-        "discrepancy_note": null
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "SATL",
-      "price": 3.49,
-      "gap_pct": 5.09,
-      "pm_volume": 166378,
-      "avg_vol_10d": 4535486,
-      "avg_dollar_vol": 15828846,
-      "mkt_cap": 517371894,
-      "rvol": 0.75,
-      "adr_pct": 8.68,
-      "category": "Institutional Buying",
-      "theme": "BlackRock 5.2% Beneficial Ownership",
-      "reasoning": "BlackRock, Inc. reported a **5.2% beneficial ownership** stake in Satellogic, signaling strong institutional conviction and potential for increased investor interest.",
-      "hypothesis": "Medium Conviction (RS Hold) — Large fund accumulation; watch for continuation.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Space",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "BlackRock, Inc. disclosed a **5.2% beneficial ownership** in Satellogic (SATL) as of **July 30, 2026**. This filing signals a significant stake from a major institutional asset manager.",
-        "impact": "This disclosure suggests a high-conviction investment from a prominent institution, potentially drawing further institutional and retail interest, and acting as a vote of confidence in Satellogic's long-term prospects."
-      },
-      "analysis_details": "• **The Buyer**\nBlackRock, Inc., a leading institutional asset manager, has reported acquiring a **5.2% beneficial ownership** stake in Satellogic (**SATL**). This disclosure occurred on **2026-07-30**, signifying a notable investment position.\n\n• **Conviction Signal**\nThis significant stake from **BlackRock** acts as a strong signal of institutional conviction in Satellogic's business model and future growth trajectory. It could attract additional institutional capital and increase investor confidence, potentially leading to a re-evaluation of the stock's intrinsic value and driving positive price momentum.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "BlackRock, Inc. (NASDAQ: SATL) reports 5.2% beneficial ownership in Satellogic - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPa21xUUk1Rk1EZUxwb3pmRXhWb2tlb1BtaFJ5R29CbUZiOE12Rm1pZ3dFMXBGYnd1RzlmQVdvUGJ3UzBIcUZIdlNuSVR6Z3ZhUjNQTnRlV3RDeXdqekQyS2hKVGpsRWxZQU5CcC1FV2tOekJ1WkpiNFVKbWVOUVI0YlhRZnQzd3JuSVlvZ0JHRDd4dE14cG1OcmFXTERsZjFyOE5oZ3JuR1ZrSU04QnFmQTljTmxqS2dfdlZqd2t3?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Space",
-      "technical_status": "Fail (Avg $Vol $16M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "5.2% beneficial ownership stake in Satellogic by BlackRock, Inc.",
-        "discrepancy_note": "Source B (Google News - Stock Titan) reports BlackRock's 5.2% beneficial ownership. Source A (Finviz) does not contain this information, thus both sources do not confirm the claim."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "GFS",
-      "price": 49.89,
-      "gap_pct": 5.01,
-      "pm_volume": 90116,
-      "avg_vol_10d": 3950198,
-      "avg_dollar_vol": 197075378,
-      "mkt_cap": 27374682860,
-      "rvol": 0.89,
-      "adr_pct": 5.68,
-      "category": "Government Policy",
-      "theme": "US DOC LOI for Semiconductor R&D",
-      "reasoning": "GLOBALFOUNDRIES secured a **$300 million** Letter of Intent from the US Department of Commerce for **silicon photonics R&D**.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 56,
-      "grade": "A",
-      "finviz_theme": "Semiconductors - Foundries",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "The US Department of Commerce (US DOC) and GLOBALFOUNDRIES (GFS) signed a Letter of Intent (LOI) for **$300 million** dedicated to **silicon photonics R&D**. This funding is part of a broader **$874 million** initiative by the US to boost semiconductor research.",
-        "impact": "This direct government funding significantly bolsters GFS's R&D capabilities in a critical technology, enhancing its long-term competitive positioning and reducing R&D costs."
-      },
-      "analysis_details": "• **The Policy**\nThe US Department of Commerce (US DOC) and GLOBALFOUNDRIES (GFS) have formally signed a Letter of Intent (LOI) to provide **$300 million** in funding. This capital is specifically allocated for advanced **silicon photonics research and development** efforts at GFS.\n\n• **Direct Impact**\nThis **$300 million** LOI for **silicon photonics R&D** is a direct infusion of capital from a larger **$874 million** government initiative aimed at strengthening domestic semiconductor research. The funding directly supports GFS's strategic investments in critical emerging technologies, potentially accelerating product development and reinforcing its position in the semiconductor foundry space.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "GLOBALFOUNDRIES (GFS) Stock Looks Discounted Even As Caution Persists - sg.finance.yahoo.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNVUREa0JzRkR2M0hHakR1dVVSQTVEdFVzYXJ4b0FkYXV2ckRVZmVFNTNKTEhQdGFudWxoTVpWRFlZWmhPdV95OWZtaExJaEVkYk5rblNwNmxXNUVHM2w1NG93cFNtM2tUZmRGUDBic3FPeUQ5OENOU0toUWZCUlhsdndoSHJaV2FENkJBQjkzRkozWjVwRUE?oc=5"
-        },
-        {
-          "title": "GLOBALFOUNDRIES Inc. (NASDAQ: GFS) director receives RSU and share awards - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQYk9xeHAwVmhVcXRzdHBGRzg4VjVBaFBFX0R3Z2lzQlM1OWlmMkEtMDlTbUgyTDBSVkZEOVJaaUpnbS1yX0loOFBfUl9LZG02Q05zbjBuMzZDeDlyMXFJbnZUQzRqdDI4NTFYNE15cDdZQlpHNzcteUFXajFaamJGdk9NX2JFS01wZGNuR3R0bWJzelF2alJRMXpUTnBIeGVkRU9OS2dScld5MFd5ZkgtNlVB?oc=5"
-        },
-        {
-          "title": "GLOBALFOUNDRIES (GFS) Stock Looks Above Fair Value On Cash Flow Yet Below Fair Value On Earnings - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQM0s2bk5sRVdZQ2psWjhHQ1J3NC1LYmtOQ2hwc0pHa0cxNHpfcnlLZnV4elV6VGd4SksxakdIOHJsOHJCVWxFZUpYd24wME5RWTBYR0VPMGpUTHh6MTFic2w3enZ5VVZ0YmxmNDBXajRDUFZNbTMzMXB1b3F6Z0RkS0lGNTdwOFJVZkdVVGNmM1o0dlp2bHJrakd5eUQ1MmpFUVpJUmF0bTBqclRhSk1yR2xxTTJWWk0tNEg2WEU1N2FzOU9kajdhTEh3VEVkN3ZseXkwVDVn0gHbAUFVX3lxTFA1aFdXc203RXRQVHNsSGxna0JRU29vaTFpQ1REWUlKbF9FUVJQeEVwM1kxYlRMVE9fdzRGMzB5REJWSW1NcmJkcjFENk9PdTNDeC14MlJ1MmRwQjdGM0JUcVoxUmRlcmhocURmalRMR1hyOFRWd1BRbVViV0FnTjBIM1ZoV2JHWVRZV3pRdVYwbHlQd1JLdzlYM2lMb0NMcm5MN1RKcHh0TmZaVkRrRUJVNFF6UFllQW5iRWk0TjlBbEE5MUlOY1NlZTJwZDlOOE9UdjNUUFhyZWlCNA?oc=5"
-        },
-        {
-          "title": "US signs letters of intent worth $874 million to boost semiconductor research",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/us-signs-letters-intent-worth-182916924.html"
-        },
-        {
-          "title": "US DOC, GlobalFoundries sign LOI for $300m silicon photonics R&D",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/4127352d-7e19-39ea-9cc6-6bf89a2f0080/us-doc%2C-globalfoundries-sign.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Semiconductors - Foundries",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
         "confidence_score": 70,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "GLOBALFOUNDRIES secured a $300 million Letter of Intent from the US Department of Commerce for silicon photonics R&D.",
-        "discrepancy_note": "Source A (Finviz) explicitly confirms 'US DOC, GlobalFoundries sign LOI for $300m silicon photonics R&D'. Source B (Google News) does not contain any mention or confirmation of a $300 million Letter of Intent for silicon photonics R&D with GLOBALFOUNDRIES. One article in Source B mentions 'Trump Admin’s $2B Quantum Funding Push' involving GFS, but this is a different amount and purpose, and does not relate to the primary claim."
+        "primary_claim": "No specific fundamental catalyst information available despite 8-K filing; likely technical movement or institutional flow.",
+        "discrepancy_note": "The primary claim states 'No specific fundamental catalyst information available despite 8-K filing.' Source B [1] ('Why Is Atkore Stock Soaring Monday?') discusses ATKR's stock movement but does not identify a specific fundamental catalyst for the *soaring* movement discussed. It also does not mention an 8-K filing. Other articles in Source B discuss past earnings (Q3, Q2) or valuation, which are not current catalysts for *today's* (Monday's) movement. Neither source mentions an 8-K filing. Therefore, the claim about an 8-K filing, which is a specific factual detail, cannot be confirmed or denied, and the claim about the absence of specific fundamental catalysts for the stock's recent movement is neither directly confirmed nor contradicted by a specific catalyst in the provided snippets for the immediate soaring event."
       },
-      "gates_passed": 5,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": true,
+        "gate_dollar_vol": false,
         "gate_mkt_cap": true,
-        "gate_adr": true
+        "gate_adr": false
       },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
     },
     {
-      "ticker": "VRT",
-      "price": 227.5,
-      "gap_pct": 5.01,
-      "pm_volume": 128024,
-      "avg_vol_10d": 7171015,
-      "avg_dollar_vol": 1631405912,
-      "mkt_cap": 87584813156,
-      "rvol": 2.54,
-      "adr_pct": 5.83,
-      "category": "Earnings",
-      "theme": "Earnings Report",
-      "reasoning": "Vertiv (VRT) stock rebounded after its earnings report, with the market focusing on AI margins impacting valuation.",
+      "ticker": "SUPN",
+      "price": 44.63,
+      "gap_pct": 14.27,
+      "pm_volume": 56311,
+      "avg_vol_10d": 511014,
+      "avg_dollar_vol": 22806555,
+      "mkt_cap": 2590312875,
+      "rvol": 1.2,
+      "adr_pct": 3.47,
+      "category": "New Contract/Partnership",
+      "theme": "All-Stock Merger of Equals",
+      "reasoning": "Supernus Pharmaceuticals agreed to an **all-stock merger of equals** with **Indivior**, a transformative deal for both companies.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 81,
-      "grade": "B",
-      "finviz_theme": "Cloud Data Centers",
+      "conviction": 77,
+      "grade": "C",
+      "finviz_theme": "Pharma - Large Cap",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Vertiv (VRT) filed an **8-K on 2026-07-29** for **Earnings/Financial Results**, as detailed in Item **2.02**, **7.01**, and **9.01** of the filing. The market reacted with a **rebound** in **Vertiv (VRT) Stock Price** on **2026-07-31**.",
-        "impact": "The market's focus on **AI Margins Tighten Valuation Focus** suggests that while the stock rebounded, the profitability of AI-related segments is a key area of scrutiny, potentially influencing future price momentum."
+        "catalyst": "Supernus Pharmaceuticals and **Indivior** have agreed to an **all-stock merger of equals**, indicating a significant strategic combination between the two companies.",
+        "impact": "This merger creates a new combined entity, potentially altering competitive landscapes, financial structures, and future growth trajectories for both former companies."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nWhile specific figures are not provided, Vertiv's (VRT) stock price **rebounded** on **2026-07-31**, following its **earnings/financial results** 8-K filing on **2026-07-29**. This rebound indicates a generally positive, or at least better-than-expected, market reception to the results.\n\n• **The Growth (Momentum)**\nThe market's reaction, characterized by a **stock price rebound**, points to positive momentum for VRT. However, the accompanying commentary regarding **AI Margins Tighten Valuation Focus** suggests that while the current results may be favorable, future growth and profitability in key areas like AI are under close watch by investors and analysts.",
+      "analysis_details": "• **Impact**\nSupernus Pharmaceuticals has agreed to an **all-stock merger of equals** with **Indivior**, signifying a major strategic combination of the two pharmaceutical companies. This deal will create a larger combined entity, merging their respective portfolios and market presences.\n\n• **Strategic Value**\nThis merger of equals is expected to drive long-term value by leveraging complementary assets, achieving synergies, and expanding market reach in the pharmaceutical sector. The **all-stock** nature suggests a focus on combining strengths rather than a cash acquisition.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Vertiv (VRT) Stock Price Rebounds As AI Margins Tighten Valuation Focus - simplywall.st",
+          "title": "Supernus Pharmaceuticals Earnings: What To Look For From SUPN - StockStory",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQeEpzNFpxUVNzNE9BdUJGalZNdnNlUXZEWnkyNlVoNWYwczljdU5DLVhLZkpkSmdTenBTckRYaW4yVkUyRFVzaUxmRThwSzFIVU1PMnQzRllqUW50OHZCRmUtOTlEVVNnb1VkNGtsd3loM3RpTklNQ0JPWEF3ODV3NTFDaWhQdDNJdFdtM0xic1VscHR0OXNjZHlxQmNpVjhmbXZwd2luLTJUWi1aY1FuNy12NDlrU1NaVXJybHJrWUNsUXJScnBRTmRmR0JlUlVQWWJTVHZR0gHbAUFVX3lxTE4tUXFORFRVajZPcDZ5R3FFUlk0WTBNb21LVlcwNUI5cnI3N2VQa3NWcUxRRVh1NkhWSEtBZXFZb0EzdUpFRm1hWjJIaFAwbFlkNFozdnk0SWR4RnVEaG9RYV9XcWo0cFREZjl6V2w3QjlOazIwWktoU0J1dV9ndW9EQkhQSF8yTmF3YW1XelhVdFF1OGJ4NmZZS09rMGxOWjZRMnRPdXFEOUdIZFhLbDJfaU5Eck1leUtkV3QtSGRnZVpNUVcxYzZSSTBNOXh1WGlSUm5OdHctYUNwZw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQd0drbzFUT053UFR1WDdzSXFzMjU2OWdZVkxWaG5WcHZ6cHRnYnA4dFVEWGxST2RhbEl5cERoc2xiTEtEUnVIZkNZSEE4Rm9udU1OVnpta0JiV3k5RDE1cDJ0Q2k1WXlsQWk3UFhIYmNBV0ZVdkdJTmRIWmdvWWlEaWFwVEtacDllMHRlUFJCMnRjVnpENWRhUDJ6TndCOURRTTdkaXFJanVrU0c3U0V4cmkxNEMyYUVsNTFoNlhn?oc=5"
+        },
+        {
+          "title": "Understanding Momentum Shifts in (SUPN) - Stock Traders Daily",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPS2tOV01MdENWVEl0d0E5T0phODBRMXBSUUE3VVBqN1hZZXJFaF9Tdmw2QVNiNjAtQTJPU1Fac180SWdCODZPWEVzMkFPcmlBQWhvRDBpNC1Tci0yRmUta1lRR0s3UWFiN3VPanlIMGJBWDRZWm4zQjFoU0dwcmlzWFV5N1lQblJfQWd0Tk5aWVRXUGFHakd2THFJOURGQWFpYjVYd0FhRC1jNnNfcEhDZk9uaXNkdDg?oc=5"
+        },
+        {
+          "title": "Supernus and Indivior Agree to All-Stock Merger of Equals - stocktitan.net",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPR0oxY25pcTlqT1gyZW45SVhiMVh3LVFjVzVvNDd6RzlsOHJWTlBaUWYzRU9aUnBWSU9EWFZ1S0ZrTWpvOE1UU2w5Rzl5YVItWWZwV3B1TGZzVFRCVWVJQ3M4Xy1QNnY2ajh4TFRCbGo2RXVuZEhsZm8tZlBVa212VlY4bzlBYzhBNE92QmJnaS00dkw4d2p3aV9kQXVvcmJmMzFfQk9n?oc=5"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-07-29",
+        "filing_date": "2026-08-03",
+        "form": "8-K",
+        "items": [
+          "8.01",
+          "9.01"
+        ],
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/1356576/000110465926089524/tm2622009d4_8k.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Pharma - Large Cap",
+      "technical_status": "Fail (Avg $Vol $23M < $100M, ADR 3.5% < 4%)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Supernus Pharmaceuticals agreed to an all-stock merger of equals with Indivior",
+        "discrepancy_note": "While Source B [1] confirms the merger between Supernus and Indivior as an 'all-stock merger of equals', Finviz (Source A) provides no information to corroborate this specific claim."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "CNH",
+      "price": 10.25,
+      "gap_pct": 7.66,
+      "pm_volume": 226369,
+      "avg_vol_10d": 13746127,
+      "avg_dollar_vol": 140897802,
+      "mkt_cap": 12709492003,
+      "rvol": 1.01,
+      "adr_pct": 3.33,
+      "category": "Earnings",
+      "theme": "Negative Q2 Earnings",
+      "reasoning": "CNH reported a significant **35% decline** in **Second-Quarter Net Income**, suggesting a negative earnings surprise for investors.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "CNH filed an **8-K** on **2026-08-03** for **Earnings/Financial Results**, revealing **Second-Quarter Net Income fell 35%**. Despite this, the company **returned $0.2B** to shareholders.",
+        "impact": "The substantial drop in net income indicates a potential deceleration in core business performance, which could weigh on future price momentum despite shareholder returns."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nCNH's **Second-Quarter Net Income fell 35%**, indicating a significant miss against expectations or a material operational headwind. The company did announce **$0.2B** in returns, which could partially offset the negative sentiment from the income decline.\n\n• **The Growth (Momentum)**\nThe **35% decrease** in net income signals a clear slowdown or contraction in profitability, challenging any positive growth momentum for the company. Without further details on revenue or other operational metrics, this decline suggests a challenging period for the company's core business performance.",
+      "peer_tickers": [
+        "DE",
+        "AGCO",
+        "CNHI"
+      ],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "CNH Returns $0.2B as Second-Quarter Net Income Falls 35% - stocktitan.net",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPLW9ScFJ1YXFmdmdKVUpVUnZtVVZaR1Q1TzEtTHlBTmJGUDlOUWE3MkpnOVZFbWg3bUVoT3VsMmNOeVktd1k1SzEyZkc0YXNCVGc0MnRCbG1YZENmLVV2SkszdlpQWmh4M3kxM1Q2U2w1RVF0b0x2ajlIOHZEYkpueE14Wk1VaFlkSnNjREk0WXJBb2RyTFJyTlJKWks5LXR3N0E?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-08-03",
         "form": "8-K",
         "items": [
           "2.02",
@@ -1311,43 +195,175 @@
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1674101/000162828026050323/vrt-20260729.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1567094/000156709426000015/cnhi-20260803.htm"
       },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Cloud Data Centers",
-      "technical_status": "Pass",
+      "industry": "Others",
+      "technical_status": "Fail (ADR 3.3% < 4%)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 100,
+        "confidence_score": 80,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Vertiv (VRT) stock rebounded after its earnings report.",
-        "discrepancy_note": "Source B[1] states 'Stock Price Rebounds', while Source B[3] states 'Stock Slides'."
+        "primary_claim": "35% decline in Second-Quarter Net Income",
+        "discrepancy_note": "Source A (Finviz) has no information. Source B (Google News) headline [1] confirms a '35% decline' in 'Second-Quarter Net Income'. However, other headlines in Source B ([2] 'Beats Expectations By $0.03 EPS', [4] 'stock rallying today') suggest a positive market reaction or performance, which conflicts with the '35% decline' being solely indicative of a 'negative earnings surprise' as stated in the catalyst summary."
       },
-      "gates_passed": 5,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "TE",
+      "price": 4.17,
+      "gap_pct": 5.76,
+      "pm_volume": 1279815,
+      "avg_vol_10d": 45292428,
+      "avg_dollar_vol": 188869425,
+      "mkt_cap": 1164561602,
+      "rvol": 0.5,
+      "adr_pct": 11.0,
+      "category": "New Contract/Partnership",
+      "theme": "New Contract",
+      "reasoning": "Clearway secured a **641MW** deal requiring **U.S.-Made Cells**, benefiting related manufacturers and driving renewable energy momentum.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 75,
+      "grade": "B",
+      "finviz_theme": "Clean Energy - Solar",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "**Clearway** announced a **641MW** deal, which explicitly calls for the use of **U.S.-Made Cells** in future builds.",
+        "impact": "This contract signals growing demand for renewable energy projects, particularly those prioritizing domestic manufacturing, potentially creating tailwinds for related suppliers and accelerating momentum."
+      },
+      "analysis_details": "• **Impact**\n**Clearway** finalized a **641MW** deal, a substantial project requiring **U.S.-Made Cells** for its future construction. This specification highlights a clear trend towards domestic sourcing within large-scale renewable energy developments.\n\n• **Strategic Value**\nThe inclusion of **U.S.-Made Cells** in the **641MW** deal suggests a strategic alignment with government incentives or a push for supply chain localization. This could provide a significant advantage for companies producing solar cells or components in the U.S., driving increased order flow and market share within the clean energy sector.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Clearway’s 641MW Deal Calls for U.S.-Made Cells in Future Builds - stocktitan.net",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQVUNNd1luc1RxNmVjX3U1Z3E1WkFWUUpWOXNEWXA4Nkg3V2xJN3lDc2RVTFFwd2RKaWlPbDJLUFRyR0FxNVBSd2VjVEpycExpOS1SeklvbDMxRTA5UnNURm9aU19wWVYya19TOFVwTmV3OG95eGFUV3lzeXJtaExTc0h2dU5jYS1rbS1oMWtpNGhqTXdvVW5udmJB?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Clean Energy - Solar",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 60,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "641MW deal",
+        "discrepancy_note": "Source A (Finviz) has no mention of the 641MW deal. Source B (Google News) headline explicitly mentions 'Clearway’s 641MW Deal'."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "AMC",
+      "price": 2.82,
+      "gap_pct": 5.73,
+      "pm_volume": 4647288,
+      "avg_vol_10d": 62829672,
+      "avg_dollar_vol": 177179675,
+      "mkt_cap": 2517144953,
+      "rvol": 0.65,
+      "adr_pct": 9.13,
+      "category": "Thematic Narratives",
+      "theme": "Box Office Rebound & Record Revenue",
+      "reasoning": "AMC stock surged after reporting **record weekend revenue performance** driven by **Spider-Man's $927M global opening**, signaling a strong box office rebound.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 55,
+      "grade": "A",
+      "finviz_theme": "Consumer - Streaming",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "AMC stock is rising following a **record weekend revenue performance** and the success of **Spider-Man's $927M global opening**. The company and other premium cinema shares are reportedly **riding the box office rebound**.",
+        "impact": "This strong operational update from a blockbuster film's success indicates significant revenue upside for AMC, potentially leading to improved financial outlooks and a re-evaluation of the cinema sector."
+      },
+      "analysis_details": "• **The Narrative**\nAMC stock has seen a significant rise after reporting a **record weekend revenue performance**. This surge is directly attributed to the blockbuster success of \"Spider-Man,\" which achieved a remarkable **$927M global opening**. This performance highlights a broader trend of **premium cinema shares riding the box office rebound**.\n\n• **Explosiveness**\nThe **record weekend revenue performance** and the substantial **$927M global opening** for \"Spider-Man\" demonstrate strong consumer demand for theatrical releases. This positive operational data provides substantial momentum for AMC, suggesting a potential for upward revisions in future revenue guidance and reinforcing the narrative of a robust recovery in the cinema industry. Continued success from future blockbusters could sustain this upward trajectory.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "AMC stock rises after record weekend revenue performance By Investing.com - Investing.com Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPNU9nX1doSnZaR0RZS0d5TkEwWFhOdW5qekxXMV8yanFDMDlyUWRtUTdQcjI0NDlsZGliU3EyZUVJb1RxaU1aRGdNZnZWT2FmMzluT0d0aTdDbUQ4WlVyVDFBRWxDV2F3ZHc1b0JVT1pXVHhqNlFNM2RYQXBtaUUydjJnMU91TzhiYW4wMWp3V2RPYjgyX3ZIczNOVGF5Qmh0VGhuTm1fc250YTV3SGNTTGFPWG5LcXE4?oc=5"
+        },
+        {
+          "title": "Spider-Man's Media-Reported $927M Global Opening Powers AMC Weekend - stocktitan.net",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQUXVLbTFuTV9QajBUTjFTSVZQUGswNGNXbFJzWTRudHJhaUpHdzY1RUo1Q21LNlVqMVZxeGwxcm1QSWgzRkdFS2JVbno0UzlmSGVNQ0JtRFZIWU9wR002a01rLWhHY2xLRDM4d2kwa3FndTFSM0ZFcEVRV0xzdzZoVFpQbXlWTUJBeU85WUFlQUN1bENWbW9fOS1PTmpZbzJ6MC1GM0lhem9xREMwZUxRaVpLeDVxaC02RVBtOVhB?oc=5"
+        },
+        {
+          "title": "AMC Stock And Other Premium Cinema Shares Riding The Box Office Rebound - simplywall.st",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQRzBZakR6QXhMM3N0c0ZkZFVnV0tuVDBYN2lSU2VnSV94UFh4bTQ1WmphWnJUbUF3UjA1NjhMeGpjWm1sbVFWVDhYRExFVG1xakZ1R3BZVGFJVFpfckowZ3RvR19ONFc3NmZFZ2pWVi1XY0VNekpaM2s2NmdaenVGU2pidE9zTjUxVUoxZnprVDlYTFQ0V0ZWSjhDWG16dGU3VjdWR0Vwdm4zNzRTeS0zeXRFdnpDOWlQYzRqQ2N0WE90My1iMXcyMjRJLUhYVFHSAc8BQVVfeXFMUEcwWWpEekF4TDNzdHNGZGRVZ1dLblQwWDdpUlNlZ0lfeFBYeG00NVpqYVpyVG1Bd1IwNTY4THhqY1ptbG1RVlQ4WERMRVRtcWpGdUdwWVRhSVRaX3JKMGd0b0dfTjRXNzZmRWdqVlYtV2NFTXpKWjNrNjZnWnp1RlNqYnRPc041MVVKMWZ6a1Q5WExUNFdGVko4Q1htenRlN1Y3VkdFcHZuMzc0U3ktM3l0RXZ6QzlpUGM0akNjdFhPdDMtYjF3MjI0SS1IWFRR?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Consumer - Streaming",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Spider-Man's $927M global opening",
+        "discrepancy_note": "Source A (Finviz) contains no information. Source B (Google News) only explicitly confirms the '$927M global opening' in one article (stocktitan.net). Other articles in Google News mention Spider-Man's impact or record revenue but do not specify the $927M figure for its global opening."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
         "gate_dollar_vol": true,
         "gate_mkt_cap": true,
         "gate_adr": true
       },
-      "meets_all_gates": true,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
+      "meets_all_gates": false,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 16,
-    "large_gaps": 2,
-    "total_headlines": 43,
+    "small_gaps": 4,
+    "large_gaps": 1,
+    "total_headlines": 8,
     "monthly_cost_usd": 0.01
   }
 }
