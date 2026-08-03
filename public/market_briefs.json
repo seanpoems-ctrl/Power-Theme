@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-03 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Equities Rally, Commodity Stress",
+    "spy_price": 747.03,
+    "spy_change_pct": 0.72,
+    "vix": 15.95,
+    "hy_oas": 2.84,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 61.0,
+    "mmth": 68.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Announced a groundbreaking enterprise AI integration, significantly expanding their cloud AI services market share."
+        },
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc",
+          "reason": "Reported better-than-expected Q3 delivery guidance and announced new production efficiencies surpassing analyst estimates."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Continues to face headwinds from declining crude oil prices, despite its diversified operations and prior quarter's strong earnings."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-07-31 17:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "GME",
           "company": "GameStop Corp.",
           "reason": "GameStop continues to attract retail investor attention, experiencing renewed social media-driven momentum and short-squeeze speculation, without any fresh fundamental news catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-13 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Uncertain Divergence / Heightened Volatility",
-    "spy_price": 754.95,
-    "spy_change_pct": 0.43,
-    "vix": 16.29,
-    "hy_oas": 2.7,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 64.3,
-    "mmth": 68.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Reports breakthrough in next-gen AI chip manufacturing, securing new datacenter contracts with hyperscalers, driving strong pre-market momentum."
-        },
-        {
-          "ticker": "CVX",
-          "company": "Chevron Corporation",
-          "reason": "Benefits from surging crude oil prices (+3.50%) amidst renewed global supply concerns, leading to an analyst price target upgrade."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GME",
-          "company": "GameStop Corp.",
-          "reason": "Retail traders attempting to spark another short squeeze; no fresh fundamental catalyst or company-specific news to justify today's move."
         }
       ]
     }
