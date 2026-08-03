@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-03 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On Rally / Growth Optimism",
+    "spy_price": 757.67,
+    "spy_change_pct": 1.42,
+    "vix": 15.86,
+    "hy_oas": 2.84,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 61.6,
+    "mmth": 70.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AMC",
+          "company": "AMC Entertainment Holdings, Inc.",
+          "reason": "Fresh news of a box office rebound and record revenue projections provided a strong catalyst for today's high-conviction gapper."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Renewed institutional flow into high-growth technology names, specifically Microsoft, fueled by broad market optimism and its consistent cloud services growth, acted as a fresh catalyst today."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Trading purely on technical momentum and ongoing retail interest, lacking a fresh fundamental catalyst beyond recycled narrative about production targets."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-03 09:45 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "GME",
           "company": "GameStop Corp.",
           "reason": "Experienced speculative short-term volatility following broader market weakness, driven by retail flow rather than specific corporate news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-13 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Volatility Surge",
-    "spy_price": 749.17,
-    "spy_change_pct": -0.77,
-    "vix": 17.16,
-    "hy_oas": 2.69,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 62.1,
-    "mmth": 68.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Rallied strongly today following the significant surge in crude oil prices, coupled with an analyst upgrade citing robust free cash flow projections and a positive outlook for energy demand."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Surged on news of a breakthrough FDA fast-track designation for its promising Alzheimer's treatment candidate, significantly de-risking its pipeline and boosting future revenue expectations."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continued to drift lower as investors took profits in high-growth technology names amid broader market volatility and a rotation towards perceived safer assets, despite no specific negative company news today."
         }
       ]
     }
