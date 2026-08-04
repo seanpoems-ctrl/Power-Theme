@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-04 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Strong Equities, Divergent Global Flows",
+    "spy_price": 771.33,
+    "spy_change_pct": 1.8,
+    "vix": 16.5,
+    "hy_oas": 2.78,
+    "yield_curve": 0.45,
+    "credit_status": "Complacent",
+    "s5fi": 69.2,
+    "mmth": 71.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MRVL",
+          "company": "Marvell Technology, Inc.",
+          "reason": "Marvell's latest AI product development and aggressive price target hikes signal strong conviction in its growth trajectory within the booming AI sector."
+        },
+        {
+          "ticker": "PLTR",
+          "company": "Palantir Technologies Inc.",
+          "reason": "Palantir's robust earnings beat coupled with an upward revision in guidance underscores its growing enterprise demand and operational efficiency."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMC",
+          "company": "AMC Entertainment Holdings, Inc.",
+          "reason": "AMC continues to be influenced by retail flow and sentiment, exhibiting price action driven more by technicals and social media chatter than new fundamental catalysts."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-04 09:06 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "NVDA",
           "company": "Nvidia Corporation",
           "reason": "Nvidia continues to see strong technical momentum and consistent institutional flow, reflecting sustained AI-driven demand without a fresh catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-14 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Growth-Led Risk-On",
-    "spy_price": 751.83,
-    "spy_change_pct": 0.36,
-    "vix": 16.5,
-    "hy_oas": 2.69,
-    "yield_curve": 0.36,
-    "credit_status": "Complacent",
-    "s5fi": 62.4,
-    "mmth": 67.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "TSEM",
-          "company": "Tower Semiconductor Ltd.",
-          "reason": "Company secured a significant Japan Chip Expansion Grant, signaling strong governmental support and future growth in semiconductor manufacturing."
-        },
-        {
-          "ticker": "AXTI",
-          "company": "AXT, Inc.",
-          "reason": "Aggressive Indium Phosphide expansion plans indicate rising demand and strategic positioning in advanced compound semiconductors."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continues to benefit from underlying secular trends in artificial intelligence and data center demand, with no specific fresh catalyst today."
         }
       ]
     }
