@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-04 09:06 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Broad Risk-On / Growth Resurgence",
+    "spy_price": 757.67,
+    "spy_change_pct": 1.42,
+    "vix": 15.59,
+    "hy_oas": 2.84,
+    "yield_curve": 0.45,
+    "credit_status": "Complacent",
+    "s5fi": 61.6,
+    "mmth": 70.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Reportedly poised to announce a groundbreaking quantum computing breakthrough with a major government contract, signaling a significant leap in its cloud and AI capabilities."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Rumors circulating of Amazon Web Services securing a multi-billion dollar expansion deal with a major healthcare provider, reinforcing its cloud dominance."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Continues to experience elevated volatility as retail interest and short covering interact with ongoing production updates and competitive news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-04 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continues to benefit from underlying secular trends in artificial intelligence and data center demand, with no specific fresh catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-14 08:19 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Inflationary Headwinds",
-    "spy_price": 749.17,
-    "spy_change_pct": -0.77,
-    "vix": 17.5,
-    "hy_oas": 2.69,
-    "yield_curve": 0.36,
-    "credit_status": "Complacent",
-    "s5fi": 62.1,
-    "mmth": 68.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon's AWS unit announces a significant multi-billion dollar data center expansion in Europe, signaling strong long-term growth prospects for its cloud computing division."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase reported robust Q2 earnings surpassing analyst expectations, driven by strong fixed income trading and investment banking performance."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA shares face continued pressure from general technology sector weakness and profit-taking after recent gains, lacking a fresh catalyst for a rebound."
         }
       ]
     }
