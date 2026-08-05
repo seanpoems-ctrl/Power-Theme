@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-05 16:45 ET",
+  "generated_at": "2026-08-05 17:53 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -12,19 +12,19 @@
       "close": 769.79,
       "prev_open": 760.63,
       "prev_close": 771.33,
-      "volume": 43789419,
+      "volume": 44246082,
       "change_pct": -0.2
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 717.3,
-      "open": 726.25,
+      "open": 726.22,
       "high": 728.54,
       "low": 716.92,
       "close": 717.3,
       "prev_open": 708.16,
       "prev_close": 723.85,
-      "volume": 30756730,
+      "volume": 32662387,
       "change_pct": -0.9
     },
     "^VIX": {
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 74.95,
+      "price": 75.08,
       "open": 75.17,
       "high": 76.7,
       "low": 74.24,
-      "close": 74.95,
+      "close": 75.08,
       "prev_open": 80.1,
       "prev_close": 75.77,
-      "volume": 233754,
-      "change_pct": -1.08
+      "volume": 234779,
+      "change_pct": -0.91
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -78,7 +78,7 @@
   },
   "fred": {
     "hy_oas": 2.73,
-    "yield_curve": 0.43,
+    "yield_curve": 0.45,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Post-Market Brief: August 05, 2026",
-    "mood_emoji": "⚖️",
-    "mood": "Equities Mixed, Tech Weakens",
-    "narrative": "The market closed with mixed signals today, as the S&P 500 saw a slight dip while the Nasdaq 100 experienced more notable weakness. Despite some equity selling, the VIX continued its decline, suggesting a lack of broad systemic fear among investors.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 769.79 | -0.20% | ➡️ |\n| Nasdaq 100 ETF | 717.30 | -0.90% | 📉 |\n| VIX | 15.81 | -4.18% | 📉 |\n| Crude Oil | 74.95 | -1.08% | 📉 |\n| Nikkei 225 | 63957.53 | +0.32% | ➡️ |\n| DAX | 26126.30 | -0.29% | ➡️ |",
-    "macro_section": "High-yield credit spreads, as measured by BAMLH0A0HYM2, remain at a 'Complacent' 2.73%, indicating a lack of stress in corporate credit markets. Concurrently, the 10Y-2Y Yield Curve (T10Y2Y) stands at a 'Normal / Steepening' +0.430 basis points, reinforcing an environment where institutional risk appetite remains largely intact, unhindered by credit or liquidity concerns.",
-    "analysis_para1": "Global equity markets presented a varied picture today, with the Nikkei 225 posting a modest gain of +0.32% while the DAX declined marginally by -0.29%. Concurrently, Crude Oil prices retreated by -1.08%, settling at $74.95. Despite these mixed international movements and a drop in commodity prices, US high-yield credit spreads held firm at a 'Complacent' 2.73%. This indicates that global dynamics, while varied, are not transmitting significant stress to US credit markets, allowing institutional investors to maintain their existing risk exposure without immediate concern.",
-    "analysis_para2": "The primary driver of today's market flow appears to be a targeted sectoral rebalancing and profit-taking in high-growth technology names, rather than a broad risk-off sentiment. Despite the Nasdaq 100 ETF seeing a notable 0.90% decline, the VIX simultaneously fell by 4.18%, indicating a lack of systemic fear. This suggests investors are rotating out of richly valued tech stocks after recent runs, possibly reallocating capital elsewhere, without signaling broader market distress or a fundamental shift in macro outlook.",
-    "analysis_para3": "Traders should closely monitor the S&P 500 ETF for a decisive break above 772 as a potential long trigger, signaling renewed bullish momentum and broad market strength. Conversely, a sustained move below 765 could indicate further weakness and trigger short entries, targeting subsequent support around 760. Given the falling VIX, immediate broad risk-off thresholds are not being triggered, but a daily close below 765 on the S&P 500 ETF would be a clear signal to reduce long exposure and tighten stop-losses across the board. The priority today is to observe how price reacts to these immediate levels in post-market trading and prepare for potential follow-through.",
-    "technical_signal": "No reversal pattern confirmed yet. The equity market technically remains in an uptrend, with a healthy percentage of S&P 500 stocks above their 50-day and 200-day moving averages (68.0% and 71.2% respectively). Traders should watch for a lower low on the S&P 500 ETF below 765 as a potential initial crack in market structure, while sustained strength above 772 would reaffirm bullish conviction.",
+    "mood_emoji": "🤔",
+    "mood": "Mixed US / Underlying Caution",
+    "narrative": "S&P 500 and Nasdaq 100 experienced modest declines today, while global equity markets presented a mixed picture. Despite the US equity weakness, stable credit spreads and falling volatility suggest institutional investors are not in a state of panic.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 769.79 | -0.20% | ➡️ |\n| Nasdaq 100 ETF | 717.30 | -0.90% | 📉 |\n| VIX | 15.81 | -4.18% | 📉 |\n| Crude Oil | 75.08 | -0.91% | 📉 |\n| Nikkei 225 | 63957.53 | +0.32% | ➡️ |\n| DAX | 26126.30 | -0.29% | ➡️ |",
+    "macro_section": "High Yield Credit Spreads (BAMLH0A0HYM2) registered a complacent 2.73%, indicating comfortable credit conditions. Concurrently, the 10Y-2Y Yield Curve (T10Y2Y) stands at a normal and steepening +0.450, suggesting a healthy economic outlook. These macro indicators collectively imply that institutional risk appetite remains resilient, unperturbed by today's minor equity market fluctuations.",
+    "analysis_para1": "The global tape offered a mixed signal, with the Nikkei 225 posting a modest gain of +0.32% while the DAX dipped slightly by -0.29%. Crude Oil also saw a decline of -0.91%, reflecting some demand concerns. However, this global mosaic, combined with US High Yield Credit Spreads holding at a complacent 2.73%, suggests that overall US risk appetite is not broadly contracting. Rather, any caution appears to be localized, with no systemic flight to safety indicated by the stability in credit markets.",
+    "analysis_para2": "Today's primary market flow appears driven by earnings-related sector re-allocation and positioning adjustments. A slew of corporate earnings reports, some beating expectations, others facing scrutiny, led to selective capital shifts. This mechanical catalyst explains the Nasdaq 100 ETF's larger -0.90% decline compared to the S&P 500 ETF's more modest -0.20% dip, as investors rotated out of certain growth-oriented or previously strong sectors to capture profits or move into newly affirmed opportunities.",
+    "analysis_para3": "Traders should monitor the S&P 500 ETF (SPY equivalent) for immediate support around the 765-768 price levels. A bounce from this zone could signal an opportunity for long entries, particularly in stocks demonstrating strong post-earnings momentum. Conversely, a sustained break and close below 765 would serve as a risk-off threshold, indicating potential for deeper correction and warranting defensive positioning. Today, traders should prioritize identifying sector leaders with confirmed earnings beats and managing risk tightly around these key technical levels.",
+    "technical_signal": "No reversal pattern confirmed yet. S&P 500 stocks above SMA50 and S&P stocks above SMA200 remain robust at 68.0% and 71.2% respectively, signaling underlying technical strength. Traders should watch for a sustained close below the 765 level on the S&P 500 ETF as a potential trigger for increased downside momentum.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "ANET",
-          "company": "Arista Networks, Inc.",
-          "reason": "The company posted a significant earnings beat and raised its full-year guidance, signaling strong operational momentum in data center and cloud networking."
+          "company": "Arista Networks",
+          "reason": "Strong Q2 earnings beat and raised full-year guidance fueled robust demand for cloud networking solutions."
         },
         {
           "ticker": "SHOP",
           "company": "Shopify Inc.",
-          "reason": "Shopify reported stronger-than-expected earnings, indicating robust e-commerce platform growth and improved profitability metrics."
+          "reason": "Reported better-than-expected earnings, demonstrating continued strength in its e-commerce platform and merchant growth."
         }
       ],
       "c_grade": [
         {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "The stock experienced selling pressure as part of broader technology sector weakness, lacking a fresh specific catalyst today."
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Trading largely on broader market sentiment and technical levels today, lacking any specific fundamental news catalyst."
         }
       ]
     }

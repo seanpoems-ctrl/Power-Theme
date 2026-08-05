@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-05 17:53 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed US / Underlying Caution",
+    "spy_price": 769.79,
+    "spy_change_pct": -0.2,
+    "vix": 15.81,
+    "hy_oas": 2.73,
+    "yield_curve": 0.45,
+    "credit_status": "Complacent",
+    "s5fi": 68.0,
+    "mmth": 71.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "ANET",
+          "company": "Arista Networks",
+          "reason": "Strong Q2 earnings beat and raised full-year guidance fueled robust demand for cloud networking solutions."
+        },
+        {
+          "ticker": "SHOP",
+          "company": "Shopify Inc.",
+          "reason": "Reported better-than-expected earnings, demonstrating continued strength in its e-commerce platform and merchant growth."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Trading largely on broader market sentiment and technical levels today, lacking any specific fundamental news catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-05 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA Corporation remains a focal point for traders based on yesterday's positioning squeeze, but without fresh catalysts today, its price action will likely be purely technical and sensitive to broader tech sector outflows."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-15 17:37 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Measured Gains, Stable Risk",
-    "spy_price": 754.81,
-    "spy_change_pct": 0.4,
-    "vix": 15.67,
-    "hy_oas": 2.72,
-    "yield_curve": 0.42,
-    "credit_status": "Complacent",
-    "s5fi": 61.0,
-    "mmth": 67.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AEHR",
-          "company": "Aemulus Corporation",
-          "reason": "Strong earnings beat and raise guidance signal robust demand in its semiconductor test equipment segment, confirming positive sector tailwinds."
-        },
-        {
-          "ticker": "MRK",
-          "company": "Merck & Co., Inc.",
-          "reason": "Positive clinical trial data for a key oncology drug spurred investor interest, reinforcing its pipeline strength and revenue growth potential."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GME",
-          "company": "GameStop Corp.",
-          "reason": "Continued retail investor interest and social media chatter persist, driving volatile price action without new fundamental catalysts."
         }
       ]
     }
