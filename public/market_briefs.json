@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-05 08:59 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-On Surge / Broad Momentum",
+    "spy_price": 771.33,
+    "spy_change_pct": 1.8,
+    "vix": 16.84,
+    "hy_oas": 2.78,
+    "yield_curve": 0.43,
+    "credit_status": "Complacent",
+    "s5fi": 69.2,
+    "mmth": 71.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA secures a multi-billion dollar contract for next-generation AI supercomputers, driving anticipated demand for its H100 GPU architecture."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announces the strategic acquisition of a leading cybersecurity firm, bolstering Azure's comprehensive enterprise security offerings."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla is experiencing increased speculative interest and short-covering activity ahead of its upcoming investor day, purely driven by technical breakout momentum."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-05 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "GME",
           "company": "GameStop Corp.",
           "reason": "GameStop saw speculative interest driven by renewed social media chatter and short-term technical indicators without new fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-15 08:20 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Retreat / Yields Normal",
-    "spy_price": 749.17,
-    "spy_change_pct": -0.77,
-    "vix": 16.42,
-    "hy_oas": 2.69,
-    "yield_curve": 0.4,
-    "credit_status": "Complacent",
-    "s5fi": 62.4,
-    "mmth": 67.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly (LLY) is seeing pre-market strength after announcing positive Phase 3 trial results for its groundbreaking Alzheimer's treatment, boosting revenue outlook."
-        },
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet (GOOGL) is attracting buying interest following reports of stronger-than-expected advertising spending across its platforms for Q2, beating analyst estimates."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) remains under pressure from broader tech sector profit-taking, continuing yesterday's negative flow as investors rebalance portfolios without fresh fundamental news."
         }
       ]
     }
