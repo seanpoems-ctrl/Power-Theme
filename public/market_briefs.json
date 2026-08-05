@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-05 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Equities Mixed, Tech Weakens",
+    "spy_price": 769.79,
+    "spy_change_pct": -0.2,
+    "vix": 15.81,
+    "hy_oas": 2.73,
+    "yield_curve": 0.43,
+    "credit_status": "Complacent",
+    "s5fi": 68.0,
+    "mmth": 71.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "ANET",
+          "company": "Arista Networks, Inc.",
+          "reason": "The company posted a significant earnings beat and raised its full-year guidance, signaling strong operational momentum in data center and cloud networking."
+        },
+        {
+          "ticker": "SHOP",
+          "company": "Shopify Inc.",
+          "reason": "Shopify reported stronger-than-expected earnings, indicating robust e-commerce platform growth and improved profitability metrics."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "The stock experienced selling pressure as part of broader technology sector weakness, lacking a fresh specific catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-05 08:59 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "GME",
           "company": "GameStop Corp.",
           "reason": "Continued retail investor interest and social media chatter persist, driving volatile price action without new fundamental catalysts."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-15 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Stable Risk Appetite",
-    "spy_price": 754.81,
-    "spy_change_pct": 0.4,
-    "vix": 15.67,
-    "hy_oas": 2.72,
-    "yield_curve": 0.4,
-    "credit_status": "Complacent",
-    "s5fi": 61.0,
-    "mmth": 67.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AEHR",
-          "company": "AEHR Test Systems",
-          "reason": "The company reported a strong 'beat and raise' quarter, exceeding analyst expectations and providing an optimistic outlook for future growth."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA received a significant analyst upgrade today citing accelerated AI infrastructure demand and robust data center segment growth."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GME",
-          "company": "GameStop Corp.",
-          "reason": "GameStop saw speculative interest driven by renewed social media chatter and short-term technical indicators without new fundamental news."
         }
       ]
     }
