@@ -1,52 +1,6 @@
 {
-  "generated_at": "2026-08-05T23:03:18.796593+00:00",
+  "generated_at": "2026-08-05T23:56:29.360723+00:00",
   "data_source": "fallback",
-  "power_themes": [
-    {
-      "name": "Other",
-      "theme_rs": 89.5,
-      "perf_1d": 7.42,
-      "leaders": [
-        {
-          "ticker": "DT",
-          "price": 50.86,
-          "rs_52w": 91,
-          "adr_pct": 4.13,
-          "vol_surge": 3.29,
-          "mkt_cap": 14824455958,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Base"
-        },
-        {
-          "ticker": "ANET",
-          "price": 197.31,
-          "rs_52w": 88,
-          "adr_pct": 5.77,
-          "vol_surge": 2.07,
-          "mkt_cap": 248446718737,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Base"
-        }
-      ]
-    }
-  ],
+  "power_themes": [],
   "account_equity": null
 }
