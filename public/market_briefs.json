@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-05 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Broad Risk-On Rally",
+    "spy_price": 771.33,
+    "spy_change_pct": 1.8,
+    "vix": 16.57,
+    "hy_oas": 2.78,
+    "yield_curve": 0.43,
+    "credit_status": "Complacent",
+    "s5fi": 69.2,
+    "mmth": 71.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Reports significant new orders for its next-generation AI processors from key hyperscale data center clients, boosting revenue forecasts."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "Raises its full-year earnings guidance, citing robust performance across its investment banking and consumer lending divisions."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Continues to benefit from strong e-commerce sales trends and persistent positive analyst sentiment regarding its cloud computing segment."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-04 17:53 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA (NVDA) remains under pressure from broader tech sector profit-taking, continuing yesterday's negative flow as investors rebalance portfolios without fresh fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-15 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Global Divergence",
-    "spy_price": 749.17,
-    "spy_change_pct": -0.77,
-    "vix": 16.36,
-    "hy_oas": 2.69,
-    "yield_curve": 0.4,
-    "credit_status": "Complacent",
-    "s5fi": 62.4,
-    "mmth": 67.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "Announced a significant share buyback program exceeding analyst expectations, signaling strong capital returns and bolstering investor confidence."
-        },
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Reported successful advanced exploration results in a major offshore project, significantly boosting future production estimates and aligning with rising crude oil prices."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continuing to experience profit-taking pressures following its recent strong run, with key technical support levels being tested amidst broader tech sector weakness."
         }
       ]
     }
