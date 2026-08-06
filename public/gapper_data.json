@@ -1,448 +1,48 @@
 {
-  "scan_time": "2026-08-05 08:55 ET",
+  "scan_time": "2026-08-06 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "BLMN",
-      "price": 8.92,
-      "gap_pct": 28.7,
-      "pm_volume": 186263,
-      "avg_vol_10d": 1582062,
-      "avg_dollar_vol": 14111993,
-      "mkt_cap": 763679457,
-      "rvol": 1.12,
-      "adr_pct": 4.65,
+      "ticker": "AEVA",
+      "price": 19.61,
+      "gap_pct": 31.92,
+      "pm_volume": 248929,
+      "avg_vol_10d": 1479665,
+      "avg_dollar_vol": 29016231,
+      "mkt_cap": 1324365352,
+      "rvol": 0.59,
+      "adr_pct": 8.43,
       "category": "Earnings",
-      "theme": "Beat & Stock Jump",
-      "reasoning": "Bloomin' Brands **beat Q2 CY2026 sales expectations** and reported strong **adjusted EPS of $0.39**, driving the stock **up 24.7%**.",
+      "theme": "Q2 2026 Results & New Business Launch",
+      "reasoning": "Aeva reported Q2 2026 results and launched an optical connectivity business with a first customer agreement from a major hyperscaler.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
+      "conviction": 75,
       "grade": "C",
-      "finviz_theme": "Others",
+      "finviz_theme": "AI Edge & IoT",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Bloomin' Brands (BLMN) filed an 8-K on **2026-08-05** for its **Q2 CY2026 earnings**, reporting **adjusted EPS of $0.39** per share. The company also **beat Q2 CY2026 sales expectations**, leading to a significant **24.7% stock jump**.",
-        "impact": "The strong earnings beat and substantial positive market reaction suggest significant momentum, potentially signaling a positive re-rating for the stock as investors digest the robust performance."
+        "catalyst": "Aeva officially **reported Second Quarter 2026 Results** on 2026-08-05. Concurrently, the company **launched an Optical Connectivity Business** and **signed its first customer agreement** for this new venture with a **Major Hyperscaler**.",
+        "impact": "The launch of a new business segment with a significant first customer expands AEVA's total addressable market and diversifies its revenue streams beyond its core LiDAR offerings, signaling strong strategic execution."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nBloomin' Brands (BLMN) reported strong financial results for **Q2 CY2026**, with **adjusted EPS reaching $0.39 per share**. The company also **exceeded Q2 CY2026 sales expectations**, indicating better-than-anticipated operational performance and revenue generation. This positive earnings surprise led to a substantial **24.7% surge** in the stock price.\n\n• **The Growth (Momentum)**\nThe significant **24.7% jump** in BLMN's stock following the earnings release highlights robust investor confidence in the company's current performance and future trajectory. The beat on sales expectations and solid EPS figure suggest underlying strength in the business, which could sustain upward momentum as the market re-evaluates its growth prospects.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nAeva officially **reported its Second Quarter 2026 Results** on 2026-08-05. While specific figures are not detailed in the headlines, the announcement of an earnings report often serves as a key catalyst for immediate price movements based on investor expectations and disclosed performance.\n\n• **The Growth (Momentum)**\nBeyond the Q2 results, Aeva demonstrated significant strategic growth by **launching an Optical Connectivity Business**. This new venture is immediately bolstered by the **signing of a first customer agreement** with a **Major Hyperscaler**, indicating substantial demand and validating the new business direction from its inception.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Bloomin' Brands (NASDAQ:BLMN) Beats Q2 CY2026 Sales Expectations, Stock Jumps 24.7% - StockStory",
+          "title": "Aeva's six investor events span Boston, New York and virtual venues - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPZjQ4Q0FqNlR5dFh6bHlVWk9qN2UwdkRQSDhyQmpfeDhMRGZubmE1WDVRbmI0dVZPbkxIVjFwQWNvMUlNbnpQZEdzTF81WFVMNEdzUGFUdW1xLWNVcU1RejBaanZZQVBGOWZYX2M2a2JxbWhSSnRBazItTzdoWVZNZlpmZHhFeHVIOXp2dFJjNDhmU3JiUXc3XzI1Q3oyS0FhbWo4QkpIU0xZS0lmcWhMVkt0ek5VbUFlQUxUQ2V3YTUyb00zdjdWUkhnR010em1aRFVvYWZBel9Sdw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOc3VaX1BLU3BrZUQ5bzBwaFJKVkY4MDBqUzExU3VEVWRRR1kwTnpkY3l5SGJEMF8xNFVtcERybjZKT0t4RGU4QUItbm01aXYyUWVQSWdmcV9yaFhrSXNQU1RHZ09TUUZDMXlmZlM1S3NJZG16aDkxREFpeTE2QU1nVlBLdzNMenEyUmJZRUZQMlNCRHE1TlotOWlCUQ?oc=5"
         },
         {
-          "title": "Earnings Flash (BLMN) Bloomin' Brands, Inc. Posts Q2 Adjusted EPS $0.39 per Share - marketscreener.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOazVkNXRWLXBvM3JmeVcyblpLOUEyeHlTQkpwaGgxTVZwX1VBbzFkd2N0bTB5R214cGxpSHBLYXl4Q0t6ZFdhNFNacDlNUU1iSExIYTdNbzBpbUxsSmQ1cDdaRkdsZW5mM3N1WDZTbGg0VHdlcHlyUGNDQ1U4eGpEaTN0bmEydVFrR2VuNzJfdGNWTlFERjBvd3pCVGg5SHRBb0xldm44OElrMUk1SFlXS2JPd2g0NzcyaVdDeVJ5WndvblZOcEhn?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-08-05",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1546417/000154641726000030/blmn-20260805.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $14M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "adjusted EPS of $0.39",
-        "discrepancy_note": "Source A (Finviz News) has no mention of the adjusted EPS figure. Source B (Google News, article [3]) confirms 'Adjusted EPS $0.39 per Share', but without confirmation from both sources, the claim cannot be 'Verified'."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "APPS",
-      "price": 9.51,
-      "gap_pct": 28.29,
-      "pm_volume": 392317,
-      "avg_vol_10d": 2965197,
-      "avg_dollar_vol": 28199023,
-      "mkt_cap": 1150101795,
-      "rvol": 2.33,
-      "adr_pct": 7.93,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "Digital Turbine reported strong fiscal Q1 2027 financial results, driven by 69% adjusted EBITDA growth, and raised full-year guidance.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 80,
-      "grade": "C",
-      "finviz_theme": "AI Ads & Search",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Digital Turbine (APPS) reported **strong Fiscal 2027 First Quarter Financial Results**, including **69% Adjusted EBITDA Growth**. The company also reported a **$3.2M GAAP Loss** for the quarter, and **raised full-year guidance**.",
-        "impact": "The positive results and improved full-year outlook indicate strong business momentum, likely leading to continued investor confidence and potential price appreciation."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nDigital Turbine reported **strong Fiscal 2027 First Quarter Financial Results**, exceeding expectations. The company highlighted **69% Adjusted EBITDA Growth** during this period, signaling significant operational efficiency and profitability expansion.\n\n• **The Growth (Momentum)**\nThe reported **69% Adjusted EBITDA Growth** demonstrates robust business momentum and scalability. Despite reporting a **$3.2M GAAP Loss**, the strong adjusted profitability metric is likely to be a key focus for momentum investors.\n\n• **The Guide**\nCrucially, Digital Turbine **raised full-year guidance**, which is a strong indicator of management's confidence in sustained performance. This upgraded outlook provides a positive catalyst for forward momentum and potential analyst re-ratings.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Digital Turbine Reports 69% Adjusted EBITDA Growth and $3.2M GAAP Loss - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOZURaN0x5aEZGQ0hRLWp1amRfcnFMWjQ0RDZfS21WYm43MVppV0hUcjRkMnBrYm9NcmtqbFVUTHVJZW1Va3hmLUFIdm44UF9xWWwyc1M0ZnU5a01VcHpSenh2QThSN2ljVk9lOXN0YmdrVDM1ZkNhVVBPRGF4al9RN3BaWkRkUFhfenFHSTJCOXd4TTd2aW13eGlaOGlfLVNwQTVQV3VDbmRfUEt5Q0NSUzdPWnJzeHJ1cnBsSXFB?oc=5"
-        },
-        {
-          "title": "Digital Turbine Reports Strong Fiscal 2027 First Quarter Financial Results and Raises Full-Year Guidance",
+          "title": "Aeva Reports Second Quarter 2026 Results",
           "source": "Finviz",
-          "url": "/news/377010/digital-turbine-reports-strong-fiscal-2027-first-quarter-financial-results-and-raises-full-year-guidance"
+          "url": "https://www.businesswire.com/news/home/20260805379581/en/"
         },
         {
-          "title": "SpaceXs First Earnings Offer a Chance to Reverse Stocks Plunge",
+          "title": "Aeva Launches Optical Connectivity Business, Signs First Customer Agreement for a Major Hyperscaler",
           "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/spacex-first-earnings-offer-chance-082619954.html"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-08-04",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/317788/000162828026052539/apps-20260804.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "AI Ads & Search",
-      "technical_status": "Fail (Avg $Vol $28M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "69% adjusted EBITDA growth",
-        "discrepancy_note": "Source B (Google News [3]) explicitly reports '69% Adjusted EBITDA Growth'. Source A (Finviz) mentions 'Strong Fiscal 2027 First Quarter Financial Results' but does not provide the specific '69% adjusted EBITDA growth' figure."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "SHOP",
-      "price": 123.3,
-      "gap_pct": 18.19,
-      "pm_volume": 2409747,
-      "avg_vol_10d": 10881251,
-      "avg_dollar_vol": 1341658248,
-      "mkt_cap": 160000821685,
-      "rvol": 2.68,
-      "adr_pct": 4.84,
-      "category": "Earnings",
-      "theme": "Beat",
-      "reasoning": "Shopify stock surged **25.1%** after reporting **strong Q2 CY2026 earnings** that **beat expectations**, indicating robust performance.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 82,
-      "grade": "A",
-      "finviz_theme": "Consumer - E-Commerce",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Shopify reported **strong Q2 CY2026 earnings** on **2026-08-05**, **beating expectations** and causing the stock to jump **25.1%**.",
-        "impact": "The significant earnings beat suggests robust business fundamentals and could lead to continued positive momentum and potential re-rating for Shopify."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nShopify (NASDAQ:SHOP) reported **strong Q2 CY2026 earnings** on **2026-08-05**, significantly **beating expectations**. This positive surprise led to a substantial market reaction, with the stock jumping **25.1%** following the announcement.\n\n• **The Growth (Momentum)**\nThe strong performance in Q2 CY2026 indicates robust underlying business momentum for Shopify. This beat suggests continued demand for its e-commerce solutions, contributing to sustained investor interest and upward price action.\n\n• **The Guide**\nWhile specific guidance figures were not detailed in the headlines, the overall strength in Q2 suggests a positive outlook. The market's enthusiastic response implies confidence in Shopify's future trajectory and operational execution.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Shopify (NASDAQ:SHOP) Beats Expectations in Strong Q2 CY2026, Stock Jumps 25.1% - FinancialContent",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOV190ajQxQTZtWU9CbXVHelpLbkdlQXBGTkJEWlQ3M0JCSHU5UzNaRWIzblZGMTUtNFRxOXY3bVJNcVRKS01hM2VKb093ZjVWdVFabFk4ZUtSdTE4SjROaUlaYlh1Q3VLQzBzMmY5cDVmU2lhYXlmY3E2NzZjZU9lY3ljcFljOC15NWVhVDVsWVZHeEFWbXF4THlvaUNzRk1NQ25VeVo4X2VYMHhmanJ3bG9qeE8zaXpHM3VNZ1RRb2QwV09lMTlBNzlIWlVPQV96TTFSYS1XczluWk5tY2c?oc=5"
-        },
-        {
-          "title": "SpaceX is down nearly 40% ahead of Tuesday's earnings—how to decide to buy stock dips, according to pros - CNBC",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPMkNVSXN1bHFVeDRoOWgwemtUOFNnS0ZBbTZici1vS21teGJMeVJFMEZSNmdqZGllbEcyZk9nMTBSTkhwTjVUWkRQdVFqdVA4LS1idDY5cG9SU0VpZ0U3QXJUSmFKaWd6RG5JZUI2Y1lLeE80Q1p4VG9fYkdadEtxSDVLSy0zS2lkRnV3SlNRMzJSM0E4dkN2UFFfUmt0c0lZazVvT9IBqgFBVV95cUxOZU4yMVFta2dWcEYwUGtXS05WYjNNcnJHcHR2WEVUTWpTcHVLY0RkTUlFUzlBYzhzWHRzM3JZWEFrbVNuak5rM01XU2h6ZW11VnFmYWlrWXJXUDNnQXlzczhCek8xR3NiOGM2a0dnbHR0MGtyWUltY0VtUnNjNmtMYjNaWm5aR1Iyc3dzNGI3NktVRXJOeXpuQW1kcG50NnY4MVFNYzZXRnVKQQ?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-08-05",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1594805/000159480526000046/shop-20260805.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Consumer - E-Commerce",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Shopify stock surged 25.1% after reporting strong Q2 CY2026 earnings",
-        "discrepancy_note": "Source A (Finviz) provides no information regarding the claim. Source B (Google News, specifically article [5]) confirms 'Shopify (NASDAQ:SHOP) Beats Expectations in Strong Q2 CY2026, Stock Jumps 25.1%', but since Source A is empty, the claim cannot be confirmed by 'BOTH' sources."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "UPST",
-      "price": 30.32,
-      "gap_pct": 14.61,
-      "pm_volume": 179185,
-      "avg_vol_10d": 4167222,
-      "avg_dollar_vol": 126350171,
-      "mkt_cap": 2901974796,
-      "rvol": 1.76,
-      "adr_pct": 5.01,
-      "category": "Earnings",
-      "theme": "Return to GAAP Profitability",
-      "reasoning": "Upstart reported a return to GAAP profitability with $16.5M Q2 income, driven by AI upgrades and loan growth.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 79,
-      "grade": "A",
-      "finviz_theme": "Fintech - Lending",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Upstart filed an 8-K on **2026-08-04** announcing **Second Quarter 2026 Results**, with headlines confirming the company **returns to GAAP profitability** and reports **$16.5M Q2 income**. Upstart's **AI upgrades paid off**, leading to a **pickup in loan growth**.",
-        "impact": "The return to profitability and strong operational drivers suggest a potential re-rating for the stock, indicating improved financial health and business model validation for its AI-driven lending platform."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nUpstart announced its **Second Quarter 2026 Results**, significantly reporting a **return to GAAP profitability**. The company posted **$16.5M Q2 income**, a key positive financial outcome highlighted by news sources. This performance suggests a beat on expectations regarding its path to profitability.\n\n• **The Growth (Momentum)**\nHeadlines indicate that **Upstart's AI upgrades paid off**, contributing to a **pickup in loan growth**. This operational improvement underscores the effectiveness of its core technology and signals positive business momentum. The stock had already edged higher for **three straight sessions** leading into the earnings release.",
-      "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "UPSX",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "UPST Stock Edges Higher Overnight: Can Earnings Keep The Recovery Alive?",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/a3990130-44b7-3166-9f08-02db6dc87722/upst-stock-edges-higher.html"
-        },
-        {
-          "title": "Upstart's AI upgrades pay off, as a pickup in loan growth helps send the stock higher",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/story/upstarts-ai-upgrades-pay-off-as-a-pickup-in-loan-growth-helps-send-the-stock-higher-32e7ec9d?mod=mw_FV"
-        },
-        {
-          "title": "Upstart Announces Second Quarter 2026 Results",
-          "source": "Finviz",
-          "url": "/news/377056/upstart-announces-second-quarter-2026-results"
-        },
-        {
-          "title": "Upstart returns to GAAP profitability, reports $16.5M Q2 income - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPdFlTRU9xckMzWlJNWE1YaE50aEFGM1EzWEJiYXVLZHJEWmd4X1AtRVZCdVA3TWtSMmlyZzZWZHc3bE1Xc1JXQldvTzJxbThTYjB2LVZDTmtCWHp4UTFWeGhKMmZkd1d2WVF5ODMyc0ZGM3hSbFhTSzhkUmY2QjdhdHRkOEhnaVM4ZEJBR3pjVk5OMmpLYk1j?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-08-04",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1647639/000164763926000062/upst-20260804.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Fintech - Lending",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "$16.5M Q2 income",
-        "discrepancy_note": "Source B (Google News [1]) confirms the 'Q2 income of $16.5M'. However, Source A (Finviz News) does not provide this specific dollar amount in any of its headlines. Furthermore, Finviz News [3] mentions 'Second Quarter 2026 Results', which is significantly in the future compared to standard Q2 reporting for current market news, raising a flag about the reporting period even if the dollar amount were present."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "KTOS",
-      "price": 51.87,
-      "gap_pct": 14.41,
-      "pm_volume": 325738,
-      "avg_vol_10d": 3420675,
-      "avg_dollar_vol": 177430412,
-      "mkt_cap": 9726661630,
-      "rvol": 1.75,
-      "adr_pct": 5.75,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "Kratos (KTOS) exceeded Q2 CY2026 earnings expectations and provided optimistic full-year sales guidance, driving positive investor sentiment.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 79,
-      "grade": "A",
-      "finviz_theme": "Defense & Aerospace",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Kratos Defense & Security Solutions Inc. (KTOS) reported **Q2 profit of $4.4 million**, or **2 cents per share**, with adjusted earnings of **21 cents per share**, which **exceeded expectations**. The company also issued **optimistic full-year sales guidance**.",
-        "impact": "The significant earnings beat combined with a positive outlook for future sales is likely to generate strong upward momentum and investor confidence in KTOS's operational performance and market position within the defense sector."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nKratos (KTOS) reported a strong Q2 CY2026, with profit reaching **$4.4 million**, translating to **2 cents per share**. Adjusted for one-time gains and costs, earnings came in at **21 cents per share**, a figure that **exceeded Wa** (expectations).\n\n• **The Guide**\nThe company's full-year sales guidance was described as **optimistic**, suggesting a strong outlook for future revenue generation. This positive revision to the guidance reinforces the company's growth trajectory and could attract further institutional interest.\n\n• **The Growth (Momentum)**\nThe combination of exceeding current quarter expectations and providing an optimistic full-year sales guidance indicates robust operational momentum. This positive news positions KTOS favorably for continued upward price movement, reflecting improved fundamentals and investor confidence in its growth prospects within the defense and security solutions market.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Kratos (NASDAQ:KTOS) Beats Expectations in Strong Q2 CY2026, Full-Year Sales Guidance is Optimistic - StockStory",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxOQnhZZUpEUzJ3a2FMTDVMY2hfRjg3elQwc2FfQi1HTERUMU1nX25KQjBZTU1CMkRna0JDTW90TlB1ejZmaWhfSHlSeTYtU08zczJHbDVGY0xST1dPblVGanFxdWhwZWlYVFF4SEhrMzVpQjcybXdST1ozQTZCNDZEVDNUV3lGalgwS1ZsbVl6Z2kwUmVKNnlvRkVnaHl4RUJLYkxvQlZ3Smxva3BoUzFuc00zbHJ4YkRuTXNuTVE2NmpnS2ExMUpTU0JYbThLX2VOSTJ3ZVN5eExKVTBBeHVZdHdTMnUtN3Y3U3c?oc=5"
-        },
-        {
-          "title": "Kratos: Q2 Earnings Snapshot",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/kratos-q2-earnings-snapshot-213858944.html"
-        },
-        {
-          "title": "Kratos Reports Second Quarter 2026 Financial Results",
-          "source": "Finviz",
-          "url": "/news/376975/kratos-reports-second-quarter-2026-financial-results"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-08-04",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1069258/000106925826000075/ktos-20260804.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Defense & Aerospace",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "KTOS exceeded Q2 CY2026 earnings expectations",
-        "discrepancy_note": "Google News articles [3] and [4] confirm KTOS 'Beats Expectations' or 'Double Beat' for Q2 CY2026. However, Finviz (Source A) only states that Kratos 'Reports Second Quarter 2026 Financial Results' and provides an 'Earnings Snapshot' without explicitly confirming that expectations were exceeded. Therefore, not all sources confirm the specific claim with matching specifics, leading to a discrepancy in explicit confirmation across sources."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "DT",
-      "price": 45.71,
-      "gap_pct": 12.67,
-      "pm_volume": 179595,
-      "avg_vol_10d": 4538723,
-      "avg_dollar_vol": 207465028,
-      "mkt_cap": 13266361923,
-      "rvol": 1.42,
-      "adr_pct": 3.79,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "Dynatrace (DT) shares surged after the company reported a **Q2 CY2026 sales beat** and provided **strong guidance**, exceeding analyst expectations.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 78,
-      "grade": "B",
-      "finviz_theme": "AI Enterprise Software",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Dynatrace (DT) reported **Q2 CY2026 Sales Beat Estimates**, leading to its stock jumping **10.3%** and climbing **8%**. The company also provided **strong guidance** alongside the earnings beat.",
-        "impact": "The positive earnings and forward-looking guidance suggest strong business momentum and could lead to continued upward pressure on the stock, reflecting improved investor confidence."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nDynatrace (DT) announced its **Q2 CY2026 Sales Beat Estimates**, signaling better-than-expected financial performance for the quarter. This positive surprise was a primary driver for the immediate market reaction.\n\n• **The Growth (Momentum)**\nFollowing the earnings release, Dynatrace stock saw a significant positive movement, with shares jumping **10.3%** and climbing **8%** according to various reports. This strong price action indicates robust investor confidence in the company's current performance and future trajectory.\n\n• **The Guide**\nIn addition to the earnings beat, Dynatrace also provided **strong guidance**, which is a critical factor for momentum investors. Favorable guidance typically suggests management anticipates continued growth and positive financial results in the upcoming periods, further fueling market optimism.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Dynatrace’s (NYSE:DT) Q2 CY2026 Sales Beat Estimates, Stock Jumps 10.3% - Yahoo Finance UK",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxPRWRZb2RJYzk4NTZ1RFAtNTFHWmlPY29YeW5EaW0yQVItVkNWby1RUU1qdC0zYnNHV0NUU1VTMWhhb21rZk45MlhNSk8yQUh3U0xlOFNWeDlhZ056UmhBOVhEaVY0TlliaERBcXBza0wtMVlfVjdFcHpJdHVPNTlNalFn?oc=5"
-        },
-        {
-          "title": "Dynatrace stock climbs 8% on earnings beat and strong guidance By Investing.com - Investing.com Canada",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPeG93Qm1Pc0JfOW9CY205NFRLTzVDOTNhVXJwX0FPQ09NYkpmd1pFYkY4LTQ4aTlPTlhILXU5OGtkSEZmYUdPWU9pN0hwLWR0dUx3eEZ2aU04YmhNTFM0OS1OdkNGTkZrdXZneE50R3RjWDJJSmV4UFVnYVR6cERCNERlbXJnUXVXUno1cXVJZ2c3Nmc4cXhnempoWi1RX1hVSUs2ZDF5ZzF1ell3RHhiMDN6cng1VkJaeFRGNi1QZw?oc=5"
+          "url": "/news/377791/aeva-launches-optical-connectivity-business-signs-first-customer-agreement-for-a-major-hyperscaler"
         }
       ],
       "edgar_filing": {
@@ -451,242 +51,31 @@
         "items": [
           "2.02",
           "5.02",
-          "7.01",
           "9.01"
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1773383/000177338326000049/dt-20260731.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1789029/000119312526335102/aeva-20260730.htm"
       },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "AI Enterprise Software",
-      "technical_status": "Fail (ADR 3.8% < 4%)",
+      "industry": "AI Edge & IoT",
+      "technical_status": "Fail (Avg $Vol $29M < $100M)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Q2 CY2026 sales beat",
-        "discrepancy_note": "Source A (Finviz) has no relevant news. Source B (Google News) shows conflicting quarters for the earnings/sales beat: one article [1] mentions 'Q2 CY2026 Sales Beat', while another [2] mentions 'Q1 earnings beat'."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "ANET",
-      "price": 190.51,
-      "gap_pct": 11.75,
-      "pm_volume": 241527,
-      "avg_vol_10d": 7338272,
-      "avg_dollar_vol": 1398014199,
-      "mkt_cap": 239890687404,
-      "rvol": 1.98,
-      "adr_pct": 5.4,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "Arista Networks surged after reporting Q2 earnings and revenue beat estimates, fueled by AI cloud networking demand and upbeat Q3 guidance.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 79,
-      "grade": "A",
-      "finviz_theme": "AI Networking",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Arista's **Q2 earnings and revenue topped Wall Street estimates** on strong **AI cloud networking growth**. The company also reported a **\"$3B Quarter\"** and introduced **1.6 Tbps AI Fabric Platforms**.",
-        "impact": "The company's **upbeat Q3 revenue forecast** driven by **AI-driven networking demand** signals continued momentum and expands its market reach in critical infrastructure."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nArista's **Q2 earnings and revenue topped Wall Street estimates**, demonstrating strong operational performance. The company reported a **\"$3B Quarter\"**, indicating significant financial achievement. These results highlight Arista's effective strategy in leveraging current market dynamics.\n\n• **The Growth (Momentum)**\nGrowth was propelled by robust **AI cloud networking demand**, showcasing the company's strong position in this rapidly expanding sector. Arista also introduced new **1.6 Tbps AI Fabric Platforms**, further solidifying its innovation and product leadership in advanced networking solutions.\n\n• **The Guide**\nArista provided an **upbeat quarterly revenue forecast**, projecting figures **above Wall Street estimates**. This positive outlook is primarily driven by strong demand for its **networking gear** as companies accelerate the expansion of their **AI infrastructure**, signaling continued market share gains.",
-      "peer_tickers": [
-        "HPE",
-        "CSCO",
-        "JNPR"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "TECL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "TECS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "Arista Introduces 1.6 Tbps AI Fabric Platforms in $3B Quarter - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQQ2xveFVVRnZBRllPbHl5SGZjUVhvemtVLTRJWUJuakpvUTJ6MTJna0ZHYlRKZ0U5MHdJQmhqNmxXTHJyRXlOcnRmcFVuTkRFTlZNZEhqajRRT0hITWs5c2JjVHhGLXNGeE9ZSTc3RDRfQnlqeWlFVzhUZE03akRJblU2RlNYeDJQcTRBSzNWWVRDQmJZVXM1dU00NnIzWXhhc0JseEV0bzRMcnN3bV9aVEpn?oc=5"
-        },
-        {
-          "title": "Arista forecasts upbeat quarterly revenue on AI-driven networking demand",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/articles/arista-forecasts-upbeat-quarterly-revenue-221420916.html"
-        },
-        {
-          "title": "Arista Earnings, Revenue Top Estimates On AI Cloud Networking Growth",
-          "source": "Finviz",
-          "url": "https://www.investors.com/news/technology/arista-stock-anet-arista-earnings-q22026?mod=IBD_FV"
-        },
-        {
-          "title": "Arista Networks: Q2 Earnings Snapshot",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/arista-networks-q2-earnings-snapshot-201337418.html"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-08-04",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1596532/000159653226000174/anet-20260804.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "AI Networking",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
         "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Arista Networks reported Q2 earnings and revenue that beat estimates",
-        "discrepancy_note": ""
+        "primary_claim": "Aeva reported Q2 2026 results",
+        "discrepancy_note": "Source A (Finviz) explicitly states 'Second Quarter 2026 Results'. Source B (Google News, via Yahoo Finance) mentions 'Reports Q2 Loss, Beats Revenue Estimates' but does not specify the year '2026'."
       },
-      "gates_passed": 5,
+      "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "GFI",
-      "price": 34.11,
-      "gap_pct": 8.33,
-      "pm_volume": 268067,
-      "avg_vol_10d": 3204753,
-      "avg_dollar_vol": 109314125,
-      "mkt_cap": 30644734643,
-      "rvol": 1.08,
-      "adr_pct": 2.97,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Fail (ADR 3.0% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 20,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "USAS",
-      "price": 4.39,
-      "gap_pct": 7.97,
-      "pm_volume": 191145,
-      "avg_vol_10d": 4556316,
-      "avg_dollar_vol": 20002227,
-      "mkt_cap": 1483682965,
-      "rvol": 1.6,
-      "adr_pct": 6.33,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $20M < $100M)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 100,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
         "gate_dollar_vol": false,
         "gate_mkt_cap": false,
         "gate_adr": true
@@ -696,187 +85,45 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "HYMC",
-      "price": 22.36,
-      "gap_pct": 7.87,
-      "pm_volume": 62211,
-      "avg_vol_10d": 1415921,
-      "avg_dollar_vol": 31659994,
-      "mkt_cap": 2083542394,
-      "rvol": 0.8,
-      "adr_pct": 6.61,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $32M < $100M)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "BKNG",
-      "price": 194.27,
-      "gap_pct": 7.75,
-      "pm_volume": 121940,
-      "avg_vol_10d": 6580804,
-      "avg_dollar_vol": 1278452793,
-      "mkt_cap": 150535633569,
-      "rvol": 1.39,
-      "adr_pct": 3.39,
+      "ticker": "SOUN",
+      "price": 6.43,
+      "gap_pct": 27.22,
+      "pm_volume": 3983455,
+      "avg_vol_10d": 35902096,
+      "avg_dollar_vol": 230850477,
+      "mkt_cap": 2801385044,
+      "rvol": 0.53,
+      "adr_pct": 5.71,
       "category": "Earnings",
-      "theme": "Earnings Beat",
-      "reasoning": "Booking Holdings beat Q2 EPS and revenue estimates, driven by strong travel demand, causing shares to gain.",
+      "theme": "Earnings Release (Details Unknown)",
+      "reasoning": "SoundHound AI filed an 8-K for earnings, but specific financial figures or guidance are not available in provided headlines.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 78,
-      "grade": "B",
-      "finviz_theme": "Consumer - E-Commerce",
+      "conviction": 75,
+      "grade": "C",
+      "finviz_theme": "AI Enterprise Software",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Booking Holdings reported strong Q2 CY2026 results, with **earnings per share** of **$2.54** significantly beating analyst estimates of **$2.44**. The company also reported **revenue** of **$7.35 billion**, surpassing Wall Street consensus expectations.",
-        "impact": "This strong earnings performance, driven by robust travel demand, indicates solid operational execution and potential for continued positive momentum in the travel sector."
+        "catalyst": "SoundHound AI (**SOUN**) filed an **8-K** on **2026-08-05** announcing **Earnings/Financial Results** (Item **2.02**). However, the provided news headlines for **2026-08-05** do not contain any specific earnings figures such as EPS or revenue.",
+        "impact": "Without actual reported figures (beats, misses, or guidance changes), the market's reaction to this earnings release remains unclear and speculative for momentum trading."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nBooking Holdings (BKNG) delivered a strong second-quarter performance, with **earnings per share** reaching **$2.54**, comfortably exceeding the analyst estimate of **$2.44**. The company's **revenue** for the quarter also impressed, coming in at **$7.35 billion**, which surpassed consensus expectations. These results demonstrate a significant beat on both key financial metrics.\n\n• **The Growth (Momentum)**\nThe better-than-expected Q2 earnings and revenue figures were primarily fueled by **strong travel demand**, as highlighted by headlines. This indicates robust underlying business momentum and a positive outlook for the travel industry. The market reacted positively, with Booking Holdings' shares **gaining** and **climbing** following the announcement, reflecting investor confidence in the company's growth trajectory.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
+      "analysis_details": "• **The Beats (Surprise Factor)**\nSoundHound AI (**SOUN**) officially filed an **8-K** with the SEC on **2026-08-05** for its **Earnings/Financial Results** under Item **2.02**. However, the provided news headlines do not include any specific financial metrics, such as EPS, revenue, or guidance figures, precluding an assessment of any beat or miss relative to analyst expectations.\n\n• **Key Consideration**\nThe absence of specific earnings data in the headlines makes it impossible to evaluate the fundamental impact of this earnings report. Separately, **SOUN** was reported to lead Wall Street's most shorted stocks at **42%**, indicating high short interest which could lead to volatility if any bullish catalyst were to emerge from the earnings, though no such details are available.",
+      "peer_tickers": [
+        "GRRR",
+        "BBAI",
+        "CEVA"
+      ],
+      "leverage_etfs": [
         {
-          "title": "Booking (NASDAQ:BKNG) Beats Q2 CY2026 Sales Expectations - StockStory",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPOXhqd1BTZ1VJWG4yZUpVMWlCYjNEblNQRlN5NG5RNkRGdGd0RlFYSXdBeUNvWERfOUFwelh0MmExRkw3b3JDVFZydTgxaG1EbVFFQWhpVmZXMW5HaTMyMlhqdkdOOTZ1dDZnbS1QbjZqdGJkaE00QmpabWtiVTIzZzRGU2Z0TWszUXJoaE1vZmxRMEJpakRWTkp3MlQ4ZVYxbWFySE5qTWxBX01uUTVFZDhR?oc=5"
-        },
-        {
-          "title": "Booking Holdings (BKNG) Tops Q2 Earnings and Revenue Estimates - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOUzU4eWsyaUhRQnlMNEdWX3VYNFVhTW52d0FJNmotcmxncWxIXzJWRm5OckEtM1FPQng4VjE5LV9vbjBpMm85Y0JrZDB4dm9LbXpkTkJRUlhHMi1Pd3gyYlUyVW1jTjJCYVVwMEVCcXYwSC1ybWlTZHBsZy0zMmxjZjEyN2N4Yi1ObzBGU2tUMktEZ01VWDRJVWlR?oc=5"
-        },
-        {
-          "title": "Booking Holdings beats Q2 estimates on travel demand, shares gain",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/booking-holdings-beats-q2-estimates-205044385.html"
-        },
-        {
-          "title": "Booking Holdings Reports Higher Revenue on Strong Travel Demand",
-          "source": "Finviz",
-          "url": "https://www.wsj.com/business/earnings/booking-holdings-reports-higher-revenue-on-strong-travel-demand-cfce9176?mod=wsj_FV"
-        },
-        {
-          "title": "Booking Stock Climbs After Earnings Beat. Here Are The Numbers To Know.",
-          "source": "Finviz",
-          "url": "https://www.investors.com/news/technology/booking-stock-bkng-q2-2026-earnings?mod=IBD_FV"
+          "ticker": "SOUX",
+          "mult": "2x"
         }
       ],
-      "edgar_filing": {
-        "filing_date": "2026-08-04",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1075531/000107553126000036/bkng-20260804.htm"
-      },
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Consumer - E-Commerce",
-      "technical_status": "Fail (ADR 3.4% < 4%)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Booking Holdings beat Q2 EPS and revenue estimates",
-        "discrepancy_note": null
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "ELAN",
-      "price": 25.6,
-      "gap_pct": 7.54,
-      "pm_volume": 58777,
-      "avg_vol_10d": 5627268,
-      "avg_dollar_vol": 144058061,
-      "mkt_cap": 12785909566,
-      "rvol": 1.76,
-      "adr_pct": 3.34,
-      "category": "Earnings",
-      "theme": "Strong Sales & Positive Outlook",
-      "reasoning": "Elanco surged after reporting **strong Q2 CY2026 sales** and guiding for **Q3 revenue of $1.20B - $1.22B**.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 79,
-      "grade": "B",
-      "finviz_theme": "Pharma - Large Cap",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Elanco (NYSE:ELAN) reported **strong Q2 CY2026 sales**, driving its stock to **soar**. The company further expects **Q3 revenue** to be in the range of **$1.20B - $1.22B**.",
-        "impact": "The positive sales performance and confident forward guidance suggest sustained growth momentum for Elanco, potentially attracting further investor interest and upward revisions to price targets."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nElanco (NYSE:ELAN) reported **strong sales** for its **Q2 CY2026**, leading to a significant rally in its stock price. This strong performance likely exceeded market expectations, as evidenced by the immediate positive market reaction.\n\n• **The Guide**\nThe company provided an optimistic outlook for the upcoming quarter, projecting **Q3 revenue** to fall within the range of **$1.20B - $1.22B**. This forward guidance demonstrates management's confidence in continued business momentum.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "(ELAN) Elanco Animal Health Incorporated Expects Q3 Revenue Range $1.20B - $1.22B - marketscreener.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxObGgxQXhDY2JVR0lYQ1dlbFhrWG04bVgtRERpT3R4cWRUMmNBOXdyQ2lwVFlSUS1jUDVZc2ZTZGR6bGRHOENOU3gyN0NtTzkwRXF0d29oaWtONGZfc3Exak15NUU0R05lNy1UaTJLYW92YkUxaWV1YnJyQUpySnZVQVZURld4ZDkxWXRwQWRmOFkyNjd6RjNpOFRreUV2b0s2N3dEUW13MUdHUURwVWJzUmc1Y21DUjF0T3RKa18xVWQ0aHJaWGdv?oc=5"
-        },
-        {
-          "title": "Elanco’s (NYSE:ELAN) Q2 CY2026: Strong Sales, Stock Soars - FinancialContent",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxNeHpkU1haSHFEd0IxblpRcS1JVmdUNFZLbVpzUVgwS1FwMEtlZkxXdVhJV0xSX1E5TEs0U19zel9nV21aYk05YW5Jd3JLS3NaZnRpbmpGRDd4cjB3bnNtVjFLSFh4WFVyVkNPX1JKemx3UFVpTHJid21BeGZRVWJHaERIeEdwRFhuTmdCSmYzV1ZBM0pMRElXNmhhaVM3bEtxOUo3REFPNHc1cFRaUVFnQWxZc2J5ZUFvR205ZGNQTDE?oc=5"
+          "title": "SoundHound AI Leads Wall Street's Most Shorted Stocks at 42%",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/soundhound-ai-leads-wall-streets-181309255.html"
         }
       ],
       "edgar_filing": {
@@ -888,129 +135,13 @@
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1739104/000173910426000040/elan-20260805.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1840856/000184085626000019/soun-20260805.htm"
       },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Pharma - Large Cap",
-      "technical_status": "Fail (ADR 3.3% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Q3 revenue of $1.20B - $1.22B",
-        "discrepancy_note": "Source B [3] confirms the Q3 revenue guidance range of $1.20B - $1.22B, but Source A (Finviz) contains no information to confirm this claim."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "AU",
-      "price": 81.5,
-      "gap_pct": 7.12,
-      "pm_volume": 60344,
-      "avg_vol_10d": 2875756,
-      "avg_dollar_vol": 234374114,
-      "mkt_cap": 41158109360,
-      "rvol": 0.77,
-      "adr_pct": 3.5,
-      "category": "Thematic Narratives",
-      "theme": "Australian Reporting Season Outlook",
-      "reasoning": "General media report warns of potential significant declines for major Australian companies during the upcoming earnings season.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "The Australian Broadcasting Corporation reported that the upcoming **reporting season** is expected to bring **big falls at major companies**. This general market sentiment suggests potential negative performance across Australian equities.",
-        "impact": "This serves as a cautionary signal for investors in Australian shares, potentially leading to broader market weakness or increased scrutiny on upcoming earnings results."
-      },
-      "analysis_details": "• **The Narrative**\nABC News & Headlines highlighted that the upcoming **reporting season** in Australia is anticipated to result in **big falls at major companies**. This report sets a negative thematic tone for the broader Australian equity market, suggesting a period of potential underperformance or increased volatility.\n\n• **Explosiveness**\nThe headline presents a general market warning rather than a specific catalyst for AU. While it creates a cautious sentiment around Australian stocks, its impact on a specific ticker like AU without direct company-specific context is likely limited to broad market correlation or minor negative sentiment, making it a low-explosiveness event.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Own Australian shares? Reporting season to bring big falls at major companies - ABC News & Headlines – Australian Broadcasting Corporation",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQbzllRHZoVW54UHpkVklDT3dkZUtqZjl2TVhldGcxc2M5aFFSelF5bFNBdlFlN2RSVlJXajNMZ3BTZXpwbzlDS05GSGx3TDJzNy10UVBLTTdPQ21rUEoyR1gyeUNfS1d6TGQ0S3VJazZYQ1V6eFcwdE9femRzMTFULUx6NkxzMHFLdTFDWG43REFTcHE4LVRJc3hqNGZiRmZJb2lSRGpSWlRrRUxwRGc?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Others",
-      "technical_status": "Fail (ADR 3.5% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "potential significant declines for major Australian companies during the upcoming earnings season",
-        "discrepancy_note": "Source A (Finviz News) has no information. Source B (Google News, ABC News) headline 'Reporting season to bring big falls at major companies' directly supports the claim of significant declines during earnings season."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "HMY",
-      "price": 16.88,
-      "gap_pct": 6.99,
-      "pm_volume": 112119,
-      "avg_vol_10d": 2482936,
-      "avg_dollar_vol": 41911960,
-      "mkt_cap": 10650868054,
-      "rvol": 0.93,
-      "adr_pct": 3.04,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $42M < $100M, ADR 3.0% < 4%)",
+      "industry": "AI Enterprise Software",
+      "technical_status": "Pass",
       "verification": {
         "status": "Verified",
         "confidence_score": 95,
@@ -1018,8 +149,84 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found",
+        "primary_claim": "SoundHound AI reported Q2 revenue of $61.9 Million.",
         "discrepancy_note": null
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "WPP",
+      "price": 20.61,
+      "gap_pct": 26.93,
+      "pm_volume": 270036,
+      "avg_vol_10d": 425118,
+      "avg_dollar_vol": 8761682,
+      "mkt_cap": 4460792878,
+      "rvol": 1.73,
+      "adr_pct": 3.06,
+      "category": "Earnings",
+      "theme": "Turnaround Progress Report",
+      "reasoning": "WPP shares surged over **20%** after the company reported progress on its turnaround plan, showing signs of recovery in its **First Half of 2026** update.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 79,
+      "grade": "C",
+      "finviz_theme": "AI Ads & Search",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "WPP's stock jumped **more than 20%** as the advertising group's turnaround plan showed signs of recovery. The company reported revenue dropped **5.6%** in **First Half of 2026** but confirmed it is 'On Track' with its overhaul, which is helping to ease the top-line decline.",
+        "impact": "The positive market reaction suggests a significant re-rating of WPP's prospects, as investors gain confidence in the execution and future potential of the turnaround strategy despite current revenue challenges."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nWPP's shares **jumped more than 20%** after the company announced its turnaround plan is 'On Track' and 'begins to bear fruit', despite a **5.6% revenue drop** in the **First Half of 2026**. This indicates the market views the progress as a significant positive surprise, easing concerns about the top-line decline and validating the ongoing overhaul efforts.\n\n• **The Growth (Momentum)**\nThe surge in share price reflects strong momentum driven by the perceived recovery, with headlines highlighting 'WPP shares soar' and 'WPP Shares Surge'. The positive update suggests an inflection point where the market is re-pricing WPP based on the successful execution of its turnaround plan, potentially leading to sustained upward momentum as recovery continues.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "WPP shares soar as advertising group shows signs of recovery - Euronext Markets: Real-time Stock Market Data | live",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNRC1vNzk4S04zZ2dHMVF4dlNGVGJ5c29uZlEyYWhQVDAyVHBIOXAyYmMzUDlhcVRaUjFseEZicHVyMUtRdkVocEJ3Nl9VQzFUeWFXYkRGXzJ1Szh1cWtiNGtZUzZ2cWRxdm1MUmx2YlRLaWk1Mm9ZNEVrNGo2RmwxcHNrdWR0ck5qOUo5aWdHNWFvdWxKWHVDR0V3YmhYWXc?oc=5"
+        },
+        {
+          "title": "WPP Is 'On Track' With Turnaround Plan, as Revenue Drops 5.6% in First Half of 2026 - ADWEEK",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNLWdra3l6cWNyYVppcmZMY3FPMTNKeTM3N0loQXVPRDlkSXZFMmF1T0R4YUFOdGN5ay1yeE9XbHJaNUJadVJsRkU1cWp1MG1ic0J1Q21VWmhyWWlTLS00enppUUNXa0hfZDVxQ2ktUHAzRVBYdV8zem03OXBBVGdfZG5LRHNXb0RMRy1meHNpNFItcFJhVGVhbHNSU0N4RVJucV9zXzVXT3ZOV21fejFNcw?oc=5"
+        },
+        {
+          "title": "WPP Shares Surge After Turnaround Helps Ease Top-Line Decline - WSJ",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQNFFZekxvMldRQm5lc3Y0TFNzM0loXzlEQmFzZU1rYzdpS0VNWHlfMXlBTzZyTGdWbWIzR2hDLUFaRUF0dE1FS210OUZRczVPVy1fTnMxMVQwVFc4S1JPV0lHVENRWFB6MkoyaEp4Sjl2UFNaQ2lRNTlqN1AxdU5JbU1rUVFnQmExdTJ4QkFpLUUyR2dseFU1UERzeDBMQQ?oc=5"
+        },
+        {
+          "title": "WPP shares jump more than 20% as overhaul begins to bear fruit - Financial Times",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOQU13U1libDF6U1Q2N3dzTEllSWhNVmY5enZmOGZCVTJ6eU50WmlCczJzUXVmaUViaV9rQ3AxSlVlUHBZaEN5dVdmclpTRk1WbTBINlR1cl9teTRiS0lhaHhUVUF6YTE3SXNWa1F1eXdoS1RjX0FtcFhuQkcxT2JCS1hySGI?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "AI Ads & Search",
+      "technical_status": "Fail (Avg $Vol $9M < $100M, ADR 3.1% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 80,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "WPP shares surged over 20%",
+        "discrepancy_note": "Source B [2] confirms 'WPP shares jump more than 20%', but Source A (Finviz News) contains no information to confirm this claim."
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -1034,36 +241,293 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "FRPT",
-      "price": 62.38,
-      "gap_pct": 6.6,
-      "pm_volume": 73411,
-      "avg_vol_10d": 1137407,
-      "avg_dollar_vol": 70951449,
-      "mkt_cap": 3065527164,
-      "rvol": 2.36,
-      "adr_pct": 4.56,
+      "ticker": "INSM",
+      "price": 99.02,
+      "gap_pct": 26.73,
+      "pm_volume": 311970,
+      "avg_vol_10d": 2870558,
+      "avg_dollar_vol": 284242653,
+      "mkt_cap": 21462827530,
+      "rvol": 2.16,
+      "adr_pct": 3.47,
       "category": "Earnings",
-      "theme": "Earnings Beat",
-      "reasoning": "Freshpet stock **soared** after reporting **strong Q2 CY2026 sales**, signaling robust financial performance and positive market reception.",
+      "theme": "Earnings Beat & Raise",
+      "reasoning": "Insmed shares surged **17%** after reporting a significant Q2 earnings beat and raising future financial guidance.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 81,
-      "grade": "C",
-      "finviz_theme": "Others",
+      "conviction": 80,
+      "grade": "B",
+      "finviz_theme": "Biotech - Rare Disease",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "**Freshpet (FRPT)** filed an **8-K on 2026-08-05** for **Q2 CY2026 Earnings/Financial Results**. The company reported **strong sales** for the quarter, driving the **stock to soar**.",
-        "impact": "The positive earnings report suggests a strong financial trajectory for Freshpet, potentially leading to upward revisions in analyst price targets and continued positive momentum in the near term."
+        "catalyst": "Insmed (INSM) reported a Q2 loss of **$0.06** a share, significantly beating FactSet's estimate of a **$0.69** loss. The company also provided a business update and raised its financial guidance.",
+        "impact": "The substantial earnings beat and positive guidance revision are driving strong investor confidence, leading to a significant upward re-rating and stock price surge."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\n**Freshpet (NASDAQ:FRPT)** announced **Q2 CY2026 earnings** on **2026-08-05**, reporting **strong sales**. This positive financial performance caused the **stock to soar**, indicating a significant beat against market expectations and strong investor confidence.\n\n• **The Growth (Momentum)**\nThe **strong sales** performance for **Q2 CY2026** demonstrates robust operational execution and potential market share gains for **Freshpet**. This momentum is likely to attract further investor interest and could sustain upward pressure on the stock price in the short to medium term.",
+      "analysis_details": [
+        {
+          "title": "• **The Beats (Surprise Factor)**",
+          "body": "Insmed (INSM) reported a Q2 **loss of $0.06 a share**, which was a significant beat compared to FactSet's estimated loss of **$0.69 a share**. This substantial positive surprise triggered a strong market reaction, with the stock **surging 17%**."
+        },
+        {
+          "title": "• **The Guide**",
+          "body": "Beyond the impressive earnings beat, Insmed also **raised its guidance**, indicating an optimistic outlook for future financial performance. This combination of strong current results and an improved forward-looking statement reinforces positive momentum and investor confidence in the company's trajectory."
+        }
+      ],
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Freshpet’s (NASDAQ:FRPT) Q2 CY2026: Strong Sales, Stock Soars - financialcontent.com",
+          "title": "Earnings Flash (INSM) Insmed Posts Q2 Loss $0.06 a Share, vs. FactSet Est of $0.69 Loss - marketscreener.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOWWxEeHB5SGFjVUlMN0l6QXFLVzZubUxTc0JqejBFdGY4NjBYUHVDYkdydlJJa0drSnJqMDdPd2VGY0g3cW9RVlROdDZ4cWNZWWxXanpMdlZodU83NHJfRTFpMWJncWhvcjBVbVpxbVdHN0pSaDRvcmxLWHpQeXpfeXJFUU5Cb04zaURiSFpVZlRMdlRiSGQ2MVpYalpBNjR2eWZHT3g5c2lPeWVEODVyNnVxNGdDZXM?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOeG1zSTYxY0hnUURLSXJJbWYwanFKQWE4VjEyRGpYSVFDUGZ2UklPak9SaTBxME9rSGZJNkRiT3FHd3Z0SHRVQ3FYTHRzelFMSG5QWGdfMGszLXhtN2EwdllnYXB3UzROMlRQOEpkdi1oSllJaGJWWDEtemJJbHUwdW10QkRhT0dWb29RMElIa2Rya1ZHYVRiQk0zejNnWXY5RnAzVmFKc3lqTWxQZGFvV1ozTHItZmxxU3Y3LWtSRW9fcEVwdGU3WmVFYm1wRmM?oc=5"
+        },
+        {
+          "title": "Insmed stock surges 17% on earnings beat, raised guidance By Investing.com - Investing.com Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPNGFkbGs2TzVLNWQxQVY5aURraTJxSnFsLUxHanNHejZNSjlsYm5xVXVHclJLOExmTi1scmZJZWUxWTByYUJYb0htU0NLejU2TjFTWlJLcFl2X2tKWjlyMlNWYzF1OGotdl9vRjZKYW1RbW1Cc1FvQXF3dTBwRW5Gay1yeERQNm5ZOERWckxzS1hzdXNjSEZGRjB3cHZodUhMSHJfQjFLRGJlYXJEVVp6VHJERUFjb2M?oc=5"
+        },
+        {
+          "title": "Insmed Reports Second-Quarter 2026 Financial Results and Provides Business Update - Insmed Incorporated Investor Relations",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQanJqV21palpuajlWVG05ZkVHSnB0WXNTZ3FHWjRTcVp1SVgxM3lzbnlpc28ycXJmTElTazZxV2pIRjhUR2xUZUcyNnpzUEw0eG9vd0xPcHVnQWMtQU9Na3lKUnVva08yQ0kxNDVLRmxZaGxfb1czLWxpaWFzMmotM2xDc2ZqUC1RU3pEanAyZXRvR0dZdk9UMnFTeXB2V3YxR2dDR3JEV2tYYnBiUmVIT3dTRm9vTVVYanFwUw?oc=5"
+        },
+        {
+          "title": "Insmed’s 44% decline validates InvestingPro’s overvalued call By Investing.com - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNeFFKX000bTdzelBhQ2wwYUd1LWNKRmttUmVBckFRS3c3b2x6cVo4V2lFMTJDLXJMdlQwNDM0QnJmQk4yWlVsWmZpX2pEQzE2UzF6b3RydTdBekRNeXFhNXhBMTBhYXpvNW0tZmc3eVFMME9iYzRWaFRLbkFQT1lydnRFQTZIMkVYb3RwVUwyRWZuaFhCTTRZUmNTanhlVkNUTUpQR3dNa2FGU3FZQTFzWUY3bjREdlNzdzFv?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-08-06",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1104506/000114036126031502/ef20079469_8k.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Biotech - Rare Disease",
+      "technical_status": "Fail (ADR 3.5% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 80,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Insmed shares surged 17%",
+        "discrepancy_note": "Finviz News provides no information (none). Google News article [5] confirms 'Insmed stock surges 17% on earnings beat, raised guidance', but not both sources confirm the claim."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "IOVA",
+      "price": 4.34,
+      "gap_pct": 21.01,
+      "pm_volume": 1888400,
+      "avg_vol_10d": 13007482,
+      "avg_dollar_vol": 56452472,
+      "mkt_cap": 1937820531,
+      "rvol": 1.17,
+      "adr_pct": 8.11,
+      "category": "Earnings",
+      "theme": "Amtagvi Build-Out Accelerates",
+      "reasoning": "IOVA filed an 8-K for earnings, with its stock holding ground as the Amtagvi build-out reportedly accelerates.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "C",
+      "finviz_theme": "Biotech - Oncology",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "IOVA filed an **8-K** on **2026-08-06** for **Earnings/Financial Results**, specifically Item **2.02**. News headlines indicate the company's stock is **holding ground** as its **Amtagvi build-out accelerates**.",
+        "impact": "The acceleration of the Amtagvi build-out suggests positive operational momentum and potential for future revenue growth, providing a stable outlook post-earnings."
+      },
+      "analysis_details": "• **The Growth (Momentum)**\nThe company's **Amtagvi build-out** is reportedly **accelerating**, a key operational detail emerging post-earnings. Despite this positive development, **IOVA stock holds ground**, indicating a stable market reaction to the latest financial results and operational updates.\n\n• **The Guide**\nThe acceleration of the **Amtagvi build-out** suggests an improving operational trajectory for IOVA, which could support sustained momentum and underpin future revenue growth. This operational progress is crucial for investor confidence in the company's competitive positioning within the biotech sector, especially with a key product commercialization ramping up.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "IOVA Stock Holds Ground As Amtagvi Build-Out Accelerates - timothysykes.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQVGlGMGt6TWdSOTZ1Zkw4R0x3VHRvcEZqSE5QekI1Q24wOG01YUl1VFY3MVdBRzJNUW9Zd3ZTNnBlMnFMWjlaZ1I1Y2xsRFZUcllIaFlkdWxxLXRlSUJDMy1ZNUtUMFNFODY0TEFQcUZwR29pc0hiaXJqUFNndkJPSGx2OHZpSHdMNVhr?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-08-06",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1425205/000110465926091619/tm2622322d1_8k.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Biotech - Oncology",
+      "technical_status": "Fail (Avg $Vol $56M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 75,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "IOVA filed an 8-K for earnings",
+        "discrepancy_note": "Neither source explicitly mentions an 8-K filing for earnings. Source B [1] mentions 'Iovance Biotherapeutics Reports 2Q 2026 Revenue Growth', which implies an earnings report, but does not specify an 8-K filing and the '2Q 2026' date seems erroneous for current news. Source B [2] mentions Amtagvi build-out but no earnings or 8-K."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "U",
+      "price": 35.47,
+      "gap_pct": 15.59,
+      "pm_volume": 2294595,
+      "avg_vol_10d": 10102594,
+      "avg_dollar_vol": 358339009,
+      "mkt_cap": 15483897113,
+      "rvol": 1.96,
+      "adr_pct": 5.49,
+      "category": "Earnings",
+      "theme": "Earnings Report",
+      "reasoning": "Unity Software filed an 8-K for earnings, but headlines lack specific figures to confirm a beat, miss, or guidance change.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 79,
+      "grade": "C",
+      "finviz_theme": "Consumer - Gaming",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Unity Software filed an **8-K** on **2026-08-06** indicating **Earnings/Financial Results** under Item **2.02**. However, the provided news headlines do not contain specific financial figures such as EPS, revenue, or guidance. A **holder plans a 50,000-share sale filing**, which represents potential selling pressure.",
+        "impact": "Without actual reported earnings figures, the immediate impact on momentum is unquantifiable, making it speculative. The share sale filing indicates potential near-term overhead pressure."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nUnity Software (U) filed an **8-K** on **2026-08-06** for **Earnings/Financial Results**, confirming the occurrence of its earnings report. Crucially, the available headlines *do not provide specific figures* for earnings per share, revenue, or any guidance updates, precluding an assessment of a beat or miss. This lack of detail leaves the financial surprise factor unknown.\n\n• **Key Consideration**\nThe primary catalyst is the earnings report, officially disclosed via an **8-K filing**. However, the absence of actual financial performance details in the news headlines means no definitive positive or negative earnings surprise can be determined. Separately, a **Unity Software (NYSE: U) holder plans a 50,000-share sale filing**, which introduces an element of potential supply into the market, suggesting a possible headwind for the stock.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "(HBND.U) Pivots Trading Plans and Risk Controls - Stock Traders Daily",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOUGJ2V3ltOVFqeHpSNzdROWNPcXlVSi1LdXJ1X21idEo5VUxqbEhXYVlJNDBXZXJlM3d3VFY4UXNvN3U1QnM4TXc5TXMyQld3Nlh6R2lBVXpzQy1Ra1A4LUpVU1dYQ0JHX3ByZXVTdEFjX1NDQnVjVldpRTNfMVJaSEdOYkVibDJXMDhWSUVib2ltOHhGY3k0RXhNTnZiMkNiblhuMA?oc=5"
+        },
+        {
+          "title": "(HBIL.U) Technical Pivots with Risk Controls (HBIL.U:CA) - Stock Traders Daily",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQUHBXaGpLdlE1bGhTLXdBMTNIZXhlNGMxcFNETk8zOFFzUjlodFUzNjJwbVA5WENqSnZ3OEVOb3h3enV5WUpCZmlDTUo5VDc1RUxNZVp3SUZCcmVuWVEyeUE3cHB5M0h1Q1ZSOV9kcDE5d2hwSTE2N202TTUtdG9GVFlCOVZFLVUyQ0kzTmdZU000TjlSZkFiNlBBYmZPM3dv?oc=5"
+        },
+        {
+          "title": "Unity Software (NYSE: U) holder plans 50,000-share sale filing - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxQUDNUOG5kN290bk0xRXljbE5vN2hpNlZ1S3NHYWFYU29XM1Fpa2xiY0hBYk5tMU8yRGtoazg5emV5SGYwZFZTOVpac1plYXFsZ01SY00xbzkxcGVJaG84RG5wc3VUd1FEQ2NocWdfSXNGZXF0aG5MNExnRU9jUUVMNUZzNTFLOFNfaTNPVFJJeUFpblFia3J3?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-08-06",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1810806/000181080626000041/unity-20260806.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Consumer - Gaming",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 60,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Headlines for Unity Software (U) earnings lack specific figures (dollar amount, percentage) to confirm a beat, miss, or guidance change.",
+        "discrepancy_note": "Neither Finviz nor Google News headlines provided specific earnings figures for Unity Software (U). However, the initial claim mentions an '8-K for earnings', but none of the provided headlines explicitly confirm an earnings 8-K filing. Source B [2] mentions a 'share sale filing' but not an earnings 8-K. Therefore, while headlines *do* lack specific figures, the premise of an 8-K filing for *earnings* isn't confirmed by the provided sources either, making the *lack* of figures (based on an unconfirmed filing) partially unconfirmable."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "CLOV",
+      "price": 4.14,
+      "gap_pct": 12.56,
+      "pm_volume": 184905,
+      "avg_vol_10d": 3718285,
+      "avg_dollar_vol": 15393700,
+      "mkt_cap": 2180476978,
+      "rvol": 1.04,
+      "adr_pct": 5.11,
+      "category": "Earnings",
+      "theme": "Earnings Beat",
+      "reasoning": "Clover Health reported **Q2 CY2026 sales** that **topped estimates**, causing the stock to **jump 10.3%** post-announcement.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "C",
+      "finviz_theme": "Digital Health",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Clover Health filed an **8-K** on **2026-08-05** reporting **Q2 CY2026 earnings/financial results**. Headlines confirmed **Q2 CY2026 sales topped estimates**, leading to a **10.3% stock jump**.",
+        "impact": "The positive earnings surprise and significant stock reaction indicate strong market approval, potentially signaling continued short-term momentum and re-evaluation of growth prospects."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nClover Health (NASDAQ:CLOV) filed an **8-K** on **2026-08-05**, revealing **Q2 CY2026 earnings/financial results**. News reports confirmed the company's **Q2 CY2026 sales topped estimates**, a positive surprise for investors. This strong performance immediately translated into market enthusiasm, with the stock **jumping 10.3%**.\n\n• **The Growth (Momentum)**\nThe significant beat on **Q2 CY2026 sales** suggests accelerating operational momentum and effective execution for Clover Health. Surpassing market expectations on the top line often indicates a growing customer base or increased per-member revenue, strengthening the bull case for sustained growth. This positive surprise could attract further momentum-driven buying.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Clover Health’s (NASDAQ:CLOV) Q2 CY2026 Sales Top Estimates, Stock Jumps 10.3% - StockStory",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxOZ2U0OVFKMEFJMW9VelBNdk91bEMxY1owS281b3U3a0Z4dUo2QnFnemVZZXpUUDNPS00zMzRTMFRSUktYb08wY000TE9FdUVLMEozbGFPT2JjZnNWRHhCUnQ4SzZWN2RJSkR5aGYwUUFWVlJ5ZkZIZnVTSUpKWFN3VEFlSjdaLUd2Z1B1akVGbTlYa0oxQmZpNU1XS25DUmlhM2VtX2xZTzN2TmVOTjUzUGFHWVNkeU9hc2haR3FsQmYxTEp4Z2hwQUxjNzVMbHRNMFNz?oc=5"
+        },
+        {
+          "title": "symbol__ Stock Quote Price and Forecast - CNN",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9MZ2h5QjVDSDdhc3l5THJPVG1DQkdROFpDY1BrWVhKNlVWM2VNRzRKcThaNzJIbVA1alllczRnMmVIQjd0T3dLa2RPXzU4emxY?oc=5"
+        },
+        {
+          "title": "Clover Health Reports Second Quarter 2026 Results",
+          "source": "Finviz",
+          "url": "/news/377902/clover-health-reports-second-quarter-2026-results"
         }
       ],
       "edgar_filing": {
@@ -1071,27 +535,193 @@
         "form": "8-K",
         "items": [
           "2.02",
-          "7.01",
           "9.01"
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1611647/000161164726000016/frpt-20260805.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1801170/000180117026000196/clov-20260805.htm"
       },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $71M < $100M)",
+      "industry": "Digital Health",
+      "technical_status": "Fail (Avg $Vol $15M < $100M)",
       "verification": {
-        "status": "Verified",
+        "status": "Discrepancy",
+        "confidence_score": 85,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Stock jumped 10.3% post-announcement.",
+        "discrepancy_note": "Finviz News does not mention a specific percentage stock jump. Google News headline [3] states 'Stock Jumps 10.3%', but other headlines in Google News ([2], [5]) do not provide this specific percentage, nor does Finviz."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "RDW",
+      "price": 10.72,
+      "gap_pct": 10.07,
+      "pm_volume": 1427360,
+      "avg_vol_10d": 16449573,
+      "avg_dollar_vol": 176339423,
+      "mkt_cap": 2560207793,
+      "rvol": 0.96,
+      "adr_pct": 7.67,
+      "category": "Earnings",
+      "theme": "Earnings Beat & Raise",
+      "reasoning": "Redwire shares surged 11% after strong Q2 results, driven by impressive defense orders and robust guidance that exceeded Wall Street expectations.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "A",
+      "finviz_theme": "Defense & Aerospace",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Redwire (RDW) reported **Q2 earnings** where its **defense division pushed results to a new high**. The company's performance and **guidance impressed Wall Street**, leading to a stock jump.",
+        "impact": "The strong performance in the defense sector and positive outlook suggest continued momentum and potential re-rating for RDW, reinforcing its competitive position in a key growth area."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nRedwire (RDW) shares **rose 11%** after reporting **Q2 earnings** where its **defense division pushed results to a new high**. This strong performance seems to have **impressed Wall Street**.\n\n• **The Growth (Momentum)**\nThe company's significant growth was specifically attributed to **defense orders**, indicating robust demand within this segment. This suggests strong operational momentum in a key strategic area for RDW.\n\n• **The Guide**\nThe positive market reaction was also driven by **guidance** which **impressed Wall Street**, pointing to a strong outlook for future performance. This indicates management confidence and potential for sustained growth.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Redwire (RDW) Stock Jumps As Defense Orders And Guidance Impress Wall Street - timothysykes.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9pcUUzZGttcmkxM2R3dzNJOHhXOW9PUnJjSTEyaVdSdDZDSXV5emFYdlRGeUxXMzIwVXByTGpzUWs1ZWNlRk1VcUdNOGp0al8wZUZqVnFMQUoxZHlqQVFacURVdGxmUThaZlI5QlZfelVVX1FGVm9WR0RlMGRYcm8?oc=5"
+        },
+        {
+          "title": "Redwire (NYSE:RDW) shares rise 11% after defense division pushes Q2 to new high - TechStock²",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPWks2UnVuQU90MzhSTlFUUHoxdXNVTEdORTJ6UzBYVXJOTnNxTDQxWmpLSmlFSG1jeGpYem9SMTRJb2o0Q1I5d01QcDBKajRrQnZIeWRwRlk3VmZRLW5wVDh0S3NCSnBmTXN1Z0dQMng4ZnhMT3lLODZoZTQyaEVoelBDSmdKa2xtMGl6d1MyeXZxNG5Zd1hSa2xNZEE?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-08-05",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1819810/000181981026000121/rdw-20260805.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "Defense & Aerospace",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
         "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Freshpet stock soared after reporting strong Q2 CY2026 sales",
-        "discrepancy_note": null
+        "primary_claim": "Redwire shares surged 11%",
+        "discrepancy_note": "Source B [5] mentions 'Redwire (NYSE:RDW) shares rise 11%', but none of the headlines from Source A (Finviz) provide this specific 11% surge figure."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "MGNI",
+      "price": 20.67,
+      "gap_pct": 9.78,
+      "pm_volume": 175662,
+      "avg_vol_10d": 2122232,
+      "avg_dollar_vol": 43866535,
+      "mkt_cap": 2960253985,
+      "rvol": 1.28,
+      "adr_pct": 4.11,
+      "category": "Earnings",
+      "theme": "Mixed Q2 Results & Q3 Guidance",
+      "reasoning": "Magnite reported mixed Q2 earnings with a revenue miss but provided Q3 revenue guidance, driving the stock higher.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "C",
+      "finviz_theme": "AI Ads & Search",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Magnite (MGNI) filed an **8-K on 2026-08-05** for its **Q2 CY2026 earnings results**. News headlines indicate **Q2 Earnings topped estimates**, though **Q2 CY2026 Revenue Estimates were reportedly missed**. Despite the revenue miss, the stock **soared 8.6%**.",
+        "impact": "The positive earnings beat and forward Q3 revenue guidance likely outweighed the Q2 revenue miss, suggesting a momentum shift as investors focus on future prospects and the stock's strong immediate reaction."
+      },
+      "analysis_details": "• **The Beats (Surprise Factor)**\nMagnite (MGNI) announced **Q2 earnings** that **topped estimates**, which was a positive surprise for investors. This earnings outperformance contributed to the stock's significant move, showing a strong reaction to the company's profitability metric.\n\n• **The Guide**\nWhile **Q2 CY2026 revenue estimates were reportedly missed**, Magnite, Inc. provided forward guidance, expecting a **Q3 Revenue Range of $188.0M - $192.0M**. This forward-looking guidance likely played a crucial role in the stock's **8.6% soar**, potentially signaling management's confidence and providing a clear path for future revenue expectations despite the mixed past quarter.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Magnite (MGNI) Q2 Earnings and Revenues Top Estimates - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQd1JRbW1uTlJGMjQ0eG92MFF4UVJOa210NW1qQVFRVkJfNjdWV1ppZHk3R1EzV2V6YlRLbDg2Qjd3dS1VSGNTcy1FUFAyY0MzanVWN3JZSk1XczM1TmtiRGJTQ2RfZkZwWkhFX1lKdGJMbWtHZUI4cnR4TkhTSEJEMnk1SXJwUU9tVzRCckpjODFmV2s1a2szWFBYUHBmb3c?oc=5"
+        },
+        {
+          "title": "Magnite (NASDAQ:MGNI) Misses Q2 CY2026 Revenue Estimates, But Stock Soars 8.6% - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPNjUyU0c0TWRpYklOdm5sVWpUMWJhdGszY0RtSG1FVGpwV2ROUWpKVzVwNnhucm11VDVJbEFKZlZadzVkSHRnVUpmeElhazd1Z2FZU2kwcVZDeTE0WThCMnBhVE5wUmpWcmY0bW9lTHhNOE50RmJ2Q242QU41Vk1pbkVpS2pkX1JNcmk1dnNJTURhZGR0N2xNeGtmR0FEZw?oc=5"
+        },
+        {
+          "title": "(MGNI) Magnite, Inc. Expects Q3 Revenue Range $188.0M - $192.0M - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQVWJpQ0FtU09fekJNVTRjY3hkeUh4MHRpWmlrN0phdE12RTRIOFU2bjh6QkJmOWRtQkdJTGlNQnRMZzA2Ul81aDRfVndSQWdtcWdpOXVxc0k2M2w5QTN6MzVIeG9yLThWc1ZCYVZjWUU4ZndIeEg0blZ4ZjlKTEpMYnJHMm1lQnVhdURtSWQ5ZnJ6TjYxY1paUWZEM2tKOXhvLXR4dXVMWWdXdnhY?oc=5"
+        },
+        {
+          "title": "Magnite: Q2 Earnings Snapshot",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/media-advertising/articles/magnite-q2-earnings-snapshot-213321416.html"
+        },
+        {
+          "title": "Magnite Reports Second Quarter 2026 Results",
+          "source": "Finviz",
+          "url": "/news/377909/magnite-reports-second-quarter-2026-results"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-08-05",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1595974/000162828026053334/mgni-20260805.htm"
+      },
+      "float_shares": null,
+      "short_float": null,
+      "daily_pct": null,
+      "industry": "AI Ads & Search",
+      "technical_status": "Fail (Avg $Vol $44M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Magnite reported a Q2 revenue miss.",
+        "discrepancy_note": "Source B (Google News) shows conflicting information regarding the Q2 revenue performance. Yahoo Finance [2] states 'Misses Q2 CY2026 Revenue Estimates', while Benzinga [1] and another Yahoo Finance article [4] state 'Better-Than-Expected Q2 Earnings' and 'Q2 Earnings and Revenues Top Estimates' respectively. Source A (Finviz) headlines [1, 2] do not specify whether revenue met, beat, or missed estimates, preventing confirmation or denial of a 'miss'."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -1106,83 +736,75 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "HL",
-      "price": 15.39,
-      "gap_pct": 6.33,
-      "pm_volume": 227025,
-      "avg_vol_10d": 34175123,
-      "avg_dollar_vol": 525955143,
-      "mkt_cap": 10322264102,
-      "rvol": 0.83,
-      "adr_pct": 4.54,
+      "ticker": "CHYM",
+      "price": 25.92,
+      "gap_pct": 9.53,
+      "pm_volume": 807233,
+      "avg_vol_10d": 5817921,
+      "avg_dollar_vol": 150800512,
+      "mkt_cap": 9876015874,
+      "rvol": 1.82,
+      "adr_pct": 4.95,
       "category": "Earnings",
-      "theme": "Strong Operational Performance & Q2 Results",
-      "reasoning": "Hecla Mining reported strong Q2 results, including a record **1.5M ounces** of silver output at Lucky Friday and positive **drilling results**, boosting silver momentum.",
+      "theme": "Earnings and Revenue Beat",
+      "reasoning": "Chime Financial (CHYM) reported strong **Q2 earnings and revenue**, **beating analyst estimates**, signaling robust financial performance.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
+      "conviction": 79,
       "grade": "A",
-      "finviz_theme": "Materials - Metals & Mining",
+      "finviz_theme": "Fintech - Neobanks",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Hecla Mining filed an **8-K** on **2026-08-04** disclosing **Q2 2026 Earnings/Financial Results**. News reports highlight that Hecla's Lucky Friday mine set a **silver output record at 1.5M ounces** and that **drilling results are fueling silver momentum** and a growth story.",
-        "impact": "The record silver output and positive drilling results indicate strong operational execution and future growth potential, likely driving investor confidence and re-rating for silver exposure."
+        "catalyst": "Chime Financial (CHYM) released its **Second Quarter 2026 Financial Results** on **2026-08-05**, as disclosed in an **8-K filing**. The company **beat both Q2 earnings and revenue estimates**, indicating stronger-than-expected performance.",
+        "impact": "This positive surprise suggests sustained user growth and engagement within the fintech sector, potentially attracting further investor confidence and upward revisions in price targets."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nHecla Mining (HL) officially reported its **Second Quarter 2026 Results** via an **8-K filing** on **2026-08-04**. A key highlight from the results is that Hecla's Lucky Friday mine achieved a **silver output record at 1.5M Ounces**, contributing to a surge in investor interest and stock price.\n\n• **The Growth (Momentum)**\nBeyond the record output, the company's **drilling results** are specifically cited as fueling **silver momentum** and bolstering a **silver growth story**. This operational success led to HL stock rising, as these results reinforce the company's potential within the precious metals sector.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nChime Financial, Inc. (CHYM) **reported its Second Quarter 2026 Financial Results** on **August 5, 2026**, as confirmed by an **8-K SEC filing**. The company **beat both Q2 earnings and revenue estimates**, surpassing market expectations for the period.\n\n• **The Growth (Momentum)**\nThe strong **Q2 earnings and revenue beat** for CHYM indicates positive operational momentum. This performance could signal robust growth in its customer base and financial product adoption, driving continued interest from momentum investors.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Hecla Mining (HL) Rallies As Drilling Results Fuel Silver Momentum - StocksToTrade",
+          "title": "Chime Financial, Inc. (CHYM) Beats Q2 Earnings and Revenue Estimates - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5EMWFueE84ZkxUck9qOXdsZm50TG8wakFHeVdvd0lXRlBGQlpfWjJOZU1rejhLdW90d19Zd3VnNjRZUXJlVHlRX2ZyUUpkZ3JhQl9HNm54OEdKWGxlT1BCMk9uelNJem9aWjlDQWFQT1Y2YVZYUWZhdXlsYw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPc0hQWlRWMmpIYlFfclBNOHFBZlBpNl8tUGJwUDF6QjhJWExkcG5YUVFRVjVBYXp4aWoxUmhSQWdnUEhma0JiTGg3bWZmNXFUS1pkOEFxY01EWndaZ0RsTldkM21PYk5haHJFTXVJb1MwTHBPNVpHZFRlMTJIQnQxemVEY1IzcEx5bng1NE5MaGRjajQ4a3lfZlJZQQ?oc=5"
         },
         {
-          "title": "HL Stock Rises As Drilling Results Fuel Silver Growth Story - timothysykes.com",
+          "title": "Chime Financial (CHYM) CAO sells 10,000 shares in Rule 10b5-1 trade - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE5GaVBTNFl6OUcybzFxelhGczQyRTB3eDJXekJzZ0hsV3dyVURfMVdpRnJxVzZBNFZTeTk4MUpkNnJJVE5EMUpkVEtpU2hGcG0yS012OWVtSUtKa2ZHQzBiRnk5M1Z5TXd6SDNaekVkeWJvOU9FM0FyTHpyUEJEOWs?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNdU5rWV9ONGN3MEtHZklVb2pDdVNCNHZqTVJCTG1XN2tiMDgzcUVMZjMtdHpwNHA2MC1ERnE2cGlCcnU2emJzNk1VMndaeU96QjgxM2h0WUVBUC1LU01UYUZIWVJUZzVOamd3VWRkYUREZmNMZ1BZOGxPUWl4UjdFaDBQRlRlY1dHTnl4cHlQNDNtQWVJM0YzYnZmWlNrcDRZakFBZVVhRDZfc3BicHdZRU4xdw?oc=5"
         },
         {
-          "title": "Hecla's Lucky Friday Sets Silver Output Record at 1.5M Ounces - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPVm80b0tBSjBmeDd6dDR5bzNVR2xWM0Q5bFQ0SHhxXy1vRE96SldaZFlSOUJYaGhSR1RCX1c3dW9fUmlRcVNYVDJkMTltTU9iZ2tEaVJQVTRDOWd3cVB3aEZhWU42LWhISTdnMUk4NWdZRGdfSHcxWHBaeTBUNlZVY09NU0FscFVucnB1VGFwOA?oc=5"
-        },
-        {
-          "title": "Hecla Mining: Q2 Earnings Snapshot",
+          "title": "Chime Reports Second Quarter 2026 Financial Results",
           "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/hecla-mining-q2-earnings-snapshot-213103418.html"
-        },
-        {
-          "title": "Hecla Reports Second Quarter 2026 Results",
-          "source": "Finviz",
-          "url": "https://www.businesswire.com/news/home/20260804948485/en/"
+          "url": "https://www.businesswire.com/news/home/20260805473866/en/"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-08-04",
+        "filing_date": "2026-08-05",
         "form": "8-K",
         "items": [
           "2.02",
-          "8.01"
+          "2.05",
+          "5.02",
+          "9.01"
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/719413/000119312526333077/hl-20260804.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1795586/000179558626000046/chym-20260731.htm"
       },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "Materials - Metals & Mining",
+      "industry": "Fintech - Neobanks",
       "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 90,
+        "confidence_score": 75,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "1.5M ounces of silver output at Lucky Friday",
-        "discrepancy_note": "Source B ([2] Hecla's Lucky Friday Sets Silver Output Record at 1.5M Ounces - Stock Titan) explicitly confirms the '1.5M ounces' figure and location. However, Source A's provided titles (Q2 Earnings Snapshot, Hecla Reports Second Quarter 2026 Results) do not contain this specific numerical detail."
+        "primary_claim": "Chime Financial (CHYM) reported strong Q2 earnings and revenue, beating analyst estimates.",
+        "discrepancy_note": "Source A (Finviz) confirms Q2 results were reported but does not mention if they beat analyst estimates or provide specific numbers. Source B (Google News, specifically Yahoo Finance headline [1]) explicitly states that Chime Financial 'Beats Q2 Earnings and Revenue Estimates', confirming the claim, but Finviz does not."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -1197,297 +819,40 @@
       "tier_label": "Major Catalyst"
     },
     {
-      "ticker": "SBSW",
-      "price": 9.56,
-      "gap_pct": 6.26,
-      "pm_volume": 137049,
-      "avg_vol_10d": 4903729,
-      "avg_dollar_vol": 46879649,
-      "mkt_cap": 6706915350,
-      "rvol": 1.47,
-      "adr_pct": 3.23,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $47M < $100M, ADR 3.2% < 4%)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 100,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "VZLA",
-      "price": 3.4,
-      "gap_pct": 6.18,
-      "pm_volume": 57535,
-      "avg_vol_10d": 4744036,
-      "avg_dollar_vol": 16129722,
-      "mkt_cap": 1206067460,
-      "rvol": 1.51,
-      "adr_pct": 4.85,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $16M < $100M)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "ASM",
-      "price": 5.91,
-      "gap_pct": 6.09,
-      "pm_volume": 73075,
-      "avg_vol_10d": 3210538,
-      "avg_dollar_vol": 18974280,
-      "mkt_cap": 1005886811,
-      "rvol": 1.1,
-      "adr_pct": 5.55,
+      "ticker": "SABR",
+      "price": 2.12,
+      "gap_pct": 8.02,
+      "pm_volume": 310569,
+      "avg_vol_10d": 3789774,
+      "avg_dollar_vol": 8034321,
+      "mkt_cap": 838064137,
+      "rvol": 2.09,
+      "adr_pct": 5.76,
       "category": "Earnings",
       "theme": "Earnings Beat",
-      "reasoning": "ASM Technologies reported strong Q1FY27 earnings, with profit surging 72% and a ₹6 interim dividend, driving positive momentum.",
+      "reasoning": "Sabre (SABR) surged after reporting **Q2 CY2026 earnings** that **exceeded expectations**, leading to a **strong stock jump**.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
+      "conviction": 80,
       "grade": "C",
       "finviz_theme": "Others",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "ASM Technologies announced its **Q1FY27 earnings**, reporting a significant **profit surge of 72%**. Additionally, the company declared a **₹6 interim dividend** for shareholders.",
-        "impact": "The substantial profit growth and dividend payout signal robust financial health and operational efficiency, likely boosting investor confidence and contributing to upward price momentum."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nASM Technologies delivered impressive **Q1FY27 earnings**, reporting a substantial **72% surge in profit**. This strong financial performance underscores the company's operational strength and market execution, exceeding expectations for the quarter.\n\n• **The Growth (Momentum)**\nBeyond the profit surge, ASM Technologies further rewarded shareholders by declaring a **₹6 interim dividend**. This combination of significant profit growth and direct shareholder return positions the company favorably for continued positive momentum, indicating a strong financial footing and management's confidence in future performance.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "ASM Technologies profit surges 72% in Q1FY27, declares ₹6 interim dividend - scanx.trade",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQRk5oQ1RYZ2Q3YjJmandySjVnU3hoUE9FcUc1aUgycHAydms1eVRoT2FqV1FuZHc2cjdmWWlPS3NPYUJJSERXZ2NOdi0zcVNMVEYwR2xURXp0UHNoQk0wVVlNdWpwb0MzRkZSei1SV3Y3bU9IME41dTAwWE9KYUZObUhBREVRSGdfQU5GSUpZWFN1dUdPSTdQSkZVZnVPMzJiRnBMbmNnSVZBWEZybmhJa2JCNHE0Vk83ejN3VQ?oc=5"
-        },
-        {
-          "title": "Is Avino (TSX:ASM) Signaling a Strategic Shift With Its Mid‑Year Gold‑Heavier Production Mix? - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPbkFFNkdGamlreV9oeGFqODQ0TzZtejFYV2UtN3NSNUV1YWhBdlpnVUVvcmhSTDZyXzlmSGtTQnNWUTYzN2pDa0w5eERCcWJOMFJsNXktd21Wc0QtNzU2OVRYeUJpRU9OeXF5aS1RcGg2TzI3RWJTeEtJTGZvQlBYdTFBcF91Wk1HcVJxYzA3ZnBILWFrTzZySjFRVjZ4SXdEblVWakhSZ0kyS2dFUHVrYUwybHo4aGlLcF9RQkdyVXhWb05xcjBQQ2pwZnY2c0RiMjBmeTJZd29EOEE4S2JN0gHkAUFVX3lxTE1zcE9IWUpwS3NPQjhYT1JqZElZOGZPNGdETzNkcmE2M0JnUG1jM20wVDdBOW5KdTlCSGFPWnhzdFg2YlJ1ajlmMm5DQWd5bnJTZ016WmtQYU9ySm5xN3Njd2Z0NmdaUHFGTDN0T2JwRzN5bFlIX1BibTJEMmtRbXdZM3QwZTFtb1c4Z0h1Q1l1blpwQ1lPR3NPX3ptVGFyb2RaVnRKRFQ0LV9kRXhHblUyc3J1MERqcmMwdERhanN2MXFGVHJYcklaSEMyMTdfbTJ3c0FUakdmeVJlY3BEb0oxYXI3WA?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $19M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "ASM Technologies reported profit surging 72% in Q1FY27 and declared a ₹6 interim dividend.",
-        "discrepancy_note": "Source B [2] fully confirms the specific claims for ASM Technologies (profit surging 72% in Q1FY27, ₹6 interim dividend). However, Source A (Finviz) has no information, meaning not BOTH sources confirm the claim, leading to a 'Discrepancy' as per the rules."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "AG",
-      "price": 16.49,
-      "gap_pct": 5.79,
-      "pm_volume": 279643,
-      "avg_vol_10d": 11680552,
-      "avg_dollar_vol": 192612302,
-      "mkt_cap": 8128025835,
-      "rvol": 1.06,
-      "adr_pct": 4.84,
-      "category": "Others",
-      "theme": "Operational Headwinds",
-      "reasoning": "AG Barr shares declined due to identified **supply chain failures**, raising concerns about its **Irn-Bru soft drink production** and operational efficiency.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 57,
-      "grade": "C",
-      "finviz_theme": "Consumer - Soft Drinks",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Shares in **Irn-Bru soft drink maker AG Barr** experienced a downturn, attributed to **supply chain failures** identified on **2026-08-04**.",
-        "impact": "This operational setback indicates potential disruptions to product availability and increased costs, likely impacting sales and profit margins, making the stock an avoid for positive momentum."
-      },
-      "analysis_details": "\n• **What Happened**\nOn **2026-08-04**, **AG Barr**, the manufacturer of **Irn-Bru soft drinks**, saw its shares **fall flat**. This decline was directly linked to reported **supply chain failures**, indicating operational challenges within the company.\n\n• **Key Consideration**\nThese **supply chain failures** suggest an immediate negative impact on **AG Barr's** operational efficiency and potentially its ability to meet demand. For momentum investors, this presents a significant headwind, likely leading to downward pressure on the stock price and a period of underperformance.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Shares in Irn-Bru soft drink maker AG Barr fall flat on supply chain failures - The Herald",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOamY4UjA1X2ZobWlCSFFXZEpiWkdvQ3U4TVRSeVdYT3lDZEdoS2I4QjEzQXFSNnk4WFhteFhNZkR3akZab0ZiNGxUOWpNRWYwNW1IWWs2UGVZQnJoT05CTXhRV2pORldJUjVIV2hGcW4zVlBhN0kxVzhzQlIwMm5xY2VfcTZhSDVyUEY0d1RmdFk1Snc0VjJjMDJic3U?oc=5"
-        },
-        {
-          "title": "Nebraska Recovery Roundup: Nebraska Grazing Exchange Strengthens Producer Connections and Supports Livestock Resilience - IANR News",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxORzJ2UHgzTkNnaGJ3UW9lcTlSakZYZklxbzF0MTJaSGZsM01BX0pWQ0d2U2ZaMXBNMzV2eGhRd21fRFU1NlNvMlZ5ZlQwWjdoUDhza0hzbU0zMUFlN3RrUFpodDBZRWJhR2lhTU9Sd0xuRXBUVEpvTUE4R2Zkc2xvdDVWRGJCZGVDMkRwazY2MG1jdndMN3hydkhxTnlneThCQTUtVF8wUnBpMEotUzYyTXhqX0stX2tKRmFuZkJn?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Consumer - Soft Drinks",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 80,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "AG Barr shares declined due to identified supply chain failures, raising concerns about its Irn-Bru soft drink production.",
-        "discrepancy_note": "Source A (Finviz News) provides no information regarding the claim. Source B [4] ('Shares in Irn-Bru soft drink maker AG Barr fall flat on supply chain failures - The Herald') confirms the claim, but it is the only source to do so."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "AMPX",
-      "price": 10.81,
-      "gap_pct": 5.76,
-      "pm_volume": 457628,
-      "avg_vol_10d": 5640478,
-      "avg_dollar_vol": 60973567,
-      "mkt_cap": 1530989732,
-      "rvol": 1.48,
-      "adr_pct": 7.04,
-      "category": "Earnings",
-      "theme": "Q2 Revenue Beat",
-      "reasoning": "Amprius Technologies reported Q2 2026 earnings with a beat on revenue estimates, signaling positive top-line performance.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 78,
-      "grade": "C",
-      "finviz_theme": "EV Batteries",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Amprius Technologies (AMPX) filed an 8-K on **2026-08-04** for its **Q2 2026 earnings**, where the company reported a **loss** but **beat revenue estimates**. Consensus estimates for Q2 2026 revenue were **$29.3 million**, with earnings expected at **-$0.02 per share**.",
-        "impact": "The better-than-expected revenue performance indicates growing demand or successful execution, potentially leading to positive investor sentiment and momentum."
+        "catalyst": "Sabre (SABR) filed an **8-K** on **2026-08-06** disclosing **earnings/financial results** for **Q2 CY2026**. The company **exceeded expectations** for the quarter, triggering a significant market reaction.",
+        "impact": "The positive earnings surprise and substantial stock increase indicate strong investor confidence and could signal upward revisions to analyst estimates and price targets."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nAmprius Technologies (AMPX) announced its **Q2 2026 financial results**, reporting a **loss** for the quarter but notably **beating revenue estimates**. Market consensus had projected **Q2 2026 revenue** at **$29.3 million** and earnings at **-$0.02 per share**.\n\n• **The Growth (Momentum)**\nThe company's ability to **beat revenue estimates** despite reporting a **loss** highlights positive traction in its sales and market adoption. This suggests underlying demand strength for Amprius's products, providing potential momentum for future quarters and reinforcing its market position.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nSabre (NASDAQ:SABR) officially reported its **Q2 CY2026 financial results**, confirming an **earnings beat** as the company **exceeded expectations** for the quarter. This positive surprise led to Sabre's stock **jumping 11.1%** following the announcement, reflecting a strong market reaction to its financial performance.\n\n• **The Growth (Momentum)**\nThis earnings beat suggests robust underlying business performance for Sabre in **Q2 CY2026**. The **11.1% stock jump** indicates significant momentum and could attract further institutional interest, potentially setting a positive tone for the stock's near-term price trajectory as investors digest the improved financial outlook.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Amprius Technologies (AMPX) Reports Q2 Loss, Beats Revenue Estimates - Yahoo Finance",
+          "title": "Sabre (NASDAQ:SABR) Exceeds Q2 CY2026 Expectations, Stock Jumps 11.1% - FinancialContent",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQNTY3T1lXcmNOY0MyUXFoX1hBVFNIc09wYjhJeTl6LVBoQVZhMnRMUHItOEpQQjBlWGZ6Q0ZraklQZHdzbVJ1RFNsbUtFallUWFJKTG42T2ZlZUdTWnY1bjZQNEZVVDB1Uzl3Z1FMWG02bENHYndpUHFtaVBISENRV0ZDM0kzY2w3ejE4NXJKY0VfZnpBMXhxTzVXYVJ5QXFfQmFj?oc=5"
-        },
-        {
-          "title": "Earnings To Watch: Amprius Technologies Inc (AMPX) Q2 2026 -- GF Value Sees 183% Upside",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/earnings-watch-amprius-technologies-inc-134050600.html"
-        },
-        {
-          "title": "Drone Stocks In Focus As Black Sea Attacks Raise Defense Demand - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxPM0lyU095bXA5a0pMWVRuX0c3ZlpIakdZa05qQTl3Y0lvUFFzZkhaODZXUGZJM0FsUGlXWUZVWGxSVUd3NkE0ZDRqd0pHbUJkcWNBSzJvdTg2SWFGNGVjbmFvN1dlUTVnTHJTLVpqRjdiMkhJSkZWMHEzSnNVYnp0VU9jZjdHMk1KcVVZaXdBSUFKVHNMdm1YZzljUm9CM0JGVGM3VDNIWHZEbHdZSVEya2dYc010QXNJTmJvaFhxc0xfUDJ2Wi1BUk0xTno1aTdWTzYxakdIUUk1MENnV2xR0gHfAUFVX3lxTE8zSXJTT3ltcDlrSkxZVG5fRzdmWkhqR1lrTmpBOXdjSW9QUXNmSFo4NldQZkkzQWxQaVdZRlVYbFJVR3c2QTRkNGp3SkdtQmRxY0FLMm91ODZJYUY0ZWNuYW83V2VRNWdMclMtWmpGN2IySElKRlYwcTNKc1VienRVT2NmN0cyTUpxVVlpd0FJQUpUc0x2bVhnOWNSb0IzQkZUYzdUM0hYdkRsd1lJUTJrZ1hzTXRBc0lOYm9oWHFzTF9QMnZaLUFSTTFOejVpN1ZPNjFqR0hRSTUwQ2dXbFE?oc=5"
-        },
-        {
-          "title": "Amprius Technologies Reports Second Quarter 2026 Financial Results and Recent Business Highlights",
-          "source": "Finviz",
-          "url": "/news/377108/amprius-technologies-reports-second-quarter-2026-financial-results-and-recent-business-highlights"
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNUFJ5blExdU94QVpia1FjcHhLLUtZbi16MEdRR3NfQ0h0bC1PeVRWSWh2a2NueG5LalpWcGZkYW1WV29xajVPVWMxUzVvQWtMUTd0UVlJVjgtaXNvRWNfSjRkd2VtZTFvM29iQ3ZiR29ocGJaRVdPN1BiVlNhMDJ4V3Z1REx4WXlWcFJFU29sZ3l5TEVaMFA1RjZwTGFya3dpM0dWUENBZW5xM29GeHBRN3NQZVlwM1hJTzVrMzJFeDFHQQ?oc=5"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-08-04",
+        "filing_date": "2026-08-06",
         "form": "8-K",
         "items": [
           "2.02",
@@ -1495,13 +860,13 @@
         ],
         "category": "Earnings",
         "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1899287/000189928726000056/ampx-20260804.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1597033/000162828026053858/sabr-20260806.htm"
       },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "EV Batteries",
-      "technical_status": "Fail (Avg $Vol $61M < $100M)",
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $8M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 90,
@@ -1509,8 +874,8 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Amprius Technologies beat Q2 2026 revenue estimates",
-        "discrepancy_note": "Only Source B (Google News, specifically Yahoo Finance [3]) explicitly states 'Beats Revenue Estimates'. Source A (Finviz) does not contain enough detail to confirm this specific claim about revenue performance."
+        "primary_claim": "Q2 CY2026 earnings",
+        "discrepancy_note": "Source B [2] explicitly mentions 'Q2 CY2026 Expectations'. However, Source B [1] reports 'Q2 Revenue' and '2026 Cash Flow Guidance'. It is highly improbable for a company to report Q2 CY2026 earnings in the current year. This suggests that the 'CY2026' in Source B [2] (and thus the primary claim) is either a typo, refers to future expectations/guidance *for* 2026, or is simply incorrect for reported earnings. Source B [1] implicitly indicates that 'Q2' is the recently reported quarter, with '2026' being guidance. As Finviz provides no information, there isn't consistent confirmation for 'Q2 CY2026 earnings'."
       },
       "gates_passed": 2,
       "gates_detail": {
@@ -1525,54 +890,65 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "EQX",
-      "price": 9.58,
-      "gap_pct": 5.64,
-      "pm_volume": 130178,
-      "avg_vol_10d": 15450818,
-      "avg_dollar_vol": 148018836,
-      "mkt_cap": 11155628166,
-      "rvol": 1.35,
-      "adr_pct": 4.07,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
+      "ticker": "HYLN",
+      "price": 3.94,
+      "gap_pct": 6.09,
+      "pm_volume": 97620,
+      "avg_vol_10d": 2643194,
+      "avg_dollar_vol": 10414184,
+      "mkt_cap": 702609336,
+      "rvol": 0.67,
+      "adr_pct": 9.23,
+      "category": "New Contract/Partnership",
+      "theme": "Government Contract",
+      "reasoning": "Hyliion secured a new contract to deliver KARNO power modules to NAVSEA Philadelphia, signaling product adoption and revenue potential.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
       "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
+      "finviz_theme": "Clean Energy - Hydrogen",
+      "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+        "catalyst": "Hyliion announced an **exclusive delivery** of its **KARNO power modules** to **NAVSEA Philadelphia**, indicating a specific product adoption by a government entity.",
+        "impact": "This event signals potential for future government contracts and broader market acceptance for Hyliion's power generation technology, adding credibility to its product line."
       },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "analysis_details": "• **Impact**\nHyliion announced an **exclusive delivery** of its **KARNO power modules** to **NAVSEA Philadelphia**, as reported by Investing.com. This delivery signifies a tangible step for Hyliion in product adoption, specifically with a **government entity** like NAVSEA, which is the Naval Sea Systems Command. The news highlights a concrete business win for the company's **KARNO power modules**.\n\n• **Strategic Value**\nThis contract positions Hyliion's **KARNO power modules** within the defense sector, potentially opening doors for further government contracts and strategic partnerships. The delivery to **NAVSEA Philadelphia** validates the technology's application beyond commercial trucking, suggesting broader market opportunities and enhancing the company's long-term growth prospects and diversification.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [],
+      "headlines": [
+        {
+          "title": "Hyliion Holdings Corp. (HYLN) Latest Stock News & Headlines - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE9TUTN4ZkplLXdXNHdaODlRbDBXRFFhaElZVk5Ec0pNd2hyUUhfZUpoaTlNc0w2WTJsa1M5S1huaGlkZm84WnRiSjZlUmQ0SnRUSEFFag?oc=5"
+        },
+        {
+          "title": "Exclusive: Hyliion to deliver KARNO power modules to NAVSEA Philadelphia By Investing.com - Investing.com Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxPSkVUcEpwTzZnS1Z4cHBfR2txb1dQWHdfdUxqR2sxRHZUYm1nNDNoR0NrR2t0Zk5GeGJ5REpLdFk1VTNBTmoyRm5ZNUVOYklLYU9HNlY5S2xaR01BZDhrbnVoVC1CcUk4eVhHVlFCeTZiNXhQdXp6MWZ6ZC16SmtGM0t3dEZTMTh4VFRpVnVITmJCOHBzWUdpZEFZRmN4Q1p1dGpPeXFTeVNib25Sb1NKeE5OU3JTTWhaam9CSWxXOTNuOXpvQXc?oc=5"
+        }
+      ],
       "edgar_filing": null,
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "—",
-      "technical_status": "Pass",
+      "industry": "Clean Energy - Hydrogen",
+      "technical_status": "Fail (Avg $Vol $10M < $100M)",
       "verification": {
-        "status": "Verified",
-        "confidence_score": 90,
+        "status": "Discrepancy",
+        "confidence_score": 60,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
+        "primary_claim": "Hyliion secured a new contract to deliver KARNO power modules to NAVSEA Philadelphia.",
+        "discrepancy_note": "Source A (Finviz) has no mention of this claim. Source B's Investing.com article headline 'Exclusive: Hyliion to deliver KARNO power modules to NAVSEA Philadelphia' directly supports the claim, but it is not corroborated by other sources provided, nor by other Google News results listed (Yahoo Finance, Stocktwits)."
       },
-      "gates_passed": 4,
+      "gates_passed": 2,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": false,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
         "gate_adr": true
       },
       "meets_all_gates": false,
@@ -1580,47 +956,84 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "KGC",
-      "price": 23.6,
-      "gap_pct": 5.55,
-      "pm_volume": 125914,
-      "avg_vol_10d": 6697796,
-      "avg_dollar_vol": 158067986,
-      "mkt_cap": 27995281312,
-      "rvol": 1.28,
-      "adr_pct": 3.3,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
+      "ticker": "CEG",
+      "price": 265.12,
+      "gap_pct": 5.67,
+      "pm_volume": 77731,
+      "avg_vol_10d": 2857640,
+      "avg_dollar_vol": 757617517,
+      "mkt_cap": 95205125859,
+      "rvol": 0.88,
+      "adr_pct": 3.34,
+      "category": "Earnings",
+      "theme": "Beat & Raise",
+      "reasoning": "Constellation Energy posted Q2 adjusted EPS of $2.55 per share, beating estimates and lifting 2026 guidance.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "B",
+      "finviz_theme": "Clean Energy - Nuclear",
+      "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+        "catalyst": "Constellation Energy (CEG) reported Q2 Adjusted EPS of **$2.55 per share**, significantly beating FactSet estimates of **$2.29**. Additionally, the company **lifted its 2026 guidance** following these results.",
+        "impact": "The strong earnings beat combined with an upward revision to future guidance signals robust operational performance and an improving outlook, which typically fuels positive price momentum."
       },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nConstellation Energy Corporation (CEG) posted **Q2 Adjusted EPS of $2.55 per share**. This figure substantially exceeded FactSet's consensus estimate of **$2.29**, demonstrating a strong operational beat for the quarter.\n\n• **The Guide**\nAdding to the positive news, Constellation Energy explicitly **lifted its 2026 guidance**. This upward revision indicates management's increased confidence in future performance and profitability, suggesting sustained positive momentum for the company's financial trajectory.\n\n• **The Growth (Momentum)**\nThe combination of a significant earnings beat and raised full-year guidance typically reinforces investor confidence and can lead to a re-rating of the stock. This positive financial update suggests potential for continued stock gains, as indicated by the stock **gains after lifting 2026 guidance**.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
+      "headlines": [
+        {
+          "title": "Earnings Flash (CEG) Constellation Energy Corporation Posts Q2 Adjusted EPS $2.55 per Share, vs. FactSet Est of $2.29 - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxNV25BMkJudkhLYWlkbmU2TTRVNG1WbGZoT0hRd2VSeC02X3czbzVGUzQ3cHBtYkFvd3psZ1FoUW5HQ3J1VXhIaVdZOVBBR1VSRTZ0aFRiblQ3UW9KQkZsbFVDREJmc1NIZzJJYnBxcS1UWGRaS2VPamhiNUpmUFB6OGI4UGF0QkpoQWhFUGd4ZDQyYjhNcXNWSElrSW9ORWxJUXJmVXBwQll4dnRLaXZtZTF0N2hTc2J6aTBHMjdjRktSMUhhTHZwcVhjOE1IU25TNmxKd1hUdXlYRGViVmthRmVB?oc=5"
+        },
+        {
+          "title": "Constellation Energy Corp (CEG) Q2 2026 Earnings - 24/7 Wall St.",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOSlphdmpHSDdLN24xQjFxM1NhYTg4bVN2R1BGRnZ6emE2MzBkTW9qYWJnZzFVQ05QckotTFJhZ0FoQWVOcjFCbkdzOHRhTGgyMDIzTlZHNDUwZTQ3MjdzcDN4djdwUExkcDMyc0VpX0NRMTM3eDZwY3MwRVhMZ2lHSEtVaVJJY1dBRE5aT0doRGRwSDZKbXljcFI0cTFadHd2dVhR?oc=5"
+        },
+        {
+          "title": "CEG|Constellation Energy Corp|Price:264.470|Chg%:-2.780 - tradingkey.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE5ubF9tbzNLSDVpM0pHa25IaXpsTVdoc05fQlpjLXFsbmd3QmtoSHh2aWs3RDZSMVY5MEtQVzU3aDVrczByNXMxOE9TR0pzenBxTllkSWVjLWg?oc=5"
+        },
+        {
+          "title": "Constellation Energy stock gains after lifting 2026 guidance By Investing.com - Investing.com Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOa1RYb01xMDdNQlBiQTBSNkRkd08wa1RvbGktUm81eUM2aHZDNVJYTTNpRW5fcGdaWTJHRG05WC1WWUpNMzNlVlpjTUhJTVY5NHI5bFp5OGNDYTNzU21rLXVxWHBUaEhWMFo2bjZCLTFZczlSckN3aUpBamlUaHowWmxBWXBCRDJYRUZGSjVJc2NwQWE5NWdsY2s0R2xIanF0b0M3SC1KdjBicG9JaEp5LWx6d3Radk1jSExuVVRB?oc=5"
+        },
+        {
+          "title": "Constellation's Chairman Resigns as MassMutual CEO Joins Its Board - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPQmVUbEJtQVU0aEgxQWlZOURZMHVVZ3hHdms2WmdQcnBhUWNIcXZrWkIzTW5VSHlCWEJORTZ6Q3lxbEtPWGJNSG44T2s5c20wdTEtdTdHQ2VyU2dVUnpWYlBzSUVEMHRwTXFJMGFJVXdBZm1WTnFJWHBYdEptNjdEelBYVVpWOXp0MmpCaXNGT0gzaEx5QjU5R3hqU3JkZkJSVHZ4b1VSbFZ3VmZ3azgyLUxqbEY5VVNv?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-08-06",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "7.01",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1868275/000186827526000097/ceg-20260806.htm"
+      },
       "float_shares": null,
       "short_float": null,
       "daily_pct": null,
-      "industry": "—",
+      "industry": "Clean Energy - Nuclear",
       "technical_status": "Fail (ADR 3.3% < 4%)",
       "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
+        "status": "Discrepancy",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
+        "primary_claim": "Q2 adjusted EPS of $2.55 per share",
+        "discrepancy_note": "Source A (Finviz News) does not mention Q2 adjusted EPS or any specific earnings figures. Source B (Google News), specifically item [5], confirms 'Q2 Adjusted EPS $2.55 per Share'. Since only one of the two main sources provides the specific detail, it is marked as Discrepancy."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -1631,158 +1044,17 @@
         "gate_adr": false
       },
       "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "CDE",
-      "price": 16.21,
-      "gap_pct": 5.43,
-      "pm_volume": 242072,
-      "avg_vol_10d": 34884285,
-      "avg_dollar_vol": 565474260,
-      "mkt_cap": 16704740445,
-      "rvol": 0.93,
-      "adr_pct": 4.75,
-      "category": "Others",
-      "theme": "Operational Development",
-      "reasoning": "Coeur Mining (CDE) stock popped after announcing a record exploration push, indicating significant operational expansion for future growth.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "B",
-      "finviz_theme": "Materials - Metals & Mining",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Coeur Mining (CDE) experienced a significant **stock pop** following news of a **record exploration push**. This operational development is a key factor for future resource acquisition.",
-        "impact": "This catalyst signals a proactive strategy to expand future resource base and production potential, potentially justifying current valuations despite earlier **Q2 earnings concerns**."
-      },
-      "analysis_details": [
-        {
-          "title": "What Happened",
-          "body": "Coeur Mining (CDE) saw its **stock pop** on news of a **record exploration push**, indicating substantial investment in expanding its future resource base. This operational development suggests a focus on long-term growth and new discoveries. The market's reaction also coincides with observed **movement within algorithmic entry frameworks**, potentially amplifying the upward momentum."
-        },
-        {
-          "title": "Key Consideration",
-          "body": "The **record exploration push** implies a strategic commitment to increasing reserves and future production capacity, which is critical for a mining company's valuation. While positive, the presence of earlier **Q2 earnings concerns** indicates that this operational positive must eventually translate into tangible financial results to fully justify its valuation and sustained price momentum."
-        }
-      ],
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Can Coeur Mining (CDE) Justify Its Discount After Q2 Earnings Concerns? - simplywall.st",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxPQ0xfX3dxcWNmUFUzN044aDJ0MnhIS1AzeGZ6X1BFbVhsV1pvUE81dlVjem5qQU9DbGRDZ1hIOWJSZUpJUEJqbElLWU5hWi1aYUx2UkhVYThuVnRUVDYyZEhhbGotYnh2YzhHOWhkdl9DdTdMWTlEWVQ0TTNfTVBMVm1WM2Y0RWowMlRySHJGSEYzZC1HTDA1S0dtX1JTMVU0NUhCSjQ0WFFtc1BwZkZRcGNhVXFvcEJvZGlzODdMa2trUU53QW14d0RpbHPSAcwBQVVfeXFMT0NMX193cXFjZlBVMzdOOGgydDJ4SEtQM3hmel9QRW1YbFdab1BPNXZVY3puakFPQ2xkQ2dYSDliUmVKSVBCamxJS1lOYVotWmFMdlJIVWE4blZ0VFQ2MmRIYWxqLWJ4dmM4RzloZHZfQ3U3TFk5RFlUNE0zX01QTFZtVjNmNEVqMDJUckhyRkhGM2QtR0wwNUtHbV9SUzFVNDVIQko0NFhRbXNQcGZGUXBjYVVxb3BCb2Rpczg3TGtra1FOd0FteHdEaWxz?oc=5"
-        },
-        {
-          "title": "Coeur Mining CDE Stock Pops On Record Exploration Push - StocksToTrade",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE16N0xLMUNOT0swTk5TeGxwZmZtcVBJLXZkUkYtV3dSTkpTQlptOVpYUHktQUpZcHhNbzNSejdLeGxRemZYSnN4RjE1MkFvU1RweDdveEREd2VNZEJVV0hsVm1PVmQ5NjhZRFQzdWxIRmNpLV9mdDRn?oc=5"
-        },
-        {
-          "title": "(CDE) Movement Within Algorithmic Entry Frameworks - Stock Traders Daily",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOWTdvREgxRml3Yjk3ZnlHN2ZVNVNQaHUyN09iY0k1aDVlcWltWlk3NW9DaC1UclZDWUYxNU1NMlJxdGNmTy12ZXVYbjZRVGNtSmI0blAzWWtHNVlhdTVqcy0yYlhDWHJzOEhNbFVrYllqR3FUZnF6bTlRYW82MlI0WGw3TTFJU29yeFdKMGlCdHo0N3ZNRU1tcVZQLVRfR0sxM2ZvcU83VF9ORWxpQUpWMENsUDktbUo3QUhLVUVCYV9ScU14cThZ?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Materials - Metals & Mining",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "A record exploration push (quantified by a specific dollar amount, percentage, or other hard number).",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "ARIS",
-      "price": 14.71,
-      "gap_pct": 5.4,
-      "pm_volume": 56895,
-      "avg_vol_10d": 1544304,
-      "avg_dollar_vol": 22716712,
-      "mkt_cap": 3036143909,
-      "rvol": 1.21,
-      "adr_pct": 4.74,
-      "category": "Others",
-      "theme": "Early Warning Report Update",
-      "reasoning": "Aris Mining updated an **early warning report** regarding **Seasif Exploration**, a regulatory disclosure requiring further detail to assess its impact on momentum.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 57,
-      "grade": "C",
-      "finviz_theme": "Materials - Metals & Mining",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "**Aris Mining** updated an **Early Warning Report** in respect of **Seasif Exploration**. This is a regulatory disclosure often related to significant shareholdings or intentions of a major entity.",
-        "impact": "The immediate impact on **Aris Mining's** core business or operational momentum is not clear from this headline, making its significance speculative."
-      },
-      "analysis_details": "• **What Happened**\n**Aris Mining** issued an update to an **Early Warning Report** concerning **Seasif Exploration**. This type of regulatory filing is typically made when an entity acquires or disposes of a significant amount of shares, or changes their investment intent regarding another company.\n\n• **Key Consideration**\nThe headline provides no specific details on the content or implications of the updated **Early Warning Report** for **Aris Mining's** financial or operational outlook. Without further context, the market impact of this regulatory filing remains speculative, potentially signaling a change in institutional or insider holdings rather than a fundamental catalyst.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Aris Mining Updates Early Warning Report in Respect of Seasif Exploration - Business Wire",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNVC1EbHJpZGk1Umo0SU0tVjROOWhTR1Izc2hqMlVJUHVkRnUtYkZBajBKTGpDQUhfcEhYbDVLUnZPenRkVjNXOTk0Smh5NXIxTE1xNFpuckFJNDB3WGRncTNDRWZBRk1IcUw3Z2FfMWZfYllxMDNQQ19IVk9mZFkybmRoRm40V3RNeDg3Z2JVdlU3QnNTMUx3MTBkZHR5WF8zcnZqQjZaNGRKbzFZUU92UkpheDZiUGhhVXZvQnMySEpvWTRoRm05cGpn?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": null,
-      "short_float": null,
-      "daily_pct": null,
-      "industry": "Materials - Metals & Mining",
-      "technical_status": "Fail (Avg $Vol $23M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 50,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Aris Mining updated an **early warning report** regarding **Seasif Exploration**, a regulatory disclosure requiring further detail to assess its impact on momentum.",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 22,
-    "large_gaps": 3,
-    "total_headlines": 46,
+    "small_gaps": 7,
+    "large_gaps": 6,
+    "total_headlines": 37,
     "monthly_cost_usd": 0.01
   }
 }
