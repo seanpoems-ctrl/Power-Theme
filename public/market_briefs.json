@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-06 09:00 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious / Defensive Posture",
+    "spy_price": 769.79,
+    "spy_change_pct": -0.2,
+    "vix": 15.95,
+    "hy_oas": 2.73,
+    "yield_curve": 0.45,
+    "credit_status": "Complacent",
+    "s5fi": 68.0,
+    "mmth": 71.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA is expected to react positively to news of a significant new partnership with a leading automotive manufacturer for its next-gen AI platform, reinforcing its growth trajectory."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon's AWS division is poised for attention after securing a multi-year cloud services contract with a major government agency, solidifying its enterprise cloud market position."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla shares are exhibiting strong short-term momentum, with traders targeting a retest of its recent highs following a period of consolidation, driven by pure technical flow."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-06 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "GME",
           "company": "GameStop Corp.",
           "reason": "GameStop (GME) experienced a short-covering surge as retail traders capitalized on technical momentum, disregarding any fresh fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-16 08:25 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Unease, US Resilience Tested",
-    "spy_price": 754.81,
-    "spy_change_pct": 0.4,
-    "vix": 16.35,
-    "hy_oas": 2.72,
-    "yield_curve": 0.42,
-    "credit_status": "Complacent",
-    "s5fi": 61.0,
-    "mmth": 67.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Reports suggest unprecedented pre-orders for its Vision Pro 2 headset, indicating robust consumer demand and strong Q3 guidance."
-        },
-        {
-          "ticker": "COST",
-          "company": "Costco Wholesale Corporation",
-          "reason": "Received a significant analyst upgrade following revised estimates for strong Q3 comparable sales growth, driven by resilient consumer spending."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GME",
-          "company": "GameStop Corp.",
-          "reason": "Observing increased social media chatter and volatile trading volumes, indicative of pure technical flow rather than fresh fundamental news."
         }
       ]
     }
