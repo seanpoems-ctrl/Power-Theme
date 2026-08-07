@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-07 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On Momentum Prevails",
+    "spy_price": 773.26,
+    "spy_change_pct": 0.61,
+    "vix": 14.9,
+    "hy_oas": 2.71,
+    "yield_curve": 0.44,
+    "credit_status": "Complacent",
+    "s5fi": 67.2,
+    "mmth": 74.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft unveiled a new AI-powered cloud service for enterprises, boosting productivity estimates and strengthening its competitive edge."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet announced stronger-than-expected ad revenue growth projections for Q3 following new monetization strategies across its platforms."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continues to benefit from broader artificial intelligence sector momentum and positive flow, despite a lack of specific fresh news catalysts today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-07 07:51 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2180,43 +2218,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-07-17 08:17 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Global Retreat",
-    "spy_price": 750.72,
-    "spy_change_pct": -0.54,
-    "vix": 18.15,
-    "hy_oas": 2.71,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 64.8,
-    "mmth": 70.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Google announces a breakthrough in quantum AI computing, unveiling a new processor that significantly reduces processing time for complex algorithms, positioning it years ahead of competitors."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase reports Q2 earnings significantly above analyst expectations, driven by strong net interest income and a reduction in loan loss provisions, prompting an upgrade in full-year guidance."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GME",
-          "company": "GameStop Corp.",
-          "reason": "GameStop is experiencing renewed short squeeze interest from retail investors following a series of bullish options contracts, despite no new fundamental news."
-        }
-      ]
-    }
   }
 ]
