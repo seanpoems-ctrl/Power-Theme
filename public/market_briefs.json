@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-07 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Watchful / Mixed Equity Tone",
+    "spy_price": 768.56,
+    "spy_change_pct": -0.16,
+    "vix": 15.27,
+    "hy_oas": 2.75,
+    "yield_curve": 0.44,
+    "credit_status": "Complacent",
+    "s5fi": 66.2,
+    "mmth": 71.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase announced a significant expansion of its wealth management division with a new AI-powered platform, sparking analyst upgrades and strong institutional interest."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly revealed promising Phase 3 trial results for its new Alzheimer's drug, exceeding expectations and boosting future revenue projections across the pharmaceutical sector."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continues to benefit from lingering positive sentiment regarding AI infrastructure demand, driving purely technical buying interest without a specific new catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-06 20:57 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2160,43 +2198,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-07-16 17:43 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Volatility Spike",
-    "spy_price": 750.72,
-    "spy_change_pct": -0.54,
-    "vix": 16.73,
-    "hy_oas": 2.71,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 64.8,
-    "mmth": 70.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly and Company announced positive Phase 3 trial data for their novel Alzheimer's treatment, significantly surpassing efficacy benchmarks and boosting future revenue outlook."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon.com Inc. unveiled an aggressive expansion of its global fulfillment network and hinted at strong AWS growth projections at a key investor event, driving optimism."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GME",
-          "company": "GameStop Corp.",
-          "reason": "GameStop Corp. experienced a surge in trading volume and options activity, reflecting a resurgence in retail-driven speculative interest without new company-specific catalysts."
-        }
-      ]
-    }
   }
 ]
