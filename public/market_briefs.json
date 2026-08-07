@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-06 20:57 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Global Unease, US Resilience",
+    "spy_price": 768.56,
+    "spy_change_pct": -0.16,
+    "vix": 15.15,
+    "hy_oas": 2.75,
+    "yield_curve": 0.44,
+    "credit_status": "Complacent",
+    "s5fi": 66.2,
+    "mmth": 71.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "RDW",
+          "company": "Redwood Dynamics",
+          "reason": "The company reported an earnings and revenue beat, alongside an upward revision to future guidance, signaling strong operational momentum."
+        },
+        {
+          "ticker": "CHYM",
+          "company": "Chymeris Health Solutions",
+          "reason": "Solid earnings and revenue beats by the company confirm robust fundamental performance and positive analyst sentiment."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "The stock saw continued flow-driven activity today, with no fresh news catalyst, indicating ongoing technical interest rather than fundamental shift."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-06 09:00 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "GME",
           "company": "GameStop Corp.",
           "reason": "GameStop Corp. experienced a surge in trading volume and options activity, reflecting a resurgence in retail-driven speculative interest without new company-specific catalysts."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-16 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Volatility Spike",
-    "spy_price": 750.72,
-    "spy_change_pct": -0.54,
-    "vix": 16.73,
-    "hy_oas": 2.71,
-    "yield_curve": 0.42,
-    "credit_status": "Complacent",
-    "s5fi": 64.8,
-    "mmth": 70.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple (AAPL) rallied on news of a strategic partnership with a major European telecom provider, expanding its services ecosystem and device penetration in key international markets."
-        },
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet (GOOGL) advanced following an optimistic analyst report highlighting accelerated revenue growth in its cloud division, fueled by new enterprise AI integrations."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GME",
-          "company": "GameStop Corp.",
-          "reason": "GameStop (GME) experienced a short-covering surge as retail traders capitalized on technical momentum, disregarding any fresh fundamental news."
         }
       ]
     }
