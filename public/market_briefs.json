@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-07 17:21 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On / Growth Optimism",
+    "spy_price": 773.26,
+    "spy_change_pct": 0.61,
+    "vix": 14.9,
+    "hy_oas": 2.71,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 67.2,
+    "mmth": 74.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Announced a multi-year, multi-billion dollar strategic partnership with a major financial institution to modernize their cloud infrastructure with cutting-edge AI services."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Reported exceptionally positive Phase 3 clinical trial data for their novel Alzheimer's treatment, showing significant cognitive decline reduction across primary and secondary endpoints."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continues to see elevated trading volume as investors position for sustained demand in AI data center infrastructure build-outs, a recurring theme."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-07 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2200,23 +2238,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-07-17 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "",
-    "spy_price": 743.29,
-    "spy_change_pct": -0.99,
-    "vix": 18.77,
-    "hy_oas": 2.71,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 63.2,
-    "mmth": 68.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
