@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-07 07:51 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Mixed Signals, US Caution Prevails",
+    "spy_price": 768.56,
+    "spy_change_pct": -0.16,
+    "vix": 15.23,
+    "hy_oas": 2.75,
+    "yield_curve": 0.44,
+    "credit_status": "Complacent",
+    "s5fi": 66.2,
+    "mmth": 71.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly (LLY) shares are poised to move on news of accelerated FDA approval for its new groundbreaking Alzheimer's treatment, expanding its market leadership."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA (NVDA) is set for volatility following an analyst upgrade citing strong demand for its next-generation AI data center chips and a positive earnings outlook."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon (AMZN) could see technical buying interest after holding key support levels over the past two sessions, suggesting accumulation by large institutional players."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-07 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2180,23 +2218,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-07-17 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "",
-    "spy_price": 750.72,
-    "spy_change_pct": -0.54,
-    "vix": 18.07,
-    "hy_oas": 2.71,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 64.8,
-    "mmth": 70.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
