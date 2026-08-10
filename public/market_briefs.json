@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-10 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious / Volatility Rises",
+    "spy_price": 773.03,
+    "spy_change_pct": -0.03,
+    "vix": 15.46,
+    "hy_oas": 2.7,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 66.8,
+    "mmth": 72.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple unveiled a new high-performance M4 chip for upcoming Pro devices, signaling innovation and potential market share gains in its premium hardware segment."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly secured breakthrough therapy designation for its novel Alzheimer's treatment, accelerating its path to market and significantly boosting revenue potential."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil saw renewed interest today, driven by the significant surge in crude oil prices, extending its recent upward trend on commodity tailwinds."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-10 07:54 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corp.",
           "reason": "Microsoft Corp. continues to trade based on sector flows and general market sentiment, with no new fundamental catalysts reported today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-20 09:11 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Risk-Off Deepens",
-    "spy_price": 743.29,
-    "spy_change_pct": -0.99,
-    "vix": 18.22,
-    "hy_oas": 2.71,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 63.1,
-    "mmth": 68.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple Inc. (AAPL) is expected to see strong trading activity following reports of robust pre-orders for its new Vision Pro 2 headset, indicating strong consumer demand."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft Corp. (MSFT) is poised for volatility after securing a multi-billion dollar government cloud computing contract, boosting its Azure segment outlook."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Tesla Inc. (TSLA) continues to attract attention purely on technical consolidation after a recent volatility surge, with traders watching for a break from its narrow range."
         }
       ]
     }
