@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-10 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-On Momentum Continues",
+    "spy_price": 773.26,
+    "spy_change_pct": 0.61,
+    "vix": 15.44,
+    "hy_oas": 2.71,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 67.2,
+    "mmth": 74.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA is expected to announce a groundbreaking AI chip architecture this week, fueling speculative buying and strong analyst upgrades."
+        },
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil is reportedly nearing a major acquisition in the Permian Basin, poised to significantly boost its crude oil and natural gas reserves amidst rising oil prices."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft continues to benefit from ongoing cloud computing demand and AI integration, though today's move is primarily flow-driven following broader market strength."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-07 17:21 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "BA",
           "company": "The Boeing Company",
           "reason": "Boeing (BA) is seeing early trading volume on recycled news concerning ongoing supply chain challenges, with no fresh fundamental catalysts driving today's interest."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-17 17:30 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Volatility Spike",
-    "spy_price": 743.29,
-    "spy_change_pct": -0.99,
-    "vix": 18.77,
-    "hy_oas": 2.71,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 63.2,
-    "mmth": 68.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Google unveiled a groundbreaking new AI language model today, generating strong investor excitement about its future growth trajectory and competitive positioning."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon announced a substantial multi-year cloud services contract with a major government agency, reinforcing its market dominance in the enterprise sector."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GME",
-          "company": "GameStop Corp.",
-          "reason": "Shares saw renewed interest based purely on social media chatter and technical short-squeeze potential, rather than any new fundamental business development."
         }
       ]
     }
