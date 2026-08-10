@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-10 07:54 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Strong Risk-On Momentum",
+    "spy_price": 773.26,
+    "spy_change_pct": 0.61,
+    "vix": 15.45,
+    "hy_oas": 2.71,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 67.2,
+    "mmth": 74.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet (GOOGL) surged pre-market following news of a landmark AI-powered cloud computing contract, underscoring strong enterprise adoption of its cutting-edge services."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase (JPM) sees increased institutional buying after a major analyst upgrade, citing robust Q3 earnings outlook and accelerated loan growth."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA (NVDA) extends its rally as continuous systematic inflows capitalize on persistent demand for AI hardware infrastructure, reflecting flow-driven momentum rather than a fresh catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-10 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Tesla Inc. (TSLA) continues to attract attention purely on technical consolidation after a recent volatility surge, with traders watching for a break from its narrow range."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-20 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Controlled Risk-Off / Global Unwind",
-    "spy_price": 743.29,
-    "spy_change_pct": -0.99,
-    "vix": 18.35,
-    "hy_oas": 2.71,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 63.1,
-    "mmth": 68.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet (GOOGL) shares are gaining traction pre-market as analysts upgrade price targets following an impressive AI model demonstration expected to significantly boost cloud and search revenues."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla (TSLA) is poised for activity on reports of a major battery innovation breakthrough, promising enhanced range and faster charging, potentially accelerating its market dominance."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "BA",
-          "company": "The Boeing Company",
-          "reason": "Boeing (BA) is seeing early trading volume on recycled news concerning ongoing supply chain challenges, with no fresh fundamental catalysts driving today's interest."
         }
       ]
     }
