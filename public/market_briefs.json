@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-10 17:24 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Aversion Resurfaces",
+    "spy_price": 773.03,
+    "spy_change_pct": -0.03,
+    "vix": 15.46,
+    "hy_oas": 2.7,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 66.8,
+    "mmth": 72.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly announced positive Phase 3 trial results for their new Alzheimer's treatment, showing significant cognitive improvement and validating their pipeline."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft secured a multi-billion-dollar government contract for its Azure cloud services, reinforcing its dominant position in enterprise solutions."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil is seeing increased options activity and sector rotation, riding the tailwinds of today's significant surge in crude oil prices."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-10 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Continues to be a key player in the AI narrative, driving flow based on recycled themes of cloud and enterprise AI integration rather than fresh specific news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-20 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Stable US, Global Caution",
-    "spy_price": 742.09,
-    "spy_change_pct": -0.16,
-    "vix": 18.65,
-    "hy_oas": 2.73,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 59.7,
-    "mmth": 66.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "HUT",
-          "company": "Hut 8 Corp.",
-          "reason": "Hut 8 Corp. secured new significant AI data center lease contracts, signaling robust demand for specialized computing infrastructure."
-        },
-        {
-          "ticker": "IREN",
-          "company": "Iris Energy Limited",
-          "reason": "Iris Energy Limited reported strong operational metrics and increased capacity to meet surging artificial intelligence demand."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft Corp. continues to trade based on sector flows and general market sentiment, with no new fundamental catalysts reported today."
         }
       ]
     }
