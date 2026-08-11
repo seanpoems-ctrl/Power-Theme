@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-11 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Mixed Flows, Selective Strength",
+    "spy_price": 773.03,
+    "spy_change_pct": -0.03,
+    "vix": 15.49,
+    "hy_oas": 2.7,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 66.8,
+    "mmth": 72.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA is expected to see strong interest following reports of a significant new contract for its next-generation AI data center GPUs with a major cloud provider, fueling sustained demand expectations."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly shares are in focus after announcing highly positive Phase 3 clinical trial results for a new advanced therapy in autoimmune diseases, indicating a substantial market opportunity."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple may experience technical pressure today as analysts continue to debate the impact of broader consumer spending trends on upcoming iPhone sales figures, a recycled narrative."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-10 17:24 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Microsoft Corporation continues to see sustained institutional flow driven by ongoing strength in its Azure cloud computing division and AI initiatives."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-20 17:47 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed US, Global Weakness",
-    "spy_price": 742.09,
-    "spy_change_pct": -0.16,
-    "vix": 18.65,
-    "hy_oas": 2.73,
-    "yield_curve": 0.39,
-    "credit_status": "Complacent",
-    "s5fi": 59.7,
-    "mmth": 66.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "HUT",
-          "company": "Hut 8 Corp",
-          "reason": "Secured fresh AI data center lease contracts today, signaling direct demand fulfillment for high-growth compute infrastructure."
-        },
-        {
-          "ticker": "IREN",
-          "company": "Iris Energy Ltd",
-          "reason": "Benefiting from strong tailwinds in AI demand and expanding data center capacity, reinforcing its position in critical infrastructure."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Continues to be a key player in the AI narrative, driving flow based on recycled themes of cloud and enterprise AI integration rather than fresh specific news."
         }
       ]
     }
