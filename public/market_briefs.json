@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-11 17:27 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Flows, Underlying Stability",
+    "spy_price": 770.56,
+    "spy_change_pct": -0.32,
+    "vix": 15.28,
+    "hy_oas": 2.7,
+    "yield_curve": 0.48,
+    "credit_status": "Complacent",
+    "s5fi": 66.3,
+    "mmth": 72.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Announced a new generation AI chip today, significantly exceeding performance benchmarks and boosting sentiment in the AI sector."
+        },
+        {
+          "ticker": "UNH",
+          "company": "UnitedHealth Group Incorporated",
+          "reason": "Revealed the acquisition of a cutting-edge digital health platform, signaling strategic expansion into advanced healthcare technology solutions."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Continues to see consistent institutional accumulation on perceived long-term value, with today's action reflecting underlying buy-the-dip flow."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-11 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Continues to be a focus for retail and institutional flow despite no specific fresh news catalyst, often reacting to technical levels and broader market sentiment."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-21 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious Accumulation",
-    "spy_price": 748.28,
-    "spy_change_pct": 0.83,
-    "vix": 17.05,
-    "hy_oas": 2.69,
-    "yield_curve": 0.39,
-    "credit_status": "Complacent",
-    "s5fi": 57.7,
-    "mmth": 65.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NBIS",
-          "company": "Nebula Biosciences",
-          "reason": "Nvidia's strategic stake in Nebula Biosciences validates its innovative AI platform, driving immediate investor enthusiasm and strong price action."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a significant expansion of its Azure AI capabilities, signaling robust cloud growth and a continued leadership position in enterprise AI."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Tesla continued to trade within its recent consolidation range, lacking fresh fundamental catalysts and primarily driven by technical flows."
         }
       ]
     }
