@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-12 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Mixed flows, underlying stability",
+    "spy_price": 770.56,
+    "spy_change_pct": -0.32,
+    "vix": 15.4,
+    "hy_oas": 2.7,
+    "yield_curve": 0.48,
+    "credit_status": "Complacent",
+    "s5fi": 66.2,
+    "mmth": 72.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "JNJ",
+          "company": "Johnson & Johnson",
+          "reason": "FDA approval for a new oncology drug provides a significant boost to pharmaceutical segment growth outlook."
+        },
+        {
+          "ticker": "AMD",
+          "company": "Advanced Micro Devices",
+          "reason": "Announces a breakthrough AI chip partnership with a major cloud provider, intensifying competition in the AI infrastructure market."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "AI-driven demand continues to fuel upward momentum, with consistent flow from institutional buying supporting the price action."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-11 17:27 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corp.",
           "reason": "NVIDIA Corp. is seeing follow-through momentum from yesterday's tech-led rally, with flows indicating continued retail and institutional accumulation on technical strength rather than a fresh news catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-21 17:44 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Bullish Sentiment, Growth Leads",
-    "spy_price": 748.28,
-    "spy_change_pct": 0.83,
-    "vix": 17.05,
-    "hy_oas": 2.69,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 57.5,
-    "mmth": 65.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NBIS",
-          "company": "NBIS Corporation",
-          "reason": "Secured a significant strategic stake from Nvidia, signaling strong confidence and potential future collaboration which ignited strong bullish sentiment."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Market sentiment buoyed by its strategic investment announcement, reinforcing its growth trajectory and expanding ecosystem, leading to broad tech sector optimism."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Continues to be a focus for retail and institutional flow despite no specific fresh news catalyst, often reacting to technical levels and broader market sentiment."
         }
       ]
     }
