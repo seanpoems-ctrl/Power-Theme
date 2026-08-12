@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-12 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Growth Momentum Accelerates",
+    "spy_price": 772.49,
+    "spy_change_pct": 0.25,
+    "vix": 14.55,
+    "hy_oas": 2.72,
+    "yield_curve": 0.48,
+    "credit_status": "Complacent",
+    "s5fi": 68.2,
+    "mmth": 71.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft (MSFT) unveiled a new generative AI platform feature today, significantly expanding its Azure cloud service capabilities and driving optimism for accelerated enterprise adoption."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly (LLY) announced positive Phase 3 trial results for its new obesity drug, exceeding efficacy expectations and positioning it for market dominance."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA (NVDA) showed strong price action today, likely due to continued inflows into AI-related semiconductor stocks following yesterday's broadly positive sector analyst reports."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-12 07:53 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Microsoft continues to trade on broad market sentiment and ongoing investor focus on AI integration, without a fresh, company-specific fundamental catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-22 08:43 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-On / Tech Momentum",
-    "spy_price": 748.28,
-    "spy_change_pct": 0.83,
-    "vix": 17.67,
-    "hy_oas": 2.69,
-    "yield_curve": 0.37,
-    "credit_status": "Complacent",
-    "s5fi": 57.6,
-    "mmth": 65.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft (MSFT) unveiled a new enterprise AI platform, projecting significant revenue growth in cloud services, bolstering investor confidence."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) announced a breakthrough in quantum computing integration with its GPU architecture, expanding its market reach and future revenue streams."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla (TSLA) continues to benefit from broader electric vehicle sector tailwinds, though lacking fresh company-specific news today and driven by technical flow."
         }
       ]
     }
