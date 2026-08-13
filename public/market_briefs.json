@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-13 07:54 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Broad Equity Strength / Risk-On",
+    "spy_price": 772.49,
+    "spy_change_pct": 0.25,
+    "vix": 14.55,
+    "hy_oas": 2.72,
+    "yield_curve": 0.48,
+    "credit_status": "Complacent",
+    "s5fi": 68.2,
+    "mmth": 71.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly & Co. announced breakthrough Phase 3 trial results for its new Alzheimer's drug, exceeding efficacy expectations and sparking investor excitement."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet Inc.'s Google Cloud secured a major multi-year partnership with a global enterprise for AI-powered infrastructure, boosting confidence in its cloud segment."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla Inc. continues to attract momentum-driven buying following recent delivery report speculation and short-covering activity."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-13 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA remains a focus for institutional flow traders, as its robust technical support levels are being re-tested amidst broader tech sector weakness."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-23 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious / Defensive Tilt",
-    "spy_price": 747.41,
-    "spy_change_pct": -0.12,
-    "vix": 17.57,
-    "hy_oas": 2.69,
-    "yield_curve": 0.36,
-    "credit_status": "Complacent",
-    "s5fi": 59.1,
-    "mmth": 65.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Announced a breakthrough in quantum computing, positioning it for leadership in a rapidly evolving tech frontier."
-        },
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Disclosed a major oil discovery in the Gulf of Mexico, significantly enhancing production capacity amid elevated crude prices."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continues to be a focus for AI sector sentiment and technical trading following recent volatility."
         }
       ]
     }
