@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-13 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Robust Equity Rally / Growth Bias",
+    "spy_price": 777.88,
+    "spy_change_pct": 0.7,
+    "vix": 14.63,
+    "hy_oas": 2.71,
+    "yield_curve": 0.48,
+    "credit_status": "Complacent",
+    "s5fi": 71.2,
+    "mmth": 74.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a significant new partnership today with a leading healthcare provider to integrate its AI services, boosting confidence in its enterprise cloud growth."
+        },
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple unveiled unexpected stronger-than-anticipated pre-order numbers for its upcoming Vision Pro-lite device, signaling robust consumer demand despite broader economic concerns."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMD",
+          "company": "Advanced Micro Devices, Inc.",
+          "reason": "AMD saw continued institutional buying pressure, pushing shares higher on lingering optimism from last week's analyst upgrades regarding its AI chip roadmap."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-13 07:54 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "XOM",
           "company": "Exxon Mobil Corporation",
           "reason": "Exxon Mobil saw strong flow due to the significant +5.90% jump in Crude Oil prices, benefiting from broader energy sector strength rather than company-specific news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-23 08:45 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off with Oil Inflationary Pressure",
-    "spy_price": 747.41,
-    "spy_change_pct": -0.12,
-    "vix": 18.55,
-    "hy_oas": 2.69,
-    "yield_curve": 0.36,
-    "credit_status": "Complacent",
-    "s5fi": 59.1,
-    "mmth": 65.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil shares could see early strength after reports indicate a significant new oil discovery in its Guyana operations, potentially boosting future production forecasts amidst rising crude prices."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft is poised for attention following a major multi-year cloud services contract win with a leading global financial institution, reaffirming its robust enterprise demand despite broader tech sector weakness."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA remains a focus for institutional flow traders, as its robust technical support levels are being re-tested amidst broader tech sector weakness."
         }
       ]
     }
