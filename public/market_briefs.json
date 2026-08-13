@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-13 17:27 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Equity Strength, Underlying Vigilance",
+    "spy_price": 777.88,
+    "spy_change_pct": 0.7,
+    "vix": 14.63,
+    "hy_oas": 2.71,
+    "yield_curve": 0.48,
+    "credit_status": "Complacent",
+    "s5fi": 71.2,
+    "mmth": 74.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "The company announced a breakthrough in its next-generation AI GPU architecture, sparking strong investor interest in its continued dominance in the artificial intelligence sector."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Positive Phase 3 trial results for its new Alzheimer's treatment were published, potentially opening a massive new market opportunity and boosting future revenue projections."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Shares saw renewed buying interest following a general rebound in electric vehicle sentiment and analyst upgrades based on production forecasts, albeit without a fresh, company-specific fundamental catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-13 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Experienced renewed selling pressure today after failing to hold critical technical support levels around $270, attracting further short-term bearish flow amidst ongoing production concerns."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-23 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Inflationary Jitters",
-    "spy_price": 738.18,
-    "spy_change_pct": -1.23,
-    "vix": 18.7,
-    "hy_oas": 2.68,
-    "yield_curve": 0.36,
-    "credit_status": "Complacent",
-    "s5fi": 57.3,
-    "mmth": 65.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly announced positive Phase 3 trial results for its new Alzheimer's drug, providing a strong fundamental catalyst despite the broad market weakness."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft secured a landmark multi-billion dollar AI infrastructure contract with a major government agency, reinforcing its leadership in cloud and AI services."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil saw strong flow due to the significant +5.90% jump in Crude Oil prices, benefiting from broader energy sector strength rather than company-specific news."
         }
       ]
     }
