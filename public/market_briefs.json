@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-13 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Constructive Risk Appetite",
+    "spy_price": 772.49,
+    "spy_change_pct": 0.25,
+    "vix": 14.59,
+    "hy_oas": 2.72,
+    "yield_curve": 0.48,
+    "credit_status": "Complacent",
+    "s5fi": 68.2,
+    "mmth": 71.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet is reportedly nearing a landmark regulatory approval for its new AI-driven search functionality in Europe, signaling potential significant revenue stream expansion."
+        },
+        {
+          "ticker": "CAT",
+          "company": "Caterpillar Inc.",
+          "reason": "Caterpillar announced a multi-billion dollar infrastructure equipment deal with a key emerging market government, boosting revenue projections and market share in critical regions."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla maintains its upward trend, driven by continued positive sentiment from options flow and short covering activity, rather than new fundamental announcements."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-12 17:25 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continues to be a focus for AI sector sentiment and technical trading following recent volatility."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-22 17:42 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Consolidating US, Global Strength",
-    "spy_price": 747.41,
-    "spy_change_pct": -0.12,
-    "vix": 16.64,
-    "hy_oas": 2.69,
-    "yield_curve": 0.36,
-    "credit_status": "Complacent",
-    "s5fi": 59.1,
-    "mmth": 65.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "ARWR",
-          "company": "Arrowhead Pharmaceuticals",
-          "reason": "The company announced positive Phase 3 trial results for its key therapeutic candidate, driving significant investor interest."
-        },
-        {
-          "ticker": "SMCI",
-          "company": "Super Micro Computer Inc.",
-          "reason": "Super Micro Computer reported a robust earnings beat and raised its full-year guidance, signaling strong demand and operational performance."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "Shares saw flow-driven movements today amid broader sector sentiment without any fresh, specific fundamental catalysts for the bank."
         }
       ]
     }
