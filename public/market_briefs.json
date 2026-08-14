@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-14 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Global Resilience, Domestic Digestion",
+    "spy_price": 776.34,
+    "spy_change_pct": -0.2,
+    "vix": 14.25,
+    "hy_oas": 2.71,
+    "yield_curve": 0.48,
+    "credit_status": "Complacent",
+    "s5fi": 72.6,
+    "mmth": 75.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a landmark partnership with a leading quantum computing firm, fueling speculation of accelerated AI development and new enterprise solutions."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly released positive Phase 3 clinical trial results for its experimental Alzheimer's drug, positioning it favorably for regulatory approval and significant market share."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continues to see speculative flow driven by ongoing analyst upgrades and positive sentiment surrounding the persistent demand for AI infrastructure."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-14 07:51 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Tesla continues to be influenced by ongoing discussions around demand trends, production targets, and CEO commentary, with no new fundamental catalysts today, purely technical/flow-driven."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-24 08:24 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Sell-Off / Caution",
-    "spy_price": 738.18,
-    "spy_change_pct": -1.23,
-    "vix": 18.68,
-    "hy_oas": 2.68,
-    "yield_curve": 0.34,
-    "credit_status": "Complacent",
-    "s5fi": 57.3,
-    "mmth": 65.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple Inc. (AAPL) is seeing pre-market strength following rumors of a breakthrough in its Vision Pro technology and strong pre-order data for its next iPhone lineup, signaling robust consumer demand."
-        },
-        {
-          "ticker": "PFE",
-          "company": "Pfizer Inc.",
-          "reason": "Pfizer Inc. (PFE) shares are surging after the company announced positive Phase 3 trial results for its new oncology drug, significantly broadening its pipeline and market opportunity."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corporation (NVDA) is trading lower on continued profit-taking and technical weakness after reaching all-time highs earlier this week, with no fresh fundamental catalyst driving today's move."
         }
       ]
     }
