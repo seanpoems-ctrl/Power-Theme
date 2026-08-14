@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-14 07:51 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Broad Market Optimism",
+    "spy_price": 777.88,
+    "spy_change_pct": 0.7,
+    "vix": 14.51,
+    "hy_oas": 2.71,
+    "yield_curve": 0.48,
+    "credit_status": "Complacent",
+    "s5fi": 71.1,
+    "mmth": 74.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a significant new partnership with a leading cloud provider to expand its Azure AI services globally, indicating accelerating enterprise adoption."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly received Fast Track designation from the FDA for its investigational Alzheimer's treatment, boosting confidence in its late-stage pipeline."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continues to benefit from the secular growth trend in artificial intelligence and data center demand, maintaining strong technical momentum."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-14 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA Corporation (NVDA) is trading lower on continued profit-taking and technical weakness after reaching all-time highs earlier this week, with no fresh fundamental catalyst driving today's move."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-24 07:06 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Risk-Off / Divergent Europe",
-    "spy_price": 738.18,
-    "spy_change_pct": -1.23,
-    "vix": 18.85,
-    "hy_oas": 2.68,
-    "yield_curve": 0.34,
-    "credit_status": "Complacent",
-    "s5fi": 57.3,
-    "mmth": 65.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly announced FDA approval for its new Alzheimer's drug, donanemab, with a broad label, significantly expanding its market potential."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft secured a multi-billion dollar AI infrastructure contract with a major government agency, bolstering its cloud and AI dominance."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet (GOOGL) is exhibiting a bearish engulfing pattern on daily charts, suggesting further downside pressure following general market weakness."
         }
       ]
     }
