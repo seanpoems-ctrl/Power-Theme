@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-17 07:33 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious Observation / Mixed Signals",
+    "spy_price": 776.34,
+    "spy_change_pct": -0.2,
+    "vix": 14.91,
+    "hy_oas": 2.71,
+    "yield_curve": 0.51,
+    "credit_status": "Complacent",
+    "s5fi": 72.6,
+    "mmth": 75.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA is expected to see increased volume following a major analyst upgrade to 'Outperform' with a significantly raised price target, citing robust demand for its new generation of AI data center GPUs."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase is gaining traction on news of an anticipated regulatory approval for its recent fintech acquisition, signaling expansion into high-growth digital banking services."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple (AAPL) continues to be influenced by ongoing discussions around smartphone upgrade cycles and upcoming product launch speculation, lacking a fresh catalyst today but maintaining high liquidity from sustained retail interest."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-17 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Apple is seeing continued buying interest today as investors extend their positions based on recent analyst upgrades, without any fresh catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-27 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Mixed Signals, Underlying Caution",
-    "spy_price": 738.93,
-    "spy_change_pct": 0.1,
-    "vix": 17.58,
-    "hy_oas": 2.77,
-    "yield_curve": 0.36,
-    "credit_status": "Complacent",
-    "s5fi": 61.7,
-    "mmth": 66.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "XOM",
-          "company": "ExxonMobil Corporation",
-          "reason": "Analysts downgrade price targets for major oil producers following today's sharp crude oil sell-off, citing demand concerns and potential margin compression."
-        },
-        {
-          "ticker": "BA",
-          "company": "The Boeing Company",
-          "reason": "Boeing receives a substantial new order from a major international airline, signaling robust travel demand despite global economic concerns."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Technical consolidation continues for Apple following recent strong earnings, with traders monitoring the 50-day moving average for trend confirmation."
         }
       ]
     }
