@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-17 17:00 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Rising Volatility, Selective Risk-Off",
+    "spy_price": 772.67,
+    "spy_change_pct": -0.47,
+    "vix": 15.19,
+    "hy_oas": 2.67,
+    "yield_curve": 0.51,
+    "credit_status": "Complacent",
+    "s5fi": 66.0,
+    "mmth": 71.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation announced a significant advancement in its next-generation AI GPU architecture, prompting analyst upgrades and increased demand forecasts, driving its shares higher."
+        },
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil Corporation capitalized on rising crude prices by securing a major long-term supply deal with a European energy consortium, boosting investor confidence."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple Inc. saw its shares influenced primarily by broader technology sector rebalancing and institutional flow, lacking a distinct fresh catalyst for today's movement."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-17 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "XOM",
           "company": "Exxon Mobil Corporation",
           "reason": "Exxon Mobil is experiencing strong buying momentum today, purely on technical breakouts from a multi-week consolidation pattern."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-27 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Performance, Tech & Oil Weakness",
-    "spy_price": 739.09,
-    "spy_change_pct": 0.12,
-    "vix": 18.67,
-    "hy_oas": 2.79,
-    "yield_curve": 0.36,
-    "credit_status": "Complacent",
-    "s5fi": 65.1,
-    "mmth": 69.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NBIS",
-          "company": "Nvidia Strategic Investment (Proxy for Company Receiving Investment)",
-          "reason": "Strategic investment from Nvidia provides significant capital and market validation, driving strong pre-market conviction due to implied future growth."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp",
-          "reason": "Analyst upgrade to 'Strong Buy' citing robust cloud growth prospects and successful AI integration, offering a counter-narrative to broader tech weakness."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Continued pressure from lingering concerns over global smartphone demand and uncertainty surrounding the upcoming product cycle, largely driven by technical flows."
         }
       ]
     }
