@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-17 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Watchful Calm / Global Strength",
+    "spy_price": 776.34,
+    "spy_change_pct": -0.2,
+    "vix": 14.93,
+    "hy_oas": 2.71,
+    "yield_curve": 0.51,
+    "credit_status": "Complacent",
+    "s5fi": 72.6,
+    "mmth": 75.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Pre-orders for Apple's new advanced AR/VR headset are reportedly crushing initial expectations, signalling robust consumer demand for immersive technologies."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly announces groundbreaking Phase 3 clinical trial results for its next-generation Alzheimer's drug, showing significant cognitive decline reduction."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSTR",
+          "company": "MicroStrategy Incorporated",
+          "reason": "Purely technical breakout potential driven by renewed institutional interest in Bitcoin exchange-traded funds, fueling a potential short squeeze in the highly leveraged name."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-14 17:00 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Technical consolidation continues for Apple following recent strong earnings, with traders monitoring the 50-day moving average for trend confirmation."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-24 17:44 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Sentiment / Sector Rotation",
-    "spy_price": 738.93,
-    "spy_change_pct": 0.1,
-    "vix": 18.58,
-    "hy_oas": 2.77,
-    "yield_curve": 0.36,
-    "credit_status": "Complacent",
-    "s5fi": 61.7,
-    "mmth": 66.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMKR",
-          "company": "Amkor Technology, Inc.",
-          "reason": "Secured a strategic partnership with NVIDIA and received prepayment, signaling strong demand and competitive advantage in advanced packaging."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA's active involvement in the strategic partnership with Amkor, including prepayment, underscores its continued aggressive expansion and leadership in AI infrastructure."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Continues to be driven by retail sentiment and technical levels, lacking fresh fundamental catalysts to break recent consolidation patterns."
         }
       ]
     }
