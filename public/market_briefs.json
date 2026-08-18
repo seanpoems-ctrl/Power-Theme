@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-18 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Broad Risk-Off / Volatility Spikes",
+    "spy_price": 767.45,
+    "spy_change_pct": -0.68,
+    "vix": 15.84,
+    "hy_oas": 2.7,
+    "yield_curve": 0.53,
+    "credit_status": "Complacent",
+    "s5fi": 62.4,
+    "mmth": 70.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation announced a new generation of AI processors, setting new industry benchmarks for performance and efficiency, sparking upgrade cycles."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly and Company received accelerated FDA approval for its new Alzheimer's drug, positioning it for significant market share in a high-demand therapeutic area."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla, Inc. faced renewed selling pressure after failing to convincingly hold its 200-day moving average, signaling persistent technical weakness."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-18 07:33 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Showed continued volatility driven by broader chip sector sentiment and technical levels, lacking a fresh catalyst beyond existing AI narrative momentum."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-28 08:58 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Headwinds, Local Resilience",
-    "spy_price": 739.09,
-    "spy_change_pct": 0.02,
-    "vix": 18.66,
-    "hy_oas": 2.79,
-    "yield_curve": 0.34,
-    "credit_status": "Complacent",
-    "s5fi": 65.1,
-    "mmth": 69.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA unveiled new AI infrastructure solutions today, sparking analyst upgrades and renewed investor interest in its pivotal role in the ongoing technology revolution."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase announced better-than-expected Q2 earnings this morning, driven by strong trading revenue and robust consumer banking growth, signaling resilience in the financial sector."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple continues to see accumulation ahead of anticipated product announcements later in the quarter, with current price action driven by technical flows rather than fresh fundamental news."
         }
       ]
     }
