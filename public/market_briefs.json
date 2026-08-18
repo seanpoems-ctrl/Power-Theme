@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-18 16:58 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Global Caution",
+    "spy_price": 767.45,
+    "spy_change_pct": -0.68,
+    "vix": 15.84,
+    "hy_oas": 2.7,
+    "yield_curve": 0.53,
+    "credit_status": "Complacent",
+    "s5fi": 62.4,
+    "mmth": 70.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a significant new cloud computing contract with a major government agency, boosting investor confidence in its Azure growth trajectory."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon reported record Prime Day sales figures, exceeding analyst expectations and signaling robust consumer spending in e-commerce."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA (NVDA) continued to garner bullish analyst commentary surrounding its dominant position in AI hardware, a familiar narrative driving consistent, albeit not fresh, buying interest."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-18 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corp.",
           "reason": "Experienced technical selling pressure following broader Nasdaq weakness, lacking a fresh fundamental catalyst today but attracting chart-driven flow."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-28 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Signals, Growth Repricing",
-    "spy_price": 740.86,
-    "spy_change_pct": 0.24,
-    "vix": 18.21,
-    "hy_oas": 2.81,
-    "yield_curve": 0.34,
-    "credit_status": "Complacent",
-    "s5fi": 67.2,
-    "mmth": 71.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CORZ",
-          "company": "Core Scientific Inc.",
-          "reason": "Surged after announcing a significant AI data center pact with AMD, signaling strong demand for specialized compute infrastructure."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Rallied on positive Phase 3 trial results for its new Alzheimer's treatment, significantly de-risking its pipeline and boosting growth prospects."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Showed continued volatility driven by broader chip sector sentiment and technical levels, lacking a fresh catalyst beyond existing AI narrative momentum."
         }
       ]
     }
