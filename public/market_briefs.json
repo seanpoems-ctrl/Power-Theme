@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-18 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off / Heightened Volatility",
+    "spy_price": 776.34,
+    "spy_change_pct": -0.2,
+    "vix": 15.78,
+    "hy_oas": 2.67,
+    "yield_curve": 0.53,
+    "credit_status": "Complacent",
+    "s5fi": 66.0,
+    "mmth": 71.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Rumors swirling about a significant advancement in quantum computing applications being integrated into its cloud services, promising a new era of processing power."
+        },
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Speculation of impending regulatory approval for its Full Self-Driving system across key European markets, potentially unlocking a new revenue stream."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continues to attract robust investor attention due to sustained long-term demand for AI infrastructure, despite no new specific catalysts today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-17 17:00 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Apple shares continue to consolidate after recent product launch hype, with flow-based trading dominating ahead of next earnings cycle."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-27 17:46 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Signals / Underlying Complacency",
-    "spy_price": 739.09,
-    "spy_change_pct": 0.02,
-    "vix": 18.67,
-    "hy_oas": 2.79,
-    "yield_curve": 0.34,
-    "credit_status": "Complacent",
-    "s5fi": 65.1,
-    "mmth": 69.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NBIS",
-          "company": "NBIS Corp.",
-          "reason": "NBIS Corp. surged following news of a strategic investment from Nvidia, signaling strong future growth potential in its specialized AI sector."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a significant new cloud computing partnership with a major enterprise client, bolstering its market position and revenue outlook."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil is experiencing strong buying momentum today, purely on technical breakouts from a multi-week consolidation pattern."
         }
       ]
     }
