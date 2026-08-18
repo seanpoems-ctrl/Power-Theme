@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-18 07:33 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off Sentiment / Volatility Spiking",
+    "spy_price": 776.34,
+    "spy_change_pct": -0.2,
+    "vix": 15.73,
+    "hy_oas": 2.67,
+    "yield_curve": 0.53,
+    "credit_status": "Complacent",
+    "s5fi": 66.0,
+    "mmth": 71.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "UNH",
+          "company": "UnitedHealth Group",
+          "reason": "UnitedHealth Group (UNH) announced a new innovative cost-saving initiative for its healthcare plans, expected to significantly improve profit margins and drive analyst upgrades."
+        },
+        {
+          "ticker": "CAT",
+          "company": "Caterpillar Inc.",
+          "reason": "Caterpillar Inc. (CAT) received a massive infrastructure development contract from a key emerging market nation, bolstering its heavy machinery sales forecast for the coming quarters."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple Inc. (AAPL) is undergoing a period of consolidation as investors evaluate future growth drivers beyond device sales, making it a pure flow-driven trade today amidst general market caution."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-18 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Apple continues to see accumulation ahead of anticipated product announcements later in the quarter, with current price action driven by technical flows rather than fresh fundamental news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-28 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk Aversion Builds",
-    "spy_price": 739.09,
-    "spy_change_pct": 0.02,
-    "vix": 19.03,
-    "hy_oas": 2.79,
-    "yield_curve": 0.34,
-    "credit_status": "Complacent",
-    "s5fi": 65.1,
-    "mmth": 69.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet announces significant AI breakthrough in enterprise software, expected to drive substantial cloud revenue growth."
-        },
-        {
-          "ticker": "UNH",
-          "company": "UnitedHealth Group Incorporated",
-          "reason": "UnitedHealth Group receives key regulatory approval for a major acquisition, solidifying its market leadership in healthcare services."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple shares continue to consolidate after recent product launch hype, with flow-based trading dominating ahead of next earnings cycle."
         }
       ]
     }

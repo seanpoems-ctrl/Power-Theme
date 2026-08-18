@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-18 07:05 ET",
+  "generated_at": "2026-08-18 07:33 ET",
   "phase": "PRE",
   "session": "Pre-Market",
   "assets": {
@@ -29,27 +29,27 @@
     },
     "^VIX": {
       "label": "VIX",
-      "price": 15.78,
+      "price": 15.73,
       "open": 15.81,
       "high": 16.09,
-      "low": 15.78,
-      "close": 15.78,
+      "low": 15.73,
+      "close": 15.73,
       "prev_open": 14.64,
       "prev_close": 14.25,
       "volume": 0,
-      "change_pct": 10.74
+      "change_pct": 10.39
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 84.0,
+      "price": 84.08,
       "open": 84.98,
-      "high": 85.68,
+      "high": 85.67,
       "low": 84.62,
-      "close": 84.0,
+      "close": 84.08,
       "prev_open": 82.53,
       "prev_close": 84.5,
-      "volume": 44738,
-      "change_pct": -0.59
+      "volume": 47422,
+      "change_pct": -0.5
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,11 +65,11 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 26262.31,
+      "price": 26262.22,
       "open": 26280.86,
       "high": 26292.95,
       "low": 26151.35,
-      "close": 26262.31,
+      "close": 26262.22,
       "prev_open": 26445.99,
       "prev_close": 26440.31,
       "volume": 0,
@@ -100,32 +100,32 @@
   "analysis": {
     "title": "Pre-Market Brief: August 18, 2026",
     "mood_emoji": "⚠️",
-    "mood": "Risk-Off / Heightened Volatility",
-    "narrative": "Global markets are retreating sharply, pushing the VIX significantly higher as risk aversion builds. Despite this, US credit spreads remain complacent, hinting at a potential divergence in risk perception.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 776.34 | -0.20% | ➡️ |\n| Nasdaq 100 ETF | 731.07 | -0.14% | ➡️ |\n| VIX | 15.78 | +10.74% | 📈 |\n| Crude Oil | 84.00 | -0.59% | 📉 |\n| Nikkei 225 | 67460.73 | -1.82% | 📉 |\n| DAX | 26262.31 | -0.67% | 📉 |",
-    "macro_section": "The BAMLH0A0HYM2 High-Yield Credit Spread currently sits at a complacent 2.67%, indicating that US institutional investors are not yet pricing in significant credit risk. Concurrently, the T10Y2Y yield curve at +0.530 remains in a Normal / Steepening regime, typically signaling healthy economic expectations. However, this domestic tranquility might be at odds with mounting global pressures.",
-    "analysis_para1": "The global tape shows clear signs of de-risking, with the Nikkei 225 down a steep -1.82% and the DAX retreating -0.67%. Crude Oil's dip of -0.59% further underscores a broader reduction in growth expectations and risk appetite outside the US. While these international signals usually translate to increased caution, US High-Yield credit spreads, at a seemingly placid 2.67%, suggest domestic investors are either late to react or remain insulated from these global jitters. This divergence implies that US risk appetite could be built on fragile ground, vulnerable to a delayed reaction as global sentiment continues to sour.",
-    "analysis_para2": "The single dominant catalyst driving today's primary flow is a sudden surge in market-wide volatility, evidenced by the VIX spiking a notable +10.74%. This mechanical move reflects a swift repricing of risk and an increase in hedging activity, likely stemming from growing geopolitical uncertainties or an accumulation of minor negative economic data points from abroad. The VIX's ascent forces systematic strategies to deleverage and encourages a general 'risk-off' posture, compelling even previously bullish investors to re-evaluate their exposure.",
-    "analysis_para3": "Given the rising volatility and global weakness, today's trading plan should prioritize defense and capital preservation. The S&P 500 ETF (SPY equivalent) at 776.34 provides a key immediate level to watch. A decisive breach below the 775 mark would likely trigger further downside momentum, making short entries appealing with tight stops. Conversely, a bounce off this level, coupled with declining VIX, could present a short-term long opportunity for nimble traders. However, a sustained move above VIX 16 or a drop below 770 on the S&P 500 ETF should be considered a heightened risk-off threshold, mandating reduced exposure and potentially increased hedging.",
-    "technical_signal": "No reversal pattern confirmed yet. While the S&P 500 stocks above SMA50 and S&P stocks above SMA200 remain at a healthy 66.0% and 71.8% respectively, indicating underlying strength, the sharp VIX spike signals rising uncertainty. Traders should watch for a clear retest and hold of key support levels, or further confirmation of increased selling pressure, before committing to directional trades.",
+    "mood": "Risk-Off Sentiment / Volatility Spiking",
+    "narrative": "Global markets are under pressure this morning, leading to increased caution and a noticeable spike in volatility ahead of the US open. This suggests a defensive posture for today's trading, despite underlying macro stability.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 776.34 | -0.20% | ➡️ |\n| Nasdaq 100 ETF | 731.07 | -0.14% | ➡️ |\n| VIX | 15.73 | +10.39% | 📈 |\n| Crude Oil | 84.08 | -0.50% | 📉 |\n| Nikkei 225 | 67460.73 | -1.82% | 📉 |\n| DAX | 26262.22 | -0.67% | 📉 |",
+    "macro_section": "The BAMLH0A0HYM2 High Yield Credit Spread remains at a complacent 2.67%, while the 10-year minus 2-year yield curve sits at a normal and steepening +0.530. This combination implies that institutional risk appetite has a sturdy underlying foundation, suggesting current market pressure may be tactical rather than a broad systemic shift.",
+    "analysis_para1": "A distinctly risk-off tone permeates global markets this morning, with the Nikkei 225 down a sharp -1.82% and the DAX declining by -0.67%. Crude Oil prices are also sliding, dropping -0.50% to $84.08, reflecting weakening demand sentiment globally. Despite these international headwinds, the US High Yield Credit Spread (BAMLH0A0HYM2) remains comfortably complacent at 2.67%. This divergence suggests that while global risk appetite is currently muted, US credit markets have not yet priced in significant systemic stress, potentially offering a floor to broader US equity declines.",
+    "analysis_para2": "The primary driver behind today's observed price action appears to be a broad **risk-off positioning unwind**, evidenced by the sharp +10.39% spike in the VIX. This mechanical catalyst reflects a rapid increase in hedging demand as investors de-risk across various asset classes, unwinding recent optimistic bets. Concerns over decelerating global growth and potential policy responses are fueling this broad-based capitulation, driving synchronized declines in international equities and commodities ahead of the US open.",
+    "analysis_para3": "Today, traders should adopt a cautious stance, monitoring the S&P 500 ETF (SPY equivalent) for a test of initial support at 775.00. A breach of this level could accelerate selling towards 770.00, marking a critical risk-off threshold where short positions gain conviction. Conversely, a firm hold above 775.00, accompanied by a cooling VIX, would indicate potential for a short-term bounce, offering cautious long entries. The actionable plan is to observe early market structure for confirmation of either sustained selling pressure or a stabilization bounce before committing capital.",
+    "technical_signal": "No reversal pattern confirmed yet. While today's pre-market weakness is evident, the underlying health indicated by 66.0% of S&P 500 stocks above SMA50 and 71.8% above SMA200 suggests resilience. Watch for an exhaustion gap down or positive divergence on intraday charts to signal a potential short-term bottom.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Rumors swirling about a significant advancement in quantum computing applications being integrated into its cloud services, promising a new era of processing power."
+          "ticker": "UNH",
+          "company": "UnitedHealth Group",
+          "reason": "UnitedHealth Group (UNH) announced a new innovative cost-saving initiative for its healthcare plans, expected to significantly improve profit margins and drive analyst upgrades."
         },
         {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Speculation of impending regulatory approval for its Full Self-Driving system across key European markets, potentially unlocking a new revenue stream."
+          "ticker": "CAT",
+          "company": "Caterpillar Inc.",
+          "reason": "Caterpillar Inc. (CAT) received a massive infrastructure development contract from a key emerging market nation, bolstering its heavy machinery sales forecast for the coming quarters."
         }
       ],
       "c_grade": [
         {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continues to attract robust investor attention due to sustained long-term demand for AI infrastructure, despite no new specific catalysts today."
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple Inc. (AAPL) is undergoing a period of consolidation as investors evaluate future growth drivers beyond device sales, making it a pure flow-driven trade today amidst general market caution."
         }
       ]
     }
