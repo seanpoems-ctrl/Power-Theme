@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-19 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Resilient US, Global Weakness",
+    "spy_price": 769.06,
+    "spy_change_pct": 0.21,
+    "vix": 14.89,
+    "hy_oas": 2.75,
+    "yield_curve": 0.52,
+    "credit_status": "Complacent",
+    "s5fi": 61.8,
+    "mmth": 74.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "COST",
+          "company": "Costco Wholesale Corporation",
+          "reason": "Costco announced robust quarterly earnings exceeding analyst expectations, driven by strong membership growth and increased same-store sales."
+        },
+        {
+          "ticker": "CRM",
+          "company": "Salesforce, Inc.",
+          "reason": "Salesforce unveiled new AI-powered platform enhancements and a strategic partnership, signaling accelerated enterprise cloud adoption."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA experienced heightened options activity and technical resistance today, indicating potential for continued range-bound trading."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-19 07:32 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Trading on recycled sector momentum and general technology market flows, lacking a fresh specific catalyst today but remaining a key indicator for broader semiconductor sentiment."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-29 09:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Divergent Flows, Energy Surge",
-    "spy_price": 739.09,
-    "spy_change_pct": 0.02,
-    "vix": 18.64,
-    "hy_oas": 2.81,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 67.2,
-    "mmth": 71.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "XOM",
-          "company": "ExxonMobil Corporation",
-          "reason": "The significant +6.74% surge in Crude Oil prices provides a fresh, direct catalyst for major energy producers, bolstering earnings outlooks."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Announced a new strategic partnership in quantum computing research, signaling continued innovation and potential for long-term growth in its cloud and AI segments."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Experiencing renewed profit-taking amidst broader tech sector softness, following recent strong gains, without a specific new fundamental catalyst today."
         }
       ]
     }
