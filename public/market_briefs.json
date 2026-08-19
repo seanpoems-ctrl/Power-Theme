@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-19 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Weakness, Risk-Off Tone",
+    "spy_price": 767.45,
+    "spy_change_pct": -0.68,
+    "vix": 15.82,
+    "hy_oas": 2.7,
+    "yield_curve": 0.52,
+    "credit_status": "Complacent",
+    "s5fi": 62.4,
+    "mmth": 70.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a major strategic partnership with a leading industrial firm to deploy its Azure AI solutions globally, signaling robust enterprise demand despite broader market jitters."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly and Company received fast-track designation from the FDA for its new Alzheimer's treatment candidate, potentially accelerating its path to market and offering a defensive play amidst sector weakness."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla is seeing renewed technical selling pressure following yesterday's broad market weakness, with no fresh company-specific news to offset the negative flow."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-18 16:58 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA shows continued rotational selling pressure following yesterday's broad tech weakness, without any fresh company-specific news, relying purely on market flow."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-28 17:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Flows, Broad Resilience",
-    "spy_price": 740.86,
-    "spy_change_pct": 0.24,
-    "vix": 18.21,
-    "hy_oas": 2.81,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 67.2,
-    "mmth": 71.6,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CORZ",
-          "company": "Core Scientific, Inc.",
-          "reason": "Secured a significant AMD AI Data Center Pact today, positioning the company to expand its high-performance computing capabilities."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Announced the expansion of its Azure AI supercomputer offerings, securing new enterprise cloud computing contracts to capitalize on growing AI infrastructure demand."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp.",
-          "reason": "Experienced technical selling pressure following broader Nasdaq weakness, lacking a fresh fundamental catalyst today but attracting chart-driven flow."
         }
       ]
     }
