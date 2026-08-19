@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-19 17:00 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious Optimism Amidst Global Headwinds",
+    "spy_price": 769.06,
+    "spy_change_pct": 0.21,
+    "vix": 14.89,
+    "hy_oas": 2.75,
+    "yield_curve": 0.52,
+    "credit_status": "Complacent",
+    "s5fi": 61.8,
+    "mmth": 74.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft announced a landmark multi-year cloud services contract with the Department of Defense, significantly expanding its government sector presence."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet unveiled a next-generation AI model for enterprise search, garnering analyst upgrades and boosting expectations for future revenue streams."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla saw continued volatility and elevated short interest today, driven by ongoing speculation regarding its Q3 delivery targets."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-19 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "This stock is primarily driven by existing momentum and broad technology sector flows, without a fresh, specific news catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-29 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Volatility Spike",
-    "spy_price": 729.46,
-    "spy_change_pct": -1.54,
-    "vix": 20.66,
-    "hy_oas": 2.84,
-    "yield_curve": 0.35,
-    "credit_status": "Complacent",
-    "s5fi": 63.0,
-    "mmth": 68.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "TER",
-          "company": "Teradyne Inc.",
-          "reason": "The semiconductor test equipment maker delivered a strong earnings beat and raised its full-year guidance, signaling robust demand in its core markets."
-        },
-        {
-          "ticker": "STX",
-          "company": "Seagate Technology Holdings plc",
-          "reason": "The data storage solutions provider reported better-than-expected earnings and provided an optimistic outlook, suggesting a strong recovery in enterprise and cloud demand."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Trading on recycled sector momentum and general technology market flows, lacking a fresh specific catalyst today but remaining a key indicator for broader semiconductor sentiment."
         }
       ]
     }
