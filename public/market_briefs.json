@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-20 07:34 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Mixed Signals / Global Strength",
+    "spy_price": 769.06,
+    "spy_change_pct": 0.21,
+    "vix": 15.19,
+    "hy_oas": 2.75,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 61.8,
+    "mmth": 74.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase & Co. announced a strategic partnership with a major fintech firm to expand its digital payment solutions globally, positioning it for significant growth."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly and Company reported better-than-expected Phase 3 trial results for its new Alzheimer's treatment, unlocking a potentially multi-billion dollar market opportunity."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation remains a focus for institutional accumulation and options flow, extending its AI-driven momentum without fresh specific news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-20 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2180,43 +2218,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-07-30 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Broad Market Decline",
-    "spy_price": 729.46,
-    "spy_change_pct": -1.54,
-    "vix": 19.38,
-    "hy_oas": 2.84,
-    "yield_curve": 0.45,
-    "credit_status": "Complacent",
-    "s5fi": 63.0,
-    "mmth": 68.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AVGO",
-          "company": "Broadcom Inc.",
-          "reason": "Broadcom announced a significant multi-year contract with a major cloud provider for next-generation AI accelerators, signaling robust demand in a key growth segment."
-        },
-        {
-          "ticker": "PG",
-          "company": "Procter & Gamble",
-          "reason": "Procter & Gamble reported stronger-than-expected quarterly earnings and raised full-year guidance, citing resilient consumer demand and effective cost management."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft is experiencing increased selling pressure following the broader tech market downturn, approaching key technical support levels without specific fresh company news."
-        }
-      ]
-    }
   }
 ]
