@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-20 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Divergent Flows, Underlying Strength",
+    "spy_price": 769.06,
+    "spy_change_pct": 0.21,
+    "vix": 15.11,
+    "hy_oas": 2.75,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 61.8,
+    "mmth": 74.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Announced a strategic partnership with a major cloud provider to expand enterprise AI solutions, hinting at significant revenue upside."
+        },
+        {
+          "ticker": "PFE",
+          "company": "Pfizer Inc.",
+          "reason": "Granted fast-track designation by the FDA for its innovative gene therapy candidate, accelerating its path to market."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "Exhibits strong technical momentum following yesterday's broad semiconductor strength, attracting renewed speculative interest."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-19 17:00 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corp.",
           "reason": "Microsoft is experiencing increased selling pressure following the broader tech market downturn, approaching key technical support levels without specific fresh company news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-29 17:33 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Broad Sell-Off, Volatility Spike",
-    "spy_price": 729.46,
-    "spy_change_pct": -1.54,
-    "vix": 20.66,
-    "hy_oas": 2.84,
-    "yield_curve": 0.45,
-    "credit_status": "Complacent",
-    "s5fi": 63.0,
-    "mmth": 68.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "TER",
-          "company": "Teradyne, Inc.",
-          "reason": "The company delivered a strong 'Beat & Raise' on earnings, providing a clear positive catalyst against a challenging market backdrop."
-        },
-        {
-          "ticker": "AVTR",
-          "company": "Avantor, Inc.",
-          "reason": "The company reported an impressive 'Earnings Beat' today, demonstrating strong operational performance despite broader market headwinds."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "This stock is primarily driven by existing momentum and broad technology sector flows, without a fresh, specific news catalyst today."
         }
       ]
     }
