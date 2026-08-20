@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-20 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off Sentiment",
+    "spy_price": 762.6,
+    "spy_change_pct": -0.84,
+    "vix": 16.01,
+    "hy_oas": 2.73,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 55.5,
+    "mmth": 72.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA announced a significant multi-year partnership with a leading cloud computing provider to deploy next-generation AI data centers, signaling robust demand for its Hopper GPUs."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly revealed highly anticipated positive Phase 3 clinical trial results for its novel GLP-1 treatment targeting obesity and cardiovascular health, exceeding analyst expectations."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft saw increased institutional buying interest following yesterday's minor analyst upgrade, continuing its gradual uptrend on consistent cloud adoption narratives."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-20 07:34 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2200,23 +2238,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-07-30 08:50 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "",
-    "spy_price": 729.46,
-    "spy_change_pct": -1.54,
-    "vix": 19.09,
-    "hy_oas": 2.84,
-    "yield_curve": 0.45,
-    "credit_status": "Complacent",
-    "s5fi": 63.0,
-    "mmth": 68.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
