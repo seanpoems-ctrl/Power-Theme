@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-20 16:45 ET",
+  "generated_at": "2026-08-20 17:01 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -24,7 +24,7 @@
       "close": 710.93,
       "prev_open": 720.39,
       "prev_close": 716.08,
-      "volume": 31461338,
+      "volume": 32876361,
       "change_pct": -0.72
     },
     "^VIX": {
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 86.5,
+      "price": 86.41,
       "open": 84.4,
       "high": 87.69,
       "low": 84.23,
-      "close": 86.5,
+      "close": 86.41,
       "prev_open": 85.42,
       "prev_close": 85.83,
-      "volume": 246424,
-      "change_pct": 0.78
+      "volume": 247200,
+      "change_pct": 0.68
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: August 20, 2026",
-    "mood_emoji": "📉",
-    "mood": "Risk-Off Sentiment",
-    "narrative": "Equities experienced broad declines today, particularly in Asia, as a hawkish central bank outlook dampened global risk appetite. Volatility surged while US credit spreads remained complacent, signaling a potential divergence.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 762.60 | -0.84% | 📉 |\n| Nasdaq 100 ETF | 710.93 | -0.72% | 📉 |\n| VIX | 16.01 | +7.52% | 📈 |\n| Crude Oil | 86.50 | +0.78% | 📈 |\n| Nikkei 225 | 65326.42 | -3.16% | 📉 |\n| DAX | 25983.04 | -0.42% | ➡️ |",
-    "macro_section": "Despite high yield credit spreads remaining at a complacent 2.73%, suggesting no immediate fear in corporate debt markets, the 10-year minus 2-year yield curve sits in a normal/steepening +0.460 regime. This divergence implies institutional risk appetite may be starting to temper even as underlying credit conditions appear stable.",
-    "analysis_para1": "The sharp 3.16% decline in the Nikkei 225, alongside a more modest 0.42% dip in the DAX, indicates a deteriorating global risk appetite, especially pronounced in Asian markets. While crude oil saw a 0.78% gain to $86.50, often signaling commodity strength, the broader equity weakness globally stands in stark contrast to the still-complacent US high yield credit spread of 2.73%. This divergence suggests that US risk appetite could soon face pressure from external headwinds, potentially challenging the current benign credit environment.",
-    "analysis_para2": "Today's primary market flow was predominantly driven by a mechanical catalyst stemming from unexpectedly hawkish commentary by a prominent central bank official regarding future monetary policy. These remarks, perceived as signaling a longer period of restrictive rates than anticipated, sparked an immediate unwinding of risk positions across global equities. The resulting shift in rate hike expectations directly fueled the 7.52% surge in the VIX, as investors scrambled to price in heightened uncertainty and a less accommodative financial environment.",
-    "analysis_para3": "Traders should closely monitor the S&P 500 ETF, with today's closing price of 762.60 serving as an immediate resistance level for any potential bounce. A decisive break below the intraday low for the S&P 500 ETF would trigger further short entries, targeting psychological support around 750. Conversely, a clear reclaim of 765 on significant volume could signal a temporary capitulation of sellers, offering a scalp long opportunity. Risk-off thresholds include any sustained move above VIX 17, indicating increasing market fear, warranting reduced equity exposure. Today, the prudent action is to reassess portfolio risk and tighten stop-losses.",
-    "technical_signal": "No reversal pattern confirmed yet. While today's decline pushed the S&P 500 ETF lower, the percentage of S&P 500 stocks above their 50-day and 200-day moving averages (55.5% and 72.4% respectively) still indicates underlying health. Watch for a test of immediate support zones around 760 on the S&P 500 ETF, with any subsequent bounce needing to show strong conviction and volume to suggest a temporary bottom.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA announced a significant multi-year partnership with a leading cloud computing provider to deploy next-generation AI data centers, signaling robust demand for its Hopper GPUs."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly revealed highly anticipated positive Phase 3 clinical trial results for its novel GLP-1 treatment targeting obesity and cardiovascular health, exceeding analyst expectations."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft saw increased institutional buying interest following yesterday's minor analyst upgrade, continuing its gradual uptrend on consistent cloud adoption narratives."
-        }
-      ]
-    }
+    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
   }
 }
