@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-21 07:33 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Measured Pullback / Cautious Tone",
+    "spy_price": 762.6,
+    "spy_change_pct": -0.84,
+    "vix": 15.64,
+    "hy_oas": 2.73,
+    "yield_curve": 0.5,
+    "credit_status": "Complacent",
+    "s5fi": 55.5,
+    "mmth": 72.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced significant advancements in its cloud AI services, including new large language model integrations, boosting investor confidence in its growth trajectory."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly released positive Phase 3 trial results for its new metabolic disorder drug candidate, positioning it for accelerated regulatory review and significant market potential."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla continues to see choppy trading, driven by ongoing retail flow and technical consolidation rather than fresh fundamental news, as investors await further clarity on production ramps."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-21 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2180,43 +2218,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-07-31 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Strong Risk Appetite / Growth Optimism",
-    "spy_price": 741.69,
-    "spy_change_pct": 1.68,
-    "vix": 16.83,
-    "hy_oas": 2.87,
-    "yield_curve": 0.45,
-    "credit_status": "Complacent",
-    "s5fi": 60.9,
-    "mmth": 69.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Fresh reports indicate Apple is poised to unveil a revolutionary AI-powered operating system update that could significantly boost its services revenue."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla announced Q2 vehicle deliveries significantly exceeded analyst expectations, pointing to robust demand and efficient production scaling."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continued strong technical momentum driven by sector rotation into semiconductors, following an analyst upgrade citing sustained AI infrastructure spending."
-        }
-      ]
-    }
   }
 ]
