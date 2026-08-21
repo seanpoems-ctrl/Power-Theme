@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-21 16:58 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Stable Equity Advance",
+    "spy_price": 765.72,
+    "spy_change_pct": 0.41,
+    "vix": 15.13,
+    "hy_oas": 2.75,
+    "yield_curve": 0.5,
+    "credit_status": "Complacent",
+    "s5fi": 59.3,
+    "mmth": 72.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Amazon unveiled its new Gen-AI powered global logistics optimization platform, projecting significant Q4 margin expansion and accelerated delivery speeds."
+        },
+        {
+          "ticker": "CRM",
+          "company": "Salesforce, Inc.",
+          "reason": "Salesforce announced the strategic acquisition of 'CyberGuard Solutions', rapidly expanding its enterprise security offerings and cloud market share."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA saw continued momentum from large option flows and general AI sector exuberance, rather than any fresh fundamental news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-21 16:46 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Tesla shows renewed interest from retail flow and technical buying after recent consolidation, despite no new fundamental catalysts today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-31 16:46 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On / Broad Market Gains",
-    "spy_price": 747.03,
-    "spy_change_pct": 0.72,
-    "vix": 15.99,
-    "hy_oas": 2.84,
-    "yield_curve": 0.45,
-    "credit_status": "Complacent",
-    "s5fi": 61.0,
-    "mmth": 68.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "ARM",
-          "company": "ARM Holdings",
-          "reason": "The company reported a strong 'Beat & Raise' quarter, fueling optimism around AI chip demand and licensing growth."
-        },
-        {
-          "ticker": "SKHY",
-          "company": "Skyworks Solutions, Inc.",
-          "reason": "SKHY delivered a 'Beat & Raise' earnings report, pointing to robust demand for its analog and mixed-signal semiconductors."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft continues to exhibit strong institutional flow and technical momentum, benefiting from the broader market's risk-on sentiment without specific fresh news today."
         }
       ]
     }
