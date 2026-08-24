@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-24 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious / Equity Weakness",
+    "spy_price": 763.47,
+    "spy_change_pct": -0.29,
+    "vix": 15.85,
+    "hy_oas": 2.7,
+    "yield_curve": 0.5,
+    "credit_status": "Complacent",
+    "s5fi": 60.1,
+    "mmth": 74.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA shares surged following reports of robust demand for its next-generation AI accelerators, signaling continued market dominance and strong Q3 revenue projections."
+        },
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla saw heavy buying interest after unveiling aggressive new production targets for its Model Y line, easing prior supply chain concerns and boosting delivery expectations."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft experienced technical profit-taking today, pulling back from recent highs after failing to sustain momentum above key resistance, without new fundamental news driving the move."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-24 07:36 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Trading purely on technical momentum and ongoing retail interest, lacking a fresh fundamental catalyst beyond recycled narrative about production targets."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-03 09:45 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-On / Divergent",
-    "spy_price": 751.55,
-    "spy_change_pct": 0.61,
-    "vix": 16.02,
-    "hy_oas": 2.84,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 62.0,
-    "mmth": 69.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMC",
-          "company": "AMC Entertainment Holdings, Inc.",
-          "reason": "The stock is gapping higher on news of a significant box office rebound and record revenue projections for the latest quarter."
-        },
-        {
-          "ticker": "DAL",
-          "company": "Delta Air Lines, Inc.",
-          "reason": "Anticipation of improved profit margins driven by the substantial decline in crude oil prices reduces operational costs for airlines."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Trades on continued positive sentiment from its recent AI announcements, but lacks a fresh, specific catalyst for today's pre-market movement."
         }
       ]
     }
