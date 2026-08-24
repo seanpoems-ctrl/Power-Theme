@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-24 07:36 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Volatility Surges Uneasily",
+    "spy_price": 765.72,
+    "spy_change_pct": 0.41,
+    "vix": 16.04,
+    "hy_oas": 2.75,
+    "yield_curve": 0.5,
+    "credit_status": "Complacent",
+    "s5fi": 59.3,
+    "mmth": 72.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Announced groundbreaking Phase 3 clinical trial results for its new metabolic drug, demonstrating superior efficacy and driving significant buy-side interest."
+        },
+        {
+          "ticker": "PANW",
+          "company": "Palo Alto Networks Inc.",
+          "reason": "Secured a substantial new cybersecurity contract with a major government client, reinforcing its leadership in secure cloud solutions."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Sustained buying interest continues as analysts reiterate positive outlooks on its AI integration strategy and robust cloud services growth, reinforcing prior catalysts."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-24 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Trades on continued positive sentiment from its recent AI announcements, but lacks a fresh, specific catalyst for today's pre-market movement."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-03 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Equities Rally, Commodity Stress",
-    "spy_price": 747.03,
-    "spy_change_pct": 0.72,
-    "vix": 15.95,
-    "hy_oas": 2.84,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 61.0,
-    "mmth": 68.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Announced a groundbreaking enterprise AI integration, significantly expanding their cloud AI services market share."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc",
-          "reason": "Reported better-than-expected Q3 delivery guidance and announced new production efficiencies surpassing analyst estimates."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Continues to face headwinds from declining crude oil prices, despite its diversified operations and prior quarter's strong earnings."
         }
       ]
     }
