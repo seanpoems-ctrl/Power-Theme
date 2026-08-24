@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-24 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious Optimism / Volatility Spike",
+    "spy_price": 765.72,
+    "spy_change_pct": 0.41,
+    "vix": 15.94,
+    "hy_oas": 2.75,
+    "yield_curve": 0.5,
+    "credit_status": "Complacent",
+    "s5fi": 59.3,
+    "mmth": 72.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a new generative AI partnership with a major enterprise client, boosting sentiment for its cloud services growth outlook."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase received approval for a significant expansion into a new international market, signaling strong growth initiatives."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMC",
+          "company": "AMC Entertainment Holdings Inc.",
+          "reason": "AMC Entertainment is seeing renewed retail interest following a multi-week consolidation pattern, driven by social media buzz."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-21 16:58 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "XOM",
           "company": "Exxon Mobil Corporation",
           "reason": "Continues to face headwinds from declining crude oil prices, despite its diversified operations and prior quarter's strong earnings."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-07-31 17:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On / Growth Focus",
-    "spy_price": 747.03,
-    "spy_change_pct": 0.72,
-    "vix": 15.99,
-    "hy_oas": 2.84,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 61.0,
-    "mmth": 68.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "ARM",
-          "company": "ARM Holdings Plc",
-          "reason": "The company's latest 'Beat & Raise' earnings report, coupled with strong guidance, signals robust demand for its chip designs in AI and cloud computing."
-        },
-        {
-          "ticker": "SKHY",
-          "company": "SK Hynix Inc.",
-          "reason": "SK Hynix delivered a significant 'Beat & Raise' quarter, driven by strong demand for high-bandwidth memory crucial for AI accelerators, boosting semiconductor sector sentiment."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Tesla shows renewed interest from retail flow and technical buying after recent consolidation, despite no new fundamental catalysts today."
         }
       ]
     }
