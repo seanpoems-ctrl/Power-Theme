@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-24 16:45 ET",
+  "generated_at": "2026-08-24 17:03 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -12,7 +12,7 @@
       "close": 763.47,
       "prev_open": 766.05,
       "prev_close": 765.72,
-      "volume": 31551112,
+      "volume": 31916629,
       "change_pct": -0.29
     },
     "QQQ": {
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 84.96,
+      "price": 84.94,
       "open": 86.5,
       "high": 86.57,
       "low": 84.36,
-      "close": 84.96,
+      "close": 84.94,
       "prev_open": 86.27,
       "prev_close": 87.06,
-      "volume": 193166,
-      "change_pct": -2.41
+      "volume": 194234,
+      "change_pct": -2.44
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: August 24, 2026",
-    "mood_emoji": "😬",
-    "mood": "Cautious / Equity Weakness",
-    "narrative": "US equities closed lower today, led by the Nasdaq 100, while the VIX edged higher, reflecting a degree of market apprehension. Despite this, credit spreads remain complacent, and global indices were only modestly impacted.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 763.47 | -0.29% | ➡️ |\n| Nasdaq 100 ETF | 706.32 | -1.00% | 📉 |\n| VIX | 15.85 | +4.76% | 📈 |\n| Crude Oil | 84.96 | -2.41% | 📉 |\n| Nikkei 225 | 66016.36 | -0.30% | ➡️ |\n| DAX | 26106.60 | -0.11% | ➡️ |",
-    "macro_section": "The High-Yield Credit Spread (BAMLH0A0HYM2) remains Complacent at 2.70%, signaling low perceived risk in corporate debt. Concurrently, the 10Y-2Y Yield Curve (T10Y2Y) is Normal / Steepening at +0.500, which typically implies healthy economic prospects and a willingness for institutions to take on credit risk. This macro backdrop suggests underlying stability for institutional risk appetite, even as equity markets showed signs of softness today.",
-    "analysis_para1": "Global equity markets displayed a mildly cautious tone today, with the Nikkei 225 down -0.30% and the DAX losing -0.11%, indicating a lack of significant bullish conviction overseas. The notable drop in Crude Oil by -2.41% to 84.96 suggests potential concerns about global demand or economic activity, which could theoretically strain energy-related credit. However, despite these global hints of softness and a significant move in oil, US High-Yield Credit Spreads (BAMLH0A0HYM2) remain remarkably Complacent at 2.70%, implying that US credit markets are not yet pricing in any systemic risk or widespread economic deceleration.",
-    "analysis_para2": "Today's primary flow appears driven by a cautious positioning adjustment, particularly a rotation out of growth-oriented technology stocks, as evidenced by the Nasdaq 100's steeper decline of -1.00% compared to the broader S&P 500's -0.29% dip. This mild shift in risk appetite, coupled with some short-covering in volatility, contributed to the VIX's significant increase of +4.76%, suggesting investors are de-risking ahead of unknown catalysts rather than reacting to a singular, dramatic event. The mechanical catalyst seems to be a combination of profit-taking in high-beta names and preemptive hedging.",
-    "analysis_para3": "Today, traders should maintain a defensive stance, prioritizing capital preservation. Watch for the S&P 500 ETF to hold immediate support at 760.00; a breakdown below this level could trigger further selling towards 755.00, signaling a deeper risk-off move. Conversely, a reclaim of 765.00 could indicate stabilization, but aggressive long entries should wait for confirmation above this resistance. The focus today is on monitoring these technical levels and reducing exposure in volatile sectors.",
-    "technical_signal": "No reversal pattern confirmed yet. While the S&P 500 saw a slight pullback today, it remains above key short-term moving averages with S&P 500 stocks above SMA50 at 60.1% and S&P stocks above SMA200 at 74.3% indicating underlying strength. Traders should watch for a decisive close below the previous day's low or a significant increase in selling volume to confirm any potential bearish reversal.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA shares surged following reports of robust demand for its next-generation AI accelerators, signaling continued market dominance and strong Q3 revenue projections."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla saw heavy buying interest after unveiling aggressive new production targets for its Model Y line, easing prior supply chain concerns and boosting delivery expectations."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft experienced technical profit-taking today, pulling back from recent highs after failing to sustain momentum above key resistance, without new fundamental news driving the move."
-        }
-      ]
-    }
+    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
   }
 }
