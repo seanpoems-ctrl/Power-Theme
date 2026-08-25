@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-25 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Divergent Flows, Oil Pressure",
+    "spy_price": 763.47,
+    "spy_change_pct": -0.29,
+    "vix": 15.83,
+    "hy_oas": 2.7,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 60.1,
+    "mmth": 74.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet announces a groundbreaking AI partnership with a major automotive manufacturer, significantly expanding its autonomous driving division and potential market reach."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Amazon is reportedly exploring a strategic acquisition in the healthcare tech sector, aiming to integrate AI-powered diagnostics into its Amazon Pharmacy unit."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Continued volatility following recent production guidance revisions, attracting short-term speculative interest on pure technical momentum."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-24 17:03 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Shares are seeing a surge in buying interest driven by a technical breakout above its recent consolidation range, attracting momentum traders."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-03 17:46 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Broad Risk-On Optimism",
-    "spy_price": 757.67,
-    "spy_change_pct": 1.42,
-    "vix": 15.86,
-    "hy_oas": 2.84,
-    "yield_curve": 0.45,
-    "credit_status": "Complacent",
-    "s5fi": 61.6,
-    "mmth": 70.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMC",
-          "company": "AMC Entertainment Holdings",
-          "reason": "A significant box office rebound has led to record revenue figures, signaling strong consumer demand for entertainment."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Announced a strategic acquisition in the burgeoning cloud computing sector, poised to significantly bolster its enterprise AI offerings."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Continues to trade largely on technical momentum as investors await further clarity on Cybertruck production targets and margin stability."
         }
       ]
     }
