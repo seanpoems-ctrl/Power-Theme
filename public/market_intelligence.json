@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25 07:05 ET",
+  "generated_at": "2026-08-25 07:35 ET",
   "phase": "PRE",
   "session": "Pre-Market",
   "assets": {
@@ -29,27 +29,27 @@
     },
     "^VIX": {
       "label": "VIX",
-      "price": 15.83,
+      "price": 15.8,
       "open": 15.71,
       "high": 15.88,
       "low": 15.69,
-      "close": 15.83,
+      "close": 15.8,
       "prev_open": 15.9,
       "prev_close": 15.85,
       "volume": 0,
-      "change_pct": -0.13
+      "change_pct": -0.32
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 82.42,
+      "price": 82.45,
       "open": 85.03,
       "high": 85.84,
       "low": 82.04,
-      "close": 82.42,
+      "close": 82.45,
       "prev_open": 86.5,
       "prev_close": 85.01,
-      "volume": 77424,
-      "change_pct": -3.05
+      "volume": 81646,
+      "change_pct": -3.01
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 26329.76,
+      "price": 26310.16,
       "open": 26206.01,
       "high": 26341.52,
       "low": 26164.11,
-      "close": 26329.76,
+      "close": 26310.16,
       "prev_open": 26091.29,
       "prev_close": 26106.6,
       "volume": 0,
-      "change_pct": 0.85
+      "change_pct": 0.78
     }
   },
   "fred": {
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Pre-Market Brief: August 25, 2026",
-    "mood_emoji": "🧐",
-    "mood": "Divergent Flows, Oil Pressure",
-    "narrative": "US markets show slight weakness with tech leading losses, while global indices rally, suggesting a divergence in sentiment driven by specific regional factors and a notable drop in crude oil prices. This sets a cautious tone for US open despite buoyant international markets.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 763.47 | -0.29% | ➡️ |\n| Nasdaq 100 ETF | 706.32 | -1.00% | 📉 |\n| VIX | 15.83 | -0.13% | ➡️ |\n| Crude Oil | 82.42 | -3.05% | 📉 |\n| Nikkei 225 | 65856.43 | +0.50% | 📈 |\n| DAX | 26329.76 | +0.85% | 📈 |",
-    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) sits at a \"Complacent\" 2.70%, indicating low perceived credit risk among institutional investors. Complementing this, the 10Y-2Y Yield Curve (T10Y2Y) is at +0.460, reflecting a \"Normal / Steepening\" regime. This combination typically implies a healthy appetite for risk and confidence in economic stability, despite immediate market fluctuations.",
-    "analysis_para1": "Nikkei 225 posted solid gains of +0.50% and the DAX rallied by +0.85%, signaling robust risk-on appetite across Asian and European sessions, which stands in contrast to the pre-market softness observed in US equity futures. However, the significant plunge in Crude Oil by -3.05% introduces a notable divergence, potentially signaling underlying concerns about global demand or a supply-side shock. Despite this commodity volatility, US high-yield credit spreads remain 'Complacent' at 2.70%, suggesting that institutional investors are not yet broadly pricing in systemic risk. This indicates that while overseas markets show strength, the dramatic oil price movement may prompt a more cautious approach to US risk assets.",
-    "analysis_para2": "The primary mechanical catalyst driving today's observed pre-market price action appears to be the substantial -3.05% drop in Crude Oil prices. This sharp decline signals a significant shift in energy market dynamics, potentially stemming from an unexpected surge in supply or a perceived weakening of global demand. Such a move forces a re-evaluation of inflationary pressures and can directly impact corporate earnings, particularly for energy-sensitive sectors and companies reliant on stable commodity prices. Consequently, this oil price action is likely generating a cautious undertone for US equities, especially in growth-oriented tech sectors, even as global markets exhibit strength.",
-    "analysis_para3": "Traders should maintain a cautious stance today, with key support levels to watch for the S&P 500 ETF around 760 and the Nasdaq 100 ETF near 700. A sustained bounce from these levels, ideally on increasing volume, could signal a buying opportunity for a retest of yesterday's close. Conversely, a decisive break below these supports, particularly if crude oil continues its decline, would serve as a trigger for short entries, confirming a downside bias. Traders should closely monitor the correlation between oil prices and broader market sentiment, establishing clear risk-off thresholds if either S&P 500 stocks above SMA50 or S&P stocks above SMA200 show significant deterioration. Today's primary action involves observing the market's initial reaction and confirming directional bias before committing to large positions.",
-    "technical_signal": "No reversal pattern confirmed yet. While US indices show pre-market weakness, S&P 500 stocks above SMA50 at 60.1% and S&P stocks above SMA200 at 74.3% indicate underlying healthy breadth. Watch for sustained closes below key support levels for confirmation of a bearish shift.",
+    "mood_emoji": "⚖️",
+    "mood": "Mixed Signals, Divergent Flows",
+    "narrative": "Market sentiment remains bifurcated as global equities advance amidst declines in US tech and energy sectors. Resilient credit conditions and a normal yield curve continue to underpin broader institutional risk appetite despite sector-specific weakness.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 763.47 | -0.29% | ➡️ |\n| Nasdaq 100 ETF | 706.32 | -1.00% | 📉 |\n| VIX | 15.80 | -0.32% | ➡️ |\n| Crude Oil | 82.45 | -3.01% | 📉 |\n| Nikkei 225 | 65856.43 | +0.50% | 📈 |\n| DAX | 26310.16 | +0.78% | 📈 |",
+    "macro_section": "High Yield Credit Spreads (BAMLH0A0HYM2) remain at a complacent 2.70%, indicating a healthy risk-on environment from credit markets. Concurrently, the 10Y-2Y Yield Curve stands at a normal and steepening +0.460, further suggesting robust economic expectations. These indicators collectively support a sustained institutional appetite for risk-taking.",
+    "analysis_para1": "Despite a notable -3.01% plunge in Crude Oil prices, which often signals demand concerns, global equity markets are showing strength with the Nikkei 225 up +0.50% and the DAX gaining +0.78%. This divergence suggests that while energy commodities face headwinds, broader international sentiment remains constructive. The sustained complacent High Yield Credit Spread at 2.70% reinforces this global risk-on tone, implying that any softness in US equity indices, particularly the Nasdaq 100's -1.00% dip, is not yet translating into systemic credit stress for the US market.",
+    "analysis_para2": "The primary flow today appears to be driven by a tactical positioning squeeze, particularly evident in the Nasdaq 100 ETF's -1.00% decline. With broader macro indicators such as credit spreads and the yield curve remaining positive, the underperformance in US tech, alongside the sharp -3.01% drop in Crude Oil, suggests a sector-specific rotation or profit-taking. This could be due to unwinding crowded long positions ahead of potential macroeconomic releases later in the week or simply a re-allocation out of recent outperformers into more defensive or value-oriented assets.",
+    "analysis_para3": "Traders should closely monitor the S&P 500 ETF for a test of immediate support around 760, with resistance noted near yesterday's close of 763.47. A decisive break below 760 could trigger further downside towards 755, signaling a more significant risk-off phase for the day. Conversely, a reclaim of 765 would suggest an abatement of current selling pressure and could act as a trigger for short-term long entries, but caution is warranted given the Nasdaq's recent weakness. The key today is managing exposure in tech names, using a confirmed break of yesterday's lows as a stop-loss threshold.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 ETF's slight dip keeps it within recent consolidation, while the Nasdaq 100 ETF's more significant drop suggests a potential retest of its 50-day moving average. Traders should watch for bullish engulfing patterns or hammer candles near key support levels to signal a potential bounce.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet announces a groundbreaking AI partnership with a major automotive manufacturer, significantly expanding its autonomous driving division and potential market reach."
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly (LLY) is set for a strong open after announcing overwhelmingly positive Phase 3 trial results for its groundbreaking metabolic syndrome drug, expanding its already robust pipeline."
         },
         {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon is reportedly exploring a strategic acquisition in the healthcare tech sector, aiming to integrate AI-powered diagnostics into its Amazon Pharmacy unit."
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA (NVDA) is showing strength on news of a major new partnership with a leading cloud provider to deploy next-generation AI infrastructure, solidifying its market dominance."
         }
       ],
       "c_grade": [
         {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Continued volatility following recent production guidance revisions, attracting short-term speculative interest on pure technical momentum."
+          "ticker": "AMC",
+          "company": "AMC Entertainment Holdings, Inc.",
+          "reason": "AMC Entertainment Holdings (AMC) remains a speculative play, primarily influenced by ongoing retail investor sentiment and technical chart patterns rather than new fundamental catalysts."
         }
       ]
     }
