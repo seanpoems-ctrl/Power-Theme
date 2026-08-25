@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-25 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Tech-Led Optimism / Risk Appetite",
+    "spy_price": 765.91,
+    "spy_change_pct": 0.32,
+    "vix": 15.45,
+    "hy_oas": 2.69,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 59.8,
+    "mmth": 74.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA shares surged after the company unveiled its next-generation 'Orion' AI processing unit at an industry conference, promising significant performance gains for large language models and data centers."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly saw strong buying interest following the release of compelling Phase 3 trial data for its novel GLP-1/GIP receptor agonist in treating severe obesity, significantly outperforming placebo."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla experienced volatile trading driven by pure technical momentum and algorithmic activity, retesting a key support level without any new fundamental company-specific news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-25 07:35 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "AMC",
           "company": "AMC Entertainment Holdings, Inc.",
           "reason": "AMC continues to be influenced by retail flow and sentiment, exhibiting price action driven more by technicals and social media chatter than new fundamental catalysts."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-04 09:06 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Broad Risk-On / Growth Resurgence",
-    "spy_price": 757.67,
-    "spy_change_pct": 1.42,
-    "vix": 15.59,
-    "hy_oas": 2.84,
-    "yield_curve": 0.45,
-    "credit_status": "Complacent",
-    "s5fi": 61.6,
-    "mmth": 70.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Reportedly poised to announce a groundbreaking quantum computing breakthrough with a major government contract, signaling a significant leap in its cloud and AI capabilities."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Rumors circulating of Amazon Web Services securing a multi-billion dollar expansion deal with a major healthcare provider, reinforcing its cloud dominance."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Continues to experience elevated volatility as retail interest and short covering interact with ongoing production updates and competitive news."
         }
       ]
     }
