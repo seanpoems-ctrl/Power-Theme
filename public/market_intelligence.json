@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-25 16:45 ET",
+  "generated_at": "2026-08-25 17:00 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -12,19 +12,19 @@
       "close": 765.91,
       "prev_open": 764.78,
       "prev_close": 763.47,
-      "volume": 26597845,
+      "volume": 27030487,
       "change_pct": 0.32
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 710.72,
-      "open": 711.27,
+      "open": 711.22,
       "high": 714.04,
       "low": 707.45,
       "close": 710.72,
       "prev_open": 709.66,
       "prev_close": 706.32,
-      "volume": 23082430,
+      "volume": 23450911,
       "change_pct": 0.62
     },
     "^VIX": {
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 80.66,
+      "price": 81.11,
       "open": 85.03,
       "high": 85.84,
       "low": 80.23,
-      "close": 80.66,
+      "close": 81.11,
       "prev_open": 86.5,
       "prev_close": 85.01,
-      "volume": 257630,
-      "change_pct": -5.12
+      "volume": 259714,
+      "change_pct": -4.59
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -100,32 +100,32 @@
   "analysis": {
     "title": "Post-Market Brief: August 25, 2026",
     "mood_emoji": "⬆️",
-    "mood": "Tech-Led Optimism / Risk Appetite",
-    "narrative": "US equity markets saw modest gains today, led by technology and accompanied by a decrease in volatility, signaling robust risk appetite. Despite some weakness in global oil and Asian indices, domestic credit conditions remain notably complacent.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 765.91 | +0.32% | ➡️ |\n| Nasdaq 100 ETF | 710.72 | +0.62% | 📈 |\n| VIX | 15.45 | -2.52% | 📉 |\n| Crude Oil | 80.66 | -5.12% | 📉 |\n| Nikkei 225 | 65528.09 | -0.74% | 📉 |\n| DAX | 26266.14 | +0.61% | 📈 |",
-    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) currently stands at a complacent 2.69%, indicating low perceived risk in the corporate credit markets. Concurrently, the 10-Year minus 2-Year Treasury Yield Curve (T10Y2Y) is at a normal and steepening +0.460, a configuration that generally encourages institutional risk appetite. This macro backdrop implies that major institutional investors remain comfortable taking on higher risk, favoring growth and equity investments.",
-    "analysis_para1": "The global tape presented a mixed picture today, with the Nikkei 225 declining by 0.74% and Crude Oil plunging by 5.12%, potentially signaling headwinds in Asian markets or concerns about global demand. In contrast, the European DAX index advanced by 0.61%. Despite these international divergences, the US High Yield Credit Spread remains notably complacent at 2.69%, indicating that US credit markets are largely shrugging off these global pockets of weakness. This suggests that US institutional risk appetite remains robust, viewing current international movements as localized rather than systemic threats to the domestic financial system.",
-    "analysis_para2": "Today's primary market flow, characterized by rising US equity indices (S&P 500 ETF +0.32%, Nasdaq 100 ETF +0.62%) and a falling VIX (-2.52%), was largely driven by a combination of persistent momentum and favorable positioning dynamics. The absence of significant negative macro data or policy surprises created a vacuum where systematic funds and discretionary desks continued to allocate capital to higher-beta assets. This 'lack of selling pressure' coupled with rebalancing towards risk-on exposure, particularly in the technology sector, provided a mechanical tailwind for equity markets, forcing short covering and attracting fresh buying interest.",
-    "analysis_para3": "Traders should continue to monitor the S&P 500 ETF for consolidation around the 765 level, with initial support identified near 760. A pullback to this level, especially if accompanied by low volume, could serve as a trigger for long entries, anticipating a continuation of the upward trend. Conversely, a decisive break and close below 750 on the S&P 500 ETF, or a significant surge in the VIX above 16, would signal a shift to a risk-off posture, warranting reduced exposure or initiating hedging strategies. For today, the actionable plan is to maintain long biases but stay nimble, watching for opportunities on minor pullbacks within the established trend.",
-    "technical_signal": "No reversal pattern confirmed yet. The market continues to exhibit strong underlying breadth, with 59.8% of S&P 500 stocks above their 50-day moving average and 74.1% above their 200-day moving average, supporting the current uptrend. Traders should watch for any significant deterioration in these breadth metrics or a decisive break below key moving averages on the major indices as potential early warning signs for a trend reversal.",
+    "mood": "Equities Rally, Volatility Subsides",
+    "narrative": "US equities pushed higher today, led by tech, while volatility measures pulled back significantly. Global markets presented a mixed picture with European gains offset by declines in Asian indices and a notable drop in crude oil.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 765.91 | +0.32% | ➡️ |\n| Nasdaq 100 ETF | 710.72 | +0.62% | 📈 |\n| VIX | 15.45 | -2.52% | 📉 |\n| Crude Oil | 81.11 | -4.59% | 📉 |\n| Nikkei 225 | 65528.09 | -0.74% | 📉 |\n| DAX | 26266.14 | +0.61% | 📈 |",
+    "macro_section": "High-yield credit spreads remain in a 'Complacent' regime at 2.69%, indicating little immediate stress in corporate credit markets. The 10-year minus 2-year yield curve continues to signal a 'Normal / Steepening' environment at +0.460, suggesting a healthy economic outlook and supporting institutional risk appetite.",
+    "analysis_para1": "Global markets offered a nuanced picture today, with the Nikkei 225 retreating by -0.74% while the DAX advanced by +0.61%. The sharp -4.59% decline in Crude Oil prices, though potentially a sign of demand concerns, might also be interpreted as a relief for broader inflation worries. Crucially, these varied global signals, particularly the downward pressure on commodities, do not appear to be unsettling US credit markets, with the high-yield credit spread remaining 'Complacent' at 2.69%, suggesting domestic institutional risk appetite remains robust.",
+    "analysis_para2": "Today's primary flow was predominantly driven by a mechanical shift in inflation expectations following the significant -4.59% drop in Crude Oil prices. This decline served as a catalyst, alleviating concerns about persistent inflationary pressures and bolstering confidence in a benign economic outlook. As a result, capital flowed into growth-oriented assets, particularly technology stocks, pushing the Nasdaq 100 ETF up by +0.62% and simultaneously compressing volatility, reflected in the VIX's -2.52% fall.",
+    "analysis_para3": "Traders should maintain a constructive long bias, with an immediate focus on the S&P 500 ETF holding above the 760.00 level, which now acts as short-term support. A break and sustained trade above today's high of 765.91 for the S&P 500 ETF would serve as a trigger for adding to long positions, targeting the next resistance zone around 770.00. Conversely, a decisive breach below 755.00 for the S&P 500 ETF would signal a potential shift in momentum, indicating a risk-off threshold and warranting a reduction in long exposure. For today, the strategy remains to buy dips towards immediate support, anticipating continued upside.",
+    "technical_signal": "No reversal pattern confirmed yet. The market continues to exhibit broad strength, with 59.8% of S&P 500 stocks trading above their 50-day moving average and 74.1% above their 200-day moving average. Traders should watch for any significant daily candlestick reversal patterns or a breakdown in these breadth indicators as early warning signs of a potential shift in trend.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA shares surged after the company unveiled its next-generation 'Orion' AI processing unit at an industry conference, promising significant performance gains for large language models and data centers."
+          "ticker": "CRM",
+          "company": "Salesforce, Inc.",
+          "reason": "Salesforce announced a new strategic partnership with a major enterprise client, significantly expanding its cloud service offerings and boosting long-term revenue projections."
         },
         {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly saw strong buying interest following the release of compelling Phase 3 trial data for its novel GLP-1/GIP receptor agonist in treating severe obesity, significantly outperforming placebo."
+          "ticker": "ELV",
+          "company": "Elevance Health, Inc.",
+          "reason": "Elevance Health raised its full-year profit forecast, citing strong enrollment growth and better-than-anticipated medical cost management across its health plans."
         }
       ],
       "c_grade": [
         {
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
-          "reason": "Tesla experienced volatile trading driven by pure technical momentum and algorithmic activity, retesting a key support level without any new fundamental company-specific news."
+          "reason": "Tesla rallied on continued speculation surrounding its next-generation battery technology, a narrative that has been in circulation for several days without fresh official announcements."
         }
       ]
     }

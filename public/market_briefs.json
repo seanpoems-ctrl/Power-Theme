@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-25 17:00 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Equities Rally, Volatility Subsides",
+    "spy_price": 765.91,
+    "spy_change_pct": 0.32,
+    "vix": 15.45,
+    "hy_oas": 2.69,
+    "yield_curve": 0.46,
+    "credit_status": "Complacent",
+    "s5fi": 59.8,
+    "mmth": 74.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CRM",
+          "company": "Salesforce, Inc.",
+          "reason": "Salesforce announced a new strategic partnership with a major enterprise client, significantly expanding its cloud service offerings and boosting long-term revenue projections."
+        },
+        {
+          "ticker": "ELV",
+          "company": "Elevance Health, Inc.",
+          "reason": "Elevance Health raised its full-year profit forecast, citing strong enrollment growth and better-than-anticipated medical cost management across its health plans."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla rallied on continued speculation surrounding its next-generation battery technology, a narrative that has been in circulation for several days without fresh official announcements."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-25 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "AMZN",
           "company": "Amazon.com, Inc.",
           "reason": "Benefited from the broader tech sector momentum and general market exuberance, without a fresh, specific catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-04 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Strong Equities, Divergent Global Flows",
-    "spy_price": 771.33,
-    "spy_change_pct": 1.8,
-    "vix": 16.5,
-    "hy_oas": 2.78,
-    "yield_curve": 0.45,
-    "credit_status": "Complacent",
-    "s5fi": 69.2,
-    "mmth": 71.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MRVL",
-          "company": "Marvell Technology, Inc.",
-          "reason": "Marvell's latest AI product development and aggressive price target hikes signal strong conviction in its growth trajectory within the booming AI sector."
-        },
-        {
-          "ticker": "PLTR",
-          "company": "Palantir Technologies Inc.",
-          "reason": "Palantir's robust earnings beat coupled with an upward revision in guidance underscores its growing enterprise demand and operational efficiency."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMC",
-          "company": "AMC Entertainment Holdings, Inc.",
-          "reason": "AMC continues to be influenced by retail flow and sentiment, exhibiting price action driven more by technicals and social media chatter than new fundamental catalysts."
         }
       ]
     }
