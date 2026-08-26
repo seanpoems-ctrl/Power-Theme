@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-26 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Positive Momentum, Credit Comfort",
+    "spy_price": 765.91,
+    "spy_change_pct": 0.32,
+    "vix": 15.67,
+    "hy_oas": 2.69,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 59.8,
+    "mmth": 74.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet's cloud division announced a strategic AI integration partnership with a major enterprise client, sparking renewed investor interest in its growth trajectory."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft unveiled a new suite of productivity tools powered by advanced generative AI, positioning it to capture significant market share in the enterprise software space."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "Nvidia Corporation",
+          "reason": "Nvidia is seeing renewed interest based on sector rotation into high-beta tech, despite no fresh company-specific news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-25 17:00 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "AMZN",
           "company": "Amazon.com Inc.",
           "reason": "Continues to benefit from strong e-commerce sales trends and persistent positive analyst sentiment regarding its cloud computing segment."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-04 17:53 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Tech-Led Ascent, Volatility Wary",
-    "spy_price": 771.33,
-    "spy_change_pct": 1.8,
-    "vix": 16.5,
-    "hy_oas": 2.78,
-    "yield_curve": 0.43,
-    "credit_status": "Complacent",
-    "s5fi": 69.2,
-    "mmth": 71.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "PLTR",
-          "company": "Palantir Technologies",
-          "reason": "Reported a significant earnings beat and raised guidance, fueling strong investor conviction in its growth trajectory."
-        },
-        {
-          "ticker": "MRVL",
-          "company": "Marvell Technology, Inc.",
-          "reason": "Boosted by new AI product development announcements and aggressive price target upgrades from analysts, signaling strong future potential."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Benefited from the broader tech sector momentum and general market exuberance, without a fresh, specific catalyst today."
         }
       ]
     }
