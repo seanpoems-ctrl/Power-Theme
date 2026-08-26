@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-26 07:36 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-On Momentum",
+    "spy_price": 765.91,
+    "spy_change_pct": 0.32,
+    "vix": 15.62,
+    "hy_oas": 2.69,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 59.8,
+    "mmth": 74.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple Inc. (AAPL) is poised for a strong open following reports of higher-than-expected pre-orders for its new VisionOS device in Asian markets, signaling robust consumer demand."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase & Co. (JPM) is gaining attention after announcing a strategic acquisition in the fintech space, expected to significantly bolster its digital banking capabilities and market share."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation (NVDA) continues to attract speculative flow, building on recent AI sector enthusiasm, with technical indicators suggesting continued upward momentum rather than a fresh fundamental trigger today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-26 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla is experiencing increased speculative interest and short-covering activity ahead of its upcoming investor day, purely driven by technical breakout momentum."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-05 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Broad Risk-On Rally",
-    "spy_price": 771.33,
-    "spy_change_pct": 1.8,
-    "vix": 16.57,
-    "hy_oas": 2.78,
-    "yield_curve": 0.43,
-    "credit_status": "Complacent",
-    "s5fi": 69.2,
-    "mmth": 71.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Reports significant new orders for its next-generation AI processors from key hyperscale data center clients, boosting revenue forecasts."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "Raises its full-year earnings guidance, citing robust performance across its investment banking and consumer lending divisions."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Continues to benefit from strong e-commerce sales trends and persistent positive analyst sentiment regarding its cloud computing segment."
         }
       ]
     }
