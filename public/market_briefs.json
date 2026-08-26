@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-26 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Subdued Strength, Complacent Credit",
+    "spy_price": 766.08,
+    "spy_change_pct": 0.02,
+    "vix": 15.21,
+    "hy_oas": 2.7,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 60.1,
+    "mmth": 73.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA (NVDA) unveiled a new chip architecture designed to significantly accelerate AI model training, sparking analyst upgrades for data center growth targets."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly (LLY) announced positive Phase 3 clinical trial results for its new obesity drug, exceeding efficacy expectations and reinforcing its market leadership."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMC",
+          "company": "AMC Entertainment Holdings, Inc.",
+          "reason": "AMC Entertainment (AMC) saw renewed speculative interest driven by short squeeze narratives and options market activity, despite no new fundamental corporate announcements."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-26 07:36 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2177,44 +2215,6 @@
           "ticker": "AMZN",
           "company": "Amazon.com, Inc.",
           "reason": "The stock experienced selling pressure as part of broader technology sector weakness, lacking a fresh specific catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-05 08:59 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-On Surge / Broad Momentum",
-    "spy_price": 771.33,
-    "spy_change_pct": 1.8,
-    "vix": 16.84,
-    "hy_oas": 2.78,
-    "yield_curve": 0.43,
-    "credit_status": "Complacent",
-    "s5fi": 69.2,
-    "mmth": 71.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA secures a multi-billion dollar contract for next-generation AI supercomputers, driving anticipated demand for its H100 GPU architecture."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announces the strategic acquisition of a leading cybersecurity firm, bolstering Azure's comprehensive enterprise security offerings."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla is experiencing increased speculative interest and short-covering activity ahead of its upcoming investor day, purely driven by technical breakout momentum."
         }
       ]
     }
