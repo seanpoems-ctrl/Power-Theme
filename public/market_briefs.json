@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-27 16:58 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Sustained Risk-On Momentum",
+    "spy_price": 771.1,
+    "spy_change_pct": 0.66,
+    "vix": 14.51,
+    "hy_oas": 2.67,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 57.1,
+    "mmth": 73.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Announced a groundbreaking partnership in cloud-based quantum computing, positioning itself as a leader in next-generation enterprise solutions."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Reported unexpectedly positive Phase 3 trial data for its new obesity treatment, potentially expanding its market dominance in the weight-loss drug sector."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Experienced a strong technical bounce, driven by short covering and algorithmically triggered buy orders following a period of consolidation."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-27 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2137,44 +2175,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "The stock saw continued flow-driven activity today, with no fresh news catalyst, indicating ongoing technical interest rather than fundamental shift."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-06 09:00 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious / Defensive Posture",
-    "spy_price": 769.79,
-    "spy_change_pct": -0.2,
-    "vix": 15.95,
-    "hy_oas": 2.73,
-    "yield_curve": 0.45,
-    "credit_status": "Complacent",
-    "s5fi": 68.0,
-    "mmth": 71.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is expected to react positively to news of a significant new partnership with a leading automotive manufacturer for its next-gen AI platform, reinforcing its growth trajectory."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Amazon's AWS division is poised for attention after securing a multi-year cloud services contract with a major government agency, solidifying its enterprise cloud market position."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla shares are exhibiting strong short-term momentum, with traders targeting a retest of its recent highs following a period of consolidation, driven by pure technical flow."
         }
       ]
     }
