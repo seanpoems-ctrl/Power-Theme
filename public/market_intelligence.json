@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-26 16:45 ET",
+  "generated_at": "2026-08-26 20:04 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -12,19 +12,19 @@
       "close": 766.08,
       "prev_open": 766.16,
       "prev_close": 765.91,
-      "volume": 26784448,
+      "volume": 27260923,
       "change_pct": 0.02
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 711.37,
-      "open": 708.41,
+      "open": 708.5,
       "high": 713.02,
       "low": 707.97,
       "close": 711.37,
       "prev_open": 711.22,
       "prev_close": 710.72,
-      "volume": 17872598,
+      "volume": 18464999,
       "change_pct": 0.09
     },
     "^VIX": {
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 81.77,
-      "open": 81.11,
-      "high": 83.31,
-      "low": 79.62,
-      "close": 81.77,
+      "price": 81.85,
+      "open": 82.0,
+      "high": 82.13,
+      "low": 81.75,
+      "close": 81.85,
       "prev_open": 85.03,
       "prev_close": 82.36,
-      "volume": 233957,
-      "change_pct": -0.72
+      "volume": 1275,
+      "change_pct": -0.62
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 26285.96,
-      "open": 26255.41,
-      "high": 26466.76,
-      "low": 26196.92,
-      "close": 26285.96,
-      "prev_open": 26206.01,
-      "prev_close": 26266.14,
-      "volume": 0,
-      "change_pct": 0.08
+      "price": 26266.14,
+      "open": 26206.01,
+      "high": 26341.52,
+      "low": 26164.11,
+      "close": 26266.14,
+      "prev_open": 26091.29,
+      "prev_close": 26106.6,
+      "volume": 41726700,
+      "change_pct": 0.61
     }
   },
   "fred": {
@@ -98,36 +98,6 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: August 26, 2026",
-    "mood_emoji": "🌿",
-    "mood": "Subdued Strength, Complacent Credit",
-    "narrative": "US equities saw minimal positive movement, with S&P 500 and Nasdaq 100 ETFs drifting slightly higher amidst declining volatility. Global markets showed a mixed but generally constructive tone, supported by complacent credit conditions and a steepening yield curve.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 766.08 | +0.02% | ➡️ |\n| Nasdaq 100 ETF | 711.37 | +0.09% | ➡️ |\n| VIX | 15.21 | -1.55% | 📉 |\n| Crude Oil | 81.77 | -0.72% | 📉 |\n| Nikkei 225 | 65856.43 | +0.50% | 📈 |\n| DAX | 26285.96 | +0.08% | ➡️ |",
-    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) registered a complacent 2.70%, signaling a low perception of risk among market participants. Coupled with a Normal / Steepening 10Y-2Y Yield Curve (T10Y2Y) at +0.470, this environment suggests that institutional risk appetite remains robust, favoring capital allocation towards riskier assets.",
-    "analysis_para1": "Global equities exhibited a generally positive tone, with the Nikkei 225 advancing by +0.50% to 65856.43 and the DAX showing a modest gain of +0.08% to 26285.96. Despite a slight dip in Crude Oil prices by -0.72% to $81.77, the broader international sentiment appears constructive. This global backdrop of mild strength and contained commodity volatility reinforces the prevailing complacent stance reflected in the US High Yield Credit Spread (BAMLH0A0HYM2) at 2.70%, implying a continued healthy risk appetite for US assets.",
-    "analysis_para2": "Today's primary flow appears to be driven by a lack of fresh significant macroeconomic catalysts, leading to a subdued yet positive drift in equity markets. With no major policy decisions or high-impact data releases, the mechanical catalyst was largely a consolidation phase following recent moves. This absence of immediate drivers allowed for light rebalancing and short covering, contributing to the slight positive price action in benchmark indices and the softening of the VIX.",
-    "analysis_para3": "For traders, the current environment calls for monitoring the established ranges as critical support and resistance levels. A sustained break above the S&P 500 ETF's intraday high around 766.50 could trigger long entries, targeting further upside in a low-volatility drift. Conversely, a clear rejection of 765.00 for the S&P 500 ETF, especially on increasing volume, would signal caution and potential for a brief pullback. The primary risk-off threshold remains a VIX spike above 16.00, suggesting a fundamental shift in market sentiment. Today, traders should focus on managing existing positions and scaling into high-conviction names on minor pullbacks, avoiding aggressive new directional bets.",
-    "technical_signal": "No reversal pattern confirmed yet. Equities continue to consolidate near recent highs, supported by healthy breadth indicators with 60.1% of S&P 500 stocks above SMA50 and 73.9% above SMA200. Traders should monitor volume trends and intraday momentum for early signs of divergence or a break from the current positive but quiet trajectory.",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) unveiled a new chip architecture designed to significantly accelerate AI model training, sparking analyst upgrades for data center growth targets."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly (LLY) announced positive Phase 3 clinical trial results for its new obesity drug, exceeding efficacy expectations and reinforcing its market leadership."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMC",
-          "company": "AMC Entertainment Holdings, Inc.",
-          "reason": "AMC Entertainment (AMC) saw renewed speculative interest driven by short squeeze narratives and options market activity, despite no new fundamental corporate announcements."
-        }
-      ]
-    }
+    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
   }
 }
