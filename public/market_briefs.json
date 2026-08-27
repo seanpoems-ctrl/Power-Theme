@@ -1,5 +1,23 @@
 [
   {
+    "generated_at": "2026-08-27 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "",
+    "spy_price": 766.08,
+    "spy_change_pct": 0.02,
+    "vix": 14.95,
+    "hy_oas": 2.7,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 60.1,
+    "mmth": 73.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {}
+  },
+  {
     "generated_at": "2026-08-26 20:04 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2157,44 +2175,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA is experiencing continued profit-taking and sector rotation, driving technical selling after its recent strong rally, without new fundamental catalysts today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-05 17:53 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed US / Underlying Caution",
-    "spy_price": 769.79,
-    "spy_change_pct": -0.2,
-    "vix": 15.81,
-    "hy_oas": 2.73,
-    "yield_curve": 0.45,
-    "credit_status": "Complacent",
-    "s5fi": 68.0,
-    "mmth": 71.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "ANET",
-          "company": "Arista Networks",
-          "reason": "Strong Q2 earnings beat and raised full-year guidance fueled robust demand for cloud networking solutions."
-        },
-        {
-          "ticker": "SHOP",
-          "company": "Shopify Inc.",
-          "reason": "Reported better-than-expected earnings, demonstrating continued strength in its e-commerce platform and merchant growth."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Trading largely on broader market sentiment and technical levels today, lacking any specific fundamental news catalyst."
         }
       ]
     }
