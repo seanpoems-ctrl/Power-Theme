@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-28 16:46 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Drifting Lower / Complacent Tone",
+    "spy_price": 769.35,
+    "spy_change_pct": -0.23,
+    "vix": 14.43,
+    "hy_oas": 2.63,
+    "yield_curve": 0.47,
+    "credit_status": "Complacent",
+    "s5fi": 54.8,
+    "mmth": 72.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Shares surged after analysts upgraded price targets, citing unexpectedly robust pre-orders for its new Vision Pro 2 headset following yesterday's product reveal."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Saw renewed buying interest following reports of a significant new enterprise contract win for its AWS division in the burgeoning artificial intelligence infrastructure market."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continued to trade within its recent range as investors consolidated positions following the latest artificial intelligence chip supply chain reports from earlier this week."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-28 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2137,44 +2175,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA continues to benefit from broader artificial intelligence sector momentum and positive flow, despite a lack of specific fresh news catalysts today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-07 07:51 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Mixed Signals, US Caution Prevails",
-    "spy_price": 768.56,
-    "spy_change_pct": -0.16,
-    "vix": 15.23,
-    "hy_oas": 2.75,
-    "yield_curve": 0.44,
-    "credit_status": "Complacent",
-    "s5fi": 66.2,
-    "mmth": 71.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly (LLY) shares are poised to move on news of accelerated FDA approval for its new groundbreaking Alzheimer's treatment, expanding its market leadership."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) is set for volatility following an analyst upgrade citing strong demand for its next-generation AI data center chips and a positive earnings outlook."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Amazon (AMZN) could see technical buying interest after holding key support levels over the past two sessions, suggesting accumulation by large institutional players."
         }
       ]
     }
