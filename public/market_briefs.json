@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-28 17:20 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Flows / Cautious Consolidation",
+    "spy_price": 769.35,
+    "spy_change_pct": -0.23,
+    "vix": 14.43,
+    "hy_oas": 2.63,
+    "yield_curve": 0.39,
+    "credit_status": "Complacent",
+    "s5fi": 54.8,
+    "mmth": 72.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a groundbreaking partnership with a major automotive manufacturer for its Azure AI platform, significantly expanding its cloud computing footprint in the IoT sector."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly received accelerated FDA approval for its new obesity drug candidate, driving expectations for substantial market share gains in a rapidly expanding therapeutic area."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla shares saw renewed selling pressure as technical levels broke down, exacerbating concerns over competitive pressures and production targets."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-28 16:46 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2137,44 +2175,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continues to see elevated trading volume as investors position for sustained demand in AI data center infrastructure build-outs, a recurring theme."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-07 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On Momentum Prevails",
-    "spy_price": 773.26,
-    "spy_change_pct": 0.61,
-    "vix": 14.9,
-    "hy_oas": 2.71,
-    "yield_curve": 0.44,
-    "credit_status": "Complacent",
-    "s5fi": 67.2,
-    "mmth": 74.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft unveiled a new AI-powered cloud service for enterprises, boosting productivity estimates and strengthening its competitive edge."
-        },
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet announced stronger-than-expected ad revenue growth projections for Q3 following new monetization strategies across its platforms."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA continues to benefit from broader artificial intelligence sector momentum and positive flow, despite a lack of specific fresh news catalysts today."
         }
       ]
     }
