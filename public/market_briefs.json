@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-08-31 13:58 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Volatility Resurfaces / Cautious Pullback",
+    "spy_price": 766.46,
+    "spy_change_pct": -0.38,
+    "vix": 15.1,
+    "hy_oas": 2.6,
+    "yield_curve": 0.39,
+    "credit_status": "Complacent",
+    "s5fi": 52.0,
+    "mmth": 69.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp",
+          "reason": "Announced a new strategic partnership with a leading hyperscaler for its next-generation AI data center architecture, fueling strong bullish momentum."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Co",
+          "reason": "Reported highly positive Phase 3 clinical trial data for its groundbreaking Alzheimer's drug, leading to significant analyst upgrades."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp",
+          "reason": "Benefited from continued institutional rotation into high-quality tech names as investors seek stability amidst broader market uncertainty."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-08-31 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2117,44 +2155,6 @@
           "ticker": "XOM",
           "company": "Exxon Mobil Corporation",
           "reason": "Exxon Mobil saw renewed interest today, driven by the significant surge in crude oil prices, extending its recent upward trend on commodity tailwinds."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-10 07:54 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Strong Risk-On Momentum",
-    "spy_price": 773.26,
-    "spy_change_pct": 0.61,
-    "vix": 15.45,
-    "hy_oas": 2.71,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 67.2,
-    "mmth": 74.0,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet (GOOGL) surged pre-market following news of a landmark AI-powered cloud computing contract, underscoring strong enterprise adoption of its cutting-edge services."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase (JPM) sees increased institutional buying after a major analyst upgrade, citing robust Q3 earnings outlook and accelerated loan growth."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) extends its rally as continuous systematic inflows capitalize on persistent demand for AI hardware infrastructure, reflecting flow-driven momentum rather than a fresh catalyst."
         }
       ]
     }
