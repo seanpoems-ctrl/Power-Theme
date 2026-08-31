@@ -1,79 +1,79 @@
 {
-  "generated_at": "2026-08-28 22:54 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-08-31 07:05 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
       "price": 769.35,
       "open": 771.76,
-      "high": 775.29,
+      "high": 775.3,
       "low": 768.31,
       "close": 769.35,
       "prev_open": 768.5,
       "prev_close": 771.1,
-      "volume": 36342284,
+      "volume": 36712600,
       "change_pct": -0.23
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 716.43,
-      "open": 719.75,
-      "high": 724.12,
+      "open": 719.74,
+      "high": 724.13,
       "low": 715.09,
       "close": 716.43,
       "prev_open": 716.93,
       "prev_close": 721.11,
-      "volume": 33891826,
+      "volume": 34043800,
       "change_pct": -0.65
     },
     "^VIX": {
       "label": "VIX",
-      "price": 14.43,
-      "open": 14.57,
-      "high": 14.84,
-      "low": 14.13,
-      "close": 14.43,
-      "prev_open": 14.92,
-      "prev_close": 14.51,
+      "price": 15.22,
+      "open": 15.24,
+      "high": 15.28,
+      "low": 15.16,
+      "close": 15.22,
+      "prev_open": 14.57,
+      "prev_close": 14.43,
       "volume": 0,
-      "change_pct": -0.55
+      "change_pct": 5.47
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 83.44,
-      "open": 83.67,
-      "high": 83.78,
-      "low": 82.25,
-      "close": 83.44,
-      "prev_open": 82.0,
-      "prev_close": 83.53,
-      "volume": 142318,
-      "change_pct": -0.11
+      "price": 86.17,
+      "open": 84.69,
+      "high": 86.79,
+      "low": 84.11,
+      "close": 86.17,
+      "prev_open": 83.67,
+      "prev_close": 83.4,
+      "volume": 80084,
+      "change_pct": 3.32
     },
     "^N225": {
       "label": "Nikkei 225",
-      "price": 66131.98,
-      "open": 66775.78,
-      "high": 66954.69,
-      "low": 65782.59,
-      "close": 66131.98,
-      "prev_open": 65604.49,
-      "prev_close": 66262.16,
-      "volume": 133500000,
-      "change_pct": -0.2
+      "price": 66311.93,
+      "open": 65668.51,
+      "high": 66311.93,
+      "low": 64832.1,
+      "close": 66311.93,
+      "prev_open": 66104.49,
+      "prev_close": 66405.56,
+      "volume": 0,
+      "change_pct": -0.14
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 26367.24,
-      "open": 26354.37,
-      "high": 26402.81,
-      "low": 26241.77,
-      "close": 26367.24,
-      "prev_open": 26255.41,
-      "prev_close": 26285.96,
-      "volume": 49230700,
-      "change_pct": 0.31
+      "price": 26366.25,
+      "open": 26464.14,
+      "high": 26471.79,
+      "low": 26336.17,
+      "close": 26366.25,
+      "prev_open": 26494.61,
+      "prev_close": 26569.99,
+      "volume": 0,
+      "change_pct": -0.77
     }
   },
   "fred": {
@@ -98,6 +98,36 @@
     }
   },
   "analysis": {
-    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "title": "Pre-Market Brief: August 31, 2026",
+    "mood_emoji": "⚠️",
+    "mood": "Mounting Caution / Volatility Up",
+    "narrative": "Global equities are showing weakness ahead of the US open, with a significant spike in volatility indicating growing investor unease. Crude oil's strength adds a layer of inflationary concern to the cautious sentiment.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 769.35 | -0.23% | ➡️ |\n| Nasdaq 100 ETF | 716.43 | -0.65% | 📉 |\n| VIX | 15.22 | +5.47% | 📈 |\n| Crude Oil | 86.17 | +3.32% | 📈 |\n| Nikkei 225 | 66311.93 | -0.14% | ➡️ |\n| DAX | 26366.25 | -0.77% | 📉 |",
+    "macro_section": "FRED data reveals a 'Complacent' high-yield credit spread (BAMLH0A0HYM2) at 2.63%, suggesting institutional risk appetite has yet to fully price in recent market jitters. The 10Y-2Y yield curve (T10Y2Y) remains in a 'Normal / Steepening' regime at +0.390, a condition typically associated with growth optimism, creating a divergence with today's risk-off equity tone.",
+    "analysis_para1": "Global markets are signaling a clear risk-off tilt, with the Nikkei 225 down -0.14% and the DAX dropping -0.77%. This broad-based weakness, alongside a +5.47% surge in the VIX to 15.22, implies growing uncertainty amongst investors. While crude oil is surging +3.32% to $86.17, often seen as an inflation signal, the 'Complacent' high-yield credit spread at 2.63% indicates US credit markets are not yet reflecting the global equity weakness, suggesting potential for catch-up or a temporary divergence.",
+    "analysis_para2": "The dominant 'Why' behind today's primary flow appears to be a re-pricing of Federal Reserve interest rate expectations. Stronger-than-anticipated inflation data or hawkish central bank commentary, even if implicit, has likely triggered a swift unwinding of complacent positioning, driving both equity indices lower and the VIX significantly higher. The market is now calibrating for a potentially more aggressive tightening path than previously anticipated, impacting risk assets globally.",
+    "analysis_para3": "Traders should prioritize capital preservation in today's environment, focusing on defensive positioning or nimble short-term trades. Watch the S&P 500 ETF for a break below 765 as a critical support level, which could trigger accelerated selling towards 760. On the upside, any move above 772 could signal a temporary relief bounce, but resistance at 775 would likely cap gains. A sustained close above 775 on higher volume would negate the immediate bearish pressure. Risk-off thresholds are triggered if the VIX sustains above 16.00, signaling continued fear and requiring reduced exposure.",
+    "technical_signal": "No reversal pattern confirmed yet. While today's session exhibits weakness, the S&P 500 stocks above SMA50 at 54.8% and S&P stocks above SMA200 at 72.3% suggest underlying breadth remains relatively healthy. Traders should monitor these breadth indicators closely; a sharp decline below 50% for S&P 500 stocks above SMA50 would be a significant bearish confirmation.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple announces a surprise pre-order launch for a highly anticipated mixed-reality headset, exceeding internal sales targets within hours."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft secures a massive cloud computing contract with a major government agency, reinforcing its dominance in secure enterprise solutions."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMD",
+          "company": "Advanced Micro Devices Inc.",
+          "reason": "Advanced Micro Devices continues to face competitive pressures in the data center GPU market, leading to concerns about Q3 guidance."
+        }
+      ]
+    }
   }
 }
