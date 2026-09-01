@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-01 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Volatility Surge",
+    "spy_price": 761.78,
+    "spy_change_pct": -0.69,
+    "vix": 16.34,
+    "hy_oas": 2.63,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 47.9,
+    "mmth": 65.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil announced a significant new liquefied natural gas supply deal, boosting future revenue outlook amidst rising energy prices."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly reported encouraging interim results from its late-stage obesity drug trial, positioning it for potential market share gains."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA saw continued profit-taking and broad-market de-risking, extending recent weakness without new company-specific news to offset the tech sector's struggles."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-01 11:26 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Continues to see consistent institutional accumulation on perceived long-term value, with today's action reflecting underlying buy-the-dip flow."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-11 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious Consolidation",
-    "spy_price": 770.56,
-    "spy_change_pct": -0.32,
-    "vix": 15.28,
-    "hy_oas": 2.7,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 66.3,
-    "mmth": 72.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Announced significant advancements in battery technology for its electric semi-trucks, promising extended range and faster charging capabilities, driving renewed investor interest."
-        },
-        {
-          "ticker": "UNH",
-          "company": "UnitedHealth Group Incorporated",
-          "reason": "Revised its third-quarter earnings guidance upwards, citing favorable medical loss ratios and robust enrollment figures across its diverse health plans."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Experienced continued bullish flow driven by ongoing demand for AI infrastructure and positive sentiment stemming from recent analyst upgrades."
         }
       ]
     }
