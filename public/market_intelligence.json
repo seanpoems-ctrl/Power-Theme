@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-01 16:45 ET",
+  "generated_at": "2026-09-01 18:49 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -12,7 +12,7 @@
       "close": 761.78,
       "prev_open": 767.33,
       "prev_close": 767.05,
-      "volume": 37889464,
+      "volume": 40112421,
       "change_pct": -0.69
     },
     "QQQ": {
@@ -24,7 +24,7 @@
       "close": 707.64,
       "prev_open": 715.17,
       "prev_close": 716.76,
-      "volume": 33293724,
+      "volume": 34409539,
       "change_pct": -1.27
     },
     "^VIX": {
@@ -42,13 +42,13 @@
     "CL=F": {
       "label": "Crude Oil",
       "price": 90.83,
-      "open": 86.31,
-      "high": 90.97,
-      "low": 86.13,
+      "open": 90.65,
+      "high": 91.01,
+      "low": 90.57,
       "close": 90.83,
       "prev_open": 84.69,
       "prev_close": 85.76,
-      "volume": 296482,
+      "volume": 1715,
       "change_pct": 5.91
     },
     "^N225": {
@@ -65,20 +65,20 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25970.11,
-      "open": 26150.75,
-      "high": 26206.13,
-      "low": 25916.76,
-      "close": 25970.11,
-      "prev_open": 26464.14,
-      "prev_close": 26258.11,
-      "volume": 0,
-      "change_pct": -1.1
+      "price": 26258.11,
+      "open": 26464.14,
+      "high": 26471.79,
+      "low": 26249.59,
+      "close": 26258.11,
+      "prev_open": 26494.61,
+      "prev_close": 26569.99,
+      "volume": 81710600,
+      "change_pct": -1.17
     }
   },
   "fred": {
     "hy_oas": 2.63,
-    "yield_curve": 0.41,
+    "yield_curve": 0.4,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -100,32 +100,32 @@
   "analysis": {
     "title": "Post-Market Brief: September 01, 2026",
     "mood_emoji": "📉",
-    "mood": "Risk-Off / Volatility Surge",
-    "narrative": "US equities fell across the board, led by tech, as global risk aversion intensified and volatility surged. A significant rise in crude oil prices added to inflationary concerns, putting pressure on broader markets.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 761.78 | -0.69% | 📉 |\n| Nasdaq 100 ETF | 707.64 | -1.27% | 📉 |\n| VIX | 16.34 | +9.52% | 📈 |\n| Crude Oil | 90.83 | +5.91% | 📈 |\n| Nikkei 225 | 66311.93 | -0.14% | ➡️ |\n| DAX | 25970.11 | -1.10% | 📉 |",
-    "macro_section": "Today's FRED macro data shows the High Yield Credit Spread (BAMLH0A0HYM2) remaining at a complacent 2.63%, alongside a normal/steepening 10Y-2Y yield curve (T10Y2Y) at +0.410. While these indicators typically suggest a supportive environment for institutional risk appetite, the sharp equity declines and VIX spike imply a disconnect, with market sentiment turning markedly cautious despite seemingly benign credit conditions.",
-    "analysis_para1": "The global tape presented a mixed but ultimately concerning picture, with the Nikkei 225 showing relative resilience down only -0.14%, while the DAX plunged -1.10%. Simultaneously, Crude Oil prices surged a substantial +5.91% to $90.83, hinting at renewed inflationary pressures and supply concerns. Despite US High Yield Credit Spreads (BAMLH0A0HYM2) remaining at a complacent 2.63%, these international movements, particularly the European equity weakness and commodity inflation, signal an underlying increase in global risk aversion that is beginning to spill over into US markets, challenging the complacency reflected in credit.",
-    "analysis_para2": "Today's dominant mechanical catalyst appears to be a re-pricing of inflation risk, significantly exacerbated by the almost 6% surge in Crude Oil prices. This rapid appreciation in oil to $90.83 reignited fears of persistent inflationary pressures, driving investors to shed risk assets. Consequently, the observed price action saw broad equity declines, especially in growth-oriented Nasdaq names, alongside a sharp 9.52% spike in the VIX, indicating a rapid increase in implied volatility as market participants de-risked ahead of anticipated tighter monetary policy responses or further macroeconomic data.",
-    "analysis_para3": "Given today's decisive risk-off move, traders should maintain a defensive posture heading into tomorrow. Watch for critical support levels around S&P 500 ETF 760 and Nasdaq 100 ETF 705; a sustained break below these could trigger further downside. Key triggers for short entries include failed bounces back towards today's open or rejection at the 765 level for S&P 500. The primary risk-off threshold for confirming deeper corrections would be the S&P 500 stocks above SMA50 falling below 45% and continued VIX expansion, signaling further institutional de-risking. For today's close, the actionable plan is to reduce exposure and prepare for potential follow-through selling.",
-    "technical_signal": "No reversal pattern confirmed yet. The sharp selling across major indices today, coupled with the VIX surge, suggests dominant bearish momentum. While S&P stocks above SMA200 remains relatively strong at 65.8%, the S&P 500 stocks above SMA50 dipping below 50% at 47.9% indicates weakening intermediate-term breadth. Traders should monitor for a high-volume capitulation candle or a clear bullish engulfing pattern to signal potential stabilization.",
+    "mood": "Risk-Off / Inflationary Concerns",
+    "narrative": "Global equities faced widespread selling pressure today, driven by renewed inflation fears after a significant surge in crude oil prices. This led to a broad market retreat, increased volatility, and a cautious stance among investors.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 761.78 | -0.69% | 📉 |\n| Nasdaq 100 ETF | 707.64 | -1.27% | 📉 |\n| VIX | 16.34 | +9.52% | 📈 |\n| Crude Oil | 90.83 | +5.91% | 📈 |\n| Nikkei 225 | 66311.93 | -0.14% | ➡️ |\n| DAX | 26258.11 | -1.17% | 📉 |",
+    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) remains 'Complacent' at 2.63%, suggesting a disconnect from today's equity declines. Meanwhile, the 10Y-2Y Yield Curve (T10Y2Y) stands at a 'Normal / Steepening' +0.400, typically indicating growth expectations or rising inflation concerns. However, in today's risk-off environment, these macro indicators imply that while credit markets are not yet pricing in significant stress, institutional risk appetite for equities is clearly retreating amidst uncertainty.",
+    "analysis_para1": "Global equities followed Wall Street's lead, with the DAX notably falling -1.17% and the Nikkei 225 seeing a modest -0.14% dip, signaling a broad-based move away from risk. Despite this, crude oil surged +5.91% to $90.83, potentially fueling renewed inflation concerns and future central bank hawkishness. Curiously, US High Yield credit spreads remain 'Complacent' at 2.63%, indicating that while equity markets are showing aversion, the credit market has not yet priced in significant distress. This global tape suggests a selective, yet growing, reduction in US risk appetite, particularly sensitive to inflationary pressures.",
+    "analysis_para2": "Today's primary market flow was predominantly driven by a renewed inflation scare, mechanically triggered by the significant surge in Crude Oil prices. The +5.91% jump in oil to $90.83 reignited fears of persistent inflationary pressures, compelling investors to price in potentially more aggressive central bank tightening ahead. This expectation shift directly led to a broad-based sell-off across equities, evidenced by the S&P 500 ETF's -0.69% decline and the Nasdaq 100 ETF's sharper -1.27% drop. The ensuing uncertainty also manifested in a sharp +9.52% spike in the VIX, reflecting heightened market anxiety.",
+    "analysis_para3": "Given the broad risk-off sentiment and rising volatility, traders should exercise caution and prioritize capital preservation. Watch for the S&P 500 ETF to potentially retest yesterday's lows below 760 as a key support level, while a failure to hold could signal further downside to the 755 area. A clear trigger for potential long entries would be a sustained push back above 765 on significant volume, indicating buyer conviction. However, initiating new short positions on any technical breakdown below 760 could be considered, with a clear risk-off threshold set by the VIX climbing above 18. Traders should look to trim exposure and remain nimble, avoiding aggressive bets until market stability is confirmed.",
+    "technical_signal": "No reversal pattern confirmed yet. Short-term breadth is weakening, with S&P 500 stocks above SMA50 at 47.9%, while longer-term health remains moderate with S&P stocks above SMA200 at 65.8%. Watch for a stabilization in equity indices, specifically the S&P 500 ETF, and a corresponding decrease in the VIX below 16 as potential signals for a pause in the current downtrend.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil announced a significant new liquefied natural gas supply deal, boosting future revenue outlook amidst rising energy prices."
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla Inc. (TSLA) soared after announcing a groundbreaking battery technology partnership that promises to significantly extend EV range and slash charging times, boosting future growth prospects."
         },
         {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly reported encouraging interim results from its late-stage obesity drug trial, positioning it for potential market share gains."
+          "ticker": "UNH",
+          "company": "UnitedHealth Group Inc.",
+          "reason": "UnitedHealth Group Inc. (UNH) gained traction following an unexpected pre-announcement of raised full-year earnings guidance, driven by robust performance across its Optum and health plan segments."
         }
       ],
       "c_grade": [
         {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA saw continued profit-taking and broad-market de-risking, extending recent weakness without new company-specific news to offset the tech sector's struggles."
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft Corp. (MSFT) continued its downward drift alongside broader technology names, experiencing selling pressure as investors rotate out of high-multiple growth stocks without a fresh fundamental catalyst."
         }
       ]
     }
