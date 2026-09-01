@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31 16:45 ET",
+  "generated_at": "2026-08-31 20:04 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -12,19 +12,19 @@
       "close": 767.05,
       "prev_open": 771.76,
       "prev_close": 769.35,
-      "volume": 34347091,
+      "volume": 38644504,
       "change_pct": -0.3
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 716.76,
-      "open": 715.17,
+      "open": 715.12,
       "high": 717.58,
       "low": 713.16,
       "close": 716.76,
       "prev_open": 719.74,
       "prev_close": 716.43,
-      "volume": 31393831,
+      "volume": 31883751,
       "change_pct": 0.05
     },
     "^VIX": {
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 86.31,
-      "open": 84.69,
-      "high": 86.79,
-      "low": 84.11,
-      "close": 86.31,
+      "price": 86.4,
+      "open": 86.31,
+      "high": 86.49,
+      "low": 86.13,
+      "close": 86.4,
       "prev_open": 83.67,
       "prev_close": 83.4,
-      "volume": 213468,
-      "change_pct": 3.49
+      "volume": 1993,
+      "change_pct": 3.6
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,20 +65,20 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 26258.11,
-      "open": 26464.14,
-      "high": 26471.79,
-      "low": 26249.59,
-      "close": 26258.11,
-      "prev_open": 26494.61,
-      "prev_close": 26569.99,
-      "volume": 0,
-      "change_pct": -1.17
+      "price": 26569.99,
+      "open": 26494.61,
+      "high": 26618.74,
+      "low": 26467.36,
+      "close": 26569.99,
+      "prev_open": 26354.37,
+      "prev_close": 26367.24,
+      "volume": 45045000,
+      "change_pct": 0.77
     }
   },
   "fred": {
     "hy_oas": 2.6,
-    "yield_curve": 0.39,
+    "yield_curve": 0.41,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -98,6 +98,36 @@
     }
   },
   "analysis": {
-    "error": "503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+    "title": "Post-Market Brief: August 31, 2026",
+    "mood_emoji": "⚠️",
+    "mood": "Cautious Divergence",
+    "narrative": "The S&P 500 dipped slightly while the VIX and crude oil rose, indicating underlying caution despite positive global equity performance. Nasdaq remained flat, suggesting tech resilience amid broader market uncertainty.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 767.05 | -0.30% | ➡️ |\n| Nasdaq 100 ETF | 716.76 | +0.05% | ➡️ |\n| VIX | 14.92 | +3.40% | 📈 |\n| Crude Oil | 86.40 | +3.60% | 📈 |\n| Nikkei 225 | 66405.56 | +0.41% | ➡️ |\n| DAX | 26569.99 | +0.77% | 📈 |",
+    "macro_section": "High Yield Credit Spreads currently sit at 2.60%, signaling a Complacent regime in credit markets. Concurrently, the 10-Year minus 2-Year Yield Curve stands at a positive 0.410, indicating a Normal / Steepening curve. This combination suggests that while credit markets appear stable, institutional risk appetite might be subtly shifting as macro signals diverge.",
+    "analysis_para1": "Global equities, specifically the Nikkei 225 advancing +0.41% and the DAX gaining +0.77%, showed robust performance today, complemented by a significant +3.60% surge in crude oil prices to $86.40. Despite this international strength and a still 'Complacent' US High Yield Credit Spread of 2.60%, the US S&P 500 ETF experienced a modest -0.30% pullback. This divergence implies that while global risk appetite remains resilient, US domestic sentiment is exhibiting selective caution, likely reflecting sector-specific concerns rather than a broad-based flight from risk.",
+    "analysis_para2": "The dominant 'Why' behind today's primary flow appears to be the sharp escalation in crude oil prices, climbing +3.60% to $86.40 per barrel. This abrupt commodity price shock likely initiated a rotation within the market, favoring energy-related assets while simultaneously weighing on the broader S&P 500 due to concerns over input costs and potential inflationary pressures. The associated +3.40% jump in the VIX reflects this heightened uncertainty and the market's immediate repricing of risk as investors absorb the economic implications of more expensive energy.",
+    "analysis_para3": "Traders should prioritize defending core positions and maintaining strict risk management today. Watch for the S&P 500 ETF to hold the 765 level as immediate support; a sustained break below could signal further downside potential. The Nasdaq 100 ETF's resilience near 716.76 suggests tech may offer relative safety, with 715 acting as a key floor. Given the rising VIX and crude oil, consider hedging strategies to protect against increased volatility, and actively monitor crude oil price action for continuation or reversal cues that will dictate broader market sentiment into the next session.",
+    "technical_signal": "No reversal pattern confirmed yet. Breadth indicators remain relatively healthy, with 52.3% of S&P 500 stocks above SMA50 and 69.7% above SMA200, suggesting the underlying market structure is not severely broken despite today's modest pullback. Watch for sustained closes below the S&P 500 ETF's 50-day moving average as a potential trigger for further technical deterioration.",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Announced breakthrough Phase 3 trial results for its new dual-agonist obesity treatment, exceeding efficacy expectations and projecting significant market expansion."
+        },
+        {
+          "ticker": "XOM",
+          "company": "ExxonMobil Corporation",
+          "reason": "Upgraded its full-year production guidance and capital return program following robust crude oil price surge, signaling strong operational leverage."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continued to attract speculative flow on persistent AI enthusiasm and momentum, despite no specific fresh fundamental catalyst today."
+        }
+      ]
+    }
   }
 }
