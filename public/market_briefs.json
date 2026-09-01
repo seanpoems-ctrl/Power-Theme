@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-01 11:26 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off / Caution Escalates",
+    "spy_price": 763.45,
+    "spy_change_pct": -0.47,
+    "vix": 15.47,
+    "hy_oas": 2.63,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 50.4,
+    "mmth": 67.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CVX",
+          "company": "Chevron Corporation",
+          "reason": "Chevron announced a new deepwater discovery in the Gulf of Mexico, potentially boosting future production capacity, capitalizing on rising crude oil prices."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet's Google Cloud division secured a major multi-year enterprise AI contract with a Fortune 100 client, signaling strong demand for its generative AI services."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA is attracting attention after yesterday's decline, as options flow suggests institutional hedging rather than outright bearish positioning."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-01 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Experienced continued bullish flow driven by ongoing demand for AI infrastructure and positive sentiment stemming from recent analyst upgrades."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-11 07:51 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Consolidation",
-    "spy_price": 773.03,
-    "spy_change_pct": -0.03,
-    "vix": 15.49,
-    "hy_oas": 2.7,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 66.8,
-    "mmth": 72.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon.com (AMZN) secures a multi-billion dollar, multi-year cloud services contract with the Department of Defense, signaling continued dominance in government IT infrastructure."
-        },
-        {
-          "ticker": "PFE",
-          "company": "Pfizer Inc.",
-          "reason": "Pfizer (PFE) shares are seeing pre-market buying after announcing positive Phase 3 clinical trial data for its novel Alzheimer's treatment, potentially opening a new blockbuster market."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) is consolidating after its recent rally, with no fresh news catalyst today, suggesting pure technical trading around recent highs and potential profit-taking."
         }
       ]
     }
