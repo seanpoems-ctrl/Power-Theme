@@ -10075,7 +10075,36 @@ const DailyWatchlistTab = ({ data }) => {
       }));
   }, [data, screenerMap]);
   const topThemes = displayThemes.slice(0, 5);
-  const laggardThemes = [...displayThemes].reverse().slice(0, 5);  // worst-first, for the Short tab
+
+  // Worst-momentum themes for the Short tab. displayThemes only holds the top-5
+  // leaders, so reversing it just re-orders those same leaders — instead, rank
+  // the FULL theme_rankings list ascending and pull real stock detail from
+  // data.themes (rare) or data.heatmap_themes (the other ~35 scraped themes).
+  const laggardThemes = React.useMemo(() => {
+    const rk = data?.theme_rankings ?? [];
+    if (!rk.length) return [...displayThemes].reverse().slice(0, 5);
+    const themesByName = new Map((data?.themes ?? []).map(t => [t.name, t]));
+    const heatmapByName = new Map((data?.heatmap_themes ?? []).map(t => [t.name, t]));
+    return [...rk]
+      .sort((a, b) => (a.rs_score ?? 0) - (b.rs_score ?? 0))
+      .slice(0, 5)
+      .map(r => {
+        const full = themesByName.get(r.name) ?? heatmapByName.get(r.name);
+        return {
+          name: r.name,
+          _ranking: !full,
+          perf_1d: r.perf_1d, perf_1m: r.perf_1m, perf_3m: r.perf_3m,
+          rs_score: r.rs_score,
+          subthemes: full?.subthemes ?? [{
+            name: r.name,
+            stocks: (r._tickers ?? []).map(tk => {
+              const sc = screenerMap[tk] || {};
+              return { ticker: tk, ...sc, rs_52w: sc.rs_52w ?? sc.rs_score };
+            }),
+          }],
+        };
+      });
+  }, [data, displayThemes, screenerMap]);
 
   // ── Gapper Watch ── conviction ≥ 55
   const topGappers = (gapperData?.gappers ?? []).filter(g => (g.conviction ?? 0) >= 55).slice(0, 6);
@@ -10297,12 +10326,9 @@ const DailyWatchlistTab = ({ data }) => {
               const topS = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))[0];
               const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
               const perfKey = perfMode === "1d" ? "perf_1d" : perfMode === "1m" ? "perf_1m" : "perf_3m";
-              const topStocks = stocks.slice(0, 5);
               const perf = theme._ranking
                 ? (theme[perfKey] ?? 0)
-                : (topStocks.length
-                    ? topStocks.reduce((acc, st) => acc + (st[perfKey] ?? 0), 0) / topStocks.length
-                    : 0);
+                : (topS?.[perfKey] ?? 0);
               return (
                 <div key={theme.name}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40 cursor-pointer hover:bg-zinc-700/50 hover:border-zinc-600/60 transition-colors"
@@ -10421,12 +10447,9 @@ const DailyWatchlistTab = ({ data }) => {
                   const topS = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))[0];
                   const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
                   const perfKey = perfMode === "1d" ? "perf_1d" : perfMode === "1m" ? "perf_1m" : "perf_3m";
-                  const topStocks = stocks.slice(0, 5);
                   const perf = theme._ranking
                     ? (theme[perfKey] ?? 0)
-                    : (topStocks.length
-                        ? topStocks.reduce((acc, st) => acc + (st[perfKey] ?? 0), 0) / topStocks.length
-                        : 0);
+                    : (topS?.[perfKey] ?? 0);
                   return (
                     <div key={theme.name}
                       className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40 cursor-pointer hover:bg-zinc-700/50 hover:border-zinc-600/60 transition-colors"

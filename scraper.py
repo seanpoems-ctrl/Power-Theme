@@ -787,8 +787,13 @@ def aggregate_theme_performance(industries: list[dict]) -> list[dict]:
 
 
 def _build_hardcoded_theme_entry(theme_name: str, tickers: list[str]) -> dict | None:
-    """Build a theme_rankings-style entry for a hardcoded ticker list using yfinance."""
+    """Build a theme_rankings-style entry for a hardcoded ticker list using yfinance.
+
+    Uses the median across tickers (not mean) so a single squeeze/outlier stock
+    can't drag a small hardcoded group to the top of the overall theme ranking.
+    """
     try:
+        import statistics
         import yfinance as yf
         hist = yf.download(tickers, period="7mo", interval="1d",
                            auto_adjust=True, progress=False, group_by="ticker")
@@ -812,7 +817,7 @@ def _build_hardcoded_theme_entry(theme_name: str, tickers: list[str]) -> dict | 
         avg_perfs = {}
         for k in perf_keys:
             vals = all_perfs[k]
-            avg_perfs[k] = round(sum(vals) / len(vals), 2) if vals else 0.0
+            avg_perfs[k] = round(statistics.median(vals), 2) if vals else 0.0
 
         rs_score = round(
             avg_perfs.get("perf_1d", 0) * 0.05 +
