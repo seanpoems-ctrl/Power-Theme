@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-02 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On US, AI Leadership",
+    "spy_price": 765.16,
+    "spy_change_pct": 0.44,
+    "vix": 15.2,
+    "hy_oas": 2.65,
+    "yield_curve": 0.4,
+    "credit_status": "Complacent",
+    "s5fi": 49.8,
+    "mmth": 67.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "GTLB",
+          "company": "GitLab Inc.",
+          "reason": "Today's Q2 earnings beat and strong AI-driven outlook propelled significant buying interest."
+        },
+        {
+          "ticker": "DELL",
+          "company": "Dell Technologies Inc.",
+          "reason": "Strong Q2 earnings beat, fueled by robust AI server growth, acted as a major positive catalyst."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Continued to benefit from broader Artificial Intelligence sector momentum and institutional flow, without specific new news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-02 11:02 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Technical breakout above recent resistance levels attracted momentum buyers following ongoing narratives of robust global EV demand."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-12 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Growth Momentum Accelerates",
-    "spy_price": 772.49,
-    "spy_change_pct": 0.25,
-    "vix": 14.55,
-    "hy_oas": 2.72,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 68.2,
-    "mmth": 71.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft (MSFT) unveiled a new generative AI platform feature today, significantly expanding its Azure cloud service capabilities and driving optimism for accelerated enterprise adoption."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly (LLY) announced positive Phase 3 trial results for its new obesity drug, exceeding efficacy expectations and positioning it for market dominance."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) showed strong price action today, likely due to continued inflows into AI-related semiconductor stocks following yesterday's broadly positive sector analyst reports."
         }
       ]
     }
