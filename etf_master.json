@@ -1,1076 +1,1290 @@
 {
-  "XLK": {
-    "category": "Technology & Digital Disruption",
-    "label": "Technology Sector",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "SOXX": {
-    "category": "Technology & Digital Disruption",
-    "label": "Semiconductors Broad",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "FDN": {
-    "category": "Technology & Digital Disruption",
-    "label": "Internet Giants",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "SMH": {
-    "category": "Technology & Digital Disruption",
-    "label": "Semiconductors Mega-Cap",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "CLOU": {
-    "category": "Technology & Digital Disruption",
-    "label": "Cloud SaaS",
+  "NANC": {
+    "category": "Quantitative Factors & Volatility",
+    "label": "Political",
     "type": "beta_booster",
-    "liquid": true
+    "liquid": false,
+    "description": "Stocks disclosed as purchases by Democratic lawmakers and spouses"
   },
-  "BUG": {
-    "category": "Technology & Digital Disruption",
-    "label": "Cybersecurity Alt",
+  "PSIL": {
+    "category": "Healthcare & Biotech",
+    "label": "Psychedelics",
     "type": "beta_booster",
-    "liquid": true
-  },
-  "CIBR": {
-    "category": "Technology & Digital Disruption",
-    "label": "Cybersecurity",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "HACK": {
-    "category": "Technology & Digital Disruption",
-    "label": "Cybersecurity Alt2",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "SKYY": {
-    "category": "Technology & Digital Disruption",
-    "label": "Cloud Alt",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "ARKK": {
-    "category": "Technology & Digital Disruption",
-    "label": "ARK Innovation",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "ARKW": {
-    "category": "Technology & Digital Disruption",
-    "label": "ARK Internet",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "XSW": {
-    "category": "Technology & Digital Disruption",
-    "label": "Software Equal",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "IGN": {
-    "category": "Technology & Digital Disruption",
-    "label": "Networking",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "AIQ": {
-    "category": "Technology & Digital Disruption",
-    "label": "AI & Data Processing",
-    "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Actively selected psychedelic-medicine companies"
   },
   "BAI": {
     "category": "Technology & Digital Disruption",
-    "label": "AI Active",
+    "label": "AI Value Chain",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Actively selected companies across the AI value chain"
   },
-  "DRAM": {
-    "category": "Technology & Digital Disruption",
-    "label": "Memory Chips",
+  "ASHR": {
+    "category": "Geographic / Country Specific",
+    "label": "China A-Shares",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": true,
+    "description": "300 large mainland Chinese A-share companies"
   },
-  "FINX": {
-    "category": "Technology & Digital Disruption",
-    "label": "FinTech",
+  "HELX": {
+    "category": "Healthcare & Biotech",
+    "label": "Gene Editing",
     "type": "beta_booster",
-    "liquid": false
-  },
-  "FIVG": {
-    "category": "Technology & Digital Disruption",
-    "label": "5G",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "IDGT": {
-    "category": "Technology & Digital Disruption",
-    "label": "Data Centers",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "IGV": {
-    "category": "Technology & Digital Disruption",
-    "label": "Software Giants",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "QTUM": {
-    "category": "Technology & Digital Disruption",
-    "label": "Quantum Computing",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "WCLD": {
-    "category": "Technology & Digital Disruption",
-    "label": "Cloud",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "XLSR": {
-    "category": "Technology & Digital Disruption",
-    "label": "Software & Services",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "XSD": {
-    "category": "Technology & Digital Disruption",
-    "label": "Semiconductors Equal",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "ARKF": {
-    "category": "Technology & Digital Disruption",
-    "label": "ARK FinTech",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "ARKQ": {
-    "category": "Technology & Digital Disruption",
-    "label": "ARK Robotics",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "BLOK": {
-    "category": "Technology & Digital Disruption",
-    "label": "Blockchain",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "SNSR": {
-    "category": "Technology & Digital Disruption",
-    "label": "Internet of Things",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "FOTO": {
-    "category": "Technology & Digital Disruption",
-    "label": "Photonics",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "CHPX": {
-    "category": "Technology & Digital Disruption",
-    "label": "AI Semi & Quantum",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "DTCR": {
-    "category": "Technology & Digital Disruption",
-    "label": "Data Center Infrastructure",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "XLE": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Traditional Oil & Gas",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "UNG": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Natural Gas",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "USO": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Crude Oil",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "GLD": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Gold",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "XOP": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Oil & Gas Equal",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "OIH": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Oil Services",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "GDX": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Gold Miners",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "TAN": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Solar",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "ICLN": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Clean Energy",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "URNM": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Uranium Miners",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "URA": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Uranium & Nuclear",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "GNR": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Natural Resources Global",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "VEGI": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Agriculture Producers",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "WOOD": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Timber & Forestry",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "DBA": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Commodities Agriculture",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "FAN": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Wind",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "HYDR": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Hydrogen",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "GRID": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Smart Grid",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "PICK": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Metals & Mining",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "REMX": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Rare Earth Metals",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "SIL": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Silver Miners",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "SILJ": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Silver Miners Junior",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "COPX": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Copper Miners",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "SLX": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Steel",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "NLR": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Nuclear",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "NUKZ": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Nuclear Renaissance",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "MOO": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Agriculture & FoodTech",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "AMLP": {
-    "category": "Energy, Metals & Commodities",
-    "label": "MLP & Midstream",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "ENFR": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Energy Infrastructure",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "ERTH": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Clean Energy ESG",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "EVX": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Environmental Services",
-    "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Actively selected gene-editing and genomic-medicine companies"
   },
   "FCG": {
     "category": "Energy, Metals & Commodities",
     "label": "Natural Gas Producers",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Natural-gas producers—not the gas commodity"
   },
-  "KRBN": {
+  "IEO": {
     "category": "Energy, Metals & Commodities",
-    "label": "Carbon Credits",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "PBW": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Clean Energy Alt",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "RING": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Gold Miners Alt",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "XES": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Energy Equipment",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "XLB": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Materials & Mining",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "XME": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Metals & Mining Equal",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "ESGU": {
-    "category": "Energy, Metals & Commodities",
-    "label": "ESG Sustainability",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "HTOO": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Hydrogen Fuel Cells",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "CPER": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Copper Futures",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "GDXJ": {
-    "category": "Energy, Metals & Commodities",
-    "label": "Gold Miners Junior",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "KROP": {
-    "category": "Energy, Metals & Commodities",
-    "label": "AgTech",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "XLI": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Industrials Sector",
+    "label": "Oil & Gas Cap-Weighted",
     "type": "pure_sector",
-    "liquid": true
-  },
-  "IYT": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Transportation",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "ITA": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Aerospace & Defense",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "JETS": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Airlines",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "PAVE": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Infrastructure",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "XTN": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Trucking",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "IGF": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Global Infrastructure",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "PHO": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Water Resources",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "XAR": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Aerospace & Defense Equal",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "SHLD": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Global Defense Tech",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "ITB": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Homebuilders",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "XHB": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Homebuilders Equal",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "LIT": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Electric Vehicles",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "DRIV": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "EV & Autonomous",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "FDRV": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "EV Future Transport",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "BOTZ": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Robotics",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "ROBO": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Robotics Alt",
-    "type": "beta_booster",
-    "liquid": false
+    "liquid": true,
+    "description": "Market-cap-weighted large U.S. oil and gas producers"
   },
   "BOAT": {
     "category": "Industrials, Transportation & Infrastructure",
-    "label": "Maritime Shipping",
+    "label": "Shipping",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Global marine shipping operators"
   },
-  "VPN": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Digital Infrastructure",
+  "XES": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Oil Services Equal",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Equal-weight oil equipment and service companies"
   },
-  "HUMN": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Humanoid Robotics",
+  "OIH": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Oil Services Concentrated",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": true,
+    "description": "Concentrated exposure to the largest oilfield-service companies"
   },
-  "PRNT": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "3D Printing",
+  "PLTM": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Platinum",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Physically backed platinum-price exposure"
   },
-  "SEA": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Global Shipping",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "BWET": {
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Dry Bulk Shipping",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "XLP": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Staples Sector",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "XLY": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Discretionary Sector",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "XRT": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Retail",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "BETZ": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Sports Betting",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "SOCL": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Social Media",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "XHS": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Health Care Services",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "IYC": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Discretionary US",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "IYK": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Staples US",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "PBJ": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Food & Beverage",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "FTXG": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Food & Beverage Alt",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "RSPS": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Staples Equal Weight",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "RSPD": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Discretionary Equal Weight",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "MJ": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Cannabis & Sin Stocks",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "BUZZ": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Social Sentiment",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "ESPO": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Esports & Gaming",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "HERO": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Digital Entertainment",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "IBUY": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "E-Commerce",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "MEME": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Meme Stocks",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "METV": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "AR/VR Metaverse",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "PEJ": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Leisure & Entertainment",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "VICE": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Vice & Sin Stocks",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "PAWZ": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Pet Care",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "MILN": {
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Millennial Consumer",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "XLV": {
+  "CANC": {
     "category": "Healthcare & Biotech",
-    "label": "Healthcare Sector",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "IBB": {
-    "category": "Healthcare & Biotech",
-    "label": "Biotech",
+    "label": "Healthcare",
     "type": "beta_booster",
-    "liquid": true
-  },
-  "XBI": {
-    "category": "Healthcare & Biotech",
-    "label": "Biotech Alt",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "PPH": {
-    "category": "Healthcare & Biotech",
-    "label": "Pharmaceuticals",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "XPH": {
-    "category": "Healthcare & Biotech",
-    "label": "Pharma Equal",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "IHF": {
-    "category": "Healthcare & Biotech",
-    "label": "Aging & Longevity",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "XHE": {
-    "category": "Healthcare & Biotech",
-    "label": "Equipment Equal",
-    "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Actively selected cancer-treatment and oncology companies"
   },
   "PBE": {
     "category": "Healthcare & Biotech",
-    "label": "Biotech Equal",
+    "label": "Biotech Multi-Factor",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Biotech and genomic companies selected using multiple factors"
   },
-  "IHI": {
-    "category": "Healthcare & Biotech",
-    "label": "Medical Devices",
-    "type": "beta_booster",
-    "liquid": false
+  "PHO": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Water",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "U.S. water infrastructure, treatment and technology companies"
   },
-  "GNOM": {
-    "category": "Healthcare & Biotech",
-    "label": "Genomics",
+  "XSD": {
+    "category": "Technology & Digital Disruption",
+    "label": "Semiconductors Equal",
     "type": "beta_booster",
-    "liquid": false
-  },
-  "ARKG": {
-    "category": "Healthcare & Biotech",
-    "label": "ARK Genomics",
-    "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Equal-weight semiconductors with greater small-company exposure"
   },
   "KURE": {
     "category": "Healthcare & Biotech",
     "label": "China Healthcare",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Healthcare companies operating primarily in China"
   },
-  "AGNG": {
-    "category": "Healthcare & Biotech",
-    "label": "Aging Population",
+  "GUNR": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Natural Resources Upstream",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": true,
+    "description": "Upstream companies extracting energy, metals and agricultural resources"
   },
-  "LNGR": {
-    "category": "Healthcare & Biotech",
-    "label": "Longevity",
+  "EVX": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Environment",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Waste-management and environmental-service companies"
   },
-  "EDOC": {
-    "category": "Healthcare & Biotech",
-    "label": "Telemedicine",
+  "RACK": {
+    "category": "Technology & Digital Disruption",
+    "label": "Data Centers",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Chips, power, cooling and equipment supplying data centers"
   },
-  "HEAL": {
-    "category": "Healthcare & Biotech",
-    "label": "HealthTech",
+  "FFTY": {
+    "category": "Quantitative Factors & Volatility",
+    "label": "Growth Stocks",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "The 50 highest-ranked stocks from the IBD growth methodology"
   },
-  "XLF": {
-    "category": "Finance & Capital Markets",
-    "label": "Financials Sector",
+  "USO": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Crude Oil",
     "type": "pure_sector",
-    "liquid": true
+    "liquid": true,
+    "description": "WTI crude-oil futures—not oil-company stocks"
   },
-  "KRE": {
-    "category": "Finance & Capital Markets",
-    "label": "Regional Banks",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "KBE": {
-    "category": "Finance & Capital Markets",
-    "label": "Banking Equal",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "IAI": {
-    "category": "Finance & Capital Markets",
-    "label": "Broker-Dealers",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "IAK": {
-    "category": "Finance & Capital Markets",
-    "label": "Insurance",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "IYG": {
-    "category": "Finance & Capital Markets",
-    "label": "Financial Services",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "KCE": {
-    "category": "Finance & Capital Markets",
-    "label": "Capital Markets Equal",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "KIE": {
-    "category": "Finance & Capital Markets",
-    "label": "Insurance Equal",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "XLRE": {
-    "category": "Real Estate & Utilities",
-    "label": "Real Estate Sector",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "XLU": {
-    "category": "Real Estate & Utilities",
-    "label": "Utilities Sector",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "VNQ": {
-    "category": "Real Estate & Utilities",
-    "label": "REITs Broad",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "FRI": {
-    "category": "Real Estate & Utilities",
-    "label": "REIT Index",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "SCHH": {
-    "category": "Real Estate & Utilities",
-    "label": "Schwab REIT",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "FXI": {
+  "GXC": {
     "category": "Geographic / Country Specific",
-    "label": "China Large Cap",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "KWEB": {
-    "category": "Geographic / Country Specific",
-    "label": "China Internet",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "EWZ": {
-    "category": "Geographic / Country Specific",
-    "label": "Brazil",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "EWY": {
-    "category": "Geographic / Country Specific",
-    "label": "South Korea",
-    "type": "pure_sector",
-    "liquid": true
+    "label": "China Broad",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Broad Chinese market across multiple sectors and company sizes"
   },
   "CHIQ": {
     "category": "Geographic / Country Specific",
     "label": "China Consumer",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Chinese consumer-discretionary companies"
+  },
+  "GNR": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Natural Resources Global",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "Global large energy, metals and agricultural producers"
+  },
+  "JETS": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Airlines",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Global airline operators and related aviation companies"
+  },
+  "TAN": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Solar",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Global solar manufacturers, installers and technology suppliers"
+  },
+  "IBB": {
+    "category": "Healthcare & Biotech",
+    "label": "Biotech Large-Cap",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Market-cap-weighted large Nasdaq-listed biotechnology companies"
+  },
+  "NLR": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Nuclear",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Nuclear utilities, reactor suppliers and uranium producers"
   },
   "ARGT": {
     "category": "Geographic / Country Specific",
     "label": "Argentina",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Argentine companies and companies deriving revenue from Argentina"
   },
-  "GBTC": {
-    "category": "Crypto & Digital Assets",
-    "label": "Bitcoin",
+  "IYZ": {
+    "category": "Telecom & Communication",
+    "label": "Telecom Cap-Weighted",
     "type": "pure_sector",
-    "liquid": true
+    "liquid": false,
+    "description": "Market-cap-weighted U.S. telecom companies"
   },
-  "BITW": {
-    "category": "Crypto & Digital Assets",
-    "label": "Multi Asset",
+  "XOP": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Oil & Gas Equal",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Equal-weight U.S. oil and gas producers and refiners"
+  },
+  "FDRV": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "EV Suppliers",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "EV, autonomous-driving and supporting technology suppliers"
+  },
+  "SLX": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Steel",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global steel producers and related mining companies"
+  },
+  "FXI": {
+    "category": "Geographic / Country Specific",
+    "label": "China Large-Cap",
     "type": "pure_sector",
-    "liquid": true
+    "liquid": true,
+    "description": "Approximately 50 large Chinese companies listed in Hong Kong"
+  },
+  "SUPL": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Logistics",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global logistics, freight and supply-chain technology companies"
+  },
+  "HYDR": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Hydrogen",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Hydrogen producers, fuel cells and electrolyzer companies"
+  },
+  "PPH": {
+    "category": "Healthcare & Biotech",
+    "label": "Pharma Concentrated",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "Concentrated portfolio of large global drug manufacturers"
+  },
+  "ITB": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Homebuilding",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Market-cap-weighted U.S. homebuilders and housing suppliers"
+  },
+  "BLOK": {
+    "category": "Technology & Digital Disruption",
+    "label": "Blockchain",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Actively selected companies using or developing blockchain"
+  },
+  "XAR": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Defense Equal",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Equal-weight aerospace and defense, including smaller contractors"
+  },
+  "ILF": {
+    "category": "Geographic / Country Specific",
+    "label": "Latin America",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "40 large companies from Brazil, Mexico, Chile and other Latin markets"
+  },
+  "XRPI": {
+    "category": "Crypto & Digital Assets",
+    "label": "XRP Futures",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "One-times XRP exposure through futures and derivatives—not spot XRP"
+  },
+  "FAN": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Wind Energy",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global wind-turbine manufacturers, suppliers and wind-power operators"
+  },
+  "HLAL": {
+    "category": "Quantitative Factors & Volatility",
+    "label": "Values-based",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "U.S. stocks screened for Sharia compliance"
+  },
+  "DRIV": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "EV Broad",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Broad EV and autonomous-driving value chain"
+  },
+  "AMLP": {
+    "category": "Energy, Metals & Commodities",
+    "label": "MLP & Midstream",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Midstream pipelines and MLPs focused on fees and distributions"
+  },
+  "PBW": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Clean Energy Growth",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Diversified clean-energy companies with a smaller-growth-stock tilt"
+  },
+  "XHB": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Homebuilders Equal",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Equal-weight homebuilders, building products and home retailers"
+  },
+  "IDGT": {
+    "category": "Technology & Digital Disruption",
+    "label": "Digital Infrastructure",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Data-center and telecom-tower REITs plus communications equipment"
+  },
+  "ITA": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Defense Cap-Weighted",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Market-cap-weighted portfolio dominated by major U.S. defense contractors"
+  },
+  "PAVE": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Infrastructure US",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "U.S. construction, engineering, materials and industrial infrastructure"
+  },
+  "IHI": {
+    "category": "Healthcare & Biotech",
+    "label": "Medical Devices",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Market-cap-weighted large U.S. medical-device manufacturers"
+  },
+  "KWEB": {
+    "category": "Geographic / Country Specific",
+    "label": "China Internet",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Chinese internet, e-commerce and digital-platform companies"
+  },
+  "OZEM": {
+    "category": "Healthcare & Biotech",
+    "label": "Weight Loss & GLP-1",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Actively selected GLP-1 drugs and weight-loss supply-chain companies"
+  },
+  "SOLZ": {
+    "category": "Crypto & Digital Assets",
+    "label": "Solana Futures",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "One-times Solana exposure through futures—not spot SOL"
+  },
+  "UNG": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Natural Gas Futures",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Henry Hub natural-gas futures—not gas-producing stocks"
+  },
+  "KRE": {
+    "category": "Finance & Capital Markets",
+    "label": "Regional Banks",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight U.S. regional banks"
+  },
+  "ARKX": {
+    "category": "Space Exploration",
+    "label": "Space Active",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Actively selected space companies plus enabling technologies"
+  },
+  "ARKW": {
+    "category": "Technology & Digital Disruption",
+    "label": "Internet Active",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Actively selected cloud, digital media, blockchain and internet companies"
+  },
+  "ESPO": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Gaming",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Video-game publishers, esports platforms and gaming hardware"
+  },
+  "IBIT": {
+    "category": "Crypto & Digital Assets",
+    "label": "Bitcoin Spot",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Holds Bitcoin directly for spot-price exposure"
+  },
+  "MOO": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Agriculture & FoodTech",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global fertilizer, equipment, seed and agricultural companies"
+  },
+  "XTL": {
+    "category": "Telecom & Communication",
+    "label": "Telecom Equal",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Equal-weight telecom carriers, equipment makers and satellite companies"
+  },
+  "MAGS": {
+    "category": "Technology & Digital Disruption",
+    "label": "Mega-cap Technology",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Equal-weight exposure to only the Magnificent Seven"
+  },
+  "RTH": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Retail Concentrated",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Concentrated portfolio of the largest U.S.-listed retailers"
+  },
+  "EWZ": {
+    "category": "Geographic / Country Specific",
+    "label": "Brazil",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Large and mid-sized Brazilian companies"
+  },
+  "BUZZ": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Social Sentiment",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Large U.S. stocks receiving positive online attention"
+  },
+  "IGV": {
+    "category": "Technology & Digital Disruption",
+    "label": "Software Cap-Weighted",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Market-cap-weighted large software companies"
+  },
+  "ARKQ": {
+    "category": "Technology & Digital Disruption",
+    "label": "Robotics Active",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Actively selected robotics, autonomy, drones and industrial AI"
+  },
+  "XBI": {
+    "category": "Healthcare & Biotech",
+    "label": "Biotech Equal",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Equal-weight biotech with substantial small-company exposure"
+  },
+  "IGF": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Infrastructure Global",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "Global owners and operators of utilities, transport and infrastructure"
+  },
+  "ESGU": {
+    "category": "Energy, Metals & Commodities",
+    "label": "ESG",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Broad U.S. market tilted toward stronger ESG-rated companies"
+  },
+  "SHLD": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Defense Technology",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global drones, cybersecurity, AI and advanced-defense technology"
+  },
+  "ICLN": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Clean Energy Broad",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Broad global renewable-energy producers and equipment companies"
+  },
+  "BETZ": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Gambling",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Global sports-betting, casino and online-gambling companies"
+  },
+  "QTUM": {
+    "category": "Technology & Digital Disruption",
+    "label": "Quantum Computing",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Equal-weight quantum, machine-learning and enabling-chip companies"
+  },
+  "PBJ": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Food & Beverage Multi-Factor",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "U.S. food and beverage companies selected using multiple factors"
+  },
+  "USCA": {
+    "category": "Quantitative Factors & Volatility",
+    "label": "Climate",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Broad U.S. companies leading their sectors on climate policies"
+  },
+  "ARKG": {
+    "category": "Healthcare & Biotech",
+    "label": "Genomics Active",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Actively selected genomics, diagnostics and gene-therapy companies"
+  },
+  "URNM": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Uranium Miners Pure-Play",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Pure-play uranium miners plus physical uranium exposure"
+  },
+  "CNBS": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Cannabis Global",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Actively selected global cannabis-related companies"
+  },
+  "ROBO": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Robotics Diversified",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Diversified, relatively equal-weight global robotics and automation"
+  },
+  "XHE": {
+    "category": "Healthcare & Biotech",
+    "label": "Medical Equipment",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Equal-weight U.S. medical equipment and supply companies"
+  },
+  "METV": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Metaverse",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Gaming, virtual platforms, computing and metaverse infrastructure"
+  },
+  "SHE": {
+    "category": "Quantitative Factors & Volatility",
+    "label": "Gender Diversity",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "U.S. companies with relatively strong female leadership"
+  },
+  "GRID": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Electrical Grid",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Grid equipment, power management and electrical infrastructure"
+  },
+  "XTN": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Transportation Equal",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "Equal-weight airlines, railroads, trucking and logistics"
+  },
+  "GLD": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Gold",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Holds physical gold bullion for direct gold-price exposure"
+  },
+  "XPH": {
+    "category": "Healthcare & Biotech",
+    "label": "Pharma Equal",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "Equal-weight U.S. drugmakers, giving smaller companies more influence"
+  },
+  "ETHA": {
+    "category": "Crypto & Digital Assets",
+    "label": "Ethereum",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Holds Ether directly for spot-price exposure"
+  },
+  "CIBR": {
+    "category": "Technology & Digital Disruption",
+    "label": "Cybersecurity Broad",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Cybersecurity software, networking and security-service companies"
+  },
+  "KBE": {
+    "category": "Finance & Capital Markets",
+    "label": "Banks Equal",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight mix of large, regional and diversified U.S. banks"
+  },
+  "IAI": {
+    "category": "Finance & Capital Markets",
+    "label": "Capital Markets Cap-Weighted",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Market-cap-weighted brokers, investment banks and stock exchanges"
+  },
+  "ARKF": {
+    "category": "Technology & Digital Disruption",
+    "label": "Fintech",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Actively selected digital payments, banking and financial platforms"
+  },
+  "XHS": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Healthcare Services",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Equal-weight insurers, facilities, distributors and healthcare services"
+  },
+  "AIQ": {
+    "category": "Technology & Digital Disruption",
+    "label": "AI Broad",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Passive global AI, big-data, software and hardware exposure"
+  },
+  "SVIX": {
+    "category": "Quantitative Factors & Volatility",
+    "label": "Volatility",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Targets the inverse daily performance of short-term VIX futures"
+  },
+  "PEJ": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Leisure",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Restaurants, entertainment, hotels and leisure companies"
+  },
+  "KCE": {
+    "category": "Finance & Capital Markets",
+    "label": "Capital Markets Equal",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Equal-weight asset managers, brokers, exchanges and investment banks"
+  },
+  "GDX": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Gold Miners Large-Cap",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Large and mid-sized global gold-mining companies"
+  },
+  "HOMZ": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Housing Cycle",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Entire housing cycle: builders, REITs, materials and home services"
+  },
+  "COPX": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Copper",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global copper miners—not the physical copper price"
+  },
+  "PAWZ": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Pet Industry",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Pet food, veterinary care and animal-health companies"
+  },
+  "PALL": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Palladium",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Physically backed palladium-price exposure"
+  },
+  "VICE": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Vice Industries",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Alcohol, tobacco, gambling and other vice-related businesses"
+  },
+  "SCHH": {
+    "category": "Real Estate & Utilities",
+    "label": "Real Estate Broad",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "Broad U.S. equity REITs, generally excluding mortgage REITs"
+  },
+  "CLOU": {
+    "category": "Technology & Digital Disruption",
+    "label": "Cloud Revenue",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Global companies deriving meaningful revenue from cloud computing"
+  },
+  "SPMO": {
+    "category": "Quantitative Factors & Volatility",
+    "label": "Momentum S&P 500",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "The 100 S&P 500 stocks with the strongest price momentum"
+  },
+  "SILJ": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Silver Miners Junior",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Smaller, more speculative silver-mining companies"
+  },
+  "XME": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Metals & Mining",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Equal-weight U.S. steel, coal and diversified mining companies"
+  },
+  "IYT": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Transportation Cap-Weighted",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted large U.S. transport companies"
+  },
+  "LIT": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Lithium",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global lithium miners, processors and battery manufacturers"
+  },
+  "GENZ": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Digital Economy",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Fintech, gig-economy and online-betting platforms serving digital natives"
+  },
+  "GDXJ": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Gold Miners Junior",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Smaller and more speculative gold-mining companies"
+  },
+  "AWAY": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Travel Technology",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Booking platforms and travel technology—not airlines themselves"
+  },
+  "FDN": {
+    "category": "Technology & Digital Disruption",
+    "label": "Internet Large-Cap",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Approximately 40 large U.S. internet and digital-platform companies"
+  },
+  "ARKK": {
+    "category": "Technology & Digital Disruption",
+    "label": "Innovation",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Actively selected disruptive companies across multiple industries"
+  },
+  "REMX": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Strategic Metals",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Rare-earth and strategic-metal miners, processors and refiners"
+  },
+  "IHF": {
+    "category": "Healthcare & Biotech",
+    "label": "Healthcare Providers",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "Market-cap-weighted U.S. insurers, hospitals and care providers"
+  },
+  "SLV": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Silver",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Holds physical silver bullion for direct silver-price exposure"
+  },
+  "XRT": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Retail Equal",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight retailers with much more small-company exposure"
+  },
+  "KIE": {
+    "category": "Finance & Capital Markets",
+    "label": "Insurance Equal",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Equal-weight property, life, health and reinsurance companies"
+  },
+  "MEME": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Meme Stocks",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Stocks driven by social attention, volatility and retail participation"
+  },
+  "URA": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Uranium & Nuclear",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Uranium miners plus nuclear-equipment and component manufacturers"
+  },
+  "WOOD": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Timber",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "Global forestry, paper, packaging and timber REIT companies"
+  },
+  "SIL": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Silver Miners Established",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Established global silver-mining companies"
+  },
+  "IBUY": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Online Retail",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Companies earning most of their revenue from online sales"
+  },
+  "MSOS": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Cannabis US Operators",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "U.S. cannabis operators accessed mainly through swap contracts"
+  },
+  "SKYY": {
+    "category": "Technology & Digital Disruption",
+    "label": "Cloud Infrastructure",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Established cloud infrastructure, platform and software companies"
+  },
+  "BOTZ": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Robotics Industrial",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Large global industrial-robotics, automation and AI-hardware companies"
+  },
+  "SOCL": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Social Media",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Global social networks, messaging and content platforms"
+  },
+  "XSW": {
+    "category": "Technology & Digital Disruption",
+    "label": "Software Equal",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "Equal-weight U.S. software with greater small-company exposure"
+  },
+  "SMH": {
+    "category": "Technology & Digital Disruption",
+    "label": "Semiconductors Mega-Cap",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Concentrated in approximately 25 dominant global chip companies"
+  },
+  "WCLD": {
+    "category": "Technology & Digital Disruption",
+    "label": "Cloud Growth",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Equal-weight emerging cloud-software companies with higher growth exposure"
+  },
+  "IPAY": {
+    "category": "Finance & Capital Markets",
+    "label": "Payments",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global card networks, payment processors and digital-wallet companies"
   },
   "WGMI": {
     "category": "Crypto & Digital Assets",
-    "label": "Mining",
+    "label": "Bitcoin Miners",
     "type": "beta_booster",
-    "liquid": false
+    "liquid": false,
+    "description": "Bitcoin-mining companies—not Bitcoin itself"
+  },
+  "NASA": {
+    "category": "Space Exploration",
+    "label": "Space Pre-IPO",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Actively selected public and limited pre-IPO space companies"
+  },
+  "UFO": {
+    "category": "Space Exploration",
+    "label": "Space Rules-Based",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Rules-based companies deriving substantial revenue directly from space"
+  },
+  "SOXX": {
+    "category": "Technology & Digital Disruption",
+    "label": "Semiconductors Broad",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Approximately 30 large U.S.-listed chipmakers and equipment suppliers"
+  },
+  "DXYZ": {
+    "category": "Quantitative Factors & Volatility",
+    "label": "Private Tech Growth",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Closed-end fund holding private high-growth technology companies"
+  },
+  "EWY": {
+    "category": "Geographic / Country Specific",
+    "label": "South Korea",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Large and mid-sized South Korean companies"
+  },
+  "DRAM": {
+    "category": "Technology & Digital Disruption",
+    "label": "Memory",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Concentrated exposure to global DRAM, NAND and storage-memory companies"
+  },
+  "BUG": {
+    "category": "Technology & Digital Disruption",
+    "label": "Cybersecurity Pure-Play",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Pure-play global cybersecurity firms deriving most revenue from security"
+  },
+  "CABZ": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Robotaxis",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Actively selected robotaxi, autonomous-driving and enabling-technology companies"
+  },
+  "CHAT": {
+    "category": "Technology & Digital Disruption",
+    "label": "Generative AI",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Actively selected generative-AI platforms, chips and software companies"
+  },
+  "ENFR": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Energy Infrastructure",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "U.S. and Canadian pipelines, storage and energy-processing companies"
+  },
+  "ERTH": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Sustainable Economy",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global companies across clean energy, water, green buildings and agriculture"
+  },
+  "FRI": {
+    "category": "Real Estate & Utilities",
+    "label": "Real Estate Cap-Weighted",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Market-cap-weighted U.S. REITs owning and operating property"
+  },
+  "FTXG": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Food & Beverage Growth",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "U.S. food and beverage companies weighted by growth, value and volatility"
+  },
+  "GBTC": {
+    "category": "Crypto & Digital Assets",
+    "label": "Bitcoin Legacy Trust",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Legacy Grayscale fund holding Bitcoin directly for spot-price exposure"
+  },
+  "HACK": {
+    "category": "Technology & Digital Disruption",
+    "label": "Cybersecurity Hardware",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Broad cybersecurity hardware, software and service providers"
+  },
+  "HUMN": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Humanoid Robotics",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Actively selected humanoid-robot makers and critical component suppliers"
+  },
+  "IAK": {
+    "category": "Finance & Capital Markets",
+    "label": "Insurance Cap-Weighted",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Market-cap-weighted U.S. insurance companies"
+  },
+  "IYC": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Consumer Discretionary",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "Market-cap-weighted U.S. cyclical consumer and retail companies"
+  },
+  "IYG": {
+    "category": "Finance & Capital Markets",
+    "label": "Financial Services",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Market-cap-weighted U.S. banks, payment firms and financial-services companies"
+  },
+  "IYK": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Consumer Staples",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "Market-cap-weighted U.S. food, beverage and household-staples companies"
+  },
+  "KRBN": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Carbon Credits",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global carbon-allowance futures across major cap-and-trade markets"
+  },
+  "LOHA": {
+    "category": "Quantitative Factors & Volatility",
+    "label": "AI-resistant Assets",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Physical-asset-heavy U.S. companies considered resistant to AI obsolescence"
+  },
+  "LYTE": {
+    "category": "Technology & Digital Disruption",
+    "label": "Photonics",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Optical interconnect, laser and photonic-chip companies serving AI data centers"
+  },
+  "MARS": {
+    "category": "Space Exploration",
+    "label": "Space Infrastructure",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Actively selected launch, satellite and space-infrastructure companies"
+  },
+  "MJ": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Cannabis Broad",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global cannabis companies, with U.S. exposure obtained through CNBS"
+  },
+  "MTUM": {
+    "category": "Quantitative Factors & Volatility",
+    "label": "Momentum Broad",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "U.S. large and mid-cap stocks with strong risk-adjusted price momentum"
+  },
+  "NCLD": {
+    "category": "Technology & Digital Disruption",
+    "label": "Neocloud",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "GPU-as-a-Service and AI data-center operators providing compute capacity"
+  },
+  "NERD": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Video Games",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global pure-play video-game publishers, platforms and gaming hardware"
+  },
+  "PRNT": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "3D Printing",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Global 3D-printing hardware, software, scanning and materials companies"
+  },
+  "TLT": {
+    "category": "Quantitative Factors & Volatility",
+    "label": "Long-Term Treasuries",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "U.S. Treasury bonds with maturities longer than 20 years"
+  },
+  "UX": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Uranium Physical",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Physical uranium-price exposure mainly through swaps not uranium miners"
+  },
+  "VCX": {
+    "category": "Technology & Digital Disruption",
+    "label": "Private Tech Venture",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Closed-end venture fund holding private AI and technology companies"
+  },
+  "VEGI": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Agriculture Producers",
+    "type": "pure_sector",
+    "liquid": false,
+    "description": "Global agricultural product and equipment producers not crop commodities"
+  },
+  "WEED": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Cannabis Concentrated",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Concentrated exposure to five leading U.S. cannabis operators via swaps"
+  },
+  "XLK": {
+    "category": "Technology & Digital Disruption",
+    "label": "Technology Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 technology-sector companies"
+  },
+  "XLE": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Traditional Oil & Gas",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 energy-sector companies"
+  },
+  "XLV": {
+    "category": "Healthcare & Biotech",
+    "label": "Healthcare Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 healthcare-sector companies"
+  },
+  "XLF": {
+    "category": "Finance & Capital Markets",
+    "label": "Financials Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 financial-sector companies"
+  },
+  "XLI": {
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Industrials Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 industrial-sector companies"
+  },
+  "XLP": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Staples Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 consumer-staples companies"
+  },
+  "XLY": {
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Discretionary Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 consumer-discretionary companies"
+  },
+  "XLU": {
+    "category": "Real Estate & Utilities",
+    "label": "Utilities Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 utilities-sector companies"
+  },
+  "XLRE": {
+    "category": "Real Estate & Utilities",
+    "label": "Real Estate Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 real-estate-sector companies"
+  },
+  "XLB": {
+    "category": "Energy, Metals & Commodities",
+    "label": "Materials & Mining",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Market-cap-weighted S&P 500 materials-sector companies"
   },
   "XLC": {
     "category": "Telecom & Communication",
     "label": "Telecom Sector",
     "type": "pure_sector",
-    "liquid": true
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 communication-services companies"
   },
-  "IYZ": {
-    "category": "Telecom & Communication",
-    "label": "Services",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "FCOM": {
-    "category": "Telecom & Communication",
-    "label": "Broad",
-    "type": "pure_sector",
-    "liquid": false
-  },
-  "XTL": {
-    "category": "Telecom & Communication",
-    "label": "Equal",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "MTUM": {
-    "category": "Quantitative Factors & Volatility",
-    "label": "Momentum",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "SPMO": {
-    "category": "Quantitative Factors & Volatility",
-    "label": "S&P Momentum",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "SVIX": {
-    "category": "Quantitative Factors & Volatility",
-    "label": "Short Volatility",
-    "type": "pure_sector",
-    "liquid": true
-  },
-  "FFTY": {
-    "category": "Quantitative Factors & Volatility",
-    "label": "IBD 50 Growth",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "DXYZ": {
-    "category": "Quantitative Factors & Volatility",
-    "label": "Pre-IPO & Unicorn",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "GXTG": {
-    "category": "Quantitative Factors & Volatility",
-    "label": "Thematic Rotation",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "NASA": {
-    "category": "Space Exploration",
-    "label": "Space Economy",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "UFO": {
-    "category": "Space Exploration",
-    "label": "Space Industry",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "ARKX": {
-    "category": "Space Exploration",
-    "label": "ARK Space",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "MARS": {
-    "category": "Space Exploration",
-    "label": "Space & Tech",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "ORBX": {
-    "category": "Space Exploration",
-    "label": "Space Tech",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "SPCX": {
-    "category": "Space Exploration",
-    "label": "SpaceX Exposure",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "EUV": {
+  "FOTO": {
     "category": "Technology & Digital Disruption",
-    "label": "Lithography & Photonics",
+    "label": "Photonics Broad",
     "type": "beta_booster",
-    "liquid": false
-  },
-  "AIPO": {
-    "category": "Technology & Digital Disruption",
-    "label": "AI & Power Infrastructure",
-    "type": "beta_booster",
-    "liquid": false
-  },
-  "IBIT": {
-    "category": "Crypto & Digital Assets",
-    "label": "Spot Bitcoin",
-    "type": "beta_booster",
-    "liquid": true
-  },
-  "ETHA": {
-    "category": "Crypto & Digital Assets",
-    "label": "Spot Ethereum",
-    "type": "beta_booster",
-    "liquid": true
+    "liquid": false,
+    "description": "Semiconductor and optical-technology companies enabling photonics applications"
   },
   "EEM": {
     "category": "Geographic / Country Specific",
     "label": "Emerging Markets",
     "type": "beta_booster",
-    "liquid": true
+    "liquid": true,
+    "description": "Diversified large- and mid-cap companies across emerging-market countries"
+  },
+  "BITW": {
+    "category": "Crypto & Digital Assets",
+    "label": "Multi Asset",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Diversified basket of the largest cryptocurrencies by market cap"
   }
 }
