@@ -224,6 +224,14 @@
     "description": "Holds Bitcoin directly for spot-price exposure"
   },
   {
+    "ticker": "BITW",
+    "category": "Crypto & Digital Assets",
+    "label": "Multi Asset",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Diversified basket of the largest cryptocurrencies by market cap"
+  },
+  {
     "ticker": "GBTC",
     "category": "Crypto & Digital Assets",
     "label": "Bitcoin Legacy Trust",
@@ -670,6 +678,14 @@
     "type": "beta_booster",
     "liquid": true,
     "description": "300 large mainland Chinese A-share companies"
+  },
+  {
+    "ticker": "EEM",
+    "category": "Geographic / Country Specific",
+    "label": "Emerging Markets",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Diversified large- and mid-cap companies across emerging-market countries"
   },
   {
     "ticker": "ILF",
@@ -1342,6 +1358,14 @@
     "type": "beta_booster",
     "liquid": false,
     "description": "Concentrated exposure to global DRAM, NAND and storage-memory companies"
+  },
+  {
+    "ticker": "FOTO",
+    "category": "Technology & Digital Disruption",
+    "label": "Photonics Broad",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Semiconductor and optical-technology companies enabling photonics applications"
   },
   {
     "ticker": "IDGT",
