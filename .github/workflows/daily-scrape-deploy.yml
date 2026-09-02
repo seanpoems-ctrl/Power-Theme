@@ -11,8 +11,14 @@ on:
     - cron: "45 22 * * *"   # 6:45 AM Malaysia (10:45 PM UTC) — every day incl. weekends
 
 concurrency:
-  group: pages-deploy
-  cancel-in-progress: false  # Queue — scraper takes ~10 min, cancelling would prevent completion
+  # Own group (not the shared pages-deploy) + cancel-in-progress so a hung or
+  # queued previous run is cancelled by the next scheduled run — a jam can't
+  # persist beyond one cycle (it silently froze the dashboard for ~4 weeks when
+  # runs piled up in the shared pages-deploy queue). Normal scrapes finish in
+  # ~27 min, far inside the 24h gap, so this only ever cancels a hung run. The
+  # github-pages environment still serialises the actual deployment.
+  group: daily-scrape-deploy
+  cancel-in-progress: true
 
 jobs:
   scrape-build-deploy:

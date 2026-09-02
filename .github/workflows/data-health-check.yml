@@ -29,12 +29,39 @@ jobs:
         continue-on-error: true
         run: python data_health_check.py
 
-      - name: Create GitHub Issue alert
+      - name: Telegram alert (high-visibility)
+        # The GitHub Issue alone went unnoticed for ~4 weeks. Push a phone
+        # notification so a jam/staleness can never fail silently again.
         if: steps.check.outputs.has_issues == 'true'
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:   ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          gh issue create \
-            --title "⚠️ Stale Dashboard Data — $(date -u +%Y-%m-%d)" \
-            --body "$(echo '${{ steps.check.outputs.issue_body }}' | tr '%0A' '\n')" \
-            --label "data-stale"
+          if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then
+            echo "Telegram secrets not set — skipping"; exit 0
+          fi
+          BODY=$(echo '${{ steps.check.outputs.issue_body }}' | tr '%0A' '\n')
+          curl -s -X POST "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d chat_id="${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text=⚠️ Power-Theme dashboard data is STALE:
+          ${BODY}
+
+          The Daily scrape may be jammed — check GitHub Actions." >/dev/null || echo "telegram send failed"
+
+      - name: Create/refresh GitHub Issue alert (deduped)
+        # Reuse a single open issue instead of opening one per day (the old
+        # behaviour would have created ~28 duplicate issues over the freeze).
+        if: steps.check.outputs.has_issues == 'true'
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BODY="$(echo '${{ steps.check.outputs.issue_body }}' | tr '%0A' '\n')
+          Last checked: $(date -u +%Y-%m-%dT%H:%M)Z"
+          EXISTING=$(gh issue list --label data-stale --state open --json number --jq '.[0].number' 2>/dev/null || echo "")
+          if [ -n "$EXISTING" ]; then
+            gh issue comment "$EXISTING" --body "$BODY"
+          else
+            gh issue create --title "⚠️ Stale Dashboard Data" --body "$BODY" --label "data-stale"
+          fi

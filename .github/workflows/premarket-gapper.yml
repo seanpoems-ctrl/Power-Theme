@@ -10,8 +10,11 @@ on:
     - cron: '55 12 * * 1-5'  # Mon-Fri 8:55 AM ET
 
 concurrency:
-  group: pages-deploy
-  cancel-in-progress: false
+  # Own group + cancel-in-progress so a hung/queued run can't jam the pipeline
+  # (see daily-scrape-deploy.yml). The github-pages environment still serialises
+  # the actual deployment vs the daily scrape.
+  group: premarket-gapper
+  cancel-in-progress: true
 
 jobs:
   gapper-scan:
