@@ -32,6 +32,22 @@
     "description": "Concentrated portfolio of the largest U.S.-listed retailers"
   },
   {
+    "ticker": "XLP",
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Staples Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 consumer-staples companies"
+  },
+  {
+    "ticker": "XLY",
+    "category": "Consumer, Gaming & E-Commerce",
+    "label": "Discretionary Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 consumer-discretionary companies"
+  },
+  {
     "ticker": "XRT",
     "category": "Consumer, Gaming & E-Commerce",
     "label": "Retail Equal",
@@ -344,6 +360,14 @@
     "description": "WTI crude-oil futures—not oil-company stocks"
   },
   {
+    "ticker": "XLE",
+    "category": "Energy, Metals & Commodities",
+    "label": "Traditional Oil & Gas",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 energy-sector companies"
+  },
+  {
     "ticker": "AMLP",
     "category": "Energy, Metals & Commodities",
     "label": "MLP & Midstream",
@@ -528,6 +552,14 @@
     "description": "Equal-weight oil equipment and service companies"
   },
   {
+    "ticker": "XLB",
+    "category": "Energy, Metals & Commodities",
+    "label": "Materials & Mining",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Market-cap-weighted S&P 500 materials-sector companies"
+  },
+  {
     "ticker": "XME",
     "category": "Energy, Metals & Commodities",
     "label": "Metals & Mining",
@@ -598,6 +630,14 @@
     "type": "pure_sector",
     "liquid": true,
     "description": "Equal-weight U.S. regional banks"
+  },
+  {
+    "ticker": "XLF",
+    "category": "Finance & Capital Markets",
+    "label": "Financials Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 financial-sector companies"
   },
   {
     "ticker": "IPAY",
@@ -710,6 +750,14 @@
     "type": "beta_booster",
     "liquid": true,
     "description": "Equal-weight biotech with substantial small-company exposure"
+  },
+  {
+    "ticker": "XLV",
+    "category": "Healthcare & Biotech",
+    "label": "Healthcare Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 healthcare-sector companies"
   },
   {
     "ticker": "ARKG",
@@ -838,6 +886,14 @@
     "type": "pure_sector",
     "liquid": true,
     "description": "Market-cap-weighted large U.S. transport companies"
+  },
+  {
+    "ticker": "XLI",
+    "category": "Industrials, Transportation & Infrastructure",
+    "label": "Industrials Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 industrial-sector companies"
   },
   {
     "ticker": "BOAT",
@@ -1072,6 +1128,22 @@
     "description": "Broad U.S. companies leading their sectors on climate policies"
   },
   {
+    "ticker": "XLRE",
+    "category": "Real Estate & Utilities",
+    "label": "Real Estate Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 real-estate-sector companies"
+  },
+  {
+    "ticker": "XLU",
+    "category": "Real Estate & Utilities",
+    "label": "Utilities Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 utilities-sector companies"
+  },
+  {
     "ticker": "FRI",
     "category": "Real Estate & Utilities",
     "label": "Real Estate Cap-Weighted",
@@ -1208,6 +1280,14 @@
     "description": "Approximately 30 large U.S.-listed chipmakers and equipment suppliers"
   },
   {
+    "ticker": "XLK",
+    "category": "Technology & Digital Disruption",
+    "label": "Technology Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 technology-sector companies"
+  },
+  {
     "ticker": "AIQ",
     "category": "Technology & Digital Disruption",
     "label": "AI Broad",
@@ -1342,6 +1422,14 @@
     "type": "pure_sector",
     "liquid": false,
     "description": "Equal-weight U.S. software with greater small-company exposure"
+  },
+  {
+    "ticker": "XLC",
+    "category": "Telecom & Communication",
+    "label": "Telecom Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 communication-services companies"
   },
   {
     "ticker": "XTL",
