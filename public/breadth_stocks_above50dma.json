@@ -2,8 +2,20 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 5,
+  "count": 6,
   "stocks": [
+    {
+      "ticker": "HOS",
+      "company": "Helix Energy Solutions Group, Inc.",
+      "industry": "Marine Shipping",
+      "price": 10.33,
+      "change_pct": 3345.63,
+      "adr_pct": 8.0,
+      "dollar_volume": "$5.8M",
+      "market_cap_b": 1.522,
+      "rs_ibd": 99,
+      "above50dma_pct": 1421.4
+    },
     {
       "ticker": "PSNYW",
       "company": "Polestar Automotive Holding UK Limited",
@@ -35,7 +47,7 @@
       "price": 24.32,
       "change_pct": 1.33,
       "adr_pct": 6.7,
-      "dollar_volume": "$299.8M",
+      "dollar_volume": "$299.9M",
       "market_cap_b": 2.181,
       "rs_ibd": 46,
       "above50dma_pct": 72.4
@@ -66,12 +78,12 @@
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 0.46,
-    "spx_1m": -0.9,
-    "spx_3m": 1.49,
-    "spx_34d": 1.76,
-    "spx_qtd": 2.45,
-    "spx_mtd": 0.46
+    "spx_1d": null,
+    "spx_1m": null,
+    "spx_3m": null,
+    "spx_34d": null,
+    "spx_qtd": null,
+    "spx_mtd": null
   },
-  "fetched_at_utc": "2026-09-02T23:01:37+00:00"
+  "fetched_at_utc": "2026-09-03T00:59:08+00:00"
 }
