@@ -478,6 +478,19 @@ def build_etf_rs() -> dict:
 
 def main() -> None:
     data = build_etf_rs()
+
+    # Safety guard: a rate-limited/failed yf.download() returns an empty frame,
+    # every ticker gets silently skipped, and build_etf_rs() still "succeeds"
+    # with etfs=[] — don't let that wipe out a good public/etf_rs.json.
+    min_expected = max(1, int(len(ALL_TICKERS) * 0.5))
+    if len(data["etfs"]) < min_expected:
+        logger.error(
+            "Only %d/%d ETFs priced (need ≥%d) — likely a data-fetch failure. "
+            "Refusing to overwrite %s.",
+            len(data["etfs"]), len(ALL_TICKERS), min_expected, OUTPUT_PATH,
+        )
+        raise SystemExit(1)
+
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT_PATH.write_text(
         json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8"

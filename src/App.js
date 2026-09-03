@@ -6480,8 +6480,10 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
               const livePrice  = lp?.price ?? g.price;
               const liveChgPct = lp?.change_pct ?? g.gap_pct;
               const isLive     = !!lp;
-              // prevClose: from live fetch, or derived from scan-time price ÷ (1 + gap%)
-              const prevClose  = lp?.prevClose ?? (g.price / (1 + g.gap_pct / 100));
+              // prevClose: live fetch, then Finviz's own "Prev Close" field, then a last-resort
+              // derivation from scan-time price ÷ (1 + gap%) — that division drifts whenever
+              // TradingView's `close` has moved past the moment `gap_pct` was captured.
+              const prevClose  = lp?.prevClose ?? g.prev_close ?? (g.price / (1 + g.gap_pct / 100));
               return (
               <tr key={g.ticker + i} className={rowCls}>
                 {/* Ticker */}
@@ -6495,8 +6497,20 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
                   <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer" className="ml-1">
                     <ExternalLink size={8} className="inline text-zinc-600 hover:text-blue-400"/>
                   </a>
-                  <div className="text-[11px] font-mono text-zinc-500">Previous close ${prevClose.toFixed(2)}</div>
-                  <div className="text-[11px] font-mono text-zinc-500">Close ${livePrice.toFixed(2)}</div>
+                  <div className="text-[11px] font-mono text-zinc-500">
+                    Previous close ${prevClose.toFixed(2)}
+                    {g.daily_pct != null && (
+                      <span className={`ml-1 font-semibold ${g.daily_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                        {g.daily_pct >= 0 ? "+" : ""}{g.daily_pct.toFixed(1)}%
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-[11px] font-mono text-zinc-500">
+                    Close ${livePrice.toFixed(2)}
+                    <span className={`ml-1 font-semibold ${liveChgPct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                      {liveChgPct >= 0 ? "+" : ""}{liveChgPct.toFixed(1)}%
+                    </span>
+                  </div>
                 </td>
                 {/* Premkt % */}
                 <td className="py-1 px-2 align-middle text-center">
@@ -10238,7 +10252,7 @@ const DailyWatchlistTab = ({ data }) => {
                   </div>
                 </div>
                 {g.reasoning && (
-                  <p className="text-[11px] text-zinc-200 leading-snug line-clamp-3">{g.reasoning}</p>
+                  <p className="text-[11px] text-zinc-200 leading-snug line-clamp-3">{renderMarkdown(g.reasoning)}</p>
                 )}
                 {topHeadline && (
                   <p className="text-[10px] text-zinc-500 leading-snug line-clamp-2 border-t border-zinc-700/50 pt-1">

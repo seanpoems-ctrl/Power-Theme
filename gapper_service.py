@@ -786,8 +786,8 @@ def fetch_finviz_theme_map() -> dict:
 # ──────────────────────────────────────────────────────────────
 
 def fetch_finviz_data(ticker: str) -> dict:
-    """Fetch Float, Short Interest %, and Daily % from Finviz quote page."""
-    result = {"float_shares": None, "short_float": None, "daily_pct": None}
+    """Fetch Float, Short Interest %, Daily %, and Prev Close from Finviz quote page."""
+    result = {"float_shares": None, "short_float": None, "daily_pct": None, "prev_close": None}
     try:
         from bs4 import BeautifulSoup
         url = f"https://finviz.com/quote.ashx?t={ticker}&ty=c&p=d&b=1"
@@ -796,10 +796,13 @@ def fetch_finviz_data(ticker: str) -> dict:
         })
         resp.raise_for_status()
         soup = BeautifulSoup(resp.text, "html.parser")
-        table = soup.find("table", class_="snapshot-table2")
-        if not table:
+        # Finviz splits the snapshot data across several <table class="snapshot-table2">
+        # chunks now — reading only the first one silently dropped every field below
+        # "IPO" (Float, Short Float, Change, Prev Close all live in later chunks).
+        tables = soup.find_all("table", class_="snapshot-table2")
+        if not tables:
             return result
-        cells = table.find_all("td")
+        cells = [td for t in tables for td in t.find_all("td")]
         for i in range(0, len(cells) - 1, 2):
             label = cells[i].get_text(strip=True)
             value = cells[i + 1].get_text(strip=True)
@@ -807,11 +810,16 @@ def fetch_finviz_data(ticker: str) -> dict:
                 result["float_shares"] = value
             elif label == "Short Float":
                 result["short_float"] = value
-            elif label == "Change":
+            elif label in ("Change %", "Change"):
                 try:
                     result["daily_pct"] = float(value.replace("%", "").replace("+", ""))
                 except ValueError:
                     result["daily_pct"] = None
+            elif label == "Prev Close":
+                try:
+                    result["prev_close"] = float(value.replace(",", ""))
+                except ValueError:
+                    result["prev_close"] = None
         return result
     except Exception as e:
         logger.warning(f"  Finviz data failed for {ticker}: {e}")
@@ -1681,6 +1689,7 @@ def main():
             "float_shares":     fv.get("float_shares"),
             "short_float":      fv.get("short_float"),
             "daily_pct":        fv.get("daily_pct"),
+            "prev_close":       fv.get("prev_close"),
             "industry":         analysis.get("finviz_theme", "—"),
             "technical_status": technical_status,
             "verification":     verification,
