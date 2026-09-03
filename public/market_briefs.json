@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-03 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Broad Risk-On Rally",
+    "spy_price": 773.17,
+    "spy_change_pct": 1.05,
+    "vix": 14.32,
+    "hy_oas": 2.66,
+    "yield_curve": 0.4,
+    "credit_status": "Complacent",
+    "s5fi": 54.9,
+    "mmth": 69.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AVAV",
+          "company": "AeroVironment Inc.",
+          "reason": "Government contract win positions the company for significant revenue growth and market share expansion in defense technology."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Announced a landmark cloud computing contract with a major enterprise client, bolstering its Azure platform's competitive advantage."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Price action today was driven by continued retail flow and short-term technical indicators, absent any new fundamental news catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-03 10:56 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Shares saw renewed buying interest following a general rebound in electric vehicle sentiment and analyst upgrades based on production forecasts, albeit without a fresh, company-specific fundamental catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-13 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Robust Equity Rally / Growth Bias",
-    "spy_price": 777.88,
-    "spy_change_pct": 0.7,
-    "vix": 14.63,
-    "hy_oas": 2.71,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 71.2,
-    "mmth": 74.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a significant new partnership today with a leading healthcare provider to integrate its AI services, boosting confidence in its enterprise cloud growth."
-        },
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple unveiled unexpected stronger-than-anticipated pre-order numbers for its upcoming Vision Pro-lite device, signaling robust consumer demand despite broader economic concerns."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMD",
-          "company": "Advanced Micro Devices, Inc.",
-          "reason": "AMD saw continued institutional buying pressure, pushing shares higher on lingering optimism from last week's analyst upgrades regarding its AI chip roadmap."
         }
       ]
     }
