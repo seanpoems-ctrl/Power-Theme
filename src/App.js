@@ -10298,9 +10298,9 @@ const DailyWatchlistTab = ({ data }) => {
               const topS = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))[0];
               const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
               const perfKey = perfMode === "1d" ? "perf_1d" : perfMode === "1m" ? "perf_1m" : "perf_3m";
-              const perf = theme._ranking
-                ? (theme[perfKey] ?? 0)
-                : (topS?.[perfKey] ?? 0);
+              // Prefer the displayed ticker's own perf; only fall back to the theme-level
+              // aggregate when there's no per-stock data at all (e.g. screenerMap missed it).
+              const perf = topS?.[perfKey] != null ? topS[perfKey] : (theme[perfKey] ?? 0);
               return (
                 <div key={theme.name}
                   className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40 cursor-pointer hover:bg-zinc-700/50 hover:border-zinc-600/60 transition-colors"
@@ -10419,9 +10419,9 @@ const DailyWatchlistTab = ({ data }) => {
                   const topS = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))[0];
                   const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
                   const perfKey = perfMode === "1d" ? "perf_1d" : perfMode === "1m" ? "perf_1m" : "perf_3m";
-                  const perf = theme._ranking
-                    ? (theme[perfKey] ?? 0)
-                    : (topS?.[perfKey] ?? 0);
+                  // Prefer the displayed ticker's own perf; only fall back to the theme-level
+                  // aggregate when there's no per-stock data at all (e.g. screenerMap missed it).
+                  const perf = topS?.[perfKey] != null ? topS[perfKey] : (theme[perfKey] ?? 0);
                   return (
                     <div key={theme.name}
                       className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40 cursor-pointer hover:bg-zinc-700/50 hover:border-zinc-600/60 transition-colors"
