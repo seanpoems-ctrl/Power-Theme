@@ -1967,56 +1967,29 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
       }
     }
 
-    // Always fetch live price + LOD from Finnhub; Yahoo Finance only when no thematic bars
+    // Live price + LOD from Finnhub. (Previously also queried Yahoo Finance via
+    // corsproxy.io for price/LOD/ADR-20, but that proxy now returns its own
+    // marketing page instead of proxying — the call always silently failed.
+    // ADR-20 for tickers outside the thematic universe is unavailable without it;
+    // Finnhub's free tier doesn't include historical candles.)
     try {
-      // Always call Yahoo (also has price + LOD via meta), call Finnhub when key is set
-      const yahooFetch = fetch(`https://corsproxy.io/?${encodeURIComponent(`https://query1.finance.yahoo.com/v8/finance/chart/${s}?range=90d&interval=1d`)}`);
-      const finnhubFetch = FINNHUB_KEY
-        ? fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`).then(r => r.ok ? r.json() : null).catch(() => null)
-        : Promise.resolve(null);
-      const [yahooRes, quoteData] = await Promise.all([yahooFetch, finnhubFetch]);
-      const yahooData = await yahooRes.json().catch(() => null);
+      const quoteData = FINNHUB_KEY
+        ? await fetch(`https://finnhub.io/api/v1/quote?symbol=${s}&token=${FINNHUB_KEY}`).then(r => r.ok ? r.json() : null).catch(() => null)
+        : null;
 
-      // Yahoo meta has live regularMarketPrice + previousClose
-      const yMeta = yahooData?.chart?.result?.[0]?.meta;
-      const yPrice = yMeta?.regularMarketPrice;
-      const yPrevClose = yMeta?.previousClose ?? yMeta?.chartPreviousClose;
-      const yLow = yMeta?.regularMarketDayLow;
-
-      // Live price: Finnhub.c → Finnhub.pc → Yahoo regularMarketPrice → Yahoo previousClose → thematic data
       const fCur = quoteData?.c;
       const fPrevClose = quoteData?.pc;
       const livePrice =
         (fCur != null && fCur > 0) ? fCur :
-        (yPrice != null && yPrice > 0) ? yPrice :
         (fPrevClose != null && fPrevClose > 0) ? fPrevClose :
-        (yPrevClose != null && yPrevClose > 0) ? yPrevClose :
         thematicBarsFallbackPrice;
       if (livePrice != null) setCurrentPrice(parseFloat(parseFloat(livePrice).toFixed(2)));
 
-      // LOD: Finnhub.l → Yahoo regularMarketDayLow → Finnhub.pc → Yahoo previousClose
       const fLow = quoteData?.l;
       const lodVal =
         (fLow != null && fLow > 0) ? fLow :
-        (yLow != null && yLow > 0) ? yLow :
-        (fPrevClose != null && fPrevClose > 0) ? fPrevClose :
-        (yPrevClose != null && yPrevClose > 0) ? yPrevClose : null;
+        (fPrevClose != null && fPrevClose > 0) ? fPrevClose : null;
       if (lodVal != null) setLod(parseFloat(parseFloat(lodVal).toFixed(2)));
-
-      // ADR-20 from Yahoo Finance (only when thematic bars not available)
-      const q = yahooData?.chart?.result?.[0]?.indicators?.quote?.[0];
-      if (!thematicBarsFound && q?.high?.length >= 15) {
-        const { high: h, low: l } = q;
-        const valid = [];
-        for (let i = 0; i < h.length; i++) {
-          if (h[i] != null && l[i] != null && l[i] > 0) valid.push((h[i] - l[i]) / l[i] * 100);
-        }
-        const slice = valid.slice(-20);
-        if (slice.length > 0) {
-          const adr20 = slice.reduce((a, b) => a + b, 0) / slice.length;
-          setAtr(adr20.toFixed(2));
-        }
-      }
     } catch {
       if (thematicBarsFallbackPrice != null) setCurrentPrice(thematicBarsFallbackPrice);
     } finally {
@@ -6992,7 +6965,9 @@ const EDGAR_CIKS = {
 };
 
 // Fetches SEC's full ticker→CIK map once per browser session and caches in sessionStorage.
-// www.sec.gov/files has no CORS header so we go through corsproxy.io with allorigins fallback.
+// Pre-baked server-side by gapper_service.py (refreshed daily) into public/sec_cik_map.json —
+// same-origin, no CORS issues. Falls back to the old direct-SEC-via-proxy path only if that
+// file is ever missing (www.sec.gov itself has no CORS header for browser fetches).
 let _cikMapPromise = null;
 const _loadCikMap = () => {
   if (_cikMapPromise) return _cikMapPromise;
@@ -7000,19 +6975,25 @@ const _loadCikMap = () => {
     const stored = sessionStorage.getItem("edgar_cik_map_v1");
     if (stored) { _cikMapPromise = Promise.resolve(JSON.parse(stored)); return _cikMapPromise; }
   } catch {}
-  const src = "https://www.sec.gov/files/company_tickers.json";
-  _cikMapPromise = fetch(`https://corsproxy.io/?${encodeURIComponent(src)}`)
-    .catch(() => fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(src)}`))
+  _cikMapPromise = fetch(`${process.env.PUBLIC_URL}/sec_cik_map.json`)
     .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(data => {
-      const map = {};
-      Object.values(data).forEach(({ cik_str, ticker }) => {
-        if (ticker) map[ticker.toUpperCase()] = String(cik_str);
-      });
+    .catch(() => {
+      const src = "https://www.sec.gov/files/company_tickers.json";
+      return fetch(`https://corsproxy.io/?${encodeURIComponent(src)}`)
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(data => {
+          const map = {};
+          Object.values(data).forEach(({ cik_str, ticker }) => {
+            if (ticker) map[ticker.toUpperCase()] = String(cik_str);
+          });
+          return map;
+        })
+        .catch(() => ({}));
+    })
+    .then(map => {
       try { sessionStorage.setItem("edgar_cik_map_v1", JSON.stringify(map)); } catch {}
       return map;
-    })
-    .catch(() => ({}));
+    });
   return _cikMapPromise;
 };
 
@@ -7195,49 +7176,28 @@ const SearchBar = ({ data, search, setSearch }) => {
     return { ...base, appearances: merged };
   })();
 
-  // Fetch live price: try local API first, fallback to Yahoo Finance. Polls every 30s.
+  // Fetch live price from Finnhub. Polls every 30s.
+  // (Previously tried a dev-only localhost:5001 helper, then Yahoo Finance
+  // directly — Yahoo doesn't send CORS headers for third-party origins, so
+  // that fallback never actually worked in any real browser.)
   useEffect(() => {
     setLivePrice(null);
-    if (!fullResult) return;
+    if (!fullResult || !FINNHUB_KEY) return;
     const ticker = fullResult.ticker;
     let cancelled = false;
     const doFetch = () => {
-      const fetchYahoo = () => {
-        setLivePriceLoading(true);
-        fetch(`https://query2.finance.yahoo.com/v7/finance/quote?symbols=${ticker}&fields=regularMarketPrice,regularMarketChangePercent`)
-          .then(r => r.json())
-          .then(d => {
-            if (cancelled) return;
-            const q = d?.quoteResponse?.result?.[0];
-            if (q?.regularMarketPrice != null) {
-              setLivePrice({ price: q.regularMarketPrice, change_pct: q.regularMarketChangePercent ?? null });
-            }
-          })
-          .catch(() => {
-            // fallback: v8 chart
-            fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=1d&range=1d`)
-              .then(r => r.json())
-              .then(d => {
-                if (cancelled) return;
-                const meta = d?.chart?.result?.[0]?.meta;
-                if (meta?.regularMarketPrice != null) {
-                  const price = meta.regularMarketPrice;
-                  const prev = meta.chartPreviousClose || meta.previousClose;
-                  setLivePrice({ price, change_pct: prev ? ((price - prev) / prev) * 100 : null });
-                }
-              })
-              .catch(() => {});
-          })
-          .finally(() => { if (!cancelled) setLivePriceLoading(false); });
-      };
-      fetch(`http://localhost:5001/price/${ticker}`)
-        .then(r => r.json())
-        .then(d => {
-          if (cancelled) return;
-          if (d.price != null) { setLivePrice({ price: d.price, change_pct: d.change_pct }); setLivePriceLoading(false); }
-          else fetchYahoo();
+      setLivePriceLoading(true);
+      fetch(`https://finnhub.io/api/v1/quote?symbol=${ticker}&token=${FINNHUB_KEY}`)
+        .then(r => r.ok ? r.json() : null)
+        .then(q => {
+          if (cancelled || !q) return;
+          if (q.c != null && q.c > 0) {
+            const chgPct = q.pc ? ((q.c - q.pc) / q.pc * 100) : null;
+            setLivePrice({ price: q.c, change_pct: chgPct });
+          }
         })
-        .catch(() => fetchYahoo());
+        .catch(() => {})
+        .finally(() => { if (!cancelled) setLivePriceLoading(false); });
     };
     doFetch();
     const interval = setInterval(doFetch, 30000); // refresh every 30s

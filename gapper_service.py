@@ -1592,6 +1592,14 @@ def main():
     # RC1: Load SEC EDGAR CIK map once (no API key needed — free public API)
     logger.info("Loading SEC EDGAR CIK map...")
     _load_cik_map()
+    if _CIK_MAP:
+        try:
+            Path("public/sec_cik_map.json").write_text(
+                json.dumps(_CIK_MAP, separators=(",", ":")), encoding="utf-8"
+            )
+            logger.info(f"  Wrote public/sec_cik_map.json ({len(_CIK_MAP)} tickers)")
+        except Exception as e:
+            logger.warning(f"  Could not write sec_cik_map.json: {e}")
 
     logger.info("Fetching gappers from TradingView...")
     gappers = fetch_gappers()[:25]
