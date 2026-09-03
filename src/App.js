@@ -6435,19 +6435,19 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
       <div className="rounded-lg border border-zinc-700/40">
         <table className="w-full table-fixed" style={{tableLayout:"fixed"}}>
           <colgroup>
-            <col style={{width:"18%"}}/>
-            <col style={{width:"6%"}}/>
+            <col style={{width:"7%"}}/>
+            <col style={{width:"7%"}}/>
             <col style={{width:"6%"}}/>
             <col style={{width:"5%"}}/>
             <col style={{width:"5%"}}/>
-            <col style={{width:"4%"}}/>
-            <col style={{width:"4%"}}/>
-            <col style={{width:"6%"}}/>
-            <col style={{width:"8%"}}/>
+            <col style={{width:"5%"}}/>
+            <col style={{width:"5%"}}/>
+            <col style={{width:"7%"}}/>
+            <col style={{width:"9%"}}/>
             <col style={{width:"7%"}}/>
             <col style={{width:"4%"}}/>
-            <col style={{width:"9%"}}/>
-            <col style={{width:"10%"}}/>
+            <col style={{width:"12%"}}/>
+            <col style={{width:"13%"}}/>
           </colgroup>
           <thead>
             <tr className="text-[11px] text-zinc-500 uppercase tracking-wider bg-zinc-900/80 border-b border-zinc-700/40 align-middle">
@@ -6497,17 +6497,17 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
                   <a href={`https://www.tradingview.com/chart/?symbol=${g.ticker}`} target="_blank" rel="noreferrer" className="ml-1">
                     <ExternalLink size={8} className="inline text-zinc-600 hover:text-blue-400"/>
                   </a>
-                  <div className="text-[10px] font-mono text-zinc-500 grid grid-cols-[auto_auto_auto] gap-x-1 whitespace-nowrap">
-                    <span>Prev Close</span>
-                    <span className="text-zinc-400">${prevClose.toFixed(2)}</span>
-                    {g.daily_pct != null ? (
-                      <span className={`font-semibold ${g.daily_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                  <div className="text-[11px] font-mono text-zinc-500 whitespace-nowrap">
+                    Prev Close ${prevClose.toFixed(2)}
+                    {g.daily_pct != null && (
+                      <span className={`ml-0.5 font-semibold ${g.daily_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
                         {g.daily_pct >= 0 ? "+" : ""}{g.daily_pct.toFixed(1)}%
                       </span>
-                    ) : <span/>}
-                    <span>Close</span>
-                    <span className="text-zinc-400">${livePrice.toFixed(2)}</span>
-                    <span className={`font-semibold ${liveChgPct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                    )}
+                  </div>
+                  <div className="text-[11px] font-mono text-zinc-500 whitespace-nowrap">
+                    Close ${livePrice.toFixed(2)}
+                    <span className={`ml-0.5 font-semibold ${liveChgPct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
                       {liveChgPct >= 0 ? "+" : ""}{liveChgPct.toFixed(1)}%
                     </span>
                   </div>
