@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-03 18:48 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Strong US Rally / Complacent Credit",
+    "spy_price": 773.17,
+    "spy_change_pct": 1.05,
+    "vix": 14.32,
+    "hy_oas": 2.66,
+    "yield_curve": 0.43,
+    "credit_status": "Complacent",
+    "s5fi": 54.9,
+    "mmth": 69.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AVAV",
+          "company": "AeroVironment, Inc.",
+          "reason": "Experienced significant upside due to a fresh Government Contract Win, confirmed as a high-conviction gapper from pre-market scans."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Showed strong performance, likely driven by renewed investor enthusiasm following reported new advancements in AI computing solutions."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Continued volatility driven by broader market sentiment and ongoing production ramp speculation, lacking a fresh, specific catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-03 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "Continues to benefit from the ongoing robust demand for AI infrastructure, extending its recent bullish technical trend without a fresh fundamental catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-13 17:27 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Equity Strength, Underlying Vigilance",
-    "spy_price": 777.88,
-    "spy_change_pct": 0.7,
-    "vix": 14.63,
-    "hy_oas": 2.71,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 71.2,
-    "mmth": 74.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "The company announced a breakthrough in its next-generation AI GPU architecture, sparking strong investor interest in its continued dominance in the artificial intelligence sector."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Positive Phase 3 trial results for its new Alzheimer's treatment were published, potentially opening a massive new market opportunity and boosting future revenue projections."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Shares saw renewed buying interest following a general rebound in electric vehicle sentiment and analyst upgrades based on production forecasts, albeit without a fresh, company-specific fundamental catalyst today."
         }
       ]
     }
