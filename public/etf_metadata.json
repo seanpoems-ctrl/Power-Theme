@@ -5,7 +5,8 @@
     "label": "Gambling",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Global sports-betting, casino and online-gambling companies"
+    "description": "Global sports-betting, casino and online-gambling companies",
+    "benchmark": false
   },
   {
     "ticker": "SOCL",
@@ -13,7 +14,8 @@
     "label": "Social Media",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Global social networks, messaging and content platforms"
+    "description": "Global social networks, messaging and content platforms",
+    "benchmark": false
   },
   {
     "ticker": "XHS",
@@ -21,7 +23,8 @@
     "label": "Healthcare Services",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Equal-weight insurers, facilities, distributors and healthcare services"
+    "description": "Equal-weight insurers, facilities, distributors and healthcare services",
+    "benchmark": false
   },
   {
     "ticker": "RTH",
@@ -29,23 +32,8 @@
     "label": "Retail Concentrated",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Concentrated portfolio of the largest U.S.-listed retailers"
-  },
-  {
-    "ticker": "XLP",
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Staples Sector",
-    "type": "pure_sector",
-    "liquid": true,
-    "description": "Market-cap-weighted S&P 500 consumer-staples companies"
-  },
-  {
-    "ticker": "XLY",
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Discretionary Sector",
-    "type": "pure_sector",
-    "liquid": true,
-    "description": "Market-cap-weighted S&P 500 consumer-discretionary companies"
+    "description": "Concentrated portfolio of the largest U.S.-listed retailers",
+    "benchmark": false
   },
   {
     "ticker": "XRT",
@@ -53,7 +41,8 @@
     "label": "Retail Equal",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Equal-weight retailers with much more small-company exposure"
+    "description": "Equal-weight retailers with much more small-company exposure",
+    "benchmark": false
   },
   {
     "ticker": "AWAY",
@@ -61,7 +50,8 @@
     "label": "Travel Technology",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Booking platforms and travel technology—not airlines themselves"
+    "description": "Booking platforms and travel technology—not airlines themselves",
+    "benchmark": false
   },
   {
     "ticker": "BUZZ",
@@ -69,7 +59,8 @@
     "label": "Social Sentiment",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Large U.S. stocks receiving positive online attention"
+    "description": "Large U.S. stocks receiving positive online attention",
+    "benchmark": false
   },
   {
     "ticker": "CNBS",
@@ -77,7 +68,8 @@
     "label": "Cannabis Global",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected global cannabis-related companies"
+    "description": "Actively selected global cannabis-related companies",
+    "benchmark": false
   },
   {
     "ticker": "ESPO",
@@ -85,7 +77,8 @@
     "label": "Gaming",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Video-game publishers, esports platforms and gaming hardware"
+    "description": "Video-game publishers, esports platforms and gaming hardware",
+    "benchmark": false
   },
   {
     "ticker": "GENZ",
@@ -93,7 +86,8 @@
     "label": "Digital Economy",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Fintech, gig-economy and online-betting platforms serving digital natives"
+    "description": "Fintech, gig-economy and online-betting platforms serving digital natives",
+    "benchmark": false
   },
   {
     "ticker": "IBUY",
@@ -101,7 +95,8 @@
     "label": "Online Retail",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Companies earning most of their revenue from online sales"
+    "description": "Companies earning most of their revenue from online sales",
+    "benchmark": false
   },
   {
     "ticker": "MEME",
@@ -109,7 +104,8 @@
     "label": "Meme Stocks",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Stocks driven by social attention, volatility and retail participation"
+    "description": "Stocks driven by social attention, volatility and retail participation",
+    "benchmark": false
   },
   {
     "ticker": "METV",
@@ -117,7 +113,8 @@
     "label": "Metaverse",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Gaming, virtual platforms, computing and metaverse infrastructure"
+    "description": "Gaming, virtual platforms, computing and metaverse infrastructure",
+    "benchmark": false
   },
   {
     "ticker": "MJ",
@@ -125,7 +122,8 @@
     "label": "Cannabis Broad",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Global cannabis companies, with U.S. exposure obtained through CNBS"
+    "description": "Global cannabis companies, with U.S. exposure obtained through CNBS",
+    "benchmark": false
   },
   {
     "ticker": "MSOS",
@@ -133,7 +131,8 @@
     "label": "Cannabis US Operators",
     "type": "beta_booster",
     "liquid": false,
-    "description": "U.S. cannabis operators accessed mainly through swap contracts"
+    "description": "U.S. cannabis operators accessed mainly through swap contracts",
+    "benchmark": false
   },
   {
     "ticker": "NERD",
@@ -141,7 +140,8 @@
     "label": "Video Games",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Global pure-play video-game publishers, platforms and gaming hardware"
+    "description": "Global pure-play video-game publishers, platforms and gaming hardware",
+    "benchmark": false
   },
   {
     "ticker": "PAWZ",
@@ -149,7 +149,8 @@
     "label": "Pet Industry",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Pet food, veterinary care and animal-health companies"
+    "description": "Pet food, veterinary care and animal-health companies",
+    "benchmark": false
   },
   {
     "ticker": "PEJ",
@@ -157,7 +158,8 @@
     "label": "Leisure",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Restaurants, entertainment, hotels and leisure companies"
+    "description": "Restaurants, entertainment, hotels and leisure companies",
+    "benchmark": false
   },
   {
     "ticker": "VICE",
@@ -165,7 +167,8 @@
     "label": "Vice Industries",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Alcohol, tobacco, gambling and other vice-related businesses"
+    "description": "Alcohol, tobacco, gambling and other vice-related businesses",
+    "benchmark": false
   },
   {
     "ticker": "WEED",
@@ -173,7 +176,8 @@
     "label": "Cannabis Concentrated",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Concentrated exposure to five leading U.S. cannabis operators via swaps"
+    "description": "Concentrated exposure to five leading U.S. cannabis operators via swaps",
+    "benchmark": false
   },
   {
     "ticker": "FTXG",
@@ -181,7 +185,8 @@
     "label": "Food & Beverage Growth",
     "type": "pure_sector",
     "liquid": false,
-    "description": "U.S. food and beverage companies weighted by growth, value and volatility"
+    "description": "U.S. food and beverage companies weighted by growth, value and volatility",
+    "benchmark": false
   },
   {
     "ticker": "IYC",
@@ -189,7 +194,8 @@
     "label": "Consumer Discretionary",
     "type": "pure_sector",
     "liquid": false,
-    "description": "Market-cap-weighted U.S. cyclical consumer and retail companies"
+    "description": "Market-cap-weighted U.S. cyclical consumer and retail companies",
+    "benchmark": false
   },
   {
     "ticker": "IYK",
@@ -197,7 +203,8 @@
     "label": "Consumer Staples",
     "type": "pure_sector",
     "liquid": false,
-    "description": "Market-cap-weighted U.S. food, beverage and household-staples companies"
+    "description": "Market-cap-weighted U.S. food, beverage and household-staples companies",
+    "benchmark": false
   },
   {
     "ticker": "PBJ",
@@ -205,7 +212,8 @@
     "label": "Food & Beverage Multi-Factor",
     "type": "pure_sector",
     "liquid": false,
-    "description": "U.S. food and beverage companies selected using multiple factors"
+    "description": "U.S. food and beverage companies selected using multiple factors",
+    "benchmark": false
   },
   {
     "ticker": "ETHA",
@@ -213,7 +221,8 @@
     "label": "Ethereum",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Holds Ether directly for spot-price exposure"
+    "description": "Holds Ether directly for spot-price exposure",
+    "benchmark": false
   },
   {
     "ticker": "IBIT",
@@ -221,7 +230,8 @@
     "label": "Bitcoin Spot",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Holds Bitcoin directly for spot-price exposure"
+    "description": "Holds Bitcoin directly for spot-price exposure",
+    "benchmark": false
   },
   {
     "ticker": "BITW",
@@ -229,7 +239,8 @@
     "label": "Multi Asset",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Diversified basket of the largest cryptocurrencies by market cap"
+    "description": "Diversified basket of the largest cryptocurrencies by market cap",
+    "benchmark": false
   },
   {
     "ticker": "GBTC",
@@ -237,7 +248,8 @@
     "label": "Bitcoin Legacy Trust",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Legacy Grayscale fund holding Bitcoin directly for spot-price exposure"
+    "description": "Legacy Grayscale fund holding Bitcoin directly for spot-price exposure",
+    "benchmark": false
   },
   {
     "ticker": "SOLZ",
@@ -245,7 +257,8 @@
     "label": "Solana Futures",
     "type": "beta_booster",
     "liquid": false,
-    "description": "One-times Solana exposure through futures—not spot SOL"
+    "description": "One-times Solana exposure through futures—not spot SOL",
+    "benchmark": false
   },
   {
     "ticker": "WGMI",
@@ -253,7 +266,8 @@
     "label": "Bitcoin Miners",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Bitcoin-mining companies—not Bitcoin itself"
+    "description": "Bitcoin-mining companies—not Bitcoin itself",
+    "benchmark": false
   },
   {
     "ticker": "XRPI",
@@ -261,7 +275,107 @@
     "label": "XRP Futures",
     "type": "beta_booster",
     "liquid": false,
-    "description": "One-times XRP exposure through futures and derivatives—not spot XRP"
+    "description": "One-times XRP exposure through futures and derivatives—not spot XRP",
+    "benchmark": false
+  },
+  {
+    "ticker": "RSPC",
+    "category": "EW Sector",
+    "label": "Equal Weight Communication",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 communication-services companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "RSPD",
+    "category": "EW Sector",
+    "label": "Equal Weight Discretionary",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 consumer-discretionary companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "RSPF",
+    "category": "EW Sector",
+    "label": "Equal Weight Financials",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 financial companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "RSPG",
+    "category": "EW Sector",
+    "label": "Equal Weight Energy",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 energy companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "RSPH",
+    "category": "EW Sector",
+    "label": "Equal Weight Health Care",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 health-care companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "RSPM",
+    "category": "EW Sector",
+    "label": "Equal Weight Material",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 materials companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "RSPN",
+    "category": "EW Sector",
+    "label": "Equal Weight Industrial",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 industrial companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "RSPR",
+    "category": "EW Sector",
+    "label": "Equal Weight Real Estate",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 real-estate companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "RSPS",
+    "category": "EW Sector",
+    "label": "Equal Weight Staples",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 consumer-staples companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "RSPT",
+    "category": "EW Sector",
+    "label": "Equal Weight Technology",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 technology companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "RSPU",
+    "category": "EW Sector",
+    "label": "Equal Weight Utilities",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 utilities companies",
+    "benchmark": true
   },
   {
     "ticker": "GDX",
@@ -269,7 +383,8 @@
     "label": "Gold Miners Large-Cap",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Large and mid-sized global gold-mining companies"
+    "description": "Large and mid-sized global gold-mining companies",
+    "benchmark": false
   },
   {
     "ticker": "GUNR",
@@ -277,7 +392,8 @@
     "label": "Natural Resources Upstream",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Upstream companies extracting energy, metals and agricultural resources"
+    "description": "Upstream companies extracting energy, metals and agricultural resources",
+    "benchmark": false
   },
   {
     "ticker": "ICLN",
@@ -285,7 +401,8 @@
     "label": "Clean Energy Broad",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Broad global renewable-energy producers and equipment companies"
+    "description": "Broad global renewable-energy producers and equipment companies",
+    "benchmark": false
   },
   {
     "ticker": "OIH",
@@ -293,7 +410,8 @@
     "label": "Oil Services Concentrated",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Concentrated exposure to the largest oilfield-service companies"
+    "description": "Concentrated exposure to the largest oilfield-service companies",
+    "benchmark": false
   },
   {
     "ticker": "TAN",
@@ -301,7 +419,8 @@
     "label": "Solar",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Global solar manufacturers, installers and technology suppliers"
+    "description": "Global solar manufacturers, installers and technology suppliers",
+    "benchmark": false
   },
   {
     "ticker": "URA",
@@ -309,7 +428,8 @@
     "label": "Uranium & Nuclear",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Uranium miners plus nuclear-equipment and component manufacturers"
+    "description": "Uranium miners plus nuclear-equipment and component manufacturers",
+    "benchmark": false
   },
   {
     "ticker": "URNM",
@@ -317,7 +437,8 @@
     "label": "Uranium Miners Pure-Play",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Pure-play uranium miners plus physical uranium exposure"
+    "description": "Pure-play uranium miners plus physical uranium exposure",
+    "benchmark": false
   },
   {
     "ticker": "XOP",
@@ -325,7 +446,8 @@
     "label": "Oil & Gas Equal",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Equal-weight U.S. oil and gas producers and refiners"
+    "description": "Equal-weight U.S. oil and gas producers and refiners",
+    "benchmark": false
   },
   {
     "ticker": "GLD",
@@ -333,7 +455,8 @@
     "label": "Gold",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Holds physical gold bullion for direct gold-price exposure"
+    "description": "Holds physical gold bullion for direct gold-price exposure",
+    "benchmark": false
   },
   {
     "ticker": "IEO",
@@ -341,7 +464,8 @@
     "label": "Oil & Gas Cap-Weighted",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Market-cap-weighted large U.S. oil and gas producers"
+    "description": "Market-cap-weighted large U.S. oil and gas producers",
+    "benchmark": false
   },
   {
     "ticker": "SLV",
@@ -349,7 +473,8 @@
     "label": "Silver",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Holds physical silver bullion for direct silver-price exposure"
+    "description": "Holds physical silver bullion for direct silver-price exposure",
+    "benchmark": false
   },
   {
     "ticker": "UNG",
@@ -357,7 +482,8 @@
     "label": "Natural Gas Futures",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Henry Hub natural-gas futures—not gas-producing stocks"
+    "description": "Henry Hub natural-gas futures—not gas-producing stocks",
+    "benchmark": false
   },
   {
     "ticker": "USO",
@@ -365,15 +491,8 @@
     "label": "Crude Oil",
     "type": "pure_sector",
     "liquid": true,
-    "description": "WTI crude-oil futures—not oil-company stocks"
-  },
-  {
-    "ticker": "XLE",
-    "category": "Energy, Metals & Commodities",
-    "label": "Traditional Oil & Gas",
-    "type": "pure_sector",
-    "liquid": true,
-    "description": "Market-cap-weighted S&P 500 energy-sector companies"
+    "description": "WTI crude-oil futures—not oil-company stocks",
+    "benchmark": false
   },
   {
     "ticker": "AMLP",
@@ -381,7 +500,8 @@
     "label": "MLP & Midstream",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Midstream pipelines and MLPs focused on fees and distributions"
+    "description": "Midstream pipelines and MLPs focused on fees and distributions",
+    "benchmark": false
   },
   {
     "ticker": "COPX",
@@ -389,7 +509,8 @@
     "label": "Copper",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Global copper miners—not the physical copper price"
+    "description": "Global copper miners—not the physical copper price",
+    "benchmark": false
   },
   {
     "ticker": "ENFR",
@@ -397,7 +518,8 @@
     "label": "Energy Infrastructure",
     "type": "beta_booster",
     "liquid": false,
-    "description": "U.S. and Canadian pipelines, storage and energy-processing companies"
+    "description": "U.S. and Canadian pipelines, storage and energy-processing companies",
+    "benchmark": false
   },
   {
     "ticker": "ERTH",
@@ -405,7 +527,8 @@
     "label": "Sustainable Economy",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Global companies across clean energy, water, green buildings and agriculture"
+    "description": "Global companies across clean energy, water, green buildings and agriculture",
+    "benchmark": false
   },
   {
     "ticker": "ESGU",
@@ -413,7 +536,8 @@
     "label": "ESG",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Broad U.S. market tilted toward stronger ESG-rated companies"
+    "description": "Broad U.S. market tilted toward stronger ESG-rated companies",
+    "benchmark": false
   },
   {
     "ticker": "EVX",
@@ -421,7 +545,8 @@
     "label": "Environment",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Waste-management and environmental-service companies"
+    "description": "Waste-management and environmental-service companies",
+    "benchmark": false
   },
   {
     "ticker": "FAN",
@@ -429,7 +554,8 @@
     "label": "Wind Energy",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Global wind-turbine manufacturers, suppliers and wind-power operators"
+    "description": "Global wind-turbine manufacturers, suppliers and wind-power operators",
+    "benchmark": false
   },
   {
     "ticker": "FCG",
@@ -437,7 +563,8 @@
     "label": "Natural Gas Producers",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Natural-gas producers—not the gas commodity"
+    "description": "Natural-gas producers—not the gas commodity",
+    "benchmark": false
   },
   {
     "ticker": "GDXJ",
@@ -445,7 +572,8 @@
     "label": "Gold Miners Junior",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Smaller and more speculative gold-mining companies"
+    "description": "Smaller and more speculative gold-mining companies",
+    "benchmark": false
   },
   {
     "ticker": "GRID",
@@ -453,7 +581,8 @@
     "label": "Electrical Grid",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Grid equipment, power management and electrical infrastructure"
+    "description": "Grid equipment, power management and electrical infrastructure",
+    "benchmark": false
   },
   {
     "ticker": "HYDR",
@@ -461,7 +590,8 @@
     "label": "Hydrogen",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Hydrogen producers, fuel cells and electrolyzer companies"
+    "description": "Hydrogen producers, fuel cells and electrolyzer companies",
+    "benchmark": false
   },
   {
     "ticker": "KRBN",
@@ -469,7 +599,8 @@
     "label": "Carbon Credits",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Global carbon-allowance futures across major cap-and-trade markets"
+    "description": "Global carbon-allowance futures across major cap-and-trade markets",
+    "benchmark": false
   },
   {
     "ticker": "MOO",
@@ -477,7 +608,8 @@
     "label": "Agriculture & FoodTech",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Global fertilizer, equipment, seed and agricultural companies"
+    "description": "Global fertilizer, equipment, seed and agricultural companies",
+    "benchmark": false
   },
   {
     "ticker": "NLR",
@@ -485,7 +617,8 @@
     "label": "Nuclear",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Nuclear utilities, reactor suppliers and uranium producers"
+    "description": "Nuclear utilities, reactor suppliers and uranium producers",
+    "benchmark": false
   },
   {
     "ticker": "PALL",
@@ -493,7 +626,8 @@
     "label": "Palladium",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Physically backed palladium-price exposure"
+    "description": "Physically backed palladium-price exposure",
+    "benchmark": false
   },
   {
     "ticker": "PBW",
@@ -501,7 +635,8 @@
     "label": "Clean Energy Growth",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Diversified clean-energy companies with a smaller-growth-stock tilt"
+    "description": "Diversified clean-energy companies with a smaller-growth-stock tilt",
+    "benchmark": false
   },
   {
     "ticker": "PLTM",
@@ -509,7 +644,8 @@
     "label": "Platinum",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Physically backed platinum-price exposure"
+    "description": "Physically backed platinum-price exposure",
+    "benchmark": false
   },
   {
     "ticker": "REMX",
@@ -517,7 +653,8 @@
     "label": "Strategic Metals",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Rare-earth and strategic-metal miners, processors and refiners"
+    "description": "Rare-earth and strategic-metal miners, processors and refiners",
+    "benchmark": false
   },
   {
     "ticker": "SIL",
@@ -525,7 +662,8 @@
     "label": "Silver Miners Established",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Established global silver-mining companies"
+    "description": "Established global silver-mining companies",
+    "benchmark": false
   },
   {
     "ticker": "SILJ",
@@ -533,7 +671,8 @@
     "label": "Silver Miners Junior",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Smaller, more speculative silver-mining companies"
+    "description": "Smaller, more speculative silver-mining companies",
+    "benchmark": false
   },
   {
     "ticker": "SLX",
@@ -541,7 +680,8 @@
     "label": "Steel",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Global steel producers and related mining companies"
+    "description": "Global steel producers and related mining companies",
+    "benchmark": false
   },
   {
     "ticker": "UX",
@@ -549,7 +689,8 @@
     "label": "Uranium Physical",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Physical uranium-price exposure mainly through swaps not uranium miners"
+    "description": "Physical uranium-price exposure mainly through swaps not uranium miners",
+    "benchmark": false
   },
   {
     "ticker": "XES",
@@ -557,15 +698,8 @@
     "label": "Oil Services Equal",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Equal-weight oil equipment and service companies"
-  },
-  {
-    "ticker": "XLB",
-    "category": "Energy, Metals & Commodities",
-    "label": "Materials & Mining",
-    "type": "beta_booster",
-    "liquid": false,
-    "description": "Market-cap-weighted S&P 500 materials-sector companies"
+    "description": "Equal-weight oil equipment and service companies",
+    "benchmark": false
   },
   {
     "ticker": "XME",
@@ -573,7 +707,8 @@
     "label": "Metals & Mining",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Equal-weight U.S. steel, coal and diversified mining companies"
+    "description": "Equal-weight U.S. steel, coal and diversified mining companies",
+    "benchmark": false
   },
   {
     "ticker": "GNR",
@@ -581,7 +716,8 @@
     "label": "Natural Resources Global",
     "type": "pure_sector",
     "liquid": false,
-    "description": "Global large energy, metals and agricultural producers"
+    "description": "Global large energy, metals and agricultural producers",
+    "benchmark": false
   },
   {
     "ticker": "VEGI",
@@ -589,7 +725,8 @@
     "label": "Agriculture Producers",
     "type": "pure_sector",
     "liquid": false,
-    "description": "Global agricultural product and equipment producers not crop commodities"
+    "description": "Global agricultural product and equipment producers not crop commodities",
+    "benchmark": false
   },
   {
     "ticker": "WOOD",
@@ -597,7 +734,8 @@
     "label": "Timber",
     "type": "pure_sector",
     "liquid": false,
-    "description": "Global forestry, paper, packaging and timber REIT companies"
+    "description": "Global forestry, paper, packaging and timber REIT companies",
+    "benchmark": false
   },
   {
     "ticker": "IAI",
@@ -605,7 +743,8 @@
     "label": "Capital Markets Cap-Weighted",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Market-cap-weighted brokers, investment banks and stock exchanges"
+    "description": "Market-cap-weighted brokers, investment banks and stock exchanges",
+    "benchmark": false
   },
   {
     "ticker": "IAK",
@@ -613,7 +752,8 @@
     "label": "Insurance Cap-Weighted",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Market-cap-weighted U.S. insurance companies"
+    "description": "Market-cap-weighted U.S. insurance companies",
+    "benchmark": false
   },
   {
     "ticker": "IYG",
@@ -621,7 +761,8 @@
     "label": "Financial Services",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Market-cap-weighted U.S. banks, payment firms and financial-services companies"
+    "description": "Market-cap-weighted U.S. banks, payment firms and financial-services companies",
+    "benchmark": false
   },
   {
     "ticker": "KBE",
@@ -629,7 +770,8 @@
     "label": "Banks Equal",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Equal-weight mix of large, regional and diversified U.S. banks"
+    "description": "Equal-weight mix of large, regional and diversified U.S. banks",
+    "benchmark": false
   },
   {
     "ticker": "KRE",
@@ -637,15 +779,8 @@
     "label": "Regional Banks",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Equal-weight U.S. regional banks"
-  },
-  {
-    "ticker": "XLF",
-    "category": "Finance & Capital Markets",
-    "label": "Financials Sector",
-    "type": "pure_sector",
-    "liquid": true,
-    "description": "Market-cap-weighted S&P 500 financial-sector companies"
+    "description": "Equal-weight U.S. regional banks",
+    "benchmark": false
   },
   {
     "ticker": "IPAY",
@@ -653,7 +788,8 @@
     "label": "Payments",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Global card networks, payment processors and digital-wallet companies"
+    "description": "Global card networks, payment processors and digital-wallet companies",
+    "benchmark": false
   },
   {
     "ticker": "KCE",
@@ -661,7 +797,8 @@
     "label": "Capital Markets Equal",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Equal-weight asset managers, brokers, exchanges and investment banks"
+    "description": "Equal-weight asset managers, brokers, exchanges and investment banks",
+    "benchmark": false
   },
   {
     "ticker": "KIE",
@@ -669,7 +806,8 @@
     "label": "Insurance Equal",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Equal-weight property, life, health and reinsurance companies"
+    "description": "Equal-weight property, life, health and reinsurance companies",
+    "benchmark": false
   },
   {
     "ticker": "ASHR",
@@ -677,7 +815,8 @@
     "label": "China A-Shares",
     "type": "beta_booster",
     "liquid": true,
-    "description": "300 large mainland Chinese A-share companies"
+    "description": "300 large mainland Chinese A-share companies",
+    "benchmark": false
   },
   {
     "ticker": "EEM",
@@ -685,7 +824,8 @@
     "label": "Emerging Markets",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Diversified large- and mid-cap companies across emerging-market countries"
+    "description": "Diversified large- and mid-cap companies across emerging-market countries",
+    "benchmark": false
   },
   {
     "ticker": "ILF",
@@ -693,7 +833,8 @@
     "label": "Latin America",
     "type": "beta_booster",
     "liquid": true,
-    "description": "40 large companies from Brazil, Mexico, Chile and other Latin markets"
+    "description": "40 large companies from Brazil, Mexico, Chile and other Latin markets",
+    "benchmark": false
   },
   {
     "ticker": "EWY",
@@ -701,7 +842,8 @@
     "label": "South Korea",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Large and mid-sized South Korean companies"
+    "description": "Large and mid-sized South Korean companies",
+    "benchmark": false
   },
   {
     "ticker": "EWZ",
@@ -709,7 +851,8 @@
     "label": "Brazil",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Large and mid-sized Brazilian companies"
+    "description": "Large and mid-sized Brazilian companies",
+    "benchmark": false
   },
   {
     "ticker": "FXI",
@@ -717,7 +860,8 @@
     "label": "China Large-Cap",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Approximately 50 large Chinese companies listed in Hong Kong"
+    "description": "Approximately 50 large Chinese companies listed in Hong Kong",
+    "benchmark": false
   },
   {
     "ticker": "KWEB",
@@ -725,7 +869,8 @@
     "label": "China Internet",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Chinese internet, e-commerce and digital-platform companies"
+    "description": "Chinese internet, e-commerce and digital-platform companies",
+    "benchmark": false
   },
   {
     "ticker": "ARGT",
@@ -733,7 +878,8 @@
     "label": "Argentina",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Argentine companies and companies deriving revenue from Argentina"
+    "description": "Argentine companies and companies deriving revenue from Argentina",
+    "benchmark": false
   },
   {
     "ticker": "CHIQ",
@@ -741,7 +887,8 @@
     "label": "China Consumer",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Chinese consumer-discretionary companies"
+    "description": "Chinese consumer-discretionary companies",
+    "benchmark": false
   },
   {
     "ticker": "GXC",
@@ -749,7 +896,8 @@
     "label": "China Broad",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Broad Chinese market across multiple sectors and company sizes"
+    "description": "Broad Chinese market across multiple sectors and company sizes",
+    "benchmark": false
   },
   {
     "ticker": "IBB",
@@ -757,7 +905,8 @@
     "label": "Biotech Large-Cap",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Market-cap-weighted large Nasdaq-listed biotechnology companies"
+    "description": "Market-cap-weighted large Nasdaq-listed biotechnology companies",
+    "benchmark": false
   },
   {
     "ticker": "XBI",
@@ -765,15 +914,8 @@
     "label": "Biotech Equal",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Equal-weight biotech with substantial small-company exposure"
-  },
-  {
-    "ticker": "XLV",
-    "category": "Healthcare & Biotech",
-    "label": "Healthcare Sector",
-    "type": "pure_sector",
-    "liquid": true,
-    "description": "Market-cap-weighted S&P 500 healthcare-sector companies"
+    "description": "Equal-weight biotech with substantial small-company exposure",
+    "benchmark": false
   },
   {
     "ticker": "ARKG",
@@ -781,7 +923,8 @@
     "label": "Genomics Active",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected genomics, diagnostics and gene-therapy companies"
+    "description": "Actively selected genomics, diagnostics and gene-therapy companies",
+    "benchmark": false
   },
   {
     "ticker": "CANC",
@@ -789,7 +932,8 @@
     "label": "Healthcare",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected cancer-treatment and oncology companies"
+    "description": "Actively selected cancer-treatment and oncology companies",
+    "benchmark": false
   },
   {
     "ticker": "HELX",
@@ -797,7 +941,8 @@
     "label": "Gene Editing",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected gene-editing and genomic-medicine companies"
+    "description": "Actively selected gene-editing and genomic-medicine companies",
+    "benchmark": false
   },
   {
     "ticker": "IHI",
@@ -805,7 +950,8 @@
     "label": "Medical Devices",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Market-cap-weighted large U.S. medical-device manufacturers"
+    "description": "Market-cap-weighted large U.S. medical-device manufacturers",
+    "benchmark": false
   },
   {
     "ticker": "KURE",
@@ -813,7 +959,8 @@
     "label": "China Healthcare",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Healthcare companies operating primarily in China"
+    "description": "Healthcare companies operating primarily in China",
+    "benchmark": false
   },
   {
     "ticker": "OZEM",
@@ -821,7 +968,8 @@
     "label": "Weight Loss & GLP-1",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected GLP-1 drugs and weight-loss supply-chain companies"
+    "description": "Actively selected GLP-1 drugs and weight-loss supply-chain companies",
+    "benchmark": false
   },
   {
     "ticker": "PBE",
@@ -829,7 +977,8 @@
     "label": "Biotech Multi-Factor",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Biotech and genomic companies selected using multiple factors"
+    "description": "Biotech and genomic companies selected using multiple factors",
+    "benchmark": false
   },
   {
     "ticker": "PSIL",
@@ -837,7 +986,8 @@
     "label": "Psychedelics",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected psychedelic-medicine companies"
+    "description": "Actively selected psychedelic-medicine companies",
+    "benchmark": false
   },
   {
     "ticker": "XHE",
@@ -845,7 +995,8 @@
     "label": "Medical Equipment",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Equal-weight U.S. medical equipment and supply companies"
+    "description": "Equal-weight U.S. medical equipment and supply companies",
+    "benchmark": false
   },
   {
     "ticker": "IHF",
@@ -853,7 +1004,8 @@
     "label": "Healthcare Providers",
     "type": "pure_sector",
     "liquid": false,
-    "description": "Market-cap-weighted U.S. insurers, hospitals and care providers"
+    "description": "Market-cap-weighted U.S. insurers, hospitals and care providers",
+    "benchmark": false
   },
   {
     "ticker": "PPH",
@@ -861,7 +1013,8 @@
     "label": "Pharma Concentrated",
     "type": "pure_sector",
     "liquid": false,
-    "description": "Concentrated portfolio of large global drug manufacturers"
+    "description": "Concentrated portfolio of large global drug manufacturers",
+    "benchmark": false
   },
   {
     "ticker": "XPH",
@@ -869,7 +1022,80 @@
     "label": "Pharma Equal",
     "type": "pure_sector",
     "liquid": false,
-    "description": "Equal-weight U.S. drugmakers, giving smaller companies more influence"
+    "description": "Equal-weight U.S. drugmakers, giving smaller companies more influence",
+    "benchmark": false
+  },
+  {
+    "ticker": "TLT",
+    "category": "Index",
+    "label": "Long-Term Treasuries",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "U.S. Treasury bonds with maturities longer than 20 years",
+    "benchmark": true
+  },
+  {
+    "ticker": "DIA",
+    "category": "Index",
+    "label": "Dow 30",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Price-weighted Dow Jones Industrial Average (30 mega-caps)",
+    "benchmark": true
+  },
+  {
+    "ticker": "IWM",
+    "category": "Index",
+    "label": "Russell 2000",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Small-cap Russell 2000 index",
+    "benchmark": true
+  },
+  {
+    "ticker": "QQQ",
+    "category": "Index",
+    "label": "Nasdaq-100",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted Nasdaq-100 index",
+    "benchmark": true
+  },
+  {
+    "ticker": "QQQE",
+    "category": "Index",
+    "label": "Nasdaq-100 Equal Weight",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight Nasdaq-100 index",
+    "benchmark": true
+  },
+  {
+    "ticker": "RSP",
+    "category": "Index",
+    "label": "S&P 500 Equal Weight",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 — the breadth benchmark this whole section is measured against",
+    "benchmark": true
+  },
+  {
+    "ticker": "SPMO",
+    "category": "Index",
+    "label": "Momentum S&P 500",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "The 100 S&P 500 stocks with the strongest price momentum",
+    "benchmark": true
+  },
+  {
+    "ticker": "SPY",
+    "category": "Index",
+    "label": "S&P 500 SPDR",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 index",
+    "benchmark": true
   },
   {
     "ticker": "ITA",
@@ -877,7 +1103,8 @@
     "label": "Defense Cap-Weighted",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Market-cap-weighted portfolio dominated by major U.S. defense contractors"
+    "description": "Market-cap-weighted portfolio dominated by major U.S. defense contractors",
+    "benchmark": false
   },
   {
     "ticker": "JETS",
@@ -885,7 +1112,8 @@
     "label": "Airlines",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Global airline operators and related aviation companies"
+    "description": "Global airline operators and related aviation companies",
+    "benchmark": false
   },
   {
     "ticker": "PAVE",
@@ -893,7 +1121,8 @@
     "label": "Infrastructure US",
     "type": "beta_booster",
     "liquid": true,
-    "description": "U.S. construction, engineering, materials and industrial infrastructure"
+    "description": "U.S. construction, engineering, materials and industrial infrastructure",
+    "benchmark": false
   },
   {
     "ticker": "IYT",
@@ -901,15 +1130,8 @@
     "label": "Transportation Cap-Weighted",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Market-cap-weighted large U.S. transport companies"
-  },
-  {
-    "ticker": "XLI",
-    "category": "Industrials, Transportation & Infrastructure",
-    "label": "Industrials Sector",
-    "type": "pure_sector",
-    "liquid": true,
-    "description": "Market-cap-weighted S&P 500 industrial-sector companies"
+    "description": "Market-cap-weighted large U.S. transport companies",
+    "benchmark": false
   },
   {
     "ticker": "BOAT",
@@ -917,7 +1139,8 @@
     "label": "Shipping",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Global marine shipping operators"
+    "description": "Global marine shipping operators",
+    "benchmark": false
   },
   {
     "ticker": "BOTZ",
@@ -925,7 +1148,8 @@
     "label": "Robotics Industrial",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Large global industrial-robotics, automation and AI-hardware companies"
+    "description": "Large global industrial-robotics, automation and AI-hardware companies",
+    "benchmark": false
   },
   {
     "ticker": "CABZ",
@@ -933,7 +1157,8 @@
     "label": "Robotaxis",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected robotaxi, autonomous-driving and enabling-technology companies"
+    "description": "Actively selected robotaxi, autonomous-driving and enabling-technology companies",
+    "benchmark": false
   },
   {
     "ticker": "DRIV",
@@ -941,7 +1166,8 @@
     "label": "EV Broad",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Broad EV and autonomous-driving value chain"
+    "description": "Broad EV and autonomous-driving value chain",
+    "benchmark": false
   },
   {
     "ticker": "FDRV",
@@ -949,7 +1175,8 @@
     "label": "EV Suppliers",
     "type": "beta_booster",
     "liquid": false,
-    "description": "EV, autonomous-driving and supporting technology suppliers"
+    "description": "EV, autonomous-driving and supporting technology suppliers",
+    "benchmark": false
   },
   {
     "ticker": "HOMZ",
@@ -957,7 +1184,8 @@
     "label": "Housing Cycle",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Entire housing cycle: builders, REITs, materials and home services"
+    "description": "Entire housing cycle: builders, REITs, materials and home services",
+    "benchmark": false
   },
   {
     "ticker": "HUMN",
@@ -965,7 +1193,8 @@
     "label": "Humanoid Robotics",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected humanoid-robot makers and critical component suppliers"
+    "description": "Actively selected humanoid-robot makers and critical component suppliers",
+    "benchmark": false
   },
   {
     "ticker": "ITB",
@@ -973,7 +1202,8 @@
     "label": "Homebuilding",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Market-cap-weighted U.S. homebuilders and housing suppliers"
+    "description": "Market-cap-weighted U.S. homebuilders and housing suppliers",
+    "benchmark": false
   },
   {
     "ticker": "LIT",
@@ -981,7 +1211,8 @@
     "label": "Lithium",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Global lithium miners, processors and battery manufacturers"
+    "description": "Global lithium miners, processors and battery manufacturers",
+    "benchmark": false
   },
   {
     "ticker": "PRNT",
@@ -989,7 +1220,8 @@
     "label": "3D Printing",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Global 3D-printing hardware, software, scanning and materials companies"
+    "description": "Global 3D-printing hardware, software, scanning and materials companies",
+    "benchmark": false
   },
   {
     "ticker": "ROBO",
@@ -997,7 +1229,8 @@
     "label": "Robotics Diversified",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Diversified, relatively equal-weight global robotics and automation"
+    "description": "Diversified, relatively equal-weight global robotics and automation",
+    "benchmark": false
   },
   {
     "ticker": "SHLD",
@@ -1005,7 +1238,8 @@
     "label": "Defense Technology",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Global drones, cybersecurity, AI and advanced-defense technology"
+    "description": "Global drones, cybersecurity, AI and advanced-defense technology",
+    "benchmark": false
   },
   {
     "ticker": "SUPL",
@@ -1013,7 +1247,8 @@
     "label": "Logistics",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Global logistics, freight and supply-chain technology companies"
+    "description": "Global logistics, freight and supply-chain technology companies",
+    "benchmark": false
   },
   {
     "ticker": "XAR",
@@ -1021,7 +1256,8 @@
     "label": "Defense Equal",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Equal-weight aerospace and defense, including smaller contractors"
+    "description": "Equal-weight aerospace and defense, including smaller contractors",
+    "benchmark": false
   },
   {
     "ticker": "XHB",
@@ -1029,7 +1265,8 @@
     "label": "Homebuilders Equal",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Equal-weight homebuilders, building products and home retailers"
+    "description": "Equal-weight homebuilders, building products and home retailers",
+    "benchmark": false
   },
   {
     "ticker": "IGF",
@@ -1037,7 +1274,8 @@
     "label": "Infrastructure Global",
     "type": "pure_sector",
     "liquid": false,
-    "description": "Global owners and operators of utilities, transport and infrastructure"
+    "description": "Global owners and operators of utilities, transport and infrastructure",
+    "benchmark": false
   },
   {
     "ticker": "PHO",
@@ -1045,7 +1283,8 @@
     "label": "Water",
     "type": "pure_sector",
     "liquid": false,
-    "description": "U.S. water infrastructure, treatment and technology companies"
+    "description": "U.S. water infrastructure, treatment and technology companies",
+    "benchmark": false
   },
   {
     "ticker": "XTN",
@@ -1053,15 +1292,8 @@
     "label": "Transportation Equal",
     "type": "pure_sector",
     "liquid": false,
-    "description": "Equal-weight airlines, railroads, trucking and logistics"
-  },
-  {
-    "ticker": "TLT",
-    "category": "Quantitative Factors & Volatility",
-    "label": "Long-Term Treasuries",
-    "type": "beta_booster",
-    "liquid": true,
-    "description": "U.S. Treasury bonds with maturities longer than 20 years"
+    "description": "Equal-weight airlines, railroads, trucking and logistics",
+    "benchmark": false
   },
   {
     "ticker": "MTUM",
@@ -1069,15 +1301,8 @@
     "label": "Momentum Broad",
     "type": "pure_sector",
     "liquid": true,
-    "description": "U.S. large and mid-cap stocks with strong risk-adjusted price momentum"
-  },
-  {
-    "ticker": "SPMO",
-    "category": "Quantitative Factors & Volatility",
-    "label": "Momentum S&P 500",
-    "type": "pure_sector",
-    "liquid": true,
-    "description": "The 100 S&P 500 stocks with the strongest price momentum"
+    "description": "U.S. large and mid-cap stocks with strong risk-adjusted price momentum",
+    "benchmark": false
   },
   {
     "ticker": "SVIX",
@@ -1085,7 +1310,8 @@
     "label": "Volatility",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Targets the inverse daily performance of short-term VIX futures"
+    "description": "Targets the inverse daily performance of short-term VIX futures",
+    "benchmark": false
   },
   {
     "ticker": "DXYZ",
@@ -1093,7 +1319,8 @@
     "label": "Private Tech Growth",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Closed-end fund holding private high-growth technology companies"
+    "description": "Closed-end fund holding private high-growth technology companies",
+    "benchmark": false
   },
   {
     "ticker": "FFTY",
@@ -1101,7 +1328,8 @@
     "label": "Growth Stocks",
     "type": "beta_booster",
     "liquid": false,
-    "description": "The 50 highest-ranked stocks from the IBD growth methodology"
+    "description": "The 50 highest-ranked stocks from the IBD growth methodology",
+    "benchmark": false
   },
   {
     "ticker": "HLAL",
@@ -1109,7 +1337,8 @@
     "label": "Values-based",
     "type": "beta_booster",
     "liquid": false,
-    "description": "U.S. stocks screened for Sharia compliance"
+    "description": "U.S. stocks screened for Sharia compliance",
+    "benchmark": false
   },
   {
     "ticker": "LOHA",
@@ -1117,7 +1346,8 @@
     "label": "AI-resistant Assets",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Physical-asset-heavy U.S. companies considered resistant to AI obsolescence"
+    "description": "Physical-asset-heavy U.S. companies considered resistant to AI obsolescence",
+    "benchmark": false
   },
   {
     "ticker": "NANC",
@@ -1125,7 +1355,8 @@
     "label": "Political",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Stocks disclosed as purchases by Democratic lawmakers and spouses"
+    "description": "Stocks disclosed as purchases by Democratic lawmakers and spouses",
+    "benchmark": false
   },
   {
     "ticker": "SHE",
@@ -1133,7 +1364,8 @@
     "label": "Gender Diversity",
     "type": "beta_booster",
     "liquid": false,
-    "description": "U.S. companies with relatively strong female leadership"
+    "description": "U.S. companies with relatively strong female leadership",
+    "benchmark": false
   },
   {
     "ticker": "USCA",
@@ -1141,23 +1373,8 @@
     "label": "Climate",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Broad U.S. companies leading their sectors on climate policies"
-  },
-  {
-    "ticker": "XLRE",
-    "category": "Real Estate & Utilities",
-    "label": "Real Estate Sector",
-    "type": "pure_sector",
-    "liquid": true,
-    "description": "Market-cap-weighted S&P 500 real-estate-sector companies"
-  },
-  {
-    "ticker": "XLU",
-    "category": "Real Estate & Utilities",
-    "label": "Utilities Sector",
-    "type": "pure_sector",
-    "liquid": true,
-    "description": "Market-cap-weighted S&P 500 utilities-sector companies"
+    "description": "Broad U.S. companies leading their sectors on climate policies",
+    "benchmark": false
   },
   {
     "ticker": "FRI",
@@ -1165,7 +1382,8 @@
     "label": "Real Estate Cap-Weighted",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Market-cap-weighted U.S. REITs owning and operating property"
+    "description": "Market-cap-weighted U.S. REITs owning and operating property",
+    "benchmark": false
   },
   {
     "ticker": "SCHH",
@@ -1173,7 +1391,188 @@
     "label": "Real Estate Broad",
     "type": "pure_sector",
     "liquid": false,
-    "description": "Broad U.S. equity REITs, generally excluding mortgage REITs"
+    "description": "Broad U.S. equity REITs, generally excluding mortgage REITs",
+    "benchmark": false
+  },
+  {
+    "ticker": "XLC",
+    "category": "SPDR Sector",
+    "label": "Telecom Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 communication-services companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "XLE",
+    "category": "SPDR Sector",
+    "label": "Traditional Oil & Gas",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 energy-sector companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "XLF",
+    "category": "SPDR Sector",
+    "label": "Financials Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 financial-sector companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "XLI",
+    "category": "SPDR Sector",
+    "label": "Industrials Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 industrial-sector companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "XLK",
+    "category": "SPDR Sector",
+    "label": "Technology Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 technology-sector companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "XLP",
+    "category": "SPDR Sector",
+    "label": "Staples Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 consumer-staples companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "XLRE",
+    "category": "SPDR Sector",
+    "label": "Real Estate Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 real-estate-sector companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "XLU",
+    "category": "SPDR Sector",
+    "label": "Utilities Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 utilities-sector companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "XLV",
+    "category": "SPDR Sector",
+    "label": "Healthcare Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 healthcare-sector companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "XLY",
+    "category": "SPDR Sector",
+    "label": "Discretionary Sector",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 consumer-discretionary companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "XLB",
+    "category": "SPDR Sector",
+    "label": "Materials & Mining",
+    "type": "beta_booster",
+    "liquid": false,
+    "description": "Market-cap-weighted S&P 500 materials-sector companies",
+    "benchmark": true
+  },
+  {
+    "ticker": "IJH",
+    "category": "Segment",
+    "label": "MidCap 400",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "S&P MidCap 400 core index",
+    "benchmark": true
+  },
+  {
+    "ticker": "IJJ",
+    "category": "Segment",
+    "label": "MidCap 400 Value",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Value slice of the S&P MidCap 400",
+    "benchmark": true
+  },
+  {
+    "ticker": "IJK",
+    "category": "Segment",
+    "label": "MidCap 400 Growth",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Growth slice of the S&P MidCap 400",
+    "benchmark": true
+  },
+  {
+    "ticker": "IJR",
+    "category": "Segment",
+    "label": "Small-Cap 600",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "S&P SmallCap 600 core index",
+    "benchmark": true
+  },
+  {
+    "ticker": "IJS",
+    "category": "Segment",
+    "label": "Small-Cap 600 Value",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Value slice of the S&P SmallCap 600",
+    "benchmark": true
+  },
+  {
+    "ticker": "IJT",
+    "category": "Segment",
+    "label": "Small-Cap 600 Growth",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Growth slice of the S&P SmallCap 600",
+    "benchmark": true
+  },
+  {
+    "ticker": "IVE",
+    "category": "Segment",
+    "label": "Large-Cap 500 Value",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Value slice of the S&P 500",
+    "benchmark": true
+  },
+  {
+    "ticker": "IVV",
+    "category": "Segment",
+    "label": "S&P 500 iShares",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 index (iShares)",
+    "benchmark": true
+  },
+  {
+    "ticker": "IVW",
+    "category": "Segment",
+    "label": "Large-Cap 500 Growth",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Growth slice of the S&P 500",
+    "benchmark": true
   },
   {
     "ticker": "ARKX",
@@ -1181,7 +1580,8 @@
     "label": "Space Active",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected space companies plus enabling technologies"
+    "description": "Actively selected space companies plus enabling technologies",
+    "benchmark": false
   },
   {
     "ticker": "MARS",
@@ -1189,7 +1589,8 @@
     "label": "Space Infrastructure",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected launch, satellite and space-infrastructure companies"
+    "description": "Actively selected launch, satellite and space-infrastructure companies",
+    "benchmark": false
   },
   {
     "ticker": "NASA",
@@ -1197,7 +1598,8 @@
     "label": "Space Pre-IPO",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected public and limited pre-IPO space companies"
+    "description": "Actively selected public and limited pre-IPO space companies",
+    "benchmark": false
   },
   {
     "ticker": "UFO",
@@ -1205,7 +1607,8 @@
     "label": "Space Rules-Based",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Rules-based companies deriving substantial revenue directly from space"
+    "description": "Rules-based companies deriving substantial revenue directly from space",
+    "benchmark": false
   },
   {
     "ticker": "ARKK",
@@ -1213,7 +1616,8 @@
     "label": "Innovation",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Actively selected disruptive companies across multiple industries"
+    "description": "Actively selected disruptive companies across multiple industries",
+    "benchmark": false
   },
   {
     "ticker": "ARKW",
@@ -1221,7 +1625,8 @@
     "label": "Internet Active",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Actively selected cloud, digital media, blockchain and internet companies"
+    "description": "Actively selected cloud, digital media, blockchain and internet companies",
+    "benchmark": false
   },
   {
     "ticker": "BUG",
@@ -1229,7 +1634,8 @@
     "label": "Cybersecurity Pure-Play",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Pure-play global cybersecurity firms deriving most revenue from security"
+    "description": "Pure-play global cybersecurity firms deriving most revenue from security",
+    "benchmark": false
   },
   {
     "ticker": "CIBR",
@@ -1237,7 +1643,8 @@
     "label": "Cybersecurity Broad",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Cybersecurity software, networking and security-service companies"
+    "description": "Cybersecurity software, networking and security-service companies",
+    "benchmark": false
   },
   {
     "ticker": "CLOU",
@@ -1245,7 +1652,8 @@
     "label": "Cloud Revenue",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Global companies deriving meaningful revenue from cloud computing"
+    "description": "Global companies deriving meaningful revenue from cloud computing",
+    "benchmark": false
   },
   {
     "ticker": "HACK",
@@ -1253,7 +1661,8 @@
     "label": "Cybersecurity Hardware",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Broad cybersecurity hardware, software and service providers"
+    "description": "Broad cybersecurity hardware, software and service providers",
+    "benchmark": false
   },
   {
     "ticker": "MAGS",
@@ -1261,7 +1670,8 @@
     "label": "Mega-cap Technology",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Equal-weight exposure to only the Magnificent Seven"
+    "description": "Equal-weight exposure to only the Magnificent Seven",
+    "benchmark": false
   },
   {
     "ticker": "SKYY",
@@ -1269,7 +1679,8 @@
     "label": "Cloud Infrastructure",
     "type": "beta_booster",
     "liquid": true,
-    "description": "Established cloud infrastructure, platform and software companies"
+    "description": "Established cloud infrastructure, platform and software companies",
+    "benchmark": false
   },
   {
     "ticker": "FDN",
@@ -1277,7 +1688,8 @@
     "label": "Internet Large-Cap",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Approximately 40 large U.S. internet and digital-platform companies"
+    "description": "Approximately 40 large U.S. internet and digital-platform companies",
+    "benchmark": false
   },
   {
     "ticker": "SMH",
@@ -1285,7 +1697,8 @@
     "label": "Semiconductors Mega-Cap",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Concentrated in approximately 25 dominant global chip companies"
+    "description": "Concentrated in approximately 25 dominant global chip companies",
+    "benchmark": false
   },
   {
     "ticker": "SOXX",
@@ -1293,15 +1706,8 @@
     "label": "Semiconductors Broad",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Approximately 30 large U.S.-listed chipmakers and equipment suppliers"
-  },
-  {
-    "ticker": "XLK",
-    "category": "Technology & Digital Disruption",
-    "label": "Technology Sector",
-    "type": "pure_sector",
-    "liquid": true,
-    "description": "Market-cap-weighted S&P 500 technology-sector companies"
+    "description": "Approximately 30 large U.S.-listed chipmakers and equipment suppliers",
+    "benchmark": false
   },
   {
     "ticker": "AIQ",
@@ -1309,7 +1715,8 @@
     "label": "AI Broad",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Passive global AI, big-data, software and hardware exposure"
+    "description": "Passive global AI, big-data, software and hardware exposure",
+    "benchmark": false
   },
   {
     "ticker": "ARKF",
@@ -1317,7 +1724,8 @@
     "label": "Fintech",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected digital payments, banking and financial platforms"
+    "description": "Actively selected digital payments, banking and financial platforms",
+    "benchmark": false
   },
   {
     "ticker": "ARKQ",
@@ -1325,7 +1733,8 @@
     "label": "Robotics Active",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected robotics, autonomy, drones and industrial AI"
+    "description": "Actively selected robotics, autonomy, drones and industrial AI",
+    "benchmark": false
   },
   {
     "ticker": "BAI",
@@ -1333,7 +1742,8 @@
     "label": "AI Value Chain",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected companies across the AI value chain"
+    "description": "Actively selected companies across the AI value chain",
+    "benchmark": false
   },
   {
     "ticker": "BLOK",
@@ -1341,7 +1751,8 @@
     "label": "Blockchain",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected companies using or developing blockchain"
+    "description": "Actively selected companies using or developing blockchain",
+    "benchmark": false
   },
   {
     "ticker": "CHAT",
@@ -1349,7 +1760,8 @@
     "label": "Generative AI",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Actively selected generative-AI platforms, chips and software companies"
+    "description": "Actively selected generative-AI platforms, chips and software companies",
+    "benchmark": false
   },
   {
     "ticker": "DRAM",
@@ -1357,7 +1769,8 @@
     "label": "Memory",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Concentrated exposure to global DRAM, NAND and storage-memory companies"
+    "description": "Concentrated exposure to global DRAM, NAND and storage-memory companies",
+    "benchmark": false
   },
   {
     "ticker": "FOTO",
@@ -1365,7 +1778,8 @@
     "label": "Photonics Broad",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Semiconductor and optical-technology companies enabling photonics applications"
+    "description": "Semiconductor and optical-technology companies enabling photonics applications",
+    "benchmark": false
   },
   {
     "ticker": "IDGT",
@@ -1373,7 +1787,8 @@
     "label": "Digital Infrastructure",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Data-center and telecom-tower REITs plus communications equipment"
+    "description": "Data-center and telecom-tower REITs plus communications equipment",
+    "benchmark": false
   },
   {
     "ticker": "IGV",
@@ -1381,7 +1796,8 @@
     "label": "Software Cap-Weighted",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Market-cap-weighted large software companies"
+    "description": "Market-cap-weighted large software companies",
+    "benchmark": false
   },
   {
     "ticker": "LYTE",
@@ -1389,7 +1805,8 @@
     "label": "Photonics",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Optical interconnect, laser and photonic-chip companies serving AI data centers"
+    "description": "Optical interconnect, laser and photonic-chip companies serving AI data centers",
+    "benchmark": false
   },
   {
     "ticker": "NCLD",
@@ -1397,7 +1814,8 @@
     "label": "Neocloud",
     "type": "beta_booster",
     "liquid": false,
-    "description": "GPU-as-a-Service and AI data-center operators providing compute capacity"
+    "description": "GPU-as-a-Service and AI data-center operators providing compute capacity",
+    "benchmark": false
   },
   {
     "ticker": "QTUM",
@@ -1405,7 +1823,8 @@
     "label": "Quantum Computing",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Equal-weight quantum, machine-learning and enabling-chip companies"
+    "description": "Equal-weight quantum, machine-learning and enabling-chip companies",
+    "benchmark": false
   },
   {
     "ticker": "RACK",
@@ -1413,7 +1832,8 @@
     "label": "Data Centers",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Chips, power, cooling and equipment supplying data centers"
+    "description": "Chips, power, cooling and equipment supplying data centers",
+    "benchmark": false
   },
   {
     "ticker": "VCX",
@@ -1421,7 +1841,8 @@
     "label": "Private Tech Venture",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Closed-end venture fund holding private AI and technology companies"
+    "description": "Closed-end venture fund holding private AI and technology companies",
+    "benchmark": false
   },
   {
     "ticker": "WCLD",
@@ -1429,7 +1850,8 @@
     "label": "Cloud Growth",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Equal-weight emerging cloud-software companies with higher growth exposure"
+    "description": "Equal-weight emerging cloud-software companies with higher growth exposure",
+    "benchmark": false
   },
   {
     "ticker": "XSD",
@@ -1437,7 +1859,8 @@
     "label": "Semiconductors Equal",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Equal-weight semiconductors with greater small-company exposure"
+    "description": "Equal-weight semiconductors with greater small-company exposure",
+    "benchmark": false
   },
   {
     "ticker": "XSW",
@@ -1445,15 +1868,8 @@
     "label": "Software Equal",
     "type": "pure_sector",
     "liquid": false,
-    "description": "Equal-weight U.S. software with greater small-company exposure"
-  },
-  {
-    "ticker": "XLC",
-    "category": "Telecom & Communication",
-    "label": "Telecom Sector",
-    "type": "pure_sector",
-    "liquid": true,
-    "description": "Market-cap-weighted S&P 500 communication-services companies"
+    "description": "Equal-weight U.S. software with greater small-company exposure",
+    "benchmark": false
   },
   {
     "ticker": "XTL",
@@ -1461,7 +1877,8 @@
     "label": "Telecom Equal",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Equal-weight telecom carriers, equipment makers and satellite companies"
+    "description": "Equal-weight telecom carriers, equipment makers and satellite companies",
+    "benchmark": false
   },
   {
     "ticker": "IYZ",
@@ -1469,6 +1886,7 @@
     "label": "Telecom Cap-Weighted",
     "type": "pure_sector",
     "liquid": false,
-    "description": "Market-cap-weighted U.S. telecom companies"
+    "description": "Market-cap-weighted U.S. telecom companies",
+    "benchmark": false
   }
 ]
