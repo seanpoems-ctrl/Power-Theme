@@ -530,7 +530,7 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, s
     if (pt) {
       return {
         themeName: name,
-        stocks: (pt.leaders || []).map(l => ({ ...l, float_shares: null, short_pct: null })),
+        stocks: (pt.leaders || []).map(l => ({ ...l, float_shares: null, short_pct: null, mkt_cap_b: l.mkt_cap_b ?? (l.mkt_cap != null ? l.mkt_cap / 1e9 : null) })),
         themeRS: pt.theme_rs,
         analysis: null,
       };
@@ -8745,12 +8745,25 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
   const [sortCol, setSortCol] = useState("perf_1d");
   const [sortDir, setSortDir] = useState("desc");
 
-  // Enrich holdings with TradingView rolling perf — stocks from screenerMap, ETFs from etfRsMap
+  // Enrich holdings with TradingView rolling perf — stocks from screenerMap, ETFs from etfRsMap.
+  // Also backfill adr_pct/rs/mkt_cap when the scraper's own per-holding fetch came back null
+  // (screenerMap's 500-name universe and etfRsMap don't always overlap with etf_holdings, but
+  // when they do it's real data that shouldn't be wasted).
   const enrichedHoldings = React.useMemo(() => {
     return holdings.map(h => {
       const sc = screenerMap[h.ticker] || etfRsMap[h.ticker];
       if (!sc) return h;
-      return { ...h, perf_1d: sc.perf_1d ?? h.perf_1d, perf_1w: sc.perf_1w ?? h.perf_1w, perf_1m: sc.perf_1m ?? h.perf_1m, perf_3m: sc.perf_3m ?? h.perf_3m, perf_6m: sc.perf_6m ?? h.perf_6m };
+      return {
+        ...h,
+        perf_1d: sc.perf_1d ?? h.perf_1d, perf_1w: sc.perf_1w ?? h.perf_1w, perf_1m: sc.perf_1m ?? h.perf_1m,
+        perf_3m: sc.perf_3m ?? h.perf_3m, perf_6m: sc.perf_6m ?? h.perf_6m,
+        adr_pct: h.adr_pct ?? sc.adr_pct,
+        rs: h.rs ?? sc.rs_score ?? sc.rs_52w,
+        mkt_cap: h.mkt_cap ?? (
+          (sc.mkt_cap_b ?? sc.market_cap_b) != null ? (sc.mkt_cap_b ?? sc.market_cap_b) * 1e9 : null
+        ),
+        dollar_volume: h.dollar_volume ?? sc.avg_dollar_volume,
+      };
     });
   }, [holdings, screenerMap, etfRsMap]);
 
@@ -9790,8 +9803,9 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
               {sorted.map((s, i) => {
                 const dvol = s.avg_dollar_volume ?? s.dollar_volume;
                 const adrXVol = (s.adr_pct != null && dvol != null) ? (s.adr_pct / 100) * dvol : null;
-                const mktCap = s.mkt_cap_b != null
-                  ? `$${s.mkt_cap_b >= 1000 ? (s.mkt_cap_b / 1000).toFixed(1) + "T" : s.mkt_cap_b.toFixed(2) + "B"}`
+                const mc = s.mkt_cap_b ?? s.market_cap_b;
+                const mktCap = mc != null
+                  ? `$${mc >= 1000 ? (mc / 1000).toFixed(1) + "T" : mc.toFixed(2) + "B"}`
                   : "—";
                 const p1d = s.perf_1d ?? s.change_pct;
                 return (
@@ -10041,7 +10055,7 @@ const DailyWatchlistTab = ({ data }) => {
           name: r.name,
           stocks: (r._tickers ?? []).map(tk => {
             const sc = screenerMap[tk] || {};
-            return { ticker: tk, ...sc, rs_52w: sc.rs_52w ?? sc.rs_score };
+            return { ticker: tk, ...sc, rs_52w: sc.rs_52w ?? sc.rs_score, mkt_cap_b: sc.mkt_cap_b ?? sc.market_cap_b };
           }),
         }],
       }));
@@ -10071,7 +10085,7 @@ const DailyWatchlistTab = ({ data }) => {
             name: r.name,
             stocks: (r._tickers ?? []).map(tk => {
               const sc = screenerMap[tk] || {};
-              return { ticker: tk, ...sc, rs_52w: sc.rs_52w ?? sc.rs_score };
+              return { ticker: tk, ...sc, rs_52w: sc.rs_52w ?? sc.rs_score, mkt_cap_b: sc.mkt_cap_b ?? sc.market_cap_b };
             }),
           }],
         };
@@ -10194,12 +10208,32 @@ const DailyWatchlistTab = ({ data }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {topGappers.map(g => {
             const topHeadline = (g.headlines ?? []).find(h => h && h.length > 10);
+            // prevClose: Finviz's own "Prev Close" field, then a last-resort derivation
+            // from scan-time price ÷ (1 + gap%) — see Institutional Gappers for why.
+            const prevClose = g.prev_close ?? (g.gap_pct != null ? g.price / (1 + g.gap_pct / 100) : null);
             return (
               <div key={g.ticker} className="px-3 py-2.5 rounded-lg bg-zinc-800/60 border border-zinc-700/40 flex flex-col gap-1.5">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <span className="font-mono font-bold text-cyan-400 text-sm">{g.ticker}</span>
-                    <span className="text-emerald-400 font-mono font-bold text-sm">+{g.gap_pct != null ? g.gap_pct.toFixed(1) : "—"}%</span>
+                  <div className="flex flex-col gap-0.5">
+                    <div className="flex items-center gap-2">
+                      <span className="font-mono font-bold text-cyan-400 text-sm">{g.ticker}</span>
+                      <span className="text-emerald-400 font-mono font-bold text-sm">+{g.gap_pct != null ? g.gap_pct.toFixed(1) : "—"}%</span>
+                    </div>
+                    {prevClose != null && (
+                      <div className="text-[10px] font-mono text-zinc-500 whitespace-nowrap">
+                        Prev Close ${prevClose.toFixed(2)}
+                      </div>
+                    )}
+                    {g.price != null && (
+                      <div className="text-[10px] font-mono text-zinc-500 whitespace-nowrap">
+                        Close ${g.price.toFixed(2)}
+                        {g.gap_pct != null && (
+                          <span className={`ml-0.5 font-semibold ${g.gap_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                            {g.gap_pct >= 0 ? "+" : ""}{g.gap_pct.toFixed(1)}%
+                          </span>
+                        )}
+                      </div>
+                    )}
                   </div>
                   <div className="flex items-center gap-1.5">
                     {g.category && (
