@@ -305,22 +305,39 @@ def build_etf_rs() -> dict:
                     else:
                         rs_histogram.append(1.0)
 
-        # RS Thrust Rate — 1-week recency-weighted RS line vs. its own 1-month
-        # baseline (Jeff Sun's "strongest groups by 1-week weighted RS based on
-        # the latest close, sorted against their 1-month RS%"). Weighted average
-        # of the last 5 sessions of the RS line (today weighted heaviest, 5×
-        # yesterday's 4× ... 4 sessions ago 1×) divided by the mean of the full
-        # 25-day RS line, ×100. >100% = RS accelerating this week relative to its
-        # own trailing month; <100% = decelerating. Unlike a percentile rank this
-        # is unbounded above 100%.
+        # RS Thrust Rate — per Jeff Sun directly: "a calibrated blend of 1-week
+        # and 1-month RS, currently leaning 60/40 in favor of recency, plus a
+        # small 0.1 adjustment factor based on the change in 1-week RS versus
+        # its reading three trading days ago — so readings run 110% to -10%,
+        # exceeding the 0-100% threshold. This prevents a group from scoring a
+        # perfect RS reading simply because of a short-lived burst while
+        # underlying constituents are already losing momentum."
+        #
+        # "1-week RS" and "1-month RS" are both min-max range-position reads
+        # (same convention as 1-Mth RS%/rs_pct below) — 1-week uses only the
+        # trailing 5 sessions of the RS line as its window, 1-month uses the
+        # full 25-day window. _week_rs_asof(offset) reconstructs that 1-week
+        # read as of `offset` trading days ago by truncating the RS line first.
+        def _range_pos(window: list[float]) -> float | None:
+            if len(window) < 2:
+                return None
+            mn, mx = min(window), max(window)
+            rng = mx - mn
+            return 50.0 if rng == 0 else (window[-1] - mn) / rng * 100
+
+        def _week_rs_asof(offset: int) -> float | None:
+            end = len(rs_histogram) - offset
+            if end < 2:
+                return None
+            return _range_pos(rs_histogram[max(0, end - 5):end])
+
         rs_thrust_1w: float | None = None
-        if len(rs_histogram) >= 5:
-            last5 = rs_histogram[-5:]
-            wts = [1, 2, 3, 4, 5]
-            weighted_1w = sum(v * w for v, w in zip(last5, wts)) / sum(wts)
-            baseline_1m = sum(rs_histogram) / len(rs_histogram)
-            if baseline_1m > 0:
-                rs_thrust_1w = round(weighted_1w / baseline_1m * 100, 1)
+        rs_1wk_now = _week_rs_asof(0)
+        rs_1mo_now = _range_pos(rs_histogram) if rs_histogram else None
+        if rs_1wk_now is not None and rs_1mo_now is not None:
+            rs_1wk_3d_ago = _week_rs_asof(3)
+            delta = (rs_1wk_now - rs_1wk_3d_ago) if rs_1wk_3d_ago is not None else 0.0
+            rs_thrust_1w = round(0.6 * rs_1wk_now + 0.4 * rs_1mo_now + 0.1 * delta, 1)
 
         # IBD RS quarters
         D189 = D63 * 3

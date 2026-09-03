@@ -9500,32 +9500,44 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
     return rng === 0 ? 50 : Math.round(((last - mn) / rng) * 100);
   };
 
+  // No RS-based sorting anywhere in this table — every section uses a fixed
+  // ticker arrangement (same principle as Segment's small→large, value→core→
+  // growth progression) so the eye tracks the same position group to group.
+  const INDEX_ORDER  = ["RSP", "SPY", "QQQ", "QQQE", "IWM", "DIA", "SPMO", "TLT"];
+  const SEGMENT_ORDER = ["IJS", "IJR", "IJT", "IJJ", "IJH", "IJK", "IVE", "IVV", "IVW"];
+  const EW_SECTOR_ORDER = ["RSPH", "RSPG", "RSPS", "RSPC", "SPY", "RSPM", "RSPF", "RSPT", "RSPR", "RSPU", "RSPD", "RSPN"];
+  const SPDR_SECTOR_ORDER = ["XLE", "XLP", "XLV", "XLC", "SPY", "XLF", "XLB", "XLK", "XLU", "XLRE", "XLY", "XLI"];
+
   const sections = React.useMemo(() => {
-    const build = (cat, includeSpy) => {
-      let rows = etfs.filter(e => e.category === cat);
-      if (includeSpy && spy && !rows.some(r => r.ticker === "SPY")) rows = [...rows, spy];
-      return [...rows].sort((a, b) => (b.rs_thrust_1w ?? -Infinity) - (a.rs_thrust_1w ?? -Infinity));
+    const build = (cat, order) => {
+      const byTicker = Object.fromEntries(etfs.filter(e => e.category === cat).map(e => [e.ticker, e]));
+      if (spy) byTicker.SPY = spy; // SPY reference row isn't its own category member
+      return order.map(t => byTicker[t]).filter(Boolean);
     };
     return [
-      { name: "Index",       rows: build("Index", false) },
-      { name: "Segment",     rows: build("Segment", false) },
-      { name: "EW Sector",   rows: build("EW Sector", true) },
-      { name: "SPDR Sector", rows: build("SPDR Sector", true) },
+      { name: "Index",       rows: build("Index", INDEX_ORDER) },
+      { name: "Segment",     rows: build("Segment", SEGMENT_ORDER) },
+      { name: "EW Sector",   rows: build("EW Sector", EW_SECTOR_ORDER) },
+      { name: "SPDR Sector", rows: build("SPDR Sector", SPDR_SECTOR_ORDER) },
     ].filter(s => s.rows.length > 0);
-  }, [etfs, spy]);
+  }, [etfs, spy]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!etfRsData || sections.length === 0) return null;
 
-  // RS Thrust % is centered at 100 (unbounded, ratio to the ETF's own 1-month
-  // baseline) — green above 100 (accelerating), rose below (decelerating).
-  const thrustStyle = (v) => {
-    if (v == null) return {};
-    const d = v - 100;
-    if (d >= 0) return { backgroundColor: `rgba(16,185,129,${(0.12 + Math.min(d / 15, 1) * 0.5).toFixed(2)})` };
-    return { backgroundColor: `rgba(244,63,94,${(0.08 + Math.min(-d / 15, 1) * 0.4).toFixed(2)})` };
-  };
-  // 1-Mth RS % is a 0-100 range-position — pale to dark green as it climbs.
+  // RS Thrust % and 1-Mth RS % are both 0-100 range-position metrics — pale to
+  // dark green as they climb toward 100.
   const rsPctStyle = (v) => v == null ? {} : { backgroundColor: `rgba(16,185,129,${(0.06 + (v / 100) * 0.5).toFixed(2)})` };
+  // Plain +/- performance columns — green above 0, rose below, saturating at ±scale.
+  const perfStyle = (v, scale = 3) => {
+    if (v == null) return {};
+    if (v >= 0) return { backgroundColor: `rgba(16,185,129,${(0.08 + Math.min(v / scale, 1) * 0.5).toFixed(2)})` };
+    return { backgroundColor: `rgba(244,63,94,${(0.06 + Math.min(-v / scale, 1) * 0.45).toFixed(2)})` };
+  };
+  // % Off 52W High — always <= 0; deeper red the further below the high.
+  const offHighStyle = (v) => {
+    if (v == null) return {};
+    return { backgroundColor: `rgba(244,63,94,${(0.05 + Math.min(-v / 30, 1) * 0.45).toFixed(2)})` };
+  };
 
   return (
     <div className="space-y-4">
@@ -9542,7 +9554,8 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
                 <th className="px-2 py-2 text-left font-semibold border-r border-zinc-800">1-Mth RS</th>
                 <th className="px-2 py-2 text-right font-semibold border-r border-zinc-800">% Intraday</th>
                 <th className="px-2 py-2 text-right font-semibold border-r border-zinc-800">% 1D</th>
-                <th className="px-2 py-2 text-right font-semibold">% 1-Mth</th>
+                <th className="px-2 py-2 text-right font-semibold border-r border-zinc-800">% 1-Mth</th>
+                <th className="px-2 py-2 text-right font-semibold">% Off 52W H</th>
               </tr>
             </thead>
             <tbody>
@@ -9563,7 +9576,7 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
                     <td className={`px-2 py-1 text-[11px] border-r border-zinc-800 max-w-[180px] truncate ${isSpyRef ? "text-emerald-400 font-semibold" : "text-zinc-300"}`}>
                       {e.label ?? e.theme}
                     </td>
-                    <td className="px-2 py-1 text-right font-mono border-r border-zinc-800" style={isAnchor ? {} : thrustStyle(e.rs_thrust_1w)}>
+                    <td className="px-2 py-1 text-right font-mono border-r border-zinc-800" style={isAnchor ? {} : rsPctStyle(e.rs_thrust_1w)}>
                       {isAnchor
                         ? <span className="text-zinc-500 italic text-[10px]">benchmark</span>
                         : (e.rs_thrust_1w != null ? `${e.rs_thrust_1w.toFixed(1)}%` : "—")}
@@ -9573,9 +9586,12 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
                     </td>
                     <td className="px-2 py-0.5 border-r border-zinc-800"><EtfSparkline data={e.sparkline ?? []} /></td>
                     <td className="px-2 py-0.5 border-r border-zinc-800"><EtfRsHistogram data={e.rs_histogram ?? []} /></td>
-                    <td className="px-2 py-1 text-right font-mono border-r border-zinc-800">{fmtP(e.perf_intraday)}</td>
-                    <td className="px-2 py-1 text-right font-mono border-r border-zinc-800">{fmtP(e.perf_1d)}</td>
-                    <td className="px-2 py-1 text-right font-mono">{fmtP(e.perf_1m)}</td>
+                    <td className="px-2 py-1 text-right font-mono border-r border-zinc-800" style={perfStyle(e.perf_intraday)}>{fmtP(e.perf_intraday)}</td>
+                    <td className="px-2 py-1 text-right font-mono border-r border-zinc-800" style={perfStyle(e.perf_1d)}>{fmtP(e.perf_1d)}</td>
+                    <td className="px-2 py-1 text-right font-mono border-r border-zinc-800" style={perfStyle(e.perf_1m, 10)}>{fmtP(e.perf_1m)}</td>
+                    <td className="px-2 py-1 text-right font-mono" style={offHighStyle(e.pct_off_52wh)}>
+                      {e.pct_off_52wh != null ? `${e.pct_off_52wh > 0 ? "+" : ""}${e.pct_off_52wh.toFixed(0)}%` : "—"}
+                    </td>
                   </tr>
                 );
               })}
