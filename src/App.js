@@ -9718,7 +9718,7 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
     <>
     <div>
       <div className="flex items-baseline gap-2 mb-3">
-        <h3 className="text-sm font-semibold text-zinc-100">ETF Relative Strength</h3>
+        <h3 className="text-sm font-semibold text-zinc-100">Industry Sector Relative Strength</h3>
         <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{sorted.length}</span>
         <span className="text-xs text-zinc-600">IBD-style RS · click any header to sort</span>
         {etfRsData.generated_at && (
@@ -9821,11 +9821,15 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
                 <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_qtr)}</td>
                 <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_hy)}</td>
                 <td className="px-2 py-1 text-right border-r border-zinc-800">{rsCell(e.rs_yr)}</td>
-                {/* % Off 52W High — pink bar proportional to distance from high */}
-                <td className="px-2 py-1 font-mono min-w-[80px]">
-                  <div className="flex items-center gap-1.5">
-                    {/* Pink bar — wider = further from 52W high */}
-                    <div className="flex-1 h-3 flex items-center">
+                {/* % Off 52W High — pink bar (fixed width) proportional to distance from high */}
+                <td className="px-2 py-1 font-mono">
+                  <div className="flex items-center justify-end gap-1.5">
+                    {/* Value text */}
+                    <span className={`text-right shrink-0 ${e.pct_off_52wh == null ? "text-zinc-600" : e.pct_off_52wh >= -1 ? "text-zinc-400" : "text-rose-400"}`}>
+                      {e.pct_off_52wh != null ? `${e.pct_off_52wh > 0 ? "+" : ""}${e.pct_off_52wh.toFixed(0)}%` : "—"}
+                    </span>
+                    {/* Pink bar — wider = further from 52W high, fixed-width track so it can't crowd the text out */}
+                    <div className="w-10 h-3 flex items-center shrink-0">
                       {e.pct_off_52wh != null && e.pct_off_52wh < 0 && (
                         <div
                           className="h-full rounded-sm bg-rose-400/70"
@@ -9833,10 +9837,6 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
                         />
                       )}
                     </div>
-                    {/* Value text */}
-                    <span className={`text-right shrink-0 ${e.pct_off_52wh == null ? "text-zinc-600" : e.pct_off_52wh >= -1 ? "text-zinc-400" : "text-rose-400"}`}>
-                      {e.pct_off_52wh != null ? `${e.pct_off_52wh > 0 ? "+" : ""}${e.pct_off_52wh.toFixed(0)}%` : "—"}
-                    </span>
                   </div>
                 </td>
               </tr>
