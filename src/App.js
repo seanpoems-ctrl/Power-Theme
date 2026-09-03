@@ -6334,22 +6334,19 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
   // (v7 bulk quote requires auth cookies; v8 chart meta works without them)
   const [livePrices, setLivePrices] = useState({});
   useEffect(() => {
-    if (!gapperData?.gappers?.length) return;
+    if (!gapperData?.gappers?.length || !FINNHUB_KEY) return;
     const tickers = gapperData.gappers.map(g => g.ticker);
     const fetchLive = async () => {
       const results = await Promise.all(
         tickers.map(async (sym) => {
           try {
-            const url = `https://query1.finance.yahoo.com/v8/finance/chart/${sym}?range=1d&interval=1m`;
-            const r = await fetch(`https://corsproxy.io/?${encodeURIComponent(url)}`);
+            const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${sym}&token=${FINNHUB_KEY}`);
             if (!r.ok) return null;
-            const json = await r.json();
-            const meta = json?.chart?.result?.[0]?.meta;
-            if (!meta) return null;
-            const price = meta.preMarketPrice ?? meta.regularMarketPrice;
-            if (price == null) return null;
-            const prevClose = meta.previousClose ?? meta.regularMarketPreviousClose ?? meta.chartPreviousClose;
-            const chgPct = prevClose ? ((price - prevClose) / prevClose * 100) : 0;
+            const q = await r.json();
+            const price = q?.c;
+            const prevClose = q?.pc;
+            if (price == null || !prevClose) return null;
+            const chgPct = (price - prevClose) / prevClose * 100;
             return [sym, { price, change_pct: chgPct, prevClose }];
           } catch { return null; }
         })
