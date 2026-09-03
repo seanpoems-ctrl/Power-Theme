@@ -1954,6 +1954,23 @@ def build_data() -> dict:
         if theme_subthemes:
             heatmap_themes.append({"name": theme_name, "subthemes": theme_subthemes})
 
+    # ── Step 3c: Full detail for hardcoded themes not already in top 5 ──
+    # Hardcoded themes (Neocloud, Quantum Computing) aren't Finviz map themes, so
+    # Step 3b never picks them up. Without this, whenever they're NOT in the top 5
+    # they only carry the theme_rankings summary stats (no per-stock company name,
+    # market cap, sector, ADR% etc.) — the frontend then has to backfill from the
+    # 500-name screener universe, which misses smaller/newer tickers entirely.
+    hardcoded_extra = [name for name in HARDCODED_THEMES if name not in output_theme_names]
+    if hardcoded_extra:
+        logger.info(f"\nStep 3c: Fetching full detail for {len(hardcoded_extra)} hardcoded theme(s) not in top 5...")
+        for theme_name in hardcoded_extra:
+            tickers = HARDCODED_THEMES[theme_name]
+            picks = [{"ticker": t} for t in tickers]
+            sub_stocks = _fetch_details(picks, all_detail_cache)
+            if sub_stocks:
+                heatmap_themes.append({"name": theme_name, "subthemes": [{"name": theme_name, "stocks": sub_stocks}]})
+                logger.info(f"  {theme_name}: {len(sub_stocks)}/{len(tickers)} tickers enriched")
+
     # ── Step 4: Mark pure_play (appears in only one subtheme across all themes) ──
     ticker_count: dict[str, int] = {}
     for th in output_themes:
