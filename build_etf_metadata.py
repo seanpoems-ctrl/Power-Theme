@@ -36,9 +36,12 @@ MASTER_PATH = ROOT / "etf_master.json"
 
 
 def load_master() -> dict:
-    """ticker -> (category, label, type, liquid, description) from etf_master.json."""
+    """ticker -> (category, label, type, liquid, description, benchmark) from etf_master.json."""
     raw = json.loads(MASTER_PATH.read_text(encoding="utf-8"))
-    return {t: (m["category"], m["label"], m["type"], m["liquid"], m.get("description", "")) for t, m in raw.items()}
+    return {
+        t: (m["category"], m["label"], m["type"], m["liquid"], m.get("description", ""), m.get("benchmark", False))
+        for t, m in raw.items()
+    }
 
 
 # Curated leaderboard aliases — extra theme-name → ticker keys for App.js so that
@@ -88,7 +91,7 @@ def _validate(etf_meta: dict) -> None:
     if bad_type:
         raise SystemExit(f"❌ Bad type values: {bad_type}")
     cats = defaultdict(list)
-    for t, (cat, _lbl, typ, _liq, _desc) in etf_meta.items():
+    for t, (cat, _lbl, typ, _liq, _desc, _bm) in etf_meta.items():
         cats[cat].append(typ)
     for cat, types in cats.items():
         if cat != "Space Exploration" and "pure_sector" not in types:
@@ -99,10 +102,10 @@ def main() -> None:
     etf_meta = load_master()
     _validate(etf_meta)
 
-    # 1) public/etf_metadata.json — ticker → category/label/type/liquid/description
+    # 1) public/etf_metadata.json — ticker → category/label/type/liquid/description/benchmark
     metadata = [
-        {"ticker": t, "category": cat, "label": lbl, "type": typ, "liquid": liq, "description": desc}
-        for t, (cat, lbl, typ, liq, desc) in etf_meta.items()
+        {"ticker": t, "category": cat, "label": lbl, "type": typ, "liquid": liq, "description": desc, "benchmark": bm}
+        for t, (cat, lbl, typ, liq, desc, bm) in etf_meta.items()
     ]
     metadata.sort(key=lambda x: (x["category"], not x["liquid"], x["type"], x["ticker"]))
     (ROOT / "public" / "etf_metadata.json").write_text(
@@ -110,7 +113,7 @@ def main() -> None:
     )
 
     # 2) public/etf_map.json — label → ticker (scraper.py + etf_rs_builder.py)
-    label_map = {lbl: t for t, (_cat, lbl, _typ, _liq, _desc) in etf_meta.items()}
+    label_map = {lbl: t for t, (_cat, lbl, _typ, _liq, _desc, _bm) in etf_meta.items()}
     (ROOT / "public" / "etf_map.json").write_text(
         json.dumps(label_map, ensure_ascii=False, indent=2), encoding="utf-8"
     )

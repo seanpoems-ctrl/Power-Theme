@@ -176,6 +176,10 @@ CATEGORY_ANCHORS: dict[str, str] = {
     "Crypto & Digital Assets":                     "GBTC",
     "Quantitative Factors & Volatility":           "SPMO",
     "Space Exploration":                           None,    # no anchor
+    "Index":                                       "RSP",   # equal-weight S&P 500 breadth benchmark
+    "Segment":                                     "RSP",
+    "EW Sector":                                   "RSP",
+    "SPDR Sector":                                 "RSP",
 }
 
 def _safe_pct(series: pd.Series, periods: int) -> float | None:
@@ -275,24 +279,48 @@ def build_etf_rs() -> dict:
         rng = spark_max - spark_min or 1
         sparkline = [round((v - spark_min) / rng * 100, 1) for v in spark_raw]
 
-        # 25-day cumulative RS histogram vs SPY
-        # Formula: cumRS[i] = (ETF[i]/ETF[0]) / (SPY[i]/SPY[0])
-        # Always positive → all bars green; rising = outperforming SPY over time
+        # 25-day cumulative RS histogram vs a benchmark.
+        # Formula: cumRS[i] = (ETF[i]/ETF[0]) / (Bench[i]/Bench[0])
+        # Always positive → all bars green; rising = outperforming the benchmark.
+        # The Index/Segment/EW Sector/SPDR Sector tables (etf_master.json
+        # "benchmark": true) are measured against RSP — the equal-weight S&P
+        # 500 — a market-breadth reference (per Jeff Sun's methodology: these
+        # broad indices/sectors are compared to "the average stock", not SPY
+        # itself). Every other ETF keeps the usual SPY comparison.
+        is_benchmark_group = bool(ETF_METADATA.get(tkr, {}).get("benchmark"))
+        rs_base_ticker = "RSP" if is_benchmark_group else "SPY"
         rs_histogram: list[float] = []
-        if "SPY" in closes.columns:
-            spy_s   = closes["SPY"].dropna()
-            common  = s.index.intersection(spy_s.index)
+        if rs_base_ticker in closes.columns:
+            base_s  = closes[rs_base_ticker].dropna()
+            common  = s.index.intersection(base_s.index)
             etf_w   = s.loc[common].tail(D25 + 1)   # +1 for base day
-            spy_w   = spy_s.loc[common].tail(D25 + 1)
-            if len(etf_w) >= 2 and len(spy_w) >= 2:
-                etf_base = float(etf_w.iloc[0])
-                spy_base = float(spy_w.iloc[0])
-                for ep, sp in zip(etf_w.iloc[1:].tolist(), spy_w.iloc[1:].tolist()):
-                    if etf_base > 0 and spy_base > 0 and sp > 0:
-                        cum_rs = (ep / etf_base) / (sp / spy_base)
+            base_w  = base_s.loc[common].tail(D25 + 1)
+            if len(etf_w) >= 2 and len(base_w) >= 2:
+                etf_base  = float(etf_w.iloc[0])
+                bench_base = float(base_w.iloc[0])
+                for ep, bp in zip(etf_w.iloc[1:].tolist(), base_w.iloc[1:].tolist()):
+                    if etf_base > 0 and bench_base > 0 and bp > 0:
+                        cum_rs = (ep / etf_base) / (bp / bench_base)
                         rs_histogram.append(round(cum_rs, 4))
                     else:
                         rs_histogram.append(1.0)
+
+        # RS Thrust Rate — 1-week recency-weighted RS line vs. its own 1-month
+        # baseline (Jeff Sun's "strongest groups by 1-week weighted RS based on
+        # the latest close, sorted against their 1-month RS%"). Weighted average
+        # of the last 5 sessions of the RS line (today weighted heaviest, 5×
+        # yesterday's 4× ... 4 sessions ago 1×) divided by the mean of the full
+        # 25-day RS line, ×100. >100% = RS accelerating this week relative to its
+        # own trailing month; <100% = decelerating. Unlike a percentile rank this
+        # is unbounded above 100%.
+        rs_thrust_1w: float | None = None
+        if len(rs_histogram) >= 5:
+            last5 = rs_histogram[-5:]
+            wts = [1, 2, 3, 4, 5]
+            weighted_1w = sum(v * w for v, w in zip(last5, wts)) / sum(wts)
+            baseline_1m = sum(rs_histogram) / len(rs_histogram)
+            if baseline_1m > 0:
+                rs_thrust_1w = round(weighted_1w / baseline_1m * 100, 1)
 
         # IBD RS quarters
         D189 = D63 * 3
@@ -310,6 +338,7 @@ def build_etf_rs() -> dict:
             "label":          meta.get("label"),
             "etf_type":       meta.get("type"),        # "pure_sector" | "beta_booster"
             "liquid":         meta.get("liquid"),      # True = Liquid Basket, False = Illiquid Vector
+            "benchmark":      bool(meta.get("benchmark")),  # Index/Segment/EW Sector/SPDR Sector table
             "perf_intraday":  round(p1d,  2) if p1d  is not None else None,
             "perf_1d":        round(p1d,  2) if p1d  is not None else None,
             "perf_1w":        round(p1w,  2) if p1w  is not None else None,
@@ -320,6 +349,7 @@ def build_etf_rs() -> dict:
             "pct_off_52wh":   pct_off_52wh,
             "sparkline":      sparkline,
             "rs_histogram":   rs_histogram,
+            "rs_thrust_1w":   rs_thrust_1w,
             "ibd_raw":        ibd_raw,
             # Raw returns stored for peer-ranking (removed after ranking)
             "_raw_1d":        p1d,

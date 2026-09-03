@@ -9107,7 +9107,9 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
   const [sortKey, setSortKey] = useState("score");      // "score" | "perf_1w" | "perf_1m"
   const [holdingsModal, setHoldingsModal] = useState(null);
 
-  const etfs = etfRsData?.etfs ?? [];
+  // Exclude Index/Segment/EW Sector/SPDR Sector — broad-market benchmarks, not
+  // thematic categories, so they'd be apples-to-oranges in a rotation leaderboard.
+  const etfs = (etfRsData?.etfs ?? []).filter(e => !e.benchmark);
 
   const etfRsMap = React.useMemo(() => {
     const m = {};
@@ -9274,7 +9276,9 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
 
 // ── ETF Flip Scanner ─────────────────────────────────────────────────────────
 const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
-  const etfs = etfRsData?.etfs ?? [];
+  // Exclude Index/Segment/EW Sector/SPDR Sector benchmarks — this scanner is
+  // about thematic beta boosters flipping vs their sector anchor.
+  const etfs = (etfRsData?.etfs ?? []).filter(e => !e.benchmark);
   const [holdingsModal, setHoldingsModal] = useState(null); // { ticker, theme, holdings }
 
   const etfRsMap = React.useMemo(() => {
@@ -9475,12 +9479,131 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
   );
 };
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Index / Segment / EW Sector / SPDR Sector — broad-market breadth benchmarks,
+// measured against RSP (equal-weight S&P 500) rather than SPY. Separate from
+// the thematic ETF universe below; four small sub-tables, RSP itself shown as
+// the reference row ("benchmark") in Index, and SPY re-shown as a familiar
+// reference row inside EW Sector / SPDR Sector.
+// ─────────────────────────────────────────────────────────────────────────────
+const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
+  const [selectedEtf, setSelectedEtf] = useState(null);
+  const etfs = etfRsData?.etfs ?? [];
+  const spy = React.useMemo(() => etfs.find(e => e.ticker === "SPY"), [etfs]);
+  const fmtP = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
+
+  const getRsPct = (hist) => {
+    if (!hist || hist.length < 2) return null;
+    const last = hist[hist.length - 1];
+    const mn = Math.min(...hist), mx = Math.max(...hist);
+    const rng = mx - mn;
+    return rng === 0 ? 50 : Math.round(((last - mn) / rng) * 100);
+  };
+
+  const sections = React.useMemo(() => {
+    const build = (cat, includeSpy) => {
+      let rows = etfs.filter(e => e.category === cat);
+      if (includeSpy && spy && !rows.some(r => r.ticker === "SPY")) rows = [...rows, spy];
+      return [...rows].sort((a, b) => (b.rs_thrust_1w ?? -Infinity) - (a.rs_thrust_1w ?? -Infinity));
+    };
+    return [
+      { name: "Index",       rows: build("Index", false) },
+      { name: "Segment",     rows: build("Segment", false) },
+      { name: "EW Sector",   rows: build("EW Sector", true) },
+      { name: "SPDR Sector", rows: build("SPDR Sector", true) },
+    ].filter(s => s.rows.length > 0);
+  }, [etfs, spy]);
+
+  if (!etfRsData || sections.length === 0) return null;
+
+  // RS Thrust % is centered at 100 (unbounded, ratio to the ETF's own 1-month
+  // baseline) — green above 100 (accelerating), rose below (decelerating).
+  const thrustStyle = (v) => {
+    if (v == null) return {};
+    const d = v - 100;
+    if (d >= 0) return { backgroundColor: `rgba(16,185,129,${(0.12 + Math.min(d / 15, 1) * 0.5).toFixed(2)})` };
+    return { backgroundColor: `rgba(244,63,94,${(0.08 + Math.min(-d / 15, 1) * 0.4).toFixed(2)})` };
+  };
+  // 1-Mth RS % is a 0-100 range-position — pale to dark green as it climbs.
+  const rsPctStyle = (v) => v == null ? {} : { backgroundColor: `rgba(16,185,129,${(0.06 + (v / 100) * 0.5).toFixed(2)})` };
+
+  return (
+    <div className="space-y-4">
+      {sections.map(({ name, rows }) => (
+        <div key={name} className="rounded-lg border border-zinc-800 overflow-x-auto">
+          <table className="w-full text-xs border-collapse">
+            <thead>
+              <tr className="bg-zinc-900/80 border-b border-zinc-700 text-zinc-400 text-[11px] whitespace-nowrap">
+                <th className="px-2 py-2 text-left font-semibold border-r border-zinc-800">{name}</th>
+                <th className="px-2 py-2 text-left font-semibold border-r border-zinc-800">{name}</th>
+                <th className="px-2 py-2 text-right font-semibold border-r border-zinc-800" title="1-week recency-weighted RS line vs its own 1-month baseline">RS Thrust Rate %</th>
+                <th className="px-2 py-2 text-right font-semibold border-r border-zinc-800">1-Mth RS %</th>
+                <th className="px-2 py-2 text-left font-semibold border-r border-zinc-800">1-Mth Chart</th>
+                <th className="px-2 py-2 text-left font-semibold border-r border-zinc-800">1-Mth RS</th>
+                <th className="px-2 py-2 text-right font-semibold border-r border-zinc-800">% Intraday</th>
+                <th className="px-2 py-2 text-right font-semibold border-r border-zinc-800">% 1D</th>
+                <th className="px-2 py-2 text-right font-semibold">% 1-Mth</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((e, i) => {
+                const isAnchor = e.ticker === "RSP";
+                const isSpyRef = e.ticker === "SPY" && name !== "Index";
+                const rsPct = getRsPct(e.rs_histogram);
+                return (
+                  <tr key={`${name}-${e.ticker}`}
+                      className={`border-b border-zinc-800/60 last:border-b-0 hover:bg-zinc-800/40 ${isAnchor || isSpyRef ? "bg-zinc-800/50" : ""}`}>
+                    <td className="px-2 py-1 border-r border-zinc-800">
+                      <button
+                        onClick={() => setSelectedEtf({ ticker: e.ticker, theme: e.theme, holdings: etfHoldings[e.ticker] ?? [] })}
+                        className="font-mono font-bold text-cyan-400 hover:underline text-[12px]">
+                        {e.ticker}
+                      </button>
+                    </td>
+                    <td className={`px-2 py-1 text-[11px] border-r border-zinc-800 max-w-[180px] truncate ${isSpyRef ? "text-emerald-400 font-semibold" : "text-zinc-300"}`}>
+                      {e.label ?? e.theme}
+                    </td>
+                    <td className="px-2 py-1 text-right font-mono border-r border-zinc-800" style={isAnchor ? {} : thrustStyle(e.rs_thrust_1w)}>
+                      {isAnchor
+                        ? <span className="text-zinc-500 italic text-[10px]">benchmark</span>
+                        : (e.rs_thrust_1w != null ? `${e.rs_thrust_1w.toFixed(1)}%` : "—")}
+                    </td>
+                    <td className="px-2 py-1 text-right font-mono border-r border-zinc-800" style={isAnchor ? {} : rsPctStyle(rsPct)}>
+                      {isAnchor ? <span className="text-zinc-500 italic text-[10px]">benchmark</span> : (rsPct != null ? `${rsPct}%` : "—")}
+                    </td>
+                    <td className="px-2 py-0.5 border-r border-zinc-800"><EtfSparkline data={e.sparkline ?? []} /></td>
+                    <td className="px-2 py-0.5 border-r border-zinc-800"><EtfRsHistogram data={e.rs_histogram ?? []} /></td>
+                    <td className="px-2 py-1 text-right font-mono border-r border-zinc-800">{fmtP(e.perf_intraday)}</td>
+                    <td className="px-2 py-1 text-right font-mono border-r border-zinc-800">{fmtP(e.perf_1d)}</td>
+                    <td className="px-2 py-1 text-right font-mono">{fmtP(e.perf_1m)}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      ))}
+      {selectedEtf && (
+        <EtfHoldingsModal
+          etf={selectedEtf.ticker}
+          theme={selectedEtf.theme}
+          holdings={selectedEtf.holdings}
+          screenerMap={screenerMap}
+          onClose={() => setSelectedEtf(null)}
+        />
+      )}
+    </div>
+  );
+};
+
 const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
   const [sortCol, setSortCol] = useState("score");
   const [sortDir, setSortDir] = useState("desc");
   const [selectedEtf, setSelectedEtf] = useState(null); // { ticker, theme, holdings }
 
-  const etfs = etfRsData?.etfs ?? [];
+  // Exclude Index/Segment/EW Sector/SPDR Sector — those have their own
+  // dedicated table (IndexSectorBenchmarkTable) above this one.
+  const etfs = (etfRsData?.etfs ?? []).filter(e => !e.benchmark);
 
   const etfRsMap = React.useMemo(() => {
     const m = {};
@@ -9552,6 +9675,7 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
     { col: "ticker",        label: "Group",       align: "left"  },
     { col: "theme",         label: "Group",       align: "left"  },
     { col: "score",         label: "Score ↓",     align: "right" },
+    { col: "rs_thrust_1w",  label: "RS Thrust %", align: "right", tooltip: "1-week recency-weighted RS line vs its own 1-month baseline. >100% = relative strength accelerating this week; <100% = decelerating." },
     { col: "rs_pct",        label: "RS%",         align: "right", tooltip: "Use Score for theme selection, and RS% for tactical entry/exit timing" },
     { col: "perf_1d",       label: "Day %",       align: "right" },
     { col: "perf_1w",       label: "Wk %",        align: "right" },
@@ -9621,6 +9745,14 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
                   <span className={(e.score ?? 0) >= 70 ? "text-emerald-300" : (e.score ?? 0) >= 50 ? "text-zinc-200" : "text-rose-400"}>
                     {e.score != null ? e.score.toFixed(1) : "—"}
                   </span>
+                </td>
+                {/* RS Thrust % — 1-week recency-weighted RS line vs its own 1-month baseline */}
+                <td className="px-2 py-1 text-right font-mono border-r border-zinc-800">
+                  {e.rs_thrust_1w != null
+                    ? <span className={e.rs_thrust_1w >= 100 ? "text-emerald-400 font-semibold" : "text-rose-400"}>
+                        {e.rs_thrust_1w.toFixed(1)}%
+                      </span>
+                    : <span className="text-zinc-600">—</span>}
                 </td>
                 {/* RS% — position of today's RS bar within the 25-day min-max range */}
                 <td className="px-2 py-1 text-right font-mono border-r border-zinc-800">
@@ -10414,6 +10546,7 @@ const DailyWatchlistTab = ({ data }) => {
           <EtfRotationBrief etfRsData={etfRsData} />
           <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
+          <IndexSectorBenchmarkTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfCandidatesPanel />
         </div>

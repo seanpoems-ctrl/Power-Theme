@@ -749,11 +749,12 @@
     "description": "Global companies deriving meaningful revenue from cloud computing"
   },
   "SPMO": {
-    "category": "Quantitative Factors & Volatility",
+    "category": "Index",
     "label": "Momentum S&P 500",
     "type": "pure_sector",
     "liquid": true,
-    "description": "The 100 S&P 500 stocks with the strongest price momentum"
+    "description": "The 100 S&P 500 stocks with the strongest price momentum",
+    "benchmark": true
   },
   "SILJ": {
     "category": "Energy, Metals & Commodities",
@@ -1155,11 +1156,12 @@
     "description": "Global 3D-printing hardware, software, scanning and materials companies"
   },
   "TLT": {
-    "category": "Quantitative Factors & Volatility",
+    "category": "Index",
     "label": "Long-Term Treasuries",
     "type": "beta_booster",
     "liquid": true,
-    "description": "U.S. Treasury bonds with maturities longer than 20 years"
+    "description": "U.S. Treasury bonds with maturities longer than 20 years",
+    "benchmark": true
   },
   "UX": {
     "category": "Energy, Metals & Commodities",
@@ -1190,81 +1192,92 @@
     "description": "Concentrated exposure to five leading U.S. cannabis operators via swaps"
   },
   "XLK": {
-    "category": "Technology & Digital Disruption",
+    "category": "SPDR Sector",
     "label": "Technology Sector",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Market-cap-weighted S&P 500 technology-sector companies"
+    "description": "Market-cap-weighted S&P 500 technology-sector companies",
+    "benchmark": true
   },
   "XLE": {
-    "category": "Energy, Metals & Commodities",
+    "category": "SPDR Sector",
     "label": "Traditional Oil & Gas",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Market-cap-weighted S&P 500 energy-sector companies"
+    "description": "Market-cap-weighted S&P 500 energy-sector companies",
+    "benchmark": true
   },
   "XLV": {
-    "category": "Healthcare & Biotech",
+    "category": "SPDR Sector",
     "label": "Healthcare Sector",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Market-cap-weighted S&P 500 healthcare-sector companies"
+    "description": "Market-cap-weighted S&P 500 healthcare-sector companies",
+    "benchmark": true
   },
   "XLF": {
-    "category": "Finance & Capital Markets",
+    "category": "SPDR Sector",
     "label": "Financials Sector",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Market-cap-weighted S&P 500 financial-sector companies"
+    "description": "Market-cap-weighted S&P 500 financial-sector companies",
+    "benchmark": true
   },
   "XLI": {
-    "category": "Industrials, Transportation & Infrastructure",
+    "category": "SPDR Sector",
     "label": "Industrials Sector",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Market-cap-weighted S&P 500 industrial-sector companies"
+    "description": "Market-cap-weighted S&P 500 industrial-sector companies",
+    "benchmark": true
   },
   "XLP": {
-    "category": "Consumer, Gaming & E-Commerce",
+    "category": "SPDR Sector",
     "label": "Staples Sector",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Market-cap-weighted S&P 500 consumer-staples companies"
+    "description": "Market-cap-weighted S&P 500 consumer-staples companies",
+    "benchmark": true
   },
   "XLY": {
-    "category": "Consumer, Gaming & E-Commerce",
+    "category": "SPDR Sector",
     "label": "Discretionary Sector",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Market-cap-weighted S&P 500 consumer-discretionary companies"
+    "description": "Market-cap-weighted S&P 500 consumer-discretionary companies",
+    "benchmark": true
   },
   "XLU": {
-    "category": "Real Estate & Utilities",
+    "category": "SPDR Sector",
     "label": "Utilities Sector",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Market-cap-weighted S&P 500 utilities-sector companies"
+    "description": "Market-cap-weighted S&P 500 utilities-sector companies",
+    "benchmark": true
   },
   "XLRE": {
-    "category": "Real Estate & Utilities",
+    "category": "SPDR Sector",
     "label": "Real Estate Sector",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Market-cap-weighted S&P 500 real-estate-sector companies"
+    "description": "Market-cap-weighted S&P 500 real-estate-sector companies",
+    "benchmark": true
   },
   "XLB": {
-    "category": "Energy, Metals & Commodities",
+    "category": "SPDR Sector",
     "label": "Materials & Mining",
     "type": "beta_booster",
     "liquid": false,
-    "description": "Market-cap-weighted S&P 500 materials-sector companies"
+    "description": "Market-cap-weighted S&P 500 materials-sector companies",
+    "benchmark": true
   },
   "XLC": {
-    "category": "Telecom & Communication",
+    "category": "SPDR Sector",
     "label": "Telecom Sector",
     "type": "pure_sector",
     "liquid": true,
-    "description": "Market-cap-weighted S&P 500 communication-services companies"
+    "description": "Market-cap-weighted S&P 500 communication-services companies",
+    "benchmark": true
   },
   "FOTO": {
     "category": "Technology & Digital Disruption",
@@ -1286,5 +1299,213 @@
     "type": "pure_sector",
     "liquid": true,
     "description": "Diversified basket of the largest cryptocurrencies by market cap"
+  },
+  "RSP": {
+    "category": "Index",
+    "label": "S&P 500 Equal Weight",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 — the breadth benchmark this whole section is measured against",
+    "benchmark": true
+  },
+  "SPY": {
+    "category": "Index",
+    "label": "S&P 500 SPDR",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 index",
+    "benchmark": true
+  },
+  "QQQ": {
+    "category": "Index",
+    "label": "Nasdaq-100",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted Nasdaq-100 index",
+    "benchmark": true
+  },
+  "QQQE": {
+    "category": "Index",
+    "label": "Nasdaq-100 Equal Weight",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight Nasdaq-100 index",
+    "benchmark": true
+  },
+  "IWM": {
+    "category": "Index",
+    "label": "Russell 2000",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Small-cap Russell 2000 index",
+    "benchmark": true
+  },
+  "DIA": {
+    "category": "Index",
+    "label": "Dow 30",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Price-weighted Dow Jones Industrial Average (30 mega-caps)",
+    "benchmark": true
+  },
+  "IJS": {
+    "category": "Segment",
+    "label": "Small-Cap 600 Value",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Value slice of the S&P SmallCap 600",
+    "benchmark": true
+  },
+  "IJR": {
+    "category": "Segment",
+    "label": "Small-Cap 600",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "S&P SmallCap 600 core index",
+    "benchmark": true
+  },
+  "IJT": {
+    "category": "Segment",
+    "label": "Small-Cap 600 Growth",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Growth slice of the S&P SmallCap 600",
+    "benchmark": true
+  },
+  "IJJ": {
+    "category": "Segment",
+    "label": "MidCap 400 Value",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Value slice of the S&P MidCap 400",
+    "benchmark": true
+  },
+  "IJH": {
+    "category": "Segment",
+    "label": "MidCap 400",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "S&P MidCap 400 core index",
+    "benchmark": true
+  },
+  "IJK": {
+    "category": "Segment",
+    "label": "MidCap 400 Growth",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Growth slice of the S&P MidCap 400",
+    "benchmark": true
+  },
+  "IVE": {
+    "category": "Segment",
+    "label": "Large-Cap 500 Value",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Value slice of the S&P 500",
+    "benchmark": true
+  },
+  "IVV": {
+    "category": "Segment",
+    "label": "S&P 500 iShares",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Market-cap-weighted S&P 500 index (iShares)",
+    "benchmark": true
+  },
+  "IVW": {
+    "category": "Segment",
+    "label": "Large-Cap 500 Growth",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Growth slice of the S&P 500",
+    "benchmark": true
+  },
+  "RSPH": {
+    "category": "EW Sector",
+    "label": "Equal Weight Health Care",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 health-care companies",
+    "benchmark": true
+  },
+  "RSPG": {
+    "category": "EW Sector",
+    "label": "Equal Weight Energy",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 energy companies",
+    "benchmark": true
+  },
+  "RSPS": {
+    "category": "EW Sector",
+    "label": "Equal Weight Staples",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 consumer-staples companies",
+    "benchmark": true
+  },
+  "RSPC": {
+    "category": "EW Sector",
+    "label": "Equal Weight Communication",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 communication-services companies",
+    "benchmark": true
+  },
+  "RSPM": {
+    "category": "EW Sector",
+    "label": "Equal Weight Material",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 materials companies",
+    "benchmark": true
+  },
+  "RSPF": {
+    "category": "EW Sector",
+    "label": "Equal Weight Financials",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 financial companies",
+    "benchmark": true
+  },
+  "RSPT": {
+    "category": "EW Sector",
+    "label": "Equal Weight Technology",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 technology companies",
+    "benchmark": true
+  },
+  "RSPR": {
+    "category": "EW Sector",
+    "label": "Equal Weight Real Estate",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 real-estate companies",
+    "benchmark": true
+  },
+  "RSPU": {
+    "category": "EW Sector",
+    "label": "Equal Weight Utilities",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 utilities companies",
+    "benchmark": true
+  },
+  "RSPD": {
+    "category": "EW Sector",
+    "label": "Equal Weight Discretionary",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 consumer-discretionary companies",
+    "benchmark": true
+  },
+  "RSPN": {
+    "category": "EW Sector",
+    "label": "Equal Weight Industrial",
+    "type": "pure_sector",
+    "liquid": true,
+    "description": "Equal-weight S&P 500 industrial companies",
+    "benchmark": true
   }
 }
