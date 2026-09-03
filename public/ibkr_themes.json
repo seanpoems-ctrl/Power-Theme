@@ -1,6 +1,52 @@
 {
-  "generated_at": "2026-09-03T00:59:07.789604+00:00",
+  "generated_at": "2026-09-03T03:40:35.560499+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Other",
+      "theme_rs": 97.0,
+      "perf_1d": 15.68,
+      "leaders": [
+        {
+          "ticker": "DELL",
+          "price": 492.2,
+          "rs_52w": 98,
+          "adr_pct": 6.32,
+          "vol_surge": 5.03,
+          "mkt_cap": 318031310949,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "GTLB",
+          "price": 49.59,
+          "rs_52w": 96,
+          "adr_pct": 5.22,
+          "vol_surge": 5.54,
+          "mkt_cap": 8262437875,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }
