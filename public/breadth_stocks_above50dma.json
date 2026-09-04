@@ -2,67 +2,55 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 5,
+  "count": 4,
   "stocks": [
     {
       "ticker": "ASST",
       "company": "Strive, Inc.",
       "industry": "Financial Conglomerates",
-      "price": 26.82,
-      "change_pct": 10.28,
-      "adr_pct": 6.4,
-      "dollar_volume": "$350.3M",
-      "market_cap_b": 2.405,
-      "rs_ibd": 65,
-      "above50dma_pct": 86.4
+      "price": 27.14,
+      "change_pct": 1.19,
+      "adr_pct": 6.5,
+      "dollar_volume": "$338.1M",
+      "market_cap_b": 2.434,
+      "rs_ibd": 67,
+      "above50dma_pct": 84.6
     },
     {
       "ticker": "MRNA",
       "company": "Moderna, Inc.",
       "industry": "Biotechnology",
-      "price": 148.87,
-      "change_pct": -1.29,
-      "adr_pct": 9.2,
-      "dollar_volume": "$4.69B",
-      "market_cap_b": 59.434,
+      "price": 145.55,
+      "change_pct": -2.23,
+      "adr_pct": 9.4,
+      "dollar_volume": "$3.53B",
+      "market_cap_b": 58.109,
       "rs_ibd": 98,
-      "above50dma_pct": 77.7
+      "above50dma_pct": 70.2
     },
     {
       "ticker": "PSNYW",
       "company": "Polestar Automotive Holding UK Limited",
       "industry": "Motor Vehicles",
-      "price": 5.32,
-      "change_pct": -5.84,
-      "adr_pct": 16.5,
-      "dollar_volume": "$6.4M",
-      "market_cap_b": 1.747,
-      "rs_ibd": 37,
-      "above50dma_pct": 73.8
+      "price": 5.0,
+      "change_pct": -6.02,
+      "adr_pct": 16.8,
+      "dollar_volume": "$6.0M",
+      "market_cap_b": 1.266,
+      "rs_ibd": 30,
+      "above50dma_pct": 61.2
     },
     {
       "ticker": "TEAM",
       "company": "Atlassian Corporation",
       "industry": "Packaged Software",
-      "price": 194.68,
-      "change_pct": 4.42,
-      "adr_pct": 4.8,
-      "dollar_volume": "$780.9M",
-      "market_cap_b": 49.281,
-      "rs_ibd": 81,
-      "above50dma_pct": 57.5
-    },
-    {
-      "ticker": "PURR",
-      "company": "Hyperliquid Strategies Inc",
-      "industry": "Financial Conglomerates",
-      "price": 12.77,
-      "change_pct": 12.81,
-      "adr_pct": 8.4,
-      "dollar_volume": "$401.6M",
-      "market_cap_b": 2.526,
-      "rs_ibd": 92,
-      "above50dma_pct": 56.8
+      "price": 189.58,
+      "change_pct": -2.62,
+      "adr_pct": 4.9,
+      "dollar_volume": "$745.2M",
+      "market_cap_b": 47.99,
+      "rs_ibd": 80,
+      "above50dma_pct": 50.6
     }
   ],
   "spx_benchmarks": {
@@ -73,5 +61,5 @@
     "spx_qtd": null,
     "spx_mtd": null
   },
-  "fetched_at_utc": "2026-09-04T00:42:21+00:00"
+  "fetched_at_utc": "2026-09-04T23:04:31+00:00"
 }
