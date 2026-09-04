@@ -1,391 +1,86 @@
 {
-  "scan_time": "2026-09-03 08:55 ET",
+  "scan_time": "2026-09-04 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "SNOW",
-      "price": 305.84,
-      "gap_pct": 24.26,
-      "pm_volume": 329439,
-      "avg_vol_10d": 4507540,
-      "avg_dollar_vol": 1378586034,
-      "mkt_cap": 106004144597,
-      "rvol": 2.08,
-      "adr_pct": 3.69,
+      "ticker": "IOT",
+      "price": 38.75,
+      "gap_pct": 12.65,
+      "pm_volume": 190254,
+      "avg_vol_10d": 6145091,
+      "avg_dollar_vol": 238122276,
+      "mkt_cap": 22649896531,
+      "rvol": 3.49,
+      "adr_pct": 4.76,
       "category": "Earnings",
       "theme": "Earnings Beat & Raise",
-      "reasoning": "Snowflake's stock surged **20-22.3%** after reporting **better-than-expected sales** and an **earnings beat** for Q2 CY2026, accompanied by **raised guidance**.",
+      "reasoning": "Samsara reported a strong Q2 earnings and revenue beat, fueled by **30%** YoY revenue growth and a solid outlook, driving shares **+12.1%**.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 80,
-      "grade": "B",
-      "finviz_theme": "AI Data & Analytics",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Snowflake reported **better-than-expected sales** and an **earnings beat** for Q2 CY2026, alongside **raised guidance**, leading to a **20-22.3%** stock jump.",
-        "impact": "The strong financial performance, especially boosted by **surging AI demand**, signals robust growth and potentially an expanded market opportunity in data and AI workloads."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nSnowflake (SNOW) posted **better-than-expected sales** in Q2 CY2026, delivering **strong quarterly results** that led to its stock **jumping 22.3%**. The company reported an **earnings beat**, surprising the market and driving significant share price appreciation.\n\n• **The Growth (Momentum)**\nThe positive earnings were explicitly boosted by **surging AI demand**, indicating a significant tailwind for Snowflake's business. Following the strong performance, Wall Street analysts were **hiking price targets** for SNOW stock.\n\n• **The Guide**\nThe company also issued **raised guidance**, signaling management's increased confidence in future performance and growth trajectory. This positive outlook further fueled investor optimism, contributing to the stock's **skyrocketing** price.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Snowflake (NYSE:SNOW) Posts Better-Than-Expected Sales In Q2 CY2026, Stock Jumps 22.3% - StockStory",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxOTVN6QVV0WFRfUXlnNnZDU1FnUzJacnJ5TGFDdTVuUEtsMjVMX1U2Vi1uUl9ibVVpdE9lZWRsVGJPdi1lcjhjM3M5VHU3aHFPRTI2cVdvUXlmV29mSms1a01LejJmbWE3QnJjdHR3eHB2RGFoRm1vQXB4eGxJSmtTakhtYzNWckxxNUZQUG0wbW40VzBiZHBaVUdQOFppQi1jOXg0TGNVV0YxVzVnSDJMeXJUMGZEd2ZTX1VwQXpWbzJVVVN0TXFJekM0dXoxVy0xQ1NRaXdDYzVOMzMx?oc=5"
-        },
-        {
-          "title": "SNOW Stock Pops As Wall Street Hikes Price Targets Ahead Q2 - timothysykes.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE5IMVpnSDJBN2h5ek1hak5zSXRNOWtXU2pvZ2x2b2JsRTA2UFg1VUNmc1NRcmNjenhZT2JBdFoxYkl6aFhFZ3RpSW51OWhYYWFOV1k2SURta2VOLUpMSEpOT1hjbGMxOFExQUVMX0ZkYm5WRm8?oc=5"
-        },
-        {
-          "title": "Snowflake (SNOW) price skyrockets after posting strong quarterly results",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/video/snowflake-snow-price-skyrockets-posting-210200107.html"
-        },
-        {
-          "title": "Snowflake Stock Soars as Surging AI Demand Boosts Earnings",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/12c226e5-2721-31c7-b6a6-a28d57fa1e46/snowflake-stock-soars-as.html"
-        },
-        {
-          "title": "Snowflake soars 20% on earnings beat and raised guidance",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/snowflake-soars-20-earnings-beat-204552979.html"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-09-02",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1640147/000164014726000033/snow-20260902.htm"
-      },
-      "float_shares": "335.47M",
-      "short_float": "5.61%",
-      "daily_pct": 23.48,
-      "prev_close": 305.84,
-      "industry": "AI Data & Analytics",
-      "technical_status": "Fail (ADR 3.7% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Snowflake's stock surged 20-22.3%",
-        "discrepancy_note": "Finviz headlines state both '23%' and '20%'. Google News headlines state '23%' and '22.3%'. While some numbers (20%, 22.3%) fall within the claimed range, the consistent mention of '23%' in multiple headlines from both sources (Finviz [1], Google News [1]) conflicts with the upper bound of the '20-22.3%' range specified in the primary catalyst claim."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "WOOF",
-      "price": 2.63,
-      "gap_pct": 19.01,
-      "pm_volume": 300717,
-      "avg_vol_10d": 1903411,
-      "avg_dollar_vol": 5005971,
-      "mkt_cap": 751037232,
-      "rvol": 2.9,
-      "adr_pct": 4.1,
-      "category": "Earnings",
-      "theme": "Q2 Earnings Report",
-      "reasoning": "Petco (WOOF) reported its second-quarter 2026 results, with positive premarket stock movement suggesting favorable investor reception.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 82,
-      "grade": "C",
-      "finviz_theme": "Consumer - E-Commerce",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "WOOF filed an **8-K with the SEC** on **2026-09-02** confirming **Earnings/Financial Results** for its second quarter. News headlines confirm **Petco Reports Second Quarter 2026 Results** and the stock saw a **+1.94% rise premarket** ahead of these results.",
-        "impact": "While specific financial figures are not detailed in the provided headlines, the premarket rise and analyst price target boost indicates an overall positive, albeit unquantified, investor sentiment post-earnings."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nWOOF filed an **8-K with the SEC** on **September 2, 2026**, indicating an **Earnings/Financial Results** event. Although specific financial figures like EPS or revenue are not detailed in the provided news, the stock experienced a **+1.94% rise premarket**, suggesting a positive investor reaction to the **Second Quarter 2026 Results** announcement.\n\n• **The Guide**\nAhead of the earnings release, Wall Street analysts provided fresh price target boosts for Petco, with **Evercore ISI** reportedly raising its price target. This indicates a favorable outlook from analysts, likely factoring in future performance or a re-evaluation of the company's prospects following the latest results.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "FIVE, WOOF Stocks Rise Premarket: Five Below And Petco Get Fresh Wall Street Price Target Boosts Ahead Of Earnings",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/f1a2a134-4c2c-37bb-b1ab-803626e81c0b/five%2C-woof-stocks-rise.html"
-        },
-        {
-          "title": "Petco Reports Second Quarter 2026 Results",
-          "source": "Finviz",
-          "url": "/news/388258/petco-reports-second-quarter-2026-results"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-09-02",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "7.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1826470/000119312526380189/woof-20260902.htm"
-      },
-      "float_shares": "149.24M",
-      "short_float": "13.07%",
-      "daily_pct": 15.59,
-      "prev_close": 2.63,
-      "industry": "Consumer - E-Commerce",
-      "technical_status": "Fail (Avg $Vol $5M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Petco (WOOF) reported its second-quarter 2026 results.",
-        "discrepancy_note": "Source A headline [1] states 'Petco Reports Second Quarter 2026 Results,' directly confirming the claim. However, Source A headline [2] refers to WOOF as 'Ahead Of Earnings,' which contradicts the claim that results have already been reported."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "NTSK",
-      "price": 13.75,
-      "gap_pct": 13.45,
-      "pm_volume": 113244,
-      "avg_vol_10d": 4760383,
-      "avg_dollar_vol": 65455266,
-      "mkt_cap": 5553950222,
-      "rvol": 1.96,
-      "adr_pct": 5.73,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "Netskope reported strong Q2 revenue of $221 million, exceeding estimates and raising its fiscal 2027 outlook on robust cybersecurity demand.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 79,
-      "grade": "C",
-      "finviz_theme": "Cybersecurity - Cloud",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Netskope (NTSK) announced strong fiscal **Q2 financial results**, with revenue jumping **29% to $221 million**, which **beat estimates**. The company also reported an adjusted loss of **3 cents per share** and subsequently **raised its fiscal 2027 revenue outlook**.",
-        "impact": "The significant revenue beat and raised guidance signal accelerated growth and strong demand in the cybersecurity sector, particularly benefiting Netskope's market position amidst AI-powered tailwinds, suggesting continued positive momentum."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nNetskope reported a significant **29% jump in Q2 revenue to $221 million**, which **beat analyst estimates**. The company also reported an adjusted loss of **3 cents per share**, reflecting continued investment in growth within the cybersecurity sector.\n\n• **The Growth (Momentum)**\nThe earnings report highlighted that the **AI boom powers growth** for this cybersecurity player, with **Netskope's stock boosted by cybersecurity demand**. This indicates strong underlying business momentum, positioning the company favorably against larger peers like CrowdStrike and Palo Alto Networks.\n\n• **The Guide**\nNetskope **raised its fiscal 2027 revenue outlook**, signaling management's confidence in continued strong performance. This upward revision in guidance provides a strong forward-looking catalyst, suggesting sustained growth driven by the demand for cybersecurity solutions.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "CrowdStrike And Palo Alto Networks Aside, AI Boom Powers Growth In This Smaller Cybersecurity Player",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/af1d598d-f99c-3aa2-b3b0-85cb2568c55e/crowdstrike-and-palo-alto.html"
-        },
-        {
-          "title": "Netskope Stock Boosted by Cybersecurity Demand",
-          "source": "Finviz",
-          "url": "https://www.barrons.com/articles/netskope-earnings-stock-price-469cab13?mod=bar_FV"
-        },
-        {
-          "title": "Netskope: Fiscal Q2 Earnings Snapshot",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/netskope-fiscal-q2-earnings-snapshot-202203140.html"
-        },
-        {
-          "title": "Netskope Announces Strong Second Quarter Fiscal 2027 Financial Results",
-          "source": "Finviz",
-          "url": "/news/388275/netskope-announces-strong-second-quarter-fiscal-2027-financial-results"
-        },
-        {
-          "title": "Broadcom, Hewlett Packard and Snowflake lead another round of tech earnings",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/livecoverage/stock-market-today-dow-s-p-500-nasdaq-oil-prices-bond-yields-adp-jobs-data-broadcom-results/card/broadcom-hewlett-packard-and-snowflake-lead-another-round-of-tech-earnings-lGm221euVNPxQEFq0QqI?mod=mw_FV"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-09-02",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "7.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/2063196/000119312526380188/ntsk-20260902.htm"
-      },
-      "float_shares": "236.64M",
-      "short_float": "5.99%",
-      "daily_pct": 12.94,
-      "prev_close": 13.75,
-      "industry": "Cybersecurity - Cloud",
-      "technical_status": "Fail (Avg $Vol $65M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Netskope reported Q2 revenue of $221 million",
-        "discrepancy_note": null
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "SMMT",
-      "price": 14.6,
-      "gap_pct": 7.19,
-      "pm_volume": 95792,
-      "avg_vol_10d": 5865483,
-      "avg_dollar_vol": 85636052,
-      "mkt_cap": 11647144958,
-      "rvol": 0.51,
-      "adr_pct": 5.57,
-      "category": "FDA",
-      "theme": "Positive Phase 3 Clinical Trial Results",
-      "reasoning": "Akeso's HARMONi-2 study for Ivonescimab demonstrated statistically significant overall survival benefit in advanced NSCLC, benefiting SMMT's key asset.",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 20,
-      "grade": "C",
-      "finviz_theme": "Biotech - Oncology",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Akeso reported that **Ivonescimab Monotherapy** demonstrated **statistically significant overall survival benefit** compared to **Pembrolizumab monotherapy** in **PD-L1-Positive Advanced NSCLC** in the **HARMONi-2 Study** conducted in China.",
-        "impact": "This strong clinical data validates a key asset for SMMT, potentially expanding its market opportunity in a competitive oncology landscape."
-      },
-      "analysis_details": "• **The Drug**\nIvonescimab monotherapy, a key asset for Summit Therapeutics, has shown a **statistically significant overall survival benefit** over **Pembrolizumab monotherapy** in patients with **PD-L1-Positive Advanced NSCLC**. This positive data comes from the **HARMONi-2 Study**, conducted by **Akeso in China**.\n\n• **The Significance**\nThis positive outcome against a high-standard comparator like Pembrolizumab in **PD-L1-Positive Advanced NSCLC** is a major de-risking event for Ivonescimab. It suggests a strong competitive profile and substantial market opportunity in a large oncology indication, paving the way for potential regulatory submissions and broader commercialization efforts, significantly enhancing SMMT's pipeline value.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Ivonescimab Monotherapy Demonstrates Statistically Significant Overall Survival Benefit Compared to Pembrolizumab Monotherapy in PD-L1-Positive Advanced NSCLC in HARMONi-2 Study Conducted by Akeso in China",
-          "source": "Finviz",
-          "url": "https://www.businesswire.com/news/home/20260902840786/en/"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "152.34M",
-      "short_float": "24.57%",
-      "daily_pct": 5.68,
-      "prev_close": 14.6,
-      "industry": "Biotech - Oncology",
-      "technical_status": "Fail (Avg $Vol $86M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 85,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Akeso's HARMONi-2 study for Ivonescimab demonstrated statistically significant overall survival benefit in advanced NSCLC.",
-        "discrepancy_note": "Source A (Finviz) confirms the specific details regarding Ivonescimab, HARMONi-2 study, Akeso, and the 'statistically significant overall survival benefit'. Source B (Google News) only provides a general 'Positive Phase III Trial Res' for SMMT without mentioning Ivonescimab, HARMONi-2, Akeso, or the specific 'statistically significant overall survival benefit', thus not confirming the specific elements of the claim."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "AVAV",
-      "price": 145.39,
-      "gap_pct": 6.4,
-      "pm_volume": 56113,
-      "avg_vol_10d": 1222505,
-      "avg_dollar_vol": 177740002,
-      "mkt_cap": 7389099639,
-      "rvol": 1.32,
-      "adr_pct": 5.42,
-      "category": "New Contract/Partnership",
-      "theme": "Government Contract Win",
-      "reasoning": "AeroVironment secured a **$465 million Army laser weapons contract** for its **Locust X3 systems**, marking the first **directed energy production award** in U.S. history.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
+      "conviction": 84,
       "grade": "A",
-      "finviz_theme": "Defense & Aerospace",
-      "analysis_source": "gemini",
+      "finviz_theme": "AI Edge & IoT",
+      "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "AeroVironment (**AVAV**) secured a **$465 million** contract from the **U.S. Army** for its **Locust X3 laser weapon systems**. This deal represents the **first-ever production award** for directed energy systems in **U.S. history**.",
-        "impact": "This contract validates AVAV's directed energy technology, establishes a new revenue stream, and positions the company as a key player in the emerging laser weapon defense market."
+        "catalyst": "Samsara (IOT) reported a strong Q2 CY2026, surpassing earnings and revenue estimates. The company's revenue jumped **30%** year over year to **$508.4 million**, with the stock rising **12.1%**.",
+        "impact": "The impressive beat and solid guidance signal strong momentum for Samsara's fleet technology, suggesting continued platform adoption and potential for further upward revisions."
       },
-      "analysis_details": "• **Impact**\nAeroVironment (**AVAV**) has been awarded a **$465 million** contract by the **U.S. Army** for its **Locust X3 laser weapon systems**. This landmark agreement will see AVAV deliver **dozens** of **30-kilowatt** Locust X3 systems over the next few years. The contract highlights AVAV's capabilities in advanced defense technologies.\n\n• **Strategic Value**\nThis contract is particularly significant as it marks the **first-ever production award** for directed energy systems in **U.S. history**, specifically for the **Enduring-High Energy Laser (E-HEL) Program**. The **Locust X3** system's selection for this nearly **$500 million** Army Counter-UAS contract solidifies AVAV's position as a leader in next-generation defense solutions, providing a substantial new revenue stream and validating its technological prowess in a critical emerging sector.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nSamsara Inc. (IOT) **surpassed Q2 earnings and revenue estimates**, with its Q2 CY2026 revenue jumping **30%** year over year to **$508.4 million**. This strong performance drove the stock to surge **12.1%** following the report, indicating significant investor approval.\n\n• **The Growth (Momentum)**\nSamsara's revenue growth was fueled by strength in transportation and Mexico markets. The company also **crossed $2.1 Billion in ARR**, demonstrating large enterprises are standardizing on its platform. Management sees a large runway for fleet technology adoption, with **50% of North American commercial vehicles** remaining unconnected.\n\n• **The Guide**\nSamsara soared on a **solid guide** provided by management, complementing the strong earnings beat. This positive outlook, combined with the significant market opportunity in fleet technology and AI dash cameras, underpins expectations for continued momentum.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "AVAV Stock In Focus As AeroVironment Wins $465M Army Laser Weapons Contract",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/fa8739a0-5c0d-3568-969f-8fde94ed2a31/avav-stock-in-focus-as.html"
-        },
-        {
-          "title": "AV's LOCUST Selected for Nearly $500 million Army Counter-UAS Contract for Enduring-High Energy Laser (E-HEL) Program",
-          "source": "Finviz",
-          "url": "/news/388225/avs-locust-selected-for-nearly-500-million-army-counter-uas-contract-for-enduring-high-energy-laser-e-hel-program"
-        },
-        {
-          "title": "AeroVironment shares may move 13% on earnings release By Investing.com - Investing.com Canada",
+          "title": "Samsara Inc. (IOT) Surpasses Q2 Earnings and Revenue Estimates - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOU3BMa2VBX08zN3NtNVR3RkIzTVVIZEVFV3F4UXNNQ3JEQzdPeEkwNWI2UmR5OXA3NDhoLWoxNjlzVThhWFR2UU1hR1FYQVdoZ1lsSTYzVDhteXNxZHd6NzBxbUNrNlR5d3NuSXFTLWJGZ3p0MGVGTEp4OVhaUVNIVUZDN0JTZjhwbU8yN2w2TnpQbllaTUo5YkR5LVdtSDFxNWdYQ0RsZDZqNllTbjFWUHFqOA?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOejN2UjFaYi1lNGZHcldXYlA5SFFlNzZVZGptX252UFJvZndTbU9DWjdHc3ZzMHJ5NWhxVDE2eG40b3kzdTlRZ2VCNmsxbVBBbURydVIyekpSbTVrdTNENHNUeUl1WXRjN1hDUmY2X1RJaGZfV2RRRlkzaWFnS3NBdjRqOEVIZHdrZjJ6RVdKQlZMMjFrb2dhZw?oc=5"
+        },
+        {
+          "title": "Samsara (NYSE:IOT) Delivers Impressive Q2 CY2026, Stock Jumps 12.1% - StockStory",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOeUV1VlA0Tk9lZFlsRjg2bXpUVGpVQWMyV0Y0N09WZnFSUGJyWGwxekthR3RoeGdyM2JMU0VoNU9WYUhpNWFQZ3pfbXNhYmFwNEJsY3gzRW1PMGF2ZVZ5ZHlTYzRfSXdTbEdhdWVfUUw4UVRXS3didWZLaHJUYlJLYVM3Uk02YnQ2UV9kbTBGajJDTWtjZEJ5akRHZ2dqRF9oaFp3RDEzdFZUNERGbFJrM2hDOVdEcTNlcHBIZGhiMU9udw?oc=5"
+        },
+        {
+          "title": "Samsara Q2 revenue jumps 30% as transportation, Mexico fuel growth",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/articles/samsara-q2-revenue-jumps-30-234940982.html"
+        },
+        {
+          "title": "Samsara soars on strong earnings beat and solid guide",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/stocks/articles/samsara-soars-strong-earnings-beat-210229708.html"
+        },
+        {
+          "title": "Samsara Crosses $2.1 Billion in ARR as Large Enterprises Standardize on Its Platform",
+          "source": "Finviz",
+          "url": "/news/388922/samsara-crosses-21-billion-in-arr-as-large-enterprises-standardize-on-its-platform"
         }
       ],
-      "edgar_filing": null,
-      "float_shares": "38.09M",
-      "short_float": "9.62%",
-      "daily_pct": 6.32,
-      "prev_close": 145.39,
-      "industry": "Defense & Aerospace",
+      "edgar_filing": {
+        "filing_date": "2026-09-03",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1642896/000162828026060438/iot-20260903.htm"
+      },
+      "float_shares": "359.50M",
+      "short_float": "7.99%",
+      "daily_pct": 14.35,
+      "prev_close": 38.75,
+      "industry": "AI Edge & IoT",
       "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 95,
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "$465 million Army laser weapons contract",
-        "discrepancy_note": "Source A (Finviz) headline [1] explicitly states '$465M Army Laser Weapons Contract'. However, Source B (Google News) does not contain any mention of a contract value of $465 million or a laser weapons contract in any of its provided snippets."
+        "primary_claim": "30% YoY revenue growth driving shares +12.1%",
+        "discrepancy_note": "Finviz [1] confirms 'Samsara Q2 revenue jumps 30%'. Google News [3] confirms 'Stock Jumps 12.1%'. However, neither source confirms both percentages in one place, and Source A does not confirm the stock jump percentage, while Source B does not confirm the revenue growth percentage. Therefore, the combined claim as presented is not fully verified by both sources individually."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -400,110 +95,74 @@
       "tier_label": "Major Catalyst"
     },
     {
-      "ticker": "GPRK",
-      "price": 11.69,
-      "gap_pct": 5.99,
-      "pm_volume": 64490,
-      "avg_vol_10d": 650494,
-      "avg_dollar_vol": 7604275,
-      "mkt_cap": 758638626,
-      "rvol": 2.38,
-      "adr_pct": 3.63,
-      "category": "New Contract/Partnership",
-      "theme": "Major Strategic Entry",
-      "reasoning": "GeoPark announced a major strategic entry into Venezuela, signaling significant expansion and long-term growth potential for the energy company.",
+      "ticker": "PL",
+      "price": 18.35,
+      "gap_pct": 10.95,
+      "pm_volume": 1193226,
+      "avg_vol_10d": 8204015,
+      "avg_dollar_vol": 150543675,
+      "mkt_cap": 6539986340,
+      "rvol": 6.24,
+      "adr_pct": 5.07,
+      "category": "Earnings",
+      "theme": "Operational Headwinds",
+      "reasoning": "Planet Labs reported Q2 FY2027 financial results, with CEO Will Marshall flagging a SpaceX rideshare crunch and rising launch prices, leading to PL dropping **-8.20%**.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 81,
-      "grade": "C",
-      "finviz_theme": "Energy - Oil & Gas",
-      "analysis_source": "gemini",
+      "conviction": 92,
+      "grade": "B",
+      "finviz_theme": "Space",
+      "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "GeoPark announced a **major strategic entry into Venezuela** on **2026-09-02 21:30 UTC**. This move signals a significant expansion of the company's operational footprint and potential resource base.",
-        "impact": "This event suggests a material increase in GeoPark's addressable market and long-term production capabilities, potentially leading to a re-rating of the stock based on expanded asset value and future revenue streams."
+        "catalyst": "Planet Labs (PL) reported its **Second Quarter of Fiscal Year 2027 financial results** on 2026-09-03. During the report, **CEO Will Marshall** stated that **launch prices have been increasing** and that **SpaceX is restricting new Falcon 9 and rideshare bookings beyond 2028**.",
+        "impact": "This suggests potential operational headwinds for PL and other smaller operators, impacting future launch access and costs, which could affect the company's growth trajectory and profitability."
       },
-      "analysis_details": "• **Impact**\nGeoPark announced a **major strategic entry into Venezuela**, a region known for its vast oil and gas reserves. This move indicates a significant expansion of the company's operational presence and potential resource base, opening up new avenues for growth and increasing its geographical diversification.\n\n• **Strategic Value**\nThis strategic entry could fundamentally alter GeoPark's long-term growth trajectory and competitive positioning within the energy sector. A successful penetration into Venezuela could unlock substantial value by providing access to new, large-scale projects, enhancing the company's asset portfolio, and attracting increased institutional interest due to expanded production potential and market presence.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nPlanet Labs reported its **financial results for the Second Quarter of Fiscal Year 2027** yesterday. While specific financial figures are not detailed, the market reacted negatively, with PL stock falling **-8.20%**. This suggests the report either missed expectations or contained concerning forward-looking statements.\n\n• **The Growth (Momentum)**\nCEO Will Marshall highlighted a significant operational challenge: the **SpaceX rideshare crunch**. He noted that **launch prices have risen** and that **SpaceX is limiting new bookings beyond 2028** as Starlink consumes more launch capacity. This indicates a tightening market for satellite launches, which could impact Planet Labs' ability to deploy its constellation efficiently and cost-effectively, potentially slowing future growth.\n\n• **The Guide**\nThe disclosed challenges regarding **SpaceX's capacity restrictions** and **rising launch prices** imply a more difficult operating environment for Planet Labs. The company is actively **investing to secure access**, indicating efforts to mitigate these issues, but the sentiment points to increased costs and potential delays for future satellite deployments.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "GeoPark Announces Major Strategic Entry Into Venezuela",
+          "title": "RKLB And FLY Investors, Take Note: Planet Labs Flags SpaceX Rideshare Crunch As Smaller Operators Seek Alternatives",
           "source": "Finviz",
-          "url": "/news/388423/geopark-announces-major-strategic-entry-into-venezuela"
+          "url": "https://finance.yahoo.com/m/88e2cdd2-c567-3c2c-b6b6-7882845a1265/rklb-and-fly-investors%2C-take.html"
+        },
+        {
+          "title": "Planet Reports Financial Results for Second Quarter of Fiscal Year 2027",
+          "source": "Finviz",
+          "url": "/news/388883/planet-reports-financial-results-for-second-quarter-of-fiscal-year-2027"
+        },
+        {
+          "title": "How Long Can Rocket Lab Stock Wait On Neutron?",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/m/143c3efb-f1c4-3666-bbd4-9ea021642d27/how-long-can-rocket-lab-stock.html"
         }
       ],
-      "edgar_filing": null,
-      "float_shares": "28.28M",
-      "short_float": "2.96%",
-      "daily_pct": 6.59,
-      "prev_close": 11.69,
-      "industry": "Energy - Oil & Gas",
-      "technical_status": "Fail (Avg $Vol $8M < $100M, ADR 3.6% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
+      "edgar_filing": {
+        "filing_date": "2026-09-03",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "9.01"
         ],
-        "primary_claim": "GeoPark announced a major strategic entry into Venezuela",
-        "discrepancy_note": "Source A (Finviz) reports 'GeoPark Announces Major Strategic Entry Into Venezuela,' which directly matches the claim. However, Source B (Google News) shows 'none,' indicating no confirmation from a second source for this specific claim."
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1836833/000119312526381874/pl-20260903.htm"
       },
-      "gates_passed": 1,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "ASST",
-      "price": 24.32,
-      "gap_pct": 5.47,
-      "pm_volume": 435271,
-      "avg_vol_10d": 12330326,
-      "avg_dollar_vol": 299873528,
-      "mkt_cap": 2181100918,
-      "rvol": 0.75,
-      "adr_pct": 7.77,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "78.70M",
-      "short_float": "23.12%",
-      "daily_pct": 4.56,
-      "prev_close": 24.32,
-      "industry": "—",
+      "float_shares": "277.93M",
+      "short_float": "9.98%",
+      "daily_pct": 9.59,
+      "prev_close": 18.35,
+      "industry": "Space",
       "technical_status": "Pass",
       "verification": {
-        "status": "Verified",
-        "confidence_score": 100,
+        "status": "Discrepancy",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found",
-        "discrepancy_note": null
+        "primary_claim": "PL dropping -8.20%",
+        "discrepancy_note": "Finviz [2] states 'PL Stock Jumps 8% After-Hours'. Google News [5] states 'Planet Labs Stock Climbs After Mixed Q2 Print'. These directly contradict the claim of 'dropping -8.20%'. Google News [4] mentions 'Plunges' but does not provide a specific percentage."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -514,196 +173,17 @@
         "gate_adr": true
       },
       "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "GORO",
-      "price": 3.87,
-      "gap_pct": 5.43,
-      "pm_volume": 66955,
-      "avg_vol_10d": 1783271,
-      "avg_dollar_vol": 6901259,
-      "mkt_cap": 522036713,
-      "rvol": 0.52,
-      "adr_pct": 8.99,
-      "category": "Thematic Narratives",
-      "theme": "Exploration Potential Highlight",
-      "reasoning": "Goldgroup highlighted significant exploration potential at its Don David property, anchored by two producing mines and a 55-kilometre land package.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 55,
-      "grade": "C",
-      "finviz_theme": "Materials - Metals & Mining",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Goldgroup (GORO) highlighted significant exploration potential at its **Don David** property, emphasizing **two producing mines** that anchor a **55-kilometre land package** and the presence of **more targets remaining to be tested**.",
-        "impact": "This update reinforces the long-term asset value and future growth prospects through continued exploration, potentially attracting investor interest seeking resource expansion narratives."
-      },
-      "analysis_details": "• **The Narrative**\nGoldgroup (GORO) has highlighted the significant exploration potential at its **Don David** property. This update specifically notes **two producing mines** that currently anchor a **roughly 55-kilometre land package**, indicating substantial existing assets. Furthermore, the company emphasized that **more targets remain to be tested**, suggesting a robust pipeline for future exploration and potential resource expansion.\n\n• **Explosiveness**\nThis catalyst provides an incremental positive narrative for GORO by reaffirming the value and growth prospects of its core assets. While not a new discovery, it reinforces the company's strategic focus on expanding its resource base through exploration. This could contribute to sustained investor interest, particularly from those focused on long-term growth in the precious metals sector, by outlining clear future operational potential beyond current production.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Two producing mines anchor a roughly 55-kilometre land package. More targets remain to be tested. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOZ18tS0tOZmx2aEN3RHZsNjhjX3hhSHZHRFM1ajZOSkRCMWFxMGVmUXR3bTZwRks1UTRONHpnNDdFN29McDB6X1doajZEak5LcWlNZGdOQU91eHRLREpLUllfaGNXcC1OakUwVHp6Zk4zNE1GbXVPcFhVc2laaDh2d054RVE0aHNHbm1OLUdEcVJQSzEtanhTN0c0SGRHeFkxM2VwMkdQQQ?oc=5"
-        },
-        {
-          "title": "Goldgroup Highlights Exploration Potential at Don David",
-          "source": "Finviz",
-          "url": "/news/388379/goldgroup-highlights-exploration-potential-at-don-david"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "108.09M",
-      "short_float": "0.95%",
-      "daily_pct": 4.41,
-      "prev_close": 3.87,
-      "industry": "Materials - Metals & Mining",
-      "technical_status": "Fail (Avg $Vol $7M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 80,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "a 55-kilometre land package",
-        "discrepancy_note": "Source B mentions 'a roughly 55-kilometre land package', but Source A does not provide this specific detail."
-      },
-      "gates_passed": 2,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": false,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "GFI",
-      "price": 44.92,
-      "gap_pct": 5.21,
-      "pm_volume": 186317,
-      "avg_vol_10d": 4206034,
-      "avg_dollar_vol": 188935047,
-      "mkt_cap": 40258649646,
-      "rvol": 1.05,
-      "adr_pct": 3.18,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "895.02M",
-      "short_float": "0.70%",
-      "daily_pct": 6.14,
-      "prev_close": 44.92,
-      "industry": "—",
-      "technical_status": "Fail (ADR 3.2% < 4%)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found for GFI",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "HMY",
-      "price": 19.45,
-      "gap_pct": 5.04,
-      "pm_volume": 195895,
-      "avg_vol_10d": 4987104,
-      "avg_dollar_vol": 96999173,
-      "mkt_cap": 12225540567,
-      "rvol": 1.08,
-      "adr_pct": 3.21,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
-      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
-      "conviction": 25,
-      "grade": "C",
-      "finviz_theme": "—",
-      "analysis_source": "no_news",
-      "analysis_detail": {
-        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
-        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
-      },
-      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [],
-      "edgar_filing": null,
-      "float_shares": "624.88M",
-      "short_float": "1.55%",
-      "daily_pct": 5.76,
-      "prev_close": 19.45,
-      "industry": "—",
-      "technical_status": "Fail (Avg $Vol $97M < $100M, ADR 3.2% < 4%)",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "No immediate fundamental catalyst found for HMY",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 8,
-    "large_gaps": 2,
-    "total_headlines": 19,
+    "small_gaps": 2,
+    "large_gaps": 0,
+    "total_headlines": 8,
     "monthly_cost_usd": 0.01
   }
 }
