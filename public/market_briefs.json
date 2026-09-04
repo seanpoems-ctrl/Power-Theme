@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-04 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-On Momentum / Bullish Lift",
+    "spy_price": 773.17,
+    "spy_change_pct": 1.05,
+    "vix": 14.17,
+    "hy_oas": 2.66,
+    "yield_curve": 0.43,
+    "credit_status": "Complacent",
+    "s5fi": 54.6,
+    "mmth": 69.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple is set to unveil groundbreaking AI integration across its product ecosystem, with analysts projecting significant market share gains."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Google Cloud secured a multi-year, multi-billion dollar AI infrastructure contract with a major government agency, signaling robust enterprise demand."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continues to see strong investor interest following yesterday's analyst commentary on expanding AI data center demand, maintaining its upward trajectory based on flow."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-03 18:48 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA continues to benefit from the secular growth trend in artificial intelligence and data center demand, maintaining strong technical momentum."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-14 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Bullish Momentum Sustained",
-    "spy_price": 777.88,
-    "spy_change_pct": 0.7,
-    "vix": 14.53,
-    "hy_oas": 2.71,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 71.1,
-    "mmth": 74.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "Announced a strategic acceleration in digital payments infrastructure, projecting significant revenue growth and market share expansion in Q3 earnings."
-        },
-        {
-          "ticker": "WMT",
-          "company": "Walmart Inc.",
-          "reason": "Unveiled an innovative partnership with a major AI logistics firm, projecting significant enhancements to its last-mile delivery capabilities and cost efficiencies."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continues to benefit from the ongoing robust demand for AI infrastructure, extending its recent bullish technical trend without a fresh fundamental catalyst today."
         }
       ]
     }
