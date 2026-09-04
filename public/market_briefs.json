@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-04 10:54 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Mixed / Cautious Accumulation",
+    "spy_price": 769.82,
+    "spy_change_pct": -0.43,
+    "vix": 14.1,
+    "hy_oas": 2.65,
+    "yield_curve": 0.43,
+    "credit_status": "Complacent",
+    "s5fi": 52.1,
+    "mmth": 68.3,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "IOT",
+          "company": "Samsara Inc.",
+          "reason": "The company reported a significant earnings beat and raised its full-year guidance, driving strong pre-market buying interest."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft is gapping up on news of a strategic partnership announcement in the generative AI space, signaling continued innovation and market leadership."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple is experiencing rotational selling after a period of strength, without any fresh fundamental catalyst driving price action today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-04 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA continues to see speculative flow driven by ongoing analyst upgrades and positive sentiment surrounding the persistent demand for AI infrastructure."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-14 07:51 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Broad Market Optimism",
-    "spy_price": 777.88,
-    "spy_change_pct": 0.7,
-    "vix": 14.51,
-    "hy_oas": 2.71,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 71.1,
-    "mmth": 74.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a significant new partnership with a leading cloud provider to expand its Azure AI services globally, indicating accelerating enterprise adoption."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly received Fast Track designation from the FDA for its investigational Alzheimer's treatment, boosting confidence in its late-stage pipeline."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA continues to benefit from the secular growth trend in artificial intelligence and data center demand, maintaining strong technical momentum."
         }
       ]
     }
