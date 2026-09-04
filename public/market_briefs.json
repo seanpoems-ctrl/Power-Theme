@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-04 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Sentiment, Cautious Undertones",
+    "spy_price": 770.19,
+    "spy_change_pct": -0.39,
+    "vix": 14.53,
+    "hy_oas": 2.65,
+    "yield_curve": 0.43,
+    "credit_status": "Complacent",
+    "s5fi": 51.7,
+    "mmth": 67.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "IOT",
+          "company": "Samsara Inc.",
+          "reason": "Samsara reported an impressive earnings beat and raise, significantly outperforming analyst expectations and driving strong upward momentum."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a groundbreaking AI partnership with a major automaker, signaling significant expansion into the automotive sector and robust future revenue streams."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continues to benefit from recycled bullish sentiment and technical strength following recent analyst upgrades, absent new fundamental catalysts today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-04 10:54 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA saw renewed interest driven by options flow ahead of next week's developer conference, despite no new fundamental news released today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-14 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Global Resilience, Domestic Digestion",
-    "spy_price": 776.34,
-    "spy_change_pct": -0.2,
-    "vix": 14.25,
-    "hy_oas": 2.71,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 72.6,
-    "mmth": 75.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a landmark partnership with a leading quantum computing firm, fueling speculation of accelerated AI development and new enterprise solutions."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly released positive Phase 3 clinical trial results for its experimental Alzheimer's drug, positioning it favorably for regulatory approval and significant market share."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA continues to see speculative flow driven by ongoing analyst upgrades and positive sentiment surrounding the persistent demand for AI infrastructure."
         }
       ]
     }
