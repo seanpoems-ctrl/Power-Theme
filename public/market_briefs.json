@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-04 18:31 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Sentiment, Cautious Undertones",
+    "spy_price": 770.19,
+    "spy_change_pct": -0.39,
+    "vix": 14.53,
+    "hy_oas": 2.65,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 51.7,
+    "mmth": 67.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "IOT",
+          "company": "Samsara Inc.",
+          "reason": "Strong Q2 earnings beat and raised full-year guidance propelled shares higher, signaling robust demand for its IoT data platform."
+        },
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Reports of robust pre-order demand for its upcoming mixed-reality headset indicate strong consumer interest and potential for new revenue streams."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Shares continue to attract speculative interest on ongoing AI sector momentum, despite a lack of specific new catalysts today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-04 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "MSTR",
           "company": "MicroStrategy Incorporated",
           "reason": "Purely technical breakout potential driven by renewed institutional interest in Bitcoin exchange-traded funds, fueling a potential short squeeze in the highly leveraged name."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-14 17:00 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Complacent Calm",
-    "spy_price": 776.34,
-    "spy_change_pct": -0.2,
-    "vix": 14.25,
-    "hy_oas": 2.71,
-    "yield_curve": 0.48,
-    "credit_status": "Complacent",
-    "s5fi": 72.6,
-    "mmth": 75.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft unveiled a new enterprise AI suite today, garnering significant analyst upgrades predicting accelerated cloud adoption."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly announced positive Phase 3 trial results for its new obesity drug, exceeding expectations and boosting future revenue projections."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA saw renewed interest driven by options flow ahead of next week's developer conference, despite no new fundamental news released today."
         }
       ]
     }
