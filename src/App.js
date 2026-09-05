@@ -10855,7 +10855,6 @@ const FocusScanTable = ({ scan }) => {
   const fmtVol   = v => v == null ? "—" : v >= 1e6 ? `${(v/1e6).toFixed(1)}M` : v >= 1e3 ? `${(v/1e3).toFixed(0)}K` : `${v}`;
   const chgCls   = v => v == null ? "text-zinc-500" : v >= 0 ? "text-emerald-400" : "text-rose-400";
 
-  const SHOW_MAX = 15;
   const hasPerf = scan.group === "momentum";
   const enriched = scan.stocks || [];
 
@@ -10891,8 +10890,6 @@ const FocusScanTable = ({ scan }) => {
     return rows;
   }, [enriched, sortCol, sortDir]);
 
-  const visible = sorted.slice(0, SHOW_MAX);
-
   const SortIcon = ({ col }) => {
     if (sortCol !== col) return <span className="ml-0.5 text-zinc-700">⇅</span>;
     return <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>;
@@ -10908,21 +10905,21 @@ const FocusScanTable = ({ scan }) => {
       {enriched.length === 0 ? (
         <p className="text-xs text-zinc-600 italic px-3 py-4">No matches right now.</p>
       ) : (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto overflow-y-auto max-h-[420px]">
           <table className="w-full text-xs border-collapse">
             <thead>
               <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
                 {COLS.map(({ key, label, align, hideSm }) => (
                   <th key={key}
                       onClick={() => handleSort(key)}
-                      className={`px-3 py-1.5 font-medium cursor-pointer hover:text-zinc-300 transition-colors ${align === "right" ? "text-right" : "text-left"} ${hideSm ? "hidden sm:table-cell" : ""}`}>
+                      className={`sticky top-0 z-10 bg-zinc-900 px-3 py-1.5 font-medium cursor-pointer hover:text-zinc-300 transition-colors ${align === "right" ? "text-right" : "text-left"} ${hideSm ? "hidden sm:table-cell" : ""}`}>
                     {label}<SortIcon col={key}/>
                   </th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {visible.map((s, i) => (
+              {sorted.map((s, i) => (
                 <tr key={s.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
                   <td className="px-3 py-1.5 text-left">
                     <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noreferrer"
@@ -10942,11 +10939,6 @@ const FocusScanTable = ({ scan }) => {
               ))}
             </tbody>
           </table>
-          {enriched.length > SHOW_MAX && (
-            <div className="text-[10px] text-zinc-600 text-center py-1.5 border-t border-zinc-800/60">
-              showing top {SHOW_MAX} of {enriched.length}
-            </div>
-          )}
         </div>
       )}
     </div>
