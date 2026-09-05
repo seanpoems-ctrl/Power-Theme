@@ -690,7 +690,7 @@ def fetch_gappers() -> list[dict]:
         (_, df) = (
             Query()
             .select(
-                "name", "close", "premarket_change", "premarket_volume",
+                "name", "close", "premarket_close", "premarket_change", "premarket_volume",
                 "market_cap_basic", "average_volume_10d_calc", "relative_volume_intraday|5"
             )
             .where(
@@ -709,7 +709,15 @@ def fetch_gappers() -> list[dict]:
         results = []
         for _, row in df.iterrows():
             rvol     = float(row.get("relative_volume_intraday|5") or 0)
-            price    = round(float(row.get("close") or 0), 2)
+            # `close` lags during the actual pre-market window — it can still
+            # read the prior session's close if no fresh print has landed at
+            # the exact scan instant, while `premarket_change` already reflects
+            # the real gap computed from the pre-market tape. That mismatch
+            # made `price` and the later-scraped Finviz "Prev Close" collide
+            # on the same number despite a real double-digit gap. Prefer the
+            # dedicated pre-market price so `price` actually matches `gap_pct`.
+            pm_close = row.get("premarket_close")
+            price    = round(float(pm_close if pm_close else row.get("close") or 0), 2)
             avg_vol  = int(row.get("average_volume_10d_calc") or 0)
             avg_dvol = round(price * avg_vol)
             # Minimum avg $ vol: $5M (UI filter handles stricter thresholds)

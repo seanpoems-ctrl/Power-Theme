@@ -6036,7 +6036,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
   );
 };
 
-const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
+const LeaderColumn = ({ ibkrThemesData, gapperData, livePrices = {}, mode }) => {
   // mode: "scanner" (ibkr power leaders) | "gapper" (gate-passing gappers + peers)
   const hoverTimer = useRef(null);
   const [hovered, setHovered] = useState(null);
@@ -6055,16 +6055,19 @@ const LeaderColumn = ({ ibkrThemesData, gapperData, mode }) => {
     return gappers
       .filter(g => g.meets_all_gates)
       .slice(0, 8)
-      .map(g => ({
-        ticker:   g.ticker,
-        price:    g.price ?? null,
-        gap_pct:  g.gap_pct ?? null,
-        rs:       g.rs_52w ?? null,
-        peers:    g.peer_tickers || [],
-        leverage: g.leverage_etfs || [],
-        inverse:  g.inverse_etfs  || [],
-      }));
-  }, [gapperData, mode]);
+      .map(g => {
+        const lp = livePrices[g.ticker];
+        return {
+          ticker:   g.ticker,
+          price:    lp?.price ?? g.price ?? null,
+          gap_pct:  lp?.change_pct ?? g.gap_pct ?? null,
+          rs:       g.rs_52w ?? null,
+          peers:    g.peer_tickers || [],
+          leverage: g.leverage_etfs || [],
+          inverse:  g.inverse_etfs  || [],
+        };
+      });
+  }, [gapperData, mode, livePrices]);
 
   const leaders = useMemo(() => {
     if (mode === "gapper") return []; // gapper mode uses gapperGroups instead
@@ -6605,7 +6608,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
         onTickerClick={(ticker, rect) => setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect })}
       />
       </div>
-      <LeaderColumn ibkrThemesData={ibkrThemesData} gapperData={gapperData} mode="gapper" />
+      <LeaderColumn ibkrThemesData={ibkrThemesData} gapperData={gapperData} livePrices={livePrices} mode="gapper" />
     </div>
     {hovered && <TVPopup ticker={hovered.ticker} anchorRect={hovered.rect} onClose={() => setHovered(null)}/>}
     {modalData && (
@@ -10010,6 +10013,32 @@ const DailyWatchlistTab = ({ data }) => {
       .catch(() => {});
   }, []);
 
+  // Live prices for the Gapper Watch cards — same Finnhub quote lookup as the
+  // Institutional Gappers table, so "Close" here means the real last/close
+  // price rather than the scan-time pre-market snapshot stored in gapper_data.json.
+  const [gwLivePrices, setGwLivePrices] = React.useState({});
+  React.useEffect(() => {
+    if (!gapperData?.gappers?.length || !FINNHUB_KEY) return;
+    const tickers = gapperData.gappers.map(g => g.ticker);
+    (async () => {
+      const results = await Promise.all(
+        tickers.map(async (sym) => {
+          try {
+            const r = await fetch(`https://finnhub.io/api/v1/quote?symbol=${sym}&token=${FINNHUB_KEY}`);
+            if (!r.ok) return null;
+            const q = await r.json();
+            const price = q?.c;
+            const prevClose = q?.pc;
+            if (price == null || !prevClose) return null;
+            return [sym, { price, change_pct: (price - prevClose) / prevClose * 100 }];
+          } catch { return null; }
+        })
+      );
+      const updates = Object.fromEntries(results.filter(Boolean));
+      if (Object.keys(updates).length) setGwLivePrices(updates);
+    })();
+  }, [gapperData]);
+
   // Flatten all stocks from all themes/subthemes — keep highest RS per ticker
   const allStocks = React.useMemo(() => {
     if (!data?.themes) return [];
@@ -10359,6 +10388,9 @@ const DailyWatchlistTab = ({ data }) => {
             // prevClose: Finviz's own "Prev Close" field, then a last-resort derivation
             // from scan-time price ÷ (1 + gap%) — see Institutional Gappers for why.
             const prevClose = g.prev_close ?? (g.gap_pct != null ? g.price / (1 + g.gap_pct / 100) : null);
+            const lp = gwLivePrices[g.ticker];
+            const closePrice = lp?.price ?? g.price;
+            const closePct   = lp?.change_pct ?? g.gap_pct;
             return (
               <div key={g.ticker} className="px-3 py-2.5 rounded-lg bg-zinc-800/60 border border-zinc-700/40 flex flex-col gap-1.5">
                 <div className="flex items-center justify-between">
@@ -10372,12 +10404,12 @@ const DailyWatchlistTab = ({ data }) => {
                         Prev Close ${prevClose.toFixed(2)}
                       </div>
                     )}
-                    {g.price != null && (
+                    {closePrice != null && (
                       <div className="text-[10px] font-mono text-zinc-500 whitespace-nowrap">
-                        Close ${g.price.toFixed(2)}
-                        {g.gap_pct != null && (
-                          <span className={`ml-0.5 font-semibold ${g.gap_pct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
-                            {g.gap_pct >= 0 ? "+" : ""}{g.gap_pct.toFixed(1)}%
+                        Close ${closePrice.toFixed(2)}
+                        {closePct != null && (
+                          <span className={`ml-0.5 font-semibold ${closePct >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                            {closePct >= 0 ? "+" : ""}{closePct.toFixed(1)}%
                           </span>
                         )}
                       </div>
