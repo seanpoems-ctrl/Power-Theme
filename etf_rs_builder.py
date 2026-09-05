@@ -230,16 +230,20 @@ def build_etf_rs() -> dict:
         progress=False,
     )
 
-    # Extract close prices
+    # Extract close/high prices
     if isinstance(raw.columns, pd.MultiIndex):
         closes  = raw["Close"]
+        highs   = raw["High"]
     else:
         closes  = raw[["Close"]].rename(columns={"Close": ALL_TICKERS[0]})
+        highs   = raw[["High"]].rename(columns={"High": ALL_TICKERS[0]})
 
     if isinstance(raw5.columns, pd.MultiIndex):
         closes5 = raw5["Close"]
+        opens5  = raw5["Open"]
     else:
         closes5 = raw5[["Close"]].rename(columns={"Close": ALL_TICKERS[0]})
+        opens5  = raw5[["Open"]].rename(columns={"Open": ALL_TICKERS[0]})
 
     D20  = 20   # Jeff Sun's 1-month RS baseline period (20 trading days)
     D25  = 25   # Jeff Sun's histogram window (25 trading days for daily RS bars)
@@ -259,6 +263,18 @@ def build_etf_rs() -> dict:
         s5 = closes5[tkr].dropna() if tkr in closes5.columns else pd.Series(dtype=float)
         p1d = _safe_pct(s5, 2) if len(s5) >= 3 else _safe_pct(s, 2)
 
+        # Intraday change: most recent session's close vs its OWN open — distinct from
+        # % 1D (close vs *prior day's* close), which absorbs any overnight/pre-market gap.
+        p_intraday = None
+        o5 = opens5[tkr].dropna() if tkr in opens5.columns else pd.Series(dtype=float)
+        if len(o5) and len(s5):
+            common = o5.index.intersection(s5.index)
+            if len(common):
+                d = common.max()
+                o_val = float(o5.loc[d])
+                if o_val:
+                    p_intraday = round((float(s5.loc[d]) / o_val - 1) * 100, 1)
+
         # 1-week (5 trading days)
         p1w = _safe_pct(s5, 6) if len(s5) >= 6 else _safe_pct(s, 6)
 
@@ -268,8 +284,10 @@ def build_etf_rs() -> dict:
         p6m  = _safe_pct(s, D126)
         p12m = _safe_pct(s, D252)
 
-        # % off 52-week high
-        h52 = float(s.tail(D252).max()) if len(s) >= 5 else None
+        # % off 52-week high — Jeff Sun's own tables measure against the intraday
+        # high, not the closing high, so use the High series (always >= Close).
+        hi = highs[tkr].dropna() if tkr in highs.columns else pd.Series(dtype=float)
+        h52 = float(hi.tail(D252).max()) if len(hi) >= 5 else None
         cur = float(s.iloc[-1])
         pct_off_52wh = round((cur / h52 - 1) * 100, 1) if h52 and h52 > 0 else None
 
@@ -356,13 +374,13 @@ def build_etf_rs() -> dict:
             "etf_type":       meta.get("type"),        # "pure_sector" | "beta_booster"
             "liquid":         meta.get("liquid"),      # True = Liquid Basket, False = Illiquid Vector
             "benchmark":      bool(meta.get("benchmark")),  # Index/Segment/EW Sector/SPDR Sector table
-            "perf_intraday":  round(p1d,  2) if p1d  is not None else None,
-            "perf_1d":        round(p1d,  2) if p1d  is not None else None,
-            "perf_1w":        round(p1w,  2) if p1w  is not None else None,
-            "perf_1m":        p1m,
-            "perf_3m":        p3m,
-            "perf_6m":        p6m,
-            "perf_12m":       p12m,
+            "perf_intraday":  p_intraday,
+            "perf_1d":        round(p1d,  1) if p1d  is not None else None,
+            "perf_1w":        round(p1w,  1) if p1w  is not None else None,
+            "perf_1m":        round(p1m,  1) if p1m  is not None else None,
+            "perf_3m":        round(p3m,  1) if p3m  is not None else None,
+            "perf_6m":        round(p6m,  1) if p6m  is not None else None,
+            "perf_12m":       round(p12m, 1) if p12m is not None else None,
             "pct_off_52wh":   pct_off_52wh,
             "sparkline":      sparkline,
             "rs_histogram":   rs_histogram,
