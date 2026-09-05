@@ -9988,6 +9988,7 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
 const DailyWatchlistTab = ({ data }) => {
   const [gapperData, setGapperData]   = React.useState(null);
   const [etfRsData,  setEtfRsData]    = React.useState(null);
+  const [focusListData, setFocusListData] = React.useState(null);
   const [mode, setMode]               = React.useState("long");   // "long" | "short" | "etf"
   const [perfMode, setPerfMode]       = React.useState("1m");      // "1d" | "1m" | "3m"
   const [leaderPerfMode, setLeaderPerfMode] = React.useState("perf_1m");
@@ -10006,6 +10007,10 @@ const DailyWatchlistTab = ({ data }) => {
     fetch(process.env.PUBLIC_URL + "/etf_rs.json?v=" + Date.now())
       .then(r => r.ok ? r.json() : null)
       .then(d => { if (d) setEtfRsData(d); })
+      .catch(() => {});
+    fetch(process.env.PUBLIC_URL + "/focus_list.json?v=" + Date.now())
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d) setFocusListData(d); })
       .catch(() => {});
     fetch(process.env.PUBLIC_URL + "/screener_stocks.json?v=" + Date.now())
       .then(r => r.ok ? r.json() : null)
@@ -10467,6 +10472,10 @@ const DailyWatchlistTab = ({ data }) => {
             className={`px-3 py-1.5 transition-colors border-r border-zinc-700 ${mode === "etf" ? "bg-blue-600/25 text-blue-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
             📊 ETF RS
           </button>
+          <button onClick={() => setMode("focus")}
+            className={`px-3 py-1.5 transition-colors border-r border-zinc-700 ${mode === "focus" ? "bg-amber-600/25 text-amber-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
+            🎯 Focus List
+          </button>
           <button onClick={() => setMode("universe")}
             className={`px-3 py-1.5 transition-colors ${mode === "universe" ? "bg-violet-600/25 text-violet-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
             🌐 Universe
@@ -10599,6 +10608,9 @@ const DailyWatchlistTab = ({ data }) => {
           <EtfCandidatesPanel />
         </div>
       )}
+
+      {/* ── FOCUS LIST ───────────────────────────────────── */}
+      {mode === "focus" && <FocusListTab data={focusListData} />}
 
       {/* ── UNIVERSE ──────────────────────────────────────── */}
       {mode === "universe" && <UniverseTab etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} etfRsData={etfRsData} />}
@@ -10831,6 +10843,182 @@ const TrendSparkline = ({ data = [] }) => {
     </svg>
   );
 };
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Focus List — Jeff Sun-style screener battery (public/focus_list.json, built
+// by focus_list_scanner.py): 8 momentum scans (1W/1M/3M/6M x Small/Large cap)
+// + 5 operational/tightness scans, each already sorted by its defining metric.
+// ─────────────────────────────────────────────────────────────────────────────
+const FocusScanTable = ({ scan }) => {
+  const fmtPct   = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
+  const fmtDvol  = v => v == null ? "—" : v >= 1e9 ? `$${(v/1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v/1e6).toFixed(0)}M` : `$${(v/1e3).toFixed(0)}K`;
+  const fmtVol   = v => v == null ? "—" : v >= 1e6 ? `${(v/1e6).toFixed(1)}M` : v >= 1e3 ? `${(v/1e3).toFixed(0)}K` : `${v}`;
+  const chgCls   = v => v == null ? "text-zinc-500" : v >= 0 ? "text-emerald-400" : "text-rose-400";
+
+  const SHOW_MAX = 15;
+  const hasPerf = scan.group === "momentum";
+  const enriched = scan.stocks || [];
+
+  const COLS = [
+    { key: "ticker",     label: "Ticker",     align: "left"  },
+    { key: "industry",   label: "Industry",   align: "left"  },
+    { key: "adr_dvol",   label: "ADR×$Vol",   align: "right" },
+    { key: "close",      label: "Price",      align: "right" },
+    { key: "change",     label: "Day%",       align: "right" },
+    ...(hasPerf ? [{ key: "perf", label: scan.timeframe, align: "right" }] : []),
+    { key: "adr_pct",    label: "ADR%",       align: "right" },
+    { key: "volume",     label: "Vol",        align: "right", hideSm: true },
+    { key: "market_cap", label: "Mkt Cap",    align: "right", hideSm: true },
+  ];
+
+  const [sortCol, setSortCol] = React.useState(hasPerf ? "perf" : "change");
+  const [sortDir, setSortDir] = React.useState("desc");
+  const handleSort = col => {
+    if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
+    else { setSortCol(col); setSortDir(col === "ticker" || col === "industry" ? "asc" : "desc"); }
+  };
+
+  const sorted = React.useMemo(() => {
+    const rows = [...enriched];
+    rows.sort((a, b) => {
+      let av = a[sortCol], bv = b[sortCol];
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+      return sortDir === "asc" ? av - bv : bv - av;
+    });
+    return rows;
+  }, [enriched, sortCol, sortDir]);
+
+  const visible = sorted.slice(0, SHOW_MAX);
+
+  const SortIcon = ({ col }) => {
+    if (sortCol !== col) return <span className="ml-0.5 text-zinc-700">⇅</span>;
+    return <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>;
+  };
+
+  return (
+    <div className="rounded-lg border border-zinc-800 overflow-hidden">
+      <div className="flex items-baseline gap-2 px-3 py-2 bg-zinc-900/80 border-b border-zinc-800">
+        <h4 className="text-[12px] font-semibold text-zinc-100">{scan.label}</h4>
+        <span className="text-[10px] font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{enriched.length}</span>
+        {scan.timeframe && <span className="text-[10px] text-zinc-600">{scan.mcap_group} · {scan.timeframe}</span>}
+      </div>
+      {enriched.length === 0 ? (
+        <p className="text-xs text-zinc-600 italic px-3 py-4">No matches right now.</p>
+      ) : (
+        <div className="overflow-x-auto">
+          <table className="w-full text-xs border-collapse">
+            <thead>
+              <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
+                {COLS.map(({ key, label, align, hideSm }) => (
+                  <th key={key}
+                      onClick={() => handleSort(key)}
+                      className={`px-3 py-1.5 font-medium cursor-pointer hover:text-zinc-300 transition-colors ${align === "right" ? "text-right" : "text-left"} ${hideSm ? "hidden sm:table-cell" : ""}`}>
+                    {label}<SortIcon col={key}/>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {visible.map((s, i) => (
+                <tr key={s.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
+                  <td className="px-3 py-1.5 text-left">
+                    <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noreferrer"
+                       className="font-mono font-bold text-cyan-400 hover:underline">
+                      {s.ticker}
+                    </a>
+                  </td>
+                  <td className="px-3 py-1.5 text-left text-zinc-400 max-w-[140px] truncate">{s.industry || "—"}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{fmtDvol(s.adr_dvol)}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-300">{s.close != null ? `$${s.close.toFixed(2)}` : "—"}</td>
+                  <td className={`px-3 py-1.5 text-right font-mono font-semibold ${chgCls(s.change)}`}>{fmtPct(s.change)}</td>
+                  {hasPerf && <td className={`px-3 py-1.5 text-right font-mono font-semibold ${chgCls(s.perf)}`}>{fmtPct(s.perf)}</td>}
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-400">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtVol(s.volume)}</td>
+                  <td className="px-3 py-1.5 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtDvol(s.market_cap)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {enriched.length > SHOW_MAX && (
+            <div className="text-[10px] text-zinc-600 text-center py-1.5 border-t border-zinc-800/60">
+              showing top {SHOW_MAX} of {enriched.length}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+};
+
+const FocusListTab = ({ data }) => {
+  if (!data) return <p className="text-sm text-zinc-600 italic py-8 text-center">Loading Focus List…</p>;
+
+  const scanTimeLabel = (() => {
+    if (!data.scan_time) return null;
+    try {
+      return new Intl.DateTimeFormat('en-US', { timeZone: 'America/New_York', hour: '2-digit', minute: '2-digit', hour12: false }).format(new Date(data.scan_time)) + ' ET';
+    } catch { return null; }
+  })();
+
+  const scans = data.scans || [];
+  const momentum   = scans.filter(s => s.group === "momentum");
+  const operational = scans.filter(s => s.group === "operational");
+  const smallCap = momentum.filter(s => s.mcap_group?.startsWith("$"));
+  const largeCap = momentum.filter(s => s.mcap_group?.startsWith(">"));
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h3 className="text-sm font-semibold text-zinc-100">🎯 Focus List</h3>
+          <p className="text-[11px] text-zinc-600">Jeff Sun-style screener battery · 13 scans · momentum + tightness filters</p>
+        </div>
+        {scanTimeLabel && <span className="text-[11px] text-zinc-600 font-mono tabular-nums">↻ {scanTimeLabel}</span>}
+      </div>
+
+      {momentum.length > 0 && (
+        <div>
+          <FocusSec title="Momentum Scans" sub="1W / 1M / 3M / 6M lookback, tight above SMA10 — not extended" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="space-y-4">
+              <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wide">Small Cap ($300M–$10B)</div>
+              {smallCap.map(s => <FocusScanTable key={s.key} scan={s} />)}
+            </div>
+            <div className="space-y-4">
+              <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wide">Large Cap (&gt;$10B)</div>
+              {largeCap.map(s => <FocusScanTable key={s.key} scan={s} />)}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {operational.length > 0 && (
+        <div>
+          <FocusSec title="Operational & Tightness Scans" sub="Fundamental growth, post-earnings bases, and strongest-stock filters" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            {operational.map(s => <FocusScanTable key={s.key} scan={s} />)}
+          </div>
+        </div>
+      )}
+
+      {scans.length === 0 && (
+        <p className="text-sm text-zinc-500 italic py-8 text-center">
+          No Focus List data yet — run <code className="text-zinc-400">python focus_list_scanner.py</code> to generate public/focus_list.json.
+        </p>
+      )}
+    </div>
+  );
+};
+
+const FocusSec = ({ title, sub }) => (
+  <div className="flex items-baseline gap-2 mb-3">
+    <h3 className="text-sm font-semibold text-zinc-100">{title}</h3>
+    {sub && <span className="text-xs text-zinc-600">{sub}</span>}
+  </div>
+);
 
 const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null }) => {
   const [uData, setUData]         = useState(null);
