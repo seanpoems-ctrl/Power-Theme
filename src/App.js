@@ -10982,7 +10982,7 @@ const FocusListTab = ({ data }) => {
       {momentum.length > 0 && (
         <div>
           <FocusSec title="Momentum Scans" sub="1W / 1M / 3M / 6M lookback, tight above SMA10 — not extended" />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="space-y-4">
             <div className="space-y-4">
               <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wide">Small Cap ($300M–$10B)</div>
               {smallCap.map(s => <FocusScanTable key={s.key} scan={s} />)}
@@ -10998,7 +10998,7 @@ const FocusListTab = ({ data }) => {
       {operational.length > 0 && (
         <div>
           <FocusSec title="Operational & Tightness Scans" sub="Fundamental growth, post-earnings bases, and strongest-stock filters" />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          <div className="space-y-4">
             {operational.map(s => <FocusScanTable key={s.key} scan={s} />)}
           </div>
         </div>
