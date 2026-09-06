@@ -11888,8 +11888,8 @@ const appScreenerMap = useMemo(() => {
 
 
           {/* Row 3: Tabs + right-side actions */}
-          <div className="flex items-center border-t border-zinc-800/50 pt-1 mt-0.5">
-            <div className="flex items-center gap-0 flex-1">
+          <div className="flex flex-wrap items-center gap-y-1 border-t border-zinc-800/50 pt-1 mt-0.5">
+            <div className="flex flex-wrap items-center gap-0 flex-1">
               <button onClick={() => setTab("scanner")} className={`px-3 py-1.5 text-[13px] font-medium border-b-2 -mb-px transition-colors whitespace-nowrap ${tab === "scanner" ? "border-blue-400 text-white" : "border-transparent text-zinc-500 hover:text-zinc-300"}`}>
                 Thematic Scanner
               </button>
