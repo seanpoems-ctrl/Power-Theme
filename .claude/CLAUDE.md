@@ -18,6 +18,7 @@ Deployed on **GitHub Pages** as a static React app. Data is fetched nightly via 
 ├── .github/workflows/
 │   ├── daily-scrape-deploy.yml   # Mon-Fri 21:30 UTC — thematic scraper + build + deploy
 │   ├── premarket-gapper.yml      # Mon-Fri 13:05 UTC — gapper scan + build + deploy
+│   ├── focus-list-scan.yml       # Mon-Fri, 68 min after close — Focus List scan (data commit only)
 │   └── deploy.yml                # Triggered on push to main — build + deploy only
 ├── src/
 │   ├── App.js                    # Main React app (~950 lines)
@@ -173,6 +174,7 @@ Python dependencies: `requests`, `beautifulsoup4`, `yfinance`, `exchange_calenda
 |----------|---------------|---------------|---------|
 | daily-scrape-deploy.yml | Mon–Fri 21:30 | ~4:30 PM | After market close |
 | premarket-gapper.yml | Mon–Fri 13:05 | 8:05 AM | Pre-market |
+| focus-list-scan.yml | Mon–Fri 21:08 (EDT) / 22:08 (EST) | 5:08 PM | 68 min after close — lets AMC earnings prints land first |
 | deploy.yml | on push to main | — | Code changes only |
 
 All workflows check `is_trading_day()` and skip on NYSE holidays.
