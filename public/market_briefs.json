@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-07 12:23 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Signals, Underlying Caution",
+    "spy_price": 770.19,
+    "spy_change_pct": -0.39,
+    "vix": 15.3,
+    "hy_oas": 2.65,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 51.9,
+    "mmth": 67.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple's new mixed-reality headset, Vision Pro 2, garnered overwhelmingly positive reviews following its developer conference, sparking renewed enthusiasm for its ecosystem expansion."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly announced promising Phase 3 trial results for its next-generation obesity drug, exceeding efficacy expectations and reinforcing its market leadership."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continued its multi-week rally, buoyed by ongoing bullish sentiment around artificial intelligence infrastructure and sector-wide rotational flow."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-07 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2100,43 +2138,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-08-17 07:33 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Observation / Mixed Signals",
-    "spy_price": 776.34,
-    "spy_change_pct": -0.2,
-    "vix": 14.91,
-    "hy_oas": 2.71,
-    "yield_curve": 0.51,
-    "credit_status": "Complacent",
-    "s5fi": 72.6,
-    "mmth": 75.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is expected to see increased volume following a major analyst upgrade to 'Outperform' with a significantly raised price target, citing robust demand for its new generation of AI data center GPUs."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase is gaining traction on news of an anticipated regulatory approval for its recent fintech acquisition, signaling expansion into high-growth digital banking services."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple (AAPL) continues to be influenced by ongoing discussions around smartphone upgrade cycles and upcoming product launch speculation, lacking a fresh catalyst today but maintaining high liquidity from sustained retail interest."
-        }
-      ]
-    }
   }
 ]
