@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-07 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Mixed Global, Cautious US",
+    "spy_price": 770.19,
+    "spy_change_pct": -0.39,
+    "vix": 15.06,
+    "hy_oas": 2.65,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 51.9,
+    "mmth": 67.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA announced a groundbreaking AI accelerator chip partnership with a major cloud provider, fueling optimism for accelerated data center revenue growth and extending its market leadership."
+        },
+        {
+          "ticker": "COST",
+          "company": "Costco Wholesale Corporation",
+          "reason": "Costco reported better-than-expected August sales figures, driven by strong consumer spending trends and successful new membership initiatives, hinting at robust Q4 earnings."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "GameStop sees renewed short-squeeze speculation following unusual options activity and a technical breakout above its 50-day moving average, a familiar pattern lacking fresh fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-04 18:31 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2097,44 +2135,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Apple (AAPL) continues to be influenced by ongoing discussions around smartphone upgrade cycles and upcoming product launch speculation, lacking a fresh catalyst today but maintaining high liquidity from sustained retail interest."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-17 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Watchful Calm / Global Strength",
-    "spy_price": 776.34,
-    "spy_change_pct": -0.2,
-    "vix": 14.93,
-    "hy_oas": 2.71,
-    "yield_curve": 0.51,
-    "credit_status": "Complacent",
-    "s5fi": 72.6,
-    "mmth": 75.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Pre-orders for Apple's new advanced AR/VR headset are reportedly crushing initial expectations, signalling robust consumer demand for immersive technologies."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly announces groundbreaking Phase 3 clinical trial results for its next-generation Alzheimer's drug, showing significant cognitive decline reduction."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSTR",
-          "company": "MicroStrategy Incorporated",
-          "reason": "Purely technical breakout potential driven by renewed institutional interest in Bitcoin exchange-traded funds, fueling a potential short squeeze in the highly leveraged name."
         }
       ]
     }
