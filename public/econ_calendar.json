@@ -1,17 +1,7 @@
 {
-  "generated_at": "2026-09-06T00:28:15.013192+00:00",
+  "generated_at": "2026-09-07T23:04:40.233746+00:00",
   "data_source": "tradingview",
   "events": [
-    {
-      "date": "2026-08-08",
-      "time_et": "12:45",
-      "event": "Fed Bowman Speech",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": null,
-      "currency": "USD"
-    },
     {
       "date": "2026-08-10",
       "time_et": "11:30",
@@ -3168,7 +3158,7 @@
       "event": "Consumer Credit Change",
       "impact": "Low",
       "actual": null,
-      "forecast": "11.3",
+      "forecast": "12",
       "previous": "14.17",
       "currency": "USD"
     },
@@ -3288,18 +3278,8 @@
       "event": "PPI YoY",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "5.3",
       "previous": "4.7",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-10",
-      "time_et": "08:30",
-      "event": "Continuing Jobless Claims",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "1779",
       "currency": "USD"
     },
     {
@@ -3310,6 +3290,16 @@
       "actual": null,
       "forecast": null,
       "previous": "207.25",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-10",
+      "time_et": "08:30",
+      "event": "Continuing Jobless Claims",
+      "impact": "Low",
+      "actual": null,
+      "forecast": "1790",
+      "previous": "1779",
       "currency": "USD"
     },
     {
@@ -3328,7 +3318,7 @@
       "event": "Core PPI YoY",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "4.6",
       "previous": "4.2",
       "currency": "USD"
     },
@@ -3358,7 +3348,7 @@
       "event": "PPI MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": "0.3",
+      "forecast": "0.4",
       "previous": null,
       "currency": "USD"
     },
@@ -3398,7 +3388,7 @@
       "event": "Existing Home Sales",
       "impact": "Low",
       "actual": null,
-      "forecast": "4.03",
+      "forecast": "3.99",
       "previous": "4.06",
       "currency": "USD"
     },
@@ -3565,21 +3555,21 @@
     {
       "date": "2026-09-11",
       "time_et": "08:30",
-      "event": "CPI",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "333.92",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-11",
-      "time_et": "08:30",
       "event": "CPI s.a",
       "impact": "Low",
       "actual": null,
       "forecast": null,
       "previous": "332.81",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-11",
+      "time_et": "08:30",
+      "event": "CPI",
+      "impact": "Low",
+      "actual": null,
+      "forecast": "334.85",
+      "previous": "333.92",
       "currency": "USD"
     },
     {
@@ -3635,21 +3625,21 @@
     {
       "date": "2026-09-11",
       "time_et": "10:00",
-      "event": "Michigan Inflation Expectations Prel",
+      "event": "Michigan Current Conditions Prel",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
-      "previous": "4",
+      "forecast": "51",
+      "previous": "51.9",
       "currency": "USD"
     },
     {
       "date": "2026-09-11",
       "time_et": "10:00",
-      "event": "Michigan Current Conditions Prel",
+      "event": "Michigan Inflation Expectations Prel",
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": "51.9",
+      "previous": "4",
       "currency": "USD"
     },
     {
@@ -3668,7 +3658,7 @@
       "event": "Michigan Consumer Sentiment Prel",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "51",
       "previous": "51.7",
       "currency": "USD"
     },
@@ -3708,7 +3698,7 @@
       "event": "Monthly Budget Statement",
       "impact": "Low",
       "actual": null,
-      "forecast": "-202.4",
+      "forecast": "-202.5",
       "previous": "-432",
       "currency": "USD"
     },
@@ -3965,21 +3955,21 @@
     {
       "date": "2026-09-16",
       "time_et": "10:00",
-      "event": "Business Inventories MoM",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": null,
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-16",
-      "time_et": "10:00",
       "event": "NAHB Housing Market Index",
       "impact": "Low",
       "actual": null,
       "forecast": null,
       "previous": "35",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-16",
+      "time_et": "10:00",
+      "event": "Business Inventories MoM",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
       "currency": "USD"
     },
     {
@@ -4486,6 +4476,36 @@
       "date": "2026-09-18",
       "time_et": "13:00",
       "event": "Baker Hughes Total Rigs Count",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-21",
+      "time_et": "08:30",
+      "event": "Chicago Fed National Activity Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "-0.08",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-21",
+      "time_et": "11:30",
+      "event": "6-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-21",
+      "time_et": "11:30",
+      "event": "3-Month Bill Auction",
       "impact": "Low",
       "actual": null,
       "forecast": null,
