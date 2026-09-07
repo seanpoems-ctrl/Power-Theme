@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-07 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Elevated Volatility, Mixed Signals",
+    "spy_price": 770.19,
+    "spy_change_pct": -0.39,
+    "vix": 15.3,
+    "hy_oas": 2.65,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 51.9,
+    "mmth": 67.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a groundbreaking AI chip partnership today, positioning it as a key player in the next generation of generative AI infrastructure."
+        },
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla reported better-than-expected Q3 delivery numbers, signaling a strong rebound in production and demand."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continues to see strong investor interest driven by persistent AI enthusiasm, though no fresh catalysts were reported today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-07 12:23 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2120,23 +2158,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-08-17 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "",
-    "spy_price": 772.67,
-    "spy_change_pct": -0.47,
-    "vix": 15.19,
-    "hy_oas": 2.67,
-    "yield_curve": 0.51,
-    "credit_status": "Complacent",
-    "s5fi": 66.0,
-    "mmth": 71.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
