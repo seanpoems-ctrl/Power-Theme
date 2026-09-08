@@ -2,64 +2,52 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 4,
+  "count": 3,
   "stocks": [
     {
       "ticker": "ASST",
       "company": "Strive, Inc.",
       "industry": "Financial Conglomerates",
-      "price": 27.14,
-      "change_pct": 1.19,
+      "price": 27.16,
+      "change_pct": 0.07,
       "adr_pct": 6.5,
-      "dollar_volume": "$338.2M",
-      "market_cap_b": 2.434,
-      "rs_ibd": 67,
-      "above50dma_pct": 84.6
+      "dollar_volume": "$322.8M",
+      "market_cap_b": 2.533,
+      "rs_ibd": 71,
+      "above50dma_pct": 80.8
     },
     {
       "ticker": "MRNA",
       "company": "Moderna, Inc.",
       "industry": "Biotechnology",
-      "price": 145.55,
-      "change_pct": -2.23,
-      "adr_pct": 9.4,
-      "dollar_volume": "$3.53B",
-      "market_cap_b": 58.109,
+      "price": 140.33,
+      "change_pct": -3.59,
+      "adr_pct": 9.5,
+      "dollar_volume": "$3.11B",
+      "market_cap_b": 56.025,
       "rs_ibd": 98,
-      "above50dma_pct": 70.2
+      "above50dma_pct": 61.4
     },
     {
-      "ticker": "PSNYW",
-      "company": "Polestar Automotive Holding UK Limited",
-      "industry": "Motor Vehicles",
-      "price": 5.0,
-      "change_pct": -6.02,
-      "adr_pct": 16.8,
-      "dollar_volume": "$6.0M",
-      "market_cap_b": 1.521,
-      "rs_ibd": 30,
-      "above50dma_pct": 61.2
-    },
-    {
-      "ticker": "TEAM",
-      "company": "Atlassian Corporation",
+      "ticker": "LIFE",
+      "company": "Ethos Technologies Inc.",
       "industry": "Packaged Software",
-      "price": 189.58,
-      "change_pct": -2.62,
-      "adr_pct": 4.9,
-      "dollar_volume": "$745.2M",
-      "market_cap_b": 47.99,
-      "rs_ibd": 80,
-      "above50dma_pct": 50.6
+      "price": 42.02,
+      "change_pct": 5.45,
+      "adr_pct": 6.0,
+      "dollar_volume": "$52.0M",
+      "market_cap_b": 2.679,
+      "rs_ibd": 94,
+      "above50dma_pct": 54.7
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.38,
-    "spx_1m": -0.5,
-    "spx_3m": 4.22,
-    "spx_34d": 2.79,
-    "spx_qtd": 3.15,
-    "spx_mtd": 1.14
+    "spx_1d": -0.58,
+    "spx_1m": -1.03,
+    "spx_3m": 3.88,
+    "spx_34d": 2.33,
+    "spx_qtd": 2.54,
+    "spx_mtd": 0.55
   },
-  "fetched_at_utc": "2026-09-08T01:03:06+00:00"
+  "fetched_at_utc": "2026-09-08T23:02:51+00:00"
 }
