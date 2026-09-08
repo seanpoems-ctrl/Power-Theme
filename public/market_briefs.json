@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-08 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious Risk-Off",
+    "spy_price": 765.96,
+    "spy_change_pct": -0.55,
+    "vix": 15.72,
+    "hy_oas": 2.68,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 47.9,
+    "mmth": 65.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "RGTI",
+          "company": "Rigetti Computing, Inc.",
+          "reason": "Rigetti Computing secured a new government contract award today, providing a strong fresh catalyst for potential upside."
+        },
+        {
+          "ticker": "IONQ",
+          "company": "IonQ, Inc.",
+          "reason": "IonQ announced a guidance raise and a new contract today, driving high-conviction pre-market interest."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation (NVDA) is a C-Grade candidate primarily driven by technical momentum and sector-wide sentiment following recent market shifts, lacking a fresh catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-08 11:02 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2117,44 +2155,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA (NVDA) continued to garner bullish analyst commentary surrounding its dominant position in AI hardware, a familiar narrative driving consistent, albeit not fresh, buying interest."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-18 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Broad Risk-Off / Volatility Spikes",
-    "spy_price": 767.45,
-    "spy_change_pct": -0.68,
-    "vix": 15.84,
-    "hy_oas": 2.7,
-    "yield_curve": 0.53,
-    "credit_status": "Complacent",
-    "s5fi": 62.4,
-    "mmth": 70.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corporation announced a new generation of AI processors, setting new industry benchmarks for performance and efficiency, sparking upgrade cycles."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly and Company received accelerated FDA approval for its new Alzheimer's drug, positioning it for significant market share in a high-demand therapeutic area."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla, Inc. faced renewed selling pressure after failing to convincingly hold its 200-day moving average, signaling persistent technical weakness."
         }
       ]
     }
