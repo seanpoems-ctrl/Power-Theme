@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-08 18:58 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Sentiment, Cautious Dip",
+    "spy_price": 765.96,
+    "spy_change_pct": -0.55,
+    "vix": 15.72,
+    "hy_oas": 2.68,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 47.9,
+    "mmth": 65.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "RGTI",
+          "company": "Rigetti Computing Inc.",
+          "reason": "The company announced a significant government contract award, providing a strong fresh catalyst for today's price action."
+        },
+        {
+          "ticker": "IONQ",
+          "company": "IonQ Inc.",
+          "reason": "IonQ reported a guidance raise and secured a new contract, signaling improved business outlook and growth prospects."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft saw movement based on broader market sentiment and recycled headlines around ongoing AI initiatives, lacking a specific fresh catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-08 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2117,44 +2155,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla is seeing renewed technical selling pressure following yesterday's broad market weakness, with no fresh company-specific news to offset the negative flow."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-18 16:58 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Global Caution",
-    "spy_price": 767.45,
-    "spy_change_pct": -0.68,
-    "vix": 15.84,
-    "hy_oas": 2.7,
-    "yield_curve": 0.53,
-    "credit_status": "Complacent",
-    "s5fi": 62.4,
-    "mmth": 70.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a significant new cloud computing contract with a major government agency, boosting investor confidence in its Azure growth trajectory."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Amazon reported record Prime Day sales figures, exceeding analyst expectations and signaling robust consumer spending in e-commerce."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) continued to garner bullish analyst commentary surrounding its dominant position in AI hardware, a familiar narrative driving consistent, albeit not fresh, buying interest."
         }
       ]
     }
