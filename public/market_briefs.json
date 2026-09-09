@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-09 18:44 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Inflationary Concerns",
+    "spy_price": 762.4,
+    "spy_change_pct": -0.46,
+    "vix": 16.46,
+    "hy_oas": 2.67,
+    "yield_curve": 0.4,
+    "credit_status": "Complacent",
+    "s5fi": 43.5,
+    "mmth": 62.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil",
+          "reason": "Exxon Mobil shares saw a strong move today after crude oil surged, benefiting from renewed inflation expectations and robust energy demand forecasts."
+        },
+        {
+          "ticker": "CVX",
+          "company": "Chevron Corporation",
+          "reason": "Chevron Corporation rallied as oil prices climbed, positioning the integrated energy giant to outperform on higher commodity prices and strong refining margins."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA experienced technical selling pressure today, continuing recent sideways consolidation amidst broader market weakness and lacking a fresh fundamental catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-09 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2117,44 +2155,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corp.",
           "reason": "Exhibits strong technical momentum following yesterday's broad semiconductor strength, attracting renewed speculative interest."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-19 17:00 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious Optimism Amidst Global Headwinds",
-    "spy_price": 769.06,
-    "spy_change_pct": 0.21,
-    "vix": 14.89,
-    "hy_oas": 2.75,
-    "yield_curve": 0.52,
-    "credit_status": "Complacent",
-    "s5fi": 61.8,
-    "mmth": 74.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft announced a landmark multi-year cloud services contract with the Department of Defense, significantly expanding its government sector presence."
-        },
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet unveiled a next-generation AI model for enterprise search, garnering analyst upgrades and boosting expectations for future revenue streams."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Tesla saw continued volatility and elevated short interest today, driven by ongoing speculation regarding its Q3 delivery targets."
         }
       ]
     }
