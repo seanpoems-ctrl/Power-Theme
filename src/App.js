@@ -9621,10 +9621,36 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
 // magnitude relative to the max |value| in that column (bullet-chart style).
 // ─────────────────────────────────────────────────────────────────────────────
 const Top10ThematicSectors = ({ etfRsData }) => {
+  // The top-10 SET is always chosen by % P5D Change (that's what this widget is) —
+  // sorting below only reorders how those same 10 rows are displayed.
   const top10 = React.useMemo(() => {
     const etfs = (etfRsData?.etfs ?? []).filter(e => !e.benchmark && e.perf_1w != null);
     return [...etfs].sort((a, b) => b.perf_1w - a.perf_1w).slice(0, 10);
   }, [etfRsData]);
+
+  const [sortCol, setSortCol] = React.useState("perf_1w");
+  const [sortDir, setSortDir] = React.useState("desc");
+  const handleSort = col => {
+    if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
+    else { setSortCol(col); setSortDir(col === "ticker" ? "asc" : "desc"); }
+  };
+  const SortIcon = ({ col }) => {
+    if (sortCol !== col) return <span className="ml-0.5 text-zinc-700">⇅</span>;
+    return <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>;
+  };
+
+  const sorted = React.useMemo(() => {
+    const rows = [...top10];
+    rows.sort((a, b) => {
+      let av = a[sortCol], bv = b[sortCol];
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+      return sortDir === "asc" ? av - bv : bv - av;
+    });
+    return rows;
+  }, [top10, sortCol, sortDir]);
 
   if (top10.length === 0) return null;
 
@@ -9664,15 +9690,23 @@ const Top10ThematicSectors = ({ etfRsData }) => {
         <table className="w-full text-xs border-collapse">
           <thead>
             <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
-              <th className="px-3 py-1.5 text-left font-medium">Group</th>
-              <th className="px-3 py-1.5 text-left font-medium">% Daily Change</th>
-              <th className="px-3 py-1.5 text-left font-medium">% P5D Change</th>
-              <th className="px-3 py-1.5 text-left font-medium">% Off 52-Wk High</th>
-              <th className="px-3 py-1.5 text-left font-medium">Yr % Gain/Loss</th>
+              {[
+                { key: "ticker",       label: "Group" },
+                { key: "perf_1d",      label: "% Daily Change" },
+                { key: "perf_1w",      label: "% P5D Change" },
+                { key: "pct_off_52wh", label: "% Off 52-Wk High" },
+                { key: "perf_12m",     label: "Yr % Gain/Loss" },
+              ].map(({ key, label }) => (
+                <th key={key}
+                    onClick={() => handleSort(key)}
+                    className="px-3 py-1.5 text-left font-medium cursor-pointer hover:text-zinc-300 transition-colors">
+                  {label}<SortIcon col={key}/>
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {top10.map((e, i) => (
+            {sorted.map((e, i) => (
               <tr key={e.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
                 <td className="px-3 py-1.5 text-left whitespace-nowrap">
                   <a href={`https://finviz.com/quote.ashx?t=${e.ticker}`} target="_blank" rel="noreferrer"
