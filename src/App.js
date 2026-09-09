@@ -9620,7 +9620,9 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
 // movers from the same 170-ETF universe as EtfRsTable below. Bar width is
 // magnitude relative to the max |value| in that column (bullet-chart style).
 // ─────────────────────────────────────────────────────────────────────────────
-const Top10ThematicSectors = ({ etfRsData }) => {
+const Top10ThematicSectors = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
+  const [selectedEtf, setSelectedEtf] = React.useState(null);
+
   // The top-10 SET is always chosen by % P5D Change (that's what this widget is) —
   // sorting below only reorders how those same 10 rows are displayed.
   const top10 = React.useMemo(() => {
@@ -9709,10 +9711,11 @@ const Top10ThematicSectors = ({ etfRsData }) => {
             {sorted.map((e, i) => (
               <tr key={e.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
                 <td className="px-3 py-1.5 text-left whitespace-nowrap">
-                  <a href={`https://finviz.com/quote.ashx?t=${e.ticker}`} target="_blank" rel="noreferrer"
-                     className="font-mono font-bold text-cyan-400 hover:underline">
+                  <button
+                    onClick={() => setSelectedEtf({ ticker: e.ticker, theme: e.theme, holdings: etfHoldings[e.ticker] ?? [] })}
+                    className="font-mono font-bold text-cyan-400 hover:underline">
                     {e.ticker}
-                  </a>
+                  </button>
                   <span className="ml-1.5 text-zinc-400">{e.label ?? e.theme}</span>
                 </td>
                 <td className="px-3 py-1.5 w-40"><BarCell value={e.perf_1d} max={maxDay}/></td>
@@ -9724,6 +9727,15 @@ const Top10ThematicSectors = ({ etfRsData }) => {
           </tbody>
         </table>
       </div>
+      {selectedEtf && (
+        <EtfHoldingsModal
+          etf={selectedEtf.ticker}
+          theme={selectedEtf.theme}
+          holdings={selectedEtf.holdings}
+          screenerMap={screenerMap}
+          onClose={() => setSelectedEtf(null)}
+        />
+      )}
     </div>
   );
 };
@@ -10717,7 +10729,7 @@ const DailyWatchlistTab = ({ data }) => {
           <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <IndexSectorBenchmarkTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
-          <Top10ThematicSectors etfRsData={etfRsData} />
+          <Top10ThematicSectors etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfCandidatesPanel />
         </div>
