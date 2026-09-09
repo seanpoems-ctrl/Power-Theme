@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-09 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Global Retreat",
+    "spy_price": 762.4,
+    "spy_change_pct": -0.46,
+    "vix": 16.46,
+    "hy_oas": 2.67,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 43.5,
+    "mmth": 62.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Announced positive Phase 3 trial results for its new Alzheimer's therapeutic, showing significant cognitive decline reduction."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp",
+          "reason": "Secured a multi-billion dollar AI infrastructure deal with a major government agency, boosting its Azure cloud outlook."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp",
+          "reason": "Experienced a short-term price surge driven by retail investor sentiment and technical breakout signals without new fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-09 11:04 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2117,44 +2155,6 @@
           "ticker": "TSLA",
           "company": "Tesla Inc.",
           "reason": "Tesla saw continued volatility and elevated short interest today, driven by ongoing speculation regarding its Q3 delivery targets."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-19 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Resilient US, Global Weakness",
-    "spy_price": 769.06,
-    "spy_change_pct": 0.21,
-    "vix": 14.89,
-    "hy_oas": 2.75,
-    "yield_curve": 0.52,
-    "credit_status": "Complacent",
-    "s5fi": 61.8,
-    "mmth": 74.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "COST",
-          "company": "Costco Wholesale Corporation",
-          "reason": "Costco announced robust quarterly earnings exceeding analyst expectations, driven by strong membership growth and increased same-store sales."
-        },
-        {
-          "ticker": "CRM",
-          "company": "Salesforce, Inc.",
-          "reason": "Salesforce unveiled new AI-powered platform enhancements and a strategic partnership, signaling accelerated enterprise cloud adoption."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA experienced heightened options activity and technical resistance today, indicating potential for continued range-bound trading."
         }
       ]
     }
