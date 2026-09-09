@@ -1,270 +1,61 @@
 {
-  "scan_time": "2026-09-08 08:55 ET",
+  "scan_time": "2026-09-09 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "ROIV",
-      "price": 41.37,
-      "gap_pct": 18.44,
-      "pm_volume": 477555,
-      "avg_vol_10d": 9321720,
-      "avg_dollar_vol": 385639556,
-      "mkt_cap": 25230742542,
-      "rvol": 0.88,
-      "adr_pct": 3.27,
-      "category": "Thematic Narratives",
-      "theme": "New Clinical Trial Initiation",
-      "reasoning": "Roivant initiated a new clinical trial for a lung disease affecting **up to 200,000 people**, signaling pipeline progress and addressing an unmet medical need.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 56,
-      "grade": "B",
-      "finviz_theme": "Biotech - Rare Disease",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Roivant has initiated a **new clinical trial** for a lung disease that affects **up to 200,000 people**.",
-        "impact": "This marks a progression in Roivant's drug development pipeline, potentially expanding its future addressable market in rare or specialized disease areas."
-      },
-      "analysis_details": "• **The Narrative**\nRoivant has announced the initiation of a **new clinical trial** for a lung disease. This disease reportedly affects **up to 200,000 people**, indicating a potentially significant patient population for a successful therapy.\n\n• **Explosiveness**\nThis new trial represents a positive step in Roivant's pipeline, potentially driving momentum as investors factor in future product opportunities. The progress in clinical development could increase the company's intrinsic value, attracting further interest in its therapeutic areas focused on unmet medical needs.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Up to 200,000 people live with this lung disease. Roivant starts a new trial. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQQ0JvaUl4QlY0bnRmZ0JYWXdCZkxkUlJPMEFvUk1CeF9Td2FlWnpjajMwOVNxcTA1a0cta1Q2YnZsc0hiaDd2WlJ0ZlVCbHoyRGZmQmliMlVKRElVY0ZVRUZXZVAxZ0Q3Nk4yOGdZLTFQcFVmUjMzcGhnUkpaLVFFeGROajZPb2lfNVhLTmNnM1hzLWhfYXRvcVlwMWI4Z2tCNk1JalJKTm9OYlREVzZLOHdseWxIQjUtcmd3Q0dvdFc?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "524.10M",
-      "short_float": "5.84%",
-      "daily_pct": 19.38,
-      "prev_close": 34.93,
-      "industry": "Biotech - Rare Disease",
-      "technical_status": "Fail (ADR 3.3% < 4%)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 85,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "up to 200,000 people",
-        "discrepancy_note": "Source A (Finviz News) contains no information regarding this claim. Source B (Google News) confirms 'Up to 200,000 people' in one headline (Stock Titan [4]), but it is not corroborated by a second distinct source or Finviz."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "PHVS",
-      "price": 41.11,
-      "gap_pct": 16.62,
-      "pm_volume": 313078,
-      "avg_vol_10d": 535988,
-      "avg_dollar_vol": 22034467,
-      "mkt_cap": 2462694918,
-      "rvol": 0.87,
-      "adr_pct": 4.75,
-      "category": "Others",
-      "theme": "Positive Trial Data",
-      "reasoning": "Pharvaris surged **27%** after announcing **positive trial data**, suggesting significant progress in its drug development pipeline.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "Biotech - Rare Disease",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Pharvaris stock **surged 27%** today following the announcement of **positive trial data**. This development indicates successful progress in the company's clinical pipeline.",
-        "impact": "The positive trial results significantly de-risk future drug development and regulatory pathways, potentially expanding the company's total addressable market and attracting further investor interest in its pipeline assets."
-      },
-      "analysis_details": "• **What Happened**\nPharvaris stock experienced a significant price movement, **surging 27%** today. This substantial increase is directly attributed to the company's announcement of **positive trial data**, indicating a successful outcome from its recent clinical study.\n\n• **Key Consideration**\nThe positive trial data represents a critical de-risking event for Pharvaris's drug development efforts. This outcome can lead to a re-evaluation of the company's valuation, open doors for subsequent trial phases or regulatory submissions, and potentially accelerate the path to commercialization.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Pharvaris stock surges 27% on positive trial data - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPc2FsVHE3SDg5R21FM3JQbF8xMEtDaGwtdWpadnR4ckVPX1dvWW5QU0tPVnNtbTNueWZBaTk2M2F3NngyWkxFSkYtZ3pENl9zMTNFdUx5X21iZGtWWHVLQ1lBMXR2QjU5UjNsVlNCSk5Cb05lRDBuSTRfOGNETUtGNlFWWGhYckJZeUd0a05xYUd4VHRzZnhUX2RUUGtHZjlFVDhneDZCdFNoQzdMLUo0?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "33.05M",
-      "short_float": "5.37%",
-      "daily_pct": 20.98,
-      "prev_close": 35.25,
-      "industry": "Biotech - Rare Disease",
-      "technical_status": "Fail (Avg $Vol $22M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Pharvaris surged 27%",
-        "discrepancy_note": "Finviz News (Source A) has no mention of PHVS or a 27% surge. Google News (Source B) contains one article ([2] Investing.com) stating 'Pharvaris stock surges 27%'. However, another article within Google News ([5] TipRanks) states 'Pharvaris Plunges As Blockbuster Trial Win Disappoints', directly contradicting the reported surge."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "RGTI",
-      "price": 16.45,
-      "gap_pct": 8.22,
-      "pm_volume": 2863909,
-      "avg_vol_10d": 14019501,
-      "avg_dollar_vol": 230620791,
-      "mkt_cap": 5073284751,
-      "rvol": 0.68,
-      "adr_pct": 5.15,
-      "category": "New Contract/Partnership",
-      "theme": "Government Contract Award",
-      "reasoning": "Rigetti secured a **$100 million** contract with the **U.S. government** for quantum computing research, boosting investor confidence.",
+      "ticker": "ODD",
+      "price": 17.12,
+      "gap_pct": 31.44,
+      "pm_volume": 1054965,
+      "avg_vol_10d": 804972,
+      "avg_dollar_vol": 13781121,
+      "mkt_cap": 600772283,
+      "rvol": 1.54,
+      "adr_pct": 5.95,
+      "category": "Earnings",
+      "theme": "Earnings Beat",
+      "reasoning": "Oddity Tech surged after reporting **Q2 earnings and revenue beats**, leading Truist to target the strong financial performance.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "A",
-      "finviz_theme": "AI Compute",
-      "analysis_source": "gemini+edgar",
+      "conviction": 78,
+      "grade": "C",
+      "finviz_theme": "Consumer - E-Commerce",
+      "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "Rigetti filed an **8-K** on **September 8, 2026**, disclosing a **Material Contract or Agreement**. The company secured a **$100 million contract** from the **U.S. government** to conduct **quantum computing research**, leading to a stock rise.",
-        "impact": "This significant government funding validates Rigetti's quantum computing technology and strategic direction, potentially accelerating research and development efforts."
+        "catalyst": "**Oddity Tech (ODD)** significantly **beat Q2 earnings and revenue estimates**. This strong financial performance prompted **Truist** to specifically **target** the **earnings beat**, driving the stock to pop.",
+        "impact": "A strong Q2 earnings beat suggests positive operational momentum and could lead to upward revisions in analyst models and price targets, sustaining investor interest."
       },
-      "analysis_details": "• **Impact**\nRigetti (RGTI) stock rose after announcing it secured a **$100 million government contract** on **September 8, 2026**. This agreement with the **U.S. government** specifically awards funds for **quantum computing research**, as reported in news headlines. The **8-K filing** confirms this material contract or agreement.\n\n• **Strategic Value**\nThis substantial government contract provides critical funding and strategic validation for Rigetti's position in the nascent quantum computing sector. It signals strong confidence from the U.S. government in Rigetti's capabilities, potentially accelerating technology development and solidifying its competitive standing in a highly strategic and rapidly evolving industry.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\n**Oddity Tech (ODD)** reported an impressive **Q2 earnings and revenue beat**, exceeding market expectations. The positive financial results were immediately recognized, with **Truist** highlighting the company's strong performance by **targeting** the **earnings beat**, which caused the **ODDITY Tech stock** to **pop**.\n\n• **The Growth (Momentum)**\nThe reported **Q2 earnings and revenue beats** for **Oddity Tech** indicate robust business execution and potentially accelerating growth within the e-commerce beauty sector. This strong financial momentum provides a solid foundation for continued upward price movement, attracting further institutional and retail interest.",
       "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "RGTX",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "RGTZ",
-          "mult": "1x"
-        }
-      ],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Rigetti stock rises after securing $100M government contract - Investing.com",
+          "title": "Oddity Tech (ODD) Beats Q2 Earnings and Revenue Estimates - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQZjF6VFB6YWRDVXRxcndlTEEwaldYamQ5UzJoZUY2Wk5nWW40UE5PLTNZY3FaVFNWQ2VCNUU4bXNfRVFOMi1NeGVWSEUzUXRVblNQbFhaM3REQ2RhbHJacWE0dXZuTGJpSTU1RXN4dlAtbHd1SWtaUUxyN05INVNFRzBJYXBpUDlsdGFmX0FsY3dWeG5DZUpkakZfZDVLWHNTLVktWWxPQzZFMVhhNThTZnB4NF9Kdzc4YUhKa3pn?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxOZmpJN1RmRk45d01xMDIxX0QwX0NyV2hXazI5RE5HRHRJcjR4ZVJ0NEEwaG0zQll4cmtpV1RobHBablYwdG5ZWW9yTEtKOHRoYWNacjJUM3IxcFh5dmM1YVkwSE1zRUxNdmh1a3pMTmlWaHpaOTA2cE52Q3R2b0NZQzlpcURwc2pUbWZOd2dscUlRM0E?oc=5"
         },
         {
-          "title": "The U.S. government agreed to award $100 million for quantum computing research with Rigetti - Stock Titan",
+          "title": "ODDITY Tech Stock Pops As Truist Targets Earnings Beat - stockstotrade.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNVEdTSzA4QUFWeWFsY2lFRTZaNFA0RUxxeHJQUHl5U0dZdFh0R0lFOEl0bEh2TmNZNnZhODVEX285a3UxNVFsTWxDeFBibW1IRUl4eHV4MnNmWXBhZnpxQWFLOGJEWEFFZmJhc0Rac3VrdXg4bWVfYmI3eElmeVF6cFBVYmEzMURaMDN2TzF2SVNDNl9KLTFFOGR5TEhtVHAxTXdwYmlfUDlNSS1uNXNjQWZINVEtUHF6QW9KOHl3?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-09-08",
-        "form": "8-K",
-        "items": [
-          "1.01",
-          "3.02",
-          "7.01",
-          "8.01",
-          "9.01"
-        ],
-        "category": "New Contract/Partnership",
-        "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/1838359/000110465926105662/tm2624940d1_8k.htm"
-      },
-      "float_shares": "326.96M",
-      "short_float": "18.04%",
-      "daily_pct": 7.13,
-      "prev_close": 15.2,
-      "industry": "AI Compute",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "$100 million contract with the U.S. government for quantum computing research",
-        "discrepancy_note": "Source A (Finviz) contains no news items to confirm the claim. Source B (Google News) consistently confirms the $100 million contract with the U.S. government for Rigetti across multiple articles, but without confirmation from both designated sources, it cannot be marked as 'Verified'."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "INBX",
-      "price": 130.0,
-      "gap_pct": 7.29,
-      "pm_volume": 55887,
-      "avg_vol_10d": 294245,
-      "avg_dollar_vol": 38251850,
-      "mkt_cap": 1783338829,
-      "rvol": 0.59,
-      "adr_pct": 7.2,
-      "category": "Others",
-      "theme": "Positive Clinical Trial Data",
-      "reasoning": "Inhibrx reported positive clinical data for its HPV-linked throat cancer treatment, showing high non-progression rates and plans for trial expansion.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 55,
-      "grade": "C",
-      "finviz_theme": "Biotech - Oncology",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Inhibrx announced that **90% of HPV-linked throat cancer patients** in its trial had **no progression at six months**. The company plans to **add about 50 patients** to the study.",
-        "impact": "This positive interim data reduces clinical development risk and enhances the drug's potential, indicating a strong therapeutic profile for a significant patient population."
-      },
-      "analysis_details": "• **What Happened**\nInhibrx reported encouraging interim clinical data, with a remarkable **90% of HPV-linked throat cancer patients** demonstrating **no disease progression at six months**. Following these positive results, Inhibrx is expanding the trial, planning to **add about 50 patients**.\n\n• **Key Consideration**\nThe strong non-progression rate signals high efficacy for INBX's candidate in HPV-linked throat cancer. The decision to **add about 50 patients** suggests increased confidence in the drug's potential and could accelerate its path through clinical development and towards regulatory milestones.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "90% of HPV-linked throat cancer patients had no progression at six months. Inhibrx plans to add about 50 patients. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNdTJVX3loREhXLXdaM3VzOHVZcGU1U1A1dldQU1d6SWJuSHlnREJFU0x0NVQ3bG41N3lIbFpHeHN3bVlGQkstejU5dlVURXZpcVI5NFp4bG5iUlNwY3BYa0lySnBGYUcwbnJDaGkxb0F5WFN6OGZtV3hKMThNTjJEZjA4eHptOGNWZUJZcGpkMndlRjBjT2YzbkZJX0k3c0hVX2N1NGNJMzVYTzZsR3FmUmdXTDQxYjQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE9OQ2xEOVBneE9LVmx3UUEzVlRDVjRfaVl1dG1Vd1owSWR4RTF4LTVRazJQMnNiWkpJU0huMDlmbEVEUFNjQTZTS1V0ZEUzbTJSVW1WZUxiMUwyOGJGQ1BzV2Q4Z3QtZ3dJdC1sdVdYRzlkcjZxaVE?oc=5"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "11.01M",
-      "short_float": "29.20%",
-      "daily_pct": 5.18,
-      "prev_close": 121.17,
-      "industry": "Biotech - Oncology",
-      "technical_status": "Fail (Avg $Vol $38M < $100M)",
+      "float_shares": "28.11M",
+      "short_float": "23.42%",
+      "daily_pct": 31.67,
+      "prev_close": 13.02,
+      "industry": "Consumer - E-Commerce",
+      "technical_status": "Fail (Avg $Vol $14M < $100M)",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 85,
+        "status": "Unconfirmed",
+        "confidence_score": 60,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "non-progression rates for HPV-linked throat cancer treatment",
-        "discrepancy_note": "The initial analysis claims 'high non-progression rates.' Source B reports '90%... no progression at six months,' providing a specific percentage. Source A has no information ('(none)'). Since only one source provides a specific number related to the non-progression rate and the initial claim itself does not specify a number, it cannot be 'Verified' across 'BOTH sources with matching specifics'. It's a discrepancy because only one source provides the detail."
+        "primary_claim": "Oddity Tech reported Q2 earnings and revenue beats",
+        "discrepancy_note": "Finviz News provided no information. While Google News articles confirm 'Q2 earnings and revenue beats' (Source B[1]) and 'Earnings Beat' (Source B[2]), the prompt requires *both* provided sources (Finviz and Google News) to confirm the claim. Since Finviz is blank, it fails to provide confirmation, leading to an 'Unconfirmed' status based on the strict interpretation of 'BOTH sources confirm'."
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -279,218 +70,70 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "IONQ",
-      "price": 42.25,
-      "gap_pct": 6.9,
-      "pm_volume": 1270541,
-      "avg_vol_10d": 17093864,
-      "avg_dollar_vol": 722215754,
-      "mkt_cap": 16011057583,
-      "rvol": 0.81,
-      "adr_pct": 5.48,
-      "category": "New Contract/Partnership",
-      "theme": "Guidance Raise & New Contract",
-      "reasoning": "IonQ raised its 2026 full-year revenue guidance and secured an $8.18 million U.S. deal, signaling strong business momentum.",
+      "ticker": "SIG",
+      "price": 91.51,
+      "gap_pct": 10.69,
+      "pm_volume": 204781,
+      "avg_vol_10d": 780437,
+      "avg_dollar_vol": 71417790,
+      "mkt_cap": 3251392888,
+      "rvol": 3.27,
+      "adr_pct": 3.43,
+      "category": "Earnings",
+      "theme": "Beat & Share Buyback",
+      "reasoning": "Signet (SIG) exceeded Q2 earnings estimates and announced a **$125 million** share buyback program, driving momentum.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 76,
-      "grade": "A",
-      "finviz_theme": "AI Compute",
+      "conviction": 83,
+      "grade": "C",
+      "finviz_theme": "Consumer - E-Commerce",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "IonQ announced it has **raised its 2026 full-year revenue guidance**, indicating stronger financial expectations. Concurrently, the company secured an **$8.18 million U.S. deal** to protect business data, marking a significant contract win.",
-        "impact": "The combination of increased guidance and a substantial new contract suggests robust demand and operational execution, potentially driving a positive re-rating."
+        "catalyst": "Signet (SIG) reported **Q2 earnings** that **surpassed estimates**. The company also announced plans for a **$125 million** share buyback program, alongside reporting that sales from existing stores and online rose **2.2%**.",
+        "impact": "The earnings beat combined with a substantial share buyback program signals management confidence and is likely to provide sustained positive momentum for the stock."
       },
-      "analysis_details": "• **Impact**\nIonQ has **raised its 2026 full-year revenue guidance**, signaling an optimistic outlook for its financial performance. This positive revision is underpinned by a significant new **$8.18 million U.S. deal** focused on protecting business data, which is noted as among the largest of its kind. The simultaneous announcement of enhanced financial projections and a material contract underscores strong operational momentum for the company.\n\n• **Strategic Value**\nThe **$8.18 million U.S. deal** enhances IonQ's revenue pipeline and validates its offerings in the critical area of business data protection, showcasing market demand for its quantum computing solutions. The **raised full-year revenue guidance** indicates that this deal, and potentially others, are directly contributing to the company's growth trajectory and strengthening its competitive position in the nascent quantum computing sector.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nSignet (SIG) **surpassed Q2 earnings estimates**, indicating better-than-expected financial performance for the quarter. This positive surprise is a key driver for investor confidence and momentum.\n\n• **The Growth (Momentum)**\nThe jewelry seller reported that sales from existing stores and online rose a healthy **2.2%**, demonstrating positive underlying business momentum. Additionally, the company plans a **$125 million** share buyback, signaling strong financial health and a commitment to returning capital to shareholders.",
       "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "IONX",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "IONZ",
-          "mult": "1x"
-        }
-      ],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
       "headlines": [
         {
-          "title": "IonQ (NYSE: IONQ) Raises 2026 Full-Year Revenue Guidance - IonQ",
+          "title": "Signet (SIG) Surpasses Q2 Earnings Estimates - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxNNHpsZTZQSWtialNsSUN2ZHVraktXeW5fdkd5VWRTUjdyeERtbmZVNnpXbEdUVHZxci03SVhuUDJXSEF3SEZ5UldTSmlfSlVVRlJwTkJPcFRCamVIZjl0Zl81TEdGMXpTVFR0NlhrY3ljRHdxbjBCT2VfejlsZHplTHRDU3NYYWV6bDJpRTZWSFpFaENLZzc5SkVkOHVfdEV2eGljNXN5bTZ0SzZPY293dHlkenM?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPUTNKTWxhTWNXUGdHR2dQcG1jY0dBZGxGY2tobWFicGdtMklqY1V6cEgta3llQzUwdTNJZ1BxT2Y0R0JCU3VoVVJKQ0ZHX0tJV2VLM1hLSHhlU293elRXTG9MOEM2MkxoZy1XOTlwdlBiZ1dqMTFSZTFLNWh5VnpVVXQtQ1h2dHlhbDk5ZDlzZlhLbEFYU0E0eUVMOUotUQ?oc=5"
         },
         {
-          "title": "An $8.18 million U.S. deal to protect business data is among the largest of its kind - Stock Titan",
+          "title": "A jewelry seller plans $125 million to buy back shares after sales from existing stores and online rose 2.2% - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxONkxVanJ3RUZTRWtCdTVIampMaVh6amg4NF8wM05WT2YzX3hEMHUxUjlzdmNWckMtSGdUbjNMRlVKWkdWcDdESVRQaVlsSW84bi1DRUt5NkMtc0RGWER1Zk5UX2Vjc0ltYmVLNndLWlozTUk4Wk1xRkhwQ3dLN0l4dVBpblhUdmdXejhvdjFPUXN4WFR0ZWJ1RjE1NV9UWVlRQklhdUhFLUdSZkNyLUE?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNZ1l6OGxmZ2VscmNPa1RIZVhhRFF0ZFdTMFNrSFlXLWR6WWxHcVBULWJmcndlR3lHQWRwNVJxMVozWHpfUkozMm51bDVKRUhRMDZKbEllZ3p5UUZXcHhOdGRYTmx3SnpKMVBFQnRPQ1BfcDFXcnd1YTN2WHJSXzlJWDZjaVk1aXd6cndhMjdHVFVCdHh5dF9XT01UT2d5TmJ3ZnBxbWZDcw?oc=5"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-09-08",
+        "filing_date": "2026-09-09",
         "form": "8-K",
         "items": [
-          "7.01",
+          "1.01",
+          "2.02",
           "9.01"
         ],
-        "category": "Others",
-        "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/1824920/000119312526384388/ionq-20260908.htm"
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/832988/000083298826000227/sig-20260904.htm"
       },
-      "float_shares": "398.47M",
-      "short_float": "10.63%",
-      "daily_pct": 6.25,
-      "prev_close": 39.52,
-      "industry": "AI Compute",
-      "technical_status": "Pass",
+      "float_shares": "38.53M",
+      "short_float": "13.29%",
+      "daily_pct": 13.4,
+      "prev_close": 82.67,
+      "industry": "Consumer - E-Commerce",
+      "technical_status": "Fail (Avg $Vol $71M < $100M, ADR 3.4% < 4%)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 80,
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "$8.18 million U.S. deal",
-        "discrepancy_note": "Source A (Finviz) contains no news items, and thus does not confirm the claim. Source B (Google News) lists one headline (Stock Titan) mentioning an '$8.18 million U.S. deal', but this is not confirmed by both specified sources."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "BE",
-      "price": 269.99,
-      "gap_pct": 6.77,
-      "pm_volume": 733273,
-      "avg_vol_10d": 12740338,
-      "avg_dollar_vol": 3439763857,
-      "mkt_cap": 74477127976,
-      "rvol": 1.28,
-      "adr_pct": 6.89,
-      "category": "Others",
-      "theme": "S&P 500 Index Inclusion",
-      "reasoning": "Bloom Energy (BE) is being added to the S&P 500 index, triggering forced institutional buying and increasing visibility for the stock.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 57,
-      "grade": "B",
-      "finviz_theme": "Clean Energy - Hydrogen",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "S&P Dow Jones Indices announced that **Bloom Energy (NYSE:BE)**, along with Everpure and Illumina, will join the **S&P 500 index**. The news caused BE shares to surge by **+7.35%** in recent trading.",
-        "impact": "This inclusion provides a significant tailwind through passive fund inflows and enhanced institutional legitimacy, potentially boosting long-term price stability and liquidity."
-      },
-      "analysis_details": "• **What Happened**\n**Bloom Energy (NYSE:BE)**, alongside Everpure and Illumina, will be added to the S&P 500 index, as announced by S&P Dow Jones Indices. This news drove a substantial reaction in BE's stock, which was reported **up +7.35%** following the announcement. The inclusion is set to take effect before trading commences.\n\n• **Key Consideration**\nThe inclusion in the S&P 500 is a powerful mechanical catalyst, necessitating passive index funds to acquire shares, which provides a significant floor for the stock. This event boosts the company's profile and liquidity, making it more attractive to a broader institutional investor base and could sustain positive momentum in the near term.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Bloom Energy Is Joining the S&P 500: Is the Stock Still a Buy After Its Massive Run? - The Globe and Mail",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxNa2pteUlFdnA5RlkwZWVPb3NkVHNYZGUtUVBIaTUwdkRkclZDR2FGeHhNU0pQbThmQVR5WHo0cUhGWHFrQkVtanRZY3gtaVZLNmlHS2xYYzBJSE1OdWlab1NOZ3Nob3FZX09id3R1cWZVUVhwX2NsclVoODdzVERDZDBhZTlZMUlrbjNKZzd0VmRycmRxSE96VlNPb2RFREFzMzNrUGNhZWNMMmVjRndQaHBuRkt5NFZJT3JMM2pKeUF1MmNESW55RkVlUzlMZW5RRzZPbzBWZ2FpMmt0YktjVnJYV0tjd19KZ0lLNnAwWUlQM3ByRUNXcXFn?oc=5"
-        },
-        {
-          "title": "S&P 500 Adds 3 Surging Stocks in Major Shake-Up",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/p-500-adds-3-surging-214536624.html"
-        },
-        {
-          "title": "Bloom Energy Up 52% Since Pelosi's Bottom Buy: What Does She Know?",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/5c8b4eb1-da14-3745-acf9-079601a53e2b/bloom-energy-up-52%25-since.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "276.92M",
-      "short_float": "6.59%",
-      "daily_pct": 8.18,
-      "prev_close": 252.87,
-      "industry": "Clean Energy - Hydrogen",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Verified",
-        "confidence_score": 100,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Bloom Energy (BE) is being added to the S&P 500 index",
-        "discrepancy_note": null
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "ZIM",
-      "price": 30.31,
-      "gap_pct": 6.05,
-      "pm_volume": 358038,
-      "avg_vol_10d": 1093344,
-      "avg_dollar_vol": 33139257,
-      "mkt_cap": 3444451901,
-      "rvol": 1.36,
-      "adr_pct": 3.0,
-      "category": "Thematic Narratives",
-      "theme": "Takeover Proposal Revision",
-      "reasoning": "ZIM shares surged after Hapag-Lloyd revised its takeover proposal, signaling increased M&A activity and potential upside for shareholders.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 58,
-      "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Zim Integrated Shipping Shares Rose as Hapag-Lloyd **revised** its takeover proposal, indicating renewed or intensified M&A interest.",
-        "impact": "This revised proposal could drive price momentum due to acquisition premium speculation, potentially re-rating the stock."
-      },
-      "analysis_details": "• **The Narrative**\nZim Integrated Shipping shares experienced a rise following news that **Hapag-Lloyd revised its takeover proposal**. This development signals ongoing strategic interest from a peer and indicates that discussions or negotiations regarding a potential acquisition are advancing.\n\n• **Explosiveness**\nThis revised takeover proposal introduces significant M&A speculation, which can lead to substantial price volatility and upward momentum. The market will likely re-evaluate ZIM's intrinsic value based on potential acquisition terms, suggesting a re-rating if the proposal progresses toward a definitive agreement.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "ZIM Integrated (NYSE: ZIM) director exits stake after exercising options - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQeVd4ZURCeWVSSjVNOUx0NzMxU0Jmc3ZHUS1pSUZ0QWkwbTMyclIzcmNTVmQ4QWlOU2tpTWpOZGRwYUlfQmRMQkNwS0hqZjNPVzM2eTh3UDVqem9QejFObWV4eFljTEFEOE1HV2pITnBMTnB5Y3dwUFlpTlNwbFNhZ0FMWU9CenpfSlBUaWJiZk56ZXE0RmhzdjhjTG5BYTZHMTZuU291V1NWM1VyallBdWlHTjlLZWs1VjEtZ0REaVotNEpscGY0ag?oc=5"
-        },
-        {
-          "title": "Zim Integrated Shipping Shares Rise as Hapag-Lloyd Revises Takeover Proposal - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQaEpYUTNma2RxZjZlSFpYM0czWjVveTR3Z0hvYlFoemp1enoweTNSRW9la2FlM1YtYzFjd0FvbG1VdkRpRE1fMGljSkRLSUcxMEZMbHdVMmRlRDFkY0pBUnh3RkswcVJPaTlNLXgzLTMta2hFTWF6Tk1pMzdGUU5OSEctdUhaUGZlNDZNYVFJcVVVcFZRcnI5NEVzWGo5M2lfMmc?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "120.33M",
-      "short_float": "2.62%",
-      "daily_pct": 5.93,
-      "prev_close": 28.58,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $33M < $100M, ADR 3.0% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Hapag-Lloyd revised its takeover proposal",
-        "discrepancy_note": "Finviz News (Source A) provides no information regarding Hapag-Lloyd's takeover proposal. While Google News (Source B) contains multiple headlines confirming Hapag-Lloyd's revised or improved proposal, the claim cannot be 'Verified' as it is not confirmed by BOTH sources."
+        "primary_claim": "$125 million share buyback program",
+        "discrepancy_note": "Source A (Finviz News) provides no information regarding a share buyback program. Source B (Google News, specifically Stock Titan) confirms a $125 million share buyback."
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -505,56 +148,134 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "QBTS",
-      "price": 17.46,
-      "gap_pct": 5.31,
-      "pm_volume": 1303695,
-      "avg_vol_10d": 15494999,
-      "avg_dollar_vol": 270542683,
-      "mkt_cap": 6175054359,
-      "rvol": 0.84,
-      "adr_pct": 4.94,
-      "category": "Government Policy",
-      "theme": "CHIPS Act Funding",
-      "reasoning": "D-Wave secured **$100 million** in CHIPS Act funding from the U.S. government for quantum computers, signaling significant government support.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 56,
+      "ticker": "ASO",
+      "price": 49.27,
+      "gap_pct": 10.2,
+      "pm_volume": 140423,
+      "avg_vol_10d": 2050988,
+      "avg_dollar_vol": 101052179,
+      "mkt_cap": 2772841337,
+      "rvol": 1.55,
+      "adr_pct": 3.19,
+      "category": "Earnings",
+      "theme": "Beat & Raise",
+      "reasoning": "Academy Sports (ASO) surged after reporting a strong earnings beat with profit per share jumping **17.3%** and **raising its 2026 earnings forecast**.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 78,
       "grade": "B",
-      "finviz_theme": "AI Compute",
+      "finviz_theme": "Consumer - E-Commerce",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "D-Wave (QBTS) has secured **$100 million** in funding from the **U.S. government** under the **CHIPS Act** program. This funding is specifically earmarked for the development and deployment of **quantum computers**, highlighting a strategic investment in critical computing infrastructure.",
-        "impact": "This funding infusion under the CHIPS Act provides D-Wave with substantial capital, reducing financial risk and accelerating its quantum computing initiatives, while also signaling strong government validation of its technology."
+        "catalyst": "Catalyst: Academy Sports (ASO) filed an 8-K today, reporting Q2 earnings that included a **profit per share jump of 17.3%** which constituted an earnings beat. The company also **raised its 2026 earnings forecast**. Impact: This significant beat and raise indicates strong operational performance and improving financial outlook, likely attracting increased investor confidence and upward momentum in the stock price.",
+        "impact": ""
       },
-      "analysis_details": "• **The Policy**\nD-Wave (QBTS) has secured access to up to **$100 million** in funding through the **CHIPS Act**, a significant U.S. government policy initiative. This funding is directly provided by the **U.S. government** to D-Wave for the advancement of **quantum computers**, as detailed in the recent 8-K filing regarding a material contract or agreement.\n\n• **Direct Impact**\nThis government funding provides a substantial capital injection of up to **$100 million** to D-Wave, which is crucial for accelerating research, development, and commercialization efforts in quantum computing. The move underscores the government's commitment to bolstering domestic capabilities in advanced computing and positions D-Wave as a key recipient of strategic national investment.",
+      "analysis_details": "• **The Beats (Surprise Factor)**\nAcademy Sports (ASO) saw its stock surge following its earnings report, which included an earnings beat.\n\n• **The Guide**\nAdding to the positive sentiment, Academy also **raised its 2026 earnings forecast**, signaling management's confidence in continued strong performance.",
       "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "QBTX",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "QBTZ",
-          "mult": "1x"
-        }
-      ],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Rising Risks Overshadow D-Wave Quantum Booking: Sell or Hold QBTS Now? - Zacks Investment Research",
+          "title": "Academy Sports surges on earnings beat and raised guidance By Investing.com - Investing.com Nigeria",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNRXU3bkNEZlpzSVFzQUh6WEFuaHhBN0RkY1liQk5xSVFWRV9Zd2U0OHBUMk9xTmRFM2VPalE3RnQxRTFDb3ZIWlV6YkFsS0ZUYXJFcnVtVHM2dnE3NjFqUFdSOTRmR0F6ZDFrb1VJNHhnXzlsLWRYcTMyM19BLThIeVk3RzA3eWNuaXJOQlFLYW96Q0FpTFgwYnRkZ0g5a0FZVXIyYm9YZ1ZOeXBuTlE?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxObmk1MC1lUHV4aHU4Y3NqVl9naFBuOTNYRWxXWVdwWG1nQjM0WlpUM1ZzOG1oU0NjWkhDYUtsOHRSWGJPSXdhRTd1YXl1UVZKMERtSVJpTWp6cEhiOHBsTWdBTERnNi1Ma2ExUE5KVlhTTlVwOXcxdWZGbDgwV1FSaUREa3kxZHJBMEZDVlRTVzJLUURqc3oxYlpGb1lzVE9FSDBxaEdtUGE5NzZ3SE5feFAxQko?oc=5"
         },
         {
-          "title": "D-Wave stock rises after securing $100M in CHIPS Act funding - Investing.com",
+          "title": "Profit per share jumped 17.3% at Academy, which raised its 2026 earnings forecast - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOUnRkU0xDWGFDMm1BazI0Wll2cmNrMFQ4cEszZ0NRUV84NzJWVzBqbkU3cVFRXzFNUlVkUjVOWGRTWEFXV2JtSEdaVmFPalRjdUNNbE03Z2pXNzlFTlBRczM3T1lvQWJOMl9VZkdrWkpZV09fT3NmNjFsZ25jNzBNRnZaYWRQUEZFTHlQVHFiTXZXUm5kN19sQ055UThlQUNLdlVaT0RfMXJPR3dOaHduY1EwZHNTMHNWYXNhbQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOb3VTX3NzMFJzMHZoYXkzVmNFMGVxbm8tS3pBeFBlcmYyNXVoRVNPZEp3SXFtWlRZZHNKdFB5dWRzcVphZERfWkRDS0xyYWNfTV9ERjFJYmVxdENxNFNpVDNaWXVUMlRGYnB3dm1sWWJldFdyUkgtaFNLTVpFM2h4ZzBXcmM3a0lZeGNQNjZDdUZwWVBQaFlxZHFuS3huWTgyc1lBOXY5OElJMzVuNU5QbklR?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-09-09",
+        "form": "8-K",
+        "items": [
+          "2.02",
+          "7.01",
+          "9.01"
+        ],
+        "category": "Earnings",
+        "label": "Earnings/Financial Results",
+        "url": "https://www.sec.gov/Archives/edgar/data/1817358/000181735826000146/aso-20260909.htm"
+      },
+      "float_shares": "61.06M",
+      "short_float": "12.46%",
+      "daily_pct": 8.12,
+      "prev_close": 44.71,
+      "industry": "Consumer - E-Commerce",
+      "technical_status": "Fail (ADR 3.2% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "profit per share jumping 17.3%",
+        "discrepancy_note": "Finviz (Source A) provides no information. Only one article from Google News (Source B[1]) explicitly confirms 'Profit per share jumped 17.3%'. The claim is not confirmed by both sources as required."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "CHYM",
+      "price": 35.56,
+      "gap_pct": 10.06,
+      "pm_volume": 100195,
+      "avg_vol_10d": 5438531,
+      "avg_dollar_vol": 193394162,
+      "mkt_cap": 12232084953,
+      "rvol": 0.94,
+      "adr_pct": 3.88,
+      "category": "New Contract/Partnership",
+      "theme": "Acquisition & Guidance Raise",
+      "reasoning": "Chime Financial announced a $590 million acquisition of Stride Bank, alongside raising its Q3 and full-year revenue guidance.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
+      "grade": "B",
+      "finviz_theme": "Fintech - Neobanks",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Chime Financial (CHYM) confirmed an agreement to acquire **Stride Bank** for **$590 million**, formalized via an 8-K filing for a material contract. Concurrently, Chime raised its **third-quarter revenue guidance to $705 million** (up from $680 million-$690 million) and its **full-year revenue guidance to $2.76 billion-$2.77 billion** (up from $2.725 billion-$2.745 billion).",
+        "impact": "The acquisition expands Chime's operational capabilities and market reach, while the strong guidance raise indicates robust underlying business performance and potentially an accelerated growth trajectory post-acquisition, driving a **10.5% share rise**."
+      },
+      "analysis_details": "• **Impact**\nChime Financial agreed to acquire nationally chartered bank **Stride Bank** for **$590 million**, confirmed by an 8-K filing on 2026-09-08 for a material contract. This strategic move was announced concurrently with Chime raising its financial guidance, which sent the stock **up 10.5%**.\n\n• **Strategic Value**\nThe acquisition of **Stride Bank** is coupled with Chime raising its **third-quarter revenue guidance to $705 million** (vs. a prior target of **$680 million-$690 million**) and **full-year revenue guidance to $2.76 billion-$2.77 billion** (vs. its previous goal of **$2.725 billion-$2.745 billion**). This indicates that the takeover is expected to significantly enhance Chime's financial performance and operational capabilities within the mobile banking sector.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Chime Financial (NASDAQ: CHYM) officer plans $658K stock sale - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOekRtNm9teHZVSlJpQU8yM0NZRXBQaGpra1VPNWtnTVE1LUJwOWN1TlNVTUxFWC01N1I4d2tta2hmMGYwclN1OWsyRTVZNEhDbWZIR3dIWHRnakVINDdvTFNpeERyZVpJMDhTMWRFMHB4S0NQYVV2N21XblItX0tjTE11dXFHWUwzenFYZnpwcWhHUXltZ0lTWlZsYVo?oc=5"
         },
         {
-          "title": "The U.S. government gives D-Wave access to up to $100 million for quantum computers. - Stock Titan",
+          "title": "Chime Financial shares rise 10.5% after $590 million Stride Bank acquisition agreement - Yahoo Finance",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOa1RkT0ZnRmJYd3VyaUFUeGRzdHEzV29YY0dwSlV0V3hRc1pmT0tpWXdtdjNpZmNQbWJPYVpueHJpNkVJQkJzS25fSFY0Q0J6V3Iyb3NjT2V1QzNXZjExdzJkZU1feHJNWVBpd0k1UUJ1dUF5M1QyZm5naGxvOFF0cXh6QnVoUDRkUDloQlRoTGhOc0lKV3BBSkZiTFR2YXgwOXJPZzQ4WDE1LTN2UEF0U1o0bExZdEJkT2Z0MUZabUU?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQamJRS2hieDBtcEdzN0xQUzB0cEx5cVlRTEtrMlU1QmFqVGs5b3p1V0s3V2FLektJY09KSVdCWUg4V0NLQ0FHb1V0MVVnbGQyUmF4OEYtWHRWMmRMaHFsQWp1aEdqTTJ2X3FULXE1QTlLV0lpZ1hDNHRMOURIWFVKMU42XzdDcVpVblIxM3h5ZFhEbktILWF3RldrUQ?oc=5"
+        },
+        {
+          "title": "Chime Financial Signals Breakout On Strong Guidance, Stride Takeover",
+          "source": "Finviz",
+          "url": "https://www.investors.com/news/chime-financial-stocks-jumps-fintech-guidance-stride-takeover?mod=IBD_FV"
+        },
+        {
+          "title": "Chime to Buy Stride Bank for $590 Million",
+          "source": "Finviz",
+          "url": "https://www.barrons.com/articles/chime-stride-bank-buy-e0bea1a2?mod=bar_FV"
+        },
+        {
+          "title": "Chime Announces Agreement to Acquire Stride Bank",
+          "source": "Finviz",
+          "url": "https://www.businesswire.com/news/home/20260908076531/en/"
         }
       ],
       "edgar_filing": {
@@ -563,28 +284,83 @@
         "items": [
           "1.01",
           "7.01",
-          "8.01",
           "9.01"
         ],
         "category": "New Contract/Partnership",
         "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/1907982/000190798226000141/qbts-20260904.htm"
+        "url": "https://www.sec.gov/Archives/edgar/data/1795586/000119312526385383/d948605d8k.htm"
       },
-      "float_shares": "359.34M",
-      "short_float": "18.63%",
-      "daily_pct": 5.61,
-      "prev_close": 16.58,
-      "industry": "AI Compute",
-      "technical_status": "Pass",
+      "float_shares": "179.48M",
+      "short_float": "10.56%",
+      "daily_pct": 10.3,
+      "prev_close": 32.31,
+      "industry": "Fintech - Neobanks",
+      "technical_status": "Fail (ADR 3.9% < 4%)",
       "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 75,
+        "status": "Verified",
+        "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "$100 million in CHIPS Act funding from the U.S. government for quantum computers",
-        "discrepancy_note": "Source A (Finviz News) has no information ('(none)') regarding the claim. Source B (Google News) headlines consistently report D-Wave securing $100 million in US government funding/deals, with one headline explicitly mentioning 'CHIPS Act funding'."
+        "primary_claim": "$590 million acquisition of Stride Bank",
+        "discrepancy_note": null
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T2",
+      "tier_label": "Strong Catalyst"
+    },
+    {
+      "ticker": "SMMT",
+      "price": 18.18,
+      "gap_pct": 5.21,
+      "pm_volume": 87812,
+      "avg_vol_10d": 6984444,
+      "avg_dollar_vol": 126977192,
+      "mkt_cap": 13785114220,
+      "rvol": 1.18,
+      "adr_pct": 5.92,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "152.34M",
+      "short_float": "24.57%",
+      "daily_pct": 5.28,
+      "prev_close": 17.28,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found for SMMT",
+        "discrepancy_note": "Source A (Finviz) has no news, which is consistent with the claim of 'no catalyst found'. However, Source B (Google News) reports a fundamental catalyst: 'Jefferies upgrades Summit Therapeutics stock rating on trial outlook', directly contradicting the primary claim."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -599,73 +375,139 @@
       "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "ORCL",
-      "price": 167.05,
-      "gap_pct": 5.21,
-      "pm_volume": 977863,
-      "avg_vol_10d": 20904504,
-      "avg_dollar_vol": 3492097393,
-      "mkt_cap": 457361173491,
-      "rvol": 1.4,
-      "adr_pct": 3.92,
-      "category": "Upgrade",
-      "theme": "Morgan Stanley Price Target Hike & OpenAI Buzz",
-      "reasoning": "Oracle stock rallied on anticipation of upcoming earnings, fueled by Morgan Stanley's significant price target and buzz around OpenAI GPT-6 Astra.",
-      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
-      "conviction": 33,
-      "grade": "B",
-      "finviz_theme": "Cloud Databases",
-      "analysis_source": "gemini",
+      "ticker": "SSL",
+      "price": 13.99,
+      "gap_pct": 5.19,
+      "pm_volume": 104331,
+      "avg_vol_10d": 1613451,
+      "avg_dollar_vol": 22572179,
+      "mkt_cap": 8415824621,
+      "rvol": 0.97,
+      "adr_pct": 2.49,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
       "analysis_detail": {
-        "catalyst": "Morgan Stanley issued a **'Big Target'** for ORCL, contributing to the rally. This was coupled with positive buzz surrounding **OpenAI GPT-6 Astra**, indicating strong market interest in Oracle's potential AI contributions. Oracle also showed a **+3.08%** move, with options traders bracing for an **11.2%** swing post-earnings on **September 10**.",
-        "impact": "The analyst target provides a short-term price catalyst and validates a positive outlook, while AI buzz signals potential long-term strategic positioning ahead of the upcoming earnings report."
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
       },
-      "analysis_details": "• **The Firm & Rating**\nMorgan Stanley has issued a **'Big Target'** for Oracle, acting as a catalyst for the stock's rally into its earnings week. This analyst action contributes to positive sentiment, pushing Oracle's stock **+3.08%**.\n\n• **The Thesis**\nThe positive sentiment is further buoyed by market buzz around **OpenAI GPT-6 Astra**, suggesting Oracle's potential involvement or benefit from advanced AI developments. This thematic narrative, combined with the analyst's conviction, is driving pre-earnings momentum, with options traders anticipating an **11.2%** move after the fiscal first-quarter report on **September 10**.",
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
       "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "ORCX",
-          "mult": "2x"
-        }
-      ],
+      "leverage_etfs": [],
       "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "ORCL Stock Rallies Into Earnings Week: OpenAI GPT-6 Astra Buzz, Morgan Stanley’s Big Target Give Bulls A Boost - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPZEx6TFFYVUZWTFk2VDVMVy12LXh5Ujh0dXBTX0V1aHBuWVFSM09jTm5wUDJSb01ZclcwT00tZVpfUTI4TjIybUdwQzJnTE9ncGZjbWVlUVQwZlB6cGtNQkpudzA2TXpXRzFFQmlPNlVEVUpLZ3g0V0VyajdGTnhBQjFmN2Z5TnJJNUE1MGxKOF9TNW1wZ1VWVzJUSEtsQQ?oc=5"
-        },
-        {
-          "title": "Nvidia, Tech Giants Flash Stunning Market Signal",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/nvidia-tech-giants-flash-stunning-123419569.html"
-        },
-        {
-          "title": "Oracle Stock Flashes Stunning Signal Before Earnings",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/options/articles/oracle-stock-flashes-stunning-signal-122129801.html"
-        },
-        {
-          "title": "BofA Sees Clear Winner Between Adobe and Oracle",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/bofa-sees-clear-winner-between-122011345.html"
-        }
-      ],
+      "headlines": [],
       "edgar_filing": null,
-      "float_shares": "1.71B",
-      "short_float": "2.79%",
-      "daily_pct": 4.93,
-      "prev_close": 158.78,
-      "industry": "Cloud Databases",
-      "technical_status": "Fail (ADR 3.9% < 4%)",
+      "float_shares": "633.74M",
+      "short_float": "0.97%",
+      "daily_pct": 5.62,
+      "prev_close": 13.3,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $23M < $100M, ADR 2.5% < 4%)",
       "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 95,
+        "status": "Discrepancy",
+        "confidence_score": 90,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "The specific dollar amount of Morgan Stanley's price target for ORCL.",
+        "primary_claim": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+        "discrepancy_note": "While Finviz reports 'none' for news (supporting 'no immediate fundamental catalyst'), Google News presents conflicting information. Two articles ([1], [2]) suggest positive price action without a clear fundamental catalyst, implying technical drivers. However, a third article ([3]) explicitly states 'Sasol slides as earnings outlook disappoints investors', which is a specific fundamental catalyst that contradicts the initial summary's claim of 'no immediate fundamental catalyst found' and the general positive sentiment of the other news items. The presence of a reported fundamental catalyst, even if negative and conflicting with other articles, disproves the 'no fundamental catalyst' claim."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "META",
+      "price": 644.3,
+      "gap_pct": 5.02,
+      "pm_volume": 1240785,
+      "avg_vol_10d": 17279455,
+      "avg_dollar_vol": 11133152856,
+      "mkt_cap": 1562844013311,
+      "rvol": 1.05,
+      "adr_pct": 3.07,
+      "category": "Thematic Narratives",
+      "theme": "AI Product Launch & User Growth",
+      "reasoning": "Meta stock jumped as it launched its new **Muse personal AI agent** and Zuckerberg highlighted **Threads' growth** rivaling X, addressing investor concerns.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "B",
+      "finviz_theme": "AI Applications",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Meta launched its **simple-to-use Muse personal AI agent**, which reportedly **addresses a major investor concern**, causing the stock to jump. Additionally, Zuckerberg stated that **Threads is 'either bigger than X' or close in scale**, boosting market sentiment.",
+        "impact": "This event signals Meta's strong execution in its AI strategy and solidifies its competitive position in the social media landscape, potentially driving further user engagement and ad revenue."
+      },
+      "analysis_details": "• **The Narrative**\nMeta's stock surged as the company unveiled its new **simple-to-use Muse personal AI agent**, specifically noted for addressing a **major investor concern**. This product launch is a significant step in Meta's broader push into personal AI agents. Complementing this, CEO Mark Zuckerberg announced that **Threads is 'either bigger than X' or close in scale**, indicating robust user growth for their social platform.\n\n• **Explosiveness**\nThis dual catalyst of a strategic AI product launch that tackles investor worries and strong competitive user growth positions Meta favorably in the AI and social media arenas. The successful rollout of **Muse** and the validation of **Threads**' scale could lead to a re-rating of Meta's innovation capacity and market dominance, fueling sustained momentum as the company capitalizes on these advancements.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "METU",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "METD",
+          "mult": "1x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "Meta’s stock jumps as new personal AI agent Muse addresses a major investor concern - MarketWatch",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOTk5wMjNDc21DN1A4eDdyOXdsVWVOUGd4YWQzSzhNNkVXbVJGakE3SVZqaFJkYmdaaXhHc1JDTnU0T2s5NWpIYkl4Szl1ZDJfQVlUdU8waTZRWEZvX1Z1NFdTNkJ0R2tOZFRtZXpwa0EyT2JOZW9lZkpybFJPMjByWVFfQkROdTc2aTU2RnZsOEdOenFWN2psazZGdy1WWExHSkpqTXZEUF90UzRqNE81TjRTSXNmS1Q3WXBwZW1NSmt1Zw?oc=5"
+        },
+        {
+          "title": "META Stock Rises Premarket: Zuckerberg Says Threads Is ‘Either Bigger Than X’ Or Close In Scale - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNSFFnWDRQTmdmM2tQdmNjZ2p4QzZ4Vm5RX0pKMHNRLVRuNjluWmlUek83N3R6NmRRZlBQZnJtaF8xN0YyTWhUYXBHVVVtdzhWbEZ5MVdFSFZpMFJrYkc0SHVpZW5PWVg3cU1fRWNBRE14dFMzRmR2UXd2ZmsyclBPZFphRTVJYVFNNDhXRldjWWlmalJnSWt5dW4tejRySHRpNFd1QQ?oc=5"
+        },
+        {
+          "title": "Meta pushes into personal AI agents as company faces public reckoning over privacy and safety - CNBC",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOc3FnZkpVdk5HZkFnakV0N3dBWmZ6SFFjTE1DLWlsUGQ0N1Y3SlhiTGFzVkFQQnY2cHkxSzd2YlpwOERKLVZOOGtkdThRTzloZzBBUWlpWmUyS2UzU3J3QjhPUkFhR1pROW9ybW1JNWpMSmZWdjRwV0cyY3Atcnh1c3E1Q28zVnRGLTlmS1ZGQkRPY0xYVjU40gGcAUFVX3lxTE05R3lsWEZfZjV6WkRZNndRZU8wZWhUZDViT0tYYU1VWlpSTUpFNkpra2EzS0JCcl9ySzRCWTR4enJoVDdoTXFfcElqQ0hJZ0JVeXRWSU11ZWlnOElBbW9XYjFLVEtybktUMWlhU01DOC1VcVFGaktNeTl1eFNGYmowYjZZTzY5SnkzcllGdUl5N1NfWlprVmh2TFVoeQ?oc=5"
+        },
+        {
+          "title": "Meta Launches Simple-To-Use Muse Personal AI Agent",
+          "source": "Finviz",
+          "url": "https://www.investors.com/news/technology/meta-stock-muse-ai-agent-app?mod=IBD_FV"
+        },
+        {
+          "title": "AMD Guides to $70 Billion of 2027 Data Center Revenue",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/amd-guides-70-billion-2027-211135048.html"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "2.20B",
+      "short_float": "1.27%",
+      "daily_pct": 5.12,
+      "prev_close": 613.48,
+      "industry": "AI Applications",
+      "technical_status": "Fail (ADR 3.1% < 4%)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Meta launched its new Muse personal AI agent",
         "discrepancy_note": ""
       },
       "gates_passed": 4,
@@ -685,9 +527,9 @@
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 7,
-    "large_gaps": 2,
-    "total_headlines": 19,
+    "small_gaps": 6,
+    "large_gaps": 1,
+    "total_headlines": 16,
     "monthly_cost_usd": 0.01
   }
 }
