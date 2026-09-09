@@ -284,6 +284,16 @@ def build_etf_rs() -> dict:
         p6m  = _safe_pct(s, D126)
         p12m = _safe_pct(s, D252)
 
+        # % YTD — change since the first trading day of the current calendar
+        # year (distinct from perf_12m, which is a rolling trailing-12-month
+        # return and can diverge a lot from calendar YTD around year boundaries).
+        p_ytd = None
+        year_bars = s[s.index.year == s.index[-1].year]
+        if len(year_bars) >= 1:
+            ytd_base = float(year_bars.iloc[0])
+            if ytd_base:
+                p_ytd = round((float(s.iloc[-1]) / ytd_base - 1) * 100, 2)
+
         # % off 52-week high — Jeff Sun's own tables measure against the intraday
         # high, not the closing high, so use the High series (always >= Close).
         hi = highs[tkr].dropna() if tkr in highs.columns else pd.Series(dtype=float)
@@ -381,6 +391,7 @@ def build_etf_rs() -> dict:
             "perf_3m":        round(p3m,  1) if p3m  is not None else None,
             "perf_6m":        round(p6m,  1) if p6m  is not None else None,
             "perf_12m":       round(p12m, 1) if p12m is not None else None,
+            "perf_ytd":       p_ytd,
             "pct_off_52wh":   pct_off_52wh,
             "sparkline":      sparkline,
             "rs_histogram":   rs_histogram,

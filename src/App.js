@@ -9658,7 +9658,7 @@ const Top10ThematicSectors = ({ etfRsData }) => {
   const maxDay = maxAbs("perf_1d");
   const max5d  = maxAbs("perf_1w");
   const maxOff = maxAbs("pct_off_52wh");
-  const maxYr  = maxAbs("perf_12m");
+  const maxYr  = maxAbs("perf_ytd");
 
   const BarCell = ({ value, max }) => {
     if (value == null) return <div className="text-[11px] text-zinc-600 px-1.5">—</div>;
@@ -9695,7 +9695,7 @@ const Top10ThematicSectors = ({ etfRsData }) => {
                 { key: "perf_1d",      label: "% Daily Change" },
                 { key: "perf_1w",      label: "% P5D Change" },
                 { key: "pct_off_52wh", label: "% Off 52-Wk High" },
-                { key: "perf_12m",     label: "Yr % Gain/Loss" },
+                { key: "perf_ytd",     label: "% Gain/Loss YTD" },
               ].map(({ key, label }) => (
                 <th key={key}
                     onClick={() => handleSort(key)}
@@ -9718,7 +9718,7 @@ const Top10ThematicSectors = ({ etfRsData }) => {
                 <td className="px-3 py-1.5 w-40"><BarCell value={e.perf_1d} max={maxDay}/></td>
                 <td className="px-3 py-1.5 w-40"><BarCell value={e.perf_1w} max={max5d}/></td>
                 <td className="px-3 py-1.5 w-40"><BarCell value={e.pct_off_52wh} max={maxOff}/></td>
-                <td className="px-3 py-1.5 w-40"><BarCell value={e.perf_12m} max={maxYr}/></td>
+                <td className="px-3 py-1.5 w-40"><BarCell value={e.perf_ytd} max={maxYr}/></td>
               </tr>
             ))}
           </tbody>
