@@ -30,7 +30,8 @@ MIN_COUNTS: dict[str, int] = {
     "up13_34":     5,
     "dn13_34":     5,
     "atr_ext":    10,
-    "above50dma": 10,
+    "above50dma":  1,   # ≥50% above the 50-day MA is an extreme threshold — the recent
+                        # archive shows 4-6 stocks on every normal day, never near 10
 }
 
 
