@@ -2,52 +2,40 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 3,
+  "count": 2,
   "stocks": [
     {
       "ticker": "ASST",
       "company": "Strive, Inc.",
       "industry": "Financial Conglomerates",
-      "price": 27.16,
-      "change_pct": 0.07,
-      "adr_pct": 6.5,
-      "dollar_volume": "$322.9M",
-      "market_cap_b": 2.533,
-      "rs_ibd": 71,
-      "above50dma_pct": 80.8
+      "price": 26.69,
+      "change_pct": -1.73,
+      "adr_pct": 6.8,
+      "dollar_volume": "$304.2M",
+      "market_cap_b": 2.489,
+      "rs_ibd": 65,
+      "above50dma_pct": 74.2
     },
     {
       "ticker": "MRNA",
       "company": "Moderna, Inc.",
       "industry": "Biotechnology",
-      "price": 140.33,
-      "change_pct": -3.59,
+      "price": 135.61,
+      "change_pct": -3.36,
       "adr_pct": 9.5,
-      "dollar_volume": "$3.11B",
-      "market_cap_b": 56.025,
+      "dollar_volume": "$2.45B",
+      "market_cap_b": 54.14,
       "rs_ibd": 98,
-      "above50dma_pct": 61.4
-    },
-    {
-      "ticker": "LIFE",
-      "company": "Ethos Technologies Inc.",
-      "industry": "Packaged Software",
-      "price": 42.02,
-      "change_pct": 5.45,
-      "adr_pct": 6.0,
-      "dollar_volume": "$52.0M",
-      "market_cap_b": 2.679,
-      "rs_ibd": 94,
-      "above50dma_pct": 54.7
+      "above50dma_pct": 53.6
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.58,
-    "spx_1m": -1.03,
-    "spx_3m": 3.88,
-    "spx_34d": 2.33,
-    "spx_qtd": 2.54,
-    "spx_mtd": 0.55
+    "spx_1d": -0.48,
+    "spx_1m": -1.19,
+    "spx_3m": 5.08,
+    "spx_34d": 3.08,
+    "spx_qtd": 2.05,
+    "spx_mtd": 0.06
   },
-  "fetched_at_utc": "2026-09-09T00:55:49+00:00"
+  "fetched_at_utc": "2026-09-09T23:08:23+00:00"
 }

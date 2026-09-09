@@ -1,6 +1,52 @@
 {
-  "generated_at": "2026-09-09T00:55:48.574364+00:00",
+  "generated_at": "2026-09-09T23:03:51.829550+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Other",
+      "theme_rs": 95.0,
+      "perf_1d": 7.6,
+      "leaders": [
+        {
+          "ticker": "PURR",
+          "price": 12.03,
+          "rs_52w": 98,
+          "adr_pct": 8.89,
+          "vol_surge": 1.46,
+          "mkt_cap": 2379986239,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "CHYM",
+          "price": 34.55,
+          "rs_52w": 92,
+          "adr_pct": 4.37,
+          "vol_surge": 2.04,
+          "mkt_cap": 13080115296,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }
