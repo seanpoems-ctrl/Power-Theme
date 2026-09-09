@@ -9493,7 +9493,7 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
   const [selectedEtf, setSelectedEtf] = useState(null);
   const etfs = etfRsData?.etfs ?? [];
   const spy = React.useMemo(() => etfs.find(e => e.ticker === "SPY"), [etfs]);
-  const fmtP = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
+  const fmtP = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(2)}%` : "—";
 
   const getRsPct = (hist) => {
     if (!hist || hist.length < 2) return null;
@@ -9593,7 +9593,7 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
                     <td className="px-2 py-1 text-right font-mono border-r border-zinc-800" style={perfStyle(e.perf_1d)}>{fmtP(e.perf_1d)}</td>
                     <td className="px-2 py-1 text-right font-mono border-r border-zinc-800" style={perfStyle(e.perf_1m, 10)}>{fmtP(e.perf_1m)}</td>
                     <td className="px-2 py-1 text-right font-mono" style={offHighStyle(e.pct_off_52wh)}>
-                      {e.pct_off_52wh != null ? `${e.pct_off_52wh > 0 ? "+" : ""}${e.pct_off_52wh.toFixed(0)}%` : "—"}
+                      {e.pct_off_52wh != null ? `${e.pct_off_52wh > 0 ? "+" : ""}${e.pct_off_52wh.toFixed(2)}%` : "—"}
                     </td>
                   </tr>
                 );
@@ -9611,6 +9611,85 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
           onClose={() => setSelectedEtf(null)}
         />
       )}
+    </div>
+  );
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Top 10 Thematic Sectors — bullet-bar leaderboard of the biggest 5-day (P5D)
+// movers from the same 170-ETF universe as EtfRsTable below. Bar width is
+// magnitude relative to the max |value| in that column (bullet-chart style).
+// ─────────────────────────────────────────────────────────────────────────────
+const Top10ThematicSectors = ({ etfRsData }) => {
+  const top10 = React.useMemo(() => {
+    const etfs = (etfRsData?.etfs ?? []).filter(e => !e.benchmark && e.perf_1w != null);
+    return [...etfs].sort((a, b) => b.perf_1w - a.perf_1w).slice(0, 10);
+  }, [etfRsData]);
+
+  if (top10.length === 0) return null;
+
+  const maxAbs = key => Math.max(1, ...top10.map(e => Math.abs(e[key] ?? 0)));
+  const maxDay = maxAbs("perf_1d");
+  const max5d  = maxAbs("perf_1w");
+  const maxOff = maxAbs("pct_off_52wh");
+  const maxYr  = maxAbs("perf_12m");
+
+  const BarCell = ({ value, max }) => {
+    if (value == null) return <div className="text-[11px] text-zinc-600 px-1.5">—</div>;
+    const pct = Math.min(100, Math.abs(value) / max * 100);
+    const positive = value >= 0;
+    return (
+      <div className="relative h-5 rounded-sm bg-zinc-800/50 overflow-hidden">
+        <div
+          className={`absolute inset-y-0 ${positive ? "left-0 bg-emerald-500/60" : "right-0 bg-rose-500/60"}`}
+          style={{ width: `${pct}%` }}
+        />
+        <span className={`relative z-10 h-full flex items-center px-1.5 text-[11px] font-mono font-semibold ${positive ? "text-emerald-200" : "text-rose-100"} ${positive ? "justify-start" : "justify-end"}`}>
+          {positive ? "+" : ""}{value.toFixed(2)}%
+        </span>
+      </div>
+    );
+  };
+
+  return (
+    <div className="rounded-lg border border-zinc-800 overflow-hidden">
+      <div className="flex items-center justify-between px-3 py-2 bg-zinc-900/80 border-b border-zinc-800">
+        <div className="flex items-center gap-2">
+          <h3 className="text-[13px] font-semibold text-zinc-100">Top 10 Thematic Sectors</h3>
+          <span className="text-[10px] font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{top10.length}</span>
+        </div>
+        <span className="text-[10px] text-zinc-600">ranked by % P5D Change (previous 5 days)</span>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-xs border-collapse">
+          <thead>
+            <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
+              <th className="px-3 py-1.5 text-left font-medium">Group</th>
+              <th className="px-3 py-1.5 text-left font-medium">% Daily Change</th>
+              <th className="px-3 py-1.5 text-left font-medium">% P5D Change</th>
+              <th className="px-3 py-1.5 text-left font-medium">% Off 52-Wk High</th>
+              <th className="px-3 py-1.5 text-left font-medium">Yr % Gain/Loss</th>
+            </tr>
+          </thead>
+          <tbody>
+            {top10.map((e, i) => (
+              <tr key={e.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
+                <td className="px-3 py-1.5 text-left whitespace-nowrap">
+                  <a href={`https://finviz.com/quote.ashx?t=${e.ticker}`} target="_blank" rel="noreferrer"
+                     className="font-mono font-bold text-cyan-400 hover:underline">
+                    {e.ticker}
+                  </a>
+                  <span className="ml-1.5 text-zinc-400">{e.label ?? e.theme}</span>
+                </td>
+                <td className="px-3 py-1.5 w-40"><BarCell value={e.perf_1d} max={maxDay}/></td>
+                <td className="px-3 py-1.5 w-40"><BarCell value={e.perf_1w} max={max5d}/></td>
+                <td className="px-3 py-1.5 w-40"><BarCell value={e.pct_off_52wh} max={maxOff}/></td>
+                <td className="px-3 py-1.5 w-40"><BarCell value={e.perf_12m} max={maxYr}/></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
@@ -10604,6 +10683,7 @@ const DailyWatchlistTab = ({ data }) => {
           <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <IndexSectorBenchmarkTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
+          <Top10ThematicSectors etfRsData={etfRsData} />
           <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfCandidatesPanel />
         </div>

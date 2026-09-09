@@ -273,7 +273,7 @@ def build_etf_rs() -> dict:
                 d = common.max()
                 o_val = float(o5.loc[d])
                 if o_val:
-                    p_intraday = round((float(s5.loc[d]) / o_val - 1) * 100, 1)
+                    p_intraday = round((float(s5.loc[d]) / o_val - 1) * 100, 2)
 
         # 1-week (5 trading days)
         p1w = _safe_pct(s5, 6) if len(s5) >= 6 else _safe_pct(s, 6)
@@ -289,7 +289,7 @@ def build_etf_rs() -> dict:
         hi = highs[tkr].dropna() if tkr in highs.columns else pd.Series(dtype=float)
         h52 = float(hi.tail(D252).max()) if len(hi) >= 5 else None
         cur = float(s.iloc[-1])
-        pct_off_52wh = round((cur / h52 - 1) * 100, 1) if h52 and h52 > 0 else None
+        pct_off_52wh = round((cur / h52 - 1) * 100, 2) if h52 and h52 > 0 else None
 
         # 1-month sparkline (last 21 closes, normalised to 0-100 for SVG)
         spark_raw = s.tail(D21).round(4).tolist()
@@ -375,9 +375,9 @@ def build_etf_rs() -> dict:
             "liquid":         meta.get("liquid"),      # True = Liquid Basket, False = Illiquid Vector
             "benchmark":      bool(meta.get("benchmark")),  # Index/Segment/EW Sector/SPDR Sector table
             "perf_intraday":  p_intraday,
-            "perf_1d":        round(p1d,  1) if p1d  is not None else None,
+            "perf_1d":        round(p1d,  2) if p1d  is not None else None,
             "perf_1w":        round(p1w,  1) if p1w  is not None else None,
-            "perf_1m":        round(p1m,  1) if p1m  is not None else None,
+            "perf_1m":        round(p1m,  2) if p1m  is not None else None,
             "perf_3m":        round(p3m,  1) if p3m  is not None else None,
             "perf_6m":        round(p6m,  1) if p6m  is not None else None,
             "perf_12m":       round(p12m, 1) if p12m is not None else None,
