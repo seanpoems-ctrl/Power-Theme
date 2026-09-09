@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-09 11:04 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Risk-Off / Volatility Rises",
+    "spy_price": 762.82,
+    "spy_change_pct": -0.41,
+    "vix": 16.07,
+    "hy_oas": 2.67,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 45.0,
+    "mmth": 63.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a significant new AI infrastructure investment initiative targeting enterprise cloud solutions, poised to accelerate revenue growth in its Azure segment."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly received breakthrough therapy designation from the FDA for its new Alzheimer's drug candidate, creating significant upside potential for its neuroscience pipeline."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "GameStop continues to see elevated retail interest driven by social media mentions and technical chart patterns, with no new fundamental catalysts reported."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-09 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2117,44 +2155,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA experienced heightened options activity and technical resistance today, indicating potential for continued range-bound trading."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-19 07:32 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Risk-Off",
-    "spy_price": 767.45,
-    "spy_change_pct": -0.68,
-    "vix": 15.76,
-    "hy_oas": 2.7,
-    "yield_curve": 0.52,
-    "credit_status": "Complacent",
-    "s5fi": 62.4,
-    "mmth": 70.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase announces a strategic acquisition of a leading fintech startup, poised to expand its digital banking services and market share."
-        },
-        {
-          "ticker": "NFLX",
-          "company": "Netflix, Inc.",
-          "reason": "Netflix unveils strong subscriber growth projections for Q3 following a successful international content expansion strategy and crackdown on password sharing."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple sees continued technical selling pressure following a multi-week rally, with investors taking profits ahead of upcoming product cycle announcements."
         }
       ]
     }
