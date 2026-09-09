@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-09 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off / Rising Volatility",
+    "spy_price": 765.96,
+    "spy_change_pct": -0.55,
+    "vix": 16.34,
+    "hy_oas": 2.68,
+    "yield_curve": 0.41,
+    "credit_status": "Complacent",
+    "s5fi": 47.9,
+    "mmth": 65.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly announced overwhelmingly positive Phase 3 trial results for its novel Alzheimer's treatment, significantly surpassing efficacy expectations."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft unveiled a groundbreaking AI-powered enterprise suite, expected to drive substantial revenue growth in its cloud and productivity segments."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "GameStop continues to see elevated trading volume on social media-driven momentum, with no fresh fundamental catalysts to support the price action."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-08 18:58 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2117,44 +2155,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Apple sees continued technical selling pressure following a multi-week rally, with investors taking profits ahead of upcoming product cycle announcements."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-19 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Weakness, Risk-Off Tone",
-    "spy_price": 767.45,
-    "spy_change_pct": -0.68,
-    "vix": 15.82,
-    "hy_oas": 2.7,
-    "yield_curve": 0.52,
-    "credit_status": "Complacent",
-    "s5fi": 62.4,
-    "mmth": 70.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a major strategic partnership with a leading industrial firm to deploy its Azure AI solutions globally, signaling robust enterprise demand despite broader market jitters."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly and Company received fast-track designation from the FDA for its new Alzheimer's treatment candidate, potentially accelerating its path to market and offering a defensive play amidst sector weakness."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla is seeing renewed technical selling pressure following yesterday's broad market weakness, with no fresh company-specific news to offset the negative flow."
         }
       ]
     }
