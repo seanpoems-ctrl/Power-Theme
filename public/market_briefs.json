@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-10 18:46 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Global Retreat",
+    "spy_price": 757.83,
+    "spy_change_pct": -0.6,
+    "vix": 17.84,
+    "hy_oas": 2.71,
+    "yield_curve": 0.39,
+    "credit_status": "Complacent",
+    "s5fi": 38.8,
+    "mmth": 59.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft unveiled a groundbreaking AI-driven cybersecurity platform, expected to significantly boost its enterprise subscription revenue and market share."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "JPMorgan Chase boosted its quarterly dividend and initiated a new share repurchase program, underscoring robust financial health and commitment to shareholder returns."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "GameStop experienced renewed speculative interest driven by sustained high short interest and retail investor engagement across social platforms."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-10 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2140,23 +2178,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-08-20 17:01 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "",
-    "spy_price": 762.6,
-    "spy_change_pct": -0.84,
-    "vix": 16.01,
-    "hy_oas": 2.73,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 55.5,
-    "mmth": 72.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
