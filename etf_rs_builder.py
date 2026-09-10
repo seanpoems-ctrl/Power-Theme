@@ -245,6 +245,14 @@ def build_etf_rs() -> dict:
         closes5 = raw5[["Close"]].rename(columns={"Close": ALL_TICKERS[0]})
         opens5  = raw5[["Open"]].rename(columns={"Open": ALL_TICKERS[0]})
 
+    # Freshest bar date anyone in the batch has — yfinance's bulk download can
+    # come back a day stale for a *subset* of tickers when Yahoo throttles a
+    # repeated CI request. Any ticker whose own latest bar is behind this
+    # consensus has stale 1D / intraday / 1W numbers, so we null those out
+    # rather than ship yesterday's move labelled as today's.
+    consensus_last = closes5.index.max() if len(closes5.index) else None
+    stale_tickers: list[str] = []
+
     D20  = 20   # Jeff Sun's 1-month RS baseline period (20 trading days)
     D25  = 25   # Jeff Sun's histogram window (25 trading days for daily RS bars)
     D21, D63, D126, D252 = D20, 63, 126, 252
@@ -277,6 +285,12 @@ def build_etf_rs() -> dict:
 
         # 1-week (5 trading days)
         p1w = _safe_pct(s5, 6) if len(s5) >= 6 else _safe_pct(s, 6)
+
+        # Drop 1D / intraday / 1W if this ticker's own latest bar lags the batch
+        # consensus — those numbers would be yesterday's move mislabelled as today's.
+        if consensus_last is not None and len(s5) and s5.index.max() < consensus_last:
+            stale_tickers.append(tkr)
+            p1d = p_intraday = p1w = None
 
         # Longer-term performance from 12-month data
         p1m  = _safe_pct(s, D21)
@@ -546,8 +560,19 @@ def build_etf_rs() -> dict:
     # Sort by composite Score descending
     result_rows = sorted(rows, key=lambda r: -(r["score"] or 0))
 
+    if stale_tickers:
+        logger.warning(
+            "%d/%d tickers had a stale latest bar (behind consensus %s) — 1D/intraday/1W "
+            "nulled for: %s",
+            len(stale_tickers), len(result_rows),
+            consensus_last.date() if consensus_last is not None else "?",
+            ", ".join(sorted(stale_tickers)[:40]),
+        )
+
     return {
         "generated_at": datetime.now(tz=timezone.utc).isoformat(),
+        "consensus_last": consensus_last.date().isoformat() if consensus_last is not None else None,
+        "stale_count": len(stale_tickers),
         "etfs": result_rows,
     }
 
@@ -564,6 +589,26 @@ def main() -> None:
             "Only %d/%d ETFs priced (need ≥%d) — likely a data-fetch failure. "
             "Refusing to overwrite %s.",
             len(data["etfs"]), len(ALL_TICKERS), min_expected, OUTPUT_PATH,
+        )
+        raise SystemExit(1)
+
+    # Freshness guard: a throttled yf.download() can come back a day stale for
+    # part of the batch (or, worse, all of it). Rather than overwrite a good
+    # file with yesterday's snapshot, bail and let the previous run's data stand.
+    n_priced = len(data["etfs"])
+    if data["stale_count"] > max(3, int(n_priced * 0.08)):
+        logger.error(
+            "%d/%d tickers came back a day stale (>8%%) — degraded batch. "
+            "Refusing to overwrite %s; last good file stands.",
+            data["stale_count"], n_priced, OUTPUT_PATH,
+        )
+        raise SystemExit(1)
+
+    cl = data.get("consensus_last")
+    if cl and (datetime.now(tz=timezone.utc).date() - datetime.fromisoformat(cl).date()).days > 4:
+        logger.error(
+            "Consensus latest bar is %s, >4 days behind today — feed appears frozen. "
+            "Refusing to overwrite %s.", cl, OUTPUT_PATH,
         )
         raise SystemExit(1)
 

@@ -9685,6 +9685,9 @@ const Top10ThematicSectors = ({ etfRsData, etfHoldings = {}, screenerMap = {} })
         <div className="flex items-center gap-2">
           <h3 className="text-[13px] font-semibold text-zinc-100">Top 10 Thematic Sectors</h3>
           <span className="text-[10px] font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{top10.length}</span>
+          {etfRsData?.consensus_last && (
+            <span className="text-[10px] font-mono text-zinc-500">as of {etfRsData.consensus_last}</span>
+          )}
         </div>
         <span className="text-[10px] text-zinc-600">ranked by % P5D Change (previous 5 days)</span>
       </div>
