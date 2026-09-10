@@ -3,11 +3,14 @@ on:
   push:
     branches: [ main ]
     paths-ignore:
+      # High-churn data files the 15-min auto-committer rewrites constantly —
+      # deploying on each would be deploy spam. focus_list.json is NOT here: it's
+      # written once per trading day by focus-list-scan.yml, so one deploy per
+      # day for it is fine and lets the scan reach the live site same-day.
       - 'public/thematic_data.json'
       - 'public/gapper_data.json'
       - 'public/breadth_monitor.json'
       - 'public/calendar_history/**'
-      - 'public/focus_list.json'
       - 'public/etf_rs.json'
       - 'public/screener_stocks.json'
 concurrency:

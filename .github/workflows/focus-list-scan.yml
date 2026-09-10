@@ -105,7 +105,11 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase --autostash
           git add public/focus_list.json
-          git diff --staged --quiet || git commit -m "data: focus_list $(date -u +%Y-%m-%dT%H:%M) [skip ci]"
+          # No [skip ci] — this commit SHOULD trigger deploy.yml so the fresh
+          # scan reaches GitHub Pages the same day (focus_list.json is not in
+          # deploy.yml's paths-ignore). It runs once per trading day, so that's
+          # exactly one deploy per day.
+          git diff --staged --quiet || git commit -m "data: focus_list $(date -u +%Y-%m-%dT%H:%M)"
           pushed=false
           for i in 1 2 3 4 5; do
             if git push; then pushed=true; break; fi
