@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-10 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Volatility Surge",
+    "spy_price": 757.83,
+    "spy_change_pct": -0.6,
+    "vix": 17.84,
+    "hy_oas": 2.71,
+    "yield_curve": 0.4,
+    "credit_status": "Complacent",
+    "s5fi": 38.9,
+    "mmth": 59.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA shares rallied after the company announced a revolutionary new AI chip architecture that is expected to significantly expand its market leadership in data center and generative AI applications."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon's stock saw renewed interest following reports that Amazon Web Services (AWS) secured a multi-billion dollar, multi-year contract to modernize a key government cloud infrastructure."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "GameStop experienced another day of technical-driven volatility and short-squeeze activity, without any fresh fundamental news catalyst to justify the price action."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-10 10:56 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2120,43 +2158,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-08-20 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off Sentiment",
-    "spy_price": 762.6,
-    "spy_change_pct": -0.84,
-    "vix": 16.01,
-    "hy_oas": 2.73,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 55.5,
-    "mmth": 72.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA announced a significant multi-year partnership with a leading cloud computing provider to deploy next-generation AI data centers, signaling robust demand for its Hopper GPUs."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly revealed highly anticipated positive Phase 3 clinical trial results for its novel GLP-1 treatment targeting obesity and cardiovascular health, exceeding analyst expectations."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft saw increased institutional buying interest following yesterday's minor analyst upgrade, continuing its gradual uptrend on consistent cloud adoption narratives."
-        }
-      ]
-    }
   }
 ]
