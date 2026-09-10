@@ -1,5 +1,6 @@
 name: Deploy to GitHub Pages
 on:
+  workflow_dispatch: {}   # manual "force redeploy" escape hatch
   push:
     branches: [ main ]
     paths-ignore:
