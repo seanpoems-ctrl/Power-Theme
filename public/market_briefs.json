@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-11 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Renewed Risk Appetite",
+    "spy_price": 764.29,
+    "spy_change_pct": 0.85,
+    "vix": 15.84,
+    "hy_oas": 2.7,
+    "yield_curve": 0.39,
+    "credit_status": "Complacent",
+    "s5fi": 44.0,
+    "mmth": 60.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple Inc. (AAPL) rallied on reports of robust pre-order demand for its latest Vision Pro headset, signaling strong consumer interest and a positive outlook for future revenue."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft Corporation (MSFT) advanced following an influential analyst upgrade, citing accelerated cloud adoption rates and a strong pipeline of AI-driven enterprise solutions."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "GameStop Corp. (GME) continued its volatile climb, driven by persistent short-squeeze dynamics and speculative retail interest rather than new fundamental catalysts."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-11 10:57 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2137,44 +2175,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA saw continued momentum from large option flows and general AI sector exuberance, rather than any fresh fundamental news today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-21 16:46 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-On Accumulation",
-    "spy_price": 765.72,
-    "spy_change_pct": 0.41,
-    "vix": 15.13,
-    "hy_oas": 2.75,
-    "yield_curve": 0.5,
-    "credit_status": "Complacent",
-    "s5fi": 59.3,
-    "mmth": 72.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Announced breakthrough in battery density, promising significantly extended range for future electric vehicle models."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Reported impressive clinical trial results for a new Alzheimer's drug, demonstrating unprecedented efficacy and safety."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continues to see robust institutional buying interest following yesterday's positive AI conference sentiment and analyst upgrades."
         }
       ]
     }
