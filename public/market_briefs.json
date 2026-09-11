@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-11 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Global Risk-Off Sentiment",
+    "spy_price": 757.83,
+    "spy_change_pct": -0.6,
+    "vix": 17.23,
+    "hy_oas": 2.71,
+    "yield_curve": 0.39,
+    "credit_status": "Complacent",
+    "s5fi": 38.8,
+    "mmth": 59.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "SMCI",
+          "company": "Super Micro Computer Inc.",
+          "reason": "Announced a groundbreaking AI server chip design partnership with a major cloud provider, expected to significantly boost Q4 revenue guidance."
+        },
+        {
+          "ticker": "UNH",
+          "company": "UnitedHealth Group Inc.",
+          "reason": "Received favorable regulatory approval for its new telemedicine integration platform, expanding market reach and driving analyst upgrades."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "Observing increased social media chatter and minor price action on a short-squeeze alert, driven purely by technical momentum and retail sentiment."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-10 18:46 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2137,44 +2175,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla continues to see choppy trading, driven by ongoing retail flow and technical consolidation rather than fresh fundamental news, as investors await further clarity on production ramps."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-21 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious / Risk-Off Sentiment",
-    "spy_price": 762.6,
-    "spy_change_pct": -0.84,
-    "vix": 15.7,
-    "hy_oas": 2.73,
-    "yield_curve": 0.5,
-    "credit_status": "Complacent",
-    "s5fi": 55.5,
-    "mmth": 72.4,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is expected to reveal advancements in its next-generation AI data center architecture today, likely fueling renewed investor interest and analyst upgrades."
-        },
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple is rumored to be on the verge of announcing a strategic partnership to expand its augmented reality content ecosystem, driving speculative upside."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft continues to trade on the back of sustained positive momentum in its cloud infrastructure growth and favorable analyst commentary from earlier this week."
         }
       ]
     }
