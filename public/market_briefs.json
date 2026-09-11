@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-11 18:47 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Robust US Gains / Fading Volatility",
+    "spy_price": 764.29,
+    "spy_change_pct": 0.85,
+    "vix": 15.84,
+    "hy_oas": 2.7,
+    "yield_curve": 0.33,
+    "credit_status": "Complacent",
+    "s5fi": 44.0,
+    "mmth": 60.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Announced breakthrough advancements in its next-gen AI GPU architecture, driving significant investor optimism for future data center and edge computing revenue streams."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Reported highly positive Phase 3 clinical trial results for its new Alzheimer's drug candidate, positioning it as a potential market leader in a massive therapeutic area."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "GME",
+          "company": "GameStop Corp.",
+          "reason": "Experienced a significant short squeeze on elevated volume, driven by renewed retail investor interest and technical breakouts rather than new fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-11 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2137,44 +2175,6 @@
           "ticker": "AMC",
           "company": "AMC Entertainment Holdings Inc.",
           "reason": "AMC Entertainment is seeing renewed retail interest following a multi-week consolidation pattern, driven by social media buzz."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-21 16:58 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Stable Equity Advance",
-    "spy_price": 765.72,
-    "spy_change_pct": 0.41,
-    "vix": 15.13,
-    "hy_oas": 2.75,
-    "yield_curve": 0.5,
-    "credit_status": "Complacent",
-    "s5fi": 59.3,
-    "mmth": 72.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon unveiled its new Gen-AI powered global logistics optimization platform, projecting significant Q4 margin expansion and accelerated delivery speeds."
-        },
-        {
-          "ticker": "CRM",
-          "company": "Salesforce, Inc.",
-          "reason": "Salesforce announced the strategic acquisition of 'CyberGuard Solutions', rapidly expanding its enterprise security offerings and cloud market share."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA saw continued momentum from large option flows and general AI sector exuberance, rather than any fresh fundamental news today."
         }
       ]
     }
