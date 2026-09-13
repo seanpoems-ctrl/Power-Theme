@@ -9274,7 +9274,7 @@ const EtfCandidatesPanel = () => {
   );
 };
 
-const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
+const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onJumpToTheme = null }) => {
   const [sortCol, setSortCol] = useState("score");      // any column key below
   const [sortDir, setSortDir] = useState("desc");
   const [holdingsModal, setHoldingsModal] = useState(null);
@@ -9448,6 +9448,14 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
                     {c.cat}
                   </span>
                   <span className="text-zinc-600 ml-1.5 text-[10px] font-mono">{c.count}</span>
+                  {onJumpToTheme && (
+                    <button
+                      onClick={(e) => { e.stopPropagation(); onJumpToTheme(c.cat); }}
+                      title={`Jump to ${c.cat} stocks in Long mode`}
+                      className="ml-1.5 text-[9px] font-semibold px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-500 hover:bg-blue-500/20 hover:text-blue-300 border border-zinc-700/60 hover:border-blue-500/30 transition-colors">
+                      → Stocks
+                    </button>
+                  )}
                 </td>
                 {/* Score bar */}
                 <td className="px-2 py-1.5">
@@ -10348,6 +10356,8 @@ const DailyWatchlistTab = ({ data }) => {
   const [etfRsData,  setEtfRsData]    = React.useState(null);
   const [focusListData, setFocusListData] = React.useState(null);
   const [mode, setMode]               = React.useState("long");   // "long" | "short" | "etf"
+  const [themeFilter, setThemeFilter] = React.useState(null);      // set by clicking a Category Leaderboard row
+  const jumpToTheme = (theme) => { setThemeFilter(theme); setMode("long"); };
   const [perfMode, setPerfMode]       = React.useState("1m");      // "1d" | "1m" | "3m"
   const [leaderPerfMode, setLeaderPerfMode] = React.useState("perf_1m");
   const [selectedThemeModal, setSelectedThemeModal] = React.useState(null); // { name, stocks }
@@ -10539,7 +10549,7 @@ const DailyWatchlistTab = ({ data }) => {
 
   // ── Market Leaders ── built from screener_stocks.json (TradingView rolling 30-day perf)
   // Falls back to thematic allStocks if screener not loaded yet.
-  const leaders = React.useMemo(() => {
+  const leadersAll = React.useMemo(() => {
     const source = screenerStocks.length > 0 ? screenerStocks : allStocks;
     return source
       .filter(s =>
@@ -10553,9 +10563,17 @@ const DailyWatchlistTab = ({ data }) => {
         mkt_cap_b: s.market_cap_b ?? s.mkt_cap_b,
         theme: tickerThemeMap[s.ticker] ?? s.theme ?? s.industry ?? "—",
       }))
-      .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))
-      .slice(0, 15);
+      .sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0));
   }, [screenerStocks, allStocks, tickerThemeMap]);
+
+  // themeFilter is set by clicking a Category Leaderboard row (jumpToTheme) —
+  // case-insensitive match against each stock's theme/industry tag. When active,
+  // shows every qualifying leader in that theme instead of just the top 15.
+  const leaders = React.useMemo(() => {
+    if (!themeFilter) return leadersAll.slice(0, 15);
+    const needle = themeFilter.toLowerCase();
+    return leadersAll.filter(s => (s.theme || "").toLowerCase() === needle);
+  }, [leadersAll, themeFilter]);
 
   // ── Market Laggards ── mirror of leaders for the Short tab: RS≤50, weakest first
   const laggards = React.useMemo(() => {
@@ -10857,11 +10875,17 @@ const DailyWatchlistTab = ({ data }) => {
 
         {/* Market Leaders cards */}
         <div>
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-baseline gap-2">
+          <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+            <div className="flex items-baseline gap-2 flex-wrap">
               <h3 className="text-sm font-semibold text-zinc-100">Market Leaders</h3>
               <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{leaders.length}</span>
               <span className="text-xs text-zinc-600">RS≥90 · Mkt Cap≥$10B · $Vol≥$100M · sorted by strength</span>
+              {themeFilter && (
+                <button onClick={() => setThemeFilter(null)}
+                  className="flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-300 border border-blue-500/30 hover:bg-blue-500/25 transition-colors">
+                  Filtered: {themeFilter} <X size={11}/>
+                </button>
+              )}
             </div>
             <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 shrink-0">
               {[{k:"perf_1d",l:"1D"},{k:"perf_1w",l:"1W"},{k:"perf_1m",l:"1M"},{k:"perf_3m",l:"3M"}].map(o => (
@@ -10872,6 +10896,13 @@ const DailyWatchlistTab = ({ data }) => {
               ))}
             </div>
           </div>
+          {themeFilter && leaders.length === 0 && (
+            <div className="text-[12px] text-zinc-500 italic py-6 text-center border border-dashed border-zinc-800 rounded-lg mb-2">
+              No qualifying Market Leaders (RS≥90 · $10B+ cap · $100M+ vol) tagged to "{themeFilter}" right now.
+              This can happen when {themeFilter} wasn't in today's scanned top-5 themes —
+              check the Leaderboard tab or Industry Matrix directly for its full stock list.
+            </div>
+          )}
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2">
             {leaders.map(s => {
               const perfVal = s[leaderPerfMode] ?? null;
@@ -10913,7 +10944,7 @@ const DailyWatchlistTab = ({ data }) => {
       {mode === "etf" && (
         <div className="space-y-6">
           <EtfRotationBrief etfRsData={etfRsData} />
-          <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
+          <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} onJumpToTheme={jumpToTheme} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <IndexSectorBenchmarkTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfCandidatesPanel />
