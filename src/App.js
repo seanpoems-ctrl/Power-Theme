@@ -9219,6 +9219,7 @@ const EtfCandidatesPanel = () => {
 const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
   const [sortKey, setSortKey] = useState("score");      // "score" | "perf_1w" | "perf_1m"
   const [holdingsModal, setHoldingsModal] = useState(null);
+  const [expandedCat, setExpandedCat] = useState(null);  // category name whose top movers are shown
 
   // Exclude Index/Segment/EW Sector/SPDR Sector — broad-market benchmarks, not
   // thematic categories, so they'd be apples-to-oranges in a rotation leaderboard.
@@ -9282,6 +9283,27 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
     : "bg-rose-500/40";
 
   const maxScore = Math.max(...categories.map(c => c.score ?? 0), 1);
+
+  // Per-category top-movers bar cell — same visual language as the old
+  // standalone Top 10 Thematic Sectors table, now scoped to one category's
+  // members so the bar scale reflects that category's own volatility.
+  const BarCell = ({ value, max }) => {
+    if (value == null) return <div className="text-[11px] text-zinc-600 px-1.5">—</div>;
+    const pct = Math.min(100, Math.abs(value) / max * 100);
+    const positive = value >= 0;
+    return (
+      <div className="relative h-5 rounded-sm bg-zinc-800/50 overflow-hidden">
+        <div
+          className={`absolute inset-y-0 ${positive ? "left-0 bg-emerald-500/60" : "right-0 bg-rose-500/60"}`}
+          style={{ width: `${pct}%` }}
+        />
+        <span className={`relative z-10 h-full flex items-center px-1.5 text-[11px] font-mono font-semibold ${positive ? "text-emerald-200" : "text-rose-100"} ${positive ? "justify-start" : "justify-end"}`}>
+          {positive ? "+" : ""}{value.toFixed(2)}%
+        </span>
+      </div>
+    );
+  };
+
   const SortBtn = ({ k, label }) => (
     <button onClick={() => setSortKey(k)}
       className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-colors ${sortKey === k ? "bg-blue-500/30 text-blue-200 border border-blue-500/40" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
@@ -9318,11 +9340,25 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
             </tr>
           </thead>
           <tbody>
-            {categories.map((c, i) => (
-              <tr key={c.cat} className={`border-b border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "bg-zinc-900/20" : ""}`}>
+            {categories.map((c, i) => {
+              const isExpanded = expandedCat === c.cat;
+              const movers = [...c.members]
+                .filter(m => m.perf_1w != null)
+                .sort((a, b) => b.perf_1w - a.perf_1w);
+              const shown = movers.slice(0, 10);
+              const maxAbs = key => Math.max(1, ...shown.map(m => Math.abs(m[key] ?? 0)));
+              const maxDay = maxAbs("perf_1d"), max5d = maxAbs("perf_1w"),
+                    maxOff = maxAbs("pct_off_52wh"), maxYr = maxAbs("perf_ytd");
+              return (
+              <React.Fragment key={c.cat}>
+              <tr onClick={() => setExpandedCat(isExpanded ? null : c.cat)}
+                  className={`border-b border-zinc-800/60 hover:bg-zinc-800/30 cursor-pointer ${i % 2 === 0 ? "bg-zinc-900/20" : ""} ${isExpanded ? "bg-zinc-800/40" : ""}`}>
                 <td className="px-2 py-1.5 text-zinc-600 font-mono">{i + 1}</td>
                 <td className="px-2 py-1.5 text-zinc-200 font-medium max-w-[230px]">
-                  {c.cat}
+                  <span className="inline-flex items-center gap-1">
+                    {isExpanded ? <ChevronDown size={12} className="text-zinc-500"/> : <ChevronRight size={12} className="text-zinc-600"/>}
+                    {c.cat}
+                  </span>
                   <span className="text-zinc-600 ml-1.5 text-[10px] font-mono">{c.count}</span>
                 </td>
                 {/* Score bar */}
@@ -9344,7 +9380,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
                 <td className="px-2 py-1.5">
                   {c.leader ? (
                     <button
-                      onClick={() => setHoldingsModal({ ticker: c.leader.ticker, theme: `${c.cat} - ${c.leader.label || c.leader.theme}`, holdings: etfHoldings[c.leader.ticker] ?? [] })}
+                      onClick={(e) => { e.stopPropagation(); setHoldingsModal({ ticker: c.leader.ticker, theme: `${c.cat} - ${c.leader.label || c.leader.theme}`, holdings: etfHoldings[c.leader.ticker] ?? [] }); }}
                       className="font-mono font-bold text-cyan-400 hover:underline text-[11px]">
                       {c.leader.ticker}
                       <span className="text-zinc-600 ml-1 font-sans font-normal">{c.leader.score?.toFixed(0)}</span>
@@ -9365,12 +9401,57 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
                     : <span className="text-zinc-700">·</span>}
                 </td>
               </tr>
-            ))}
+              {isExpanded && (
+                <tr className="border-b border-zinc-800/60 bg-zinc-950/40">
+                  <td colSpan={9} className="px-4 py-2.5">
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wide">
+                        Top movers in {c.cat} · ranked by % P5D change
+                      </span>
+                      {movers.length > shown.length && (
+                        <span className="text-[10px] text-zinc-600">showing 10 of {movers.length}</span>
+                      )}
+                    </div>
+                    <table className="w-full text-xs border-collapse">
+                      <thead>
+                        <tr className="text-zinc-600 text-[9px] uppercase tracking-wide">
+                          <th className="px-2 py-1 text-left font-medium">Ticker</th>
+                          <th className="px-2 py-1 text-left font-medium">% Daily</th>
+                          <th className="px-2 py-1 text-left font-medium">% P5D</th>
+                          <th className="px-2 py-1 text-left font-medium">% Off 52W High</th>
+                          <th className="px-2 py-1 text-left font-medium">% YTD</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {shown.map(m => (
+                          <tr key={m.ticker} className="hover:bg-zinc-800/30">
+                            <td className="px-2 py-1 whitespace-nowrap">
+                              <button
+                                onClick={(e) => { e.stopPropagation(); setHoldingsModal({ ticker: m.ticker, theme: `${c.cat} - ${m.label || m.theme}`, holdings: etfHoldings[m.ticker] ?? [] }); }}
+                                className="font-mono font-bold text-cyan-400 hover:underline">
+                                {m.ticker}
+                              </button>
+                              <span className="ml-1.5 text-zinc-500">{m.label ?? m.theme}</span>
+                            </td>
+                            <td className="px-2 py-1 w-32"><BarCell value={m.perf_1d} max={maxDay}/></td>
+                            <td className="px-2 py-1 w-32"><BarCell value={m.perf_1w} max={max5d}/></td>
+                            <td className="px-2 py-1 w-32"><BarCell value={m.pct_off_52wh} max={maxOff}/></td>
+                            <td className="px-2 py-1 w-32"><BarCell value={m.perf_ytd} max={maxYr}/></td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              )}
+              </React.Fragment>
+              );
+            })}
           </tbody>
         </table>
       </div>
       <p className="text-[10px] text-zinc-600 mt-1.5">
-        Category Score = median RS Score of all baskets in the category (0–100, percentile vs every ETF). Leader = highest-scoring basket. Anchor = the pure-sector benchmark its boosters are measured against. ⚡ = active RS flips.
+        Category Score = median RS Score of all baskets in the category (0–100, percentile vs every ETF). Leader = highest-scoring basket. Anchor = the pure-sector benchmark its boosters are measured against. ⚡ = active RS flips. Click a row to see that category's top movers by % P5D change.
       </p>
 
       {holdingsModal && (
@@ -9712,134 +9793,6 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
           </table>
         </div>
       ))}
-      {selectedEtf && (
-        <EtfHoldingsModal
-          etf={selectedEtf.ticker}
-          theme={selectedEtf.theme}
-          holdings={selectedEtf.holdings}
-          screenerMap={screenerMap}
-          onClose={() => setSelectedEtf(null)}
-        />
-      )}
-    </div>
-  );
-};
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Top 10 Thematic Sectors — bullet-bar leaderboard of the biggest 5-day (P5D)
-// movers from the same 170-ETF universe as EtfRsTable below. Bar width is
-// magnitude relative to the max |value| in that column (bullet-chart style).
-// ─────────────────────────────────────────────────────────────────────────────
-const Top10ThematicSectors = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
-  const [selectedEtf, setSelectedEtf] = React.useState(null);
-
-  // The top-10 SET is always chosen by % P5D Change (that's what this widget is) —
-  // sorting below only reorders how those same 10 rows are displayed.
-  const top10 = React.useMemo(() => {
-    const etfs = (etfRsData?.etfs ?? []).filter(e => !e.benchmark && e.perf_1w != null);
-    return [...etfs].sort((a, b) => b.perf_1w - a.perf_1w).slice(0, 10);
-  }, [etfRsData]);
-
-  const [sortCol, setSortCol] = React.useState("perf_1w");
-  const [sortDir, setSortDir] = React.useState("desc");
-  const handleSort = col => {
-    if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
-    else { setSortCol(col); setSortDir(col === "ticker" ? "asc" : "desc"); }
-  };
-  const SortIcon = ({ col }) => {
-    if (sortCol !== col) return <span className="ml-0.5 text-zinc-700">⇅</span>;
-    return <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>;
-  };
-
-  const sorted = React.useMemo(() => {
-    const rows = [...top10];
-    rows.sort((a, b) => {
-      let av = a[sortCol], bv = b[sortCol];
-      if (av == null && bv == null) return 0;
-      if (av == null) return 1;
-      if (bv == null) return -1;
-      if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
-      return sortDir === "asc" ? av - bv : bv - av;
-    });
-    return rows;
-  }, [top10, sortCol, sortDir]);
-
-  if (top10.length === 0) return null;
-
-  const maxAbs = key => Math.max(1, ...top10.map(e => Math.abs(e[key] ?? 0)));
-  const maxDay = maxAbs("perf_1d");
-  const max5d  = maxAbs("perf_1w");
-  const maxOff = maxAbs("pct_off_52wh");
-  const maxYr  = maxAbs("perf_ytd");
-
-  const BarCell = ({ value, max }) => {
-    if (value == null) return <div className="text-[11px] text-zinc-600 px-1.5">—</div>;
-    const pct = Math.min(100, Math.abs(value) / max * 100);
-    const positive = value >= 0;
-    return (
-      <div className="relative h-5 rounded-sm bg-zinc-800/50 overflow-hidden">
-        <div
-          className={`absolute inset-y-0 ${positive ? "left-0 bg-emerald-500/60" : "right-0 bg-rose-500/60"}`}
-          style={{ width: `${pct}%` }}
-        />
-        <span className={`relative z-10 h-full flex items-center px-1.5 text-[11px] font-mono font-semibold ${positive ? "text-emerald-200" : "text-rose-100"} ${positive ? "justify-start" : "justify-end"}`}>
-          {positive ? "+" : ""}{value.toFixed(2)}%
-        </span>
-      </div>
-    );
-  };
-
-  return (
-    <div className="rounded-lg border border-zinc-800 overflow-hidden">
-      <div className="flex items-center justify-between px-3 py-2 bg-zinc-900/80 border-b border-zinc-800">
-        <div className="flex items-center gap-2">
-          <h3 className="text-[13px] font-semibold text-zinc-100">Top 10 Thematic Sectors</h3>
-          <span className="text-[10px] font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{top10.length}</span>
-          {etfRsData?.consensus_last && (
-            <span className="text-[10px] font-mono text-zinc-500">as of {etfRsData.consensus_last}</span>
-          )}
-        </div>
-        <span className="text-[10px] text-zinc-600">ranked by % P5D Change (previous 5 days)</span>
-      </div>
-      <div className="overflow-x-auto">
-        <table className="w-full text-xs border-collapse">
-          <thead>
-            <tr className="text-zinc-500 text-[10px] uppercase tracking-wide">
-              {[
-                { key: "ticker",       label: "Group" },
-                { key: "perf_1d",      label: "% Daily Change" },
-                { key: "perf_1w",      label: "% P5D Change" },
-                { key: "pct_off_52wh", label: "% Off 52-Wk High" },
-                { key: "perf_ytd",     label: "% Gain/Loss YTD" },
-              ].map(({ key, label }) => (
-                <th key={key}
-                    onClick={() => handleSort(key)}
-                    className="px-3 py-1.5 text-left font-medium cursor-pointer hover:text-zinc-300 transition-colors">
-                  {label}<SortIcon col={key}/>
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {sorted.map((e, i) => (
-              <tr key={e.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
-                <td className="px-3 py-1.5 text-left whitespace-nowrap">
-                  <button
-                    onClick={() => setSelectedEtf({ ticker: e.ticker, theme: e.theme, holdings: etfHoldings[e.ticker] ?? [] })}
-                    className="font-mono font-bold text-cyan-400 hover:underline">
-                    {e.ticker}
-                  </button>
-                  <span className="ml-1.5 text-zinc-400">{e.label ?? e.theme}</span>
-                </td>
-                <td className="px-3 py-1.5 w-40"><BarCell value={e.perf_1d} max={maxDay}/></td>
-                <td className="px-3 py-1.5 w-40"><BarCell value={e.perf_1w} max={max5d}/></td>
-                <td className="px-3 py-1.5 w-40"><BarCell value={e.pct_off_52wh} max={maxOff}/></td>
-                <td className="px-3 py-1.5 w-40"><BarCell value={e.perf_ytd} max={maxYr}/></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
       {selectedEtf && (
         <EtfHoldingsModal
           etf={selectedEtf.ticker}
@@ -10842,7 +10795,6 @@ const DailyWatchlistTab = ({ data }) => {
           <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <IndexSectorBenchmarkTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
-          <Top10ThematicSectors etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfCandidatesPanel />
         </div>
