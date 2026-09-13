@@ -36,10 +36,15 @@ MASTER_PATH = ROOT / "etf_master.json"
 
 
 def load_master() -> dict:
-    """ticker -> (category, label, type, liquid, description, benchmark) from etf_master.json."""
+    """ticker -> (category, fine_theme, label, type, liquid, description, benchmark) from etf_master.json.
+
+    fine_theme is the Matrix-aligned (industry-level) grouping — finer than the
+    12-bucket category, used by Category Leaderboard's fine view. Benchmark
+    ETFs (broad index/sector funds) don't get one since that view excludes them.
+    """
     raw = json.loads(MASTER_PATH.read_text(encoding="utf-8"))
     return {
-        t: (m["category"], m["label"], m["type"], m["liquid"], m.get("description", ""), m.get("benchmark", False))
+        t: (m["category"], m.get("fine_theme"), m["label"], m["type"], m["liquid"], m.get("description", ""), m.get("benchmark", False))
         for t, m in raw.items()
     }
 
@@ -78,20 +83,37 @@ LEADERBOARD_ALIASES = {
     "Infrastructure":                     "PAVE",
     "Homebuilders":                       "ITB",
     "Airlines":                           "JETS",
+    # Matrix parent-theme fallbacks — industries the Industry Matrix groups
+    # under a theme that isn't any ETF's own label. Lets an industry tile with
+    # no top-5/ETF match of its own fall back to its parent theme's ETF.
+    "Agriculture & Food":                 "VEGI",
+    "Commodities Metals":                 "XME",
+    "Consumer Goods":                     "XLY",
+    "Energy Traditional":                 "XLE",
+    "Environmental Sustainability":       "ERTH",
+    "Hardware":                           "XLK",
+    "Industrial Automation":              "BOTZ",
+    "Industrials":                        "XLI",
+    "Insurance":                          "IAK",
+    "Nuclear & Coal":                     "URA",
+    "Real Estate & REITs":                "XLRE",
+    "Telecommunications":                 "XLC",
+    "Transportation & Logistics":         "IYT",
+    "Utilities":                          "XLU",
 }
 
 
 def _validate(etf_meta: dict) -> None:
     """Fail fast on duplicate labels or bad types before writing."""
-    labels = [m[1] for m in etf_meta.values()]
+    labels = [m[2] for m in etf_meta.values()]
     dupes = {x for x in labels if labels.count(x) > 1}
     if dupes:
         raise SystemExit(f"❌ Duplicate labels (must be unique): {sorted(dupes)}")
-    bad_type = {t: m[2] for t, m in etf_meta.items() if m[2] not in ("pure_sector", "beta_booster")}
+    bad_type = {t: m[3] for t, m in etf_meta.items() if m[3] not in ("pure_sector", "beta_booster")}
     if bad_type:
         raise SystemExit(f"❌ Bad type values: {bad_type}")
     cats = defaultdict(list)
-    for t, (cat, _lbl, typ, _liq, _desc, _bm) in etf_meta.items():
+    for t, (cat, _fine, _lbl, typ, _liq, _desc, _bm) in etf_meta.items():
         cats[cat].append(typ)
     for cat, types in cats.items():
         if cat != "Space Exploration" and "pure_sector" not in types:
@@ -102,10 +124,10 @@ def main() -> None:
     etf_meta = load_master()
     _validate(etf_meta)
 
-    # 1) public/etf_metadata.json — ticker → category/label/type/liquid/description/benchmark
+    # 1) public/etf_metadata.json — ticker → category/fine_theme/label/type/liquid/description/benchmark
     metadata = [
-        {"ticker": t, "category": cat, "label": lbl, "type": typ, "liquid": liq, "description": desc, "benchmark": bm}
-        for t, (cat, lbl, typ, liq, desc, bm) in etf_meta.items()
+        {"ticker": t, "category": cat, "fine_theme": fine, "label": lbl, "type": typ, "liquid": liq, "description": desc, "benchmark": bm}
+        for t, (cat, fine, lbl, typ, liq, desc, bm) in etf_meta.items()
     ]
     metadata.sort(key=lambda x: (x["category"], not x["liquid"], x["type"], x["ticker"]))
     (ROOT / "public" / "etf_metadata.json").write_text(
@@ -113,7 +135,7 @@ def main() -> None:
     )
 
     # 2) public/etf_map.json — label → ticker (scraper.py + etf_rs_builder.py)
-    label_map = {lbl: t for t, (_cat, lbl, _typ, _liq, _desc, _bm) in etf_meta.items()}
+    label_map = {lbl: t for t, (_cat, _fine, lbl, _typ, _liq, _desc, _bm) in etf_meta.items()}
     (ROOT / "public" / "etf_map.json").write_text(
         json.dumps(label_map, ensure_ascii=False, indent=2), encoding="utf-8"
     )

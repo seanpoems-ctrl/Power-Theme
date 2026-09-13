@@ -2,6 +2,7 @@
   {
     "ticker": "BETZ",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Digital Entertainment",
     "label": "Gambling",
     "type": "beta_booster",
     "liquid": true,
@@ -11,6 +12,7 @@
   {
     "ticker": "SOCL",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Digital Entertainment",
     "label": "Social Media",
     "type": "beta_booster",
     "liquid": true,
@@ -18,17 +20,9 @@
     "benchmark": false
   },
   {
-    "ticker": "XHS",
-    "category": "Consumer, Gaming & E-Commerce",
-    "label": "Healthcare Services",
-    "type": "beta_booster",
-    "liquid": true,
-    "description": "Equal-weight insurers, facilities, distributors and healthcare services",
-    "benchmark": false
-  },
-  {
     "ticker": "RTH",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Consumer Goods",
     "label": "Retail Concentrated",
     "type": "pure_sector",
     "liquid": true,
@@ -38,6 +32,7 @@
   {
     "ticker": "XRT",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Consumer Goods",
     "label": "Retail Equal",
     "type": "pure_sector",
     "liquid": true,
@@ -47,6 +42,7 @@
   {
     "ticker": "AWAY",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Consumer Goods",
     "label": "Travel Technology",
     "type": "beta_booster",
     "liquid": false,
@@ -56,6 +52,7 @@
   {
     "ticker": "BUZZ",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Quantitative Factors & Volatility",
     "label": "Social Sentiment",
     "type": "beta_booster",
     "liquid": false,
@@ -65,6 +62,7 @@
   {
     "ticker": "CNBS",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Consumer Goods",
     "label": "Cannabis Global",
     "type": "beta_booster",
     "liquid": false,
@@ -74,6 +72,7 @@
   {
     "ticker": "ESPO",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Digital Entertainment",
     "label": "Gaming",
     "type": "beta_booster",
     "liquid": false,
@@ -83,6 +82,7 @@
   {
     "ticker": "GENZ",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Quantitative Factors & Volatility",
     "label": "Digital Economy",
     "type": "beta_booster",
     "liquid": false,
@@ -92,6 +92,7 @@
   {
     "ticker": "IBUY",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "E-Commerce",
     "label": "Online Retail",
     "type": "beta_booster",
     "liquid": false,
@@ -101,6 +102,7 @@
   {
     "ticker": "MEME",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Quantitative Factors & Volatility",
     "label": "Meme Stocks",
     "type": "beta_booster",
     "liquid": false,
@@ -110,6 +112,7 @@
   {
     "ticker": "METV",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Digital Entertainment",
     "label": "Metaverse",
     "type": "beta_booster",
     "liquid": false,
@@ -119,6 +122,7 @@
   {
     "ticker": "MJ",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Consumer Goods",
     "label": "Cannabis Broad",
     "type": "beta_booster",
     "liquid": false,
@@ -128,6 +132,7 @@
   {
     "ticker": "MSOS",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Consumer Goods",
     "label": "Cannabis US Operators",
     "type": "beta_booster",
     "liquid": false,
@@ -137,6 +142,7 @@
   {
     "ticker": "NERD",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Digital Entertainment",
     "label": "Video Games",
     "type": "beta_booster",
     "liquid": false,
@@ -146,6 +152,7 @@
   {
     "ticker": "PAWZ",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Consumer Goods",
     "label": "Pet Industry",
     "type": "beta_booster",
     "liquid": false,
@@ -155,6 +162,7 @@
   {
     "ticker": "PEJ",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Digital Entertainment",
     "label": "Leisure",
     "type": "beta_booster",
     "liquid": false,
@@ -164,6 +172,7 @@
   {
     "ticker": "VICE",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Consumer Goods",
     "label": "Vice Industries",
     "type": "beta_booster",
     "liquid": false,
@@ -173,6 +182,7 @@
   {
     "ticker": "WEED",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Consumer Goods",
     "label": "Cannabis Concentrated",
     "type": "beta_booster",
     "liquid": false,
@@ -182,6 +192,7 @@
   {
     "ticker": "FTXG",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Agriculture & Food",
     "label": "Food & Beverage Growth",
     "type": "pure_sector",
     "liquid": false,
@@ -191,6 +202,7 @@
   {
     "ticker": "IYC",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Consumer Goods",
     "label": "Consumer Discretionary",
     "type": "pure_sector",
     "liquid": false,
@@ -200,6 +212,7 @@
   {
     "ticker": "IYK",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Consumer Goods",
     "label": "Consumer Staples",
     "type": "pure_sector",
     "liquid": false,
@@ -209,6 +222,7 @@
   {
     "ticker": "PBJ",
     "category": "Consumer, Gaming & E-Commerce",
+    "fine_theme": "Agriculture & Food",
     "label": "Food & Beverage Multi-Factor",
     "type": "pure_sector",
     "liquid": false,
@@ -218,6 +232,7 @@
   {
     "ticker": "ETHA",
     "category": "Crypto & Digital Assets",
+    "fine_theme": "Crypto & Digital Assets",
     "label": "Ethereum",
     "type": "beta_booster",
     "liquid": true,
@@ -227,6 +242,7 @@
   {
     "ticker": "IBIT",
     "category": "Crypto & Digital Assets",
+    "fine_theme": "Crypto & Digital Assets",
     "label": "Bitcoin Spot",
     "type": "beta_booster",
     "liquid": true,
@@ -236,6 +252,7 @@
   {
     "ticker": "BITW",
     "category": "Crypto & Digital Assets",
+    "fine_theme": "Crypto & Digital Assets",
     "label": "Multi Asset",
     "type": "pure_sector",
     "liquid": true,
@@ -245,6 +262,7 @@
   {
     "ticker": "GBTC",
     "category": "Crypto & Digital Assets",
+    "fine_theme": "Crypto & Digital Assets",
     "label": "Bitcoin Legacy Trust",
     "type": "pure_sector",
     "liquid": true,
@@ -254,6 +272,7 @@
   {
     "ticker": "SOLZ",
     "category": "Crypto & Digital Assets",
+    "fine_theme": "Crypto & Digital Assets",
     "label": "Solana Futures",
     "type": "beta_booster",
     "liquid": false,
@@ -263,6 +282,7 @@
   {
     "ticker": "WGMI",
     "category": "Crypto & Digital Assets",
+    "fine_theme": "Crypto & Digital Assets",
     "label": "Bitcoin Miners",
     "type": "beta_booster",
     "liquid": false,
@@ -272,6 +292,7 @@
   {
     "ticker": "XRPI",
     "category": "Crypto & Digital Assets",
+    "fine_theme": "Crypto & Digital Assets",
     "label": "XRP Futures",
     "type": "beta_booster",
     "liquid": false,
@@ -281,6 +302,7 @@
   {
     "ticker": "RSPC",
     "category": "EW Sector",
+    "fine_theme": null,
     "label": "Equal Weight Communication",
     "type": "pure_sector",
     "liquid": true,
@@ -290,6 +312,7 @@
   {
     "ticker": "RSPD",
     "category": "EW Sector",
+    "fine_theme": null,
     "label": "Equal Weight Discretionary",
     "type": "pure_sector",
     "liquid": true,
@@ -299,6 +322,7 @@
   {
     "ticker": "RSPF",
     "category": "EW Sector",
+    "fine_theme": null,
     "label": "Equal Weight Financials",
     "type": "pure_sector",
     "liquid": true,
@@ -308,6 +332,7 @@
   {
     "ticker": "RSPG",
     "category": "EW Sector",
+    "fine_theme": null,
     "label": "Equal Weight Energy",
     "type": "pure_sector",
     "liquid": true,
@@ -317,6 +342,7 @@
   {
     "ticker": "RSPH",
     "category": "EW Sector",
+    "fine_theme": null,
     "label": "Equal Weight Health Care",
     "type": "pure_sector",
     "liquid": true,
@@ -326,6 +352,7 @@
   {
     "ticker": "RSPM",
     "category": "EW Sector",
+    "fine_theme": null,
     "label": "Equal Weight Material",
     "type": "pure_sector",
     "liquid": true,
@@ -335,6 +362,7 @@
   {
     "ticker": "RSPN",
     "category": "EW Sector",
+    "fine_theme": null,
     "label": "Equal Weight Industrial",
     "type": "pure_sector",
     "liquid": true,
@@ -344,6 +372,7 @@
   {
     "ticker": "RSPR",
     "category": "EW Sector",
+    "fine_theme": null,
     "label": "Equal Weight Real Estate",
     "type": "pure_sector",
     "liquid": true,
@@ -353,6 +382,7 @@
   {
     "ticker": "RSPS",
     "category": "EW Sector",
+    "fine_theme": null,
     "label": "Equal Weight Staples",
     "type": "pure_sector",
     "liquid": true,
@@ -362,6 +392,7 @@
   {
     "ticker": "RSPT",
     "category": "EW Sector",
+    "fine_theme": null,
     "label": "Equal Weight Technology",
     "type": "pure_sector",
     "liquid": true,
@@ -371,6 +402,7 @@
   {
     "ticker": "RSPU",
     "category": "EW Sector",
+    "fine_theme": null,
     "label": "Equal Weight Utilities",
     "type": "pure_sector",
     "liquid": true,
@@ -380,6 +412,7 @@
   {
     "ticker": "GDX",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Commodities Metals",
     "label": "Gold Miners Large-Cap",
     "type": "beta_booster",
     "liquid": true,
@@ -389,6 +422,7 @@
   {
     "ticker": "GUNR",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Materials & Mining",
     "label": "Natural Resources Upstream",
     "type": "beta_booster",
     "liquid": true,
@@ -398,6 +432,7 @@
   {
     "ticker": "ICLN",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Renewable",
     "label": "Clean Energy Broad",
     "type": "beta_booster",
     "liquid": true,
@@ -407,6 +442,7 @@
   {
     "ticker": "OIH",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Traditional",
     "label": "Oil Services Concentrated",
     "type": "beta_booster",
     "liquid": true,
@@ -416,6 +452,7 @@
   {
     "ticker": "TAN",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Renewable",
     "label": "Solar",
     "type": "beta_booster",
     "liquid": true,
@@ -425,6 +462,7 @@
   {
     "ticker": "URA",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Nuclear & Coal",
     "label": "Uranium & Nuclear",
     "type": "beta_booster",
     "liquid": true,
@@ -434,6 +472,7 @@
   {
     "ticker": "URNM",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Nuclear & Coal",
     "label": "Uranium Miners Pure-Play",
     "type": "beta_booster",
     "liquid": true,
@@ -443,6 +482,7 @@
   {
     "ticker": "XOP",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Traditional",
     "label": "Oil & Gas Equal",
     "type": "beta_booster",
     "liquid": true,
@@ -452,6 +492,7 @@
   {
     "ticker": "GLD",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Commodities Metals",
     "label": "Gold",
     "type": "pure_sector",
     "liquid": true,
@@ -461,6 +502,7 @@
   {
     "ticker": "IEO",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Traditional",
     "label": "Oil & Gas Cap-Weighted",
     "type": "pure_sector",
     "liquid": true,
@@ -470,6 +512,7 @@
   {
     "ticker": "SLV",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Commodities Metals",
     "label": "Silver",
     "type": "pure_sector",
     "liquid": true,
@@ -479,6 +522,7 @@
   {
     "ticker": "UNG",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Traditional",
     "label": "Natural Gas Futures",
     "type": "pure_sector",
     "liquid": true,
@@ -488,6 +532,7 @@
   {
     "ticker": "USO",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Traditional",
     "label": "Crude Oil",
     "type": "pure_sector",
     "liquid": true,
@@ -497,6 +542,7 @@
   {
     "ticker": "AMLP",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Traditional",
     "label": "MLP & Midstream",
     "type": "beta_booster",
     "liquid": false,
@@ -506,6 +552,7 @@
   {
     "ticker": "COPX",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Commodities Metals",
     "label": "Copper",
     "type": "beta_booster",
     "liquid": false,
@@ -515,6 +562,7 @@
   {
     "ticker": "ENFR",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Traditional",
     "label": "Energy Infrastructure",
     "type": "beta_booster",
     "liquid": false,
@@ -524,6 +572,7 @@
   {
     "ticker": "ERTH",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Environmental Sustainability",
     "label": "Sustainable Economy",
     "type": "beta_booster",
     "liquid": false,
@@ -533,6 +582,7 @@
   {
     "ticker": "ESGU",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Quantitative Factors & Volatility",
     "label": "ESG",
     "type": "beta_booster",
     "liquid": false,
@@ -542,6 +592,7 @@
   {
     "ticker": "EVX",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Environmental Sustainability",
     "label": "Environment",
     "type": "beta_booster",
     "liquid": false,
@@ -551,6 +602,7 @@
   {
     "ticker": "FAN",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Renewable",
     "label": "Wind Energy",
     "type": "beta_booster",
     "liquid": false,
@@ -560,6 +612,7 @@
   {
     "ticker": "FCG",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Traditional",
     "label": "Natural Gas Producers",
     "type": "beta_booster",
     "liquid": false,
@@ -569,6 +622,7 @@
   {
     "ticker": "GDXJ",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Commodities Metals",
     "label": "Gold Miners Junior",
     "type": "beta_booster",
     "liquid": false,
@@ -578,6 +632,7 @@
   {
     "ticker": "GRID",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Utilities",
     "label": "Electrical Grid",
     "type": "beta_booster",
     "liquid": false,
@@ -587,6 +642,7 @@
   {
     "ticker": "HYDR",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Renewable",
     "label": "Hydrogen",
     "type": "beta_booster",
     "liquid": false,
@@ -596,6 +652,7 @@
   {
     "ticker": "KRBN",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Environmental Sustainability",
     "label": "Carbon Credits",
     "type": "beta_booster",
     "liquid": false,
@@ -605,6 +662,7 @@
   {
     "ticker": "MOO",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Agriculture & Food",
     "label": "Agriculture & FoodTech",
     "type": "beta_booster",
     "liquid": false,
@@ -614,6 +672,7 @@
   {
     "ticker": "NLR",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Nuclear & Coal",
     "label": "Nuclear",
     "type": "beta_booster",
     "liquid": false,
@@ -623,6 +682,7 @@
   {
     "ticker": "PALL",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Commodities Metals",
     "label": "Palladium",
     "type": "beta_booster",
     "liquid": false,
@@ -632,6 +692,7 @@
   {
     "ticker": "PBW",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Renewable",
     "label": "Clean Energy Growth",
     "type": "beta_booster",
     "liquid": false,
@@ -641,6 +702,7 @@
   {
     "ticker": "PLTM",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Commodities Metals",
     "label": "Platinum",
     "type": "beta_booster",
     "liquid": false,
@@ -650,6 +712,7 @@
   {
     "ticker": "REMX",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Commodities Metals",
     "label": "Strategic Metals",
     "type": "beta_booster",
     "liquid": false,
@@ -659,6 +722,7 @@
   {
     "ticker": "SIL",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Commodities Metals",
     "label": "Silver Miners Established",
     "type": "beta_booster",
     "liquid": false,
@@ -668,6 +732,7 @@
   {
     "ticker": "SILJ",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Commodities Metals",
     "label": "Silver Miners Junior",
     "type": "beta_booster",
     "liquid": false,
@@ -677,6 +742,7 @@
   {
     "ticker": "SLX",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Materials & Mining",
     "label": "Steel",
     "type": "beta_booster",
     "liquid": false,
@@ -686,6 +752,7 @@
   {
     "ticker": "UX",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Nuclear & Coal",
     "label": "Uranium Physical",
     "type": "beta_booster",
     "liquid": false,
@@ -695,6 +762,7 @@
   {
     "ticker": "XES",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Energy Traditional",
     "label": "Oil Services Equal",
     "type": "beta_booster",
     "liquid": false,
@@ -704,6 +772,7 @@
   {
     "ticker": "XME",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Materials & Mining",
     "label": "Metals & Mining",
     "type": "beta_booster",
     "liquid": false,
@@ -713,6 +782,7 @@
   {
     "ticker": "GNR",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Materials & Mining",
     "label": "Natural Resources Global",
     "type": "pure_sector",
     "liquid": false,
@@ -722,6 +792,7 @@
   {
     "ticker": "VEGI",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Agriculture & Food",
     "label": "Agriculture Producers",
     "type": "pure_sector",
     "liquid": false,
@@ -731,6 +802,7 @@
   {
     "ticker": "WOOD",
     "category": "Energy, Metals & Commodities",
+    "fine_theme": "Materials & Mining",
     "label": "Timber",
     "type": "pure_sector",
     "liquid": false,
@@ -740,6 +812,7 @@
   {
     "ticker": "IAI",
     "category": "Finance & Capital Markets",
+    "fine_theme": "Fintech",
     "label": "Capital Markets Cap-Weighted",
     "type": "beta_booster",
     "liquid": true,
@@ -749,6 +822,7 @@
   {
     "ticker": "IAK",
     "category": "Finance & Capital Markets",
+    "fine_theme": "Insurance",
     "label": "Insurance Cap-Weighted",
     "type": "beta_booster",
     "liquid": true,
@@ -758,6 +832,7 @@
   {
     "ticker": "IYG",
     "category": "Finance & Capital Markets",
+    "fine_theme": "Fintech",
     "label": "Financial Services",
     "type": "beta_booster",
     "liquid": true,
@@ -767,6 +842,7 @@
   {
     "ticker": "KBE",
     "category": "Finance & Capital Markets",
+    "fine_theme": "Fintech",
     "label": "Banks Equal",
     "type": "pure_sector",
     "liquid": true,
@@ -776,6 +852,7 @@
   {
     "ticker": "KRE",
     "category": "Finance & Capital Markets",
+    "fine_theme": "Fintech",
     "label": "Regional Banks",
     "type": "pure_sector",
     "liquid": true,
@@ -785,6 +862,7 @@
   {
     "ticker": "IPAY",
     "category": "Finance & Capital Markets",
+    "fine_theme": "Fintech",
     "label": "Payments",
     "type": "beta_booster",
     "liquid": false,
@@ -794,6 +872,7 @@
   {
     "ticker": "KCE",
     "category": "Finance & Capital Markets",
+    "fine_theme": "Fintech",
     "label": "Capital Markets Equal",
     "type": "beta_booster",
     "liquid": false,
@@ -803,6 +882,7 @@
   {
     "ticker": "KIE",
     "category": "Finance & Capital Markets",
+    "fine_theme": "Insurance",
     "label": "Insurance Equal",
     "type": "beta_booster",
     "liquid": false,
@@ -812,6 +892,7 @@
   {
     "ticker": "ASHR",
     "category": "Geographic / Country Specific",
+    "fine_theme": "Geographic / Country Specific",
     "label": "China A-Shares",
     "type": "beta_booster",
     "liquid": true,
@@ -821,6 +902,7 @@
   {
     "ticker": "EEM",
     "category": "Geographic / Country Specific",
+    "fine_theme": "Geographic / Country Specific",
     "label": "Emerging Markets",
     "type": "beta_booster",
     "liquid": true,
@@ -830,6 +912,7 @@
   {
     "ticker": "ILF",
     "category": "Geographic / Country Specific",
+    "fine_theme": "Geographic / Country Specific",
     "label": "Latin America",
     "type": "beta_booster",
     "liquid": true,
@@ -839,6 +922,7 @@
   {
     "ticker": "EWY",
     "category": "Geographic / Country Specific",
+    "fine_theme": "Geographic / Country Specific",
     "label": "South Korea",
     "type": "pure_sector",
     "liquid": true,
@@ -848,6 +932,7 @@
   {
     "ticker": "EWZ",
     "category": "Geographic / Country Specific",
+    "fine_theme": "Geographic / Country Specific",
     "label": "Brazil",
     "type": "pure_sector",
     "liquid": true,
@@ -857,6 +942,7 @@
   {
     "ticker": "FXI",
     "category": "Geographic / Country Specific",
+    "fine_theme": "Geographic / Country Specific",
     "label": "China Large-Cap",
     "type": "pure_sector",
     "liquid": true,
@@ -866,6 +952,7 @@
   {
     "ticker": "KWEB",
     "category": "Geographic / Country Specific",
+    "fine_theme": "Geographic / Country Specific",
     "label": "China Internet",
     "type": "pure_sector",
     "liquid": true,
@@ -875,6 +962,7 @@
   {
     "ticker": "ARGT",
     "category": "Geographic / Country Specific",
+    "fine_theme": "Geographic / Country Specific",
     "label": "Argentina",
     "type": "beta_booster",
     "liquid": false,
@@ -884,6 +972,7 @@
   {
     "ticker": "CHIQ",
     "category": "Geographic / Country Specific",
+    "fine_theme": "Geographic / Country Specific",
     "label": "China Consumer",
     "type": "beta_booster",
     "liquid": false,
@@ -893,6 +982,7 @@
   {
     "ticker": "GXC",
     "category": "Geographic / Country Specific",
+    "fine_theme": "Geographic / Country Specific",
     "label": "China Broad",
     "type": "beta_booster",
     "liquid": false,
@@ -902,6 +992,7 @@
   {
     "ticker": "IBB",
     "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare & Biotech",
     "label": "Biotech Large-Cap",
     "type": "beta_booster",
     "liquid": true,
@@ -911,6 +1002,7 @@
   {
     "ticker": "XBI",
     "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare & Biotech",
     "label": "Biotech Equal",
     "type": "beta_booster",
     "liquid": true,
@@ -918,8 +1010,19 @@
     "benchmark": false
   },
   {
+    "ticker": "XHS",
+    "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare Services",
+    "label": "Healthcare Services",
+    "type": "beta_booster",
+    "liquid": true,
+    "description": "Equal-weight insurers, facilities, distributors and healthcare services",
+    "benchmark": false
+  },
+  {
     "ticker": "ARKG",
     "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare & Biotech",
     "label": "Genomics Active",
     "type": "beta_booster",
     "liquid": false,
@@ -929,6 +1032,7 @@
   {
     "ticker": "CANC",
     "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare & Biotech",
     "label": "Healthcare",
     "type": "beta_booster",
     "liquid": false,
@@ -938,6 +1042,7 @@
   {
     "ticker": "HELX",
     "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare & Biotech",
     "label": "Gene Editing",
     "type": "beta_booster",
     "liquid": false,
@@ -947,6 +1052,7 @@
   {
     "ticker": "IHI",
     "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare & Biotech",
     "label": "Medical Devices",
     "type": "beta_booster",
     "liquid": false,
@@ -956,6 +1062,7 @@
   {
     "ticker": "KURE",
     "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare & Biotech",
     "label": "China Healthcare",
     "type": "beta_booster",
     "liquid": false,
@@ -965,6 +1072,7 @@
   {
     "ticker": "OZEM",
     "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare & Biotech",
     "label": "Weight Loss & GLP-1",
     "type": "beta_booster",
     "liquid": false,
@@ -974,6 +1082,7 @@
   {
     "ticker": "PBE",
     "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare & Biotech",
     "label": "Biotech Multi-Factor",
     "type": "beta_booster",
     "liquid": false,
@@ -983,6 +1092,7 @@
   {
     "ticker": "PSIL",
     "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare & Biotech",
     "label": "Psychedelics",
     "type": "beta_booster",
     "liquid": false,
@@ -992,6 +1102,7 @@
   {
     "ticker": "XHE",
     "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare & Biotech",
     "label": "Medical Equipment",
     "type": "beta_booster",
     "liquid": false,
@@ -1001,6 +1112,7 @@
   {
     "ticker": "IHF",
     "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare Services",
     "label": "Healthcare Providers",
     "type": "pure_sector",
     "liquid": false,
@@ -1010,6 +1122,7 @@
   {
     "ticker": "PPH",
     "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare & Biotech",
     "label": "Pharma Concentrated",
     "type": "pure_sector",
     "liquid": false,
@@ -1019,6 +1132,7 @@
   {
     "ticker": "XPH",
     "category": "Healthcare & Biotech",
+    "fine_theme": "Healthcare & Biotech",
     "label": "Pharma Equal",
     "type": "pure_sector",
     "liquid": false,
@@ -1028,6 +1142,7 @@
   {
     "ticker": "TLT",
     "category": "Index",
+    "fine_theme": null,
     "label": "Long-Term Treasuries",
     "type": "beta_booster",
     "liquid": true,
@@ -1037,6 +1152,7 @@
   {
     "ticker": "DIA",
     "category": "Index",
+    "fine_theme": null,
     "label": "Dow 30",
     "type": "pure_sector",
     "liquid": true,
@@ -1046,6 +1162,7 @@
   {
     "ticker": "IWM",
     "category": "Index",
+    "fine_theme": null,
     "label": "Russell 2000",
     "type": "pure_sector",
     "liquid": true,
@@ -1055,6 +1172,7 @@
   {
     "ticker": "QQQ",
     "category": "Index",
+    "fine_theme": null,
     "label": "Nasdaq-100",
     "type": "pure_sector",
     "liquid": true,
@@ -1064,6 +1182,7 @@
   {
     "ticker": "QQQE",
     "category": "Index",
+    "fine_theme": null,
     "label": "Nasdaq-100 Equal Weight",
     "type": "pure_sector",
     "liquid": true,
@@ -1073,6 +1192,7 @@
   {
     "ticker": "RSP",
     "category": "Index",
+    "fine_theme": null,
     "label": "S&P 500 Equal Weight",
     "type": "pure_sector",
     "liquid": true,
@@ -1082,6 +1202,7 @@
   {
     "ticker": "SPMO",
     "category": "Index",
+    "fine_theme": null,
     "label": "Momentum S&P 500",
     "type": "pure_sector",
     "liquid": true,
@@ -1091,6 +1212,7 @@
   {
     "ticker": "SPY",
     "category": "Index",
+    "fine_theme": null,
     "label": "S&P 500 SPDR",
     "type": "pure_sector",
     "liquid": true,
@@ -1100,6 +1222,7 @@
   {
     "ticker": "ITA",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Defense & Aerospace",
     "label": "Defense Cap-Weighted",
     "type": "beta_booster",
     "liquid": true,
@@ -1109,6 +1232,7 @@
   {
     "ticker": "JETS",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Transportation & Logistics",
     "label": "Airlines",
     "type": "beta_booster",
     "liquid": true,
@@ -1118,6 +1242,7 @@
   {
     "ticker": "PAVE",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Industrials",
     "label": "Infrastructure US",
     "type": "beta_booster",
     "liquid": true,
@@ -1127,6 +1252,7 @@
   {
     "ticker": "IYT",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Transportation & Logistics",
     "label": "Transportation Cap-Weighted",
     "type": "pure_sector",
     "liquid": true,
@@ -1136,6 +1262,7 @@
   {
     "ticker": "BOAT",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Transportation & Logistics",
     "label": "Shipping",
     "type": "beta_booster",
     "liquid": false,
@@ -1145,6 +1272,7 @@
   {
     "ticker": "BOTZ",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Industrial Automation",
     "label": "Robotics Industrial",
     "type": "beta_booster",
     "liquid": false,
@@ -1154,6 +1282,7 @@
   {
     "ticker": "CABZ",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Industrial Automation",
     "label": "Robotaxis",
     "type": "beta_booster",
     "liquid": false,
@@ -1163,6 +1292,7 @@
   {
     "ticker": "DRIV",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Electric Vehicles",
     "label": "EV Broad",
     "type": "beta_booster",
     "liquid": false,
@@ -1172,6 +1302,7 @@
   {
     "ticker": "FDRV",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Electric Vehicles",
     "label": "EV Suppliers",
     "type": "beta_booster",
     "liquid": false,
@@ -1181,6 +1312,7 @@
   {
     "ticker": "HOMZ",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Real Estate & REITs",
     "label": "Housing Cycle",
     "type": "beta_booster",
     "liquid": false,
@@ -1190,6 +1322,7 @@
   {
     "ticker": "HUMN",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Industrial Automation",
     "label": "Humanoid Robotics",
     "type": "beta_booster",
     "liquid": false,
@@ -1199,6 +1332,7 @@
   {
     "ticker": "ITB",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Real Estate & REITs",
     "label": "Homebuilding",
     "type": "beta_booster",
     "liquid": false,
@@ -1208,6 +1342,7 @@
   {
     "ticker": "LIT",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Electric Vehicles",
     "label": "Lithium",
     "type": "beta_booster",
     "liquid": false,
@@ -1217,6 +1352,7 @@
   {
     "ticker": "PRNT",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Industrial Automation",
     "label": "3D Printing",
     "type": "beta_booster",
     "liquid": false,
@@ -1226,6 +1362,7 @@
   {
     "ticker": "ROBO",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Industrial Automation",
     "label": "Robotics Diversified",
     "type": "beta_booster",
     "liquid": false,
@@ -1235,6 +1372,7 @@
   {
     "ticker": "SHLD",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Defense & Aerospace",
     "label": "Defense Technology",
     "type": "beta_booster",
     "liquid": false,
@@ -1244,6 +1382,7 @@
   {
     "ticker": "SUPL",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Transportation & Logistics",
     "label": "Logistics",
     "type": "beta_booster",
     "liquid": false,
@@ -1253,6 +1392,7 @@
   {
     "ticker": "XAR",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Defense & Aerospace",
     "label": "Defense Equal",
     "type": "beta_booster",
     "liquid": false,
@@ -1262,6 +1402,7 @@
   {
     "ticker": "XHB",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Real Estate & REITs",
     "label": "Homebuilders Equal",
     "type": "beta_booster",
     "liquid": false,
@@ -1271,6 +1412,7 @@
   {
     "ticker": "IGF",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Industrials",
     "label": "Infrastructure Global",
     "type": "pure_sector",
     "liquid": false,
@@ -1280,6 +1422,7 @@
   {
     "ticker": "PHO",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Utilities",
     "label": "Water",
     "type": "pure_sector",
     "liquid": false,
@@ -1289,6 +1432,7 @@
   {
     "ticker": "XTN",
     "category": "Industrials, Transportation & Infrastructure",
+    "fine_theme": "Transportation & Logistics",
     "label": "Transportation Equal",
     "type": "pure_sector",
     "liquid": false,
@@ -1298,6 +1442,7 @@
   {
     "ticker": "MTUM",
     "category": "Quantitative Factors & Volatility",
+    "fine_theme": "Quantitative Factors & Volatility",
     "label": "Momentum Broad",
     "type": "pure_sector",
     "liquid": true,
@@ -1307,6 +1452,7 @@
   {
     "ticker": "SVIX",
     "category": "Quantitative Factors & Volatility",
+    "fine_theme": "Quantitative Factors & Volatility",
     "label": "Volatility",
     "type": "pure_sector",
     "liquid": true,
@@ -1316,6 +1462,7 @@
   {
     "ticker": "DXYZ",
     "category": "Quantitative Factors & Volatility",
+    "fine_theme": "Quantitative Factors & Volatility",
     "label": "Private Tech Growth",
     "type": "beta_booster",
     "liquid": false,
@@ -1325,6 +1472,7 @@
   {
     "ticker": "FFTY",
     "category": "Quantitative Factors & Volatility",
+    "fine_theme": "Quantitative Factors & Volatility",
     "label": "Growth Stocks",
     "type": "beta_booster",
     "liquid": false,
@@ -1334,6 +1482,7 @@
   {
     "ticker": "HLAL",
     "category": "Quantitative Factors & Volatility",
+    "fine_theme": "Quantitative Factors & Volatility",
     "label": "Values-based",
     "type": "beta_booster",
     "liquid": false,
@@ -1343,6 +1492,7 @@
   {
     "ticker": "LOHA",
     "category": "Quantitative Factors & Volatility",
+    "fine_theme": "Quantitative Factors & Volatility",
     "label": "AI-resistant Assets",
     "type": "beta_booster",
     "liquid": false,
@@ -1352,6 +1502,7 @@
   {
     "ticker": "NANC",
     "category": "Quantitative Factors & Volatility",
+    "fine_theme": "Quantitative Factors & Volatility",
     "label": "Political",
     "type": "beta_booster",
     "liquid": false,
@@ -1361,6 +1512,7 @@
   {
     "ticker": "SHE",
     "category": "Quantitative Factors & Volatility",
+    "fine_theme": "Quantitative Factors & Volatility",
     "label": "Gender Diversity",
     "type": "beta_booster",
     "liquid": false,
@@ -1370,6 +1522,7 @@
   {
     "ticker": "USCA",
     "category": "Quantitative Factors & Volatility",
+    "fine_theme": "Quantitative Factors & Volatility",
     "label": "Climate",
     "type": "beta_booster",
     "liquid": false,
@@ -1379,6 +1532,7 @@
   {
     "ticker": "FRI",
     "category": "Real Estate & Utilities",
+    "fine_theme": "Real Estate & REITs",
     "label": "Real Estate Cap-Weighted",
     "type": "beta_booster",
     "liquid": false,
@@ -1388,6 +1542,7 @@
   {
     "ticker": "SCHH",
     "category": "Real Estate & Utilities",
+    "fine_theme": "Real Estate & REITs",
     "label": "Real Estate Broad",
     "type": "pure_sector",
     "liquid": false,
@@ -1397,6 +1552,7 @@
   {
     "ticker": "XLC",
     "category": "SPDR Sector",
+    "fine_theme": null,
     "label": "Telecom Sector",
     "type": "pure_sector",
     "liquid": true,
@@ -1406,6 +1562,7 @@
   {
     "ticker": "XLE",
     "category": "SPDR Sector",
+    "fine_theme": null,
     "label": "Traditional Oil & Gas",
     "type": "pure_sector",
     "liquid": true,
@@ -1415,6 +1572,7 @@
   {
     "ticker": "XLF",
     "category": "SPDR Sector",
+    "fine_theme": null,
     "label": "Financials Sector",
     "type": "pure_sector",
     "liquid": true,
@@ -1424,6 +1582,7 @@
   {
     "ticker": "XLI",
     "category": "SPDR Sector",
+    "fine_theme": null,
     "label": "Industrials Sector",
     "type": "pure_sector",
     "liquid": true,
@@ -1433,6 +1592,7 @@
   {
     "ticker": "XLK",
     "category": "SPDR Sector",
+    "fine_theme": null,
     "label": "Technology Sector",
     "type": "pure_sector",
     "liquid": true,
@@ -1442,6 +1602,7 @@
   {
     "ticker": "XLP",
     "category": "SPDR Sector",
+    "fine_theme": null,
     "label": "Staples Sector",
     "type": "pure_sector",
     "liquid": true,
@@ -1451,6 +1612,7 @@
   {
     "ticker": "XLRE",
     "category": "SPDR Sector",
+    "fine_theme": null,
     "label": "Real Estate Sector",
     "type": "pure_sector",
     "liquid": true,
@@ -1460,6 +1622,7 @@
   {
     "ticker": "XLU",
     "category": "SPDR Sector",
+    "fine_theme": null,
     "label": "Utilities Sector",
     "type": "pure_sector",
     "liquid": true,
@@ -1469,6 +1632,7 @@
   {
     "ticker": "XLV",
     "category": "SPDR Sector",
+    "fine_theme": null,
     "label": "Healthcare Sector",
     "type": "pure_sector",
     "liquid": true,
@@ -1478,6 +1642,7 @@
   {
     "ticker": "XLY",
     "category": "SPDR Sector",
+    "fine_theme": null,
     "label": "Discretionary Sector",
     "type": "pure_sector",
     "liquid": true,
@@ -1487,6 +1652,7 @@
   {
     "ticker": "XLB",
     "category": "SPDR Sector",
+    "fine_theme": null,
     "label": "Materials & Mining",
     "type": "beta_booster",
     "liquid": false,
@@ -1496,6 +1662,7 @@
   {
     "ticker": "IJH",
     "category": "Segment",
+    "fine_theme": null,
     "label": "MidCap 400",
     "type": "pure_sector",
     "liquid": true,
@@ -1505,6 +1672,7 @@
   {
     "ticker": "IJJ",
     "category": "Segment",
+    "fine_theme": null,
     "label": "MidCap 400 Value",
     "type": "pure_sector",
     "liquid": true,
@@ -1514,6 +1682,7 @@
   {
     "ticker": "IJK",
     "category": "Segment",
+    "fine_theme": null,
     "label": "MidCap 400 Growth",
     "type": "pure_sector",
     "liquid": true,
@@ -1523,6 +1692,7 @@
   {
     "ticker": "IJR",
     "category": "Segment",
+    "fine_theme": null,
     "label": "Small-Cap 600",
     "type": "pure_sector",
     "liquid": true,
@@ -1532,6 +1702,7 @@
   {
     "ticker": "IJS",
     "category": "Segment",
+    "fine_theme": null,
     "label": "Small-Cap 600 Value",
     "type": "pure_sector",
     "liquid": true,
@@ -1541,6 +1712,7 @@
   {
     "ticker": "IJT",
     "category": "Segment",
+    "fine_theme": null,
     "label": "Small-Cap 600 Growth",
     "type": "pure_sector",
     "liquid": true,
@@ -1550,6 +1722,7 @@
   {
     "ticker": "IVE",
     "category": "Segment",
+    "fine_theme": null,
     "label": "Large-Cap 500 Value",
     "type": "pure_sector",
     "liquid": true,
@@ -1559,6 +1732,7 @@
   {
     "ticker": "IVV",
     "category": "Segment",
+    "fine_theme": null,
     "label": "S&P 500 iShares",
     "type": "pure_sector",
     "liquid": true,
@@ -1568,6 +1742,7 @@
   {
     "ticker": "IVW",
     "category": "Segment",
+    "fine_theme": null,
     "label": "Large-Cap 500 Growth",
     "type": "pure_sector",
     "liquid": true,
@@ -1577,6 +1752,7 @@
   {
     "ticker": "ARKX",
     "category": "Space Exploration",
+    "fine_theme": "Space Exploration",
     "label": "Space Active",
     "type": "beta_booster",
     "liquid": false,
@@ -1586,6 +1762,7 @@
   {
     "ticker": "MARS",
     "category": "Space Exploration",
+    "fine_theme": "Space Exploration",
     "label": "Space Infrastructure",
     "type": "beta_booster",
     "liquid": false,
@@ -1595,6 +1772,7 @@
   {
     "ticker": "NASA",
     "category": "Space Exploration",
+    "fine_theme": "Space Exploration",
     "label": "Space Pre-IPO",
     "type": "beta_booster",
     "liquid": false,
@@ -1604,6 +1782,7 @@
   {
     "ticker": "UFO",
     "category": "Space Exploration",
+    "fine_theme": "Space Exploration",
     "label": "Space Rules-Based",
     "type": "beta_booster",
     "liquid": false,
@@ -1613,6 +1792,7 @@
   {
     "ticker": "ARKK",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Software",
     "label": "Innovation",
     "type": "beta_booster",
     "liquid": true,
@@ -1622,6 +1802,7 @@
   {
     "ticker": "ARKW",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Cloud Computing",
     "label": "Internet Active",
     "type": "beta_booster",
     "liquid": true,
@@ -1631,6 +1812,7 @@
   {
     "ticker": "BUG",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Cybersecurity",
     "label": "Cybersecurity Pure-Play",
     "type": "beta_booster",
     "liquid": true,
@@ -1640,6 +1822,7 @@
   {
     "ticker": "CIBR",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Cybersecurity",
     "label": "Cybersecurity Broad",
     "type": "beta_booster",
     "liquid": true,
@@ -1649,6 +1832,7 @@
   {
     "ticker": "CLOU",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Cloud Computing",
     "label": "Cloud Revenue",
     "type": "beta_booster",
     "liquid": true,
@@ -1658,6 +1842,7 @@
   {
     "ticker": "HACK",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Cybersecurity",
     "label": "Cybersecurity Hardware",
     "type": "beta_booster",
     "liquid": true,
@@ -1667,6 +1852,7 @@
   {
     "ticker": "MAGS",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Software",
     "label": "Mega-cap Technology",
     "type": "beta_booster",
     "liquid": true,
@@ -1676,6 +1862,7 @@
   {
     "ticker": "SKYY",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Cloud Computing",
     "label": "Cloud Infrastructure",
     "type": "beta_booster",
     "liquid": true,
@@ -1685,6 +1872,7 @@
   {
     "ticker": "FDN",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "E-Commerce",
     "label": "Internet Large-Cap",
     "type": "pure_sector",
     "liquid": true,
@@ -1694,6 +1882,7 @@
   {
     "ticker": "SMH",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Semiconductors",
     "label": "Semiconductors Mega-Cap",
     "type": "pure_sector",
     "liquid": true,
@@ -1703,6 +1892,7 @@
   {
     "ticker": "SOXX",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Semiconductors",
     "label": "Semiconductors Broad",
     "type": "pure_sector",
     "liquid": true,
@@ -1712,6 +1902,7 @@
   {
     "ticker": "AIQ",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Artificial Intelligence",
     "label": "AI Broad",
     "type": "beta_booster",
     "liquid": false,
@@ -1721,6 +1912,7 @@
   {
     "ticker": "ARKF",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Fintech",
     "label": "Fintech",
     "type": "beta_booster",
     "liquid": false,
@@ -1730,6 +1922,7 @@
   {
     "ticker": "ARKQ",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Industrial Automation",
     "label": "Robotics Active",
     "type": "beta_booster",
     "liquid": false,
@@ -1739,6 +1932,7 @@
   {
     "ticker": "BAI",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Artificial Intelligence",
     "label": "AI Value Chain",
     "type": "beta_booster",
     "liquid": false,
@@ -1748,6 +1942,7 @@
   {
     "ticker": "BLOK",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Crypto & Digital Assets",
     "label": "Blockchain",
     "type": "beta_booster",
     "liquid": false,
@@ -1757,6 +1952,7 @@
   {
     "ticker": "CHAT",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Artificial Intelligence",
     "label": "Generative AI",
     "type": "beta_booster",
     "liquid": false,
@@ -1766,6 +1962,7 @@
   {
     "ticker": "DRAM",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Semiconductors",
     "label": "Memory",
     "type": "beta_booster",
     "liquid": false,
@@ -1775,6 +1972,7 @@
   {
     "ticker": "FOTO",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Semiconductors",
     "label": "Photonics Broad",
     "type": "beta_booster",
     "liquid": false,
@@ -1784,6 +1982,7 @@
   {
     "ticker": "IDGT",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Cloud Computing",
     "label": "Digital Infrastructure",
     "type": "beta_booster",
     "liquid": false,
@@ -1793,6 +1992,7 @@
   {
     "ticker": "IGV",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Software",
     "label": "Software Cap-Weighted",
     "type": "beta_booster",
     "liquid": false,
@@ -1802,6 +2002,7 @@
   {
     "ticker": "LYTE",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Semiconductors",
     "label": "Photonics",
     "type": "beta_booster",
     "liquid": false,
@@ -1811,6 +2012,7 @@
   {
     "ticker": "NCLD",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Cloud Computing",
     "label": "Neocloud",
     "type": "beta_booster",
     "liquid": false,
@@ -1820,6 +2022,7 @@
   {
     "ticker": "QTUM",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Semiconductors",
     "label": "Quantum Computing",
     "type": "beta_booster",
     "liquid": false,
@@ -1829,6 +2032,7 @@
   {
     "ticker": "RACK",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Cloud Computing",
     "label": "Data Centers",
     "type": "beta_booster",
     "liquid": false,
@@ -1838,6 +2042,7 @@
   {
     "ticker": "VCX",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Quantitative Factors & Volatility",
     "label": "Private Tech Venture",
     "type": "beta_booster",
     "liquid": false,
@@ -1847,6 +2052,7 @@
   {
     "ticker": "WCLD",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Cloud Computing",
     "label": "Cloud Growth",
     "type": "beta_booster",
     "liquid": false,
@@ -1856,6 +2062,7 @@
   {
     "ticker": "XSD",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Semiconductors",
     "label": "Semiconductors Equal",
     "type": "beta_booster",
     "liquid": false,
@@ -1865,6 +2072,7 @@
   {
     "ticker": "XSW",
     "category": "Technology & Digital Disruption",
+    "fine_theme": "Software",
     "label": "Software Equal",
     "type": "pure_sector",
     "liquid": false,
@@ -1874,6 +2082,7 @@
   {
     "ticker": "XTL",
     "category": "Telecom & Communication",
+    "fine_theme": "Telecommunications",
     "label": "Telecom Equal",
     "type": "beta_booster",
     "liquid": false,
@@ -1883,6 +2092,7 @@
   {
     "ticker": "IYZ",
     "category": "Telecom & Communication",
+    "fine_theme": "Telecommunications",
     "label": "Telecom Cap-Weighted",
     "type": "pure_sector",
     "liquid": false,

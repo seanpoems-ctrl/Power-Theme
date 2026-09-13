@@ -9241,7 +9241,11 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
   const categories = React.useMemo(() => {
     const byCat = {};
     for (const e of etfs) {
-      const c = e.category || "Other";
+      // fine_theme is the Matrix-aligned industry grouping (29 themes) — falls
+      // back to the coarse 12-bucket category for ETFs with no clean Finviz
+      // industry match (crypto, space, geography, factor/quant strategies) and
+      // for older cached data built before fine_theme existed.
+      const c = e.fine_theme || e.category || "Other";
       (byCat[c] ||= []).push(e);
     }
     const rows = Object.entries(byCat).map(([cat, members]) => {
@@ -9315,7 +9319,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
     <div className="mb-2">
       <div className="flex items-center gap-3 mb-3 flex-wrap">
         <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide">🏆 Category Leaderboard</h3>
-        <span className="text-[11px] text-zinc-500">Theme-category RS rollup · top-down rotation view</span>
+        <span className="text-[11px] text-zinc-500">Fine-grained industry RS rollup · top-down rotation view</span>
         <div className="ml-auto flex items-center gap-1">
           <span className="text-[10px] text-zinc-600 mr-1">rank by</span>
           <SortBtn k="score"   label="Score" />

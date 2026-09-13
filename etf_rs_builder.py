@@ -394,6 +394,7 @@ def build_etf_rs() -> dict:
             "ticker":         tkr,
             "theme":          TICKER_TO_THEME.get(tkr, tkr),
             "category":       meta.get("category"),
+            "fine_theme":     meta.get("fine_theme"),  # Matrix-aligned industry grouping (finer than category)
             "label":          meta.get("label"),
             "etf_type":       meta.get("type"),        # "pure_sector" | "beta_booster"
             "liquid":         meta.get("liquid"),      # True = Liquid Basket, False = Illiquid Vector
