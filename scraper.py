@@ -2680,7 +2680,7 @@ _THEME_ETF_MAP = _load_etf_map() or {
 }
 
 
-def fetch_etf_holdings(etf_ticker: str) -> list:
+def fetch_etf_holdings(etf_ticker: str, _retry: bool = True) -> list:
     """Fetch top holdings for an ETF via yfinance. Returns [] on any failure.
 
     Foreign-listed tickers (non-US exchanges, e.g. 600900.SS, VWS.CO, SUZLON.BO)
@@ -2734,6 +2734,15 @@ def fetch_etf_holdings(etf_ticker: str) -> list:
         )
         return rows
     except Exception as e:
+        if _retry:
+            # Yahoo's per-ticker funds-data endpoint rate-limits hard on rapid
+            # sequential requests (this fn is called ~210x back-to-back) — a
+            # failure is usually a throttle blip, not a real per-ticker error.
+            # One backoff-and-retry recovers most of them.
+            backoff = 3.0 if CI else 1.5
+            logger.warning(f"  ETF holdings failed for {etf_ticker} ({e}) — retrying after {backoff}s")
+            time.sleep(backoff)
+            return fetch_etf_holdings(etf_ticker, _retry=False)
         logger.warning(f"  ETF holdings failed for {etf_ticker}: {e}")
         return []
 
@@ -3011,12 +3020,24 @@ def main():
     unique_etfs = sorted(set(_THEME_ETF_MAP.values()))
     logger.info(f"Fetching ETF holdings for {len(unique_etfs)} ETFs...")
     etf_holdings = {}
+    n_fetched, n_attempted = 0, 0
     for etf in unique_etfs:
         if etf in etf_holdings_override:
             logger.info(f"  {etf}: using manual override ({len(etf_holdings_override[etf])} holdings)")
             etf_holdings[etf] = etf_holdings_override[etf]
         else:
+            n_attempted += 1
             etf_holdings[etf] = fetch_etf_holdings(etf)
+            if etf_holdings[etf]:
+                n_fetched += 1
+            # Polite delay — Yahoo throttles this endpoint hard on unthrottled
+            # sequential CI requests, which silently emptied ~209/210 ETFs' worth
+            # of holdings modals on 2026-09-11 before this was added.
+            _sleep()
+    if n_attempted:
+        (logger.error if n_fetched < n_attempted * 0.5 else logger.info)(
+            f"ETF holdings: {n_fetched}/{n_attempted} fetched successfully (non-override)"
+        )
     etf_holdings = enrich_etf_holdings(etf_holdings)   # add price/perf/RS
     output["etf_holdings"] = etf_holdings
 

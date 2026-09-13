@@ -24,6 +24,7 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: write
+      actions: write   # to dispatch deploy.yml explicitly — see note below
     steps:
       - uses: actions/checkout@v4
 
@@ -105,10 +106,11 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git pull --rebase --autostash
           git add public/focus_list.json
-          # No [skip ci] — this commit SHOULD trigger deploy.yml so the fresh
-          # scan reaches GitHub Pages the same day (focus_list.json is not in
-          # deploy.yml's paths-ignore). It runs once per trading day, so that's
-          # exactly one deploy per day.
+          # No [skip ci] — kept in case something else's push ever touches this
+          # file too. But a push authenticated with this job's own GITHUB_TOKEN
+          # can NEVER trigger deploy.yml's `on: push` (GitHub's documented
+          # anti-recursion rule for the default token), regardless of paths-ignore
+          # or [skip ci] — hence the explicit dispatch step below.
           git diff --staged --quiet || git commit -m "data: focus_list $(date -u +%Y-%m-%dT%H:%M)"
           pushed=false
           for i in 1 2 3 4 5; do
@@ -121,3 +123,9 @@ jobs:
             echo "ERROR: failed to push Focus List data after 5 attempts"
             exit 1
           fi
+
+      - name: Trigger deploy (push above can't cascade — see comment)
+        if: steps.trading_day.outputs.should_run == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy.yml --ref main
