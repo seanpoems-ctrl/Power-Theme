@@ -3128,6 +3128,62 @@ const CHECKLIST_SECTIONS = [
     ],
   },
   {
+    id: "short",
+    label: "Short Routine (Bear Market)",
+    time: "Only when Market Signal = 🔴 Red",
+    color: "rose",
+    steps: [
+      {
+        section: "Step 1 — Confirm Bear Conditions Before Shorting (5 min)",
+        items: [
+          "Only run this routine when Market Pulse signal is 🔴 Red — shorting in a Yellow/Green tape fights the trend",
+          "Breadth tab: %Above SMA50 falling and A/D net negative multiple days running — confirms broad distribution, not one bad day",
+          "Stockbee 5-day ratio < 0.7 = real downside thrust; 0.7–1.0 = choppy, size down further or skip",
+          "VIX ≥ 24 → size shorts down too, not just longs — bear-market rallies squeeze hard and fast",
+        ],
+      },
+      {
+        section: "Step 2 — Find the Weakest Theme (10 min)",
+        items: [
+          "Watchlist → ▼ Short mode → Laggard Themes panel: themes ranked by worst momentum — your short universe, same logic as Long's Leading Themes, inverted",
+          "Watchlist → 📊 ETF RS → Category Leaderboard: sort by Score, then scroll to the BOTTOM rows — there's no ascending sort, the weakest categories are the last rows, not the first",
+          "Category Leaderboard's Anchor column: the sector's own benchmark ETF red on 1M = the whole sector is breaking, not just one weak name inside it",
+          "Thematic Scanner → Industry Matrix: switch metric to 1W then 1M — a theme with MULTIPLE red industry tiles (not just one) is broad-based weakness, the safer short",
+          "RS Flip Scanner: an empty or thin flip list during a Red signal confirms broad risk-off — no theme is genuinely accelerating up right now",
+          "Correlation warning applies here too — don't short 2-3 correlated weak themes as if they were independent bets",
+        ],
+      },
+      {
+        section: "Step 3 — Short Candidate Selection (10 min)",
+        items: [
+          "Open the weakest 1–3 themes from Step 2 in the Thematic Scanner's stock table",
+          "Invert your long filters: below SMA20 AND SMA50, RS 52W < 30, distribution volume (down day, above-average volume)",
+          "Priority: broken pivot low on volume > lower high forming below resistance > still holding a prior support level",
+          "Avoid: stock already down >20% from its recent high without a bounce — the easy short is often already taken",
+          "Shortlist 2–3 names MAX — shorts move faster and are less forgiving than longs, so run fewer positions",
+        ],
+      },
+      {
+        section: "Step 4 — Chart & Plan Short Entries (10 min)",
+        items: [
+          "TradingView: mark breakdown trigger (close below support/pivot low), stop (above most recent swing high, max 7% away), 2R target",
+          "Position Calc tab: the same 0.3% portfolio risk rule applies to shorts — don't size up because 'it feels obvious'",
+          "Confirm your broker actually allows shorting the name (borrow available) before planning the trade",
+          "Set TradingView alerts at the breakdown trigger — same discipline as longs, no staring at charts",
+        ],
+      },
+      {
+        section: "Step 5 — Short-Specific Risk Rules (Non-Negotiable)",
+        items: [
+          "Daily max loss and 0.3% per-trade risk rules apply identically to shorts — no exceptions for 'high conviction'",
+          "Cover immediately if Market Pulse flips back to 🟡/🟢 intraday — that's a trend reversal, not a dip to hold through",
+          "Never short a stock already down >20% off its high without a fresh catalyst — squeeze risk is asymmetric there",
+          "Max 2 open short positions simultaneously, same cap as longs — this is a routine addition, not a second book",
+        ],
+      },
+    ],
+  },
+  {
     id: "during",
     label: "During Market",
     time: "9:30 AM – 4:00 PM ET",
@@ -3269,6 +3325,7 @@ const COLOR_MAP = {
   blue:  { border: "border-blue-500/30",  bg: "bg-blue-500/8",   badge: "bg-blue-500/15 text-blue-400",  dot: "bg-blue-400",  text: "text-blue-400"  },
   green: { border: "border-green-500/30", bg: "bg-green-500/8",  badge: "bg-green-500/15 text-green-400", dot: "bg-green-400", text: "text-green-400" },
   amber: { border: "border-amber-500/30", bg: "bg-amber-500/8",  badge: "bg-amber-500/15 text-amber-400", dot: "bg-amber-400", text: "text-amber-400" },
+  rose:  { border: "border-rose-500/30",  bg: "bg-rose-500/8",   badge: "bg-rose-500/15 text-rose-400",  dot: "bg-rose-400",  text: "text-rose-400"  },
 };
 
 const ChecklistTab = () => {
@@ -3340,7 +3397,7 @@ const ChecklistTab = () => {
               <div className={`text-[13px] font-bold ${active ? cc.text : "text-zinc-300"}`}>{sec.label}</div>
               <div className={`text-[11px] ${active ? cc.text : "text-zinc-500"} opacity-70`}>{sec.time}</div>
               <div className="w-full bg-zinc-700/50 rounded-full h-1 mt-1">
-                <div className={`h-1 rounded-full transition-all ${active ? (sec.color === "blue" ? "bg-blue-400" : sec.color === "green" ? "bg-green-400" : "bg-amber-400") : "bg-zinc-600"}`} style={{ width: `${pct}%` }}/>
+                <div className={`h-1 rounded-full transition-all ${active ? (sec.color === "blue" ? "bg-blue-400" : sec.color === "green" ? "bg-green-400" : sec.color === "rose" ? "bg-rose-400" : "bg-amber-400") : "bg-zinc-600"}`} style={{ width: `${pct}%` }}/>
               </div>
               <div className={`text-[10px] font-mono ${active ? cc.text : "text-zinc-500"}`}>{done}/{total}</div>
             </button>
@@ -3374,7 +3431,7 @@ const ChecklistTab = () => {
                     <label key={ii} className={`flex items-start gap-3 cursor-pointer group rounded-lg px-3 py-2 transition-colors ${done ? "bg-zinc-800/20" : "hover:bg-zinc-800/30"}`}>
                       <div className="mt-0.5 flex-shrink-0">
                         <input type="checkbox" checked={done} onChange={() => toggle(id)} className="sr-only"/>
-                        <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${done ? (section.color === "blue" ? "bg-blue-500 border-blue-500" : section.color === "green" ? "bg-green-500 border-green-500" : "bg-amber-500 border-amber-500") : "border-zinc-600 group-hover:border-zinc-400"}`}>
+                        <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${done ? (section.color === "blue" ? "bg-blue-500 border-blue-500" : section.color === "green" ? "bg-green-500 border-green-500" : section.color === "rose" ? "bg-rose-500 border-rose-500" : "bg-amber-500 border-amber-500") : "border-zinc-600 group-hover:border-zinc-400"}`}>
                           {done && <svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>}
                         </div>
                       </div>
