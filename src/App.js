@@ -3065,14 +3065,15 @@ const CHECKLIST_SECTIONS = [
         ],
       },
       {
-        section: "Step 2 — Theme Leaderboard: RS + ROT (5 min)",
+        section: "Step 2 — Find the Strongest Theme (10 min)",
         items: [
-          "Note the top 5 themes by RS — today's candidates come from these or from ⚡ themes below",
-          "Read the ROT column: ⚡ +N = 1W rank jumped ≥25% ahead of 3M rank on a positive week = early rotation IN",
-          "Click ROT to sort once — any ⚡ theme outside the RS top 5 is tomorrow's leader: drill into it today",
-          "RS leader showing ROT ≤ −15 = already ran, fading short-term → hold existing positions, no NEW entries there",
+          "Watchlist → 📊 ETF RS → Category Leaderboard: sort by Score — the top row is today's #1 theme by RS, ranked against every ETF, not just its own category",
+          "⚡ flip badge on a category = institutional money just accelerated into it vs its sector anchor — outranks a plain high score",
+          "Click the top 2–3 rows to expand their top movers (same panel) — note the Leader ticker, that's your theme's flagship",
+          "RS Flip Scanner below it: any new flip today = tomorrow's rotation candidate, screen it even if its category score is still low",
+          "Thematic Scanner → Industry Matrix: switch metric to 1W then 1M — does the raw % agree with the RS Score leader, or is it a one-day blip? Agreement across both = higher conviction",
+          "Leaderboard tab (Thematic Scanner): confirm the same theme shows up in the stock-level RS top 5 with a positive ROT (rotation rank) — this is your final theme pick",
           "Correlation warning (top-3 >0.80) → treat those themes as ONE position when sizing",
-          "Heatmap glance: your chosen theme red on the day → wait for a green confirmation day",
         ],
       },
       {
@@ -3205,32 +3206,32 @@ const CHECKLIST_SECTIONS = [
         ],
       },
       {
-        section: "Step 3 — Scanner Refresh: Leaderboard RS + ROT (after nightly scrape, ~4:30–5:30 PM ET) (10 min)",
+        section: "Step 3 — Scanner Refresh: Category Leaderboard + Leaderboard RS/ROT (after nightly scrape, ~4:30–5:30 PM ET) (10 min)",
         items: [
           "Reload after the nightly scrape lands — fresh theme rankings, RS scores, and rotation deltas",
-          "Did the RS top 5 change? New theme entering with ⚡ = rotation confirming — build tomorrow's list from it",
-          "Track ⚡ themes day over day: accelerating 2–3 sessions in a row = real rotation; one-day blips fade",
-          "Your open positions' themes: fell out of the top half AND position below SMA20 → write the exit plan now",
-          "Sort by ROT once — note the biggest climbers and biggest faders in Trade Journal notes",
+          "Category Leaderboard: did the #1 row by Score change? New theme entering with a ⚡ flip = rotation confirming — build tomorrow's list from it",
+          "Track ⚡ flips day over day: accelerating 2–3 sessions in a row = real rotation; one-day blips fade",
+          "Leaderboard tab: did the RS top 5 change, and does ROT agree with the Category Leaderboard move?",
+          "Your open positions' themes: fell out of the top half of BOTH leaderboards AND position below SMA20 → write the exit plan now",
         ],
       },
       {
-        section: "Step 4 — Watchlist Maintenance: ▲ Long + ETF RS (10 min)",
+        section: "Step 4 — Watchlist Maintenance: ▲ Long (10 min)",
         items: [
           "▲ Long mode: re-sort by RS 52W — add new RS ≥ 85, grade A/A+ names from today's leading themes",
           "Remove stocks that closed below SMA20 on above-average volume (distribution)",
           "Update each candidate's entry trigger and stop based on today's close",
           "VCP Tightening flag on any stock → top of tomorrow's focus list",
-          "📊 ETF RS mode: sector jumped into top 3 → cross-check Thematic Scanner for its strongest stocks",
+          "Category Leaderboard: theme jumped into the top 5 by Score → cross-check Leaderboard tab (Thematic Scanner) for its strongest stocks",
         ],
       },
       {
-        section: "Step 5 — Universe Mode: Find Hidden Leaders (5 min)",
+        section: "Step 5 — RS Flip Scanner: Catch Institutional Rotation (5 min)",
         items: [
-          "Scan 🌐 Universe for RS ≥ 90 stocks that moved up in rank today",
-          "RS is ranked vs S&P 1500 + all scanned movers — a 90+ print is real outperformance, not grade inflation",
-          "New RS 90+ entry in a leading or ⚡ theme → high-priority candidate, always worth charting",
-          "Add to TradingView and set a price alert at the next pivot / breakout level",
+          "Watchlist → 📊 ETF RS → RS Flip Scanner: any basket flipping RS vs its sector anchor is where money just started rotating in",
+          "Weekly Scanning Checklist (same panel): work down the ▶ SCREEN NOW rows first — those are today's live flips, not yesterday's",
+          "A flip inside a theme already in your Category Leaderboard top 5 = highest-conviction setup of the day",
+          "Add the flip's leader ticker to TradingView and set a price alert at the next pivot / breakout level",
         ],
       },
       {
@@ -3259,7 +3260,7 @@ const CHECKLIST_SECTIONS = [
 
 const CORE_RULES = [
   { rule: "Never fight the Market Signal", detail: "Red means stop — no new entries, no exceptions. Close swings, protect capital." },
-  { rule: "Trade themes, not individual hunches", detail: "Money flows theme-first. Confirm with Leaderboard RS + ROT before every entry — rising theme, rising stock." },
+  { rule: "Trade themes, not individual hunches", detail: "Money flows theme-first. Confirm with Category Leaderboard Score + Leaderboard RS/ROT before every entry — rising theme, rising stock." },
   { rule: "Only trade your wired-in universe", detail: "ADR ≥5%, $Vol ≥$300M, RS ≥85 are baked into the scanner and the default filters. If a trade needs the filters loosened, it is not your trade." },
   { rule: "Every trade gets logged", detail: "No log = no review = no improvement. Journal is mandatory, not optional." },
 ];
