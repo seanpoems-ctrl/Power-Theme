@@ -9275,9 +9275,17 @@ const EtfCandidatesPanel = () => {
 };
 
 const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
-  const [sortKey, setSortKey] = useState("score");      // "score" | "perf_1w" | "perf_1m"
+  const [sortCol, setSortCol] = useState("score");      // any column key below
+  const [sortDir, setSortDir] = useState("desc");
   const [holdingsModal, setHoldingsModal] = useState(null);
   const [expandedCat, setExpandedCat] = useState(null);  // category name whose top movers are shown
+  const [moverSortCol, setMoverSortCol] = useState("perf_1w"); // sort within the expanded top-movers table
+  const [moverSortDir, setMoverSortDir] = useState("desc");
+
+  const handleMoverSort = col => {
+    if (moverSortCol === col) setMoverSortDir(d => d === "asc" ? "desc" : "asc");
+    else { setMoverSortCol(col); setMoverSortDir(col === "ticker" ? "asc" : "desc"); }
+  };
 
   // Exclude Index/Segment/EW Sector/SPDR Sector — broad-market benchmarks, not
   // thematic categories, so they'd be apples-to-oranges in a rotation leaderboard.
@@ -9322,13 +9330,26 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
       return {
         cat, members, score, perf_1w, perf_1m, perf_3m, leader,
         anchorTicker, anchorPerf1m: anchorRow?.perf_1m ?? null,
+        leaderScore: leader?.score ?? null,
         flips: flips.length,
         count: members.length,
       };
     });
-    rows.sort((a, b) => (b[sortKey] ?? -Infinity) - (a[sortKey] ?? -Infinity));
+    rows.sort((a, b) => {
+      let av = a[sortCol], bv = b[sortCol];
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+      return sortDir === "asc" ? av - bv : bv - av;
+    });
     return rows;
-  }, [etfs, etfRsMap, sortKey]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [etfs, etfRsMap, sortCol, sortDir]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleSort = col => {
+    if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
+    else { setSortCol(col); setSortDir(col === "cat" || col === "anchorTicker" ? "asc" : "desc"); }
+  };
 
   if (!etfRsData) return null;
 
@@ -9366,24 +9387,22 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
     );
   };
 
-  const SortBtn = ({ k, label }) => (
-    <button onClick={() => setSortKey(k)}
-      className={`px-2 py-0.5 rounded text-[10px] font-semibold transition-colors ${sortKey === k ? "bg-blue-500/30 text-blue-200 border border-blue-500/40" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
+  const CatTh = ({ col, label, align = "right", className = "" }) => (
+    <th onClick={() => handleSort(col)}
+        className={`px-2 py-1.5 font-medium cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap
+          ${align === "left" ? "text-left" : "text-right"} ${sortCol === col ? "text-zinc-200" : ""} ${className}`}>
       {label}
-    </button>
+      {sortCol === col
+        ? <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>
+        : <span className="ml-0.5 text-zinc-700">⇅</span>}
+    </th>
   );
 
   return (
     <div className="mb-2">
       <div className="flex items-center gap-3 mb-3 flex-wrap">
         <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide">🏆 Category Leaderboard</h3>
-        <span className="text-[11px] text-zinc-500">Fine-grained industry RS rollup · top-down rotation view</span>
-        <div className="ml-auto flex items-center gap-1">
-          <span className="text-[10px] text-zinc-600 mr-1">rank by</span>
-          <SortBtn k="score"   label="Score" />
-          <SortBtn k="perf_1w" label="1W" />
-          <SortBtn k="perf_1m" label="1M" />
-        </div>
+        <span className="text-[11px] text-zinc-500">Fine-grained industry RS rollup · top-down rotation view · click any column to sort</span>
       </div>
 
       <div className="overflow-x-auto rounded-lg border border-zinc-800">
@@ -9391,14 +9410,14 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
           <thead>
             <tr className="bg-zinc-900/80 border-b border-zinc-700 text-zinc-500 text-[10px] uppercase tracking-wide">
               <th className="px-2 py-1.5 text-left w-7">#</th>
-              <th className="px-2 py-1.5 text-left">Category</th>
-              <th className="px-2 py-1.5 text-left w-[28%]">Category Score (median)</th>
-              <th className="px-2 py-1.5 text-right">1W</th>
-              <th className="px-2 py-1.5 text-right">1M</th>
-              <th className="px-2 py-1.5 text-right">3M</th>
-              <th className="px-2 py-1.5 text-left">Leader</th>
-              <th className="px-2 py-1.5 text-left">Anchor</th>
-              <th className="px-2 py-1.5 text-center">Flips</th>
+              <CatTh col="cat" label="Category" align="left" />
+              <CatTh col="score" label="Category Score (median)" align="left" className="w-[28%]" />
+              <CatTh col="perf_1w" label="1W" />
+              <CatTh col="perf_1m" label="1M" />
+              <CatTh col="perf_3m" label="3M" />
+              <CatTh col="leaderScore" label="Leader" align="left" />
+              <CatTh col="anchorTicker" label="Anchor" align="left" />
+              <CatTh col="flips" label="Flips" className="text-center" />
             </tr>
           </thead>
           <tbody>
@@ -9406,7 +9425,14 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
               const isExpanded = expandedCat === c.cat;
               const movers = [...c.members]
                 .filter(m => m.perf_1w != null)
-                .sort((a, b) => b.perf_1w - a.perf_1w);
+                .sort((a, b) => {
+                  let av = a[moverSortCol], bv = b[moverSortCol];
+                  if (av == null && bv == null) return 0;
+                  if (av == null) return 1;
+                  if (bv == null) return -1;
+                  if (typeof av === "string") return moverSortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+                  return moverSortDir === "asc" ? av - bv : bv - av;
+                });
               const shown = movers.slice(0, 10);
               const maxAbs = key => Math.max(1, ...shown.map(m => Math.abs(m[key] ?? 0)));
               const maxDay = maxAbs("perf_1d"), max5d = maxAbs("perf_1w"),
@@ -9468,7 +9494,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
                   <td colSpan={9} className="px-4 py-2.5">
                     <div className="flex items-center justify-between mb-1.5">
                       <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wide">
-                        Top movers in {c.cat} · ranked by % P5D change
+                        Top movers in {c.cat} · click any column to sort
                       </span>
                       {movers.length > shown.length && (
                         <span className="text-[10px] text-zinc-600">showing 10 of {movers.length}</span>
@@ -9477,11 +9503,21 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {} 
                     <table className="w-full text-xs border-collapse">
                       <thead>
                         <tr className="text-zinc-600 text-[9px] uppercase tracking-wide">
-                          <th className="px-2 py-1 text-left font-medium">Ticker</th>
-                          <th className="px-2 py-1 text-left font-medium">% Daily</th>
-                          <th className="px-2 py-1 text-left font-medium">% P5D</th>
-                          <th className="px-2 py-1 text-left font-medium">% Off 52W High</th>
-                          <th className="px-2 py-1 text-left font-medium">% YTD</th>
+                          {[
+                            { col: "ticker",        label: "Ticker" },
+                            { col: "perf_1d",       label: "% Daily" },
+                            { col: "perf_1w",       label: "% P5D" },
+                            { col: "pct_off_52wh",  label: "% Off 52W High" },
+                            { col: "perf_ytd",      label: "% YTD" },
+                          ].map(({ col, label }) => (
+                            <th key={col} onClick={(e) => { e.stopPropagation(); handleMoverSort(col); }}
+                                className={`px-2 py-1 text-left font-medium cursor-pointer select-none hover:text-zinc-300 ${moverSortCol === col ? "text-zinc-300" : ""}`}>
+                              {label}
+                              {moverSortCol === col
+                                ? <span className="ml-0.5 text-blue-400">{moverSortDir === "asc" ? "↑" : "↓"}</span>
+                                : <span className="ml-0.5 text-zinc-700">⇅</span>}
+                            </th>
+                          ))}
                         </tr>
                       </thead>
                       <tbody>
@@ -9536,6 +9572,13 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
   // about thematic beta boosters flipping vs their sector anchor.
   const etfs = (etfRsData?.etfs ?? []).filter(e => !e.benchmark);
   const [holdingsModal, setHoldingsModal] = useState(null); // { ticker, theme, holdings }
+  const [flipSortCol, setFlipSortCol] = useState("rs_flip_strength");
+  const [flipSortDir, setFlipSortDir] = useState("desc");
+
+  const handleFlipSort = col => {
+    if (flipSortCol === col) setFlipSortDir(d => d === "asc" ? "desc" : "asc");
+    else { setFlipSortCol(col); setFlipSortDir(col === "ticker" || col === "category" || col === "anchor_ticker" ? "asc" : "desc"); }
+  };
 
   const etfRsMap = React.useMemo(() => {
     const m = {};
@@ -9546,10 +9589,17 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
   // All beta boosters with anchor data
   const boosters = etfs.filter(e => e.etf_type === "beta_booster" && e.anchor_ticker && e.rs_vs_anchor_1m != null);
 
-  // Active flip signals sorted by strength
+  // Active flip signals, user-sortable (defaults to strength, same as before)
   const flips = boosters
     .filter(e => e.rs_flip_signal)
-    .sort((a, b) => (b.rs_flip_strength || 0) - (a.rs_flip_strength || 0));
+    .sort((a, b) => {
+      let av = a[flipSortCol], bv = b[flipSortCol];
+      if (av == null && bv == null) return 0;
+      if (av == null) return 1;
+      if (bv == null) return -1;
+      if (typeof av === "string") return flipSortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+      return flipSortDir === "asc" ? av - bv : bv - av;
+    });
 
   // Top 3 momentum: highest 1W excess return among all beta boosters
   const top3 = [...boosters]
@@ -9595,12 +9645,23 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
               <table className="w-full text-[11px] border-collapse">
                 <thead>
                   <tr className="bg-zinc-900/80 border-b border-zinc-700 text-zinc-500 text-[10px] uppercase tracking-wide">
-                    <th className="px-2 py-1.5 text-left">Beta Booster</th>
-                    <th className="px-2 py-1.5 text-left">Category</th>
-                    <th className="px-2 py-1.5 text-left">Anchor</th>
-                    <th className="px-2 py-1.5 text-right">1M Excess</th>
-                    <th className="px-2 py-1.5 text-right">1W Excess</th>
-                    <th className="px-2 py-1.5 text-right">Strength</th>
+                    {[
+                      { col: "ticker",           label: "Beta Booster", align: "left" },
+                      { col: "category",         label: "Category",     align: "left" },
+                      { col: "anchor_ticker",    label: "Anchor",       align: "left" },
+                      { col: "rs_vs_anchor_1m",  label: "1M Excess" },
+                      { col: "rs_vs_anchor_1w",  label: "1W Excess" },
+                      { col: "rs_flip_strength", label: "Strength" },
+                    ].map(({ col, label, align }) => (
+                      <th key={col} onClick={() => handleFlipSort(col)}
+                          className={`px-2 py-1.5 font-medium cursor-pointer select-none hover:text-zinc-300 whitespace-nowrap
+                            ${align === "left" ? "text-left" : "text-right"} ${flipSortCol === col ? "text-zinc-300" : ""}`}>
+                        {label}
+                        {flipSortCol === col
+                          ? <span className="ml-0.5 text-blue-400">{flipSortDir === "asc" ? "↑" : "↓"}</span>
+                          : <span className="ml-0.5 text-zinc-700">⇅</span>}
+                      </th>
+                    ))}
                     <th className="px-2 py-1.5 text-left">Signal</th>
                   </tr>
                 </thead>
@@ -9756,9 +9817,22 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
     return rng === 0 ? 50 : Math.round(((last - mn) / rng) * 100);
   };
 
-  // No RS-based sorting anywhere in this table — every section uses a fixed
-  // ticker arrangement (same principle as Segment's small→large, value→core→
-  // growth progression) so the eye tracks the same position group to group.
+  // Default order is fixed per section (same principle as Segment's small→large,
+  // value→core→growth progression) so the eye tracks the same position group to
+  // group — but every column is still sortable on demand; sortCol=null restores
+  // this curated order. Sorting is scoped within each section independently.
+  const [sortCol, setSortCol] = useState(null);
+  const [sortDir, setSortDir] = useState("desc");
+  const handleSort = col => {
+    if (sortCol === col) setSortDir(d => d === "asc" ? "desc" : "asc");
+    else { setSortCol(col); setSortDir(col === "ticker" || col === "name" ? "asc" : "desc"); }
+  };
+  const sortVal = (e, col) => {
+    if (col === "name") return e.label ?? e.theme ?? "";
+    if (col === "rs_1m_pct") return getRsPct(e.rs_histogram);
+    return e[col];
+  };
+
   const INDEX_ORDER  = ["RSP", "SPY", "QQQ", "QQQE", "IWM", "DIA", "SPMO", "TLT"];
   const SEGMENT_ORDER = ["IJS", "IJR", "IJT", "IJJ", "IJH", "IJK", "IVE", "IVV", "IVW"];
   const EW_SECTOR_ORDER = ["RSPH", "RSPG", "RSPS", "RSPC", "SPY", "RSPM", "RSPF", "RSPT", "RSPR", "RSPU", "RSPD", "RSPN"];
@@ -9768,7 +9842,18 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
     const build = (cat, order) => {
       const byTicker = Object.fromEntries(etfs.filter(e => e.category === cat).map(e => [e.ticker, e]));
       if (spy) byTicker.SPY = spy; // SPY reference row isn't its own category member
-      return order.map(t => byTicker[t]).filter(Boolean);
+      let rows = order.map(t => byTicker[t]).filter(Boolean);
+      if (sortCol) {
+        rows = [...rows].sort((a, b) => {
+          let av = sortVal(a, sortCol), bv = sortVal(b, sortCol);
+          if (av == null && bv == null) return 0;
+          if (av == null) return 1;
+          if (bv == null) return -1;
+          if (typeof av === "string") return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+          return sortDir === "asc" ? av - bv : bv - av;
+        });
+      }
+      return rows;
     };
     return [
       { name: "Index",       rows: build("Index", INDEX_ORDER) },
@@ -9776,7 +9861,7 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
       { name: "EW Sector",   rows: build("EW Sector", EW_SECTOR_ORDER) },
       { name: "SPDR Sector", rows: build("SPDR Sector", SPDR_SECTOR_ORDER) },
     ].filter(s => s.rows.length > 0);
-  }, [etfs, spy]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [etfs, spy, sortCol, sortDir]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!etfRsData || sections.length === 0) return null;
 
@@ -9802,16 +9887,36 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
           <table className="w-full text-xs border-collapse">
             <thead>
               <tr className="bg-zinc-900/80 border-b border-zinc-700 text-zinc-400 text-[11px] whitespace-nowrap">
-                <th className="px-2 py-2 text-left font-semibold border-r border-zinc-800">{name}</th>
-                <th className="px-2 py-2 text-left font-semibold border-r border-zinc-800">{name}</th>
-                <th className="px-2 py-2 text-right font-semibold border-r border-zinc-800" title="1-week recency-weighted RS line vs its own 1-month baseline">RS Thrust Rate %</th>
-                <th className="px-2 py-2 text-right font-semibold border-r border-zinc-800">1-Mth RS %</th>
+                {[
+                  { col: "ticker",         label: name,                align: "left", border: true },
+                  { col: "name",           label: name,                align: "left", border: true },
+                  { col: "rs_thrust_1w",   label: "RS Thrust Rate %",  align: "right", border: true, title: "1-week recency-weighted RS line vs its own 1-month baseline" },
+                  { col: "rs_1m_pct",      label: "1-Mth RS %",        align: "right", border: true },
+                ].map(({ col, label, align, border, title }) => (
+                  <th key={col} onClick={() => handleSort(col)} title={title}
+                      className={`px-2 py-2 font-semibold cursor-pointer select-none hover:text-zinc-200 ${align === "left" ? "text-left" : "text-right"} ${border ? "border-r border-zinc-800" : ""} ${sortCol === col ? "text-zinc-100" : ""}`}>
+                    {label}
+                    {sortCol === col
+                      ? <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>
+                      : <span className="ml-0.5 text-zinc-700">⇅</span>}
+                  </th>
+                ))}
                 <th className="px-2 py-2 text-left font-semibold border-r border-zinc-800">1-Mth Chart</th>
                 <th className="px-2 py-2 text-left font-semibold border-r border-zinc-800">1-Mth RS</th>
-                <th className="px-2 py-2 text-right font-semibold border-r border-zinc-800">% Intraday</th>
-                <th className="px-2 py-2 text-right font-semibold border-r border-zinc-800">% 1D</th>
-                <th className="px-2 py-2 text-right font-semibold border-r border-zinc-800">% 1-Mth</th>
-                <th className="px-2 py-2 text-right font-semibold">% Off 52W H</th>
+                {[
+                  { col: "perf_intraday", label: "% Intraday" },
+                  { col: "perf_1d",       label: "% 1D" },
+                  { col: "perf_1m",       label: "% 1-Mth" },
+                  { col: "pct_off_52wh",  label: "% Off 52W H", last: true },
+                ].map(({ col, label, last }) => (
+                  <th key={col} onClick={() => handleSort(col)}
+                      className={`px-2 py-2 text-right font-semibold cursor-pointer select-none hover:text-zinc-200 ${last ? "" : "border-r border-zinc-800"} ${sortCol === col ? "text-zinc-100" : ""}`}>
+                    {label}
+                    {sortCol === col
+                      ? <span className="ml-0.5 text-blue-400">{sortDir === "asc" ? "↑" : "↓"}</span>
+                      : <span className="ml-0.5 text-zinc-700">⇅</span>}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
