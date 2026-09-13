@@ -9274,7 +9274,7 @@ const EtfCandidatesPanel = () => {
   );
 };
 
-const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onJumpToTheme = null }) => {
+const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onJumpToThemeLong = null, onJumpToThemeShort = null }) => {
   const [sortCol, setSortCol] = useState("score");      // any column key below
   const [sortDir, setSortDir] = useState("desc");
   const [holdingsModal, setHoldingsModal] = useState(null);
@@ -9448,12 +9448,20 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
                     {c.cat}
                   </span>
                   <span className="text-zinc-600 ml-1.5 text-[10px] font-mono">{c.count}</span>
-                  {onJumpToTheme && (
+                  {onJumpToThemeLong && (
                     <button
-                      onClick={(e) => { e.stopPropagation(); onJumpToTheme(c.cat); }}
+                      onClick={(e) => { e.stopPropagation(); onJumpToThemeLong(c.cat); }}
                       title={`Jump to ${c.cat} stocks in Long mode`}
-                      className="ml-1.5 text-[9px] font-semibold px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-500 hover:bg-blue-500/20 hover:text-blue-300 border border-zinc-700/60 hover:border-blue-500/30 transition-colors">
-                      → Stocks
+                      className="ml-1.5 text-[9px] font-semibold px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-500 hover:bg-emerald-500/20 hover:text-emerald-300 border border-zinc-700/60 hover:border-emerald-500/30 transition-colors">
+                      → Longs
+                    </button>
+                  )}
+                  {onJumpToThemeShort && (
+                    <button
+                      onClick={(e) => { e.stopPropagation(); onJumpToThemeShort(c.cat); }}
+                      title={`Jump to ${c.cat} stocks in Short mode`}
+                      className="ml-1 text-[9px] font-semibold px-1.5 py-0.5 rounded bg-zinc-800 text-zinc-500 hover:bg-rose-500/20 hover:text-rose-300 border border-zinc-700/60 hover:border-rose-500/30 transition-colors">
+                      → Shorts
                     </button>
                   )}
                 </td>
@@ -10357,7 +10365,8 @@ const DailyWatchlistTab = ({ data }) => {
   const [focusListData, setFocusListData] = React.useState(null);
   const [mode, setMode]               = React.useState("long");   // "long" | "short" | "etf"
   const [themeFilter, setThemeFilter] = React.useState(null);      // set by clicking a Category Leaderboard row
-  const jumpToTheme = (theme) => { setThemeFilter(theme); setMode("long"); };
+  const jumpToThemeLong  = (theme) => { setThemeFilter(theme); setMode("long"); };
+  const jumpToThemeShort = (theme) => { setThemeFilter(theme); setMode("short"); };
   const [perfMode, setPerfMode]       = React.useState("1m");      // "1d" | "1m" | "3m"
   const [leaderPerfMode, setLeaderPerfMode] = React.useState("perf_1m");
   const [selectedThemeModal, setSelectedThemeModal] = React.useState(null); // { name, stocks }
@@ -10576,7 +10585,7 @@ const DailyWatchlistTab = ({ data }) => {
   }, [leadersAll, themeFilter]);
 
   // ── Market Laggards ── mirror of leaders for the Short tab: RS≤50, weakest first
-  const laggards = React.useMemo(() => {
+  const laggardsAll = React.useMemo(() => {
     const source = screenerStocks.length > 0 ? screenerStocks : allStocks;
     return source
       .filter(s =>
@@ -10590,9 +10599,16 @@ const DailyWatchlistTab = ({ data }) => {
         mkt_cap_b: s.market_cap_b ?? s.mkt_cap_b,
         theme: tickerThemeMap[s.ticker] ?? s.theme ?? s.industry ?? "—",
       }))
-      .sort((a, b) => (a.rs_52w ?? 99) - (b.rs_52w ?? 99))
-      .slice(0, 15);
+      .sort((a, b) => (a.rs_52w ?? 99) - (b.rs_52w ?? 99));
   }, [screenerStocks, allStocks, tickerThemeMap]);
+
+  // Same themeFilter drives both Long and Short — only one mode is visible at a
+  // time, so sharing the filter state is safe and keeps "jump to theme" symmetric.
+  const laggards = React.useMemo(() => {
+    if (!themeFilter) return laggardsAll.slice(0, 15);
+    const needle = themeFilter.toLowerCase();
+    return laggardsAll.filter(s => (s.theme || "").toLowerCase() === needle);
+  }, [laggardsAll, themeFilter]);
 
   // ── Top Themes ── prefer the rich hierarchical data.themes; fall back to the
   // lighter theme_rankings when that array is empty (scraper sometimes ships
@@ -10944,7 +10960,7 @@ const DailyWatchlistTab = ({ data }) => {
       {mode === "etf" && (
         <div className="space-y-6">
           <EtfRotationBrief etfRsData={etfRsData} />
-          <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} onJumpToTheme={jumpToTheme} />
+          <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} onJumpToThemeLong={jumpToThemeLong} onJumpToThemeShort={jumpToThemeShort} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <IndexSectorBenchmarkTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfCandidatesPanel />
@@ -11063,11 +11079,17 @@ const DailyWatchlistTab = ({ data }) => {
 
             {/* Market Laggards cards */}
             <div className="lg:col-span-2">
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-baseline gap-2">
+              <div className="flex items-center justify-between mb-3 flex-wrap gap-2">
+                <div className="flex items-baseline gap-2 flex-wrap">
                   <h3 className="text-sm font-semibold text-zinc-100">Market Laggards</h3>
                   <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{laggards.length}</span>
                   <span className="text-xs text-zinc-600">RS≤50 · Mkt Cap≥$10B · $Vol≥$100M · weakest first</span>
+                  {themeFilter && (
+                    <button onClick={() => setThemeFilter(null)}
+                      className="flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-300 border border-rose-500/30 hover:bg-rose-500/25 transition-colors">
+                      Filtered: {themeFilter} <X size={11}/>
+                    </button>
+                  )}
                 </div>
                 <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 shrink-0">
                   {[{k:"perf_1d",l:"1D"},{k:"perf_1w",l:"1W"},{k:"perf_1m",l:"1M"},{k:"perf_3m",l:"3M"}].map(o => (
@@ -11080,7 +11102,11 @@ const DailyWatchlistTab = ({ data }) => {
               </div>
               <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2">
                 {laggards.length === 0 ? (
-                  <p className="text-sm text-zinc-600 italic col-span-full py-2">No large-cap laggards (RS≤50, $10B+) right now.</p>
+                  <p className="text-sm text-zinc-600 italic col-span-full py-2">
+                    {themeFilter
+                      ? `No qualifying Market Laggards (RS≤50 · $10B+ cap · $100M+ vol) tagged to "${themeFilter}" right now. This can happen when ${themeFilter} wasn't in today's scanned themes.`
+                      : "No large-cap laggards (RS≤50, $10B+) right now."}
+                  </p>
                 ) : laggards.map(s => {
                   const perfVal = s[leaderPerfMode] ?? null;
                   const perfLabel = {perf_1d:"1D",perf_1w:"1W",perf_1m:"1M",perf_3m:"3M"}[leaderPerfMode];
