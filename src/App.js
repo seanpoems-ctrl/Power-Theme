@@ -661,10 +661,21 @@ const HeroZone = ({ data, themesCount, tickersCount, etfTrendlineData }) => {
   );
 };
 
-const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt, etfHoldings = {}, openTheme = null, onThemeOpened = null, stockFilter = null }) => {
+const MATRIX_METRICS = [
+  { key: 'perf_1d',  label: '1D',  thresholds: [3, 1.5, 0.5] },
+  { key: 'perf_1w',  label: '1W',  thresholds: [5, 2.5, 1] },
+  { key: 'perf_1m',  label: '1M',  thresholds: [10, 5, 2] },
+  { key: 'perf_3m',  label: '3M',  thresholds: [20, 10, 4] },
+  { key: 'perf_6m',  label: '6M',  thresholds: [30, 15, 6] },
+  { key: 'perf_ytd', label: 'YTD', thresholds: [40, 20, 8] },
+  { key: 'perf_1y',  label: '1Y',  thresholds: [50, 25, 10] },
+];
+
+const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRankings = [], generatedAt, etfHoldings = {}, openTheme = null, onThemeOpened = null, stockFilter = null }) => {
   const lang = useLang();
   const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks, inTop5, fromEtf }
   const [tblSort, setTblSort] = useState({ col: null, dir: 'desc' });
+  const [matrixMetric, setMatrixMetric] = useState('perf_1d');
 
   // Reset sort whenever a new theme is opened
   React.useEffect(() => { setTblSort({ col: null, dir: 'desc' }); }, [selectedTheme?.name]);
@@ -751,6 +762,42 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
     return { bg: 'bg-red-500/60', text: 'text-red-100' };
   };
 
+  const activeMetric = MATRIX_METRICS.find(m => m.key === matrixMetric) || MATRIX_METRICS[0];
+
+  const getMatrixColor = (v) => {
+    if (v == null) return { bg: 'bg-zinc-800/60', text: 'text-zinc-500' };
+    const [hi, mid, lo] = activeMetric.thresholds;
+    if (v >= hi)  return { bg: 'bg-emerald-500/60', text: 'text-emerald-100' };
+    if (v >= mid) return { bg: 'bg-emerald-500/40', text: 'text-emerald-200' };
+    if (v >= lo)  return { bg: 'bg-emerald-500/25', text: 'text-emerald-300' };
+    if (v >= 0)   return { bg: 'bg-zinc-700/60', text: 'text-zinc-100' };
+    if (v >= -lo) return { bg: 'bg-zinc-700/60', text: 'text-zinc-100' };
+    if (v >= -mid) return { bg: 'bg-red-500/25', text: 'text-red-300' };
+    if (v >= -hi) return { bg: 'bg-red-500/40', text: 'text-red-200' };
+    return { bg: 'bg-red-500/60', text: 'text-red-100' };
+  };
+
+  // Rows = industries grouped by parent theme (Finviz "Matrix" layout: a grid of
+  // color tiles, not the circle-packing "Clusters" mode). Grouping + within-group
+  // order both follow the currently selected metric so the strongest theme/industry
+  // rises to the top whenever the metric changes.
+  const groupedIndustries = useMemo(() => {
+    const groups = new Map();
+    for (const ind of industryRankings || []) {
+      const key = ind.parent_theme || 'Other';
+      if (!groups.has(key)) groups.set(key, []);
+      groups.get(key).push(ind);
+    }
+    const arr = [...groups.entries()].map(([theme, inds]) => {
+      const vals = inds.map(i => i[matrixMetric]).filter(v => v != null);
+      const avg = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
+      const sorted = [...inds].sort((a, b) => (b[matrixMetric] ?? -999) - (a[matrixMetric] ?? -999));
+      return { theme, avg, industries: sorted };
+    });
+    arr.sort((a, b) => (b.avg ?? -999) - (a.avg ?? -999));
+    return arr;
+  }, [industryRankings, matrixMetric]);
+
   const handleCardClick = (itemName) => {
     const allSources = [...(themes || []), ...(heatmapThemes || [])];
     const norm = allSources.find(t => t.name?.toLowerCase() === itemName.toLowerCase());
@@ -769,37 +816,87 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, generatedAt,
     setSelectedTheme({ name: itemName, stocks: sorted, inTop5: true, fromEtf: null });
   };
 
-  if (!topBottom.length) return null;
+  const hasMatrix = groupedIndustries.length > 0;
+  if (!hasMatrix && !topBottom.length) return null;
 
   return (
     <>
       <div className="mb-3 bg-zinc-900/40 border border-zinc-800/50 rounded-xl p-3">
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
           <div className="text-[11px] font-bold text-zinc-500 uppercase tracking-[0.18em]">
-            Theme Heatmap — 1D RS Performance
+            {hasMatrix ? 'Industry Matrix' : 'Theme Heatmap — 1D RS Performance'}
           </div>
           <div className="flex items-center gap-2">
+            {hasMatrix && (
+              <div className="flex items-center gap-0.5 bg-zinc-800/60 rounded-lg p-0.5">
+                {MATRIX_METRICS.map(m => (
+                  <button
+                    key={m.key}
+                    onClick={() => setMatrixMetric(m.key)}
+                    className={`text-[10px] font-mono font-semibold px-2 py-1 rounded-md transition-colors
+                      ${matrixMetric === m.key ? 'bg-zinc-600 text-zinc-100' : 'text-zinc-500 hover:text-zinc-300'}`}
+                  >
+                    {m.label}
+                  </button>
+                ))}
+              </div>
+            )}
             <UpdatedAt ts={generatedAt}/>
-            {hasEnough && <div className="text-[11px] text-zinc-600 uppercase tracking-wider">Top 5 · Bottom 5</div>}
+            {!hasMatrix && hasEnough && <div className="text-[11px] text-zinc-600 uppercase tracking-wider">Top 5 · Bottom 5</div>}
           </div>
         </div>
-        <div className="grid gap-1" style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}>
-          {topBottom.map((item, idx) => {
-            const { bg, text } = getColor(item.perf_1d);
-            return (
-              <div
-                key={`${item.name}-${idx}`}
-                className={`rounded-lg p-2 ${bg} text-center cursor-pointer hover:ring-1 hover:ring-white/20 transition-all`}
-                onClick={() => handleCardClick(item.name)}
-              >
-                <div className={`text-[11px] font-semibold leading-tight truncate ${text}`}>{item.name}</div>
-                <div className={`text-[12px] font-bold font-mono mt-0.5 ${text}`}>
-                  {item.perf_1d != null ? `${item.perf_1d >= 0 ? '+' : ''}${item.perf_1d.toFixed(1)}%` : '—'}
+
+        {hasMatrix ? (
+          <div className="space-y-2">
+            {groupedIndustries.map(({ theme, avg, industries }) => (
+              <div key={theme}>
+                <div className="flex items-center gap-1.5 mb-1 px-0.5">
+                  <span className="text-[10px] font-semibold text-zinc-400 uppercase tracking-wide truncate">{theme}</span>
+                  <span className={`text-[10px] font-mono ${avg == null ? 'text-zinc-700' : avg >= 0 ? 'text-emerald-500' : 'text-red-500'}`}>
+                    {avg != null ? `${avg >= 0 ? '+' : ''}${avg.toFixed(1)}%` : '—'}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {industries.map(ind => {
+                    const v = ind[matrixMetric];
+                    const { bg, text } = getMatrixColor(v);
+                    return (
+                      <div
+                        key={ind.name}
+                        title={ind.name}
+                        onClick={() => handleCardClick(ind.name)}
+                        className={`rounded-md px-2 py-1.5 min-w-[92px] ${bg} cursor-pointer hover:ring-1 hover:ring-white/20 transition-all`}
+                      >
+                        <div className={`text-[10px] font-medium leading-tight truncate ${text}`}>{ind.name}</div>
+                        <div className={`text-[11px] font-bold font-mono mt-0.5 ${text}`}>
+                          {v != null ? `${v >= 0 ? '+' : ''}${v.toFixed(1)}%` : '—'}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
-            );
-          })}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="grid gap-1" style={{ gridTemplateColumns: 'repeat(5, 1fr)' }}>
+            {topBottom.map((item, idx) => {
+              const { bg, text } = getColor(item.perf_1d);
+              return (
+                <div
+                  key={`${item.name}-${idx}`}
+                  className={`rounded-lg p-2 ${bg} text-center cursor-pointer hover:ring-1 hover:ring-white/20 transition-all`}
+                  onClick={() => handleCardClick(item.name)}
+                >
+                  <div className={`text-[11px] font-semibold leading-tight truncate ${text}`}>{item.name}</div>
+                  <div className={`text-[12px] font-bold font-mono mt-0.5 ${text}`}>
+                    {item.perf_1d != null ? `${item.perf_1d >= 0 ? '+' : ''}${item.perf_1d.toFixed(1)}%` : '—'}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       {selectedTheme && (
@@ -12121,7 +12218,7 @@ const appScreenerMap = useMemo(() => {
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex flex-col lg:flex-row items-stretch lg:items-start gap-3">
           {/* ── MAIN CONTENT ─────────────────────────────────────── */}
           <main className="flex-1 min-w-0 w-full flex flex-col gap-3">
-            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}} openTheme={pendingTheme} onThemeOpened={() => setPendingTheme(null)} stockFilter={stockFilter}/>
+            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} industryRankings={data?.industry_rankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}} openTheme={pendingTheme} onThemeOpened={() => setPendingTheme(null)} stockFilter={stockFilter}/>
             <BreadthStockScreener data={data} compact />
             {data && <Leaderboard
               themeRankings={data.theme_rankings}
