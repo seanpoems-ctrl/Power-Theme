@@ -10672,8 +10672,9 @@ const DailyWatchlistTab = ({ data }) => {
             🎯 Focus List
           </button>
           <button onClick={() => setMode("universe")}
+            title="Sector heatmap, full ETF RS table, ETF rotation, daily stock universe — moved here to keep the main views lean"
             className={`px-3 py-1.5 transition-colors ${mode === "universe" ? "bg-violet-600/25 text-violet-300" : "bg-zinc-800/60 text-zinc-500 hover:text-zinc-300"}`}>
-            🌐 Universe
+            🗄 Archive
           </button>
         </div>
         {mc?.spy?.sma50_pct != null && (
@@ -10688,58 +10689,11 @@ const DailyWatchlistTab = ({ data }) => {
       {/* ── LONG MODE ─────────────────────────────────────── */}
       {mode === "long" && <div className="space-y-8">
 
-      {/* ── Row 1: Themes + Leaders ────────────────────────── */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-        {/* Leading Themes */}
-        <div>
-          <div className="flex items-center justify-between mb-2">
-            <Sec title="Leading Themes" badge={topThemes.length} sub="ranked by momentum" />
-            <div className="flex bg-zinc-800/60 rounded-md p-0.5 border border-zinc-700/40">
-              {[{k:"1d",l:"1D"},{k:"1m",l:"1M"},{k:"3m",l:"3M"}].map(({k,l}) => (
-                <button key={k} onClick={() => setPerfMode(k)}
-                  className={`px-2 py-0.5 text-[10px] font-medium rounded transition-all ${perfMode === k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300"}`}>
-                  {l}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="space-y-1.5">
-            {topThemes.map((theme, i) => {
-              const rawStocks = theme.subthemes?.flatMap(s => s.stocks || []) ?? [];
-              // Enrich with screener rolling-30d perf (override Finviz calendar-month)
-              const stocks = rawStocks.map(s => {
-                const sc = screenerMap[s.ticker];
-                if (!sc) return s;
-                return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
-              });
-              const topS = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))[0];
-              const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
-              const perfKey = perfMode === "1d" ? "perf_1d" : perfMode === "1m" ? "perf_1m" : "perf_3m";
-              // Prefer the displayed ticker's own perf; only fall back to the theme-level
-              // aggregate when there's no per-stock data at all (e.g. screenerMap missed it).
-              const perf = topS?.[perfKey] != null ? topS[perfKey] : (theme[perfKey] ?? 0);
-              return (
-                <div key={theme.name}
-                  className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40 cursor-pointer hover:bg-zinc-700/50 hover:border-zinc-600/60 transition-colors"
-                  onClick={() => setSelectedThemeModal({ name: theme.name, stocks: [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0)) })}>
-                  <span className="text-zinc-600 font-mono text-[11px] w-4 shrink-0">{i + 1}</span>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-xs font-medium text-zinc-200 truncate">{theme.name}</div>
-                    <div className="text-[10px] text-zinc-600">{stocks.length} stocks{avgRs ? ` · avg RS ${avgRs}` : ""}</div>
-                  </div>
-                  {topS && <span className="text-[10px] font-mono text-cyan-400 shrink-0">{topS.ticker}</span>}
-                  <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf > 0 ? "text-emerald-400" : "text-rose-400"}`}>
-                    {perf > 0 ? "+" : ""}{perf.toFixed(1)}%
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+      {/* ── Row 1: Leaders ──────────────────────────────────── */}
+      <div>
 
         {/* Market Leaders cards */}
-        <div className="lg:col-span-2">
+        <div>
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-baseline gap-2">
               <h3 className="text-sm font-semibold text-zinc-100">Market Leaders</h3>
@@ -10799,7 +10753,6 @@ const DailyWatchlistTab = ({ data }) => {
           <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <IndexSectorBenchmarkTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
-          <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfCandidatesPanel />
         </div>
       )}
@@ -10807,8 +10760,59 @@ const DailyWatchlistTab = ({ data }) => {
       {/* ── FOCUS LIST ───────────────────────────────────── */}
       {mode === "focus" && <FocusListTab data={focusListData} />}
 
-      {/* ── UNIVERSE ──────────────────────────────────────── */}
-      {mode === "universe" && <UniverseTab etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} etfRsData={etfRsData} />}
+      {/* ── ARCHIVE ── overflow/legacy views kept for reference: Leading Themes
+          mini-list, the full flat ETF RS table, and the Universe tab's sector
+          heatmap + ETF rotation + daily stock universe. Each duplicates a
+          primary-flow tool (Category Leaderboard, Leaderboard tab) in a
+          rawer or differently-scored form — parked here instead of deleted. */}
+      {mode === "universe" && (
+        <div className="space-y-6">
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <Sec title="Leading Themes" badge={topThemes.length} sub="ranked by momentum" />
+              <div className="flex bg-zinc-800/60 rounded-md p-0.5 border border-zinc-700/40">
+                {[{k:"1d",l:"1D"},{k:"1m",l:"1M"},{k:"3m",l:"3M"}].map(({k,l}) => (
+                  <button key={k} onClick={() => setPerfMode(k)}
+                    className={`px-2 py-0.5 text-[10px] font-medium rounded transition-all ${perfMode === k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300"}`}>
+                    {l}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5">
+              {topThemes.map((theme, i) => {
+                const rawStocks = theme.subthemes?.flatMap(s => s.stocks || []) ?? [];
+                const stocks = rawStocks.map(s => {
+                  const sc = screenerMap[s.ticker];
+                  if (!sc) return s;
+                  return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
+                });
+                const topS = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0))[0];
+                const avgRs = stocks.length ? Math.round(stocks.reduce((s, st) => s + (st.rs_52w ?? 0), 0) / stocks.length) : null;
+                const perfKey = perfMode === "1d" ? "perf_1d" : perfMode === "1m" ? "perf_1m" : "perf_3m";
+                const perf = topS?.[perfKey] != null ? topS[perfKey] : (theme[perfKey] ?? 0);
+                return (
+                  <div key={theme.name}
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-zinc-800/50 border border-zinc-700/40 cursor-pointer hover:bg-zinc-700/50 hover:border-zinc-600/60 transition-colors"
+                    onClick={() => setSelectedThemeModal({ name: theme.name, stocks: [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0)) })}>
+                    <span className="text-zinc-600 font-mono text-[11px] w-4 shrink-0">{i + 1}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-xs font-medium text-zinc-200 truncate">{theme.name}</div>
+                      <div className="text-[10px] text-zinc-600">{stocks.length} stocks{avgRs ? ` · avg RS ${avgRs}` : ""}</div>
+                    </div>
+                    {topS && <span className="text-[10px] font-mono text-cyan-400 shrink-0">{topS.ticker}</span>}
+                    <span className={`text-[11px] font-mono font-semibold shrink-0 ${perf > 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                      {perf > 0 ? "+" : ""}{perf.toFixed(1)}%
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
+          <UniverseTab etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} etfRsData={etfRsData} />
+        </div>
+      )}
 
       {/* ── SHORT MODE ────────────────────────────────────── */}
       {mode === "short" && (
