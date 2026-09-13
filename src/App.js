@@ -802,8 +802,12 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
     const allSources = [...(themes || []), ...(heatmapThemes || [])];
     const norm = allSources.find(t => t.name?.toLowerCase() === itemName.toLowerCase());
     if (!norm) {
-      // Not in top-5 themes — try ETF holdings fallback
-      const etfTicker = THEME_ETF_MAP[itemName];
+      // Not in top-5 themes — try ETF holdings fallback, first on the exact name
+      // (industry or theme), then on the industry's parent theme (e.g. "Communication
+      // Equipment" isn't in THEME_ETF_MAP but its parent "Telecommunications" is
+      // close enough to have a sector ETF, giving the tile a proxy drill-down).
+      const parentTheme = industryRankings.find(i => i.name?.toLowerCase() === itemName.toLowerCase())?.parent_theme;
+      const etfTicker = THEME_ETF_MAP[itemName] || (parentTheme && THEME_ETF_MAP[parentTheme]);
       const holdings = etfTicker ? (etfHoldings[etfTicker] ?? []) : [];
       setSelectedTheme({ name: itemName, stocks: holdings, inTop5: false, fromEtf: etfTicker || null });
       return;
@@ -948,6 +952,15 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                       </div>
                       <div className="text-zinc-600 text-xs leading-relaxed">
                         {lang === 'zh' ? '關閉 Filters 即可顯示完整列表。' : 'Toggle Filters off to see the full list.'}
+                      </div>
+                    </>
+                  ) : selectedTheme.inTop5 === false && selectedTheme.fromEtf ? (
+                    <>
+                      <div className="text-zinc-400 text-sm font-medium">
+                        {lang === 'zh' ? `${selectedTheme.fromEtf} 暫無持股資料` : `No holdings data for ${selectedTheme.fromEtf} yet`}
+                      </div>
+                      <div className="text-zinc-600 text-xs leading-relaxed">
+                        {lang === 'zh' ? '將於下次每日掃描後更新。' : 'Scraper populates this on the next nightly run.'}
                       </div>
                     </>
                   ) : selectedTheme.inTop5 === false ? (
