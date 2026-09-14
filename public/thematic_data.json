@@ -1,6 +1,6 @@
 {
   "last_updated": "2026-09-11",
-  "generated_at": "2026-09-13 10:25 ET",
+  "generated_at": "2026-09-13 20:36 ET",
   "themes": [
     {
       "name": "Hardware",
@@ -238320,7 +238320,7 @@
                 137.81,
                 141.27,
                 147.93,
-                140.5,
+                140.51,
                 141.21,
                 137.25,
                 144.47,
@@ -313159,9 +313159,9 @@
       "perf_1m": 5.61,
       "perf_3m": 11.33,
       "perf_6m": 15.15,
-      "rank_1w": 8,
+      "rank_1w": 7,
       "rank_3m": 2,
-      "rotation_delta": -6,
+      "rotation_delta": -5,
       "accelerating": false
     },
     {
@@ -313758,7 +313758,7 @@
         "Quantum Computing"
       ],
       "n_industries": 1,
-      "rs_score": -9.83,
+      "rs_score": -10.3,
       "stage2_momentum": false,
       "_hardcoded": true,
       "_tickers": [
@@ -313768,15 +313768,15 @@
         "QBTS",
         "QMCO"
       ],
-      "perf_1d": 1.51,
-      "perf_1w": 0.11,
-      "perf_1m": -14.21,
-      "perf_3m": -23.38,
-      "perf_6m": 2.59,
-      "rank_1w": 7,
-      "rank_3m": 28,
+      "perf_1d": 0.84,
+      "perf_1w": -0.25,
+      "perf_1m": -17.99,
+      "perf_3m": -27.22,
+      "perf_6m": 9.45,
+      "rank_1w": 8,
+      "rank_3m": 29,
       "rotation_delta": 21,
-      "accelerating": true
+      "accelerating": false
     },
     {
       "name": "Energy Renewable",
@@ -313793,8 +313793,8 @@
       "perf_3m": -26.48,
       "perf_6m": -13.02,
       "rank_1w": 16,
-      "rank_3m": 29,
-      "rotation_delta": 13,
+      "rank_3m": 28,
+      "rotation_delta": 12,
       "accelerating": false
     }
   ],
@@ -316371,56 +316371,56 @@
     "perf_6m": 14.75
   },
   "market_condition": {
-    "signal": "yellow",
+    "signal": "orange",
     "spy": {
-      "price": 7659.5,
-      "change_pct": 0.8,
-      "index_status": "Mediocre",
+      "price": 7617.75,
+      "change_pct": -0.55,
+      "index_status": "Lagging",
       "breadth": 39.3,
-      "rsi14": 48.8,
-      "sma50_pct": 0.33,
-      "sma200_pct": 6.51,
+      "rsi14": 45.34,
+      "sma50_pct": -0.24,
+      "sma200_pct": 5.87,
       "sma200_slope_up": null,
-      "ema9": 7669.87,
-      "ema21": 7678.67,
-      "ema50": 7625.64,
-      "ema200": 7227.13,
+      "ema9": 7659.55,
+      "ema21": 7673.18,
+      "ema50": 7625.35,
+      "ema200": 7231.02,
       "price_above_ema9": false,
       "price_above_ema21": false,
-      "price_above_ema50": true,
+      "price_above_ema50": false,
       "price_above_ema200": true
     },
     "qqq": {
-      "price": 29387.0,
-      "change_pct": 0.86,
-      "index_status": "Mediocre",
+      "price": 29009.25,
+      "change_pct": -1.29,
+      "index_status": "Lagging",
       "breadth": null,
-      "rsi14": 49.74,
-      "sma50_pct": 0.23,
-      "sma200_pct": 7.83,
+      "rsi14": 43.9,
+      "sma50_pct": -1.02,
+      "sma200_pct": 6.37,
       "sma200_slope_up": null,
-      "ema9": 29387.99,
-      "ema21": 29405.85,
-      "ema50": 29319.1,
-      "ema200": 27517.29,
+      "ema9": 29312.24,
+      "ema21": 29369.79,
+      "ema50": 29306.94,
+      "ema200": 27532.13,
       "price_above_ema9": false,
       "price_above_ema21": false,
-      "price_above_ema50": true,
+      "price_above_ema50": false,
       "price_above_ema200": true
     },
     "iwm": {
-      "price": 2904.5,
-      "change_pct": 0.38,
+      "price": 2897.9,
+      "change_pct": -0.23,
       "index_status": "Lagging",
       "breadth": 39.3,
-      "rsi14": 37.66,
-      "sma50_pct": -2.84,
-      "sma200_pct": 5.0,
+      "rsi14": 36.8,
+      "sma50_pct": -2.99,
+      "sma200_pct": 4.68,
       "sma200_slope_up": null,
-      "ema9": 2941.15,
-      "ema21": 2968.95,
-      "ema50": 2970.37,
-      "ema200": 2782.98,
+      "ema9": 2932.5,
+      "ema21": 2962.49,
+      "ema50": 2967.53,
+      "ema200": 2784.12,
       "price_above_ema9": false,
       "price_above_ema21": false,
       "price_above_ema50": false,
@@ -316457,20 +316457,20 @@
       "below_pct": 44.5
     },
     "btc": {
-      "price": 76970.0,
-      "change_pct": -0.59
+      "price": 76740.0,
+      "change_pct": -0.89
     },
     "gld": {
-      "price": 4408.9,
-      "change_pct": 0.04
+      "price": 4375.5,
+      "change_pct": -0.76
     },
     "oil": {
-      "price": 100.05,
-      "change_pct": -2.37
+      "price": 102.9,
+      "change_pct": 2.85
     },
     "dxy": {
-      "price": 99.09,
-      "change_pct": 0.0
+      "price": 99.18,
+      "change_pct": 0.09
     },
     "credit_spread": {
       "value": 2.7,
@@ -316480,52 +316480,101 @@
   "vix": 15.84,
   "macro_news": [
     {
-      "title": "Circle Faces Back-To-Back Catalysts As Senate Votes On CLARITY Act, And Fed Weighs Rate Hike - tradingview.com",
-      "summary": "Circle Faces Back-To-Back Catalysts As Senate Votes On CLARITY Act, And Fed Weighs Rate Hike&nbsp;&nbsp;tradingview.com",
-      "url": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxNU0NYQlRhVlhnaDhsb0NINzhOMFNYWW0tX0tYelk5MzVLM25xYVZyRXNMc3NObWszV0tDS3B3TkJKU1Nnb1ZodDRIQmZQUDFydnA2d1c2YjQwLVZvZHY4czJibGk5akpuZ01KS1pqLXFnVEVRLWFFSDhmZ3pyNEJyUDZlZjRrY3hvOHBQYkdZYWo4VFJLWGdkWEpibS1ScnZPakJtT0xjT3VvSDdJallBQXJscHoxY0E2c3puWURJaWxEaVo5R3dpdm9BNDNzVmFjUko0cWE2Y2k4aVZZM0ZxaDZBMkFUbTA?oc=5",
-      "date": "2026-09-13 13:59",
+      "title": "Trump again calls for Federal Reserve to cut interest rates - upi.com",
+      "summary": "Trump again calls for Federal Reserve to cut interest rates&nbsp;&nbsp;upi.com",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNWmtfNTJxb3hXWW9zMV93MU5HWHdwRG10NDB0aTgwbE1yRjFQT2c4UUc2WVdnOG9IMHpmZ1JEd0s0ZWZrVzNUZC1RNm1STkFGV0txaEVZdDNEdmctdzNtOVRhVGgyWU5fN1lKVWVDek5HZUVJWkFmMlItZTdLN0lEbzhIcjZEZ9IBiwFBVV95cUxNdk9lelJkSi1mdXdGU2YxUWFRTDhFMGhjbGFZQklrOVFlR0hEcXJ4TFpNTC15N2tsdS1abFBqZGJGZDlZZTRVYk94ZFJvUlJVUThBZDhnZy1Fc1EyeWo1eEdNektvSTBvNUxmMVlxSjFjdk1yWm1zX001a21rV2UyREVDZEhNS0FHTzYw?oc=5",
+      "date": "2026-09-13 23:51",
+      "source": "Google News"
+    },
+    {
+      "title": "Trump says US interest rates should be lowest in the world - Semafor",
+      "summary": "Trump says US interest rates should be lowest in the world&nbsp;&nbsp;Semafor",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQaTZBWXFaRUR2SDh4N2JIN280QTVmb2pQNVFOZ3gzcXBDR3hfbms2SFNhY2QwWWRqWDA0UGRUeVBkM3k1ZWVZMklYa3BGTkRERjNOd2lsOUZ1NnRlX2lObVlUZVkzQWpuOVV3VUxFQXhTWmluTVpBaUhvWGZHQno0SWZxUWVUU3dMTWxoYXRBYVJzZkJkMTQweTdSUEhtYVhkYW1vR1Y5LUtYQQ?oc=5",
+      "date": "2026-09-13 22:30",
+      "source": "Google News"
+    },
+    {
+      "title": "Ahead of Fed meeting, Trump says US should have world's lowest interest rate - Reuters",
+      "summary": "Ahead of Fed meeting, Trump says US should have world's lowest interest rate&nbsp;&nbsp;Reuters",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNNTFWNE1wQVNQdkFJRm1zVXZ1bHgzSTlxVTM5OTVPVVF2ZW9Gb3FFSXlwWXdfVUF6U2RZYVpucVBHcGxfaGIySEt5YW5KczRCT1VXdW1YZVFMZDUxR3hPTW9LQ3VIM2pRci02ZzBtTGxHWE9JOVgxd3o5dklha0sydUlRMTc1RGdRcnRUXy1lS1VRUTRKOTlLUGIwQ1p1SUhLeDVRdGF6aVN2R0NQMVBoNlNtLUc1djg?oc=5",
+      "date": "2026-09-13 21:32",
+      "source": "Google News"
+    },
+    {
+      "title": "Trump Urges Federal Reserve To Cut Rates As Market Bets On Warsh Hike - Investor's Business Daily",
+      "summary": "Trump Urges Federal Reserve To Cut Rates As Market Bets On Warsh Hike&nbsp;&nbsp;Investor's Business Daily",
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPaEVOMUNfTUZvb2hraDdJWDJDMTVJM21kSjJVV2lOdll4R09DQWZtcVZCZmIySE9QMW11dU1NMlUzazdRYmQzcUhTLURxcDhYeXQwbldmeGMyNGlpREJlMTQ2SXl0bEc1YWFUUzdWdnlkZTNYUjZLSnBwUkp6QXlTd18yVGlZYnJSTnktN0JpSU82amFfRk1uWXhwMA?oc=5",
+      "date": "2026-09-13 20:51",
+      "source": "Google News"
+    },
+    {
+      "title": "Fed Rate Fight: Trump Pushes for Lower Rates as U.S. Farmers Watch Credit Costs - AgroLatam",
+      "summary": "Fed Rate Fight: Trump Pushes for Lower Rates as U.S. Farmers Watch Credit Costs&nbsp;&nbsp;AgroLatam",
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPRWFLTlhJTE1sTVdfWkJWRDVaOFpIc0Nwb29DQjdEVG1lUTE5NnNZTTVJTlU4SzJhYUZFLUZqMjBnV1RhZXZPdWk2YXV1blA3SWJicWc4N3VXdTEyRFhkM3ZjT2kzVFRCYm1aampZT0wzMUgySGhuUXVDUTJwMXZSQzNILVgtR1pp?oc=5",
+      "date": "2026-09-13 20:33",
+      "source": "Google News"
+    },
+    {
+      "title": "Brij Khurana: What Low Interest Rates Hath Wrought - commonplace.org",
+      "summary": "Brij Khurana: What Low Interest Rates Hath Wrought&nbsp;&nbsp;commonplace.org",
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBBaGlfOVd1aDl4U01xWWNESVhZSUl1eEltR0hiMGdVN0k3NFh4TEhpVk1aMGU4aE8wYkxTOTBSNkxsZGtaSGJONXFVZTFYRl9vYU1acTduaG83UjJTZmRraUpXLUNzZE5DclNuOC1kZGl4RXpE?oc=5",
+      "date": "2026-09-13 20:25",
+      "source": "Google News"
+    },
+    {
+      "title": "Everyday Economics: The Fed can’t pump more oil - thecentersquare.com",
+      "summary": "Everyday Economics: The Fed can’t pump more oil&nbsp;&nbsp;thecentersquare.com",
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNSzg0QzZ0N0hSVHM5V1BDUzg2SlNnM1VFNVB1ZnpBSlV5YWU0cHlLNGtrbDJ1RDZIRktlNURBM3E0YVljMFVhMWllLVBYWTVCcENyUXFVVmhDb1B5LXEwVGYxZnRreWFOZ2hxRnF2VjhUcFpVR2tKSGVuVGk5VDgwZUp2S2tidzhmQzFab2NMTUN4eGVE0gGaAUFVX3lxTE9VWTdkRUlaQUtvQnZEaVdaLXdPTG1EX0ZGLTYzb09rY0h5NHpSZmpfQS1XS2lHZExJa2FqY1NKSWJxR21YbXdUaW1RZ1lscUpZMHpOMWlzcjRxY2czU1pJYVpyc1RFaTZrMW5NbW9WYzBfTUdzU1pEWWRMREQ0NVRSX01xMkR2RG51OW1SVWNrTkFiNVVjLXAzU2c?oc=5",
+      "date": "2026-09-13 19:07",
+      "source": "Google News"
+    },
+    {
+      "title": "Fund manager’s Fed interest rate outlook will frustrate consumers - thestreet.com",
+      "summary": "Fund manager’s Fed interest rate outlook will frustrate consumers&nbsp;&nbsp;thestreet.com",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOaHNaMnlZOVYzYVhoNXRHMmdIcEMyc19sZlZ5NmRLZ25pS0p5czB1aVZmMVZwMVNQeGtmT1ZaYnRDMTNfZFBUQTJiU0lIQTJXbWthckpXZVBsLTQxOHc3Ql9BTkVyZElCZWllcldzWkcxbzhvY2FEMzVVeE5nY2UzLXd2SjBlUUtSZUxfSEVEbDlpQlFISnJnOXFkWWNmRFkybmRJeGNndlRRei1vZ1JueFRNaDM?oc=5",
+      "date": "2026-09-13 18:53",
+      "source": "Google News"
+    },
+    {
+      "title": "Hassett on Trump trade war interest rates threat: ‘I don’t expect the trade’s going to go to zero’ - The Hill",
+      "summary": "Hassett on Trump trade war interest rates threat: ‘I don’t expect the trade’s going to go to zero’&nbsp;&nbsp;The Hill",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPM01uVEtfLTJJZExBNnJWLXJWd3J6X01sSWhIYkVfZHBHMGsxN2pqbF9qUlN5QldITEpmWDBvZGNRM3p3RDA5VUhpQVI3N3FuVk9DMUJkU1hXd1hHNG9TMWlMR0REckN6aEJJWFZLMkhzMXhVcFpTZ1pKbkkwZGJnZNIBhgFBVV95cUxPZ29uVVN2NGpKOTY1YjJxREgwaDhON0haOTRnUmdyMEQ3OWhFSFRUOGtIVmNHZTNPYVNPbEY3OUtTTG5Xc2F1M1dscDJERWVpOS1aMTB0UHBMblZJVGY5U2lvUjVQUW1tb3RDRU1HMGtzaU1lMFZadUpIcU1tTVYtcjFoNzFTdw?oc=5",
+      "date": "2026-09-13 18:28",
+      "source": "Google News"
+    },
+    {
+      "title": "Ahead of Fed meeting, Trump says US should have world’s lowest interest rate - South China Morning Post",
+      "summary": "Ahead of Fed meeting, Trump says US should have world’s lowest interest rate&nbsp;&nbsp;South China Morning Post",
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxOUTdQOFhkQlRNdWU1YTNkZkpFVjdPQUhhYU5ic3RNZVdlS1AyM2F2Z1JWbFM2TUxTWmxtQnFidFNVakRLdHRUMlRqQTBiTkxWSXlCMi1IVnRObi1samk0bTI2WlNRdDhUTmdIN0dsRUdaeXFFaVBJZS1GZEJONFFRRWp1SlVNaFJnbFlVRWlQWnJaYi13Ukg3MWtQLTNlQmF0RVBfV1FRQ0l0WGhiem5pdG52SURydTZ4TGpMMHdGblp6c1FjdVI1NFVZRDJsdlXSAc8BQVVfeXFMTzlVOUdaNFllMVZHakxkdzczQm9QbkpXMmVIamwwRnpiYk5TaGo5dHFCbDNEQWJkYkRINk1VM3ROVFlPczhEWGgwZmZVenpfdzVvd2huVnFObDRRallON0xfVEliRUZvSWVhNmNHb3FGbDB2akFtUHBzUDFZaUhBYURzRmhSUlJaZFBoR2J6WThrMU5oQlc3WlVuNzRpNXdQZDRBc1cxWl8xcFhrdy1uS0xOanhxNThKaWJja0dqSXBRTWJxMTNVaktrbnUwWG1N?oc=5",
+      "date": "2026-09-13 17:55",
       "source": "Google News"
     },
     {
       "title": "Surging inflation puts interest rates back in focus as policymakers meet in Japan, US and UK - The Guardian",
       "summary": "Surging inflation puts interest rates back in focus as policymakers meet in Japan, US and UK&nbsp;&nbsp;The Guardian",
       "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPSjlxdEJuc05uQjJBcXJsU2cycGktTGlVMDVrVTdZcTRlMDRDNU9lWmhUaW9CTFB6cjhfdWpOaDkyaWhjeWp3amV1MkJmQXJkUjU1RERfWWY5T2hyNXhLX0puWHdFeFdCRHRRY0praXZPSjZGRmRQNDVuMUtBWjh3ME85endheVBtTXpxTjhXcXpaWER0X2dBTzFNeHd5bWtqdlE?oc=5",
-      "date": "2026-09-13 13:56",
+      "date": "2026-09-13 17:34",
       "source": "Google News"
     },
     {
-      "title": "The Week Ahead: September FOMC Rate Decision and Dot Plot Ahead, Trip.com and Lennar Earnings in Focus - TradingKey",
-      "summary": "The Week Ahead: September FOMC Rate Decision and Dot Plot Ahead, Trip.com and Lennar Earnings in Focus&nbsp;&nbsp;TradingKey",
-      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQRWVScUJ2cFh5Y1NEQ1lxR2FOSDNlbTJsYkdXaFZWRmMyTU1PUk5UTVFDX1hNMTR4LVRiRzQ1QkhKT1lGWlNIcTNkcFdzOTFNRHRBN21GNC12cEZTdWl5TGJnV1NVZHhqUGlkWHV5OE9zWXUzYmxDWEc1UFFGR0phOTJfXzY3ZW1heU45VUZoVnRXN3RBN2dtOWhYeHlhWDJQYzdDRy1FMEdXMTQwZVkxeTVZWlF4a0dQT2EtTXNxY0xzN0VXUlgwcmttQ0xkQVk?oc=5",
-      "date": "2026-09-13 12:06",
+      "title": "Top WH economic advisor: ‘Yes’ Trump will accept potential Fed interest rate hike - CNN",
+      "summary": "Top WH economic advisor: ‘Yes’ Trump will accept potential Fed interest rate hike&nbsp;&nbsp;CNN",
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQeE1uZnVSR1hEaG5najRSVkx1ckVVeDZHd1g0MUNpYXBDWlJTaFB0VjdhblJrVG0tRU1wcGE2aHdQY2xoSHZ2R3R5M0lGNW9icjRabER0d0ZLMDloV0FtWlY4aFVyTnNILWFpaEpJU2Z1TFdKRXpRVkhHMVFaU0RMUTlJeC1sem8?oc=5",
+      "date": "2026-09-13 14:13",
       "source": "Google News"
     },
     {
-      "title": "'This is the test': All eyes turn to Fed as rate hike probable - Daily Sabah",
-      "summary": "'This is the test': All eyes turn to Fed as rate hike probable&nbsp;&nbsp;Daily Sabah",
-      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPZzI1MFo0TWtvSFVWWlc0WHR6YmlIeEVxbHZLeEV1MXlUUUg2MEsxSlc0RTVZd2VzY1NjQ2sxY0FSMlFaMFJsdFBNMTh6WHBFWHYtUnNGX3RfMUF2V1VqZnJ4YUJVOTdCSHBFVWhBU1NJNlhYY0V1bk55ZnBBNklMdUtYNjFQem9STjlNNTkzZTR1VjdQZU9kRnBNa0ZYcVB6T3RNNW13?oc=5",
-      "date": "2026-09-13 11:23",
+      "title": "Trump Pushes Fed to Lower Rates Despite Pressure to Raise Them - bloomberg.com",
+      "summary": "Trump Pushes Fed to Lower Rates Despite Pressure to Raise Them&nbsp;&nbsp;bloomberg.com",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQSXRScjkydGRvalg0a1Z4aDlWLTVmSFRZVXR2Z0lTbVVtN25iSlBwMnd2aW85aU5kanFmZzhnNjEwT2QzWGVlWFQ2RjhhMzFZZE9qWnhFd0xCZ2pQMjEzT0ZRZ3NzT044RGo0b2Nzem5Jbks1OWFPOHM2eXZHbVNsN1diQkc4TlpRMnVrd2I0VXpaUEFnNGJ4MFNkNVBIZjEtSEFhdnEzaUsxZ1VDaXpuSEMwNA?oc=5",
+      "date": "2026-09-13 13:45",
       "source": "Google News"
     },
     {
-      "title": "Stock Markets This Week: US Fed Decision, Inflation Data, Oil To Be Key Drivers, Say Analysts - NDTV Profit",
-      "summary": "Stock Markets This Week: US Fed Decision, Inflation Data, Oil To Be Key Drivers, Say Analysts&nbsp;&nbsp;NDTV Profit",
-      "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxOdm5qdGllUjNzLUpzVnVvZXZ4RDhDTHJfbHJlQXh3RFdoY3d6TE5iamNCeTN4empETUszUFp0dDF3YjNGV0swWFl4eDY3MEJKWVdkTUdSY2pJeHA5YmR0T2VSclNGa2VVdkQzZ3puVWlCOWtoTkJOM1NPb2dQNGhnOTJBc1pOeGc4MVdwX01ySEljYTNqU0pGQTM5Y3hpbm4ybjlYNWx6MC1DSWZBWmk2TGZvNkNVQk9tRVA1bE0xY0dmRVVwT1dyTEJTdmRDQVNubUFzenozS3J0dXBoXzFCetIB6AFBVV95cUxPVzhNNDV3X19RaEw4cW1YVVpSQ21jMUNPSzFzZTAxRzkydDlkbnJQdTEzMHVtWkwwbEJXbnB6Z2I2WERGNUpWa3dlak0xclNidnQ5a0NWQ1plSTJRa081RXlTZWtjR3ZnbmZ1SGZDLVFVOTlwTlJyYUdjeVlUdHUzN0FkRmUyMDUxRTR4TzQtUEJYVnZ0Y2tuWk1tU2dINEdYTGNPdTFGREZ3NU95bTJPVGhheXlnWndiLVdVZWZBWDdFYlI2VTN6Q2JCOFBkNnM1YmZpMEphQ1lYMGhoeHZEWjljbHhIREZB?oc=5",
-      "date": "2026-09-13 10:41",
-      "source": "Google News"
-    },
-    {
-      "title": "Surging Oil Prices Likely To Push Us Interest Rates Higher – Expert - Bernama",
-      "summary": "Surging Oil Prices Likely To Push Us Interest Rates Higher – Expert&nbsp;&nbsp;Bernama",
-      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE92Z2hQejBJRE90aEZldHl3UWlWUk44anptZVdjYTNIUzBIOHpPNVM0X1dITXJmcW9XN3dDbTFEYzdIYnFiSGhaYnZ1R19RaldJekI4TDVMdFlzTThIWHI0M2JR?oc=5",
-      "date": "2026-09-13 09:35",
-      "source": "Google News"
-    },
-    {
-      "title": "US consumer prices accelerate in August, push Fed closer to rate hike - Reuters",
-      "summary": "US consumer prices accelerate in August, push Fed closer to rate hike&nbsp;&nbsp;Reuters",
-      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxOdW10dVZWcHQ3MkdPRy1fRGN2VVUzeV8tV2tRSnRfVHdBbllhS0hfTzlWUy1tM0pHZWxmTl84b3loTVFqRHdUX3I2REFQQ1h5ZTZIcHBJTy1Jcmd1VUpPdDRtdVhvbVpHMEVCQmJkbnNqYXBCUGZiTjVmcTM5NUpEbFgwb08wQU92TFE?oc=5",
-      "date": "2026-09-13 09:08",
+      "title": "Why The Fed Is Likely To Raise Rates This Week - Forbes",
+      "summary": "Why The Fed Is Likely To Raise Rates This Week&nbsp;&nbsp;Forbes",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxORWRQRGtCSEd3amJzUVFKOHdPc1lVeWhkeTVOc1VPSUhvbDhydFVWRDVpS1poTmdXa3ZWU1Zwa2JWSkZWT3o5bWlWdHZDR0JFOGJicFV3eThYeGp1RUZiYXpITFRvc1dhVVZjbHR0ZjB6R09ZeVRhRlNzSWZ5dERJR0dXZHp3NmFLVDBSQ2xONDVGU2phTTJkbk54N2JMa0E?oc=5",
+      "date": "2026-09-13 11:00",
       "source": "Google News"
     },
     {
@@ -316533,55 +316582,6 @@
       "summary": "What to Expect in Markets This Week: Fed Interest-Rate Decision; U.S. Retail Sales Data; Salesforce Conference&nbsp;&nbsp;Investopedia",
       "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOTzd3emRxb0pBb180Y1k0U2k4amZlaUEwX0p4QndKOXNKVXJRUHhwX25zd0wwLU9aMzZzeG0ycVl5YzhrSTVVN2QzTjhMTldkWGZTamU0TGdZRFJCMUlMOVYyQUZ0d21TZVR5LVZMQnpidzNabWVUWXRLY0RYQzZFTlE1SmowSDdKa010b0JlaGpNcUNEY3JITFlZN1hTQ3RKQ0JuOS1wc3luLW1ESF9aTHMxMXRKMDl6TFhrV3pXWQ?oc=5",
       "date": "2026-09-13 09:00",
-      "source": "Google News"
-    },
-    {
-      "title": "All eyes on US Fed to tackle high inflation - Iraqi News",
-      "summary": "All eyes on US Fed to tackle high inflation&nbsp;&nbsp;Iraqi News",
-      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOVUFKbXozdU1iUzZvOWpXSTcyYXFuZVBWSWpweVpFc29yYTJvSkFwOUNDWVFPWEJBVDB2bThQaHFXTmZ4cEU3Sm5jMkhnaVNWZHdSdXZDNkVMLWY0dDVyeHRsYVktb1pSdzVpV3pVbjQwM0JYMktEam5LdEtxNEstR3FJeHY3dw?oc=5",
-      "date": "2026-09-13 05:09",
-      "source": "Google News"
-    },
-    {
-      "title": "Will the Federal Reserve pursue consecutive interest rate hikes? Could the tightening cycle of the late 1980s be repeated? - Moomoo",
-      "summary": "Will the Federal Reserve pursue consecutive interest rate hikes? Could the tightening cycle of the late 1980s be repeated?&nbsp;&nbsp;Moomoo",
-      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxQMWtVa21OdWZFSDFJbldTdkQzMjk0MXBPZHhtYWtrc21rSm4zMVduemRNTUxrSTBlcFc1RHBYaDBnd19DbGZZSGkweTFmbTUtcHJXUmFrTkYtdnUwNXB4UEZXazluR0NSUnhHdzZRMGZ6ZldMc2xyV2RzTmZQMC1BckM2aHJYMm5iS0ZaNzhna055dlpiaEE2MFdlRmxHRnpkNXBVaEYycnhHWlhMRFhHdw?oc=5",
-      "date": "2026-09-13 03:00",
-      "source": "Google News"
-    },
-    {
-      "title": "Next Week's Must-Watch | Fed to Announce New Interest Rate Decision; CLARITY Heads to the Senate Again (9.14-9.20) - odaily.news",
-      "summary": "Next Week's Must-Watch | Fed to Announce New Interest Rate Decision; CLARITY Heads to the Senate Again (9.14-9.20)&nbsp;&nbsp;odaily.news",
-      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE9SVmptdk5qLTREclZxSEJFSkkzOFhSR0E2OWNNejc1NnhkWFJKbHBHNTRHbXduOW1icHh0T1NvVVZ3dnVmT2tmcS05SWJycUd4?oc=5",
-      "date": "2026-09-13 02:13",
-      "source": "Google News"
-    },
-    {
-      "title": "All eyes on Warsh as rate-hike fever spreads across G7 central banks - The Japan Times",
-      "summary": "All eyes on Warsh as rate-hike fever spreads across G7 central banks&nbsp;&nbsp;The Japan Times",
-      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOUGg2MG5OUkpXYWx1akVUWXMzcmV4VFM4Y1gzSURFNFB0Z2EzZ091N18tTEFsZDJUdHotcXZwa004YkdPYUZVNVhyRmZoRGpLUkpOZXd5MTltVXhuMmM3UnRkcHF0Wnl4SHFHUWlTa25PSUJ3MnZ0bW1nUnp0VFNNcUIzaWJOaTVfcmRoUm80b1I3SUM0?oc=5",
-      "date": "2026-09-13 01:07",
-      "source": "Google News"
-    },
-    {
-      "title": "Bitcoin, Ethereum, and XRP face pressure as Fed rate hike odds jump to 86.5%. - Pluang",
-      "summary": "Bitcoin, Ethereum, and XRP face pressure as Fed rate hike odds jump to 86.5%.&nbsp;&nbsp;Pluang",
-      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOLTZkU0dHYWc1Ym5VTVNGc0c4LUp1dVRwaG9JbkRDeFNUa3JLVTcyMXh5c0Q1NzROT1FFQ2RxYXNZNktNT2o4X1BzQmc1d09tVDYtLTRGcGJVbGpZcHJLamNHNjVXTGdVYWRfTGFKVG9lWHZwdkJPZW5TaEdZby1QZW5mbWRqT3BiXzkzOVRPWDlMWVpNWXJ5LUFkRjRuZm9BRy0tWEVBOA?oc=5",
-      "date": "2026-09-13 00:05",
-      "source": "Google News"
-    },
-    {
-      "title": "Elevated Inflation Keeps Pressure on Fed to Raise Interest Rates - The New York Times",
-      "summary": "Elevated Inflation Keeps Pressure on Fed to Raise Interest Rates&nbsp;&nbsp;The New York Times",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5IMFFtaTVreE9NQ2hRcW9hc0JHQ21zU2w1OUY3Nm85MHVuZXZMejVBN2xrUFZORm1mRjRvYTdpNDdVWUIxRENhTWxJd0lTWGxzdlBSQjhoN1gzd0duaWxXTWQybC1QSjNVelU2cVRQa0hmdGg3V040Ng?oc=5",
-      "date": "2026-09-12 18:58",
-      "source": "Google News"
-    },
-    {
-      "title": "The Fed’s No-Win Decision Next Week - InvestorPlace",
-      "summary": "The Fed’s No-Win Decision Next Week&nbsp;&nbsp;InvestorPlace",
-      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1wU3FrZGVBUlR1V3NMdzJxbU5wQzVvc1BDZG9ub0pVald0U1VWVTZ5MUh5bTEwOUlvX3JtakhtbjhaRGgtZXpVSnJYb0Z3SmJKY1lVYlZTM2d6aG16aWhIbmxIRlNrREg2RlVtNTBCcjRzZmRZLWJYMA?oc=5",
-      "date": "2026-09-12 16:00",
       "source": "Google News"
     }
   ],
@@ -316810,7 +316810,7 @@
     ]
   },
   "market_internals": {
-    "generated_at": "2026-09-13T14:23:51.187963+00:00",
+    "generated_at": "2026-09-14T00:35:30.649208+00:00",
     "vix": 15.84,
     "tick": 823.0,
     "trin": 0.84,
