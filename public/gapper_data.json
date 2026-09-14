@@ -1,94 +1,84 @@
 {
-  "scan_time": "2026-09-11 08:55 ET",
+  "scan_time": "2026-09-14 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "ACVA",
-      "price": 10.45,
-      "gap_pct": 44.67,
-      "pm_volume": 24879980,
-      "avg_vol_10d": 4734043,
-      "avg_dollar_vol": 49470749,
-      "mkt_cap": 1226013605,
-      "rvol": 1.13,
-      "adr_pct": 5.56,
-      "category": "New Contract/Partnership",
-      "theme": "Takeover / Buyout Offer",
-      "reasoning": "ACVA stock soared after Copart launched a **$1.9B cash takeover** offer, providing a **40%+ premium** to shareholders.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
+      "ticker": "DFTX",
+      "price": 44.24,
+      "gap_pct": 13.76,
+      "pm_volume": 419598,
+      "avg_vol_10d": 1609529,
+      "avg_dollar_vol": 71205563,
+      "mkt_cap": 5225530939,
+      "rvol": 0.97,
+      "adr_pct": 4.55,
+      "category": "FDA",
+      "theme": "Positive Late-Stage Trial Results",
+      "reasoning": "Definium Therapeutics stock jumped after its anxiety treatment met every key goal in a late-stage trial, with an FDA meeting planned for late 2026.",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 21,
       "grade": "C",
-      "finviz_theme": "Others",
+      "finviz_theme": "Biotech - Neurology",
       "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "ACVA filed an **8-K** on **2026-09-10** confirming a **Material Contract or Agreement**. This was revealed as **Copart launching a $10.50 cash takeover** bid, valuing ACV at **$1.9 billion**. The offer includes a **45% premium** for ACV shareholders.",
-        "impact": "This acquisition provides a significant immediate payout to ACVA shareholders, effectively capping upside for current equity holders unless a higher bid emerges. The deal removes M&A risk and offers a substantial premium over the prior market price."
+        "catalyst": "Definium Therapeutics disclosed **positive trial results** for its **anxiety treatment**, which successfully **met every key goal in a late-stage trial**. An **FDA meeting is planned for late 2026** following these successful outcomes.",
+        "impact": "This catalyst significantly de-risks the drug's path to market, opening a clear pathway for potential FDA approval and commercialization, driving investor confidence and upward momentum."
       },
-      "analysis_details": "• **Impact**\nACVA stock **soared over 40% after-hours** and **jumped** during trading on **September 11, 2026**, following news that **Copart** launched a **$10.50 cash takeover** offer. This **$1.9 billion buyout deal** represents a **45% premium** for ACV shareholders, as confirmed by news headlines.\n\n• **Strategic Value**\nThis definitive agreement with **Copart** indicates a significant valuation event for ACVA, removing standalone operational risk for investors. While offering a substantial premium, the reported investigation by **Halper Sadeh LLC** regarding fair price suggests potential for further scrutiny, though the immediate impact is a strong positive price movement driven by the **$10.50 cash offer**.",
+      "analysis_details": "• **The Drug**\nDefinium Therapeutics' **anxiety treatment** achieved positive results in a **late-stage trial**, successfully **meeting every key goal**. This critical milestone sets the stage for regulatory advancement.\n\n• **The Significance**\nFollowing the successful trial, an **FDA meeting is planned for late 2026**, indicating an accelerated path towards potential market approval. This progress significantly enhances the drug's commercial viability and reduces regulatory uncertainty, positioning DFTX for substantial future growth in the anxiety treatment market.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "ACVA Stock Soars As Copart Launches $10.50 Cash Takeover - StocksToTrade",
+          "title": "Definium Therapeutics stock jumps on positive trial results - Investing.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE5WRk9ib21ia04wdFlKVUwyN05iRnp6Qmh4Z2x6bmFMMXFZbHdaY3kyZjZXNkJLRlBHa3hjcUxKYTRoWmRHSEFGWVA2R2NlQkVJRFZQVHlmMS0xVnc3ZGNudWFGOTFiS1Y4VXJEYWhuYnRVWU9DdXFwMFlxVQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPQkxBM0NwSUwzTndaQklyWEZQaGJPN0pUZkN6ZFY2TWhxNGUzR0o4UzlCek9sTGpxVkJtNFlYQWhZWjdYRlpSdDF1Q2taZDA0OG1FdjJzZXVodnFjN1ZyM3B4YnFmVlhkY05IdmJuWUF3TmJkU2hnYWdNTy10RkpLQTlCbmdhVVJ3dWtSMXJib0ZRTjBpN3J2MUhpXzlNd1ViVXdEQk1jYVFBZHJQY2staS1FcjJNbndxdXVfODhR?oc=5"
         },
         {
-          "title": "ACVA Stock Jumps As Copart Launches $10.50 Cash Takeover - timothysykes.com",
+          "title": "An anxiety treatment met every key goal in a late-stage trial. An FDA meeting is planned for late 2026. - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE1Sek9vamZIX3NhbjVORkYxQ2dDYXpOOVFPbDdWQjhKQ21QVVFSUEFjcWFNLUVfZ2p0MWN6bUhEMmdxM0JQUGxQY0tVZ2VaY0xuWURwR3l3d3hzaThLVHloWGExbk9IV25aZ3JtT3V1bVpwd3FBSFUtQkV5dGQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQN1VIM09fSG55UzhUNUk0UkZ3T2VNQnF2MDljQ0Rlbk9fWTA1SmNYdFgtYnFkVFhhb2V6TE92ZndRQVNlTzZrZUFWSTI2YldQQm11a2FlNlkyOFlGeDNlcDh3bE9JZXk0eF9tZEdhblF1S1pyVENHVzhKWGhvZjBzM1g0ekNsUmRaaWFKalVDZko4TUphdUhMeDRXekQzalZqMjlzM3hIX3daeU9ienhQUURGa0hJa1lxR3IxZFBYdw?oc=5"
         },
         {
-          "title": "ACVA Stock Alert: Halper Sadeh LLC is Investigating Whether ACV is Obtaining a Fair Price for its Shareholders - Business Wire",
+          "title": "Three new hires get rights to buy 56,650 Definium shares - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxQd0dSeVJHN1l1MmwwTUZJelpQT2hDbk1lSEJubWNwNGowckUtbTVJcHNGMzhGOXlPRkd5S1A0MThxS0I1ZGZEcE9QZm1DSFJnVUFvMjZUYUZ2WmVfSlkxVzdJSGNEbTNZZ0UxOEJSOEx5ZnRhNDJyODNWbHpiMjlDb1Rka2hGYXh5ZVBUWE1relFibTBZRGNHdmlESFBBbVJlZm9relp3djluZmJYVWJsY01YSHBuNVE4dUtHWDYyZXVSZkxvSDZ1U0dnT0pMVTNaeGhWUGFSbWVDd1BMN3prRFU0aHlvcFNoV2lqekxENzRCVnNGODk4WEFB?oc=5"
-        },
-        {
-          "title": "ACVA Stock Soars Over 40% After-Hours On Coparts $1.9B Buyout Deal",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/c73aaf72-9795-3b9a-adb5-2421d876d6e5/acva-stock-soars-over-40%25.html"
-        },
-        {
-          "title": "A 45% premium is on the table for ACV shareholders as Copart plans to buy the company. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQR1ZyNVlxU1dvcVdBcmZSR2lxVVRhSDNpVER1VEVMRE9mUjVQMmxVamZvZGRTTmIyYThmdkVhTHlZV1NNa2RTS1BOQ003MDVxc25PX2U1LXV4NTk5cVpBUHJMMFRSQ3hmd09naEVBamN2aHR4OXhoSWRHbFQ4MFNfLW9uQnFRdURieDVrbUZyQnllLVc0MUVxZ0Y4aGItR2t4RlFvWFRrTjl4Nm5UckRubmZKSXA?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPYjZvd2xNbWZxRzNZWTRab0RTXzRzRVFsVWJCY2c1Y1BES1pTTTd1aHdVVUNDTndmQUFMMV9GY29hb05sOU5DcVQwWW5EUUJTTjdkQTRoUXV4Y241a3FTdUhydmF0Q09PMjRUUTJQNDlDOVMzXzBzNFdlSTZoc01FWjktQUs3ZVdGaGI1WkdoUWtwTGt3LWxyTWFYMHpVTHY0cjh1WTdhRXNPUVhLajJF?oc=5"
         }
       ],
       "edgar_filing": {
-        "filing_date": "2026-09-10",
+        "filing_date": "2026-09-14",
         "form": "8-K",
         "items": [
-          "1.01",
           "7.01",
+          "8.01",
           "9.01"
         ],
-        "category": "New Contract/Partnership",
-        "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/1637873/000095010326013780/dp253207_8k.htm"
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/1813814/000110465926107275/tm2625365d1_8k.htm"
       },
-      "float_shares": "158.72M",
-      "short_float": "9.85%",
-      "daily_pct": 44.6,
-      "prev_close": 7.22,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $49M < $100M)",
+      "float_shares": "128.18M",
+      "short_float": "7.67%",
+      "daily_pct": 12.88,
+      "prev_close": 38.89,
+      "industry": "Biotech - Neurology",
+      "technical_status": "Fail (Avg $Vol $71M < $100M)",
       "verification": {
-        "status": "Verified",
-        "confidence_score": 95,
+        "status": "Discrepancy",
+        "confidence_score": 75,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "$1.9B cash takeover",
-        "discrepancy_note": ""
+        "primary_claim": "FDA meeting planned for late 2026",
+        "discrepancy_note": "Google News headline [4] from Stock Titan directly states 'An FDA meeting is planned for late 2026', confirming the specific date. However, Source A (Finviz) and Google News headline [5] (Stocktwits) both state 'Investors Brace For Phase 3 Results', implying the results have not yet been released. This creates a discrepancy regarding the timing and certainty of the reported positive trial outcome and subsequent FDA meeting planning."
       },
-      "gates_passed": 2,
+      "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": false,
+        "gate_price": true,
         "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
+        "gate_mkt_cap": true,
         "gate_adr": true
       },
       "meets_all_gates": false,
@@ -96,76 +86,45 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "CPRT",
-      "price": 32.95,
-      "gap_pct": 7.15,
-      "pm_volume": 106584,
-      "avg_vol_10d": 8133423,
-      "avg_dollar_vol": 267996288,
-      "mkt_cap": 28468704345,
-      "rvol": 2.47,
-      "adr_pct": 3.5,
+      "ticker": "RUM",
+      "price": 7.81,
+      "gap_pct": 8.93,
+      "pm_volume": 3186295,
+      "avg_vol_10d": 3433050,
+      "avg_dollar_vol": 26812120,
+      "mkt_cap": 3554959027,
+      "rvol": 1.28,
+      "adr_pct": 7.58,
       "category": "New Contract/Partnership",
-      "theme": "Acquisition & Earnings Beat",
-      "reasoning": "Copart announced the strategic **$1.9B acquisition** of ACV, expanding its market presence, alongside reporting a **revenue beat** for Q2 CY2026.",
+      "theme": "Major GPU Supply Deal",
+      "reasoning": "RUM Group surged after securing a **$13.7B GPU deal**, significantly enhancing its position in the rapidly expanding AI market.",
       "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 81,
-      "grade": "B",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini+edgar",
+      "conviction": 77,
+      "grade": "C",
+      "finviz_theme": "AI Compute",
+      "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "Copart filed an 8-K regarding a **Material Contract or Agreement**, confirmed by news of its plan to acquire ACV for **$1.9B**, offering a **45% premium** to ACV shareholders. This acquisition is expected to close by **end of 2026** and will be financed with **existing cash**, not requiring extra financing. Concurrently, Copart reported a **Q2 CY2026 revenue beat**, causing its stock to soar.",
-        "impact": "The acquisition strategically expands Copart's footprint across the **vehicle remarketing ecosystem**, signaling potential for enhanced market share and diversified revenue streams, while the earnings beat reinforces strong operational performance."
+        "catalyst": "RUM Group announced a substantial **$13.7 billion GPU deal** that is set to **reshape its AI story**. The news led to a significant jump in the stock, reflecting the market's positive reaction to this **large-scale contract**.",
+        "impact": "This deal is expected to provide a strong revenue pipeline and strategic positioning for RUM in the competitive AI compute space, attracting significant investor interest and potentially driving further re-rating."
       },
-      "analysis_details": "• **Impact**\nCopart announced the acquisition of ACV for **$1.9 billion**, representing a **45% premium** for ACV shareholders. This deal is structured as a tender offer and is anticipated to close by the **end of 2026**, pending regulatory approval. Copart plans to utilize **existing cash reserves** to fund the acquisition, avoiding the need for additional financing.\n\n• **Strategic Value**\nThis acquisition is poised to significantly expand Copart’s position across the **vehicle remarketing ecosystem**, enhancing its competitive landscape. The deal, coupled with Copart's reported **Q2 CY2026 revenue beat**, provides a strong foundation for future growth and reinforces the company's operational strength in a consolidating market.",
+      "analysis_details": "• **Impact**\nRUM Group's stock experienced a significant jump following the announcement of a **$13.7 billion GPU deal**. This substantial agreement is described as **reshaping the company's AI story**, indicating a fundamental shift in its market perception and operational focus.\n\n• **Strategic Value**\nThis massive GPU deal positions RUM as a key player in the booming AI compute sector, ensuring a long-term revenue stream and potentially attracting further partnerships or investments. It provides a clear growth narrative for the company, elevating its profile and competitive standing within the AI industry.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Copart’s (NASDAQ:CPRT) Q2 CY2026: Beats On Revenue, Stock Soars - Yahoo Finance",
+          "title": "RUM Group Jumps As $13.7B GPU Deal Reshapes AI Story - StocksToTrade",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOLXRZSmFsNThfWGZGa21LaFJFeTIxOG5GMHg0NHJMNUhmdk1wa0t4Q08zTXIycmhYSkY3TnZJS3p2enp6LVdFSkEwUEJ6NkQ3Q21VNDh1aS1BemIwVzBhNFVLYjh4NDVublZnZmM5dlV4c1pMQW1zWDdnbld0Ny1YVGhjU3V6WWM2OXVOSEVmNTQyZnlYUE9hdQ?oc=5"
-        },
-        {
-          "title": "A 45% premium is on the table for ACV shareholders as Copart plans to buy the company. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxQR1ZyNVlxU1dvcVdBcmZSR2lxVVRhSDNpVER1VEVMRE9mUjVQMmxVamZvZGRTTmIyYThmdkVhTHlZV1NNa2RTS1BOQ003MDVxc25PX2U1LXV4NTk5cVpBUHJMMFRSQ3hmd09naEVBamN2aHR4OXhoSWRHbFQ4MFNfLW9uQnFRdURieDVrbUZyQnllLVc0MUVxZ0Y4aGItR2t4RlFvWFRrTjl4Nm5UckRubmZKSXA?oc=5"
-        },
-        {
-          "title": "ACVA Stock Soars Over 40% After-Hours On Coparts $1.9B Buyout Deal",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/c73aaf72-9795-3b9a-adb5-2421d876d6e5/acva-stock-soars-over-40%25.html"
-        },
-        {
-          "title": "Copart Inc. stock outperforms competitors despite losses on the day",
-          "source": "Finviz",
-          "url": "https://www.marketwatch.com/data-news/copart-inc-stock-outperforms-competitors-despite-losses-on-the-day-aae77d1a-3fe35063e378?mod=mw_FV"
-        },
-        {
-          "title": "Copart to Acquire ACV, Expanding Position Across the Vehicle Remarketing Ecosystem",
-          "source": "Finviz",
-          "url": "https://www.businesswire.com/news/home/20260910881782/en/"
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTE9wQmpGZlUzT3Z2WlpoUU81akVJRHFpa1BsNHgwY2MzRUVXYTk2TXh6bGticlBGQ01wV2pBa18zRTBKdEx5Q1ExUVFETVViYmJTemNYWUZJbWRPYUd3ZFNtNS1uMXRLdGFBQVl0N29aUXlvQ0U?oc=5"
         }
       ],
-      "edgar_filing": {
-        "filing_date": "2026-09-10",
-        "form": "8-K",
-        "items": [
-          "1.01",
-          "7.01",
-          "9.01"
-        ],
-        "category": "New Contract/Partnership",
-        "label": "Material Contract or Agreement",
-        "url": "https://www.sec.gov/Archives/edgar/data/900075/000119312526388064/d138322d8k.htm"
-      },
-      "float_shares": "842.58M",
-      "short_float": "4.49%",
-      "daily_pct": 6.08,
-      "prev_close": 30.75,
-      "industry": "Others",
-      "technical_status": "Fail (ADR 3.5% < 4%)",
+      "edgar_filing": null,
+      "float_shares": "132.44M",
+      "short_float": "16.43%",
+      "daily_pct": 10.14,
+      "prev_close": 7.17,
+      "industry": "AI Compute",
+      "technical_status": "Fail (Avg $Vol $27M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 90,
@@ -173,8 +132,75 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "$1.9B acquisition of ACV",
-        "discrepancy_note": "Finviz Source A [1] explicitly states '$1.9B Buyout Deal'. However, none of the Google News sources provide a specific dollar amount for the acquisition, preventing full confirmation from both sources."
+        "primary_claim": "$13.7B GPU deal",
+        "discrepancy_note": "Source A (Finviz) provides no information. Source B (Google News) headline [5] mentions a '$13.7B GPU Deal', but it is not corroborated by other headlines or Source A."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "BNTX",
+      "price": 102.27,
+      "gap_pct": 5.73,
+      "pm_volume": 56475,
+      "avg_vol_10d": 1154868,
+      "avg_dollar_vol": 118108350,
+      "mkt_cap": 24298999166,
+      "rvol": 1.0,
+      "adr_pct": 3.36,
+      "category": "FDA",
+      "theme": "Phase 3 Trial Success",
+      "reasoning": "BioNTech reported positive Phase 3 trial data for its lung cancer drug, demonstrating extended survival compared to chemotherapy.",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 22,
+      "grade": "B",
+      "finviz_theme": "Biotech - Oncology",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "BioNTech (NASDAQ: BNTX) announced its **lung cancer drug** demonstrated positive results in a **Phase 3 trial**, extending survival. The experimental treatment extended survival to **18.5 months**, significantly outperforming chemotherapy, which showed survival of **10 months**.",
+        "impact": "This successful Phase 3 readout significantly derisks the drug's path to regulatory approval, potentially expanding BioNTech's addressable market in oncology and strengthening its pipeline."
+      },
+      "analysis_details": "• **The Drug**\nBioNTech's experimental treatment for **lung cancer** achieved its primary endpoint in a **Phase 3 trial**, demonstrating a significant improvement in patient outcomes. The drug extended patient survival to **18.5 months**, a notable increase compared to the **10 months** achieved by standard chemotherapy.\n\n• **The Significance**\nThis positive **Phase 3** data represents a critical milestone for BioNTech, significantly derisking the development and regulatory pathway for its **lung cancer drug**. A successful outcome in such a pivotal trial indicates strong potential for market approval and positions the company for a substantial entry into the large oncology market, particularly in **lung cancer** treatment.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "BioNTech (NASDAQ: BNTX) lung cancer drug extends survival vs chemo in Phase 3 - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxQcDA4UHNyUnRWbGlKR3V2NTJsakZpdWhnWkFEUFk5cjFKeHdnUDRjOFNLZnM4UEliQ21uYnZvUWVVeWlEUGNCaWppNmJXWklYUWd6aEZtNDlNTWk1dksyTHpfZkhNNXg4dnkxbVAyZmZ1VVQzY0t5dGptVF9INjBQVkFHOXgtV1RZR3hVdnNpSzRpNG45emNSd2FjMFhkRHpHTFhFLXA3LU5HY3BSV1E?oc=5"
+        },
+        {
+          "title": "BioNTech’s experimental treatment extended survival to 18.5 months, versus 10 - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPQlBYTjQzcTFRS1h3M0JwOVdtemIwRUJ0TURoN3BOSVFuMUVUYWpicnhNRDIxc2tIVWxRVGtnbFUxNE84Y0tuNWNZMEVENXVYWlhuUDNzNjE1ZkpJcDR0Sy1aUTJ1R1JnSkJsdkRQbksxWXJxTmM4ekdQZ2x0NTVrVmN4Y0UwWDZOZGgxX3JDNTZ4TzA2UFFFSUFhYlJkSWhsV3picnBXXzBQeWo5RnRLa2ZnX0h0elprVVE?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "250.13M",
+      "short_float": "0.92%",
+      "daily_pct": 5.97,
+      "prev_close": 96.73,
+      "industry": "Biotech - Oncology",
+      "technical_status": "Fail (ADR 3.4% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 75,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "BioNTech's lung cancer drug extended survival compared to chemotherapy.",
+        "discrepancy_note": "Finviz News provides no information to confirm or deny the claim. Google News headlines [1] and [3] support the claim of extended survival, with [1] providing specific numbers (18.5 months vs 10 months). However, since Finviz (Source A) has no content, there is no second source to 'verify' the claim with matching specifics, making it a Discrepancy based on the rule that BOTH sources must confirm."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -185,170 +211,58 @@
         "gate_adr": false
       },
       "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     },
     {
-      "ticker": "ORCL",
-      "price": 163.1,
-      "gap_pct": 6.64,
-      "pm_volume": 2584574,
-      "avg_vol_10d": 28508074,
-      "avg_dollar_vol": 4649666869,
-      "mkt_cap": 440539233706,
-      "rvol": 1.91,
-      "adr_pct": 3.9,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "Oracle surged after beating Q1 estimates, raising fiscal 2027 earnings forecast, and reporting soaring cloud infrastructure revenue from record AI cloud bookings.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 79,
-      "grade": "B",
-      "finviz_theme": "AI Cloud",
-      "analysis_source": "gemini+edgar",
+      "ticker": "CRWD",
+      "price": 218.04,
+      "gap_pct": 5.47,
+      "pm_volume": 397541,
+      "avg_vol_10d": 10714473,
+      "avg_dollar_vol": 2336183693,
+      "mkt_cap": 211688289165,
+      "rvol": 0.5,
+      "adr_pct": 5.35,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst identified; likely technical breakout or institutional flow is driving pre-market gains.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 55,
+      "grade": "C",
+      "finviz_theme": "Cybersecurity - Endpoint",
+      "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "Oracle reported a **strong Q1 report**, with both **revenue and adjusted earnings beating Wall Street estimates**. The company also **raised its fiscal 2027 earnings forecast**. The cloud infrastructure division saw revenue soar **121% to $7.4 billion**, surpassing consensus expectations. Remaining performance obligations (RPO) surged to a **record $664 billion**, driven by **more than $30 billion in new AI cloud contract bookings** during the quarter.",
-        "impact": "This strong performance, particularly in AI cloud, signals robust demand and potential for continued price momentum, positioning Oracle favorably against competitors like AWS and Azure in the accelerating AI infrastructure race."
+        "catalyst": "Unknown. **CrowdStrike** is **climbing 3.92% pre-market** with no specific fundamental news reported in the last **24 hours** to explain the move, suggesting a potentially speculative event.",
+        "impact": "Speculative. The **significant pre-market move** without a clear catalyst increases the risk of a **Gap and Trap** scenario, driven by technical factors or institutional flow rather than core fundamentals."
       },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nOracle delivered a **strong Q1 report**, with both **revenue and adjusted earnings beating Wall Street estimates**. The cloud infrastructure division reported revenue soaring **121% to $7.4 billion**, exceeding consensus expectations. Remaining performance obligations (RPO) reached a **record $664 billion**, significantly bolstered by **more than $30 billion in new AI cloud contract bookings**.\n\n• **The Growth (Momentum)**\nAnalysts are noting that **Oracle Cloud demand is growing faster than AWS and Azure**, fueled by the surge in AI cloud bookings. This marks a turning point for the software sector, with Dan Ives calling it the **clearest buy signal in months** for software stocks. The strong performance highlights Oracle's competitive positioning in the high-growth AI infrastructure market.\n\n• **The Guide**\nOracle demonstrated confidence in its future outlook by **raising its fiscal 2027 earnings forecast**. This upward revision reinforces the expectation of sustained momentum driven by accelerating AI cloud adoption and continued strong demand across its cloud offerings.",
+      "analysis_details": "• **What Happened**\nCrowdStrike is experiencing a **3.92% climb pre-market** as of **2026-09-14 08:05 UTC**, highlighted in trending stock reports. No specific company-specific fundamental news, such as an earnings report, analyst upgrade, or new contract, has been identified in the last **24 hours** to account for this movement.\n\n• **Key Consideration**\nWith an average daily range of **5.3%** and a relative volume of **0.5x**, the **3.92% pre-market climb** on lower-than-average volume suggests this could be a technically driven event or speculative flow. The absence of a clear catalyst indicates a high risk of a **Gap and Trap** situation, making the sustainability of this momentum questionable without further fundamental developments.",
       "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "ORCX",
-          "mult": "2x"
-        }
-      ],
+      "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "ORCL Stock Jumps After Strong Q1 Report: Analyst Says Oracle Cloud Demand Is Growing Faster Than AWS, Azure",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/orcl-stock-jumps-strong-q1-015849715.html"
-        },
-        {
-          "title": "ORCL Stock Soars 7% After-Hours  Oracle Cloud Surge Powers Q1 Beat As AI Demand Fuels Record Backlog",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/05282056-2411-3c8d-ba4c-9f4495ededb0/orcl-stock-soars-7%25.html"
-        },
-        {
-          "title": "Dan Ives Says Software Stocks Just Got Their Clearest Buy Signal Yet",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/m/f5ef6f41-ea6a-363a-aaea-40d14b096800/dan-ives-says-software-stocks.html"
-        },
-        {
-          "title": "Oracle's stock edges up on earnings beat as cloud infrastructure revenue more than doubles - cnbc.com",
+          "title": "Trending Stocks Today | CrowdStrike Climbs 3.92% Pre-Market - Moomoo",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBvTEg4QmktNm1FbTRvNzZFU1B1eTFkWHVEWWJkaFNiZ0l6NkhSUzdhZzhsV2Z0U2FYWkg5YzVGVEJHMkZuTHU2TWROd2w4Y3o4TDRVUGJBcHc4QS1EVWtUbzFjM2dFZlFMN3dLdHVJRy1nSUF6cFAwMTlURHbSAYIBQVVfeXFMTXpxWkU0U094Z3cwcVdsT0RJOERKSWRRTzNLSjNNbEJGRTJHYWRncWY5Z3gtQkFnOFp2U3V5U29aN2tTVzk3YVZ2dnFMRUhRaTdKaGY5RVpOTmlpaV9UMFg1bEY1UEhWemFudmpheWJZN0s0cENsVV9CZ015X2haYWU5dw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNNnRhMElma0JJMHBRNUF3M0pkd1pnczFvS1VtX3BxSlhmNDZNRUQ1UGk1WHdEbHdWSUtVOVBRWlBUMmJ5aWdIZEFYY1c2blowMjVZWjl0VzhVQ3FzcGN3NF9yVGJXUmx1Ykd5QnRjZktCY190RVVjTGRlSm81UUZ4Vk1xanZDa0lNYjh3N3NRNDRoOGJpTDRMc2pWWi1kYlk?oc=5"
         }
       ],
-      "edgar_filing": {
-        "filing_date": "2026-09-10",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "8.01",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526387905/orcl-20260910.htm"
-      },
-      "float_shares": "1.71B",
-      "short_float": "2.60%",
-      "daily_pct": 7.29,
-      "prev_close": 152.94,
-      "industry": "AI Cloud",
-      "technical_status": "Fail (ADR 3.9% < 4%)",
+      "edgar_filing": null,
+      "float_shares": "990.32M",
+      "short_float": "2.46%",
+      "daily_pct": 5.5,
+      "prev_close": 206.74,
+      "industry": "Cybersecurity - Endpoint",
+      "technical_status": "Pass",
       "verification": {
-        "status": "Unconfirmed",
+        "status": "Discrepancy",
         "confidence_score": 95,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "raising fiscal 2027 earnings forecast",
-        "discrepancy_note": null
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "AEHR",
-      "price": 98.61,
-      "gap_pct": 5.12,
-      "pm_volume": 58094,
-      "avg_vol_10d": 3280734,
-      "avg_dollar_vol": 323513180,
-      "mkt_cap": 3063791921,
-      "rvol": 1.12,
-      "adr_pct": 9.18,
-      "category": "Upgrade",
-      "theme": "Oppenheimer Outperform Initiation",
-      "reasoning": "Aehr Test Systems received an 'outperform' initiation from Oppenheimer, providing a positive re-rating and new analyst coverage.",
-      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
-      "conviction": 32,
-      "grade": "B",
-      "finviz_theme": "Semiconductors - Packaging",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Oppenheimer initiated coverage on Aehr Test Systems (NASDAQ:AEHR) with an **outperform rating** on **2026-09-10**. This marks a fresh analyst endorsement for the semiconductor test equipment manufacturer.",
-        "impact": "The initiation provides a positive re-rating and new institutional coverage, potentially attracting fresh capital and building momentum for the stock."
-      },
-      "analysis_details": "• **The Firm & Rating**\nOppenheimer initiated coverage on Aehr Test Systems with an **outperform rating** on **September 10, 2026**. This action signals a new, positive institutional view on the company's prospects.\n\n• **The Thesis**\nThis analyst initiation highlights a fresh assessment of AEHR's market position and future potential by Oppenheimer. While specific price targets or detailed reasoning are not provided in the headline, an 'outperform' rating typically implies expectations for the stock to exceed the broader market's performance over the coming 12-18 months. This can act as a significant validation point for momentum investors, suggesting a positive outlook for the stock's trajectory.",
-      "peer_tickers": [
-        "COHU",
-        "ONTO",
-        "MKSI"
-      ],
-      "leverage_etfs": [
-        {
-          "ticker": "SOXL",
-          "mult": "3x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "SOXS",
-          "mult": "3x"
-        }
-      ],
-      "headlines": [
-        {
-          "title": "Aehr Test Systems (NASDAQ:AEHR) faces a fresh market test as oil and yields rise - Kalkine Media",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPM2pRczZBQ1hIVl9vRHU5V3ZTMkFDREtQSzY2M2FrYmZyd08tQjFlQXJBOHhadjY3Yk9KOENrTVhMUWpqMDRPeWhUcDdZOXRfNUtJQWl0UlQtOV92c3g3cXU2d3czYXBIeExLSlFnY0pnOTFaamJKMXk5bkJnS0tXMktiZ0tvM1JPYWFSZWdkYjNHcFg0SGRpVHVkOTV4MDZYOWFnSm1RNlhzWm9uWEFZNmRYUWZqUGp1NTB0a2Jn?oc=5"
-        },
-        {
-          "title": "Oppenheimer initiates Aehr Test Systems stock with outperform rating - Investing.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxPY3V4SFBablRnT29rNFlJY0VDMFFxV2R3QXk2UGtIRjI1NzlWam90cjZwUWNSOWNldlh6ODFrRS1waTZTdkJvdVRUb09HbTJISUl6NkVubkkxMFdjSUlmbGdYcFlnZWVDd0MxUlFKeWNvRFRsR3gxNy1yeUZHRTlwSjVoejBGRXZ6ZGNLVkpQcUljYkV4N2lPRElvMjY3ZVVjRm9VSk5ucHNNRXQxNWdVeHE3NjVQQzVRZGlKNEM0b3B5NjJDbVpz?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "30.99M",
-      "short_float": "14.04%",
-      "daily_pct": 4.95,
-      "prev_close": 93.81,
-      "industry": "Semiconductors - Packaging",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 80,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Aehr Test Systems received an 'outperform' initiation from Oppenheimer.",
-        "discrepancy_note": "Finviz News (Source A) had no mention of the Oppenheimer 'outperform' initiation, while Google News (Source B) provided multiple articles confirming 'Oppenheimer initiates Aehr Test Systems stock with outperform rating'."
+        "primary_claim": "No immediate fundamental catalyst identified",
+        "discrepancy_note": "The primary catalyst claims 'No immediate fundamental catalyst identified', but Google News [1] and [5] both clearly mention a specific fundamental catalyst: 'Fresh AI Security Launches' and 'CrowdStrike Expands AI Capabilities With Autonomous Product Launch'."
       },
       "gates_passed": 5,
       "gates_detail": {
@@ -361,15 +275,93 @@
       "meets_all_gates": true,
       "tier": "T3",
       "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "SRRK",
+      "price": 58.19,
+      "gap_pct": 5.02,
+      "pm_volume": 79795,
+      "avg_vol_10d": 1069556,
+      "avg_dollar_vol": 62237464,
+      "mkt_cap": 6748122253,
+      "rvol": 0.88,
+      "adr_pct": 4.11,
+      "category": "FDA",
+      "theme": "FDA Approval for Drug/Therapy",
+      "reasoning": "Scholar Rock received FDA approval for a drug/therapy, prompting Raymond James to raise its price target on the stock.",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 21,
+      "grade": "C",
+      "finviz_theme": "Biotech - Rare Disease",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "News headlines report that Scholar Rock Holding received **FDA approval** for a drug, leading Raymond James to raise its price target. Separately, Truist also raised its price target on Scholar Rock Holding to **$76** from **$55**, maintaining a **Buy** rating.",
+        "impact": "FDA approval signifies a major de-risking event and opens the door for commercialization, significantly expanding the company's total addressable market."
+      },
+      "analysis_details": "• **The Drug**\nScholar Rock Holding has secured **FDA approval** for a new drug or therapy, a pivotal development for the company. This significant regulatory milestone was a direct factor in Raymond James raising its stock price target.\n\n• **The Significance**\nThis **FDA approval** represents a major de-risking event, transitioning the company from a clinical-stage to a commercial-stage entity. The approval is likely to expand the total addressable market for Scholar Rock's product, potentially leading to substantial revenue growth and attracting further investor interest. Truist's subsequent price target increase from **$55** to **$76**, alongside a reiterated **Buy** rating, reflects this positive outlook and the perceived value creation from the approval.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Truist Raises Price Target on Scholar Rock Holding to $76 From $55, Keeps Buy Rating - marketscreener.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxNTGZoTkV1MFlCem4tM3J1Zl9fTUxYM0RNVkZQSmQyOUExTWhJOFNfRkJOaDNMQm1HT1dwZGMwNldubkYxaXZFX2FWUFNoSVZGZUJUZjhleXM1cXdqekcySXlkaFYyeGlMWWJFTVNzdVZOWHM5SU1vWE94RFhZOFBHUTNIbnZuWk0ySjNJYWJFMUN4aE0yVTdYRUF3NjNOWWVkeTdwNEhjWFBMZHdSUjBodjB4TzJUbHdWYlh3Vjl5OFl2dlZVems4OEVqQWRZN3M?oc=5"
+        },
+        {
+          "title": "Raymond James raises Scholar Rock stock price target on FDA approval - Investing.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPOEJYeGtoVHlzcURQY3hIN0xGVmtseXJNU1pqb3B0MGZZM0ptZElBeDlWTXU5aWh5bjF3MEQ0MlBlbU5lLUEwaFZJbDZOMU5ac09WMlBMWmlFSHZNM2laWXRMam8wVUFqUjA0UzNxVlh2NEJKeV9QVGdZZEFhdFQzQy0wd19YYVUtRXM5N3FxM0NXSkMwcUZLRkJ6dy1YUkUxczF4dzRHN1UxV3lvM2xkSm1wa2VGU2FxRDZRRHQ0RzBtaWJFRlJnQmtWQVRTbnBJNVE?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-09-14",
+        "form": "8-K",
+        "items": [
+          "7.01",
+          "8.01",
+          "9.01"
+        ],
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/1727196/000110465926107273/tm2625362d1_8k.htm"
+      },
+      "float_shares": "100.56M",
+      "short_float": "17.91%",
+      "daily_pct": 4.67,
+      "prev_close": 55.41,
+      "industry": "Biotech - Rare Disease",
+      "technical_status": "Fail (Avg $Vol $62M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 80,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Scholar Rock received FDA approval for a drug/therapy, prompting Raymond James to raise its price target on the stock.",
+        "discrepancy_note": "Source A (Finviz News) contains no information to confirm or deny the claim. Only Source B (Google News) articles [2] and [3] mention the FDA approval and Raymond James raising its price target."
+      },
+      "gates_passed": 4,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 3,
-    "large_gaps": 1,
-    "total_headlines": 16,
+    "small_gaps": 5,
+    "large_gaps": 0,
+    "total_headlines": 9,
     "monthly_cost_usd": 0.01
   }
 }
