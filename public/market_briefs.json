@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-14 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Heightened Volatility",
+    "spy_price": 760.88,
+    "spy_change_pct": -0.45,
+    "vix": 17.1,
+    "hy_oas": 2.65,
+    "yield_curve": 0.33,
+    "credit_status": "Complacent",
+    "s5fi": 41.6,
+    "mmth": 59.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft Corp. announced a major advancement in its quantum computing division, positioning it as a leader in next-generation processing capabilities."
+        },
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil Corporation surged on news of a significant offshore oil discovery, capitalizing on today's rise in crude oil prices to $101.97."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple Inc. experienced increased selling pressure today as investors reacted to persistent concerns about iPhone demand in key international markets, a recurring headline this quarter."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-14 12:55 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2140,43 +2178,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-08-24 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious / Equity Weakness",
-    "spy_price": 763.47,
-    "spy_change_pct": -0.29,
-    "vix": 15.85,
-    "hy_oas": 2.7,
-    "yield_curve": 0.5,
-    "credit_status": "Complacent",
-    "s5fi": 60.1,
-    "mmth": 74.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA shares surged following reports of robust demand for its next-generation AI accelerators, signaling continued market dominance and strong Q3 revenue projections."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla saw heavy buying interest after unveiling aggressive new production targets for its Model Y line, easing prior supply chain concerns and boosting delivery expectations."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft experienced technical profit-taking today, pulling back from recent highs after failing to sustain momentum above key resistance, without new fundamental news driving the move."
-        }
-      ]
-    }
   }
 ]
