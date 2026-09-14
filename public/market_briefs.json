@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-14 19:27 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-Off / Volatility Resurfacing",
+    "spy_price": 760.88,
+    "spy_change_pct": -0.45,
+    "vix": 17.1,
+    "hy_oas": 2.65,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 41.6,
+    "mmth": 59.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly and Company (LLY) rallied sharply after announcing positive Phase 3 trial results for its new Alzheimer's drug, exceeding expectations and boosting future revenue projections."
+        },
+        {
+          "ticker": "CAT",
+          "company": "Caterpillar Inc.",
+          "reason": "Caterpillar Inc. (CAT) demonstrated resilience today, driven by a new large-scale infrastructure contract win in a key emerging market and strong analyst upgrades based on robust global demand for heavy machinery."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Tesla Inc. (TSLA) saw persistent selling pressure today, extending its recent downtrend as technical support levels failed to hold amidst broader market declines."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-14 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2160,23 +2198,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-08-24 17:03 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "",
-    "spy_price": 763.47,
-    "spy_change_pct": -0.29,
-    "vix": 15.85,
-    "hy_oas": 2.7,
-    "yield_curve": 0.5,
-    "credit_status": "Complacent",
-    "s5fi": 60.1,
-    "mmth": 74.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
