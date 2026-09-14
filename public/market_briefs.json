@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-14 12:55 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk Appetite Fading",
+    "spy_price": 763.08,
+    "spy_change_pct": -0.16,
+    "vix": 16.75,
+    "hy_oas": 2.65,
+    "yield_curve": 0.33,
+    "credit_status": "Complacent",
+    "s5fi": 42.1,
+    "mmth": 59.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple Inc. (AAPL) surged after announcing better-than-expected initial sales figures for its new Vision Pro 2 headset in key Asian markets, signaling robust consumer demand."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft Corp. (MSFT) saw significant buying interest following reports of securing a multi-billion dollar AI infrastructure contract with a major defense contractor, bolstering its Azure cloud growth outlook."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "NVIDIA Corp. (NVDA) experienced intraday volatility driven by options expiry flow and profit-taking after recent gains, lacking any fresh fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-14 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2137,44 +2175,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corp.",
           "reason": "Microsoft experienced technical profit-taking today, pulling back from recent highs after failing to sustain momentum above key resistance, without new fundamental news driving the move."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-24 07:36 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Volatility Surges Uneasily",
-    "spy_price": 765.72,
-    "spy_change_pct": 0.41,
-    "vix": 16.04,
-    "hy_oas": 2.75,
-    "yield_curve": 0.5,
-    "credit_status": "Complacent",
-    "s5fi": 59.3,
-    "mmth": 72.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Announced groundbreaking Phase 3 clinical trial results for its new metabolic drug, demonstrating superior efficacy and driving significant buy-side interest."
-        },
-        {
-          "ticker": "PANW",
-          "company": "Palo Alto Networks Inc.",
-          "reason": "Secured a substantial new cybersecurity contract with a major government client, reinforcing its leadership in secure cloud solutions."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Sustained buying interest continues as analysts reiterate positive outlooks on its AI integration strategy and robust cloud services growth, reinforcing prior catalysts."
         }
       ]
     }
