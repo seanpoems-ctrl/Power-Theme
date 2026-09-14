@@ -1167,7 +1167,14 @@ const EtfHoldingsPopup = ({ etfTicker, holdingsData = {}, onClose }) => {
         {/* ── Table ── */}
         <div className="overflow-y-auto flex-1">
           {!holdings || holdings.length === 0 ? (
-            <div className="text-[12px] text-zinc-500 text-center py-10">No holdings data</div>
+            <div className="text-[12px] text-zinc-500 text-center py-10 px-6">
+              {NO_HOLDINGS_ETFS[etfTicker] ? (
+                <>
+                  <div className="text-zinc-400">{NO_HOLDINGS_ETFS[etfTicker]} — no company stock holdings apply</div>
+                  <div className="text-zinc-600 text-[11px] mt-1">Structural to how {etfTicker} is built, not a data gap.</div>
+                </>
+              ) : "No holdings data"}
+            </div>
           ) : (
             <table className="w-full border-collapse text-xs">
               <thead className="sticky top-0 bg-zinc-900 z-10 border-b border-zinc-800 text-zinc-500">
@@ -8912,6 +8919,33 @@ const EtfRsHistogram = ({ data = [] }) => {
 };
 
 // ── ETF Holdings Modal — blurred overlay, triggered by clicking the theme name ──
+// ETFs that structurally never have a stock holdings list — futures, physical
+// bullion, direct crypto, bonds, swap-based synthetic exposure, or private-
+// company venture funds. "Scraper populates this on the next nightly run" is
+// false for these; no future run will ever produce a list. Keep this in sync
+// with etf_master.json when a new ETF of one of these types is added.
+const NO_HOLDINGS_ETFS = {
+  GLD:  "Holds physical gold bullion",
+  SLV:  "Holds physical silver bullion",
+  PALL: "Holds physical palladium",
+  PLTM: "Holds physical platinum",
+  UX:   "Physical uranium exposure via swaps",
+  USO:  "Holds WTI crude-oil futures",
+  UNG:  "Holds Henry Hub natural-gas futures",
+  SOLZ: "Solana futures exposure",
+  XRPI: "XRP futures exposure",
+  SVIX: "Inverse VIX futures exposure",
+  IBIT: "Holds Bitcoin directly",
+  GBTC: "Holds Bitcoin directly",
+  ETHA: "Holds Ether directly",
+  BITW: "Diversified basket of cryptocurrencies",
+  TLT:  "Holds U.S. Treasury bonds",
+  WEED: "Synthetic exposure via swaps, not direct ownership",
+  DXYZ: "Closed-end fund holding private companies",
+  VCX:  "Closed-end fund holding private companies",
+  NASA: "Mix of public and pre-IPO companies",
+};
+
 const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etfRsMap = {} }) => {
   const [sortCol, setSortCol] = useState("perf_1d");
   const [sortDir, setSortDir] = useState("desc");
@@ -9010,8 +9044,15 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
         {/* Table */}
         <div className="overflow-auto flex-1">
           {sorted.length === 0 ? (
-            <div className="py-16 text-center text-zinc-600 text-sm">
-              No holdings data — scraper populates this on the next nightly run
+            <div className="py-16 text-center text-zinc-600 text-sm px-6">
+              {NO_HOLDINGS_ETFS[etf] ? (
+                <>
+                  <div className="text-zinc-400">{NO_HOLDINGS_ETFS[etf]} — no company stock holdings apply</div>
+                  <div className="text-zinc-600 text-xs mt-1">This won't change on future scrapes; it's structural to how {etf} is built, not a data gap.</div>
+                </>
+              ) : (
+                "No holdings data — scraper populates this on the next nightly run"
+              )}
             </div>
           ) : (
             <table className="w-full text-xs border-collapse">
