@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-14 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Volatile US Strength / Divergent Signals",
+    "spy_price": 764.29,
+    "spy_change_pct": 0.85,
+    "vix": 17.64,
+    "hy_oas": 2.7,
+    "yield_curve": 0.33,
+    "credit_status": "Complacent",
+    "s5fi": 44.0,
+    "mmth": 60.5,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil is set for a strong session as crude oil surges over 2.39%, driven by renewed global demand forecasts and tight supply, boosting its profitability outlook."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA announces a significant breakthrough in AI data center efficiency and next-gen chip architecture, leading to analyst upgrades and fresh institutional buying interest."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla continues to attract speculative interest based on technical support levels and high retail flow, but lacks a fresh, specific fundamental catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-11 18:47 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2137,44 +2175,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Sustained buying interest continues as analysts reiterate positive outlooks on its AI integration strategy and robust cloud services growth, reinforcing prior catalysts."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-24 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Optimism / Volatility Spike",
-    "spy_price": 765.72,
-    "spy_change_pct": 0.41,
-    "vix": 15.94,
-    "hy_oas": 2.75,
-    "yield_curve": 0.5,
-    "credit_status": "Complacent",
-    "s5fi": 59.3,
-    "mmth": 72.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a new generative AI partnership with a major enterprise client, boosting sentiment for its cloud services growth outlook."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase received approval for a significant expansion into a new international market, signaling strong growth initiatives."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMC",
-          "company": "AMC Entertainment Holdings Inc.",
-          "reason": "AMC Entertainment is seeing renewed retail interest following a multi-week consolidation pattern, driven by social media buzz."
         }
       ]
     }
