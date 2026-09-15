@@ -9142,8 +9142,8 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
 
   const Th = ({ col, label, align = "right" }) => (
     <th onClick={() => handleSort(col)}
-        className={`px-3 py-2.5 font-semibold whitespace-nowrap cursor-pointer hover:text-zinc-100 select-none
-          text-zinc-400 text-[11px] uppercase tracking-wide
+        className={`px-2 py-2.5 font-semibold cursor-pointer hover:text-zinc-100 select-none
+          text-zinc-400 text-[11px] uppercase tracking-wide leading-tight
           ${align === "left" ? "text-left" : "text-right"}`}>
       {label}
       {sortCol === col
@@ -9173,7 +9173,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-16 px-4 pb-8"
          style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }}
          onClick={onClose}>
-      <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-4xl flex flex-col max-h-[80vh]"
+      <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-[1320px] flex flex-col max-h-[80vh]"
            onClick={e => e.stopPropagation()}>
 
         {/* Title bar — matches screenshot 2 */}
@@ -9188,8 +9188,10 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
           </button>
         </div>
 
-        {/* Table */}
-        <div className="overflow-auto flex-1">
+        {/* Table — fixed layout with % column widths so it always fits the
+            modal's width with no horizontal scroll, however many perf
+            columns are shown; only vertical scroll is needed for long lists. */}
+        <div className="overflow-y-auto overflow-x-hidden flex-1">
           {sorted.length === 0 ? (
             <div className="py-16 text-center text-zinc-600 text-sm px-6">
               {NO_HOLDINGS_ETFS[etf] ? (
@@ -9202,10 +9204,27 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
               )}
             </div>
           ) : (
-            <table className="w-full text-xs border-collapse">
+            <table className="w-full text-xs border-collapse table-fixed">
+              <colgroup>
+                <col style={{ width: "3%" }} />
+                <col style={{ width: "6%" }} />
+                <col style={{ width: "17%" }} />
+                <col style={{ width: "7%" }} />
+                <col style={{ width: "7%" }} />
+                <col style={{ width: "6%" }} />
+                <col style={{ width: "5%" }} />
+                <col style={{ width: "7%" }} />
+                <col style={{ width: "6%" }} />
+                <col style={{ width: "6%" }} />
+                <col style={{ width: "6%" }} />
+                <col style={{ width: "6%" }} />
+                <col style={{ width: "6%" }} />
+                <col style={{ width: "6%" }} />
+                <col style={{ width: "6%" }} />
+              </colgroup>
               <thead className="sticky top-0 bg-zinc-900 border-b border-zinc-700">
                 <tr>
-                  <th className="px-3 py-2.5 text-left text-zinc-500 font-semibold text-[11px] w-8">#</th>
+                  <th className="px-2 py-2.5 text-left text-zinc-500 font-semibold text-[11px]">#</th>
                   <Th col="ticker"        label="Ticker"    align="left" />
                   <Th col="name"          label="Company"   align="left" />
                   <Th col="mkt_cap"       label="Mkt Cap"               />
@@ -9213,7 +9232,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
                   <Th col="adr_pct"       label="ADR%"                   />
                   <Th col="rs"            label="RS"                     />
                   <Th col="perf_intraday" label="% Intraday"             />
-                  <Th col="perf_1d"       label="1D Change%"             />
+                  <Th col="perf_1d"       label="1D"                     />
                   <Th col="perf_1w"       label="1W"                     />
                   <Th col="perf_1m"       label="1M"                     />
                   <Th col="perf_3m"       label="3M"                     />
@@ -9226,29 +9245,29 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
                 {sorted.map((h, i) => (
                   <tr key={`${h.ticker}-${i}`}
                       className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors ${i % 2 === 0 ? "" : "bg-zinc-900/40"}`}>
-                    <td className="px-3 py-2 text-zinc-600 text-[11px]">{i + 1}</td>
-                    <td className="px-3 py-2">
+                    <td className="px-2 py-2 text-zinc-600 text-[11px]">{i + 1}</td>
+                    <td className="px-2 py-2 truncate">
                       <a href={`https://finviz.com/quote.ashx?t=${h.ticker}`} target="_blank" rel="noreferrer"
                          onClick={e => e.stopPropagation()}
                          className="font-mono font-bold text-cyan-400 hover:underline">{h.ticker}</a>
                     </td>
-                    <td className="px-3 py-2 text-zinc-300 max-w-[200px] truncate">{h.name || "—"}</td>
-                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmt(h.mkt_cap)}</td>
-                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{fmt(h.dollar_volume)}</td>
-                    <td className="px-3 py-2 text-right font-mono text-zinc-400">{h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : "—"}</td>
-                    <td className="px-3 py-2 text-right font-mono">
+                    <td className="px-2 py-2 text-zinc-300 truncate">{h.name || "—"}</td>
+                    <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate">{fmt(h.mkt_cap)}</td>
+                    <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate">{fmt(h.dollar_volume)}</td>
+                    <td className="px-2 py-2 text-right font-mono text-zinc-400 truncate">{h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : "—"}</td>
+                    <td className="px-2 py-2 text-right font-mono">
                       {h.rs != null
                         ? <span className={h.rs >= 80 ? "text-emerald-400 font-bold" : h.rs >= 60 ? "text-zinc-200" : "text-zinc-500"}>{h.rs}</span>
                         : <span className="text-zinc-600">—</span>}
                     </td>
-                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_intraday)}</td>
-                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_1d)}</td>
-                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_1w)}</td>
-                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_1m)}</td>
-                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_3m)}</td>
-                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_6m)}</td>
-                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_ytd)}</td>
-                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_1y)}</td>
+                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_intraday)}</td>
+                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_1d)}</td>
+                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_1w)}</td>
+                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_1m)}</td>
+                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_3m)}</td>
+                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_6m)}</td>
+                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_ytd)}</td>
+                    <td className="px-2 py-2 text-right font-mono truncate">{p1dCell(h.perf_1y)}</td>
                   </tr>
                 ))}
               </tbody>
