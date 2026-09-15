@@ -431,7 +431,7 @@ Each bullet: label + em-dash + 2 concise sentences with specific numbers.
 TODAY — (today's up4/dn4 absolute counts and ratio; note any threshold crossing per the colour rules above)
 WEEK — (5-day trend in the ratio and up25M or up13_34d; is breadth improving, steady, or fading?)
 MONTH — (up50M froth level, % above 50dma zone, T2108 reading; what it means for swing traders)
-REGIME — (one-word regime label + what Stockbee would watch as the next leading signal)"""
+REGIME — (one-word regime label + the next leading signal to watch for)"""
 
     # Ordered fallback chain: try each model in sequence until one works.
     MODELS = [

@@ -316,7 +316,7 @@ Each bullet: bold ALL-CAPS label + em-dash + 2 concise sentences with specific n
 **TODAY** — (today's up4/dn4 absolute counts and ratio; note any threshold crossing per the colour rules above)
 **WEEK** — (5-day trend in the ratio and up25M or up13_34d; is breadth improving, steady, or fading?)
 **MONTH** — (up50M froth level, % above 50dma zone, T2108 reading; what it means for swing traders)
-**REGIME** — (one-word regime label + what Stockbee would watch as the next leading signal)`;
+**REGIME** — (one-word regime label + the next leading signal to watch for)`;
 
   const url  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GEMINI_KEY}`;
   const body = {
@@ -433,7 +433,7 @@ const GeminiBreadthRead = memo(function GeminiBreadthRead({ rows, precomputedAna
       <div className="flex items-center gap-2 mb-2.5">
         <Sparkles className="h-3.5 w-3.5 text-violet-400 flex-shrink-0" />
         <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-wider">
-          Gemini · Stockbee Breadth Read
+          Gemini · Breadth Read
         </span>
         {loading && <RefreshCw size={10} className="text-zinc-500 animate-spin ml-1" />}
         <button
@@ -611,7 +611,7 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-[1040px] border-collapse text-left">
-        <caption className="sr-only">Stockbee Market Monitor breadth history.</caption>
+        <caption className="sr-only">Market Monitor breadth history.</caption>
         <thead>
           {/* ── Row 1: group headers ────────────────────────────── */}
           <tr>
@@ -1003,7 +1003,7 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
         <div className="flex items-center gap-2">
           <BarChart3 className="h-4 w-4 text-emerald-400" />
           <div>
-            <h3 className="text-sm font-semibold text-slate-100">Stockbee Market Monitor</h3>
+            <h3 className="text-sm font-semibold text-slate-100">Market Monitor</h3>
             <p className="text-xs text-slate-500">
               Sheet {data.sheet_year ?? "—"} ·{" "}
               {data.fetched_at_utc
@@ -1021,7 +1021,7 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
               rel="noopener noreferrer"
               className="flex items-center gap-1 text-xs text-slate-500 hover:text-emerald-400"
             >
-              stockbee MM <ExternalLink className="h-3 w-3" />
+              Source <ExternalLink className="h-3 w-3" />
             </a>
           )}
           <button
@@ -1088,7 +1088,7 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
       {/* Footer note */}
       <div className="border-t border-gray-800 px-4 py-2">
         <p className="text-xs text-slate-600">
-          Data from Stockbee Market Monitor spreadsheet. Refreshed daily after market close.
+          Data from the Market Monitor spreadsheet. Refreshed daily after market close.
           Click any cell to drill into individual stocks for that day.
           Historical data is archived starting from the next trading day after this update.
         </p>

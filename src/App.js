@@ -3068,7 +3068,7 @@ const CHECKLIST_SECTIONS = [
           "🟡 Yellow → half size, A/A+ grades only, stock must be above its own SMA20 + SMA50",
           "VIX ≥ 24 → halve all position sizes regardless of signal (expected move shown on Market Pulse)",
           "Breadth tab: %Above SMA50 trend, A/D, NH−NL — price up but breadth down = divergence → size down 50%",
-          "Stockbee panel: 5-day ratio ≥ 1.5 confirms bull momentum; below 1.0 = thrust unconfirmed, stay selective",
+          "Market Monitor panel: 5-day ratio ≥ 1.5 confirms bull momentum; below 1.0 = thrust unconfirmed, stay selective",
         ],
       },
       {
@@ -3145,7 +3145,7 @@ const CHECKLIST_SECTIONS = [
         items: [
           "Only run this routine when Market Pulse signal is 🔴 Red — shorting in a Yellow/Green tape fights the trend",
           "Breadth tab: %Above SMA50 falling and A/D net negative multiple days running — confirms broad distribution, not one bad day",
-          "Stockbee 5-day ratio < 0.7 = real downside thrust; 0.7–1.0 = choppy, size down further or skip",
+          "5-day ratio < 0.7 = real downside thrust; 0.7–1.0 = choppy, size down further or skip",
           "VIX ≥ 24 → size shorts down too, not just longs — bear-market rallies squeeze hard and fast",
         ],
       },
