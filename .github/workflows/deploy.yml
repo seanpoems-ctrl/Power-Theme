@@ -1,6 +1,8 @@
 name: Deploy to GitHub Pages
 on:
-  workflow_dispatch: {}   # manual "force redeploy" escape hatch
+  workflow_dispatch: {}   # manual "force redeploy" escape hatch — use this if a push
+                           # ever lands on main but no run appears (seen once, 2026-09-15,
+                           # push-trigger delivery stalled; workflow_dispatch ran fine)
   push:
     branches: [ main ]
     paths-ignore:
