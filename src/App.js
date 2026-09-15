@@ -9104,8 +9104,11 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
       if (!sc) return h;
       return {
         ...h,
+        perf_intraday: sc.perf_intraday ?? h.perf_intraday,
         perf_1d: sc.perf_1d ?? h.perf_1d, perf_1w: sc.perf_1w ?? h.perf_1w, perf_1m: sc.perf_1m ?? h.perf_1m,
         perf_3m: sc.perf_3m ?? h.perf_3m, perf_6m: sc.perf_6m ?? h.perf_6m,
+        perf_ytd: sc.perf_ytd ?? h.perf_ytd,
+        perf_1y: sc.perf_1y ?? sc.perf_12m ?? h.perf_1y,
         adr_pct: h.adr_pct ?? sc.adr_pct,
         rs: h.rs ?? sc.rs_score ?? sc.rs_52w,
         mkt_cap: h.mkt_cap ?? (
@@ -9209,7 +9212,14 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
                   <Th col="dollar_volume" label="$ Vol"                  />
                   <Th col="adr_pct"       label="ADR%"                   />
                   <Th col="rs"            label="RS"                     />
+                  <Th col="perf_intraday" label="% Intraday"             />
                   <Th col="perf_1d"       label="1D Change%"             />
+                  <Th col="perf_1w"       label="1W"                     />
+                  <Th col="perf_1m"       label="1M"                     />
+                  <Th col="perf_3m"       label="3M"                     />
+                  <Th col="perf_6m"       label="6M"                     />
+                  <Th col="perf_ytd"      label="YTD"                    />
+                  <Th col="perf_1y"       label="1Y"                     />
                 </tr>
               </thead>
               <tbody>
@@ -9231,7 +9241,14 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
                         ? <span className={h.rs >= 80 ? "text-emerald-400 font-bold" : h.rs >= 60 ? "text-zinc-200" : "text-zinc-500"}>{h.rs}</span>
                         : <span className="text-zinc-600">—</span>}
                     </td>
+                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_intraday)}</td>
                     <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_1d)}</td>
+                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_1w)}</td>
+                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_1m)}</td>
+                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_3m)}</td>
+                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_6m)}</td>
+                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_ytd)}</td>
+                    <td className="px-3 py-2 text-right font-mono">{p1dCell(h.perf_1y)}</td>
                   </tr>
                 ))}
               </tbody>

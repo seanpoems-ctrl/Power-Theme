@@ -9,8 +9,9 @@ ADR% × Avg$Vol (daily dollar volatility = institutional hot-money signal).
 Universe: all NYSE/NASDAQ stocks, mkt cap ≥ $1B, avg daily vol ≥ 500K shares,
           price ≥ $5, not ETF/fund.
 
-Performance fields (perf_1d/1w/1m/3m/6m/1y) come directly from TradingView
-rolling fields: change / Perf.W / Perf.1M / Perf.3M / Perf.6M / Perf.Y.
+Performance fields (perf_1d/1w/1m/3m/6m/ytd/1y) come directly from TradingView
+rolling fields: change / Perf.W / Perf.1M / Perf.3M / Perf.6M / Perf.YTD / Perf.Y.
+perf_intraday (close vs today's own open) is computed locally from open/close.
 NaN guards applied throughout to handle thinly-traded tickers gracefully.
 
 Output: public/screener_stocks.json
@@ -61,10 +62,12 @@ FIELDS = [
     "price_52_week_high",       # 52W high
     "price_52_week_low",        # 52W low
     "ATR",                      # Average True Range (14-day)
+    "open",                     # today's open — for % intraday (close vs own open)
     "Perf.W",                   # 1W performance %
     "Perf.1M",                  # 1M performance %
     "Perf.3M",                  # 3M performance %
     "Perf.6M",                  # 6M performance %
+    "Perf.YTD",                 # YTD performance %
     "Perf.Y",                   # 1Y performance %
     "Relative.Volume",          # relative volume vs avg
 ]
@@ -197,6 +200,14 @@ def build_screener() -> list[dict]:
             if rng > 0:
                 pct_52w = round(min(100, max(0, (float(price) - float(lo52)) / rng * 100)), 1)
 
+        # % Intraday — today's close vs today's own open (distinct from perf_1d,
+        # which is close vs *prior day's* close and absorbs any overnight gap)
+        open_px = row.get("open")
+        try:
+            perf_intraday = round((float(price) / float(open_px) - 1) * 100, 2) if open_px and price and math.isfinite(float(open_px)) else None
+        except (TypeError, ValueError):
+            perf_intraday = None
+
         # Relative volume
         rvol = row.get("Relative.Volume")
 
@@ -218,11 +229,13 @@ def build_screener() -> list[dict]:
             "week52_high":         _f(hi52),
             "week52_low":          _f(lo52),
             "pct_52w_range":       pct_52w,
+            "perf_intraday":       perf_intraday,
             "perf_1d":             _f(row.get("change")),
             "perf_1w":             _f(row.get("Perf.W")),
             "perf_1m":             _f(row.get("Perf.1M")),
             "perf_3m":             _f(row.get("Perf.3M")),
             "perf_6m":             _f(row.get("Perf.6M")),
+            "perf_ytd":            _f(row.get("Perf.YTD")),
             "perf_1y":             _f(row.get("Perf.Y")),
             "rvol":                _f(rvol),
             "ss_etfs":             ss_etfs,   # single-stock ETF tickers (enriched below)
