@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-15 19:10 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Equity Weakness, Commodity Strength",
+    "spy_price": 757.39,
+    "spy_change_pct": -0.46,
+    "vix": 17.2,
+    "hy_oas": 2.71,
+    "yield_curve": 0.33,
+    "credit_status": "Complacent",
+    "s5fi": 38.1,
+    "mmth": 56.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "FPS",
+          "company": "First Solar, Inc.",
+          "reason": "The company reported stronger-than-expected Q3 earnings and raised its full-year guidance, driven by robust demand for solar energy solutions."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a significant new AI partnership and unveiled a suite of enterprise solutions, driving positive sentiment around future revenue streams."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla experienced significant intraday volatility driven by technical trading flows rather than new fundamental catalysts today, continuing recent trends."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-15 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "NVDA",
           "company": "Nvidia Corporation",
           "reason": "Nvidia is seeing renewed interest based on sector rotation into high-beta tech, despite no fresh company-specific news today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-25 17:00 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Equities Rally, Volatility Subsides",
-    "spy_price": 765.91,
-    "spy_change_pct": 0.32,
-    "vix": 15.45,
-    "hy_oas": 2.69,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 59.8,
-    "mmth": 74.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CRM",
-          "company": "Salesforce, Inc.",
-          "reason": "Salesforce announced a new strategic partnership with a major enterprise client, significantly expanding its cloud service offerings and boosting long-term revenue projections."
-        },
-        {
-          "ticker": "ELV",
-          "company": "Elevance Health, Inc.",
-          "reason": "Elevance Health raised its full-year profit forecast, citing strong enrollment growth and better-than-anticipated medical cost management across its health plans."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla rallied on continued speculation surrounding its next-generation battery technology, a narrative that has been in circulation for several days without fresh official announcements."
         }
       ]
     }
