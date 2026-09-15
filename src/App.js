@@ -9604,7 +9604,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
               <th className="px-2 py-1.5 text-left w-7">#</th>
               <CatTh col="cat" label="Category" align="left" />
               <CatTh col="score" label="Category Score (median)" align="left" className="w-[28%]" />
-              <CatTh col="perf_intraday" label="Open" />
+              <CatTh col="perf_intraday" label="% Intraday" />
               <CatTh col="perf_1d" label="1D" />
               <CatTh col="perf_1w" label="1W" />
               <CatTh col="perf_1m" label="1M" />
