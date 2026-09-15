@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-15 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off Tendencies",
+    "spy_price": 760.88,
+    "spy_change_pct": -0.45,
+    "vix": 17.2,
+    "hy_oas": 2.65,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 41.6,
+    "mmth": 59.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly's new Alzheimer's drug has reportedly received accelerated approval from the FDA, opening up a significant new market opportunity."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a groundbreaking partnership to integrate its generative AI capabilities across a major automotive manufacturer's entire vehicle lineup, boosting its cloud and AI revenue projections."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla continues to exhibit volatility driven by ongoing retail speculative interest and technical levels, lacking fresh fundamental news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-14 19:27 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "AMC",
           "company": "AMC Entertainment Holdings, Inc.",
           "reason": "AMC Entertainment Holdings (AMC) remains a speculative play, primarily influenced by ongoing retail investor sentiment and technical chart patterns rather than new fundamental catalysts."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-25 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Divergent Flows, Oil Pressure",
-    "spy_price": 763.47,
-    "spy_change_pct": -0.29,
-    "vix": 15.83,
-    "hy_oas": 2.7,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 60.1,
-    "mmth": 74.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet announces a groundbreaking AI partnership with a major automotive manufacturer, significantly expanding its autonomous driving division and potential market reach."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon is reportedly exploring a strategic acquisition in the healthcare tech sector, aiming to integrate AI-powered diagnostics into its Amazon Pharmacy unit."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Continued volatility following recent production guidance revisions, attracting short-term speculative interest on pure technical momentum."
         }
       ]
     }
