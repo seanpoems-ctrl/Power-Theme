@@ -82,6 +82,16 @@ def last_trading_date(d: date | None = None) -> date:
         return d
 
 
+def _last_completed_session(now_et: datetime) -> date:
+    """Most recent NYSE session whose regular-hours close (4:00 PM ET) has
+    already happened, as of `now_et`. Used to pin index/futures readings to
+    an actual finalized close instead of a still-forming bar."""
+    d = now_et.date()
+    if now_et.hour >= 16 and is_trading_day(d):
+        return d
+    return last_trading_date(d)
+
+
 def parse_pct(s: str) -> float | None:
     if not s or s == "-":
         return None
@@ -1185,11 +1195,25 @@ def _fetch_tradingview_index_snapshot(tv_symbol: str, scan_url: str = _TV_SCAN_U
 
 
 def _fetch_market_indicators_yfinance(ticker: str, breadth: float | None = None) -> dict:
-    """Legacy path: 1y daily history from yfinance (SMA200 slope + EMA cross persistence)."""
+    """1y daily history from yfinance, pinned to the last FINALIZED NYSE
+    session's close (SMA200 slope + EMA cross persistence).
+
+    Continuous futures tickers (ES=F/NQ=F/RTY=F) trade almost 24h — Yahoo
+    starts printing the next session's row as soon as evening trading
+    resumes, so the newest row in the history can be a still-forming bar
+    reflecting after-hours drift rather than an actual close. Any bar dated
+    after the last completed NYSE session is dropped before computing price/
+    EMA/SMA so this always reflects the true close, regardless of what time
+    of day (or how many hours into an after-close scrape) this runs.
+    """
     try:
         import yfinance as yf
 
         hist = yf.Ticker(ticker).history(period="1y", interval="1d")
+        if hist.empty or len(hist) < 50:
+            return {}
+        target = _last_completed_session(datetime.now(ZoneInfo("America/New_York")))
+        hist = hist[hist.index.date <= target]
         if hist.empty or len(hist) < 50:
             return {}
         closes = [float(c) for c in hist["Close"].tolist()]
@@ -1234,9 +1258,33 @@ def _fetch_market_indicators_yfinance(ticker: str, breadth: float | None = None)
         return {}
 
 
+# Continuous futures tickers (Yahoo Finance) used to pin the market-regime
+# read to the last FINALIZED daily close — see _fetch_market_indicators_yfinance.
+_YF_FUTURES_TICKER = {
+    "SPY": "ES=F",   # E-mini S&P 500
+    "QQQ": "NQ=F",   # E-mini Nasdaq-100
+    "IWM": "RTY=F",  # E-mini Russell 2000
+}
+
+
 def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
-    """Index ETF metrics + Elite Regime. Primary: TradingView scanner; fallback: yfinance."""
+    """Index futures metrics + Elite Regime, pinned to the last finalized close.
+
+    Primary: yfinance daily bar for the continuous futures contract (immune to
+    when in the day this runs — the scraper can finish hours after the cash
+    close, and a live snapshot would leak after-hours/overnight drift into
+    what's supposed to be "today's close" reading). Falls back to TradingView's
+    live scanner only if yfinance is unavailable.
+    """
     sym = (ticker or "").upper()
+    yf_ticker = _YF_FUTURES_TICKER.get(sym, sym)
+    primary = _fetch_market_indicators_yfinance(yf_ticker, breadth)
+    if primary:
+        logger.info(f"  {sym} market indicators (yfinance {yf_ticker}, finalized close): "
+                    f"price={primary['price']} chg={primary['change_pct']}%")
+        return primary
+
+    logger.warning(f"  {sym} yfinance indicators unavailable — falling back to TradingView live scanner")
     tv_entry = _TV_INDEX_SYMBOL.get(sym)
     if tv_entry:
         tv_sym, scan_url = tv_entry
@@ -1271,6 +1319,8 @@ def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
                 "price_above_ema50": bool(price > ema50) if price and ema50 else None,
                 "price_above_ema200": bool(price > ema200) if price and ema200 else None,
             }
+    # Last resort: yfinance on the actual ETF ticker (e.g. "SPY") rather than
+    # its futures proxy, if both paths above failed.
     return _fetch_market_indicators_yfinance(ticker, breadth)
 
 
