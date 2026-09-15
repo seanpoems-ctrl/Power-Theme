@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-15 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious with Inflationary Pressure",
+    "spy_price": 757.39,
+    "spy_change_pct": -0.46,
+    "vix": 17.2,
+    "hy_oas": 2.71,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 38.3,
+    "mmth": 56.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "FPS",
+          "company": "First Payment Solutions",
+          "reason": "First Payment Solutions surged following its Q3 earnings release, which handily beat analyst estimates and featured an upward revision to its annual revenue forecast, signaling strong business momentum."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet Inc. showed strength today after announcing a strategic partnership to integrate its AI platforms with a major automotive manufacturer, projecting significant new revenue streams."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft Corp. experienced modest profit-taking after its recent rally, with no new fundamental catalyst beyond ongoing market interest in its cloud and AI initiatives."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-15 11:31 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla rallied on continued speculation surrounding its next-generation battery technology, a narrative that has been in circulation for several days without fresh official announcements."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-25 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Tech-Led Optimism / Risk Appetite",
-    "spy_price": 765.91,
-    "spy_change_pct": 0.32,
-    "vix": 15.45,
-    "hy_oas": 2.69,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 59.8,
-    "mmth": 74.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA shares surged after the company unveiled its next-generation 'Orion' AI processing unit at an industry conference, promising significant performance gains for large language models and data centers."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly saw strong buying interest following the release of compelling Phase 3 trial data for its novel GLP-1/GIP receptor agonist in treating severe obesity, significantly outperforming placebo."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla experienced volatile trading driven by pure technical momentum and algorithmic activity, retesting a key support level without any new fundamental company-specific news."
         }
       ]
     }
