@@ -9500,23 +9500,30 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
       (byCat[c] ||= []).push(e);
     }
     const rows = Object.entries(byCat).map(([cat, members]) => {
-      const score   = median(members.map(m => m.score));
-      const perf_1w = median(members.map(m => m.perf_1w));
-      const perf_1m = median(members.map(m => m.perf_1m));
-      const perf_3m = median(members.map(m => m.perf_3m));
+      const score        = median(members.map(m => m.score));
+      const perf_intraday = median(members.map(m => m.perf_intraday));
+      const perf_1d       = median(members.map(m => m.perf_1d));
+      const perf_1w       = median(members.map(m => m.perf_1w));
+      const perf_1m       = median(members.map(m => m.perf_1m));
+      const perf_3m       = median(members.map(m => m.perf_3m));
+      const perf_6m       = median(members.map(m => m.perf_6m));
+      const perf_ytd       = median(members.map(m => m.perf_ytd));
+      const perf_1y        = median(members.map(m => m.perf_12m ?? m.perf_1y));
       // Leader = highest-scoring member
       const leader = [...members].filter(m => m.score != null)
         .sort((a, b) => (b.score ?? 0) - (a.score ?? 0))[0] || null;
       // Anchor (pure-sector benchmark) for this category — boosters share it
       const anchorTicker = members.find(m => m.anchor_ticker)?.anchor_ticker || null;
       const anchorRow = anchorTicker ? etfRsMap[anchorTicker] : null;
-      // Active flips in this category
+      // Active flips in this category — keep tickers, not just the count, so
+      // the leaderboard can name which ETF flipped rather than just "⚡3".
       const flips = members.filter(m => m.rs_flip_signal);
       return {
-        cat, members, score, perf_1w, perf_1m, perf_3m, leader,
+        cat, members, score, perf_intraday, perf_1d, perf_1w, perf_1m, perf_3m, perf_6m, perf_ytd, perf_1y, leader,
         anchorTicker, anchorPerf1m: anchorRow?.perf_1m ?? null,
         leaderScore: leader?.score ?? null,
         flips: flips.length,
+        flipTickers: flips.map(m => m.ticker),
         count: members.length,
       };
     });
@@ -9597,9 +9604,14 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
               <th className="px-2 py-1.5 text-left w-7">#</th>
               <CatTh col="cat" label="Category" align="left" />
               <CatTh col="score" label="Category Score (median)" align="left" className="w-[28%]" />
+              <CatTh col="perf_intraday" label="Open" />
+              <CatTh col="perf_1d" label="1D" />
               <CatTh col="perf_1w" label="1W" />
               <CatTh col="perf_1m" label="1M" />
               <CatTh col="perf_3m" label="3M" />
+              <CatTh col="perf_6m" label="6M" />
+              <CatTh col="perf_ytd" label="YTD" />
+              <CatTh col="perf_1y" label="1Y" />
               <CatTh col="leaderScore" label="Leader" align="left" />
               <CatTh col="anchorTicker" label="Anchor" align="left" />
               <CatTh col="flips" label="Flips" className="text-center" />
@@ -9662,9 +9674,14 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
                     </span>
                   </div>
                 </td>
+                <td className={`px-2 py-1.5 text-right font-mono ${pctColor(c.perf_intraday)}`}>{fmtP(c.perf_intraday)}</td>
+                <td className={`px-2 py-1.5 text-right font-mono ${pctColor(c.perf_1d)}`}>{fmtP(c.perf_1d)}</td>
                 <td className={`px-2 py-1.5 text-right font-mono ${pctColor(c.perf_1w)}`}>{fmtP(c.perf_1w)}</td>
                 <td className={`px-2 py-1.5 text-right font-mono ${pctColor(c.perf_1m)}`}>{fmtP(c.perf_1m)}</td>
                 <td className={`px-2 py-1.5 text-right font-mono ${pctColor(c.perf_3m)}`}>{fmtP(c.perf_3m)}</td>
+                <td className={`px-2 py-1.5 text-right font-mono ${pctColor(c.perf_6m)}`}>{fmtP(c.perf_6m)}</td>
+                <td className={`px-2 py-1.5 text-right font-mono ${pctColor(c.perf_ytd)}`}>{fmtP(c.perf_ytd)}</td>
+                <td className={`px-2 py-1.5 text-right font-mono ${pctColor(c.perf_1y)}`}>{fmtP(c.perf_1y)}</td>
                 {/* Leader — clickable to holdings */}
                 <td className="px-2 py-1.5">
                   {c.leader ? (
@@ -9683,16 +9700,23 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
                     <span className={`ml-1 ${pctColor(c.anchorPerf1m)}`}>{fmtP(c.anchorPerf1m)}</span>
                   )}
                 </td>
-                {/* Flips */}
+                {/* Flips — name the ETF(s), not just a count */}
                 <td className="px-2 py-1.5 text-center">
                   {c.flips > 0
-                    ? <span className="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">⚡{c.flips}</span>
+                    ? (
+                      <span
+                        title={c.flipTickers.join(", ")}
+                        className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 font-mono">
+                        ⚡{c.flipTickers.slice(0, 2).join(", ")}
+                        {c.flipTickers.length > 2 && ` +${c.flipTickers.length - 2}`}
+                      </span>
+                    )
                     : <span className="text-zinc-700">·</span>}
                 </td>
               </tr>
               {isExpanded && (
                 <tr className="border-b border-zinc-800/60 bg-zinc-950/40">
-                  <td colSpan={9} className="px-4 py-2.5">
+                  <td colSpan={14} className="px-4 py-2.5">
                     <div className="flex items-center justify-between mb-1.5">
                       <span className="text-[10px] font-semibold text-zinc-500 uppercase tracking-wide">
                         Top movers in {c.cat} · click any column to sort
