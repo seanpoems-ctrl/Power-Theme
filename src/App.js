@@ -9632,7 +9632,8 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
                 });
               const shown = movers.slice(0, 10);
               const maxAbs = key => Math.max(1, ...shown.map(m => Math.abs(m[key] ?? 0)));
-              const maxDay = maxAbs("perf_1d"), max5d = maxAbs("perf_1w"),
+              const maxIntraday = maxAbs("perf_intraday"),
+                    maxDay = maxAbs("perf_1d"), max5d = maxAbs("perf_1w"),
                     maxOff = maxAbs("pct_off_52wh"), maxYr = maxAbs("perf_ytd");
               return (
               <React.Fragment key={c.cat}>
@@ -9730,6 +9731,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
                         <tr className="text-zinc-600 text-[9px] uppercase tracking-wide">
                           {[
                             { col: "ticker",        label: "Ticker" },
+                            { col: "perf_intraday", label: "% Intraday" },
                             { col: "perf_1d",       label: "% Daily" },
                             { col: "perf_1w",       label: "% P5D" },
                             { col: "pct_off_52wh",  label: "% Off 52W High" },
@@ -9756,6 +9758,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
                               </button>
                               <span className="ml-1.5 text-zinc-500">{m.label ?? m.theme}</span>
                             </td>
+                            <td className="px-2 py-1 w-32"><BarCell value={m.perf_intraday} max={maxIntraday}/></td>
                             <td className="px-2 py-1 w-32"><BarCell value={m.perf_1d} max={maxDay}/></td>
                             <td className="px-2 py-1 w-32"><BarCell value={m.perf_1w} max={max5d}/></td>
                             <td className="px-2 py-1 w-32"><BarCell value={m.pct_off_52wh} max={maxOff}/></td>
