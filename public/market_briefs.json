@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-15 11:31 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off, Volatility Rises",
+    "spy_price": 757.28,
+    "spy_change_pct": -0.47,
+    "vix": 17.8,
+    "hy_oas": 2.71,
+    "yield_curve": 0.32,
+    "credit_status": "Complacent",
+    "s5fi": 38.2,
+    "mmth": 56.4,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "FPS",
+          "company": "First Page Solutions Inc.",
+          "reason": "The company reported a significant earnings beat and raised its full-year guidance, indicating strong operational performance and positive future outlook."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Reports indicate Amazon is aggressively expanding its cloud computing division with a new major government contract, signaling robust growth in its high-margin segments."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Trading on a recycled headline regarding ongoing enterprise AI integration talks, lacking a fresh catalyst but showing consistent technical flow."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-15 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla experienced volatile trading driven by pure technical momentum and algorithmic activity, retesting a key support level without any new fundamental company-specific news."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-25 07:35 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Mixed Signals, Divergent Flows",
-    "spy_price": 763.47,
-    "spy_change_pct": -0.29,
-    "vix": 15.8,
-    "hy_oas": 2.7,
-    "yield_curve": 0.46,
-    "credit_status": "Complacent",
-    "s5fi": 60.1,
-    "mmth": 74.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly (LLY) is set for a strong open after announcing overwhelmingly positive Phase 3 trial results for its groundbreaking metabolic syndrome drug, expanding its already robust pipeline."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) is showing strength on news of a major new partnership with a leading cloud provider to deploy next-generation AI infrastructure, solidifying its market dominance."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMC",
-          "company": "AMC Entertainment Holdings, Inc.",
-          "reason": "AMC Entertainment Holdings (AMC) remains a speculative play, primarily influenced by ongoing retail investor sentiment and technical chart patterns rather than new fundamental catalysts."
         }
       ]
     }
