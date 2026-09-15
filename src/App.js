@@ -9231,7 +9231,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
                   <Th col="dollar_volume" label="$ Vol"                  />
                   <Th col="adr_pct"       label="ADR%"                   />
                   <Th col="rs"            label="RS"                     />
-                  <Th col="perf_intraday" label="% Intraday"             />
+                  <Th col="perf_intraday" label="Intraday"                />
                   <Th col="perf_1d"       label="1D"                     />
                   <Th col="perf_1w"       label="1W"                     />
                   <Th col="perf_1m"       label="1M"                     />
@@ -9640,7 +9640,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
               <th className="px-2 py-1.5 text-left w-7">#</th>
               <CatTh col="cat" label="Category" align="left" />
               <CatTh col="score" label="Category Score (median)" align="left" className="w-[28%]" />
-              <CatTh col="perf_intraday" label="% Intraday" />
+              <CatTh col="perf_intraday" label="Intraday" />
               <CatTh col="perf_1d" label="1D" />
               <CatTh col="perf_1w" label="1W" />
               <CatTh col="perf_1m" label="1M" />
@@ -9767,7 +9767,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
                         <tr className="text-zinc-600 text-[9px] uppercase tracking-wide">
                           {[
                             { col: "ticker",        label: "Ticker" },
-                            { col: "perf_intraday", label: "% Intraday" },
+                            { col: "perf_intraday", label: "Intraday" },
                             { col: "perf_1d",       label: "% Daily" },
                             { col: "perf_1w",       label: "% P5D" },
                             { col: "pct_off_52wh",  label: "% Off 52W High" },
@@ -10168,7 +10168,7 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
                 <th className="px-2 py-2 text-left font-semibold border-r border-zinc-800">1-Mth Chart</th>
                 <th className="px-2 py-2 text-left font-semibold border-r border-zinc-800">1-Mth RS</th>
                 {[
-                  { col: "perf_intraday", label: "% Intraday" },
+                  { col: "perf_intraday", label: "Intraday" },
                   { col: "perf_1d",       label: "% 1D" },
                   { col: "perf_1m",       label: "% 1-Mth" },
                   { col: "pct_off_52wh",  label: "% Off 52W H", last: true },
