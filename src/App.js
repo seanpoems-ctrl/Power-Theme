@@ -3837,6 +3837,11 @@ function calFmtDateHeader(dateStr) {
   return `${CAL_DAY_FULL[d.getDay()]}, ${CAL_MONTH_FULL[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
 }
 
+function calFmtDateShort(dateStr) {
+  const d = new Date(dateStr + "T12:00:00");
+  return `${CAL_DAY_FULL[d.getDay()].slice(0, 3)}, ${CAL_MONTH_NAMES[d.getMonth()]} ${d.getDate()}`;
+}
+
 function calFmtMktCap(v) {
   if (v == null) return "—";
   if (v >= 1e12) return `$${(v/1e12).toFixed(2)}T`;
@@ -4739,6 +4744,7 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
   const _todayD = new Date();
   const todayStr = `${_todayD.getFullYear()}-${String(_todayD.getMonth()+1).padStart(2,"0")}-${String(_todayD.getDate()).padStart(2,"0")}`;
   const [calSubTab, setCalSubTab] = useState("economic");  // "economic" | "earnings"
+  const [calViewMode, setCalViewMode] = useState("day");   // "day" | "5day"
   const [selectedDay, setSelectedDay] = useState(todayStr);
   const [weekOffset, setWeekOffset]   = useState(0);
   const [analysisStock, setAnalysisStock] = useState(null); // stock object for AI drawer
@@ -4867,6 +4873,49 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
     return groups;
   }, [dayEconEvents]);
 
+  // ── 5-Day view: window of 5 dates anchored on the previous day ─────────────
+  // (selectedDay - 1, selectedDay, selectedDay + 1, selectedDay + 2, selectedDay + 3)
+  const fiveDayDates = useMemo(() => {
+    const base = new Date(selectedDay + "T12:00:00");
+    return Array.from({ length: 5 }, (_, i) => {
+      const d = new Date(base);
+      d.setDate(base.getDate() - 1 + i);
+      return calToDateStr(d);
+    });
+  }, [selectedDay]);
+
+  const fiveDayEconByDate = useMemo(() => {
+    const out = {};
+    for (const ds of fiveDayDates) {
+      const events = allEconEvents
+        .filter(e => e.date === ds)
+        .sort((a, b) => (a.time_et || "").localeCompare(b.time_et || ""));
+      const groups = {};
+      for (const e of events) {
+        const t = e.time_et || "—";
+        (groups[t] = groups[t] || []).push(e);
+      }
+      out[ds] = groups;
+    }
+    return out;
+  }, [allEconEvents, fiveDayDates]);
+
+  const fiveDayEarningsByDate = useMemo(() => {
+    const ORDER = { BMO: 0, AMC: 1 };
+    const out = {};
+    for (const ds of fiveDayDates) {
+      out[ds] = allEarnings
+        .filter(e => e.date === ds)
+        .sort((a, b) => {
+          const aHasTheme = tickerThemeMap[a.ticker] ? 0 : 1;
+          const bHasTheme = tickerThemeMap[b.ticker] ? 0 : 1;
+          if (aHasTheme !== bHasTheme) return aHasTheme - bHasTheme;
+          return (ORDER[a.time_of_day] ?? 2) - (ORDER[b.time_of_day] ?? 2);
+        });
+    }
+    return out;
+  }, [allEarnings, fiveDayDates, tickerThemeMap]);
+
   // index of first upcoming time slot (for red pill highlight)
   const nowTimeStr = new Date().toTimeString().slice(0, 5);
   const timeKeys   = Object.keys(econByTime);
@@ -4921,6 +4970,90 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
         <span className="text-[12px] text-zinc-400 text-right font-mono">{calFmtRev(e.rev_est)}</span>
         <span className="text-[12px] font-bold text-zinc-200 text-right font-mono">{calFmtRev(e.rev_act)}</span>
         <span className={`text-[12px] text-right font-mono ${calSurpCls(e.rev_surp_pct)}`}>{calFmtSurp(e.rev_surp_pct)}</span>
+      </div>
+    );
+  };
+
+  // ── Earnings groups (Thematic / BMO / AMC / unknown) for a set of rows ─────
+  const EarningsDayGroups = ({ earnings }) => {
+    const thematic = earnings.filter(e => tickerThemeMap[e.ticker]);
+    const rest     = earnings.filter(e => !tickerThemeMap[e.ticker]);
+    const bmo      = rest.filter(e => e.time_of_day === "BMO");
+    const amc      = rest.filter(e => e.time_of_day === "AMC");
+    const unk      = rest.filter(e => !e.time_of_day || (e.time_of_day !== "BMO" && e.time_of_day !== "AMC"));
+    return <>
+      {thematic.length > 0 && <>
+        <div className="px-3 py-1.5 bg-sky-900/20 border-b border-sky-800/30">
+          <span className="text-[11px] text-sky-500 uppercase tracking-widest font-semibold">Thematic Scanner</span>
+        </div>
+        {thematic.map((e, i) => <EarningsRow key={`th-${i}`} e={e}/>)}
+      </>}
+      {bmo.length > 0 && <>
+        <div className="px-3 py-1.5 bg-zinc-800/30 border-y border-zinc-800/60">
+          <span className="text-[11px] text-zinc-600 uppercase tracking-widest font-semibold">Before Market Open</span>
+        </div>
+        {bmo.map((e, i) => <EarningsRow key={`bmo-${i}`} e={e}/>)}
+      </>}
+      {amc.length > 0 && <>
+        <div className="px-3 py-1.5 bg-zinc-800/30 border-y border-zinc-800/60">
+          <span className="text-[11px] text-zinc-600 uppercase tracking-widest font-semibold">After Market Close</span>
+        </div>
+        {amc.map((e, i) => <EarningsRow key={`amc-${i}`} e={e}/>)}
+      </>}
+      {unk.map((e, i) => <EarningsRow key={`unk-${i}`} e={e}/>)}
+    </>;
+  };
+
+  // ── Economic event row (shared by single-day and 5-day views) ──────────────
+  const EconRow = ({ ev, showTime, timeLabel, isNextSlot, isPast }) => {
+    const cc       = CURRENCY_COUNTRY[ev.currency] || { flag: "🌐", name: ev.currency || "" };
+    const actual   = ev.actual   ?? null;
+    const forecast = ev.forecast ?? null;
+    const prior    = ev.previous ?? null;
+    const actualColor =
+      actual == null ? "" :
+      forecast != null && parseFloat(actual) > parseFloat(forecast) ? "text-emerald-400" :
+      forecast != null && parseFloat(actual) < parseFloat(forecast) ? "text-rose-400" :
+      "text-zinc-200";
+    return (
+      <div className="grid items-center px-4 py-2.5 border-b border-zinc-800/30 last:border-b-0 hover:bg-zinc-800/20 transition-colors"
+        style={{ gridTemplateColumns: "72px 180px 20px 1fr 110px 100px 100px" }}>
+
+        {/* Time — only show on first row of time group */}
+        {showTime ? (
+          isNextSlot
+            ? <span className="inline-flex w-fit items-center px-1.5 py-0.5 rounded bg-red-500 text-white text-[11px] font-bold leading-none">{timeLabel}</span>
+            : <span className={`text-[12px] font-mono font-semibold ${isPast ? "text-zinc-600" : "text-amber-400"}`}>{timeLabel}</span>
+        ) : <span/>}
+
+        {/* Flag + country */}
+        <div className="flex items-center gap-1.5 min-w-0">
+          <span className="text-[15px] leading-none">{cc.flag}</span>
+          <span className={`text-[11px] truncate ${isPast ? "text-zinc-600" : "text-zinc-400"}`}>{cc.name}</span>
+        </div>
+
+        {/* Impact bars */}
+        <div className="flex justify-center">
+          <ImpactBars impact={ev.impact}/>
+        </div>
+
+        {/* Event name */}
+        <div className={`text-[12px] font-medium truncate pl-2 ${isPast ? "text-zinc-500" : "text-zinc-200"}`}>
+          {ev.event}
+        </div>
+
+        {/* Actual */}
+        <div className="text-right">
+          {actual == null
+            ? <span className="text-[11px] text-amber-500/70 font-medium">Coming soon</span>
+            : <span className={`text-[12px] font-mono font-semibold ${actualColor}`}>{actual}</span>}
+        </div>
+
+        {/* Forecast */}
+        <div className="text-[12px] font-mono text-zinc-500 text-right">{forecast ?? "—"}</div>
+
+        {/* Prior */}
+        <div className="text-[12px] font-mono text-zinc-600 text-right">{prior ?? "—"}</div>
       </div>
     );
   };
@@ -5000,21 +5133,35 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
         </div>
       </div>
 
-      {/* ── Sub-tabs ──────────────────────────────────────────────────────── */}
-      <div className="flex gap-2 mb-4">
-        {[{k:"economic",l:"Economic"},{k:"earnings",l:"Earnings"}].map(({k,l}) => (
-          <button key={k} onClick={() => setCalSubTab(k)}
-            className={`px-4 py-1.5 text-[12px] font-semibold rounded-full border transition-colors
-              ${calSubTab===k
-                ? "bg-blue-500/20 border-blue-500/40 text-blue-400"
-                : "border-zinc-700/40 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600"}`}>
-            {l}
-          </button>
-        ))}
+      {/* ── Sub-tabs + view mode ─────────────────────────────────────────── */}
+      <div className="flex items-center justify-between gap-2 mb-4 flex-wrap">
+        <div className="flex gap-2">
+          {[{k:"economic",l:"Economic"},{k:"earnings",l:"Earnings"}].map(({k,l}) => (
+            <button key={k} onClick={() => setCalSubTab(k)}
+              className={`px-4 py-1.5 text-[12px] font-semibold rounded-full border transition-colors
+                ${calSubTab===k
+                  ? "bg-blue-500/20 border-blue-500/40 text-blue-400"
+                  : "border-zinc-700/40 text-zinc-500 hover:text-zinc-300 hover:border-zinc-600"}`}>
+              {l}
+            </button>
+          ))}
+        </div>
+        <div className="flex gap-1 p-0.5 rounded-full border border-zinc-700/40 bg-zinc-900/40">
+          {[{k:"day",l:"Day"},{k:"5day",l:"5-Day"}].map(({k,l}) => (
+            <button key={k} onClick={() => setCalViewMode(k)}
+              title={k === "5day" ? "Show the previous day plus the next 4 days" : "Show only the selected day"}
+              className={`px-3 py-1 text-[11px] font-semibold rounded-full transition-colors
+                ${calViewMode===k
+                  ? "bg-blue-500/20 text-blue-400"
+                  : "text-zinc-500 hover:text-zinc-300"}`}>
+              {l}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* ── ECONOMIC SUB-TAB ──────────────────────────────────────────────── */}
-      {calSubTab === "economic" && (
+      {/* ── ECONOMIC SUB-TAB — Day view ──────────────────────────────────── */}
+      {calSubTab === "economic" && calViewMode === "day" && (
         <div>
           <div className="text-[11px] font-semibold text-zinc-500 mb-3 uppercase tracking-wider">
             {calFmtDateHeader(selectedDay)}
@@ -5046,59 +5193,9 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
                 const isNextSlot = gi === nextTimeIdx;
                 return (
                   <div key={time} className={isNextSlot ? "bg-red-950/10" : ""}>
-                    {events.map((ev, j) => {
-                      const cc       = CURRENCY_COUNTRY[ev.currency] || { flag: "🌐", name: ev.currency || "" };
-                      const actual   = ev.actual   ?? null;
-                      const forecast = ev.forecast  ?? null;
-                      const prior    = ev.previous  ?? null;
-                      const actualColor =
-                        actual == null ? "" :
-                        forecast != null && parseFloat(actual) > parseFloat(forecast) ? "text-emerald-400" :
-                        forecast != null && parseFloat(actual) < parseFloat(forecast) ? "text-rose-400" :
-                        "text-zinc-200";
-                      return (
-                        <div key={j}
-                          className="grid items-center px-4 py-2.5 border-b border-zinc-800/30 last:border-b-0 hover:bg-zinc-800/20 transition-colors"
-                          style={{ gridTemplateColumns: "72px 180px 20px 1fr 110px 100px 100px" }}>
-
-                          {/* Time — only show on first row of time group */}
-                          {j === 0 ? (
-                            isNextSlot
-                              ? <span className="inline-flex w-fit items-center px-1.5 py-0.5 rounded bg-red-500 text-white text-[11px] font-bold leading-none">{time}</span>
-                              : <span className={`text-[12px] font-mono font-semibold ${isPast ? "text-zinc-600" : "text-amber-400"}`}>{time}</span>
-                          ) : <span/>}
-
-                          {/* Flag + country */}
-                          <div className="flex items-center gap-1.5 min-w-0">
-                            <span className="text-[15px] leading-none">{cc.flag}</span>
-                            <span className={`text-[11px] truncate ${isPast ? "text-zinc-600" : "text-zinc-400"}`}>{cc.name}</span>
-                          </div>
-
-                          {/* Impact bars */}
-                          <div className="flex justify-center">
-                            <ImpactBars impact={ev.impact}/>
-                          </div>
-
-                          {/* Event name */}
-                          <div className={`text-[12px] font-medium truncate pl-2 ${isPast ? "text-zinc-500" : "text-zinc-200"}`}>
-                            {ev.event}
-                          </div>
-
-                          {/* Actual */}
-                          <div className="text-right">
-                            {actual == null
-                              ? <span className="text-[11px] text-amber-500/70 font-medium">Coming soon</span>
-                              : <span className={`text-[12px] font-mono font-semibold ${actualColor}`}>{actual}</span>}
-                          </div>
-
-                          {/* Forecast */}
-                          <div className="text-[12px] font-mono text-zinc-500 text-right">{forecast ?? "—"}</div>
-
-                          {/* Prior */}
-                          <div className="text-[12px] font-mono text-zinc-600 text-right">{prior ?? "—"}</div>
-                        </div>
-                      );
-                    })}
+                    {events.map((ev, j) => (
+                      <EconRow key={j} ev={ev} showTime={j === 0} timeLabel={time} isNextSlot={isNextSlot} isPast={isPast}/>
+                    ))}
                   </div>
                 );
               })}
@@ -5107,8 +5204,48 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
         </div>
       )}
 
-      {/* ── EARNINGS SUB-TAB ──────────────────────────────────────────────── */}
-      {calSubTab === "earnings" && (
+      {/* ── ECONOMIC SUB-TAB — 5-Day view ────────────────────────────────── */}
+      {calSubTab === "economic" && calViewMode === "5day" && (
+        <div className="space-y-4">
+          {fiveDayDates.map(ds => {
+            const groups   = fiveDayEconByDate[ds] || {};
+            const dTimeKeys = Object.keys(groups);
+            const count    = dTimeKeys.reduce((n, t) => n + groups[t].length, 0);
+            const isToday  = ds === todayStr;
+            const dNextTimeIdx = isToday ? dTimeKeys.findIndex(t => t !== "—" && t >= nowTimeStr) : -1;
+            return (
+              <div key={ds} className="rounded-xl border border-zinc-800/60 overflow-hidden">
+                <div className={`flex items-center gap-2 px-4 py-2 border-b border-zinc-800/60 ${isToday ? "bg-blue-500/10" : "bg-zinc-800/40"}`}>
+                  <span className={`text-[12px] font-semibold ${isToday ? "text-blue-400" : "text-zinc-300"}`}>{calFmtDateShort(ds)}</span>
+                  {isToday && <span className="text-[10px] font-bold text-blue-400 px-1.5 py-0.5 rounded bg-blue-500/15 border border-blue-500/30 leading-none">TODAY</span>}
+                  <span className="text-[11px] text-zinc-600 ml-auto">{count} event{count === 1 ? "" : "s"}</span>
+                </div>
+                {count === 0 ? (
+                  <div className="py-6 text-center">
+                    <p className="text-[12px] text-zinc-600 italic">No economic events</p>
+                  </div>
+                ) : (
+                  dTimeKeys.map((time, gi) => {
+                    const events = groups[time];
+                    const isPast = ds < todayStr || (isToday && time !== "—" && time < nowTimeStr);
+                    const isNextSlot = gi === dNextTimeIdx;
+                    return (
+                      <div key={time} className={isNextSlot ? "bg-red-950/10" : ""}>
+                        {events.map((ev, j) => (
+                          <EconRow key={j} ev={ev} showTime={j === 0} timeLabel={time} isNextSlot={isNextSlot} isPast={isPast}/>
+                        ))}
+                      </div>
+                    );
+                  })
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* ── EARNINGS SUB-TAB — Day view ──────────────────────────────────── */}
+      {calSubTab === "earnings" && calViewMode === "day" && (
         <div>
           <div className="text-[11px] font-semibold text-zinc-500 mb-3 uppercase tracking-wider">
             {calFmtDateHeader(selectedDay)}
@@ -5131,36 +5268,43 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
               </div>
 
               {/* Thematic Scanner stocks first */}
-              {(() => {
-                const thematic = dayEarnings.filter(e => tickerThemeMap[e.ticker]);
-                const rest     = dayEarnings.filter(e => !tickerThemeMap[e.ticker]);
-                const bmo      = rest.filter(e => e.time_of_day === "BMO");
-                const amc      = rest.filter(e => e.time_of_day === "AMC");
-                const unk      = rest.filter(e => !e.time_of_day || (e.time_of_day !== "BMO" && e.time_of_day !== "AMC"));
-                return <>
-                  {thematic.length > 0 && <>
-                    <div className="px-3 py-1.5 bg-sky-900/20 border-b border-sky-800/30">
-                      <span className="text-[11px] text-sky-500 uppercase tracking-widest font-semibold">Thematic Scanner</span>
-                    </div>
-                    {thematic.map((e, i) => <EarningsRow key={`th-${i}`} e={e}/>)}
-                  </>}
-                  {bmo.length > 0 && <>
-                    <div className="px-3 py-1.5 bg-zinc-800/30 border-y border-zinc-800/60">
-                      <span className="text-[11px] text-zinc-600 uppercase tracking-widest font-semibold">Before Market Open</span>
-                    </div>
-                    {bmo.map((e, i) => <EarningsRow key={`bmo-${i}`} e={e}/>)}
-                  </>}
-                  {amc.length > 0 && <>
-                    <div className="px-3 py-1.5 bg-zinc-800/30 border-y border-zinc-800/60">
-                      <span className="text-[11px] text-zinc-600 uppercase tracking-widest font-semibold">After Market Close</span>
-                    </div>
-                    {amc.map((e, i) => <EarningsRow key={`amc-${i}`} e={e}/>)}
-                  </>}
-                  {unk.map((e, i) => <EarningsRow key={`unk-${i}`} e={e}/>)}
-                </>;
-              })()}
+              <EarningsDayGroups earnings={dayEarnings}/>
             </div>
           )}
+        </div>
+      )}
+
+      {/* ── EARNINGS SUB-TAB — 5-Day view ────────────────────────────────── */}
+      {calSubTab === "earnings" && calViewMode === "5day" && (
+        <div className="space-y-4">
+          {fiveDayDates.map(ds => {
+            const earnings = fiveDayEarningsByDate[ds] || [];
+            const isToday  = ds === todayStr;
+            return (
+              <div key={ds} className="rounded-xl border border-zinc-800/60 overflow-x-auto">
+                <div className={`flex items-center gap-2 px-3 py-2 border-b border-zinc-800/60 min-w-[900px] ${isToday ? "bg-blue-500/10" : "bg-zinc-800/40"}`}>
+                  <span className={`text-[12px] font-semibold ${isToday ? "text-blue-400" : "text-zinc-300"}`}>{calFmtDateShort(ds)}</span>
+                  {isToday && <span className="text-[10px] font-bold text-blue-400 px-1.5 py-0.5 rounded bg-blue-500/15 border border-blue-500/30 leading-none">TODAY</span>}
+                  <span className="text-[11px] text-zinc-600 ml-auto">{earnings.length} compan{earnings.length === 1 ? "y" : "ies"}</span>
+                </div>
+                {earnings.length === 0 ? (
+                  <div className="py-6 text-center">
+                    <p className="text-[12px] text-zinc-600 italic">No earnings</p>
+                  </div>
+                ) : (
+                  <>
+                    <div className="grid items-center border-b border-zinc-800/60 bg-zinc-800/20 px-3 py-1.5 min-w-[900px]"
+                         style={{ gridTemplateColumns: "90px 1fr 90px 90px 80px 80px 90px 90px 90px 90px" }}>
+                      {["Ticker","Company","Time","Mkt Cap","EPS Est","EPS Act","EPS Surp","Rev Est","Rev Act","Rev Surp"].map((col, ci) => (
+                        <span key={ci} className={`text-[10px] font-semibold text-zinc-600 uppercase tracking-wider ${ci >= 3 ? "text-right" : ""} ${ci === 2 ? "!text-left" : ""}`}>{col}</span>
+                      ))}
+                    </div>
+                    <EarningsDayGroups earnings={earnings}/>
+                  </>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
 
