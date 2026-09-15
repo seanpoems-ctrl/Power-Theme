@@ -1,52 +1,6 @@
 {
-  "generated_at": "2026-09-14T23:02:52.418512+00:00",
+  "generated_at": "2026-09-15T01:12:58.161340+00:00",
   "data_source": "fallback",
-  "power_themes": [
-    {
-      "name": "Cybersecurity",
-      "theme_rs": 94.5,
-      "perf_1d": 5.4,
-      "leaders": [
-        {
-          "ticker": "CRWD",
-          "price": 235.38,
-          "rs_52w": 97,
-          "adr_pct": 5.46,
-          "vol_surge": 2.61,
-          "mkt_cap": 241013788109,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Cybersecurity",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        },
-        {
-          "ticker": "S",
-          "price": 22.61,
-          "rs_52w": 92,
-          "adr_pct": 5.09,
-          "vol_surge": 2.26,
-          "mkt_cap": 7869390747,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Cybersecurity",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    }
-  ],
+  "power_themes": [],
   "account_equity": null
 }

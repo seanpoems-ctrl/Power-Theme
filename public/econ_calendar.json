@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-14T23:01:08.622708+00:00",
+  "generated_at": "2026-09-15T01:11:45.850096+00:00",
   "data_source": "tradingview",
   "events": [
     {
@@ -3175,16 +3175,6 @@
     {
       "date": "2026-09-16",
       "time_et": "08:30",
-      "event": "Export Prices YoY",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "8.2",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-16",
-      "time_et": "08:30",
       "event": "Import Prices YoY",
       "impact": "Low",
       "actual": null,
@@ -3205,21 +3195,21 @@
     {
       "date": "2026-09-16",
       "time_et": "08:30",
-      "event": "NY Fed Services Activity Index",
+      "event": "Export Prices YoY",
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": "0.5",
+      "previous": "8.2",
       "currency": "USD"
     },
     {
       "date": "2026-09-16",
       "time_et": "08:30",
-      "event": "Import Prices MoM",
+      "event": "NY Fed Services Activity Index",
       "impact": "Low",
       "actual": null,
-      "forecast": "0.4",
-      "previous": "-0.4",
+      "forecast": null,
+      "previous": "0.5",
       "currency": "USD"
     },
     {
@@ -3246,6 +3236,16 @@
       "date": "2026-09-16",
       "time_et": "08:30",
       "event": "Retail Sales Control Group MoM",
+      "impact": "Low",
+      "actual": null,
+      "forecast": "0.4",
+      "previous": "-0.4",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-16",
+      "time_et": "08:30",
+      "event": "Import Prices MoM",
       "impact": "Low",
       "actual": null,
       "forecast": "0.4",
@@ -4015,6 +4015,16 @@
     {
       "date": "2026-09-23",
       "time_et": "09:45",
+      "event": "S&P Global Services PMI Flash",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-23",
+      "time_et": "09:45",
       "event": "S&P Global Composite PMI Flash",
       "impact": "Low",
       "actual": null,
@@ -4026,16 +4036,6 @@
       "date": "2026-09-23",
       "time_et": "09:45",
       "event": "S&P Global Manufacturing PMI Flash",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": null,
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-23",
-      "time_et": "09:45",
-      "event": "S&P Global Services PMI Flash",
       "impact": "Low",
       "actual": null,
       "forecast": null,
@@ -4445,7 +4445,7 @@
     {
       "date": "2026-09-25",
       "time_et": "13:00",
-      "event": "Baker Hughes Oil Rig Count",
+      "event": "Baker Hughes Total Rigs Count",
       "impact": "Low",
       "actual": null,
       "forecast": null,
@@ -4455,7 +4455,7 @@
     {
       "date": "2026-09-25",
       "time_et": "13:00",
-      "event": "Baker Hughes Total Rigs Count",
+      "event": "Baker Hughes Oil Rig Count",
       "impact": "Low",
       "actual": null,
       "forecast": null,
