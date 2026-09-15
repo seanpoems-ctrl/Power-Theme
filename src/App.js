@@ -4740,7 +4740,7 @@ const EarningsReportTab = () => {
   );
 };
 
-const CalendarTab = ({ econData, earningsData, thematicData }) => {
+const CalendarTab = ({ econData, earningsData, thematicData, categoryThemeMap = {} }) => {
   const _todayD = new Date();
   const todayStr = `${_todayD.getFullYear()}-${String(_todayD.getMonth()+1).padStart(2,"0")}-${String(_todayD.getDate()).padStart(2,"0")}`;
   const [calSubTab, setCalSubTab] = useState("economic");  // "economic" | "earnings"
@@ -4785,9 +4785,9 @@ const CalendarTab = ({ econData, earningsData, thematicData }) => {
     for (const theme of thematicData?.themes || [])
       for (const sub of theme.subthemes || [])
         for (const s of sub.stocks || [])
-          if (s.ticker && !m[s.ticker]) m[s.ticker] = theme.name;
+          if (s.ticker && !m[s.ticker]) m[s.ticker] = categoryThemeMap[s.ticker] ?? theme.name;
     return m;
-  }, [thematicData]);
+  }, [thematicData, categoryThemeMap]);
 
   const tickerStockMap = useMemo(() => {
     const m = {};
@@ -10588,7 +10588,7 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
   );
 };
 
-const DailyWatchlistTab = ({ data }) => {
+const DailyWatchlistTab = ({ data, categoryThemeMap = {} }) => {
   const [gapperData, setGapperData]   = React.useState(null);
   const [etfRsData,  setEtfRsData]    = React.useState(null);
   const [focusListData, setFocusListData] = React.useState(null);
@@ -10670,9 +10670,9 @@ const DailyWatchlistTab = ({ data }) => {
   // ticker → theme name from thematic_data (for enriching screener stocks)
   const tickerThemeMap = React.useMemo(() => {
     const m = {};
-    for (const s of allStocks) if (s.ticker) m[s.ticker] = s.theme;
+    for (const s of allStocks) if (s.ticker) m[s.ticker] = categoryThemeMap[s.ticker] ?? s.theme;
     return m;
-  }, [allStocks]);
+  }, [allStocks, categoryThemeMap]);
 
   // screener stocks keyed by ticker for O(1) lookup
   const screenerMap = React.useMemo(() => {
@@ -10693,15 +10693,17 @@ const DailyWatchlistTab = ({ data }) => {
     return n || 0;
   };
 
-  // Enrich allStocks with TradingView rolling perf for Clean Bases / Short Candidates
+  // Enrich allStocks with TradingView rolling perf for Clean Bases / Short Candidates.
+  // Also standardizes the displayed theme to the Category Leaderboard's category
+  // when the ticker is held by a tracked ETF (see buildCategoryThemeMap).
   const enrichedAllStocks = React.useMemo(() => {
-    if (!screenerMap || Object.keys(screenerMap).length === 0) return allStocks;
     return allStocks.map(s => {
       const sc = screenerMap[s.ticker];
-      if (!sc) return s;
-      return { ...s, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
+      const theme = categoryThemeMap[s.ticker] ?? s.theme;
+      if (!sc) return theme === s.theme ? s : { ...s, theme };
+      return { ...s, theme, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
     });
-  }, [allStocks, screenerMap]);
+  }, [allStocks, screenerMap, categoryThemeMap]);
 
   // ── Clean Bases ── filtered, then sorted by active column
   const cleanBases = React.useMemo(() => {
@@ -12060,6 +12062,58 @@ const CalcModal = ({ onClose, ibkrThemesData, thematicData, vix }) => {
   );
 };
 
+// ── Category Leaderboard theme standardization ──────────────────────────────
+// Secondary tables (Clean Bases, Market Leaders, Calendar earnings tags, Gapper
+// Scanner, …) historically tagged each stock with its Thematic Scanner theme
+// (Finviz industry-derived). That's a different taxonomy from the Category
+// Leaderboard's ETF-holdings-derived categories, so the same stock could show
+// two different "theme" labels depending which table you looked at (e.g. OKTA/
+// CRWD as "Cloud Computing" in Clean Bases vs. "Cybersecurity" in the
+// Leaderboard, since CIBR/BUG/HACK all hold them too).
+//
+// This builds ticker → Category-Leaderboard-category for every stock held by
+// at least one tracked (non-benchmark) ETF, so those tables can standardize on
+// it — falling back to the stock's original Scanner theme when it isn't held
+// by any tracked ETF. When a stock is held by ETFs spanning multiple
+// categories, the category with the higher current median Category Score
+// (same figure shown in the Leaderboard) wins — the same "which theme is
+// strongest right now" read a trader would use to break the tie manually.
+function buildCategoryThemeMap(etfHoldings, etfRsData) {
+  const etfs = (etfRsData?.etfs || []).filter(e => !e.benchmark);
+  if (!etfs.length || !etfHoldings) return {};
+
+  const etfInfo = {};               // etf ticker -> { category, score }
+  const scoresByCategory = {};      // category -> [scores...]
+  for (const e of etfs) {
+    const cat = e.fine_theme || e.category;
+    if (!cat || e.score == null) continue;
+    etfInfo[e.ticker] = { category: cat };
+    (scoresByCategory[cat] ||= []).push(e.score);
+  }
+  const median = arr => {
+    const a = [...arr].sort((x, y) => x - y);
+    const mid = Math.floor(a.length / 2);
+    return a.length % 2 ? a[mid] : (a[mid - 1] + a[mid]) / 2;
+  };
+  const categoryScore = {};
+  for (const [cat, scores] of Object.entries(scoresByCategory)) categoryScore[cat] = median(scores);
+
+  const best = {}; // stock ticker -> { category, score }
+  for (const [etfTicker, holdings] of Object.entries(etfHoldings)) {
+    const info = etfInfo[etfTicker];
+    if (!info) continue;
+    const catScore = categoryScore[info.category] ?? 0;
+    for (const h of holdings || []) {
+      const t = h.ticker;
+      if (!t) continue;
+      if (!best[t] || catScore > best[t].score) best[t] = { category: info.category, score: catScore };
+    }
+  }
+  const map = {};
+  for (const [t, v] of Object.entries(best)) map[t] = v.category;
+  return map;
+}
+
 export default function App() {
   const [lang, setLang] = useState(() => localStorage.getItem('ui_lang') || 'zh');
   const toggleLang = useCallback(() => setLang(l => { const next = l === 'zh' ? 'en' : 'zh'; localStorage.setItem('ui_lang', next); return next; }), []);
@@ -12071,6 +12125,7 @@ export default function App() {
   const [ibkrThemesData, setIbkrThemesData] = useState(null);
   const [earningsData, setEarningsData]     = useState(null);
   const [econData, setEconData]             = useState(null);
+  const [appEtfRsData, setAppEtfRsData]     = useState(null);
   const [internalsData, setInternalsData]   = useState(null);
   const [lbView, setLbView]                 = useState("themes");
   const [spotlightThemeName, setSpotlightThemeName] = useState(null);
@@ -12215,14 +12270,24 @@ export default function App() {
       safeFetch(`econ_calendar.json?v=${v}`),
       safeFetch(`market_internals.json?v=${v}`),
       safeFetch(`screener_stocks.json?v=${v}`),
-    ]).then(([ibkrThemes, earnings, econ, internals, screener]) => {
+      safeFetch(`etf_rs.json?v=${v}`),
+    ]).then(([ibkrThemes, earnings, econ, internals, screener, etfRs]) => {
       setIbkrThemesData(ibkrThemes);
       setEarningsData(earnings);
       setEconData(econ);
       setInternalsData(internals);
       if (screener?.stocks) setAppScreenerStocks(screener.stocks);
+      setAppEtfRsData(etfRs);
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Ticker -> Category Leaderboard category, standardized across secondary
+  // tables (Clean Bases, Market Leaders, Calendar earnings tags, Gapper
+  // Scanner). See buildCategoryThemeMap() above.
+  const categoryThemeMap = React.useMemo(
+    () => buildCategoryThemeMap(data?.etf_holdings, appEtfRsData),
+    [data?.etf_holdings, appEtfRsData]
+  );
 
   // Breaking news — poll every 5 min
   useEffect(() => {
@@ -12635,7 +12700,7 @@ const appScreenerMap = useMemo(() => {
         </div>
       </div>
 
-      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
+      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex flex-col lg:flex-row items-stretch lg:items-start gap-3">
           {/* ── MAIN CONTENT ─────────────────────────────────────── */}
