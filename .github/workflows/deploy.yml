@@ -19,7 +19,7 @@ concurrency:
   # queued/running *code* deploy — collapsing stacked pushes to the newest instead
   # of jamming the queue. The github-pages environment still serialises the actual
   # deployment vs. the daily scrape, and the scrape keeps its protected pages-deploy
-  # queue, so this never cancels a running scrape/gapper.
+  # queue, so this never cancels a running scrape or gapper run.
   group: deploy-code
   cancel-in-progress: true
 jobs:

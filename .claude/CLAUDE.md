@@ -225,6 +225,16 @@ Surfaced in the frontend Leaderboard as the sortable **ROT** column (⚡ badge =
 
 ---
 
+## Market Condition Signal (2026-09-15 fix)
+
+`market_condition.spy` / `.qqq` / `.iwm` (top banner, Market Pulse card, "ES!"/"NQ!" header ticker) are built from **continuous futures**, not the ETFs — `fetch_market_indicators()` maps `SPY→ES=F`, `QQQ→NQ=F`, `IWM→RTY=F` (Yahoo) and `_market_signal()` derives green/yellow/orange/red from price vs. EMA9/21/50/200.
+
+**Why futures, not the ETF:** futures trade near-24h, giving a pre/post-market-aware read instead of freezing at the 4PM cash close.
+
+**The finalized-close guard:** because futures trade almost continuously, Yahoo starts printing the *next* session's row as soon as evening trading resumes — and the full scrape pipeline (theme/sub-theme scraping → S&P 1500 RS universe → *then* market indicators) can finish hours after the 4PM ET close. Blindly taking the newest daily bar risks reading a still-forming, after-hours-drifted bar and mislabeling it "today's close." `_fetch_market_indicators_yfinance()` truncates history to `_last_completed_session()` (the most recent NYSE session whose close has actually happened) before computing price/EMA/SMA, so the signal always reflects the true close regardless of when in the day the pipeline runs. TradingView's live scanner is kept only as a fallback if yfinance is unavailable.
+
+---
+
 ## Removed Features (2026-06-12 audit)
 
 - **News Hub tab** — folded into a collapsed-by-default `NewsHubFold` section at the bottom of the Scanner tab (open state in localStorage `news_hub_open`; content fetches only mount when expanded).
