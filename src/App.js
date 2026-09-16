@@ -1005,7 +1005,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                         <tr key={`${h.ticker}-${i}`} className="border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors">
                           <td className="px-4 py-2">
                             <a
-                              href={`https://finviz.com/quote.ashx?t=${h.ticker}`}
+                              href={`https://www.tradingview.com/chart/?symbol=${h.ticker}`}
                               target="_blank"
                               rel="noreferrer"
                               className="font-bold text-sky-400 hover:text-sky-300"
@@ -1060,7 +1060,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                         <tr key={`${s.ticker}-${i}`} className="border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors">
                           <td className="px-4 py-2">
                             <a
-                              href={`https://finviz.com/quote.ashx?t=${s.ticker}`}
+                              href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`}
                               target="_blank"
                               rel="noreferrer"
                               className="font-bold text-sky-400 hover:text-sky-300"
@@ -1196,7 +1196,7 @@ const EtfHoldingsPopup = ({ etfTicker, holdingsData = {}, onClose }) => {
                   <tr key={i} className="hover:bg-zinc-800/30 transition-colors">
                     {/* Ticker */}
                     <td className="px-3 py-2">
-                      <a href={`https://finviz.com/quote.ashx?t=${h.ticker}`}
+                      <a href={`https://www.tradingview.com/chart/?symbol=${h.ticker}`}
                          target="_blank" rel="noreferrer"
                          className="font-mono font-bold text-sky-400 hover:text-sky-300 transition-colors"
                          onClick={e => e.stopPropagation()}>
@@ -6316,7 +6316,7 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
                   {ltSortedStocks.map(s => (
                     <tr key={s.ticker} className="hover:bg-zinc-800/30 transition-colors">
                       <td className="px-3 py-2">
-                        <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noreferrer"
+                        <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noreferrer"
                            className="font-mono font-bold text-sky-400 hover:text-sky-300 transition-colors"
                            onClick={e => e.stopPropagation()}>
                           {s.ticker}
@@ -9247,7 +9247,7 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
                       className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors ${i % 2 === 0 ? "" : "bg-zinc-900/40"}`}>
                     <td className="px-2 py-2 text-zinc-600 text-[11px]">{i + 1}</td>
                     <td className="px-2 py-2 truncate">
-                      <a href={`https://finviz.com/quote.ashx?t=${h.ticker}`} target="_blank" rel="noreferrer"
+                      <a href={`https://www.tradingview.com/chart/?symbol=${h.ticker}`} target="_blank" rel="noreferrer"
                          onClick={e => e.stopPropagation()}
                          className="font-mono font-bold text-cyan-400 hover:underline">{h.ticker}</a>
                     </td>
@@ -10613,7 +10613,7 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
                   <tr key={s.ticker} className={`border-b border-zinc-800/50 hover:bg-zinc-800/40 transition-colors ${i % 2 === 0 ? "" : "bg-zinc-900/40"}`}>
                     <td className="px-3 py-2 text-zinc-600 text-[11px]">{i + 1}</td>
                     <td className="px-3 py-2">
-                      <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noreferrer"
+                      <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noreferrer"
                          onClick={e => e.stopPropagation()}
                          className="font-mono font-bold text-cyan-400 hover:underline">{s.ticker}</a>
                     </td>
@@ -11018,7 +11018,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
               {cleanBases.map((s, i) => (
                 <tr key={s.ticker} className={`border-b border-zinc-800/50 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/30"}`}>
                   <td className="px-3 py-2">
-                    <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noopener noreferrer"
+                    <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noopener noreferrer"
                        className="font-mono font-bold text-cyan-400 hover:underline">{s.ticker}</a>
                   </td>
                   <td className="px-3 py-2 hidden md:table-cell">
@@ -11203,7 +11203,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
               const perfLabel = {perf_1d:"1D",perf_1w:"1W",perf_1m:"1M",perf_3m:"3M"}[leaderPerfMode];
               return (
               <a key={s.ticker}
-                 href={`https://finviz.com/quote.ashx?t=${s.ticker}`}
+                 href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`}
                  target="_blank" rel="noopener noreferrer"
                  className="block px-2.5 py-2 rounded-lg bg-zinc-800/60 border border-zinc-700/40 hover:border-cyan-500/40 hover:bg-zinc-800 transition-all">
                 <div className="flex items-center justify-between mb-0.5">
@@ -11390,7 +11390,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                   const perfLabel = {perf_1d:"1D",perf_1w:"1W",perf_1m:"1M",perf_3m:"3M"}[leaderPerfMode];
                   return (
                   <a key={s.ticker}
-                     href={`https://finviz.com/quote.ashx?t=${s.ticker}`}
+                     href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`}
                      target="_blank" rel="noopener noreferrer"
                      className="block px-2.5 py-2 rounded-lg bg-zinc-800/60 border border-zinc-700/40 hover:border-rose-500/40 hover:bg-zinc-800 transition-all">
                     <div className="flex items-center justify-between mb-0.5">
@@ -11455,7 +11455,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                     {shortCandidates.map((s, i) => (
                       <tr key={s.ticker} className={`border-b border-zinc-800/50 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/30"}`}>
                         <td className="px-3 py-2">
-                          <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noopener noreferrer"
+                          <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noopener noreferrer"
                              className="font-mono font-bold text-rose-400 hover:underline">{s.ticker}</a>
                         </td>
                         <td className="px-3 py-2 hidden md:table-cell">
@@ -11619,7 +11619,7 @@ const FocusScanTable = ({ scan }) => {
               {sorted.map((s, i) => (
                 <tr key={s.ticker} className={`border-t border-zinc-800/60 hover:bg-zinc-800/30 ${i % 2 === 0 ? "" : "bg-zinc-900/20"}`}>
                   <td className="px-3 py-1.5 text-left">
-                    <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noreferrer"
+                    <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noreferrer"
                        className="font-mono font-bold text-cyan-400 hover:underline">
                       {s.ticker}
                     </a>
@@ -12032,7 +12032,7 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null }) =
                     <td className="px-3 py-2 text-zinc-600 text-[11px]">{i+1}</td>
                     <td className="px-3 py-2">
                       <div className="flex items-center gap-1">
-                        <a href={`https://finviz.com/quote.ashx?t=${s.ticker}`} target="_blank" rel="noreferrer"
+                        <a href={`https://www.tradingview.com/chart/?symbol=${s.ticker}`} target="_blank" rel="noreferrer"
                            className="font-mono font-bold text-cyan-400 hover:underline">{s.ticker}</a>
                         {isNew && <span className="text-[9px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-1 rounded font-bold">NEW</span>}
                       </div>
