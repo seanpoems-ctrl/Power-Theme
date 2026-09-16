@@ -1,139 +1,52 @@
 {
-  "scan_time": "2026-09-15 08:55 ET",
+  "scan_time": "2026-09-16 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "VERA",
-      "price": 39.8,
-      "gap_pct": 16.89,
-      "pm_volume": 875173,
-      "avg_vol_10d": 1939185,
-      "avg_dollar_vol": 77179563,
-      "mkt_cap": 2453756646,
-      "rvol": 1.18,
-      "adr_pct": 4.93,
-      "category": "FDA",
-      "theme": "Positive Clinical Trial Results",
-      "reasoning": "Vera Therapeutics stock jumped on positive clinical trial results for its kidney treatment, demonstrating sustained function over two years.",
-      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
-      "conviction": 22,
-      "grade": "C",
-      "finviz_theme": "Biotech - Immunology",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Vera Therapeutics stock **jumped** following the announcement of **positive trial results** for its **kidney treatment**. The company reported that the treatment **kept function steady** for **two years**, indicating significant efficacy.",
-        "impact": "This positive clinical data significantly de-risks the development pathway for VERA's kidney treatment, potentially accelerating future regulatory milestones and expanding the drug's market opportunity."
-      },
-      "analysis_details": [
-        {
-          "title": "The Drug",
-          "body": "Vera Therapeutics announced **positive trial results** for its **kidney treatment**. The company reported that the treatment was effective in maintaining **steady kidney function** over a period of **two years**, a critical outcome for patients with kidney disease. This news led to a notable jump in **Vera Therapeutics stock**."
-        },
-        {
-          "title": "The Significance",
-          "body": "These strong clinical results provide substantial validation for VERA's therapeutic approach and enhance the drug's potential for eventual FDA approval. Sustained kidney function improvement for **two years** represents a significant milestone, strengthening VERA's competitive positioning and increasing the addressable market opportunity for this treatment."
-        }
-      ],
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Vera Therapeutics stock jumps on positive trial results By Investing.com - Investing.com Nigeria",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQYl9veU81aHh5S3lxencyWlZMMnRSUGVjTmVlWHN2SjhSWGJtOXk4S2FhVE5fdnNmSE85WEM0Ukt3Nmd6ZDFmYzJueEdlV01FZXJneWIxWFhfNzduMVJzTUJtS2x2UTkyeE5YN3E5aG9GRE96NGVIMUNzYklzZmxNRHdQaVZLbjlaNmN5Y1UzTFQwem5YZjJzOVNCTWlfc1hRQm5EMTI2MmJzZkpqcTJjUXBQUzVTcTQ?oc=5"
-        },
-        {
-          "title": "A kidney treatment kept function steady for two years, Vera says - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOQmJYcjBIQkNzdDZQV1VpV3NBOUNkVHdFdmkteGJjWWptT3B3c250TUFPU1dBejZKZWd6UVpub096c19JX2xNR0wtYWctcHk5RGlvM3E1WnJxUnBvVXFWQ1hnZmFQZjNEQkgzSnZJeHBSZkNmOUsyRWZsM1JxQXljZXBJbGcxWDhpZFpCOFNlR0Jhbm1iaUhOOEc5N2h1UmctcE5SWEtFU21ESTdCN2tmdk5Jblo5SWNJY3NYaTdR?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-09-15",
-        "form": "8-K",
-        "items": [
-          "7.01",
-          "8.01",
-          "9.01"
-        ],
-        "category": "Others",
-        "label": "Item 9.01",
-        "url": "https://www.sec.gov/Archives/edgar/data/1831828/000119312526391280/d32300d8k.htm"
-      },
-      "float_shares": "58.52M",
-      "short_float": "33.96%",
-      "daily_pct": 15.54,
-      "prev_close": 34.05,
-      "industry": "Biotech - Immunology",
-      "technical_status": "Fail (Avg $Vol $77M < $100M)",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 85,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "demonstrating sustained function over two years",
-        "discrepancy_note": "Source B (Google News, specifically Stock Titan) mentions 'A kidney treatment kept function steady for two years', directly confirming the claim. However, Source A (Finviz) has no information, preventing verification by BOTH sources."
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "WAY",
-      "price": 27.85,
-      "gap_pct": 11.85,
-      "pm_volume": 76812,
-      "avg_vol_10d": 1731094,
-      "avg_dollar_vol": 48210968,
-      "mkt_cap": 4774535793,
-      "rvol": 1.01,
-      "adr_pct": 3.96,
+      "ticker": "NOK",
+      "price": 10.35,
+      "gap_pct": 5.17,
+      "pm_volume": 8036321,
+      "avg_vol_10d": 80388074,
+      "avg_dollar_vol": 832016566,
+      "mkt_cap": 55954172224,
+      "rvol": 1.12,
+      "adr_pct": 3.37,
       "category": "Thematic Narratives",
-      "theme": "M&A Speculation (Sale Exploration)",
-      "reasoning": "WAY (Waystar) is surging pre-market after reports indicate the healthcare software company is exploring strategic options, including a potential sale.",
+      "theme": "AI-powered Network Trials",
+      "reasoning": "Nokia's **AI-powered phone networks** are moving into **live trials worldwide**, signaling progress in a critical growth area.",
       "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
       "conviction": 57,
-      "grade": "C",
-      "finviz_theme": "Digital Health",
+      "grade": "B",
+      "finviz_theme": "AI Networking",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "A report indicates that **Waystar**, a healthcare software company, is **exploring strategic options, including a sale**. This news has propelled the stock to rise **over 16% pre-market**.",
-        "impact": "The exploration of a sale could lead to a significant valuation increase or acquisition premium, driving sustained momentum if a deal materializes, but also carries deal execution risk."
+        "catalyst": "News indicates that **AI-powered phone networks** developed by Nokia are now moving into **live trials worldwide**. This highlights Nokia's active role in advancing next-generation telecommunications technology.",
+        "impact": "This development potentially validates Nokia's strategic investments in AI, positioning it for future revenue streams from advanced network solutions."
       },
-      "analysis_details": "• **The Narrative**\nA report circulating today indicates that **Waystar**, identified as a **healthcare software company**, is actively **exploring various strategic options**. These options specifically include a potential **sale** of the company, signaling a significant corporate development. Following this news, Waystar's stock has already demonstrated a strong positive reaction, rising **over 16% pre-market**.\n\n• **Explosiveness**\nThis M&A speculation introduces a high degree of explosiveness for the stock, as a potential sale often involves a premium over the current market price. The initial **+16% pre-market** move suggests strong investor confidence in a favorable outcome. The ongoing exploration of strategic options will likely keep the stock highly sensitive to further news or developments regarding a potential transaction.",
+      "analysis_details": "• **The Narrative**\nNews reports that Nokia is progressing with its **AI-powered phone networks**, which are now moving into **live trials worldwide**. This significant step indicates the company's commitment to integrating advanced artificial intelligence into its core telecom offerings, signaling a new phase of technological development.\n\n• **Explosiveness**\nThis catalyst enhances Nokia's momentum within the burgeoning AI networking space, suggesting potential for future commercialization and market share gains. Successful global trials could lead to broader adoption by carriers, positioning Nokia favorably against competitors in the rapidly evolving telecommunications infrastructure sector.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "In Pro Stock, the event winning NDRC Christmas Tree went the way of returning racer John Barbagallo.Image mages credit to DragPhotos.com.au - Auto Action",
+          "title": "$Nokia Oyj (NOK.US)$ - Moomoo",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi0wJBVV95cUxOTVJ1RERsUXVEOXFKSDNNQnFLeHpzT0lkSUVraHdkTlg1MkFyZmx3bTZ4ZG90OGJWNGtJdTVycEYxUGFEWXBaMjRyS3pqZ3hXMW4zSUh4XzU1OWhkUEdkSjFyM1BOdG1xMUZ2NzNQTlVsSjQzLUd5Nnh2OU16NTUzcFlXYzNDSHpwNVdyX29NOUFhekdrMkRacmR4MEE2d1prX1pCMG9aRk9tUzZMZ3VQdkE4d3oxNUlTckRQWG5WOGIzQ2N0am1wWk5Sa2Z4cF9sR0NwVnJESVhubmZjVnB4elZ2UEpiVkNEMHlTdlp0U3ZNdTFfTmhXVFRUOWtQZlY5Sjg2SGZiRkhkcU8zY01SUzBqZTIwRHNXN3VDX3NjZlFEc2dTOWN5Ml9tRlpjSlBEM0p1aHp5U2I4dVYzdXN6RDJCLWE3TG5tcHVMLVFZcEdEMUE?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5QRGQtbnFNc3g5LXl5ZFRyTEkwZkpIVzNqdzI4VUxqOWtRaGl1NkJhblpLWHRlN0MycTFUU3RNZVNmbldkb1VsemdXYXI5QVZVeW53SzVOYmJZWHhobnhHWUNNRkUyNlZNaWlPa2ZGUXlINWNPUEtHOVdn?oc=5"
         },
         {
-          "title": "Waystar Rises Over 16% Pre-Market as Report Says Healthcare Software Company Exploring Options Including Sale - TradingKey",
+          "title": "AI-powered phone networks move into live trials worldwide with Nokia - Stock Titan",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNME1YM3FuRl9HWDhzSFE3MGJ5dGtMTThBWTFiUFptSW9VbFBHaXI4N3VWeG1kNzBxZC11Q3BNRzMxYW9pV2dqTndZRUw2eVJmazlscjhZWWVOcnlKamkwMG1RR01tNFVHMVhUNVRGaXNFZnc1S3RxSzh6X1RiUGtIV21DQWFDcjJWOVdTV1FHVnYtLWtQVklj?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPWUlHTlpLMXk5eWNITUU3X1hHb3FWREhtVkNpbEl6MTM4ejYtU1FBeVhTSWVTLW0xQjctS0xkYTQ5Sl9lLWhxa3dKc1VkZ1I2REM5dEFXQi14d1JHaWRVSG5ZdlpjZU5HWElZakNYME15cGlhV19CZ2NhOGFicnlYLVdvMXl1dXJrWkU0R3VxX1I0a0dZdTJEM3loOXdTQm00VFNxeWFQR0ZrSmwxdmZQWDFfY2V3emlIRnc?oc=5"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "134.59M",
-      "short_float": "10.49%",
-      "daily_pct": 12.3,
-      "prev_close": 24.9,
-      "industry": "Digital Health",
-      "technical_status": "Fail (Avg $Vol $48M < $100M, ADR 4.0% < 4%)",
+      "float_shares": "5.60B",
+      "short_float": "1.04%",
+      "daily_pct": 5.08,
+      "prev_close": 9.84,
+      "industry": "AI Networking",
+      "technical_status": "Fail (ADR 3.4% < 4%)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 70,
@@ -141,111 +54,29 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "WAY (Waystar) is exploring strategic options, including a potential sale.",
-        "discrepancy_note": "Finviz News (Source A) provides no information regarding the claim. Google News (Source B) contains multiple articles confirming the claim (e.g., [2] 'potential take-private deal report' and [3] 'Exploring Options Including Sale'), but since Source A has no content, 'both' sources do not confirm it."
+        "primary_claim": "Nokia's AI-powered phone networks are moving into live trials worldwide",
+        "discrepancy_note": "Only Google News source [1] ('AI-powered phone networks move into live trials worldwide with Nokia - Stock Titan') confirms the claim directly. Finviz News has no relevant articles to confirm this specific claim."
       },
       "gates_passed": 3,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
+        "gate_price": false,
+        "gate_dollar_vol": true,
         "gate_mkt_cap": true,
         "gate_adr": false
       },
       "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "FPS",
-      "price": 30.87,
-      "gap_pct": 7.77,
-      "pm_volume": 1026786,
-      "avg_vol_10d": 6414904,
-      "avg_dollar_vol": 198028086,
-      "mkt_cap": 8718843356,
-      "rvol": 2.34,
-      "adr_pct": 5.49,
-      "category": "Earnings",
-      "theme": "Beat & Raise",
-      "reasoning": "Forgent Power Solutions (FPS) posted a **Q4 earnings beat**, issued **strong FY27 guidance**, and reported a **record $3 billion backlog**.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 81,
-      "grade": "A+",
-      "finviz_theme": "Clean Energy - Grid",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "Forgent Power Solutions (FPS) filed an **8-K for Earnings/Financial Results** on **2026-09-15**, announcing a **Q4 beat** and **strong FY27 guidance**. The company reported **$1.5 billion in orders** in one quarter, surpassing its **full-year revenue**, and a **record $3 billion backlog**.",
-        "impact": "This substantial operational and financial performance indicates robust demand and future revenue visibility, likely supporting significant upward price momentum."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nForgent Power Solutions (NYSE:FPS) announced a **Q4 beat**, which, combined with **strong FY27 guidance**, propelled shares **up 10.6% pre-market**. The company reported an impressive **$1.5 billion in new orders** during the quarter, exceeding its **full-year revenue** from the prior period.\n\n• **The Growth (Momentum)**\nThe company's backlog has swelled to an unprecedented **$3 billion**, indicating significant future revenue streams and strong operational momentum. This substantial order intake and backlog provide clear visibility into robust demand for Forgent Power's solutions.\n\n• **The Guide**\nForgent Power (FPS) provided **higher 2027 revenue guidance**, signaling confidence in its continued growth trajectory. This optimistic outlook, backed by a significant increase in backlog, suggests sustained top-line expansion.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Forgent Power Solutions (NYSE:FPS) Q4 Beat and Strong FY27 Guidance Send Shares Up 10.6% Pre-Market - ChartMill",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxQMEMtTmlFQjlTU3pVdm93WW02Y0hnRmptT0xGUUNOMDNmeWdpcjQ2dDBvX0FBNF9RUFJiMXRmU3pKc3l6LXN4RWZhSVc5TnJ4cldmeFhhMFdQd2Q0NnFHdFFtMzBGaE9fbjYtbllzakxmSkU4b09xYUgxdkZBU1E5eEhtQ1BrRHJlLXphdnRTTVhTUE5LQ25FN1BacWk4czJIc3lBcjN5RkNtYVhTQVlreDJqaXlpdUFuVlpPbTJMTGVvSW04OWlkVFNpdVM4c08zcWVXR2RVLV8yUFJScWc?oc=5"
-        },
-        {
-          "title": "Backlog hits $3B at Forgent Power (FPS) as it guides to higher 2027 revenue - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQOXNjODk2eXNhckpBQmJDUDk1eW0wU3piNW41ZnNBQUpnRU1WMmVpYWJQeUF6V0liUEZhUW4tWmNLNjA4ODdtM0wxbk93NHhWd2ZVSjVUREdsVDE2LTBfblk4bDZBVUJIS0lMSzJvbkJtcjJCeGNQaGNmNWlRZDZwcUFOZ3RPeXEwQTZUYkE1TTdxZXVMWjB1SVJXc1pPakVHRl9QTXJiNFJmVVBwUno0bkNDMTFIQQ?oc=5"
-        },
-        {
-          "title": "One quarter brought $1.5 billion in orders. That topped Forgent’s full-year revenue. - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQdEx6TzRaM3RlREVKT3VSUV9qbk5xNnliNXduVGg2T3J1YXd3NE9tOEU3dXhrWVZ6dFd1blJNOEdVd1NXNGdLQ3JlcTZrdXkxTWFSNzJDSTR4MU5XazFhQWJzRlFQTVZKUUpHaVZaRDNOQjJWTGpNdVphZ2lGWEZNVi1KYVpaM0pPM285SlZBLWpLa1FIM3E5SnNVZ2RGdTg1R3VMTUZKc2pERUl6dGRBY1dQOGhmZXBjUGc?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-09-15",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/2080126/000208012626000034/fps-20260915.htm"
-      },
-      "float_shares": "190.79M",
-      "short_float": "4.96%",
-      "daily_pct": 9.39,
-      "prev_close": 28.64,
-      "industry": "Clean Energy - Grid",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "record $3 billion backlog",
-        "discrepancy_note": null
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 2,
-    "large_gaps": 1,
-    "total_headlines": 7,
+    "small_gaps": 1,
+    "large_gaps": 0,
+    "total_headlines": 2,
     "monthly_cost_usd": 0.01
   }
 }
