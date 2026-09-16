@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-16 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "US Pullback, Complacent Credit",
+    "spy_price": 757.39,
+    "spy_change_pct": -0.46,
+    "vix": 16.97,
+    "hy_oas": 2.71,
+    "yield_curve": 0.33,
+    "credit_status": "Complacent",
+    "s5fi": 38.1,
+    "mmth": 56.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft (MSFT) is rallying on news of a strategic partnership with a major telecommunications firm to integrate its generative AI suite across their global infrastructure, signaling new revenue streams."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Nvidia (NVDA) surges on reports of a new multi-year supply agreement with a leading automotive manufacturer for its AI-driven autonomous driving platforms."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla (TSLA) is experiencing heightened volatility pre-market, driven by technical trading flows and ongoing debate regarding EV demand, rather than any fresh company-specific news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-15 19:10 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2157,44 +2195,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA Corporation (NVDA) continues to attract speculative flow, building on recent AI sector enthusiasm, with technical indicators suggesting continued upward momentum rather than a fresh fundamental trigger today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-26 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Positive Momentum, Credit Comfort",
-    "spy_price": 765.91,
-    "spy_change_pct": 0.32,
-    "vix": 15.67,
-    "hy_oas": 2.69,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 59.8,
-    "mmth": 74.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet's cloud division announced a strategic AI integration partnership with a major enterprise client, sparking renewed investor interest in its growth trajectory."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft unveiled a new suite of productivity tools powered by advanced generative AI, positioning it to capture significant market share in the enterprise software space."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "Nvidia Corporation",
-          "reason": "Nvidia is seeing renewed interest based on sector rotation into high-beta tech, despite no fresh company-specific news today."
         }
       ]
     }
