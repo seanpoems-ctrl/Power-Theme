@@ -7,9 +7,11 @@ asyncio.set_event_loop(asyncio.new_event_loop())
 """
 IBKR TWS WebSocket Bridge — ibkr_ws_server.py
 ==============================================
-Connects to IBKR TWS/Gateway via ib_insync, subscribes to real-time market data
-for all tickers in public/thematic_data.json + key market internals, then fans out
-live price updates to any browser client via WebSocket on port 5003.
+Connects to IBKR TWS/Gateway via ib_insync, subscribes to delayed (15-min)
+market data for the top tickers in public/thematic_data.json + key market
+internals + one category-leader ETF per Category Leaderboard category
+(public/etf_rs.json), then fans out price updates to any browser client via
+WebSocket on port 5003.
 
 Frontend connects: ws://localhost:5003
 Message format (server → client):
@@ -47,7 +49,16 @@ CLIENT_ID  = int(os.getenv("TWS_CLIENT_ID", "20")) # must differ from other scri
 WS_PORT    = int(os.getenv("WS_PORT",   "5003"))
 DATA_PATH   = Path(os.getenv("THEMATIC_JSON", "public/thematic_data.json"))
 GAPPER_PATH = Path(os.getenv("GAPPER_JSON",   "public/gapper_data.json"))
-MAX_TICKERS = 40  # max stock ticker subscriptions (IBKR limit=100; TWS uses ~40 lines itself; 40+3+40=83)
+ETF_RS_PATH = Path(os.getenv("ETF_RS_JSON",   "public/etf_rs.json"))
+MAX_TICKERS = 40  # max stock ticker subscriptions
+# ETF RS tab (Category Leaderboard) tickers get a small separate pool. IBKR's
+# ~100-line simultaneous market-data cap is shared with whatever TWS itself
+# has open (watchlists, other windows) — that overhead isn't fixed, so this
+# is kept conservative rather than computed against a hardcoded TWS-usage
+# estimate (a 15-ticker pool + 40 stocks + 3 internals = 58 once already
+# tripped the 100-line cap in practice). One leader ETF per category, ranked
+# by current Category Score — top categories get a live slot first.
+MAX_ETF_TICKERS = 8
 BROADCAST_INTERVAL = 1.0  # seconds between price broadcasts
 
 logging.basicConfig(
@@ -152,6 +163,52 @@ def load_gapper_tickers() -> list[tuple[str, int]]:
         return []
 
 
+def load_etf_leader_tickers() -> list[tuple[str, float]]:
+    """
+    Return [(ticker, category_score), ...] — one leader ETF per Category
+    Leaderboard category, sorted by that category's current median score
+    descending (highest-conviction categories get a live slot first).
+
+    Mirrors EtfCategoryLeaderboard's own grouping in the frontend: group by
+    fine_theme (falling back to category), excluding benchmark ETFs; a
+    category's score is the median score of its members; its leader is the
+    highest-scoring member.
+    """
+    if not ETF_RS_PATH.exists():
+        log.info("etf_rs.json not found at %s — no ETF leader tickers added", ETF_RS_PATH)
+        return []
+    try:
+        with ETF_RS_PATH.open(encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception as exc:
+        log.warning("Could not read etf_rs.json: %s", exc)
+        return []
+
+    etfs = [e for e in data.get("etfs", []) if not e.get("benchmark") and e.get("score") is not None]
+    by_category: dict[str, list[dict]] = {}
+    for e in etfs:
+        cat = e.get("fine_theme") or e.get("category")
+        if not cat or not e.get("ticker"):
+            continue
+        by_category.setdefault(cat, []).append(e)
+
+    def _median(vals: list[float]) -> float:
+        s = sorted(vals)
+        n = len(s)
+        mid = n // 2
+        return s[mid] if n % 2 else (s[mid - 1] + s[mid]) / 2
+
+    rows: list[tuple[str, float]] = []
+    for cat, members in by_category.items():
+        score = _median([m["score"] for m in members])
+        leader = max(members, key=lambda m: m["score"])
+        rows.append((leader["ticker"], score))
+
+    rows.sort(key=lambda r: r[1], reverse=True)
+    log.info("Loaded %d category-leader ETFs from etf_rs.json", len(rows))
+    return rows
+
+
 def merge_tickers(
     gappers: list[tuple[str, int]],
     thematic: list[tuple[str, int]],
@@ -215,7 +272,10 @@ def _on_pending_tickers(tickers):
 # IBKR connect + subscribe
 # ─────────────────────────────────────────────────────────────────────────────
 
-async def subscribe_all(symbols_ranked: list[tuple[str, int]]) -> None:
+async def subscribe_all(
+    symbols_ranked: list[tuple[str, int]],
+    etf_tickers: list[tuple[str, float]] | None = None,
+) -> None:
     """Subscribe to market data for all symbols. Respects the ~100-slot limit."""
     global ib
 
@@ -252,10 +312,31 @@ async def subscribe_all(symbols_ranked: list[tuple[str, int]]) -> None:
         else:
             await asyncio.sleep(0.02)
 
-    log.info("All subscriptions placed (%d tickers + internals).", len(all_tickers))
+    # 3. ETF RS tab (Category Leaderboard) category-leader tickers — separate
+    # small pool, deduplicated against stocks already subscribed above.
+    already = set(all_tickers)
+    etf_symbols = [s for s, _ in (etf_tickers or [])[:MAX_ETF_TICKERS] if s not in already]
+    if etf_symbols:
+        log.info("Subscribing %d ETF category-leader tickers (delayed data)…", len(etf_symbols))
+        for i, symbol in enumerate(etf_symbols):
+            try:
+                contract = Stock(symbol, "SMART", "USD")
+                ib.reqMktData(contract, "", False, False)
+            except Exception as exc:
+                log.warning("  ✗ %s: %s", symbol, exc)
+            if i % 25 == 24:
+                await asyncio.sleep(0.3)
+            else:
+                await asyncio.sleep(0.02)
+
+    log.info("All subscriptions placed (%d stock + %d ETF + %d internals).",
+              len(all_tickers), len(etf_symbols), len(INTERNALS))
 
 
-async def ibkr_connect(symbols_ranked: list[tuple[str, int]]) -> bool:
+async def ibkr_connect(
+    symbols_ranked: list[tuple[str, int]],
+    etf_tickers: list[tuple[str, float]] | None = None,
+) -> bool:
     """Try connecting to TWS. Returns True on success."""
     global ibkr_connected
     # Try configured port first, then all common IBKR ports as fallback
@@ -270,7 +351,7 @@ async def ibkr_connect(symbols_ranked: list[tuple[str, int]]) -> bool:
             log.info("✅ Connected to IBKR TWS/Gateway")
             ibkr_connected = True
             await _broadcast_ibkr_status(True)
-            await subscribe_all(symbols_ranked)
+            await subscribe_all(symbols_ranked, etf_tickers)
             return True
         except Exception as exc:
             log.warning("Connection failed on port %d: %s", port, exc)
@@ -279,7 +360,10 @@ async def ibkr_connect(symbols_ranked: list[tuple[str, int]]) -> bool:
     return False
 
 
-def _setup_reconnect(symbols_ranked: list[tuple[str, int]]) -> None:
+def _setup_reconnect(
+    symbols_ranked: list[tuple[str, int]],
+    etf_tickers: list[tuple[str, float]] | None = None,
+) -> None:
     """Register a disconnected callback that keeps retrying until TWS is back."""
     async def _reconnect():
         global ibkr_connected
@@ -289,7 +373,7 @@ def _setup_reconnect(symbols_ranked: list[tuple[str, int]]) -> None:
         while True:
             await asyncio.sleep(10)
             log.info("Attempting reconnect to IBKR…")
-            connected = await ibkr_connect(symbols_ranked)
+            connected = await ibkr_connect(symbols_ranked, etf_tickers)
             if connected:
                 return
             log.info("Reconnect failed — retrying in 10 s…")
@@ -367,6 +451,7 @@ async def main() -> None:
     gapper_tickers   = load_gapper_tickers()
     thematic_tickers = load_tickers_from_json()
     symbols_ranked   = merge_tickers(gapper_tickers, thematic_tickers)
+    etf_tickers      = load_etf_leader_tickers()
 
     # Start WebSocket server — use serve_forever() for compatibility with websockets 13/14+
     log.info("Starting WebSocket server on ws://localhost:%d …", WS_PORT)
@@ -374,14 +459,14 @@ async def main() -> None:
     log.info("WebSocket server ready ✅  (ws://localhost:%d)", WS_PORT)
 
     # Set up reconnect handler before first connect
-    _setup_reconnect(symbols_ranked)
+    _setup_reconnect(symbols_ranked, etf_tickers)
 
     # Connect in background — keeps retrying every 10s until IB Gateway / TWS opens.
     # This allows the script to auto-start at Windows login and connect the moment
     # the user opens IB Gateway, with no manual intervention.
     async def _connect_with_retry():
         while True:
-            connected = await ibkr_connect(symbols_ranked)
+            connected = await ibkr_connect(symbols_ranked, etf_tickers)
             if connected:
                 return
             log.info("IB Gateway / TWS not open yet — retrying in 10 s…")

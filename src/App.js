@@ -9495,13 +9495,25 @@ const EtfCandidatesPanel = () => {
   );
 };
 
-const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onJumpToThemeLong = null, onJumpToThemeShort = null }) => {
+const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onJumpToThemeLong = null, onJumpToThemeShort = null, livePricesRef = null }) => {
   const [sortCol, setSortCol] = useState("score");      // any column key below
   const [sortDir, setSortDir] = useState("desc");
   const [holdingsModal, setHoldingsModal] = useState(null);
   const [expandedCat, setExpandedCat] = useState(null);  // category name whose top movers are shown
   const [moverSortCol, setMoverSortCol] = useState("perf_1w"); // sort within the expanded top-movers table
   const [moverSortDir, setMoverSortDir] = useState("desc");
+
+  // Live (IBKR, 15-min delayed) prices for category-leader ETFs — livePricesRef
+  // is mutated directly by the WebSocket handler with no re-render, so poll it
+  // locally at 1Hz and only update local state when something actually
+  // changed. Scoped to this component so it doesn't force the whole app to
+  // re-render on every tick.
+  const [, setLiveTick] = useState(0);
+  React.useEffect(() => {
+    if (!livePricesRef) return;
+    const id = setInterval(() => setLiveTick(t => t + 1), 1000);
+    return () => clearInterval(id);
+  }, [livePricesRef]);
 
   const handleMoverSort = col => {
     if (moverSortCol === col) setMoverSortDir(d => d === "asc" ? "desc" : "asc");
@@ -9722,12 +9734,28 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
                 {/* Leader — clickable to holdings */}
                 <td className="px-2 py-1.5">
                   {c.leader ? (
-                    <button
-                      onClick={(e) => { e.stopPropagation(); setHoldingsModal({ ticker: c.leader.ticker, theme: `${c.cat} - ${c.leader.label || c.leader.theme}`, holdings: etfHoldings[c.leader.ticker] ?? [] }); }}
-                      className="font-mono font-bold text-cyan-400 hover:underline text-[11px]">
-                      {c.leader.ticker}
-                      <span className="text-zinc-600 ml-1 font-sans font-normal">{c.leader.score?.toFixed(0)}</span>
-                    </button>
+                    <>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); setHoldingsModal({ ticker: c.leader.ticker, theme: `${c.cat} - ${c.leader.label || c.leader.theme}`, holdings: etfHoldings[c.leader.ticker] ?? [] }); }}
+                        className="font-mono font-bold text-cyan-400 hover:underline text-[11px]">
+                        {c.leader.ticker}
+                        <span className="text-zinc-600 ml-1 font-sans font-normal">{c.leader.score?.toFixed(0)}</span>
+                      </button>
+                      {(() => {
+                        const lp = livePricesRef?.current?.[c.leader.ticker];
+                        if (!lp?.price) return null;
+                        return (
+                          <span title="IBKR, 15-min delayed" className="ml-1.5 text-[10px] font-mono whitespace-nowrap">
+                            <span className="text-zinc-500">${lp.price.toFixed(2)}</span>
+                            {lp.change_pct != null && (
+                              <span className={lp.change_pct >= 0 ? "text-emerald-400 ml-0.5" : "text-rose-400 ml-0.5"}>
+                                {lp.change_pct >= 0 ? "+" : ""}{lp.change_pct.toFixed(2)}%
+                              </span>
+                            )}
+                          </span>
+                        );
+                      })()}
+                    </>
                   ) : <span className="text-zinc-700">—</span>}
                 </td>
                 {/* Anchor benchmark */}
@@ -10607,7 +10635,7 @@ const ThemeStocksModal = ({ name, stocks, onClose }) => {
   );
 };
 
-const DailyWatchlistTab = ({ data, categoryThemeMap = {} }) => {
+const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }) => {
   const [gapperData, setGapperData]   = React.useState(null);
   const [etfRsData,  setEtfRsData]    = React.useState(null);
   const [focusListData, setFocusListData] = React.useState(null);
@@ -11210,7 +11238,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {} }) => {
       {mode === "etf" && (
         <div className="space-y-6">
           <EtfRotationBrief etfRsData={etfRsData} />
-          <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} onJumpToThemeLong={jumpToThemeLong} onJumpToThemeShort={jumpToThemeShort} />
+          <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} onJumpToThemeLong={jumpToThemeLong} onJumpToThemeShort={jumpToThemeShort} livePricesRef={livePricesRef} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <IndexSectorBenchmarkTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfCandidatesPanel />
@@ -12719,7 +12747,7 @@ const appScreenerMap = useMemo(() => {
         </div>
       </div>
 
-      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
+      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex flex-col lg:flex-row items-stretch lg:items-start gap-3">
           {/* ── MAIN CONTENT ─────────────────────────────────────── */}

@@ -13,6 +13,12 @@
 
 # misc
 .DS_Store
+
+# local Claude Code MCP server config (machine-specific paths, not shared)
+.mcp.json
+
+# local script logs (e.g. ibkr_ws_server.py output redirection)
+*.log
 .env
 .env.local
 .env.development.local
