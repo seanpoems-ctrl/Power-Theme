@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-16 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious Risk-Off",
+    "spy_price": 754.05,
+    "spy_change_pct": -0.44,
+    "vix": 17.71,
+    "hy_oas": 2.76,
+    "yield_curve": 0.33,
+    "credit_status": "Complacent",
+    "s5fi": 33.9,
+    "mmth": 53.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly shares surged on groundbreaking Phase 3 trial results for their new weight-loss therapy, signaling massive market potential."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Alphabet's stock saw renewed interest following the unveiling of a revolutionary new AI-powered search tool, promising significant user engagement."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla continues to draw attention as headlines regarding its latest Gigafactory expansion circulate, with price action driven by ongoing short-term technical swings."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-16 11:23 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2160,43 +2198,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-08-26 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Subdued Strength, Complacent Credit",
-    "spy_price": 766.08,
-    "spy_change_pct": 0.02,
-    "vix": 15.21,
-    "hy_oas": 2.7,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 60.1,
-    "mmth": 73.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA (NVDA) unveiled a new chip architecture designed to significantly accelerate AI model training, sparking analyst upgrades for data center growth targets."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly (LLY) announced positive Phase 3 clinical trial results for its new obesity drug, exceeding efficacy expectations and reinforcing its market leadership."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMC",
-          "company": "AMC Entertainment Holdings, Inc.",
-          "reason": "AMC Entertainment (AMC) saw renewed speculative interest driven by short squeeze narratives and options market activity, despite no new fundamental corporate announcements."
-        }
-      ]
-    }
   }
 ]
