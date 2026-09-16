@@ -2,115 +2,103 @@
   "ok": true,
   "filter": "atr_ext",
   "label": "10x ATR Extended",
-  "count": 9,
+  "count": 8,
   "stocks": [
     {
       "ticker": "MKTX",
       "company": "MarketAxess Holdings, Inc.",
       "industry": "Investment Banks/Brokers",
-      "price": 163.1,
-      "change_pct": 0.06,
+      "price": 163.38,
+      "change_pct": 0.17,
       "adr_pct": 0.6,
-      "dollar_volume": "$147.3M",
-      "market_cap_b": 5.74,
+      "dollar_volume": "$149.1M",
+      "market_cap_b": 5.75,
       "rs_ibd": 59,
-      "atr_ext_val": 20.17
+      "atr_ext_val": 20.3
     },
     {
       "ticker": "HZO",
       "company": "MarineMax, Inc. (FL)",
       "industry": "Specialty Stores",
-      "price": 52.21,
-      "change_pct": 0.0,
-      "adr_pct": 1.1,
-      "dollar_volume": "$47.0M",
-      "market_cap_b": 1.153,
-      "rs_ibd": 88,
-      "atr_ext_val": 18.71
+      "price": 52.5,
+      "change_pct": 0.56,
+      "adr_pct": 1.0,
+      "dollar_volume": "$48.3M",
+      "market_cap_b": 1.16,
+      "rs_ibd": 89,
+      "atr_ext_val": 19.21
     },
     {
       "ticker": "UTZ",
       "company": "Utz Brands Inc",
       "industry": "Food: Specialty/Candy",
-      "price": 14.23,
-      "change_pct": -0.35,
+      "price": 14.27,
+      "change_pct": 0.28,
       "adr_pct": 0.6,
-      "dollar_volume": "$24.6M",
-      "market_cap_b": 2.049,
-      "rs_ibd": 85,
-      "atr_ext_val": 18.61
+      "dollar_volume": "$23.1M",
+      "market_cap_b": 2.054,
+      "rs_ibd": 86,
+      "atr_ext_val": 17.97
     },
     {
       "ticker": "SAFT",
       "company": "Safety Insurance Group, Inc.",
       "industry": "Property/Casualty Insurance",
-      "price": 103.3,
-      "change_pct": -0.12,
+      "price": 103.51,
+      "change_pct": 0.2,
       "adr_pct": 0.5,
-      "dollar_volume": "$13.5M",
-      "market_cap_b": 1.516,
-      "rs_ibd": 80,
-      "atr_ext_val": 16.64
+      "dollar_volume": "$12.5M",
+      "market_cap_b": 1.52,
+      "rs_ibd": 81,
+      "atr_ext_val": 16.54
     },
     {
       "ticker": "ITGR",
       "company": "Integer Holdings Corporation",
       "industry": "Medical Specialties",
-      "price": 126.13,
-      "change_pct": 0.1,
-      "adr_pct": 0.7,
-      "dollar_volume": "$102.9M",
-      "market_cap_b": 4.287,
-      "rs_ibd": 70,
-      "atr_ext_val": 15.59
+      "price": 126.21,
+      "change_pct": 0.06,
+      "adr_pct": 0.6,
+      "dollar_volume": "$101.0M",
+      "market_cap_b": 4.29,
+      "rs_ibd": 71,
+      "atr_ext_val": 15.62
     },
     {
       "ticker": "ARX",
       "company": "Accelerant Holdings",
       "industry": "Property/Casualty Insurance",
-      "price": 19.83,
-      "change_pct": -0.05,
-      "adr_pct": 1.6,
-      "dollar_volume": "$22.4M",
-      "market_cap_b": 4.307,
-      "rs_ibd": 65,
-      "atr_ext_val": 15.28
+      "price": 19.81,
+      "change_pct": -0.1,
+      "adr_pct": 1.5,
+      "dollar_volume": "$24.0M",
+      "market_cap_b": 4.303,
+      "rs_ibd": 70,
+      "atr_ext_val": 15.41
     },
     {
       "ticker": "ATKR",
       "company": "Atkore Inc.",
       "industry": "Electrical Products",
-      "price": 94.07,
-      "change_pct": -0.08,
+      "price": 94.55,
+      "change_pct": 0.51,
       "adr_pct": 0.8,
-      "dollar_volume": "$74.5M",
-      "market_cap_b": 3.177,
-      "rs_ibd": 73,
-      "atr_ext_val": 12.69
-    },
-    {
-      "ticker": "ASST",
-      "company": "Strive, Inc.",
-      "industry": "Financial Conglomerates",
-      "price": 29.03,
-      "change_pct": 5.1,
-      "adr_pct": 6.4,
-      "dollar_volume": "$309.6M",
-      "market_cap_b": 2.707,
-      "rs_ibd": 56,
-      "atr_ext_val": 12.2
+      "dollar_volume": "$78.5M",
+      "market_cap_b": 3.193,
+      "rs_ibd": 75,
+      "atr_ext_val": 12.93
     },
     {
       "ticker": "CBZ",
       "company": "CBIZ, Inc.",
       "industry": "Miscellaneous Commercial Services",
-      "price": 54.6,
-      "change_pct": 0.11,
-      "adr_pct": 0.9,
-      "dollar_volume": "$75.1M",
-      "market_cap_b": 2.963,
-      "rs_ibd": 66,
-      "atr_ext_val": 10.79
+      "price": 54.68,
+      "change_pct": 0.15,
+      "adr_pct": 0.8,
+      "dollar_volume": "$73.5M",
+      "market_cap_b": 2.967,
+      "rs_ibd": 70,
+      "atr_ext_val": 10.58
     }
   ],
   "spx_benchmarks": {
@@ -121,5 +109,5 @@
     "spx_qtd": null,
     "spx_mtd": null
   },
-  "fetched_at_utc": "2026-09-15T01:12:58+00:00"
+  "fetched_at_utc": "2026-09-16T01:11:10+00:00"
 }

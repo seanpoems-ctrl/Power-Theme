@@ -1,87 +1,7 @@
 {
-  "generated_at": "2026-09-15T01:11:45.850096+00:00",
+  "generated_at": "2026-09-16T01:08:56.356024+00:00",
   "data_source": "tradingview",
   "events": [
-    {
-      "date": "2026-08-17",
-      "time_et": "08:30",
-      "event": "NY Empire State Manufacturing Index",
-      "impact": "Low",
-      "actual": "20.6",
-      "forecast": "11",
-      "previous": "15.6",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-08-17",
-      "time_et": "10:00",
-      "event": "NAHB Housing Market Index",
-      "impact": "Low",
-      "actual": "35",
-      "forecast": "33",
-      "previous": "34",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-08-17",
-      "time_et": "11:30",
-      "event": "6-Month Bill Auction",
-      "impact": "Low",
-      "actual": "3.78",
-      "forecast": null,
-      "previous": "3.83",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-08-17",
-      "time_et": "11:30",
-      "event": "3-Month Bill Auction",
-      "impact": "Low",
-      "actual": "3.715",
-      "forecast": null,
-      "previous": "3.735",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-08-17",
-      "time_et": "12:00",
-      "event": "NOPA Crush Report",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": null,
-      "currency": "USD"
-    },
-    {
-      "date": "2026-08-17",
-      "time_et": "16:00",
-      "event": "Overall Net Capital Flows",
-      "impact": "Low",
-      "actual": "133.5",
-      "forecast": null,
-      "previous": "131.5",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-08-17",
-      "time_et": "16:00",
-      "event": "Foreign Bond Investment",
-      "impact": "Low",
-      "actual": "6.8",
-      "forecast": null,
-      "previous": "56.6",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-08-17",
-      "time_et": "16:00",
-      "event": "Net Long-term TIC Flows",
-      "impact": "Low",
-      "actual": "172.7",
-      "forecast": "151.4",
-      "previous": "231.2",
-      "currency": "USD"
-    },
     {
       "date": "2026-08-18",
       "time_et": "08:15",
@@ -2215,21 +2135,21 @@
     {
       "date": "2026-09-03",
       "time_et": "12:00",
-      "event": "30-Year Mortgage Rate",
-      "impact": "Low",
-      "actual": "6.71",
-      "forecast": null,
-      "previous": "6.66",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-03",
-      "time_et": "12:00",
       "event": "15-Year Mortgage Rate",
       "impact": "Low",
       "actual": "6.04",
       "forecast": null,
       "previous": "5.98",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-03",
+      "time_et": "12:00",
+      "event": "30-Year Mortgage Rate",
+      "impact": "Low",
+      "actual": "6.71",
+      "forecast": null,
+      "previous": "6.66",
       "currency": "USD"
     },
     {
@@ -2595,6 +2515,16 @@
     {
       "date": "2026-09-10",
       "time_et": "08:30",
+      "event": "PPI Ex Food, Energy and Trade MoM",
+      "impact": "Low",
+      "actual": "0.3",
+      "forecast": null,
+      "previous": "0.4",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-10",
+      "time_et": "08:30",
       "event": "PPI Ex Food, Energy and Trade YoY",
       "impact": "Low",
       "actual": "4.7",
@@ -2635,11 +2565,11 @@
     {
       "date": "2026-09-10",
       "time_et": "08:30",
-      "event": "PPI Ex Food, Energy and Trade MoM",
+      "event": "Core PPI MoM",
       "impact": "Low",
-      "actual": "0.3",
-      "forecast": null,
-      "previous": "0.4",
+      "actual": "0.2",
+      "forecast": "0.3",
+      "previous": "0.3",
       "currency": "USD"
     },
     {
@@ -2650,16 +2580,6 @@
       "actual": "206",
       "forecast": "205",
       "previous": "207",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-10",
-      "time_et": "08:30",
-      "event": "Core PPI MoM",
-      "impact": "Low",
-      "actual": "0.2",
-      "forecast": "0.3",
-      "previous": "0.3",
       "currency": "USD"
     },
     {
@@ -3047,9 +2967,9 @@
       "time_et": "08:15",
       "event": "ADP Employment Change Weekly",
       "impact": "Low",
-      "actual": null,
+      "actual": "16.25",
       "forecast": null,
-      "previous": "12",
+      "previous": "12.25",
       "currency": "USD"
     },
     {
@@ -3057,7 +2977,7 @@
       "time_et": "08:30",
       "event": "NY Empire State Manufacturing Index",
       "impact": "Low",
-      "actual": null,
+      "actual": "7.6",
       "forecast": "14.75",
       "previous": "20.6",
       "currency": "USD"
@@ -3067,7 +2987,7 @@
       "time_et": "08:55",
       "event": "Redbook YoY",
       "impact": "Low",
-      "actual": null,
+      "actual": "8.5",
       "forecast": null,
       "previous": "8.3",
       "currency": "USD"
@@ -3077,7 +2997,7 @@
       "time_et": "11:30",
       "event": "6-Week Bill Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "3.85",
       "forecast": null,
       "previous": "3.74",
       "currency": "USD"
@@ -3097,29 +3017,19 @@
       "time_et": "13:00",
       "event": "20-Year Bond Auction",
       "impact": "Low",
-      "actual": null,
+      "actual": "5.42",
       "forecast": null,
       "previous": "5.204",
       "currency": "USD"
     },
     {
       "date": "2026-09-15",
-      "time_et": "16:30",
+      "time_et": "17:00",
       "event": "API Crude Oil Stock Change",
       "impact": "Low",
-      "actual": null,
-      "forecast": null,
+      "actual": "7.14",
+      "forecast": "-1.8",
       "previous": "-0.3",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-16",
-      "time_et": "07:00",
-      "event": "MBA Purchase Index",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "157.5",
       "currency": "USD"
     },
     {
@@ -3130,6 +3040,16 @@
       "actual": null,
       "forecast": null,
       "previous": "240.6",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-16",
+      "time_et": "07:00",
+      "event": "MBA Purchase Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "157.5",
       "currency": "USD"
     },
     {
@@ -3228,7 +3148,7 @@
       "event": "Retail Sales Ex Autos MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": "0.6",
+      "forecast": "0.5",
       "previous": "-0.3",
       "currency": "USD"
     },
@@ -3258,7 +3178,7 @@
       "event": "Retail Sales MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": "0.9",
+      "forecast": "0.8",
       "previous": "-0.6",
       "currency": "USD"
     },
@@ -3278,7 +3198,7 @@
       "event": "Business Inventories MoM",
       "impact": "Low",
       "actual": null,
-      "forecast": "0.8",
+      "forecast": "0.3",
       "previous": null,
       "currency": "USD"
     },
@@ -3290,26 +3210,6 @@
       "actual": null,
       "forecast": "34",
       "previous": "35",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-16",
-      "time_et": "10:30",
-      "event": "EIA Gasoline Production Change",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "-0.537",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-16",
-      "time_et": "10:30",
-      "event": "EIA Cushing Crude Oil Stocks Change",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "-0.684",
       "currency": "USD"
     },
     {
@@ -3335,11 +3235,21 @@
     {
       "date": "2026-09-16",
       "time_et": "10:30",
-      "event": "EIA Crude Oil Imports Change",
+      "event": "EIA Gasoline Production Change",
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": "1.12",
+      "previous": "-0.537",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-16",
+      "time_et": "10:30",
+      "event": "EIA Cushing Crude Oil Stocks Change",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "-0.684",
       "currency": "USD"
     },
     {
@@ -3355,6 +3265,16 @@
     {
       "date": "2026-09-16",
       "time_et": "10:30",
+      "event": "EIA Crude Oil Imports Change",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "1.12",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-16",
+      "time_et": "10:30",
       "event": "EIA Heating Oil Stocks Change",
       "impact": "Low",
       "actual": null,
@@ -3365,21 +3285,21 @@
     {
       "date": "2026-09-16",
       "time_et": "10:30",
-      "event": "EIA Crude Oil Stocks Change",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "-0.391",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-16",
-      "time_et": "10:30",
       "event": "EIA Gasoline Stocks Change",
       "impact": "Low",
       "actual": null,
       "forecast": null,
       "previous": "1.269",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-16",
+      "time_et": "10:30",
+      "event": "EIA Crude Oil Stocks Change",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "-0.391",
       "currency": "USD"
     },
     {
@@ -3415,6 +3335,16 @@
     {
       "date": "2026-09-16",
       "time_et": "14:00",
+      "event": "Interest Rate Projection - 3rd Yr",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "3.1",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-16",
+      "time_et": "14:00",
       "event": "Interest Rate Projection - Current",
       "impact": "Low",
       "actual": null,
@@ -3426,16 +3356,6 @@
       "date": "2026-09-16",
       "time_et": "14:00",
       "event": "Interest Rate Projection - Longer",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "3.1",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-16",
-      "time_et": "14:00",
-      "event": "Interest Rate Projection - 3rd Yr",
       "impact": "Low",
       "actual": null,
       "forecast": null,
@@ -3505,11 +3425,11 @@
     {
       "date": "2026-09-17",
       "time_et": "08:30",
-      "event": "Jobless Claims 4-week Average",
+      "event": "Philly Fed Prices Paid",
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": "206",
+      "previous": "40.9",
       "currency": "USD"
     },
     {
@@ -3518,8 +3438,18 @@
       "event": "Continuing Jobless Claims",
       "impact": "Low",
       "actual": null,
-      "forecast": null,
+      "forecast": "1780",
       "previous": "1774",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-17",
+      "time_et": "08:30",
+      "event": "Jobless Claims 4-week Average",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "206",
       "currency": "USD"
     },
     {
@@ -3565,20 +3495,10 @@
     {
       "date": "2026-09-17",
       "time_et": "08:30",
-      "event": "Philly Fed Prices Paid",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "40.9",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-17",
-      "time_et": "08:30",
       "event": "Initial Jobless Claims",
       "impact": "Low",
       "actual": null,
-      "forecast": "205",
+      "forecast": "208",
       "previous": "206",
       "currency": "USD"
     },
@@ -3588,7 +3508,7 @@
       "event": "Philadelphia Fed Manufacturing Index",
       "impact": "Low",
       "actual": null,
-      "forecast": "32.5",
+      "forecast": "30.5",
       "previous": "47.4",
       "currency": "USD"
     },
@@ -3665,21 +3585,21 @@
     {
       "date": "2026-09-17",
       "time_et": "11:30",
-      "event": "8-Week Bill Auction",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "3.845",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-17",
-      "time_et": "11:30",
       "event": "4-Week Bill Auction",
       "impact": "Low",
       "actual": null,
       "forecast": null,
       "previous": "3.775",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-17",
+      "time_et": "11:30",
+      "event": "8-Week Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "3.845",
       "currency": "USD"
     },
     {
@@ -3795,21 +3715,21 @@
     {
       "date": "2026-09-18",
       "time_et": "13:00",
-      "event": "Baker Hughes Oil Rig Count",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "450",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-18",
-      "time_et": "13:00",
       "event": "Baker Hughes Total Rigs Count",
       "impact": "Low",
       "actual": null,
       "forecast": null,
       "previous": "591",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-18",
+      "time_et": "13:00",
+      "event": "Baker Hughes Oil Rig Count",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "450",
       "currency": "USD"
     },
     {
@@ -3859,7 +3779,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "16.25",
       "currency": "USD"
     },
     {
@@ -3869,7 +3789,17 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "8.5",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-22",
+      "time_et": "10:00",
+      "event": "Richmond Fed Manufacturing Shipments Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "11",
       "currency": "USD"
     },
     {
@@ -3890,16 +3820,6 @@
       "actual": null,
       "forecast": null,
       "previous": "-8",
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-22",
-      "time_et": "10:00",
-      "event": "Richmond Fed Manufacturing Shipments Index",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": "11",
       "currency": "USD"
     },
     {
@@ -3959,7 +3879,7 @@
       "impact": "Low",
       "actual": null,
       "forecast": null,
-      "previous": null,
+      "previous": "7.14",
       "currency": "USD"
     },
     {
@@ -4015,16 +3935,6 @@
     {
       "date": "2026-09-23",
       "time_et": "09:45",
-      "event": "S&P Global Services PMI Flash",
-      "impact": "Low",
-      "actual": null,
-      "forecast": null,
-      "previous": null,
-      "currency": "USD"
-    },
-    {
-      "date": "2026-09-23",
-      "time_et": "09:45",
       "event": "S&P Global Composite PMI Flash",
       "impact": "Low",
       "actual": null,
@@ -4044,8 +3954,8 @@
     },
     {
       "date": "2026-09-23",
-      "time_et": "10:30",
-      "event": "EIA Crude Oil Imports Change",
+      "time_et": "09:45",
+      "event": "S&P Global Services PMI Flash",
       "impact": "Low",
       "actual": null,
       "forecast": null,
@@ -4106,6 +4016,16 @@
       "date": "2026-09-23",
       "time_et": "10:30",
       "event": "EIA Heating Oil Stocks Change",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-23",
+      "time_et": "10:30",
+      "event": "EIA Crude Oil Imports Change",
       "impact": "Low",
       "actual": null,
       "forecast": null,
@@ -4445,7 +4365,7 @@
     {
       "date": "2026-09-25",
       "time_et": "13:00",
-      "event": "Baker Hughes Total Rigs Count",
+      "event": "Baker Hughes Oil Rig Count",
       "impact": "Low",
       "actual": null,
       "forecast": null,
@@ -4455,7 +4375,7 @@
     {
       "date": "2026-09-25",
       "time_et": "13:00",
-      "event": "Baker Hughes Oil Rig Count",
+      "event": "Baker Hughes Total Rigs Count",
       "impact": "Low",
       "actual": null,
       "forecast": null,
@@ -4496,6 +4416,146 @@
       "date": "2026-09-28",
       "time_et": "11:30",
       "event": "6-Month Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-29",
+      "time_et": "08:55",
+      "event": "Redbook YoY",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-29",
+      "time_et": "09:00",
+      "event": "S&P/Case-Shiller Home Price MoM",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "0.4",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-29",
+      "time_et": "09:00",
+      "event": "House Price Index MoM",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-29",
+      "time_et": "09:00",
+      "event": "House Price Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "442.5",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-29",
+      "time_et": "09:00",
+      "event": "House Price Index YoY",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "2.3",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-29",
+      "time_et": "09:00",
+      "event": "S&P/Case-Shiller Home Price YoY",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "2.1",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-29",
+      "time_et": "10:00",
+      "event": "JOLTs Job Quits",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "3.056",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-29",
+      "time_et": "10:00",
+      "event": "CB Consumer Confidence",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "89.4",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-29",
+      "time_et": "10:00",
+      "event": "JOLTs Job Openings",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "7.271",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-29",
+      "time_et": "10:30",
+      "event": "Dallas Fed Services Revenues Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "6.6",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-29",
+      "time_et": "10:30",
+      "event": "Dallas Fed Services Index",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": "4.2",
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-29",
+      "time_et": "11:30",
+      "event": "6-Week Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-29",
+      "time_et": "11:30",
+      "event": "52-Week Bill Auction",
+      "impact": "Low",
+      "actual": null,
+      "forecast": null,
+      "previous": null,
+      "currency": "USD"
+    },
+    {
+      "date": "2026-09-29",
+      "time_et": "16:30",
+      "event": "API Crude Oil Stock Change",
       "impact": "Low",
       "actual": null,
       "forecast": null,
