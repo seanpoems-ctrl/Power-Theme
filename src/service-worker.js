@@ -27,7 +27,7 @@ registerRoute(
 registerRoute(
   ({ url }) => url.pathname.endsWith('.json'),
   new StaleWhileRevalidate({
-    cacheName: 'power-theme-data-v1',
+    cacheName: 'power-theme-data-v2',
     plugins: [
       new ExpirationPlugin({ maxEntries: 30, maxAgeSeconds: 24 * 60 * 60 }),
     ],

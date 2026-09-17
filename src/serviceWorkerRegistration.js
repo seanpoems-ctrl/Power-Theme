@@ -11,8 +11,9 @@
 //      that skip-waiting already installs in the background actually shows
 //      up without a manual hard refresh.
 //
-// Verified 2026-09-17: an already-open tab on the previous bundle picked up
-// this exact change and reloaded itself with zero manual intervention.
+// Note: update-detection byte-compares service-worker.js itself, not this
+// file or the app's main bundle — a change here alone won't trigger a real
+// SW update cycle to test against.
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
