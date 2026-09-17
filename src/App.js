@@ -7439,7 +7439,7 @@ const FILING_LABEL = {
 };
 
 // ── Merged Search + Ticker Lookup ──
-const SearchBar = ({ data, search, setSearch }) => {
+const SearchBar = ({ data, search, setSearch, categoryThemeMap = {} }) => {
   const lang = useLang();
   const [open, setOpen] = useState(false);
   const [allTickers, setAllTickers] = useState([]);
@@ -8016,15 +8016,21 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
                   <span className="text-zinc-200">{value}</span>
                 </div>
               ) : null)}
-              {fullResult.appearances.length > 0 && (
+              {(fullResult.appearances.length > 0 || categoryThemeMap[fullResult.ticker]) && (
                 <div className="mt-2 pt-2 border-t border-zinc-800 space-y-1.5">
-                  {/* Single "Theme" row — display only, not expandable */}
+                  {/* Single "Theme" row — display only, not expandable.
+                      Category Leaderboard's ETF-based mapping (categoryThemeMap)
+                      wins when available — same standardization already used in
+                      Calendar/Watchlist, and covers far more tickers than the
+                      scanner's own appearances (only the 5 nightly-drilled themes). */}
                   <div className="flex gap-2 text-[13px] items-start">
                     <span className="text-zinc-500 w-16 flex-shrink-0">Theme</span>
                     <div className="flex flex-wrap gap-x-2 gap-y-1">
-                      {fullResult.appearances.map((a, i) => (
-                        <span key={i} className="text-blue-300 font-medium">{a.theme}</span>
-                      ))}
+                      {categoryThemeMap[fullResult.ticker]
+                        ? <span className="text-blue-300 font-medium">{categoryThemeMap[fullResult.ticker]}</span>
+                        : fullResult.appearances.map((a, i) => (
+                            <span key={i} className="text-blue-300 font-medium">{a.theme}</span>
+                          ))}
                     </div>
                   </div>
                   {/* Sub-theme for scanner stocks */}
@@ -12797,7 +12803,7 @@ const appScreenerMap = useMemo(() => {
               <button onClick={() => setTab("journal")} className={`px-2.5 py-1 text-[12px] font-medium rounded-md border transition-colors whitespace-nowrap ${tab === "journal" ? "bg-blue-500/15 border-blue-500/30 text-blue-400" : "bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-300"}`}>
                 Trade Journal
               </button>
-              <SearchBar data={data} search={search} setSearch={setSearch}/>
+              <SearchBar data={data} search={search} setSearch={setSearch} categoryThemeMap={categoryThemeMap}/>
               <button onClick={toggleLang} title="Toggle language" className="px-2.5 py-1 text-[12px] font-bold rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-200 transition-colors whitespace-nowrap">
                 {lang === 'zh' ? '中' : 'EN'}
               </button>
