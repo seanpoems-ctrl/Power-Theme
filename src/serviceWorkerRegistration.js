@@ -1,5 +1,15 @@
 // Standard CRA service worker registration.
 // Registers in production only; on localhost it validates the SW is still valid.
+//
+// Extended with two things the stock CRA template leaves as an exercise for
+// the caller (nobody wired them up here, so a tab left open across a deploy
+// would silently keep running the old bundle indefinitely):
+//   1. Periodic + on-visibility registration.update() calls — browsers only
+//      passively re-check the SW script for changes about once every ~24h,
+//      far slower than this project's deploy cadence.
+//   2. An auto-reload once a genuinely new SW takes control, so the update
+//      that skip-waiting already installs in the background actually shows
+//      up without a manual hard refresh.
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -23,6 +33,16 @@ function registerValidSW(swUrl, config) {
   navigator.serviceWorker
     .register(swUrl)
     .then((registration) => {
+      // Force a check on our own schedule rather than waiting on the
+      // browser's passive ~24h one — every 5 min while the tab is open, and
+      // immediately whenever it becomes visible again (e.g. switching back
+      // after being away).
+      setInterval(() => registration.update(), 5 * 60 * 1000);
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') registration.update();
+      });
+
+      let updateDetected = false;
       registration.onupdatefound = () => {
         const installing = registration.installing;
         if (!installing) return;
@@ -30,6 +50,7 @@ function registerValidSW(swUrl, config) {
           if (installing.state === 'installed') {
             if (navigator.serviceWorker.controller) {
               // New version available — tell the SW to skip waiting
+              updateDetected = true;
               installing.postMessage({ type: 'SKIP_WAITING' });
               config?.onUpdate?.(registration);
             } else {
@@ -37,6 +58,16 @@ function registerValidSW(swUrl, config) {
             }
           }
         };
+      };
+
+      // Once the new SW actually takes control, reload so the page picks up
+      // the new bundle — but only when it's a real update (updateDetected),
+      // never on the very first activation of a fresh visit, and only once.
+      let reloaded = false;
+      navigator.serviceWorker.oncontrollerchange = () => {
+        if (!updateDetected || reloaded) return;
+        reloaded = true;
+        window.location.reload();
       };
     })
     .catch((err) => console.error('SW registration failed:', err));
