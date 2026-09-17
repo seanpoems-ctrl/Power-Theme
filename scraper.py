@@ -2374,7 +2374,7 @@ def _tv_batch_detail(tickers: list[str]) -> dict[str, dict]:
     FIELDS = ["name", "description", "close", "change", "open",
               "Perf.W", "Perf.1M", "Perf.3M", "Perf.6M", "Perf.Y",
               "average_volume_10d_calc", "volume", "market_cap_basic",
-              "price_52_week_high", "price_52_week_low", "ATR", "Relative.Volume",
+              "price_52_week_high", "price_52_week_low", "ATR", "relative_volume_10d_calc",
               "SMA10", "SMA20", "SMA50", "SMA200", "sector", "industry"]
     out: dict[str, dict] = {}
     for i in range(0, len(us), 1000):
@@ -2414,7 +2414,7 @@ def _tv_batch_detail(tickers: list[str]) -> dict[str, dict]:
                 "52w_high": hi52,
                 "52w_low": _f(row.get("price_52_week_low")),
                 "dist_52w_high": round((close / hi52 - 1) * 100, 2) if hi52 else None,
-                "rvol": _f(row.get("Relative.Volume")),
+                "rvol": _f(row.get("relative_volume_10d_calc")),
                 "sector": str(row.get("sector", "") or ""),
                 "industry": str(row.get("industry", "") or ""),
                 "perf_1d": _f(row.get("change")),
