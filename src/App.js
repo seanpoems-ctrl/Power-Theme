@@ -1342,7 +1342,10 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, fin
   // and Thematic Spotlight instead of running an independent Finviz score.
   // "industry" stays a distinct drill-down lens into raw Finviz industry
   // detail, not a second competing "what's hot" claim.
-  const activeData = view === "finetheme" ? fineThemeRankings : themeRankings;
+  // Falls back to themeRankings if fine_theme_rankings hasn't been generated
+  // yet (e.g. right after this feature deploys, before the next etf_rs_builder.py
+  // run) so the leaderboard is never silently empty.
+  const activeData = view === "finetheme" ? (fineThemeRankings.length > 0 ? fineThemeRankings : themeRankings) : themeRankings;
 
   const handleLBSort = (key, isShift) => {
     if (isShift) {
