@@ -8033,8 +8033,11 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
                           ))}
                     </div>
                   </div>
-                  {/* Sub-theme for scanner stocks */}
-                  {fullResult.appearances.some(a => a.subtheme) && (
+                  {/* Sub-theme for scanner stocks — suppressed when Theme was
+                      overridden by categoryThemeMap, since the sub-theme still
+                      belongs to the scanner's original (possibly different)
+                      theme and would pair confusingly with the displayed one. */}
+                  {!categoryThemeMap[fullResult.ticker] && fullResult.appearances.some(a => a.subtheme) && (
                     <div className="flex gap-2 text-[13px] items-start">
                       <span className="text-zinc-500 w-16 flex-shrink-0">Sub-Theme</span>
                       <div className="flex flex-wrap gap-x-2 gap-y-1">
