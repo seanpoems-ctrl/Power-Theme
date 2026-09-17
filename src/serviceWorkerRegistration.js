@@ -10,6 +10,9 @@
 //   2. An auto-reload once a genuinely new SW takes control, so the update
 //      that skip-waiting already installs in the background actually shows
 //      up without a manual hard refresh.
+//
+// Verified 2026-09-17: an already-open tab on the previous bundle picked up
+// this exact change and reloaded itself with zero manual intervention.
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
