@@ -7439,7 +7439,7 @@ const FILING_LABEL = {
 };
 
 // ── Merged Search + Ticker Lookup ──
-const SearchBar = ({ data, search, setSearch, categoryThemeMap = {} }) => {
+const SearchBar = ({ data, search, setSearch, categoryThemeMap = {}, categoryEtfMap = {} }) => {
   const lang = useLang();
   const [open, setOpen] = useState(false);
   const [allTickers, setAllTickers] = useState([]);
@@ -8054,6 +8054,28 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
                             </button>
                           );
                         })}
+                      </div>
+                    </div>
+                  )}
+                  {/* Theme ETF — replaces Sub-Theme once Theme has been
+                      overridden by categoryThemeMap: names the specific
+                      tracked ETF(s) within that category that actually hold
+                      this stock, rather than showing a stale sub-theme tied
+                      to the scanner's original (overridden) placement. */}
+                  {categoryThemeMap[fullResult.ticker] && (categoryEtfMap[fullResult.ticker] || []).length > 0 && (
+                    <div className="flex gap-2 text-[13px] items-start">
+                      <span className="text-zinc-500 w-16 flex-shrink-0">Theme ETF</span>
+                      <div className="flex flex-wrap gap-x-2 gap-y-1">
+                        {categoryEtfMap[fullResult.ticker].map(etf => (
+                          <a key={etf}
+                            href={`https://www.tradingview.com/chart/?symbol=${etf}`}
+                            target="_blank" rel="noreferrer"
+                            onMouseDown={e => e.preventDefault()}
+                            className="text-[11px] font-mono font-semibold px-1.5 py-0.5 rounded border text-emerald-400 bg-emerald-500/10 border-emerald-500/20 hover:bg-emerald-500/20"
+                          >
+                            {etf}
+                          </a>
+                        ))}
                       </div>
                     </div>
                   )}
@@ -12244,7 +12266,7 @@ const CalcModal = ({ onClose, ibkrThemesData, thematicData, vix }) => {
 // strongest right now" read a trader would use to break the tie manually.
 function buildCategoryThemeMap(etfHoldings, etfRsData) {
   const etfs = (etfRsData?.etfs || []).filter(e => !e.benchmark);
-  if (!etfs.length || !etfHoldings) return {};
+  if (!etfs.length || !etfHoldings) return { themeMap: {}, etfMap: {} };
 
   const etfInfo = {};               // etf ticker -> { category, score }
   const scoresByCategory = {};      // category -> [scores...]
@@ -12262,7 +12284,10 @@ function buildCategoryThemeMap(etfHoldings, etfRsData) {
   const categoryScore = {};
   for (const [cat, scores] of Object.entries(scoresByCategory)) categoryScore[cat] = median(scores);
 
-  const best = {}; // stock ticker -> { category, score }
+  // Every (etf, category) hit per stock, so we can both pick the winning
+  // category AND list every ETF within it that actually holds the stock —
+  // not just the single ETF that happened to be iterated last.
+  const hitsByStock = {}; // stock ticker -> [{ etfTicker, category, score }, ...]
   for (const [etfTicker, holdings] of Object.entries(etfHoldings)) {
     const info = etfInfo[etfTicker];
     if (!info) continue;
@@ -12270,12 +12295,18 @@ function buildCategoryThemeMap(etfHoldings, etfRsData) {
     for (const h of holdings || []) {
       const t = h.ticker;
       if (!t) continue;
-      if (!best[t] || catScore > best[t].score) best[t] = { category: info.category, score: catScore };
+      (hitsByStock[t] ||= []).push({ etfTicker, category: info.category, score: catScore });
     }
   }
-  const map = {};
-  for (const [t, v] of Object.entries(best)) map[t] = v.category;
-  return map;
+
+  const themeMap = {}, etfMap = {};
+  for (const [t, hits] of Object.entries(hitsByStock)) {
+    let best = hits[0];
+    for (const h of hits) if (h.score > best.score) best = h;
+    themeMap[t] = best.category;
+    etfMap[t] = [...new Set(hits.filter(h => h.category === best.category).map(h => h.etfTicker))];
+  }
+  return { themeMap, etfMap };
 }
 
 export default function App() {
@@ -12447,8 +12478,11 @@ export default function App() {
 
   // Ticker -> Category Leaderboard category, standardized across secondary
   // tables (Clean Bases, Market Leaders, Calendar earnings tags, Gapper
-  // Scanner). See buildCategoryThemeMap() above.
-  const categoryThemeMap = React.useMemo(
+  // Scanner). categoryEtfMap is the same computation's other half — which
+  // specific ETF(s) within that winning category actually hold the stock —
+  // used by the search panel to show "Theme ETF" instead of a stale
+  // Sub-Theme once Theme has been overridden. See buildCategoryThemeMap().
+  const { themeMap: categoryThemeMap, etfMap: categoryEtfMap } = React.useMemo(
     () => buildCategoryThemeMap(data?.etf_holdings, appEtfRsData),
     [data?.etf_holdings, appEtfRsData]
   );
@@ -12806,7 +12840,7 @@ const appScreenerMap = useMemo(() => {
               <button onClick={() => setTab("journal")} className={`px-2.5 py-1 text-[12px] font-medium rounded-md border transition-colors whitespace-nowrap ${tab === "journal" ? "bg-blue-500/15 border-blue-500/30 text-blue-400" : "bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-300"}`}>
                 Trade Journal
               </button>
-              <SearchBar data={data} search={search} setSearch={setSearch} categoryThemeMap={categoryThemeMap}/>
+              <SearchBar data={data} search={search} setSearch={setSearch} categoryThemeMap={categoryThemeMap} categoryEtfMap={categoryEtfMap}/>
               <button onClick={toggleLang} title="Toggle language" className="px-2.5 py-1 text-[12px] font-bold rounded-md border bg-zinc-800/60 border-zinc-700/50 text-zinc-400 hover:text-zinc-200 transition-colors whitespace-nowrap">
                 {lang === 'zh' ? '中' : 'EN'}
               </button>
