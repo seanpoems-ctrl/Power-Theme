@@ -59,7 +59,7 @@ const PERF_KEYS = [
 ];
 
 const LB_KEYS = [
-  { key: "perf_intraday", label: "% Intraday" },
+  { key: "perf_intraday", label: "Intraday" },
   { key: "perf_1d", label: "1D" },
   { key: "perf_1w", label: "1W" },
   { key: "perf_1m", label: "1M" },
@@ -1062,7 +1062,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                       <SortTh col="ticker"   label="Ticker"                           align="left"  className="px-4" />
                       <SortTh col="name"     label={lang === 'zh' ? '公司' : 'Company'} align="left"  className="px-4 hidden sm:table-cell" />
                       <SortTh col="price"    label={lang === 'zh' ? '價格' : 'Price'}   align="right" />
-                      <SortTh col="perf_intraday" label="% Intraday"                   align="right" />
+                      <SortTh col="perf_intraday" label="Intraday"                     align="right" />
                       <SortTh col="perf_1d"  label="1D"                               align="right" />
                       <SortTh col="perf_1w"  label="1W"                               align="right" />
                       <SortTh col="perf_1m"  label="1M"                               align="right" />
@@ -1117,7 +1117,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                       <SortTh col="ticker"   label="Ticker"                           align="left"  className="px-4" />
                       <SortTh col="company"  label={lang === 'zh' ? '公司' : 'Company'} align="left"  className="px-4 hidden sm:table-cell" />
                       <SortTh col="price"    label={lang === 'zh' ? '價格' : 'Price'}   align="right" />
-                      <SortTh col="perf_intraday" label="% Intraday"                   align="right" />
+                      <SortTh col="perf_intraday" label="Intraday"                     align="right" />
                       <SortTh col="perf_1d"  label="1D"                               align="right" />
                       <SortTh col="perf_1w"  label="1W"                               align="right" />
                       <SortTh col="perf_1m"  label="1M"                               align="right" />
@@ -5761,7 +5761,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
     { col: "adr_dvol",      label: "ADR×",      label2: "Avg$Vol",  tooltip: "ADR% × Avg Daily $Vol"        },
     { col: "pct_52w_range", label: "52W%",                          tooltip: "Price position in 52W range"  },
     { col: "adr_pct",       label: "ADR%"                                                                    },
-    { col: "perf_intraday", label: "Intra%",                        tooltip: "% change from today's open"   },
+    { col: "perf_intraday", label: "Intra",                         tooltip: "% change from today's open"   },
     { col: "perf_1d",       label: "1D%"                                                                     },
     { col: "perf_1w",       label: "1W%"                                                                     },
     { col: "perf_1m",       label: "1M%"                                                                     },
