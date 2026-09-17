@@ -7124,6 +7124,78 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
   );
 };
 
+// ── Single-stock leveraged/inverse ETFs — long (bull) and short (bear) products
+// tracking one underlying stock. Hand-curated reference list; update here when
+// new single-stock ETFs launch. One correction from the source list: TSLA's
+// short group read "slq tsls tslz" — "slq" isn't a real ticker on its own and
+// only makes sense as "tslq" (Direxion's actual TSLA bear product) truncated
+// by column width, so it's normalized to TSLQ below.
+const LEVERAGED_ETF_MAP = {
+  HIMS:  { long: ["HIMZ"], short: [] },
+  ARM:   { long: ["ARMG"], short: [] },
+  NBIS:  { long: ["NBIL", "NBIG", "NEBX"], short: ["NBIZ"] },
+  WDC:   { long: ["WDCX"], short: [] },
+  HOOD:  { long: ["ROBN"], short: ["HOOZ"] },
+  ALAB:  { long: ["LABX"], short: [] },
+  CRDO:  { long: ["CRDU"], short: [] },
+  SNDK:  { long: ["SNXX"], short: [] },
+  RIOT:  { long: ["RIOX"], short: [] },
+  CRWV:  { long: ["CWVX", "CRWG"], short: ["CORD"] },
+  MU:    { long: ["MUU"], short: ["MUD"] },
+  SOFI:  { long: ["SOFX"], short: [] },
+  MRVL:  { long: ["MVLL"], short: [] },
+  TSM:   { long: ["TSMX"], short: [] },
+  AMD:   { long: ["AMDL"], short: ["AMDD"] },
+  INTC:  { long: ["INTW"], short: [] },
+  APLD:  { long: ["APLX"], short: [] },
+  UNH:   { long: ["UNHG"], short: [] },
+  BE:    { long: ["BEX"], short: [] },
+  CBRS:  { long: ["CBRG"], short: [] },
+  MARA:  { long: ["MRAL"], short: [] },
+  TEM:   { long: ["TEMT"], short: [] },
+  COIN:  { long: ["CONL"], short: [] },
+  AVGO:  { long: ["AVGX"], short: ["AVS"] },
+  OKLO:  { long: ["OKLL"], short: ["OKLS"] },
+  QCOM:  { long: ["QCML"], short: [] },
+  IREN:  { long: ["IRE", "IREX"], short: [] },
+  RDDT:  { long: ["RDTL"], short: [] },
+  UPST:  { long: ["UPSX"], short: [] },
+  AAPL:  { long: ["AAPU"], short: ["AAPD"] },
+  GOOGL: { long: ["GGLL"], short: ["GGLS"] },
+  GOOG:  { long: ["GGLL"], short: ["GGLS"] },
+  AXTI:  { long: ["AXTX"], short: [] },
+  LITE:  { long: ["LITX"], short: [] },
+  SMR:   { long: ["SMU"], short: [] },
+  RKLB:  { long: ["RKLX"], short: ["RKLZ"] },
+  NVDA:  { long: ["NVDX", "NVDU", "NVDL"], short: ["NVD", "NVDQ"] },
+  POET:  { long: ["POEL"], short: [] },
+  RGTI:  { long: ["RGTX"], short: ["RGTZ"] },
+  CRCL:  { long: ["RCG", "CWVX", "CRWU"], short: ["CRCD"] },
+  SOUN:  { long: ["SOUX"], short: [] },
+  AAOI:  { long: ["AAOX"], short: [] },
+  QUBT:  { long: ["QUBX"], short: [] },
+  TSLA:  { long: ["TSLL", "TSLR"], short: ["TSLQ", "TSLS", "TSLZ"] },
+  ASTS:  { long: ["ASTX"], short: [] },
+  ORCL:  { long: ["ORCX"], short: [] },
+  META:  { long: ["FBL", "METU"], short: ["METD"] },
+  PLTR:  { long: ["PLTU", "PTIR"], short: ["PLTD", "PLTZ"] },
+  QBTS:  { long: ["QBTX"], short: ["QBTZ"] },
+  IONQ:  { long: ["IONX"], short: ["IONZ"] },
+  ONDS:  { long: ["ONDL", "ONDG"], short: [] },
+  AMZN:  { long: ["AMZU"], short: ["AMZD"] },
+  APP:   { long: ["APPX"], short: [] },
+  NOW:   { long: ["NOWL"], short: [] },
+  LUNR:  { long: ["LUNL"], short: [] },
+  BBAI:  { long: ["BAIG"], short: [] },
+  NFLX:  { long: ["NFXL", "NFLU"], short: ["NFXS"] },
+  MSFT:  { long: ["MSFU"], short: ["MSFD"] },
+  BABA:  { long: ["BABX"], short: [] },
+  ADBE:  { long: ["ADBG"], short: [] },
+  BMNR:  { long: ["BMNU"], short: [] },
+  SMCI:  { long: ["SMCX", "SMCL"], short: ["SMCZ"] },
+  MSTR:  { long: ["MSTU", "MSTX"], short: ["MSTZ", "SMST"] },
+};
+
 // ── Multi-theme overrides: legacy frontend fallback (now mostly handled by scraper's ticker_extra_subthemes) ──
 // Only add entries here for themes the scraper doesn't cover yet.
 const TICKER_EXTRA_THEMES = {};
@@ -7980,6 +8052,32 @@ Please analyze ${ticker}${company ? ` (${company})` : ""} and provide the follow
                           onClick={() => { setSearch(p); }}
                           className="text-[10px] font-mono font-semibold text-blue-400/80 hover:text-blue-300 transition-colors"
                         >{p}</button>
+                      ))}
+                    </div>
+                  );
+                })()}
+                {/* Leveraged single-stock ETFs — long (green) / short (red) */}
+                {(() => {
+                  const letf = LEVERAGED_ETF_MAP[fullResult.ticker];
+                  if (!letf || (letf.long.length === 0 && letf.short.length === 0)) return null;
+                  return (
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      <span className="text-[10px] text-zinc-600 uppercase tracking-wide font-semibold">LETF</span>
+                      {letf.long.map(t => (
+                        <a key={t}
+                          href={`https://www.tradingview.com/chart/?symbol=${t}`}
+                          target="_blank" rel="noreferrer"
+                          onMouseDown={e => e.preventDefault()}
+                          className="text-[10px] font-mono font-semibold text-emerald-400 hover:text-emerald-300 transition-colors"
+                        >{t}</a>
+                      ))}
+                      {letf.short.map(t => (
+                        <a key={t}
+                          href={`https://www.tradingview.com/chart/?symbol=${t}`}
+                          target="_blank" rel="noreferrer"
+                          onMouseDown={e => e.preventDefault()}
+                          className="text-[10px] font-mono font-semibold text-red-400 hover:text-red-300 transition-colors"
+                        >{t}</a>
                       ))}
                     </div>
                   );
