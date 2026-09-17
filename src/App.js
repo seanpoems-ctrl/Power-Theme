@@ -10276,7 +10276,19 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
     <div className="space-y-4">
       {sections.map(({ name, rows }) => (
         <div key={name} className="rounded-lg border border-zinc-800 overflow-x-auto">
-          <table className="w-full text-xs border-collapse">
+          <table className="w-full text-xs border-collapse" style={{ tableLayout: "fixed" }}>
+            <colgroup>
+              <col style={{ width: "8%" }} />
+              <col style={{ width: "20%" }} />
+              <col style={{ width: "10%" }} />
+              <col style={{ width: "9%" }} />
+              <col style={{ width: "12%" }} />
+              <col style={{ width: "12%" }} />
+              <col style={{ width: "7%" }} />
+              <col style={{ width: "7%" }} />
+              <col style={{ width: "7%" }} />
+              <col style={{ width: "8%" }} />
+            </colgroup>
             <thead>
               <tr className="bg-zinc-900/80 border-b border-zinc-700 text-zinc-400 text-[11px] whitespace-nowrap">
                 {[
