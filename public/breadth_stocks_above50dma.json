@@ -2,52 +2,64 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 3,
+  "count": 4,
   "stocks": [
+    {
+      "ticker": "SDGR",
+      "company": "Schrodinger, Inc.",
+      "industry": "Packaged Software",
+      "price": 30.24,
+      "change_pct": 26.37,
+      "adr_pct": 5.2,
+      "dollar_volume": "$66.8M",
+      "market_cap_b": 2.262,
+      "rs_ibd": 89,
+      "above50dma_pct": 66.2
+    },
     {
       "ticker": "ASST",
       "company": "Strive, Inc.",
       "industry": "Financial Conglomerates",
-      "price": 27.41,
-      "change_pct": -0.58,
-      "adr_pct": 6.8,
-      "dollar_volume": "$271.2M",
-      "market_cap_b": 2.556,
-      "rs_ibd": 57,
-      "above50dma_pct": 62.6
+      "price": 28.28,
+      "change_pct": 3.17,
+      "adr_pct": 6.6,
+      "dollar_volume": "$280.2M",
+      "market_cap_b": 2.637,
+      "rs_ibd": 65,
+      "above50dma_pct": 64.7
     },
     {
       "ticker": "MRNA",
       "company": "Moderna, Inc.",
       "industry": "Biotechnology",
-      "price": 145.62,
-      "change_pct": 1.29,
-      "adr_pct": 8.0,
-      "dollar_volume": "$1.68B",
-      "market_cap_b": 58.137,
+      "price": 158.07,
+      "change_pct": 8.55,
+      "adr_pct": 7.6,
+      "dollar_volume": "$1.86B",
+      "market_cap_b": 63.107,
       "rs_ibd": 98,
-      "above50dma_pct": 53.4
+      "above50dma_pct": 63.6
     },
     {
       "ticker": "IOVA",
       "company": "Iovance Biotherapeutics, Inc.",
       "industry": "Biotechnology",
-      "price": 9.87,
-      "change_pct": 5.45,
-      "adr_pct": 5.2,
-      "dollar_volume": "$129.7M",
-      "market_cap_b": 4.471,
+      "price": 10.02,
+      "change_pct": 1.52,
+      "adr_pct": 5.6,
+      "dollar_volume": "$143.5M",
+      "market_cap_b": 4.539,
       "rs_ibd": 98,
-      "above50dma_pct": 50.5
+      "above50dma_pct": 50.2
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.45,
-    "spx_1m": -1.82,
-    "spx_3m": 1.78,
-    "spx_34d": 1.54,
-    "spx_qtd": 0.92,
-    "spx_mtd": -1.04
+    "spx_1d": null,
+    "spx_1m": null,
+    "spx_3m": null,
+    "spx_34d": null,
+    "spx_qtd": null,
+    "spx_mtd": null
   },
-  "fetched_at_utc": "2026-09-17T01:11:50+00:00"
+  "fetched_at_utc": "2026-09-17T23:09:36+00:00"
 }

@@ -3,33 +3,16 @@
   "filter": "dn50m",
   "label": "Down 50%+ Monthly",
   "min_cap_b": 1.0,
-  "count": 1,
-  "stocks": [
-    {
-      "ticker": "RARE",
-      "company": "Ultragenyx Pharmaceutical Inc.",
-      "industry": "Pharmaceuticals: Major",
-      "market_cap_b": 1.27,
-      "price": 12.88,
-      "change_pct": -1.45,
-      "dollar_volume": "$102.9M",
-      "adr_pct": 11.6,
-      "perf_1m": -50.95,
-      "perf_3m": -53.23,
-      "perf_34d": null,
-      "perf_qtd": -53.23,
-      "perf_mtd": -50.95,
-      "rs_ibd": 6
-    }
-  ],
+  "count": 0,
+  "stocks": [],
   "spx_benchmarks": {
-    "spx_1d": -0.45,
-    "spx_1m": -1.82,
-    "spx_3m": 1.78,
-    "spx_34d": 1.54,
-    "spx_qtd": 0.92,
-    "spx_mtd": -1.04
+    "spx_1d": 1.14,
+    "spx_1m": -0.91,
+    "spx_3m": 1.83,
+    "spx_34d": 1.98,
+    "spx_qtd": 2.07,
+    "spx_mtd": 0.08
   },
-  "fetched_at_utc": "2026-09-17T01:12:01+00:00",
+  "fetched_at_utc": "2026-09-17T23:09:47+00:00",
   "source": "tv_fallback"
 }
