@@ -237,7 +237,32 @@ def _build_fine_theme_rankings(result_rows: list[dict]) -> list[dict]:
         out.append(row)
 
     out.sort(key=lambda r: -(r["score"] if r["score"] is not None else -999))
+    _add_rotation_ranks(out)
     return out
+
+
+def _add_rotation_ranks(rankings: list[dict]) -> None:
+    """Same rank-momentum signal as scraper.py's _add_rotation_ranks (kept as
+    a separate copy rather than a cross-file import, since these two scripts
+    otherwise run independently): rank_1w/rank_3m are a bucket's position
+    when the whole set is ranked by that window's perf (1 = best);
+    rotation_delta = rank_3m - rank_1w, positive meaning the bucket's
+    short-term rank has climbed ahead of its longer-term rank (rotation in).
+    """
+    n = len(rankings)
+    if n < 2:
+        return
+    by_1w = sorted(rankings, key=lambda t: t.get("perf_1w") or 0, reverse=True)
+    by_3m = sorted(rankings, key=lambda t: t.get("perf_3m") or 0, reverse=True)
+    rank_1w = {id(t): i + 1 for i, t in enumerate(by_1w)}
+    rank_3m = {id(t): i + 1 for i, t in enumerate(by_3m)}
+    threshold = max(3, round(n * 0.25))
+    for t in rankings:
+        t["rank_1w"] = rank_1w[id(t)]
+        t["rank_3m"] = rank_3m[id(t)]
+        t["rotation_delta"] = t["rank_3m"] - t["rank_1w"]
+        t["accelerating"] = (t["rotation_delta"] >= threshold
+                             and (t.get("perf_1w") or 0) > 0)
 
 
 def compute_ibd_rs(perf_q4: float | None, perf_q3: float | None,
