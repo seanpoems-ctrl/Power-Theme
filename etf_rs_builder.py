@@ -196,6 +196,50 @@ def _safe_pct(series: pd.Series, periods: int) -> float | None:
         return None
 
 
+def _median(vals: list) -> float | None:
+    vals = sorted(v for v in vals if v is not None)
+    if not vals:
+        return None
+    n = len(vals)
+    mid = n // 2
+    return vals[mid] if n % 2 else (vals[mid - 1] + vals[mid]) / 2
+
+
+def _build_fine_theme_rankings(result_rows: list[dict]) -> list[dict]:
+    """Roll individual ETFs up into fine_theme buckets — the same median-based
+    aggregation EtfCategoryLeaderboard (Category Leaderboard) computes
+    client-side, done once here so every other dashboard surface (Industry
+    Matrix, Theme Leaderboard, Thematic Spotlight) can read the exact same
+    'what's hot' ranking instead of running an independent Finviz-based score
+    that can (and does) disagree with Category Leaderboard."""
+    by_cat: dict[str, list[dict]] = {}
+    for r in result_rows:
+        if r.get("benchmark"):
+            continue
+        cat = r.get("fine_theme") or r.get("category") or "Other"
+        by_cat.setdefault(cat, []).append(r)
+
+    PERF_KEYS = ["perf_intraday", "perf_1d", "perf_1w", "perf_1m", "perf_3m", "perf_6m", "perf_ytd", "perf_12m"]
+    out = []
+    for cat, members in by_cat.items():
+        scored = [m for m in members if m.get("score") is not None]
+        leader = max(scored, key=lambda m: m["score"]) if scored else None
+        row = {
+            "name": cat,
+            "score": _median([m.get("score") for m in members]),
+            "leader_ticker": leader["ticker"] if leader else None,
+            "anchor_ticker": next((m.get("anchor_ticker") for m in members if m.get("anchor_ticker")), None),
+            "member_tickers": sorted(m["ticker"] for m in members),
+            "count": len(members),
+        }
+        for k in PERF_KEYS:
+            row[k] = _median([m.get(k) for m in members])
+        out.append(row)
+
+    out.sort(key=lambda r: -(r["score"] if r["score"] is not None else -999))
+    return out
+
+
 def compute_ibd_rs(perf_q4: float | None, perf_q3: float | None,
                    perf_q2: float | None, perf_q1: float | None) -> float | None:
     """IBD RS composite: 40% recent qtr + 20% each of the prior 3 qtrs."""
@@ -575,6 +619,7 @@ def build_etf_rs() -> dict:
         "consensus_last": consensus_last.date().isoformat() if consensus_last is not None else None,
         "stale_count": len(stale_tickers),
         "etfs": result_rows,
+        "fine_theme_rankings": _build_fine_theme_rankings(result_rows),
     }
 
 

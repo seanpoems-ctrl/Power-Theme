@@ -352,6 +352,24 @@ INDUSTRY_TO_THEME = {
     "Shell Companies": "Other",
 }
 
+# fine_theme is the 29-bucket, ETF-price-based taxonomy Category Leaderboard
+# (etf_rs_builder.py / public/etf_metadata.json) already groups by — the
+# reconciliation target so Industry Matrix, Theme Leaderboard, and Thematic
+# Spotlight all rank/group the same way Category Leaderboard does. Almost
+# every INDUSTRY_TO_THEME name already equals a fine_theme bucket name
+# 1:1; only a handful of scanner-only themes (not present as their own
+# fine_theme bucket in etf_metadata.json) need remapping to their closest
+# Category Leaderboard bucket.
+THEME_TO_FINE_THEME_OVERRIDES = {
+    "Hardware": "Semiconductors",
+    "Neocloud": "Cloud Computing",
+    "Quantum Computing": "Semiconductors",   # matches QTUM's own fine_theme in etf_metadata.json
+}
+
+
+def to_fine_theme(theme_name: str) -> str:
+    return THEME_TO_FINE_THEME_OVERRIDES.get(theme_name, theme_name)
+
 INDUSTRY_TO_SUBTHEME = {
     # Artificial Intelligence
     "Internet Content & Information": "Cloud",
@@ -725,6 +743,7 @@ def fetch_industry_performance() -> list[dict]:
             industries.append({
                 "name": name,
                 "parent_theme": parent,
+                "fine_theme": to_fine_theme(parent),
                 "perf_1w": parse_pct(cells[2]),
                 "perf_1m": parse_pct(cells[3]),
                 "perf_3m": parse_pct(cells[4]),
@@ -2195,6 +2214,20 @@ def build_data() -> dict:
     for _rankings in (theme_rankings, finviz_theme_rankings):
         for _r in _rankings:
             _r["perf_intraday"] = _theme_intraday.get((_r.get("name") or "").lower())
+
+    # fine_theme — tag every theme/output-theme with its Category Leaderboard
+    # bucket so the frontend can cross-reference "which of our drilled themes
+    # corresponds to Category Leaderboard's #1 fine_theme" without its own
+    # name-matching table. theme_rankings' ~30 names already line up almost
+    # 1:1 with fine_theme's 29 buckets (see THEME_TO_FINE_THEME_OVERRIDES);
+    # finviz_theme_rankings uses a different, more granular ~40-name Finviz
+    # taxonomy that doesn't line up the same way, so it's left untagged here
+    # — it's being retired as a ranking/display source in favor of the
+    # Category-Leaderboard-derived fine_theme_rankings.
+    for _r in theme_rankings:
+        _r["fine_theme"] = to_fine_theme(_r.get("name") or "")
+    for _theme in output_themes:
+        _theme["fine_theme"] = to_fine_theme(_theme["name"])
 
     logger.info("Fetching macro news...")
     macro_news = fetch_macro_news()

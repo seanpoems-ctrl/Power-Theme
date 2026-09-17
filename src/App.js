@@ -505,7 +505,7 @@ const RotCellLB = ({ row }) => {
 
 
 
-const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, stockFilter = null }) => {
+const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, stockFilter = null, fineThemeRankings = [], etfHoldings = {} }) => {
   const [hovered, setHovered] = useState(null);
   const fmtMktCap = (v) => {
     if (v == null) return '—';
@@ -521,31 +521,89 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, s
   };
 
   const { themeName, stocks, themeRS, analysis } = useMemo(() => {
-    const name = spotlightThemeName
-      || (lbView === 'ibkr' ? ibkrThemesData?.power_themes?.[0]?.name : data?.themes?.[0]?.name)
-      || null;
-    if (!name) return { themeName: null, stocks: [], themeRS: null, analysis: null };
+    const buildFromScannedTheme = (name) => {
+      const theme = (data?.themes || []).find(t => t.name === name);
+      if (!theme) return null;
+      const allStocks = (theme.subthemes || []).flatMap(s => s.stocks || []);
+      const pool = stockFilter ? allStocks.filter(stockFilter) : allStocks;
+      const sorted = [...pool].sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0)).slice(0, 10);
+      const avgRS = sorted.length ? Math.round(sorted.reduce((s, x) => s + (x.rs_52w || 0), 0) / sorted.length) : null;
+      const topAnalysis = sorted[0]?.analysis_details || sorted[0]?.reasoning || null;
+      return { themeName: name, stocks: sorted, themeRS: avgRS, analysis: topAnalysis };
+    };
 
-    // Try ibkr data first (regardless of lbView), then fall back to thematic_data
-    const pt = (ibkrThemesData?.power_themes || []).find(t => t.name === name);
-    if (pt) {
-      return {
-        themeName: name,
-        stocks: (pt.leaders || []).map(l => ({ ...l, float_shares: null, short_pct: null, mkt_cap_b: l.mkt_cap_b ?? (l.mkt_cap != null ? l.mkt_cap / 1e9 : null) })),
-        themeRS: pt.theme_rs,
-        analysis: null,
-      };
+    // Union holdings across every ETF in the fine_theme bucket (not just the
+    // leader) — some individual ETFs (e.g. BUG) come back with 0 scraped
+    // holdings while a sibling in the same bucket (e.g. HACK) has real data,
+    // so trying only the leader ticker under-reports far too often.
+    const buildFromEtfHoldings = (name, tickers, score) => {
+      const list = Array.isArray(tickers) ? tickers : [tickers].filter(Boolean);
+      const seen = new Set();
+      const mapped = [];
+      for (const tkr of list) {
+        for (const h of (etfHoldings[tkr] || [])) {
+          if (seen.has(h.ticker)) continue;
+          seen.add(h.ticker);
+          mapped.push({
+            ticker: h.ticker, company: h.name, price: h.price,
+            mkt_cap_b: h.mkt_cap != null ? h.mkt_cap / 1e9 : null,
+            adr_pct: h.adr_pct, dollar_volume: h.dollar_volume, rs_52w: h.rs,
+          });
+        }
+      }
+      mapped.sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0));
+      return { themeName: name, stocks: mapped.slice(0, 10), themeRS: score != null ? Math.round(score) : null, analysis: null };
+    };
+
+    // Explicit pick (user clicked a Leaderboard/heatmap row) always wins.
+    if (spotlightThemeName) {
+      const pt = (ibkrThemesData?.power_themes || []).find(t => t.name === spotlightThemeName);
+      if (pt) {
+        return {
+          themeName: spotlightThemeName,
+          stocks: (pt.leaders || []).map(l => ({ ...l, float_shares: null, short_pct: null, mkt_cap_b: l.mkt_cap_b ?? (l.mkt_cap != null ? l.mkt_cap / 1e9 : null) })),
+          themeRS: pt.theme_rs,
+          analysis: null,
+        };
+      }
+      return buildFromScannedTheme(spotlightThemeName)
+        || buildFromEtfHoldings(spotlightThemeName, THEME_ETF_MAP[spotlightThemeName], null)
+        || { themeName: spotlightThemeName, stocks: [], themeRS: null, analysis: null };
     }
 
-    const theme = (data?.themes || []).find(t => t.name === name);
-    if (!theme) return { themeName: name, stocks: [], themeRS: null, analysis: null };
-    const allStocks = (theme.subthemes || []).flatMap(s => s.stocks || []);
-    const pool = stockFilter ? allStocks.filter(stockFilter) : allStocks;
-    const sorted = [...pool].sort((a, b) => (b.rs_52w || 0) - (a.rs_52w || 0)).slice(0, 10);
-    const avgRS = sorted.length ? Math.round(sorted.reduce((s, x) => s + (x.rs_52w || 0), 0) / sorted.length) : null;
-    const topAnalysis = sorted[0]?.analysis_details || sorted[0]?.reasoning || null;
-    return { themeName: name, stocks: sorted, themeRS: avgRS, analysis: topAnalysis };
-  }, [spotlightThemeName, lbView, data, ibkrThemesData, stockFilter]);
+    if (lbView === 'ibkr') {
+      const pt = ibkrThemesData?.power_themes?.[0];
+      if (pt) {
+        return {
+          themeName: pt.name,
+          stocks: (pt.leaders || []).map(l => ({ ...l, float_shares: null, short_pct: null, mkt_cap_b: l.mkt_cap_b ?? (l.mkt_cap != null ? l.mkt_cap / 1e9 : null) })),
+          themeRS: pt.theme_rs,
+          analysis: null,
+        };
+      }
+    }
+
+    // Default: Category Leaderboard's #1 fine_theme — the one "what's hot"
+    // signal shared across the whole dashboard. Prefer a theme we actually
+    // drilled into for real per-stock detail; when the top fine_theme wasn't
+    // one of the drilled themes (common — only 5 of ~29 get drilled nightly),
+    // fall back to that fine_theme's own ETF holdings so the highlighted
+    // name still matches Category Leaderboard instead of silently reverting
+    // to a different, weaker-scoring theme that happened to get scanned.
+    const topFine = fineThemeRankings[0];
+    if (topFine) {
+      const scannedMatch = (data?.themes || []).find(t => (t.fine_theme || t.name) === topFine.name);
+      const built = scannedMatch
+        ? buildFromScannedTheme(scannedMatch.name)
+        : buildFromEtfHoldings(topFine.name, topFine.member_tickers || topFine.leader_ticker, topFine.score);
+      if (built) return built;
+    }
+
+    // Last resort — no etf_rs data yet (e.g. first paint) — old behavior.
+    const name = data?.themes?.[0]?.name || null;
+    if (!name) return { themeName: null, stocks: [], themeRS: null, analysis: null };
+    return buildFromScannedTheme(name) || { themeName: name, stocks: [], themeRS: null, analysis: null };
+  }, [spotlightThemeName, lbView, data, ibkrThemesData, stockFilter, fineThemeRankings, etfHoldings]);
 
   if (!themeName) return null;
 
@@ -672,7 +730,7 @@ const MATRIX_METRICS = [
   { key: 'perf_1y',  label: '1Y',  thresholds: [50, 25, 10] },
 ];
 
-const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRankings = [], generatedAt, etfHoldings = {}, openTheme = null, onThemeOpened = null, stockFilter = null }) => {
+const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRankings = [], fineThemeRankings = [], generatedAt, etfHoldings = {}, openTheme = null, onThemeOpened = null, stockFilter = null }) => {
   const lang = useLang();
   const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks, inTop5, fromEtf }
   const [tblSort, setTblSort] = useState({ col: null, dir: 'desc' });
@@ -729,6 +787,9 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
   };
 
   const heatData = useMemo(() => {
+    if (fineThemeRankings.length > 0) {
+      return fineThemeRankings.map(r => ({ name: r.name, perf_1d: r.perf_1d }));
+    }
     const rankings = finvizThemeRankings || [];
     if (rankings.length === 0) {
       return (themes || []).map(t => {
@@ -740,7 +801,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
       });
     }
     return rankings.map(r => ({ name: r.name, perf_1d: r.perf_1d }));
-  }, [themes, finvizThemeRankings]);
+  }, [themes, finvizThemeRankings, fineThemeRankings]);
 
   const { topBottom, hasEnough } = useMemo(() => {
     const withVal = heatData.filter(h => h.perf_1d != null);
@@ -782,10 +843,20 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
   // color tiles, not the circle-packing "Clusters" mode). Grouping + within-group
   // order both follow the currently selected metric so the strongest theme/industry
   // rises to the top whenever the metric changes.
+  // Grouped by fine_theme — the same Category Leaderboard bucket Category
+  // Leaderboard, Theme Leaderboard and Thematic Spotlight all use — instead
+  // of the old parent_theme (a separate Finviz-industry-composite grouping
+  // that could name/bucket things differently from Category Leaderboard).
+  const fineThemeScore = useMemo(() => {
+    const m = {};
+    for (const r of fineThemeRankings) m[r.name] = r.score;
+    return m;
+  }, [fineThemeRankings]);
+
   const groupedIndustries = useMemo(() => {
     const groups = new Map();
     for (const ind of industryRankings || []) {
-      const key = ind.parent_theme || 'Other';
+      const key = ind.fine_theme || ind.parent_theme || 'Other';
       if (!groups.has(key)) groups.set(key, []);
       groups.get(key).push(ind);
     }
@@ -793,11 +864,14 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
       const vals = inds.map(i => i[matrixMetric]).filter(v => v != null);
       const avg = vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
       const sorted = [...inds].sort((a, b) => (b[matrixMetric] ?? -999) - (a[matrixMetric] ?? -999));
-      return { theme, avg, industries: sorted };
+      return { theme, avg, score: fineThemeScore[theme] ?? null, industries: sorted };
     });
-    arr.sort((a, b) => (b.avg ?? -999) - (a.avg ?? -999));
+    // Category Leaderboard's score orders the groups when available (matches
+    // the rest of the dashboard); groups with no fine_theme score (e.g.
+    // "Other") fall back to the metric-local average.
+    arr.sort((a, b) => (b.score ?? b.avg ?? -999) - (a.score ?? a.avg ?? -999));
     return arr;
-  }, [industryRankings, matrixMetric]);
+  }, [industryRankings, matrixMetric, fineThemeScore]);
 
   const handleCardClick = (itemName) => {
     const allSources = [...(themes || []), ...(heatmapThemes || [])];
@@ -1254,16 +1328,21 @@ const EtfHoldingsPopup = ({ etfTicker, holdingsData = {}, onClose }) => {
 };
 
 
-const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, themes = [], heatmapThemes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, generatedAt, onViewChange, onThemeSelect, etfHoldings = {} }) => {
+const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, fineThemeRankings = [], themes = [], heatmapThemes = [], themeSparklines = {}, ibkrThemesData, spyBenchmarks, generatedAt, onViewChange, onThemeSelect, etfHoldings = {} }) => {
   const [sortPriority, setSortPriority] = useState([{ key: 'rs_score', direction: 'desc' }]);
   const [expanded, setExpanded] = useState(null);
-  const [view, setView] = useState("themes"); // "themes" (Finviz map) or "industry"
+  const [view, setView] = useState("finetheme"); // "finetheme" (Category Leaderboard ranking) or "industry" (Finviz industry detail)
   const [themeHover, setThemeHover] = useState(null); // { ticker, rect }
   const [themeStats, setThemeStats] = useState(null); // { themeName, anchorRect }
   const [rsMode, setRsMode] = useState('52w');
   const [etfPopup, setEtfPopup] = useState(null); // { etf, anchorRect }
 
-  const activeData = view === "themes" ? finvizThemeRankings : themeRankings;
+  // "finetheme" — Category Leaderboard's own ranking (fine_theme_rankings),
+  // so this leaderboard's default #1 always agrees with Category Leaderboard
+  // and Thematic Spotlight instead of running an independent Finviz score.
+  // "industry" stays a distinct drill-down lens into raw Finviz industry
+  // detail, not a second competing "what's hot" claim.
+  const activeData = view === "finetheme" ? fineThemeRankings : themeRankings;
 
   const handleLBSort = (key, isShift) => {
     if (isShift) {
@@ -1351,8 +1430,13 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
           const cmp = sa < sb ? -1 : 1;
           return direction === 'asc' ? cmp : -cmp;
         }
-        let va = key === 'rs_score' ? (themeAvgRS[a.name?.toLowerCase()] ?? 0) : (a[key] ?? 0);
-        let vb = key === 'rs_score' ? (themeAvgRS[b.name?.toLowerCase()] ?? 0) : (b[key] ?? 0);
+        // rs_score sorts by Category Leaderboard's own score when the row has
+        // one (fine_theme_rankings rows — the "finetheme" view, so the default
+        // #1 always matches Category Leaderboard), falling back to the
+        // stock-level RS average (themeAvgRS) for theme_rankings rows, which
+        // don't carry a comparable composite score of their own.
+        let va = key === 'rs_score' ? (a.score ?? themeAvgRS[a.name?.toLowerCase()] ?? 0) : (a[key] ?? 0);
+        let vb = key === 'rs_score' ? (b.score ?? themeAvgRS[b.name?.toLowerCase()] ?? 0) : (b[key] ?? 0);
         if (i === 0 && LB_PERF_COLS.has(key)) {
           va = Math.round(va * 10) / 10;
           vb = Math.round(vb * 10) / 10;
@@ -1422,7 +1506,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
         )}
         <div className="flex-1"></div>
         <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 flex-shrink-0">
-          {[{k:"themes",l:"Themes Map"},{k:"industry",l:"Industry"}].map(v => (
+          {[{k:"finetheme",l:"Category Leaderboard"},{k:"industry",l:"Industry Detail"}].map(v => (
             <button key={v.k} onClick={() => { setView(v.k); setExpanded(null); onViewChange && onViewChange(v.k); }}
               className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all flex items-center gap-1 ${view === v.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
               {v.l}
@@ -1469,7 +1553,10 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
               const isExpanded = isIndustryView && expanded === t.name;
               const industries = isIndustryView ? (industryMap[t.name] || []) : [];
 
-              const etfTicker = view === "themes" ? (THEME_ETF_MAP[t.name] || null) : null;
+              // In the Category Leaderboard view, prefer the row's own leader_ticker
+              // (the same leader Category Leaderboard itself picked for this bucket)
+              // over the static THEME_ETF_MAP lookup.
+              const etfTicker = view === "finetheme" ? (t.leader_ticker || THEME_ETF_MAP[t.name] || null) : null;
 
               return (<React.Fragment key={`lb-${t.name}`}>
                 <tr
@@ -1527,7 +1614,10 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, the
                   {LB_KEYS.map(k => <PerfCellLB key={k.key} val={t[k.key]}/>)}
                   <RotCellLB row={t}/>
                   {(() => {
-                    const rsVal = themeAvgRS[t.name?.toLowerCase()];
+                    // Category Leaderboard's own score fills in when no scanned
+                    // stocks exist for this fine_theme (themeAvgRS needs real
+                    // per-stock data, which most fine_theme buckets don't have).
+                    const rsVal = themeAvgRS[t.name?.toLowerCase()] ?? (view === "finetheme" && t.score != null ? Math.round(t.score) : null);
                     // All modes now return a 1–99 IBD-style percentile rank
                     const cls = rsVal == null ? 'text-zinc-600'
                       : rsVal >= 90 ? 'text-emerald-300'
@@ -5814,7 +5904,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
   );
 };
 
-const MarketBreadthTab = ({ data, internalsData, econData }) => {
+const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [] }) => {
   const mc  = data?.market_condition || {};
   const adv = mc.adv_dec;
   const hl  = mc.new_hl;
@@ -6000,12 +6090,17 @@ const MarketBreadthTab = ({ data, internalsData, econData }) => {
 
   // ── Leading themes ───────────────────────────────────────────────────────────
   const leadingThemes = useMemo(() => {
-    const rankings = data?.finviz_theme_rankings || data?.theme_rankings || [];
+    // Category Leaderboard's fine_theme ranking first (same signal as
+    // everywhere else on the dashboard), falling back to the older Finviz
+    // scores only if etf_rs data hasn't loaded yet.
+    const rankings = fineThemeRankings.length > 0
+      ? fineThemeRankings
+      : (data?.finviz_theme_rankings || data?.theme_rankings || []);
     return [...rankings]
       .filter(t => t.perf_1d != null)
       .sort((a, b) => (b.perf_1d || 0) - (a.perf_1d || 0))
       .slice(0, 5);
-  }, [data]);
+  }, [data, fineThemeRankings]);
 
   // ── Internals block ──────────────────────────────────────────────────────────
   const internals = [
@@ -12176,7 +12271,7 @@ export default function App() {
   const [econData, setEconData]             = useState(null);
   const [appEtfRsData, setAppEtfRsData]     = useState(null);
   const [internalsData, setInternalsData]   = useState(null);
-  const [lbView, setLbView]                 = useState("themes");
+  const [lbView, setLbView]                 = useState("finetheme");
   const [spotlightThemeName, setSpotlightThemeName] = useState(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -12337,6 +12432,13 @@ export default function App() {
     () => buildCategoryThemeMap(data?.etf_holdings, appEtfRsData),
     [data?.etf_holdings, appEtfRsData]
   );
+
+  // The single "what's hot" ranking — Category Leaderboard's ETF-price-based
+  // fine_theme rollup (etf_rs_builder.py), reconciled dashboard-wide so
+  // Industry Matrix, Theme Leaderboard, Thematic Spotlight, and Leading
+  // Themes all agree with Category Leaderboard instead of each running its
+  // own independent Finviz-based score.
+  const fineThemeRankings = appEtfRsData?.fine_theme_rankings || [];
 
   // Breaking news — poll every 5 min
   useEffect(() => {
@@ -12530,6 +12632,11 @@ const appScreenerMap = useMemo(() => {
     .sort((a, b) => {
       const getRankingRS = (theme) => {
         const name = theme.name.toLowerCase();
+        // Category Leaderboard's fine_theme score first — same ranking as
+        // everywhere else on the dashboard — then the older Finviz scores,
+        // then raw stock RS as a last resort.
+        const ftEntry = fineThemeRankings.find(r => r.name?.toLowerCase() === (theme.fine_theme || "").toLowerCase());
+        if (ftEntry?.score != null) return ftEntry.score;
         const entry =
           data.finviz_theme_rankings?.find(r => r.name?.toLowerCase() === name) ||
           data.theme_rankings?.find(r => r.name?.toLowerCase() === name);
@@ -12540,7 +12647,7 @@ const appScreenerMap = useMemo(() => {
       };
       return getRankingRS(b) - getRankingRS(a);
     });
-  }, [data, search, stockFilter, creditRegime]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [data, search, stockFilter, creditRegime, fineThemeRankings]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const unique = [...new Set(filtered.flatMap(t => t.subthemes.flatMap(s => s.stocks.map(st => st.ticker))))];
 
@@ -12749,17 +12856,18 @@ const appScreenerMap = useMemo(() => {
         </div>
       </div>
 
-      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
+      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} fineThemeRankings={fineThemeRankings}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex flex-col lg:flex-row items-stretch lg:items-start gap-3">
           {/* ── MAIN CONTENT ─────────────────────────────────────── */}
           <main className="flex-1 min-w-0 w-full flex flex-col gap-3">
-            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} industryRankings={data?.industry_rankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}} openTheme={pendingTheme} onThemeOpened={() => setPendingTheme(null)} stockFilter={stockFilter}/>
+            <ThemeHeatmap themes={data?.themes} heatmapThemes={data?.heatmap_themes} finvizThemeRankings={data?.finviz_theme_rankings} industryRankings={data?.industry_rankings} fineThemeRankings={fineThemeRankings} generatedAt={data?.generated_at} etfHoldings={data?.etf_holdings || {}} openTheme={pendingTheme} onThemeOpened={() => setPendingTheme(null)} stockFilter={stockFilter}/>
             <BreadthStockScreener data={data} compact />
             {data && <Leaderboard
               themeRankings={data.theme_rankings}
               industryRankings={data.industry_rankings}
               finvizThemeRankings={data.finviz_theme_rankings}
+              fineThemeRankings={fineThemeRankings}
               themes={data.themes}
               heatmapThemes={data.heatmap_themes || []}
               spyBenchmarks={data.spy_benchmarks}
@@ -12770,7 +12878,7 @@ const appScreenerMap = useMemo(() => {
               onThemeSelect={name => setSpotlightThemeName(name)}
             />}
             {data && <MarketWarnings themes={data.themes}/>}
-            <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData} stockFilter={stockFilter}/>
+            <ThematicSpotlight lbView={lbView} spotlightThemeName={spotlightThemeName} data={data} ibkrThemesData={ibkrThemesData} stockFilter={stockFilter} fineThemeRankings={fineThemeRankings} etfHoldings={data?.etf_holdings || {}}/>
             <HeroZone data={data} themesCount={filtered.length} tickersCount={unique.length} etfTrendlineData={etfTrendlineData}/>
             <NewsHubFold newsData={newsData}/>
           </main>
