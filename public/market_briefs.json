@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-17 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious Balance, Volatility Subsides",
+    "spy_price": 754.05,
+    "spy_change_pct": -0.44,
+    "vix": 16.01,
+    "hy_oas": 2.76,
+    "yield_curve": 0.27,
+    "credit_status": "Complacent",
+    "s5fi": 33.9,
+    "mmth": 53.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft secures a multi-billion dollar government contract for its Azure AI services, indicating strong public sector adoption."
+        },
+        {
+          "ticker": "JNJ",
+          "company": "Johnson & Johnson",
+          "reason": "Johnson & Johnson announces positive Phase 3 trial results for its new oncology drug, surpassing analyst expectations."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla seeing renewed interest from retail traders following recent volatility, with options activity suggesting a short-term rebound play."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-16 19:14 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2200,23 +2238,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-08-27 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "",
-    "spy_price": 766.08,
-    "spy_change_pct": 0.02,
-    "vix": 14.95,
-    "hy_oas": 2.7,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 60.1,
-    "mmth": 73.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
