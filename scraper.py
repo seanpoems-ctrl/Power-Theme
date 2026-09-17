@@ -2941,6 +2941,17 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             except Exception:
                 pass
 
+        # Relative volume — today's volume vs its own 20-day average
+        rvol = None
+        n_rvol = min(20, len(volumes) - 1)
+        if n_rvol > 0:
+            try:
+                avg_vol = float(volumes.iloc[-n_rvol - 1:-1].mean())
+                if avg_vol > 0:
+                    rvol = round(float(volumes.iloc[-1]) / avg_vol, 2)
+            except Exception:
+                pass
+
         # % change vs today's own open (distinct from perf_1d, which is close
         # vs prior close and absorbs overnight/pre-market gaps)
         perf_intraday = None
@@ -2953,7 +2964,7 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
                 pass
 
         stats[tkr] = {"price": price, "adr_pct": adr_pct, "dollar_volume": dollar_volume,
-                      "perf_intraday": perf_intraday, **perfs}
+                      "perf_intraday": perf_intraday, "rvol": rvol, **perfs}
 
     # ── RS percentile within the ETF holdings universe ──────────────────────
     rs_lookup: dict[str, int] = {}
@@ -3027,6 +3038,7 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             s = stats.get(h["ticker"], {})
             new_h["price"]         = s.get("price")
             new_h["perf_intraday"] = s.get("perf_intraday")
+            new_h["rvol"]          = s.get("rvol")
             new_h["perf_1d"]       = s.get("perf_1d")
             new_h["perf_1w"]       = s.get("perf_1w")
             new_h["perf_1m"]       = s.get("perf_1m")

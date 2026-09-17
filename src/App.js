@@ -547,7 +547,7 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, s
           mapped.push({
             ticker: h.ticker, company: h.name, price: h.price,
             mkt_cap_b: h.mkt_cap != null ? h.mkt_cap / 1e9 : null,
-            adr_pct: h.adr_pct, dollar_volume: h.dollar_volume, rs_52w: h.rs,
+            adr_pct: h.adr_pct, dollar_volume: h.dollar_volume, rs_52w: h.rs, rvol: h.rvol,
           });
         }
       }
