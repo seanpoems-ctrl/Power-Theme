@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-17T03:20:38.097718+00:00",
+  "generated_at": "2026-09-17T03:54:45.695353+00:00",
   "consensus_last": "2026-09-16",
   "stale_count": 0,
   "etfs": [
@@ -8385,7 +8385,7 @@
         0.9678
       ],
       "rs_thrust_1w": 3.9,
-      "ibd_raw": 4.026,
+      "ibd_raw": 4.024,
       "rs_day": 14,
       "rs_wk": 66,
       "rs_mth": 54,
@@ -18128,7 +18128,11 @@
       "perf_3m": 25.2,
       "perf_6m": 54.8,
       "perf_ytd": 50.66,
-      "perf_12m": 33.7
+      "perf_12m": 33.7,
+      "rank_1w": 1,
+      "rank_3m": 1,
+      "rotation_delta": 0,
+      "accelerating": false
     },
     {
       "name": "Healthcare Services",
@@ -18147,7 +18151,11 @@
       "perf_3m": 11.350000000000001,
       "perf_6m": 33.1,
       "perf_ytd": 23.4,
-      "perf_12m": 31.25
+      "perf_12m": 31.25,
+      "rank_1w": 3,
+      "rank_3m": 6,
+      "rotation_delta": 3,
+      "accelerating": false
     },
     {
       "name": "Software",
@@ -18168,7 +18176,11 @@
       "perf_3m": 12.7,
       "perf_6m": 20.5,
       "perf_ytd": 6.3,
-      "perf_12m": 1.8
+      "perf_12m": 1.8,
+      "rank_1w": 2,
+      "rank_3m": 4,
+      "rotation_delta": 2,
+      "accelerating": false
     },
     {
       "name": "Insurance",
@@ -18187,7 +18199,11 @@
       "perf_3m": 7.35,
       "perf_6m": 13.95,
       "perf_ytd": 7.5249999999999995,
-      "perf_12m": 11.899999999999999
+      "perf_12m": 11.899999999999999,
+      "rank_1w": 4,
+      "rank_3m": 8,
+      "rotation_delta": 4,
+      "accelerating": false
     },
     {
       "name": "Crypto & Digital Assets",
@@ -18212,7 +18228,11 @@
       "perf_3m": 18.15,
       "perf_6m": 7.5,
       "perf_ytd": -17.415,
-      "perf_12m": -37.0
+      "perf_12m": -37.0,
+      "rank_1w": 24,
+      "rank_3m": 2,
+      "rotation_delta": -22,
+      "accelerating": false
     },
     {
       "name": "Cloud Computing",
@@ -18236,7 +18256,11 @@
       "perf_3m": 14.6,
       "perf_6m": 40.3,
       "perf_ytd": 20.72,
-      "perf_12m": 20.1
+      "perf_12m": 20.1,
+      "rank_1w": 9,
+      "rank_3m": 3,
+      "rotation_delta": -6,
+      "accelerating": false
     },
     {
       "name": "Telecommunications",
@@ -18255,7 +18279,11 @@
       "perf_3m": -2.95,
       "perf_6m": 9.3,
       "perf_ytd": 28.615000000000002,
-      "perf_12m": 42.400000000000006
+      "perf_12m": 42.400000000000006,
+      "rank_1w": 7,
+      "rank_3m": 19,
+      "rotation_delta": 12,
+      "accelerating": false
     },
     {
       "name": "Healthcare & Biotech",
@@ -18285,7 +18313,11 @@
       "perf_3m": 11.7,
       "perf_6m": 23.1,
       "perf_ytd": 14.79,
-      "perf_12m": 38.1
+      "perf_12m": 38.1,
+      "rank_1w": 10,
+      "rank_3m": 5,
+      "rotation_delta": -5,
+      "accelerating": false
     },
     {
       "name": "Artificial Intelligence",
@@ -18305,7 +18337,11 @@
       "perf_3m": -11.1,
       "perf_6m": 28.9,
       "perf_ytd": 27.65,
-      "perf_12m": 30.9
+      "perf_12m": 30.9,
+      "rank_1w": 27,
+      "rank_3m": 25,
+      "rotation_delta": -2,
+      "accelerating": false
     },
     {
       "name": "Quantitative Factors & Volatility",
@@ -18336,7 +18372,11 @@
       "perf_3m": 1.75,
       "perf_6m": 18.1,
       "perf_ytd": 10.42,
-      "perf_12m": 15.7
+      "perf_12m": 15.7,
+      "rank_1w": 17,
+      "rank_3m": 15,
+      "rotation_delta": -2,
+      "accelerating": false
     },
     {
       "name": "Agriculture & Food",
@@ -18357,7 +18397,11 @@
       "perf_3m": 5.550000000000001,
       "perf_6m": 2.5,
       "perf_ytd": 12.149999999999999,
-      "perf_12m": 11.600000000000001
+      "perf_12m": 11.600000000000001,
+      "rank_1w": 11,
+      "rank_3m": 9,
+      "rotation_delta": -2,
+      "accelerating": false
     },
     {
       "name": "Consumer Goods",
@@ -18384,7 +18428,11 @@
       "perf_3m": 1.9,
       "perf_6m": 6.5,
       "perf_ytd": -2.515,
-      "perf_12m": -1.8
+      "perf_12m": -1.8,
+      "rank_1w": 14,
+      "rank_3m": 14,
+      "rotation_delta": 0,
+      "accelerating": false
     },
     {
       "name": "E-Commerce",
@@ -18403,7 +18451,11 @@
       "perf_3m": 5.4,
       "perf_6m": 13.600000000000001,
       "perf_ytd": -0.13500000000000068,
-      "perf_12m": -4.95
+      "perf_12m": -4.95,
+      "rank_1w": 6,
+      "rank_3m": 10,
+      "rotation_delta": 4,
+      "accelerating": false
     },
     {
       "name": "Semiconductors",
@@ -18427,7 +18479,11 @@
       "perf_3m": -17.65,
       "perf_6m": 42.35,
       "perf_ytd": 43.2,
-      "perf_12m": 67.6
+      "perf_12m": 67.6,
+      "rank_1w": 29,
+      "rank_3m": 29,
+      "rotation_delta": 0,
+      "accelerating": false
     },
     {
       "name": "Digital Entertainment",
@@ -18450,7 +18506,11 @@
       "perf_3m": 3.9000000000000004,
       "perf_6m": 6.5,
       "perf_ytd": -8.31,
-      "perf_12m": -19.0
+      "perf_12m": -19.0,
+      "rank_1w": 5,
+      "rank_3m": 12,
+      "rotation_delta": 7,
+      "accelerating": false
     },
     {
       "name": "Environmental Sustainability",
@@ -18470,7 +18530,11 @@
       "perf_3m": 0.3,
       "perf_6m": 2.3,
       "perf_ytd": -4.87,
-      "perf_12m": 2.9
+      "perf_12m": 2.9,
+      "rank_1w": 23,
+      "rank_3m": 17,
+      "rotation_delta": -6,
+      "accelerating": false
     },
     {
       "name": "Materials & Mining",
@@ -18492,7 +18556,11 @@
       "perf_3m": 5.4,
       "perf_6m": 3.9,
       "perf_ytd": 19.95,
-      "perf_12m": 29.8
+      "perf_12m": 29.8,
+      "rank_1w": 25,
+      "rank_3m": 11,
+      "rotation_delta": -14,
+      "accelerating": false
     },
     {
       "name": "Energy Traditional",
@@ -18518,7 +18586,11 @@
       "perf_3m": 10.2,
       "perf_6m": 5.7,
       "perf_ytd": 35.09,
-      "perf_12m": 47.1
+      "perf_12m": 47.1,
+      "rank_1w": 21,
+      "rank_3m": 7,
+      "rotation_delta": -14,
+      "accelerating": false
     },
     {
       "name": "Utilities",
@@ -18537,7 +18609,11 @@
       "perf_3m": -2.9000000000000004,
       "perf_6m": 4.05,
       "perf_ytd": 4.57,
-      "perf_12m": 7.1000000000000005
+      "perf_12m": 7.1000000000000005,
+      "rank_1w": 16,
+      "rank_3m": 18,
+      "rotation_delta": 2,
+      "accelerating": false
     },
     {
       "name": "Geographic / Country Specific",
@@ -18564,7 +18640,11 @@
       "perf_3m": -3.6999999999999997,
       "perf_6m": 2.35,
       "perf_ytd": 1.3599999999999999,
-      "perf_12m": 16.05
+      "perf_12m": 16.05,
+      "rank_1w": 19,
+      "rank_3m": 21,
+      "rotation_delta": 2,
+      "accelerating": false
     },
     {
       "name": "Industrial Automation",
@@ -18587,7 +18667,11 @@
       "perf_3m": -8.399999999999999,
       "perf_6m": 0.05000000000000002,
       "perf_ytd": -2.285,
-      "perf_12m": 6.6
+      "perf_12m": 6.6,
+      "rank_1w": 18,
+      "rank_3m": 24,
+      "rotation_delta": 6,
+      "accelerating": false
     },
     {
       "name": "Space Exploration",
@@ -18608,7 +18692,11 @@
       "perf_3m": -20.700000000000003,
       "perf_6m": -1.5,
       "perf_ytd": 3.065,
-      "perf_12m": 21.7
+      "perf_12m": 21.7,
+      "rank_1w": 8,
+      "rank_3m": 30,
+      "rotation_delta": 22,
+      "accelerating": false
     },
     {
       "name": "Fintech",
@@ -18632,7 +18720,11 @@
       "perf_3m": 2.8,
       "perf_6m": 15.6,
       "perf_ytd": 1.81,
-      "perf_12m": 4.3
+      "perf_12m": 4.3,
+      "rank_1w": 20,
+      "rank_3m": 13,
+      "rotation_delta": -7,
+      "accelerating": false
     },
     {
       "name": "Transportation & Logistics",
@@ -18654,7 +18746,11 @@
       "perf_3m": -3.6,
       "perf_6m": 12.7,
       "perf_ytd": 8.42,
-      "perf_12m": 17.6
+      "perf_12m": 17.6,
+      "rank_1w": 13,
+      "rank_3m": 20,
+      "rotation_delta": 7,
+      "accelerating": false
     },
     {
       "name": "Industrials",
@@ -18673,7 +18769,11 @@
       "perf_3m": -6.7,
       "perf_6m": 0.5,
       "perf_ytd": 5.65,
-      "perf_12m": 10.7
+      "perf_12m": 10.7,
+      "rank_1w": 22,
+      "rank_3m": 23,
+      "rotation_delta": 1,
+      "accelerating": false
     },
     {
       "name": "Defense & Aerospace",
@@ -18693,7 +18793,11 @@
       "perf_3m": -11.2,
       "perf_6m": -10.6,
       "perf_ytd": -3.18,
-      "perf_12m": 6.9
+      "perf_12m": 6.9,
+      "rank_1w": 15,
+      "rank_3m": 26,
+      "rotation_delta": 11,
+      "accelerating": false
     },
     {
       "name": "Commodities Metals",
@@ -18720,7 +18824,11 @@
       "perf_3m": 0.45,
       "perf_6m": -7.050000000000001,
       "perf_ytd": 1.31,
-      "perf_12m": 35.65
+      "perf_12m": 35.65,
+      "rank_1w": 30,
+      "rank_3m": 16,
+      "rotation_delta": -14,
+      "accelerating": false
     },
     {
       "name": "Electric Vehicles",
@@ -18740,7 +18848,11 @@
       "perf_3m": -15.6,
       "perf_6m": 1.0,
       "perf_ytd": 5.86,
-      "perf_12m": 22.5
+      "perf_12m": 22.5,
+      "rank_1w": 26,
+      "rank_3m": 28,
+      "rotation_delta": 2,
+      "accelerating": false
     },
     {
       "name": "Energy Renewable",
@@ -18762,7 +18874,11 @@
       "perf_3m": -20.8,
       "perf_6m": -5.5,
       "perf_ytd": 1.56,
-      "perf_12m": 17.5
+      "perf_12m": 17.5,
+      "rank_1w": 28,
+      "rank_3m": 31,
+      "rotation_delta": 3,
+      "accelerating": false
     },
     {
       "name": "Real Estate & REITs",
@@ -18784,7 +18900,11 @@
       "perf_3m": -3.8,
       "perf_6m": 0.7,
       "perf_ytd": -5.14,
-      "perf_12m": -9.2
+      "perf_12m": -9.2,
+      "rank_1w": 12,
+      "rank_3m": 22,
+      "rotation_delta": 10,
+      "accelerating": false
     },
     {
       "name": "Nuclear & Coal",
@@ -18805,7 +18925,11 @@
       "perf_3m": -12.1,
       "perf_6m": -17.7,
       "perf_ytd": -13.55,
-      "perf_12m": -4.0
+      "perf_12m": -4.0,
+      "rank_1w": 31,
+      "rank_3m": 27,
+      "rotation_delta": -4,
+      "accelerating": false
     }
   ]
 }
