@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-17 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Risk-On / Growth Optimism",
+    "spy_price": 762.6,
+    "spy_change_pct": 1.13,
+    "vix": 15.44,
+    "hy_oas": 2.7,
+    "yield_curve": 0.27,
+    "credit_status": "Complacent",
+    "s5fi": 36.2,
+    "mmth": 54.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "CLSK",
+          "company": "CleanSpark, Inc.",
+          "reason": "Fresh news of a Meta AI data center lease and $2.23 billion in financing positions CleanSpark directly in the burgeoning AI infrastructure boom."
+        },
+        {
+          "ticker": "BTDR",
+          "company": "Bitdeer Technologies Group",
+          "reason": "Bitdeer secured a significant $4.7 billion AI data center lease, marking a substantial commitment to the rapidly expanding AI sector."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continues to benefit from general AI tailwinds, but today's positive flow appears to be driven by broader market sentiment rather than a fresh, specific company catalyst."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-17 11:30 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Continues to see momentum from broader electric vehicle sector optimism and a technical breakout above its 200-day moving average."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-27 16:58 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Sustained Risk-On Momentum",
-    "spy_price": 771.1,
-    "spy_change_pct": 0.66,
-    "vix": 14.51,
-    "hy_oas": 2.67,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 57.1,
-    "mmth": 73.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Announced a groundbreaking partnership in cloud-based quantum computing, positioning itself as a leader in next-generation enterprise solutions."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Reported unexpectedly positive Phase 3 trial data for its new obesity treatment, potentially expanding its market dominance in the weight-loss drug sector."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Experienced a strong technical bounce, driven by short covering and algorithmically triggered buy orders following a period of consolidation."
         }
       ]
     }
