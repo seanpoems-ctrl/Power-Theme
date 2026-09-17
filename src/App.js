@@ -1650,7 +1650,7 @@ const Leaderboard = ({ themeRankings, industryRankings, finvizThemeRankings, fin
       </div>
     </div>
     {themeHover && <TVPopup ticker={themeHover.ticker} anchorRect={themeHover.rect} onClose={() => { setThemeHover(null); setThemeStats(null); }}/>}
-    {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} heatmapThemes={heatmapThemes} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => { setThemeStats(null); setThemeHover(null); }}/>}
+    {themeStats && <ThemeStatsPopup themeName={themeStats.themeName} themes={themes} heatmapThemes={heatmapThemes} etfHoldings={etfHoldings} fineThemeRankings={fineThemeRankings} anchorRect={themeStats.anchorRect} chartAnchor={themeHover?.rect} onClose={() => { setThemeStats(null); setThemeHover(null); }}/>}
     {etfPopup && <EtfHoldingsPopup etfTicker={etfPopup.etf} holdingsData={etfHoldings} onClose={() => setEtfPopup(null)}/>}
     </>
   );
@@ -1738,28 +1738,49 @@ const TVPopup = ({ ticker, anchorRect, chartUrl, onClose }) => {
 
   if (!ticker || !anchorRect || !rect) return null;
   const { left, top, width: W, height: H } = rect;
-  const src = chartUrl || `https://finviz.com/chart.ashx?t=${encodeURIComponent(ticker)}&ty=c&ta=1&p=d&s=l`;
+  // TradingView's "Mini Symbol Overview" embed widget — config is passed as
+  // URL-encoded JSON in the fragment, not query params (TradingView's own
+  // documented embed format for this widget).
+  const tvConfig = { symbol: ticker, width: "100%", height: "100%", locale: "en", dateRange: "3M", colorTheme: "dark", isTransparent: false, autosize: true, largeChartUrl: "" };
+  const src = chartUrl || `https://s.tradingview.com/embed-widget/mini-symbol-overview/#${encodeURIComponent(JSON.stringify(tvConfig))}`;
   return (
     <>
       {onClose && <div style={{ position:"fixed", inset:0, zIndex:9998 }} onClick={onClose}/>}
-      <div ref={chartRef} id="tv-popup-chart" style={{ position:"fixed", left, top: top + topAdj, width:W, height:H, zIndex:9999, borderRadius:8, overflow:"hidden", border:"1px solid #27272a", boxShadow:"0 24px 64px rgba(0,0,0,0.85)", pointerEvents:"none", background:"#fff" }}>
-        <img src={src} alt={ticker} referrerPolicy="no-referrer" style={{ width:"100%", height:"100%", objectFit:"fill", display:"block" }}/>
+      <div ref={chartRef} id="tv-popup-chart" style={{ position:"fixed", left, top: top + topAdj, width:W, height:H, zIndex:9999, borderRadius:8, overflow:"hidden", border:"1px solid #27272a", boxShadow:"0 24px 64px rgba(0,0,0,0.85)", pointerEvents:"none", background:"#131722" }}>
+        <iframe src={src} title={ticker} scrolling="no" style={{ width:"100%", height:"100%", border:"none", display:"block" }}/>
       </div>
     </>
   );
 };
 
-const ThemeStatsPopup = ({ themeName, themes, heatmapThemes, anchorRect, chartAnchor, onClose }) => {
+const ThemeStatsPopup = ({ themeName, themes, heatmapThemes, etfHoldings = {}, fineThemeRankings = [], anchorRect, chartAnchor, onClose }) => {
   const stocks = useMemo(() => {
     if (!themeName) return [];
     const allSources = [...(themes || []), ...(heatmapThemes || [])];
     const theme = allSources.find(t => normalizeTheme(t).name.toLowerCase() === themeName.toLowerCase());
-    if (!theme) return [];
-    const norm = normalizeTheme(theme);
-    const all = norm.subthemes.flatMap(s => s.stocks);
+    if (theme) {
+      const norm = normalizeTheme(theme);
+      const all = norm.subthemes.flatMap(s => s.stocks);
+      const seen = new Set();
+      return all.filter(s => { if (seen.has(s.ticker)) return false; seen.add(s.ticker); return true; });
+    }
+    // Not a scanned/heatmap theme (e.g. "Insurance" — an industry rollup, not
+    // one of Finviz's own theme-map categories) — fall back to the union of
+    // holdings across every ETF in its fine_theme bucket, same as Thematic
+    // Spotlight, instead of showing an empty "0 stocks" popup.
+    const ft = fineThemeRankings.find(r => r.name?.toLowerCase() === themeName.toLowerCase());
+    const tickers = ft?.member_tickers || [];
     const seen = new Set();
-    return all.filter(s => { if (seen.has(s.ticker)) return false; seen.add(s.ticker); return true; });
-  }, [themeName, themes]);
+    const mapped = [];
+    for (const tkr of tickers) {
+      for (const h of (etfHoldings[tkr] || [])) {
+        if (seen.has(h.ticker)) continue;
+        seen.add(h.ticker);
+        mapped.push({ ticker: h.ticker, price: h.price, perf_1m: h.perf_1m, perf_1d: h.perf_1d, rs_52w: h.rs });
+      }
+    }
+    return mapped;
+  }, [themeName, themes, heatmapThemes, etfHoldings, fineThemeRankings]);
 
   const mean = (arr) => arr.length ? arr.reduce((a, v) => a + v, 0) / arr.length : 0;
   const avgPrice  = mean(stocks.map(s => s.price).filter(v => v != null));
