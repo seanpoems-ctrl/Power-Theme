@@ -1738,11 +1738,17 @@ const TVPopup = ({ ticker, anchorRect, chartUrl, onClose }) => {
 
   if (!ticker || !anchorRect || !rect) return null;
   const { left, top, width: W, height: H } = rect;
-  // TradingView's "Mini Symbol Overview" embed widget — config is passed as
-  // URL-encoded JSON in the fragment, not query params (TradingView's own
-  // documented embed format for this widget).
-  const tvConfig = { symbol: ticker, width: "100%", height: "100%", locale: "en", dateRange: "3M", colorTheme: "dark", isTransparent: false, autosize: true, largeChartUrl: "" };
-  const src = chartUrl || `https://s.tradingview.com/embed-widget/mini-symbol-overview/#${encodeURIComponent(JSON.stringify(tvConfig))}`;
+  // TradingView's "Advanced Chart" embed widget — the Mini Symbol Overview
+  // widget only ever renders a line/area trend, no candlestick option.
+  // style=1 is candles; toolbars/legend hidden to keep this small
+  // non-interactive hover preview clean.
+  const tvParams = new URLSearchParams({
+    symbol: ticker, interval: "D", theme: "dark", style: "1", timezone: "exchange",
+    hidesidetoolbar: "1", hidetoptoolbar: "1", hidelegend: "1", saveimage: "0",
+    withdateranges: "0", studies_overrides: "{}", overrides: "{}",
+    enabled_features: "[]", disabled_features: "[]", locale: "en",
+  });
+  const src = chartUrl || `https://s.tradingview.com/widgetembed/?${tvParams.toString()}`;
   return (
     <>
       {onClose && <div style={{ position:"fixed", inset:0, zIndex:9998 }} onClick={onClose}/>}
