@@ -1077,6 +1077,22 @@ def fetch_sparkline(ticker: str) -> dict:
         return {"sparkline": [], "bars_30d": []}
 
 
+def fetch_short_interest(ticker: str) -> float | None:
+    """% of float sold short, via yfinance's quoteSummary (.info) — deliberately
+    scoped to only the individually-scanned theme stocks (~250/night), not the
+    full ETF-holdings universe (~1000+ tickers): Finviz has this data too (Short
+    Float), but per-stock Finviz requests at that scale are exactly what
+    rate-limited the GitHub Actions runner IP once before. yfinance .info is
+    slower per call (~0.5s) than the batched OHLCV download, but stays within
+    a bounded, already-per-stock-touched set."""
+    try:
+        import yfinance as yf
+        pct = yf.Ticker(ticker).info.get("shortPercentOfFloat")
+        return round(float(pct) * 100, 2) if pct is not None else None
+    except Exception:
+        return None
+
+
 def _rolling_perf_from_closes(closes: list) -> dict:
     """Compute rolling-period returns from a list of daily closes (yfinance).
     Trading-day windows: 1d=1, 1w=5, 1m=21, 3m=63, 6m=126.
@@ -1092,6 +1108,44 @@ def _rolling_perf_from_closes(closes: list) -> dict:
             if base and base > 0:
                 result[key] = round((last / base - 1) * 100, 2)
     return result
+
+
+def _classify_setup(bars_30d: list[dict], rvol: float | None) -> str | None:
+    """'Flag' / 'Base' / 'Watch' — VCP-style setup classification from 30-day
+    OHLCV bars ({"h","l","c","v"}), strongest signal first:
+      Base  — tight 3-day range (<1.5%) AND volume dry-up (classic VCP base)
+      Flag  — tight 3-day range alone (contraction, but volume hasn't dried up yet)
+      Watch — an inside day alone (today's range inside yesterday's) — the
+              weakest/earliest signal, worth a look but not yet a clean setup
+    Returns None when no bars are available or none of the signals fire."""
+    if not bars_30d or len(bars_30d) < 2:
+        return None
+
+    last3 = bars_30d[-3:]
+    tight = False
+    if len(last3) >= 3:
+        hi = max(b["h"] for b in last3)
+        lo = min(b["l"] for b in last3)
+        tight = lo > 0 and (hi - lo) / lo < 0.015
+
+    vdu = False
+    if len(bars_30d) >= 10:
+        prior9 = bars_30d[-10:-1]
+        vol_avg = sum(b["v"] for b in prior9) / len(prior9)
+        vdu = vol_avg > 0 and bars_30d[-1]["v"] < vol_avg * 0.5
+    elif rvol is not None:
+        vdu = rvol < 0.5
+
+    today, prev = bars_30d[-1], bars_30d[-2]
+    inside_day = today["h"] <= prev["h"] and today["l"] >= prev["l"]
+
+    if tight and vdu:
+        return "Base"
+    if tight:
+        return "Flag"
+    if inside_day:
+        return "Watch"
+    return None
 
 
 # ──────────────────────────────────────────────────────────────
@@ -2397,9 +2451,11 @@ def _fetch_details(picks: list[dict], cache: dict) -> list[dict]:
                 price_data = fetch_sparkline(t)
                 detail["sparkline"] = price_data.get("sparkline", [])
                 detail["bars_30d"] = price_data.get("bars_30d", [])
+                detail["setup_label"] = _classify_setup(detail["bars_30d"], detail.get("rvol"))
                 if detail.get("sma10_pct") is None:
                     detail["sma10_pct"] = price_data.get("sma10_pct")
                 detail["earnings"] = fetch_earnings_yf(t)
+                detail["short_pct"] = fetch_short_interest(t)
                 # Finviz gives calendar-month perf → override with yfinance rolling.
                 # TV already returns rolling perf, so only do this for the fallback.
                 if from_finviz:
@@ -2963,8 +3019,22 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             except Exception:
                 pass
 
+        # 30-day OHLCV bars for setup classification — sliced from the same
+        # history already downloaded above, no extra requests.
+        n_bars = min(30, len(highs), len(lows), len(closes), len(volumes))
+        bars_30d = []
+        if n_bars > 0:
+            try:
+                for h, l, c, v in zip(highs.iloc[-n_bars:], lows.iloc[-n_bars:],
+                                       closes.iloc[-n_bars:], volumes.iloc[-n_bars:]):
+                    bars_30d.append({"h": float(h), "l": float(l), "c": float(c), "v": float(v)})
+            except Exception:
+                bars_30d = []
+        setup_label = _classify_setup(bars_30d, rvol)
+
         stats[tkr] = {"price": price, "adr_pct": adr_pct, "dollar_volume": dollar_volume,
-                      "perf_intraday": perf_intraday, "rvol": rvol, **perfs}
+                      "perf_intraday": perf_intraday, "rvol": rvol,
+                      "setup_label": setup_label, **perfs}
 
     # ── RS percentile within the ETF holdings universe ──────────────────────
     rs_lookup: dict[str, int] = {}
@@ -3039,6 +3109,7 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             new_h["price"]         = s.get("price")
             new_h["perf_intraday"] = s.get("perf_intraday")
             new_h["rvol"]          = s.get("rvol")
+            new_h["setup_label"]   = s.get("setup_label")
             new_h["perf_1d"]       = s.get("perf_1d")
             new_h["perf_1w"]       = s.get("perf_1w")
             new_h["perf_1m"]       = s.get("perf_1m")

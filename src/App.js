@@ -240,41 +240,10 @@ const GradeBadge = ({ grade }) => {
   return <Tip text={GRADE_TIP[grade]} color={GRADE_TIP_COLOR[grade]}><span className={`inline-flex items-center px-1 py-0.5 text-[11px] font-bold rounded border backdrop-blur-sm cursor-pointer ${GRADE_STYLE[grade]}`}>{grade}</span></Tip>;
 };
 
-function isVDU(s) {
-  const bars = s.bars_30d;
-  if (bars && bars.length >= 10) {
-    const vol10avg = bars.slice(-10, -1).reduce((sum, b) => sum + b.v, 0) / 9;
-    const todayVol = bars[bars.length - 1]?.v || 0;
-    return vol10avg > 0 && todayVol < vol10avg * 0.5;
-  }
-  return (s.rvol || 1) < 0.5;
-}
-
-function isTight(s) {
-  const bars = s.bars_30d;
-  if (bars && bars.length >= 3) {
-    const last3 = bars.slice(-3);
-    const range = (Math.max(...last3.map(b => b.h)) - Math.min(...last3.map(b => b.l))) / Math.min(...last3.map(b => b.l));
-    return range < 0.015;
-  }
-  const sp = s.sparkline;
-  if (!sp || sp.length < 3) return false;
-  const last3 = sp.slice(-3);
-  return (Math.max(...last3) - Math.min(...last3)) / Math.min(...last3) < 0.015;
-}
-
-function isInsideDay(s) {
-  const bars = s.bars_30d;
-  if (!bars || bars.length < 2) return false;
-  const today = bars[bars.length - 1];
-  const prev  = bars[bars.length - 2];
-  return today.h <= prev.h && today.l >= prev.l;
-}
-
-
-function isVCPTightening(s) {
-  return isTight(s) && isVDU(s);
-}
+// Flag/Base/Watch setup labels are computed server-side (scraper.py's
+// _classify_setup) from 30-day OHLCV bars — same VDU/tight-range/inside-day
+// signals this used to check client-side, now a single source of truth
+// covering both scanned stocks and ETF-holdings-fallback stocks.
 
 function getEliteGrade(s) {
   const sp = s.sparkline;
@@ -547,7 +516,7 @@ const ThematicSpotlight = ({ lbView, spotlightThemeName, data, ibkrThemesData, s
           mapped.push({
             ticker: h.ticker, company: h.name, price: h.price,
             mkt_cap_b: h.mkt_cap != null ? h.mkt_cap / 1e9 : null,
-            adr_pct: h.adr_pct, dollar_volume: h.dollar_volume, rs_52w: h.rs, rvol: h.rvol,
+            adr_pct: h.adr_pct, dollar_volume: h.dollar_volume, rs_52w: h.rs, rvol: h.rvol, setup_label: h.setup_label,
           });
         }
       }
