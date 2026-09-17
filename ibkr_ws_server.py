@@ -83,6 +83,17 @@ CLIENTS:        set             = set() # connected WebSocket objects
 ibkr_connected: bool            = False # True only while IB Gateway session is live
 ib = IB()
 
+# ib_insync auto-resubscribes account summary on every "connectivity restored"
+# (error 1102) event with a brand-new reqId each time, and never cancels the
+# previous one first — on a flaky network this leaks one subscription per
+# blip until TWS rejects further requests ("Maximum number of account
+# summary requests exceeded"). This script never reads account summary data
+# (only ticker prices), so neutralize the hook entirely rather than track
+# reqIds to cancel a subscription we don't use.
+async def _no_account_summary() -> None:
+    return None
+ib.reqAccountSummaryAsync = _no_account_summary
+
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Helpers
@@ -372,6 +383,14 @@ def _setup_reconnect(
         await _broadcast_ibkr_status(False)
         while True:
             await asyncio.sleep(10)
+            # Force a clean disconnect first — reconnecting on the same `ib`
+            # object without this leaves its internal account-sync state
+            # (positions/account summary) still subscribed from the last
+            # session, so each retry piles a new subscription on top instead
+            # of replacing it ("Maximum number of account summary requests
+            # exceeded" after a few reconnect cycles).
+            if ib.isConnected():
+                ib.disconnect()
             log.info("Attempting reconnect to IBKR…")
             connected = await ibkr_connect(symbols_ranked, etf_tickers)
             if connected:
