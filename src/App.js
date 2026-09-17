@@ -59,6 +59,7 @@ const PERF_KEYS = [
 ];
 
 const LB_KEYS = [
+  { key: "perf_intraday", label: "% Intraday" },
   { key: "perf_1d", label: "1D" },
   { key: "perf_1w", label: "1W" },
   { key: "perf_1m", label: "1M" },
@@ -482,7 +483,7 @@ const PerfCellLB = ({ val }) => {
   );
 };
 
-const LB_PERF_COLS = new Set(['perf_1d','perf_1w','perf_1m','perf_3m','perf_6m']);
+const LB_PERF_COLS = new Set(['perf_intraday','perf_1d','perf_1w','perf_1m','perf_3m','perf_6m']);
 
 // Rotation/acceleration cell — rank delta between the 1W and 3M leaderboards.
 // Positive = theme's short-term rank jumped ahead of its long-term rank
@@ -987,13 +988,13 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                       <SortTh col="ticker"   label="Ticker"                           align="left"  className="px-4" />
                       <SortTh col="name"     label={lang === 'zh' ? '公司' : 'Company'} align="left"  className="px-4 hidden sm:table-cell" />
                       <SortTh col="price"    label={lang === 'zh' ? '價格' : 'Price'}   align="right" />
+                      <SortTh col="perf_intraday" label="% Intraday"                   align="right" />
                       <SortTh col="perf_1d"  label="1D"                               align="right" />
                       <SortTh col="perf_1w"  label="1W"                               align="right" />
                       <SortTh col="perf_1m"  label="1M"                               align="right" />
                       <SortTh col="dollar_volume" label="$Vol"                          align="right" className="hidden sm:table-cell" />
                       <SortTh col="rs"       label="RS"                               align="right" />
                       <SortTh col="adr_pct"  label="ADR%"                             align="right" className="hidden sm:table-cell" />
-                      <th className="text-left px-3 py-2 font-medium hidden md:table-cell">Sub-Theme</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1016,6 +1017,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                           </td>
                           <td className="px-4 py-2 text-zinc-400 truncate max-w-[140px] hidden sm:table-cell">{h.name || '—'}</td>
                           <td className="px-3 py-2 text-right text-zinc-200 font-mono">{h.price != null ? `$${h.price.toFixed(2)}` : '—'}</td>
+                          <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_intraday)}</td>
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_1d)}</td>
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_1w)}</td>
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(h.perf_1m)}</td>
@@ -1028,7 +1030,6 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                               : <span className="text-zinc-600">—</span>}
                           </td>
                           <td className="px-3 py-2 text-right text-zinc-400 hidden sm:table-cell">{h.adr_pct != null ? `${h.adr_pct.toFixed(1)}%` : '—'}</td>
-                          <td className="px-3 py-2 text-zinc-500 text-[11px] hidden md:table-cell">{selectedTheme.name}</td>
                         </tr>
                       );
                     })}
@@ -1042,13 +1043,13 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                       <SortTh col="ticker"   label="Ticker"                           align="left"  className="px-4" />
                       <SortTh col="company"  label={lang === 'zh' ? '公司' : 'Company'} align="left"  className="px-4 hidden sm:table-cell" />
                       <SortTh col="price"    label={lang === 'zh' ? '價格' : 'Price'}   align="right" />
+                      <SortTh col="perf_intraday" label="% Intraday"                   align="right" />
                       <SortTh col="perf_1d"  label="1D"                               align="right" />
                       <SortTh col="perf_1w"  label="1W"                               align="right" />
                       <SortTh col="perf_1m"  label="1M"                               align="right" />
                       <SortTh col="dollar_volume" label="$Vol"                          align="right" className="hidden sm:table-cell" />
                       <SortTh col="rs_52w"   label="RS"                               align="right" />
                       <SortTh col="adr_pct"  label="ADR%"                             align="right" className="hidden sm:table-cell" />
-                      <SortTh col="_subtheme" label="Sub-Theme"                        align="left"  className="hidden md:table-cell" />
                     </tr>
                   </thead>
                   <tbody>
@@ -1072,6 +1073,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                           </td>
                           <td className="px-4 py-2 text-zinc-400 truncate max-w-[140px] hidden sm:table-cell">{s.company || '—'}</td>
                           <td className="px-3 py-2 text-right text-zinc-200 font-mono">{s.price != null ? `$${s.price.toFixed(2)}` : '—'}</td>
+                          <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_intraday)}</td>
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1d)}</td>
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1w)}</td>
                           <td className="px-3 py-2 text-right font-mono">{fmtPct(s.perf_1m)}</td>
@@ -1084,7 +1086,6 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                               : <span className="text-zinc-600">—</span>}
                           </td>
                           <td className="px-3 py-2 text-right text-zinc-400 hidden sm:table-cell">{s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : '—'}</td>
-                          <td className="px-3 py-2 text-zinc-500 text-[11px] hidden md:table-cell truncate max-w-[120px]">{s._subtheme || '—'}</td>
                         </tr>
                       );
                     })}
@@ -5660,13 +5661,14 @@ const BreadthStockScreener = ({ data, compact = false }) => {
   };
 
   // Column widths as % — must sum to 100 (# col is separate at 3%)
-  const COL_WIDTHS = ["9%","13%","9%","7%","7%","7%","7%","7%","7%","7%","7%","5%"];
+  const COL_WIDTHS = ["9%","13%","9%","7%","7%","7%","7%","7%","7%","7%","7%","7%","5%"];
   const COLS = [
     { col: "ticker",        label: "Sym"                                                                     },
     { col: "industry",      label: "Industry",  label2: "Theme",    leftAlign: true                         },
     { col: "adr_dvol",      label: "ADR×",      label2: "Avg$Vol",  tooltip: "ADR% × Avg Daily $Vol"        },
     { col: "pct_52w_range", label: "52W%",                          tooltip: "Price position in 52W range"  },
     { col: "adr_pct",       label: "ADR%"                                                                    },
+    { col: "perf_intraday", label: "Intra%",                        tooltip: "% change from today's open"   },
     { col: "perf_1d",       label: "1D%"                                                                     },
     { col: "perf_1w",       label: "1W%"                                                                     },
     { col: "perf_1m",       label: "1M%"                                                                     },
@@ -5788,8 +5790,8 @@ const BreadthStockScreener = ({ data, compact = false }) => {
                   <td className="px-2 py-1.5 text-center text-[12px] font-mono text-zinc-300">
                     {s.adr_pct != null ? `${s.adr_pct.toFixed(1)}%` : "—"}
                   </td>
-                  {/* 1D 1W 1M 3M 6M 1YR */}
-                  {[p1d, s.perf_1w, s.perf_1m, s.perf_3m, s.perf_6m, s.perf_1y ?? s.perf_12m].map((v, pi) => (
+                  {/* Intraday 1D 1W 1M 3M 6M 1YR */}
+                  {[s.perf_intraday, p1d, s.perf_1w, s.perf_1m, s.perf_3m, s.perf_6m, s.perf_1y ?? s.perf_12m].map((v, pi) => (
                     <td key={pi} className={`px-2 py-1.5 text-center text-[12px] font-mono ${perfCol(v)}`}>
                       {fmtPerf(v)}
                     </td>

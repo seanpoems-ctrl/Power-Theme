@@ -1021,6 +1021,12 @@ def fetch_stock_detail(ticker: str) -> dict | None:
         # Finviz snapshot-table2 has no "Perf Day" field; always fall back to Change%
         if result.get("perf_1d") is None:
             result["perf_1d"] = result["change_pct"]
+
+        # perf_intraday (% vs today's own open) isn't available here — Finviz's
+        # current quote-page snapshot table has "Prev Close"/"Price" but no "Open"
+        # cell. Left unset; this path is only the fallback for tickers
+        # _tv_batch_detail can't resolve, and TradingView's "open" field covers
+        # the primary path.
         return result
     except (ValueError, TypeError):
         return None
@@ -2170,6 +2176,26 @@ def build_data() -> dict:
     ]
     _add_rotation_ranks(industry_rankings)
 
+    # % Intraday for theme_rankings / finviz_theme_rankings: average each drilled-into
+    # theme's own individually-scraped stocks (grouped structurally by output_themes,
+    # not by industry-name matching — the scanned stocks' "industry" field comes from
+    # TradingView in CI and doesn't line up with Finviz's industry_rankings taxonomy,
+    # so only the theme-level rollup is reliable). Only covers the top drilled-into
+    # themes; the rest stay None and render as "—" in the Leaderboard.
+    _theme_intraday = {}
+    for _theme in output_themes:
+        _vals = [
+            s.get("perf_intraday")
+            for st in _theme.get("subthemes", [])
+            for s in st.get("stocks", [])
+            if s.get("perf_intraday") is not None
+        ]
+        if _vals:
+            _theme_intraday[_theme["name"].lower()] = round(sum(_vals) / len(_vals), 2)
+    for _rankings in (theme_rankings, finviz_theme_rankings):
+        for _r in _rankings:
+            _r["perf_intraday"] = _theme_intraday.get((_r.get("name") or "").lower())
+
     logger.info("Fetching macro news...")
     macro_news = fetch_macro_news()
 
@@ -2258,7 +2284,7 @@ def _tv_batch_detail(tickers: list[str]) -> dict[str, dict]:
         s = _f(sma)
         return round((close / s - 1) * 100, 2) if s and s > 0 else None
 
-    FIELDS = ["name", "description", "close", "change",
+    FIELDS = ["name", "description", "close", "change", "open",
               "Perf.W", "Perf.1M", "Perf.3M", "Perf.6M", "Perf.Y",
               "average_volume_10d_calc", "volume", "market_cap_basic",
               "price_52_week_high", "price_52_week_low", "ATR", "Relative.Volume",
@@ -2285,10 +2311,12 @@ def _tv_batch_detail(tickers: list[str]) -> dict[str, dict]:
             atr  = _f(row.get("ATR"))
             hi52 = _f(row.get("price_52_week_high"))
             mktcap = _f(row.get("market_cap_basic"), 0)
+            open_px = _f(row.get("open"))
             out[tkr] = {
                 "ticker": tkr,
                 "company": str(row.get("description", "") or "").strip(),
                 "price": round(close, 2),
+                "perf_intraday": round((close / open_px - 1) * 100, 2) if open_px and open_px > 0 else None,
                 "change_pct": _f(row.get("change")) or 0,
                 "volume": int(_f(row.get("volume"), 0) or 0),
                 "avg_volume": int(avg_vol),
@@ -2838,6 +2866,7 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             closes  = hist[tkr]["Close"].dropna()  if len(all_tickers) > 1 else hist["Close"].dropna()
             highs   = hist[tkr]["High"].dropna()   if len(all_tickers) > 1 else hist["High"].dropna()
             lows    = hist[tkr]["Low"].dropna()    if len(all_tickers) > 1 else hist["Low"].dropna()
+            opens   = hist[tkr]["Open"].dropna()   if len(all_tickers) > 1 else hist["Open"].dropna()
             volumes = hist[tkr]["Volume"].dropna() if len(all_tickers) > 1 else hist["Volume"].dropna()
         except Exception:
             continue
@@ -2879,7 +2908,19 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             except Exception:
                 pass
 
-        stats[tkr] = {"price": price, "adr_pct": adr_pct, "dollar_volume": dollar_volume, **perfs}
+        # % change vs today's own open (distinct from perf_1d, which is close
+        # vs prior close and absorbs overnight/pre-market gaps)
+        perf_intraday = None
+        if len(opens) > 0:
+            try:
+                open_px = float(opens.iloc[-1])
+                if open_px > 0:
+                    perf_intraday = round((price / open_px - 1) * 100, 2)
+            except Exception:
+                pass
+
+        stats[tkr] = {"price": price, "adr_pct": adr_pct, "dollar_volume": dollar_volume,
+                      "perf_intraday": perf_intraday, **perfs}
 
     # ── RS percentile within the ETF holdings universe ──────────────────────
     rs_lookup: dict[str, int] = {}
@@ -2952,6 +2993,7 @@ def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
             new_h = dict(h)
             s = stats.get(h["ticker"], {})
             new_h["price"]         = s.get("price")
+            new_h["perf_intraday"] = s.get("perf_intraday")
             new_h["perf_1d"]       = s.get("perf_1d")
             new_h["perf_1w"]       = s.get("perf_1w")
             new_h["perf_1m"]       = s.get("perf_1m")
