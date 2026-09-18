@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-18 18:48 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Signals, Complacent Credit",
+    "spy_price": 761.69,
+    "spy_change_pct": -0.12,
+    "vix": 14.81,
+    "hy_oas": 2.7,
+    "yield_curve": 0.25,
+    "credit_status": "Complacent",
+    "s5fi": 33.3,
+    "mmth": 54.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp.",
+          "reason": "Microsoft Corp. announced a landmark multi-year cloud services agreement with a leading global retailer, expanding its Azure footprint significantly."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "NVIDIA Corp. shares surged after key industry reports highlighted accelerating adoption of its latest GPU architectures in enterprise AI deployments."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corp.",
+          "reason": "Exxon Mobil Corp. experienced renewed selling pressure as crude oil prices plummeted, underscoring commodity-driven weakness in the energy sector."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-18 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2220,23 +2258,5 @@
         }
       ]
     }
-  },
-  {
-    "generated_at": "2026-08-28 22:54 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "",
-    "spy_price": 769.35,
-    "spy_change_pct": -0.23,
-    "vix": 14.43,
-    "hy_oas": 2.63,
-    "yield_curve": 0.39,
-    "credit_status": "Complacent",
-    "s5fi": 54.8,
-    "mmth": 72.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {}
   }
 ]
