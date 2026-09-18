@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-18 10:54 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious Divergence, Oil Slump",
+    "spy_price": 759.79,
+    "spy_change_pct": -0.37,
+    "vix": 15.35,
+    "hy_oas": 2.7,
+    "yield_curve": 0.27,
+    "credit_status": "Complacent",
+    "s5fi": 33.6,
+    "mmth": 53.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announces a strategic acquisition of a leading AI-powered cybersecurity firm, expanding its enterprise security offerings and cloud solutions."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly's new Alzheimer's drug shows highly positive results in Phase 3 trials, setting it up for expedited regulatory review and significant market potential."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil faces continued pressure from the significant global crude oil price decline, driving bearish sentiment without specific new company developments."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-18 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2197,44 +2235,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Tesla shares saw renewed selling pressure as technical levels broke down, exacerbating concerns over competitive pressures and production targets."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-28 16:46 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Drifting Lower / Complacent Tone",
-    "spy_price": 769.35,
-    "spy_change_pct": -0.23,
-    "vix": 14.43,
-    "hy_oas": 2.63,
-    "yield_curve": 0.47,
-    "credit_status": "Complacent",
-    "s5fi": 54.8,
-    "mmth": 72.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Shares surged after analysts upgraded price targets, citing unexpectedly robust pre-orders for its new Vision Pro 2 headset following yesterday's product reveal."
-        },
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com, Inc.",
-          "reason": "Saw renewed buying interest following reports of a significant new enterprise contract win for its AWS division in the burgeoning artificial intelligence infrastructure market."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Continued to trade within its recent range as investors consolidated positions following the latest artificial intelligence chip supply chain reports from earlier this week."
         }
       ]
     }
