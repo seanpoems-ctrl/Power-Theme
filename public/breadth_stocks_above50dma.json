@@ -2,64 +2,88 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 4,
+  "count": 6,
   "stocks": [
-    {
-      "ticker": "SDGR",
-      "company": "Schrodinger, Inc.",
-      "industry": "Packaged Software",
-      "price": 30.24,
-      "change_pct": 26.37,
-      "adr_pct": 5.2,
-      "dollar_volume": "$66.8M",
-      "market_cap_b": 2.262,
-      "rs_ibd": 89,
-      "above50dma_pct": 66.2
-    },
     {
       "ticker": "ASST",
       "company": "Strive, Inc.",
       "industry": "Financial Conglomerates",
-      "price": 28.28,
-      "change_pct": 3.17,
-      "adr_pct": 6.6,
-      "dollar_volume": "$280.2M",
-      "market_cap_b": 2.637,
-      "rs_ibd": 65,
-      "above50dma_pct": 64.7
+      "price": 30.09,
+      "change_pct": 6.4,
+      "adr_pct": 6.3,
+      "dollar_volume": "$295.0M",
+      "market_cap_b": 2.873,
+      "rs_ibd": 76,
+      "above50dma_pct": 71.7
+    },
+    {
+      "ticker": "PURR",
+      "company": "Hyperliquid Strategies Inc",
+      "industry": "Financial Conglomerates",
+      "price": 14.09,
+      "change_pct": 9.82,
+      "adr_pct": 8.3,
+      "dollar_volume": "$358.6M",
+      "market_cap_b": 3.352,
+      "rs_ibd": 95,
+      "above50dma_pct": 58.1
+    },
+    {
+      "ticker": "SDGR",
+      "company": "Schrodinger, Inc.",
+      "industry": "Packaged Software",
+      "price": 29.02,
+      "change_pct": -4.03,
+      "adr_pct": 5.5,
+      "dollar_volume": "$77.0M",
+      "market_cap_b": 2.171,
+      "rs_ibd": 87,
+      "above50dma_pct": 57.4
     },
     {
       "ticker": "MRNA",
       "company": "Moderna, Inc.",
       "industry": "Biotechnology",
-      "price": 158.07,
-      "change_pct": 8.55,
+      "price": 154.04,
+      "change_pct": -2.55,
       "adr_pct": 7.6,
-      "dollar_volume": "$1.86B",
-      "market_cap_b": 63.107,
+      "dollar_volume": "$1.92B",
+      "market_cap_b": 61.498,
       "rs_ibd": 98,
-      "above50dma_pct": 63.6
+      "above50dma_pct": 56.9
     },
     {
       "ticker": "IOVA",
       "company": "Iovance Biotherapeutics, Inc.",
       "industry": "Biotechnology",
-      "price": 10.02,
-      "change_pct": 1.52,
-      "adr_pct": 5.6,
-      "dollar_volume": "$143.5M",
-      "market_cap_b": 4.539,
+      "price": 10.25,
+      "change_pct": 2.3,
+      "adr_pct": 5.4,
+      "dollar_volume": "$155.2M",
+      "market_cap_b": 4.643,
       "rs_ibd": 98,
-      "above50dma_pct": 50.2
+      "above50dma_pct": 51.0
+    },
+    {
+      "ticker": "SECZ",
+      "company": "Securitize Corp.",
+      "industry": "Packaged Software",
+      "price": 10.86,
+      "change_pct": 21.61,
+      "adr_pct": 8.0,
+      "dollar_volume": "$45.2M",
+      "market_cap_b": 1.773,
+      "rs_ibd": 45,
+      "above50dma_pct": 50.4
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": 1.14,
-    "spx_1m": -0.91,
-    "spx_3m": 1.83,
-    "spx_34d": 1.98,
-    "spx_qtd": 2.07,
-    "spx_mtd": 0.08
+    "spx_1d": 0.17,
+    "spx_1m": 0.12,
+    "spx_3m": 2.38,
+    "spx_34d": 0.66,
+    "spx_qtd": 2.24,
+    "spx_mtd": 0.25
   },
-  "fetched_at_utc": "2026-09-18T01:13:46+00:00"
+  "fetched_at_utc": "2026-09-18T23:13:19+00:00"
 }
