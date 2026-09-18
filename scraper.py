@@ -2847,13 +2847,21 @@ _THEME_ETF_MAP = _load_etf_map() or {
 }
 
 
-def fetch_etf_holdings(etf_ticker: str, _retry: bool = True) -> list:
+def fetch_etf_holdings(etf_ticker: str, _max_attempts: int = 3) -> list:
     """Fetch top holdings for an ETF via yfinance. Returns [] on any failure.
 
     Foreign-listed tickers (non-US exchanges, e.g. 600900.SS, VWS.CO, SUZLON.BO)
     are excluded — only US-listed stocks and ADRs are kept.  A ticker is
     considered foreign if it contains a '.' whose suffix matches a known
     non-US exchange code.
+
+    Yahoo's per-ticker funds-data endpoint rate-limits hard on rapid
+    sequential requests (this fn is called ~210x back-to-back) — a failure
+    is usually a throttle blip, not a real per-ticker error. That throttle
+    can show up two ways: a raised exception, OR a "successful" call that
+    just comes back with empty top_holdings — retry on both, not just the
+    exception path (an empty-but-no-error response used to fall straight
+    through with zero retries).
     """
     import re
     _FOREIGN_SUFFIX_RE = re.compile(
@@ -2862,56 +2870,52 @@ def fetch_etf_holdings(etf_ticker: str, _retry: bool = True) -> list:
         re.IGNORECASE,
     )
 
-    try:
-        import yfinance as yf
-        t = yf.Ticker(etf_ticker)
-        fd = t.get_funds_data()
-        if fd is None:
-            return []
-        th = fd.top_holdings
-        if th is None or th.empty:
-            return []
-        rows = []
-        skipped = 0
-        for sym, row in th.iterrows():
-            ticker = str(sym).strip()
-            # Drop foreign-listed tickers
-            if _FOREIGN_SUFFIX_RE.search(ticker):
-                skipped += 1
-                continue
-            # Drop money market funds, cash equivalents and non-equity instruments.
-            # These show up as holdings when an ETF parks cash (e.g. FGXXX, VMFXX,
-            # SGOV, BIL) — identified by ending in ≥2 X's, or known cash/mm names.
-            name = str(row.get("Name", "")).strip()
-            name_lower = name.lower()
-            if (ticker.upper().endswith("XX") or ticker.upper().endswith("XXX")
-                    or any(kw in name_lower for kw in (
-                        "money market", "government oblig", "cash", "treasury",
-                        "liquidity fund", "prime fund", "reserve fund",
-                    ))):
-                skipped += 1
-                logger.debug(f"  Skipping cash/MM holding: {ticker} ({name})")
-                continue
-            pct = float(row.get("Holding Percent", 0)) * 100
-            rows.append({"ticker": ticker, "name": name, "weight": round(pct, 2)})
-        rows.sort(key=lambda x: x["weight"], reverse=True)
-        logger.info(
-            f"  ETF holdings: {etf_ticker} → {len(rows)} holdings"
-            + (f" ({skipped} foreign-listed removed)" if skipped else "")
-        )
-        return rows
-    except Exception as e:
-        if _retry:
-            # Yahoo's per-ticker funds-data endpoint rate-limits hard on rapid
-            # sequential requests (this fn is called ~210x back-to-back) — a
-            # failure is usually a throttle blip, not a real per-ticker error.
-            # One backoff-and-retry recovers most of them.
-            backoff = 3.0 if CI else 1.5
-            logger.warning(f"  ETF holdings failed for {etf_ticker} ({e}) — retrying after {backoff}s")
-            time.sleep(backoff)
-            return fetch_etf_holdings(etf_ticker, _retry=False)
-        logger.warning(f"  ETF holdings failed for {etf_ticker}: {e}")
-        return []
+    for attempt in range(1, _max_attempts + 1):
+        try:
+            import yfinance as yf
+            t = yf.Ticker(etf_ticker)
+            fd = t.get_funds_data()
+            th = fd.top_holdings if fd is not None else None
+            if th is None or th.empty:
+                raise ValueError("empty top_holdings")
+            rows = []
+            skipped = 0
+            for sym, row in th.iterrows():
+                ticker = str(sym).strip()
+                # Drop foreign-listed tickers
+                if _FOREIGN_SUFFIX_RE.search(ticker):
+                    skipped += 1
+                    continue
+                # Drop money market funds, cash equivalents and non-equity instruments.
+                # These show up as holdings when an ETF parks cash (e.g. FGXXX, VMFXX,
+                # SGOV, BIL) — identified by ending in ≥2 X's, or known cash/mm names.
+                name = str(row.get("Name", "")).strip()
+                name_lower = name.lower()
+                if (ticker.upper().endswith("XX") or ticker.upper().endswith("XXX")
+                        or any(kw in name_lower for kw in (
+                            "money market", "government oblig", "cash", "treasury",
+                            "liquidity fund", "prime fund", "reserve fund",
+                        ))):
+                    skipped += 1
+                    logger.debug(f"  Skipping cash/MM holding: {ticker} ({name})")
+                    continue
+                pct = float(row.get("Holding Percent", 0)) * 100
+                rows.append({"ticker": ticker, "name": name, "weight": round(pct, 2)})
+            rows.sort(key=lambda x: x["weight"], reverse=True)
+            logger.info(
+                f"  ETF holdings: {etf_ticker} → {len(rows)} holdings"
+                + (f" ({skipped} foreign-listed removed)" if skipped else "")
+                + (f" (attempt {attempt})" if attempt > 1 else "")
+            )
+            return rows
+        except Exception as e:
+            if attempt < _max_attempts:
+                backoff = (3.0 if CI else 1.5) * attempt
+                logger.warning(f"  ETF holdings failed for {etf_ticker} ({e}) — retrying after {backoff}s (attempt {attempt}/{_max_attempts})")
+                time.sleep(backoff)
+            else:
+                logger.warning(f"  ETF holdings failed for {etf_ticker} after {_max_attempts} attempts: {e}")
+                return []
 
 
 def enrich_etf_holdings(etf_holdings_dict: dict) -> dict:
