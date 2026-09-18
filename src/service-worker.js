@@ -7,6 +7,12 @@ import { StaleWhileRevalidate, NetworkFirst } from 'workbox-strategies';
 
 clientsClaim();
 
+// Named once here so the activate-time cleanup below always matches whatever
+// version the two routes below are actually using — bump these, not the
+// string literals further down.
+const DATA_CACHE_NAME = 'power-theme-data-v2';
+const EXTERNAL_CACHE_NAME = 'external-api-v1';
+
 // Precache all build artifacts (JS, CSS, HTML) — injected at build time
 precacheAndRoute(self.__WB_MANIFEST);
 
@@ -27,7 +33,7 @@ registerRoute(
 registerRoute(
   ({ url }) => url.pathname.endsWith('.json'),
   new StaleWhileRevalidate({
-    cacheName: 'power-theme-data-v2',
+    cacheName: DATA_CACHE_NAME,
     plugins: [
       new ExpirationPlugin({ maxEntries: 30, maxAgeSeconds: 24 * 60 * 60 }),
     ],
@@ -39,8 +45,26 @@ registerRoute(
   ({ url }) =>
     url.hostname !== self.location.hostname &&
     !url.hostname.endsWith('github.io'),
-  new NetworkFirst({ cacheName: 'external-api-v1' })
+  new NetworkFirst({ cacheName: EXTERNAL_CACHE_NAME })
 );
+
+// Drop any previous-version runtime cache left behind by a version bump above
+// (e.g. power-theme-data-v1, orphaned by the v1->v2 bump) instead of leaving
+// it in browser storage indefinitely — workbox-precaching already does this
+// for its own precache automatically, but these two hand-named caches aren't
+// covered by that.
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((names) =>
+      Promise.all(
+        names
+          .filter((n) => (n.startsWith('power-theme-data-') || n.startsWith('external-api-'))
+            && n !== DATA_CACHE_NAME && n !== EXTERNAL_CACHE_NAME)
+          .map((n) => caches.delete(n))
+      )
+    )
+  );
+});
 
 // Skip waiting when a new SW is available (triggered by the app)
 self.addEventListener('message', (event) => {
