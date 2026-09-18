@@ -126,19 +126,27 @@ jobs:
           timeout 120 python ibkr_themes.py        || echo "ibkr_themes.py failed (non-fatal)"
           timeout 900 python breadth_stocks_builder.py  || echo "breadth_stocks_builder.py failed (non-fatal)"
           timeout 300 python etf_trendline_service.py   || echo "etf_trendline_service.py failed (non-fatal)"
-          # etf_rs_builder.py silently failed 2 nights running (2026-09-14/15)
-          # while the scripts immediately before/after it succeeded in the same
-          # step — completes in ~8-10s locally even on the exact CI dependency
-          # versions, so it looks like a transient CI-only network/rate-limit
-          # issue rather than a code bug. Retry a few times before giving up.
+          # Root-caused 2026-09-18 (pulled the actual CI job log, not just the
+          # exit code): this isn't a network/rate-limit failure at all — the
+          # script runs fine and its OWN stale-data guard is correctly firing.
+          # At this job's run time (~5h after the US close), yfinance's bulk
+          # "5d" download comes back with most tickers still a session behind
+          # on Yahoo's backend — 208/209 ETFs stale, only one caught up, same
+          # result on all 3 attempts within the old 20s retry gap. That's a
+          # data-propagation lag on Yahoo's side that a 20s wait can't outrun;
+          # it needs real wall-clock time, not more immediate retries.
           for attempt in 1 2 3; do
             if timeout 120 python etf_rs_builder.py; then
               echo "etf_rs_builder.py OK (attempt $attempt)"
               break
             fi
             echo "etf_rs_builder.py attempt $attempt failed"
-            if [ "$attempt" -lt 3 ]; then
-              sleep 20
+            if [ "$attempt" -eq 1 ]; then
+              echo "Waiting 5 min for Yahoo's data to catch up…"
+              sleep 300
+            elif [ "$attempt" -eq 2 ]; then
+              echo "Waiting 10 min for Yahoo's data to catch up…"
+              sleep 600
             else
               echo "etf_rs_builder.py failed after 3 attempts (non-fatal)"
             fi
