@@ -5,7 +5,9 @@ on:
                            # push-trigger delivery stalled; workflow_dispatch ran fine), or
                            # after a fix to a paths-ignored file (e.g. etf_rs.json) that
                            # needs to reach the live site without waiting for tonight's scrape
-                           # (e.g. 2026-09-17, fine_theme_rankings added to etf_rs.json)
+                           # (e.g. 2026-09-17, fine_theme_rankings added to etf_rs.json;
+                           # 2026-09-18, manual etf_rs.json refresh after CI's own run
+                           # silently failed to produce it two nights running)
   push:
     branches: [ main ]
     paths-ignore:
