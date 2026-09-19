@@ -3171,6 +3171,31 @@ function _ibkrNum(s) {
   const n = parseFloat(v);
   return neg ? -n : n;
 }
+// IBKR's "Date/Time" column shows up in more than one configured format
+// depending on the account's statement settings:
+//   "2026-01-15, 09:31:00"   comma-separated, dashed date
+//   "20260115;093100"         semicolon-separated, compact yyyyMMdd;HHmmss
+// Normalizes either to { date: "YYYY-MM-DD", time: "HH:MM" }.
+function _parseIbkrDateTime(dt) {
+  const raw = String(dt || "").trim();
+  let datePart = raw, timePart = "";
+  if (raw.includes(";")) [datePart, timePart] = raw.split(";").map(s => s.trim());
+  else if (raw.includes(",")) [datePart, timePart] = raw.split(",").map(s => s.trim());
+  if (/^\d{8}$/.test(datePart)) datePart = `${datePart.slice(0, 4)}-${datePart.slice(4, 6)}-${datePart.slice(6, 8)}`;
+  if (/^\d{6}$/.test(timePart) || /^\d{4}$/.test(timePart)) timePart = `${timePart.slice(0, 2)}:${timePart.slice(2, 4)}`;
+  else timePart = timePart.slice(0, 5);
+  return { date: datePart, time: timePart };
+}
+// Detects the broken "20260115;093100" pattern already-imported trades may
+// have if they were imported before _parseIbkrDateTime learned this format —
+// used by the Trade Journal's "Fix broken dates" repair button.
+const IBKR_COMPACT_DATETIME_RE = /^(\d{4})(\d{2})(\d{2});(\d{2})(\d{2})(\d{2})$/;
+function _repairIbkrDateTimeField(value) {
+  const m = IBKR_COMPACT_DATETIME_RE.exec(value || "");
+  if (!m) return null;
+  const [, y, mo, d, hh, mm] = m;
+  return { date: `${y}-${mo}-${d}`, time: `${hh}:${mm}` };
+}
 function parseIbkrTrades(csvText, categoryThemeMap = {}) {
   const lines = csvText.split(/\r?\n/);
   let header = null;
@@ -3194,8 +3219,8 @@ function parseIbkrTrades(csvText, categoryThemeMap = {}) {
       const qty = _ibkrNum(cells[header["Quantity"]]);
       const price = _ibkrNum(cells[header["T. Price"]] ?? cells[header["Price"]]);
       if (!symbol || !dt || isNaN(qty) || isNaN(price) || qty === 0) continue;
-      const [dPart, tPart] = dt.split(",").map(s => s.trim());
-      execs.push({ symbol: symbol.trim(), date: dPart, time: (tPart || "").slice(0, 5), qty, price });
+      const { date: dPart, time: tPart } = _parseIbkrDateTime(dt);
+      execs.push({ symbol: symbol.trim(), date: dPart, time: tPart, qty, price });
     }
   }
 
@@ -3217,8 +3242,8 @@ function parseIbkrTrades(csvText, categoryThemeMap = {}) {
           const symbol = cells[symIdx], dt = cells[dateIdx];
           const qty = _ibkrNum(cells[qtyIdx]), price = _ibkrNum(cells[priceIdx]);
           if (!symbol || !dt || isNaN(qty) || isNaN(price) || qty === 0) continue;
-          const [dPart, tPart] = dt.split(",").map(s => s.trim());
-          execs.push({ symbol: symbol.trim(), date: dPart, time: (tPart || "").slice(0, 5), qty, price });
+          const { date: dPart, time: tPart } = _parseIbkrDateTime(dt);
+          execs.push({ symbol: symbol.trim(), date: dPart, time: tPart, qty, price });
         }
       }
     }
@@ -4311,6 +4336,30 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     setImportMsg(filled ? `Filled in ${filled} missing theme${filled === 1 ? "" : "s"}.` : "No missing themes could be resolved — those tickers aren't in the scanner, ETF holdings, or stock database.");
   };
 
+  // Repairs trades imported before _parseIbkrDateTime learned IBKR's compact
+  // "20260115;093100" Date/Time format — those rows have the raw string
+  // sitting in date/exit_date (e.g. "20251128;105410") with entry_time/
+  // exit_time left blank. Fixes in place rather than asking for a re-import,
+  // since the broken date string is part of the dedup signature and a
+  // re-import would just add duplicates instead of replacing them.
+  const fixBrokenDates = () => {
+    let fixed = 0;
+    const updated = trades.map(t => {
+      const d = _repairIbkrDateTimeField(t.date);
+      const ed = _repairIbkrDateTimeField(t.exit_date);
+      if (!d && !ed) return t;
+      fixed++;
+      return calcDerived({
+        ...t,
+        ...(d ? { date: d.date, entry_time: t.entry_time || d.time } : {}),
+        ...(ed ? { exit_date: ed.date, exit_time: t.exit_time || ed.time } : {}),
+      });
+    });
+    if (fixed) persist(updated);
+    setImportMsg(fixed ? `Fixed ${fixed} trade${fixed === 1 ? "" : "s"} with broken date/time formatting.` : "No broken dates found.");
+  };
+  const hasBrokenDates = trades.some(t => IBKR_COMPACT_DATETIME_RE.test(t.date) || IBKR_COMPACT_DATETIME_RE.test(t.exit_date));
+
   const handleImportFile = (e) => {
     const file = e.target.files?.[0];
     e.target.value = ""; // allow re-selecting the same file
@@ -4525,6 +4574,12 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
           <button onClick={fillMissingThemes}
             className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 rounded-lg hover:bg-zinc-700/60 transition-colors">
             Fill missing themes
+          </button>
+        )}
+        {hasBrokenDates && (
+          <button onClick={fixBrokenDates}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-amber-500/15 text-amber-400 border border-amber-500/30 rounded-lg hover:bg-amber-500/25 transition-colors">
+            Fix broken dates
           </button>
         )}
         <button onClick={() => { setImportMsg(null); fileInputRef.current?.click(); }}
