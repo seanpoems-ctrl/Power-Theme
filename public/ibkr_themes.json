@@ -1,33 +1,6 @@
 {
-  "generated_at": "2026-09-18T23:13:18.683392+00:00",
+  "generated_at": "2026-09-19T01:05:53.303939+00:00",
   "data_source": "fallback",
-  "power_themes": [
-    {
-      "name": "Other",
-      "theme_rs": 98.0,
-      "perf_1d": 7.72,
-      "leaders": [
-        {
-          "ticker": "PURR",
-          "price": 14.09,
-          "rs_52w": 98,
-          "adr_pct": 8.3,
-          "vol_surge": 3.5,
-          "mkt_cap": 2825942436,
-          "gates_passed": 5,
-          "gates_detail": {
-            "rs_52w > 85": true,
-            "price > 12": true,
-            "avg_dollar_vol_30d > 100M": true,
-            "mkt_cap > 2B": true,
-            "adr_pct >= 4.0": true
-          },
-          "primary_theme": "Other",
-          "secondary_themes": [],
-          "setup_label": "Flag"
-        }
-      ]
-    }
-  ],
+  "power_themes": [],
   "account_equity": null
 }
