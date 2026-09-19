@@ -4221,6 +4221,8 @@ const PerfTable = ({ title, rows, labelHeader, bare = false }) => {
 const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [trades, setTrades]         = useState(() => loadTrades());
   const [filter, setFilter]         = useState("all");
+  const [sortCol, setSortCol]       = useState(null);
+  const [sortDir, setSortDir]       = useState("desc");
   const [showForm, setShowForm]     = useState(false);
   const [draft, setDraft]           = useState({ ...EMPTY_TRADE, id: newId() });
   const [importMsg, setImportMsg]   = useState(null);
@@ -4429,6 +4431,37 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const advancedFiltersActive = !!(fTicker || fSetup || fGrade || fSide || fFrom || fTo);
   const clearAdvancedFilters = () => { setFTicker(""); setFSetup(""); setFGrade(""); setFSide(""); setFFrom(""); setFTo(""); };
 
+  // Sortable columns — numeric ones compare as numbers (blanks always sort
+  // last regardless of direction); everything else compares as text. Date
+  // strings are "YYYY-MM-DD" so a plain text compare already sorts them
+  // chronologically. No sort selected = insertion order (newest import/add
+  // first), same as before this feature existed.
+  const NUMERIC_SORT_COLS = new Set(["entry_price", "exit_price", "shares", "stop_price", "pnl_dollars", "pnl_pct", "r_multiple"]);
+  const handleSort = (col) => {
+    if (sortCol === col) { setSortDir(d => d === "asc" ? "desc" : "asc"); return; }
+    setSortCol(col);
+    setSortDir(NUMERIC_SORT_COLS.has(col) ? "desc" : "asc");
+  };
+  const sortedVisible = useMemo(() => {
+    if (!sortCol) return visible;
+    const numeric = NUMERIC_SORT_COLS.has(sortCol);
+    return [...visible].sort((a, b) => {
+      let av = a[sortCol], bv = b[sortCol];
+      if (numeric) {
+        av = av === "" || av == null ? null : parseFloat(av);
+        bv = bv === "" || bv == null ? null : parseFloat(bv);
+        if (av == null && bv == null) return 0;
+        if (av == null) return 1;
+        if (bv == null) return -1;
+        return sortDir === "asc" ? av - bv : bv - av;
+      }
+      av = (av || "").toString(); bv = (bv || "").toString();
+      if (!av && bv) return 1;
+      if (!bv && av) return -1;
+      return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
+    });
+  }, [visible, sortCol, sortDir]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // ── Performance by theme ─────────────────────────────────────────────────────
   const byTheme = useMemo(() => {
     const m = {};
@@ -4509,8 +4542,12 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const pnlCls  = (v) => { const n = parseFloat(v); return isNaN(n) ? "text-zinc-500" : n > 0 ? "text-emerald-400 font-semibold" : n < 0 ? "text-red-400 font-semibold" : "text-zinc-400"; };
   const rCls    = (v) => { const n = parseFloat(v); return isNaN(n) ? "text-zinc-500" : n >= 2 ? "text-emerald-400 font-bold" : n > 0 ? "text-emerald-400" : n < 0 ? "text-red-400" : "text-zinc-500"; };
 
-  const TH = ({ children, w }) => (
-    <th className={`px-2 py-2 text-[11px] font-semibold text-zinc-500 uppercase tracking-wider whitespace-nowrap ${w || ""}`}>{children}</th>
+  const TH = ({ children, w, col }) => (
+    <th onClick={col ? () => handleSort(col) : undefined}
+      className={`px-2 py-2 text-[11px] font-semibold uppercase tracking-wider whitespace-nowrap ${w || ""} ${col ? "cursor-pointer select-none hover:text-zinc-300" : ""} ${sortCol === col ? "text-blue-400" : "text-zinc-500"}`}>
+      {children}
+      {col && (sortCol === col ? <span className="ml-0.5">{sortDir === "asc" ? "↑" : "↓"}</span> : <span className="ml-0.5 text-zinc-700">⇅</span>)}
+    </th>
   );
 
   return (
@@ -4642,18 +4679,18 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
             <thead className="border-b border-zinc-800/60 bg-zinc-900/80">
               <tr>
                 <TH w="w-8"/>
-                <TH>Date</TH>
-                <TH>Ticker</TH>
-                <TH>Theme</TH>
-                <TH>Entry</TH>
-                <TH>Exit</TH>
-                <TH>Shares</TH>
-                <TH>Stop</TH>
-                <TH>P&L $</TH>
-                <TH>P&L %</TH>
-                <TH>R</TH>
-                <TH>Grade</TH>
-                <TH w="w-48">Notes</TH>
+                <TH col="date">Date</TH>
+                <TH col="ticker">Ticker</TH>
+                <TH col="theme">Theme</TH>
+                <TH col="entry_price">Entry</TH>
+                <TH col="exit_price">Exit</TH>
+                <TH col="shares">Shares</TH>
+                <TH col="stop_price">Stop</TH>
+                <TH col="pnl_dollars">P&L $</TH>
+                <TH col="pnl_pct">P&L %</TH>
+                <TH col="r_multiple">R</TH>
+                <TH col="grade">Grade</TH>
+                <TH w="w-48" col="notes">Notes</TH>
               </tr>
             </thead>
             <tbody>
@@ -4743,7 +4780,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
               {/* ── Existing trades ── */}
               {visible.length === 0 ? (
                 <tr><td colSpan={13} className="py-12 text-center text-zinc-600 text-[12px] italic">No trades yet — click "+ Add Trade" to begin</td></tr>
-              ) : visible.map(t => (
+              ) : sortedVisible.map(t => (
                 <tr key={t.id} className={`border-b border-zinc-800/30 transition-colors ${rowBg(t)}`}>
                   <td className="px-2 py-2">
                     <button onClick={() => deleteTrade(t.id)} className="text-zinc-700 hover:text-red-400 transition-colors text-[11px]">✕</button>
