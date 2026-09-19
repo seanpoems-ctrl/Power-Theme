@@ -3069,13 +3069,16 @@ const EarningsStrip = ({ earningsData, gapperTickers = new Set(), onTickerClick 
 // ── Trade Journal Tab ─────────────────────────────────────────────────────────
 
 const JOURNAL_KEY     = "power_theme_journal";
+const NOTEBOOK_KEY     = "power_theme_journal_notebook";
 const JOURNAL_AI_KEY  = process.env.REACT_APP_GEMINI_KEY || "";
 
 const EMPTY_TRADE = {
-  id: "", date: "", exit_date: "", ticker: "", theme: "", side: "long", entry_price: "", exit_price: "",
+  id: "", date: "", exit_date: "", ticker: "", theme: "", setup: "", side: "long", entry_price: "", exit_price: "",
   shares: "", stop_used: "ATR", stop_price: "", pnl_dollars: "", pnl_pct: "",
   r_multiple: "", grade: "", notes: "",
 };
+
+const SETUP_OPTS = ["Breakout", "Pullback", "VCP", "Flag", "Base", "Reversal", "Earnings", "Gap & Go", "Other"];
 
 function loadTrades() {
   try { return JSON.parse(localStorage.getItem(JOURNAL_KEY) || "[]"); } catch { return []; }
@@ -3084,6 +3087,17 @@ function saveTrades(arr) {
   try { localStorage.setItem(JOURNAL_KEY, JSON.stringify(arr)); } catch { /* quota */ }
 }
 function newId() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+
+// ── Trading notebook — free-form dated entries (plans, loss recaps, rules),
+// separate from individual trades. Same localStorage-only persistence as trades.
+function loadNotebook() {
+  try { return JSON.parse(localStorage.getItem(NOTEBOOK_KEY) || "[]"); } catch { return []; }
+}
+function saveNotebook(arr) {
+  try { localStorage.setItem(NOTEBOOK_KEY, JSON.stringify(arr)); } catch { /* quota */ }
+}
+
+const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 function calcDerived(t) {
   const entry = parseFloat(t.entry_price);
@@ -3696,6 +3710,220 @@ const ChecklistTab = () => {
   );
 };
 
+// Cumulative realized P&L over time, sorted by exit date — the standard
+// "equity curve" every trading journal leads with.
+const EquityCurveChart = ({ trades }) => {
+  const points = useMemo(() => {
+    const closedSorted = trades
+      .filter(t => t.exit_date && t.pnl_dollars !== "" && t.pnl_dollars != null)
+      .sort((a, b) => a.exit_date.localeCompare(b.exit_date));
+    let running = 0;
+    return closedSorted.map(t => { running += parseFloat(t.pnl_dollars) || 0; return { date: t.exit_date, cum: running }; });
+  }, [trades]);
+
+  if (points.length < 2) {
+    return <div className="text-[12px] text-zinc-600 italic py-10 text-center">Need at least 2 closed trades with exit dates to plot an equity curve.</div>;
+  }
+
+  const W = 1000, H = 220, padL = 54, padR = 12, padT = 14, padB = 22;
+  const vals = points.map(p => p.cum);
+  const minV = Math.min(0, ...vals), maxV = Math.max(0, ...vals);
+  const range = (maxV - minV) || 1;
+  const x = i => padL + (i / (points.length - 1)) * (W - padL - padR);
+  const y = v => H - padB - ((v - minV) / range) * (H - padT - padB);
+  const pathPts = points.map((p, i) => `${x(i).toFixed(1)},${y(p.cum).toFixed(1)}`).join(" ");
+  const zeroY = y(0);
+  const last = points[points.length - 1].cum;
+  const color = last >= 0 ? "#34d399" : "#f87171";
+  const areaPath = `M${x(0).toFixed(1)},${zeroY.toFixed(1)} L${pathPts} L${x(points.length - 1).toFixed(1)},${zeroY.toFixed(1)} Z`;
+  const fmt = v => `${v >= 0 ? "+" : ""}$${v.toFixed(0)}`;
+
+  return (
+    <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="block">
+      <line x1={padL} y1={zeroY} x2={W - padR} y2={zeroY} stroke="#3f3f46" strokeWidth="1" strokeDasharray="4 3"/>
+      <path d={areaPath} fill={color} opacity="0.1"/>
+      <polyline points={pathPts} fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"/>
+      <text x={4} y={zeroY + 3} fontSize="11" fill="#71717a">$0</text>
+      <text x={4} y={padT + 9} fontSize="11" fill="#71717a">{fmt(maxV)}</text>
+      <text x={4} y={H - 6} fontSize="11" fill="#71717a">{fmt(minV)}</text>
+      <text x={padL} y={H - 4} fontSize="10" fill="#52525b">{points[0].date}</text>
+      <text x={W - padR} y={H - 4} fontSize="10" fill="#52525b" textAnchor="end">{points[points.length - 1].date}</text>
+    </svg>
+  );
+};
+
+// Month-grid calendar of realized P&L, keyed by exit_date — click a day to
+// filter the trade table down to that day's trades.
+const TradeCalendarView = ({ trades, month, onMonthChange, onDayClick, selectedDay }) => {
+  const { y, m } = month;
+  const byDay = useMemo(() => {
+    const map = {};
+    for (const t of trades) {
+      if (!t.exit_date || t.pnl_dollars === "" || t.pnl_dollars == null) continue;
+      (map[t.exit_date] ||= []).push(t);
+    }
+    return map;
+  }, [trades]);
+
+  const firstOfMonth = new Date(y, m, 1);
+  const startWeekday = firstOfMonth.getDay();
+  const daysInMonth = new Date(y, m + 1, 0).getDate();
+  const monthLabel = firstOfMonth.toLocaleString('en-US', { month: 'long', year: 'numeric' });
+  const pad2 = n => String(n).padStart(2, "0");
+
+  const cells = [];
+  for (let i = 0; i < startWeekday; i++) cells.push(null);
+  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+
+  let monthPnl = 0, monthTradeCount = 0;
+  for (let d = 1; d <= daysInMonth; d++) {
+    for (const t of (byDay[`${y}-${pad2(m + 1)}-${pad2(d)}`] || [])) { monthPnl += parseFloat(t.pnl_dollars) || 0; monthTradeCount++; }
+  }
+
+  return (
+    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4 mb-5">
+      <div className="flex items-center justify-between mb-3">
+        <div className="flex items-center gap-2">
+          <button onClick={() => onMonthChange(m === 0 ? { y: y - 1, m: 11 } : { y, m: m - 1 })}
+            className="text-zinc-500 hover:text-zinc-200 px-2 py-1 rounded hover:bg-zinc-800 transition-colors">‹</button>
+          <span className="text-[13px] font-semibold text-zinc-200 w-36 text-center">{monthLabel}</span>
+          <button onClick={() => onMonthChange(m === 11 ? { y: y + 1, m: 0 } : { y, m: m + 1 })}
+            className="text-zinc-500 hover:text-zinc-200 px-2 py-1 rounded hover:bg-zinc-800 transition-colors">›</button>
+        </div>
+        <span className={`text-[13px] font-mono font-semibold ${monthPnl >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+          {monthTradeCount > 0 ? `${monthPnl >= 0 ? "+" : ""}$${monthPnl.toFixed(0)} · ${monthTradeCount} trade${monthTradeCount === 1 ? "" : "s"}` : "No closed trades"}
+        </span>
+      </div>
+      <div className="grid grid-cols-7 gap-1 mb-1">
+        {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(d => (
+          <div key={d} className="text-[10px] text-zinc-600 uppercase tracking-wide text-center py-1">{d}</div>
+        ))}
+      </div>
+      <div className="grid grid-cols-7 gap-1">
+        {cells.map((d, i) => {
+          if (d == null) return <div key={i}/>;
+          const key = `${y}-${pad2(m + 1)}-${pad2(d)}`;
+          const dayTrades = byDay[key] || [];
+          const pnl = dayTrades.reduce((s, t) => s + (parseFloat(t.pnl_dollars) || 0), 0);
+          const hasTrades = dayTrades.length > 0;
+          const isSelected = selectedDay === key;
+          const bg = !hasTrades ? "bg-zinc-800/20" : pnl > 0 ? "bg-emerald-500/20" : pnl < 0 ? "bg-red-500/20" : "bg-zinc-700/30";
+          const border = isSelected ? "border-blue-500" : hasTrades ? "border-zinc-700/50" : "border-transparent";
+          return (
+            <button key={i} onClick={() => hasTrades && onDayClick(key)}
+              className={`aspect-square rounded-md border ${border} ${hasTrades ? "cursor-pointer hover:brightness-125" : "cursor-default"} ${bg} flex flex-col items-center justify-center p-1 transition-all`}>
+              <span className="text-[10px] text-zinc-500">{d}</span>
+              {hasTrades && (
+                <>
+                  <span className={`text-[10px] font-mono font-bold ${pnl >= 0 ? "text-emerald-300" : "text-red-300"}`}>
+                    {pnl >= 0 ? "+" : "-"}{Math.abs(pnl) >= 1000 ? (Math.abs(pnl) / 1000).toFixed(1) + "k" : Math.abs(pnl).toFixed(0)}
+                  </span>
+                  <span className="text-[8px] text-zinc-600">{dayTrades.length}t</span>
+                </>
+              )}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+// Full-size TradingView chart for one trade, opened by clicking its ticker.
+// TradingView's public embed widget has no param to jump to a specific past
+// date range, so this shows entry/exit as text and leaves navigation to the
+// chart's own date scroll — an "Open full chart" link covers anyone who wants
+// TradingView's full drawing/replay tools instead.
+const TradeChartModal = ({ trade, onClose }) => {
+  React.useEffect(() => {
+    const h = e => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", h);
+    return () => window.removeEventListener("keydown", h);
+  }, [onClose]);
+  if (!trade) return null;
+  const holdDays = trade.exit_date && trade.date ? (new Date(trade.exit_date) - new Date(trade.date)) / 86400000 : null;
+  const interval = holdDays == null ? "D" : holdDays <= 5 ? "60" : holdDays <= 30 ? "D" : "W";
+  const tvParams = new URLSearchParams({
+    symbol: trade.ticker, interval, theme: "dark", style: "1", timezone: "exchange",
+    hidesidetoolbar: "0", hidetoptoolbar: "0", withdateranges: "1", locale: "en", saveimage: "0",
+  });
+  const src = `https://s.tradingview.com/widgetembed/?${tvParams.toString()}`;
+  return (
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-12 px-4 pb-8"
+      style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }} onClick={onClose}>
+      <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-[1100px] flex flex-col max-h-[88vh]" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 flex-shrink-0">
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className="text-sm font-bold text-zinc-100">{trade.ticker}</span>
+            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${trade.side === "short" ? "text-red-400 bg-red-500/10 border-red-500/30" : "text-zinc-400 bg-zinc-800/60 border-zinc-700/50"}`}>
+              {trade.side === "short" ? "SHORT" : "LONG"}
+            </span>
+            <span className="text-[12px] text-zinc-400">Entry <span className="text-zinc-200 font-mono">${trade.entry_price}</span> <span className="font-mono">{trade.date || "—"}</span></span>
+            <span className="text-[12px] text-zinc-400">
+              Exit {trade.exit_price ? <span className="text-zinc-200 font-mono">${trade.exit_price}</span> : <span className="text-blue-400">Open</span>}
+              {trade.exit_date && <span className="font-mono"> {trade.exit_date}</span>}
+            </span>
+            {trade.pnl_dollars !== "" && trade.pnl_dollars != null && (
+              <span className={`text-[12px] font-mono font-bold ${parseFloat(trade.pnl_dollars) >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                {parseFloat(trade.pnl_dollars) >= 0 ? "+" : ""}${parseFloat(trade.pnl_dollars).toFixed(0)}
+              </span>
+            )}
+            <a href={`https://www.tradingview.com/chart/?symbol=${trade.ticker}`} target="_blank" rel="noreferrer"
+              className="text-[11px] text-blue-400 hover:text-blue-300">Open full chart ↗</a>
+          </div>
+          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded flex-shrink-0"><X size={15}/></button>
+        </div>
+        <div className="text-[10px] text-zinc-600 px-4 pt-2 flex-shrink-0">
+          TradingView's embedded widget can't auto-jump to a past date — use the chart's own date scroll/zoom to navigate to {trade.date}{trade.exit_date ? ` – ${trade.exit_date}` : " (still open)"}.
+        </div>
+        <div className="flex-1 min-h-[500px]">
+          <iframe src={src} title={trade.ticker} style={{ width: "100%", height: "100%", minHeight: "500px", border: "none", display: "block" }}/>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Win/loss/P&L breakdown table — same shape reused for Theme, Setup, and Day
+// of Week grouping, so all three stay visually and numerically consistent.
+const PerfTable = ({ title, rows, labelHeader, bare = false }) => {
+  if (!rows.length) return null;
+  return (
+    <div className={`bg-zinc-900/60 border border-zinc-800/60 rounded-xl overflow-hidden ${bare ? "" : "mb-5"}`}>
+      <div className="px-4 py-2.5 border-b border-zinc-800/60">
+        <span className="text-[12px] font-semibold text-zinc-300">{title}</span>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-left">
+          <thead className="border-b border-zinc-800/40">
+            <tr>
+              {[labelHeader, "Trades", "Wins", "Win %", "Total P&L", "Avg P&L"].map(h => (
+                <th key={h} className="px-3 py-2 text-[11px] font-semibold text-zinc-600 uppercase tracking-wider">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(([label, s]) => (
+              <tr key={label} className="border-b border-zinc-800/20 hover:bg-zinc-800/20 transition-colors">
+                <td className="px-3 py-2 text-[12px] font-medium text-zinc-200">{label}</td>
+                <td className="px-3 py-2 text-[12px] font-mono text-zinc-400">{s.count}</td>
+                <td className="px-3 py-2 text-[12px] font-mono text-zinc-400">{s.wins}</td>
+                <td className="px-3 py-2 text-[12px] font-mono text-zinc-300">{s.count ? `${((s.wins / s.count) * 100).toFixed(0)}%` : "—"}</td>
+                <td className={`px-3 py-2 text-[12px] font-mono font-semibold ${s.pnl >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+                  {s.pnl >= 0 ? "+" : ""}${s.pnl.toFixed(0)}
+                </td>
+                <td className={`px-3 py-2 text-[12px] font-mono ${s.count ? (s.pnl / s.count >= 0 ? "text-emerald-400" : "text-red-400") : "text-zinc-500"}`}>
+                  {s.count ? `${s.pnl / s.count >= 0 ? "+" : ""}$${(s.pnl / s.count).toFixed(0)}` : "—"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+};
+
 const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [trades, setTrades]         = useState(() => loadTrades());
   const [filter, setFilter]         = useState("all");
@@ -3706,6 +3934,19 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [aiResult, setAiResult]     = useState(null);
   const [aiLoading, setAiLoading]   = useState(false);
   const [allTickers, setAllTickers] = useState([]);
+  const [view, setView]             = useState("table"); // "table" | "calendar"
+  const [calMonth, setCalMonth]     = useState(() => { const d = new Date(); return { y: d.getFullYear(), m: d.getMonth() }; });
+  const [calSelectedDay, setCalSelectedDay] = useState(null);
+  const [chartTrade, setChartTrade] = useState(null);
+  const [notebook, setNotebook]     = useState(() => loadNotebook());
+  const [notebookDraft, setNotebookDraft] = useState("");
+  const [showFilters, setShowFilters] = useState(false);
+  const [fTicker, setFTicker]       = useState("");
+  const [fSetup, setFSetup]         = useState("");
+  const [fGrade, setFGrade]         = useState("");
+  const [fSide, setFSide]           = useState("");
+  const [fFrom, setFFrom]           = useState("");
+  const [fTo, setFTo]               = useState("");
 
   // Same stock_db.json the search bar reads, so a ticker resolves to the same
   // Theme here as it would if you typed it into the search box.
@@ -3779,6 +4020,15 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
 
   const deleteTrade = (id) => { if (window.confirm("Delete this trade?")) persist(trades.filter(t => t.id !== id)); };
 
+  const persistNotebook = (arr) => { setNotebook(arr); saveNotebook(arr); };
+  const addNote = () => {
+    const text = notebookDraft.trim();
+    if (!text) return;
+    persistNotebook([{ id: newId(), date: new Date().toISOString().slice(0, 10), text }, ...notebook]);
+    setNotebookDraft("");
+  };
+  const deleteNote = (id) => persistNotebook(notebook.filter(n => n.id !== id));
+
   const fillMissingThemes = () => {
     let filled = 0;
     const updated = trades.map(t => {
@@ -3835,13 +4085,31 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   }).filter(v => v != null && v >= 0);
   const avgHold  = holdDays.length ? (holdDays.reduce((a, v) => a + v, 0) / holdDays.length) : null;
 
+  // Trade expectancy: (win% × avg win) − (loss% × avg loss) — the standard
+  // one-number "is this system profitable per trade" stat.
+  const winTrades  = closed.filter(tradeIsWin);
+  const lossTrades = closed.filter(tradeIsLoss);
+  const avgWin  = winTrades.length  ? winTrades.reduce((s, t) => s + (parseFloat(t.pnl_dollars) || 0), 0) / winTrades.length : 0;
+  const avgLoss = lossTrades.length ? Math.abs(lossTrades.reduce((s, t) => s + (parseFloat(t.pnl_dollars) || 0), 0) / lossTrades.length) : 0;
+  const winRate = closed.length ? winTrades.length / closed.length : 0;
+  const expectancy = closed.length ? (winRate * avgWin) - ((1 - winRate) * avgLoss) : null;
+
   // ── Filtered trades ──────────────────────────────────────────────────────────
   const visible = trades.filter(t => {
-    if (filter === "winners") return tradeIsWin(t);
-    if (filter === "losers")  return tradeIsLoss(t);
-    if (filter === "open")    return !t.exit_price;
+    if (filter === "winners" && !tradeIsWin(t)) return false;
+    if (filter === "losers"  && !tradeIsLoss(t)) return false;
+    if (filter === "open"    && t.exit_price) return false;
+    if (calSelectedDay && t.exit_date !== calSelectedDay) return false;
+    if (fTicker && !t.ticker?.toUpperCase().includes(fTicker.toUpperCase())) return false;
+    if (fSetup && t.setup !== fSetup) return false;
+    if (fGrade && t.grade !== fGrade) return false;
+    if (fSide && t.side !== fSide) return false;
+    if (fFrom && (!t.date || t.date < fFrom)) return false;
+    if (fTo && (!t.date || t.date > fTo)) return false;
     return true;
   });
+  const advancedFiltersActive = !!(fTicker || fSetup || fGrade || fSide || fFrom || fTo);
+  const clearAdvancedFilters = () => { setFTicker(""); setFSetup(""); setFGrade(""); setFSide(""); setFFrom(""); setFTo(""); };
 
   // ── Performance by theme ─────────────────────────────────────────────────────
   const byTheme = useMemo(() => {
@@ -3854,6 +4122,33 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       if (tradeIsWin(t)) m[th].wins += 1;
     }
     return Object.entries(m).sort((a, b) => b[1].pnl - a[1].pnl);
+  }, [trades]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const bySetup = useMemo(() => {
+    const m = {};
+    for (const t of closed) {
+      const s = t.setup || "Untagged";
+      if (!m[s]) m[s] = { pnl: 0, count: 0, wins: 0 };
+      m[s].pnl   += parseFloat(t.pnl_dollars) || 0;
+      m[s].count += 1;
+      if (tradeIsWin(t)) m[s].wins += 1;
+    }
+    return Object.entries(m).sort((a, b) => b[1].pnl - a[1].pnl);
+  }, [trades]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Grouped by the day of week the trade was CLOSED (exit_date) — same shape
+  // as Performance by Theme, answering "which weekday am I actually good on."
+  const byDayOfWeek = useMemo(() => {
+    const m = {};
+    for (const t of closed) {
+      if (!t.exit_date) continue;
+      const dow = DAY_NAMES[new Date(t.exit_date + "T00:00:00").getDay()];
+      if (!m[dow]) m[dow] = { pnl: 0, count: 0, wins: 0 };
+      m[dow].pnl   += parseFloat(t.pnl_dollars) || 0;
+      m[dow].count += 1;
+      if (tradeIsWin(t)) m[dow].wins += 1;
+    }
+    return DAY_NAMES.slice(1, 6).map(d => [d, m[d]]).filter(([, v]) => v); // Mon-Fri only, trading days
   }, [trades]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Gemini analysis ──────────────────────────────────────────────────────────
@@ -3904,12 +4199,13 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-8">
 
       {/* ── Summary cards ────────────────────────────────────────────────── */}
-      <div className="grid grid-cols-4 gap-3 mb-5">
+      <div className="grid grid-cols-5 gap-3 mb-5">
         {[
           { label: "Realized P&L MTD", value: pnlMTD !== 0 || mtd.length ? `${pnlMTD >= 0 ? "+" : ""}$${pnlMTD.toFixed(0)}` : "—", cls: pnlMTD >= 0 ? "text-emerald-400" : "text-red-400", sub: `${mtd.length} closed trades` },
           { label: "Open Positions",   value: open.length,   cls: open.length > 0 ? "text-blue-400" : "text-zinc-400", sub: `${trades.length} total trades` },
           { label: "Avg R:R",          value: avgR != null ? avgR.toFixed(2) + "R" : "—", cls: avgR != null && avgR >= 1 ? "text-emerald-400" : avgR != null && avgR < 0 ? "text-red-400" : "text-zinc-400", sub: `${rMults.length} closed with R` },
           { label: "Avg Hold",         value: avgHold != null ? `${avgHold.toFixed(1)}d` : "—", cls: "text-zinc-300", sub: `${holdDays.length} trades with exit date` },
+          { label: "Expectancy",       value: expectancy != null ? `${expectancy >= 0 ? "+" : ""}$${expectancy.toFixed(0)}/trade` : "—", cls: expectancy != null && expectancy >= 0 ? "text-emerald-400" : expectancy != null ? "text-red-400" : "text-zinc-400", sub: closed.length ? `${(winRate * 100).toFixed(0)}% win · avg +$${avgWin.toFixed(0)} / -$${avgLoss.toFixed(0)}` : "no closed trades" },
         ].map(m => (
           <div key={m.label} className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
             <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-1.5">{m.label}</div>
@@ -3919,8 +4215,14 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         ))}
       </div>
 
+      {/* ── Equity curve ─────────────────────────────────────────────────── */}
+      <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4 mb-5">
+        <span className="text-[12px] font-semibold text-zinc-300 block mb-2">Equity Curve</span>
+        <EquityCurveChart trades={trades}/>
+      </div>
+
       {/* ── Filter tabs + Add button ─────────────────────────────────────── */}
-      <div className="flex items-center gap-3 mb-3">
+      <div className="flex items-center gap-3 mb-3 flex-wrap">
         <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
           {[{k:"all",l:"All"},{k:"winners",l:"Winners"},{k:"losers",l:"Losers"},{k:"open",l:"Open"}].map(v => (
             <button key={v.k} onClick={() => setFilter(v.k)}
@@ -3929,6 +4231,24 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
             </button>
           ))}
         </div>
+        <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+          {[{k:"table",l:"Table"},{k:"calendar",l:"Calendar"}].map(v => (
+            <button key={v.k} onClick={() => setView(v.k)}
+              className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all ${view === v.k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
+              {v.l}
+            </button>
+          ))}
+        </div>
+        <button onClick={() => setShowFilters(f => !f)}
+          className={`px-2.5 py-1 text-[11px] font-medium rounded-lg border transition-colors ${advancedFiltersActive ? "bg-amber-500/15 text-amber-400 border-amber-500/30" : "bg-zinc-800/60 text-zinc-500 border-zinc-700/40 hover:text-zinc-300"}`}>
+          Filters{advancedFiltersActive ? " •" : ""}
+        </button>
+        {calSelectedDay && (
+          <button onClick={() => setCalSelectedDay(null)}
+            className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-medium bg-blue-500/15 text-blue-400 border border-blue-500/30 rounded-lg">
+            {calSelectedDay} ✕
+          </button>
+        )}
         <span className="text-[11px] text-zinc-600">{visible.length} trades</span>
         <div className="flex-1"/>
         <input ref={fileInputRef} type="file" accept=".csv,text/csv" onChange={handleImportFile} className="hidden"/>
@@ -3947,10 +4267,48 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
           {showForm ? "✕ Cancel" : "+ Add Trade"}
         </button>
       </div>
+      {showFilters && (
+        <div className="flex items-center gap-2 mb-3 flex-wrap bg-zinc-900/60 border border-zinc-800/60 rounded-lg p-2.5">
+          <input type="text" placeholder="Ticker…" value={fTicker} onChange={e => setFTicker(e.target.value)}
+            className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-2 py-1 text-zinc-200 outline-none focus:border-blue-500/60 w-24"/>
+          <select value={fSetup} onChange={e => setFSetup(e.target.value)}
+            className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none">
+            <option value="">Any setup</option>
+            {SETUP_OPTS.map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
+          <select value={fGrade} onChange={e => setFGrade(e.target.value)}
+            className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none">
+            <option value="">Any grade</option>
+            {GRADE_OPTS.map(o => <option key={o} value={o}>{o}</option>)}
+          </select>
+          <select value={fSide} onChange={e => setFSide(e.target.value)}
+            className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none">
+            <option value="">Long + Short</option>
+            <option value="long">Long only</option>
+            <option value="short">Short only</option>
+          </select>
+          <span className="text-[11px] text-zinc-600">Entered</span>
+          <input type="date" value={fFrom} onChange={e => setFFrom(e.target.value)}
+            className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none"/>
+          <span className="text-[11px] text-zinc-600">–</span>
+          <input type="date" value={fTo} onChange={e => setFTo(e.target.value)}
+            className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none"/>
+          {advancedFiltersActive && (
+            <button onClick={clearAdvancedFilters} className="text-[11px] text-zinc-500 hover:text-zinc-300 ml-1">Clear</button>
+          )}
+        </div>
+      )}
       {importMsg && (
         <div className="mb-3 -mt-1 text-[11px] text-zinc-400 bg-zinc-800/40 border border-zinc-700/40 rounded-lg px-3 py-1.5">
           {importMsg}
         </div>
+      )}
+
+      {/* ── Calendar view ────────────────────────────────────────────────── */}
+      {view === "calendar" && (
+        <TradeCalendarView trades={trades} month={calMonth} onMonthChange={setCalMonth}
+          selectedDay={calSelectedDay}
+          onDayClick={day => setCalSelectedDay(d => d === day ? null : day)}/>
       )}
 
       {/* ── Trade table ──────────────────────────────────────────────────── */}
@@ -4000,6 +4358,14 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                             <option value="short">S</option>
                           </select>
                         )}
+                        {f === "theme" && (
+                          <select value={draft.setup} onChange={e => setDraft(d => ({ ...d, setup: e.target.value }))}
+                            title="Setup"
+                            className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1 py-1 text-zinc-200 outline-none">
+                            <option value="">Setup…</option>
+                            {SETUP_OPTS.map(o => <option key={o} value={o}>{o}</option>)}
+                          </select>
+                        )}
                       </div>
                     </td>
                   ))}
@@ -4044,8 +4410,11 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                     <button onClick={() => deleteTrade(t.id)} className="text-zinc-700 hover:text-red-400 transition-colors text-[11px]">✕</button>
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-500 whitespace-nowrap">{t.date || "—"}</td>
-                  <td className="px-2 py-1.5 text-[12px] font-mono font-semibold text-zinc-100 whitespace-nowrap">
-                    {t.ticker || "—"}
+                  <td className="px-2 py-1.5 text-[12px] font-mono font-semibold whitespace-nowrap">
+                    {t.ticker
+                      ? <button onClick={() => setChartTrade(t)} title="Open chart"
+                          className="text-zinc-100 hover:text-blue-400 transition-colors">{t.ticker}</button>
+                      : "—"}
                     {t.ticker && (
                       <InlineSelect value={t.side === "short" ? "S" : "L"} options={["L", "S"]}
                         onChange={v => updateField(t.id, "side", v === "S" ? "short" : "long")}
@@ -4063,6 +4432,8 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                         </span>
                       )}
                       <InlineText value={t.theme} onChange={v => updateField(t.id, "theme", v)} placeholder="Theme"/>
+                      <InlineSelect value={t.setup} options={SETUP_OPTS} onChange={v => updateField(t.id, "setup", v)} placeholder="Setup"
+                        cls="text-[10px] font-medium px-1.5 py-0.5 rounded border text-violet-400 bg-violet-500/10 border-violet-500/20"/>
                     </div>
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">{t.entry_price ? `$${t.entry_price}` : "—"}</td>
@@ -4099,41 +4470,39 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         </div>
       </div>
 
-      {/* ── Performance by theme ─────────────────────────────────────────── */}
-      {byTheme.length > 0 && (
-        <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl overflow-hidden mb-5">
-          <div className="px-4 py-2.5 border-b border-zinc-800/60">
-            <span className="text-[12px] font-semibold text-zinc-300">Performance by Theme</span>
-          </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left">
-              <thead className="border-b border-zinc-800/40">
-                <tr>
-                  {["Theme","Trades","Wins","Win %","Total P&L","Avg P&L"].map(h => (
-                    <th key={h} className="px-3 py-2 text-[11px] font-semibold text-zinc-600 uppercase tracking-wider">{h}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {byTheme.map(([theme, s]) => (
-                  <tr key={theme} className="border-b border-zinc-800/20 hover:bg-zinc-800/20 transition-colors">
-                    <td className="px-3 py-2 text-[12px] font-medium text-zinc-200">{theme}</td>
-                    <td className="px-3 py-2 text-[12px] font-mono text-zinc-400">{s.count}</td>
-                    <td className="px-3 py-2 text-[12px] font-mono text-zinc-400">{s.wins}</td>
-                    <td className="px-3 py-2 text-[12px] font-mono text-zinc-300">{s.count ? `${((s.wins/s.count)*100).toFixed(0)}%` : "—"}</td>
-                    <td className={`px-3 py-2 text-[12px] font-mono font-semibold ${s.pnl >= 0 ? "text-emerald-400" : "text-red-400"}`}>
-                      {s.pnl >= 0 ? "+" : ""}${s.pnl.toFixed(0)}
-                    </td>
-                    <td className={`px-3 py-2 text-[12px] font-mono ${s.count ? (s.pnl/s.count >= 0 ? "text-emerald-400" : "text-red-400") : "text-zinc-500"}`}>
-                      {s.count ? `${s.pnl/s.count >= 0 ? "+" : ""}$${(s.pnl/s.count).toFixed(0)}` : "—"}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+      {/* ── Performance breakdowns ───────────────────────────────────────── */}
+      <PerfTable title="Performance by Theme" rows={byTheme} labelHeader="Theme"/>
+      <div className="grid grid-cols-2 gap-5 mb-5">
+        <PerfTable title="Performance by Setup" rows={bySetup} labelHeader="Setup" bare/>
+        <PerfTable title="Performance by Day of Week" rows={byDayOfWeek} labelHeader="Day" bare/>
+      </div>
+
+      {/* ── Trading Notebook ─────────────────────────────────────────────── */}
+      <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4 mb-5">
+        <span className="text-[12px] font-semibold text-zinc-300 block mb-2">📓 Trading Notebook</span>
+        <div className="flex items-start gap-2 mb-3">
+          <textarea value={notebookDraft} onChange={e => setNotebookDraft(e.target.value)}
+            placeholder="Pre-market plan, loss recap, a rule you broke…" rows={2}
+            className="flex-1 text-[12px] bg-zinc-800 border border-zinc-700/60 rounded-lg px-3 py-2 text-zinc-200 outline-none focus:border-blue-500/60 resize-none"/>
+          <button onClick={addNote} disabled={!notebookDraft.trim()}
+            className="px-3 py-2 text-[12px] font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded-lg hover:bg-blue-500/30 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0">
+            Save
+          </button>
         </div>
-      )}
+        {notebook.length === 0 ? (
+          <p className="text-[12px] text-zinc-600 italic">No entries yet — jot down a plan or a lesson learned after a loss.</p>
+        ) : (
+          <div className="space-y-2 max-h-80 overflow-y-auto">
+            {notebook.map(n => (
+              <div key={n.id} className="flex items-start gap-2 bg-zinc-800/40 border border-zinc-700/30 rounded-lg px-3 py-2">
+                <span className="text-[10px] font-mono text-zinc-600 whitespace-nowrap pt-0.5">{n.date}</span>
+                <span className="text-[12px] text-zinc-300 flex-1 whitespace-pre-wrap">{n.text}</span>
+                <button onClick={() => deleteNote(n.id)} className="text-zinc-700 hover:text-red-400 transition-colors text-[11px] flex-shrink-0">✕</button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
 
       {/* ── Gemini Journal Analysis ──────────────────────────────────────── */}
       <div className="border border-zinc-700/40 bg-zinc-800/20 rounded-xl p-4">
@@ -4151,6 +4520,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         }
       </div>
 
+      {chartTrade && <TradeChartModal trade={chartTrade} onClose={() => setChartTrade(null)}/>}
     </div>
   );
 };
@@ -7509,6 +7879,7 @@ const SECTOR_LEVERAGED_ETF_MAP = {
   ETHA: { long: ["ETHU"], short: [] },         // Ethereum
   QQQ:  { long: ["TQQQ"], short: ["SQQQ"] },   // Nasdaq-100
   GDX:  { long: ["NUGT"], short: ["DUST"] },   // Gold Miners Large-Cap
+  SPY:  { long: ["UPRO", "SPXL"], short: ["SPXU", "SPXS"] }, // S&P 500
 };
 
 // Leveraged/inverse crypto-token ETFs whose "underlying" isn't itself a
