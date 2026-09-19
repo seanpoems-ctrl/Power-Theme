@@ -3927,10 +3927,15 @@ const TradeJournalTab = ({ data, categoryThemeMap = {} }) => {
                     </td>
                   ))}
                   <td className="px-1.5 py-2">
-                    <select value={draft.stop_used} onChange={e => setDraft(d => ({ ...d, stop_used: e.target.value }))}
-                      className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1 py-1 text-zinc-200 outline-none w-full">
-                      {STOP_OPTS.map(o => <option key={o} value={o}>{o}</option>)}
-                    </select>
+                    <div className="flex items-center gap-1">
+                      <select value={draft.stop_used} onChange={e => setDraft(d => ({ ...d, stop_used: e.target.value }))}
+                        className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1 py-1 text-zinc-200 outline-none">
+                        {STOP_OPTS.map(o => <option key={o} value={o}>{o}</option>)}
+                      </select>
+                      <input type="number" placeholder="Stop $" value={draft.stop_price || ""}
+                        onChange={e => setDraft(d => ({ ...d, stop_price: e.target.value }))}
+                        className="w-full text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none focus:border-blue-500/60 min-w-[55px]"/>
+                    </div>
                   </td>
                   <td className="px-1.5 py-2 text-[11px] text-zinc-500 font-mono" colSpan={3}>auto-calc</td>
                   <td className="px-1.5 py-2">
@@ -3977,8 +3982,12 @@ const TradeJournalTab = ({ data, categoryThemeMap = {} }) => {
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">{t.exit_price ? `$${t.exit_price}` : <span className="text-blue-400 text-[11px]">Open</span>}</td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-400">{t.shares || "—"}</td>
                   <td className="px-2 py-1.5">
-                    <InlineSelect value={t.stop_used} options={STOP_OPTS} onChange={v => updateField(t.id, "stop_used", v)}
-                      cls="text-[11px] font-mono text-zinc-500"/>
+                    <div className="flex items-center gap-1">
+                      <InlineSelect value={t.stop_used} options={STOP_OPTS} onChange={v => updateField(t.id, "stop_used", v)}
+                        cls="text-[11px] font-mono text-zinc-500"/>
+                      <InlineText value={t.stop_price} onChange={v => updateField(t.id, "stop_price", v)} placeholder="Stop $" mono
+                        cls="text-zinc-400"/>
+                    </div>
                   </td>
                   <td className={`px-2 py-1.5 text-[11px] font-mono ${pnlCls(t.pnl_dollars)}`}>
                     {t.pnl_dollars ? `${parseFloat(t.pnl_dollars) >= 0 ? "+" : ""}$${parseFloat(t.pnl_dollars).toFixed(0)}` : "—"}
