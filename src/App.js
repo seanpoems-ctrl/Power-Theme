@@ -4805,19 +4805,29 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const backfillLodStops = async () => {
     if (!TV_PROXY_URL || lodBackfillLoading || !lodEligible.length) return;
     setLodBackfillLoading(true);
-    const byTicker = new Map();
-    for (const t of lodEligible) (byTicker.get(t.ticker) || byTicker.set(t.ticker, []).get(t.ticker)).push(t);
 
-    // The Worker propagates Yahoo's own failure as a non-OK status (never a
-    // fake 200-with-empty-bars — see cloudflare-worker/worker.js), so a
-    // retry here is a real second chance, not a no-op. At small scale a
-    // dropped request is a rare blip and a short retry is plenty; at
-    // journal-wide scale (hundreds of distinct tickers) the real risk is
-    // Yahoo's own rate-limiting kicking in from the sheer request volume,
-    // which needs actual seconds of backoff to clear, not milliseconds —
-    // a real run against 889 eligible trades hit exactly this (0 filled,
-    // "couldn't find intraday history for any eligible trades") with the
-    // previous 500ms/1s backoff.
+    // Yahoo's 5m intraday history only reaches back ~60 days — a trade
+    // older than that can never succeed no matter how many times this
+    // runs, so skip it before spending any network calls/retries on a
+    // request that's permanently doomed. This is what actually mattered at
+    // 889-trade scale: a real run against a journal spanning months came
+    // back "couldn't find intraday history for ANY eligible trades" (0
+    // filled), because most of those 889 were simply older than Yahoo will
+    // serve at this resolution, and retrying doesn't fix that. 55 days
+    // (not 60) leaves a small buffer since the exact cutoff can drift.
+    const intradayCutoff = _addDays(new Date().toISOString().slice(0, 10), -55);
+    const withinWindow = lodEligible.filter(t => t.date >= intradayCutoff);
+    const tooOld = lodEligible.length - withinWindow.length;
+
+    const byTicker = new Map();
+    for (const t of withinWindow) (byTicker.get(t.ticker) || byTicker.set(t.ticker, []).get(t.ticker)).push(t);
+
+    // The Worker distinguishes a permanent failure (422 — e.g. this exact
+    // range is out of Yahoo's reach for this resolution) from a possibly-
+    // transient one (502 — network blip, 429 rate-limit, 5xx) — see
+    // cloudflare-worker/worker.js. A 422 means retrying is pure waste
+    // (it'll 422 every time), so stop immediately instead of burning the
+    // full backoff schedule on something no amount of retrying fixes.
     const fetchBarsWithRetry = async (ticker, from, to, retries = 3) => {
       for (let attempt = 0; attempt <= retries; attempt++) {
         try {
@@ -4826,6 +4836,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
             const { bars } = await r.json();
             return (bars || []).map(b => ({ time: Math.floor(b.time / 1000), low: b.low }));
           }
+          if (r.status === 422) return []; // permanent — no point retrying
         } catch { /* network error — retry */ }
         if (attempt < retries) await new Promise(res => setTimeout(res, 1500 * 2 ** attempt));
       }
@@ -4855,7 +4866,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
 
     let filled = 0;
     const updated = trades.map(t => {
-      if (!lodEligible.includes(t)) return t;
+      if (!withinWindow.includes(t)) return t;
       const bars = barsByTicker.get(t.ticker) || [];
       const dayStart = _dateToUnixSec(t.date);
       const dayEnd = _dateToUnixSec(_addDays(t.date, 1));
@@ -4867,17 +4878,17 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       return calcDerived({ ...t, stop_price: (low * (1 - 0.0008)).toFixed(2), stop_used: "LOD" });
     });
     if (filled) persist(updated);
-    const skipped = lodEligible.length - filled;
-    // A large skip count is more likely a Yahoo rate-limit than every one of
-    // those trades genuinely lacking history — this is idempotent (already-
-    // filled trades are skipped on the next pass), so re-running later is
-    // always safe and picks up wherever this run left off.
-    const retryHint = skipped >= 20 ? " Re-running the backfill again in a bit may pick up more of these." : "";
-    setImportMsg(
-      filled
-        ? `Filled stop price for ${filled} trade${filled === 1 ? "" : "s"} using the low observed before entry (−0.08%)${skipped ? `; ${skipped} skipped (no intraday history that far back).${retryHint}` : "."}`
-        : `Couldn't find intraday history for any eligible trades — Yahoo's intraday data typically only goes back ~60 days.${retryHint}`
-    );
+    const skippedInWindow = withinWindow.length - filled;
+    // Only trades that WERE in Yahoo's window but still failed benefit from
+    // a re-run (rate-limit/transient) — trades outside the window never
+    // will, so the hint doesn't apply to those.
+    const retryHint = skippedInWindow >= 10 ? " Re-running the backfill again in a bit may pick up more of these." : "";
+    const parts = [];
+    if (filled) parts.push(`Filled stop price for ${filled} trade${filled === 1 ? "" : "s"} using the low observed before entry (−0.08%)`);
+    if (skippedInWindow) parts.push(`${skippedInWindow} skipped (couldn't fetch intraday history)`);
+    if (tooOld) parts.push(`${tooOld} skipped (older than Yahoo's ~55-day intraday window — a manual stop is the only option for these)`);
+    const base = parts.length ? `${parts.join("; ")}.` : "No trades could be backfilled.";
+    setImportMsg(base + retryHint);
     setLodBackfillLoading(false);
   };
 

@@ -63,9 +63,22 @@ export default {
     try {
       yahooRes = await fetch(yahooUrl, { headers: { "User-Agent": "Mozilla/5.0 (compatible; PowerThemeProxy/1.0)" } });
     } catch (e) {
+      // Can't reach Yahoo at all — plausibly transient, worth a retry.
       return withCors(json({ error: `upstream fetch failed: ${e.message}` }, 502));
     }
-    if (!yahooRes.ok) return withCors(json({ error: `Yahoo returned ${yahooRes.status}` }, 502));
+    if (!yahooRes.ok) {
+      // Yahoo returns 4xx (commonly 422) for a request that's permanently
+      // invalid for this range — e.g. intraday bars further back than it
+      // retains (~60 days) — versus 429/5xx, which are the actual
+      // transient cases worth retrying. Forwarding 422 vs 502 lets the
+      // client stop retrying immediately on the former instead of wasting
+      // several retries + backoff on something no amount of retrying fixes
+      // (this mattered a lot at journal-wide backfill scale: retrying a
+      // permanently-out-of-range request for every old trade in a large
+      // batch was slow for zero benefit).
+      const retryable = yahooRes.status === 429 || yahooRes.status >= 500;
+      return withCors(json({ error: `Yahoo returned ${yahooRes.status}` }, retryable ? 502 : 422));
+    }
 
     let data;
     try {
@@ -76,8 +89,8 @@ export default {
 
     const result = data?.chart?.result?.[0];
     const err = data?.chart?.error;
-    if (err) return withCors(json({ error: err.description || "Yahoo chart error" }, 404));
-    if (!result) return withCors(json({ error: "no data for symbol" }, 404));
+    if (err) return withCors(json({ error: err.description || "Yahoo chart error" }, 422));
+    if (!result) return withCors(json({ error: "no data for symbol" }, 422));
 
     const timestamps = result.timestamp || [];
     const quote = result.indicators?.quote?.[0] || {};
