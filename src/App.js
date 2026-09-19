@@ -4658,7 +4658,6 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [fFrom, setFFrom]           = useState("");
   const [fTo, setFTo]               = useState("");
   const [selectedIds, setSelectedIds] = useState(() => new Set());
-  const [expandedFills, setExpandedFills] = useState(null); // trade id whose fill breakdown is expanded, or null
 
   // Same stock_db.json the search bar reads, so a ticker resolves to the same
   // Theme here as it would if you typed it into the search box.
@@ -5440,23 +5439,11 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">
                     {t.entry_price ? `$${t.entry_price}` : "—"}
-                    {t.entry_fills?.length > 1 && (
-                      <button onClick={() => setExpandedFills(id => id === t.id ? null : t.id)}
-                        title="Click to see each fill's price and shares"
-                        className={`ml-1 text-[9px] px-1 rounded cursor-pointer ${expandedFills === t.id ? "text-blue-400 bg-blue-500/15" : "text-zinc-600 hover:text-zinc-400"}`}>
-                        ×{t.entry_fills.length}
-                      </button>
-                    )}
+                    {t.entry_fills?.length > 1 && <span className="ml-1 text-[9px] text-zinc-600">avg ×{t.entry_fills.length}</span>}
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">
                     {t.exit_price ? `$${t.exit_price}` : <span className="text-blue-400 text-[11px]">Open</span>}
-                    {t.exit_fills?.length > 1 && (
-                      <button onClick={() => setExpandedFills(id => id === t.id ? null : t.id)}
-                        title="Click to see each fill's price and shares"
-                        className={`ml-1 text-[9px] px-1 rounded cursor-pointer ${expandedFills === t.id ? "text-blue-400 bg-blue-500/15" : "text-zinc-600 hover:text-zinc-400"}`}>
-                        ×{t.exit_fills.length}
-                      </button>
-                    )}
+                    {t.exit_fills?.length > 1 && <span className="ml-1 text-[9px] text-zinc-600">avg ×{t.exit_fills.length}</span>}
                     {t.exit_price && (
                       <>
                         {" "}<InlineText value={t.exit_date} onChange={v => updateField(t.id, "exit_date", v)} placeholder="exit date" cls="text-zinc-600"/>
@@ -5490,7 +5477,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                     <InlineText value={t.notes} onChange={v => updateField(t.id, "notes", v)} placeholder="Add notes…"/>
                   </td>
                 </tr>
-                {expandedFills === t.id && (
+                {(t.entry_fills?.length > 1 || t.exit_fills?.length > 1) && (
                   <tr className="border-b border-zinc-800/30 bg-zinc-900/40">
                     <td/><td/>
                     <td colSpan={12} className="px-2 py-2">
