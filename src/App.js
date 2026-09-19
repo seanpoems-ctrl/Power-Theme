@@ -4423,8 +4423,16 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   };
 
   // ── Summary cards ────────────────────────────────────────────────────────────
-  const closed = trades.filter(t => t.exit_price !== "" && t.exit_price != null);
-  const open   = trades.filter(t => !t.exit_price);
+  // Scoped to the active date-range filter (fFrom/fTo) instead of always
+  // pulling from the whole journal, so these numbers match whatever period
+  // the user has selected rather than all-time history.
+  const statsBase = trades.filter(t => {
+    if (fFrom && (!t.date || t.date < fFrom)) return false;
+    if (fTo && (!t.date || t.date > fTo)) return false;
+    return true;
+  });
+  const closed = statsBase.filter(t => t.exit_price !== "" && t.exit_price != null);
+  const open   = statsBase.filter(t => !t.exit_price);
   const today  = new Date();
   const mtd    = closed.filter(t => {
     if (!t.date) return false;
@@ -4434,11 +4442,6 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const pnlMTD   = mtd.reduce((s, t) => s + (parseFloat(t.pnl_dollars) || 0), 0);
   const rMults   = closed.map(t => parseFloat(t.r_multiple)).filter(v => !isNaN(v) && v !== 0);
   const avgR     = rMults.length ? (rMults.reduce((a, v) => a + v, 0) / rMults.length) : null;
-  const holdDays = closed.map(t => {
-    if (!t.date || !t.exit_date) return null;
-    return (new Date(t.exit_date) - new Date(t.date)) / 86400000;
-  }).filter(v => v != null && v >= 0);
-  const avgHold  = holdDays.length ? (holdDays.reduce((a, v) => a + v, 0) / holdDays.length) : null;
 
   // Trade expectancy: (win% × avg win) − (loss% × avg loss) — the standard
   // one-number "is this system profitable per trade" stat.
@@ -4448,6 +4451,17 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const avgLoss = lossTrades.length ? Math.abs(lossTrades.reduce((s, t) => s + (parseFloat(t.pnl_dollars) || 0), 0) / lossTrades.length) : 0;
   const winRate = closed.length ? winTrades.length / closed.length : 0;
   const expectancy = closed.length ? (winRate * avgWin) - ((1 - winRate) * avgLoss) : null;
+
+  // Avg Hold, split by outcome — a blended number hides that winners and
+  // losers often behave on very different timelines.
+  const holdDaysOf = ts => ts.map(t => {
+    if (!t.date || !t.exit_date) return null;
+    return (new Date(t.exit_date) - new Date(t.date)) / 86400000;
+  }).filter(v => v != null && v >= 0);
+  const holdDaysWin  = holdDaysOf(winTrades);
+  const holdDaysLoss = holdDaysOf(lossTrades);
+  const avgHoldWin  = holdDaysWin.length  ? holdDaysWin.reduce((a, v) => a + v, 0) / holdDaysWin.length  : null;
+  const avgHoldLoss = holdDaysLoss.length ? holdDaysLoss.reduce((a, v) => a + v, 0) / holdDaysLoss.length : null;
 
   // ── Filtered trades ──────────────────────────────────────────────────────────
   const visible = trades.filter(t => {
@@ -4607,14 +4621,23 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       <div className="grid grid-cols-5 gap-3 mb-5">
         {[
           { label: "Realized P&L MTD", value: pnlMTD !== 0 || mtd.length ? `${pnlMTD >= 0 ? "+" : ""}$${pnlMTD.toFixed(0)}` : "—", cls: pnlMTD >= 0 ? "text-emerald-400" : "text-red-400", sub: `${mtd.length} closed trades` },
-          { label: "Open Positions",   value: open.length,   cls: open.length > 0 ? "text-blue-400" : "text-zinc-400", sub: `${trades.length} total trades` },
+          { label: "Open Positions",   value: open.length,   cls: open.length > 0 ? "text-blue-400" : "text-zinc-400", sub: `${statsBase.length} total trades` },
           { label: "Avg R:R",          value: avgR != null ? avgR.toFixed(2) + "R" : "—", cls: avgR != null && avgR >= 1 ? "text-emerald-400" : avgR != null && avgR < 0 ? "text-red-400" : "text-zinc-400", sub: `${rMults.length} closed with R` },
-          { label: "Avg Hold",         value: avgHold != null ? `${avgHold.toFixed(1)}d` : "—", cls: "text-zinc-300", sub: `${holdDays.length} trades with exit date` },
+          { label: "Avg Hold", custom: (
+              <>
+                <div className="text-[15px] font-bold font-mono leading-tight text-emerald-400">W {avgHoldWin != null ? `${avgHoldWin.toFixed(1)}d` : "—"}</div>
+                <div className="text-[15px] font-bold font-mono leading-tight text-red-400">L {avgHoldLoss != null ? `${avgHoldLoss.toFixed(1)}d` : "—"}</div>
+              </>
+            ), sub: `${holdDaysWin.length + holdDaysLoss.length} trades with exit date` },
           { label: "Expectancy",       value: expectancy != null ? `${expectancy >= 0 ? "+" : ""}$${expectancy.toFixed(0)}/trade` : "—", cls: expectancy != null && expectancy >= 0 ? "text-emerald-400" : expectancy != null ? "text-red-400" : "text-zinc-400", sub: closed.length ? `${(winRate * 100).toFixed(0)}% win · avg +$${avgWin.toFixed(0)} / -$${avgLoss.toFixed(0)}` : "no closed trades" },
         ].map(m => (
           <div key={m.label} className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
             <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-1.5">{m.label}</div>
-            <div className={`text-[22px] font-bold font-mono leading-none mb-1 ${m.cls}`}>{m.value}</div>
+            {m.custom ? (
+              <div className="mb-1">{m.custom}</div>
+            ) : (
+              <div className={`text-[22px] font-bold font-mono leading-none mb-1 ${m.cls}`}>{m.value}</div>
+            )}
             <div className="text-[11px] text-zinc-600">{m.sub}</div>
           </div>
         ))}
