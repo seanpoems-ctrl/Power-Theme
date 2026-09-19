@@ -3755,7 +3755,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   // back to whatever its underlying resolves to — same bucket as a plain trade
   // in the same name, so Performance by Theme isn't fragmented by wrapper.
   const resolveTheme = (ticker) => {
-    const direct = categoryThemeMap[ticker] || scannerThemeMap[ticker] || stockDbThemeMap[ticker];
+    const direct = categoryThemeMap[ticker] || scannerThemeMap[ticker] || stockDbThemeMap[ticker] || etfOwnThemeMap[ticker];
     if (direct) return direct;
     const letf = LETF_UNDERLYING_MAP[ticker];
     if (!letf) return "";
@@ -7506,6 +7506,8 @@ const SECTOR_LEVERAGED_ETF_MAP = {
   XBI:  { long: ["LABU"], short: ["LABD"] },   // Biotech Equal
   IBIT: { long: ["BITX"], short: [] },         // Bitcoin Spot
   ETHA: { long: ["ETHU"], short: [] },         // Ethereum
+  QQQ:  { long: ["TQQQ"], short: ["SQQQ"] },   // Nasdaq-100
+  GDX:  { long: ["NUGT"], short: ["DUST"] },   // Gold Miners Large-Cap
 };
 
 // Reverse index — leveraged/inverse ETF ticker -> { underlying, side } — built
