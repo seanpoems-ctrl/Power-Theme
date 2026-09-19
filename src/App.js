@@ -4103,6 +4103,11 @@ function _addDays(dateStr, days) {
   d.setUTCDate(d.getUTCDate() + days);
   return d.toISOString().slice(0, 10);
 }
+function _addMonths(dateStr, months) {
+  const d = new Date(dateStr + "T00:00:00Z");
+  d.setUTCMonth(d.getUTCMonth() + months);
+  return d.toISOString().slice(0, 10);
+}
 // Hours to ADD to an America/New_York wall-clock time to get UTC, for a given
 // date (4 during EDT, 5 during EST) — computed via Intl so DST transitions
 // are handled correctly without a hardcoded date range. US equities' fill
@@ -4755,6 +4760,24 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     reader.readAsText(file);
   };
 
+  // Quick period presets (7D/MTD/1M/YTD/1Y) — shortcuts that just set the
+  // same fFrom/fTo the Filters panel's date pickers already drive, so the
+  // equity curve, summary cards, and trade table all scope to the chosen
+  // period together instead of needing three separate controls.
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const PERIOD_PRESETS = [
+    { k: "7d",  l: "7D",  from: _addDays(todayStr, -6) },
+    { k: "mtd", l: "MTD", from: todayStr.slice(0, 8) + "01" },
+    { k: "1m",  l: "1M",  from: _addMonths(todayStr, -1) },
+    { k: "ytd", l: "YTD", from: todayStr.slice(0, 4) + "-01-01" },
+    { k: "1y",  l: "1Y",  from: _addMonths(todayStr, -12) },
+  ];
+  const activePeriod = PERIOD_PRESETS.find(p => fFrom === p.from && fTo === todayStr)?.k || null;
+  const togglePeriod = preset => {
+    if (activePeriod === preset.k) { setFFrom(""); setFTo(""); }
+    else { setFFrom(preset.from); setFTo(todayStr); }
+  };
+
   // ── Summary cards ────────────────────────────────────────────────────────────
   // Scoped to the active date-range filter (fFrom/fTo) instead of always
   // pulling from the whole journal, so these numbers match whatever period
@@ -4978,8 +5001,18 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
 
       {/* ── Equity curve ─────────────────────────────────────────────────── */}
       <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4 mb-5">
-        <span className="text-[12px] font-semibold text-zinc-300 block mb-2">Equity Curve</span>
-        <EquityCurveChart trades={trades} onDayClick={day => setCalSelectedDay(d => d === day ? null : day)}/>
+        <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
+          <span className="text-[12px] font-semibold text-zinc-300">Equity Curve</span>
+          <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+            {PERIOD_PRESETS.map(p => (
+              <button key={p.k} onClick={() => togglePeriod(p)}
+                className={`px-2.5 py-1 text-[11px] font-medium rounded-md transition-all ${activePeriod === p.k ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
+                {p.l}
+              </button>
+            ))}
+          </div>
+        </div>
+        <EquityCurveChart key={activePeriod || "all"} trades={statsBase} onDayClick={day => setCalSelectedDay(d => d === day ? null : day)}/>
       </div>
 
       {/* ── Filter tabs + Add button ─────────────────────────────────────── */}
