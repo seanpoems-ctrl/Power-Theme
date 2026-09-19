@@ -3744,6 +3744,14 @@ const ChecklistTab = () => {
 // "equity curve" every trading journal leads with.
 const EquityCurveChart = ({ trades, onDayClick }) => {
   const [hoverIdx, setHoverIdx] = useState(null);
+  // Hiding the tooltip the instant the mouse leaves the chart made it
+  // impossible to actually reach and click it (it vanished mid-move). A
+  // short grace period keeps it up while the cursor is in transit, and gets
+  // cancelled the moment the mouse re-enters the chart or the tooltip itself.
+  const hideTimerRef = useRef(null);
+  const cancelHide = () => { if (hideTimerRef.current) { clearTimeout(hideTimerRef.current); hideTimerRef.current = null; } };
+  const scheduleHide = () => { cancelHide(); hideTimerRef.current = setTimeout(() => setHoverIdx(null), 1000); };
+  useEffect(() => cancelHide, []);
 
   // points: one entry per closed trade (chart granularity, unchanged).
   // dayAgg: same trades grouped by exit_date, for the hover tooltip —
@@ -3786,6 +3794,7 @@ const EquityCurveChart = ({ trades, onDayClick }) => {
   const fmt = v => `${v >= 0 ? "+" : ""}$${v.toFixed(0)}`;
 
   const handleMove = e => {
+    cancelHide();
     const rect = e.currentTarget.getBoundingClientRect();
     if (!rect.width) return;
     const svgX = ((e.clientX - rect.left) / rect.width) * W;
@@ -3793,7 +3802,7 @@ const EquityCurveChart = ({ trades, onDayClick }) => {
     const idx = Math.round(frac * (points.length - 1));
     setHoverIdx(Math.max(0, Math.min(points.length - 1, idx)));
   };
-  const handleLeave = () => setHoverIdx(null);
+  const handleLeave = () => scheduleHide();
 
   const hp = hoverIdx != null ? points[hoverIdx] : null;
   const hAgg = hp ? dayAgg[hp.date] : null;
@@ -3821,6 +3830,8 @@ const EquityCurveChart = ({ trades, onDayClick }) => {
       {hp && hAgg && (
         <div
           onClick={() => onDayClick && onDayClick(hp.date)}
+          onMouseEnter={cancelHide}
+          onMouseLeave={scheduleHide}
           className="absolute z-20 bg-zinc-950 border border-zinc-700/60 rounded-lg px-3 py-2 text-[11px] shadow-xl min-w-[150px] cursor-pointer hover:border-zinc-500"
           style={{
             left: `${hxFrac * 100}%`,
