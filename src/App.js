@@ -3760,7 +3760,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     const letf = LETF_UNDERLYING_MAP[ticker];
     if (!letf) return "";
     const u = letf.underlying;
-    return categoryThemeMap[u] || scannerThemeMap[u] || stockDbThemeMap[u] || etfOwnThemeMap[u] || "";
+    return categoryThemeMap[u] || scannerThemeMap[u] || stockDbThemeMap[u] || etfOwnThemeMap[u] || CRYPTO_THEME_MAP[u] || "";
   };
 
   const persist = (arr) => { setTrades(arr); saveTrades(arr); };
@@ -7511,14 +7511,27 @@ const SECTOR_LEVERAGED_ETF_MAP = {
   GDX:  { long: ["NUGT"], short: ["DUST"] },   // Gold Miners Large-Cap
 };
 
+// Leveraged/inverse crypto-token ETFs whose "underlying" isn't itself a
+// tracked stock or ETF (the token just isn't part of this app's universe at
+// all) — so it can't resolve a theme via any of the normal chains. Paired
+// with CRYPTO_THEME_MAP below, which hand-assigns the theme those tokens
+// would get if they were tracked.
+const CRYPTO_LEVERAGED_MAP = {
+  XRP: { long: ["XXRP"], short: [] },
+};
+const CRYPTO_THEME_MAP = {
+  XRP: "Crypto & Digital Assets",
+};
+
 // Reverse index — leveraged/inverse ETF ticker -> { underlying, side } — built
-// once from the two maps above, so any leveraged ticker (stock- or
-// sector-keyed) can be traced back to what it's actually leveraged exposure
-// to. Used by the Trade Journal to theme LETF positions via their underlying
-// and to show a "LETF → underlying" badge instead of leaving Theme blank.
+// once from the maps above, so any leveraged ticker (stock-, sector-, or
+// crypto-token-keyed) can be traced back to what it's actually leveraged
+// exposure to. Used by the Trade Journal to theme LETF positions via their
+// underlying and to show a "LETF → underlying" badge instead of leaving
+// Theme blank.
 const LETF_UNDERLYING_MAP = (() => {
   const m = {};
-  for (const src of [LEVERAGED_ETF_MAP, SECTOR_LEVERAGED_ETF_MAP]) {
+  for (const src of [LEVERAGED_ETF_MAP, SECTOR_LEVERAGED_ETF_MAP, CRYPTO_LEVERAGED_MAP]) {
     for (const [underlying, { long, short }] of Object.entries(src)) {
       for (const t of long)  m[t] = { underlying, side: "long" };
       for (const t of short) m[t] = { underlying, side: "short" };
