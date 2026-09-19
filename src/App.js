@@ -4658,6 +4658,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [fFrom, setFFrom]           = useState("");
   const [fTo, setFTo]               = useState("");
   const [selectedIds, setSelectedIds] = useState(() => new Set());
+  const [expandedFills, setExpandedFills] = useState(null); // trade id whose fill breakdown is expanded, or null
 
   // Same stock_db.json the search bar reads, so a ticker resolves to the same
   // Theme here as it would if you typed it into the search box.
@@ -5398,7 +5399,8 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
               {visible.length === 0 ? (
                 <tr><td colSpan={14} className="py-12 text-center text-zinc-600 text-[12px] italic">No trades yet — click "+ Add Trade" to begin</td></tr>
               ) : sortedVisible.map(t => (
-                <tr key={t.id} className={`border-b border-zinc-800/30 transition-colors ${selectedIds.has(t.id) ? "bg-blue-500/10" : rowBg(t)}`}>
+                <React.Fragment key={t.id}>
+                <tr className={`border-b border-zinc-800/30 transition-colors ${selectedIds.has(t.id) ? "bg-blue-500/10" : rowBg(t)}`}>
                   <td className="px-2 py-2">
                     <button onClick={() => deleteTrade(t.id)} className="text-zinc-700 hover:text-red-400 transition-colors text-[11px]">✕</button>
                   </td>
@@ -5439,15 +5441,21 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">
                     {t.entry_price ? `$${t.entry_price}` : "—"}
                     {t.entry_fills?.length > 1 && (
-                      <span title={t.entry_fills.map(f => `${f.qty}@$${f.price} ${f.date}${f.time ? ` ${f.time}` : ""}`).join("\n")}
-                        className="ml-1 text-[9px] text-zinc-600 cursor-help">×{t.entry_fills.length}</span>
+                      <button onClick={() => setExpandedFills(id => id === t.id ? null : t.id)}
+                        title="Click to see each fill's price and shares"
+                        className={`ml-1 text-[9px] px-1 rounded cursor-pointer ${expandedFills === t.id ? "text-blue-400 bg-blue-500/15" : "text-zinc-600 hover:text-zinc-400"}`}>
+                        ×{t.entry_fills.length}
+                      </button>
                     )}
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">
                     {t.exit_price ? `$${t.exit_price}` : <span className="text-blue-400 text-[11px]">Open</span>}
                     {t.exit_fills?.length > 1 && (
-                      <span title={t.exit_fills.map(f => `${f.qty}@$${f.price} ${f.date}${f.time ? ` ${f.time}` : ""}`).join("\n")}
-                        className="ml-1 text-[9px] text-zinc-600 cursor-help">×{t.exit_fills.length}</span>
+                      <button onClick={() => setExpandedFills(id => id === t.id ? null : t.id)}
+                        title="Click to see each fill's price and shares"
+                        className={`ml-1 text-[9px] px-1 rounded cursor-pointer ${expandedFills === t.id ? "text-blue-400 bg-blue-500/15" : "text-zinc-600 hover:text-zinc-400"}`}>
+                        ×{t.exit_fills.length}
+                      </button>
                     )}
                     {t.exit_price && (
                       <>
@@ -5482,6 +5490,38 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                     <InlineText value={t.notes} onChange={v => updateField(t.id, "notes", v)} placeholder="Add notes…"/>
                   </td>
                 </tr>
+                {expandedFills === t.id && (
+                  <tr className="border-b border-zinc-800/30 bg-zinc-900/40">
+                    <td/><td/>
+                    <td colSpan={12} className="px-2 py-2">
+                      <div className="flex flex-wrap gap-x-8 gap-y-2 text-[11px] font-mono">
+                        {t.entry_fills?.length > 1 && (
+                          <div>
+                            <div className="text-zinc-500 mb-1">Entry fills</div>
+                            {t.entry_fills.map((f, i) => (
+                              <div key={i} className="text-zinc-300">{f.qty} sh @ ${f.price} <span className="text-zinc-600">{f.date}{f.time && ` ${f.time}`}</span></div>
+                            ))}
+                          </div>
+                        )}
+                        {t.exit_fills?.length > 1 && (
+                          <div>
+                            <div className="text-zinc-500 mb-1">Exit fills</div>
+                            {t.exit_fills.map((f, i) => {
+                              const entryRef = parseFloat(t.entry_price);
+                              const favorable = t.side === "short" ? parseFloat(f.price) < entryRef : parseFloat(f.price) > entryRef;
+                              return (
+                                <div key={i} className={favorable ? "text-emerald-400" : "text-red-400"}>
+                                  {f.qty} sh @ ${f.price} <span className="text-zinc-600">{f.date}{f.time && ` ${f.time}`}</span>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        )}
+                      </div>
+                    </td>
+                  </tr>
+                )}
+                </React.Fragment>
               ))}
             </tbody>
           </table>
