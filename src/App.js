@@ -7196,6 +7196,22 @@ const LEVERAGED_ETF_MAP = {
   MSTR:  { long: ["MSTU", "MSTX"], short: ["MSTZ", "SMST"] },
 };
 
+// Sector/index/commodity/crypto leveraged ETFs — same long(green)/short(red)
+// shape as LEVERAGED_ETF_MAP above, but keyed by the representative benchmark
+// ETF ticker (THEME_ETF_MAP's values) since these track an index/commodity/
+// crypto spot, not a single stock. Surfaced in EtfHoldingsModal's title bar
+// next to that benchmark ETF's own badge.
+const SECTOR_LEVERAGED_ETF_MAP = {
+  SOXX: { long: ["SOXL"], short: ["SOXS"] },   // Semiconductors Broad
+  IWM:  { long: ["TNA"],  short: ["TZA"] },    // Russell 2000
+  FDN:  { long: ["WEBL"], short: ["WEBS"] },   // Internet Large-Cap
+  SLV:  { long: ["AGQ"],  short: ["ZSL"] },    // Silver
+  USO:  { long: ["UCO"],  short: ["SCO"] },    // Crude Oil
+  XBI:  { long: [],       short: ["LABD"] },   // Biotech Equal
+  IBIT: { long: ["BITX"], short: [] },         // Bitcoin Spot
+  ETHA: { long: ["ETHU"], short: [] },         // Ethereum
+};
+
 // ── Multi-theme overrides: legacy frontend fallback (now mostly handled by scraper's ticker_extra_subthemes) ──
 // Only add entries here for themes the scraper doesn't cover yet.
 const TICKER_EXTRA_THEMES = {};
@@ -9406,6 +9422,24 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-sm font-bold text-zinc-100">{theme}</span>
             <span className="font-mono text-xs font-semibold text-sky-400 bg-sky-500/15 border border-sky-500/30 px-1.5 py-0.5 rounded">{etf}</span>
+            {(() => {
+              const sletf = SECTOR_LEVERAGED_ETF_MAP[etf];
+              if (!sletf || (sletf.long.length === 0 && sletf.short.length === 0)) return null;
+              return (
+                <span className="flex items-center gap-1.5">
+                  {sletf.long.map(t => (
+                    <a key={t} href={`https://www.tradingview.com/chart/?symbol=${t}`} target="_blank" rel="noreferrer"
+                      className="font-mono text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-1.5 py-0.5 rounded hover:bg-emerald-500/20"
+                    >{t}</a>
+                  ))}
+                  {sletf.short.map(t => (
+                    <a key={t} href={`https://www.tradingview.com/chart/?symbol=${t}`} target="_blank" rel="noreferrer"
+                      className="font-mono text-xs font-semibold text-red-400 bg-red-500/10 border border-red-500/20 px-1.5 py-0.5 rounded hover:bg-red-500/20"
+                    >{t}</a>
+                  ))}
+                </span>
+              );
+            })()}
             <span className="text-xs text-zinc-500">{sorted.length} stocks · historical snapshot</span>
           </div>
           <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded">
