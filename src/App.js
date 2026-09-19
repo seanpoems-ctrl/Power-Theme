@@ -3072,7 +3072,7 @@ const JOURNAL_KEY     = "power_theme_journal";
 const JOURNAL_AI_KEY  = process.env.REACT_APP_GEMINI_KEY || "";
 
 const EMPTY_TRADE = {
-  id: "", date: "", ticker: "", theme: "", entry_price: "", exit_price: "",
+  id: "", date: "", exit_date: "", ticker: "", theme: "", side: "long", entry_price: "", exit_price: "",
   shares: "", stop_used: "ATR", stop_price: "", pnl_dollars: "", pnl_pct: "",
   r_multiple: "", grade: "", notes: "",
 };
@@ -3090,10 +3090,11 @@ function calcDerived(t) {
   const exit  = parseFloat(t.exit_price);
   const sh    = parseFloat(t.shares);
   const stop  = parseFloat(t.stop_price);
+  const dir   = t.side === "short" ? -1 : 1; // short profits when price falls: (entry - exit)
   const out   = { ...t };
   if (!isNaN(entry) && !isNaN(exit) && !isNaN(sh)) {
-    out.pnl_dollars = ((exit - entry) * sh).toFixed(2);
-    out.pnl_pct     = (((exit - entry) / entry) * 100).toFixed(2);
+    out.pnl_dollars = (dir * (exit - entry) * sh).toFixed(2);
+    out.pnl_pct     = (dir * ((exit - entry) / entry) * 100).toFixed(2);
   }
   if (!isNaN(entry) && !isNaN(stop) && Math.abs(entry - stop) > 0 &&
       !isNaN(parseFloat(out.pnl_dollars))) {
@@ -3101,6 +3102,153 @@ function calcDerived(t) {
     out.r_multiple = risk > 0 ? (parseFloat(out.pnl_dollars) / risk).toFixed(2) : "";
   }
   return out;
+}
+
+// Win/loss for a closed trade: prefer R-multiple (risk-adjusted) when a stop
+// was recorded, otherwise fall back to raw P&L — imported trades (no stop
+// data) would otherwise never count as a win/loss anywhere in the journal.
+function tradeIsWin(t) {
+  const r = parseFloat(t.r_multiple);
+  if (!isNaN(r)) return r > 0;
+  const p = parseFloat(t.pnl_dollars);
+  return !isNaN(p) && p > 0;
+}
+function tradeIsLoss(t) {
+  const r = parseFloat(t.r_multiple);
+  if (!isNaN(r)) return r < 0;
+  const p = parseFloat(t.pnl_dollars);
+  return !isNaN(p) && p < 0;
+}
+
+// ── IBKR CSV import ──────────────────────────────────────────────────────────
+// Parses IBKR's standard Activity Statement CSV export (Reports → Activity →
+// download as CSV): a multi-section file where the Trades section looks like
+//   Trades,Header,DataDiscriminator,Asset Category,...,Symbol,Date/Time,...,Quantity,T. Price,...
+//   Trades,Data,Order,Stocks,...,AAPL,"2026-01-15, 09:31:00",...,100,150.25,...
+// Falls back to a flat single-table CSV (Flex Query export) if no "Trades,Header"
+// row is found, as long as it has Symbol/Quantity/Price-ish columns.
+// Executions are grouped per ticker and walked in date order; whenever the
+// running position returns to flat, that's one closed round-trip journal row
+// (entry = weighted-avg buy price, exit = weighted-avg sell price). A position
+// still open at the end of the file becomes one open row. Commissions are
+// intentionally excluded from P&L, matching how manually-entered trades in
+// this journal already compute P&L (entry/exit/shares only, no fee field).
+function _splitCsvLine(line) {
+  const out = [];
+  let cur = "", inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (inQuotes) {
+      if (c === '"') { if (line[i + 1] === '"') { cur += '"'; i++; } else inQuotes = false; }
+      else cur += c;
+    } else if (c === '"') inQuotes = true;
+    else if (c === ',') { out.push(cur); cur = ""; }
+    else cur += c;
+  }
+  out.push(cur);
+  return out;
+}
+function _ibkrNum(s) {
+  if (s == null) return NaN;
+  let v = String(s).replace(/[$,]/g, "").trim();
+  const neg = /^\(.*\)$/.test(v);
+  if (neg) v = v.slice(1, -1);
+  const n = parseFloat(v);
+  return neg ? -n : n;
+}
+function parseIbkrTrades(csvText, categoryThemeMap = {}) {
+  const lines = csvText.split(/\r?\n/);
+  let header = null;
+  const execs = [];
+  let flat = false;
+
+  for (const line of lines) {
+    if (!line.trim()) continue;
+    const cells = _splitCsvLine(line);
+    if (cells[0] === "Trades" && cells[1] === "Header") {
+      header = {}; cells.forEach((c, i) => { header[c.trim()] = i; });
+      continue;
+    }
+    if (cells[0] === "Trades" && cells[1] === "Data" && header) {
+      const disc = cells[header["DataDiscriminator"]];
+      if (disc !== "Order" && disc !== "Trade") continue; // skip SubTotal/Total rows
+      const assetCat = cells[header["Asset Category"]];
+      if (assetCat && !/stock/i.test(assetCat)) continue; // stocks only for now
+      const symbol = cells[header["Symbol"]];
+      const dt = cells[header["Date/Time"]] ?? cells[header["Date"]];
+      const qty = _ibkrNum(cells[header["Quantity"]]);
+      const price = _ibkrNum(cells[header["T. Price"]] ?? cells[header["Price"]]);
+      if (!symbol || !dt || isNaN(qty) || isNaN(price) || qty === 0) continue;
+      execs.push({ symbol: symbol.trim(), date: dt.split(",")[0].trim(), qty, price });
+    }
+  }
+
+  // Fallback: flat single-table CSV (e.g. a Flex Query export) with its own header row
+  if (!execs.length) {
+    const headerLine = lines.find(l => /symbol/i.test(l) && /(quantity|qty)/i.test(l));
+    if (headerLine) {
+      flat = true;
+      const cols = _splitCsvLine(headerLine).map(c => c.trim());
+      const idx = name => cols.findIndex(c => new RegExp(`^${name}$`, "i").test(c));
+      const symIdx = idx("symbol"), qtyIdx = cols.findIndex(c => /^(quantity|qty)$/i.test(c));
+      const priceIdx = cols.findIndex(c => /^(t\.?\s*price|price|tradeprice)$/i.test(c));
+      const dateIdx = cols.findIndex(c => /^(date\/time|date|tradedate)$/i.test(c));
+      if (symIdx >= 0 && qtyIdx >= 0 && priceIdx >= 0 && dateIdx >= 0) {
+        const startAt = lines.indexOf(headerLine) + 1;
+        for (let i = startAt; i < lines.length; i++) {
+          if (!lines[i].trim()) continue;
+          const cells = _splitCsvLine(lines[i]);
+          const symbol = cells[symIdx], dt = cells[dateIdx];
+          const qty = _ibkrNum(cells[qtyIdx]), price = _ibkrNum(cells[priceIdx]);
+          if (!symbol || !dt || isNaN(qty) || isNaN(price) || qty === 0) continue;
+          execs.push({ symbol: symbol.trim(), date: dt.split(",")[0].trim(), qty, price });
+        }
+      }
+    }
+  }
+  if (!execs.length) return { trades: [], skipped: flat ? 0 : -1 };
+
+  const bySymbol = {};
+  for (const e of execs) (bySymbol[e.symbol] ||= []).push(e);
+
+  const trades = [];
+  for (const [symbol, list] of Object.entries(bySymbol)) {
+    list.sort((a, b) => a.date.localeCompare(b.date));
+    let running = 0, segBuys = [], segSells = [], segStart = null, segLastDate = null;
+    const flush = (isOpen) => {
+      if (!segBuys.length && !segSells.length) return;
+      const sumQty = arr => arr.reduce((s, x) => s + Math.abs(x.qty), 0);
+      const wavg = arr => { const q = sumQty(arr); return q ? arr.reduce((s, x) => s + x.price * Math.abs(x.qty), 0) / q : null; };
+      const longFirst = segBuys.length && (!segSells.length || segBuys[0].date <= segSells[0].date);
+      const entrySide = longFirst ? segBuys : segSells;
+      const exitSide  = longFirst ? segSells : segBuys;
+      const entryAvg = wavg(entrySide), exitAvg = wavg(exitSide);
+      trades.push({
+        ...EMPTY_TRADE,
+        id: newId(),
+        date: segStart,
+        exit_date: isOpen ? "" : segLastDate,
+        ticker: symbol,
+        theme: categoryThemeMap[symbol] || "",
+        side: longFirst ? "long" : "short",
+        entry_price: entryAvg != null ? entryAvg.toFixed(2) : "",
+        exit_price: isOpen || exitAvg == null ? "" : exitAvg.toFixed(2),
+        shares: Math.round(Math.min(sumQty(segBuys), sumQty(segSells)) || sumQty(entrySide)),
+        notes: "Imported from IBKR",
+      });
+      segBuys = []; segSells = []; segStart = null; segLastDate = null;
+    };
+    for (const e of list) {
+      if (segStart === null) segStart = e.date;
+      segLastDate = e.date;
+      if (e.qty > 0) segBuys.push(e); else segSells.push(e);
+      running += e.qty;
+      if (Math.abs(running) < 1e-9) { flush(false); running = 0; }
+    }
+    if (Math.abs(running) > 1e-9) flush(true);
+  }
+
+  return { trades: trades.map(calcDerived).sort((a, b) => (b.date || "").localeCompare(a.date || "")), skipped: 0 };
 }
 
 const STOP_OPTS = ["ATR", "LOD", "Manual"];
@@ -3548,11 +3696,13 @@ const ChecklistTab = () => {
   );
 };
 
-const TradeJournalTab = ({ data }) => {
+const TradeJournalTab = ({ data, categoryThemeMap = {} }) => {
   const [trades, setTrades]         = useState(() => loadTrades());
   const [filter, setFilter]         = useState("all");
   const [showForm, setShowForm]     = useState(false);
   const [draft, setDraft]           = useState({ ...EMPTY_TRADE, id: newId() });
+  const [importMsg, setImportMsg]   = useState(null);
+  const fileInputRef                = useRef(null);
   const [aiResult, setAiResult]     = useState(null);
   const [aiLoading, setAiLoading]   = useState(false);
 
@@ -3571,6 +3721,30 @@ const TradeJournalTab = ({ data }) => {
   };
 
   const deleteTrade = (id) => { if (window.confirm("Delete this trade?")) persist(trades.filter(t => t.id !== id)); };
+
+  const handleImportFile = (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // allow re-selecting the same file
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const { trades: parsed, skipped } = parseIbkrTrades(String(reader.result || ""), categoryThemeMap);
+      if (skipped === -1) { setImportMsg("Couldn't find a Trades table in this file — export the Activity Statement as CSV from IBKR's Reports page."); return; }
+      const existingSig = new Set(trades.map(t => `${t.ticker}|${t.date}|${t.exit_date}|${t.entry_price}|${t.exit_price}|${t.shares}`));
+      const fresh = parsed.filter(t => !existingSig.has(`${t.ticker}|${t.date}|${t.exit_date}|${t.entry_price}|${t.exit_price}|${t.shares}`));
+      const dupes = parsed.length - fresh.length;
+      if (fresh.length) persist([...fresh, ...trades]);
+      const closedCount = fresh.filter(t => t.exit_price).length;
+      const openCount = fresh.length - closedCount;
+      setImportMsg(
+        fresh.length === 0
+          ? `No new trades — all ${parsed.length} matched trades already in your journal.`
+          : `Imported ${fresh.length} trade${fresh.length === 1 ? "" : "s"} (${closedCount} closed, ${openCount} open)${dupes ? `, skipped ${dupes} already-imported` : ""}.`
+      );
+    };
+    reader.onerror = () => setImportMsg("Couldn't read that file.");
+    reader.readAsText(file);
+  };
 
   // ── Summary cards ────────────────────────────────────────────────────────────
   const closed = trades.filter(t => t.exit_price !== "" && t.exit_price != null);
@@ -3592,9 +3766,8 @@ const TradeJournalTab = ({ data }) => {
 
   // ── Filtered trades ──────────────────────────────────────────────────────────
   const visible = trades.filter(t => {
-    const r = parseFloat(t.r_multiple);
-    if (filter === "winners") return !isNaN(r) && r > 0;
-    if (filter === "losers")  return !isNaN(r) && r < 0;
+    if (filter === "winners") return tradeIsWin(t);
+    if (filter === "losers")  return tradeIsLoss(t);
     if (filter === "open")    return !t.exit_price;
     return true;
   });
@@ -3607,7 +3780,7 @@ const TradeJournalTab = ({ data }) => {
       if (!m[th]) m[th] = { pnl: 0, count: 0, wins: 0 };
       m[th].pnl   += parseFloat(t.pnl_dollars) || 0;
       m[th].count += 1;
-      if ((parseFloat(t.r_multiple) || 0) > 0) m[th].wins += 1;
+      if (tradeIsWin(t)) m[th].wins += 1;
     }
     return Object.entries(m).sort((a, b) => b[1].pnl - a[1].pnl);
   }, [trades]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -3637,9 +3810,8 @@ const TradeJournalTab = ({ data }) => {
   // ── Row bg ────────────────────────────────────────────────────────────────────
   const rowBg = (t) => {
     if (!t.exit_price) return "bg-blue-500/5 hover:bg-blue-500/10";
-    const r = parseFloat(t.r_multiple);
-    if (!isNaN(r) && r > 0) return "bg-emerald-500/5 hover:bg-emerald-500/8";
-    if (!isNaN(r) && r < 0) return "bg-red-500/5 hover:bg-red-500/8";
+    if (tradeIsWin(t))  return "bg-emerald-500/5 hover:bg-emerald-500/8";
+    if (tradeIsLoss(t)) return "bg-red-500/5 hover:bg-red-500/8";
     return "hover:bg-zinc-800/30";
   };
 
@@ -3688,11 +3860,21 @@ const TradeJournalTab = ({ data }) => {
         </div>
         <span className="text-[11px] text-zinc-600">{visible.length} trades</span>
         <div className="flex-1"/>
+        <input ref={fileInputRef} type="file" accept=".csv,text/csv" onChange={handleImportFile} className="hidden"/>
+        <button onClick={() => { setImportMsg(null); fileInputRef.current?.click(); }}
+          className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 rounded-lg hover:bg-zinc-700/60 transition-colors">
+          ⬆ Import IBKR CSV
+        </button>
         <button onClick={() => setShowForm(f => !f)}
           className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded-lg hover:bg-blue-500/30 transition-colors">
           {showForm ? "✕ Cancel" : "+ Add Trade"}
         </button>
       </div>
+      {importMsg && (
+        <div className="mb-3 -mt-1 text-[11px] text-zinc-400 bg-zinc-800/40 border border-zinc-700/40 rounded-lg px-3 py-1.5">
+          {importMsg}
+        </div>
+      )}
 
       {/* ── Trade table ──────────────────────────────────────────────────── */}
       <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl overflow-hidden mb-5">
@@ -3729,9 +3911,19 @@ const TradeJournalTab = ({ data }) => {
                     { f:"shares",      type:"number", ph:"Shares"  },
                   ].map(({ f, type, ph }) => (
                     <td key={f} className="px-1.5 py-2">
-                      <input type={type} placeholder={ph} value={draft[f] || ""}
-                        onChange={e => setDraft(d => ({ ...d, [f]: e.target.value }))}
-                        className="w-full text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none focus:border-blue-500/60 min-w-[60px]"/>
+                      <div className="flex items-center gap-1">
+                        <input type={type} placeholder={ph} value={draft[f] || ""}
+                          onChange={e => setDraft(d => ({ ...d, [f]: e.target.value }))}
+                          className="w-full text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none focus:border-blue-500/60 min-w-[60px]"/>
+                        {f === "ticker" && (
+                          <select value={draft.side} onChange={e => setDraft(d => ({ ...d, side: e.target.value }))}
+                            title="Long or short"
+                            className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1 py-1 text-zinc-200 outline-none">
+                            <option value="long">L</option>
+                            <option value="short">S</option>
+                          </select>
+                        )}
+                      </div>
                     </td>
                   ))}
                   <td className="px-1.5 py-2">
@@ -3770,7 +3962,14 @@ const TradeJournalTab = ({ data }) => {
                     <button onClick={() => deleteTrade(t.id)} className="text-zinc-700 hover:text-red-400 transition-colors text-[11px]">✕</button>
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-500 whitespace-nowrap">{t.date || "—"}</td>
-                  <td className="px-2 py-1.5 text-[12px] font-mono font-semibold text-zinc-100 whitespace-nowrap">{t.ticker || "—"}</td>
+                  <td className="px-2 py-1.5 text-[12px] font-mono font-semibold text-zinc-100 whitespace-nowrap">
+                    {t.ticker || "—"}
+                    {t.ticker && (
+                      <InlineSelect value={t.side === "short" ? "S" : "L"} options={["L", "S"]}
+                        onChange={v => updateField(t.id, "side", v === "S" ? "short" : "long")}
+                        cls={`ml-1 text-[9px] font-bold px-1 py-0 rounded border leading-none ${t.side === "short" ? "text-red-400 bg-red-500/10 border-red-500/30" : "text-zinc-500 bg-zinc-800/60 border-zinc-700/50"}`}/>
+                    )}
+                  </td>
                   <td className="px-2 py-1.5">
                     <InlineText value={t.theme} onChange={v => updateField(t.id, "theme", v)} placeholder="Theme"/>
                   </td>
@@ -13043,7 +13242,7 @@ const appScreenerMap = useMemo(() => {
         </div>
       </div>
 
-      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef}/> : tab === "journal" ? <TradeJournalTab data={data}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} fineThemeRankings={fineThemeRankings}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
+      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef}/> : tab === "journal" ? <TradeJournalTab data={data} categoryThemeMap={categoryThemeMap}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} fineThemeRankings={fineThemeRankings}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex flex-col lg:flex-row items-stretch lg:items-start gap-3">
           {/* ── MAIN CONTENT ─────────────────────────────────────── */}
