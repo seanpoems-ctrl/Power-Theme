@@ -4989,7 +4989,14 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                 <div className="text-[15px] font-bold font-mono leading-tight text-red-400">L {avgHoldLoss != null ? `${avgHoldLoss.toFixed(1)}d` : "—"}</div>
               </>
             ), sub: `${holdDaysWin.length + holdDaysLoss.length} trades with exit date` },
-          { label: "Expectancy",       value: expectancy != null ? `${expectancy >= 0 ? "+" : ""}$${expectancy.toFixed(0)}/trade` : "—", cls: expectancy != null && expectancy >= 0 ? "text-emerald-400" : expectancy != null ? "text-red-400" : "text-zinc-400", sub: closed.length ? `${(winRate * 100).toFixed(0)}% win · ${(lossRate * 100).toFixed(0)}% loss · avg +$${avgWin.toFixed(0)} / -$${avgLoss.toFixed(0)}` : "no closed trades" },
+          { label: "Expectancy",       value: expectancy != null ? `${expectancy >= 0 ? "+" : ""}$${expectancy.toFixed(0)}/trade` : "—", cls: expectancy != null && expectancy >= 0 ? "text-emerald-400" : expectancy != null ? "text-red-400" : "text-zinc-400", sub: closed.length ? (
+              <>
+                <span className="text-emerald-400">{(winRate * 100).toFixed(0)}% win</span>
+                {" · "}
+                <span className="text-red-400">{(lossRate * 100).toFixed(0)}% loss</span>
+                {` · avg +$${avgWin.toFixed(0)} / -$${avgLoss.toFixed(0)}`}
+              </>
+            ) : "no closed trades" },
         ].map(m => (
           <div key={m.label} className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
             <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-1.5">{m.label}</div>
