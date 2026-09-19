@@ -59,6 +59,7 @@ jobs:
           CI: false
           REACT_APP_FINNHUB_KEY: ${{ secrets.FINNHUB_API_KEY }}
           REACT_APP_GEMINI_KEY: ${{ secrets.GEMINI_API_KEY }}
+          REACT_APP_TV_PROXY_URL: ${{ secrets.TV_PROXY_URL }}
 
       - uses: actions/configure-pages@v4
 

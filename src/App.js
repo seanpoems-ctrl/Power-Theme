@@ -2,6 +2,7 @@ import React, { useState, useEffect, useLayoutEffect, useMemo, useCallback, useR
 import ETF_MAP_JSON from "./etf_map.json";
 import { ChevronDown, ChevronRight, Activity, BarChart3, RefreshCw, Search, SlidersHorizontal, X, Zap, TrendingUp, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink } from "lucide-react";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
+import { createChart, CandlestickSeries, createSeriesMarkers } from "lightweight-charts";
 import useMarketStore from "./useMarketStore";
 import GlobalAlertBanner from "./GlobalAlertBanner";
 import MarketBreadthMonitor from "./MarketBreadthMonitor";
@@ -3834,20 +3835,138 @@ const TradeCalendarView = ({ trades, month, onMonthChange, onDayClick, selectedD
 // date range, so this shows entry/exit as text and leaves navigation to the
 // chart's own date scroll — an "Open full chart" link covers anyone who wants
 // TradingView's full drawing/replay tools instead.
+// Bar-data proxy URL (Cloudflare Worker, see cloudflare-worker/) — same
+// pattern as REACT_APP_FINNHUB_KEY: unset in dev until deployed, feature
+// degrades gracefully rather than breaking.
+const TV_PROXY_URL = process.env.REACT_APP_TV_PROXY_URL || "";
+
+function _dateToUnixSec(dateStr) {
+  return Math.floor(new Date(dateStr + "T00:00:00Z").getTime() / 1000);
+}
+function _addDays(dateStr, days) {
+  const d = new Date(dateStr + "T00:00:00Z");
+  d.setUTCDate(d.getUTCDate() + days);
+  return d.toISOString().slice(0, 10);
+}
+
+// Candlestick chart for one trade using TradingView's Lightweight Charts
+// (Apache-2.0, plain npm package — not the licensed Advanced Charts library,
+// which was evaluated and declined: public-repo restriction conflicts with
+// this being an open GitHub repo, plus a $50k liquidated-damages clause).
+// Draws entry/exit as both a price line (exact price, right axis) and a
+// shape marker (exact date). Daily resolution only — trades only record a
+// date, not a time, so daily bars are the honest level of precision, and
+// unlike intraday bars they're never outside Yahoo's retention window for
+// older trades.
 const TradeChartModal = ({ trade, onClose }) => {
+  const containerRef = useRef(null);
+  const chartRef = useRef(null);
+  const [status, setStatus] = useState(TV_PROXY_URL ? "loading" : "no-proxy"); // loading | ready | error | no-proxy
+
   React.useEffect(() => {
     const h = e => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", h);
     return () => window.removeEventListener("keydown", h);
   }, [onClose]);
+
+  useEffect(() => {
+    if (!trade || !TV_PROXY_URL || !containerRef.current) return;
+    let cancelled = false;
+    setStatus("loading");
+
+    const entryDate = trade.date;
+    const exitDate = trade.exit_date || new Date().toISOString().slice(0, 10);
+    const from = _dateToUnixSec(_addDays(entryDate, -15));
+    const to = _dateToUnixSec(_addDays(exitDate, 15));
+
+    fetch(`${TV_PROXY_URL}/bars?symbol=${encodeURIComponent(trade.ticker)}&resolution=D&from=${from}&to=${to}`)
+      .then(r => r.json())
+      .then(({ bars }) => {
+        if (cancelled || !containerRef.current) return;
+        if (!bars || bars.length < 2) { setStatus("error"); return; }
+
+        const data = bars.map(b => ({
+          time: Math.floor(b.time / 1000), // Worker returns ms; Lightweight Charts wants unix seconds
+          open: b.open, high: b.high, low: b.low, close: b.close,
+        }));
+
+        const chart = createChart(containerRef.current, {
+          layout: { background: { color: "#09090b" }, textColor: "#a1a1aa" },
+          grid: { vertLines: { color: "#27272a" }, horzLines: { color: "#27272a" } },
+          timeScale: { borderColor: "#3f3f46" },
+          rightPriceScale: { borderColor: "#3f3f46" },
+          autoSize: true,
+        });
+        chartRef.current = chart;
+
+        const series = chart.addSeries(CandlestickSeries, {
+          upColor: "#22c55e", downColor: "#ef4444", borderVisible: false,
+          wickUpColor: "#22c55e", wickDownColor: "#ef4444",
+        });
+        series.setData(data);
+
+        // Nearest bar at-or-after a given date — trade dates can land on a
+        // weekend/holiday with no bar (e.g. an IBKR import's exit_date).
+        const barAtOrAfter = dateStr => {
+          const target = _dateToUnixSec(dateStr);
+          return data.find(b => b.time >= target) || data[data.length - 1];
+        };
+
+        const entryBar = barAtOrAfter(entryDate);
+        const isShort = trade.side === "short";
+        const markers = [{
+          time: entryBar.time, position: isShort ? "aboveBar" : "belowBar",
+          color: "#3b82f6", shape: isShort ? "arrowDown" : "arrowUp",
+          text: `Entry $${trade.entry_price}`,
+        }];
+        series.createPriceLine({
+          price: parseFloat(trade.entry_price), color: "#3b82f6", lineWidth: 1,
+          lineStyle: 2, axisLabelVisible: true, title: "Entry",
+        });
+
+        if (trade.exit_price) {
+          const exitBar = barAtOrAfter(trade.exit_date);
+          const won = tradeIsWin(trade);
+          markers.push({
+            time: exitBar.time, position: isShort ? "belowBar" : "aboveBar",
+            color: won ? "#22c55e" : "#ef4444", shape: isShort ? "arrowUp" : "arrowDown",
+            text: `Exit $${trade.exit_price}`,
+          });
+          series.createPriceLine({
+            price: parseFloat(trade.exit_price), color: won ? "#22c55e" : "#ef4444", lineWidth: 1,
+            lineStyle: 2, axisLabelVisible: true, title: "Exit",
+          });
+        }
+        createSeriesMarkers(series, markers);
+
+        // The actual ask: auto-jump to the trade's date window (padded a
+        // few days either side) instead of leaving that to manual scrolling.
+        chart.timeScale().setVisibleRange({
+          from: _dateToUnixSec(_addDays(entryDate, -5)),
+          to: _dateToUnixSec(_addDays(exitDate, 5)),
+        });
+
+        setStatus("ready");
+      })
+      .catch(() => { if (!cancelled) setStatus("error"); });
+
+    return () => {
+      cancelled = true;
+      if (chartRef.current) { chartRef.current.remove(); chartRef.current = null; }
+    };
+  }, [trade]); // eslint-disable-line react-hooks/exhaustive-deps
+
   if (!trade) return null;
+
   const holdDays = trade.exit_date && trade.date ? (new Date(trade.exit_date) - new Date(trade.date)) / 86400000 : null;
-  const interval = holdDays == null ? "D" : holdDays <= 5 ? "60" : holdDays <= 30 ? "D" : "W";
+  const fallbackInterval = holdDays == null ? "D" : holdDays <= 5 ? "60" : holdDays <= 30 ? "D" : "W";
   const tvParams = new URLSearchParams({
-    symbol: trade.ticker, interval, theme: "dark", style: "1", timezone: "exchange",
+    symbol: trade.ticker, interval: fallbackInterval, theme: "dark", style: "1", timezone: "exchange",
     hidesidetoolbar: "0", hidetoptoolbar: "0", withdateranges: "1", locale: "en", saveimage: "0",
   });
-  const src = `https://s.tradingview.com/widgetembed/?${tvParams.toString()}`;
+  const fallbackSrc = `https://s.tradingview.com/widgetembed/?${tvParams.toString()}`;
+  const showFallback = status === "no-proxy" || status === "error";
+
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-12 px-4 pb-8"
       style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }} onClick={onClose}>
@@ -3873,11 +3992,25 @@ const TradeChartModal = ({ trade, onClose }) => {
           </div>
           <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded flex-shrink-0"><X size={15}/></button>
         </div>
-        <div className="text-[10px] text-zinc-600 px-4 pt-2 flex-shrink-0">
-          TradingView's embedded widget can't auto-jump to a past date — use the chart's own date scroll/zoom to navigate to {trade.date}{trade.exit_date ? ` – ${trade.exit_date}` : " (still open)"}.
-        </div>
-        <div className="flex-1 min-h-[500px]">
-          <iframe src={src} title={trade.ticker} style={{ width: "100%", height: "100%", minHeight: "500px", border: "none", display: "block" }}/>
+        {showFallback && (
+          <div className="text-[10px] text-zinc-600 px-4 pt-2 flex-shrink-0">
+            {status === "no-proxy"
+              ? "Bar-data proxy not configured (REACT_APP_TV_PROXY_URL) — showing TradingView's live widget instead. Use its own date scroll/zoom to navigate to "
+              : "Couldn't load bar data for this symbol/range — showing TradingView's live widget instead. Use its own date scroll/zoom to navigate to "}
+            {trade.date}{trade.exit_date ? ` – ${trade.exit_date}` : " (still open)"}.
+          </div>
+        )}
+        <div className="flex-1 min-h-[500px] relative">
+          {showFallback ? (
+            <iframe src={fallbackSrc} title={trade.ticker} style={{ width: "100%", height: "100%", minHeight: "500px", border: "none", display: "block" }}/>
+          ) : (
+            <>
+              <div ref={containerRef} style={{ width: "100%", height: "100%", minHeight: "500px" }}/>
+              {status === "loading" && (
+                <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[12px]">Loading chart…</div>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>
