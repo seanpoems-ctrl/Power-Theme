@@ -3743,12 +3743,29 @@ const ChecklistTab = () => {
 // Cumulative realized P&L over time, sorted by exit date — the standard
 // "equity curve" every trading journal leads with.
 const EquityCurveChart = ({ trades }) => {
-  const points = useMemo(() => {
+  const [hoverIdx, setHoverIdx] = useState(null);
+
+  // points: one entry per closed trade (chart granularity, unchanged).
+  // dayAgg: same trades grouped by exit_date, for the hover tooltip —
+  // several trades can close on the same day and the tooltip should show
+  // that day's total P&L and every trade in it, not just the one point
+  // nearest the cursor.
+  const { points, dayAgg } = useMemo(() => {
     const closedSorted = trades
       .filter(t => t.exit_date && t.pnl_dollars !== "" && t.pnl_dollars != null)
       .sort((a, b) => a.exit_date.localeCompare(b.exit_date));
     let running = 0;
-    return closedSorted.map(t => { running += parseFloat(t.pnl_dollars) || 0; return { date: t.exit_date, cum: running }; });
+    const pts = [];
+    const agg = {};
+    for (const t of closedSorted) {
+      const pnl = parseFloat(t.pnl_dollars) || 0;
+      running += pnl;
+      pts.push({ date: t.exit_date, cum: running });
+      const bucket = (agg[t.exit_date] ||= { pnl: 0, trades: [] });
+      bucket.pnl += pnl;
+      bucket.trades.push({ ticker: t.ticker, pnl });
+    }
+    return { points: pts, dayAgg: agg };
   }, [trades]);
 
   if (points.length < 2) {
@@ -3768,17 +3785,64 @@ const EquityCurveChart = ({ trades }) => {
   const areaPath = `M${x(0).toFixed(1)},${zeroY.toFixed(1)} L${pathPts} L${x(points.length - 1).toFixed(1)},${zeroY.toFixed(1)} Z`;
   const fmt = v => `${v >= 0 ? "+" : ""}$${v.toFixed(0)}`;
 
+  const handleMove = e => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    if (!rect.width) return;
+    const svgX = ((e.clientX - rect.left) / rect.width) * W;
+    const frac = (svgX - padL) / (W - padL - padR);
+    const idx = Math.round(frac * (points.length - 1));
+    setHoverIdx(Math.max(0, Math.min(points.length - 1, idx)));
+  };
+  const handleLeave = () => setHoverIdx(null);
+
+  const hp = hoverIdx != null ? points[hoverIdx] : null;
+  const hAgg = hp ? dayAgg[hp.date] : null;
+  const hxFrac = hp ? x(hoverIdx) / W : 0;
+
   return (
-    <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="block">
-      <line x1={padL} y1={zeroY} x2={W - padR} y2={zeroY} stroke="#3f3f46" strokeWidth="1" strokeDasharray="4 3"/>
-      <path d={areaPath} fill={color} opacity="0.1"/>
-      <polyline points={pathPts} fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"/>
-      <text x={4} y={zeroY + 3} fontSize="11" fill="#71717a">$0</text>
-      <text x={4} y={padT + 9} fontSize="11" fill="#71717a">{fmt(maxV)}</text>
-      <text x={4} y={H - 6} fontSize="11" fill="#71717a">{fmt(minV)}</text>
-      <text x={padL} y={H - 4} fontSize="10" fill="#52525b">{points[0].date}</text>
-      <text x={W - padR} y={H - 4} fontSize="10" fill="#52525b" textAnchor="end">{points[points.length - 1].date}</text>
-    </svg>
+    <div className="relative">
+      <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="block cursor-crosshair"
+        onMouseMove={handleMove} onMouseLeave={handleLeave}>
+        <line x1={padL} y1={zeroY} x2={W - padR} y2={zeroY} stroke="#3f3f46" strokeWidth="1" strokeDasharray="4 3"/>
+        <path d={areaPath} fill={color} opacity="0.1"/>
+        <polyline points={pathPts} fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"/>
+        {hp && (
+          <>
+            <line x1={x(hoverIdx)} y1={padT} x2={x(hoverIdx)} y2={H - padB} stroke="#a1a1aa" strokeWidth="1" strokeDasharray="3 3"/>
+            <circle cx={x(hoverIdx)} cy={y(hp.cum)} r="3.5" fill={color} stroke="#18181b" strokeWidth="1.5"/>
+          </>
+        )}
+        <text x={4} y={zeroY + 3} fontSize="11" fill="#71717a">$0</text>
+        <text x={4} y={padT + 9} fontSize="11" fill="#71717a">{fmt(maxV)}</text>
+        <text x={4} y={H - 6} fontSize="11" fill="#71717a">{fmt(minV)}</text>
+        <text x={padL} y={H - 4} fontSize="10" fill="#52525b">{points[0].date}</text>
+        <text x={W - padR} y={H - 4} fontSize="10" fill="#52525b" textAnchor="end">{points[points.length - 1].date}</text>
+      </svg>
+      {hp && hAgg && (
+        <div
+          className="absolute z-20 pointer-events-none bg-zinc-950 border border-zinc-700/60 rounded-lg px-3 py-2 text-[11px] shadow-xl min-w-[150px] max-w-[220px]"
+          style={{
+            left: `${hxFrac * 100}%`,
+            top: `${(y(hp.cum) / H) * 100}%`,
+            transform: `translate(${hxFrac > 0.82 ? "-100%" : hxFrac < 0.12 ? "0%" : "-50%"}, -100%) translateY(-10px)`,
+          }}
+        >
+          <div className="text-zinc-300 font-semibold mb-1">{hp.date}</div>
+          <div className={`font-mono font-bold mb-1 ${hAgg.pnl >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+            {fmt(hAgg.pnl)} · {hAgg.trades.length} trade{hAgg.trades.length === 1 ? "" : "s"}
+          </div>
+          <div className="space-y-0.5 max-h-[110px] overflow-y-auto">
+            {hAgg.trades.slice(0, 8).map((t, i) => (
+              <div key={i} className="flex justify-between gap-3">
+                <span className="text-zinc-400">{t.ticker || "—"}</span>
+                <span className={t.pnl >= 0 ? "text-emerald-400/80" : "text-red-400/80"}>{fmt(t.pnl)}</span>
+              </div>
+            ))}
+            {hAgg.trades.length > 8 && <div className="text-zinc-600">+{hAgg.trades.length - 8} more</div>}
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 
