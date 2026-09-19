@@ -3916,9 +3916,11 @@ const TradeChartModal = ({ trade, onClose }) => {
 
     const entryDate = trade.date;
     const exitDate = trade.exit_date || new Date().toISOString().slice(0, 10);
-    // Intraday views only need a few days of context either side; D/W keep
-    // the wider lead-in/follow-through window.
-    const fetchPad = _isIntraday(timeframe) ? 3 : 15;
+    // fetchPad is how much data actually gets loaded (so there's something
+    // to see when you zoom/scroll out); rangePad is just the initial framed
+    // view. Weekly bars are coarse (~1 bar/week), so it needs a much wider
+    // fetch window than Daily to have enough bars to zoom into meaningfully.
+    const fetchPad = _isIntraday(timeframe) ? 3 : timeframe === "W" ? 365 : 180;
     const rangePad = _isIntraday(timeframe) ? 1 : 5;
     const from = _dateToUnixSec(_addDays(entryDate, -fetchPad));
     const to = _dateToUnixSec(_addDays(exitDate, fetchPad));
