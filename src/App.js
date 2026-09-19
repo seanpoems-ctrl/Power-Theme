@@ -7194,6 +7194,7 @@ const LEVERAGED_ETF_MAP = {
   BMNR:  { long: ["BMNU"], short: [] },
   SMCI:  { long: ["SMCX", "SMCL"], short: ["SMCZ"] },
   MSTR:  { long: ["MSTU", "MSTX"], short: ["MSTZ", "SMST"] },
+  SPCX:  { long: ["SPCH"], short: ["SSPC"] },
 };
 
 // Sector/index/commodity/crypto leveraged ETFs — same long(green)/short(red)
@@ -7207,7 +7208,7 @@ const SECTOR_LEVERAGED_ETF_MAP = {
   FDN:  { long: ["WEBL"], short: ["WEBS"] },   // Internet Large-Cap
   SLV:  { long: ["AGQ"],  short: ["ZSL"] },    // Silver
   USO:  { long: ["UCO"],  short: ["SCO"] },    // Crude Oil
-  XBI:  { long: [],       short: ["LABD"] },   // Biotech Equal
+  XBI:  { long: ["LABU"], short: ["LABD"] },   // Biotech Equal
   IBIT: { long: ["BITX"], short: [] },         // Bitcoin Spot
   ETHA: { long: ["ETHU"], short: [] },         // Ethereum
 };
