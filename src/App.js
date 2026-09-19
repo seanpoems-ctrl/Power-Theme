@@ -3285,8 +3285,12 @@ function parseIbkrTrades(csvText, categoryThemeMap = {}) {
         entry_price: entryAvg != null ? entryAvg.toFixed(2) : "",
         exit_price: isOpen || exitAvg == null ? "" : exitAvg.toFixed(2),
         shares: Math.round(Math.min(sumQty(segBuys), sumQty(segSells)) || sumQty(entrySide)),
-        entry_fills: entrySide.map(e => ({ date: e.date, time: e.time, price: e.price, qty: Math.abs(e.qty) })),
-        exit_fills: isOpen ? [] : exitSide.map(e => ({ date: e.date, time: e.time, price: e.price, qty: Math.abs(e.qty) })),
+        // Individual fill prices rounded to 2dp for display (IBKR's raw
+        // per-execution prices can carry many decimal places, e.g.
+        // 166.834197531) — the weighted average above is still computed
+        // from the unrounded prices, this is purely cosmetic.
+        entry_fills: entrySide.map(e => ({ date: e.date, time: e.time, price: +e.price.toFixed(2), qty: Math.abs(e.qty) })),
+        exit_fills: isOpen ? [] : exitSide.map(e => ({ date: e.date, time: e.time, price: +e.price.toFixed(2), qty: Math.abs(e.qty) })),
         notes: "Imported from IBKR",
       });
       segBuys = []; segSells = []; segStart = null; segStartTime = null; segLastDate = null; segLastTime = null;
@@ -4852,17 +4856,37 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       const { trades: rawParsed, skipped } = parseIbkrTrades(String(reader.result || ""), categoryThemeMap);
       if (skipped === -1) { setImportMsg("Couldn't find a Trades table in this file — export the Activity Statement as CSV from IBKR's Reports page."); return; }
       const parsed = rawParsed.map(t => t.theme ? t : { ...t, theme: resolveTheme(t.ticker) });
-      const existingSig = new Set(trades.map(t => `${t.ticker}|${t.date}|${t.exit_date}|${t.entry_price}|${t.exit_price}|${t.shares}`));
-      const fresh = parsed.filter(t => !existingSig.has(`${t.ticker}|${t.date}|${t.exit_date}|${t.entry_price}|${t.exit_price}|${t.shares}`));
-      const dupes = parsed.length - fresh.length;
-      if (fresh.length) persist([...fresh, ...trades]);
+      const sigOf = t => `${t.ticker}|${t.date}|${t.exit_date}|${t.entry_price}|${t.exit_price}|${t.shares}`;
+      const bySig = new Map(parsed.map(t => [sigOf(t), t]));
+
+      // Re-uploading a statement also repairs already-imported trades that
+      // predate the entry_fills/exit_fills feature (or were imported before
+      // this fix) — they matched on the dedup signature so got skipped as
+      // "already imported" and never picked up the per-fill breakdown.
+      // Only touches the fills arrays; every other field stays as-is.
+      let repaired = 0;
+      const matchedSigs = new Set();
+      const patched = trades.map(t => {
+        const sig = sigOf(t);
+        const match = bySig.get(sig);
+        if (!match) return t;
+        matchedSigs.add(sig);
+        const needsRepair = (t.entry_fills?.length || 0) <= 1 && (t.exit_fills?.length || 0) <= 1;
+        const hasNewFills = (match.entry_fills?.length || 0) > 1 || (match.exit_fills?.length || 0) > 1;
+        if (!needsRepair || !hasNewFills) return t;
+        repaired++;
+        return { ...t, entry_fills: match.entry_fills, exit_fills: match.exit_fills };
+      });
+      const fresh = parsed.filter(t => !matchedSigs.has(sigOf(t)));
+      if (fresh.length || repaired) persist([...fresh, ...patched]);
       const closedCount = fresh.filter(t => t.exit_price).length;
       const openCount = fresh.length - closedCount;
-      setImportMsg(
-        fresh.length === 0
-          ? `No new trades — all ${parsed.length} matched trades already in your journal.`
-          : `Imported ${fresh.length} trade${fresh.length === 1 ? "" : "s"} (${closedCount} closed, ${openCount} open)${dupes ? `, skipped ${dupes} already-imported` : ""}.`
-      );
+      const dupes = parsed.length - fresh.length - repaired;
+      const parts = [];
+      if (fresh.length) parts.push(`imported ${fresh.length} trade${fresh.length === 1 ? "" : "s"} (${closedCount} closed, ${openCount} open)`);
+      if (repaired) parts.push(`repaired fill data for ${repaired} existing trade${repaired === 1 ? "" : "s"}`);
+      if (dupes > 0 && !parts.length) parts.push(`no changes — all ${parsed.length} matched trades already in your journal with fill data`);
+      setImportMsg(parts.length ? `${parts.join("; ")}.` : "No matching trades found in this file.");
     };
     reader.onerror = () => setImportMsg("Couldn't read that file.");
     reader.readAsText(file);
