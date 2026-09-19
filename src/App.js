@@ -4808,21 +4808,42 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     const byTicker = new Map();
     for (const t of lodEligible) (byTicker.get(t.ticker) || byTicker.set(t.ticker, []).get(t.ticker)).push(t);
 
-    const barsByTicker = new Map(); // ticker -> raw intraday bars (real UTC seconds)
-    await Promise.all([...byTicker.entries()].map(async ([ticker, ts]) => {
-      const dates = ts.map(t => t.date).sort();
-      // 5m resolution: fine enough for a stop level, coarse enough that
-      // Yahoo's ~60-day intraday lookback covers a useful window of history.
-      const from = _dateToUnixSec(dates[0]);
-      const to = _dateToUnixSec(_addDays(dates[dates.length - 1], 1));
-      try {
-        const r = await fetch(`${TV_PROXY_URL}/bars?symbol=${encodeURIComponent(ticker)}&resolution=5&from=${from}&to=${to}`);
-        const { bars } = await r.json();
-        barsByTicker.set(ticker, (bars || []).map(b => ({ time: Math.floor(b.time / 1000), low: b.low })));
-      } catch {
-        barsByTicker.set(ticker, []);
+    // Retries on failure — at journal-wide scale (potentially many distinct
+    // tickers) a single dropped/slow request would otherwise permanently
+    // mark that ticker "no intraday history" even when it was just a
+    // transient blip, not genuinely missing data.
+    const fetchBarsWithRetry = async (ticker, from, to, retries = 2) => {
+      for (let attempt = 0; attempt <= retries; attempt++) {
+        try {
+          const r = await fetch(`${TV_PROXY_URL}/bars?symbol=${encodeURIComponent(ticker)}&resolution=5&from=${from}&to=${to}`);
+          if (r.ok) {
+            const { bars } = await r.json();
+            return (bars || []).map(b => ({ time: Math.floor(b.time / 1000), low: b.low }));
+          }
+        } catch { /* network error — retry */ }
+        if (attempt < retries) await new Promise(res => setTimeout(res, 500 * (attempt + 1)));
       }
-    }));
+      return [];
+    };
+
+    const barsByTicker = new Map(); // ticker -> raw intraday bars (real UTC seconds)
+    const tickerEntries = [...byTicker.entries()];
+    // Bounded concurrency instead of firing every ticker's fetch at once —
+    // a journal with many distinct tickers would otherwise burst dozens/
+    // hundreds of simultaneous requests through the proxy to Yahoo, which
+    // is exactly the pattern its unofficial API tends to rate-limit.
+    const CONCURRENCY = 6;
+    for (let i = 0; i < tickerEntries.length; i += CONCURRENCY) {
+      const chunk = tickerEntries.slice(i, i + CONCURRENCY);
+      await Promise.all(chunk.map(async ([ticker, ts]) => {
+        const dates = ts.map(t => t.date).sort();
+        // 5m resolution: fine enough for a stop level, coarse enough that
+        // Yahoo's ~60-day intraday lookback covers a useful window of history.
+        const from = _dateToUnixSec(dates[0]);
+        const to = _dateToUnixSec(_addDays(dates[dates.length - 1], 1));
+        barsByTicker.set(ticker, await fetchBarsWithRetry(ticker, from, to));
+      }));
+    }
 
     let filled = 0;
     const updated = trades.map(t => {
