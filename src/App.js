@@ -4813,15 +4813,32 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const expectancy = closed.length ? (winRate * avgWin) - ((1 - winRate) * avgLoss) : null;
 
   // Avg Hold, split by outcome — a blended number hides that winners and
-  // losers often behave on very different timelines.
+  // losers often behave on very different timelines. Same-day trades use
+  // entry_time/exit_time when both are recorded, so a scalped 20-minute
+  // trade doesn't register identically to one held all session — falls
+  // back to the date-only diff (whole days) when times aren't on record.
   const holdDaysOf = ts => ts.map(t => {
     if (!t.date || !t.exit_date) return null;
-    return (new Date(t.exit_date) - new Date(t.date)) / 86400000;
+    const dayDiff = (new Date(t.exit_date) - new Date(t.date)) / 86400000;
+    if (dayDiff === 0 && t.entry_time && t.exit_time) {
+      const toMin = s => { const [h, m] = s.split(":").map(Number); return h * 60 + m; };
+      return Math.max(0, toMin(t.exit_time) - toMin(t.entry_time)) / 1440;
+    }
+    return dayDiff;
   }).filter(v => v != null && v >= 0);
   const holdDaysWin  = holdDaysOf(winTrades);
   const holdDaysLoss = holdDaysOf(lossTrades);
   const avgHoldWin  = holdDaysWin.length  ? holdDaysWin.reduce((a, v) => a + v, 0) / holdDaysWin.length  : null;
   const avgHoldLoss = holdDaysLoss.length ? holdDaysLoss.reduce((a, v) => a + v, 0) / holdDaysLoss.length : null;
+  // Below 1 day, "0.0d" hides everything — step down to hours, then
+  // minutes, so a scalp and an overnight swing don't look identical.
+  const fmtHold = d => {
+    if (d == null) return "—";
+    if (d >= 1) return `${d.toFixed(1)}d`;
+    const hours = d * 24;
+    if (hours >= 1) return `${hours.toFixed(1)}h`;
+    return `${Math.round(hours * 60)}m`;
+  };
 
   // ── Filtered trades ──────────────────────────────────────────────────────────
   const visible = trades.filter(t => {
@@ -4985,8 +5002,8 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
           { label: "Avg R:R",          value: avgR != null ? avgR.toFixed(2) + "R" : "—", cls: avgR != null && avgR >= 1 ? "text-emerald-400" : avgR != null && avgR < 0 ? "text-red-400" : "text-zinc-400", sub: `${rMults.length} closed with R` },
           { label: "Avg Hold", custom: (
               <>
-                <div className="text-[15px] font-bold font-mono leading-tight text-emerald-400">W {avgHoldWin != null ? `${avgHoldWin.toFixed(1)}d` : "—"}</div>
-                <div className="text-[15px] font-bold font-mono leading-tight text-red-400">L {avgHoldLoss != null ? `${avgHoldLoss.toFixed(1)}d` : "—"}</div>
+                <div className="text-[15px] font-bold font-mono leading-tight text-emerald-400">W {fmtHold(avgHoldWin)}</div>
+                <div className="text-[15px] font-bold font-mono leading-tight text-red-400">L {fmtHold(avgHoldLoss)}</div>
               </>
             ), sub: `${holdDaysWin.length + holdDaysLoss.length} trades with exit date` },
           { label: "Expectancy",       value: expectancy != null ? `${expectancy >= 0 ? "+" : ""}$${expectancy.toFixed(0)}/trade` : "—", cls: expectancy != null && expectancy >= 0 ? "text-emerald-400" : expectancy != null ? "text-red-400" : "text-zinc-400", sub: closed.length ? (
