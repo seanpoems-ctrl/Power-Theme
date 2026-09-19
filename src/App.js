@@ -2,7 +2,7 @@ import React, { useState, useEffect, useLayoutEffect, useMemo, useCallback, useR
 import ETF_MAP_JSON from "./etf_map.json";
 import { ChevronDown, ChevronRight, Activity, BarChart3, RefreshCw, Search, SlidersHorizontal, X, Zap, TrendingUp, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink } from "lucide-react";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
-import { createChart, CandlestickSeries, createSeriesMarkers } from "lightweight-charts";
+import { createChart, CandlestickSeries, LineSeries, HistogramSeries, createSeriesMarkers } from "lightweight-charts";
 import useMarketStore from "./useMarketStore";
 import GlobalAlertBanner from "./GlobalAlertBanner";
 import MarketBreadthMonitor from "./MarketBreadthMonitor";
@@ -3974,13 +3974,26 @@ function _nyOffsetHours(dateStr) {
   const m = tz.match(/GMT([+-]\d+)/);
   return m ? -parseInt(m[1], 10) : 5;
 }
-// A date + "HH:MM" ET wall-clock time -> unix seconds (UTC), matching the
-// epoch convention of bars returned by the proxy.
-function _dateTimeToUnixSec(dateStr, timeStr) {
+// Lightweight Charts always renders its axis/crosshair time labels using
+// UTC clock fields, regardless of the viewer's own timezone — so a bar's
+// true UTC unix time was displaying as UTC clock time (e.g. a 10:31 ET fill
+// showing as "14:31"). Shifting each intraday bar's `time` by that date's
+// ET/UTC offset before it reaches the chart makes the library's
+// UTC-formatted label read as ET wall-clock time instead. Daily/Weekly bars
+// are left alone — their tick labels are date-only, and shifting could push
+// a bar's UTC timestamp across a calendar-day boundary.
+function _utcToEtDisplaySec(utcSec) {
+  const etDateStr = new Date(utcSec * 1000).toLocaleDateString("en-CA", { timeZone: "America/New_York" });
+  return utcSec - _nyOffsetHours(etDateStr) * 3600;
+}
+// Once bar times are shifted for display (above), a bar's `time` numerically
+// reads as its ET wall-clock moment rather than a true UTC instant — so
+// matching a recorded ET fill time against those (shifted) bars needs the
+// date+time treated as literal UTC, not converted to a real UTC instant
+// (which would double-apply the offset).
+function _etWallClockAsUtcSec(dateStr, timeStr) {
   const [hh, mm] = timeStr.split(":").map(Number);
-  const d = new Date(dateStr + "T00:00:00Z");
-  d.setUTCHours(hh + _nyOffsetHours(dateStr), mm, 0, 0);
-  return Math.floor(d.getTime() / 1000);
+  return _dateToUnixSec(dateStr) + hh * 3600 + mm * 60;
 }
 
 // Intraday resolutions have limited lookback on Yahoo's backend (1m ~7d, up
@@ -3996,6 +4009,39 @@ const TIMEFRAME_OPTS = [
   { key: "W",  label: "1W" },
 ];
 const _isIntraday = tf => tf !== "D" && tf !== "W";
+
+// Exponential moving average over a series that may start with nulls (e.g.
+// a MACD line, which has no value until both its underlying EMAs are
+// seeded). Skips leading nulls, seeds with a simple average over the first
+// `period` values, then continues recursively. Returns an array the same
+// length as `values`, with nulls wherever there isn't enough history yet.
+function _emaSeries(values, period) {
+  const out = new Array(values.length).fill(null);
+  const start = values.findIndex(v => v != null);
+  if (start === -1 || values.length - start < period) return out;
+  const k = 2 / (period + 1);
+  let seed = 0;
+  for (let i = start; i < start + period; i++) seed += values[i];
+  seed /= period;
+  out[start + period - 1] = seed;
+  let prev = seed;
+  for (let i = start + period; i < values.length; i++) {
+    prev = values[i] * k + prev * (1 - k);
+    out[i] = prev;
+  }
+  return out;
+}
+
+// EMA overlay colors — matches a reference chart's convention (fast→slow:
+// teal, orange, blue, silver).
+const EMA_OVERLAY_CONFIG = [
+  { period: 9,   color: "#2dd4bf" },
+  { period: 21,  color: "#fb923c" },
+  { period: 50,  color: "#3b82f6" },
+  { period: 150, color: "#d4d4d8" },
+];
+const MACD_FAST = 6, MACD_SLOW = 20, MACD_SIGNAL = 9;
+const MACD_LINE_COLOR = "#22d3ee", MACD_SIGNAL_COLOR = "#f472b6";
 
 // Candlestick chart for one trade using TradingView's Lightweight Charts
 // (Apache-2.0, plain npm package — not the licensed Advanced Charts library,
@@ -4043,10 +4089,18 @@ const TradeChartModal = ({ trade, onClose }) => {
         if (chartRef.current) { chartRef.current.remove(); chartRef.current = null; }
         if (!bars || bars.length < 2) { setStatus("no-data"); return; }
 
-        const data = bars.map(b => ({
-          time: Math.floor(b.time / 1000), // Worker returns ms; Lightweight Charts wants unix seconds
-          open: b.open, high: b.high, low: b.low, close: b.close,
-        }));
+        const data = bars.map(b => {
+          const t = Math.floor(b.time / 1000); // Worker returns ms; Lightweight Charts wants unix seconds
+          return {
+            time: _isIntraday(timeframe) ? _utcToEtDisplaySec(t) : t,
+            open: b.open, high: b.high, low: b.low, close: b.close,
+          };
+        });
+        // `data[].time` is display-shifted for intraday (see above), so
+        // pagination fetches — which need real UTC seconds to query the
+        // proxy — track the true UTC time of the oldest loaded bar
+        // separately rather than reading it back off `data`.
+        let oldestUtcSec = bars.length ? Math.floor(bars[0].time / 1000) : null;
 
         const chart = createChart(containerRef.current, {
           layout: { background: { color: "#09090b" }, textColor: "#a1a1aa" },
@@ -4066,6 +4120,47 @@ const TradeChartModal = ({ trade, onClose }) => {
         });
         series.setData(data);
 
+        // EMA overlays (9/21/50/150) above 5m — at 1m/5m granularity they're
+        // mostly noise. MACD(6,20,9) is the reverse: only meaningful at 5m,
+        // so it only appears there, in its own sub-pane.
+        const showEMA = timeframe !== "1" && timeframe !== "5";
+        const showMACD = timeframe === "5";
+        const emaLines = showEMA
+          ? EMA_OVERLAY_CONFIG.map(cfg => ({
+              period: cfg.period,
+              series: chart.addSeries(LineSeries, {
+                color: cfg.color, lineWidth: 1, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false,
+              }),
+            }))
+          : [];
+        const macd = showMACD ? {
+          hist: chart.addSeries(HistogramSeries, { priceLineVisible: false, lastValueVisible: false }, 1),
+          line: chart.addSeries(LineSeries, { color: MACD_LINE_COLOR, lineWidth: 1, priceLineVisible: false, lastValueVisible: false }, 1),
+          signal: chart.addSeries(LineSeries, { color: MACD_SIGNAL_COLOR, lineWidth: 1, priceLineVisible: false, lastValueVisible: false }, 1),
+        } : null;
+        const buildLineData = values => data.reduce((acc, b, i) => {
+          if (values[i] != null) acc.push({ time: b.time, value: values[i] });
+          return acc;
+        }, []);
+        const refreshIndicators = () => {
+          const closes = data.map(b => b.close);
+          emaLines.forEach(({ period, series: s }) => s.setData(buildLineData(_emaSeries(closes, period))));
+          if (macd) {
+            const fast = _emaSeries(closes, MACD_FAST);
+            const slow = _emaSeries(closes, MACD_SLOW);
+            const macdVals = closes.map((_, i) => (fast[i] != null && slow[i] != null) ? fast[i] - slow[i] : null);
+            const signalVals = _emaSeries(macdVals, MACD_SIGNAL);
+            const histVals = closes.map((_, i) => (macdVals[i] != null && signalVals[i] != null) ? macdVals[i] - signalVals[i] : null);
+            macd.line.setData(buildLineData(macdVals));
+            macd.signal.setData(buildLineData(signalVals));
+            macd.hist.setData(data.reduce((acc, b, i) => {
+              if (histVals[i] != null) acc.push({ time: b.time, value: histVals[i], color: histVals[i] >= 0 ? "#22c55e" : "#ef4444" });
+              return acc;
+            }, []));
+          }
+        };
+        refreshIndicators();
+
         // Infinite-scroll-back: fetch another chunk further into the past
         // once the visible range nears the start of what's loaded, instead
         // of a bigger-but-still-finite fixed window that just moves the same
@@ -4077,9 +4172,9 @@ const TradeChartModal = ({ trade, onClose }) => {
           if (loadingOlder || noMoreOlder || cancelled || !data.length) return;
           loadingOlder = true;
           setStatus(s => s === "ready" ? "loading-more" : s);
-          const oldestDate = new Date(data[0].time * 1000).toISOString().slice(0, 10);
+          const oldestDate = new Date(oldestUtcSec * 1000).toISOString().slice(0, 10);
           const olderFrom = _dateToUnixSec(_addDays(oldestDate, -chunkDays));
-          const olderTo = data[0].time - 1;
+          const olderTo = oldestUtcSec - 1;
           fetch(`${TV_PROXY_URL}/bars?symbol=${encodeURIComponent(trade.ticker)}&resolution=${timeframe}&from=${olderFrom}&to=${olderTo}`)
             .then(r => r.json())
             .then(({ bars: olderBars }) => {
@@ -4088,11 +4183,16 @@ const TradeChartModal = ({ trade, onClose }) => {
               setStatus(s => s === "loading-more" ? "ready" : s);
               if (!olderBars || !olderBars.length) { noMoreOlder = true; return; }
               const older = olderBars
-                .map(b => ({ time: Math.floor(b.time / 1000), open: b.open, high: b.high, low: b.low, close: b.close }))
+                .map(b => {
+                  const t = Math.floor(b.time / 1000);
+                  return { time: _isIntraday(timeframe) ? _utcToEtDisplaySec(t) : t, open: b.open, high: b.high, low: b.low, close: b.close };
+                })
                 .filter(b => b.time < data[0].time);
               if (!older.length) { noMoreOlder = true; return; }
+              oldestUtcSec = Math.floor(olderBars[0].time / 1000);
               data.unshift(...older);
               series.setData(data);
+              refreshIndicators();
             })
             .catch(() => { loadingOlder = false; if (!cancelled) setStatus(s => s === "loading-more" ? "ready" : s); });
         };
@@ -4123,7 +4223,11 @@ const TradeChartModal = ({ trade, onClose }) => {
         // an IBKR import's actual execution timestamp), so the marker lands
         // on the true entry/exit candle instead of an approximated one.
         const barContaining = (dateStr, timeStr) => {
-          const target = _dateTimeToUnixSec(dateStr, timeStr);
+          // Only ever called on intraday timeframes (see hasEntryTime/
+          // hasExitTime below), where `data[].time` is already display-
+          // shifted to read as ET wall-clock — so the target needs the same
+          // literal-as-UTC treatment.
+          const target = _etWallClockAsUtcSec(dateStr, timeStr);
           for (let i = data.length - 1; i >= 0; i--) if (data[i].time <= target) return data[i];
           return data[0];
         };
@@ -4221,6 +4325,28 @@ const TradeChartModal = ({ trade, onClose }) => {
                 </button>
               ))}
             </div>
+            {timeframe !== "1" && timeframe !== "5" && (
+              <div className="flex items-center gap-2 text-[10px] text-zinc-500">
+                {EMA_OVERLAY_CONFIG.map(cfg => (
+                  <span key={cfg.period} className="flex items-center gap-1">
+                    <span className="w-2 h-0.5 inline-block" style={{ backgroundColor: cfg.color }}/>
+                    EMA{cfg.period}
+                  </span>
+                ))}
+              </div>
+            )}
+            {timeframe === "5" && (
+              <div className="flex items-center gap-2 text-[10px] text-zinc-500">
+                <span className="flex items-center gap-1">
+                  <span className="w-2 h-0.5 inline-block" style={{ backgroundColor: MACD_LINE_COLOR }}/>
+                  MACD (6,20)
+                </span>
+                <span className="flex items-center gap-1">
+                  <span className="w-2 h-0.5 inline-block" style={{ backgroundColor: MACD_SIGNAL_COLOR }}/>
+                  Signal (9)
+                </span>
+              </div>
+            )}
             {_isIntraday(timeframe) && (
               <span className="text-[10px] text-zinc-600">
                 {trade.entry_time || trade.exit_time
