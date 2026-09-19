@@ -4808,11 +4808,17 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     const byTicker = new Map();
     for (const t of lodEligible) (byTicker.get(t.ticker) || byTicker.set(t.ticker, []).get(t.ticker)).push(t);
 
-    // Retries on failure — at journal-wide scale (potentially many distinct
-    // tickers) a single dropped/slow request would otherwise permanently
-    // mark that ticker "no intraday history" even when it was just a
-    // transient blip, not genuinely missing data.
-    const fetchBarsWithRetry = async (ticker, from, to, retries = 2) => {
+    // The Worker propagates Yahoo's own failure as a non-OK status (never a
+    // fake 200-with-empty-bars — see cloudflare-worker/worker.js), so a
+    // retry here is a real second chance, not a no-op. At small scale a
+    // dropped request is a rare blip and a short retry is plenty; at
+    // journal-wide scale (hundreds of distinct tickers) the real risk is
+    // Yahoo's own rate-limiting kicking in from the sheer request volume,
+    // which needs actual seconds of backoff to clear, not milliseconds —
+    // a real run against 889 eligible trades hit exactly this (0 filled,
+    // "couldn't find intraday history for any eligible trades") with the
+    // previous 500ms/1s backoff.
+    const fetchBarsWithRetry = async (ticker, from, to, retries = 3) => {
       for (let attempt = 0; attempt <= retries; attempt++) {
         try {
           const r = await fetch(`${TV_PROXY_URL}/bars?symbol=${encodeURIComponent(ticker)}&resolution=5&from=${from}&to=${to}`);
@@ -4821,18 +4827,19 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
             return (bars || []).map(b => ({ time: Math.floor(b.time / 1000), low: b.low }));
           }
         } catch { /* network error — retry */ }
-        if (attempt < retries) await new Promise(res => setTimeout(res, 500 * (attempt + 1)));
+        if (attempt < retries) await new Promise(res => setTimeout(res, 1500 * 2 ** attempt));
       }
       return [];
     };
 
     const barsByTicker = new Map(); // ticker -> raw intraday bars (real UTC seconds)
     const tickerEntries = [...byTicker.entries()];
-    // Bounded concurrency instead of firing every ticker's fetch at once —
-    // a journal with many distinct tickers would otherwise burst dozens/
-    // hundreds of simultaneous requests through the proxy to Yahoo, which
-    // is exactly the pattern its unofficial API tends to rate-limit.
-    const CONCURRENCY = 6;
+    // Bounded concurrency, and a pause between chunks (not just limiting
+    // how many are in flight at once) — a journal with many distinct
+    // tickers would otherwise sustain a high aggregate request rate through
+    // the proxy to Yahoo across many back-to-back chunks even at low
+    // concurrency, which is exactly the pattern its unofficial API rate-limits.
+    const CONCURRENCY = 4;
     for (let i = 0; i < tickerEntries.length; i += CONCURRENCY) {
       const chunk = tickerEntries.slice(i, i + CONCURRENCY);
       await Promise.all(chunk.map(async ([ticker, ts]) => {
@@ -4843,6 +4850,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         const to = _dateToUnixSec(_addDays(dates[dates.length - 1], 1));
         barsByTicker.set(ticker, await fetchBarsWithRetry(ticker, from, to));
       }));
+      if (i + CONCURRENCY < tickerEntries.length) await new Promise(res => setTimeout(res, 400));
     }
 
     let filled = 0;
@@ -4860,10 +4868,15 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     });
     if (filled) persist(updated);
     const skipped = lodEligible.length - filled;
+    // A large skip count is more likely a Yahoo rate-limit than every one of
+    // those trades genuinely lacking history — this is idempotent (already-
+    // filled trades are skipped on the next pass), so re-running later is
+    // always safe and picks up wherever this run left off.
+    const retryHint = skipped >= 20 ? " Re-running the backfill again in a bit may pick up more of these." : "";
     setImportMsg(
       filled
-        ? `Filled stop price for ${filled} trade${filled === 1 ? "" : "s"} using the low observed before entry (−0.08%)${skipped ? `; ${skipped} skipped (no intraday history that far back)` : ""}.`
-        : "Couldn't find intraday history for any eligible trades — Yahoo's intraday data typically only goes back ~60 days."
+        ? `Filled stop price for ${filled} trade${filled === 1 ? "" : "s"} using the low observed before entry (−0.08%)${skipped ? `; ${skipped} skipped (no intraday history that far back).${retryHint}` : "."}`
+        : `Couldn't find intraday history for any eligible trades — Yahoo's intraday data typically only goes back ~60 days.${retryHint}`
     );
     setLodBackfillLoading(false);
   };
