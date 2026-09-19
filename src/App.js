@@ -3898,7 +3898,7 @@ const TradeChartModal = ({ trade, onClose }) => {
   const containerRef = useRef(null);
   const chartRef = useRef(null);
   const [timeframe, setTimeframe] = useState("D");
-  const [status, setStatus] = useState(TV_PROXY_URL ? "loading" : "no-proxy"); // loading | ready | no-data | error | no-proxy
+  const [status, setStatus] = useState(TV_PROXY_URL ? "loading" : "no-proxy"); // loading | ready | loading-more | no-data | error | no-proxy
 
   React.useEffect(() => {
     const h = e => { if (e.key === "Escape") onClose(); };
@@ -3951,6 +3951,39 @@ const TradeChartModal = ({ trade, onClose }) => {
           wickUpColor: "#22c55e", wickDownColor: "#ef4444",
         });
         series.setData(data);
+
+        // Infinite-scroll-back: fetch another chunk further into the past
+        // once the visible range nears the start of what's loaded, instead
+        // of a bigger-but-still-finite fixed window that just moves the same
+        // wall further out. Stops once the proxy returns nothing further
+        // back (the ticker's actual listing date) or a fetch is in flight.
+        let loadingOlder = false, noMoreOlder = false;
+        const chunkDays = _isIntraday(timeframe) ? 3 : timeframe === "W" ? 365 : 180;
+        const loadOlder = () => {
+          if (loadingOlder || noMoreOlder || cancelled || !data.length) return;
+          loadingOlder = true;
+          setStatus(s => s === "ready" ? "loading-more" : s);
+          const oldestDate = new Date(data[0].time * 1000).toISOString().slice(0, 10);
+          const olderFrom = _dateToUnixSec(_addDays(oldestDate, -chunkDays));
+          const olderTo = data[0].time - 1;
+          fetch(`${TV_PROXY_URL}/bars?symbol=${encodeURIComponent(trade.ticker)}&resolution=${timeframe}&from=${olderFrom}&to=${olderTo}`)
+            .then(r => r.json())
+            .then(({ bars: olderBars }) => {
+              loadingOlder = false;
+              if (cancelled) return;
+              setStatus(s => s === "loading-more" ? "ready" : s);
+              if (!olderBars || !olderBars.length) { noMoreOlder = true; return; }
+              const older = olderBars
+                .map(b => ({ time: Math.floor(b.time / 1000), open: b.open, high: b.high, low: b.low, close: b.close }))
+                .filter(b => b.time < data[0].time);
+              if (!older.length) { noMoreOlder = true; return; }
+              data.unshift(...older);
+              series.setData(data);
+            })
+            .catch(() => { loadingOlder = false; if (!cancelled) setStatus(s => s === "loading-more" ? "ready" : s); });
+        };
+        const rangeHandler = (range) => { if (range && range.from <= 5) loadOlder(); };
+        chart.timeScale().subscribeVisibleLogicalRangeChange(rangeHandler);
 
         // Nearest bar at-or-after a given date — trade dates can land on a
         // weekend/holiday with no bar (e.g. an IBKR import's exit_date).
@@ -4100,6 +4133,11 @@ const TradeChartModal = ({ trade, onClose }) => {
               <div ref={containerRef} style={{ width: "100%", height: "100%", minHeight: "500px" }}/>
               {status === "loading" && (
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[12px]">Loading chart…</div>
+              )}
+              {status === "loading-more" && (
+                <div className="absolute top-2 left-2 text-[10px] text-zinc-500 bg-zinc-900/80 px-2 py-1 rounded border border-zinc-700/50">
+                  Loading earlier history…
+                </div>
               )}
               {status === "no-data" && (
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[12px] text-center px-8">
