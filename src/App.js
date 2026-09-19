@@ -4766,15 +4766,18 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   // period together instead of needing three separate controls.
   const todayStr = new Date().toISOString().slice(0, 10);
   const PERIOD_PRESETS = [
+    { k: "all", l: "All", from: null },
     { k: "7d",  l: "7D",  from: _addDays(todayStr, -6) },
     { k: "mtd", l: "MTD", from: todayStr.slice(0, 8) + "01" },
     { k: "1m",  l: "1M",  from: _addMonths(todayStr, -1) },
     { k: "ytd", l: "YTD", from: todayStr.slice(0, 4) + "-01-01" },
     { k: "1y",  l: "1Y",  from: _addMonths(todayStr, -12) },
   ];
-  const activePeriod = PERIOD_PRESETS.find(p => fFrom === p.from && fTo === todayStr)?.k || null;
+  // No date filter set = "All" — the default, unfiltered state — rather
+  // than leaving every preset unhighlighted when nothing's selected.
+  const activePeriod = (!fFrom && !fTo) ? "all" : (PERIOD_PRESETS.find(p => p.from && fFrom === p.from && fTo === todayStr)?.k || null);
   const togglePeriod = preset => {
-    if (activePeriod === preset.k) { setFFrom(""); setFTo(""); }
+    if (preset.k === "all" || activePeriod === preset.k) { setFFrom(""); setFTo(""); }
     else { setFFrom(preset.from); setFTo(todayStr); }
   };
 
@@ -4806,6 +4809,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const avgWin  = winTrades.length  ? winTrades.reduce((s, t) => s + (parseFloat(t.pnl_dollars) || 0), 0) / winTrades.length : 0;
   const avgLoss = lossTrades.length ? Math.abs(lossTrades.reduce((s, t) => s + (parseFloat(t.pnl_dollars) || 0), 0) / lossTrades.length) : 0;
   const winRate = closed.length ? winTrades.length / closed.length : 0;
+  const lossRate = closed.length ? lossTrades.length / closed.length : 0;
   const expectancy = closed.length ? (winRate * avgWin) - ((1 - winRate) * avgLoss) : null;
 
   // Avg Hold, split by outcome — a blended number hides that winners and
@@ -4985,7 +4989,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                 <div className="text-[15px] font-bold font-mono leading-tight text-red-400">L {avgHoldLoss != null ? `${avgHoldLoss.toFixed(1)}d` : "—"}</div>
               </>
             ), sub: `${holdDaysWin.length + holdDaysLoss.length} trades with exit date` },
-          { label: "Expectancy",       value: expectancy != null ? `${expectancy >= 0 ? "+" : ""}$${expectancy.toFixed(0)}/trade` : "—", cls: expectancy != null && expectancy >= 0 ? "text-emerald-400" : expectancy != null ? "text-red-400" : "text-zinc-400", sub: closed.length ? `${(winRate * 100).toFixed(0)}% win · avg +$${avgWin.toFixed(0)} / -$${avgLoss.toFixed(0)}` : "no closed trades" },
+          { label: "Expectancy",       value: expectancy != null ? `${expectancy >= 0 ? "+" : ""}$${expectancy.toFixed(0)}/trade` : "—", cls: expectancy != null && expectancy >= 0 ? "text-emerald-400" : expectancy != null ? "text-red-400" : "text-zinc-400", sub: closed.length ? `${(winRate * 100).toFixed(0)}% win · ${(lossRate * 100).toFixed(0)}% loss · avg +$${avgWin.toFixed(0)} / -$${avgLoss.toFixed(0)}` : "no closed trades" },
         ].map(m => (
           <div key={m.label} className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
             <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-1.5">{m.label}</div>
