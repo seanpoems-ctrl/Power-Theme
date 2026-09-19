@@ -4482,6 +4482,10 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     const numeric = NUMERIC_SORT_COLS.has(sortCol);
     return [...visible].sort((a, b) => {
       let av = a[sortCol], bv = b[sortCol];
+      if (sortCol === "date") {
+        av = `${a.date || ""} ${a.entry_time || ""}`.trim();
+        bv = `${b.date || ""} ${b.entry_time || ""}`.trim();
+      }
       if (numeric) {
         av = av === "" || av == null ? null : parseFloat(av);
         bv = bv === "" || bv == null ? null : parseFloat(bv);
