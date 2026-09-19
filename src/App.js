@@ -4051,7 +4051,10 @@ const TradeChartModal = ({ trade, onClose }) => {
         const chart = createChart(containerRef.current, {
           layout: { background: { color: "#09090b" }, textColor: "#a1a1aa" },
           grid: { vertLines: { color: "#27272a" }, horzLines: { color: "#27272a" } },
-          timeScale: { borderColor: "#3f3f46" },
+          // Below 1D, tick labels are otherwise just the day number repeated
+          // across every bar (unreadable for intraday) — timeVisible shows
+          // HH:mm alongside the date on those resolutions.
+          timeScale: { borderColor: "#3f3f46", timeVisible: _isIntraday(timeframe), secondsVisible: false },
           rightPriceScale: { borderColor: "#3f3f46" },
           autoSize: true,
         });
