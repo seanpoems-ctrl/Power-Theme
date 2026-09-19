@@ -4265,6 +4265,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [fSide, setFSide]           = useState("");
   const [fFrom, setFFrom]           = useState("");
   const [fTo, setFTo]               = useState("");
+  const [selectedIds, setSelectedIds] = useState(() => new Set());
 
   // Same stock_db.json the search bar reads, so a ticker resolves to the same
   // Theme here as it would if you typed it into the search box.
@@ -4337,6 +4338,18 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   };
 
   const deleteTrade = (id) => { if (window.confirm("Delete this trade?")) persist(trades.filter(t => t.id !== id)); };
+
+  const toggleSelected = (id) => setSelectedIds(prev => {
+    const next = new Set(prev);
+    if (next.has(id)) next.delete(id); else next.add(id);
+    return next;
+  });
+  const deleteSelected = () => {
+    if (!selectedIds.size) return;
+    if (!window.confirm(`Delete ${selectedIds.size} selected trade${selectedIds.size === 1 ? "" : "s"}?`)) return;
+    persist(trades.filter(t => !selectedIds.has(t.id)));
+    setSelectedIds(new Set());
+  };
 
   const persistNotebook = (arr) => { setNotebook(arr); saveNotebook(arr); };
   const addNote = () => {
@@ -4483,6 +4496,17 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       return sortDir === "asc" ? av.localeCompare(bv) : bv.localeCompare(av);
     });
   }, [visible, sortCol, sortDir]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // "Select all" operates on whatever's currently visible (filtered/sorted),
+  // not the whole journal — matches how the Winners/Losers/Filters scoping
+  // already works for everything else on this tab.
+  const allVisibleSelected = sortedVisible.length > 0 && sortedVisible.every(t => selectedIds.has(t.id));
+  const toggleSelectAllVisible = () => setSelectedIds(prev => {
+    const next = new Set(prev);
+    if (allVisibleSelected) sortedVisible.forEach(t => next.delete(t.id));
+    else sortedVisible.forEach(t => next.add(t.id));
+    return next;
+  });
 
   // ── Performance by theme ─────────────────────────────────────────────────────
   const byTheme = useMemo(() => {
@@ -4641,6 +4665,12 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
             Fix broken dates
           </button>
         )}
+        {selectedIds.size > 0 && (
+          <button onClick={deleteSelected}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-red-500/15 text-red-400 border border-red-500/30 rounded-lg hover:bg-red-500/25 transition-colors">
+            ✕ Delete {selectedIds.size} selected
+          </button>
+        )}
         <button onClick={() => { setImportMsg(null); fileInputRef.current?.click(); }}
           className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 rounded-lg hover:bg-zinc-700/60 transition-colors">
           ⬆ Import IBKR CSV
@@ -4701,6 +4731,10 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
             <thead className="border-b border-zinc-800/60 bg-zinc-900/80">
               <tr>
                 <TH w="w-8"/>
+                <th className="px-2 py-2 w-8">
+                  <input type="checkbox" checked={allVisibleSelected} onChange={toggleSelectAllVisible}
+                    title="Select all visible" className="cursor-pointer accent-blue-500"/>
+                </th>
                 <TH col="date">Date</TH>
                 <TH col="ticker">Ticker</TH>
                 <TH col="theme">Theme</TH>
@@ -4719,6 +4753,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
               {/* ── Inline add form row ── */}
               {showForm && (
                 <tr className="border-b border-zinc-700/60 bg-blue-500/5">
+                  <td className="px-2 py-2"/>
                   <td className="px-2 py-2"/>
                   {[
                     { f:"date",        type:"date",   ph:"Date"    },
@@ -4801,11 +4836,15 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
 
               {/* ── Existing trades ── */}
               {visible.length === 0 ? (
-                <tr><td colSpan={13} className="py-12 text-center text-zinc-600 text-[12px] italic">No trades yet — click "+ Add Trade" to begin</td></tr>
+                <tr><td colSpan={14} className="py-12 text-center text-zinc-600 text-[12px] italic">No trades yet — click "+ Add Trade" to begin</td></tr>
               ) : sortedVisible.map(t => (
-                <tr key={t.id} className={`border-b border-zinc-800/30 transition-colors ${rowBg(t)}`}>
+                <tr key={t.id} className={`border-b border-zinc-800/30 transition-colors ${selectedIds.has(t.id) ? "bg-blue-500/10" : rowBg(t)}`}>
                   <td className="px-2 py-2">
                     <button onClick={() => deleteTrade(t.id)} className="text-zinc-700 hover:text-red-400 transition-colors text-[11px]">✕</button>
+                  </td>
+                  <td className="px-2 py-2">
+                    <input type="checkbox" checked={selectedIds.has(t.id)} onChange={() => toggleSelected(t.id)}
+                      className="cursor-pointer accent-blue-500"/>
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-500 whitespace-nowrap">
                     {t.date || "—"}{" "}
