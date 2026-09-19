@@ -3074,7 +3074,7 @@ const NOTEBOOK_KEY     = "power_theme_journal_notebook";
 const JOURNAL_AI_KEY  = process.env.REACT_APP_GEMINI_KEY || "";
 
 const EMPTY_TRADE = {
-  id: "", date: "", exit_date: "", ticker: "", theme: "", setup: "", side: "long", entry_price: "", exit_price: "",
+  id: "", date: "", entry_time: "", exit_date: "", exit_time: "", ticker: "", theme: "", setup: "", side: "long", entry_price: "", exit_price: "",
   shares: "", stop_used: "ATR", stop_price: "", pnl_dollars: "", pnl_pct: "",
   r_multiple: "", grade: "", notes: "",
 };
@@ -3194,7 +3194,8 @@ function parseIbkrTrades(csvText, categoryThemeMap = {}) {
       const qty = _ibkrNum(cells[header["Quantity"]]);
       const price = _ibkrNum(cells[header["T. Price"]] ?? cells[header["Price"]]);
       if (!symbol || !dt || isNaN(qty) || isNaN(price) || qty === 0) continue;
-      execs.push({ symbol: symbol.trim(), date: dt.split(",")[0].trim(), qty, price });
+      const [dPart, tPart] = dt.split(",").map(s => s.trim());
+      execs.push({ symbol: symbol.trim(), date: dPart, time: (tPart || "").slice(0, 5), qty, price });
     }
   }
 
@@ -3216,7 +3217,8 @@ function parseIbkrTrades(csvText, categoryThemeMap = {}) {
           const symbol = cells[symIdx], dt = cells[dateIdx];
           const qty = _ibkrNum(cells[qtyIdx]), price = _ibkrNum(cells[priceIdx]);
           if (!symbol || !dt || isNaN(qty) || isNaN(price) || qty === 0) continue;
-          execs.push({ symbol: symbol.trim(), date: dt.split(",")[0].trim(), qty, price });
+          const [dPart, tPart] = dt.split(",").map(s => s.trim());
+          execs.push({ symbol: symbol.trim(), date: dPart, time: (tPart || "").slice(0, 5), qty, price });
         }
       }
     }
@@ -3228,13 +3230,13 @@ function parseIbkrTrades(csvText, categoryThemeMap = {}) {
 
   const trades = [];
   for (const [symbol, list] of Object.entries(bySymbol)) {
-    list.sort((a, b) => a.date.localeCompare(b.date));
-    let running = 0, segBuys = [], segSells = [], segStart = null, segLastDate = null;
+    list.sort((a, b) => `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`));
+    let running = 0, segBuys = [], segSells = [], segStart = null, segStartTime = null, segLastDate = null, segLastTime = null;
     const flush = (isOpen) => {
       if (!segBuys.length && !segSells.length) return;
       const sumQty = arr => arr.reduce((s, x) => s + Math.abs(x.qty), 0);
       const wavg = arr => { const q = sumQty(arr); return q ? arr.reduce((s, x) => s + x.price * Math.abs(x.qty), 0) / q : null; };
-      const longFirst = segBuys.length && (!segSells.length || segBuys[0].date <= segSells[0].date);
+      const longFirst = segBuys.length && (!segSells.length || `${segBuys[0].date} ${segBuys[0].time}` <= `${segSells[0].date} ${segSells[0].time}`);
       const entrySide = longFirst ? segBuys : segSells;
       const exitSide  = longFirst ? segSells : segBuys;
       const entryAvg = wavg(entrySide), exitAvg = wavg(exitSide);
@@ -3242,7 +3244,9 @@ function parseIbkrTrades(csvText, categoryThemeMap = {}) {
         ...EMPTY_TRADE,
         id: newId(),
         date: segStart,
+        entry_time: segStartTime || "",
         exit_date: isOpen ? "" : segLastDate,
+        exit_time: isOpen ? "" : (segLastTime || ""),
         ticker: symbol,
         theme: categoryThemeMap[symbol] || "",
         side: longFirst ? "long" : "short",
@@ -3251,11 +3255,11 @@ function parseIbkrTrades(csvText, categoryThemeMap = {}) {
         shares: Math.round(Math.min(sumQty(segBuys), sumQty(segSells)) || sumQty(entrySide)),
         notes: "Imported from IBKR",
       });
-      segBuys = []; segSells = []; segStart = null; segLastDate = null;
+      segBuys = []; segSells = []; segStart = null; segStartTime = null; segLastDate = null; segLastTime = null;
     };
     for (const e of list) {
-      if (segStart === null) segStart = e.date;
-      segLastDate = e.date;
+      if (segStart === null) { segStart = e.date; segStartTime = e.time; }
+      segLastDate = e.date; segLastTime = e.time;
       if (e.qty > 0) segBuys.push(e); else segSells.push(e);
       running += e.qty;
       if (Math.abs(running) < 1e-9) { flush(false); running = 0; }
@@ -3848,6 +3852,25 @@ function _addDays(dateStr, days) {
   d.setUTCDate(d.getUTCDate() + days);
   return d.toISOString().slice(0, 10);
 }
+// Hours to ADD to an America/New_York wall-clock time to get UTC, for a given
+// date (4 during EDT, 5 during EST) — computed via Intl so DST transitions
+// are handled correctly without a hardcoded date range. US equities' fill
+// times (IBKR statements, this app's whole domain) are ET by convention.
+function _nyOffsetHours(dateStr) {
+  const d = new Date(dateStr + "T12:00:00Z"); // noon UTC avoids day-boundary edge cases
+  const parts = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", timeZoneName: "shortOffset" }).formatToParts(d);
+  const tz = parts.find(p => p.type === "timeZoneName")?.value || "GMT-5";
+  const m = tz.match(/GMT([+-]\d+)/);
+  return m ? -parseInt(m[1], 10) : 5;
+}
+// A date + "HH:MM" ET wall-clock time -> unix seconds (UTC), matching the
+// epoch convention of bars returned by the proxy.
+function _dateTimeToUnixSec(dateStr, timeStr) {
+  const [hh, mm] = timeStr.split(":").map(Number);
+  const d = new Date(dateStr + "T00:00:00Z");
+  d.setUTCHours(hh + _nyOffsetHours(dateStr), mm, 0, 0);
+  return Math.floor(d.getTime() / 1000);
+}
 
 // Intraday resolutions have limited lookback on Yahoo's backend (1m ~7d, up
 // to 60m ~2yr) — an older trade will legitimately return no bars at those
@@ -3946,8 +3969,19 @@ const TradeChartModal = ({ trade, onClose }) => {
           const dayBars = data.filter(b => b.time >= start && b.time < end);
           return dayBars.length ? dayBars[dayBars.length - 1] : barAtOrAfter(dateStr);
         };
+        // The bar whose window contains a given date+time (ET) — used when a
+        // real fill time is on record (typed in manually, or captured from
+        // an IBKR import's actual execution timestamp), so the marker lands
+        // on the true entry/exit candle instead of an approximated one.
+        const barContaining = (dateStr, timeStr) => {
+          const target = _dateTimeToUnixSec(dateStr, timeStr);
+          for (let i = data.length - 1; i >= 0; i--) if (data[i].time <= target) return data[i];
+          return data[0];
+        };
 
-        const entryBar = barAtOrAfter(entryDate);
+        const hasEntryTime = _isIntraday(timeframe) && trade.entry_time;
+        const hasExitTime = _isIntraday(timeframe) && trade.exit_time;
+        const entryBar = hasEntryTime ? barContaining(entryDate, trade.entry_time) : barAtOrAfter(entryDate);
         const isShort = trade.side === "short";
         const markers = [{
           time: entryBar.time, position: isShort ? "aboveBar" : "belowBar",
@@ -3960,9 +3994,10 @@ const TradeChartModal = ({ trade, onClose }) => {
         });
 
         if (trade.exit_price) {
-          const exitBar = (_isIntraday(timeframe) && trade.exit_date === entryDate)
-            ? lastBarOfDay(trade.exit_date)
-            : barAtOrAfter(trade.exit_date);
+          const exitBar = hasExitTime ? barContaining(trade.exit_date, trade.exit_time)
+            : (_isIntraday(timeframe) && trade.exit_date === entryDate)
+              ? lastBarOfDay(trade.exit_date)
+              : barAtOrAfter(trade.exit_date);
           const won = tradeIsWin(trade);
           markers.push({
             time: exitBar.time, position: isShort ? "belowBar" : "aboveBar",
@@ -4014,10 +4049,10 @@ const TradeChartModal = ({ trade, onClose }) => {
             <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${trade.side === "short" ? "text-red-400 bg-red-500/10 border-red-500/30" : "text-zinc-400 bg-zinc-800/60 border-zinc-700/50"}`}>
               {trade.side === "short" ? "SHORT" : "LONG"}
             </span>
-            <span className="text-[12px] text-zinc-400">Entry <span className="text-zinc-200 font-mono">${trade.entry_price}</span> <span className="font-mono">{trade.date || "—"}</span></span>
+            <span className="text-[12px] text-zinc-400">Entry <span className="text-zinc-200 font-mono">${trade.entry_price}</span> <span className="font-mono">{trade.date || "—"}{trade.entry_time && ` ${trade.entry_time}`}</span></span>
             <span className="text-[12px] text-zinc-400">
               Exit {trade.exit_price ? <span className="text-zinc-200 font-mono">${trade.exit_price}</span> : <span className="text-blue-400">Open</span>}
-              {trade.exit_date && <span className="font-mono"> {trade.exit_date}</span>}
+              {trade.exit_date && <span className="font-mono"> {trade.exit_date}{trade.exit_time && ` ${trade.exit_time}`}</span>}
             </span>
             {trade.pnl_dollars !== "" && trade.pnl_dollars != null && (
               <span className={`text-[12px] font-mono font-bold ${parseFloat(trade.pnl_dollars) >= 0 ? "text-emerald-400" : "text-red-400"}`}>
@@ -4041,7 +4076,10 @@ const TradeChartModal = ({ trade, onClose }) => {
             </div>
             {_isIntraday(timeframe) && (
               <span className="text-[10px] text-zinc-600">
-                marker = first bar of that day (fill time isn't recorded) · Yahoo intraday history is limited, older trades may show no data
+                {trade.entry_time || trade.exit_time
+                  ? "marker placed at recorded fill time (ET) · "
+                  : "marker = first/last bar of that day, fill time not recorded for this trade · "}
+                Yahoo intraday history is limited, older trades may show no data
               </span>
             )}
           </div>
@@ -4559,6 +4597,21 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                             {SETUP_OPTS.map(o => <option key={o} value={o}>{o}</option>)}
                           </select>
                         )}
+                        {f === "date" && (
+                          <input type="time" title="Entry time (ET) — optional, used to place the chart marker precisely"
+                            value={draft.entry_time || ""} onChange={e => setDraft(d => ({ ...d, entry_time: e.target.value }))}
+                            className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1 py-1 text-zinc-200 outline-none w-[75px]"/>
+                        )}
+                        {f === "exit_price" && (
+                          <>
+                            <input type="date" title="Exit date" value={draft.exit_date || ""}
+                              onChange={e => setDraft(d => ({ ...d, exit_date: e.target.value }))}
+                              className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1 py-1 text-zinc-200 outline-none w-[110px]"/>
+                            <input type="time" title="Exit time (ET) — optional, used to place the chart marker precisely"
+                              value={draft.exit_time || ""} onChange={e => setDraft(d => ({ ...d, exit_time: e.target.value }))}
+                              className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1 py-1 text-zinc-200 outline-none w-[75px]"/>
+                          </>
+                        )}
                       </div>
                     </td>
                   ))}
@@ -4602,7 +4655,10 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                   <td className="px-2 py-2">
                     <button onClick={() => deleteTrade(t.id)} className="text-zinc-700 hover:text-red-400 transition-colors text-[11px]">✕</button>
                   </td>
-                  <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-500 whitespace-nowrap">{t.date || "—"}</td>
+                  <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-500 whitespace-nowrap">
+                    {t.date || "—"}{" "}
+                    <InlineText value={t.entry_time} onChange={v => updateField(t.id, "entry_time", v)} placeholder="hh:mm" cls="text-zinc-600"/>
+                  </td>
                   <td className="px-2 py-1.5 text-[12px] font-mono font-semibold whitespace-nowrap">
                     {t.ticker
                       ? <button onClick={() => setChartTrade(t)} title="Open chart"
@@ -4630,7 +4686,15 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                     </div>
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">{t.entry_price ? `$${t.entry_price}` : "—"}</td>
-                  <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">{t.exit_price ? `$${t.exit_price}` : <span className="text-blue-400 text-[11px]">Open</span>}</td>
+                  <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">
+                    {t.exit_price ? `$${t.exit_price}` : <span className="text-blue-400 text-[11px]">Open</span>}
+                    {t.exit_price && (
+                      <>
+                        {" "}<InlineText value={t.exit_date} onChange={v => updateField(t.id, "exit_date", v)} placeholder="exit date" cls="text-zinc-600"/>
+                        {" "}<InlineText value={t.exit_time} onChange={v => updateField(t.id, "exit_time", v)} placeholder="hh:mm" cls="text-zinc-600"/>
+                      </>
+                    )}
+                  </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-400">{t.shares || "—"}</td>
                   <td className="px-2 py-1.5">
                     <div className="flex items-center gap-1">
