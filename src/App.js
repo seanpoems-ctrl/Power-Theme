@@ -4726,9 +4726,9 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
 
       {/* ── Trade table ──────────────────────────────────────────────────── */}
       <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl overflow-hidden mb-5">
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto overflow-y-auto max-h-[70vh]">
           <table className="w-full text-left min-w-[1100px]">
-            <thead className="border-b border-zinc-800/60 bg-zinc-900/80">
+            <thead className="sticky top-0 z-10 border-b border-zinc-800/60 bg-zinc-900">
               <tr>
                 <TH w="w-8"/>
                 <th className="px-2 py-2 w-8">
