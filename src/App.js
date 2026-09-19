@@ -3795,10 +3795,21 @@ const TradeCalendarView = ({ trades, month, onMonthChange, onDayClick, selectedD
     return map;
   }, [trades]);
 
+  // Every year actually present in the journal (entry or exit date), plus
+  // the currently-viewed year and today's — so the dropdown always covers
+  // real data and never comes up empty for a fresh journal.
+  const yearOptions = useMemo(() => {
+    const years = new Set([y, new Date().getFullYear()]);
+    for (const t of trades) {
+      if (t.date) years.add(parseInt(t.date.slice(0, 4), 10));
+      if (t.exit_date) years.add(parseInt(t.exit_date.slice(0, 4), 10));
+    }
+    return [...years].filter(n => !isNaN(n)).sort((a, b) => a - b);
+  }, [trades, y]);
+
   const firstOfMonth = new Date(y, m, 1);
   const startWeekday = firstOfMonth.getDay();
   const daysInMonth = new Date(y, m + 1, 0).getDate();
-  const monthLabel = firstOfMonth.toLocaleString('en-US', { month: 'long', year: 'numeric' });
   const pad2 = n => String(n).padStart(2, "0");
 
   const cells = [];
@@ -3813,12 +3824,23 @@ const TradeCalendarView = ({ trades, month, onMonthChange, onDayClick, selectedD
   return (
     <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4 mb-5">
       <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <button onClick={() => onMonthChange(m === 0 ? { y: y - 1, m: 11 } : { y, m: m - 1 })}
-            className="text-zinc-500 hover:text-zinc-200 px-2 py-1 rounded hover:bg-zinc-800 transition-colors">‹</button>
-          <span className="text-[13px] font-semibold text-zinc-200 w-36 text-center">{monthLabel}</span>
-          <button onClick={() => onMonthChange(m === 11 ? { y: y + 1, m: 0 } : { y, m: m + 1 })}
-            className="text-zinc-500 hover:text-zinc-200 px-2 py-1 rounded hover:bg-zinc-800 transition-colors">›</button>
+        <div className="flex items-center gap-1">
+          <button onClick={() => onMonthChange({ y: y - 1, m })} title="Previous year"
+            className="text-zinc-500 hover:text-zinc-200 px-1.5 py-1 rounded hover:bg-zinc-800 transition-colors text-[11px]">«</button>
+          <button onClick={() => onMonthChange(m === 0 ? { y: y - 1, m: 11 } : { y, m: m - 1 })} title="Previous month"
+            className="text-zinc-500 hover:text-zinc-200 px-1.5 py-1 rounded hover:bg-zinc-800 transition-colors">‹</button>
+          <select value={m} onChange={e => onMonthChange({ y, m: parseInt(e.target.value, 10) })}
+            className="text-[13px] font-semibold bg-zinc-800/60 border border-zinc-700/40 rounded px-1.5 py-1 text-zinc-200 outline-none cursor-pointer">
+            {CAL_MONTH_FULL.map((name, i) => <option key={name} value={i}>{name}</option>)}
+          </select>
+          <select value={y} onChange={e => onMonthChange({ y: parseInt(e.target.value, 10), m })}
+            className="text-[13px] font-semibold bg-zinc-800/60 border border-zinc-700/40 rounded px-1.5 py-1 text-zinc-200 outline-none cursor-pointer">
+            {yearOptions.map(yr => <option key={yr} value={yr}>{yr}</option>)}
+          </select>
+          <button onClick={() => onMonthChange(m === 11 ? { y: y + 1, m: 0 } : { y, m: m + 1 })} title="Next month"
+            className="text-zinc-500 hover:text-zinc-200 px-1.5 py-1 rounded hover:bg-zinc-800 transition-colors">›</button>
+          <button onClick={() => onMonthChange({ y: y + 1, m })} title="Next year"
+            className="text-zinc-500 hover:text-zinc-200 px-1.5 py-1 rounded hover:bg-zinc-800 transition-colors text-[11px]">»</button>
         </div>
         <span className={`text-[13px] font-mono font-semibold ${monthPnl >= 0 ? "text-emerald-400" : "text-red-400"}`}>
           {monthTradeCount > 0 ? `${monthPnl >= 0 ? "+" : ""}$${monthPnl.toFixed(0)} · ${monthTradeCount} trade${monthTradeCount === 1 ? "" : "s"}` : "No closed trades"}
