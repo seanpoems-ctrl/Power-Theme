@@ -3989,8 +3989,7 @@ const TradeChartModal = ({ trade, onClose }) => {
           text: `Entry $${trade.entry_price}`,
         }];
         series.createPriceLine({
-          price: parseFloat(trade.entry_price), color: "#3b82f6", lineWidth: 1,
-          lineStyle: 2, axisLabelVisible: true, title: "Entry",
+          price: parseFloat(trade.entry_price), color: "#3b82f6", lineWidth: 1, lineStyle: 2, axisLabelVisible: false,
         });
 
         if (trade.exit_price) {
@@ -4005,8 +4004,7 @@ const TradeChartModal = ({ trade, onClose }) => {
             text: `Exit $${trade.exit_price}`,
           });
           series.createPriceLine({
-            price: parseFloat(trade.exit_price), color: won ? "#22c55e" : "#ef4444", lineWidth: 1,
-            lineStyle: 2, axisLabelVisible: true, title: "Exit",
+            price: parseFloat(trade.exit_price), color: won ? "#22c55e" : "#ef4444", lineWidth: 1, lineStyle: 2, axisLabelVisible: false,
           });
         }
         createSeriesMarkers(series, markers);
