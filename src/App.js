@@ -4140,6 +4140,14 @@ function _etWallClockAsUtcSec(dateStr, timeStr) {
   const [hh, mm] = timeStr.split(":").map(Number);
   return _dateToUnixSec(dateStr) + hh * 3600 + mm * 60;
 }
+// A date + "HH:MM" ET wall-clock time -> true unix seconds (UTC), matching
+// the epoch convention of RAW (unshifted) bars straight from the proxy —
+// used when comparing against real bar timestamps rather than the display-
+// shifted ones the chart renders with.
+function _dateTimeToUnixSec(dateStr, timeStr) {
+  const [hh, mm] = timeStr.split(":").map(Number);
+  return _dateToUnixSec(dateStr) + (hh + _nyOffsetHours(dateStr)) * 3600 + mm * 60;
+}
 
 // Intraday resolutions have limited lookback on Yahoo's backend (1m ~7d, up
 // to 60m ~2yr) — an older trade will legitimately return no bars at those
@@ -4736,14 +4744,18 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   };
   const hasBrokenDates = trades.some(t => IBKR_COMPACT_DATETIME_RE.test(t.date) || IBKR_COMPACT_DATETIME_RE.test(t.exit_date));
 
-  // Backfill missing stops from that trade's Low of Day (long trades only —
-  // matches how this trader actually places stops) minus the same 0.08%
-  // buffer the live Position Calculator uses, so a real market-derived
-  // number replaces a blank instead of a guess. Uses the same historical
-  // bar proxy the trade chart already relies on.
+  // Backfill missing stops from that trade's Low of Day AS OF THE MOMENT OF
+  // ENTRY (long trades only — matches how this trader actually places
+  // stops), minus the same 0.08% buffer the live Position Calculator uses.
+  // Using the full day's low would be look-ahead bias — a real LOD stop can
+  // only reflect price action observed before you entered, not a low the
+  // stock happened to make later that same session. That means this needs
+  // intraday bars (not a daily bar's low) filtered to before entry_time,
+  // and a trade with no recorded entry_time can't be backfilled at all —
+  // there'd be no way to know where "before entry" ends.
   const lodEligible = trades.filter(t =>
     t.exit_price !== "" && t.exit_price != null && (!t.stop_price || t.stop_price === "") &&
-    t.side !== "short" && t.date && t.ticker
+    t.side !== "short" && t.date && t.ticker && t.entry_time
   );
   const backfillLodStops = async () => {
     if (!TV_PROXY_URL || lodBackfillLoading || !lodEligible.length) return;
@@ -4751,36 +4763,41 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     const byTicker = new Map();
     for (const t of lodEligible) (byTicker.get(t.ticker) || byTicker.set(t.ticker, []).get(t.ticker)).push(t);
 
-    const lowsByTicker = new Map(); // ticker -> Map(dateStr -> low)
+    const barsByTicker = new Map(); // ticker -> raw intraday bars (real UTC seconds)
     await Promise.all([...byTicker.entries()].map(async ([ticker, ts]) => {
       const dates = ts.map(t => t.date).sort();
-      const from = _dateToUnixSec(_addDays(dates[0], -5));
-      const to = _dateToUnixSec(_addDays(dates[dates.length - 1], 5));
+      // 5m resolution: fine enough for a stop level, coarse enough that
+      // Yahoo's ~60-day intraday lookback covers a useful window of history.
+      const from = _dateToUnixSec(dates[0]);
+      const to = _dateToUnixSec(_addDays(dates[dates.length - 1], 1));
       try {
-        const r = await fetch(`${TV_PROXY_URL}/bars?symbol=${encodeURIComponent(ticker)}&resolution=D&from=${from}&to=${to}`);
+        const r = await fetch(`${TV_PROXY_URL}/bars?symbol=${encodeURIComponent(ticker)}&resolution=5&from=${from}&to=${to}`);
         const { bars } = await r.json();
-        const map = new Map();
-        for (const b of (bars || [])) map.set(new Date(Math.floor(b.time / 1000) * 1000).toISOString().slice(0, 10), b.low);
-        lowsByTicker.set(ticker, map);
+        barsByTicker.set(ticker, (bars || []).map(b => ({ time: Math.floor(b.time / 1000), low: b.low })));
       } catch {
-        lowsByTicker.set(ticker, new Map());
+        barsByTicker.set(ticker, []);
       }
     }));
 
     let filled = 0;
     const updated = trades.map(t => {
       if (!lodEligible.includes(t)) return t;
-      const low = lowsByTicker.get(t.ticker)?.get(t.date);
-      if (low == null) return t;
+      const bars = barsByTicker.get(t.ticker) || [];
+      const dayStart = _dateToUnixSec(t.date);
+      const dayEnd = _dateToUnixSec(_addDays(t.date, 1));
+      const cutoff = _dateTimeToUnixSec(t.date, t.entry_time);
+      const preEntryLows = bars.filter(b => b.time >= dayStart && b.time < dayEnd && b.time <= cutoff).map(b => b.low);
+      if (!preEntryLows.length) return t;
       filled++;
+      const low = Math.min(...preEntryLows);
       return calcDerived({ ...t, stop_price: (low * (1 - 0.0008)).toFixed(2), stop_used: "LOD" });
     });
     if (filled) persist(updated);
     const skipped = lodEligible.length - filled;
     setImportMsg(
       filled
-        ? `Filled stop price for ${filled} trade${filled === 1 ? "" : "s"} using Low of Day (−0.08%)${skipped ? `; ${skipped} skipped (no historical data for that date)` : ""}.`
-        : "Couldn't find historical data for any eligible trades."
+        ? `Filled stop price for ${filled} trade${filled === 1 ? "" : "s"} using the low observed before entry (−0.08%)${skipped ? `; ${skipped} skipped (no intraday history that far back)` : ""}.`
+        : "Couldn't find intraday history for any eligible trades — Yahoo's intraday data typically only goes back ~60 days."
     );
     setLodBackfillLoading(false);
   };
@@ -5138,7 +5155,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         )}
         {TV_PROXY_URL && lodEligible.length > 0 && (
           <button onClick={backfillLodStops} disabled={lodBackfillLoading}
-            title="Fills blank stops on closed long trades using that day's Low of Day, minus the same 0.08% buffer the Position Calculator uses"
+            title="Fills blank stops on closed long trades using the low observed BEFORE your recorded entry time (not the whole day's low), minus the same 0.08% buffer the Position Calculator uses. Needs an entry time and intraday history for that date."
             className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-amber-500/15 text-amber-400 border border-amber-500/30 rounded-lg hover:bg-amber-500/25 transition-colors disabled:opacity-50">
             {lodBackfillLoading ? "Backfilling…" : `Backfill ${lodEligible.length} stop${lodEligible.length === 1 ? "" : "s"} from LOD`}
           </button>
