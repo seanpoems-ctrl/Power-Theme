@@ -3744,6 +3744,11 @@ const ChecklistTab = () => {
 // "equity curve" every trading journal leads with.
 const EquityCurveChart = ({ trades, onDayClick }) => {
   const [hoverIdx, setHoverIdx] = useState(null);
+  // view: {start, end} indices into `points` for the currently zoomed
+  // window, or null for the full history. Kept as raw indices (not a
+  // fraction) so panning/resizing math stays simple integer arithmetic.
+  const [view, setView] = useState(null);
+  const dragRef = useRef(null);
   // Hiding the tooltip the instant the mouse leaves the chart made it
   // impossible to actually reach and click it (it vanished mid-move). A
   // short grace period keeps it up while the cursor is in transit, and gets
@@ -3752,6 +3757,11 @@ const EquityCurveChart = ({ trades, onDayClick }) => {
   const cancelHide = () => { if (hideTimerRef.current) { clearTimeout(hideTimerRef.current); hideTimerRef.current = null; } };
   const scheduleHide = () => { cancelHide(); hideTimerRef.current = setTimeout(() => setHoverIdx(null), 1000); };
   useEffect(() => cancelHide, []);
+  // Drag listeners are attached to `window` (dragging can continue outside
+  // the SVG's bounds) — clean them up if the component unmounts mid-drag.
+  useEffect(() => () => {
+    if (dragRef.current) { window.removeEventListener("mousemove", dragRef.current.onMove); window.removeEventListener("mouseup", dragRef.current.onUp); }
+  }, []);
 
   // points: one entry per closed trade (chart granularity, unchanged).
   // dayAgg: same trades grouped by exit_date, for the hover tooltip —
@@ -3776,45 +3786,150 @@ const EquityCurveChart = ({ trades, onDayClick }) => {
     return { points: pts, dayAgg: agg };
   }, [trades]);
 
+  // Slump indicator: a 10-period EMA of cumulative P&L. When the actual
+  // curve drops below it, that's a losing-streak signal to step down
+  // position size — computed over the FULL history (not just the zoomed
+  // window) so it doesn't cold-start every time the view is panned.
+  const emaFull = useMemo(() => _emaSeries(points.map(p => p.cum), 10), [points]);
+
   if (points.length < 2) {
     return <div className="text-[12px] text-zinc-600 italic py-10 text-center">Need at least 2 closed trades with exit dates to plot an equity curve.</div>;
   }
 
+  const total = points.length;
+  const MIN_SPAN = Math.max(1, Math.min(4, total - 1));
+  // Re-clamp on every render instead of storing clamped values, so a zoom
+  // window survives the trade list changing shape (new trade added, filter
+  // applied) without needing an effect to reset it.
+  const viewStart = view ? Math.max(0, Math.min(view.start, total - 1 - MIN_SPAN)) : 0;
+  const viewEnd = view ? Math.max(viewStart + MIN_SPAN, Math.min(view.end, total - 1)) : total - 1;
+  const isZoomed = viewStart > 0 || viewEnd < total - 1;
+  const vp = points.slice(viewStart, viewEnd + 1);
+  const emaVp = emaFull.slice(viewStart, viewEnd + 1);
+  const hasEma = emaVp.some(v => v != null);
+
   const W = 1000, H = 220, padL = 54, padR = 12, padT = 14, padB = 22;
-  const vals = points.map(p => p.cum);
+  const NAV_H = 30;
+  const vals = vp.map(p => p.cum);
   const minV = Math.min(0, ...vals), maxV = Math.max(0, ...vals);
   const range = (maxV - minV) || 1;
-  const x = i => padL + (i / (points.length - 1)) * (W - padL - padR);
+  const x = i => padL + (i / (vp.length - 1)) * (W - padL - padR);
   const y = v => H - padB - ((v - minV) / range) * (H - padT - padB);
-  const pathPts = points.map((p, i) => `${x(i).toFixed(1)},${y(p.cum).toFixed(1)}`).join(" ");
+  const pathPts = vp.map((p, i) => `${x(i).toFixed(1)},${y(p.cum).toFixed(1)}`).join(" ");
   const zeroY = y(0);
-  const last = points[points.length - 1].cum;
+  const last = vp[vp.length - 1].cum;
   const color = last >= 0 ? "#34d399" : "#f87171";
-  const areaPath = `M${x(0).toFixed(1)},${zeroY.toFixed(1)} L${pathPts} L${x(points.length - 1).toFixed(1)},${zeroY.toFixed(1)} Z`;
+  const areaPath = `M${x(0).toFixed(1)},${zeroY.toFixed(1)} L${pathPts} L${x(vp.length - 1).toFixed(1)},${zeroY.toFixed(1)} Z`;
   const fmt = v => `${v >= 0 ? "+" : ""}$${v.toFixed(0)}`;
 
+  const emaPathPts = vp.map((p, i) => emaVp[i] != null ? `${x(i).toFixed(1)},${y(emaVp[i]).toFixed(1)}` : null).filter(Boolean).join(" ");
+  // Shade every contiguous run where the actual curve is under the EMA —
+  // the "step down size" zones — as its own closed path: forward along the
+  // equity line, back along the EMA line.
+  const slumpPaths = [];
+  for (let i = 0; i < vp.length; ) {
+    if (emaVp[i] != null && vp[i].cum < emaVp[i]) {
+      let j = i;
+      while (j < vp.length && emaVp[j] != null && vp[j].cum < emaVp[j]) j++;
+      const fwd = [];
+      for (let k = i; k < j; k++) fwd.push(`${x(k).toFixed(1)},${y(vp[k].cum).toFixed(1)}`);
+      const bwd = [];
+      for (let k = j - 1; k >= i; k--) bwd.push(`${x(k).toFixed(1)},${y(emaVp[k]).toFixed(1)}`);
+      slumpPaths.push(`M${fwd.join(" L")} L${bwd.join(" L")} Z`);
+      i = j;
+    } else {
+      i++;
+    }
+  }
+
   const handleMove = e => {
+    if (dragRef.current) return; // dragging the zoom bar — don't also update the hover crosshair
     cancelHide();
     const rect = e.currentTarget.getBoundingClientRect();
     if (!rect.width) return;
     const svgX = ((e.clientX - rect.left) / rect.width) * W;
     const frac = (svgX - padL) / (W - padL - padR);
-    const idx = Math.round(frac * (points.length - 1));
-    setHoverIdx(Math.max(0, Math.min(points.length - 1, idx)));
+    const idx = Math.round(frac * (vp.length - 1));
+    setHoverIdx(Math.max(0, Math.min(vp.length - 1, idx)));
   };
   const handleLeave = () => scheduleHide();
 
-  const hp = hoverIdx != null ? points[hoverIdx] : null;
+  const hp = hoverIdx != null ? vp[hoverIdx] : null;
   const hAgg = hp ? dayAgg[hp.date] : null;
   const hxFrac = hp ? x(hoverIdx) / W : 0;
 
+  // ── Zoom bar (navigator strip) ───────────────────────────────────────────
+  // A mini overview of the full history with a draggable/resizable window,
+  // the same idea as the candlestick chart's own zoom/scroll — needed once
+  // there's enough trade history that squeezing every point into one fixed
+  // width makes the line unreadable. Drag the window body to pan, drag
+  // either edge to resize (zoom).
+  const navX = i => padL + (i / (total - 1)) * (W - padL - padR);
+  const navVals = points.map(p => p.cum);
+  const navMinV = Math.min(0, ...navVals), navMaxV = Math.max(0, ...navVals);
+  const navRange = (navMaxV - navMinV) || 1;
+  const navY = v => NAV_H - 4 - ((v - navMinV) / navRange) * (NAV_H - 8);
+  const navPathPts = points.map((p, i) => `${navX(i).toFixed(1)},${navY(p.cum).toFixed(1)}`).join(" ");
+  const clientXToTotalIdx = (clientX, rect) => {
+    const svgX = ((clientX - rect.left) / rect.width) * W;
+    const frac = (svgX - padL) / (W - padL - padR);
+    return frac * (total - 1);
+  };
+  const beginDrag = (mode, e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const rect = e.currentTarget.closest("svg").getBoundingClientRect();
+    const startClientX = e.clientX, startStart = viewStart, startEnd = viewEnd;
+    setHoverIdx(null);
+    const onMove = ev => {
+      if (mode === "pan") {
+        const deltaIdx = clientXToTotalIdx(ev.clientX, rect) - clientXToTotalIdx(startClientX, rect);
+        const span = startEnd - startStart;
+        let ns = startStart + deltaIdx, ne = ns + span;
+        if (ns < 0) { ne -= ns; ns = 0; }
+        if (ne > total - 1) { ns -= (ne - (total - 1)); ne = total - 1; }
+        setView({ start: Math.round(Math.max(0, ns)), end: Math.round(Math.min(total - 1, ne)) });
+      } else if (mode === "left") {
+        const ns = Math.max(0, Math.min(clientXToTotalIdx(ev.clientX, rect), startEnd - MIN_SPAN));
+        setView({ start: Math.round(ns), end: startEnd });
+      } else {
+        const ne = Math.min(total - 1, Math.max(clientXToTotalIdx(ev.clientX, rect), startStart + MIN_SPAN));
+        setView({ start: startStart, end: Math.round(ne) });
+      }
+    };
+    const onUp = () => {
+      dragRef.current = null;
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+    dragRef.current = { onMove, onUp };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+  };
+
   return (
     <div className="relative">
+      {hasEma && (
+        <div className="flex items-center gap-3 mb-1 text-[10px] text-zinc-500">
+          <span className="flex items-center gap-1">
+            <span className="w-2.5 h-0.5 inline-block" style={{ backgroundColor: "#f59e0b" }}/>
+            EMA10
+          </span>
+          <span className="flex items-center gap-1">
+            <span className="w-2.5 h-2.5 inline-block rounded-sm" style={{ backgroundColor: "#ef4444", opacity: 0.35 }}/>
+            Below EMA10 — consider stepping down position size
+          </span>
+        </div>
+      )}
       <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="block cursor-crosshair"
         onMouseMove={handleMove} onMouseLeave={handleLeave}>
         <line x1={padL} y1={zeroY} x2={W - padR} y2={zeroY} stroke="#3f3f46" strokeWidth="1" strokeDasharray="4 3"/>
         <path d={areaPath} fill={color} opacity="0.1"/>
+        {slumpPaths.map((d, i) => <path key={i} d={d} fill="#ef4444" opacity="0.22"/>)}
         <polyline points={pathPts} fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"/>
+        {emaPathPts && (
+          <polyline points={emaPathPts} fill="none" stroke="#f59e0b" strokeWidth="1.25" strokeDasharray="4 2" strokeLinejoin="round" strokeLinecap="round" opacity="0.9"/>
+        )}
         {hp && (
           <>
             <line x1={x(hoverIdx)} y1={padT} x2={x(hoverIdx)} y2={H - padB} stroke="#a1a1aa" strokeWidth="1" strokeDasharray="3 3"/>
@@ -3824,8 +3939,8 @@ const EquityCurveChart = ({ trades, onDayClick }) => {
         <text x={4} y={zeroY + 3} fontSize="11" fill="#71717a">$0</text>
         <text x={4} y={padT + 9} fontSize="11" fill="#71717a">{fmt(maxV)}</text>
         <text x={4} y={H - 6} fontSize="11" fill="#71717a">{fmt(minV)}</text>
-        <text x={padL} y={H - 4} fontSize="10" fill="#52525b">{points[0].date}</text>
-        <text x={W - padR} y={H - 4} fontSize="10" fill="#52525b" textAnchor="end">{points[points.length - 1].date}</text>
+        <text x={padL} y={H - 4} fontSize="10" fill="#52525b">{vp[0].date}</text>
+        <text x={W - padR} y={H - 4} fontSize="10" fill="#52525b" textAnchor="end">{vp[vp.length - 1].date}</text>
       </svg>
       {hp && hAgg && (
         <div
@@ -3845,6 +3960,27 @@ const EquityCurveChart = ({ trades, onDayClick }) => {
           </div>
           <div className="text-zinc-600 mt-0.5">Click to view trades</div>
         </div>
+      )}
+
+      {total > MIN_SPAN + 1 && (
+        <>
+          <div className="flex items-center justify-between mt-2 mb-1">
+            <span className="text-[10px] text-zinc-600">{isZoomed ? "Drag the window to pan, drag its edges to resize" : "Drag below to zoom in"}</span>
+            {isZoomed && <button onClick={() => setView(null)} className="text-[10px] text-blue-400 hover:text-blue-300">Reset zoom</button>}
+          </div>
+          <svg width="100%" height={NAV_H} viewBox={`0 0 ${W} ${NAV_H}`} preserveAspectRatio="none" className="block select-none">
+            <polyline points={navPathPts} fill="none" stroke="#52525b" strokeWidth="1"/>
+            <rect x={padL} y={0} width={Math.max(0, navX(viewStart) - padL)} height={NAV_H} fill="#000" opacity="0.5"/>
+            <rect x={navX(viewEnd)} y={0} width={Math.max(0, (W - padR) - navX(viewEnd))} height={NAV_H} fill="#000" opacity="0.5"/>
+            <rect x={navX(viewStart)} y={0.5} width={Math.max(1, navX(viewEnd) - navX(viewStart))} height={NAV_H - 1}
+              fill="#3b82f6" opacity="0.15" stroke="#3b82f6" strokeWidth="1"
+              style={{ cursor: "grab" }} onMouseDown={e => beginDrag("pan", e)}/>
+            <rect x={navX(viewStart) - 3} y={0} width={6} height={NAV_H} fill="#3b82f6"
+              style={{ cursor: "ew-resize" }} onMouseDown={e => beginDrag("left", e)}/>
+            <rect x={navX(viewEnd) - 3} y={0} width={6} height={NAV_H} fill="#3b82f6"
+              style={{ cursor: "ew-resize" }} onMouseDown={e => beginDrag("right", e)}/>
+          </svg>
+        </>
       )}
     </div>
   );
