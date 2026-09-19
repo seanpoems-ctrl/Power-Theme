@@ -5085,8 +5085,15 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         pnl_dollars: t.pnl_dollars, r_multiple: t.r_multiple, grade: t.grade,
       }));
       const url  = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${JOURNAL_AI_KEY}`;
-      const prompt = `You are a trading coach analysing a trader's journal. Given the last 20 trades as JSON, provide: (1) Win rate and avg R-multiple by theme, (2) avg R-multiple by stop mode (ATR / LOD / Manual), (3) a concise one-paragraph actionable recommendation. Be specific.\n\nTrades:\n${JSON.stringify(last20, null, 2)}`;
-      const body = { contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.3, maxOutputTokens: 400 } };
+      const prompt = `You are a trading coach analysing a trader's journal. Given the last 20 trades as JSON, provide: (1) Win rate and avg R-multiple by theme, (2) avg R-multiple by stop mode (ATR / LOD / Manual), (3) a concise one-paragraph actionable recommendation. Be specific. Do not repeat or restate the input data in your response — respond only with the numbered analysis, no preamble, no code blocks.\n\nTrades:\n${JSON.stringify(last20, null, 2)}`;
+      // gemini-2.5-flash "thinks" before answering, and thinking tokens count
+      // against maxOutputTokens — at 400 the model burned its whole budget
+      // (finishReason MAX_TOKENS, ~380 thought tokens) before writing a
+      // single real sentence. thinkingBudget: 0 disables that for this
+      // straightforward summarization task, matching every other Gemini
+      // call site in this file; maxOutputTokens raised to comfortably fit
+      // the requested 3-part answer.
+      const body = { contents: [{ parts: [{ text: prompt }] }], generationConfig: { temperature: 0.3, maxOutputTokens: 1024, thinkingConfig: { thinkingBudget: 0 } } };
       const res  = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
       const json = await res.json();
       setAiResult(json?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || "No response from Gemini.");
