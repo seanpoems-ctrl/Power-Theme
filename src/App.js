@@ -3705,6 +3705,43 @@ const TradeJournalTab = ({ data, categoryThemeMap = {} }) => {
   const fileInputRef                = useRef(null);
   const [aiResult, setAiResult]     = useState(null);
   const [aiLoading, setAiLoading]   = useState(false);
+  const [allTickers, setAllTickers] = useState([]);
+
+  // Same stock_db.json the search bar reads, so a ticker resolves to the same
+  // Theme here as it would if you typed it into the search box.
+  useEffect(() => {
+    fetch(`${process.env.PUBLIC_URL}/stock_db.json?v=${Date.now()}`)
+      .then(r => r.json())
+      .then(setAllTickers)
+      .catch(() => {
+        fetch(`${process.env.PUBLIC_URL}/all_tickers.json?v=${Date.now()}`)
+          .then(r => r.json())
+          .then(setAllTickers)
+          .catch(() => {});
+      });
+  }, []);
+
+  // Today's scanner theme per ticker (Thematic Scanner's own theme→subtheme→stock tree)
+  const scannerThemeMap = useMemo(() => {
+    const m = {};
+    (data?.themes || []).forEach(t => {
+      const norm = normalizeTheme(t);
+      norm.subthemes.forEach(sub => sub.stocks.forEach(s => { if (s.ticker && !m[s.ticker]) m[s.ticker] = norm.name; }));
+    });
+    return m;
+  }, [data]);
+
+  // stock_db.json's Finviz-industry-derived theme (same fallback the search bar uses)
+  const stockDbThemeMap = useMemo(() => {
+    const m = {};
+    for (const s of allTickers) if (s.ticker && s.theme && !m[s.ticker]) m[s.ticker] = s.theme;
+    return m;
+  }, [allTickers]);
+
+  // Same priority order the search bar's Theme row uses: Category Leaderboard's
+  // ETF-holdings mapping first (most current), then today's scanner tree, then
+  // stock_db.json's static Finviz-derived theme as a last resort.
+  const resolveTheme = (ticker) => categoryThemeMap[ticker] || scannerThemeMap[ticker] || stockDbThemeMap[ticker] || "";
 
   const persist = (arr) => { setTrades(arr); saveTrades(arr); };
 
@@ -3722,14 +3759,28 @@ const TradeJournalTab = ({ data, categoryThemeMap = {} }) => {
 
   const deleteTrade = (id) => { if (window.confirm("Delete this trade?")) persist(trades.filter(t => t.id !== id)); };
 
+  const fillMissingThemes = () => {
+    let filled = 0;
+    const updated = trades.map(t => {
+      if (t.theme || !t.ticker) return t;
+      const theme = resolveTheme(t.ticker);
+      if (!theme) return t;
+      filled++;
+      return { ...t, theme };
+    });
+    if (filled) persist(updated);
+    setImportMsg(filled ? `Filled in ${filled} missing theme${filled === 1 ? "" : "s"}.` : "No missing themes could be resolved — those tickers aren't in the scanner, ETF holdings, or stock database.");
+  };
+
   const handleImportFile = (e) => {
     const file = e.target.files?.[0];
     e.target.value = ""; // allow re-selecting the same file
     if (!file) return;
     const reader = new FileReader();
     reader.onload = () => {
-      const { trades: parsed, skipped } = parseIbkrTrades(String(reader.result || ""), categoryThemeMap);
+      const { trades: rawParsed, skipped } = parseIbkrTrades(String(reader.result || ""), categoryThemeMap);
       if (skipped === -1) { setImportMsg("Couldn't find a Trades table in this file — export the Activity Statement as CSV from IBKR's Reports page."); return; }
+      const parsed = rawParsed.map(t => t.theme ? t : { ...t, theme: resolveTheme(t.ticker) });
       const existingSig = new Set(trades.map(t => `${t.ticker}|${t.date}|${t.exit_date}|${t.entry_price}|${t.exit_price}|${t.shares}`));
       const fresh = parsed.filter(t => !existingSig.has(`${t.ticker}|${t.date}|${t.exit_date}|${t.entry_price}|${t.exit_price}|${t.shares}`));
       const dupes = parsed.length - fresh.length;
@@ -3861,6 +3912,12 @@ const TradeJournalTab = ({ data, categoryThemeMap = {} }) => {
         <span className="text-[11px] text-zinc-600">{visible.length} trades</span>
         <div className="flex-1"/>
         <input ref={fileInputRef} type="file" accept=".csv,text/csv" onChange={handleImportFile} className="hidden"/>
+        {trades.some(t => !t.theme) && (
+          <button onClick={fillMissingThemes}
+            className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 rounded-lg hover:bg-zinc-700/60 transition-colors">
+            Fill missing themes
+          </button>
+        )}
         <button onClick={() => { setImportMsg(null); fileInputRef.current?.click(); }}
           className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 rounded-lg hover:bg-zinc-700/60 transition-colors">
           ⬆ Import IBKR CSV
