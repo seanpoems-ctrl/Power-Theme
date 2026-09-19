@@ -3742,7 +3742,7 @@ const ChecklistTab = () => {
 
 // Cumulative realized P&L over time, sorted by exit date — the standard
 // "equity curve" every trading journal leads with.
-const EquityCurveChart = ({ trades }) => {
+const EquityCurveChart = ({ trades, onDayClick }) => {
   const [hoverIdx, setHoverIdx] = useState(null);
 
   // points: one entry per closed trade (chart granularity, unchanged).
@@ -3820,7 +3820,8 @@ const EquityCurveChart = ({ trades }) => {
       </svg>
       {hp && hAgg && (
         <div
-          className="absolute z-20 pointer-events-none bg-zinc-950 border border-zinc-700/60 rounded-lg px-3 py-2 text-[11px] shadow-xl min-w-[150px] max-w-[220px]"
+          onClick={() => onDayClick && onDayClick(hp.date)}
+          className="absolute z-20 bg-zinc-950 border border-zinc-700/60 rounded-lg px-3 py-2 text-[11px] shadow-xl min-w-[150px] cursor-pointer hover:border-zinc-500"
           style={{
             left: `${hxFrac * 100}%`,
             top: `${(y(hp.cum) / H) * 100}%`,
@@ -3828,18 +3829,10 @@ const EquityCurveChart = ({ trades }) => {
           }}
         >
           <div className="text-zinc-300 font-semibold mb-1">{hp.date}</div>
-          <div className={`font-mono font-bold mb-1 ${hAgg.pnl >= 0 ? "text-emerald-400" : "text-red-400"}`}>
+          <div className={`font-mono font-bold ${hAgg.pnl >= 0 ? "text-emerald-400" : "text-red-400"}`}>
             {fmt(hAgg.pnl)} · {hAgg.trades.length} trade{hAgg.trades.length === 1 ? "" : "s"}
           </div>
-          <div className="space-y-0.5 max-h-[110px] overflow-y-auto">
-            {hAgg.trades.slice(0, 8).map((t, i) => (
-              <div key={i} className="flex justify-between gap-3">
-                <span className="text-zinc-400">{t.ticker || "—"}</span>
-                <span className={t.pnl >= 0 ? "text-emerald-400/80" : "text-red-400/80"}>{fmt(t.pnl)}</span>
-              </div>
-            ))}
-            {hAgg.trades.length > 8 && <div className="text-zinc-600">+{hAgg.trades.length - 8} more</div>}
-          </div>
+          <div className="text-zinc-600 mt-0.5">Click to view trades</div>
         </div>
       )}
     </div>
@@ -4839,7 +4832,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       {/* ── Equity curve ─────────────────────────────────────────────────── */}
       <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4 mb-5">
         <span className="text-[12px] font-semibold text-zinc-300 block mb-2">Equity Curve</span>
-        <EquityCurveChart trades={trades}/>
+        <EquityCurveChart trades={trades} onDayClick={day => setCalSelectedDay(d => d === day ? null : day)}/>
       </div>
 
       {/* ── Filter tabs + Add button ─────────────────────────────────────── */}
