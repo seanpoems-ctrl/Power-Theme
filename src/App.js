@@ -5479,33 +5479,27 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                 </tr>
                 {(t.entry_fills?.length > 1 || t.exit_fills?.length > 1) && (
                   <tr className="border-b border-zinc-800/30 bg-zinc-900/40">
-                    <td/><td/>
-                    <td colSpan={12} className="px-2 py-2">
-                      <div className="flex flex-wrap gap-x-8 gap-y-2 text-[11px] font-mono">
-                        {t.entry_fills?.length > 1 && (
-                          <div>
-                            <div className="text-zinc-500 mb-1">Entry fills</div>
-                            {t.entry_fills.map((f, i) => (
-                              <div key={i} className="text-zinc-300">{f.qty} sh @ ${f.price} <span className="text-zinc-600">{f.date}{f.time && ` ${f.time}`}</span></div>
-                            ))}
-                          </div>
-                        )}
-                        {t.exit_fills?.length > 1 && (
-                          <div>
-                            <div className="text-zinc-500 mb-1">Exit fills</div>
-                            {t.exit_fills.map((f, i) => {
-                              const entryRef = parseFloat(t.entry_price);
-                              const favorable = t.side === "short" ? parseFloat(f.price) < entryRef : parseFloat(f.price) > entryRef;
-                              return (
-                                <div key={i} className={favorable ? "text-emerald-400" : "text-red-400"}>
-                                  {f.qty} sh @ ${f.price} <span className="text-zinc-600">{f.date}{f.time && ` ${f.time}`}</span>
-                                </div>
-                              );
-                            })}
-                          </div>
-                        )}
-                      </div>
+                    {/* Empty cells for ✕/checkbox/Date/Ticker/Theme, so the
+                        breakdowns below land directly under the Entry/Exit
+                        columns they belong to instead of the row's left edge. */}
+                    <td/><td/><td/><td/><td/>
+                    <td className="px-2 py-2 align-top text-[11px] font-mono">
+                      {t.entry_fills?.length > 1 && t.entry_fills.map((f, i) => (
+                        <div key={i} className="text-zinc-300 whitespace-nowrap">{f.qty}sh ${f.price} <span className="text-zinc-600">{f.time}</span></div>
+                      ))}
                     </td>
+                    <td className="px-2 py-2 align-top text-[11px] font-mono">
+                      {t.exit_fills?.length > 1 && t.exit_fills.map((f, i) => {
+                        const entryRef = parseFloat(t.entry_price);
+                        const favorable = t.side === "short" ? parseFloat(f.price) < entryRef : parseFloat(f.price) > entryRef;
+                        return (
+                          <div key={i} className={`whitespace-nowrap ${favorable ? "text-emerald-400" : "text-red-400"}`}>
+                            {f.qty}sh ${f.price} <span className="text-zinc-600">{f.date} {f.time}</span>
+                          </div>
+                        );
+                      })}
+                    </td>
+                    <td colSpan={7}/>
                   </tr>
                 )}
                 </React.Fragment>
