@@ -4586,6 +4586,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [showForm, setShowForm]     = useState(false);
   const [draft, setDraft]           = useState({ ...EMPTY_TRADE, id: newId() });
   const [importMsg, setImportMsg]   = useState(null);
+  const [lodBackfillLoading, setLodBackfillLoading] = useState(false);
   const fileInputRef                = useRef(null);
   const [aiResult, setAiResult]     = useState(null);
   const [aiLoading, setAiLoading]   = useState(false);
@@ -4734,6 +4735,55 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     setImportMsg(fixed ? `Fixed ${fixed} trade${fixed === 1 ? "" : "s"} with broken date/time formatting.` : "No broken dates found.");
   };
   const hasBrokenDates = trades.some(t => IBKR_COMPACT_DATETIME_RE.test(t.date) || IBKR_COMPACT_DATETIME_RE.test(t.exit_date));
+
+  // Backfill missing stops from that trade's Low of Day (long trades only —
+  // matches how this trader actually places stops) minus the same 0.08%
+  // buffer the live Position Calculator uses, so a real market-derived
+  // number replaces a blank instead of a guess. Uses the same historical
+  // bar proxy the trade chart already relies on.
+  const lodEligible = trades.filter(t =>
+    t.exit_price !== "" && t.exit_price != null && (!t.stop_price || t.stop_price === "") &&
+    t.side !== "short" && t.date && t.ticker
+  );
+  const backfillLodStops = async () => {
+    if (!TV_PROXY_URL || lodBackfillLoading || !lodEligible.length) return;
+    setLodBackfillLoading(true);
+    const byTicker = new Map();
+    for (const t of lodEligible) (byTicker.get(t.ticker) || byTicker.set(t.ticker, []).get(t.ticker)).push(t);
+
+    const lowsByTicker = new Map(); // ticker -> Map(dateStr -> low)
+    await Promise.all([...byTicker.entries()].map(async ([ticker, ts]) => {
+      const dates = ts.map(t => t.date).sort();
+      const from = _dateToUnixSec(_addDays(dates[0], -5));
+      const to = _dateToUnixSec(_addDays(dates[dates.length - 1], 5));
+      try {
+        const r = await fetch(`${TV_PROXY_URL}/bars?symbol=${encodeURIComponent(ticker)}&resolution=D&from=${from}&to=${to}`);
+        const { bars } = await r.json();
+        const map = new Map();
+        for (const b of (bars || [])) map.set(new Date(Math.floor(b.time / 1000) * 1000).toISOString().slice(0, 10), b.low);
+        lowsByTicker.set(ticker, map);
+      } catch {
+        lowsByTicker.set(ticker, new Map());
+      }
+    }));
+
+    let filled = 0;
+    const updated = trades.map(t => {
+      if (!lodEligible.includes(t)) return t;
+      const low = lowsByTicker.get(t.ticker)?.get(t.date);
+      if (low == null) return t;
+      filled++;
+      return calcDerived({ ...t, stop_price: (low * (1 - 0.0008)).toFixed(2), stop_used: "LOD" });
+    });
+    if (filled) persist(updated);
+    const skipped = lodEligible.length - filled;
+    setImportMsg(
+      filled
+        ? `Filled stop price for ${filled} trade${filled === 1 ? "" : "s"} using Low of Day (−0.08%)${skipped ? `; ${skipped} skipped (no historical data for that date)` : ""}.`
+        : "Couldn't find historical data for any eligible trades."
+    );
+    setLodBackfillLoading(false);
+  };
 
   const handleImportFile = (e) => {
     const file = e.target.files?.[0];
@@ -5084,6 +5134,13 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
           <button onClick={fixBrokenDates}
             className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-amber-500/15 text-amber-400 border border-amber-500/30 rounded-lg hover:bg-amber-500/25 transition-colors">
             Fix broken dates
+          </button>
+        )}
+        {TV_PROXY_URL && lodEligible.length > 0 && (
+          <button onClick={backfillLodStops} disabled={lodBackfillLoading}
+            title="Fills blank stops on closed long trades using that day's Low of Day, minus the same 0.08% buffer the Position Calculator uses"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-amber-500/15 text-amber-400 border border-amber-500/30 rounded-lg hover:bg-amber-500/25 transition-colors disabled:opacity-50">
+            {lodBackfillLoading ? "Backfilling…" : `Backfill ${lodEligible.length} stop${lodEligible.length === 1 ? "" : "s"} from LOD`}
           </button>
         )}
         {selectedIds.size > 0 && (
