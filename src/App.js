@@ -3853,6 +3853,7 @@ function _addDays(dateStr, days) {
 // to 60m ~2yr) — an older trade will legitimately return no bars at those
 // resolutions. Daily/Weekly go back decades, so they always work.
 const TIMEFRAME_OPTS = [
+  { key: "1",  label: "1m" },
   { key: "5",  label: "5m" },
   { key: "15", label: "15m" },
   { key: "30", label: "30m" },
