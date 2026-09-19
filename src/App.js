@@ -3933,6 +3933,19 @@ const TradeChartModal = ({ trade, onClose }) => {
           const target = _dateToUnixSec(dateStr);
           return data.find(b => b.time >= target) || data[data.length - 1];
         };
+        // Last bar within a given date (exclusive of the next day). Used for
+        // the exit marker on an intraday, same-day round trip — we only
+        // record dates, not times, so entry and exit would otherwise both
+        // resolve to that day's FIRST bar via barAtOrAfter and land on top
+        // of each other. Anchoring exit to the day's last bar instead keeps
+        // them visibly distinct (start-of-session vs end-of-session) rather
+        // than an arbitrary coincidental overlap.
+        const lastBarOfDay = dateStr => {
+          const start = _dateToUnixSec(dateStr);
+          const end = _dateToUnixSec(_addDays(dateStr, 1));
+          const dayBars = data.filter(b => b.time >= start && b.time < end);
+          return dayBars.length ? dayBars[dayBars.length - 1] : barAtOrAfter(dateStr);
+        };
 
         const entryBar = barAtOrAfter(entryDate);
         const isShort = trade.side === "short";
@@ -3947,7 +3960,9 @@ const TradeChartModal = ({ trade, onClose }) => {
         });
 
         if (trade.exit_price) {
-          const exitBar = barAtOrAfter(trade.exit_date);
+          const exitBar = (_isIntraday(timeframe) && trade.exit_date === entryDate)
+            ? lastBarOfDay(trade.exit_date)
+            : barAtOrAfter(trade.exit_date);
           const won = tradeIsWin(trade);
           markers.push({
             time: exitBar.time, position: isShort ? "belowBar" : "aboveBar",
