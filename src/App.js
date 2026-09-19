@@ -3696,7 +3696,7 @@ const ChecklistTab = () => {
   );
 };
 
-const TradeJournalTab = ({ data, categoryThemeMap = {} }) => {
+const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [trades, setTrades]         = useState(() => loadTrades());
   const [filter, setFilter]         = useState("all");
   const [showForm, setShowForm]     = useState(false);
@@ -3738,10 +3738,30 @@ const TradeJournalTab = ({ data, categoryThemeMap = {} }) => {
     return m;
   }, [allTickers]);
 
+  // A sector-ETF-keyed leveraged ticker's underlying (SOXX, IWM, FDN, ...) is
+  // itself an ETF, not a stock — none of the three stock-oriented sources
+  // above ever cover it. etf_rs.json carries every tracked ETF's own
+  // fine_theme/category directly, so that's the fallback for that case.
+  const etfOwnThemeMap = useMemo(() => {
+    const m = {};
+    for (const e of etfRsData?.etfs || []) if (e.ticker && (e.fine_theme || e.category)) m[e.ticker] = e.fine_theme || e.category;
+    return m;
+  }, [etfRsData]);
+
   // Same priority order the search bar's Theme row uses: Category Leaderboard's
   // ETF-holdings mapping first (most current), then today's scanner tree, then
-  // stock_db.json's static Finviz-derived theme as a last resort.
-  const resolveTheme = (ticker) => categoryThemeMap[ticker] || scannerThemeMap[ticker] || stockDbThemeMap[ticker] || "";
+  // stock_db.json's static Finviz-derived theme as a last resort. A leveraged/
+  // inverse ETF ticker (SOXS, PLTU, ...) has no theme of its own, so it falls
+  // back to whatever its underlying resolves to — same bucket as a plain trade
+  // in the same name, so Performance by Theme isn't fragmented by wrapper.
+  const resolveTheme = (ticker) => {
+    const direct = categoryThemeMap[ticker] || scannerThemeMap[ticker] || stockDbThemeMap[ticker];
+    if (direct) return direct;
+    const letf = LETF_UNDERLYING_MAP[ticker];
+    if (!letf) return "";
+    const u = letf.underlying;
+    return categoryThemeMap[u] || scannerThemeMap[u] || stockDbThemeMap[u] || etfOwnThemeMap[u] || "";
+  };
 
   const persist = (arr) => { setTrades(arr); saveTrades(arr); };
 
@@ -4033,7 +4053,17 @@ const TradeJournalTab = ({ data, categoryThemeMap = {} }) => {
                     )}
                   </td>
                   <td className="px-2 py-1.5">
-                    <InlineText value={t.theme} onChange={v => updateField(t.id, "theme", v)} placeholder="Theme"/>
+                    <div className="flex items-center gap-1.5 flex-wrap">
+                      {LETF_UNDERLYING_MAP[t.ticker] && (
+                        <span className="inline-flex items-center gap-1 text-[10px] font-mono font-semibold px-1.5 py-0.5 rounded border text-amber-400 bg-amber-500/10 border-amber-500/20 whitespace-nowrap">
+                          LETF
+                          <a href={`https://www.tradingview.com/chart/?symbol=${LETF_UNDERLYING_MAP[t.ticker].underlying}`}
+                            target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()}
+                            className="text-blue-400 hover:text-blue-300">{LETF_UNDERLYING_MAP[t.ticker].underlying}</a>
+                        </span>
+                      )}
+                      <InlineText value={t.theme} onChange={v => updateField(t.id, "theme", v)} placeholder="Theme"/>
+                    </div>
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">{t.entry_price ? `$${t.entry_price}` : "—"}</td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">{t.exit_price ? `$${t.exit_price}` : <span className="text-blue-400 text-[11px]">Open</span>}</td>
@@ -7477,6 +7507,22 @@ const SECTOR_LEVERAGED_ETF_MAP = {
   IBIT: { long: ["BITX"], short: [] },         // Bitcoin Spot
   ETHA: { long: ["ETHU"], short: [] },         // Ethereum
 };
+
+// Reverse index — leveraged/inverse ETF ticker -> { underlying, side } — built
+// once from the two maps above, so any leveraged ticker (stock- or
+// sector-keyed) can be traced back to what it's actually leveraged exposure
+// to. Used by the Trade Journal to theme LETF positions via their underlying
+// and to show a "LETF → underlying" badge instead of leaving Theme blank.
+const LETF_UNDERLYING_MAP = (() => {
+  const m = {};
+  for (const src of [LEVERAGED_ETF_MAP, SECTOR_LEVERAGED_ETF_MAP]) {
+    for (const [underlying, { long, short }] of Object.entries(src)) {
+      for (const t of long)  m[t] = { underlying, side: "long" };
+      for (const t of short) m[t] = { underlying, side: "short" };
+    }
+  }
+  return m;
+})();
 
 // ── Multi-theme overrides: legacy frontend fallback (now mostly handled by scraper's ticker_extra_subthemes) ──
 // Only add entries here for themes the scraper doesn't cover yet.
@@ -13308,7 +13354,7 @@ const appScreenerMap = useMemo(() => {
         </div>
       </div>
 
-      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef}/> : tab === "journal" ? <TradeJournalTab data={data} categoryThemeMap={categoryThemeMap}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} fineThemeRankings={fineThemeRankings}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
+      {tab === "checklist" ? <ChecklistTab/> : tab === "watchlist" ? <DailyWatchlistTab data={data} categoryThemeMap={categoryThemeMap} livePricesRef={livePricesRef}/> : tab === "journal" ? <TradeJournalTab data={data} categoryThemeMap={categoryThemeMap} etfRsData={appEtfRsData}/> : tab === "earnings" ? <EarningsReportTab/> : tab === "news" ? <CalendarTab econData={econData} earningsData={earningsData} thematicData={data} categoryThemeMap={categoryThemeMap}/> : tab === "breadth" ? <MarketBreadthTab data={data} internalsData={internalsData} econData={econData} fineThemeRankings={fineThemeRankings}/> : tab === "gapper" ? <GapperScanner finvizThemeRankings={data?.finviz_theme_rankings || []} themeRankings={data?.theme_rankings || []} earningsData={earningsData} ibkrThemesData={ibkrThemesData} etfHoldings={data?.etf_holdings || {}}/> : (
         <>
         <div className="max-w-[1560px] mx-auto px-4 pt-2 pb-4 flex flex-col lg:flex-row items-stretch lg:items-start gap-3">
           {/* ── MAIN CONTENT ─────────────────────────────────────── */}
