@@ -3077,6 +3077,13 @@ const EMPTY_TRADE = {
   id: "", date: "", entry_time: "", exit_date: "", exit_time: "", ticker: "", theme: "", setup: "", side: "long", entry_price: "", exit_price: "",
   shares: "", stop_used: "ATR", stop_price: "", pnl_dollars: "", pnl_pct: "",
   r_multiple: "", grade: "", notes: "",
+  // Individual executions behind entry_price/exit_price when a position was
+  // built or closed across more than one fill (e.g. scaling in, partial
+  // profit-taking) — entry_price/exit_price stay the size-weighted average
+  // for P&L/R-multiple math, these are for showing each real fill on the
+  // table and chart. [{date, time, price, qty}, ...]; empty for a
+  // single-fill trade or one entered manually.
+  entry_fills: [], exit_fills: [],
 };
 
 const SETUP_OPTS = ["Breakout", "Pullback", "VCP", "Flag", "Base", "Reversal", "Earnings", "Gap & Go", "Other"];
@@ -3278,6 +3285,8 @@ function parseIbkrTrades(csvText, categoryThemeMap = {}) {
         entry_price: entryAvg != null ? entryAvg.toFixed(2) : "",
         exit_price: isOpen || exitAvg == null ? "" : exitAvg.toFixed(2),
         shares: Math.round(Math.min(sumQty(segBuys), sumQty(segSells)) || sumQty(entrySide)),
+        entry_fills: entrySide.map(e => ({ date: e.date, time: e.time, price: e.price, qty: Math.abs(e.qty) })),
+        exit_fills: isOpen ? [] : exitSide.map(e => ({ date: e.date, time: e.time, price: e.price, qty: Math.abs(e.qty) })),
         notes: "Imported from IBKR",
       });
       segBuys = []; segSells = []; segStart = null; segStartTime = null; segLastDate = null; segLastTime = null;
@@ -4385,33 +4394,64 @@ const TradeChartModal = ({ trade, onClose }) => {
           return data[0];
         };
 
-        const hasEntryTime = _isIntraday(timeframe) && trade.entry_time;
-        const hasExitTime = _isIntraday(timeframe) && trade.exit_time;
-        const entryBar = hasEntryTime ? barContaining(entryDate, trade.entry_time) : barAtOrAfter(entryDate);
         const isShort = trade.side === "short";
-        const markers = [{
-          time: entryBar.time, position: isShort ? "aboveBar" : "belowBar",
-          color: "#3b82f6", shape: isShort ? "arrowDown" : "arrowUp",
-          text: `Entry $${trade.entry_price}`,
-        }];
-        series.createPriceLine({
-          price: parseFloat(trade.entry_price), color: "#3b82f6", lineWidth: 1, lineStyle: 2, axisLabelVisible: false,
-        });
+        // Real fills when the import captured them (each with its own date/
+        // time/price/qty), falling back to a single synthetic fill from the
+        // trade's own fields for manual entries or pre-fills-feature data —
+        // same bar-resolution behavior as before in that fallback case.
+        const entryFills = trade.entry_fills?.length
+          ? trade.entry_fills
+          : [{ date: entryDate, time: trade.entry_time || "", price: trade.entry_price, qty: trade.shares }];
+        const exitFills = trade.exit_price
+          ? (trade.exit_fills?.length
+              ? trade.exit_fills
+              : [{ date: trade.exit_date, time: trade.exit_time || "", price: trade.exit_price, qty: trade.shares }])
+          : [];
 
-        if (trade.exit_price) {
-          const exitBar = hasExitTime ? barContaining(trade.exit_date, trade.exit_time)
-            : (_isIntraday(timeframe) && trade.exit_date === entryDate)
-              ? lastBarOfDay(trade.exit_date)
-              : barAtOrAfter(trade.exit_date);
-          const won = tradeIsWin(trade);
+        const barForEntryFill = f => (_isIntraday(timeframe) && f.time) ? barContaining(f.date, f.time) : barAtOrAfter(f.date);
+        const barForExitFill = f => {
+          if (_isIntraday(timeframe) && f.time) return barContaining(f.date, f.time);
+          if (_isIntraday(timeframe) && f.date === entryDate) return lastBarOfDay(f.date);
+          return barAtOrAfter(f.date);
+        };
+
+        const markers = [];
+        entryFills.forEach(f => {
           markers.push({
-            time: exitBar.time, position: isShort ? "belowBar" : "aboveBar",
-            color: won ? "#22c55e" : "#ef4444", shape: isShort ? "arrowUp" : "arrowDown",
-            text: `Exit $${trade.exit_price}`,
+            time: barForEntryFill(f).time, position: isShort ? "aboveBar" : "belowBar",
+            color: "#3b82f6", shape: isShort ? "arrowDown" : "arrowUp",
+            text: entryFills.length > 1 ? `Entry ${f.qty}@$${f.price}` : `Entry $${f.price}`,
           });
+        });
+        // Multiple entry/exit fills means multiple dashed lines would clutter
+        // the chart with little added benefit (each marker's own label
+        // already shows its exact price) — only draw the reference line for
+        // the simple, common single-fill case.
+        if (entryFills.length === 1) {
           series.createPriceLine({
-            price: parseFloat(trade.exit_price), color: won ? "#22c55e" : "#ef4444", lineWidth: 1, lineStyle: 2, axisLabelVisible: false,
+            price: parseFloat(entryFills[0].price), color: "#3b82f6", lineWidth: 1, lineStyle: 2, axisLabelVisible: false,
           });
+        }
+
+        if (exitFills.length) {
+          const entryRef = parseFloat(trade.entry_price);
+          exitFills.forEach(f => {
+            // Each exit fill is colored by whether THAT fill beat the entry
+            // average, not just the trade's overall win/loss — makes a
+            // scaled-out exit's good and bad pieces visible at a glance.
+            const favorable = isShort ? parseFloat(f.price) < entryRef : parseFloat(f.price) > entryRef;
+            markers.push({
+              time: barForExitFill(f).time, position: isShort ? "belowBar" : "aboveBar",
+              color: favorable ? "#22c55e" : "#ef4444", shape: isShort ? "arrowUp" : "arrowDown",
+              text: exitFills.length > 1 ? `Exit ${f.qty}@$${f.price}` : `Exit $${f.price}`,
+            });
+          });
+          if (exitFills.length === 1) {
+            const won = tradeIsWin(trade);
+            series.createPriceLine({
+              price: parseFloat(exitFills[0].price), color: won ? "#22c55e" : "#ef4444", lineWidth: 1, lineStyle: 2, axisLabelVisible: false,
+            });
+          }
         }
         createSeriesMarkers(series, markers);
 
@@ -4453,10 +4493,11 @@ const TradeChartModal = ({ trade, onClose }) => {
             <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${trade.side === "short" ? "text-red-400 bg-red-500/10 border-red-500/30" : "text-zinc-400 bg-zinc-800/60 border-zinc-700/50"}`}>
               {trade.side === "short" ? "SHORT" : "LONG"}
             </span>
-            <span className="text-[12px] text-zinc-400">Entry <span className="text-zinc-200 font-mono">${trade.entry_price}</span> <span className="font-mono">{trade.date || "—"}{trade.entry_time && ` ${trade.entry_time}`}</span></span>
+            <span className="text-[12px] text-zinc-400">Entry <span className="text-zinc-200 font-mono">${trade.entry_price}</span> <span className="font-mono">{trade.date || "—"}{trade.entry_time && ` ${trade.entry_time}`}</span>{trade.entry_fills?.length > 1 && <span className="text-zinc-600"> (avg of {trade.entry_fills.length} fills)</span>}</span>
             <span className="text-[12px] text-zinc-400">
               Exit {trade.exit_price ? <span className="text-zinc-200 font-mono">${trade.exit_price}</span> : <span className="text-blue-400">Open</span>}
               {trade.exit_date && <span className="font-mono"> {trade.exit_date}{trade.exit_time && ` ${trade.exit_time}`}</span>}
+              {trade.exit_fills?.length > 1 && <span className="text-zinc-600"> (avg of {trade.exit_fills.length} fills)</span>}
             </span>
             {trade.pnl_dollars !== "" && trade.pnl_dollars != null && (
               <span className={`text-[12px] font-mono font-bold ${parseFloat(trade.pnl_dollars) >= 0 ? "text-emerald-400" : "text-red-400"}`}>
@@ -5371,9 +5412,19 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                         cls="text-[10px] font-medium px-1.5 py-0.5 rounded border text-violet-400 bg-violet-500/10 border-violet-500/20"/>
                     </div>
                   </td>
-                  <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">{t.entry_price ? `$${t.entry_price}` : "—"}</td>
+                  <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">
+                    {t.entry_price ? `$${t.entry_price}` : "—"}
+                    {t.entry_fills?.length > 1 && (
+                      <span title={t.entry_fills.map(f => `${f.qty}@$${f.price} ${f.date}${f.time ? ` ${f.time}` : ""}`).join("\n")}
+                        className="ml-1 text-[9px] text-zinc-600 cursor-help">×{t.entry_fills.length}</span>
+                    )}
+                  </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">
                     {t.exit_price ? `$${t.exit_price}` : <span className="text-blue-400 text-[11px]">Open</span>}
+                    {t.exit_fills?.length > 1 && (
+                      <span title={t.exit_fills.map(f => `${f.qty}@$${f.price} ${f.date}${f.time ? ` ${f.time}` : ""}`).join("\n")}
+                        className="ml-1 text-[9px] text-zinc-600 cursor-help">×{t.exit_fills.length}</span>
+                    )}
                     {t.exit_price && (
                       <>
                         {" "}<InlineText value={t.exit_date} onChange={v => updateField(t.id, "exit_date", v)} placeholder="exit date" cls="text-zinc-600"/>
