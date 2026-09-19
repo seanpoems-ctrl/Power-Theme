@@ -3849,25 +3849,41 @@ function _addDays(dateStr, days) {
   return d.toISOString().slice(0, 10);
 }
 
+// Intraday resolutions have limited lookback on Yahoo's backend (1m ~7d, up
+// to 60m ~2yr) — an older trade will legitimately return no bars at those
+// resolutions. Daily/Weekly go back decades, so they always work.
+const TIMEFRAME_OPTS = [
+  { key: "5",  label: "5m" },
+  { key: "15", label: "15m" },
+  { key: "30", label: "30m" },
+  { key: "60", label: "1H" },
+  { key: "D",  label: "1D" },
+  { key: "W",  label: "1W" },
+];
+const _isIntraday = tf => tf !== "D" && tf !== "W";
+
 // Candlestick chart for one trade using TradingView's Lightweight Charts
 // (Apache-2.0, plain npm package — not the licensed Advanced Charts library,
 // which was evaluated and declined: public-repo restriction conflicts with
 // this being an open GitHub repo, plus a $50k liquidated-damages clause).
 // Draws entry/exit as both a price line (exact price, right axis) and a
-// shape marker (exact date). Daily resolution only — trades only record a
-// date, not a time, so daily bars are the honest level of precision, and
-// unlike intraday bars they're never outside Yahoo's retention window for
-// older trades.
+// shape marker. Trades only record a date, not a time, so on intraday
+// timeframes the marker lands on the first bar of that day — real for
+// studying the day's candle structure, not literally the fill's minute.
 const TradeChartModal = ({ trade, onClose }) => {
   const containerRef = useRef(null);
   const chartRef = useRef(null);
-  const [status, setStatus] = useState(TV_PROXY_URL ? "loading" : "no-proxy"); // loading | ready | error | no-proxy
+  const [timeframe, setTimeframe] = useState("D");
+  const [status, setStatus] = useState(TV_PROXY_URL ? "loading" : "no-proxy"); // loading | ready | no-data | error | no-proxy
 
   React.useEffect(() => {
     const h = e => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", h);
     return () => window.removeEventListener("keydown", h);
   }, [onClose]);
+
+  // Reset to Daily whenever a different trade is opened.
+  useEffect(() => { setTimeframe("D"); }, [trade?.id]);
 
   useEffect(() => {
     if (!trade || !TV_PROXY_URL || !containerRef.current) return;
@@ -3876,14 +3892,19 @@ const TradeChartModal = ({ trade, onClose }) => {
 
     const entryDate = trade.date;
     const exitDate = trade.exit_date || new Date().toISOString().slice(0, 10);
-    const from = _dateToUnixSec(_addDays(entryDate, -15));
-    const to = _dateToUnixSec(_addDays(exitDate, 15));
+    // Intraday views only need a few days of context either side; D/W keep
+    // the wider lead-in/follow-through window.
+    const fetchPad = _isIntraday(timeframe) ? 3 : 15;
+    const rangePad = _isIntraday(timeframe) ? 1 : 5;
+    const from = _dateToUnixSec(_addDays(entryDate, -fetchPad));
+    const to = _dateToUnixSec(_addDays(exitDate, fetchPad));
 
-    fetch(`${TV_PROXY_URL}/bars?symbol=${encodeURIComponent(trade.ticker)}&resolution=D&from=${from}&to=${to}`)
+    fetch(`${TV_PROXY_URL}/bars?symbol=${encodeURIComponent(trade.ticker)}&resolution=${timeframe}&from=${from}&to=${to}`)
       .then(r => r.json())
       .then(({ bars }) => {
         if (cancelled || !containerRef.current) return;
-        if (!bars || bars.length < 2) { setStatus("error"); return; }
+        if (chartRef.current) { chartRef.current.remove(); chartRef.current = null; }
+        if (!bars || bars.length < 2) { setStatus("no-data"); return; }
 
         const data = bars.map(b => ({
           time: Math.floor(b.time / 1000), // Worker returns ms; Lightweight Charts wants unix seconds
@@ -3942,8 +3963,8 @@ const TradeChartModal = ({ trade, onClose }) => {
         // The actual ask: auto-jump to the trade's date window (padded a
         // few days either side) instead of leaving that to manual scrolling.
         chart.timeScale().setVisibleRange({
-          from: _dateToUnixSec(_addDays(entryDate, -5)),
-          to: _dateToUnixSec(_addDays(exitDate, 5)),
+          from: _dateToUnixSec(_addDays(entryDate, -rangePad)),
+          to: _dateToUnixSec(_addDays(exitDate, rangePad)),
         });
 
         setStatus("ready");
@@ -3954,7 +3975,7 @@ const TradeChartModal = ({ trade, onClose }) => {
       cancelled = true;
       if (chartRef.current) { chartRef.current.remove(); chartRef.current = null; }
     };
-  }, [trade]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [trade, timeframe]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!trade) return null;
 
@@ -3992,6 +4013,23 @@ const TradeChartModal = ({ trade, onClose }) => {
           </div>
           <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded flex-shrink-0"><X size={15}/></button>
         </div>
+        {!showFallback && (
+          <div className="flex items-center gap-2 px-4 pt-2 flex-shrink-0">
+            <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+              {TIMEFRAME_OPTS.map(o => (
+                <button key={o.key} onClick={() => setTimeframe(o.key)}
+                  className={`px-2 py-0.5 text-[11px] font-medium rounded-md transition-all ${timeframe === o.key ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
+                  {o.label}
+                </button>
+              ))}
+            </div>
+            {_isIntraday(timeframe) && (
+              <span className="text-[10px] text-zinc-600">
+                marker = first bar of that day (fill time isn't recorded) · Yahoo intraday history is limited, older trades may show no data
+              </span>
+            )}
+          </div>
+        )}
         {showFallback && (
           <div className="text-[10px] text-zinc-600 px-4 pt-2 flex-shrink-0">
             {status === "no-proxy"
@@ -4008,6 +4046,12 @@ const TradeChartModal = ({ trade, onClose }) => {
               <div ref={containerRef} style={{ width: "100%", height: "100%", minHeight: "500px" }}/>
               {status === "loading" && (
                 <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[12px]">Loading chart…</div>
+              )}
+              {status === "no-data" && (
+                <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[12px] text-center px-8">
+                  No {TIMEFRAME_OPTS.find(o => o.key === timeframe)?.label} data available for this date range —
+                  {_isIntraday(timeframe) ? " this trade is likely older than Yahoo's intraday retention window. Try 1D or 1W." : " try a different timeframe."}
+                </div>
               )}
             </>
           )}
