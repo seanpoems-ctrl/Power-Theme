@@ -7655,6 +7655,7 @@ const BreadthStockScreener = ({ data, compact = false }) => {
 };
 
 const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [] }) => {
+  const [miniChartsFor, setMiniChartsFor] = React.useState(null); // { title, tickers } for the Market Breadth drill-down's mini-chart grid
   const mc  = data?.market_condition || {};
   const adv = mc.adv_dec;
   const hl  = mc.new_hl;
@@ -7988,7 +7989,7 @@ const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [
 
         {/* ── Stockbee Market Monitor table ─────────────────────────────── */}
         <div className="mt-5">
-          <MarketBreadthMonitor />
+          <MarketBreadthMonitor onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Market Breadth", tickers })} />
         </div>
       </div>
 
@@ -8198,6 +8199,9 @@ const MarketBreadthTab = ({ data, internalsData, econData, fineThemeRankings = [
           </div>
         </div>
       </div>
+    )}
+    {miniChartsFor && (
+      <MiniChartGridModal title={miniChartsFor.title} tickers={miniChartsFor.tickers} onClose={() => setMiniChartsFor(null)} />
     )}</>
   );
 };
@@ -11116,7 +11120,7 @@ const NO_HOLDINGS_ETFS = {
   NASA: "Mix of public and pre-IPO companies",
 };
 
-const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etfRsMap = {} }) => {
+const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etfRsMap = {}, onMiniCharts = null }) => {
   const [sortCol, setSortCol] = useState("perf_1d");
   const [sortDir, setSortDir] = useState("desc");
 
@@ -11227,9 +11231,17 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
             })()}
             <span className="text-xs text-zinc-500">{sorted.length} stocks · historical snapshot</span>
           </div>
-          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded">
-            <X size={15} />
-          </button>
+          <div className="flex items-center gap-3">
+            {onMiniCharts && sorted.length > 0 && (
+              <button onClick={() => onMiniCharts(sorted.map(h => h.ticker), `${theme} (${etf})`)}
+                className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+                ▦ Mini Charts
+              </button>
+            )}
+            <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded">
+              <X size={15} />
+            </button>
+          </div>
         </div>
 
         {/* Table — fixed layout with % column widths so it always fits the
@@ -11914,6 +11926,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
           screenerMap={screenerMap}
           etfRsMap={etfRsMap}
           onClose={() => setHoldingsModal(null)}
+          onMiniCharts={onMiniCharts}
         />
       )}
     </div>
@@ -12150,6 +12163,7 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniC
           screenerMap={screenerMap}
           etfRsMap={etfRsMap}
           onClose={() => setHoldingsModal(null)}
+          onMiniCharts={onMiniCharts}
         />
       )}
     </div>
@@ -12163,7 +12177,7 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniC
 // the reference row ("benchmark") in Index, and SPY re-shown as a familiar
 // reference row inside EW Sector / SPDR Sector.
 // ─────────────────────────────────────────────────────────────────────────────
-const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
+const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniCharts = null }) => {
   const [selectedEtf, setSelectedEtf] = useState(null);
   const etfs = etfRsData?.etfs ?? [];
   const spy = React.useMemo(() => etfs.find(e => e.ticker === "SPY"), [etfs]);
@@ -12242,6 +12256,17 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
 
   return (
     <div className="space-y-4">
+      {onMiniCharts && (
+        <div className="flex justify-end">
+          <button onClick={() => onMiniCharts(
+              sections.flatMap(({ name, rows }) => rows.map(e => ({ ticker: e.ticker, category: name }))),
+              "Index / Sector Benchmarks"
+            )}
+            className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+            ▦ Mini Charts
+          </button>
+        </div>
+      )}
       {sections.map(({ name, rows }) => (
         <div key={name} className="rounded-lg border border-zinc-800 overflow-x-auto">
           <table className="w-full text-xs border-collapse" style={{ tableLayout: "fixed" }}>
@@ -12339,6 +12364,7 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
           holdings={selectedEtf.holdings}
           screenerMap={screenerMap}
           onClose={() => setSelectedEtf(null)}
+          onMiniCharts={onMiniCharts}
         />
       )}
     </div>
@@ -12619,6 +12645,7 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
         screenerMap={screenerMap}
         etfRsMap={etfRsMap}
         onClose={() => setSelectedEtf(null)}
+        onMiniCharts={onMiniCharts}
       />
     )}
     </>
@@ -12815,7 +12842,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
         </div>
         <div className="overflow-y-auto p-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {pageItems.map(item => <MiniChartCard key={item.ticker} ticker={item.ticker} category={item.category} timeframe={timeframe}/>)}
+            {pageItems.map((item, i) => <MiniChartCard key={`${item.ticker}::${item.category || ""}::${i}`} ticker={item.ticker} category={item.category} timeframe={timeframe}/>)}
           </div>
         </div>
       </div>
@@ -13535,13 +13562,21 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                 </button>
               )}
             </div>
-            <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 shrink-0">
-              {[{k:"perf_1d",l:"1D"},{k:"perf_1w",l:"1W"},{k:"perf_1m",l:"1M"},{k:"perf_3m",l:"3M"}].map(o => (
-                <button key={o.k} onClick={() => setLeaderPerfMode(o.k)}
-                  className={`px-2 py-0.5 text-[11px] font-medium rounded-md transition-all ${leaderPerfMode === o.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
-                  {o.l}
+            <div className="flex items-center gap-2 shrink-0">
+              <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+                {[{k:"perf_1d",l:"1D"},{k:"perf_1w",l:"1W"},{k:"perf_1m",l:"1M"},{k:"perf_3m",l:"3M"}].map(o => (
+                  <button key={o.k} onClick={() => setLeaderPerfMode(o.k)}
+                    className={`px-2 py-0.5 text-[11px] font-medium rounded-md transition-all ${leaderPerfMode === o.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
+                    {o.l}
+                  </button>
+                ))}
+              </div>
+              {leaders.length > 0 && (
+                <button onClick={() => setMiniChartsFor({ title: "Market Leaders", tickers: leaders.map(s => ({ ticker: s.ticker, category: s.theme })) })}
+                  className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+                  ▦ Mini Charts
                 </button>
-              ))}
+              )}
             </div>
           </div>
           {themeFilter && leaders.length === 0 && (
@@ -13593,10 +13628,11 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
         <div className="space-y-6">
           <EtfRotationBrief etfRsData={etfRsData} />
           <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} onJumpToThemeLong={jumpToThemeLong} onJumpToThemeShort={jumpToThemeShort} livePricesRef={livePricesRef}
-            onMiniCharts={tickers => setMiniChartsFor({ title: "ETF Category Leaderboard", tickers })} />
+            onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "ETF Category Leaderboard", tickers })} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap}
-            onMiniCharts={tickers => setMiniChartsFor({ title: "RS Flip Scanner", tickers })} />
-          <IndexSectorBenchmarkTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
+            onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "RS Flip Scanner", tickers })} />
+          <IndexSectorBenchmarkTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap}
+            onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Index / Sector Benchmarks", tickers })} />
           <EtfCandidatesPanel />
         </div>
       )}
@@ -13654,7 +13690,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
             </div>
           </div>
           <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap}
-            onMiniCharts={tickers => setMiniChartsFor({ title: "ETF RS", tickers })} />
+            onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "ETF RS", tickers })} />
           <UniverseTab etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} etfRsData={etfRsData} />
         </div>
       )}

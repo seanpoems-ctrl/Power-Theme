@@ -906,7 +906,7 @@ const BreadthTable = memo(function BreadthTable({ rows, latestDate, onOpenModal 
 // Main component
 // ---------------------------------------------------------------------------
 
-const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
+const MarketBreadthMonitor = memo(function MarketBreadthMonitor({ onMiniCharts }) {
   const [data, setData]             = useState(null);
   const [loading, setLoading]       = useState(true);
   const [error, setError]           = useState(null);
@@ -1103,6 +1103,7 @@ const MarketBreadthMonitor = memo(function MarketBreadthMonitor() {
           isLatest={modal.isLatest}
           onClose={closeModal}
           onAddToClipboard={addToClipboard}
+          onMiniCharts={onMiniCharts}
         />
       )}
     </div>

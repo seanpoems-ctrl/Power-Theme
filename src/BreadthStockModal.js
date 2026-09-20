@@ -1176,7 +1176,7 @@ function normalizeHistoricalStock(s) {
 // Main modal
 // ---------------------------------------------------------------------------
 
-const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel, date, isLatest, onClose, onAddToClipboard }) {
+const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel, date, isLatest, onClose, onAddToClipboard, onMiniCharts }) {
   const [view, setView] = useState("list");
   const [stocks, setStocks] = useState([]);
   const [spxData, setSpxData] = useState(null);
@@ -1285,6 +1285,13 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
 
   const allTickers = displayStocks.map((s) => s.ticker);
 
+  // Mini-chart items follow whichever view is active: List gives a flat
+  // ticker list, Group gives {ticker, category: industry} pairs so the
+  // grid shows the same industry grouping the table itself is showing.
+  const miniChartItems = view === "group"
+    ? groupByIndustry(displayStocks).flatMap((g) => g.items.map((s) => ({ ticker: s.ticker, category: g.industry })))
+    : allTickers;
+
   return (
     <>
     {/* Backdrop */}
@@ -1334,6 +1341,17 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
               Group
             </button>
           </div>
+
+          {/* Mini Charts */}
+          {allTickers.length > 0 && onMiniCharts && (
+            <button
+              onClick={() => onMiniCharts(miniChartItems, filterLabel)}
+              className="inline-flex items-center gap-1.5 rounded px-2.5 py-1 text-xs transition-colors
+                bg-zinc-800 text-zinc-300 hover:bg-zinc-700 hover:text-zinc-100 border border-zinc-700"
+            >
+              ▦ Mini Charts
+            </button>
+          )}
 
           {/* Add to Clipboard */}
           {allTickers.length > 0 && onAddToClipboard && (
