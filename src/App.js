@@ -11688,7 +11688,19 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
         <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide">🏆 Category Leaderboard</h3>
         <span className="text-[11px] text-zinc-500">Fine-grained industry RS rollup · top-down rotation view · click any column to sort</span>
         {onMiniCharts && (
-          <button onClick={() => onMiniCharts(etfs.map(e => e.ticker))}
+          <button onClick={() => {
+            // Categories are already in the table's own current sort order
+            // (score, or whichever perf column the user last clicked) — reuse
+            // that order rather than a flat, arbitrary ticker dump. Members
+            // within each category sort by that same metric when it exists on
+            // a member row (all the perf_* columns do; category-only columns
+            // like leaderScore/anchorTicker/flips fall back to 1W perf).
+            const memberSortCol = etfs[0] && etfs[0][sortCol] !== undefined ? sortCol : "perf_1w";
+            const items = categories.flatMap(c => [...c.members]
+              .sort((a, b) => (b[memberSortCol] ?? -Infinity) - (a[memberSortCol] ?? -Infinity))
+              .map(m => ({ ticker: m.ticker, category: c.cat })));
+            onMiniCharts(items);
+          }}
             className="ml-auto text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
             ▦ Mini Charts
           </button>
@@ -12625,7 +12637,7 @@ const _miniIsIntraday = tf => tf !== "D" && tf !== "W" && tf !== "M";
 // own comment). This gets real green/orange/blue EMAs at the cost of losing
 // the iframe's free interval-switcher chrome — replaced by the
 // MINI_TIMEFRAME_OPTS row in MiniChartGridModal's header, applied to every card.
-const MiniChartCard = ({ ticker, timeframe }) => {
+const MiniChartCard = ({ ticker, category, timeframe }) => {
   const containerRef = useRef(null);
   const chartRef = useRef(null);
   const [status, setStatus] = useState(TV_PROXY_URL ? "loading" : "no-proxy");
@@ -12701,8 +12713,9 @@ const MiniChartCard = ({ ticker, timeframe }) => {
   return (
     <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-lg overflow-hidden">
       <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
-        className="block px-2 py-1 text-[11px] font-mono font-bold text-cyan-400 hover:text-cyan-300 border-b border-zinc-800/60">
-        {ticker}
+        className="flex items-baseline gap-1.5 px-2 py-1 text-[11px] font-mono font-bold text-cyan-400 hover:text-cyan-300 border-b border-zinc-800/60">
+        <span>{ticker}</span>
+        {category && <span className="text-zinc-500 font-sans font-normal truncate">{category}</span>}
       </a>
       <div className="relative" style={{ height: 260 }}>
         <div ref={containerRef} style={{ width: "100%", height: "100%" }}/>
@@ -12722,8 +12735,13 @@ const MINI_CHART_PAGE_SIZE = 9; // 3x3 grid per page
 const MiniChartGridModal = ({ title, tickers, onClose }) => {
   const [page, setPage] = React.useState(0);
   const [timeframe, setTimeframe] = React.useState("D");
-  const pageCount = Math.ceil(tickers.length / MINI_CHART_PAGE_SIZE);
-  const pageTickers = tickers.slice(page * MINI_CHART_PAGE_SIZE, page * MINI_CHART_PAGE_SIZE + MINI_CHART_PAGE_SIZE);
+  // `tickers` is either a flat array of ticker strings (Clean Bases, ETF RS,
+  // RS Flip Scanner) or {ticker, category} objects (Category Leaderboard,
+  // which groups/orders by category) — normalize once so the rest of this
+  // component doesn't care which shape it got.
+  const items = React.useMemo(() => tickers.map(t => typeof t === "string" ? { ticker: t, category: null } : t), [tickers]);
+  const pageCount = Math.ceil(items.length / MINI_CHART_PAGE_SIZE);
+  const pageItems = items.slice(page * MINI_CHART_PAGE_SIZE, page * MINI_CHART_PAGE_SIZE + MINI_CHART_PAGE_SIZE);
 
   React.useEffect(() => {
     const handler = e => { if (e.key === "Escape") onClose(); };
@@ -12737,7 +12755,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
       <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-[1400px] flex flex-col max-h-[90vh]" onClick={e => e.stopPropagation()}>
         <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 flex-shrink-0 flex-wrap gap-2">
           <div className="flex items-center gap-3 flex-wrap">
-            <span className="text-sm font-bold text-zinc-100">{title} <span className="text-zinc-500 font-normal">({tickers.length})</span></span>
+            <span className="text-sm font-bold text-zinc-100">{title} <span className="text-zinc-500 font-normal">({items.length})</span></span>
             <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
               {MINI_TIMEFRAME_OPTS.map(o => (
                 <button key={o.key} onClick={() => setTimeframe(o.key)}
@@ -12770,7 +12788,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
         </div>
         <div className="overflow-y-auto p-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {pageTickers.map(ticker => <MiniChartCard key={ticker} ticker={ticker} timeframe={timeframe}/>)}
+            {pageItems.map(item => <MiniChartCard key={item.ticker} ticker={item.ticker} category={item.category} timeframe={timeframe}/>)}
           </div>
         </div>
       </div>
