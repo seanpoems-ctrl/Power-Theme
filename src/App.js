@@ -11539,7 +11539,7 @@ const EtfCandidatesPanel = () => {
   );
 };
 
-const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onJumpToThemeLong = null, onJumpToThemeShort = null, livePricesRef = null }) => {
+const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onJumpToThemeLong = null, onJumpToThemeShort = null, livePricesRef = null, onMiniCharts = null }) => {
   const [sortCol, setSortCol] = useState("score");      // any column key below
   const [sortDir, setSortDir] = useState("desc");
   const [holdingsModal, setHoldingsModal] = useState(null);
@@ -11687,6 +11687,12 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
       <div className="flex items-center gap-3 mb-3 flex-wrap">
         <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide">🏆 Category Leaderboard</h3>
         <span className="text-[11px] text-zinc-500">Fine-grained industry RS rollup · top-down rotation view · click any column to sort</span>
+        {onMiniCharts && (
+          <button onClick={() => onMiniCharts(etfs.map(e => e.ticker))}
+            className="ml-auto text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+            ▦ Mini Charts
+          </button>
+        )}
       </div>
 
       <div className="overflow-x-auto rounded-lg border border-zinc-800">
@@ -12575,19 +12581,135 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
 //   2. Market Leaders — RS≥90 cards with theme context
 //   3. Gapper Watch — high conviction pre-market plays
 // ─────────────────────────────────────────────────────────────────────────────
-// Grid of small real candlestick charts (with 9/21/50 EMA overlays, matching
-// TradeChartModal's own EMA_OVERLAY_CONFIG periods) — a quick-glance scan
-// across many tickers at once (e.g. every Clean Bases name) instead of
-// opening one full chart at a time. Uses TradingView's public
-// `embed-widget/advanced-chart` endpoint (not the licensed Advanced Charts
-// library) — the plain `widgetembed` endpoint used elsewhere in this file
-// doesn't honor a `studies` param at all (verified live), so this one needs
-// the JSON-config hash format instead. The earlier version used the much
-// sparser "mini symbol overview" line-sparkline widget, which read as
-// near-blank at this size; full candles with volume are far more legible.
+// EMA overlay colors for the mini chart grid — green/orange/blue per the
+// user's explicit ask (distinct from TradeChartModal's own teal/orange/blue
+// EMA_OVERLAY_CONFIG convention).
+const MINI_EMA_CONFIG = [
+  { period: 9,  color: "#22c55e" },
+  { period: 21, color: "#f97316" },
+  { period: 50, color: "#3b82f6" },
+];
+
+// Mini-chart-grid-only interval list (separate from TradeChartModal's own
+// TIMEFRAME_OPTS so adding Monthly here can't affect that component). "M" is
+// the one bar resolution TradeChartModal doesn't offer.
+const MINI_TIMEFRAME_OPTS = [
+  { key: "1",  label: "1m" },
+  { key: "5",  label: "5m" },
+  { key: "15", label: "15m" },
+  { key: "30", label: "30m" },
+  { key: "60", label: "1H" },
+  { key: "D",  label: "1D" },
+  { key: "W",  label: "1W" },
+  { key: "M",  label: "1M" },
+];
+const _miniIsIntraday = tf => tf !== "D" && tf !== "W" && tf !== "M";
+
+// One card's own Lightweight Charts instance (same unrestricted library +
+// cloudflare-worker proxy as TradeChartModal). The TradingView public embed
+// widget was tried first, but it can't color multiple instances of the same
+// study differently — true per-line EMA colors need the licensed Advanced
+// Charts JS API, which this project already declined (see TradeChartModal's
+// own comment). This gets real green/orange/blue EMAs at the cost of losing
+// the iframe's free interval-switcher chrome — replaced by the
+// MINI_TIMEFRAME_OPTS row in MiniChartGridModal's header, applied to every card.
+const MiniChartCard = ({ ticker, timeframe }) => {
+  const containerRef = useRef(null);
+  const chartRef = useRef(null);
+  const [status, setStatus] = useState(TV_PROXY_URL ? "loading" : "no-proxy");
+
+  useEffect(() => {
+    if (!TV_PROXY_URL || !containerRef.current) return;
+    let cancelled = false;
+    setStatus("loading");
+
+    const today = new Date().toISOString().slice(0, 10);
+    const fetchDays = _miniIsIntraday(timeframe) ? 10 : timeframe === "M" ? 2600 : timeframe === "W" ? 600 : 260;
+    const from = _dateToUnixSec(_addDays(today, -fetchDays));
+    const to = _dateToUnixSec(_addDays(today, 1));
+
+    fetch(`${TV_PROXY_URL}/bars?symbol=${encodeURIComponent(ticker)}&resolution=${timeframe}&from=${from}&to=${to}`)
+      .then(r => r.json())
+      .then(({ bars }) => {
+        if (cancelled || !containerRef.current) return;
+        if (chartRef.current) { chartRef.current.remove(); chartRef.current = null; }
+        if (!bars || bars.length < 2) { setStatus("no-data"); return; }
+
+        const data = bars.map(b => {
+          const t = Math.floor(b.time / 1000);
+          return {
+            time: _miniIsIntraday(timeframe) ? _utcToEtDisplaySec(t) : t,
+            open: b.open, high: b.high, low: b.low, close: b.close, volume: b.volume || 0,
+          };
+        });
+
+        const chart = createChart(containerRef.current, {
+          layout: { background: { color: "transparent" }, textColor: "#71717a", fontSize: 10 },
+          grid: { vertLines: { color: "#ffffff08" }, horzLines: { color: "#ffffff08" } },
+          timeScale: { borderColor: "#3f3f46", timeVisible: _miniIsIntraday(timeframe), secondsVisible: false },
+          rightPriceScale: { borderColor: "#3f3f46" },
+          crosshair: { mode: 0 },
+          autoSize: true,
+        });
+        chartRef.current = chart;
+
+        const series = chart.addSeries(CandlestickSeries, {
+          upColor: "#22c55e", downColor: "#ef4444", borderVisible: false,
+          wickUpColor: "#22c55e", wickDownColor: "#ef4444",
+        });
+        series.setData(data);
+
+        const volSeries = chart.addSeries(HistogramSeries, { priceFormat: { type: "volume" }, priceScaleId: "vol", priceLineVisible: false, lastValueVisible: false });
+        volSeries.priceScale().applyOptions({ scaleMargins: { top: 0.82, bottom: 0 } });
+        volSeries.setData(data.map(b => ({ time: b.time, value: b.volume, color: b.close >= b.open ? "#22c55e40" : "#ef444440" })));
+
+        const closes = data.map(b => b.close);
+        const buildLineData = values => data.reduce((acc, b, i) => {
+          if (values[i] != null) acc.push({ time: b.time, value: values[i] });
+          return acc;
+        }, []);
+        MINI_EMA_CONFIG.forEach(cfg => {
+          const s = chart.addSeries(LineSeries, {
+            color: cfg.color, lineWidth: 1, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false,
+          });
+          s.setData(buildLineData(_emaSeries(closes, cfg.period)));
+        });
+
+        chart.timeScale().fitContent();
+        setStatus("ready");
+      })
+      .catch(() => { if (!cancelled) setStatus("error"); });
+
+    return () => {
+      cancelled = true;
+      if (chartRef.current) { chartRef.current.remove(); chartRef.current = null; }
+    };
+  }, [ticker, timeframe]);
+
+  return (
+    <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-lg overflow-hidden">
+      <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
+        className="block px-2 py-1 text-[11px] font-mono font-bold text-cyan-400 hover:text-cyan-300 border-b border-zinc-800/60">
+        {ticker}
+      </a>
+      <div className="relative" style={{ height: 260 }}>
+        <div ref={containerRef} style={{ width: "100%", height: "100%" }}/>
+        {status === "loading" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[10px]">Loading…</div>}
+        {status === "no-data" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[10px]">No data for this range</div>}
+        {status === "error" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[10px]">Failed to load</div>}
+        {status === "no-proxy" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[10px] px-3 text-center">Bar-data proxy not configured</div>}
+      </div>
+    </div>
+  );
+};
+
+// Grid of small real candlestick charts with 9/21/50 EMA overlays — a
+// quick-glance scan across many tickers at once (e.g. every Clean Bases
+// name) instead of opening one full chart at a time.
 const MINI_CHART_PAGE_SIZE = 9; // 3x3 grid per page
 const MiniChartGridModal = ({ title, tickers, onClose }) => {
   const [page, setPage] = React.useState(0);
+  const [timeframe, setTimeframe] = React.useState("D");
   const pageCount = Math.ceil(tickers.length / MINI_CHART_PAGE_SIZE);
   const pageTickers = tickers.slice(page * MINI_CHART_PAGE_SIZE, page * MINI_CHART_PAGE_SIZE + MINI_CHART_PAGE_SIZE);
 
@@ -12601,8 +12723,26 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-8 px-4 pb-8"
       style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }} onClick={onClose}>
       <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-[1400px] flex flex-col max-h-[90vh]" onClick={e => e.stopPropagation()}>
-        <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 flex-shrink-0">
-          <span className="text-sm font-bold text-zinc-100">{title} <span className="text-zinc-500 font-normal">({tickers.length})</span></span>
+        <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 flex-shrink-0 flex-wrap gap-2">
+          <div className="flex items-center gap-3 flex-wrap">
+            <span className="text-sm font-bold text-zinc-100">{title} <span className="text-zinc-500 font-normal">({tickers.length})</span></span>
+            <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+              {MINI_TIMEFRAME_OPTS.map(o => (
+                <button key={o.key} onClick={() => setTimeframe(o.key)}
+                  className={`px-2 py-0.5 text-[11px] font-medium rounded-md transition-all ${timeframe === o.key ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
+                  {o.label}
+                </button>
+              ))}
+            </div>
+            <div className="flex items-center gap-2 text-[10px] text-zinc-500">
+              {MINI_EMA_CONFIG.map(cfg => (
+                <span key={cfg.period} className="flex items-center gap-1">
+                  <span className="w-2 h-0.5 inline-block" style={{ backgroundColor: cfg.color }}/>
+                  EMA{cfg.period}
+                </span>
+              ))}
+            </div>
+          </div>
           <div className="flex items-center gap-3">
             {pageCount > 1 && (
               <div className="flex items-center gap-2 text-xs text-zinc-400">
@@ -12618,36 +12758,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
         </div>
         <div className="overflow-y-auto p-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {pageTickers.map(ticker => {
-              // The plain `widgetembed` endpoint doesn't honor `studies` at all
-              // (verified live). `embed-widget/advanced-chart` takes a JSON config
-              // instead and does — the object form `{id, inputs}` per study is
-              // required to get 3 EMAs at 3 *different* lengths, since
-              // `studies_overrides` only applies per study-type, not per instance.
-              // `hide_legend` drops the in-chart OHLC/EMA-values legend overlay
-              // (redundant with — and visually competing with — our own ticker
-              // header above each card).
-              const tvConfig = {
-                symbol: ticker, interval: "D", theme: "dark", style: "1", timezone: "exchange",
-                locale: "en", hide_top_toolbar: true, hide_side_toolbar: true, hide_legend: true,
-                withdateranges: false, save_image: false,
-                studies: [
-                  { id: "MAExp@tv-basicstudies", inputs: { length: 9 } },
-                  { id: "MAExp@tv-basicstudies", inputs: { length: 21 } },
-                  { id: "MAExp@tv-basicstudies", inputs: { length: 50 } },
-                ],
-              };
-              const src = `https://s.tradingview.com/embed-widget/advanced-chart/#${encodeURIComponent(JSON.stringify(tvConfig))}`;
-              return (
-                <div key={ticker} className="bg-zinc-900/60 border border-zinc-800/60 rounded-lg overflow-hidden">
-                  <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
-                    className="block px-2 py-1 text-[11px] font-mono font-bold text-cyan-400 hover:text-cyan-300 border-b border-zinc-800/60">
-                    {ticker}
-                  </a>
-                  <iframe title={ticker} src={src} width="100%" height="300" style={{ border: 0, display: "block" }} loading="lazy"/>
-                </div>
-              );
-            })}
+            {pageTickers.map(ticker => <MiniChartCard key={ticker} ticker={ticker} timeframe={timeframe}/>)}
           </div>
         </div>
       </div>
@@ -13424,7 +13535,8 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
       {mode === "etf" && (
         <div className="space-y-6">
           <EtfRotationBrief etfRsData={etfRsData} />
-          <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} onJumpToThemeLong={jumpToThemeLong} onJumpToThemeShort={jumpToThemeShort} livePricesRef={livePricesRef} />
+          <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} onJumpToThemeLong={jumpToThemeLong} onJumpToThemeShort={jumpToThemeShort} livePricesRef={livePricesRef}
+            onMiniCharts={tickers => setMiniChartsFor({ title: "ETF Category Leaderboard", tickers })} />
           <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <IndexSectorBenchmarkTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfCandidatesPanel />
