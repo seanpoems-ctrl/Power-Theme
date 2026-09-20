@@ -12804,7 +12804,13 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
       const sc = screenerMap[s.ticker];
       const theme = categoryThemeMap[s.ticker] ?? s.theme;
       if (!sc) return theme === s.theme ? s : { ...s, theme };
-      return { ...s, theme, perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m, perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y };
+      return {
+        ...s, theme,
+        perf_intraday: sc.perf_intraday ?? s.perf_intraday,
+        perf_1d: sc.perf_1d ?? s.perf_1d, perf_1w: sc.perf_1w ?? s.perf_1w, perf_1m: sc.perf_1m ?? s.perf_1m,
+        perf_3m: sc.perf_3m ?? s.perf_3m, perf_6m: sc.perf_6m ?? s.perf_6m, perf_1y: sc.perf_1y ?? s.perf_1y,
+        perf_ytd: sc.perf_ytd ?? s.perf_ytd,
+      };
     });
   }, [allStocks, screenerMap, categoryThemeMap]);
 
@@ -12826,7 +12832,14 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
       if (sortCol === "adr_pct")        return s.adr_pct ?? 0;
       if (sortCol === "dist_52w_high")  return s.dist_52w_high ?? -99;
       if (sortCol === "dollar_volume")  return parseDvol(s.dollar_volume);
+      if (sortCol === "perf_intraday")  return s.perf_intraday ?? -999;
+      if (sortCol === "perf_1d")        return s.perf_1d ?? -999;
+      if (sortCol === "perf_1w")        return s.perf_1w ?? -999;
       if (sortCol === "perf_1m")        return s.perf_1m ?? -999;
+      if (sortCol === "perf_3m")        return s.perf_3m ?? -999;
+      if (sortCol === "perf_6m")        return s.perf_6m ?? -999;
+      if (sortCol === "perf_ytd")       return s.perf_ytd ?? -999;
+      if (sortCol === "perf_1y")        return s.perf_1y ?? -999;
       if (sortCol === "setup") {
         let score = 0;
         if (s.vcp_stage1) score += 4;
@@ -13059,7 +13072,14 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                   { col: "adr_pct",       label: "ADR%",     align: "right", cls: "" },
                   { col: "dist_52w_high", label: "52W Dist", align: "right", cls: "" },
                   { col: "dollar_volume", label: "$Vol",     align: "right", cls: "hidden sm:table-cell" },
-                  { col: "perf_1m",       label: "1M%",      align: "right", cls: "hidden sm:table-cell" },
+                  { col: "perf_intraday", label: "Intraday", align: "right", cls: "hidden md:table-cell" },
+                  { col: "perf_1d",       label: "1D",       align: "right", cls: "hidden sm:table-cell" },
+                  { col: "perf_1w",       label: "1W",       align: "right", cls: "hidden sm:table-cell" },
+                  { col: "perf_1m",       label: "1M",       align: "right", cls: "hidden sm:table-cell" },
+                  { col: "perf_3m",       label: "3M",       align: "right", cls: "hidden md:table-cell" },
+                  { col: "perf_6m",       label: "6M",       align: "right", cls: "hidden lg:table-cell" },
+                  { col: "perf_ytd",      label: "YTD",      align: "right", cls: "hidden lg:table-cell" },
+                  { col: "perf_1y",       label: "1Y",       align: "right", cls: "hidden lg:table-cell" },
                   { col: "setup",         label: "Setup",    align: "left",  cls: "" },
                 ].map(({ col, label, align, cls }) => (
                   <th key={col}
@@ -13089,8 +13109,29 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                     {s.dist_52w_high != null ? `${s.dist_52w_high.toFixed(1)}%` : "—"}
                   </td>
                   <td className="px-3 py-2 text-right font-mono text-zinc-400 hidden sm:table-cell">{fmtDvol(s.dollar_volume)}</td>
+                  <td className={`px-3 py-2 text-right font-mono font-semibold hidden md:table-cell ${(s.perf_intraday ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                    {fmtPct(s.perf_intraday)}
+                  </td>
+                  <td className={`px-3 py-2 text-right font-mono font-semibold hidden sm:table-cell ${(s.perf_1d ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                    {fmtPct(s.perf_1d)}
+                  </td>
+                  <td className={`px-3 py-2 text-right font-mono font-semibold hidden sm:table-cell ${(s.perf_1w ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                    {fmtPct(s.perf_1w)}
+                  </td>
                   <td className={`px-3 py-2 text-right font-mono font-semibold hidden sm:table-cell ${(s.perf_1m ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
                     {fmtPct(s.perf_1m)}
+                  </td>
+                  <td className={`px-3 py-2 text-right font-mono font-semibold hidden md:table-cell ${(s.perf_3m ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                    {fmtPct(s.perf_3m)}
+                  </td>
+                  <td className={`px-3 py-2 text-right font-mono font-semibold hidden lg:table-cell ${(s.perf_6m ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                    {fmtPct(s.perf_6m)}
+                  </td>
+                  <td className={`px-3 py-2 text-right font-mono font-semibold hidden lg:table-cell ${(s.perf_ytd ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                    {fmtPct(s.perf_ytd)}
+                  </td>
+                  <td className={`px-3 py-2 text-right font-mono font-semibold hidden lg:table-cell ${(s.perf_1y ?? 0) >= 0 ? "text-emerald-400" : "text-rose-400"}`}>
+                    {fmtPct(s.perf_1y)}
                   </td>
                   <td className="px-3 py-2">
                     <div className="flex gap-1 flex-wrap">
