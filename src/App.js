@@ -12575,6 +12575,53 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
 //   2. Market Leaders — RS≥90 cards with theme context
 //   3. Gapper Watch — high conviction pre-market plays
 // ─────────────────────────────────────────────────────────────────────────────
+// Grid of small TradingView "mini symbol overview" widgets — a quick-glance
+// scan across many tickers at once (e.g. every Clean Bases name) instead of
+// opening one full chart at a time. Each is a plain public TradingView embed
+// (same unrestricted widget family already used elsewhere in this app, not
+// the licensed Advanced Charts library), so no proxy/API key needed — just
+// an iframe per ticker built from the same URL-encoded-JSON-hash pattern
+// TradingView's own generated embed snippets use.
+const MiniChartGridModal = ({ title, tickers, onClose }) => {
+  React.useEffect(() => {
+    const handler = e => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onClose]);
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-start justify-center pt-8 px-4 pb-8"
+      style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }} onClick={onClose}>
+      <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-[1500px] flex flex-col max-h-[90vh]" onClick={e => e.stopPropagation()}>
+        <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 flex-shrink-0">
+          <span className="text-sm font-bold text-zinc-100">{title} <span className="text-zinc-500 font-normal">({tickers.length})</span></span>
+          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded flex-shrink-0"><X size={16}/></button>
+        </div>
+        <div className="overflow-y-auto p-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+            {tickers.map(ticker => {
+              const cfg = {
+                symbol: ticker, width: "100%", height: 150, locale: "en",
+                dateRange: "3M", colorTheme: "dark", isTransparent: true, autosize: false,
+              };
+              const src = `https://s.tradingview.com/embed-widget/mini-symbol-overview/#${encodeURIComponent(JSON.stringify(cfg))}`;
+              return (
+                <div key={ticker} className="bg-zinc-900/60 border border-zinc-800/60 rounded-lg overflow-hidden">
+                  <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
+                    className="block px-2 py-1 text-[11px] font-mono font-bold text-cyan-400 hover:text-cyan-300 border-b border-zinc-800/60">
+                    {ticker}
+                  </a>
+                  <iframe title={ticker} src={src} width="100%" height="150" style={{ border: 0, display: "block" }} loading="lazy"/>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ThemeStocksModal = ({ name, stocks, onClose }) => {
   const [sortCol, setSortCol] = useState("rs_52w");
   const [sortDir, setSortDir] = useState("desc");
@@ -12702,6 +12749,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
   const [perfMode, setPerfMode]       = React.useState("1m");      // "1d" | "1m" | "3m"
   const [leaderPerfMode, setLeaderPerfMode] = React.useState("perf_1m");
   const [selectedThemeModal, setSelectedThemeModal] = React.useState(null); // { name, stocks }
+  const [miniChartsFor, setMiniChartsFor] = React.useState(null); // { title, tickers } for the mini-chart grid modal
   const [sortCol, setSortCol]       = React.useState("rs_52w");
   const [sortDir, setSortDir]       = React.useState("desc");
   const [shortSortCol, setShortSortCol] = React.useState("rs_52w");
@@ -13035,11 +13083,12 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
     : "text-amber-400 bg-amber-500/10 border-amber-500/30";
   const sigLabel = signal === "green" ? "🟢 Market: Uptrend" : signal === "orange" ? "🟠 Market: Correction" : signal === "red" ? "🔴 Market: Bear" : "🟡 Market: Pullback";
 
-  const Sec = ({ title, badge, sub }) => (
-    <div className="flex items-baseline gap-2 mb-3">
+  const Sec = ({ title, badge, sub, action }) => (
+    <div className="flex items-baseline gap-2 mb-3 flex-wrap">
       <h3 className="text-sm font-semibold text-zinc-100">{title}</h3>
       {badge != null && <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{badge}</span>}
       {sub && <span className="text-xs text-zinc-600">{sub}</span>}
+      {action && <span className="ml-auto">{action}</span>}
     </div>
   );
 
@@ -13052,6 +13101,13 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
         title="Clean Bases — Buy Watch"
         badge={cleanBases.length}
         sub="Above SMA10/20/50 · ≤8% from 52W high · RS≥75 · ADR≥4%"
+        action={cleanBases.length > 0 && (
+          <button
+            onClick={() => setMiniChartsFor({ title: "Clean Bases — Buy Watch", tickers: cleanBases.map(s => s.ticker) })}
+            className="text-[11px] font-medium px-2 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20 transition-colors">
+            ▦ Mini Charts
+          </button>
+        )}
       />
       {cleanBases.length === 0 ? (
         <p className="text-sm text-zinc-500 italic py-4">
@@ -13588,6 +13644,13 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
         name={selectedThemeModal.name}
         stocks={selectedThemeModal.stocks}
         onClose={() => setSelectedThemeModal(null)}
+      />
+    )}
+    {miniChartsFor && (
+      <MiniChartGridModal
+        title={miniChartsFor.title}
+        tickers={miniChartsFor.tickers}
+        onClose={() => setMiniChartsFor(null)}
       />
     )}
     </>
