@@ -11909,7 +11909,7 @@ const EtfCategoryLeaderboard = ({ etfRsData, etfHoldings = {}, screenerMap = {},
 };
 
 // ── ETF Flip Scanner ─────────────────────────────────────────────────────────
-const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
+const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniCharts = null }) => {
   // Exclude Index/Segment/EW Sector/SPDR Sector benchmarks — this scanner is
   // about thematic beta boosters flipping vs their sector anchor.
   const etfs = (etfRsData?.etfs ?? []).filter(e => !e.benchmark);
@@ -11969,6 +11969,12 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
       <div className="flex items-center gap-3">
         <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide">⚡ RS Flip Scanner</h3>
         <span className="text-[11px] text-zinc-500">Beta Booster vs Pure Sector Anchor · When RS turns up sharply → run stock screens on that basket</span>
+        {onMiniCharts && flips.length > 0 && (
+          <button onClick={() => onMiniCharts(flips.map(e => e.ticker))}
+            className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+            ▦ Mini Charts
+          </button>
+        )}
         {flips.length > 0 && (
           <span className="ml-auto px-2 py-0.5 rounded text-[11px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">
             {flips.length} FLIP{flips.length > 1 ? "S" : ""} ACTIVE
@@ -13543,7 +13549,8 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
           <EtfRotationBrief etfRsData={etfRsData} />
           <EtfCategoryLeaderboard etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} onJumpToThemeLong={jumpToThemeLong} onJumpToThemeShort={jumpToThemeShort} livePricesRef={livePricesRef}
             onMiniCharts={tickers => setMiniChartsFor({ title: "ETF Category Leaderboard", tickers })} />
-          <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
+          <EtfFlipScanner etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap}
+            onMiniCharts={tickers => setMiniChartsFor({ title: "RS Flip Scanner", tickers })} />
           <IndexSectorBenchmarkTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
           <EtfCandidatesPanel />
         </div>
