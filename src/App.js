@@ -13692,7 +13692,8 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
           </div>
           <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap}
             onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "ETF RS", tickers })} />
-          <UniverseTab etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} etfRsData={etfRsData} />
+          <UniverseTab etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} etfRsData={etfRsData}
+            onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Daily Stock Universe", tickers })} />
         </div>
       )}
 
@@ -13763,13 +13764,21 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
                     </button>
                   )}
                 </div>
-                <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40 shrink-0">
-                  {[{k:"perf_1d",l:"1D"},{k:"perf_1w",l:"1W"},{k:"perf_1m",l:"1M"},{k:"perf_3m",l:"3M"}].map(o => (
-                    <button key={o.k} onClick={() => setLeaderPerfMode(o.k)}
-                      className={`px-2 py-0.5 text-[11px] font-medium rounded-md transition-all ${leaderPerfMode === o.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
-                      {o.l}
+                <div className="flex items-center gap-2 shrink-0">
+                  <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
+                    {[{k:"perf_1d",l:"1D"},{k:"perf_1w",l:"1W"},{k:"perf_1m",l:"1M"},{k:"perf_3m",l:"3M"}].map(o => (
+                      <button key={o.k} onClick={() => setLeaderPerfMode(o.k)}
+                        className={`px-2 py-0.5 text-[11px] font-medium rounded-md transition-all ${leaderPerfMode === o.k ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' : 'text-zinc-500 hover:text-zinc-300 border border-transparent'}`}>
+                        {o.l}
+                      </button>
+                    ))}
+                  </div>
+                  {laggards.length > 0 && (
+                    <button onClick={() => setMiniChartsFor({ title: "Market Laggards", tickers: laggards.map(s => ({ ticker: s.ticker, category: s.theme })) })}
+                      className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+                      ▦ Mini Charts
                     </button>
-                  ))}
+                  )}
                 </div>
               </div>
               <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 gap-2">
@@ -13815,6 +13824,12 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
               title="Clean Bases — Sell Watch"
               badge={shortCandidates.length}
               sub="Below SMA10/20/50 · RS≤50 · ADR≥4%"
+              action={shortCandidates.length > 0 && (
+                <button onClick={() => setMiniChartsFor({ title: "Clean Bases — Sell Watch", tickers: shortCandidates.map(s => s.ticker) })}
+                  className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+                  ▦ Mini Charts
+                </button>
+              )}
             />
             {shortCandidates.length === 0 ? (
               <p className="text-sm text-zinc-500 italic py-4">
@@ -14116,7 +14131,7 @@ const FocusSec = ({ title, sub }) => (
   </div>
 );
 
-const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null }) => {
+const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null, onMiniCharts = null }) => {
   const [uData, setUData]         = useState(null);
   const [loading, setLoading]     = useState(true);
   const [sigFilter, setSigFilter] = useState("All");
@@ -14397,6 +14412,12 @@ const UniverseTab = ({ etfHoldings = {}, screenerMap = {}, etfRsData = null }) =
               NEW only
             </button>
           </div>
+          {onMiniCharts && filteredStocks.length > 0 && (
+            <button onClick={() => onMiniCharts(filteredStocks.map(s => ({ ticker: s.ticker, category: s.signal })), "Daily Stock Universe")}
+              className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+              ▦ Mini Charts
+            </button>
+          )}
           <span className="text-xs text-zinc-600 w-full text-right">{filteredStocks.length} stocks</span>
         </div>
 
