@@ -12585,7 +12585,12 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
 // the JSON-config hash format instead. The earlier version used the much
 // sparser "mini symbol overview" line-sparkline widget, which read as
 // near-blank at this size; full candles with volume are far more legible.
+const MINI_CHART_PAGE_SIZE = 9; // 3x3 grid per page
 const MiniChartGridModal = ({ title, tickers, onClose }) => {
+  const [page, setPage] = React.useState(0);
+  const pageCount = Math.ceil(tickers.length / MINI_CHART_PAGE_SIZE);
+  const pageTickers = tickers.slice(page * MINI_CHART_PAGE_SIZE, page * MINI_CHART_PAGE_SIZE + MINI_CHART_PAGE_SIZE);
+
   React.useEffect(() => {
     const handler = e => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", handler);
@@ -12595,22 +12600,36 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-8 px-4 pb-8"
       style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }} onClick={onClose}>
-      <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-[1600px] flex flex-col max-h-[90vh]" onClick={e => e.stopPropagation()}>
+      <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-[1400px] flex flex-col max-h-[90vh]" onClick={e => e.stopPropagation()}>
         <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 flex-shrink-0">
           <span className="text-sm font-bold text-zinc-100">{title} <span className="text-zinc-500 font-normal">({tickers.length})</span></span>
-          <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded flex-shrink-0"><X size={16}/></button>
+          <div className="flex items-center gap-3">
+            {pageCount > 1 && (
+              <div className="flex items-center gap-2 text-xs text-zinc-400">
+                <button onClick={() => setPage(p => Math.max(0, p - 1))} disabled={page === 0}
+                  className="px-2 py-1 rounded border border-zinc-700 hover:bg-zinc-800 disabled:opacity-30 disabled:hover:bg-transparent transition-colors">‹</button>
+                <span>Page {page + 1} / {pageCount}</span>
+                <button onClick={() => setPage(p => Math.min(pageCount - 1, p + 1))} disabled={page === pageCount - 1}
+                  className="px-2 py-1 rounded border border-zinc-700 hover:bg-zinc-800 disabled:opacity-30 disabled:hover:bg-transparent transition-colors">›</button>
+              </div>
+            )}
+            <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded flex-shrink-0"><X size={16}/></button>
+          </div>
         </div>
         <div className="overflow-y-auto p-3">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-            {tickers.map(ticker => {
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {pageTickers.map(ticker => {
               // The plain `widgetembed` endpoint doesn't honor `studies` at all
               // (verified live). `embed-widget/advanced-chart` takes a JSON config
               // instead and does — the object form `{id, inputs}` per study is
               // required to get 3 EMAs at 3 *different* lengths, since
               // `studies_overrides` only applies per study-type, not per instance.
+              // `hide_legend` drops the in-chart OHLC/EMA-values legend overlay
+              // (redundant with — and visually competing with — our own ticker
+              // header above each card).
               const tvConfig = {
                 symbol: ticker, interval: "D", theme: "dark", style: "1", timezone: "exchange",
-                locale: "en", hide_top_toolbar: true, hide_side_toolbar: true,
+                locale: "en", hide_top_toolbar: true, hide_side_toolbar: true, hide_legend: true,
                 withdateranges: false, save_image: false,
                 studies: [
                   { id: "MAExp@tv-basicstudies", inputs: { length: 9 } },
@@ -12625,7 +12644,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
                     className="block px-2 py-1 text-[11px] font-mono font-bold text-cyan-400 hover:text-cyan-300 border-b border-zinc-800/60">
                     {ticker}
                   </a>
-                  <iframe title={ticker} src={src} width="100%" height="260" style={{ border: 0, display: "block" }} loading="lazy"/>
+                  <iframe title={ticker} src={src} width="100%" height="300" style={{ border: 0, display: "block" }} loading="lazy"/>
                 </div>
               );
             })}
