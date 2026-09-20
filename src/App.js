@@ -13638,7 +13638,8 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
       )}
 
       {/* ── FOCUS LIST ───────────────────────────────────── */}
-      {mode === "focus" && <FocusListTab data={focusListData} />}
+      {mode === "focus" && <FocusListTab data={focusListData}
+        onMiniCharts={(tickers, title) => setMiniChartsFor({ title: title || "Focus List", tickers })} />}
 
       {/* ── ARCHIVE ── overflow/legacy views kept for reference: Leading Themes
           mini-list, the full flat ETF RS table, and the Universe tab's sector
@@ -13946,7 +13947,7 @@ const TrendSparkline = ({ data = [] }) => {
 // by focus_list_scanner.py): 8 momentum scans (1W/1M/3M/6M x Small/Large cap)
 // + 5 operational/tightness scans, each already sorted by its defining metric.
 // ─────────────────────────────────────────────────────────────────────────────
-const FocusScanTable = ({ scan }) => {
+const FocusScanTable = ({ scan, onMiniCharts = null }) => {
   const fmtPct   = v => v != null ? `${v > 0 ? "+" : ""}${v.toFixed(1)}%` : "—";
   const fmtDvol  = v => v == null ? "—" : v >= 1e9 ? `$${(v/1e9).toFixed(1)}B` : v >= 1e6 ? `$${(v/1e6).toFixed(0)}M` : `$${(v/1e3).toFixed(0)}K`;
   const fmtVol   = v => v == null ? "—" : v >= 1e6 ? `${(v/1e6).toFixed(1)}M` : v >= 1e3 ? `${(v/1e3).toFixed(0)}K` : `${v}`;
@@ -13998,6 +13999,12 @@ const FocusScanTable = ({ scan }) => {
         <h4 className="text-[12px] font-semibold text-zinc-100">{scan.label}</h4>
         <span className="text-[10px] font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{enriched.length}</span>
         {scan.timeframe && <span className="text-[10px] text-zinc-600">{scan.mcap_group} · {scan.timeframe}</span>}
+        {onMiniCharts && enriched.length > 0 && (
+          <button onClick={() => onMiniCharts(sorted.map(s => ({ ticker: s.ticker, category: s.industry })), scan.label)}
+            className="ml-auto text-[10px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+            ▦ Mini Charts
+          </button>
+        )}
       </div>
       {enriched.length === 0 ? (
         <p className="text-xs text-zinc-600 italic px-3 py-4">No matches right now.</p>
@@ -14042,7 +14049,7 @@ const FocusScanTable = ({ scan }) => {
   );
 };
 
-const FocusListTab = ({ data }) => {
+const FocusListTab = ({ data, onMiniCharts = null }) => {
   if (!data) return <p className="text-sm text-zinc-600 italic py-8 text-center">Loading Focus List…</p>;
 
   const scanTimeLabel = (() => {
@@ -14074,11 +14081,11 @@ const FocusListTab = ({ data }) => {
           <div className="space-y-4">
             <div className="space-y-4">
               <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wide">Small Cap ($300M–$10B)</div>
-              {smallCap.map(s => <FocusScanTable key={s.key} scan={s} />)}
+              {smallCap.map(s => <FocusScanTable key={s.key} scan={s} onMiniCharts={onMiniCharts} />)}
             </div>
             <div className="space-y-4">
               <div className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wide">Large Cap (&gt;$10B)</div>
-              {largeCap.map(s => <FocusScanTable key={s.key} scan={s} />)}
+              {largeCap.map(s => <FocusScanTable key={s.key} scan={s} onMiniCharts={onMiniCharts} />)}
             </div>
           </div>
         </div>
@@ -14088,7 +14095,7 @@ const FocusListTab = ({ data }) => {
         <div>
           <FocusSec title="Operational & Tightness Scans" sub="Fundamental growth, post-earnings bases, and strongest-stock filters" />
           <div className="space-y-4">
-            {operational.map(s => <FocusScanTable key={s.key} scan={s} />)}
+            {operational.map(s => <FocusScanTable key={s.key} scan={s} onMiniCharts={onMiniCharts} />)}
           </div>
         </div>
       )}
