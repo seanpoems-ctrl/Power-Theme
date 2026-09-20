@@ -12575,13 +12575,16 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
 //   2. Market Leaders — RS≥90 cards with theme context
 //   3. Gapper Watch — high conviction pre-market plays
 // ─────────────────────────────────────────────────────────────────────────────
-// Grid of small TradingView "mini symbol overview" widgets — a quick-glance
-// scan across many tickers at once (e.g. every Clean Bases name) instead of
-// opening one full chart at a time. Each is a plain public TradingView embed
-// (same unrestricted widget family already used elsewhere in this app, not
-// the licensed Advanced Charts library), so no proxy/API key needed — just
-// an iframe per ticker built from the same URL-encoded-JSON-hash pattern
-// TradingView's own generated embed snippets use.
+// Grid of small real candlestick charts (with 9/21/50 EMA overlays, matching
+// TradeChartModal's own EMA_OVERLAY_CONFIG periods) — a quick-glance scan
+// across many tickers at once (e.g. every Clean Bases name) instead of
+// opening one full chart at a time. Uses TradingView's public
+// `embed-widget/advanced-chart` endpoint (not the licensed Advanced Charts
+// library) — the plain `widgetembed` endpoint used elsewhere in this file
+// doesn't honor a `studies` param at all (verified live), so this one needs
+// the JSON-config hash format instead. The earlier version used the much
+// sparser "mini symbol overview" line-sparkline widget, which read as
+// near-blank at this size; full candles with volume are far more legible.
 const MiniChartGridModal = ({ title, tickers, onClose }) => {
   React.useEffect(() => {
     const handler = e => { if (e.key === "Escape") onClose(); };
@@ -12592,26 +12595,37 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-8 px-4 pb-8"
       style={{ backgroundColor: "rgba(0,0,0,0.65)", backdropFilter: "blur(4px)" }} onClick={onClose}>
-      <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-[1500px] flex flex-col max-h-[90vh]" onClick={e => e.stopPropagation()}>
+      <div className="bg-zinc-950 border border-zinc-700 rounded-xl shadow-2xl w-full max-w-[1600px] flex flex-col max-h-[90vh]" onClick={e => e.stopPropagation()}>
         <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 flex-shrink-0">
           <span className="text-sm font-bold text-zinc-100">{title} <span className="text-zinc-500 font-normal">({tickers.length})</span></span>
           <button onClick={onClose} className="text-zinc-500 hover:text-zinc-200 transition-colors p-1 rounded flex-shrink-0"><X size={16}/></button>
         </div>
         <div className="overflow-y-auto p-3">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
             {tickers.map(ticker => {
-              const cfg = {
-                symbol: ticker, width: "100%", height: 150, locale: "en",
-                dateRange: "3M", colorTheme: "dark", isTransparent: true, autosize: false,
+              // The plain `widgetembed` endpoint doesn't honor `studies` at all
+              // (verified live). `embed-widget/advanced-chart` takes a JSON config
+              // instead and does — the object form `{id, inputs}` per study is
+              // required to get 3 EMAs at 3 *different* lengths, since
+              // `studies_overrides` only applies per study-type, not per instance.
+              const tvConfig = {
+                symbol: ticker, interval: "D", theme: "dark", style: "1", timezone: "exchange",
+                locale: "en", hide_top_toolbar: true, hide_side_toolbar: true,
+                withdateranges: false, save_image: false,
+                studies: [
+                  { id: "MAExp@tv-basicstudies", inputs: { length: 9 } },
+                  { id: "MAExp@tv-basicstudies", inputs: { length: 21 } },
+                  { id: "MAExp@tv-basicstudies", inputs: { length: 50 } },
+                ],
               };
-              const src = `https://s.tradingview.com/embed-widget/mini-symbol-overview/#${encodeURIComponent(JSON.stringify(cfg))}`;
+              const src = `https://s.tradingview.com/embed-widget/advanced-chart/#${encodeURIComponent(JSON.stringify(tvConfig))}`;
               return (
                 <div key={ticker} className="bg-zinc-900/60 border border-zinc-800/60 rounded-lg overflow-hidden">
                   <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
                     className="block px-2 py-1 text-[11px] font-mono font-bold text-cyan-400 hover:text-cyan-300 border-b border-zinc-800/60">
                     {ticker}
                   </a>
-                  <iframe title={ticker} src={src} width="100%" height="150" style={{ border: 0, display: "block" }} loading="lazy"/>
+                  <iframe title={ticker} src={src} width="100%" height="260" style={{ border: 0, display: "block" }} loading="lazy"/>
                 </div>
               );
             })}
