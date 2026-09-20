@@ -13437,7 +13437,13 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
   const gapperWatchSection = (
     topGappers.length > 0 ? (
       <div>
-        <Sec title="Gapper Watch" sub={`${gapperData?.scan_time ?? ""} · conviction ≥55`} />
+        <Sec title="Gapper Watch" sub={`${gapperData?.scan_time ?? ""} · conviction ≥55`}
+          action={(
+            <button onClick={() => setMiniChartsFor({ title: "Gapper Watch", tickers: topGappers.map(g => ({ ticker: g.ticker, category: g.category })) })}
+              className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+              ▦ Mini Charts
+            </button>
+          )} />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
           {topGappers.map(g => {
             const topHeadline = (g.headlines ?? []).find(h => h && h.length > 10);
