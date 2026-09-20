@@ -12455,7 +12455,34 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniChart
         <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{sorted.length}</span>
         <span className="text-xs text-zinc-600">IBD-style RS · click any header to sort</span>
         {onMiniCharts && (
-          <button onClick={() => onMiniCharts(sorted.map(e => e.ticker))}
+          <button onClick={() => {
+            // Same grouping as Category Leaderboard's Mini Charts: bucket by
+            // fine_theme/category, order categories by the table's own active
+            // sort metric (median across members), and order each category's
+            // members by that same metric. rs_pct isn't a stored field (it's
+            // derived from rs_histogram), and ticker/theme are non-numeric —
+            // both fall back to "score" so the grouping stays meaningful.
+            const memberSortCol = (sortCol === "ticker" || sortCol === "theme") ? "score" : sortCol;
+            const valueFor = e => memberSortCol === "rs_pct" ? getRsPct(e.rs_histogram) : e[memberSortCol];
+            const byCat = {};
+            for (const e of etfs) {
+              const cat = e.fine_theme || e.category || "Other";
+              (byCat[cat] ||= []).push(e);
+            }
+            const median = arr => {
+              const a = arr.filter(v => v != null).sort((x, y) => x - y);
+              if (!a.length) return null;
+              const mid = Math.floor(a.length / 2);
+              return a.length % 2 ? a[mid] : (a[mid - 1] + a[mid]) / 2;
+            };
+            const items = Object.entries(byCat)
+              .map(([cat, members]) => ({ cat, members, m: median(members.map(valueFor)) }))
+              .sort((a, b) => (b.m ?? -Infinity) - (a.m ?? -Infinity))
+              .flatMap(({ cat, members }) => [...members]
+                .sort((a, b) => (valueFor(b) ?? -Infinity) - (valueFor(a) ?? -Infinity))
+                .map(e => ({ ticker: e.ticker, category: cat })));
+            onMiniCharts(items);
+          }}
             className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
             ▦ Mini Charts
           </button>
