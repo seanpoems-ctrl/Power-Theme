@@ -12327,7 +12327,7 @@ const IndexSectorBenchmarkTable = ({ etfRsData, etfHoldings = {}, screenerMap = 
   );
 };
 
-const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
+const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniCharts = null }) => {
   const [sortCol, setSortCol] = useState("score");
   const [sortDir, setSortDir] = useState("desc");
   const [selectedEtf, setSelectedEtf] = useState(null); // { ticker, theme, holdings }
@@ -12436,6 +12436,12 @@ const EtfRsTable = ({ etfRsData, etfHoldings = {}, screenerMap = {} }) => {
         <h3 className="text-sm font-semibold text-zinc-100">Industry Sector Relative Strength</h3>
         <span className="text-xs font-mono text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">{sorted.length}</span>
         <span className="text-xs text-zinc-600">IBD-style RS · click any header to sort</span>
+        {onMiniCharts && (
+          <button onClick={() => onMiniCharts(sorted.map(e => e.ticker))}
+            className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+            ▦ Mini Charts
+          </button>
+        )}
         {etfRsData.generated_at && (
           <span className="text-xs text-zinc-700 ml-auto font-mono">
             {new Date(etfRsData.generated_at).toLocaleDateString()}
@@ -12646,7 +12652,7 @@ const MiniChartCard = ({ ticker, timeframe }) => {
         const chart = createChart(containerRef.current, {
           layout: { background: { color: "transparent" }, textColor: "#71717a", fontSize: 10 },
           grid: { vertLines: { color: "#ffffff08" }, horzLines: { color: "#ffffff08" } },
-          timeScale: { borderColor: "#3f3f46", timeVisible: _miniIsIntraday(timeframe), secondsVisible: false },
+          timeScale: { borderColor: "#3f3f46", timeVisible: _miniIsIntraday(timeframe), secondsVisible: false, rightOffset: 20 },
           rightPriceScale: { borderColor: "#3f3f46" },
           crosshair: { mode: 0 },
           autoSize: true,
@@ -13595,7 +13601,8 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
               })}
             </div>
           </div>
-          <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} />
+          <EtfRsTable etfRsData={etfRsData} etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap}
+            onMiniCharts={tickers => setMiniChartsFor({ title: "ETF RS", tickers })} />
           <UniverseTab etfHoldings={data?.etf_holdings || {}} screenerMap={screenerMap} etfRsData={etfRsData} />
         </div>
       )}
