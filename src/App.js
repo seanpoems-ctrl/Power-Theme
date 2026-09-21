@@ -12918,7 +12918,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
       {enlargedItem && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center px-4 py-10"
           style={{ backgroundColor: "rgba(0,0,0,0.85)" }} onClick={e => { e.stopPropagation(); setEnlargedIdx(null); }}>
-          <div className="relative w-full max-w-3xl" onClick={e => e.stopPropagation()}>
+          <div className="relative w-full max-w-6xl" onClick={e => e.stopPropagation()}>
             <button onClick={() => setEnlargedIdx(null)}
               className="absolute -top-9 right-0 text-zinc-400 hover:text-zinc-100 transition-colors"><X size={20}/></button>
             {enlargedIdx > 0 && (
@@ -12930,7 +12930,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
                 className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800 transition-colors text-lg">›</button>
             )}
             <MiniChartCard key={`enlarged-${enlargedItem.ticker}::${enlargedItem.category || ""}`}
-              ticker={enlargedItem.ticker} category={enlargedItem.category} timeframe={timeframe} height={560}/>
+              ticker={enlargedItem.ticker} category={enlargedItem.category} timeframe={timeframe} height="min(840px, 75vh)"/>
             <div className="text-center text-[11px] text-zinc-500 mt-2">
               {enlargedIdx + 1} / {items.length} · ← → to navigate · Esc for the grid
             </div>
