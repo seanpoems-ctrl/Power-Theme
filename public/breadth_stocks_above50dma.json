@@ -2,79 +2,67 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 6,
+  "count": 5,
   "stocks": [
     {
-      "ticker": "ASST",
-      "company": "Strive, Inc.",
-      "industry": "Financial Conglomerates",
-      "price": 30.09,
-      "change_pct": 6.4,
-      "adr_pct": 6.3,
-      "dollar_volume": "$295.0M",
-      "market_cap_b": 2.873,
-      "rs_ibd": 76,
-      "above50dma_pct": 71.7
-    },
-    {
-      "ticker": "PURR",
-      "company": "Hyperliquid Strategies Inc",
-      "industry": "Financial Conglomerates",
-      "price": 14.09,
-      "change_pct": 9.82,
-      "adr_pct": 8.3,
-      "dollar_volume": "$358.8M",
-      "market_cap_b": 3.352,
-      "rs_ibd": 95,
-      "above50dma_pct": 58.1
-    },
-    {
-      "ticker": "SDGR",
-      "company": "Schrodinger, Inc.",
+      "ticker": "SECZ",
+      "company": "Securitize Corp.",
       "industry": "Packaged Software",
-      "price": 29.02,
-      "change_pct": -4.03,
-      "adr_pct": 5.5,
-      "dollar_volume": "$77.0M",
-      "market_cap_b": 2.171,
-      "rs_ibd": 87,
-      "above50dma_pct": 57.4
+      "price": 13.5,
+      "change_pct": 24.31,
+      "adr_pct": 7.6,
+      "dollar_volume": "$63.7M",
+      "market_cap_b": 2.204,
+      "rs_ibd": 75,
+      "above50dma_pct": 84.1
     },
     {
       "ticker": "MRNA",
       "company": "Moderna, Inc.",
       "industry": "Biotechnology",
-      "price": 154.04,
-      "change_pct": -2.55,
-      "adr_pct": 7.6,
-      "dollar_volume": "$1.92B",
-      "market_cap_b": 61.498,
+      "price": 172.94,
+      "change_pct": 12.27,
+      "adr_pct": 7.3,
+      "dollar_volume": "$2.26B",
+      "market_cap_b": 69.044,
       "rs_ibd": 98,
-      "above50dma_pct": 56.9
+      "above50dma_pct": 72.5
     },
     {
-      "ticker": "IOVA",
-      "company": "Iovance Biotherapeutics, Inc.",
-      "industry": "Biotechnology",
-      "price": 10.25,
-      "change_pct": 2.3,
-      "adr_pct": 5.4,
-      "dollar_volume": "$155.2M",
-      "market_cap_b": 4.643,
-      "rs_ibd": 98,
-      "above50dma_pct": 51.0
+      "ticker": "ASST",
+      "company": "Strive, Inc.",
+      "industry": "Financial Conglomerates",
+      "price": 30.33,
+      "change_pct": 0.8,
+      "adr_pct": 6.5,
+      "dollar_volume": "$323.5M",
+      "market_cap_b": 2.896,
+      "rs_ibd": 82,
+      "above50dma_pct": 69.6
     },
     {
-      "ticker": "SECZ",
-      "company": "Securitize Corp.",
+      "ticker": "SDGR",
+      "company": "Schrodinger, Inc.",
       "industry": "Packaged Software",
-      "price": 10.86,
-      "change_pct": 21.61,
-      "adr_pct": 8.0,
-      "dollar_volume": "$45.2M",
-      "market_cap_b": 1.773,
-      "rs_ibd": 45,
-      "above50dma_pct": 50.4
+      "price": 30.24,
+      "change_pct": 4.2,
+      "adr_pct": 5.4,
+      "dollar_volume": "$86.4M",
+      "market_cap_b": 2.262,
+      "rs_ibd": 90,
+      "above50dma_pct": 61.6
+    },
+    {
+      "ticker": "MSTR",
+      "company": "Strategy Inc",
+      "industry": "Internet Software/Services",
+      "price": 168.5,
+      "change_pct": 9.47,
+      "adr_pct": 5.8,
+      "dollar_volume": "$4.22B",
+      "market_cap_b": 64.742,
+      "rs_ibd": 28,
+      "above50dma_pct": 50.1
     }
   ],
   "spx_benchmarks": {
@@ -85,5 +73,5 @@
     "spx_qtd": null,
     "spx_mtd": null
   },
-  "fetched_at_utc": "2026-09-21T00:54:49+00:00"
+  "fetched_at_utc": "2026-09-21T23:17:20+00:00"
 }
