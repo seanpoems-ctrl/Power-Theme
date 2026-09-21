@@ -1,52 +1,47 @@
 {
-  "scan_time": "2026-09-18 08:57 ET",
+  "scan_time": "2026-09-21 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "PURR",
-      "price": 13.85,
-      "gap_pct": 7.95,
-      "pm_volume": 1419985,
-      "avg_vol_10d": 23346080,
-      "avg_dollar_vol": 323343208,
-      "mkt_cap": 3052504357,
-      "rvol": 1.34,
-      "adr_pct": 10.29,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "PURR stock surges on high volume, with no new fundamental catalyst, indicating a technical breakout and institutional flow.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 58,
+      "ticker": "CRML",
+      "price": 8.66,
+      "gap_pct": 28.68,
+      "pm_volume": 3612658,
+      "avg_vol_10d": 6012295,
+      "avg_dollar_vol": 52066475,
+      "mkt_cap": 988561278,
+      "rvol": 0.87,
+      "adr_pct": 8.4,
+      "category": "Thematic Narratives",
+      "theme": "Rare Earth Expansion Strategy",
+      "reasoning": "CRML surged on news of a strategic **Romanian Refinery Plan** which significantly enhances the company's **rare earth ambitions**.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 56,
       "grade": "C",
-      "finviz_theme": "Others",
+      "finviz_theme": "Materials - Metals & Mining",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "Unknown",
-        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
+        "catalyst": "CRML's stock **popped** following reports of a new **Romanian Refinery Plan** which is expected to boost its **rare earth ambitions**. The plan represents a significant strategic initiative for the company.",
+        "impact": "This development suggests CRML is making a strategic push into the rare earth market, which could expand its long-term total addressableable market and revenue streams."
       },
-      "analysis_details": "• **What Happened**\nPURR stock **soared** and **surged** yesterday, as **traders pile in** following references to **blowout 2026 earnings** and **blowout 2026 results**. The reported price action appears to be a delayed reaction or re-discovery of previously released financial information, prompting increased buying activity.\n\n• **Key Consideration**\nDespite the headlines attributing the move to **blowout 2026 earnings**, the last earnings report was **22 days ago**, indicating no fresh fundamental news. This suggests the surge is likely driven by **technical momentum** or significant **institutional flow**, potentially leading to a short-term squeeze as traders pile into the stock.",
+      "analysis_details": "• **The Narrative**\nCRML's stock experienced a significant uplift driven by a **Romanian Refinery Plan** that is poised to elevate the company's **rare earth ambitions**. This initiative signals a strategic move into a critical and growing sector, indicating a potential diversification or expansion of CRML's core business.\n\n• **Explosiveness**\nThe news, while specific to a **Romanian Refinery Plan**, links CRML to the broader, high-growth **rare earth** market. This thematic connection can attract momentum-driven investors, potentially leading to increased speculative interest and volatility as the market prices in future growth prospects in this strategic sector.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "PURR Stock Soars As Traders Pile In After Blowout 2026 Earnings - StocksToTrade",
+          "title": "CRML Stock Pops As Romanian Refinery Plan Lifts Rare Earth Ambitions - timothysykes.com",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPamRCMlQ2RVdpWGUzRjBoeW80Y3BNZkNQdDRCcF9ycnl1MEFJVXVhc0tyMUUxZXZjSE1nQ2tJVEJHTEd6MEZvUG5mWkN4M2w5ZkFVM1RwRHRkZW5TR2xpRnVfNGN5bDYtVl9KYlpKeU92QWZMNXBiVExjV2drTjd1Z0syanJndw?oc=5"
-        },
-        {
-          "title": "PURR Stock Surges As Traders Pile In After Blowout 2026 Results - timothysykes.com",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQVVN0dzhxcUdtc25CN0ZxQWg4cmV2OGl1WFp1VS1CaHZvc0RGOElCM190UVByUVRPOE1lYTJvZTRGUDdubEhFZVduU3d0Z3BxSDJZSU01OEZCVmIzdWVNWkF1dWFzeGlmcHBabzExQW5LdG81Rmw4a0VjdkJpd1J3ckRDa0ROZVI1ekE?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQbTl4T3hINzhOREFhUXRDMEZpZzgyWHVZRkI3VllFd29iVzNaRlV4LWU5UGFjT3lYTjFjbEk3Vm9wUFZsS3cxREFtQ2F0NE1aVUlsVFB3RGdHVGVTU0I5aTFiS0V3dEhhY2tvZGZ4OUpvRGppejZ6THA4Mm9mWXhRWkJB?oc=5"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "173.67M",
-      "short_float": "16.49%",
-      "daily_pct": 7.37,
-      "prev_close": 12.83,
-      "industry": "Others",
-      "technical_status": "Pass",
+      "float_shares": "82.51M",
+      "short_float": "28.55%",
+      "daily_pct": 26.3,
+      "prev_close": 6.73,
+      "industry": "Materials - Metals & Mining",
+      "technical_status": "Fail (Avg $Vol $52M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 100,
@@ -54,70 +49,163 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "no new fundamental catalyst",
-        "discrepancy_note": "Google News provides multiple fundamental catalysts: 'Blowout 2026 Earnings/Results' (Sources [1] and [3]) and 'SEC Approves 'Innovation Exemption'' (Source [4]), directly contradicting the claim of 'no new fundamental catalyst'."
+        "primary_claim": "Romanian Refinery Plan",
+        "discrepancy_note": "Source A (Finviz) does not mention a 'Romanian Refinery Plan'. Source B (Google News) contains one headline from timothysykes.com that mentions 'Romanian Refinery Plan', but other headlines within Source B and all of Source A focus on a US security deal for Greenland and Greenland rare earths."
       },
-      "gates_passed": 5,
+      "gates_passed": 2,
       "gates_detail": {
         "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
         "gate_adr": true
       },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
     },
     {
-      "ticker": "STUB",
-      "price": 6.4,
-      "gap_pct": 7.74,
-      "pm_volume": 242755,
-      "avg_vol_10d": 5771414,
-      "avg_dollar_vol": 36937050,
-      "mkt_cap": 2269614419,
-      "rvol": 0.99,
-      "adr_pct": 4.19,
-      "category": "Others",
-      "theme": "Technical / Flow",
-      "reasoning": "No immediate fundamental catalyst found for STUB; likely a technical breakout or institutional flow driving the move.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
+      "ticker": "NUAI",
+      "price": 6.97,
+      "gap_pct": 18.94,
+      "pm_volume": 2034230,
+      "avg_vol_10d": 6798393,
+      "avg_dollar_vol": 47384799,
+      "mkt_cap": 624437710,
+      "rvol": 0.76,
+      "adr_pct": 8.45,
+      "category": "New Contract/Partnership",
+      "theme": "New Era Energy 20-year power deal",
+      "reasoning": "NUAI secured a **20-year power deal** to feed its **Texas data center**, backed by **credit support**, de-risking its long-term operational costs.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 76,
       "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini",
+      "finviz_theme": "AI Energy",
+      "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "No specific news for **STUB** was reported in the last **24 hours**. The headline refers to **Aethlon's** stock rally and a **$16.5 million** merger stub, not STUB directly.",
-        "impact": "The absence of a clear catalyst suggests the move is driven by technical factors or institutional flow, making it highly speculative with high risk."
+        "catalyst": "NUAI entered into a **20-year power deal** to supply its **Texas data center** with energy. This agreement includes **credit support** tied directly to the data center's build-out, providing long-term operational certainty.",
+        "impact": "This contract solidifies NUAI's foundational infrastructure for its data center operations, reducing long-term energy cost volatility and supporting future expansion."
       },
-      "analysis_details": "• **What Happened**\nNo specific news catalyst for **STUB** has been identified within the last **24 hours**. The available headline discusses **Aethlon's 467%** stock rally, attributing it to a **$16.5 million** merger stub rather than a **$346.5 million** windfall, which is unrelated to STUB.\n\n• **Key Consideration**\nWithout a direct fundamental driver, the recent price movement in **STUB** is likely a result of technical factors such as short covering, retail speculation, or institutional flow. This creates a high risk of a \"Gap and Trap\" scenario where early gains may not be sustainable.",
+      "analysis_details": "• **Impact**\nNUAI has secured a significant **20-year power deal** crucial for feeding its **Texas data center**. The contract explicitly includes **credit support tied to the build-out**, providing financial stability and de-risking the capital-intensive development of its data center infrastructure.\n\n• **Strategic Value**\nThis long-term power agreement for a data center is a fundamental step, ensuring a stable and potentially cost-effective energy supply for decades. Securing such a deal with credit support is vital for operational longevity and demonstrates progress in establishing key infrastructure, which can be a strong catalyst for future growth and investor confidence.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Aethlon’s 467% Stock Rally Reflects a $16.5 Million Merger Stub, Not a $346.5 Million Windfall - TechStock²",
+          "title": "NUAI Stock Slides As Traders Weigh Cash Cushion Against Heavy Losses - StocksToTrade",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQRXJKS1Q5THJReXNBZjRuZ0I4X1FHT1VYX2dkWU5fREJMcHBlcWN0bl9tZUJOMTVVdGpJbl9iNlZVY2lXQnd2TWNCeGxkUTludnpxQXhhdDNsUVJJTkhadFAxYXhnZnpYVkl1VVlhU1ZITU1UNWZjbGl6emZmSWdNaE9naS1HeWI1Z2U2TUdHSFZ6TXpkSzJsNUE3QWtPY2p0dHBBQVI2WXpOaXM0ZF9N?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNY0JaR1FhUS03Uk9Lb3pKam1ROTA3dGc4d05SM1lDTk9xUFliVVVUYjRpX3VXanRPRS1rd0lYbzFCY0o3ZXFyWEQ1cnZlVHBwZmxyWnBWbWVZNnFjdGZ0OHpaLXFRQnU4ckZ4WDcwRTFoT1FlM2ZqUnpnaUVieWQ4dDlTYTVBeUNS?oc=5"
+        },
+        {
+          "title": "NUAI Stock Sees Volatile Spike As Traders Eye Cash-Fueled Runway - timothysykes.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPVldEOUppMnNLeFN3czZIZnBVNWpDOTBPbUdCMlVOYkR4ZjNUZUtJZnFPbTN0eXh5SnpPcmxNeGdCam1pQmlnWVozLXZTNTRUXy1KTGVSM1RDOGZUd2RrTkdEbE9rdGdXd0NDemNpSTNmQWRXMVJGbzJSXzBhRUxXUjhYZmpQT1B5Zmc?oc=5"
+        },
+        {
+          "title": "20-year power deal to feed New Era Energy & Digital (NUAI) Texas data center, with credit support tied to build-out. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOa3Z2Um11WElHNlVNb3NMdnFjellieE1wX1RaLTBzQS1zNGRyUEp5Q0RYTGMyMnZOTWVsT3lZZGhZWHkyUVQ4NE43YVoyQjJKXzd3eHhYWmNtbk1fQjh5S2ZnNFhmbTBaYmZNRTJvMjdCSjZWT1lWTU0yQjl6TjV0ZU1TcnN5Y3pRdDVWX2xqRktsWWZZSnpiWWlQN1p3c2tfMlhBc09EdW1DNG9QelQ3ZEVkcmpZQQ?oc=5"
         }
       ],
-      "edgar_filing": null,
-      "float_shares": "270.14M",
-      "short_float": "9.39%",
-      "daily_pct": 7.92,
-      "prev_close": 5.94,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $37M < $100M)",
+      "edgar_filing": {
+        "filing_date": "2026-09-21",
+        "form": "8-K",
+        "items": [
+          "1.01",
+          "7.01",
+          "9.01"
+        ],
+        "category": "New Contract/Partnership",
+        "label": "Material Contract or Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/2028336/000121390026101642/ea0305716-8k_newera.htm"
+      },
+      "float_shares": "85.73M",
+      "short_float": "31.34%",
+      "daily_pct": 16.72,
+      "prev_close": 5.86,
+      "industry": "AI Energy",
+      "technical_status": "Fail (Avg $Vol $47M < $100M)",
       "verification": {
         "status": "Discrepancy",
-        "confidence_score": 95,
+        "confidence_score": 70,
         "sources_consulted": [
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "No immediate fundamental catalyst found for STUB",
-        "discrepancy_note": "The primary catalyst claim states 'No immediate fundamental catalyst found for STUB'. However, Source B [1] explicitly identifies a fundamental catalyst: 'StubHub Stock Jumps After Citi Upgrade'. This contradicts the initial analysis's claim of no fundamental catalyst."
+        "primary_claim": "20-year power deal",
+        "discrepancy_note": "Finviz News (Source A) has no mention of any deal for NUAI. Google News (Source B), specifically articles [3] and [4], confirms a '20-year power deal'."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "XXI",
+      "price": 6.39,
+      "gap_pct": 9.97,
+      "pm_volume": 118486,
+      "avg_vol_10d": 3608399,
+      "avg_dollar_vol": 23057670,
+      "mkt_cap": 3785092892,
+      "rvol": 2.24,
+      "adr_pct": 5.44,
+      "category": "Thematic Narratives",
+      "theme": "Bitcoin Conference Appearance",
+      "reasoning": "Twenty One Capital's CEO is scheduled to speak at an upcoming Bitcoin conference, signaling the company's engagement within the crypto thematic.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 60,
+      "grade": "C",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Twenty One Capital’s CEO is slated to speak at a **Bitcoin conference session** streaming live on **September 28**.",
+        "impact": "This event positions XXI directly within the burgeoning blockchain/crypto thematic, attracting potential interest from investors keen on the sector."
+      },
+      "analysis_details": "• **The Narrative**\nTwenty One Capital's CEO will speak at a **Bitcoin conference session** scheduled to stream live on **September 28**. This direct participation highlights the company's involvement and strategic interest within the cryptocurrency ecosystem, aligning it with the broader digital asset trend.\n\n• **Explosiveness**\nThe CEO's appearance at a prominent Bitcoin conference could generate increased visibility and speculative interest around XXI, particularly given the conference's focus. This event could act as a near-term catalyst, potentially drawing momentum traders seeking exposure to blockchain and crypto-related themes ahead of the **September 28** stream.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "A Bitcoin conference session will stream live Sept. 28. Twenty One Capital’s CEO speaks. - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPcWRoQ0JNMWZGcHVOeW9ISkRQQkVybGc2Z3dwaUplcU91RkRPcUF6ZkZER1c1cDdyTjlBZ05LWlRsWjRVeU1YWEFadkhTdTV4UjJnUDhTMlJCS1VueDI5ejZnUkVhMlIyR1FXdmFwM3o5bkNpU2tQeFY1Q0swSzdlVWlOU25YWS00TjVVZGFVLVhNdlUzYjEzQ1psQU84T0I1T2VnWFNYVVB1S0d1SEp2OVdkeC1pejlSQzNabkNSaw?oc=5"
+        },
+        {
+          "title": "Today’s Stock Recommendation: September 21, 2026 - BusinessLine",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOZ2xPTHJUUGZxcGRNZDRqeWxUMUNQS2xEWlJQNXhIZmIxLXg5MUYwbGVzRVNHSUNVOVVHc1N0RUQyUm9qR0IyLXVqQ2g4NnRXX0ZwYUFjc09rNFE4N2M5dnFWVXB5RWFqQllmLXlrVHplekN6ZDJiakhRdzduaVA5WG50Y2lmNkMxanQyaGZHNUVYLXEtcXhxWlJGM1pIR1NWXzljaTJsR0pLWVpvQlhPdFQ0ZUUxZGxGcnNJ?oc=5"
+        },
+        {
+          "title": "Stocks Rise in Upbeat Start to Week as Oil Drops: Markets Wrap - Bloomberg.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxONWk0czlDZlZ6UFZXeFRWaEtxd3J5Z295dlFNOTJKelkxcE1jVEJWWU0tMl9nRUo5RmNHNUhodFdwWGVKNjJYREQ1Y3B2d1JnT2RZSTVOMnNXbU93MWNWN2doM05LSUgzVWd0NU93MldhRUduSEJaX1BqdmxuMzFGZmNEYm1GbmEyWFctalFDU2RuSVhYUzhWQTdmSnFtR1Y5WXdJZjhLaUplaVFubXRfWlJR?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "346.39M",
+      "short_float": "1.83%",
+      "daily_pct": 9.98,
+      "prev_close": 5.81,
+      "industry": "Fintech - Blockchain/Crypto",
+      "technical_status": "Fail (Avg $Vol $23M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 75,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Twenty One Capital's CEO is scheduled to speak at an upcoming Bitcoin conference.",
+        "discrepancy_note": "Finviz News provided no information. Google News [1] confirms 'Twenty One Capital’s CEO speaks' at 'A Bitcoin conference session' on 'Sept. 28', but this is only one source confirming the claim, not both as required for 'Verified'."
       },
       "gates_passed": 3,
       "gates_detail": {
@@ -132,117 +220,45 @@
       "tier_label": "Excluded"
     },
     {
-      "ticker": "PPTA",
-      "price": 24.66,
-      "gap_pct": 5.52,
-      "pm_volume": 85152,
-      "avg_vol_10d": 843933,
-      "avg_dollar_vol": 20811388,
-      "mkt_cap": 2923489004,
-      "rvol": 0.88,
-      "adr_pct": 4.32,
-      "category": "Others",
-      "theme": "Market Commentary",
-      "reasoning": "Recent headlines analyze PPTA's valuation and increased attention, suggesting market commentary is the primary driver.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
+      "ticker": "SECZ",
+      "price": 11.87,
+      "gap_pct": 9.32,
+      "pm_volume": 313379,
+      "avg_vol_10d": 4158848,
+      "avg_dollar_vol": 49365526,
+      "mkt_cap": 1773065294,
+      "rvol": 4.01,
+      "adr_pct": 9.1,
+      "category": "Upgrade",
+      "theme": "Cantor Fitzgerald Initiation with Overweight Rating",
+      "reasoning": "Cantor Fitzgerald **initiated coverage** on Securitize stock with an **overweight rating**, signaling new institutional interest and a positive outlook.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 41,
       "grade": "C",
-      "finviz_theme": "Materials - Metals & Mining",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "Market commentary",
-        "impact": "Unclear. The headlines are analytical, not event-driven, potentially reflecting a shift in market perception."
+        "catalyst": "Cantor Fitzgerald **initiated coverage** on **Securitize stock** with an **overweight rating**, indicating a new positive analytical stance.",
+        "impact": "This initiation could attract new institutional investors and enhance the stock's visibility, potentially leading to increased trading volume and price appreciation based on the positive analyst endorsement."
       },
-      "analysis_details": "• **What Happened**\nRecent headlines highlight that Perpetua Resources (TSX:PPTA) stock **'May Look Fully Priced Against Book Value'**, indicating a valuation assessment. Another headline questions **'What Is Driving Attention?'** for Perpetua Resources, suggesting increased market interest without specifying a particular event.\n\n• **Key Consideration**\nThese headlines are analytical and observational rather than reporting a specific corporate action or external event. The increased 'spotlight' could stem from general market interest or technical movements, but without a concrete fundamental catalyst, the implications for sustained price momentum are speculative and carry higher risk.",
+      "analysis_details": "• **The Firm & Rating**\nCantor Fitzgerald has **initiated coverage** on **Securitize stock**, assigning an **overweight rating**. This marks a formal entry of a significant financial institution providing a public view on the company, specifically highlighting its investment potential.\n\n• **The Thesis**\nAn **overweight rating** from Cantor Fitzgerald implies a belief that Securitize's stock is expected to outperform the average return of the stocks in the analyst's coverage universe. This positive outlook suggests a new investment thesis or fundamental re-evaluation that could drive investor interest and capital allocation towards the company.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Perpetua Resources (TSX:PPTA) Stock May Look Fully Priced Against Book Value - Yahoo Finance",
+          "title": "Cantor Fitzgerald initiates Securitize stock with overweight rating By Investing.com - Investing.com Canada",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOUkp5ZWJHdHlWQlJwZWIzRWxHOFRXMkItRnVGOTB6dHplZWVEQU9iMEVsbVhWTTFsbWhPTXExbHVoTkE3cC16T3hZY3B2UF9YNlJJVE9vaU5ZUXRMX2I0SjI2UWxHZjdwcDBhUUxSM0pXUzduaHJtS0RZZG16d0szaGk5SWxmXzFuRFRLeTFPbWE1d1lFWXdwTEZOaFFCQXc?oc=5"
-        },
-        {
-          "title": "Perpetua Resources (TSX:PPTA) Is Back In The Spotlight, What Is Driving Attention? - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOdUtUcmxzZjE1NEpJMEFzckNnQk1NSnN4SF8wQjNEUm0ycG5FNUZjMzdaTWh6dm1nSVU0OXRxcUJpNmxfN2dSSEowVEwzNFc1dktWRWQ2R0dLYkJiSGhvblphN3loM2JLWmcxV2NDaFV4TWtpaVpXYWx4MUgwRHIyMUJYYnZQcWtkYUpKLUlUVFEzXy1TYkZpX1ZYblUzdw?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQX3lLLXpyYnk4UVAyRXdrdDl6QTZzQ1c0MGVHR0ZLdm9kbXRodDNwZmxUNTFLcTVWZnZlR1JneTJUWXl2SVoxTUhtZnJoWUlUeDgwZFRnZlJyZ3EzTFVLUGJqSVhXVzk0N0RRMDZVMFFhTXJZS3k3aGU4SjkxNkFuMkRTVGVlVGoyS2lwM1V2b04xN0tJeGdneWJSRmxLNHBCNklnajZzRFVCcWZoRHhhbVowUnBYRldqcl8zVG1xMlFGVEVsUUFF?oc=5"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "116.22M",
-      "short_float": "9.46%",
-      "daily_pct": 3.47,
-      "prev_close": 23.37,
-      "industry": "Materials - Metals & Mining",
-      "technical_status": "Fail (Avg $Vol $21M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "market commentary is the primary driver of PPTA's increased attention",
-        "discrepancy_note": ""
-      },
-      "gates_passed": 4,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "ONON",
-      "price": 28.81,
-      "gap_pct": 5.42,
-      "pm_volume": 830198,
-      "avg_vol_10d": 8163532,
-      "avg_dollar_vol": 235191357,
-      "mkt_cap": 9001750948,
-      "rvol": 1.63,
-      "adr_pct": 2.75,
-      "category": "Others",
-      "theme": "Analyst 'Top Pick' Mention",
-      "reasoning": "On Holding AG (ONON) was highlighted as a top consumer cyclical pick by analysts, signaling positive sentiment.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 58,
-      "grade": "B",
-      "finviz_theme": "Consumer - E-Commerce",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "On Holding AG (ONON) has been identified as a **'Top Consumer Cyclical Pick'** by analysts, alongside Trip.com Group Sponsored ADR (**TCOM**). This general positive sentiment suggests a favorable outlook from the analyst community.",
-        "impact": "The recognition as a 'top pick' provides a supportive narrative for ONON, potentially attracting broader investor attention and reinforcing positive momentum, though without specific price targets or ratings."
-      },
-      "analysis_details": "• **What Happened**\nAnalysts have collectively identified **On Holding AG (ONON)** as a top selection within the Consumer Cyclical sector. This broad endorsement positions ONON favorably among its peers, including **Trip.com Group Sponsored ADR (TCOM)**, suggesting a consensus of positive sentiment from the analyst community regarding its prospects.\n\n• **Key Consideration**\nThe designation as an 'Analyst Top Pick' provides a general positive theme, but lacks the specificity of an individual firm upgrade with a new price target. While it reinforces a bullish narrative, the absence of a concrete action or revised valuation makes its direct, immediate impact on price momentum more speculative than an explicit rating change.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Analysts’ Top Consumer Cyclical Picks: Trip.com Group Sponsored ADR (TCOM), On Holding AG (ONON) - The Globe and Mail",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMigwJBVV95cUxQYkdnOHVXRzZoNkdqVzNWS25LY3p1Zng0TC1YdEZ0a2xaS0ZRYWNxTk9aMlpwSnVRY0hvSGNPVUg2M3dUNDU3cFo5MTJvWWZnaDF2bC01cGhRTXVhaDBmYXZKTmdybG5oTWNvSGFDVHI5VVljajB4OUVDZVRabnl0SndyM3BVWmZ4RWVWWjNqYnVhTk15NUFRWFlSX2M3WVlNMlFXcWJENzhnTkwzRXhmY1U4bEUzbzFqNGpTdHV4UWg1dzV2OVhjTDI5R0RYVzZicGpSRFltdzAxYTJtNHJ3QWQxRW9DVUpKcW1tT0FCUUNpaHlmeFN1a1laa2xaQWlmRHA0?oc=5"
-        },
-        {
-          "title": "3 Stocks Put Traders Are Targeting Today",
-          "source": "Finviz",
-          "url": "/news/393263/3-stocks-put-traders-are-targeting-today"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "225.21M",
-      "short_float": "10.19%",
-      "daily_pct": 5.74,
-      "prev_close": 27.33,
-      "industry": "Consumer - E-Commerce",
-      "technical_status": "Fail (ADR 2.8% < 4%)",
+      "float_shares": "139.35M",
+      "short_float": "2.18%",
+      "daily_pct": 9.58,
+      "prev_close": 10.86,
+      "industry": "Fintech - Blockchain/Crypto",
+      "technical_status": "Fail (Avg $Vol $49M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 85,
@@ -250,8 +266,214 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "On Holding AG (ONON) was highlighted as a top consumer cyclical pick by analysts",
-        "discrepancy_note": "Source A does not contain this claim. Source B [4] confirms ONON was listed as one of 'Analysts’ Top Consumer Cyclical Picks', but this is only one source."
+        "primary_claim": "Cantor Fitzgerald initiated coverage on Securitize stock with an overweight rating",
+        "discrepancy_note": "Source A (Finviz) has no mention of the claim. Source B (Google News) articles [3] and [5] confirm the claim regarding Cantor Fitzgerald initiating coverage on Securitize with an overweight rating. As only one of the two primary sources (Google News) contains the detail, it is marked as Discrepancy based on the rule 'If only ONE source mentions the claim or sources give conflicting numbers, mark as Discrepancy.'"
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "VNET",
+      "price": 7.05,
+      "gap_pct": 8.13,
+      "pm_volume": 81253,
+      "avg_vol_10d": 3249734,
+      "avg_dollar_vol": 22910625,
+      "mkt_cap": 1856189507,
+      "rvol": 1.45,
+      "adr_pct": 4.93,
+      "category": "Institutional Buying",
+      "theme": "Strategic Investment Closing",
+      "reasoning": "VNET confirmed closing the sale of a **38.1% stake** to **CATL-affiliated buyers**, granting them a **board seat** and influence over **major deals**.",
+      "hypothesis": "Medium Conviction (RS Hold) — Large fund accumulation; watch for continuation.",
+      "conviction": 58,
+      "grade": "C",
+      "finviz_theme": "Cloud Data Centers",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "VNET announced the **closing** of a previously announced **strategic investment**, with buyers acquiring a **38.1% stake** in the company. These **CATL-affiliated buyers** gain a **board seat** and influence over **major deals**.",
+        "impact": "This significant stake acquisition signals strong institutional confidence and could lead to substantial strategic shifts, operational improvements, or future collaborations, enhancing long-term value and potentially driving M&A speculation."
+      },
+      "analysis_details": "• **The Buyer**\nVNET announced the successful **closing** of its previously announced strategic investment. **CATL-affiliated buyers** have acquired a substantial **38.1% stake** in VNET. The new backers will gain a **board seat** and say over **major deals** within VNET.\n\n• **Conviction Signal**\nThis large strategic investment by **CATL-affiliated buyers** represents a significant vote of confidence in VNET's future direction and operations. The acquisition of a **38.1% stake** and board representation suggests a deep, long-term commitment, potentially signaling new growth avenues or strategic alignment. The influence over **major deals** indicates these institutional investors will actively shape the company's future, which could translate into enhanced operational efficiency or market expansion, driving positive momentum.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Buyers acquire 38.1% stake in VNET, a top Chine... - Pluang",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQVXBrVmpmbUlkUElwc21mNXV0bHRKazU5Z0I1NG9SSkY4YmZRQ0swTDRlQ25IcXZOZjRmcDVmRjFzMzE2YzFnMEQ2aHdBQ2o1MnVmRWxObHVrbFgxTE5nT1BETzZ6d2FOTnotVHZkUlZRTjVoMEdNV3VHWVktczNHZU5YNDRhU2tYZGtKbDE1Nzh2bkU?oc=5"
+        },
+        {
+          "title": "New backers at VNET (NASDAQ: VNET) gain board seat and say over major deals - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOV3l2UmR5cFRSeTdBelFpeFdhSmYxTmxOQy15cEQzZ0U2T1NLczJsUXY3b0xiSkhkLVZqTDZFaWJ4aVN2T082WloyeWwzNzY0Nm4wMGhYZGpNU1VhQnAtb0gtdEdDT3NlTmhJa3ZQc1oxSDlwaVlwUXhOLVQ0V1VhMWphQkV3VEVxUnlCWFgwaEI1VHZ3dE4teHBscDR3LXltNkgyU2ozVFdBVDZNYlFF?oc=5"
+        },
+        {
+          "title": "VNET completes sale of 38.1% stake to CATL-affiliated buyers By Investing.com - Investing.com Canada",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQX0xWX0pTSGh4NFphdi1fMGFPWHFsajJOV3dtUHVxS3NrMUdOR1hta2IwQlc0SXVWTEJWaW15Q2EtMkFlNDFCWGFyNlNVT3drX3JJeU9ZUVk4c0I4bUYwbC1NZ1gxSkVucU8xLThwT3lsUnF6NXhHWElvYzNFWWhNREE1b09HV2o3YWdRcWFUam9YUkJRUm1wcHV3dnBCTWlKZkdrRXdBQl9nMmRaLXEyNFBSd0hXVGpuVXc?oc=5"
+        },
+        {
+          "title": "VNET Announces Closing of Previously Announced Strategic Investment - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPS25vaEY1V3hTeEZ0Q2RHbU9ZNXpwelZEcmxKVHB1Z1ZUYmRzaWFVSENqUThEbERic1hXM29Pekh0UkhHT0lySGFaUUZuczU2RTVJaHBORGNlc0dUM2t5R3NQbkJxM3FZd2ZOUGtGUFB6dXlXYm9DMUNfVGJuLVFsQXRQT1lkR0dXWWhfcXA5ZU9HYnZLc1FrYnRvWU5IUmJKS0FnZmlMMUl0SE41?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "269.16M",
+      "short_float": "14.70%",
+      "daily_pct": 6.13,
+      "prev_close": 6.52,
+      "industry": "Cloud Data Centers",
+      "technical_status": "Fail (Avg $Vol $23M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "38.1% stake",
+        "discrepancy_note": "Source A (Finviz News) provides no information regarding the 38.1% stake. Source B (Google News), specifically headlines from Pluang and Investing.com, confirms the 38.1% stake."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "FWDI",
+      "price": 8.27,
+      "gap_pct": 7.4,
+      "pm_volume": 245432,
+      "avg_vol_10d": 2354485,
+      "avg_dollar_vol": 19471591,
+      "mkt_cap": 568621006,
+      "rvol": 2.48,
+      "adr_pct": 8.72,
+      "category": "Upgrade",
+      "theme": "Cantor Fitzgerald Reiteration",
+      "reasoning": "FWDI sees Cantor Fitzgerald **reiterate** its stock rating, suggesting sustained analyst conviction and potential for continued investor interest.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 36,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "**Cantor Fitzgerald** has **reiterated** its stock rating for **Forward Industries** on **2026-09-21**. This action confirms the firm's standing and analyst's ongoing assessment of the company.",
+        "impact": "This reiteration suggests sustained confidence from **Cantor Fitzgerald**, which may provide underlying support for the stock and attract continued attention from institutional investors, although it does not signal a new catalyst for price momentum."
+      },
+      "analysis_details": "• **The Firm & Rating**\n**Cantor Fitzgerald** has **reiterated** its stock rating for **Forward Industries** (FWDI) on **2026-09-21**. This action signals the firm's continued conviction in the company's prospects, maintaining its previous stance on the stock.\n\n• **The Thesis**\nThe reiteration by **Cantor Fitzgerald** indicates that the firm's investment thesis for FWDI remains unchanged. This implies that the prior reasons for their rating are still valid, potentially reinforcing current investor sentiment and providing stability rather than initiating new upward momentum.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Cantor Fitzgerald reiterates Forward Industries stock rating By Investing.com - Investing.com India",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxONjNoNlRFUGtqZ0YwQUVmajFqeFRvczFNb3hBUFNWdVU0NEFaSXNWQkoyU3c4TzMydnp0eUdBbmpDekpYWDBrUVhpYXdzWlU5ejhGRG93cUtPdTF6WFpMbnEzT2k2Q295SzBDWDgzSExBWkYtX0o0dDBwMnZYUXlQMEx5Mmt2T3VDLThzMGhmTU1GelRpZl9oUjZ1LVpaMy16eTVuNVh6R1Q4RF9CLUZkZEtGdFg2VTI5em90TV9n?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "63.61M",
+      "short_float": "9.73%",
+      "daily_pct": 5.71,
+      "prev_close": 7.7,
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $19M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 80,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Cantor Fitzgerald reiterate its stock rating for FWDI",
+        "discrepancy_note": "Source B ([2] Cantor Fitzgerald reiterates Forward Industries stock rating) confirms the claim. Source A (Finviz News) has no information regarding Cantor Fitzgerald or a stock rating reiteration for FWDI. Source B [1] mentions FWDI as a winner but not the specific catalyst."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "WBD",
+      "price": 29.83,
+      "gap_pct": 7.3,
+      "pm_volume": 3688778,
+      "avg_vol_10d": 20091293,
+      "avg_dollar_vol": 599323270,
+      "mkt_cap": 69797551747,
+      "rvol": 1.93,
+      "adr_pct": 1.06,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found for WBD; likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 59,
+      "grade": "C",
+      "finviz_theme": "Consumer - Streaming",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. Significant move on no company-specific news suggests potential technical momentum or short-term institutional flow."
+      },
+      "analysis_details": "• **What Happened**\nWarner Bros. Discovery (WBD) is showing significant activity with **1.9x average daily volume**, but no direct, specific fundamental news has been released for the company. While a headline mentioned **Paramount Discussed $1.5 Billion California Investment to Clear Merger Hurdle**, this news pertains to a competitor, not WBD directly. Another headline mentioned **3 Volatile Stocks with Warning Signs**, but this is a general observation and not a specific catalyst.\n\n• **Key Consideration**\nWithout a clear fundamental trigger, any significant price movement in WBD is likely attributable to technical factors or institutional flow, often leading to a high risk of a **Gap and Trap** scenario. Traders should exercise caution as the lack of specific news makes sustained momentum speculative and vulnerable to quick reversals, despite the elevated trading volume.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "3 Volatile Stocks with Warning Signs - The Globe and Mail",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOUHNudld3MFg0SjFYNUFqOHFQQlRKWkN6cUd3WHFQUGFCenUwT1N3b3c2ZDNJc0dCaTA0WVVCa2FKb3dhdkpqNmRBVDlYRGVzbEVuc2xuZzdVT0xqc29hWHZ5WDFtcEQxcG51eklNRkU3aHJSRXJycDFfWHQ5NFV2YmVET1d6V0FlMG9OcGRYb0JhY2VGRTRBVXAtemxkZGxVdFB0ZjV0VTdvQVpsN3p5UW5tYnRFaXYwWFZLVQ?oc=5"
+        },
+        {
+          "title": "Paramount Discussed $1.5 Billion California Investment to Clear Merger Hurdle",
+          "source": "Finviz",
+          "url": "https://www.wsj.com/business/media/paramount-discussed-1-5-billion-california-investment-to-clear-merger-hurdle-ebe9f59b?mod=wsj_FV"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "2.40B",
+      "short_float": "2.87%",
+      "daily_pct": 7.09,
+      "prev_close": 27.8,
+      "industry": "Consumer - Streaming",
+      "technical_status": "Fail (ADR 1.1% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found for WBD",
+        "discrepancy_note": "The initial analysis claims 'No immediate fundamental catalyst found for WBD'. However, Google News [3] explicitly states 'Paramount Stock Jumps 7% on WBD Settlement Talks', indicating a specific fundamental catalyst (settlement talks involving WBD) that could be driving pre-market movement for WBD. Additionally, Google News [4] reports a significant institutional purchase of WBD shares (353,949 shares by Nykredit A S), which is a specific form of 'institutional flow' and could be considered a fundamental event affecting the stock."
       },
       "gates_passed": 4,
       "gates_detail": {
@@ -262,17 +484,1009 @@
         "gate_adr": false
       },
       "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "MSTR",
+      "price": 165.07,
+      "gap_pct": 7.24,
+      "pm_volume": 3115033,
+      "avg_vol_10d": 23577060,
+      "avg_dollar_vol": 3891865294,
+      "mkt_cap": 59139989835,
+      "rvol": 2.31,
+      "adr_pct": 6.33,
+      "category": "Thematic Narratives",
+      "theme": "Bitcoin Treasury Strategy & Capital Structure",
+      "reasoning": "MicroStrategy is reinforcing its bitcoin treasury strategy by adding more and improving its capital structure through preferred share retirement.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 60,
+      "grade": "A",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "MSTR has **added bitcoin** to its treasury and **retired preferred shares**, affirming its unique corporate strategy.",
+        "impact": "This move strengthens the company's balance sheet by reducing preferred share obligations while doubling down on its primary investment thesis, likely boosting investor confidence in its bitcoin-centric model."
+      },
+      "analysis_details": "• **The Narrative**\nMicroStrategy Inc (NASDAQ: MSTR) has officially disclosed that it **added bitcoin** to its treasury and concurrently **retired preferred shares**, demonstrating a continued commitment to its unconventional corporate strategy. These actions, confirmed by an **8-K filing on 2026-09-21**, reinforce the company's position as a proxy for bitcoin exposure in the equity market and signal a proactive management of its capital structure.\n\n• **Explosiveness**\nThe market is reacting positively, with MSTR stock **ralling as Wall Street backs** its **Bitcoin-Treasury Bet**. This indicates strong investor validation of the company's strategy, which includes both the acquisition of digital assets and the optimization of its balance sheet. The retirement of preferred shares reduces future financial obligations and potential dilution, which is a favorable development for equity holders.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "MSTU",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "SMST",
+          "mult": "1x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "Strategy Inc (NASDAQ: MSTR) adds bitcoin and retires preferred shares while keeping multi‑billion cash reserves - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQRzNxRzE1TUR1WVJJbnBvd3hPdUJKaXh6SUNvYlFSc1BXZGMyZXhJcDg5MVhIb3d3eFVaRmhQcVA0dXBuVk0tTGJTTW16RlItY1hSQ0V0WmI0YTRLcEZmYk95QzIxRU1wcjJfX1ZLa1IwV2d6eHEwYzN6VTlCNUZKaHZxbm1iZTd4REllNmJOM2R1NjhpeDkzVHdaZGxNWm1TeHhn?oc=5"
+        },
+        {
+          "title": "MSTR Stock Rallies As Wall Street Backs Bitcoin-Treasury Bet - StocksToTrade",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMic0FVX3lxTFBSc3BteVUtYWgtdzFvMktWNWVUWUladTNjNklEd0pwTkhyNkxPbGlZZ3RzZUFyaTRiVmVRNmYwbW9mMlJ0MmhrSVFMek9wMk1ERUtZdVE4V1EzamtNVTFzQkFUMFVvdkszXzdIVkhYMzRmR1E?oc=5"
+        },
+        {
+          "title": "Strategy Inc (MSTR) Stock Forecast 2026: Can It Recover From $100 After Authorizing Bitcoin Sales? - TradingKey",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQdVlVS0RTYXpieE9aVjF1SFZ5R2M1UzIyeWFKazktWU9KczlOZ2t3SE5Qenp2Z19TNzh4bGlnekNRNDc3cnR6czFfVzZKa1hoc2dRWE94U2Q5UmhqV3pLb0JMSzA5TzVKMDlxUGtyUU1zeEttUDA2c2U1a2Q5d0hiSkFzWXdtSTBmR0Zra19zWXJWVEZlSjlaQWpkcjdHYWw5cUZ5WlhvRlp2cDl1WnpfNzhoc1pUMzIwVGU3R2FVRC1KOVhoZWt2dTRzU29ZT29uZ2Rn?oc=5"
+        },
+        {
+          "title": "Michael Saylor Hints at More MicroStrategy Bitcoin Buys After Dead Cat Bounce Debate",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/crypto/articles/michael-saylor-hints-more-microstrategy-192307340.html"
+        },
+        {
+          "title": "Michael Saylor Calls CLARITY Act Rejection A Positive Inflection Point For Crypto Industry",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/crypto/articles/michael-saylor-calls-clarity-act-094228154.html"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-09-21",
+        "form": "8-K",
+        "items": [
+          "7.01",
+          "8.01"
+        ],
+        "category": "Others",
+        "label": "Other Material Event",
+        "url": "https://www.sec.gov/Archives/edgar/data/1050446/000119312526396093/mstr-20260914.htm"
+      },
+      "float_shares": "363.59M",
+      "short_float": "8.97%",
+      "daily_pct": 7.86,
+      "prev_close": 153.92,
+      "industry": "Fintech - Blockchain/Crypto",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 75,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "MicroStrategy is improving its capital structure through preferred share retirement.",
+        "discrepancy_note": "Source B (Google News [5]) explicitly mentions MicroStrategy 'retires preferred shares', which confirms the claim. However, Source A (Finviz) does not contain any information regarding preferred share retirement, preventing 'Verified' status."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
       "tier": "T3",
       "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "USAR",
+      "price": 16.4,
+      "gap_pct": 6.7,
+      "pm_volume": 656804,
+      "avg_vol_10d": 14454718,
+      "avg_dollar_vol": 237057375,
+      "mkt_cap": 5764926816,
+      "rvol": 0.69,
+      "adr_pct": 5.97,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "246.72M",
+      "short_float": "12.48%",
+      "daily_pct": 6.38,
+      "prev_close": 15.37,
+      "industry": "—",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "The primary catalyst claim states 'No immediate fundamental catalyst found'. Source A (Finviz) has no news, which aligns with the 'no catalyst found' assessment. However, Source B (Google News) explicitly points to 'USA Rare Earth Expands European Footprint With Major France Investment' as a reason for the stock being 'In Focus' and 'jumping today', indicating a fundamental catalyst. Therefore, the sources do not confirm the absence of a catalyst."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "ASST",
+      "price": 32.1,
+      "gap_pct": 6.68,
+      "pm_volume": 946332,
+      "avg_vol_10d": 9805490,
+      "avg_dollar_vol": 314756229,
+      "mkt_cap": 2873269520,
+      "rvol": 1.33,
+      "adr_pct": 8.2,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; likely technical breakout or institutional flow driving ASST's recent price action.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 57,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. Significant move on no news suggests Low Float squeeze. High risk of Gap and Trap."
+      },
+      "analysis_details": "• **What Happened**\nASST filed an **8-K** with the SEC today, September **21, 2026**, under Item **8.01 (Other Material Event)**. However, without specific details from news headlines or the filing content itself, the exact nature of this material event remains undisclosed in the provided context.\n\n• **Key Consideration**\nGiven the absence of specific fundamental news regarding the 8-K's content, the current price movement is likely driven by **technical factors** or **institutional flow**. Such moves, particularly without a clear narrative, carry a **high risk** of being a **Gap and Trap**, where initial momentum quickly reverses once speculative interest wanes.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": {
+        "filing_date": "2026-09-21",
+        "form": "8-K",
+        "items": [
+          "8.01"
+        ],
+        "category": "Others",
+        "label": "Other Material Event",
+        "url": "https://www.sec.gov/Archives/edgar/data/1920406/000162828026062806/asst-20260921.htm"
+      },
+      "float_shares": "84.52M",
+      "short_float": "23.38%",
+      "daily_pct": 6.56,
+      "prev_close": 30.09,
+      "industry": "Others",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found; likely technical breakout or institutional flow driving ASST's recent price action.",
+        "discrepancy_note": null
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "PSKY",
+      "price": 10.84,
+      "gap_pct": 6.17,
+      "pm_volume": 101967,
+      "avg_vol_10d": 20543445,
+      "avg_dollar_vol": 222690944,
+      "mkt_cap": 11455067556,
+      "rvol": 1.87,
+      "adr_pct": 3.97,
+      "category": "Thematic Narratives",
+      "theme": "Merger Settlement Progress",
+      "reasoning": "PSKY shares rose on reports of progress in settlement talks for its **$111-billion acquisition** of Warner Bros. Discovery, addressing antitrust litigation.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 59,
+      "grade": "B",
+      "finviz_theme": "Consumer - Streaming",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Paramount and Warner Bros. shares rose on reports of **progress in merger settlement talks** for the proposed **$111-billion acquisition** of Warner Bros. Discovery. Paramount reportedly discussed a **$1.5 Billion California investment** to clear antitrust hurdles.",
+        "impact": "Progress on this massive acquisition removes significant regulatory overhang, potentially unlocking substantial long-term value and market dominance."
+      },
+      "analysis_details": "• **The Narrative**\nNews reports indicate **Paramount and Warner Bros. Shares Rise** following reports of **progress in merger settlement talks**. Paramount has reportedly **discussed a $1.5 Billion California investment** as a key measure to resolve antitrust litigation and clear a significant hurdle for its proposed **$111-billion acquisition** of Warner Bros. Discovery.\n\n• **Explosiveness**\nThis development suggests a potential path forward for a **major M&A event** that would fundamentally reshape the media landscape. Clearing regulatory hurdles for such a large acquisition provides significant momentum, indicating a reduction in deal risk and potential for substantial long-term value creation and market consolidation within the streaming and content industry.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Paramount and Warner Bros. Shares Rise on Report of Progress in Merger Settlement Talks - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQU2lvZ0tNU0ltU3FwSFlxb1YzUWZxT3laNi0tRkxjUFAtd2h5c05iWi1YU255aW9ONGRWQ3A4clpnSXlITE9KWExYSjhscC1qYWoyVHhvcTJIQUxKRkMwc0tKcXJ0R2FqQW5YNkJnZWJZUmlEN2RGbWVFMkVmU2ZBV0tsVDZOaUU0VmVoYmhlb3FjWko3dGprU0RWT09maGJDY2ZB?oc=5"
+        },
+        {
+          "title": "Paramount Discussed $1.5 Billion California Investment to Clear Merger Hurdle",
+          "source": "Finviz",
+          "url": "https://www.wsj.com/business/media/paramount-discussed-1-5-billion-california-investment-to-clear-merger-hurdle-ebe9f59b?mod=wsj_FV"
+        },
+        {
+          "title": "Opposition grows to Paramount-Warner Bros. merger settlement as deal enters critical week",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/media-advertising/articles/opposition-grows-paramount-warner-bros-213019552.html"
+        },
+        {
+          "title": "Like father, like son: David Ellison considers Nashville alongside Austin as future home for Paramount",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/media-advertising/articles/father-son-david-ellison-considers-140000496.html"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "901.22M",
+      "short_float": "8.48%",
+      "daily_pct": 6.17,
+      "prev_close": 10.21,
+      "industry": "Consumer - Streaming",
+      "technical_status": "Fail (ADR 4.0% < 4%)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 90,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "$111-billion acquisition",
+        "discrepancy_note": "The catalyst claims a '$111-billion acquisition'. Finviz does not mention the total acquisition value. Google News (Source B[5]) mentions a '$110B Merger', which is a close but differing amount."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": false
+      },
+      "meets_all_gates": false,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "BMNR",
+      "price": 27.52,
+      "gap_pct": 5.89,
+      "pm_volume": 2692818,
+      "avg_vol_10d": 44115566,
+      "avg_dollar_vol": 1214060376,
+      "mkt_cap": 15677853461,
+      "rvol": 1.32,
+      "adr_pct": 6.52,
+      "category": "Thematic Narratives",
+      "theme": "Disclosure of Significant Crypto and Cash Holdings",
+      "reasoning": "BMNR disclosed substantial **5.98 million Ethereum tokens** and **$17.1 billion** in total crypto and cash holdings via an 8-K filing.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 57,
+      "grade": "A",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Bitmine Immersion Technologies (BMNR) announced via an 8-K filing on 2026-09-21 that its ETH Holdings reached **5.98 Million Tokens**, and its Total Crypto and Total Cash Holdings amounted to **$17.1 Billion**.",
+        "impact": "This disclosure provides a clear update on BMNR's significant asset base, which is a key valuation driver for a company in the crypto sector, potentially bolstering investor confidence."
+      },
+      "analysis_details": "• **The Narrative**\nBitmine Immersion Technologies (BMNR) officially disclosed on 2026-09-21 that its Ethereum (ETH) holdings have reached **5.98 Million Tokens**. Concurrently, the company reported its total crypto and total cash holdings combined stand at a substantial **$17.1 Billion**.\n\n• **Explosiveness**\nThis significant asset disclosure, particularly the **$17.1 Billion** in total crypto and cash, directly reinforces BMNR's position as a major player with considerable financial backing and exposure in the cryptocurrency space. Such substantial holdings can act as a strong bullish catalyst, attracting investor interest in its thematic narrative surrounding crypto investment and operational strength.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Bitmine Immersion Technologies (BMNR) Announces ETH Holdings Reach 5.98 Million Tokens, and Total Crypto and Total Cash Holdings of $17.1 Billion - PR Newswire",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiqgJBVV95cUxQTkFvdnQzZ19mTGQ3N2FvczBOdmpSOWVXVF8yNUhvTGJvUkVzM3JSU2Y3UEo1V2ZwN0pXOEdPb2w3LUJJd2xCY1dVQzNwVkFfNGIxQ3BzQ3VJM3FyZGpZQklLSkx4UzItOExPSVp5c0hKMkhlNDMyM04yblBzSDlTUEc1MFF4Y01QVlpwcC1kSFVUU3VMcG9GSHhZbDk4MEhLTnM4M1hpa1haTkpnVkplOXU4czV1RWY5eXFSWUx1eEw5d0JUamxEeXpXVXlobXZkcXlFSkl3V21TYjdhekhRSHVJR012Tm5JVUlGcW94bkpOTXd1OFNFWUduWEFwdDc0NUNXN21CYmJoWWhsYmpfX0t3WFZNV2w5QWF3dThHSWdhNEpLc1JqV3h3?oc=5"
+        },
+        {
+          "title": "BitMine Stock Forecast: Can Ethereum Holdings and Buybacks Drive BMNR Higher? - TradingKey",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPQTdNQ1h6YXVlX1F6aG0zMG1ETjgwUjVkT2JwVnFJdEx0bzA1VnFpb1pINHVJeXhFeU9pQ2s4cWNfa0VZRkFZVUpLaWxoR2JhNGNOUWctVFFTUWo1ak1JTEwxbUUzUUVQdTU1QmgtYm5BUldENUdaU09STmhVdW1fR1FucnFTSDdSVXoyVlpDRWo5SzcwcG5UeFkxUTJhdi1wQTRUVWs1c2hEdjQ2cEVENUNKcXNEc2xPOWg4YmgyQUhpTFlCeHYwemNNNXJoOEk?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-09-21",
+        "form": "8-K",
+        "items": [
+          "7.01",
+          "9.01"
+        ],
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/1829311/000149315226043486/form8-k.htm"
+      },
+      "float_shares": "599.91M",
+      "short_float": "6.94%",
+      "daily_pct": 5.85,
+      "prev_close": 25.99,
+      "industry": "Fintech - Blockchain/Crypto",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 85,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "BMNR disclosed 5.98 million Ethereum tokens and $17.1 billion in total crypto and cash holdings.",
+        "discrepancy_note": "Source A (Finviz) has no information regarding the claim. Only one article within Source B (Google News, specifically PR Newswire) confirms the claim with matching specifics. This does not meet the requirement for 'BOTH sources confirm'."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "INTC",
+      "price": 114.96,
+      "gap_pct": 5.86,
+      "pm_volume": 3390970,
+      "avg_vol_10d": 114479764,
+      "avg_dollar_vol": 13160593669,
+      "mkt_cap": 574071045840,
+      "rvol": 0.92,
+      "adr_pct": 4.22,
+      "category": "Thematic Narratives",
+      "theme": "AI Turnaround Narrative",
+      "reasoning": "Intel stock surged as Wall Street collectively signals support for the company's ongoing **AI turnaround** efforts, boosting investor confidence.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 56,
+      "grade": "B",
+      "finviz_theme": "Semiconductors - Compute",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Intel stock has **jumped** as **Wall Street** explicitly **backs** the company's strategic **AI Turnaround**. This indicates a shift in market sentiment towards Intel's positioning in the critical AI sector.",
+        "impact": "This renewed Wall Street confidence could drive sustained momentum, potentially attracting further institutional inflows as the AI narrative strengthens for Intel."
+      },
+      "analysis_details": "• **The Narrative**\nIntel's stock experienced a **jump** following news that **Wall Street backs** the company's **AI Turnaround**. This suggests a strengthening belief among analysts and investors in Intel's strategic shift and future prospects within the high-growth artificial intelligence market. The news points to a positive sentiment re-rating rather than a specific event like an earnings report or product launch.\n\n• **Explosiveness**\nThis catalyst, while not tied to a singular event like a major contract or specific upgrade, signifies a broader, more qualitative shift in market perception. A collective 'backing' from Wall Street around the **AI Turnaround** can act as a powerful, sustained narrative, potentially leading to increased demand and upward price momentum as more capital flows into the stock on this thesis.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "INTW",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Intel Stock Jumps As Wall Street Backs AI Turnaround - StocksToTrade",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTE4xS3N2d1NaSVg3SnY0NmxScWcyQjIwQmltOTRpSElCVmVRM2lETzh6eEtiWXhBbnVYNHpzS2lWdHliNk5IYWV3WkRFVmpnV2NSMmY5NV85ZjZ0N1BaTXl3Um8tYVl6NWtCS0pzS3pleEZPeHNidmhoaFNkVFY?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "4.55B",
+      "short_float": "3.35%",
+      "daily_pct": 5.87,
+      "prev_close": 108.6,
+      "industry": "Semiconductors - Compute",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 60,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Wall Street collectively signals support for Intel's ongoing AI turnaround efforts.",
+        "discrepancy_note": "The primary catalyst claim is a thematic statement about 'Wall Street support' and 'AI turnaround efforts', not a specific factual claim (like a dollar amount, percentage, or date) that can be numerically verified. While Google News headline [4] 'Intel Stock Jumps As Wall Street Backs AI Turnaround' directly echoes this thematic claim, it does not provide any specific factual details to verify (e.g., a specific analyst rating, a target price, or a percentage increase due to this 'backing'). Source A (Finviz) has no information."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "ALOY",
+      "price": 8.73,
+      "gap_pct": 5.73,
+      "pm_volume": 105186,
+      "avg_vol_10d": 2212912,
+      "avg_dollar_vol": 19318722,
+      "mkt_cap": 573400378,
+      "rvol": 0.94,
+      "adr_pct": 6.6,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "56.79M",
+      "short_float": "14.01%",
+      "daily_pct": 5.93,
+      "prev_close": 8.26,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $19M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "ABTC",
+      "price": 10.67,
+      "gap_pct": 5.62,
+      "pm_volume": 137744,
+      "avg_vol_10d": 2126782,
+      "avg_dollar_vol": 22692764,
+      "mkt_cap": 735479224,
+      "rvol": 2.3,
+      "adr_pct": 9.79,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "23.10M",
+      "short_float": "18.69%",
+      "daily_pct": 6.14,
+      "prev_close": 10.1,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $23M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": "The initial analysis claims no immediate fundamental catalyst, but Source B explicitly states a fundamental catalyst: 'Revenue More Than Doubles Estimates'."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "CRCL",
+      "price": 96.89,
+      "gap_pct": 5.57,
+      "pm_volume": 774008,
+      "avg_vol_10d": 16592141,
+      "avg_dollar_vol": 1607612541,
+      "mkt_cap": 23300727191,
+      "rvol": 1.07,
+      "adr_pct": 7.03,
+      "category": "New Contract/Partnership",
+      "theme": "New Payments Partnership",
+      "reasoning": "CRCL dipped following a new **Tazapay** deal and broader pushes into **global payments**, amidst **rival stablecoin challenges** to **USDC**.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "C",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "CRCL stock dipped on news of a **Tazapay deal** as **USDC momentum builds**, with Circle pushing deeper into **global payments** and **cross-border and tokenization bets**. The stock also crashed **17%** due to **rival stablecoin challenges** to **USDC**.",
+        "impact": "Despite strategic expansion, the market reacted negatively to the partnership and competitive pressures, signaling concerns over **USDC**'s market position."
+      },
+      "analysis_details": "• **Impact**\nCRCL stock experienced a dip following the announcement of a deal with **Tazapay**, which is part of Circle's broader strategy to push deeper into **global payments** and **cross-border and tokenization bets**. While **USDC momentum builds**, the market reacted negatively to these developments, with the stock dipping.\n\n• **Strategic Value**\nThe company's stock crashed **17%** as a direct result of **rival stablecoin challenges** to **USDC**, indicating significant competitive pressure in the stablecoin market. Despite initiatives like the **Tazapay deal** and expansion into **global payments**, investor sentiment appears weighed down by these competitive threats.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "CRCL Stock Dips On Tazapay Deal As USDC Momentum Builds - StocksToTrade",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNZ3JYZHhxQ0tWdkt2Z0VmX013eUZvSWhFbHlMeF9ZdnRMTngzUnBfQmxpTXJBSk9aamhuMXJUSzB6TjdnMktHaFdIdV9ReFgwN0prWS01ZGh3Wm02dUJ2YzRsamdtRXZlODY5WHlEMDVNY0RIMzlzQkszWnpUWFBkZWdxNUVVb0E?oc=5"
+        },
+        {
+          "title": "CRCL Stock Dips As Circle Pushes Deeper Into Global Payments - StocksToTrade",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNLWlCN09IVkhuWEJIQ1ZReGpNUFZ0bVhQb1NGVExrWU1NV3FhSkx0SDlYZHB0VVhqSTVfUGJxOFI0RWFhd2VZOWh0Nld2UlZGQlFNeWx3YkY0dnVFb2twcFZZbFFnX0ZkNGlfVHgxNmxRUHduWlpva29ZSVluU1BldXoyclk?oc=5"
+        },
+        {
+          "title": "CRCL Stock Dips As Circle Pushes Cross-Border And Tokenization Bets - timothysykes.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPUmliWHRxa1JoR2lTSXdtandjZFRqYkd4YWQ4TGRfUmRqRU5aVjFOQ3NPdHdKRDY4bTA0eFpYMlFyaUJvSmhPZnNjbkFaNndKYXJibW9lMFZtV1M4UGJNLXJKeTNBN1RMV193S0tRdWQ4ZVBSbGVPWVZDUTJkNUp0ci1tQ2JiSG5f?oc=5"
+        },
+        {
+          "title": "Circle Price Forecast: CRCL Crashes 17% as Rival Stablecoin Challenges USDC - TradingKey",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQd0lJc0NqbDFzUnc4VFI2bFVaM0VKRl9Wb1REeHU5UVMyMFlzUHR3bkFaenBwLVM5ampmODRzZUJIYnIzdHFUZzM1am5tbkdwRnJvdHVWcDNNamhobjdhZmQ0TV9GSFYxN1MwUm50U2FJUUdIS2lGV2MzLWVoRldjWERIM1ctYk9KTVN1aU52QmR2cnZKRzZWQU4wRFpJWE9WNHFGUGNabXFZb3lVbkVVeFZTaXdBcDM4Szhzd1JUZw?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "192.06M",
+      "short_float": "10.72%",
+      "daily_pct": 6.26,
+      "prev_close": 91.78,
+      "industry": "Fintech - Blockchain/Crypto",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 85,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "CRCL dipped following a new Tazapay deal and broader pushes into global payments, amidst rival stablecoin challenges to USDC.",
+        "discrepancy_note": "The primary catalyst claims a 'new Tazapay deal' and 'rival stablecoin challenges to USDC' as reasons for CRCL dipping. Source A (Finviz) has no information. Source B (Google News) confirms both the 'Tazapay deal' ([4]) and 'rival stablecoin challenges to USDC' ([3]). However, the initial catalyst summary does not provide a specific numerical dip amount, while one Google News source ([3]) specifies 'CRCL Crashes 17%'. Since the primary claim only states 'CRCL dipped' without a number, and Finviz offers no confirmation, a full verification of a specific dip percentage is not possible across *both* sources. While some elements are confirmed in Google News, the lack of confirmation from Finviz and the absence of a specific number in the primary claim makes a 'Verified' status inappropriate for numerical claims. If the claim were 'CRCL dipped following a Tazapay deal' without a numerical component, and Finviz *also* confirmed the dip and deal, it would be different."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "COIN",
+      "price": 204.67,
+      "gap_pct": 5.37,
+      "pm_volume": 656559,
+      "avg_vol_10d": 11058072,
+      "avg_dollar_vol": 2263255596,
+      "mkt_cap": 51250337250,
+      "rvol": 2.22,
+      "adr_pct": 6.03,
+      "category": "Upgrade",
+      "theme": "Wall Street Price Target Hikes",
+      "reasoning": "COIN surged after multiple Wall Street analysts hiked price targets, signaling increased confidence and potential re-rating for the crypto platform.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 35,
+      "grade": "B",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Multiple Wall Street analysts hiked **price targets** for Coinbase, leading to an **11.7 percent surge** in COIN stock today and a **12% jump** last Friday. This re-rating reflects growing confidence in the crypto platform, with **Bitcoin's breakout** also contributing.",
+        "impact": "Increased analyst confidence and higher price targets typically drive positive momentum, attracting new institutional and retail capital, and suggesting potential for further upside if the new targets are reached."
+      },
+      "analysis_details": "• **The Firm & Rating**\nSeveral Wall Street analysts have concurrently hiked their **price targets** for Coinbase, directly contributing to the stock's significant upward movement. This widespread re-rating across multiple firms suggests a strengthening consensus view on COIN's future valuation.\n\n• **The Thesis**\nCoinbase stock experienced an **11.7 percent surge** today, building on a **12% jump** last Friday. While **Bitcoin’s breakout** was a contributing factor, the primary catalyst for today's move appears to be these upgraded price targets. Additionally, comments from Brian Armstrong suggest Coinbase may **benefit** from the failure of the **CLARITY Act**, potentially reducing competition from banks.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "CONL",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "COIN stock heads into the open after an 11.7 percent surge - AD HOC NEWS",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQNHRZTFAtRjJzTXR4SGwyT1N1YkZ3LTJUenluNFgwbUZCUWlOaTRrWHBNdEF5djctaTV5YjVsVmNHc01Canc2TnJpSUlmbVBTdFV4ejRNbktwc0Z5bkxkcWpDTTVXb0R5WkpIMEp5NlZYTldqaTZIQTVzd19zMUFNMUhuc1pNZ0ZwOVRTek5DVVRKQ1FtenNkbFJVN0F2Zm1TVzh3SnVaLWs2d2t0SEdpRURiTzJLMjNRRzBDNlJR?oc=5"
+        },
+        {
+          "title": "Coinbase Stock Surges As Wall Street Hikes Price Targets - StocksToTrade",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBkMUd2Y2hfTkEyLUpzU21CMGFJY2Y3NjdwdGlYTUV4ZW5Sbl9tMjZidkwwMDJhWFh5cjRsU1FDbEpiVWdtdlFHZU96dC1pd0JRcTMza0Vubm45OUY0eHJ5eFYwSHlTcG9xY3JsdFpFZHNvNG5Sa0VRRl9ZTVk?oc=5"
+        },
+        {
+          "title": "Coinbase Stock Jumped 12% Last Friday. Bitcoin’s Breakout Wasn’t the Only Reason. - TIKR.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPaEJtVVpNVmtjaXlEUWo0YU80dU4tbG10WmVwV1NfRmtNV241REczQkhkVGUybWFkRFBqM2Zid1NvTEdLQ3ZGdVhwQ0Nzal8xZnhXeFI3TVNUamdvSWlvZkdhVnI4TzBnU2syNUFDeHZMekVMeHVRSlRJTDlHX0VnVmJRZEkyTWpaZlRYVWtqQXgxREFaM3MzUE14UWc0RjFQU1VBVw?oc=5"
+        },
+        {
+          "title": "Robinhood CEO Says Crypto Event-Contracts Will Overtake Sports Markets",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/crypto/articles/robinhood-ceo-says-crypto-event-021944954.html"
+        },
+        {
+          "title": "Brian Armstrong Says Coinbase May Benefit After CLARITY Act Fails, Banks Face More Competition",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/crypto/articles/brian-armstrong-says-coinbase-may-165719051.html"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "215.71M",
+      "short_float": "12.69%",
+      "daily_pct": 5.66,
+      "prev_close": 194.25,
+      "industry": "Fintech - Blockchain/Crypto",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 85,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "COIN surged by a specific percentage due to Wall Street analysts hiking price targets.",
+        "discrepancy_note": "Google News [1] states 'Coinbase Stock Jumped 12% Last Friday.' Google News [5] states 'COIN stock heads into the open after an 11.7 percent surge.' While both report a surge and Google News [2] confirms analyst price target hikes, the specific percentage of the surge differs (12% vs 11.7%). Finviz does not provide a specific percentage surge or explicitly confirm analyst price target hikes leading to a surge."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "RBLX",
+      "price": 50.38,
+      "gap_pct": 5.35,
+      "pm_volume": 144657,
+      "avg_vol_10d": 10073239,
+      "avg_dollar_vol": 507489781,
+      "mkt_cap": 34161456943,
+      "rvol": 0.94,
+      "adr_pct": 4.72,
+      "category": "Upgrade",
+      "theme": "JPMorgan reiterates rating on viral engagement",
+      "reasoning": "JPMorgan reiterated its Roblox stock rating, citing recent **viral engagement gains**, signaling continued positive sentiment from institutional research.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 31,
+      "grade": "B",
+      "finviz_theme": "Consumer - Gaming",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "**JPMorgan** has **reiterated Roblox stock rating**, specifically on the back of **viral engagement gains**. This analyst action comes **53 days** after RBLX's last earnings report.",
+        "impact": "This reiteration reinforces the positive narrative around RBLX's user growth and engagement, potentially attracting further investor attention to the stock's momentum. It serves as an affirmation from a major financial institution regarding the company's current operational performance."
+      },
+      "analysis_details": "• **The Firm & Rating**\n**JPMorgan** has **reiterated** its existing **Roblox stock rating**, validating its prior thesis. This comes amidst observations of **viral engagement gains** for the Roblox platform.\n\n• **The Thesis**\nThe reaffirmation by **JPMorgan** suggests a continued belief in Roblox's ability to drive user interaction and growth through **viral engagement**. This implies that the firm sees sustainable positive trends in the platform's core metrics, supporting the current valuation or future potential.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "JPMorgan reiterates Roblox stock rating on viral engagement gains By Investing.com - Investing.com India",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQTkN4ZEpiNDdQU3FLaDVmZUgzcWhoTHlTSTlad1ZOZGFCaGF0c0o1ZHlRRzhGTFpadTBqQ2Z4R05JZFBycTVnbkNIQkcxOXpHbVNfYzB5R0JTTXpEVEQ0NnJfUk9qbWQ5cXRpcTVwWUt2eUNSWExDT0gyN0dsOEhrWmN0eW5weTF1VWxoZUdBRC1Ja0VXU3BHVmNDdHN0SDZrNVR5cnhlYnhXWDZhRXp4emVyUDRnVmo5S20zNVdyT3VrNU9S?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "633.43M",
+      "short_float": "3.70%",
+      "daily_pct": 4.81,
+      "prev_close": 47.82,
+      "industry": "Consumer - Gaming",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "JPMorgan reiterated its Roblox stock rating, citing recent viral engagement gains.",
+        "discrepancy_note": "Source B (Google News, headline 4 from Investing.com) directly confirms 'JPMorgan reiterates Roblox stock rating on viral engagement gains'. Source A (Finviz News) has no mention of this claim."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "HUT",
+      "price": 104.0,
+      "gap_pct": 5.33,
+      "pm_volume": 76077,
+      "avg_vol_10d": 5034124,
+      "avg_dollar_vol": 523548896,
+      "mkt_cap": 12170639615,
+      "rvol": 1.23,
+      "adr_pct": 8.08,
+      "category": "Upgrade",
+      "theme": "Rothschild Redburn Initiates Neutral",
+      "reasoning": "Hut 8 stock initiated with a **neutral rating** by **Rothschild Redburn**, potentially influencing investor sentiment and trading activity.",
+      "hypothesis": "Caution (Fade Candidate) — Low institutional conviction; likely gap-fill.",
+      "conviction": 32,
+      "grade": "C",
+      "finviz_theme": "Fintech - Blockchain/Crypto",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "**Rothschild Redburn** initiated **Hut 8 stock** with a **neutral rating** by Investing.com.",
+        "impact": "This new analyst coverage provides market validation but suggests limited immediate upside or downside potential according to the initiating firm."
+      },
+      "analysis_details": "• **The Firm & Rating**\nInvestment firm **Rothschild Redburn** has initiated coverage on **Hut 8 stock**, assigning a **neutral rating** to the cryptocurrency mining company. This analyst action brings new attention to the stock, adding to its visibility within the investment community.\n\n• **The Thesis**\nThe **neutral rating** from **Rothschild Redburn** implies that, at current levels, the firm does not foresee significant outperformance or underperformance for Hut 8. While providing market validation, this stance suggests a balanced risk/reward profile, potentially leading to sideways trading or limited momentum from this specific catalyst.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Pizza Hut GM at Yum China (NYSE: YUMC) gets dividend RSUs vesting in thirds - Stock Titan",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPOEZEdlo0V0NMSGRRX2RHZTEwOG1BcHFaRmtMR29FcU5La1hoTEwxeFFXWFNxU1BpWEdGTHlLRVNnVHQtM1BLN2txNmtDU2lld1ZyakpzNERRZ0c5cjQxMkYtbElMVGZmQ0kwblpYbHVtQTZROFhIQzV5TkpFWk96YTVjMWtzeFZKcWRBcTQwczd5bmZvM3oyWmlXZnRZOG1aQ05LRlhENmdWUzV0TGNPcE4xVHVsOU0?oc=5"
+        },
+        {
+          "title": "Rothschild Redburn initiates Hut 8 stock with neutral rating By Investing.com - Investing.com Nigeria",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOeTB3bHVPcFhyQkZHZ3dFenZGVmZTdHlmdWkzQVJUMFdCQVhrTzhWNmZUa2tTVU9zd0xzMDN1TnFyXy1CQ0RHUmFxeXVIdHQ2RlRzTUdOY1E3bTVXd0NUMUtUNXJzOHl5bW80MWJ4VzdSZjdLYlptUHBaLWlWaFRVdGxGdlJJRW9rR1BfbHZBV0pwVzJkZEkyVmNCSjJJNmo2SEU5Tk1LcGMwdllqU21WeWV1aWdRZ2FUckx2Zk93?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "112.39M",
+      "short_float": "13.24%",
+      "daily_pct": 5.83,
+      "prev_close": 98.74,
+      "industry": "Fintech - Blockchain/Crypto",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 85,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Hut 8 stock initiated with a neutral rating by Rothschild Redburn",
+        "discrepancy_note": "Source B (Google News, specifically entry [2] and [3]) confirms that Rothschild Redburn initiated Hut 8 stock with a neutral rating. Source A (Finviz News) has no information regarding this claim, thus both sources do not confirm the claim."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "HOOD",
+      "price": 126.19,
+      "gap_pct": 5.32,
+      "pm_volume": 847490,
+      "avg_vol_10d": 24551941,
+      "avg_dollar_vol": 3098209435,
+      "mkt_cap": 107728039476,
+      "rvol": 1.44,
+      "adr_pct": 5.88,
+      "category": "Thematic Narratives",
+      "theme": "Crypto Event-Contracts Growth",
+      "reasoning": "Robinhood CEO Vlad Tenev highlighted the rapid growth of crypto event-contracts, predicting they will soon overtake sports markets.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 58,
+      "grade": "B",
+      "finviz_theme": "Fintech - Trading",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Robinhood CEO Vlad Tenev told CNBC's Jim Cramer that **crypto event-contracts** are already capturing an **outsized share** of the platform's prediction markets business, forecasting they will **overtake sports markets** within a few years. HOOD stock reacted positively, rising **+9.12%** following these comments.",
+        "impact": "This commentary suggests a significant growth driver within Robinhood's prediction market offerings, potentially expanding its total addressable market and user engagement in a high-growth sector."
+      },
+      "analysis_details": "• **The Narrative**\nRobinhood Chairman and CEO Vlad Tenev stated that crypto event-contracts are taking an **outsized share** of the platform's prediction markets. He boldly predicted that these contracts will **overtake sports markets** in prediction volume within a few years, indicating robust internal growth for this new product line within Robinhood.\n\n• **Explosiveness**\nThis CEO commentary on a rapidly expanding product segment, particularly within the nascent prediction markets and crypto space, highlights a potential future revenue stream and user acquisition channel. The strong positive market reaction of **+9.12%** suggests investors are receptive to this growth narrative, which could fuel further momentum as this thematic growth story develops.",
+      "peer_tickers": [],
+      "leverage_etfs": [
+        {
+          "ticker": "ROBN",
+          "mult": "2x"
+        }
+      ],
+      "inverse_etfs": [
+        {
+          "ticker": "HOOZ",
+          "mult": "1x"
+        }
+      ],
+      "headlines": [
+        {
+          "title": "Robinhood CEO Says Crypto Event-Contracts Will Overtake Sports Markets",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/markets/crypto/articles/robinhood-ceo-says-crypto-event-021944954.html"
+        },
+        {
+          "title": "Robinhood CEO Says Civil Liability May Not Be Enough To Contain Biggest AI Risks",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/robinhood-ceo-says-civil-liability-141117324.html"
+        },
+        {
+          "title": "Standard: Robinhood Stock Token Liquidity Drive - blockchain.news",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOUHVDUFNNUTJXVGhuX3lybk9femtsWko0c3AzbTVWbGZlbm10MjFjcXBBeDBlSkg1SDlWazI5NFM5SUl5Qi1ua3Q5LVY5bGQzN0pNVGxWLXJhSHBjS1o2bTU1UVE1VGdwVWVjZ0ZqT0ZOdGItbGpkUk9tWENuSFVJQjZYa3dsNlk?oc=5"
+        },
+        {
+          "title": "Higher Rates Keep Robinhood Stock And Cash Sweep Platforms In Focus - Yahoo Finance",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQUm5nQ0RLc2gxajNqSFAwdmdHdUphUlNyYkZ1QWZ0TXBSeHBndnpDNnAxN0EzcFBMSDVzY0NlMVFKLVNxcDhmVnhyd0EwMDZqdUVGR1puSEYyWUtCUXdkNTZsTm1WLTF1STBMM3Q5eGNLbTh6aUwyMlVONGF4RWRydWczWW00TmF6aGRXNGFHN2NPOXA0YmZ1Xy1yeWQxUkk?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "760.92M",
+      "short_float": "4.67%",
+      "daily_pct": 5.44,
+      "prev_close": 119.82,
+      "industry": "Fintech - Trading",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 75,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "Robinhood CEO Vlad Tenev predicted crypto event-contracts will soon overtake sports markets.",
+        "discrepancy_note": "Source A (Finviz News [1]) explicitly states the claim, matching the catalyst summary. Source B (Google News) does not contain any mention of crypto event-contracts or this specific prediction."
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
+    },
+    {
+      "ticker": "SBET",
+      "price": 9.82,
+      "gap_pct": 5.03,
+      "pm_volume": 445790,
+      "avg_vol_10d": 8928614,
+      "avg_dollar_vol": 87678989,
+      "mkt_cap": 2031040764,
+      "rvol": 1.57,
+      "adr_pct": 6.38,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "No immediate fundamental catalyst found; price action likely driven by technical breakout or institutional flow.",
+      "hypothesis": "Caution (Gap & Trap Risk) — Avoid open chase; wait for 15-min base confirmation.",
+      "conviction": 25,
+      "grade": "C",
+      "finviz_theme": "—",
+      "analysis_source": "no_news",
+      "analysis_detail": {
+        "catalyst": "No fundamental catalyst identified in the last 24 hours.",
+        "impact": "Speculative. Significant price move on no news suggests Low Float squeeze or technical stop-running. High risk of Gap and Trap without fundamental backing."
+      },
+      "analysis_details": "• **What Happened**\nNo news catalyst identified within the last 24 hours. The gap is likely technical or flow-driven.\n\n• **Key Consideration**\nLow Float squeezes and overnight program flows can create sizable gaps with no fundamental backing. These are typically Gap and Trap setups — the stock often fades to fill the gap by end of day.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [],
+      "edgar_filing": null,
+      "float_shares": "202.79M",
+      "short_float": "17.28%",
+      "daily_pct": 5.13,
+      "prev_close": 9.35,
+      "industry": "—",
+      "technical_status": "Fail (Avg $Vol $88M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "No immediate fundamental catalyst found",
+        "discrepancy_note": null
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 4,
-    "large_gaps": 0,
-    "total_headlines": 7,
+    "small_gaps": 19,
+    "large_gaps": 2,
+    "total_headlines": 43,
     "monthly_cost_usd": 0.01
   }
 }
