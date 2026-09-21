@@ -4654,6 +4654,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [calMonth, setCalMonth]     = useState(() => { const d = new Date(); return { y: d.getFullYear(), m: d.getMonth() }; });
   const [calSelectedDay, setCalSelectedDay] = useState(null);
   const [chartTrade, setChartTrade] = useState(null);
+  const [miniChartsFor, setMiniChartsFor] = useState(null); // { title, tickers } for the trade table's mini-chart grid
   const [notebook, setNotebook]     = useState(() => loadNotebook());
   const [notebookDraft, setNotebookDraft] = useState("");
   const [showFilters, setShowFilters] = useState(false);
@@ -5257,6 +5258,12 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
           </button>
         )}
         <span className="text-[11px] text-zinc-600">{visible.length} trades</span>
+        {sortedVisible.length > 0 && (
+          <button onClick={() => setMiniChartsFor({ title: "Trade Journal", tickers: sortedVisible.map(t => ({ ticker: t.ticker, category: t.theme })) })}
+            className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+            ▦ Mini Charts
+          </button>
+        )}
         <div className="flex-1"/>
         <input ref={fileInputRef} type="file" accept=".csv,text/csv" onChange={handleImportFile} className="hidden"/>
         {trades.some(t => !t.theme) && (
@@ -5613,6 +5620,9 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       </div>
 
       {chartTrade && <TradeChartModal trade={chartTrade} onClose={() => setChartTrade(null)}/>}
+      {miniChartsFor && (
+        <MiniChartGridModal title={miniChartsFor.title} tickers={miniChartsFor.tickers} onClose={() => setMiniChartsFor(null)} />
+      )}
     </div>
   );
 };
