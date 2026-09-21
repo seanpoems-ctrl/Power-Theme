@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-21 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Divergent Flows, Underlying Caution",
+    "spy_price": 761.69,
+    "spy_change_pct": 0.13,
+    "vix": 14.89,
+    "hy_oas": 2.7,
+    "yield_curve": 0.25,
+    "credit_status": "Complacent",
+    "s5fi": 33.3,
+    "mmth": 54.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Announces breakthrough AI chip for data centers, significantly boosting revenue projections and market leadership expectations."
+        },
+        {
+          "ticker": "JPM",
+          "company": "JPMorgan Chase & Co.",
+          "reason": "Major investment bank confirms strategic acquisition, expanding its market share in a key wealth management segment."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Continues to face pressure from falling crude oil prices and general sector outflows, driven purely by commodity and flow dynamics."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-18 18:48 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2217,44 +2255,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corp",
           "reason": "Benefited from continued institutional rotation into high-quality tech names as investors seek stability amidst broader market uncertainty."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-08-31 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Mounting Caution / Volatility Up",
-    "spy_price": 769.35,
-    "spy_change_pct": -0.23,
-    "vix": 15.22,
-    "hy_oas": 2.63,
-    "yield_curve": 0.39,
-    "credit_status": "Complacent",
-    "s5fi": 54.8,
-    "mmth": 72.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple announces a surprise pre-order launch for a highly anticipated mixed-reality headset, exceeding internal sales targets within hours."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft secures a massive cloud computing contract with a major government agency, reinforcing its dominance in secure enterprise solutions."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AMD",
-          "company": "Advanced Micro Devices Inc.",
-          "reason": "Advanced Micro Devices continues to face competitive pressures in the data center GPU market, leading to concerns about Q3 guidance."
         }
       ]
     }
