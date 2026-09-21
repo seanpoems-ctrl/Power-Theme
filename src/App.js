@@ -8967,7 +8967,7 @@ const LEVERAGED_ETF_MAP = {
   LITE:  { long: ["LITX"], short: [] },
   SMR:   { long: ["SMU"], short: [] },
   RKLB:  { long: ["RKLX"], short: ["RKLZ"] },
-  NVDA:  { long: ["NVDX", "NVDU", "NVDL"], short: ["NVD", "NVDQ"] },
+  NVDA:  { long: ["NVDX", "NVDU", "NVDL"], short: ["NVD", "NVDQ", "NVDS", "NVDD"] },
   POET:  { long: ["POEL"], short: [] },
   RGTI:  { long: ["RGTX"], short: ["RGTZ"] },
   CRCL:  { long: ["RCG", "CWVX", "CRWU", "CRCG"], short: ["CRCD"] },
