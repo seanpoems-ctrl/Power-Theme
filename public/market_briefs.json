@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-21 12:57 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Equity Rally, Oil Plunge",
+    "spy_price": 772.12,
+    "spy_change_pct": 1.37,
+    "vix": 15.1,
+    "hy_oas": 2.68,
+    "yield_curve": 0.25,
+    "credit_status": "Complacent",
+    "s5fi": 36.3,
+    "mmth": 54.9,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSTR",
+          "company": "MicroStrategy, Inc.",
+          "reason": "MicroStrategy's reiterated Bitcoin Treasury Strategy amidst today's market conditions signals continued aggressive capital allocation towards digital assets, resonating with investors bullish on cryptocurrency exposure."
+        },
+        {
+          "ticker": "BMNR",
+          "company": "Binary Minerals Corp.",
+          "reason": "BMNR's disclosure of significant crypto and cash holdings positions it as a key beneficiary of digital asset enthusiasm, offering a unique blend of stability and growth potential in a volatile market."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "XOM",
+          "company": "ExxonMobil Corporation",
+          "reason": "ExxonMobil is vulnerable to today's significant crude oil price plunge, facing potential headwinds to its revenue and profit outlook, warranting caution despite broader market strength."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-21 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2220,43 +2258,5 @@
     "reversal": false,
     "reversal_description": "",
     "ticker_intel": {}
-  },
-  {
-    "generated_at": "2026-08-31 13:58 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Volatility Resurfaces / Cautious Pullback",
-    "spy_price": 766.46,
-    "spy_change_pct": -0.38,
-    "vix": 15.1,
-    "hy_oas": 2.6,
-    "yield_curve": 0.39,
-    "credit_status": "Complacent",
-    "s5fi": 52.0,
-    "mmth": 69.9,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corp",
-          "reason": "Announced a new strategic partnership with a leading hyperscaler for its next-generation AI data center architecture, fueling strong bullish momentum."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Co",
-          "reason": "Reported highly positive Phase 3 clinical trial data for its groundbreaking Alzheimer's drug, leading to significant analyst upgrades."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp",
-          "reason": "Benefited from continued institutional rotation into high-quality tech names as investors seek stability amidst broader market uncertainty."
-        }
-      ]
-    }
   }
 ]
