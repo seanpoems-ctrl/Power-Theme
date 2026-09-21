@@ -8938,10 +8938,10 @@ const LEVERAGED_ETF_MAP = {
   HOOD:  { long: ["ROBN"], short: ["HOOZ"] },
   ALAB:  { long: ["LABX"], short: [] },
   CRDO:  { long: ["CRDU"], short: [] },
-  SNDK:  { long: ["SNXX"], short: [] },
+  SNDK:  { long: ["SNXX"], short: ["SNDQ"] },
   RIOT:  { long: ["RIOX"], short: [] },
   CRWV:  { long: ["CWVX", "CRWG"], short: ["CORD"] },
-  MU:    { long: ["MUU"], short: ["MUD"] },
+  MU:    { long: ["MUU", "MULL"], short: ["MUD", "MUZ"] },
   SOFI:  { long: ["SOFX"], short: [] },
   MRVL:  { long: ["MVLL"], short: [] },
   TSM:   { long: ["TSMX"], short: [] },
@@ -8953,7 +8953,7 @@ const LEVERAGED_ETF_MAP = {
   CBRS:  { long: ["CBRG"], short: [] },
   MARA:  { long: ["MRAL"], short: [] },
   TEM:   { long: ["TEMT"], short: [] },
-  COIN:  { long: ["CONL"], short: [] },
+  COIN:  { long: ["CONL"], short: ["CONI"] },
   AVGO:  { long: ["AVGX"], short: ["AVS"] },
   OKLO:  { long: ["OKLL"], short: ["OKLS"] },
   QCOM:  { long: ["QCML"], short: [] },
@@ -8996,6 +8996,7 @@ const LEVERAGED_ETF_MAP = {
   SMCI:  { long: ["SMCX", "SMCL"], short: ["SMCZ"] },
   MSTR:  { long: ["MSTU", "MSTX"], short: ["MSTZ", "SMST"] },
   SPCX:  { long: ["SPCH"], short: ["SSPC"] },
+  SKHY:  { long: ["SKHX"], short: [] },
 };
 
 // Sector/index/commodity/crypto leveraged ETFs — same long(green)/short(red)
