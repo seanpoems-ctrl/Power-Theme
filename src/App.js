@@ -12018,7 +12018,7 @@ const EtfFlipScanner = ({ etfRsData, etfHoldings = {}, screenerMap = {}, onMiniC
         <h3 className="text-sm font-bold text-zinc-100 uppercase tracking-wide">⚡ RS Flip Scanner</h3>
         <span className="text-[11px] text-zinc-500">Beta Booster vs Pure Sector Anchor · When RS turns up sharply → run stock screens on that basket</span>
         {onMiniCharts && flips.length > 0 && (
-          <button onClick={() => onMiniCharts(flips.map(e => e.ticker))}
+          <button onClick={() => onMiniCharts(flips.map(e => ({ ticker: e.ticker, category: e.category })))}
             className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
             ▦ Mini Charts
           </button>
@@ -12714,7 +12714,7 @@ const _miniIsIntraday = tf => tf !== "D" && tf !== "W" && tf !== "M";
 // own comment). This gets real green/orange/blue EMAs at the cost of losing
 // the iframe's free interval-switcher chrome — replaced by the
 // MINI_TIMEFRAME_OPTS row in MiniChartGridModal's header, applied to every card.
-const MiniChartCard = ({ ticker, category, timeframe }) => {
+const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = null }) => {
   const containerRef = useRef(null);
   const chartRef = useRef(null);
   const [status, setStatus] = useState(TV_PROXY_URL ? "loading" : "no-proxy");
@@ -12794,7 +12794,7 @@ const MiniChartCard = ({ ticker, category, timeframe }) => {
         <span>{ticker}</span>
         {category && <span className="text-zinc-500 font-sans font-normal truncate">{category}</span>}
       </a>
-      <div className="relative" style={{ height: 260 }}>
+      <div className={`relative ${onExpand ? "cursor-zoom-in" : ""}`} style={{ height }} onClick={onExpand || undefined}>
         <div ref={containerRef} style={{ width: "100%", height: "100%" }}/>
         {status === "loading" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[10px]">Loading…</div>}
         {status === "no-data" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[10px]">No data for this range</div>}
@@ -12812,6 +12812,10 @@ const MINI_CHART_PAGE_SIZE = 9; // 3x3 grid per page
 const MiniChartGridModal = ({ title, tickers, onClose }) => {
   const [page, setPage] = React.useState(0);
   const [timeframe, setTimeframe] = React.useState("D");
+  // Index into `items` (not `pageItems`) of the currently-enlarged chart, or
+  // null when showing the grid. Kept as a global index (not page-relative)
+  // so prev/next can carry across page boundaries.
+  const [enlargedIdx, setEnlargedIdx] = React.useState(null);
   // `tickers` is either a flat array of ticker strings (Clean Bases, ETF RS,
   // RS Flip Scanner) or {ticker, category} objects (Category Leaderboard,
   // which groups/orders by category) — normalize once so the rest of this
@@ -12821,10 +12825,23 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
   const pageItems = items.slice(page * MINI_CHART_PAGE_SIZE, page * MINI_CHART_PAGE_SIZE + MINI_CHART_PAGE_SIZE);
 
   React.useEffect(() => {
-    const handler = e => { if (e.key === "Escape") onClose(); };
+    const handler = e => {
+      if (e.key === "Escape") {
+        // First Escape backs out of the enlarged chart to the grid; only a
+        // second Escape (grid already showing) closes the whole modal.
+        if (enlargedIdx != null) setEnlargedIdx(null);
+        else onClose();
+      } else if (enlargedIdx != null && e.key === "ArrowLeft") {
+        setEnlargedIdx(i => Math.max(0, i - 1));
+      } else if (enlargedIdx != null && e.key === "ArrowRight") {
+        setEnlargedIdx(i => Math.min(items.length - 1, i + 1));
+      }
+    };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  }, [onClose]);
+  }, [onClose, enlargedIdx, items.length]);
+
+  const enlargedItem = enlargedIdx != null ? items[enlargedIdx] : null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-start justify-center pt-8 px-4 pb-8"
@@ -12865,10 +12882,39 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
         </div>
         <div className="overflow-y-auto p-3">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {pageItems.map((item, i) => <MiniChartCard key={`${item.ticker}::${item.category || ""}::${i}`} ticker={item.ticker} category={item.category} timeframe={timeframe}/>)}
+            {pageItems.map((item, i) => {
+              const globalIdx = page * MINI_CHART_PAGE_SIZE + i;
+              return (
+                <MiniChartCard key={`${item.ticker}::${item.category || ""}::${i}`} ticker={item.ticker} category={item.category} timeframe={timeframe}
+                  onExpand={() => setEnlargedIdx(globalIdx)}/>
+              );
+            })}
           </div>
         </div>
       </div>
+
+      {enlargedItem && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center px-4 py-10"
+          style={{ backgroundColor: "rgba(0,0,0,0.85)" }} onClick={e => { e.stopPropagation(); setEnlargedIdx(null); }}>
+          <div className="relative w-full max-w-3xl" onClick={e => e.stopPropagation()}>
+            <button onClick={() => setEnlargedIdx(null)}
+              className="absolute -top-9 right-0 text-zinc-400 hover:text-zinc-100 transition-colors"><X size={20}/></button>
+            {enlargedIdx > 0 && (
+              <button onClick={() => setEnlargedIdx(i => i - 1)}
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800 transition-colors text-lg">‹</button>
+            )}
+            {enlargedIdx < items.length - 1 && (
+              <button onClick={() => setEnlargedIdx(i => i + 1)}
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-zinc-900/80 border border-zinc-700 text-zinc-300 hover:text-zinc-100 hover:bg-zinc-800 transition-colors text-lg">›</button>
+            )}
+            <MiniChartCard key={`enlarged-${enlargedItem.ticker}::${enlargedItem.category || ""}`}
+              ticker={enlargedItem.ticker} category={enlargedItem.category} timeframe={timeframe} height={560}/>
+            <div className="text-center text-[11px] text-zinc-500 mt-2">
+              {enlargedIdx + 1} / {items.length} · ← → to navigate · Esc for the grid
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
@@ -13354,7 +13400,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
         sub="Above SMA10/20/50 · ≤8% from 52W high · RS≥75 · ADR≥4%"
         action={cleanBases.length > 0 && (
           <button
-            onClick={() => setMiniChartsFor({ title: "Clean Bases — Buy Watch", tickers: cleanBases.map(s => s.ticker) })}
+            onClick={() => setMiniChartsFor({ title: "Clean Bases — Buy Watch", tickers: cleanBases.map(s => ({ ticker: s.ticker, category: s.theme })) })}
             className="text-[11px] font-medium px-2 py-1 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20 transition-colors">
             ▦ Mini Charts
           </button>
@@ -13854,7 +13900,7 @@ const DailyWatchlistTab = ({ data, categoryThemeMap = {}, livePricesRef = null }
               badge={shortCandidates.length}
               sub="Below SMA10/20/50 · RS≤50 · ADR≥4%"
               action={shortCandidates.length > 0 && (
-                <button onClick={() => setMiniChartsFor({ title: "Clean Bases — Sell Watch", tickers: shortCandidates.map(s => s.ticker) })}
+                <button onClick={() => setMiniChartsFor({ title: "Clean Bases — Sell Watch", tickers: shortCandidates.map(s => ({ ticker: s.ticker, category: s.theme })) })}
                   className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
                   ▦ Mini Charts
                 </button>
