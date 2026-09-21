@@ -8577,7 +8577,15 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
       </div>
 
       <div className="flex items-center justify-between mb-3">
-        <h2 className="text-sm font-bold text-zinc-100 tracking-wide uppercase">Institutional Gappers</h2>
+        <div className="flex items-center gap-2">
+          <h2 className="text-sm font-bold text-zinc-100 tracking-wide uppercase">Institutional Gappers</h2>
+          {filtered.length > 0 && (
+            <button onClick={() => setMiniChartsFor({ title: "Institutional Gappers", tickers: filtered.map(g => ({ ticker: g.ticker, category: g.category })) })}
+              className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+              ▦ Mini Charts
+            </button>
+          )}
+        </div>
         {filtered.length === 0 && (
           <p className="text-[13px] text-zinc-500">No gappers match current filters — try loosening the criteria</p>
         )}
