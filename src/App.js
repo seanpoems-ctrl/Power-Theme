@@ -705,6 +705,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
   const [selectedTheme, setSelectedTheme] = useState(null); // { name, stocks, inTop5, fromEtf }
   const [tblSort, setTblSort] = useState({ col: null, dir: 'desc' });
   const [matrixMetric, setMatrixMetric] = useState('perf_1d');
+  const [miniChartsFor, setMiniChartsFor] = useState(null); // { title, tickers } for the theme drill-down's mini-chart grid
 
   // Reset sort whenever a new theme is opened
   React.useEffect(() => { setTblSort({ col: null, dir: 'desc' }); }, [selectedTheme?.name]);
@@ -978,12 +979,20 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                   </span>
                 )}
               </div>
-              <button
-                onClick={() => setSelectedTheme(null)}
-                className="text-zinc-500 hover:text-zinc-200 transition-colors p-1"
-              >
-                <X size={16} />
-              </button>
+              <div className="flex items-center gap-3">
+                {sortedStocks.length > 0 && (
+                  <button onClick={() => setMiniChartsFor({ title: selectedTheme.name, tickers: sortedStocks.map(s => s.ticker) })}
+                    className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
+                    ▦ Mini Charts
+                  </button>
+                )}
+                <button
+                  onClick={() => setSelectedTheme(null)}
+                  className="text-zinc-500 hover:text-zinc-200 transition-colors p-1"
+                >
+                  <X size={16} />
+                </button>
+              </div>
             </div>
 
             {/* Stock list */}
@@ -1139,6 +1148,9 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
             </div>
           </div>
         </div>
+      )}
+      {miniChartsFor && (
+        <MiniChartGridModal title={miniChartsFor.title} tickers={miniChartsFor.tickers} onClose={() => setMiniChartsFor(null)} />
       )}
     </>
   );

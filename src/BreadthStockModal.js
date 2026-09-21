@@ -1285,12 +1285,13 @@ const BreadthStockModal = memo(function BreadthStockModal({ filter, filterLabel,
 
   const allTickers = displayStocks.map((s) => s.ticker);
 
-  // Mini-chart items follow whichever view is active: List gives a flat
-  // ticker list, Group gives {ticker, category: industry} pairs so the
-  // grid shows the same industry grouping the table itself is showing.
+  // Mini-chart items always carry each stock's industry as its category label.
+  // Group view additionally clusters/orders by that industry (matching the
+  // table's own grouping); List view keeps the table's own row order and just
+  // labels each card, same as everywhere else in the app.
   const miniChartItems = view === "group"
     ? groupByIndustry(displayStocks).flatMap((g) => g.items.map((s) => ({ ticker: s.ticker, category: g.industry })))
-    : allTickers;
+    : displayStocks.map((s) => ({ ticker: s.ticker, category: s.industry || null }));
 
   return (
     <>
