@@ -3014,7 +3014,7 @@ const IBKRScannerTable = ({ ibkrScanner, onTickerClick }) => {
   );
 };
 
-const EarningsStrip = ({ earningsData, gapperTickers = new Set(), onTickerClick }) => {
+const EarningsStrip = ({ earningsData, gapperTickers = new Set(), onTickerClick, onMiniCharts = null }) => {
   const _now = new Date();
   const todayStr = `${_now.getFullYear()}-${String(_now.getMonth()+1).padStart(2,"0")}-${String(_now.getDate()).padStart(2,"0")}`;
   // Support both new flat {earnings:[]} schema and legacy {today:[]} schema
@@ -3029,6 +3029,12 @@ const EarningsStrip = ({ earningsData, gapperTickers = new Set(), onTickerClick 
         <Clock size={11} className="text-zinc-500 flex-shrink-0"/>
         <span className="text-[11px] font-semibold text-zinc-500 uppercase tracking-widest">Earnings Today</span>
         <span className="text-[11px] text-zinc-700">{today.length} co.</span>
+        {onMiniCharts && (
+          <button onClick={() => onMiniCharts(today.map(e => ({ ticker: e.ticker, category: e.time_of_day || "Unscheduled" })))}
+            className="ml-auto text-[10px] font-medium px-2 py-0.5 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors flex-shrink-0">
+            ▦ Mini Charts
+          </button>
+        )}
       </div>
       <div className="flex gap-2 overflow-x-auto pb-0.5" style={{ scrollbarWidth: 'none' }}>
         {today.map(entry => {
@@ -8449,6 +8455,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
   const [fMinDolVol, setFMinDolVol] = useState(0);     // $M
   const [modalData, setModalData] = useState(null);
   const [chartAnchorRect, setChartAnchorRect] = useState(null);
+  const [miniChartsFor, setMiniChartsFor] = useState(null); // { title, tickers } for the Earnings Strip's mini-chart grid
 
   useEffect(() => {
     fetch(`${process.env.PUBLIC_URL}/stock_db.json?v=${Date.now()}`)
@@ -8545,6 +8552,7 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
         earningsData={earningsData}
         gapperTickers={gapperTickerSet}
         onTickerClick={(ticker, rect) => setHovered(prev => prev?.ticker === ticker ? null : { ticker, rect })}
+        onMiniCharts={tickers => setMiniChartsFor({ title: "Earnings Today", tickers })}
       />
       {/* Filter Bar */}
       <div className="mb-4 p-3 bg-zinc-800/40 border border-zinc-700/40 rounded-lg">
@@ -8873,6 +8881,13 @@ const GapperScanner = ({ earningsData, ibkrThemesData, etfHoldings = {} }) => {
         ticker={modalData.ticker}
         anchorRect={chartAnchorRect}
         onClose={() => setChartAnchorRect(null)}
+      />
+    )}
+    {miniChartsFor && (
+      <MiniChartGridModal
+        title={miniChartsFor.title}
+        tickers={miniChartsFor.tickers}
+        onClose={() => setMiniChartsFor(null)}
       />
     )}
     </>
