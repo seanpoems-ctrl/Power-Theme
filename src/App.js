@@ -2139,6 +2139,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
   const [currentPrice, setCurrentPrice] = React.useState(null);
   const [lodLoading, setLodLoading] = React.useState(false);
   const [lodError, setLodError] = React.useState(false);
+  const [miniChartOpen, setMiniChartOpen] = React.useState(false);
 
   const entryRef    = React.useRef(null);
   const stopRef     = React.useRef(null);
@@ -2362,6 +2363,7 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
   };
 
   return (
+    <>
     <div className={z.card}>
       <div className={`flex items-center justify-between ${z.mb}`}>
         <div className={`${z.title} font-bold text-zinc-500 uppercase tracking-[0.18em]`}>Position Calc</div>
@@ -2396,6 +2398,12 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
           placeholder="AAPL"
           className={`${z.tickerW} bg-zinc-800/60 border border-zinc-700/50 rounded ${large ? 'px-3 py-2.5 rounded-lg' : 'px-2 py-1'} ${z.tickerPx} font-mono text-zinc-200 placeholder-zinc-700 outline-none focus:border-zinc-600 uppercase`}/>
         <button onClick={handleClear} tabIndex={-1} className={`${large ? 'text-[12px] px-3 py-2' : 'text-[10px] px-2 py-0.5'} flex-shrink-0 rounded border border-zinc-700/50 text-zinc-500 hover:text-zinc-200 hover:border-zinc-500 transition-colors font-medium`}>Clear</button>
+        {lodTicker.trim() && (
+          <button onClick={() => setMiniChartOpen(true)} tabIndex={-1} title="View chart"
+            className={`${large ? 'text-[12px] px-3 py-2' : 'text-[10px] px-2 py-0.5'} flex-shrink-0 rounded border border-zinc-700/50 text-zinc-500 hover:text-zinc-200 hover:border-zinc-500 transition-colors font-medium`}>
+            ▦
+          </button>
+        )}
         <div className="flex-1 flex flex-col items-end overflow-hidden">
           {lodLoading
             ? <span className={`${z.priceSz} font-mono text-zinc-500`}>...</span>
@@ -2502,6 +2510,10 @@ const PositionCalc = ({ ibkrThemesData, thematicData, vix, onClose, large }) => 
         </div>
       </div>
     </div>
+    {miniChartOpen && (
+      <MiniChartGridModal title={lodTicker.trim().toUpperCase()} tickers={[lodTicker.trim().toUpperCase()]} onClose={() => setMiniChartOpen(false)} />
+    )}
+    </>
   );
 };
 
