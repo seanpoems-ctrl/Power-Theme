@@ -1,6 +1,109 @@
 {
-  "generated_at": "2026-09-22T01:34:06.134720+00:00",
+  "generated_at": "2026-09-22T02:59:22.262764+00:00",
   "data_source": "fallback",
-  "power_themes": [],
+  "power_themes": [
+    {
+      "name": "Other",
+      "theme_rs": 95.6,
+      "perf_1d": 6.04,
+      "leaders": [
+        {
+          "ticker": "INTC",
+          "price": 121.78,
+          "rs_52w": 98,
+          "adr_pct": 5.4,
+          "vol_surge": 1.76,
+          "mkt_cap": 639896208226,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "ASST",
+          "price": 30.33,
+          "rs_52w": 98,
+          "adr_pct": 6.5,
+          "vol_surge": 2.91,
+          "mkt_cap": 2880402604,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "ARM",
+          "price": 322.9,
+          "rs_52w": 97,
+          "adr_pct": 5.83,
+          "vol_surge": 2.39,
+          "mkt_cap": 344856731411,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "HUT",
+          "price": 103.42,
+          "rs_52w": 96,
+          "adr_pct": 7.97,
+          "vol_surge": 1.21,
+          "mkt_cap": 12747493954,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Flag"
+        },
+        {
+          "ticker": "MARA",
+          "price": 13.28,
+          "rs_52w": 89,
+          "adr_pct": 7.0,
+          "vol_surge": 1.06,
+          "mkt_cap": 5130054561,
+          "gates_passed": 5,
+          "gates_detail": {
+            "rs_52w > 85": true,
+            "price > 12": true,
+            "avg_dollar_vol_30d > 100M": true,
+            "mkt_cap > 2B": true,
+            "adr_pct >= 4.0": true
+          },
+          "primary_theme": "Other",
+          "secondary_themes": [],
+          "setup_label": "Base"
+        }
+      ]
+    }
+  ],
   "account_equity": null
 }
