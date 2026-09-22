@@ -11398,7 +11398,9 @@ const EtfHoldingsModal = ({ etf, theme, holdings, onClose, screenerMap = {}, etf
 // can see top-down which area of the market money is rotating into, before drilling
 // into individual baskets (Flip Scanner) or tickers (RS table).
 // ── ETF Rotation Brief — Gemini morning read of the category leaderboard ──────
-const ETF_BRIEF_CACHE_KEY = "gemini_etf_brief_v1";
+const ETF_BRIEF_CACHE_KEY = "gemini_etf_brief_v2"; // bumped 2026-09-22: invalidate briefs cached before the
+                                                     // fine_theme category-grouping fix (v1 briefs cite stale
+                                                     // category medians that no longer match the leaderboard)
 
 async function fetchEtfBrief(payload) {
   const prompt =
