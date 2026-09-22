@@ -11426,10 +11426,17 @@ const EtfRotationBrief = ({ etfRsData }) => {
   };
 
   const buildPayload = useCallback(() => {
-    const etfs = etfRsData?.etfs ?? [];
+    // Same universe + grouping as EtfCategoryLeaderboard (the table this brief
+    // sits above): exclude Index/Segment/EW Sector/SPDR Sector benchmarks, and
+    // group by fine_theme (falling back to the coarser category) rather than
+    // category alone — otherwise this payload's "categories" don't match the
+    // table's rows 1:1, and Gemini's medians silently diverge from what's
+    // shown on screen (e.g. Healthcare & Biotech vs. the separate Healthcare
+    // Services basket the table splits out via fine_theme).
+    const etfs = (etfRsData?.etfs ?? []).filter(e => !e.benchmark);
     if (!etfs.length) return null;
     const byCat = {};
-    for (const e of etfs) (byCat[e.category || "Other"] ||= []).push(e);
+    for (const e of etfs) (byCat[e.fine_theme || e.category || "Other"] ||= []).push(e);
     const rsMap = {}; for (const e of etfs) rsMap[e.ticker] = e;
     const categories = Object.entries(byCat).map(([cat, members]) => {
       const leader = [...members].filter(m => m.score != null).sort((a, b) => (b.score ?? 0) - (a.score ?? 0))[0];
