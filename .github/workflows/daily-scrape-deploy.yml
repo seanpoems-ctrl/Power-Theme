@@ -209,6 +209,38 @@ jobs:
           REACT_APP_GEMINI_KEY: ${{ secrets.GEMINI_API_KEY }}
           REACT_APP_TV_PROXY_URL: ${{ secrets.TV_PROXY_URL }}
 
+      # Same guard as deploy.yml and premarket-gapper.yml (added 2026-09-23
+      # after premarket-gapper.yml's own build was found missing this env var
+      # entirely, silently shipping broken builds every trading morning) —
+      # this workflow builds independently of deploy.yml too, so it needs its
+      # own check rather than relying on deploy.yml's guard.
+      - name: Verify required secrets reached the build
+        if: steps.trading_day.outputs.is_trading_day == 'true'
+        env:
+          TV_PROXY_URL: ${{ secrets.TV_PROXY_URL }}
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+        run: |
+          fail=0
+          check() {
+            name="$1"; value="$2"
+            if [ -z "$value" ]; then
+              echo "::error::$name repo secret is empty or missing."
+              fail=1
+              return
+            fi
+            if ! grep -rqF -- "$value" build/static/js/*.js; then
+              echo "::error::$name is set but never made it into the build output — Mini Charts/trade charts or news would silently break in production."
+              fail=1
+            fi
+          }
+          check "TV_PROXY_URL" "$TV_PROXY_URL"
+          check "FINNHUB_API_KEY" "$FINNHUB_API_KEY"
+          if [ "$fail" = "1" ]; then
+            echo "::error::Blocking deploy — a broken build must not reach production silently. Re-save the affected secret(s) in Settings > Secrets and variables > Actions, then re-run this workflow."
+            exit 1
+          fi
+          echo "TV_PROXY_URL and FINNHUB_API_KEY both correctly present in build output."
+
       - uses: actions/configure-pages@v4
         if: steps.trading_day.outputs.is_trading_day == 'true'
 
