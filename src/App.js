@@ -12763,6 +12763,13 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
   const chartRef = useRef(null);
   const [status, setStatus] = useState(TV_PROXY_URL ? "loading" : "no-proxy");
 
+  // body { zoom: 1.15 } (index.css) causes Lightweight Charts to read mouse
+  // coordinates in post-zoom visual px while its canvas coordinate space is
+  // laid out in pre-zoom CSS px — the crosshair renders offset from the real
+  // cursor. Same fix as FlaggingStocksBox's trendline chart: apply the
+  // inverse zoom to this chart's own wrapper so net effective zoom is 1 here.
+  const bodyZoom = parseFloat(getComputedStyle(document.body).zoom) || 1;
+
   useEffect(() => {
     if (!TV_PROXY_URL || !containerRef.current) return;
     let cancelled = false;
@@ -12838,7 +12845,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         <span>{ticker}</span>
         {category && <span className="text-zinc-500 font-sans font-normal truncate">{category}</span>}
       </a>
-      <div className={`relative ${onExpand ? "cursor-zoom-in" : ""}`} style={{ height }} onClick={onExpand || undefined}>
+      <div className={`relative ${onExpand ? "cursor-zoom-in" : ""}`} style={{ height, zoom: 1 / bodyZoom }} onClick={onExpand || undefined}>
         <div ref={containerRef} style={{ width: "100%", height: "100%" }}/>
         {status === "loading" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[10px]">Loading…</div>}
         {status === "no-data" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[10px]">No data for this range</div>}
@@ -15132,30 +15139,36 @@ const appScreenerMap = useMemo(() => {
             {/* Full ticker tape */}
             <div className="flex-1 min-w-0 overflow-hidden">
               {data?.market_condition && (() => {
-                const { spy, qqq, iwm, btc, gld, oil, dxy, breadth_50d, breadth_200d, credit_spread } = data.market_condition;
+                const { spx, ndx, dji, btc, gld, oil, dxy, breadth_50d, breadth_200d, credit_spread } = data.market_condition;
                 const fmtChg = v => v == null ? null : v > 0
                   ? <span className="text-emerald-400">+{v.toFixed(2)}%</span>
                   : <span className="text-red-400">{v.toFixed(2)}%</span>;
-                const TV_SYMBOLS = { "NQ!": "CME_MINI:NQ1!", "ES!": "CME_MINI:ES1!", "RTY!": "CME_MINI:RTY1!" };
+                const TV_SYMBOLS = { "NDX": "NDX", "SPX": "SPX", "DJI": "DJI" };
                 const CHART = { btc: 'IBIT', gld: 'GLD', oil: 'USO', dxy: 'UUP', breadth_50d: '$SPXA50R', breadth_200d: '$SPXA200R', credit_spread: 'HYG' };
                 const mkClick = (key, e) => { const ticker = CHART[key]; const rect = e.currentTarget.getBoundingClientRect(); setMacroHover(prev => prev?.ticker === ticker ? null : { ticker, rect }); };
                 const breadthColor = v => v >= 60 ? "text-emerald-400" : v >= 40 ? "text-yellow-400" : "text-red-400";
                 const Sep = () => <span className="text-zinc-700 mx-1">|</span>;
                 return (
                   <div className="hidden lg:flex items-center gap-1 text-[11px] font-mono flex-wrap overflow-hidden">
-                    {qqq && (
+                    {ndx && (
                       <span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors"
-                        onClick={() => window.open(`https://www.tradingview.com/chart/?symbol=${encodeURIComponent(TV_SYMBOLS["NQ!"])}`, "_blank")}>
-                        <span className="text-zinc-500">NQ!</span>
-                        {qqq.price != null && <span className="text-zinc-300">{qqq.price.toFixed(0)}</span>}
-                        {fmtChg(qqq.change_pct)}
+                        onClick={() => window.open(`https://www.tradingview.com/chart/?symbol=${encodeURIComponent(TV_SYMBOLS["NDX"])}`, "_blank")}>
+                        <span className="text-zinc-500">NDX</span>
+                        {ndx.price != null && <span className="text-zinc-300">{ndx.price.toFixed(0)}</span>}
+                        {fmtChg(ndx.change_pct)}
                       </span>
                     )}
-                    {spy && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors"
-                        onClick={() => window.open(`https://www.tradingview.com/chart/?symbol=${encodeURIComponent(TV_SYMBOLS["ES!"])}`, "_blank")}>
-                        <span className="text-zinc-500">ES!</span>
-                        {spy.price != null && <span className="text-zinc-300">{spy.price.toFixed(0)}</span>}
-                        {fmtChg(spy.change_pct)}
+                    {spx && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors"
+                        onClick={() => window.open(`https://www.tradingview.com/chart/?symbol=${encodeURIComponent(TV_SYMBOLS["SPX"])}`, "_blank")}>
+                        <span className="text-zinc-500">SPX</span>
+                        {spx.price != null && <span className="text-zinc-300">{spx.price.toFixed(0)}</span>}
+                        {fmtChg(spx.change_pct)}
+                      </span></>}
+                    {dji && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors"
+                        onClick={() => window.open(`https://www.tradingview.com/chart/?symbol=${encodeURIComponent(TV_SYMBOLS["DJI"])}`, "_blank")}>
+                        <span className="text-zinc-500">DJI</span>
+                        {dji.price != null && <span className="text-zinc-300">{dji.price.toFixed(0)}</span>}
+                        {fmtChg(dji.change_pct)}
                       </span></>}
                     {breadth_50d != null && <><Sep/><span className="flex items-center gap-1 cursor-pointer hover:bg-zinc-800/50 rounded px-1 transition-colors" onClick={e => mkClick('breadth_50d', e)}>
                         <span className="text-zinc-600">S&P stocks above 50 Day Average</span>

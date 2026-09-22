@@ -1403,6 +1403,43 @@ def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
     return _fetch_market_indicators_yfinance(ticker, breadth)
 
 
+# Cash indices for the header ticker tape's SPX/NDX/DJI display (2026-09-22).
+# Deliberately separate from _YF_FUTURES_TICKER / fetch_market_indicators:
+# the market_condition signal (top banner, Market Pulse card) stays on
+# continuous futures per the 2026-09-15 fix, since cash indices freeze
+# outside 9:30-4:00 ET and would reintroduce the stale-at-close problem that
+# fix solved. These are for on-screen price/%chg display only, where the
+# user explicitly wants the real index print (accepting it freezes after
+# the close) rather than the always-live futures proxy.
+_YF_CASH_INDEX_TICKER = {"spx": "^GSPC", "ndx": "^NDX", "dji": "^DJI"}
+
+
+def fetch_cash_indices() -> dict:
+    """Latest price + day %chg for SPX/NDX/DJI cash indices (yfinance).
+
+    No finalized-close truncation here (contrast _fetch_market_indicators_yfinance):
+    cash indices don't trade overnight, so there's no forming/drifted bar to
+    guard against — yfinance's "today" row is simply absent outside market
+    hours and naturally holds the real closing print once the session ends.
+    """
+    import yfinance as yf
+
+    result = {}
+    for key, yf_ticker in _YF_CASH_INDEX_TICKER.items():
+        try:
+            hist = yf.Ticker(yf_ticker).history(period="5d", interval="1d")
+            if hist.empty or len(hist) < 2:
+                continue
+            closes = [float(c) for c in hist["Close"].tolist()]
+            price = closes[-1]
+            change_pct = round((closes[-1] / closes[-2] - 1) * 100, 2)
+            result[key] = {"price": round(price, 2), "change_pct": change_pct}
+            logger.info(f"  {key.upper()} ({yf_ticker}): {price:.2f} {change_pct:+.2f}%")
+        except Exception as e:
+            logger.warning(f"  Cash index {key.upper()} ({yf_ticker}) failed: {e}")
+    return result
+
+
 def fetch_macro_assets() -> dict:
     """Fetch BTC / Gold / Oil futures via TradingView + Credit Spreads from FRED."""
     result: dict = {}
@@ -2196,6 +2233,8 @@ def build_data() -> dict:
     _sleep()
     iwm_ind = fetch_market_indicators("IWM", breadth=sp500_breadth)  # S&P 500 as proxy
     _sleep()
+    cash_indices = fetch_cash_indices()
+    _sleep()
     macro_assets = fetch_macro_assets()
     signal = _market_signal(spy_ind, qqq_ind) if spy_ind and qqq_ind else "yellow"
     market_condition = {
@@ -2203,6 +2242,7 @@ def build_data() -> dict:
         "spy": spy_ind,
         "qqq": qqq_ind,
         "iwm": iwm_ind,
+        **cash_indices,
         "breadth_50d": sp500_breadth,
         "breadth_200d": sp500_breadth_200,
         "adv_dec": finviz_adv_dec,
