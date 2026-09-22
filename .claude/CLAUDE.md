@@ -225,13 +225,13 @@ Surfaced in the frontend Leaderboard as the sortable **ROT** column (⚡ badge =
 
 ---
 
-## Market Condition Signal (2026-09-15 fix)
+## Market Condition Signal (2026-09-22: reverted to cash ETFs)
 
-`market_condition.spy` / `.qqq` / `.iwm` (top banner, Market Pulse card, "ES!"/"NQ!" header ticker) are built from **continuous futures**, not the ETFs — `fetch_market_indicators()` maps `SPY→ES=F`, `QQQ→NQ=F`, `IWM→RTY=F` (Yahoo) and `_market_signal()` derives green/yellow/orange/red from price vs. EMA9/21/50/200.
+`market_condition.spy` / `.qqq` / `.iwm` (top banner, Market Pulse card) are built from the **actual SPY/QQQ/IWM cash ETFs** — `fetch_market_indicators()` calls `_fetch_market_indicators_yfinance()` directly on the ETF ticker, and `_market_signal()` derives green/yellow/orange/red from price vs. EMA9/21/50/200. The header ticker tape shows separate real **SPX/NDX/DJI** cash-index fields (`market_condition.spx/.ndx/.dji`, via `fetch_cash_indices()` — `^GSPC`/`^NDX`/`^DJI`).
 
-**Why futures, not the ETF:** futures trade near-24h, giving a pre/post-market-aware read instead of freezing at the 4PM cash close.
+**History — why this was futures, then reverted:** a 2026-09-15 fix switched `spy`/`qqq`/`iwm` to continuous futures (`ES=F`/`NQ=F`/`RTY=F`) so the signal would be pre/post-market-aware instead of freezing at the 4PM cash close. The `_last_completed_session()` guard was added to pin the read to a "finalized" daily bar, since futures trade near-24h and Yahoo starts printing the next session's row as soon as evening trading resumes.
 
-**The finalized-close guard:** because futures trade almost continuously, Yahoo starts printing the *next* session's row as soon as evening trading resumes — and the full scrape pipeline (theme/sub-theme scraping → S&P 1500 RS universe → *then* market indicators) can finish hours after the 4PM ET close. Blindly taking the newest daily bar risks reading a still-forming, after-hours-drifted bar and mislabeling it "today's close." `_fetch_market_indicators_yfinance()` truncates history to `_last_completed_session()` (the most recent NYSE session whose close has actually happened) before computing price/EMA/SMA, so the signal always reflects the true close regardless of when in the day the pipeline runs. TradingView's live scanner is kept only as a fallback if yfinance is unavailable.
+That guard turned out to be broken for futures: it only checked `now_et.hour >= 16` (a cash-market cutoff) before trusting a bar as final, but a continuous future's daily bar keeps getting revised by Yahoo for the *entire* ET calendar day, not just until 4PM — so "finalized" numbers silently drifted run to run (confirmed 2026-09-22: QQQ's supposedly-locked 09-21 bar read 30870.25 at 10:42pm ET, then 30784.75 after midnight, a ~0.3% swing). Since there's no reliable same-evening finality signal for this data source, the fix was reverted back to cash ETFs, whose daily bar genuinely is final at the 4PM close — exactly what `_last_completed_session()` was built to detect, just misapplied to the wrong instrument. Trade-off: the signal is back to reflecting the actual close rather than a live evening snapshot, same as before the Sept 15 fix. `_TV_INDEX_SYMBOL` (TradingView fallback, used only if yfinance is unavailable) was updated to match — `AMEX:SPY` / `NASDAQ:QQQ` / `AMEX:IWM` instead of the futures contracts.
 
 ---
 

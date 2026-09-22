@@ -1201,13 +1201,15 @@ def _elite_status(price, sma10, sma20, sma50, sma200, rsi, breadth) -> str:
     return "Neutral"
 
 
-# Index / futures symbols → (TV symbol, scanner endpoint)
+# Index ETF symbols → (TV symbol, scanner endpoint) — TradingView fallback used
+# only when yfinance is unavailable. Cash ETFs (2026-09-22), not futures — see
+# fetch_market_indicators.
 _TV_SCAN_URL         = "https://scanner.tradingview.com/america/scan"
 _TV_FUTURES_SCAN_URL = "https://scanner.tradingview.com/futures/scan"
 _TV_INDEX_SYMBOL = {
-    "SPY": ("CME_MINI:ES1!",  _TV_FUTURES_SCAN_URL),
-    "QQQ": ("CME_MINI:NQ1!",  _TV_FUTURES_SCAN_URL),
-    "IWM": ("CME_MINI:RTY1!", _TV_FUTURES_SCAN_URL),
+    "SPY": ("AMEX:SPY",    _TV_SCAN_URL),
+    "QQQ": ("NASDAQ:QQQ",  _TV_SCAN_URL),
+    "IWM": ("AMEX:IWM",    _TV_SCAN_URL),
 }
 # Macro futures symbols for BTC / Gold / Oil via TradingView
 _TV_MACRO_SYMBOL = {
@@ -1277,13 +1279,14 @@ def _fetch_market_indicators_yfinance(ticker: str, breadth: float | None = None)
     """1y daily history from yfinance, pinned to the last FINALIZED NYSE
     session's close (SMA200 slope + EMA cross persistence).
 
-    Continuous futures tickers (ES=F/NQ=F/RTY=F) trade almost 24h — Yahoo
-    starts printing the next session's row as soon as evening trading
-    resumes, so the newest row in the history can be a still-forming bar
-    reflecting after-hours drift rather than an actual close. Any bar dated
-    after the last completed NYSE session is dropped before computing price/
-    EMA/SMA so this always reflects the true close, regardless of what time
-    of day (or how many hours into an after-close scrape) this runs.
+    Called with cash ETF tickers (SPY/QQQ/IWM) — their daily bar is genuinely
+    final at the 4PM ET close. Any bar dated after the last completed NYSE
+    session is still dropped as a safety guard (e.g. if this runs mid-session
+    before today's close exists yet), so this always reflects a true close
+    regardless of what time of day the scrape runs. (Do not repurpose this for
+    continuous futures tickers like ES=F/NQ=F — their daily bar keeps revising
+    for the entire ET calendar day rather than finalizing at a fixed hour,
+    which silently produced drifting numbers; see fetch_market_indicators.)
     """
     try:
         import yfinance as yf
@@ -1337,29 +1340,27 @@ def _fetch_market_indicators_yfinance(ticker: str, breadth: float | None = None)
         return {}
 
 
-# Continuous futures tickers (Yahoo Finance) used to pin the market-regime
-# read to the last FINALIZED daily close — see _fetch_market_indicators_yfinance.
-_YF_FUTURES_TICKER = {
-    "SPY": "ES=F",   # E-mini S&P 500
-    "QQQ": "NQ=F",   # E-mini Nasdaq-100
-    "IWM": "RTY=F",  # E-mini Russell 2000
-}
-
-
 def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
-    """Index futures metrics + Elite Regime, pinned to the last finalized close.
+    """Cash ETF metrics + Elite Regime, pinned to the last finalized 4PM ET close.
 
-    Primary: yfinance daily bar for the continuous futures contract (immune to
-    when in the day this runs — the scraper can finish hours after the cash
-    close, and a live snapshot would leak after-hours/overnight drift into
-    what's supposed to be "today's close" reading). Falls back to TradingView's
-    live scanner only if yfinance is unavailable.
+    2026-09-22: reverted from continuous futures (ES=F/NQ=F/RTY=F) back to the
+    actual SPY/QQQ/IWM cash ETFs. The 2026-09-15 futures fix traded correctness
+    for same-evening freshness, but Yahoo's daily bar for a continuous future
+    keeps revising for the entire ET calendar day rather than truly finalizing
+    at any fixed hour — _last_completed_session's "hour >= 16 ET" cutoff (built
+    for cash-equity closes) let the scraper grab a still-drifting futures print
+    and treat it as final, producing numbers that silently changed run to run
+    (confirmed: QQQ's "finalized" 09-21 bar read 30870.25 at 10:42pm ET, then
+    30784.75 after midnight — a ~0.3% swing in a bar that was supposed to be
+    locked). Cash ETFs don't have this problem: their daily bar genuinely is
+    final at the 4PM ET close, which is exactly what _last_completed_session
+    was designed to detect. Freshness cost: the signal now reflects the actual
+    close instead of a live evening snapshot, same as before the Sept 15 fix.
     """
     sym = (ticker or "").upper()
-    yf_ticker = _YF_FUTURES_TICKER.get(sym, sym)
-    primary = _fetch_market_indicators_yfinance(yf_ticker, breadth)
+    primary = _fetch_market_indicators_yfinance(sym, breadth)
     if primary:
-        logger.info(f"  {sym} market indicators (yfinance {yf_ticker}, finalized close): "
+        logger.info(f"  {sym} market indicators (yfinance, finalized close): "
                     f"price={primary['price']} chg={primary['change_pct']}%")
         return primary
 
@@ -1398,9 +1399,7 @@ def fetch_market_indicators(ticker: str, breadth: float | None = None) -> dict:
                 "price_above_ema50": bool(price > ema50) if price and ema50 else None,
                 "price_above_ema200": bool(price > ema200) if price and ema200 else None,
             }
-    # Last resort: yfinance on the actual ETF ticker (e.g. "SPY") rather than
-    # its futures proxy, if both paths above failed.
-    return _fetch_market_indicators_yfinance(ticker, breadth)
+    return {}
 
 
 # Cash indices for the header ticker tape's SPX/NDX/DJI display (2026-09-22).
