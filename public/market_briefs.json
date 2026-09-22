@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-22 19:15 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Selective Risk-On",
+    "spy_price": 773.38,
+    "spy_change_pct": -0.02,
+    "vix": 14.21,
+    "hy_oas": 2.66,
+    "yield_curve": 0.25,
+    "credit_status": "Complacent",
+    "s5fi": 34.9,
+    "mmth": 53.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon.com, Inc. announced a strategic partnership with a major global logistics firm, expected to significantly reduce its shipping costs and boost profit margins."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly and Company received fast-track designation from the FDA for its new Alzheimer's drug candidate, accelerating its path to market and potential revenue generation."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corporation continued its ascent today, riding the broader tailwind for technology stocks and extending gains based on previous positive sentiment around AI infrastructure demand."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-22 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA is seeing continued chatter after an analyst reiterated their \"Outperform\" rating, citing sustained demand for AI accelerators, though no new fundamental news has emerged today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-01 18:49 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Inflationary Concerns",
-    "spy_price": 761.78,
-    "spy_change_pct": -0.69,
-    "vix": 16.34,
-    "hy_oas": 2.63,
-    "yield_curve": 0.4,
-    "credit_status": "Complacent",
-    "s5fi": 47.9,
-    "mmth": 65.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Tesla Inc. (TSLA) soared after announcing a groundbreaking battery technology partnership that promises to significantly extend EV range and slash charging times, boosting future growth prospects."
-        },
-        {
-          "ticker": "UNH",
-          "company": "UnitedHealth Group Inc.",
-          "reason": "UnitedHealth Group Inc. (UNH) gained traction following an unexpected pre-announcement of raised full-year earnings guidance, driven by robust performance across its Optum and health plan segments."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Microsoft Corp. (MSFT) continued its downward drift alongside broader technology names, experiencing selling pressure as investors rotate out of high-multiple growth stocks without a fresh fundamental catalyst."
         }
       ]
     }
