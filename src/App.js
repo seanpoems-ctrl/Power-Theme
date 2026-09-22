@@ -10369,8 +10369,8 @@ const MacroRiskCard = () => {
       {/* Index Cards */}
       <div className="grid grid-cols-3 gap-3">
         {[
-          { label: "ES1!", d: spy },
-          { label: "NQ1!", d: qqq },
+          { label: "SPY", d: spy },
+          { label: "QQQ", d: qqq },
           { label: "VIX", d: vix, isVix: true },
         ].map(({ label, d, isVix }) => !d.price ? null : (
           <div key={label} className="bg-zinc-900/60 border border-zinc-800/50 rounded-lg p-3">
