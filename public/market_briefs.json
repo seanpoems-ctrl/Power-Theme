@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-22 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Strong Equities / Risk-On",
+    "spy_price": 773.5,
+    "spy_change_pct": 1.55,
+    "vix": 14.8,
+    "hy_oas": 2.68,
+    "yield_curve": 0.2,
+    "credit_status": "Complacent",
+    "s5fi": 36.5,
+    "mmth": 55.0,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "New iOS AI features and robust hardware upgrade cycle are expected to drive stronger-than-anticipated Q4 revenue growth."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Strategic partnerships in cloud computing and enterprise AI solutions are positioning Microsoft for continued market share expansion."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSTR",
+          "company": "MicroStrategy Incorporated",
+          "reason": "MicroStrategy's exposure to Bitcoin's recent price appreciation continues to draw speculative interest, leading to volatile trading patterns."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-21 19:36 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA is attracting attention after yesterday's decline, as options flow suggests institutional hedging rather than outright bearish positioning."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-01 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Inflationary Concerns",
-    "spy_price": 767.05,
-    "spy_change_pct": -0.3,
-    "vix": 15.8,
-    "hy_oas": 2.6,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 52.3,
-    "mmth": 69.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "PFE",
-          "company": "Pfizer Inc.",
-          "reason": "Pfizer (PFE) announces positive Phase 3 trial results for its new Alzheimer's treatment, significantly outperforming competitors."
-        },
-        {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "JPMorgan Chase (JPM) unveils an acquisition of a major FinTech platform, reinforcing its digital banking leadership."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil (XOM) sees continued momentum as crude oil prices advance, driven by supply concerns."
         }
       ]
     }

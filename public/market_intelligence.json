@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-21 19:36 ET",
-  "phase": "POST",
-  "session": "Post-Market",
+  "generated_at": "2026-09-22 07:05 ET",
+  "phase": "PRE",
+  "session": "Pre-Market",
   "assets": {
     "SPY": {
       "label": "S&P 500 ETF",
@@ -12,44 +12,44 @@
       "close": 773.5,
       "prev_open": 761.31,
       "prev_close": 761.69,
-      "volume": 49311754,
+      "volume": 50097900,
       "change_pct": 1.55
     },
     "QQQ": {
       "label": "Nasdaq 100 ETF",
       "price": 741.47,
-      "open": 727.95,
+      "open": 727.89,
       "high": 743.22,
-      "low": 727.82,
+      "low": 727.81,
       "close": 741.47,
-      "prev_open": 718.83,
-      "prev_close": 721.45,
-      "volume": 46233453,
-      "change_pct": 2.77
+      "prev_open": 718.08,
+      "prev_close": 720.7,
+      "volume": 46619300,
+      "change_pct": 2.88
     },
     "^VIX": {
       "label": "VIX",
-      "price": 14.87,
-      "open": 14.96,
-      "high": 15.13,
-      "low": 14.6,
-      "close": 14.87,
-      "prev_open": 15.07,
-      "prev_close": 14.81,
+      "price": 14.8,
+      "open": 14.64,
+      "high": 14.95,
+      "low": 14.64,
+      "close": 14.8,
+      "prev_open": 14.96,
+      "prev_close": 14.87,
       "volume": 0,
-      "change_pct": 0.41
+      "change_pct": -0.47
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 92.18,
+      "price": 89.38,
       "open": 91.95,
-      "high": 92.22,
-      "low": 91.75,
-      "close": 92.18,
-      "prev_open": 101.06,
-      "prev_close": 100.3,
-      "volume": 1938,
-      "change_pct": -8.1
+      "high": 93.84,
+      "low": 89.16,
+      "close": 89.38,
+      "prev_open": 101.0,
+      "prev_close": 95.78,
+      "volume": 118952,
+      "change_pct": -6.68
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,15 +65,15 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25304.06,
-      "open": 25596.46,
-      "high": 25656.22,
-      "low": 25285.9,
-      "close": 25304.06,
-      "prev_open": 25681.6,
-      "prev_close": 25716.71,
-      "volume": 165009400,
-      "change_pct": -1.6
+      "price": 25708.02,
+      "open": 25592.98,
+      "high": 25752.81,
+      "low": 25423.07,
+      "close": 25708.02,
+      "prev_open": 25491.35,
+      "prev_close": 25575.01,
+      "volume": 0,
+      "change_pct": 0.52
     }
   },
   "fred": {
@@ -98,34 +98,34 @@
     }
   },
   "analysis": {
-    "title": "Post-Market Brief: September 21, 2026",
+    "title": "Pre-Market Brief: September 22, 2026",
     "mood_emoji": "🚀",
-    "mood": "Growth-Driven Optimism",
-    "narrative": "US equities surged today, largely driven by strong performance in technology and growth sectors, while crude oil experienced a significant decline and global markets showed mixed signals. This divergence suggests a concentrated rally within specific market segments, potentially fueled by developments in digital asset exposure.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 773.50 | +1.55% | 📈 |\n| Nasdaq 100 ETF | 741.47 | +2.77% | 📈 |\n| VIX | 14.87 | +0.41% | ➡️ |\n| Crude Oil | 92.18 | -8.10% | 📉 |\n| Nikkei 225 | 65018.95 | +1.38% | 📈 |\n| DAX | 25304.06 | -1.60% | 📉 |",
-    "macro_section": "High-yield credit spreads, as measured by BAMLH0A0HYM2, stand at a 'Complacent' 2.68%, indicating a comfort level among institutions regarding corporate debt risk. Simultaneously, the 10-year minus 2-year yield curve (T10Y2Y) remains 'Flat' at +0.200, suggesting stable, albeit moderate, growth expectations without immediate inflationary or recessionary pressures. This combination implies that institutional investors are willing to deploy capital into riskier assets, supported by a seemingly benign credit environment.",
-    "analysis_para1": "The global tape presented a mixed picture today, with Japan's Nikkei 225 gaining 1.38% while Germany's DAX declined by 1.60%. A notable event was the sharp 8.10% drop in Crude Oil to $92.18, a move often associated with concerns about global demand or economic slowdown. Despite these varied international signals and the significant energy sector weakness, US high-yield credit spreads remained 'Complacent' at 2.68%. This suggests that US risk appetite is currently decoupled from some global economic indicators, with domestic credit markets not reflecting the broad-based risk-off sentiment that one might expect from such an oil price movement.",
-    "analysis_para2": "Today's primary flow was dominated by a mechanical catalyst rooted in the re-evaluation of digital asset exposure, leading to a significant speculative rotation into related equities. Corporate disclosures, notably from MicroStrategy (MSTR) regarding its Bitcoin treasury strategy and from Brightpoint Mining Resources Corp. (BMNR) on its significant crypto and cash holdings, acted as key triggers. This news fueled a concentrated surge in growth and technology names, as market participants bid up companies perceived to benefit from or have substantial exposure to the digital asset ecosystem. This narrative likely spurred a positioning squeeze, forcing shorts to cover and amplifying upward price action in these specific segments.",
-    "analysis_para3": "Traders should acknowledge the strong momentum witnessed in US equities today, particularly within the Nasdaq 100 ETF which surged +2.77%. The S&P 500 ETF closed at 773.50; a sustained break below the prior day's close for the S&P 500 ETF would serve as a key risk-off threshold, signaling a potential reversal of the current momentum. Given the concentrated nature of today's rally, as evidenced by only 36.5% of S&P 500 stocks above SMA50, the mechanical plan is to observe leaders for continuation while remaining disciplined. Long entries could target pullbacks to intraday support levels in strong performing tech and crypto-linked names, with stop-losses placed below these levels to manage downside risk.",
-    "technical_signal": "No reversal pattern confirmed yet. The current technical context shows strong upward momentum in US equity indices, particularly the Nasdaq, but with less than half of S&P 500 stocks (36.5%) above their 50-day moving average, suggesting a concentrated rather than broad-based rally. Traders should watch for any significant increase in volatility (VIX spike above 16) or a notable deceleration in leading sector strength as potential early warning signs.",
+    "mood": "Strong Equities / Risk-On",
+    "narrative": "Equity markets are rallying strongly this morning, signaling a robust risk-on sentiment across global indices. This surge is underpinned by complacent credit conditions, suggesting institutional investors are embracing risk.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 773.50 | +1.55% | 📈 |\n| Nasdaq 100 ETF | 741.47 | +2.88% | 📈 |\n| VIX | 14.80 | -0.47% | ➡️ |\n| Crude Oil | 89.38 | -6.68% | 📉 |\n| Nikkei 225 | 65018.95 | +1.38% | 📈 |\n| DAX | 25708.02 | +0.52% | 📈 |",
+    "macro_section": "High-yield credit spreads, measured by BAMLH0A0HYM2, stand at a complacent 2.68%, indicating low perceived credit risk in the market. Concurrently, the 10-Year-2-Year Yield Curve is flat at +0.200%, typically suggesting a neutral to cautious outlook on future economic growth. Despite the flat yield curve, the tight credit spreads imply institutional investors maintain a healthy appetite for risk, extending capital across credit markets.",
+    "analysis_para1": "The global tape is showing mixed signals with Asian and European equities broadly positive, as the Nikkei 225 surged by +1.38% and the DAX posted a +0.52% gain. This upward momentum in international stock markets, despite a significant -6.68% drop in Crude Oil to $89.38, suggests a selective but strong appetite for risk. The broad equity strength combined with high-yield credit spreads remaining at a complacent 2.68% implies that global institutional investors are viewing the current environment as favorable for risk assets, translating into sustained buying pressure for US equities despite the commodity weakness.",
+    "analysis_para2": "Today's robust equity surge, particularly in the Nasdaq 100 with a +2.88% jump, appears driven by a significant mechanical repositioning of institutional capital. Following a period of consolidation, large-scale inflows are likely targeting growth-oriented assets, potentially ahead of anticipated dovish shifts in central bank rhetoric or a perceived bottoming of economic sentiment. This wave of buying is compelling short positions to cover, creating a self-reinforcing upward momentum that overrides other market signals like the substantial drop in Crude Oil.",
+    "analysis_para3": "Traders should closely monitor the S&P 500 ETF, looking for sustained price action above the 770 level, which now acts as immediate support. A break above 775 could trigger further upside momentum, signaling conviction in the current rally. For long entries, look for pullbacks towards 772, with a tight stop loss below 768. Conversely, a sustained break below 765 would serve as a crucial risk-off threshold, indicating the momentum has shifted and suggesting a re-evaluation of long positions. Today's plan is to cautiously participate in the upside, prioritizing strong intraday support levels.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 stocks above SMA50 is at 36.5% and S&P stocks above SMA200 is at 55.0%. While today's strong move is positive, the underlying breadth signals remain mixed, suggesting that while the current rally is powerful, broad market participation is still developing. Traders should watch for the percentage of stocks above their 50-day moving average to break above 50% as a more definitive sign of a sustainable uptrend.",
     "ticker_intel": {
       "a_grade": [
         {
-          "ticker": "MSTR",
-          "company": "MicroStrategy Inc.",
-          "reason": "The company's reiterated Bitcoin treasury strategy and capital structure focus continue to attract significant speculative interest, driving strong price action."
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "New iOS AI features and robust hardware upgrade cycle are expected to drive stronger-than-anticipated Q4 revenue growth."
         },
         {
-          "ticker": "BMNR",
-          "company": "Brightpoint Mining Resources Corp.",
-          "reason": "Disclosure of significant crypto and cash holdings has positioned the company as a key play for investors seeking exposure to the digital asset economy."
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Strategic partnerships in cloud computing and enterprise AI solutions are positioning Microsoft for continued market share expansion."
         }
       ],
       "c_grade": [
         {
-          "ticker": "JPM",
-          "company": "JPMorgan Chase & Co.",
-          "reason": "Today's movements were primarily driven by broader financial sector flows and technical positioning rather than fresh fundamental news."
+          "ticker": "MSTR",
+          "company": "MicroStrategy Incorporated",
+          "reason": "MicroStrategy's exposure to Bitcoin's recent price appreciation continues to draw speculative interest, leading to volatile trading patterns."
         }
       ]
     }
