@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-22 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Tech-Led Optimism Amidst Mixed Signals",
+    "spy_price": 773.38,
+    "spy_change_pct": -0.02,
+    "vix": 14.21,
+    "hy_oas": 2.68,
+    "yield_curve": 0.2,
+    "credit_status": "Complacent",
+    "s5fi": 34.9,
+    "mmth": 53.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA Corp. announced a strategic partnership with a major hyperscaler to develop next-generation AI data center infrastructure, signaling strong future demand for its GPU technology."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft Corp. secured a multi-year, multi-billion dollar contract with a global financial institution to modernize its entire cloud infrastructure on Azure, reinforcing enterprise growth."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "XOM",
+          "company": "Exxon Mobil Corporation",
+          "reason": "Exxon Mobil Corp. experienced headwinds from the sharp 6.05% decline in crude oil prices, reflecting broader commodity weakness rather than company-specific news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-22 11:28 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corp.",
           "reason": "Microsoft Corp. (MSFT) continued its downward drift alongside broader technology names, experiencing selling pressure as investors rotate out of high-multiple growth stocks without a fresh fundamental catalyst."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-01 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Risk-Off / Volatility Surge",
-    "spy_price": 761.78,
-    "spy_change_pct": -0.69,
-    "vix": 16.34,
-    "hy_oas": 2.63,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 47.9,
-    "mmth": 65.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "XOM",
-          "company": "Exxon Mobil Corporation",
-          "reason": "Exxon Mobil announced a significant new liquefied natural gas supply deal, boosting future revenue outlook amidst rising energy prices."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly reported encouraging interim results from its late-stage obesity drug trial, positioning it for potential market share gains."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA saw continued profit-taking and broad-market de-risking, extending recent weakness without new company-specific news to offset the tech sector's struggles."
         }
       ]
     }
