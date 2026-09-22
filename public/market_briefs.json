@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-22 11:28 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Cautious Risk-On, Tech Leading",
+    "spy_price": 773.35,
+    "spy_change_pct": -0.02,
+    "vix": 14.32,
+    "hy_oas": 2.68,
+    "yield_curve": 0.2,
+    "credit_status": "Complacent",
+    "s5fi": 34.2,
+    "mmth": 53.2,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple announces breakthrough AI integration for iOS, leveraging on-device processing to enhance privacy and user experience, which is expected to drive a significant upgrade cycle and reinforce ecosystem lock-in."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA secures a massive multi-year cloud data center contract with a major hyperscaler, significantly expanding its market dominance in AI infrastructure and promising robust revenue growth."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Despite lacking fresh news, Microsoft sees continued momentum in Azure cloud services, with analysts reiterating strong growth projections, making it a beneficiary of broader tech rotation."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-22 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA saw continued profit-taking and broad-market de-risking, extending recent weakness without new company-specific news to offset the tech sector's struggles."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-01 11:26 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-Off / Caution Escalates",
-    "spy_price": 763.45,
-    "spy_change_pct": -0.47,
-    "vix": 15.47,
-    "hy_oas": 2.63,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 50.4,
-    "mmth": 67.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CVX",
-          "company": "Chevron Corporation",
-          "reason": "Chevron announced a new deepwater discovery in the Gulf of Mexico, potentially boosting future production capacity, capitalizing on rising crude oil prices."
-        },
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Alphabet's Google Cloud division secured a major multi-year enterprise AI contract with a Fortune 100 client, signaling strong demand for its generative AI services."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is attracting attention after yesterday's decline, as options flow suggests institutional hedging rather than outright bearish positioning."
         }
       ]
     }
