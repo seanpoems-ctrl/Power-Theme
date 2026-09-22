@@ -7205,7 +7205,11 @@ const CalendarTab = ({ econData, earningsData, thematicData, categoryThemeMap = 
 
 const MARKET_SITUATION_GEMINI_KEY  = process.env.REACT_APP_GEMINI_KEY    || "";
 const MARKET_SITUATION_FINNHUB_KEY = process.env.REACT_APP_FINNHUB_KEY   || "";
-const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v5";
+const MARKET_SITUATION_CACHE_KEY   = "gemini_market_situation_v6"; // bumped 2026-09-22: invalidate briefs
+                                                                     // cached before the extra manual re-scrapes
+                                                                     // (today's SPX/NDX/DJI fix) — v5 briefs cite
+                                                                     // stale SPY/QQQ vs SMA50/200 that no longer
+                                                                     // match the on-screen tiles
 
 // Tier 1+2+3 macro keywords — all three tiers, no daily noise
 const MAJOR_NEWS_RE = new RegExp(
