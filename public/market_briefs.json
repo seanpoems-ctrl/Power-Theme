@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-23 07:06 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Strong Risk Appetite / Growth Surge",
+    "spy_price": 773.5,
+    "spy_change_pct": 1.55,
+    "vix": 14.18,
+    "hy_oas": 2.66,
+    "yield_curve": 0.25,
+    "credit_status": "Complacent",
+    "s5fi": 34.9,
+    "mmth": 53.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Shares rally after the company unveils a significant breakthrough in battery technology, promising extended range and lower production costs."
+        },
+        {
+          "ticker": "GOOGL",
+          "company": "Alphabet Inc.",
+          "reason": "Stock gains following a major 'Outperform' analyst upgrade with an increased price target, citing robust artificial intelligence monetization opportunities."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Continues to see strong buying interest on general artificial intelligence sector optimism and momentum-driven flow, lacking a fresh catalyst today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-22 19:15 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "The stock is likely to see flow-driven activity today, benefiting from the broader positive sentiment surrounding AI companies following recent earnings reports."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-02 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Global Risk-Off Deepens",
-    "spy_price": 761.78,
-    "spy_change_pct": -0.69,
-    "vix": 16.71,
-    "hy_oas": 2.63,
-    "yield_curve": 0.4,
-    "credit_status": "Complacent",
-    "s5fi": 47.9,
-    "mmth": 65.8,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "CRM",
-          "company": "Salesforce, Inc.",
-          "reason": "Salesforce is positioned for a strong open after announcing a strategic partnership with a major cloud provider to enhance its AI-driven CRM solutions, signaling expanded market reach."
-        },
-        {
-          "ticker": "V",
-          "company": "Visa Inc.",
-          "reason": "Visa is gaining attention following news of a successful pilot program for a new blockchain-based cross-border payment system, promising increased transaction efficiency and security."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA is seeing continued chatter after an analyst reiterated their \"Outperform\" rating, citing sustained demand for AI accelerators, though no new fundamental news has emerged today."
         }
       ]
     }
