@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-23 11:24 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Mixed Signals, Complacent Credit",
+    "spy_price": 769.78,
+    "spy_change_pct": -0.48,
+    "vix": 14.56,
+    "hy_oas": 2.68,
+    "yield_curve": 0.25,
+    "credit_status": "Complacent",
+    "s5fi": 34.4,
+    "mmth": 53.7,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "IONQ",
+          "company": "IonQ, Inc.",
+          "reason": "IonQ is gapping higher following a breakthrough in Quantum Error Correction combined with a significant new deal in South Korea."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA is surging on news of a strategic partnership with a major cloud provider to integrate its new Blackwell Ultra AI chips, significantly expanding its data center market reach."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Tesla faces continued pressure amid ongoing concerns over global EV price wars and margin compression, without fresh fundamental catalysts today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-23 07:06 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Continued to benefit from broader Artificial Intelligence sector momentum and institutional flow, without specific new news today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-02 11:02 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-On / Constructive Accumulation",
-    "spy_price": 765.23,
-    "spy_change_pct": 0.45,
-    "vix": 15.41,
-    "hy_oas": 2.65,
-    "yield_curve": 0.4,
-    "credit_status": "Complacent",
-    "s5fi": 50.9,
-    "mmth": 68.1,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "GTLB",
-          "company": "GitLab Inc.",
-          "reason": "Its strong earnings beat and optimistic AI-driven outlook are expected to fuel significant upward momentum today."
-        },
-        {
-          "ticker": "DELL",
-          "company": "Dell Technologies Inc.",
-          "reason": "The company's impressive Q2 earnings and robust growth in AI server demand provide a strong fundamental catalyst for today's trading."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "The stock is likely to see flow-driven activity today, benefiting from the broader positive sentiment surrounding AI companies following recent earnings reports."
         }
       ]
     }
