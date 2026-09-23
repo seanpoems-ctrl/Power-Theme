@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23 16:45 ET",
+  "generated_at": "2026-09-23 19:08 ET",
   "phase": "POST",
   "session": "Post-Market",
   "assets": {
@@ -12,7 +12,7 @@
       "close": 767.81,
       "prev_open": 774.03,
       "prev_close": 773.38,
-      "volume": 43595781,
+      "volume": 54730992,
       "change_pct": -0.72
     },
     "QQQ": {
@@ -24,7 +24,7 @@
       "close": 741.21,
       "prev_open": 740.98,
       "prev_close": 747.46,
-      "volume": 32027122,
+      "volume": 32952535,
       "change_pct": -0.84
     },
     "^VIX": {
@@ -41,15 +41,15 @@
     },
     "CL=F": {
       "label": "Crude Oil",
-      "price": 92.94,
-      "open": 89.89,
-      "high": 93.03,
-      "low": 88.71,
-      "close": 92.94,
+      "price": 92.25,
+      "open": 92.72,
+      "high": 92.79,
+      "low": 92.12,
+      "close": 92.25,
       "prev_open": 95.39,
       "prev_close": 94.59,
-      "volume": 348836,
-      "change_pct": -1.74
+      "volume": 2024,
+      "change_pct": -2.47
     },
     "^N225": {
       "label": "Nikkei 225",
@@ -65,20 +65,20 @@
     },
     "^GDAXI": {
       "label": "DAX",
-      "price": 25410.63,
-      "open": 25724.13,
-      "high": 25729.05,
-      "low": 25365.21,
-      "close": 25410.63,
-      "prev_open": 25491.35,
-      "prev_close": 25575.01,
-      "volume": 0,
-      "change_pct": -0.64
+      "price": 25575.01,
+      "open": 25491.35,
+      "high": 25617.99,
+      "low": 25434.16,
+      "close": 25575.01,
+      "prev_open": 25596.46,
+      "prev_close": 25304.06,
+      "volume": 50641100,
+      "change_pct": 1.07
     }
   },
   "fred": {
     "hy_oas": 2.68,
-    "yield_curve": 0.25,
+    "yield_curve": 0.26,
     "hy_oas_stale": false,
     "yield_curve_stale": false
   },
@@ -99,33 +99,33 @@
   },
   "analysis": {
     "title": "Post-Market Brief: September 23, 2026",
-    "mood_emoji": "📉",
-    "mood": "Risk-Off Sentiment Persists",
-    "narrative": "Global markets displayed a mixed but predominantly risk-off tone today, with major US and European indices retreating while volatility spiked. Despite a strong performance in Asia, underlying concerns about global growth and inflation appear to be driving a cautious sentiment.",
-    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 767.81 | -0.72% | 📉 |\n| Nasdaq 100 ETF | 741.21 | -0.84% | 📉 |\n| VIX | 15.18 | +2.08% | 📈 |\n| Crude Oil | 92.94 | -1.74% | 📉 |\n| Nikkei 225 | 65018.95 | +1.38% | 📈 |\n| DAX | 25410.63 | -0.64% | 📉 |",
-    "macro_section": "High-Yield Credit Spreads (BAMLH0A0HYM2) remain at a 'Complacent' 2.68%, indicating a lack of immediate distress in credit markets. Concurrently, the 10-Year Minus 2-Year Yield Curve (T10Y2Y) stands at a 'Flat' +0.250, often signaling investor uncertainty about future economic growth. This combination suggests that while credit markets are not yet pricing in significant risk, institutional appetite for long-term growth assets may be tempered by a cautious outlook.",
-    "analysis_para1": "The global tape presented a fragmented picture, with the Nikkei 225 surging +1.38% against a backdrop of declines in the DAX (-0.64%) and Crude Oil (-1.74%). This divergence, particularly the weakness in cyclically sensitive Crude Oil and European equities, typically hints at broader global growth concerns. However, US High-Yield Credit Spreads (BAMLH0A0HYM2) remain remarkably 'Complacent' at 2.68%, suggesting US credit markets are either lagging in repricing global risks or are exhibiting a disconnect. This implies that while international markets are flashing warning signs, US institutional risk appetite may not yet fully reflect these growing anxieties.",
-    "analysis_para2": "Today's dominant mechanical catalyst appears to be a broad-based de-risking flow and profit-taking across major US and European equity indices, accompanied by a noticeable uptick in volatility. Absent a singular, major policy announcement or a market-moving macro data surprise, the observed price action—falling equities, rising VIX—suggests investors are reducing exposure ahead of potential future uncertainties. This behavior is indicative of market participants adjusting positioning, possibly in anticipation of future economic headwinds or persistent inflation pressures, leading to a general withdrawal from risk assets.",
-    "analysis_para3": "Traders should prepare for continued volatility and a potential test of key support levels as risk-off sentiment persists. For the S&P 500 ETF, watching the 765 level will be crucial; a decisive break below could trigger further downside towards 760. Long entries are advisable only on a clear reclaim of 770 with sustained volume, while short opportunities may emerge on failed attempts to hold current resistance. The risk-off threshold for today is a sustained close below 765 for the S&P 500 ETF coupled with VIX pushing above 15.50, prompting a reduction in overall market exposure.",
-    "technical_signal": "No reversal pattern confirmed yet. The current technical context shows underlying market weakness, with only 33.4% of S&P 500 stocks above their 50-day moving average, indicating poor breadth. Investors should watch for a significant improvement in market breadth or a clear re-establishment of support levels before considering aggressive long positions.",
+    "mood_emoji": "🤨",
+    "mood": "Mixed Global / US Weakness",
+    "narrative": "US equities pulled back led by technology, while European and Asian markets saw gains today, reflecting a divergence in global sentiment. This mixed tape occurred amidst complacent credit spreads and a flat yield curve, indicating underlying uncertainty despite benign credit conditions.",
+    "snapshot_md": "| Asset | Last | % Change | Sentiment |\n|-------|------|----------|-----------|\n| S&P 500 ETF | 767.81 | -0.72% | 📉 |\n| Nasdaq 100 ETF | 741.21 | -0.84% | 📉 |\n| VIX | 15.18 | +2.08% | 📈 |\n| Crude Oil | 92.25 | -2.47% | 📉 |\n| Nikkei 225 | 65018.95 | +1.38% | 📈 |\n| DAX | 25575.01 | +1.07% | 📈 |",
+    "macro_section": "The High Yield Credit Spread (BAMLH0A0HYM2) remains remarkably complacent at 2.68%, suggesting institutional investors are not pricing in significant default risk. Concurrently, the 10-Year Minus 2-Year Yield Curve (T10Y2Y) stands flat at +0.260, which often signals a cautious outlook on future economic growth. This combination implies a nuanced risk appetite, where credit risk appears benign but the broader economic growth trajectory is less clear.",
+    "analysis_para1": "A notable divergence was observed today as European and Asian markets showed resilience, with the Nikkei 225 gaining +1.38% and the DAX up +1.07%, while US equities declined. This global strength, however, was counterbalanced by a significant -2.47% drop in Crude Oil, potentially signaling concerns about future global demand. Despite these varied international signals, US High Yield credit spreads remain at a complacent 2.68%, indicating that the credit market is not yet reflecting widespread panic or systemic risk, even with the domestic equity pullback.",
+    "analysis_para2": "With no major macroeconomic data releases or policy decisions driving headlines today, the primary catalyst for the observed US equity weakness appears to be a mechanical positioning adjustment. Institutional investors likely engaged in profit-taking and rebalancing activities, especially within the technology sector, ahead of the impending quarter-end. This flow-driven dynamic contributed to the broad selling pressure across major US indices and simultaneously spurred a +2.08% rise in the VIX, signaling an increase in market uncertainty and a more defensive posture among domestic participants.",
+    "analysis_para3": "Traders should prioritize defense and capital preservation amidst the current market ambiguity. Monitor the S&P 500 ETF for a retest of the 760 level, which acts as immediate support, with a decisive break below potentially opening the path to 750. For any long entries, confirmation through a clear bounce above 770, coupled with signs of declining volatility indicated by the VIX, is essential. A sustained breach below 750 on the S&P 500 ETF would be a critical risk-off threshold, mandating a reduction in long exposure and a pivot towards defensive or hedging strategies.",
+    "technical_signal": "No reversal pattern confirmed yet. The S&P 500 ETF saw a broad sell-off, pushing it further below key intraday moving averages, while the VIX edged higher, indicating rising fear. Traders should watch for a bullish engulfing candle or a clear higher low on daily charts as initial signs of a potential short-term bottom.",
     "ticker_intel": {
       "a_grade": [
         {
           "ticker": "IONQ",
           "company": "IonQ, Inc.",
-          "reason": "The company announced a significant quantum error correction breakthrough alongside a new strategic deal in South Korea, driving strong pre-market momentum."
+          "reason": "Quantum computing leader IonQ surged today on news of a significant breakthrough in error correction and a strategic expansion deal in South Korea, signaling accelerated commercialization."
         },
         {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "The company secured a landmark enterprise cloud agreement, boosting its Azure AI services growth outlook amid broader market weakness."
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly rallied after receiving expedited FDA approval for its new oncology drug, significantly expanding its market share in a critical therapeutic area."
         }
       ],
       "c_grade": [
         {
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
-          "reason": "Exhibits strong technical momentum as investors continue to flock to leading AI infrastructure plays despite broader market weakness."
+          "reason": "NVIDIA experienced continued selling pressure, reflecting broader market profit-taking in high-valuation technology names, despite no specific fundamental news today."
         }
       ]
     }

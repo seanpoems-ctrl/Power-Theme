@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-23 19:08 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Global / US Weakness",
+    "spy_price": 767.81,
+    "spy_change_pct": -0.72,
+    "vix": 15.18,
+    "hy_oas": 2.68,
+    "yield_curve": 0.26,
+    "credit_status": "Complacent",
+    "s5fi": 33.4,
+    "mmth": 52.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "IONQ",
+          "company": "IonQ, Inc.",
+          "reason": "Quantum computing leader IonQ surged today on news of a significant breakthrough in error correction and a strategic expansion deal in South Korea, signaling accelerated commercialization."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly rallied after receiving expedited FDA approval for its new oncology drug, significantly expanding its market share in a critical therapeutic area."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA experienced continued selling pressure, reflecting broader market profit-taking in high-valuation technology names, despite no specific fundamental news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-23 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "CVX",
           "company": "Chevron Corporation",
           "reason": "Chevron Corporation is experiencing renewed buying interest driven by today's significant surge in crude oil prices, positioning it as a momentum play within the energy sector."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-02 18:50 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Cautious Accumulation",
-    "spy_price": 765.16,
-    "spy_change_pct": 0.44,
-    "vix": 15.2,
-    "hy_oas": 2.65,
-    "yield_curve": 0.4,
-    "credit_status": "Complacent",
-    "s5fi": 49.8,
-    "mmth": 67.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "DELL",
-          "company": "Dell Technologies Inc.",
-          "reason": "Strong Q2 earnings beat coupled with robust growth in AI server demand drove today's conviction."
-        },
-        {
-          "ticker": "GTLB",
-          "company": "GitLab Inc.",
-          "reason": "The company reported an earnings beat and provided a strong AI-driven outlook, bolstering investor confidence."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corp.",
-          "reason": "Continued investor focus on its expansive AI product suite and cloud services sustained positioning, without a fresh specific catalyst today."
         }
       ]
     }
