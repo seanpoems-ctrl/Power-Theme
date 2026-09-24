@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-24 19:26 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Global Divergence, VIX Uptick",
+    "spy_price": 767.18,
+    "spy_change_pct": -0.08,
+    "vix": 15.67,
+    "hy_oas": 2.73,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 31.2,
+    "mmth": 50.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Breakthrough Phase 3 trial results for a new obesity drug released this morning, exceeding analyst expectations for efficacy and safety."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Announced a strategic partnership with a major automotive manufacturer to integrate its AI solutions into next-generation autonomous driving platforms."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla, Inc.",
+          "reason": "Continues to experience intraday volatility driven by technical trading levels and general market sentiment, absent new fundamental catalysts today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-24 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA continues to see strong investor interest following yesterday's analyst commentary on expanding AI data center demand, maintaining its upward trajectory based on flow."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-03 18:48 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Strong US Rally / Complacent Credit",
-    "spy_price": 773.17,
-    "spy_change_pct": 1.05,
-    "vix": 14.32,
-    "hy_oas": 2.66,
-    "yield_curve": 0.43,
-    "credit_status": "Complacent",
-    "s5fi": 54.9,
-    "mmth": 69.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AVAV",
-          "company": "AeroVironment, Inc.",
-          "reason": "Experienced significant upside due to a fresh Government Contract Win, confirmed as a high-conviction gapper from pre-market scans."
-        },
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "Showed strong performance, likely driven by renewed investor enthusiasm following reported new advancements in AI computing solutions."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Continued volatility driven by broader market sentiment and ongoing production ramp speculation, lacking a fresh, specific catalyst today."
         }
       ]
     }
