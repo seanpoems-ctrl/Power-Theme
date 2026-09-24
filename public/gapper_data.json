@@ -1,77 +1,57 @@
 {
-  "scan_time": "2026-09-23 08:55 ET",
+  "scan_time": "2026-09-24 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "IONQ",
-      "price": 45.3,
-      "gap_pct": 11.2,
-      "pm_volume": 3794369,
-      "avg_vol_10d": 18334559,
-      "avg_dollar_vol": 830555523,
-      "mkt_cap": 16505326550,
-      "rvol": 0.58,
-      "adr_pct": 5.55,
-      "category": "New Contract/Partnership",
-      "theme": "Quantum Error Correction Breakthrough & South Korea Deal",
-      "reasoning": "IonQ stock surged following the demonstration of the industry's first real-time quantum error decoder and a major quantum deal in South Korea.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 75,
-      "grade": "A",
-      "finviz_theme": "AI Compute",
+      "ticker": "FRVO",
+      "price": 18.3,
+      "gap_pct": 11.93,
+      "pm_volume": 306811,
+      "avg_vol_10d": 4846661,
+      "avg_dollar_vol": 88693896,
+      "mkt_cap": 4819378354,
+      "rvol": 0.57,
+      "adr_pct": 7.67,
+      "category": "Thematic Narratives",
+      "theme": "Geothermal Utility Scale Power Achievement",
+      "reasoning": "Fervo Energy's Cape Station project achieved first power, turning deep underground heat into grid power at utility scale for the first time.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 55,
+      "grade": "C",
+      "finviz_theme": "Clean Energy - Grid",
       "analysis_source": "gemini",
       "analysis_detail": {
-        "catalyst": "IonQ demonstrated the **industry's first end-to-end real-time quantum error decoder** and announced a **major South Korea quantum deal**.",
-        "impact": "These developments significantly advance IonQ's technological leadership and expand its market reach, boosting investor confidence."
+        "catalyst": "Fervo Energy's **Cape Station** project has successfully achieved **first power**, marking a significant milestone by turning **deep underground heat into grid power at utility scale for the first time**. This **Utah project** represents a breakthrough in geothermal energy.",
+        "impact": "This operational achievement validates Fervo's core technology, potentially unlocking future large-scale projects and establishing the company as a leader in advanced geothermal, attracting further investment and customer interest in this nascent but critical clean energy sector."
       },
-      "analysis_details": "• **Impact**\nIonQ's stock rose significantly, initially by **7%** and later **11.8%**, driven by the announcement of a **quantum error correction decoder test**. This demonstration involved the **industry's first end-to-end real-time quantum error decoder**, signaling a major technological breakthrough. Concurrently, the company also secured a **major South Korea quantum deal**.\n\n• **Strategic Value**\nThe quantum error correction breakthrough is a critical step towards fault-tolerant quantum computing, enhancing IonQ's competitive positioning and validating its technological leadership. The **major South Korea quantum deal** expands the company's global footprint and revenue opportunities, solidifying its market presence in a key region. These events combine to create a strong positive momentum signal for the stock.",
+      "analysis_details": "• **The Narrative**\nFervo Energy's **Cape Station** project has successfully achieved **first power**, a pivotal development that signals the company's capability to turn **deep underground heat into grid power at utility scale for the first time**. This **Utah project** is a significant innovation in clean energy, demonstrating the viability of geothermal technology to contribute meaningfully to the grid.\n\n• **Explosiveness**\nThis first-of-its-kind achievement at **utility scale** positions Fervo Energy as a potential leader in a new frontier of clean energy. The validation of its technology with a functional power delivery could drive strong momentum, attract substantial institutional interest, and potentially lead to an expansion of its project pipeline, especially given broader calls for reliable, baseload renewable energy sources.",
       "peer_tickers": [],
-      "leverage_etfs": [
-        {
-          "ticker": "IONX",
-          "mult": "2x"
-        }
-      ],
-      "inverse_etfs": [
-        {
-          "ticker": "IONZ",
-          "mult": "1x"
-        }
-      ],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
       "headlines": [
         {
-          "title": "IonQ Shares Rise 11.8% After Quantum Error Correction Decoder Test - Yahoo Finance",
+          "title": "Fervo Energy Company (FRVO) Faces Investor Scrutiny Amid Post-IPO Transmission Curtailment Revelation – HBSS - GlobeNewswire",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxOdzNZQ0YxVHc3dWlMbUxsRlNWaTVEUlpBTGFKUGVSYklTLTdXR3hWRjEtXzBsMzdHRHBMbmUxTXlhT0Y2cERLcERlQk8waHBZOWM0TUVjcDhBWmJWZVNvWWNKY3pZeHVLR1NibDRVcU1PRXo2SzdhMHJRSml4WHVmTkprajN4d0VCWVdPU293?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMijAJBVV95cUxOTkYzdmVwZy1oQTZkdU5mOFpkLVE5c1hwS0Y4NnZSdVVHOUwwZ0JRMFdoNGpWb3pZMnBzOEgyTHRodkw2STlkU0ZIWExZdVlEcjdqRnM2UDBUY0F4V2hOd0hYX1VXTlVpeEh0R24weTlmdGtpNXplWVhJQWpBVUlPN0hGdlVMdWh6RV93eWlCWDhodndGTHhOajJQbUZYT2hXNTlUMGc5T0FEVjlkX3BxZmRmOXRGRF9wTWhmcmFWQld1REtDSUdEYlllRTVIc0hXYW90S25mMFJKeG14bmJLc2VNX01PWkNwWjkwWVdJQzA2WF9CalQ2ZjAyeWVwalk2WDQ0N2FCZjNyZnhu?oc=5"
         },
         {
-          "title": "IonQ (IONQ) Just Gave Investors Something To Think About - Yahoo Finance",
+          "title": "Fervo Energy stock rises after Cape Station achieves first power By Investing.com - Investing.com Nigeria",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQUTFVUmtTamRuR1V0SGxtN0k1aTZOeVRNcUxIeG9nc21yY19ZWjAtOERKSmpKOU56anVYWmFnd3o0Vy1PeFkxaURQN2JuQmFBQWJmSEtnWmpvWkRNTWxDWnFEN3Q3cnBEN1BSSUtUelFPQU5lUXQ2UVozUmMxUU5UWGVBMU5SSTVOM3pKQ3ByV0Uxaklxb3R2eGZ3?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPa09fYnRiQVB1ektVemRnR1F6V1RnTm1VQ2w4TjBtZHNOeGlncFpaMHNYdTVwaWI3TG0yYVJjcE9PQmlGeVVyQlhOY2VXdFl1blFkU0E3ZmVrbE1PWVhmYmlYcFVFRTVBaFY2dExXdTBQRElaTUs2QmhVeDdpclRVMHp1b28tLWhwUkxlYXY3bTFSTGEtT25jMk0wS05CbEVxZ0pfYUhxUUVpbmplejBhOEdTbExfWFZ2WVZzT0dGTEgycnM?oc=5"
         },
         {
-          "title": "IonQ Demonstrates Industry's First End-to-End Real-Time Quantum Error Decoder",
-          "source": "Finviz",
-          "url": "/news/394443/ionq-demonstrates-industrys-first-end-to-end-real-time-quantum-error-decoder"
-        },
-        {
-          "title": "IonQ Stock in Focus After Major South Korea Quantum Deal",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/technology/ai/articles/ionq-stock-focus-major-south-122533657.html"
-        },
-        {
-          "title": "IonQ stock jumps 7% on quantum error correction breakthrough - Investing.com",
+          "title": "A Utah project turns deep underground heat into grid power at utility scale for the first time. - stocktitan.net",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNRnozSF9ReW5Ib2YyUXFsWGFvczFLN19aS1h5ZTNDVGRxWGpJaC1iTTNKTGhXaVZUMWtzN3h2WXFtNkpiRHdnUUtXR0hWcUk2NGUyLVZ1V2FFNFdaX0V0QWRacWt0b2g3QkVBXzNnaTE3aDBaWnFncVl1Wk4taUIwVFB6QVZDa0FmeU1WcEtEa2tTSHVhdTVEaWJGb3dveXNQNTRLTW05WUx3SFZGb1dTUUIzR1dmT3Q5TGV1Z2VB?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxObHVNbTd5NE9yTmxxU2RuWlp1YnFXZnpvTERsbk4yakRTNG1XbzVSNFJnNjFpU1F4TDZacFZCd0tPaVBsOVFUWnFTaTlEQzZVTGhKWEV5TVVKb0RET1lwUS1VSEp0VlozTWNrcXR0LVlVaGZqcHUydW1lcjFFYW5ORGQwbkVpMHFvdXByNTBESW0tRmhmUHRLb3doTjF3aUlmRjYwa0hfNXlnbXdaeGdncEVjYVdUQVRVZzVlRV96RQ?oc=5"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "399.03M",
-      "short_float": "10.29%",
-      "daily_pct": 10.44,
-      "prev_close": 40.74,
-      "industry": "AI Compute",
-      "technical_status": "Pass",
+      "float_shares": "182.53M",
+      "short_float": "7.39%",
+      "daily_pct": 10.16,
+      "prev_close": 16.35,
+      "industry": "Clean Energy - Grid",
+      "technical_status": "Fail (Avg $Vol $89M < $100M)",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 90,
@@ -79,312 +59,29 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "IonQ had a major quantum deal in South Korea.",
-        "discrepancy_note": "Finviz [4] explicitly states 'IonQ Stock in Focus After Major South Korea Quantum Deal', confirming the claim. Google News headlines [1-5] do not mention any 'quantum deal in South Korea', focusing instead on the quantum error correction decoder."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T1",
-      "tier_label": "Major Catalyst"
-    },
-    {
-      "ticker": "CBRL",
-      "price": 48.75,
-      "gap_pct": 7.19,
-      "pm_volume": 73266,
-      "avg_vol_10d": 1134401,
-      "avg_dollar_vol": 55302049,
-      "mkt_cap": 1016544455,
-      "rvol": 1.27,
-      "adr_pct": 4.31,
-      "category": "Earnings",
-      "theme": "Earnings Announcement",
-      "reasoning": "CBRL filed an 8-K today, 2026-09-23, specifically for Earnings/Financial Results, signaling a new earnings announcement.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 77,
-      "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini+edgar",
-      "analysis_detail": {
-        "catalyst": "CBRL filed a **8-K with the SEC today, 2026-09-23**, detailing **Earnings/Financial Results** under **Item 2.02 and 9.01**. No specific earnings figures (EPS, Revenue, or guidance) were available in the provided headlines to quantify the impact.",
-        "impact": "Without specific financial results or guidance provided, the market's reaction is speculative; the stock award news is not a financial catalyst."
-      },
-      "analysis_details": "• **The Beats (Surprise Factor)**\nCBRL filed a **Form 8-K on 2026-09-23** under **Item 2.02 (Results of Operations and Financial Condition)**, indicating a release of earnings or financial results. However, the provided news headlines for the last 24 hours do not contain specific financial figures such as **EPS, revenue, or guidance**, nor do they mention any beat or miss against analyst estimates. The only related headline mentions a **CIO stock award vesting through 2029**, which is not an earnings metric.\n\n• **The Growth (Momentum)**\nGiven the absence of specific financial data, it is impossible to assess the company's growth trajectory or any momentum from this earnings filing. The lack of detailed information suggests that either the results were not publicly disseminated in the provided news, or they were not significant enough to generate headlines with specific figures. The **CIO stock award** is an internal compensation matter, not a direct indicator of company-wide financial performance or growth.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Cracker Barrel (CBRL) CIO stock award vests through 2029 - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOM3JvZS11YXEwVk9xSzhLcFpZZ2l3T1lWYVJONFhrMTVNNlAtYnBjQTd5VzFHMjc3eS1WZWRGTUtYNVNkeTkxYy1ZXzJlNWw5Z2ZKaEpvNmRRY3JhejdCTV90SE9WSmRlRGNEZlJGdUJZWnYwcE16Tmd1MkRBVlR1dk1wMGZCNG5KcDhmLUlLZmNWWGlpRmoxdThuazRMV09zRHdFUEZUajhXbi16T3ZSWEFTbEJJWlp1Y2Qxb0ROa3ltU0VkWGZKYlhB?oc=5"
-        }
-      ],
-      "edgar_filing": {
-        "filing_date": "2026-09-23",
-        "form": "8-K",
-        "items": [
-          "2.02",
-          "9.01"
-        ],
-        "category": "Earnings",
-        "label": "Earnings/Financial Results",
-        "url": "https://www.sec.gov/Archives/edgar/data/1067294/000110465926109812/tm2625926d1_8k.htm"
-      },
-      "float_shares": "21.92M",
-      "short_float": "23.60%",
-      "daily_pct": 6.2,
-      "prev_close": 45.48,
-      "industry": "Others",
-      "technical_status": "Fail (Avg $Vol $55M < $100M)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "The earnings announcement or 8-K filing occurred on 2026-09-23.",
-        "discrepancy_note": null
-      },
-      "gates_passed": 3,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": false,
-        "gate_mkt_cap": false,
-        "gate_adr": true
-      },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
-    },
-    {
-      "ticker": "QNT",
-      "price": 55.0,
-      "gap_pct": 7.02,
-      "pm_volume": 67425,
-      "avg_vol_10d": 1946936,
-      "avg_dollar_vol": 107081480,
-      "mkt_cap": 13531405208,
-      "rvol": 0.61,
-      "adr_pct": 5.39,
-      "category": "Others",
-      "theme": "Market Commentary / Valuation Discussion",
-      "reasoning": "A Google News article discusses **QBTS vs. QNT** valuations, prompting speculation and potentially influencing sentiment, but is not a direct fundamental catalyst.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 55,
-      "grade": "C",
-      "finviz_theme": "Others",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "A **Google News article** on **2026-09-22** compared **QBTS** and **QNT**, analyzing their valuations under a **'Quantum Valuations Reset'** theme. The article poses a **'Buy, Hold or Sell'** question for QNT.",
-        "impact": "This market commentary piece offers a general perspective on valuation within the quantum computing space, but does not present a specific event, contract, or analyst rating action to directly drive price momentum."
-      },
-      "analysis_details": "• **What Happened**\nOn **September 22, 2026**, a **Google News** article published at **19:00 UTC** critically examined the valuations of **QBTS** versus **QNT**. The piece focused on a **'Quantum Valuations Reset'** and questioned whether investors should **'Buy, Hold or Sell'** QNT shares, indicating a broader market discussion around quantum computing stocks.\n\n• **Key Consideration**\nThis headline represents market commentary and valuation analysis, rather than a definitive corporate event like an upgrade, contract, or earnings report. While such articles can influence sentiment, the absence of a concrete company-specific catalyst or new data point suggests that any associated price movement would be speculative and not driven by a strong fundamental re-rating.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "QBTS vs. QNT: Buy, Hold or Sell as Quantum Valuations Reset? - Yahoo Finance",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPVnpjdVN0R3RWamEyaWZYbWp4aFlLcy15SHI1TGZOZ2tYX0syVmE3YXM1bWhibGhoM0dTeWpiNi1POHJ1ZDNzeTRzaTV4bXYxeWhWRmRaQ3NoZ1JRbGtWQTJnNGJITHphTmZUVXBLNXVuYW5uLWxZSWsyQ2w4eHpiXzN4T2d3V2JvQUlwRkt3?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "33.71M",
-      "short_float": "8.53%",
-      "daily_pct": 7.02,
-      "prev_close": 51.39,
-      "industry": "Others",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 40,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "A specific factual claim (dollar amount, percentage, date, approval decision, etc.) related to QBTS vs. QNT valuations.",
-        "discrepancy_note": "The primary catalyst claim describes the *topic* of a Google News article ('QBTS vs. QNT valuations') but does not contain a specific, quantifiable factual claim (like a dollar amount, percentage, date, or approval decision) that can be verified against the sources. Source B confirms an article with this topic exists, but there's no specific claim within the summary to verify."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": true
-      },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
-    },
-    {
-      "ticker": "CART",
-      "price": 46.77,
-      "gap_pct": 5.31,
-      "pm_volume": 50703,
-      "avg_vol_10d": 4793001,
-      "avg_dollar_vol": 224168657,
-      "mkt_cap": 10280917675,
-      "rvol": 1.54,
-      "adr_pct": 2.96,
-      "category": "New Contract/Partnership",
-      "theme": "Multiple Strategic Partnerships",
-      "reasoning": "Instacart announced key partnerships with Airbnb to expand grocery delivery and with Gopuff for a new, first-of-its-kind service.",
-      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
-      "conviction": 78,
-      "grade": "B",
-      "finviz_theme": "Consumer - E-Commerce",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "Instacart (CART) announced an **expanded grocery-delivery partnership** with **Airbnb (ABNB)**, allowing guests to order groceries pre-stay, and a **new, first-of-Its-Kind Partnership** with **Gopuff** in the U.S. Additionally, a Maplebear (CART) officer set a **$827K stock sale** under a 10b5-1 plan.",
-        "impact": "The dual partnerships significantly broaden Instacart's market reach and integration into consumer travel and quick commerce, enhancing its competitive position despite the insider sale."
-      },
-      "analysis_details": "• **Impact**\nInstacart (CART) announced an **expanded grocery-delivery partnership** with **Airbnb (ABNB)**, allowing guests to order groceries directly within the Airbnb app before and during their trips. Simultaneously, the company revealed a **new, first-of-Its-Kind Partnership** with **Gopuff** in the U.S., further diversifying its service offerings and reach in the delivery sector. These moves highlight a strategic push into new consumer touchpoints and service categories.\n\n• **Strategic Value**\nThese partnerships represent a substantial expansion of Instacart's market opportunity by integrating into the travel and quick commerce ecosystems. The Airbnb deal provides a direct channel to travelers, enhancing convenience and potentially increasing order frequency, while the Gopuff partnership establishes a novel service that could redefine convenience delivery. The cumulative effect is expected to bolster Instacart's competitive positioning against rivals like DoorDash, as it broadens its user base and utility beyond traditional grocery delivery.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Planned $827K stock sale by Maplebear (CART) officer is set under a 10b5-1 plan - Stock Titan",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQZ3pHMkxQY3paR1lzR2lmcEdya0hwZzBlWWM2ZVIxRXN6YTZBbWdnc2dCbDJ4Qm9sbXJmZVRjRGJGcHR0MUhxTUNRazh0NHA3bC0xVGRGYzMtTVR6ck5rczBXRnFzS3NsQXhHbXE1Tm12OUxsQk5KZ0twMVcwc3VDOUFuUzQ0d3pYSVMyNkZFNl82NDUz?oc=5"
-        },
-        {
-          "title": "Airbnb Makes Major Push Beyond Rentals",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/airbnb-makes-major-push-beyond-220808055.html"
-        },
-        {
-          "title": "Airbnb Adds a New Service to the Stay",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/airbnb-adds-stay-211837836.html"
-        },
-        {
-          "title": "Instacart and Gopuff Announce New, First-of-Its-Kind Partnership in the U.S.",
-          "source": "Finviz",
-          "url": "/news/394307/instacart-and-gopuff-announce-new-first-of-its-kind-partnership-in-the-us"
-        },
-        {
-          "title": "DoorDash Retains Lowest-Cost Delivery Position Despite Fee Increases, Wells Fargo Finds",
-          "source": "Finviz",
-          "url": "https://finance.yahoo.com/markets/stocks/articles/doordash-retains-lowest-cost-delivery-104328808.html"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "180.36M",
-      "short_float": "8.85%",
-      "daily_pct": 5.38,
-      "prev_close": 44.41,
-      "industry": "Consumer - E-Commerce",
-      "technical_status": "Fail (ADR 3.0% < 4%)",
-      "verification": {
-        "status": "Unconfirmed",
-        "confidence_score": 70,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "Instacart announced key partnerships with Airbnb to expand grocery delivery",
-        "discrepancy_note": "Neither source explicitly mentions an Instacart-Airbnb partnership for grocery delivery. Both Source A and Source B mention 'Airbnb Adds a New Service to the Stay', but do not specify Instacart or grocery delivery as part of this new service or partnership."
+        "primary_claim": "Fervo Energy's Cape Station project achieved first power, turning deep underground heat into grid power at utility scale for the first time.",
+        "discrepancy_note": "Source A (Finviz News) has no information regarding the claim. Source B (Google News) contains articles that collectively support the claim: [4] confirms 'Fervo Energy's Cape Station achieves first power,' and [1] confirms 'A Utah project turns deep underground heat into grid power at utility scale for the first time.' However, since Source A provides no confirmation, the claim cannot be 'Verified' by *both* primary sources."
       },
       "gates_passed": 4,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": true,
-        "gate_mkt_cap": true,
-        "gate_adr": false
-      },
-      "meets_all_gates": false,
-      "tier": "T2",
-      "tier_label": "Strong Catalyst"
-    },
-    {
-      "ticker": "INFQ",
-      "price": 14.79,
-      "gap_pct": 5.22,
-      "pm_volume": 430020,
-      "avg_vol_10d": 8730373,
-      "avg_dollar_vol": 129122217,
-      "mkt_cap": 3168520083,
-      "rvol": 0.76,
-      "adr_pct": 6.19,
-      "category": "Others",
-      "theme": "Sector Sympathy",
-      "reasoning": "INFQ is moving in sympathy with peer IonQ as **quantum computing stocks are gaining pre-market** after a **brutal summer**.",
-      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
-      "conviction": 56,
-      "grade": "C",
-      "finviz_theme": "AI Compute",
-      "analysis_source": "gemini",
-      "analysis_detail": {
-        "catalyst": "**Quantum computing stocks** are **gaining pre-market** with **IonQ surging over 12%**.",
-        "impact": "Secondary. No company-specific news for INFQ; its move is correlated to broader **quantum computing industry** trends."
-      },
-      "analysis_details": "• **What Happened**\nQuantum computing stocks are experiencing a pre-market surge, with peer **IonQ** leading the rally by **gaining over 12%**. This sector-wide movement follows a **brutal summer** for quantum stocks, indicating renewed investor interest.\n\n• **Key Consideration**\nThe current move for INFQ appears to be a **sympathy play**, lacking specific company-driven news. This suggests a **technical bounce** or **flow-driven momentum** rather than a fundamental re-rating, increasing the risk of short-term volatility and potential reversals if the broader sector enthusiasm wanes.",
-      "peer_tickers": [],
-      "leverage_etfs": [],
-      "inverse_etfs": [],
-      "headlines": [
-        {
-          "title": "Quantum Computing Stocks Gain Pre-Market as IonQ Surges Over 12% - TradingKey",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNMFd6NUFxU01EWjFKVkZDQlZ4QXVaYmxTeHQxNG9NenNybnR3eGpPQVA3YzZ3RlZMXzFRXzNhclJRUS0yY2ZCWHZVcTR5RnFocDJBbDVqRDZhSjk3VGxuMDBsY1JxSjRGN0d6YVN2ZXNTVlRjYi1PN3FHTFpBY2lXVVpNQzJucG1aNkdpcnNxNnQzWlBiMWp6MURLY25YRmZZTTBRc0JzcDJZZGtPVUlYa2RwQ09pamsyRzJqOUtVMmV5YzF4?oc=5"
-        },
-        {
-          "title": "Quantum stocks are getting hot again after a brutal summer. Can the rally last? - MarketWatch",
-          "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPUldlaW9yeXpodUdRN0NkTlJKQjlHN0s4WUxFcXdJV0owRkNud0lneGFJcnNia29TTnlJQVVqRnRqUVZjYzNydWdpV2FPb1pvMmFPQXZydnBPMTk3SktxcmJJc2E4eE5BM2JwdGUtbjI5a3JqMGlpc3ZNTjBxYWl2VEE2QjJxNmNYQXZrUTE2VFB3ME4zcHFMMW8zT2xCcjdTUGY1RUJGUmRkWnowSW10RFFNSC1TYjZCU0tjYw?oc=5"
-        }
-      ],
-      "edgar_filing": null,
-      "float_shares": "188.93M",
-      "short_float": "12.86%",
-      "daily_pct": 5.05,
-      "prev_close": 14.06,
-      "industry": "AI Compute",
-      "technical_status": "Pass",
-      "verification": {
-        "status": "Discrepancy",
-        "confidence_score": 90,
-        "sources_consulted": [
-          "Finviz",
-          "Google News"
-        ],
-        "primary_claim": "IonQ is surging over 12% pre-market.",
-        "discrepancy_note": "Source A (Finviz News) contains no information to confirm this specific claim. Source B [5] states 'IonQ Surges Over 12%', but dual confirmation from both provided sources is not possible."
-      },
-      "gates_passed": 5,
-      "gates_detail": {
-        "gate_rs": true,
-        "gate_price": true,
-        "gate_dollar_vol": true,
+        "gate_dollar_vol": false,
         "gate_mkt_cap": true,
         "gate_adr": true
       },
-      "meets_all_gates": true,
-      "tier": "T3",
-      "tier_label": "Minor Catalyst"
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 5,
+    "small_gaps": 1,
     "large_gaps": 0,
-    "total_headlines": 14,
+    "total_headlines": 3,
     "monthly_cost_usd": 0.01
   }
 }
