@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-24 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Sentiment / Oil Rally",
+    "spy_price": 767.18,
+    "spy_change_pct": -0.08,
+    "vix": 15.67,
+    "hy_oas": 2.73,
+    "yield_curve": 0.26,
+    "credit_status": "Complacent",
+    "s5fi": 31.2,
+    "mmth": 50.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "XOM",
+          "company": "ExxonMobil",
+          "reason": "ExxonMobil (XOM) rallied strongly, benefiting from the significant surge in crude oil prices and positive analyst sentiment regarding its recent exploration successes."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp",
+          "reason": "Microsoft (MSFT) saw increased buying interest following reports of accelerated adoption of its new cloud-based AI services, projected to significantly enhance enterprise productivity."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc",
+          "reason": "Tesla (TSLA) experienced volatile trading driven by options expiry and short-term technical signals, without any fresh company-specific fundamental news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-24 11:47 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Continued volatility driven by broader market sentiment and ongoing production ramp speculation, lacking a fresh, specific catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-03 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Broad Risk-On Rally",
-    "spy_price": 773.17,
-    "spy_change_pct": 1.05,
-    "vix": 14.32,
-    "hy_oas": 2.66,
-    "yield_curve": 0.4,
-    "credit_status": "Complacent",
-    "s5fi": 54.9,
-    "mmth": 69.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AVAV",
-          "company": "AeroVironment Inc.",
-          "reason": "Government contract win positions the company for significant revenue growth and market share expansion in defense technology."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Announced a landmark cloud computing contract with a major enterprise client, bolstering its Azure platform's competitive advantage."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "TSLA",
-          "company": "Tesla Inc.",
-          "reason": "Price action today was driven by continued retail flow and short-term technical indicators, absent any new fundamental news catalyst."
         }
       ]
     }
