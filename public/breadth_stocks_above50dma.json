@@ -2,64 +2,88 @@
   "ok": true,
   "filter": "above50dma",
   "label": ">50 DMA",
-  "count": 4,
+  "count": 6,
   "stocks": [
     {
       "ticker": "SECZ",
       "company": "Securitize Corp.",
       "industry": "Packaged Software",
-      "price": 14.36,
-      "change_pct": 10.46,
-      "adr_pct": 7.8,
-      "dollar_volume": "$81.8M",
-      "market_cap_b": 2.344,
-      "rs_ibd": 80,
-      "above50dma_pct": 89.7
+      "price": 16.53,
+      "change_pct": 15.11,
+      "adr_pct": 7.3,
+      "dollar_volume": "$109.2M",
+      "market_cap_b": 2.699,
+      "rs_ibd": 88,
+      "above50dma_pct": 113.8
     },
     {
       "ticker": "MRNA",
       "company": "Moderna, Inc.",
       "industry": "Biotechnology",
-      "price": 182.11,
-      "change_pct": -0.25,
-      "adr_pct": 7.1,
-      "dollar_volume": "$2.80B",
-      "market_cap_b": 72.705,
+      "price": 194.82,
+      "change_pct": 6.98,
+      "adr_pct": 6.7,
+      "dollar_volume": "$3.16B",
+      "market_cap_b": 77.779,
       "rs_ibd": 98,
-      "above50dma_pct": 73.7
+      "above50dma_pct": 81.4
+    },
+    {
+      "ticker": "GRAL",
+      "company": "GRAIL, Inc.",
+      "industry": "Medical Specialties",
+      "price": 125.21,
+      "change_pct": 15.38,
+      "adr_pct": 6.2,
+      "dollar_volume": "$254.2M",
+      "market_cap_b": 5.593,
+      "rs_ibd": 95,
+      "above50dma_pct": 63.8
     },
     {
       "ticker": "ASST",
       "company": "Strive, Inc.",
       "industry": "Financial Conglomerates",
-      "price": 28.99,
-      "change_pct": -1.23,
-      "adr_pct": 6.7,
-      "dollar_volume": "$301.9M",
-      "market_cap_b": 2.769,
-      "rs_ibd": 85,
-      "above50dma_pct": 56.1
+      "price": 29.94,
+      "change_pct": 3.28,
+      "adr_pct": 6.5,
+      "dollar_volume": "$308.2M",
+      "market_cap_b": 2.922,
+      "rs_ibd": 94,
+      "above50dma_pct": 58.3
+    },
+    {
+      "ticker": "QMCO",
+      "company": "Quantum Corporation",
+      "industry": "Computer Peripherals",
+      "price": 29.49,
+      "change_pct": 13.55,
+      "adr_pct": 8.0,
+      "dollar_volume": "$52.5M",
+      "market_cap_b": 1.162,
+      "rs_ibd": 97,
+      "above50dma_pct": 53.4
     },
     {
       "ticker": "SDGR",
       "company": "Schrodinger, Inc.",
       "industry": "Packaged Software",
-      "price": 29.23,
-      "change_pct": -4.79,
+      "price": 29.45,
+      "change_pct": 0.75,
       "adr_pct": 5.9,
-      "dollar_volume": "$94.5M",
-      "market_cap_b": 2.187,
+      "dollar_volume": "$99.7M",
+      "market_cap_b": 2.203,
       "rs_ibd": 89,
-      "above50dma_pct": 51.8
+      "above50dma_pct": 50.8
     }
   ],
   "spx_benchmarks": {
-    "spx_1d": -0.76,
-    "spx_1m": 0.69,
-    "spx_3m": 4.73,
-    "spx_34d": -0.23,
-    "spx_qtd": 2.98,
-    "spx_mtd": 0.98
+    "spx_1d": -0.02,
+    "spx_1m": 0.35,
+    "spx_3m": 4.71,
+    "spx_34d": -0.08,
+    "spx_qtd": 2.95,
+    "spx_mtd": 0.95
   },
-  "fetched_at_utc": "2026-09-24T01:17:45+00:00"
+  "fetched_at_utc": "2026-09-24T23:16:35+00:00"
 }
