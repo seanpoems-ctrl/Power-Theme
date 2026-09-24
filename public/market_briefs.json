@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-24 07:05 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Risk-Off / Credit Concerns",
+    "spy_price": 767.81,
+    "spy_change_pct": -0.72,
+    "vix": 16.11,
+    "hy_oas": 2.68,
+    "yield_curve": 0.26,
+    "credit_status": "Complacent",
+    "s5fi": 33.4,
+    "mmth": 52.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft (MSFT) is reportedly signing a landmark multi-year cloud computing deal with a major defense contractor, signaling robust enterprise AI adoption."
+        },
+        {
+          "ticker": "LLY",
+          "company": "Eli Lilly and Company",
+          "reason": "Eli Lilly (LLY) announced positive Phase 3 trial results for a new obesity treatment, exceeding analyst expectations for efficacy and safety."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA (NVDA) remains a focus for institutional flows as investors continue to rotate within the semiconductor sector, with no fresh fundamental news today but sustained technical interest."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-23 19:08 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Continues to see flow driven by broader market momentum and recycled AI optimism from prior sessions, lacking a fresh catalyst today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-03 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Cautious Climb",
-    "spy_price": 765.16,
-    "spy_change_pct": 0.44,
-    "vix": 15.43,
-    "hy_oas": 2.65,
-    "yield_curve": 0.4,
-    "credit_status": "Complacent",
-    "s5fi": 49.8,
-    "mmth": 67.2,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA Corporation shares are anticipated to be active following news of their new strategic partnership focusing on integrating advanced AI with quantum computing solutions."
-        },
-        {
-          "ticker": "UNH",
-          "company": "UnitedHealth Group Incorporated",
-          "reason": "UnitedHealth Group Incorporated is poised for gains after announcing a new government contract expansion for its Optum health services, boosting revenue projections."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "CVX",
-          "company": "Chevron Corporation",
-          "reason": "Chevron Corporation is experiencing renewed buying interest driven by today's significant surge in crude oil prices, positioning it as a momentum play within the energy sector."
         }
       ]
     }
