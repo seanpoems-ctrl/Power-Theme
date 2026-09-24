@@ -1,19 +1,19 @@
 {
-  "generated_at": "2026-09-23T23:11:14.574262+00:00",
-  "vix": null,
+  "generated_at": "2026-09-24T01:16:46.487581+00:00",
+  "vix": 15.18,
   "tick": -2413.0,
   "trin": 0.8,
-  "s5fi_50d": 30.3,
-  "mmth_200d": 50.9,
+  "s5fi_50d": 31.3,
+  "mmth_200d": 52.9,
   "t2108": 20.18,
-  "yield_10y": null,
+  "yield_10y": 5.11,
   "data_sources": {
-    "vix": "null",
+    "vix": "yfinance",
     "tick": "tradingview",
     "trin": "tradingview",
     "s5fi_50d": "scraper",
     "mmth_200d": "scraper",
     "t2108": "breadth_monitor",
-    "yield_10y": "null"
+    "yield_10y": "yfinance"
   }
 }
