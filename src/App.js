@@ -852,9 +852,29 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
       // (industry or theme), then on the industry's parent theme (e.g. "Communication
       // Equipment" isn't in THEME_ETF_MAP but its parent "Telecommunications" is
       // close enough to have a sector ETF, giving the tile a proxy drill-down).
+      //
+      // Some parent-theme ETFs are a genuinely bad stand-in for specific industries
+      // under them, not just a broad/imperfect one (2026-09-25 audit): ARKF (an
+      // actively-managed disruptive-fintech fund) holds none of the traditional
+      // banks the 8 Fintech-classified banking/finance industries represent; URA
+      // (uranium miners) holds no coal companies despite Coking/Thermal Coal
+      // sharing the Nuclear & Coal parent with the genuinely-correct Uranium
+      // industry; LIT (lithium/battery supply chain) isn't auto manufacturers;
+      // AIQ doesn't hold traditional ad agencies. Blocking the fallback per-
+      // industry (not per-parent-theme) here so the still-good matches under
+      // the same parent — Uranium/URA, Internet Content & Information/AIQ —
+      // keep working.
+      const NO_PROXY_FALLBACK = new Set([
+        "asset management", "banks - diversified", "banks - regional", "capital markets",
+        "credit services", "financial conglomerates", "financial data & stock exchanges", "mortgage finance",
+        "auto manufacturers", "auto parts",
+        "advertising agencies",
+        "coking coal", "thermal coal",
+      ]);
+      const blocked = NO_PROXY_FALLBACK.has(itemName.toLowerCase());
       const parentTheme = industryRankings.find(i => i.name?.toLowerCase() === itemName.toLowerCase())?.parent_theme;
       const directEtf = THEME_ETF_MAP[itemName];
-      const etfTicker = directEtf || (parentTheme && THEME_ETF_MAP[parentTheme]);
+      const etfTicker = blocked ? null : (directEtf || (parentTheme && THEME_ETF_MAP[parentTheme]));
       const holdings = etfTicker ? (etfHoldings[etfTicker] ?? []) : [];
       // Only when the ETF came from the broader PARENT theme (not the clicked
       // item's own name) does the badge need to say so — otherwise "BOTZ ETF"
