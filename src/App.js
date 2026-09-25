@@ -12766,6 +12766,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
   const containerRef = useRef(null);
   const chartRef = useRef(null);
   const [status, setStatus] = useState(TV_PROXY_URL ? "loading" : "no-proxy");
+  const [legend, setLegend] = useState(null); // { o,h,l,c,vol,chg,time } — crosshair bar, or latest bar when idle
 
   // body { zoom: 1.15 } (index.css) causes Lightweight Charts to read mouse
   // coordinates in post-zoom visual px while its canvas coordinate space is
@@ -12831,6 +12832,26 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
           s.setData(buildLineData(_emaSeries(closes, cfg.period)));
         });
 
+        // OHLC + %chg legend: shows the hovered bar while the crosshair is
+        // over the chart, falls back to the latest bar otherwise (%chg vs
+        // the prior bar's close, same convention as the rest of the app).
+        const byTime = new Map(data.map((b, i) => [b.time, i]));
+        const legendFor = i => {
+          if (i < 0) return null;
+          const b = data[i];
+          const prevClose = i > 0 ? data[i - 1].close : null;
+          return {
+            o: b.open, h: b.high, l: b.low, c: b.close, vol: b.volume, time: b.time,
+            chg: prevClose ? ((b.close - prevClose) / prevClose) * 100 : null,
+          };
+        };
+        setLegend(legendFor(data.length - 1));
+        chart.subscribeCrosshairMove(param => {
+          if (!param.time) { setLegend(legendFor(data.length - 1)); return; }
+          const i = byTime.get(param.time);
+          if (i != null) setLegend(legendFor(i));
+        });
+
         chart.timeScale().fitContent();
         setStatus("ready");
       })
@@ -12839,16 +12860,34 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
     return () => {
       cancelled = true;
       if (chartRef.current) { chartRef.current.remove(); chartRef.current = null; }
+      setLegend(null);
     };
   }, [ticker, timeframe]);
 
+  const fmtPx = v => v == null ? "—" : v.toFixed(v >= 1000 ? 0 : 2);
+
   return (
     <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-lg overflow-hidden">
-      <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
-        className="flex items-baseline gap-1.5 px-2 py-1 text-[11px] font-mono font-bold text-cyan-400 hover:text-cyan-300 border-b border-zinc-800/60">
-        <span>{ticker}</span>
-        {category && <span className="text-zinc-500 font-sans font-normal truncate">{category}</span>}
-      </a>
+      <div className="flex items-baseline gap-1.5 px-2 py-1 border-b border-zinc-800/60 overflow-hidden">
+        <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
+          className="flex items-baseline gap-1.5 text-[11px] font-mono font-bold text-cyan-400 hover:text-cyan-300 flex-shrink-0 min-w-0">
+          <span>{ticker}</span>
+          {category && <span className="text-zinc-500 font-sans font-normal truncate max-w-[80px]">{category}</span>}
+        </a>
+        {legend && status === "ready" && (
+          <div className="flex items-baseline gap-1 text-[10px] font-mono ml-auto flex-shrink-0 whitespace-nowrap overflow-hidden">
+            <span className="text-zinc-500">O</span><span className="text-zinc-300">{fmtPx(legend.o)}</span>
+            <span className="text-zinc-500">H</span><span className="text-zinc-300">{fmtPx(legend.h)}</span>
+            <span className="text-zinc-500">L</span><span className="text-zinc-300">{fmtPx(legend.l)}</span>
+            <span className="text-zinc-500">C</span><span className="text-zinc-300">{fmtPx(legend.c)}</span>
+            {legend.chg != null && (
+              <span className={legend.chg >= 0 ? "text-emerald-400" : "text-red-400"}>
+                {legend.chg >= 0 ? "+" : ""}{legend.chg.toFixed(2)}%
+              </span>
+            )}
+          </div>
+        )}
+      </div>
       <div className={`relative ${onExpand ? "cursor-zoom-in" : ""}`} style={{ height, zoom: 1 / bodyZoom }} onClick={onExpand || undefined}>
         <div ref={containerRef} style={{ width: "100%", height: "100%" }}/>
         {status === "loading" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[10px]">Loading…</div>}
