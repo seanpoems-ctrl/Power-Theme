@@ -5920,7 +5920,13 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
               {/* ── Existing trades ── */}
               {visible.length === 0 ? (
                 <tr><td colSpan={15} className="py-12 text-center text-zinc-600 text-[12px] italic">No trades yet — click "+ Add Trade" to begin</td></tr>
-              ) : sortedVisible.map(t => (
+              ) : sortedVisible.map(t => {
+                // A trade still open (no exit_price) with even ONE exit fill
+                // has been partially sold — that's exactly as important to
+                // surface as a multi-fill averaged exit, just gated at a
+                // lower fill count since there's nothing to average yet.
+                const showExitBreakdown = t.exit_fills?.length > 1 || (!t.exit_price && t.exit_fills?.length > 0);
+                return (
                 <React.Fragment key={t.id}>
                 <tr className={`border-b border-zinc-800/30 transition-colors ${selectedIds.has(t.id) ? "bg-blue-500/10" : rowBg(t)}`}>
                   <td className="px-2 py-2">
@@ -5966,7 +5972,12 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">
                     {t.exit_price ? `$${t.exit_price}` : <span className="text-blue-400 text-[11px]">Open</span>}
-                    {t.exit_fills?.length > 1 && <span className="ml-1 text-[9px] text-zinc-600">avg ×{t.exit_fills.length}</span>}
+                    {t.exit_price && t.exit_fills?.length > 1 && <span className="ml-1 text-[9px] text-zinc-600">avg ×{t.exit_fills.length}</span>}
+                    {!t.exit_price && t.exit_fills?.length > 0 && (
+                      <span className="ml-1 text-[9px] font-semibold text-amber-400" title="Some shares already sold — remaining shares still open">
+                        Partial{t.exit_fills.length > 1 ? ` ×${t.exit_fills.length}` : ""}
+                      </span>
+                    )}
                     {t.exit_price && (
                       <>
                         {" "}<InlineText value={t.exit_date} onChange={v => updateField(t.id, "exit_date", v)} placeholder="exit date" cls="text-zinc-600"/>
@@ -6004,7 +6015,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                     <InlineText value={t.notes} onChange={v => updateField(t.id, "notes", v)} placeholder="Add notes…"/>
                   </td>
                 </tr>
-                {(t.entry_fills?.length > 1 || t.exit_fills?.length > 1) && (
+                {(t.entry_fills?.length > 1 || showExitBreakdown) && (
                   <tr className="border-b border-zinc-800/30 bg-zinc-900/40">
                     {/* Empty cells for ✕/checkbox/Date/Ticker/Theme, so the
                         breakdowns below land directly under the Entry/Exit
@@ -6016,7 +6027,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                       ))}
                     </td>
                     <td className="px-2 py-2 align-top text-[11px] font-mono">
-                      {t.exit_fills?.length > 1 && t.exit_fills.map((f, i) => {
+                      {showExitBreakdown && t.exit_fills.map((f, i) => {
                         const entryRef = parseFloat(t.entry_price);
                         const favorable = t.side === "short" ? parseFloat(f.price) < entryRef : parseFloat(f.price) > entryRef;
                         return (
@@ -6030,7 +6041,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                   </tr>
                 )}
                 </React.Fragment>
-              ))}
+              );})}
             </tbody>
           </table>
         </div>
