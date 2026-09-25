@@ -3178,6 +3178,24 @@ function saveNotebook(arr) {
   try { localStorage.setItem(NOTEBOOK_KEY, JSON.stringify(arr)); } catch { /* quota */ }
 }
 
+// ── IBKR execution ledger — persistent, append-only record of every raw fill
+// ever imported (separate from the derived `trades` array). 2026-09-25 fix:
+// grouping trades per-CSV-file (the original design) breaks the moment a
+// position opened in one import closes in a later one — that file has no
+// record of the earlier buy, so the closing sell reads as a brand-new
+// opposite-side position instead of closing the existing one. Matches
+// industry practice (e.g. TraderSync: https://tradersync.com/topics/trade-grouping/)
+// of treating raw executions as the permanent source of truth and re-deriving
+// trades from the COMPLETE history on every sync, not per-batch.
+const EXECS_KEY = "power_theme_journal_execs";
+function loadExecs() {
+  try { return JSON.parse(localStorage.getItem(EXECS_KEY) || "[]"); } catch { return []; }
+}
+function saveExecs(arr) {
+  try { localStorage.setItem(EXECS_KEY, JSON.stringify(arr)); } catch { /* quota */ }
+}
+function _execSig(e) { return `${e.symbol}|${e.date}|${e.time}|${e.qty}|${e.price}`; }
+
 const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 function calcDerived(t) {
@@ -3276,7 +3294,12 @@ function _repairIbkrDateTimeField(value) {
   const [, y, mo, d, hh, mm] = m;
   return { date: `${y}-${mo}-${d}`, time: `${hh}:${mm}` };
 }
-function parseIbkrTrades(csvText, categoryThemeMap = {}) {
+// Parses IBKR's Activity Statement CSV into raw per-execution fills only —
+// no trade grouping here. Callers merge these into the persistent execution
+// ledger (EXECS_KEY) and re-derive trades from the FULL history via
+// deriveIbkrTrades below, rather than grouping per-file (see that function's
+// comment for why per-file grouping silently produced phantom positions).
+function parseIbkrExecutions(csvText) {
   const lines = csvText.split(/\r?\n/);
   let header = null;
   const execs = [];
@@ -3328,14 +3351,36 @@ function parseIbkrTrades(csvText, categoryThemeMap = {}) {
       }
     }
   }
-  if (!execs.length) return { trades: [], skipped: flat ? 0 : -1 };
+  return { execs, skipped: execs.length ? 0 : (flat ? 0 : -1) };
+}
 
+// Groups a FULL execution history (per ticker) into journal trade rows,
+// flat-to-flat: a new trade starts right after the running position returns
+// to exactly zero. This MUST be called with the complete execution ledger,
+// not a single import's rows — the original bug (2026-09-25) grouped
+// per-file, so a position opened in an earlier import and closed in a later
+// one had no shared execution list to reconcile against: the later file's
+// closing fill had nothing to close and silently became a phantom new
+// position on the opposite side (reported as ARM/PLTU showing duplicate
+// long+short "open" rows, and a fully-closed ZETA still showing open).
+// Matches industry practice — e.g. TraderSync groups the same way, over the
+// complete synced execution history: https://tradersync.com/topics/trade-grouping/
+//
+// A segment that never returns to flat (still open) can still contain
+// partial-exit fills (scaled out but not flat). `shares` reflects the net
+// REMAINING open size (entered minus exited) — the previous min(entered,
+// exited) understated an open position's size the moment it had ANY partial
+// exit (e.g. bought 10, sold 3: old code showed shares=3 instead of the
+// actual 7 still held). exit_price/exit_date stay blank for an open trade
+// (no unrealized-P&L support), but exit_fills are still populated so the
+// fill history/chart markers show the partial exit.
+function deriveIbkrTrades(execs, categoryThemeMap = {}) {
   const bySymbol = {};
   for (const e of execs) (bySymbol[e.symbol] ||= []).push(e);
 
   const trades = [];
   for (const [symbol, list] of Object.entries(bySymbol)) {
-    list.sort((a, b) => `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`));
+    const sorted = [...list].sort((a, b) => `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`));
     let running = 0, segBuys = [], segSells = [], segStart = null, segStartTime = null, segLastDate = null, segLastTime = null;
     const flush = (isOpen) => {
       if (!segBuys.length && !segSells.length) return;
@@ -3345,6 +3390,7 @@ function parseIbkrTrades(csvText, categoryThemeMap = {}) {
       const entrySide = longFirst ? segBuys : segSells;
       const exitSide  = longFirst ? segSells : segBuys;
       const entryAvg = wavg(entrySide), exitAvg = wavg(exitSide);
+      const entryQty = sumQty(entrySide), exitQty = sumQty(exitSide);
       trades.push({
         ...EMPTY_TRADE,
         id: newId(),
@@ -3357,18 +3403,19 @@ function parseIbkrTrades(csvText, categoryThemeMap = {}) {
         side: longFirst ? "long" : "short",
         entry_price: entryAvg != null ? entryAvg.toFixed(2) : "",
         exit_price: isOpen || exitAvg == null ? "" : exitAvg.toFixed(2),
-        shares: Math.round(Math.min(sumQty(segBuys), sumQty(segSells)) || sumQty(entrySide)),
+        shares: Math.round(isOpen ? Math.max(entryQty - exitQty, 0) : (Math.min(entryQty, exitQty) || entryQty)),
         // Individual fill prices rounded to 2dp for display (IBKR's raw
         // per-execution prices can carry many decimal places, e.g.
         // 166.834197531) — the weighted average above is still computed
         // from the unrounded prices, this is purely cosmetic.
         entry_fills: entrySide.map(e => ({ date: e.date, time: e.time, price: +e.price.toFixed(2), qty: Math.abs(e.qty) })),
-        exit_fills: isOpen ? [] : exitSide.map(e => ({ date: e.date, time: e.time, price: +e.price.toFixed(2), qty: Math.abs(e.qty) })),
+        exit_fills: exitSide.map(e => ({ date: e.date, time: e.time, price: +e.price.toFixed(2), qty: Math.abs(e.qty) })),
         notes: "Imported from IBKR",
+        _ibkr: true,
       });
       segBuys = []; segSells = []; segStart = null; segStartTime = null; segLastDate = null; segLastTime = null;
     };
-    for (const e of list) {
+    for (const e of sorted) {
       if (segStart === null) { segStart = e.date; segStartTime = e.time; }
       segLastDate = e.date; segLastTime = e.time;
       if (e.qty > 0) segBuys.push(e); else segSells.push(e);
@@ -3378,7 +3425,7 @@ function parseIbkrTrades(csvText, categoryThemeMap = {}) {
     if (Math.abs(running) > 1e-9) flush(true);
   }
 
-  return { trades: trades.map(calcDerived).sort((a, b) => (b.date || "").localeCompare(a.date || "")), skipped: 0 };
+  return trades.map(calcDerived).sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 }
 
 const STOP_OPTS = ["ATR", "LOD", "Manual"];
@@ -4973,40 +5020,72 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = () => {
-      const { trades: rawParsed, skipped } = parseIbkrTrades(String(reader.result || ""), categoryThemeMap);
+      const { execs: newExecs, skipped } = parseIbkrExecutions(String(reader.result || ""));
       if (skipped === -1) { setImportMsg("Couldn't find a Trades table in this file — export the Activity Statement as CSV from IBKR's Reports page."); return; }
-      const parsed = rawParsed.map(t => t.theme ? t : { ...t, theme: resolveTheme(t.ticker) });
-      const sigOf = t => `${t.ticker}|${t.date}|${t.exit_date}|${t.entry_price}|${t.exit_price}|${t.shares}`;
-      const bySig = new Map(parsed.map(t => [sigOf(t), t]));
+      if (!newExecs.length) { setImportMsg("No executions found in this file."); return; }
 
-      // Re-uploading a statement also repairs already-imported trades that
-      // predate the entry_fills/exit_fills feature (or were imported before
-      // this fix) — they matched on the dedup signature so got skipped as
-      // "already imported" and never picked up the per-fill breakdown.
-      // Only touches the fills arrays; every other field stays as-is.
-      let repaired = 0;
-      const matchedSigs = new Set();
-      const patched = trades.map(t => {
-        const sig = sigOf(t);
-        const match = bySig.get(sig);
-        if (!match) return t;
-        matchedSigs.add(sig);
-        const needsRepair = (t.entry_fills?.length || 0) <= 1 && (t.exit_fills?.length || 0) <= 1;
-        const hasNewFills = (match.entry_fills?.length || 0) > 1 || (match.exit_fills?.length || 0) > 1;
-        if (!needsRepair || !hasNewFills) return t;
-        repaired++;
-        return { ...t, entry_fills: match.entry_fills, exit_fills: match.exit_fills };
-      });
-      const fresh = parsed.filter(t => !matchedSigs.has(sigOf(t)));
-      if (fresh.length || repaired) persist([...fresh, ...patched]);
-      const closedCount = fresh.filter(t => t.exit_price).length;
-      const openCount = fresh.length - closedCount;
-      const dupes = parsed.length - fresh.length - repaired;
+      // Merge into the persistent execution ledger (dedupe by symbol+date+
+      // time+qty+price) so a position opened in an earlier import and closed
+      // in this one reconciles correctly — see deriveIbkrTrades for why this
+      // has to run over the FULL execution history, not just this file.
+      const execMap = new Map(loadExecs().map(x => [_execSig(x), x]));
+      let newExecCount = 0;
+      for (const x of newExecs) {
+        const sig = _execSig(x);
+        if (!execMap.has(sig)) newExecCount++;
+        execMap.set(sig, x);
+      }
+      const mergedExecs = [...execMap.values()];
+      saveExecs(mergedExecs);
+
+      // Re-derive every IBKR trade from the complete execution history, then
+      // reconcile against the previously-derived rows so user edits (theme,
+      // setup, grade, notes, stop) survive. Matched by (ticker, date,
+      // entry_time) — stable across re-derivation, since appending newer
+      // executions never moves an earlier segment's start.
+      //
+      // Migration safety: trades imported before this fix have no `_ibkr`
+      // flag, and their raw fills were never captured into the ledger (it
+      // starts empty). If this import's file doesn't happen to touch one of
+      // those old positions, deriveIbkrTrades has no way to reproduce it —
+      // so rather than replacing "all old IBKR trades" wholesale (which
+      // would silently delete anything not mentioned in this file), only
+      // trades that freshIbkr actually finds a match for get updated in
+      // place; everything else in the journal is left completely untouched.
+      const legacyIbkr = t => t._ibkr || t.notes === "Imported from IBKR";
+      const freshIbkr = deriveIbkrTrades(mergedExecs, categoryThemeMap)
+        .map(t => t.theme ? t : { ...t, theme: resolveTheme(t.ticker) });
+      const oldIbkrByKey = new Map(
+        trades.filter(legacyIbkr).map(t => [`${t.ticker}|${t.date}|${t.entry_time}`, t])
+      );
+      let added = 0, closed = 0, updated = 0;
+      const byId = new Map(trades.map(t => [t.id, t]));
+      for (const fresh of freshIbkr) {
+        const key = `${fresh.ticker}|${fresh.date}|${fresh.entry_time}`;
+        const old = oldIbkrByKey.get(key);
+        if (!old) { added++; byId.set(fresh.id, fresh); continue; }
+        const merged = calcDerived({
+          ...fresh,
+          id: old.id,
+          theme: old.theme || fresh.theme,
+          setup: old.setup,
+          grade: old.grade,
+          notes: old.notes,
+          stop_used: old.stop_used,
+          stop_price: old.stop_price,
+        });
+        if (!old.exit_date && merged.exit_date) closed++;
+        else if (JSON.stringify(old) !== JSON.stringify(merged)) updated++;
+        byId.set(old.id, merged);
+      }
+      persist([...byId.values()]);
+
       const parts = [];
-      if (fresh.length) parts.push(`imported ${fresh.length} trade${fresh.length === 1 ? "" : "s"} (${closedCount} closed, ${openCount} open)`);
-      if (repaired) parts.push(`repaired fill data for ${repaired} existing trade${repaired === 1 ? "" : "s"}`);
-      if (dupes > 0 && !parts.length) parts.push(`no changes — all ${parsed.length} matched trades already in your journal with fill data`);
-      setImportMsg(parts.length ? `${parts.join("; ")}.` : "No matching trades found in this file.");
+      if (newExecCount) parts.push(`${newExecCount} new execution${newExecCount === 1 ? "" : "s"} synced`);
+      if (added) parts.push(`${added} new trade${added === 1 ? "" : "s"}`);
+      if (closed) parts.push(`${closed} newly closed`);
+      if (updated) parts.push(`${updated} updated`);
+      setImportMsg(parts.length ? `${parts.join(", ")}.` : "No changes — this file's executions are already fully reconciled.");
     };
     reader.onerror = () => setImportMsg("Couldn't read that file.");
     reader.readAsText(file);
