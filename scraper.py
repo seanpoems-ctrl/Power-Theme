@@ -1294,6 +1294,16 @@ def _fetch_market_indicators_yfinance(ticker: str, breadth: float | None = None)
         hist = yf.Ticker(ticker).history(period="1y", interval="1d")
         if hist.empty or len(hist) < 50:
             return {}
+        # Drop any row with a NaN close BEFORE truncating to the target session.
+        # Yahoo can return a not-yet-fully-backfilled row for the most recent
+        # session for a couple hours after the 4PM close (observed: CI runs at
+        # 6:45pm ET got price=NaN for SPY/QQQ/IWM, which then silently poisoned
+        # the whole market_condition.spy/qqq payload with nulls). Dropping NaN
+        # rows first means closes[-1] naturally falls back to the last
+        # genuinely-valid close instead of propagating NaN.
+        hist = hist[hist["Close"].notna()]
+        if hist.empty or len(hist) < 50:
+            return {}
         target = _last_completed_session(datetime.now(ZoneInfo("America/New_York")))
         hist = hist[hist.index.date <= target]
         if hist.empty or len(hist) < 50:

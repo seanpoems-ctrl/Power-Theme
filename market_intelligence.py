@@ -47,8 +47,17 @@ TELEGRAM_CHAT  = os.getenv("TELEGRAM_CHAT_ID", "")
 
 # ── Data Fetching ──────────────────────────────────────────────────────────────
 
-def _dl(sym: str, period: str = "5d") -> object:
-    """yfinance download with flattened columns."""
+def _dl(sym: str, period: str = "10d") -> object:
+    """yfinance download with flattened columns.
+
+    Default bumped from 5d to 10d (2026-09-25): fetch_market_ohlc/
+    fetch_global_indices only need the latest 2 valid closes, but yfinance can
+    return a NaN/incomplete row for the most recent session for a couple hours
+    after close (dropna() below already strips it) -- a 5-day window left too
+    little buffer, so losing even 1-2 recent rows to this could push len(df)
+    below 2 and silently null out SPY/QQQ/VIX/Nikkei/DAX/FTSE entirely. 10d
+    gives comfortable headroom while staying a cheap fetch.
+    """
     import pandas as pd
     df = yf.download(sym, period=period, interval="1d",
                      progress=False, auto_adjust=True)
