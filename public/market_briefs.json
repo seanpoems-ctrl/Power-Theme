@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-24 23:14 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Signals / Defensive Posture",
+    "spy_price": 767.18,
+    "spy_change_pct": -0.08,
+    "vix": 15.67,
+    "hy_oas": 2.73,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 31.2,
+    "mmth": 50.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Microsoft announced a significant breakthrough in quantum computing integration for its Azure cloud services, promising substantial enterprise efficiency gains."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Amazon Web Services (AWS) secured a multi-billion dollar government cloud computing contract, significantly boosting its public sector revenue outlook."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continues to benefit from the sustained, broad-based demand for AI chips and data center infrastructure, driving consistent institutional flows."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-24 22:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA continues to benefit from recycled bullish sentiment and technical strength following recent analyst upgrades, absent new fundamental catalysts today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-04 10:54 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Mixed / Cautious Accumulation",
-    "spy_price": 769.82,
-    "spy_change_pct": -0.43,
-    "vix": 14.1,
-    "hy_oas": 2.65,
-    "yield_curve": 0.43,
-    "credit_status": "Complacent",
-    "s5fi": 52.1,
-    "mmth": 68.3,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "IOT",
-          "company": "Samsara Inc.",
-          "reason": "The company reported a significant earnings beat and raised its full-year guidance, driving strong pre-market buying interest."
-        },
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft is gapping up on news of a strategic partnership announcement in the generative AI space, signaling continued innovation and market leadership."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple is experiencing rotational selling after a period of strength, without any fresh fundamental catalyst driving price action today."
         }
       ]
     }
