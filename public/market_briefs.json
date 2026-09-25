@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-24 22:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Mixed Flows, Underlying Caution",
+    "spy_price": 767.18,
+    "spy_change_pct": -0.08,
+    "vix": 15.67,
+    "hy_oas": 2.73,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 31.2,
+    "mmth": 50.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Amazon announced a significant expansion of its AWS AI computing infrastructure, boosting sentiment for cloud and artificial intelligence investment."
+        },
+        {
+          "ticker": "CRM",
+          "company": "Salesforce, Inc.",
+          "reason": "Salesforce reported stronger-than-expected preliminary Q3 results and raised its full-year guidance, driven by robust enterprise software demand."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "NVIDIA continues to attract speculative interest ahead of an upcoming AI conference, driven by technical momentum rather than fresh fundamental news today."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-24 19:26 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "AAPL",
           "company": "Apple Inc.",
           "reason": "Apple is experiencing rotational selling after a period of strength, without any fresh fundamental catalyst driving price action today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-04 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Risk-On Momentum / Bullish Lift",
-    "spy_price": 773.17,
-    "spy_change_pct": 1.05,
-    "vix": 14.17,
-    "hy_oas": 2.66,
-    "yield_curve": 0.43,
-    "credit_status": "Complacent",
-    "s5fi": 54.6,
-    "mmth": 69.7,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple is set to unveil groundbreaking AI integration across its product ecosystem, with analysts projecting significant market share gains."
-        },
-        {
-          "ticker": "GOOGL",
-          "company": "Alphabet Inc.",
-          "reason": "Google Cloud secured a multi-year, multi-billion dollar AI infrastructure contract with a major government agency, signaling robust enterprise demand."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA continues to see strong investor interest following yesterday's analyst commentary on expanding AI data center demand, maintaining its upward trajectory based on flow."
         }
       ]
     }
