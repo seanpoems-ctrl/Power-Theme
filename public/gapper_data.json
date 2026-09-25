@@ -1,57 +1,354 @@
 {
-  "scan_time": "2026-09-24 08:55 ET",
+  "scan_time": "2026-09-25 08:55 ET",
   "earnings_today": [],
   "gappers": [
     {
-      "ticker": "FRVO",
-      "price": 18.3,
-      "gap_pct": 11.93,
-      "pm_volume": 306811,
-      "avg_vol_10d": 4846661,
-      "avg_dollar_vol": 88693896,
-      "mkt_cap": 4819378354,
-      "rvol": 0.57,
-      "adr_pct": 7.67,
-      "category": "Thematic Narratives",
-      "theme": "Geothermal Utility Scale Power Achievement",
-      "reasoning": "Fervo Energy's Cape Station project achieved first power, turning deep underground heat into grid power at utility scale for the first time.",
-      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
-      "conviction": 55,
+      "ticker": "AESI",
+      "price": 12.5,
+      "gap_pct": 13.74,
+      "pm_volume": 60366,
+      "avg_vol_10d": 2996607,
+      "avg_dollar_vol": 37457588,
+      "mkt_cap": 1373787954,
+      "rvol": 1.56,
+      "adr_pct": 5.35,
+      "category": "New Contract/Partnership",
+      "theme": "AI Data Center Power Deal",
+      "reasoning": "AESI secured a new contract to provide **283 megawatts** of power to an **AI lab data center** project, enhancing its energy services portfolio.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 78,
       "grade": "C",
-      "finviz_theme": "Clean Energy - Grid",
-      "analysis_source": "gemini",
+      "finviz_theme": "AI Energy",
+      "analysis_source": "gemini+edgar",
       "analysis_detail": {
-        "catalyst": "Fervo Energy's **Cape Station** project has successfully achieved **first power**, marking a significant milestone by turning **deep underground heat into grid power at utility scale for the first time**. This **Utah project** represents a breakthrough in geothermal energy.",
-        "impact": "This operational achievement validates Fervo's core technology, potentially unlocking future large-scale projects and establishing the company as a leader in advanced geothermal, attracting further investment and customer interest in this nascent but critical clean energy sector."
+        "catalyst": "Atlas Energy Solutions (AESI) announced a new **data center project** where an **AI lab** will serve as the intended power customer. The **AI lab** will also reimburse Atlas for **Caterpillar equipment** related to supplying **283 megawatts** of power.",
+        "impact": "This contract signifies AESI's strategic expansion into the high-growth AI infrastructure sector, potentially opening new revenue streams and diversifying its customer base beyond traditional energy."
       },
-      "analysis_details": "• **The Narrative**\nFervo Energy's **Cape Station** project has successfully achieved **first power**, a pivotal development that signals the company's capability to turn **deep underground heat into grid power at utility scale for the first time**. This **Utah project** is a significant innovation in clean energy, demonstrating the viability of geothermal technology to contribute meaningfully to the grid.\n\n• **Explosiveness**\nThis first-of-its-kind achievement at **utility scale** positions Fervo Energy as a potential leader in a new frontier of clean energy. The validation of its technology with a functional power delivery could drive strong momentum, attract substantial institutional interest, and potentially lead to an expansion of its project pipeline, especially given broader calls for reliable, baseload renewable energy sources.",
+      "analysis_details": "• **Impact**\nAtlas Energy Solutions (AESI) has secured a significant engagement, with an **AI lab** becoming the power customer for a dedicated **data center project**. This agreement includes the provision of **283 megawatts** of power, and the **AI lab** will reimburse AESI for **Caterpillar equipment** involved in this setup. This marks a notable entry or expansion for AESI into the rapidly growing AI infrastructure market.\n\n• **Strategic Value**\nThis new partnership positions AESI as a key infrastructure provider for the demanding power needs of artificial intelligence operations. By supplying **283 megawatts** to an **AI lab data center**, AESI is directly capitalizing on the burgeoning AI compute sector, which requires massive, reliable energy. This diversification into supporting high-growth tech could drive long-term value and momentum for the company, attracting new investor interest aligned with AI thematic narratives.",
       "peer_tickers": [],
       "leverage_etfs": [],
       "inverse_etfs": [],
       "headlines": [
         {
-          "title": "Fervo Energy Company (FRVO) Faces Investor Scrutiny Amid Post-IPO Transmission Curtailment Revelation – HBSS - GlobeNewswire",
+          "title": "Atlas Energy Solutions Inc. (AESI) Latest Stock News & Headlines - Yahoo Finance - Yahoo! Finance Canada",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMijAJBVV95cUxOTkYzdmVwZy1oQTZkdU5mOFpkLVE5c1hwS0Y4NnZSdVVHOUwwZ0JRMFdoNGpWb3pZMnBzOEgyTHRodkw2STlkU0ZIWExZdVlEcjdqRnM2UDBUY0F4V2hOd0hYX1VXTlVpeEh0R24weTlmdGtpNXplWVhJQWpBVUlPN0hGdlVMdWh6RV93eWlCWDhodndGTHhOajJQbUZYT2hXNTlUMGc5T0FEVjlkX3BxZmRmOXRGRF9wTWhmcmFWQld1REtDSUdEYlllRTVIc0hXYW90S25mMFJKeG14bmJLc2VNX01PWkNwWjkwWVdJQzA2WF9CalQ2ZjAyeWVwalk2WDQ0N2FCZjNyZnhu?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE9jWUwzTXpudWlUcHBwTE1ZTVZScC1tMnVhNGRvZ21vUmJDdzdEUjlGRUxuX2MtazdTc2N6ckE2TDZ3eFExVHJMazh1NDQ5bnV0a0NUeVIxYVQ?oc=5"
         },
         {
-          "title": "Fervo Energy stock rises after Cape Station achieves first power By Investing.com - Investing.com Nigeria",
+          "title": "An AI lab is the intended power customer for a separate Atlas Energy Solutions (AESI) data center project. - stocktitan.net",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPa09fYnRiQVB1ektVemRnR1F6V1RnTm1VQ2w4TjBtZHNOeGlncFpaMHNYdTVwaWI3TG0yYVJjcE9PQmlGeVVyQlhOY2VXdFl1blFkU0E3ZmVrbE1PWVhmYmlYcFVFRTVBaFY2dExXdTBQRElaTUs2QmhVeDdpclRVMHp1b28tLWhwUkxlYXY3bTFSTGEtT25jMk0wS05CbEVxZ0pfYUhxUUVpbmplejBhOEdTbExfWFZ2WVZzT0dGTEgycnM?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQY2pveWZ1LUV0VFJyZWVmX1FBRy1TQnRObU1BWEs0c2RNY3ljeG1fbldQRGFPV0JwY1NDMHVEVVowV1FRcjdDWng4M2Y0MGtiZmFpX05MQ1hVWTZZNUotN0RBOG1vdmZ3WE5WZEhQcWdVUHJrWlJxbFZSREpiNW5ERWMyTFZCbjV0Q005T2FTbVJwUS1WWWFGanYyUi02ekptQW4tMHY5YWdaUFZoaDBobEtZQVVBUQ?oc=5"
         },
         {
-          "title": "A Utah project turns deep underground heat into grid power at utility scale for the first time. - stocktitan.net",
+          "title": "An AI lab will reimburse Atlas for Caterpillar equipment tied to 283 megawatts of power. - stocktitan.net",
           "source": "Google News",
-          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxObHVNbTd5NE9yTmxxU2RuWlp1YnFXZnpvTERsbk4yakRTNG1XbzVSNFJnNjFpU1F4TDZacFZCd0tPaVBsOVFUWnFTaTlEQzZVTGhKWEV5TVVKb0RET1lwUS1VSEp0VlozTWNrcXR0LVlVaGZqcHUydW1lcjFFYW5ORGQwbkVpMHFvdXByNTBESW0tRmhmUHRLb3doTjF3aUlmRjYwa0hfNXlnbXdaeGdncEVjYVdUQVRVZzVlRV96RQ?oc=5"
+          "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPUnQ0dkJxcFdSLWFIcG1wU2llVVdiWFVxRTdMTHF2VVpnNlJwTTgwdnhoQTdtS2lXN09tV0NIVnVCSkRoMDlfaTh0YkE0RGhPUFpzWktlZ0IxREdraWM2a3BOMXZtUDRqSHp3dXk3aG1NTGk1bS1EZWVJZ2N1ZVpSQXpzQkpfOUstSGZfNF8xVWZKYzZvemg4TDNhaW9zYWxJeHlFeG5oUTFBQnNUa0lLQnNUYjN2MllJ?oc=5"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-09-25",
+        "form": "8-K",
+        "items": [
+          "7.01",
+          "8.01",
+          "9.01"
+        ],
+        "category": "Others",
+        "label": "Item 9.01",
+        "url": "https://www.sec.gov/Archives/edgar/data/1984060/000119312526401582/aesi-20260925.htm"
+      },
+      "float_shares": "80.10M",
+      "short_float": "29.97%",
+      "daily_pct": 15.56,
+      "prev_close": 10.99,
+      "industry": "AI Energy",
+      "technical_status": "Fail (Avg $Vol $37M < $100M)",
+      "verification": {
+        "status": "Discrepancy",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "283 megawatts",
+        "discrepancy_note": "Source A (Finviz) has no information regarding 283 megawatts. Source B (Google News) entry [2] mentions '283 megawatts' explicitly, but not both primary sources confirm it."
+      },
+      "gates_passed": 3,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "AKAM",
+      "price": 123.87,
+      "gap_pct": 12.19,
+      "pm_volume": 918019,
+      "avg_vol_10d": 4164022,
+      "avg_dollar_vol": 515797405,
+      "mkt_cap": 15867751852,
+      "rvol": 1.12,
+      "adr_pct": 4.58,
+      "category": "New Contract/Partnership",
+      "theme": "Akamai signs major AI Cloud deal with Anthropic",
+      "reasoning": "Akamai secured an **$11.6B** **seven-year** AI Cloud deal with **Anthropic**, driving stock **+20% after-hours**.",
+      "hypothesis": "High Conviction (Gap & Go) — Watch for 5-min ORB above PM High.",
+      "conviction": 77,
+      "grade": "A+",
+      "finviz_theme": "AI Cloud",
+      "analysis_source": "gemini+edgar",
+      "analysis_detail": {
+        "catalyst": "Akamai Technologies (AKAM) and artificial intelligence model maker **Anthropic** announced an **$11.6 billion**, **seven-year** agreement for **computing infrastructure** and **Cloud services**. This agreement has options to expand by an additional **$9 billion**, potentially bringing the total commitment to **$20 billion**. Akamai issued Anthropic stock warrants for up to roughly **5%** of its common stock, tied to performance and expansion.",
+        "impact": "This landmark deal represents a structural change for Akamai, establishing it as a key infrastructure provider in the rapidly expanding AI sector. It signals a substantial, long-term revenue stream and validates Akamai's distributed cloud capabilities."
+      },
+      "analysis_details": "• **Impact**\nAkamai Technologies has secured an initial **seven-year agreement** with **Anthropic** for **$11.6 billion** for **Akamai Cloud services**. This landmark deal, which drove **AKAM stock +20% after-hours**, includes options to scale up to **$20 billion** and involves Akamai issuing **Anthropic stock warrants** for up to roughly **5%** of its common stock.\n\n• **Strategic Value**\nThis agreement positions Akamai as a critical infrastructure provider for a leading **artificial intelligence model maker**, validating its distributed cloud capabilities for **AI computing**. The significant revenue commitment, potentially reaching **$20 billion**, solidifies Akamai's long-term growth trajectory within the high-growth AI infrastructure market.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "AKAM Stock Soars 20% After-Hours  Akamai Lands $11.6B AI Cloud Deal With Anthropic",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/akam-stock-soars-20-hours-220330880.html"
+        },
+        {
+          "title": "Akamai Stock Surges On Anthropic AI Computing Agreement",
+          "source": "Finviz",
+          "url": "https://www.investors.com/news/technology/akamai-stock-akam-surges-anthropic-artificial-intelligence-computing?mod=IBD_FV"
+        },
+        {
+          "title": "Anthropic to Pay Akamai Technologies $11.6 Billion Over Seven Years for Cloud Services",
+          "source": "Finviz",
+          "url": "https://www.wsj.com/tech/anthropic-to-pay-akamai-technologies-11-6-billion-over-seven-years-for-cloud-services-7a55360b?mod=wsj_FV"
+        }
+      ],
+      "edgar_filing": {
+        "filing_date": "2026-09-24",
+        "form": "8-K",
+        "items": [
+          "1.01",
+          "3.02",
+          "5.03",
+          "7.01",
+          "9.01"
+        ],
+        "category": "New Contract/Partnership",
+        "label": "Material Contract or Agreement",
+        "url": "https://www.sec.gov/Archives/edgar/data/1086222/000119312526401048/d288154d8k.htm"
+      },
+      "float_shares": "140.50M",
+      "short_float": "13.38%",
+      "daily_pct": 14.44,
+      "prev_close": 110.41,
+      "industry": "AI Cloud",
+      "technical_status": "Pass",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 100,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "$11.6B",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 5,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": true,
+        "gate_dollar_vol": true,
+        "gate_mkt_cap": true,
+        "gate_adr": true
+      },
+      "meets_all_gates": true,
+      "tier": "T1",
+      "tier_label": "Major Catalyst"
+    },
+    {
+      "ticker": "PRME",
+      "price": 3.39,
+      "gap_pct": 10.42,
+      "pm_volume": 241280,
+      "avg_vol_10d": 3197941,
+      "avg_dollar_vol": 10841020,
+      "mkt_cap": 556826953,
+      "rvol": 1.01,
+      "adr_pct": 6.88,
+      "category": "FDA",
+      "theme": "FDA IND Clearance",
+      "reasoning": "Prime Medicine surged after the FDA cleared its Investigational New Drug (IND) application for PM647, a gene-editing therapy.",
+      "hypothesis": "High Risk (Volatility Trap) — Expect 2nd-half mean reversion; avoid open chase.",
+      "conviction": 22,
+      "grade": "C",
+      "finviz_theme": "Biotech - Gene Therapy",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Prime Medicine (PRME) announced the **U.S. FDA clearance** of its **Investigational New Drug (IND)** application for **PM647**. This therapy is an **in vivo gene editing therapy** specifically targeting **Alpha-1 Antitrypsin Deficiency**.",
+        "impact": "This clearance allows PRME to advance **PM647** into clinical trials, significantly de-risking the development pathway and opening a new potential market for its gene-editing platform."
+      },
+      "analysis_details": "• **The Drug**\nPrime Medicine announced the **U.S. FDA clearance** of its **Investigational New Drug (IND)** application for **PM647**. This drug is described as an **in vivo gene editing therapy** designed to treat **Alpha-1 Antitrypsin Deficiency**. Prime Medicine stock reacted by surging over **12%** in after-hours trading following this news.\n\n• **The Significance**\nThis **FDA IND clearance** is a critical regulatory milestone, enabling Prime Medicine to initiate human clinical trials for **PM647**. This development validates the company's gene-editing platform and provides a clear pathway for potential market entry in the **Alpha-1 Antitrypsin Deficiency** therapeutic area, which is a significant step in its pipeline progression.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Prime Medicine stock surges on FDA IND clearance",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/healthcare/articles/prime-medicine-stock-surges-fda-204747789.html"
+        },
+        {
+          "title": "Prime Medicine Announces U.S. FDA Clearance of Investigational New Drug Application for PM647 in Alpha-1 Antitrypsin Deficiency",
+          "source": "Finviz",
+          "url": "/news/395375/prime-medicine-announces-us-fda-clearance-of-investigational-new-drug-application-for-pm647-in-alpha-1-antitrypsin-deficiency"
+        },
+        {
+          "title": "Anthropic AI Discovery Gene-Editing Stocks Falling",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/anthropic-ai-discovery-gene-editing-124644338.html"
         }
       ],
       "edgar_filing": null,
-      "float_shares": "182.53M",
-      "short_float": "7.39%",
-      "daily_pct": 10.16,
-      "prev_close": 16.35,
-      "industry": "Clean Energy - Grid",
-      "technical_status": "Fail (Avg $Vol $89M < $100M)",
+      "float_shares": "95.37M",
+      "short_float": "33.69%",
+      "daily_pct": 10.46,
+      "prev_close": 3.07,
+      "industry": "Biotech - Gene Therapy",
+      "technical_status": "Fail (Avg $Vol $11M < $100M)",
+      "verification": {
+        "status": "Verified",
+        "confidence_score": 95,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "FDA cleared its Investigational New Drug (IND) application for PM647",
+        "discrepancy_note": ""
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "GENI",
+      "price": 6.16,
+      "gap_pct": 6.21,
+      "pm_volume": 53261,
+      "avg_vol_10d": 8004438,
+      "avg_dollar_vol": 49307338,
+      "mkt_cap": 1610236558,
+      "rvol": 1.44,
+      "adr_pct": 6.13,
+      "category": "Others",
+      "theme": "Technical / Flow",
+      "reasoning": "GENI's stock movement is driven by technical factors as traders gauge the next move and liquidity around price events.",
+      "hypothesis": "Medium Conviction (RS Hold) — Monitor price action at open.",
+      "conviction": 58,
+      "grade": "C",
+      "finviz_theme": "Others",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Unknown",
+        "impact": "Speculative. Recent headlines indicate GENI's stock is experiencing a **pullback** as **traders gauge next moves**, alongside **liquidity mapping around price events**. This points to market mechanics and technical trading influencing price. High risk of Gap and Trap due to lack of fundamental news."
+      },
+      "analysis_details": "• **What Happened**\nNews headlines indicate **GENI Stock Pulls Back** as **traders gauge next move**, suggesting a period of price consolidation or decline. Furthermore, there is discussion around **Liquidity Mapping Around (GENI) Price Events**, highlighting the technical and market structure focus of recent activity.\n\n• **Key Consideration**\nWithout specific fundamental news, GENI's price action appears to be driven by technical analysis and market flow. The **pullback** and focus on **liquidity mapping** suggest traders are reassessing positions and looking for chart-based signals, increasing volatility and risk for momentum strategies.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "GENI Stock Pulls Back As Traders Gauge Next Move - StocksToTrade",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE9jM1ViM2UwbUFtWG5aUVRfaFB2OTVsTnNlV1pZTkswN3BnbzlhYnNpbWhPYmNFOGc0N05sM0VvWUt0UlZuTDRuMFVBZUpMc2NvSnpsZ1dYZ0JRcGdYa3ljOFFGalBQczVYR1N2dkJWS0pmZE5tQkZUZDlVLWFDVlk?oc=5"
+        },
+        {
+          "title": "Liquidity Mapping Around (GENI) Price Events - news.stocktradersdaily.com",
+          "source": "Google News",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxNaWlXUk9ZLWpUZDBiR2s4aEJPVXlyTDFpTmI3NC1xUDM3N00wZlkzOUNJblc2bjBhMEIzQWM3OXRtaTJ2MWRwRTF2WGNuQ0tNdzdZVXJabGdGUVR0MnNVcjNwZVR0Qjdqa3MwemRGVEJwRmdUZ0VjQnZNX0pua2VtTUxFRDc2SVZZQXluUnp2SUVpYks1dkxyYlQtbDcxY0pRMi02U1Y0VEJWNHFrYmxzUFBpeVUxemJOSy0zRFNDSQ?oc=5"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "244.04M",
+      "short_float": "15.63%",
+      "daily_pct": 7.59,
+      "prev_close": 5.8,
+      "industry": "Others",
+      "technical_status": "Fail (Avg $Vol $49M < $100M)",
+      "verification": {
+        "status": "Unconfirmed",
+        "confidence_score": 70,
+        "sources_consulted": [
+          "Finviz",
+          "Google News"
+        ],
+        "primary_claim": "GENI's stock movement is driven by technical factors as traders gauge the next move and liquidity around price events.",
+        "discrepancy_note": "The primary catalyst claim describes market behavior ('traders gauge next move', 'liquidity around price events') rather than a specific factual claim (e.g., dollar amount, percentage, date). While some Google News headlines allude to these aspects (e.g., '[3] Traders Gauge Next Move', '[5] Liquidity Mapping Around Price Events'), the catalyst summary itself does not contain a specific, quantifiable factual claim that can be 'Verified' or 'Discrepancy' against a number or concrete detail across sources."
+      },
+      "gates_passed": 2,
+      "gates_detail": {
+        "gate_rs": true,
+        "gate_price": false,
+        "gate_dollar_vol": false,
+        "gate_mkt_cap": false,
+        "gate_adr": true
+      },
+      "meets_all_gates": false,
+      "tier": "Fail",
+      "tier_label": "Excluded"
+    },
+    {
+      "ticker": "ARM",
+      "price": 323.0,
+      "gap_pct": 5.44,
+      "pm_volume": 219387,
+      "avg_vol_10d": 6732889,
+      "avg_dollar_vol": 2174723147,
+      "mkt_cap": 327171116089,
+      "rvol": 1.72,
+      "adr_pct": 4.98,
+      "category": "Thematic Narratives",
+      "theme": "AI Royalty Economics Concern",
+      "reasoning": "Arm slipped as investors weighed how its royalty economics would capture the AI server boom amidst increasing AI core competition.",
+      "hypothesis": "Medium Conviction (RS Hold) — Look for dip-buy at 9-EMA/VWAP.",
+      "conviction": 59,
+      "grade": "B",
+      "finviz_theme": "Semiconductors - Compute",
+      "analysis_source": "gemini",
+      "analysis_detail": {
+        "catalyst": "Arm Holdings **slipped 3.3%** to **$321.63** on Thursday, with the article stating **ARM -7.88%** (intraday price action based on article's context), as investors evaluated how its current 'royalty economics' model could capture the 'AI server boom' opportunity, particularly as 'More AI Cores Test Royalty Economics'.",
+        "impact": "This narrative indicates a developing skepticism regarding Arm's ability to fully monetize its intellectual property within the burgeoning AI server market, potentially capping upside momentum."
+      },
+      "analysis_details": "• **The Narrative**\nArm Holdings saw its stock **slip 3.3%** on Thursday, hitting **$321.63**, as market participants began to scrutinize the efficacy of its 'royalty economics' model within the rapidly expanding 'AI server boom'. The article highlighted growing concerns that 'More AI Cores Test Royalty Economics', implying potential pressure on Arm's traditional revenue streams in the high-growth AI compute sector.\n\n• **Explosiveness**\nThis evolving narrative suggests a significant headwind for Arm's stock momentum, as questions about its fundamental business model's fit for the AI era could introduce persistent investor uncertainty. The ability of Arm to capture the full 'payoff' from the AI opportunity remains 'an open ques', potentially leading to sustained volatility and limiting aggressive upward re-ratings until clarity emerges on its AI monetization strategy.",
+      "peer_tickers": [],
+      "leverage_etfs": [],
+      "inverse_etfs": [],
+      "headlines": [
+        {
+          "title": "Arm Drops 3.3% as More AI Cores Test Royalty Economics",
+          "source": "Finviz",
+          "url": "https://finance.yahoo.com/technology/ai/articles/arm-drops-3-3-more-173604154.html"
+        }
+      ],
+      "edgar_filing": null,
+      "float_shares": "1.06B",
+      "short_float": "1.46%",
+      "daily_pct": 4.92,
+      "prev_close": 306.34,
+      "industry": "Semiconductors - Compute",
+      "technical_status": "Pass",
       "verification": {
         "status": "Discrepancy",
         "confidence_score": 90,
@@ -59,29 +356,29 @@
           "Finviz",
           "Google News"
         ],
-        "primary_claim": "Fervo Energy's Cape Station project achieved first power, turning deep underground heat into grid power at utility scale for the first time.",
-        "discrepancy_note": "Source A (Finviz News) has no information regarding the claim. Source B (Google News) contains articles that collectively support the claim: [4] confirms 'Fervo Energy's Cape Station achieves first power,' and [1] confirms 'A Utah project turns deep underground heat into grid power at utility scale for the first time.' However, since Source A provides no confirmation, the claim cannot be 'Verified' by *both* primary sources."
+        "primary_claim": "Arm dropped 3.3%",
+        "discrepancy_note": "Source A (Finviz) explicitly states 'Arm Drops 3.3%'. Source B (Google News) has headlines indicating 'Arm Stock Dips' and 'Arm Stock Stumbles' which align directionally but provide no specific percentage. Crucially, Source B also contains headlines stating 'Arm Stock Rises' and 'ARM ... Stocks Gain Today', directly conflicting with the stated drop."
       },
-      "gates_passed": 4,
+      "gates_passed": 5,
       "gates_detail": {
         "gate_rs": true,
         "gate_price": true,
-        "gate_dollar_vol": false,
+        "gate_dollar_vol": true,
         "gate_mkt_cap": true,
         "gate_adr": true
       },
-      "meets_all_gates": false,
-      "tier": "Fail",
-      "tier_label": "Excluded"
+      "meets_all_gates": true,
+      "tier": "T3",
+      "tier_label": "Minor Catalyst"
     }
   ],
   "ibkr_scanner": [],
   "cost_analysis": {
     "model": "gemini-2.0-flash-lite",
     "approach": "hybrid",
-    "small_gaps": 1,
+    "small_gaps": 5,
     "large_gaps": 0,
-    "total_headlines": 3,
+    "total_headlines": 12,
     "monthly_cost_usd": 0.01
   }
 }
