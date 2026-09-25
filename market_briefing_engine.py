@@ -271,12 +271,29 @@ def _fetch_prices_sync() -> dict:
     """
     Fetch 30 days of OHLCV for SPY, QQQ, VIX, CL=F, ^N225, ^GDAXI via yfinance.
     Stores _lows_20d on SPY/QQQ for Undercut & Reclaim detection.
+
+    2026-09-25: switched from yf.download() to yf.Ticker(sym).history() plus
+    3 retries with backoff -- yf.download() was intermittently/silently
+    returning <2 rows in this workflow's GitHub Actions runs (this is the
+    actual script "Market Intelligence Engine" runs; a near-identical
+    yf.download() bug was first mis-diagnosed and "fixed" in
+    market_intelligence.py, a same-named-purpose file that turned out not to
+    be invoked by any workflow at all -- this is the real one).
+    Ticker().history() is the call scraper.py already relies on successfully
+    in the same CI, and the retries are a hedge against the per-run-runner-IP
+    throttling that seems to cause the intermittent failures.
     """
     result: dict = {}
     for sym, label in SNAPSHOT_ASSETS:
         try:
-            df = _flatten_df(yf.download(sym, period="30d", interval="1d",
-                                          progress=False, auto_adjust=True))
+            df = pd.DataFrame()
+            for attempt in range(1, 4):
+                df = _flatten_df(yf.Ticker(sym).history(period="30d", interval="1d", auto_adjust=True))
+                if len(df) >= 2:
+                    break
+                log.warning(f"Price fetch [{sym}] attempt {attempt}/3: only {len(df)} row(s) after dropna")
+                if attempt < 3:
+                    time.sleep(4)
             if len(df) < 2:
                 result[sym] = None
                 continue
