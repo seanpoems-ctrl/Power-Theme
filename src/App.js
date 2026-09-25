@@ -3391,6 +3391,16 @@ function deriveIbkrTrades(execs, categoryThemeMap = {}) {
       const exitSide  = longFirst ? segSells : segBuys;
       const entryAvg = wavg(entrySide), exitAvg = wavg(exitSide);
       const entryQty = sumQty(entrySide), exitQty = sumQty(exitSide);
+      const closedShares = Math.round(Math.min(entryQty, exitQty) || entryQty);
+      const hasClose = !isOpen && entryAvg != null && exitAvg != null;
+      // P&L computed from the FULL-PRECISION weighted averages, not from the
+      // 2dp-rounded entry_price/exit_price strings below (those are display-
+      // only). Rounding before computing can fully erase a real few-dollar
+      // P&L when entry and exit happen to round to the same cent — e.g. an
+      // entry of 29.88766537 rounds to "29.89", identical to an exit of
+      // exactly 29.89, silently turning a real ~$0.60 gain into a displayed
+      // $0.00 (found 2026-09-25 validating against a real statement).
+      const dir = longFirst ? 1 : -1;
       trades.push({
         ...EMPTY_TRADE,
         id: newId(),
@@ -3403,7 +3413,9 @@ function deriveIbkrTrades(execs, categoryThemeMap = {}) {
         side: longFirst ? "long" : "short",
         entry_price: entryAvg != null ? entryAvg.toFixed(2) : "",
         exit_price: isOpen || exitAvg == null ? "" : exitAvg.toFixed(2),
-        shares: Math.round(isOpen ? Math.max(entryQty - exitQty, 0) : (Math.min(entryQty, exitQty) || entryQty)),
+        shares: Math.round(isOpen ? Math.max(entryQty - exitQty, 0) : closedShares),
+        pnl_dollars: hasClose ? (dir * (exitAvg - entryAvg) * closedShares).toFixed(2) : "",
+        pnl_pct: hasClose ? (dir * ((exitAvg - entryAvg) / entryAvg) * 100).toFixed(2) : "",
         // Individual fill prices rounded to 2dp for display (IBKR's raw
         // per-execution prices can carry many decimal places, e.g.
         // 166.834197531) — the weighted average above is still computed
@@ -3425,7 +3437,12 @@ function deriveIbkrTrades(execs, categoryThemeMap = {}) {
     if (Math.abs(running) > 1e-9) flush(true);
   }
 
-  return trades.map(calcDerived).sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  // Not re-run through calcDerived: pnl_dollars/pnl_pct above are already
+  // computed from full-precision entryAvg/exitAvg, and re-deriving from the
+  // rounded entry_price/exit_price strings would reintroduce the precision
+  // bug this was just fixed for. r_multiple stays blank either way (IBKR
+  // imports never have a stop_price).
+  return trades.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
 }
 
 const STOP_OPTS = ["ATR", "LOD", "Manual"];
@@ -5064,7 +5081,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         const key = `${fresh.ticker}|${fresh.date}|${fresh.entry_time}`;
         const old = oldIbkrByKey.get(key);
         if (!old) { added++; byId.set(fresh.id, fresh); continue; }
-        const merged = calcDerived({
+        const base = {
           ...fresh,
           id: old.id,
           theme: old.theme || fresh.theme,
@@ -5073,7 +5090,19 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
           notes: old.notes,
           stop_used: old.stop_used,
           stop_price: old.stop_price,
-        });
+        };
+        // Recompute only r_multiple (depends on stop_price, a user-editable
+        // field carried over from `old`) — NOT via calcDerived, which would
+        // recompute pnl_dollars/pnl_pct from the rounded entry_price/
+        // exit_price strings and reintroduce the precision bug fresh's
+        // full-precision values were just fixed for.
+        const merged = { ...base };
+        const entryN = parseFloat(base.entry_price), stopN = parseFloat(base.stop_price);
+        const pnlN = parseFloat(base.pnl_dollars), shN = parseFloat(base.shares);
+        if (!isNaN(entryN) && !isNaN(stopN) && Math.abs(entryN - stopN) > 0 && !isNaN(pnlN)) {
+          const risk = Math.abs(entryN - stopN) * (isNaN(shN) ? 1 : shN);
+          merged.r_multiple = risk > 0 ? (pnlN / risk).toFixed(2) : "";
+        }
         if (!old.exit_date && merged.exit_date) closed++;
         else if (JSON.stringify(old) !== JSON.stringify(merged)) updated++;
         byId.set(old.id, merged);
