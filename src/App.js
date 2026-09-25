@@ -5217,6 +5217,34 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         else if (JSON.stringify(old) !== JSON.stringify(merged)) updated++;
         byId.set(old.id, merged);
       }
+
+      // Clean up orphaned phantom trades left behind by an earlier import
+      // that only had a PARTIAL execution history. E.g.: a sell arrives
+      // before its matching buy has been merged in — with no offsetting buy
+      // yet known, deriveIbkrTrades has no choice but to record it as its
+      // own standalone short trade, keyed by that sell's own date/time. Once
+      // the buy is merged (this import or a later one), the SAME executions
+      // correctly collapse into one long trade keyed by the BUY's date/time
+      // — but the old standalone short row's key no longer matches anything
+      // in the fresh derivation, so the update-in-place loop above silently
+      // skips it forever, leaving a duplicate "open" position sitting next
+      // to the correct one (seen 2026-09-26: PLTU and ZETA each ended up
+      // with a phantom open short alongside the correct long/closed row).
+      // Only safe for trades tagged `_ibkr: true` — those are fully
+      // reproducible from the ledger, so "not in the fresh derivation"
+      // unambiguously means stale. Older rows tagged only by the
+      // notes-based heuristic predate the ledger (no captured raw fills to
+      // re-derive from), so there's no way to verify they're stale — those
+      // are left alone, same as the update-in-place logic above.
+      const freshKeys = new Set(freshIbkr.map(t => `${t.ticker}|${t.date}|${t.entry_time}`));
+      let removed = 0;
+      for (const t of [...byId.values()]) {
+        if (t._ibkr && !freshKeys.has(`${t.ticker}|${t.date}|${t.entry_time}`)) {
+          byId.delete(t.id);
+          removed++;
+        }
+      }
+
       persist([...byId.values()]);
 
       const parts = [];
@@ -5224,6 +5252,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       if (added) parts.push(`${added} new trade${added === 1 ? "" : "s"}`);
       if (closed) parts.push(`${closed} newly closed`);
       if (updated) parts.push(`${updated} updated`);
+      if (removed) parts.push(`${removed} stale duplicate${removed === 1 ? "" : "s"} removed`);
       if (newIncomeCount) parts.push(`${newIncomeCount} new dividend/securities-lending record${newIncomeCount === 1 ? "" : "s"}`);
       setImportMsg(parts.length ? `${parts.join(", ")}.` : "No changes — this file's executions are already fully reconciled.");
     };
