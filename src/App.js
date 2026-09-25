@@ -3150,6 +3150,11 @@ const EMPTY_TRADE = {
   id: "", date: "", entry_time: "", exit_date: "", exit_time: "", ticker: "", theme: "", setup: "", side: "long", entry_price: "", exit_price: "",
   shares: "", stop_used: "ATR", stop_price: "", pnl_dollars: "", pnl_pct: "",
   r_multiple: "", grade: "", notes: "",
+  // Total commissions/fees across every fill (IBKR imports only — manually-
+  // entered trades leave this blank). Shown as its own column, NOT netted
+  // into pnl_dollars: pnl stays gross so manual and imported trades compute
+  // P&L the same way; fees are for visibility/cost-awareness alongside it.
+  fees: "",
   // Individual executions behind entry_price/exit_price when a position was
   // built or closed across more than one fill (e.g. scaling in, partial
   // profit-taking) — entry_price/exit_price stay the size-weighted average
@@ -3323,7 +3328,12 @@ function parseIbkrExecutions(csvText) {
       const price = _ibkrNum(cells[header["T. Price"]] ?? cells[header["Price"]]);
       if (!symbol || !dt || isNaN(qty) || isNaN(price) || qty === 0) continue;
       const { date: dPart, time: tPart } = _parseIbkrDateTime(dt);
-      execs.push({ symbol: symbol.trim(), date: dPart, time: tPart, qty, price });
+      // IBKR reports commission/fee as a negative cost (e.g. -1.000186) —
+      // stored as a positive magnitude, consistent with how the FEES column
+      // reads it.
+      const commRaw = _ibkrNum(cells[header["Comm/Fee"]] ?? cells[header["Commission"]]);
+      const commission = isNaN(commRaw) ? 0 : Math.abs(commRaw);
+      execs.push({ symbol: symbol.trim(), date: dPart, time: tPart, qty, price, commission });
     }
   }
 
@@ -3337,6 +3347,7 @@ function parseIbkrExecutions(csvText) {
       const symIdx = idx("symbol"), qtyIdx = cols.findIndex(c => /^(quantity|qty)$/i.test(c));
       const priceIdx = cols.findIndex(c => /^(t\.?\s*price|price|tradeprice)$/i.test(c));
       const dateIdx = cols.findIndex(c => /^(date\/time|date|tradedate)$/i.test(c));
+      const commIdx = cols.findIndex(c => /^(comm\/fee|commission)$/i.test(c));
       if (symIdx >= 0 && qtyIdx >= 0 && priceIdx >= 0 && dateIdx >= 0) {
         const startAt = lines.indexOf(headerLine) + 1;
         for (let i = startAt; i < lines.length; i++) {
@@ -3346,7 +3357,9 @@ function parseIbkrExecutions(csvText) {
           const qty = _ibkrNum(cells[qtyIdx]), price = _ibkrNum(cells[priceIdx]);
           if (!symbol || !dt || isNaN(qty) || isNaN(price) || qty === 0) continue;
           const { date: dPart, time: tPart } = _parseIbkrDateTime(dt);
-          execs.push({ symbol: symbol.trim(), date: dPart, time: tPart, qty, price });
+          const commRaw = commIdx >= 0 ? _ibkrNum(cells[commIdx]) : NaN;
+          const commission = isNaN(commRaw) ? 0 : Math.abs(commRaw);
+          execs.push({ symbol: symbol.trim(), date: dPart, time: tPart, qty, price, commission });
         }
       }
     }
@@ -3393,6 +3406,7 @@ function deriveIbkrTrades(execs, categoryThemeMap = {}) {
       const entryQty = sumQty(entrySide), exitQty = sumQty(exitSide);
       const closedShares = Math.round(Math.min(entryQty, exitQty) || entryQty);
       const hasClose = !isOpen && entryAvg != null && exitAvg != null;
+      const totalFees = [...segBuys, ...segSells].reduce((s, x) => s + (x.commission || 0), 0);
       // P&L computed from the FULL-PRECISION weighted averages, not from the
       // 2dp-rounded entry_price/exit_price strings below (those are display-
       // only). Rounding before computing can fully erase a real few-dollar
@@ -3416,6 +3430,7 @@ function deriveIbkrTrades(execs, categoryThemeMap = {}) {
         shares: Math.round(isOpen ? Math.max(entryQty - exitQty, 0) : closedShares),
         pnl_dollars: hasClose ? (dir * (exitAvg - entryAvg) * closedShares).toFixed(2) : "",
         pnl_pct: hasClose ? (dir * ((exitAvg - entryAvg) / entryAvg) * 100).toFixed(2) : "",
+        fees: totalFees > 0 ? totalFees.toFixed(2) : "",
         // Individual fill prices rounded to 2dp for display (IBKR's raw
         // per-execution prices can carry many decimal places, e.g.
         // 166.834197531) — the weighted average above is still computed
@@ -5623,6 +5638,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                 <TH col="stop_price">Stop</TH>
                 <TH col="pnl_dollars">P&L $</TH>
                 <TH col="pnl_pct">P&L %</TH>
+                <TH col="fees">Fees</TH>
                 <TH col="r_multiple">R</TH>
                 <TH col="grade">Grade</TH>
                 <TH w="w-48" col="notes">Notes</TH>
@@ -5692,7 +5708,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                         className="w-full text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none focus:border-blue-500/60 min-w-[55px]"/>
                     </div>
                   </td>
-                  <td className="px-1.5 py-2 text-[11px] text-zinc-500 font-mono" colSpan={3}>auto-calc</td>
+                  <td className="px-1.5 py-2 text-[11px] text-zinc-500 font-mono" colSpan={4}>auto-calc</td>
                   <td className="px-1.5 py-2">
                     <select value={draft.grade} onChange={e => setDraft(d => ({ ...d, grade: e.target.value }))}
                       className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1 py-1 text-zinc-200 outline-none w-full">
@@ -5715,7 +5731,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
 
               {/* ── Existing trades ── */}
               {visible.length === 0 ? (
-                <tr><td colSpan={14} className="py-12 text-center text-zinc-600 text-[12px] italic">No trades yet — click "+ Add Trade" to begin</td></tr>
+                <tr><td colSpan={15} className="py-12 text-center text-zinc-600 text-[12px] italic">No trades yet — click "+ Add Trade" to begin</td></tr>
               ) : sortedVisible.map(t => (
                 <React.Fragment key={t.id}>
                 <tr className={`border-b border-zinc-800/30 transition-colors ${selectedIds.has(t.id) ? "bg-blue-500/10" : rowBg(t)}`}>
@@ -5784,6 +5800,10 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                   </td>
                   <td className={`px-2 py-1.5 text-[11px] font-mono ${pnlCls(t.pnl_pct)}`}>
                     {t.pnl_pct ? `${parseFloat(t.pnl_pct) >= 0 ? "+" : ""}${parseFloat(t.pnl_pct).toFixed(2)}%` : "—"}
+                  </td>
+                  <td className="px-2 py-1.5">
+                    <InlineText value={t.fees} onChange={v => updateField(t.id, "fees", v)} placeholder="Fees" mono
+                      cls="text-zinc-500"/>
                   </td>
                   <td className={`px-2 py-1.5 text-[12px] font-mono font-bold ${rCls(t.r_multiple)}`}>
                     {t.r_multiple ? `${parseFloat(t.r_multiple) >= 0 ? "+" : ""}${t.r_multiple}R` : "—"}
