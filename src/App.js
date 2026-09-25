@@ -3201,6 +3201,21 @@ function saveExecs(arr) {
 }
 function _execSig(e) { return `${e.symbol}|${e.date}|${e.time}|${e.qty}|${e.price}`; }
 
+// ── Other income — dividends and Stock Yield Enhancement Program (securities
+// lending) payouts. IBKR reports these in separate sections of the same
+// Activity Statement CSV the Trades import already reads, but they aren't
+// trades (no entry/exit/shares) so they don't belong in EXECS_KEY/JOURNAL_KEY
+// — tracked separately, keyed by date/ticker/amount rather than an execution
+// signature since there's no per-fill quantity to dedupe against.
+const INCOME_KEY = "power_theme_journal_income";
+function loadIncome() {
+  try { return JSON.parse(localStorage.getItem(INCOME_KEY) || "[]"); } catch { return []; }
+}
+function saveIncome(arr) {
+  try { localStorage.setItem(INCOME_KEY, JSON.stringify(arr)); } catch { /* quota */ }
+}
+function _incomeSig(r) { return `${r.type}|${r.date}|${r.ticker}|${r.amount}|${r.description}`; }
+
 const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
 function calcDerived(t) {
@@ -3365,6 +3380,58 @@ function parseIbkrExecutions(csvText) {
     }
   }
   return { execs, skipped: execs.length ? 0 : (flat ? 0 : -1) };
+}
+
+// Parses the same IBKR Activity Statement CSV for two other income sources
+// that live in their own sections, separate from Trades:
+//   Dividends,Header,Currency,Date,Description,Amount
+//   Dividends,Data,USD,2026-05-01,DELL(US24703L2025) Cash Dividend USD 0.63 per Share (Ordinary Dividend),11.97
+//   Stock Yield Enhancement Program Securities Lent Fee Earned Details,Header,Currency,Value Date,Symbol,Start Date,Quantity,Collateral Amount,Market-based Rate (%),SYEP Rate on Customer Collateral (%),SYEP Fee Earned by Customer,Code
+//   Stock Yield Enhancement Program Securities Lent Interest Details,Header,Currency,Value Date,Symbol,Start Date,Quantity,Collateral Amount,Market-based Rate (%),Interest Rate on Customer Collateral (%),Interest Paid to Customer,Code
+// Each section's own "...,Total,,,<sum>" row is skipped (Currency column
+// reads "Total" instead of a currency code) — these are per-section running
+// totals, not real records.
+const IBKR_INCOME_SECTIONS = [
+  { name: "Dividends", type: "dividend" },
+  { name: "Stock Yield Enhancement Program Securities Lent Fee Earned Details", type: "syep_fee" },
+  { name: "Stock Yield Enhancement Program Securities Lent Interest Details", type: "syep_interest" },
+];
+function parseIbkrIncome(csvText) {
+  const lines = csvText.split(/\r?\n/);
+  const headers = {}; // section name -> column index map
+  const records = [];
+  for (const line of lines) {
+    if (!line.trim()) continue;
+    const cells = _splitCsvLine(line);
+    const section = IBKR_INCOME_SECTIONS.find(s => s.name === cells[0]);
+    if (!section) continue;
+    if (cells[1] === "Header") {
+      const h = {}; cells.forEach((c, i) => { h[c.trim()] = i; });
+      headers[section.name] = h;
+      continue;
+    }
+    if (cells[1] !== "Data") continue;
+    const h = headers[section.name];
+    if (!h || cells[h["Currency"]] === "Total" || cells[h["Currency"]] === "SubTotal") continue;
+
+    if (section.type === "dividend") {
+      const date = cells[h["Date"]];
+      const description = cells[h["Description"]];
+      const amount = _ibkrNum(cells[h["Amount"]]);
+      if (!date || !description || isNaN(amount)) continue;
+      const tickerMatch = /^(\S+?)\(/.exec(description);
+      records.push({ type: "dividend", date, ticker: tickerMatch ? tickerMatch[1] : "", description, amount });
+    } else {
+      const date = cells[h["Value Date"]];
+      const ticker = cells[h["Symbol"]];
+      const amountCol = section.type === "syep_fee" ? "SYEP Fee Earned by Customer" : "Interest Paid to Customer";
+      const amount = _ibkrNum(cells[h[amountCol]]);
+      if (!date || !ticker || isNaN(amount)) continue;
+      const description = section.type === "syep_fee" ? "Stock Yield Enhancement Program — fee earned" : "Stock Yield Enhancement Program — interest paid";
+      records.push({ type: section.type, date, ticker: ticker.trim(), description, amount });
+    }
+  }
+  return records;
 }
 
 // Groups a FULL execution history (per ticker) into journal trade rows,
@@ -4804,6 +4871,8 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [miniChartsFor, setMiniChartsFor] = useState(null); // { title, tickers } for the trade table's mini-chart grid
   const [notebook, setNotebook]     = useState(() => loadNotebook());
   const [notebookDraft, setNotebookDraft] = useState("");
+  const [income, setIncome]         = useState(() => loadIncome());
+  const [showIncome, setShowIncome] = useState(() => { try { return localStorage.getItem("power_theme_journal_income_open") === "1"; } catch { return false; } });
   const [showFilters, setShowFilters] = useState(false);
   const [fTicker, setFTicker]       = useState("");
   const [fSetup, setFSetup]         = useState("");
@@ -4898,6 +4967,8 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   };
 
   const persistNotebook = (arr) => { setNotebook(arr); saveNotebook(arr); };
+  const persistIncome = (arr) => { setIncome(arr); saveIncome(arr); };
+  const toggleShowIncome = () => setShowIncome(v => { const next = !v; try { localStorage.setItem("power_theme_journal_income_open", next ? "1" : "0"); } catch {} return next; });
   const addNote = () => {
     const text = notebookDraft.trim();
     if (!text) return;
@@ -5052,9 +5123,33 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     if (!file) return;
     const reader = new FileReader();
     reader.onload = () => {
-      const { execs: newExecs, skipped } = parseIbkrExecutions(String(reader.result || ""));
-      if (skipped === -1) { setImportMsg("Couldn't find a Trades table in this file — export the Activity Statement as CSV from IBKR's Reports page."); return; }
-      if (!newExecs.length) { setImportMsg("No executions found in this file."); return; }
+      const csvText = String(reader.result || "");
+      const { execs: newExecs, skipped } = parseIbkrExecutions(csvText);
+
+      // Dividends + Stock Yield Enhancement Program income live in their own
+      // CSV sections, independent of the Trades table — parsed and merged
+      // even if this particular file has no trades at all (e.g. a
+      // dividend-only statement window).
+      const newIncome = parseIbkrIncome(csvText);
+      const incomeMap = new Map(loadIncome().map(x => [_incomeSig(x), x]));
+      let newIncomeCount = 0;
+      for (const x of newIncome) {
+        const sig = _incomeSig(x);
+        if (!incomeMap.has(sig)) newIncomeCount++;
+        incomeMap.set(sig, { id: incomeMap.get(sig)?.id || newId(), ...x });
+      }
+      if (newIncomeCount) persistIncome([...incomeMap.values()]);
+
+      if (skipped === -1 && !newExecs.length) {
+        setImportMsg(newIncomeCount
+          ? `${newIncomeCount} new dividend/securities-lending record${newIncomeCount === 1 ? "" : "s"} synced. Couldn't find a Trades table in this file.`
+          : "Couldn't find a Trades table in this file — export the Activity Statement as CSV from IBKR's Reports page.");
+        return;
+      }
+      if (!newExecs.length) {
+        setImportMsg(newIncomeCount ? `${newIncomeCount} new dividend/securities-lending record${newIncomeCount === 1 ? "" : "s"} synced. No executions found in this file.` : "No executions found in this file.");
+        return;
+      }
 
       // Merge into the persistent execution ledger (dedupe by symbol+date+
       // time+qty+price) so a position opened in an earlier import and closed
@@ -5129,6 +5224,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       if (added) parts.push(`${added} new trade${added === 1 ? "" : "s"}`);
       if (closed) parts.push(`${closed} newly closed`);
       if (updated) parts.push(`${updated} updated`);
+      if (newIncomeCount) parts.push(`${newIncomeCount} new dividend/securities-lending record${newIncomeCount === 1 ? "" : "s"}`);
       setImportMsg(parts.length ? `${parts.join(", ")}.` : "No changes — this file's executions are already fully reconciled.");
     };
     reader.onerror = () => setImportMsg("Couldn't read that file.");
@@ -5144,7 +5240,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   // id overwrites the local entry with that id (the export is assumed to be
   // your most current state from the other machine), a new id gets added.
   const handleExportJournal = () => {
-    const payload = { version: 1, exported_at: new Date().toISOString(), trades, notebook };
+    const payload = { version: 1, exported_at: new Date().toISOString(), trades, notebook, income };
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -5167,8 +5263,9 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       catch { setImportMsg("Couldn't parse that file — not valid JSON."); return; }
       const importedTrades = Array.isArray(parsed.trades) ? parsed.trades : [];
       const importedNotebook = Array.isArray(parsed.notebook) ? parsed.notebook : [];
-      if (!importedTrades.length && !importedNotebook.length) {
-        setImportMsg("No trades or notebook entries found in that file — expected a journal export from this app.");
+      const importedIncome = Array.isArray(parsed.income) ? parsed.income : [];
+      if (!importedTrades.length && !importedNotebook.length && !importedIncome.length) {
+        setImportMsg("No trades, notebook entries, or income records found in that file — expected a journal export from this app.");
         return;
       }
 
@@ -5196,11 +5293,22 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         persistNotebook(mergedNotebook);
       }
 
+      const incomeMap = new Map(income.map(r => [r.id, r]));
+      let iAdded = 0, iUpdated = 0;
+      for (const r of importedIncome) {
+        if (!r.id) continue;
+        if (incomeMap.has(r.id)) iUpdated++; else iAdded++;
+        incomeMap.set(r.id, r);
+      }
+      if (iAdded || iUpdated) persistIncome([...incomeMap.values()]);
+
       const parts = [];
       if (tAdded) parts.push(`${tAdded} new trade${tAdded === 1 ? "" : "s"}`);
       if (tUpdated) parts.push(`${tUpdated} trade${tUpdated === 1 ? "" : "s"} updated`);
       if (nAdded) parts.push(`${nAdded} new note${nAdded === 1 ? "" : "s"}`);
       if (nUpdated) parts.push(`${nUpdated} note${nUpdated === 1 ? "" : "s"} updated`);
+      if (iAdded) parts.push(`${iAdded} new income record${iAdded === 1 ? "" : "s"}`);
+      if (iUpdated) parts.push(`${iUpdated} income record${iUpdated === 1 ? "" : "s"} updated`);
       setImportMsg(parts.length ? `Imported: ${parts.join(", ")}.` : "Nothing new to import — already in sync.");
     };
     reader.onerror = () => setImportMsg("Couldn't read that file.");
@@ -5237,6 +5345,17 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     if (fTo && (!t.date || t.date > fTo)) return false;
     return true;
   });
+  // Dividends + Stock Yield Enhancement Program (securities lending) income —
+  // same date-range filter as the trade stats above, so switching periods
+  // scopes both together.
+  const incomeBase = income.filter(r => {
+    if (fFrom && (!r.date || r.date < fFrom)) return false;
+    if (fTo && (!r.date || r.date > fTo)) return false;
+    return true;
+  });
+  const dividendTotal = incomeBase.filter(r => r.type === "dividend").reduce((s, r) => s + r.amount, 0);
+  const syepTotal = incomeBase.filter(r => r.type === "syep_fee" || r.type === "syep_interest").reduce((s, r) => s + r.amount, 0);
+  const otherIncomeTotal = dividendTotal + syepTotal;
   const closed = statsBase.filter(t => t.exit_price !== "" && t.exit_price != null);
   const open   = statsBase.filter(t => !t.exit_price);
   const today  = new Date();
@@ -5444,7 +5563,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     <div className="max-w-[1560px] mx-auto px-4 pt-4 pb-8">
 
       {/* ── Summary cards ────────────────────────────────────────────────── */}
-      <div className="grid grid-cols-5 gap-3 mb-5">
+      <div className="grid grid-cols-6 gap-3 mb-5">
         {[
           { label: "Realized P&L MTD", value: pnlMTD !== 0 || mtd.length ? `${pnlMTD >= 0 ? "+" : ""}$${pnlMTD.toFixed(0)}` : "—", cls: pnlMTD >= 0 ? "text-emerald-400" : "text-red-400", sub: `${mtd.length} closed trades` },
           { label: "Open Positions",   value: open.length,   cls: open.length > 0 ? "text-blue-400" : "text-zinc-400", sub: `${statsBase.length} total trades` },
@@ -5463,8 +5582,9 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                 {` · avg +$${avgWin.toFixed(0)} / -$${avgLoss.toFixed(0)}`}
               </>
             ) : "no closed trades" },
+          { label: "Other Income", value: otherIncomeTotal !== 0 || incomeBase.length ? `+$${otherIncomeTotal.toFixed(0)}` : "—", cls: "text-emerald-400", sub: incomeBase.length ? `$${dividendTotal.toFixed(0)} div · $${syepTotal.toFixed(0)} lending` : "no records", onClick: incomeBase.length ? toggleShowIncome : undefined },
         ].map(m => (
-          <div key={m.label} className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4">
+          <div key={m.label} onClick={m.onClick} className={`bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4 ${m.onClick ? "cursor-pointer hover:border-zinc-700" : ""}`}>
             <div className="text-[11px] text-zinc-500 uppercase tracking-wider mb-1.5">{m.label}</div>
             {m.custom ? (
               <div className="mb-1">{m.custom}</div>
@@ -5475,6 +5595,45 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
           </div>
         ))}
       </div>
+
+      {/* ── Income (dividends + securities lending) ─────────────────────── */}
+      {income.length > 0 && (
+        <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl mb-5 overflow-hidden">
+          <button onClick={toggleShowIncome} className="w-full flex items-center justify-between px-4 py-3 text-left hover:bg-zinc-800/30 transition-colors">
+            <span className="text-[12px] font-semibold text-zinc-300">
+              Other Income — Dividends & Securities Lending
+              <span className="ml-2 text-zinc-600 font-normal">{incomeBase.length} record{incomeBase.length === 1 ? "" : "s"} in range</span>
+            </span>
+            <span className="text-zinc-500 text-[12px]">{showIncome ? "▲ collapse" : "▼ expand"}</span>
+          </button>
+          {showIncome && (
+            <div className="border-t border-zinc-800/60 max-h-80 overflow-y-auto">
+              <table className="w-full text-[12px]">
+                <thead className="sticky top-0 bg-zinc-900">
+                  <tr className="text-zinc-500 text-[11px] uppercase tracking-wider">
+                    <th className="px-3 py-2 text-left">Date</th>
+                    <th className="px-3 py-2 text-left">Ticker</th>
+                    <th className="px-3 py-2 text-left">Type</th>
+                    <th className="px-3 py-2 text-left">Description</th>
+                    <th className="px-3 py-2 text-right">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[...incomeBase].sort((a, b) => (b.date || "").localeCompare(a.date || "")).map(r => (
+                    <tr key={r.id} className="border-t border-zinc-800/40 hover:bg-zinc-800/20">
+                      <td className="px-3 py-1.5 font-mono text-zinc-400">{r.date}</td>
+                      <td className="px-3 py-1.5 font-mono text-zinc-300">{r.ticker || "—"}</td>
+                      <td className="px-3 py-1.5 text-zinc-500">{r.type === "dividend" ? "Dividend" : r.type === "syep_fee" ? "Lending fee" : "Lending interest"}</td>
+                      <td className="px-3 py-1.5 text-zinc-500 truncate max-w-[360px]" title={r.description}>{r.description}</td>
+                      <td className="px-3 py-1.5 text-right font-mono text-emerald-400">${r.amount.toFixed(2)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* ── Equity curve ─────────────────────────────────────────────────── */}
       <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4 mb-5">
