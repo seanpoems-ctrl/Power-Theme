@@ -47,17 +47,21 @@ TELEGRAM_CHAT  = os.getenv("TELEGRAM_CHAT_ID", "")
 
 # ── Data Fetching ──────────────────────────────────────────────────────────────
 
-def _dl(sym: str, period: str = "10d") -> object:
+def _dl(sym: str, period: str = "10d", attempts: int = 3) -> object:
     """yfinance history with flattened columns.
 
     2026-09-25: switched from yf.download() to yf.Ticker(sym).history() --
-    yf.download() was silently returning <2 rows in GitHub Actions CI
-    (confirmed: this same run's scraper.py succeeded fetching SPY/QQQ/IWM via
-    yf.Ticker(...).history() in the exact same CI environment/timeframe where
-    yf.download() here kept failing, and the failure reproduced with no
-    version difference locally -- pointing at yf.download()'s batch/session
-    handling behaving differently in CI, not a data-availability issue).
-    Ticker().history() is the call scraper.py already relies on successfully.
+    yf.download() was silently returning <2 rows in GitHub Actions CI. That
+    alone didn't fully fix it: a follow-up run using Ticker().history() STILL
+    returned <2 rows with no exception, while a scraper.py run using the same
+    Ticker().history() call succeeded around the same time on a DIFFERENT
+    ephemeral GitHub Actions runner. Each workflow run gets a fresh runner IP,
+    so this looks like intermittent per-IP throttling by Yahoo rather than a
+    code-path bug. Added retries with backoff (the standard mitigation for
+    that) plus real logging -- previously a failure was completely silent
+    (the len(df)<2 branch printed nothing), so there was no way to tell
+    "Yahoo throttled this IP" apart from any other cause. Now it prints the
+    row count or exception on every attempt.
 
     Default bumped from 5d to 10d (2026-09-25, kept from the earlier fix):
     fetch_market_ohlc/fetch_global_indices only need the latest 2 valid
@@ -65,8 +69,19 @@ def _dl(sym: str, period: str = "10d") -> object:
     session for a couple hours after close (dropna() below strips it) -- a
     5-day window left too little buffer.
     """
-    df = yf.Ticker(sym).history(period=period, interval="1d", auto_adjust=True)
-    df.dropna(inplace=True)
+    import pandas as pd
+    df = pd.DataFrame()
+    for attempt in range(1, attempts + 1):
+        try:
+            df = yf.Ticker(sym).history(period=period, interval="1d", auto_adjust=True)
+            df.dropna(inplace=True)
+            if len(df) >= 2:
+                return df
+            print(f"  _dl [{sym}] attempt {attempt}/{attempts}: only {len(df)} row(s) after dropna")
+        except Exception as e:
+            print(f"  _dl [{sym}] attempt {attempt}/{attempts} raised: {e}")
+        if attempt < attempts:
+            time.sleep(4)
     return df
 
 
