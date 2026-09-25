@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-25 11:47 ET",
+    "phase": "PRE",
+    "session": "Pre-Market",
+    "mood": "Sectoral Tailwinds Drive Focus",
+    "spy_price": 768.07,
+    "spy_change_pct": 0.12,
+    "vix": 15.25,
+    "hy_oas": 2.8,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 31.5,
+    "mmth": 51.1,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AKAM",
+          "company": "Akamai Technologies",
+          "reason": "Akamai signs major AI Cloud deal with Anthropic, positioning it favorably in the rapidly expanding AI infrastructure market."
+        },
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corporation",
+          "reason": "Market sentiment suggests increased demand for NVIDIA's AI-enabling GPUs, driven by accelerating AI cloud deployments following key industry partnerships."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com, Inc.",
+          "reason": "Continues to track broader market performance on technical flows, without a fresh fundamental catalyst specific to today's session."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-25 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA continued its multi-week rally, buoyed by ongoing bullish sentiment around artificial intelligence infrastructure and sector-wide rotational flow."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-07 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Mixed Global, Cautious US",
-    "spy_price": 770.19,
-    "spy_change_pct": -0.39,
-    "vix": 15.06,
-    "hy_oas": 2.65,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 51.9,
-    "mmth": 67.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA announced a groundbreaking AI accelerator chip partnership with a major cloud provider, fueling optimism for accelerated data center revenue growth and extending its market leadership."
-        },
-        {
-          "ticker": "COST",
-          "company": "Costco Wholesale Corporation",
-          "reason": "Costco reported better-than-expected August sales figures, driven by strong consumer spending trends and successful new membership initiatives, hinting at robust Q4 earnings."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GME",
-          "company": "GameStop Corp.",
-          "reason": "GameStop sees renewed short-squeeze speculation following unusual options activity and a technical breakout above its 50-day moving average, a familiar pattern lacking fresh fundamental news."
         }
       ]
     }
