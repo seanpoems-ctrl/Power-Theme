@@ -48,22 +48,25 @@ TELEGRAM_CHAT  = os.getenv("TELEGRAM_CHAT_ID", "")
 # ── Data Fetching ──────────────────────────────────────────────────────────────
 
 def _dl(sym: str, period: str = "10d") -> object:
-    """yfinance download with flattened columns.
+    """yfinance history with flattened columns.
 
-    Default bumped from 5d to 10d (2026-09-25): fetch_market_ohlc/
-    fetch_global_indices only need the latest 2 valid closes, but yfinance can
-    return a NaN/incomplete row for the most recent session for a couple hours
-    after close (dropna() below already strips it) -- a 5-day window left too
-    little buffer, so losing even 1-2 recent rows to this could push len(df)
-    below 2 and silently null out SPY/QQQ/VIX/Nikkei/DAX/FTSE entirely. 10d
-    gives comfortable headroom while staying a cheap fetch.
+    2026-09-25: switched from yf.download() to yf.Ticker(sym).history() --
+    yf.download() was silently returning <2 rows in GitHub Actions CI
+    (confirmed: this same run's scraper.py succeeded fetching SPY/QQQ/IWM via
+    yf.Ticker(...).history() in the exact same CI environment/timeframe where
+    yf.download() here kept failing, and the failure reproduced with no
+    version difference locally -- pointing at yf.download()'s batch/session
+    handling behaving differently in CI, not a data-availability issue).
+    Ticker().history() is the call scraper.py already relies on successfully.
+
+    Default bumped from 5d to 10d (2026-09-25, kept from the earlier fix):
+    fetch_market_ohlc/fetch_global_indices only need the latest 2 valid
+    closes, but yfinance can return a NaN/incomplete row for the most recent
+    session for a couple hours after close (dropna() below strips it) -- a
+    5-day window left too little buffer.
     """
-    import pandas as pd
-    df = yf.download(sym, period=period, interval="1d",
-                     progress=False, auto_adjust=True)
+    df = yf.Ticker(sym).history(period=period, interval="1d", auto_adjust=True)
     df.dropna(inplace=True)
-    if isinstance(df.columns, pd.MultiIndex):
-        df.columns = df.columns.get_level_values(0)
     return df
 
 
