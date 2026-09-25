@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-25 19:32 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Cautious Accumulation",
+    "spy_price": 771.35,
+    "spy_change_pct": 0.54,
+    "vix": 14.87,
+    "hy_oas": 2.8,
+    "yield_curve": 0.36,
+    "credit_status": "Complacent",
+    "s5fi": 31.9,
+    "mmth": 51.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AKAM",
+          "company": "Akamai Technologies",
+          "reason": "The company rallied following news of a significant AI Cloud deal signed with Anthropic, positioning it as a key beneficiary in the expanding AI infrastructure landscape."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corp",
+          "reason": "Microsoft stands to benefit from increasing enterprise spending on AI infrastructure and cloud services, a trend underscored by today's sector-specific AI cloud deal news."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Trading activity suggests continuation of recent momentum or technical flows, as no fresh fundamental catalysts were reported today to drive conviction."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-25 16:45 ET",
     "phase": "POST",
     "session": "Post-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "TSLA",
           "company": "Tesla, Inc.",
           "reason": "Continues to face recycled headlines regarding intensifying competition in the EV market and ongoing production ramp-up challenges."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-07 16:45 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Elevated Volatility, Mixed Signals",
-    "spy_price": 770.19,
-    "spy_change_pct": -0.39,
-    "vix": 15.3,
-    "hy_oas": 2.65,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 51.9,
-    "mmth": 67.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "MSFT",
-          "company": "Microsoft Corporation",
-          "reason": "Microsoft announced a groundbreaking AI chip partnership today, positioning it as a key player in the next generation of generative AI infrastructure."
-        },
-        {
-          "ticker": "TSLA",
-          "company": "Tesla, Inc.",
-          "reason": "Tesla reported better-than-expected Q3 delivery numbers, signaling a strong rebound in production and demand."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA continues to see strong investor interest driven by persistent AI enthusiasm, though no fresh catalysts were reported today."
         }
       ]
     }
