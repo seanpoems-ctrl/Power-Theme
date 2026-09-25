@@ -3218,13 +3218,48 @@ function _incomeSig(r) { return `${r.type}|${r.date}|${r.ticker}|${r.amount}|${r
 
 const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
+// Standardizes a price field to 2 decimals. Also doubles as the multi-stop
+// input format: stop_price accepts a comma-separated list (e.g. a scaled
+// 3-stop exit à la Jeff Sun's system — "261.43, 258.00, 255.50"), and this
+// reformats every number in the list independently, leaving the commas and
+// any not-yet-numeric partial token (mid-edit) untouched.
+function _normalizePriceStr(v) {
+  if (v == null) return v;
+  return String(v).split(",").map(part => {
+    const s = part.trim();
+    if (s === "") return "";
+    const n = parseFloat(s);
+    return isNaN(n) ? s : n.toFixed(2);
+  }).join(", ");
+}
+// Multiple stops (scaled stop-out) are risk-averaged rather than taking the
+// tightest or widest — approximates the blended exit price of stopping out
+// across all the levels evenly, which is how a multi-stop actually resolves.
+function _avgStop(stopPriceStr) {
+  if (!stopPriceStr) return NaN;
+  const nums = String(stopPriceStr).split(",").map(s => parseFloat(s.trim())).filter(n => !isNaN(n));
+  return nums.length ? nums.reduce((a, b) => a + b, 0) / nums.length : NaN;
+}
+// Display-time 2dp formatter — a safety net for prices stored before this
+// standardization existed (e.g. a raw fill number like 333.2, or an old
+// manually-typed "49.1"), independent of the calcDerived normalization that
+// now handles it going forward.
+function fmt2(v) {
+  const n = parseFloat(v);
+  return isNaN(n) ? v : n.toFixed(2);
+}
+
 function calcDerived(t) {
-  const entry = parseFloat(t.entry_price);
-  const exit  = parseFloat(t.exit_price);
+  const out = { ...t };
+  out.entry_price = _normalizePriceStr(t.entry_price);
+  out.exit_price  = _normalizePriceStr(t.exit_price);
+  out.stop_price  = _normalizePriceStr(t.stop_price);
+
+  const entry = parseFloat(out.entry_price);
+  const exit  = parseFloat(out.exit_price);
   const sh    = parseFloat(t.shares);
-  const stop  = parseFloat(t.stop_price);
+  const stop  = _avgStop(out.stop_price);
   const dir   = t.side === "short" ? -1 : 1; // short profits when price falls: (entry - exit)
-  const out   = { ...t };
   if (!isNaN(entry) && !isNaN(exit) && !isNaN(sh)) {
     out.pnl_dollars = (dir * (exit - entry) * sh).toFixed(2);
     out.pnl_pct     = (dir * ((exit - entry) / entry) * 100).toFixed(2);
@@ -4643,7 +4678,7 @@ const TradeChartModal = ({ trade, onClose }) => {
           markers.push({
             time: barForEntryFill(f).time, position: isShort ? "aboveBar" : "belowBar",
             color: "#3b82f6", shape: isShort ? "arrowDown" : "arrowUp",
-            text: entryFills.length > 1 ? `Entry ${f.qty}@$${f.price}` : `Entry $${f.price}`,
+            text: entryFills.length > 1 ? `Entry ${f.qty}@$${f.price.toFixed(2)}` : `Entry $${f.price.toFixed(2)}`,
           });
         });
         // Multiple entry/exit fills means multiple dashed lines would clutter
@@ -4666,7 +4701,7 @@ const TradeChartModal = ({ trade, onClose }) => {
             markers.push({
               time: barForExitFill(f).time, position: isShort ? "belowBar" : "aboveBar",
               color: favorable ? "#22c55e" : "#ef4444", shape: isShort ? "arrowUp" : "arrowDown",
-              text: exitFills.length > 1 ? `Exit ${f.qty}@$${f.price}` : `Exit $${f.price}`,
+              text: exitFills.length > 1 ? `Exit ${f.qty}@$${f.price.toFixed(2)}` : `Exit $${f.price.toFixed(2)}`,
             });
           });
           if (exitFills.length === 1) {
@@ -4716,9 +4751,9 @@ const TradeChartModal = ({ trade, onClose }) => {
             <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded border ${trade.side === "short" ? "text-red-400 bg-red-500/10 border-red-500/30" : "text-zinc-400 bg-zinc-800/60 border-zinc-700/50"}`}>
               {trade.side === "short" ? "SHORT" : "LONG"}
             </span>
-            <span className="text-[12px] text-zinc-400">Entry <span className="text-zinc-200 font-mono">${trade.entry_price}</span> <span className="font-mono">{trade.date || "—"}{trade.entry_time && ` ${trade.entry_time}`}</span>{trade.entry_fills?.length > 1 && <span className="text-zinc-600"> (avg of {trade.entry_fills.length} fills)</span>}</span>
+            <span className="text-[12px] text-zinc-400">Entry <span className="text-zinc-200 font-mono">${fmt2(trade.entry_price)}</span> <span className="font-mono">{trade.date || "—"}{trade.entry_time && ` ${trade.entry_time}`}</span>{trade.entry_fills?.length > 1 && <span className="text-zinc-600"> (avg of {trade.entry_fills.length} fills)</span>}</span>
             <span className="text-[12px] text-zinc-400">
-              Exit {trade.exit_price ? <span className="text-zinc-200 font-mono">${trade.exit_price}</span> : <span className="text-blue-400">Open</span>}
+              Exit {trade.exit_price ? <span className="text-zinc-200 font-mono">${fmt2(trade.exit_price)}</span> : <span className="text-blue-400">Open</span>}
               {trade.exit_date && <span className="font-mono"> {trade.exit_date}{trade.exit_time && ` ${trade.exit_time}`}</span>}
               {trade.exit_fills?.length > 1 && <span className="text-zinc-600"> (avg of {trade.exit_fills.length} fills)</span>}
             </span>
@@ -5207,7 +5242,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         // exit_price strings and reintroduce the precision bug fresh's
         // full-precision values were just fixed for.
         const merged = { ...base };
-        const entryN = parseFloat(base.entry_price), stopN = parseFloat(base.stop_price);
+        const entryN = parseFloat(base.entry_price), stopN = _avgStop(base.stop_price);
         const pnlN = parseFloat(base.pnl_dollars), shN = parseFloat(base.shares);
         if (!isNaN(entryN) && !isNaN(stopN) && Math.abs(entryN - stopN) > 0 && !isNaN(pnlN)) {
           const risk = Math.abs(entryN - stopN) * (isNaN(shN) ? 1 : shN);
@@ -5473,8 +5508,14 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         bv = `${b.date || ""} ${b.entry_time || ""}`.trim();
       }
       if (numeric) {
-        av = av === "" || av == null ? null : parseFloat(av);
-        bv = bv === "" || bv == null ? null : parseFloat(bv);
+        // stop_price can hold a comma-separated scaled stop-out — sort by
+        // the same average the R-multiple risk calc uses, not just
+        // whatever parseFloat happens to grab from the first token.
+        const parseNum = sortCol === "stop_price" ? _avgStop : parseFloat;
+        av = av === "" || av == null ? null : parseNum(av);
+        bv = bv === "" || bv == null ? null : parseNum(bv);
+        av = isNaN(av) ? null : av;
+        bv = isNaN(bv) ? null : bv;
         if (av == null && bv == null) return 0;
         if (av == null) return 1;
         if (bv == null) return -1;
@@ -5891,7 +5932,8 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                         className="text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1 py-1 text-zinc-200 outline-none">
                         {STOP_OPTS.map(o => <option key={o} value={o}>{o}</option>)}
                       </select>
-                      <input type="number" placeholder="Stop $" value={draft.stop_price || ""}
+                      <input type="text" placeholder="Stop $" title="One stop, or a comma-separated scaled stop-out (e.g. 261.43, 258.00, 255.50) — R-multiple uses their average"
+                        value={draft.stop_price || ""}
                         onChange={e => setDraft(d => ({ ...d, stop_price: e.target.value }))}
                         className="w-full text-[11px] bg-zinc-800 border border-zinc-700/60 rounded px-1.5 py-1 text-zinc-200 outline-none focus:border-blue-500/60 min-w-[55px]"/>
                     </div>
@@ -5967,11 +6009,11 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                     </div>
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">
-                    {t.entry_price ? `$${t.entry_price}` : "—"}
+                    {t.entry_price ? `$${fmt2(t.entry_price)}` : "—"}
                     {t.entry_fills?.length > 1 && <span className="ml-1 text-[9px] text-zinc-600">avg ×{t.entry_fills.length}</span>}
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">
-                    {t.exit_price ? `$${t.exit_price}` : <span className="text-blue-400 text-[11px]">Open</span>}
+                    {t.exit_price ? `$${fmt2(t.exit_price)}` : <span className="text-blue-400 text-[11px]">Open</span>}
                     {t.exit_price && t.exit_fills?.length > 1 && <span className="ml-1 text-[9px] text-zinc-600">avg ×{t.exit_fills.length}</span>}
                     {!t.exit_price && t.exit_fills?.length > 0 && (
                       <span className="ml-1 text-[9px] font-semibold text-amber-400" title="Some shares already sold — remaining shares still open">
@@ -6023,7 +6065,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                     <td/><td/><td/><td/><td/>
                     <td className="px-2 py-2 align-top text-[11px] font-mono">
                       {t.entry_fills?.length > 1 && t.entry_fills.map((f, i) => (
-                        <div key={i} className="text-zinc-300 whitespace-nowrap">{f.qty}sh ${f.price} <span className="text-zinc-600">{f.time}</span></div>
+                        <div key={i} className="text-zinc-300 whitespace-nowrap">{f.qty}sh ${f.price.toFixed(2)} <span className="text-zinc-600">{f.time}</span></div>
                       ))}
                     </td>
                     <td className="px-2 py-2 align-top text-[11px] font-mono">
@@ -6032,7 +6074,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                         const favorable = t.side === "short" ? parseFloat(f.price) < entryRef : parseFloat(f.price) > entryRef;
                         return (
                           <div key={i} className={`whitespace-nowrap ${favorable ? "text-emerald-400" : "text-red-400"}`}>
-                            {f.qty}sh ${f.price} <span className="text-zinc-600">{f.date} {f.time}</span>
+                            {f.qty}sh ${f.price.toFixed(2)} <span className="text-zinc-600">{f.date} {f.time}</span>
                           </div>
                         );
                       })}
