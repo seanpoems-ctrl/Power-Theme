@@ -4714,6 +4714,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [importMsg, setImportMsg]   = useState(null);
   const [lodBackfillLoading, setLodBackfillLoading] = useState(false);
   const fileInputRef                = useRef(null);
+  const journalFileInputRef         = useRef(null);
   const [aiResult, setAiResult]     = useState(null);
   const [aiLoading, setAiLoading]   = useState(false);
   const [allTickers, setAllTickers] = useState([]);
@@ -5006,6 +5007,78 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       if (repaired) parts.push(`repaired fill data for ${repaired} existing trade${repaired === 1 ? "" : "s"}`);
       if (dupes > 0 && !parts.length) parts.push(`no changes — all ${parsed.length} matched trades already in your journal with fill data`);
       setImportMsg(parts.length ? `${parts.join("; ")}.` : "No matching trades found in this file.");
+    };
+    reader.onerror = () => setImportMsg("Couldn't read that file.");
+    reader.readAsText(file);
+  };
+
+  // ── Export/Import journal as a file — the journal is localStorage-only (no
+  // backend), so this is how you move it between two machines (e.g. a trading
+  // laptop and a separate dev/Claude laptop): export on one, hand the file
+  // over (USB, cloud drive, AirDrop…), import on the other. Merges by each
+  // trade/note's stable id rather than replacing outright, so importing on a
+  // laptop that already has some entries won't lose anything — an incoming
+  // id overwrites the local entry with that id (the export is assumed to be
+  // your most current state from the other machine), a new id gets added.
+  const handleExportJournal = () => {
+    const payload = { version: 1, exported_at: new Date().toISOString(), trades, notebook };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `power_theme_journal_${new Date().toISOString().slice(0, 10)}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleImportJournalFile = (e) => {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // allow re-selecting the same file
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      let parsed;
+      try { parsed = JSON.parse(String(reader.result || "")); }
+      catch { setImportMsg("Couldn't parse that file — not valid JSON."); return; }
+      const importedTrades = Array.isArray(parsed.trades) ? parsed.trades : [];
+      const importedNotebook = Array.isArray(parsed.notebook) ? parsed.notebook : [];
+      if (!importedTrades.length && !importedNotebook.length) {
+        setImportMsg("No trades or notebook entries found in that file — expected a journal export from this app.");
+        return;
+      }
+
+      const tradeMap = new Map(trades.map(t => [t.id, t]));
+      let tAdded = 0, tUpdated = 0;
+      for (const t of importedTrades) {
+        if (!t.id) continue;
+        if (tradeMap.has(t.id)) tUpdated++; else tAdded++;
+        tradeMap.set(t.id, t);
+      }
+      if (tAdded || tUpdated) persist([...tradeMap.values()]);
+
+      const noteMap = new Map(notebook.map(n => [n.id, n]));
+      let nAdded = 0, nUpdated = 0;
+      for (const n of importedNotebook) {
+        if (!n.id) continue;
+        if (noteMap.has(n.id)) nUpdated++; else nAdded++;
+        noteMap.set(n.id, n);
+      }
+      if (nAdded || nUpdated) {
+        // Notebook renders in raw array order (newest-first by convention —
+        // addNote prepends), so re-sort by date after merging rather than
+        // relying on Map insertion order.
+        const mergedNotebook = [...noteMap.values()].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+        persistNotebook(mergedNotebook);
+      }
+
+      const parts = [];
+      if (tAdded) parts.push(`${tAdded} new trade${tAdded === 1 ? "" : "s"}`);
+      if (tUpdated) parts.push(`${tUpdated} trade${tUpdated === 1 ? "" : "s"} updated`);
+      if (nAdded) parts.push(`${nAdded} new note${nAdded === 1 ? "" : "s"}`);
+      if (nUpdated) parts.push(`${nUpdated} note${nUpdated === 1 ? "" : "s"} updated`);
+      setImportMsg(parts.length ? `Imported: ${parts.join(", ")}.` : "Nothing new to import — already in sync.");
     };
     reader.onerror = () => setImportMsg("Couldn't read that file.");
     reader.readAsText(file);
@@ -5333,6 +5406,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         )}
         <div className="flex-1"/>
         <input ref={fileInputRef} type="file" accept=".csv,text/csv" onChange={handleImportFile} className="hidden"/>
+        <input ref={journalFileInputRef} type="file" accept=".json,application/json" onChange={handleImportJournalFile} className="hidden"/>
         {trades.some(t => !t.theme) && (
           <button onClick={fillMissingThemes}
             className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 rounded-lg hover:bg-zinc-700/60 transition-colors">
@@ -5361,6 +5435,16 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         <button onClick={() => { setImportMsg(null); fileInputRef.current?.click(); }}
           className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 rounded-lg hover:bg-zinc-700/60 transition-colors">
           ⬆ Import IBKR CSV
+        </button>
+        <button onClick={handleExportJournal}
+          title="Download your journal (trades + notebook) as a JSON file — use this to move it to another laptop"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 rounded-lg hover:bg-zinc-700/60 transition-colors">
+          ⬇ Export Journal
+        </button>
+        <button onClick={() => { setImportMsg(null); journalFileInputRef.current?.click(); }}
+          title="Restore a journal JSON file exported from another laptop — merges by trade/note id, nothing local is lost"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 rounded-lg hover:bg-zinc-700/60 transition-colors">
+          ⬆ Import Journal
         </button>
         <button onClick={() => setShowForm(f => !f)}
           className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded-lg hover:bg-blue-500/30 transition-colors">
