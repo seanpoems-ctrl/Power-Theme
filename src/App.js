@@ -853,9 +853,17 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
       // Equipment" isn't in THEME_ETF_MAP but its parent "Telecommunications" is
       // close enough to have a sector ETF, giving the tile a proxy drill-down).
       const parentTheme = industryRankings.find(i => i.name?.toLowerCase() === itemName.toLowerCase())?.parent_theme;
-      const etfTicker = THEME_ETF_MAP[itemName] || (parentTheme && THEME_ETF_MAP[parentTheme]);
+      const directEtf = THEME_ETF_MAP[itemName];
+      const etfTicker = directEtf || (parentTheme && THEME_ETF_MAP[parentTheme]);
       const holdings = etfTicker ? (etfHoldings[etfTicker] ?? []) : [];
-      setSelectedTheme({ name: itemName, stocks: holdings, inTop5: false, fromEtf: etfTicker || null });
+      // Only when the ETF came from the broader PARENT theme (not the clicked
+      // item's own name) does the badge need to say so — otherwise "BOTZ ETF"
+      // on a "Farm & Heavy Construction Machinery" tile reads as if BOTZ's
+      // holdings (NVDA, ISRG, CGNX — robotics/AI names) were that industry's
+      // actual constituents, when they're really Industrial Automation's
+      // proxy ETF holdings (2026-09-25 fix: was silently misleading).
+      const fromEtfProxyTheme = (!directEtf && etfTicker && parentTheme && parentTheme !== itemName) ? parentTheme : null;
+      setSelectedTheme({ name: itemName, stocks: holdings, inTop5: false, fromEtf: etfTicker || null, fromEtfProxyTheme });
       return;
     }
     const themeObj = norm.subthemes ? norm : { ...norm, subthemes: [{ name: norm.name, stocks: norm.stocks || [] }] };
@@ -863,7 +871,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
       (s.stocks || []).map(st => ({ ...st, _subtheme: s.name }))
     );
     const sorted = [...stocks].sort((a, b) => (b.rs_52w ?? 0) - (a.rs_52w ?? 0));
-    setSelectedTheme({ name: itemName, stocks: sorted, inTop5: true, fromEtf: null });
+    setSelectedTheme({ name: itemName, stocks: sorted, inTop5: true, fromEtf: null, fromEtfProxyTheme: null });
   };
 
   const hasMatrix = groupedIndustries.length > 0;
@@ -975,7 +983,7 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                 )}
                 {selectedTheme.fromEtf && (
                   <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-500/15 border border-sky-500/30 text-sky-400">
-                    {selectedTheme.fromEtf} ETF
+                    {selectedTheme.fromEtf} ETF{selectedTheme.fromEtfProxyTheme ? ` · ${selectedTheme.fromEtfProxyTheme} proxy` : ''}
                   </span>
                 )}
               </div>
@@ -994,6 +1002,14 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                 </button>
               </div>
             </div>
+
+            {selectedTheme.fromEtfProxyTheme && (
+              <div className="px-4 py-2 bg-sky-500/10 border-b border-sky-500/20 text-[11px] text-sky-300 leading-snug">
+                {lang === 'zh'
+                  ? `「${selectedTheme.name}」未進入今日前5大主題，個股資料未收錄。以下顯示的是 ${selectedTheme.fromEtf}（${selectedTheme.fromEtfProxyTheme} 的代表 ETF）實際持股，並非「${selectedTheme.name}」本身的成分股。`
+                  : `"${selectedTheme.name}" isn't one of today's top 5 drilled themes, so it has no scraped stock data. Showing ${selectedTheme.fromEtf}'s actual holdings instead — the proxy ETF for ${selectedTheme.fromEtfProxyTheme}, not exact "${selectedTheme.name}" constituents.`}
+              </div>
+            )}
 
             {/* Stock list */}
             <div className="overflow-y-auto flex-1">
