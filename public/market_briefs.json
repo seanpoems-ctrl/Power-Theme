@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-25 16:45 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Calm Accumulation Continues",
+    "spy_price": 771.35,
+    "spy_change_pct": 0.54,
+    "vix": 14.87,
+    "hy_oas": 2.8,
+    "yield_curve": 0.31,
+    "credit_status": "Complacent",
+    "s5fi": 31.9,
+    "mmth": 51.8,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AKAM",
+          "company": "Akamai Technologies",
+          "reason": "Fresh news of a major AI Cloud deal with Anthropic fueled significant investor interest, positioning Akamai as a key player in the expanding AI infrastructure space."
+        },
+        {
+          "ticker": "MSFT",
+          "company": "Microsoft Corporation",
+          "reason": "Strong market momentum and continued analyst optimism around Azure AI capabilities and new Copilot integrations today underscore its leadership in cloud-based artificial intelligence."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "TSLA",
+          "company": "Tesla Inc.",
+          "reason": "Trading remains driven by ongoing debates around production targets, competitive pricing, and technical chart patterns, rather than fresh, fundamental catalysts."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-25 11:47 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "NVDA",
           "company": "NVIDIA Corporation",
           "reason": "NVIDIA continues to see strong investor interest driven by persistent AI enthusiasm, though no fresh catalysts were reported today."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-07 12:23 ET",
-    "phase": "POST",
-    "session": "Post-Market",
-    "mood": "Mixed Signals, Underlying Caution",
-    "spy_price": 770.19,
-    "spy_change_pct": -0.39,
-    "vix": 15.3,
-    "hy_oas": 2.65,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 51.9,
-    "mmth": 67.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AAPL",
-          "company": "Apple Inc.",
-          "reason": "Apple's new mixed-reality headset, Vision Pro 2, garnered overwhelmingly positive reviews following its developer conference, sparking renewed enthusiasm for its ecosystem expansion."
-        },
-        {
-          "ticker": "LLY",
-          "company": "Eli Lilly and Company",
-          "reason": "Eli Lilly announced promising Phase 3 trial results for its next-generation obesity drug, exceeding efficacy expectations and reinforcing its market leadership."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "NVDA",
-          "company": "NVIDIA Corporation",
-          "reason": "NVIDIA continued its multi-week rally, buoyed by ongoing bullish sentiment around artificial intelligence infrastructure and sector-wide rotational flow."
         }
       ]
     }
