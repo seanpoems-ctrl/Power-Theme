@@ -12801,7 +12801,7 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
         });
 
         const chart = createChart(containerRef.current, {
-          layout: { background: { color: "transparent" }, textColor: "#71717a", fontSize: 12 },
+          layout: { background: { color: "transparent" }, textColor: "#71717a", fontSize: 14 },
           grid: { vertLines: { color: "#ffffff08" }, horzLines: { color: "#ffffff08" } },
           timeScale: { borderColor: "#3f3f46", timeVisible: _miniIsIntraday(timeframe), secondsVisible: false, rightOffset: 20 },
           rightPriceScale: { borderColor: "#3f3f46" },
@@ -12868,14 +12868,14 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
 
   return (
     <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-lg overflow-hidden">
-      <div className="flex items-baseline gap-1.5 px-2 py-1 border-b border-zinc-800/60 overflow-hidden">
+      <div className="flex items-baseline gap-1.5 px-2 py-2 border-b border-zinc-800/60 overflow-hidden">
         <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
-          className="flex items-baseline gap-1.5 text-[13px] font-mono font-bold text-cyan-400 hover:text-cyan-300 flex-shrink-0 min-w-0">
+          className="flex items-baseline gap-1.5 text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 flex-shrink-0 min-w-0">
           <span>{ticker}</span>
           {category && <span className="text-zinc-500 font-sans font-normal truncate max-w-[80px]">{category}</span>}
         </a>
         {legend && status === "ready" && (
-          <div className="flex items-baseline gap-1 text-[12px] font-mono ml-auto flex-shrink-0 whitespace-nowrap overflow-hidden">
+          <div className="flex items-baseline gap-1 text-[14px] font-mono ml-auto flex-shrink-0 whitespace-nowrap overflow-hidden">
             <span className="text-zinc-500">O</span><span className="text-zinc-300">{fmtPx(legend.o)}</span>
             <span className="text-zinc-500">H</span><span className="text-zinc-300">{fmtPx(legend.h)}</span>
             <span className="text-zinc-500">L</span><span className="text-zinc-300">{fmtPx(legend.l)}</span>
@@ -12890,10 +12890,10 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
       </div>
       <div className={`relative ${onExpand ? "cursor-zoom-in" : ""}`} style={{ height, zoom: 1 / bodyZoom }} onClick={onExpand || undefined}>
         <div ref={containerRef} style={{ width: "100%", height: "100%" }}/>
-        {status === "loading" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[12px]">Loading…</div>}
-        {status === "no-data" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[12px]">No data for this range</div>}
-        {status === "error" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[12px]">Failed to load</div>}
-        {status === "no-proxy" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[12px] px-3 text-center">Bar-data proxy not configured</div>}
+        {status === "loading" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px]">Loading…</div>}
+        {status === "no-data" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px]">No data for this range</div>}
+        {status === "error" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px]">Failed to load</div>}
+        {status === "no-proxy" && <div className="absolute inset-0 flex items-center justify-center text-zinc-600 text-[14px] px-3 text-center">Bar-data proxy not configured</div>}
       </div>
     </div>
   );
@@ -12947,12 +12947,12 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
             <div className="flex bg-zinc-800/60 rounded-lg p-0.5 border border-zinc-700/40">
               {MINI_TIMEFRAME_OPTS.map(o => (
                 <button key={o.key} onClick={() => setTimeframe(o.key)}
-                  className={`px-2 py-0.5 text-[13px] font-medium rounded-md transition-all ${timeframe === o.key ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
+                  className={`px-2 py-0.5 text-[15px] font-medium rounded-md transition-all ${timeframe === o.key ? "bg-blue-500/20 text-blue-400 border border-blue-500/30" : "text-zinc-500 hover:text-zinc-300 border border-transparent"}`}>
                   {o.label}
                 </button>
               ))}
             </div>
-            <div className="flex items-center gap-2 text-[12px] text-zinc-500">
+            <div className="flex items-center gap-2 text-[14px] text-zinc-500">
               {MINI_EMA_CONFIG.map(cfg => (
                 <span key={cfg.period} className="flex items-center gap-1">
                   <span className="w-2 h-0.5 inline-block" style={{ backgroundColor: cfg.color }}/>
@@ -13003,7 +13003,7 @@ const MiniChartGridModal = ({ title, tickers, onClose }) => {
             )}
             <MiniChartCard key={`enlarged-${enlargedItem.ticker}::${enlargedItem.category || ""}`}
               ticker={enlargedItem.ticker} category={enlargedItem.category} timeframe={timeframe} height="min(840px, 75vh)"/>
-            <div className="text-center text-[13px] text-zinc-500 mt-2">
+            <div className="text-center text-[15px] text-zinc-500 mt-2">
               {enlargedIdx + 1} / {items.length} · ← → to navigate · Esc for the grid
             </div>
           </div>
