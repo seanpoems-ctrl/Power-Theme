@@ -969,7 +969,14 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800">
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-sm font-semibold text-zinc-100">{selectedTheme.name}</span>
+                <span className="text-sm font-semibold text-zinc-100">
+                  {selectedTheme.fromEtfProxyTheme ? `${selectedTheme.fromEtfProxyTheme} Proxy` : selectedTheme.name}
+                </span>
+                {selectedTheme.fromEtfProxyTheme && (
+                  <span className="text-xs text-zinc-500">
+                    {lang === 'zh' ? `（點擊自「${selectedTheme.name}」）` : `(for ${selectedTheme.name})`}
+                  </span>
+                )}
                 <span className="text-xs text-zinc-500 bg-zinc-800 px-1.5 py-0.5 rounded">
                   {sortedStocks.length !== selectedTheme.stocks.length
                     ? `${sortedStocks.length} / ${selectedTheme.stocks.length}`
@@ -983,13 +990,13 @@ const ThemeHeatmap = ({ themes, heatmapThemes, finvizThemeRankings, industryRank
                 )}
                 {selectedTheme.fromEtf && (
                   <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-sky-500/15 border border-sky-500/30 text-sky-400">
-                    {selectedTheme.fromEtf} ETF{selectedTheme.fromEtfProxyTheme ? ` · ${selectedTheme.fromEtfProxyTheme} proxy` : ''}
+                    {selectedTheme.fromEtf} ETF
                   </span>
                 )}
               </div>
               <div className="flex items-center gap-3">
                 {sortedStocks.length > 0 && (
-                  <button onClick={() => setMiniChartsFor({ title: selectedTheme.name, tickers: sortedStocks.map(s => s.ticker) })}
+                  <button onClick={() => setMiniChartsFor({ title: selectedTheme.fromEtfProxyTheme ? `${selectedTheme.fromEtfProxyTheme} Proxy` : selectedTheme.name, tickers: sortedStocks.map(s => s.ticker) })}
                     className="text-[11px] font-medium px-2 py-1 rounded border border-zinc-700 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800 transition-colors">
                     ▦ Mini Charts
                   </button>
