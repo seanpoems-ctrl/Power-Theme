@@ -12868,14 +12868,12 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
 
   return (
     <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-lg overflow-hidden">
-      <div className="flex items-baseline gap-1.5 px-2 py-2 border-b border-zinc-800/60 overflow-hidden">
-        <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
-          className="flex items-baseline gap-1.5 text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 flex-shrink-0 min-w-0">
-          <span>{ticker}</span>
-          {category && <span className="text-zinc-500 font-sans font-normal truncate max-w-[80px]">{category}</span>}
-        </a>
-        {legend && status === "ready" && (
-          <div className="flex items-baseline gap-1 text-[14px] font-mono ml-auto flex-shrink-0 whitespace-nowrap overflow-hidden">
+      <div className="flex items-baseline gap-1.5 px-2 py-2 border-b border-zinc-800/60 overflow-hidden whitespace-nowrap">
+        {category && <span className="text-[15px] text-zinc-500 font-sans font-normal truncate max-w-[80px] flex-shrink-0">{category}</span>}
+        {legend && status === "ready" ? (
+          <div className="flex items-baseline gap-1 text-[14px] font-mono flex-shrink-0 whitespace-nowrap overflow-hidden">
+            <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
+              className="text-[15px] font-bold text-cyan-400 hover:text-cyan-300">{ticker}</a>
             <span className="text-zinc-500">O</span><span className="text-zinc-300">{fmtPx(legend.o)}</span>
             <span className="text-zinc-500">H</span><span className="text-zinc-300">{fmtPx(legend.h)}</span>
             <span className="text-zinc-500">L</span><span className="text-zinc-300">{fmtPx(legend.l)}</span>
@@ -12886,6 +12884,9 @@ const MiniChartCard = ({ ticker, category, timeframe, height = 260, onExpand = n
               </span>
             )}
           </div>
+        ) : (
+          <a href={`https://www.tradingview.com/chart/?symbol=${ticker}`} target="_blank" rel="noreferrer"
+            className="text-[15px] font-mono font-bold text-cyan-400 hover:text-cyan-300 flex-shrink-0">{ticker}</a>
         )}
       </div>
       <div className={`relative ${onExpand ? "cursor-zoom-in" : ""}`} style={{ height, zoom: 1 / bodyZoom }} onClick={onExpand || undefined}>
