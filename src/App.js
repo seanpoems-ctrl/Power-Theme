@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect, useMemo, useCallback, useRef } from "react";
+import React, { useState, useEffect, useLayoutEffect, useMemo, useCallback, useRef, useId } from "react";
 import ETF_MAP_JSON from "./etf_map.json";
 import { ChevronDown, ChevronRight, Activity, BarChart3, RefreshCw, Search, SlidersHorizontal, X, Zap, TrendingUp, AlertTriangle, Trophy, Landmark, Minimize2, Clock, ExternalLink } from "lucide-react";
 import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
@@ -4153,6 +4153,11 @@ const ChecklistTab = () => {
 // Cumulative realized P&L over time, sorted by exit date — the standard
 // "equity curve" every trading journal leads with.
 const EquityCurveChart = ({ trades, onDayClick }) => {
+  // Unique per instance so two clip-paths (used to split the line/area fill
+  // into a green-above-zero / red-below-zero two-tone, rather than one
+  // color for the whole curve) never collide with another chart's if more
+  // than one is ever mounted at once.
+  const clipId = useId();
   const [hoverIdx, setHoverIdx] = useState(null);
   // view: {start, end} indices into `points` for the currently zoomed
   // window, or null for the full history. Kept as raw indices (not a
@@ -4227,8 +4232,11 @@ const EquityCurveChart = ({ trades, onDayClick }) => {
   const y = v => H - padB - ((v - minV) / range) * (H - padT - padB);
   const pathPts = vp.map((p, i) => `${x(i).toFixed(1)},${y(p.cum).toFixed(1)}`).join(" ");
   const zeroY = y(0);
-  const last = vp[vp.length - 1].cum;
-  const color = last >= 0 ? "#34d399" : "#f87171";
+  // Two-tone line/fill (green above $0, red below) instead of one color for
+  // the whole curve — rendered via two clip-paths rather than splitting the
+  // path at each zero-crossing, so the line stays one continuous polyline
+  // and the color simply cuts off exactly at the $0 boundary.
+  const POS_COLOR = "#34d399", NEG_COLOR = "#f87171";
   const areaPath = `M${x(0).toFixed(1)},${zeroY.toFixed(1)} L${pathPts} L${x(vp.length - 1).toFixed(1)},${zeroY.toFixed(1)} Z`;
   const fmt = v => `${v >= 0 ? "+" : ""}$${v.toFixed(0)}`;
 
@@ -4333,17 +4341,23 @@ const EquityCurveChart = ({ trades, onDayClick }) => {
       )}
       <svg width="100%" height={H} viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" className="block cursor-crosshair"
         onMouseMove={handleMove} onMouseLeave={handleLeave}>
+        <defs>
+          <clipPath id={`${clipId}-above`}><rect x="0" y="0" width={W} height={zeroY}/></clipPath>
+          <clipPath id={`${clipId}-below`}><rect x="0" y={zeroY} width={W} height={H - zeroY}/></clipPath>
+        </defs>
         <line x1={padL} y1={zeroY} x2={W - padR} y2={zeroY} stroke="#3f3f46" strokeWidth="1" strokeDasharray="4 3"/>
-        <path d={areaPath} fill={color} opacity="0.1"/>
+        <path d={areaPath} fill={POS_COLOR} opacity="0.1" clipPath={`url(#${clipId}-above)`}/>
+        <path d={areaPath} fill={NEG_COLOR} opacity="0.1" clipPath={`url(#${clipId}-below)`}/>
         {slumpPaths.map((d, i) => <path key={i} d={d} fill="#ef4444" opacity="0.22"/>)}
-        <polyline points={pathPts} fill="none" stroke={color} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round"/>
+        <polyline points={pathPts} fill="none" stroke={POS_COLOR} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" clipPath={`url(#${clipId}-above)`}/>
+        <polyline points={pathPts} fill="none" stroke={NEG_COLOR} strokeWidth="2" strokeLinejoin="round" strokeLinecap="round" clipPath={`url(#${clipId}-below)`}/>
         {emaPathPts && (
           <polyline points={emaPathPts} fill="none" stroke="#f59e0b" strokeWidth="1.25" strokeDasharray="4 2" strokeLinejoin="round" strokeLinecap="round" opacity="0.9"/>
         )}
         {hp && (
           <>
             <line x1={x(hoverIdx)} y1={padT} x2={x(hoverIdx)} y2={H - padB} stroke="#a1a1aa" strokeWidth="1" strokeDasharray="3 3"/>
-            <circle cx={x(hoverIdx)} cy={y(hp.cum)} r="3.5" fill={color} stroke="#18181b" strokeWidth="1.5"/>
+            <circle cx={x(hoverIdx)} cy={y(hp.cum)} r="3.5" fill={hp.cum >= 0 ? POS_COLOR : NEG_COLOR} stroke="#18181b" strokeWidth="1.5"/>
           </>
         )}
         <text x={4} y={zeroY + 3} fontSize="11" fill="#71717a">$0</text>
