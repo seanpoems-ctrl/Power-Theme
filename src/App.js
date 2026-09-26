@@ -5156,7 +5156,20 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   // that just changed `splits` via setState pass the new list directly,
   // since the state variable itself won't reflect it until next render.
   const reconcileFromLedger = (mergedExecs, splitsOverride = splits) => {
-    const adjustedExecs = _applySplitAdjustments(mergedExecs, splitsOverride);
+    // Normalizes symbols on every derivation, not just newly-parsed CSV
+    // text — a ledger entry saved before the .NEW/.OLD merge fix existed
+    // still has the raw "SQQQ.NEW" string sitting in storage, and deploying
+    // the parser fix doesn't retroactively touch data already on disk. Re-
+    // importing wouldn't have healed it either: the fresh parse normalizes
+    // to "SQQQ", which doesn't match the stale stored "SQQQ.NEW" signature,
+    // so they'd sit side by side double-counting instead of merging.
+    // Normalizing here means every path that derives trades (import, adding
+    // a split, anything else added later) self-heals old data for free.
+    const normalizedExecs = mergedExecs.map(e => {
+      const n = _normalizeIbkrSymbol(e.symbol);
+      return n === e.symbol ? e : { ...e, symbol: n };
+    });
+    const adjustedExecs = _applySplitAdjustments(normalizedExecs, splitsOverride);
     const legacyIbkr = t => t._ibkr || t.notes === "Imported from IBKR";
     const freshIbkr = deriveIbkrTrades(adjustedExecs, categoryThemeMap)
       .map(t => t.theme ? t : { ...t, theme: resolveTheme(t.ticker) });
@@ -5421,7 +5434,21 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       // time+qty+price) so a position opened in an earlier import and closed
       // in this one reconciles correctly — see deriveIbkrTrades for why this
       // has to run over the FULL execution history, not just this file.
-      const execMap = new Map(loadExecs().map(x => [_execSig(x), x]));
+      //
+      // Existing ledger entries get their symbol normalized here too (not
+      // just newly-parsed ones) — an entry saved before the .NEW/.OLD merge
+      // fix existed still has the raw "SQQQ.NEW" string in storage, and
+      // without this, re-importing the same statement again would compare
+      // its freshly-normalized "SQQQ" rows against that stale un-normalized
+      // signature, see no match, and insert them as new — double-counting
+      // the same real fills instead of recognizing them as already known.
+      // Normalizing on load means the corrected symbol also gets persisted
+      // back via saveExecs below, so this only needs to happen once.
+      const execMap = new Map(loadExecs().map(x => {
+        const symbol = _normalizeIbkrSymbol(x.symbol);
+        const n = symbol === x.symbol ? x : { ...x, symbol };
+        return [_execSig(n), n];
+      }));
       let newExecCount = 0;
       for (const x of newExecs) {
         const sig = _execSig(x);
