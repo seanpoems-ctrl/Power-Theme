@@ -3407,11 +3407,26 @@ function parseIbkrExecutions(csvText) {
       const priceIdx = cols.findIndex(c => /^(t\.?\s*price|price|tradeprice)$/i.test(c));
       const dateIdx = cols.findIndex(c => /^(date\/time|date|tradedate)$/i.test(c));
       const commIdx = cols.findIndex(c => /^(comm\/fee|commission)$/i.test(c));
+      // A Flex Query "Trades" export includes every asset class in one flat
+      // table — FX conversions, bonds, futures alongside stocks — unlike the
+      // sectioned Activity Statement format (filtered above via "Asset
+      // Category"). Missing the equivalent filter here let FX pairs like
+      // "USD.JPY"/"SGD.HKD" and bonds get grouped as if they were stock
+      // positions; a currency conversion's running balance almost never
+      // lands on exactly zero the way a stock buy/sell does, so every one
+      // piled up as a fake permanently-"open" position (confirmed
+      // 2026-09-27 against a real multi-year Flex Query export: SGD.JPY,
+      // USD.HKD, USD.SGD, USD.JPY, SGPV19 all showed as open stock trades).
+      const assetIdx = cols.findIndex(c => /^asset\s*(class|category)$/i.test(c));
       if (symIdx >= 0 && qtyIdx >= 0 && priceIdx >= 0 && dateIdx >= 0) {
         const startAt = lines.indexOf(headerLine) + 1;
         for (let i = startAt; i < lines.length; i++) {
           if (!lines[i].trim()) continue;
           const cells = _splitCsvLine(lines[i]);
+          if (assetIdx >= 0) {
+            const assetCat = cells[assetIdx];
+            if (assetCat && !/^stk$|stock/i.test(assetCat)) continue;
+          }
           const symbol = cells[symIdx], dt = cells[dateIdx];
           const qty = _ibkrNum(cells[qtyIdx]), price = _ibkrNum(cells[priceIdx]);
           if (!symbol || !dt || isNaN(qty) || isNaN(price) || qty === 0) continue;
