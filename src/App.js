@@ -3389,6 +3389,22 @@ function _ibkrNum(s) {
 function _normalizeIbkrSymbol(symbol) {
   return symbol.trim().replace(/\.(NEW|OLD)$/i, "");
 }
+// Detects an FX conversion recorded as a "BASE.QUOTE" pseudo-symbol (e.g.
+// "USD.JPY", "SGD.HKD") — IBKR's Trades report convention for currency
+// pairs. The sectioned Activity Statement parser already excludes these via
+// "Asset Category"; the flat Flex Query fallback (older exports) didn't
+// used to, so a ledger populated before that fix can still have them stuck
+// in storage forever — that fix only stops a NEW bad row from being parsed
+// in, it doesn't reach back and remove one already there. Requires BOTH
+// halves to be a real ISO currency code (not just "3 letters — 3 letters"),
+// so it can't misfire on a real ticker like "BRK.B" (second half too
+// short) or a corporate-action symbol like "ABC.NEW" ("NEW" isn't a
+// currency code).
+const _FX_CODES = new Set(["USD","EUR","GBP","JPY","CHF","CAD","AUD","NZD","HKD","SGD","CNH","CNY","SEK","NOK","DKK","MXN","ZAR","ILS","PLN","TRY","KRW","INR","RUB","CZK","HUF","THB","IDR","PHP","MYR","AED","SAR","TWD","BRL","CLP","COP","ARS"]);
+function _isLikelyForexSymbol(symbol) {
+  const m = /^([A-Z]{3})\.([A-Z]{3})$/.exec(symbol);
+  return !!m && _FX_CODES.has(m[1]) && _FX_CODES.has(m[2]);
+}
 // IBKR's "Date/Time" column shows up in more than one configured format
 // depending on the account's statement settings:
 //   "2026-01-15, 09:31:00"   comma-separated, dashed date
@@ -5165,10 +5181,12 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     // so they'd sit side by side double-counting instead of merging.
     // Normalizing here means every path that derives trades (import, adding
     // a split, anything else added later) self-heals old data for free.
-    const normalizedExecs = mergedExecs.map(e => {
-      const n = _normalizeIbkrSymbol(e.symbol);
-      return n === e.symbol ? e : { ...e, symbol: n };
-    });
+    const normalizedExecs = mergedExecs
+      .filter(e => !_isLikelyForexSymbol(e.symbol))
+      .map(e => {
+        const n = _normalizeIbkrSymbol(e.symbol);
+        return n === e.symbol ? e : { ...e, symbol: n };
+      });
     const adjustedExecs = _applySplitAdjustments(normalizedExecs, splitsOverride);
     const legacyIbkr = t => t._ibkr || t.notes === "Imported from IBKR";
     const freshIbkr = deriveIbkrTrades(adjustedExecs, categoryThemeMap)
@@ -5443,14 +5461,21 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       // signature, see no match, and insert them as new — double-counting
       // the same real fills instead of recognizing them as already known.
       // Normalizing on load means the corrected symbol also gets persisted
-      // back via saveExecs below, so this only needs to happen once.
-      const execMap = new Map(loadExecs().map(x => {
-        const symbol = _normalizeIbkrSymbol(x.symbol);
-        const n = symbol === x.symbol ? x : { ...x, symbol };
-        return [_execSig(n), n];
-      }));
+      // back via saveExecs below, so this only needs to happen once. Same
+      // treatment for an FX conversion recorded as a "USD.JPY"-style
+      // pseudo-symbol — the asset-class filter only stops a NEW bad row
+      // from being parsed in, it doesn't retroactively strip one already
+      // sitting in a ledger populated before that fix existed.
+      const execMap = new Map(
+        loadExecs().filter(x => !_isLikelyForexSymbol(x.symbol)).map(x => {
+          const symbol = _normalizeIbkrSymbol(x.symbol);
+          const n = symbol === x.symbol ? x : { ...x, symbol };
+          return [_execSig(n), n];
+        })
+      );
       let newExecCount = 0;
       for (const x of newExecs) {
+        if (_isLikelyForexSymbol(x.symbol)) continue;
         const sig = _execSig(x);
         if (!execMap.has(sig)) newExecCount++;
         execMap.set(sig, x);
