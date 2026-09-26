@@ -3333,6 +3333,24 @@ function _ibkrNum(s) {
   const n = parseFloat(v);
   return neg ? -n : n;
 }
+// IBKR temporarily renames a security to "<TICKER>.NEW" (or "<TICKER>.OLD"
+// on the other side) during a corporate action like a reverse split, before
+// it reverts to the plain ticker a few days later. There's no execution
+// recording the handoff — the shares just continue to exist under a
+// different symbol — so grouping by raw symbol treats it as two entirely
+// unrelated tickers: the pre-action shares look permanently "open" (their
+// real closing sale lands on the OTHER symbol), and the post-action selling
+// looks like a naked short opening from nothing. Confirmed 2026-09-27
+// against a real statement: SQQQ.NEW bought 99/sold 49 (50 "stuck open"),
+// and the very next day plain SQQQ sold exactly 50 shares with no
+// preceding buy — merging the two into one symbol closes both correctly
+// AND fixes several months of subsequent SQQQ trades that had been
+// wrongly absorbed into the phantom short leftover from this gap. Doesn't
+// touch a real share-class ticker like "BRK.B" — only IBKR's specific
+// ".NEW"/".OLD" transition suffix.
+function _normalizeIbkrSymbol(symbol) {
+  return symbol.trim().replace(/\.(NEW|OLD)$/i, "");
+}
 // IBKR's "Date/Time" column shows up in more than one configured format
 // depending on the account's statement settings:
 //   "2026-01-15, 09:31:00"   comma-separated, dashed date
@@ -3392,7 +3410,7 @@ function parseIbkrExecutions(csvText) {
       // reads it.
       const commRaw = _ibkrNum(cells[header["Comm/Fee"]] ?? cells[header["Commission"]]);
       const commission = isNaN(commRaw) ? 0 : Math.abs(commRaw);
-      execs.push({ symbol: symbol.trim(), date: dPart, time: tPart, qty, price, commission });
+      execs.push({ symbol: _normalizeIbkrSymbol(symbol), date: dPart, time: tPart, qty, price, commission });
     }
   }
 
@@ -3433,7 +3451,7 @@ function parseIbkrExecutions(csvText) {
           const { date: dPart, time: tPart } = _parseIbkrDateTime(dt);
           const commRaw = commIdx >= 0 ? _ibkrNum(cells[commIdx]) : NaN;
           const commission = isNaN(commRaw) ? 0 : Math.abs(commRaw);
-          execs.push({ symbol: symbol.trim(), date: dPart, time: tPart, qty, price, commission });
+          execs.push({ symbol: _normalizeIbkrSymbol(symbol), date: dPart, time: tPart, qty, price, commission });
         }
       }
     }
