@@ -3204,7 +3204,11 @@ function loadExecs() {
 function saveExecs(arr) {
   try { localStorage.setItem(EXECS_KEY, JSON.stringify(arr)); } catch { /* quota */ }
 }
-function _execSig(e) { return `${e.symbol}|${e.date}|${e.time}|${e.qty}|${e.price}`; }
+// `seq` disambiguates genuinely distinct fills that share an identical
+// (symbol, date, time, qty, price) — see parseIbkrExecutions for why this
+// happens and matters. Falls back to 0 for executions saved before `seq`
+// existed.
+function _execSig(e) { return `${e.symbol}|${e.date}|${e.time}|${e.qty}|${e.price}|${e.seq || 0}`; }
 
 // ── Other income — dividends and Stock Yield Enhancement Program (securities
 // lending) payouts. IBKR reports these in separate sections of the same
@@ -3418,6 +3422,27 @@ function parseIbkrExecutions(csvText) {
         }
       }
     }
+  }
+  // Disambiguate genuinely distinct fills that share an identical
+  // (symbol, date, time, qty, price) — e.g. two legs of a scaled 3-stop
+  // exit landing on the same quantity, filled close enough together that
+  // IBKR's own timestamp (or our minute-level parsing of it) can't tell
+  // them apart. Without this, the second fill's ledger signature is
+  // indistinguishable from the first's and gets silently treated as an
+  // already-seen duplicate on merge, permanently undercounting how many
+  // shares were actually sold (seen 2026-09-27: HBM's three-way stop split
+  // sold 162/161/161 shares — the two identical 161-share legs collapsed
+  // into one, leaving the position stuck open with 161 phantom shares that
+  // were, in reality, already sold). `seq` is the position of this fill
+  // among others sharing the same signature, in file order — stable across
+  // re-imports of overlapping files as long as IBKR emits them in a
+  // consistent order, which it does.
+  const seqCounts = new Map();
+  for (const e of execs) {
+    const key = `${e.symbol}|${e.date}|${e.time}|${e.qty}|${e.price}`;
+    const n = seqCounts.get(key) || 0;
+    e.seq = n;
+    seqCounts.set(key, n + 1);
   }
   return { execs, skipped: execs.length ? 0 : (flat ? 0 : -1) };
 }
