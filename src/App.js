@@ -3162,6 +3162,11 @@ const EMPTY_TRADE = {
   // table and chart. [{date, time, price, qty}, ...]; empty for a
   // single-fill trade or one entered manually.
   entry_fills: [], exit_fills: [],
+  // Set when exit_price was typed in by hand on an already-imported IBKR
+  // trade (via the Exit cell's InlinePriceClose), rather than derived from
+  // an actual closing execution — protects it from a future re-import's
+  // reconciliation flipping it back to "open" (see handleImportFile).
+  manually_closed: false,
 };
 
 const SETUP_OPTS = ["Breakout", "Pullback", "VCP", "Flag", "Base", "Reversal", "Earnings", "Gap & Go", "Other"];
@@ -3598,6 +3603,32 @@ const InlineText = ({ value, onChange, placeholder, mono, cls }) => {
       onKeyDown={e => { if (e.key === "Enter") { onChange(draft); setEditing(false); } if (e.key === "Escape") setEditing(false); }}
       className="text-[11px] bg-zinc-800 border border-zinc-600 rounded px-1.5 py-0.5 text-zinc-200 outline-none w-full min-w-[80px]"
       placeholder={placeholder}/>
+  );
+};
+
+// A dollar-formatted variant of InlineText for exit_price — needed so a
+// position that's actually closed (e.g. an IBKR statement gap, or a
+// corporate action like a reverse split that leaves no closing "sell" for
+// the execution parser to find at all) can be manually marked closed.
+// Displays "$105.10" (fmt2'd) when set, an "Open" placeholder when not —
+// unlike InlineText's generic "—" placeholder, since this cell's whole
+// point is showing open/closed status.
+const InlinePriceClose = ({ value, onChange }) => {
+  const [editing, setEditing] = useState(false);
+  const [draft, setDraft]     = useState(value || "");
+  if (!editing) return (
+    <span onClick={() => { setDraft(value || ""); setEditing(true); }}
+      title="Click to set an exit price and manually close this position"
+      className="cursor-pointer hover:opacity-70 transition-opacity">
+      {value ? `$${fmt2(value)}` : <span className="text-blue-400 text-[11px]">Open</span>}
+    </span>
+  );
+  return (
+    <input autoFocus type="text" inputMode="decimal" value={draft} onChange={e => setDraft(e.target.value)}
+      onBlur={() => { onChange(draft); setEditing(false); }}
+      onKeyDown={e => { if (e.key === "Enter") { onChange(draft); setEditing(false); } if (e.key === "Escape") setEditing(false); }}
+      placeholder="Exit $"
+      className="text-[11px] bg-zinc-800 border border-zinc-600 rounded px-1.5 py-0.5 text-zinc-200 outline-none w-20"/>
   );
 };
 
@@ -4980,6 +5011,18 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     persist(updated);
   };
 
+  // Setting exit_price by hand (via InlinePriceClose) tags the trade
+  // manually_closed so a future IBKR re-import's reconciliation — which
+  // otherwise re-derives every _ibkr trade fresh from the execution ledger
+  // — leaves it alone instead of flipping it back to "open" the moment it
+  // finds no matching closing execution (see handleImportFile).
+  const closeManually = (id, exitPriceValue) => {
+    const updated = trades.map(t => t.id === id
+      ? calcDerived({ ...t, exit_price: exitPriceValue, manually_closed: exitPriceValue !== "" })
+      : t);
+    persist(updated);
+  };
+
   const addTrade = () => {
     const filled = calcDerived({ ...draft, id: draft.id || newId() });
     persist([filled, ...trades]);
@@ -5226,6 +5269,14 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         const key = `${fresh.ticker}|${fresh.date}|${fresh.entry_time}`;
         const old = oldIbkrByKey.get(key);
         if (!old) { added++; byId.set(fresh.id, fresh); continue; }
+        // A trade the user manually marked closed (e.g. a corporate action
+        // like a reverse split, or an IBKR statement gap) has no real
+        // closing execution for the ledger to ever find — every future
+        // re-import would otherwise keep re-deriving it as still open and
+        // silently wipe out the manual close. Leave it exactly as the user
+        // left it; only genuinely new fills matter here, and this trade
+        // simply has none.
+        if (old.manually_closed) continue;
         const base = {
           ...fresh,
           id: old.id,
@@ -6046,7 +6097,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
                     {t.entry_fills?.length > 1 && <span className="ml-1 text-[9px] text-zinc-600">avg ×{t.entry_fills.length}</span>}
                   </td>
                   <td className="px-2 py-1.5 text-[11px] font-mono text-zinc-300">
-                    {t.exit_price ? `$${fmt2(t.exit_price)}` : <span className="text-blue-400 text-[11px]">Open</span>}
+                    <InlinePriceClose value={t.exit_price} onChange={v => closeManually(t.id, v)}/>
                     {t.exit_price && t.exit_fills?.length > 1 && <span className="ml-1 text-[9px] text-zinc-600">avg ×{t.exit_fills.length}</span>}
                     {!t.exit_price && t.exit_fills?.length > 0 && (
                       <span className="ml-1 text-[9px] font-semibold text-amber-400" title="Some shares already sold — remaining shares still open">
