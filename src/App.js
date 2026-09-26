@@ -5626,6 +5626,7 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     { k: "1m",  l: "1M",  from: _addMonths(todayStr, -1) },
     { k: "ytd", l: "YTD", from: todayStr.slice(0, 4) + "-01-01" },
     { k: "1y",  l: "1Y",  from: _addMonths(todayStr, -12) },
+    { k: "3y",  l: "3Y",  from: _addMonths(todayStr, -36) },
   ];
   // No date filter set = "All" — the default, unfiltered state — rather
   // than leaving every preset unhighlighted when nothing's selected.
