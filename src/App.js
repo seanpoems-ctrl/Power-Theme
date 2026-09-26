@@ -3210,6 +3210,44 @@ function saveExecs(arr) {
 // existed.
 function _execSig(e) { return `${e.symbol}|${e.date}|${e.time}|${e.qty}|${e.price}|${e.seq || 0}`; }
 
+// ── Stock splits — a forward/reverse split multiplies share count without
+// any execution recording it (unlike a symbol-rename corporate action,
+// there's no ".NEW" ticker to merge — same symbol throughout, the share
+// count and price scale just jump discontinuously). Recorded by the user
+// (ticker, effective date, ratio) and applied to the execution ledger
+// before every derivation: every execution strictly before the effective
+// date gets its quantity multiplied and price divided by the ratio, so the
+// running position math operates in consistent post-split share units
+// across the whole history. Confirmed 2026-09-27 against a real statement:
+// ANET did a 4-for-1 split around 2021-11-17 — 40 shares bought at ~$525
+// pre-split were the same shares later sold as 160 shares at ~$130
+// post-split, and without this adjustment the ledger saw 160 sold against
+// only 40 ever bought, an unresolvable 120-share gap that kept the
+// position stuck open indefinitely and absorbed years of later trades.
+const SPLITS_KEY = "power_theme_journal_splits";
+function loadSplits() {
+  try { return JSON.parse(localStorage.getItem(SPLITS_KEY) || "[]"); } catch { return []; }
+}
+function saveSplits(arr) {
+  try { localStorage.setItem(SPLITS_KEY, JSON.stringify(arr)); } catch { /* quota */ }
+}
+function _applySplitAdjustments(execs, splits) {
+  if (!splits.length) return execs;
+  const byTicker = new Map();
+  for (const s of splits) (byTicker.get(s.ticker) || byTicker.set(s.ticker, []).get(s.ticker)).push(s);
+  return execs.map(e => {
+    const applicable = byTicker.get(e.symbol);
+    if (!applicable) return e;
+    let qty = e.qty, price = e.price;
+    // Multiple splits on the same ticker over the years all compound —
+    // apply every one whose effective date is after this execution.
+    for (const s of applicable) {
+      if (e.date < s.date) { qty *= s.ratio; price /= s.ratio; }
+    }
+    return qty === e.qty && price === e.price ? e : { ...e, qty, price };
+  });
+}
+
 // ── Other income — dividends and Stock Yield Enhancement Program (securities
 // lending) payouts. IBKR reports these in separate sections of the same
 // Activity Statement CSV the Trades import already reads, but they aren't
@@ -4997,6 +5035,9 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const [notebookDraft, setNotebookDraft] = useState("");
   const [income, setIncome]         = useState(() => loadIncome());
   const [showIncome, setShowIncome] = useState(() => { try { return localStorage.getItem("power_theme_journal_income_open") === "1"; } catch { return false; } });
+  const [splits, setSplits]         = useState(() => loadSplits());
+  const [showSplits, setShowSplits] = useState(false);
+  const [splitDraft, setSplitDraft] = useState({ ticker: "", date: "", newShares: "", oldShares: "" });
   const [showFilters, setShowFilters] = useState(false);
   const [fTicker, setFTicker]       = useState("");
   const [fSetup, setFSetup]         = useState("");
@@ -5105,6 +5146,95 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
   const persistNotebook = (arr) => { setNotebook(arr); saveNotebook(arr); };
   const persistIncome = (arr) => { setIncome(arr); saveIncome(arr); };
   const toggleShowIncome = () => setShowIncome(v => { const next = !v; try { localStorage.setItem("power_theme_journal_income_open", next ? "1" : "0"); } catch {} return next; });
+  const persistSplits = (arr) => { setSplits(arr); saveSplits(arr); };
+
+  // Shared by handleImportFile and the split-management panel — both need
+  // to re-derive every IBKR trade from the (split-adjusted) execution
+  // ledger and reconcile it against the current journal. Pulled out so
+  // adding/removing a split re-runs the exact same logic a CSV re-import
+  // would, without needing an actual file. `splitsOverride` lets a caller
+  // that just changed `splits` via setState pass the new list directly,
+  // since the state variable itself won't reflect it until next render.
+  const reconcileFromLedger = (mergedExecs, splitsOverride = splits) => {
+    const adjustedExecs = _applySplitAdjustments(mergedExecs, splitsOverride);
+    const legacyIbkr = t => t._ibkr || t.notes === "Imported from IBKR";
+    const freshIbkr = deriveIbkrTrades(adjustedExecs, categoryThemeMap)
+      .map(t => t.theme ? t : { ...t, theme: resolveTheme(t.ticker) });
+    const oldIbkrByKey = new Map(
+      trades.filter(legacyIbkr).map(t => [`${t.ticker}|${t.date}|${t.entry_time}`, t])
+    );
+    let added = 0, closed = 0, updated = 0;
+    const byId = new Map(trades.map(t => [t.id, t]));
+    for (const fresh of freshIbkr) {
+      const key = `${fresh.ticker}|${fresh.date}|${fresh.entry_time}`;
+      const old = oldIbkrByKey.get(key);
+      if (!old) { added++; byId.set(fresh.id, fresh); continue; }
+      if (old.manually_closed) continue;
+      const base = {
+        ...fresh,
+        id: old.id,
+        theme: old.theme || fresh.theme,
+        setup: old.setup,
+        grade: old.grade,
+        notes: old.notes,
+        stop_used: old.stop_used,
+        stop_price: old.stop_price,
+      };
+      const merged = { ...base };
+      const entryN = parseFloat(base.entry_price), stopN = _avgStop(base.stop_price);
+      const pnlN = parseFloat(base.pnl_dollars), shN = parseFloat(base.shares);
+      if (!isNaN(entryN) && !isNaN(stopN) && Math.abs(entryN - stopN) > 0 && !isNaN(pnlN)) {
+        const risk = Math.abs(entryN - stopN) * (isNaN(shN) ? 1 : shN);
+        merged.r_multiple = risk > 0 ? (pnlN / risk).toFixed(2) : "";
+      }
+      if (!old.exit_date && merged.exit_date) closed++;
+      else if (JSON.stringify(old) !== JSON.stringify(merged)) updated++;
+      byId.set(old.id, merged);
+    }
+    const freshKeys = new Set(freshIbkr.map(t => `${t.ticker}|${t.date}|${t.entry_time}`));
+    let removed = 0;
+    for (const t of [...byId.values()]) {
+      if (t._ibkr && !freshKeys.has(`${t.ticker}|${t.date}|${t.entry_time}`)) {
+        byId.delete(t.id);
+        removed++;
+      }
+    }
+    persist([...byId.values()]);
+    return { added, closed, updated, removed };
+  };
+
+  const _splitMsg = (stats, prefix) => {
+    const parts = [];
+    if (stats.added) parts.push(`${stats.added} new trade${stats.added === 1 ? "" : "s"}`);
+    if (stats.closed) parts.push(`${stats.closed} newly closed`);
+    if (stats.updated) parts.push(`${stats.updated} updated`);
+    if (stats.removed) parts.push(`${stats.removed} stale duplicate${stats.removed === 1 ? "" : "s"} removed`);
+    setImportMsg(`${prefix}${parts.length ? " " + parts.join(", ") + "." : " No trades affected."}`);
+  };
+
+  const addSplit = () => {
+    const { ticker, date, newShares, oldShares } = splitDraft;
+    const nShares = parseFloat(newShares), oShares = parseFloat(oldShares);
+    if (!ticker.trim() || !date || isNaN(nShares) || isNaN(oShares) || nShares <= 0 || oShares <= 0) {
+      setImportMsg("Enter a ticker, effective date, and both share counts (e.g. 4-for-1 split: new=4, old=1).");
+      return;
+    }
+    const rec = { id: newId(), ticker: ticker.trim().toUpperCase(), date, ratio: nShares / oShares, newShares: nShares, oldShares: oShares };
+    const updatedSplits = [...splits, rec];
+    persistSplits(updatedSplits);
+    setSplitDraft({ ticker: "", date: "", newShares: "", oldShares: "" });
+    // This changes how EXISTING ledger executions get grouped — re-derive
+    // against the ledger as it already stands, no new import needed.
+    const stats = reconcileFromLedger(loadExecs(), updatedSplits);
+    _splitMsg(stats, `Split recorded: ${rec.ticker} ${nShares}-for-${oShares} on ${date}.`);
+  };
+
+  const removeSplit = (id) => {
+    const updatedSplits = splits.filter(s => s.id !== id);
+    persistSplits(updatedSplits);
+    const stats = reconcileFromLedger(loadExecs(), updatedSplits);
+    _splitMsg(stats, "Split removed and journal re-derived.");
+  };
   const addNote = () => {
     const text = notebookDraft.trim();
     if (!text) return;
@@ -5301,95 +5431,13 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
       const mergedExecs = [...execMap.values()];
       saveExecs(mergedExecs);
 
-      // Re-derive every IBKR trade from the complete execution history, then
-      // reconcile against the previously-derived rows so user edits (theme,
-      // setup, grade, notes, stop) survive. Matched by (ticker, date,
-      // entry_time) — stable across re-derivation, since appending newer
-      // executions never moves an earlier segment's start.
-      //
-      // Migration safety: trades imported before this fix have no `_ibkr`
-      // flag, and their raw fills were never captured into the ledger (it
-      // starts empty). If this import's file doesn't happen to touch one of
-      // those old positions, deriveIbkrTrades has no way to reproduce it —
-      // so rather than replacing "all old IBKR trades" wholesale (which
-      // would silently delete anything not mentioned in this file), only
-      // trades that freshIbkr actually finds a match for get updated in
-      // place; everything else in the journal is left completely untouched.
-      const legacyIbkr = t => t._ibkr || t.notes === "Imported from IBKR";
-      const freshIbkr = deriveIbkrTrades(mergedExecs, categoryThemeMap)
-        .map(t => t.theme ? t : { ...t, theme: resolveTheme(t.ticker) });
-      const oldIbkrByKey = new Map(
-        trades.filter(legacyIbkr).map(t => [`${t.ticker}|${t.date}|${t.entry_time}`, t])
-      );
-      let added = 0, closed = 0, updated = 0;
-      const byId = new Map(trades.map(t => [t.id, t]));
-      for (const fresh of freshIbkr) {
-        const key = `${fresh.ticker}|${fresh.date}|${fresh.entry_time}`;
-        const old = oldIbkrByKey.get(key);
-        if (!old) { added++; byId.set(fresh.id, fresh); continue; }
-        // A trade the user manually marked closed (e.g. a corporate action
-        // like a reverse split, or an IBKR statement gap) has no real
-        // closing execution for the ledger to ever find — every future
-        // re-import would otherwise keep re-deriving it as still open and
-        // silently wipe out the manual close. Leave it exactly as the user
-        // left it; only genuinely new fills matter here, and this trade
-        // simply has none.
-        if (old.manually_closed) continue;
-        const base = {
-          ...fresh,
-          id: old.id,
-          theme: old.theme || fresh.theme,
-          setup: old.setup,
-          grade: old.grade,
-          notes: old.notes,
-          stop_used: old.stop_used,
-          stop_price: old.stop_price,
-        };
-        // Recompute only r_multiple (depends on stop_price, a user-editable
-        // field carried over from `old`) — NOT via calcDerived, which would
-        // recompute pnl_dollars/pnl_pct from the rounded entry_price/
-        // exit_price strings and reintroduce the precision bug fresh's
-        // full-precision values were just fixed for.
-        const merged = { ...base };
-        const entryN = parseFloat(base.entry_price), stopN = _avgStop(base.stop_price);
-        const pnlN = parseFloat(base.pnl_dollars), shN = parseFloat(base.shares);
-        if (!isNaN(entryN) && !isNaN(stopN) && Math.abs(entryN - stopN) > 0 && !isNaN(pnlN)) {
-          const risk = Math.abs(entryN - stopN) * (isNaN(shN) ? 1 : shN);
-          merged.r_multiple = risk > 0 ? (pnlN / risk).toFixed(2) : "";
-        }
-        if (!old.exit_date && merged.exit_date) closed++;
-        else if (JSON.stringify(old) !== JSON.stringify(merged)) updated++;
-        byId.set(old.id, merged);
-      }
-
-      // Clean up orphaned phantom trades left behind by an earlier import
-      // that only had a PARTIAL execution history. E.g.: a sell arrives
-      // before its matching buy has been merged in — with no offsetting buy
-      // yet known, deriveIbkrTrades has no choice but to record it as its
-      // own standalone short trade, keyed by that sell's own date/time. Once
-      // the buy is merged (this import or a later one), the SAME executions
-      // correctly collapse into one long trade keyed by the BUY's date/time
-      // — but the old standalone short row's key no longer matches anything
-      // in the fresh derivation, so the update-in-place loop above silently
-      // skips it forever, leaving a duplicate "open" position sitting next
-      // to the correct one (seen 2026-09-26: PLTU and ZETA each ended up
-      // with a phantom open short alongside the correct long/closed row).
-      // Only safe for trades tagged `_ibkr: true` — those are fully
-      // reproducible from the ledger, so "not in the fresh derivation"
-      // unambiguously means stale. Older rows tagged only by the
-      // notes-based heuristic predate the ledger (no captured raw fills to
-      // re-derive from), so there's no way to verify they're stale — those
-      // are left alone, same as the update-in-place logic above.
-      const freshKeys = new Set(freshIbkr.map(t => `${t.ticker}|${t.date}|${t.entry_time}`));
-      let removed = 0;
-      for (const t of [...byId.values()]) {
-        if (t._ibkr && !freshKeys.has(`${t.ticker}|${t.date}|${t.entry_time}`)) {
-          byId.delete(t.id);
-          removed++;
-        }
-      }
-
-      persist([...byId.values()]);
+      // Re-derive every IBKR trade from the complete (split-adjusted)
+      // execution history and reconcile against the previously-derived
+      // rows so user edits (theme, setup, grade, notes, stop) survive, any
+      // trade the user manually closed stays closed, and phantom trades
+      // left behind by an earlier partial import get cleaned up — see
+      // reconcileFromLedger for the full details of each of those steps.
+      const { added, closed, updated, removed } = reconcileFromLedger(mergedExecs);
 
       const parts = [];
       if (newExecCount) parts.push(`${newExecCount} new execution${newExecCount === 1 ? "" : "s"} synced`);
@@ -5840,6 +5888,60 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
         </div>
       )}
 
+      {/* ── Stock splits ─────────────────────────────────────────────────── */}
+      {showSplits && (
+        <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl mb-5 overflow-hidden">
+          <div className="px-4 py-3 border-b border-zinc-800/60">
+            <div className="text-[12px] font-semibold text-zinc-300 mb-1">Stock Splits</div>
+            <div className="text-[11px] text-zinc-500 mb-3">
+              A split (forward or reverse) isn't a trade IBKR reports, so it can leave a ticker stuck "open" forever with a share-count that never reconciles. Record it here — every execution before the effective date gets its shares/price adjusted before trades are grouped.
+            </div>
+            <div className="flex items-end gap-2 flex-wrap">
+              <div>
+                <div className="text-[10px] text-zinc-600 mb-1">Ticker</div>
+                <input value={splitDraft.ticker} onChange={e => setSplitDraft(d => ({ ...d, ticker: e.target.value }))}
+                  placeholder="ANET" className="w-24 text-[12px] bg-zinc-800 border border-zinc-700/60 rounded px-2 py-1 text-zinc-200 outline-none focus:border-blue-500/60"/>
+              </div>
+              <div>
+                <div className="text-[10px] text-zinc-600 mb-1">Effective date</div>
+                <input type="date" value={splitDraft.date} onChange={e => setSplitDraft(d => ({ ...d, date: e.target.value }))}
+                  className="text-[12px] bg-zinc-800 border border-zinc-700/60 rounded px-2 py-1 text-zinc-200 outline-none focus:border-blue-500/60"/>
+              </div>
+              <div>
+                <div className="text-[10px] text-zinc-600 mb-1">New shares</div>
+                <input type="number" value={splitDraft.newShares} onChange={e => setSplitDraft(d => ({ ...d, newShares: e.target.value }))}
+                  placeholder="4" className="w-16 text-[12px] bg-zinc-800 border border-zinc-700/60 rounded px-2 py-1 text-zinc-200 outline-none focus:border-blue-500/60"/>
+              </div>
+              <span className="text-zinc-600 text-[12px] pb-1.5">for</span>
+              <div>
+                <div className="text-[10px] text-zinc-600 mb-1">Old shares</div>
+                <input type="number" value={splitDraft.oldShares} onChange={e => setSplitDraft(d => ({ ...d, oldShares: e.target.value }))}
+                  placeholder="1" className="w-16 text-[12px] bg-zinc-800 border border-zinc-700/60 rounded px-2 py-1 text-zinc-200 outline-none focus:border-blue-500/60"/>
+              </div>
+              <button onClick={addSplit}
+                className="px-3 py-1.5 text-[12px] font-medium bg-blue-500/15 text-blue-400 border border-blue-500/30 rounded-lg hover:bg-blue-500/25 transition-colors">
+                + Add Split
+              </button>
+            </div>
+            <div className="text-[10px] text-zinc-600 mt-1.5">
+              E.g. a 4-for-1 forward split: new=4, old=1. A 1-for-10 reverse split: new=1, old=10.
+            </div>
+          </div>
+          {splits.length > 0 && (
+            <div className="divide-y divide-zinc-800/40">
+              {splits.map(s => (
+                <div key={s.id} className="flex items-center justify-between px-4 py-2 text-[12px]">
+                  <span className="font-mono text-zinc-300">
+                    {s.ticker} — {s.newShares ?? s.ratio}-for-{s.oldShares ?? 1} on {s.date}
+                  </span>
+                  <button onClick={() => removeSplit(s.id)} className="text-zinc-600 hover:text-red-400 transition-colors">✕ remove</button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* ── Equity curve ─────────────────────────────────────────────────── */}
       <div className="bg-zinc-900/60 border border-zinc-800/60 rounded-xl p-4 mb-5">
         <div className="flex items-center justify-between mb-2 flex-wrap gap-2">
@@ -5926,6 +6028,11 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
             ⚠ Reset IBKR Data
           </button>
         )}
+        <button onClick={() => setShowSplits(v => !v)}
+          title="Record a stock split (forward or reverse) so pre-split executions get adjusted to post-split share counts before trades are grouped — fixes a ticker getting stuck 'open' forever because a split isn't a trade IBKR reports."
+          className={`flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium rounded-lg border transition-colors ${showSplits ? "bg-amber-500/15 text-amber-400 border-amber-500/30" : "bg-zinc-800 text-zinc-300 border-zinc-700/60 hover:bg-zinc-700/60"}`}>
+          ⚗ Stock Splits{splits.length > 0 ? ` (${splits.length})` : ""}
+        </button>
         <button onClick={() => { setImportMsg(null); fileInputRef.current?.click(); }}
           className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-zinc-800 text-zinc-300 border border-zinc-700/60 rounded-lg hover:bg-zinc-700/60 transition-colors">
           ⬆ Import IBKR CSV
