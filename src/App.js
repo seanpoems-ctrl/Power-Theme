@@ -5295,6 +5295,32 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
     reader.readAsText(file);
   };
 
+  // Wipes all IBKR-derived data (the execution ledger + any trade tagged
+  // _ibkr, plus dividend/lending income records) so a fresh, single
+  // comprehensive re-import starts from zero contamination. Manually-
+  // entered trades and notebook entries are untouched. Use when the ledger
+  // has accumulated duplicate/fragmented executions for the same real fill
+  // — e.g. importing statements generated with different "trade detail"
+  // settings across visits to IBKR's report builder can report one order's
+  // fill as a single aggregated row in one export and as several exchange-
+  // level partial fills in another; since those differ in quantity they
+  // never dedupe against each other, and the position never returns to
+  // exactly flat — leaving it stuck "open" forever with a corrupted share
+  // count (seen 2026-09-26: ZSL showed 5 "exit" fills, 1,478 shares total
+  // sold, when the real statement had one 789-share buy and one 789-share
+  // sell, fully closed same day).
+  const handleResetIbkrData = () => {
+    if (!window.confirm(
+      "This clears every IBKR-imported execution, trade, and dividend/lending record. Manually-entered trades and notebook entries are untouched.\n\n" +
+      "Use this when your journal and your real IBKR statement disagree and won't reconcile no matter how many times you re-import — it's likely accumulated duplicate fill data from overlapping past imports.\n\n" +
+      "Export your journal first if you want a backup. Continue?"
+    )) return;
+    saveExecs([]);
+    persist(trades.filter(t => !t._ibkr && t.notes !== "Imported from IBKR"));
+    persistIncome([]);
+    setImportMsg("IBKR data cleared. Import one comprehensive Activity Statement CSV to rebuild from scratch.");
+  };
+
   // ── Export/Import journal as a file — the journal is localStorage-only (no
   // backend), so this is how you move it between two machines (e.g. a trading
   // laptop and a separate dev/Claude laptop): export on one, hand the file
@@ -5782,6 +5808,13 @@ const TradeJournalTab = ({ data, categoryThemeMap = {}, etfRsData = null }) => {
           <button onClick={deleteSelected}
             className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-red-500/15 text-red-400 border border-red-500/30 rounded-lg hover:bg-red-500/25 transition-colors">
             ✕ Delete {selectedIds.size} selected
+          </button>
+        )}
+        {trades.some(t => t._ibkr || t.notes === "Imported from IBKR") && (
+          <button onClick={handleResetIbkrData}
+            title="Clears all IBKR-imported executions/trades/income so you can rebuild from one clean, comprehensive re-import — use this if your journal and your real IBKR statement won't agree no matter how many times you re-import."
+            className="flex items-center gap-1.5 px-3 py-1.5 text-[12px] font-medium bg-red-500/15 text-red-400 border border-red-500/30 rounded-lg hover:bg-red-500/25 transition-colors">
+            ⚠ Reset IBKR Data
           </button>
         )}
         <button onClick={() => { setImportMsg(null); fileInputRef.current?.click(); }}
