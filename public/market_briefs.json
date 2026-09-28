@@ -1,5 +1,43 @@
 [
   {
+    "generated_at": "2026-09-28 14:34 ET",
+    "phase": "POST",
+    "session": "Post-Market",
+    "mood": "Caution Spreads / Volatility Rises",
+    "spy_price": 766.74,
+    "spy_change_pct": -0.6,
+    "vix": 15.88,
+    "hy_oas": 2.93,
+    "yield_curve": 0.36,
+    "credit_status": "Complacent",
+    "s5fi": 28.1,
+    "mmth": 49.6,
+    "generational_buy_zone": false,
+    "reversal": false,
+    "reversal_description": "",
+    "ticker_intel": {
+      "a_grade": [
+        {
+          "ticker": "AAPL",
+          "company": "Apple Inc.",
+          "reason": "Apple Inc. saw strong gains today following an analyst upgrade highlighting robust demand for its latest iPhone lineup ahead of the holiday season."
+        },
+        {
+          "ticker": "AMZN",
+          "company": "Amazon.com Inc.",
+          "reason": "Amazon.com Inc. climbed after announcing a significant expansion of its AWS cloud infrastructure in a key international market, pointing to strong future growth."
+        }
+      ],
+      "c_grade": [
+        {
+          "ticker": "NVDA",
+          "company": "NVIDIA Corp.",
+          "reason": "NVIDIA Corp. experienced continued interest, primarily driven by persistent technical buying and momentum from thematic AI-focused funds rather than any fresh fundamental news."
+        }
+      ]
+    }
+  },
+  {
     "generated_at": "2026-09-28 07:05 ET",
     "phase": "PRE",
     "session": "Pre-Market",
@@ -2237,44 +2275,6 @@
           "ticker": "MSFT",
           "company": "Microsoft Corporation",
           "reason": "Microsoft is likely experiencing recycled speculative flow or technical movements today, without any fresh fundamental news driving conviction."
-        }
-      ]
-    }
-  },
-  {
-    "generated_at": "2026-09-08 07:05 ET",
-    "phase": "PRE",
-    "session": "Pre-Market",
-    "mood": "Mixed Sentiment / Global Caution",
-    "spy_price": 770.19,
-    "spy_change_pct": -0.39,
-    "vix": 15.74,
-    "hy_oas": 2.65,
-    "yield_curve": 0.41,
-    "credit_status": "Complacent",
-    "s5fi": 51.9,
-    "mmth": 67.5,
-    "generational_buy_zone": false,
-    "reversal": false,
-    "reversal_description": "",
-    "ticker_intel": {
-      "a_grade": [
-        {
-          "ticker": "AMZN",
-          "company": "Amazon.com Inc.",
-          "reason": "Amazon announced a new AI-powered logistics platform, expected to significantly cut operational costs and boost efficiency across its global supply chain."
-        },
-        {
-          "ticker": "MU",
-          "company": "Micron Technology Inc.",
-          "reason": "Micron secured a multi-year exclusive supply contract with a major European automotive manufacturer for next-generation in-car memory solutions, signaling strong demand ahead."
-        }
-      ],
-      "c_grade": [
-        {
-          "ticker": "GME",
-          "company": "GameStop Corp.",
-          "reason": "GameStop is experiencing renewed social media interest and short-squeeze chatter, driving speculative trading volume despite no new fundamental news."
         }
       ]
     }
